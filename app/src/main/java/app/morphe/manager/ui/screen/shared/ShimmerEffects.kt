@@ -10,6 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -25,8 +26,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
- * Base shimmer box with animated gradient effect
- * Reusable component for any loading state
+ * Base shimmer box with animated gradient effect.
+ * Reusable component for any loading state.
  */
 @Composable
 fun ShimmerBox(
@@ -91,7 +92,7 @@ fun ShimmerBox(
 }
 
 /**
- * Simple shimmer element for text-like loading states
+ * Simple shimmer element for text-like loading states.
  */
 @Composable
 fun ShimmerText(
@@ -109,7 +110,7 @@ fun ShimmerText(
 }
 
 /**
- * Shimmer loading state for changelog content
+ * Shimmer loading state for changelog content.
  */
 @Composable
 fun ShimmerChangelog(
@@ -166,7 +167,7 @@ fun ShimmerChangelog(
 }
 
 /**
- * Shimmer loading state for changelog header
+ * Shimmer loading state for changelog header.
  */
 @Composable
 fun ShimmerChangelogHeader() {
@@ -224,51 +225,55 @@ fun ShimmerChangelogHeader() {
 }
 
 /**
- * Shimmer loading placeholder for APK item
+ * Shimmer loading placeholder for APK item.
  */
 @Composable
 fun ShimmerApkItem() {
     SectionCard {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // App Icon shimmer
-            ShimmerBox(
-                modifier = Modifier.size(48.dp),
-                shape = RoundedCornerShape(12.dp)
-            )
-
-            // App Info shimmer
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(6.dp)
+        Column {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 12.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                // App name
-                ShimmerText(
-                    widthFraction = 0.6f,
-                    height = 18.dp
+                ShimmerBox(
+                    modifier = Modifier.size(48.dp),
+                    shape = RoundedCornerShape(12.dp)
                 )
-                // Package name
-                ShimmerText(
-                    widthFraction = 0.8f,
-                    height = 14.dp
-                )
-                // Version + size
-                ShimmerText(
-                    widthFraction = 0.4f,
-                    height = 14.dp
-                )
+
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    ShimmerText(widthFraction = 0.6f, height = 18.dp)
+                    ShimmerText(widthFraction = 0.8f, height = 14.dp)
+                    ShimmerText(widthFraction = 0.4f, height = 14.dp)
+                }
             }
 
-            // Delete button shimmer
-            ShimmerBox(
-                modifier = Modifier.size(40.dp),
-                shape = RoundedCornerShape(20.dp)
+            HorizontalDivider(
+                modifier = Modifier.padding(horizontal = 12.dp),
+                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)
             )
+
+            FlowRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                repeat(4) {
+                    ShimmerBox(
+                        modifier = Modifier
+                            .width(72.dp)
+                            .height(36.dp),
+                        shape = RoundedCornerShape(50)
+                    )
+                }
+            }
         }
     }
 }

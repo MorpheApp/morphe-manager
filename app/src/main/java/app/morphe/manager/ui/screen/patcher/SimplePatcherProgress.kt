@@ -51,7 +51,7 @@ fun SimplePatchingInProgress(
     val (completed, total) = patchesProgress
     val context = LocalContext.current
 
-    var currentMessage by remember {
+    val currentMessage = remember {
         mutableIntStateOf(
             HomeAndPatcherMessages.getPatcherMessage(context)
         )
@@ -61,50 +61,48 @@ fun SimplePatchingInProgress(
     LaunchedEffect(Unit) {
         while (true) {
             delay(10000)
-            currentMessage = HomeAndPatcherMessages.getPatcherMessage(context)
+            currentMessage.value = HomeAndPatcherMessages.getPatcherMessage(context)
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        // Main content area
-        Column(
+    // Main content area
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .navigationBarsPadding()
+    ) {
+        // Content with weight to push bottom bar down
+        Box(
             modifier = Modifier
-                .fillMaxSize()
-                .navigationBarsPadding()
+                .weight(1f)
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
         ) {
-            // Content with weight to push bottom bar down
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                AdaptiveProgressContent(
-                    windowSize = windowSize,
-                    currentMessage = currentMessage,
-                    progress = progress,
-                    completed = completed,
-                    total = total,
-                    showLongStepWarning = showLongStepWarning,
-                    patcherViewModel = patcherViewModel,
-                    onCancelClick = onCancelClick,
-                    onHomeClick = onHomeClick
-                )
-            }
+            AdaptiveProgressContent(
+                windowSize = windowSize,
+                currentMessage = currentMessage.value,
+                progress = progress,
+                completed = completed,
+                total = total,
+                showLongStepWarning = showLongStepWarning,
+                patcherViewModel = patcherViewModel,
+                onCancelClick = onCancelClick,
+                onHomeClick = onHomeClick
+            )
+        }
 
-            // Bottom action bar
-            if (!windowSize.useTwoColumnLayout) {
-                PatcherBottomActionBar(
-                    showCancelButton = true,
-                    showHomeButton = false,
-                    showSaveButton = false,
-                    showErrorButton = false,
-                    onCancelClick = onCancelClick,
-                    onHomeClick = onHomeClick,
-                    onSaveClick = {},
-                    onErrorClick = {}
-                )
-            }
+        // Bottom action bar
+        if (!windowSize.useTwoColumnLayout) {
+            PatcherBottomActionBar(
+                showCancelButton = true,
+                showHomeButton = false,
+                showSaveButton = false,
+                showErrorButton = false,
+                onCancelClick = onCancelClick,
+                onHomeClick = onHomeClick,
+                onSaveClick = {},
+                onErrorClick = {}
+            )
         }
     }
 }
@@ -167,8 +165,7 @@ private fun AdaptiveProgressContent(
                     onCancelClick = onCancelClick,
                     onHomeClick = onHomeClick,
                     onSaveClick = {},
-                    onErrorClick = {},
-                    modifier = Modifier.padding(horizontal = 0.dp)
+                    onErrorClick = {}
                 )
             }
 

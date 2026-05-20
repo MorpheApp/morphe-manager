@@ -314,8 +314,7 @@ fun ExpertPatchingInProgress(
                         onErrorClick = {},
                         onCopyLogsClick = {
                             clipboardManager.setText(AnnotatedString(buildLogsText()))
-                        },
-                        modifier = Modifier.padding(horizontal = 0.dp)
+                        }
                     )
                 }
 
@@ -992,8 +991,9 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
                         modifier = Modifier.weight(1f))
                 }
                 if (item.deviceManufacturer != null || item.deviceModel != null) {
-                    val deviceLabel = listOfNotNull(item.deviceManufacturer, item.deviceModel)
-                        .joinToString(" ")
+                    val deviceLabel = remember(item.deviceManufacturer, item.deviceModel) {
+                        listOfNotNull(item.deviceManufacturer, item.deviceModel).joinToString(" ")
+                    }
                     BannerFieldCell(
                         label = "Device",
                         value = deviceLabel,

@@ -235,7 +235,8 @@ fun HeaderCreatorDialog(
                             HeaderConfig.headerFolderName(packageName)
                         ),
                         style = InfoBadgeStyle.Primary,
-                        icon = Icons.Outlined.Info
+                        icon = Icons.Outlined.Info,
+                        isExpanded = true
                     )
                 }
 
@@ -252,13 +253,14 @@ fun HeaderCreatorDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             // Instructions
             InfoBadge(
                 text = stringResource(R.string.header_creator_instructions),
                 style = InfoBadgeStyle.Primary,
-                icon = Icons.Outlined.Info
+                icon = Icons.Outlined.Info,
+                isExpanded = true
             )
 
             // Light header section

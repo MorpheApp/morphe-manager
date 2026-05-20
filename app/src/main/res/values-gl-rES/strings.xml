@@ -49,8 +49,6 @@
     <string name="sources_management_title">Fonte de parches</string>
     <string name="sources_management_open_in_browser">Abrir no navegador</string>
     <string name="sources_management_failed_to_open_url">Erro ao abrir o URL</string>
-    <string name="sources_management_prerelease_toggle">Empregar versións preliminares dos parches</string>
-    <string name="sources_management_prerelease_toggle_description">Recibir acceso anticipado a novas versións experimentales dos parches</string>
     <string name="sources_management_already_exists">Esta fonte xa foi engadida</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome a amosar</string>
@@ -158,9 +156,7 @@
     <string name="root_pre_patch_installer_title">Escolla método de instalación</string>
     <string name="root_pre_patch_installer_description">O seu dispositivo ten acceso root. Escolla como quere instalar a aplicación parcheada</string>
     <string name="root_pre_patch_installer_mount_title">Montaxe root</string>
-    <string name="root_pre_patch_installer_mount_description">Montar APK parcheada sobre a app orixinal. Non se precisa Gms Core</string>
     <string name="root_pre_patch_installer_standard_title">Instalación Estándar</string>
-    <string name="root_pre_patch_installer_standard_description">Instalar coma aplicación separada con soporte para GmsCore. Escolla instalador (instalador del sistema, Shizuku, etc.) tras parchear</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copiado ao portapapeis</string>
     <string name="patcher_error_log">Rexistro de erros</string>
@@ -221,11 +217,7 @@
     <!-- Settings - System Tab - Installer Section -->
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimización de batería</string>
-    <!-- Settings - System Tab - Import and export keystore -->
-    <string name="settings_system_import_keystore_dialog_button">Importar</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <!-- Settings - System Tab - Debug Section -->
-    <string name="settings_system_export_debug_logs">Exportar rexistros de depuración</string>
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_export_debug_logs_export_failed">Fallo ao exportar rexistros</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->

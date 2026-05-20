@@ -58,15 +58,18 @@
     <string name="sources_management_title">Módosításforrások</string>
     <string name="sources_management_open_in_browser">Megnyitás böngészőben</string>
     <string name="sources_management_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
-    <string name="sources_management_prerelease_toggle">Kiadás előtti módosítások használata</string>
-    <string name="sources_management_prerelease_toggle_description">Kísérleti módosítások korai elérése</string>
-    <string name="sources_management_experimental_versions_toggle">Kísérleti alkalmazásverziók használata</string>
-    <string name="sources_management_experimental_versions_toggle_description">Kísérleti alkalmazások módosítása, ha elérhetők</string>
+    <string name="sources_management_prerelease_toggle">Kiadás előtti javítások</string>
+    <string name="sources_management_prerelease_toggle_description">Korai hozzáférés kísérleti új javításverziókhoz</string>
+    <string name="sources_management_experimental_versions_toggle">Kísérleti alkalmazásverziók</string>
+    <string name="sources_management_experimental_versions_toggle_description">Módosítsa a kísérleti alkalmazás célpontjait, ha elérhetők</string>
     <string name="sources_management_already_exists">Ez a forrás már hozzá lett adva</string>
     <string name="sources_management_invalid_url">Érvénytelen forrás URL. Kérjük, ellenőrizze a címet, és próbálja újra.</string>
     <string name="sources_management_metadata_unavailable">Metaadatok nem állnak rendelkezésre.</string>
     <string name="sources_management_metadata_unavailable_hint">A távoli metaadatfájl nem érhető el. A telepített csomaggal történő javítás továbbra is működik, de az automatikus frissítés le van tiltva ehhez a forráshoz.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">A javítócsomag letöltése nem sikerült. A forrás URL helytelen lehet, vagy a fájl nem létezik.</string>
+    <string name="sources_management_source_enabled">Forrás engedélyezve</string>
+    <string name="sources_management_source_disabled">Forrás letiltva</string>
+    <string name="sources_management_source_updating">Forrás frissítése</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Megjelenítendő név</string>
     <string name="sources_dialog_rename">Módosításforrás átnevezése</string>
@@ -138,9 +141,13 @@
     <string name="expert_mode_search">Módosítások keresése</string>
     <string name="expert_mode_proceed">Módosítás indítása</string>
     <string name="expert_mode_disable_all">Minden módosítás letiltása</string>
+    <string name="expert_mode_disable_all_done">Az összes patch le van tiltva</string>
     <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
+    <string name="expert_mode_enable_all_done">Az összes patch engedélyezve van</string>
     <string name="expert_mode_reset_to_default">Ajánlott módosítások engedélyezése</string>
+    <string name="expert_mode_reset_to_default_done">A javasolt patch-ek alkalmazva</string>
     <string name="expert_mode_restore_saved">Mentett összeállítás visszaállítása</string>
+    <string name="expert_mode_restore_saved_done">A mentett kijelölés visszaállítva</string>
     <string name="expert_mode_no_results">Nem találhatók módosítások</string>
     <string name="expert_mode_universal_patches">Univerzális módosítások</string>
     <string name="expert_mode_new_patches">Új</string>
@@ -246,9 +253,9 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="root_pre_patch_installer_title">Válassz telepítési módot</string>
     <string name="root_pre_patch_installer_description">Az eszközöd root hozzáféréssel rendelkezik. Válaszd ki, hogyan szeretnéd telepíteni a módosított alkalmazást</string>
     <string name="root_pre_patch_installer_mount_title">Root csatolás</string>
-    <string name="root_pre_patch_installer_mount_description">A módosított APK-t az eredeti felé csatolja. Nem szükséges GmsCore</string>
+    <string name="root_pre_patch_installer_mount_description">A módosított APK-t az eredeti alkalmazás fölé szereli. Nincs szükség GmsCore-ra</string>
     <string name="root_pre_patch_installer_standard_title">Szabványos telepítés</string>
-    <string name="root_pre_patch_installer_standard_description">Telepítés különálló alkalmazásként GmsCore támogatással. Válaszd ki a telepítőt (Rendszertelepítő, Shizuku stb.) a módosítás után</string>
+    <string name="root_pre_patch_installer_standard_description">Telepítés különálló alkalmazásként GmsCore támogatással. A módosítás után válaszd ki a telepítőt (Rendszertelepítő, Shizuku stb.)</string>
     <string name="root_pre_patch_installer_hint">A telepítési mód határozza meg, hogy mely módosítások kerülnek beépítésre, amiket nem lehet megváltoztatni a módosítás után</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">A hiba másolva a vágólapra</string>
@@ -402,13 +409,13 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ikon megváltoztatása</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Frissítések</string>
-    <string name="settings_advanced_updates_use_prereleases">A Morphe előzetes kiadásainak használata</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Korai hozzáférést biztosít az új Morphe funkciókhoz. A kiadás előtti módosítások használatához engedélyezd a korai hozzáférés kapcsolót minden egyes forrásnál külön-külön</string>
-    <string name="settings_advanced_updates_allow_metered">Frissítés mobiladattal</string>
-    <string name="settings_advanced_updates_allow_metered_description">A Morphe és a módosítások frissítéseinek letöltése mobiladattal</string>
+    <string name="settings_advanced_updates_use_prereleases">Kiadás előtti módosítások használata</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Korai hozzáférés az új Morphe alkalmazásverziókhoz. Engedélyezés forrásonként a módosítás forrásoknál.</string>
+    <string name="settings_advanced_updates_allow_metered">Mobiladat-forgalom aktív</string>
+    <string name="settings_advanced_updates_allow_metered_description">A Morphe és a módosítások frissítéseinek letöltése mobiladattal.</string>
     <string name="settings_advanced_updates_background_notifications">Háttérfrissítési értesítések</string>
     <string name="settings_advanced_updates_background_notifications_description">A háttérben periodikusan ellenőrzi a frissítéseket és értesít, ha elérhetőek.</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">Azonnali push értesítések fogadása az új kiadásokról akkor is, ha az alkalmazás be van zárva</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Azonnali push értesítések fogadása az új kiadásokról akkor is, ha az alkalmazás be van zárva.</string>
     <string name="settings_advanced_update_interval">Ellenőrzés gyakorisága</string>
     <string name="settings_advanced_update_interval_dialog_title">Frissítések keresése</string>
     <string name="settings_advanced_update_interval_hourly">Óránként</string>
@@ -432,12 +439,11 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Szakértői beállítások</string>
     <string name="settings_advanced_expert_mode">Szakértői mód</string>
-    <string name="settings_advanced_expert_mode_description">Engedélyezi a Morphe komplex módosítási beállításait és a testreszabási lehetőségeket</string>
+    <string name="settings_advanced_expert_mode_description">Engedélyezi a Morphe komplex módosítási beállításait és a testreszabási lehetőségeket.</string>
     <string name="settings_advanced_expert_mode_dialog_title">Engedélyezed a szakértői módot?</string>
     <string name="settings_advanced_expert_mode_dialog_message">A szakértői mód nagyobb ellenőrzést biztosít a módosítások alkalmazása felett, de ebben a módban a beállítások helytelen konfigurálása az alkalmazás működésképtelenségét eredményezheti</string>
     <string name="settings_advanced_strip_unused_libs">Optimalizálás a készülék architektúrájához</string>
-    <string name="settings_advanced_strip_unused_libs_description">"Az osztott APK-k összeállításakor kihagyja a nem támogatott CPU-architektúrákhoz, nyelvekhez és képernyő felbontásokhoz tartozó APK modulokat.
-Normál APK-k esetén a módosítás után eltávolítja a nem támogatott architektúrákhoz tartozó natív könyvtárakat"</string>
+    <string name="settings_advanced_strip_unused_libs_description">Eltávolítja a nem használt CPU architektúra könyvtárakat és az APK modulokat</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Bájtkód-feldolgozási mód</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Meghatározza a bájtkód feldolgozásának módját a módosítás során. Befolyásolja a folyamat sebességét, a memóriahasználatot és a kész APK méretét</string>
@@ -563,57 +569,47 @@ A képek méreteinek a következőknek kell lennie:
     <string name="installer_unavailable_message">A választott telepítőd (%s) jelenleg nem érhető el. Javíthatod a hibát és újra próbálkozhatsz, vagy használhatod helyette a standard telepítőt.</string>
     <string name="installer_unavailable_shizuku_hint">Győzödj meg róla, hogy a Shizuku fut és engedélyezted a hozzáférést ehhez az alkalmazáshoz</string>
     <string name="installer_use_standard">Szabványos használata</string>
-    <string name="settings_prompt_installer_on_install">Telepítő kiválasztása telepítéskor</string>
-    <string name="settings_prompt_installer_on_install_description">Telepítőválasztó ablak megjelenítése minden alkalommal, amikor módosított alkalmazást telepítesz</string>
+    <string name="settings_prompt_installer_on_install">Telepítőválasztó ablak</string>
+    <string name="settings_prompt_installer_on_install_description">Telepítőválasztó ablak megjelenítése minden alkalommal, amikor módosított alkalmazást telepítesz.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Akkuoptimalizálás</string>
-    <string name="settings_system_battery_optimization_description">Megakadályozza, hogy a rendszer leállítsa a javítót, ha a Morphe minimalizálva van.</string>
-    <string name="settings_system_battery_optimization_excluded">Kizárt</string>
-    <string name="settings_system_battery_optimization_not_excluded">Nem kizárt</string>
+    <string name="settings_system_battery_optimization_description">A javító folyamat futtatása a háttérben, amikor az alkalmazás minimalizálva van.</string>
     <string name="settings_system_performance">Teljesítmény</string>
     <string name="settings_system_process_runtime">Folyamat futási ideje</string>
-    <string name="settings_system_process_runtime_description">A jobb stabilitás érdekében a módosítást külön folyamatban futtatja</string>
+    <string name="settings_system_process_runtime_description">A javítás külön folyamatban történő futtatása a jobb stabilitás érdekében.</string>
     <string name="settings_system_process_runtime_memory_limit">Memóriakorlát</string>
-    <string name="settings_system_process_runtime_memory_limit_description">A magasabb memóriakorlát felgyorsíthatja a módosítást, de régebbi eszközökön nem biztos, hogy működik</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Magasabb korlátok gyorsítják a javítást a képességekkel rendelkező eszközökön.</string>
     <string name="settings_system_process_runtime_enable">Folyamatfutási környezet engedélyezése</string>
     <string name="settings_system_memory_limit_subtitle">Módosításhoz rendelkezésre álló memória</string>
     <string name="settings_system_memory_limit_warning">Alacsony memóriakorlát esetén a nagyobb alkalmazások módosításakor hiba léphet fel</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB korlát</string>
     <string name="settings_system_process_runtime_disabled_description">Koppints a konfigurálásához</string>
     <string name="settings_system_process_runtime_description_not_available">Ez a funkció Android 11 vagy újabb verziót igényel</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importálás és exportálás</string>
-    <string name="settings_system_import_keystore">Kulcstároló importálás</string>
-    <string name="settings_system_import_keystore_description">Egyedi kulcstároló importálása</string>
+    <string name="settings_system_keystore">Kulcstár</string>
+    <string name="settings_system_import_keystore_description">Importálja vagy exportálja az aláíró tárolóját</string>
     <string name="settings_system_import_keystore_dialog_title">Add meg a kulcstároló hitelesítő adatait</string>
     <string name="settings_system_import_keystore_dialog_description">A kulcstároló importálásához meg kell adnod a hozzáférési adatokat</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Felhasználónév (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Jelszó</string>
-    <string name="settings_system_import_keystore_dialog_button">Importálás</string>
     <string name="settings_system_import_keystore_dialog_format_field">Kulcstároló formátum</string>
     <string name="settings_system_import_keystore_wrong_credentials">Hibás kulcstároló hitelesítési adatok</string>
     <string name="settings_system_import_keystore_success">Kulcstároló importálva</string>
     <string name="settings_system_import_keystore_failed">Nem sikerült importálni a kulcstárolót</string>
-    <string name="settings_system_export_keystore">Kulcstároló exportálása</string>
-    <string name="settings_system_export_keystore_description">Az aktuális kulcstároló exportálása</string>
     <string name="settings_system_export_keystore_unavailable">Nincs exportálható kulcstároló</string>
     <string name="settings_system_export_keystore_success">Kulcstároló sikeresen exportálva</string>
     <string name="settings_system_export_keystore_failed">A kulcstároló exportálása sikertelen</string>
     <string name="settings_system_show_password_field">Jelszó megjelenítése</string>
     <string name="settings_system_hide_password_field">Jelszó elrejtése</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Morphe beállítások importálása</string>
-    <string name="settings_system_import_manager_settings_description">Morphe beállítások visszaállítása JSON fájlból</string>
+    <string name="settings_system_morphe_settings">Morphe beállítások</string>
+    <string name="settings_system_import_manager_settings_description">A Morphe beállításainak biztonsági mentése és visszaállítása.</string>
     <string name="settings_system_import_manager_settings_fail">Hiba történt a Morphe beállításainak importálásakor: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe beállítások importálva</string>
-    <string name="settings_system_export_manager_settings">Morphe beállítások exportálása</string>
-    <string name="settings_system_export_manager_settings_description">Morphe beállítások mentése egy JSON fájlba</string>
     <string name="settings_system_export_manager_settings_fail">Hiba történt a Morphe beállításainak exportálásakor: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe beállítások exportálva</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Hibakeresés</string>
-    <string name="settings_system_export_debug_logs">Hibakeresési naplók exportálása</string>
-    <string name="settings_system_export_debug_logs_description">Rendszernaplók mentése hibaelhárításhoz</string>
+    <string name="settings_system_export_debug_logs_description">A rendszernaplók mentése hibaelhárításhoz</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Nem sikerült a naplók olvasása (kilépési kód: %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Nem sikerült exportálni a naplókat</string>
     <string name="settings_system_export_debug_logs_export_success">Naplók exportálva</string>
@@ -629,14 +625,14 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_patched_apks_deleted">A módosított APK sikeresen törölve</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Eredeti APK-k</string>
-    <string name="settings_system_original_apks_description">Az eredeti APK fájlok mentve vannak az újbóli módosításhoz. Csak az alkalmazás legújabb verzióját tartjuk meg</string>
+    <string name="settings_system_original_apks_description">Mentve a újra-módosításra. Az egyes alkalmazásokhoz csak egy verzió kerül tárolásra</string>
     <string name="settings_system_original_apks_empty">Nincsenek mentett, eredeti APK-k</string>
     <string name="settings_system_original_apks_deleted">Az eredeti APK sikeresen törölve</string>
     <string name="settings_system_original_apks_delete_title">Törlöd az eredeti APK-t?</string>
     <string name="settings_system_original_apks_delete_confirm">Törlöd az eredeti %s APK-t? Új APK nélkül nem fogod tudni újra elvégezni a módosítást.</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Módosítás kiválasztások</string>
-    <string name="settings_system_patch_selections_description">Kezeld a mentett módosítás kiválasztásokat és opciókat. Ezek az alkalmazás eltávolítása után is megmaradnak</string>
+    <string name="settings_system_patch_selections_description">Mentett módosítási kiválasztások, amelyek az eltávolítás után is megmaradnak.</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Visszaállítasz minden kiválasztást?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Visszaállítod a csomag kiválasztásait?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Visszaállítod a forráskiválasztást?</string>
@@ -697,6 +693,10 @@ Forrás: #%2$s</string>
     <string name="disabled">Kikapcsolva</string>
     <string name="selected">Kiválasztott</string>
     <string name="not_selected">Nincs kiválasztva</string>
+    <string name="select_all">Összes kiválasztása</string>
+    <string name="select_all_done">Mind kiválasztva</string>
+    <string name="deselect_all">Összes kijelölés visszavonása</string>
+    <string name="deselect_all_done">Mind törölve</string>
     <string name="rename">Átnevezés</string>
     <string name="import_">Importálás</string>
     <string name="export">Exportálás</string>
@@ -717,6 +717,7 @@ Forrás: #%2$s</string>
     <string name="unmount">Leválasztás</string>
     <string name="unmounted">Leválasztva</string>
     <string name="remount">Újracsatolás</string>
+    <string name="share">Megosztás</string>
     <string name="install">Telepítés</string>
     <string name="installed">Telepítve</string>
     <string name="reinstall">Újratelepítés</string>

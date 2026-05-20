@@ -58,15 +58,18 @@
     <string name="sources_management_title">Patchkilder</string>
     <string name="sources_management_open_in_browser">Åbn links i browser</string>
     <string name="sources_management_failed_to_open_url">Kunne ikke åbne URL</string>
-    <string name="sources_management_prerelease_toggle">Brug pre-release patches</string>
-    <string name="sources_management_prerelease_toggle_description">Få tidligt adgang til nye eksperimentelle patch versioner</string>
-    <string name="sources_management_experimental_versions_toggle">Brug eksperimentelle app-versioner</string>
+    <string name="sources_management_prerelease_toggle">Pre-release patches</string>
+    <string name="sources_management_prerelease_toggle_description">Få tidlig adgang til nye eksperimentelle patch versioner</string>
+    <string name="sources_management_experimental_versions_toggle">Eksperimentelle app-versioner</string>
     <string name="sources_management_experimental_versions_toggle_description">Patch eksperimentelle app-targets, hvis de er tilgængelige</string>
     <string name="sources_management_already_exists">Denne kilde er allerede tilføjet</string>
     <string name="sources_management_invalid_url">Ugyldig kilde-URL. Kontroller venligst adressen og prøv igen</string>
     <string name="sources_management_metadata_unavailable">Metadata ikke tilgængelig</string>
     <string name="sources_management_metadata_unavailable_hint">Den eksterne metadatafil er ikke tilgængelig. Opdatering med den installerede pakke fungerer stadig, men automatisk opdatering er deaktiveret for denne kilde</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Opdateringspakken kunne ikke hentes. Kilde-URL\'en kan være forkert, eller filen findes ikke</string>
+    <string name="sources_management_source_enabled">Kilde aktiveret</string>
+    <string name="sources_management_source_disabled">Kilde deaktiveret</string>
+    <string name="sources_management_source_updating">Opdaterer kilde</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Visningsnavn</string>
     <string name="sources_dialog_rename">Omdøb navnet på patchkilde</string>
@@ -138,9 +141,13 @@
     <string name="expert_mode_search">Søg patches</string>
     <string name="expert_mode_proceed">Gå videre til patching</string>
     <string name="expert_mode_disable_all">Deaktiver alle</string>
+    <string name="expert_mode_disable_all_done">Alle patches deaktiveret</string>
     <string name="expert_mode_enable_all">Aktiver alle</string>
+    <string name="expert_mode_enable_all_done">Alle patches aktiveret</string>
     <string name="expert_mode_reset_to_default">Aktivér anbefalede patches</string>
+    <string name="expert_mode_reset_to_default_done">Anbefalede patches anvendt</string>
     <string name="expert_mode_restore_saved">Gendan gemt valg</string>
+    <string name="expert_mode_restore_saved_done">Gemt valg er gendannet</string>
     <string name="expert_mode_no_results">Ingen patches fundet</string>
     <string name="expert_mode_universal_patches">Universelle patches</string>
     <string name="expert_mode_new_patches">Ny</string>
@@ -248,7 +255,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="root_pre_patch_installer_mount_title">Root Mount</string>
     <string name="root_pre_patch_installer_mount_description">Mount patchet APK over den originale app. Ingen GmsCore nødvendig</string>
     <string name="root_pre_patch_installer_standard_title">Standard Install</string>
-    <string name="root_pre_patch_installer_standard_description">Installer som en separat app med GmsCore support. Vælg installer (System installer, Shizuku, etc.) efter patching</string>
+    <string name="root_pre_patch_installer_standard_description">Installeres som en separat app med GmsCore-understøttelse. En installatør kan vælges efter patching</string>
     <string name="root_pre_patch_installer_hint">Installationsmetoden bestemmer, hvilke patches der er inkluderet og kan ikke ændres efter patching</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Fejl kopieret til udklipsholder</string>
@@ -402,10 +409,10 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ændre ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Opdateringer</string>
-    <string name="settings_advanced_updates_use_prereleases">Brug pre-release Morphe</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Modtag tidlig adgang til nye Morphe-funktioner. For at få pre-release patches, skal du aktivere pre-release-knappen i hver patchkilde separat</string>
-    <string name="settings_advanced_updates_allow_metered">Opdater over mobildata</string>
-    <string name="settings_advanced_updates_allow_metered_description">Tillad Morphe og patchopdateringer downloader over mobildata</string>
+    <string name="settings_advanced_updates_use_prereleases">Pre-release opdateringer</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Tidlig adgang til nye Morphe-appversioner. Aktivér pre-release pr. kilde i patch-kilder</string>
+    <string name="settings_advanced_updates_allow_metered">Mobildataopdateringer</string>
+    <string name="settings_advanced_updates_allow_metered_description">Tillad Morphe og patchopdateringer at downloade over mobildata</string>
     <string name="settings_advanced_updates_background_notifications">Baggrundsopdateringsmeddelelser</string>
     <string name="settings_advanced_updates_background_notifications_description">Tjek periodisk for opdateringer i baggrunden og informér når de er tilgængelige.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Modtag push-beskeder om nye udgivelser, selvom appen er lukket</string>
@@ -436,8 +443,7 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktiver Eksperttilstand?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Eksperttilstand giver mere kontrol over hvordan patches bliver anvendt, men en forkert konfiguration af indstillinger i eksperttilstand kan resultere i en ikke-funktionel app</string>
     <string name="settings_advanced_strip_unused_libs">Optimer for enhedens arkitektur</string>
-    <string name="settings_advanced_strip_unused_libs_description">"Overspring split APK-moduler for understøttede CPU-arkitekturer, sprogområder og skærmdensiteter under sammensmeltning.
-For almindelige APK'er fjernes native biblioteker for understøttede arkitekturer efter patching"</string>
+    <string name="settings_advanced_strip_unused_libs_description">Fjerner ubrugte CPU-arkitekturbiblioteker og splittede APK-moduler</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Bytecodetilstand</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Styrer, hvordan bytecode behandles under patching. Påvirker patching-hastighed, hukommelsesforbrug og output APK-størrelse</string>
@@ -445,7 +451,7 @@ For almindelige APK'er fjernes native biblioteker for understøttede arkitekture
     <string name="settings_advanced_bytecode_mode_strip_fast">Hurtig</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">Hurtigere patching og lavere hukommelsesforbrug, på bekostning af en større APK. Anbefales til enheder med lav RAM eller ældre enheder</string>
     <string name="settings_advanced_bytecode_mode_full">Fuld</string>
-    <string name="settings_advanced_bytecode_mode_full_description">Langsommere patching, genskaber ældre adfærd. Brug kun, hvis hurtig tilstand forårsager problemer</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Langsommere patching, replikerer ældre adfærd. Anbefales kun, hvis hurtig tilstand forårsager problemer</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Nødvendigt for pull request-kilder</string>
@@ -539,7 +545,7 @@ Størrelsesformatet skal være som følger:
     <string name="installer">Installer</string>
     <string name="installer_title">Vælg installer</string>
     <string name="installer_internal_name">Systeminstallationsprogram</string>
-    <string name="installer_internal_description">Brug Android-pakkeinstallationsprogrammet</string>
+    <string name="installer_internal_description">Bruger Android-pakkeinstallationsprogrammet</string>
     <string name="installer_auto_saved_name">Root monteringsinstallationsprogram</string>
     <string name="installer_auto_saved_description">Monterer den patchede APK over den installerede app</string>
     <string name="installer_shizuku_description">Installer lydløst med Shizuku eller Sui</string>
@@ -563,57 +569,47 @@ Størrelsesformatet skal være som følger:
     <string name="installer_unavailable_message">Din foretrukne installer (%s) er i øjeblikket utilgængelig. Du kan løse problemet og prøve igen, eller bruge standardinstalleren i stedet</string>
     <string name="installer_unavailable_shizuku_hint">Sørg for at Shizuku kører og at tilladelse er givet til denne app</string>
     <string name="installer_use_standard">Brug standard</string>
-    <string name="settings_prompt_installer_on_install">Forespørg om installer ved installering</string>
+    <string name="settings_prompt_installer_on_install">Installatørvalgsmeddelelse</string>
     <string name="settings_prompt_installer_on_install_description">Vis installer-valgdialog hver gang du installerer en patchet app</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterioptimering</string>
-    <string name="settings_system_battery_optimization_description">Forhindrer systemet i at stoppe patcheren, når Morphe er minimeret.</string>
-    <string name="settings_system_battery_optimization_excluded">Ekskluderet</string>
-    <string name="settings_system_battery_optimization_not_excluded">Ikke ekskluderet</string>
+    <string name="settings_system_battery_optimization_description">Holder patcheren kørende, når appen er minimeret</string>
     <string name="settings_system_performance">Ydelse</string>
     <string name="settings_system_process_runtime">Proces runtime</string>
     <string name="settings_system_process_runtime_description">Kør patching i separat proces for bedre stabilitet</string>
     <string name="settings_system_process_runtime_memory_limit">Hukommelsesbegrænsning</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Højere hukommelsesbegrænsning kan øge hastigheden på patching, men kan muligvis ikke fungere på ældre enheder</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Højere grænser fremskynder patching på kompatible enheder</string>
     <string name="settings_system_process_runtime_enable">Aktiver proces runtime</string>
     <string name="settings_system_memory_limit_subtitle">Hukommelse tilgængelig til patching</string>
     <string name="settings_system_memory_limit_warning">En lav hukommelsesbegrænsning kan medføre at patching af store apps fejler</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB grænse</string>
     <string name="settings_system_process_runtime_disabled_description">Tryk for at konfigurere</string>
     <string name="settings_system_process_runtime_description_not_available">Denne funktion kræver Android 11 eller nyere</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importér &amp; eksportér</string>
-    <string name="settings_system_import_keystore">Importér keystore</string>
-    <string name="settings_system_import_keystore_description">Importér en brugerdefineret keystore</string>
+    <string name="settings_system_keystore">Keystore</string>
+    <string name="settings_system_import_keystore_description">Importerer eller eksporterer din signaturkeystore</string>
     <string name="settings_system_import_keystore_dialog_title">Indtast keystore legitimationsoplysninger</string>
     <string name="settings_system_import_keystore_dialog_description">Du skal indtaste keystore\'ens legitimationsoplysninger for at importere den</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Brugernavn (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Adgangskode</string>
-    <string name="settings_system_import_keystore_dialog_button">Importér</string>
     <string name="settings_system_import_keystore_dialog_format_field">Keystore format</string>
     <string name="settings_system_import_keystore_wrong_credentials">Forkerte keystore legitimationsoplysninger</string>
     <string name="settings_system_import_keystore_success">Keystone importeret</string>
     <string name="settings_system_import_keystore_failed">Importering af Keystone mislykkedes</string>
-    <string name="settings_system_export_keystore">Eksportér keystore</string>
-    <string name="settings_system_export_keystore_description">Eksportér den nuværende keystore</string>
     <string name="settings_system_export_keystore_unavailable">Ingen keystore tilgængelig til eksportering</string>
     <string name="settings_system_export_keystore_success">Keystore blev eksporteret</string>
     <string name="settings_system_export_keystore_failed">Fejl under eksport af nøglelager</string>
     <string name="settings_system_show_password_field">Vis adgangskode</string>
     <string name="settings_system_hide_password_field">Skjul adgangskode</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Importér Morphe-indstillinger</string>
-    <string name="settings_system_import_manager_settings_description">Gendan Morphe-indstillinger fra en JSON-fil</string>
+    <string name="settings_system_morphe_settings">Morphe-indstillinger</string>
+    <string name="settings_system_import_manager_settings_description">Sikkerhedskopierer og gendanner dine Morphe-indstillinger</string>
     <string name="settings_system_import_manager_settings_fail">Fejl ved import af Morphe-indstillinger: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-indstillinger importeret</string>
-    <string name="settings_system_export_manager_settings">Eksportér Morphe-indstillinger</string>
-    <string name="settings_system_export_manager_settings_description">Gem Morphe-indstillinger til en JSON-fil</string>
     <string name="settings_system_export_manager_settings_fail">Fejl ved eksport af Morphe-indstillinger: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe-indstillinger eksporteret</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Fejlfinding</string>
-    <string name="settings_system_export_debug_logs">Eksportér fejlsøgningslogge</string>
-    <string name="settings_system_export_debug_logs_description">Gem systemlog for fejlfinding</string>
+    <string name="settings_system_export_debug_logs_description">Gemmer systemlogfiler til fejlfinding</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Kunne ikke læse log (udgangskode %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Kunne ikke eksportere logge</string>
     <string name="settings_system_export_debug_logs_export_success">Logge blev eksporteret</string>
@@ -629,14 +625,14 @@ Størrelsesformatet skal være som følger:
     <string name="settings_system_patched_apks_deleted">App slettet</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Originale APK-er</string>
-    <string name="settings_system_original_apks_description">Originale APK-filer gemmes til gen-patching. Kun den seneste version bliver gemt for hver app</string>
+    <string name="settings_system_original_apks_description">Gemt til repatching. Én version pr. app er bevaret</string>
     <string name="settings_system_original_apks_empty">Ingen lagrede originale APK-er</string>
     <string name="settings_system_original_apks_deleted">Original APK slettet</string>
     <string name="settings_system_original_apks_delete_title">Slet original APK? </string>
     <string name="settings_system_original_apks_delete_confirm">Slet original APK for %s? Du vil ikke kunne repatche uden at tilbyde en ny APK</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patchvalg</string>
-    <string name="settings_system_patch_selections_description">Håndter de gemte patchvalg og indstillinger. Disse bevares efter app-afinstallation</string>
+    <string name="settings_system_patch_selections_description">Gemte patch-valg, bevares efter afinstallation</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nulstil alle valg?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Nulstil pakkevalg?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Nulstil kildevalg?</string>
@@ -696,6 +692,10 @@ Størrelsesformatet skal være som følger:
     <string name="disabled">Deaktiveret</string>
     <string name="selected">Valgt</string>
     <string name="not_selected">Ikke valgt</string>
+    <string name="select_all">Vælg alle</string>
+    <string name="select_all_done">Alle valgt</string>
+    <string name="deselect_all">Fravælg alle</string>
+    <string name="deselect_all_done">Alle fjernet valget</string>
     <string name="rename">Omdøb</string>
     <string name="import_">Importer</string>
     <string name="export">Eksporter</string>
@@ -716,6 +716,7 @@ Størrelsesformatet skal være som følger:
     <string name="unmount">Afmonter</string>
     <string name="unmounted">Afmonteret</string>
     <string name="remount">Genmonter</string>
+    <string name="share">Del</string>
     <string name="install">Installér</string>
     <string name="installed">Installeret</string>
     <string name="reinstall">Geninstaller</string>

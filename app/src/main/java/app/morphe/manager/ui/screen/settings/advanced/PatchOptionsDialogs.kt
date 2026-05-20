@@ -10,7 +10,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.Image
 import androidx.compose.material.icons.outlined.Restore
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -85,9 +84,8 @@ fun ThemeColorDialog(
                     )
                 }
             ) {
-                Icon(
-                    imageVector = Icons.Outlined.Restore,
-                    contentDescription = stringResource(R.string.reset),
+                MorpheIcon(
+                    icon = Icons.Outlined.Restore,
                     tint = LocalDialogTextColor.current
                 )
             }
@@ -267,8 +265,8 @@ fun CustomBrandingDialog(
     val context = LocalContext.current
 
     // Get current values from preferences
-    var appName by remember { mutableStateOf(patchOptionsPrefs.customAppName(packageName).getBlocking()) }
-    var iconPath by remember { mutableStateOf(patchOptionsPrefs.customIconPath(packageName).getBlocking()) }
+    val appName = remember { mutableStateOf(patchOptionsPrefs.customAppName(packageName).getBlocking()) }
+    val iconPath = remember { mutableStateOf(patchOptionsPrefs.customIconPath(packageName).getBlocking()) }
 
     // State for icon creator dialog
     val showIconCreator = remember { mutableStateOf(false) }
@@ -282,7 +280,7 @@ fun CustomBrandingDialog(
     val openFolderPicker = rememberFolderPickerWithPermission(
         onFolderPicked = { uri ->
             // Convert URI to path for patch options compatibility
-            iconPath = uri.toFilePath()
+            iconPath.value = uri.toFilePath()
         }
     )
 
@@ -296,8 +294,8 @@ fun CustomBrandingDialog(
                     patchOptionsViewModel.saveCustomBranding(
                         prefs = patchOptionsPrefs,
                         packageName = packageName,
-                        appName = appName,
-                        iconPath = iconPath,
+                        appName = appName.value,
+                        iconPath = iconPath.value,
                         onDone = onDismiss
                     )
                 },
@@ -313,8 +311,8 @@ fun CustomBrandingDialog(
             // App name field
             if (appNameOption != null) {
                 MorpheDialogTextField(
-                    value = appName,
-                    onValueChange = { appName = it },
+                    value = appName.value,
+                    onValueChange = { appName.value = it },
                     label = { Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_app_name)) },
                     placeholder = { Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_app_name_hint)) },
                     showClearButton = true
@@ -324,15 +322,13 @@ fun CustomBrandingDialog(
             // Icon path field with folder picker
             if (iconOption != null) {
                 MorpheDialogTextField(
-                    value = iconPath,
-                    onValueChange = { iconPath = it },
+                    value = iconPath.value,
+                    onValueChange = { iconPath.value = it },
                     label = { Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_custom_icon)) },
                     placeholder = { Text("/storage/emulated/0/icons") },
                     showClearButton = true,
                     onFolderPickerClick = { openFolderPicker() }
                 )
-
-                Spacer(modifier = Modifier.height(0.dp))
 
                 // Create icon button
                 MorpheDialogOutlinedButton(
@@ -341,8 +337,6 @@ fun CustomBrandingDialog(
                     icon = Icons.Outlined.AutoAwesome,
                     modifier = Modifier.fillMaxWidth()
                 )
-
-                Spacer(modifier = Modifier.height(0.dp))
 
                 // Expandable instructions section
                 iconOption.description.let { description ->
@@ -380,7 +374,7 @@ fun CustomBrandingDialog(
             packageName = packageName,
             onDismiss = { showIconCreator.value = false },
             onIconCreated = { path ->
-                iconPath = path
+                iconPath.value = path
                 showIconCreator.value = false
             }
         )
@@ -400,7 +394,7 @@ fun CustomHeaderDialog(
     val context = LocalContext.current
 
     // State for header creator dialog
-    var headerPath by remember {
+    val headerPath = remember {
         mutableStateOf(patchOptionsPrefs.customHeaderPath(packageName).getBlocking())
     }
 
@@ -414,7 +408,7 @@ fun CustomHeaderDialog(
     val openFolderPicker = rememberFolderPickerWithPermission(
         onFolderPicked = { uri ->
             // Convert URI to path for patch options compatibility
-            headerPath = uri.toFilePath()
+            headerPath.value = uri.toFilePath()
         }
     )
 
@@ -428,7 +422,7 @@ fun CustomHeaderDialog(
                     patchOptionsViewModel.saveCustomHeader(
                         prefs = patchOptionsPrefs,
                         packageName = packageName,
-                        headerPath = headerPath,
+                        headerPath = headerPath.value,
                         onDone = onDismiss
                     )
                 },
@@ -443,15 +437,13 @@ fun CustomHeaderDialog(
         ) {
             if (customOption != null) {
                 MorpheDialogTextField(
-                    value = headerPath,
-                    onValueChange = { headerPath = it },
+                    value = headerPath.value,
+                    onValueChange = { headerPath.value = it },
                     label = { Text(stringResource(R.string.settings_advanced_patch_options_custom_header)) },
                     placeholder = { Text("/storage/emulated/0/header") },
                     showClearButton = true,
                     onFolderPickerClick = { openFolderPicker() }
                 )
-
-                Spacer(modifier = Modifier.height(0.dp))
 
                 // Create header button
                 MorpheDialogOutlinedButton(
@@ -460,8 +452,6 @@ fun CustomHeaderDialog(
                     icon = Icons.Outlined.Image,
                     modifier = Modifier.fillMaxWidth()
                 )
-
-                Spacer(modifier = Modifier.height(0.dp))
 
                 // Expandable instructions section
                 customOption.description.let { description ->
@@ -497,7 +487,7 @@ fun CustomHeaderDialog(
             packageName = packageName,
             onDismiss = { showHeaderCreator.value = false },
             onHeaderCreated = { path ->
-                headerPath = path
+                headerPath.value = path
                 showHeaderCreator.value = false
             }
         )

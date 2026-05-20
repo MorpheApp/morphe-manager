@@ -58,15 +58,18 @@
     <string name="sources_management_title">Izvori zakrpe</string>
     <string name="sources_management_open_in_browser">Otvori u pregledaču</string>
     <string name="sources_management_failed_to_open_url">Otvaranje URL-a nije uspelo</string>
-    <string name="sources_management_prerelease_toggle">Koristi preizdavačke ispravke</string>
-    <string name="sources_management_prerelease_toggle_description">Primaj raniji pristup novim eksperimentalnim verzijama ispravaka</string>
-    <string name="sources_management_experimental_versions_toggle">Koristi eksperimentalne verzije aplikacija</string>
-    <string name="sources_management_experimental_versions_toggle_description">Plesaj eksperimentalne ciljeve aplikacija ako su dostupni</string>
+    <string name="sources_management_prerelease_toggle">Zakrpe u predprodukciji</string>
+    <string name="sources_management_prerelease_toggle_description">Dobija rani pristup novim eksperimentalnim verzijama zakrpa</string>
+    <string name="sources_management_experimental_versions_toggle">Eksperimentalne verzije aplikacije</string>
+    <string name="sources_management_experimental_versions_toggle_description">Zakrpljuje ciljeve eksperimentalnih aplikacija ako su dostupni</string>
     <string name="sources_management_already_exists">Ovaj izvor je već dodat</string>
     <string name="sources_management_invalid_url">Nevalidna URL adresa izvora. Molimo proverite adresu i pokušajte ponovo.</string>
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
     <string name="sources_management_metadata_unavailable_hint">Datoteka sa daljinskim metapodacima nije dostupna. Primena instaliranog paketa i dalje funkcioniše, ali automatsko ažuriranje je onemogućeno za ovaj izvor.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Paket zakrpa nije uspeo da se preuzme. URL adresa izvora može biti netačna ili datoteka ne postoji.</string>
+    <string name="sources_management_source_enabled">Izvor je uključen</string>
+    <string name="sources_management_source_disabled">Izvor je isključen</string>
+    <string name="sources_management_source_updating">Ažuriranje izvora</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Prikaži ime</string>
     <string name="sources_dialog_rename">Preimenuj izvor zakrpe</string>
@@ -138,9 +141,13 @@
     <string name="expert_mode_search">Pretraži patchove</string>
     <string name="expert_mode_proceed">Pokreni krpljenje</string>
     <string name="expert_mode_disable_all">Onemogući sve</string>
+    <string name="expert_mode_disable_all_done">Sve zakrpe su isključene</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
+    <string name="expert_mode_enable_all_done">Sve zakrpe su uključene</string>
     <string name="expert_mode_reset_to_default">Омогући препоручене пакете</string>
+    <string name="expert_mode_reset_to_default_done">Preporučene zakrpe su primenjene</string>
     <string name="expert_mode_restore_saved">Ponovi poslednji izbor</string>
+    <string name="expert_mode_restore_saved_done">Vraćena sačuvana selekcija</string>
     <string name="expert_mode_no_results">Nema pronađenih zakrpa</string>
     <string name="expert_mode_universal_patches">Univerzalne zakrpe </string>
     <string name="expert_mode_new_patches">Novo</string>
@@ -246,9 +253,9 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="root_pre_patch_installer_title">Odaberi način instalacije</string>
     <string name="root_pre_patch_installer_description">Vaš uređaj ima pristup korenovom direktorijumu. Odaberite način instalacije ispravljenog programa</string>
     <string name="root_pre_patch_installer_mount_title">Montiraj ispravljeni APK preko stokovnog programa</string>
-    <string name="root_pre_patch_installer_mount_description">Montiraj ispravljeni APK preko stokovnog programa. Nema GmsCore</string>
+    <string name="root_pre_patch_installer_mount_description">Montira zakrpljeni APK preko fabričke aplikacije. Nije potreban GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Standardna instalacija</string>
-    <string name="root_pre_patch_installer_standard_description">Instaliraj kao odvojeni program s podrškom GmsCore. Odaberite instalater (Sistemski instalater, Shizuku, itd.) nakon ispravljanja</string>
+    <string name="root_pre_patch_installer_standard_description">Instalira se kao zasebna aplikacija uz podršku GmsCore. Mogući je izbor instalera nakon patchovanja</string>
     <string name="root_pre_patch_installer_hint">Način instalacije određuje koje ispravke su uključene i ne može se promijeniti nakon ispravljanja</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Greška kopirana u privremenu memoriju</string>
@@ -379,7 +386,7 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_dynamic">Dinamičko</string>
     <string name="settings_appearance_accent_color">Naglašena boja</string>
     <string name="settings_appearance_pure_black">Čisto Crna</string>
-    <string name="settings_appearance_pure_black_description">Koristi prave crne pozadine</string>
+    <string name="settings_appearance_pure_black_description">Koristi istinski crne pozadine</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Jezik aplikacije</string>
     <string name="settings_appearance_app_language_current">Trenutni jezik</string>
@@ -402,13 +409,13 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Promeni ikonu</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Ažuriranja</string>
-    <string name="settings_advanced_updates_use_prereleases">Koristite Morphe pre-verziju</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Dobijte rani pristup novim funkcijama Morphe-a. Da biste dobili preliminarne zakpre, omogućite prekidač za preliminarne zakrpe u svakom izvoru zakrpe posebno.</string>
-    <string name="settings_advanced_updates_allow_metered">Ažuriraj na mobilnim podacima</string>
-    <string name="settings_advanced_updates_allow_metered_description">Омогућите Morphe-у и надоградњама исправки да се преузму преко мобилних података</string>
+    <string name="settings_advanced_updates_use_prereleases">Pre-release ažuriranja</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Rani pristup novim verzijama aplikacije Morphe. Omogućite pre-release po izvoru u izvorima patchovanja</string>
+    <string name="settings_advanced_updates_allow_metered">Ažuriranja putem mobilnih podataka</string>
+    <string name="settings_advanced_updates_allow_metered_description">Omogućava preuzimanje ažuriranja aplikacije Morphe i patchovanja putem mobilnih podataka</string>
     <string name="settings_advanced_updates_background_notifications">Ažuriranja u pozadini</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodično proveravaj za ažuriranja u pozadini i obaveštavaj kada su dostupna</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">Primaj trenutne push obavijesti za nove verzije, čak i kada je aplikacija zatvorena</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Push obaveštenja za nove verzije, čak i kada je aplikacija zatvorena</string>
     <string name="settings_advanced_update_interval">Pronalaženje frekvencije</string>
     <string name="settings_advanced_update_interval_dialog_title">Pronalaženje ažuriranja</string>
     <string name="settings_advanced_update_interval_hourly">Jedanput na sat</string>
@@ -432,12 +439,11 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Napredne postavke</string>
     <string name="settings_advanced_expert_mode">Napredni način</string>
-    <string name="settings_advanced_expert_mode_description">Omogući složeno podešavanje Morphe i opcije za prilagođavanje</string>
+    <string name="settings_advanced_expert_mode_description">Omogućava kompleksna podešavanja i opcije prilagođavanja patchovanja u aplikaciji Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Omogućiti režim eksperta?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Režim eksperta daje više kontrole nad primenom patchova, ali pogrešno podešavanje u režimu eksperta može da rezultuje u nefunkcionalnoj aplikaciji</string>
     <string name="settings_advanced_strip_unused_libs">Optimizujte za arhitekturu uređaja</string>
-    <string name="settings_advanced_strip_unused_libs_description">"Preskoči split APK module za neproverene CPU arhitekture, lokale i rezolucije ekrana tokom spajanja.
-Za obične APK-ove, uklanja nativne biblioteke za neproverene arhitekture nakon zakrpavanja"</string>
+    <string name="settings_advanced_strip_unused_libs_description">Uklanja neiskorišćene CPU arhitektonske biblioteke i split APK module</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Način obrade bajtkoda</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Kontroliše kako se bajtkod obrađuje tokom popravki. Utiče na brzinu popravki, korišćenje memorije i veličinu izlaznog APK fajla</string>
@@ -445,7 +451,7 @@ Za obične APK-ove, uklanja nativne biblioteke za neproverene arhitekture nakon 
     <string name="settings_advanced_bytecode_mode_strip_fast">Brzo</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">Brže ispravljanje i manja upotreba memorije, uz veći APK. Preporučeno za uređaje sa malo RAM-a ili starije uređaje</string>
     <string name="settings_advanced_bytecode_mode_full">Puno</string>
-    <string name="settings_advanced_bytecode_mode_full_description">Sporije ispravljanje, replicira staro ponašanje. Koristiti samo ako brzi režim izaziva probleme</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Sporije patchovanje, replikuje prethodno ponašanje. Preporučeno samo ako brzi režim izaziva probleme</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Potrebno za izvore zahtjeva za povlačenje</string>
@@ -463,7 +469,7 @@ Za obične APK-ove, uklanja nativne biblioteke za neproverene arhitekture nakon 
     <string name="settings_advanced_patch_options_expert_mode_notice">U naprednom načinu opcije patchiranja će biti dostupne tokom procesa patchiranja</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">Boje aplikacije</string>
-    <string name="settings_advanced_patch_options_theme_colors_description">Promeni boju pozadine</string>
+    <string name="settings_advanced_patch_options_theme_colors_description">Menja boju pozadine</string>
     <string name="settings_advanced_patch_options_dark_theme_color">Mapa sa slikama za korištenje kao prilagođena pozadina</string>
     <string name="settings_advanced_patch_options_light_theme_color">Boja pozadine za svjetlo</string>
     <string name="settings_advanced_patch_options_theme_color_description">Moguće je hex boja (#RRGGBB) ili referenca na resurs boje</string>
@@ -473,7 +479,7 @@ Za obične APK-ove, uklanja nativne biblioteke za neproverene arhitekture nakon 
     <string name="settings_advanced_patch_options_no_available">Prilagođeni filtr</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">Mapa sa slikama za korištenje kao prilagođena zaglavlje</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">Unesi ime</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">Menja naziv aplikacije</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Naziv aplikacije</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Unesi ime</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Promeni ikonu</string>
@@ -511,22 +517,22 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Promeni ikonu zaglavlja</string>
-    <string name="settings_advanced_patch_options_custom_header_description">Mapa sa slikama za korištenje kao prilagođeno zaglavlje</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Menja logo zaglavlja</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Sakrij dugme „Shorts”"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Ukloni dugme „Shorts” iz izbornog menija</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Ukloni dugme „Shorts” iz dugmeta izbornog menija</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Sakrij dugme „Shorts” widget</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Uklanja Shorts iz dugog pritiska na meni pokretača</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Ukloni dugme „Shorts” iz dugmeta widgeta</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Performanse</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Uklanja Shorts dugme iz widget-a pokretača</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
     <string name="installer_title">Odaberite instalera</string>
     <string name="installer_internal_name">Sistemski instalacioni program</string>
-    <string name="installer_internal_description">Koristi instalacioni program paketa Android</string>
+    <string name="installer_internal_description">Koristi Android paketni instalator</string>
     <string name="installer_auto_saved_name">Instalator za montažu sa root-om</string>
     <string name="installer_auto_saved_description">Instalira nadinstaliranu APK na postojeću aplikaciju</string>
-    <string name="installer_shizuku_description">Instalirajte u tišini koristeći Shizuku ili Sui</string>
+    <string name="installer_shizuku_description">Instalira se tiho koristeći Shizuku ili Sui</string>
     <string name="installer_option_none">Bez rezervnog rešenja</string>
     <string name="installer_none_description">Nije konfigurisano nijedno rezervno instalaciono rešenje</string>
     <string name="installer_status_requires_root">Zahteva root pristup</string>
@@ -547,57 +553,47 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="installer_unavailable_message">Vaš preferirani instalera (%s) je trenutno nedostupan. Moguće je ispraviti problem i pokušati ponovo ili koristiti standardni instalera</string>
     <string name="installer_unavailable_shizuku_hint">Uvjerite se da je Shizuku pokrenut i da je dozvola dodijeljena ovoj aplikaciji</string>
     <string name="installer_use_standard">Koristi standard</string>
-    <string name="settings_prompt_installer_on_install">Pokušajte instalera na instalaciju</string>
-    <string name="settings_prompt_installer_on_install_description">Prikaži dijalog odabira instalera svaki put kada instalirate patchiranu aplikaciju</string>
+    <string name="settings_prompt_installer_on_install">Prompt za izbor instalera</string>
+    <string name="settings_prompt_installer_on_install_description">Prikazuje dijalog za izbor instalera svaki put kada se instalira patchovana aplikacija</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizacija baterije</string>
-    <string name="settings_system_battery_optimization_description">Sprečava sistem da zaustavi program za zakrpe kada je Morphe minimizovan</string>
-    <string name="settings_system_battery_optimization_excluded">Isključeno</string>
-    <string name="settings_system_battery_optimization_not_excluded">Nije isključeno</string>
+    <string name="settings_system_battery_optimization_description">Drži patcher pokrenutim kada je aplikacija minimizovana</string>
     <string name="settings_system_performance">Vrijedi vrijeme izvođenja</string>
     <string name="settings_system_process_runtime">Pokrenite proces izvođenja za bolju stabilnost</string>
-    <string name="settings_system_process_runtime_description">Memorija ograničenja</string>
+    <string name="settings_system_process_runtime_description">Pokreće patchovanje u zasebnom procesu za bolju stabilnost</string>
     <string name="settings_system_process_runtime_memory_limit">Viši ograničenja mogu usporediti patchiranje ali možda neće funkcionisati na stariji uređenicima</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Omogućite proces izvođenja</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Veće granice ubrzavaju patchovanje na sposobnim uređajima</string>
     <string name="settings_system_process_runtime_enable">Memorija dostupna za patchiranje</string>
     <string name="settings_system_memory_limit_subtitle">Upozorenje: Niska memorija ograničenja može dovesti neuspeh u patchiranju većih aplikacija</string>
     <string name="settings_system_memory_limit_warning">%d MB ograničenje</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB ograničenje</string>
     <string name="settings_system_process_runtime_disabled_description">Dodirni za konfigurisanje</string>
     <string name="settings_system_process_runtime_description_not_available">Ova funkcionalnost zahteva Android 11 ili noviji</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Uvoz i izvoz</string>
-    <string name="settings_system_import_keystore">Unesi podaci za kejtore</string>
-    <string name="settings_system_import_keystore_description">Unesi prilagođene podaci za kejtore</string>
+    <string name="settings_system_keystore">Keystore</string>
+    <string name="settings_system_import_keystore_description">Uvozi ili izvozi vaš keystore za potpisivanje</string>
     <string name="settings_system_import_keystore_dialog_title">Pogrešni izvor</string>
     <string name="settings_system_import_keystore_dialog_description">Morate unijeti podacima o keystore-u za njegovo uvođenje</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Pogrešni izvor</string>
     <string name="settings_system_import_keystore_dialog_password_field">Lozinka </string>
-    <string name="settings_system_import_keystore_dialog_button">Uvoz</string>
     <string name="settings_system_import_keystore_dialog_format_field">Format kejstora</string>
     <string name="settings_system_import_keystore_wrong_credentials">Pogrešni izvor</string>
     <string name="settings_system_import_keystore_success">Kejtore uvezeno</string>
     <string name="settings_system_import_keystore_failed">Nijeleženo uvoz kejtora</string>
-    <string name="settings_system_export_keystore">Izvezi kejtore</string>
-    <string name="settings_system_export_keystore_description">Izvezi trenutni kejtore</string>
     <string name="settings_system_export_keystore_unavailable">Nema dostupnih kejtora za izvoz</string>
     <string name="settings_system_export_keystore_success">Kejtore izvezeno</string>
     <string name="settings_system_export_keystore_failed">Nije uspelo izvozivanje skladišta ključeva</string>
     <string name="settings_system_show_password_field">Prikaži lozinku</string>
     <string name="settings_system_hide_password_field">Sakrij lozinku</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Увезите подешавања Morphe-а</string>
-    <string name="settings_system_import_manager_settings_description">Вратите подешавања Morphe-а из JSON датотеке</string>
+    <string name="settings_system_morphe_settings">Morphe podešavanja</string>
+    <string name="settings_system_import_manager_settings_description">Pravi backup i vraća vaše podešavanje aplikacije Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Није успело увожење подешавања Morphe-а: %s</string>
     <string name="settings_system_import_manager_settings_success">Увезена су подешавања Morphe-а</string>
-    <string name="settings_system_export_manager_settings">Извезите подешавања Morphe-а</string>
-    <string name="settings_system_export_manager_settings_description">Сачувајте подешавања Morphe-а у JSON датотеку</string>
     <string name="settings_system_export_manager_settings_fail">Није успело извожење подешавања Morphe-а: %s</string>
     <string name="settings_system_export_manager_settings_success">Извезена су подешавања Morphe-а</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
-    <string name="settings_system_export_debug_logs">Izvezi evidencije otklanjanja grešaka</string>
-    <string name="settings_system_export_debug_logs_description">Spremi sistemske logove za otklanjanje problema</string>
+    <string name="settings_system_export_debug_logs_description">Čuva sistemske logove za rešavanje problema</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Neuspeh pri čitanju dnevnika (kôd izlaza %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Neuspešan izvoz evidencija</string>
     <string name="settings_system_export_debug_logs_export_success">Lozove izvezeno</string>
@@ -606,21 +602,21 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_system_apks_size">Ukupna veličina: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patcheirani APK(s)</string>
-    <string name="settings_system_patched_apks_description">Upravljajte sačuvane patcheirane aplikacije</string>
+    <string name="settings_system_patched_apks_description">Upravlja sačuvanim patchovanim datotekama aplikacija</string>
     <string name="settings_system_patched_apks_empty">Još patcheiranih APK(s) nije sačuvano</string>
     <string name="settings_system_patched_apks_delete_title">Da li zaista želite da obrišete ovaj patcheirani APK?</string>
     <string name="settings_system_patched_apks_delete_confirm">Da li zaista želite da obrišete patcheirani APK za %s?</string>
     <string name="settings_system_patched_apks_deleted">Patcheirani APK obrisan</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Originalni APK(s)</string>
-    <string name="settings_system_original_apks_description">Originalni APK fajlovi se čuvaju za repatching. Sadrži samo najnoviju verziju za svaku aplikaciju</string>
+    <string name="settings_system_original_apks_description">Sačuvano za ponovno patchovanje. Čuva se jedna verzija po aplikaciji</string>
     <string name="settings_system_original_apks_empty">Nema sačuvanih originalnih APK fajlova</string>
     <string name="settings_system_original_apks_deleted">Da li zaista želite da obrišete ovaj originalni APK?</string>
     <string name="settings_system_original_apks_delete_title">Da li zaista želite da obrišete originalni APK za %s? Nećete moći repatchirati bez pružnog novog APK fajla.</string>
     <string name="settings_system_original_apks_delete_confirm">Izbrišite originalni fajl APK za %s? Bez novog fajla APK nećete moći ponovo patchirati</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Upravljanje sačuvanim patch-ovima i opcijama. Ovo ostaje nakon deinstalacije aplikacije</string>
-    <string name="settings_system_patch_selections_description">Upravljanje sačuvanim patch-ovima i opcijama. Ovo ostaje nakon deinstalacije aplikacije</string>
+    <string name="settings_system_patch_selections_description">Čuva odabrane patchove, zadržane nakon deinstalacije</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Poništiti sve odabire?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Poništiti odabire paketa?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Poništiti odabir izvora?</string>
@@ -643,7 +639,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O programu</string>
     <string name="settings_system_share_website">Podeli mrežni-sajt</string>
-    <string name="settings_system_share_website_description">Dijeli službeni veb-sajt Morphea</string>
+    <string name="settings_system_share_website_description">Podele zvanični veb sajt aplikacije Morphe</string>
     <string name="settings_system_manager_description">"Otvoreni projekat za moderno, pojednostavljeno ispravljanje popularnih Android aplikacija, pokretan povratnim odzivom i doprinosima zajednice"</string>
     <string name="credits">Заслуге</string>
     <string name="credits_current_development">Тренутни развој</string>
@@ -680,6 +676,10 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="disabled">Onemogućen</string>
     <string name="selected">Odabrano</string>
     <string name="not_selected">Nije odabrano</string>
+    <string name="select_all">Izaberi sve</string>
+    <string name="select_all_done">Svi su izabrani</string>
+    <string name="deselect_all">Poništi izbor svih</string>
+    <string name="deselect_all_done">Ništa nije izabrano</string>
     <string name="rename">Preimenovanje</string>
     <string name="import_">Uvoz</string>
     <string name="export">Izvezi</string>
@@ -700,6 +700,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="unmount">Izbaci</string>
     <string name="unmounted">Demontirano</string>
     <string name="remount">Ponovo priključaj</string>
+    <string name="share">Podeli</string>
     <string name="install">Instaliraj</string>
     <string name="installed">Instalirano</string>
     <string name="reinstall">Ponovo instaliraj</string>

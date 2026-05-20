@@ -366,6 +366,12 @@ private fun BundleManagementCard(
     val disabledState = stringResource(R.string.disabled)
     val openInBrowser = stringResource(R.string.sources_management_open_in_browser)
 
+    val context = LocalContext.current
+    fun withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
+        context.toast(doneMessage)
+        action()
+    }
+
     val isEnabled = bundle.enabled
     val hasMetadataError = metadataFetchError != null
     val isMissing = bundle.state is PatchBundleSource.State.Missing
@@ -397,31 +403,34 @@ private fun BundleManagementCard(
     Surface(
         modifier = modifier
             .fillMaxWidth()
-            .graphicsLayer { scaleX = scale; scaleY = scale }
-            .then(longPressModifier),
+            .graphicsLayer { scaleX = scale; scaleY = scale },
         shape = RoundedCornerShape(16.dp),
         tonalElevation = if (isDragging) 8.dp else 3.dp,
         color = animatedColor,
         border = BorderStroke(1.dp, animatedBorderColor)
     ) {
         // Build content description
-        val contentDesc = buildString {
-            append(bundle.displayTitle)
-            append(", ")
-            if (isEnabled) {
-                append(enabledState)
-            } else {
-                append(disabledState)
-            }
-            if (!forceExpanded) {
+        val updateLabel = stringResource(R.string.update)
+        val availableLabel = stringResource(R.string.available)
+        val contentDesc = remember(bundle.displayTitle, isEnabled, expanded, forceExpanded, updateInfo) {
+            buildString {
+                append(bundle.displayTitle)
                 append(", ")
-                append(if (expanded) expandedState else collapsedState)
-            }
-            updateInfo?.let {
-                append(", ")
-                append(stringResource(R.string.update))
-                append(" ")
-                append(stringResource(R.string.available))
+                if (isEnabled) {
+                    append(enabledState)
+                } else {
+                    append(disabledState)
+                }
+                if (!forceExpanded) {
+                    append(", ")
+                    append(if (expanded) expandedState else collapsedState)
+                }
+                updateInfo?.let {
+                    append(", ")
+                    append(updateLabel)
+                    append(" ")
+                    append(availableLabel)
+                }
             }
         }
 
@@ -447,7 +456,8 @@ private fun BundleManagementCard(
                 expanded = expanded,
                 showChevron = !forceExpanded,
                 enabled = isEnabled,
-                metadataFetchError = metadataFetchError
+                metadataFetchError = metadataFetchError,
+                modifier = longPressModifier
             )
 
             // Expanded content
@@ -521,7 +531,7 @@ private fun BundleManagementCard(
                         }
                     }
 
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                    MorpheSettingsDivider(modifier = Modifier.padding(vertical = 8.dp), fullWidth = true)
 
                     // Resolve prerelease state once
                     val currentUsePrerelease = when (bundle) {
@@ -555,7 +565,7 @@ private fun BundleManagementCard(
 
                             Spacer(Modifier.width(8.dp))
 
-                            Switch(
+                            MorpheSwitch(
                                 checked = currentUsePrerelease,
                                 onCheckedChange = onPrereleasesToggle
                             )
@@ -595,7 +605,7 @@ private fun BundleManagementCard(
 
                             Spacer(Modifier.width(8.dp))
 
-                            Switch(
+                            MorpheSwitch(
                                 checked = useExperimentalVersions,
                                 onCheckedChange = { onExperimentalVersionsToggle?.invoke(it) }
                             )
@@ -603,7 +613,7 @@ private fun BundleManagementCard(
                     }
 
                     if (onPrereleasesToggle != null || (hasExperimentalVersions && onExperimentalVersionsToggle != null)) {
-                        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                        MorpheSettingsDivider(modifier = Modifier.padding(vertical = 8.dp), fullWidth = true)
                     }
 
                     // Action bar
@@ -619,6 +629,10 @@ private fun BundleManagementCard(
                                 } else {
                                     stringResource(R.string.enable) + " " + bundle.displayTitle
                                 }
+                                val disableToast = stringResource(
+                                    if (bundle.enabled) R.string.sources_management_source_disabled
+                                    else R.string.sources_management_source_enabled
+                                )
 
                                 val disableIcon = if (bundle.enabled)
                                     Icons.Outlined.Block
@@ -631,35 +645,43 @@ private fun BundleManagementCard(
                                 ) { icon ->
                                     // Disable button
                                     ActionPillButton(
-                                        onClick = onDisable,
+                                        onClick = withToast(disableToast, onDisable),
                                         icon = icon,
-                                        contentDescription = disableEnableDesc
+                                        contentDescription = disableEnableDesc,
+                                        tooltip = disableEnableDesc
                                     )
                                 }
                             }
 
                             if (bundle is RemotePatchBundle) {
+                                val updateDesc = stringResource(R.string.update) + " " + bundle.displayTitle
+                                val updateToast = stringResource(R.string.sources_management_source_updating)
                                 // Update button
                                 ActionPillButton(
-                                    onClick = onUpdate,
+                                    onClick = withToast(updateToast, onUpdate),
                                     icon = Icons.Outlined.Refresh,
-                                    contentDescription = stringResource(R.string.update) + " " + bundle.displayTitle
+                                    contentDescription = updateDesc,
+                                    tooltip = updateDesc
                                 )
                             }
 
                             if (!bundle.isDefault) {
+                                val renameDesc = stringResource(R.string.rename) + " " + bundle.displayTitle
+                                val deleteDesc = stringResource(R.string.delete) + " " + bundle.displayTitle
                                 // Rename button
                                 ActionPillButton(
                                     onClick = onRename,
                                     icon = Icons.Outlined.Edit,
-                                    contentDescription = stringResource(R.string.rename) + " " + bundle.displayTitle
+                                    contentDescription = renameDesc,
+                                    tooltip = renameDesc
                                 )
 
                                 // Delete button
                                 ActionPillButton(
                                     onClick = onDelete,
                                     icon = Icons.Outlined.Delete,
-                                    contentDescription = stringResource(R.string.delete) + " " + bundle.displayTitle,
+                                    contentDescription = deleteDesc,
+                                    tooltip = deleteDesc,
                                     colors = IconButtonDefaults.filledTonalIconButtonColors(
                                         containerColor = MaterialTheme.colorScheme.errorContainer,
                                         contentColor = MaterialTheme.colorScheme.onErrorContainer
@@ -680,6 +702,7 @@ private fun BundleCardHeader(
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
     expanded: Boolean,
     showChevron: Boolean,
+    modifier: Modifier = Modifier,
     enabled: Boolean = true,
     metadataFetchError: Throwable? = null
 ) {
@@ -689,7 +712,7 @@ private fun BundleCardHeader(
     )
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -724,7 +747,7 @@ private fun BundleCardHeader(
             // When showChevron=true (multiple bundles): show version • date.
             val timestamp = bundle.updatedAt ?: bundle.createdAt
             val versionText = if (showChevron) bundle.version?.removePrefix("v") else null
-            val dateText = timestamp?.let { getRelativeTimeString(it) }
+            val dateText = remember(timestamp) { timestamp?.let { getRelativeTimeString(it) } }
 
             if (versionText != null || dateText != null) {
                 Row(
@@ -858,10 +881,9 @@ private fun BundleInfoCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Icon(
-                icon,
-                contentDescription = null,
-                modifier = Modifier.size(20.dp),
+            MorpheIcon(
+                icon = icon,
+                size = 20.dp,
                 tint = MaterialTheme.colorScheme.onSecondaryContainer
             )
 

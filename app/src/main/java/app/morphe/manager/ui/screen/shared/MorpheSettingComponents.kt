@@ -6,26 +6,22 @@
 package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.animation.*
-import androidx.compose.animation.core.Easing
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ChevronRight
-import androidx.compose.material.icons.outlined.ExpandMore
-import androidx.compose.material.icons.outlined.FolderOff
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -51,6 +47,11 @@ object MorpheDefaults {
     val IconSize = 24.dp
     val ContentPadding = 16.dp
     val ItemSpacing = 12.dp
+
+    // Gradient colors for GradientCircleIcon
+    val GradientStartColor = Color(0xFF1E5AA8)
+    val GradientEndColor = Color(0xFF00AFAE)
+    val DefaultGradientColors = listOf(GradientStartColor, GradientEndColor)
 
     // Animation durations
     /** Duration used for dialog enter/exit and overlay transitions. */
@@ -210,13 +211,14 @@ fun MorpheSettingsDivider(
     modifier: Modifier = Modifier,
     fullWidth: Boolean = false
 ) {
+    val outlineVariant = MaterialTheme.colorScheme.outlineVariant
+    val surfaceTint = MaterialTheme.colorScheme.surfaceTint
+    val color = remember(outlineVariant, surfaceTint) {
+        lerp(outlineVariant, surfaceTint, 0.18f).copy(alpha = 0.55f)
+    }
     HorizontalDivider(
         modifier = if (fullWidth) modifier else modifier.padding(horizontal = MorpheDefaults.ContentPadding),
-        color = lerp(
-            MaterialTheme.colorScheme.outlineVariant,
-            MaterialTheme.colorScheme.surfaceTint,
-            0.18f
-        ).copy(alpha = 0.55f)
+        color = color
     )
 }
 
@@ -240,6 +242,139 @@ fun MorpheIcon(
 }
 
 /**
+ * An outlined empty circle, used as a placeholder in selection lists alongside [StatusCircleIcon].
+ */
+@Composable
+fun StatusCirclePlaceholder(
+    modifier: Modifier = Modifier,
+    size: Dp = 28.dp
+) {
+    Spacer(
+        modifier = modifier
+            .size(size)
+            .border(1.5.dp, MaterialTheme.colorScheme.outlineVariant, CircleShape)
+    )
+}
+
+/**
+ * Switch with check/close icons in the thumb.
+ */
+@Composable
+fun MorpheSwitch(
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
+) {
+    Switch(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
+        modifier = modifier,
+        enabled = enabled,
+        thumbContent = {
+            Icon(
+                imageVector = if (checked) Icons.Filled.Check else Icons.Filled.Close,
+                contentDescription = null,
+                modifier = Modifier.size(SwitchDefaults.IconSize)
+            )
+        }
+    )
+}
+
+/**
+ * A small filled circle with an icon inside, used as a compact status indicator.
+ */
+@Composable
+fun StatusCircleIcon(
+    icon: ImageVector,
+    containerColor: Color,
+    contentColor: Color,
+    modifier: Modifier = Modifier,
+    size: Dp = 28.dp
+) {
+    Box(
+        modifier = modifier
+            .size(size)
+            .background(containerColor, CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            modifier = Modifier.size(size * 0.6f),
+            tint = contentColor
+        )
+    }
+}
+
+/**
+ * A settings row with a title, optional description, and import/export action buttons.
+ */
+@Composable
+fun ImportExportRow(
+    leadingContent: @Composable () -> Unit,
+    title: String,
+    description: String? = null,
+    onImport: (() -> Unit)?,
+    onExport: (() -> Unit)?
+) {
+    val hasBoth = onImport != null && onExport != null
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(MorpheDefaults.ContentPadding),
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            leadingContent()
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                if (description != null) {
+                    Text(
+                        text = description,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = if (hasBoth) Arrangement.spacedBy(8.dp) else Arrangement.Center
+        ) {
+            if (onImport != null) {
+                ActionPillButton(
+                    onClick = onImport,
+                    icon = Icons.Outlined.Download,
+                    contentDescription = stringResource(R.string.import_),
+                    modifier = if (hasBoth) Modifier.weight(1f) else Modifier.fillMaxWidth(0.5f),
+                    large = true,
+                    label = stringResource(R.string.import_)
+                )
+            }
+            if (onExport != null) {
+                ActionPillButton(
+                    onClick = onExport,
+                    icon = Icons.Outlined.Upload,
+                    contentDescription = stringResource(R.string.export),
+                    modifier = if (hasBoth) Modifier.weight(1f) else Modifier.fillMaxWidth(0.5f),
+                    large = true,
+                    label = stringResource(R.string.export)
+                )
+            }
+        }
+    }
+}
+
+/**
  * Circular icon with gradient background for section titles.
  */
 @Composable
@@ -249,7 +384,7 @@ fun GradientCircleIcon(
     size: Dp = 40.dp,
     iconSize: Dp = MorpheDefaults.IconSize,
     contentDescription: String? = null,
-    gradientColors: List<Color> = listOf(Color(0xFF1E5AA8), Color(0xFF00AFAE))
+    gradientColors: List<Color> = MorpheDefaults.DefaultGradientColors
 ) {
     Box(
         modifier = modifier
@@ -276,9 +411,11 @@ fun IconTextRow(
     leadingContent: @Composable (() -> Unit)? = null,
     title: String,
     description: String? = null,
-    titleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
+    titleStyle: TextStyle = MaterialTheme.typography.bodyLarge,
     titleWeight: FontWeight = FontWeight.Medium,
-    descriptionStyle: TextStyle = MaterialTheme.typography.bodySmall,
+    titleColor: Color = MaterialTheme.colorScheme.onSurface,
+    descriptionStyle: TextStyle = MaterialTheme.typography.bodyMedium,
+    descriptionColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     trailingContent: @Composable (() -> Unit)? = null,
     spacing: Dp = MorpheDefaults.ItemSpacing
 ) {
@@ -289,18 +426,21 @@ fun IconTextRow(
     ) {
         leadingContent?.invoke()
 
-        Column(modifier = Modifier.weight(1f)) {
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
             Text(
                 text = title,
                 style = titleStyle,
                 fontWeight = titleWeight,
-                color = MaterialTheme.colorScheme.onSurface
+                color = titleColor
             )
             description?.let {
                 Text(
                     text = it,
                     style = descriptionStyle,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = descriptionColor
                 )
             }
         }
@@ -333,6 +473,10 @@ fun SettingsItemCard(
     }
 }
 
+private val defaultChevronTrailing: @Composable () -> Unit = {
+    MorpheIcon(icon = Icons.Outlined.ChevronRight)
+}
+
 /**
  * Base settings item component.
  * Shared implementation for SettingsItem and RichSettingsItem.
@@ -345,9 +489,7 @@ fun BaseSettingsItem(
     leadingContent: @Composable () -> Unit,
     title: String,
     description: String? = null,
-    trailingContent: @Composable (() -> Unit)? = {
-        MorpheIcon(icon = Icons.Outlined.ChevronRight)
-    }
+    trailingContent: @Composable (() -> Unit)? = defaultChevronTrailing
 ) {
     SettingsItemCard(
         onClick = onClick,
@@ -397,9 +539,7 @@ fun RichSettingsItem(
     leadingContent: @Composable (() -> Unit) = {},
     title: String,
     subtitle: String? = null,
-    trailingContent: @Composable (() -> Unit)? = {
-        MorpheIcon(icon = Icons.Outlined.ChevronRight)
-    }
+    trailingContent: @Composable (() -> Unit)? = defaultChevronTrailing
 ) {
     BaseSettingsItem(
         onClick = onClick,

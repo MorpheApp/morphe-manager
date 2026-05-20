@@ -66,7 +66,7 @@ fun ColorPickerDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             // Color preview
             Surface(
@@ -156,7 +156,7 @@ private fun ColorSlider(
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
     ) {
         Text(
             text = label,

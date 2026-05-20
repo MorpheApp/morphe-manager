@@ -1,20 +1,30 @@
 package app.morphe.manager.util
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.graphics.toColorInt
 
-/**
- * Determine if a color represents a dark background
- */
+/** Determine if a color represents a dark background. */
 fun Color.isDarkBackground(): Boolean = luminance() < 0.5f
 
+/** Returns true if the color is near-black or near-white, where tinted surfaces look better than a direct tint. */
+fun Color.isExtremeAccent(): Boolean = luminance() !in 0.04f..0.92f
+
 /**
- * Get luminance from a Color
+ * Composites this color at [alpha] over [background] and returns the opaque result.
  */
-fun Color.luminance(): Float {
-    return 0.299f * red + 0.587f * green + 0.114f * blue
-}
+fun Color.compositeOver(background: Color, alpha: Float = this.alpha): Color = Color(
+    red   = background.red   * (1f - alpha) + red   * alpha,
+    green = background.green * (1f - alpha) + green * alpha,
+    blue  = background.blue  * (1f - alpha) + blue  * alpha,
+)
+
+/**
+ * Returns true if this color, when used as a background, requires light (white) content for contrast.
+ * Uses WCAG relative luminance threshold.
+ */
+fun Color.requiresLightContent(): Boolean = luminance() <= 0.179f
 
 /**
  * Lighten a color by mixing with white

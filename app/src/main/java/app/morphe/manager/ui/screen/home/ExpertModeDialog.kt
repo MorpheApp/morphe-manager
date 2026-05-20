@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.home
 
 import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -30,6 +31,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -167,6 +169,11 @@ fun ExpertModeDialog(
         compactPadding = true,
         scrollable = false
     ) {
+        BackHandler(enabled = searchVisible) {
+            searchQuery = ""
+            searchVisible = false
+        }
+
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -549,9 +556,9 @@ private fun BundlePatchControls(
 ) {
     val context = LocalContext.current
 
-    // Returns a lambda that shows a toast with [label] and then executes [action].
-    fun withToast(label: String, action: () -> Unit): () -> Unit = {
-        context.toast(label)
+    // Shows a confirmation toast with [doneMessage] and then executes [action]
+    fun withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
+        context.toast(doneMessage)
         action()
     }
 
@@ -560,12 +567,17 @@ private fun BundlePatchControls(
     val restoreLabel = stringResource(R.string.expert_mode_restore_saved)
     val deselectAllLabel = stringResource(R.string.expert_mode_disable_all)
 
+    val enabledDone = stringResource(R.string.expert_mode_enable_all_done)
+    val disabledDone = stringResource(R.string.expert_mode_disable_all_done)
+    val resetDone = stringResource(R.string.expert_mode_reset_to_default_done)
+    val restoredDone = stringResource(R.string.expert_mode_restore_saved_done)
+
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
     ) {
         ActionPillButton(
-            onClick = withToast(selectAllLabel, onSelectAll),
+            onClick = withToast(enabledDone, onSelectAll),
             icon = Icons.Outlined.DoneAll,
             contentDescription = selectAllLabel,
             tooltip = selectAllLabel,
@@ -578,7 +590,7 @@ private fun BundlePatchControls(
             )
         )
         ActionPillButton(
-            onClick = withToast(defaultLabel, onResetToDefault),
+            onClick = withToast(resetDone, onResetToDefault),
             icon = Icons.Outlined.Recommend,
             contentDescription = defaultLabel,
             tooltip = defaultLabel,
@@ -590,7 +602,7 @@ private fun BundlePatchControls(
             )
         )
         ActionPillButton(
-            onClick = withToast(restoreLabel, onRestoreSaved),
+            onClick = withToast(restoredDone, onRestoreSaved),
             icon = Icons.Outlined.History,
             contentDescription = restoreLabel,
             tooltip = restoreLabel,
@@ -603,7 +615,7 @@ private fun BundlePatchControls(
             )
         )
         ActionPillButton(
-            onClick = withToast(deselectAllLabel, onDeselectAll),
+            onClick = withToast(disabledDone, onDeselectAll),
             icon = Icons.Outlined.ClearAll,
             contentDescription = deselectAllLabel,
             tooltip = deselectAllLabel,
@@ -617,7 +629,6 @@ private fun BundlePatchControls(
         )
     }
 }
-
 
 /**
  * Individual patch card with toggle and options button.
@@ -637,6 +648,7 @@ private fun PatchCard(
     val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
     val patchState = if (isEnabled) enabledState else disabledState
+    val contentDesc = remember(patch.name, patchState) { "${patch.name}, $patchState" }
 
     Surface(
         modifier = Modifier
@@ -654,7 +666,7 @@ private fun PatchCard(
             .clickable(onClick = onToggle)
             .semantics {
                 stateDescription = patchState
-                contentDescription = "${patch.name}, $patchState"
+                contentDescription = contentDesc
             },
         shape = RoundedCornerShape(14.dp),
         color = when {
@@ -770,7 +782,7 @@ private fun EmptyStateContent(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
             modifier = Modifier.padding(32.dp)
         ) {
             Icon(
@@ -917,10 +929,7 @@ private fun PatchOptionsDialog(
             )
         }
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(0.dp)
-        ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
             // Patch description
             if (!patch.description.isNullOrBlank()) {
                 Text(
@@ -1157,6 +1166,7 @@ private fun ColorOptionWithPresets(
     }
 }
 
+/** Color preset item for the color picker option. */
 @Composable
 fun ColorPresetItem(
     label: String,
@@ -1633,7 +1643,7 @@ private fun BooleanOptionItem(
         title = title,
         subtitle = description.ifBlank { null },
         trailingContent = {
-            Switch(
+            MorpheSwitch(
                 checked = value,
                 onCheckedChange = onValueChange,
                 modifier = Modifier.semantics {
@@ -1777,7 +1787,7 @@ private fun ListStringEditorDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
         ) {
             // Description
             if (description.isNotBlank()) {
@@ -1950,6 +1960,7 @@ private fun DropdownOptionItem(
     }
 }
 
+/** Expandable surface with a header icon, title, and collapsible content. */
 @Composable
 fun ExpandableSurface(
     title: String,

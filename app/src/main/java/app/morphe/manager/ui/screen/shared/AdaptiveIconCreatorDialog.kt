@@ -237,7 +237,8 @@ fun AdaptiveIconCreatorDialog(
                             AdaptiveIconConfig.iconFolderName(packageName)
                         ),
                         style = InfoBadgeStyle.Primary,
-                        icon = Icons.Outlined.Info
+                        icon = Icons.Outlined.Info,
+                        isExpanded = true
                     )
                 }
 
@@ -254,13 +255,14 @@ fun AdaptiveIconCreatorDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             // Instructions
             InfoBadge(
                 text = stringResource(R.string.adaptive_icon_instructions),
                 style = InfoBadgeStyle.Primary,
-                icon = Icons.Outlined.Info
+                icon = Icons.Outlined.Info,
+                isExpanded = true
             )
 
             // Adaptive icon preview with safe zones
@@ -397,7 +399,7 @@ private fun AdaptiveIconPreview(
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
     ) {
         Text(
             text = stringResource(R.string.adaptive_icon_preview),
@@ -573,7 +575,7 @@ private fun AdaptiveIconPreview(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 4.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -662,7 +664,7 @@ private fun NotificationIconPreview(
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
     ) {
         Text(
             text = stringResource(R.string.notification_icon_preview),

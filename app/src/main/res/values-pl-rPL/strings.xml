@@ -58,15 +58,18 @@
     <string name="sources_management_title">Źródła modyfikacji</string>
     <string name="sources_management_open_in_browser">Otwórz w przeglądarce</string>
     <string name="sources_management_failed_to_open_url">Nie udało się otworzyć strony</string>
-    <string name="sources_management_prerelease_toggle">Używaj przedpremierowych wersji modyfikacji</string>
-    <string name="sources_management_prerelease_toggle_description">Uzyskaj wczesny dostęp do nowych, eksperymentalnych wersji modyfikacji</string>
-    <string name="sources_management_experimental_versions_toggle">Używaj eksperymentalnych wersji aplikacji</string>
-    <string name="sources_management_experimental_versions_toggle_description">Modyfikuj wersje eksperymentalne, jeśli są dostępne</string>
+    <string name="sources_management_prerelease_toggle">Płatki przedpremierowe</string>
+    <string name="sources_management_prerelease_toggle_description">Zapewnia wczesny dostęp do nowych, eksperymentalnych wersji modyfikacji</string>
+    <string name="sources_management_experimental_versions_toggle">Eksperymentalne wersje aplikacji</string>
+    <string name="sources_management_experimental_versions_toggle_description">Modyfikuje wersje eksperymentalne aplikacji, jeśli są dostępne</string>
     <string name="sources_management_already_exists">To źródło zostało już dodane</string>
     <string name="sources_management_invalid_url">Nieprawidłowy adres źródła. Sprawdź adres i spróbuj ponownie</string>
     <string name="sources_management_metadata_unavailable">Brak metadanych</string>
     <string name="sources_management_metadata_unavailable_hint">Zdalny plik metadanych jest niedostępny. Modyfikowanie przy użyciu zainstalowanego pakietu nadal działa, ale automatyczna aktualizacja dla tego źródła została wyłączona</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Nie udało się pobrać pakietu modyfikacji. Adres źródła może być nieprawidłowy lub plik nie istnieje</string>
+    <string name="sources_management_source_enabled">Źródło włączone</string>
+    <string name="sources_management_source_disabled">Źródło wyłączone</string>
+    <string name="sources_management_source_updating">Aktualizowanie źródła</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nazwa wyświetlana</string>
     <string name="sources_dialog_rename">Zmień nazwę źródła modyfikacji</string>
@@ -138,9 +141,13 @@
     <string name="expert_mode_search">Szukaj modyfikacji</string>
     <string name="expert_mode_proceed">Przejdź do modyfikowania</string>
     <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
+    <string name="expert_mode_disable_all_done">Wyłączono wszystkie modyfikacje</string>
     <string name="expert_mode_enable_all">Włącz wszystkie</string>
+    <string name="expert_mode_enable_all_done">Włączono wszystkie modyfikacje</string>
     <string name="expert_mode_reset_to_default">Włącz zalecane modyfikacje</string>
+    <string name="expert_mode_reset_to_default_done">Zastosowano zalecane modyfikacje</string>
     <string name="expert_mode_restore_saved">Przywróć zapisany wybór</string>
+    <string name="expert_mode_restore_saved_done">Przywrócono zapisany wybór</string>
     <string name="expert_mode_no_results">Nie znaleziono modyfikacji</string>
     <string name="expert_mode_universal_patches">Uniwersalne modyfikacje</string>
     <string name="expert_mode_new_patches">Nowe</string>
@@ -245,10 +252,10 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="root_gmscore_excluded">Wsparcie dla GmsCore jest wyłączone w trybie root</string>
     <string name="root_pre_patch_installer_title">Wybierz metodę instalacji</string>
     <string name="root_pre_patch_installer_description">Wykryto uprawnienia root. Wybierz sposób instalacji zmodyfikowanej aplikacji</string>
-    <string name="root_pre_patch_installer_mount_title">Montowanie z rootem</string>
-    <string name="root_pre_patch_installer_mount_description">Zamontuj zmodyfikowany plik APK nad oryginalną aplikacją. GmsCore nie jest wymagany</string>
+    <string name="root_pre_patch_installer_mount_title">Montowanie Root</string>
+    <string name="root_pre_patch_installer_mount_description">Montuje zmodyfikowany plik APK nad oryginalną aplikacją. GmsCore nie jest wymagany</string>
     <string name="root_pre_patch_installer_standard_title">Standardowa instalacja</string>
-    <string name="root_pre_patch_installer_standard_description">Zainstaluj jako oddzielną aplikację ze wsparciem GmsCore. Wybierz instalator (Systemowy, Shizuku itp.) po zakończeniu modyfikacji</string>
+    <string name="root_pre_patch_installer_standard_description">Instaluje jako oddzielną aplikację ze wsparciem GmsCore. Instalator można wybrać po modyfikowaniu</string>
     <string name="root_pre_patch_installer_hint">Metoda instalacji określa zakres dostępnych modyfikacji i nie może zostać zmieniona po rozpoczęciu procesu</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Skopiowano błąd do schowka</string>
@@ -379,7 +386,7 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Kolor wiodący</string>
     <string name="settings_appearance_pure_black">Głęboka czerń</string>
-    <string name="settings_appearance_pure_black_description">Używaj głębokiej czerni jako tła</string>
+    <string name="settings_appearance_pure_black_description">Używa prawdziwie czarnego tła</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Język aplikacji</string>
     <string name="settings_appearance_app_language_current">Bieżący język</string>
@@ -402,13 +409,13 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Zmień ikonę</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Aktualizacje</string>
-    <string name="settings_advanced_updates_use_prereleases">Używaj przedpremierowych wersji Morphe</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Uzyskaj wczesny dostęp do nowych funkcji Morphe. Aby otrzymywać przedpremierowe modyfikacje, włącz opcję wersji przedpremierowych dla każdego źródła osobno</string>
-    <string name="settings_advanced_updates_allow_metered">Aktualizuj za pomocą danych mobilnych</string>
-    <string name="settings_advanced_updates_allow_metered_description">Zezwalaj na aktualizacje przy użyciu danych mobilnych</string>
+    <string name="settings_advanced_updates_use_prereleases">Przedpremierowe aktualizacje</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Wczesny dostęp do nowych wersji aplikacji Morphe. Włącz wersje przedpremierowe dla konkretnych źródeł w menu źródeł modyfikacji</string>
+    <string name="settings_advanced_updates_allow_metered">Aktualizacje przez dane mobilne</string>
+    <string name="settings_advanced_updates_allow_metered_description">Pozwala na pobieranie aktualizacji Morphe i modyfikacji przez sieć komórkową</string>
     <string name="settings_advanced_updates_background_notifications">Powiadomienia o aktualizacjach w tle</string>
     <string name="settings_advanced_updates_background_notifications_description">Okresowo sprawdzaj aktualizacje w tle i powiadamiaj, gdy będą dostępne</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">Odbieraj natychmiastowe powiadomienia push o nowych wydaniach, nawet gdy aplikacja jest zamknięta</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Powiadomienia push o nowych wersjach, nawet gdy aplikacja jest zamknięta</string>
     <string name="settings_advanced_update_interval">Częstotliwość sprawdzania</string>
     <string name="settings_advanced_update_interval_dialog_title">Sprawdzaj aktualizacje</string>
     <string name="settings_advanced_update_interval_hourly">Raz na godzinę</string>
@@ -432,12 +439,11 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ustawienia eksperckie</string>
     <string name="settings_advanced_expert_mode">Tryb ekspercki</string>
-    <string name="settings_advanced_expert_mode_description">Włącz zaawansowane ustawienia modyfikacji oraz opcje personalizacji Morphe</string>
+    <string name="settings_advanced_expert_mode_description">Włącza zaawansowane ustawienia modyfikowania i opcje personalizacji Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Włączyć tryb ekspercki?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Tryb ekspercki zapewnia większą kontrolę nad procesem modyfikacji, jednak błędna konfiguracja ustawień może sprawić, że aplikacja przestanie działać</string>
-    <string name="settings_advanced_strip_unused_libs">Optymalizacja pod architekturę</string>
-    <string name="settings_advanced_strip_unused_libs_description">"Podczas scalania podzielonych plików APK pomija zbędne architektury, wersje językowe i gęstości ekranu.
-W przypadku zwykłych plików APK, po zmodyfikowaniu usuwa nieobsługiwane biblioteki natywne"</string>
+    <string name="settings_advanced_strip_unused_libs">Optymalizuj pod kątem architektury urządzenia</string>
+    <string name="settings_advanced_strip_unused_libs_description">Usuwa nieużywane biblioteki architektur CPU oraz moduły APK</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Tryb przetwarzania kodu bajtowego</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Określa sposób przetwarzania kodu bajtowego podczas modyfikowania. Wpływa to na szybkość procesu, zużycie pamięci i końcowy rozmiar pliku APK</string>
@@ -445,7 +451,7 @@ W przypadku zwykłych plików APK, po zmodyfikowaniu usuwa nieobsługiwane bibli
     <string name="settings_advanced_bytecode_mode_strip_fast">Szybki</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">Szybsze modyfikowanie i mniejsze zużycie pamięci kosztem większego pliku APK. Zalecane dla starszych urządzeń z małą ilością RAM-u</string>
     <string name="settings_advanced_bytecode_mode_full">Pełny</string>
-    <string name="settings_advanced_bytecode_mode_full_description">Wolniejsze modyfikowanie klasyczną metodą. Używaj tylko wtedy, gdy tryb szybki powoduje problemy</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Wolniejsze modyfikowanie, odtwarza starsze zachowanie. Zalecane tylko wtedy, gdy tryb szybki powoduje problemy</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token GitHub</string>
     <string name="settings_advanced_github_pat_description">Wymagany dla źródeł z Pull Requestów</string>
@@ -463,7 +469,7 @@ W przypadku zwykłych plików APK, po zmodyfikowaniu usuwa nieobsługiwane bibli
     <string name="settings_advanced_patch_options_expert_mode_notice">W trybie eksperckim opcje modyfikacji będą dostępne podczas modyfikowania</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">Kolory motywu aplikacji</string>
-    <string name="settings_advanced_patch_options_theme_colors_description">Zmień kolor tła</string>
+    <string name="settings_advanced_patch_options_theme_colors_description">Zmienia kolor tła</string>
     <string name="settings_advanced_patch_options_dark_theme_color">Kolor tła ciemnego motywu</string>
     <string name="settings_advanced_patch_options_light_theme_color">Kolor tła jasnego motywu</string>
     <string name="settings_advanced_patch_options_theme_color_description">Może być kolorem szesnastkowym (#RRGGBB) lub odwołaniem do zasobu kolorów</string>
@@ -473,7 +479,7 @@ W przypadku zwykłych plików APK, po zmodyfikowaniu usuwa nieobsługiwane bibli
     <string name="settings_advanced_patch_options_no_available">Brak opcji dla tej modyfikacji</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">Własna marka</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">Zmień wyświetlaną nazwę aplikacji</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">Zmienia wyświetlaną nazwę aplikacji</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Nazwa aplikacji</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Wprowadź własną nazwę</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Własna ikona</string>
@@ -511,7 +517,7 @@ morphe_adaptive_monochrome_custom.xml
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Własne logo w nagłówku</string>
-    <string name="settings_advanced_patch_options_custom_header_description">Zmień logo w nagłówku</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Zmienia logo w nagłówku</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Folder z obrazami do użycia jako własne logo w nagłówku.
 
 Folder musi zawierać jeden lub więcej z następujących folderów, w zależności od DPI urządzenia:
@@ -532,17 +538,17 @@ Wymagane są następujące wymiary obrazów:
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Ukryj funkcje Shortsów</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Ukryj skrót do Shortsów</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Usuń Shortsy z menu kontekstowego launchera</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Usuwa Shortsy z menu długiego naciśnięcia w launcherze</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Ukryj widżet z Shortsami</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Usuń przycisk Shortsów z widżetu w launcherze</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Usuwa przycisk Shortsów z widżetu launchera</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
     <string name="installer_title">Wybierz instalator</string>
     <string name="installer_internal_name">Instalator systemowy</string>
-    <string name="installer_internal_description">Użyj systemowego instalatora pakietów</string>
+    <string name="installer_internal_description">Używa instalatora pakietów Androida</string>
     <string name="installer_auto_saved_name">Instalator z montowaniem roota</string>
     <string name="installer_auto_saved_description">Montuje zmodyfikowany plik APK nad zainstalowaną aplikacją</string>
-    <string name="installer_shizuku_description">Instaluj w tle za pomocą Shizuku lub Sui</string>
+    <string name="installer_shizuku_description">Instaluje w tle za pomocą Shizuku lub Sui</string>
     <string name="installer_option_none">Brak instalatora zapasowego</string>
     <string name="installer_none_description">Nie skonfigurowano instalatora zapasowego</string>
     <string name="installer_status_requires_root">Wymaga uprawnień roota</string>
@@ -563,57 +569,47 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_unavailable_message">Twój preferowany instalator (%s) jest obecnie niedostępny. Możesz naprawić problem i spróbować ponownie lub po prostu użyć standardowego instalatora</string>
     <string name="installer_unavailable_shizuku_hint">Upewnij się, że Shizuku jest uruchomione, a tej aplikacji przyznano odpowiednie uprawnienia</string>
     <string name="installer_use_standard">Użyj standardowego</string>
-    <string name="settings_prompt_installer_on_install">Pytaj o instalator przy instalacji</string>
-    <string name="settings_prompt_installer_on_install_description">Pokazuj okno wyboru instalatora przy każdej instalacji zmodyfikowanej aplikacji</string>
+    <string name="settings_prompt_installer_on_install">Monit o wybór instalatora</string>
+    <string name="settings_prompt_installer_on_install_description">Wyświetla okno wyboru instalatora przy każdej instalacji zmodyfikowanej aplikacji</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optymalizacja baterii</string>
-    <string name="settings_system_battery_optimization_description">Zapobiega zatrzymaniu modyfikatora przez system, gdy Morphe jest zminimalizowane</string>
-    <string name="settings_system_battery_optimization_excluded">Wykluczono</string>
-    <string name="settings_system_battery_optimization_not_excluded">Nie wykluczono</string>
+    <string name="settings_system_battery_optimization_description">Utrzymuje działanie modyfikatora, gdy aplikacja jest zminimalizowana</string>
     <string name="settings_system_performance">Wydajność</string>
     <string name="settings_system_process_runtime">Osobny proces</string>
-    <string name="settings_system_process_runtime_description">Uruchamiaj modyfikowanie w osobnym procesie, aby poprawić stabilność</string>
+    <string name="settings_system_process_runtime_description">Uruchamia modyfikowanie w osobnym procesie dla lepszej stabilności</string>
     <string name="settings_system_process_runtime_memory_limit">Limit pamięci</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Wyższe limity pamięci mogą przyspieszyć modyfikowanie, ale mogą nie działać na starszych urządzeniach</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Wyższe limity przyspieszają modyfikowanie na wydajnych urządzeniach</string>
     <string name="settings_system_process_runtime_enable">Włącz osobny proces</string>
     <string name="settings_system_memory_limit_subtitle">Pamięć dostępna dla modyfikowania</string>
     <string name="settings_system_memory_limit_warning">Niski limit pamięci może powodować błędy podczas modyfikowania większych aplikacji</string>
     <string name="settings_system_process_runtime_enabled_description">Limit: %s MB</string>
-    <string name="settings_system_process_runtime_disabled_description">Stuknij, aby skonfigurować</string>
+    <string name="settings_system_process_runtime_disabled_description">Dotknij, aby skonfigurować</string>
     <string name="settings_system_process_runtime_description_not_available">Ta funkcja wymaga systemu Android 11 lub nowszego</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import i eksport</string>
-    <string name="settings_system_import_keystore">Importuj magazyn kluczy</string>
-    <string name="settings_system_import_keystore_description">Importuj własny magazyn kluczy</string>
+    <string name="settings_system_keystore">Magazyn kluczy</string>
+    <string name="settings_system_import_keystore_description">Importuje lub eksportuje magazyn kluczy do podpisywania</string>
     <string name="settings_system_import_keystore_dialog_title">Wprowadź dane magazynu kluczy</string>
     <string name="settings_system_import_keystore_dialog_description">Musisz wprowadzić dane magazynu kluczy, aby go zaimportować</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nazwa użytkownika (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Hasło</string>
-    <string name="settings_system_import_keystore_dialog_button">Importuj</string>
     <string name="settings_system_import_keystore_dialog_format_field">Format magazynu kluczy</string>
     <string name="settings_system_import_keystore_wrong_credentials">Nieprawidłowe dane magazynu kluczy</string>
     <string name="settings_system_import_keystore_success">Zaimportowano magazyn kluczy</string>
     <string name="settings_system_import_keystore_failed">Nie udało się zaimportować magazynu kluczy</string>
-    <string name="settings_system_export_keystore">Eksportuj magazyn kluczy</string>
-    <string name="settings_system_export_keystore_description">Eksportuj bieżący magazyn kluczy</string>
     <string name="settings_system_export_keystore_unavailable">Brak magazynu kluczy do eksportu</string>
     <string name="settings_system_export_keystore_success">Wyeksportowano magazyn kluczy</string>
     <string name="settings_system_export_keystore_failed">Nie udało się wyeksportować magazynu kluczy</string>
     <string name="settings_system_show_password_field">Pokaż hasło</string>
     <string name="settings_system_hide_password_field">Ukryj hasło</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Importuj ustawienia Morphe</string>
-    <string name="settings_system_import_manager_settings_description">Przywróć ustawienia Morphe z pliku JSON</string>
+    <string name="settings_system_morphe_settings">Ustawienia Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Tworzy kopię zapasową i przywraca ustawienia Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Nie udało się zaimportować ustawień Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Zaimportowano ustawienia Morphe</string>
-    <string name="settings_system_export_manager_settings">Eksportuj ustawienia Morphe</string>
-    <string name="settings_system_export_manager_settings_description">Zapisz ustawienia Morphe w pliku JSON</string>
     <string name="settings_system_export_manager_settings_fail">Nie udało się wyeksportować ustawień Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Wyeksportowano ustawienia Morphe</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debugowanie</string>
-    <string name="settings_system_export_debug_logs">Eksportuj logi debugowania</string>
-    <string name="settings_system_export_debug_logs_description">Zapisz logi systemowe, aby ułatwić rozwiązywanie problemów</string>
+    <string name="settings_system_export_debug_logs_description">Zapisuje logi systemowe w celu rozwiązywania problemów</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Nie udało się odczytać logów (kod wyjścia %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Nie udało się wyeksportować logów</string>
     <string name="settings_system_export_debug_logs_export_success">Wyeksportowano logi</string>
@@ -622,21 +618,21 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_apks_size">Całkowity rozmiar: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Zmodyfikowane pliki APK</string>
-    <string name="settings_system_patched_apks_description">Zarządzaj zapisanymi plikami zmodyfikowanych aplikacji</string>
+    <string name="settings_system_patched_apks_description">Zarządza zapisanymi plikami zmodyfikowanych aplikacji</string>
     <string name="settings_system_patched_apks_empty">Brak zapisanych plików APK</string>
     <string name="settings_system_patched_apks_delete_title">Usunąć zmodyfikowany plik APK?</string>
     <string name="settings_system_patched_apks_delete_confirm">Czy na pewno chcesz usunąć zapisany zmodyfikowany plik APK aplikacji %s?</string>
     <string name="settings_system_patched_apks_deleted">Zmodyfikowany plik APK usunięty pomyślnie</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Oryginalne pliki APK</string>
-    <string name="settings_system_original_apks_description">Oryginalne pliki APK są przechowywane na potrzeby ponownej modyfikacji. Dla każdej aplikacji zachowywana jest tylko najnowsza wersja</string>
+    <string name="settings_system_original_apks_description">Zapisane do ponownego modyfikowania. Przechowywana jest jedna wersja na aplikację</string>
     <string name="settings_system_original_apks_empty">Brak zapisanych oryginalnych plików APK</string>
     <string name="settings_system_original_apks_deleted">Oryginalny plik APK usunięty pomyślnie</string>
     <string name="settings_system_original_apks_delete_title">Usunąć oryginalny plik APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Usunąć oryginalny plik APK dla aplikacji %s? Nie będzie można ponownie modyfikować aplikacji bez wybrania nowego pliku APK</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Wybrane modyfikacje</string>
-    <string name="settings_system_patch_selections_description">Zarządzaj zapisanymi wyborami i opcjami modyfikacji. Pozostają one zachowane po odinstalowaniu aplikacji</string>
+    <string name="settings_system_patch_selections_description">Zapisane wybory modyfikacji, zachowywane po odinstalowaniu</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Zresetować wszystkie wybory?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Zresetować wybory pakietu?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Zresetować wybór źródła?</string>
@@ -659,7 +655,7 @@ Wymagane są następujące wymiary obrazów:
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Informacje</string>
     <string name="settings_system_share_website">Udostępnij stronę</string>
-    <string name="settings_system_share_website_description">Udostępnij oficjalną stronę Morphe</string>
+    <string name="settings_system_share_website_description">Udostępnia oficjalną stronę internetową Morphe</string>
     <string name="settings_system_manager_description">"Projekt otwartoźródłowy służący do nowoczesnego i sprawnego modyfikowania popularnych aplikacji na Androida, rozwijany dzięki opiniom i zaangażowaniu społeczności"</string>
     <string name="credits">Podziękowania</string>
     <string name="credits_current_development">Obecni twórcy</string>
@@ -696,6 +692,10 @@ Wymagane są następujące wymiary obrazów:
     <string name="disabled">Wyłączone</string>
     <string name="selected">Wybrano</string>
     <string name="not_selected">Nie wybrano</string>
+    <string name="select_all">Zaznacz wszystko</string>
+    <string name="select_all_done">Wszystkie wybrane</string>
+    <string name="deselect_all">Odznacz wszystko</string>
+    <string name="deselect_all_done">Wszystkie odznaczone</string>
     <string name="rename">Zmień nazwę</string>
     <string name="import_">Importuj</string>
     <string name="export">Eksportuj</string>
@@ -716,6 +716,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="unmount">Odmontuj</string>
     <string name="unmounted">Odmontowano</string>
     <string name="remount">Zamontuj ponownie</string>
+    <string name="share">Udostępnij</string>
     <string name="install">Zainstaluj</string>
     <string name="installed">Zainstalowano</string>
     <string name="reinstall">Zainstaluj ponownie</string>

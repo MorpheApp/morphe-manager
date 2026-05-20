@@ -55,7 +55,7 @@ fun PatcherBottomActionBar(
     isSaving: Boolean = false
 ) {
     // Tracks the brief "Copied!" feedback state on the copy button
-    var copied by remember { mutableStateOf(false) }
+    val copied = remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     Row(
         modifier = modifier
@@ -111,20 +111,20 @@ fun PatcherBottomActionBar(
                 onClick = {
                     onCopyLogsClick()
                     scope.launch {
-                        copied = true
+                        copied.value = true
                         delay(2000)
-                        copied = false
+                        copied.value = false
                     }
                 },
                 icon = Icons.Default.ContentCopy,
-                text = if (copied) stringResource(android.R.string.copy) + "  ✓"
+                text = if (copied.value) stringResource(android.R.string.copy) + "  ✓"
                 else stringResource(android.R.string.copy),
                 modifier = Modifier.weight(1f),
-                containerColor = if (copied)
+                containerColor = if (copied.value)
                     MaterialTheme.colorScheme.tertiaryContainer
                 else
                     MaterialTheme.colorScheme.secondaryContainer,
-                contentColor = if (copied)
+                contentColor = if (copied.value)
                     MaterialTheme.colorScheme.onTertiaryContainer
                 else
                     MaterialTheme.colorScheme.onSecondaryContainer

@@ -58,15 +58,18 @@
     <string name="sources_management_title">सुधारणांची मुळे</string>
     <string name="sources_management_open_in_browser">लिंक बाहेर नेटवर उघडा</string>
     <string name="sources_management_failed_to_open_url">लिंक उघडता आली नाही</string>
-    <string name="sources_management_prerelease_toggle">नवीन प्रायोगिक सुधारणा वापरा</string>
+    <string name="sources_management_prerelease_toggle">प्री-रिलीझ पॅचेस</string>
     <string name="sources_management_prerelease_toggle_description">नवीन प्रायोगिक सुधारणा सर्वांच्या आधी वापरा</string>
-    <string name="sources_management_experimental_versions_toggle">चाचणीसाठी असलेल्या ॲप आवृत्त्या वापरा</string>
+    <string name="sources_management_experimental_versions_toggle">प्रायोगिक ॲप आवृत्त्या</string>
     <string name="sources_management_experimental_versions_toggle_description">शक्य असल्यास प्रायोगिक ॲप्सवर पॅच लागू करा</string>
     <string name="sources_management_already_exists">हे मूळ आधीच जोडले गेले आहे</string>
     <string name="sources_management_invalid_url">अवैध स्रोत URL. कृपया पत्ता तपासा आणि पुन्हा प्रयत्न करा</string>
     <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नाही</string>
     <string name="sources_management_metadata_unavailable_hint">दूरस्थ मेटाडेटा फाइल उपलब्ध नाही. स्थापित बंडलसह पॅचिंग अजूनही कार्य करते, परंतु या स्रोतासाठी स्वयंचलित अद्यतन अक्षम केले आहे</string>
     <string name="sources_management_metadata_unavailable_hint_missing">पॅच बंडल डाउनलोड करता आले नाही. स्रोत URL चुकीचा असू शकतो किंवा फाइल अस्तित्वात नाही</string>
+    <string name="sources_management_source_enabled">स्रोत सक्षम केले</string>
+    <string name="sources_management_source_disabled">स्रोत अक्षम केले</string>
+    <string name="sources_management_source_updating">स्रोत अद्यतनित करत आहे</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">दिसणारे नाव</string>
     <string name="sources_dialog_rename">सुधारणांच्या मुळाचे नाव बदला</string>
@@ -130,8 +133,12 @@
     <string name="home_invalid_apk_io_error">फाईल उघडण्यात अयशस्वी. कृपया पुन्हा प्रयत्न करा</string>
     <string name="home_external_apk_expert_mode_required">हे वैशिष्ट्य फक्त तज्ञ मोडमध्ये उपलब्ध आहे</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <string name="expert_mode_disable_all_done">सर्व पॅच अक्षम केले</string>
+    <string name="expert_mode_enable_all_done">सर्व पॅच सक्षम केले</string>
     <string name="expert_mode_reset_to_default">शिफारस केलेले पॅचेस सक्षम करा</string>
+    <string name="expert_mode_reset_to_default_done">शिफारस केलेले पॅच लागू केले</string>
     <string name="expert_mode_restore_saved">निवडलेला डेटा पुनर्संचयित करा</string>
+    <string name="expert_mode_restore_saved_done">निवड जतन केली पुनर्स्थापित</string>
     <string name="expert_mode_new_patches">नवीन</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_low_disk_space_dialog_message">फक्त %1$.2f GB मोफत स्टोरेज उपलब्ध आहे. पॅचिंगसाठी योग्यरित्या कार्य करण्यासाठी किमान %2$.2f GB मोफत जागा आवश्यक आहे.</string>
@@ -144,6 +151,8 @@
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_apk_size">APK आकार</string>
     <!-- Home Screen - Root Mode -->
+    <string name="root_pre_patch_installer_mount_description">पॅच केलेली APK स्टॉक ॲपवर माउंट करते. GmsCore आवश्यक नाही</string>
+    <string name="root_pre_patch_installer_standard_description">ॲप GmsCore सपोर्टसह स्वतंत्र ॲप म्हणून इंस्टॉल करते. पॅचिंग केल्यानंतर इंस्टॉलर निवडता येतो.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_dialog_app_info">ॲप माहिती</string>
     <string name="patcher_conflict_hint">पॅच केलेले ॲप इंस्टॉल केलेल्या आवृत्तीपेक्षा वेगळे प्रमाणपत्र वापरते. अनइंस्टॉल केल्याने ॲपचा सर्व डेटा पुसला जाईल.</string>
@@ -176,6 +185,7 @@
     <string name="settings_appearance_background_random_interval_daily">दैनिक</string>
     <string name="settings_appearance_background_random_interval_3days">प्रत्येक 3 दिवसांनी</string>
     <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_pure_black_description">सत्य काळ्या रंगाचे बॅकग्राउंड वापरते</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">मुख्य स्क्रीन</string>
@@ -184,11 +194,17 @@
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt; वर बदला आणि रीस्टार्ट करा?</string>
     <!-- Settings - Advanced Tab - Updates Section -->
+    <string name="settings_advanced_updates_use_prereleases">प्रायोगिक सुधारणा अद्यतने</string>
+    <string name="settings_advanced_updates_use_prereleases_description">नवीन Morphe ॲप आवृत्तीमध्ये लवकर प्रवेश. पॅच स्त्रोतांमध्ये प्रति स्रोत पूर्व-रिलीझ सक्षम करा</string>
+    <string name="settings_advanced_updates_allow_metered">मोबाईल डेटा अद्यतने</string>
+    <string name="settings_advanced_updates_allow_metered_description">Morphe आणि पॅच अद्यतने मोबाईल डेटावर डाउनलोड करण्याची परवानगी देते</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">ॲप बंद असतानाही नवीन रिलीझसाठी पुश सूचना</string>
     <!-- Notification content -->
     <string name="notification_update_text">Version %s डाउनलोडसाठी तयार आहे</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <string name="settings_advanced_expert_mode_description">Morphe पॅचिंग सेटिंग्ज आणि सानुकूलन पर्याय सक्षम करते</string>
     <string name="settings_advanced_strip_unused_libs">उपकरणाच्या आर्किटेक्चरसाठी अनुकूल करा</string>
-    <string name="settings_advanced_strip_unused_libs_description">"साध्या APK साठी, पॅचिंगनंतर असमर्थित आर्किटेक्चरसाठी नेटिव्ह लायब्ररी काढल्या जातात."</string>
+    <string name="settings_advanced_strip_unused_libs_description">न वापरलेल्या CPU आर्किटेक्चर लायब्ररी आणि स्प्लिट APK मॉड्यूल्स काढून टाकते</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">बाईटकोड प्रक्रिया मोड</string>
     <string name="settings_advanced_bytecode_mode_dialog_description"> patching दरम्यान बाईटकोड कसा process केला जातो हे नियंत्रित करते. patching गती, मेमरी वापर आणि आउटपुट APK आकार यावर परिणाम होतो</string>
@@ -196,38 +212,59 @@
     <string name="settings_advanced_bytecode_mode_strip_fast">जलद</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">मोठा APK आकार या बदल्यात, जलद पॅचिंग आणि कमी मेमरी वापर. कमी RAM किंवा जुन्या उपकरणांसाठी शिफारसित</string>
     <string name="settings_advanced_bytecode_mode_full">पूर्ण</string>
-    <string name="settings_advanced_bytecode_mode_full_description">धीमे पॅचिंग, जुन्या वर्तणुकीची नक्कल करते. जलद मोड समस्या निर्माण करत असल्यास फक्त ते वापरा</string>
+    <string name="settings_advanced_bytecode_mode_full_description">धीमे पॅचिंग, जुन्या वर्तनाचे अनुकरण करते. जलद मोड समस्या निर्माण करत असल्यास केवळ शिफारस केली जाते</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
+    <string name="settings_advanced_patch_options_theme_colors_description">बॅकग्राउंड रंग बदलतो</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
+    <string name="settings_advanced_patch_options_custom_branding_description">ॲपचे प्रदर्शन नाव बदलतो</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
+    <string name="settings_advanced_patch_options_custom_header_description">हेडर लोगो बदलतो</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">लाँचरच्या दीर्घ-दाब मेनूमधून शॉर्ट्स काढून टाकते</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">लाँचर विजेटमधून शॉर्ट्स बटण काढून टाकते</string>
     <!-- Settings - System Tab - Installer Section -->
+    <string name="installer_internal_description">Android पॅकेज इंस्टॉलर वापरतो</string>
+    <string name="installer_shizuku_description">Shizuku किंवा Sui वापरून शांतपणे इंस्टॉल करते</string>
     <string name="installer_external_launched">%s उघडत आहे…</string>
     <string name="installer_external_timeout">%s ने इंस्टॉलेशनची पुष्टी केली नाही. कृपया इतर ॲप तपासा आणि पुन्हा प्रयत्न करा</string>
     <string name="installer_external_success">%s ने यशस्वी इंस्टॉलेशनची नोंद केली</string>
+    <string name="settings_prompt_installer_on_install">इंस्टॉलर निवड प्रॉम्प्ट</string>
+    <string name="settings_prompt_installer_on_install_description">पॅच केलेले ॲप इंस्टॉल करताना प्रत्येक वेळी इंस्टॉलर निवड संवाद दर्शवितो</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">बॅटरी ऑप्टिमायझेशन</string>
-    <string name="settings_system_battery_optimization_description">Morphe मिनिमाइज केल्यावर पॅचर थांबण्यापासून सिस्टीमला प्रतिबंधित करते</string>
-    <string name="settings_system_battery_optimization_excluded"> वगळलेले</string>
-    <string name="settings_system_battery_optimization_not_excluded">वगळलेले नाही</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <string name="settings_system_battery_optimization_description">ॲप मिनिमाइज केले असताना पॅचर चालू ठेवतो</string>
+    <string name="settings_system_process_runtime_description">उत्तम स्थिरतेसाठी पॅचिंग वेगळ्या प्रक्रियेत चालवतो</string>
+    <string name="settings_system_process_runtime_memory_limit_description">उच्च मर्यादा सक्षम उपकरणांवर पॅचिंगला गती देते</string>
+    <!-- Settings - System Tab - Import and Export Section -->
+    <string name="settings_system_keystore">कीस्टोर</string>
+    <string name="settings_system_import_keystore_description">तुमचे साइनिंग कीस्टोअर आयात किंवा निर्यात करते</string>
     <string name="settings_system_import_keystore_dialog_format_field">कीस्टोअर स्वरूप</string>
     <string name="settings_system_export_keystore_failed">कीस्टोअर निर्यात करण्यात अयशस्वी</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <!-- Settings - System Tab - Debug Section -->
+    <string name="settings_system_morphe_settings">मॉर्फ सेटिंग्ज</string>
+    <string name="settings_system_import_manager_settings_description">तुमच्या Morphe सेटिंग्जचा बॅकअप घेते आणि पुनर्संचयित करते</string>
+    <string name="settings_system_export_debug_logs_description">समस्यानिवारणासाठी सिस्टम लॉग जतन करते</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
+    <string name="settings_system_patched_apks_description">जतन केलेल्या पॅच केलेल्या ॲप्लिकेशन फाइल्स व्यवस्थापित करते</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
+    <string name="settings_system_original_apks_description">रिपॅचिंगसाठी जतन केलेले. प्रति ॲप एक आवृत्ती ठेवली जाते</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <string name="settings_system_patch_selections_description">अनइंस्टॉल केल्यानंतरही जतन केलेले पॅच निवड</string>
     <!-- Settings - System Tab - About Section -->
+    <string name="settings_system_share_website_description">अधिकृत Morphe वेबसाइट शेअर करते</string>
     <string name="settings_system_manager_description">"हे लोकप्रिय Android ॲप्सच्या आधुनिक, सुव्यवस्थित पॅचिंगसाठी एक मुक्त-स्रोत प्रकल्प आहे, जो समुदाय अभिप्राय आणि योगदानातून चालतो."</string>
     <string name="opensource_licenses">मुक्त-स्रोत परवाने</string>
     <!-- Shared strings -->
     <string name="all">सर्व</string>
     <string name="filter">गाळण</string>
+    <string name="select_all">सर्व निवडा</string>
+    <string name="select_all_done">सर्व निवडले</string>
+    <string name="deselect_all">सर्व निवड रद्द करा</string>
+    <string name="deselect_all_done">सर्व निवड रद्द केली</string>
     <string name="unmount">डिमाउंट</string>
+    <string name="share">शेअर करा</string>
     <string name="hidden">लपलेले</string>
     <string name="unhide">उघड करा</string>
     <string name="sources">स्त्रोत</string>

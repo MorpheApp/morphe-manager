@@ -16,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -67,22 +66,26 @@ fun AppearanceTabContent(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(16.dp)
     ) {
         // Language Section
-        LanguageSection(
-            appLanguage = appLanguage,
-            onLanguageClick = { showTranslationInfoDialog.value = true }
-        )
+        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+            LanguageSection(
+                appLanguage = appLanguage,
+                onLanguageClick = { showTranslationInfoDialog.value = true }
+            )
+        }
 
         // Home Screen Section
-        SectionTitle(
-            text = stringResource(R.string.settings_appearance_home_screen),
-            icon = Icons.Outlined.Dashboard
-        )
+        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+            SectionTitle(
+                text = stringResource(R.string.settings_appearance_home_screen),
+                icon = Icons.Outlined.Dashboard
+            )
+        }
 
         RichSettingsItem(
+            modifier = Modifier.padding(bottom = 16.dp),
             onClick = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
             showBorder = true,
             title = stringResource(R.string.settings_appearance_greeting_phrases),
@@ -91,7 +94,7 @@ fun AppearanceTabContent(
                 MorpheIcon(icon = Icons.Outlined.ChatBubbleOutline)
             },
             trailingContent = {
-                Switch(
+                MorpheSwitch(
                     checked = showGreetingPhrases,
                     onCheckedChange = null,
                     modifier = Modifier.semantics {
@@ -102,23 +105,32 @@ fun AppearanceTabContent(
         )
 
         // Theme Mode Section
-        SectionTitle(
-            text = stringResource(R.string.settings_appearance_theme),
-            icon = Icons.Outlined.Palette
-        )
+        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+            SectionTitle(
+                text = stringResource(R.string.settings_appearance_theme),
+                icon = Icons.Outlined.Palette
+            )
+        }
 
-        ThemeSelector(
-            theme = theme,
-            dynamicColor = dynamicColor,
-            supportsDynamicColor = supportsDynamicColor,
-            onThemeSelected = { selectedTheme ->
-                themeViewModel.applyThemePresetByKey(selectedTheme)
-            }
-        )
+        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+            ThemeSelector(
+                theme = theme,
+                dynamicColor = dynamicColor,
+                supportsDynamicColor = supportsDynamicColor,
+                onThemeSelected = { selectedTheme ->
+                    themeViewModel.applyThemePresetByKey(selectedTheme)
+                }
+            )
+        }
 
         // Pure Black Theme Toggle
-        AnimatedVisibility(visible = theme != Theme.LIGHT) {
+        AnimatedVisibility(
+            visible = theme != Theme.LIGHT,
+            enter = MorpheAnimations.expandFadeEnter,
+            exit = MorpheAnimations.shrinkFadeExit
+        ) {
             RichSettingsItem(
+                modifier = Modifier.padding(bottom = 16.dp),
                 onClick = { themeViewModel.togglePureBlackTheme(pureBlackTheme) },
                 showBorder = true,
                 title = stringResource(R.string.settings_appearance_pure_black),
@@ -127,7 +139,7 @@ fun AppearanceTabContent(
                     MorpheIcon(icon = Icons.Outlined.Contrast)
                 },
                 trailingContent = {
-                    Switch(
+                    MorpheSwitch(
                         checked = pureBlackTheme,
                         onCheckedChange = null,
                         modifier = Modifier.semantics {
@@ -139,41 +151,57 @@ fun AppearanceTabContent(
         }
 
         // Accent Color Section
-        AnimatedVisibility(visible = !dynamicColor) {
-            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                SectionTitle(
-                    text = stringResource(R.string.settings_appearance_accent_color),
-                    icon = Icons.Outlined.ColorLens
-                )
-
-                AccentColorSelector(
-                    selectedColorHex = customAccentColorHex,
-                    onColorSelected = { color -> themeViewModel.setCustomAccentColor(color) },
-                    dynamicColorEnabled = dynamicColor
-                )
+        AnimatedVisibility(
+            visible = !dynamicColor,
+            enter = MorpheAnimations.expandFadeEnter,
+            exit = MorpheAnimations.shrinkFadeExit
+        ) {
+            Column {
+                Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+                    SectionTitle(
+                        text = stringResource(R.string.settings_appearance_accent_color),
+                        icon = Icons.Outlined.ColorLens
+                    )
+                }
+                Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+                    AccentColorSelector(
+                        selectedColorHex = customAccentColorHex,
+                        onColorSelected = { color -> themeViewModel.setCustomAccentColor(color) },
+                        dynamicColorEnabled = dynamicColor
+                    )
+                }
             }
         }
 
         // Background Type Section
-        SectionTitle(
-            text = stringResource(R.string.settings_appearance_background),
-            icon = Icons.Outlined.Wallpaper
-        )
+        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+            SectionTitle(
+                text = stringResource(R.string.settings_appearance_background),
+                icon = Icons.Outlined.Wallpaper
+            )
+        }
 
-        BackgroundSelector(
-            selectedBackground = backgroundType,
-            onBackgroundSelected = { selectedType ->
-                themeViewModel.setBackgroundType(selectedType)
-            },
-            selectedInterval = randomInterval,
-            onIntervalSelected = { interval ->
-                themeViewModel.setRandomInterval(interval)
-            }
-        )
+        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+            BackgroundSelector(
+                selectedBackground = backgroundType,
+                onBackgroundSelected = { selectedType ->
+                    themeViewModel.setBackgroundType(selectedType)
+                },
+                selectedInterval = randomInterval,
+                onIntervalSelected = { interval ->
+                    themeViewModel.setRandomInterval(interval)
+                }
+            )
+        }
 
         // Parallax Effect Toggle
-        AnimatedVisibility(visible = backgroundType != BackgroundType.NONE) {
+        AnimatedVisibility(
+            visible = backgroundType != BackgroundType.NONE,
+            enter = MorpheAnimations.expandFadeEnter,
+            exit = MorpheAnimations.shrinkFadeExit
+        ) {
             RichSettingsItem(
+                modifier = Modifier.padding(bottom = 16.dp),
                 onClick = { themeViewModel.toggleBackgroundParallax(enableParallax) },
                 showBorder = true,
                 title = stringResource(R.string.settings_appearance_parallax_effect),
@@ -182,7 +210,7 @@ fun AppearanceTabContent(
                     MorpheIcon(icon = Icons.Outlined.ScreenRotation)
                 },
                 trailingContent = {
-                    Switch(
+                    MorpheSwitch(
                         checked = enableParallax,
                         onCheckedChange = null,
                         modifier = Modifier.semantics {
@@ -194,10 +222,12 @@ fun AppearanceTabContent(
         }
 
         // App Icon Section
-        SectionTitle(
-            text = stringResource(R.string.settings_appearance_app_icon_selector_title),
-            icon = Icons.Outlined.Apps
-        )
+        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+            SectionTitle(
+                text = stringResource(R.string.settings_appearance_app_icon_selector_title),
+                icon = Icons.Outlined.Apps
+            )
+        }
 
         AppIconSelector()
     }
@@ -262,32 +292,34 @@ private fun LanguageSection(
             .find { it.code == appLanguage }
     }
 
-    SectionTitle(
-        text = stringResource(R.string.settings_appearance_app_language),
-        icon = Icons.Outlined.Language
-    )
+    Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
+        SectionTitle(
+            text = stringResource(R.string.settings_appearance_app_language),
+            icon = Icons.Outlined.Language
+        )
 
-    RichSettingsItem(
-        onClick = onLanguageClick,
-        showBorder = true,
-        title = stringResource(R.string.settings_appearance_app_language_current),
-        subtitle = currentLanguage,
-        leadingContent = {
-            Surface(
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                modifier = Modifier.size(40.dp)
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Text(
-                        text = currentLanguageOption?.flag ?: "🌐",
-                        style = MaterialTheme.typography.titleLarge
-                    )
+        RichSettingsItem(
+            onClick = onLanguageClick,
+            showBorder = true,
+            title = stringResource(R.string.settings_appearance_app_language_current),
+            subtitle = currentLanguage,
+            leadingContent = {
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                    modifier = Modifier.size(40.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Text(
+                            text = currentLanguageOption?.flag ?: "🌐",
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                    }
                 }
+            },
+            trailingContent = {
+                MorpheIcon(icon = Icons.Outlined.ChevronRight)
             }
-        },
-        trailingContent = {
-            MorpheIcon(icon = Icons.Outlined.ChevronRight)
-        }
-    )
+        )
+    }
 }

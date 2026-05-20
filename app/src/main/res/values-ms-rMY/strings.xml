@@ -54,10 +54,6 @@
     <string name="sources_management_title">Tampalan sumber-sumber</string>
     <string name="sources_management_open_in_browser">Buka dalam pelayar web</string>
     <string name="sources_management_failed_to_open_url">Gagal untuk membuka URL</string>
-    <string name="sources_management_prerelease_toggle">Guna tampalan pra-keluaran</string>
-    <string name="sources_management_prerelease_toggle_description">Dapat akses awal kepada versi baharu tampalan uji kaji</string>
-    <string name="sources_management_experimental_versions_toggle">Guna aplikasi versi uji kaji</string>
-    <string name="sources_management_experimental_versions_toggle_description">Tampal aplikasi uji kaji jika tersedia</string>
     <string name="sources_management_already_exists">Sumber ini sudah ditambah sebelumnya</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nama paparan</string>
@@ -214,9 +210,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="root_pre_patch_installer_title">Pilih kaedah pemasangan</string>
     <string name="root_pre_patch_installer_description">Peranti anda mempunyai akses root. Pilih cara anda ingin memasang aplikasi yang ditampal</string>
     <string name="root_pre_patch_installer_mount_title">Mount Root</string>
-    <string name="root_pre_patch_installer_mount_description">Mount APK yang ditampal di atas aplikasi stok. GmsCore tidak diperlukan</string>
     <string name="root_pre_patch_installer_standard_title">Pemasangan Standard</string>
-    <string name="root_pre_patch_installer_standard_description">Pasang sebagai aplikasi berasingan dengan sokongan GmsCore. Pilih pemasang (pemasang Sistem, Shizuku, dsb.) selepas tampalan</string>
     <string name="root_pre_patch_installer_hint">Kaedah pemasangan menentukan tampalan mana yang disertakan dan tidak boleh diubah selepas tampalan</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Ralat disalin ke papan keratan</string>
@@ -331,7 +325,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Warna aksen</string>
     <string name="settings_appearance_pure_black">Hitam Tulen</string>
-    <string name="settings_appearance_pure_black_description">Gunakan latar belakang hitam sejati</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Bahasa aplikasi</string>
     <string name="settings_appearance_app_language_current">Bahasa semasa</string>
@@ -350,13 +343,8 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Tukar ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Kemas kini</string>
-    <string name="settings_advanced_updates_use_prereleases">Gunakan Morphe pra-keluaran</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Dapatkan akses awal ke ciri-ciri Morphe baharu. Untuk mendapatkan tampalan pra-keluaran, aktifkan suis toggle pra-keluaran dalam setiap sumber tampalan secara berasingan</string>
-    <string name="settings_advanced_updates_allow_metered">Kemaskini melalui data mudah alih</string>
-    <string name="settings_advanced_updates_allow_metered_description">Benarkan Morphe dan kemas kini tampalan memuat turun melalui data mudah alih</string>
     <string name="settings_advanced_updates_background_notifications">Pemberitahuan kemas kini latar belakang</string>
     <string name="settings_advanced_updates_background_notifications_description">Semak kemas kini secara berkala di latar belakang dan beritahu apabila tersedia</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">Terima pemberitahuan tolak pantas untuk keluaran baharu, walaupun aplikasi ditutup</string>
     <string name="settings_advanced_update_interval">Semak kekerapan</string>
     <string name="settings_advanced_update_interval_dialog_title">Semak kemas kini</string>
     <string name="settings_advanced_update_interval_hourly">Sekali setiap jam</string>
@@ -380,7 +368,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Tetapan pakar</string>
     <string name="settings_advanced_expert_mode">Mod mahir</string>
-    <string name="settings_advanced_expert_mode_description">Aktifkan tetapan dan pilihan penyesuaian Morphe yang kompleks</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktifkan Mod Pakar?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mod Pakar memberikan kawalan yang lebih besar ke atas cara tampalan digunakan, tetapi tetapan yang salah konfigurasi dalam Mod Pakar boleh mengakibatkan aplikasi yang tidak berfungsi</string>
     <!-- Bytecode mode -->
@@ -401,7 +388,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Dalam mod Pakar pilihan tampalan akan tersedia semasa proses tampalan</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">Warna tema aplikasi</string>
-    <string name="settings_advanced_patch_options_theme_colors_description">Tukar warna latar belakang</string>
     <string name="settings_advanced_patch_options_dark_theme_color">Warna latar belakang tema gelap</string>
     <string name="settings_advanced_patch_options_light_theme_color">Warna latar belakang tema terang</string>
     <string name="settings_advanced_patch_options_theme_color_description">Boleh menjadi warna heks (#RRGGBB) atau rujukan sumber warna</string>
@@ -411,7 +397,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_advanced_patch_options_no_available">Tiada pilihan yang tersedia untuk tampalan ini</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">Jenama tersuai</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">Tukar nama paparan aplikasi</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Nama aplikasi</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Masukkan nama tersuai</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Ikon tersuai</string>
@@ -449,7 +434,6 @@ Secara pilihan, laluan mengandungi ikon pemberitahuan dalam salah satu format be
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Logo kepala tersuai</string>
-    <string name="settings_advanced_patch_options_custom_header_description">Tukar logo kepala</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Folder dengan gambar untuk digunakan sebagai logo kepala tersuai.
 
 Folder mesti mengandungi satu atau lebih folder berikut, bergantung pada DPI peranti:
@@ -470,17 +454,13 @@ Dimensi gambar mestilah seperti berikut:
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Sembunyikan ciri Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Sembunyikan pintasan aplikasi Shorts</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Buang Shorts daripada menu tekan lama pelancar</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Sembunyikan widget Shorts</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Buang butang Shorts dari widget pelancar</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Pemasang</string>
     <string name="installer_title">Pilih pemasang</string>
     <string name="installer_internal_name">Pemasang sistem</string>
-    <string name="installer_internal_description">Gunakan pemasang pakej Android</string>
     <string name="installer_auto_saved_name">Pemasang pemasang berakar</string>
     <string name="installer_auto_saved_description">Memasang APK yang ditampal di atas aplikasi yang dipasang</string>
-    <string name="installer_shizuku_description">Pasang secara senyap menggunakan Shizuku atau Sui</string>
     <string name="installer_option_none">Tiada kejatuhan</string>
     <string name="installer_none_description">Tiada kejatuhan pemasang yang dikonfigurasi</string>
     <string name="installer_status_requires_root">Memerlukan akses akar</string>
@@ -498,52 +478,35 @@ Dimensi gambar mestilah seperti berikut:
     <string name="installer_unavailable_message">Pemasang pilihan anda (%s) tidak tersedia pada masa ini. Anda boleh memperbaiki isu itu dan cuba lagi, atau gunakan pemasang standard sebagai gantinya</string>
     <string name="installer_unavailable_shizuku_hint">Pastikan Shizuku berjalan dan izin telah diberikan kepada aplikasi ini</string>
     <string name="installer_use_standard">Gunakan standard</string>
-    <string name="settings_prompt_installer_on_install">Prompt pemasang pada pemasangan</string>
-    <string name="settings_prompt_installer_on_install_description">Tunjukkan dialog pilihan pemasang setiap kali anda memasang aplikasi yang ditampal</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisasi bateri</string>
     <string name="settings_system_performance">Prestasi</string>
     <string name="settings_system_process_runtime">Masa runtime proses</string>
-    <string name="settings_system_process_runtime_description">Jalankan tampalan dalam proses berasingan untuk kestabilan yang lebih baik</string>
     <string name="settings_system_process_runtime_memory_limit">Had memori</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Had memori yang lebih tinggi boleh mempercepatkan tampalan tetapi mungkin tidak berfungsi dengan peranti lama</string>
     <string name="settings_system_process_runtime_enable">Aktifkan masa runtime proses</string>
     <string name="settings_system_memory_limit_subtitle">Memori tersedia untuk tampalan</string>
     <string name="settings_system_memory_limit_warning">Had memori yang rendah mungkin menyebabkan kegagalan semasa menampal aplikasi yang lebih besar</string>
     <string name="settings_system_process_runtime_enabled_description">%s hadkan MB</string>
     <string name="settings_system_process_runtime_disabled_description">Klik untuk konfigurasi</string>
     <string name="settings_system_process_runtime_description_not_available">Ciri ini memerlukan Android 11 atau lebih tinggi</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import &amp; eksport</string>
-    <string name="settings_system_import_keystore">Import kunci simpanan</string>
-    <string name="settings_system_import_keystore_description">Import kunci simpanan khusus</string>
     <string name="settings_system_import_keystore_dialog_title">Masukkan kelayakan kunci simpanan</string>
     <string name="settings_system_import_keystore_dialog_description">Anda perlu masukkan kelayakan kad pengaman untuk mengimportnya</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nama pengguna (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Kata lalu</string>
-    <string name="settings_system_import_keystore_dialog_button">Import</string>
     <string name="settings_system_import_keystore_wrong_credentials">Kelayakan kunci simpanan tidak betul</string>
     <string name="settings_system_import_keystore_success">Kunci simpanan diimport</string>
     <string name="settings_system_import_keystore_failed">Gagal mengimport kunci simpanan</string>
-    <string name="settings_system_export_keystore">Eksport kunci simpanan</string>
-    <string name="settings_system_export_keystore_description">Eksport kunci simpanan semasa</string>
     <string name="settings_system_export_keystore_unavailable">Tiada kunci simpanan yang tersedia untuk dieksport</string>
     <string name="settings_system_export_keystore_success">Kunci simpanan dieksport</string>
     <string name="settings_system_show_password_field">Tunjukkan kata lalu</string>
     <string name="settings_system_hide_password_field">Sembunyikan kata lalu</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Import tetapan Morphe</string>
-    <string name="settings_system_import_manager_settings_description">Pulihkan tetapan Morphe daripada fail JSON</string>
     <string name="settings_system_import_manager_settings_fail">Gagal mengimport tetapan Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Tetapan Morphe telah diimport</string>
-    <string name="settings_system_export_manager_settings">Eksport tetapan Morphe</string>
-    <string name="settings_system_export_manager_settings_description">Simpan tetapan Morphe ke fail JSON</string>
     <string name="settings_system_export_manager_settings_fail">Gagal mengeksport tetapan Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Tetapan Morphe telah dieksport</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
-    <string name="settings_system_export_debug_logs">Eksport log debug</string>
-    <string name="settings_system_export_debug_logs_description">Simpan log sistem untuk penyelesaian masalah</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Gagal membaca log (kod keluar %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Gagal mengeksport log</string>
     <string name="settings_system_export_debug_logs_export_success">Log dieksport</string>
@@ -552,21 +515,18 @@ Dimensi gambar mestilah seperti berikut:
     <string name="settings_system_apks_size">Saiz keseluruhan: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK yang ditampal</string>
-    <string name="settings_system_patched_apks_description">Urus fail aplikasi yang ditampal yang disimpan</string>
     <string name="settings_system_patched_apks_empty">Tiada APK yang ditampal disimpan lagi</string>
     <string name="settings_system_patched_apks_delete_title">Padam APK yang ditampal?</string>
     <string name="settings_system_patched_apks_delete_confirm">Adakah anda pasti ingin memadam APK yang ditampal yang disimpan untuk %s?</string>
     <string name="settings_system_patched_apks_deleted">APK yang ditampal telah dipadam dengan jayanya</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APK asal</string>
-    <string name="settings_system_original_apks_description">Fail APK asal disimpan untuk repatching. Hanya versi terkini yang disimpan untuk setiap aplikasi</string>
     <string name="settings_system_original_apks_empty">Tiada APK asal disimpan</string>
     <string name="settings_system_original_apks_deleted">APK asal telah dipadam dengan jayanya</string>
     <string name="settings_system_original_apks_delete_title">Padam APK asal?</string>
     <string name="settings_system_original_apks_delete_confirm">Padam APK asal untuk %s? Anda tidak dapat repatch tanpa memberikan APK baharu</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Pilihan patch</string>
-    <string name="settings_system_patch_selections_description">Urus pilihan patch dan pilihan yang disimpan. Ini kekal selepas aplikasi dinyahpasang</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nyah semula semua pilihan?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Nyah semula pilihan pakej?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Nyah semula pilihan sumber?</string>
@@ -589,7 +549,6 @@ Dimensi gambar mestilah seperti berikut:
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Mengenai</string>
     <string name="settings_system_share_website">Kongsi laman web</string>
-    <string name="settings_system_share_website_description">Kongsi laman web Morphe rasmi</string>
     <string name="credits">Pengakuan</string>
     <string name="credits_current_development">Pembangunan semasa</string>
     <string name="credits_prior_development">Pembangunan sebelumnya</string>

@@ -253,55 +253,53 @@ private fun SelectionList(
     onSetResetTarget: (ResetTarget) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit
 ) {
-    Column(
+    LazyColumn(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
     ) {
         // Summary box
-        InfoBox(
-            title = pluralStringResource(
-                R.plurals.package_count,
-                selections.size,
-                selections.size
-            ),
-            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-            titleColor = MaterialTheme.colorScheme.primary,
-            icon = Icons.Outlined.Tune
-        ) {
-            Text(
-                text = pluralStringResource(
-                    R.plurals.patch_selection_total_patches,
-                    totalSelections,
-                    totalSelections
+        item(key = "summary") {
+            InfoBox(
+                title = pluralStringResource(
+                    R.plurals.package_count,
+                    selections.size,
+                    selections.size
                 ),
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogSecondaryTextColor.current
-            )
+                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                titleColor = MaterialTheme.colorScheme.primary,
+                icon = Icons.Outlined.Tune
+            ) {
+                Text(
+                    text = pluralStringResource(
+                        R.plurals.patch_selection_total_patches,
+                        totalSelections,
+                        totalSelections
+                    ),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogSecondaryTextColor.current
+                )
+            }
         }
 
         // List of packages with selections
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            items(
-                items = selections.entries.toList(),
-                key = { it.key }
-            ) { (packageName, bundleMap) ->
-                PackageSelectionItem(
-                    packageName = packageName,
-                    bundleMap = bundleMap,
-                    bundleNames = bundleNames,
-                    settingsViewModel = settingsViewModel,
-                    importExportViewModel = importExportViewModel,
-                    onResetPackage = {
-                        onSetResetTarget(ResetTarget.Package(packageName))
-                    },
-                    onResetPackageBundle = { bundleUid ->
-                        onSetResetTarget(ResetTarget.PackageBundle(packageName, bundleUid))
-                    },
-                    onShowPatchDetails = onShowPatchDetails
-                )
-            }
+        items(
+            items = selections.entries.toList(),
+            key = { it.key }
+        ) { (packageName, bundleMap) ->
+            PackageSelectionItem(
+                packageName = packageName,
+                bundleMap = bundleMap,
+                bundleNames = bundleNames,
+                settingsViewModel = settingsViewModel,
+                importExportViewModel = importExportViewModel,
+                onResetPackage = {
+                    onSetResetTarget(ResetTarget.Package(packageName))
+                },
+                onResetPackageBundle = { bundleUid ->
+                    onSetResetTarget(ResetTarget.PackageBundle(packageName, bundleUid))
+                },
+                onShowPatchDetails = onShowPatchDetails
+            )
         }
     }
 }
@@ -345,7 +343,7 @@ private fun PackageSelectionItem(
                     .fillMaxWidth()
                     .clickable { expanded = !expanded }
                     .padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // App icon
@@ -416,7 +414,7 @@ private fun PackageSelectionItem(
             ) {
                 Column(
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
                 ) {
                     bundleMap.forEach { (bundleUid, patchCount) ->
                         BundleSelectionItem(
@@ -480,7 +478,7 @@ private fun BundleSelectionItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
     ) {
         MorpheSettingsDivider(fullWidth = true)
 
@@ -499,7 +497,7 @@ private fun BundleSelectionItem(
             Row(
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Extension,
@@ -537,6 +535,9 @@ private fun BundleSelectionItem(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
         ) {
+            val exportLabel = stringResource(R.string.export)
+            val resetLabel = stringResource(R.string.reset)
+
             // Export button
             ActionPillButton(
                 onClick = {
@@ -546,14 +547,16 @@ private fun BundleSelectionItem(
                     exportLauncher.launch(fileName)
                 },
                 icon = Icons.Outlined.Upload,
-                contentDescription = stringResource(R.string.export)
+                contentDescription = exportLabel,
+                tooltip = exportLabel
             )
 
             // Reset button
             ActionPillButton(
                 onClick = onReset,
                 icon = Icons.Outlined.Delete,
-                contentDescription = stringResource(R.string.reset),
+                contentDescription = resetLabel,
+                tooltip = resetLabel,
                 colors = IconButtonDefaults.filledTonalIconButtonColors(
                     containerColor = MaterialTheme.colorScheme.errorContainer,
                     contentColor = MaterialTheme.colorScheme.onErrorContainer
@@ -595,7 +598,7 @@ private fun ConfirmResetAllDialog(
             )
         }
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
             Text(
                 text = stringResource(R.string.settings_system_patch_selection_reset_all_warning),
                 style = MaterialTheme.typography.bodyMedium,
@@ -676,7 +679,7 @@ private fun ConfirmResetPackageDialog(
             )
         }
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
             Text(
                 text = stringResource(
                     R.string.settings_system_patch_selection_reset_package_warning,
@@ -759,7 +762,7 @@ private fun ConfirmResetPackageBundleDialog(
             )
         }
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
             Text(
                 text = stringResource(
                     R.string.settings_system_patch_selection_reset_source_warning,
@@ -833,7 +836,7 @@ private fun PatchDetailsDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             // Header info
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {

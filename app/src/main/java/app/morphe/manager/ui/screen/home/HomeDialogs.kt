@@ -630,7 +630,7 @@ private fun ApkAvailabilityDialog(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (isExpertMode && compatibleVersions.isNotEmpty()) {
@@ -732,101 +732,96 @@ private fun DownloadInstructionsDialog(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.home_download_instructions_steps_title),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = textColor
-                )
+            Text(
+                text = stringResource(R.string.home_download_instructions_steps_title),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = textColor
+            )
 
+            InstructionStep(
+                number = "1",
+                text = stringResource(
+                    R.string.home_download_instructions_step1,
+                    stringResource(R.string.home_download_instructions_continue)
+                ),
+                textColor = textColor,
+                secondaryColor = secondaryColor
+            )
+
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 InstructionStep(
-                    number = "1",
-                    text = stringResource(
-                        R.string.home_download_instructions_step1,
-                        stringResource(R.string.home_download_instructions_continue)
-                    ),
+                    number = "2",
+                    text = stringResource(R.string.home_download_instructions_step2_part1),
                     textColor = textColor,
                     secondaryColor = secondaryColor
                 )
 
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    InstructionStep(
-                        number = "2",
-                        text = stringResource(R.string.home_download_instructions_step2_part1),
-                        textColor = textColor,
-                        secondaryColor = secondaryColor
-                    )
-
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentAlignment = Alignment.Center
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Surface(
+                        onClick = {
+                            context.toast(
+                                string = context.getString(
+                                    R.string.home_download_instructions_download_button_toast
+                                ),
+                                duration = Toast.LENGTH_LONG
+                            )
+                        },
+                        shape = RoundedCornerShape(1.dp),
+                        color = downloadColor
                     ) {
-                        Surface(
-                            onClick = {
-                                context.toast(
-                                    string = context.getString(
-                                        R.string.home_download_instructions_download_button_toast
-                                    ),
-                                    duration = Toast.LENGTH_LONG
-                                )
-                            },
-                            shape = RoundedCornerShape(1.dp),
-                            color = downloadColor
+                        Row(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Download,
-                                    contentDescription = null,
-                                    tint = Color.White,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                                Text(
-                                    text = if (isApkBundle) "DOWNLOAD APK BUNDLE" else "DOWNLOAD APK",
-                                    style = MaterialTheme.typography.labelLarge,
-                                    color = Color.White
-                                )
-                            }
+                            Icon(
+                                imageVector = Icons.Filled.Download,
+                                contentDescription = null,
+                                tint = Color.White,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Text(
+                                text = if (isApkBundle) "DOWNLOAD APK BUNDLE" else "DOWNLOAD APK",
+                                style = MaterialTheme.typography.labelLarge,
+                                color = Color.White
+                            )
                         }
                     }
                 }
-
-                val mountInstallRequired = usingMountInstall && !targetAppInstalled
-
-                InstructionStep(
-                    number = "3",
-                    text = htmlAnnotatedString(
-                        stringResource(
-                            if (mountInstallRequired) {
-                                R.string.home_download_instructions_step3_mount
-                            } else {
-                                R.string.home_download_instructions_step3
-                            }
-                        )
-                    ),
-                    textColor = textColor,
-                    secondaryColor = secondaryColor
-                )
-
-                InstructionStep(
-                    number = "4",
-                    text = stringResource(
-                        if (mountInstallRequired) R.string.home_download_instructions_step4_mount
-                        else R.string.home_download_instructions_step4
-                    ),
-                    textColor = textColor,
-                    secondaryColor = secondaryColor
-                )
             }
+
+            val mountInstallRequired = usingMountInstall && !targetAppInstalled
+
+            InstructionStep(
+                number = "3",
+                text = htmlAnnotatedString(
+                    stringResource(
+                        if (mountInstallRequired) {
+                            R.string.home_download_instructions_step3_mount
+                        } else {
+                            R.string.home_download_instructions_step3
+                        }
+                    )
+                ),
+                textColor = textColor,
+                secondaryColor = secondaryColor
+            )
+
+            InstructionStep(
+                number = "4",
+                text = stringResource(
+                    if (mountInstallRequired) R.string.home_download_instructions_step4_mount
+                    else R.string.home_download_instructions_step4
+                ),
+                textColor = textColor,
+                secondaryColor = secondaryColor
+            )
         }
     }
 }
@@ -966,7 +961,7 @@ private fun UnsupportedVersionWarningDialog(
 
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
             ) {
                 // Selected version card
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -1090,7 +1085,7 @@ fun InvalidSignatureDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
@@ -1145,7 +1140,7 @@ fun SplitApkWarningDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
@@ -1191,7 +1186,7 @@ fun ExperimentalVersionWarningDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
@@ -1244,7 +1239,7 @@ fun WrongPackageDialog(
 
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
             ) {
                 // Expected package (green card)
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -1324,7 +1319,7 @@ private fun NoCompatibleVersionsDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
@@ -1695,7 +1690,7 @@ fun LowDiskSpaceDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
@@ -1759,7 +1754,7 @@ fun MeteredPatchingDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
@@ -1813,7 +1808,7 @@ fun DeepLinkAddSourceDialog(
         }
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -1920,7 +1915,7 @@ fun MppImportDialog(
         }
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -2075,7 +2070,7 @@ fun SimpleBundleSelectDialog(
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
-    var selected by remember { mutableStateOf(candidates.firstOrNull()?.uid) }
+    val selected = remember { mutableStateOf(candidates.firstOrNull()?.uid) }
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -2084,8 +2079,8 @@ fun SimpleBundleSelectDialog(
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.continue_),
-                onPrimaryClick = { selected?.let { onSelect(it) } },
-                primaryEnabled = selected != null,
+                onPrimaryClick = { selected.value?.let { onSelect(it) } },
+                primaryEnabled = selected.value != null,
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
             )
@@ -2098,7 +2093,7 @@ fun SimpleBundleSelectDialog(
                 .selectableGroup()
         ) {
             candidates.forEach { candidate ->
-                val isSelected = selected == candidate.uid
+                val isSelected = selected.value == candidate.uid
                 val selectedLabel = stringResource(R.string.selected)
                 val borderColor = if (isSelected)
                     MaterialTheme.colorScheme.primary
@@ -2110,7 +2105,7 @@ fun SimpleBundleSelectDialog(
                         .fillMaxWidth()
                         .selectable(
                             selected = isSelected,
-                            onClick = { selected = candidate.uid },
+                            onClick = { selected.value = candidate.uid },
                             role = Role.RadioButton
                         )
                         .semantics {

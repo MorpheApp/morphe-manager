@@ -16,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Article
 import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material.icons.outlined.Public
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -27,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.shared.MorpheIcon
 import app.morphe.manager.ui.screen.shared.MorpheSettingsDivider
 import app.morphe.manager.ui.screen.shared.RichSettingsItem
 import app.morphe.manager.ui.screen.shared.SettingsItem
@@ -68,9 +68,8 @@ fun AboutSection(
                 )
             },
             trailingContent = {
-                Icon(
-                    imageVector = Icons.Outlined.ChevronRight,
-                    contentDescription = null,
+                MorpheIcon(
+                    icon = Icons.Outlined.ChevronRight,
                     tint = MaterialTheme.colorScheme.primary
                 )
             }

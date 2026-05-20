@@ -43,7 +43,7 @@ fun AppIconSelector() {
     val scope = rememberCoroutineScope()
     val iconManager = remember { AppIconManager(context) }
 
-    var currentIcon by remember { mutableStateOf(iconManager.getCurrentIcon()) }
+    val currentIcon = remember { mutableStateOf(iconManager.getCurrentIcon()) }
     val showConfirmDialog = remember { mutableStateOf<AppIconManager.AppIcon?>(null) }
 
     SectionCard {
@@ -62,9 +62,9 @@ fun AppIconSelector() {
                     rowIcons.forEach { icon ->
                         AppIconCard(
                             icon = icon,
-                            isSelected = currentIcon == icon,
+                            isSelected = currentIcon.value == icon,
                             onClick = {
-                                if (currentIcon != icon) showConfirmDialog.value = icon
+                                if (currentIcon.value != icon) showConfirmDialog.value = icon
                             },
                             modifier = Modifier.weight(1f)
                         )
@@ -85,7 +85,7 @@ fun AppIconSelector() {
             onConfirm = {
                 scope.launch {
                     iconManager.setIcon(selectedIcon)
-                    currentIcon = selectedIcon
+                    currentIcon.value = selectedIcon
                 }
                 showConfirmDialog.value = null
             },

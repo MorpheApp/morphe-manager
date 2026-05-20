@@ -111,7 +111,7 @@ class ProcessRuntime(
         selectedPatches: PatchSelection,
         options: Options,
         logger: Logger,
-        onPatchCompleted: suspend () -> Unit,
+        onPatchCompleted: suspend (String) -> Unit,
         onProgress: ProgressEventHandler,
         skipUnneededSplits: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)?,
@@ -162,7 +162,7 @@ class ProcessRuntime(
         options: Options,
         skipUnneededSplits: Boolean,
         logger: Logger,
-        onPatchCompleted: suspend () -> Unit,
+        onPatchCompleted: suspend (String) -> Unit,
         onProgress: ProgressEventHandler,
         onMergedApkReady: (suspend (File) -> Unit)?,
     ) = coroutineScope {
@@ -230,8 +230,8 @@ class ProcessRuntime(
             val eventHandler = object : IPatcherEvents.Stub() {
                 override fun log(level: String, msg: String) = logger.log(enumValueOf(level), msg)
 
-                override fun patchSucceeded() {
-                    scope.launch { onPatchCompleted() }
+                override fun patchSucceeded(patchName: String) {
+                    scope.launch { onPatchCompleted(patchName) }
                 }
 
                 override fun progress(name: String?, state: String?, msg: String?) =

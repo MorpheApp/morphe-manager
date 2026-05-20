@@ -77,10 +77,7 @@
     <!-- Settings - System Tab - Installer Section -->
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">ការបង្កើនប្រសិទ្ធភាពថ្ម</string>
-    <!-- Settings - System Tab - Import and export keystore -->
-    <string name="settings_system_import_keystore_dialog_button">នាំចូល</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <!-- Settings - System Tab - Debug Section -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <!-- Settings - System Tab - Storage Management Section -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->

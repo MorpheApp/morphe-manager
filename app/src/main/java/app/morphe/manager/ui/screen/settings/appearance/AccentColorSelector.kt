@@ -19,6 +19,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.SectionCard
@@ -65,6 +69,8 @@ fun AccentColorSelector(
 
     val selectedArgb = selectedColorHex.toColorOrNull()?.toArgb()
     val isEnabled = !dynamicColorEnabled
+    val selectedText = stringResource(R.string.selected)
+    val notSelectedText = stringResource(R.string.not_selected)
 
     SectionCard {
         Column(
@@ -100,6 +106,10 @@ fun AccentColorSelector(
                                     if (isEnabled) {
                                         onColorSelected(preset)
                                     }
+                                }
+                                .semantics(mergeDescendants = true) {
+                                    role = Role.RadioButton
+                                    stateDescription = if (isSelected) selectedText else notSelectedText
                                 }
                         )
                     }

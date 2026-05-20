@@ -22,7 +22,7 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         selectedPatches: PatchSelection,
         options: Options,
         logger: Logger,
-        onPatchCompleted: suspend () -> Unit,
+        onPatchCompleted: suspend (String) -> Unit,
         onProgress: ProgressEventHandler,
         skipUnneededSplits: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)?,

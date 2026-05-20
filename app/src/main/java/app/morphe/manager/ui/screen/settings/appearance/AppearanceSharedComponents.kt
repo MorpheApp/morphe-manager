@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.shared.MorpheIcon
 import app.morphe.manager.ui.screen.shared.WindowWidthSizeClass
 import app.morphe.manager.ui.screen.shared.isLandscape
 import app.morphe.manager.ui.screen.shared.rememberWindowSize
@@ -164,15 +165,13 @@ fun CompactOptionCard(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
+            MorpheIcon(
+                icon = icon,
                 tint = if (selected) {
                     MaterialTheme.colorScheme.onPrimaryContainer
                 } else {
                     MaterialTheme.colorScheme.primary
-                }.copy(alpha = if (enabled) 1f else 0.5f),
-                modifier = Modifier.size(24.dp)
+                }.copy(alpha = if (enabled) 1f else 0.5f)
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(

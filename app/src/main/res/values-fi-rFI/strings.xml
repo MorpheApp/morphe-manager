@@ -58,15 +58,18 @@
     <string name="sources_management_title">Lisäosien lähteet</string>
     <string name="sources_management_open_in_browser">Avaa selaimessa</string>
     <string name="sources_management_failed_to_open_url">URL-osoitteen avaaminen epäonnistui</string>
-    <string name="sources_management_prerelease_toggle">Käytä lisäosien ennakkoversioita</string>
+    <string name="sources_management_prerelease_toggle">Ennakkojulkaisupäivitykset</string>
     <string name="sources_management_prerelease_toggle_description">Saat uusien kokeellisten lisäosaversioiden ennakkopääsyn</string>
-    <string name="sources_management_experimental_versions_toggle">Käytä kokeellisia sovellusversioita</string>
+    <string name="sources_management_experimental_versions_toggle">Kokeelliset sovellusversiot</string>
     <string name="sources_management_experimental_versions_toggle_description">Muokkaa kokeellisia sovelluskohteita, jos saatavilla</string>
     <string name="sources_management_already_exists">Tämä lähde on jo lisätty</string>
     <string name="sources_management_invalid_url">Virheellinen lähde-URL-osoite. Tarkista osoite ja yritä uudelleen</string>
     <string name="sources_management_metadata_unavailable">Metatietoja ei ole saatavilla</string>
     <string name="sources_management_metadata_unavailable_hint">Etämetatietotiedosto ei ole saatavilla. Muokkaaminen asennetulla lisäosapaketilla onnistuu edelleen, mutta automaattinen päivitys on poistettu käytöstä tässä lähteessä</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Lisäosapaketin lataaminen epäonnistui. Lähteen URL-osoite saattaa olla virheellinen tai tiedostoa ei ole olemassa</string>
+    <string name="sources_management_source_enabled">Lähde käytössä</string>
+    <string name="sources_management_source_disabled">Lähde poistettu käytöstä</string>
+    <string name="sources_management_source_updating">Päivitetään lähdettä</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Näkyvä nimi</string>
     <string name="sources_dialog_rename">Nimeä lisäosien lähde uudelleen</string>
@@ -138,9 +141,13 @@
     <string name="expert_mode_search">Hae lisäosia</string>
     <string name="expert_mode_proceed">Jatka muokkaamiseen</string>
     <string name="expert_mode_disable_all">Poista kaikki käytöstä</string>
+    <string name="expert_mode_disable_all_done">Kaikki korjaukset poistettu käytöstä</string>
     <string name="expert_mode_enable_all">Ota kaikki käyttöön</string>
+    <string name="expert_mode_enable_all_done">Kaikki korjaukset käytössä</string>
     <string name="expert_mode_reset_to_default">Ota suositellut lisäosat käyttöön</string>
+    <string name="expert_mode_reset_to_default_done">Suositellut korjaukset asennettu</string>
     <string name="expert_mode_restore_saved">Palauta tallennettu valinta</string>
+    <string name="expert_mode_restore_saved_done">Tallennusvalinta palautettu</string>
     <string name="expert_mode_no_results">Lisäosia ei löytynyt</string>
     <string name="expert_mode_universal_patches">Yleispätevät lisäosat</string>
     <string name="expert_mode_new_patches">Uusi</string>
@@ -401,10 +408,10 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Vaihda kuvake</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Päivitykset</string>
-    <string name="settings_advanced_updates_use_prereleases">Käytä Morphen ennakkoversioita</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Saat uusiien Morphe-ominaisuuksien ennakkopääsyn. Saadaksesi lisäosien ennakkoversioita, ota kunkin lisäosien lähteen ennakkoversioasetus käyttöön erikseen</string>
-    <string name="settings_advanced_updates_allow_metered">Päivitä mobiilidatalla</string>
-    <string name="settings_advanced_updates_allow_metered_description">Salli Morphen ja lisäosien päivitysten lataaminen mobiilidatalla</string>
+    <string name="settings_advanced_updates_use_prereleases">Ennakkovalmistelujen päivitykset</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Varhainen pääsy uusiin Morphe-sovellusversioihin. Ota ennakkovalmistelut käyttöön per lähde paikkauslähteissä</string>
+    <string name="settings_advanced_updates_allow_metered">Mobiilidatan päivitykset</string>
+    <string name="settings_advanced_updates_allow_metered_description">Salli Morphen ja paikkausten päivitysten lataaminen mobiilidatalla</string>
     <string name="settings_advanced_updates_background_notifications">Taustapäivitysten ilmoitukset</string>
     <string name="settings_advanced_updates_background_notifications_description">Tarkista päivitykset säännöllisesti taustalla ja ilmoita, kun niitä on saatavilla</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Saat välittömästi ilmoituksia uusista julkaisuista, vaikka sovellus ei ole päällä</string>
@@ -435,8 +442,7 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ota asiantuntijatila käyttöön?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Asiantuntijatila antaa enemmän mahdollisuuksia hallita lisäosien käyttöönottoa, mutta asetusten virheellinen määrittäminen asiantuntijatilassa voi johtaa siihen, ettei sovellus toimi</string>
     <string name="settings_advanced_strip_unused_libs">Optimoi laitearkkitehtuurille</string>
-    <string name="settings_advanced_strip_unused_libs_description">"Ohita ositetut APK-moduulit tukemattomille suoritinarkkitehtuureille, kieliin ja näytön tiheyksiin yhdistämisen aikana. 
-Tavallisista APK:ista poistetaan tukemattomien arkkitehtuurien natiivikirjastot muokkauksen jälkeen"</string>
+    <string name="settings_advanced_strip_unused_libs_description">Poistaa käyttämättömät CPU-arkkitehtuurikirjastot ja jaetut APK-moduulit</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Tavukoodin käsittelytila</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Ohjaa tavukoodin käsittelyä muokkauksen aikana. Vaikuttaa muokkausnopeuteen, muistinkäyttöön ja lopullisen APK:n kokoon</string>
@@ -562,56 +568,46 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_unavailable_message">Edullisin asennuksesi (%s) on tällä hetkellä käytöstä poissa. Voit korjata ongelman ja yrittää uudelleen tai käyttää standardiasennusta.</string>
     <string name="installer_unavailable_shizuku_hint">Tarkista, että Shizuku on käynnissä ja lupa on myönnetty tälle sovellukselle.</string>
     <string name="installer_use_standard">Käytä oletusta</string>
-    <string name="settings_prompt_installer_on_install">Kysy asennusohjelmaa asennettaessa</string>
+    <string name="settings_prompt_installer_on_install">Asennusohjelman valintakehote</string>
     <string name="settings_prompt_installer_on_install_description">Näytä asennusohjelman valintaikkuna aina, kun asennat paikatun sovelluksen.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Akun käytön optimointi</string>
-    <string name="settings_system_battery_optimization_description">Estää järjestelmää lopettamasta päivitysohjelmaa, kun Morphe on pienennettynä.</string>
-    <string name="settings_system_battery_optimization_excluded">Poissuljettu</string>
-    <string name="settings_system_battery_optimization_not_excluded">Ei poissuljettu</string>
+    <string name="settings_system_battery_optimization_description">Pitää paikkaajan käynnissä, kun sovellus on pienennetty</string>
     <string name="settings_system_performance">Suorituskyky</string>
     <string name="settings_system_process_runtime">Prosessin suoritus</string>
     <string name="settings_system_process_runtime_description">Suorita muokkaaminen erillisessä prosessissa paremman vakauden vuoksi</string>
     <string name="settings_system_process_runtime_memory_limit">Muistirajoitus</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Suuremmat muistirajoitukset voivat nopeuttaa muokkaamista, mutta ne eivät välttämättä toimi vanhemmilla laitteilla</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Korkeammat rajat nopeuttavat muokkaamista tehokkailla laitteilla</string>
     <string name="settings_system_process_runtime_enable">Ota prosessin suoritus käyttöön</string>
     <string name="settings_system_memory_limit_subtitle">Muokkaamiseen käytettävissä oleva muisti</string>
     <string name="settings_system_memory_limit_warning">Pieni muistirajoitus voi aiheuttaa virheitä suuria sovelluksia muokattaessa</string>
     <string name="settings_system_process_runtime_enabled_description">%s Mt:n rajoitus</string>
     <string name="settings_system_process_runtime_disabled_description">Napauta määrittääksesi</string>
     <string name="settings_system_process_runtime_description_not_available">Tämä ominaisuus vaatii Android-version 11 tai uudemman </string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Tuo ja vie</string>
-    <string name="settings_system_import_keystore">Tuo avainsäilö</string>
-    <string name="settings_system_import_keystore_description">Tuo oma avainsäilö</string>
+    <string name="settings_system_keystore">Keystore</string>
+    <string name="settings_system_import_keystore_description">Tuo tai vie allekirjoitustunnuksesi</string>
     <string name="settings_system_import_keystore_dialog_title">Anna avainsäilön tiedot</string>
     <string name="settings_system_import_keystore_dialog_description">Sinun on annettava avainsäilön tiedot, jotta voit tuoda sen</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Käyttäjänimi (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Salasana</string>
-    <string name="settings_system_import_keystore_dialog_button">Tuo</string>
     <string name="settings_system_import_keystore_dialog_format_field">Avainsäilön muoto</string>
     <string name="settings_system_import_keystore_wrong_credentials">Väärät avainsäilötiedot</string>
     <string name="settings_system_import_keystore_success">Avainsäilö tuotu</string>
     <string name="settings_system_import_keystore_failed">Avainsäilön tuonti epäonnistui</string>
-    <string name="settings_system_export_keystore">Vie avainsäilö</string>
-    <string name="settings_system_export_keystore_description">Vie nykyinen avainsäilö</string>
     <string name="settings_system_export_keystore_unavailable">Ei vietävää avainsäilöä</string>
     <string name="settings_system_export_keystore_success">Avainsäilö viety</string>
     <string name="settings_system_export_keystore_failed">Avainsäilön vienti epäonnistui</string>
     <string name="settings_system_show_password_field">Näytä salasana</string>
     <string name="settings_system_hide_password_field">Piilota salasana</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Tuo Morphen asetukset</string>
-    <string name="settings_system_import_manager_settings_description">Palauta Morphen asetukset JSON-tiedostosta</string>
+    <string name="settings_system_morphe_settings">Morphe-asetukset</string>
+    <string name="settings_system_import_manager_settings_description">Varmuuskopioi ja palauta Morphen asetukset</string>
     <string name="settings_system_import_manager_settings_fail">Morphen asetusten tuonti epäonnistui: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphen asetukset tuotu</string>
-    <string name="settings_system_export_manager_settings">Vie Morphen asetukset</string>
-    <string name="settings_system_export_manager_settings_description">Tallenna Morphen asetukset JSON-tiedostoon</string>
     <string name="settings_system_export_manager_settings_fail">Morphen asetusten vienti epäonnistui: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphen asetukset viety</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Virheenkorjaus</string>
-    <string name="settings_system_export_debug_logs">Vie virheenkorjauslokit</string>
     <string name="settings_system_export_debug_logs_description">Tallenna järjestelmälokit vianetsintää varten</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Lokien lukeminen epäonnistui (poistumiskoodi %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Lokien vienti epäonnistui</string>
@@ -628,14 +624,14 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_system_patched_apks_deleted">Tallennettu patchetti poistettu onnistuneesti</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Alkuperäiset APK:t</string>
-    <string name="settings_system_original_apks_description">Alkuperäiset APK-tiedostot tallennetaan uudelleenpaikkausta varten. Kustakin sovelluksesta säilytetään vain uusin versio.</string>
+    <string name="settings_system_original_apks_description">Tallennettu uudelleenpaikkausta varten. Yksi versio per sovellus</string>
     <string name="settings_system_original_apks_empty">Ei tallennettu alkuperäisiä APK(t)</string>
     <string name="settings_system_original_apks_deleted">Alkuperäisen APK(t) poistettu onnistuneesti</string>
     <string name="settings_system_original_apks_delete_title">Poistetaanko alkuperäisen APK(t)? Tätä ei voi peruuttaa.</string>
     <string name="settings_system_original_apks_delete_confirm">Poistaa alkuperäisen APK:n %s? Korjaus ei ole enää mahdollista ilman uuden APK:n antamista</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Korjausvalinnat</string>
-    <string name="settings_system_patch_selections_description">Hallinnoi tallennettuja korjausvalintoja ja asetuksia. Nämä säilytetään sovelluksen poistamisen jälkeen</string>
+    <string name="settings_system_patch_selections_description">Tallennetut paikkausvalinnat, säilytetty poistamisen jälkeen</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nollaa kaikki valinnat?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Nollaa paketin valinnat?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Nollaa lähteen valinnan?</string>
@@ -695,6 +691,10 @@ Kuvien mittojen on oltava seuraavat:
     <string name="disabled">Pois käytöstä</string>
     <string name="selected">Valittu</string>
     <string name="not_selected">Ei valittu</string>
+    <string name="select_all">Valitse kaikki</string>
+    <string name="select_all_done">Kaikki valittu</string>
+    <string name="deselect_all">Poista kaikki valinnat</string>
+    <string name="deselect_all_done">Kaikki poistettu valinnasta</string>
     <string name="rename">Nimeä uudelleen</string>
     <string name="import_">Tuo</string>
     <string name="export">Vie</string>
@@ -715,6 +715,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="unmount">Irrotus</string>
     <string name="unmounted">Irrotettu</string>
     <string name="remount">Käynnistä</string>
+    <string name="share">Jaa</string>
     <string name="install">Asenna</string>
     <string name="installed">Asennettu</string>
     <string name="reinstall">Asenna uudelleen</string>

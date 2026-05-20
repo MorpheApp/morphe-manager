@@ -58,15 +58,18 @@
     <string name="sources_management_title">पैच स्रोत</string>
     <string name="sources_management_open_in_browser">खोल में खोल करना</string>
     <string name="sources_management_failed_to_open_url">URL खोलने में विफल रहा</string>
-    <string name="sources_management_prerelease_toggle">प्रिलीस रिलीज़ पथचों को उपयोग करें</string>
-    <string name="sources_management_prerelease_toggle_description">नए प्रयोगात्मक पथचों की नई संस्करणों को जल्दी से प्राप्त करें</string>
-    <string name="sources_management_experimental_versions_toggle">प्रयोगशील ऐप संस्करणों का उपयोग करें</string>
-    <string name="sources_management_experimental_versions_toggle_description">यदि उपलब्ध हो तो प्रयोगशील ऐप लक्ष्यों को पैच करें</string>
+    <string name="sources_management_prerelease_toggle">प्री-रिलीज़ पैच</string>
+    <string name="sources_management_prerelease_toggle_description">नए प्रायोगिक पैच संस्करणों तक जल्दी पहुँच प्राप्त करता है</string>
+    <string name="sources_management_experimental_versions_toggle">प्रायोगिक ऐप संस्करण</string>
+    <string name="sources_management_experimental_versions_toggle_description">यदि उपलब्ध हों तो प्रायोगिक ऐप लक्ष्यों को पैच करता है</string>
     <string name="sources_management_already_exists">यह स्रोत पहले से ही जोड़ा गया है</string>
     <string name="sources_management_invalid_url">अमान्य स्रोत URL। कृपया पता जांचें और फिर प्रयास करें</string>
     <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नहीं है</string>
     <string name="sources_management_metadata_unavailable_hint">रिमोट मेटाडेटा फ़ाइल अनुपलब्ध है। स्थापित बंडल के साथ पैचिंग अभी भी काम करती है, लेकिन इस स्रोत के लिए ऑटो-अपडेट अक्षम कर दिया गया है</string>
     <string name="sources_management_metadata_unavailable_hint_missing">पैच बंडल डाउनलोड नहीं किया जा सका। स्रोत URL गलत हो सकता है या फ़ाइल मौजूद नहीं है</string>
+    <string name="sources_management_source_enabled">स्रोत सक्षम किया गया</string>
+    <string name="sources_management_source_disabled">स्रोत अक्षम किया गया</string>
+    <string name="sources_management_source_updating">स्रोत अपडेट किया जा रहा है</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">नाम दर्जा करें</string>
     <string name="sources_dialog_rename">पैच स्रोत का नाम बदलें</string>
@@ -138,9 +141,13 @@
     <string name="expert_mode_search">पैच खोजें</string>
     <string name="expert_mode_proceed">पैचिंग के लिए आगे बढ़ें</string>
     <string name="expert_mode_disable_all">सभी को असक्षम करें</string>
+    <string name="expert_mode_disable_all_done">सभी पैच अक्षम किए गए</string>
     <string name="expert_mode_enable_all">सभी को सक्षम करें</string>
+    <string name="expert_mode_enable_all_done">सभी पैच सक्षम किए गए</string>
     <string name="expert_mode_reset_to_default">अनुशंसित पैच सक्षम करें</string>
+    <string name="expert_mode_reset_to_default_done">अनुशंसित पैच लागू किए गए</string>
     <string name="expert_mode_restore_saved">चयन पुनर्स्थापित करें</string>
+    <string name="expert_mode_restore_saved_done">सहेजे गए चयन को पुनर्स्थापित किया गया</string>
     <string name="expert_mode_no_results">कोई पैच नहीं मिला</string>
     <string name="expert_mode_universal_patches">सार्वभौमिक पैच</string>
     <string name="expert_mode_new_patches">नया</string>
@@ -246,9 +253,9 @@
     <string name="root_pre_patch_installer_title">स्थापना विधि का चयन करें</string>
     <string name="root_pre_patch_installer_description">आपका डिवाइस रूट एक्सेस रखता है। पट्च्ड एप्लिकेशन इंस्टॉल करने का तरीका चुनें।</string>
     <string name="root_pre_patch_installer_mount_title">रूट माउंट</string>
-    <string name="root_pre_patch_installer_mount_description">स्टॉक एप्लिकेशन के ऊपर पट्च्ड एपीके माउंट करें। जीएमएसकोर आवश्यक नहीं।</string>
+    <string name="root_pre_patch_installer_mount_description">स्टॉक ऐप पर पैच किए गए APK को माउंट करता है। GmsCore की आवश्यकता नहीं है</string>
     <string name="root_pre_patch_installer_standard_title">सामान्य इंस्टॉल</string>
-    <string name="root_pre_patch_installer_standard_description">पट्चिंग के बाद इंस्टॉलर (सिस्टम इंस्टॉलर, शिज़ुकी आदि) चुनकर अलग एप्लिकेशन के रूप में इंस्टॉल करें।</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore सपोर्ट के साथ एक अलग ऐप के रूप में इंस्टॉल करता है। पैचिंग के बाद एक इंस्टॉलर का चयन किया जा सकता है।</string>
     <string name="root_pre_patch_installer_hint">इंस्टॉलेशन मेथड पट्चिंग के बाद बदल नहीं सकती जाती है।</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copied to clipboard</string>
@@ -379,7 +386,7 @@
     <string name="settings_appearance_dynamic">मैटेरियल यू</string>
     <string name="settings_appearance_accent_color">अक्सेंट रंग</string>
     <string name="settings_appearance_pure_black">शुद्ध काला</string>
-    <string name="settings_appearance_pure_black_description">सचमुच काले पृष्ठभूमि का उपयोग करें</string>
+    <string name="settings_appearance_pure_black_description">सही काले रंग की पृष्ठभूमि का उपयोग करता है।</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">एप्लिकेशन भाषा</string>
     <string name="settings_appearance_app_language_current">वर्तमान भाषा</string>
@@ -402,13 +409,13 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">आइकॉन बदलें</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">अपडेट</string>
-    <string name="settings_advanced_updates_use_prereleases">प्री-रिलीज़ मोर्फे का उपयोग करें</string>
-    <string name="settings_advanced_updates_use_prereleases_description">नए मोर्फ़ सुविधाओं तक जल्दी पहुंच प्राप्त करें। प्री-रिलीज़ पैच प्राप्त करने के लिए, प्रत्येक पैच स्रोत में प्री-रिलीज़ टॉगल को सक्षम करें</string>
-    <string name="settings_advanced_updates_allow_metered">मोबाइल डेटा पर अपडेट करें</string>
-    <string name="settings_advanced_updates_allow_metered_description">मोबाइल डेटा पर मोर्फ़ और पैच अपडेट डाउनलोड करने की अनुमति दें</string>
+    <string name="settings_advanced_updates_use_prereleases">प्री-रिलीज़ अपडेट</string>
+    <string name="settings_advanced_updates_use_prereleases_description">नए Morphe ऐप संस्करणों तक प्रारंभिक पहुंच। पैच स्रोतों में प्रति स्रोत प्री-रिलीज़ सक्षम करें।</string>
+    <string name="settings_advanced_updates_allow_metered">मोबाइल डेटा अपडेट</string>
+    <string name="settings_advanced_updates_allow_metered_description">Morphe और पैच अपडेट को मोबाइल डेटा पर डाउनलोड करने की अनुमति देता है।</string>
     <string name="settings_advanced_updates_background_notifications">रीलेटेड अपडेट नोटिफिकेशन्स</string>
     <string name="settings_advanced_updates_background_notifications_description">बैकग्राउंड में अद्यतन उपलब्ध होने पर सूचित करें।</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">नई रिलीज़ के लिए इमीडिएट पुश नोटिफिकेशन प्राप्त करें, जब एप्प क्लोज हो</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">नया रिलीज़ होने पर, ऐप बंद होने पर भी पुश नोटिफिकेशन।</string>
     <string name="settings_advanced_update_interval">अपडेट दर देखें</string>
     <string name="settings_advanced_update_interval_dialog_title">अपडेटों के लिए देखें</string>
     <string name="settings_advanced_update_interval_hourly">एक घंटे में एक बार</string>
@@ -432,12 +439,11 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">एक्सपर्ट सेटिंग्स</string>
     <string name="settings_advanced_expert_mode">एक्सपर्ट मोड</string>
-    <string name="settings_advanced_expert_mode_description">अनुमोदित करना जटिल मॉर्फ पट्टी सेटिंग्स और कस्टमाइजेशन विकल्प</string>
+    <string name="settings_advanced_expert_mode_description">जटिल Morphe पैचिंग सेटिंग्स और अनुकूलन विकल्पों को सक्षम करता है।</string>
     <string name="settings_advanced_expert_mode_dialog_title">एक्सपर्ट मोड को अनुमोदित करना?</string>
     <string name="settings_advanced_expert_mode_dialog_message">एक्सपर्ट मोड पट्चों को लागू करने के तरीके पर अधिक नियंत्रण देता है, लेकिन एक्सपर्ट मोड में सेटिंग्स गलत करने से अप्लिकेशन में काम नहीं करने का खतरा हो सकता है</string>
     <string name="settings_advanced_strip_unused_libs">डिवाइस आर्किटेक्चर के लिए अनुकूलित करें</string>
-    <string name="settings_advanced_strip_unused_libs_description">"सादे APK के लिए, पैचिंग के बाद असमर्थित आर्किटेक्चर के लिए मूल लाइब्रेरीज़ को हटा देता है।
-असमर्थित CPU आर्किटेक्चर, लोकेल और स्क्रीन घनत्व के लिए स्प्लिट APK मॉड्यूल को मर्ज करते समय छोड़ दें।"</string>
+    <string name="settings_advanced_strip_unused_libs_description">अप्रयुक्त CPU आर्किटेक्चर लाइब्रेरियों और स्प्लिट APK मॉड्यूल को हटा देता है।</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">बाइटकोड प्रोसेसिंग मोड</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">पैचिंग के दौरान बाइटकोड कैसे प्रोसेस किया जाता है, यह नियंत्रित करता है। पैचिंग की गति, मेमोरी उपयोग और आउटपुट APK आकार को प्रभावित करता है</string>
@@ -445,7 +451,7 @@
     <string name="settings_advanced_bytecode_mode_strip_fast">तेज़</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">तेज़ पैचिंग और कम मेमोरी का उपयोग, लेकिन APK का आकार बड़ा होगा। कम RAM या पुराने उपकरणों के लिए अनुशंसित</string>
     <string name="settings_advanced_bytecode_mode_full">पूर्ण</string>
-    <string name="settings_advanced_bytecode_mode_full_description">धीमी पैचिंग, विरासत व्यवहार को दोहराती है। केवल तभी उपयोग करें जब तेज़ मोड में समस्या हो</string>
+    <string name="settings_advanced_bytecode_mode_full_description">धीमी पैचिंग, विरासत व्यवहार को दोहराता है। केवल तभी अनुशंसित है जब तेज़ मोड के कारण समस्याएं हों।</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">प्रकाशन अनुरोध स्रोतों के लिए आवश्यक</string>
@@ -463,7 +469,7 @@
     <string name="settings_advanced_patch_options_expert_mode_notice">एक्सपर्ट मोड में पैच ऑप्शंस एडिटिंग के दौरान उपलब्ध होंगेगा</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">एप्लिकेशन थीम रंग</string>
-    <string name="settings_advanced_patch_options_theme_colors_description">बैकग्राउंड रंग बदलें</string>
+    <string name="settings_advanced_patch_options_theme_colors_description">पृष्ठभूमि रंग बदलता है।</string>
     <string name="settings_advanced_patch_options_dark_theme_color">डार्क थीम बैकग्राउंड रंग</string>
     <string name="settings_advanced_patch_options_light_theme_color">लाइट थीम बैकग्राउंड रंग</string>
     <string name="settings_advanced_patch_options_theme_color_description">बन सकता है एक हेक्स रंग (#RRGGBB) या एक रंग संसाधन संदर्भ</string>
@@ -473,7 +479,7 @@
     <string name="settings_advanced_patch_options_no_available">इस पैच के लिए कोई ऑप्शंस उपलब्ध नहीं है</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">कस्टम ब्रांडिंग</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">एप्लिकेशन का प्रदर्शन नाम बदलें</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">ऐप का प्रदर्शन नाम बदलता है।</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">एप्लिकेशन आइकॉन फ़ोल्डर</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">कस्टम नाम दर्ज करें</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">कस्टम आइकॉन</string>
@@ -511,7 +517,7 @@ morphe_adaptive_monochrome_custom.xml
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">कस्टम हेडर लोगो</string>
-    <string name="settings_advanced_patch_options_custom_header_description">हेडर लोगो बदलें</string>
+    <string name="settings_advanced_patch_options_custom_header_description">हेडर लोगो बदलता है।</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"कस्टम हेडर लोगो के लिए उपयोग किए जाने वाले चित्रों के फोल्डर का पथ
 
 डिवाइस के DPI पर निर्भर करता है, फोल्डर में निम्नलिखित किसी एक या अधिक फ़ोल्डर होनी चाहिए:
@@ -532,17 +538,17 @@ morphe_header_custom_dark.png
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">शॉर्ट्स फीचर्स छिपाएं</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">शॉर्ट्स एप्लिकेशन शॉर्टकट छिपाएं</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">लॉन्चर लॉन्ग-प्रेस मेनू से शॉर्ट्स को हटाएं</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">लॉन्चर के लंबे प्रेस मेनू से शॉर्ट्स को हटाता है।</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">शॉर्ट्स विजेट छिपाएं</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget_description">लॉन्चर विजेट से शॉर्ट्स बटन को हटाएं</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">लॉन्चर विजेट से शॉर्ट्स बटन को हटाता है।</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">इंस्टॉलर</string>
     <string name="installer_title">इंस्टॉलर चुनें</string>
     <string name="installer_internal_name">सिस्टम इन्स्टॉलर</string>
-    <string name="installer_internal_description">एंड्रॉइड पैकेज इंस्टॉलर का इस्तमाल करें</string>
+    <string name="installer_internal_description">एंड्रॉइड पैकेज इंस्टॉलर का उपयोग करें।</string>
     <string name="installer_auto_saved_name">रूट्ड माउंट इंस्टॉलर</string>
     <string name="installer_auto_saved_description">संस्थापित एप्लिकेशन पर पथचिह्नित एपीके को माउंट करता है</string>
-    <string name="installer_shizuku_description">शिज़ुकू या साई को उपयोग करके चुपचाप इंस्टॉल करें</string>
+    <string name="installer_shizuku_description">Shizuku या Sui का उपयोग करके चुपचाप इंस्टॉल करता है।</string>
     <string name="installer_option_none">कोई बैकफ़ॉल नहीं</string>
     <string name="installer_none_description">कोई बैकअप इंस्टॉलर कॉन्फ़िगर नहीं किया गया है</string>
     <string name="installer_status_requires_root">Requires root access</string>
@@ -563,57 +569,47 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_message">आपका प्राथमिक इंस्टॉलर (%s) वर्तमान में उपलब्ध नहीं है. समस्या को ठीक करें और पुन: प्रयास करें, या मानक इंस्टॉलर का उपयोग करें।</string>
     <string name="installer_unavailable_shizuku_hint">确保 शिज़ुकू चल रहा है और इस ऐप को अनुमति दी गई है।</string>
     <string name="installer_use_standard">स्तاندर्ड का उपयोग करें</string>
-    <string name="settings_prompt_installer_on_install">इंस्टॉल पर इंस्टॉलर प्रदर्शित करें</string>
-    <string name="settings_prompt_installer_on_install_description">हर बार जब आप पैच्ड ऐप इंस्टॉल करते हैं, तो ऐप को इंस्टॉल करने के लिए इंस्टॉलर चयन डायलॉग दिखाएं</string>
+    <string name="settings_prompt_installer_on_install">इंस्टॉलर चयन संकेत</string>
+    <string name="settings_prompt_installer_on_install_description">जब भी पैच किए गए ऐप को इंस्टॉल किया जाता है, तो इंस्टॉलर चयन संवाद दिखाता है।</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">बैटरी अनुकूलन</string>
-    <string name="settings_system_battery_optimization_description">Morphe को छोटा किए जाने पर पैचर को रोकने से सिस्टम को रोकता है</string>
-    <string name="settings_system_battery_optimization_excluded">बहिष्कृत</string>
-    <string name="settings_system_battery_optimization_not_excluded">बहिष्कृत नहीं</string>
+    <string name="settings_system_battery_optimization_description">जब ऐप छोटा किया जाता है, तो पैचर को चालू रखता है।</string>
     <string name="settings_system_performance">प्रदर्शन</string>
     <string name="settings_system_process_runtime">प्रोसेस रनटाइम</string>
-    <string name="settings_system_process_runtime_description">बेटर स्टेबिलिटी के लिए पैचिंग को अलग से प्रोसेस में चलाएं</string>
+    <string name="settings_system_process_runtime_description">बेहतर स्थिरता के लिए एक अलग प्रक्रिया में पैचिंग करता है।</string>
     <string name="settings_system_process_runtime_memory_limit">मेमोरी लिमिट</string>
-    <string name="settings_system_process_runtime_memory_limit_description">अधिक मेमोरी लिमिट पैचिंग की गति बढ़ा सकती है, लेकिन पुराने डिवाइसों के साथ काम नहीं करना सकता है</string>
+    <string name="settings_system_process_runtime_memory_limit_description">उच्च सीमाएं सक्षम उपकरणों पर पैचिंग को गति देती हैं।</string>
     <string name="settings_system_process_runtime_enable">प्रोसेस रनटाइम सक्षम करें</string>
     <string name="settings_system_memory_limit_subtitle">पैचिंग के लिए उपलब्ध मेमोरी</string>
     <string name="settings_system_memory_limit_warning">बड़े एप्लिकेशन के पैचिंग के लिए निम्न मेमोरी लिमिट फेल हो सकती है</string>
     <string name="settings_system_process_runtime_enabled_description">%s एमबी सीमा</string>
     <string name="settings_system_process_runtime_disabled_description">कन्फ़िगरेशन के लिए क्लिक करें</string>
     <string name="settings_system_process_runtime_description_not_available">यह सुविधा Android 11 या उसके बाद के संस्करण की आवश्यकता है</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">आइमपोर्ट और एक्सपोर्ट</string>
-    <string name="settings_system_import_keystore">कीस्टोर आयम</string>
-    <string name="settings_system_import_keystore_description">कस्टम कीस्टोर आयम करें</string>
+    <string name="settings_system_keystore">कीस्टोर</string>
+    <string name="settings_system_import_keystore_description">आपके साइनिंग कीस्टोर को आयात या निर्यात करता है।</string>
     <string name="settings_system_import_keystore_dialog_title">कीस्टोर के क्रेडेंशियल दर्ज करें</string>
     <string name="settings_system_import_keystore_dialog_description">केस्टोर के क्रेडेंशियल्स के लिए प्रवेश करना होगा इसे आयात करने के लिए।</string>
     <string name="settings_system_import_keystore_dialog_alias_field">यूज़रनेम (एलियास)</string>
     <string name="settings_system_import_keystore_dialog_password_field">पासवर्ड</string>
-    <string name="settings_system_import_keystore_dialog_button">आयम</string>
     <string name="settings_system_import_keystore_dialog_format_field">कीस्टोर प्रारूप</string>
     <string name="settings_system_import_keystore_wrong_credentials">गलत कीस्टोर क्रेडेंशियल</string>
     <string name="settings_system_import_keystore_success">कीस्टोर आयम किया गया</string>
     <string name="settings_system_import_keystore_failed">कीस्टोर आयम करने में विफल</string>
-    <string name="settings_system_export_keystore">कीस्टोर एक्सपोर्ट</string>
-    <string name="settings_system_export_keystore_description">वर्तमान कीस्टोर एक्सपोर्ट करें</string>
     <string name="settings_system_export_keystore_unavailable">एक्सपोर्ट करने के लिए कीस्टोर उपलब्ध नहीं है</string>
     <string name="settings_system_export_keystore_success">कीस्टोर एक्सपोर्ट किया गया</string>
     <string name="settings_system_export_keystore_failed">कीस्टोर एक्सपोर्ट करने में विफल।</string>
     <string name="settings_system_show_password_field">पासवर्ड दिखाएं</string>
     <string name="settings_system_hide_password_field">पासवर्ड छिपाएं</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">मोर्फ़ सेटिंग्स आयात करें</string>
-    <string name="settings_system_import_manager_settings_description">एक JSON फ़ाइल से मोर्फ़ सेटिंग्स पुनर्स्थापित करें</string>
+    <string name="settings_system_morphe_settings">मॉर्फ सेटिंग्स</string>
+    <string name="settings_system_import_manager_settings_description">आपकी Morphe सेटिंग्स का बैकअप और पुनर्स्थापित करता है।</string>
     <string name="settings_system_import_manager_settings_fail">मोर्फ़ सेटिंग्स आयात करने में विफल: %s</string>
     <string name="settings_system_import_manager_settings_success">मोर्फ़ सेटिंग्स आयात की गईं</string>
-    <string name="settings_system_export_manager_settings">मोर्फ़ सेटिंग्स निर्यात करें</string>
-    <string name="settings_system_export_manager_settings_description">मोर्फ़ सेटिंग्स को एक JSON फ़ाइल में सहेजें</string>
     <string name="settings_system_export_manager_settings_fail">मोर्फ़ सेटिंग्स निर्यात करने में विफल: %s</string>
     <string name="settings_system_export_manager_settings_success">मोर्फ़ सेटिंग्स निर्यात की गईं</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">डिबग</string>
-    <string name="settings_system_export_debug_logs">डिबग लॉग्स एक्सपोर्ट करें</string>
-    <string name="settings_system_export_debug_logs_description">त्रुटि निवारण के लिए सिस्टम लॉग सहेजें</string>
+    <string name="settings_system_export_debug_logs_description">समस्या निवारण के लिए सिस्टम लॉग सहेजता है।</string>
     <string name="settings_system_export_debug_logs_export_read_failed">लॉग पढ़ने में विफल रहा (अनुक्रमणिका %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">लॉग्स एक्सपोर्ट करने में विफल</string>
     <string name="settings_system_export_debug_logs_export_success">लॉग्स एक्सपोर्ट किए गए</string>
@@ -622,21 +618,21 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_size">कुल आकार: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">पैच किए गए एपीके</string>
-    <string name="settings_system_patched_apks_description">सहेजे गए एप्लिकेशन फ़ाइलें प्रबंधित करें</string>
+    <string name="settings_system_patched_apks_description">संरक्षित पैच किए गए एप्लिकेशन फ़ाइलों का प्रबंधन करता है।</string>
     <string name="settings_system_patched_apks_empty">अभी तक कोई सहेजा गया पैच किया गया एपीके नहीं है</string>
     <string name="settings_system_patched_apks_delete_title">सहेजे गए पैच किए गए एपीके को हटाएं?</string>
     <string name="settings_system_patched_apks_delete_confirm">%s के लिए सहेजे गए पैच किए गए एपीके को हटाना चाहते हैं?</string>
     <string name="settings_system_patched_apks_deleted">%s के लिए सहेजे गए पैच किए गए एपीके सफलतापूर्वक हटाए गए</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">अरिजनल एपीके</string>
-    <string name="settings_system_original_apks_description">ओरिजिनल एपीके फाइलें पुन: पैच करने के लिए सहेजी जाती हैं। प्रत्येक एप्प के लिए केवल नवीनतम संस्करण रखा जाता है</string>
+    <string name="settings_system_original_apks_description">फिर से पैच करने के लिए सहेजा गया। प्रति ऐप एक संस्करण रखा जाता है।</string>
     <string name="settings_system_original_apks_empty">कोई सहेजा गया अरिजनल एपीके नहीं है</string>
     <string name="settings_system_original_apks_deleted">%s के लिए अरिजनल एपीके सफलतापूर्वक हटाए गए</string>
     <string name="settings_system_original_apks_delete_title">अरिजनल एपीके को हटाएं?</string>
     <string name="settings_system_original_apks_delete_confirm">%s के लिए मूल APK मिटाएं? बिना नई APK प्रदान किए पुनः पथच करना संभव नहीं होगा।</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">पथच चयन</string>
-    <string name="settings_system_patch_selections_description">सहेजे गए पथच चयन और विकल्प प्रबंधित करें। ये एप्लिकेशन अनइंस्टॉलेशन के बाद भी persis करें।</string>
+    <string name="settings_system_patch_selections_description">सहेजे गए पैच चयन, अनइंस्टॉल करने के बाद भी बरकरार रहते हैं।</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">सभी चयन रीसेट करें?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">पैकेज चयन रीसेट करें?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">स्रोत चयन रीसेट करें?</string>
@@ -659,7 +655,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">मorphe के बारे में</string>
     <string name="settings_system_share_website">वेबसाइट शेयर करें</string>
-    <string name="settings_system_share_website_description">साझा अधिकृत मॉर्फ वेबसाइट</string>
+    <string name="settings_system_share_website_description">आधिकारिक Morphe वेबसाइट साझा करता है।</string>
     <string name="settings_system_manager_description">"यह एक ओपन-सोर्स परियोजना है जो लोकप्रिय एंड्रॉइड ऐप्स के आधुनिक, सुव्यवस्थित पैचिंग के लिए है, जो सामुदायिक प्रतिक्रिया और योगदान से प्रेरित है"</string>
     <string name="credits">क्रेडिट</string>
     <string name="credits_current_development">वर्तमान विकास</string>
@@ -696,6 +692,10 @@ morphe_header_custom_dark.png
     <string name="disabled">असक्षम</string>
     <string name="selected">चयनित</string>
     <string name="not_selected">चयनित नहीं</string>
+    <string name="select_all">सब चुनें</string>
+    <string name="select_all_done">सभी चयनित</string>
+    <string name="deselect_all">सभी का चयन रद्द करें</string>
+    <string name="deselect_all_done">सभी अचयनित</string>
     <string name="rename">रename</string>
     <string name="import_">आयात करें</string>
     <string name="export">निर्यात करें</string>
@@ -716,6 +716,7 @@ morphe_header_custom_dark.png
     <string name="unmount">अनमाउंट</string>
     <string name="unmounted">अनमाउंटेड</string>
     <string name="remount">पुनःसंयोजित करें</string>
+    <string name="share">शेयर करें</string>
     <string name="install">स्थापित करें</string>
     <string name="installed">Installed</string>
     <string name="reinstall">Debugging</string>

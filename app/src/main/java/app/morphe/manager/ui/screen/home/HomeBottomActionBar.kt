@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.home
 
 import android.view.HapticFeedbackConstants
@@ -7,8 +12,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -21,6 +30,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
+import app.morphe.manager.ui.screen.shared.MorpheIcon
 
 /**
  * Section 5: Bottom action bar.
@@ -127,16 +137,21 @@ fun BottomActionButton(
         MaterialTheme.colorScheme.onPrimaryContainer
     }
 
+    val expertModeLabel = stringResource(R.string.settings_advanced_expert_mode)
+    val loadingLabel = stringResource(R.string.loading)
+
     // Build content description for accessibility
-    val contentDesc = buildString {
-        text?.let { append(it) }
-        if (isExpertMode) {
-            append(", ")
-            append(stringResource(R.string.settings_advanced_expert_mode))
-        }
-        if (showProgress) {
-            append(", ")
-            append(stringResource(R.string.loading))
+    val contentDesc = remember(text, isExpertMode, showProgress) {
+        buildString {
+            text?.let { append(it) }
+            if (isExpertMode) {
+                append(", ")
+                append(expertModeLabel)
+            }
+            if (showProgress) {
+                append(", ")
+                append(loadingLabel)
+            }
         }
     }
 
@@ -188,11 +203,9 @@ fun BottomActionButton(
                     strokeWidth = 2.dp
                 )
             } else {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                    tint = finalContentColor.copy(alpha = if (enabled) 1f else 0.5f),
-                    modifier = Modifier.size(24.dp)
+                MorpheIcon(
+                    icon = icon,
+                    tint = finalContentColor.copy(alpha = if (enabled) 1f else 0.5f)
                 )
                 if (showLabel && text != null) {
                     Spacer(modifier = Modifier.width(8.dp))

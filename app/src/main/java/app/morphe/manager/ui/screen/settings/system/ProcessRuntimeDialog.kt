@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -63,8 +64,8 @@ fun ProcessRuntimeDialog(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+                .padding(vertical = MorpheDefaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             // Enable/Disable toggle
             RichSettingsItem(
@@ -78,7 +79,7 @@ fun ProcessRuntimeDialog(
                 title = stringResource(R.string.settings_system_process_runtime_enable),
                 subtitle = stringResource(R.string.settings_system_process_runtime_description),
                 trailingContent = {
-                    Switch(
+                    MorpheSwitch(
                         checked = enabled,
                         onCheckedChange = {
                             enabled = it
@@ -93,13 +94,16 @@ fun ProcessRuntimeDialog(
 
             // Memory limit section
             Column(
-                modifier = Modifier.alpha(if (enabled) 1f else 0.5f),
-                verticalArrangement = Arrangement.spacedBy(20.dp)
+                modifier = Modifier.alpha(if (enabled) 1f else 0.5f)
             ) {
-                MorpheSettingsDivider(fullWidth = true)
+                MorpheSettingsDivider(
+                    modifier = Modifier.padding(bottom = 16.dp),
+                    fullWidth = true
+                )
 
                 // Memory limit header
                 Row(
+                    modifier = Modifier.padding(bottom = 16.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -107,7 +111,7 @@ fun ProcessRuntimeDialog(
                         imageVector = Icons.Outlined.Storage,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(16.dp)
                     )
                     Text(
                         text = stringResource(R.string.settings_system_process_runtime_memory_limit),
@@ -119,7 +123,7 @@ fun ProcessRuntimeDialog(
 
                 // Current value display
                 Surface(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
                     shape = RoundedCornerShape(12.dp),
                     color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
                 ) {
@@ -145,6 +149,7 @@ fun ProcessRuntimeDialog(
 
                 // Slider
                 Column(
+                    modifier = Modifier.padding(bottom = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Slider(
@@ -179,15 +184,22 @@ fun ProcessRuntimeDialog(
                 InfoBadge(
                     text = stringResource(R.string.settings_system_process_runtime_memory_limit_description),
                     style = InfoBadgeStyle.Default,
-                    icon = Icons.Outlined.Info
+                    icon = Icons.Outlined.Info,
+                    isExpanded = true
                 )
 
-                // Warning for low values
-                if (enabled && sliderValue < PROCESS_RUNTIME_MEMORY_LOW_WARNING) {
+                // Warning for low values — top padding inside so shrink includes spacing
+                AnimatedVisibility(
+                    visible = enabled && sliderValue < PROCESS_RUNTIME_MEMORY_LOW_WARNING,
+                    enter = MorpheAnimations.expandFadeEnter,
+                    exit = MorpheAnimations.shrinkFadeExit
+                ) {
                     InfoBadge(
+                        modifier = Modifier.padding(top = 16.dp),
                         text = stringResource(R.string.settings_system_memory_limit_warning),
                         style = InfoBadgeStyle.Error,
-                        icon = Icons.Outlined.Warning
+                        icon = Icons.Outlined.Warning,
+                        isExpanded = true
                     )
                 }
             }

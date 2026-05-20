@@ -13,7 +13,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -22,6 +21,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -73,7 +76,7 @@ fun LanguagePickerDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
         ) {
             // Search field
             MorpheDialogTextField(
@@ -86,9 +89,8 @@ fun LanguagePickerDialog(
                     )
                 },
                 leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Outlined.Search,
-                        contentDescription = null,
+                    MorpheIcon(
+                        icon = Icons.Outlined.Search,
                         tint = LocalDialogSecondaryTextColor.current
                     )
                 },
@@ -136,9 +138,16 @@ private fun LanguageItem(
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
+    val selectedText = stringResource(R.string.selected)
+    val notSelectedText = stringResource(R.string.not_selected)
+
     MorpheCard(
         onClick = onClick,
-        cornerRadius = 8.dp
+        cornerRadius = 8.dp,
+        modifier = Modifier.semantics(mergeDescendants = true) {
+            role = Role.RadioButton
+            stateDescription = if (isSelected) selectedText else notSelectedText
+        }
     ) {
         Row(
             modifier = Modifier
@@ -184,11 +193,9 @@ private fun LanguageItem(
             }
 
             if (isSelected) {
-                Icon(
-                    imageVector = Icons.Outlined.Check,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(20.dp)
+                MorpheIcon(
+                    icon = Icons.Outlined.Check,
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }

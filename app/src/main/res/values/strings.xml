@@ -62,15 +62,18 @@
     <string name="sources_management_title">Patch sources</string>
     <string name="sources_management_open_in_browser">Open in browser</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
-    <string name="sources_management_prerelease_toggle">Use pre-release patches</string>
-    <string name="sources_management_prerelease_toggle_description">Receive early access to new experimental patches version</string>
-    <string name="sources_management_experimental_versions_toggle">Use experimental app versions</string>
-    <string name="sources_management_experimental_versions_toggle_description">Patch experimental app targets if available</string>
+    <string name="sources_management_prerelease_toggle">Pre-release patches</string>
+    <string name="sources_management_prerelease_toggle_description">Receives early access to new experimental patch versions</string>
+    <string name="sources_management_experimental_versions_toggle">Experimental app versions</string>
+    <string name="sources_management_experimental_versions_toggle_description">Patches experimental app targets if available</string>
     <string name="sources_management_already_exists">This source has already been added</string>
     <string name="sources_management_invalid_url">Invalid source URL. Please check the address and try again</string>
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
     <string name="sources_management_metadata_unavailable_hint">The remote metadata file is unavailable. Patching with the installed bundle still works, but auto-update is disabled for this source</string>
     <string name="sources_management_metadata_unavailable_hint_missing">The patch bundle could not be downloaded. The source URL may be incorrect or the file does not exist</string>
+    <string name="sources_management_source_enabled">Source enabled</string>
+    <string name="sources_management_source_disabled">Source disabled</string>
+    <string name="sources_management_source_updating">Updating source</string>
 
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Display name</string>
@@ -147,9 +150,13 @@
     <string name="expert_mode_search">Search patches</string>
     <string name="expert_mode_proceed">Proceed to patching</string>
     <string name="expert_mode_disable_all">Disable all</string>
+    <string name="expert_mode_disable_all_done">All patches disabled</string>
     <string name="expert_mode_enable_all">Enable all</string>
+    <string name="expert_mode_enable_all_done">All patches enabled</string>
     <string name="expert_mode_reset_to_default">Enable recommended patches</string>
+    <string name="expert_mode_reset_to_default_done">Recommended patches applied</string>
     <string name="expert_mode_restore_saved">Restore saved selection</string>
+    <string name="expert_mode_restore_saved_done">Saved selection restored</string>
     <string name="expert_mode_no_results">No patches found</string>
     <string name="expert_mode_universal_patches">Universal patches</string>
     <string name="expert_mode_new_patches">New</string>
@@ -262,9 +269,9 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="root_pre_patch_installer_title">Choose installation method</string>
     <string name="root_pre_patch_installer_description">Your device has root access. Choose how you want to install the patched app</string>
     <string name="root_pre_patch_installer_mount_title">Root Mount</string>
-    <string name="root_pre_patch_installer_mount_description">Mount patched APK over the stock app. No GmsCore needed</string>
+    <string name="root_pre_patch_installer_mount_description">Mounts the patched APK over the stock app. No GmsCore needed</string>
     <string name="root_pre_patch_installer_standard_title">Standard Install</string>
-    <string name="root_pre_patch_installer_standard_description">Install as a separate app with GmsCore support. Choose installer (System installer, Shizuku, etc.) after patching</string>
+    <string name="root_pre_patch_installer_standard_description">Installs as a separate app with GmsCore support. An installer can be selected after patching</string>
     <string name="root_pre_patch_installer_hint">The installation method determines which patches are included and cannot be changed after patching</string>
 
     <!-- Patcher Screen -->
@@ -409,7 +416,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Accent color</string>
     <string name="settings_appearance_pure_black">Pure Black</string>
-    <string name="settings_appearance_pure_black_description">Use true black backgrounds</string>
+    <string name="settings_appearance_pure_black_description">Uses true black backgrounds</string>
 
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">App language</string>
@@ -437,13 +444,13 @@ Uninstalling will permanently erase all app data"</string>
 
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Updates</string>
-    <string name="settings_advanced_updates_use_prereleases">Use pre-release Morphe</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Receive early access to new Morphe features. To get pre-release patches, enable the pre-release toggle in each patch source separately</string>
-    <string name="settings_advanced_updates_allow_metered">Update on mobile data</string>
-    <string name="settings_advanced_updates_allow_metered_description">Allow Morphe and patch updates to download over mobile data</string>
+    <string name="settings_advanced_updates_use_prereleases">Pre-release updates</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Early access to new Morphe app versions. Enable pre-release per source in patch sources</string>
+    <string name="settings_advanced_updates_allow_metered">Mobile data updates</string>
+    <string name="settings_advanced_updates_allow_metered_description">Allows Morphe and patch updates to download over mobile data</string>
     <string name="settings_advanced_updates_background_notifications">Background update notifications</string>
     <string name="settings_advanced_updates_background_notifications_description">Periodically check for updates in the background and notify when available</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">Receive instant push notifications for new releases, even when the app is closed</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Push notifications for new releases, even when the app is closed</string>
     <string name="settings_advanced_update_interval">Check frequency</string>
     <string name="settings_advanced_update_interval_dialog_title">Check for updates</string>
     <string name="settings_advanced_update_interval_hourly">Once an hour</string>
@@ -469,12 +476,11 @@ Uninstalling will permanently erase all app data"</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>
     <string name="settings_advanced_expert_mode">Expert mode</string>
-    <string name="settings_advanced_expert_mode_description">Enable complex Morphe patching settings and customization options</string>
+    <string name="settings_advanced_expert_mode_description">Enables complex Morphe patching settings and customization options</string>
     <string name="settings_advanced_expert_mode_dialog_title">Enable Expert mode?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expert mode gives more control over how patches are applied, but misconfiguring settings in expert mode can result in a non-functional app</string>
     <string name="settings_advanced_strip_unused_libs">Optimize for device architecture</string>
-    <string name="settings_advanced_strip_unused_libs_description">"Skip split APK modules for unsupported CPU architectures, locales and screen densities during merge.
-For plain APKs, strips native libraries for unsupported architectures after patching"</string>
+    <string name="settings_advanced_strip_unused_libs_description">Removes unused CPU architecture libs and split APK modules</string>
 
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Bytecode processing mode</string>
@@ -483,7 +489,7 @@ For plain APKs, strips native libraries for unsupported architectures after patc
     <string name="settings_advanced_bytecode_mode_strip_fast">Fast</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">Faster patching and lower memory usage, at the cost of a larger APK. Recommended for low-RAM or older devices</string>
     <string name="settings_advanced_bytecode_mode_full">Full</string>
-    <string name="settings_advanced_bytecode_mode_full_description">Slower patching, replicates legacy behavior. Use only if fast mode causes issues</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Slower patching, replicates legacy behavior. Recommended only if fast mode causes issues</string>
 
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
@@ -504,7 +510,7 @@ For plain APKs, strips native libraries for unsupported architectures after patc
 
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">App theme colors</string>
-    <string name="settings_advanced_patch_options_theme_colors_description">Change background color</string>
+    <string name="settings_advanced_patch_options_theme_colors_description">Changes background color</string>
     <string name="settings_advanced_patch_options_dark_theme_color">Dark theme background color</string>
     <string name="settings_advanced_patch_options_light_theme_color">Light theme background color</string>
     <string name="settings_advanced_patch_options_theme_color_description">Can be a hex color (#RRGGBB) or a color resource reference</string>
@@ -515,7 +521,7 @@ For plain APKs, strips native libraries for unsupported architectures after patc
 
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">Custom branding</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">Change the app display name</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">Changes the app display name</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">App name</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Enter custom name</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Custom icon</string>
@@ -554,7 +560,7 @@ Optionally, the path contains a notification icon in one of the following format
 
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Custom header logo</string>
-    <string name="settings_advanced_patch_options_custom_header_description">Change header logo</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Changes header logo</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Folder with images to use as a custom header logo.
 
 The folder must contain one or more of the following folders, depending on the DPI of the device:
@@ -576,19 +582,19 @@ The image dimensions must be as follows:
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Hide Shorts features</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Hide Shorts app shortcut</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Remove Shorts from launcher long-press menu</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Removes Shorts from launcher long-press menu</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Hide Shorts widget</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Remove Shorts button from launcher widget</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Removes Shorts button from launcher widget</string>
 
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
     <string name="installer_title">Select installer</string>
     <string name="installer_internal_name">System installer</string>
-    <string name="installer_internal_description">Use the Android package installer</string>
+    <string name="installer_internal_description">Uses the Android package installer</string>
     <string name="installer_auto_saved_name">Rooted mount installer</string>
     <string name="installer_auto_saved_description">Mounts the patched APK over the installed app</string>
     <string name="installer_shizuku_name" translatable="false">Shizuku</string>
-    <string name="installer_shizuku_description">Install silently using Shizuku or Sui</string>
+    <string name="installer_shizuku_description">Installs silently using Shizuku or Sui</string>
     <string name="installer_option_none">No fallback</string>
     <string name="installer_none_description">No fallback installer is configured</string>
     <string name="installer_status_requires_root">Requires root access</string>
@@ -609,19 +615,17 @@ The image dimensions must be as follows:
     <string name="installer_unavailable_message">Your preferred installer (%s) is currently unavailable. You can fix the issue and retry, or use the standard installer instead</string>
     <string name="installer_unavailable_shizuku_hint">Make sure Shizuku is running and permission is granted to this app</string>
     <string name="installer_use_standard">Use standard</string>
-    <string name="settings_prompt_installer_on_install">Prompt installer on install</string>
-    <string name="settings_prompt_installer_on_install_description">Show installer selection dialog each time you install a patched app</string>
+    <string name="settings_prompt_installer_on_install">Installer selection prompt</string>
+    <string name="settings_prompt_installer_on_install_description">Shows installer selection dialog each time a patched app is installed</string>
 
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery optimization</string>
-    <string name="settings_system_battery_optimization_description">Prevents the system from stopping the patcher when Morphe is minimized</string>
-    <string name="settings_system_battery_optimization_excluded">Excluded</string>
-    <string name="settings_system_battery_optimization_not_excluded">Not excluded</string>
+    <string name="settings_system_battery_optimization_description">Keeps the patcher running when the app is minimized</string>
     <string name="settings_system_performance">Performance</string>
     <string name="settings_system_process_runtime">Process runtime</string>
-    <string name="settings_system_process_runtime_description">Run patching in separate process for better stability</string>
+    <string name="settings_system_process_runtime_description">Runs patching in a separate process for better stability</string>
     <string name="settings_system_process_runtime_memory_limit">Memory limit</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Higher memory limits can speed up patching but may not work with older devices</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Higher limits speed up patching on capable devices</string>
     <string name="settings_system_process_runtime_enable">Enable process runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memory available for patching</string>
     <string name="settings_system_memory_limit_warning">A low memory limit may cause failures when patching larger apps</string>
@@ -629,41 +633,31 @@ The image dimensions must be as follows:
     <string name="settings_system_process_runtime_disabled_description">Click to configure</string>
     <string name="settings_system_process_runtime_description_not_available">This feature requires Android 11 or greater</string>
 
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import &amp; export</string>
-    <string name="settings_system_import_keystore">Import keystore</string>
-    <string name="settings_system_import_keystore_description">Import a custom keystore</string>
+    <string name="settings_system_keystore">Keystore</string>
+    <string name="settings_system_import_keystore_description">Imports or exports your signing keystore</string>
     <string name="settings_system_import_keystore_dialog_title">Enter keystore credentials</string>
     <string name="settings_system_import_keystore_dialog_description">You\'ll need enter the keystore\'s credentials to import it</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Username (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Password</string>
-    <string name="settings_system_import_keystore_dialog_button">Import</string>
     <string name="settings_system_import_keystore_dialog_format_field">Keystore format</string>
     <string name="settings_system_import_keystore_wrong_credentials">Incorrect keystore credentials</string>
     <string name="settings_system_import_keystore_success">Keystore imported</string>
     <string name="settings_system_import_keystore_failed">Failed to import keystore</string>
-    <string name="settings_system_export_keystore">Export keystore</string>
-    <string name="settings_system_export_keystore_description">Export the current keystore</string>
     <string name="settings_system_export_keystore_unavailable">No keystore available to export</string>
     <string name="settings_system_export_keystore_success">Keystore exported</string>
     <string name="settings_system_export_keystore_failed">Failed to export keystore</string>
     <string name="settings_system_show_password_field">Show password</string>
     <string name="settings_system_hide_password_field">Hide password</string>
-
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Import Morphe settings</string>
-    <string name="settings_system_import_manager_settings_description">Restore Morphe settings from a JSON file</string>
+    <string name="settings_system_morphe_settings">Morphe settings</string>
+    <string name="settings_system_import_manager_settings_description">Backs up and restores your Morphe settings</string>
     <string name="settings_system_import_manager_settings_fail">Failed to import Morphe settings: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe settings imported</string>
-    <string name="settings_system_export_manager_settings">Export Morphe settings</string>
-    <string name="settings_system_export_manager_settings_description">Save Morphe settings to a JSON file</string>
     <string name="settings_system_export_manager_settings_fail">Failed to export Morphe settings: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe settings exported</string>
-
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Debug</string>
-    <string name="settings_system_export_debug_logs">Export debug logs</string>
-    <string name="settings_system_export_debug_logs_description">Save system logs for troubleshooting</string>
+    <string name="settings_system_export_debug_logs_description">Saves system logs for troubleshooting</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Failed to read logs (exit code %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Failed to export logs</string>
     <string name="settings_system_export_debug_logs_export_success">Logs exported</string>
@@ -675,7 +669,7 @@ The image dimensions must be as follows:
 
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patched APKs</string>
-    <string name="settings_system_patched_apks_description">Manage saved patched application files</string>
+    <string name="settings_system_patched_apks_description">Manages saved patched application files</string>
     <string name="settings_system_patched_apks_empty">No patched APKs saved yet</string>
     <string name="settings_system_patched_apks_delete_title">Delete patched APK?</string>
     <string name="settings_system_patched_apks_delete_confirm">Are you sure you want to delete the saved patched APK for %s?</string>
@@ -683,7 +677,7 @@ The image dimensions must be as follows:
 
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Original APKs</string>
-    <string name="settings_system_original_apks_description">Original APK files are saved for repatching. Only the most recent version is kept for each app</string>
+    <string name="settings_system_original_apks_description">Saved for repatching. One version per app is kept</string>
     <string name="settings_system_original_apks_empty">No original APKs stored</string>
     <string name="settings_system_original_apks_deleted">Original APK deleted successfully</string>
     <string name="settings_system_original_apks_delete_title">Delete original APK?</string>
@@ -691,7 +685,7 @@ The image dimensions must be as follows:
 
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch selections</string>
-    <string name="settings_system_patch_selections_description">Manage saved patch selections and options. These persist after app uninstallation</string>
+    <string name="settings_system_patch_selections_description">Saved patch selections, retained after uninstall</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Reset all selections?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Reset package selections?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Reset source selection?</string>
@@ -715,7 +709,7 @@ The image dimensions must be as follows:
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>
     <string name="settings_system_share_website">Share website</string>
-    <string name="settings_system_share_website_description">Share the official Morphe website</string>
+    <string name="settings_system_share_website_description">Shares the official Morphe website</string>
     <string name="settings_system_manager_description">"An open-source project for modern, streamlined patching of popular Android apps, driven by community feedback and contributions"</string>
     <string name="credits">Credits</string>
     <string name="credits_current_development">Current development</string>
@@ -754,6 +748,10 @@ The image dimensions must be as follows:
     <string name="disabled">Disabled</string>
     <string name="selected">Selected</string>
     <string name="not_selected">Not selected</string>
+    <string name="select_all">Select all</string>
+    <string name="select_all_done">All selected</string>
+    <string name="deselect_all">Deselect all</string>
+    <string name="deselect_all_done">All deselected</string>
     <string name="rename">Rename</string>
     <string name="import_">Import</string>
     <string name="export">Export</string>
@@ -774,6 +772,7 @@ The image dimensions must be as follows:
     <string name="unmount">Unmount</string>
     <string name="unmounted">Unmounted</string>
     <string name="remount">Remount</string>
+    <string name="share">Share</string>
     <string name="install">Install</string>
     <string name="installed">Installed</string>
     <string name="reinstall">Reinstall</string>

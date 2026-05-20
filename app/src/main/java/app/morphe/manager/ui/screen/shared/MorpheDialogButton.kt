@@ -18,8 +18,48 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.util.isDarkBackground
 
+/** Destructive content color for dark dialog backgrounds. */
+private val DestructiveColorDark = Color(0xFFFF6B6B)
+
+/** Destructive content color for light dialog backgrounds. */
+private val DestructiveColorLight = Color(0xFFD32F2F)
+
+/** Resolved colors for a dialog button variant. */
+private data class DialogButtonColors(
+    val containerColor: Color,
+    val contentColor: Color,
+    val borderColor: Color
+)
+
 /**
- * Semi-transparent primary button for dialogs
+ * Resolves container, content, and border colors for a dialog button.
+ *
+ * @param isDestructive Whether the button represents a destructive action.
+ * @param filled Whether the button has a filled background (true) or is outlined (false).
+ */
+@Composable
+private fun resolveButtonColors(isDestructive: Boolean, filled: Boolean): DialogButtonColors {
+    val primaryColor = MaterialTheme.colorScheme.primary
+    val textColor = LocalDialogTextColor.current
+    val isDark = !textColor.isDarkBackground()
+
+    return if (isDestructive) {
+        DialogButtonColors(
+            containerColor = if (filled) Color.Red.copy(alpha = if (isDark) 0.25f else 0.2f) else Color.Transparent,
+            contentColor = if (isDark) DestructiveColorDark else DestructiveColorLight,
+            borderColor = Color.Red.copy(alpha = if (isDark) 0.4f else 0.35f)
+        )
+    } else {
+        DialogButtonColors(
+            containerColor = if (filled) primaryColor.copy(alpha = if (isDark) 0.3f else 0.25f) else Color.Transparent,
+            contentColor = if (filled) textColor else textColor.copy(alpha = 0.85f),
+            borderColor = primaryColor.copy(alpha = if (isDark) (if (filled) 0.5f else 0.3f) else (if (filled) 0.4f else 0.25f))
+        )
+    }
+}
+
+/**
+ * Semi-transparent primary button for dialogs.
  */
 @Composable
 fun MorpheDialogButton(
@@ -30,25 +70,7 @@ fun MorpheDialogButton(
     icon: ImageVector? = null,
     isDestructive: Boolean = false
 ) {
-    val primaryColor = MaterialTheme.colorScheme.primary
-    val textColor = LocalDialogTextColor.current
-
-    val isDarkBackground = textColor.isDarkBackground()
-
-    val containerColor = when {
-        isDestructive -> Color.Red.copy(alpha = if (isDarkBackground) 0.25f else 0.2f)
-        else -> primaryColor.copy(alpha = if (isDarkBackground) 0.3f else 0.25f)
-    }
-
-    val contentColor = when {
-        isDestructive -> if (isDarkBackground) Color(0xFFFF6B6B) else Color(0xFFD32F2F)
-        else -> textColor
-    }
-
-    val borderColor = when {
-        isDestructive -> Color.Red.copy(alpha = if (isDarkBackground) 0.4f else 0.35f)
-        else -> primaryColor.copy(alpha = if (isDarkBackground) 0.5f else 0.4f)
-    }
+    val colors = resolveButtonColors(isDestructive, filled = true)
 
     Button(
         onClick = onClick,
@@ -56,12 +78,12 @@ fun MorpheDialogButton(
         enabled = enabled,
         shape = RoundedCornerShape(16.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = containerColor.copy(alpha = 0.5f),
-            disabledContentColor = contentColor.copy(alpha = 0.5f)
+            containerColor = colors.containerColor,
+            contentColor = colors.contentColor,
+            disabledContainerColor = colors.containerColor.copy(alpha = 0.5f),
+            disabledContentColor = colors.contentColor.copy(alpha = 0.5f)
         ),
-        border = BorderStroke(1.dp, borderColor),
+        border = BorderStroke(1.dp, colors.borderColor),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 14.dp)
     ) {
         if (icon != null) {
@@ -82,7 +104,7 @@ fun MorpheDialogButton(
 }
 
 /**
- * Semi-transparent outlined button for dialogs
+ * Semi-transparent outlined button for dialogs.
  */
 @Composable
 fun MorpheDialogOutlinedButton(
@@ -93,20 +115,7 @@ fun MorpheDialogOutlinedButton(
     icon: ImageVector? = null,
     isDestructive: Boolean = false
 ) {
-    val primaryColor = MaterialTheme.colorScheme.primary
-    val textColor = LocalDialogTextColor.current
-
-    val isDarkBackground = textColor.isDarkBackground()
-
-    val borderColor = when {
-        isDestructive -> Color.Red.copy(alpha = if (isDarkBackground) 0.35f else 0.3f)
-        else -> primaryColor.copy(alpha = if (isDarkBackground) 0.3f else 0.25f)
-    }
-
-    val contentColor = when {
-        isDestructive -> if (isDarkBackground) Color(0xFFFF6B6B) else Color(0xFFD32F2F)
-        else -> textColor.copy(alpha = 0.85f)
-    }
+    val colors = resolveButtonColors(isDestructive, filled = false)
 
     OutlinedButton(
         onClick = onClick,
@@ -115,11 +124,11 @@ fun MorpheDialogOutlinedButton(
         shape = RoundedCornerShape(16.dp),
         colors = ButtonDefaults.outlinedButtonColors(
             containerColor = Color.Transparent,
-            contentColor = contentColor,
+            contentColor = colors.contentColor,
             disabledContainerColor = Color.Transparent,
-            disabledContentColor = contentColor.copy(alpha = 0.4f)
+            disabledContentColor = colors.contentColor.copy(alpha = 0.4f)
         ),
-        border = BorderStroke(1.dp, borderColor),
+        border = BorderStroke(1.dp, colors.borderColor),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 14.dp)
     ) {
         if (icon != null) {
@@ -140,26 +149,24 @@ fun MorpheDialogOutlinedButton(
 }
 
 /**
- * Layout mode for dialog button rows
+ * Layout mode for dialog button rows.
  */
 enum class DialogButtonLayout {
-    /** Buttons side by side - use for short text like OK/Cancel */
+    /** Buttons side by side - use for short text like OK/Cancel. */
     Horizontal,
 
-    /** Buttons stacked vertically - use for longer text or equal-weight choices */
+    /** Buttons stacked vertically - use for longer text or equal-weight choices. */
     Vertical,
 
-    /** Auto-detect based on text length (default) */
+    /** Auto-detect based on text length; switches to vertical if combined text exceeds 30 chars. */
     Auto
 }
 
 /**
- * Two buttons layout - adapts based on content
+ * Two-button row that adapts its layout based on content length.
  *
- * @param layout Force specific layout or use Auto to detect
- * - Horizontal: short text like "OK" / "Cancel"
- * - Vertical: longer text or two equal choices like "Yes, I have APK" / "No, need to download"
- * - Auto: switches to vertical if combined text > 30 chars
+ * @param layout Override layout direction. [DialogButtonLayout.Auto] switches to vertical
+ * when combined text exceeds 30 chars or either label exceeds 18 chars.
  */
 @Composable
 fun MorpheDialogButtonRow(
@@ -190,7 +197,7 @@ fun MorpheDialogButtonRow(
         // Vertical layout - primary on top
         Column(
             modifier = modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding / 2)
         ) {
             MorpheDialogButton(
                 text = primaryText,
@@ -223,7 +230,7 @@ fun MorpheDialogButtonRow(
         // Horizontal layout
         Row(
             modifier = modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
         ) {
             if (secondaryText != null && onSecondaryClick != null) {
                 if (isSecondaryPrimary) {
@@ -256,7 +263,7 @@ fun MorpheDialogButtonRow(
 }
 
 /**
- * Column of buttons - for more than 2 buttons
+ * Vertically stacked button group for dialogs with more than two actions.
  */
 @Composable
 fun MorpheDialogButtonColumn(
@@ -265,7 +272,7 @@ fun MorpheDialogButtonColumn(
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding / 2),
         horizontalAlignment = Alignment.CenterHorizontally,
         content = content
     )

@@ -27,7 +27,7 @@ class Session(
     private val androidContext: Context,
     private val logger: Logger,
     private val input: File,
-    private val onPatchCompleted: suspend () -> Unit,
+    private val onPatchCompleted: suspend (String) -> Unit,
     private val onProgress: (name: String?, state: State?, message: String?) -> Unit,
     bytecodeMode: BytecodeMode = BytecodeMode.STRIP_FAST,
 ) : Closeable {
@@ -62,7 +62,7 @@ class Session(
                 throw exception
             }
 
-            onPatchCompleted()
+            onPatchCompleted(patch.name.orEmpty())
 
             logger.info("${patch.name} succeeded")
         }

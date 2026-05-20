@@ -5,15 +5,11 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -21,7 +17,6 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
 
 /**
  * Dialog to show a message with a clickable link.
@@ -39,6 +34,7 @@ fun MorpheDialogWithLinks(
     onDismiss: () -> Unit
 ) {
     val uriHandler = LocalUriHandler.current
+    val linkColor = MaterialTheme.colorScheme.primary
 
     val annotatedMessage = buildAnnotatedString {
         val linkMatch = Regex("""\S+\.\S+""").find(message)
@@ -56,7 +52,7 @@ fun MorpheDialogWithLinks(
         pushStringAnnotation(tag = "URL", annotation = urlLink)
         withStyle(
             style = SpanStyle(
-                color = Color(0xFF3B82F6),
+                color = linkColor,
                 fontWeight = FontWeight.Bold,
                 textDecoration = TextDecoration.Underline
             )
@@ -79,25 +75,19 @@ fun MorpheDialogWithLinks(
             )
         }
     ) {
-        Column(
+        @Suppress("DEPRECATION")
+        ClickableText(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            @Suppress("DEPRECATION")
-            ClickableText(
-                modifier = Modifier.fillMaxWidth(),
-                text = annotatedMessage,
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    color = LocalDialogSecondaryTextColor.current
-                ),
-                onClick = { offset ->
-                    annotatedMessage
-                        .getStringAnnotations("URL", offset, offset)
-                        .firstOrNull()
-                        ?.let { uriHandler.openUri(it.item) }
-                }
-            )
-        }
+            text = annotatedMessage,
+            style = MaterialTheme.typography.bodyLarge.copy(
+                color = LocalDialogSecondaryTextColor.current
+            ),
+            onClick = { offset ->
+                annotatedMessage
+                    .getStringAnnotations("URL", offset, offset)
+                    .firstOrNull()
+                    ?.let { uriHandler.openUri(it.item) }
+            }
+        )
     }
 }

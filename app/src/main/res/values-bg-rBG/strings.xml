@@ -58,15 +58,18 @@
     <string name="sources_management_title">Източници за поправки</string>
     <string name="sources_management_open_in_browser">Отваряне в браузър</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отваряне на URL</string>
-    <string name="sources_management_prerelease_toggle">Използвайте предварителни пакети</string>
-    <string name="sources_management_prerelease_toggle_description">Получайте достъп преди други до нови експериментални версии на пакети</string>
-    <string name="sources_management_experimental_versions_toggle">Използвайте експериментални версии на приложения</string>
-    <string name="sources_management_experimental_versions_toggle_description">Поправяйте експериментални цели за приложения, ако са налични</string>
+    <string name="sources_management_prerelease_toggle">Предварителни пачове</string>
+    <string name="sources_management_prerelease_toggle_description">Получава ранен достъп до нови експериментални версии на пачове</string>
+    <string name="sources_management_experimental_versions_toggle">Експериментални версии на приложението</string>
+    <string name="sources_management_experimental_versions_toggle_description">Пачове експериментални цели на приложението, ако са налични</string>
     <string name="sources_management_already_exists">Този източник вече е добавен</string>
     <string name="sources_management_invalid_url">Невалиден URL адрес на източника. Моля, проверете адреса и опитайте отново</string>
     <string name="sources_management_metadata_unavailable">Метаданни не са налични</string>
     <string name="sources_management_metadata_unavailable_hint">Дистанционният метаданнен файл не е достъпен. Патчването с инсталирания пакет все още работи, но автоматичното обновяване е деактивирано за този източник</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Пакетът за корекции не може да бъде свален. URL адресът на източника може да е неверен или файлът не съществува</string>
+    <string name="sources_management_source_enabled">Източникът е активиран</string>
+    <string name="sources_management_source_disabled">Източникът е деактивиран</string>
+    <string name="sources_management_source_updating">Актуализиране на източник</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Име на диалога</string>
     <string name="sources_dialog_rename">Преименуване на източник</string>
@@ -138,9 +141,13 @@
     <string name="expert_mode_search">Търсене на пачове</string>
     <string name="expert_mode_proceed">Продължете към поправянето</string>
     <string name="expert_mode_disable_all">Изключи всички</string>
+    <string name="expert_mode_disable_all_done">Всички корекции са деактивирани</string>
     <string name="expert_mode_enable_all">Включи всички</string>
+    <string name="expert_mode_enable_all_done">Всички корекции са активирани</string>
     <string name="expert_mode_reset_to_default">Активиране на препоръчаните поправки</string>
+    <string name="expert_mode_reset_to_default_done">Приложени са препоръчителните корекции</string>
     <string name="expert_mode_restore_saved">Възстановяване на запазения избор</string>
+    <string name="expert_mode_restore_saved_done">Възстановената запазена селекция</string>
     <string name="expert_mode_no_results">Няма намерени пачове</string>
     <string name="expert_mode_universal_patches">Универсални пачове</string>
     <string name="expert_mode_new_patches">Нов</string>
@@ -246,9 +253,9 @@
     <string name="root_pre_patch_installer_title">Изберете метод на инсталиране</string>
     <string name="root_pre_patch_installer_description">Устройството има достъп до корен. Изберете как да инсталирате патчираната приложението</string>
     <string name="root_pre_patch_installer_mount_title">Монтиране на корен</string>
-    <string name="root_pre_patch_installer_mount_description">Монтиране на патчиран APK над стоковата приложение. Не е нужна GmsCore</string>
+    <string name="root_pre_patch_installer_mount_description">Монтира патчана APK над инсталираното приложение (нужен root)</string>
     <string name="root_pre_patch_installer_standard_title">Стандартно инсталиране</string>
-    <string name="root_pre_patch_installer_standard_description">Инсталиране като отделно приложение с поддръжка на GmsCore. Изберете инсталатор (Системен инсталатор, Shizuku, и т.н.) след патчирането</string>
+    <string name="root_pre_patch_installer_standard_description">Инсталира се като отделно приложение с поддръжка на GmsCore. Инсталатор може да бъде избран след прилагането на пача.</string>
     <string name="root_pre_patch_installer_hint">Начинът на инсталиране определя коя патч е включен и не може да се промени след патчирането</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Грешка е копирана в клипборда</string>
@@ -379,7 +386,7 @@
     <string name="settings_appearance_dynamic">Материал Ю</string>
     <string name="settings_appearance_accent_color">Цвят на акцент</string>
     <string name="settings_appearance_pure_black">Натурално черно</string>
-    <string name="settings_appearance_pure_black_description">Използвайте истински черни фона</string>
+    <string name="settings_appearance_pure_black_description">Използва истински черни фонове</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Език на приложението</string>
     <string name="settings_appearance_app_language_current">Текущият език</string>
@@ -402,13 +409,13 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Промяна на икона</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Актуализации</string>
-    <string name="settings_advanced_updates_use_prereleases">Използвайте предварителна версия на Morphe</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Получете ранeн достъп до нови функции на Morphe. За да получавате предварителни версии на корекции, активирайте превключвателя за предварителни версии във всеки източник на корекции поотделно</string>
-    <string name="settings_advanced_updates_allow_metered">Обновяване по мобилен интернет</string>
-    <string name="settings_advanced_updates_allow_metered_description">Разрешете на Morphe и актуализациите на корекциите да изтеглят през мобилни данни</string>
+    <string name="settings_advanced_updates_use_prereleases">Предварителни версии</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Ранен достъп до нови версии на приложението Morphe. Активирайте предварителни версии за всеки източник в източниците на пачове.</string>
+    <string name="settings_advanced_updates_allow_metered">Актуализации през мобилни данни</string>
+    <string name="settings_advanced_updates_allow_metered_description">Позволява на Morphe и актуализациите на пачове да се изтеглят през мобилни данни.</string>
     <string name="settings_advanced_updates_background_notifications">Обновления в фона</string>
     <string name="settings_advanced_updates_background_notifications_description">Периодично проверете наличието на актуализации в фона и известите при наличност.</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">Получете моментални уведомления за нови версии, дори когато приложението е затворено</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Push известия за нови версии, дори когато приложението е затворено</string>
     <string name="settings_advanced_update_interval">Честота на проверка</string>
     <string name="settings_advanced_update_interval_dialog_title">Проверка за актуализации</string>
     <string name="settings_advanced_update_interval_hourly">Един път на час</string>
@@ -432,12 +439,11 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Настройки за експерти</string>
     <string name="settings_advanced_expert_mode">Режим за експерти</string>
-    <string name="settings_advanced_expert_mode_description">Включете сложни настройки за патчове и опции за personnalization на Morphe</string>
+    <string name="settings_advanced_expert_mode_description">Активира сложните настройки за прилагане на пачове на Morphe и опции за персонализиране.</string>
     <string name="settings_advanced_expert_mode_dialog_title">Включете експерт режим?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Експертният режим дава повече контрол над прилагането на патчове, но грешно конфигуриране на настройките в експертния режим може да доведе до неработеща приложение</string>
     <string name="settings_advanced_strip_unused_libs">Оптимизиране за архитектурата на устройството</string>
-    <string name="settings_advanced_strip_unused_libs_description">"Пропускане на разделени APK модули за неподдържани CPU архитектури, езици и резолюции на екрана по време на сливане.
-За обикновени APK, премахва native библиотеки за неподдържани архитектури след поправяне"</string>
+    <string name="settings_advanced_strip_unused_libs_description">Премахва неизползваните библиотеки на CPU архитектурата и разделени APK модули.</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Режим на обработка на bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Контролира как bytecode се обработва по време на поправяне. Влияе върху скоростта на поправяне, използването на памет и размера на изходния APK</string>
@@ -445,7 +451,7 @@
     <string name="settings_advanced_bytecode_mode_strip_fast">Бързо</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">По-бързо поправяне и по-ниска консумация на памет, но с по-голям APK файл. Препоръчително за устройства с малко RAM или по-стари устройства</string>
     <string name="settings_advanced_bytecode_mode_full">Пълен</string>
-    <string name="settings_advanced_bytecode_mode_full_description">По-бавно поправяне, възпроизвежда legacy поведение. Използвайте само ако режимът бързо причинява проблеми</string>
+    <string name="settings_advanced_bytecode_mode_full_description">По-бавно прилагане на пачове, възпроизвежда старо поведение. Препоръчва се само ако бързият режим причинява проблеми.</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Токен за достъп до GitHub</string>
     <string name="settings_advanced_github_pat_description">Треба за източници на заявка за изтегляне</string>
@@ -463,7 +469,7 @@
     <string name="settings_advanced_patch_options_expert_mode_notice">В режима за експерти опциите за замести ще бъдат налични по време на заместителния процес</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">Цветове на темата на приложението</string>
-    <string name="settings_advanced_patch_options_theme_colors_description">Промяна на фоновия цвят</string>
+    <string name="settings_advanced_patch_options_theme_colors_description">Променя цвета на фона</string>
     <string name="settings_advanced_patch_options_dark_theme_color">Цвят на темната тема</string>
     <string name="settings_advanced_patch_options_light_theme_color">Цвят на светлата тема</string>
     <string name="settings_advanced_patch_options_theme_color_description">Може да бъде хекс цвят (#RRGGBB) или референция към цвят от ресурса.</string>
@@ -473,7 +479,7 @@
     <string name="settings_advanced_patch_options_no_available">Няма налични опции за замести</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">Настройки за брандиране</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">Промяна на името на приложението</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">Променя името на приложението</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Име на приложението</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Въведете име</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Настройки за брандиране</string>
@@ -511,7 +517,7 @@ morphe_adaptive_monochrome_custom.xml
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Настройки за брандиране</string>
-    <string name="settings_advanced_patch_options_custom_header_description">Промяна на логото на заглавката</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Променя логото на заглавката</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Папка с изображения за използване като лого на заглавката.
 
 Папката трябва да съдържа една или повече от следните папки, в зависимост от DPI на устройството:
@@ -532,17 +538,17 @@ morphe_header_custom_dark.png
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Скриване на функции за къси видеоклипове</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Скриване на иконата на къси видеоклипове</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Изтриване на къси видеоклипове от менюто за дълбоко натискане</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Премахва Shorts от контекстното меню за дълго натискане на стартовия екран.</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Скриване на виждет на къси видеоклипове</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Изтриване на бутона за къси видеоклипове от виждет</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Премахва бутона Shorts от уиджета на стартовия екран.</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Инсталатор</string>
     <string name="installer_title">Изберете инсталатор.</string>
     <string name="installer_internal_name">Системен инсталатор</string>
-    <string name="installer_internal_description">Използвай инсталатора на Android пакети</string>
+    <string name="installer_internal_description">Използва Android инсталатора на пакети</string>
     <string name="installer_auto_saved_name">Автоматично запазен инсталатор</string>
     <string name="installer_auto_saved_description">Монтира патчана APK над инсталираната приложение</string>
-    <string name="installer_shizuku_description">Инсталирайте в тих начин използвайки Shizuku или Sui.</string>
+    <string name="installer_shizuku_description">Инсталира се тихо, използвайки Shizuku или Sui</string>
     <string name="installer_option_none">Без резервен</string>
     <string name="installer_none_description">Не е конфигуриран резервен инсталатор</string>
     <string name="installer_status_requires_root">Изисква root достъп</string>
@@ -563,57 +569,47 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_message">Предпочитаното ви инсталатор (%s) е временно недостъпно. Можете да поправите проблема и опитайте отново или използвайте стандартния инсталатор вместо него.</string>
     <string name="installer_unavailable_shizuku_hint">Уверете се, че Shizuku е стартиран и разрешението е предоставето на това приложение.</string>
     <string name="installer_use_standard">Използвайте стандартен</string>
-    <string name="settings_prompt_installer_on_install">Покажете диалог за избор на инсталатор при всяко инсталиране на патчирано приложение.</string>
-    <string name="settings_prompt_installer_on_install_description">Покажете диалог за избор на инсталатор при всяко инсталиране на патчирано приложение.</string>
+    <string name="settings_prompt_installer_on_install">Показва се прозорец за избор на инсталатор</string>
+    <string name="settings_prompt_installer_on_install_description">Показва диалогов прозорец за избор на инсталатор всеки път, когато се инсталира приложение с пач.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизация на батерията</string>
-    <string name="settings_system_battery_optimization_description">Предотвратява спирането на пачера от системата, когато Morphe е минимизиран.</string>
-    <string name="settings_system_battery_optimization_excluded">Изключено</string>
-    <string name="settings_system_battery_optimization_not_excluded">Не е изключено</string>
+    <string name="settings_system_battery_optimization_description">Поддържа работещ патчър, когато приложението е минимизирано</string>
     <string name="settings_system_performance">Перформанс</string>
     <string name="settings_system_process_runtime">Време на изпълнение</string>
-    <string name="settings_system_process_runtime_description">Изпълзване на различни процеси за по-добро стабилност</string>
+    <string name="settings_system_process_runtime_description">Изпълнява прилагането на пачове в отделен процес за по-добра стабилност.</string>
     <string name="settings_system_process_runtime_memory_limit">Ограничение на памет</string>
-    <string name="settings_system_process_runtime_memory_limit_description">По-високи ограничения на памет могат да ускорят заместителния процес, но може да не работят на по-старите устройства</string>
+    <string name="settings_system_process_runtime_memory_limit_description">По-високите лимити ускоряват прилагането на пачове на съвместими устройства.</string>
     <string name="settings_system_process_runtime_enable">Включване на изпълнение на различни процеси</string>
     <string name="settings_system_memory_limit_subtitle">Памет, достъпен за заместителния процес</string>
     <string name="settings_system_memory_limit_warning">Нисък памет може да доведе до неуспехи при заместителния на по-големи приложения</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Натиснете за конфигуриране</string>
     <string name="settings_system_process_runtime_description_not_available">Това функционално възможност изисква Android 11 или по-нова версия.</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Импорт и износ</string>
-    <string name="settings_system_import_keystore">Импортиране на ключовата запазна книга</string>
-    <string name="settings_system_import_keystore_description">Импортиране на ключовата запазна книга</string>
+    <string name="settings_system_keystore">Ключов магазин</string>
+    <string name="settings_system_import_keystore_description">Импортира или експортира вашия ключ за цифрово подписване</string>
     <string name="settings_system_import_keystore_dialog_title">Въвеждане на данни за ключовата запазна книга</string>
     <string name="settings_system_import_keystore_dialog_description">Трябва да въведете данните за keystore, за да го импортирате</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Име на потребител (Алиас)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Парола</string>
-    <string name="settings_system_import_keystore_dialog_button">Импортиране</string>
     <string name="settings_system_import_keystore_dialog_format_field">Формат на хранилището</string>
     <string name="settings_system_import_keystore_wrong_credentials">Невалидни данни за ключовата запазна книга</string>
     <string name="settings_system_import_keystore_success">Ключовата запазна книга е импортирана</string>
     <string name="settings_system_import_keystore_failed">Неуспешно импортиране на ключовата запазна книга</string>
-    <string name="settings_system_export_keystore">Извеждане на ключова запазна книга</string>
-    <string name="settings_system_export_keystore_description">Износ на текущата ключова запазна книга</string>
     <string name="settings_system_export_keystore_unavailable">Няма налична ключова запазна книга за износ</string>
     <string name="settings_system_export_keystore_success">Ключовата запазна книга е изнесена</string>
     <string name="settings_system_export_keystore_failed">Неуспешен експорт на хранилище на ключове</string>
     <string name="settings_system_show_password_field">Показване на парола</string>
     <string name="settings_system_hide_password_field">Скриване на парола</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Импортиране на настройките на Morphe</string>
-    <string name="settings_system_import_manager_settings_description">Възстановете настройките на Morphe от JSON файл</string>
+    <string name="settings_system_morphe_settings">Настройки на Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Създава резервно копие и възстановява настройките на Morphe.</string>
     <string name="settings_system_import_manager_settings_fail">Неуспешно импортиране на настройките на Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Настройките на Morphe са импортирани</string>
-    <string name="settings_system_export_manager_settings">Експортиране на настройките на Morphe</string>
-    <string name="settings_system_export_manager_settings_description">Запазете настройките на Morphe в JSON файл</string>
     <string name="settings_system_export_manager_settings_fail">Неуспешно експортиране на настройките на Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Настройките на Morphe са експортирани</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Отлад</string>
-    <string name="settings_system_export_debug_logs">Експортиране на логове за отстраняване на грешки</string>
-    <string name="settings_system_export_debug_logs_description">Запазете системни логове за отстраняване на грешки</string>
+    <string name="settings_system_export_debug_logs_description">Записва системни логове за отстраняване на грешки</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Неуспешно четене на логове (код за изход %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Неуспешно експортиране на логове</string>
     <string name="settings_system_export_debug_logs_export_success">Логовете са експортирани</string>
@@ -622,21 +618,21 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_size">Общ размер: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Променени APK</string>
-    <string name="settings_system_patched_apks_description">Управление на запазените променени файлове от приложенията</string>
+    <string name="settings_system_patched_apks_description">Управлява запазените файлове на приложения с пач</string>
     <string name="settings_system_patched_apks_empty">Все още няма запазени променени APK</string>
     <string name="settings_system_patched_apks_delete_title">Изтриване на променен APK?</string>
     <string name="settings_system_patched_apks_delete_confirm">Сигурни ли сте, че искате да изтриете запазения променен APK за %s?</string>
     <string name="settings_system_patched_apks_deleted">Промененият APK е изтрит успешно</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Оригинални APK</string>
-    <string name="settings_system_original_apks_description">Оригиналните APK файлове се съхраняват за повторно патчиране. Само най-новите версии се пазят за всеки апликации</string>
+    <string name="settings_system_original_apks_description">Запазени за повторно прилагане на пачове. Запазва се една версия за всяко приложение.</string>
     <string name="settings_system_original_apks_empty">Няма запазени оригинални APK</string>
     <string name="settings_system_original_apks_deleted">Оригиналният APK е изтрит успешно</string>
     <string name="settings_system_original_apks_delete_title">Изтриване на оригиналния APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Изтриване на оригиналния APK за %s? Не ще можете да поправите без да предоставите нов APK</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Избрани поправки</string>
-    <string name="settings_system_patch_selections_description">Управление на запазените избори за поправка и опции. Тези данни се запазват след деинсталиране на приложението</string>
+    <string name="settings_system_patch_selections_description">Запазени селекции на пачове, запазени след деинсталиране</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Изтриване на всички избрани? </string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Изтриване на избраните пакети? </string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Изтриване на избрания източник? </string>
@@ -659,7 +655,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Относно</string>
     <string name="settings_system_share_website">Споделяне на уебсайт</string>
-    <string name="settings_system_share_website_description">Сподели официалния уебсайт на Morphe</string>
+    <string name="settings_system_share_website_description">Споделя официалния уебсайт на Morphe</string>
     <string name="settings_system_manager_description">"Отворен проект с изходен код за модерен, оптимизиран процес на поправяне на популярни Android приложения, поддържан от обратна връзка и приноси от общността"</string>
     <string name="credits">Кредити</string>
     <string name="credits_current_development">Текущо развитие</string>
@@ -696,6 +692,10 @@ morphe_header_custom_dark.png
     <string name="disabled">Изключен</string>
     <string name="selected">Избран</string>
     <string name="not_selected">Не е избран</string>
+    <string name="select_all">Избери всички</string>
+    <string name="select_all_done">Всички избрани</string>
+    <string name="deselect_all">Отмени избраното</string>
+    <string name="deselect_all_done">Всички са отменени</string>
     <string name="rename">Преименуване</string>
     <string name="import_">Импортиране</string>
     <string name="export">Изтриване на запазена копия</string>
@@ -716,6 +716,7 @@ morphe_header_custom_dark.png
     <string name="unmount">B342 M542</string>
     <string name="unmounted">Размонтирано</string>
     <string name="remount">Повторно монтиране</string>
+    <string name="share">Споделяне</string>
     <string name="install">Инсталиране</string>
     <string name="installed">Инсталирано</string>
     <string name="reinstall">Изтриване на запазеното приложение</string>

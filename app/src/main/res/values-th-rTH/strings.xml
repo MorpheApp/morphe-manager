@@ -58,7 +58,7 @@
     <string name="sources_management_title">จัดการแหล่งที่มา</string>
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
-    <string name="sources_management_prerelease_toggle">ใช้แพทช์ก่อนปล่อยอย่างทางการ</string>
+    <string name="sources_management_prerelease_toggle">แพตช์ก่อนเปิดตัว</string>
     <string name="sources_management_prerelease_toggle_description">รับสิทธิ์เข้าถึงแพทช์ใหม่เวอร์ชันทดลองแต่เนิ่นๆ</string>
     <string name="sources_management_experimental_versions_toggle">ใช้แอปเวอร์ชันทดลอง</string>
     <string name="sources_management_experimental_versions_toggle_description">แพตซ์แอปเวอร์ชันทดลองของเป้าหมาย ถ้ามี</string>
@@ -67,6 +67,9 @@
     <string name="sources_management_metadata_unavailable">ไม่มีข้อมูล Metadata</string>
     <string name="sources_management_metadata_unavailable_hint">ไฟล์ Metadata ระยะไกลไม่พร้อมใช้งาน การแก้ไขด้วยชุดติดตั้งที่มีอยู่ยังคงทำงานได้ แต่การอัปเดตอัตโนมัติถูกปิดใช้งานสำหรับแหล่งที่มานี้</string>
     <string name="sources_management_metadata_unavailable_hint_missing">ไม่สามารถดาวน์โหลดชุดแก้ไขได้ URL แหล่งที่มาอาจไม่ถูกต้อง หรือไฟล์ไม่มีอยู่</string>
+    <string name="sources_management_source_enabled">แหล่งที่มาเปิดใช้งานแล้ว</string>
+    <string name="sources_management_source_disabled">แหล่งที่มาปิดใช้งานแล้ว</string>
+    <string name="sources_management_source_updating">กำลังอัปเดตแหล่งที่มา</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
     <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งที่มา</string>
@@ -138,9 +141,13 @@
     <string name="expert_mode_search">ค้นหาแพตซ์</string>
     <string name="expert_mode_proceed">ดำเนินการต่อไปยังการแพตซ์</string>
     <string name="expert_mode_disable_all">ปิดการใช้งานทั้งหมด</string>
+    <string name="expert_mode_disable_all_done">ปิดการใช้งานแพตช์ทั้งหมดแล้ว</string>
     <string name="expert_mode_enable_all">เปิดการแพตซ์ทั้งหมด</string>
+    <string name="expert_mode_enable_all_done">เปิดใช้งานแพตช์ทั้งหมดแล้ว</string>
     <string name="expert_mode_reset_to_default">เปิดใช้งานแพตช์ที่แนะนำ</string>
+    <string name="expert_mode_reset_to_default_done">ใช้แพตช์ที่แนะนำแล้ว</string>
     <string name="expert_mode_restore_saved">คืนการเลือกที่บันทึกไว้</string>
+    <string name="expert_mode_restore_saved_done">การเลือกที่บันทึกไว้ได้รับการกู้คืนแล้ว</string>
     <string name="expert_mode_no_results">ไม่พบแพตซ์</string>
     <string name="expert_mode_universal_patches">แพตช์สากล</string>
     <string name="expert_mode_new_patches">ใหม่</string>
@@ -246,9 +253,9 @@
     <string name="root_pre_patch_installer_title">เลือกวิธีการติดตั้ง</string>
     <string name="root_pre_patch_installer_description">อุปกรณ์ของคุณมีสิทธิ์รูท. เลือกวิธีที่คุณต้องการติดตั้งแอปพลิเคชันที่แก้ไขแล้ว</string>
     <string name="root_pre_patch_installer_mount_title">Root Mount</string>
-    <string name="root_pre_patch_installer_mount_description">ติดตั้ง APK แก้ไขเหนือแอปพลิเคชันสต็อก. ไม่จำเป็นต้องมี GmsCore</string>
+    <string name="root_pre_patch_installer_mount_description">เมานต์ APK ที่แพตช์แล้วทับแอปเดิม ไม่จำเป็นต้องใช้ GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">ติดตั้งแบบมาตรฐาน</string>
-    <string name="root_pre_patch_installer_standard_description">ติดตั้งเป็นแอปพลิเคชันแยกต่างหากกับการสนับสนุน GmsCore. เลือกตัวติดตั้ง (ตัวติดตั้งระบบ, Shizuku, ฯลฯ) หลังจากแก้ไข</string>
+    <string name="root_pre_patch_installer_standard_description">ติดตั้งเป็นแอปพลิเคชันแยกต่างหากที่รองรับ GmsCore สามารถเลือกตัวติดตั้งได้หลังจากแพตช์แล้ว</string>
     <string name="root_pre_patch_installer_hint">วิธีการติดตั้งกำหนดว่าประเภทไหนของการแก้ไขจะรวมอยู่และไม่สามารถเปลี่ยนได้หลังจากแก้ไขแล้ว</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
@@ -379,7 +386,7 @@
     <string name="settings_appearance_dynamic">สีเส้น</string>
     <string name="settings_appearance_accent_color">สีโฆษณา</string>
     <string name="settings_appearance_pure_black">ดำสีบริสุทธิ์</string>
-    <string name="settings_appearance_pure_black_description">ใช้พื้นหลังสีดำจริง</string>
+    <string name="settings_appearance_pure_black_description">ใช้พื้นหลังสีดำสนิท</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">ภาษาของแอป</string>
     <string name="settings_appearance_app_language_current">ภาษาที่ใช้อยู่</string>
@@ -402,13 +409,13 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">เปลี่ยนไอสัญ</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">อัปเดต</string>
-    <string name="settings_advanced_updates_use_prereleases">ใช้ Morphe รุ่นทดลองก่อนเปิดตัว</string>
-    <string name="settings_advanced_updates_use_prereleases_description">รับสิทธิพิเศษในการเข้าถึงคุณสมบัติใหม่ๆ ของ Morphe ก่อนใคร เพื่อรับแพตช์รุ่นทดลอง ให้เปิดใช้งานตัวเลือกทดลองก่อนในแต่ละแหล่งที่มาของแพตช์</string>
-    <string name="settings_advanced_updates_allow_metered">อัปเดตบนข้อมูลเคลื่อนที่</string>
-    <string name="settings_advanced_updates_allow_metered_description">อนุญาตให้ Morphe และอัปเดตแพตช์ดาวน์โหลดผ่านข้อมูลมือถือ</string>
+    <string name="settings_advanced_updates_use_prereleases">อัปเดตแบบพรีรีลีส</string>
+    <string name="settings_advanced_updates_use_prereleases_description">เข้าถึงแอป Morphe เวอร์ชันใหม่ก่อนใคร เปิดใช้งานพรีรีลีสตามแหล่งที่มาในแหล่งแพตช์</string>
+    <string name="settings_advanced_updates_allow_metered">อัปเดตข้อมูลมือถือ</string>
+    <string name="settings_advanced_updates_allow_metered_description">อนุญาตให้ Morphe และการอัปเดตแพตช์ดาวน์โหลดผ่านข้อมูลมือถือได้</string>
     <string name="settings_advanced_updates_background_notifications">การแจ้งเตือนอัปเดตพื้นหลัง</string>
     <string name="settings_advanced_updates_background_notifications_description">ตรวจสอบการอัปเดตในพื้นหลังตามเวลาที่กำหนดและแจ้งให้ทราบเมื่อมีการอัปเดตใหม่</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">รับการแจ้งเตือนข้อความทันทีสำหรับการปล่อยใหม่ ๆ แม้แต่เมื่อแอปปิดอยู่</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">รับการแจ้งเตือนแบบพุชสำหรับการเปิดตัวใหม่ๆ แม้ว่าแอปจะถูกปิดไว้</string>
     <string name="settings_advanced_update_interval">ความถี่การตรวจสอบ</string>
     <string name="settings_advanced_update_interval_dialog_title">ตรวจสอบการอัปเดต</string>
     <string name="settings_advanced_update_interval_hourly">ทุกชั่วโมง</string>
@@ -432,12 +439,11 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">การตั้งค่าแบบผู้เชี่ยวช์</string>
     <string name="settings_advanced_expert_mode">โหมดเชี่ยวชาญ</string>
-    <string name="settings_advanced_expert_mode_description">เปิดใช้งานการปรับแต่งตัวเลือกและการตั้งค่าความละเอียดสูงสำหรับการปรับปรุง Morphe</string>
+    <string name="settings_advanced_expert_mode_description">เปิดใช้งานการตั้งค่าการแพตช์และการปรับแต่งขั้นสูงของ Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">เปิดใช้งานโหมดเชี่ยวชาญ?</string>
     <string name="settings_advanced_expert_mode_dialog_message">โหมดเชี่ยวชาญให้ควบคุมการนำเข้าแปลงมากขึ้น แต่การตั้งค่าค่าไม่ถูกต้องในโหมดเชี่ยวชาญอาจทำให้แอปพลิเคชันไม่สามารถใช้งานได้</string>
     <string name="settings_advanced_strip_unused_libs">ปรับประสิทธิภาพสำหรับสถาปัตยกรรมของอุปกรณ์</string>
-    <string name="settings_advanced_strip_unused_libs_description">"ข้ามโมดูล APK แบบแยกส่วนสำหรับสถาปัตยกรรม, ภาษา และความหนาแน่นของหน้าจอที่ไม่รองรับในระหว่างการรวม
-สำหรับ APK แบบปกติ ให้ลบไลบรารีเนทีฟสำหรับสถาปัตยกรรมที่ไม่รองรับหลังจากแก้ไข"</string>
+    <string name="settings_advanced_strip_unused_libs_description">ลบไลบรารีสถาปัตยกรรม CPU ที่ไม่ได้ใช้งานและโมดูล APK ที่แยกออก</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">โหมดการประมวลผลไบต์โค้ด</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">ควบคุมวิธีการประมวลผลไบต์โค้ดในระหว่างการแก้ไขแพตช์ มีผลต่อความเร็วในการแก้ไข การใช้หน่วยความจำ และขนาด APK ที่ได้</string>
@@ -445,7 +451,7 @@
     <string name="settings_advanced_bytecode_mode_strip_fast">เร็ว</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">การปรับปรุงแพตช์ที่เร็วขึ้นและการใช้หน่วยความจำน้อยลง แต่มีขนาด APK ที่ใหญ่ขึ้น แนะนำสำหรับอุปกรณ์ที่มี RAM ต่ำหรือเก่า</string>
     <string name="settings_advanced_bytecode_mode_full">เต็ม</string>
-    <string name="settings_advanced_bytecode_mode_full_description">การปรับแพตช์ที่ช้าลง ทำซ้ำพฤติกรรมเดิม ใช้เฉพาะเมื่อโหมดที่เร็วทำให้เกิดปัญหา</string>
+    <string name="settings_advanced_bytecode_mode_full_description">การแพตช์ที่ช้าลง เลียนแบบพฤติกรรมเดิม แนะนำให้ใช้เฉพาะในกรณีที่โหมดรวดเร็วทำให้เกิดปัญหา</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">โทเคน GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">จำเป็นสำหรับแหล่งขอร้องข้อมูล</string>
@@ -463,7 +469,7 @@
     <string name="settings_advanced_patch_options_expert_mode_notice">ในการตั้งค่าแบบเชี่ยวชาญจะมีตัวเลือกแพตช์ในระหว่างกระบวนการแพตช์</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">สีธีมของแอป</string>
-    <string name="settings_advanced_patch_options_theme_colors_description">เปลี่ยนสีหลัง</string>
+    <string name="settings_advanced_patch_options_theme_colors_description">เปลี่ยนสีพื้นหลัง</string>
     <string name="settings_advanced_patch_options_dark_theme_color">สีหลังดำม</string>
     <string name="settings_advanced_patch_options_light_theme_color">สีพื้นหลังของธีมสว่าง</string>
     <string name="settings_advanced_patch_options_theme_color_description">อาจเป็นสีฮักซ์ (#RRGGBB) หรือการอ้างอิงทรัพยากรสี</string>
@@ -473,7 +479,7 @@
     <string name="settings_advanced_patch_options_no_available">ไม่มีตัวเลือกแพตช์ให้เลือก</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">แบรนด์แบบกำหนดเอง</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">เปลี่ยนชื่อแสดงของแอป</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">เปลี่ยนชื่อแอปพลิเคชันที่แสดงผล</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">ชื่อแอป</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">ป้อนชื่อแบบกำหนดเอง</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">ไอสัญแบบกำหนดเอง</string>
@@ -511,7 +517,7 @@ morphe_adaptive_monochrome_custom.xml
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">เปลี่ยนโลโก้หัวหน้า</string>
-    <string name="settings_advanced_patch_options_custom_header_description">เปลี่ยนโลโก้หัวหน้า</string>
+    <string name="settings_advanced_patch_options_custom_header_description">เปลี่ยนโลโก้ส่วนหัว</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"โฟเดอร์ที่มีไฟล์ที่ใช้เป็นโลโก้หัวหน้าแบบกำหนดเอง
 
 โฟเดอร์ต้องมีอยู่เหลือต่อไปนี้:
@@ -532,17 +538,17 @@ morphe_header_custom_dark.png
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">ซ่อนฟีเชอร์ Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">ซ่อนชอร์ทคัท Shorts</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">ลบ Shorts แอปชอร์ตจากเมนูตัวเลือก</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">ลบ Shorts ออกจากเมนูแบบยาวเมื่อกดที่ตัวเรียกใช้งาน</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">ซ่อนไอสั้น Shorts วิดเจต</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget_description">ลบ Shorts จากวิดเจต</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">ลบปุ่ม Shorts ออกจากวิดเจ็ตตัวเรียกใช้งาน</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">การติดตั้ง</string>
     <string name="installer_title">เลือกตัวติดตั้ง</string>
     <string name="installer_internal_name">โปรแกรมติดตั้งระบบ</string>
-    <string name="installer_internal_description">ใช้โปรแกรมติดตั้งแพ็คเกจ Android</string>
+    <string name="installer_internal_description">ใช้ตัวติดตั้งแพ็คเกจ Android</string>
     <string name="installer_auto_saved_name">ตัวติดตั้งแบบ Rooted mount</string>
     <string name="installer_auto_saved_description">ติดตั้ง APK ที่ถูกแก้ไขทับแทนแอปที่ถูกติดตั้งอยู่</string>
-    <string name="installer_shizuku_description">ติดตั้งโดยไม่แสดงผลด้วย Shizuku หรือ Sui</string>
+    <string name="installer_shizuku_description">ติดตั้งอย่างเงียบๆ โดยใช้ Shizuku หรือ Sui</string>
     <string name="installer_option_none">ไม่มีตัวติดตั้งสำรอง</string>
     <string name="installer_none_description">ไม่ได้กำหนดค่าตัวติดตั้งสำรอง</string>
     <string name="installer_status_requires_root">ต้องได้รับสิทธิ์ root</string>
@@ -563,57 +569,47 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_message">ตัวติดตั้งที่คุณชอบ (%s) ไม่พร้อมใช้งานในขณะนี้. คุณสามารถแก้ไขปัญหาและลองอีกครั้งหรือใช้ตัวติดตั้งมาตรฐานแทน</string>
     <string name="installer_unavailable_shizuku_hint">ให้แน่ใจว่า Shizuku กำลังทำงานและให้สิทธิ์แก่แอปนี้</string>
     <string name="installer_use_standard">ใช้มาตรฐาน</string>
-    <string name="settings_prompt_installer_on_install">แสดงตัวเลือกตัวติดตั้งในการติดตั้ง</string>
-    <string name="settings_prompt_installer_on_install_description">แสดงกล่องโต้ตอบตัวเลือกตัวติดตั้งทุกครั้งที่คุณติดตั้งแอปปรับแก้</string>
+    <string name="settings_prompt_installer_on_install">แจ้งเตือนการเลือกตัวติดตั้ง</string>
+    <string name="settings_prompt_installer_on_install_description">แสดงกล่องโต้ตอบการเลือกตัวติดตั้งทุกครั้งที่มีการติดตั้งแอปที่แพตช์แล้ว</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">การเพิ่มประสิทธิภาพแบตเตอรี่</string>
-    <string name="settings_system_battery_optimization_description">ป้องกันไม่ให้ระบบหยุดการทำงานของ patcher เมื่อ Morphe ถูกลดขนาดหน้าต่าง</string>
-    <string name="settings_system_battery_optimization_excluded">ยกเว้น</string>
-    <string name="settings_system_battery_optimization_not_excluded">ไม่ได้ยกเว้น</string>
+    <string name="settings_system_battery_optimization_description">ทำให้ตัวแพตช์ทำงานต่อไปเมื่อแอปพลิเคชันถูกลดขนาด</string>
     <string name="settings_system_performance">การตั้งค่า</string>
     <string name="settings_system_process_runtime">การทำงานของโปรเซส</string>
-    <string name="settings_system_process_runtime_description">ทำให้การนำพัท์ในโปรเซสแยกกต่างสำหรับ</string>
+    <string name="settings_system_process_runtime_description">เรียกใช้การแพตช์ในกระบวนการแยกต่างหากเพื่อเพิ่มความเสถียร</string>
     <string name="settings_system_process_runtime_memory_limit">ขนาดความจำ</string>
-    <string name="settings_system_process_runtime_memory_limit_description">การจำกัดหน่วยตวามจำที่มากกว่าเดิมจะช่วยให้แพตซเร็วขึ้นแต่จะไม่รองรับกับสมาร์ทโฟนรุ่นเก่า</string>
+    <string name="settings_system_process_runtime_memory_limit_description">ขีดจำกัดที่สูงขึ้นช่วยเพิ่มความเร็วในการแพตช์บนอุปกรณ์ที่รองรับ</string>
     <string name="settings_system_process_runtime_enable">เปิดใช้การทำงานของโปรเซส</string>
     <string name="settings_system_memory_limit_subtitle">ขนาดความจำที่ใช้สำหรับการแพตซ์</string>
     <string name="settings_system_memory_limit_warning">ขนาดความจำต่ำหรืออาจทำให้การนำพัท์ล้ม</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB จำกัด</string>
     <string name="settings_system_process_runtime_disabled_description">คลิกเพื่อตั้งค่า</string>
     <string name="settings_system_process_runtime_description_not_available">คุณสมบัติขั้นตอนนี้ต้องการ Android 11 หรือเวอร์ชันที่สูงกว่า</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">นำเข้า &amp; ส่งออก</string>
-    <string name="settings_system_import_keystore">นำเข้า keystore</string>
-    <string name="settings_system_import_keystore_description">ป้อนชื่อและรหัสของไฟล์ตัวเลือก</string>
+    <string name="settings_system_keystore">คีย์สโตร์</string>
+    <string name="settings_system_import_keystore_description">นำเข้าหรือส่งออกคีย์สโตร์การลงนามของคุณ</string>
     <string name="settings_system_import_keystore_dialog_title">คุณต้องต้องแน่ใจว่าต้องป้อนชื่อและรหัสของไฟล์ตัวเลือก</string>
     <string name="settings_system_import_keystore_dialog_description">คุณต้องป้อนข้อมูลรับรองของคลังคีย์เพื่อนำเข้า</string>
     <string name="settings_system_import_keystore_dialog_alias_field">รหัส</string>
     <string name="settings_system_import_keystore_dialog_password_field">รหัสไฟล์ตัวเลือกไม่ถูกต้อง</string>
-    <string name="settings_system_import_keystore_dialog_button">นำเข้า</string>
     <string name="settings_system_import_keystore_dialog_format_field">รูปแบบคีย์สโตร์</string>
     <string name="settings_system_import_keystore_wrong_credentials">ล้มการนำเข้าไฟล์ตัวเลือก</string>
     <string name="settings_system_import_keystore_success">ส่งออกไฟล์ตัวเลือก</string>
     <string name="settings_system_import_keystore_failed">ส่งออกไฟล์ตัวเลือก</string>
-    <string name="settings_system_export_keystore">ไม่มีไฟล์ตัวเลือกให้ส่งออก</string>
-    <string name="settings_system_export_keystore_description">ส่งออกไฟล์ตัวเลือกสำเร็จ</string>
     <string name="settings_system_export_keystore_unavailable">แสดงรหัส</string>
     <string name="settings_system_export_keystore_success">ซ่อนรหัส</string>
     <string name="settings_system_export_keystore_failed">ไม่สามารถส่งออกคีย์สโตร์ได้</string>
     <string name="settings_system_show_password_field">นำเข้าและส่งออกการตั้งค่า</string>
     <string name="settings_system_hide_password_field">นำเข้าและส่งออกการตั้งค่า</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">นำเข้าการตั้งค่า Morphe</string>
-    <string name="settings_system_import_manager_settings_description">กู้คืนการตั้งค่า Morphe จากไฟล์ JSON</string>
+    <string name="settings_system_morphe_settings">การตั้งค่า Morphe</string>
+    <string name="settings_system_import_manager_settings_description">สำรองและกู้คืนการตั้งค่า Morphe ของคุณ</string>
     <string name="settings_system_import_manager_settings_fail">การนำเข้าการตั้งค่า Morphe ไม่สำเร็จ: %s</string>
     <string name="settings_system_import_manager_settings_success">นำเข้าการตั้งค่า Morphe สำเร็จ</string>
-    <string name="settings_system_export_manager_settings">ส่งออกการตั้งค่า Morphe</string>
-    <string name="settings_system_export_manager_settings_description">บันทึกการตั้งค่า Morphe ลงในไฟล์ JSON</string>
     <string name="settings_system_export_manager_settings_fail">การส่งออกการตั้งค่า Morphe ไม่สำเร็จ: %s</string>
     <string name="settings_system_export_manager_settings_success">ส่งออกการตั้งค่า Morphe สำเร็จ</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">ส่งออกไฟล์การพัฒยายสำหรับการแก้ไข</string>
-    <string name="settings_system_export_debug_logs">ส่งออกบันทึกการแก้ไขข้อบกพร่อง</string>
-    <string name="settings_system_export_debug_logs_description">บันทึกข้อมูลการทำงานของระบบเพื่อแก้ไขปัญหา</string>
+    <string name="settings_system_export_debug_logs_description">บันทึกบันทึกระบบเพื่อแก้ไขปัญหา</string>
     <string name="settings_system_export_debug_logs_export_read_failed">ล้มเหลวในการอ่านบันทึก (รหัสออก %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">ส่งออกบันทึกไม่สำเร็จ</string>
     <string name="settings_system_export_debug_logs_export_success">ขนาดทั้งหมด: %s</string>
@@ -622,22 +618,21 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_size">จัดการแอปที่ถูกนำพัท์</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">คุณแน่ใจหรือไม่ว่าต้องการลบแอปที่ถูกนำพัท์ %s?</string>
-    <string name="settings_system_patched_apks_description">ลบแอปที่ถูกนำพัท์สำเร็จ</string>
+    <string name="settings_system_patched_apks_description">จัดการไฟล์แอปพลิเคชันที่แพตช์แล้วที่บันทึกไว้</string>
     <string name="settings_system_patched_apks_empty">แอปต้นฉบับ</string>
     <string name="settings_system_patched_apks_delete_title">แอปต้นฉบับ</string>
     <string name="settings_system_patched_apks_delete_confirm">แอปต้นฉบับมีอยู่เพื่อนำพัท์ใหม่</string>
     <string name="settings_system_patched_apks_deleted">ไม่มีแอปต้นฉบับที่บันทึกไว้</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">ลบแอปต้นฉบับ %s? คุณไม่สามารถนำพัท์แอปใหม่ได้</string>
-    <string name="settings_system_original_apks_description">ไฟล์ APK รุ่นต้นฉบับถูกบันทึกไว้สำหรับการปรับปรุงใหม่
-เฉพาะรุ่นล่าสุดของแต่ละแอปจะถูกเก็บไว้</string>
+    <string name="settings_system_original_apks_description">บันทึกไว้สำหรับการแพตช์ซ้ำ เก็บเวอร์ชันละหนึ่งรายการต่อแอป</string>
     <string name="settings_system_original_apks_empty">แชะแหน่งเว็บไซต์</string>
     <string name="settings_system_original_apks_deleted">แชะเว็บไซต์อย่างเป็นทางการ</string>
     <string name="settings_system_original_apks_delete_title">Morphe เป็นโครงการโอเพ่นซอร์สที่เน้นรากและพึ่งพบค่ำชันการพัฒยายและการปรับรอง</string>
     <string name="settings_system_original_apks_delete_confirm">ลบไฟล์ APK รุ่นต้นฉบับสำหรับ %s? คุณจะไม่สามารถแก้ไขใหม่อีกได้ถ้าไม่มีไฟล์ APK ใหม่</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">การเลือกการแก้ไข</string>
-    <string name="settings_system_patch_selections_description">จัดการการเลือกการแก้ไขและตัวเลือกที่บันทึกไว้ การเลือกนี้จะคงอยู่หลังจากการลบแอป</string>
+    <string name="settings_system_patch_selections_description">บันทึกการเลือกแพตช์ที่เก็บไว้หลังการถอนการติดตั้ง</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">รีเซ็ตการเลือกทั้งหมด?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">รีเซ็ตการเลือกแพ็กเกจ?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">รีเซ็ตการเลือกแหล่งที่มา?</string>
@@ -660,7 +655,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">เกี่ยวกับ</string>
     <string name="settings_system_share_website">ไม่พบผลลัพธ์สำหรับ</string>
-    <string name="settings_system_share_website_description">เลือก</string>
+    <string name="settings_system_share_website_description">แบ่งปันเว็บไซต์อย่างเป็นทางการของ Morphe</string>
     <string name="settings_system_manager_description">"โครงการโอเพนซอร์สสำหรับการแพตช์แอป Android ยอดนิยมที่ทันสมัยและราบรื่น ซึ่งขับเคลื่อนด้วยข้อเสนอแนะและการมีส่วนร่วมจากชุมชน"</string>
     <string name="credits">เครดิต</string>
     <string name="credits_current_development">การพัฒนาปัจจุบัน</string>
@@ -697,6 +692,10 @@ morphe_header_custom_dark.png
     <string name="disabled">ปิดการใช้งานอยู่</string>
     <string name="selected">รีมอน</string>
     <string name="not_selected">ติดตั้ง</string>
+    <string name="select_all">เลือกทั้งหมด</string>
+    <string name="select_all_done">เลือกทั้งหมดแล้ว</string>
+    <string name="deselect_all">ยกเลิกการเลือกทั้งหมด</string>
+    <string name="deselect_all_done">ยกเลิกการเลือกทั้งหมดแล้ว</string>
     <string name="rename">เปลี่ยนชื่อ</string>
     <string name="import_">นำเข้า</string>
     <string name="export">ส่งออก</string>
@@ -717,6 +716,7 @@ morphe_header_custom_dark.png
     <string name="unmount">โงมธ่งล</string>
     <string name="unmounted">ไม่ได้เมานต์</string>
     <string name="remount">ไม่มีการเปลี่ยนล่าสุด</string>
+    <string name="share">แชร์</string>
     <string name="install">ติดตั้ง</string>
     <string name="installed">ติดตั้งแล้ว</string>
     <string name="reinstall">ติดตั้งใหม่</string>

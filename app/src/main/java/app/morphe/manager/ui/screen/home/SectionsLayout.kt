@@ -43,6 +43,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
@@ -63,6 +64,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.BundleUpdateStatus
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.KnownApps
+import app.morphe.manager.util.toast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -123,11 +125,14 @@ fun SectionsLayout(
     val windowSize = rememberWindowSize()
 
     // Search state hoisted here so both AdaptiveContent and HomeBottomActionBar share it
-    var searchVisible by remember { mutableStateOf(false) }
+    val searchVisible = remember { mutableStateOf(false) }
     val searchQuery = remember { mutableStateOf("") }
-    LaunchedEffect(searchVisible) { if (!searchVisible) searchQuery.value = "" }
+    LaunchedEffect(searchVisible.value) { if (!searchVisible.value) searchQuery.value = "" }
     // Auto-close search if the button disappears
-    LaunchedEffect(showSearchButton) { if (!showSearchButton) searchVisible = false }
+    LaunchedEffect(showSearchButton) { if (!showSearchButton) searchVisible.value = false }
+
+    // Back gesture closes search (registered before multiselect BackHandler so multiselect takes priority)
+    BackHandler(enabled = searchVisible.value) { searchVisible.value = false }
 
     Box(modifier = Modifier.fillMaxSize()) {
         // Main layout structure
@@ -156,10 +161,10 @@ fun SectionsLayout(
                     hiddenAppItems = hiddenAppItems,
                     installedAppsLoading = installedAppsLoading,
                     showSearchButton = showSearchButton,
-                    searchVisible = searchVisible,
+                    searchVisible = searchVisible.value,
                     searchQuery = searchQuery.value,
                     onSearchQueryChange = { searchQuery.value = it },
-                    onSearchToggle = { searchVisible = !searchVisible },
+                    onSearchToggle = { searchVisible.value = !searchVisible.value },
                     onOtherAppsClick = onOtherAppsClick,
                     showOtherAppsButton = showOtherAppsButton,
                     onBundlesClick = onBundlesClick,
@@ -175,8 +180,8 @@ fun SectionsLayout(
                     onSettingsClick = onSettingsClick,
                     isExpertModeEnabled = isExpertModeEnabled,
                     showSearchButton = showSearchButton,
-                    searchActive = searchVisible,
-                    onSearchClick = { searchVisible = !searchVisible }
+                    searchActive = searchVisible.value,
+                    onSearchClick = { searchVisible.value = !searchVisible.value }
                 )
             }
         }
@@ -432,20 +437,20 @@ fun ManagerUpdateSnackbar(
     onShowDetails: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var dismissed by remember { mutableStateOf(false) }
-    LaunchedEffect(visible) { if (visible) dismissed = false }
+    val dismissed = remember { mutableStateOf(false) }
+    LaunchedEffect(visible) { if (visible) dismissed.value = false }
 
     val swipeState = rememberSwipeToDismissBoxState(
         positionalThreshold = { totalDistance -> totalDistance * 0.4f }
     )
     LaunchedEffect(swipeState.currentValue) {
         if (swipeState.currentValue != SwipeToDismissBoxValue.Settled) {
-            dismissed = true
+            dismissed.value = true
         }
     }
 
     AnimatedVisibility(
-        visible = visible && !dismissed,
+        visible = visible && !dismissed.value,
         enter = MorpheAnimations.slideUpFadeEnter,
         exit = MorpheAnimations.slideUpFadeExit,
         modifier = modifier
@@ -474,11 +479,9 @@ fun ManagerUpdateSnackbar(
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Update,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onTertiaryContainer,
-                        modifier = Modifier.size(24.dp)
+                    MorpheIcon(
+                        icon = Icons.Outlined.Update,
+                        tint = MaterialTheme.colorScheme.onTertiaryContainer
                     )
 
                     Column(modifier = Modifier.weight(1f)) {
@@ -511,10 +514,10 @@ fun BundleUpdateSnackbar(
     progress: PatchBundleRepository.BundleUpdateProgress?,
     modifier: Modifier = Modifier
 ) {
-    var dismissed by remember { mutableStateOf(false) }
+    val dismissed = remember { mutableStateOf(false) }
     // Reset when a new update cycle starts
     LaunchedEffect(visible, status) {
-        if (visible && status == BundleUpdateStatus.Updating) dismissed = false
+        if (visible && status == BundleUpdateStatus.Updating) dismissed.value = false
     }
 
     // Allow swipe only for terminal states - don't let user dismiss an in-progress update
@@ -525,12 +528,12 @@ fun BundleUpdateSnackbar(
     )
     LaunchedEffect(swipeState.currentValue) {
         if (swipeable && swipeState.currentValue != SwipeToDismissBoxValue.Settled) {
-            dismissed = true
+            dismissed.value = true
         }
     }
 
     AnimatedVisibility(
-        visible = visible && !dismissed,
+        visible = visible && !dismissed.value,
         enter = MorpheAnimations.slideUpFadeEnter,
         exit = MorpheAnimations.slideUpFadeExit,
         modifier = modifier
@@ -606,23 +609,17 @@ private fun BundleUpdateSnackbarContent(
             ) {
                 // Icon based on status
                 when (status) {
-                    BundleUpdateStatus.Success -> Icon(
-                        imageVector = Icons.Outlined.CheckCircle,
-                        contentDescription = null,
-                        tint = contentColor,
-                        modifier = Modifier.size(24.dp)
+                    BundleUpdateStatus.Success -> MorpheIcon(
+                        icon = Icons.Outlined.CheckCircle,
+                        tint = contentColor
                     )
-                    BundleUpdateStatus.Warning -> Icon(
-                        imageVector = Icons.Outlined.SignalCellularAlt,
-                        contentDescription = null,
-                        tint = contentColor,
-                        modifier = Modifier.size(24.dp)
+                    BundleUpdateStatus.Warning -> MorpheIcon(
+                        icon = Icons.Outlined.SignalCellularAlt,
+                        tint = contentColor
                     )
-                    BundleUpdateStatus.Error -> Icon(
-                        imageVector = Icons.Outlined.Warning,
-                        contentDescription = null,
-                        tint = contentColor,
-                        modifier = Modifier.size(24.dp)
+                    BundleUpdateStatus.Error -> MorpheIcon(
+                        icon = Icons.Outlined.Warning,
+                        tint = contentColor
                     )
                     BundleUpdateStatus.Updating -> CircularProgressIndicator(
                         modifier = Modifier.size(24.dp),
@@ -760,43 +757,46 @@ fun MainAppsSection(
     showFadeOverlay: Boolean = true
 ) {
     // Multi-select state - set of packageNames chosen for bulk hide
-    var selectedPackages by remember { mutableStateOf(emptySet<String>()) }
-    val isMultiSelectMode = selectedPackages.isNotEmpty()
+    val isMultiSelectMode = remember { mutableStateOf(false) }
+    val selectedPackages = remember { mutableStateOf(emptySet<String>()) }
 
     // Back gesture/button cancels multi-select instead of navigating back
-    BackHandler(enabled = isMultiSelectMode) {
-        selectedPackages = emptySet()
+    BackHandler(enabled = isMultiSelectMode.value) {
+        isMultiSelectMode.value = false
+        selectedPackages.value = emptySet()
     }
 
-    // Exit multi-select when items list changes
+    // Sync selection with current item list; exit mode if no items remain
     LaunchedEffect(homeAppItems) {
-        selectedPackages = selectedPackages.filter { pkg ->
+        val filtered = selectedPackages.value.filter { pkg ->
             homeAppItems.any { it.packageName == pkg }
         }.toSet()
+        selectedPackages.value = filtered
+        if (filtered.isEmpty()) isMultiSelectMode.value = false
     }
 
     // Track if real content has ever arrived so we never re-show the shimmer on resume
-    var hasEverLoaded by remember {
+    val hasEverLoaded = remember {
         mutableStateOf(homeAppItems.isNotEmpty() || hiddenAppItems.isNotEmpty())
     }
 
     // Stable loading state - drives shimmer visibility.
     // Starts as true when there is nothing to show yet; once content arrives it latches to false
     // and never goes back to true (we don't want shimmer on every recomposition).
-    var stableLoadingState by remember { mutableStateOf(!hasEverLoaded) }
+    val stableLoadingState = remember { mutableStateOf(!hasEverLoaded.value) }
 
     LaunchedEffect(installedAppsLoading, homeAppItems.size, hiddenAppItems.size) {
         val hasItems = homeAppItems.isNotEmpty() || hiddenAppItems.isNotEmpty()
-        if (hasItems) hasEverLoaded = true
+        if (hasItems) hasEverLoaded.value = true
 
-        val shouldShowShimmer = !hasEverLoaded && installedAppsLoading
+        val shouldShowShimmer = !hasEverLoaded.value && installedAppsLoading
         if (shouldShowShimmer) {
-            stableLoadingState = true
+            stableLoadingState.value = true
         } else {
             // Small delay so Compose has one frame to lay out the real cards before the
             // shimmer fades out - prevents a single-frame empty gap.
-            if (stableLoadingState) delay(50)
-            stableLoadingState = false
+            if (stableLoadingState.value) delay(50)
+            stableLoadingState.value = false
         }
     }
 
@@ -839,12 +839,12 @@ fun MainAppsSection(
     val listState = rememberLazyListState()
 
     // True empty state: loaded, no apps from any bundle (no sources / all disabled)
-    val isNoSourcesState = !stableLoadingState && homeAppItems.isEmpty() && hiddenAppItems.isEmpty()
+    val isNoSourcesState = !stableLoadingState.value && homeAppItems.isEmpty() && hiddenAppItems.isEmpty()
     // All-hidden state: apps exist but all are hidden
-    val isAllHiddenState = !stableLoadingState && homeAppItems.isEmpty() && hiddenAppItems.isNotEmpty()
+    val isAllHiddenState = !stableLoadingState.value && homeAppItems.isEmpty() && hiddenAppItems.isNotEmpty()
     val isEmptyState = isNoSourcesState || isAllHiddenState
     // Search empty state: items exist but nothing matches query (including hidden)
-    val isSearchEmpty = !stableLoadingState && homeAppItems.isNotEmpty() &&
+    val isSearchEmpty = !stableLoadingState.value && homeAppItems.isNotEmpty() &&
             searchQuery.isNotBlank() && filteredItems.isEmpty() && filteredHiddenItems.isEmpty()
 
     Box(
@@ -911,11 +911,11 @@ fun MainAppsSection(
                                     start = horizontalPadding,
                                     end = horizontalPadding,
                                     // Extra bottom padding so cards aren't hidden behind the multi-select bar
-                                    bottom = if (isMultiSelectMode) 96.dp else 0.dp
+                                    bottom = if (isMultiSelectMode.value) 120.dp else 0.dp
                                 )
                             ) {
                                 // Cold start: homeAppItems still empty - show placeholder shimmer cards
-                                if (stableLoadingState && homeAppItems.isEmpty()) {
+                                if (stableLoadingState.value && homeAppItems.isEmpty()) {
                                     items(3, key = { "placeholder_$it" }) { index ->
                                         AppLoadingCard(
                                             gradientColors = placeholderGradients[index % placeholderGradients.size],
@@ -927,18 +927,18 @@ fun MainAppsSection(
                                         items = filteredItems,
                                         key = { _, item -> item.packageName }
                                     ) { index, item ->
-                                        val isSelected = item.packageName in selectedPackages
+                                        val isSelected = item.packageName in selectedPackages.value
                                         DynamicAppCard(
                                             item = item,
-                                            isLoading = stableLoadingState,
+                                            isLoading = stableLoadingState.value,
                                             hasUpdate = item.hasUpdate,
                                             onAppClick = {
-                                                if (isMultiSelectMode) {
+                                                if (isMultiSelectMode.value) {
                                                     // In multi-select mode taps toggle selection
-                                                    selectedPackages = if (isSelected)
-                                                        selectedPackages - item.packageName
+                                                    selectedPackages.value = if (isSelected)
+                                                        selectedPackages.value - item.packageName
                                                     else
-                                                        selectedPackages + item.packageName
+                                                        selectedPackages.value + item.packageName
                                                 } else {
                                                     onAppClick(item)
                                                 }
@@ -949,13 +949,14 @@ fun MainAppsSection(
                                             showGestureHint = index == 0 && showGestureHint,
                                             onGestureHintShown = onGestureHintShown,
                                             isSelected = isSelected,
-                                            isMultiSelectMode = isMultiSelectMode,
+                                            isMultiSelectMode = isMultiSelectMode.value,
                                             onLongPress = {
                                                 // Long-press enters multi-select and toggles this card
-                                                selectedPackages = if (isSelected)
-                                                    selectedPackages - item.packageName
+                                                isMultiSelectMode.value = true
+                                                selectedPackages.value = if (isSelected)
+                                                    selectedPackages.value - item.packageName
                                                 else
-                                                    selectedPackages + item.packageName
+                                                    selectedPackages.value + item.packageName
                                             },
                                             modifier = Modifier.animateItem()
                                         )
@@ -1089,14 +1090,27 @@ fun MainAppsSection(
 
                     // Multi-select confirmation bar - slides up from bottom
                     MultiSelectBar(
-                        selectedCount = selectedPackages.size,
-                        visible = isMultiSelectMode,
-                        onHide = {
-                            onHideMultiple(selectedPackages)
-                            selectedPackages = emptySet()
+                        selectedCount = selectedPackages.value.size,
+                        totalCount = homeAppItems.size,
+                        visible = isMultiSelectMode.value,
+                        onSelectAll = {
+                            selectedPackages.value = homeAppItems.map { it.packageName }.toSet()
                         },
-                        onCancel = { selectedPackages = emptySet() },
-                        modifier = Modifier.align(Alignment.BottomCenter)
+                        onDeselectAll = { selectedPackages.value = emptySet() },
+                        onAction = {
+                            onHideMultiple(selectedPackages.value)
+                            isMultiSelectMode.value = false
+                            selectedPackages.value = emptySet()
+                        },
+                        actionIcon = Icons.Outlined.VisibilityOff,
+                        actionContentDescription = stringResource(R.string.hide),
+                        onCancel = {
+                            isMultiSelectMode.value = false
+                            selectedPackages.value = emptySet()
+                        },
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .padding(horizontal = horizontalPadding)
                     )
                 }
             }
@@ -1298,7 +1312,7 @@ private fun DynamicAppCard(
     isMultiSelectMode: Boolean = false,
     onLongPress: () -> Unit = {}
 ) {
-    var showHideDialog by remember { mutableStateOf(false) }
+    val showHideDialog = remember { mutableStateOf(false) }
     val density = LocalDensity.current
     val view = LocalView.current
 
@@ -1351,7 +1365,7 @@ private fun DynamicAppCard(
         SwipeableCardContainer(
             offsetX = offsetX,
             actionThresholdPx = actionThresholdPx,
-            onLeftSwipe = { showHideDialog = true },
+            onLeftSwipe = { showHideDialog.value = true },
             onRightSwipe = onShowPatches,
             enabled = !isMultiSelectMode,
             background = { leftProgress, rightProgress ->
@@ -1410,13 +1424,13 @@ private fun DynamicAppCard(
             }
         }
 
-        if (showHideDialog) {
+        if (showHideDialog.value) {
             HideAppDialog(
                 item = item,
-                onDismiss = { showHideDialog = false },
+                onDismiss = { showHideDialog.value = false },
                 onHide = {
                     onHide()
-                    showHideDialog = false
+                    showHideDialog.value = false
                 }
             )
         }
@@ -1425,18 +1439,37 @@ private fun DynamicAppCard(
 
 /**
  * Animated confirmation bar that slides up from the bottom of the card list
- * when the user is in multi-select (bulk-hide) mode.
- *
- * Shows how many apps are selected and exposes "Hide" and "Cancel" actions.
+ * when the user is in multi-select mode.
  */
 @Composable
 private fun MultiSelectBar(
     selectedCount: Int,
+    totalCount: Int,
     visible: Boolean,
-    onHide: () -> Unit,
+    onSelectAll: () -> Unit,
+    onDeselectAll: () -> Unit,
+    onAction: () -> Unit,
+    actionIcon: ImageVector,
+    actionContentDescription: String,
     onCancel: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    actionColors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors(
+        containerColor = MaterialTheme.colorScheme.errorContainer,
+        contentColor = MaterialTheme.colorScheme.onErrorContainer
+    )
 ) {
+    val context = LocalContext.current
+    fun withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
+        context.toast(doneMessage)
+        action()
+    }
+
+    val selectAllLabel = stringResource(R.string.select_all)
+    val selectAllDone = stringResource(R.string.select_all_done)
+    val deselectAllLabel = stringResource(R.string.deselect_all)
+    val deselectAllDone = stringResource(R.string.deselect_all_done)
+    val cancelLabel = stringResource(android.R.string.cancel)
+
     AnimatedVisibility(
         visible = visible,
         enter = MorpheAnimations.springSlideUpEnter,
@@ -1447,68 +1480,65 @@ private fun MultiSelectBar(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(16.dp),
             color = MaterialTheme.colorScheme.surfaceContainerHigh,
             shadowElevation = 8.dp,
             tonalElevation = 4.dp
         ) {
-            Row(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                // Selected count badge
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    modifier = Modifier.size(36.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        AnimatedContent(
-                            targetState = selectedCount,
-                            transitionSpec = MorpheAnimations.compactCounterTransitionSpec,
-                            label = "selected_count"
-                        ) { count ->
-                            Text(
-                                text = count.toString(),
-                                style = MaterialTheme.typography.labelLarge,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
-                            )
-                        }
-                    }
+                AnimatedContent(
+                    targetState = selectedCount,
+                    transitionSpec = MorpheAnimations.compactCounterTransitionSpec,
+                    label = "selected_count"
+                ) { count ->
+                    Text(
+                        text = "$count ${stringResource(R.string.selected).lowercase()}",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
 
-                // Label
-                Text(
-                    text = stringResource(R.string.selected),
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.weight(1f)
-                )
-
-                // Cancel
-                ActionPillButton(
-                    onClick = onCancel,
-                    icon = Icons.Outlined.Close,
-                    contentDescription = stringResource(android.R.string.cancel)
-                )
-
-                // Hide action
-                ActionPillButton(
-                    onClick = onHide,
-                    icon = Icons.Outlined.VisibilityOff,
-                    contentDescription = stringResource(R.string.hide),
-                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                        containerColor = MaterialTheme.colorScheme.errorContainer,
-                        contentColor = MaterialTheme.colorScheme.onErrorContainer
-                    )
-                )
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        ActionPillButton(
+                            onClick = withToast(selectAllDone, onSelectAll),
+                            icon = Icons.Outlined.DoneAll,
+                            contentDescription = selectAllLabel,
+                            tooltip = selectAllLabel,
+                            enabled = selectedCount < totalCount
+                        )
+                        ActionPillButton(
+                            onClick = withToast(deselectAllDone, onDeselectAll),
+                            icon = Icons.Outlined.RemoveDone,
+                            contentDescription = deselectAllLabel,
+                            tooltip = deselectAllLabel,
+                            enabled = selectedCount > 0
+                        )
+                        ActionPillButton(
+                            onClick = onCancel,
+                            icon = Icons.Outlined.Close,
+                            contentDescription = cancelLabel,
+                            tooltip = cancelLabel
+                        )
+                        ActionPillButton(
+                            onClick = withToast(actionContentDescription, onAction),
+                            icon = actionIcon,
+                            contentDescription = actionContentDescription,
+                            tooltip = actionContentDescription,
+                            enabled = selectedCount > 0,
+                            colors = actionColors
+                        )
+                    }
+                }
             }
         }
     }
@@ -1826,22 +1856,22 @@ fun AppPatchesDialog(
             Color.hsl(hue = hue, saturation = 0.55f, lightness = 0.60f)
         }
     }
-    var searchQuery by remember { mutableStateOf("") }
-    var selectedBundle by remember { mutableStateOf<Int?>(null) }
+    val searchQuery = remember { mutableStateOf("") }
+    val selectedBundle = remember { mutableStateOf<Int?>(null) }
     val showFilterSheet = remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
-    val filteredPatches = remember(allPatches, searchQuery, selectedBundle) {
+    val filteredPatches = remember(allPatches, searchQuery.value, selectedBundle.value) {
         allPatches.filter { (uid, patch) ->
-            val bundleMatch = selectedBundle == null || uid == selectedBundle
-            val queryMatch = searchQuery.isBlank() ||
-                    patch.name.contains(searchQuery, ignoreCase = true) ||
-                    patch.description?.contains(searchQuery, ignoreCase = true) == true
+            val bundleMatch = selectedBundle.value == null || uid == selectedBundle.value
+            val queryMatch = searchQuery.value.isBlank() ||
+                    patch.name.contains(searchQuery.value, ignoreCase = true) ||
+                    patch.description?.contains(searchQuery.value, ignoreCase = true) == true
             bundleMatch && queryMatch
         }
     }
 
-    val isFiltering = searchQuery.isNotBlank() || selectedBundle != null
+    val isFiltering = searchQuery.value.isNotBlank() || selectedBundle.value != null
     val totalCount = allPatches.size
 
     // Pre-compute per-bundle markers once so items{} can do O(1) lookups instead of O(n) scans
@@ -1974,8 +2004,8 @@ fun AppPatchesDialog(
                         verticalAlignment = Alignment.Bottom
                     ) {
                         MorpheDialogTextField(
-                            value = searchQuery,
-                            onValueChange = { searchQuery = it },
+                            value = searchQuery.value,
+                            onValueChange = { searchQuery.value = it },
                             label = { Text(stringResource(R.string.expert_mode_search)) },
                             leadingIcon = {
                                 Icon(
@@ -1992,11 +2022,11 @@ fun AppPatchesDialog(
                                 onClick = { showFilterSheet.value = true },
                                 modifier = Modifier.padding(bottom = 4.dp),
                                 colors = IconButtonDefaults.filledTonalIconButtonColors(
-                                    containerColor = if (selectedBundle != null)
+                                    containerColor = if (selectedBundle.value != null)
                                         MaterialTheme.colorScheme.primaryContainer
                                     else
                                         MaterialTheme.colorScheme.surfaceVariant,
-                                    contentColor = if (selectedBundle != null)
+                                    contentColor = if (selectedBundle.value != null)
                                         MaterialTheme.colorScheme.onPrimaryContainer
                                     else
                                         MaterialTheme.colorScheme.onSurfaceVariant
@@ -2017,18 +2047,18 @@ fun AppPatchesDialog(
             item(key = "filter_badges_and_empty") {
                 Column {
                     AnimatedVisibility(
-                        visible = selectedBundle != null,
+                        visible = selectedBundle.value != null,
                         enter = MorpheAnimations.expandFadeEnter,
                         exit = MorpheAnimations.shrinkFadeExit
                     ) {
-                        selectedBundle?.let { uid ->
+                        selectedBundle.value?.let { uid ->
                             FlowRow(
                                 modifier = Modifier.padding(bottom = 4.dp),
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
                                 InputChip(
                                     selected = true,
-                                    onClick = { selectedBundle = null },
+                                    onClick = { selectedBundle.value = null },
                                     label = { Text(bundleNames[uid] ?: uid.toString()) },
                                     trailingIcon = {
                                         Icon(
@@ -2087,8 +2117,8 @@ fun AppPatchesDialog(
                 val isUniversal = patch.compatiblePackages == null
                 Column(
                     modifier = Modifier.animateItem(
-                        fadeInSpec = tween(220),
-                        fadeOutSpec = tween(180),
+                        fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+                        fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
                         placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
                     )
                 ) {
@@ -2172,10 +2202,10 @@ fun AppPatchesDialog(
                 ) {
                     // "All" chip
                     FilterChip(
-                        selected = selectedBundle == null,
-                        onClick = { selectedBundle = null },
+                        selected = selectedBundle.value == null,
+                        onClick = { selectedBundle.value = null },
                         label = { Text(stringResource(R.string.all)) },
-                        leadingIcon = if (selectedBundle == null) {
+                        leadingIcon = if (selectedBundle.value == null) {
                             { Icon(Icons.Outlined.DoneAll, null, Modifier.size(16.dp)) }
                         } else null
                     )
@@ -2183,11 +2213,11 @@ fun AppPatchesDialog(
                     bundleNames.entries
                         .sortedBy { it.value }
                         .forEach { (uid, name) ->
-                            val isSelected = uid == selectedBundle
+                            val isSelected = uid == selectedBundle.value
                             FilterChip(
                                 selected = isSelected,
                                 onClick = {
-                                    selectedBundle = if (isSelected) null else uid
+                                    selectedBundle.value = if (isSelected) null else uid
                                     showFilterSheet.value = false
                                 },
                                 label = { Text(name) },
@@ -2274,14 +2304,16 @@ internal fun HiddenAppsDialog(
     onShowPatches: (HomeAppItem) -> Unit,
     onDismiss: () -> Unit
 ) {
-    var selectedPackages by remember { mutableStateOf(emptySet<String>()) }
-    val isMultiSelectMode = selectedPackages.isNotEmpty()
+    val isMultiSelectMode = remember { mutableStateOf(false) }
+    val selectedPackages = remember { mutableStateOf(emptySet<String>()) }
 
-    // Clear selection when items change
+    // Sync selection with current item list; exit mode if no items remain
     LaunchedEffect(hiddenAppItems) {
-        selectedPackages = selectedPackages.filter { pkg ->
+        val filtered = selectedPackages.value.filter { pkg ->
             hiddenAppItems.any { it.packageName == pkg }
         }.toSet()
+        selectedPackages.value = filtered
+        if (filtered.isEmpty()) isMultiSelectMode.value = false
     }
 
     val view = LocalView.current
@@ -2314,26 +2346,40 @@ internal fun HiddenAppsDialog(
 
     MorpheDialog(
         onDismissRequest = {
-            if (isMultiSelectMode) selectedPackages = emptySet()
-            else onDismiss()
+            if (isMultiSelectMode.value) {
+                isMultiSelectMode.value = false
+                selectedPackages.value = emptySet()
+            } else {
+                onDismiss()
+            }
         },
-        dismissOnClickOutside = !isMultiSelectMode,
+        dismissOnClickOutside = !isMultiSelectMode.value,
         title = stringResource(R.string.home_app_hidden_apps_title),
         footer = {
-            if (isMultiSelectMode) {
-                MorpheDialogButtonRow(
-                    primaryText = pluralStringResource(
-                        R.plurals.home_app_show_selected,
-                        selectedPackages.size,
-                        selectedPackages.size.toString()
-                    ),
-                    primaryIcon = Icons.Outlined.Visibility,
-                    onPrimaryClick = {
-                        onUnhideMultiple(selectedPackages)
-                        selectedPackages = emptySet()
+            if (isMultiSelectMode.value) {
+                MultiSelectBar(
+                    selectedCount = selectedPackages.value.size,
+                    totalCount = hiddenAppItems.size,
+                    visible = true,
+                    onSelectAll = {
+                        selectedPackages.value = hiddenAppItems.map { it.packageName }.toSet()
                     },
-                    secondaryText = stringResource(android.R.string.cancel),
-                    onSecondaryClick = { selectedPackages = emptySet() }
+                    onDeselectAll = { selectedPackages.value = emptySet() },
+                    onAction = {
+                        onUnhideMultiple(selectedPackages.value)
+                        isMultiSelectMode.value = false
+                        selectedPackages.value = emptySet()
+                    },
+                    actionIcon = Icons.Outlined.Visibility,
+                    actionContentDescription = stringResource(R.string.unhide),
+                    actionColors = IconButtonDefaults.filledTonalIconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+                    ),
+                    onCancel = {
+                        isMultiSelectMode.value = false
+                        selectedPackages.value = emptySet()
+                    }
                 )
             } else {
                 MorpheDialogOutlinedButton(
@@ -2360,22 +2406,22 @@ internal fun HiddenAppsDialog(
                     items = hiddenAppItems,
                     key = { it.packageName }
                 ) { item ->
-                    val isSelected = item.packageName in selectedPackages
+                    val isSelected = item.packageName in selectedPackages.value
                     val offsetX = remember(item.packageName) { Animatable(0f) }
 
                     // Snap card back when entering multi-select
-                    LaunchedEffect(isMultiSelectMode) {
-                        if (isMultiSelectMode) offsetX.animateTo(0f, tween(200))
+                    LaunchedEffect(isMultiSelectMode.value) {
+                        if (isMultiSelectMode.value) offsetX.animateTo(0f, tween(200))
                     }
 
                     SelectableAppCard(
                         modifier = Modifier.animateItem(
-                            fadeInSpec = tween(220),
-                            fadeOutSpec = tween(180),
+                            fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+                            fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
                             placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
                         ),
                         isSelected = isSelected,
-                        isMultiSelectMode = isMultiSelectMode
+                        isMultiSelectMode = isMultiSelectMode.value
                     ) {
                         SwipeableCardContainer(
                             offsetX = offsetX,
@@ -2384,7 +2430,7 @@ internal fun HiddenAppsDialog(
                             onRightSwipe = { onShowPatches(item) },
                             leftHaptic = HapticFeedbackConstants.LONG_PRESS,
                             rightHaptic = HapticFeedbackConstants.VIRTUAL_KEY,
-                            enabled = !isMultiSelectMode,
+                            enabled = !isMultiSelectMode.value,
                             background = { leftProgress, rightProgress ->
                                 SwipeBackground(
                                     leftProgress = leftProgress,
@@ -2401,21 +2447,22 @@ internal fun HiddenAppsDialog(
                                 gradientColors = item.gradientColors,
                                 enabled = true,
                                 onClick = {
-                                    if (isMultiSelectMode) {
-                                        selectedPackages = if (isSelected)
-                                            selectedPackages - item.packageName
+                                    if (isMultiSelectMode.value) {
+                                        selectedPackages.value = if (isSelected)
+                                            selectedPackages.value - item.packageName
                                         else
-                                            selectedPackages + item.packageName
+                                            selectedPackages.value + item.packageName
                                     } else {
                                         onUnhide(item.packageName)
                                     }
                                 },
                                 onLongClick = {
                                     view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                                    selectedPackages = if (isSelected)
-                                        selectedPackages - item.packageName
+                                    isMultiSelectMode.value = true
+                                    selectedPackages.value = if (isSelected)
+                                        selectedPackages.value - item.packageName
                                     else
-                                        selectedPackages + item.packageName
+                                        selectedPackages.value + item.packageName
                                 },
                                 modifier = Modifier.fillMaxWidth()
                             ) {
@@ -2423,7 +2470,7 @@ internal fun HiddenAppsDialog(
                                     packageName = item.packageName,
                                     packageInfo = item.packageInfo,
                                     displayName = item.displayName,
-                                    subtitle = if (isMultiSelectMode) null
+                                    subtitle = if (isMultiSelectMode.value) null
                                     else stringResource(R.string.home_app_hidden_apps_hint),
                                     gradientColors = item.gradientColors,
                                     iconSource = AppDataSource.PATCHED_APK

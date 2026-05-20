@@ -12,26 +12,32 @@ import androidx.compose.ui.unit.dp
 /**
  * Pill-shaped action button with an icon, optional text label, and optional long-press tooltip.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ActionPillButton(
     onClick: () -> Unit,
     icon: ImageVector,
     contentDescription: String,
+    modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    large: Boolean = false,
     label: String? = null,
     tooltip: String? = null,
     colors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors()
 ) {
+    val height = if (large) 40.dp else 36.dp
+    val minWidth = if (large) 80.dp else 72.dp
+    val iconSize = if (large) 20.dp else 18.dp
+    val textStyle = if (large) MaterialTheme.typography.labelLarge else MaterialTheme.typography.labelSmall
+
     val button: @Composable () -> Unit = {
         FilledTonalIconButton(
             onClick = onClick,
             enabled = enabled,
             colors = colors,
             shape = RoundedCornerShape(50),
-            modifier = Modifier
-                .height(36.dp)
-                .widthIn(min = 72.dp)
+            modifier = modifier
+                .height(height)
+                .widthIn(min = minWidth)
         ) {
             if (label != null) {
                 Row(
@@ -42,11 +48,11 @@ fun ActionPillButton(
                     Icon(
                         imageVector = icon,
                         contentDescription = contentDescription,
-                        modifier = Modifier.size(18.dp)
+                        modifier = Modifier.size(iconSize)
                     )
                     Text(
                         text = label,
-                        style = MaterialTheme.typography.labelSmall
+                        style = textStyle
                     )
                 }
             } else {

@@ -161,54 +161,52 @@ fun PatchingSuccess(
         else -> Icons.Default.Check
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        // Main content area
-        Column(
+    // Main content area
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .navigationBarsPadding()
+    ) {
+        // Content
+        Box(
             modifier = Modifier
-                .fillMaxSize()
-                .navigationBarsPadding()
+                .weight(1f)
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
         ) {
-            // Content
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                AdaptiveSuccessContent(
-                    windowSize = windowSize,
-                    icon = icon,
-                    iconTint = iconTint,
-                    iconBackgroundColor = iconBackgroundColor,
-                    isInstalling = isInstalling,
-                    isInstalled = isInstalled,
-                    isError = isError,
-                    isConflict = isConflict,
-                    installedPackageName = installedPackageName,
-                    usingMountInstall = usingMountInstall,
-                    errorMessage = errorMessage,
-                    conflictPackageName = conflictPackageName,
-                    onInstall = onInstall,
-                    onUninstall = onUninstall,
-                    onOpen = onOpen
-                )
-            }
-
-            // Bottom action bar
-            PatcherBottomActionBar(
-                showCancelButton = false,
-                showLogsButton = isExpertMode,
-                showHomeButton = true,
-                showSaveButton = true,
-                showErrorButton = false,
-                onCancelClick = {},
-                onLogsClick = onLogsClick,
-                onHomeClick = onHomeClick,
-                onSaveClick = onSaveClick,
-                isSaving = isSaving,
-                onErrorClick = {}
+            AdaptiveSuccessContent(
+                windowSize = windowSize,
+                icon = icon,
+                iconTint = iconTint,
+                iconBackgroundColor = iconBackgroundColor,
+                isInstalling = isInstalling,
+                isInstalled = isInstalled,
+                isError = isError,
+                isConflict = isConflict,
+                installedPackageName = installedPackageName,
+                usingMountInstall = usingMountInstall,
+                errorMessage = errorMessage,
+                conflictPackageName = conflictPackageName,
+                onInstall = onInstall,
+                onUninstall = onUninstall,
+                onOpen = onOpen
             )
         }
+
+        // Bottom action bar
+        PatcherBottomActionBar(
+            showCancelButton = false,
+            showLogsButton = isExpertMode,
+            showHomeButton = true,
+            showSaveButton = true,
+            showErrorButton = false,
+            onCancelClick = {},
+            onLogsClick = onLogsClick,
+            onHomeClick = onHomeClick,
+            onSaveClick = onSaveClick,
+            isSaving = isSaving,
+            onErrorClick = {}
+        )
     }
 }
 
@@ -619,7 +617,7 @@ private fun InstallActionButton(
         if (isInstalling) {
             CircularProgressIndicator(
                 modifier = Modifier.size(24.dp),
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = LocalContentColor.current,
                 strokeWidth = 2.dp
             )
             Spacer(Modifier.width(12.dp))
@@ -632,15 +630,14 @@ private fun InstallActionButton(
                 fontWeight = FontWeight.SemiBold
             )
         } else {
-            Icon(
-                imageVector = when {
+            MorpheIcon(
+                icon = when {
                     isInstalled -> Icons.AutoMirrored.Outlined.Launch
                     isConflict -> Icons.Default.DeleteForever
                     usingMountInstall -> Icons.Outlined.Link
                     else -> Icons.Outlined.InstallMobile
                 },
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
+                tint = LocalContentColor.current
             )
             Spacer(Modifier.width(12.dp))
             Text(
@@ -704,62 +701,60 @@ fun PatchingFailed(
 ) {
     val windowSize = rememberWindowSize()
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        // Main content area
-        Column(
+    // Main content area
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .navigationBarsPadding()
+    ) {
+        // Content
+        Box(
             modifier = Modifier
-                .fillMaxSize()
-                .navigationBarsPadding()
+                .weight(1f)
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
         ) {
-            // Content
-            Box(
+            Column(
                 modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
+                    .fillMaxWidth()
+                    .padding(horizontal = windowSize.contentPadding),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 2)
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = windowSize.contentPadding),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 2)
-                ) {
-                    SuccessIcon(
-                        icon = Icons.Default.Error,
-                        iconTint = MaterialTheme.colorScheme.error,
-                        iconBackgroundColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
-                        windowSize = windowSize
-                    )
+                SuccessIcon(
+                    icon = Icons.Default.Error,
+                    iconTint = MaterialTheme.colorScheme.error,
+                    iconBackgroundColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
+                    windowSize = windowSize
+                )
 
-                    Text(
-                        text = stringResource(R.string.patcher_failed_title),
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
+                Text(
+                    text = stringResource(R.string.patcher_failed_title),
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
 
-                    Text(
-                        text = stringResource(R.string.patcher_failed_subtitle),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center
-                    )
-                }
+                Text(
+                    text = stringResource(R.string.patcher_failed_subtitle),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
             }
-
-            // Bottom action bar
-            PatcherBottomActionBar(
-                showCancelButton = false,
-                showHomeButton = true,
-                showSaveButton = false,
-                showErrorButton = true,
-                onCancelClick = {},
-                onHomeClick = onHomeClick,
-                onSaveClick = {},
-                onErrorClick = onErrorClick
-            )
         }
+
+        // Bottom action bar
+        PatcherBottomActionBar(
+            showCancelButton = false,
+            showHomeButton = true,
+            showSaveButton = false,
+            showErrorButton = true,
+            onCancelClick = {},
+            onHomeClick = onHomeClick,
+            onSaveClick = {},
+            onErrorClick = onErrorClick
+        )
     }
 }

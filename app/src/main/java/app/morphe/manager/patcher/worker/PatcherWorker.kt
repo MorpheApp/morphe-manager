@@ -77,6 +77,7 @@ class PatcherWorker(
     private fun createNotification(
         stepName: String? = null,
         patchProgress: Pair<Int, Int>? = null,  // completed to total patches
+        contentText: String? = null,
     ): Notification {
         val notificationIntent = Intent(applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -98,7 +99,7 @@ class PatcherWorker(
             .setContentTitle(
                 stepName ?: applicationContext.getString(R.string.patcher_notification_title)
             )
-            .setContentText(applicationContext.getText(R.string.patcher_notification_text))
+            .setContentText(contentText ?: applicationContext.getText(R.string.patcher_notification_text))
             .apply {
                 if (patchProgress != null) {
                     val (completed, total) = patchProgress
@@ -116,13 +117,14 @@ class PatcherWorker(
     private fun updatePatcherNotification(
         stepName: String?,
         patchProgress: Pair<Int, Int>? = null,
+        contentText: String? = null,
     ) {
         val notificationManager =
             applicationContext.getSystemService(NotificationManager::class.java)
         // Android won't visually switch from indeterminate → determinate on the same notification
         // ID unless we first post a brief non-indeterminate update. Post the real notification
         // directly — the determinate bar replaces the spinning one cleanly this way
-        notificationManager.notify(NOTIFICATION_ID, createNotification(stepName, patchProgress))
+        notificationManager.notify(NOTIFICATION_ID, createNotification(stepName, patchProgress, contentText))
     }
 
     override suspend fun doWork(): Result {
@@ -170,6 +172,11 @@ class PatcherWorker(
         var completedPatches = 0
         // Cached so onPatchCompleted can update the title without a string lookup race
         val applyingPatchesLabel = applicationContext.getString(R.string.applying_patches)
+        val writingApkLabel = applicationContext.getString(R.string.patcher_step_write_patched)
+        val signingApkLabel = applicationContext.getString(R.string.patcher_step_sign_apk)
+        val isExpertMode = prefs.useExpertMode.get()
+        // Flipped once when the patching phase completes to trigger the writing-step notification
+        var patchingPhaseCompleted = false
 
         fun updateProgress(name: String? = null, state: State? = null, message: String? = null) {
             if (state == State.RUNNING) {
@@ -181,16 +188,23 @@ class PatcherWorker(
                         patchProgress = completedPatches to totalPatches
                     )
                 }
+            } else if (state == State.COMPLETED && !patchingPhaseCompleted
+                && completedPatches == totalPatches && totalPatches > 0
+            ) {
+                patchingPhaseCompleted = true
+                updatePatcherNotification(stepName = writingApkLabel, patchProgress = null)
             }
             args.onProgress(name, state, message)
         }
 
-        val onPatchCompleted: suspend () -> Unit = {
+        val onPatchCompleted: suspend (String) -> Unit = { patchName ->
             completedPatches++
-            // Update both title and progress bar together on every completed patch
+            // Update both title and progress bar together on every completed patch;
+            // in expert mode also show which patch just finished
             updatePatcherNotification(
                 stepName = applyingPatchesLabel,
-                patchProgress = completedPatches to totalPatches
+                patchProgress = completedPatches to totalPatches,
+                contentText = if (isExpertMode && patchName.isNotBlank()) patchName else null,
             )
             args.onPatchCompleted()
         }
@@ -323,6 +337,7 @@ class PatcherWorker(
                 NativeLibStripper.strip(patchedApk, args.logger)
             }
 
+            updatePatcherNotification(stepName = signingApkLabel, patchProgress = null)
             keystoreManager.sign(patchedApk, File(args.output))
             updateProgress(state = State.COMPLETED) // Signing
 

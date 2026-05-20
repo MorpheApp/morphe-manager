@@ -22,6 +22,7 @@ import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -31,7 +32,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
@@ -318,7 +318,7 @@ fun InstalledAppInfoDialog(
                             .fillMaxHeight()
                             .padding(start = 20.dp),
                         contentPadding = PaddingValues(bottom = 24.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
                     ) {
                         item(contentType = "hero") {
                             AppHeroHeader(
@@ -337,6 +337,7 @@ fun InstalledAppInfoDialog(
                                     appliedPatches = appliedPatches,
                                     bundlesUsedSummary = bundlesUsedSummary,
                                     onShowPatches = { showAppliedPatchesDialog.value = true },
+                                    accentColor = appAccentColor
                                 )
                             }
                         }
@@ -350,7 +351,7 @@ fun InstalledAppInfoDialog(
                             .fillMaxHeight()
                             .padding(horizontal = 20.dp)
                             .navigationBarsPadding(),
-                        verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
+                        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing, Alignment.CenterVertically),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         AnimatedVisibility(
@@ -368,6 +369,7 @@ fun InstalledAppInfoDialog(
                                     onClick = {
                                         onTriggerPatchFlow(installedApp.originalPackageName)
                                     },
+                                    accentColor = appAccentColor,
                                     isError = true
                                 )
                             }
@@ -387,6 +389,7 @@ fun InstalledAppInfoDialog(
                                     onClick = {
                                         onTriggerPatchFlow(installedApp.originalPackageName)
                                     },
+                                    accentColor = appAccentColor,
                                     isError = false
                                 )
                             }
@@ -408,8 +411,7 @@ fun InstalledAppInfoDialog(
                                 onShowMountWarning = { action ->
                                     pendingMountWarningAction.value = action
                                     showMountWarningDialog.value = true
-                                },
-                                modifier = Modifier.animateContentSize(animationSpec = tween(220))
+                                }
                             )
                         }
                         if (!viewModel.hasOriginalApk) {
@@ -468,6 +470,7 @@ fun InstalledAppInfoDialog(
                                             onClick = {
                                                 onTriggerPatchFlow(installedApp.originalPackageName)
                                             },
+                                            accentColor = appAccentColor,
                                             isError = true,
                                             modifier = Modifier.padding(horizontal = 20.dp)
                                         )
@@ -491,6 +494,7 @@ fun InstalledAppInfoDialog(
                                             onClick = {
                                                 onTriggerPatchFlow(installedApp.originalPackageName)
                                             },
+                                            accentColor = appAccentColor,
                                             isError = false,
                                             modifier = Modifier.padding(horizontal = 20.dp)
                                         )
@@ -510,6 +514,7 @@ fun InstalledAppInfoDialog(
                                     appliedPatches = appliedPatches,
                                     bundlesUsedSummary = bundlesUsedSummary,
                                     onShowPatches = { showAppliedPatchesDialog.value = true },
+                                    accentColor = appAccentColor
                                 )
                             }
                         }
@@ -539,7 +544,6 @@ fun InstalledAppInfoDialog(
                                 modifier = Modifier
                                     .padding(horizontal = 20.dp)
                                     .padding(top = 12.dp)
-                                    .animateContentSize(animationSpec = tween(220))
                             )
                         }
                     }
@@ -571,6 +575,12 @@ fun InstalledAppInfoDialog(
     }
 }
 
+@Composable
+private fun Color.accentContentColor(alpha: Float): Color =
+    if (isExtremeAccent()) MaterialTheme.colorScheme.onSurfaceVariant
+    else if (compositeOver(MaterialTheme.colorScheme.surface, alpha)
+        .requiresLightContent()) Color.White else Color.Black
+
 /**
  * Unified banner component for warnings and updates.
  */
@@ -582,20 +592,13 @@ private fun WarningBanner(
     buttonText: String,
     buttonIcon: ImageVector,
     onClick: () -> Unit,
+    accentColor: Color,
     modifier: Modifier = Modifier,
     isError: Boolean = false
 ) {
-    val containerColor = if (isError) {
-        MaterialTheme.colorScheme.errorContainer
-    } else {
-        MaterialTheme.colorScheme.primaryContainer
-    }
-
-    val contentColor = if (isError) {
-        MaterialTheme.colorScheme.onErrorContainer
-    } else {
-        MaterialTheme.colorScheme.onPrimaryContainer
-    }
+    val baseColor = if (isError) MaterialTheme.colorScheme.error else accentColor
+    val containerColor = if (baseColor.isExtremeAccent()) MaterialTheme.colorScheme.surfaceVariant else baseColor.copy(alpha = 0.15f)
+    val contentColor = baseColor.accentContentColor(0.15f)
 
     Column(
         modifier = modifier
@@ -638,7 +641,8 @@ private fun WarningBanner(
         // Action button
         PrimaryActionButton(
             action = ActionItem(text = buttonText, icon = buttonIcon, onClick = onClick),
-            accentColor = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+            accentColor = baseColor,
+            contentColorOverride = contentColor,
             modifier = Modifier.fillMaxWidth()
         )
     }
@@ -657,8 +661,7 @@ private fun AppHeroHeader(
     compact: Boolean = false
 ) {
     val onHero = MaterialTheme.colorScheme.onBackground
-    val isExtremeAccent = accentColor.luminance() !in 0.04f..0.92f
-    val chipBg = if (isExtremeAccent) onHero.copy(alpha = 0.12f) else accentColor.copy(alpha = 0.18f)
+    val chipBg = if (accentColor.isExtremeAccent()) onHero.copy(alpha = 0.12f) else accentColor.copy(alpha = 0.18f)
 
     val iconSize = if (compact) 56.dp else 88.dp
     val iconCorner = if (compact) 14.dp else 22.dp
@@ -669,26 +672,27 @@ private fun AppHeroHeader(
     // Entrance animations (progress-based: 0f -> 1f).
     // One Float per visual group; alpha, offset and scale are derived via lerp
     // to avoid redundant Recomposition subscribers.
-    var entered by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) { entered = true }
+    val entered = remember { mutableStateOf(false) }
+    val relativeTime = remember(installedApp.patchedAt) { installedApp.patchedAt?.let { getRelativeTimeString(it) } }
+    LaunchedEffect(Unit) { entered.value = true }
 
     // Icon: spring with overshoot (first thing the eye sees, no delay needed).
     val iconProgress by animateFloatAsState(
-        targetValue = if (entered) 1f else 0f,
+        targetValue = if (entered.value) 1f else 0f,
         animationSpec = spring(dampingRatio = 0.55f, stiffness = 320f),
         label = "heroIconProgress"
     )
 
     // Name + version share one clock; stagger handled inside graphicsLayer via lerp
     val textProgress by animateFloatAsState(
-        targetValue = if (entered) 1f else 0f,
+        targetValue = if (entered.value) 1f else 0f,
         animationSpec = tween(durationMillis = 260, delayMillis = 60, easing = EaseOutCubic),
         label = "heroTextProgress"
     )
 
     // Both chips share one clock; chip 2 uses a clamped sub-range for its offset
     val chipsProgress by animateFloatAsState(
-        targetValue = if (entered) 1f else 0f,
+        targetValue = if (entered.value) 1f else 0f,
         animationSpec = tween(durationMillis = 240, delayMillis = 160, easing = EaseOutBack),
         label = "heroChipsProgress"
     )
@@ -783,10 +787,10 @@ private fun AppHeroHeader(
                         horizontalAlignment = Alignment.End
                     ) {
                         InfoChip(icon = chipIcon, text = stringResource(chipLabel), bg = chipBg, fg = onHero)
-                        installedApp.patchedAt?.let { ts ->
+                        if (relativeTime != null) {
                             InfoChip(
                                 icon = Icons.Outlined.Schedule,
-                                text = getRelativeTimeString(ts),
+                                text = relativeTime,
                                 bg = chipBg,
                                 fg = onHero
                             )
@@ -812,7 +816,7 @@ private fun AppHeroHeader(
                         InfoChip(icon = chipIcon, text = stringResource(chipLabel), bg = chipBg, fg = onHero)
                     }
                     // Animated chip 2 (sub-range: starts when chip1 is 30% done)
-                    installedApp.patchedAt?.let { ts ->
+                    if (relativeTime != null) {
                         Box(
                             modifier = Modifier.graphicsLayer {
                                 val p = ((chipsProgress - 0.3f) / 0.7f).coerceIn(0f, 1f)
@@ -822,7 +826,7 @@ private fun AppHeroHeader(
                         ) {
                             InfoChip(
                                 icon = Icons.Outlined.Schedule,
-                                text = getRelativeTimeString(ts),
+                                text = relativeTime,
                                 bg = chipBg,
                                 fg = onHero
                             )
@@ -895,6 +899,7 @@ private fun InfoSection(
     appliedPatches: Map<Int, Set<String>>?,
     bundlesUsedSummary: String,
     onShowPatches: () -> Unit,
+    accentColor: Color,
     modifier: Modifier = Modifier
 ) {
     val totalPatches = appliedPatches?.values?.sumOf { it.size } ?: 0
@@ -947,6 +952,7 @@ private fun InfoSection(
                 icon = Icons.Outlined.DoneAll,
                 label = stringResource(R.string.home_app_info_applied_patches),
                 value = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches),
+                accentColor = accentColor,
                 onAction = onShowPatches
             )
         }
@@ -1004,6 +1010,7 @@ private fun InfoRowWithAction(
     icon: ImageVector,
     label: String,
     value: String,
+    accentColor: Color,
     onAction: () -> Unit,
 ) {
     Row(
@@ -1038,7 +1045,11 @@ private fun InfoRowWithAction(
         ActionPillButton(
             onClick = onAction,
             icon = Icons.AutoMirrored.Outlined.List,
-            contentDescription = stringResource(R.string.view)
+            contentDescription = stringResource(R.string.view),
+            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                containerColor = accentColor.copy(alpha = 0.18f),
+                contentColor = accentColor.accentContentColor(0.18f)
+            )
         )
     }
 }
@@ -1226,7 +1237,7 @@ private fun ActionsSection(
         )
     }
 
-    Column(modifier = modifier.animateContentSize(animationSpec = tween(220)), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+    Column(modifier = modifier.animateContentSize(animationSpec = tween(MorpheDefaults.ANIMATION_DURATION)), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         // Primary actions row
         if (primaryActions.isNotEmpty()) {
             primaryActions.forEach { action ->
@@ -1287,16 +1298,11 @@ private fun LoadingOrIcon(isLoading: Boolean, action: ActionItem, tint: Color) {
 private fun PrimaryActionButton(
     action: ActionItem,
     accentColor: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    contentColorOverride: Color? = null
 ) {
-    // Match the header background level: tinted surface instead of full accent
-    val isExtremeAccent = accentColor.luminance() !in 0.04f..0.92f
-    val buttonColor = if (isExtremeAccent) {
-        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.9f)
-    } else {
-        accentColor.copy(alpha = 0.18f)
-    }
-    val contentColor = MaterialTheme.colorScheme.onSurface
+    val buttonColor = if (accentColor.isExtremeAccent()) MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.9f) else accentColor.copy(alpha = 0.18f)
+    val contentColor = contentColorOverride ?: accentColor.accentContentColor(0.18f)
     Surface(
         onClick = action.onClick,
         enabled = action.enabled && !action.isLoading,
@@ -1447,7 +1453,7 @@ private fun DeleteConfirmDialog(
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             // App Icon
             AppIcon(
@@ -1556,7 +1562,7 @@ private fun AppliedPatchesDialog(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             bundles.forEach { bundle ->
                 Column(

@@ -84,24 +84,17 @@ fun IncompatiblePatcherVersionDialog(
             }
         }
     ) {
-        val secondaryColor = LocalDialogSecondaryTextColor.current
-
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Text(
-                text = htmlAnnotatedString(stringResource(
-                    R.string.patcher_incompatible_patcher_description,
-                    bundleName,
-                    requiredVersion
-                )),
-                style = MaterialTheme.typography.bodyLarge,
-                color = secondaryColor,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
+        Text(
+            text = htmlAnnotatedString(stringResource(
+                R.string.patcher_incompatible_patcher_description,
+                bundleName,
+                requiredVersion
+            )),
+            style = MaterialTheme.typography.bodyLarge,
+            color = LocalDialogSecondaryTextColor.current,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
@@ -258,7 +251,7 @@ fun StoragePermissionDialog(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             Text(
                 text = stringResource(
@@ -484,7 +477,7 @@ fun PatcherErrorDialog(
                     modifier = Modifier
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
-                        .padding(horizontal = 16.dp, vertical = 4.dp),
+                        .padding(horizontal = MorpheDefaults.ContentPadding, vertical = 4.dp),
                 ) {
                     Text(
                         text = errorMessage,

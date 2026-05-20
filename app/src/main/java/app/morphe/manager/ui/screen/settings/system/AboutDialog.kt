@@ -140,8 +140,8 @@ fun AboutDialog(onDismiss: () -> Unit) {
             // Social Links
             FlowRow(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding, Alignment.CenterHorizontally),
+                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
                 maxItemsInEachRow = 4
             ) {
                 AboutViewModel.socials.forEach { link ->

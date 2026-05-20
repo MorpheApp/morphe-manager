@@ -58,15 +58,18 @@
     <string name="sources_management_title">패치 소스</string>
     <string name="sources_management_open_in_browser">브라우저에서 열기</string>
     <string name="sources_management_failed_to_open_url">URL을 열 수 없습니다</string>
-    <string name="sources_management_prerelease_toggle">패치 Pre-release 버전 사용</string>
+    <string name="sources_management_prerelease_toggle">Pre-release 패치</string>
     <string name="sources_management_prerelease_toggle_description">새 실험 패치 버전을 미리 받아보세요</string>
-    <string name="sources_management_experimental_versions_toggle">실험 앱 버전 사용</string>
-    <string name="sources_management_experimental_versions_toggle_description">사용 가능한 경우 실험 앱 버전으로 패치합니다</string>
+    <string name="sources_management_experimental_versions_toggle">실험 앱 버전</string>
+    <string name="sources_management_experimental_versions_toggle_description">사용 가능한 경우에 실험 앱 버전으로 패치합니다</string>
     <string name="sources_management_already_exists">이 소스는 이미 추가되어 있습니다</string>
     <string name="sources_management_invalid_url">잘못된 소스 URL입니다. 주소를 확인하고 다시 시도하세요</string>
     <string name="sources_management_metadata_unavailable">메타데이터 없음</string>
     <string name="sources_management_metadata_unavailable_hint">원격 메타데이터 파일을 사용할 수 없습니다. 설치된 번들로 패치는 계속 가능하지만, 이 소스에 대한 자동 업데이트는 비활성화됩니다</string>
     <string name="sources_management_metadata_unavailable_hint_missing">패치 번들을 다운로드할 수 없습니다. 소스 URL이 올바르지 않거나 파일이 존재하지 않을 수 있습니다</string>
+    <string name="sources_management_source_enabled">소스가 활성화됨</string>
+    <string name="sources_management_source_disabled">소스 비활성화됨</string>
+    <string name="sources_management_source_updating">소스를 업데이트하는 중</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">표시 이름</string>
     <string name="sources_dialog_rename">패치 소스 이름 변경</string>
@@ -138,9 +141,13 @@
     <string name="expert_mode_search">패치 검색</string>
     <string name="expert_mode_proceed">패치 진행</string>
     <string name="expert_mode_disable_all">모두 비활성화하였습니다</string>
+    <string name="expert_mode_disable_all_done">모든 패치를 비활성화하였습니다</string>
     <string name="expert_mode_enable_all">모두 활성화하였습니다</string>
+    <string name="expert_mode_enable_all_done">모든 패치를 활성화하였습니다</string>
     <string name="expert_mode_reset_to_default">패치 기본값으로 초기화하였습니다</string>
+    <string name="expert_mode_reset_to_default_done">권장 패치를 적용하였습니다</string>
     <string name="expert_mode_restore_saved">저장된 선택 목록으로 복원하였습니다</string>
+    <string name="expert_mode_restore_saved_done">저장된 선택 목록을 복원하였습니다</string>
     <string name="expert_mode_no_results">패치를 찾을 수 없습니다</string>
     <string name="expert_mode_universal_patches">유니버셜 패치</string>
     <string name="expert_mode_new_patches">신규</string>
@@ -248,7 +255,7 @@
     <string name="root_pre_patch_installer_mount_title">루트 마운트</string>
     <string name="root_pre_patch_installer_mount_description">순정 앱 위에 패치된 APK를 마운트합니다. GmsCore가 필요하지 않습니다</string>
     <string name="root_pre_patch_installer_standard_title">표준 설치</string>
-    <string name="root_pre_patch_installer_standard_description">GmsCore support가 포함된 별도 앱으로 설치합니다. 패치 후에 설치 프로그램(시스템 설치 프로그램, Shizuku, etc.)을 선택하세요</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore를 지원하는 별도 앱으로 설치합니다. 패치 후에 설치 프로그램을 선택할 수 있습니다</string>
     <string name="root_pre_patch_installer_hint">설치 방법에 따라 포함되는 패치가 결정되며 패치 후에는 변경할 수 없습니다</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">오류 정보를 클립보드에 복사하였습니다</string>
@@ -402,13 +409,13 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">앱 아이콘 변경</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">업데이트</string>
-    <string name="settings_advanced_updates_use_prereleases">Morphe Pre-release 버전 사용</string>
-    <string name="settings_advanced_updates_use_prereleases_description">새 Morphe 기능을 미리 사용합니다. Pre-release 패치를 받으려면 각 패치 소스에서 Pre-release 토글을 개별적으로 활성화하세요</string>
-    <string name="settings_advanced_updates_allow_metered">모바일 데이터에서 업데이트</string>
-    <string name="settings_advanced_updates_allow_metered_description">모바일 데이터를 사용하여 Morphe 및 패치 업데이트를 다운로드하도록 허용합니다</string>
+    <string name="settings_advanced_updates_use_prereleases">Pre-release 업데이트</string>
+    <string name="settings_advanced_updates_use_prereleases_description">새 Morphe 앱 버전에 미리 받아봅니다. 패치 소스에서 소스별로 Pre-release를 활성화하세요</string>
+    <string name="settings_advanced_updates_allow_metered">모바일 데이터 업데이트</string>
+    <string name="settings_advanced_updates_allow_metered_description">모바일 데이터를 사용하여 Morphe 및 패치 업데이트를 다운로드할 수 있도록 허용합니다</string>
     <string name="settings_advanced_updates_background_notifications">백그라운드 업데이트 알림</string>
     <string name="settings_advanced_updates_background_notifications_description">백그라운드에서 주기적으로 업데이트를 확인하고 업데이트가 있을 경우에 알림을 보냅니다</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">앱이 닫혀 있어도 새 릴리스에 대한 푸시 알림을 즉시 받습니다</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">앱이 닫혀 있어도 새 릴리스에 대한 푸시 알림을 받습니다</string>
     <string name="settings_advanced_update_interval">확인 빈도</string>
     <string name="settings_advanced_update_interval_dialog_title">업데이트 확인</string>
     <string name="settings_advanced_update_interval_hourly">한시간에 한번</string>
@@ -432,12 +439,11 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">전문가 설정</string>
     <string name="settings_advanced_expert_mode">전문가 모드</string>
-    <string name="settings_advanced_expert_mode_description">고급 Morphe 패치 설정과 커스텀 옵션을 활성화합니다</string>
+    <string name="settings_advanced_expert_mode_description">고급 Morphe 패치 설정과 사용자 정의 옵션을 활성화합니다</string>
     <string name="settings_advanced_expert_mode_dialog_title">전문가 모드 활성화</string>
     <string name="settings_advanced_expert_mode_dialog_message">전문가 모드에서는 패치를 적용하는 방식을 더 세밀하게 조절할 수 있지만, 설정을 잘못 건드리면 앱이 정상적으로 작동하지 않을 수 있습니다</string>
     <string name="settings_advanced_strip_unused_libs">기기 아키텍처에 맞게 최적화</string>
-    <string name="settings_advanced_strip_unused_libs_description">"병합 과정에서 이 기기에서 지원되지 않는 CPU 아키텍처, 언어 및 화면 밀도에 대한 분할 APK 모듈을 건너뜁니다.
-일반 APK의 경우에는 패치 후에 지원되지 않는 아키텍처에 대한 네이티브 라이브러리를 제거합니다"</string>
+    <string name="settings_advanced_strip_unused_libs_description">사용하지 않는 CPU 아키텍처 라이브러리 및 분할 APK 모듈을 제거합니다</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">바이트코드 처리 모드</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">패치 과정에서 바이트코드를 처리하는 방식을 제어합니다. 패치 속도, 메모리 사용량 및 출력 APK 크기에 영향을 줍니다</string>
@@ -445,7 +451,7 @@
     <string name="settings_advanced_bytecode_mode_strip_fast">빠름</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">빠른 패치 속도와 낮은 메모리 사용량을 제공하지만, APK 크기가 커집니다. 저사양 또는 RAM이 적은 기기에 권장됩니다</string>
     <string name="settings_advanced_bytecode_mode_full">최대</string>
-    <string name="settings_advanced_bytecode_mode_full_description">느린 패치 속도로 기존 동작 방식과 동일하게 작동합니다. 빠른 모드에서 문제가 발생할 경우만 사용하세요</string>
+    <string name="settings_advanced_bytecode_mode_full_description">패치 속도가 느려지지만 기존 동작 방식과 동일하게 작동합니다. 빠른 모드에서 문제가 발생하는 경우에만 권장됩니다</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub 개인 액세스 토큰</string>
     <string name="settings_advanced_github_pat_description">풀 리퀘스트 소스에 필요합니다</string>
@@ -540,7 +546,7 @@ morphe_header_custom_dark.png
     <string name="installer">설치 프로그램</string>
     <string name="installer_title">설치 프로그램 선택</string>
     <string name="installer_internal_name">시스템 설치 프로그램</string>
-    <string name="installer_internal_description">Android 패키지 설치 프로그램를 사용합니다</string>
+    <string name="installer_internal_description">Android 패키지 설치 프로그램을 사용합니다</string>
     <string name="installer_auto_saved_name">루팅된 마운트 설치 프로그램</string>
     <string name="installer_auto_saved_description">설치된 앱 위에 패치된 APK를 마운트합니다</string>
     <string name="installer_shizuku_description">Shizuku 또는 Sui를 사용하여 자동으로 설치합니다</string>
@@ -564,56 +570,46 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_message">선택된 설치 프로그램(%s)을 현재 사용할 수 없습니다. 문제를 해결하고 다시 시도하거나 표준 설치 프로그램을 사용해 보세요</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku가 실행 중이고, 이 앱에 권한이 부여되었는지 확인하세요</string>
     <string name="installer_use_standard">표준을 사용합니다</string>
-    <string name="settings_prompt_installer_on_install">설치 시 설치 프로그램 안내</string>
+    <string name="settings_prompt_installer_on_install">설치 프로그램 선택 프롬프트</string>
     <string name="settings_prompt_installer_on_install_description">패치된 앱을 설치할 때마다 설치 프로그램 선택 다이얼로그를 표시합니다</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">배터리 최적화</string>
-    <string name="settings_system_battery_optimization_description">Morphe가 최소화되었을 경우에 패처가 중지되지 않도록 시스템을 방지합니다</string>
-    <string name="settings_system_battery_optimization_excluded">제외됨</string>
-    <string name="settings_system_battery_optimization_not_excluded">제외되지 않음</string>
+    <string name="settings_system_battery_optimization_description">앱이 최소화되어도 패처가 계속 실행되도록 유지합니다</string>
     <string name="settings_system_performance">성능</string>
     <string name="settings_system_process_runtime">프로세스 런타임</string>
-    <string name="settings_system_process_runtime_description">안정성 향상을 위해 패치를 별도의 프로세스에서 실행합니다</string>
+    <string name="settings_system_process_runtime_description">안정성 향상을 위해 별도의 프로세스에서 패치를 실행합니다</string>
     <string name="settings_system_process_runtime_memory_limit">메모리 제한</string>
-    <string name="settings_system_process_runtime_memory_limit_description">메모리 제한을 높이면 패치 속도가 빨라질 수 있지만 저사양 기기에서는 작동되지 않을 수 있습니다</string>
+    <string name="settings_system_process_runtime_memory_limit_description">메모리 제한 값을 높이면 성능이 좋은 기기에서 패치 속도를 향상시킬 수 있습니다</string>
     <string name="settings_system_process_runtime_enable">프로세스 런타임 활성화</string>
     <string name="settings_system_memory_limit_subtitle">패치에 사용 가능한 메모리</string>
     <string name="settings_system_memory_limit_warning">메모리 제한이 낮으면 대용랑 앱을 패치할 경우에 오류가 발생할 수 있습니다</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB 제한</string>
     <string name="settings_system_process_runtime_disabled_description">설정하려면 탭하세요</string>
     <string name="settings_system_process_runtime_description_not_available">이 기능은 Android 11 이상이 필요합니다</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">가져오기 &amp; 내보내기</string>
-    <string name="settings_system_import_keystore">키스토어 가져오기</string>
-    <string name="settings_system_import_keystore_description">커스텀 키스토어를 가져옵니다</string>
+    <string name="settings_system_keystore">키스토어</string>
+    <string name="settings_system_import_keystore_description">서명된 키스토어를 가져오거나 내보냅니다</string>
     <string name="settings_system_import_keystore_dialog_title">키스토어 자격 증명 입력</string>
     <string name="settings_system_import_keystore_dialog_description">키스토어를 가져오려면 키스토어의 자격 증명을 입력해야 합니다</string>
     <string name="settings_system_import_keystore_dialog_alias_field">사용자 이름 (별칭)</string>
     <string name="settings_system_import_keystore_dialog_password_field">비밀번호</string>
-    <string name="settings_system_import_keystore_dialog_button">가져오기</string>
     <string name="settings_system_import_keystore_dialog_format_field">키스토어 형식</string>
     <string name="settings_system_import_keystore_wrong_credentials">키스토어 자격 증명이 잘못되었습니다</string>
     <string name="settings_system_import_keystore_success">키스토어를 가져왔습니다</string>
     <string name="settings_system_import_keystore_failed">키스토어를 가져올 수 없습니다</string>
-    <string name="settings_system_export_keystore">키스토어 내보내기</string>
-    <string name="settings_system_export_keystore_description">현재 사용되는 키스토어를 내보냅니다</string>
     <string name="settings_system_export_keystore_unavailable">내보낼 키스토어가 없습니다</string>
     <string name="settings_system_export_keystore_success">키스토어를 내보냈습니다</string>
     <string name="settings_system_export_keystore_failed">키스토어를 내보낼 수 없습니다</string>
     <string name="settings_system_show_password_field">비밀번호 표시</string>
     <string name="settings_system_hide_password_field">비밀번호 숨기기</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Morphe 설정 가져오기</string>
-    <string name="settings_system_import_manager_settings_description">Morphe 설정을 JSON 파일에서 가져옵니다</string>
+    <string name="settings_system_morphe_settings">Morphe 설정</string>
+    <string name="settings_system_import_manager_settings_description">Morphe 설정을 백업하고 복원합니다</string>
     <string name="settings_system_import_manager_settings_fail">Morphe 설정을 가져올 수 없습니다: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe 설정을 가져왔습니다</string>
-    <string name="settings_system_export_manager_settings">Morphe 설정 내보내기</string>
-    <string name="settings_system_export_manager_settings_description">Morphe 설정을 JSON 파일으로 내보냅니다</string>
     <string name="settings_system_export_manager_settings_fail">Morphe 설정을 내보낼 수 없습니다: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe 설정을 내보냈습니다</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">디버그</string>
-    <string name="settings_system_export_debug_logs">디버그 로그 내보내기</string>
     <string name="settings_system_export_debug_logs_description">문제 해결을 위해 시스템 로그를 저장합니다</string>
     <string name="settings_system_export_debug_logs_export_read_failed">로그를 읽을 수 없습니다 (종료 코드 %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">로그를 내보낼 수 없습니다</string>
@@ -630,14 +626,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_deleted">패치된 APK를 성공적으로 삭제하였습니다</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">원본 APK</string>
-    <string name="settings_system_original_apks_description">원본 APK 파일을 다시 패치하기 위해 저장합니다. 앱마다 가장 최신 버전만 보관됩니다</string>
+    <string name="settings_system_original_apks_description">나중에 다시 패치할 경우를 위해 저장됩니다. 앱별로 한 개의 버전만 보관됩니다</string>
     <string name="settings_system_original_apks_empty">저장된 원본 APK가 없습니다</string>
     <string name="settings_system_original_apks_deleted">원본 APK를 성공적으로 삭제하였습니다</string>
     <string name="settings_system_original_apks_delete_title">원본 APK 삭제</string>
     <string name="settings_system_original_apks_delete_confirm">\'%s\'에 대한 원본 APK를 삭제하시겠습니까? 다시 패치할 경우에 새 APK를 제공해야 합니다.</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">패치 선택 목록</string>
-    <string name="settings_system_patch_selections_description">저장된 패치 선택 목록 및 옵션을 관리합니다. 앱을 제거한 후에도 유지됩니다</string>
+    <string name="settings_system_patch_selections_description">저장된 패치 선택 목록은 앱을 제거한 후에도 유지됩니다</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">모든 선택 목록 초기화</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">패키지 선택 목록 초기화</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">스소 선택 목록 초기화</string>
@@ -697,6 +693,10 @@ morphe_header_custom_dark.png
     <string name="disabled">비활성화됨</string>
     <string name="selected">선택됨</string>
     <string name="not_selected">선택 안 함</string>
+    <string name="select_all">모두 선택</string>
+    <string name="select_all_done">모두 선택됨</string>
+    <string name="deselect_all">모두 선택 해제</string>
+    <string name="deselect_all_done">모두 선택 해제됨</string>
     <string name="rename">이름 변경</string>
     <string name="import_">가져오기</string>
     <string name="export">내보내기</string>
@@ -717,6 +717,7 @@ morphe_header_custom_dark.png
     <string name="unmount">마운트 해제</string>
     <string name="unmounted">마운트 해제됨</string>
     <string name="remount">다시 마운트</string>
+    <string name="share">공유</string>
     <string name="install">설치</string>
     <string name="installed">설치됨</string>
     <string name="reinstall">다시 설치</string>

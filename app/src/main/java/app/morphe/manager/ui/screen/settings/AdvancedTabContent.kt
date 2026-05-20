@@ -13,7 +13,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -106,7 +105,7 @@ fun AdvancedTabContent(
             title = stringResource(R.string.settings_advanced_expert_mode),
             subtitle = stringResource(R.string.settings_advanced_expert_mode_description),
             trailingContent = {
-                Switch(
+                MorpheSwitch(
                     checked = useExpertMode,
                     onCheckedChange = null,
                     modifier = Modifier.semantics {
@@ -143,7 +142,7 @@ fun AdvancedTabContent(
                         title = stringResource(R.string.settings_advanced_strip_unused_libs),
                         subtitle = stringResource(R.string.settings_advanced_strip_unused_libs_description),
                         trailingContent = {
-                            Switch(
+                            MorpheSwitch(
                                 checked = stripUnusedNativeLibs,
                                 onCheckedChange = null,
                                 modifier = Modifier.semantics {

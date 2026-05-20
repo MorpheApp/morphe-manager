@@ -58,15 +58,18 @@
     <string name="sources_management_title">Foinsí paiste</string>
     <string name="sources_management_open_in_browser">Oscail sa bhrabhsálaí</string>
     <string name="sources_management_failed_to_open_url">Teip ar URL a oscailt</string>
-    <string name="sources_management_prerelease_toggle">Bain úsáid as paistí réamh-eisiúna</string>
+    <string name="sources_management_prerelease_toggle">Paistí réamh-eisiúna</string>
     <string name="sources_management_prerelease_toggle_description">Faigh rochtain luath ar leagan nua paistí turgnamhacha</string>
-    <string name="sources_management_experimental_versions_toggle">Úsáid leaganacha turgnamhacha d’aipeanna</string>
+    <string name="sources_management_experimental_versions_toggle">Leaganacha turgnamhacha d’aipeanna</string>
     <string name="sources_management_experimental_versions_toggle_description">Paiste spriocanna aipeanna turgnamhacha más féidir</string>
     <string name="sources_management_already_exists">Tá an fhoinse seo curtha leis cheana féin</string>
     <string name="sources_management_invalid_url">URL foinse neamhbhailí. Seiceáil an seoladh agus bain triail eile as</string>
     <string name="sources_management_metadata_unavailable">Meiteashonraí N/B</string>
     <string name="sources_management_metadata_unavailable_hint">Níl an cianchomhad meiteashonraí ar fáil. Oibríonn paistí leis an mbeart suiteáilte fós, ach tá uath-nuashonrú díchumasaithe don fhoinse seo</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Níorbh fhéidir an pacáiste paiste a íoslódáil. B’fhéidir go bhfuil an URL foinse mícheart nó nach bhfuil an comhad ann.</string>
+    <string name="sources_management_source_enabled">Foinse cumasaithe</string>
+    <string name="sources_management_source_disabled">Foinse díchumasaithe</string>
+    <string name="sources_management_source_updating">Foinse á nuashonrú</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Ainm taispeána</string>
     <string name="sources_dialog_rename">Athainmnigh foinse an phaiste</string>
@@ -138,9 +141,13 @@
     <string name="expert_mode_search">Paistí cuardaigh</string>
     <string name="expert_mode_proceed">Lean ar aghaidh leis an bpaisteáil</string>
     <string name="expert_mode_disable_all">Díchumasaigh gach rud</string>
+    <string name="expert_mode_disable_all_done">Paistí uilíocha díchumasaithe</string>
     <string name="expert_mode_enable_all">Cumasaigh gach rud</string>
+    <string name="expert_mode_enable_all_done">Paistí uilíocha cumasaithe</string>
     <string name="expert_mode_reset_to_default">Cumasaigh paistí molta</string>
+    <string name="expert_mode_reset_to_default_done">Paistí molta curtha i bhfeidhm</string>
     <string name="expert_mode_restore_saved">Athchóirigh an rogha sábháilte</string>
+    <string name="expert_mode_restore_saved_done">Athbhunaigh an rogha sábháilte</string>
     <string name="expert_mode_no_results">Níor aimsíodh aon phaistí</string>
     <string name="expert_mode_universal_patches">Paistí uilíocha</string>
     <string name="expert_mode_new_patches">Nua</string>
@@ -402,9 +409,9 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Athraigh deilbhín</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Nuashonruithe</string>
-    <string name="settings_advanced_updates_use_prereleases">Bain úsáid as Morphe réamh-eisiúna</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Faigh rochtain luath ar ghnéithe nua Morphe. Chun paistí réamh-eisiúna a fháil, cumasaigh an lasc réamh-eisiúna i ngach foinse paiste ar leithligh.</string>
-    <string name="settings_advanced_updates_allow_metered">Nuashonrú ar shonraí soghluaiste</string>
+    <string name="settings_advanced_updates_use_prereleases">Nuashonruithe réamh-eisiúna</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Roimh rochtain ar leaganacha nua de aip Morphe. Comasaigh réamh-eisiúnthe per foinse i foinsí paiste</string>
+    <string name="settings_advanced_updates_allow_metered">Nuashonruithe sonraí móibíle</string>
     <string name="settings_advanced_updates_allow_metered_description">Ceadaigh nuashonruithe Morphe agus paiste a íoslódáil thar shonraí soghluaiste</string>
     <string name="settings_advanced_updates_background_notifications">Fógraí nuashonraithe cúlra</string>
     <string name="settings_advanced_updates_background_notifications_description">Seiceáil go tréimhsiúil le haghaidh nuashonruithe sa chúlra agus cuir in iúl nuair a bhíonn siad ar fáil</string>
@@ -436,8 +443,7 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_advanced_expert_mode_dialog_title">Cumasaigh mód saineolaithe?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Tugann mód saineolaithe níos mó smachta ar an gcaoi a gcuirtear paistí i bhfeidhm, ach is féidir le socruithe míchumraithe i mód saineolaithe aip neamhfheidhmiúil a bheith mar thoradh air.</string>
     <string name="settings_advanced_strip_unused_libs">Optamaigh le haghaidh ailtireacht gléasanna</string>
-    <string name="settings_advanced_strip_unused_libs_description">"Seachain modúil scoilte APK le haghaidh ailtireachtaí LAP, logán agus dlúis scáileáin nach dtacaítear leo le linn an chumasc.
-I gcás APKanna simplí, baintear leabharlanna dúchasacha d'ailtireacht nach dtacaítear leo tar éis paisteála."</string>
+    <string name="settings_advanced_strip_unused_libs_description">Bain úsáid as comhaid líbréirí ailtireachta CPU nach bhfuil in úsáid agus modúil APK scartha</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Mód próiseála cód beart</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Rialaíonn sé conas a phróiseáiltear cód beart le linn paisteála. Bíonn tionchar aige ar luas paisteála, úsáid cuimhne, agus méid aschuir APK.</string>
@@ -561,56 +567,46 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_unavailable_message">Níl an suiteálaí is fearr leat (%s) ar fáil faoi láthair. Is féidir leat an fhadhb a réiteach agus iarracht eile a dhéanamh, nó an suiteálaí caighdeánach a úsáid ina ionad</string>
     <string name="installer_unavailable_shizuku_hint">Cinntigh go bhfuil Shizuku ag rith agus go bhfuil cead tugtha don aip seo</string>
     <string name="installer_use_standard">Úsáid caighdeánach</string>
-    <string name="settings_prompt_installer_on_install">Suiteálaí spreagtha le linn suiteála</string>
+    <string name="settings_prompt_installer_on_install">Roghnuigh suiteálaí</string>
     <string name="settings_prompt_installer_on_install_description">Taispeáin dialóg roghnúcháin suiteálaí gach uair a shuiteálann tú aip phaisteáilte</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Uasmhéadú ceallraí</string>
-    <string name="settings_system_battery_optimization_description">Cuireann sé cosc ​​ar an gcóras an patcher a stopadh nuair a bhíonn Morphe beagaithe</string>
-    <string name="settings_system_battery_optimization_excluded">Eisceachta</string>
-    <string name="settings_system_battery_optimization_not_excluded">Ní eisceachta</string>
+    <string name="settings_system_battery_optimization_description">Coimeádann an paisteálaí ag rith nuair a bhíonn an aip beagnach</string>
     <string name="settings_system_performance">Feidhmíocht</string>
     <string name="settings_system_process_runtime">Am rith an phróisis</string>
     <string name="settings_system_process_runtime_description">Rith paisteáil i bpróiseas ar leithligh le haghaidh cobhsaíochta níos fearr</string>
     <string name="settings_system_process_runtime_memory_limit">Teorainn chuimhne</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Is féidir le teorainneacha cuimhne níos airde luas a chur le paistí ach ní fhéadfadh siad a bheith ag obair le gléasanna níos sine.</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Luasaíonn teorainnteanna níos airde paisteáil ar fheistí inann</string>
     <string name="settings_system_process_runtime_enable">Cumasaigh am rith an phróisis</string>
     <string name="settings_system_memory_limit_subtitle">Cuimhne ar fáil le haghaidh paisteála</string>
     <string name="settings_system_memory_limit_warning">D’fhéadfadh teorainn íseal chuimhne teipeanna a chur faoi deara agus aipeanna níos mó á bpaisteáil</string>
     <string name="settings_system_process_runtime_enabled_description">Teorainn %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Cliceáil chun cumrú</string>
     <string name="settings_system_process_runtime_description_not_available">Éilíonn an ghné seo Android 11 nó níos déanaí</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Iompórtáil &amp; easpórtáil</string>
-    <string name="settings_system_import_keystore">Iompórtáil stór eochracha</string>
-    <string name="settings_system_import_keystore_description">Iompórtáil stór eochrach saincheaptha</string>
+    <string name="settings_system_keystore">Stór eochair</string>
+    <string name="settings_system_import_keystore_description">Allmhaigh nó athchliceáil do shreabhán comharthaíochta</string>
     <string name="settings_system_import_keystore_dialog_title">Cuir isteach dintiúir stórais eochrach</string>
     <string name="settings_system_import_keystore_dialog_description">Beidh ort dintiúir an stórais eochrach a iontráil chun é a allmhairiú</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Ainm úsáideora (Ainm eile)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Pasfhocal</string>
-    <string name="settings_system_import_keystore_dialog_button">Iompórtáil</string>
     <string name="settings_system_import_keystore_dialog_format_field">Formáid stórais eochrach</string>
     <string name="settings_system_import_keystore_wrong_credentials">Dintiúir mhíchearta stórais eochrach</string>
     <string name="settings_system_import_keystore_success">Eochairstóras allmhairithe</string>
     <string name="settings_system_import_keystore_failed">Theip ar an stór eochrach a iompórtáil</string>
-    <string name="settings_system_export_keystore">Easpórtáil stór eochrach</string>
-    <string name="settings_system_export_keystore_description">Easpórtáil an stór eochrach reatha</string>
     <string name="settings_system_export_keystore_unavailable">Níl aon stór eochrach ar fáil le honnmhairiú</string>
     <string name="settings_system_export_keystore_success">Easpórtáladh an stór eochrach</string>
     <string name="settings_system_export_keystore_failed">Theip ar easpórtáil an stór eochrach</string>
     <string name="settings_system_show_password_field">Taispeáin an focal faire</string>
     <string name="settings_system_hide_password_field">Folaigh an focal faire</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Iompórtáil socruithe Morphe</string>
-    <string name="settings_system_import_manager_settings_description">Athchóirigh socruithe Morphe ó chomhad JSON</string>
+    <string name="settings_system_morphe_settings">Socruithe Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Cóipeann agus athchómhnaíonn do socruithe Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Theip ar shocruithe Morphe a iompórtáil: %s</string>
     <string name="settings_system_import_manager_settings_success">Socruithe Morphe allmhairithe</string>
-    <string name="settings_system_export_manager_settings">Easpórtáil socruithe Morphe</string>
-    <string name="settings_system_export_manager_settings_description">Sábháil socruithe Morphe chuig comhad JSON</string>
     <string name="settings_system_export_manager_settings_fail">Theip ar shocruithe Morphe a easpórtáil: %s</string>
     <string name="settings_system_export_manager_settings_success">Socruithe Morphe onnmhairithe</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Dífhabhtú</string>
-    <string name="settings_system_export_debug_logs">Easpórtáil logaí dífhabhtaithe</string>
     <string name="settings_system_export_debug_logs_description">Sábháil logaí córais le haghaidh fabhtcheartaithe</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Theip ar na logaí a léamh (cód scoir %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Theip ar logaí a onnmhairiú</string>
@@ -627,14 +623,14 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_patched_apks_deleted">Scriosadh an APK paisteáilte go rathúil</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APKanna Bunaidh</string>
-    <string name="settings_system_original_apks_description">Sábháiltear comhaid bhunaidh APK le haghaidh athphaisteála. Ní choimeádtar ach an leagan is déanaí do gach aip.</string>
+    <string name="settings_system_original_apks_description">Sábháilte le haghaidh athpaisteála. Coimeádann sé leagan amháin in aghaidh an aip</string>
     <string name="settings_system_original_apks_empty">Níl aon APKanna bunaidh stóráilte</string>
     <string name="settings_system_original_apks_deleted">Scriosadh an APK bunaidh go rathúil</string>
     <string name="settings_system_original_apks_delete_title">Scrios an APK bunaidh?</string>
     <string name="settings_system_original_apks_delete_confirm">Scrios an APK bunaidh le haghaidh %s? Ní bheidh tú in ann athphaisteáil gan APK nua a sholáthar.</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Roghanna paiste</string>
-    <string name="settings_system_patch_selections_description">Bainistigh roghanna agus roghanna paiste sábháilte. Leanann siad seo ar aghaidh tar éis díshuiteáil an aip</string>
+    <string name="settings_system_patch_selections_description">Sábháil roghanna paisteála, coimeádta tar éis díchómhdaigh</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Athshocraigh gach rogha?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Athshocraigh roghanna pacáiste?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Athshocraigh an rogha foinse?</string>
@@ -694,6 +690,10 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="disabled">Díchumasaithe</string>
     <string name="selected">Roghnaithe</string>
     <string name="not_selected">Níor roghnaíodh</string>
+    <string name="select_all">Roghnaigh gach ceann</string>
+    <string name="select_all_done">Go léir roghnaithe</string>
+    <string name="deselect_all">Dícheallú ar fad</string>
+    <string name="deselect_all_done">Go léir díchumasaithe</string>
     <string name="rename">Athainmnigh</string>
     <string name="import_">Iompórtáil</string>
     <string name="export">Easpórtáil</string>
@@ -714,6 +714,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="unmount">Dícheangal</string>
     <string name="unmounted">Dícheangailte</string>
     <string name="remount">Athcheangail</string>
+    <string name="share">Comhroinn</string>
     <string name="install">Suiteáil</string>
     <string name="installed">Suiteáilte</string>
     <string name="reinstall">Athshuiteáil</string>

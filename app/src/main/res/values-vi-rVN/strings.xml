@@ -26,7 +26,7 @@
     <string name="home_updating_sources">Đang cập nhật nguồn…</string>
     <string name="home_update_progress_format">Đã xử lý %s</string>
     <string name="home_update_success">Cập nhật nguồn hoàn tất</string>
-    <string name="home_update_success_subtitle">Đã cập nhật tất cả các nguồn lên mới nhất</string>
+    <string name="home_update_success_subtitle">Đã cập nhật tất cả nguồn lên mới nhất</string>
     <string name="home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
     <string name="home_search_apps">Tìm ứng dụng</string>
     <string name="home_no_apps_title">Không có ứng dụng nào có sẵn</string>
@@ -58,15 +58,18 @@
     <string name="sources_management_title">Nguồn vá</string>
     <string name="sources_management_open_in_browser">Mở trong trình duyệt</string>
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
-    <string name="sources_management_prerelease_toggle">Dùng bản vá thử nghiệm</string>
-    <string name="sources_management_prerelease_toggle_description">Trải nghiệm sớm các bản vá thử nghiệm mới</string>
-    <string name="sources_management_experimental_versions_toggle">Dùng phiên bản thử nghiệm</string>
-    <string name="sources_management_experimental_versions_toggle_description">Vá phiên bản thử nghiệm của ứng dụng (nếu có)</string>
+    <string name="sources_management_prerelease_toggle">Các bản vá phát hành trước</string>
+    <string name="sources_management_prerelease_toggle_description">Nhận quyền truy cập sớm vào các phiên bản patch thử nghiệm mới</string>
+    <string name="sources_management_experimental_versions_toggle">Các phiên bản ứng dụng thử nghiệm</string>
+    <string name="sources_management_experimental_versions_toggle_description">Patch các mục tiêu ứng dụng thử nghiệm nếu có</string>
     <string name="sources_management_already_exists">Nguồn này đã được thêm vào rồi</string>
     <string name="sources_management_invalid_url">URL nguồn không hợp lệ. Vui lòng kiểm tra địa chỉ và thử lại</string>
     <string name="sources_management_metadata_unavailable">Không có metadata</string>
-    <string name="sources_management_metadata_unavailable_hint">Không thể truy cập file metadata từ máy chủ. Bạn vẫn có thể vá bằng gói ứng dụng đã cài, nhưng tính năng tự động cập nhật sẽ bị tắt cho nguồn này</string>
+    <string name="sources_management_metadata_unavailable_hint">Không thể truy cập tệp metadata từ máy chủ. Bạn vẫn có thể vá bằng gói ứng dụng đã cài, nhưng tính năng tự động cập nhật sẽ bị tắt cho nguồn này</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Không thể tải gói vá. URL nguồn có thể không đúng hoặc file không tồn tại</string>
+    <string name="sources_management_source_enabled">Nguồn đã bật</string>
+    <string name="sources_management_source_disabled">Nguồn đã tắt</string>
+    <string name="sources_management_source_updating">Đang cập nhật nguồn</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Tên hiển thị</string>
     <string name="sources_dialog_rename">Đổi tên nguồn vá</string>
@@ -132,15 +135,19 @@
     <string name="home_invalid_apk_unreadable">Không thể đọc tệp. Hãy kiểm tra xem \"Bộ nhớ ngoài\" có bị hạn chế pin hay không</string>
     <string name="home_invalid_apk_not_an_apk">Tệp đã chọn không phải là tệp APK hợp lệ</string>
     <string name="home_invalid_apk_io_error">Không thể mở tệp. Vui lòng thử lại</string>
-    <string name="home_external_apk_expert_mode_required">Tính năng này chỉ khả dụng ở chế độ Chuyên gia</string>
+    <string name="home_external_apk_expert_mode_required">Tính năng này chỉ có ở chế độ Chuyên gia</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Chế độ chuyên gia</string>
     <string name="expert_mode_search">Tìm kiếm</string>
     <string name="expert_mode_proceed">Tiến hành vá</string>
     <string name="expert_mode_disable_all">Tắt tất cả</string>
+    <string name="expert_mode_disable_all_done">Đã tắt tất cả bản vá</string>
     <string name="expert_mode_enable_all">Bật tất cả</string>
+    <string name="expert_mode_enable_all_done">Đã bật tất cả bản vá</string>
     <string name="expert_mode_reset_to_default">Bật các bản vá đề xuất</string>
+    <string name="expert_mode_reset_to_default_done">Đã áp dụng các bản vá đề xuất</string>
     <string name="expert_mode_restore_saved">Khôi phục lựa chọn đã lưu</string>
+    <string name="expert_mode_restore_saved_done">Đã khôi phục bản vá đã chọn</string>
     <string name="expert_mode_no_results">Không tìm thấy bản vá nào</string>
     <string name="expert_mode_universal_patches">Bản vá phổ quát</string>
     <string name="expert_mode_new_patches">Mới</string>
@@ -297,9 +304,9 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patcher_step_write_patched">Đang viết APK đã vá</string>
     <string name="patcher_step_sign_apk">Đang ký APK đã vá</string>
     <!-- Battery optimization pre-flight dialog -->
-    <string name="battery_optimization_dialog_title">Bảo vệ khi vá lỗi nền</string>
-    <string name="battery_optimization_dialog_description">Một số thiết bị có thể dừng bộ vá lỗi khi ứng dụng bị thu nhỏ. Cho phép Morphe chạy mà không có giới hạn pin để đảm bảo quá trình vá lỗi hoàn tất một cách đáng tin cậy.</string>
-    <string name="battery_optimization_not_now">Không phải bây giờ</string>
+    <string name="battery_optimization_dialog_title">Bảo vệ khi vá nền</string>
+    <string name="battery_optimization_dialog_description">Một số thiết bị có thể tắt trình vá khi ứng dụng bị thu nhỏ. Cho phép Morphe chạy không giới hạn pin để quá trình vá hoàn thành ổn định</string>
+    <string name="battery_optimization_not_now">Từ từ</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Đang vá…</string>
     <string name="patcher_notification_text">Bấm để quay trở lại trình vá</string>
@@ -402,9 +409,9 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_app_icon_change_dialog_confirm">Chốt</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Cập nhật</string>
-    <string name="settings_advanced_updates_use_prereleases">Dùng bản Morphe thử nghiệm</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Trải nghiệm sớm các tính năng mới của Morphe. Còn nếu bạn muốn tải các bản vá thử nghiệm, hãy bật nó trong từng nguồn vá</string>
-    <string name="settings_advanced_updates_allow_metered">Cập nhật qua dữ liệu di động</string>
+    <string name="settings_advanced_updates_use_prereleases">Dùng phiên bản \"độ\" thử nghiệm</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Truy cập sớm các phiên bản mới của ứng dụng Morphe. Bật bản \"độ\" thử nghiệm cho từng nguồn trong danh sách các nguồn vá</string>
+    <string name="settings_advanced_updates_allow_metered">Đang bật dữ liệu di động</string>
     <string name="settings_advanced_updates_allow_metered_description">Cho phép tải Morphe và cập nhật bản vá qua dữ liệu di động</string>
     <string name="settings_advanced_updates_background_notifications">Thông báo cập nhật nền</string>
     <string name="settings_advanced_updates_background_notifications_description">Kiểm tra cập nhật định kỳ khi ứng dụng chạy nền và báo cho bạn khi có phiên bản mới.</string>
@@ -436,8 +443,7 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_advanced_expert_mode_dialog_title">Bật chế độ Chuyên gia?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Chế độ chuyên gia cho phép bạn tùy chỉnh sâu hơn về cách các bản vá được áp dụng, nhưng nếu bạn chỉnh không đúng có thể khiến ứng dụng không hoạt động</string>
     <string name="settings_advanced_strip_unused_libs">Tối ưu theo kiến trúc thiết bị</string>
-    <string name="settings_advanced_strip_unused_libs_description">"Khi gộp, sẽ bỏ qua các mô-đun APK chia nhỏ không phù hợp với kiến trúc CPU, ngôn ngữ hoặc mật độ màn hình.
-Với APK thường, các thư viện gốc của kiến trúc không được hỗ trợ sẽ bị loại bỏ sau khi vá."</string>
+    <string name="settings_advanced_strip_unused_libs_description">Gỡ các thư viện kiến trúc CPU không sử dụng và các mô-đun APK bị chia tách</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Chế độ xử lý bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Quy định cách xử lý bytecode trong quá trình vá. Ảnh hưởng đến tốc độ vá, mức dùng bộ nhớ và kích thước APK đầu ra</string>
@@ -564,56 +570,43 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_unavailable_message">Trình cài đặt mà bạn ưu tiên (%s) hiện đang không khả dụng. Hãy thử lại sau khi sửa lỗi hoặc chuyển sang dùng trình cài đặt tiêu chuẩn</string>
     <string name="installer_unavailable_shizuku_hint">Hãy đảm bảo rằng Shizuku đang chạy và bạn đã cấp quyền cho ứng dụng này</string>
     <string name="installer_use_standard">Trình cài đặt tiêu chuẩn</string>
-    <string name="settings_prompt_installer_on_install">Hỏi trình cài đặt khi cài</string>
     <string name="settings_prompt_installer_on_install_description">Luôn hiện hộp thoại chọn trình cài đặt khi cài ứng dụng đã vá</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Tối ưu hóa pin</string>
-    <string name="settings_system_battery_optimization_description">Ngăn hệ thống dừng chương trình vá lỗi khi Morphe được thu nhỏ</string>
-    <string name="settings_system_battery_optimization_excluded">Đã loại trừ</string>
-    <string name="settings_system_battery_optimization_not_excluded">Chưa loại trừ</string>
     <string name="settings_system_performance">Hiệu suất</string>
     <string name="settings_system_process_runtime">Tiến trình riêng</string>
     <string name="settings_system_process_runtime_description">Chạy quá trình vá trong tiến trình riêng biệt để cải thiện độ ổn định</string>
     <string name="settings_system_process_runtime_memory_limit">Giới hạn bộ nhớ</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Tăng giới hạn bộ nhớ có thể giúp vá nhanh hơn, nhưng có thể không tương thích với các thiết bị cũ</string>
     <string name="settings_system_process_runtime_enable">Bật tiến trình riêng</string>
     <string name="settings_system_memory_limit_subtitle">Bộ nhớ cho quá trình vá</string>
     <string name="settings_system_memory_limit_warning">Nếu bộ nhớ quá thấp có thể khiến bạn gặp lỗi trong quá trình vá ứng dụng lớn</string>
     <string name="settings_system_process_runtime_enabled_description">Giới hạn %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Bấm để cấu hình</string>
     <string name="settings_system_process_runtime_description_not_available">Tính năng này yêu cầu Android 11 trở lên</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Xuất &amp; Nhập</string>
-    <string name="settings_system_import_keystore">Nhập kho khoá</string>
-    <string name="settings_system_import_keystore_description">Nhập kho khoá tuỳ chỉnh</string>
+    <string name="settings_system_keystore">Kho khoá</string>
+    <string name="settings_system_import_keystore_description">Nhập hoặc xuất kho khóa dùng để ký của bạn</string>
     <string name="settings_system_import_keystore_dialog_title">Nhập thông tin xác thực kho khoá</string>
     <string name="settings_system_import_keystore_dialog_description">Bạn sẽ cần điền thông tin xác thực của kho khóa để nhập chúng</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Tên người dùng (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Mật khẩu</string>
-    <string name="settings_system_import_keystore_dialog_button">Nhập</string>
     <string name="settings_system_import_keystore_dialog_format_field">Định dạng kho khoá</string>
     <string name="settings_system_import_keystore_wrong_credentials">Thông tin xác thực kho khóa không đúng</string>
     <string name="settings_system_import_keystore_success">Đã nhập kho khóa</string>
     <string name="settings_system_import_keystore_failed">Khổng thể nhập kho khóa</string>
-    <string name="settings_system_export_keystore">Xuất kho khoá</string>
-    <string name="settings_system_export_keystore_description">Xuất kho khoá hiện tại</string>
     <string name="settings_system_export_keystore_unavailable">Không có kho khóa nào để xuất</string>
     <string name="settings_system_export_keystore_success">Đã xuất kho khóa</string>
     <string name="settings_system_export_keystore_failed">Không thể xuất kho khóa</string>
     <string name="settings_system_show_password_field">Hiện mật khẩu</string>
     <string name="settings_system_hide_password_field">Ẩn mật khẩu</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Nhập cài đặt Morphe</string>
-    <string name="settings_system_import_manager_settings_description">Khôi phục cài đặt Morphe từ tệp JSON</string>
+    <string name="settings_system_morphe_settings">Cài đặt Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Sao lưu và khôi phục lại cài đặt Morphe của bạn</string>
     <string name="settings_system_import_manager_settings_fail">Không thể nhập cài đặt Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Đã nhập cài đặt Morphe</string>
-    <string name="settings_system_export_manager_settings">Xuất cài đặt Morphe</string>
-    <string name="settings_system_export_manager_settings_description">Lưu cài đặt Morphe vào tệp JSON</string>
     <string name="settings_system_export_manager_settings_fail">Không thể xuất cài đặt Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Đã xuất cài đặt Morphe</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Gỡ lỗi</string>
-    <string name="settings_system_export_debug_logs">Nhật ký gỡ lỗi</string>
     <string name="settings_system_export_debug_logs_description">Lưu nhật ký hệ thống giúp sửa lỗi</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Không thể đọc nhật ký (mã thoát %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Không thể xuất nhật ký</string>
@@ -630,14 +623,12 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_patched_apks_deleted">Đã xóa APK đã vá thành công</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APK gốc</string>
-    <string name="settings_system_original_apks_description">Các tệp APK gốc được lưu để vá lại. Mỗi ứng dụng chỉ giữ phiên bản gần nhất</string>
     <string name="settings_system_original_apks_empty">Không có APK gốc nào được lưu</string>
     <string name="settings_system_original_apks_deleted">Đã xóa APK gốc thành công</string>
     <string name="settings_system_original_apks_delete_title">Xóa APK gốc?</string>
     <string name="settings_system_original_apks_delete_confirm">Bạn có muốn xóa tệp APK gốc của %s? Nếu không có APK mới, bạn sẽ không thể vá lại đâu</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Bản vá đã chọn</string>
-    <string name="settings_system_patch_selections_description">Quản lý bản vá đã chọn và các tùy chỉnh. Chúng vẫn được lưu lại ngay cả khi bạn gỡ cài đặt ứng dụng</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Đặt lại toàn bộ bản vá đã chọn?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Đặt lại gói đã chọn?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Đặt lại nguồn đã chọn?</string>
@@ -697,6 +688,10 @@ Kích thước hình ảnh yêu cầu:
     <string name="disabled">Đang tắt</string>
     <string name="selected">Đã chọn</string>
     <string name="not_selected">Không chọn</string>
+    <string name="select_all">Chọn tất cả</string>
+    <string name="select_all_done">Đã chọn tất cả</string>
+    <string name="deselect_all">Bỏ chọn tất cả</string>
+    <string name="deselect_all_done">Đã bỏ chọn tất cả</string>
     <string name="rename">Đổi tên</string>
     <string name="import_">Nhập</string>
     <string name="export">Xuất</string>
@@ -717,6 +712,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="unmount">Gỡ gắn kết</string>
     <string name="unmounted">Đã gỡ gắn kết</string>
     <string name="remount">Gắn kết lại</string>
+    <string name="share">Chia sẻ</string>
     <string name="install">Cài đặt</string>
     <string name="installed">Đã cài đặt</string>
     <string name="reinstall">Cài lại</string>

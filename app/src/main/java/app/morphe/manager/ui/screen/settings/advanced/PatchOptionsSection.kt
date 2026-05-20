@@ -70,10 +70,10 @@ fun PatchOptionsSection(
 
     // Refresh only once when bundle info first becomes available.
     // Using a flag avoids re-triggering refresh on every recomposition or tab switch
-    var hasRefreshed by remember { mutableStateOf(false) }
+    val hasRefreshed = remember { mutableStateOf(false) }
     LaunchedEffect(bundleInfo) {
-        if (bundleInfo.isNotEmpty() && !hasRefreshed) {
-            hasRefreshed = true
+        if (bundleInfo.isNotEmpty() && !hasRefreshed.value) {
+            hasRefreshed.value = true
             patchOptionsViewModel.refresh()
         }
     }
@@ -187,9 +187,8 @@ fun PatchOptionsSection(
                                 context.toast(context.getString(R.string.home_updating_sources))
                             }
                         }) {
-                            Icon(
-                                imageVector = Icons.Outlined.Refresh,
-                                contentDescription = stringResource(R.string.retry),
+                            MorpheIcon(
+                                icon = Icons.Outlined.Refresh,
                                 tint = MaterialTheme.colorScheme.primary
                             )
                         }
@@ -283,51 +282,48 @@ private fun AppPatchOptionsCard(
             description = description
         )
 
-        // Options list
-        Column {
-            // Theme Colors
-            if (hasTheme) {
-                SettingsItem(
-                    icon = Icons.Outlined.Palette,
-                    title = stringResource(R.string.settings_advanced_patch_options_theme_colors),
-                    description = stringResource(R.string.settings_advanced_patch_options_theme_colors_description),
-                    onClick = onThemeClick
-                )
-            }
+        // Theme Colors
+        if (hasTheme) {
+            SettingsItem(
+                icon = Icons.Outlined.Palette,
+                title = stringResource(R.string.settings_advanced_patch_options_theme_colors),
+                description = stringResource(R.string.settings_advanced_patch_options_theme_colors_description),
+                onClick = onThemeClick
+            )
+        }
 
-            // Custom Branding
-            if (hasBranding) {
-                MorpheSettingsDivider()
+        // Custom Branding
+        if (hasBranding) {
+            MorpheSettingsDivider()
 
-                SettingsItem(
-                    icon = Icons.Outlined.Style,
-                    title = stringResource(R.string.settings_advanced_patch_options_custom_branding),
-                    description = stringResource(R.string.settings_advanced_patch_options_custom_branding_description),
-                    onClick = onBrandingClick
-                )
-            }
+            SettingsItem(
+                icon = Icons.Outlined.Style,
+                title = stringResource(R.string.settings_advanced_patch_options_custom_branding),
+                description = stringResource(R.string.settings_advanced_patch_options_custom_branding_description),
+                onClick = onBrandingClick
+            )
+        }
 
-            // Custom Header
-            if (hasHeader) {
-                MorpheSettingsDivider()
+        // Custom Header
+        if (hasHeader) {
+            MorpheSettingsDivider()
 
-                SettingsItem(
-                    icon = Icons.Outlined.Image,
-                    title = stringResource(R.string.settings_advanced_patch_options_custom_header),
-                    description = stringResource(R.string.settings_advanced_patch_options_custom_header_description),
-                    onClick = onHeaderClick
-                )
-            }
+            SettingsItem(
+                icon = Icons.Outlined.Image,
+                title = stringResource(R.string.settings_advanced_patch_options_custom_header),
+                description = stringResource(R.string.settings_advanced_patch_options_custom_header_description),
+                onClick = onHeaderClick
+            )
+        }
 
-            // Show message if no options available for this app
-            if (!hasTheme && !hasBranding && !hasHeader) {
-                Text(
-                    text = stringResource(R.string.settings_advanced_patch_options_no_available),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                )
-            }
+        // Show message if no options available for this app
+        if (!hasTheme && !hasBranding && !hasHeader) {
+            Text(
+                text = stringResource(R.string.settings_advanced_patch_options_no_available),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
         }
     }
 }
@@ -363,73 +359,70 @@ private fun HideShortsSection(
             description = stringResource(R.string.settings_advanced_patch_options_hide_shorts_features)
         )
 
-        // Options list
-        Column {
-            // Hide App Shortcut
-            if (hasAppShortcutOption && appShortcutOption != null) {
-                val hideShortsAppShortcut by patchOptionsPrefs.hideShortsAppShortcut.getAsState()
-                val title = getLocalizedOrCustomText(
-                    context,
-                    appShortcutOption.title,
-                    HIDE_SHORTS_APP_SHORTCUT_TITLE,
-                    R.string.settings_advanced_patch_options_hide_shorts_app_shortcut
-                )
-                val description = getLocalizedOrCustomText(
-                    context,
-                    appShortcutOption.description,
-                    HIDE_SHORTS_APP_SHORTCUT_DESC,
-                    R.string.settings_advanced_patch_options_hide_shorts_app_shortcut_description
-                )
+        // Hide App Shortcut
+        if (hasAppShortcutOption && appShortcutOption != null) {
+            val hideShortsAppShortcut by patchOptionsPrefs.hideShortsAppShortcut.getAsState()
+            val title = getLocalizedOrCustomText(
+                context,
+                appShortcutOption.title,
+                HIDE_SHORTS_APP_SHORTCUT_TITLE,
+                R.string.settings_advanced_patch_options_hide_shorts_app_shortcut
+            )
+            val description = getLocalizedOrCustomText(
+                context,
+                appShortcutOption.description,
+                HIDE_SHORTS_APP_SHORTCUT_DESC,
+                R.string.settings_advanced_patch_options_hide_shorts_app_shortcut_description
+            )
 
-                RichSettingsItem(
-                    onClick = { viewModel.toggleHideShortsAppShortcut(patchOptionsPrefs, hideShortsAppShortcut) },
-                    title = title,
-                    subtitle = description,
-                    trailingContent = {
-                        Switch(
-                            checked = hideShortsAppShortcut,
-                            onCheckedChange = null,
-                            modifier = Modifier.semantics {
-                                stateDescription = if (hideShortsAppShortcut) enabledState else disabledState
-                            }
-                        )
-                    }
-                )
-            }
+            RichSettingsItem(
+                onClick = { viewModel.toggleHideShortsAppShortcut(patchOptionsPrefs, hideShortsAppShortcut) },
+                title = title,
+                subtitle = description,
+                trailingContent = {
+                    MorpheSwitch(
+                        checked = hideShortsAppShortcut,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (hideShortsAppShortcut) enabledState else disabledState
+                        }
+                    )
+                }
+            )
+        }
 
-            // Hide Widget
-            if (hasWidgetOption && widgetOption != null) {
-                MorpheSettingsDivider()
+        // Hide Widget
+        if (hasWidgetOption && widgetOption != null) {
+            MorpheSettingsDivider()
 
-                val hideShortsWidget by patchOptionsPrefs.hideShortsWidget.getAsState()
-                val title = getLocalizedOrCustomText(
-                    context,
-                    widgetOption.title,
-                    HIDE_SHORTS_WIDGET_TITLE,
-                    R.string.settings_advanced_patch_options_hide_shorts_widget
-                )
-                val description = getLocalizedOrCustomText(
-                    context,
-                    widgetOption.description,
-                    HIDE_SHORTS_WIDGET_DESC,
-                    R.string.settings_advanced_patch_options_hide_shorts_widget_description
-                )
+            val hideShortsWidget by patchOptionsPrefs.hideShortsWidget.getAsState()
+            val title = getLocalizedOrCustomText(
+                context,
+                widgetOption.title,
+                HIDE_SHORTS_WIDGET_TITLE,
+                R.string.settings_advanced_patch_options_hide_shorts_widget
+            )
+            val description = getLocalizedOrCustomText(
+                context,
+                widgetOption.description,
+                HIDE_SHORTS_WIDGET_DESC,
+                R.string.settings_advanced_patch_options_hide_shorts_widget_description
+            )
 
-                RichSettingsItem(
-                    onClick = { viewModel.toggleHideShortsWidget(patchOptionsPrefs, hideShortsWidget) },
-                    title = title,
-                    subtitle = description,
-                    trailingContent = {
-                        Switch(
-                            checked = hideShortsWidget,
-                            onCheckedChange = null,
-                            modifier = Modifier.semantics {
-                                stateDescription = if (hideShortsWidget) enabledState else disabledState
-                            }
-                        )
-                    }
-                )
-            }
+            RichSettingsItem(
+                onClick = { viewModel.toggleHideShortsWidget(patchOptionsPrefs, hideShortsWidget) },
+                title = title,
+                subtitle = description,
+                trailingContent = {
+                    MorpheSwitch(
+                        checked = hideShortsWidget,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (hideShortsWidget) enabledState else disabledState
+                        }
+                    )
+                }
+            )
         }
     }
 }

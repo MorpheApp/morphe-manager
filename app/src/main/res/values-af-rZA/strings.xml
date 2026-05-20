@@ -58,15 +58,18 @@
     <string name="sources_management_title">Verandering oorspronge</string>
     <string name="sources_management_open_in_browser">Maak oop in blaaier</string>
     <string name="sources_management_failed_to_open_url">Mislukking om URL oop te maak</string>
-    <string name="sources_management_prerelease_toggle">Gebruik voorvrystelling-veranderinge</string>
-    <string name="sources_management_prerelease_toggle_description">Ontvang vroeë toegang tot nuwe eksperimentele verandering-weergawes</string>
-    <string name="sources_management_experimental_versions_toggle">Gebruik eksperimentele program-weergawes</string>
+    <string name="sources_management_prerelease_toggle">Voorvrystellings-veranderinge</string>
+    <string name="sources_management_prerelease_toggle_description">Ontvang vroegtydige toegang tot nuwe eksperimentele weergawe-opdaterings</string>
+    <string name="sources_management_experimental_versions_toggle">Eksperimentele program-weergawes</string>
     <string name="sources_management_experimental_versions_toggle_description">Pleister eksperimentele app-teikens indien beskikbaar</string>
     <string name="sources_management_already_exists">Hierdie oorsprong is reeds bygevoeg</string>
     <string name="sources_management_invalid_url">Ongeldige bron-URL. Gaan asseblief die adres na en probeer weer</string>
     <string name="sources_management_metadata_unavailable">Metadata Nie beskikbaar nie</string>
     <string name="sources_management_metadata_unavailable_hint">Die afstandmetadata lêer is nie beskikbaar nie. Patches met die geïnstalleerde bundel werk steeds, maar outo-opdatering is vir hierdie bron afgeskakel</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Die patch bundel kon nie afgelaai word nie. Die bron-URL kan verkeerd wees of die lêer bestaan ​​nie</string>
+    <string name="sources_management_source_enabled">Bron geaktiveer</string>
+    <string name="sources_management_source_disabled">Bron gedeaktiveer</string>
+    <string name="sources_management_source_updating">Bron besig om op te dateer</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Wys naam</string>
     <string name="sources_dialog_rename">Hernoem verandering oorsprong</string>
@@ -138,9 +141,13 @@
     <string name="expert_mode_search">Soek patchings</string>
     <string name="expert_mode_proceed">Gaan voort met pleister</string>
     <string name="expert_mode_disable_all">Deaktiveer alles</string>
+    <string name="expert_mode_disable_all_done">Alle pleisters gedeaktiveer</string>
     <string name="expert_mode_enable_all">Aktiveer alles</string>
+    <string name="expert_mode_enable_all_done">Alle pleisters geaktiveer</string>
     <string name="expert_mode_reset_to_default">Aktiveer aanbevole pleisters</string>
+    <string name="expert_mode_reset_to_default_done">Aanbevole pleisters toegepas</string>
     <string name="expert_mode_restore_saved">Ingevoeg suksesvol</string>
+    <string name="expert_mode_restore_saved_done">Gestoorde keuse herstel</string>
     <string name="expert_mode_no_results">Geen patchings gevind</string>
     <string name="expert_mode_universal_patches">Universele pleisters</string>
     <string name="expert_mode_new_patches">Nuwe</string>
@@ -246,9 +253,9 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="root_pre_patch_installer_title">Kies installasiemetode</string>
     <string name="root_pre_patch_installer_description">Jou toestel het root toegang. Kies hoe jy wil die gepatched app installeer</string>
     <string name="root_pre_patch_installer_mount_title">Root Mount</string>
-    <string name="root_pre_patch_installer_mount_description">Herstel gepatched APK oor die stock app. Geen GmsCore nodig</string>
+    <string name="root_pre_patch_installer_mount_description">Monteer die gepatchte APK oor die standaard app. Geen GmsCore nodig</string>
     <string name="root_pre_patch_installer_standard_title">Standard Install</string>
-    <string name="root_pre_patch_installer_standard_description">Installeer as \'n aparte app met GmsCore ondersteuning. Kies installer (System installer, Shizuku, ens.) na patching</string>
+    <string name="root_pre_patch_installer_standard_description">Installeer as \'n afsonderlike toepassing met GmsCore-ondersteuning. \'n Installeerder kan gekies word ná patching</string>
     <string name="root_pre_patch_installer_hint">Die installasiemetode bepaal watter patches ingesluit is en kan nie verander word na patching nie</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Fout gekopieer na knipbord</string>
@@ -379,7 +386,7 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Aksentkleur</string>
     <string name="settings_appearance_pure_black">Pure Black</string>
-    <string name="settings_appearance_pure_black_description">Gebruik egte swart agtergronde</string>
+    <string name="settings_appearance_pure_black_description">Gebruik ware swart agtergronde</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">App taal</string>
     <string name="settings_appearance_app_language_current">Huidige taal</string>
@@ -402,13 +409,13 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Verander ikoon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Opdaterings</string>
-    <string name="settings_advanced_updates_use_prereleases">Gebruik voorvrystelling Morphe</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Ontvang vroeë toegang tot nuwe Morphe-kenmerke. Om voorvrystellingspleisters te kry, skakel die voorvrystellingsknoppie in elke pleisterbron afsonderlik in</string>
-    <string name="settings_advanced_updates_allow_metered">Opdateer op mobiele data</string>
-    <string name="settings_advanced_updates_allow_metered_description">Laat Morphe en pleisteropdaterings toe om oor mobiele data af te laai</string>
+    <string name="settings_advanced_updates_use_prereleases">Voorvrystellingsopdaterings</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Vroeë toegang tot nuwe Morphe-appweergawes. Skakel voorvrystelling per bron in patchbronne in</string>
+    <string name="settings_advanced_updates_allow_metered">Mobiele data-opdaterings</string>
+    <string name="settings_advanced_updates_allow_metered_description">Laat Morphe en patch-opdaterings toe om oor mobiele data af te laai</string>
     <string name="settings_advanced_updates_background_notifications">Agtergrondopdateringskennisgewings</string>
     <string name="settings_advanced_updates_background_notifications_description">Kontroleer periodiek vir opdaterings in die agtergrond en gee kennis wanneer dit beskikbaar is</string>
-    <string name="settings_advanced_updates_background_notifications_description_fcm">Ontvang onmiddellike stootkennisgewings vir nuwe vrystellings, selfs wanneer die toepassing gesluit is</string>
+    <string name="settings_advanced_updates_background_notifications_description_fcm">Stuurkennisgewings vir nuwe vrystellings, selfs wanneer die toepassing gesluit is</string>
     <string name="settings_advanced_update_interval">Kontroleer frekwensie</string>
     <string name="settings_advanced_update_interval_dialog_title">Kontroleer vir opdaterings</string>
     <string name="settings_advanced_update_interval_hourly">Een keer per uur</string>
@@ -432,12 +439,11 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Spesialisinstellings</string>
     <string name="settings_advanced_expert_mode">Spesialismodus</string>
-    <string name="settings_advanced_expert_mode_description">Aktiveer komplekse Morphe patching instellings en pasmaat opsies</string>
+    <string name="settings_advanced_expert_mode_description">Skakel ingewikkelde Morphe-patchinstellings en aanpassingsopsies in</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktiveer Expert modus?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expert modus gee meer beheer oor hoe patches toegepas word, maar miskonfigureer instellings in expert modus kan lei tot \'n nie-funksionele aansoek</string>
     <string name="settings_advanced_strip_unused_libs">Optimaliseer vir toestelargitektuur</string>
-    <string name="settings_advanced_strip_unused_libs_description">"Skip split APK-modules vir onondersteunde CPU-argitekture, tale en skermdigthede tydens samesmelting.
-Vir gewone APK's, verwyder inheemse biblioteke vir onondersteunde argitekture na die pleister"</string>
+    <string name="settings_advanced_strip_unused_libs_description">Verwyder ongebruikte CPU-argitektuur-biblioteke en gedeelde APK-modules</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">Bytecode-verwerkingsmodus</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">Beheer hoe bytecode verwerk word tydens pleister. Beïnvloed die pleisterspoed, geheiebruik en APK-grootte</string>
@@ -445,7 +451,7 @@ Vir gewone APK's, verwyder inheemse biblioteke vir onondersteunde argitekture na
     <string name="settings_advanced_bytecode_mode_strip_fast">Vinnig</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">Vinniger pleister en laer geheiebruik, ten koste van \'n groter APK. Aanbeveel vir lae-RAM- of ouer toestelle</string>
     <string name="settings_advanced_bytecode_mode_full">Vol</string>
-    <string name="settings_advanced_bytecode_mode_full_description">Slaag die verwerking af, repliseer erfenisgedrag. Gebruik slegs as vinnige modus probleme veroorsaak</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Liker patching, herhaal ouer gedrag. Word aanbeveel slegs indien vinnige modus probleme veroorsaak</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Vereis vir pull request bronne</string>
@@ -463,7 +469,7 @@ Vir gewone APK's, verwyder inheemse biblioteke vir onondersteunde argitekture na
     <string name="settings_advanced_patch_options_expert_mode_notice">In Spesialismodus sal patch opsies beskikbaar wees tydens die patch proses</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">App tema kleure</string>
-    <string name="settings_advanced_patch_options_theme_colors_description">Verander agtergrond kleur</string>
+    <string name="settings_advanced_patch_options_theme_colors_description">Verander agtergrondkleur</string>
     <string name="settings_advanced_patch_options_dark_theme_color">Donker tema agtergrondkleur</string>
     <string name="settings_advanced_patch_options_light_theme_color">Ligte tema agtergrondkleur</string>
     <string name="settings_advanced_patch_options_theme_color_description">Kan \'n hekskleur wees (#RRGGBB) of \'n kleurbron verwysing</string>
@@ -473,7 +479,7 @@ Vir gewone APK's, verwyder inheemse biblioteke vir onondersteunde argitekture na
     <string name="settings_advanced_patch_options_no_available">Geen opsies beskikbaar vir hierdie patch nie</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">Pasgemaakte branding</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">Verander die app vertoon naam</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">Verander die vertoonnaam van die toepassing</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">App naam</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Gee pasgemaakte naam in</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Pasgemaakte ikoon</string>
@@ -511,7 +517,7 @@ Opsioneel bevat die pad 'n kennisgewingikoon in een van die volgende formate:
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Pasgemaakte koplogo</string>
-    <string name="settings_advanced_patch_options_custom_header_description">Verander koplogo</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Verander die koplogo</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Leêr met beelde wat as 'n pasgemaakte koplogo gebruik kan word.
 
 Die lêer moet een of meer van die volgende lêers bevat, afhangende van die DPI van die toestel:
@@ -532,17 +538,17 @@ Die beeld afmetings moet soos volg wees:
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Verberg Shorts funksies</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Verberg Shorts app kortpad</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Verwyder Shorts van die lanseerder langdruk spyskaart</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Verwyder Shorts uit die langdruk-kieslys van die lanseerder</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Verberg Shorts widget</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Verwyder Shorts knoppie van lanseerder widget</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Verwyder die Shorts-knoppie uit die lanseerder-widget</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
     <string name="installer_title">Kies installer</string>
     <string name="installer_internal_name">Stelsel installer</string>
-    <string name="installer_internal_description">Gebruik die Android pakket installer</string>
+    <string name="installer_internal_description">Gebruik die Android pakketinstalleerder</string>
     <string name="installer_auto_saved_name">Gewortelde monteer installer</string>
     <string name="installer_auto_saved_description">Monteer die gepleisterde APK oor die geïnstalleerde app</string>
-    <string name="installer_shizuku_description">Installeer stilweg met Shizuku of Sui</string>
+    <string name="installer_shizuku_description">Installeer stilweg met behulp van Shizuku of Sui</string>
     <string name="installer_option_none">Geen terugval</string>
     <string name="installer_none_description">Geen terugval installer is gekonfigureer</string>
     <string name="installer_status_requires_root">Vereis worteltoegang</string>
@@ -563,57 +569,47 @@ Die beeld afmetings moet soos volg wees:
     <string name="installer_unavailable_message">Jou voorkeurs installer (%s) is tans nie beskikbaar nie. Jy kan die probleem regstel en weer probeer, of die standaard installer gebruik</string>
     <string name="installer_unavailable_shizuku_hint">Maak seker Shizuku loop en toestemming is aan hierdie app gegee</string>
     <string name="installer_use_standard">Gebruik standaard</string>
-    <string name="settings_prompt_installer_on_install">Prompt installer on install</string>
-    <string name="settings_prompt_installer_on_install_description">Show installer selection dialog each time you install a patched app</string>
+    <string name="settings_prompt_installer_on_install">Installeerder seleksie prompt</string>
+    <string name="settings_prompt_installer_on_install_description">Wys die installeerder seleksie dialoog elke keer as \'n gepatchte toepassing geïnstalleer word</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery-optimalisering</string>
-    <string name="settings_system_battery_optimization_description">Verhoed dat die stelsel die pleister stop wanneer Morphe geminimeer is</string>
-    <string name="settings_system_battery_optimization_excluded">Uitgesluit</string>
-    <string name="settings_system_battery_optimization_not_excluded">Nie uitgesluit nie</string>
+    <string name="settings_system_battery_optimization_description">Hou die patcher lopend wanneer die toepassing geminimaliseer is</string>
     <string name="settings_system_performance">Prestasie</string>
     <string name="settings_system_process_runtime">Proses tydloop</string>
-    <string name="settings_system_process_runtime_description">Voer patching uit in \'n aparte proses vir beter stabiliteit</string>
+    <string name="settings_system_process_runtime_description">Voer patching in \'n aparte proses uit vir beter stabiliteit</string>
     <string name="settings_system_process_runtime_memory_limit">Geheugelimiet</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Hoër geheugelimiete kan patching versnel, maar werk moontlik nie met ouer toestelle nie</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Hoër limiete versnel patching op toestelle wat dit kan hanteer</string>
     <string name="settings_system_process_runtime_enable">Aktiveer proses tydloop</string>
     <string name="settings_system_memory_limit_subtitle">Geheue beskikbaar vir patching</string>
     <string name="settings_system_memory_limit_warning">\'n Lae geheugelimiet kan mislukking veroorsaak wanneer groter apps gepatched word</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limiet</string>
     <string name="settings_system_process_runtime_disabled_description">Klik om te konfigureer</string>
     <string name="settings_system_process_runtime_description_not_available">Hierdie kenmerk vereis Android 11 of later</string>
-    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importeer &amp; eksporteer</string>
-    <string name="settings_system_import_keystore">Importeer sleutel</string>
-    <string name="settings_system_import_keystore_description">Importeer \'n pasgemaakte sleutel</string>
+    <string name="settings_system_keystore">Sleutelkooi</string>
+    <string name="settings_system_import_keystore_description">Importeer of voer jou ondertekening sleutelbundel uit</string>
     <string name="settings_system_import_keystore_dialog_title">Gee sleutel geloofsbriewe in</string>
     <string name="settings_system_import_keystore_dialog_description">Jy sal die sleutel se geloofsbriewe moet invoer om dit te importeer</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Gebruikersnaam (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Wagwoord</string>
-    <string name="settings_system_import_keystore_dialog_button">Importeer</string>
     <string name="settings_system_import_keystore_dialog_format_field">Sleutelwinkel formaat</string>
     <string name="settings_system_import_keystore_wrong_credentials">Verkeerde sleutel geloofsbriewe</string>
     <string name="settings_system_import_keystore_success">Sleutel geïmporteer</string>
     <string name="settings_system_import_keystore_failed">Kon nie sleutel invoer nie</string>
-    <string name="settings_system_export_keystore">Eksporteer sleutel</string>
-    <string name="settings_system_export_keystore_description">Eksporteer die huidige sleutel</string>
     <string name="settings_system_export_keystore_unavailable">Geen sleutel beskikbaar om te eksporteer nie</string>
     <string name="settings_system_export_keystore_success">Sleutel uitgevoer</string>
     <string name="settings_system_export_keystore_failed">Kon sleutelwinkel nie uitvoer nie</string>
     <string name="settings_system_show_password_field">Wys wagwoord</string>
     <string name="settings_system_hide_password_field">Verberg wagwoord</string>
-    <!-- Settings - System Tab - Import and Export Manager Settings -->
-    <string name="settings_system_import_manager_settings">Importeer Morphe-instellings</string>
-    <string name="settings_system_import_manager_settings_description">Herstel Morphe-instellings vanaf \'n JSON-lêer</string>
+    <string name="settings_system_morphe_settings">Morphe instellings</string>
+    <string name="settings_system_import_manager_settings_description">Maak \'n rugsteun van en herstel jou Morphe-instellings</string>
     <string name="settings_system_import_manager_settings_fail">Kon Morphe-instellings nie importeer nie: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-instellings geïmporteer</string>
-    <string name="settings_system_export_manager_settings">Voer Morphe-instellings uit</string>
-    <string name="settings_system_export_manager_settings_description">Stoor Morphe-instellings in \'n JSON-lêer</string>
     <string name="settings_system_export_manager_settings_fail">Kon Morphe-instellings nie uitvoer nie: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe-instellings uitgevoer</string>
-    <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Ontfout</string>
-    <string name="settings_system_export_debug_logs">Eksporteer ontfout logboek</string>
-    <string name="settings_system_export_debug_logs_description">Stoor stelsellogboeke vir foutopsporing</string>
+    <string name="settings_system_export_debug_logs_description">Spaar stelsellogboeke vir foutoplossing</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Kon nie logboeke lees nie (afsluit kode %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Kon nie logboeke uitvoer nie</string>
     <string name="settings_system_export_debug_logs_export_success">Logboeke uitgevoer</string>
@@ -622,21 +618,21 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_system_apks_size">Totale grootte: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatched APK\'s</string>
-    <string name="settings_system_patched_apks_description">Bestuur gestoorde gepatched aansoek lêers</string>
+    <string name="settings_system_patched_apks_description">Bestuur gestoorde gepatchte toepassingslêers</string>
     <string name="settings_system_patched_apks_empty">Geen gepatched APK\'s stoor nie</string>
     <string name="settings_system_patched_apks_delete_title">Verwyder gepatched APK?</string>
     <string name="settings_system_patched_apks_delete_confirm">Is jy seker dat jy die gestoorde gepatched APK vir %s wil verwyder?</string>
     <string name="settings_system_patched_apks_deleted">Gepatched APK suksesvol verwyder</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Original APK\'s</string>
-    <string name="settings_system_original_apks_description">Original APK lêers word gestoor vir herpatching. Net die mees onlangse weergawe word bewaar vir elke app</string>
+    <string name="settings_system_original_apks_description">Gestoor vir herpatching. Een weergawe per app word gehou</string>
     <string name="settings_system_original_apks_empty">Geen original APK\'s gestoor nie</string>
     <string name="settings_system_original_apks_deleted">Original APK suksesvol verwyder</string>
     <string name="settings_system_original_apks_delete_title">Verwyder original APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Verwyder original APK vir %s? Jy sal nie in staat wees om te herpatch sonder om \'n nuwe APK te verskaf nie</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch seleksies</string>
-    <string name="settings_system_patch_selections_description">Bestuur gestoorde patch seleksies en opsies. Hierdie bly voort nadat die app gedeïnstalleer is.</string>
+    <string name="settings_system_patch_selections_description">Spaar gestoor patch seleksies, behou na verwydering</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Herstel alles?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Herstel pakket seleksies?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Herstel bron seleksie?</string>
@@ -659,7 +655,7 @@ Die beeld afmetings moet soos volg wees:
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Oor</string>
     <string name="settings_system_share_website">Deel webtuiste</string>
-    <string name="settings_system_share_website_description">Deel die amptelike Morphe webtuiste</string>
+    <string name="settings_system_share_website_description">Deel die amptelike Morphe-webwerf</string>
     <string name="settings_system_manager_description">"Kon nie '%1$s' aflaai nie: %2$s"</string>
     <string name="credits">Krediete</string>
     <string name="credits_current_development">Huidige ontwikkeling</string>
@@ -696,6 +692,10 @@ Die beeld afmetings moet soos volg wees:
     <string name="disabled">Gedeaktiveer</string>
     <string name="selected">Gekies</string>
     <string name="not_selected">Nie gekies nie</string>
+    <string name="select_all">Kies alles</string>
+    <string name="select_all_done">Alles gekies</string>
+    <string name="deselect_all">Deselekteer alles</string>
+    <string name="deselect_all_done">Alles ontkies</string>
     <string name="rename">Hernoem</string>
     <string name="import_">Importeer</string>
     <string name="export">Uitvoer</string>
@@ -716,6 +716,7 @@ Die beeld afmetings moet soos volg wees:
     <string name="unmount">Verwyder monteer</string>
     <string name="unmounted">Gededemonteer</string>
     <string name="remount">Herstel</string>
+    <string name="share">Deel</string>
     <string name="install">Installeer</string>
     <string name="installed">Geïnstalleer</string>
     <string name="reinstall">Herinstalleer</string>

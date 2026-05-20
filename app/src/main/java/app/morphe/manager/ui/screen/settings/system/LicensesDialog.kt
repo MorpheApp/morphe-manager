@@ -14,6 +14,7 @@ import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
@@ -35,6 +36,7 @@ import com.mikepenz.aboutlibraries.ui.compose.m3.libraryColors
 import com.mikepenz.aboutlibraries.ui.compose.util.strippedLicenseContent
 
 private const val NOTICE_UNIQUE_ID = "app.morphe.manager"
+private val urlRegex = Regex("(https?://[\\w./?=&%-]+)")
 // Copied verbatim from NOTICE in project root. Update manually if NOTICE changes.
 private const val NOTICE_TEXT = "Morphe NOTICE\n\nhttps://github.com/MorpheApp/morphe-manager\n\n=============\n\n7c. Project Name Restriction\n----------------------------\n\nThe project name \"Morphe\" is a protected identifier. Derivative works\nmust adopt a completely different identity that is not related to,\nconfusingly similar to, or an imitation of the name \"Morphe\".\n"
 
@@ -135,9 +137,8 @@ private fun AutoLinkText(
     color: Color = Color.Unspecified
 ) {
     val uriHandler = LocalUriHandler.current
-    val urlRegex = Regex("(https?://[\\w./?=&%-]+)")
 
-    val annotated = buildAnnotatedString {
+    val annotated = remember(text, color) { buildAnnotatedString {
         var lastIndex = 0
 
         urlRegex.findAll(text).forEach { match ->
@@ -160,7 +161,7 @@ private fun AutoLinkText(
         if (lastIndex < text.length) {
             append(text.substring(lastIndex))
         }
-    }
+    } }
     @Suppress("DEPRECATION")
     ClickableText(
         text = annotated,

@@ -46,7 +46,7 @@ fun KeystoreCredentialsDialog(
         title = stringResource(R.string.settings_system_import_keystore_dialog_title),
         footer = {
             MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.settings_system_import_keystore_dialog_button),
+                primaryText = stringResource(R.string.import_),
                 onPrimaryClick = { onSubmit(alias, pass, format) },
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
@@ -58,7 +58,7 @@ fun KeystoreCredentialsDialog(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             Text(
                 text = stringResource(R.string.settings_system_import_keystore_dialog_description),

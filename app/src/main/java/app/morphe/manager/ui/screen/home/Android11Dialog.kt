@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.home
 
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,7 +18,7 @@ import app.morphe.manager.ui.screen.shared.MorpheDialog
 import app.morphe.manager.ui.screen.shared.MorpheDialogButtonRow
 
 /**
- * Dialog shown on Android 11+ when install apps permission is needed
+ * Dialog shown on Android 11+ when install apps permission is needed.
  */
 @Composable
 fun Android11Dialog(

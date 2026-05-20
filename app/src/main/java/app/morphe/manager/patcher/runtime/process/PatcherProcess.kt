@@ -108,7 +108,7 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                     androidContext = context,
                     logger = logger,
                     input = preparation.file,
-                    onPatchCompleted = { events.patchSucceeded() },
+                    onPatchCompleted = { patchName -> events.patchSucceeded(patchName) },
                     onProgress = { name, state, message ->
                         events.progress(name, state?.name, message)
                     },
