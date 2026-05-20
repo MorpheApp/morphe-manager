@@ -1031,9 +1031,9 @@ private suspend fun createAdaptiveIcons(
         if (drawableDocDir != null) {
             val plainPaint = Paint().apply { isAntiAlias = true; isFilterBitmap = true; isDither = true }
 
-            // Monochrome adaptive layer: render at 4x oversample to reduce scanline aliasing,
-            // then scale path coordinates back to the 108x108 viewport.
-            val monoOversample = 4
+            // Monochrome adaptive layer: render at 16x oversample (1728x1728) so each scanline
+            // is 0.0625 viewport units tall, making stair-stepping sub-pixel on all densities.
+            val monoOversample = 16
             val adaptiveMonoBmp = renderBitmapWithAdaptiveTransforms(
                 sourceBitmap = monochromeSrc,
                 targetSize = AdaptiveIconConfig.MONOCHROME_ADAPTIVE_VIEWPORT * monoOversample,
