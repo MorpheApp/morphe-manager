@@ -37,7 +37,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.util.requiresLightContent
 
 // Constants
 object MorpheDefaults {
@@ -267,14 +266,12 @@ fun MorpheSwitch(
     modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
-    val thumbColor = MaterialTheme.colorScheme.onPrimary
-    val iconColor = if (thumbColor.requiresLightContent()) Color.White else Color.Black
     Switch(
         checked = checked,
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
-        colors = SwitchDefaults.colors(checkedIconColor = iconColor),
+        colors = SwitchDefaults.colors(checkedIconColor = MaterialTheme.colorScheme.primary),
         thumbContent = {
             Icon(
                 imageVector = if (checked) Icons.Filled.Check else Icons.Filled.Close,
