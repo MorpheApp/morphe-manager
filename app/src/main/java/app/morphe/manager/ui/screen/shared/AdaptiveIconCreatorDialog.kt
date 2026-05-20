@@ -15,8 +15,8 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Image
@@ -39,6 +39,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -114,12 +115,13 @@ private object AdaptiveIconConfig {
     const val SNAP_GUIDE_STROKE_WIDTH = 1.5f
     const val SNAP_GUIDE_ALPHA = 0.6f
 
-    // Default background color
-    const val DEFAULT_BACKGROUND_COLOR = "#B3E5FC"
+    // Default background colors per system theme
+    const val DEFAULT_BACKGROUND_COLOR_LIGHT = "#E3F2FD"
+    const val DEFAULT_BACKGROUND_COLOR_DARK = "#1565C0"
 
     // Preview sizes
-    val PREVIEW_SIZE = 130.dp
-    val NOTIFICATION_PREVIEW_SIZE = 52.dp
+    val PREVIEW_SIZE = 150.dp
+    val NOTIFICATION_PREVIEW_SIZE = 60.dp
 
     // Adaptive icon preview shape, squircle approximation matching Pixel launcher mask
     val PREVIEW_CORNER_RADIUS = 28.dp
@@ -146,7 +148,13 @@ fun AdaptiveIconCreatorDialog(
 
     var foregroundUri by remember { mutableStateOf<Uri?>(null) }
     var foregroundBitmap by remember { mutableStateOf<Bitmap?>(null) }
-    var backgroundColor by remember { mutableStateOf(AdaptiveIconConfig.DEFAULT_BACKGROUND_COLOR) }
+    val isDarkTheme = isSystemInDarkTheme()
+    var backgroundColor by remember {
+        mutableStateOf(
+            if (isDarkTheme) AdaptiveIconConfig.DEFAULT_BACKGROUND_COLOR_DARK
+            else AdaptiveIconConfig.DEFAULT_BACKGROUND_COLOR_LIGHT
+        )
+    }
     val showColorPicker = remember { mutableStateOf(false) }
     val showInfoDialog = remember { mutableStateOf(false) }
 
@@ -496,28 +504,30 @@ fun AdaptiveIconCreatorDialog(
 
                 HorizontalDivider()
 
-                // 4. Background color picker and alpha slider on separate rows
-                Column(
+                // 4. Background color swatch - tap to open picker
+                Text(
+                    text = stringResource(R.string.adaptive_icon_background_color),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = LocalDialogSecondaryTextColor.current,
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                    textAlign = TextAlign.Center
+                )
+                val swatchColor = parseColorToRgb(backgroundColor).let { (r, g, b) -> Color(r, g, b) }
+                Surface(
+                    onClick = { showColorPicker.value = true },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    color = swatchColor,
+                    border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline)
                 ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Surface(
-                            onClick = { showColorPicker.value = true },
-                            modifier = Modifier.size(36.dp),
-                            shape = CircleShape,
-                            color = parseColorToRgb(backgroundColor).let { (r, g, b) -> Color(r, g, b) },
-                            border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline)
-                        ) {}
+                    Box(contentAlignment = Alignment.Center) {
                         Text(
-                            text = stringResource(R.string.adaptive_icon_background_color),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium,
-                            color = LocalDialogTextColor.current
+                            text = backgroundColor.uppercase(),
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.SemiBold,
+                            color = if (swatchColor.requiresLightContent()) Color.White else Color.Black
                         )
                     }
                 }
@@ -603,7 +613,7 @@ private fun AdaptiveIconPreview(
     // Guide color adapts to background brightness to keep circles visible
     val previewGuideColor = remember(backgroundColor) {
         val bgColor = backgroundColor.toColorOrNull()
-            ?: AdaptiveIconConfig.DEFAULT_BACKGROUND_COLOR.toColorOrNull()
+            ?: AdaptiveIconConfig.DEFAULT_BACKGROUND_COLOR_LIGHT.toColorOrNull()
             ?: Color.Black
         if (bgColor.isDarkBackground()) Color.White else Color.Black
     }
