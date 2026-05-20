@@ -100,6 +100,8 @@ private object AdaptiveIconConfig {
     // Transform constraints
     const val MIN_SCALE = 0.5f
     const val MAX_SCALE = 3.0f
+    // Notification icon must not exceed the status bar slot boundary
+    const val MAX_NOTIFICATION_SCALE = 1f
     const val MAX_OFFSET = 200f
 
     // Snap to center thresholds (in pixels)
@@ -437,10 +439,10 @@ fun AdaptiveIconCreatorDialog(
                             onValueChange = {
                                 notificationScale = it.coerceIn(
                                     AdaptiveIconConfig.MIN_SCALE,
-                                    AdaptiveIconConfig.MAX_SCALE
+                                    AdaptiveIconConfig.MAX_NOTIFICATION_SCALE
                                 )
                             },
-                            valueRange = AdaptiveIconConfig.MIN_SCALE..AdaptiveIconConfig.MAX_SCALE,
+                            valueRange = AdaptiveIconConfig.MIN_SCALE..AdaptiveIconConfig.MAX_NOTIFICATION_SCALE,
                             modifier = Modifier.weight(1f)
                         )
                         Icon(
