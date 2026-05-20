@@ -19,7 +19,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.outlined.Image
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.RestartAlt
+import androidx.compose.material.icons.outlined.Save
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -36,7 +39,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -112,9 +114,8 @@ private object AdaptiveIconConfig {
     const val SNAP_GUIDE_STROKE_WIDTH = 1.5f
     const val SNAP_GUIDE_ALPHA = 0.6f
 
-    // Default background color and alpha
+    // Default background color
     const val DEFAULT_BACKGROUND_COLOR = "#B3E5FC"
-    const val DEFAULT_BACKGROUND_ALPHA = 1f
 
     // Preview sizes
     val PREVIEW_SIZE = 130.dp
@@ -146,7 +147,6 @@ fun AdaptiveIconCreatorDialog(
     var foregroundUri by remember { mutableStateOf<Uri?>(null) }
     var foregroundBitmap by remember { mutableStateOf<Bitmap?>(null) }
     var backgroundColor by remember { mutableStateOf(AdaptiveIconConfig.DEFAULT_BACKGROUND_COLOR) }
-    var backgroundAlpha by remember { mutableFloatStateOf(AdaptiveIconConfig.DEFAULT_BACKGROUND_ALPHA) }
     val showColorPicker = remember { mutableStateOf(false) }
     val showInfoDialog = remember { mutableStateOf(false) }
 
@@ -198,7 +198,6 @@ fun AdaptiveIconCreatorDialog(
                     packageName = packageName,
                     foregroundBitmap = foregroundBitmap!!,
                     backgroundColor = backgroundColor,
-                    backgroundAlpha = backgroundAlpha,
                     scale = scale,
                     offsetX = offsetX,
                     offsetY = offsetY,
@@ -289,7 +288,6 @@ fun AdaptiveIconCreatorDialog(
                         AdaptiveIconPreview(
                             foregroundBitmap = foregroundBitmap,
                             backgroundColor = backgroundColor,
-                            backgroundAlpha = backgroundAlpha,
                             scale = scale,
                             offsetX = offsetX,
                             offsetY = offsetY,
@@ -512,9 +510,7 @@ fun AdaptiveIconCreatorDialog(
                             onClick = { showColorPicker.value = true },
                             modifier = Modifier.size(36.dp),
                             shape = CircleShape,
-                            color = parseColorToRgb(backgroundColor).let { (r, g, b) ->
-                                Color(r, g, b, backgroundAlpha)
-                            },
+                            color = parseColorToRgb(backgroundColor).let { (r, g, b) -> Color(r, g, b) },
                             border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline)
                         ) {}
                         Text(
@@ -522,37 +518,6 @@ fun AdaptiveIconCreatorDialog(
                             style = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.Medium,
                             color = LocalDialogTextColor.current
-                        )
-                    }
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Opacity,
-                            contentDescription = null,
-                            modifier = Modifier.size(14.dp),
-                            tint = LocalDialogSecondaryTextColor.current
-                        )
-                        Slider(
-                            value = backgroundAlpha,
-                            onValueChange = { backgroundAlpha = it },
-                            valueRange = 0f..1f,
-                            modifier = Modifier.weight(1f)
-                        )
-                        Icon(
-                            imageVector = Icons.Outlined.Opacity,
-                            contentDescription = null,
-                            modifier = Modifier.size(22.dp),
-                            tint = LocalDialogSecondaryTextColor.current
-                        )
-                        Text(
-                            text = "${(backgroundAlpha * 100).toInt()}%",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = LocalDialogSecondaryTextColor.current,
-                            modifier = Modifier.width(32.dp),
-                            textAlign = TextAlign.End
                         )
                     }
                 }
@@ -629,7 +594,6 @@ fun AdaptiveIconCreatorDialog(
 private fun AdaptiveIconPreview(
     foregroundBitmap: Bitmap?,
     backgroundColor: String,
-    backgroundAlpha: Float,
     scale: Float,
     offsetX: Float,
     offsetY: Float,
@@ -651,9 +615,7 @@ private fun AdaptiveIconPreview(
             .size(AdaptiveIconConfig.PREVIEW_SIZE)
             .clip(RoundedCornerShape(AdaptiveIconConfig.PREVIEW_CORNER_RADIUS))
             .background(
-                parseColorToRgb(backgroundColor).let { (r, g, b) ->
-                    Color(r, g, b, backgroundAlpha)
-                }
+                parseColorToRgb(backgroundColor).let { (r, g, b) -> Color(r, g, b) }
             )
             .border(2.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(AdaptiveIconConfig.PREVIEW_CORNER_RADIUS)),
         contentAlignment = Alignment.Center
@@ -971,7 +933,6 @@ private suspend fun createAdaptiveIcons(
     packageName: String,
     foregroundBitmap: Bitmap,
     backgroundColor: String,
-    backgroundAlpha: Float,
     scale: Float,
     offsetX: Float,
     offsetY: Float,
@@ -1003,7 +964,6 @@ private suspend fun createAdaptiveIcons(
                 densityConfig = densityConfig,
                 foregroundBitmap = foregroundBitmap,
                 backgroundColor = backgroundColor,
-                backgroundAlpha = backgroundAlpha,
                 scale = scale,
                 offsetX = offsetX,
                 offsetY = offsetY,
@@ -1087,7 +1047,6 @@ private fun createIconsForDensity(
     densityConfig: AdaptiveIconConfig.DensityConfig,
     foregroundBitmap: Bitmap,
     backgroundColor: String,
-    backgroundAlpha: Float,
     scale: Float,
     offsetX: Float,
     offsetY: Float,
@@ -1096,13 +1055,12 @@ private fun createIconsForDensity(
     val targetSize = densityConfig.size
     val mipmapDocDir = iconsDocDir.getOrCreateDir(densityConfig.folderName) ?: return
 
-    // Background bitmap (solid color with alpha support)
+    // Background bitmap (solid color)
     val backgroundBitmap = createBitmap(targetSize, targetSize)
     val canvas = Canvas(backgroundBitmap)
     val rgb = parseColorToRgb(backgroundColor)
     val paint = Paint().apply {
-        color = android.graphics.Color.argb(
-            (backgroundAlpha * 255).toInt(),
+        color = android.graphics.Color.rgb(
             (rgb.first * 255).toInt(),
             (rgb.second * 255).toInt(),
             (rgb.third * 255).toInt()
