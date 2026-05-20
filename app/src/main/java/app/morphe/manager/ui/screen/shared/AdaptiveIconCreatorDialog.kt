@@ -185,9 +185,12 @@ fun AdaptiveIconCreatorDialog(
     val successMessage = stringResource(R.string.adaptive_icon_created_success)
     val failureMessage = stringResource(R.string.adaptive_icon_creation_failed)
 
+    var isCreating by remember { mutableStateOf(false) }
+
     // Folder picker for saving
     val openFolderPicker = rememberFolderPicker { uri ->
         scope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) { isCreating = true }
             try {
                 val success = createAdaptiveIcons(
                     context = context,
@@ -202,6 +205,7 @@ fun AdaptiveIconCreatorDialog(
                     notificationScale = notificationScale
                 )
                 withContext(Dispatchers.Main) {
+                    isCreating = false
                     if (success != null) {
                         context.toast(successMessage)
                         onIconCreated(success)
@@ -211,13 +215,16 @@ fun AdaptiveIconCreatorDialog(
                     }
                 }
             } catch (e: Exception) {
-                withContext(Dispatchers.Main) { context.toast("Failed to create icon: ${e.message}") }
+                withContext(Dispatchers.Main) {
+                    isCreating = false
+                    context.toast("Failed to create icon: ${e.message}")
+                }
             }
         }
     }
 
     MorpheDialog(
-        onDismissRequest = onDismiss,
+        onDismissRequest = { if (!isCreating) onDismiss() },
         title = stringResource(R.string.adaptive_icon_create),
         titleTrailingContent = {
             IconButton(onClick = { showInfoDialog.value = true }) {
@@ -234,294 +241,330 @@ fun AdaptiveIconCreatorDialog(
             MorpheDialogButton(
                 text = stringResource(R.string.adaptive_icon_create),
                 onClick = { openFolderPicker() },
-                enabled = foregroundBitmap != null,
+                enabled = foregroundBitmap != null && !isCreating,
                 icon = Icons.Outlined.Save,
                 modifier = Modifier.fillMaxWidth()
             )
         }
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            // Foreground image picker
-            MorpheDialogOutlinedButton(
-                text = if (foregroundUri == null)
-                    stringResource(R.string.adaptive_icon_select_image)
-                else
-                    stringResource(R.string.adaptive_icon_change_image),
-                onClick = { openForegroundPicker() },
-                icon = Icons.Outlined.Image,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            // 2. Preview row: large adaptive circle on the left, small notification +
-            //    monochrome circles stacked vertically on the right (only when a source exists).
-            //    IntrinsicSize.Min lets the right column stretch to match the adaptive circle's height.
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(IntrinsicSize.Min),
-                horizontalArrangement = Arrangement.spacedBy(40.dp, Alignment.CenterHorizontally),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                // Large adaptive preview
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.adaptive_icon_label),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                    AdaptiveIconPreview(
-                        foregroundBitmap = foregroundBitmap,
-                        backgroundColor = backgroundColor,
-                        backgroundAlpha = backgroundAlpha,
-                        scale = scale,
-                        offsetX = offsetX,
-                        offsetY = offsetY,
-                        onScaleChange = { scale = it.coerceIn(AdaptiveIconConfig.MIN_SCALE, AdaptiveIconConfig.MAX_SCALE) },
-                        onOffsetChange = { x, y ->
-                            offsetX = x.coerceIn(-AdaptiveIconConfig.MAX_OFFSET, AdaptiveIconConfig.MAX_OFFSET)
-                            offsetY = y.coerceIn(-AdaptiveIconConfig.MAX_OFFSET, AdaptiveIconConfig.MAX_OFFSET)
-                        }
-                    )
-                }
-
-                // Small previews, fill the same height as the adaptive column via SpaceBetween
-                foregroundBitmap?.let { bitmap ->
-                    Column(
-                        modifier = Modifier.fillMaxHeight(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        // Notification preview, white-on-dark, scale only
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Text(
-                                text = stringResource(R.string.notification_icon_preview),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = LocalDialogSecondaryTextColor.current
-                            )
-                            NotificationIconCanvas(
-                                bitmap = bitmap,
-                                scale = notificationScale
-                            )
-                        }
-                        // Monochrome adaptive preview, non-interactive, mirrors adaptive transforms
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Text(
-                                text = stringResource(R.string.adaptive_icon_monochrome_label),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = LocalDialogSecondaryTextColor.current
-                            )
-                            MonochromeAdaptiveCanvas(
-                                bitmap = bitmap,
-                                scale = scale,
-                                offsetX = offsetX,
-                                offsetY = offsetY
-                            )
-                        }
-                    }
-                }
-            }
-
-            // Safe zone legend
-            val legendColor = MaterialTheme.colorScheme.onSurface
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 36.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                SafeZoneLegendItem(
-                    baseColor = legendColor,
-                    alpha = AdaptiveIconConfig.SAFE_ZONE_INNER_ALPHA,
-                    isDashed = false,
-                    text = stringResource(R.string.adaptive_icon_safe_zone_inner)
-                )
-                SafeZoneLegendItem(
-                    baseColor = legendColor,
-                    alpha = AdaptiveIconConfig.SAFE_ZONE_OUTER_ALPHA,
-                    isDashed = true,
-                    text = stringResource(R.string.adaptive_icon_safe_zone_outer)
-                )
-            }
-
-            // 3. Scale/offset sliders, grouped together, shown only when relevant
-            if (foregroundBitmap != null) {
-                HorizontalDivider()
-
-                // Adaptive slider
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.adaptive_icon_label),
-                        style = MaterialTheme.typography.bodySmall,
-                        fontWeight = FontWeight.Medium,
-                        color = LocalDialogSecondaryTextColor.current,
-                        modifier = Modifier.width(72.dp)
-                    )
-                    Icon(
-                        imageVector = Icons.Outlined.Image,
-                        contentDescription = null,
-                        modifier = Modifier.size(14.dp),
-                        tint = LocalDialogSecondaryTextColor.current
-                    )
-                    Slider(
-                        value = scale,
-                        onValueChange = { scale = it.coerceIn(AdaptiveIconConfig.MIN_SCALE, AdaptiveIconConfig.MAX_SCALE) },
-                        valueRange = AdaptiveIconConfig.MIN_SCALE..AdaptiveIconConfig.MAX_SCALE,
-                        modifier = Modifier.weight(1f)
-                    )
-                    Icon(
-                        imageVector = Icons.Outlined.Image,
-                        contentDescription = null,
-                        modifier = Modifier.size(22.dp),
-                        tint = LocalDialogSecondaryTextColor.current
-                    )
-                    AnimatedVisibility(
-                        visible = scale != 1f || offsetX != 0f || offsetY != 0f,
-                        enter = MorpheAnimations.expandFadeEnter,
-                        exit = MorpheAnimations.shrinkFadeExit
-                    ) {
-                        IconButton(
-                            onClick = { scale = 1f; offsetX = 0f; offsetY = 0f },
-                            modifier = Modifier.size(40.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.RestartAlt,
-                                contentDescription = stringResource(R.string.adaptive_icon_reset_transform),
-                                modifier = Modifier.size(24.dp),
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-                }
-
-                // Notification slider
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.notification_icon_preview),
-                        style = MaterialTheme.typography.bodySmall,
-                        fontWeight = FontWeight.Medium,
-                        color = LocalDialogSecondaryTextColor.current,
-                        modifier = Modifier.width(72.dp)
-                    )
-                    Icon(
-                        imageVector = Icons.Outlined.Image,
-                        contentDescription = null,
-                        modifier = Modifier.size(14.dp),
-                        tint = LocalDialogSecondaryTextColor.current
-                    )
-                    Slider(
-                        value = notificationScale,
-                        onValueChange = { notificationScale = it.coerceIn(AdaptiveIconConfig.MIN_SCALE, AdaptiveIconConfig.MAX_SCALE) },
-                        valueRange = AdaptiveIconConfig.MIN_SCALE..AdaptiveIconConfig.MAX_SCALE,
-                        modifier = Modifier.weight(1f)
-                    )
-                    Icon(
-                        imageVector = Icons.Outlined.Image,
-                        contentDescription = null,
-                        modifier = Modifier.size(22.dp),
-                        tint = LocalDialogSecondaryTextColor.current
-                    )
-                    AnimatedVisibility(
-                        visible = notificationScale != 1f,
-                        enter = MorpheAnimations.expandFadeEnter,
-                        exit = MorpheAnimations.shrinkFadeExit
-                    ) {
-                        IconButton(
-                            onClick = { notificationScale = 1f },
-                            modifier = Modifier.size(40.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.RestartAlt,
-                                contentDescription = stringResource(R.string.adaptive_icon_reset_transform),
-                                modifier = Modifier.size(24.dp),
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-                }
-            }
-
-            HorizontalDivider()
-
-            // 4. Background color picker and alpha slider on separate rows
+        Box(modifier = Modifier.fillMaxWidth()) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
+                // Foreground image picker
+                MorpheDialogOutlinedButton(
+                    text = if (foregroundUri == null)
+                        stringResource(R.string.adaptive_icon_select_image)
+                    else
+                        stringResource(R.string.adaptive_icon_change_image),
+                    onClick = { openForegroundPicker() },
+                    icon = Icons.Outlined.Image,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // 2. Preview row: large adaptive circle on the left, small notification +
+                //    monochrome circles stacked vertically on the right (only when a source exists).
+                //    IntrinsicSize.Min lets the right column stretch to match the adaptive circle's height.
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(IntrinsicSize.Min),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        40.dp,
+                        Alignment.CenterHorizontally
+                    ),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Surface(
-                        onClick = { showColorPicker.value = true },
-                        modifier = Modifier.size(36.dp),
-                        shape = CircleShape,
-                        color = parseColorToRgb(backgroundColor).let { (r, g, b) ->
-                            Color(r, g, b, backgroundAlpha)
-                        },
-                        border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline)
-                    ) {}
-                    Text(
-                        text = stringResource(R.string.adaptive_icon_background_color),
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Medium,
-                        color = LocalDialogTextColor.current
+                    // Large adaptive preview
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.adaptive_icon_label),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
+                        AdaptiveIconPreview(
+                            foregroundBitmap = foregroundBitmap,
+                            backgroundColor = backgroundColor,
+                            backgroundAlpha = backgroundAlpha,
+                            scale = scale,
+                            offsetX = offsetX,
+                            offsetY = offsetY,
+                            onScaleChange = {
+                                scale = it.coerceIn(
+                                    AdaptiveIconConfig.MIN_SCALE,
+                                    AdaptiveIconConfig.MAX_SCALE
+                                )
+                            },
+                            onOffsetChange = { x, y ->
+                                offsetX = x.coerceIn(
+                                    -AdaptiveIconConfig.MAX_OFFSET,
+                                    AdaptiveIconConfig.MAX_OFFSET
+                                )
+                                offsetY = y.coerceIn(
+                                    -AdaptiveIconConfig.MAX_OFFSET,
+                                    AdaptiveIconConfig.MAX_OFFSET
+                                )
+                            }
+                        )
+                    }
+
+                    // Small previews, fill the same height as the adaptive column via SpaceBetween
+                    foregroundBitmap?.let { bitmap ->
+                        Column(
+                            modifier = Modifier.fillMaxHeight(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            // Notification preview, white-on-dark, scale only
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.notification_icon_preview),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = LocalDialogSecondaryTextColor.current
+                                )
+                                NotificationIconCanvas(
+                                    bitmap = bitmap,
+                                    scale = notificationScale
+                                )
+                            }
+                            // Monochrome adaptive preview, non-interactive, mirrors adaptive transforms
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.adaptive_icon_monochrome_label),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = LocalDialogSecondaryTextColor.current
+                                )
+                                MonochromeAdaptiveCanvas(
+                                    bitmap = bitmap,
+                                    scale = scale,
+                                    offsetX = offsetX,
+                                    offsetY = offsetY
+                                )
+                            }
+                        }
+                    }
+                }
+
+                // Safe zone legend
+                val legendColor = MaterialTheme.colorScheme.onSurface
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 36.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    SafeZoneLegendItem(
+                        baseColor = legendColor,
+                        alpha = AdaptiveIconConfig.SAFE_ZONE_INNER_ALPHA,
+                        isDashed = false,
+                        text = stringResource(R.string.adaptive_icon_safe_zone_inner)
+                    )
+                    SafeZoneLegendItem(
+                        baseColor = legendColor,
+                        alpha = AdaptiveIconConfig.SAFE_ZONE_OUTER_ALPHA,
+                        isDashed = true,
+                        text = stringResource(R.string.adaptive_icon_safe_zone_outer)
                     )
                 }
-                Row(
+
+                // 3. Scale/offset sliders, grouped together, shown only when relevant
+                if (foregroundBitmap != null) {
+                    HorizontalDivider()
+
+                    // Adaptive slider
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.adaptive_icon_label),
+                            style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Medium,
+                            color = LocalDialogSecondaryTextColor.current,
+                            modifier = Modifier.width(72.dp)
+                        )
+                        Icon(
+                            imageVector = Icons.Outlined.Image,
+                            contentDescription = null,
+                            modifier = Modifier.size(14.dp),
+                            tint = LocalDialogSecondaryTextColor.current
+                        )
+                        Slider(
+                            value = scale,
+                            onValueChange = {
+                                scale = it.coerceIn(
+                                    AdaptiveIconConfig.MIN_SCALE,
+                                    AdaptiveIconConfig.MAX_SCALE
+                                )
+                            },
+                            valueRange = AdaptiveIconConfig.MIN_SCALE..AdaptiveIconConfig.MAX_SCALE,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Icon(
+                            imageVector = Icons.Outlined.Image,
+                            contentDescription = null,
+                            modifier = Modifier.size(22.dp),
+                            tint = LocalDialogSecondaryTextColor.current
+                        )
+                        AnimatedVisibility(
+                            visible = scale != 1f || offsetX != 0f || offsetY != 0f,
+                            enter = MorpheAnimations.expandFadeEnter,
+                            exit = MorpheAnimations.shrinkFadeExit
+                        ) {
+                            IconButton(
+                                onClick = { scale = 1f; offsetX = 0f; offsetY = 0f },
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.RestartAlt,
+                                    contentDescription = stringResource(R.string.adaptive_icon_reset_transform),
+                                    modifier = Modifier.size(24.dp),
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    }
+
+                    // Notification slider
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.notification_icon_preview),
+                            style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Medium,
+                            color = LocalDialogSecondaryTextColor.current,
+                            modifier = Modifier.width(72.dp)
+                        )
+                        Icon(
+                            imageVector = Icons.Outlined.Image,
+                            contentDescription = null,
+                            modifier = Modifier.size(14.dp),
+                            tint = LocalDialogSecondaryTextColor.current
+                        )
+                        Slider(
+                            value = notificationScale,
+                            onValueChange = {
+                                notificationScale = it.coerceIn(
+                                    AdaptiveIconConfig.MIN_SCALE,
+                                    AdaptiveIconConfig.MAX_SCALE
+                                )
+                            },
+                            valueRange = AdaptiveIconConfig.MIN_SCALE..AdaptiveIconConfig.MAX_SCALE,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Icon(
+                            imageVector = Icons.Outlined.Image,
+                            contentDescription = null,
+                            modifier = Modifier.size(22.dp),
+                            tint = LocalDialogSecondaryTextColor.current
+                        )
+                        AnimatedVisibility(
+                            visible = notificationScale != 1f,
+                            enter = MorpheAnimations.expandFadeEnter,
+                            exit = MorpheAnimations.shrinkFadeExit
+                        ) {
+                            IconButton(
+                                onClick = { notificationScale = 1f },
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.RestartAlt,
+                                    contentDescription = stringResource(R.string.adaptive_icon_reset_transform),
+                                    modifier = Modifier.size(24.dp),
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    }
+                }
+
+                HorizontalDivider()
+
+                // 4. Background color picker and alpha slider on separate rows
+                Column(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Opacity,
-                        contentDescription = null,
-                        modifier = Modifier.size(14.dp),
-                        tint = LocalDialogSecondaryTextColor.current
-                    )
-                    Slider(
-                        value = backgroundAlpha,
-                        onValueChange = { backgroundAlpha = it },
-                        valueRange = 0f..1f,
-                        modifier = Modifier.weight(1f)
-                    )
-                    Icon(
-                        imageVector = Icons.Outlined.Opacity,
-                        contentDescription = null,
-                        modifier = Modifier.size(22.dp),
-                        tint = LocalDialogSecondaryTextColor.current
-                    )
-                    Text(
-                        text = "${(backgroundAlpha * 100).toInt()}%",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = LocalDialogSecondaryTextColor.current,
-                        modifier = Modifier.width(32.dp),
-                        textAlign = TextAlign.End
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Surface(
+                            onClick = { showColorPicker.value = true },
+                            modifier = Modifier.size(36.dp),
+                            shape = CircleShape,
+                            color = parseColorToRgb(backgroundColor).let { (r, g, b) ->
+                                Color(r, g, b, backgroundAlpha)
+                            },
+                            border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline)
+                        ) {}
+                        Text(
+                            text = stringResource(R.string.adaptive_icon_background_color),
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Medium,
+                            color = LocalDialogTextColor.current
+                        )
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Opacity,
+                            contentDescription = null,
+                            modifier = Modifier.size(14.dp),
+                            tint = LocalDialogSecondaryTextColor.current
+                        )
+                        Slider(
+                            value = backgroundAlpha,
+                            onValueChange = { backgroundAlpha = it },
+                            valueRange = 0f..1f,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Icon(
+                            imageVector = Icons.Outlined.Opacity,
+                            contentDescription = null,
+                            modifier = Modifier.size(22.dp),
+                            tint = LocalDialogSecondaryTextColor.current
+                        )
+                        Text(
+                            text = "${(backgroundAlpha * 100).toInt()}%",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = LocalDialogSecondaryTextColor.current,
+                            modifier = Modifier.width(32.dp),
+                            textAlign = TextAlign.End
+                        )
+                    }
+                }
+            }
+            if (isCreating) {
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
                 }
             }
         }

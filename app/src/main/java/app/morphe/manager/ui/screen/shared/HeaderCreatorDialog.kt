@@ -177,8 +177,11 @@ fun HeaderCreatorDialog(
     // Whether all required images are provided
     val canCreate = darkHeaderBitmap != null && (!showLightVariant || lightHeaderBitmap != null)
 
+    var isCreating by remember { mutableStateOf(false) }
+
     val openFolderPicker = rememberFolderPicker { uri ->
         scope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) { isCreating = true }
             try {
                 val success = createHeaderFiles(
                     context = context,
@@ -196,6 +199,7 @@ fun HeaderCreatorDialog(
                     darkOffsetY = darkOffsetY
                 )
                 withContext(Dispatchers.Main) {
+                    isCreating = false
                     if (success != null) {
                         context.toast(successMessage)
                         onHeaderCreated(success)
@@ -206,6 +210,7 @@ fun HeaderCreatorDialog(
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
+                    isCreating = false
                     context.toast("Failed to create header: ${e.message}")
                 }
             }
@@ -215,7 +220,7 @@ fun HeaderCreatorDialog(
     val showInfoDialog = remember { mutableStateOf(false) }
 
     MorpheDialog(
-        onDismissRequest = onDismiss,
+        onDismissRequest = { if (!isCreating) onDismiss() },
         title = stringResource(R.string.header_creator_create),
         titleTrailingContent = {
             IconButton(onClick = { showInfoDialog.value = true }) {
@@ -232,16 +237,17 @@ fun HeaderCreatorDialog(
             MorpheDialogButton(
                 text = stringResource(R.string.header_creator_create),
                 onClick = { openFolderPicker() },
-                enabled = canCreate,
+                enabled = canCreate && !isCreating,
                 icon = Icons.Outlined.Save,
                 modifier = Modifier.fillMaxWidth()
             )
         }
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
-        ) {
+        Box(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            ) {
             // Light header section
             if (showLightVariant) {
                 Text(
@@ -409,6 +415,17 @@ fun HeaderCreatorDialog(
                 icon = Icons.Outlined.DarkMode,
                 modifier = Modifier.fillMaxWidth()
             )
+            }
+            if (isCreating) {
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
         }
     }
 
