@@ -101,7 +101,7 @@ private object AdaptiveIconConfig {
     const val MIN_SCALE = 0.5f
     const val MAX_SCALE = 3.0f
     // Notification icon must not exceed the status bar slot boundary
-    const val MAX_NOTIFICATION_SCALE = 1f
+    const val MAX_NOTIFICATION_SCALE = 2.0f
     const val MAX_OFFSET = 200f
 
     // Snap to center thresholds (in pixels)
@@ -328,6 +328,28 @@ fun AdaptiveIconCreatorDialog(
                     }
                 }
 
+                // Safe zone legend
+                val legendColor = MaterialTheme.colorScheme.onSurface
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 36.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    SafeZoneLegendItem(
+                        baseColor = legendColor,
+                        alpha = AdaptiveIconConfig.SAFE_ZONE_INNER_ALPHA,
+                        isDashed = false,
+                        text = stringResource(R.string.adaptive_icon_safe_zone_inner)
+                    )
+                    SafeZoneLegendItem(
+                        baseColor = legendColor,
+                        alpha = AdaptiveIconConfig.SAFE_ZONE_OUTER_ALPHA,
+                        isDashed = true,
+                        text = stringResource(R.string.adaptive_icon_safe_zone_outer)
+                    )
+                }
+
                 // Adaptive scale slider
                 if (foregroundBitmap != null) {
                     Row(
@@ -378,28 +400,6 @@ fun AdaptiveIconCreatorDialog(
                             }
                         }
                     }
-                }
-
-                // Safe zone legend
-                val legendColor = MaterialTheme.colorScheme.onSurface
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 36.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    SafeZoneLegendItem(
-                        baseColor = legendColor,
-                        alpha = AdaptiveIconConfig.SAFE_ZONE_INNER_ALPHA,
-                        isDashed = false,
-                        text = stringResource(R.string.adaptive_icon_safe_zone_inner)
-                    )
-                    SafeZoneLegendItem(
-                        baseColor = legendColor,
-                        alpha = AdaptiveIconConfig.SAFE_ZONE_OUTER_ALPHA,
-                        isDashed = true,
-                        text = stringResource(R.string.adaptive_icon_safe_zone_outer)
-                    )
                 }
 
                 // 3. Status bar notification preview, always visible
