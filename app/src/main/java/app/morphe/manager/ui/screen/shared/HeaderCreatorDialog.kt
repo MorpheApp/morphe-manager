@@ -9,7 +9,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.net.Uri
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -213,56 +212,36 @@ fun HeaderCreatorDialog(
         }
     }
 
+    val showInfoDialog = remember { mutableStateOf(false) }
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.header_creator_create),
-        compactPadding = false,
-        footer = {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                // Explanation text
-                AnimatedVisibility(
-                    visible = canCreate,
-                    enter = MorpheAnimations.expandFadeEnter,
-                    exit = MorpheAnimations.shrinkFadeExit
-                ) {
-                    InfoBadge(
-                        text = stringResource(
-                            R.string.header_creator_folder_explanation,
-                            HeaderConfig.BRANDING_FOLDER_NAME,
-                            HeaderConfig.headerFolderName(packageName)
-                        ),
-                        style = InfoBadgeStyle.Primary,
-                        icon = Icons.Outlined.Info,
-                        isExpanded = true
-                    )
-                }
-
-                // Create button
-                MorpheDialogButton(
-                    text = stringResource(R.string.header_creator_create),
-                    onClick = { openFolderPicker() },
-                    enabled = canCreate,
-                    icon = Icons.Outlined.Save,
-                    modifier = Modifier.fillMaxWidth()
+        titleTrailingContent = {
+            IconButton(onClick = { showInfoDialog.value = true }) {
+                Icon(
+                    imageVector = Icons.Outlined.Info,
+                    contentDescription = stringResource(R.string.header_creator_guide),
+                    modifier = Modifier.size(24.dp),
+                    tint = LocalDialogTextColor.current
                 )
             }
+        },
+        compactPadding = false,
+        footer = {
+            MorpheDialogButton(
+                text = stringResource(R.string.header_creator_create),
+                onClick = { openFolderPicker() },
+                enabled = canCreate,
+                icon = Icons.Outlined.Save,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
-            // Instructions
-            InfoBadge(
-                text = stringResource(R.string.header_creator_instructions),
-                style = InfoBadgeStyle.Primary,
-                icon = Icons.Outlined.Info,
-                isExpanded = true
-            )
-
             // Light header section
             if (showLightVariant) {
                 Text(
@@ -431,6 +410,55 @@ fun HeaderCreatorDialog(
                 modifier = Modifier.fillMaxWidth()
             )
         }
+    }
+
+    if (showInfoDialog.value) {
+        MorpheDialog(
+            onDismissRequest = { showInfoDialog.value = false },
+            title = stringResource(R.string.header_creator_guide),
+            footer = {
+                MorpheDialogButton(
+                    text = stringResource(android.R.string.ok),
+                    onClick = { showInfoDialog.value = false },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                HeaderCreatorGuideSection(
+                    title = stringResource(R.string.header_creator_guide_image_title),
+                    body = stringResource(R.string.header_creator_guide_image_body)
+                )
+                HeaderCreatorGuideSection(
+                    title = stringResource(R.string.header_creator_guide_themes_title),
+                    body = stringResource(R.string.header_creator_guide_themes_body)
+                )
+                HeaderCreatorGuideSection(
+                    title = stringResource(R.string.header_creator_guide_positioning_title),
+                    body = stringResource(R.string.header_creator_guide_positioning_body)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun HeaderCreatorGuideSection(title: String, body: String) {
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.SemiBold,
+            color = LocalDialogTextColor.current
+        )
+        Text(
+            text = body,
+            style = MaterialTheme.typography.bodySmall,
+            color = LocalDialogSecondaryTextColor.current
+        )
     }
 }
 

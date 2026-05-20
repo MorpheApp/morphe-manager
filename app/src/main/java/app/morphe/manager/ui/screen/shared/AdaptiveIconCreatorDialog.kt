@@ -988,10 +988,12 @@ private suspend fun createAdaptiveIcons(
         if (drawableDocDir != null) {
             val plainPaint = Paint().apply { isAntiAlias = true; isFilterBitmap = true; isDither = true }
 
-            // Monochrome adaptive layer: 108x108 viewport, using adaptive transforms
+            // Monochrome adaptive layer: render at 4x oversample to reduce scanline aliasing,
+            // then scale path coordinates back to the 108x108 viewport.
+            val monoOversample = 4
             val adaptiveMonoBmp = renderBitmapWithAdaptiveTransforms(
                 sourceBitmap = monochromeSrc,
-                targetSize = AdaptiveIconConfig.MONOCHROME_ADAPTIVE_VIEWPORT,
+                targetSize = AdaptiveIconConfig.MONOCHROME_ADAPTIVE_VIEWPORT * monoOversample,
                 scale = scale,
                 offsetX = offsetX,
                 offsetY = offsetY,
@@ -1001,6 +1003,7 @@ private suspend fun createAdaptiveIcons(
             val adaptiveMonoXml = createMonochromeVectorXml(
                 bitmap = adaptiveMonoBmp,
                 viewportSize = AdaptiveIconConfig.MONOCHROME_ADAPTIVE_VIEWPORT,
+                coordScale = 1f / monoOversample,
                 // System tints the monochrome layer; fill color is overridden at runtime
                 fillColor = "#FF000000"
             )
@@ -1218,8 +1221,9 @@ private fun renderBitmapWithNotificationTransforms(
 /**
  * Convert a bitmap's alpha channel to SVG/VectorDrawable path data using scanline spans.
  * Each row of opaque pixels (alpha > 127) is encoded as one or more horizontal rect commands.
+ * [coordScale] maps bitmap pixel coordinates to viewport units (use 1f/oversampleFactor for oversampled bitmaps).
  */
-private fun bitmapToVectorPathData(bitmap: Bitmap): String {
+private fun bitmapToVectorPathData(bitmap: Bitmap, coordScale: Float = 1f): String {
     val width = bitmap.width
     val height = bitmap.height
     val sb = StringBuilder()
@@ -1232,14 +1236,18 @@ private fun bitmapToVectorPathData(bitmap: Bitmap): String {
             if (opaque && spanStart == -1) {
                 spanStart = x
             } else if (!opaque && spanStart != -1) {
-                val w = x - spanStart
-                sb.append("M${spanStart},${y}h${w}v1h-${w}z")
+                val sx = spanStart * coordScale
+                val sy = y * coordScale
+                val sw = (x - spanStart) * coordScale
+                sb.append("M$sx,${sy}h${sw}v${coordScale}h-${sw}z")
                 spanStart = -1
             }
         }
         if (spanStart != -1) {
-            val w = width - spanStart
-            sb.append("M${spanStart},${y}h${w}v1h-${w}z")
+            val sx = spanStart * coordScale
+            val sy = y * coordScale
+            val sw = (width - spanStart) * coordScale
+            sb.append("M$sx,${sy}h${sw}v${coordScale}h-${sw}z")
         }
     }
     return sb.toString()
@@ -1248,9 +1256,10 @@ private fun bitmapToVectorPathData(bitmap: Bitmap): String {
 /**
  * Create an Android VectorDrawable XML string from a pre-rendered monochrome bitmap.
  * The bitmap's alpha channel defines the icon shape; [fillColor] sets the path fill.
+ * [coordScale] is forwarded to [bitmapToVectorPathData] for oversampled bitmaps.
  */
-private fun createMonochromeVectorXml(bitmap: Bitmap, viewportSize: Int, fillColor: String): String {
-    val pathData = bitmapToVectorPathData(bitmap)
+private fun createMonochromeVectorXml(bitmap: Bitmap, viewportSize: Int, coordScale: Float = 1f, fillColor: String): String {
+    val pathData = bitmapToVectorPathData(bitmap, coordScale)
     return """<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="${viewportSize}dp"

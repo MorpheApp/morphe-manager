@@ -237,13 +237,18 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
 
     <!-- Header Creator -->
     <string name="header_creator_create">Create custom header</string>
-    <string name="header_creator_instructions">Choose images for light and dark themes, then adjust with pinch-to-zoom gestures</string>
     <string name="header_creator_light_theme">Light theme header</string>
     <string name="header_creator_dark_theme">Dark theme header</string>
     <string name="header_creator_no_image">No image selected</string>
     <string name="header_creator_success">Header created successfully</string>
     <string name="header_creator_failed">Failed to create header</string>
-    <string name="header_creator_folder_explanation">Select where to create \'%1$s/%2$s\' folder with generated header files</string>
+    <string name="header_creator_guide">Header creation guide</string>
+    <string name="header_creator_guide_image_title">Image requirements</string>
+    <string name="header_creator_guide_image_body">Use any image file (PNG or JPEG). For best results, use a wide-format image with an approximately 2.7:1 aspect ratio. PNG files with transparent backgrounds will blend naturally with the app theme.</string>
+    <string name="header_creator_guide_themes_title">Light and dark themes</string>
+    <string name="header_creator_guide_themes_body">Most apps require separate images for the light and dark themes. Some apps (such as YouTube Music) only use the dark theme, so only that section is shown.</string>
+    <string name="header_creator_guide_positioning_title">Positioning and scaling</string>
+    <string name="header_creator_guide_positioning_body">Use pinch-to-zoom and drag gestures directly in the preview to position and scale your image. Snap guides appear when the image is near the center. You can also use the slider below the preview.</string>
 
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Are you sure you want to uninstall this app?</string>
