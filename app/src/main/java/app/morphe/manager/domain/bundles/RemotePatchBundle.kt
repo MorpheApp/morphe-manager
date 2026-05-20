@@ -1,11 +1,13 @@
 package app.morphe.manager.domain.bundles
 
+import app.morphe.manager.domain.bundles.RemotePatchBundle.Companion.CHANGELOG_CACHE_TTL
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.network.dto.MorpheAsset
 import app.morphe.manager.network.service.HttpService
 import app.morphe.manager.network.utils.getOrThrow
 import app.morphe.manager.util.ChangelogEntry
+import app.morphe.manager.util.compareVersions
 import io.ktor.client.request.header
 import io.ktor.client.request.prepareGet
 import io.ktor.client.request.url
@@ -15,6 +17,8 @@ import io.ktor.http.contentType
 import io.ktor.utils.io.jvm.javaio.toInputStream
 import io.ktor.utils.io.readAvailable
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
@@ -184,6 +188,9 @@ sealed class RemotePatchBundle(
     }
 
     companion object {
+        const val BRANCH_STABLE = "main"
+        const val BRANCH_DEV = "dev"
+
         internal const val CHANGELOG_CACHE_TTL = 10 * 60 * 1000L
         private val changelogCacheMutex = Mutex()
         private val changelogCache = mutableMapOf<String, CachedChangelog>()
@@ -236,36 +243,26 @@ class JsonPatchBundle(
 ) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate, enabled) {
 
     /**
-     * The branch the endpoint URL currently points to (e.g. "main", "dev").
+     * The branch the endpoint URL currently points to.
      * Returns null if the URL uses refs/heads/... or is not a recognized format.
      */
     val endpointBranch: String? get() = extractBranch(endpoint)
 
     /**
-     * The "stable" branch. Always "main" - prerelease toggling is only available when
-     * the endpoint explicitly points to "main" or "dev", so switching back to stable
-     * always means "main".
-     */
-    private val stableBranch: String get() = "main"
-
-    /**
-     * Resolves the effective fetch URL, substituting the target branch when
-     * [supportsPrerelease] is true.
-     *
-     * Only called when [supportsPrerelease] is true, i.e. the endpoint already
-     * points to "main" or "dev" - so both branches are expected to exist.
+     * Returns [url] with its branch segment replaced by [targetBranch].
      *
      * Supports:
      * - https://raw.githubusercontent.com/owner/repo/branch/path/file.json
      * - https://github.com/owner/repo/tree|blob/branch/path/file.json
      * - https://gitlab.com/owner/repo/-/raw/branch/path/file.json
+     *
+     * Returns the original [url] unchanged for unrecognized hosts, `refs/heads/...` links,
+     * or when parsing fails.
      */
-    private fun resolveBranchUrl(url: String): String {
+    private fun switchBranchInUrl(url: String, targetBranch: String): String {
         return try {
             val uri = java.net.URI(url)
             val host = uri.host?.lowercase(java.util.Locale.US)
-            val targetBranch = if (usePrerelease) "dev" else stableBranch
-
             when (host) {
                 "raw.githubusercontent.com" -> {
                     val parts = uri.path.trim('/').split('/')
@@ -303,20 +300,62 @@ class JsonPatchBundle(
     }
 
     /**
+     * Resolves the effective fetch URL for the current [usePrerelease] state.
+     *
+     * Delegates to [switchBranchInUrl]: uses `BRANCH_DEV` when pre-releases are enabled,
+     * `BRANCH_STABLE` otherwise.
+     */
+    private fun resolveBranchUrl(url: String) =
+        switchBranchInUrl(url, if (usePrerelease) BRANCH_DEV else BRANCH_STABLE)
+
+    /**
      * Returns true if this bundle supports prerelease toggling.
-     * Only bundles whose endpoint explicitly points to "main" or "dev" branch support.
+     * Only bundles whose endpoint explicitly points to `BRANCH_STABLE` or `BRANCH_DEV` branch support.
      */
     val supportsPrerelease: Boolean get() {
         val branch = endpointBranch ?: return false
-        return branch == "main" || branch == "dev"
+        return branch == BRANCH_STABLE || branch == BRANCH_DEV
     }
 
+    /**
+     * Fetches the latest release metadata for this bundle.
+     *
+     * When [usePrerelease] is enabled and [supportsPrerelease] is true, both the `BRANCH_DEV` and
+     * `BRANCH_STABLE` JSON endpoints are fetched in parallel and the one with the
+     * higher version is returned. This prevents missing a stable release when a third-party
+     * source hasn't updated its `BRANCH_DEV` JSON after shipping a new stable build.
+     *
+     * When [usePrerelease] is disabled (or the endpoint does not support branch switching),
+     * only the [resolveBranchUrl]-resolved endpoint is fetched, as before.
+     *
+     * @throws IllegalStateException if both channels are unreachable.
+     */
     override suspend fun getLatestInfo() = withContext(Dispatchers.IO) {
-        val resolvedEndpoint = resolveBranchUrl(endpoint)
-
-        val asset = http.request<MorpheAsset> {
-            url(resolvedEndpoint)
-        }.getOrThrow()
+        val asset = if (usePrerelease && supportsPrerelease) {
+            // Fetch both BRANCH_DEV and BRANCH_STABLE in parallel; return whichever has the newer version.
+            // Needed because third-party devs sometimes don't update the BRANCH_DEV JSON when a new
+            // stable release is tagged, so the dev channel would otherwise stay on an older
+            // pre-release and the stable update would go unnoticed
+            coroutineScope {
+                val devDeferred = async {
+                    runCatching { http.request<MorpheAsset> { url(switchBranchInUrl(endpoint, BRANCH_DEV)) }.getOrThrow() }.getOrNull()
+                }
+                val stableDeferred = async {
+                    runCatching { http.request<MorpheAsset> { url(switchBranchInUrl(endpoint, BRANCH_STABLE)) }.getOrThrow() }.getOrNull()
+                }
+                val devAsset = devDeferred.await()
+                val stableAsset = stableDeferred.await()
+                when {
+                    devAsset == null && stableAsset == null -> error("No release found for $name")
+                    devAsset == null -> stableAsset!!
+                    stableAsset == null -> devAsset
+                    compareVersions(devAsset.version, stableAsset.version) >= 0 -> devAsset
+                    else -> stableAsset
+                }
+            }
+        } else {
+            http.request<MorpheAsset> { url(resolveBranchUrl(endpoint)) }.getOrThrow()
+        }
 
         // If pageUrl is not set, try to infer it from the endpoint and add version tag
         if (asset.pageUrl == null) {
@@ -427,7 +466,7 @@ class APIPatchBundle(
     override suspend fun getLatestInfo() = api.getPatchesUpdate(usePrerelease).getOrThrow()
 
     override suspend fun fetchChangelogEntries(sinceVersion: String?): List<ChangelogEntry> {
-        val branch = if (usePrerelease) "dev" else "main"
+        val branch = if (usePrerelease) BRANCH_DEV else BRANCH_STABLE
         return fetchAndCacheEntries("$uid|$branch", sinceVersion) { api.fetchPatchesChangelog(branch) }
     }
 
