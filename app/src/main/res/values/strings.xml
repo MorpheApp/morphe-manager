@@ -213,9 +213,6 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
 
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Create adaptive icon</string>
-    <string name="adaptive_icon_instructions">Choose a foreground image, select a background color, then use the slider or pinch gestures to adjust the preview</string>
-    <string name="adaptive_icon_preview">Adaptive icon preview</string>
-    <string name="adaptive_icon_preview_hint">For the best result, keep your icon within the solid inner circle</string>
     <string name="adaptive_icon_select_image">Select image</string>
     <string name="adaptive_icon_change_image">Change image</string>
     <string name="adaptive_icon_background_color">Background color</string>
@@ -224,9 +221,19 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="adaptive_icon_safe_zone_outer">Mask zone (may be clipped)</string>
     <string name="adaptive_icon_created_success">Adaptive icon created successfully</string>
     <string name="adaptive_icon_creation_failed">Failed to create adaptive icon</string>
-    <string name="adaptive_icon_folder_explanation">Select where to create \'%1$s/%2$s\' folder with generated icon files</string>
-    <string name="notification_icon_preview">Notification icon preview</string>
-    <string name="notification_icon_preview_hint">Use the slider to resize. Drag to reposition</string>
+    <string name="adaptive_icon_label">Adaptive</string>
+    <string name="adaptive_icon_monochrome_label">Monochrome</string>
+    <string name="adaptive_icon_guide">Icon creation guide</string>
+    <string name="adaptive_icon_guide_png_title">Use a PNG with a transparent background</string>
+    <string name="adaptive_icon_guide_png_body">The foreground must be a PNG file with a transparent background. A solid-colored background will look incorrect - the background color should come from the background picker below.</string>
+    <string name="adaptive_icon_guide_safe_zones_title">Safe zones</string>
+    <string name="adaptive_icon_guide_safe_zones_body">"Inner zone (solid): content is always fully visible on all launcher shapes.
+Outer zone (dashed): may be clipped by the launcher mask - keep important details inside the inner zone."</string>
+    <string name="adaptive_icon_guide_notification_title">Notification icon</string>
+    <string name="adaptive_icon_guide_notification_body">Generated automatically from the foreground image. Adjust its size using the Notification slider. All visible content appears white in the status bar.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Monochrome icon</string>
+    <string name="adaptive_icon_guide_monochrome_body">Generated automatically from the foreground image using the same adaptive icon transforms. It appears tinted with the wallpaper accent color on Android 13 and later.</string>
+    <string name="notification_icon_preview">Notification</string>
 
     <!-- Header Creator -->
     <string name="header_creator_create">Create custom header</string>
