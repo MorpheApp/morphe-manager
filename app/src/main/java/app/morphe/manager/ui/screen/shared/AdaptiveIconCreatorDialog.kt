@@ -116,8 +116,8 @@ private object AdaptiveIconConfig {
     const val SNAP_GUIDE_ALPHA = 0.6f
 
     // Default background colors per system theme
-    const val DEFAULT_BACKGROUND_COLOR_LIGHT = "#E3F2FD"
-    const val DEFAULT_BACKGROUND_COLOR_DARK = "#1565C0"
+    const val DEFAULT_BACKGROUND_COLOR_LIGHT = "#9E9E9E"
+    const val DEFAULT_BACKGROUND_COLOR_DARK = "#FFFFFF"
 
     // Preview sizes
     val PREVIEW_SIZE = 150.dp
