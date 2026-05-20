@@ -9,6 +9,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.net.Uri
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -257,6 +258,16 @@ fun HeaderCreatorDialog(
                         color = LocalDialogTextColor.current
                     )
 
+                    MorpheDialogOutlinedButton(
+                        text = if (lightHeaderUri == null)
+                            stringResource(R.string.adaptive_icon_select_image)
+                        else
+                            stringResource(R.string.adaptive_icon_change_image),
+                        onClick = { openLightHeaderPicker() },
+                        icon = Icons.Outlined.LightMode,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
                     HeaderPreview(
                         headerBitmap = lightHeaderBitmap,
                         scale = lightScale,
@@ -272,7 +283,6 @@ fun HeaderCreatorDialog(
                         }
                     )
 
-                    // Scale slider and reset button for light header
                     if (lightHeaderBitmap != null) {
                         Row(
                             modifier = Modifier
@@ -299,37 +309,20 @@ fun HeaderCreatorDialog(
                                 modifier = Modifier.size(22.dp),
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
-                        }
-
-                        if (lightScale != 1f || lightOffsetX != 0f || lightOffsetY != 0f) {
-                            TextButton(
-                                onClick = {
-                                    lightScale = 1f
-                                    lightOffsetX = 0f
-                                    lightOffsetY = 0f
-                                },
-                                modifier = Modifier.align(Alignment.CenterHorizontally)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.RestartAlt,
-                                    contentDescription = null,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text(stringResource(R.string.adaptive_icon_reset_transform))
+                            AnimatedVisibility(visible = lightScale != 1f || lightOffsetX != 0f || lightOffsetY != 0f) {
+                                IconButton(
+                                    onClick = { lightScale = 1f; lightOffsetX = 0f; lightOffsetY = 0f },
+                                    modifier = Modifier.size(40.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.RestartAlt,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
                             }
                         }
                     }
-
-                    MorpheDialogButton(
-                        text = if (lightHeaderUri == null)
-                            stringResource(R.string.adaptive_icon_select_image)
-                        else
-                            stringResource(R.string.adaptive_icon_change_image),
-                        onClick = { openLightHeaderPicker() },
-                        icon = Icons.Outlined.LightMode,
-                        modifier = Modifier.fillMaxWidth()
-                    )
 
                     HorizontalDivider()
                 }
@@ -340,6 +333,16 @@ fun HeaderCreatorDialog(
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                     color = LocalDialogTextColor.current
+                )
+
+                MorpheDialogOutlinedButton(
+                    text = if (darkHeaderUri == null)
+                        stringResource(R.string.adaptive_icon_select_image)
+                    else
+                        stringResource(R.string.adaptive_icon_change_image),
+                    onClick = { openDarkHeaderPicker() },
+                    icon = Icons.Outlined.DarkMode,
+                    modifier = Modifier.fillMaxWidth()
                 )
 
                 HeaderPreview(
@@ -357,7 +360,6 @@ fun HeaderCreatorDialog(
                     }
                 )
 
-                // Scale slider and reset button for dark header
                 if (darkHeaderBitmap != null) {
                     Row(
                         modifier = Modifier
@@ -384,37 +386,20 @@ fun HeaderCreatorDialog(
                             modifier = Modifier.size(22.dp),
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                    }
-
-                    if (darkScale != 1f || darkOffsetX != 0f || darkOffsetY != 0f) {
-                        TextButton(
-                            onClick = {
-                                darkScale = 1f
-                                darkOffsetX = 0f
-                                darkOffsetY = 0f
-                            },
-                            modifier = Modifier.align(Alignment.CenterHorizontally)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.RestartAlt,
-                                contentDescription = null,
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(stringResource(R.string.adaptive_icon_reset_transform))
+                        AnimatedVisibility(visible = darkScale != 1f || darkOffsetX != 0f || darkOffsetY != 0f) {
+                            IconButton(
+                                onClick = { darkScale = 1f; darkOffsetX = 0f; darkOffsetY = 0f },
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.RestartAlt,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            }
                         }
                     }
                 }
-
-                MorpheDialogButton(
-                    text = if (darkHeaderUri == null)
-                        stringResource(R.string.adaptive_icon_select_image)
-                    else
-                        stringResource(R.string.adaptive_icon_change_image),
-                    onClick = { openDarkHeaderPicker() },
-                    icon = Icons.Outlined.DarkMode,
-                    modifier = Modifier.fillMaxWidth()
-                )
             }
             if (isCreating) {
                 Box(
