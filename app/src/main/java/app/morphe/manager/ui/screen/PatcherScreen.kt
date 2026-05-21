@@ -7,6 +7,7 @@ package app.morphe.manager.ui.screen
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.media.RingtoneManager
 import android.util.Log
 import android.view.HapticFeedbackConstants
 import android.view.WindowManager
@@ -37,9 +38,9 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.patcher.*
-import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
+import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.util.APK_MIMETYPE
@@ -100,12 +101,12 @@ fun PatcherScreen(
     )
 
     // Drive background speed: ramps 1x→3x during patching, resets on completion/failure.
-    // Uses a coroutine loop so speed tracks displayProgress in real time without recomposition churn.
+    // Uses a coroutine loop so speed tracks displayProgress in real time without recomposition churn
     LaunchedEffect(patcherSucceeded) {
         if (patcherSucceeded == null) {
-            // Exponential moving average to smooths sudden progress jumps.
+            // Exponential moving average to smooths sudden progress jumps
             var movingAverage = 0.0f
-            // Lower factor has more abrupt animation changes.
+            // Lower factor has more abrupt animation changes
             val smoothingFactor = 0.25f
             // Patching in progress - poll displayProgress every 250ms (same cadence as progress loop)
             while (true) {
@@ -120,8 +121,10 @@ fun PatcherScreen(
             if (patcherSucceeded == true) {
                 delay(300) // small pause so speed resets before effect fires
                 onPatchingCompleted()
-                // Haptic feedback
+                // Haptic + audio feedback
                 view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                val ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                RingtoneManager.getRingtone(context, ringtoneUri)?.play()
             }
         }
     }
@@ -134,7 +137,7 @@ fun PatcherScreen(
     // Get output file from viewModel
     val outputFile = patcherViewModel.outputFile
 
-    // Progress animation logic: drives displayProgress and showSuccessScreen.
+    // Progress animation logic: drives displayProgress and showSuccessScreen
     LaunchedEffect(patcherSucceeded) {
         var lastProgressUpdate = 0.0f
         var currentStepStartTime = System.currentTimeMillis()
@@ -151,7 +154,7 @@ fun PatcherScreen(
                 }
             }
 
-            // When to stop using overcorrection of progress and always use the actual progress.
+            // When to stop using overcorrection of progress and always use the actual progress
             val maxOverCorrectPercentage = 0.97
 
             if (actualProgress >= maxOverCorrectPercentage) {
@@ -160,7 +163,7 @@ fun PatcherScreen(
                 // Overestimate the progress by about 1% per second, but decays to
                 // adding smaller adjustments each second until the current step completes
                 fun overEstimateProgressAdjustment(secondsElapsed: Double): Double {
-                    // Sigmoid curve. Give larger correct soon after the step starts but then flattens off.
+                    // Sigmoid curve. Give larger correct soon after the step starts but then flattens off
                     val maximumValue = 25.0 // Up to 25% over correct
                     val timeConstant = 50.0 // Larger value = longer time until plateau
                     return maximumValue * (1 - exp(-secondsElapsed / timeConstant))
@@ -335,7 +338,7 @@ fun PatcherScreen(
     }
 
     // Storage permission pre-flight dialog.
-    // Shown when a patch option points to an external path the app cannot read.
+    // Shown when a patch option points to an external path the app cannot read
     patcherViewModel.inaccessibleOptionPaths?.let { errorState ->
         StoragePermissionDialog(
             failures = errorState.failures,
@@ -348,7 +351,7 @@ fun PatcherScreen(
     }
 
     // Patcher version incompatibility pre-flight dialog.
-    // Shown when a bundle's Patcher-Version is newer than what the manager ships.
+    // Shown when a bundle's Patcher-Version is newer than what the manager ships
     patcherViewModel.incompatiblePatcherVersion?.let { state ->
         IncompatiblePatcherVersionDialog(
             bundleName = state.bundleName,
