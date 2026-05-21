@@ -68,7 +68,6 @@ private object AdaptiveIconConfig {
     const val BACKGROUND_FILE_NAME = "morphe_adaptive_background_custom.png"
     const val FOREGROUND_FILE_NAME = "morphe_adaptive_foreground_custom.png"
     const val NOTIFICATION_FILE_NAME = "morphe_notification_icon_custom.png"
-    const val NOTIFICATION_XML_FILE_NAME = "morphe_notification_icon_custom.xml"
     const val MONOCHROME_ADAPTIVE_FILE_NAME = "morphe_adaptive_monochrome_custom.xml"
     const val DRAWABLE_FOLDER_NAME = "drawable"
 
@@ -114,7 +113,6 @@ private object AdaptiveIconConfig {
     const val SNAP_GUIDE_STROKE_WIDTH = 1.5f
     const val SNAP_GUIDE_ALPHA = 0.6f
 
-    // Default background colors per system theme
     // Used only as a ratio reference for safe zone corner calculations
     val PREVIEW_SIZE = 150.dp
 
@@ -123,7 +121,6 @@ private object AdaptiveIconConfig {
 
     // Viewport sizes for XML VectorDrawable output
     const val MONOCHROME_ADAPTIVE_VIEWPORT = 108
-    const val NOTIFICATION_XML_VIEWPORT = 24
 }
 
 /**
@@ -290,8 +287,8 @@ fun AdaptiveIconCreatorDialog(
                     }
                 }
 
-                // 2. Preview row: adaptive on the left, monochrome on the right (when bitmap exists).
-                //    Each column takes equal weight so the previews fill available width side by side.
+                // 2. Preview row: adaptive on the left, monochrome on the right.
+                //    Each column takes equal weight so the previews fill available width side by side
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
@@ -333,7 +330,7 @@ fun AdaptiveIconCreatorDialog(
                         )
                     }
 
-                    // Monochrome preview, always shown, mirrors adaptive transforms
+                    // Monochrome preview, mirrors adaptive transforms
                     Column(
                         modifier = Modifier.weight(1f),
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -430,7 +427,7 @@ fun AdaptiveIconCreatorDialog(
                     }
                 }
 
-                // 3. Status bar notification preview, always visible
+                // 3. Status bar notification preview
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(4.dp)
@@ -894,7 +891,7 @@ private fun MonochromeAdaptiveCanvas(
 ) {
     val shape = RoundedCornerShape(AdaptiveIconConfig.PREVIEW_CORNER_RADIUS)
     // Read accent colors outside Canvas; must be stable across recompositions.
-    // Icon uses primaryContainer so it reads as a cutout from the onPrimaryContainer background.
+    // Icon uses primaryContainer so it reads as a cutout from the onPrimaryContainer background
     val iconColor = MaterialTheme.colorScheme.primaryContainer
     Box(
         modifier = Modifier
@@ -908,7 +905,7 @@ private fun MonochromeAdaptiveCanvas(
         if (bitmap != null) {
             Canvas(modifier = Modifier.fillMaxSize()) {
                 // Image fitting mirrors AdaptiveIconPreview: fill the canvas dimension that matches
-                // the image's longer edge, then scale/offset using the shared state values.
+                // the image's longer edge, then scale/offset using the shared state values
                 val imageBitmap = bitmap.asImageBitmap()
                 val imageAspect = imageBitmap.width.toFloat() / imageBitmap.height.toFloat()
                 val (baseWidth, baseHeight) = if (imageAspect > 1f)
@@ -1018,7 +1015,7 @@ private suspend fun createAdaptiveIcons(
     try {
         val baseDocDir = DocumentFile.fromTreeUri(context, baseUri) ?: return@withContext null
 
-        // Create directory structure: morphe_branding/morphe_icons_youtube or morphe_icons_music
+        // Create directory structure: BRANDING_FOLDER_NAME/YOUTUBE_ICONS_FOLDER_NAME or YTM_ICONS_FOLDER_NAME
         val brandingDocDir = baseDocDir.getOrCreateDir(AdaptiveIconConfig.BRANDING_FOLDER_NAME)
             ?: return@withContext null
 
@@ -1082,29 +1079,10 @@ private suspend fun createAdaptiveIcons(
             )
             val adaptiveMonoXml = createMonochromeVectorXml(
                 bitmap = adaptiveMonoBmp,
-                viewportSize = AdaptiveIconConfig.MONOCHROME_ADAPTIVE_VIEWPORT,
-                coordinateScale = 1f / monoOversample,
-                // System tints the monochrome layer; fill color is overridden at runtime
-                fillColor = "#FF000000"
+                coordinateScale = 1f / monoOversample
             )
             adaptiveMonoBmp.recycle()
-            saveXmlToDocFile(context, drawableDocDir, AdaptiveIconConfig.MONOCHROME_ADAPTIVE_FILE_NAME, adaptiveMonoXml)
-
-            // Notification icon XML: 24x24 viewport, using notification transforms
-            val notifMonoBmp = renderBitmapWithNotificationTransforms(
-                sourceBitmap = monochromeSrc,
-                targetSize = AdaptiveIconConfig.NOTIFICATION_XML_VIEWPORT,
-                scale = notificationScale,
-                previewDensity = previewDensity,
-                paint = plainPaint
-            )
-            val notifMonoXml = createMonochromeVectorXml(
-                bitmap = notifMonoBmp,
-                viewportSize = AdaptiveIconConfig.NOTIFICATION_XML_VIEWPORT,
-                fillColor = "#FFFFFFFF"
-            )
-            notifMonoBmp.recycle()
-            saveXmlToDocFile(context, drawableDocDir, AdaptiveIconConfig.NOTIFICATION_XML_FILE_NAME, notifMonoXml)
+            saveXmlToDocFile(context, drawableDocDir, adaptiveMonoXml)
         }
 
         // Convert back to a real path so the patcher can reference it as a patch option value
@@ -1273,7 +1251,7 @@ private fun renderBitmapWithNotificationTransforms(
     val canvas = Canvas(result)
     // The notification icon should fill its small canvas the same way the foreground
     // fills the adaptive icon safe zone. We therefore express the user's transform
-    // relative to the safe zone size and then map it onto the full notification canvas.
+    // relative to the safe zone size and then map it onto the full notification canvas
     val previewCanvasSize = AdaptiveIconConfig.PREVIEW_SIZE.value * previewDensity
     // Size of the outer safe zone in preview canvas pixels
     val safeZoneSize = previewCanvasSize * AdaptiveIconConfig.SAFE_ZONE_OUTER
@@ -1306,7 +1284,7 @@ private fun bitmapToVectorPathData(bitmap: Bitmap, coordinateScale: Float = 1f):
     val height = bitmap.height
     val sb = StringBuilder()
     // Each row is scanned left-to-right; adjacent opaque pixels are merged into spans,
-    // so the number of path commands equals the number of horizontal spans, not pixels.
+    // so the number of path commands equals the number of horizontal spans, not pixels
     for (y in 0 until height) {
         var spanStart = -1
         for (x in 0 until width) {
@@ -1333,10 +1311,11 @@ private fun bitmapToVectorPathData(bitmap: Bitmap, coordinateScale: Float = 1f):
 
 /**
  * Create an Android VectorDrawable XML string from a pre-rendered monochrome bitmap.
- * The bitmap's alpha channel defines the icon shape; [fillColor] sets the path fill.
+ * The bitmap's alpha channel defines the icon shape.
  * [coordinateScale] is forwarded to [bitmapToVectorPathData] for oversampled bitmaps.
  */
-private fun createMonochromeVectorXml(bitmap: Bitmap, viewportSize: Int, coordinateScale: Float = 1f, fillColor: String): String {
+private fun createMonochromeVectorXml(bitmap: Bitmap, coordinateScale: Float = 1f): String {
+    val viewportSize = AdaptiveIconConfig.MONOCHROME_ADAPTIVE_VIEWPORT
     val pathData = bitmapToVectorPathData(bitmap, coordinateScale)
     return """<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
@@ -1345,7 +1324,7 @@ private fun createMonochromeVectorXml(bitmap: Bitmap, viewportSize: Int, coordin
     android:viewportWidth="$viewportSize"
     android:viewportHeight="$viewportSize">
     <path
-        android:fillColor="$fillColor"
+        android:fillColor="#FF000000"
         android:pathData="$pathData" />
 </vector>"""
 }
@@ -1353,8 +1332,8 @@ private fun createMonochromeVectorXml(bitmap: Bitmap, viewportSize: Int, coordin
 /**
  * Write an XML string to a DocumentFile, truncating any previous content.
  */
-private fun saveXmlToDocFile(context: Context, dir: DocumentFile, fileName: String, content: String) {
-    val file = dir.getOrCreateFile("text/xml", fileName) ?: return
+private fun saveXmlToDocFile(context: Context, dir: DocumentFile, content: String) {
+    val file = dir.getOrCreateFile("text/xml", AdaptiveIconConfig.MONOCHROME_ADAPTIVE_FILE_NAME) ?: return
     context.contentResolver.openOutputStream(file.uri, "wt")?.use { out ->
         out.write(content.toByteArray(Charsets.UTF_8))
     }
