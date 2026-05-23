@@ -103,6 +103,8 @@ class PreferencesManager(
     val installationTime = LongPreference(dataStore, "manager_installation_time", 0L)
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
 
+    val useCustomFilePicker = booleanPreference("use_custom_file_picker", true)
+
     /**  Hidden preference to track if prerelease was auto-enabled. */
     private val prereleaseAutoEnabled = booleanPreference("prerelease_auto_enabled", false)
 

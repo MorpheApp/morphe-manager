@@ -208,6 +208,10 @@ class SettingsViewModel(
         prefs.promptInstallerOnInstall.update(enabled)
     }
 
+    fun setUseCustomFilePicker(enabled: Boolean) = viewModelScope.launch {
+        prefs.useCustomFilePicker.update(enabled)
+    }
+
     /**
      * Requests root access when the AutoSaved (root-mount) installer is chosen,
      * then persists the selection.

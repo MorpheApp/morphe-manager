@@ -672,6 +672,19 @@ The image dimensions must be as follows:
     <string name="settings_system_export_debug_logs_export_failed">Failed to export logs</string>
     <string name="settings_system_export_debug_logs_export_success">Logs exported</string>
 
+    <!-- Settings - System Tab - Files Section -->
+    <string name="settings_system_files">Files</string>
+    <string name="settings_system_custom_file_picker">Custom file picker</string>
+    <string name="settings_system_custom_file_picker_description">Browse storage with Morphe\'s built-in file picker instead of the system default</string>
+
+    <!-- File Picker -->
+    <string name="file_picker_title">Select file</string>
+    <string name="file_picker_previous_directory">Previous directory</string>
+    <string name="file_picker_select">Select</string>
+    <string name="file_picker_no_files">No files here</string>
+    <string name="file_picker_internal_storage">Internal storage</string>
+    <string name="file_picker_sd_card">SD card</string>
+
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Storage management</string>
     <string name="settings_system_apks_size">Total size: %s</string>

@@ -14,10 +14,11 @@ import android.provider.DocumentsContract
 import android.provider.OpenableColumns
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import app.morphe.manager.data.platform.Filesystem
+import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.ui.screen.shared.FilePicker
 import org.koin.compose.koinInject
 import java.io.File
 
@@ -39,6 +40,9 @@ data class MppManifest(
  * Prefer using Uri directly with ContentResolver where possible.
  */
 fun Uri.toFilePath(): String {
+    // file:// URIs from the custom file picker — extract the path directly
+    if (scheme == "file") return path ?: Uri.decode(toString())
+
     val docId: String? = when {
         DocumentsContract.isTreeUri(this) ->
             // Child document URI contains the full path; root tree URI contains only the root
@@ -234,8 +238,9 @@ fun Context.isAndroidTv(): Boolean {
 /**
  * On Android TV uses [ActivityResultContracts.OpenDocument] which routes through
  * DocumentsUI and shows registered storage providers (file managers).
- * On phones/tablets uses [ActivityResultContracts.GetContent]: a single MIME type is passed
- * as-is; multiple types collapse to a wildcard with extension validation on the result.
+ * On phones/tablets: uses Morphe's built-in [FilePicker] when [PreferencesManager.useCustomFilePicker]
+ * is enabled, falling back to [ActivityResultContracts.GetContent] otherwise.
+ * Storage permission is requested automatically before showing the custom picker.
  */
 @Composable
 fun rememberAdaptiveFilePicker(
@@ -244,7 +249,11 @@ fun rememberAdaptiveFilePicker(
 ): () -> Unit {
     val context = LocalContext.current
     val isTV = remember { context.isAndroidTv() }
+    val prefs: PreferencesManager = koinInject()
+    val fs: Filesystem = koinInject()
+    val useCustomPicker by prefs.useCustomFilePicker.getAsState()
 
+    // System launchers — always registered so the composable graph stays stable
     val tvLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument()
     ) { uri -> onResult(uri) }
@@ -253,10 +262,34 @@ fun rememberAdaptiveFilePicker(
         contract = ActivityResultContracts.GetContent()
     ) { uri -> onResult(uri) }
 
-    return remember(isTV) {
+    val (permissionContract, permissionName) = remember { fs.permissionContract() }
+    val showPickerState = remember { mutableStateOf(false) }
+
+    val permissionLauncher = rememberLauncherForActivityResult(contract = permissionContract) { granted ->
+        if (granted) showPickerState.value = true
+    }
+
+    if (showPickerState.value) {
+        FilePicker(
+            mimeTypes = mimeTypes,
+            onDismiss = { showPickerState.value = false },
+            onFilePicked = { file ->
+                showPickerState.value = false
+                onResult(Uri.fromFile(file))
+            }
+        )
+    }
+
+    return remember(isTV, useCustomPicker) {
         {
-            if (isTV) tvLauncher.launch(mimeTypes)
-            else phoneLauncher.launch(if (mimeTypes.size == 1) mimeTypes[0] else "*/*")
+            when {
+                isTV -> tvLauncher.launch(mimeTypes)
+                useCustomPicker -> {
+                    if (fs.hasStoragePermission()) showPickerState.value = true
+                    else permissionLauncher.launch(permissionName)
+                }
+                else -> phoneLauncher.launch(if (mimeTypes.size == 1) mimeTypes[0] else "*/*")
+            }
         }
     }
 }
