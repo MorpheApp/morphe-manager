@@ -149,13 +149,15 @@ fun rememberFolderPicker(onFolderPicked: (Uri) -> Unit): () -> Unit {
  * Folder picker launcher with automatic permission handling.
  * Use this when storing the picked folder PATH as a patch option value (the patcher will
  * later read files from it via the File API, which requires MANAGE_EXTERNAL_STORAGE).
- * Uses Morphe's built-in [FilePicker] when [PreferencesManager.useCustomFilePicker] is enabled,
- * falling back to [ActivityResultContracts.OpenDocumentTree] otherwise.
+ * Uses Morphe's built-in [FilePicker] on TV and when [PreferencesManager.useCustomFilePicker]
+ * is enabled, falling back to [ActivityResultContracts.OpenDocumentTree] otherwise.
  */
 @Composable
 fun rememberFolderPickerWithPermission(
     onFolderPicked: (Uri) -> Unit
 ): () -> Unit {
+    val context = LocalContext.current
+    val isTV = remember { context.isAndroidTv() }
     val fs: Filesystem = koinInject()
     val prefs: PreferencesManager = koinInject()
     val useCustomPicker by prefs.useCustomFilePicker.getAsState()
@@ -186,15 +188,17 @@ fun rememberFolderPickerWithPermission(
         contract = permissionContract
     ) { granted ->
         if (granted) {
-            if (useCustomPicker) showPickerState.value = true
+            if (useCustomPicker || isTV) showPickerState.value = true
             else folderPickerLauncher.launch(null)
+        } else if (isTV) {
+            folderPickerLauncher.launch(null)
         }
     }
 
-    return remember(useCustomPicker) {
+    return remember(isTV, useCustomPicker) {
         {
             when {
-                useCustomPicker -> {
+                useCustomPicker || isTV -> {
                     if (fs.hasStoragePermission()) showPickerState.value = true
                     else permissionLauncher.launch(permissionName)
                 }
@@ -259,9 +263,9 @@ fun Context.isAndroidTv(): Boolean {
 }
 
 /**
- * Uses Morphe's built-in [FilePicker] on all devices when [PreferencesManager.useCustomFilePicker]
- * is enabled. Falls back to [ActivityResultContracts.OpenDocument] on TV and
- * [ActivityResultContracts.GetContent] on phones/tablets.
+ * Uses Morphe's built-in [FilePicker] on TV and on any device when [PreferencesManager.useCustomFilePicker] is enabled.
+ * Falls back to [ActivityResultContracts.OpenDocument] on TV if permission is denied,
+ * or [ActivityResultContracts.GetContent] on phones/tablets.
  * Storage permission is requested automatically before showing the custom picker.
  */
 @Composable
@@ -290,6 +294,7 @@ fun rememberAdaptiveFilePicker(
 
     val permissionLauncher = rememberLauncherForActivityResult(contract = permissionContract) { granted ->
         if (granted) showPickerState.value = true
+        else if (isTV) tvLauncher.launch(mimeTypes)
     }
 
     if (showPickerState.value) {
@@ -307,11 +312,10 @@ fun rememberAdaptiveFilePicker(
     return remember(isTV, useCustomPicker) {
         {
             when {
-                useCustomPicker -> {
+                useCustomPicker || isTV -> {
                     if (fs.hasStoragePermission()) showPickerState.value = true
                     else permissionLauncher.launch(permissionName)
                 }
-                isTV -> tvLauncher.launch(mimeTypes)
                 else -> phoneLauncher.launch(if (mimeTypes.size == 1) mimeTypes[0] else "*/*")
             }
         }
