@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.automirrored.outlined.InsertDriveFile
+import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -39,6 +40,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 
@@ -77,11 +79,36 @@ private fun storageRoots(): List<Pair<String, File>> {
 private val iconLoadDispatcher = Dispatchers.IO.limitedParallelism(2)
 private val apkPackageInfoCache = LruCache<String, PackageInfo>(100)
 
+private enum class SortMode {
+    NAME_ASC, NAME_DESC, SIZE_DESC, SIZE_ASC, DATE_DESC, DATE_ASC;
+
+    fun labelRes() = when (this) {
+        NAME_ASC  -> R.string.file_picker_sort_name_asc
+        NAME_DESC -> R.string.file_picker_sort_name_desc
+        SIZE_DESC -> R.string.file_picker_sort_size_desc
+        SIZE_ASC  -> R.string.file_picker_sort_size_asc
+        DATE_DESC -> R.string.file_picker_sort_date_desc
+        DATE_ASC  -> R.string.file_picker_sort_date_asc
+    }
+}
+
 private fun listDir(dir: File, allowedExtensions: Set<String>?): List<File> =
     dir.listFiles()
         ?.filter { it.isDirectory || allowedExtensions == null || it.extension.lowercase() in allowedExtensions }
-        ?.sortedWith(compareBy({ !it.isDirectory }, { it.name.lowercase() }))
         ?: emptyList()
+
+private fun applySort(files: List<File>, mode: SortMode): List<File> {
+    val (dirs, nonDirs) = files.partition { it.isDirectory }
+    val sortedFiles = when (mode) {
+        SortMode.NAME_ASC  -> nonDirs.sortedBy { it.name.lowercase() }
+        SortMode.NAME_DESC -> nonDirs.sortedByDescending { it.name.lowercase() }
+        SortMode.SIZE_DESC -> nonDirs.sortedByDescending { it.length() }
+        SortMode.SIZE_ASC  -> nonDirs.sortedBy { it.length() }
+        SortMode.DATE_DESC -> nonDirs.sortedByDescending { it.lastModified() }
+        SortMode.DATE_ASC  -> nonDirs.sortedBy { it.lastModified() }
+    }
+    return dirs.sortedBy { it.name.lowercase() } + sortedFiles
+}
 
 private fun formatModDate(timestamp: Long): String =
     SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.getDefault()).format(Date(timestamp))
@@ -99,6 +126,7 @@ fun FilePicker(
 ) {
     val prefs: PreferencesManager = koinInject()
     val pm: PM = koinInject()
+    val coroutineScope = rememberCoroutineScope()
     val allowedExtensions = remember(mimeTypes) { resolveAllowedExtensions(mimeTypes) }
     val roots = remember { storageRoots() }
 
@@ -112,6 +140,12 @@ fun FilePicker(
     var selectedFile by remember { mutableStateOf<File?>(null) }
     var refreshKey by remember { mutableIntStateOf(0) }
     var showStorageMenu by remember { mutableStateOf(false) }
+    var sortMode by remember {
+        mutableStateOf(runCatching { SortMode.valueOf(prefs.filePickerSortMode.getBlocking()) }.getOrDefault(SortMode.NAME_ASC))
+    }
+    var showSortMenu by remember { mutableStateOf(false) }
+
+    val sortedContents = remember(dirContents, sortMode) { applySort(dirContents, sortMode) }
 
     // Restore the last visited directory on open; Downloads stays as fallback until then
     LaunchedEffect(Unit) {
@@ -165,6 +199,33 @@ fun FilePicker(
                     color = LocalDialogTextColor.current,
                     modifier = Modifier.weight(1f)
                 )
+                Box {
+                    IconButton(onClick = { showSortMenu = true }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Outlined.Sort,
+                            contentDescription = null,
+                            tint = LocalDialogTextColor.current
+                        )
+                    }
+                    DropdownMenu(
+                        expanded = showSortMenu,
+                        onDismissRequest = { showSortMenu = false }
+                    ) {
+                        SortMode.entries.forEach { mode ->
+                            DropdownMenuItem(
+                                text = { Text(stringResource(mode.labelRes())) },
+                                trailingIcon = if (sortMode == mode) {
+                                    { Icon(Icons.Outlined.Check, contentDescription = null) }
+                                } else null,
+                                onClick = {
+                                    sortMode = mode
+                                    showSortMenu = false
+                                    coroutineScope.launch { prefs.filePickerSortMode.update(mode.name) }
+                                }
+                            )
+                        }
+                    }
+                }
                 IconButton(onClick = { refreshKey++ }) {
                     Icon(
                         imageVector = Icons.Outlined.Refresh,
@@ -243,7 +304,7 @@ fun FilePicker(
                             )
                         }
                     } else {
-                        items(dirContents, key = { it.absolutePath }) { file ->
+                        items(sortedContents, key = { it.absolutePath }) { file ->
                             val isSelected = selectedFile == file
                             val isDir = file.isDirectory
                             val isApk = !isDir && file.extension.lowercase() in APK_EXTENSIONS

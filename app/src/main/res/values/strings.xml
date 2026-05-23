@@ -684,6 +684,12 @@ The image dimensions must be as follows:
     <string name="file_picker_no_files">No files here</string>
     <string name="file_picker_internal_storage">Internal storage</string>
     <string name="file_picker_sd_card">SD card</string>
+    <string name="file_picker_sort_name_asc">Name (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Name (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Size (largest first)</string>
+    <string name="file_picker_sort_size_asc">Size (smallest first)</string>
+    <string name="file_picker_sort_date_desc">Date (newest first)</string>
+    <string name="file_picker_sort_date_asc">Date (oldest first)</string>
 
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Storage management</string>

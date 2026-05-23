@@ -105,6 +105,7 @@ class PreferencesManager(
 
     val useCustomFilePicker = booleanPreference("use_custom_file_picker", true)
     val lastFilePickerPath = stringPreference("last_file_picker_path", "")
+    val filePickerSortMode = stringPreference("file_picker_sort_mode", "NAME_ASC")
 
     /**  Hidden preference to track if prerelease was auto-enabled. */
     private val prereleaseAutoEnabled = booleanPreference("prerelease_auto_enabled", false)
