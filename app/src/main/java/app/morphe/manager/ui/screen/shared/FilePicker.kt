@@ -42,23 +42,41 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+// Exact MIME type → extensions
 private val MIME_EXTENSION_MAP: Map<String, Set<String>> = mapOf(
     "application/vnd.android.package-archive" to setOf("apk", "apks", "xapk", "apkm"),
     "application/json" to setOf("json"),
     "text/plain" to setOf("txt", "log"),
-    "application/vnd.ms-project" to setOf("mpp"),
+    "application/vnd.ms-project" to setOf("mpp"), // Morphe patch bundle format
     "image/png" to setOf("png"),
     "image/jpeg" to setOf("jpg", "jpeg"),
     "image/gif" to setOf("gif"),
     "image/webp" to setOf("webp"),
 )
 
-// Returns null when the types are too broad to filter (wildcards like *\/*, application\/*)
+// Category wildcard MIME type → extensions
+private val MIME_WILDCARD_MAP: Map<String, Set<String>> = mapOf(
+    "image/*" to setOf("png", "jpg", "jpeg", "gif", "webp", "bmp", "heic", "heif", "svg", "ico"),
+    "video/*" to setOf("mp4", "mkv", "avi", "mov", "webm", "3gp", "ts", "flv"),
+    "audio/*" to setOf("mp3", "wav", "ogg", "flac", "aac", "m4a", "opus", "wma"),
+    "text/*" to setOf("txt", "log", "csv", "xml", "html", "htm", "md", "json"),
+)
+
+// Broad/generic MIME types added as system-picker fallbacks - skipped during resolution
+// so they don't suppress filtering when specific types are also present in the array
+private val MIME_PASSTHROUGH: Set<String> = setOf(
+    "*/*",
+    "application/octet-stream",
+    "application/*",
+)
+
+// Skips passthrough types; returns null only when no specific type could be resolved
 internal fun resolveAllowedExtensions(mimeTypes: Array<String>): Set<String>? {
-    if (mimeTypes.any { it == "*/*" || it.endsWith("/*") }) return null
+    val specific = mimeTypes.filter { it !in MIME_PASSTHROUGH }
+    if (specific.isEmpty()) return null
     val extensions = mutableSetOf<String>()
-    for (mime in mimeTypes) {
-        extensions += MIME_EXTENSION_MAP[mime] ?: return null
+    for (mime in specific) {
+        extensions += MIME_EXTENSION_MAP[mime] ?: MIME_WILDCARD_MAP[mime] ?: return null
     }
     return extensions.ifEmpty { null }
 }
