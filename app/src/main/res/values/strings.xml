@@ -673,23 +673,6 @@ The image dimensions must be as follows:
     <string name="settings_system_export_debug_logs_export_success">Logs exported</string>
 
     <!-- Settings - System Tab - Files & Storage Section -->
-
-
-    <!-- File Picker -->
-    <string name="file_picker_title">Select file</string>
-    <string name="file_picker_previous_directory">Previous directory</string>
-    <string name="file_picker_select">Select</string>
-    <string name="file_picker_no_files">No files here</string>
-    <string name="file_picker_internal_storage">Internal storage</string>
-    <string name="file_picker_sd_card">SD card</string>
-    <string name="file_picker_sort_name_asc">Name (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Name (Z–A)</string>
-    <string name="file_picker_sort_size_desc">Size (largest first)</string>
-    <string name="file_picker_sort_size_asc">Size (smallest first)</string>
-    <string name="file_picker_sort_date_desc">Date (newest first)</string>
-    <string name="file_picker_sort_date_asc">Date (oldest first)</string>
-
-    <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Files &amp; storage</string>
     <string name="settings_system_apks_size">Total size: %s</string>
     <string name="settings_system_apk_item_info" translatable="false">v%s • %s</string>
@@ -736,6 +719,21 @@ The image dimensions must be as follows:
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Custom file picker</string>
     <string name="settings_system_custom_file_picker_description">Browse storage with Morphe\'s built-in file picker instead of the system default</string>
+
+    <!-- File Picker -->
+    <string name="file_picker_title">Select file</string>
+    <string name="file_picker_title_folder">Select folder</string>
+    <string name="file_picker_previous_directory">Previous directory</string>
+    <string name="file_picker_select">Select</string>
+    <string name="file_picker_no_files">No files here</string>
+    <string name="file_picker_internal_storage">Internal storage</string>
+    <string name="file_picker_sd_card">SD card</string>
+    <string name="file_picker_sort_name_asc">Name (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Name (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Size (largest first)</string>
+    <string name="file_picker_sort_size_asc">Size (smallest first)</string>
+    <string name="file_picker_sort_date_desc">Date (newest first)</string>
+    <string name="file_picker_sort_date_asc">Date (oldest first)</string>
 
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>

@@ -201,19 +201,17 @@ fun FilePicker(
                     .padding(start = 4.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = onDismiss) {
-                    Icon(
-                        imageVector = Icons.Outlined.Close,
-                        contentDescription = stringResource(android.R.string.cancel),
-                        tint = LocalDialogTextColor.current
-                    )
-                }
                 Text(
-                    text = stringResource(R.string.file_picker_title),
+                    text = stringResource(
+                        if (allowFolderSelection) R.string.file_picker_title_folder
+                        else R.string.file_picker_title
+                    ),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = LocalDialogTextColor.current,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 16.dp)
                 )
                 Box {
                     IconButton(onClick = { showSortMenu = true }) {
