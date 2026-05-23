@@ -192,7 +192,7 @@
     <string name="patch_option_enter_value">Введіть значення</string>
     <string name="patch_option_enter_number">Введіть число</string>
     <string name="patch_option_enter_decimal">Введіть десяткове число</string>
-    <string name="patch_option_pick_folder">Вибрати папку</string>
+    <string name="patch_option_pick_folder">Вибрати теку</string>
     <string name="patch_option_pick_file">Вибрати файл</string>
     <string name="patch_option_list_duplicate">Це значення вже існує</string>
     <string name="patch_option_list_empty">Значення не може бути порожнім</string>
@@ -493,16 +493,16 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name">Назва застосунку</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Введіть власну назву</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Власна іконка</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Папка із зображеннями для використання як власної іконки.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Тека із зображеннями для використання як власної іконки.
 
-Папка повинна містити одну або декілька з таких папок, залежно від DPI пристрою:
+Тека повинна містити одну або декілька з таких тек, залежно від DPI пристрою:
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-Кожна з папок повинна містити всі такі файли:
+Кожна з тек повинна містити всі такі файли:
 morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
@@ -513,7 +513,7 @@ morphe_adaptive_foreground_custom.png
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-За бажанням, шлях містить папку 'drawable' з файлом іконки у монохромному зображенні:
+За бажанням, шлях містить теку 'drawable' з файлом іконки у монохромному зображенні:
 morphe_adaptive_monochrome_custom.xml
 
 За бажанням, шлях містить іконку сповіщення в одному з таких форматів:
@@ -528,15 +528,15 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Власний логотип заголовку</string>
     <string name="settings_advanced_patch_options_custom_header_description">Змінює логотип заголовку</string>
-    <string name="settings_advanced_patch_options_custom_header_instruction">"Папка з зображеннями для використання власного логотипу заголовку.
+    <string name="settings_advanced_patch_options_custom_header_instruction">"Тека з зображеннями для використання власного логотипу заголовку.
 
-Папка повинна містити одну або кілька з наступних папок, залежно від DPI пристрою:
+Тека повинна містити одну або кілька з наступних тек, залежно від DPI пристрою:
 - drawable-hdpi
 - drawable-xhdpi
 - drawable-xxhdpi
 - drawable-xxxhdpi
 
-Кожна з папок повинна містити всі наступні файли:
+Кожна з тек повинна містити всі наступні файли:
 morphe_header_custom_light.png
 morphe_header_custom_dark.png
 
@@ -623,8 +623,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_read_failed">Не вдалося прочитати журнали (код виходу %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Не вдалося експортувати журнали</string>
     <string name="settings_system_export_debug_logs_export_success">Журнали експортовано</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Керування сховищем</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Файли та сховище</string>
     <string name="settings_system_apks_size">Загальний розмір: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Патчені APK файли</string>
@@ -662,6 +662,23 @@ morphe_header_custom_dark.png
     <string name="settings_system_selected_patches_title">Вибрані патчі (%s)</string>
     <string name="settings_system_patch_options_title">Параметри патчів (%s)</string>
     <string name="settings_system_no_patches_or_options">Не збережено жодних патчів або параметрів</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Власний вибір файлів</string>
+    <string name="settings_system_custom_file_picker_description">Переглядайте сховище за допомогою вбудованого у Morphe вибору файлів замість системного</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Оберіть файл</string>
+    <string name="file_picker_title_folder">Оберіть теку</string>
+    <string name="file_picker_previous_directory">Попередня тека</string>
+    <string name="file_picker_select">Вибрати</string>
+    <string name="file_picker_no_files">Тут немає файлів</string>
+    <string name="file_picker_internal_storage">Внутрішнє сховище</string>
+    <string name="file_picker_sd_card">SD-карта</string>
+    <string name="file_picker_sort_name_asc">Назва (А–Я)</string>
+    <string name="file_picker_sort_name_desc">Назва (Я–А)</string>
+    <string name="file_picker_sort_size_desc">Розмір (спочатку більші)</string>
+    <string name="file_picker_sort_size_asc">Розмір (спочатку менші)</string>
+    <string name="file_picker_sort_date_desc">Дата (спочатку новіші)</string>
+    <string name="file_picker_sort_date_asc">Дата (спочатку старіші)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Про нас</string>
     <string name="settings_system_share_website">Поділитися вебсайтом</string>

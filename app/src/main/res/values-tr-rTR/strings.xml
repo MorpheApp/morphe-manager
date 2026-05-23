@@ -623,8 +623,8 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_export_debug_logs_export_read_failed">Günlükler okunamadı (çıkış kodu %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Kayıtlar dışa aktarılamadı</string>
     <string name="settings_system_export_debug_logs_export_success">Günlükler dışa aktarıldı</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Depolama yönetimi</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Dosyalar ve depolama</string>
     <string name="settings_system_apks_size">Toplam boyut: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Yamalanmış APK\'ler</string>
@@ -662,6 +662,23 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_selected_patches_title">Seçilen yamalar (%s)</string>
     <string name="settings_system_patch_options_title">Yama seçenekleri (%s)</string>
     <string name="settings_system_no_patches_or_options">Hiçbir yama veya seçenek kaydedilmedi</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Özel dosya seçici</string>
+    <string name="settings_system_custom_file_picker_description">Morphe\'nin yerleşik dosya seçicisini sistem varsayılanı yerine kullanarak depolamayı göz atın</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Dosya seç</string>
+    <string name="file_picker_title_folder">Klasör seç</string>
+    <string name="file_picker_previous_directory">Önceki dizin</string>
+    <string name="file_picker_select">Seç</string>
+    <string name="file_picker_no_files">Burada dosya yok</string>
+    <string name="file_picker_internal_storage">Dahili depolama</string>
+    <string name="file_picker_sd_card">SD kart</string>
+    <string name="file_picker_sort_name_asc">Ad (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Ad (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Boyut (en büyüğü önce)</string>
+    <string name="file_picker_sort_size_asc">Boyut (en küçüğü önce)</string>
+    <string name="file_picker_sort_date_desc">Tarih (en yenisi önce)</string>
+    <string name="file_picker_sort_date_asc">Tarih (en eskisi önce)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Hakkında</string>
     <string name="settings_system_share_website">Web sitesini paylaş</string>

@@ -5,13 +5,13 @@
     <string name="home_not_patched_yet">Não patcheado ainda</string>
     <string name="home_no_patches_available">Não há patches disponíveis</string>
     <string name="home_app_hide_title">Ocultar esse app?</string>
-    <string name="home_app_hide_message">Este app será oculto da tela inicial. Você pode restaurá-lo mais tarde usando o botão \"\" na parte inferior da lista</string>
+    <string name="home_app_hide_message">Este app será oculto da tela inicial. Você pode restaurá-lo mais tarde usando o botão na parte inferior da lista</string>
     <string name="home_app_will_be_hidden">Esse app será oculto</string>
     <string name="home_app_no_hidden">Sem apps ocultos</string>
     <string name="home_app_hidden_apps_title">Apps ocultos</string>
-    <string name="home_app_hidden_apps_hint">Toque para exibir</string>
+    <string name="home_app_hidden_apps_hint">Toque para desocultar</string>
     <string name="android_11_bug_dialog_title">Bug do Android 11</string>
-    <string name="android_11_bug_dialog_description">A permissão de instalação do aplicativo deve ser concedida antecipadamente para evitar um bug no sistema Android 11 que afetará negativamente a experiência do usuário.</string>
+    <string name="android_11_bug_dialog_description">A permissão de instalação do app deve ser concedida antecipadamente para evitar um bug no sistema Android 11 que afetará negativamente a experiência do usuário.</string>
     <string name="deep_link_add_source_title">Adicionar fonte</string>
     <string name="deep_link_add_source_message">Quer adicionar essa fonte de patches ao Morphe?</string>
     <string name="deep_link_add_source_warning">Adicione fontes somente daquelas em que você confia</string>
@@ -34,7 +34,7 @@
     <string name="home_all_apps_hidden_title">Todos os apps estão ocultos</string>
     <string name="home_all_apps_hidden_subtitle">Você ocultou todos os apps da tela inicial</string>
     <!-- Home Screen - Home Greetings -->
-    <string name="home_greeting_1">Qual app você quer patchar?</string>
+    <string name="home_greeting_1">Qual app você quer patchear?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="home_greeting_2">Pronto para tornar apps lendários de novo?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
@@ -138,7 +138,7 @@
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Modo expert</string>
     <string name="expert_mode_search">Procurar patches</string>
-    <string name="expert_mode_proceed">Iniciar a atualização</string>
+    <string name="expert_mode_proceed">Iniciar a aplicação de patches</string>
     <string name="expert_mode_disable_all">Desativar todos</string>
     <string name="expert_mode_disable_all_done">Todos os patches desativados</string>
     <string name="expert_mode_enable_all">Ativar todos</string>
@@ -162,7 +162,7 @@ Tem certeza de que deseja continuar?"</string>
     <string name="home_split_apk_warning_message">"Este arquivo é um pacote APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 
-Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;b&gt;APK completo&lt;/b&gt;"</string>
+Para obter os melhores resultados, este app recomenda aplicar os patches em um &lt;b&gt;APK completo&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Escolha outro APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">Esta versão tem suporte experimental e pode ser instável ou incompleta</string>
@@ -179,10 +179,10 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="home_dialog_selected_package">Pacote selecionado:</string>
     <string name="home_outdated_patches_dialog_title">Patches podem estar desatualizados</string>
     <string name="home_outdated_patches_dialog_message">Dados móveis estão ativos e atualizações de patch estão desativadas</string>
-    <string name="home_outdated_patches_dialog_warning">Usar patches desatualizados pode resultar em um aplicativo quebrado</string>
+    <string name="home_outdated_patches_dialog_warning">Usar patches desatualizados pode resultar em um app quebrado</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Atualizar &amp; patch</string>
     <string name="home_low_disk_space_dialog_title">Pouco espaço em disco</string>
-    <string name="home_low_disk_space_dialog_message">Apenas %1$.2f GB de espaço de armazenamento livre disponível. Para que o reparo funcione corretamente, é necessário pelo menos %2$.2f GB de espaço livre</string>
+    <string name="home_low_disk_space_dialog_message">Apenas %1$.2f GB de espaço de armazenamento livre disponível. A aplicação de patches requer pelo menos %2$.2f GB de espaço livre para funcionar corretamente.</string>
     <string name="home_low_disk_space_dialog_warning">Prosseguir pode resultar em um erro de \"arquivo não encontrado\" ou um APK de saída corrompido</string>
     <string name="home_simple_bundle_select_title">Selecionar fonte de patch</string>
     <!-- Patch Options -->
@@ -242,11 +242,11 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="home_app_info_delete_item_database">Entrada do banco de dados</string>
     <string name="home_app_info_delete_item_patched_apk">Arquivo APK patcheado</string>
     <string name="home_app_info_delete_item_original_apk">Arquivo APK original</string>
-    <string name="home_app_info_delete_preservation_note">Sua seleção de emenda e opções serão preservadas para emendas futuras</string>
+    <string name="home_app_info_delete_preservation_note">Sua seleção de patches e opções serão preservadas para aplicações futuras</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Sem nome</string>
     <string name="home_app_info_patches_replace_fail">Falha ao importar patches: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">APK original não encontrado. Não é possível repatchar este aplicativo</string>
+    <string name="home_app_info_repatch_no_original_apk">APK original não encontrado. Não é possível repatchear este app</string>
     <string name="home_app_info_original_package_name">Nome do pacote original</string>
     <string name="home_app_info_applied_patches">Patches aplicados</string>
     <string name="home_app_info_patch_source_used">Fonte do patch utilizada</string>
@@ -258,7 +258,7 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="home_app_info_app_deleted_description">Esse app foi desinstalado fora do Morphe. Repatche-o para restaurar a funcionalidade</string>
     <string name="home_app_info_apk_size">Tamanho do APK</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">O modo raiz requer que o APK original esteja instalado em seu dispositivo antes do patch</string>
+    <string name="root_install_apk_required">O modo raiz requer que o APK original esteja instalado em seu dispositivo antes da aplicação de patches</string>
     <string name="root_gmscore_excluded">O patch de suporte do GmsCore está excluído no modo root</string>
     <string name="root_pre_patch_installer_title">Escolha o método de instalação</string>
     <string name="root_pre_patch_installer_description">Seu dispositivo tem acesso root. Escolha como deseja instalar o app patchado.</string>
@@ -279,7 +279,7 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="patcher_complete_title">Patches aplicados com sucesso! ✨</string>
     <string name="patcher_failed_title">Oops! Algo deu errado</string>
     <string name="patcher_failed_subtitle">Verifique os detalhes do erro abaixo</string>
-    <string name="patcher_failed_dialog_title">Falha ao aplicar o patch</string>
+    <string name="patcher_failed_dialog_title">A aplicação de patches falhou</string>
     <string name="patcher_unknown_error">Ocorreu um erro desconhecido</string>
     <string name="patcher_conflict_title">Conflito de pacote</string>
     <string name="patcher_conflict_subtitle">Você precisa desinstalar a versão existente</string>
@@ -309,12 +309,12 @@ A desinstalação apagará permanentemente todos os dados do aplicativo."</strin
     <string name="patcher_step_load_patches">Carregando patches</string>
     <string name="patcher_step_prepare_split_apk">Fusão de APK dividido</string>
     <string name="patcher_step_unpack">Ler arquivo APK</string>
-    <string name="patcher_step_group_patching">Aplicando patch</string>
+    <string name="patcher_step_group_patching">Aplicando patches</string>
     <string name="patcher_step_group_saving">Salvando</string>
     <string name="patcher_step_write_patched">Escrevendo arquivo APK patcheado</string>
     <string name="patcher_step_sign_apk">Assinando arquivo APK patcheado</string>
     <!-- Battery optimization pre-flight dialog -->
-    <string name="battery_optimization_dialog_title">Proteção contra aplicação de patches em segundo plano</string>
+    <string name="battery_optimization_dialog_title">Proteção ao aplicar patches em segundo plano</string>
     <string name="battery_optimization_dialog_description">Alguns dispositivos podem interromper o aplicativo de patches quando minimizado. Permita que o Morphe seja executado sem restrições de bateria para garantir que a aplicação de patches seja concluída de forma confiável</string>
     <string name="battery_optimization_not_now">Não agora</string>
     <!-- Patcher Screen - Patcher Worker -->
@@ -591,7 +591,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_process_runtime_memory_limit_description">Limites mais altos aceleram o patching em dispositivos compatíveis</string>
     <string name="settings_system_process_runtime_enable">Habilitar processo de runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memória disponível para patching</string>
-    <string name="settings_system_memory_limit_warning">Um limite de memória baixo pode causar falhas ao patchar aplicativos maiores</string>
+    <string name="settings_system_memory_limit_warning">Um limite de memória baixo pode causar falhas ao patchear apps maiores</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limite</string>
     <string name="settings_system_process_runtime_disabled_description">Clique para configurar</string>
     <string name="settings_system_process_runtime_description_not_available">Este recurso requer Android 11 ou superior</string>
@@ -623,8 +623,8 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_export_debug_logs_export_read_failed">Falha ao ler logs (código de saída %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Falha ao exportar registros</string>
     <string name="settings_system_export_debug_logs_export_success">Registros exportados</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Gerenciamento de armazenamento</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Arquivos e armazenamento</string>
     <string name="settings_system_apks_size">Tamanho total: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs patcheados</string>
@@ -662,6 +662,23 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_selected_patches_title">Patches selecionados (%s)</string>
     <string name="settings_system_patch_options_title">Opções de patch (%s)</string>
     <string name="settings_system_no_patches_or_options">Não há patches ou opções salvas</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Seletor de arquivos personalizado</string>
+    <string name="settings_system_custom_file_picker_description">Navegue pelo armazenamento com o seletor de arquivos integrado do Morphe, em vez do padrão do sistema.</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Selecionar arquivo</string>
+    <string name="file_picker_title_folder">Selecionar pasta</string>
+    <string name="file_picker_previous_directory">Diretório anterior</string>
+    <string name="file_picker_select">Selecionar</string>
+    <string name="file_picker_no_files">Nenhum arquivo aqui</string>
+    <string name="file_picker_internal_storage">Armazenamento interno</string>
+    <string name="file_picker_sd_card">Cartão SD</string>
+    <string name="file_picker_sort_name_asc">Nome (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Nome (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Tamanho (maior primeiro)</string>
+    <string name="file_picker_sort_size_asc">Tamanho (menor primeiro)</string>
+    <string name="file_picker_sort_date_desc">Data (mais recente primeiro)</string>
+    <string name="file_picker_sort_date_asc">Data (mais antiga primeiro)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Sobre</string>
     <string name="settings_system_share_website">Compartilhar site</string>
@@ -719,7 +736,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="continue_">Continuar</string>
     <string name="version">Versão</string>
     <string name="patch">Patch</string>
-    <string name="repatch">Repatchar</string>
+    <string name="repatch">Reaplicação de patches</string>
     <string name="open">Abrir</string>
     <string name="mount">Montar</string>
     <string name="mounted">Montado</string>

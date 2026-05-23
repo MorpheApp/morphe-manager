@@ -622,8 +622,8 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_system_export_debug_logs_export_read_failed">Lokien lukeminen epäonnistui (poistumiskoodi %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Lokien vienti epäonnistui</string>
     <string name="settings_system_export_debug_logs_export_success">Lokit viety</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Tallennustilan hallinta</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Tiedostot &amp; tallennustila</string>
     <string name="settings_system_apks_size">Koko yhteensä: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Muokatut APK:t</string>
@@ -661,6 +661,23 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_system_selected_patches_title">Valitut patchit (%s)</string>
     <string name="settings_system_patch_options_title">Patch-vaihtoehdot (%s)</string>
     <string name="settings_system_no_patches_or_options">Ei tallennettuja patsas- tai vaihtoehtoja</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Mukautettu tiedostonvalitsin</string>
+    <string name="settings_system_custom_file_picker_description">Käytä Morphen sisäänrakennettua tiedostonvalitsinta järjestelmän oletusarvon sijaan</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Valitse tiedosto</string>
+    <string name="file_picker_title_folder">Valitse asennusohjelma</string>
+    <string name="file_picker_previous_directory">Edellinen hakemisto</string>
+    <string name="file_picker_select">Valitse</string>
+    <string name="file_picker_no_files">Täällä ei ole tiedostoja</string>
+    <string name="file_picker_internal_storage">Sisäinen tallennustila</string>
+    <string name="file_picker_sd_card">SD-kortti</string>
+    <string name="file_picker_sort_name_asc">Nimi (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Nimi (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Koko (suurin ensin)</string>
+    <string name="file_picker_sort_size_asc">Koko (pienin ensin)</string>
+    <string name="file_picker_sort_date_desc">Päivämäärä (uusin ensin)</string>
+    <string name="file_picker_sort_date_asc">Päivämäärä (vanhin ensin)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tietoja</string>
     <string name="settings_system_share_website">Jaa verkkosivusto</string>

@@ -624,8 +624,8 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_system_export_debug_logs_export_read_failed">Ni bilo mogoče brati beležk (koda izhoda %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Izvoz datotek je spodletel</string>
     <string name="settings_system_export_debug_logs_export_success">Datoteke izvožene</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Upravljanje shrambe</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Datoteke in pomnilnik</string>
     <string name="settings_system_apks_size">Skupna velikost: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Popravljeni APK-ji</string>
@@ -663,6 +663,23 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_system_selected_patches_title">Izbrani popravki (%s)</string>
     <string name="settings_system_patch_options_title">Možnosti popravkov (%s)</string>
     <string name="settings_system_no_patches_or_options">Ni shranjenih popravkov ali možnosti</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Izbira datoteke po meri</string>
+    <string name="settings_system_custom_file_picker_description">Uporabi vgrajeno izbiro datotek programa Morphe namesto sistemske privzete</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Izberite datoteko</string>
+    <string name="file_picker_title_folder">Izberite mapo</string>
+    <string name="file_picker_previous_directory">Prejšnji imenik</string>
+    <string name="file_picker_select">Izberi</string>
+    <string name="file_picker_no_files">Ni datotek tukaj</string>
+    <string name="file_picker_internal_storage">Notranji pomnilnik</string>
+    <string name="file_picker_sd_card">SD kartica</string>
+    <string name="file_picker_sort_name_asc">Ime (A–Ž)</string>
+    <string name="file_picker_sort_name_desc">Ime (Ž–A)</string>
+    <string name="file_picker_sort_size_desc">Velikost (največja naprej)</string>
+    <string name="file_picker_sort_size_asc">Velikost (najmanjša naprej)</string>
+    <string name="file_picker_sort_date_desc">Datum (najnovejšo naprej)</string>
+    <string name="file_picker_sort_date_asc">Datum (najstarejšo naprej)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikaciji</string>
     <string name="settings_system_share_website">Delite spletno mesto</string>

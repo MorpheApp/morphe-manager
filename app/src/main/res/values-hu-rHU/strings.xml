@@ -623,8 +623,8 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_export_debug_logs_export_read_failed">Nem sikerült a naplók olvasása (kilépési kód: %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Nem sikerült exportálni a naplókat</string>
     <string name="settings_system_export_debug_logs_export_success">Naplók exportálva</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Tárhelykezelés</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Fájlok és tárhely</string>
     <string name="settings_system_apks_size">Teljes méret: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Módosított APK-k</string>
@@ -663,6 +663,23 @@ Forrás: #%2$s</string>
     <string name="settings_system_selected_patches_title">Kiválasztott módosítások (%s)</string>
     <string name="settings_system_patch_options_title">Módosítási opciók (%s)</string>
     <string name="settings_system_no_patches_or_options">Nincsenek mentett módosítások vagy beállítások</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Egyéni fájlválasztó</string>
+    <string name="settings_system_custom_file_picker_description">A Morphe beépített fájlválasztóját használja a rendszer alapértelmezett helyett.</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Fájl kiválasztása</string>
+    <string name="file_picker_title_folder">Mappa kiválasztása</string>
+    <string name="file_picker_previous_directory">Előző mappa</string>
+    <string name="file_picker_select">Kiválasztás</string>
+    <string name="file_picker_no_files">Nincs itt fájl</string>
+    <string name="file_picker_internal_storage">Belső tárhely</string>
+    <string name="file_picker_sd_card">SD-kártya</string>
+    <string name="file_picker_sort_name_asc">Név (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Név (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Méret (a legnagyobbtól kezdve)</string>
+    <string name="file_picker_sort_size_asc">Méret (a legkisebbtől kezdve)</string>
+    <string name="file_picker_sort_date_desc">Dátum (a legújabbaktól kezdve)</string>
+    <string name="file_picker_sort_date_asc">Dátum (a legrégebbtől kezdve)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Névjegy</string>
     <string name="settings_system_share_website">Webhely megosztása</string>

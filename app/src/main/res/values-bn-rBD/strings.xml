@@ -612,8 +612,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_export_debug_logs_export_read_failed">লগ পড়তে ব্যর্থ হয়েছে (ব্যবহার করা কোড %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">স্টোর ম্যানেজমেন্ট</string>
     <string name="settings_system_export_debug_logs_export_success">লগ এক্সপোর্ট করা হয়েছে</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">স্টোরেজ ম্যানেজমেন্ট</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">ফাইল ও স্টোরেজ</string>
     <string name="settings_system_apks_size">মোট আকার: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">প্যাচ করা APK সমূহ</string>
@@ -651,6 +651,23 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_selected_patches_title">নির্বাচিত প্যাচ (%s)</string>
     <string name="settings_system_patch_options_title">প্যাচ বিকল্প (%s)</string>
     <string name="settings_system_no_patches_or_options">কোনো সংরক্ষিত প্যাচ বা বিকল্প নেই</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">কাস্টম ফাইল পিকার</string>
+    <string name="settings_system_custom_file_picker_description">সিস্টেম ডিফল্টের পরিবর্তে Morphe-এর বিল্ট-ইন ফাইল পিকার দিয়ে স্টোরেজ ব্রাউজ করুন</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">ফাইল নির্বাচন করুন</string>
+    <string name="file_picker_title_folder">ফোল্ডার নির্বাচন করুন</string>
+    <string name="file_picker_previous_directory">আগের ডিরেক্টরি</string>
+    <string name="file_picker_select">নির্বাচন করুন</string>
+    <string name="file_picker_no_files">এখানে কোন ফাইল নেই</string>
+    <string name="file_picker_internal_storage">অভ্যন্তরীণ স্টোরেজ</string>
+    <string name="file_picker_sd_card">এসডি কার্ড</string>
+    <string name="file_picker_sort_name_asc">নাম (A–Z)</string>
+    <string name="file_picker_sort_name_desc">নাম (Z–A)</string>
+    <string name="file_picker_sort_size_desc">সাইজ (বৃহত্তম প্রথমে)</string>
+    <string name="file_picker_sort_size_asc">সাইজ (ক্ষুদ্রতম প্রথমে)</string>
+    <string name="file_picker_sort_date_desc">তারিখ (নতুনতম প্রথমে)</string>
+    <string name="file_picker_sort_date_asc">তারিখ (পুরানো প্রথমে)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">মর্ফ সম্পর্কে</string>
     <string name="settings_system_share_website">ওয়েবসাইট শেয়ার করুন</string>

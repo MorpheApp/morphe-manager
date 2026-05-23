@@ -623,8 +623,8 @@ Størrelsesformatet skal være som følger:
     <string name="settings_system_export_debug_logs_export_read_failed">Kunne ikke læse log (udgangskode %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Kunne ikke eksportere logge</string>
     <string name="settings_system_export_debug_logs_export_success">Logge blev eksporteret</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Administration af lager</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Filer &amp; lagerplads</string>
     <string name="settings_system_apks_size">Samlet størrelse: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patchet APK\'er</string>
@@ -662,6 +662,23 @@ Størrelsesformatet skal være som følger:
     <string name="settings_system_selected_patches_title">Valgte patches (%s)</string>
     <string name="settings_system_patch_options_title">Patchvalg (%s)</string>
     <string name="settings_system_no_patches_or_options">Ingen patches eller valg gemt</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Brugerdefineret filvælger</string>
+    <string name="settings_system_custom_file_picker_description">Brug Morphes indbyggede filvælger i stedet for systemstandardindstillingen</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Vælg fil</string>
+    <string name="file_picker_title_folder">Vælg mappe</string>
+    <string name="file_picker_previous_directory">Forrige mappe</string>
+    <string name="file_picker_select">Vælg</string>
+    <string name="file_picker_no_files">Ingen filer her</string>
+    <string name="file_picker_internal_storage">Intern lagring</string>
+    <string name="file_picker_sd_card">SD-kort</string>
+    <string name="file_picker_sort_name_asc">Navn (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Navn (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Størrelse (størst først)</string>
+    <string name="file_picker_sort_size_asc">Størrelse (mindst først)</string>
+    <string name="file_picker_sort_date_desc">Dato (nyeste først)</string>
+    <string name="file_picker_sort_date_asc">Dato (ældste først)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Del hjemmeside</string>

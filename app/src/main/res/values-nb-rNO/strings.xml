@@ -623,8 +623,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_read_failed">Kunne ikke lese logger (exit-kode %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Kunne ikke eksportere logger</string>
     <string name="settings_system_export_debug_logs_export_success">Logger eksportert</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Lagringsadministrasjon</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Filer og lagringsplass</string>
     <string name="settings_system_apks_size">Total størrelse: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patchede APK-er</string>
@@ -662,6 +662,23 @@ morphe_header_custom_dark.png
     <string name="settings_system_selected_patches_title">Valgte patcher (%s)</string>
     <string name="settings_system_patch_options_title">Patch-alternativer (%s)</string>
     <string name="settings_system_no_patches_or_options">Ingen patcher eller alternativer lagret</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Egendefinert filvelger</string>
+    <string name="settings_system_custom_file_picker_description">Bruk Morphés innebygde filvelger i stedet for systemets standardfilvelger.</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Velg fil</string>
+    <string name="file_picker_title_folder">Velg mappe</string>
+    <string name="file_picker_previous_directory">Forrige mappe</string>
+    <string name="file_picker_select">Velg</string>
+    <string name="file_picker_no_files">Ingen filer her</string>
+    <string name="file_picker_internal_storage">Intern lagringsplass</string>
+    <string name="file_picker_sd_card">SD-kort</string>
+    <string name="file_picker_sort_name_asc">Navn (A–Å)</string>
+    <string name="file_picker_sort_name_desc">Navn (Å–A)</string>
+    <string name="file_picker_sort_size_desc">Størrelse (størst først)</string>
+    <string name="file_picker_sort_size_asc">Størrelse (minst først)</string>
+    <string name="file_picker_sort_date_desc">Dato (nyeste først)</string>
+    <string name="file_picker_sort_date_asc">Dato (eldste først)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Del nettsiden</string>

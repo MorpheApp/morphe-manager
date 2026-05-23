@@ -623,8 +623,8 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_export_debug_logs_export_read_failed">Lesen der Protokolle fehlgeschlagen (Rückgabecode %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Exportieren der Protokolle fehlgeschlagen</string>
     <string name="settings_system_export_debug_logs_export_success">Protokolle exportiert</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Speichermanagement</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Dateien &amp; Speicher</string>
     <string name="settings_system_apks_size">Gesamtgröße: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatchte APKs</string>
@@ -662,6 +662,23 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_selected_patches_title">Ausgewählte Patches (%s)</string>
     <string name="settings_system_patch_options_title">Patch-Optionen (%s)</string>
     <string name="settings_system_no_patches_or_options">Keine Patches oder Optionen gespeichert</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Benutzerdefinierter Dateiauswahldialog</string>
+    <string name="settings_system_custom_file_picker_description">Durchsuchen Sie den Speicher mit dem integrierten Dateiauswahldialog von Morphe anstelle der systemspezifischen Standardeinstellung.</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Datei auswählen</string>
+    <string name="file_picker_title_folder">Ordner auswählen</string>
+    <string name="file_picker_previous_directory">Vorheriges Verzeichnis</string>
+    <string name="file_picker_select">Auswählen</string>
+    <string name="file_picker_no_files">Keine Dateien hier</string>
+    <string name="file_picker_internal_storage">Interner Speicher</string>
+    <string name="file_picker_sd_card">SD-Karte</string>
+    <string name="file_picker_sort_name_asc">Name (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Name (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Größe (größte zuerst)</string>
+    <string name="file_picker_sort_size_asc">Größe (kleinste zuerst)</string>
+    <string name="file_picker_sort_date_desc">Datum (neueste zuerst)</string>
+    <string name="file_picker_sort_date_asc">Datum (älteste zuerst)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Über</string>
     <string name="settings_system_share_website">Website teilen</string>

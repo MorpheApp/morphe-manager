@@ -621,8 +621,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_export_debug_logs_export_read_failed">Det gick inte att läsa loggarna (utgångskod %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Det gick inte att exportera loggar</string>
     <string name="settings_system_export_debug_logs_export_success">Loggar exporterades</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Lagringshantering</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_apks_size">Total storlek: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Modifierade APK-filer</string>
@@ -660,6 +659,8 @@ Bildernas mått ska vara följande:
     <string name="settings_system_selected_patches_title">Valda tillägg (%s)</string>
     <string name="settings_system_patch_options_title">Tilläggsalternativ (%s)</string>
     <string name="settings_system_no_patches_or_options">Inga tillägg eller alternativ har sparats</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <!-- File Picker -->
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Dela webbplatsen</string>

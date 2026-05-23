@@ -78,10 +78,12 @@
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">ការបង្កើនប្រសិទ្ធភាពថ្ម</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <!-- Settings - System Tab - Storage Management Section -->
+    <!-- Settings - System Tab - Files & Storage Section -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <!-- Settings - System Tab - Custom file picker -->
+    <!-- File Picker -->
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">អំពីកម្មវិធីនេះ</string>
     <!-- Shared strings -->

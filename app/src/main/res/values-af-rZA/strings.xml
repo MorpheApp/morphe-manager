@@ -623,8 +623,8 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_system_export_debug_logs_export_read_failed">Kon nie logboeke lees nie (afsluit kode %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Kon nie logboeke uitvoer nie</string>
     <string name="settings_system_export_debug_logs_export_success">Logboeke uitgevoer</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Berging bestuur</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Lêers &amp; berging</string>
     <string name="settings_system_apks_size">Totale grootte: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatched APK\'s</string>
@@ -662,6 +662,23 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_system_selected_patches_title">Gekose patches (%s)</string>
     <string name="settings_system_patch_options_title">Patch opsies (%s)</string>
     <string name="settings_system_no_patches_or_options">Geen patches of opsies gered nie</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Pasgemaakte lêerkeurder</string>
+    <string name="settings_system_custom_file_picker_description">Gebruik Morphe se ingeboude lêerkeurder in plaas van die stelsel se verstek</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Kies lêer</string>
+    <string name="file_picker_title_folder">Kies vouer</string>
+    <string name="file_picker_previous_directory">Vorige gids</string>
+    <string name="file_picker_select">Kies</string>
+    <string name="file_picker_no_files">Geen lêers hier</string>
+    <string name="file_picker_internal_storage">Interne stoorplek</string>
+    <string name="file_picker_sd_card">SD-kaart</string>
+    <string name="file_picker_sort_name_asc">Naam (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Naam (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Grootte (grootste eerst)</string>
+    <string name="file_picker_sort_size_asc">Grootte (kleinste eerst)</string>
+    <string name="file_picker_sort_date_desc">Datum (nuutste eerst)</string>
+    <string name="file_picker_sort_date_asc">Datum (oudste eerst)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Oor</string>
     <string name="settings_system_share_website">Deel webtuiste</string>

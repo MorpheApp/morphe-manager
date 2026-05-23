@@ -623,8 +623,8 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_export_debug_logs_export_read_failed">Nabigong mabasa ang mga tala (exit code %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Nabigong ma-export ang mga tala</string>
     <string name="settings_system_export_debug_logs_export_success">Na-export ang mga tala</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Pamamahala ng imbakan</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Mga File at imbakan</string>
     <string name="settings_system_apks_size">Buong sukat: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Na-patch na mga APK</string>
@@ -662,6 +662,23 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_selected_patches_title">Piniling mga patch (%s)</string>
     <string name="settings_system_patch_options_title">Mga pagpipilian ng patch (%s)</string>
     <string name="settings_system_no_patches_or_options">Walang naka-save na mga patch o pagpipilian</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Pasadyang pumili ng file</string>
+    <string name="settings_system_custom_file_picker_description">Gumamit ng file picker na binuo ng Morphe sa halip na ang default ng sistema</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Piliin ang file</string>
+    <string name="file_picker_title_folder">Piliin ang folder</string>
+    <string name="file_picker_previous_directory">Nakaraang direktoryo</string>
+    <string name="file_picker_select">Piliin</string>
+    <string name="file_picker_no_files">Walang mga file dito</string>
+    <string name="file_picker_internal_storage">Imbakan ng telepono</string>
+    <string name="file_picker_sd_card">SD card</string>
+    <string name="file_picker_sort_name_asc">Pangalan (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Pangalan (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Laki (pinakamalaki muna)</string>
+    <string name="file_picker_sort_size_asc">Laki (pinakamaliit muna)</string>
+    <string name="file_picker_sort_date_desc">Petsa (pinakabago muna)</string>
+    <string name="file_picker_sort_date_asc">Petsa (pinakaluma muna)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tungkol sa</string>
     <string name="settings_system_share_website">Ibahagi ang website</string>

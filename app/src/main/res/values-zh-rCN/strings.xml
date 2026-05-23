@@ -623,8 +623,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_read_failed">读取日志失败 (退出代码 %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">导出日志失败</string>
     <string name="settings_system_export_debug_logs_export_success">日志已导出</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">存储管理</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">文件和存储</string>
     <string name="settings_system_apks_size">总大小：%s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">已修补 APK</string>
@@ -662,6 +662,23 @@ morphe_header_custom_dark.png
     <string name="settings_system_selected_patches_title">已选择的补丁 (%s)</string>
     <string name="settings_system_patch_options_title">补丁选项 (%s)</string>
     <string name="settings_system_no_patches_or_options">没有保存的补丁或选项</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">自定义文件选择器</string>
+    <string name="settings_system_custom_file_picker_description">使用Morphe内置的文件选择器代替系统默认的文件选择器</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">选择文件</string>
+    <string name="file_picker_title_folder">选择文件夹</string>
+    <string name="file_picker_previous_directory">上一级目录</string>
+    <string name="file_picker_select">选择</string>
+    <string name="file_picker_no_files">这里没有文件</string>
+    <string name="file_picker_internal_storage">内部存储空间</string>
+    <string name="file_picker_sd_card">SD卡</string>
+    <string name="file_picker_sort_name_asc">名称 (A–Z)</string>
+    <string name="file_picker_sort_name_desc">名称 (Z–A)</string>
+    <string name="file_picker_sort_size_desc">大小 (从大到小)</string>
+    <string name="file_picker_sort_size_asc">大小 (从小到大)</string>
+    <string name="file_picker_sort_date_desc">日期 (最新到旧)</string>
+    <string name="file_picker_sort_date_asc">日期 (从旧到新)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">关于</string>
     <string name="settings_system_share_website">分享网站</string>

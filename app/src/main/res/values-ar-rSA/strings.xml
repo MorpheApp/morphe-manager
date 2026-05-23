@@ -624,8 +624,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_export_debug_logs_export_read_failed">فشل في قراءة السجلات (رمز الخروج %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">فشل تصدير السجلات</string>
     <string name="settings_system_export_debug_logs_export_success">تم تصدير السجلات</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">إدارة التخزين</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">الملفات والتخزين</string>
     <string name="settings_system_apks_size">إجمالي الحجم: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs معدلة</string>
@@ -663,6 +663,23 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_selected_patches_title">التعديلات المحددة (%s)</string>
     <string name="settings_system_patch_options_title">خيارات التعديل (%s)</string>
     <string name="settings_system_no_patches_or_options">لا يوجد تعديلات أو خيارات محفوظة</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">منتقي ملفات مخصص</string>
+    <string name="settings_system_custom_file_picker_description">استخدم متصفح التخزين المدمج في Morphe بدلاً من متصفح النظام الافتراضي</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">اختر ملف</string>
+    <string name="file_picker_title_folder">اختر مجلد</string>
+    <string name="file_picker_previous_directory">المجلد السابق</string>
+    <string name="file_picker_select">تحديد</string>
+    <string name="file_picker_no_files">لا توجد ملفات هنا</string>
+    <string name="file_picker_internal_storage">التخزين الداخلي</string>
+    <string name="file_picker_sd_card">بطاقة SD</string>
+    <string name="file_picker_sort_name_asc">الاسم (أ–ي)</string>
+    <string name="file_picker_sort_name_desc">الاسم (ي–أ)</string>
+    <string name="file_picker_sort_size_desc">الحجم (الأكبر أولاً)</string>
+    <string name="file_picker_sort_size_asc">الحجم (الأصغر أولاً)</string>
+    <string name="file_picker_sort_date_desc">التاريخ (الأحدث أولاً)</string>
+    <string name="file_picker_sort_date_asc">التاريخ (الأقدم أولاً)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">لمحة</string>
     <string name="settings_system_share_website">مشاركة الموقع الإلكتروني</string>

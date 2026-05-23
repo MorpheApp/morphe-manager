@@ -623,8 +623,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_read_failed">Αποτυχία ανάγνωσης αρχείων καταγραφής (κωδικός εξόδου %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Αποτυχία εξαγωγής αρχείων καταγραφής</string>
     <string name="settings_system_export_debug_logs_export_success">Επιτυχής εξαγωγή αρχείων καταγραφής</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Διαχείριση αποθηκευτικού χώρου</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Αρχεία &amp; αποθηκευτικός χώρος</string>
     <string name="settings_system_apks_size">Συνολικό μέγεθος: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Τροποποιημένες APKs</string>
@@ -662,6 +662,23 @@ morphe_header_custom_dark.png
     <string name="settings_system_selected_patches_title">Επιλεγμένες τροποποιήσεις (%s)</string>
     <string name="settings_system_patch_options_title">Επιλογές τροποποιήσεων (%s)</string>
     <string name="settings_system_no_patches_or_options">Δεν υπάρχουν αποθηκευμένες τροποποιήσεις ή επιλογές</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Προσαρμοσμένη επιλογή αρχείων</string>
+    <string name="settings_system_custom_file_picker_description">Χρησιμοποιήστε την ενσωματωμένη επιλογή αρχείων του Morphe αντί για την προεπιλεγμένη του συστήματος</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Επιλογή αρχείου</string>
+    <string name="file_picker_title_folder">Επιλογή φακέλου</string>
+    <string name="file_picker_previous_directory">Προηγούμενος κατάλογος</string>
+    <string name="file_picker_select">Επιλογή</string>
+    <string name="file_picker_no_files">Δεν υπάρχουν αρχεία εδώ</string>
+    <string name="file_picker_internal_storage">Εσωτερική αποθήκευση</string>
+    <string name="file_picker_sd_card">Κάρτα SD</string>
+    <string name="file_picker_sort_name_asc">Όνομα (Α–Ζ)</string>
+    <string name="file_picker_sort_name_desc">Όνομα (Ζ–Α)</string>
+    <string name="file_picker_sort_size_desc">Μέγεθος (μεγαλύτερο πρώτο)</string>
+    <string name="file_picker_sort_size_asc">Μέγεθος (μικρότερο πρώτο)</string>
+    <string name="file_picker_sort_date_desc">Ημερομηνία (πιο πρόσφατο πρώτο)</string>
+    <string name="file_picker_sort_date_asc">Ημερομηνία (πιο παλιό πρώτο)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Σχετικά με</string>
     <string name="settings_system_share_website">Διαμοίραση ιστότοπου</string>

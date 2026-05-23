@@ -87,7 +87,7 @@
     <string name="sources_dialog_local_file_description">ストレージから .mpp パッチソースファイルを選択してください</string>
     <string name="sources_dialog_local_invalid_extension">ファイルは.mpp拡張子でなければなりません</string>
     <string name="sources_dialog_url_valid">有効なリポジトリまたはJSON URL</string>
-    <string name="sources_dialog_url_invalid">URLは、GitHub/GitLabリポジトリまたは.jsonファイルを指している必要があります。</string>
+    <string name="sources_dialog_url_invalid">URL は GitHub または GitLab のリポジトリ、もしくは .json ファイルを指している必要があります</string>
     <string name="sources_dialog_local_change_file">ファイルを変更</string>
     <string name="sources_dialog_preinstalled">プリインストール</string>
     <string name="sources_update_success">更新成功</string>
@@ -145,7 +145,7 @@
     <string name="expert_mode_enable_all_done">すべてのパッチが有効になりました</string>
     <string name="expert_mode_reset_to_default">推奨パッチの有効化</string>
     <string name="expert_mode_reset_to_default_done">推奨パッチが適用されました</string>
-    <string name="expert_mode_restore_saved">保存済みのパッチセレクションの復元</string>
+    <string name="expert_mode_restore_saved">保存済みのパッチ セレクションの復元</string>
     <string name="expert_mode_restore_saved_done">保存された選択が復元されました</string>
     <string name="expert_mode_no_results">パッチが見つかりません</string>
     <string name="expert_mode_universal_patches">ユニバーサルパッチ</string>
@@ -206,21 +206,21 @@
     <string name="adaptive_icon_reset_transform">位置とスケールをリセット</string>
     <string name="adaptive_icon_safe_zone_inner">セーフゾーン（常に表示される）</string>
     <string name="adaptive_icon_safe_zone_outer">マスクゾーン（切り取られる可能性あり）</string>
-    <string name="adaptive_icon_no_transparency_warning">画像に透明なピクセルはありません。結果が正しく表示されない場合があります。</string>
+    <string name="adaptive_icon_no_transparency_warning">画像に透明ピクセルが含まれていません。正しく表示されない可能性があります</string>
     <string name="adaptive_icon_created_success">アダプティブ アイコンの作成に成功しました</string>
     <string name="adaptive_icon_creation_failed">アダプティブ アイコンの作成に失敗しました</string>
     <string name="adaptive_icon_label">アダプティブ</string>
     <string name="adaptive_icon_monochrome_label">モノクロ</string>
     <string name="adaptive_icon_guide">アイコン作成ガイド</string>
-    <string name="adaptive_icon_guide_png_title">透明な背景を持つPNGを使用する</string>
-    <string name="adaptive_icon_guide_png_body">前景は、透明な背景を持つPNGファイルである必要があります。単色の背景は正しく表示されません。背景色は、以下の背景ピッカーから選択してください。</string>
+    <string name="adaptive_icon_guide_png_title">背景が透明な PNG を使用する</string>
+    <string name="adaptive_icon_guide_png_body">前景画像には、背景が透明な PNG ファイルを使用してください。単色の背景を含む画像は正しく表示されない場合があります。背景色は下の背景色ピッカーから設定してください。</string>
     <string name="adaptive_icon_guide_safe_zones_title">セーフゾーン</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"内側のゾーン（実線）：コンテンツはすべてのランチャーシェイプで常に完全に表示されます。
-外側のゾーン（破線）：ランチャーマスクによってクリップされる可能性があります。重要な詳細は内側のゾーン内に配置してください。"</string>
+    <string name="adaptive_icon_guide_safe_zones_body">"内側の領域（実線）：すべてのランチャー形状で確実に表示されます。
+外側の領域（破線）：ランチャーマスクによって一部が切り取られる場合があります。重要な部分は内側の領域に配置してください。"</string>
     <string name="adaptive_icon_guide_notification_title">通知アイコン</string>
-    <string name="adaptive_icon_guide_notification_body">前景画像から自動的に生成されます。通知スライダーを使用してサイズを調整します。すべての表示コンテンツはステータスバーで白く表示されます。</string>
+    <string name="adaptive_icon_guide_notification_body">前景画像から自動生成されます。サイズは「通知」スライダーで調整できます。表示される内容は、ステータスバーではすべて白色で表示されます。</string>
     <string name="adaptive_icon_guide_monochrome_title">モノクロアイコン</string>
-    <string name="adaptive_icon_guide_monochrome_body">同じ適応アイコン変換を使用して、前景画像から自動的に生成されます。Android 13以降では、壁紙のアクセントカラーで色調が付けられます。</string>
+    <string name="adaptive_icon_guide_monochrome_body">前景画像をもとに、同じアダプティブアイコン変換を使用して自動生成されます。Android 13 以降では、壁紙のアクセントカラーが適用されます。</string>
     <string name="notification_icon_preview">通知</string>
     <!-- Header Creator -->
     <string name="header_creator_create">カスタム ヘッダーを作成</string>
@@ -230,12 +230,12 @@
     <string name="header_creator_success">ヘッダーの作成に成功しました</string>
     <string name="header_creator_failed">ヘッダーの作成に失敗しました</string>
     <string name="header_creator_guide">ヘッダー作成ガイド</string>
-    <string name="header_creator_guide_image_title">画像要件</string>
-    <string name="header_creator_guide_image_body">PNGまたはJPEGなど、任意の画像ファイルを使用できます。最適な結果を得るには、アスペクト比が約2.7:1のワイドフォーマット画像を使用してください。透明な背景を持つPNGファイルは、アプリのテーマと自然に調和します。</string>
-    <string name="header_creator_guide_themes_title">ライトとダークテーマ</string>
-    <string name="header_creator_guide_themes_body">ほとんどのアプリでは、ライトテーマとダークテーマ用に個別の画像が必要です。一部のアプリ（YouTube Musicなど）では、ダークテーマのみを使用するため、そのセクションのみが表示されます。</string>
-    <string name="header_creator_guide_positioning_title">配置とスケーリング</string>
-    <string name="header_creator_guide_positioning_body">プレビュー内でピンチ・トゥ・ズーム操作とドラッグ操作を直接使用して、画像の位置とスケールを調整します。画像が中央付近にあるときにスナップガイドが表示されます。プレビューの下にあるスライダーも使用できます。</string>
+    <string name="header_creator_guide_image_title">画像の要件</string>
+    <string name="header_creator_guide_image_body">PNG または JPEG の画像ファイルを使用できます。よりきれいに表示するには、アスペクト比が約 2.7:1 の横長画像を使用してください。背景が透明な PNG ファイルは、アプリのテーマに自然に馴染みます。</string>
+    <string name="header_creator_guide_themes_title">ライトテーマとダークテーマ</string>
+    <string name="header_creator_guide_themes_body">多くのアプリでは、ライトテーマ用とダークテーマ用にそれぞれ画像が必要です。一部のアプリ（YouTube Music など）はダークテーマのみを使用するため、該当するセクションのみ表示されます。</string>
+    <string name="header_creator_guide_positioning_title">位置とサイズ調整</string>
+    <string name="header_creator_guide_positioning_body">プレビュー上でピンチズームやドラッグ操作を使用して、画像の位置やサイズを調整できます。画像が中央付近にあるときにスナップガイドが表示されます。プレビュー下のスライダーを使用して調整することもできます。</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">このアプリをアンインストールしますか？</string>
     <string name="home_app_info_remove_app_warning">以下を完全に削除します</string>
@@ -285,9 +285,9 @@
     <string name="patcher_conflict_subtitle">既存のバージョンをアンインストールする必要があります</string>
     <string name="patcher_conflict_hint">パッチを適用したアプリは、インストールされているバージョンとは異なる証明書を使用しています。アンインストールすると、すべてのアプリデータが消去されます</string>
     <string name="patcher_installed_conflict_title">アンインストールが必要です</string>
-    <string name="patcher_installed_conflict_body">"Morpheは、パッチされたアプリを元のものとは異なる独自の証明書で署名します。Androidでは、パッチされたアプリをインストールする前に、既存のバージョンを削除する必要があります。
+    <string name="patcher_installed_conflict_body">"Morphe は、元のアプリとは異なる独自の証明書でパッチ済みアプリに署名します。Android の仕様上、パッチ済みアプリをインストールする前に既存のアプリをアンインストールする必要があります。
 
-アンインストールすると、アプリのデータがすべて完全に消去されます。"</string>
+アンインストールすると、アプリのデータは完全に消去されます"</string>
     <string name="patcher_install_error_title">インストールエラー</string>
     <string name="patcher_install_error_subtitle">一度アンインストールしてから、再度インストールしてください</string>
     <string name="patcher_ready_to_install_subtitle">インストールするには以下のボタンを押してください</string>
@@ -315,7 +315,7 @@
     <string name="patcher_step_sign_apk">パッチ済み APK ファイルに署名中</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">バックグラウンドパッチ保護</string>
-    <string name="battery_optimization_dialog_description">アプリが最小化された場合に、一部のデバイスでパッチャーが停止することがあります。Morpheが確実パッチを完了できるように、バッテリー制限なしで実行できるようにしてください。</string>
+    <string name="battery_optimization_dialog_description">一部のデバイスでは、アプリを最小化するとパッチャーが停止する場合があります。確実にパッチ処理を完了するため、Morphe をバッテリー制限の対象外にしてください</string>
     <string name="battery_optimization_not_now">後で</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">パッチ適用中…</string>
@@ -421,7 +421,7 @@
     <string name="settings_advanced_updates">更新</string>
     <string name="settings_advanced_updates_use_prereleases">プレリリース版のパッチを使用</string>
     <string name="settings_advanced_updates_use_prereleases_description">新しい Morphe アプリの早期アクセス。パッチソースでソースごとにプレリリースを有効にします</string>
-    <string name="settings_advanced_updates_allow_metered">モバイルデータ通信が有効です</string>
+    <string name="settings_advanced_updates_allow_metered">モバイルデータ通信を使用する</string>
     <string name="settings_advanced_updates_allow_metered_description">モバイルデータ通信での Morphe およびパッチの更新のダウンロードを許可します</string>
     <string name="settings_advanced_updates_background_notifications">バックグラウンドでの更新通知</string>
     <string name="settings_advanced_updates_background_notifications_description">バックグラウンドで定期的に更新を確認し、利用可能な場合に通知します</string>
@@ -558,7 +558,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_description">Android パッケージインストーラーを使用します</string>
     <string name="installer_auto_saved_name">root 権限マウント式インストーラー</string>
     <string name="installer_auto_saved_description">パッチ適用済み APK をインストール済みアプリの上にマウントします</string>
-    <string name="installer_shizuku_description">Shizuku または Sui を使用してサイレントインストールします。</string>
+    <string name="installer_shizuku_description">Shizuku または Sui を使用してサイレントインストールします</string>
     <string name="installer_option_none">代替なし</string>
     <string name="installer_none_description">代替インストーラーは未設定です</string>
     <string name="installer_status_requires_root">root 権限が必要です</string>
@@ -573,22 +573,22 @@ morphe_header_custom_dark.png
     <string name="installer_hint_generic">インストールに失敗しました。もう一度試すか、別のインストーラーを使用してください</string>
     <string name="installer_hint_conflict">同じパッケージ名を持つ別のアプリが既にインストールされています。続行するには、アプリをアンインストールしてください</string>
     <string name="installer_external_launched">%s を開いています…</string>
-    <string name="installer_external_timeout">%s がインストールを確認できませんでした。別のアプリを確認して、再度お試しください。</string>
-    <string name="installer_external_success">%s がインストールに成功したことを報告しました。</string>
+    <string name="installer_external_timeout">%s がインストールを確認できませんでした。別のアプリを確認して、もう一度お試しください</string>
+    <string name="installer_external_success">%s でインストールが正常に完了しました</string>
     <string name="installer_unavailable_title">%s が利用できません</string>
     <string name="installer_unavailable_message">選択中のインストーラー (%s) は現在使用できません。問題を修正して再試行するか、標準のインストーラーを使用してください</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku が起動中であること、およびこのアプリに権限が付与されていることを確認してください</string>
     <string name="installer_use_standard">標準を使用</string>
-    <string name="settings_prompt_installer_on_install">インストーラー選択プロンプト</string>
+    <string name="settings_prompt_installer_on_install">インストーラー選択ダイアログ</string>
     <string name="settings_prompt_installer_on_install_description">パッチ適用済みアプリをインストールする際に、毎回インストーラー選択ダイアログを表示します</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">電池の最適化</string>
-    <string name="settings_system_battery_optimization_description">アプリが最小化されているときにパッチャーを実行し続けます</string>
+    <string name="settings_system_battery_optimization_description">アプリを最小化してもパッチャーを実行し続けます</string>
     <string name="settings_system_performance">パフォーマンス</string>
     <string name="settings_system_process_runtime">別プロセスで実行</string>
     <string name="settings_system_process_runtime_description">安定性を向上させるために、パッチ処理を別プロセスで実行します</string>
     <string name="settings_system_process_runtime_memory_limit">メモリ制限</string>
-    <string name="settings_system_process_runtime_memory_limit_description">高度なデバイスでは、より高い制限によりパッチ処理が高速化されます</string>
+    <string name="settings_system_process_runtime_memory_limit_description">高性能なデバイスでは、制限値を高くすることでパッチ処理を高速化できます</string>
     <string name="settings_system_process_runtime_enable">別プロセスでの実行を有効化</string>
     <string name="settings_system_memory_limit_subtitle">パッチに使用できるメモリ</string>
     <string name="settings_system_memory_limit_warning">メモリ制限が低い場合、大規模なアプリをパッチする際に失敗する可能性があります</string>
@@ -598,7 +598,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">インポートとエクスポート</string>
     <string name="settings_system_keystore">キーストア</string>
-    <string name="settings_system_import_keystore_description">署名キーストアのインポートまたはエクスポート</string>
+    <string name="settings_system_import_keystore_description">署名用キーストアをインポートまたはエクスポートします</string>
     <string name="settings_system_import_keystore_dialog_title">キーストアの資格情報を入力</string>
     <string name="settings_system_import_keystore_dialog_description">キーストアをインポートするには、認証情報の入力が必要です</string>
     <string name="settings_system_import_keystore_dialog_alias_field">ユーザー名（エイリアス）</string>
@@ -623,26 +623,26 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_read_failed">ログの読み取りに失敗しました (終了コード %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">ログのエクスポートに失敗しました</string>
     <string name="settings_system_export_debug_logs_export_success">ログをエクスポートしました</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">ストレージ管理</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">ファイルとストレージ</string>
     <string name="settings_system_apks_size">合計サイズ: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">パッチ適用済み APK</string>
-    <string name="settings_system_patched_apks_description">保存されたパッチ適用済みのアプリケーション ファイルを管理します</string>
+    <string name="settings_system_patched_apks_description">保存されたパッチ適用済みのアプリファイルを管理します</string>
     <string name="settings_system_patched_apks_empty">まだパッチ適用済み APK が保存されていません</string>
     <string name="settings_system_patched_apks_delete_title">パッチ適用済み APK を削除しますか？</string>
     <string name="settings_system_patched_apks_delete_confirm">保存されている %s のパッチ適用済み APK を削除してもよろしいですか？</string>
     <string name="settings_system_patched_apks_deleted">パッチ適用済み APK を削除しました</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">オリジナルの APK</string>
-    <string name="settings_system_original_apks_description">再パッチのために保存します。各アプリにつき 1 つのバージョンが保持されます</string>
+    <string name="settings_system_original_apks_description">再パッチ用に保存されます。アプリごとに1つのバージョンのみ保持されます</string>
     <string name="settings_system_original_apks_empty">オリジナルの APK は保存されていません</string>
     <string name="settings_system_original_apks_deleted">オリジナルの APK を削除しました</string>
     <string name="settings_system_original_apks_delete_title">オリジナルの APK を削除しますか？</string>
     <string name="settings_system_original_apks_delete_confirm">%s のオリジナルの APK を削除しますか？再パッチには新しい APK が必要になります</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">パッチ セレクション</string>
-    <string name="settings_system_patch_selections_description">保存されたパッチの選択を保持し、アンインストール後も維持します</string>
+    <string name="settings_system_patch_selections_description">保存されたパッチ セレクションを管理します。これらはアンインストール後も保持されます</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">すべてのセレクションをリセットしますか？</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">パッケージ セレクションをリセットしますか？</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">ソース セレクションをリセットしますか？</string>
@@ -662,6 +662,23 @@ morphe_header_custom_dark.png
     <string name="settings_system_selected_patches_title">選択したパッチ (%s)</string>
     <string name="settings_system_patch_options_title">パッチ オプション (%s)</string>
     <string name="settings_system_no_patches_or_options">保存されたパッチやオプションなし</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">カスタムファイルピッカー</string>
+    <string name="settings_system_custom_file_picker_description">システムのデフォルトではなく、Morpheの組み込みファイルピッカーでストレージを参照する</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">ファイルを選択</string>
+    <string name="file_picker_title_folder">フォルダーを選択</string>
+    <string name="file_picker_previous_directory">前のディレクトリ</string>
+    <string name="file_picker_select">選択</string>
+    <string name="file_picker_no_files">ファイルが見つかりません</string>
+    <string name="file_picker_internal_storage">内部ストレージ</string>
+    <string name="file_picker_sd_card">SDカード</string>
+    <string name="file_picker_sort_name_asc">名前（A–Z）</string>
+    <string name="file_picker_sort_name_desc">名前（Z–A）</string>
+    <string name="file_picker_sort_size_desc">サイズ（大きい順）</string>
+    <string name="file_picker_sort_size_asc">サイズ（小さい順）</string>
+    <string name="file_picker_sort_date_desc">日付（新しい順）</string>
+    <string name="file_picker_sort_date_asc">日付（古い順）</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Morphe について</string>
     <string name="settings_system_share_website">ウェブサイトを共有</string>

@@ -624,8 +624,8 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_system_export_debug_logs_export_read_failed">Gagal membaca catatan (kode keluaran %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Gagal mengekspor catatan</string>
     <string name="settings_system_export_debug_logs_export_success">Catatan diekspor</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Manajemen penyimpanan</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">File &amp; penyimpanan</string>
     <string name="settings_system_apks_size">Ukuran total: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK yang ditambal</string>
@@ -663,6 +663,23 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_system_selected_patches_title">Tambalan terpilih (%s)</string>
     <string name="settings_system_patch_options_title">Pilihan tambalan (%s)</string>
     <string name="settings_system_no_patches_or_options">Tidak ada tambalan atau pilihan yang disimpan</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Pemilih file khusus</string>
+    <string name="settings_system_custom_file_picker_description">Telusuri penyimpanan dengan pemilih file bawaan Morphe, bukan pemilih file bawaan sistem</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Pilih berkas</string>
+    <string name="file_picker_title_folder">Pilih folder</string>
+    <string name="file_picker_previous_directory">Direktori sebelumnya</string>
+    <string name="file_picker_select">Pilih</string>
+    <string name="file_picker_no_files">Tidak ada berkas di sini</string>
+    <string name="file_picker_internal_storage">Memori internal</string>
+    <string name="file_picker_sd_card">Kartu SD</string>
+    <string name="file_picker_sort_name_asc">Nama (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Nama (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Ukuran (terbesar dahulu)</string>
+    <string name="file_picker_sort_size_asc">Ukuran (terkecil dahulu)</string>
+    <string name="file_picker_sort_date_desc">Tanggal (terbaru dahulu)</string>
+    <string name="file_picker_sort_date_asc">Tanggal (terlama dahulu)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tentang</string>
     <string name="settings_system_share_website">Bagikan situs web</string>

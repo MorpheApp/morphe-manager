@@ -265,13 +265,31 @@
     <string name="settings_system_morphe_settings">मॉर्फ सेटिंग्ज</string>
     <string name="settings_system_import_manager_settings_description">तुमच्या Morphe सेटिंग्जचा बॅकअप घेते आणि पुनर्संचयित करते</string>
     <string name="settings_system_export_debug_logs_description">समस्यानिवारणासाठी सिस्टम लॉग जतन करते</string>
-    <!-- Settings - System Tab - Storage Management Section -->
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">फाईल्स आणि स्टोरेज</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_description">जतन केलेल्या पॅच केलेल्या ॲप्लिकेशन फाइल्स व्यवस्थापित करते</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_description">रिपॅचिंगसाठी जतन केलेले. प्रति ॲप एक आवृत्ती ठेवली जाते</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_description">अनइंस्टॉल केल्यानंतरही जतन केलेले पॅच निवड</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">कस्टम फाइल पिकर</string>
+    <string name="settings_system_custom_file_picker_description">सिस्टम डिफॉल्ट ऐवजी मोर्फच्या बिल्ट-इन फाइल पिकरने स्टोरेज ब्राउझ करा</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">फाईल निवडा</string>
+    <string name="file_picker_title_folder">फोल्डर निवडा</string>
+    <string name="file_picker_previous_directory">मागील निर्देशिका</string>
+    <string name="file_picker_select">निवडा</string>
+    <string name="file_picker_no_files">येथे कोणतीही फाईल नाही</string>
+    <string name="file_picker_internal_storage"> अंतर्गत स्टोरेज</string>
+    <string name="file_picker_sd_card">एसडी कार्ड</string>
+    <string name="file_picker_sort_name_asc">नाव (A–Z)</string>
+    <string name="file_picker_sort_name_desc">नाव (Z–A)</string>
+    <string name="file_picker_sort_size_desc">आकार (सर्वात मोठे प्रथम)</string>
+    <string name="file_picker_sort_size_asc">आकार (सर्वात लहान प्रथम)</string>
+    <string name="file_picker_sort_date_desc">दिनांक (नवीनतम प्रथम)</string>
+    <string name="file_picker_sort_date_asc">दिनांक (जुने प्रथम)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_share_website_description">अधिकृत Morphe वेबसाइट शेअर करते</string>
     <string name="settings_system_manager_description">हे लोकप्रिय Android ॲप्सच्या आधुनिक, सुव्यवस्थित पॅचिंगसाठी एक मुक्त-स्रोत प्रकल्प आहे, जो समुदाय अभिप्राय आणि योगदानातून चालतो.</string>

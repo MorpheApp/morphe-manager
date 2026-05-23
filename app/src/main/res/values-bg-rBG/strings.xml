@@ -623,8 +623,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_read_failed">Неуспешно четене на логове (код за изход %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Неуспешно експортиране на логове</string>
     <string name="settings_system_export_debug_logs_export_success">Логовете са експортирани</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Управление на съхранението</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Файлове и хранилище</string>
     <string name="settings_system_apks_size">Общ размер: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Променени APK</string>
@@ -662,6 +662,23 @@ morphe_header_custom_dark.png
     <string name="settings_system_selected_patches_title">Избрани заплашки (%s)</string>
     <string name="settings_system_patch_options_title">Опции на заплашки (%s)</string>
     <string name="settings_system_no_patches_or_options">Няма запазени пакети или опции</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Персонализиран избор на файлове</string>
+    <string name="settings_system_custom_file_picker_description">Използвайте вградения файлов мениджър на Morphe вместо системния.</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Избери файл</string>
+    <string name="file_picker_title_folder">Избери папка</string>
+    <string name="file_picker_previous_directory">Предишна директория</string>
+    <string name="file_picker_select">Избери</string>
+    <string name="file_picker_no_files">Няма файлове тук</string>
+    <string name="file_picker_internal_storage">Вътрешна памет</string>
+    <string name="file_picker_sd_card">SD карта</string>
+    <string name="file_picker_sort_name_asc">Име (А–Я)</string>
+    <string name="file_picker_sort_name_desc">Име (Я–А)</string>
+    <string name="file_picker_sort_size_desc">Размер (от най-голям към най-малък)</string>
+    <string name="file_picker_sort_size_asc">Размер (от най-малък към най-голям)</string>
+    <string name="file_picker_sort_date_desc">Дата (най-нова към най-стара)</string>
+    <string name="file_picker_sort_date_asc">Дата (най-стара към най-нова)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Относно</string>
     <string name="settings_system_share_website">Споделяне на уебсайт</string>

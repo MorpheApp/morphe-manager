@@ -623,8 +623,8 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_export_debug_logs_export_read_failed">Error al leer los registros (código de salida %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Error al exportar registros</string>
     <string name="settings_system_export_debug_logs_export_success">Registros exportados</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Administración de almacenamiento</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Archivos y almacenamiento</string>
     <string name="settings_system_apks_size">Tamaño total: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs parcheados</string>
@@ -662,6 +662,23 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_selected_patches_title">Parches seleccionados (%s)</string>
     <string name="settings_system_patch_options_title">Opciones de parche (%s)</string>
     <string name="settings_system_no_patches_or_options">No hay parches ni opciones guardadas</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Selector de archivos personalizado</string>
+    <string name="settings_system_custom_file_picker_description">Explorar el almacenamiento con el selector de archivos integrado de Morphe en lugar del predeterminado del sistema</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Seleccionar archivo</string>
+    <string name="file_picker_title_folder">Seleccionar carpeta</string>
+    <string name="file_picker_previous_directory">Directorio anterior</string>
+    <string name="file_picker_select">Seleccionar</string>
+    <string name="file_picker_no_files">No hay archivos aquí</string>
+    <string name="file_picker_internal_storage">Almacenamiento interno</string>
+    <string name="file_picker_sd_card">Tarjeta SD</string>
+    <string name="file_picker_sort_name_asc">Nombre (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Nombre (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Tamaño (el más grande primero)</string>
+    <string name="file_picker_sort_size_asc">Tamaño (el más pequeño primero)</string>
+    <string name="file_picker_sort_date_desc">Fecha (la más reciente primero)</string>
+    <string name="file_picker_sort_date_asc">Fecha (la más antigua primero)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Acerca de Morphe</string>
     <string name="settings_system_share_website">Compartir sitio web</string>

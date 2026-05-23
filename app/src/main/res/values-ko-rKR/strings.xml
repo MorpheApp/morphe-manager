@@ -624,8 +624,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_read_failed">로그를 읽을 수 없습니다 (종료 코드 %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">로그를 내보낼 수 없습니다</string>
     <string name="settings_system_export_debug_logs_export_success">로그를 내보냈습니다</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">저장소 관리</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">파일 및 저장 공간</string>
     <string name="settings_system_apks_size">전체 용량: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">패치된 APK</string>
@@ -663,6 +663,23 @@ morphe_header_custom_dark.png
     <string name="settings_system_selected_patches_title">선택된 패치 (%s)</string>
     <string name="settings_system_patch_options_title">패치 옵션 (%s)</string>
     <string name="settings_system_no_patches_or_options">저장된 패치 또는 옵션이 없습니다</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">사용자 정의 파일 선택기</string>
+    <string name="settings_system_custom_file_picker_description">시스템 기본 파일 선택기 대신 Morphe의 내장 파일 선택기로 저장소를 탐색합니다.</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">파일 선택</string>
+    <string name="file_picker_title_folder">폴더 선택</string>
+    <string name="file_picker_previous_directory">이전 디렉터리</string>
+    <string name="file_picker_select">선택하기</string>
+    <string name="file_picker_no_files">파일이 없습니다</string>
+    <string name="file_picker_internal_storage">내부 저장소</string>
+    <string name="file_picker_sd_card">SD 카드</string>
+    <string name="file_picker_sort_name_asc">이름 (A–Z)</string>
+    <string name="file_picker_sort_name_desc">이름 (Z–A)</string>
+    <string name="file_picker_sort_size_desc">크기 (큰 순서)</string>
+    <string name="file_picker_sort_size_asc">크기 (작은 순서)</string>
+    <string name="file_picker_sort_date_desc">날짜 (최신순)</string>
+    <string name="file_picker_sort_date_asc">날짜 (오래된 순서)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">정보</string>
     <string name="settings_system_share_website">웹사이트 공유</string>

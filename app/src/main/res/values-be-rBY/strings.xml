@@ -66,10 +66,12 @@
     <!-- Settings - System Tab - Installer Section -->
     <!-- Settings - System Tab - Performance Section -->
     <!-- Settings - System Tab - Import and Export Section -->
-    <!-- Settings - System Tab - Storage Management Section -->
+    <!-- Settings - System Tab - Files & Storage Section -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <!-- Settings - System Tab - Custom file picker -->
+    <!-- File Picker -->
     <!-- Settings - System Tab - About Section -->
     <!-- Shared strings -->
 </resources>

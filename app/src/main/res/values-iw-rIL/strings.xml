@@ -607,8 +607,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_export_debug_logs_export_read_failed">שגיאה בקריאת לוגים (קוד יציאה %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">נכשל לייצא יומנים</string>
     <string name="settings_system_export_debug_logs_export_success">התיקונים יוצאו</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">ניהול אחסון</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">קבצים ואחסון</string>
     <string name="settings_system_apks_size">גודל: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">פיצ\'ים מותאמים</string>
@@ -646,6 +646,23 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_selected_patches_title">פצ\'ים נבחרים (%s)</string>
     <string name="settings_system_patch_options_title">אפשרויות פצ\' (%s)</string>
     <string name="settings_system_no_patches_or_options">אין תיקונים או אפשרויות שמורות</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">בחירת קבצים מותאמת אישית</string>
+    <string name="settings_system_custom_file_picker_description">דפדף אחסון באמצעות בוחר הקבצים המובנה של Morphe במקום ברירת המערכת</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">בחר קובץ</string>
+    <string name="file_picker_title_folder">בחר תיקייה</string>
+    <string name="file_picker_previous_directory">ספרייה קודמת</string>
+    <string name="file_picker_select">בחר</string>
+    <string name="file_picker_no_files">אין קבצים כאן</string>
+    <string name="file_picker_internal_storage">אחסון פנימי</string>
+    <string name="file_picker_sd_card">כרטיס SD</string>
+    <string name="file_picker_sort_name_asc">שם (A–Z)</string>
+    <string name="file_picker_sort_name_desc">שם (Z–A)</string>
+    <string name="file_picker_sort_size_desc">גודל (מהגדול לקטן)</string>
+    <string name="file_picker_sort_size_asc">גודל (מהקטן לגדול)</string>
+    <string name="file_picker_sort_date_desc">תאריך (מהחדש לישן)</string>
+    <string name="file_picker_sort_date_asc">תאריך (מהישן לחדש)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">אודות</string>
     <string name="settings_system_share_website">שתף אתר</string>

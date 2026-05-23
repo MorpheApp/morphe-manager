@@ -623,8 +623,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_read_failed">ล้มเหลวในการอ่านบันทึก (รหัสออก %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">ส่งออกบันทึกไม่สำเร็จ</string>
     <string name="settings_system_export_debug_logs_export_success">ขนาดทั้งหมด: %s</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">การจัดการพื้นที่เก็บ</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">ไฟล์และการจัดเก็บข้อมูล</string>
     <string name="settings_system_apks_size">จัดการแอปที่ถูกนำพัท์</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">คุณแน่ใจหรือไม่ว่าต้องการลบแอปที่ถูกนำพัท์ %s?</string>
@@ -662,6 +662,23 @@ morphe_header_custom_dark.png
     <string name="settings_system_selected_patches_title">แพตซ์ที่เลือก (%s)</string>
     <string name="settings_system_patch_options_title">ตัวเลือกแพตช์ (%s)</string>
     <string name="settings_system_no_patches_or_options">ไม่มีการบันทึกแพตช์หรือตัวเลือก</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">ตัวเลือกไฟล์แบบกำหนดเอง</string>
+    <string name="settings_system_custom_file_picker_description">เรียกดูพื้นที่จัดเก็บด้วยตัวเลือกไฟล์ในตัวของ Morphe แทนค่าเริ่มต้นของระบบ</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">เลือกไฟล์</string>
+    <string name="file_picker_title_folder">เลือกโฟลเดอร์</string>
+    <string name="file_picker_previous_directory">ไดเรกทอรีก่อนหน้า</string>
+    <string name="file_picker_select">เลือก</string>
+    <string name="file_picker_no_files">ไม่มีไฟล์อยู่ที่นี่</string>
+    <string name="file_picker_internal_storage">หน่วยความจำภายใน</string>
+    <string name="file_picker_sd_card">การ์ด SD</string>
+    <string name="file_picker_sort_name_asc">ชื่อ (A–Z)</string>
+    <string name="file_picker_sort_name_desc">ชื่อ (Z–A)</string>
+    <string name="file_picker_sort_size_desc">ขนาด (ใหญ่ที่สุดก่อน)</string>
+    <string name="file_picker_sort_size_asc">ขนาด (เล็กที่สุดก่อน)</string>
+    <string name="file_picker_sort_date_desc">วันที่ (ใหม่ล่าสุดก่อน)</string>
+    <string name="file_picker_sort_date_asc">วันที่ (เก่าแก่ที่สุดก่อน)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">เกี่ยวกับ</string>
     <string name="settings_system_share_website">ไม่พบผลลัพธ์สำหรับ</string>

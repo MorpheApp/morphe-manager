@@ -59,7 +59,7 @@
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
     <string name="sources_management_prerelease_toggle">Bản vá phát hành trước</string>
     <string name="sources_management_prerelease_toggle_description">Trải nghiệm sớm các bản vá thử nghiệm mới</string>
-    <string name="sources_management_experimental_versions_toggle">Các phiên bản ứng dụng thử nghiệm</string>
+    <string name="sources_management_experimental_versions_toggle">Phiên bản ứng dụng thử nghiệm</string>
     <string name="sources_management_experimental_versions_toggle_description">Vá phiên bản thử nghiệm (nếu có)</string>
     <string name="sources_management_already_exists">Nguồn này đã được thêm vào rồi</string>
     <string name="sources_management_invalid_url">URL nguồn không hợp lệ. Vui lòng kiểm tra địa chỉ và thử lại</string>
@@ -624,8 +624,8 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_export_debug_logs_export_read_failed">Không thể đọc nhật ký (mã thoát %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Không thể xuất nhật ký</string>
     <string name="settings_system_export_debug_logs_export_success">Đã xuất nhật ký</string>
-    <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Quản lý bộ nhớ</string>
+    <!-- Settings - System Tab - Files & Storage Section -->
+    <string name="settings_system_files">Tệp &amp; bộ nhớ</string>
     <string name="settings_system_apks_size">Tổng kích thước: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK đã vá</string>
@@ -663,6 +663,23 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_selected_patches_title">Số bản vá đã chọn (%s)</string>
     <string name="settings_system_patch_options_title">Số bản vá đã chỉnh (%s)</string>
     <string name="settings_system_no_patches_or_options">Không có bản vá hoặc tùy chỉnh được lưu</string>
+    <!-- Settings - System Tab - Custom file picker -->
+    <string name="settings_system_custom_file_picker">Bộ chọn tệp tùy chỉnh</string>
+    <string name="settings_system_custom_file_picker_description">Duyệt bộ nhớ bằng trình chọn tệp tích hợp của Morphe thay vì trình chọn mặc định của hệ thống</string>
+    <!-- File Picker -->
+    <string name="file_picker_title">Chọn tệp</string>
+    <string name="file_picker_title_folder">Chọn thư mục</string>
+    <string name="file_picker_previous_directory">Thư mục trước đó</string>
+    <string name="file_picker_select">Chọn</string>
+    <string name="file_picker_no_files">Không có tệp nào ở đây</string>
+    <string name="file_picker_internal_storage">Bộ nhớ trong</string>
+    <string name="file_picker_sd_card">Thẻ SD</string>
+    <string name="file_picker_sort_name_asc">Tên (A–Z)</string>
+    <string name="file_picker_sort_name_desc">Tên (Z–A)</string>
+    <string name="file_picker_sort_size_desc">Kích thước (lớn nhất trước)</string>
+    <string name="file_picker_sort_size_asc">Kích thước (nhỏ nhất trước)</string>
+    <string name="file_picker_sort_date_desc">Ngày (mới nhất trước)</string>
+    <string name="file_picker_sort_date_asc">Ngày (cũ nhất trước)</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Giới thiệu</string>
     <string name="settings_system_share_website">Chia sẻ</string>
