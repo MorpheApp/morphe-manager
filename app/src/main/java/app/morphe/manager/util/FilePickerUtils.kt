@@ -94,7 +94,6 @@ fun Uri.hasMppExtension(contentResolver: ContentResolver): Boolean =
 fun Uri.hasApkExtension(contentResolver: ContentResolver): Boolean =
     displayName(contentResolver)?.substringAfterLast('.', "")?.lowercase() in APK_EXTENSIONS
 
-
 /**
  * Reads and parses the META-INF/MANIFEST.MF entry from a .mpp patch bundle URI.
  * Returns null if the entry is missing, the URI is unreadable, or any IO error occurs.

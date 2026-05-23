@@ -383,7 +383,7 @@ fun FilePicker(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 MorpheDialogOutlinedButton(
-                    text = stringResource(android.R.string.cancel),
+                    text = stringResource(R.string.close),
                     onClick = onDismiss,
                     modifier = Modifier.weight(1f)
                 )
