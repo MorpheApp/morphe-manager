@@ -8,7 +8,6 @@ package app.morphe.manager.ui.screen.shared
 import android.content.pm.PackageInfo
 import android.os.Environment
 import android.util.LruCache
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -168,10 +167,8 @@ fun FilePicker(
         currentDir = if (atStorageRoot) null else currentDir?.parentFile
     }
 
-    BackHandler(enabled = currentDir != null, onBack = navigateBack)
-
     MorpheDialog(
-        onDismissRequest = onDismiss,
+        onDismissRequest = { if (currentDir != null) navigateBack() else onDismiss() },
         title = null,
         noPadding = true,
         scrollable = false,
