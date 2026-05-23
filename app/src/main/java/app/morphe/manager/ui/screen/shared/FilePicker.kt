@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -339,19 +340,23 @@ fun FilePicker(
                                 }
                             }
 
+                            val isMpp = !isDir && file.extension.lowercase() == "mpp"
                             val icon = when {
                                 isDir -> Icons.Outlined.Folder
                                 canLoadIcon && packageInfo == null -> Icons.Outlined.Android
                                 canLoadIcon -> null
                                 isApk -> Icons.Outlined.Android
+                                isMpp -> null
                                 else -> Icons.AutoMirrored.Outlined.InsertDriveFile
                             }
+                            val iconRes = if (isMpp) R.drawable.ic_notification else null
                             val detail = if (!isDir) {
                                 "${formatBytes(file.length())} · ${formatModDate(file.lastModified())}"
                             } else null
 
                             FilePickerRow(
                                 icon = icon,
+                                iconRes = iconRes,
                                 packageInfo = packageInfo,
                                 name = file.name,
                                 detail = detail,
@@ -398,9 +403,12 @@ private fun FilePickerRow(
     name: String,
     detail: String?,
     packageInfo: PackageInfo? = null,
+    iconRes: Int? = null,
     isSelected: Boolean = false,
     onClick: () -> Unit
 ) {
+    val iconTint = if (isSelected) MaterialTheme.colorScheme.primary
+                   else LocalDialogTextColor.current.copy(alpha = 0.75f)
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -419,12 +427,18 @@ private fun FilePickerRow(
                 contentDescription = null,
                 modifier = Modifier.size(22.dp)
             )
+        } else if (iconRes != null) {
+            Icon(
+                painter = painterResource(iconRes),
+                contentDescription = null,
+                tint = iconTint,
+                modifier = Modifier.size(22.dp)
+            )
         } else if (icon != null) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                tint = if (isSelected) MaterialTheme.colorScheme.primary
-                       else LocalDialogTextColor.current.copy(alpha = 0.75f),
+                tint = iconTint,
                 modifier = Modifier.size(22.dp)
             )
         }
