@@ -12,19 +12,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.InstallMobile
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.settings.system.*
-import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.shared.SectionCard
+import app.morphe.manager.ui.screen.shared.SectionTitle
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 
@@ -45,10 +43,6 @@ fun SystemTabContent(
     onChangelogClick: () -> Unit
 ) {
     val useExpertMode by settingsViewModel.prefs.useExpertMode.getAsState()
-    val useCustomFilePicker by settingsViewModel.prefs.useCustomFilePicker.getAsState()
-
-    val enabledState = stringResource(R.string.enabled)
-    val disabledState = stringResource(R.string.disabled)
 
     Column(
         modifier = Modifier
@@ -82,30 +76,6 @@ fun SystemTabContent(
                 onImportSettings = onImportSettings,
                 onExportSettings = onExportSettings,
                 onExportDebugLogs = onExportDebugLogs
-            )
-        }
-
-        // Files
-        SectionTitle(
-            text = stringResource(R.string.settings_system_files),
-            icon = Icons.Outlined.FolderOpen
-        )
-
-        SectionCard {
-            RichSettingsItem(
-                onClick = { settingsViewModel.setUseCustomFilePicker(!useCustomFilePicker) },
-                leadingContent = { MorpheIcon(icon = Icons.Outlined.FolderOpen) },
-                title = stringResource(R.string.settings_system_custom_file_picker),
-                subtitle = stringResource(R.string.settings_system_custom_file_picker_description),
-                trailingContent = {
-                    MorpheSwitch(
-                        checked = useCustomFilePicker,
-                        onCheckedChange = null,
-                        modifier = Modifier.semantics {
-                            stateDescription = if (useCustomFilePicker) enabledState else disabledState
-                        }
-                    )
-                }
             )
         }
 
