@@ -163,6 +163,7 @@ private fun PatchSelectionManagementDialogContent(
 ) {
     val openImportAllSelectionsPicker = rememberAdaptiveFilePicker(
         mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE),
+        customPickerMimeTypes = arrayOf(JSON_MIMETYPE),
         onResult = { uri ->
             uri?.let { importExportViewModel.importAllSelections(it) }
         }
