@@ -73,6 +73,8 @@ private fun storageRoots(): List<Pair<String, File>> {
     return roots
 }
 
+private val iconLoadDispatcher = Dispatchers.IO.limitedParallelism(2)
+
 private fun listDir(dir: File, allowedExtensions: Set<String>?): List<File> =
     dir.listFiles()
         ?.filter { it.isDirectory || allowedExtensions == null || it.extension.lowercase() in allowedExtensions }
@@ -243,14 +245,17 @@ fun FilePicker(
                             val isSelected = selectedFile == file
                             val isDir = file.isDirectory
                             val isApk = !isDir && file.extension.lowercase() in APK_EXTENSIONS
+                            // Only standard .apk supports getPackageArchiveInfo; bundles (.apkm/.apks/.xapk) are ZIPs
+                            val canLoadIcon = !isDir && file.extension.lowercase() == "apk"
 
                             val packageInfo by produceState<PackageInfo?>(null, file) {
-                                if (isApk) value = withContext(Dispatchers.IO) { pm.getPackageInfo(file) }
+                                if (canLoadIcon) value = withContext(iconLoadDispatcher) { pm.getPackageInfo(file) }
                             }
 
                             val icon = when {
                                 isDir -> Icons.Outlined.Folder
-                                isApk -> null
+                                canLoadIcon -> null
+                                isApk -> Icons.Outlined.Android
                                 else -> Icons.AutoMirrored.Outlined.InsertDriveFile
                             }
                             val detail = if (!isDir) {
