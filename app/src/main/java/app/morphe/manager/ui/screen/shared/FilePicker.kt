@@ -29,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import android.content.pm.PackageInfo
+import android.util.LruCache
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.APK_EXTENSIONS
@@ -74,6 +75,7 @@ private fun storageRoots(): List<Pair<String, File>> {
 }
 
 private val iconLoadDispatcher = Dispatchers.IO.limitedParallelism(2)
+private val apkPackageInfoCache = LruCache<String, PackageInfo>(100)
 
 private fun listDir(dir: File, allowedExtensions: Set<String>?): List<File> =
     dir.listFiles()
@@ -249,7 +251,16 @@ fun FilePicker(
                             val canLoadIcon = !isDir && file.extension.lowercase() == "apk"
 
                             val packageInfo by produceState<PackageInfo?>(null, file) {
-                                if (canLoadIcon) value = withContext(iconLoadDispatcher) { pm.getPackageInfo(file) }
+                                if (canLoadIcon) {
+                                    val cached = apkPackageInfoCache.get(file.absolutePath)
+                                    if (cached != null) {
+                                        value = cached
+                                    } else {
+                                        val info = withContext(iconLoadDispatcher) { pm.getPackageInfo(file) }
+                                        if (info != null) apkPackageInfoCache.put(file.absolutePath, info)
+                                        value = info
+                                    }
+                                }
                             }
 
                             val icon = when {
