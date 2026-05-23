@@ -79,8 +79,8 @@ fun SystemTabContent(
             )
         }
 
-        // Storage Management
-        StorageManagementSection(
+        // Files & Storage
+        FilesAndStorageSection(
             settingsViewModel = settingsViewModel,
             importExportViewModel = importExportViewModel
         )

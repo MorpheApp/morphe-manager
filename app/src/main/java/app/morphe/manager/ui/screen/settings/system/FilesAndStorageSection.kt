@@ -31,7 +31,7 @@ import app.morphe.manager.util.isAndroidTv
  * Storage management section.
  */
 @Composable
-fun StorageManagementSection(
+fun FilesAndStorageSection(
     settingsViewModel: SettingsViewModel,
     importExportViewModel: ImportExportViewModel
 ) {

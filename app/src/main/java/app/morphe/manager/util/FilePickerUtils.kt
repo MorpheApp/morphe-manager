@@ -14,7 +14,10 @@ import android.provider.DocumentsContract
 import android.provider.OpenableColumns
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.manager.PreferencesManager
@@ -148,8 +151,9 @@ fun rememberFolderPicker(onFolderPicked: (Uri) -> Unit): () -> Unit {
  * Folder picker launcher with automatic permission handling.
  * Use this when storing the picked folder PATH as a patch option value (the patcher will
  * later read files from it via the File API, which requires MANAGE_EXTERNAL_STORAGE).
- * Uses Morphe's built-in [FilePicker] on TV and when [PreferencesManager.useCustomFilePicker]
- * is enabled, falling back to [ActivityResultContracts.OpenDocumentTree] otherwise.
+ * Uses Morphe's built-in [FilePicker] on TV and when [PreferencesManager.useCustomFilePicker] is enabled.
+ * On phones/tablets without the custom picker, falls back to [ActivityResultContracts.OpenDocumentTree].
+ * Storage permission is always required first; if denied, the picker is not shown.
  */
 @Composable
 fun rememberFolderPickerWithPermission(
@@ -260,7 +264,7 @@ fun Context.isAndroidTv(): Boolean {
 }
 
 /**
- * Uses Morphe's built-in [FilePicker] when [PreferencesManager.useCustomFilePicker] is enabled.
+ * Uses Morphe's built-in [FilePicker] on TV and when [PreferencesManager.useCustomFilePicker] is enabled.
  * Falls back to [ActivityResultContracts.GetContent] on phones/tablets.
  * Storage permission is requested automatically before showing the custom picker.
  *
