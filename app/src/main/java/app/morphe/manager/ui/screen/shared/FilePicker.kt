@@ -29,11 +29,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.APK_EXTENSIONS
 import app.morphe.manager.util.formatBytes
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import org.koin.compose.koinInject
 
 private val MIME_EXTENSION_MAP: Map<String, Set<String>> = mapOf(
     "application/vnd.android.package-archive" to setOf("apk", "apks", "xapk", "apkm"),
@@ -87,17 +89,34 @@ fun FilePicker(
     onDismiss: () -> Unit,
     onFilePicked: (File) -> Unit
 ) {
+    val prefs: PreferencesManager = koinInject()
     val allowedExtensions = remember(mimeTypes) { resolveAllowedExtensions(mimeTypes) }
     val roots = remember { storageRoots() }
 
-    var currentDir by remember { mutableStateOf<File?>(null) }
+    val downloadsDir = remember {
+        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            .takeIf { it.isDirectory }
+    }
+
+    var currentDir by remember { mutableStateOf(downloadsDir) }
     var dirContents by remember { mutableStateOf<List<File>>(emptyList()) }
     var selectedFile by remember { mutableStateOf<File?>(null) }
     var refreshKey by remember { mutableIntStateOf(0) }
 
+    // Restore the last visited directory on open; Downloads stays as fallback until then
+    LaunchedEffect(Unit) {
+        val savedPath = prefs.lastFilePickerPath.get()
+        if (savedPath.isNotEmpty()) {
+            val savedDir = File(savedPath)
+            if (savedDir.isDirectory) currentDir = savedDir
+        }
+    }
+
+    // Reload contents and persist the current directory on every navigation
     LaunchedEffect(currentDir, refreshKey) {
         dirContents = currentDir?.let { listDir(it, allowedExtensions) } ?: emptyList()
         if (selectedFile?.parentFile != currentDir) selectedFile = null
+        currentDir?.absolutePath?.let { prefs.lastFilePickerPath.update(it) }
     }
 
     val navigateBack = {
