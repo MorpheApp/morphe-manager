@@ -130,6 +130,13 @@ class PreferencesManager(
                 patcherProcessMemoryLimit.update(adaptive)
             }
 
+            // TODO: remove after 1.18.0 stable - migrates expert mode users who upgraded before
+            //  custom file picker toggle existed; without this they'd get the new default (false)
+            //  even though they should have it on.
+            if (useExpertMode.get() && !customFilePickerUserConfigured.get()) {
+                useCustomFilePicker.update(true)
+            }
+
             // Auto-enable prereleases for dev versions
             if (isDevVersion() && !prereleaseAutoEnabled.get()) {
                 Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
