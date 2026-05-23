@@ -28,13 +28,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import android.content.pm.PackageInfo
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.APK_EXTENSIONS
+import app.morphe.manager.util.PM
 import app.morphe.manager.util.formatBytes
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 
 private val MIME_EXTENSION_MAP: Map<String, Set<String>> = mapOf(
@@ -90,6 +94,7 @@ fun FilePicker(
     onFilePicked: (File) -> Unit
 ) {
     val prefs: PreferencesManager = koinInject()
+    val pm: PM = koinInject()
     val allowedExtensions = remember(mimeTypes) { resolveAllowedExtensions(mimeTypes) }
     val roots = remember { storageRoots() }
 
@@ -237,9 +242,15 @@ fun FilePicker(
                         items(dirContents, key = { it.absolutePath }) { file ->
                             val isSelected = selectedFile == file
                             val isDir = file.isDirectory
+                            val isApk = !isDir && file.extension.lowercase() in APK_EXTENSIONS
+
+                            val packageInfo by produceState<PackageInfo?>(null, file) {
+                                if (isApk) value = withContext(Dispatchers.IO) { pm.getPackageInfo(file) }
+                            }
+
                             val icon = when {
                                 isDir -> Icons.Outlined.Folder
-                                file.extension.lowercase() in APK_EXTENSIONS -> Icons.Outlined.Android
+                                isApk -> null
                                 else -> Icons.AutoMirrored.Outlined.InsertDriveFile
                             }
                             val detail = if (!isDir) {
@@ -248,6 +259,7 @@ fun FilePicker(
 
                             FilePickerRow(
                                 icon = icon,
+                                packageInfo = packageInfo,
                                 name = file.name,
                                 detail = detail,
                                 isSelected = isSelected,
@@ -297,9 +309,10 @@ fun FilePicker(
 
 @Composable
 private fun FilePickerRow(
-    icon: ImageVector,
+    icon: ImageVector?,
     name: String,
     detail: String?,
+    packageInfo: PackageInfo? = null,
     isSelected: Boolean = false,
     onClick: () -> Unit
 ) {
@@ -315,13 +328,21 @@ private fun FilePickerRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint = if (isSelected) MaterialTheme.colorScheme.primary
-                   else LocalDialogTextColor.current.copy(alpha = 0.75f),
-            modifier = Modifier.size(22.dp)
-        )
+        if (packageInfo != null) {
+            AppIcon(
+                packageInfo = packageInfo,
+                contentDescription = null,
+                modifier = Modifier.size(22.dp)
+            )
+        } else if (icon != null) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = if (isSelected) MaterialTheme.colorScheme.primary
+                       else LocalDialogTextColor.current.copy(alpha = 0.75f),
+                modifier = Modifier.size(22.dp)
+            )
+        }
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = name,
