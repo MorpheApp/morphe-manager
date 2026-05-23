@@ -154,24 +154,22 @@ fun StorageManagementSection(
             }
         }
 
-        if (useExpertMode) {
-            SectionCard {
-                RichSettingsItem(
-                    onClick = { settingsViewModel.setUseCustomFilePicker(!useCustomFilePicker) },
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.FolderOpen) },
-                    title = stringResource(R.string.settings_system_custom_file_picker),
-                    subtitle = stringResource(R.string.settings_system_custom_file_picker_description),
-                    trailingContent = {
-                        MorpheSwitch(
-                            checked = useCustomFilePicker,
-                            onCheckedChange = null,
-                            modifier = androidx.compose.ui.Modifier.semantics {
-                                stateDescription = if (useCustomFilePicker) enabledState else disabledState
-                            }
-                        )
-                    }
-                )
-            }
+        SectionCard {
+            RichSettingsItem(
+                onClick = { settingsViewModel.setUseCustomFilePicker(!useCustomFilePicker) },
+                leadingContent = { MorpheIcon(icon = Icons.Outlined.FolderOpen) },
+                title = stringResource(R.string.settings_system_custom_file_picker),
+                subtitle = stringResource(R.string.settings_system_custom_file_picker_description),
+                trailingContent = {
+                    MorpheSwitch(
+                        checked = useCustomFilePicker,
+                        onCheckedChange = null,
+                        modifier = androidx.compose.ui.Modifier.semantics {
+                            stateDescription = if (useCustomFilePicker) enabledState else disabledState
+                        }
+                    )
+                }
+            )
         }
     }
 }
