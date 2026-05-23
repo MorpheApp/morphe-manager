@@ -50,6 +50,7 @@ import app.morphe.manager.util.APK_EXTENSIONS
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.formatBytes
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
@@ -216,7 +217,12 @@ fun FilePicker(
     }
 
     LaunchedEffect(showSearch) {
-        if (showSearch) searchFocusRequester.requestFocus()
+        if (showSearch) {
+            // Allow the TextField to attach to the window before requesting focus,
+            // otherwise the keyboard animation is delayed in release builds
+            delay(100)
+            searchFocusRequester.requestFocus()
+        }
     }
 
     // Clear search when navigating to a different directory
