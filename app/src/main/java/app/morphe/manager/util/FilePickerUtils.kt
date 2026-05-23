@@ -259,10 +259,9 @@ fun Context.isAndroidTv(): Boolean {
 }
 
 /**
- * On Android TV uses [ActivityResultContracts.OpenDocument] which routes through
- * DocumentsUI and shows registered storage providers (file managers).
- * On phones/tablets: uses Morphe's built-in [FilePicker] when [PreferencesManager.useCustomFilePicker]
- * is enabled, falling back to [ActivityResultContracts.GetContent] otherwise.
+ * Uses Morphe's built-in [FilePicker] on all devices when [PreferencesManager.useCustomFilePicker]
+ * is enabled. Falls back to [ActivityResultContracts.OpenDocument] on TV and
+ * [ActivityResultContracts.GetContent] on phones/tablets.
  * Storage permission is requested automatically before showing the custom picker.
  */
 @Composable
@@ -308,11 +307,11 @@ fun rememberAdaptiveFilePicker(
     return remember(isTV, useCustomPicker) {
         {
             when {
-                isTV -> tvLauncher.launch(mimeTypes)
                 useCustomPicker -> {
                     if (fs.hasStoragePermission()) showPickerState.value = true
                     else permissionLauncher.launch(permissionName)
                 }
+                isTV -> tvLauncher.launch(mimeTypes)
                 else -> phoneLauncher.launch(if (mimeTypes.size == 1) mimeTypes[0] else "*/*")
             }
         }
