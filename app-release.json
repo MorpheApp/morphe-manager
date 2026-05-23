@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-05-23T14:12:32",
-  "description": "# [1.19.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.19.0-dev.1...v1.19.0-dev.2) (2026-05-23)\n\n\n### Bug Fixes\n\n* Crash on `.mpp` icon load ([6ca5114](https://github.com/MorpheApp/morphe-manager/commit/6ca51147200d50b5a54ce4ccd4b0ed858ddef0c8))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.19.0-dev.2/morphe-manager-1.19.0-dev.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.19.0-dev.2/morphe-manager-1.19.0-dev.2.apk.asc",
-  "version": "1.19.0-dev.2"
+  "created_at": "2026-05-23T16:33:21",
+  "description": "# [1.19.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.19.0-dev.2...v1.19.0-dev.3) (2026-05-23)\n\n\n### Bug Fixes\n\n* Add spacing between file name and detail in file picker ([5f94287](https://github.com/MorpheApp/morphe-manager/commit/5f942876329019ffbb4f249b76fe1d1547fd9330))\n* Remove redundant checkmark from file picker selection ([5222e14](https://github.com/MorpheApp/morphe-manager/commit/5222e1477b80e4843ed875bf6f426daa7c3c20b0))\n\n\n### Features\n\n* Add search to file picker ([e9388ed](https://github.com/MorpheApp/morphe-manager/commit/e9388edfebe6124baaad5fc4d71ef19d130c206e))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.19.0-dev.3/morphe-manager-1.19.0-dev.3.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.19.0-dev.3/morphe-manager-1.19.0-dev.3.apk.asc",
+  "version": "1.19.0-dev.3"
 }

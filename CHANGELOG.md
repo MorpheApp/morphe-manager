@@ -1,3 +1,16 @@
+# [1.19.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.19.0-dev.2...v1.19.0-dev.3) (2026-05-23)
+
+
+### Bug Fixes
+
+* Add spacing between file name and detail in file picker ([5f94287](https://github.com/MorpheApp/morphe-manager/commit/5f942876329019ffbb4f249b76fe1d1547fd9330))
+* Remove redundant checkmark from file picker selection ([5222e14](https://github.com/MorpheApp/morphe-manager/commit/5222e1477b80e4843ed875bf6f426daa7c3c20b0))
+
+
+### Features
+
+* Add search to file picker ([e9388ed](https://github.com/MorpheApp/morphe-manager/commit/e9388edfebe6124baaad5fc4d71ef19d130c206e))
+
 # [1.19.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.19.0-dev.1...v1.19.0-dev.2) (2026-05-23)
 
 
