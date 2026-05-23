@@ -6,13 +6,16 @@
 package app.morphe.manager.ui.screen.shared
 
 import android.content.pm.PackageInfo
+import android.graphics.BitmapFactory
 import android.os.Environment
 import android.util.LruCache
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.automirrored.outlined.InsertDriveFile
@@ -22,8 +25,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -96,8 +103,22 @@ private fun storageRoots(): List<Pair<String, File>> {
     return roots
 }
 
+private val IMAGE_EXTENSIONS = setOf("png", "jpg", "jpeg", "gif", "webp", "bmp")
+
 private val iconLoadDispatcher = Dispatchers.IO.limitedParallelism(2)
 private val apkPackageInfoCache = LruCache<String, PackageInfo>(100)
+private val imageThumbnailCache = LruCache<String, ImageBitmap>(30)
+
+private fun decodeThumbnail(file: File): ImageBitmap? = runCatching {
+    val opts = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+    BitmapFactory.decodeFile(file.absolutePath, opts)
+    var sampleSize = 1
+    while (opts.outWidth / (sampleSize * 2) >= 128 && opts.outHeight / (sampleSize * 2) >= 128) {
+        sampleSize *= 2
+    }
+    BitmapFactory.decodeFile(file.absolutePath, BitmapFactory.Options().apply { inSampleSize = sampleSize })
+        ?.asImageBitmap()
+}.getOrNull()
 
 private enum class SortMode {
     NAME_ASC, NAME_DESC, SIZE_DESC, SIZE_ASC, DATE_DESC, DATE_ASC;
@@ -327,6 +348,7 @@ fun FilePicker(
                             val isApk = !isDir && file.extension.lowercase() in APK_EXTENSIONS
                             // Only standard .apk supports getPackageArchiveInfo; bundles (.apkm/.apks/.xapk) are ZIPs
                             val canLoadIcon = !isDir && file.extension.lowercase() == "apk"
+                            val isImage = !isDir && file.extension.lowercase() in IMAGE_EXTENSIONS
 
                             val packageInfo by produceState<PackageInfo?>(null, file) {
                                 if (canLoadIcon) {
@@ -341,6 +363,19 @@ fun FilePicker(
                                 }
                             }
 
+                            val thumbnail by produceState<ImageBitmap?>(null, file) {
+                                if (isImage) {
+                                    val cached = imageThumbnailCache.get(file.absolutePath)
+                                    if (cached != null) {
+                                        value = cached
+                                    } else {
+                                        val bmp = withContext(iconLoadDispatcher) { decodeThumbnail(file) }
+                                        if (bmp != null) imageThumbnailCache.put(file.absolutePath, bmp)
+                                        value = bmp
+                                    }
+                                }
+                            }
+
                             val isMpp = !isDir && file.extension.lowercase() == "mpp"
                             val icon = when {
                                 isDir -> Icons.Outlined.Folder
@@ -348,6 +383,8 @@ fun FilePicker(
                                 canLoadIcon -> null
                                 isApk -> Icons.Outlined.Android
                                 isMpp -> null
+                                isImage && thumbnail == null -> Icons.Outlined.Image
+                                isImage -> null
                                 else -> Icons.AutoMirrored.Outlined.InsertDriveFile
                             }
                             val iconRes = if (isMpp) R.drawable.ic_notification else null
@@ -358,6 +395,7 @@ fun FilePicker(
                             FilePickerRow(
                                 icon = icon,
                                 iconRes = iconRes,
+                                thumbnail = thumbnail,
                                 packageInfo = packageInfo,
                                 name = file.name,
                                 detail = detail,
@@ -405,6 +443,7 @@ private fun FilePickerRow(
     detail: String?,
     packageInfo: PackageInfo? = null,
     iconRes: Int? = null,
+    thumbnail: ImageBitmap? = null,
     isSelected: Boolean = false,
     onClick: () -> Unit
 ) {
@@ -427,6 +466,15 @@ private fun FilePickerRow(
                 packageInfo = packageInfo,
                 contentDescription = null,
                 modifier = Modifier.size(22.dp)
+            )
+        } else if (thumbnail != null) {
+            Image(
+                bitmap = thumbnail,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(22.dp)
+                    .clip(RoundedCornerShape(4.dp))
             )
         } else if (iconRes != null) {
             Icon(
