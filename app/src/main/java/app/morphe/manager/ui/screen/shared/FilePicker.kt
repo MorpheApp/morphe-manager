@@ -102,6 +102,7 @@ fun FilePicker(
     var dirContents by remember { mutableStateOf<List<File>>(emptyList()) }
     var selectedFile by remember { mutableStateOf<File?>(null) }
     var refreshKey by remember { mutableIntStateOf(0) }
+    var showStorageMenu by remember { mutableStateOf(false) }
 
     // Restore the last visited directory on open; Downloads stays as fallback until then
     LaunchedEffect(Unit) {
@@ -167,16 +168,39 @@ fun FilePicker(
             HorizontalDivider(color = LocalDialogTextColor.current.copy(alpha = 0.08f))
 
             if (currentDir != null) {
-                Text(
-                    text = currentDir!!.absolutePath,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = LocalDialogSecondaryTextColor.current,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 6.dp)
-                )
+                Box {
+                    Text(
+                        text = currentDir!!.absolutePath,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = LocalDialogSecondaryTextColor.current,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable(enabled = roots.size > 1) { showStorageMenu = true }
+                            .padding(horizontal = 16.dp, vertical = 6.dp)
+                    )
+                    DropdownMenu(
+                        expanded = showStorageMenu,
+                        onDismissRequest = { showStorageMenu = false }
+                    ) {
+                        roots.forEach { (label, root) ->
+                            DropdownMenuItem(
+                                text = { Text(label) },
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Storage,
+                                        contentDescription = null
+                                    )
+                                },
+                                onClick = {
+                                    currentDir = root
+                                    showStorageMenu = false
+                                }
+                            )
+                        }
+                    }
+                }
                 HorizontalDivider(color = LocalDialogTextColor.current.copy(alpha = 0.06f))
             }
 
