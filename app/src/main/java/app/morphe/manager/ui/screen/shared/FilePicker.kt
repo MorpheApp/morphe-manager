@@ -6,9 +6,12 @@
 package app.morphe.manager.ui.screen.shared
 
 import android.content.pm.PackageInfo
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.os.Environment
 import android.util.LruCache
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,7 +34,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -49,6 +52,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import androidx.core.graphics.createBitmap
 
 // Exact MIME type → extensions
 private val MIME_EXTENSION_MAP: Map<String, Set<String>> = mapOf(
@@ -168,8 +172,19 @@ fun FilePicker(
 ) {
     val prefs: PreferencesManager = koinInject()
     val pm: PM = koinInject()
+    val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val allowedExtensions = remember(mimeTypes) { resolveAllowedExtensions(mimeTypes) }
+    val mppIcon: ImageBitmap? = remember(context) {
+        runCatching {
+            val drawable = AppCompatResources.getDrawable(context, R.drawable.ic_mpp) ?: return@runCatching null
+            val size = 96
+            val bmp = createBitmap(size, size)
+            drawable.setBounds(0, 0, size, size)
+            drawable.draw(Canvas(bmp))
+            bmp.asImageBitmap()
+        }.getOrNull()
+    }
     val roots = remember { storageRoots() }
 
     val downloadsDir = remember {
@@ -387,14 +402,13 @@ fun FilePicker(
                                 isImage -> null
                                 else -> Icons.AutoMirrored.Outlined.InsertDriveFile
                             }
-                            val iconRes = if (isMpp) R.drawable.ic_notification else null
                             val detail = if (!isDir) {
                                 "${formatBytes(file.length())} · ${formatModDate(file.lastModified())}"
                             } else null
 
                             FilePickerRow(
                                 icon = icon,
-                                iconRes = iconRes,
+                                iconBitmap = if (isMpp) mppIcon else null,
                                 thumbnail = thumbnail,
                                 packageInfo = packageInfo,
                                 name = file.name,
@@ -442,7 +456,7 @@ private fun FilePickerRow(
     name: String,
     detail: String?,
     packageInfo: PackageInfo? = null,
-    iconRes: Int? = null,
+    iconBitmap: ImageBitmap? = null,
     thumbnail: ImageBitmap? = null,
     isSelected: Boolean = false,
     onClick: () -> Unit
@@ -476,9 +490,9 @@ private fun FilePickerRow(
                     .size(22.dp)
                     .clip(RoundedCornerShape(4.dp))
             )
-        } else if (iconRes != null) {
+        } else if (iconBitmap != null) {
             Icon(
-                painter = painterResource(iconRes),
+                bitmap = iconBitmap,
                 contentDescription = null,
                 tint = iconTint,
                 modifier = Modifier.size(22.dp)
