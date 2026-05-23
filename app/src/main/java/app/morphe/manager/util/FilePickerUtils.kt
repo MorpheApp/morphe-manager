@@ -264,10 +264,15 @@ fun Context.isAndroidTv(): Boolean {
  * Uses Morphe's built-in [FilePicker] when [PreferencesManager.useCustomFilePicker] is enabled.
  * Falls back to [ActivityResultContracts.GetContent] on phones/tablets.
  * Storage permission is requested automatically before showing the custom picker.
+ *
+ * [customPickerMimeTypes] overrides the MIME types passed to the custom picker only,
+ * allowing tighter extension filtering without affecting the system picker.
+ * Defaults to [mimeTypes] when not specified.
  */
 @Composable
 fun rememberAdaptiveFilePicker(
     mimeTypes: Array<String>,
+    customPickerMimeTypes: Array<String> = mimeTypes,
     onResult: (Uri?) -> Unit,
     allowFolderSelection: Boolean = false
 ): () -> Unit {
@@ -291,7 +296,7 @@ fun rememberAdaptiveFilePicker(
 
     if (showPickerState.value) {
         FilePicker(
-            mimeTypes = mimeTypes,
+            mimeTypes = customPickerMimeTypes,
             allowFolderSelection = allowFolderSelection,
             onDismiss = { showPickerState.value = false },
             onFilePicked = { file ->

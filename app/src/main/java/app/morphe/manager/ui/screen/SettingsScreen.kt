@@ -101,11 +101,17 @@ fun SettingsScreen(
 
     val importKeystoreLauncher = rememberAdaptiveFilePicker(
         mimeTypes = arrayOf("*/*"),
+        customPickerMimeTypes = arrayOf(
+            "application/x-pkcs12",
+            "application/x-java-keystore",
+            "application/vnd.morphe.keystore",
+        ),
         onResult = { uri -> uri?.let { importExportViewModel.startKeystoreImport(it) } }
     )
 
     val importSettingsLauncher = rememberAdaptiveFilePicker(
         mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE),
+        customPickerMimeTypes = arrayOf(JSON_MIMETYPE),
         onResult = { uri -> uri?.let { importExportViewModel.importManagerSettings(it) } }
     )
 
