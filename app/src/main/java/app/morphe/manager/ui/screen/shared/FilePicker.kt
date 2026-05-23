@@ -5,15 +5,15 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import android.content.pm.PackageInfo
 import android.os.Environment
+import android.util.LruCache
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.automirrored.outlined.InsertDriveFile
@@ -29,20 +29,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import android.content.pm.PackageInfo
-import android.util.LruCache
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.APK_EXTENSIONS
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.formatBytes
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 private val MIME_EXTENSION_MAP: Map<String, Set<String>> = mapOf(
     "application/vnd.android.package-archive" to setOf("apk", "apks", "xapk", "apkm"),
@@ -360,25 +359,17 @@ fun FilePicker(
                     .padding(horizontal = 16.dp, vertical = 12.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                OutlinedButton(
+                MorpheDialogOutlinedButton(
+                    text = stringResource(android.R.string.cancel),
                     onClick = onDismiss,
-                    modifier = Modifier.weight(1f),
-                    shape = RoundedCornerShape(24.dp),
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = LocalDialogTextColor.current
-                    ),
-                    border = BorderStroke(1.dp, LocalDialogTextColor.current.copy(alpha = 0.3f))
-                ) {
-                    Text(stringResource(android.R.string.cancel))
-                }
-                Button(
+                    modifier = Modifier.weight(1f)
+                )
+                MorpheDialogButton(
+                    text = stringResource(R.string.file_picker_select),
                     onClick = { selectedFile?.let { onFilePicked(it) } },
                     enabled = selectedFile != null,
-                    modifier = Modifier.weight(1f),
-                    shape = RoundedCornerShape(24.dp)
-                ) {
-                    Text(stringResource(R.string.file_picker_select))
-                }
+                    modifier = Modifier.weight(1f)
+                )
             }
         }
     }
