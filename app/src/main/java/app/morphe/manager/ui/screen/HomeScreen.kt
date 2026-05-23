@@ -115,19 +115,21 @@ fun HomeScreen(
     }
 
     val openApkPicker = rememberAdaptiveFilePicker(
-        mimeTypes = APK_FILE_MIME_TYPES
-    ) { uri -> uri?.let { homeViewModel.handleApkSelection(it) } }
+        mimeTypes = APK_FILE_MIME_TYPES,
+        onResult = { uri -> uri?.let { homeViewModel.handleApkSelection(it) } }
+    )
 
     val openBundlePicker = rememberAdaptiveFilePicker(
-        mimeTypes = MPP_FILE_MIME_TYPES
-    ) { uri ->
-        uri?.let {
-            homeViewModel.selectedBundleUri = it
-            homeViewModel.selectedBundlePath = it.displayName(context.contentResolver)
-                ?: it.lastPathSegment
-                ?: it.toString()
+        mimeTypes = MPP_FILE_MIME_TYPES,
+        onResult = { uri ->
+            uri?.let {
+                homeViewModel.selectedBundleUri = it
+                homeViewModel.selectedBundlePath = it.displayName(context.contentResolver)
+                    ?: it.lastPathSegment
+                    ?: it.toString()
+            }
         }
-    }
+    )
 
     val installAppsPermissionLauncher = rememberLauncherForActivityResult(
         contract = RequestInstallAppsContract

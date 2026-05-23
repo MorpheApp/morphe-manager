@@ -158,29 +158,32 @@ fun AdaptiveIconCreatorDialog(
     val context = LocalContext.current
 
     // Foreground image picker, resets all transforms when a new image is loaded
-    val openForegroundPicker = rememberAdaptiveFilePicker(mimeTypes = arrayOf("image/*")) { uri ->
-        uri?.let {
-            foregroundUri = it
-            showTransparencyWarning = false
-            scope.launch(Dispatchers.IO) {
-                try {
-                    val inputStream = context.contentResolver.openInputStream(it)
-                    val bitmap = BitmapFactory.decodeStream(inputStream)
-                    inputStream?.close()
-                    foregroundBitmap = bitmap
-                    val hasTransparency = bitmap?.hasTransparentPixels() == true
-                    // Reset transform when new image is loaded
-                    withContext(Dispatchers.Main) {
-                        scale = 1f; offsetX = 0f; offsetY = 0f
-                        notificationScale = 1f
-                        showTransparencyWarning = !hasTransparency
+    val openForegroundPicker = rememberAdaptiveFilePicker(
+        mimeTypes = arrayOf("image/*"),
+        onResult = { uri ->
+            uri?.let {
+                foregroundUri = it
+                showTransparencyWarning = false
+                scope.launch(Dispatchers.IO) {
+                    try {
+                        val inputStream = context.contentResolver.openInputStream(it)
+                        val bitmap = BitmapFactory.decodeStream(inputStream)
+                        inputStream?.close()
+                        foregroundBitmap = bitmap
+                        val hasTransparency = bitmap?.hasTransparentPixels() == true
+                        // Reset transform when new image is loaded
+                        withContext(Dispatchers.Main) {
+                            scale = 1f; offsetX = 0f; offsetY = 0f
+                            notificationScale = 1f
+                            showTransparencyWarning = !hasTransparency
+                        }
+                    } catch (e: Exception) {
+                        withContext(Dispatchers.Main) { context.toast("Failed to load image: ${e.message}") }
                     }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) { context.toast("Failed to load image: ${e.message}") }
                 }
             }
         }
-    }
+    )
 
     val successMessage = stringResource(R.string.adaptive_icon_created_success)
     val failureMessage = stringResource(R.string.adaptive_icon_creation_failed)

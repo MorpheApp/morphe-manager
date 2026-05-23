@@ -21,6 +21,7 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.FilePicker
 import org.koin.compose.koinInject
 import java.io.File
+import java.util.zip.ZipInputStream
 
 /** Parsed metadata from a .mpp patch bundle's META-INF/MANIFEST.MF entry. */
 data class MppManifest(
@@ -40,7 +41,7 @@ data class MppManifest(
  * Prefer using Uri directly with ContentResolver where possible.
  */
 fun Uri.toFilePath(): String {
-    // file:// URIs from the custom file picker — extract the path directly
+    // file:// URIs from the custom file picker - extract the path directly
     if (scheme == "file") return path ?: Uri.decode(toString())
 
     val docId: String? = when {
@@ -102,7 +103,7 @@ fun Uri.hasApkExtension(contentResolver: ContentResolver): Boolean =
 fun Uri.readMppManifest(contentResolver: ContentResolver): MppManifest? =
     runCatching {
         contentResolver.openInputStream(this)?.use { stream ->
-            java.util.zip.ZipInputStream(stream).use { zip ->
+            ZipInputStream(stream).use { zip ->
                 var manifest: MppManifest? = null
                 var entry = zip.nextEntry
                 while (entry != null && manifest == null) {
@@ -148,13 +149,31 @@ fun rememberFolderPicker(onFolderPicked: (Uri) -> Unit): () -> Unit {
  * Folder picker launcher with automatic permission handling.
  * Use this when storing the picked folder PATH as a patch option value (the patcher will
  * later read files from it via the File API, which requires MANAGE_EXTERNAL_STORAGE).
+ * Uses Morphe's built-in [FilePicker] when [PreferencesManager.useCustomFilePicker] is enabled,
+ * falling back to [ActivityResultContracts.OpenDocumentTree] otherwise.
  */
 @Composable
 fun rememberFolderPickerWithPermission(
     onFolderPicked: (Uri) -> Unit
 ): () -> Unit {
     val fs: Filesystem = koinInject()
+    val prefs: PreferencesManager = koinInject()
+    val useCustomPicker by prefs.useCustomFilePicker.getAsState()
+    val showPickerState = remember { mutableStateOf(false) }
 
+    if (showPickerState.value) {
+        FilePicker(
+            mimeTypes = arrayOf("*/*"),
+            allowFolderSelection = true,
+            onDismiss = { showPickerState.value = false },
+            onFilePicked = { file ->
+                showPickerState.value = false
+                onFolderPicked(Uri.fromFile(file))
+            }
+        )
+    }
+
+    // SAF launcher - always registered so the composable graph stays stable
     val folderPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocumentTree()
     ) { uri: Uri? ->
@@ -167,16 +186,20 @@ fun rememberFolderPickerWithPermission(
         contract = permissionContract
     ) { granted ->
         if (granted) {
-            folderPickerLauncher.launch(null)
+            if (useCustomPicker) showPickerState.value = true
+            else folderPickerLauncher.launch(null)
         }
     }
 
-    return remember {
+    return remember(useCustomPicker) {
         {
-            if (fs.hasStoragePermission()) {
-                folderPickerLauncher.launch(null)
-            } else {
-                permissionLauncher.launch(permissionName)
+            when {
+                useCustomPicker -> {
+                    if (fs.hasStoragePermission()) showPickerState.value = true
+                    else permissionLauncher.launch(permissionName)
+                }
+                fs.hasStoragePermission() -> folderPickerLauncher.launch(null)
+                else -> permissionLauncher.launch(permissionName)
             }
         }
     }
@@ -246,6 +269,7 @@ fun Context.isAndroidTv(): Boolean {
 fun rememberAdaptiveFilePicker(
     mimeTypes: Array<String>,
     onResult: (Uri?) -> Unit,
+    allowFolderSelection: Boolean = false
 ): () -> Unit {
     val context = LocalContext.current
     val isTV = remember { context.isAndroidTv() }
@@ -253,7 +277,7 @@ fun rememberAdaptiveFilePicker(
     val fs: Filesystem = koinInject()
     val useCustomPicker by prefs.useCustomFilePicker.getAsState()
 
-    // System launchers — always registered so the composable graph stays stable
+    // System launchers - always registered so the composable graph stays stable
     val tvLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument()
     ) { uri -> onResult(uri) }
@@ -272,6 +296,7 @@ fun rememberAdaptiveFilePicker(
     if (showPickerState.value) {
         FilePicker(
             mimeTypes = mimeTypes,
+            allowFolderSelection = allowFolderSelection,
             onDismiss = { showPickerState.value = false },
             onFilePicked = { file ->
                 showPickerState.value = false

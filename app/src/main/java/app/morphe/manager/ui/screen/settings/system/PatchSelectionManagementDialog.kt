@@ -162,10 +162,11 @@ private fun PatchSelectionManagementDialogContent(
     onShowPatchDetails: (PatchDetailsTarget) -> Unit
 ) {
     val openImportAllSelectionsPicker = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE)
-    ) { uri ->
-        uri?.let { importExportViewModel.importAllSelections(it) }
-    }
+        mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE),
+        onResult = { uri ->
+            uri?.let { importExportViewModel.importAllSelections(it) }
+        }
+    )
 
     val exportAllSelectionsLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument(JSON_MIMETYPE)

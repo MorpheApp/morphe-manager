@@ -1433,10 +1433,11 @@ private fun FilePathInputOption(
     val isInvalid = required && value.isBlank()
 
     val filePicker = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("*/*")
-    ) { uri ->
-        uri?.toFilePath()?.let { onValueChange(it) }
-    }
+        mimeTypes = arrayOf("*/*"),
+        onResult = { uri ->
+            uri?.toFilePath()?.let { onValueChange(it) }
+        }
+    )
 
     Column(
         modifier = Modifier.fillMaxWidth(),

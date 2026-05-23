@@ -121,7 +121,8 @@ private fun formatModDate(timestamp: Long): String =
 fun FilePicker(
     mimeTypes: Array<String>,
     onDismiss: () -> Unit,
-    onFilePicked: (File) -> Unit
+    onFilePicked: (File) -> Unit,
+    allowFolderSelection: Boolean = false
 ) {
     val prefs: PreferencesManager = koinInject()
     val pm: PM = koinInject()
@@ -366,8 +367,8 @@ fun FilePicker(
                 )
                 MorpheDialogButton(
                     text = stringResource(R.string.file_picker_select),
-                    onClick = { selectedFile?.let { onFilePicked(it) } },
-                    enabled = selectedFile != null,
+                    onClick = { (selectedFile ?: currentDir?.takeIf { allowFolderSelection })?.let { onFilePicked(it) } },
+                    enabled = selectedFile != null || (allowFolderSelection && currentDir != null),
                     modifier = Modifier.weight(1f)
                 )
             }

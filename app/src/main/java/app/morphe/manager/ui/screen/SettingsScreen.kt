@@ -100,12 +100,14 @@ fun SettingsScreen(
     val showChangelogDialog = remember { mutableStateOf(false) }
 
     val importKeystoreLauncher = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("*/*")
-    ) { uri -> uri?.let { importExportViewModel.startKeystoreImport(it) } }
+        mimeTypes = arrayOf("*/*"),
+        onResult = { uri -> uri?.let { importExportViewModel.startKeystoreImport(it) } }
+    )
 
     val importSettingsLauncher = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE)
-    ) { uri -> uri?.let { importExportViewModel.importManagerSettings(it) } }
+        mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE),
+        onResult = { uri -> uri?.let { importExportViewModel.importManagerSettings(it) } }
+    )
 
     // Export launchers
     val exportKeystoreLauncher = rememberLauncherForActivityResult(

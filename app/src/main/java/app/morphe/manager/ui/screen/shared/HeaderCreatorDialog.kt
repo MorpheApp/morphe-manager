@@ -120,57 +120,59 @@ fun HeaderCreatorDialog(
 
     // Light header image picker
     val openLightHeaderPicker = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("image/*")
-    ) { uri ->
-        uri?.let {
-            lightHeaderUri = it
-            scope.launch(Dispatchers.IO) {
-                try {
-                    val inputStream = context.contentResolver.openInputStream(it)
-                    val bitmap = BitmapFactory.decodeStream(inputStream)
-                    inputStream?.close()
-                    lightHeaderBitmap = bitmap
-                    // Reset transform when new image is loaded
-                    withContext(Dispatchers.Main) {
-                        lightScale = 1f
-                        lightOffsetX = 0f
-                        lightOffsetY = 0f
-                    }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        context.toast("Failed to load image: ${e.message}")
+        mimeTypes = arrayOf("image/*"),
+        onResult = { uri ->
+            uri?.let {
+                lightHeaderUri = it
+                scope.launch(Dispatchers.IO) {
+                    try {
+                        val inputStream = context.contentResolver.openInputStream(it)
+                        val bitmap = BitmapFactory.decodeStream(inputStream)
+                        inputStream?.close()
+                        lightHeaderBitmap = bitmap
+                        // Reset transform when new image is loaded
+                        withContext(Dispatchers.Main) {
+                            lightScale = 1f
+                            lightOffsetX = 0f
+                            lightOffsetY = 0f
+                        }
+                    } catch (e: Exception) {
+                        withContext(Dispatchers.Main) {
+                            context.toast("Failed to load image: ${e.message}")
+                        }
                     }
                 }
             }
         }
-    }
+    )
 
     // Dark header image picker
     val openDarkHeaderPicker = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("image/*")
-    ) { uri ->
-        uri?.let {
-            darkHeaderUri = it
-            scope.launch(Dispatchers.IO) {
-                try {
-                    val inputStream = context.contentResolver.openInputStream(it)
-                    val bitmap = BitmapFactory.decodeStream(inputStream)
-                    inputStream?.close()
-                    darkHeaderBitmap = bitmap
-                    // Reset transform when new image is loaded
-                    withContext(Dispatchers.Main) {
-                        darkScale = 1f
-                        darkOffsetX = 0f
-                        darkOffsetY = 0f
-                    }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        context.toast("Failed to load image: ${e.message}")
+        mimeTypes = arrayOf("image/*"),
+        onResult = { uri ->
+            uri?.let {
+                darkHeaderUri = it
+                scope.launch(Dispatchers.IO) {
+                    try {
+                        val inputStream = context.contentResolver.openInputStream(it)
+                        val bitmap = BitmapFactory.decodeStream(inputStream)
+                        inputStream?.close()
+                        darkHeaderBitmap = bitmap
+                        // Reset transform when new image is loaded
+                        withContext(Dispatchers.Main) {
+                            darkScale = 1f
+                            darkOffsetX = 0f
+                            darkOffsetY = 0f
+                        }
+                    } catch (e: Exception) {
+                        withContext(Dispatchers.Main) {
+                            context.toast("Failed to load image: ${e.message}")
+                        }
                     }
                 }
             }
         }
-    }
+    )
 
     // Folder picker for saving
     val successMessage = stringResource(R.string.header_creator_success)
