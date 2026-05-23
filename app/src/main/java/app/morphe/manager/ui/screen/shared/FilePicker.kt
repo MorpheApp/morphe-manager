@@ -323,6 +323,7 @@ fun FilePicker(
 
                             val icon = when {
                                 isDir -> Icons.Outlined.Folder
+                                canLoadIcon && packageInfo == null -> Icons.Outlined.Android
                                 canLoadIcon -> null
                                 isApk -> Icons.Outlined.Android
                                 else -> Icons.AutoMirrored.Outlined.InsertDriveFile
