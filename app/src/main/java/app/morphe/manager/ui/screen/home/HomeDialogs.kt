@@ -590,15 +590,14 @@ private fun ApkAvailabilityDialog(
                     layout = DialogButtonLayout.Vertical
                 )
 
-                // When the installed app uses split APKs and the saved original covers the
-                // same version, prefer the saved merged mono-APK.
-                // Hide the installed button in that case
-                val preferSavedOverInstalled = installedApkInfo?.isSplit == true &&
-                    savedApkInfo != null && savedApkInfo.version == installedApkInfo.version
+                // When the saved original covers the same version as the installed APK,
+                // prefer it for repatching and hide the duplicate installed option.
+                val preferSavedOverInstalled = savedApkInfo != null &&
+                    installedApkInfo != null &&
+                    savedApkInfo.version == installedApkInfo.version
 
-                // Saved APK button - hidden when a single-APK install covers the same version
-                if (savedApkInfo != null &&
-                    (preferSavedOverInstalled || installedApkInfo == null || savedApkInfo.version != installedApkInfo.version)) {
+                // Saved APK button
+                if (savedApkInfo != null) {
                     MorpheDialogOutlinedButton(
                         text = stringResource(
                             R.string.home_apk_use_saved_with_version,
@@ -610,7 +609,7 @@ private fun ApkAvailabilityDialog(
                     )
                 }
 
-                // Installed APK button - hidden when saved mono-APK covers the same split version
+                // Installed APK button - hidden when a saved APK covers the same version
                 if (installedApkInfo != null && !preferSavedOverInstalled) {
                     MorpheDialogOutlinedButton(
                         text = stringResource(
