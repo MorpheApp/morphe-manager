@@ -145,6 +145,8 @@ fun DinoGame(
     progress: Float? = null,
     extraActions: @Composable (() -> Unit)? = null
 ) {
+    GameOverHaptic(state.isGameOver)
+
     LaunchedEffect(Unit) {
         while (isActive) {
             withFrameMillis { state.tick(it) }

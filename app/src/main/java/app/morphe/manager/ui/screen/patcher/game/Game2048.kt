@@ -157,6 +157,8 @@ fun Game2048Board(
     progress: Float? = null,
     extraActions: @Composable (() -> Unit)? = null
 ) {
+    GameOverHaptic(state.isGameOver)
+
     BoxWithConstraints(modifier = modifier) {
         // 56.dp = ScoreRow height (44dp) + spacing between row and board (12dp)
         val boardSize = minOf(maxWidth, (maxHeight - 56.dp).coerceAtLeast(120.dp))

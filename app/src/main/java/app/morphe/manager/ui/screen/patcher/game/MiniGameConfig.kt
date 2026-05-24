@@ -5,6 +5,8 @@
 
 package app.morphe.manager.ui.screen.patcher.game
 
+import android.os.VibrationEffect
+import android.os.Vibrator
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -298,5 +301,15 @@ internal fun GameOverOverlay(score: Int, onRestart: () -> Unit, modifier: Modifi
                 Text(stringResource(R.string.mini_game_try_again))
             }
         }
+    }
+}
+
+@Composable
+internal fun GameOverHaptic(isGameOver: Boolean) {
+    val context = LocalContext.current
+    LaunchedEffect(isGameOver) {
+        if (!isGameOver) return@LaunchedEffect
+        val vibrator = context.getSystemService(Vibrator::class.java) ?: return@LaunchedEffect
+        vibrator.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 80, 50, 80), -1))
     }
 }

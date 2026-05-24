@@ -130,6 +130,8 @@ fun FlappyBirdGame(
     progress: Float? = null,
     extraActions: @Composable (() -> Unit)? = null
 ) {
+    GameOverHaptic(state.isGameOver)
+
     // Runs every vsync; tick() is a no-op when the game is paused or over
     LaunchedEffect(Unit) {
         while (isActive) {
