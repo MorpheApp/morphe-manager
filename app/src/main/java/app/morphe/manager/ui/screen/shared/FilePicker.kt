@@ -217,7 +217,7 @@ fun FilePicker(
     var currentDir by remember { mutableStateOf(downloadsDir) }
     var dirContents by remember { mutableStateOf<List<File>>(emptyList()) }
     var refreshKey by remember { mutableIntStateOf(0) }
-    var showStorageMenu by remember { mutableStateOf(false) }
+    var showBreadcrumbs by remember { mutableStateOf(false) }
     var sortMode by remember {
         mutableStateOf(runCatching { SortMode.valueOf(prefs.filePickerSortMode.getBlocking()) }.getOrDefault(SortMode.NAME_ASC))
     }
@@ -225,6 +225,19 @@ fun FilePicker(
     var showSearch by remember { mutableStateOf(false) }
     var searchQuery by remember { mutableStateOf("") }
     val searchFocusRequester = remember { FocusRequester() }
+
+    val breadcrumbs = remember(currentDir, roots) {
+        val dir = currentDir ?: return@remember emptyList()
+        val segments = mutableListOf<Pair<String, File>>()
+        var node: File? = dir
+        while (node != null) {
+            val root = roots.find { (_, r) -> r == node }
+            if (root != null) { segments.add(0, root.first to node); break }
+            segments.add(0, node.name to node)
+            node = node.parentFile
+        }
+        segments
+    }
 
     val sortedContents = remember(dirContents, sortMode) { applySort(dirContents, sortMode) }
     val displayedContents = remember(sortedContents, searchQuery) {
@@ -388,27 +401,48 @@ fun FilePicker(
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable(enabled = roots.size > 1) { showStorageMenu = true }
+                            .clickable { showBreadcrumbs = true }
                             .padding(horizontal = 16.dp, vertical = 6.dp)
                     )
                     DropdownMenu(
-                        expanded = showStorageMenu,
-                        onDismissRequest = { showStorageMenu = false }
+                        expanded = showBreadcrumbs,
+                        onDismissRequest = { showBreadcrumbs = false }
                     ) {
-                        roots.forEach { (label, root) ->
+                        breadcrumbs.forEachIndexed { index, (label, dir) ->
+                            val isRoot = index == 0
+                            val isCurrent = index == breadcrumbs.lastIndex
                             DropdownMenuItem(
                                 text = { Text(label) },
                                 leadingIcon = {
                                     Icon(
-                                        imageVector = Icons.Outlined.Storage,
+                                        imageVector = if (isRoot) Icons.Outlined.Storage else Icons.Outlined.Folder,
                                         contentDescription = null
                                     )
                                 },
+                                trailingIcon = if (isCurrent) {
+                                    { Icon(Icons.Outlined.Check, contentDescription = null) }
+                                } else null,
                                 onClick = {
-                                    currentDir = root
-                                    showStorageMenu = false
+                                    currentDir = dir
+                                    showBreadcrumbs = false
                                 }
                             )
+                        }
+                        val otherRoots = roots.filter { (_, root) -> breadcrumbs.none { (_, dir) -> dir == root } }
+                        if (otherRoots.isNotEmpty()) {
+                            HorizontalDivider()
+                            otherRoots.forEach { (label, root) ->
+                                DropdownMenuItem(
+                                    text = { Text(label) },
+                                    leadingIcon = {
+                                        Icon(Icons.Outlined.Storage, contentDescription = null)
+                                    },
+                                    onClick = {
+                                        currentDir = root
+                                        showBreadcrumbs = false
+                                    }
+                                )
+                            }
                         }
                     }
                 }
