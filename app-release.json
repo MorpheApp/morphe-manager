@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-05-23T22:47:15",
-  "description": "# [1.19.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.19.0-dev.4...v1.19.0-dev.5) (2026-05-23)\n\n\n### Bug Fixes\n\n* Align APK and split APK icon sizes in file picker ([29858a8](https://github.com/MorpheApp/morphe-manager/commit/29858a82c3bb193a6e142f2b3f2fc92b42ae2282))\n* Filter only JSON files in patch selections import custom file picker ([248849a](https://github.com/MorpheApp/morphe-manager/commit/248849a08575090daf65a43720badf2e9ca15174))\n\n\n### Features\n\n* Add file-type icons for keystores and JSON in file picker ([0a0ed51](https://github.com/MorpheApp/morphe-manager/commit/0a0ed51d35db010b42429b90e2c32367bec0712b))\n* Select file immediately on tap in file picker ([80070b8](https://github.com/MorpheApp/morphe-manager/commit/80070b85f95ae7026a72b60eea57e17d3026d25c))\n* Show icons for `.apkm` and `.xapk` files in file picker ([b1a6ee2](https://github.com/MorpheApp/morphe-manager/commit/b1a6ee24718b3c1433a0126eb2bb4e2117a75ed9))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.19.0-dev.5/morphe-manager-1.19.0-dev.5.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.19.0-dev.5/morphe-manager-1.19.0-dev.5.apk.asc",
-  "version": "1.19.0-dev.5"
+  "created_at": "2026-05-24T07:52:36",
+  "description": "# [1.19.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.19.0-dev.5...v1.19.0-dev.6) (2026-05-24)\n\n\n### Features\n\n* Add `Crossfade` and `AnimatedVisibility` transitions to file picker ([f935e66](https://github.com/MorpheApp/morphe-manager/commit/f935e669c4878d6796e57fe0d27db5f6f13c3ce4))\n* Add root filesystem entry to file picker for rooted devices ([1d928e2](https://github.com/MorpheApp/morphe-manager/commit/1d928e2e2152aee86c208972c0fc3ab008be192b))\n* Replace storage menu with breadcrumb path navigation in file picker ([d60f73b](https://github.com/MorpheApp/morphe-manager/commit/d60f73b75ad25595a555f181f324cb3c6a73f3a4))\n* Show left-truncated breadcrumb path in file picker path bar ([0489850](https://github.com/MorpheApp/morphe-manager/commit/0489850b4128ff4958e7a4cde9d93c5c9676258b))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.19.0-dev.6/morphe-manager-1.19.0-dev.6.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.19.0-dev.6/morphe-manager-1.19.0-dev.6.apk.asc",
+  "version": "1.19.0-dev.6"
 }

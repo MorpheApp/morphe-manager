@@ -1,3 +1,13 @@
+# [1.19.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.19.0-dev.5...v1.19.0-dev.6) (2026-05-24)
+
+
+### Features
+
+* Add `Crossfade` and `AnimatedVisibility` transitions to file picker ([f935e66](https://github.com/MorpheApp/morphe-manager/commit/f935e669c4878d6796e57fe0d27db5f6f13c3ce4))
+* Add root filesystem entry to file picker for rooted devices ([1d928e2](https://github.com/MorpheApp/morphe-manager/commit/1d928e2e2152aee86c208972c0fc3ab008be192b))
+* Replace storage menu with breadcrumb path navigation in file picker ([d60f73b](https://github.com/MorpheApp/morphe-manager/commit/d60f73b75ad25595a555f181f324cb3c6a73f3a4))
+* Show left-truncated breadcrumb path in file picker path bar ([0489850](https://github.com/MorpheApp/morphe-manager/commit/0489850b4128ff4958e7a4cde9d93c5c9676258b))
+
 # [1.19.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.19.0-dev.4...v1.19.0-dev.5) (2026-05-23)
 
 
