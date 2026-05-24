@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
@@ -47,6 +48,18 @@ data class DinoObstacle(
     val height: Float   // fraction of canvas height; max 0.15 keeps it always clearable
 )
 
+data class DinoSeagull(
+    val x: Float,         // left edge, fraction of canvas width
+    val y: Float,         // center y, fraction of canvas height
+    val wingPhase: Float  // 0..1, drives wing animation
+)
+
+data class DinoCloud(
+    val x: Float,    // center x, fraction of canvas width
+    val y: Float,    // center y, fraction of canvas height
+    val scale: Float // size multiplier
+)
+
 @Stable
 class DinoGameState : MiniGameStateBase {
     var dinoJump by mutableFloatStateOf(0f)  // upward offset from ground, fraction of canvas height
@@ -65,11 +78,17 @@ class DinoGameState : MiniGameStateBase {
         private set
     var isPaused by mutableStateOf(false)
         private set
+    var seagulls by mutableStateOf<List<DinoSeagull>>(emptyList())
+        private set
+    var clouds by mutableStateOf<List<DinoCloud>>(emptyList())
+        private set
 
     private var lastTickMs = 0L
     private var lastObstacleMs = 0L
     private var distanceTraveled = 0f
     private var elapsedSec = 0f
+    private var lastSeagullMs = 0L
+    private var lastCloudMs = 0L
 
     fun tap() {
         if (isGameOver) { restart(); return }
@@ -122,6 +141,29 @@ class DinoGameState : MiniGameStateBase {
         }
         obstacles = moved
         if (hit) isGameOver = true
+
+        // Clouds: slow decorative background elements
+        if (lastCloudMs == 0L) lastCloudMs = nowMs
+        clouds = clouds.mapNotNull { c ->
+            val nx = c.x - speed * 0.15f * dt
+            if (nx + c.scale * 0.22f < 0f) null else c.copy(x = nx)
+        }
+        if (nowMs - lastCloudMs >= 7000L) {
+            clouds = clouds + DinoCloud(1.08f, Random.nextFloat() * 0.20f + 0.04f, Random.nextFloat() * 0.45f + 0.65f)
+            lastCloudMs = nowMs
+        }
+
+        // Seagulls: occasional birds flying past in the sky
+        seagulls = seagulls.mapNotNull { g ->
+            val nx = g.x - speed * 0.65f * dt
+            if (nx < -0.12f) null else g.copy(x = nx, wingPhase = (g.wingPhase + dt * 2.5f) % 1f)
+        }
+        if (lastSeagullMs == 0L) lastSeagullMs = nowMs
+        val seagullGap = maxOf(2500L, (5000L - elapsedSec * 20).toLong())
+        if (nowMs - lastSeagullMs >= seagullGap) {
+            seagulls = seagulls + DinoSeagull(1.05f, Random.nextFloat() * 0.28f + 0.04f, 0f)
+            lastSeagullMs = nowMs
+        }
     }
 
     override fun restart() {
@@ -137,6 +179,13 @@ class DinoGameState : MiniGameStateBase {
         distanceTraveled = 0f
         elapsedSec = 0f
         legPhase = 0
+        seagulls = emptyList()
+        clouds = listOf(
+            DinoCloud(0.25f, Random.nextFloat() * 0.16f + 0.04f, Random.nextFloat() * 0.4f + 0.7f),
+            DinoCloud(0.68f, Random.nextFloat() * 0.16f + 0.04f, Random.nextFloat() * 0.4f + 0.7f)
+        )
+        lastSeagullMs = 0L
+        lastCloudMs = 0L
     }
 
     fun pause() { if (isStarted && !isGameOver) isPaused = true }
@@ -167,9 +216,40 @@ private fun DinoCanvas(state: DinoGameState, modifier: Modifier) {
             val h = size.height
             val gy = GROUND_Y * h
 
+            // Sky gradient
+            drawRect(
+                brush = Brush.verticalGradient(listOf(DinoSkyTop, DinoSkyHorizon), startY = 0f, endY = gy),
+                topLeft = Offset.Zero,
+                size = Size(w, gy)
+            )
+
             // Ground
             drawRect(DinoGround, Offset(0f, gy), Size(w, h - gy))
             drawLine(DinoGroundLine, Offset(0f, gy), Offset(w, gy), strokeWidth = 2f)
+
+            // Clouds
+            for (cloud in state.clouds) {
+                val cx = cloud.x * w
+                val cy = cloud.y * h
+                val r = cloud.scale * w * 0.055f
+                drawCircle(DinoCloudColor, r, Offset(cx, cy))
+                drawCircle(DinoCloudColor, r * 0.72f, Offset(cx - r * 0.85f, cy + r * 0.15f))
+                drawCircle(DinoCloudColor, r * 0.72f, Offset(cx + r * 0.85f, cy + r * 0.15f))
+                drawCircle(DinoCloudColor, r * 0.60f, Offset(cx - r * 0.42f, cy - r * 0.22f))
+                drawCircle(DinoCloudColor, r * 0.55f, Offset(cx + r * 0.55f, cy - r * 0.18f))
+            }
+
+            // Seagulls: V-shaped birds with animated wings
+            for (gull in state.seagulls) {
+                val gx = gull.x * w
+                val sy = gull.y * h
+                val span = w * 0.028f
+                val p = gull.wingPhase
+                val dip = if (p < 0.5f) p * 2f else 2f - p * 2f  // 0 -> 1 -> 0 per cycle
+                val tipY = sy - span * 0.55f * dip
+                drawLine(DinoGullColor, Offset(gx - span, tipY), Offset(gx, sy), strokeWidth = h * 0.006f)
+                drawLine(DinoGullColor, Offset(gx, sy), Offset(gx + span, tipY), strokeWidth = h * 0.006f)
+            }
 
             // Obstacles (cacti)
             for (obs in state.obstacles) {
@@ -259,8 +339,12 @@ private fun DinoCanvas(state: DinoGameState, modifier: Modifier) {
 }
 
 private val DinoBg         = Color(0xFFF5F0E8)
-private val DinoGround     = Color(0xFFE0D8CC)
-private val DinoGroundLine = Color(0xFFBBB5A8)
+private val DinoGround     = Color(0xFFEADA90)
+private val DinoGroundLine = Color(0xFFC8B060)
 private val DinoCactus     = Color(0xFF3E7D40)
 private val DinoBody       = Color(0xFF424242)
 private val DinoEye        = Color(0xFF212121)
+private val DinoSkyTop     = Color(0xFF5DA0CF)
+private val DinoSkyHorizon = Color(0xFFB4D6EC)
+private val DinoCloudColor = Color(0xFFFFFFFF)
+private val DinoGullColor  = Color(0xFF4A7A99)
