@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Refresh
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -144,15 +146,6 @@ class Game2048State {
 
 enum class Direction { LEFT, RIGHT, UP, DOWN }
 
-/**
- * Holds the state for every available mini-game.
- * Add new game states here as new games are introduced.
- */
-@Stable
-class MiniGameState {
-    val game2048 = Game2048State()
-}
-
 // Minimum drag distance (px) before a swipe is recognized as a move
 private const val SwipeThresholdPx = 40f
 private val TileGap = 8.dp
@@ -179,7 +172,7 @@ fun Game2048Board(
 
             if (state.hasWon && !state.isGameOver) {
                 Text(
-                    text = stringResource(R.string.game_2048_win),
+                    text = stringResource(R.string.mini_game_2048_win),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFFEDC22E)
@@ -202,7 +195,7 @@ private fun ScoreRow(
         verticalAlignment = Alignment.CenterVertically
     ) {
         GameChip(verticalPadding = 8.dp) {
-            Text(stringResource(R.string.game_2048_score, score),
+            Text(stringResource(R.string.mini_game_score, score),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold)
         }
@@ -218,23 +211,6 @@ private fun ScoreRow(
             Icon(Icons.Outlined.Refresh, contentDescription = null, modifier = Modifier.size(20.dp))
         }
         extraActions?.invoke()
-    }
-}
-
-@Composable
-private fun GameChip(
-    onClick: (() -> Unit)? = null,
-    verticalPadding: Dp = 12.dp,
-    content: @Composable () -> Unit
-) {
-    if (onClick != null) {
-        Surface(onClick = onClick, shape = RoundedCornerShape(10.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
-            Box(modifier = Modifier.padding(horizontal = 12.dp, vertical = verticalPadding)) { content() }
-        }
-    } else {
-        Surface(shape = RoundedCornerShape(10.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
-            Box(modifier = Modifier.padding(horizontal = 12.dp, vertical = verticalPadding)) { content() }
-        }
     }
 }
 
@@ -282,7 +258,7 @@ private fun BoardGrid(state: Game2048State, size: Dp) {
         }
 
         if (state.isGameOver) {
-            GameOverOverlay(onRestart = state::restart, modifier = Modifier.matchParentSize())
+            GameOverOverlay(score = state.score, onRestart = state::restart, modifier = Modifier.matchParentSize())
         }
     }
 }
@@ -312,29 +288,6 @@ private fun TileCell(value: Int, size: Dp, emptyColor: Color) {
                     else         -> 14.sp
                 }
             )
-        }
-    }
-}
-
-@Composable
-private fun GameOverOverlay(onRestart: () -> Unit, modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(12.dp))
-            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.92f)),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Text(
-                text = stringResource(R.string.game_2048_game_over),
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-            Button(onClick = onRestart) { Text(stringResource(R.string.game_2048_try_again)) }
         }
     }
 }

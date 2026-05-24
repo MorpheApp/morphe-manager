@@ -8,11 +8,10 @@ package app.morphe.manager.ui.screen.patcher
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.BarChart
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.SportsEsports
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -20,8 +19,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import app.morphe.manager.ui.screen.patcher.game.Game2048Board
-import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
@@ -35,6 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.ui.model.State
+import app.morphe.manager.ui.screen.patcher.game.MiniGameContent
+import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
@@ -256,26 +255,12 @@ private fun ProgressSlot(
 ) {
     Box(modifier = modifier) {
         if (showGame) {
-            Game2048Board(
-                state = miniGameState.game2048,
-                modifier = Modifier.fillMaxSize().padding(8.dp),
+            MiniGameContent(
+                state = miniGameState,
+                modifier = Modifier.fillMaxSize(),
                 progress = progress,
-                extraActions = {
-                    Surface(
-                        onClick = onToggleGame,
-                        shape = RoundedCornerShape(10.dp),
-                        color = MaterialTheme.colorScheme.surfaceVariant
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.BarChart,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier
-                                .padding(12.dp)
-                                .size(20.dp)
-                        )
-                    }
-                }
+                gameContentPadding = 8.dp,
+                onBackToHost = onToggleGame
             )
         } else {
             Column(
@@ -295,9 +280,7 @@ private fun ProgressSlot(
                             imageVector = Icons.Outlined.SportsEsports,
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier
-                                .padding(12.dp)
-                                .size(20.dp)
+                            modifier = Modifier.padding(12.dp).size(20.dp)
                         )
                     }
                 }

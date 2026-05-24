@@ -5,7 +5,9 @@
 
 package app.morphe.manager.ui.screen.patcher
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -54,11 +57,10 @@ import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREF
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_RUNTIME
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SUCCEEDED
 import app.morphe.manager.ui.model.State
+import app.morphe.manager.ui.screen.patcher.game.MiniGameContent
+import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
-import androidx.compose.runtime.saveable.rememberSaveable
-import app.morphe.manager.ui.screen.patcher.game.Game2048Board
-import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import kotlinx.coroutines.delay
 
 /** Brand blue — start of the progress gradient. */
@@ -746,7 +748,8 @@ private fun ExpertLogPanel(
     val rawLogs = patcherViewModel.logs
     // Convert the full list in one stateful pass so banner cards can aggregate metadata from auxiliary lines
     val logItems = remember(rawLogs.size) { rawLogs.toLogItems() }
-    var showGame by rememberSaveable { mutableStateOf(false) }
+    // 0 = logs, 1 = game
+    var activeTab by rememberSaveable { mutableIntStateOf(0) }
 
     Surface(
         modifier = modifier,
@@ -757,62 +760,61 @@ private fun ExpertLogPanel(
         Column(modifier = Modifier.fillMaxSize()) {
             LogPanelTabHeader(
                 isLive = patcherSucceeded == null,
-                showGame = showGame,
-                onShowGame = { showGame = it }
+                activeTab = activeTab,
+                onTabSelect = { activeTab = it }
             )
 
             HorizontalDivider(
                 color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
             )
 
-            if (showGame) {
-                Game2048Board(
-                    state = miniGameState.game2048,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp)
+            when (activeTab) {
+                1 -> MiniGameContent(
+                    state = miniGameState,
+                    modifier = Modifier.fillMaxSize()
                 )
-            } else {
-                LazyColumn(
-                    state = listState,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(vertical = 6.dp),
-                ) {
-                    if (rawLogs.isEmpty()) {
-                        item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 48.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                else -> {
+                    LazyColumn(
+                        state = listState,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(vertical = 6.dp),
+                    ) {
+                        if (rawLogs.isEmpty()) {
+                            item {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(vertical = 48.dp),
+                                    contentAlignment = Alignment.Center
                                 ) {
-                                    LiveIndicatorDot(size = 10.dp)
-                                    Text(
-                                        text = "Waiting for log output…",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f),
-                                        fontFamily = FontFamily.Monospace,
-                                        textAlign = TextAlign.Center
-                                    )
+                                    Column(
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                                    ) {
+                                        LiveIndicatorDot(size = 10.dp)
+                                        Text(
+                                            text = "Waiting for log output…",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f),
+                                            fontFamily = FontFamily.Monospace,
+                                            textAlign = TextAlign.Center
+                                        )
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    items(
-                        count = logItems.size,
-                        key = { index -> index }
-                    ) { index ->
-                        LogItemContent(logItems[index])
-                    }
+                        items(
+                            count = logItems.size,
+                            key = { index -> index }
+                        ) { index ->
+                            LogItemContent(logItems[index])
+                        }
 
-                    // Bottom padding so last item isn't clipped by rounded corners
-                    item { Spacer(Modifier.height(8.dp)) }
+                        // Bottom padding so last item isn't clipped by rounded corners
+                        item { Spacer(Modifier.height(8.dp)) }
+                    }
                 }
             }
         }
@@ -820,10 +822,14 @@ private fun ExpertLogPanel(
 }
 
 /**
- * Tab header that switches the log panel between patcher logs and the game.
+ * Tab header that switches the log panel between patcher logs and the mini-game.
  */
 @Composable
-private fun LogPanelTabHeader(isLive: Boolean, showGame: Boolean, onShowGame: (Boolean) -> Unit) {
+private fun LogPanelTabHeader(
+    isLive: Boolean,
+    activeTab: Int,
+    onTabSelect: (Int) -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -833,14 +839,14 @@ private fun LogPanelTabHeader(isLive: Boolean, showGame: Boolean, onShowGame: (B
     ) {
         LogTabChip(
             label = stringResource(R.string.patcher_tab_logs),
-            selected = !showGame,
-            onClick = { onShowGame(false) },
-            leadingContent = { LiveIndicatorDot(size = 8.dp, isLive = isLive && !showGame) }
+            selected = activeTab == 0,
+            onClick = { onTabSelect(0) },
+            leadingContent = { LiveIndicatorDot(size = 8.dp, isLive = isLive && activeTab == 0) }
         )
         LogTabChip(
-            label = stringResource(R.string.patcher_tab_game_2048),
-            selected = showGame,
-            onClick = { onShowGame(true) }
+            label = stringResource(R.string.patcher_tab_game),
+            selected = activeTab == 1,
+            onClick = { onTabSelect(1) }
         )
     }
 }
