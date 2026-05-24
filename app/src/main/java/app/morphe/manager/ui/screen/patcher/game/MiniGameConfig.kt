@@ -95,14 +95,11 @@ internal fun GameChip(
 
 /**
  * Game selection screen shown when no game is active yet.
- * [onClose] is optional; pass null when the caller's navigation already provides
- * a way to dismiss (e.g. Expert mode, clicking the Logs tab suffices).
  */
 @Composable
 internal fun GamePickerContent(
     onSelect: (MiniGame) -> Unit,
-    modifier: Modifier = Modifier,
-    onClose: (() -> Unit)? = null
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier,
@@ -125,12 +122,6 @@ internal fun GamePickerContent(
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
                     )
-                }
-            }
-            Spacer(Modifier.weight(1f))
-            if (onClose != null) {
-                GameChip(onClick = onClose) {
-                    Icon(Icons.Outlined.BarChart, contentDescription = null, modifier = Modifier.size(20.dp))
                 }
             }
         }
@@ -224,57 +215,46 @@ private fun GamePickerGridCard(
 /**
  * Unified slot that shows either the game picker or the active game.
  * Handles all picker/game switching internally so callers only need to pass state.
- *
- * [onBackToHost] adds a BarChart chip that exits the game slot entirely (Simple mode only).
- * Pass null in Expert mode where the Logs tab serves that purpose.
  */
 @Composable
 internal fun MiniGameContent(
     state: MiniGameState,
-    modifier: Modifier = Modifier,
-    progress: Float? = null,
-    gameContentPadding: Dp = 16.dp,
-    onBackToHost: (() -> Unit)? = null
+    progress: Float? = null
 ) {
+    val contentModifier = Modifier.fillMaxSize().padding(16.dp)
     when (val selected = state.selectedGame) {
         null -> GamePickerContent(
             onSelect = { state.selectGame(it) },
-            modifier = modifier.padding(gameContentPadding),
-            onClose = onBackToHost
+            modifier = contentModifier
         )
         else -> {
             val extraActions: @Composable () -> Unit = {
                 GameChip(onClick = { state.selectedGame = null }) {
                     Icon(Icons.Outlined.SportsEsports, contentDescription = null, modifier = Modifier.size(20.dp))
                 }
-                if (onBackToHost != null) {
-                    GameChip(onClick = onBackToHost) {
-                        Icon(Icons.Outlined.BarChart, contentDescription = null, modifier = Modifier.size(20.dp))
-                    }
-                }
             }
             when (selected) {
                 MiniGame.GAME_2048 -> Game2048Board(
                     state = state.game2048,
-                    modifier = modifier.padding(gameContentPadding),
+                    modifier = contentModifier,
                     progress = progress,
                     extraActions = extraActions
                 )
                 MiniGame.FLAPPY -> FlappyBirdGame(
                     state = state.flappy,
-                    modifier = modifier.padding(gameContentPadding),
+                    modifier = contentModifier,
                     progress = progress,
                     extraActions = extraActions
                 )
                 MiniGame.SNAKE -> SnakeGame(
                     state = state.snake,
-                    modifier = modifier.padding(gameContentPadding),
+                    modifier = contentModifier,
                     progress = progress,
                     extraActions = extraActions
                 )
                 MiniGame.DINO -> DinoGame(
                     state = state.dino,
-                    modifier = modifier.padding(gameContentPadding),
+                    modifier = contentModifier,
                     progress = progress,
                     extraActions = extraActions
                 )

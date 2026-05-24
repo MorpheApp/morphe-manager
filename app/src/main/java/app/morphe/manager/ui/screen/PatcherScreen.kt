@@ -460,7 +460,6 @@ fun PatcherScreen(
                             patchesProgress = patchesProgress,
                             patcherViewModel = patcherViewModel,
                             showLongStepWarning = showLongStepWarning,
-                            miniGameState = miniGameState,
                             onCancelClick = { state.showCancelDialog = true },
                             onHomeClick = onBackClick
                         )

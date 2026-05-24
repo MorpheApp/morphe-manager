@@ -769,10 +769,7 @@ private fun ExpertLogPanel(
             )
 
             when (activeTab) {
-                1 -> MiniGameContent(
-                    state = miniGameState,
-                    modifier = Modifier.fillMaxSize()
-                )
+                1 -> MiniGameContent(state = miniGameState)
                 else -> {
                     LazyColumn(
                         state = listState,
