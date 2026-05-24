@@ -397,17 +397,25 @@ Uninstalling will permanently erase all app data"</string>
 
     <!-- Patcher Screen - Mini-games -->
     <string name="mini_game_picker_title">Pick a game</string>
-    <string name="mini_game_2048_picker_subtitle">Slide tiles to merge</string>
-    <string name="mini_game_flappy_picker_subtitle">Tap to fly through pipes</string>
     <string name="mini_game_score">Score %d</string>
     <string name="mini_game_game_over">Game Over</string>
     <string name="mini_game_try_again">Try Again</string>
 
     <string name="mini_game_2048" translatable="false">2048</string>
+    <string name="mini_game_2048_picker_subtitle">Slide tiles to merge</string>
     <string name="mini_game_2048_win" translatable="false">2048!</string>
 
     <string name="mini_game_flappy" translatable="false">Flappy</string>
+    <string name="mini_game_flappy_picker_subtitle">Tap to fly through pipes</string>
     <string name="mini_game_flappy_tap_to_start">Tap to fly</string>
+
+    <string name="mini_game_snake" translatable="false">Snake</string>
+    <string name="mini_game_snake_picker_subtitle">Eat food, don\'t hit yourself</string>
+    <string name="mini_game_snake_swipe_to_start">Swipe to start</string>
+
+    <string name="mini_game_dino" translatable="false">Dino</string>
+    <string name="mini_game_dino_picker_subtitle">Tap to jump over cacti</string>
+    <string name="mini_game_dino_tap_to_start">Tap to run</string>
 
     <!-- Settings -->
     <string name="appearance">Appearance</string>

@@ -9,10 +9,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Air
-import androidx.compose.material.icons.outlined.BarChart
-import androidx.compose.material.icons.outlined.Grid4x4
-import androidx.compose.material.icons.outlined.SportsEsports
+import androidx.compose.material.icons.automirrored.outlined.DirectionsRun
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -28,11 +26,12 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.GradientCircleIcon
 import app.morphe.manager.ui.screen.shared.MorpheCard
 import app.morphe.manager.ui.screen.shared.MorpheDefaults
-import app.morphe.manager.ui.screen.shared.SectionTitle
 
 enum class MiniGame {
     GAME_2048,
-    FLAPPY
+    FLAPPY,
+    SNAKE,
+    DINO
 }
 
 /**
@@ -43,6 +42,8 @@ enum class MiniGame {
 class MiniGameState {
     val game2048 = Game2048State()
     val flappy = FlappyGameState()
+    val snake = SnakeGameState()
+    val dino = DinoGameState()
     var selectedGame by mutableStateOf<MiniGame?>(null)
 
     fun selectGame(game: MiniGame) {
@@ -50,6 +51,8 @@ class MiniGameState {
             when (selectedGame) {
                 MiniGame.GAME_2048 -> game2048.restart()
                 MiniGame.FLAPPY -> flappy.restart()
+                MiniGame.SNAKE -> snake.restart()
+                MiniGame.DINO -> dino.restart()
                 null -> {}
             }
         }
@@ -89,15 +92,29 @@ internal fun GamePickerContent(
     onClose: (() -> Unit)? = null
 ) {
     Column(
-        modifier = modifier.padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            SectionTitle(text = stringResource(R.string.mini_game_picker_title), icon = Icons.Outlined.SportsEsports)
+            GameChip(verticalPadding = 8.dp) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(Icons.Outlined.SportsEsports, contentDescription = null, modifier = Modifier.size(20.dp))
+                    Text(
+                        text = stringResource(R.string.mini_game_picker_title),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+            }
+            Spacer(Modifier.weight(1f))
             if (onClose != null) {
                 GameChip(onClick = onClose) {
                     Icon(Icons.Outlined.BarChart, contentDescription = null, modifier = Modifier.size(20.dp))
@@ -105,29 +122,49 @@ internal fun GamePickerContent(
             }
         }
 
-        Spacer(Modifier.weight(1f))
-
-        Row(
+        Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            GamePickerGridCard(
-                icon = Icons.Outlined.Grid4x4,
-                title = stringResource(R.string.mini_game_2048),
-                subtitle = stringResource(R.string.mini_game_2048_picker_subtitle),
-                onClick = { onSelect(MiniGame.GAME_2048) },
-                modifier = Modifier.weight(1f)
-            )
-            GamePickerGridCard(
-                icon = Icons.Outlined.Air,
-                title = stringResource(R.string.mini_game_flappy),
-                subtitle = stringResource(R.string.mini_game_flappy_picker_subtitle),
-                onClick = { onSelect(MiniGame.FLAPPY) },
-                modifier = Modifier.weight(1f)
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                GamePickerGridCard(
+                    icon = Icons.Outlined.Grid4x4,
+                    title = stringResource(R.string.mini_game_2048),
+                    subtitle = stringResource(R.string.mini_game_2048_picker_subtitle),
+                    onClick = { onSelect(MiniGame.GAME_2048) },
+                    modifier = Modifier.weight(1f)
+                )
+                GamePickerGridCard(
+                    icon = Icons.Outlined.Air,
+                    title = stringResource(R.string.mini_game_flappy),
+                    subtitle = stringResource(R.string.mini_game_flappy_picker_subtitle),
+                    onClick = { onSelect(MiniGame.FLAPPY) },
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                GamePickerGridCard(
+                    icon = Icons.Outlined.Gesture,
+                    title = stringResource(R.string.mini_game_snake),
+                    subtitle = stringResource(R.string.mini_game_snake_picker_subtitle),
+                    onClick = { onSelect(MiniGame.SNAKE) },
+                    modifier = Modifier.weight(1f)
+                )
+                GamePickerGridCard(
+                    icon = Icons.AutoMirrored.Outlined.DirectionsRun,
+                    title = stringResource(R.string.mini_game_dino),
+                    subtitle = stringResource(R.string.mini_game_dino_picker_subtitle),
+                    onClick = { onSelect(MiniGame.DINO) },
+                    modifier = Modifier.weight(1f)
+                )
+            }
         }
-
-        Spacer(Modifier.weight(1f))
     }
 }
 
@@ -189,7 +226,7 @@ internal fun MiniGameContent(
     when (val selected = state.selectedGame) {
         null -> GamePickerContent(
             onSelect = { state.selectGame(it) },
-            modifier = modifier,
+            modifier = modifier.padding(gameContentPadding),
             onClose = onBackToHost
         )
         else -> {
@@ -212,6 +249,18 @@ internal fun MiniGameContent(
                 )
                 MiniGame.FLAPPY -> FlappyBirdGame(
                     state = state.flappy,
+                    modifier = modifier.padding(gameContentPadding),
+                    progress = progress,
+                    extraActions = extraActions
+                )
+                MiniGame.SNAKE -> SnakeGame(
+                    state = state.snake,
+                    modifier = modifier.padding(gameContentPadding),
+                    progress = progress,
+                    extraActions = extraActions
+                )
+                MiniGame.DINO -> DinoGame(
+                    state = state.dino,
                     modifier = modifier.padding(gameContentPadding),
                     progress = progress,
                     extraActions = extraActions
