@@ -35,10 +35,6 @@ class AboutViewModel : ViewModel() {
                 url = "https://github.com/MorpheApp"
             ),
             SocialLink(
-                name = "X",
-                url = "https://x.com/MorpheApp"
-            ),
-            SocialLink(
                 name = "Reddit",
                 url = "https://reddit.com/r/MorpheApp"
             ),
@@ -53,7 +49,6 @@ class AboutViewModel : ViewModel() {
             "GitHub" to FontAwesomeIcons.Brands.Github,
             "Changelog" to Icons.AutoMirrored.Outlined.Article,
             "Reddit" to FontAwesomeIcons.Brands.RedditAlien,
-            "X" to FontAwesomeIcons.Brands.XTwitter,
             "Crowdin" to Icons.Outlined.Translate,
         )
 
