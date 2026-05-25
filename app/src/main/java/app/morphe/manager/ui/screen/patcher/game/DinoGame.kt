@@ -154,7 +154,11 @@ class DinoGameState : MiniGameStateBase {
             if (nx + c.scale * 0.22f < 0f) null else c.copy(x = nx)
         }
         if (nowMs - lastCloudMs >= 7000L) {
-            clouds = clouds + DinoCloud(1.08f, Random.nextFloat() * 0.20f + 0.04f, Random.nextFloat() * 0.45f + 0.65f)
+            clouds = clouds + DinoCloud(
+                x = 1.08f,
+                y = Random.nextFloat() * 0.20f + 0.04f,
+                scale = Random.nextFloat() * 0.45f + 0.65f
+            )
             lastCloudMs = nowMs
         }
 
@@ -335,7 +339,12 @@ private fun DinoCanvas(state: DinoGameState, modifier: Modifier) {
         }
 
         if (state.isGameOver) {
-            GameOverOverlay(score = state.score, highScore = state.highScore, onRestart = state::restart, modifier = Modifier.fillMaxSize())
+            GameOverOverlay(
+                score = state.score,
+                highScore = state.highScore,
+                onRestart = state::restart,
+                modifier = Modifier.fillMaxSize()
+            )
         }
         if (state.isPaused) {
             GamePauseOverlay(onResume = state::resume, modifier = Modifier.fillMaxSize())

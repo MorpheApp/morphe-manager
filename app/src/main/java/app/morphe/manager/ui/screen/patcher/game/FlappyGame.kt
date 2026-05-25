@@ -204,7 +204,7 @@ private fun FlappyCanvas(state: FlappyGameState, modifier: Modifier) {
 
             // Eye (white + pupil)
             drawCircle(Color.White, radius = br * 0.38f, center = Offset(bx + br * 0.3f, by - br * 0.15f))
-            drawCircle(Color(0xFF212121), radius = br * 0.2f, center = Offset(bx + br * 0.38f, by - br * 0.15f))
+            drawCircle(FlappyPupil, radius = br * 0.2f, center = Offset(bx + br * 0.38f, by - br * 0.15f))
 
             // Beak (right-pointing triangle)
             drawPath(
@@ -218,7 +218,6 @@ private fun FlappyCanvas(state: FlappyGameState, modifier: Modifier) {
             )
         }
 
-        // "Tap to fly" prompt shown before first tap
         if (!state.isStarted && !state.isGameOver) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
@@ -235,9 +234,13 @@ private fun FlappyCanvas(state: FlappyGameState, modifier: Modifier) {
             }
         }
 
-        // Game over overlay
         if (state.isGameOver) {
-            GameOverOverlay(score = state.score, highScore = state.highScore, onRestart = state::restart, modifier = Modifier.fillMaxSize())
+            GameOverOverlay(
+                score = state.score,
+                highScore = state.highScore,
+                onRestart = state::restart,
+                modifier = Modifier.fillMaxSize()
+            )
         }
         if (state.isPaused) {
             GamePauseOverlay(onResume = state::resume, modifier = Modifier.fillMaxSize())
@@ -251,3 +254,4 @@ private val FlappyPipeFill = Color(0xFF73C02A)
 private val FlappyPipeCap = Color(0xFF5A9820)
 private val FlappyBirdBody = Color(0xFFFDD835)
 private val FlappyBirdBeak = Color(0xFFFF8F00)
+private val FlappyPupil    = Color(0xFF212121)

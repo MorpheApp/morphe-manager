@@ -71,7 +71,9 @@ class SnakeGameState : MiniGameStateBase {
             SnakeDir.LEFT  -> hx - 1 to hy
             SnakeDir.RIGHT -> hx + 1 to hy
         }
-        if (newHead.first !in 0 until SNAKE_GRID || newHead.second !in 0 until SNAKE_GRID || snake.contains(newHead)) {
+        if (newHead.first !in 0 until SNAKE_GRID ||
+            newHead.second !in 0 until SNAKE_GRID ||
+            snake.contains(newHead)) {
             if (score > highScore) highScore = score
             isGameOver = true; return
         }
@@ -185,7 +187,12 @@ private fun SnakeCanvas(state: SnakeGameState, modifier: Modifier) {
         }
 
         if (state.isGameOver) {
-            GameOverOverlay(score = state.score, highScore = state.highScore, onRestart = state::restart, modifier = Modifier.fillMaxSize())
+            GameOverOverlay(
+                score = state.score,
+                highScore = state.highScore,
+                onRestart = state::restart,
+                modifier = Modifier.fillMaxSize()
+            )
         }
         if (state.isPaused) {
             GamePauseOverlay(onResume = state::resume, modifier = Modifier.fillMaxSize())

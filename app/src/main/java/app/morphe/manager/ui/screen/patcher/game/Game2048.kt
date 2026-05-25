@@ -179,14 +179,12 @@ fun Game2048Board(state: Game2048State) {
 @Composable
 private fun BoardGrid(state: Game2048State, size: Dp) {
     val tileSize = (size - TileGap * 5) / 4
-    val boardBg = Color(0xFFBBADA0)
-    val emptyTileBg = Color(0xFFCDC1B4)
 
     Box(
         modifier = Modifier
             .size(size)
             .clip(RoundedCornerShape(12.dp))
-            .background(boardBg)
+            .background(BoardBg)
             .pointerInput(Unit) {
                 var drag = Offset.Zero
                 detectDragGestures(
@@ -213,14 +211,19 @@ private fun BoardGrid(state: Game2048State, size: Dp) {
             for (r in 0 until BOARD_SIZE) {
                 Row(horizontalArrangement = Arrangement.spacedBy(TileGap)) {
                     for (c in 0 until BOARD_SIZE) {
-                        TileCell(value = state.board[r][c], size = tileSize, emptyColor = emptyTileBg)
+                        TileCell(value = state.board[r][c], size = tileSize, emptyColor = EmptyTileBg)
                     }
                 }
             }
         }
 
         if (state.isGameOver) {
-            GameOverOverlay(score = state.score, highScore = state.highScore, onRestart = state::restart, modifier = Modifier.matchParentSize())
+            GameOverOverlay(
+                score = state.score,
+                highScore = state.highScore,
+                onRestart = state::restart,
+                modifier = Modifier.matchParentSize()
+            )
         }
         if (state.isPaused) {
             GamePauseOverlay(onResume = state::resume, modifier = Modifier.matchParentSize())
@@ -256,6 +259,9 @@ private fun TileCell(value: Int, size: Dp, emptyColor: Color) {
         }
     }
 }
+
+private val BoardBg     = Color(0xFFBBADA0)
+private val EmptyTileBg = Color(0xFFCDC1B4)
 
 // Classic 2048 tile palette
 private fun tileBackground(value: Int): Color = when (value) {

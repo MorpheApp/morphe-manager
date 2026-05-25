@@ -40,7 +40,7 @@ enum class MiniGame {
     DINO
 }
 
-/** Common state contract for all mini-games — exposes only what the shared UI layer needs. */
+/** Common state contract for all mini-games, exposes only what the shared UI layer needs. */
 interface MiniGameStateBase {
     val score: Int
     val highScore: Int
@@ -377,7 +377,12 @@ internal fun GameScoreRow(
 
 /** Full-screen overlay shown when a game ends, displaying the final [score] and a restart button. */
 @Composable
-internal fun GameOverOverlay(score: Int, highScore: Int, onRestart: () -> Unit, modifier: Modifier = Modifier) {
+internal fun GameOverOverlay(
+    score: Int,
+    highScore: Int,
+    onRestart: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
