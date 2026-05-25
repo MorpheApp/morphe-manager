@@ -83,6 +83,14 @@ class SessionInstaller(private val app: Application) {
 
             val sessionId = installer.createSession(params)
             Log.d(TAG, "Created session $sessionId for ${apkFile.name}")
+            var registeredReceiver: BroadcastReceiver? = null
+
+            fun unregisterRegisteredReceiver() {
+                registeredReceiver?.let { receiver ->
+                    runCatching { app.unregisterReceiver(receiver) }
+                    registeredReceiver = null
+                }
+            }
 
             try {
                 installer.openSession(sessionId).use { session ->
@@ -114,7 +122,7 @@ class SessionInstaller(private val app: Application) {
 
                             when (status) {
                                 PackageInstaller.STATUS_SUCCESS -> {
-                                    app.unregisterReceiver(this)
+                                    unregisterRegisteredReceiver()
                                     cont.resume(InstallResult.Success)
                                 }
 
@@ -134,17 +142,17 @@ class SessionInstaller(private val app: Application) {
                                 }
 
                                 PackageInstaller.STATUS_FAILURE_ABORTED -> {
-                                    app.unregisterReceiver(this)
+                                    unregisterRegisteredReceiver()
                                     cont.resumeWithException(InstallCancelledException())
                                 }
 
                                 PackageInstaller.STATUS_FAILURE_CONFLICT -> {
-                                    app.unregisterReceiver(this)
+                                    unregisterRegisteredReceiver()
                                     cont.resume(InstallResult.Conflict(message))
                                 }
 
                                 else -> {
-                                    app.unregisterReceiver(this)
+                                    unregisterRegisteredReceiver()
                                     if (message?.contains("dead", ignoreCase = true) == true ||
                                         message?.contains("abandoned", ignoreCase = true) == true
                                     ) {
@@ -158,15 +166,17 @@ class SessionInstaller(private val app: Application) {
                     }
 
                     registerReceiverCompat(receiver, IntentFilter(ACTION_INSTALL_STATUS))
+                    registeredReceiver = receiver
 
                     cont.invokeOnCancellation {
-                        runCatching { app.unregisterReceiver(receiver) }
+                        unregisterRegisteredReceiver()
                         runCatching { installer.abandonSession(sessionId) }
                     }
 
                     session.commit(pi.intentSender)
                 }
             } catch (e: Exception) {
+                unregisterRegisteredReceiver()
                 runCatching { installer.abandonSession(sessionId) }
                 throw e
             }

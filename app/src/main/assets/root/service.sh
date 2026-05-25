@@ -1,6 +1,6 @@
 #!/system/bin/sh
-package_name="__PKG_NAME__"
-version="__VERSION__"
+package_name=__PKG_NAME_SH__
+version=__VERSION_SH__
 
 # Resolve the module directory from the script's own path.
 # Falls back to the standard Magisk modules path if readlink is unavailable

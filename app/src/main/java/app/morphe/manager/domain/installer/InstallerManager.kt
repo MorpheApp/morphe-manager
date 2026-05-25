@@ -199,6 +199,9 @@ class InstallerManager(
         runCatching {
             app.revokeUriPermission(plan.uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
+        runCatching {
+            plan.sharedFile.takeIf { it.exists() }?.delete()
+        }
     }
 
     private fun readCustomInstallerTokens(): List<Token.Component> =

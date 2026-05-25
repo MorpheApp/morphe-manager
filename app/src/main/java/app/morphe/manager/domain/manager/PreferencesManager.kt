@@ -206,7 +206,7 @@ class PreferencesManager(
         installerCustomComponents = installerCustomComponents.get(),
         installerHiddenComponents = installerHiddenComponents.get(),
         keystoreAlias = keystoreAlias.get(),
-        keystorePass = keystorePass.get(),
+        keystorePass = null,
         firstLaunch = firstLaunch.get(),
         useManagerPrereleases = useManagerPrereleases.get(),
         bundlePrereleasesEnabled = bundlePrereleasesEnabled.get(),

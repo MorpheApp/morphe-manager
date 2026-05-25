@@ -133,13 +133,16 @@ class UpdateViewModel(
                             }
                         )
                     } else {
-                        http.download(location, resumeOffset) {
-                            url(release.downloadUrl)
-                            onDownload { bytesSentTotal, contentLength ->
-                                downloadedSize = resumeOffset + bytesSentTotal
-                                totalSize = resumeOffset + (contentLength ?: totalSize)
+                        http.download(
+                            saveLocation = location,
+                            resumeFrom = resumeOffset,
+                            builder = { url(release.downloadUrl) },
+                            onProgress = { bytesRead, contentLength, resumed ->
+                                downloadedSize = bytesRead
+                                totalSize = contentLength ?: totalSize
+                                if (!resumed) canResumeDownload = false
                             }
-                        }
+                        )
                     }
                 }
                 canResumeDownload = false

@@ -314,7 +314,11 @@ class PatcherViewModel(
             } else {
                 0.0
             }
-        } + ((completedPatchCount / patchCount.toDouble()) * patchesPercentage)
+        } + if (patchCount > 0) {
+            (completedPatchCount / patchCount.toDouble()) * patchesPercentage
+        } else {
+            0.0
+        }
 
         min(1.0, currentProgress).toFloat()
     }

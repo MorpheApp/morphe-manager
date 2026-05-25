@@ -36,6 +36,7 @@ import kotlinx.coroutines.sync.withLock
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
+import java.io.IOException
 import java.net.URI
 import java.net.URISyntaxException
 import java.nio.ByteBuffer
@@ -899,9 +900,9 @@ class PatchBundleRepository(
                         copyTotal = copyRead
                     }
 
-                    val manifestName = runCatching {
-                        PatchBundle(tempFile.absolutePath).manifestAttributes?.name
-                    }.getOrNull()?.takeUnless { it.isBlank() }
+                    val manifestAttributes = PatchBundle(tempFile.absolutePath).manifestAttributes
+                        ?: throw IOException("Invalid patch bundle manifest")
+                    val manifestName = manifestAttributes.name?.takeUnless { it.isBlank() }
 
                     // Block importing official Morphe source
 //                    if (manifestName?.equals(SOURCE_NAME, ignoreCase = true) == true) {
@@ -978,6 +979,9 @@ class PatchBundleRepository(
                             runCatching {
                                 localBundle.patchesJarFile.delete()
                             }
+                            runCatching {
+                                dao.remove(entity.uid)
+                            }
                         }
                     }
                 } finally {
@@ -1038,6 +1042,7 @@ class PatchBundleRepository(
     suspend fun createRemote(
         url: String,
         autoUpdate: Boolean,
+        displayName: String? = null,
         createdAt: Long? = null,
         updatedAt: Long? = null,
         onProgress: PatchBundleDownloadProgress? = null,
@@ -1082,6 +1087,7 @@ class PatchBundleRepository(
                 "",
                 SourceInfo.from(normalizedUrl),
                 autoUpdate,
+                displayName = displayName,
                 createdAt = createdAt,
                 updatedAt = updatedAt
             ).load() as RemotePatchBundle
@@ -1142,13 +1148,23 @@ class PatchBundleRepository(
 
     fun normalizeRemoteBundleUrl(input: String): String {
         val trimmed = input.trim()
+        val normalizedInput = if (trimmed.contains("://")) trimmed else "https://$trimmed"
         val parsed = try {
-            Url(trimmed)
+            Url(normalizedInput)
         } catch (e: Exception) {
+            throw IllegalArgumentException("Invalid bundle URL: ${e.message ?: trimmed}")
+        }
+        val uri = try {
+            URI(normalizedInput)
+        } catch (e: URISyntaxException) {
             throw IllegalArgumentException("Invalid bundle URL: ${e.message ?: trimmed}")
         }
 
         val host = parsed.host
+        val scheme = parsed.protocol.name.lowercase(Locale.US)
+        if (scheme != "http" && scheme != "https") {
+            throw IllegalArgumentException("Unsupported bundle URL scheme: $scheme")
+        }
         val pathSegments = parsed.encodedPath.trim('/').split('/').filter { it.isNotBlank() }
 
         // Handle GitHub repository URLs
@@ -1173,9 +1189,7 @@ class PatchBundleRepository(
             val branch = when {
                 // URL format: github.com/owner/repo/tree/branch/path...
                 pathSegments.size >= 4 && pathSegments[2] == "tree" -> {
-                    val branchSegments = pathSegments.drop(3)
-                    // Find where the branch name ends (could be multi-segment like "refs/heads/main")
-                    branchSegments.takeWhile { !it.endsWith(".json") }.joinToString("/")
+                    pathSegments[3]
                 }
                 // URL format: github.com/owner/repo/blob/branch/path...
                 pathSegments.size >= 4 && pathSegments[2] == "blob" -> {
@@ -1188,9 +1202,8 @@ class PatchBundleRepository(
             // Get the remaining path after branch (if any)
             val remainingPath = when {
                 pathSegments.size >= 4 && pathSegments[2] == "tree" -> {
-                    // For tree URLs, get everything after the branch
-                    val branchSegmentCount = branch.split("/").size
-                    pathSegments.drop(3 + branchSegmentCount).joinToString("/")
+                    // For tree URLs, get everything after the branch.
+                    pathSegments.drop(4).joinToString("/")
                 }
                 pathSegments.size >= 5 && pathSegments[2] == "blob" -> {
                     // For blob URLs, get everything after the branch
@@ -1255,7 +1268,21 @@ class PatchBundleRepository(
                 else -> "main"
             }
 
-            return "https://gitlab.com/$owner/$repo/-/raw/$branch/patches-bundle.json"
+            val remainingPath = when {
+                treeIndex >= 2 && pathSegments.getOrNull(treeIndex - 1) == "-" ->
+                    pathSegments.drop(treeIndex + 2).joinToString("/")
+                blobIndex >= 2 && pathSegments.getOrNull(blobIndex - 1) == "-" ->
+                    pathSegments.drop(blobIndex + 2).joinToString("/")
+                else -> ""
+            }
+            val finalPath = if (remainingPath.isNotEmpty()) {
+                if (remainingPath.endsWith(".json", ignoreCase = true)) remainingPath
+                else "$remainingPath/patches-bundle.json"
+            } else {
+                "patches-bundle.json"
+            }
+
+            return "https://gitlab.com/$owner/$repo/-/raw/$branch/$finalPath"
         }
 
         // Handle raw.githubusercontent.com URLs (legacy support)
@@ -1284,7 +1311,11 @@ class PatchBundleRepository(
         }
 
         val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
-        return "https://$host$normalizedPath$query"
+        val authority = uri.rawAuthority?.substringAfterLast('@') ?: buildString {
+            append(host)
+            if (uri.port != -1) append(":${uri.port}")
+        }
+        return "$scheme://$authority$normalizedPath$query"
     }
 
     /** Returns true if [uid] corresponds to a currently loaded bundle. */
@@ -1911,6 +1942,7 @@ class PatchBundleRepository(
                 .filterIsInstance<RemotePatchBundle>()
                 .map { it.endpoint.lowercase(Locale.US) }
                 .toSet()
+                .toMutableSet()
 
             var addedAny = false
             snapshots.forEach { snapshot ->
@@ -1918,7 +1950,9 @@ class PatchBundleRepository(
                     normalizeRemoteBundleUrl(snapshot.source)
                 }.getOrNull() ?: return@forEach
 
-                if (normalizedUrl.lowercase(Locale.US) in existingEndpoints) return@forEach
+                val normalizedKey = normalizedUrl.lowercase(Locale.US)
+                if (normalizedKey in existingEndpoints) return@forEach
+                existingEndpoints += normalizedKey
 
                 createEntity(
                     name = snapshot.name,

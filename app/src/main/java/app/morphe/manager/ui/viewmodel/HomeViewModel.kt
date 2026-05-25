@@ -1028,9 +1028,9 @@ class HomeViewModel(
         }
     }
 
-    fun createRemoteSource(apiUrl: String, autoUpdate: Boolean) = viewModelScope.launch {
+    fun createRemoteSource(apiUrl: String, autoUpdate: Boolean, displayName: String? = null) = viewModelScope.launch {
         withContext(NonCancellable) {
-            patchBundleRepository.createRemote(apiUrl, autoUpdate)
+            patchBundleRepository.createRemote(apiUrl, autoUpdate, displayName = displayName)
         }
         patchBundleRepository.bundleUpdateProgress
             .dropWhile { it == null }
@@ -1052,7 +1052,7 @@ class HomeViewModel(
     fun confirmDeepLinkBundle() {
         val bundle = deepLinkPendingBundle ?: return
         deepLinkPendingBundle = null
-        createRemoteSource(bundle.url, autoUpdate = true)
+        createRemoteSource(bundle.url, autoUpdate = true, displayName = bundle.name)
     }
 
     /** User dismissed the deep link confirmation dialog. */
@@ -2144,6 +2144,12 @@ class HomeViewModel(
         patches: PatchSelection,
         options: Options
     ) {
+        if (patches.values.sumOf { it.size } == 0) {
+            app.toast(app.getString(R.string.home_no_patches_available))
+            cleanupPendingData()
+            return
+        }
+
         // Dismiss InstalledAppInfoDialog here, right before navigating to PatcherScreen.
         // This ensures there is never a gap between the info dialog closing and the next screen appearing
         dismissInstalledAppInfo()
@@ -2543,6 +2549,8 @@ class HomeViewModel(
         context: Context,
         uri: Uri
     ): ApkLoadResult = withContext(Dispatchers.IO) {
+        var tempFile: File? = null
+        var keepTempFile = false
         try {
             // Copy file to uiTempDir with original extension detection
             val fileName = context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
@@ -2551,27 +2559,28 @@ class HomeViewModel(
             } ?: "temp_${System.currentTimeMillis()}"
 
             val extension = fileName.substringAfterLast('.', "apk").lowercase()
-            val tempFile = filesystem.uiTempDir.resolve("temp_apk_${System.currentTimeMillis()}.$extension")
+            val copiedTempFile = filesystem.uiTempDir.resolve("temp_apk_${System.currentTimeMillis()}.$extension")
+            tempFile = copiedTempFile
 
             // openInputStream can return null when the provider is unavailable
             // e.g. Samsung External Storage restricted by Battery Optimization
             val bytesCopied = context.contentResolver.openInputStream(uri)?.use { input ->
-                tempFile.outputStream().use { output -> input.copyTo(output) }
+                copiedTempFile.outputStream().use { output -> input.copyTo(output) }
             }
             if (bytesCopied == null || bytesCopied == 0L) {
-                tempFile.delete()
+                copiedTempFile.delete()
                 return@withContext ApkLoadResult.Unreadable
             }
 
             // Check if it's a split APK archive
-            val isSplitArchive = SplitApkPreparer.isSplitArchive(tempFile)
+            val isSplitArchive = SplitApkPreparer.isSplitArchive(copiedTempFile)
 
             val packageInfo = if (isSplitArchive) {
                 // Extract the representative base APK and read package info from it.
                 // SplitApkInspector uses a smarter entry-selection algorithm than a naive
                 // name search: base.apk → main/master → largest non-config → fallback.
                 val extracted = SplitApkInspector.extractRepresentativeApk(
-                    source = tempFile,
+                    source = copiedTempFile,
                     workspace = filesystem.uiTempDir
                 )
                 try {
@@ -2581,24 +2590,28 @@ class HomeViewModel(
                 }
             } else {
                 // Regular APK - parse directly
-                pm.getPackageInfo(tempFile)
+                pm.getPackageInfo(copiedTempFile)
             }
 
             if (packageInfo == null) {
-                tempFile.delete()
+                copiedTempFile.delete()
                 return@withContext ApkLoadResult.NotAnApk
             }
 
+            keepTempFile = true
             ApkLoadResult.Success(
                 SelectedApp.Local(
                     packageName = packageInfo.packageName,
                     version = packageInfo.versionName ?: "unknown",
-                    file = tempFile,
+                    file = copiedTempFile,
                     temporary = true
                 )
             )
         } catch (e: Exception) {
             Log.e(tag, "Failed to load APK", e)
+            if (!keepTempFile) {
+                tempFile?.takeIf { it.exists() }?.delete()
+            }
             ApkLoadResult.IoError
         }
     }

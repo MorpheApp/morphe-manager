@@ -248,8 +248,10 @@ fun BundleManagementSheet(
                                     if (bundle.uid == bundleToShowChangelogUid) {
                                         bundleToShowChangelogUid = null
                                     }
-                                    bundle.clearChangelogCache()
-                                    scope.launch { patchBundleRepository.setUsePrerelease(bundle.uid, usePrerelease) }
+                                    scope.launch {
+                                        bundle.clearChangelogCache()
+                                        patchBundleRepository.setUsePrerelease(bundle.uid, usePrerelease)
+                                    }
                                 }
                                 else -> null
                             },

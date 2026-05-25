@@ -20,6 +20,8 @@ import androidx.compose.ui.platform.LocalContext
 import app.morphe.manager.data.platform.Filesystem
 import org.koin.compose.koinInject
 import java.io.File
+import java.io.IOException
+import java.nio.charset.StandardCharsets
 
 /** Parsed metadata from a .mpp patch bundle's META-INF/MANIFEST.MF entry. */
 data class MppManifest(
@@ -103,7 +105,10 @@ fun Uri.readMppManifest(contentResolver: ContentResolver): MppManifest? =
                 var entry = zip.nextEntry
                 while (entry != null && manifest == null) {
                     if (entry.name == "META-INF/MANIFEST.MF") {
-                        val attrs = zip.bufferedReader().readText()
+                        if (entry.size > MAX_MPP_MANIFEST_BYTES) {
+                            throw IOException("Manifest is too large")
+                        }
+                        val attrs = zip.readLimitedText(MAX_MPP_MANIFEST_BYTES)
                             .lineSequence()
                             .filter { ":" in it }
                             .associate { line ->
@@ -127,6 +132,23 @@ fun Uri.readMppManifest(contentResolver: ContentResolver): MppManifest? =
             }
         }
     }.getOrNull()
+
+private const val MAX_MPP_MANIFEST_BYTES = 64 * 1024
+
+private fun java.io.InputStream.readLimitedText(maxBytes: Int): String {
+    val output = java.io.ByteArrayOutputStream()
+    val buffer = ByteArray(4096)
+    var total = 0
+    while (true) {
+        val remaining = maxBytes + 1 - total
+        val read = read(buffer, 0, minOf(buffer.size, remaining))
+        if (read == -1) break
+        output.write(buffer, 0, read)
+        total += read
+        if (total > maxBytes) throw IOException("Input exceeds $maxBytes bytes")
+    }
+    return output.toString(StandardCharsets.UTF_8.name())
+}
 
 /**
  * Plain SAF folder picker. Use this when writing files via [androidx.documentfile.provider.DocumentFile]/[ContentResolver].

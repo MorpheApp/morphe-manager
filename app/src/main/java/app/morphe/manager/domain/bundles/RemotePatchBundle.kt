@@ -169,21 +169,14 @@ sealed class RemotePatchBundle(
         }
     }
 
-    fun clearChangelogCache() {
+    suspend fun clearChangelogCache() {
         val assetKey = "$uid|$endpoint"
-        changelogCacheMutex.tryLock()
-        try {
+        changelogCacheMutex.withLock {
             changelogCache.remove(assetKey)
-        } finally {
-            changelogCacheMutex.unlock()
         }
 
-        entriesCacheMutex.tryLock()
-
-        try {
+        entriesCacheMutex.withLock {
             entriesCache.keys.removeAll { it.startsWith("$uid|") }
-        } finally {
-            entriesCacheMutex.unlock()
         }
     }
 

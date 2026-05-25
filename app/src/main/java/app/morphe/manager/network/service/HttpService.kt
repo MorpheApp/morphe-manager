@@ -24,6 +24,7 @@ import kotlinx.coroutines.*
 import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.io.OutputStream
 import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
@@ -147,10 +148,11 @@ class HttpService(
     suspend fun download(
         saveLocation: File,
         resumeFrom: Long = 0,
-        builder: HttpRequestBuilder.() -> Unit
-    ) {
+        builder: HttpRequestBuilder.() -> Unit,
+        onProgress: ((bytesRead: Long, contentLength: Long?, resumed: Boolean) -> Unit)? = null
+    ): Boolean {
         try {
-            runWith429Retry("download") {
+            return runWith429Retry("download") {
                 http.prepareGet {
                     if (resumeFrom > 0) header(HttpHeaders.Range, "bytes=$resumeFrom-")
                     builder()
@@ -162,6 +164,8 @@ class HttpService(
 
                         response.status.isSuccess() -> {
                             val channel: ByteReadChannel = response.body()
+                            val contentLength =
+                                response.headers[HttpHeaders.ContentLength]?.toLongOrNull()
                             // Append only when the server confirmed partial content (HTTP 206)
                             val append =
                                 resumeFrom > 0 && response.status == HttpStatusCode.PartialContent
@@ -170,9 +174,17 @@ class HttpService(
                             }
                             withContext(Dispatchers.IO) {
                                 FileOutputStream(saveLocation, append).use { out ->
-                                    channel.copyToStream(out)
+                                    val base = if (append) resumeFrom else 0L
+                                    channel.copyToStream(out, contentLength) { bytesRead, length ->
+                                        onProgress?.invoke(
+                                            base + bytesRead,
+                                            length?.let { base + it },
+                                            append
+                                        )
+                                    }
                                 }
                             }
+                            append
                         }
 
                         else -> throw HttpException(response.status)
@@ -302,6 +314,10 @@ class HttpService(
                                         position += read
                                         totalRead.addAndGet(read.toLong())
                                         reportProgress()
+                                    }
+
+                                    if (position != end + 1) {
+                                        throw IOException("Range $start-$end ended at ${position - 1}")
                                     }
                                 }
 
@@ -494,17 +510,25 @@ class HttpService(
                 followRedirects = false
             }
 
-            noRedirectClient.request {
-                method = HttpMethod.Head
-                url(url)
-            }.headers[HttpHeaders.Location]?.let { location ->
-                if (location.startsWith("http://") || location.startsWith("https://")) {
-                    location
-                } else {
-                    val uri = java.net.URI(url)
-                    val prefix = "${uri.scheme}://${uri.host}"
-                    if (location.startsWith("/")) "$prefix$location" else "$prefix/$location"
+            try {
+                noRedirectClient.request {
+                    method = HttpMethod.Head
+                    url(url)
+                }.headers[HttpHeaders.Location]?.let { location ->
+                    if (location.startsWith("http://") || location.startsWith("https://")) {
+                        location
+                    } else {
+                        val uri = java.net.URI(url)
+                        val authority = uri.rawAuthority?.substringAfterLast('@') ?: buildString {
+                            append(uri.host)
+                            if (uri.port != -1) append(":${uri.port}")
+                        }
+                        val prefix = "${uri.scheme}://$authority"
+                        if (location.startsWith("/")) "$prefix$location" else "$prefix/$location"
+                    }
                 }
+            } finally {
+                noRedirectClient.close()
             }
         }.getOrNull()
     }
