@@ -5,11 +5,11 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
-import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.PowerManager
 import android.os.StatFs
 import android.util.Log
+import androidx.core.app.NotificationCompat
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
@@ -95,7 +95,7 @@ class PatcherWorker(
         val notificationManager =
             applicationContext.getSystemService(NotificationManager::class.java)
         notificationManager.createNotificationChannel(channel)
-        return Notification.Builder(applicationContext, channel.id)
+        return NotificationCompat.Builder(applicationContext, channel.id)
             .setContentTitle(
                 stepName ?: applicationContext.getString(R.string.patcher_notification_title)
             )
@@ -107,10 +107,11 @@ class PatcherWorker(
                     setProgress(total, completed, false)
                 }
             }
-            .setSmallIcon(Icon.createWithResource(applicationContext, R.drawable.ic_notification))
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentIntent(pendingIntent)
             .setCategory(Notification.CATEGORY_SERVICE)
             .setOngoing(true)
+            .setSilent(true)
             .build()
     }
 
