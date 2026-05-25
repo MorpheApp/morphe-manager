@@ -181,9 +181,11 @@ class RootInstaller(
                         val content = String(inputStream.readBytes())
                             .replace("\r\n", "\n")
                             .replace("\r", "\n")
-                            .replace("__PKG_NAME__", packageName)
-                            .replace("__VERSION__", version)
-                            .replace("__LABEL__", label)
+                            .replace("__PKG_NAME_SH__", shellLiteral(packageName))
+                            .replace("__VERSION_SH__", shellLiteral(version))
+                            .replace("__PKG_NAME_PROP__", modulePropValue(packageName))
+                            .replace("__VERSION_PROP__", modulePropValue(version))
+                            .replace("__LABEL_PROP__", modulePropValue(label))
                             .toByteArray()
 
                         outputStream.write(content)
@@ -240,6 +242,12 @@ class RootInstaller(
 
     companion object {
         const val MODULES_PATH = "/data/adb/modules"
+
+        private fun shellLiteral(value: String): String =
+            "'" + value.replace("'", "'\"'\"'") + "'"
+
+        private fun modulePropValue(value: String): String =
+            value.replace(Regex("[\\r\\n\\u0000]"), " ").trim()
 
         private fun Shell.Result.assertSuccess(errorMessage: String) {
             if (!isSuccess) throw Exception(errorMessage)

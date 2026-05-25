@@ -1,6 +1,6 @@
-id=__PKG_NAME__-Morphe
-name=__LABEL__ Morphe
-version=__VERSION__
+id=__PKG_NAME_PROP__-Morphe
+name=__LABEL_PROP__ Morphe
+version=__VERSION_PROP__
 versionCode=0
 author=Morphe
 description=Mounts the patched APK on top of the original one
