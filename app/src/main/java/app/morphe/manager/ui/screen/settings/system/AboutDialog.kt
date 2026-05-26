@@ -145,8 +145,8 @@ fun AboutDialog(onDismiss: () -> Unit) {
             // Social Links
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween)
-            {
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 AboutViewModel.socials.forEach { link ->
                     SocialIconButton(
                         icon = AboutViewModel.getSocialIcon(link.name),

@@ -290,7 +290,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="patcher_patches_progress_format" translatable="false">%1$s / %2$s</string>
     <string name="patcher_percentage" translatable="false">%s%%</string>
     <string name="patcher_tab_logs">Patcher Logs</string>
-    <string name="patcher_tab_game">Game</string>
+    <string name="patcher_tab_game">Games</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="patcher_installing_subtitle">Almost ready to rock! 🎸</string>
     <string name="patcher_success_title">All Done! 🎉</string>
@@ -396,7 +396,6 @@ Uninstalling will permanently erase all app data"</string>
     <string name="failed_to_unmount">Failed to unmount: %s</string>
 
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_picker_title">Pick a game</string>
     <string name="mini_game_score">Score %d</string>
     <string name="mini_game_best">Best %d</string>
     <string name="mini_game_new_record">New record!</string>
