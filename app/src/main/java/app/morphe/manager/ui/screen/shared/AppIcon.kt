@@ -3,6 +3,7 @@ package app.morphe.manager.ui.screen.shared
 import android.content.pm.PackageInfo
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Android
@@ -18,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import org.koin.compose.koinInject
 
 /**
@@ -96,10 +98,11 @@ private fun SimpleAppIcon(
             .build()
     }
 
-    AsyncImage(
+    SubcomposeAsyncImage(
         model = request,
         contentDescription = contentDescription,
-        modifier = modifier
+        modifier = modifier,
+        loading = { ShimmerBox(modifier = Modifier.fillMaxSize()) }
     )
 }
 

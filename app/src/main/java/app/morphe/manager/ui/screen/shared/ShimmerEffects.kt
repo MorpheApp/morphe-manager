@@ -33,10 +33,14 @@ import androidx.compose.ui.unit.dp
 fun ShimmerBox(
     modifier: Modifier = Modifier,
     shape: Shape = RoundedCornerShape(8.dp),
-    baseColor: Color = Color.White.copy(alpha = 0.1f),
-    shimmerColor: Color = Color.White.copy(alpha = 0.3f),
+    baseColor: Color = Color.Unspecified,
+    shimmerColor: Color = Color.Unspecified,
     baseAlpha: Float = 0.2f
 ) {
+    val onSurface = MaterialTheme.colorScheme.onSurface
+    val resolvedBaseColor = if (baseColor == Color.Unspecified) onSurface.copy(alpha = 0.1f) else baseColor
+    val resolvedShimmerColor = if (shimmerColor == Color.Unspecified) onSurface.copy(alpha = 0.3f) else shimmerColor
+
     val infiniteTransition = rememberInfiniteTransition(label = "shimmer")
 
     // Shimmer animation
@@ -69,7 +73,7 @@ fun ShimmerBox(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(baseColor.copy(alpha = pulseAlpha))
+                .background(resolvedBaseColor.copy(alpha = pulseAlpha))
         )
 
         // Shimmer overlay
@@ -80,7 +84,7 @@ fun ShimmerBox(
                     brush = Brush.linearGradient(
                         colors = listOf(
                             Color.Transparent,
-                            shimmerColor,
+                            resolvedShimmerColor,
                             Color.Transparent
                         ),
                         start = Offset(shimmerOffset * 1000, 0f),
@@ -274,6 +278,33 @@ fun ShimmerApkItem() {
                     )
                 }
             }
+        }
+    }
+}
+
+/**
+ * Shimmer loading placeholder for an installed app picker row.
+ */
+@Composable
+fun ShimmerInstalledAppRow() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 4.dp, vertical = 10.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        ShimmerBox(
+            modifier = Modifier.size(40.dp),
+            shape = RoundedCornerShape(10.dp)
+        )
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            ShimmerText(widthFraction = 0.5f, height = 16.dp)
+            ShimmerText(widthFraction = 0.7f, height = 12.dp)
+            ShimmerText(widthFraction = 0.35f, height = 12.dp)
         }
     }
 }

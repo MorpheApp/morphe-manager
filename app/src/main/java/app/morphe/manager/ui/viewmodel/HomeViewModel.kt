@@ -10,6 +10,8 @@ import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
 import android.net.Uri
 import android.os.Build
 import android.os.StatFs
@@ -130,6 +132,15 @@ data class InstalledApkInfo(
 ) {
     val isSplit: Boolean get() = splitPaths.isNotEmpty()
 }
+
+/** An installed app entry shown in the universal-patch app picker. */
+data class InstalledAppPickerItem(
+    val packageName: String,
+    val label: String,
+    val packageInfo: PackageInfo,
+    val isSystemApp: Boolean,
+    val info: InstalledApkInfo
+)
 
 /**
  * Combined home screen app state - emitted atomically so visible and hidden lists
@@ -256,6 +267,9 @@ class HomeViewModel(
     var showApkAvailabilityDialog by mutableStateOf(false)
     var showDownloadInstructionsDialog by mutableStateOf(false)
     var showFilePickerPromptDialog by mutableStateOf(false)
+    var showInstalledAppPickerDialog by mutableStateOf(false)
+    var loadingInstalledApps by mutableStateOf(false)
+    var installedAppsForPicker by mutableStateOf<List<InstalledAppPickerItem>>(emptyList())
 
     // Error/warning dialogs
     var showUnsupportedVersionDialog by mutableStateOf<UnsupportedVersionDialogState?>(null)
@@ -1596,6 +1610,104 @@ class HomeViewModel(
     }
 
     /**
+     * Loads all user-installed apps and opens the picker dialog.
+     * Called from the "Other apps" file-picker prompt when the user taps "Use installed app".
+     */
+    fun loadInstalledAppsForPicker() {
+        if (loadingInstalledApps) return
+        viewModelScope.launch {
+            installedAppsForPicker = emptyList()
+            loadingInstalledApps = true
+            showFilePickerPromptDialog = false
+            showInstalledAppPickerDialog = true
+            try {
+                val items = withContext(Dispatchers.IO) {
+                    try {
+                        pm.getInstalledPackages()
+                            .mapNotNull { pkgInfo ->
+                                if (pkgInfo.packageName == app.packageName) return@mapNotNull null
+                                val appInfo = pkgInfo.applicationInfo ?: return@mapNotNull null
+                                val sourceDir = appInfo.sourceDir ?: return@mapNotNull null
+                                if (!File(sourceDir).exists()) return@mapNotNull null
+                                val version = pkgInfo.versionName?.takeUnless { it.isBlank() }
+                                    ?: return@mapNotNull null
+                                val label = with(pm) { pkgInfo.label() }
+                                val splitPaths = appInfo.splitSourceDirs
+                                    ?.filter { File(it).exists() }
+                                    .orEmpty()
+                                InstalledAppPickerItem(
+                                    packageName = pkgInfo.packageName,
+                                    label = label,
+                                    packageInfo = pkgInfo,
+                                    isSystemApp = (appInfo.flags and ApplicationInfo.FLAG_SYSTEM) != 0,
+                                    info = InstalledApkInfo(
+                                        version = version,
+                                        apkPath = sourceDir,
+                                        splitPaths = splitPaths
+                                    )
+                                )
+                            }
+                            .sortedBy { it.label.lowercase() }
+                    } catch (e: Exception) {
+                        Log.e(tag, "Failed to load installed apps for picker", e)
+                        emptyList()
+                    }
+                }
+                installedAppsForPicker = items
+            } finally {
+                loadingInstalledApps = false
+            }
+        }
+    }
+
+    /**
+     * Handles selection of an app from the universal-patch installed-app picker.
+     * Extracts the APK (or packs splits into an archive) and sends it through the patch flow.
+     */
+    fun handleInstalledAppPickerSelection(item: InstalledAppPickerItem) {
+        showInstalledAppPickerDialog = false
+        pendingAppName = item.label
+        viewModelScope.launch {
+            val selectedApp = withContext(Dispatchers.IO) {
+                try {
+                    if (item.info.isSplit) {
+                        val archive = File(filesystem.uiTempDir, "${item.packageName}_installed.apks")
+                        createApksArchive(item.info, archive)
+                        SelectedApp.Local(
+                            packageName = item.packageName,
+                            version = item.info.version,
+                            file = archive,
+                            temporary = true,
+                            fromInstalledDevice = true
+                        )
+                    } else {
+                        val source = File(item.info.apkPath)
+                        if (!source.exists()) return@withContext null
+                        val tempFile = File(filesystem.uiTempDir, "${item.packageName}_installed.apk")
+                        source.copyTo(tempFile, overwrite = true)
+                        SelectedApp.Local(
+                            packageName = item.packageName,
+                            version = item.info.version,
+                            file = tempFile,
+                            temporary = true,
+                            fromInstalledDevice = true
+                        )
+                    }
+                } catch (e: Exception) {
+                    Log.e(tag, "Failed to prepare APK from picker", e)
+                    null
+                }
+            }
+            if (selectedApp != null) {
+                processSelectedAppIgnoringSignature(selectedApp)
+            } else {
+                app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                cleanupPendingData()
+            }
+        }
+    }
+
+    /**
      * Packs [info]'s base APK and all split APKs into an APKS archive (ZIP).
      * Entry names preserve the original filenames so [SplitApkPreparer] can
      * identify the base entry by the "base" substring and filter ABI/density splits.
@@ -2447,6 +2559,7 @@ class HomeViewModel(
         showApkAvailabilityDialog = false
         showDownloadInstructionsDialog = false
         showFilePickerPromptDialog = false
+        showInstalledAppPickerDialog = false
     }
 
     /**

@@ -10,7 +10,10 @@ import android.os.Build
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
@@ -25,6 +28,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
@@ -181,6 +185,7 @@ fun HomeDialogs(
         FilePickerPromptDialog(
             appName = appName,
             isOtherApps = isOtherApps,
+            isLoadingInstalledApps = homeViewModel.loadingInstalledApps,
             onDismiss = {
                 homeViewModel.showFilePickerPromptDialog = false
                 homeViewModel.cleanupPendingData()
@@ -188,7 +193,27 @@ fun HomeDialogs(
             onOpenFilePicker = {
                 homeViewModel.showFilePickerPromptDialog = false
                 storagePickerLauncher()
-            }
+            },
+            onUseInstalledApp = if (isOtherApps) {
+                { homeViewModel.loadInstalledAppsForPicker() }
+            } else null
+        )
+    }
+
+    // Dialog 3.5: Installed app picker (universal patches)
+    AnimatedVisibility(
+        visible = homeViewModel.showInstalledAppPickerDialog,
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
+    ) {
+        InstalledAppPickerDialog(
+            items = homeViewModel.installedAppsForPicker,
+            isLoading = homeViewModel.loadingInstalledApps,
+            onDismiss = {
+                homeViewModel.showInstalledAppPickerDialog = false
+                homeViewModel.cleanupPendingData()
+            },
+            onSelect = { homeViewModel.handleInstalledAppPickerSelection(it) }
         )
     }
 
@@ -874,8 +899,10 @@ private fun InstructionStep(
 private fun FilePickerPromptDialog(
     appName: String,
     isOtherApps: Boolean,
+    isLoadingInstalledApps: Boolean,
     onDismiss: () -> Unit,
-    onOpenFilePicker: () -> Unit
+    onOpenFilePicker: () -> Unit,
+    onUseInstalledApp: (() -> Unit)?
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -887,12 +914,30 @@ private fun FilePickerPromptDialog(
             }
         ),
         footer = {
-            MorpheDialogButton(
-                text = stringResource(R.string.home_file_picker_prompt_open_apk),
-                onClick = onOpenFilePicker,
-                icon = Icons.Outlined.FolderOpen,
-                modifier = Modifier.fillMaxWidth()
-            )
+            if (isOtherApps && onUseInstalledApp != null) {
+                MorpheDialogButtonColumn {
+                    MorpheDialogButton(
+                        text = stringResource(R.string.home_use_installed_app),
+                        onClick = onUseInstalledApp,
+                        icon = Icons.Outlined.PhoneAndroid,
+                        enabled = !isLoadingInstalledApps,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    MorpheDialogOutlinedButton(
+                        text = stringResource(R.string.home_file_picker_prompt_open_apk),
+                        onClick = onOpenFilePicker,
+                        icon = Icons.Outlined.FolderOpen,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            } else {
+                MorpheDialogButton(
+                    text = stringResource(R.string.home_file_picker_prompt_open_apk),
+                    onClick = onOpenFilePicker,
+                    icon = Icons.Outlined.FolderOpen,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     ) {
         val secondaryColor = LocalDialogSecondaryTextColor.current
@@ -908,6 +953,214 @@ private fun FilePickerPromptDialog(
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )
+    }
+}
+
+private enum class AppFilter { All, UserOnly, SystemOnly }
+
+/**
+ * Dialog that shows all installed apps for the universal-patch flow.
+ * User picks an app; its APK is extracted and sent through the patch pipeline.
+ */
+@Composable
+private fun InstalledAppPickerDialog(
+    items: List<InstalledAppPickerItem>,
+    isLoading: Boolean,
+    onDismiss: () -> Unit,
+    onSelect: (InstalledAppPickerItem) -> Unit
+) {
+    val context = LocalContext.current
+    val searchQuery = remember { mutableStateOf("") }
+    var appFilter by remember { mutableStateOf(AppFilter.UserOnly) }
+    val filtered = remember(items, searchQuery.value, appFilter) {
+        items
+            .let { list ->
+                when (appFilter) {
+                    AppFilter.UserOnly -> list.filter { !it.isSystemApp }
+                    AppFilter.SystemOnly -> list.filter { it.isSystemApp }
+                    AppFilter.All -> list
+                }
+            }
+            .let { list ->
+                if (searchQuery.value.isBlank()) list
+                else list.filter {
+                    it.label.contains(searchQuery.value, ignoreCase = true) ||
+                            it.packageName.contains(searchQuery.value, ignoreCase = true)
+                }
+            }
+    }
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        dismissOnClickOutside = true,
+        title = stringResource(R.string.home_installed_app_picker_title),
+        compactPadding = true,
+        scrollable = false,
+        titleTrailingContent = {
+            val labelAll = stringResource(R.string.home_installed_app_picker_filter_all)
+            val labelUser = stringResource(R.string.home_installed_app_picker_filter_user)
+            val labelSystem = stringResource(R.string.home_installed_app_picker_filter_system)
+            val (icon, description) = when (appFilter) {
+                AppFilter.All -> Icons.Outlined.FilterList to labelAll
+                AppFilter.UserOnly -> Icons.Outlined.Person to labelUser
+                AppFilter.SystemOnly -> Icons.Outlined.Android to labelSystem
+            }
+            FilledTonalIconButton(
+                onClick = {
+                    appFilter = when (appFilter) {
+                        AppFilter.All -> AppFilter.UserOnly
+                        AppFilter.UserOnly -> AppFilter.SystemOnly
+                        AppFilter.SystemOnly -> AppFilter.All
+                    }
+                    context.toast(
+                        when (appFilter) {
+                            AppFilter.All -> labelAll
+                            AppFilter.UserOnly -> labelUser
+                            AppFilter.SystemOnly -> labelSystem
+                        }
+                    )
+                },
+                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = description,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+        },
+        footer = {
+            MorpheDialogOutlinedButton(
+                text = stringResource(android.R.string.cancel),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    ) {
+        val textColor = LocalDialogTextColor.current
+        val secondaryColor = LocalDialogSecondaryTextColor.current
+
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            userScrollEnabled = !isLoading
+        ) {
+            stickyHeader {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = MaterialTheme.colorScheme.surface
+                ) {
+                    MorpheDialogTextField(
+                        value = searchQuery.value,
+                        onValueChange = { searchQuery.value = it },
+                        placeholder = { Text(stringResource(R.string.search)) },
+                        leadingIcon = {
+                            Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
+                        },
+                        showClearButton = true,
+                        enabled = !isLoading,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 4.dp)
+                    )
+                }
+            }
+
+            if (isLoading) {
+                items(10) { index ->
+                    ShimmerInstalledAppRow()
+                    if (index < 9) {
+                        HorizontalDivider(
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f)
+                        )
+                    }
+                }
+            } else {
+                if (filtered.isEmpty()) {
+                    item(key = "empty_state") {
+                        Box(
+                            modifier = Modifier
+                                .animateItem()
+                                .fillMaxWidth()
+                                .padding(vertical = 48.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.SearchOff,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(48.dp),
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = stringResource(R.string.home_installed_app_picker_empty),
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+                    }
+                }
+
+                itemsIndexed(filtered, key = { _, item -> item.packageName }) { index, item ->
+                    Column(modifier = Modifier.animateItem()) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { onSelect(item) }
+                                .padding(horizontal = 4.dp, vertical = 10.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            AppIcon(
+                                packageInfo = item.packageInfo,
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .size(40.dp)
+                                    .clip(RoundedCornerShape(10.dp))
+                            )
+                            Column(
+                                modifier = Modifier.weight(1f),
+                                verticalArrangement = Arrangement.spacedBy(2.dp)
+                            ) {
+                                Text(
+                                    text = item.label,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    fontWeight = FontWeight.Medium,
+                                    color = textColor,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                                Text(
+                                    text = item.packageName,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = secondaryColor,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                                Text(
+                                    text = "v${item.info.version}",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = secondaryColor.copy(alpha = 0.6f),
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
+                        }
+                        if (index < filtered.size - 1) {
+                            HorizontalDivider(
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f)
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

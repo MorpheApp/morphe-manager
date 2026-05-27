@@ -138,7 +138,13 @@
     <string name="home_recommended_version">Recommended version</string>
     <string name="home_selected_version">Selected version</string>
     <string name="home_select_apk_title">Select APK</string>
-    <string name="home_select_any_apk_description">Tap the button below to select an APK file of any app for patching</string>
+    <string name="home_select_any_apk_description">Select an APK file of any app, or pick an app already installed on this device</string>
+    <string name="home_use_installed_app">Use installed app</string>
+    <string name="home_installed_app_picker_title">Select installed app</string>
+    <string name="home_installed_app_picker_empty">No apps found</string>
+    <string name="home_installed_app_picker_filter_all">All apps</string>
+    <string name="home_installed_app_picker_filter_user">User apps only</string>
+    <string name="home_installed_app_picker_filter_system">System apps only</string>
     <string name="home_invalid_apk_unreadable">Could not read the file. Check that \'External Storage\' is not battery restricted</string>
     <string name="home_invalid_apk_not_an_apk">The selected file is not a valid APK</string>
     <string name="home_invalid_apk_io_error">Failed to open the file. Please try again</string>

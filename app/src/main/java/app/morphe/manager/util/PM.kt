@@ -2,7 +2,6 @@ package app.morphe.manager.util
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.util.Log
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
@@ -14,6 +13,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Parcelable
 import android.provider.Settings
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.compose.runtime.Immutable
 import androidx.core.content.pm.PackageInfoCompat
@@ -64,6 +64,13 @@ class PM(
 
         return pkgInfo
     }
+
+    @Suppress("DEPRECATION", "QueryPermissionsNeeded")
+    fun getInstalledPackages(flags: Int = 0): List<PackageInfo> =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            app.packageManager.getInstalledPackages(PackageInfoFlags.of(flags.toLong()))
+        else
+            app.packageManager.getInstalledPackages(flags)
 
     fun PackageInfo.label(): String {
         val raw = this.applicationInfo!!.loadLabel(app.packageManager).toString()
