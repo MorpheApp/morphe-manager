@@ -121,6 +121,15 @@ private fun storageRoots(context: Context, hasRoot: Boolean): List<Pair<String, 
     return roots
 }
 
+private fun storageRootIcon(root: File): ImageVector {
+    val primary = Environment.getExternalStorageDirectory()
+    return when {
+        root.absolutePath == "/" -> Icons.Outlined.DeveloperMode
+        root.absolutePath.startsWith(primary.absolutePath) -> Icons.Outlined.Storage
+        else -> Icons.Outlined.SdCard
+    }
+}
+
 private val IMAGE_EXTENSIONS = setOf("png", "jpg", "jpeg", "gif", "webp", "bmp")
 private val SPLIT_ICON_EXTENSIONS = setOf("apkm", "xapk")
 private val KEYSTORE_EXTENSIONS = setOf("jks", "keystore", "bks", "p12", "pfx")
@@ -459,7 +468,7 @@ fun FilePicker(
                                     text = { Text(label) },
                                     leadingIcon = {
                                         Icon(
-                                            imageVector = if (isRoot) Icons.Outlined.Storage else Icons.Outlined.Folder,
+                                            imageVector = if (isRoot) storageRootIcon(dir) else Icons.Outlined.Folder,
                                             contentDescription = null
                                         )
                                     },
@@ -479,7 +488,7 @@ fun FilePicker(
                                     DropdownMenuItem(
                                         text = { Text(label) },
                                         leadingIcon = {
-                                            Icon(Icons.Outlined.Storage, contentDescription = null)
+                                            Icon(storageRootIcon(root), contentDescription = null)
                                         },
                                         onClick = {
                                             currentDir = root
@@ -500,7 +509,7 @@ fun FilePicker(
                 if (currentDir == null) {
                     items(roots, key = { it.second.absolutePath }) { (label, root) ->
                         FilePickerRow(
-                            icon = Icons.Outlined.Storage,
+                            icon = storageRootIcon(root),
                             name = label,
                             detail = null,
                             onClick = { currentDir = root }
