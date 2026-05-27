@@ -34,7 +34,7 @@ import app.morphe.manager.util.KeystoreInputFormat
 fun KeystoreCredentialsDialog(
     onDismiss: () -> Unit,
     initialFormat: KeystoreInputFormat = KeystoreInputFormat.KEYSTORE,
-    onSubmit: (alias: String, password: String, format: KeystoreInputFormat) -> Unit
+    onSubmit: (alias: String, keyPassword: String, storePassword: String, format: KeystoreInputFormat) -> Unit
 ) {
     var alias by rememberSaveable { mutableStateOf("") }
     var pass by rememberSaveable { mutableStateOf("") }
@@ -46,7 +46,7 @@ fun KeystoreCredentialsDialog(
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.import_),
-                onPrimaryClick = { onSubmit(alias, pass, format) },
+                onPrimaryClick = { onSubmit(alias, pass, "", format) },
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
             )

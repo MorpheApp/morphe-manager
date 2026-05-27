@@ -5,10 +5,13 @@
 
 package app.morphe.manager.util
 
+import app.morphe.patcher.apk.ApkSigner
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.security.KeyFactory
 import java.security.KeyStore
+import java.security.Provider
+import java.security.Security
 import java.security.cert.CertificateFactory
 import java.security.spec.PKCS8EncodedKeySpec
 
@@ -60,6 +63,16 @@ sealed interface KeystoreConversionResult {
 
 object KeystoreConversionUtils {
 
+    // ApkSigner.init registers the standalone BC provider (bcpkix-jdk18on) as "BC".
+    // We access it here to guarantee BC is registered before any keystore operations, then
+    // retrieve the provider instance to use directly - bypassing any Android system BC fork
+    private val bcProvider: Provider by lazy {
+        ApkSigner.javaClass  // triggers ApkSigner.init, which registers standalone BC
+        checkNotNull(Security.getProvider("BC")) { "BouncyCastle provider unavailable" }
+    }
+
+    private fun newBksKeyStore() = KeyStore.getInstance("BKS", bcProvider)
+
     /**
      * Loads a keystore of [format] from [inputStream] and re-encodes all entries into a
      * new BKS keystore, returning the raw bytes. The stream is read but not closed.
@@ -83,7 +96,7 @@ object KeystoreConversionUtils {
             val entries = JksKeyStoreParser.parse(inputStream, password)
             check(entries.isNotEmpty()) { "No entries found in JKS keystore" }
 
-            val jksTarget = KeyStore.getInstance("BKS").apply { load(null, pass) }
+            val jksTarget = newBksKeyStore().apply { load(null, pass) }
             val cf = CertificateFactory.getInstance("X.509")
             val kf = KeyFactory.getInstance("RSA")
 
@@ -104,7 +117,6 @@ object KeystoreConversionUtils {
             return@runCatching KeystoreConversionResult.Success(out.toByteArray().toList())
         }
 
-        // PKCS12 uses Android's default provider which handles it natively
         val source = KeyStore.getInstance(format.jcaType).apply { load(inputStream, pass) }
 
         val entriesToMigrate = if (alias.isBlank()) {
@@ -117,8 +129,7 @@ object KeystoreConversionUtils {
 
         check(entriesToMigrate.isNotEmpty()) { "No entries found in keystore" }
 
-        // Target BKS keystore using Android's default provider
-        val target = KeyStore.getInstance("BKS").apply { load(null, pass) }
+        val target = newBksKeyStore().apply { load(null, pass) }
 
         for (entryAlias in entriesToMigrate) {
             val protection = KeyStore.PasswordProtection(pass)

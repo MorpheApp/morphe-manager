@@ -140,9 +140,9 @@ fun SettingsScreen(
                 importExportViewModel.cancelKeystoreImport()
             },
             initialFormat = importExportViewModel.detectedKeystoreFormat,
-            onSubmit = { alias, pass, format ->
+            onSubmit = { alias, pass, storePass, format ->
                 coroutineScope.launch {
-                    val result = importExportViewModel.tryKeystoreImport(alias, pass, format)
+                    val result = importExportViewModel.tryKeystoreImport(alias, pass, storePass, format)
                     if (!result) {
                         context.toast(context.getString(R.string.settings_system_import_keystore_wrong_credentials))
                     }

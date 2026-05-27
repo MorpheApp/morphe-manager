@@ -146,7 +146,7 @@ class ImportExportViewModel(
             for (format in autoFormats) {
                 for (alias in aliases) {
                     for (pass in knownPasswords) {
-                        if (tryKeystoreImport(alias, pass, format, path)) return@launch
+                        if (tryKeystoreImport(alias, pass, "", format, path)) return@launch
                     }
                 }
             }
@@ -161,10 +161,10 @@ class ImportExportViewModel(
         keystoreImportPath = null
     }
 
-    suspend fun tryKeystoreImport(alias: String, pass: String, format: KeystoreInputFormat): Boolean =
-        tryKeystoreImport(alias, pass, format, keystoreImportPath!!)
+    suspend fun tryKeystoreImport(alias: String, pass: String, keystorePw: String = "", format: KeystoreInputFormat): Boolean =
+        tryKeystoreImport(alias, pass, keystorePw, format, keystoreImportPath!!)
 
-    private suspend fun tryKeystoreImport(alias: String, pass: String, format: KeystoreInputFormat, path: Path): Boolean {
+    private suspend fun tryKeystoreImport(alias: String, pass: String, keystorePw: String, format: KeystoreInputFormat, path: Path): Boolean {
         // BKS is passed through as-is; converting it would re-encrypt the private key
         // in a way that ApkSigner cannot read back
         val bksBytes = if (format == KeystoreInputFormat.BKS || format == KeystoreInputFormat.KEYSTORE) {
@@ -180,7 +180,7 @@ class ImportExportViewModel(
         }
 
         return try {
-            val imported = keystoreManager.import(alias, pass, bksBytes.inputStream())
+            val imported = keystoreManager.import(alias, pass, keystorePw, bksBytes.inputStream())
             if (imported) {
                 app.toast(app.getString(R.string.settings_system_import_keystore_success))
                 cancelKeystoreImport()

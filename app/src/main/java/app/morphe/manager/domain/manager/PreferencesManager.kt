@@ -92,6 +92,7 @@ class PreferencesManager(
 
     val keystoreAlias = stringPreference("keystore_alias", KeystoreManager.DEFAULT)
     val keystorePass = stringPreference("keystore_pass", KeystoreManager.DEFAULT)
+    val keystorePassword = stringPreference("keystore_password", "")
 
     // Other hidden settings
     val gitHubPat = stringPreference("github_pat", "")
@@ -180,6 +181,7 @@ class PreferencesManager(
         val installerHiddenComponents: Set<String>? = null,
         val keystoreAlias: String? = null,
         val keystorePass: String? = null,
+        val keystorePassword: String? = null,
         val firstLaunch: Boolean? = null,
         val showManagerUpdateDialogOnLaunch: Boolean? = null,
         val useManagerPrereleases: Boolean? = null,
@@ -227,6 +229,7 @@ class PreferencesManager(
         installerHiddenComponents = installerHiddenComponents.get(),
         keystoreAlias = keystoreAlias.get(),
         keystorePass = keystorePass.get(),
+        keystorePassword = keystorePassword.get().takeIf { it.isNotEmpty() },
         firstLaunch = firstLaunch.get(),
         useManagerPrereleases = useManagerPrereleases.get(),
         bundlePrereleasesEnabled = bundlePrereleasesEnabled.get(),
@@ -260,6 +263,7 @@ class PreferencesManager(
         snapshot.installerHiddenComponents?.let { installerHiddenComponents.value = it }
         snapshot.keystoreAlias?.let { keystoreAlias.value = it }
         snapshot.keystorePass?.let { keystorePass.value = it }
+        snapshot.keystorePassword?.let { keystorePassword.value = it }
         snapshot.firstLaunch?.let { firstLaunch.value = it }
         snapshot.useManagerPrereleases?.let { useManagerPrereleases.value = it }
         snapshot.bundlePrereleasesEnabled?.let { bundlePrereleasesEnabled.value = it }

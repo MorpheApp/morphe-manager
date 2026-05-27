@@ -24,14 +24,15 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
     private val keystorePath =
         app.getDir("signing", Context.MODE_PRIVATE).resolve("morphe.keystore")
 
-    private suspend fun updatePrefs(alias: String, pass: String) = prefs.edit {
+    private suspend fun updatePrefs(alias: String, pass: String, keystorePw: String) = prefs.edit {
         prefs.keystoreAlias.value = alias
         prefs.keystorePass.value = pass
+        prefs.keystorePassword.value = keystorePw
     }
 
     private suspend fun signingDetails(path: File = keystorePath) = ApkUtils.KeyStoreDetails(
         keyStore = path,
-        keyStorePassword = null,
+        keyStorePassword = prefs.keystorePassword.get().ifEmpty { null },
         alias = prefs.keystoreAlias.get(),
         password = prefs.keystorePass.get()
     )
@@ -76,7 +77,7 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
         }.getOrElse { input }
     }
 
-    suspend fun import(alias: String, pass: String, keystore: InputStream): Boolean {
+    suspend fun import(alias: String, pass: String, keystorePw: String = "", keystore: InputStream): Boolean {
         val keystoreData = withContext(Dispatchers.IO) { keystore.readBytes() }
 
         try {
@@ -93,7 +94,7 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
             Files.write(keystorePath.toPath(), keystoreData)
         }
 
-        updatePrefs(alias, pass)
+        updatePrefs(alias, pass, keystorePw)
         return true
     }
 
