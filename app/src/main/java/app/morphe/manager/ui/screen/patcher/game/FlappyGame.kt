@@ -39,7 +39,7 @@ private const val BIRD_RADIUS = 0.05f      // fraction of canvas height
 private const val PIPE_WIDTH = 0.15f       // fraction of canvas width
 private const val PIPE_GAP = 0.30f         // gap height as fraction of canvas height
 private const val PIPE_SPEED = 0.32f       // canvas-widths per second
-private const val PIPE_SPAWN_MS = 2000L
+private const val PIPE_SPACING = 0.64f     // distance between consecutive pipe left edges
 private const val GRAVITY = 2.0f           // height-fraction per second squared
 private const val TAP_IMPULSE = -0.65f     // height-fraction per second, upward
 // Collision radius is smaller than the visual radius to be forgiving
@@ -74,7 +74,6 @@ class FlappyGameState(
         private set
 
     private var lastTickMs = 0L
-    private var lastSpawnMs = 0L
 
     fun tap() {
         if (isGameOver) return
@@ -95,11 +94,10 @@ class FlappyGameState(
             isGameOver = true; return
         }
 
-        if (lastSpawnMs == 0L) lastSpawnMs = nowMs
-        if (nowMs - lastSpawnMs >= PIPE_SPAWN_MS) {
+        // Spawn once the previous pipe has moved far enough - keeps spacing consistent at any frame rate
+        if (pipes.isEmpty() || pipes.last().x <= 1.05f - PIPE_SPACING) {
             // Gap center constrained to 0.26..0.64 so pipes are always passable
             pipes = pipes + FlappyPipe(x = 1.05f, gapCenter = Random.nextFloat() * 0.38f + 0.26f)
-            lastSpawnMs = nowMs
         }
 
         val hitR = BIRD_RADIUS * HIT_SHRINK
@@ -131,7 +129,6 @@ class FlappyGameState(
         isStarted = false
         isPaused = false
         lastTickMs = 0L
-        lastSpawnMs = 0L
     }
 
     fun pause() { if (isStarted && !isGameOver) isPaused = true }
