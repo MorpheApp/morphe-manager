@@ -189,24 +189,31 @@ fun PatchingSuccess(
                 conflictPackageName = conflictPackageName,
                 onInstall = onInstall,
                 onUninstall = onUninstall,
-                onOpen = onOpen
+                onOpen = onOpen,
+                isExpertMode = isExpertMode,
+                onHomeClick = onHomeClick,
+                onLogsClick = onLogsClick,
+                onSaveClick = onSaveClick,
+                isSaving = isSaving
             )
         }
 
-        // Bottom action bar
-        PatcherBottomActionBar(
-            showCancelButton = false,
-            showLogsButton = isExpertMode,
-            showHomeButton = true,
-            showSaveButton = true,
-            showErrorButton = false,
-            onCancelClick = {},
-            onLogsClick = onLogsClick,
-            onHomeClick = onHomeClick,
-            onSaveClick = onSaveClick,
-            isSaving = isSaving,
-            onErrorClick = {}
-        )
+        // Bottom action bar (portrait only - in landscape it lives inside the left column)
+        if (!windowSize.useTwoColumnLayout) {
+            PatcherBottomActionBar(
+                showCancelButton = false,
+                showLogsButton = isExpertMode,
+                showHomeButton = true,
+                showSaveButton = true,
+                showErrorButton = false,
+                onCancelClick = {},
+                onLogsClick = onLogsClick,
+                onHomeClick = onHomeClick,
+                onSaveClick = onSaveClick,
+                isSaving = isSaving,
+                onErrorClick = {}
+            )
+        }
     }
 }
 
@@ -229,7 +236,12 @@ private fun AdaptiveSuccessContent(
     conflictPackageName: String?,
     onInstall: () -> Unit,
     onUninstall: (String) -> Unit,
-    onOpen: () -> Unit
+    onOpen: () -> Unit,
+    isExpertMode: Boolean = false,
+    onHomeClick: () -> Unit = {},
+    onLogsClick: () -> Unit = {},
+    onSaveClick: () -> Unit = {},
+    isSaving: Boolean = false
 ) {
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
@@ -244,30 +256,47 @@ private fun AdaptiveSuccessContent(
             horizontalArrangement = Arrangement.spacedBy(itemSpacing * 3),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Left column: Icon and status
+            // Left column: Icon, status, and action bar
             Column(
                 modifier = Modifier
                     .weight(0.5f)
                     .fillMaxHeight(),
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                SuccessIcon(
-                    icon = icon,
-                    iconTint = iconTint,
-                    iconBackgroundColor = iconBackgroundColor,
-                    windowSize = windowSize
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(itemSpacing)
+                ) {
+                    SuccessIcon(
+                        icon = icon,
+                        iconTint = iconTint,
+                        iconBackgroundColor = iconBackgroundColor,
+                        windowSize = windowSize
+                    )
 
-                Spacer(Modifier.height(itemSpacing))
+                    SuccessStatusText(
+                        isInstalling = isInstalling,
+                        isInstalled = isInstalled,
+                        isError = isError,
+                        isConflict = isConflict,
+                        installedPackageName = installedPackageName,
+                        windowSize = windowSize
+                    )
+                }
 
-                SuccessStatusText(
-                    isInstalling = isInstalling,
-                    isInstalled = isInstalled,
-                    isError = isError,
-                    isConflict = isConflict,
-                    installedPackageName = installedPackageName,
-                    windowSize = windowSize
+                PatcherBottomActionBar(
+                    showCancelButton = false,
+                    showLogsButton = isExpertMode,
+                    showHomeButton = true,
+                    showSaveButton = true,
+                    showErrorButton = false,
+                    onCancelClick = {},
+                    onLogsClick = onLogsClick,
+                    onHomeClick = onHomeClick,
+                    onSaveClick = onSaveClick,
+                    isSaving = isSaving,
+                    onErrorClick = {}
                 )
             }
 

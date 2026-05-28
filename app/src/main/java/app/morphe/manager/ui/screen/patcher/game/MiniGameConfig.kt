@@ -18,7 +18,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
@@ -245,50 +244,26 @@ internal fun MiniGameContent(
                     MiniGame.SNAKE -> state.snake
                     MiniGame.DINO -> state.dino
                 }
-                BoxWithConstraints(
-                    modifier = Modifier.fillMaxSize().padding(8.dp)
+                Column(
+                    modifier = Modifier.fillMaxSize().padding(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    val h = maxHeight
-                    if (maxWidth > h) {
-                        Row(
-                            modifier = Modifier.fillMaxSize(),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            GameSideControls(
-                                score = activeState.score,
-                                progress = progress,
-                                onRestart = activeState::restart,
-                                onChangeGame = { state.selectedGame = null },
-                                modifier = Modifier.weight(1f).fillMaxHeight()
-                            )
-                            Box(Modifier.size(h)) {
+                    GameScoreRow(
+                        score = activeState.score,
+                        progress = progress,
+                        onRestart = activeState::restart,
+                        onChangeGame = { state.selectedGame = null }
+                    )
+                    Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
+                        BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+                            val size = minOf(maxWidth, maxHeight)
+                            Box(
+                                modifier = Modifier
+                                    .size(size)
+                                    .align(Alignment.Center)
+                            ) {
                                 GameCanvasSlot(selected = selected, state = state)
-                            }
-                        }
-                    } else {
-                        Column(
-                            modifier = Modifier.fillMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            GameScoreRow(
-                                score = activeState.score,
-                                progress = progress,
-                                onRestart = activeState::restart,
-                                onChangeGame = { state.selectedGame = null }
-                            )
-                            Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
-                                BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-                                    val size = minOf(maxWidth, maxHeight)
-                                    Box(
-                                        modifier = Modifier
-                                            .size(size)
-                                            .align(Alignment.Center)
-                                    ) {
-                                        GameCanvasSlot(selected = selected, state = state)
-                                    }
-                                }
                             }
                         }
                     }
@@ -305,47 +280,6 @@ private fun GameCanvasSlot(selected: MiniGame, state: MiniGameState) {
         MiniGame.FLAPPY -> FlappyBirdGame(state = state.flappy)
         MiniGame.SNAKE -> SnakeGame(state = state.snake)
         MiniGame.DINO -> DinoGame(state = state.dino)
-    }
-}
-
-@Composable
-private fun GameSideControls(
-    score: Int,
-    progress: Float?,
-    onRestart: () -> Unit,
-    onChangeGame: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        GameChip(verticalPadding = 8.dp) {
-            Text(
-                stringResource(R.string.mini_game_score, score),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold
-            )
-        }
-        if (progress != null) {
-            Spacer(Modifier.height(8.dp))
-            GameChip(verticalPadding = 8.dp) {
-                Text(
-                    "${(progress * 100).toInt()}%",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.SemiBold
-                )
-            }
-        }
-        Spacer(Modifier.height(8.dp))
-        GameChip(onClick = onRestart) {
-            Icon(Icons.Outlined.Refresh, contentDescription = null, modifier = Modifier.size(20.dp))
-        }
-        Spacer(Modifier.height(8.dp))
-        GameChip(onClick = onChangeGame) {
-            Icon(Icons.Outlined.SportsEsports, contentDescription = null, modifier = Modifier.size(20.dp))
-        }
     }
 }
 
@@ -400,9 +334,7 @@ internal fun GameOverOverlay(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(12.dp))
-            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.92f)),
+        modifier = modifier.background(MaterialTheme.colorScheme.surface.copy(alpha = 0.92f)),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -447,9 +379,7 @@ internal fun GameOverOverlay(
 @Composable
 internal fun GamePauseOverlay(onResume: () -> Unit, modifier: Modifier = Modifier) {
     Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(12.dp))
-            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.92f)),
+        modifier = modifier.background(MaterialTheme.colorScheme.surface.copy(alpha = 0.92f)),
         contentAlignment = Alignment.Center
     ) {
         Column(

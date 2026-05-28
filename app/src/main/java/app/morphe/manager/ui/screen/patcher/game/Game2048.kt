@@ -189,8 +189,7 @@ private fun BoardGrid(state: Game2048State, size: Dp) {
     Box(
         modifier = Modifier
             .size(size)
-            .clip(RoundedCornerShape(12.dp))
-            .background(BoardBg)
+            .background(BoardBg, RoundedCornerShape(12.dp))
             .pointerInput(Unit) {
                 var drag = Offset.Zero
                 detectDragGestures(
