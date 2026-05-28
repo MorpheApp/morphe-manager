@@ -116,7 +116,7 @@ enum class SnakeDir {
 
 @Composable
 fun SnakeGame(state: SnakeGameState) {
-    GameOverHaptic(state.isGameOver)
+    GameOverHaptic { state.isGameOver }
     LaunchedEffect(Unit) {
         while (isActive) {
             delay(state.tickMs)

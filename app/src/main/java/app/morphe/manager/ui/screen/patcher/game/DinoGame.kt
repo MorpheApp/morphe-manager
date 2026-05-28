@@ -206,7 +206,7 @@ class DinoGameState(
 
 @Composable
 fun DinoGame(state: DinoGameState) {
-    GameOverHaptic(state.isGameOver)
+    GameOverHaptic { state.isGameOver }
     LaunchedEffect(Unit) {
         while (isActive) {
             withFrameMillis { state.tick(it) }

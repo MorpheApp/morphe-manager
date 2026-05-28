@@ -401,11 +401,17 @@ internal fun GamePauseOverlay(onResume: () -> Unit, modifier: Modifier = Modifie
 
 /** Fires a double-buzz haptic pattern once when [isGameOver] transitions to `true`. */
 @Composable
-internal fun GameOverHaptic(isGameOver: Boolean) {
+internal fun GameOverHaptic(isGameOver: () -> Boolean) {
     val context = LocalContext.current
-    LaunchedEffect(isGameOver) {
-        if (!isGameOver) return@LaunchedEffect
-        val vibrator = context.getSystemService(Vibrator::class.java) ?: return@LaunchedEffect
-        vibrator.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 80, 50, 80), -1))
+    LaunchedEffect(Unit) {
+        var seenFalse = false
+        snapshotFlow(isGameOver).collect { current ->
+            if (!current) {
+                seenFalse = true
+            } else if (seenFalse) {
+                val vibrator = context.getSystemService(Vibrator::class.java) ?: return@collect
+                vibrator.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 80, 50, 80), -1))
+            }
+        }
     }
 }

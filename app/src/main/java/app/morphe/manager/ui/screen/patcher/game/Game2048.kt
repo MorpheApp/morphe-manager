@@ -165,7 +165,7 @@ private val TileGap = 8.dp
 
 @Composable
 fun Game2048Board(state: Game2048State) {
-    GameOverHaptic(state.isGameOver)
+    GameOverHaptic { state.isGameOver }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         BoardGrid(state = state, size = maxWidth)
         if (state.hasWon && !state.isGameOver) {
