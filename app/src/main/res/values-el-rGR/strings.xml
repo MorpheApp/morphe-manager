@@ -689,6 +689,7 @@ morphe_header_custom_dark.png
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Προηγούμενος κατάλογος</string>
     <string name="file_picker_no_files">Δεν υπάρχουν αρχεία εδώ</string>
+    <string name="file_picker_read_error">Δεν είναι δυνατή η ανάγνωση αυτού του καταλόγου</string>
     <string name="file_picker_internal_storage">Εσωτερική αποθήκευση</string>
     <string name="file_picker_sd_card">Κάρτα SD</string>
     <string name="file_picker_root">Ρίζα (/)</string>

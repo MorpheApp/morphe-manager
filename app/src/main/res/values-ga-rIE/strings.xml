@@ -687,6 +687,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Eolaire roimhe seo</string>
     <string name="file_picker_no_files">Níl aon chomhaid anseo</string>
+    <string name="file_picker_read_error">Ní féidir an eolaire seo a léamh</string>
     <string name="file_picker_internal_storage">Stóráil inmheánach</string>
     <string name="file_picker_sd_card">Cárta SD</string>
     <string name="file_picker_root">Fréamh (/)</string>

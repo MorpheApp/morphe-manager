@@ -548,6 +548,7 @@ Opzionalmente, il percorso contiene un'icona di notifica in uno dei seguenti for
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Logo dell’intestazione personalizzato</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Modifica il logo nell\'intestazione</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Cartella con le immagini da utilizzare come logo dell’intestazione.
 
 La cartella deve contenere una o più delle seguenti cartelle, a seconda dei DPI del dispositivo:
@@ -570,6 +571,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Nascondi l’icona dell’app Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Rimuovi Shorts dal menu a pressione prolungata del launcher</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Nascondi il widget degli Shorts</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Rimuove il pulsante Shorts dal widget del launcher</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installatore</string>
     <string name="installer_title">Seleziona l\'installatore</string>
@@ -598,11 +600,16 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="installer_unavailable_message">Il tuo installer preferito (%s) non è attualmente disponibile. Puoi risolvere il problema e riprovare, o utilizzare l\'installer standard</string>
     <string name="installer_unavailable_shizuku_hint">Assicurati che Shizuku sia in esecuzione e che il permesso sia concesso a questa app</string>
     <string name="installer_use_standard">Usa standard</string>
+    <string name="settings_prompt_installer_on_install">Richiesta di selezione dell\'installer</string>
+    <string name="settings_prompt_installer_on_install_description">Mostra la finestra di dialogo di selezione dell\'installer ogni volta che un\'app patchata viene installata</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Ottimizzazione batteria</string>
+    <string name="settings_system_battery_optimization_description">Mantiene il patcher in esecuzione quando l\'app è minimizzata</string>
     <string name="settings_system_performance">Prestazioni</string>
     <string name="settings_system_process_runtime">Processo di esecuzione</string>
+    <string name="settings_system_process_runtime_description">Esegue il patching in un processo separato per una maggiore stabilità</string>
     <string name="settings_system_process_runtime_memory_limit">Limite di memoria</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Limiti più alti velocizzano il patching su dispositivi compatibili</string>
     <string name="settings_system_process_runtime_enable">Abilita il processo di esecuzione</string>
     <string name="settings_system_memory_limit_subtitle">Memoria disponibile per il patching</string>
     <string name="settings_system_memory_limit_warning">Un limite di memoria basso potrebbe causare errori durante il patching delle app più grandi</string>
@@ -612,6 +619,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importa &amp; Esporta</string>
     <string name="settings_system_keystore">Keystore</string>
+    <string name="settings_system_import_keystore_description">Importa o esporta il keystore di firma</string>
     <string name="settings_system_import_keystore_dialog_title">Inserisci le credenziali del keystore</string>
     <string name="settings_system_import_keystore_dialog_description">Dovrai inserire le credenziali del keystore per importarlo</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nome utente (Alias)</string>
@@ -641,18 +649,21 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_apks_size">Dimensione totale: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK patchati</string>
+    <string name="settings_system_patched_apks_description">Gestione dei file delle applicazioni patchate</string>
     <string name="settings_system_patched_apks_empty">Non ci sono APK patchati salvati</string>
     <string name="settings_system_patched_apks_delete_title">Cancellare l\'APK patchato?</string>
     <string name="settings_system_patched_apks_delete_confirm">Sei sicuro di voler eliminare l\'APK patchato per %s?</string>
     <string name="settings_system_patched_apks_deleted">L\'APK patchato è stato eliminato correttamente </string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APK originali</string>
+    <string name="settings_system_original_apks_description">Salvato per il ri-patching. Viene mantenuta una versione per app</string>
     <string name="settings_system_original_apks_empty">Non ci sono APK originali archiviati</string>
     <string name="settings_system_original_apks_deleted">L\'APK originale è stato eliminato correttamente </string>
     <string name="settings_system_original_apks_delete_title">Eliminare APK originale?</string>
     <string name="settings_system_original_apks_delete_confirm">Eliminare l\'APK originale per %s? Non potrai ripatchare senza fornire un nuovo APK</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Selezioni delle patch</string>
+    <string name="settings_system_patch_selections_description">Selezione patch salvata, conservata dopo la disinstallazione</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Ripristinare tutte le selezioni?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Ripristinare le selezioni del pacchetto?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Ripristinare la selezione della fonte?</string>
@@ -678,6 +689,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Directory precedente</string>
     <string name="file_picker_no_files">Nessun file qui</string>
+    <string name="file_picker_read_error">Impossibile leggere questa directory</string>
     <string name="file_picker_internal_storage">Memoria interna</string>
     <string name="file_picker_sd_card">Scheda SD</string>
     <string name="file_picker_root">Radice (/)</string>

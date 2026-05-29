@@ -689,6 +689,7 @@ Resim boyutları şu şekilde olmalıdır:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Önceki dizin</string>
     <string name="file_picker_no_files">Burada dosya yok</string>
+    <string name="file_picker_read_error">Bu dizini okuyamıyorum</string>
     <string name="file_picker_internal_storage">Dahili depolama</string>
     <string name="file_picker_sd_card">SD kart</string>
     <string name="file_picker_root">Root (/)</string>

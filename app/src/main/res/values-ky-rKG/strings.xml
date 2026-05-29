@@ -39,6 +39,7 @@
     <!-- Patcher Screen - Mini-games -->
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
+    <string name="settings_appearance_background_none">Эч бири</string>
     <!-- Settings - Appearance Tab - Theme -->
     <!-- Settings - Appearance Tab - Language Selector -->
     <!-- Settings - Appearance Tab - Home Screen Section -->
@@ -55,6 +56,7 @@
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <!-- Settings - System Tab - Installer Section -->
     <!-- Settings - System Tab - Performance Section -->
+    <string name="settings_system_battery_optimization">Батареяны колдонуу чектөөлөрү</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <!-- Settings - System Tab - Files & Storage Section -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
@@ -63,5 +65,8 @@
     <!-- Settings - System Tab - Custom file picker -->
     <!-- File Picker -->
     <!-- Settings - System Tab - About Section -->
+    <string name="settings_system_about">Маалымат</string>
     <!-- Shared strings -->
+    <string name="enabled">Ишке киргизилген</string>
+    <string name="disabled">Иштен чыгарылган</string>
 </resources>

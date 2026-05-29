@@ -690,6 +690,7 @@ morphe_adaptive_monochrome_custom.xml
     <!-- File Picker -->
     <string name="file_picker_previous_directory">المجلد السابق</string>
     <string name="file_picker_no_files">لا توجد ملفات هنا</string>
+    <string name="file_picker_read_error">لا يمكننق قراءة هذا المجلد</string>
     <string name="file_picker_internal_storage">التخزين الداخلي</string>
     <string name="file_picker_sd_card">الذاكرة الخارجية SD</string>
     <string name="file_picker_root">Root (/)</string>

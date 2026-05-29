@@ -689,6 +689,7 @@ Die beeld afmetings moet soos volg wees:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Vorige gids</string>
     <string name="file_picker_no_files">Geen lêers hier</string>
+    <string name="file_picker_read_error">Kan hierdie gids nie lees nie</string>
     <string name="file_picker_internal_storage">Interne stoorplek</string>
     <string name="file_picker_sd_card">SD-kaart</string>
     <string name="file_picker_root">Root (/)</string>

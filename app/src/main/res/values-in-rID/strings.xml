@@ -690,6 +690,7 @@ Dimensi gambar harus sebagai berikut:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Direktori sebelumnya</string>
     <string name="file_picker_no_files">Tidak ada berkas di sini</string>
+    <string name="file_picker_read_error">Tidak dapat membaca direktori ini</string>
     <string name="file_picker_internal_storage">Memori internal</string>
     <string name="file_picker_sd_card">Kartu SD</string>
     <string name="file_picker_root">Root (/)</string>

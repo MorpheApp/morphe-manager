@@ -689,6 +689,7 @@ morphe_header_custom_dark.png
     <!-- File Picker -->
     <string name="file_picker_previous_directory">पिछली निर्देशिका</string>
     <string name="file_picker_no_files">यहां कोई फ़ाइलें नहीं हैं</string>
+    <string name="file_picker_read_error">इस डाइरेक्टरी को पढ़ने में असमर्थ</string>
     <string name="file_picker_internal_storage">आंतरिक संग्रहण</string>
     <string name="file_picker_sd_card">एसडी कार्ड</string>
     <string name="file_picker_root">रूट (/)</string>

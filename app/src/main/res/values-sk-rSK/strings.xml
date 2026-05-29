@@ -689,6 +689,7 @@ Rozmery obrázka musia byť nasledovné:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Predchádzajúci priečinok</string>
     <string name="file_picker_no_files">Tu nie sú žiadne súbory</string>
+    <string name="file_picker_read_error">Nie je možné prečítať tento adresár</string>
     <string name="file_picker_internal_storage">Interná pamäť</string>
     <string name="file_picker_sd_card">SD karta</string>
     <string name="file_picker_root">Koreň (/)</string>

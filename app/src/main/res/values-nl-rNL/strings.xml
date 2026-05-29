@@ -686,6 +686,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Vorige map</string>
     <string name="file_picker_no_files">Geen bestanden hier</string>
+    <string name="file_picker_read_error">Kan deze map niet lezen</string>
     <string name="file_picker_internal_storage">Interne opslag</string>
     <string name="file_picker_sd_card">SD-kaart</string>
     <string name="file_picker_root">Root (/)</string>

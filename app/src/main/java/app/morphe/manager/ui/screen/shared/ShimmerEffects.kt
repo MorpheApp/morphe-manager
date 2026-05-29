@@ -6,7 +6,6 @@
 package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,10 +13,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -38,24 +38,23 @@ fun ShimmerBox(
     baseAlpha: Float = 0.2f
 ) {
     val onSurface = MaterialTheme.colorScheme.onSurface
-    val resolvedBaseColor = if (baseColor == Color.Unspecified) onSurface.copy(alpha = 0.1f) else baseColor
-    val resolvedShimmerColor = if (shimmerColor == Color.Unspecified) onSurface.copy(alpha = 0.3f) else shimmerColor
+    val resolvedBaseColor = if (baseColor == Color.Unspecified) onSurface else baseColor
+    val resolvedShimmerColor = if (shimmerColor == Color.Unspecified) onSurface.copy(alpha = 0.35f) else shimmerColor
 
     val infiniteTransition = rememberInfiniteTransition(label = "shimmer")
 
-    // Shimmer animation
-    val shimmerOffset by infiniteTransition.animateFloat(
-        initialValue = -1f,
-        targetValue = 2f,
+    // State<Float> (not `by`) so .value in drawBehind is a draw-phase observation - only the draw
+    // lambda re-runs per frame. initialValue=0.5 keeps the band on-screen from frame 1
+    val shimmerProgressState: State<Float> = infiniteTransition.animateFloat(
+        initialValue = 0.5f,
+        targetValue = 1.5f,
         animationSpec = infiniteRepeatable(
-            animation = tween(1500, easing = LinearEasing),
+            animation = tween(1200, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
         ),
-        label = "shimmer_offset"
+        label = "shimmer_progress"
     )
-
-    // Pulse animation for subtle breathing effect
-    val pulseAlpha by infiniteTransition.animateFloat(
+    val pulseAlphaState: State<Float> = infiniteTransition.animateFloat(
         initialValue = baseAlpha,
         targetValue = baseAlpha + 0.1f,
         animationSpec = infiniteRepeatable(
@@ -68,31 +67,22 @@ fun ShimmerBox(
     Box(
         modifier = modifier
             .clip(shape)
-    ) {
-        // Base gradient background
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(resolvedBaseColor.copy(alpha = pulseAlpha))
-        )
+            .drawBehind {
+                val progress = shimmerProgressState.value % 1f
+                val alpha = pulseAlphaState.value
+                val bandWidth = size.width * 0.7f
+                val startX = progress * (size.width + bandWidth) - bandWidth
 
-        // Shimmer overlay
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
+                drawRect(color = resolvedBaseColor.copy(alpha = alpha))
+                drawRect(
                     brush = Brush.linearGradient(
-                        colors = listOf(
-                            Color.Transparent,
-                            resolvedShimmerColor,
-                            Color.Transparent
-                        ),
-                        start = Offset(shimmerOffset * 1000, 0f),
-                        end = Offset((shimmerOffset + 1f) * 1000, 0f)
+                        colors = listOf(Color.Transparent, resolvedShimmerColor, Color.Transparent),
+                        start = Offset(startX, 0f),
+                        end = Offset(startX + bandWidth, 0f)
                     )
                 )
-        )
-    }
+            }
+    )
 }
 
 /**
@@ -159,14 +149,6 @@ fun ShimmerChangelog(
                 }
             }
         }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Date/author info
-        ShimmerText(
-            widthFraction = 0.3f,
-            height = 12.dp
-        )
     }
 }
 

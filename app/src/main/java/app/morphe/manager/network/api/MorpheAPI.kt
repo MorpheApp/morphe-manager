@@ -11,6 +11,8 @@ import app.morphe.manager.network.utils.getOrNull
 import app.morphe.manager.util.*
 import io.ktor.client.request.header
 import io.ktor.client.request.url
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
@@ -156,7 +158,7 @@ class MorpheAPI(
             downloadUrl = asset.downloadUrl,
             createdAt = parseTimestamp(timestamp),
             signatureDownloadUrl = findSignatureUrl(release, asset),
-            pageUrl = "${config.htmlUrl}/releases/tag/${release.tagName}",
+            pageUrl = releasePageUrl(config.htmlUrl, release.tagName),
             description = release.body?.ifBlank { release.name.orEmpty() } ?: release.name.orEmpty(),
             version = release.tagName
         )
@@ -171,7 +173,7 @@ class MorpheAPI(
             downloadUrl = releaseInfo.downloadUrl,
             createdAt = parseTimestamp(releaseInfo.createdAt),
             signatureDownloadUrl = releaseInfo.signatureDownloadUrl,
-            pageUrl = "${config.htmlUrl}/releases/tag/$version",
+            pageUrl = releasePageUrl(config.htmlUrl, version),
             description = releaseInfo.description,
             version = version
         )
@@ -187,7 +189,7 @@ class MorpheAPI(
             createdAt = parseTimestamp(releaseInfo.createdAt),
             // Treat empty string the same as absent — some JSON files emit ""
             signatureDownloadUrl = releaseInfo.signatureDownloadUrl?.ifBlank { null },
-            pageUrl = "${config.htmlUrl}/releases/tag/$version",
+            pageUrl = releasePageUrl(config.htmlUrl, version),
             description = releaseInfo.description,
             version = version
         )
@@ -421,17 +423,19 @@ class MorpheAPI(
     }
 
     /** Fetches and parses CHANGELOG.md from the first-party patches repository. */
-    suspend fun fetchPatchesChangelog(branch: String = "main"): List<ChangelogEntry> =
-        fetchChangelogFromRepo(patchesConfig, branch)
+    suspend fun fetchPatchesChangelog(branch: String = "main", stopAfterFirstStable: Boolean = false): List<ChangelogEntry> =
+        fetchChangelogFromRepo(patchesConfig, branch, stopAfterFirstStable = stopAfterFirstStable)
 
     /**
      * Fetches and parses CHANGELOG.md from an arbitrary raw URL.
      * Used for third-party bundles that follow the Morphe changelog format.
      */
-    suspend fun fetchChangelogFromUrl(changelogUrl: String): List<ChangelogEntry> {
+    suspend fun fetchChangelogFromUrl(changelogUrl: String, stopAfterFirstStable: Boolean = false): List<ChangelogEntry> {
         Log.d(tag, "fetchChangelogFromUrl: $changelogUrl")
         return when (val r = client.request<String> { url(changelogUrl) }) {
-            is APIResponse.Success -> ChangelogParser.parse(r.data)
+            is APIResponse.Success -> withContext(Dispatchers.Default) {
+                ChangelogParser.parse(r.data, stopAfterFirstStable)
+            }
             is APIResponse.Error, is APIResponse.Failure -> {
                 Log.w(tag, "Failed to fetch changelog from $changelogUrl")
                 emptyList()
@@ -442,7 +446,8 @@ class MorpheAPI(
     private suspend fun fetchChangelogFromRepo(
         config: RepoConfig,
         branch: String,
-        path: String = "CHANGELOG.md"
+        path: String = "CHANGELOG.md",
+        stopAfterFirstStable: Boolean = false
     ): List<ChangelogEntry> {
         val url = config.rawFileUrl(branch, path)
         Log.d(tag, "fetchChangelog: $url")
@@ -450,7 +455,9 @@ class MorpheAPI(
             url(url)
             header("Cache-Control", "no-cache")
         }) {
-            is APIResponse.Success -> ChangelogParser.parse(r.data)
+            is APIResponse.Success -> withContext(Dispatchers.Default) {
+                ChangelogParser.parse(r.data, stopAfterFirstStable)
+            }
             is APIResponse.Error, is APIResponse.Failure -> {
                 Log.w(tag, "Failed to fetch $path for ${config.name}@$branch")
                 emptyList()

@@ -9,7 +9,10 @@ import android.annotation.SuppressLint
 import android.graphics.Color.argb
 import android.graphics.Color.colorToHSV
 import android.net.Uri
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
@@ -18,6 +21,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -54,12 +58,16 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.*
+import com.mikepenz.markdown.model.parseMarkdownFlow
 import compose.icons.FontAwesomeIcons
 import compose.icons.fontawesomeicons.Brands
 import compose.icons.fontawesomeicons.brands.Github
 import compose.icons.fontawesomeicons.brands.Gitlab
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.mapNotNull
 import org.koin.compose.koinInject
+import com.mikepenz.markdown.model.State as MarkdownRenderState
 
 private val ColorValid = Color(0xFF4CAF50)
 
@@ -1142,67 +1150,80 @@ fun BundleChangelogDialog(
     onDismissRequest: () -> Unit
 ) {
     var state: BundleChangelogState by remember { mutableStateOf(BundleChangelogState.Loading) }
+    // 0 = waiting for dialog enter; incremented to trigger fetch, again on retry
+    var fetchTrigger by remember { mutableIntStateOf(0) }
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(fetchTrigger) {
+        if (fetchTrigger == 0) return@LaunchedEffect
         state = BundleChangelogState.Loading
-        state = try {
-            val usePrerelease = (src as? APIPatchBundle)?.usePrerelease == true
-                    || (src as? JsonPatchBundle)?.usePrerelease == true
+        state = withContext(Dispatchers.Default) {
+            try {
+                val usePrerelease = (src as? APIPatchBundle)?.usePrerelease == true
+                        || (src as? JsonPatchBundle)?.usePrerelease == true
 
-            val allEntries = src.fetchChangelogEntries(sinceVersion = null)
+                val allEntries = src.fetchChangelogEntries(sinceVersion = null)
 
-            val entries = if (usePrerelease) {
-                // Prerelease: from the last stable release onwards
-                val lastStable = allEntries.firstOrNull { !it.version.contains("-") }
-                if (lastStable != null)
-                    ChangelogParser.entriesNewerThan(allEntries, lastStable.version) + lastStable
-                else allEntries
-            } else {
-                // Stable: from the installed version onwards
-                val installed = src.installedVersionSignature
-                val installedEntry = installed?.let {
-                    ChangelogParser.findVersion(allEntries, it)
+                val entries = if (usePrerelease) {
+                    // Prerelease: from the last stable release onwards
+                    val lastStable = allEntries.firstOrNull { !it.version.contains("-") }
+                    if (lastStable != null)
+                        ChangelogParser.entriesNewerThan(allEntries, lastStable.version) + lastStable
+                    else allEntries.take(30)
+                } else {
+                    // Stable: from the installed version onwards
+                    val installed = src.installedVersionSignature
+                    val installedEntry = installed?.let {
+                        ChangelogParser.findVersion(allEntries, it)
+                    }
+                    val newer = if (installed != null)
+                        ChangelogParser.entriesNewerThan(allEntries, installed)
+                    else allEntries
+                    if (installedEntry != null) newer + installedEntry else newer
                 }
-                val newer = if (installed != null)
-                    ChangelogParser.entriesNewerThan(allEntries, installed)
-                else allEntries
-                if (installedEntry != null) newer + installedEntry else newer
-            }
 
-            // APIPatchBundle has endpoint="api" - use SOURCE_REPO_URL directly
-            val repoUrl = when (src) {
-                is APIPatchBundle -> SOURCE_REPO_URL
-                else -> RemotePatchBundle.inferPageUrlFromEndpoint(src.endpoint)
-            }
-            val latestPageUrl = entries.firstOrNull()?.version?.let { version ->
-                val tag = if (version.startsWith("v")) version else "v$version"
-                val url = repoUrl?.let { "$it/releases/tag/$tag" }
-                url
-            }
+                // APIPatchBundle has endpoint="api" - use SOURCE_REPO_URL directly
+                val repoUrl = when (src) {
+                    is APIPatchBundle -> SOURCE_REPO_URL
+                    else -> RemotePatchBundle.inferPageUrlFromEndpoint(src.endpoint)
+                }
+                val latestPageUrl = entries.firstOrNull()?.version?.let { version ->
+                    repoUrl?.let { releasePageUrl(it, version) }
+                }
 
-            if (entries.isNotEmpty()) {
-                BundleChangelogState.Entries(entries, latestPageUrl = latestPageUrl)
-            } else {
-                // Fallback: CHANGELOG.md unavailable - use latest release info from API
-                val asset = src.fetchLatestReleaseInfo()
-                BundleChangelogState.Entries(
-                    entries = listOf(
+                if (entries.isNotEmpty()) {
+                    BundleChangelogState.Entries(
+                        entries = entries,
+                        parsedMarkdown = preParseEntries(entries),
+                        latestPageUrl = latestPageUrl
+                    )
+                } else {
+                    // Fallback: CHANGELOG.md unavailable - use latest release info from API
+                    val asset = src.fetchLatestReleaseInfo()
+                    val fallbackEntries = listOf(
                         ChangelogEntry(
                             version = asset.version,
                             date = null,
                             content = asset.description.sanitizePatchChangelogMarkdown()
                         )
-                    ),
-                    latestPageUrl = asset.pageUrl
-                )
+                    )
+                    BundleChangelogState.Entries(
+                        entries = fallbackEntries,
+                        parsedMarkdown = preParseEntries(fallbackEntries),
+                        latestPageUrl = asset.pageUrl
+                    )
+                }
+            } catch (t: Throwable) {
+                BundleChangelogState.Error(t)
             }
-        } catch (t: Throwable) {
-            BundleChangelogState.Error(t)
         }
     }
 
     MorpheDialog(
         onDismissRequest = onDismissRequest,
+        // Start fetch only after the dialog enter animation completes so the shimmer
+        // is always visible first, even when data is cached and would resolve instantly
+        onEntered = { if (fetchTrigger == 0) fetchTrigger = 1 },
+        scrollable = false,
         title = when (state) {
             is BundleChangelogState.Entries -> null
             is BundleChangelogState.Error -> stringResource(R.string.changelog)
@@ -1229,7 +1250,7 @@ fun BundleChangelogDialog(
                     MorpheDialogButtonColumn {
                         MorpheDialogButton(
                             text = stringResource(R.string.changelog_retry),
-                            onClick = { state = BundleChangelogState.Loading },
+                            onClick = { fetchTrigger++ },
                             modifier = Modifier.fillMaxWidth()
                         )
                         MorpheDialogButton(
@@ -1249,21 +1270,48 @@ fun BundleChangelogDialog(
             }
         }
     ) {
-        AnimatedContent(
-            targetState = state,
-            transitionSpec = MorpheAnimations.fadeCrossfade(),
-            contentKey = { it::class },
-            label = "changelog_content"
-        ) { current ->
-            when (current) {
-                BundleChangelogState.Loading -> ChangelogSectionLoading()
-                is BundleChangelogState.Error -> BundleChangelogError(error = current.throwable)
-                is BundleChangelogState.Entries -> ChangelogEntriesList(
-                    entries = current.entries,
-                    headerIcon = Icons.Outlined.History,
-                    emptyText = stringResource(R.string.changelog_empty),
-                    textColor = LocalDialogTextColor.current
-                )
+        BundleChangelogContent(state)
+    }
+}
+
+@Composable
+private fun BundleChangelogContent(state: BundleChangelogState) {
+    Crossfade(
+        targetState = state,
+        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+        modifier = Modifier.fillMaxWidth(),
+        label = "changelog_state"
+    ) { current ->
+        when (current) {
+            BundleChangelogState.Loading -> ChangelogSectionLoading()
+            is BundleChangelogState.Error -> BundleChangelogError(error = current.throwable)
+            is BundleChangelogState.Entries -> {
+                if (current.entries.isEmpty()) {
+                    Text(
+                        text = stringResource(R.string.changelog_empty),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                } else {
+                    val textColor = LocalDialogTextColor.current
+                    LazyColumn(modifier = Modifier.fillMaxWidth()) {
+                        itemsIndexed(current.entries) { index, entry ->
+                            if (index > 0) {
+                                HorizontalDivider(
+                                    modifier = Modifier.padding(vertical = 20.dp),
+                                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
+                                )
+                            }
+                            ChangelogEntrySection(
+                                entry = entry,
+                                headerIcon = Icons.Outlined.History,
+                                textColor = textColor,
+                                precomputedMarkdown = current.parsedMarkdown.getOrNull(index)
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -1318,10 +1366,24 @@ private sealed interface BundleChangelogState {
     /** [entries] are already filtered to "missed" versions, newest-first. */
     data class Entries(
         val entries: List<ChangelogEntry>,
+        val parsedMarkdown: List<MarkdownRenderState?>,
         val latestPageUrl: String?
     ) : BundleChangelogState
     data class Error(val throwable: Throwable) : BundleChangelogState
 }
+
+private suspend fun preParseEntries(entries: List<ChangelogEntry>): List<MarkdownRenderState?> =
+    coroutineScope {
+        entries.map { entry ->
+            async {
+                if (entry.content.isBlank()) null
+                else runCatching {
+                    parseMarkdownFlow(entry.content.trimIndent())
+                        .first { it !is MarkdownRenderState.Loading }
+                }.getOrNull()
+            }
+        }.awaitAll()
+    }
 
 private val doubleBracketLinkRegex = Regex("""\[\[([^]]+)]\(([^)]+)\)]""")
 

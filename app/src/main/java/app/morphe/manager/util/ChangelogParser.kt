@@ -65,8 +65,13 @@ object ChangelogParser {
     /**
      * Parse raw CHANGELOG.md text into a list of [ChangelogEntry], ordered
      * newest-first (same order as in the file).
+     *
+     * When [stopAfterFirstStable] is true the parser stops as soon as the first
+     * stable release (no pre-release suffix) has been collected and the next
+     * heading is encountered, skipping the rest of the file. Useful for dev-branch
+     * changelogs that accumulate many old entries below the last stable baseline.
      */
-    fun parse(markdown: String): List<ChangelogEntry> {
+    fun parse(markdown: String, stopAfterFirstStable: Boolean = false): List<ChangelogEntry> {
         val entries = mutableListOf<ChangelogEntry>()
         val lines = markdown.lines()
 
@@ -89,6 +94,10 @@ object ChangelogParser {
             val match = VERSION_HEADING.find(line)
             if (match != null) {
                 flush()
+                if (stopAfterFirstStable && entries.lastOrNull()?.version?.contains("-") == false) {
+                    currentVersion = null
+                    break
+                }
                 currentVersion = match.groupValues[1].trim()
                 currentDate = match.groupValues[2]
                 currentContent.clear()

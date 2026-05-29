@@ -13,9 +13,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
-import app.morphe.manager.util.MANAGER_REPO_URL
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
+import app.morphe.manager.util.MANAGER_REPO_URL
+import app.morphe.manager.util.releasePageUrl
 
 /**
  * Changelog dialog.
@@ -40,10 +41,7 @@ fun ChangelogDialog(
         footer = {
             MorpheDialogButtonColumn {
                 ChangelogButton(
-                    pageUrl = entry?.version?.let {
-                        val tag = if (it.startsWith("v")) it else "v$it"
-                        "$MANAGER_REPO_URL/releases/tag/$tag"
-                    },
+                    pageUrl = entry?.version?.let { releasePageUrl(MANAGER_REPO_URL, it) },
                     modifier = Modifier.fillMaxWidth()
                 )
                 MorpheDialogButton(

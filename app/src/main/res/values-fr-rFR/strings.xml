@@ -690,6 +690,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Dossier précédent</string>
     <string name="file_picker_no_files">Aucun fichier ici</string>
+    <string name="file_picker_read_error">Impossible de lire ce répertoire</string>
     <string name="file_picker_internal_storage">Stockage interne</string>
     <string name="file_picker_sd_card">Carte SD</string>
     <string name="file_picker_root">Root (/)</string>

@@ -29,6 +29,7 @@ import app.morphe.manager.util.ChangelogEntry
 import com.mikepenz.markdown.compose.Markdown
 import com.mikepenz.markdown.m3.markdownColor
 import com.mikepenz.markdown.m3.markdownTypography
+import com.mikepenz.markdown.model.State as MarkdownRenderState
 
 /**
  * Opens the GitHub release page for the given [pageUrl].
@@ -76,7 +77,8 @@ fun ChangelogSectionLoading(
 fun ChangelogEntrySection(
     entry: ChangelogEntry,
     headerIcon: ImageVector = Icons.Outlined.NewReleases,
-    textColor: Color = LocalDialogTextColor.current
+    textColor: Color = LocalDialogTextColor.current,
+    precomputedMarkdown: MarkdownRenderState? = null
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -89,7 +91,7 @@ fun ChangelogEntrySection(
             textColor = textColor
         )
         if (entry.content.isNotBlank()) {
-            Changelog(markdown = entry.content)
+            Changelog(markdown = entry.content, precomputedState = precomputedMarkdown)
         }
     }
 }
@@ -210,28 +212,35 @@ private fun ChangelogEntryHeader(
  */
 @Composable
 fun Changelog(
-    markdown: String
+    markdown: String,
+    precomputedState: MarkdownRenderState? = null
 ) {
-    Markdown(
-        content = markdown.trimIndent(),
-        immediate = true,
-        retainState = true,
-        colors = markdownColor(
-            text = MaterialTheme.colorScheme.onSurface,
-            codeBackground = MaterialTheme.colorScheme.surfaceContainerHighest,
-            inlineCodeBackground = MaterialTheme.colorScheme.surfaceContainerHighest,
-            dividerColor = MaterialTheme.colorScheme.outlineVariant
-        ),
-        typography = markdownTypography(
-            h1 = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-            h2 = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
-            h3 = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
-            text = MaterialTheme.typography.bodyMedium,
-            list = MaterialTheme.typography.bodyMedium,
-            code = MaterialTheme.typography.bodySmall.copy(
-                fontFamily = FontFamily.Monospace,
-                letterSpacing = 0.sp
-            )
+    val colors = markdownColor(
+        text = MaterialTheme.colorScheme.onSurface,
+        codeBackground = MaterialTheme.colorScheme.surfaceContainerHighest,
+        inlineCodeBackground = MaterialTheme.colorScheme.surfaceContainerHighest,
+        dividerColor = MaterialTheme.colorScheme.outlineVariant
+    )
+    val typography = markdownTypography(
+        h1 = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+        h2 = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+        h3 = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
+        text = MaterialTheme.typography.bodyMedium,
+        list = MaterialTheme.typography.bodyMedium,
+        code = MaterialTheme.typography.bodySmall.copy(
+            fontFamily = FontFamily.Monospace,
+            letterSpacing = 0.sp
         )
     )
+    if (precomputedState != null) {
+        Markdown(state = precomputedState, colors = colors, typography = typography)
+    } else {
+        Markdown(
+            content = markdown.trimIndent(),
+            retainState = true,
+            loading = { ShimmerChangelog(modifier = it) },
+            colors = colors,
+            typography = typography
+        )
+    }
 }

@@ -689,6 +689,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Nakaraang direktoryo</string>
     <string name="file_picker_no_files">Walang mga file dito</string>
+    <string name="file_picker_read_error">Hindi mabasa ang direktoryong ito</string>
     <string name="file_picker_internal_storage">Imbakan ng telepono</string>
     <string name="file_picker_sd_card">SD card</string>
     <string name="file_picker_root">Root (/)</string>

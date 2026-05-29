@@ -754,6 +754,7 @@ The image dimensions must be as follows:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Previous directory</string>
     <string name="file_picker_no_files">No files here</string>
+    <string name="file_picker_read_error">Cannot read this directory</string>
     <string name="file_picker_internal_storage">Internal storage</string>
     <string name="file_picker_sd_card">SD card</string>
     <string name="file_picker_root">Root (/)</string>

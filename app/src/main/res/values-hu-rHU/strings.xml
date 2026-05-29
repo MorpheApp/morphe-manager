@@ -690,6 +690,7 @@ Forrás: #%2$s</string>
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Előző mappa</string>
     <string name="file_picker_no_files">Nincs itt fájl</string>
+    <string name="file_picker_read_error">Nem lehet beolvasni ezt a könyvtárat</string>
     <string name="file_picker_internal_storage">Belső tárhely</string>
     <string name="file_picker_sd_card">SD-kártya</string>
     <string name="file_picker_root">Gyökér (/)</string>

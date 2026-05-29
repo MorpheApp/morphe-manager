@@ -201,6 +201,7 @@
     <string name="patch_option_list_duplicate">Ova vrednost već postoji</string>
     <string name="patch_option_list_empty">Vrednost ne može biti prazna</string>
     <string name="patch_option_list_empty_state">Nisu dodate nijedne vrednosti</string>
+    <string name="patch_option_required_missing">%s: попуните сва обавезna поља</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Направи адаптивни икону</string>
     <string name="adaptive_icon_select_image">Изабери слику</string>
@@ -688,6 +689,7 @@ morphe_header_custom_dark.png
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Претходни директоријум</string>
     <string name="file_picker_no_files">Нема фајлова овде</string>
+    <string name="file_picker_read_error">Не могу да прочитам ову директорију</string>
     <string name="file_picker_internal_storage">Интерна складиште</string>
     <string name="file_picker_sd_card">SD картица</string>
     <string name="file_picker_root">Корен (/)</string>

@@ -807,7 +807,9 @@ fun InfoBox(
 @Composable
 fun EmptyState(
     message: String,
-    icon: ImageVector? = Icons.Outlined.FolderOff
+    icon: ImageVector? = Icons.Outlined.FolderOff,
+    actionLabel: String? = null,
+    onAction: (() -> Unit)? = null
 ) {
     Column(
         modifier = Modifier
@@ -830,5 +832,10 @@ fun EmptyState(
             color = LocalDialogSecondaryTextColor.current,
             textAlign = TextAlign.Center
         )
+        if (actionLabel != null && onAction != null) {
+            OutlinedButton(onClick = onAction) {
+                Text(actionLabel)
+            }
+        }
     }
 }

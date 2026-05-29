@@ -43,6 +43,7 @@
     <!-- Settings - Appearance Tab - Language Selector -->
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
+    <string name="settings_appearance_app_icon_default">The </string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
@@ -63,5 +64,6 @@
     <!-- Settings - System Tab - Custom file picker -->
     <!-- File Picker -->
     <!-- Settings - System Tab - About Section -->
+    <string name="settings_system_about">O Morphe</string>
     <!-- Shared strings -->
 </resources>

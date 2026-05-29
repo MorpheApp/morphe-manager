@@ -689,6 +689,7 @@ Dimenzije slike morajo biti naslednje:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Prejšnji imenik</string>
     <string name="file_picker_no_files">Ni datotek tukaj</string>
+    <string name="file_picker_read_error">Ne morem prebrati te mape</string>
     <string name="file_picker_internal_storage">Notranji pomnilnik</string>
     <string name="file_picker_sd_card">SD kartica</string>
     <string name="file_picker_root">Koren (/)</string>

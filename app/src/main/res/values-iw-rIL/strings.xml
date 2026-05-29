@@ -673,6 +673,7 @@ morphe_adaptive_monochrome_custom.xml
     <!-- File Picker -->
     <string name="file_picker_previous_directory">ספרייה קודמת</string>
     <string name="file_picker_no_files">אין קבצים כאן</string>
+    <string name="file_picker_read_error">לא ניתן לקרוא תיקייה זו</string>
     <string name="file_picker_internal_storage">אחסון פנימי</string>
     <string name="file_picker_sd_card">כרטיס SD</string>
     <string name="file_picker_root">שורש (/)</string>

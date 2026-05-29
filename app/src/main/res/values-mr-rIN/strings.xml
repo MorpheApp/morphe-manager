@@ -317,6 +317,7 @@
     <!-- File Picker -->
     <string name="file_picker_previous_directory">मागील निर्देशिका</string>
     <string name="file_picker_no_files">येथे कोणतीही फाईल नाही</string>
+    <string name="file_picker_read_error">या निर्देशिकेस वाचू शकत नाही</string>
     <string name="file_picker_internal_storage"> अंतर्गत स्टोरेज</string>
     <string name="file_picker_sd_card">एसडी कार्ड</string>
     <string name="file_picker_root">मुल (/)</string>

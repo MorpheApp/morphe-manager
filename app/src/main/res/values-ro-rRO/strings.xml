@@ -689,6 +689,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Director anterior</string>
     <string name="file_picker_no_files">Nu există fișiere aici</string>
+    <string name="file_picker_read_error">Nu se poate citi acest director</string>
     <string name="file_picker_internal_storage">Stocare internă</string>
     <string name="file_picker_sd_card">Card SD</string>
     <string name="file_picker_root">Rădăcină (/)</string>

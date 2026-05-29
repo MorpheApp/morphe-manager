@@ -178,12 +178,15 @@
     <!-- Patcher Screen - Mini-games -->
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
+    <string name="settings_appearance_background_none">موردی وجود ندارد</string>
     <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_system">سیستم</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Notification content -->
+    <string name="notification_manager_update_title">به‌روزرسانی Morphe در دسترس است</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert_mode">حالت متخصص</string>
     <!-- Bytecode mode -->
@@ -206,4 +209,9 @@
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">درباره</string>
     <!-- Shared strings -->
+    <string name="remove">حذف</string>
+    <string name="enabled">فعال</string>
+    <string name="disabled">غیرفعال</string>
+    <string name="allow">اجازه</string>
+    <string name="details">جزئیات</string>
 </resources>

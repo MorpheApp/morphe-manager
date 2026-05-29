@@ -162,6 +162,7 @@
 Oletko varma, että haluat jatkaa?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">Todentamaton APK</string>
+    <string name="home_invalid_signature_message">Valitsemasi APK-tiedosto &lt;b&gt;%s&lt;/b&gt; ei vastaa odotettua allekirjoitussertifikaattia. Sitä on ehkä muokattu tai se on peräisin luotettamattomasta lähteestä</string>
     <string name="home_invalid_signature_badge">Tämä APK ei välttämättä ole alkuperäinen</string>
     <string name="home_split_apk_warning_title">Ositettu APK havaittu</string>
     <string name="home_split_apk_warning_message">"Tämä tiedosto on APK-paketti
@@ -688,6 +689,7 @@ Kuvien mittojen on oltava seuraavat:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Edellinen hakemisto</string>
     <string name="file_picker_no_files">Täällä ei ole tiedostoja</string>
+    <string name="file_picker_read_error">Tätä hakemistoa ei voida lukea</string>
     <string name="file_picker_internal_storage">Sisäinen tallennustila</string>
     <string name="file_picker_sd_card">SD-kortti</string>
     <string name="file_picker_root">Juurihakemisto (/)</string>

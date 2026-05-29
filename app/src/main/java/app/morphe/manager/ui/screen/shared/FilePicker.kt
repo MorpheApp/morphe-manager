@@ -179,10 +179,10 @@ private enum class SortMode {
     }
 }
 
-private fun listDir(dir: File, allowedExtensions: Set<String>?): List<File> =
+// Returns null when the directory cannot be read (permission denied or I/O error)
+private fun listDir(dir: File, allowedExtensions: Set<String>?): List<File>? =
     dir.listFiles()
         ?.filter { it.isDirectory || allowedExtensions == null || it.extension.lowercase() in allowedExtensions }
-        ?: emptyList()
 
 private fun applySort(files: List<File>, mode: SortMode): List<File> {
     val (dirs, nonDirs) = files.partition { it.isDirectory }
@@ -271,15 +271,32 @@ fun FilePicker(
     }
 
     // key() disposes and recreates the State in the same frame currentDir/refreshKey change,
-    // guaranteeing dirContents is null (loading) before the producer runs
+    // guaranteeing dirContents is null (loading) before the producer runs.
+    // Result.success = read OK; Result.failure = listFiles() returned null (permission denied / I/O error)
     val dirContents by key(currentDir, refreshKey) {
-        produceState<List<File>?>(initialValue = null) {
-            value = currentDir?.let { listDir(it, allowedExtensions) } ?: emptyList()
-            currentDir?.absolutePath?.let { prefs.lastFilePickerPath.update(it) }
+        produceState<Result<List<File>>?>(initialValue = null) {
+            val dir = currentDir
+            if (dir == null) {
+                value = Result.success(emptyList())
+            } else {
+                var files = withContext(Dispatchers.IO) { listDir(dir, allowedExtensions) }
+                if (files == null) {
+                    // On Android 11+, MANAGE_EXTERNAL_STORAGE is granted via a separate Settings
+                    // screen. The system flag updates immediately, but the kernel GID propagation
+                    // can lag by a few hundred ms, causing listFiles() to return null right after
+                    // the user returns to the app. One retry covers the vast majority of devices
+                    delay(300)
+                    files = withContext(Dispatchers.IO) { listDir(dir, allowedExtensions) }
+                }
+                value = if (files != null) Result.success(files) else Result.failure(SecurityException())
+                if (files != null) prefs.lastFilePickerPath.update(dir.absolutePath)
+            }
         }
     }
 
-    val sortedContents = remember(dirContents, sortMode) { dirContents?.let { applySort(it, sortMode) } ?: emptyList() }
+    val sortedContents = remember(dirContents, sortMode) {
+        dirContents?.getOrNull()?.let { applySort(it, sortMode) } ?: emptyList()
+    }
     val displayedContents = remember(sortedContents, searchQuery) {
         if (searchQuery.isBlank()) sortedContents
         else sortedContents.filter { it.name.contains(searchQuery, ignoreCase = true) }
@@ -528,7 +545,16 @@ fun FilePicker(
                     }
 
                     val contentsLoaded = dirContents
-                    if (contentsLoaded != null && contentsLoaded.isEmpty()) {
+                    if (contentsLoaded != null && contentsLoaded.isFailure) {
+                        item(key = "__error__") {
+                            EmptyState(
+                                message = stringResource(R.string.file_picker_read_error),
+                                icon = Icons.Outlined.Lock,
+                                actionLabel = stringResource(R.string.retry),
+                                onAction = { refreshKey++ }
+                            )
+                        }
+                    } else if (contentsLoaded != null && contentsLoaded.getOrNull()!!.isEmpty()) {
                         item(key = "__empty__") {
                             EmptyState(
                                 message = stringResource(R.string.file_picker_no_files),

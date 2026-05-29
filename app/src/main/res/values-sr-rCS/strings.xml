@@ -673,6 +673,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Prethodna direktorijum</string>
     <string name="file_picker_no_files">Ovde nema datoteka</string>
+    <string name="file_picker_read_error">Ne mogu da pročitam ovu direktoriju</string>
     <string name="file_picker_internal_storage">Interna memorija</string>
     <string name="file_picker_sd_card">SD kartica</string>
     <string name="file_picker_root">Koren (/)</string>

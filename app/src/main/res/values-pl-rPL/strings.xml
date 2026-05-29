@@ -689,6 +689,7 @@ Wymagane są następujące wymiary obrazów:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Poprzedni katalog</string>
     <string name="file_picker_no_files">Brak plików</string>
+    <string name="file_picker_read_error">Nie można odczytać tego katalogu</string>
     <string name="file_picker_internal_storage">Pamięć wewnętrzna</string>
     <string name="file_picker_sd_card">Karta SD</string>
     <string name="file_picker_root">Katalog główny (/)</string>

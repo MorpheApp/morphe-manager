@@ -690,6 +690,7 @@ morphe_header_custom_dark.png
     <!-- File Picker -->
     <string name="file_picker_previous_directory">이전 디렉터리</string>
     <string name="file_picker_no_files">파일이 없습니다</string>
+    <string name="file_picker_read_error">이 디렉터리를 읽을 수 없습니다</string>
     <string name="file_picker_internal_storage">내부 저장소</string>
     <string name="file_picker_sd_card">SD 카드</string>
     <string name="file_picker_root">루트 (/)</string>

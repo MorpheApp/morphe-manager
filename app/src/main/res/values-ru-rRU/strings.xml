@@ -689,6 +689,7 @@ morphe_header_custom_dark.png
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Предыдущий каталог</string>
     <string name="file_picker_no_files">Здесь нет файлов</string>
+    <string name="file_picker_read_error">Не удается прочитать эту директорию</string>
     <string name="file_picker_internal_storage">Внутренняя память</string>
     <string name="file_picker_sd_card">SD-карта</string>
     <string name="file_picker_root">Корень (/)</string>

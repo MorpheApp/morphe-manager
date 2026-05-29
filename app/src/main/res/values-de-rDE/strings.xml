@@ -689,6 +689,7 @@ Die Bildgrößen müssen wie folgt sein:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Vorheriges Verzeichnis</string>
     <string name="file_picker_no_files">Keine Dateien hier</string>
+    <string name="file_picker_read_error">Kann dieses Verzeichnis nicht lesen</string>
     <string name="file_picker_internal_storage">Interner Speicher</string>
     <string name="file_picker_sd_card">SD-Karte</string>
     <string name="file_picker_root">Stammverzeichnis (/)</string>

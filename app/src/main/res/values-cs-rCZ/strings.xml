@@ -689,6 +689,7 @@ Rozměry obrázků musí být následující:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Předchozí adresář</string>
     <string name="file_picker_no_files">Zde nejsou žádné soubory</string>
+    <string name="file_picker_read_error">Nelze přečíst tento adresář</string>
     <string name="file_picker_internal_storage">Interní úložiště</string>
     <string name="file_picker_sd_card">SD karta</string>
     <string name="file_picker_root">Kořeď (/)</string>

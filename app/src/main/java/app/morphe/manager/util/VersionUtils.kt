@@ -82,3 +82,17 @@ fun compareVersions(v1: String?, v2: String?): Int {
 fun isNewerVersion(oldVersion: String?, newVersion: String?): Boolean {
     return compareVersions(oldVersion, newVersion) < 0
 }
+
+/**
+ * Builds a release page URL for [version] in [repoUrl].
+ *
+ * GitHub uses `/releases/tag/<version>`, GitLab uses `/-/releases/<version>`.
+ * [version] is normalized to include a `v` prefix if absent.
+ */
+fun releasePageUrl(repoUrl: String, version: String): String {
+    val normalized = if (version.startsWith("v")) version else "v$version"
+    return if (repoUrl.contains("gitlab.com", ignoreCase = true))
+        "$repoUrl/-/releases/$normalized"
+    else
+        "$repoUrl/releases/tag/$normalized"
+}

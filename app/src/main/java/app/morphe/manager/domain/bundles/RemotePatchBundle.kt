@@ -8,6 +8,7 @@ import app.morphe.manager.network.service.HttpService
 import app.morphe.manager.network.utils.getOrThrow
 import app.morphe.manager.util.ChangelogEntry
 import app.morphe.manager.util.compareVersions
+import app.morphe.manager.util.releasePageUrl
 import io.ktor.client.request.header
 import io.ktor.client.request.prepareGet
 import io.ktor.client.request.url
@@ -361,14 +362,7 @@ class JsonPatchBundle(
         if (asset.pageUrl == null) {
             val repoUrl = inferPageUrlFromEndpoint(endpoint)
             val inferredPageUrl = if (repoUrl != null && asset.version.isNotBlank()) {
-                // Normalize version to ensure it starts with 'v'
-                val normalizedVersion = if (asset.version.startsWith("v")) asset.version else "v${asset.version}"
-                // Create proper release page URL:
-                // GitHub: https://github.com/owner/repo/releases/tag/v1.0.0-dev.1
-                // GitLab: https://gitlab.com/owner/repo/-/releases/v1.0.0-dev.1
-                val isGitLab = endpoint.contains("gitlab.com", ignoreCase = true)
-                if (isGitLab) "$repoUrl/-/releases/$normalizedVersion"
-                else "$repoUrl/releases/tag/$normalizedVersion"
+                releasePageUrl(repoUrl, asset.version)
             } else {
                 // Fallback to repository URL if version is missing
                 repoUrl
@@ -385,7 +379,7 @@ class JsonPatchBundle(
         val activeEndpoint = resolveBranchUrl(endpoint)
         val changelogUrl = api.changelogUrlFromBundleEndpoint(activeEndpoint) ?: return emptyList()
         return fetchAndCacheEntries("$uid|$changelogUrl", sinceVersion) {
-            api.fetchChangelogFromUrl(changelogUrl)
+            api.fetchChangelogFromUrl(changelogUrl, stopAfterFirstStable = usePrerelease)
         }
     }
 
@@ -467,7 +461,9 @@ class APIPatchBundle(
 
     override suspend fun fetchChangelogEntries(sinceVersion: String?): List<ChangelogEntry> {
         val branch = if (usePrerelease) BRANCH_DEV else BRANCH_STABLE
-        return fetchAndCacheEntries("$uid|$branch", sinceVersion) { api.fetchPatchesChangelog(branch) }
+        return fetchAndCacheEntries("$uid|$branch", sinceVersion) {
+            api.fetchPatchesChangelog(branch, stopAfterFirstStable = usePrerelease)
+        }
     }
 
     override fun copy(

@@ -689,6 +689,7 @@ morphe_header_custom_dark.png
     <!-- File Picker -->
     <string name="file_picker_previous_directory">上一级目录</string>
     <string name="file_picker_no_files">这里没有文件</string>
+    <string name="file_picker_read_error">无法读取此目录</string>
     <string name="file_picker_internal_storage">内部存储空间</string>
     <string name="file_picker_sd_card">SD卡</string>
     <string name="file_picker_root">根目录 (/)</string>

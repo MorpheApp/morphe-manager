@@ -689,6 +689,7 @@ Størrelsesformatet skal være som følger:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Forrige mappe</string>
     <string name="file_picker_no_files">Ingen filer her</string>
+    <string name="file_picker_read_error">Kan ikke læse denne mappe</string>
     <string name="file_picker_internal_storage">Intern lagring</string>
     <string name="file_picker_sd_card">SD-kort</string>
     <string name="file_picker_root">Rod (/)</string>
