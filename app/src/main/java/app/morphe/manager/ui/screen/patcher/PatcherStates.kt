@@ -261,28 +261,32 @@ private fun AdaptiveSuccessContent(
                 modifier = Modifier
                     .weight(0.5f)
                     .fillMaxHeight(),
-                verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(itemSpacing)
+                Box(
+                    modifier = Modifier.weight(1f),
+                    contentAlignment = Alignment.Center
                 ) {
-                    SuccessIcon(
-                        icon = icon,
-                        iconTint = iconTint,
-                        iconBackgroundColor = iconBackgroundColor,
-                        windowSize = windowSize
-                    )
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(itemSpacing)
+                    ) {
+                        SuccessIcon(
+                            icon = icon,
+                            iconTint = iconTint,
+                            iconBackgroundColor = iconBackgroundColor,
+                            windowSize = windowSize
+                        )
 
-                    SuccessStatusText(
-                        isInstalling = isInstalling,
-                        isInstalled = isInstalled,
-                        isError = isError,
-                        isConflict = isConflict,
-                        installedPackageName = installedPackageName,
-                        windowSize = windowSize
-                    )
+                        SuccessStatusText(
+                            isInstalling = isInstalling,
+                            isInstalled = isInstalled,
+                            isError = isError,
+                            isConflict = isConflict,
+                            installedPackageName = installedPackageName,
+                            windowSize = windowSize
+                        )
+                    }
                 }
 
                 PatcherBottomActionBar(
