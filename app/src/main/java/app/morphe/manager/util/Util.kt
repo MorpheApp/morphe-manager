@@ -26,8 +26,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import java.io.File
-import java.security.MessageDigest
 import kotlin.properties.PropertyDelegateProvider
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -171,17 +169,3 @@ fun <T : Any> SavedStateHandle.saveableVar(init: () -> T): PropertyDelegateProvi
                 set(name, value)
         }
     }
-
-fun File.sha256OrNull(): String? = runCatching {
-    if (!isFile) return@runCatching null
-    val digest = MessageDigest.getInstance("SHA-256")
-    inputStream().use { input ->
-        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
-        while (true) {
-            val read = input.read(buffer)
-            if (read < 0) break
-            digest.update(buffer, 0, read)
-        }
-    }
-    digest.digest().joinToString("") { byte -> "%02x".format(byte) }
-}.getOrNull()

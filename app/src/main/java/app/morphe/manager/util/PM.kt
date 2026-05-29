@@ -212,6 +212,21 @@ class PM(
     }
 }
 
+fun File.sha256OrNull(): String? = runCatching {
+    if (!isFile) return@runCatching null
+    val digest = MessageDigest.getInstance("SHA-256")
+    inputStream().use { input ->
+        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+        while (!Thread.currentThread().isInterrupted) {
+            val read = input.read(buffer)
+            if (read < 0) break
+            digest.update(buffer, 0, read)
+        }
+    }
+    if (Thread.currentThread().isInterrupted) return@runCatching null
+    digest.digest().joinToString("") { byte -> "%02x".format(byte) }
+}.getOrNull()
+
 /** Opens the system screen that lets the user grant the "install unknown apps" permission. */
 object RequestInstallAppsContract : ActivityResultContract<String, Boolean>(), KoinComponent {
     private val pm: PM by inject()
