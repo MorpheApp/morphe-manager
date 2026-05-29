@@ -408,7 +408,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         outputFile: File,
         targetPackageName: String
     ): Boolean = withContext(Dispatchers.IO) {
-        val installedFile = pm.getPackageInfo(targetPackageName)?.applicationInfo?.sourceDir
+        val installedFile = pm.getApplicationInfo(targetPackageName)?.sourceDir
             ?.takeIf { it.isNotEmpty() }
             ?.let(::File) ?: return@withContext false
         val installedHash = installedFile.sha256OrNull() ?: return@withContext false

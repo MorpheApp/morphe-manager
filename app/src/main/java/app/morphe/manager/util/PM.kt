@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.ApplicationInfoFlags
 import android.content.pm.PackageManager.NameNotFoundException
 import android.content.pm.PackageManager.PackageInfoFlags
 import android.content.pm.Signature
@@ -41,12 +43,24 @@ class PM(
 
     val application: Application get() = app
 
+    @Suppress("DEPRECATION")
     fun getPackageInfo(packageName: String, flags: Int = 0): PackageInfo? =
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
                 app.packageManager.getPackageInfo(packageName, PackageInfoFlags.of(flags.toLong()))
             else
                 app.packageManager.getPackageInfo(packageName, flags)
+        } catch (_: NameNotFoundException) {
+            null
+        }
+
+    @Suppress("DEPRECATION")
+    fun getApplicationInfo(packageName: String, flags: Int = 0): ApplicationInfo? =
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                app.packageManager.getApplicationInfo(packageName, ApplicationInfoFlags.of(flags.toLong()))
+            else
+                app.packageManager.getApplicationInfo(packageName, flags)
         } catch (_: NameNotFoundException) {
             null
         }
