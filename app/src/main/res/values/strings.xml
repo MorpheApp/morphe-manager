@@ -908,11 +908,8 @@ Do you still want to continue?"</string>
     <string name="onboarding_system_installer_desc">Choose how patched apps are installed: standard, root mount, or Shizuku</string>
     <string name="onboarding_system_process_runtime_desc">Run patching in a separate process to improve stability and control memory usage. Recommended for large apps</string>
     <string name="onboarding_system_file_picker_desc">Enable to use the built-in file browser instead of the system picker when selecting APKs or keystores</string>
-    <string name="welcome_title">Welcome to %s</string>
-    <string name="welcome_description">Everything you need to patch, manage, and update your apps - in one place</string>
-    <string name="welcome_feature_patches">Apply patches to any supported app</string>
-    <string name="welcome_feature_updates">Stay up to date with bundle updates</string>
-    <string name="welcome_feature_safe">Open source and community-driven</string>
-    <string name="welcome_start_tour">Show me around</string>
-    <string name="welcome_skip">Skip for now</string>
+    <!-- Tour prompt dialog shown after first successful patch install -->
+    <string name="tour_prompt_title">Quick feature tour</string>
+    <string name="tour_prompt_desc">Want a quick tour of Morphe\'s key features?</string>
+    <string name="tour_prompt_confirm">Show me around</string>
 </resources>

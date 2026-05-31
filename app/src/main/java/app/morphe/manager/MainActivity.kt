@@ -11,10 +11,6 @@ import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -84,7 +80,6 @@ class MainActivity : AppCompatActivity() {
         super.attachBaseContext(newBase)
     }
 
-    @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -215,10 +210,9 @@ private fun MorpheManager(vm: MainViewModel) {
     // Unified onboarding
     val isFirstLaunchPref by prefs.firstLaunch.getAsState()
     val isFirstVisit = ONBOARDING_TESTING_MODE || isFirstLaunchPref
-    val welcomeChoice = remember { mutableStateOf<Boolean?>(null) }
+    val wantsOnboardingTour = remember { mutableStateOf(false) }
     var onboardingPhase by remember { mutableStateOf(OnboardingPhase.HOME) }
-    val showWelcome = isFirstVisit && welcomeChoice.value == null
-    val showOnboarding = isFirstVisit && welcomeChoice.value == true && onboardingPhase != OnboardingPhase.DONE
+    val showOnboarding = (ONBOARDING_TESTING_MODE || wantsOnboardingTour.value) && onboardingPhase != OnboardingPhase.DONE
     val homeOnboardingState = remember { OnboardingState() }
     val globalOnboardingState = remember { GlobalOnboardingState() }
 
@@ -415,7 +409,15 @@ private fun MorpheManager(vm: MainViewModel) {
                     patcherViewModel = patcherViewModel,
                     usingMountInstall = usingMountInstallState.value,
                     onBackgroundSpeedChange = { patcherBackgroundSpeed.floatValue = it },
-                    onPatchingCompleted = { patchingCompleted.value = true }
+                    onPatchingCompleted = { patchingCompleted.value = true },
+                    isFirstPatch = isFirstVisit,
+                    onStartTour = {
+                        onboardingPhase = OnboardingPhase.HOME
+                        wantsOnboardingTour.value = true
+                    },
+                    onDeclineTour = {
+                        scope.launch { prefs.firstLaunch.update(false) }
+                    }
                 )
             }
 
@@ -425,16 +427,6 @@ private fun MorpheManager(vm: MainViewModel) {
                     globalOnboardingState = if (showOnboarding) globalOnboardingState else null
                 )
             }
-        }
-
-        AnimatedVisibility(visible = showWelcome, enter = fadeIn(), exit = fadeOut()) {
-            WelcomeScreen(
-                onStartTour = { welcomeChoice.value = true },
-                onSkip = {
-                    welcomeChoice.value = false
-                    scope.launch { prefs.firstLaunch.update(false) }
-                }
-            )
         }
 
         if (showOnboarding) {
