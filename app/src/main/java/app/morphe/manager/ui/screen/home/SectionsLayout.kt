@@ -1349,7 +1349,10 @@ private fun DynamicAppCard(
 
     // Hint animation: nudge right then left, once (only first card)
     LaunchedEffect(showGestureHint, isLoading) {
-        if (!showGestureHint || isLoading) return@LaunchedEffect
+        if (!showGestureHint || isLoading) {
+            offsetX.snapTo(0f)
+            return@LaunchedEffect
+        }
         delay(800)
         val nudge = with(density) { 72.dp.toPx() }
         offsetX.animateTo(nudge,  tween(500, easing = FastOutSlowInEasing))
