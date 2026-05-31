@@ -1190,6 +1190,11 @@ class HomeViewModel(
         showSwipeGestureHint.value = false
     }
 
+    /** Triggers the swipe gesture hint animation on the first card. */
+    fun triggerSwipeGestureHint() {
+        showSwipeGestureHint.value = true
+    }
+
     /**
      * Invalidates AppDataResolver cache for [packageName] and forces homeAppState recomputation.
      * Call this after any install/uninstall operation that doesn't change the DB record.

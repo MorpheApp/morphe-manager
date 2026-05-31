@@ -15,6 +15,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -33,7 +37,8 @@ import app.morphe.manager.util.isAndroidTv
 @Composable
 fun FilesAndStorageSection(
     settingsViewModel: SettingsViewModel,
-    importExportViewModel: ImportExportViewModel
+    importExportViewModel: ImportExportViewModel,
+    onFilePickerPositioned: ((Rect) -> Unit)? = null
 ) {
     val context = LocalContext.current
     val isTV = remember { context.isAndroidTv() }
@@ -160,7 +165,11 @@ fun FilesAndStorageSection(
 
         // TV always uses the custom picker regardless of this toggle, so hide it to avoid confusion
         if (!isTV) {
-            SectionCard {
+            SectionCard(
+                modifier = if (onFilePickerPositioned != null)
+                    Modifier.onGloballyPositioned { coords -> onFilePickerPositioned(coords.boundsInWindow()) }
+                else Modifier
+            ) {
                 RichSettingsItem(
                     onClick = { settingsViewModel.setUseCustomFilePicker(!useCustomFilePicker) },
                     leadingContent = { MorpheIcon(icon = Icons.Outlined.FolderOpen) },
@@ -170,7 +179,7 @@ fun FilesAndStorageSection(
                         MorpheSwitch(
                             checked = useCustomFilePicker,
                             onCheckedChange = null,
-                            modifier = androidx.compose.ui.Modifier.semantics {
+                            modifier = Modifier.semantics {
                                 stateDescription = if (useCustomFilePicker) enabledState else disabledState
                             }
                         )

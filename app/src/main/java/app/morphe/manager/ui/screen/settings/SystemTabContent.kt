@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.settings
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +18,9 @@ import androidx.compose.material.icons.outlined.InstallMobile
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -40,14 +44,18 @@ fun SystemTabContent(
     onExportSettings: () -> Unit,
     onExportDebugLogs: () -> Unit,
     onAboutClick: () -> Unit,
-    onChangelogClick: () -> Unit
+    onChangelogClick: () -> Unit,
+    scrollState: ScrollState = rememberScrollState(),
+    onInstallerSectionPositioned: ((Rect) -> Unit)? = null,
+    onProcessRuntimePositioned: ((Rect) -> Unit)? = null,
+    onFilePickerPositioned: ((Rect) -> Unit)? = null
 ) {
     val useExpertMode by settingsViewModel.prefs.useExpertMode.getAsState()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -57,7 +65,11 @@ fun SystemTabContent(
             icon = Icons.Outlined.InstallMobile
         )
 
-        SectionCard {
+        SectionCard(
+            modifier = if (onInstallerSectionPositioned != null)
+                Modifier.onGloballyPositioned { coords -> onInstallerSectionPositioned(coords.boundsInWindow()) }
+            else Modifier
+        ) {
             InstallerSection(
                 settingsViewModel = settingsViewModel,
                 onShowInstallerDialog = onShowInstallerDialog
@@ -65,7 +77,10 @@ fun SystemTabContent(
         }
 
         // Performance
-        PerformanceSection(settingsViewModel = settingsViewModel)
+        PerformanceSection(
+            settingsViewModel = settingsViewModel,
+            onProcessRuntimePositioned = onProcessRuntimePositioned
+        )
 
         // Import & Export (Expert mode only)
         if (useExpertMode) {
@@ -82,7 +97,8 @@ fun SystemTabContent(
         // Files & Storage
         FilesAndStorageSection(
             settingsViewModel = settingsViewModel,
-            importExportViewModel = importExportViewModel
+            importExportViewModel = importExportViewModel,
+            onFilePickerPositioned = onFilePickerPositioned
         )
 
         // About

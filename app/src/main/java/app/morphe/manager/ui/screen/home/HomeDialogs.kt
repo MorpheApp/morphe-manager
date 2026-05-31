@@ -66,7 +66,8 @@ fun HomeDialogs(
     homeViewModel: HomeViewModel,
     storagePickerLauncher: () -> Unit,
     openBundlePicker: () -> Unit,
-    patchesItem: MutableState<HomeAppItem?>
+    patchesItem: MutableState<HomeAppItem?>,
+    globalOnboardingState: GlobalOnboardingState? = null
 ) {
     val uriHandler = LocalUriHandler.current
     val scope = rememberCoroutineScope()
@@ -448,7 +449,8 @@ fun HomeDialogs(
                 scope.launch {
                     homeViewModel.patchBundleRepository.reorderBundles(orderedUids)
                 }
-            }
+            },
+            globalOnboardingState = globalOnboardingState
         )
     }
 

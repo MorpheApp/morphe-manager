@@ -20,9 +20,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -44,7 +47,9 @@ fun HomeBottomActionBar(
     isExpertModeEnabled: Boolean = false,
     showSearchButton: Boolean = false,
     searchActive: Boolean = false,
-    onSearchClick: () -> Unit = {}
+    onSearchClick: () -> Unit = {},
+    onSourcesPositioned: ((Rect) -> Unit)? = null,
+    onSettingsPositioned: ((Rect) -> Unit)? = null
 ) {
     // Show labels only when there are 2 buttons, buttons are wider so there's space
     val showLabels = !showSearchButton
@@ -68,7 +73,13 @@ fun HomeBottomActionBar(
                 icon = Icons.Outlined.Source,
                 text = stringResource(R.string.sources),
                 showLabel = showLabels,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .then(
+                        if (onSourcesPositioned != null) Modifier.onGloballyPositioned { coords ->
+                            onSourcesPositioned(coords.boundsInWindow())
+                        } else Modifier
+                    )
             )
 
             // Center: Search button
@@ -97,7 +108,13 @@ fun HomeBottomActionBar(
                 text = stringResource(R.string.settings),
                 showLabel = showLabels,
                 isExpertMode = isExpertModeEnabled,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .then(
+                        if (onSettingsPositioned != null) Modifier.onGloballyPositioned { coords ->
+                            onSettingsPositioned(coords.boundsInWindow())
+                        } else Modifier
+                    )
             )
         }
     }

@@ -20,6 +20,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -37,7 +40,10 @@ import app.morphe.patcher.dex.BytecodeMode
  */
 @SuppressLint("LocalContextGetResourceValueCheck", "BatteryLife")
 @Composable
-fun PerformanceSection(settingsViewModel: SettingsViewModel) {
+fun PerformanceSection(
+    settingsViewModel: SettingsViewModel,
+    onProcessRuntimePositioned: ((Rect) -> Unit)? = null
+) {
     val context = LocalContext.current
     val prefs = settingsViewModel.prefs
     val useProcessRuntime by prefs.useProcessRuntime.getAsState()
@@ -84,6 +90,9 @@ fun PerformanceSection(settingsViewModel: SettingsViewModel) {
             Column {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     RichSettingsItem(
+                        modifier = if (onProcessRuntimePositioned != null)
+                            Modifier.onGloballyPositioned { coords -> onProcessRuntimePositioned(coords.boundsInWindow()) }
+                        else Modifier,
                         onClick = { showProcessRuntimeDialog.value = true },
                         title = stringResource(R.string.settings_system_process_runtime),
                         subtitle = if (useProcessRuntime)

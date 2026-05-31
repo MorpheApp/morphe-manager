@@ -20,6 +20,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -44,7 +47,8 @@ fun AppearanceTabContent(
     pureBlackTheme: Boolean,
     dynamicColor: Boolean,
     customAccentColorHex: String?,
-    themeViewModel: ThemeSettingsViewModel
+    themeViewModel: ThemeSettingsViewModel,
+    onThemeSelectorPositioned: ((Rect) -> Unit)? = null
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -112,7 +116,15 @@ fun AppearanceTabContent(
             )
         }
 
-        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+        Box(
+            Modifier.padding(bottom = 16.dp).fillMaxWidth().then(
+                if (onThemeSelectorPositioned != null)
+                    Modifier.onGloballyPositioned { coords ->
+                        onThemeSelectorPositioned(coords.boundsInWindow())
+                    }
+                else Modifier
+            )
+        ) {
             ThemeSelector(
                 theme = theme,
                 dynamicColor = dynamicColor,

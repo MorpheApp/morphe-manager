@@ -22,16 +22,15 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.model.HomeAppItem
-import app.morphe.manager.ui.screen.home.Android11Dialog
-import app.morphe.manager.ui.screen.home.HomeDialogs
-import app.morphe.manager.ui.screen.home.ManagerUpdateDetailsDialog
-import app.morphe.manager.ui.screen.home.SectionsLayout
+import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.settings.system.PrePatchInstallerDialog
 import app.morphe.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.QuickPatchParams
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
 import app.morphe.manager.util.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
@@ -49,11 +48,14 @@ fun HomeScreen(
     prefs: PreferencesManager = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
+    onboardingState: OnboardingState? = null,
+    globalOnboardingState: GlobalOnboardingState? = null,
     patchTriggerPackage: String? = null,
     onPatchTriggerHandled: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val view = LocalView.current
+    val scope = rememberCoroutineScope()
 
     // Dialog states
     val showUpdateDetailsDialog = remember { mutableStateOf(false) }
@@ -168,7 +170,8 @@ fun HomeScreen(
         homeViewModel = homeViewModel,
         storagePickerLauncher = { openApkPicker() },
         openBundlePicker = { openBundlePicker() },
-        patchesItem = patchesSheetItem
+        patchesItem = patchesSheetItem,
+        globalOnboardingState = globalOnboardingState
     )
 
     // Pre-patching installer selection dialog for root-capable devices.
@@ -223,7 +226,15 @@ fun HomeScreen(
                 onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
                 onShowPatches = { item -> patchesSheetItem.value = item },
                 showGestureHint = showGestureHint,
-                onGestureHintShown = { homeViewModel.markSwipeGestureHintShown() },
+                onGestureHintShown = {
+                    homeViewModel.markSwipeGestureHintShown()
+                    if (onboardingState != null && onboardingState.swipeActive) {
+                        scope.launch {
+                            delay(600)
+                            if (onboardingState.swipeActive) homeViewModel.triggerSwipeGestureHint()
+                        }
+                    }
+                },
                 hiddenAppItems = hiddenAppItems,
                 installedAppsLoading = bundlePipelineLoading || homeViewModel.installedAppsLoading,
 
@@ -248,7 +259,10 @@ fun HomeScreen(
                 onSettingsClick = onSettingsClick,
 
                 // Expert mode
-                isExpertModeEnabled = useExpertMode
+                isExpertModeEnabled = useExpertMode,
+
+                // Onboarding
+                onboardingState = onboardingState
             )
         }
     }

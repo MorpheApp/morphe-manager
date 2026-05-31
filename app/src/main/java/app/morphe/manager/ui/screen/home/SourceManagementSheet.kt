@@ -33,11 +33,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalUriHandler
@@ -72,6 +75,12 @@ import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 
 /**
+ * Number of onboarding steps shown inside [BundleManagementSheet].
+ * Keep in sync with `MorpheManager` in [app.morphe.manager.MainActivity].
+ */
+internal const val BUNDLE_SHEET_ONBOARDING_STEP_COUNT = 3
+
+/**
  * Bottom sheet for managing patch bundles.
  */
 @SuppressLint("LocalContextGetResourceValueCall")
@@ -84,7 +93,8 @@ fun BundleManagementSheet(
     onDisable: (PatchBundleSource) -> Unit,
     onUpdate: (PatchBundleSource) -> Unit,
     onRename: (PatchBundleSource) -> Unit,
-    onReorder: (List<Int>) -> Unit
+    onReorder: (List<Int>) -> Unit,
+    globalOnboardingState: GlobalOnboardingState? = null
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val prefs: PreferencesManager = koinInject()
@@ -97,6 +107,28 @@ fun BundleManagementSheet(
     val metadataFetchErrors by patchBundleRepository.metadataFetchErrors.collectAsStateWithLifecycle(emptyMap())
     val experimentalVersionsEnabled by prefs.bundleExperimentalVersionsEnabled.getAsState()
     val bundleInfo by patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
+
+    val showSheetOnboarding = globalOnboardingState?.sheetOnboardingActive == true
+    val sheetSteps = remember(globalOnboardingState) {
+        if (globalOnboardingState == null) emptyList()
+        else listOf(
+            StepDef(
+                titleRes = R.string.patches,
+                descRes = R.string.onboarding_sources_patches_desc,
+                getBounds = { globalOnboardingState.sourcesPatchesBounds }
+            ),
+            StepDef(
+                titleRes = R.string.changelog,
+                descRes = R.string.onboarding_sources_version_desc,
+                getBounds = { globalOnboardingState.sourcesVersionBounds }
+            ),
+            StepDef(
+                titleRes = R.string.sources_management_prerelease_toggle,
+                descRes = R.string.onboarding_sources_prerelease_desc,
+                getBounds = { globalOnboardingState.sourcesPrereleaseBounds }
+            )
+        )
+    }
 
     val bundleToDelete = remember { mutableStateOf<PatchBundleSource?>(null) }
     // Expanded state lifted out of LazyColumn so it survives scroll-off-screen recomposition
@@ -156,146 +188,172 @@ fun BundleManagementSheet(
         val context = LocalContext.current
         val uriHandler = LocalUriHandler.current
 
-        Column(Modifier.fillMaxWidth()) {
-            // Header - outside scrollable area
-            Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-                Row(
+        Box {
+            Column(Modifier.fillMaxWidth()) {
+                // Header - outside scrollable area
+                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column {
+                            Text(
+                                text = stringResource(R.string.sources_management_title),
+                                style = MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = pluralStringResource(
+                                    R.plurals.sources_management_subtitle,
+                                    sources.size,
+                                    sources.size
+                                ),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+
+                        FilledIconButton(
+                            onClick = onAddSource,
+                            colors = IconButtonDefaults.filledIconButtonColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer
+                            )
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                contentDescription = stringResource(R.string.add)
+                            )
+                        }
+                    }
+
+                    Spacer(Modifier.height(8.dp))
+                }
+
+                // Bundle cards
+                LazyColumn(
+                    state = listState,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                        .navigationBarsPadding()
+                        .weight(1f, fill = false),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    contentPadding = PaddingValues(
+                        start = 16.dp,
+                        end = 16.dp,
+                        bottom = 16.dp
+                    )
                 ) {
-                    Column {
-                        Text(
-                            text = stringResource(R.string.sources_management_title),
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Text(
-                            text = pluralStringResource(
-                                R.plurals.sources_management_subtitle,
-                                sources.size,
-                                sources.size
-                            ),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
+                    items(orderedSources, key = { bundle -> bundle.uid }) { bundle ->
+                        val hasExperimentalVersions = remember(bundle.uid, bundleInfo) {
+                            bundleInfo[bundle.uid]?.patches?.any { patch ->
+                                patch.compatiblePackages?.any { pkg ->
+                                    pkg.experimentalVersions?.isNotEmpty() == true
+                                } == true
+                            } == true
+                        }
+                        val useExperimentalVersions = bundle.uid.toString() in experimentalVersionsEnabled
 
-                    FilledIconButton(
-                        onClick = onAddSource,
-                        colors = IconButtonDefaults.filledIconButtonColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer
-                        )
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = stringResource(R.string.add)
-                        )
+                        val isFirstCard = bundle.uid == orderedSources.firstOrNull()?.uid
+                        ReorderableItem(reorderableState, key = bundle.uid) { itemIsDragging ->
+                            BundleManagementCard(
+                                bundle = bundle,
+                                patchCount = patchCounts[bundle.uid] ?: 0,
+                                updateInfo = manualUpdateInfo[bundle.uid],
+                                isUpdating = bundle.uid in activeUpdateUids,
+                                metadataFetchError = metadataFetchErrors[bundle.uid],
+                                expanded = isSingleDefaultBundle || bundle.uid in expandedBundleUids ||
+                                    (showSheetOnboarding && isFirstCard),
+                                onToggleExpanded = {
+                                    expandedBundleUids = if (bundle.uid in expandedBundleUids) {
+                                        expandedBundleUids - bundle.uid
+                                    } else {
+                                        expandedBundleUids + bundle.uid
+                                    }
+                                },
+                                onDelete = { bundleToDelete.value = bundle },
+                                onDisable = { onDisable(bundle) },
+                                onUpdate = { onUpdate(bundle) },
+                                onRename = { onRename(bundle) },
+                                onPrereleasesToggle = when {
+                                    bundle is JsonPatchBundle && bundle.supportsPrerelease ||
+                                            bundle is APIPatchBundle -> { usePrerelease ->
+                                        if (bundle.uid == bundleToShowChangelogUid) {
+                                            bundleToShowChangelogUid = null
+                                        }
+                                        bundle.clearChangelogCache()
+                                        scope.launch {
+                                            patchBundleRepository.setUsePrerelease(
+                                                bundle.uid,
+                                                usePrerelease
+                                            )
+                                        }
+                                    }
+
+                                    else -> null
+                                },
+                                onExperimentalVersionsToggle = if (hasExperimentalVersions) {
+                                    { useExperimental ->
+                                        scope.launch {
+                                            patchBundleRepository.setUseExperimentalVersions(
+                                                bundle.uid,
+                                                useExperimental
+                                            )
+                                        }
+                                    }
+                                } else null,
+                                hasExperimentalVersions = hasExperimentalVersions,
+                                useExperimentalVersions = useExperimentalVersions,
+                                onPatchesClick = { bundleToShowPatches.value = bundle },
+                                onVersionClick = {
+                                    if (bundle is RemotePatchBundle) {
+                                        bundleToShowChangelogUid = bundle.uid
+                                    }
+                                },
+                                onOpenInBrowser = {
+                                    val pageUrl = manualUpdateInfo[bundle.uid]?.pageUrl
+                                        ?: (bundle as? RemotePatchBundle)?.let { remote ->
+                                            RemotePatchBundle.inferPageUrlFromEndpoint(remote.endpoint)
+                                        }
+                                        ?: SOURCE_REPO_URL
+                                    try {
+                                        uriHandler.openUri(pageUrl)
+                                    } catch (_: Exception) {
+                                        context.toast(context.getString(R.string.sources_management_failed_to_open_url))
+                                    }
+                                },
+                                forceExpanded = isSingleDefaultBundle,
+                                isDragging = itemIsDragging,
+                                longPressModifier = Modifier.longPressDraggableHandle(
+                                    onDragStarted = {
+                                        isDragging = true
+                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    },
+                                    onDragStopped = {
+                                        isDragging = false
+                                        onReorder(localOrder)
+                                    }
+                                ),
+                                onPatchesBtnPositioned = if (isFirstCard) { b -> globalOnboardingState?.sourcesPatchesBounds = b } else null,
+                                onVersionPositioned = if (isFirstCard) { b -> globalOnboardingState?.sourcesVersionBounds = b } else null,
+                                onPrereleaseBtnPositioned = if (isFirstCard) { b -> globalOnboardingState?.sourcesPrereleaseBounds = b } else null,
+                                modifier = Modifier.zIndex(if (itemIsDragging) 1f else 0f)
+                            )
+                        }
                     }
                 }
-
-                Spacer(Modifier.height(8.dp))
             }
 
-            // Bundle cards
-            LazyColumn(
-                state = listState,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .navigationBarsPadding()
-                    .weight(1f, fill = false),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(
-                    start = 16.dp,
-                    end = 16.dp,
-                    bottom = 16.dp
+            if (showSheetOnboarding && sheetSteps.isNotEmpty()) {
+                OnboardingShowcase(
+                    steps = sheetSteps,
+                    stepOffset = globalOnboardingState.sheetStepOffset,
+                    totalStepsOverride = globalOnboardingState.totalOnboardingSteps.takeIf { it > 0 },
+                    onComplete = { globalOnboardingState.onSheetComplete?.invoke() },
+                    onSkip = { globalOnboardingState.onGlobalSkip?.invoke() }
                 )
-            ) {
-                items(orderedSources, key = { bundle -> bundle.uid }) { bundle ->
-                    val hasExperimentalVersions = remember(bundle.uid, bundleInfo) {
-                        bundleInfo[bundle.uid]?.patches?.any { patch ->
-                            patch.compatiblePackages?.any { pkg ->
-                                pkg.experimentalVersions?.isNotEmpty() == true
-                            } == true
-                        } == true
-                    }
-                    val useExperimentalVersions = bundle.uid.toString() in experimentalVersionsEnabled
-
-                    ReorderableItem(reorderableState, key = bundle.uid) { itemIsDragging ->
-                        BundleManagementCard(
-                            bundle = bundle,
-                            patchCount = patchCounts[bundle.uid] ?: 0,
-                            updateInfo = manualUpdateInfo[bundle.uid],
-                            isUpdating = bundle.uid in activeUpdateUids,
-                            metadataFetchError = metadataFetchErrors[bundle.uid],
-                            expanded = isSingleDefaultBundle || bundle.uid in expandedBundleUids,
-                            onToggleExpanded = {
-                                expandedBundleUids = if (bundle.uid in expandedBundleUids) {
-                                    expandedBundleUids - bundle.uid
-                                } else {
-                                    expandedBundleUids + bundle.uid
-                                }
-                            },
-                            onDelete = { bundleToDelete.value = bundle },
-                            onDisable = { onDisable(bundle) },
-                            onUpdate = { onUpdate(bundle) },
-                            onRename = { onRename(bundle) },
-                            onPrereleasesToggle = when {
-                                bundle is JsonPatchBundle && bundle.supportsPrerelease ||
-                                        bundle is APIPatchBundle -> { usePrerelease ->
-                                    if (bundle.uid == bundleToShowChangelogUid) {
-                                        bundleToShowChangelogUid = null
-                                    }
-                                    bundle.clearChangelogCache()
-                                    scope.launch { patchBundleRepository.setUsePrerelease(bundle.uid, usePrerelease) }
-                                }
-                                else -> null
-                            },
-                            onExperimentalVersionsToggle = if (hasExperimentalVersions) {
-                                { useExperimental ->
-                                    scope.launch {
-                                        patchBundleRepository.setUseExperimentalVersions(bundle.uid, useExperimental)
-                                    }
-                                }
-                            } else null,
-                            hasExperimentalVersions = hasExperimentalVersions,
-                            useExperimentalVersions = useExperimentalVersions,
-                            onPatchesClick = { bundleToShowPatches.value = bundle },
-                            onVersionClick = {
-                                if (bundle is RemotePatchBundle) {
-                                    bundleToShowChangelogUid = bundle.uid
-                                }
-                            },
-                            onOpenInBrowser = {
-                                val pageUrl = manualUpdateInfo[bundle.uid]?.pageUrl
-                                    ?: (bundle as? RemotePatchBundle)?.let { remote ->
-                                        RemotePatchBundle.inferPageUrlFromEndpoint(remote.endpoint)
-                                    }
-                                    ?: SOURCE_REPO_URL
-                                try {
-                                    uriHandler.openUri(pageUrl)
-                                } catch (_: Exception) {
-                                    context.toast(context.getString(R.string.sources_management_failed_to_open_url))
-                                }
-                            },
-                            forceExpanded = isSingleDefaultBundle,
-                            isDragging = itemIsDragging,
-                            longPressModifier = Modifier.longPressDraggableHandle(
-                                onDragStarted = {
-                                    isDragging = true
-                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                },
-                                onDragStopped = {
-                                    isDragging = false
-                                    onReorder(localOrder)
-                                }
-                            ),
-                            modifier = Modifier.zIndex(if (itemIsDragging) 1f else 0f)
-                        )
-                    }
-                }
             }
         }
     }
@@ -352,6 +410,9 @@ private fun BundleManagementCard(
     onRename: () -> Unit,
     onPrereleasesToggle: ((Boolean) -> Unit)?,
     onExperimentalVersionsToggle: ((Boolean) -> Unit)?,
+    onPatchesBtnPositioned: ((Rect) -> Unit)? = null,
+    onVersionPositioned: ((Rect) -> Unit)? = null,
+    onPrereleaseBtnPositioned: ((Rect) -> Unit)? = null,
     hasExperimentalVersions: Boolean,
     useExperimentalVersions: Boolean,
     onPatchesClick: () -> Unit,
@@ -492,7 +553,13 @@ private fun BundleManagementCard(
 
                     // Patches
                     BundleInfoCard(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().then(
+                            if (onPatchesBtnPositioned != null)
+                                Modifier.onGloballyPositioned { coords ->
+                                    onPatchesBtnPositioned(coords.boundsInWindow())
+                                }
+                            else Modifier
+                        ),
                         icon = Icons.Outlined.Info,
                         title = stringResource(R.string.patches),
                         value = patchCount.toString(),
@@ -502,7 +569,13 @@ private fun BundleManagementCard(
 
                     // Version
                     BundleInfoCard(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().then(
+                            if (onVersionPositioned != null)
+                                Modifier.onGloballyPositioned { coords ->
+                                    onVersionPositioned(coords.boundsInWindow())
+                                }
+                            else Modifier
+                        ),
                         icon = Icons.Outlined.Update,
                         title = stringResource(R.string.version),
                         value = bundle.version?.removePrefix("v") ?: "N/A",
@@ -546,7 +619,14 @@ private fun BundleManagementCard(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable { onPrereleasesToggle(!currentUsePrerelease) }
-                                .padding(vertical = 4.dp),
+                                .padding(vertical = 4.dp)
+                                .then(
+                                    if (onPrereleaseBtnPositioned != null)
+                                        Modifier.onGloballyPositioned { coords ->
+                                            onPrereleaseBtnPositioned(coords.boundsInWindow())
+                                        }
+                                    else Modifier
+                                ),
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {

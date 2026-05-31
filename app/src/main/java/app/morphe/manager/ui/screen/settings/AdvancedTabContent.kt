@@ -16,6 +16,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -37,7 +40,8 @@ import app.morphe.manager.ui.viewmodel.SettingsViewModel
 fun AdvancedTabContent(
     patchOptionsViewModel: PatchOptionsViewModel,
     homeViewModel: HomeViewModel,
-    settingsViewModel: SettingsViewModel
+    settingsViewModel: SettingsViewModel,
+    onExpertModeItemPositioned: ((Rect) -> Unit)? = null
 ) {
     val prefs = settingsViewModel.prefs
     val useExpertMode by prefs.useExpertMode.getAsState()
@@ -99,6 +103,9 @@ fun AdvancedTabContent(
                 else settingsViewModel.setExpertMode(false)
             },
             showBorder = true,
+            modifier = if (onExpertModeItemPositioned != null) Modifier.onGloballyPositioned { coords ->
+                onExpertModeItemPositioned(coords.boundsInWindow())
+            } else Modifier,
             leadingContent = {
                 MorpheIcon(icon = Icons.Outlined.Psychology)
             },
