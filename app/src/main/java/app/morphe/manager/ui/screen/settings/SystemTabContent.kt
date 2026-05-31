@@ -19,8 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.layout.boundsInWindow
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -65,14 +63,11 @@ fun SystemTabContent(
             icon = Icons.Outlined.InstallMobile
         )
 
-        SectionCard(
-            modifier = if (onInstallerSectionPositioned != null)
-                Modifier.onGloballyPositioned { coords -> onInstallerSectionPositioned(coords.boundsInWindow()) }
-            else Modifier
-        ) {
+        SectionCard {
             InstallerSection(
                 settingsViewModel = settingsViewModel,
-                onShowInstallerDialog = onShowInstallerDialog
+                onShowInstallerDialog = onShowInstallerDialog,
+                onInstallerItemPositioned = onInstallerSectionPositioned
             )
         }
 
