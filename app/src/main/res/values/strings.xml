@@ -895,7 +895,7 @@ Do you still want to continue?"</string>
     <string name="onboarding_sources_desc">View and manage your patch sources here. Each source provides patches that can be applied to your apps</string>
     <string name="onboarding_swipe_title">Swipe gestures</string>
     <string name="onboarding_swipe_desc">Swipe right on an app card to view its available patches. Swipe left to hide the card from the home screen</string>
-    <string name="onboarding_settings_desc">Customize Morphe Manager: appearance, advanced options, and system tools</string>
+    <string name="onboarding_settings_desc">Customize Morphe: appearance, advanced options, and system tools</string>
     <string name="onboarding_sources_patches_desc">Tap to view all patches available from this source</string>
     <string name="onboarding_sources_version_desc">Tap the version to view the full changelog for this source</string>
     <string name="onboarding_sources_prerelease_desc">Enable this to receive pre-release patch versions from this source</string>
