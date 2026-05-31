@@ -208,8 +208,6 @@ private fun MorpheManager(vm: MainViewModel) {
     val usingMountInstallState = remember { mutableStateOf(false) }
 
     // Unified onboarding
-    val isFirstLaunchPref by prefs.firstLaunch.getAsState()
-    val isFirstVisit = ONBOARDING_TESTING_MODE || isFirstLaunchPref
     val wantsOnboardingTour = remember { mutableStateOf(false) }
     var onboardingPhase by remember { mutableStateOf(OnboardingPhase.HOME) }
     val showOnboarding = (ONBOARDING_TESTING_MODE || wantsOnboardingTour.value) && onboardingPhase != OnboardingPhase.DONE
@@ -410,7 +408,6 @@ private fun MorpheManager(vm: MainViewModel) {
                     usingMountInstall = usingMountInstallState.value,
                     onBackgroundSpeedChange = { patcherBackgroundSpeed.floatValue = it },
                     onPatchingCompleted = { patchingCompleted.value = true },
-                    isFirstPatch = isFirstVisit,
                     onStartTour = {
                         onboardingPhase = OnboardingPhase.HOME
                         wantsOnboardingTour.value = true

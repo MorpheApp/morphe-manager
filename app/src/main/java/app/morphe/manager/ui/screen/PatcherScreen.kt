@@ -21,11 +21,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -56,7 +52,6 @@ import app.morphe.manager.util.tag
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -80,7 +75,6 @@ fun PatcherScreen(
     prefs: PreferencesManager = koinInject(),
     onBackgroundSpeedChange: (Float) -> Unit = {},
     onPatchingCompleted: () -> Unit = {},
-    isFirstPatch: Boolean = false,
     onStartTour: () -> Unit = {},
     onDeclineTour: () -> Unit = {}
 ) {
@@ -291,16 +285,11 @@ fun PatcherScreen(
     val errorMessage by remember { derivedStateOf { (installViewModel.installState as? InstallViewModel.InstallState.Error)?.message } }
 
     val showInstalledSourceConflictDialog = remember { mutableStateOf(false) }
-    val showTourPrompt = remember { mutableStateOf(false) }
+    val shouldPromptTour by patcherViewModel.shouldPromptTour.collectAsStateWithLifecycle()
 
     LaunchedEffect(installState) {
         if (installState is InstallViewModel.InstallState.Installed) {
-            patcherViewModel.triggerNotificationPromptIfNeeded()
-            if (isFirstPatch) {
-                // Wait for the notification dialog (if shown) to be dismissed first
-                snapshotFlow { shouldPromptNotification }.first { !it }
-                showTourPrompt.value = true
-            }
+            patcherViewModel.triggerPostInstallPromptsIfNeeded()
         }
         if (installState is InstallViewModel.InstallState.Conflict && autoHandleConflict) {
             showInstalledSourceConflictDialog.value = true
@@ -342,10 +331,10 @@ fun PatcherScreen(
     }
 
     // Tour prompt dialog shown after first successful install
-    if (showTourPrompt.value) {
+    if (shouldPromptTour) {
         MorpheDialog(
             onDismissRequest = {
-                showTourPrompt.value = false
+                patcherViewModel.consumeTourPrompt()
                 onDeclineTour()
             },
             title = stringResource(R.string.tour_prompt_title),
@@ -353,13 +342,13 @@ fun PatcherScreen(
                 MorpheDialogButtonRow(
                     primaryText = stringResource(R.string.tour_prompt_confirm),
                     onPrimaryClick = {
-                        showTourPrompt.value = false
+                        patcherViewModel.consumeTourPrompt()
                         onStartTour()
                         onBackClick()
                     },
                     secondaryText = stringResource(R.string.onboarding_skip),
                     onSecondaryClick = {
-                        showTourPrompt.value = false
+                        patcherViewModel.consumeTourPrompt()
                         onDeclineTour()
                         onBackClick()
                     }
