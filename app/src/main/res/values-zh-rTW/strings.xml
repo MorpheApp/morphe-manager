@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">點擊下方的「%s」按鈕</string>
     <string name="home_download_instructions_step2_part1">向下捲動網頁並點擊</string>
     <string name="home_download_instructions_download_button_toast">在網站上按下下載，而不是在這裡 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">太棒了！現在點擊下方「繼續」並前往網站 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">熟能生巧，你快要成功了！ 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">還沒到…還沒到… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">好的，我尊重您的奉獻 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">您現在是 Morphe 官方按鈕測試員 🏅</string>
     <string name="home_download_instructions_step3">等待下載完成，並且 <b>請勿安裝</b> 該 APK</string>
     <string name="home_download_instructions_step3_mount">等待下載完成，然後 <b>安裝該 APK</b></string>
     <string name="home_download_instructions_step4">下載完成後，回到 Morphe</string>
@@ -602,6 +607,9 @@ morphe_header_custom_dark.png
     <string name="installer_use_standard">使用標準</string>
     <string name="settings_prompt_installer_on_install">安裝程式選擇提示</string>
     <string name="settings_prompt_installer_on_install_description">每次安裝修補後的應用程式時顯示安裝程式選取對話方塊</string>
+    <string name="settings_auto_install_with_shizuku">修補完成後自動安裝</string>
+    <string name="settings_auto_install_with_shizuku_description">修補完成後會立即自動安裝 APK</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" 已啟用 - 將略過自動安裝</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">電池最佳化</string>
     <string name="settings_system_battery_optimization_description">即使應用程式被最小化，也會保持修補程式的運行</string>

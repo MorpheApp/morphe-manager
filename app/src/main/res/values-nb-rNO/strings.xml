@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">Trykk på \'%s\'-knappen nedenfor</string>
     <string name="home_download_instructions_step2_part1">Rull nedover nettsiden og trykk på</string>
     <string name="home_download_instructions_download_button_toast">Trykk på nedlastingsknappen på nettsiden, og ikke her 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Perfekt! Klikk fortsett nedenfor og gå til nettstedet 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Øvelse gjør mester, du er på vei! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Fortsatt ikke her… fortsatt ikke her… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">OK, jeg respekterer dedikasjonen 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Du er nå en offisiell Morphe-knapptester 🏅</string>
     <string name="home_download_instructions_step3">Vent til nedlastingen er fullført, og &lt;b&gt;ikke installer&lt;/b&gt; APK-filen</string>
     <string name="home_download_instructions_step3_mount">Vent til nedlastingen er fullført, og &lt;b&gt;installer APK-filen&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Etter at nedlastingen er fullført, gå tilbake til Morphe</string>
@@ -602,6 +607,9 @@ morphe_header_custom_dark.png
     <string name="installer_use_standard">Bruk standard</string>
     <string name="settings_prompt_installer_on_install">Installeringsvalg-melding</string>
     <string name="settings_prompt_installer_on_install_description">Viser installasjonsvalgdialogen hver gang en oppdatert app installeres</string>
+    <string name="settings_auto_install_with_shizuku">Automatisk installasjon etter patching</string>
+    <string name="settings_auto_install_with_shizuku_description">Installerer APK-en stille og rolig så snart patching er fullført</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" er aktivert - automatisk installasjon vil bli hoppet over</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimalisering av batteri</string>
     <string name="settings_system_battery_optimization_description">Holder oppdatereren i gang når appen minimeres</string>

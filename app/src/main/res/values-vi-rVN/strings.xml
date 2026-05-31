@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">Bấm nút \"%s\" ở bên dưới</string>
     <string name="home_download_instructions_step2_part1">Cuộn xuống trang web và bấm</string>
     <string name="home_download_instructions_download_button_toast">Bấm tải xuống trên trang web ấy, chứ không phải ở đây 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Tuyệt vời! Bây giờ hãy nhấp vào tiếp tục bên dưới và truy cập trang web 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Thực hành tạo nên sự hoàn hảo, bạn đang tiến bộ đấy! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Vẫn chưa đến... vẫn chưa đến... 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">Được rồi, tôi tôn trọng sự tận tâm của bạn 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Bây giờ bạn là người dùng thử nút Morphe chính thức 🏅</string>
     <string name="home_download_instructions_step3">Đợi tải xong, nhưng &lt;b&gt;không cài&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">Đợi tải xong, sau đó &lt;b&gt;cài APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Sau khi tải xong, hãy quay lại Morphe</string>
@@ -381,7 +386,7 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="mini_game_try_again">Thử lại</string>
     <string name="mini_game_paused">Tạm dừng</string>
     <string name="mini_game_resume">Tiếp tục</string>
-    <string name="mini_game_2048_picker_subtitle">Vuốt các ô để ghép chúng lại</string>
+    <string name="mini_game_2048_picker_subtitle">Vuốt để ghép các ô lại với nhau</string>
     <string name="mini_game_flappy_picker_subtitle">Chạm để bay lách qua các ống</string>
     <string name="mini_game_flappy_tap_to_start">Chạm để bay</string>
     <string name="mini_game_snake_picker_subtitle">Ăn thức ăn, đừng tự đâm vào mình</string>
@@ -603,6 +608,9 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_use_standard">Trình cài đặt tiêu chuẩn</string>
     <string name="settings_prompt_installer_on_install">Hỏi chọn trình cài đặt</string>
     <string name="settings_prompt_installer_on_install_description">Luôn hiện hộp thoại chọn trình cài đặt khi cài ứng dụng đã vá</string>
+    <string name="settings_auto_install_with_shizuku">Tự động cài đặt sau khi vá lỗi</string>
+    <string name="settings_auto_install_with_shizuku_description">Tự động cài đặt APK đã vá ngay sau khi quá trình vá lỗi hoàn tất</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" đã được bật - cài đặt tự động sẽ bị bỏ qua</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Tối ưu hóa pin</string>
     <string name="settings_system_battery_optimization_description">Duy trì trình vá tiếp tục chạy kể cả khi ứng dụng bị thu nhỏ</string>

@@ -1,2 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%s pataisa</item>
+        <item quantity="few">%s pataisa</item>
+        <item quantity="many">%s pataisa</item>
+        <item quantity="other">%s pataisymai</item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%s pataisos nustatymas</item>
+        <item quantity="few">%s pataisų nustatymai</item>
+        <item quantity="many">%s pataisų nustatymai</item>
+        <item quantity="other">%s pataisų nustatymai</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%s šaltinis</item>
+        <item quantity="few">%s šaltiniai</item>
+        <item quantity="many">%s šaltiniai</item>
+        <item quantity="other">%s šaltiniai</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%s paketas</item>
+        <item quantity="few">%s paketai</item>
+        <item quantity="many">%s paketai</item>
+        <item quantity="other">%s paketai</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Vykdyti %s pataisą</item>
+        <item quantity="few">Vykdyti %s pataisas</item>
+        <item quantity="many">Vykdyti %s pataisas</item>
+        <item quantity="other">Vykdyti %s pataisas</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%s APK failas</item>
+        <item quantity="few">%s APK failai</item>
+        <item quantity="many">%s APK failai</item>
+        <item quantity="other">%s APK failai</item>
+    </plurals>
+</resources>

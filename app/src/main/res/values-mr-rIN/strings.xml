@@ -117,6 +117,11 @@
     <string name="home_download_instructions_step1">खालील \'%s\' बटण दाबा</string>
     <string name="home_download_instructions_step2_part1">वेबपेजवर खाली स्क्रोल करा आणि दाबा</string>
     <string name="home_download_instructions_download_button_toast">वेबसाइटवर असलेल्या डाउनलोड बटणावर दाबा, येथे नाही. 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">उत्कृष्ट! आता खालील \'सुरू ठेवा\' वर क्लिक करा आणि वेबसाइटवर जा 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">सरावाने सर्व काही साध्य होते, तुम्ही तिथे पोहोचत आहात! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">अजून इथे नाही... अजून इथे नाही... 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">ठीक आहे, मी तुमच्या समर्पणाचा आदर करतो 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">आता तुम्ही अधिकृत Morphe बटण परीक्षक आहात 🏅</string>
     <string name="home_download_instructions_step3">डाउनलोड पूर्ण होऊ द्या, पण APK  &lt;b&gt;इन्स्टॉल करू नका.&lt;b&gt;</string>
     <string name="home_download_instructions_step3_mount">डाउनलोड पूर्ण होण्याची प्रतीक्षा करा, त्यानंतर  &lt;b&gt;APK इन्स्टॉल करा&lt;b&gt;</string>
     <string name="home_download_instructions_step4">डाउनलोड झाल्यावर पुन्हा Morphe उघडा.</string>
@@ -289,6 +294,9 @@
     <string name="installer_external_success">%s ने यशस्वी इंस्टॉलेशनची नोंद केली</string>
     <string name="settings_prompt_installer_on_install">इंस्टॉलर निवड प्रॉम्प्ट</string>
     <string name="settings_prompt_installer_on_install_description">पॅच केलेले ॲप इंस्टॉल करताना प्रत्येक वेळी इंस्टॉलर निवड संवाद दर्शवितो</string>
+    <string name="settings_auto_install_with_shizuku">पॅचिंग केल्यानंतर स्वयंचलितपणे स्थापित करा</string>
+    <string name="settings_auto_install_with_shizuku_description">पॅचिंग पूर्ण झाल्यावर पॅच केलेले APK शांतपणे स्थापित करते</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" सक्षम आहे - स्वयंचलितपणे स्थापित करणे वगळले जाईल</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">बॅटरी ऑप्टिमायझेशन</string>
     <string name="settings_system_battery_optimization_description">ॲप मिनिमाइज केले असताना पॅचर चालू ठेवतो</string>

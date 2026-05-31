@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">Pindutin ang \'%s\' na button sa ibaba</string>
     <string name="home_download_instructions_step2_part1">I-scroll pababa ang webpage at pindutin</string>
     <string name="home_download_instructions_download_button_toast">Pindutin ang download sa website, at hindi dito 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Perpekto! Ngayon, i-click ang magpatuloy sa ibaba at pumunta sa website 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Ang pagsasanay ang magpapahusay, malapit ka na! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Wala pa rin… wala pa rin… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">OK, iginagalang ko ang dedikasyon 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Opisyal ka nang Morphe button tester 🏅</string>
     <string name="home_download_instructions_step3">Hintaying makumpleto ang pag-download, at &lt;b&gt;huwag i-install&lt;/b&gt; ang APK</string>
     <string name="home_download_instructions_step3_mount">Hintaying makumpleto ang pag-download, pagkatapos &lt;b&gt;i-install ang APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Pagkatapos ang pag-download, bumalik sa Morphe</string>
@@ -602,6 +607,9 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_use_standard">Gamitin ang standard</string>
     <string name="settings_prompt_installer_on_install">Prompt ng pagpili ng installer</string>
     <string name="settings_prompt_installer_on_install_description">Ipinapakita ang diyalogo ng pagpili ng installer sa tuwing mag-i-install ka ng naka-patch na aplikasyon</string>
+    <string name="settings_auto_install_with_shizuku">Awtomatikong i-install pagkatapos ng pag-patch</string>
+    <string name="settings_auto_install_with_shizuku_description">Tahimik na i-i-install ang patched na APK sa sandaling makumpleto ang pag-patch</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" ay naka-enable - lalaktawan ang awtomatikong pag-install</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pag-optimize sa baterya</string>
     <string name="settings_system_battery_optimization_description">Pinapanatili ang patcher na tumatakbo kapag ang app ay minimize</string>

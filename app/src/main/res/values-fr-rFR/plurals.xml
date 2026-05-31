@@ -13,8 +13,8 @@
         <item quantity="other">%s sources</item>
     </plurals>
     <plurals name="package_count">
-        <item quantity="one">%s package</item>
-        <item quantity="other">%s packages</item>
+        <item quantity="one">%s paquet</item>
+        <item quantity="other">%s paquets</item>
     </plurals>
     <plurals name="patches_executed">
         <item quantity="one">%s patch exécuté</item>

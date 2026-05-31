@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">Pressiona o botão \"%s\" em baixo</string>
     <string name="home_download_instructions_step2_part1">Desloca a página para baixo e pressiona</string>
     <string name="home_download_instructions_download_button_toast">Pressiona o botão \"download\" no site, e não aqui 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Perfeito! Agora clique em continuar abaixo e acesse o site 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">A prática leva à perfeição, você está quase lá! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Ainda não… ainda não… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">OK, eu respeito a dedicação 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Agora você é um testador oficial do botão Morphe 🏅</string>
     <string name="home_download_instructions_step3">Aguarda para que a transferência complete, &lt;b&gt;não instales&lt;/b&gt; o APK</string>
     <string name="home_download_instructions_step3_mount">Aguarda pela conclusão da transferência, e depois &lt;b&gt;instala o APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Depois da transferência terminar, volta para o Morphe</string>
@@ -602,6 +607,9 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_use_standard">Usar padrão</string>
     <string name="settings_prompt_installer_on_install">Solicitação de seleção do instalador</string>
     <string name="settings_prompt_installer_on_install_description">Mostrar diálogo de seleção de instalador cada vez que instalares uma aplicação modificada</string>
+    <string name="settings_auto_install_with_shizuku">Instalação automática após a aplicação do patch</string>
+    <string name="settings_auto_install_with_shizuku_description">Instala silenciosamente o APK corrigido assim que a correção for concluída</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" está habilitado - a instalação automática será ignorada</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Otimização de bateria</string>
     <string name="settings_system_battery_optimization_description">Mantém o modificador em execução quando a aplicação é minimizada</string>

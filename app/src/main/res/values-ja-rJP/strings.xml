@@ -36,7 +36,7 @@
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">どのアプリにパッチを適用しますか？</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">再びアプリを伝説にする準備はできましたか？</string>
+    <string name="home_greeting_2">アプリを素晴らしくする準備はOK？</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">準備はいい？ パッチの時間だ</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
@@ -60,11 +60,11 @@
     <string name="sources_management_prerelease_toggle">プレリリース版のパッチを使用</string>
     <string name="sources_management_prerelease_toggle_description">実験的なバージョンのパッチを取得します</string>
     <string name="sources_management_experimental_versions_toggle">実験的なバージョンのアプリを使用</string>
-    <string name="sources_management_experimental_versions_toggle_description">利用可能な場合は、実験的なバージョンのアプリをパッチ対象にします</string>
+    <string name="sources_management_experimental_versions_toggle_description">利用可能な場合に、実験的なバージョンのアプリをパッチ対象にします</string>
     <string name="sources_management_already_exists">このソースは既に存在します</string>
     <string name="sources_management_invalid_url">無効なソースURLです。アドレスを確認して、もう一度試してください。</string>
-    <string name="sources_management_metadata_unavailable">メタデータなし</string>
-    <string name="sources_management_metadata_unavailable_hint">リモートのメタデータファイルは利用できません。インストール済みのバンドルでのパッチ適用は可能ですが、このソースの自動更新は無効になります。</string>
+    <string name="sources_management_metadata_unavailable">メタデータがありません</string>
+    <string name="sources_management_metadata_unavailable_hint">接続先のメタデータファイルが利用できません。インストール済みバンドルでのパッチ適用は可能ですが、このソースからの自動更新は無効になります。</string>
     <string name="sources_management_metadata_unavailable_hint_missing">パッチバンドルのダウンロードに失敗しました。ソースURLが正しくないか、ファイルが存在しない可能性があります。</string>
     <string name="sources_management_source_enabled">ソースが有効</string>
     <string name="sources_management_source_disabled">ソースが無効</string>
@@ -101,7 +101,7 @@
     <string name="home_apk_availability_dialog_title">オリジナルの APK を探すのにお困りですか？</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt; にパッチを適用するには、以下のバージョンの APK (未パッチ) が必要です</string>
     <string name="home_apk_availability_dialog_expert">&lt;b&gt;%s&lt;/b&gt; にパッチを適用するには、以下のバージョンの APK (未パッチ) が必要です</string>
-    <string name="home_apk_availability_recommended_label">推奨</string>
+    <string name="home_apk_availability_recommended_label">おすすめ</string>
     <string name="home_apk_availability_unpatched_label">未パッチ</string>
     <string name="home_apk_availability_incompatible_label">非対応</string>
     <string name="home_apk_availability_yes">はい、 APK を探すのを手伝ってください</string>
@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">下の 「%s」 ボタンをタップする</string>
     <string name="home_download_instructions_step2_part1">ウェブページを下にスクロールして、このボタンをタップする</string>
     <string name="home_download_instructions_download_button_toast">ここではなく、ウェブサイトにあるボタンをタップしてください😊</string>
+    <string name="home_download_instructions_download_button_toast_2">パーフェクト！それでは、下の「続行」ボタンをクリックしてサイトにアクセスしてください👆</string>
+    <string name="home_download_instructions_download_button_toast_3">練習は報われる。ゴールはもうすぐです！💪</string>
+    <string name="home_download_instructions_download_button_toast_4">まだ、まだ先だ…🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">承知しました！　献身に敬意を表します🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">あなたは今、Morpheボタンの公式テスターになりました🏅</string>
     <string name="home_download_instructions_step3">ダウンロードが完了するまで待ち、その APK はまだ &lt;b&gt;インストールしない&lt;b&gt;</string>
     <string name="home_download_instructions_step3_mount">ダウンロードが完了するまで待ち、&lt;b&gt;その APK をインストールする&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">ダウンロード完了後、 Morphe に戻る</string>
@@ -324,9 +329,9 @@
     <string name="battery_optimization_dialog_description">一部のデバイスでは、アプリを最小化するとパッチャーが停止する場合があります。確実にパッチ処理を完了するため、Morphe をバッテリー制限の対象外にしてください</string>
     <string name="battery_optimization_not_now">後で</string>
     <!-- Patcher Screen - Patcher Worker -->
-    <string name="patcher_notification_title">パッチ適用中…</string>
-    <string name="patcher_notification_text">パッチ適用プログラムに戻るにはタップ</string>
-    <string name="patcher_stop_confirm_title">パッチ適用プログラムを停止</string>
+    <string name="patcher_notification_title">パッチを適用中…</string>
+    <string name="patcher_notification_text">パッチ画面に戻るにはタップ</string>
+    <string name="patcher_stop_confirm_title">パッチ適用処理を停止</string>
     <string name="patcher_stop_confirm_description">パッチ適用処理を停止してもよろしいですか？</string>
     <!-- Patcher Screen - Patcher Messages -->
     <string name="patcher_message_1">アプリを最高な姿に変身中…</string>
@@ -602,6 +607,9 @@ morphe_header_custom_dark.png
     <string name="installer_use_standard">標準を使用</string>
     <string name="settings_prompt_installer_on_install">インストーラー選択ダイアログ</string>
     <string name="settings_prompt_installer_on_install_description">パッチ適用済みアプリをインストールする際に、毎回インストーラー選択ダイアログを表示します</string>
+    <string name="settings_auto_install_with_shizuku">パッチ適用後の自動インストール</string>
+    <string name="settings_auto_install_with_shizuku_description">パッチ適用が完了次第、すぐに修正済みAPKをサイレントにインストールします</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" が有効になっています - 自動インストールはスキップされます</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">電池の最適化</string>
     <string name="settings_system_battery_optimization_description">アプリを閉じているときでも、パッチャーを実行し続けます</string>

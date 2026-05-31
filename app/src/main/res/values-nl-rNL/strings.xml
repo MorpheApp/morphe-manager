@@ -115,6 +115,11 @@
     <string name="home_download_instructions_steps_title">Instructies:</string>
     <string name="home_download_instructions_step2_part1">Scroll naar beneden op de webpagina en druk op</string>
     <string name="home_download_instructions_download_button_toast">Druk op de download op de website, en niet hier 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Perfect! Klik nu op \'verder\' hieronder en ga naar de website 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Oefening baart kunst, je bent er bijna! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Nog steeds niet hier… nog steeds niet hier… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">OK, ik respecteer de toewijding 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Je bent nu een officiële Morphe knop tester 🏅</string>
     <string name="home_download_instructions_step3">Wacht tot de download is voltooid, en &lt;b&gt;installeer de APK niet&lt;/b&gt;</string>
     <string name="home_download_instructions_step3_mount">Wacht tot de download is voltooid, en &lt;b&gt;installeer de APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Na het downloaden, ga terug naar Morphe</string>
@@ -599,6 +604,9 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_use_standard">Standaard gebruiken</string>
     <string name="settings_prompt_installer_on_install">Keuze van installer</string>
     <string name="settings_prompt_installer_on_install_description">Toont het dialoogvenster voor het selecteren van de installer bij elke geïnstalleerde gepatchte app</string>
+    <string name="settings_auto_install_with_shizuku">Automatisch installeren na patchen</string>
+    <string name="settings_auto_install_with_shizuku_description">Installeert de gepatchte APK stilzwijgend zodra het patchen is voltooid</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" is ingeschakeld - automatische installatie wordt overgeslagen</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterijoptimalisatie</string>
     <string name="settings_system_battery_optimization_description">Houdt de patcher actief wanneer de app geminimaliseerd is</string>

@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">नीचे दिया गया \'%s\' बटन दबाएं</string>
     <string name="home_download_instructions_step2_part1">वेबपेज पर नीचे की ओर स्क्रोल करें और दबाएं</string>
     <string name="home_download_instructions_download_button_toast">वेबसाइट पर डाउनलोड बटन पर क्लिक करें, यहां नहीं 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">उत्कृष्ट! अब नीचे दिए गए जारी रखें पर क्लिक करें और वेबसाइट पर जाएं 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">अभ्यास परिपूर्ण बनाता है, आप वहां पहुंच रहे हैं! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">अभी भी यहां नहीं… अभी भी यहां नहीं… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">ठीक है, मैं समर्पण का सम्मान करता हूँ 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">आप अब एक आधिकारिक मोर्फ़ बटन परीक्षक हैं 🏅</string>
     <string name="home_download_instructions_step3">डाउनलोड पूरा होने का इंतज़ार करें और APK को &lt;b&gt;इंस्टाल न करें&lt;/b&gt;</string>
     <string name="home_download_instructions_step3_mount">डाउनलोड पूरा होने का इंतज़ार करें. इसके बाद,  &lt;b&gt;APK को इंस्टाल करें&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">डाउनलोड पूरा हो जाने के बाद, इस ऐप्लिकेशन को दोबारा खोलें</string>
@@ -602,6 +607,9 @@ morphe_header_custom_dark.png
     <string name="installer_use_standard">स्तاندर्ड का उपयोग करें</string>
     <string name="settings_prompt_installer_on_install">इंस्टॉलर चयन संकेत</string>
     <string name="settings_prompt_installer_on_install_description">जब भी पैच किए गए ऐप को इंस्टॉल किया जाता है, तो इंस्टॉलर चयन संवाद दिखाता है।</string>
+    <string name="settings_auto_install_with_shizuku">पैचिंग के बाद स्वतः इंस्टॉल करें</string>
+    <string name="settings_auto_install_with_shizuku_description">पैचिंग पूरा होने के तुरंत बाद पैच्ड APK चुपचाप इंस्टॉल करता है</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" सक्षम है - स्वतः इंस्टॉल छोड़ दिया जाएगा</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">बैटरी अनुकूलन</string>
     <string name="settings_system_battery_optimization_description">जब ऐप छोटा किया जाता है, तो पैचर को चालू रखता है।</string>

@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">Натиснете бутона \'%s\' отдолу</string>
     <string name="home_download_instructions_step2_part1">Скролни надолу страницата и натиснете</string>
     <string name="home_download_instructions_download_button_toast">Натиснете \"Изтеглете\" на уебсайта, а не тук 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Отлично! Кликнете продължи по-долу и отидете на уебсайта 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Практиката води до съвършенство, напредваш! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Все още не е тук… все още не е тук… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">Добре, уважавам отдадеността 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Вече сте официален тестер на бутона Morphe 🏅</string>
     <string name="home_download_instructions_step3">Чакајте да се завърши изтеглянето и &lt;b&gt;не инсталирайте&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">Чакајте да се завърши изтеглянето, след това &lt;b&gt;инсталирайте&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step4">След завършване на свалянето, върнете се в Morphe</string>
@@ -602,6 +607,9 @@ morphe_header_custom_dark.png
     <string name="installer_use_standard">Използвайте стандартен</string>
     <string name="settings_prompt_installer_on_install">Показва се прозорец за избор на инсталатор</string>
     <string name="settings_prompt_installer_on_install_description">Показва диалогов прозорец за избор на инсталатор всеки път, когато се инсталира приложение с пач.</string>
+    <string name="settings_auto_install_with_shizuku">Автоматична инсталация след поправяне</string>
+    <string name="settings_auto_install_with_shizuku_description">Инсталира поправения APK тихо веднага след завършване на поправянето</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" е включен - автоматичната инсталация ще бъде пропусната</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизация на батерията</string>
     <string name="settings_system_battery_optimization_description">Поддържа работещ патчър, когато приложението е минимизирано</string>

@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">انقر على زر \'%s\' أدناه</string>
     <string name="home_download_instructions_step2_part1">مرر لأسفل صفحة الويب واضغط</string>
     <string name="home_download_instructions_download_button_toast">اضغط على التنزيل من الموقع الإلكتروني، وليس هنا 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">مثالي! الآن انقر فوق متابعة أدناه وانتقل إلى الموقع الإلكتروني 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">التدريب يصنع الإتقان، أنت تقترب! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">ليس هنا بعد… ليس هنا بعد… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">حسنًا، أحترم التفاني 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">أنت الآن مختبر رسمي لزر Morphe 🏅</string>
     <string name="home_download_instructions_step3">انتظر حتى يكتمل التنزيل، و&lt;b&gt;لا تقم بتثبيت&lt;/b&gt; ملف APK</string>
     <string name="home_download_instructions_step3_mount">انتظر حتى يكتمل التنزيل، ثم &lt;b&gt;قم بتثبيت ملف APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">بعد انتهاء التنزيل، ارجع إلى Morphe</string>
@@ -603,6 +608,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_use_standard">استخدام القياسي</string>
     <string name="settings_prompt_installer_on_install">نافذة اختيار أداة التثبيت</string>
     <string name="settings_prompt_installer_on_install_description">يعرض نافذة اختيار أداة التثبيت في كل مرة تقوم فيها بتثبيت تطبيق معدل</string>
+    <string name="settings_auto_install_with_shizuku">التثبيت التلقائي بعد الترقيع</string>
+    <string name="settings_auto_install_with_shizuku_description">يقوم بتثبيت ملف APK المرقع بصمت بمجرد اكتمال الترقيع</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" مُفعّل - سيتم تخطي التثبيت التلقائي</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">تحسينات البطارية</string>
     <string name="settings_system_battery_optimization_description">يحافظ على تشغيل أداة التعديل عند تصغير التطبيق</string>
@@ -690,7 +698,7 @@ morphe_adaptive_monochrome_custom.xml
     <!-- File Picker -->
     <string name="file_picker_previous_directory">المجلد السابق</string>
     <string name="file_picker_no_files">لا توجد ملفات هنا</string>
-    <string name="file_picker_read_error">لا يمكننق قراءة هذا المجلد</string>
+    <string name="file_picker_read_error">لا يمكن قراءة هذا المجلد</string>
     <string name="file_picker_internal_storage">التخزين الداخلي</string>
     <string name="file_picker_sd_card">الذاكرة الخارجية SD</string>
     <string name="file_picker_root">Root (/)</string>

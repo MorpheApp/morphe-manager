@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">请按下下面的“%s”按钮。</string>
     <string name="home_download_instructions_step2_part1">向下滚动网页并按</string>
     <string name="home_download_instructions_download_button_toast">在网站上按下下载，而不是在这里 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">完美！现在点击下面的“继续”并访问网站👆</string>
+    <string name="home_download_instructions_download_button_toast_3">熟能生巧，你正在进步！💪</string>
+    <string name="home_download_instructions_download_button_toast_4">还没到…还没到…🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">好的，我尊重您的奉献精神 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">您现在是 Morphe 按钮的官方测试员 🏅</string>
     <string name="home_download_instructions_step3">等待下载完成，并 &lt;b&gt;不要安装&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">等待下载完成，然后 &lt;b&gt;安装 APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">下载完成后，返回 Morphe</string>
@@ -602,6 +607,9 @@ morphe_header_custom_dark.png
     <string name="installer_use_standard">使用标准</string>
     <string name="settings_prompt_installer_on_install">安装程序选择提示</string>
     <string name="settings_prompt_installer_on_install_description">每次安装已修补的应用时，都会显示安装程序选择对话框</string>
+    <string name="settings_auto_install_with_shizuku">补丁应用后自动安装</string>
+    <string name="settings_auto_install_with_shizuku_description">在补丁完成安装后，静默安装补丁后的 APK</string>
+    <string name="settings_auto_install_prompt_conflict">已启用 \"%s\" - 将跳过自动安装</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">电池优化</string>
     <string name="settings_system_battery_optimization_description">在应用最小化时，保持修补程序运行</string>

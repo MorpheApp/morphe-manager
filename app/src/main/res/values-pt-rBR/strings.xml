@@ -99,8 +99,8 @@
     <string name="sources_patch_expert_badge_tooltip">Ative o Modo Especialista em Configurações para incluir este patch manualmente</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Precisa de ajuda para encontrar um APK original sem patches?</string>
-    <string name="home_apk_availability_dialog_simple">Para aplicar os patches em &lt;b&gt;%s&lt;/b&gt;, você precisa do APK sem patches na versão:</string>
-    <string name="home_apk_availability_dialog_expert">Para aplicar os patches em &lt;b&gt;%s&lt;/b&gt;, você precisa de um APK sem patches na versão:</string>
+    <string name="home_apk_availability_dialog_simple">Para aplicar os patches no(a) &lt;b&gt;%s&lt;/b&gt;, você precisa do APK sem patches na versão:</string>
+    <string name="home_apk_availability_dialog_expert">Para aplicar os patches no(a) &lt;b&gt;%s&lt;/b&gt;, você precisa de um APK sem patches na versão:</string>
     <string name="home_apk_availability_recommended_label">Recomendado</string>
     <string name="home_apk_availability_unpatched_label">Sem patches</string>
     <string name="home_apk_availability_incompatible_label">Incompatível</string>
@@ -115,14 +115,19 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Baixar o APK original</string>
     <string name="home_download_instructions_steps_title">Instruções:</string>
-    <string name="home_download_instructions_step1">Pressione o botão \"%s\" abaixo</string>
+    <string name="home_download_instructions_step1">Pressione o botão \'%s\' abaixo</string>
     <string name="home_download_instructions_step2_part1">Role a página para baixo e pressione</string>
-    <string name="home_download_instructions_download_button_toast">Pressione o download no site, e não aqui 😊</string>
+    <string name="home_download_instructions_download_button_toast">Pressiona o botão \"download\" no site, e não aqui 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Perfeito! Agora clique em continuar abaixo e acesse o site 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">A prática leva à perfeição, você está quase lá! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Ainda não chegou… ainda não chegou… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">OK, respeito a dedicação 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Agora você é um testador oficial do Morphe 🏅</string>
     <string name="home_download_instructions_step3">Aguarde o download terminar, e &lt;b&gt;não instale&lt;/b&gt; o APK</string>
     <string name="home_download_instructions_step3_mount">Aguarde o download terminar, então &lt;b&gt;instale o APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Depois da conclusão do download, volte para o Morphe</string>
     <string name="home_download_instructions_step4_mount">Depois de instalar o APK original, volte para o Morphe</string>
-    <string name="home_download_instructions_continue">Continuar para APKMirror.com</string>
+    <string name="home_download_instructions_continue">Ir para o APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Selecione o APK baixado</string>
     <string name="home_file_picker_prompt_description">Selecione o arquivo &lt;b&gt;%s&lt;/b&gt; APK que você baixou recentemente</string>
@@ -173,7 +178,7 @@ Para obter os melhores resultados, este app recomenda aplicar os patches em um &
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">Esta versão tem suporte experimental e pode ser instável ou incompleta</string>
     <string name="morphe_experimental_app_version_dialog_title">Você quer experimentar? 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">Esta versão de &lt;b&gt;%s&lt;/b&gt; tem suporte experimental inicial&lt;br/&gt;&lt;br/&gt;🔧 Espere comportamentos estranhos do aplicativo ou bugs não identificados, pois os patches estão sendo refinados para esta versão do aplicativo</string>
+    <string name="morphe_experimental_app_version_dialog_message">Esta versão de &lt;b&gt;%s&lt;/b&gt; tem suporte experimental inicial&lt;br/&gt;&lt;br/&gt;🔧 Espere comportamentos estranhos do app ou bugs não identificados, pois os patches estão sendo refinados para esta versão do app</string>
     <string name="home_dialog_unsupported_version_dialog_title">Versão não suportada</string>
     <string name="home_dialog_unsupported_version_dialog_description">Este APK não é uma versão recomendada do app. Prosseguir pode resultar em mau funcionamento</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Continuar mesmo assim</string>
@@ -237,7 +242,7 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="header_creator_guide_image_title">Requisitos de imagem</string>
     <string name="header_creator_guide_image_body">Use qualquer arquivo de imagem (PNG ou JPEG). Para obter os melhores resultados, use uma imagem no formato largo com uma proporção de aproximadamente 2,7:1. Arquivos PNG com fundos transparentes se misturam naturalmente com o tema do aplicativo.</string>
     <string name="header_creator_guide_themes_title">Temas claro e escuro</string>
-    <string name="header_creator_guide_themes_body">A maioria dos aplicativos requer imagens separadas para os temas claro e escuro. Alguns aplicativos (como o YouTube Music) usam apenas o tema escuro, portanto, apenas essa seção é exibida.</string>
+    <string name="header_creator_guide_themes_body">A maioria dos apps requer imagens separadas para os temas claro e escuro. Alguns apps (como o YouTube Music) usam apenas o tema escuro, portanto, apenas essa seção é exibida.</string>
     <string name="header_creator_guide_positioning_title">Posicionamento e dimensionamento</string>
     <string name="header_creator_guide_positioning_body">Use gestos de pinça para aumentar o zoom e arraste diretamente na visualização para posicionar e dimensionar sua imagem. Guias de ajuste aparecem quando a imagem está perto do centro. Você também pode usar o controle deslizante abaixo da visualização.</string>
     <!-- Home Screen - App Info Screen -->
@@ -321,7 +326,7 @@ A desinstalação apagará permanentemente todos os dados do aplicativo."</strin
     <string name="patcher_step_sign_apk">Assinando arquivo APK patcheado</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Proteção ao aplicar patches em segundo plano</string>
-    <string name="battery_optimization_dialog_description">Alguns dispositivos podem interromper o aplicativo de patches quando minimizado. Permita que o Morphe seja executado sem restrições de bateria para garantir que a aplicação de patches seja concluída de forma confiável</string>
+    <string name="battery_optimization_dialog_description">Alguns dispositivos podem fechar o patcher quando minimizado. Permita que o Morphe seja executado sem restrições de bateria para garantir que a aplicação de patches seja concluída de forma confiável</string>
     <string name="battery_optimization_not_now">Não agora</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patch em andamento…</string>
@@ -472,7 +477,7 @@ A desinstalação apagará permanentemente todos os dados do aplicativo."</strin
     <string name="settings_advanced_expert_mode">Modo avançado</string>
     <string name="settings_advanced_expert_mode_description">Habilita configurações e opções de personalização avançadas do Morphe</string>
     <string name="settings_advanced_expert_mode_dialog_title">Habilitar o modo expert?</string>
-    <string name="settings_advanced_expert_mode_dialog_message">O modo expert oferece mais controle sobre como os patches são aplicados, mas a má configuração de settings no modo expert pode resultar em um aplicativo não funcional</string>
+    <string name="settings_advanced_expert_mode_dialog_message">O modo expert oferece mais controle sobre como os patches são aplicados, mas configurar incorretamente pode resultar em um app não funcional</string>
     <string name="settings_advanced_strip_unused_libs">Otimizar para a arquitetura do dispositivo</string>
     <string name="settings_advanced_strip_unused_libs_description">Remove libs de arquitetura de CPU não utilizadas e módulos APK divididos</string>
     <!-- Bytecode mode -->
@@ -495,8 +500,8 @@ A desinstalação apagará permanentemente todos os dados do aplicativo."</strin
     <string name="settings_advanced_github_pat_export_warning">Não compartilhe seu PAT. Se você incluí-lo em uma exportação de configurações, mantenha esse arquivo privado porque ele contém o token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Opções de patch</string>
-    <string name="settings_advanced_patch_options_youtube_description">Tema, marca e opções de cabeçalho</string>
-    <string name="settings_advanced_patch_options_restart_message">Alterar opções de patch requer reiniciar o aplicativo para fazer efeito</string>
+    <string name="settings_advanced_patch_options_youtube_description">Opções de tema, personalização e cabeçalho do app</string>
+    <string name="settings_advanced_patch_options_restart_message">Alterar opções de patch requer reaplicar os patches no app para fazer efeito</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Em modo avançado, as opções de patch estarão disponíveis durante o processo de patching</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">Cores do tema do app</string>
@@ -509,7 +514,7 @@ A desinstalação apagará permanentemente todos os dados do aplicativo."</strin
     <string name="settings_advanced_patch_options_load_error">Falha ao carregar opções de patch</string>
     <string name="settings_advanced_patch_options_no_available">Não há opções disponíveis para esse patch</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
-    <string name="settings_advanced_patch_options_custom_branding">Personalização do app</string>
+    <string name="settings_advanced_patch_options_custom_branding">Personalizar o app</string>
     <string name="settings_advanced_patch_options_custom_branding_description">Altera o nome de exibição do app</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Nome do app</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Escreva o nome personalizado</string>
@@ -547,7 +552,7 @@ Opcionalmente, o caminho contém um ícone de notificação em um dos seguintes 
   drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
-    <string name="settings_advanced_patch_options_custom_header">Logo personalizado do cabeçalho</string>
+    <string name="settings_advanced_patch_options_custom_header">Personalizar o logo do cabeçalho</string>
     <string name="settings_advanced_patch_options_custom_header_description">Altera o logo do cabeçalho</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Pasta com imagens para usar como logo personalizado no cabeçalho.
 
@@ -568,7 +573,7 @@ As dimensões das imagens devem ser as seguintes:
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Ocultar recursos de Shorts</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Ocultar atalho de aplicativo de Shorts</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Ocultar atalho Shorts do app</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Remove Shorts do menu de longo toque do launcher</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Ocultar widget de Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Remove o botão de Shorts do widget do launcher</string>
@@ -586,11 +591,11 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_status_not_supported">Não suportado para esta ação</string>
     <string name="installer_status_shizuku_not_installed">Instale Shizuku ou Sui para usar esta opção</string>
     <string name="installer_status_shizuku_not_running">Inicie Shizuku ou Sui e tente novamente</string>
-    <string name="installer_status_shizuku_permission">Conceda permissão do Shizuku ao Morphe a partir do aplicativo Shizuku</string>
+    <string name="installer_status_shizuku_permission">Conceda permissão do Shizuku ao Morphe a partir do app Shizuku</string>
     <string name="installer_mount_warning_install">Seu instalador principal está definido para o instalador montado com root. Este aplicativo salvo não foi instalado usando o montador</string>
     <string name="mount_version_mismatch_message">A versão do app original (%2$s) não corresponde à versão do app patcheado (%1$s). Instale a versão original compatível e tente novamente.</string>
     <string name="installer_status_shizuku_unsupported">A versão do Shizuku instalada não é suportada</string>
-    <string name="installer_action_open_shizuku">Abrir Shizuku</string>
+    <string name="installer_action_open_shizuku">Abrir o Shizuku</string>
     <string name="installer_hint_generic">A instalação falhou. Tente novamente ou mude para um instalador diferente</string>
     <string name="installer_hint_conflict">Outro aplicativo com este nome de pacote já está instalado. Desinstale-o antes de continuar</string>
     <string name="installer_external_launched">Abrindo %s…</string>
@@ -602,6 +607,9 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_use_standard">Usar padrão</string>
     <string name="settings_prompt_installer_on_install">Prompt de seleção do instalador</string>
     <string name="settings_prompt_installer_on_install_description">Mostra a janela de seleção de instalador a cada vez que você instalar um app patcheado</string>
+    <string name="settings_auto_install_with_shizuku">Instalação automática após a aplicação do patch</string>
+    <string name="settings_auto_install_with_shizuku_description">Instala silenciosamente o APK corrigido assim que a aplicação do patch for concluída</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" está habilitado - a instalação automática será ignorada</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Otimização de bateria</string>
     <string name="settings_system_battery_optimization_description">Mantém o patcher em execução quando o app é minimizado</string>
@@ -662,7 +670,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_original_apks_delete_title">Excluir APK original?</string>
     <string name="settings_system_original_apks_delete_confirm">Excluir o APK original para %s? Você não poderá reparar sem fornecer um novo APK</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
-    <string name="settings_system_patch_selections_title">Seleções de emenda</string>
+    <string name="settings_system_patch_selections_title">Seleções de patches</string>
     <string name="settings_system_patch_selections_description">Salva seleções de patch, mantidas após a desinstalação</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Resetar todas as seleções?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Resetar seleções de pacote?</string>

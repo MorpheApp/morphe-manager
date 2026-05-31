@@ -50,7 +50,7 @@
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Bereit, aus enttäuschend einfach großartig zu machen?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Apps von sich selbst retten, seit heute</string>
+    <string name="home_greeting_9">Apps vor sich selbst retten, seit heute</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Angetrieben von Koffein und guten Patches</string>
     <!-- Home Screen - Sources Management -->
@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">Drücken Sie die Taste \'%s\' unten </string>
     <string name="home_download_instructions_step2_part1">Scrollen Sie auf der Webseite nach unten und drücken Sie </string>
     <string name="home_download_instructions_download_button_toast">Drücken Sie die Download-Taste auf der Website und nicht hier 😊 </string>
+    <string name="home_download_instructions_download_button_toast_2">Perfekt! Klicke nun auf \'Weiter\' unten und gehe zur Website 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Übung macht den Meister, du bist schon fast da! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Immer noch nicht hier… immer noch nicht hier… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">OK, ich respektiere die Hingabe 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Du bist jetzt offizieller Morphe-Button-Tester 🏅</string>
     <string name="home_download_instructions_step3">Warten Sie bis der Download abgeschlossen ist, und &lt;b&gt; installieren Sie nicht&lt;/b&gt; die APK </string>
     <string name="home_download_instructions_step3_mount">Warten Sie bis der Download abgeschlossen ist, dann &lt;b&gt;installieren Sie die APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Nachdem der Download abgeschlossen ist, kehren Sie zu Morphe zurück</string>
@@ -602,6 +607,9 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="installer_use_standard">Standard verwenden</string>
     <string name="settings_prompt_installer_on_install">Auswahlaufforderung für den Installer</string>
     <string name="settings_prompt_installer_on_install_description">Zeigt jedes Mal ein Dialogfenster zur Installerauswahl an, wenn eine gepatchte App installiert wird</string>
+    <string name="settings_auto_install_with_shizuku">Automatische Installation nach dem Patchen</string>
+    <string name="settings_auto_install_with_shizuku_description">Installiert die gepatchte APK automatisch, sobald das Patchen abgeschlossen ist</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" ist aktiviert - die automatische Installation wird übersprungen</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterieoptimierung</string>
     <string name="settings_system_battery_optimization_description">Behält den Patcher im Betrieb, wenn die App minimiert wird</string>

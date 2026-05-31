@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">Tekan tombol \'%s\' di bawah ini</string>
     <string name="home_download_instructions_step2_part1">Geser halaman web ke bawah dan tekan</string>
     <string name="home_download_instructions_download_button_toast">Tekan unduh di situs web, dan bukan di sini 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Sempurna! Sekarang klik lanjutkan di bawah ini dan kunjungi situs webnya 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Latihan membuat sempurna, kamu semakin mahir! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Masih belum di sini… masih belum di sini… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">Oke, saya menghormati dedikasinya 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Selamat Anda sekarang adalah penguji resmi tombol Morphe 🏅</string>
     <string name="home_download_instructions_step3">Tunggu hingga unduhan selesai, dan &lt;b&gt;jangan pasang&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">Tunggu hingga unduhan selesai, kemudian &lt;b&gt;pasang APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Setelah proses unduh selesai, kembali ke Morphe</string>
@@ -603,6 +608,9 @@ Dimensi gambar harus sebagai berikut:
     <string name="installer_use_standard">Gunakan standar</string>
     <string name="settings_prompt_installer_on_install">Permintaan pemilihan pemasang</string>
     <string name="settings_prompt_installer_on_install_description">Menampilkan dialog pemilihan pemasang setiap kali Anda memasang aplikasi yang ditambal</string>
+    <string name="settings_auto_install_with_shizuku">Instal otomatis setelah patching</string>
+    <string name="settings_auto_install_with_shizuku_description">Secara senyap menginstal APK yang telah di-patch segera setelah patching selesai</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" diaktifkan - instal otomatis akan dilewati</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisasi baterai</string>
     <string name="settings_system_battery_optimization_description">Menjaga penambal tetap berjalan saat aplikasi diminimalkan</string>

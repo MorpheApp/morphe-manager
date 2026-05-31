@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">Pulsa el botón \"%s\" de abajo</string>
     <string name="home_download_instructions_step2_part1">Desplázate hacia abajo en la página web y pulsa</string>
     <string name="home_download_instructions_download_button_toast">Pulsa descargar en el sitio web, y no aquí 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">¡Perfecto! Ahora pulsa en \"Continuar\" abajo y ve al sitio web 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">La práctica hace al maestro, ¡ya casi lo logras! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Todavía no está aquí… todavía no está aquí… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">De acuerdo, respeto la dedicación 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Ahora eres un probador oficial del botón Morphe 🏅</string>
     <string name="home_download_instructions_step3">Espera a que la descarga se complete, y &lt;b&gt;no instales&lt;/b&gt; el APK</string>
     <string name="home_download_instructions_step3_mount">Espera a que la descarga se complete, luego &lt;b&gt;instala el APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Después de que la descarga termine, vuelve a Morphe</string>
@@ -602,6 +607,9 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="installer_use_standard">Usar estándar</string>
     <string name="settings_prompt_installer_on_install">Solicitud de selección del instalador</string>
     <string name="settings_prompt_installer_on_install_description">Muestra el diálogo de selección del instalador cada vez que se instala una aplicación parcheada</string>
+    <string name="settings_auto_install_with_shizuku">Instalación automática después del parcheo</string>
+    <string name="settings_auto_install_with_shizuku_description">Instala silenciosamente el APK parcheado tan pronto como se completa el parcheo</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" está habilitado: la instalación automática se omitirá</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimización de batería</string>
     <string name="settings_system_battery_optimization_description">Mantiene el parcheador en funcionamiento cuando la aplicación está minimizada</string>

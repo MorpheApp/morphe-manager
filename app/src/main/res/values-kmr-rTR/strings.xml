@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">Butona \'%s\' ya jêr lê deynin.</string>
     <string name="home_download_instructions_step2_part1">Li ser rûbera malperê biqewime û bikşîne</string>
     <string name="home_download_instructions_download_button_toast">Li ser malpera çapa serdest bike, ne ku xwer li vir 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Bêhtirîn! Naha li ser dewam bike tıklake bike û biçin ser malperê 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Temaşekirîn çêtir dike, hûn nêzîk dibin! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Hê jî li vir nînê... hîş li vir nînê... 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">Tamam, adaneliğinize saygı duyuyorum 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Artık resmi bir Morphe düğme test cihazısın 🏅</string>
     <string name="home_download_instructions_step3">Li benda qedembûna daxistinê bibe, û &lt;b&gt;APK-ê nas neke&lt;/b&gt;</string>
     <string name="home_download_instructions_step3_mount">Binevin destpêkirina daxistnê biqedîne, paşê &lt;b&gt;APKê nas bike&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Pi serîdana daxistinê bi dawî bû, vegerin ser Morphe</string>
@@ -600,6 +605,9 @@ Qasîyên wêneyan divê wiha bin:
     <string name="installer_use_standard">Standard bikarîne</string>
     <string name="settings_prompt_installer_on_install">Dîyaloga hilbijartina sazkirî</string>
     <string name="settings_prompt_installer_on_install_description">Hîşyarî her carî dema ku app’a girêtî hatî sazkirin, dîyaloga hilbijartina sazkirî nîşan bide</string>
+    <string name="settings_auto_install_with_shizuku">Têxînekî otomatîkî piştî paqijkirinê</string>
+    <string name="settings_auto_install_with_shizuku_description">Bi hesînî APK-ya paqijkirî piştî qedandina paqijkirinê saz dike</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" aktîv e - sazkirina otomatîkî dê derbas bibe</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Serûşê bateriyê</string>
     <string name="settings_system_battery_optimization_description">Dema ku app hatî biçikînîn, sazkirîn bidomîne</string>

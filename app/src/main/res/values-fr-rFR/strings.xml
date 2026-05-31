@@ -75,7 +75,7 @@
     <string name="sources_dialog_duplicate_name_error">Une source de patchs portant ce nom existe déjà</string>
     <string name="sources_dialog_missing_error">Impossible de mettre à jour cette source de patchs</string>
     <string name="sources_dialog_view_any_version">N\'importe quelle version</string>
-    <string name="sources_dialog_view_any_package">N\'importe quel package</string>
+    <string name="sources_dialog_view_any_package">N\'importe quel paquet</string>
     <string name="sources_dialog_add_source">Ajouter une source de patchs</string>
     <string name="sources_dialog_delete_confirm_message">Supprimer la source \"%s\" ? Cela ne peut pas être réversible</string>
     <string name="sources_dialog_remote">Distant</string>
@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">Appuyez sur le bouton \'%s\' ci-dessous</string>
     <string name="home_download_instructions_step2_part1">Faites défiler la page Web et appuyez sur</string>
     <string name="home_download_instructions_download_button_toast">Appuyez sur télécharger sur le site Web, et non ici 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Parfait ! Maintenant, cliquez sur continuer ci-dessous et allez sur le site web 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">C\'est en forgeant qu\'on devient forgeron, vous y êtes presque ! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Pas encore… pas encore… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">OK, je respecte le dévouement 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Vous êtes maintenant un testeur officiel du bouton Morphe 🏅</string>
     <string name="home_download_instructions_step3">Attendez que le téléchargement se termine, et &lt;b&gt;n\'installez pas&lt;/b&gt; l\'APK</string>
     <string name="home_download_instructions_step3_mount">Attendez que le téléchargement ce terminé, puis &lt;b&gt;installez l\'APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Une fois le téléchargement terminé, revenez sur Morphe</string>
@@ -180,8 +185,8 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="home_dialog_unsupported_version_unsupported_label">Non supporté</string>
     <string name="home_dialog_wrong_package_title">Mauvais paquet sélectionné</string>
     <string name="home_dialog_wrong_package_description">L\'APK sélectionné ne correspond pas à l\'application que vous aviez l\'intention de patcher</string>
-    <string name="home_dialog_expected_package">Package attendu:</string>
-    <string name="home_dialog_selected_package">Package sélectionné:</string>
+    <string name="home_dialog_expected_package">Paquet attendu :</string>
+    <string name="home_dialog_selected_package">Paquet sélectionné :</string>
     <string name="home_outdated_patches_dialog_title">Les patchs peuvent être obsolètes</string>
     <string name="home_outdated_patches_dialog_message">Les données mobiles sont activées et les mises à jour de patch sont désactivées</string>
     <string name="home_outdated_patches_dialog_warning">Appliquer des patchs obsolètes peut entraîner une application défectueuse</string>
@@ -221,7 +226,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <string name="adaptive_icon_guide_safe_zones_body">"Zone intérieure (pleine) : le contenu est toujours entièrement visible sur toutes les formes de lanceur.
 Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - gardez les éléments importants à l’intérieur de la zone intérieure."</string>
     <string name="adaptive_icon_guide_notification_title">Icône de notification</string>
-    <string name="adaptive_icon_guide_notification_body">Généré automatiquement à partir de l\'image de premier plan. Ajustez sa taille à l’aide du curseur Notification. Tout le contenu visible apparaît en blanc dans la barre d’état.</string>
+    <string name="adaptive_icon_guide_notification_body">Généré automatiquement à partir de l\'image du premier plan. Ajustez sa taille à l\'aide du curseur de notification. Tout le contenu visible apparaît en blanc dans la barre d\'état.</string>
     <string name="adaptive_icon_guide_monochrome_title">Icône monochrome</string>
     <string name="adaptive_icon_guide_monochrome_body">Généré automatiquement à partir de l’image de premier plan en utilisant les mêmes transformations que l\'icône adaptative. Il apparaît teinté avec la couleur d\'accent du fond d’écran sur Android 13 et versions ultérieures.</string>
     <string name="notification_icon_preview">Notification</string>
@@ -250,7 +255,7 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="home_app_info_patches_name_fallback">Sans nom</string>
     <string name="home_app_info_patches_replace_fail">Échec de l\'importation des correctifs : %s</string>
     <string name="home_app_info_repatch_no_original_apk">APK d’origine introuvable. Impossible de repatcher cette application</string>
-    <string name="home_app_info_original_package_name">Nom de package d\'origine</string>
+    <string name="home_app_info_original_package_name">Nom du paquet d\'origine</string>
     <string name="home_app_info_applied_patches">Patchs appliqués</string>
     <string name="home_app_info_patch_source_used">Source de patchs utilisée</string>
     <string name="home_app_info_install_type_custom_installer">Installateur personnalisé</string>
@@ -286,7 +291,7 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="patcher_failed_subtitle">Vérifiez les détails de l\'erreur ci-dessous</string>
     <string name="patcher_failed_dialog_title">Échec du patchage</string>
     <string name="patcher_unknown_error">Une erreur inconnue s\'est produite</string>
-    <string name="patcher_conflict_title">Package en conflit</string>
+    <string name="patcher_conflict_title">Paquet en conflit</string>
     <string name="patcher_conflict_subtitle">Vous devez désinstaller la version existante</string>
     <string name="patcher_conflict_hint">L’application patchée utilise un certificat différent de celui de la version installée. La désinstallation effacera toutes les données de l’application</string>
     <string name="patcher_installed_conflict_title">Désinstallation nécessaire</string>
@@ -369,7 +374,7 @@ La désinstallation effacera définitivement toutes les données de l’applicat
     <string name="saved_app_export_failed">Échec de l\'exportation de l\'application patchée</string>
     <string name="saved_app_removed_toast">Suppression de l\'application patchée enregistrée</string>
     <string name="saved_app_launch_unavailable">Installez l\'application avant de l\'ouvrir</string>
-    <string name="package_name">Nom de package</string>
+    <string name="package_name">Nom de paquet</string>
     <string name="failed_to_mount">Échec du montage : %s</string>
     <string name="failed_to_unmount">Échec du démontage : %s</string>
     <!-- Patcher Screen - Mini-games -->
@@ -577,7 +582,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer">Installateur</string>
     <string name="installer_title">Sélectionner l\'installateur</string>
     <string name="installer_internal_name">Installateur système</string>
-    <string name="installer_internal_description">Utilise l\'installateur de package Android</string>
+    <string name="installer_internal_description">Utilise l\'installateur de paquets Android</string>
     <string name="installer_auto_saved_name">Installateur par montage root</string>
     <string name="installer_auto_saved_description">Monte l\'APK patché par-dessus l\'application installée</string>
     <string name="installer_shizuku_description">Installe silencieusement via Shizuku ou Sui</string>
@@ -593,7 +598,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_status_shizuku_unsupported">La version de Shizuku installée n\'est pas prise en charge</string>
     <string name="installer_action_open_shizuku">Ouvrir Shizuku</string>
     <string name="installer_hint_generic">L\'installation a échoué. Réessayez ou choisissez un installateur différent</string>
-    <string name="installer_hint_conflict">Une autre application portant ce nom de package est déjà installée. Désinstallez-la avant de continuer</string>
+    <string name="installer_hint_conflict">Une autre application portant ce nom de paquet est déjà installée. Désinstallez-la avant de continuer</string>
     <string name="installer_external_launched">Ouverture de %s…</string>
     <string name="installer_external_timeout">%s n\'a pas confirmé l\'installation. Vérifiez l\'autre application et réessayez</string>
     <string name="installer_external_success">%s a signalé une installation réussie</string>
@@ -603,6 +608,9 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_use_standard">Utiliser l\'installateur standard</string>
     <string name="settings_prompt_installer_on_install">Invite de sélection de l\'installateur</string>
     <string name="settings_prompt_installer_on_install_description">Affiche la boîte de dialogue de sélection de l’installateur à chaque installation d’une application patchée</string>
+    <string name="settings_auto_install_with_shizuku">Installer automatiquement après le correctif</string>
+    <string name="settings_auto_install_with_shizuku_description">Installe silencieusement l\'APK corrigé dès que le correctif est terminé</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" est activé - l\'installation automatique sera ignorée</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisation de la batterie</string>
     <string name="settings_system_battery_optimization_description">Maintient le patcher en cours d\'exécution lorsque l\'application est minimisée</string>
@@ -666,7 +674,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_patch_selections_title">Sélections de patchs</string>
     <string name="settings_system_patch_selections_description">Sélections de patchs enregistrées, conservées après la désinstallation</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Réinitialiser toutes les sélections ?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Réinitialiser les sélections de package ?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Réinitialiser les sélections des paquets ?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Réinitialiser la sélection de source ?</string>
     <string name="settings_system_patch_selection_no_saved">Aucune sélection de patch enregistrée</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s à %2$s</string>

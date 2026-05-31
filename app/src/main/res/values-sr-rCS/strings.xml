@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">Pritisnite dugme \'%s\' ispod</string>
     <string name="home_download_instructions_step2_part1">Pomerite se nadole na veb-stranici i pritisnite</string>
     <string name="home_download_instructions_download_button_toast">Pritisnite preuzmi na sajtu, a ne ovde 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Odlično! Sada kliknite na „nastavi“ ispod i idite na veb-sajt 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Vežba čini majstora, napreduješ! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Još nisi tu… još nisi tu… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">U redu, poštujem posvećenost 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Sada ste zvanični tester Morphe dugmeta 🏅</string>
     <string name="home_download_instructions_step3">Sačekajte da preuzimanje bude završeno, i &lt;b&gt;nemojte instalirati&lt;/b&gt; APK</string>
     <string name="home_download_instructions_step3_mount">Sačekajte da preuzimanje bude završeno, a onda &lt;b&gt;instalirajte APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Nakon što se preuzimanje završi, vratite se na Morphe</string>
@@ -586,6 +591,9 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="installer_use_standard">Koristi standard</string>
     <string name="settings_prompt_installer_on_install">Prompt za izbor instalera</string>
     <string name="settings_prompt_installer_on_install_description">Prikazuje dijalog za izbor instalera svaki put kada se instalira patchovana aplikacija</string>
+    <string name="settings_auto_install_with_shizuku">Automatska instalacija nakon zakrpljivanja</string>
+    <string name="settings_auto_install_with_shizuku_description">Tiho instalira zakrpljeni APK čim se zakrpljivanje završi</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" je omogućen - automatska instalacija će biti preskočena</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizacija baterije</string>
     <string name="settings_system_battery_optimization_description">Drži patcher pokrenutim kada je aplikacija minimizovana</string>

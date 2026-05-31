@@ -1,2 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%s патч</item>
+        <item quantity="other">%s Патчтар</item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%s патч опциясы</item>
+        <item quantity="other">%s Патч опциялары</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%s дереккөз </item>
+        <item quantity="other">%s Дереккөздер</item>
+    </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%s пакет</item>
+        <item quantity="other">%s Пакеттер</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Орындалған %s патч</item>
+        <item quantity="other">Орындалған %s патчтар</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%s АПК файл</item>
+        <item quantity="other">%s АПК файлдары</item>
+    </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Сақталған таңдаудан %s ескірген патч жойылды</item>
+        <item quantity="other">Сақталған таңдаудан %s ескірген патчтар жойылды</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%s дереккөз орнатылған </item>
+        <item quantity="other">%s дереккөздер орнатылған </item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%s патч таңдалды</item>
+        <item quantity="other">%s Патчтар таңдалды</item>
+    </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s жасырылған бағдарлама</item>
+        <item quantity="other">%s жасырылған бағдарламалар</item>
+    </plurals>
+</resources>

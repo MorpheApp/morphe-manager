@@ -18,14 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe atnaujinimas prieinamas</string>
     <string name="home_update_available_subtitle">Nauja versija paruošta įdiegti</string>
-    <string name="home_update_error">Atnaujinimas nepavyko</string>
+    <string name="home_update_error">Nepavyko atnaujinti</string>
     <string name="home_update_error_subtitle">Patikrinkite savo interneto ryšį ir bandykite dar kartą</string>
-    <string name="home_update_skipped_metered">Atnaujinamai praleisti</string>
-    <string name="home_update_skipped_metered_subtitle">Mobilusis duomenys įjungti</string>
-    <string name="home_updating_sources">Atnaujinimū šaltiniai…</string>
+    <string name="home_update_skipped_metered">Atnaujinimai praleisti</string>
+    <string name="home_update_skipped_metered_subtitle">Mobilieji duomenys yra įjungti</string>
+    <string name="home_updating_sources">Atnaujinami šaltiniai…</string>
     <string name="home_update_progress_format">%s apdorota</string>
     <string name="home_update_success">Šaltinių atnaujinimas baigtas</string>
-    <string name="home_update_success_subtitle">Jūsų šaltiniai atnaujinti</string>
+    <string name="home_update_success_subtitle">Jūsų šaltiniai yra atnaujinti</string>
     <string name="home_sources_are_loading">Šaltiniai kraunami, palaukite…</string>
     <string name="home_search_apps">Ieškoti programų</string>
     <string name="home_no_apps_title">Nėra pasiekiamų programų</string>
@@ -60,19 +60,131 @@
     <string name="sources_management_prerelease_toggle">Bandomosios versijos pataisos</string>
     <string name="sources_management_prerelease_toggle_description">Gaukite ankstyvą prieigą prie naujų eksperimentinių pataisos versijų</string>
     <string name="sources_management_experimental_versions_toggle">Eksperimentinės programos versijos</string>
+    <string name="sources_management_experimental_versions_toggle_description">Pataisas </string>
+    <string name="sources_management_already_exists">Šis šaltinis jau pridėtas</string>
+    <string name="sources_management_invalid_url">Neteisynga šaltinio URL. Patikrinkite adresą ir bandykite dar kartą</string>
+    <string name="sources_management_metadata_unavailable">Metaduomenys N/A</string>
+    <string name="sources_management_metadata_unavailable_hint">Nutolusių metaduomenų failas nepasiekiamas. Programėlė vis tiek funkcionuos su įdiegtu paketu, bet automatinis atnaujinimas šitam šaltiniui bus išjungtas</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Šaltinio paketo rinkinys nepavyko atsisiųsti. Galbūt neteisingas šaltinio URL arba failas neegzistuoja.</string>
+    <string name="sources_management_source_enabled">Šaltinis įjungtas</string>
+    <string name="sources_management_source_disabled">Šaltinis išjungtas</string>
+    <string name="sources_management_source_updating">Atnaujinamas šaltinis</string>
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_dialog_display_name">Rodomas vardas</string>
+    <string name="sources_dialog_rename">Pervadinti pataisos šaltinį</string>
+    <string name="sources_dialog_duplicate_name_error">Pataisų šaltinis su šiuo pavadinimu jau egzistuoja</string>
+    <string name="sources_dialog_missing_error">Negalima atnaujinti šio pataisos šaltinio</string>
+    <string name="sources_dialog_view_any_version">Bet kuri versija</string>
+    <string name="sources_dialog_view_any_package">Bet kuris paketas</string>
+    <string name="sources_dialog_add_source">Pridėti pataisų šaltini</string>
+    <string name="sources_dialog_delete_confirm_message">Ištrinti šaltinį \"%s\"? Šio veiksmo negalima atkurti</string>
+    <string name="sources_dialog_remote_url">Šaltinio URL</string>
+    <string name="sources_dialog_remote_url_formats_title">Pavyzdžiai:</string>
+    <string name="sources_dialog_local_file">Pasirinkite pataisos šaltinio failą</string>
+    <string name="sources_dialog_local_file_tap_hint">Palieskite, kad peržiūrėtumėte saugojimo vietą</string>
+    <string name="sources_dialog_local_file_description">Pasirinkite .mpp pataisos šaltinio failą iš atminties</string>
+    <string name="sources_dialog_local_invalid_extension">Failas turi turėti .mpp pabaiga</string>
+    <string name="sources_dialog_url_valid">Validus repozitorium arba JSON URL</string>
+    <string name="sources_dialog_url_invalid">URL turi rodyti į GitHub/GitLab repo arba .json failą</string>
+    <string name="sources_dialog_local_change_file">Pakeisti failą</string>
+    <string name="sources_dialog_preinstalled">iš anksto įdiegta</string>
+    <string name="sources_update_success">Sėkmingas atnaujinimas</string>
+    <string name="sources_update_unavailable">Atnaujinimo nėra</string>
+    <string name="sources_download_fail">Nepavyko atsisiųsti šaltinio: %s</string>
+    <string name="sources_download_fail_named">\'%s\' neįmanoma atnaujinti. Patikrinkite savo interneto ryšį ir bandykite dar kartą</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': trūkst meta duomenų apie pataisą</string>
+    <string name="sources_patch_expert_badge_tooltip">Įjunkite Ekspertų režimą Parametruose, kad galėtumėte rankiniu būdu įtraukti šį pataisą</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
+    <string name="home_apk_availability_dialog_title">Reikia pagalbos randant originalų nepataisyta APK?</string>
+    <string name="home_apk_availability_dialog_simple">Kad pataisyti&lt;b&gt;%s&lt;/b&gt;, jums reikia nepataisytos versijos:</string>
+    <string name="home_apk_availability_dialog_expert">Kad pataisyti&lt;b&gt;%s&lt;/b&gt;, jums reikia nepataisytu versiju:</string>
+    <string name="home_apk_availability_recommended_label">Rekomenduota</string>
+    <string name="home_apk_availability_unpatched_label">Nepataisytas</string>
+    <string name="home_apk_availability_incompatible_label">Nesuderinama</string>
+    <string name="home_apk_availability_yes">Taip, padėkite man rasti APK</string>
+    <string name="home_apk_availability_no">Ne, jau turiu APK</string>
+    <string name="home_apk_use_saved_with_version">Naudoti išsaugotą APK (v%s)</string>
+    <string name="home_apk_use_installed_with_version">Naudoti įdiegtą APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">Nėra išsaugoto APK. Siekiant pataisyti, reikės dar karta pasirinkti APK failą</string>
+    <string name="home_version_requires_android">Privaloma Android %s+</string>
+    <string name="home_apk_no_compatible_versions_title">Nesuportuota ant sio įrenginio</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; neturi palaikytų versijų ant Android %2$d (API %3$d). Visos deklaruotos versijos reikalauja aukštesnės Android versijos</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
+    <string name="home_download_instructions_title">Parsisiųskite originalų APK</string>
     <string name="home_download_instructions_steps_title">Instrukcijos:</string>
     <string name="home_download_instructions_step1">Paspauskite \'%s\' mygtuką apačioje</string>
+    <string name="home_download_instructions_step2_part1">Slinkite žemyn tinklalapyje ir paspauskite</string>
     <string name="home_download_instructions_download_button_toast">Paspauskite atsisiųsti (Download) puslapyje, o ne čia 😊</string>
+    <string name="home_download_instructions_step3">Palaukite, kol atsisižsimas baigsis, ir &lt;b&gt;neįdiekite&lt;/b&gt; APK</string>
+    <string name="home_download_instructions_step3_mount">Palaukite, kol atsisiuntimas baigsis, tada &lt;b&gt;diegaite APK&lt;/b&gt;</string>
+    <string name="home_download_instructions_step4">Po atsisiuntimo, grįžkite į Morphe</string>
+    <string name="home_download_instructions_step4_mount">Po originalaus APK diegimo grįžkite į Morphe</string>
+    <string name="home_download_instructions_continue">Tęskite į APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
+    <string name="home_file_picker_prompt_title">Pasirinkite atsisiųstą APK</string>
+    <string name="home_file_picker_prompt_description">Pasirinkite &lt;b&gt;%s&lt;/b&gt; APK kuri tika atsisiuntete</string>
+    <string name="home_file_picker_prompt_open_apk">Atverti APK failą</string>
     <string name="home_recommended_version">Rekomenduojama versija</string>
     <string name="home_selected_version">Pasirinkta versija</string>
+    <string name="home_select_apk_title">Pasirinkite APK</string>
+    <string name="home_select_any_apk_description">Pasirinkite bet kurios programos APK failą arba pasirinkite įdiegtą programą šiame įrenginyje</string>
+    <string name="home_use_installed_app">Naudoti įdiegtą programą</string>
+    <string name="home_installed_app_picker_title">Pasirinkite įdiegtą programą</string>
+    <string name="home_installed_app_picker_empty">Nėra rastų programų</string>
+    <string name="home_installed_app_picker_filter_all">Visos programos</string>
+    <string name="home_installed_app_picker_filter_user">Tik naudotojo programos</string>
+    <string name="home_installed_app_picker_filter_system">Tik sistemos programos</string>
+    <string name="home_invalid_apk_unreadable">Nepavyko perskaityti failo. Patikrinkite, ar \'Išorinė atmintinė\' nėra apribota baterijos</string>
+    <string name="home_invalid_apk_not_an_apk">Pasirinktas failas nėra galiojantis APK</string>
+    <string name="home_invalid_apk_io_error">Nepavyko atverti failą. Pabandykite dar kartą</string>
+    <string name="home_external_apk_expert_mode_required">Ši funkcija yra prieinama tik Ekspertų režime</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <string name="expert_mode_title">Eksperto rėžimas</string>
+    <string name="expert_mode_search">Ieškoti modifikacijų</string>
+    <string name="expert_mode_proceed">Tęsti taisymą</string>
+    <string name="expert_mode_disable_all">Išjungti viską</string>
+    <string name="expert_mode_disable_all_done">Visi pataisymai išjungti</string>
+    <string name="expert_mode_enable_all">Įjungti visus</string>
+    <string name="expert_mode_enable_all_done">Visi pataisymai įjungti</string>
+    <string name="expert_mode_reset_to_default">Įjungti rekomenduojamus pataisymus</string>
+    <string name="expert_mode_reset_to_default_done">Rekomenduojami pataisymai pridėti</string>
+    <string name="expert_mode_restore_saved">Atkurti išsaugotą pasirinkimą</string>
+    <string name="expert_mode_restore_saved_done">Išsaugotas pasirinkimas atkurtas</string>
+    <string name="expert_mode_no_results">Nėra rasti pataisų</string>
+    <string name="expert_mode_universal_patches">Univeralus pataisymai</string>
+    <string name="expert_mode_multiple_sources_warning_title">Pasirinkta keli šaltiniai</string>
+    <string name="expert_mode_multiple_sources_warning_message">"Jūs pasirinkote pataisas iš kelių pataisų šaltinių. Tai gali sukelti nesuderinamumo problemų arba netikėtų veikimo ypatumų.
+
+Ar tikrai norite tęsti?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_message">Pasiringtas APK rinkinys nesutampa su tikėtinu skaitmenimis sertifikatu. Jis galbētč buvo modifikuotas arba yra nepatikimos šaltinio.</string>
+    <string name="home_invalid_signature_badge">Šis APK galimai neoriginalus</string>
+    <string name="home_split_apk_warning_title">Dalinis APK aptiktas</string>
+    <string name="home_split_apk_warning_message">"Šis failas yra APK paketas
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
+
+Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt;visą APK&lt;/b&gt;"</string>
+    <string name="home_split_apk_warning_pick_another">Pasirinkite kitą APK</string>
+    <string name="home_dialog_unsupported_version_experimental_label">Eksperimentinis</string>
+    <string name="home_dialog_unsupported_version_experimental_description">Ši versija turi eksperimentinę palaikymą ir gali būti nestabili arba nebaigta</string>
+    <string name="morphe_experimental_app_version_dialog_title">Ar norite eksperimentuoti? 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_message">Ši versija &lt;b&gt;%s&lt;/b&gt; turi ankstyvą eksperimentinį palaikymą&lt;br/&gt;&lt;br/&gt;🔧 Tikėtinos keistos programos veikimas arba neatpažintų klaidų, nes šios programos versijos pataisos yra tobulinamas</string>
+    <string name="home_dialog_unsupported_version_dialog_title">Nepalaikoma versija</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Šis APK yra nerekomenduota programos versija. Toliau veikti gali lemti neveikiancią programą</string>
+    <string name="home_dialog_unsupported_version_dialog_proceed">Vis tiek tęsti</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">Suderinamos versijos:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Nepalaikomas</string>
     <string name="home_dialog_wrong_package_title">Pasirinktas netinkamas failas</string>
+    <string name="home_dialog_wrong_package_description">Pasirinktas APK failas nėra skirtas jums reikiamo programavimo apipavidalinimui</string>
+    <string name="home_dialog_expected_package">Lauktas paketas:</string>
     <string name="home_dialog_selected_package">Pasirinktas failas:</string>
+    <string name="home_outdated_patches_dialog_title">Patobėjimai gali būti pasenę</string>
+    <string name="home_outdated_patches_dialog_message">Mobilieji duomenys yra aktyvūs, o pataisų naujinimai išjungti</string>
+    <string name="home_outdated_patches_dialog_warning">Pataisius pasenusiomis pataisomis, programa gali sugesti</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Atnaujinti &amp; pataisa</string>
+    <string name="home_low_disk_space_dialog_title">Mažai vietos diske</string>
+    <string name="home_low_disk_space_dialog_message">Laisvos vietos liko tik %1$.2f GB. Atnaujinimui reikia bent %2$.2f GB laisvos vietos, kad veiktų tinkamai</string>
+    <string name="home_low_disk_space_dialog_warning">Tęsiant gali atsirasti klaida „failas nerastas“ arba sugadintas išvesties APK</string>
     <!-- Patch Options -->
     <string name="patch_option_instructions">Instrukcijos</string>
     <!-- Adaptive Icon Creator -->

@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">Tryk på \'%s\' knappen nedenfor</string>
     <string name="home_download_instructions_step2_part1">Rul ned på websiden og tryk</string>
     <string name="home_download_instructions_download_button_toast">Tryk på download på hjemmesiden, og ikke her 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Perfekt! Klik nu på fortsæt nedenfor og gå til hjemmesiden 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Øvelse gør mester, du er ved at være der! 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Stadig ikke her… stadig ikke her… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">OK, jeg respekterer dedikationen 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Du er nu en officiel Morphe-knaptester 🏅</string>
     <string name="home_download_instructions_step3">Vent på at downloaden er færdig, og &lt;b&gt;installer ikke&lt;/b&gt; APK\'en</string>
     <string name="home_download_instructions_step3_mount">Vent på at downloaden er færdig, og &lt;b&gt;installer APK\'en&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Når downloaden er færdigt, vend tilbage til Morphe</string>
@@ -602,6 +607,9 @@ Størrelsesformatet skal være som følger:
     <string name="installer_use_standard">Brug standard</string>
     <string name="settings_prompt_installer_on_install">Installatørvalgsmeddelelse</string>
     <string name="settings_prompt_installer_on_install_description">Vis installer-valgdialog hver gang du installerer en patchet app</string>
+    <string name="settings_auto_install_with_shizuku">Automatisk installation efter patching</string>
+    <string name="settings_auto_install_with_shizuku_description">Installerer automatisk den patched APK, så snart patching er fuldført</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" er aktiveret - automatisk installation vil blive sprunget over</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterioptimering</string>
     <string name="settings_system_battery_optimization_description">Holder patcheren kørende, når appen er minimeret</string>

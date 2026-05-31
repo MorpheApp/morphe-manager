@@ -118,6 +118,11 @@
     <string name="home_download_instructions_step1">নিচের \'%s\' বোতামটি চাপুন</string>
     <string name="home_download_instructions_step2_part1">ওয়েবপেজটি স্ক্রোল করুন এবং চাপুন</string>
     <string name="home_download_instructions_download_button_toast">এখানে নয়, ওয়েবসাইটে ডাউনলোড করুন 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">দারুণ! এখন নিচের দিকে ‘जारी রাখুন’ এ ক্লিক করুন এবং ওয়েবসাইটে যান 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">চর্চা চলতে থাকলে নিখুঁত হওয়া যায়, আপনি প্রায় সেখানে পৌঁছে গেছেন! 💪 </string>
+    <string name="home_download_instructions_download_button_toast_4">এখনো এখানে নেই… এখনো এখানে নেই… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">ঠিক আছে, আমি আপনার নিষ্ঠা সম্মান করি 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">আপনি এখন একজন অফিসিয়াল Morphe বোতাম পরীক্ষক 🏅</string>
     <string name="home_download_instructions_step3">ডাউনলোড শেষ হওয়ার অপেক্ষা করুন, এবং &lt;b&gt;APK ইনস্টল করবেন না&lt;/b&gt;</string>
     <string name="home_download_instructions_step3_mount">ডাউনলোড শেষ হওয়ার অপেক্ষা করুন, তারপর &lt;b&gt;APK ইনস্টল করুন&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">পরবর্তীতে ডাউনলোড শেষ হলে, মর্ফেকে ফিরে যান</string>
@@ -592,6 +597,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_use_standard">স্ট্যান্ডার্ড ব্যবহার করুন</string>
     <string name="settings_prompt_installer_on_install">ইনস্টলার নির্বাচন প্রম্পট।</string>
     <string name="settings_prompt_installer_on_install_description">প্যাচ করা অ্যাপ ইনস্টল করার সময়마다 ইনস্টলার নির্বাচন ডায়ালগ দেখায়।</string>
+    <string name="settings_auto_install_with_shizuku">প্যাচিং করার পরে স্বয়ংক্রিয়ভাবে ইনস্টল করুন</string>
+    <string name="settings_auto_install_with_shizuku_description">প্যাচিং সম্পন্ন হওয়ার সাথে সাথেই প্যাচ করা APK নিঃশব্দে ইনস্টল করে</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" সক্রিয় করা হয়েছে - স্বয়ংক্রিয় ইনস্টলেশন এড়িয়ে যাওয়া হবে</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">ব্যাটারি অপটিমাইজেশন</string>
     <string name="settings_system_battery_optimization_description">অ্যাপটি মিনিমাইজ করা হলে প্যাচার চালু রাখে।</string>
