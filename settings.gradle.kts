@@ -41,13 +41,11 @@ dependencyResolutionManagement {
             // A repository must be specified for some reason. "registry" is a dummy.
             url = uri("https://maven.pkg.github.com/MorpheApp/registry")
             credentials {
-                val hardcodedUser = ""
-                val hardcodedToken = ""
-                val gprUser: String? = providers.gradleProperty("gpr.user").orNull
-                val gprKey: String? = providers.gradleProperty("gpr.key").orNull
+                val gprUser: String? = githubUser()
+                val gprKey: String? = githubToken()
 
-                username = (hardcodedUser.ifBlank { System.getenv("GITHUB_ACTOR") ?: gprUser })
-                password = (hardcodedToken.ifBlank { System.getenv("GITHUB_TOKEN") ?: gprKey })
+                username = gprUser.orEmpty().ifBlank { "anonymous" }
+                password = gprKey.orEmpty()
             }
         }
     }
@@ -60,7 +58,7 @@ include(":app")
 mapOf(
     "morphe-patcher" to "app.morphe:morphe-patcher",
 //    "morphe-library" to "app.morphe:morphe-library", // FIXME: Must upgrade library gradle to use this
-    "ARSCLib" to "com.github.REAndroid:arsclib"
+//    "ARSCLib" to "com.github.REAndroid:arsclib"
 ).forEach { (libraryPath, libraryName) ->
     val libDir = file("../$libraryPath")
     if (libDir.exists()) {
