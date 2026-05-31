@@ -7,7 +7,6 @@ package app.morphe.manager.ui.screen.home
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
-import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -33,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.shared.MorpheAnimations
 
 /** Set to true to show onboarding every launch regardless of firstLaunch preference. */
 // TODO: Set to false before release
@@ -62,11 +62,6 @@ class GlobalOnboardingState {
     var sourcesVersionBounds by mutableStateOf<Rect?>(null)
     var sourcesPrereleaseBounds by mutableStateOf<Rect?>(null)
     var sheetOnboardingActive by mutableStateOf(false)
-    var onSheetComplete: (() -> Unit)? = null
-    var onGlobalSkip: (() -> Unit)? = null
-    // Global step numbering so all phases appear as one continuous tour
-    var sheetStepOffset by mutableIntStateOf(0)
-    var totalOnboardingSteps by mutableIntStateOf(0)
     // Settings screen
     var appearanceTabBounds by mutableStateOf<Rect?>(null)
     var themeSelectorBounds by mutableStateOf<Rect?>(null)

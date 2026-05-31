@@ -75,12 +75,6 @@ import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 
 /**
- * Number of onboarding steps shown inside [BundleManagementSheet].
- * Keep in sync with `MorpheManager` in [app.morphe.manager.MainActivity].
- */
-internal const val BUNDLE_SHEET_ONBOARDING_STEP_COUNT = 3
-
-/**
  * Bottom sheet for managing patch bundles.
  */
 @SuppressLint("LocalContextGetResourceValueCall")
@@ -109,26 +103,6 @@ fun BundleManagementSheet(
     val bundleInfo by patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
     val showSheetOnboarding = globalOnboardingState?.sheetOnboardingActive == true
-    val sheetSteps = remember(globalOnboardingState) {
-        if (globalOnboardingState == null) emptyList()
-        else listOf(
-            StepDef(
-                titleRes = R.string.patches,
-                descRes = R.string.onboarding_sources_patches_desc,
-                getBounds = { globalOnboardingState.sourcesPatchesBounds }
-            ),
-            StepDef(
-                titleRes = R.string.changelog,
-                descRes = R.string.onboarding_sources_version_desc,
-                getBounds = { globalOnboardingState.sourcesVersionBounds }
-            ),
-            StepDef(
-                titleRes = R.string.sources_management_prerelease_toggle,
-                descRes = R.string.onboarding_sources_prerelease_desc,
-                getBounds = { globalOnboardingState.sourcesPrereleaseBounds }
-            )
-        )
-    }
 
     val bundleToDelete = remember { mutableStateOf<PatchBundleSource?>(null) }
     // Expanded state lifted out of LazyColumn so it survives scroll-off-screen recomposition
@@ -344,16 +318,6 @@ fun BundleManagementSheet(
                         }
                     }
                 }
-            }
-
-            if (showSheetOnboarding && sheetSteps.isNotEmpty()) {
-                OnboardingShowcase(
-                    steps = sheetSteps,
-                    stepOffset = globalOnboardingState.sheetStepOffset,
-                    totalStepsOverride = globalOnboardingState.totalOnboardingSteps.takeIf { it > 0 },
-                    onComplete = { globalOnboardingState.onSheetComplete?.invoke() },
-                    onSkip = { globalOnboardingState.onGlobalSkip?.invoke() }
-                )
             }
         }
     }

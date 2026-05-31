@@ -22,6 +22,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
+import androidx.compose.ui.window.DialogWindowProvider
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -288,24 +292,27 @@ private fun MorpheManager(vm: MainViewModel) {
         )
     }
 
-    val totalOnboardingSteps = homeSteps.size + BUNDLE_SHEET_ONBOARDING_STEP_COUNT + settingsSteps.size
-
-    // When BundleManagementSheet sub-flow completes, close sheet and advance to Settings phase
-    LaunchedEffect(Unit) {
-        globalOnboardingState.sheetStepOffset = homeSteps.size
-        globalOnboardingState.totalOnboardingSteps = totalOnboardingSteps
-        globalOnboardingState.onSheetComplete = {
-            globalOnboardingState.sheetOnboardingActive = false
-            homeViewModel.showBundleManagementSheet = false
-            onboardingPhase = OnboardingPhase.SETTINGS
-        }
-        globalOnboardingState.onGlobalSkip = {
-            globalOnboardingState.sheetOnboardingActive = false
-            homeViewModel.showBundleManagementSheet = false
-            onboardingPhase = OnboardingPhase.DONE
-            scope.launch { prefs.firstLaunch.update(false) }
-        }
+    val sheetSteps = remember(globalOnboardingState) {
+        listOf(
+            StepDef(
+                titleRes = R.string.patches,
+                descRes = R.string.onboarding_sources_patches_desc,
+                getBounds = { globalOnboardingState.sourcesPatchesBounds }
+            ),
+            StepDef(
+                titleRes = R.string.changelog,
+                descRes = R.string.onboarding_sources_version_desc,
+                getBounds = { globalOnboardingState.sourcesVersionBounds }
+            ),
+            StepDef(
+                titleRes = R.string.sources_management_prerelease_toggle,
+                descRes = R.string.onboarding_sources_prerelease_desc,
+                getBounds = { globalOnboardingState.sourcesPrereleaseBounds }
+            )
+        )
     }
+
+    val totalOnboardingSteps = homeSteps.size + sheetSteps.size + settingsSteps.size
 
     // Box with background at the highest level
     Box(
@@ -433,49 +440,92 @@ private fun MorpheManager(vm: MainViewModel) {
         if (showOnboarding) {
             val currentSteps = when (onboardingPhase) {
                 OnboardingPhase.HOME -> homeSteps
+                OnboardingPhase.SHEET -> sheetSteps
                 OnboardingPhase.SETTINGS -> settingsSteps
                 else -> null
             }
             if (currentSteps != null) {
                 val phaseOffset = when (onboardingPhase) {
                     OnboardingPhase.HOME -> 0
-                    OnboardingPhase.SETTINGS -> homeSteps.size + BUNDLE_SHEET_ONBOARDING_STEP_COUNT
+                    OnboardingPhase.SHEET -> homeSteps.size
+                    OnboardingPhase.SETTINGS -> homeSteps.size + sheetSteps.size
                     else -> 0
                 }
-                key(onboardingPhase) {
-                    OnboardingShowcase(
-                        steps = currentSteps,
-                        stepOffset = phaseOffset,
-                        totalStepsOverride = totalOnboardingSteps,
-                        onComplete = {
-                            when (onboardingPhase) {
-                                OnboardingPhase.HOME -> {
-                                    homeOnboardingState.swipeActive = false
-                                    homeViewModel.markSwipeGestureHintShown()
-                                    homeViewModel.showBundleManagementSheet = true
-                                    globalOnboardingState.sheetOnboardingActive = true
-                                    onboardingPhase = OnboardingPhase.SHEET
-                                }
-                                OnboardingPhase.SETTINGS -> {
-                                    onboardingPhase = OnboardingPhase.DONE
-                                    scope.launch {
-                                        prefs.firstLaunch.update(false)
-                                        navController.popBackStack(HomeScreen, false)
-                                    }
-                                }
-                                else -> {}
-                            }
-                        },
-                        onSkip = {
+                val onComplete: () -> Unit = {
+                    when (onboardingPhase) {
+                        OnboardingPhase.HOME -> {
                             homeOnboardingState.swipeActive = false
                             homeViewModel.markSwipeGestureHintShown()
+                            homeViewModel.showBundleManagementSheet = true
+                            globalOnboardingState.sheetOnboardingActive = true
+                            scope.launch {
+                                while (globalOnboardingState.sourcesPatchesBounds == null) {
+                                    delay(16)
+                                }
+                                onboardingPhase = OnboardingPhase.SHEET
+                            }
+                        }
+                        OnboardingPhase.SHEET -> {
+                            globalOnboardingState.sheetOnboardingActive = false
+                            homeViewModel.showBundleManagementSheet = false
+                            onboardingPhase = OnboardingPhase.SETTINGS
+                        }
+                        OnboardingPhase.SETTINGS -> {
                             onboardingPhase = OnboardingPhase.DONE
                             scope.launch {
                                 prefs.firstLaunch.update(false)
                                 navController.popBackStack(HomeScreen, false)
                             }
                         }
-                    )
+                        else -> {}
+                    }
+                }
+                val onSkip: () -> Unit = {
+                    homeOnboardingState.swipeActive = false
+                    homeViewModel.markSwipeGestureHintShown()
+                    globalOnboardingState.sheetOnboardingActive = false
+                    homeViewModel.showBundleManagementSheet = false
+                    onboardingPhase = OnboardingPhase.DONE
+                    scope.launch {
+                        prefs.firstLaunch.update(false)
+                        navController.popBackStack(HomeScreen, false)
+                    }
+                }
+
+                if (onboardingPhase == OnboardingPhase.SHEET) {
+                    // Render in a Dialog window so the overlay appears above the sheet's popup window
+                    Dialog(
+                        onDismissRequest = {},
+                        properties = DialogProperties(
+                            usePlatformDefaultWidth = false,
+                            dismissOnBackPress = false,
+                            dismissOnClickOutside = false,
+                            decorFitsSystemWindows = false
+                        )
+                    ) {
+                        val dialogWindow = (LocalView.current.parent as? DialogWindowProvider)?.window
+                        SideEffect {
+                            dialogWindow?.setDimAmount(0f)
+                            dialogWindow?.setBackgroundDrawableResource(android.R.color.transparent)
+                        }
+                        OnboardingShowcase(
+                            steps = currentSteps,
+                            stepOffset = phaseOffset,
+                            totalStepsOverride = totalOnboardingSteps,
+                            onComplete = onComplete,
+                            onSkip = onSkip
+                        )
+                    }
+                } else {
+                    key(onboardingPhase) {
+                        OnboardingShowcase(
+                            steps = currentSteps,
+                            stepOffset = phaseOffset,
+                            totalStepsOverride = totalOnboardingSteps,
+                            onComplete = onComplete,
+                            onSkip = onSkip
+                        )
+                    }
                 }
             }
         }
