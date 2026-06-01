@@ -17,6 +17,7 @@ import app.morphe.manager.domain.installer.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.PM
+import app.morphe.manager.util.sha256OrNull
 import app.morphe.manager.util.simpleMessage
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.*
@@ -374,9 +375,14 @@ class InstallViewModel : ViewModel(), KoinComponent {
         val result = try {
             sessionInstaller.installInternal(outputFile)
         } catch (_: InstallCancelledException) {
-            // User dismissed the dialog - go back to Ready immediately, no error shown
-            installState = InstallState.Ready
-            return
+            if (confirmInstallCompleted(outputFile, targetPackageName)) {
+                Log.w(TAG, "Install callback reported cancelled but APK SHA-256 verification succeeded for $targetPackageName")
+                InstallResult.Success
+            } else {
+                // User dismissed the dialog and the installed APK does not match the patched APK.
+                installState = InstallState.Ready
+                return
+            }
         } catch (_: SessionDeadException) {
             Log.w(TAG, "Session dead, falling back to intent-based install")
             launchIntentBasedFallback(outputFile, targetPackageName, onPersistApp)
@@ -396,6 +402,18 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
             )
         }
+    }
+
+    private suspend fun confirmInstallCompleted(
+        outputFile: File,
+        targetPackageName: String
+    ): Boolean = withContext(Dispatchers.IO) {
+        val installedFile = pm.getApplicationInfo(targetPackageName)?.sourceDir
+            ?.takeIf { it.isNotEmpty() }
+            ?.let(::File) ?: return@withContext false
+        val installedHash = installedFile.sha256OrNull() ?: return@withContext false
+        val expectedHash = outputFile.sha256OrNull() ?: return@withContext false
+        installedHash == expectedHash
     }
 
     /**
