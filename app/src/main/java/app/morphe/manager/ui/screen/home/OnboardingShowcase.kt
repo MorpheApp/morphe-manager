@@ -76,9 +76,11 @@ class GlobalOnboardingState {
     var onNavigateToAppearanceTab: (() -> Unit)? = null
     var onNavigateToAdvancedTab: (() -> Unit)? = null
     var onNavigateToSystemTab: (() -> Unit)? = null
+    var onScrollToThemeSelector: (() -> Unit)? = null
     var onScrollToInstaller: (() -> Unit)? = null
     var onScrollToProcessRuntime: (() -> Unit)? = null
     var onScrollSystemToBottom: (() -> Unit)? = null
+    var onScrollToFirstSource: (() -> Unit)? = null
 }
 
 /**

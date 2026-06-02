@@ -92,7 +92,9 @@ fun SettingsScreen(
         initialPage = SettingsTab.ADVANCED.ordinal, // Open the Advanced tab when opening settings
         pageCount = { SettingsTab.entries.size }
     )
+    val appearanceScrollState = rememberScrollState()
     val systemScrollState = rememberScrollState()
+    var themeSelectorScrollTarget by remember { mutableIntStateOf(0) }
     var installerScrollTarget by remember { mutableIntStateOf(0) }
     var processRuntimeScrollTarget by remember { mutableIntStateOf(0) }
 
@@ -107,6 +109,9 @@ fun SettingsScreen(
             }
             obs.onNavigateToSystemTab = {
                 coroutineScope.launch { pagerState.animateScrollToPage(SettingsTab.SYSTEM.ordinal) }
+            }
+            obs.onScrollToThemeSelector = {
+                coroutineScope.launch { appearanceScrollState.animateScrollTo(themeSelectorScrollTarget) }
             }
             obs.onScrollToInstaller = {
                 coroutineScope.launch { systemScrollState.animateScrollTo(installerScrollTarget) }
@@ -221,7 +226,9 @@ fun SettingsScreen(
                         dynamicColor = dynamicColor,
                         customAccentColorHex = customAccentColorHex,
                         themeViewModel = themeViewModel,
-                        onThemeSelectorPositioned = { globalOnboardingState?.themeSelectorBounds = it }
+                        scrollState = appearanceScrollState,
+                        onThemeSelectorPositioned = { globalOnboardingState?.themeSelectorBounds = it },
+                        onThemeSelectorScrollTarget = { themeSelectorScrollTarget = it }
                     )
 
                     SettingsTab.ADVANCED -> AdvancedTabContent(

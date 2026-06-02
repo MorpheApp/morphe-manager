@@ -110,6 +110,11 @@ fun BundleManagementSheet(
 
     // Drag-and-drop state
     val listState = rememberLazyListState()
+    LaunchedEffect(globalOnboardingState) {
+        globalOnboardingState?.onScrollToFirstSource = {
+            scope.launch { listState.animateScrollToItem(0) }
+        }
+    }
     var localOrder by remember { mutableStateOf(sources.map { it.uid }) }
     var isDragging by remember { mutableStateOf(false) }
     LaunchedEffect(sources) {

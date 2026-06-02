@@ -255,7 +255,10 @@ private fun MorpheManager(vm: MainViewModel) {
             StepDef(
                 R.string.settings_appearance_theme, R.string.onboarding_appearance_theme_desc,
                 getBounds = { globalOnboardingState.themeSelectorBounds },
-                onShow = { globalOnboardingState.onNavigateToAppearanceTab?.invoke() }
+                onShow = {
+                    globalOnboardingState.onNavigateToAppearanceTab?.invoke()
+                    globalOnboardingState.onScrollToThemeSelector?.invoke()
+                }
             ),
             StepDef(
                 R.string.settings_advanced_expert_mode, R.string.onboarding_expert_mode_desc,
@@ -296,17 +299,20 @@ private fun MorpheManager(vm: MainViewModel) {
             StepDef(
                 titleRes = R.string.patches,
                 descRes = R.string.onboarding_sources_patches_desc,
-                getBounds = { globalOnboardingState.sourcesPatchesBounds }
+                getBounds = { globalOnboardingState.sourcesPatchesBounds },
+                onShow = { globalOnboardingState.onScrollToFirstSource?.invoke() }
             ),
             StepDef(
                 titleRes = R.string.changelog,
                 descRes = R.string.onboarding_sources_version_desc,
-                getBounds = { globalOnboardingState.sourcesVersionBounds }
+                getBounds = { globalOnboardingState.sourcesVersionBounds },
+                onShow = { globalOnboardingState.onScrollToFirstSource?.invoke() }
             ),
             StepDef(
                 titleRes = R.string.sources_management_prerelease_toggle,
                 descRes = R.string.onboarding_sources_prerelease_desc,
-                getBounds = { globalOnboardingState.sourcesPrereleaseBounds }
+                getBounds = { globalOnboardingState.sourcesPrereleaseBounds },
+                onShow = { globalOnboardingState.onScrollToFirstSource?.invoke() }
             )
         )
     }
