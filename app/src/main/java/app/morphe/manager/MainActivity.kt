@@ -210,6 +210,7 @@ private fun MorpheManager(vm: MainViewModel) {
     // Unified onboarding
     val wantsOnboardingTour = remember { mutableStateOf(false) }
     var onboardingPhase by remember { mutableStateOf(OnboardingPhase.HOME) }
+    var phaseInitialStep by remember { mutableIntStateOf(0) }
     val showOnboarding = (ONBOARDING_TESTING_MODE || wantsOnboardingTour.value) && onboardingPhase != OnboardingPhase.DONE
     val homeOnboardingState = remember { OnboardingState() }
     val globalOnboardingState = remember { GlobalOnboardingState() }
@@ -448,6 +449,7 @@ private fun MorpheManager(vm: MainViewModel) {
                 val onComplete: () -> Unit = {
                     when (onboardingPhase) {
                         OnboardingPhase.HOME -> {
+                            phaseInitialStep = 0
                             homeOnboardingState.swipeActive = false
                             homeViewModel.markSwipeGestureHintShown()
                             homeViewModel.showBundleManagementSheet = true
@@ -460,6 +462,7 @@ private fun MorpheManager(vm: MainViewModel) {
                             }
                         }
                         OnboardingPhase.SHEET -> {
+                            phaseInitialStep = 0
                             globalOnboardingState.sheetOnboardingActive = false
                             homeViewModel.showBundleManagementSheet = false
                             onboardingPhase = OnboardingPhase.SETTINGS
@@ -473,6 +476,31 @@ private fun MorpheManager(vm: MainViewModel) {
                         }
                         else -> {}
                     }
+                }
+                val phaseBack: (() -> Unit)? = when (onboardingPhase) {
+                    OnboardingPhase.SHEET -> {
+                        {
+                            phaseInitialStep = homeSteps.size - 1
+                            globalOnboardingState.sheetOnboardingActive = false
+                            homeViewModel.showBundleManagementSheet = false
+                            onboardingPhase = OnboardingPhase.HOME
+                        }
+                    }
+                    OnboardingPhase.SETTINGS -> {
+                        {
+                            phaseInitialStep = sheetSteps.size - 1
+                            scope.launch {
+                                navController.popBackStack(HomeScreen, false)
+                                globalOnboardingState.sheetOnboardingActive = true
+                                homeViewModel.showBundleManagementSheet = true
+                                while (globalOnboardingState.sourcesPatchesBounds == null) {
+                                    delay(16)
+                                }
+                                onboardingPhase = OnboardingPhase.SHEET
+                            }
+                        }
+                    }
+                    else -> null
                 }
                 val onSkip: () -> Unit = {
                     homeOnboardingState.swipeActive = false
@@ -506,8 +534,10 @@ private fun MorpheManager(vm: MainViewModel) {
                             steps = currentSteps,
                             stepOffset = phaseOffset,
                             totalStepsOverride = totalOnboardingSteps,
+                            initialStep = phaseInitialStep,
                             onComplete = onComplete,
-                            onSkip = onSkip
+                            onSkip = onSkip,
+                            onPhaseBack = phaseBack
                         )
                     }
                 } else {
@@ -516,8 +546,10 @@ private fun MorpheManager(vm: MainViewModel) {
                             steps = currentSteps,
                             stepOffset = phaseOffset,
                             totalStepsOverride = totalOnboardingSteps,
+                            initialStep = phaseInitialStep,
                             onComplete = onComplete,
-                            onSkip = onSkip
+                            onSkip = onSkip,
+                            onPhaseBack = phaseBack
                         )
                     }
                 }

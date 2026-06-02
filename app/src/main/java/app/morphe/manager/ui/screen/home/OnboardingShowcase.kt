@@ -93,10 +93,12 @@ fun OnboardingShowcase(
     onComplete: () -> Unit,
     onSkip: () -> Unit = onComplete,
     stepOffset: Int = 0,
-    totalStepsOverride: Int? = null
+    totalStepsOverride: Int? = null,
+    initialStep: Int = 0,
+    onPhaseBack: (() -> Unit)? = null
 ) {
     if (steps.isEmpty()) return
-    var step by remember { mutableIntStateOf(0) }
+    var step by remember { mutableIntStateOf(initialStep.coerceIn(0, steps.size - 1)) }
     val stepDef = steps[step]
     val bounds = stepDef.getBounds()
     val displayStep = stepOffset + step + 1
@@ -209,7 +211,11 @@ fun OnboardingShowcase(
                 step = displayStep,
                 totalSteps = displayTotal,
                 onNext = { if (step < steps.size - 1) step++ else onComplete() },
-                onPrevious = if (step > 0) { { step-- } } else null,
+                onPrevious = when {
+                    step > 0 -> { { step -= 1 } }
+                    onPhaseBack != null -> onPhaseBack
+                    else -> null
+                },
                 onSkip = onSkip,
                 modifier = Modifier
                     .align(Alignment.TopStart)
