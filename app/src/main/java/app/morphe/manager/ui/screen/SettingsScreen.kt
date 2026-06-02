@@ -93,6 +93,8 @@ fun SettingsScreen(
         pageCount = { SettingsTab.entries.size }
     )
     val systemScrollState = rememberScrollState()
+    var installerScrollTarget by remember { mutableIntStateOf(0) }
+    var processRuntimeScrollTarget by remember { mutableIntStateOf(0) }
 
     // Register scroll/navigate callbacks so MorpheManager can drive Settings pager during onboarding
     LaunchedEffect(globalOnboardingState) {
@@ -105,6 +107,12 @@ fun SettingsScreen(
             }
             obs.onNavigateToSystemTab = {
                 coroutineScope.launch { pagerState.animateScrollToPage(SettingsTab.SYSTEM.ordinal) }
+            }
+            obs.onScrollToInstaller = {
+                coroutineScope.launch { systemScrollState.animateScrollTo(installerScrollTarget) }
+            }
+            obs.onScrollToProcessRuntime = {
+                coroutineScope.launch { systemScrollState.animateScrollTo(processRuntimeScrollTarget) }
             }
             obs.onScrollSystemToBottom = {
                 coroutineScope.launch { systemScrollState.animateScrollTo(systemScrollState.maxValue) }
@@ -245,7 +253,9 @@ fun SettingsScreen(
                         onChangelogClick = { showChangelogDialog.value = true },
                         scrollState = systemScrollState,
                         onInstallerSectionPositioned = { globalOnboardingState?.installerSectionBounds = it },
+                        onInstallerScrollTarget = { installerScrollTarget = it },
                         onProcessRuntimePositioned = { globalOnboardingState?.processRuntimeBounds = it },
+                        onProcessRuntimeScrollTarget = { processRuntimeScrollTarget = it },
                         onFilePickerPositioned = { globalOnboardingState?.filePickerBounds = it }
                     )
                 }

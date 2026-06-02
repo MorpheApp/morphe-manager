@@ -73,6 +73,8 @@ class GlobalOnboardingState {
     var onNavigateToAppearanceTab: (() -> Unit)? = null
     var onNavigateToAdvancedTab: (() -> Unit)? = null
     var onNavigateToSystemTab: (() -> Unit)? = null
+    var onScrollToInstaller: (() -> Unit)? = null
+    var onScrollToProcessRuntime: (() -> Unit)? = null
     var onScrollSystemToBottom: (() -> Unit)? = null
 }
 
@@ -134,8 +136,10 @@ fun OnboardingShowcase(
                 animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing),
                 label = "obs_card_bias"
             )
+            // When the card is at the bottom we must clear the system nav bar AND the app's bottom action bar
+            val navBarPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
             val cardVertPadding by animateDpAsState(
-                targetValue = if (isBottomHalf) 64.dp else 32.dp,
+                targetValue = if (isBottomHalf) 64.dp else navBarPadding + 72.dp,
                 animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing),
                 label = "obs_card_pad"
             )

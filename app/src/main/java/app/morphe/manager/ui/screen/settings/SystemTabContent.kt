@@ -19,8 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.layout.boundsInParent
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import kotlin.math.roundToInt
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.settings.system.*
 import app.morphe.manager.ui.screen.shared.SectionCard
@@ -45,7 +48,9 @@ fun SystemTabContent(
     onChangelogClick: () -> Unit,
     scrollState: ScrollState = rememberScrollState(),
     onInstallerSectionPositioned: ((Rect) -> Unit)? = null,
+    onInstallerScrollTarget: ((Int) -> Unit)? = null,
     onProcessRuntimePositioned: ((Rect) -> Unit)? = null,
+    onProcessRuntimeScrollTarget: ((Int) -> Unit)? = null,
     onFilePickerPositioned: ((Rect) -> Unit)? = null
 ) {
     val useExpertMode by settingsViewModel.prefs.useExpertMode.getAsState()
@@ -63,7 +68,11 @@ fun SystemTabContent(
             icon = Icons.Outlined.InstallMobile
         )
 
-        SectionCard {
+        SectionCard(
+            modifier = if (onInstallerScrollTarget != null) Modifier.onGloballyPositioned { coords ->
+                onInstallerScrollTarget(coords.boundsInParent().top.roundToInt())
+            } else Modifier
+        ) {
             InstallerSection(
                 settingsViewModel = settingsViewModel,
                 onShowInstallerDialog = onShowInstallerDialog,
@@ -72,10 +81,16 @@ fun SystemTabContent(
         }
 
         // Performance
-        PerformanceSection(
-            settingsViewModel = settingsViewModel,
-            onProcessRuntimePositioned = onProcessRuntimePositioned
-        )
+        Column(
+            modifier = if (onProcessRuntimeScrollTarget != null) Modifier.onGloballyPositioned { coords ->
+                onProcessRuntimeScrollTarget(coords.boundsInParent().top.roundToInt())
+            } else Modifier
+        ) {
+            PerformanceSection(
+                settingsViewModel = settingsViewModel,
+                onProcessRuntimePositioned = onProcessRuntimePositioned
+            )
+        }
 
         // Import & Export (Expert mode only)
         if (useExpertMode) {

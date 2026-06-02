@@ -270,11 +270,18 @@ private fun MorpheManager(vm: MainViewModel) {
             StepDef(
                 R.string.installer, R.string.onboarding_system_installer_desc,
                 getBounds = { globalOnboardingState.installerSectionBounds },
-                onShow = { globalOnboardingState.onNavigateToSystemTab?.invoke() }
+                onShow = {
+                    globalOnboardingState.onNavigateToSystemTab?.invoke()
+                    globalOnboardingState.onScrollToInstaller?.invoke()
+                }
             ),
             StepDef(
                 R.string.settings_system_process_runtime, R.string.onboarding_system_process_runtime_desc,
-                getBounds = { globalOnboardingState.processRuntimeBounds }
+                getBounds = { globalOnboardingState.processRuntimeBounds },
+                onShow = {
+                    globalOnboardingState.onNavigateToSystemTab?.invoke()
+                    globalOnboardingState.onScrollToProcessRuntime?.invoke()
+                }
             ),
             StepDef(
                 R.string.settings_system_custom_file_picker, R.string.onboarding_system_file_picker_desc,
