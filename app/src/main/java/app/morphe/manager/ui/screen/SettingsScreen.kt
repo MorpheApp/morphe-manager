@@ -119,7 +119,7 @@ fun SettingsScreen(
             obs.onScrollToProcessRuntime = {
                 coroutineScope.launch { systemScrollState.animateScrollTo(processRuntimeScrollTarget) }
             }
-            obs.onScrollSystemToBottom = {
+            obs.onScrollToFilePicker = {
                 coroutineScope.launch { systemScrollState.animateScrollTo(systemScrollState.maxValue) }
             }
         }

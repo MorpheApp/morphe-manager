@@ -79,7 +79,7 @@ class GlobalOnboardingState {
     var onScrollToThemeSelector: (() -> Unit)? = null
     var onScrollToInstaller: (() -> Unit)? = null
     var onScrollToProcessRuntime: (() -> Unit)? = null
-    var onScrollSystemToBottom: (() -> Unit)? = null
+    var onScrollToFilePicker: (() -> Unit)? = null
     var onScrollToFirstSource: (() -> Unit)? = null
 }
 

@@ -273,23 +273,17 @@ private fun MorpheManager(vm: MainViewModel) {
             StepDef(
                 R.string.installer, R.string.onboarding_system_installer_desc,
                 getBounds = { globalOnboardingState.installerSectionBounds },
-                onShow = {
-                    globalOnboardingState.onNavigateToSystemTab?.invoke()
-                    globalOnboardingState.onScrollToInstaller?.invoke()
-                }
+                onShow = { globalOnboardingState.onScrollToInstaller?.invoke() }
             ),
             StepDef(
                 R.string.settings_system_process_runtime, R.string.onboarding_system_process_runtime_desc,
                 getBounds = { globalOnboardingState.processRuntimeBounds },
-                onShow = {
-                    globalOnboardingState.onNavigateToSystemTab?.invoke()
-                    globalOnboardingState.onScrollToProcessRuntime?.invoke()
-                }
+                onShow = { globalOnboardingState.onScrollToProcessRuntime?.invoke() }
             ),
             StepDef(
                 R.string.settings_system_custom_file_picker, R.string.onboarding_system_file_picker_desc,
                 getBounds = { globalOnboardingState.filePickerBounds },
-                onShow = { globalOnboardingState.onScrollSystemToBottom?.invoke() }
+                onShow = { globalOnboardingState.onScrollToFilePicker?.invoke() }
             )
         )
     }
@@ -305,14 +299,12 @@ private fun MorpheManager(vm: MainViewModel) {
             StepDef(
                 titleRes = R.string.changelog,
                 descRes = R.string.onboarding_sources_version_desc,
-                getBounds = { globalOnboardingState.sourcesVersionBounds },
-                onShow = { globalOnboardingState.onScrollToFirstSource?.invoke() }
+                getBounds = { globalOnboardingState.sourcesVersionBounds }
             ),
             StepDef(
                 titleRes = R.string.sources_management_prerelease_toggle,
                 descRes = R.string.onboarding_sources_prerelease_desc,
-                getBounds = { globalOnboardingState.sourcesPrereleaseBounds },
-                onShow = { globalOnboardingState.onScrollToFirstSource?.invoke() }
+                getBounds = { globalOnboardingState.sourcesPrereleaseBounds }
             )
         )
     }
