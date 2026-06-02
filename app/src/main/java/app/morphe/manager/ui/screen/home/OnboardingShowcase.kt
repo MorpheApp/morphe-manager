@@ -148,13 +148,14 @@ fun OnboardingShowcase(
             val hPad = with(density) { 24.dp.roundToPx() }
             val navPx = with(density) { navBarPadding.roundToPx() }
             val statusPx = with(density) { statusBarPadding.roundToPx() }
-            // Use last known card size; fall back to a reasonable estimate on first frame
-            val cw = cardSize.width.takeIf { it > 0 } ?: with(density) { 360.dp.roundToPx() }
+            // Cap card width so it always fits within horizontal padding on any screen width
+            val maxCardWidth = (screenW - 2 * hPad).coerceAtMost(with(density) { 380.dp.roundToPx() })
+            val cw = cardSize.width.takeIf { it > 0 } ?: maxCardWidth
             val ch = cardSize.height.takeIf { it > 0 } ?: with(density) { 160.dp.roundToPx() }
 
             val targetX = if (bounds != null) {
                 ((bounds.center.x - selfOffset.x) - cw / 2f).roundToInt()
-                    .coerceIn(hPad, (screenW - cw - hPad).coerceAtLeast(hPad))
+                    .coerceIn(hPad, screenW - cw - hPad)
             } else (screenW - cw) / 2
 
             val targetY = if (bounds != null) {
@@ -213,6 +214,7 @@ fun OnboardingShowcase(
                 modifier = Modifier
                     .align(Alignment.TopStart)
                     .offset { IntOffset(cardOffsetX, cardOffsetY) }
+                    .widthIn(max = with(density) { maxCardWidth.toDp() })
                     .onGloballyPositioned { cardSize = it.size }
             )
         }
