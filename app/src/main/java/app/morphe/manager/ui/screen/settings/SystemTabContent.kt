@@ -52,7 +52,8 @@ fun SystemTabContent(
     onInstallerScrollTarget: ((Int) -> Unit)? = null,
     onProcessRuntimePositioned: ((Rect) -> Unit)? = null,
     onProcessRuntimeScrollTarget: ((Int) -> Unit)? = null,
-    onFilePickerPositioned: ((Rect) -> Unit)? = null
+    onFilePickerPositioned: ((Rect) -> Unit)? = null,
+    onFilePickerScrollTarget: ((Int) -> Unit)? = null
 ) {
     val useExpertMode by settingsViewModel.prefs.useExpertMode.getAsState()
 
@@ -106,11 +107,17 @@ fun SystemTabContent(
         }
 
         // Files & Storage
-        FilesAndStorageSection(
-            settingsViewModel = settingsViewModel,
-            importExportViewModel = importExportViewModel,
-            onFilePickerPositioned = onFilePickerPositioned
-        )
+        Box(
+            modifier = if (onFilePickerScrollTarget != null) Modifier.onGloballyPositioned { coords ->
+                onFilePickerScrollTarget(coords.boundsInParent().top.roundToInt())
+            } else Modifier
+        ) {
+            FilesAndStorageSection(
+                settingsViewModel = settingsViewModel,
+                importExportViewModel = importExportViewModel,
+                onFilePickerPositioned = onFilePickerPositioned
+            )
+        }
 
         // About
         SectionTitle(

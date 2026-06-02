@@ -110,9 +110,17 @@ fun BundleManagementSheet(
 
     // Drag-and-drop state
     val listState = rememberLazyListState()
+    var listWindowY by remember { mutableFloatStateOf(0f) }
     LaunchedEffect(globalOnboardingState) {
         globalOnboardingState?.onScrollToFirstSource = {
             scope.launch { listState.animateScrollToItem(0) }
+        }
+        globalOnboardingState?.onScrollToPrerelease = {
+            scope.launch {
+                val bounds = globalOnboardingState.sourcesPrereleaseBounds ?: return@launch
+                val offset = (bounds.top - listWindowY).coerceAtLeast(0f).toInt()
+                listState.animateScrollToItem(0, offset)
+            }
         }
     }
     var localOrder by remember { mutableStateOf(sources.map { it.uid }) }
@@ -217,7 +225,8 @@ fun BundleManagementSheet(
                     modifier = Modifier
                         .fillMaxWidth()
                         .navigationBarsPadding()
-                        .weight(1f, fill = false),
+                        .weight(1f, fill = false)
+                        .onGloballyPositioned { coords -> listWindowY = coords.boundsInWindow().top },
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                     contentPadding = PaddingValues(
                         start = 16.dp,

@@ -93,10 +93,13 @@ fun SettingsScreen(
         pageCount = { SettingsTab.entries.size }
     )
     val appearanceScrollState = rememberScrollState()
+    val advancedScrollState = rememberScrollState()
     val systemScrollState = rememberScrollState()
     var themeSelectorScrollTarget by remember { mutableIntStateOf(0) }
+    var expertModeScrollTarget by remember { mutableIntStateOf(0) }
     var installerScrollTarget by remember { mutableIntStateOf(0) }
     var processRuntimeScrollTarget by remember { mutableIntStateOf(0) }
+    var filePickerScrollTarget by remember { mutableIntStateOf(0) }
 
     // Register scroll/navigate callbacks so MorpheManager can drive Settings pager during onboarding
     LaunchedEffect(globalOnboardingState) {
@@ -113,6 +116,12 @@ fun SettingsScreen(
             obs.onScrollToThemeSelector = {
                 coroutineScope.launch { appearanceScrollState.animateScrollTo(themeSelectorScrollTarget) }
             }
+            obs.onScrollToExpertMode = {
+                coroutineScope.launch {
+                    pagerState.animateScrollToPage(SettingsTab.ADVANCED.ordinal)
+                    advancedScrollState.animateScrollTo(expertModeScrollTarget)
+                }
+            }
             obs.onScrollToInstaller = {
                 coroutineScope.launch { systemScrollState.animateScrollTo(installerScrollTarget) }
             }
@@ -120,7 +129,7 @@ fun SettingsScreen(
                 coroutineScope.launch { systemScrollState.animateScrollTo(processRuntimeScrollTarget) }
             }
             obs.onScrollToFilePicker = {
-                coroutineScope.launch { systemScrollState.animateScrollTo(systemScrollState.maxValue) }
+                coroutineScope.launch { systemScrollState.animateScrollTo(filePickerScrollTarget) }
             }
         }
     }
@@ -235,7 +244,9 @@ fun SettingsScreen(
                         patchOptionsViewModel = patchOptionsViewModel,
                         homeViewModel = homeViewModel,
                         settingsViewModel = settingsViewModel,
-                        onExpertModeItemPositioned = { globalOnboardingState?.expertModeBounds = it }
+                        scrollState = advancedScrollState,
+                        onExpertModeItemPositioned = { globalOnboardingState?.expertModeBounds = it },
+                        onExpertModeScrollTarget = { expertModeScrollTarget = it }
                     )
 
                     SettingsTab.SYSTEM -> SystemTabContent(
@@ -263,7 +274,8 @@ fun SettingsScreen(
                         onInstallerScrollTarget = { installerScrollTarget = it },
                         onProcessRuntimePositioned = { globalOnboardingState?.processRuntimeBounds = it },
                         onProcessRuntimeScrollTarget = { processRuntimeScrollTarget = it },
-                        onFilePickerPositioned = { globalOnboardingState?.filePickerBounds = it }
+                        onFilePickerPositioned = { globalOnboardingState?.filePickerBounds = it },
+                        onFilePickerScrollTarget = { filePickerScrollTarget = it }
                     )
                 }
             }

@@ -8,6 +8,7 @@ package app.morphe.manager.ui.screen.settings
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -17,8 +18,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
+import kotlin.math.roundToInt
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -41,7 +44,9 @@ fun AdvancedTabContent(
     patchOptionsViewModel: PatchOptionsViewModel,
     homeViewModel: HomeViewModel,
     settingsViewModel: SettingsViewModel,
-    onExpertModeItemPositioned: ((Rect) -> Unit)? = null
+    scrollState: ScrollState = rememberScrollState(),
+    onExpertModeItemPositioned: ((Rect) -> Unit)? = null,
+    onExpertModeScrollTarget: ((Int) -> Unit)? = null
 ) {
     val prefs = settingsViewModel.prefs
     val useExpertMode by prefs.useExpertMode.getAsState()
@@ -75,7 +80,7 @@ fun AdvancedTabContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .animateContentSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -103,9 +108,12 @@ fun AdvancedTabContent(
                 else settingsViewModel.setExpertMode(false)
             },
             showBorder = true,
-            modifier = if (onExpertModeItemPositioned != null) Modifier.onGloballyPositioned { coords ->
-                onExpertModeItemPositioned(coords.boundsInWindow())
-            } else Modifier,
+            modifier = if (onExpertModeItemPositioned != null || onExpertModeScrollTarget != null)
+                Modifier.onGloballyPositioned { coords ->
+                    onExpertModeItemPositioned?.invoke(coords.boundsInWindow())
+                    onExpertModeScrollTarget?.invoke(coords.boundsInParent().top.roundToInt())
+                }
+            else Modifier,
             leadingContent = {
                 MorpheIcon(icon = Icons.Outlined.Psychology)
             },

@@ -81,6 +81,8 @@ class GlobalOnboardingState {
     var onScrollToProcessRuntime: (() -> Unit)? = null
     var onScrollToFilePicker: (() -> Unit)? = null
     var onScrollToFirstSource: (() -> Unit)? = null
+    var onScrollToExpertMode: (() -> Unit)? = null
+    var onScrollToPrerelease: (() -> Unit)? = null
 }
 
 /**
@@ -157,7 +159,7 @@ fun OnboardingShowcase(
 
             val targetX = if (bounds != null) {
                 ((bounds.center.x - selfOffset.x) - cw / 2f).roundToInt()
-                    .coerceIn(hPad, screenW - cw - hPad)
+                    .coerceIn(hPad, (screenW - cw - hPad).coerceAtLeast(hPad))
             } else (screenW - cw) / 2
 
             val targetY = if (bounds != null) {

@@ -264,7 +264,7 @@ private fun MorpheManager(vm: MainViewModel) {
             StepDef(
                 R.string.settings_advanced_expert_mode, R.string.onboarding_expert_mode_desc,
                 getBounds = { globalOnboardingState.expertModeBounds },
-                onShow = { globalOnboardingState.onNavigateToAdvancedTab?.invoke() }
+                onShow = { globalOnboardingState.onScrollToExpertMode?.invoke() }
             ),
             StepDef(
                 R.string.onboarding_system_tab_title, R.string.onboarding_system_tab_desc,
@@ -305,7 +305,8 @@ private fun MorpheManager(vm: MainViewModel) {
             StepDef(
                 titleRes = R.string.sources_management_prerelease_toggle,
                 descRes = R.string.onboarding_sources_prerelease_desc,
-                getBounds = { globalOnboardingState.sourcesPrereleaseBounds }
+                getBounds = { globalOnboardingState.sourcesPrereleaseBounds },
+                onShow = { globalOnboardingState.onScrollToPrerelease?.invoke() }
             )
         )
     }
