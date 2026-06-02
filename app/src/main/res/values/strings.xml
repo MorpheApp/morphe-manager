@@ -890,6 +890,7 @@ Do you still want to continue?"</string>
     <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%1$d of %2$d</string>
     <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_back">Back</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding_done">Done</string>
     <string name="onboarding_sources_desc">View and manage your patch sources here. Each source provides patches that can be applied to your apps</string>

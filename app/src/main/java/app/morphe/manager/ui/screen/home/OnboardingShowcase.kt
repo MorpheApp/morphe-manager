@@ -208,6 +208,7 @@ fun OnboardingShowcase(
                 step = displayStep,
                 totalSteps = displayTotal,
                 onNext = { if (step < steps.size - 1) step++ else onComplete() },
+                onPrevious = if (step > 0) { { step-- } } else null,
                 onSkip = onSkip,
                 modifier = Modifier
                     .align(Alignment.TopStart)
@@ -225,6 +226,7 @@ private fun OnboardingCard(
     step: Int,
     totalSteps: Int,
     onNext: () -> Unit,
+    onPrevious: (() -> Unit)?,
     onSkip: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -266,13 +268,21 @@ private fun OnboardingCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TextButton(onClick = onSkip) {
-                    Text(stringResource(R.string.onboarding_skip))
+                    Text(stringResource(R.string.onboarding_skip), maxLines = 1)
                 }
-                Button(onClick = onNext) {
-                    Text(
-                        if (step == totalSteps) stringResource(R.string.onboarding_done)
-                        else stringResource(R.string.onboarding_next)
-                    )
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    if (onPrevious != null) {
+                        OutlinedButton(onClick = onPrevious) {
+                            Text(stringResource(R.string.onboarding_back), maxLines = 1)
+                        }
+                    }
+                    Button(onClick = onNext) {
+                        Text(
+                            if (step == totalSteps) stringResource(R.string.onboarding_done)
+                            else stringResource(R.string.onboarding_next),
+                            maxLines = 1
+                        )
+                    }
                 }
             }
         }
