@@ -7,6 +7,7 @@ package app.morphe.manager.ui.screen.settings
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -81,7 +82,7 @@ fun SystemTabContent(
         }
 
         // Performance
-        Column(
+        Box(
             modifier = if (onProcessRuntimeScrollTarget != null) Modifier.onGloballyPositioned { coords ->
                 onProcessRuntimeScrollTarget(coords.boundsInParent().top.roundToInt())
             } else Modifier

@@ -15,7 +15,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
@@ -27,12 +26,16 @@ import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
+import kotlin.math.roundToInt
 
 /** Set to true to show onboarding every launch regardless of firstLaunch preference. */
 // TODO: Set to false before release
@@ -128,20 +131,50 @@ fun OnboardingShowcase(
                 }
                 .clickable(remember { MutableInteractionSource() }, indication = null) {}
         ) {
-            val screenH = constraints.maxHeight.toFloat()
-            val isBottomHalf = bounds != null && bounds.top - selfOffset.y > screenH * 0.55f
+            val density = LocalDensity.current
+            val screenW = constraints.maxWidth
+            val screenH = constraints.maxHeight
+            // Card shows above the target when the target is in the lower half of the screen
+            val isBottomHalf = bounds != null && (bounds.center.y - selfOffset.y) > screenH * 0.5f
 
-            val cardBias by animateFloatAsState(
-                targetValue = if (isBottomHalf) -1f else 1f,
-                animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing),
-                label = "obs_card_bias"
-            )
-            // When the card is at the bottom we must clear the system nav bar AND the app's bottom action bar
             val navBarPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-            val cardVertPadding by animateDpAsState(
-                targetValue = if (isBottomHalf) 64.dp else navBarPadding + 72.dp,
-                animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing),
-                label = "obs_card_pad"
+            val statusBarPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+
+            var cardSize by remember { mutableStateOf(IntSize.Zero) }
+
+            val gap = with(density) { 16.dp.roundToPx() }
+            val hPad = with(density) { 24.dp.roundToPx() }
+            val navPx = with(density) { navBarPadding.roundToPx() }
+            val statusPx = with(density) { statusBarPadding.roundToPx() }
+            // Use last known card size; fall back to a reasonable estimate on first frame
+            val cw = cardSize.width.takeIf { it > 0 } ?: with(density) { 360.dp.roundToPx() }
+            val ch = cardSize.height.takeIf { it > 0 } ?: with(density) { 160.dp.roundToPx() }
+
+            val targetX = if (bounds != null) {
+                ((bounds.center.x - selfOffset.x) - cw / 2f).roundToInt()
+                    .coerceIn(hPad, (screenW - cw - hPad).coerceAtLeast(hPad))
+            } else (screenW - cw) / 2
+
+            val targetY = if (bounds != null) {
+                if (isBottomHalf)
+                    // Show card just above the spotlight target
+                    (bounds.top - selfOffset.y - ch - gap).roundToInt()
+                        .coerceAtLeast(statusPx + gap)
+                else
+                    // Show card just below the spotlight target
+                    (bounds.bottom - selfOffset.y + gap).roundToInt()
+                        .coerceAtMost(screenH - ch - navPx - gap)
+            } else ((screenH - ch) / 2).coerceAtLeast(statusPx)
+
+            val cardOffsetX by animateIntAsState(
+                targetValue = targetX,
+                animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+                label = "obs_card_x"
+            )
+            val cardOffsetY by animateIntAsState(
+                targetValue = targetY,
+                animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+                label = "obs_card_y"
             )
 
             Canvas(
@@ -175,9 +208,9 @@ fun OnboardingShowcase(
                 onNext = { if (step < steps.size - 1) step++ else onComplete() },
                 onSkip = onSkip,
                 modifier = Modifier
-                    .align(BiasAlignment(horizontalBias = 0f, verticalBias = cardBias))
-                    .padding(horizontal = 24.dp)
-                    .padding(vertical = cardVertPadding)
+                    .align(Alignment.TopStart)
+                    .offset { IntOffset(cardOffsetX, cardOffsetY) }
+                    .onGloballyPositioned { cardSize = it.size }
             )
         }
     }
