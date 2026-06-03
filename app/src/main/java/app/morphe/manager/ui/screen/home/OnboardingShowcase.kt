@@ -104,7 +104,11 @@ fun OnboardingShowcase(
     var step by remember { mutableIntStateOf(initialStep.coerceIn(0, steps.size - 1)) }
 
     BackHandler {
-        if (onPhaseBack != null) onPhaseBack() else onSkip()
+        when {
+            step > 0 -> step -= 1
+            onPhaseBack != null -> onPhaseBack()
+            else -> onSkip()
+        }
     }
     val stepDef = steps[step]
     val bounds = stepDef.getBounds()

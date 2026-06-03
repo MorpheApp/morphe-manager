@@ -212,6 +212,7 @@ private fun MorpheManager(vm: MainViewModel) {
     var onboardingPhase by remember { mutableStateOf(OnboardingPhase.HOME) }
     var phaseInitialStep by remember { mutableIntStateOf(0) }
     val showOnboarding = (ONBOARDING_TESTING_MODE || wantsOnboardingTour.value) && onboardingPhase != OnboardingPhase.DONE
+    var showOnboardingOverlay by remember { mutableStateOf(true) }
     val homeOnboardingState = remember { OnboardingState() }
     val globalOnboardingState = remember { GlobalOnboardingState() }
 
@@ -240,14 +241,15 @@ private fun MorpheManager(vm: MainViewModel) {
         listOf(
             StepDef(
                 R.string.settings, R.string.onboarding_settings_desc,
-                getBounds = { homeOnboardingState.settingsButtonBounds }
+                getBounds = { homeOnboardingState.settingsButtonBounds },
+                onShow = { navController.popBackStack(HomeScreen, false) }
             ),
             StepDef(
                 R.string.appearance, R.string.onboarding_appearance_tab_desc,
                 getBounds = { globalOnboardingState.appearanceTabBounds },
                 onShow = {
                     scope.launch {
-                        navController.navigate(Settings)
+                        navController.navigate(Settings) { launchSingleTop = true }
                         delay(400)
                         globalOnboardingState.onNavigateToAppearanceTab?.invoke()
                     }
@@ -440,7 +442,7 @@ private fun MorpheManager(vm: MainViewModel) {
                 OnboardingPhase.SETTINGS -> settingsSteps
                 else -> null
             }
-            if (currentSteps != null) {
+            if (currentSteps != null && showOnboardingOverlay) {
                 val phaseOffset = when (onboardingPhase) {
                     OnboardingPhase.HOME -> 0
                     OnboardingPhase.SHEET -> homeSteps.size
@@ -481,23 +483,32 @@ private fun MorpheManager(vm: MainViewModel) {
                 val phaseBack: (() -> Unit)? = when (onboardingPhase) {
                     OnboardingPhase.SHEET -> {
                         {
-                            phaseInitialStep = homeSteps.size - 1
-                            globalOnboardingState.sheetOnboardingActive = false
-                            homeViewModel.showBundleManagementSheet = false
-                            onboardingPhase = OnboardingPhase.HOME
+                            scope.launch {
+                                showOnboardingOverlay = false
+                                globalOnboardingState.sheetOnboardingActive = false
+                                homeViewModel.showBundleManagementSheet = false
+                                delay(300)
+                                phaseInitialStep = homeSteps.size - 1
+                                onboardingPhase = OnboardingPhase.HOME
+                                showOnboardingOverlay = true
+                            }
                         }
                     }
                     OnboardingPhase.SETTINGS -> {
                         {
-                            phaseInitialStep = sheetSteps.size - 1
                             scope.launch {
+                                showOnboardingOverlay = false
                                 navController.popBackStack(HomeScreen, false)
-                                globalOnboardingState.sheetOnboardingActive = true
+                                delay(300)
+                                globalOnboardingState.sourcesPatchesBounds = null
                                 homeViewModel.showBundleManagementSheet = true
+                                globalOnboardingState.sheetOnboardingActive = true
                                 while (globalOnboardingState.sourcesPatchesBounds == null) {
                                     delay(16)
                                 }
+                                phaseInitialStep = sheetSteps.size - 1
                                 onboardingPhase = OnboardingPhase.SHEET
+                                showOnboardingOverlay = true
                             }
                         }
                     }
