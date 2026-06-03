@@ -346,7 +346,7 @@ fun PatcherScreen(
                         onStartTour()
                         onBackClick()
                     },
-                    secondaryText = stringResource(R.string.onboarding_skip),
+                    secondaryText = stringResource(R.string.skip),
                     onSecondaryClick = {
                         patcherViewModel.consumeTourPrompt()
                         onDeclineTour()

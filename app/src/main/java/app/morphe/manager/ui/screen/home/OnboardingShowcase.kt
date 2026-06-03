@@ -286,18 +286,18 @@ private fun OnboardingCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TextButton(onClick = onSkip) {
-                    Text(stringResource(R.string.onboarding_skip), maxLines = 1)
+                    Text(stringResource(R.string.skip), maxLines = 1)
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     if (onPrevious != null) {
                         OutlinedButton(onClick = onPrevious) {
-                            Text(stringResource(R.string.onboarding_back), maxLines = 1)
+                            Text(stringResource(R.string.back), maxLines = 1)
                         }
                     }
                     Button(onClick = onNext) {
                         Text(
-                            if (step == totalSteps) stringResource(R.string.onboarding_done)
-                            else stringResource(R.string.onboarding_next),
+                            if (step == totalSteps) stringResource(R.string.done)
+                            else stringResource(R.string.next),
                             maxLines = 1
                         )
                     }

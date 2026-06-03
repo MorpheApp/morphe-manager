@@ -802,6 +802,10 @@ The image dimensions must be as follows:
     <string name="retry">Retry</string>
     <string name="add">Add</string>
     <string name="close">Close</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="done">Done</string>
+    <string name="skip">Skip</string>
     <string name="clear">Clear</string>
     <string name="delete">Delete</string>
     <string name="remove">Remove</string>
@@ -889,11 +893,7 @@ Do you still want to continue?"</string>
     <!-- Onboarding coach marks -->
     <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%1$d of %2$d</string>
-    <string name="onboarding_skip">Skip</string>
-    <string name="onboarding_back">Back</string>
-    <string name="onboarding_next">Next</string>
-    <string name="onboarding_done">Done</string>
-    <string name="onboarding_sources_desc">View and manage your patch sources here. Each source provides patches that can be applied to your apps</string>
+<string name="onboarding_sources_desc">View and manage your patch sources here. Each source provides patches that can be applied to your apps</string>
     <string name="onboarding_swipe_title">Swipe gestures</string>
     <string name="onboarding_swipe_desc">Swipe right on an app card to view its available patches. Swipe left to hide the card from the home screen</string>
     <string name="onboarding_settings_desc">Customize Morphe: appearance, advanced options, and system tools</string>
