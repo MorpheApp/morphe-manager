@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.home
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
@@ -101,6 +102,10 @@ fun OnboardingShowcase(
 ) {
     if (steps.isEmpty()) return
     var step by remember { mutableIntStateOf(initialStep.coerceIn(0, steps.size - 1)) }
+
+    BackHandler {
+        if (onPhaseBack != null) onPhaseBack() else onSkip()
+    }
     val stepDef = steps[step]
     val bounds = stepDef.getBounds()
     val displayStep = stepOffset + step + 1
