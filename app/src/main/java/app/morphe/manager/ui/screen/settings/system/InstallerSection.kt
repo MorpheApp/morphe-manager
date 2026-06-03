@@ -21,7 +21,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -42,7 +45,8 @@ import kotlinx.coroutines.isActive
 @Composable
 fun InstallerSection(
     settingsViewModel: SettingsViewModel,
-    onShowInstallerDialog: () -> Unit
+    onShowInstallerDialog: () -> Unit,
+    onInstallerItemPositioned: ((Rect) -> Unit)? = null
 ) {
     val expertMode by settingsViewModel.prefs.useExpertMode.getAsState()
     val primaryPreference by settingsViewModel.prefs.installerPrimary.getAsState()
@@ -79,11 +83,17 @@ fun InstallerSection(
 
     Column {
         if (primaryEntry != null) {
-            InstallerSettingsItem(
-                title = stringResource(R.string.installer_title),
-                entry = primaryEntry,
-                onClick = onShowInstallerDialog
-            )
+            Box(
+                modifier = if (onInstallerItemPositioned != null)
+                    Modifier.onGloballyPositioned { coords -> onInstallerItemPositioned(coords.boundsInWindow()) }
+                else Modifier
+            ) {
+                InstallerSettingsItem(
+                    title = stringResource(R.string.installer_title),
+                    entry = primaryEntry,
+                    onClick = onShowInstallerDialog
+                )
+            }
         }
 
         // Prompt installer toggle (Expert mode only)

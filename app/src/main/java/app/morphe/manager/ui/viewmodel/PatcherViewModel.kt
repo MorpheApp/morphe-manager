@@ -395,6 +395,14 @@ class PatcherViewModel(
     private val _shouldPromptNotification = MutableStateFlow(false)
     val shouldPromptNotification: StateFlow<Boolean> = _shouldPromptNotification.asStateFlow()
 
+    /**
+     * Emits true after the first successful install to prompt the onboarding tour dialog.
+     * Always follows [shouldPromptNotification]; fires only after the notification dialog closes.
+     * Resets to false after the UI acknowledges it via [consumeTourPrompt].
+     */
+    private val _shouldPromptTour = MutableStateFlow(false)
+    val shouldPromptTour: StateFlow<Boolean> = _shouldPromptTour.asStateFlow()
+
     init {
         val existingId = patcherWorkerId?.uuid
         if (existingId != null) {
@@ -692,8 +700,31 @@ class PatcherViewModel(
         }
     }
 
+    /**
+     * Triggers post-install prompts in order: notification permission (if needed), then
+     * onboarding tour (if first launch). The tour waits for the notification dialog to close
+     * before appearing, so the two dialogs never overlap.
+     */
+    fun triggerPostInstallPromptsIfNeeded() {
+        viewModelScope.launch {
+            val needsNotification = !prefs.notificationPermissionRequested.get() &&
+                    !prefs.backgroundUpdateNotifications.get()
+            val needsTour = prefs.firstLaunch.get()
+
+            if (needsNotification) _shouldPromptNotification.value = true
+            if (needsTour) {
+                _shouldPromptNotification.first { !it }
+                _shouldPromptTour.value = true
+            }
+        }
+    }
+
     fun consumeNotificationPrompt() {
         _shouldPromptNotification.value = false
+    }
+
+    fun consumeTourPrompt() {
+        _shouldPromptTour.value = false
     }
 
     /**

@@ -13,6 +13,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Palette
@@ -27,7 +28,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -38,6 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.home.GlobalOnboardingState
 import app.morphe.manager.ui.screen.settings.AdvancedTabContent
 import app.morphe.manager.ui.screen.settings.AppearanceTabContent
 import app.morphe.manager.ui.screen.settings.SystemTabContent
@@ -75,7 +80,9 @@ fun SettingsScreen(
     settingsViewModel: SettingsViewModel = koinViewModel(),
     updateViewModel: UpdateViewModel = koinViewModel {
         parametersOf(false)
-    }
+    },
+    globalOnboardingState: GlobalOnboardingState? = null,
+    onStartTour: (() -> Unit)? = null
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -86,6 +93,59 @@ fun SettingsScreen(
         initialPage = SettingsTab.ADVANCED.ordinal, // Open the Advanced tab when opening settings
         pageCount = { SettingsTab.entries.size }
     )
+    val appearanceScrollState = rememberScrollState()
+    val advancedScrollState = rememberScrollState()
+    val systemScrollState = rememberScrollState()
+    var themeSelectorScrollTarget by remember { mutableIntStateOf(0) }
+    var expertModeScrollTarget by remember { mutableIntStateOf(0) }
+    var installerScrollTarget by remember { mutableIntStateOf(0) }
+    var processRuntimeScrollTarget by remember { mutableIntStateOf(0) }
+    var filePickerScrollTarget by remember { mutableIntStateOf(0) }
+
+    // Register scroll/navigate callbacks so MorpheManager can drive Settings pager during onboarding
+    LaunchedEffect(globalOnboardingState) {
+        globalOnboardingState?.let { obs ->
+            obs.onNavigateToAppearanceTab = {
+                coroutineScope.launch { pagerState.animateScrollToPage(SettingsTab.APPEARANCE.ordinal) }
+            }
+            obs.onNavigateToSystemTab = {
+                coroutineScope.launch { pagerState.animateScrollToPage(SettingsTab.SYSTEM.ordinal) }
+            }
+            obs.onScrollToThemeSelector = {
+                coroutineScope.launch { appearanceScrollState.animateScrollTo(themeSelectorScrollTarget) }
+            }
+            obs.onScrollToExpertMode = {
+                coroutineScope.launch {
+                    pagerState.animateScrollToPage(SettingsTab.ADVANCED.ordinal)
+                    advancedScrollState.animateScrollTo(expertModeScrollTarget)
+                }
+            }
+            obs.onScrollToInstaller = {
+                coroutineScope.launch { systemScrollState.animateScrollTo(installerScrollTarget) }
+            }
+            obs.onScrollToProcessRuntime = {
+                coroutineScope.launch { systemScrollState.animateScrollTo(processRuntimeScrollTarget) }
+            }
+            obs.onScrollToFilePicker = {
+                coroutineScope.launch { systemScrollState.animateScrollTo(filePickerScrollTarget) }
+            }
+        }
+    }
+
+    DisposableEffect(globalOnboardingState) {
+        onDispose {
+            globalOnboardingState?.let { obs ->
+                obs.onNavigateToAppearanceTab = null
+                obs.onNavigateToSystemTab = null
+                obs.onScrollToThemeSelector = null
+                obs.onScrollToExpertMode = null
+                obs.onScrollToInstaller = null
+                obs.onScrollToProcessRuntime = null
+                obs.onScrollToFilePicker = null
+            }
+        }
+    }
+
     val currentTab = SettingsTab.entries[pagerState.currentPage]
 
     // Appearance settings
@@ -167,66 +227,84 @@ fun SettingsScreen(
         )
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .statusBarsPadding()
-    ) {
-        // Content area
-        HorizontalPager(
-            state = pagerState,
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        ) { page ->
-            when (SettingsTab.entries[page]) {
-                SettingsTab.APPEARANCE -> AppearanceTabContent(
-                    theme = theme,
-                    pureBlackTheme = pureBlackTheme,
-                    dynamicColor = dynamicColor,
-                    customAccentColorHex = customAccentColorHex,
-                    themeViewModel = themeViewModel
-                )
+                .fillMaxSize()
+                .statusBarsPadding()
+        ) {
+            // Content area
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) { page ->
+                when (SettingsTab.entries[page]) {
+                    SettingsTab.APPEARANCE -> AppearanceTabContent(
+                        theme = theme,
+                        pureBlackTheme = pureBlackTheme,
+                        dynamicColor = dynamicColor,
+                        customAccentColorHex = customAccentColorHex,
+                        themeViewModel = themeViewModel,
+                        scrollState = appearanceScrollState,
+                        onThemeSelectorPositioned = { globalOnboardingState?.themeSelectorBounds = it },
+                        onThemeSelectorScrollTarget = { themeSelectorScrollTarget = it }
+                    )
 
-                SettingsTab.ADVANCED -> AdvancedTabContent(
-                    patchOptionsViewModel = patchOptionsViewModel,
-                    homeViewModel = homeViewModel,
-                    settingsViewModel = settingsViewModel
-                )
+                    SettingsTab.ADVANCED -> AdvancedTabContent(
+                        patchOptionsViewModel = patchOptionsViewModel,
+                        homeViewModel = homeViewModel,
+                        settingsViewModel = settingsViewModel,
+                        scrollState = advancedScrollState,
+                        onExpertModeItemPositioned = { globalOnboardingState?.expertModeBounds = it },
+                        onExpertModeScrollTarget = { expertModeScrollTarget = it }
+                    )
 
-                SettingsTab.SYSTEM -> SystemTabContent(
-                    settingsViewModel = settingsViewModel,
-                    onShowInstallerDialog = { showInstallerDialog.value = true },
-                    importExportViewModel = importExportViewModel,
-                    onImportKeystore = { importKeystoreLauncher() },
-                    onExportKeystore = {
-                        if (isTV) importExportViewModel.exportKeystoreToDownloads()
-                        else exportKeystoreLauncher.launch("Morphe.keystore")
-                    },
-                    onImportSettings = { importSettingsLauncher() },
-                    onExportSettings = {
-                        if (isTV) importExportViewModel.exportManagerSettingsToDownloads()
-                        else exportSettingsLauncher.launch("morphe_manager_settings.json")
-                    },
-                    onExportDebugLogs = {
-                        if (isTV) importExportViewModel.exportDebugLogsToDownloads()
-                        else exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName)
-                    },
-                    onAboutClick = { showAboutDialog.value = true },
-                    onChangelogClick = { showChangelogDialog.value = true }
-                )
-            }
-        }
-
-        // Bottom Navigation
-        MorpheBottomNavigation(
-            currentTab = currentTab,
-            onTabSelected = { tab ->
-                coroutineScope.launch {
-                    pagerState.animateScrollToPage(tab.ordinal)
+                    SettingsTab.SYSTEM -> SystemTabContent(
+                        settingsViewModel = settingsViewModel,
+                        onShowInstallerDialog = { showInstallerDialog.value = true },
+                        importExportViewModel = importExportViewModel,
+                        onImportKeystore = { importKeystoreLauncher() },
+                        onExportKeystore = {
+                            if (isTV) importExportViewModel.exportKeystoreToDownloads()
+                            else exportKeystoreLauncher.launch("Morphe.keystore")
+                        },
+                        onImportSettings = { importSettingsLauncher() },
+                        onExportSettings = {
+                            if (isTV) importExportViewModel.exportManagerSettingsToDownloads()
+                            else exportSettingsLauncher.launch("morphe_manager_settings.json")
+                        },
+                        onExportDebugLogs = {
+                            if (isTV) importExportViewModel.exportDebugLogsToDownloads()
+                            else exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName)
+                        },
+                        onAboutClick = { showAboutDialog.value = true },
+                        onChangelogClick = { showChangelogDialog.value = true },
+                        onStartTour = onStartTour,
+                        scrollState = systemScrollState,
+                        onInstallerSectionPositioned = { globalOnboardingState?.installerSectionBounds = it },
+                        onInstallerScrollTarget = { installerScrollTarget = it },
+                        onProcessRuntimePositioned = { globalOnboardingState?.processRuntimeBounds = it },
+                        onProcessRuntimeScrollTarget = { processRuntimeScrollTarget = it },
+                        onFilePickerPositioned = { globalOnboardingState?.filePickerBounds = it },
+                        onFilePickerScrollTarget = { filePickerScrollTarget = it }
+                    )
                 }
             }
-        )
+
+            // Bottom Navigation
+            MorpheBottomNavigation(
+                currentTab = currentTab,
+                onTabSelected = { tab ->
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(tab.ordinal)
+                    }
+                },
+                onAppearanceTabPositioned = { globalOnboardingState?.appearanceTabBounds = it },
+                onSystemTabPositioned = { globalOnboardingState?.systemTabBounds = it }
+            )
+        }
     }
 }
 
@@ -236,7 +314,9 @@ fun SettingsScreen(
 @Composable
 private fun MorpheBottomNavigation(
     currentTab: SettingsTab,
-    onTabSelected: (SettingsTab) -> Unit
+    onTabSelected: (SettingsTab) -> Unit,
+    onAppearanceTabPositioned: ((Rect) -> Unit)? = null,
+    onSystemTabPositioned: ((Rect) -> Unit)? = null
 ) {
     Surface(
         modifier = Modifier
@@ -264,7 +344,23 @@ private fun MorpheBottomNavigation(
                         tab = tab,
                         isSelected = isSelected,
                         onClick = { onTabSelected(tab) },
-                        modifier = if (isSelected) Modifier.weight(1f) else Modifier.width(64.dp)
+                        modifier = Modifier
+                            .then(if (isSelected) Modifier.weight(1f) else Modifier.width(64.dp))
+                            .then(
+                                when (tab) {
+                                    SettingsTab.APPEARANCE if onAppearanceTabPositioned != null ->
+                                        Modifier.onGloballyPositioned { coords ->
+                                            onAppearanceTabPositioned(coords.boundsInWindow())
+                                        }
+
+                                    SettingsTab.SYSTEM if onSystemTabPositioned != null ->
+                                        Modifier.onGloballyPositioned { coords ->
+                                            onSystemTabPositioned(coords.boundsInWindow())
+                                        }
+
+                                    else -> Modifier
+                                }
+                            )
                     )
                 }
             }

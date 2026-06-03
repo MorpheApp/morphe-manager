@@ -19,11 +19,9 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -31,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.installer.InstallerManager
@@ -41,7 +40,10 @@ import app.morphe.manager.ui.screen.patcher.*
 import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
+import app.morphe.manager.ui.screen.shared.LocalDialogSecondaryTextColor
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
+import app.morphe.manager.ui.screen.shared.MorpheDialog
+import app.morphe.manager.ui.screen.shared.MorpheDialogButtonRow
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.util.APK_MIMETYPE
@@ -72,7 +74,9 @@ fun PatcherScreen(
     installViewModel: InstallViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
     onBackgroundSpeedChange: (Float) -> Unit = {},
-    onPatchingCompleted: () -> Unit = {}
+    onPatchingCompleted: () -> Unit = {},
+    onStartTour: () -> Unit = {},
+    onDeclineTour: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val view = LocalView.current
@@ -281,10 +285,11 @@ fun PatcherScreen(
     val errorMessage by remember { derivedStateOf { (installViewModel.installState as? InstallViewModel.InstallState.Error)?.message } }
 
     val showInstalledSourceConflictDialog = remember { mutableStateOf(false) }
+    val shouldPromptTour by patcherViewModel.shouldPromptTour.collectAsStateWithLifecycle()
 
     LaunchedEffect(installState) {
         if (installState is InstallViewModel.InstallState.Installed) {
-            patcherViewModel.triggerNotificationPromptIfNeeded()
+            patcherViewModel.triggerPostInstallPromptsIfNeeded()
         }
         if (installState is InstallViewModel.InstallState.Conflict && autoHandleConflict) {
             showInstalledSourceConflictDialog.value = true
@@ -323,6 +328,41 @@ fun PatcherScreen(
                 patcherViewModel.consumeNotificationPrompt()
             }
         )
+    }
+
+    // Tour prompt dialog shown after first successful install
+    if (shouldPromptTour) {
+        MorpheDialog(
+            onDismissRequest = {
+                patcherViewModel.consumeTourPrompt()
+                onDeclineTour()
+            },
+            title = stringResource(R.string.tour_prompt_title),
+            footer = {
+                MorpheDialogButtonRow(
+                    primaryText = stringResource(R.string.tour_prompt_confirm),
+                    onPrimaryClick = {
+                        patcherViewModel.consumeTourPrompt()
+                        onStartTour()
+                        onBackClick()
+                    },
+                    secondaryText = stringResource(R.string.skip),
+                    onSecondaryClick = {
+                        patcherViewModel.consumeTourPrompt()
+                        onDeclineTour()
+                        onBackClick()
+                    }
+                )
+            }
+        ) {
+            Text(
+                text = stringResource(R.string.tour_prompt_desc),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 
     // Activity launcher for handling plugin activities or external installs

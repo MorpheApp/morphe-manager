@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Article
 import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.Public
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -44,6 +45,7 @@ import org.koin.androidx.compose.koinViewModel
 fun AboutSection(
     onAboutClick: () -> Unit,
     onChangelogClick: () -> Unit,
+    onStartTour: (() -> Unit)? = null,
     updateViewModel: UpdateViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
@@ -115,5 +117,16 @@ fun AboutSection(
                 }
             }
         )
+
+        if (onStartTour != null) {
+            MorpheSettingsDivider()
+
+            SettingsItem(
+                icon = Icons.Outlined.Lightbulb,
+                title = stringResource(R.string.onboarding_restart_title),
+                description = stringResource(R.string.onboarding_restart_desc),
+                onClick = onStartTour
+            )
+        }
     }
 }

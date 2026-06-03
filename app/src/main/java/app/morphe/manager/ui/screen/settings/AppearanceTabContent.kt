@@ -8,6 +8,7 @@ package app.morphe.manager.ui.screen.settings
 import android.app.Activity
 import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,6 +21,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.layout.boundsInParent
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
+import kotlin.math.roundToInt
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -44,7 +50,10 @@ fun AppearanceTabContent(
     pureBlackTheme: Boolean,
     dynamicColor: Boolean,
     customAccentColorHex: String?,
-    themeViewModel: ThemeSettingsViewModel
+    themeViewModel: ThemeSettingsViewModel,
+    scrollState: ScrollState = rememberScrollState(),
+    onThemeSelectorPositioned: ((Rect) -> Unit)? = null,
+    onThemeSelectorScrollTarget: ((Int) -> Unit)? = null
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -65,7 +74,7 @@ fun AppearanceTabContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .padding(16.dp)
     ) {
         // Language Section
@@ -112,7 +121,16 @@ fun AppearanceTabContent(
             )
         }
 
-        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+        Box(
+            Modifier.padding(bottom = 16.dp).fillMaxWidth().then(
+                if (onThemeSelectorPositioned != null || onThemeSelectorScrollTarget != null)
+                    Modifier.onGloballyPositioned { coords ->
+                        onThemeSelectorPositioned?.invoke(coords.boundsInWindow())
+                        onThemeSelectorScrollTarget?.invoke(coords.boundsInParent().top.roundToInt())
+                    }
+                else Modifier
+            )
+        ) {
             ThemeSelector(
                 theme = theme,
                 dynamicColor = dynamicColor,

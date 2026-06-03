@@ -802,6 +802,10 @@ The image dimensions must be as follows:
     <string name="retry">Retry</string>
     <string name="add">Add</string>
     <string name="close">Close</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="done">Done</string>
+    <string name="skip">Skip</string>
     <string name="clear">Clear</string>
     <string name="delete">Delete</string>
     <string name="remove">Remove</string>
@@ -885,4 +889,30 @@ The image dimensions must be as follows:
 
 Do you still want to continue?"</string>
     <string name="download_update_confirmation">Download update?</string>
+
+    <!-- Onboarding coach marks -->
+    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$d of %2$d</string>
+    <string name="onboarding_sources_desc">Manage your patch sources. Each source provides patches that can be applied to your apps</string>
+    <string name="onboarding_swipe_title">Swipe gestures</string>
+    <string name="onboarding_swipe_desc">Swipe right on an app card to view its available patches. Swipe left to hide the card from the home screen</string>
+    <string name="onboarding_settings_desc">Customize Morphe: appearance, advanced options, and system tools</string>
+    <string name="onboarding_sources_patches_desc">Tap to view all patches available from this source</string>
+    <string name="onboarding_sources_version_desc">Tap the version to view the full changelog for this source</string>
+    <string name="onboarding_sources_prerelease_desc">Enable this to receive pre-release patch versions from this source</string>
+    <string name="onboarding_appearance_tab_desc">Customize the app\'s look: theme, accent color, and background</string>
+    <string name="onboarding_appearance_theme_desc">Choose between light, dark, or system theme. You can also pick a custom accent color or enable Dynamic Color</string>
+    <string name="onboarding_expert_mode_desc">Enable Expert Mode to unlock patch selection, custom options, and other advanced features</string>
+    <!-- Translate "System" the same way as the System settings tab -->
+    <string name="onboarding_system_tab_title">System tab</string>
+    <string name="onboarding_system_tab_desc">Keystore management, import/export tools, and app information</string>
+    <string name="onboarding_system_installer_desc">Choose how patched apps are installed: standard, root mount, or Shizuku</string>
+    <string name="onboarding_system_process_runtime_desc">Run patching in a separate process to improve stability and control memory usage. Recommended for large apps</string>
+    <string name="onboarding_system_file_picker_desc">Enable to use the built-in file browser instead of the system picker when selecting APKs or keystores</string>
+    <!-- Tour prompt dialog shown after first successful patch install -->
+    <string name="tour_prompt_title">Quick feature tour</string>
+    <string name="tour_prompt_desc">Want a quick tour of Morphe\'s key features?</string>
+    <string name="tour_prompt_confirm">Show me around</string>
+    <string name="onboarding_restart_title">Feature tour</string>
+    <string name="onboarding_restart_desc">Take a guided tour of Morphe\'s key features</string>
 </resources>

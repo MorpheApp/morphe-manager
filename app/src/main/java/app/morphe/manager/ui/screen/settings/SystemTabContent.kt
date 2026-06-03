@@ -5,7 +5,9 @@
 
 package app.morphe.manager.ui.screen.settings
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -17,8 +19,12 @@ import androidx.compose.material.icons.outlined.InstallMobile
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.layout.boundsInParent
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import kotlin.math.roundToInt
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.settings.system.*
 import app.morphe.manager.ui.screen.shared.SectionCard
@@ -40,14 +46,22 @@ fun SystemTabContent(
     onExportSettings: () -> Unit,
     onExportDebugLogs: () -> Unit,
     onAboutClick: () -> Unit,
-    onChangelogClick: () -> Unit
+    onChangelogClick: () -> Unit,
+    onStartTour: (() -> Unit)? = null,
+    scrollState: ScrollState = rememberScrollState(),
+    onInstallerSectionPositioned: ((Rect) -> Unit)? = null,
+    onInstallerScrollTarget: ((Int) -> Unit)? = null,
+    onProcessRuntimePositioned: ((Rect) -> Unit)? = null,
+    onProcessRuntimeScrollTarget: ((Int) -> Unit)? = null,
+    onFilePickerPositioned: ((Rect) -> Unit)? = null,
+    onFilePickerScrollTarget: ((Int) -> Unit)? = null
 ) {
     val useExpertMode by settingsViewModel.prefs.useExpertMode.getAsState()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -57,15 +71,29 @@ fun SystemTabContent(
             icon = Icons.Outlined.InstallMobile
         )
 
-        SectionCard {
+        SectionCard(
+            modifier = if (onInstallerScrollTarget != null) Modifier.onGloballyPositioned { coords ->
+                onInstallerScrollTarget(coords.boundsInParent().top.roundToInt())
+            } else Modifier
+        ) {
             InstallerSection(
                 settingsViewModel = settingsViewModel,
-                onShowInstallerDialog = onShowInstallerDialog
+                onShowInstallerDialog = onShowInstallerDialog,
+                onInstallerItemPositioned = onInstallerSectionPositioned
             )
         }
 
         // Performance
-        PerformanceSection(settingsViewModel = settingsViewModel)
+        Box(
+            modifier = if (onProcessRuntimeScrollTarget != null) Modifier.onGloballyPositioned { coords ->
+                onProcessRuntimeScrollTarget(coords.boundsInParent().top.roundToInt())
+            } else Modifier
+        ) {
+            PerformanceSection(
+                settingsViewModel = settingsViewModel,
+                onProcessRuntimePositioned = onProcessRuntimePositioned
+            )
+        }
 
         // Import & Export (Expert mode only)
         if (useExpertMode) {
@@ -80,10 +108,17 @@ fun SystemTabContent(
         }
 
         // Files & Storage
-        FilesAndStorageSection(
-            settingsViewModel = settingsViewModel,
-            importExportViewModel = importExportViewModel
-        )
+        Box(
+            modifier = if (onFilePickerScrollTarget != null) Modifier.onGloballyPositioned { coords ->
+                onFilePickerScrollTarget(coords.boundsInParent().top.roundToInt())
+            } else Modifier
+        ) {
+            FilesAndStorageSection(
+                settingsViewModel = settingsViewModel,
+                importExportViewModel = importExportViewModel,
+                onFilePickerPositioned = onFilePickerPositioned
+            )
+        }
 
         // About
         SectionTitle(
@@ -94,7 +129,8 @@ fun SystemTabContent(
         SectionCard {
             AboutSection(
                 onAboutClick = onAboutClick,
-                onChangelogClick = onChangelogClick
+                onChangelogClick = onChangelogClick,
+                onStartTour = onStartTour
             )
         }
     }

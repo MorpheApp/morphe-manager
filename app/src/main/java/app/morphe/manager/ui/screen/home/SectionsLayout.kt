@@ -44,6 +44,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -121,7 +123,10 @@ fun SectionsLayout(
     onSettingsClick: () -> Unit,
 
     // Expert mode
-    isExpertModeEnabled: Boolean = false
+    isExpertModeEnabled: Boolean = false,
+
+    // Onboarding
+    onboardingState: OnboardingState? = null
 ) {
     val windowSize = rememberWindowSize()
 
@@ -170,7 +175,8 @@ fun SectionsLayout(
                     showOtherAppsButton = showOtherAppsButton,
                     onBundlesClick = onBundlesClick,
                     onSettingsClick = onSettingsClick,
-                    isExpertModeEnabled = isExpertModeEnabled
+                    isExpertModeEnabled = isExpertModeEnabled,
+                    onboardingState = onboardingState
                 )
             }
 
@@ -182,7 +188,9 @@ fun SectionsLayout(
                     isExpertModeEnabled = isExpertModeEnabled,
                     showSearchButton = showSearchButton,
                     searchActive = searchVisible.value,
-                    onSearchClick = { searchVisible.value = !searchVisible.value }
+                    onSearchClick = { searchVisible.value = !searchVisible.value },
+                    onSourcesPositioned = onboardingState?.let { s -> { b -> s.sourcesButtonBounds = b } },
+                    onSettingsPositioned = onboardingState?.let { s -> { b -> s.settingsButtonBounds = b } }
                 )
             }
         }
@@ -228,7 +236,8 @@ private fun AdaptiveContent(
     showOtherAppsButton: Boolean = true,
     onBundlesClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
-    isExpertModeEnabled: Boolean = false
+    isExpertModeEnabled: Boolean = false,
+    onboardingState: OnboardingState? = null
 ) {
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
@@ -273,6 +282,8 @@ private fun AdaptiveContent(
                         showSearchButton = showSearchButton && !isAppsEmpty,
                         searchActive = searchVisible,
                         onSearchClick = onSearchToggle,
+                        onSourcesPositioned = onboardingState?.let { s -> { b -> s.sourcesButtonBounds = b } },
+                        onSettingsPositioned = onboardingState?.let { s -> { b -> s.settingsButtonBounds = b } },
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                 }
@@ -300,6 +311,7 @@ private fun AdaptiveContent(
                         searchQuery = searchQuery,
                         onSearchQueryChange = onSearchQueryChange,
                         onBundlesClick = onBundlesClick,
+                        onboardingState = onboardingState,
                         showFadeOverlay = false,
                         modifier = Modifier.weight(1f)
                     )
@@ -354,6 +366,7 @@ private fun AdaptiveContent(
                         searchQuery = searchQuery,
                         onSearchQueryChange = onSearchQueryChange,
                         onBundlesClick = onBundlesClick,
+                        onboardingState = onboardingState,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -755,6 +768,7 @@ fun MainAppsSection(
     searchQuery: String = "",
     onSearchQueryChange: (String) -> Unit = {},
     onBundlesClick: () -> Unit = {},
+    onboardingState: OnboardingState? = null,
     showFadeOverlay: Boolean = true
 ) {
     // Multi-select state - set of packageNames chosen for bulk hide
@@ -959,7 +973,15 @@ fun MainAppsSection(
                                                 else
                                                     selectedPackages.value + item.packageName
                                             },
-                                            modifier = Modifier.animateItem()
+                                            modifier = Modifier
+                                                .animateItem()
+                                                .then(
+                                                    if (index == 0 && onboardingState != null)
+                                                        Modifier.onGloballyPositioned { coords ->
+                                                            onboardingState.firstAppCardBounds = coords.boundsInWindow()
+                                                        }
+                                                    else Modifier
+                                                )
                                         )
                                     }
 
@@ -1327,7 +1349,10 @@ private fun DynamicAppCard(
 
     // Hint animation: nudge right then left, once (only first card)
     LaunchedEffect(showGestureHint, isLoading) {
-        if (!showGestureHint || isLoading) return@LaunchedEffect
+        if (!showGestureHint || isLoading) {
+            offsetX.snapTo(0f)
+            return@LaunchedEffect
+        }
         delay(800)
         val nudge = with(density) { 72.dp.toPx() }
         offsetX.animateTo(nudge,  tween(500, easing = FastOutSlowInEasing))
