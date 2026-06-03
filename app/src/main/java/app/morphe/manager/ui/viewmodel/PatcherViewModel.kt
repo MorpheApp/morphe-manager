@@ -19,7 +19,6 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.home.ONBOARDING_TESTING_MODE
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
@@ -710,7 +709,7 @@ class PatcherViewModel(
         viewModelScope.launch {
             val needsNotification = !prefs.notificationPermissionRequested.get() &&
                     !prefs.backgroundUpdateNotifications.get()
-            val needsTour = ONBOARDING_TESTING_MODE || prefs.firstLaunch.get()
+            val needsTour = prefs.firstLaunch.get()
 
             if (needsNotification) _shouldPromptNotification.value = true
             if (needsTour) {

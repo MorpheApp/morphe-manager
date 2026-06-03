@@ -212,7 +212,7 @@ private fun MorpheManager(vm: MainViewModel) {
     val wantsOnboardingTour = remember { mutableStateOf(false) }
     var onboardingPhase by remember { mutableStateOf(OnboardingPhase.HOME) }
     var phaseInitialStep by remember { mutableIntStateOf(0) }
-    val showOnboarding = (ONBOARDING_TESTING_MODE || wantsOnboardingTour.value) && onboardingPhase != OnboardingPhase.DONE
+    val showOnboarding = wantsOnboardingTour.value && onboardingPhase != OnboardingPhase.DONE
     var showOnboardingOverlay by remember { mutableStateOf(true) }
     val homeOnboardingState = remember { OnboardingState() }
     val globalOnboardingState = remember { GlobalOnboardingState() }

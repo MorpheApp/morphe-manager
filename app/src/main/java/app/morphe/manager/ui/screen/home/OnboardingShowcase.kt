@@ -38,10 +38,6 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import kotlin.math.roundToInt
 
-/** Set to true to show onboarding every launch regardless of firstLaunch preference. */
-// TODO: Set to false before release
-internal val ONBOARDING_TESTING_MODE: Boolean get() = true
-
 /** One coach-mark step: resource IDs for text, a lambda that returns the current target bounds,
  *  and an optional callback fired when this step becomes active (e.g. to navigate a pager). */
 data class StepDef(
