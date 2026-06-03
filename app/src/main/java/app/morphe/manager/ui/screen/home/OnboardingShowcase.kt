@@ -125,7 +125,7 @@ fun OnboardingShowcase(
 
     // Track the overlay's own position in the window so we can convert window-space
     // bounds (from boundsInWindow) to canvas-local coordinates. This is needed when
-    // the overlay does not start at the window origin, e.g. inside a ModalBottomSheet.
+    // the overlay does not start at the window origin, e.g. inside a Dialog window.
     var selfOffset by remember { mutableStateOf(Offset.Zero) }
 
     var visible by remember { mutableStateOf(false) }

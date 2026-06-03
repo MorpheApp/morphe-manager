@@ -422,6 +422,7 @@ private fun MorpheManager(vm: MainViewModel) {
                     onBackgroundSpeedChange = { patcherBackgroundSpeed.floatValue = it },
                     onPatchingCompleted = { patchingCompleted.value = true },
                     onStartTour = {
+                        phaseInitialStep = 0
                         onboardingPhase = OnboardingPhase.HOME
                         wantsOnboardingTour.value = true
                     },
