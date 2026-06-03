@@ -107,9 +107,6 @@ fun SettingsScreen(
             obs.onNavigateToAppearanceTab = {
                 coroutineScope.launch { pagerState.animateScrollToPage(SettingsTab.APPEARANCE.ordinal) }
             }
-            obs.onNavigateToAdvancedTab = {
-                coroutineScope.launch { pagerState.animateScrollToPage(SettingsTab.ADVANCED.ordinal) }
-            }
             obs.onNavigateToSystemTab = {
                 coroutineScope.launch { pagerState.animateScrollToPage(SettingsTab.SYSTEM.ordinal) }
             }
@@ -130,6 +127,20 @@ fun SettingsScreen(
             }
             obs.onScrollToFilePicker = {
                 coroutineScope.launch { systemScrollState.animateScrollTo(filePickerScrollTarget) }
+            }
+        }
+    }
+
+    DisposableEffect(globalOnboardingState) {
+        onDispose {
+            globalOnboardingState?.let { obs ->
+                obs.onNavigateToAppearanceTab = null
+                obs.onNavigateToSystemTab = null
+                obs.onScrollToThemeSelector = null
+                obs.onScrollToExpertMode = null
+                obs.onScrollToInstaller = null
+                obs.onScrollToProcessRuntime = null
+                obs.onScrollToFilePicker = null
             }
         }
     }

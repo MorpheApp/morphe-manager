@@ -75,7 +75,6 @@ class GlobalOnboardingState {
     var processRuntimeBounds by mutableStateOf<Rect?>(null)
     var filePickerBounds by mutableStateOf<Rect?>(null)
     var onNavigateToAppearanceTab: (() -> Unit)? = null
-    var onNavigateToAdvancedTab: (() -> Unit)? = null
     var onNavigateToSystemTab: (() -> Unit)? = null
     var onScrollToThemeSelector: (() -> Unit)? = null
     var onScrollToInstaller: (() -> Unit)? = null
