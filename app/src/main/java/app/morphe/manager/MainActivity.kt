@@ -434,7 +434,16 @@ private fun MorpheManager(vm: MainViewModel) {
             composable<Settings> {
                 SettingsScreen(
                     homeViewModel = homeViewModel,
-                    globalOnboardingState = if (showOnboarding) globalOnboardingState else null
+                    globalOnboardingState = if (showOnboarding) globalOnboardingState else null,
+                    onStartTour = if (!showOnboarding) {
+                        {
+                            onboardingPhase = OnboardingPhase.HOME
+                            phaseInitialStep = 0
+                            showOnboardingOverlay = true
+                            wantsOnboardingTour.value = true
+                            navController.popBackStack(HomeScreen, false)
+                        }
+                    } else null
                 )
             }
         }

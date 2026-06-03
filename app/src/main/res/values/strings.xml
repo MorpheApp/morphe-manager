@@ -913,4 +913,6 @@ Do you still want to continue?"</string>
     <string name="tour_prompt_title">Quick feature tour</string>
     <string name="tour_prompt_desc">Want a quick tour of Morphe\'s key features?</string>
     <string name="tour_prompt_confirm">Show me around</string>
+    <string name="onboarding_restart_title">Feature tour</string>
+    <string name="onboarding_restart_desc">Take a guided tour of Morphe\'s key features</string>
 </resources>

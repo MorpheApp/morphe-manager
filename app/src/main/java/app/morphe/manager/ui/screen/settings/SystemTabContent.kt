@@ -47,6 +47,7 @@ fun SystemTabContent(
     onExportDebugLogs: () -> Unit,
     onAboutClick: () -> Unit,
     onChangelogClick: () -> Unit,
+    onStartTour: (() -> Unit)? = null,
     scrollState: ScrollState = rememberScrollState(),
     onInstallerSectionPositioned: ((Rect) -> Unit)? = null,
     onInstallerScrollTarget: ((Int) -> Unit)? = null,
@@ -128,7 +129,8 @@ fun SystemTabContent(
         SectionCard {
             AboutSection(
                 onAboutClick = onAboutClick,
-                onChangelogClick = onChangelogClick
+                onChangelogClick = onChangelogClick,
+                onStartTour = onStartTour
             )
         }
     }

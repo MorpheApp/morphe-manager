@@ -81,7 +81,8 @@ fun SettingsScreen(
     updateViewModel: UpdateViewModel = koinViewModel {
         parametersOf(false)
     },
-    globalOnboardingState: GlobalOnboardingState? = null
+    globalOnboardingState: GlobalOnboardingState? = null,
+    onStartTour: (() -> Unit)? = null
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -280,6 +281,7 @@ fun SettingsScreen(
                         },
                         onAboutClick = { showAboutDialog.value = true },
                         onChangelogClick = { showChangelogDialog.value = true },
+                        onStartTour = onStartTour,
                         scrollState = systemScrollState,
                         onInstallerSectionPositioned = { globalOnboardingState?.installerSectionBounds = it },
                         onInstallerScrollTarget = { installerScrollTarget = it },
