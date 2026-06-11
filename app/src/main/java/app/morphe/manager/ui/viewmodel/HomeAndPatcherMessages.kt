@@ -72,6 +72,8 @@ object HomeAndPatcherMessages {
      */
     fun getHomeMessage(context: Context): Int {
         return homeGreetingMessage ?: run {
+            // home_greeting_1 is always shown first on a new installation.
+            // All other strings in the active time bucket are randomly shown
             val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
             val messages = listOf(R.string.home_greeting_1) + when (hour) {
                 in 5..11 -> listOf(
