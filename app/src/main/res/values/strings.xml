@@ -56,6 +56,19 @@
     <string name="home_greeting_9">Saving apps from themselves since today</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Powered by caffeine and good patches</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Rise and patch</string>
+    <string name="home_greeting_morning_2">Good morning! Apps won\'t patch themselves</string>
+    <!-- Afternoon greeting (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Afternoon slump? Patch something</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Good evening! Evening patches hit different</string>
+    <string name="home_greeting_evening_2">Winding down? Patch an app first</string>
+    <!-- Late night greeting (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Still up? So are the apps that need patching</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Peak patching hours… allegedly</string>
+    <string name="home_greeting_super_late_2">Can\'t sleep? Patch something</string>
 
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch sources</string>

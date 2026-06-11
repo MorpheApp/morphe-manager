@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import app.morphe.manager.R
 import app.morphe.manager.util.tag
+import java.util.Calendar
 import kotlin.random.Random
 
 /**
@@ -37,7 +38,7 @@ object HomeAndPatcherMessages {
 
         var currentMessageIndex = messageIndex.get(context)
         if (currentMessageIndex > messages.lastIndex) {
-            // All messages are exhausted. Reset the shuffle so the next batch is in random order.
+            // All messages are exhausted. Reset the shuffle so the next batch is in random order
             currentMessageIndex = 0
             updateSeed = true
         }
@@ -65,32 +66,46 @@ object HomeAndPatcherMessages {
     }
 
     /**
-     * Witty greeting message.
+     * Witty greeting message. Picks from a time-of-day bucket so the tone matches
+     * when the user opens the app.
      */
     fun getHomeMessage(context: Context): Int {
-        // First message is always shown as the first message for installations,
-        // and all other strings are randomly shown.
-        // Use different seed on each install, but keep the same seed across sessions
         var message = homeGreetingMessage
 
         if (message == null) {
-            message = updateValues(
-                context,
-                homeGreetingMessageIndex,
-                homeGreetingMessageSeed,
-                listOf(
+            val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+            val messages = when (hour) {
+                in 5..11 -> listOf(
+                    R.string.home_greeting_4,
+                    R.string.home_greeting_7,
+                    R.string.home_greeting_10,
+                    R.string.home_greeting_morning_1,
+                    R.string.home_greeting_morning_2,
+                )
+                in 12..16 -> listOf(
                     R.string.home_greeting_1,
                     R.string.home_greeting_2,
-                    R.string.home_greeting_3,
-                    R.string.home_greeting_4,
-                    R.string.home_greeting_5,
-                    R.string.home_greeting_6,
-                    R.string.home_greeting_7,
                     R.string.home_greeting_8,
-                    R.string.home_greeting_9,
-                    R.string.home_greeting_10,
+                    R.string.home_greeting_afternoon_1,
                 )
-            )
+                in 17..21 -> listOf(
+                    R.string.home_greeting_3,
+                    R.string.home_greeting_6,
+                    R.string.home_greeting_evening_1,
+                    R.string.home_greeting_evening_2,
+                )
+                in 22..23 -> listOf(
+                    R.string.home_greeting_5,
+                    R.string.home_greeting_9,
+                    R.string.home_greeting_late_night_1,
+                )
+                else -> listOf( // 0..4
+                    R.string.home_greeting_super_late_1,
+                    R.string.home_greeting_super_late_2,
+                )
+            }
+            // Use different seed on each install, but keep the same seed across sessions
+            message = updateValues(context, homeGreetingMessageIndex, homeGreetingMessageSeed, messages)
             homeGreetingMessage = message
         }
 
@@ -101,7 +116,7 @@ object HomeAndPatcherMessages {
      * Witty patcher message.
      */
     fun getPatcherMessage(context: Context): Int {
-        // Message changes each time called.
+        // Message changes each time called
         return updateValues(
             context,
             patcherMessageIndex,
