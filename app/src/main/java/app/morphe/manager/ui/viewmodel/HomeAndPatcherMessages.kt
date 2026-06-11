@@ -3,6 +3,7 @@ package app.morphe.manager.ui.viewmodel
 import android.content.Context
 import android.util.Log
 import app.morphe.manager.R
+import app.morphe.manager.ui.viewmodel.HomeAndPatcherMessages.getHomeMessage
 import app.morphe.manager.util.tag
 import java.util.Calendar
 import kotlin.random.Random
@@ -72,9 +73,8 @@ object HomeAndPatcherMessages {
     fun getHomeMessage(context: Context): Int {
         return homeGreetingMessage ?: run {
             val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-            val messages = when (hour) {
+            val messages = listOf(R.string.home_greeting_1) + when (hour) {
                 in 5..11 -> listOf(
-                    R.string.home_greeting_1, // pinned first on new install
                     R.string.home_greeting_4,
                     R.string.home_greeting_7,
                     R.string.home_greeting_10,
@@ -82,31 +82,27 @@ object HomeAndPatcherMessages {
                     R.string.home_greeting_morning_2,
                 )
                 in 12..16 -> listOf(
-                    R.string.home_greeting_1, // pinned first on new install
                     R.string.home_greeting_2,
                     R.string.home_greeting_8,
                     R.string.home_greeting_afternoon_1,
                 )
                 in 17..21 -> listOf(
-                    R.string.home_greeting_1, // pinned first on new install
                     R.string.home_greeting_3,
                     R.string.home_greeting_6,
                     R.string.home_greeting_evening_1,
                     R.string.home_greeting_evening_2,
                 )
                 in 22..23 -> listOf(
-                    R.string.home_greeting_1, // pinned first on new install
                     R.string.home_greeting_5,
                     R.string.home_greeting_9,
                     R.string.home_greeting_late_night_1,
                 )
                 else -> listOf( // 0..4
-                    R.string.home_greeting_1, // pinned first on new install
                     R.string.home_greeting_super_late_1,
                     R.string.home_greeting_super_late_2,
                 )
             }
-            // Use different seed on each install, but keep the same seed across sessions.
+            // Use different seed on each install, but keep the same seed across sessions
             updateValues(context, homeGreetingMessageIndex, homeGreetingMessageSeed, messages).also {
                 homeGreetingMessage = it
             }
