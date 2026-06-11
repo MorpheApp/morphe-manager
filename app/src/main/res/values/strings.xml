@@ -37,13 +37,11 @@
     <string name="home_all_apps_hidden_subtitle">You\'ve hidden all apps from the home screen</string>
 
     <!-- Home Screen - Home Greetings -->
-    <string name="home_greeting_1">What app do you want to patch?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Ready to make apps legendary again?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Buckle up, it\'s patching time</string>
+    <string name="home_greeting_1">Please choose an app to patch.</string>
+    <string name="home_greeting_2">Tim Cook is shaking in his Very Small Boots.</string>
+    <string name="home_greeting_3">Get in loser, we\'re going patching.</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Another day, another ad-blocked masterpiece</string>
+    <string name="home_greeting_4">\"It\'s a hard-knock life- For us!</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">Want to watch ads? Me neither</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
@@ -124,12 +122,12 @@
     <string name="home_download_instructions_steps_title">Instructions:</string>
     <string name="home_download_instructions_step1">Press the \'%s\' button below</string>
     <string name="home_download_instructions_step2_part1">Scroll down the webpage and press</string>
-    <string name="home_download_instructions_download_button_toast">Press download on the website, and not here 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Perfect! Now click continue below and go to the website 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Practice makes perfect, you\'re getting there! 💪</string>
-    <string name="home_download_instructions_download_button_toast_4">Still not here… still not here… 🙈</string>
-    <string name="home_download_instructions_download_button_toast_5">OK I respect the dedication 🫡</string>
-    <string name="home_download_instructions_download_button_toast_6">You are now an official Morphe button tester 🏅</string>
+    <string name="home_download_instructions_download_button_toast">This is just example of what the button looks like. Please click the actual one on the website below.</string>
+    <string name="home_download_instructions_download_button_toast_2">Again, this is just an example. the real button/'s in the link below</string>
+    <string name="home_download_instructions_download_button_toast_3">Are you blind? I guess you couldn't be operating this app if you were...</string>
+    <string name="home_download_instructions_download_button_toast_4">okay, this is just getting silly. the button's still not here.</string>
+    <string name="home_download_instructions_download_button_toast_5">I can't help you any more than I have. I'm just a text prompt.</string>
+    <string name="home_download_instructions_download_button_toast_6">Fine! Alright! you win! /" Download Succesful/" Is that what you wanted to hear?!</string>
     <string name="home_download_instructions_step3">Wait for the download to complete, and &lt;b&gt;do not install&lt;/b&gt; the APK</string>
     <string name="home_download_instructions_step3_mount">Wait for the download to complete, then &lt;b&gt;install the APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">After the download finishes, return to Morphe</string>
@@ -357,31 +355,29 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patcher_stop_confirm_description">Are you sure you want to stop the patching process?</string>
 
     <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Morphing your app into something awesome… 🏆</string>
-    <string name="patcher_message_2">Teaching old apps new tricks… 🎩</string>
-    <string name="patcher_message_3">Giving your app a digital tune-up… 🔧</string>
-    <string name="patcher_message_4">Brewing digital magic… ☕</string>
-    <string name="patcher_message_5">Coffee break recommended… ☕</string>
-    <string name="patcher_message_6">Look outside, it\'s nice out there… 🌤️</string>
-    <string name="patcher_message_7">Adjusting 1\'s and 0\'s… 🤖</string>
-    <string name="patcher_message_8">Untangling digital spaghetti… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Fixing bugs in the unpatched app… 🪲</string>
-    <string name="patcher_message_10">Great patches are worth the wait… ⏳</string>
-    <string name="patcher_message_11">Polishing pixels until they shine… 💎</string>
-    <string name="patcher_message_12">Please remain seated until the captain turns off the \"Patching in progress\" sign… 💺✈️</string>
-    <string name="patcher_message_13">Cooking up your patched app, hot and fresh… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Negotiating politely with bytecode… 🤝</string>
+    <string name="patcher_message_1">Decieving the Deceptors...</string>
+    <string name="patcher_message_2">Taking Adsense out behind the shed...</string>
+    <string name="patcher_message_3">If we can\'t get right-to-repair, this is the next best thing.</string>
+    <string name="patcher_message_4">Help\! I'm trapped in the flavor text!</string>
+    <string name="patcher_message_5">Patching patches...</string>
+    <string
+name="patcher_message_6">Please go outside.</string>
+    <string name="patcher_message_7">Lobotomizing adsense...</string>
+    <string name="patcher_message_8">Silencing Dissident code...</string>
+    <string
+name="patcher_message_9">Recombombulating discombobulators...</string>
+    <string name="patcher_message_10">Morphe claims no responsibility for the spontanious combustion of your device, although we have no idea how that would happen.</string>
+    <string name="patcher_message_11">Copy-and-pasting error logs into Google...</string>
+    <string name="patcher_message_12">If this app were a plane, it would be the one from Madagascar 2: Escape 2 Africa.</string>
+    <string name="patcher_message_13">How many patches can you add to an app before it stops being the same app? Questions questions...</string>
+    <string name="patcher_message_14">Paying Hush Money to the Google lawyers...</string>
     <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">All systems nominal… patching trajectory is stable… 🚀</string>
-    <string name="patcher_message_16">Squeezing out extra power, like juice from a digital lemon… 🍋</string>
-    <string name="patcher_message_17">Encouraging the app to accept its new, better self… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
-    <string name="patcher_message_18">Changing the app superposition from unpatched to patched… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Your app has a fever, and the only prescription is more patches… 🩺🔔</string>
-    <string name="patcher_message_20">Removing nonsense. Please stand by… 🗑️</string>
+    <string name="patcher_message_15">call me the jusdice department the way i patch over undesireable data.</string>
+    <string name="patcher_message_16">Oh boy, i sure hope John Google doesn\'t discover you\'re patching your apps...</string>
+    <string name="patcher_message_17">Now's Your Chance to \[Circumvent Youtube Prenium\]</string>
+    <string name="patcher_message_18">Shhhhh... Don\'t worry... I\'m a totally lisenced doctor...</string>
+    <string name="patcher_message_19">\"But doctor House! App patches will kill the patient\"  \"No, they need app patches to live!\"</string>
+    <string name="patcher_message_20">👦  I, too, am in this patching screen.</string>
 
     <!-- Expert patcher Screen -->
     <string name="patching_app">Patching app</string>
