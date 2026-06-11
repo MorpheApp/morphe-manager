@@ -70,9 +70,7 @@ object HomeAndPatcherMessages {
      * when the user opens the app.
      */
     fun getHomeMessage(context: Context): Int {
-        var message = homeGreetingMessage
-
-        if (message == null) {
+        return homeGreetingMessage ?: run {
             val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
             val messages = when (hour) {
                 in 5..11 -> listOf(
@@ -104,12 +102,11 @@ object HomeAndPatcherMessages {
                     R.string.home_greeting_super_late_2,
                 )
             }
-            // Use different seed on each install, but keep the same seed across sessions
-            message = updateValues(context, homeGreetingMessageIndex, homeGreetingMessageSeed, messages)
-            homeGreetingMessage = message
+            // Use different seed on each install, but keep the same seed across sessions.
+            updateValues(context, homeGreetingMessageIndex, homeGreetingMessageSeed, messages).also {
+                homeGreetingMessage = it
+            }
         }
-
-        return message
     }
 
     /**
