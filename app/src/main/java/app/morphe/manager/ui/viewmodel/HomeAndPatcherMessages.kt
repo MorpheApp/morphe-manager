@@ -85,21 +85,29 @@ object HomeAndPatcherMessages {
                     R.string.home_greeting_2,
                     R.string.home_greeting_8,
                     R.string.home_greeting_afternoon_1,
+                    R.string.home_greeting_afternoon_2,
+                    R.string.home_greeting_afternoon_3,
                 )
                 in 17..21 -> listOf(
                     R.string.home_greeting_3,
                     R.string.home_greeting_6,
                     R.string.home_greeting_evening_1,
                     R.string.home_greeting_evening_2,
+                    R.string.home_greeting_evening_3,
                 )
                 in 22..23 -> listOf(
                     R.string.home_greeting_5,
                     R.string.home_greeting_9,
                     R.string.home_greeting_late_night_1,
+                    R.string.home_greeting_late_night_2,
+                    R.string.home_greeting_late_night_3,
                 )
                 else -> listOf( // 0..4
                     R.string.home_greeting_super_late_1,
                     R.string.home_greeting_super_late_2,
+                    R.string.home_greeting_super_late_3,
+                    R.string.home_greeting_super_late_4,
+                    R.string.home_greeting_super_late_5,
                 )
             }
             // Use different seed on each install, but keep the same seed across sessions
