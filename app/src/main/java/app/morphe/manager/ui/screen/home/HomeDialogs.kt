@@ -51,6 +51,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.*
 import app.morphe.patcher.patch.AppTarget
+import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -115,7 +116,7 @@ fun HomeDialogs(
             onNeedApk = {
                 homeViewModel.showApkAvailabilityDialog = false
                 scope.launch {
-                    delay(50)
+                    delay(50.milliseconds)
                     homeViewModel.showDownloadInstructionsDialog = true
                     homeViewModel.resolveDownloadRedirect()
                 }
@@ -229,15 +230,11 @@ fun HomeDialogs(
 
         UnsupportedVersionWarningDialog(
             version = dialogState.version,
+            versionCode = dialogState.versionCode,
             recommendedVersion = dialogState.recommendedVersion?.version,
-            allCompatibleVersions = dialogState.allCompatibleVersions.map { it.version ?: "" }.filter { it.isNotEmpty() },
-            versionDescriptions = dialogState.allCompatibleVersions
-                .mapNotNull { target ->
-                    val v = target.version ?: return@mapNotNull null
-                    val d = target.description ?: return@mapNotNull null
-                    v to d
-                }
-                .toMap(),
+            allCompatibleVersions = dialogState.compatibleVersionNames,
+            versionDescriptions = dialogState.compatibleVersionDescriptions,
+            compatibleVersionCodes = dialogState.compatibleVersionCodes,
             experimentalVersions = homeViewModel.getExperimentalVersionsForPackage(dialogState.packageName),
             isExperimental = dialogState.isExperimental,
             isExpertMode = isExpertMode,
@@ -691,6 +688,13 @@ private fun ApkAvailabilityDialog(
                             .mapNotNull { b -> b.target.version?.let { v -> b.target.description?.let { d -> v to d } } }
                             .toMap(),
                         incompatibleSdkVersions = incompatibleSdkVersions,
+                        versionCodes = compatibleVersions
+                            .mapNotNull { b ->
+                                val v = b.target.version ?: return@mapNotNull null
+                                val codes = b.buildCodes ?: return@mapNotNull null
+                                v to codes
+                            }
+                            .toMap(),
                     )
                 }
             } else {
@@ -707,7 +711,11 @@ private fun ApkAvailabilityDialog(
 
                 VersionListCard(
                     versions = listOf(recommendedVersion?.version ?: anyString),
-                    showUnpatchedBadge = true
+                    showUnpatchedBadge = true,
+                    versionCodes = compatibleVersions
+                        .firstOrNull { it.target.version == recommendedVersion?.version }
+                        ?.let { b -> b.target.version?.let { v -> b.buildCodes?.let { mapOf(v to it) } } }
+                        ?: emptyMap()
                 )
             }
 
@@ -1178,15 +1186,18 @@ private fun InstalledAppPickerDialog(
 @Composable
 private fun UnsupportedVersionWarningDialog(
     version: String,
+    versionCode: Long? = null,
     recommendedVersion: String?,
     allCompatibleVersions: List<String>,
     versionDescriptions: Map<String, String> = emptyMap(),
+    compatibleVersionCodes: Map<String, Set<Int>> = emptyMap(),
     experimentalVersions: Set<String> = emptySet(),
     isExperimental: Boolean = false,
     isExpertMode: Boolean,
     onDismiss: () -> Unit,
     onProceed: () -> Unit
 ) {
+    val versionCodeMismatch = !isExperimental && versionCode != null && version == recommendedVersion
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_dialog_unsupported_version_dialog_title),
@@ -1210,10 +1221,11 @@ private fun UnsupportedVersionWarningDialog(
         ) {
             Text(
                 text = stringResource(
-                    if (isExperimental)
-                        R.string.home_dialog_unsupported_version_experimental_description
-                    else
-                        R.string.home_dialog_unsupported_version_dialog_description
+                    when {
+                        isExperimental -> R.string.home_dialog_unsupported_version_experimental_description
+                        versionCodeMismatch -> R.string.home_dialog_unsupported_version_build_mismatch_description
+                        else -> R.string.home_dialog_unsupported_version_dialog_description
+                    }
                 ),
                 style = MaterialTheme.typography.bodyLarge,
                 color = secondaryColor,
@@ -1248,16 +1260,26 @@ private fun UnsupportedVersionWarningDialog(
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(
-                                text = version,
-                                style = MaterialTheme.typography.bodyLarge,
-                                fontFamily = FontFamily.Monospace,
-                                fontWeight = FontWeight.Bold,
-                                color = if (isExperimental)
-                                    MaterialTheme.colorScheme.tertiary
-                                else
-                                    MaterialTheme.colorScheme.error
-                            )
+                            Column {
+                                Text(
+                                    text = version,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    fontFamily = FontFamily.Monospace,
+                                    fontWeight = FontWeight.Bold,
+                                    color = if (isExperimental)
+                                        MaterialTheme.colorScheme.tertiary
+                                    else
+                                        MaterialTheme.colorScheme.error
+                                )
+                                if (versionCode != null) {
+                                    Text(
+                                        text = stringResource(R.string.home_dialog_unsupported_version_build, versionCode),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        fontFamily = FontFamily.Monospace,
+                                        color = secondaryColor
+                                    )
+                                }
+                            }
 
                             if (isExperimental) {
                                 InfoBadge(
@@ -1293,7 +1315,8 @@ private fun UnsupportedVersionWarningDialog(
                                 .takeIf { it >= 0 } ?: 0,
                             isCompatible = true,
                             experimentalVersions = experimentalVersions,
-                            descriptions = versionDescriptions
+                            descriptions = versionDescriptions,
+                            versionCodes = compatibleVersionCodes
                         )
                     }
                 } else if (recommendedVersion != null) {
@@ -1309,7 +1332,8 @@ private fun UnsupportedVersionWarningDialog(
                             versions = listOf(recommendedVersion),
                             recommendedIndex = 0,
                             isCompatible = true,
-                            experimentalVersions = experimentalVersions
+                            experimentalVersions = experimentalVersions,
+                            versionCodes = compatibleVersionCodes
                         )
                     }
                 }
@@ -1813,6 +1837,7 @@ private fun VersionListCard(
     experimentalVersions: Set<String> = emptySet(),
     descriptions: Map<String, String> = emptyMap(),
     incompatibleSdkVersions: Set<String> = emptySet(),
+    versionCodes: Map<String, Set<Int>> = emptyMap()
 ) {
     if (versions.isEmpty()) return
 
@@ -1844,6 +1869,7 @@ private fun VersionListCard(
                 val isExperimentalVersion = version in experimentalVersions
                 val isIncompatibleSdk = version in incompatibleSdkVersions
                 val versionDescription = descriptions[version]
+                val buildCode = versionCodes[version]?.firstOrNull()
 
                 // Resolve badge once - drives both the badge composable and version text color
                 val badge: @Composable (() -> Unit)? = when {
@@ -1903,6 +1929,16 @@ private fun VersionListCard(
                             overflow = TextOverflow.Ellipsis
                         )
                         badge?.invoke()
+                    }
+
+                    // Build number
+                    if (buildCode != null) {
+                        Text(
+                            text = stringResource(R.string.home_dialog_unsupported_version_build, buildCode),
+                            style = MaterialTheme.typography.bodySmall,
+                            fontFamily = FontFamily.Monospace,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
                     }
 
                     // Optional per-version description

@@ -194,6 +194,9 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_dialog_unsupported_version_dialog_proceed">Proceed anyway</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Compatible versions:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Unsupported</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">This is a different build of the same version. The patches require a specific build</string>
     <string name="home_dialog_wrong_package_title">Wrong package selected</string>
     <string name="home_dialog_wrong_package_description">The selected APK is not for the application you intended to patch</string>
     <string name="home_dialog_expected_package">Expected package:</string>

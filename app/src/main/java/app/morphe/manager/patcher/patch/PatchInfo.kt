@@ -1,6 +1,7 @@
 package app.morphe.manager.patcher.patch
 
 import androidx.compose.runtime.Immutable
+import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.ApkFileType
 import kotlinx.collections.immutable.ImmutableList
@@ -62,8 +63,7 @@ data class PatchInfo(
                     versionCodes = compatibility.targets
                         .mapNotNull { target ->
                             val v = target.version ?: return@mapNotNull null
-                            val codes = target.versionCodes?.values?.toImmutableSet()?.takeIf { it.isNotEmpty() }
-                                ?: return@mapNotNull null
+                            val codes = target.buildCodesOrNull()?.toImmutableSet() ?: return@mapNotNull null
                             v to codes
                         }
                         .toMap()
@@ -96,7 +96,7 @@ data class PatchInfo(
             if (pkg.versions == null) return@any true
             if (versionName == null || versionName !in pkg.versions) return@any false
             val allowedCodes = pkg.versionCodes?.get(versionName) ?: return@any true
-            versionCode == null || allowedCodes.any { it.toLong() == versionCode }
+            versionCode == null || versionCode.toInt() in allowedCodes
         }
     }
 
@@ -156,6 +156,9 @@ data class CompatiblePackage(
     /** Per-version allowed version codes (union of all declared ABI codes). Null means no constraint. */
     val versionCodes: ImmutableMap<String, ImmutableSet<Int>>? = null,
 )
+
+/** Returns the union of all ABI-specific version codes, or null if none are declared. */
+fun AppTarget.buildCodesOrNull(): Set<Int>? = versionCodes?.values?.toSet()?.ifEmpty { null }
 
 @Immutable
 data class Option<T>(

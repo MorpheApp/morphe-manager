@@ -80,8 +80,11 @@ enum class BundleUpdateStatus {
 data class UnsupportedVersionDialogState(
     val packageName: String,
     val version: String,
+    val versionCode: Long? = null,
     val recommendedVersion: AppTarget?,
-    val allCompatibleVersions: List<AppTarget> = emptyList(),
+    val compatibleVersionNames: List<String> = emptyList(),
+    val compatibleVersionDescriptions: Map<String, String> = emptyMap(),
+    val compatibleVersionCodes: Map<String, Set<Int>> = emptyMap(),
     /** True if the selected version is marked as experimental in the patch bundle. */
     val isExperimental: Boolean = false
 )
@@ -93,7 +96,9 @@ data class UnsupportedVersionDialogState(
 data class BundledAppTarget(
     val target: AppTarget,
     val bundleUid: Int,
-    val bundleName: String
+    val bundleName: String,
+    /** Allowed build codes for this version, sourced from the patch bundle. Null means no constraint. */
+    val buildCodes: Set<Int>? = null
 )
 
 /** Dialog state for wrong package warning. */
@@ -1977,13 +1982,24 @@ class HomeViewModel(
 
         if (versionMismatch && !allowIncompatible) {
             val recommendedVersion = recommendedVersions[selectedApp.packageName]
-            val allVersions = compatibleVersions[selectedApp.packageName]?.map { it.target } ?: emptyList()
+            val allBundled = compatibleVersions[selectedApp.packageName] ?: emptyList()
             pendingSelectedApp = selectedApp
             showUnsupportedVersionDialog = UnsupportedVersionDialogState(
                 packageName = selectedApp.packageName,
                 version = selectedApp.version ?: "unknown",
+                versionCode = selectedApp.versionCode,
                 recommendedVersion = recommendedVersion,
-                allCompatibleVersions = allVersions,
+                compatibleVersionNames = allBundled.mapNotNull { it.target.version },
+                compatibleVersionDescriptions = allBundled.mapNotNull { b ->
+                    val v = b.target.version ?: return@mapNotNull null
+                    val d = b.target.description ?: return@mapNotNull null
+                    v to d
+                }.toMap(),
+                compatibleVersionCodes = allBundled.mapNotNull { b ->
+                    val v = b.target.version ?: return@mapNotNull null
+                    val codes = b.buildCodes ?: return@mapNotNull null
+                    v to codes
+                }.toMap(),
                 isExperimental = isVersionExperimental
             )
             cleanupPendingData(keepSelectedApp = true, keepBundleUid = true)
@@ -1995,13 +2011,24 @@ class HomeViewModel(
         // - Experimental mode OFF → UnsupportedVersionWarningDialog
         if (isVersionExperimental && !allowIncompatible) {
             val recommendedVersion = recommendedVersions[selectedApp.packageName]
-            val allVersions = compatibleVersions[selectedApp.packageName]?.map { it.target } ?: emptyList()
+            val allBundled = compatibleVersions[selectedApp.packageName] ?: emptyList()
             pendingSelectedApp = selectedApp
             val state = UnsupportedVersionDialogState(
                 packageName = selectedApp.packageName,
                 version = selectedApp.version ?: "unknown",
+                versionCode = selectedApp.versionCode,
                 recommendedVersion = recommendedVersion,
-                allCompatibleVersions = allVersions,
+                compatibleVersionNames = allBundled.mapNotNull { it.target.version },
+                compatibleVersionDescriptions = allBundled.mapNotNull { b ->
+                    val v = b.target.version ?: return@mapNotNull null
+                    val d = b.target.description ?: return@mapNotNull null
+                    v to d
+                }.toMap(),
+                compatibleVersionCodes = allBundled.mapNotNull { b ->
+                    val v = b.target.version ?: return@mapNotNull null
+                    val codes = b.buildCodes ?: return@mapNotNull null
+                    v to codes
+                }.toMap(),
                 isExperimental = true
             )
             if (isExperimentalModeEnabled) {
@@ -2595,6 +2622,8 @@ class HomeViewModel(
     ): Map<String, List<BundledAppTarget>> {
         // packageName → bundleUid → version → AppTarget
         val targetsByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, AppTarget>>>()
+        // packageName → bundleUid → version → build codes (parallel to targetsByPackage)
+        val codesByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, Set<Int>>>>()
 
         bundleInfo.forEach { (bundleUid, info) ->
             if (enabledBundleUids.isNotEmpty() && bundleUid !in enabledBundleUids) return@forEach
@@ -2605,19 +2634,23 @@ class HomeViewModel(
                     val bundleMap = targetsByPackage
                         .getOrPut(packageName) { mutableMapOf() }
                         .getOrPut(bundleUid) { mutableMapOf() }
+                    val codesMap = codesByPackage
+                        .getOrPut(packageName) { mutableMapOf() }
+                        .getOrPut(bundleUid) { mutableMapOf() }
 
                     pkg.versions?.forEach { version ->
                         val isExperimental = pkg.experimentalVersions?.contains(version) == true
                         // If a version appears in multiple patches of the same bundle, prefer stable
                         if (version !in bundleMap || !isExperimental) {
-                            val description = pkg.versionDescriptions?.get(version)
-                            val minSdk = pkg.versionMinSdks?.get(version)
                             bundleMap[version] = AppTarget(
                                 version = version,
                                 isExperimental = isExperimental,
-                                description = description,
-                                minSdk = minSdk,
+                                description = pkg.versionDescriptions?.get(version),
+                                minSdk = pkg.versionMinSdks?.get(version),
                             )
+                            pkg.versionCodes?.get(version)?.takeIf { it.isNotEmpty() }?.let {
+                                codesMap[version] = it.toSet()
+                            }
                         }
                     }
                 }
@@ -2626,17 +2659,19 @@ class HomeViewModel(
 
         // Flatten: bundles ordered by display name, versions newest→oldest within each bundle
         return targetsByPackage
-            .mapValues { (_, byBundle) ->
+            .mapValues { (packageName, byBundle) ->
                 byBundle.entries
                     .sortedWith(compareBy({ it.key != DEFAULT_SOURCE_UID }, { bundleNames[it.key] ?: "" }))
                     .flatMap { (uid, versionMap) ->
+                        val codesForBundle = codesByPackage[packageName]?.get(uid)
                         versionMap.values
                             .sortedDescending()
                             .map { target ->
                                 BundledAppTarget(
                                     target = target,
                                     bundleUid = uid,
-                                    bundleName = bundleNames[uid] ?: "Bundle $uid"
+                                    bundleName = bundleNames[uid] ?: "Bundle $uid",
+                                    buildCodes = target.version?.let { codesForBundle?.get(it) }
                                 )
                             }
                     }
