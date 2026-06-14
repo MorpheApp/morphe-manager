@@ -1446,7 +1446,7 @@ class HomeViewModel(
             savedJob?.await()?.let { pendingSavedApkInfo = it }
             installedJob?.await()?.let { (installed, info) ->
                 pendingTargetAppInstalled = installed
-                pendingInstalledApkInfo = info?.takeIf { isInstalledVersionCompatible(it.version) }
+                pendingInstalledApkInfo = info?.takeIf { isInstalledVersionCompatible(it.version, it.versionCode) }
             }
         }
 
@@ -1501,10 +1501,13 @@ class HomeViewModel(
      * Returns true if [installedVersion] is listed in [pendingCompatibleVersions],
      * or if the compatible list is empty / contains an "any version" target.
      */
-    private fun isInstalledVersionCompatible(installedVersion: String): Boolean {
+    private fun isInstalledVersionCompatible(installedVersion: String, installedVersionCode: Long?): Boolean {
         val compatible = pendingCompatibleVersions
         if (compatible.isEmpty() || compatible.any { it.target.version == null }) return true
-        return compatible.any { it.target.version == installedVersion }
+        return compatible.any { entry ->
+            entry.target.version == installedVersion &&
+                (entry.buildCodes == null || installedVersionCode == null || installedVersionCode.toInt() in entry.buildCodes)
+        }
     }
 
     /**
