@@ -148,28 +148,5 @@ sealed class PatchBundleInfo {
 
             bundle.uid to patches
         }
-
-        /**
-         * Algorithm for determining whether all required options have been set.
-         */
-        inline fun Iterable<Scoped>.requiredOptionsSet(
-            allowIncompatible: Boolean,
-            crossinline isSelected: (Scoped, PatchInfo) -> Boolean,
-            crossinline optionsForPatch: (Scoped, PatchInfo) -> Map<String, Any?>?
-        ) = all bundle@{ bundle ->
-            bundle
-                .patchSequence(allowIncompatible)
-                .filter { isSelected(bundle, it) }
-                .all patch@{
-                    if (it.options.isNullOrEmpty()) return@patch true
-                    val opts by lazy { optionsForPatch(bundle, it).orEmpty() }
-
-                    it.options.all option@{ option ->
-                        if (!option.required || option.default != null) return@option true
-
-                        option.key in opts
-                    }
-                }
-        }
     }
 }

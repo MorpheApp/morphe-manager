@@ -55,6 +55,8 @@ import java.nio.file.Files
 import java.util.UUID
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 @OptIn(SavedStateHandleSaveableApi::class)
 class PatcherViewModel(
@@ -321,8 +323,8 @@ class PatcherViewModel(
     }
 
     private val workManager = WorkManager.getInstance(app)
-    private val _patcherSucceeded = MediatorLiveData<Boolean?>()
-    val patcherSucceeded: LiveData<Boolean?> get() = _patcherSucceeded
+    val patcherSucceeded: LiveData<Boolean?>
+        field: MediatorLiveData<Boolean?> = MediatorLiveData()
     private var currentWorkSource: LiveData<WorkInfo?>? = null
     private val handledFailureIds = mutableSetOf<UUID>()
     private var forceKeepLocalInput = false
@@ -681,7 +683,7 @@ class PatcherViewModel(
             app.toast(app.getString(R.string.patched_app_save_failed_toast))
         } else {
             app.toast(app.getString(R.string.save_apk_success))
-            delay(2000)
+            delay(2.seconds)
         }
 
         if (saved) triggerNotificationPromptIfNeeded()
@@ -776,7 +778,7 @@ class PatcherViewModel(
                 ) {
                     _showLongStepWarning.value = true
                 }
-                delay(250)
+                delay(250.milliseconds)
             }
             _showLongStepWarning.value = false
         }
@@ -883,9 +885,9 @@ class PatcherViewModel(
 
     private fun observeWorker(id: UUID) {
         val source = workManager.getWorkInfoByIdLiveData(id)
-        currentWorkSource?.let { _patcherSucceeded.removeSource(it) }
+        currentWorkSource?.let { patcherSucceeded.removeSource(it) }
         currentWorkSource = source
-        _patcherSucceeded.addSource(source) { workInfo ->
+        patcherSucceeded.addSource(source) { workInfo ->
             when (workInfo?.state) {
                 WorkInfo.State.SUCCEEDED -> {
                     forceKeepLocalInput = false
@@ -899,7 +901,7 @@ class PatcherViewModel(
                                 // Delete temporary input file after saving
                                 cleanupTemporaryInput()
                                 refreshExportMetadata()
-                                _patcherSucceeded.value = true
+                                patcherSucceeded.value = true
                             }
                         }
                     }
@@ -907,13 +909,13 @@ class PatcherViewModel(
 
                 WorkInfo.State.FAILED -> {
                     handleWorkerFailure(workInfo)
-                    _patcherSucceeded.value = false
+                    patcherSucceeded.value = false
                 }
 
                 WorkInfo.State.RUNNING,
                 WorkInfo.State.ENQUEUED,
-                WorkInfo.State.BLOCKED -> _patcherSucceeded.value = null
-                else -> _patcherSucceeded.value = null
+                WorkInfo.State.BLOCKED -> patcherSucceeded.value = null
+                else -> patcherSucceeded.value = null
             }
         }
     }

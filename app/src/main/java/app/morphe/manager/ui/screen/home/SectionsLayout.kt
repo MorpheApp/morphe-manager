@@ -70,6 +70,7 @@ import app.morphe.manager.util.KnownApps
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 /** Data describing one side of a swipe action - icon, label, and colors. */
 private data class SwipeActionConfig(
@@ -810,7 +811,7 @@ fun MainAppsSection(
         } else {
             // Small delay so Compose has one frame to lay out the real cards before the
             // shimmer fades out - prevents a single-frame empty gap.
-            if (stableLoadingState.value) delay(50)
+            if (stableLoadingState.value) delay(50.milliseconds)
             stableLoadingState.value = false
         }
     }
@@ -1353,11 +1354,11 @@ private fun DynamicAppCard(
             offsetX.snapTo(0f)
             return@LaunchedEffect
         }
-        delay(800)
+        delay(800.milliseconds)
         val nudge = with(density) { 72.dp.toPx() }
         offsetX.animateTo(nudge,  tween(500, easing = FastOutSlowInEasing))
         offsetX.animateTo(0f,     tween(400, easing = FastOutSlowInEasing))
-        delay(250)
+        delay(250.milliseconds)
         offsetX.animateTo(-nudge, tween(500, easing = FastOutSlowInEasing))
         offsetX.animateTo(0f,     tween(400, easing = FastOutSlowInEasing))
         onGestureHintShown()

@@ -65,6 +65,8 @@ import java.util.zip.CRC32
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import kotlin.time.Clock
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 /** Bundle update status for snackbar display. */
 enum class BundleUpdateStatus {
@@ -759,7 +761,7 @@ class HomeViewModel(
             try {
                 patchBundleRepository.updateCheck()
                 checkForManagerUpdates()
-                delay(500)
+                delay(500.milliseconds)
             } finally {
                 _isRefreshing.value = false
             }
@@ -874,7 +876,7 @@ class HomeViewModel(
             if (releaseAgeSeconds < MANAGER_UPDATE_SHOW_DELAY_SECONDS) {
                 val remainingMs = (MANAGER_UPDATE_SHOW_DELAY_SECONDS - releaseAgeSeconds) * 1_000L
                 Log.d(tag, "Manager update ${update.version} is ${releaseAgeSeconds}s old, waiting ${remainingMs / 1000}s before showing banner")
-                delay(remainingMs)
+                delay(remainingMs.milliseconds)
             }
 
             updatedManagerVersion = update.version
@@ -975,7 +977,7 @@ class HomeViewModel(
         val toastRepeater = launch(Dispatchers.Main) {
             try {
                 while (isActive) {
-                    delay(1_750)
+                    delay(1_750.milliseconds)
                     progressToast.show()
                 }
             } catch (_: CancellationException) {
@@ -1050,9 +1052,8 @@ class HomeViewModel(
         }
         patchBundleRepository.bundleUpdateProgress
             .dropWhile { it == null }
-            .filter { it == null }
-            .first()
-        delay(1_500)
+            .first { it == null }
+        delay(1.5.seconds)
         showSwipeGestureHint.value = true
     }
 
@@ -1765,7 +1766,7 @@ class HomeViewModel(
             }
             // Wait for patches to be ready. Cap at 30 s to avoid hanging forever when
             // no patch sources are configured (installedAppsLoading never clears in that case)
-            withTimeoutOrNull(30_000L) {
+            withTimeoutOrNull(30.seconds) {
                 snapshotFlow { installedAppsLoading }.first { !it }
             }
             handleApkSelection(uri)
