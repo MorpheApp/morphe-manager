@@ -112,8 +112,8 @@
     <string name="home_apk_availability_incompatible_label">Incompatible</string>
     <string name="home_apk_availability_yes">Yes, help me find an APK</string>
     <string name="home_apk_availability_no">No, I already have an APK</string>
-    <string name="home_apk_use_saved_with_version">Use saved APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Use installed APK (v%s)</string>
+    <string name="home_apk_use_saved">Use saved APK</string>
+    <string name="home_apk_use_installed">Use installed APK</string>
     <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
     <string name="home_version_requires_android">Requires Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Not supported on this device</string>

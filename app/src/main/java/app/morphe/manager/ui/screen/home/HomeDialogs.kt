@@ -623,10 +623,8 @@ private fun ApkAvailabilityDialog(
                 // Saved APK button - always shown when a saved APK exists
                 if (savedApkInfo != null) {
                     MorpheDialogOutlinedButton(
-                        text = stringResource(
-                            R.string.home_apk_use_saved_with_version,
-                            savedApkInfo.version
-                        ),
+                        text = stringResource(R.string.home_apk_use_saved),
+                        textSuffix = buildVersionSuffix(savedApkInfo.version, savedApkInfo.versionCode),
                         onClick = onUseSaved,
                         icon = Icons.Outlined.History,
                         modifier = Modifier.fillMaxWidth()
@@ -636,10 +634,8 @@ private fun ApkAvailabilityDialog(
                 // Installed APK button - hidden when saved mono-APK covers the same split version
                 if (installedApkInfo != null && !preferSavedOverInstalled) {
                     MorpheDialogOutlinedButton(
-                        text = stringResource(
-                            R.string.home_apk_use_installed_with_version,
-                            installedApkInfo.version
-                        ),
+                        text = stringResource(R.string.home_apk_use_installed),
+                        textSuffix = buildVersionSuffix(installedApkInfo.version, installedApkInfo.versionCode),
                         onClick = onUseInstalled,
                         icon = Icons.Outlined.PhoneAndroid,
                         modifier = Modifier.fillMaxWidth()
@@ -2485,3 +2481,6 @@ fun SimpleBundleSelectDialog(
         }
     }
 }
+
+private fun buildVersionSuffix(version: String, versionCode: Long?): String =
+    if (versionCode != null) "v$version ($versionCode)" else "v$version"
