@@ -34,6 +34,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * Home Screen with 5-section layout.
@@ -230,7 +231,7 @@ fun HomeScreen(
                     homeViewModel.markSwipeGestureHintShown()
                     if (onboardingState != null && onboardingState.swipeActive) {
                         scope.launch {
-                            delay(600)
+                            delay(600.milliseconds)
                             if (onboardingState.swipeActive) homeViewModel.triggerSwipeGestureHint()
                         }
                     }

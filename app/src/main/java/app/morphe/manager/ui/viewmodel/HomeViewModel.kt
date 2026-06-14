@@ -121,12 +121,14 @@ data class QuickPatchParams(
 data class SavedApkInfo(
     val fileName: String,
     val filePath: String,
-    val version: String
+    val version: String,
+    val versionCode: Long? = null
 )
 
 /** Installed APK information for display in APK selection dialog. */
 data class InstalledApkInfo(
     val version: String,
+    val versionCode: Long? = null,
     val apkPath: String,
     val splitPaths: List<String> = emptyList()
 ) {
@@ -1480,7 +1482,8 @@ class HomeViewModel(
             return SavedApkInfo(
                 fileName = file.name,
                 filePath = file.absolutePath,
-                version = version
+                version = version,
+                versionCode = resolvedData.packageInfo?.let { pm.getVersionCode(it) }
             )
         } catch (e: Exception) {
             Log.e(tag, "Failed to load saved APK info", e)
@@ -1549,7 +1552,7 @@ class HomeViewModel(
             val splitPaths = appInfo.splitSourceDirs
                 ?.filter { File(it).exists() }
                 ?: emptyList()
-            true to InstalledApkInfo(version = version, apkPath = sourceDir, splitPaths = splitPaths)
+            true to InstalledApkInfo(version = version, versionCode = pm.getVersionCode(pkgInfo), apkPath = sourceDir, splitPaths = splitPaths)
         } catch (e: Exception) {
             Log.e(tag, "Failed to load installed app info", e)
             false to null
@@ -1581,6 +1584,7 @@ class HomeViewModel(
                         SelectedApp.Local(
                             packageName = packageName,
                             version = installedInfo.version,
+                            versionCode = installedInfo.versionCode,
                             file = archive,
                             temporary = true,
                             fromInstalledDevice = true
@@ -1593,6 +1597,7 @@ class HomeViewModel(
                         SelectedApp.Local(
                             packageName = packageName,
                             version = installedInfo.version,
+                            versionCode = installedInfo.versionCode,
                             file = tempFile,
                             temporary = true,
                             fromInstalledDevice = true
@@ -1647,6 +1652,7 @@ class HomeViewModel(
                                     isSystemApp = (appInfo.flags and ApplicationInfo.FLAG_SYSTEM) != 0,
                                     info = InstalledApkInfo(
                                         version = version,
+                                        versionCode = pm.getVersionCode(pkgInfo),
                                         apkPath = sourceDir,
                                         splitPaths = splitPaths
                                     )
@@ -1681,6 +1687,7 @@ class HomeViewModel(
                         SelectedApp.Local(
                             packageName = item.packageName,
                             version = item.info.version,
+                            versionCode = item.info.versionCode,
                             file = archive,
                             temporary = true,
                             fromInstalledDevice = true
@@ -1693,6 +1700,7 @@ class HomeViewModel(
                         SelectedApp.Local(
                             packageName = item.packageName,
                             version = item.info.version,
+                            versionCode = item.info.versionCode,
                             file = tempFile,
                             temporary = true,
                             fromInstalledDevice = true
@@ -1818,6 +1826,7 @@ class HomeViewModel(
                     SelectedApp.Local(
                         packageName = packageName,
                         version = savedInfo.version,
+                        versionCode = savedInfo.versionCode,
                         file = file,
                         temporary = false // Don't delete saved APK files
                     )
@@ -1925,7 +1934,7 @@ class HomeViewModel(
         // Scoped.universal = compatiblePackages == null (applies to any package/version).
         val bundles = withContext(Dispatchers.IO) {
             patchBundleRepository
-                .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
+                .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version, selectedApp.versionCode)
                 .first()
         }
 
@@ -2034,7 +2043,7 @@ class HomeViewModel(
         allowIncompatible: Boolean
     ) {
         val allBundles = patchBundleRepository
-            .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
+            .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version, selectedApp.versionCode)
             .first()
 
         if (allBundles.isEmpty()) {
@@ -2711,6 +2720,7 @@ class HomeViewModel(
                 SelectedApp.Local(
                     packageName = packageInfo.packageName,
                     version = packageInfo.versionName ?: "unknown",
+                    versionCode = pm.getVersionCode(packageInfo),
                     file = tempFile,
                     temporary = true
                 )

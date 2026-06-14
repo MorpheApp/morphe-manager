@@ -186,7 +186,8 @@ class PatcherViewModel(
     private suspend fun gatherScopedBundles(): Map<Int, PatchBundleInfo.Scoped> =
         patchBundleRepository.scopedBundleInfoFlow(
             packageName,
-            input.selectedApp.version
+            input.selectedApp.version,
+            input.selectedApp.versionCode
         ).first().associateBy { it.uid }
 
     suspend fun collectSelectedBundleMetadata(): Pair<List<String>, List<String>> {
@@ -603,7 +604,8 @@ class PatcherViewModel(
         // This ensures all applied patches are correctly saved
         val scopedBundlesForSelection = patchBundleRepository.scopedBundleInfoFlow(
             packageName,
-            input.selectedApp.version
+            input.selectedApp.version,
+            input.selectedApp.versionCode
         ).first().associateBy { it.uid }
         val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundlesForSelection)
         val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundlesForSelection)
