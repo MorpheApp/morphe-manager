@@ -1846,9 +1846,9 @@ class HomeViewModel(
             }
 
             if (selectedApp != null) {
-                // The saved file is a merged mono-APK signed with our keystore.
-                // Skip signature verification to avoid a false "invalid signature" dialog
-                processSelectedAppIgnoringSignature(selectedApp)
+                // Saved file may be signed with our keystore - skip signature check.
+                // Version/versionCode check still runs via processSelectedApp.
+                processSelectedApp(selectedApp, skipSplitCheck = true)
             } else {
                 cleanupPendingData()
             }
