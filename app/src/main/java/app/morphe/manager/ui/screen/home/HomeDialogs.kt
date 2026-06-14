@@ -9,6 +9,7 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -1795,9 +1796,10 @@ private fun SelectableVersionListCard(
                                     target.isExperimental -> MaterialTheme.colorScheme.tertiary
                                     else -> LocalDialogTextColor.current
                                 },
-                                modifier = Modifier.weight(1f),
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .basicMarquee(iterations = Int.MAX_VALUE),
                                 maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
                             )
                             badge?.invoke()
                         }
