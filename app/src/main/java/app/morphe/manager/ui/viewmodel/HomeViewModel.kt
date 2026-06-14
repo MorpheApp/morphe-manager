@@ -1721,7 +1721,9 @@ class HomeViewModel(
                 }
             }
             if (selectedApp != null) {
-                processSelectedAppIgnoringSignature(selectedApp)
+                // Installed APK may be signed with our keystore - skip signature check.
+                // Version/versionCode check still runs via processSelectedApp.
+                processSelectedApp(selectedApp, skipSplitCheck = true)
             } else {
                 app.toast(app.getString(R.string.home_invalid_apk_io_error))
                 cleanupPendingData()
