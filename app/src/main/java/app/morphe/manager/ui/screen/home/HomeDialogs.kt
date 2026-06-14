@@ -1161,7 +1161,11 @@ private fun InstalledAppPickerDialog(
                                     overflow = TextOverflow.Ellipsis
                                 )
                                 Text(
-                                    text = "v${item.info.version}",
+                                    text = if (item.info.versionCode != null) {
+                                        "v${item.info.version} (${item.info.versionCode})"
+                                    } else {
+                                        "v${item.info.version}"
+                                    },
                                     style = MaterialTheme.typography.bodySmall,
                                     color = secondaryColor.copy(alpha = 0.6f),
                                     maxLines = 1,
