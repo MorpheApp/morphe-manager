@@ -1,3 +1,16 @@
+# [1.22.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.21.0...v1.22.0-dev.1) (2026-06-15)
+
+
+### Bug Fixes
+
+* Show install error instead of uninstall dialog when target package is not installed ([6a7dcc1](https://github.com/MorpheApp/morphe-manager/commit/6a7dcc1089dbff3f27539d740b1ee782bb29637d))
+
+
+### Features
+
+* Check `versionCode` when resolving patch compatibility ([#639](https://github.com/MorpheApp/morphe-manager/issues/639)) ([08889f3](https://github.com/MorpheApp/morphe-manager/commit/08889f319abc4fe41eb887e45f1666f6cbe5a014))
+* Show home greetings based on time of day ([#632](https://github.com/MorpheApp/morphe-manager/issues/632)) ([1f30763](https://github.com/MorpheApp/morphe-manager/commit/1f30763833889cdea7b8e793d65bea6062edef5b))
+
 # [1.21.0](https://github.com/MorpheApp/morphe-manager/compare/v1.20.0...v1.21.0) (2026-06-10)
 
 

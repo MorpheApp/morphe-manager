@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-06-10T10:51:21",
-  "description": "# [1.21.0](https://github.com/MorpheApp/morphe-manager/compare/v1.20.0...v1.21.0) (2026-06-10)\n\n\n### Bug Fixes\n\n* Cancelled install callbacks on some OEM systems ([#598](https://github.com/MorpheApp/morphe-manager/issues/598)) ([6ec8543](https://github.com/MorpheApp/morphe-manager/commit/6ec854345ae6bd59a51de1998a943566fa20db4f))\n* Invert vertical parallax axis ([503e38e](https://github.com/MorpheApp/morphe-manager/commit/503e38ec4461d3f4d6372358bb8b310ac8875f22))\n\n\n### Features\n\n* Add onboarding tour triggered after first patch ([#611](https://github.com/MorpheApp/morphe-manager/issues/611)) ([a7ab6df](https://github.com/MorpheApp/morphe-manager/commit/a7ab6dfb576d20a9ef527ec759ed33ee57189772))\n* Auto-install patched APK with Shizuku after patching completes ([c43c663](https://github.com/MorpheApp/morphe-manager/commit/c43c66368d175be5d6bfc97ebb98f5880130f833))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.21.0/morphe-manager-1.21.0.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.21.0/morphe-manager-1.21.0.apk.asc",
-  "version": "1.21.0"
+  "created_at": "2026-06-15T06:16:14",
+  "description": "# [1.22.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.21.0...v1.22.0-dev.1) (2026-06-15)\n\n\n### Bug Fixes\n\n* Show install error instead of uninstall dialog when target package is not installed ([6a7dcc1](https://github.com/MorpheApp/morphe-manager/commit/6a7dcc1089dbff3f27539d740b1ee782bb29637d))\n\n\n### Features\n\n* Check `versionCode` when resolving patch compatibility ([#639](https://github.com/MorpheApp/morphe-manager/issues/639)) ([08889f3](https://github.com/MorpheApp/morphe-manager/commit/08889f319abc4fe41eb887e45f1666f6cbe5a014))\n* Show home greetings based on time of day ([#632](https://github.com/MorpheApp/morphe-manager/issues/632)) ([1f30763](https://github.com/MorpheApp/morphe-manager/commit/1f30763833889cdea7b8e793d65bea6062edef5b))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.1/morphe-manager-1.22.0-dev.1.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.1/morphe-manager-1.22.0-dev.1.apk.asc",
+  "version": "1.22.0-dev.1"
 }
