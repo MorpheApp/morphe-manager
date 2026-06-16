@@ -59,6 +59,7 @@ import org.koin.compose.koinInject
 import kotlin.math.exp
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * Patcher screen with progress tracking.
@@ -100,7 +101,7 @@ fun PatcherScreen(
     // Animated progress with dual-mode animation
     var displayProgress by rememberSaveable { mutableFloatStateOf(patcherViewModel.progress) }
     val showLongStepWarning by patcherViewModel.showLongStepWarning.collectAsStateWithLifecycle()
-    var showSuccessScreen by rememberSaveable { mutableStateOf(false) }
+    val showSuccessScreen = patcherViewModel.showSuccessScreen
 
     LaunchedEffect(showSuccessScreen) {
         if (showSuccessScreen) miniGameState.pauseActiveGame()
@@ -125,13 +126,13 @@ fun PatcherScreen(
                 movingAverage = (1 - smoothingFactor) * movingAverage +
                         smoothingFactor * displayProgress
                 onBackgroundSpeedChange(1 + movingAverage)
-                delay(250)
+                delay(250.milliseconds)
             }
         } else {
             // Patching finished - reset speed then fire completion effect
             onBackgroundSpeedChange(1f)
-            if (patcherSucceeded == true) {
-                delay(300) // small pause so speed resets before effect fires
+            if (patcherSucceeded == true && patcherViewModel.patchingCompletedInForeground) {
+                delay(300.milliseconds) // small pause so speed resets before effect fires
                 onPatchingCompleted()
                 // Haptic feedback
                 view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
@@ -151,22 +152,18 @@ fun PatcherScreen(
     val primaryInstallerPref by prefs.installerPrimary.getAsState()
     val promptInstallerOnInstall by prefs.promptInstallerOnInstall.getAsState()
 
-    // Auto-install: triggers when success screen appears with Shizuku as primary installer.
-    // Skipped when promptInstallerOnInstall is enabled - user gets the manual Install button instead.
-    LaunchedEffect(showSuccessScreen) {
-        if (!showSuccessScreen) return@LaunchedEffect
-        if (!autoInstallWithShizuku) return@LaunchedEffect
-        if (usingMountInstall) return@LaunchedEffect
-        if (patcherSucceeded != true) return@LaunchedEffect
-        if (primaryInstallerPref != InstallerPreferenceTokens.SHIZUKU) return@LaunchedEffect
-        if (promptInstallerOnInstall) return@LaunchedEffect
-        if (installViewModel.installState !is InstallViewModel.InstallState.Ready) return@LaunchedEffect
-        delay(300)
-        installViewModel.install(
-            outputFile = outputFile,
-            originalPackageName = patcherViewModel.packageName,
-            onPersistApp = { pkg, type -> patcherViewModel.persistPatchedApp(pkg, type) }
-        )
+    // Auto-install: driven by ViewModel so it fires in the background even if the app is not
+    // in the foreground when patching completes. UI-only guards checked here.
+    LaunchedEffect(Unit) {
+        patcherViewModel.autoInstallEvent.collect {
+            if (usingMountInstall) return@collect
+            if (installViewModel.installState !is InstallViewModel.InstallState.Ready) return@collect
+            installViewModel.install(
+                outputFile = outputFile,
+                originalPackageName = patcherViewModel.packageName,
+                onPersistApp = { pkg, type -> patcherViewModel.persistPatchedApp(pkg, type) }
+            )
+        }
     }
 
     // Progress animation logic: drives displayProgress and showSuccessScreen
@@ -213,18 +210,12 @@ fun PatcherScreen(
             }
 
             // Update four times a second
-            delay(250)
+            delay(250.milliseconds)
         }
 
         // Patching completed - ensure progress reaches 100%
         if (patcherSucceeded == true) {
             displayProgress = 1.0f
-            // Wait for animation to complete and add extra delay
-            delay(2000) // Wait 2 seconds at 100% before showing success screen
-            showSuccessScreen = true
-        } else {
-            // Failed - show immediately
-            showSuccessScreen = true
         }
     }
 
@@ -244,7 +235,7 @@ fun PatcherScreen(
     }
 
     BackHandler {
-        if (patcherSucceeded == null) {
+        if (patcherViewModel.isPatching) {
             // Show cancel dialog if patching is in progress
             state.showCancelDialog = true
         } else {
@@ -254,7 +245,7 @@ fun PatcherScreen(
     }
 
     // Keep screen on during patching
-    if (patcherSucceeded == null) {
+    if (patcherViewModel.isPatching) {
         DisposableEffect(Unit) {
             val window = (context as Activity).window
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -477,7 +468,7 @@ fun PatcherScreen(
                     primaryToken,
                     installTarget
                 )
-                delay(1_500)
+                delay(1_500.milliseconds)
             }
         }
 
@@ -521,7 +512,7 @@ fun PatcherScreen(
                             patcherSucceeded = patcherSucceeded,
                             miniGameState = miniGameState,
                             onCancelClick = { state.showCancelDialog = true },
-                            onInstallClick = { showSuccessScreen = true },
+                            onInstallClick = { patcherViewModel.showSuccess() },
                             onHomeClick = onBackClick
                         )
                     } else {
@@ -560,7 +551,7 @@ fun PatcherScreen(
                         onDismissInstallerDialog = installViewModel::dismissInstallerUnavailableDialog,
                         usingMountInstall = usingMountInstall,
                         isExpertMode = useExpertMode,
-                        onLogsClick = { showSuccessScreen = false },
+                        onLogsClick = { patcherViewModel.hideSuccessScreen() },
                         onInstall = {
                             if (usingMountInstall) {
                                 // Mount install
