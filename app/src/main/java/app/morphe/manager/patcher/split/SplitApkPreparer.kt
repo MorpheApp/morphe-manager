@@ -119,12 +119,16 @@ object SplitApkPreparer {
         }
     }
 
-    // Returns true if the ZIP file at [file] contains at least one embedded .apk entry
+    // Split module entries are always at the root of the archive (no path separator).
+    // Nested .apk files (e.g. res/raw/) are embedded resources, not split modules.
+    private fun isSplitModuleEntry(entryName: String): Boolean =
+        !entryName.contains('/') && entryName.endsWith(".apk", ignoreCase = true)
+
     private fun hasEmbeddedApkEntries(file: File): Boolean =
         runCatching {
             ZipFile(file).use { zip ->
                 zip.entries().asSequence().any { entry ->
-                    !entry.isDirectory && entry.name.endsWith(".apk", ignoreCase = true)
+                    !entry.isDirectory && isSplitModuleEntry(entry.name)
                 }
             }
         }.getOrDefault(false)
@@ -333,7 +337,7 @@ object SplitApkPreparer {
             ZipFile(source).use { zip ->
                 val apkEntries = zip.entries().asSequence()
                     .filterNot { it.isDirectory }
-                    .filter { it.name.endsWith(".apk", ignoreCase = true) }
+                    .filter { isSplitModuleEntry(it.name) }
                     .toList()
 
                 if (apkEntries.isEmpty()) {
