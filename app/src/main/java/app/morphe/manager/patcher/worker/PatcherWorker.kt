@@ -123,7 +123,7 @@ class PatcherWorker(
             applicationContext.getSystemService(NotificationManager::class.java)
         // Android won't visually switch from indeterminate → determinate on the same notification
         // ID unless we first post a brief non-indeterminate update. Post the real notification
-        // directly — the determinate bar replaces the spinning one cleanly this way
+        // directly - the determinate bar replaces the spinning one cleanly this way
         notificationManager.notify(NOTIFICATION_ID, createNotification(stepName, patchProgress, contentText))
     }
 
@@ -137,14 +137,19 @@ class PatcherWorker(
             // This does not always show up for some reason.
             setForeground(getForegroundInfo())
         } catch (e: Exception) {
-            Log.d(tag, "Failed to set foreground info:", e)
+            // Foreground promotion can fail on some devices or when notification permission is
+            // denied. Log it but continue - patching still works, just with less OS protection.
+            Log.w(tag, "Failed to promote worker to foreground service:".logFmt(), e)
         }
 
         val wakeLock: PowerManager.WakeLock =
             (applicationContext.getSystemService(Context.POWER_SERVICE) as PowerManager)
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "$tag::Patcher")
                 .apply {
-                    acquire(10 * 60 * 1000L)
+                    // No timeout: the finally block below always releases this lock, so a cap
+                    // would only risk the CPU sleeping mid-patch on large or slow devices
+                    @Suppress("WakelockTimeout")
+                    acquire()
                     Log.d(tag, "Acquired wakelock.")
                 }
 

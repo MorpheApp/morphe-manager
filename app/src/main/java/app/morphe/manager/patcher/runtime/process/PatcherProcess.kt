@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
+import android.os.PowerManager
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.patcher.Session
 import app.morphe.manager.patcher.logger.LogLevel
@@ -145,6 +146,14 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
             // Abuse hidden APIs to get a context.
             val systemContext = ActivityThread.systemMain().systemContext as Context
             val appContext = systemContext.createPackageContext(managerPackageName, 0)
+
+            // Keep the CPU awake for the duration of patching. The child process does not
+            // inherit the parent's WakeLock, so it needs its own. Released automatically
+            // when the process exits via any exitProcess() call.
+            @Suppress("WakelockTimeout")
+            (appContext.getSystemService(Context.POWER_SERVICE) as PowerManager)
+                .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "PatcherProcess::Patcher")
+                .acquire()
 
             // Avoid annoying logs. See https://github.com/robolectric/robolectric/blob/ad0484c6b32c7d11176c711abeb3cb4a900f9258/robolectric/src/main/java/org/robolectric/android/internal/AndroidTestEnvironment.java#L376-L388
             Class.forName("android.app.AppCompatCallbacks").apply {
