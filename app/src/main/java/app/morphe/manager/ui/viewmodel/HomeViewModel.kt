@@ -1100,17 +1100,25 @@ class HomeViewModel(
     val bundleAppMetadataFlow: StateFlow<Map<String, BundleAppMetadata>> =
         patchBundleRepository.appMetadata
 
+    private val _homePrefsFlow = combine(
+        homeAppButtonPrefs.hiddenPackages,
+        homeAppButtonPrefs.customOrder,
+    ) { hidden, order -> Pair(hidden, order) }
+
     /**
-     * Combined flow that produces the sorted list of home app items.
-     *
-     * Sorting order by display name:
-     * 1. Patched (installed) apps first
-     * 2. Non-patched apps
-     * Hidden apps are excluded.
-     */
+    * Sorted list of visible and hidden home app items.
+    *
+    * Default sort order:
+    * 1. Patched (installed) apps first
+    * 2. Apps with isPinnedByDefault = true
+    * 3. All other apps, alphabetical
+    *
+    * If the user has saved a custom order it is applied on top of the default sort.
+    * Hidden apps are excluded from [HomeAppState.visible].
+    */
     val homeAppState: StateFlow<HomeAppState?> = combine(
         patchBundleRepository.bundleState,
-        homeAppButtonPrefs.hiddenPackages,
+        _homePrefsFlow,
         installedAppRepository.getAll().onEach { apps ->
             apps.forEach { app ->
                 appDataResolver.invalidate(app.currentPackageName)
@@ -1121,7 +1129,7 @@ class HomeViewModel(
         },
         _appUpdatesAvailable,
         _appStateTicker,
-    ) { bundleState, hiddenPackages, installedApps, updatesMap, _ ->
+    ) { bundleState, (hiddenPackages, customOrder), installedApps, updatesMap, _ ->
         val ready = bundleState as? PatchBundleRepository.BundleState.Ready
             ?: return@combine null
 
@@ -1176,12 +1184,18 @@ class HomeViewModel(
         val visiblePackages = packages.filter { it !in hiddenPackages }
         val visibleItems = ArrayList<HomeAppItem>(visiblePackages.size)
         for (pkg in visiblePackages) visibleItems.add(buildItem(pkg))
-        val visible = visibleItems.sortedWith(
+        val defaultSorted = visibleItems.sortedWith(
             compareByDescending<HomeAppItem> { it.installedApp != null }
                 .thenByDescending { it.isPinnedByDefault }
                 .thenByDescending { it.packageInfo != null }
                 .thenBy(String.CASE_INSENSITIVE_ORDER) { it.displayName }
         )
+        val visible = if (customOrder.isEmpty()) {
+            defaultSorted
+        } else {
+            val indexMap = customOrder.mapIndexed { i, pkg -> pkg to i }.toMap()
+            defaultSorted.sortedBy { indexMap[it.packageName] ?: Int.MAX_VALUE }
+        }
 
         val hiddenItems = ArrayList<HomeAppItem>(activeHidden.size)
         for (pkg in activeHidden) hiddenItems.add(buildItem(pkg))
@@ -1244,6 +1258,14 @@ class HomeViewModel(
      */
     fun getBundleDisplayName(uid: Int): String? =
         allBundlesInfoState.value[uid]?.name
+
+    fun saveAppOrder(packageNames: List<String>) {
+        homeAppButtonPrefs.saveOrder(packageNames)
+    }
+
+    fun resetAppOrder() {
+        homeAppButtonPrefs.resetOrder()
+    }
 
     /**
      * Hide an app from the home screen.

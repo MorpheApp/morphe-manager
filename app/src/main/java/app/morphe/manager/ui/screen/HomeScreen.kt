@@ -225,6 +225,8 @@ fun HomeScreen(
                 onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
                 onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.hideApp(it) } },
                 onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
+                onSaveOrder = { packageNames -> homeViewModel.saveAppOrder(packageNames) },
+                onResetOrder = { homeViewModel.resetAppOrder() },
                 onShowPatches = { item -> patchesSheetItem.value = item },
                 showGestureHint = showGestureHint,
                 onGestureHintShown = {

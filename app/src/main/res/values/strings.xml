@@ -849,6 +849,11 @@ The image dimensions must be as follows:
     <string name="select_all_done">All selected</string>
     <string name="deselect_all">Deselect all</string>
     <string name="deselect_all_done">All deselected</string>
+    <string name="reorder_list">Reorder list</string>
+    <string name="reorder_list_hint">Drag to reorder</string>
+    <string name="reorder_done">Order saved</string>
+    <string name="reset_order">Reset order</string>
+    <string name="reset_order_done">Order reset</string>
     <string name="rename">Rename</string>
     <string name="import_">Import</string>
     <string name="export">Export</string>
@@ -883,6 +888,7 @@ The image dimensions must be as follows:
     <string name="hide">Hide</string>
     <string name="hidden">Hidden</string>
     <string name="unhide">Unhide</string>
+    <string name="unhide_done">Shown</string>
     <string name="logs">Logs</string>
     <string name="sources">Sources</string>
     <string name="installing_ellipsis">Installing…</string>
