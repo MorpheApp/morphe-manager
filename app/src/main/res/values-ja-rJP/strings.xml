@@ -781,6 +781,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">すべて選択</string>
     <string name="deselect_all">すべて選択解除</string>
     <string name="deselect_all_done">すべて選択解除</string>
+    <string name="reorder_list">リストの並べ替え</string>
+    <string name="reorder_list_hint">並べ替えるにはドラッグしてください</string>
+    <string name="reorder_done">順序を保存しました</string>
+    <string name="reset_order">順序をリセット</string>
+    <string name="reset_order_done">注文をリセットしました</string>
     <string name="rename">名前を変更する</string>
     <string name="import_">インポート</string>
     <string name="export">エクスポート</string>
@@ -815,6 +820,7 @@ morphe_header_custom_dark.png
     <string name="hide">非表示にする</string>
     <string name="hidden">非表示</string>
     <string name="unhide">再表示</string>
+    <string name="unhide_done">表示</string>
     <string name="logs">ログ</string>
     <string name="sources">ソース</string>
     <string name="installing_ellipsis">インストール中…</string>

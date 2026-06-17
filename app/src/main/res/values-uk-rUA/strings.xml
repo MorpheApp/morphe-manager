@@ -781,6 +781,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">Всі вибрано</string>
     <string name="deselect_all">Скасувати вибір усіх</string>
     <string name="deselect_all_done">Всі скасовано</string>
+    <string name="reorder_list">Змінити порядок списку</string>
+    <string name="reorder_list_hint">Перетягніть, щоб змінити порядок</string>
+    <string name="reorder_done">Порядок збережено</string>
+    <string name="reset_order">Скинути порядок</string>
+    <string name="reset_order_done">Порядок скинуто</string>
     <string name="rename">Перейменувати</string>
     <string name="import_">Імпорт</string>
     <string name="export">Експорт</string>
@@ -815,6 +820,7 @@ morphe_header_custom_dark.png
     <string name="hide">Приховати</string>
     <string name="hidden">Приховані</string>
     <string name="unhide">Показати</string>
+    <string name="unhide_done">Показано</string>
     <string name="logs">Журнали</string>
     <string name="sources">Джерела</string>
     <string name="installing_ellipsis">Інсталяція…</string>

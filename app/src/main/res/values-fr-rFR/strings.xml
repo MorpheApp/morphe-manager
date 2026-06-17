@@ -637,7 +637,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_auto_install_prompt_conflict">%s est activé - l\'installation automatique sera passée</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisation de la batterie</string>
-    <string name="settings_system_battery_optimization_description">Maintient le patcher en cours d\'exécution lorsque l\'application est minimisée</string>
+    <string name="settings_system_battery_optimization_description">Maintient le patcheur en cours d\'exécution lorsque l\'application est minimisée</string>
     <string name="settings_system_performance">Performance</string>
     <string name="settings_system_process_runtime">Temps d’exécution du processus</string>
     <string name="settings_system_process_runtime_description">Exécute le patchage dans un processus séparé pour une meilleure stabilité</string>
@@ -782,6 +782,11 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="select_all_done">Tous sélectionnés</string>
     <string name="deselect_all">Tout désélectionner</string>
     <string name="deselect_all_done">Tous désélectionnés</string>
+    <string name="reorder_list">Réorganiser la liste</string>
+    <string name="reorder_list_hint">Faites glisser pour réorganiser</string>
+    <string name="reorder_done">Ordre enregistré</string>
+    <string name="reset_order">Réinitialiser l\'ordre</string>
+    <string name="reset_order_done">Réinitialisation de la commande</string>
     <string name="rename">Renommer</string>
     <string name="import_">Importer</string>
     <string name="export">Exporter</string>
@@ -816,6 +821,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="hide">Masquer</string>
     <string name="hidden">Masqué</string>
     <string name="unhide">Afficher</string>
+    <string name="unhide_done">Affiché</string>
     <string name="logs">Journaux</string>
     <string name="sources">Sources</string>
     <string name="installing_ellipsis">Installation…</string>

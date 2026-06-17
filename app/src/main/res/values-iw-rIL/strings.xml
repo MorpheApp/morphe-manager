@@ -765,6 +765,11 @@ morphe_adaptive_monochrome_custom.xml
     <string name="select_all_done">הכל נבחר</string>
     <string name="deselect_all">בטל בחירה של הכל</string>
     <string name="deselect_all_done">הכל בוטל</string>
+    <string name="reorder_list">סדר מחדש רשימה</string>
+    <string name="reorder_list_hint">גרור לסדר מחדש</string>
+    <string name="reorder_done">הסדר נשמר</string>
+    <string name="reset_order">אפס סדר</string>
+    <string name="reset_order_done">איפוס ההזמנה</string>
     <string name="rename">שנה שם</string>
     <string name="import_">ייבוא</string>
     <string name="export">יְצוּא</string>
@@ -799,6 +804,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="hide">הסתר</string>
     <string name="hidden">מוסתר</string>
     <string name="unhide">הסתר</string>
+    <string name="unhide_done">הוצג</string>
     <string name="logs">יומן</string>
     <string name="sources">מקורות</string>
     <string name="installing_ellipsis">מתקין…</string>

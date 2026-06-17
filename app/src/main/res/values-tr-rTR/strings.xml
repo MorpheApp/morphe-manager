@@ -207,7 +207,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="home_dialog_unsupported_version_unsupported_label"> Uyumlu değil</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Yapı %d</string>
-    <string name="home_dialog_unsupported_version_build_mismatch_description">Bu, aynı sürümün farklı bir yapımıdır. Yamalar belirli bir yapım gerektirir</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Bu, aynı sürüme ait farklı bir yapıdır. Yamalar belirli bir yapı gerektirir</string>
     <string name="home_dialog_wrong_package_title">Yanlış paket seçildi</string>
     <string name="home_dialog_wrong_package_description">Seçilen APK, yamalamak istediğiniz uygulama için değil</string>
     <string name="home_dialog_expected_package">Beklenen paket:</string>
@@ -781,6 +781,11 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="select_all_done">Hepsi seçildi</string>
     <string name="deselect_all">Hepsini kaldır</string>
     <string name="deselect_all_done">Hepsinin seçimi kaldırıldı</string>
+    <string name="reorder_list">Listeyi yeniden sırala</string>
+    <string name="reorder_list_hint">Yeniden sıralamak için sürükle</string>
+    <string name="reorder_done">Sıra kaydedildi</string>
+    <string name="reset_order">Sırayı sıfırla</string>
+    <string name="reset_order_done">Sipariş sıfırlandı</string>
     <string name="rename">Yeniden adlandır</string>
     <string name="import_">İçe aktar</string>
     <string name="export">Dışa aktar</string>
@@ -815,6 +820,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="hide">Gizle</string>
     <string name="hidden">Gizli</string>
     <string name="unhide">Gizliliği kaldır</string>
+    <string name="unhide_done">Gösterildi</string>
     <string name="logs">Günlükler</string>
     <string name="sources">Kaynaklar</string>
     <string name="installing_ellipsis">Yükleniyor…</string>

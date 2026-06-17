@@ -781,6 +781,11 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="select_all_done">Tutto selezionato</string>
     <string name="deselect_all">Deseleziona tutto</string>
     <string name="deselect_all_done">Tutto deselezionato</string>
+    <string name="reorder_list">Riordina lista</string>
+    <string name="reorder_list_hint">Trascina per riordinare</string>
+    <string name="reorder_done">Ordine salvato</string>
+    <string name="reset_order">Ripristina ordine</string>
+    <string name="reset_order_done">Ordine resettato</string>
     <string name="rename">Rinomina</string>
     <string name="import_">Importa</string>
     <string name="export">Esporta</string>
@@ -815,6 +820,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="hide">Nascondi</string>
     <string name="hidden">Nascosto</string>
     <string name="unhide">Mostra</string>
+    <string name="unhide_done">Mostrato</string>
     <string name="logs">Tracciati</string>
     <string name="sources">Fonti</string>
     <string name="installing_ellipsis">Installazione in corso…</string>

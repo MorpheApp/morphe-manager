@@ -54,26 +54,26 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Nạp caffein có ngay bản vá xịn</string>
     <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Chào bình minh và cập nhật</string>
-    <string name="home_greeting_morning_2">Chào buổi sáng! Ứng dụng sẽ không tự động cập nhật đâu nhé</string>
+    <string name="home_greeting_morning_1">Dậy đi, vá thôi</string>
+    <string name="home_greeting_morning_2">Chào ngày mới! Ứng dụng không tự vá đâu nhá</string>
     <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Buổi chiều buồn chán? Cập nhật thôi!</string>
-    <string name="home_greeting_afternoon_2">Vệc vá lỗi sau bữa trưa có gì đó khác biệt</string>
-    <string name="home_greeting_afternoon_3">Ca làm chiều: phiên bản vá lỗi</string>
+    <string name="home_greeting_afternoon_1">Chiều nay hơi đuối? Thử vá một ứng dụng xem</string>
+    <string name="home_greeting_afternoon_2">Sau bữa trưa mà vá thì cuốn lắm</string>
+    <string name="home_greeting_afternoon_3">Nhiệm vụ ca chiều: vá ứng dụng</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Chào buổi tối! Vá lỗi buổi tối có gì đó khác biệt</string>
-    <string name="home_greeting_evening_2">Đang nghỉ ngơi? Hãy vá ứng dụng trước nhé</string>
-    <string name="home_greeting_evening_3">Sắp hết giờ làm? Vá lỗi một chút đã</string>
+    <string name="home_greeting_evening_1">Tối rồi! Giờ mà vá mới khác bọt</string>
+    <string name="home_greeting_evening_2">Đang thư giãn đấy ah? Hay là vá một ứng dụng đi</string>
+    <string name="home_greeting_evening_3">Sắp tan làm chưa? Về nhớ vá đấy</string>
     <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Vẫn còn thức? Các ứng dụng cần vá lỗi cũng vậy</string>
-    <string name="home_greeting_late_night_2">Buổi vá lỗi đêm muộn? Quá đỉnh</string>
-    <string name="home_greeting_late_night_3">Chế độ cú đêm: đã kích hoạt</string>
+    <string name="home_greeting_late_night_1">Chưa vá mà cũng chưa ngủ nữa, trời ơi..</string>
+    <string name="home_greeting_late_night_2">Thức khuya để vá luôn? Respect</string>
+    <string name="home_greeting_late_night_3">Cú đêm đã vào vị trí</string>
     <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Giờ vá lỗi cao điểm… theo lời đồn</string>
-    <string name="home_greeting_super_late_2">Không ngủ được? Vá lỗi đi</string>
-    <string name="home_greeting_super_late_3">Đến lúc này, cứ thức dậy và vá lỗi thôi</string>
-    <string name="home_greeting_super_late_4">Bạn và máy chủ, cả hai đều tỉnh táo</string>
-    <string name="home_greeting_super_late_5">Nocturnal và hiệu quả</string>
+    <string name="home_greeting_super_late_1">Nghe giang hồ đồn đại, giờ này vá peak lắm</string>
+    <string name="home_greeting_super_late_2">Khó ngủ lắm hay sao? Thôi thì vá gì đấy giết thời gian cũng được</string>
+    <string name="home_greeting_super_late_3">Đến nước này rồi thì thức vá luôn, xem có gì mới hông~</string>
+    <string name="home_greeting_super_late_4">Đêm nay không chỉ mình bạn thức đâu ^^</string>
+    <string name="home_greeting_super_late_5">Cú đêm năng suất thật đấy</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Nguồn vá</string>
     <string name="sources_management_open_in_browser">Mở trong trình duyệt</string>
@@ -206,8 +206,8 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="home_dialog_unsupported_version_compatible_versions">Phiên bản tương thích:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Không tương thích</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Build %d</string>
-    <string name="home_dialog_unsupported_version_build_mismatch_description">Đây là một build khác của cùng một phiên bản. Các bản vá yêu cầu một build cụ thể</string>
+    <string name="home_dialog_unsupported_version_build">Bản dựng %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Mặc dù cùng phiên bản, nhưng đây là bản dựng khác. Các bản vá yêu cầu đúng bản dựng mới hỗ trợ</string>
     <string name="home_dialog_wrong_package_title">Chọn sai gói rồi</string>
     <string name="home_dialog_wrong_package_description">APK đã chọn không dành cho ứng dụng mà bạn định vá</string>
     <string name="home_dialog_expected_package">Cần gói:</string>
@@ -782,6 +782,11 @@ Kích thước hình ảnh yêu cầu:
     <string name="select_all_done">Đã chọn tất cả</string>
     <string name="deselect_all">Bỏ chọn tất cả</string>
     <string name="deselect_all_done">Đã bỏ chọn tất cả</string>
+    <string name="reorder_list">Sắp xếp lại danh sách</string>
+    <string name="reorder_list_hint">Kéo để sắp xếp lại</string>
+    <string name="reorder_done">Đã lưu thứ tự</string>
+    <string name="reset_order">Đặt lại thứ tự</string>
+    <string name="reset_order_done">Đơn hàng đã được hoàn tác</string>
     <string name="rename">Đổi tên</string>
     <string name="import_">Nhập</string>
     <string name="export">Xuất</string>
@@ -816,6 +821,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="hide">Ẩn</string>
     <string name="hidden">Ẩn</string>
     <string name="unhide">Hiện</string>
+    <string name="unhide_done">Đã hiển thị</string>
     <string name="logs">Nhật ký</string>
     <string name="sources">Nguồn</string>
     <string name="installing_ellipsis">Đang cài đặt…</string>

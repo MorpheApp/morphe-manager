@@ -781,6 +781,11 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="select_all_done">Alle ausgewählt</string>
     <string name="deselect_all">Alles abwählen</string>
     <string name="deselect_all_done">Alle abgewählt</string>
+    <string name="reorder_list">Liste neu ordnen</string>
+    <string name="reorder_list_hint">Zum Neuordnen ziehen</string>
+    <string name="reorder_done">Reihenfolge gespeichert</string>
+    <string name="reset_order">Reihenfolge zurücksetzen</string>
+    <string name="reset_order_done">Bestellung zurückgesetzt</string>
     <string name="rename">Umbenennen</string>
     <string name="import_">Importieren</string>
     <string name="export">Exportieren</string>
@@ -815,6 +820,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="hide">Verbergen</string>
     <string name="hidden">Ausgeblendet</string>
     <string name="unhide">Anzeigen</string>
+    <string name="unhide_done">Angezeigt</string>
     <string name="logs">Protokolle</string>
     <string name="sources">Quellen</string>
     <string name="installing_ellipsis">Wird installiert…</string>

@@ -779,6 +779,11 @@ Qasîyên wêneyan divê wiha bin:
     <string name="select_all_done">Hemûyan hilbijartin</string>
     <string name="deselect_all">Hemûyan hilbijêre</string>
     <string name="deselect_all_done">Hemûyan bêhilbijartin</string>
+    <string name="reorder_list">Lîsteyê dîsa rêzekirin</string>
+    <string name="reorder_list_hint">Bixistin da ku dîsa rêzekirin</string>
+    <string name="reorder_done">Rêzê hat xêzkirin</string>
+    <string name="reset_order">Rêzê dîsa serî hildin</string>
+    <string name="reset_order_done">Fermanê sîparîşê nûkirin</string>
     <string name="rename">Navê nû bigere</string>
     <string name="import_">Hez kirin</string>
     <string name="export">Dernake</string>
@@ -813,6 +818,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="hide">Vêşêrîn</string>
     <string name="hidden">Veşartî</string>
     <string name="unhide">Neveşartîne</string>
+    <string name="unhide_done">Nîşan dayin</string>
     <string name="logs">Log</string>
     <string name="sources">Çavkanî</string>
     <string name="installing_ellipsis">Dikuştin…</string>

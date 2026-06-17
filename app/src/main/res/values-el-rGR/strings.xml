@@ -781,6 +781,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">Όλα επιλέχθηκαν</string>
     <string name="deselect_all">Κατάργηση επιλογής όλων</string>
     <string name="deselect_all_done">Όλα αποεπιλέχθηκαν</string>
+    <string name="reorder_list">Αναδιάταξη λίστας</string>
+    <string name="reorder_list_hint">Σύρετε για να αναδιατάξετε</string>
+    <string name="reorder_done">Η σειρά αποθηκεύτηκε</string>
+    <string name="reset_order">Επαναφορά σειράς</string>
+    <string name="reset_order_done">Επαναφορά παραγγελίας</string>
     <string name="rename">Μετονομασία</string>
     <string name="import_">Εισαγωγή</string>
     <string name="export">Εξαγωγή</string>
@@ -815,6 +820,7 @@ morphe_header_custom_dark.png
     <string name="hide">Απόκρυψη</string>
     <string name="hidden">Κρυφό</string>
     <string name="unhide">Εμφάνιση</string>
+    <string name="unhide_done">Εμφανίστηκε</string>
     <string name="logs">Εγγραφές</string>
     <string name="sources">Πηγές</string>
     <string name="installing_ellipsis">Εγκατάσταση…</string>

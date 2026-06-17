@@ -138,11 +138,11 @@
     <string name="home_download_instructions_steps_title">步驟如下：</string>
     <string name="home_download_instructions_step1">請選取下方的「%s」按鈕</string>
     <string name="home_download_instructions_step2_part1">請往下滑動網頁，然後點選</string>
-    <string name="home_download_instructions_download_button_toast">請到網站上點選下載，不是在這裡 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">太棒了！現在點擊下方「繼續」並前往網站 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">熟能生巧，你快要成功了！ 💪</string>
-    <string name="home_download_instructions_download_button_toast_4">還沒到…還沒到… 🙈</string>
-    <string name="home_download_instructions_download_button_toast_5">好的，我尊重您的奉獻 🫡</string>
+    <string name="home_download_instructions_download_button_toast">請到網站上點選 [下載]，不是這裡的範例按鈕 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">很好！現在請選取下方的 [繼續]，到網站繼續下載 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">快抓到訣竅了！真正的下載按鈕在網站上 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">不是這個按鈕… 這只是範例按鈕… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">好吧，您的毅力我收到了 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">您現在是 Morphe 官方按鈕測試員 🏅</string>
     <string name="home_download_instructions_step3">等待下載完成，並且 <b>請勿安裝</b> 該 APK</string>
     <string name="home_download_instructions_step3_mount">等待下載完成，然後 <b>安裝該 APK</b></string>
@@ -163,42 +163,42 @@
     <string name="home_installed_app_picker_filter_all">所有應用程式</string>
     <string name="home_installed_app_picker_filter_user">僅限使用者應用程式</string>
     <string name="home_installed_app_picker_filter_system">僅限系統應用程式</string>
-    <string name="home_invalid_apk_unreadable">無法讀取檔案。請檢查「外部儲存空間」是否未受電池限制</string>
-    <string name="home_invalid_apk_not_an_apk">所選檔案不是有效的 APK</string>
-    <string name="home_invalid_apk_io_error">無法開啟檔案。請重試</string>
-    <string name="home_external_apk_expert_mode_required">此功能僅在專家模式下可用</string>
+    <string name="home_invalid_apk_unreadable">無法讀取檔案。請檢查「外部儲存空間」不受電池限制</string>
+    <string name="home_invalid_apk_not_an_apk">選取的檔案不是有效的 APK</string>
+    <string name="home_invalid_apk_io_error">無法開啟檔案。請再試一次</string>
+    <string name="home_external_apk_expert_mode_required">此功能僅在專家模式中提供</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">專家模式</string>
     <string name="expert_mode_search">搜尋修補程式</string>
     <string name="expert_mode_proceed">繼續修補</string>
     <string name="expert_mode_disable_all">全部停用</string>
-    <string name="expert_mode_disable_all_done">所有修補程式已停用</string>
+    <string name="expert_mode_disable_all_done">已停用所有修補程式</string>
     <string name="expert_mode_enable_all">全部啟用</string>
-    <string name="expert_mode_enable_all_done">所有修補程式已啟用</string>
+    <string name="expert_mode_enable_all_done">已啟用所有修補程式</string>
     <string name="expert_mode_reset_to_default">啟用推薦的修補程式</string>
-    <string name="expert_mode_reset_to_default_done">已套用建議修補程式</string>
+    <string name="expert_mode_reset_to_default_done">已套用推薦的修補程式</string>
     <string name="expert_mode_restore_saved">還原儲存的選取範圍</string>
     <string name="expert_mode_restore_saved_done">已儲存的選取已還原</string>
     <string name="expert_mode_no_results">找不到修補程式</string>
-    <string name="expert_mode_universal_patches">通用修補程式</string>
+    <string name="expert_mode_universal_patches">通用型修補程式</string>
     <string name="expert_mode_new_patches">新增</string>
     <string name="expert_mode_multiple_sources_warning_title">選取了多個修補來源</string>
-    <string name="expert_mode_multiple_sources_warning_message">"\"您已從多個修補來源中選取修補程式。這可能會導致相容性問題或意外行為。
+    <string name="expert_mode_multiple_sources_warning_message">"您已從多個修補來源中選取修補程式，可能會造成相容性問題或非預期行為。
 
-確定要繼續嗎？\""</string>
+確定要繼續嗎？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">未驗證的 APK</string>
-    <string name="home_invalid_signature_message">您為 <b>%s</b> 選取的 APK 與預期的簽署憑證不符。它可能已被修改或來自不受信任的來源</string>
+    <string name="home_invalid_signature_message">您為 &lt;b&gt;%s&lt;/b&gt; 選取的 APK 與預期的簽署憑證不符。APK 可能已遭修改，或來自不受信任的來源</string>
     <string name="home_invalid_signature_badge">此 APK 可能不是原始版本</string>
-    <string name="home_split_apk_warning_title">偵測到分割 APK</string>
-    <string name="home_split_apk_warning_message">"\"此檔案是一個 APK 組合包
-(<b>APKM / APKS / XAPK</b>)。
+    <string name="home_split_apk_warning_title">偵測到分割型 APK</string>
+    <string name="home_split_apk_warning_message">"此檔案是 APK 套件組合
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;)。
 
-為獲得最佳結果，此應用程式建議修補 <b>完整的 APK</b>\""</string>
-    <string name="home_split_apk_warning_pick_another">選取另一個 APK</string>
+為取得最佳結果，建議以&lt;b&gt;完整 APK&lt;/b&gt;檔案進行修補"</string>
+    <string name="home_split_apk_warning_pick_another">選擇其他 APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">實驗性</string>
     <string name="home_dialog_unsupported_version_experimental_description">此版本具有實驗性支援，可能不穩定或不完整</string>
-    <string name="morphe_experimental_app_version_dialog_title">您想嘗試實驗性版本嗎？ 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_title">確定要嘗試實驗性版本嗎？ 🧪</string>
     <string name="morphe_experimental_app_version_dialog_message"><b>%s</b> 的此版本具有早期實驗性支援<br/><br/>🔧 由於針對此應用程式版本的修補程式仍在完善中，因此請預期會出現奇怪的應用程式行為或未知的錯誤</string>
     <string name="home_dialog_unsupported_version_dialog_title">不支援的版本</string>
     <string name="home_dialog_unsupported_version_dialog_description">此 APK 不是推薦的應用程式版本。繼續操作可能會導致應用程式無法正常運作</string>
@@ -781,6 +781,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">全部選取</string>
     <string name="deselect_all">取消全選</string>
     <string name="deselect_all_done">全部取消選取</string>
+    <string name="reorder_list">重新排序列表</string>
+    <string name="reorder_list_hint">拖曳以重新排序</string>
+    <string name="reorder_done">排序已儲存</string>
+    <string name="reset_order">重設排序</string>
+    <string name="reset_order_done">訂單已重置</string>
     <string name="rename">重新命名</string>
     <string name="import_">匯入</string>
     <string name="export">匯出</string>
@@ -815,6 +820,7 @@ morphe_header_custom_dark.png
     <string name="hide">隱藏</string>
     <string name="hidden">已隱藏</string>
     <string name="unhide">取消隱藏</string>
+    <string name="unhide_done">已顯示</string>
     <string name="logs">記錄</string>
     <string name="sources">來源</string>
     <string name="installing_ellipsis">安裝中……</string>

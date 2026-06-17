@@ -781,6 +781,11 @@ Wymagane są następujące wymiary obrazów:
     <string name="select_all_done">Zaznaczono wszystko</string>
     <string name="deselect_all">Odznacz wszystko</string>
     <string name="deselect_all_done">Odznaczono wszystko</string>
+    <string name="reorder_list">Zmień kolejność listy</string>
+    <string name="reorder_list_hint">Przeciągnij, aby zmienić kolejność</string>
+    <string name="reorder_done">Kolejność zapisana</string>
+    <string name="reset_order">Przywróć kolejność</string>
+    <string name="reset_order_done">Resetowanie zamówienia</string>
     <string name="rename">Zmień nazwę</string>
     <string name="import_">Importuj</string>
     <string name="export">Eksportuj</string>
@@ -815,6 +820,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="hide">Ukryj</string>
     <string name="hidden">Ukryte</string>
     <string name="unhide">Pokaż</string>
+    <string name="unhide_done">Wyświetlone</string>
     <string name="logs">Logi</string>
     <string name="sources">Źródła</string>
     <string name="installing_ellipsis">Instalowanie…</string>

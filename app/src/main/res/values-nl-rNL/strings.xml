@@ -778,6 +778,11 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="select_all_done">Alles geselecteerd</string>
     <string name="deselect_all">Alles deselecteren</string>
     <string name="deselect_all_done">Alles gedeselecteerd</string>
+    <string name="reorder_list">Lijst herordenen</string>
+    <string name="reorder_list_hint">Sleep om te herordenen</string>
+    <string name="reorder_done">Volgorde opgeslagen</string>
+    <string name="reset_order">Volgorde herstellen</string>
+    <string name="reset_order_done">Bestelling gereset</string>
     <string name="rename">Hernoemen</string>
     <string name="import_">Importeren</string>
     <string name="export">Exporteren</string>
@@ -812,6 +817,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="hide">Verbergen</string>
     <string name="hidden">Verborgen</string>
     <string name="unhide">Toon</string>
+    <string name="unhide_done">Weergeven</string>
     <string name="logs">Logboeken</string>
     <string name="sources">Bron-URL</string>
     <string name="installing_ellipsis">Installeren…</string>

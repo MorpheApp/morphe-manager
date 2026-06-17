@@ -781,6 +781,11 @@ Rozměry obrázků musí být následující:
     <string name="select_all_done">Vše vybráno</string>
     <string name="deselect_all">Zrušit výběr všech</string>
     <string name="deselect_all_done">Vše zrušeno</string>
+    <string name="reorder_list">Změnit pořadí seznamu</string>
+    <string name="reorder_list_hint">Přetáhněte pro změnu pořadí</string>
+    <string name="reorder_done">Pořadí uloženo</string>
+    <string name="reset_order">Obnovit pořadí</string>
+    <string name="reset_order_done">Objednávka resetována</string>
     <string name="rename">Přejmenovat</string>
     <string name="import_">Importovat</string>
     <string name="export">Exportovat</string>
@@ -815,6 +820,7 @@ Rozměry obrázků musí být následující:
     <string name="hide">Skrýt</string>
     <string name="hidden">Skrytý</string>
     <string name="unhide">Zobrazit</string>
+    <string name="unhide_done">Zobrazeno</string>
     <string name="logs">Protokoly</string>
     <string name="sources">Zdroje</string>
     <string name="installing_ellipsis">Instaluje se…</string>

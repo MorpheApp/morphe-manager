@@ -54,10 +54,26 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Kofein və yaxşı yamaqlar ilə gücləndirilib</string>
     <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Ayağa dur və yamaqla</string>
+    <string name="home_greeting_morning_2">Sabahınız xeyir! Tətbiqlər öz-özünə yamaqlanmayacaq</string>
     <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Günortadan sonra yorğunluq? Bir şeyi yamaqla</string>
+    <string name="home_greeting_afternoon_2">Nahar sonrası yamaqlama başqa cür toxunur</string>
+    <string name="home_greeting_afternoon_3">Günorta növbəsi: yamaq buraxılışı</string>
     <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Axşamınız xeyir! Axşam yamaqları başqa bir toxunuşdur</string>
+    <string name="home_greeting_evening_2">Dincəlirsən? Əvvəlcə tətbiqi yamaqla</string>
+    <string name="home_greeting_evening_3">Günü bitirirsən? Əvvəlcə nəyisə yamaqla</string>
     <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Hələ oyaqsan? Yamaqlanmalı olan tətbiqlər də gözləyir</string>
+    <string name="home_greeting_late_night_2">Gecənin bu vaxtı yamaq sessiyası? Eşq olsun!</string>
+    <string name="home_greeting_late_night_3">Gecə bayquşu rejimi: işləkdir</string>
     <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Yamaqlanma pik saatları... guya ki</string>
+    <string name="home_greeting_super_late_2">Yatanmırsan? Bir şey yamaqla</string>
+    <string name="home_greeting_super_late_3">Artıq bu yerdə, oyaq qal və yamaqla</string>
+    <string name="home_greeting_super_late_4">Sən və serverlər, ikiniz də oyaqsınız</string>
+    <string name="home_greeting_super_late_5">Gecəcil və səmərəli</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yamaq mənbələri</string>
     <string name="sources_management_open_in_browser">Brauzerdə açın</string>
@@ -65,7 +81,7 @@
     <string name="sources_management_prerelease_toggle">İlkin-buraxılış yamaqları</string>
     <string name="sources_management_prerelease_toggle_description">Yeni təcrübi yamaq versiyalarına erkən keçid əldə edilir</string>
     <string name="sources_management_experimental_versions_toggle">Təcrübi tətbiq versiyaları</string>
-    <string name="sources_management_experimental_versions_toggle_description">Əlçatandırsa təcrübi tətbiq hədəflərin yamaqlayır</string>
+    <string name="sources_management_experimental_versions_toggle_description">Əgər varsa təcrübi tətbiq hədəflərin yamaqlayır</string>
     <string name="sources_management_already_exists">Bu mənbə artıq əlavə edilib</string>
     <string name="sources_management_invalid_url">Etibarsız mənbə URL-si. Xahiş olunur, ünvanı yoxla və təkrar cəhd et</string>
     <string name="sources_management_metadata_unavailable">Əlavə Məlumat Yoxdur</string>
@@ -111,6 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Uyuşmaz</string>
     <string name="home_apk_availability_yes">Bəli, APK tapmağa mənə kömək et</string>
     <string name="home_apk_availability_no">Xeyr, Mənim artıq APK-m var</string>
+    <string name="home_apk_use_saved">Saxlanılan APK-nı istifadə et</string>
+    <string name="home_apk_use_installed">Quraşdırılan APK-nı istifadə et</string>
     <string name="home_app_info_no_saved_apk">Saxlanılan APK yoxdur. Yamaqlanma APK faylını təkrar seçmək istəyəcək</string>
     <string name="home_version_requires_android">Android %s+ tələb olunur</string>
     <string name="home_apk_no_compatible_versions_title">Bu cihazda dəstəklənmir</string>
@@ -138,7 +156,7 @@
     <string name="home_recommended_version">Tövsiyə olunan versiya</string>
     <string name="home_selected_version">Seçilən versiya</string>
     <string name="home_select_apk_title">APK Seçin</string>
-    <string name="home_select_any_apk_description">İstənilən tətbiqin APK faylın yaxud bu cihazda artıq quraşdırılan tətbiq seç</string>
+    <string name="home_select_any_apk_description">İstənilən tətbiqin APK faylını yaxud bu cihazda artıq quraşdırılan tətbiqi seç</string>
     <string name="home_use_installed_app">Quraşdırılan tətbiqi istifadə et</string>
     <string name="home_installed_app_picker_title">Quraşdırılan tətbiqi seç</string>
     <string name="home_installed_app_picker_empty">Tətbiq tapılmadı</string>
@@ -188,6 +206,8 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Uyuşan versiyalar:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Dəstəklənməyən</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Qurulma %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Bu, eyni versiyanın fərqli quruluşudur. Yamaqlar xüsusi quruluş tələb edir</string>
     <string name="home_dialog_wrong_package_title">Yanlış paket seçildi</string>
     <string name="home_dialog_wrong_package_description">Seçilən APK, yamaq üçün təyin etdiyiniz tətbiq üçün deyil</string>
     <string name="home_dialog_expected_package">Gözlənilən paket:</string>

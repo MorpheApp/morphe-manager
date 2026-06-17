@@ -781,6 +781,11 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="select_all_done">Toate selectate</string>
     <string name="deselect_all">Deselecteazã totul</string>
     <string name="deselect_all_done">Toate deselectorizate</string>
+    <string name="reorder_list">Reordonare listă</string>
+    <string name="reorder_list_hint">Glisați pentru a reordona</string>
+    <string name="reorder_done">Ordine salvată</string>
+    <string name="reset_order">Resetează ordinea</string>
+    <string name="reset_order_done">Comanda resetată</string>
     <string name="rename">Redenumește</string>
     <string name="import_">Importă</string>
     <string name="export">Exportă</string>
@@ -815,6 +820,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="hide">Ascunde</string>
     <string name="hidden">Ascuns</string>
     <string name="unhide">Dezascunde</string>
+    <string name="unhide_done">Afișat</string>
     <string name="logs">Jurnale</string>
     <string name="sources">Surse</string>
     <string name="installing_ellipsis">Se instalează…</string>

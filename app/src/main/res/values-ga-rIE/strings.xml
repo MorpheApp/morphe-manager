@@ -54,26 +54,26 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Cumhachtaithe ag caiféin agus paistí maithe</string>
     <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Éirigh agus patch</string>
-    <string name="home_greeting_morning_2">Maidin mhaith! Ní patchóidh aipeanna iad féin</string>
+    <string name="home_greeting_morning_1">Ardaigh agus paiste</string>
+    <string name="home_greeting_morning_2">Maidin mhaith! Ní dhéanfaidh aipeanna paistí iad féin</string>
     <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">An mealladh tráthnóna? Patchaigh rud éigin</string>
-    <string name="home_greeting_afternoon_2">Tá comhrá seisiúin lónn ag cur béim ar rud ar leith.</string>
-    <string name="home_greeting_afternoon_3">An caibidil tráchtairní na tráthnóna.</string>
+    <string name="home_greeting_afternoon_1">Droch-mhíshuaimhneas tráthnóna? Paisteáil rud éigin</string>
+    <string name="home_greeting_afternoon_2">Buaileann paisteáil iar-lón difriúil</string>
+    <string name="home_greeting_afternoon_3">An t-athrú tráthnóna: eagrán paiste</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Fáilte ar maidin! Tá athruithe cuí ag dul ar aghaidh ag an tráthnóna.</string>
-    <string name="home_greeting_evening_2">Ag sosú? Patcháil aipe ar dtús.</string>
-    <string name="home_greeting_evening_3">Ag dul ar lár? Patcháil rud éigin ar dtús.</string>
+    <string name="home_greeting_evening_1">Tráthnóna maith! Buaileann paistí tráthnóna go difriúil</string>
+    <string name="home_greeting_evening_2">Ag sosú? Paisteáil aip ar dtús</string>
+    <string name="home_greeting_evening_3">Ag clocáil amach? Paisteáil rud éigin ar dtús</string>
     <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">An bhfuil tú fós awake? Tá na aipeanna a thar a bheith gá patcháil fós.</string>
-    <string name="home_greeting_late_night_2">Seisiún patchála déanach ar oíche? Meas.</string>
-    <string name="home_greeting_late_night_3">Mód owl oíche: Gníomhaithe.</string>
+    <string name="home_greeting_late_night_1">An bhfuil paistí ag teastáil uathu fós?</string>
+    <string name="home_greeting_late_night_2">Seisiún paiste déanach san oíche? Meas?</string>
+    <string name="home_greeting_late_night_3">Mód ulchabhán oíche: gníomhachtaithe</string>
     <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Uaireanta ard patchála… go raibh maith agat.</string>
-    <string name="home_greeting_super_late_2">Nó féidir leat codladh? Patcháil rud éigin.</string>
-    <string name="home_greeting_super_late_3">Ag an bpointe seo, fan agus patcháil.</string>
-    <string name="home_greeting_super_late_4">Tú féin agus na freastalaithe, araon awake.</string>
-    <string name="home_greeting_super_late_5">Oícheachtach agus táirgiúil.</string>
+    <string name="home_greeting_super_late_1">Uaireanta paisteála buaic… de réir dealraimh</string>
+    <string name="home_greeting_super_late_2">Nach féidir leat codladh? Paisteáil rud éigin</string>
+    <string name="home_greeting_super_late_3">Ag an bpointe seo, fan suas agus déan paiste.</string>
+    <string name="home_greeting_super_late_4">Tusa agus na freastalaithe, an bheirt agaibh ina ndúiseacht</string>
+    <string name="home_greeting_super_late_5">Oícheanta agus táirgiúil</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Foinsí paiste</string>
     <string name="sources_management_open_in_browser">Oscail sa bhrabhsálaí</string>
@@ -206,8 +206,8 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="home_dialog_unsupported_version_compatible_versions">Leaganacha comhoiriúnacha:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Gan tacaíocht</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Tógáil %d</string>
-    <string name="home_dialog_unsupported_version_build_mismatch_description">Is é seo tógáil difriúil den leagan céanna. Teastaíonn patchála leagan áirithe.</string>
+    <string name="home_dialog_unsupported_version_build">Tóg %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Is tógáil dhifriúil den leagan céanna é seo. Éilíonn na paistí tógáil shonrach</string>
     <string name="home_dialog_wrong_package_title">Pacáiste mícheart roghnaithe</string>
     <string name="home_dialog_wrong_package_description">Níl an APK roghnaithe don fheidhmchlár arbh eol duit paiste a chur air</string>
     <string name="home_dialog_expected_package">Pacáiste ionchais:</string>
@@ -779,6 +779,11 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="select_all_done">Gach ceann roghnaithe</string>
     <string name="deselect_all">Díroghnaigh gach rud</string>
     <string name="deselect_all_done">Gach rud díroghnaithe</string>
+    <string name="reorder_list">Athordú liosta</string>
+    <string name="reorder_list_hint">Tarraing chun athordú</string>
+    <string name="reorder_done">Ordú sábháilte</string>
+    <string name="reset_order">Athshocraigh ord</string>
+    <string name="reset_order_done">Ordú athshocraithe</string>
     <string name="rename">Athainmnigh</string>
     <string name="import_">Iompórtáil</string>
     <string name="export">Easpórtáil</string>
@@ -813,6 +818,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="hide">Folaigh</string>
     <string name="hidden">I bhfolach</string>
     <string name="unhide">Nochtadh</string>
+    <string name="unhide_done">Taispeántar</string>
     <string name="logs">Logaí</string>
     <string name="sources">Foinsí</string>
     <string name="installing_ellipsis">Ag suiteáil…</string>

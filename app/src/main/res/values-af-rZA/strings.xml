@@ -781,6 +781,11 @@ Die beeld afmetings moet soos volg wees:
     <string name="select_all_done">Alles gekies</string>
     <string name="deselect_all">Deselekteer alles</string>
     <string name="deselect_all_done">Alles ontkies</string>
+    <string name="reorder_list">Lysordening</string>
+    <string name="reorder_list_hint">Sleep om te herordeneer</string>
+    <string name="reorder_done">Volgorde stoor</string>
+    <string name="reset_order">Herstel volgorde</string>
+    <string name="reset_order_done">Bestelling terugstel</string>
     <string name="rename">Hernoem</string>
     <string name="import_">Importeer</string>
     <string name="export">Uitvoer</string>
@@ -815,6 +820,7 @@ Die beeld afmetings moet soos volg wees:
     <string name="hide">Verberg</string>
     <string name="hidden">Versteek</string>
     <string name="unhide">Herstel</string>
+    <string name="unhide_done">Wys</string>
     <string name="logs">Logboeke</string>
     <string name="sources">Bronne</string>
     <string name="installing_ellipsis">Installeer…</string>

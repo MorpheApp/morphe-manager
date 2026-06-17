@@ -781,6 +781,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">Све изабрано</string>
     <string name="deselect_all">Поништи све изборе</string>
     <string name="deselect_all_done">Све поништено</string>
+    <string name="reorder_list">Преуреди листу</string>
+    <string name="reorder_list_hint">Превуците да преуредите</string>
+    <string name="reorder_done">Ред је сачуван</string>
+    <string name="reset_order">Ресетуј ред</string>
+    <string name="reset_order_done">Ресет поруџбине</string>
     <string name="rename">Преименуј</string>
     <string name="import_">Увоз</string>
     <string name="export">Извези</string>
@@ -815,6 +820,7 @@ morphe_header_custom_dark.png
     <string name="hide">Sakrij</string>
     <string name="hidden">Сакривено</string>
     <string name="unhide">Покажи</string>
+    <string name="unhide_done">Приказано</string>
     <string name="logs">Дневници</string>
     <string name="sources">Извори</string>
     <string name="installing_ellipsis">Инсталирање…</string>

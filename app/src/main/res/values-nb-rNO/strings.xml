@@ -781,6 +781,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">Alle valgt</string>
     <string name="deselect_all">Fjern markeringen fra alle</string>
     <string name="deselect_all_done">Alle fjernet valgt</string>
+    <string name="reorder_list">Omorganisér liste</string>
+    <string name="reorder_list_hint">Dra for å omorganisere</string>
+    <string name="reorder_done">Rekkefølge lagret</string>
+    <string name="reset_order">Tilbakestill rekkefølge</string>
+    <string name="reset_order_done">Bestilling tilbakestilt</string>
     <string name="rename">Gi nytt navn</string>
     <string name="import_">Importer</string>
     <string name="export">Eksporter</string>
@@ -815,6 +820,7 @@ morphe_header_custom_dark.png
     <string name="hide">Skjul</string>
     <string name="hidden">Skjult</string>
     <string name="unhide">Vis</string>
+    <string name="unhide_done">Vises</string>
     <string name="logs">Logger</string>
     <string name="sources">Kilder</string>
     <string name="installing_ellipsis">Installerer…</string>

@@ -776,6 +776,11 @@ Myndastærðin verður að vera sem hér segir:
     <string name="select_all_done">Allt valið</string>
     <string name="deselect_all">Afvelja allt</string>
     <string name="deselect_all_done">Allt afveldur</string>
+    <string name="reorder_list">Endurreikning á lista</string>
+    <string name="reorder_list_hint">Drag til að endurreikna</string>
+    <string name="reorder_done">Röð vistuð</string>
+    <string name="reset_order">Endurstilla röð</string>
+    <string name="reset_order_done">Pöntun endurstillt</string>
     <string name="rename">Endurnefna</string>
     <string name="import_">Flytja</string>
     <string name="export">Flytja út</string>
@@ -810,6 +815,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="hide">Húð</string>
     <string name="hidden">Falinn</string>
     <string name="unhide">Afhylja</string>
+    <string name="unhide_done">Sýnt</string>
     <string name="logs">Logs</string>
     <string name="sources">Heimildir</string>
     <string name="installing_ellipsis">Sæti…</string>

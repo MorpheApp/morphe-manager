@@ -781,6 +781,11 @@ Kuvien mittojen on oltava seuraavat:
     <string name="select_all_done">Kaikki valittu</string>
     <string name="deselect_all">Poista kaikki valinnat</string>
     <string name="deselect_all_done">Kaikki poistettu valinnasta</string>
+    <string name="reorder_list">Järjestä lista uudelleen</string>
+    <string name="reorder_list_hint">Vedä järjestääksesi uudelleen</string>
+    <string name="reorder_done">Järjestys tallennettu</string>
+    <string name="reset_order">Palauta järjestys</string>
+    <string name="reset_order_done">Tilaus nollattu</string>
     <string name="rename">Nimeä uudelleen</string>
     <string name="import_">Tuo</string>
     <string name="export">Vie</string>
@@ -815,6 +820,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="hide">Piilota</string>
     <string name="hidden">Piilotettu</string>
     <string name="unhide">Näytä</string>
+    <string name="unhide_done">Näytetään</string>
     <string name="logs">Lokit</string>
     <string name="sources">Lähteet</string>
     <string name="installing_ellipsis">Asennetaan…</string>

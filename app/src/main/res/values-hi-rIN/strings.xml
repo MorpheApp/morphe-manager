@@ -781,6 +781,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">सभी चयनित</string>
     <string name="deselect_all">सभी का चयन रद्द करें</string>
     <string name="deselect_all_done">सभी अचयनित</string>
+    <string name="reorder_list">सूची को पुन: व्यवस्थित करें</string>
+    <string name="reorder_list_hint">पुन: व्यवस्थित करने के लिए खींचें</string>
+    <string name="reorder_done">क्रम सहेजा गया</string>
+    <string name="reset_order">क्रम रीसेट करें</string>
+    <string name="reset_order_done">ऑर्डर रीसेट हो गया</string>
     <string name="rename">रename</string>
     <string name="import_">आयात करें</string>
     <string name="export">निर्यात करें</string>
@@ -815,6 +820,7 @@ morphe_header_custom_dark.png
     <string name="hide">छुपायें</string>
     <string name="hidden">छिपा हुआ</string>
     <string name="unhide">अनहाइड करें</string>
+    <string name="unhide_done">दिखाया गया</string>
     <string name="logs">लॉग्स</string>
     <string name="sources">स्रोत</string>
     <string name="installing_ellipsis">इंस्टॉल हो रहा है…</string>

@@ -781,6 +781,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">เลือกทั้งหมดแล้ว</string>
     <string name="deselect_all">ยกเลิกการเลือกทั้งหมด</string>
     <string name="deselect_all_done">ยกเลิกการเลือกทั้งหมดแล้ว</string>
+    <string name="reorder_list">จัดเรียงรายการใหม่</string>
+    <string name="reorder_list_hint">ลากเพื่อจัดเรียงใหม่</string>
+    <string name="reorder_done">บันทึกการจัดเรียงแล้ว</string>
+    <string name="reset_order">รีเซ็ตการจัดเรียง</string>
+    <string name="reset_order_done">รีเซ็ตคำสั่งซื้อ</string>
     <string name="rename">เปลี่ยนชื่อ</string>
     <string name="import_">นำเข้า</string>
     <string name="export">ส่งออก</string>
@@ -815,6 +820,7 @@ morphe_header_custom_dark.png
     <string name="hide">ซ่อน</string>
     <string name="hidden">ซ่อน</string>
     <string name="unhide">แสดง</string>
+    <string name="unhide_done">แสดงแล้ว</string>
     <string name="logs">บันทึก</string>
     <string name="sources">แหล่งที่มา</string>
     <string name="installing_ellipsis">กำลังติดตั้ง…</string>

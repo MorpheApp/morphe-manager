@@ -454,6 +454,11 @@
     <string name="select_all_done">सर्व निवडले</string>
     <string name="deselect_all">सर्व निवड रद्द करा</string>
     <string name="deselect_all_done">सर्व निवड रद्द केली</string>
+    <string name="reorder_list">सूची पुन्हा क्रमवारी लावा</string>
+    <string name="reorder_list_hint">पुन्हा क्रमवारी लावण्यासाठी ड्रॅग करा</string>
+    <string name="reorder_done">क्रम जतन केला</string>
+    <string name="reset_order">क्रम रीसेट करा</string>
+    <string name="reset_order_done">ऑर्डर रीसेट केली</string>
     <string name="import_">आयात</string>
     <string name="unmount">डिमाउंट</string>
     <string name="share">शेअर करा</string>
@@ -463,6 +468,7 @@
     <string name="hide">लपवा</string>
     <string name="hidden">लपलेले</string>
     <string name="unhide">उघड करा</string>
+    <string name="unhide_done">दर्शविले</string>
     <string name="sources">स्त्रोत</string>
     <string name="imported_successfully">यशस्वीरित्या आयात केले</string>
     <!-- Onboarding coach marks -->

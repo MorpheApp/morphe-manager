@@ -781,6 +781,11 @@ Størrelsesformatet skal være som følger:
     <string name="select_all_done">Alle valgt</string>
     <string name="deselect_all">Fravælg alle</string>
     <string name="deselect_all_done">Alle fjernet valget</string>
+    <string name="reorder_list">Omarranger liste</string>
+    <string name="reorder_list_hint">Træk for at omarrangere</string>
+    <string name="reorder_done">Rækkefølge gemt</string>
+    <string name="reset_order">Nulstil rækkefølge</string>
+    <string name="reset_order_done">Ordre nulstillet</string>
     <string name="rename">Omdøb</string>
     <string name="import_">Importer</string>
     <string name="export">Eksporter</string>
@@ -815,6 +820,7 @@ Størrelsesformatet skal være som følger:
     <string name="hide">Skjul</string>
     <string name="hidden">Skjult</string>
     <string name="unhide">Vis</string>
+    <string name="unhide_done">Vist</string>
     <string name="logs">Logge</string>
     <string name="sources">Kilder</string>
     <string name="installing_ellipsis">Installerer…</string>

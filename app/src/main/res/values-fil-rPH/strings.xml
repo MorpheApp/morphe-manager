@@ -781,6 +781,11 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="select_all_done">Lahat ay napili</string>
     <string name="deselect_all">Alisin ang pagpili sa lahat</string>
     <string name="deselect_all_done">Lahat ay hindi napili</string>
+    <string name="reorder_list">Ayusin muli ang listahan</string>
+    <string name="reorder_list_hint">I-drag upang ayusin muli</string>
+    <string name="reorder_done">Nai-save ang pagkakasunud-sunod</string>
+    <string name="reset_order">Ibalik sa orihinal na pagkakasunud-sunod</string>
+    <string name="reset_order_done">Naibalik ang order</string>
     <string name="rename">Palitan</string>
     <string name="import_">I-import</string>
     <string name="export">I-export</string>
@@ -815,6 +820,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="hide">Itago</string>
     <string name="hidden">Nakatago</string>
     <string name="unhide">Ipakita</string>
+    <string name="unhide_done">Ipinakita</string>
     <string name="logs">Mga log</string>
     <string name="sources">Mga mapagkukunan</string>
     <string name="installing_ellipsis">Ini-install…</string>

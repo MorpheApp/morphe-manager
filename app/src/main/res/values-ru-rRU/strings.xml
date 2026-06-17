@@ -99,7 +99,7 @@
     <string name="sources_dialog_view_any_package">Любой пакет</string>
     <string name="sources_dialog_add_source">Добавить источник патча</string>
     <string name="sources_dialog_delete_confirm_message">Удалить источник \"%s\"? Это действие невозможно отменить</string>
-    <string name="sources_dialog_remote">Сторонние</string>
+    <string name="sources_dialog_remote">Удаленный</string>
     <string name="sources_dialog_remote_url">URL источника</string>
     <string name="sources_dialog_remote_url_formats_title">Примеры:</string>
     <string name="sources_dialog_local">Локальный</string>
@@ -781,6 +781,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">Все выбрано</string>
     <string name="deselect_all">Снять выделение со всех</string>
     <string name="deselect_all_done">Все снято</string>
+    <string name="reorder_list">Переупорядочить список</string>
+    <string name="reorder_list_hint">Перетащите, чтобы изменить порядок</string>
+    <string name="reorder_done">Порядок сохранен</string>
+    <string name="reset_order">Сбросить порядок</string>
+    <string name="reset_order_done">Сброс заказа</string>
     <string name="rename">Переименовать</string>
     <string name="import_">Импортировать</string>
     <string name="export">Экспорт</string>
@@ -815,6 +820,7 @@ morphe_header_custom_dark.png
     <string name="hide">Скрыть</string>
     <string name="hidden">Скрыто</string>
     <string name="unhide">Показать</string>
+    <string name="unhide_done">Показано</string>
     <string name="logs">Журналы</string>
     <string name="sources">Источники</string>
     <string name="installing_ellipsis">Установка…</string>

@@ -782,6 +782,11 @@ morphe_adaptive_monochrome_custom.xml
     <string name="select_all_done">تم تحديد الكل</string>
     <string name="deselect_all">إلغاء تحديد الكل</string>
     <string name="deselect_all_done">تم إلغاء تحديد الكل</string>
+    <string name="reorder_list">إعادة ترتيب القائمة</string>
+    <string name="reorder_list_hint">اسحب لإعادة الترتيب</string>
+    <string name="reorder_done">تم حفظ الترتيب</string>
+    <string name="reset_order">إعادة تعيين الترتيب</string>
+    <string name="reset_order_done">تم إعادة تعيين الطلب</string>
     <string name="rename">إعادة تسمية</string>
     <string name="import_">استيراد</string>
     <string name="export">تصدير</string>
@@ -816,6 +821,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="hide">إخفاء</string>
     <string name="hidden">مخفي</string>
     <string name="unhide">إظهار</string>
+    <string name="unhide_done">تمّ العرض</string>
     <string name="logs">السجلات</string>
     <string name="sources">المصادر</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>

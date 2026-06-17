@@ -782,6 +782,11 @@ Forrás: #%2$s</string>
     <string name="select_all_done">Mind kiválasztva</string>
     <string name="deselect_all">Összes kijelölés visszavonása</string>
     <string name="deselect_all_done">Mind törölve</string>
+    <string name="reorder_list">Lista átrendezése</string>
+    <string name="reorder_list_hint">Húzza át a pozíciók módosításához</string>
+    <string name="reorder_done">Rendezés mentve</string>
+    <string name="reset_order">Rendezés alaphelyzetbe állítása</string>
+    <string name="reset_order_done">Rendelés visszaállítva</string>
     <string name="rename">Átnevezés</string>
     <string name="import_">Importálás</string>
     <string name="export">Exportálás</string>
@@ -816,6 +821,7 @@ Forrás: #%2$s</string>
     <string name="hide">Elrejtés</string>
     <string name="hidden">Elrejtve</string>
     <string name="unhide">Feloldás</string>
+    <string name="unhide_done">Megjelenítve</string>
     <string name="logs">Naplók</string>
     <string name="sources">Források</string>
     <string name="installing_ellipsis">Telepítés…</string>

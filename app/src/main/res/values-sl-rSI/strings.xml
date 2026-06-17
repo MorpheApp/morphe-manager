@@ -781,6 +781,11 @@ Dimenzije slike morajo biti naslednje:
     <string name="select_all_done">Vse izbrano</string>
     <string name="deselect_all">Ne izberi nič</string>
     <string name="deselect_all_done">Nič več izbrano</string>
+    <string name="reorder_list">Ponovno uredi seznam</string>
+    <string name="reorder_list_hint">Povlecite za ponovno ureditev</string>
+    <string name="reorder_done">Vrstni red shranjen</string>
+    <string name="reset_order">Ponastavi vrstni red</string>
+    <string name="reset_order_done">Ponastavitev naročila</string>
     <string name="rename">Preimenuj</string>
     <string name="import_">Uvozi</string>
     <string name="export">Izvozi</string>
@@ -815,6 +820,7 @@ Dimenzije slike morajo biti naslednje:
     <string name="hide">Skrij</string>
     <string name="hidden">Skrit</string>
     <string name="unhide">Pokaži</string>
+    <string name="unhide_done">Prikazano</string>
     <string name="logs">Dnevnik</string>
     <string name="sources">Viri</string>
     <string name="installing_ellipsis">Nameščanje…</string>

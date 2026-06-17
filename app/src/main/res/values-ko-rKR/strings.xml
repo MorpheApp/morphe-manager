@@ -55,25 +55,25 @@
     <string name="home_greeting_10">카페인과 좋은 패치로 가동 중</string>
     <!-- Morning greetings (5:00–11:59) -->
     <string name="home_greeting_morning_1">일어나서 패치하세요</string>
-    <string name="home_greeting_morning_2">좋은 아침입니다! 앱은 스스로 패치되지 않아요.</string>
+    <string name="home_greeting_morning_2">좋은 아침입니다! 앱은 스스로 패치되지 않아요</string>
     <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">오후에 힘이 드시나요? 무언가 패치하세요.</string>
-    <string name="home_greeting_afternoon_2">점심 식사 후 패치는 또 다른 느낌</string>
-    <string name="home_greeting_afternoon_3">오후 조는 패치 시간</string>
+    <string name="home_greeting_afternoon_1">오후에 나른해지나요? 무언가를 패치해 보세요</string>
+    <string name="home_greeting_afternoon_2">점심 식사 후에 하는 패치는 느낌이 달라요</string>
+    <string name="home_greeting_afternoon_3">오후 시간에는 패치 모드 돌입</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">안녕하세요! 저녁 패치는 또 다른 느낌입니다.</string>
-    <string name="home_greeting_evening_2">좀 쉬고 싶나요? 먼저 앱을 패치하세요.</string>
-    <string name="home_greeting_evening_3">퇴근하시나요? 먼저 무언가 패치하세요.</string>
+    <string name="home_greeting_evening_1">안녕하세요! 저녁 패치는 또 다른 느낌입니다</string>
+    <string name="home_greeting_evening_2">좀 쉬고 싶나요? 먼저 앱을 패치해 보세요</string>
+    <string name="home_greeting_evening_3">퇴근하시나요? 먼저 무언가 패치해 보세요</string>
     <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">아직 안 주무시나요? 패치가 필요한 앱들도 깨어 있습니다.</string>
-    <string name="home_greeting_late_night_2">늦은 밤 패치 세션? 좋아요.</string>
-    <string name="home_greeting_late_night_3">야행성 모드: 활성화됨</string>
+    <string name="home_greeting_late_night_1">아직 안 주무시나요? 패치가 필요한 앱들도 깨어 있습니다</string>
+    <string name="home_greeting_late_night_2">늦은 밤까지 패치 작업 중이라고요? 존경합니다</string>
+    <string name="home_greeting_late_night_3">야행성 모드: ON</string>
     <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">패치 최적 시간... 이라는데</string>
-    <string name="home_greeting_super_late_2">잠이 안 오나요? 무언가 패치하세요.</string>
-    <string name="home_greeting_super_late_3">이럴 바에는 그냥 깨어 있다가 패치하세요.</string>
-    <string name="home_greeting_super_late_4">당신과 서버, 둘 다 깨어있네요.</string>
-    <string name="home_greeting_super_late_5">밤에도 생산적입니다.</string>
+    <string name="home_greeting_super_late_1">패치 최적 시간... 이라고 합니다</string>
+    <string name="home_greeting_super_late_2">잠이 안 오나요? 무언가 패치해 보세요</string>
+    <string name="home_greeting_super_late_3">이 정도면 그냥 안 자고 패치하는 게 낫겠네요</string>
+    <string name="home_greeting_super_late_4">당신과 서버, 둘 다 깨어있네요</string>
+    <string name="home_greeting_super_late_5">야행성이면서 생산적이네요</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">패치 소스</string>
     <string name="sources_management_open_in_browser">브라우저에서 열기</string>
@@ -206,7 +206,7 @@
     <string name="home_dialog_unsupported_version_compatible_versions">호환 가능한 버전:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">지원되지 않음</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">빌드 %d</string>
+    <string name="home_dialog_unsupported_version_build">Build %d</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">동일 버전이지만 다른 빌드입니다. 패치하려면 특정 빌드가 필요합니다</string>
     <string name="home_dialog_wrong_package_title">잘못된 패키지가 선택됨</string>
     <string name="home_dialog_wrong_package_description">선택된 APK는 패치하려는 애플리케이션이 아닙니다</string>
@@ -613,7 +613,7 @@ morphe_header_custom_dark.png
     <string name="installer_option_none">대체 없음</string>
     <string name="installer_none_description">설정된 대체 설치 프로그램이 없습니다</string>
     <string name="installer_status_requires_root">루트 접근 권한이 필요합니다</string>
-    <string name="installer_status_not_supported">이 동작에는 지원되지 않습니다</string>
+    <string name="installer_status_not_supported">이 작업에는 지원되지 않습니다</string>
     <string name="installer_status_shizuku_not_installed">이 옵션을 사용하려면 Shizuku 또는 Sui를 설치하세요</string>
     <string name="installer_status_shizuku_not_running">Shizuku 또는 Sui 을 시작하고 다시 시도하세요</string>
     <string name="installer_status_shizuku_permission">Shizuku 앱에서 Morphe에 Shizuku 권한을 부여하세요</string>
@@ -782,6 +782,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">모두 선택하였습니다</string>
     <string name="deselect_all">모두 선택 해제</string>
     <string name="deselect_all_done">모두 선택 해제하였습니다</string>
+    <string name="reorder_list">목록 재정렬</string>
+    <string name="reorder_list_hint">재정렬하려면 드래그하세요</string>
+    <string name="reorder_done">순서가 저장되었습니다</string>
+    <string name="reset_order">순서 초기화</string>
+    <string name="reset_order_done">주문 초기화</string>
     <string name="rename">이름 변경</string>
     <string name="import_">가져오기</string>
     <string name="export">내보내기</string>
@@ -816,6 +821,7 @@ morphe_header_custom_dark.png
     <string name="hide">숨기기</string>
     <string name="hidden">숨겨짐</string>
     <string name="unhide">숨기기 해제</string>
+    <string name="unhide_done">표시됨</string>
     <string name="logs">로그</string>
     <string name="sources">소스</string>
     <string name="installing_ellipsis">설치하는 중…</string>
