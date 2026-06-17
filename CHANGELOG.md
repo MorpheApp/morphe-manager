@@ -1,3 +1,15 @@
+# [1.22.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.1...v1.22.0-dev.2) (2026-06-17)
+
+
+### Bug Fixes
+
+* Exclude nested `.apk` entries from split archive detection ([#644](https://github.com/MorpheApp/morphe-manager/issues/644)) ([0b4d6ee](https://github.com/MorpheApp/morphe-manager/commit/0b4d6ee006e098cbaed7b01ec529e5a585e1e8ec))
+
+
+### Features
+
+* Add app list reorder mode to home screen multiselect bar ([#645](https://github.com/MorpheApp/morphe-manager/issues/645)) ([c0939e4](https://github.com/MorpheApp/morphe-manager/commit/c0939e44976ece5e42598a9538e176d3b5a70e3b))
+
 # [1.22.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.21.0...v1.22.0-dev.1) (2026-06-15)
 
 

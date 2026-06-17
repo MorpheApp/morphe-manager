@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-06-15T06:16:14",
-  "description": "# [1.22.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.21.0...v1.22.0-dev.1) (2026-06-15)\n\n\n### Bug Fixes\n\n* Show install error instead of uninstall dialog when target package is not installed ([6a7dcc1](https://github.com/MorpheApp/morphe-manager/commit/6a7dcc1089dbff3f27539d740b1ee782bb29637d))\n\n\n### Features\n\n* Check `versionCode` when resolving patch compatibility ([#639](https://github.com/MorpheApp/morphe-manager/issues/639)) ([08889f3](https://github.com/MorpheApp/morphe-manager/commit/08889f319abc4fe41eb887e45f1666f6cbe5a014))\n* Show home greetings based on time of day ([#632](https://github.com/MorpheApp/morphe-manager/issues/632)) ([1f30763](https://github.com/MorpheApp/morphe-manager/commit/1f30763833889cdea7b8e793d65bea6062edef5b))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.1/morphe-manager-1.22.0-dev.1.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.1/morphe-manager-1.22.0-dev.1.apk.asc",
-  "version": "1.22.0-dev.1"
+  "created_at": "2026-06-17T06:57:58",
+  "description": "# [1.22.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.1...v1.22.0-dev.2) (2026-06-17)\n\n\n### Bug Fixes\n\n* Exclude nested `.apk` entries from split archive detection ([#644](https://github.com/MorpheApp/morphe-manager/issues/644)) ([0b4d6ee](https://github.com/MorpheApp/morphe-manager/commit/0b4d6ee006e098cbaed7b01ec529e5a585e1e8ec))\n\n\n### Features\n\n* Add app list reorder mode to home screen multiselect bar ([#645](https://github.com/MorpheApp/morphe-manager/issues/645)) ([c0939e4](https://github.com/MorpheApp/morphe-manager/commit/c0939e44976ece5e42598a9538e176d3b5a70e3b))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.2/morphe-manager-1.22.0-dev.2.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.2/morphe-manager-1.22.0-dev.2.apk.asc",
+  "version": "1.22.0-dev.2"
 }
