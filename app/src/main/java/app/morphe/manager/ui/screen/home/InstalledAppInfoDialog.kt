@@ -326,7 +326,7 @@ fun InstalledAppInfoDialog(
                                 packageName = packageName,
                                 installedApp = installedApp,
                                 accentColor = appAccentColor,
-                                compact = true,
+                                compact = windowSize.widthSizeClass == WindowWidthSizeClass.Expanded,
                                 modifier = Modifier.clip(RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp))
                             )
                         }
