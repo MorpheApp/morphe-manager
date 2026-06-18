@@ -1,3 +1,10 @@
+# [1.22.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.2...v1.22.0-dev.3) (2026-06-18)
+
+
+### Bug Fixes
+
+* Trigger Shizuku auto-install in the background without waiting for foreground ([#642](https://github.com/MorpheApp/morphe-manager/issues/642)) ([eee8626](https://github.com/MorpheApp/morphe-manager/commit/eee8626bb86d385a2036111cc1a75cf18dc6f141))
+
 # [1.22.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.1...v1.22.0-dev.2) (2026-06-17)
 
 

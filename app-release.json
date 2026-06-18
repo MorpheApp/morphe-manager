@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-06-17T06:57:58",
-  "description": "# [1.22.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.1...v1.22.0-dev.2) (2026-06-17)\n\n\n### Bug Fixes\n\n* Exclude nested `.apk` entries from split archive detection ([#644](https://github.com/MorpheApp/morphe-manager/issues/644)) ([0b4d6ee](https://github.com/MorpheApp/morphe-manager/commit/0b4d6ee006e098cbaed7b01ec529e5a585e1e8ec))\n\n\n### Features\n\n* Add app list reorder mode to home screen multiselect bar ([#645](https://github.com/MorpheApp/morphe-manager/issues/645)) ([c0939e4](https://github.com/MorpheApp/morphe-manager/commit/c0939e44976ece5e42598a9538e176d3b5a70e3b))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.2/morphe-manager-1.22.0-dev.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.2/morphe-manager-1.22.0-dev.2.apk.asc",
-  "version": "1.22.0-dev.2"
+  "created_at": "2026-06-18T07:02:00",
+  "description": "# [1.22.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.2...v1.22.0-dev.3) (2026-06-18)\n\n\n### Bug Fixes\n\n* Trigger Shizuku auto-install in the background without waiting for foreground ([#642](https://github.com/MorpheApp/morphe-manager/issues/642)) ([eee8626](https://github.com/MorpheApp/morphe-manager/commit/eee8626bb86d385a2036111cc1a75cf18dc6f141))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.3/morphe-manager-1.22.0-dev.3.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.3/morphe-manager-1.22.0-dev.3.apk.asc",
+  "version": "1.22.0-dev.3"
 }
