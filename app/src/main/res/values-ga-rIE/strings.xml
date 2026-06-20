@@ -754,6 +754,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="warning">Rabhadh</string>
     <string name="error_">Earráid</string>
     <string name="retry">Déan iarracht eile</string>
+    <string name="refresh">Athnuachan</string>
     <string name="add">Cuir leis</string>
     <string name="close">Dún</string>
     <string name="back">Ar ais</string>
@@ -770,6 +771,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="view">Amharc</string>
     <string name="search">Cuardaigh</string>
     <string name="search_no_results">Níor aimsíodh aon torthaí</string>
+    <string name="sort">Sórtáil</string>
     <string name="any_version">Aon</string>
     <string name="enabled">Cumasaithe</string>
     <string name="disabled">Díchumasaithe</string>

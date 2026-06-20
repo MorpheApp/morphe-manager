@@ -757,6 +757,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="warning">Avertissement</string>
     <string name="error_">Erreur</string>
     <string name="retry">Réessayer</string>
+    <string name="refresh">Actualiser</string>
     <string name="add">Ajouter</string>
     <string name="close">Fermer</string>
     <string name="back">Retour</string>
@@ -773,6 +774,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="view">Voir</string>
     <string name="search">Rechercher</string>
     <string name="search_no_results">Pas de résultat trouvé</string>
+    <string name="sort">Trier</string>
     <string name="any_version">N\'importe laquelle</string>
     <string name="enabled">Activé</string>
     <string name="disabled">Désactivé</string>

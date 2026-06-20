@@ -756,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">Προειδοποίηση</string>
     <string name="error_">Σφάλμα</string>
     <string name="retry">Προσπαθήστε ξανά</string>
+    <string name="refresh">Ανανέωση</string>
     <string name="add">Προσθήκη</string>
     <string name="close">Κλείσιμο</string>
     <string name="back">Πίσω</string>
@@ -772,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">Προβολή</string>
     <string name="search">Αναζήτηση</string>
     <string name="search_no_results">Δε βρέθηκαν αποτελέσματα</string>
+    <string name="sort">Ταξινόμηση</string>
     <string name="any_version">Οποιαδήποτε</string>
     <string name="enabled">Ενεργοποιημένο</string>
     <string name="disabled">Απενεργοποιημένο</string>

@@ -756,6 +756,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="warning">Aviso</string>
     <string name="error_">Erro</string>
     <string name="retry">Tentar de novo</string>
+    <string name="refresh">Atualizar</string>
     <string name="add">Adicionar</string>
     <string name="close">Fechar</string>
     <string name="back">Voltar</string>
@@ -772,6 +773,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="view">Visualizar</string>
     <string name="search">Pesquisar</string>
     <string name="search_no_results">Nenhum resultado encontrado</string>
+    <string name="sort">Ordenar</string>
     <string name="any_version">Qualquer</string>
     <string name="enabled">Ativado</string>
     <string name="disabled">Desativado</string>

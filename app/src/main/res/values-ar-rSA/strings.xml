@@ -757,6 +757,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="warning">تحذير</string>
     <string name="error_">خطأ</string>
     <string name="retry">إعادة المحاولة</string>
+    <string name="refresh">تحديث</string>
     <string name="add">إضافة</string>
     <string name="close">إغلاق</string>
     <string name="back">رجوع</string>
@@ -773,6 +774,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="view">عرض</string>
     <string name="search">البحث</string>
     <string name="search_no_results">لم يتم العثور على نتائج</string>
+    <string name="sort">فرز</string>
     <string name="any_version">أي شي</string>
     <string name="enabled">تمكين</string>
     <string name="disabled">معطّل</string>

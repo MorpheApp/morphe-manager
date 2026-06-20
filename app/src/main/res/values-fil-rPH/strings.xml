@@ -756,6 +756,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="warning">Babala</string>
     <string name="error_">Pagkakamali</string>
     <string name="retry">Subukan muli</string>
+    <string name="refresh">I-refresh</string>
     <string name="add">Idagdag</string>
     <string name="close">Isara</string>
     <string name="back">Bumalik</string>
@@ -772,6 +773,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="view">Tingnan</string>
     <string name="search">Hanapin</string>
     <string name="search_no_results">Walang mahanap na mga resulta</string>
+    <string name="sort">Pagbukud-bukurin</string>
     <string name="any_version">Anuman</string>
     <string name="enabled">Pinagana</string>
     <string name="disabled">Nakapatay</string>

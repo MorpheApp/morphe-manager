@@ -756,6 +756,7 @@ Die beeld afmetings moet soos volg wees:
     <string name="warning">Waarskuwing</string>
     <string name="error_">Fout</string>
     <string name="retry">Probeer weer</string>
+    <string name="refresh">Herlaai</string>
     <string name="add">Voeg by</string>
     <string name="close">Sluit</string>
     <string name="back">Terug</string>
@@ -772,6 +773,7 @@ Die beeld afmetings moet soos volg wees:
     <string name="view">Beskou</string>
     <string name="search">Soek</string>
     <string name="search_no_results">Geen resultate gevind nie</string>
+    <string name="sort">Sorteer</string>
     <string name="any_version">Enige</string>
     <string name="enabled">Geaktiveer</string>
     <string name="disabled">Gedeaktiveer</string>

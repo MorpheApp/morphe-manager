@@ -756,6 +756,7 @@ Rozměry obrázků musí být následující:
     <string name="warning">Varování</string>
     <string name="error_">Chyba</string>
     <string name="retry">Zkuste znova</string>
+    <string name="refresh">Obnovit</string>
     <string name="add">Přidat</string>
     <string name="close">Zavřít</string>
     <string name="back">Zpět</string>
@@ -772,6 +773,7 @@ Rozměry obrázků musí být následující:
     <string name="view">Zobrazit</string>
     <string name="search">Hledat</string>
     <string name="search_no_results">Nebyly nalezeny žádné výsledky</string>
+    <string name="sort">Řazení</string>
     <string name="any_version">Libovolná</string>
     <string name="enabled">Zapnuto</string>
     <string name="disabled">Vypnuto</string>

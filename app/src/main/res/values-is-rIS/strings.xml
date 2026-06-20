@@ -751,6 +751,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="warning">Vara</string>
     <string name="error_">Villa</string>
     <string name="retry">Reyna aftur</string>
+    <string name="refresh">Endurhæfa</string>
     <string name="add">Bæta við</string>
     <string name="close">Loka</string>
     <string name="back">Til baka</string>
@@ -767,6 +768,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="view">Skoða</string>
     <string name="search">Leita</string>
     <string name="search_no_results">Engin niðurstöður fundust</string>
+    <string name="sort">Raða</string>
     <string name="any_version">Hver sem er</string>
     <string name="enabled">Virkt</string>
     <string name="disabled">Óvirkt</string>

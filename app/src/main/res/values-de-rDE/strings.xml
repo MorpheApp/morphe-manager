@@ -756,6 +756,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="warning">Warnung</string>
     <string name="error_">Fehler</string>
     <string name="retry">Erneut versuchen</string>
+    <string name="refresh">Aktualisieren</string>
     <string name="add">Hinzufügen</string>
     <string name="close">Schließen</string>
     <string name="back">Zurück</string>
@@ -772,6 +773,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="view">Anzeigen</string>
     <string name="search">Suchen</string>
     <string name="search_no_results">Keine Ergebnisse gefunden</string>
+    <string name="sort">Sortieren</string>
     <string name="any_version">Jede</string>
     <string name="enabled">Aktiviert</string>
     <string name="disabled">Deaktiviert</string>

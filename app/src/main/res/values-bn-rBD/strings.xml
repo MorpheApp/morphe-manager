@@ -748,6 +748,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="warning">সতর্কবার্তা</string>
     <string name="error_">ত্রুটি</string>
     <string name="retry">আবার চেষ্টা করুন</string>
+    <string name="refresh">রিফ্রেশ</string>
     <string name="add">যোগ করুন</string>
     <string name="close">বন্ধ করুন</string>
     <string name="back">পিছিয়ে যান</string>
@@ -764,6 +765,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="view">দেখুন</string>
     <string name="search">অনুসন্ধান</string>
     <string name="search_no_results">কোনো ফলাফল পাওয়া যায়নি</string>
+    <string name="sort">সর্ট করুন</string>
     <string name="any_version">যেকোনো</string>
     <string name="enabled">ক্ষমতাকার্তা করা হয়েছে</string>
     <string name="disabled">নিষ্ক্রিয় হয়েছে</string>

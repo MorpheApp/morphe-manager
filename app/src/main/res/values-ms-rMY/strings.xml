@@ -54,8 +54,14 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Dikuasakan oleh kafein dan tampalan yang bagus</string>
     <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Bangun dan tampal</string>
+    <string name="home_greeting_morning_2">Selamat pagi! Aplikasi tidak akan melakukan tampalannya sendiri</string>
     <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Rasa lemas di tengah hari? Buatlah tampalan</string>
+    <string name="home_greeting_afternoon_2">Membuat tampalan selepas makan tengah hari terasa berbeza</string>
+    <string name="home_greeting_afternoon_3">Syif petang: edisi tampalan</string>
     <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Selamat petang! Tampalan petang terasa berbeza</string>
     <!-- Late night greetings (22:00–23:59) -->
     <!-- Super late night greetings (0:00–4:59) -->
     <!-- Home Screen - Sources Management -->

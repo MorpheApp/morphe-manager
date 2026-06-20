@@ -756,6 +756,7 @@ Størrelsesformatet skal være som følger:
     <string name="warning">Advarsel</string>
     <string name="error_">Fejl</string>
     <string name="retry">Forsøg igen</string>
+    <string name="refresh">Opdater</string>
     <string name="add">Tilføj</string>
     <string name="close">Luk</string>
     <string name="back">Tilbage</string>
@@ -772,6 +773,7 @@ Størrelsesformatet skal være som følger:
     <string name="view">Vis</string>
     <string name="search">Søg</string>
     <string name="search_no_results">Fandt ingen resultater</string>
+    <string name="sort">Sortér</string>
     <string name="any_version">Enhver</string>
     <string name="enabled">Aktiveret</string>
     <string name="disabled">Deaktiveret</string>

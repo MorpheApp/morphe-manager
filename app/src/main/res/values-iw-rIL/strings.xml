@@ -740,6 +740,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="warning">אזהרה</string>
     <string name="error_">שגגה</string>
     <string name="retry">נסה שוב</string>
+    <string name="refresh">רענן</string>
     <string name="add">הוסף</string>
     <string name="close">סגור</string>
     <string name="back">חזרה</string>
@@ -756,6 +757,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="view">צפה</string>
     <string name="search">חיפוש</string>
     <string name="search_no_results">לא נמצאו תוצאות</string>
+    <string name="sort">מיון</string>
     <string name="any_version">כל</string>
     <string name="enabled">הפעל</string>
     <string name="disabled">מושבת</string>

@@ -756,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">Попередження</string>
     <string name="error_">Помилка</string>
     <string name="retry">Повторити</string>
+    <string name="refresh">Оновити</string>
     <string name="add">Додати</string>
     <string name="close">Закрити</string>
     <string name="back">Назад</string>
@@ -772,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">Переглянути</string>
     <string name="search">Пошук</string>
     <string name="search_no_results">Не знайдено результатів</string>
+    <string name="sort">Сортувати</string>
     <string name="any_version">Будь-яка</string>
     <string name="enabled">Увімкнено</string>
     <string name="disabled">Вимкнено</string>

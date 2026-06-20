@@ -756,6 +756,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="warning">Varoitus</string>
     <string name="error_">Virhe</string>
     <string name="retry">Yritä uudelleen</string>
+    <string name="refresh">Päivitä</string>
     <string name="add">Lisää</string>
     <string name="close">Sulje</string>
     <string name="back">Takaisin</string>
@@ -772,6 +773,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="view">Näytä</string>
     <string name="search">Haku</string>
     <string name="search_no_results">Tuloksia ei löytynyt</string>
+    <string name="sort">Lajittele</string>
     <string name="any_version">Mikä tahansa</string>
     <string name="enabled">Käytössä</string>
     <string name="disabled">Pois käytöstä</string>

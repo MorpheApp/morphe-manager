@@ -756,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">Предупреждение</string>
     <string name="error_">Грешка</string>
     <string name="retry">Повтори</string>
+    <string name="refresh">Опресни</string>
     <string name="add">Добави</string>
     <string name="close">Затвори</string>
     <string name="back">Назад</string>
@@ -772,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">Просмотр</string>
     <string name="search">Търсене</string>
     <string name="search_no_results">Няма намерени резултати</string>
+    <string name="sort">Сортиране</string>
     <string name="any_version">Изтриване на запазеното приложение</string>
     <string name="enabled">Включен</string>
     <string name="disabled">Изключен</string>

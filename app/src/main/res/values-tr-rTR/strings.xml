@@ -756,6 +756,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="warning">Uyarı</string>
     <string name="error_">Hata</string>
     <string name="retry">Tekrar deneyin</string>
+    <string name="refresh">Yenile</string>
     <string name="add">Ekle</string>
     <string name="close">Kapat</string>
     <string name="back">Geri</string>
@@ -772,6 +773,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="view">Görüntüle</string>
     <string name="search">Ara</string>
     <string name="search_no_results">Sonuç bulunamadı</string>
+    <string name="sort">Sırala</string>
     <string name="any_version">Herhangi</string>
     <string name="enabled">Etkin</string>
     <string name="disabled">Devre dışı</string>
@@ -818,7 +820,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="allow">İzin ver</string>
     <string name="details">Detaylar</string>
     <string name="hide">Gizle</string>
-    <string name="hidden">Gizli</string>
+    <string name="hidden">Gizlendi</string>
     <string name="unhide">Gizliliği kaldır</string>
     <string name="unhide_done">Gösterildi</string>
     <string name="logs">Günlükler</string>

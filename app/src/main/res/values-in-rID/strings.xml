@@ -54,26 +54,26 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Didukung oleh kafein dan tambalan yang bagus</string>
     <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Bangun dan tambal</string>
-    <string name="home_greeting_morning_2">Selamat pagi! Aplikasi tidak akan memperbarui diri sendiri</string>
+    <string name="home_greeting_morning_1">Bangkit dan tambal</string>
+    <string name="home_greeting_morning_2">Selamat pagi! Aplikasi tidak akan menambal dirinya sendiri</string>
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">Lemas di siang hari? Tambal sesuatu</string>
-    <string name="home_greeting_afternoon_2">Patching setelah makan siang terasa berbeda</string>
-    <string name="home_greeting_afternoon_3">Shift sore: edisi patching</string>
+    <string name="home_greeting_afternoon_2">Menambal setelah makan siang terasa berbeda</string>
+    <string name="home_greeting_afternoon_3">Shift sore: edisi menambal</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Selamat malam! Patching malam terasa berbeda</string>
-    <string name="home_greeting_evening_2">Mau bersantai? Patch dulu aplikasinya</string>
-    <string name="home_greeting_evening_3">Mau pulang? Patch dulu aplikasinya</string>
+    <string name="home_greeting_evening_1">Selamat malam! Menambal di malam hari terasa berbeda</string>
+    <string name="home_greeting_evening_2">Mau bersantai? Tambal dulu aplikasinya</string>
+    <string name="home_greeting_evening_3">Mau pulang? Tambal dulu aplikasinya</string>
     <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Masih terjaga? Aplikasi yang perlu di-patch juga demikian</string>
-    <string name="home_greeting_late_night_2">Sesi patching larut malam? Keren</string>
+    <string name="home_greeting_late_night_1">Masih terjaga? Aplikasi yang perlu ditambal juga demikian</string>
+    <string name="home_greeting_late_night_2">Sesi penambalan larut malam? Salut!</string>
     <string name="home_greeting_late_night_3">Mode burung hantu malam: diaktifkan</string>
     <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Jam sibuk patching… konon katanya</string>
-    <string name="home_greeting_super_late_2">Tidak bisa tidur? Patch saja</string>
-    <string name="home_greeting_super_late_3">Saat ini, mending tetap bangun dan patch</string>
+    <string name="home_greeting_super_late_1">Jam-jam sibuk untuk menambal… kata orang sih</string>
+    <string name="home_greeting_super_late_2">Tidak bisa tidur? Tambal sesuatu lah</string>
+    <string name="home_greeting_super_late_3">Saat ini, mending tetap bangun dan tambal</string>
     <string name="home_greeting_super_late_4">Kamu dan server, sama-sama terjaga</string>
-    <string name="home_greeting_super_late_5">Malam dan produktif</string>
+    <string name="home_greeting_super_late_5">Aktif di malam hari dan produktif</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Sumber tambalan</string>
     <string name="sources_management_open_in_browser">Buka di peramban</string>
@@ -128,7 +128,7 @@
     <string name="home_apk_availability_yes">Ya, bantu saya mencari APK</string>
     <string name="home_apk_availability_no">Tidak, saya sudah memiliki APK</string>
     <string name="home_apk_use_saved">Gunakan APK yang tersimpan</string>
-    <string name="home_apk_use_installed">Menggunakan APK yang terpasang</string>
+    <string name="home_apk_use_installed">Gunakan APK yang terpasang</string>
     <string name="home_app_info_no_saved_apk">Tidak ada APK yang disimpan. Penambalan akan memerlukan memilih berkas APK lagi</string>
     <string name="home_version_requires_android">Membutuhkan Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Tidak didukung di perangkat ini</string>
@@ -208,7 +208,7 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <string name="home_dialog_unsupported_version_unsupported_label">Tidak didukung</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Build %d</string>
-    <string name="home_dialog_unsupported_version_build_mismatch_description">Ini adalah build yang berbeda dari versi yang sama. Patch memerlukan build tertentu</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Ini adalah build yang berbeda dari versi yang sama. Tambalan memerlukan build tertentu</string>
     <string name="home_dialog_wrong_package_title">Salah memilih paket</string>
     <string name="home_dialog_wrong_package_description">APK yang dipilih bukan untuk aplikasi yang Anda harapkan untuk ditambal</string>
     <string name="home_dialog_expected_package">Paket yang diharapkan:</string>
@@ -757,6 +757,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="warning">Peringatan</string>
     <string name="error_">Kesalahan</string>
     <string name="retry">Coba lagi</string>
+    <string name="refresh">Segarkan</string>
     <string name="add">Tambah</string>
     <string name="close">Tutup</string>
     <string name="back">Kembali</string>
@@ -773,6 +774,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="view">Lihat</string>
     <string name="search">Pencarian</string>
     <string name="search_no_results">Tidak ada hasil yang ditemukan</string>
+    <string name="sort">Urutkan</string>
     <string name="any_version">Apa pun</string>
     <string name="enabled"> Diaktifkan</string>
     <string name="disabled">Dinonaktifkan</string>
@@ -785,8 +787,8 @@ Dimensi gambar harus sebagai berikut:
     <string name="reorder_list">Urutkan ulang daftar</string>
     <string name="reorder_list_hint">Seret untuk mengurutkan ulang</string>
     <string name="reorder_done">Urutan disimpan</string>
-    <string name="reset_order">Reset urutan</string>
-    <string name="reset_order_done">Pesanan dibatalkan</string>
+    <string name="reset_order">Atur ulang urutan</string>
+    <string name="reset_order_done">Urutan diatur ulang</string>
     <string name="rename">Ganti nama</string>
     <string name="import_">Impor</string>
     <string name="export">Ekspor</string>

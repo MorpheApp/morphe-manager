@@ -756,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">警告</string>
     <string name="error_">エラー</string>
     <string name="retry">再試行</string>
+    <string name="refresh">更新</string>
     <string name="add">追加</string>
     <string name="close">閉じる</string>
     <string name="back">戻る</string>
@@ -772,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">表示</string>
     <string name="search">検索</string>
     <string name="search_no_results">検索結果は見つかりませんでした</string>
+    <string name="sort">並べ替え</string>
     <string name="any_version">すべて</string>
     <string name="enabled">有効化</string>
     <string name="disabled">無効</string>

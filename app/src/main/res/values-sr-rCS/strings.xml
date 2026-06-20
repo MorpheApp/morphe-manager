@@ -740,6 +740,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="warning">Upozorenje</string>
     <string name="error_">Greška</string>
     <string name="retry">Pokušaj ponovo</string>
+    <string name="refresh">Osveži</string>
     <string name="add">Dodaj</string>
     <string name="close">Zatvori</string>
     <string name="back">Nazad</string>
@@ -756,6 +757,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="view">Pogledaj</string>
     <string name="search">Pretraži</string>
     <string name="search_no_results">Nije pronađen nijedan rezultat</string>
+    <string name="sort">Sortiraj</string>
     <string name="any_version">Bilo koja</string>
     <string name="enabled">Omogućen</string>
     <string name="disabled">Onemogućen</string>

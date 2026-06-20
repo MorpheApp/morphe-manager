@@ -756,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">警告</string>
     <string name="error_">错误</string>
     <string name="retry">重试</string>
+    <string name="refresh">刷新</string>
     <string name="add">添加</string>
     <string name="close">关闭</string>
     <string name="back">返回</string>
@@ -772,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">查看</string>
     <string name="search">搜索</string>
     <string name="search_no_results">找不到结果</string>
+    <string name="sort">排序</string>
     <string name="any_version">任意</string>
     <string name="enabled">已启用</string>
     <string name="disabled">已禁用</string>

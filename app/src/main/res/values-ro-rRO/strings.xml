@@ -756,6 +756,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="warning">Atenție</string>
     <string name="error_">Eroare</string>
     <string name="retry">Reîncearcă</string>
+    <string name="refresh">Reîmprospătează</string>
     <string name="add">Adaugă</string>
     <string name="close">Închide</string>
     <string name="back">Înapoi</string>
@@ -772,6 +773,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="view">Vizualizează</string>
     <string name="search">Caută</string>
     <string name="search_no_results">Nu s-au găsit rezultate</string>
+    <string name="sort">Sortare</string>
     <string name="any_version">Orice</string>
     <string name="enabled">Activat</string>
     <string name="disabled">Dezactivat</string>

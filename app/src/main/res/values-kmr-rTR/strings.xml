@@ -754,6 +754,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="warning">Îşar</string>
     <string name="error_">Xeṭ</string>
     <string name="retry">Dilo</string>
+    <string name="refresh">Nûvekirin</string>
     <string name="add">Zêde bike</string>
     <string name="close">Vediwere</string>
     <string name="back">Paşve</string>
@@ -770,6 +771,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="view">Dîtin</string>
     <string name="search">Lêwî</string>
     <string name="search_no_results">Tu encamedan ne heye</string>
+    <string name="sort">Rêbertkirin</string>
     <string name="any_version">Her</string>
     <string name="enabled">Destûrxast kirin</string>
     <string name="disabled">Ne destûrxast kirin</string>

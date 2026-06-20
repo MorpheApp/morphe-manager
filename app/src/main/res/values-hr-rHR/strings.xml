@@ -54,10 +54,26 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Pokretano kavom i dobrim patchevima</string>
     <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Ustani i patchaj</string>
+    <string name="home_greeting_morning_2">Dobro jutro! Aplikacije se neće same patchati</string>
     <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Poslijednji pad energije? Patchajte nešto</string>
+    <string name="home_greeting_afternoon_2">Patchanje nakon ručka pogađa drugačije</string>
+    <string name="home_greeting_afternoon_3">Popodnevna smjena: izdanje patcha</string>
     <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Dobra večer! Večernje patchanje pogađa drugačije</string>
+    <string name="home_greeting_evening_2">Opustili ste se? Prvo patchajte aplikaciju</string>
+    <string name="home_greeting_evening_3">Isključujete se? Prvo nešto patchajte</string>
     <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Još uvijek budni? Kao i aplikacije koje treba patchati također.</string>
+    <string name="home_greeting_late_night_2">Kasna noćna patch sesija? Poštovanje</string>
+    <string name="home_greeting_late_night_3">Mod noćne sove: aktivirano</string>
     <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Vrhunac patchanja... navodno</string>
+    <string name="home_greeting_super_late_2">Ne možeš spavati? Patchajte nešto</string>
+    <string name="home_greeting_super_late_3">U ovom trenutku, samo ostanite budni i patchajte</string>
+    <string name="home_greeting_super_late_4">Vi i poslužitelji, oboje budni</string>
+    <string name="home_greeting_super_late_5">Noćna i produktivna</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Izvori patcheva</string>
     <string name="sources_management_open_in_browser">Otvori u pregledniku</string>
@@ -111,6 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Nekompatibilno</string>
     <string name="home_apk_availability_yes">Da, pomozi mi pronaći aplikaciju</string>
     <string name="home_apk_availability_no">Ne, već imam aplikaciju</string>
+    <string name="home_apk_use_saved">Koristi spremljenu aplikaciju</string>
+    <string name="home_apk_use_installed">Koristi instaliranu aplikaciju</string>
     <string name="home_app_info_no_saved_apk">Nema spremljene aplikacije. Patchanje će zahtijevati ponovni odabir aplikacije</string>
     <string name="home_version_requires_android">Zahtijeva Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nije podržano na ovom uređaju</string>
@@ -188,6 +206,8 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatibilne verzije:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nije podržano</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Verzija %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Ovo je različita verzija iste verzije. Patchevi zahtijevaju posebnu verziju</string>
     <string name="home_dialog_wrong_package_title">Pogrešan paket odabran</string>
     <string name="home_dialog_wrong_package_description">Odabrana aplikacija nije namijenjena za aplikaciju koju želite patchati</string>
     <string name="home_dialog_expected_package">Očekivani paket:</string>
@@ -761,6 +781,11 @@ Dimenzije slike moraju biti sljedeće:
     <string name="select_all_done">Sve odabrano</string>
     <string name="deselect_all">Poništi odabir</string>
     <string name="deselect_all_done">Sve odabrano poništeno</string>
+    <string name="reorder_list">Promijeni redoslijed</string>
+    <string name="reorder_list_hint">Povucite za promjenu redoslijeda</string>
+    <string name="reorder_done">Redoslijed je spremljen</string>
+    <string name="reset_order">Poništite redoslijed</string>
+    <string name="reset_order_done">Redoslijed poništen</string>
     <string name="rename">Preimenuj</string>
     <string name="import_">Uvezi</string>
     <string name="export">Izvezi</string>
@@ -795,6 +820,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="hide">Sakrij</string>
     <string name="hidden">Skriveno</string>
     <string name="unhide">Otkrij</string>
+    <string name="unhide_done">Prikazuje se</string>
     <string name="logs">Zapisnici</string>
     <string name="sources">Izvori</string>
     <string name="installing_ellipsis">Instaliranje…</string>

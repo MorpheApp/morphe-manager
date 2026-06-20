@@ -753,6 +753,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="warning">Waarschuwing</string>
     <string name="error_">Fout</string>
     <string name="retry">Opnieuw proberen</string>
+    <string name="refresh">Vernieuwen</string>
     <string name="add">Toevoegen</string>
     <string name="close">Sluiten</string>
     <string name="back">Terug</string>
@@ -769,6 +770,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="view">Bekijken</string>
     <string name="search">Zoeken</string>
     <string name="search_no_results">Geen resultaten gevonden</string>
+    <string name="sort">Sorteren</string>
     <string name="any_version">Elke</string>
     <string name="enabled">Ingeschakeld</string>
     <string name="disabled">Uitgeschakeld</string>

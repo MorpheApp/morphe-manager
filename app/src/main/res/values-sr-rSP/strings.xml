@@ -756,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">Упозорење</string>
     <string name="error_">Грешка</string>
     <string name="retry">Покушај поново</string>
+    <string name="refresh">Освежи</string>
     <string name="add">Додај</string>
     <string name="close">Затвори</string>
     <string name="back">Назад</string>
@@ -772,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">Погледај</string>
     <string name="search">Претрага</string>
     <string name="search_no_results">Нису пронађени резултати за \'\'</string>
+    <string name="sort">Сортирај</string>
     <string name="any_version">Било која</string>
     <string name="enabled">Омогућено</string>
     <string name="disabled">Онемогућен</string>

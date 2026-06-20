@@ -757,6 +757,7 @@ Forrás: #%2$s</string>
     <string name="warning">Figyelmeztetés</string>
     <string name="error_">Hiba</string>
     <string name="retry">Újra</string>
+    <string name="refresh">Frissítés</string>
     <string name="add">Hozzáadás</string>
     <string name="close">Bezárás</string>
     <string name="back">Vissza</string>
@@ -773,6 +774,7 @@ Forrás: #%2$s</string>
     <string name="view">Megtekintés</string>
     <string name="search">Keresés</string>
     <string name="search_no_results">Nincs találat</string>
+    <string name="sort">Rendezés</string>
     <string name="any_version">Bármelyik</string>
     <string name="enabled">Engedélyezve</string>
     <string name="disabled">Kikapcsolva</string>

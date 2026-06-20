@@ -756,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">चेतावनी</string>
     <string name="error_">त्रुटि</string>
     <string name="retry">पुनरावलोकन करें</string>
+    <string name="refresh">ताज़ा करें</string>
     <string name="add">जोड़ें</string>
     <string name="close">बंद करे</string>
     <string name="back">वापस</string>
@@ -772,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">दृश्य</string>
     <string name="search">खोज</string>
     <string name="search_no_results">कोई परिणाम नहीं मिला</string>
+    <string name="sort">क्रमबद्ध करें</string>
     <string name="any_version">Failed to import keystore</string>
     <string name="enabled">सक्षम</string>
     <string name="disabled">असक्षम</string>

@@ -756,6 +756,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="warning">Ostrzeżenie</string>
     <string name="error_">Błąd</string>
     <string name="retry">Spróbuj ponownie</string>
+    <string name="refresh">Odśwież</string>
     <string name="add">Dodaj</string>
     <string name="close">Zamknij</string>
     <string name="back">Wstecz</string>
@@ -772,6 +773,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="view">Wyświetl</string>
     <string name="search">Szukaj</string>
     <string name="search_no_results">Nie znaleziono wyników</string>
+    <string name="sort">Sortuj</string>
     <string name="any_version">Dowolna</string>
     <string name="enabled">Włączone</string>
     <string name="disabled">Wyłączone</string>

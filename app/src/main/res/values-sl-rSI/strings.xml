@@ -756,6 +756,7 @@ Dimenzije slike morajo biti naslednje:
     <string name="warning">Opozorilo</string>
     <string name="error_">Napaka</string>
     <string name="retry">Poskusite znova</string>
+    <string name="refresh">Osveži</string>
     <string name="add">Dodaj</string>
     <string name="close">Zapri</string>
     <string name="back">Nazaj</string>
@@ -772,6 +773,7 @@ Dimenzije slike morajo biti naslednje:
     <string name="view">Poglej</string>
     <string name="search">Poišči</string>
     <string name="search_no_results">Ni najdenih rezultatov</string>
+    <string name="sort">Razvrsti</string>
     <string name="any_version">Kateri koli</string>
     <string name="enabled">Omogočeno</string>
     <string name="disabled">Onemogočeno</string>

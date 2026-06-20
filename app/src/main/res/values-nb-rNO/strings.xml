@@ -756,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">Advarsel</string>
     <string name="error_">Feil</string>
     <string name="retry">Prøv igjen</string>
+    <string name="refresh">Oppdater</string>
     <string name="add">Legg til</string>
     <string name="close">Lukk</string>
     <string name="back">Tilbake</string>
@@ -772,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">Vis</string>
     <string name="search">Søk</string>
     <string name="search_no_results">Ingen resultater funnet</string>
+    <string name="sort">Sorter</string>
     <string name="any_version">Hvilken som helst</string>
     <string name="enabled">Aktivert</string>
     <string name="disabled">Deaktivert</string>

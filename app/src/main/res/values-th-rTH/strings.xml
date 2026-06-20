@@ -756,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">คำเตือน</string>
     <string name="error_">ขยาย</string>
     <string name="retry">ลองใหม่อีกครั้ง</string>
+    <string name="refresh">รีเฟรช</string>
     <string name="add">เพิ่ม</string>
     <string name="close">ปิด</string>
     <string name="back">ย้อนกลับ</string>
@@ -772,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">ดู</string>
     <string name="search">ค้นหา</string>
     <string name="search_no_results">เปิด</string>
+    <string name="sort">เรียงลำดับ</string>
     <string name="any_version">เวอร์ชันใดก็ได้</string>
     <string name="enabled">เปิดใช้งานแล้ว</string>
     <string name="disabled">ปิดการใช้งานอยู่</string>

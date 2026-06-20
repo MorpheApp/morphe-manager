@@ -757,6 +757,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="warning">Cảnh báo</string>
     <string name="error_">Lỗi</string>
     <string name="retry">Thử lại</string>
+    <string name="refresh">Làm mới</string>
     <string name="add">Thêm</string>
     <string name="close">Đóng</string>
     <string name="back">Trước</string>
@@ -773,6 +774,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="view">Xem</string>
     <string name="search">Tìm kiếm</string>
     <string name="search_no_results">Không tìm thấy kết quả nào</string>
+    <string name="sort">Sắp xếp</string>
     <string name="any_version">Bất kỳ</string>
     <string name="enabled">Đang bật</string>
     <string name="disabled">Đang tắt</string>

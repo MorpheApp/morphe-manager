@@ -446,10 +446,12 @@
     <string name="all">सर्व</string>
     <string name="filter">गाळण</string>
     <string name="reset_all">सर्व रीसेट करा</string>
+    <string name="refresh">ताजे करा</string>
     <string name="back">मागे</string>
     <string name="next">पुढे</string>
     <string name="done">झाले</string>
     <string name="skip">वगळा</string>
+    <string name="sort">क्रमवारी लावा</string>
     <string name="select_all">सर्व निवडा</string>
     <string name="select_all_done">सर्व निवडले</string>
     <string name="deselect_all">सर्व निवड रद्द करा</string>
