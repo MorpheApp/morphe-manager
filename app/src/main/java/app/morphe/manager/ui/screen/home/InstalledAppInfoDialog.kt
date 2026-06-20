@@ -376,7 +376,7 @@ fun InstalledAppInfoDialog(
                         }
                     }
 
-                    VerticalDivider(modifier = Modifier.padding(vertical = 24.dp))
+                    VerticalDivider(modifier = Modifier.statusBarsPadding().navigationBarsPadding().padding(vertical = 20.dp))
 
                     // Right panel: header + banners + info
                     LazyColumn(

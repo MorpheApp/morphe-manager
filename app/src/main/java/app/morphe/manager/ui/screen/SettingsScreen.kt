@@ -318,6 +318,7 @@ fun SettingsScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .statusBarsPadding()
+                    .navigationBarsPadding()
             ) {
                 LandscapeNavPanel(
                     currentTab = currentTab,
@@ -326,12 +327,12 @@ fun SettingsScreen(
                     onAppearanceTabPositioned = { globalOnboardingState?.appearanceTabBounds = it },
                     onSystemTabPositioned = { globalOnboardingState?.systemTabBounds = it }
                 )
-                VerticalDivider(modifier = Modifier.navigationBarsPadding())
+                VerticalDivider(modifier = Modifier.padding(vertical = 20.dp))
                 AnimatedContent(
                     targetState = currentTab,
                     transitionSpec = MorpheAnimations.fadeCrossfade(200),
                     label = "settings_tab_landscape",
-                    modifier = Modifier.weight(1f).fillMaxHeight().navigationBarsPadding()
+                    modifier = Modifier.weight(1f).fillMaxHeight()
                 ) { tab -> TabContent(tab) }
             }
         } else {
@@ -377,7 +378,6 @@ private fun LandscapeNavPanel(
         modifier = modifier
             .width(220.dp)
             .fillMaxHeight()
-            .navigationBarsPadding()
             .padding(horizontal = 12.dp, vertical = 24.dp)
     ) {
         Column(

@@ -286,7 +286,7 @@ private fun AdaptiveContent(
                     onSourcesPositioned = onboardingState?.let { s -> { b -> s.sourcesButtonBounds = b } },
                     onSettingsPositioned = onboardingState?.let { s -> { b -> s.settingsButtonBounds = b } }
                 )
-                VerticalDivider()
+                VerticalDivider(modifier = Modifier.padding(vertical = 20.dp))
                 Column(
                     modifier = Modifier
                         .weight(1f)
