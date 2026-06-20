@@ -133,7 +133,10 @@ fun SectionsLayout(
 
     // Reorder
     onSaveOrder: (List<String>) -> Unit = {},
-    onResetOrder: () -> Unit = {}
+    onResetOrder: () -> Unit = {},
+
+    // Accessibility
+    onRefreshGreeting: (() -> Unit)? = null
 ) {
     val windowSize = rememberWindowSize()
 
@@ -185,7 +188,8 @@ fun SectionsLayout(
                     isExpertModeEnabled = isExpertModeEnabled,
                     onboardingState = onboardingState,
                     onSaveOrder = onSaveOrder,
-                    onResetOrder = onResetOrder
+                    onResetOrder = onResetOrder,
+                    onRefreshGreeting = onRefreshGreeting
                 )
             }
 
@@ -249,7 +253,8 @@ private fun AdaptiveContent(
     isExpertModeEnabled: Boolean = false,
     onboardingState: OnboardingState? = null,
     onSaveOrder: (List<String>) -> Unit = {},
-    onResetOrder: () -> Unit = {}
+    onResetOrder: () -> Unit = {},
+    onRefreshGreeting: (() -> Unit)? = null
 ) {
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
@@ -293,7 +298,8 @@ private fun AdaptiveContent(
                     if (!greetingMessage.isNullOrEmpty()) {
                         GreetingSection(
                             message = greetingMessage,
-                            modifier = Modifier.widthIn(max = maxCardWidth).fillMaxWidth()
+                            modifier = Modifier.widthIn(max = maxCardWidth).fillMaxWidth(),
+                            onRefresh = onRefreshGreeting
                         )
                         Spacer(modifier = Modifier.height(itemSpacing))
                     }
@@ -348,7 +354,8 @@ private fun AdaptiveContent(
                 if (!greetingMessage.isNullOrEmpty()) {
                     GreetingSection(
                         message = greetingMessage,
-                        modifier = Modifier.padding(horizontal = contentPadding)
+                        modifier = Modifier.padding(horizontal = contentPadding),
+                        onRefresh = onRefreshGreeting
                     )
                     Spacer(modifier = Modifier.height(itemSpacing))
                 } else {
@@ -732,10 +739,21 @@ private fun BundleUpdateSnackbarContent(
 @Composable
 fun GreetingSection(
     message: String?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onRefresh: (() -> Unit)? = null
 ) {
     if (message.isNullOrEmpty()) return
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+    val refreshLabel = stringResource(R.string.refresh)
+    Box(
+        modifier = modifier.then(
+            if (onRefresh != null) Modifier.semantics {
+                customActions = listOf(
+                    CustomAccessibilityAction(refreshLabel) { onRefresh(); true }
+                )
+            } else Modifier
+        ),
+        contentAlignment = Alignment.Center
+    ) {
         AnimatedContent(
             targetState = message,
             transitionSpec = MorpheAnimations.slideUpContentTransitionSpec,
@@ -1483,7 +1501,12 @@ private fun DynamicAppCard(
         )
     }
 
-    Box(modifier = modifier.fillMaxWidth()) {
+    Box(modifier = modifier.fillMaxWidth().semantics {
+        customActions = listOf(
+            CustomAccessibilityAction(hideLabel) { showHideDialog.value = true; true },
+            CustomAccessibilityAction(patchesLabel) { onShowPatches(); true }
+        )
+    }) {
         SwipeableCardContainer(
             offsetX = offsetX,
             actionThresholdPx = actionThresholdPx,

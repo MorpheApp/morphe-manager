@@ -60,6 +60,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.time.Duration.Companion.milliseconds
 
 // Exact MIME type → extensions
 private val MIME_EXTENSION_MAP: Map<String, Set<String>> = mapOf(
@@ -285,7 +286,7 @@ fun FilePicker(
                     // screen. The system flag updates immediately, but the kernel GID propagation
                     // can lag by a few hundred ms, causing listFiles() to return null right after
                     // the user returns to the app. One retry covers the vast majority of devices
-                    delay(300)
+                    delay(300.milliseconds)
                     files = withContext(Dispatchers.IO) { listDir(dir, allowedExtensions) }
                 }
                 value = if (files != null) Result.success(files) else Result.failure(SecurityException())
@@ -307,7 +308,7 @@ fun FilePicker(
             searchFocusRequester.requestFocus()
         } else {
             // Clear query only after the exit animation finishes so the text doesn't flash away
-            delay(MorpheDefaults.ANIMATION_DURATION.toLong())
+            delay(MorpheDefaults.ANIMATION_DURATION.toLong().milliseconds)
             searchQuery = ""
         }
     }
@@ -361,7 +362,7 @@ fun FilePicker(
                         IconButton(onClick = { showSearch = false }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
-                                contentDescription = null,
+                                contentDescription = stringResource(R.string.back),
                                 tint = LocalDialogTextColor.current
                             )
                         }
@@ -413,7 +414,7 @@ fun FilePicker(
                             IconButton(onClick = { showSortMenu = true }) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Outlined.Sort,
-                                    contentDescription = null,
+                                    contentDescription = stringResource(R.string.sort),
                                     tint = LocalDialogTextColor.current
                                 )
                             }
@@ -439,14 +440,14 @@ fun FilePicker(
                         IconButton(onClick = { refreshKey++ }) {
                             Icon(
                                 imageVector = Icons.Outlined.Refresh,
-                                contentDescription = null,
+                                contentDescription = stringResource(R.string.refresh),
                                 tint = LocalDialogTextColor.current
                             )
                         }
                         IconButton(onClick = { showSearch = true }) {
                             Icon(
                                 imageVector = Icons.Outlined.Search,
-                                contentDescription = null,
+                                contentDescription = stringResource(R.string.search),
                                 tint = LocalDialogTextColor.current
                             )
                         }

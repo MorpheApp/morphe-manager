@@ -824,6 +824,7 @@ The image dimensions must be as follows:
     <string name="warning">Warning</string>
     <string name="error_">Error</string>
     <string name="retry">Retry</string>
+    <string name="refresh">Refresh</string>
     <string name="add">Add</string>
     <string name="close">Close</string>
     <string name="back">Back</string>
@@ -840,6 +841,7 @@ The image dimensions must be as follows:
     <string name="view">View</string>
     <string name="search">Search</string>
     <string name="search_no_results">No results found</string>
+    <string name="sort">Sort</string>
     <string name="any_version">Any</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>

@@ -16,6 +16,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
@@ -79,7 +83,11 @@ private fun BytecodeModeOption(
 ) {
     SettingsItemCard(
         onClick = onSelect,
-        borderWidth = 1.dp
+        borderWidth = 1.dp,
+        modifier = Modifier.semantics {
+            role = Role.RadioButton
+            selected = isSelected
+        }
     ) {
         IconTextRow(
             modifier = Modifier.padding(MorpheDefaults.ContentPadding),

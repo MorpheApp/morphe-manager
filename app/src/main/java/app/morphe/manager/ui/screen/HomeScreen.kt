@@ -207,6 +207,7 @@ fun HomeScreen(
 
                 // Greeting section
                 greetingMessage = greetingMessage,
+                onRefreshGreeting = onRefresh,
 
                 // Dynamic app items
                 homeAppItems = homeAppItems,
