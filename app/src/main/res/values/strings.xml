@@ -26,6 +26,8 @@
     <string name="home_updating_sources">Updating sources…</string>
     <string name="home_update_progress_format">%s processed</string>
     <string name="home_update_download_progress" translatable="false">%1$.1f MB / %2$.1f MB (%3$s%%)</string>
+    <string name="home_update_bundle_count" translatable="false">%1$d / %2$d</string>
+    <string name="home_update_bundle_count_with_bytes" translatable="false">%1$d / %2$d  ·  %3$.1f / %4$.1f MB (%5$d%%)</string>
     <string name="home_update_success">Update sources complete</string>
     <string name="home_update_success_subtitle">Your sources are up to date</string>
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>

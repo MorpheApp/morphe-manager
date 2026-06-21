@@ -586,39 +586,39 @@ private fun BundleUpdateSnackbarContent(
     status: BundleUpdateStatus,
     progress: PatchBundleRepository.BundleUpdateProgress?
 ) {
-    // Calculate bundle processing progress
-    val fraction = if (progress?.total == 0 || progress == null) {
-        0f
-    } else {
-        progress.completed.toFloat() / progress.total
-    }
+    val fraction = if (progress == null || progress.total == 0) 0f
+                   else progress.completed.toFloat() / progress.total
 
-    // Calculate download progress
-    val downloadFraction = if (progress?.bytesTotal == null || progress.bytesTotal == 0L) {
-        0f
-    } else {
-        progress.bytesRead.toFloat() / progress.bytesTotal.toFloat()
-    }
+    val downloadFraction = progress?.bytesTotal
+        ?.takeIf { it > 0L }
+        ?.let { progress.bytesRead.toFloat() / it }
+        ?: 0f
 
-    // Determine which progress to show
     val isDownloading = progress?.phase == PatchBundleRepository.BundleUpdatePhase.Downloading &&
-            progress.bytesTotal != null &&
-            progress.bytesTotal > 0L
+            downloadFraction > 0f
     val displayProgress = if (isDownloading) downloadFraction else fraction
 
-    val containerColor = when (status) {
-        BundleUpdateStatus.Success -> MaterialTheme.colorScheme.primaryContainer
-        BundleUpdateStatus.Warning -> MaterialTheme.colorScheme.secondaryContainer
-        BundleUpdateStatus.Error -> MaterialTheme.colorScheme.errorContainer
-        BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.surfaceVariant
-    }
+    val containerColor by animateColorAsState(
+        targetValue = when (status) {
+            BundleUpdateStatus.Success -> MaterialTheme.colorScheme.primaryContainer
+            BundleUpdateStatus.Warning -> MaterialTheme.colorScheme.secondaryContainer
+            BundleUpdateStatus.Error -> MaterialTheme.colorScheme.errorContainer
+            BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.surfaceVariant
+        },
+        animationSpec = tween(durationMillis = 300),
+        label = "containerColor"
+    )
 
-    val contentColor = when (status) {
-        BundleUpdateStatus.Success -> MaterialTheme.colorScheme.onPrimaryContainer
-        BundleUpdateStatus.Warning -> MaterialTheme.colorScheme.onSecondaryContainer
-        BundleUpdateStatus.Error -> MaterialTheme.colorScheme.onErrorContainer
-        BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.onSurfaceVariant
-    }
+    val contentColor by animateColorAsState(
+        targetValue = when (status) {
+            BundleUpdateStatus.Success -> MaterialTheme.colorScheme.onPrimaryContainer
+            BundleUpdateStatus.Warning -> MaterialTheme.colorScheme.onSecondaryContainer
+            BundleUpdateStatus.Error -> MaterialTheme.colorScheme.onErrorContainer
+            BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.onSurfaceVariant
+        },
+        animationSpec = tween(durationMillis = 300),
+        label = "contentColor"
+    )
 
     Card(
         modifier = Modifier
@@ -637,69 +637,103 @@ private fun BundleUpdateSnackbarContent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Icon based on status
-                when (status) {
-                    BundleUpdateStatus.Success -> MorpheIcon(
-                        icon = Icons.Outlined.CheckCircle,
-                        tint = contentColor
-                    )
-                    BundleUpdateStatus.Warning -> MorpheIcon(
-                        icon = Icons.Outlined.SignalCellularAlt,
-                        tint = contentColor
-                    )
-                    BundleUpdateStatus.Error -> MorpheIcon(
-                        icon = Icons.Outlined.Warning,
-                        tint = contentColor
-                    )
-                    BundleUpdateStatus.Updating -> CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        strokeWidth = 2.5.dp,
-                        color = contentColor
-                    )
+                Crossfade(targetState = status, label = "snackbarIcon") { s ->
+                    when (s) {
+                        BundleUpdateStatus.Success -> MorpheIcon(
+                            icon = Icons.Outlined.CheckCircle,
+                            tint = contentColor
+                        )
+                        BundleUpdateStatus.Warning -> MorpheIcon(
+                            icon = Icons.Outlined.SignalCellularAlt,
+                            tint = contentColor
+                        )
+                        BundleUpdateStatus.Error -> MorpheIcon(
+                            icon = Icons.Outlined.Warning,
+                            tint = contentColor
+                        )
+                        BundleUpdateStatus.Updating -> CircularProgressIndicator(
+                            modifier = Modifier.size(24.dp),
+                            strokeWidth = 2.5.dp,
+                            color = contentColor
+                        )
+                    }
                 }
 
                 // Text content
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = when (status) {
-                            BundleUpdateStatus.Success -> stringResource(R.string.home_update_success)
-                            BundleUpdateStatus.Warning -> stringResource(R.string.home_update_skipped_metered)
-                            BundleUpdateStatus.Error -> stringResource(R.string.home_update_error)
-                            BundleUpdateStatus.Updating -> stringResource(R.string.home_updating_sources)
-                        },
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = contentColor
-                    )
+                    Crossfade(targetState = status, label = "snackbarTitle") { s ->
+                        Text(
+                            text = when (s) {
+                                BundleUpdateStatus.Success -> stringResource(R.string.home_update_success)
+                                BundleUpdateStatus.Warning -> stringResource(R.string.home_update_skipped_metered)
+                                BundleUpdateStatus.Error -> stringResource(R.string.home_update_error)
+                                BundleUpdateStatus.Updating -> stringResource(R.string.home_updating_sources)
+                            },
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = contentColor
+                        )
+                    }
+
+                    val subtitleColor = contentColor.copy(alpha = 0.8f)
 
                     if (status == BundleUpdateStatus.Warning) {
                         Text(
                             text = stringResource(R.string.home_update_skipped_metered_subtitle),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = contentColor.copy(alpha = 0.8f)
+                            color = subtitleColor
                         )
                     }
 
                     if (status == BundleUpdateStatus.Updating && progress != null) {
-                        if (isDownloading) {
-                            val readMb = progress.bytesRead.toFloat() / (1024 * 1024)
-                            val totalMb = progress.bytesTotal.toFloat() / (1024 * 1024)
-                            val percent = (downloadFraction * 100).toInt()
-                            Text(
-                                text = stringResource(
-                                    R.string.home_update_download_progress,
-                                    readMb, totalMb, percent.toString()
-                                ),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = contentColor.copy(alpha = 0.8f)
+                        val totalMb = (progress.bytesTotal ?: 0L).toFloat() / (1024 * 1024)
+                        val readMb = progress.bytesRead.toFloat() / (1024 * 1024)
+                        val percent = (downloadFraction * 100).toInt()
+                        val (subtitleKey, subtitle) = when {
+                            progress.total > 1 && isDownloading -> 1 to stringResource(
+                                R.string.home_update_bundle_count_with_bytes,
+                                progress.completed, progress.total, readMb, totalMb, percent
                             )
-                        } else if (progress.currentBundleName != null) {
-                            Text(
-                                text = progress.currentBundleName,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = contentColor.copy(alpha = 0.8f),
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
+                            progress.total > 1 -> 2 to stringResource(
+                                R.string.home_update_bundle_count,
+                                progress.completed, progress.total
                             )
+                            isDownloading -> 3 to stringResource(
+                                R.string.home_update_download_progress,
+                                readMb, totalMb, percent.toString()
+                            )
+                            progress.currentBundleName != null -> 4 to progress.currentBundleName
+                            else -> 0 to null
+                        }
+                        AnimatedContent(
+                            targetState = subtitleKey to subtitle,
+                            contentKey = { it.first },
+                            transitionSpec = MorpheAnimations.fadeCrossfade(200),
+                            label = "subtitle"
+                        ) { (_, text) ->
+                            if (text != null) {
+                                Text(
+                                    text = text,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = subtitleColor,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
+                        }
+                        AnimatedVisibility(visible = progress.activeNames.isNotEmpty()) {
+                            Crossfade(
+                                targetState = progress.activeNames.joinToString(", "),
+                                label = "activeNames"
+                            ) { names ->
+                                Text(
+                                    text = names,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = contentColor.copy(alpha = 0.6f),
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
                         }
                     }
 
@@ -707,14 +741,14 @@ private fun BundleUpdateSnackbarContent(
                         Text(
                             text = stringResource(R.string.home_update_success_subtitle),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = contentColor.copy(alpha = 0.8f)
+                            color = subtitleColor
                         )
                     }
                     if (status == BundleUpdateStatus.Error) {
                         Text(
                             text = stringResource(R.string.home_update_error_subtitle),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = contentColor.copy(alpha = 0.8f)
+                            color = subtitleColor
                         )
                     }
                 }
