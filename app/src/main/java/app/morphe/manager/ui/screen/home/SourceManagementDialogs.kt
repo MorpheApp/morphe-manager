@@ -595,7 +595,14 @@ fun BundlePatchesDialog(
         scrollable = false
     ) {
         if (isLoading) {
-            PulsingLogoIndicator()
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                contentAlignment = Alignment.Center
+            ) {
+                PulsingLogoIndicator()
+            }
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxWidth(),

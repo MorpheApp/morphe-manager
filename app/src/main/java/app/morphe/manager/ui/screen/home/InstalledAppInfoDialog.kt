@@ -305,7 +305,7 @@ fun InstalledAppInfoDialog(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                LoadingIndicator()
+                PulsingLogoIndicator()
             }
         } else {
             val windowSize = rememberWindowSize()
