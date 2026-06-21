@@ -807,6 +807,8 @@ private fun DownloadInstructionsDialog(
                     modifier = Modifier.fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
+                    val adjustedDownloadColor = downloadColor.ensureContrast(MaterialTheme.colorScheme.background)
+                    val downloadContentColor = if (adjustedDownloadColor.requiresLightContent()) Color.White else Color.Black
                     Surface(
                         onClick = {
                             downloadClickCount++
@@ -816,7 +818,7 @@ private fun DownloadInstructionsDialog(
                             )
                         },
                         shape = RoundedCornerShape(1.dp),
-                        color = downloadColor
+                        color = adjustedDownloadColor
                     ) {
                         Row(
                             modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
@@ -826,13 +828,13 @@ private fun DownloadInstructionsDialog(
                             Icon(
                                 imageVector = Icons.Filled.Download,
                                 contentDescription = null,
-                                tint = Color.White,
+                                tint = downloadContentColor,
                                 modifier = Modifier.size(20.dp)
                             )
                             Text(
                                 text = if (isApkBundle) "DOWNLOAD APK BUNDLE" else "DOWNLOAD APK",
                                 style = MaterialTheme.typography.labelLarge,
-                                color = Color.White
+                                color = downloadContentColor
                             )
                         }
                     }
