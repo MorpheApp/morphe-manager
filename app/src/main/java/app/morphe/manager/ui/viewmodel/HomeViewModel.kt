@@ -872,7 +872,6 @@ class HomeViewModel(
      * is likely fully uploaded. If the release is newer than [MANAGER_UPDATE_SHOW_DELAY_SECONDS],
      * the banner is shown immediately; otherwise we wait out the remaining time.
      */
-    @OptIn(kotlin.time.ExperimentalTime::class)
     suspend fun checkForManagerUpdates() {
         uiSafe(app, R.string.failed_to_check_updates, "Failed to check for updates") {
             val update = morpheAPI.getAppUpdate() ?: return@uiSafe

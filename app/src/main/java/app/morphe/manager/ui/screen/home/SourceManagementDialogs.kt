@@ -11,7 +11,6 @@ import android.net.Uri
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
@@ -73,7 +72,6 @@ private val ColorValid = Color(0xFF4CAF50)
 /**
  * Dialog for adding patch bundles.
  */
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AddSourceDialog(
     onDismiss: () -> Unit,
@@ -891,7 +889,6 @@ fun BundlePatchesDialog(
 /**
  * Patch item card.
  */
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun PatchItemCard(
     modifier: Modifier = Modifier,

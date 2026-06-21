@@ -459,7 +459,6 @@ fun NotificationsOverlay(
 /**
  * Manager update snackbar.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ManagerUpdateSnackbar(
     visible: Boolean,
@@ -535,7 +534,6 @@ fun ManagerUpdateSnackbar(
 /**
  * Bundle update snackbar.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BundleUpdateSnackbar(
     visible: Boolean,
@@ -3139,7 +3137,6 @@ private fun HomeGlassPillButton(
  * - subtle horizontal frost band
  * - gradient border
  */
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun AppCardLayout(
     modifier: Modifier = Modifier,
