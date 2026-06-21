@@ -279,6 +279,8 @@ class HomeViewModel(
     var showInstalledAppPickerDialog by mutableStateOf(false)
     var loadingInstalledApps by mutableStateOf(false)
     var installedAppsForPicker by mutableStateOf<List<InstalledAppPickerItem>>(emptyList())
+    // True while APK loading/processing runs in the background
+    var processingApkSelection by mutableStateOf(false)
 
     // Error/warning dialogs
     var showUnsupportedVersionDialog by mutableStateOf<UnsupportedVersionDialogState?>(null)
@@ -1606,46 +1608,50 @@ class HomeViewModel(
 
         viewModelScope.launch {
             showApkAvailabilityDialog = false
-
-            val selectedApp = withContext(Dispatchers.IO) {
-                try {
-                    if (installedInfo.isSplit) {
-                        val archive = File(filesystem.uiTempDir, "${packageName}_installed.apks")
-                        createApksArchive(installedInfo, archive)
-                        SelectedApp.Local(
-                            packageName = packageName,
-                            version = installedInfo.version,
-                            versionCode = installedInfo.versionCode,
-                            file = archive,
-                            temporary = true,
-                            fromInstalledDevice = true
-                        )
-                    } else {
-                        val source = File(installedInfo.apkPath)
-                        if (!source.exists()) return@withContext null
-                        val tempFile = File(filesystem.uiTempDir, "${packageName}_installed.apk")
-                        source.copyTo(tempFile, overwrite = true)
-                        SelectedApp.Local(
-                            packageName = packageName,
-                            version = installedInfo.version,
-                            versionCode = installedInfo.versionCode,
-                            file = tempFile,
-                            temporary = true,
-                            fromInstalledDevice = true
-                        )
+            processingApkSelection = true
+            try {
+                val selectedApp = withContext(Dispatchers.IO) {
+                    try {
+                        if (installedInfo.isSplit) {
+                            val archive = File(filesystem.uiTempDir, "${packageName}_installed.apks")
+                            createApksArchive(installedInfo, archive)
+                            SelectedApp.Local(
+                                packageName = packageName,
+                                version = installedInfo.version,
+                                versionCode = installedInfo.versionCode,
+                                file = archive,
+                                temporary = true,
+                                fromInstalledDevice = true
+                            )
+                        } else {
+                            val source = File(installedInfo.apkPath)
+                            if (!source.exists()) return@withContext null
+                            val tempFile = File(filesystem.uiTempDir, "${packageName}_installed.apk")
+                            source.copyTo(tempFile, overwrite = true)
+                            SelectedApp.Local(
+                                packageName = packageName,
+                                version = installedInfo.version,
+                                versionCode = installedInfo.versionCode,
+                                file = tempFile,
+                                temporary = true,
+                                fromInstalledDevice = true
+                            )
+                        }
+                    } catch (e: Exception) {
+                        Log.e(tag, "Failed to prepare installed APK", e)
+                        null
                     }
-                } catch (e: Exception) {
-                    Log.e(tag, "Failed to prepare installed APK", e)
-                    null
                 }
-            }
 
-            if (selectedApp != null) {
-                // Skip signature check: the installed APK may already be patched with our key
-                processSelectedAppIgnoringSignature(selectedApp)
-            } else {
-                app.toast(app.getString(R.string.home_invalid_apk_io_error))
-                cleanupPendingData()
+                if (selectedApp != null) {
+                    // Skip signature check: the installed APK may already be patched with our key
+                    processSelectedAppIgnoringSignature(selectedApp)
+                } else {
+                    app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                    cleanupPendingData()
+                }
+            } finally {
+                processingApkSelection = false
             }
         }
     }
@@ -1710,45 +1716,50 @@ class HomeViewModel(
         showInstalledAppPickerDialog = false
         pendingAppName = item.label
         viewModelScope.launch {
-            val selectedApp = withContext(Dispatchers.IO) {
-                try {
-                    if (item.info.isSplit) {
-                        val archive = File(filesystem.uiTempDir, "${item.packageName}_installed.apks")
-                        createApksArchive(item.info, archive)
-                        SelectedApp.Local(
-                            packageName = item.packageName,
-                            version = item.info.version,
-                            versionCode = item.info.versionCode,
-                            file = archive,
-                            temporary = true,
-                            fromInstalledDevice = true
-                        )
-                    } else {
-                        val source = File(item.info.apkPath)
-                        if (!source.exists()) return@withContext null
-                        val tempFile = File(filesystem.uiTempDir, "${item.packageName}_installed.apk")
-                        source.copyTo(tempFile, overwrite = true)
-                        SelectedApp.Local(
-                            packageName = item.packageName,
-                            version = item.info.version,
-                            versionCode = item.info.versionCode,
-                            file = tempFile,
-                            temporary = true,
-                            fromInstalledDevice = true
-                        )
+            processingApkSelection = true
+            try {
+                val selectedApp = withContext(Dispatchers.IO) {
+                    try {
+                        if (item.info.isSplit) {
+                            val archive = File(filesystem.uiTempDir, "${item.packageName}_installed.apks")
+                            createApksArchive(item.info, archive)
+                            SelectedApp.Local(
+                                packageName = item.packageName,
+                                version = item.info.version,
+                                versionCode = item.info.versionCode,
+                                file = archive,
+                                temporary = true,
+                                fromInstalledDevice = true
+                            )
+                        } else {
+                            val source = File(item.info.apkPath)
+                            if (!source.exists()) return@withContext null
+                            val tempFile = File(filesystem.uiTempDir, "${item.packageName}_installed.apk")
+                            source.copyTo(tempFile, overwrite = true)
+                            SelectedApp.Local(
+                                packageName = item.packageName,
+                                version = item.info.version,
+                                versionCode = item.info.versionCode,
+                                file = tempFile,
+                                temporary = true,
+                                fromInstalledDevice = true
+                            )
+                        }
+                    } catch (e: Exception) {
+                        Log.e(tag, "Failed to prepare APK from picker", e)
+                        null
                     }
-                } catch (e: Exception) {
-                    Log.e(tag, "Failed to prepare APK from picker", e)
-                    null
                 }
-            }
-            if (selectedApp != null) {
-                // Installed APK may be signed with our keystore - skip signature check.
-                // Version/versionCode check still runs via processSelectedApp.
-                processSelectedApp(selectedApp, skipSplitCheck = true)
-            } else {
-                app.toast(app.getString(R.string.home_invalid_apk_io_error))
-                cleanupPendingData()
+                if (selectedApp != null) {
+                    // Installed APK may be signed with our keystore - skip signature check.
+                    // Version/versionCode check still runs via processSelectedApp.
+                    processSelectedApp(selectedApp, skipSplitCheck = true)
+                } else {
+                    app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                    cleanupPendingData()
+                }
+            } finally {
+                processingApkSelection = false
             }
         }
     }
@@ -1815,15 +1826,20 @@ class HomeViewModel(
         }
 
         viewModelScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                loadLocalApk(app, uri)
-            }
+            processingApkSelection = true
+            try {
+                val result = withContext(Dispatchers.IO) {
+                    loadLocalApk(app, uri)
+                }
 
-            when (result) {
-                is ApkLoadResult.Success -> processSelectedApp(result.app)
-                is ApkLoadResult.Unreadable -> app.toast(app.getString(R.string.home_invalid_apk_unreadable))
-                is ApkLoadResult.NotAnApk -> app.toast(app.getString(R.string.home_invalid_apk_not_an_apk))
-                is ApkLoadResult.IoError -> app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                when (result) {
+                    is ApkLoadResult.Success -> processSelectedApp(result.app)
+                    is ApkLoadResult.Unreadable -> app.toast(app.getString(R.string.home_invalid_apk_unreadable))
+                    is ApkLoadResult.NotAnApk -> app.toast(app.getString(R.string.home_invalid_apk_not_an_apk))
+                    is ApkLoadResult.IoError -> app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                }
+            } finally {
+                processingApkSelection = false
             }
         }
     }
@@ -1843,38 +1859,42 @@ class HomeViewModel(
 
         viewModelScope.launch {
             showApkAvailabilityDialog = false
+            processingApkSelection = true
+            try {
+                // Create SelectedApp from saved APK file
+                val selectedApp = withContext(Dispatchers.IO) {
+                    try {
+                        val file = File(savedInfo.filePath)
+                        if (!file.exists()) {
+                            app.toast(app.getString(R.string.home_app_info_repatch_no_original_apk))
+                            return@withContext null
+                        }
 
-            // Create SelectedApp from saved APK file
-            val selectedApp = withContext(Dispatchers.IO) {
-                try {
-                    val file = File(savedInfo.filePath)
-                    if (!file.exists()) {
-                        app.toast(app.getString(R.string.home_app_info_repatch_no_original_apk))
-                        return@withContext null
+                        // Mark as used
+                        originalApkRepository.markUsed(packageName)
+
+                        SelectedApp.Local(
+                            packageName = packageName,
+                            version = savedInfo.version,
+                            versionCode = savedInfo.versionCode,
+                            file = file,
+                            temporary = false // Don't delete saved APK files
+                        )
+                    } catch (e: Exception) {
+                        Log.e(tag, "Failed to load saved APK", e)
+                        null
                     }
-
-                    // Mark as used
-                    originalApkRepository.markUsed(packageName)
-
-                    SelectedApp.Local(
-                        packageName = packageName,
-                        version = savedInfo.version,
-                        versionCode = savedInfo.versionCode,
-                        file = file,
-                        temporary = false // Don't delete saved APK files
-                    )
-                } catch (e: Exception) {
-                    Log.e(tag, "Failed to load saved APK", e)
-                    null
                 }
-            }
 
-            if (selectedApp != null) {
-                // Saved file may be signed with our keystore - skip signature check.
-                // Version/versionCode check still runs via processSelectedApp.
-                processSelectedApp(selectedApp, skipSplitCheck = true)
-            } else {
-                cleanupPendingData()
+                if (selectedApp != null) {
+                    // Saved file may be signed with our keystore - skip signature check.
+                    // Version/versionCode check still runs via processSelectedApp.
+                    processSelectedApp(selectedApp, skipSplitCheck = true)
+                } else {
+                    cleanupPendingData()
+                }
+            } finally {
+                processingApkSelection = false
             }
         }
     }
