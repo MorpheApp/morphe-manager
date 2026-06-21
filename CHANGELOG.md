@@ -1,3 +1,15 @@
+# [1.22.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.6...v1.22.0-dev.7) (2026-06-21)
+
+
+### Bug Fixes
+
+* Block UI during APK selection processing ([36b0a92](https://github.com/MorpheApp/morphe-manager/commit/36b0a923bf308cfcd3bc4724469bf4985bbe7088))
+
+
+### Features
+
+* Add pulsing logo indicator ([52733f8](https://github.com/MorpheApp/morphe-manager/commit/52733f8ecd0d1f2792ec801b652139aacd8cf867))
+
 # [1.22.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.5...v1.22.0-dev.6) (2026-06-21)
 
 
