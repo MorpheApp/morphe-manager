@@ -759,12 +759,14 @@ private fun LogPanelTabHeader(
             label = stringResource(R.string.patcher_tab_logs),
             selected = activeTab == 0,
             onClick = { onTabSelect(0) },
+            modifier = Modifier.weight(1f, fill = false),
             leadingContent = { LiveIndicatorDot(size = 8.dp, isLive = isLive && activeTab == 0) }
         )
         LogTabChip(
             label = stringResource(R.string.patcher_tab_game),
             selected = activeTab == 1,
-            onClick = { onTabSelect(1) }
+            onClick = { onTabSelect(1) },
+            modifier = Modifier.weight(1f, fill = false)
         )
     }
 }
@@ -774,12 +776,14 @@ private fun LogTabChip(
     label: String,
     selected: Boolean,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     leadingContent: @Composable (() -> Unit)? = null
 ) {
     Surface(
         onClick = onClick,
         shape = RoundedCornerShape(8.dp),
-        color = if (selected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent
+        color = if (selected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent,
+        modifier = modifier
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
@@ -792,7 +796,9 @@ private fun LogTabChip(
                 style = MaterialTheme.typography.labelLarge,
                 fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
                 color = if (selected) MaterialTheme.colorScheme.onPrimaryContainer
-                        else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                        else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
         }
     }
