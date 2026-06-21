@@ -1,3 +1,15 @@
+# [1.22.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.5...v1.22.0-dev.6) (2026-06-21)
+
+
+### Bug Fixes
+
+* Prevent tab chip squishing in expert patcher on long translations ([ec720dd](https://github.com/MorpheApp/morphe-manager/commit/ec720dd56b7254fbf822227002ddf28e3e26d438))
+
+
+### Features
+
+* Parallelize bundle refresh and improve update snackbar ([b4e74a5](https://github.com/MorpheApp/morphe-manager/commit/b4e74a5ea2db17fec8d007b2d1cb5c57284421e2))
+
 # [1.22.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.4...v1.22.0-dev.5) (2026-06-20)
 
 
