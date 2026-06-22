@@ -61,7 +61,7 @@
     <string name="home_greeting_afternoon_2">午餐後的修補程式就是不一樣</string>
     <string name="home_greeting_afternoon_3">下午班段：修補程式版本</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">晚上好！晚間修補程式就是不一樣</string>
+    <string name="home_greeting_evening_1">晚安！夜幕降臨後的修補程式就是不一樣</string>
     <string name="home_greeting_evening_2">準備休息了？先修補一個應用程式</string>
     <string name="home_greeting_evening_3">準備下班了？先修補一些東西</string>
     <!-- Late night greetings (22:00–23:59) -->
@@ -78,7 +78,7 @@
     <string name="sources_management_title">修補來源</string>
     <string name="sources_management_open_in_browser">在瀏覽器中開啟</string>
     <string name="sources_management_failed_to_open_url">無法開啟網址</string>
-    <string name="sources_management_prerelease_toggle">發行前修補程式</string>
+    <string name="sources_management_prerelease_toggle">預先發布版修補程式</string>
     <string name="sources_management_prerelease_toggle_description">搶先取得新實驗性修補程式版本</string>
     <string name="sources_management_experimental_versions_toggle">實驗性應用程式版本</string>
     <string name="sources_management_experimental_versions_toggle_description">若有可用的實驗性應用程式，則對其進行修補</string>
@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">請選取下方的「%s」按鈕</string>
     <string name="home_download_instructions_step2_part1">請往下滑動網頁，然後點選</string>
     <string name="home_download_instructions_download_button_toast">請到網站上點選 [下載]，不是這裡的範例按鈕 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">很好！現在請選取下方的 [繼續]，到網站繼續下載 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">快抓到訣竅了！真正的下載按鈕在網站上 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">太棒了！現在點擊繼續並前往網站 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">熟能生巧，你快要掌握了 💪</string>
     <string name="home_download_instructions_download_button_toast_4">不是這個按鈕… 這只是範例按鈕… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">好吧，您的毅力我收到了 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">您現在是 Morphe 官方按鈕測試員 🏅</string>
@@ -469,8 +469,8 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">變更圖示</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
-    <string name="settings_advanced_updates_use_prereleases">預發佈更新</string>
-    <string name="settings_advanced_updates_use_prereleases_description">搶先體驗最新 Morphe 應用程式版本。在修補來源中啟用預發佈版本</string>
+    <string name="settings_advanced_updates_use_prereleases">預先發布版更新</string>
+    <string name="settings_advanced_updates_use_prereleases_description">搶先體驗最新 Morphe 應用程式版本。在修補來源中啟用預先發布版</string>
     <string name="settings_advanced_updates_allow_metered">行動數據更新</string>
     <string name="settings_advanced_updates_allow_metered_description">允許 Morphe 和修補更新在使用行動數據時進行下載</string>
     <string name="settings_advanced_updates_background_notifications">背景更新通知</string>
@@ -672,10 +672,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_manager_settings_fail">無法匯出 Morphe 設定：%s</string>
     <string name="settings_system_export_manager_settings_success">已匯出 Morphe 設定</string>
     <string name="settings_system_debug">偵錯</string>
-    <string name="settings_system_export_debug_logs_description">儲存系統日誌以進行疑難排解</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">無法讀取日誌（結束代碼 %s）</string>
-    <string name="settings_system_export_debug_logs_export_failed">無法匯出日誌</string>
-    <string name="settings_system_export_debug_logs_export_success">日誌已匯出</string>
+    <string name="settings_system_export_debug_logs_description">儲存系統紀錄以進行疑難排解</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">無法讀取紀錄（結束代碼 %s）</string>
+    <string name="settings_system_export_debug_logs_export_failed">無法匯出紀錄</string>
+    <string name="settings_system_export_debug_logs_export_success">記錄已匯出</string>
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">檔案與儲存空間</string>
     <string name="settings_system_apks_size">總大小：%s</string>
@@ -830,11 +830,11 @@ morphe_header_custom_dark.png
     <string name="unmounting_ellipsis">正在解除掛載……</string>
     <string name="importing_ellipsis">匯入……</string>
     <string name="imported_successfully">匯入成功</string>
-    <string name="changelog">檢視更新日誌</string>
+    <string name="changelog">檢視變更紀錄</string>
     <string name="changelog_description">查看此更新中的最新變更</string>
-    <string name="changelog_download_fail">無法下載更新日誌：%s</string>
+    <string name="changelog_download_fail">無法下載變更紀錄：%s</string>
     <string name="changelog_retry">重試</string>
-    <string name="changelog_empty">沒有可用的更新日誌</string>
+    <string name="changelog_empty">沒有可用的變更紀錄</string>
     <string name="no_network_toast">沒有可用的網際網路連線</string>
     <string name="update_available">有可用的更新</string>
     <string name="ready_to_install_update">準備安裝更新</string>
@@ -853,16 +853,16 @@ morphe_header_custom_dark.png
     <!-- Onboarding coach marks -->
     <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%1$d / %2$d</string>
-    <string name="onboarding_sources_desc">管理您的補丁來源。每個來源提供可應用於您的應用程式的補丁</string>
+    <string name="onboarding_sources_desc">管理您的修補檔案來源。每個來源都提供可用於您應用程式的修補檔案</string>
     <string name="onboarding_swipe_title">手勢</string>
-    <string name="onboarding_swipe_desc">向右滑動應用程式卡片以查看其可用補丁。向左滑動可從主螢幕隱藏卡片</string>
+    <string name="onboarding_swipe_desc">向右滑動應用程式卡片以查看其可用的修補。向左滑動可從主螢幕隱藏卡片</string>
     <string name="onboarding_settings_desc">自訂 Morphe：外觀、進階選項和系統工具</string>
-    <string name="onboarding_sources_patches_desc">點擊以查看此來源提供的所有補丁</string>
-    <string name="onboarding_sources_version_desc">點擊版本以查看此來源的完整變更日誌</string>
-    <string name="onboarding_sources_prerelease_desc">啟用此選項可從此來源接收預發布補丁版本</string>
+    <string name="onboarding_sources_patches_desc">點擊以查看此來源提供的可用修補</string>
+    <string name="onboarding_sources_version_desc">點擊版本以查看此來源的完整變更紀錄</string>
+    <string name="onboarding_sources_prerelease_desc">啟用此選項可從此來源接收預先發布版</string>
     <string name="onboarding_appearance_tab_desc">自訂應用程式的外觀：主題、重點顏色和背景</string>
     <string name="onboarding_appearance_theme_desc">在淺色、深色或系統主題之間切換。您還可以選擇自訂重點顏色或啟用動態色彩</string>
-    <string name="onboarding_expert_mode_desc">啟用專家模式以解鎖補丁選擇、自訂選項和其他進階功能</string>
+    <string name="onboarding_expert_mode_desc">啟用專家模式以解鎖修補選擇、自訂選項和其他進階功能</string>
     <!-- Translate "System" the same way as the System settings tab -->
     <string name="onboarding_system_tab_title">系統標籤</string>
     <string name="onboarding_system_tab_desc">金鑰庫管理、匯入/匯出工具和應用程式資訊</string>

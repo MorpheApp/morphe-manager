@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">Valitse alta %s -painike</string>
     <string name="home_download_instructions_step2_part1">Vieritä verkkosivua alaspäin ja valitse</string>
     <string name="home_download_instructions_download_button_toast">Paina latauspainiketta verkkosivustolla, älä tässä 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Loistavaa! Napsauta nyt jatka-painiketta alla ja siirry verkkosivustolle 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Harjoitus tekee mestarin, olet jo pitkällä! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Hienoa! Napsauta nyt Jatka ja siirry verkkosivustolle 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Harjoitus tekee mestarin, ja olet jo pitkällä 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Ei vielä täällä… ei vielä täällä… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, kunnioitan omistautumista 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Olet nyt virallinen Morphe-painikoiden testaaja 🏅</string>

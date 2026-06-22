@@ -62,7 +62,7 @@
     <string name="home_greeting_afternoon_3">Öğleden sonra vardiyası: yama baskısı</string>
     <!-- Evening greetings (17:00–21:59) -->
     <string name="home_greeting_evening_1">İyi akşamlar! Akşam yamaları farklı hissettiriyor</string>
-    <string name="home_greeting_evening_2">Rahatlıyor musunuz? Önce bir uygulamayı yamalayın</string>
+    <string name="home_greeting_evening_2">Dinleniyor musunuz? Önce bir uygulamayı yamalayın</string>
     <string name="home_greeting_evening_3">İşten çıkıyor musunuz? Önce bir şeyleri yamalayın</string>
     <!-- Late night greetings (22:00–23:59) -->
     <string name="home_greeting_late_night_1">Hala ayakta mısınız? Yamalanması gereken uygulamalar da</string>
@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">Aşağıdaki \"%s\" düğmesine tıklayın</string>
     <string name="home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve</string>
     <string name="home_download_instructions_download_button_toast">Web sitesindeki indirme düğmesine basın, buradakine değil 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Harika! Şimdi aşağıdan devam\'a tıklayın ve web sitesine gidin 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Pratik mükemmelleştirir, yaklaşıyorsun! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Harika! Şimdi devam\'a tıklayın ve web sitesine gidin 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Pratik mükemmelleştirir ve yavaş yavaş ilerliyorsun 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Hala ulaşılmadı… hala ulaşılmadı… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Tamam, özveriyi anlıyorum 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Artık resmi bir Morphe butonu test kullanıcısısınız 🏅</string>

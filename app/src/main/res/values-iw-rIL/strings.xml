@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">לחץ על הכפתור \'%s\' למטה כדי להוריד</string>
     <string name="home_download_instructions_step2_part1">גלול מטה בדף האינטרנט ולחץ על</string>
     <string name="home_download_instructions_download_button_toast">לחץ הורד באתר, ולא כאן 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">מושלם! עכשיו לחץ על המשך למטה וגש לאתר 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">תרגול הופך למושלם, אתה מתקדם! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">נפלא! עכשיו לחץ על המשך וכנס לאתר 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">תרגול הופך את הדברים לשלמים ואתה בדרך הנכונה 💪</string>
     <string name="home_download_instructions_download_button_toast_4">עדיין לא כאן… עדיין לא כאן… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">בסדר, אני מכבד את המסירות 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">אתה עכשיו בודק רשמי של כפתור Morphe 🏅</string>

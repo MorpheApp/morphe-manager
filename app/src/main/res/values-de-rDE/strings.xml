@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">Drücken Sie die Taste \'%s\' unten </string>
     <string name="home_download_instructions_step2_part1">Scrollen Sie auf der Webseite nach unten und drücken Sie </string>
     <string name="home_download_instructions_download_button_toast">Drücken Sie die Download-Taste auf der Website und nicht hier 😊 </string>
-    <string name="home_download_instructions_download_button_toast_2">Perfekt! Klicken Sie nun auf \'Weiter\' unten und gehen Sie zur Website 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Übung macht den Meister, Sie sind schon fast da! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Ausgezeichnet! Klicken Sie nun auf \'Weiter\' und gehen Sie zur Website 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Übung macht den Meister, und Sie sind auf dem richtigen Weg 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Immer noch nicht hier… immer noch nicht hier… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, ich respektiere die Hingabe 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Sie sind jetzt ein offizieller Morphe Button Tester 🏅</string>

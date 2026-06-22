@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">নিচের \'%s\' বোতামটি চাপুন</string>
     <string name="home_download_instructions_step2_part1">ওয়েবপেজটি স্ক্রোল করুন এবং চাপুন</string>
     <string name="home_download_instructions_download_button_toast">এখানে নয়, ওয়েবসাইটে ডাউনলোড করুন 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">দারুণ! এখন নিচের দিকে ‘जारी রাখুন’ এ ক্লিক করুন এবং ওয়েবসাইটে যান 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">চর্চা চলতে থাকলে নিখুঁত হওয়া যায়, আপনি প্রায় সেখানে পৌঁছে গেছেন! 💪 </string>
+    <string name="home_download_instructions_download_button_toast_2">চমৎকার! এখন কন্টিনিউ বাটনে ক্লিক করে ওয়েবসাইটে চলে যান 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">অনুশীলনের মাধ্যমেই নিখুঁত হওয়া যায় এবং আপনি সঠিক পথেই এগোচ্ছেন 💪</string>
     <string name="home_download_instructions_download_button_toast_4">এখনো এখানে নেই… এখনো এখানে নেই… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">ঠিক আছে, আমি আপনার নিষ্ঠা সম্মান করি 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">আপনি এখন একজন অফিসিয়াল Morphe বোতাম পরীক্ষক 🏅</string>
@@ -748,7 +748,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="warning">সতর্কবার্তা</string>
     <string name="error_">ত্রুটি</string>
     <string name="retry">আবার চেষ্টা করুন</string>
-    <string name="refresh">রিফ্রেশ</string>
+    <string name="refresh">রিফ্রেশ করুন</string>
     <string name="add">যোগ করুন</string>
     <string name="close">বন্ধ করুন</string>
     <string name="back">পিছিয়ে যান</string>
@@ -765,7 +765,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="view">দেখুন</string>
     <string name="search">অনুসন্ধান</string>
     <string name="search_no_results">কোনো ফলাফল পাওয়া যায়নি</string>
-    <string name="sort">সর্ট করুন</string>
+    <string name="sort">ক্রমানুসারে সাজান</string>
     <string name="any_version">যেকোনো</string>
     <string name="enabled">ক্ষমতাকার্তা করা হয়েছে</string>
     <string name="disabled">নিষ্ক্রিয় হয়েছে</string>

@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">Ýttu á \"%s\" hnappinn hér að neðan</string>
     <string name="home_download_instructions_step2_part1">Scrollaðu niður á vefsíðuna og ýttu á</string>
     <string name="home_download_instructions_download_button_toast">Ýttu á niðuhlaðningu á vefsíðunni, og ekki hér 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Frábært! Núna smelltu á „Hafðu áfram“ hér að neðan og farðu á vefsíðuna 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Æfing gerir meistara, þú ert á leiðinni! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Frábært! Smelltu áfram og farðu á vefsíðuna 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Æfingin skapar meistarann og þú ert á góðri leið 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Enn ekki hér… enn ekki hér… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Í lagi, ég virði einbeitinguna 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Þú ert nú það sem kalla má áhugaverðan prófunarhnappur 🏅</string>

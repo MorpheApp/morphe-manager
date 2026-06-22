@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">กดปุ่ม \'%s\' ด้านล่าง</string>
     <string name="home_download_instructions_step2_part1">เลื่อนลงมาที่หน้าเว็บแล้วกดปุ่ม</string>
     <string name="home_download_instructions_download_button_toast">กดดาวน์โหลดบนเว็บไซต์ อย่ากดที่นี่ 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">ยอดเยี่ยม! ตอนนี้คลิกดำเนินการต่อด้านล่างและไปที่เว็บไซต์ 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">การฝึกฝนทำให้เกิดความสมบูรณ์แบบ คุณทำได้ดีขึ้นเรื่อยๆ แล้ว! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">เยี่ยมเลย! ตอนนี้คลิกดำเนินการต่อแล้วไปที่เว็บไซต์ 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">การฝึกฝนทำให้สมบูรณ์แบบ และคุณก็กำลังไปถึงจุดนั้น 💪</string>
     <string name="home_download_instructions_download_button_toast_4">ยังไม่มา… ยังไม่มา… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">ตกลง ฉันเคารพในการทุ่มเท 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">ตอนนี้คุณเป็นผู้ทดสอบปุ่ม Morphe อย่างเป็นทางการแล้ว 🏅</string>

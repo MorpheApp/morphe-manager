@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">Premi il pulsante \'%s\' qui sotto</string>
     <string name="home_download_instructions_step2_part1">Scorri verso il basso la pagina web e premi</string>
     <string name="home_download_instructions_download_button_toast">Premi scarica sul sito web, e non qui 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Perfetto! Ora clicca su continua qui sotto e vai al sito web 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">La pratica rende perfetti, ci sei quasi! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Ottimo! Ora clicca su continua e vai al sito web 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">La pratica rende perfetti e ci stai quasi arrivando 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Ancora non ci sei... ancora non ci sei... 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, rispetto la dedizione 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Ora sei un tester ufficiale del pulsante Morphe 🏅</string>

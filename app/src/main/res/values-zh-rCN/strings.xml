@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">请按下下面的“%s”按钮。</string>
     <string name="home_download_instructions_step2_part1">向下滚动网页并按</string>
     <string name="home_download_instructions_download_button_toast">在网站上按下下载，而不是在这里 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">完美！现在点击下面的“继续”并访问网站👆</string>
-    <string name="home_download_instructions_download_button_toast_3">熟能生巧，你正在进步！💪</string>
+    <string name="home_download_instructions_download_button_toast_2">太棒了！现在点击继续并访问网站👆</string>
+    <string name="home_download_instructions_download_button_toast_3">熟能生巧，你做得越来越好了💪</string>
     <string name="home_download_instructions_download_button_toast_4">还没到…还没到…🙈</string>
     <string name="home_download_instructions_download_button_toast_5">好的，我尊重您的奉献精神 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">您现在是 Morphe 按钮的官方测试员 🏅</string>

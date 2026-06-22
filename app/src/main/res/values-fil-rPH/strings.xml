@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">Pindutin ang \'%s\' na button sa ibaba</string>
     <string name="home_download_instructions_step2_part1">I-scroll pababa ang webpage at pindutin</string>
     <string name="home_download_instructions_download_button_toast">Pindutin ang download sa website, at hindi dito 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Perpekto! Ngayon, i-click ang magpatuloy sa ibaba at pumunta sa website 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Ang pagsasanay ang magpapahusay, malapit ka na! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Mahusay! I-click ngayon ang magpatuloy at pumunta sa website 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Ang pagsasanay ang magpapahusay sa iyo at papalapit ka na! 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Wala pa rin… wala pa rin… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, iginagalang ko ang dedikasyon 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Opisyal ka nang Morphe button tester 🏅</string>

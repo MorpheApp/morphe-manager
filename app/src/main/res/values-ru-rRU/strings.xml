@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">Нажмите \'%s\' кнопке ниже</string>
     <string name="home_download_instructions_step2_part1">Прокрутите страницу вниз и нажмите</string>
     <string name="home_download_instructions_download_button_toast">Нажмите скачать на веб-сайте, а не здесь 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Отлично! Теперь нажмите \"Продолжить\" ниже и перейдите на сайт 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Практика ведет к совершенству, вы почти у цели! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Отлично! Теперь нажмите \"Продолжить\" и перейдите на сайт 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Практика — залог успеха, и у вас всё получается 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Все еще не здесь… все еще не здесь… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">ОК, я уважаю вашу целеустремлённость 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Теперь вы официальный тестер кнопки Morphe 🏅</string>

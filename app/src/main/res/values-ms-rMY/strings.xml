@@ -117,6 +117,8 @@
     <string name="home_apk_availability_incompatible_label">Tidak serasi</string>
     <string name="home_apk_availability_yes">Ya, bantu saya mencari APK</string>
     <string name="home_apk_availability_no">Tidak, saya ada APK</string>
+    <string name="home_apk_use_saved">Guna APK tersimpan</string>
+    <string name="home_apk_use_installed">Guna APK terpasang</string>
     <string name="home_app_info_no_saved_apk">Tiada APK tersimpan. Tampalan akan memerlukan fail APK yang dipilih semula</string>
     <string name="home_version_requires_android">Memerlukan Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Tidak disokong pada peranti ini</string>
@@ -127,8 +129,8 @@
     <string name="home_download_instructions_step1">Tekan butang \'%s\' dibawah</string>
     <string name="home_download_instructions_step2_part1">Tatal laman sesawang ke bawah dan tekan</string>
     <string name="home_download_instructions_download_button_toast">Tekan muat turun pada tapak sesawang, bukannya di sini 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Bagus! Sekarang klik teruskan di bawah dan pergi ke tapak sesawang 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Alah bisa tegal biasa. Anda semakin hampir! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Bagus! Sekarang klik teruskan dan pergi ke tapak sesawang 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Alah bisa tegal biasa dan anda semakin hampir 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Belum lagi… belum lagi… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Okey, saya menghormati dedikasi ini 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Anda kini penguji butang Morphe yang rasmi 🏅</string>
@@ -165,8 +167,11 @@
     <string name="expert_mode_enable_all_done">Semua tampalan didayakan</string>
     <string name="expert_mode_reset_to_default">Dayakan tampalan yang disyorkan</string>
     <string name="expert_mode_reset_to_default_done">Tampalan disyorkan digunakan</string>
+    <string name="expert_mode_restore_saved">Pulihkan pemilihan yang disimpan</string>
+    <string name="expert_mode_restore_saved_done">Pemilihan yang disimpan telah dipulihkan</string>
     <string name="expert_mode_no_results">Tiada tampalan tersedia</string>
     <string name="expert_mode_universal_patches">Tampalan universal</string>
+    <string name="expert_mode_new_patches">Baharu</string>
     <string name="expert_mode_multiple_sources_warning_title">Pelbagai sumber tampalan dipilih</string>
     <string name="expert_mode_multiple_sources_warning_message">"Anda telah memilih tampalan dari berbagai sumber tampalan. Ini mungkin boleh menyebabkan masalah kesesuaian atau tingkah laku yang tidak dijangka.
 
@@ -192,6 +197,8 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versi-versi bersesuaian:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Tidak disokong</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Binaan %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Ini ialah binaan yang berbeza bagi versi yang sama. Tampalan memerlukan binaan tertentu</string>
     <string name="home_dialog_wrong_package_title">Pakej yang dipilih salah</string>
     <string name="home_dialog_wrong_package_description">APK yang dipilih bukan untuk aplikasi yang anda ingin tampal</string>
     <string name="home_dialog_expected_package">Pakej yang dijangkakan:</string>
@@ -201,7 +208,9 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="home_outdated_patches_dialog_warning">Menampal dengan tampalan ketinggalan zaman mungkin boleh menyebabkan aplikasi rosak</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Kemas kini tampalan \'&amp;\'</string>
     <string name="home_low_disk_space_dialog_title">Ruang storan sedikit</string>
+    <string name="home_low_disk_space_dialog_message">Hanya %1$.2f GB storan bebas yang tersedia. Tampalan memerlukan sekurang-kurangnya %2$.2f GB ruang kosong untuk berfungsi dengan baik</string>
     <string name="home_low_disk_space_dialog_warning">Teruskan mungkin boleh mengakibatkan ralat \"Fail tidak dijumpai\" atau memcemarkan keluaran APK</string>
+    <string name="home_simple_bundle_select_title">Pilih sumber tampalan</string>
     <!-- Patch Options -->
     <string name="custom_color">Warna tersuai</string>
     <string name="hex_color">Warna Hex</string>
@@ -212,6 +221,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patch_option_list_duplicate">Nilai ini sudah wujud</string>
     <string name="patch_option_list_empty">Nilai tidak boleh kosong</string>
     <string name="patch_option_list_empty_state">Tiada nilai ditambah lagi</string>
+    <string name="patch_option_required_missing">%s: isikan semua pilihan yang diperlukan</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Cipta ikon adaptif</string>
     <string name="adaptive_icon_select_image">Pilih imej</string>
@@ -220,8 +230,17 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="adaptive_icon_reset_transform">Balik ke kedudukan dan skala asal</string>
     <string name="adaptive_icon_safe_zone_inner">Zon selamat (selalu dapat dilihat)</string>
     <string name="adaptive_icon_safe_zone_outer">Zon topeng (mungkin dipotong)</string>
+    <string name="adaptive_icon_no_transparency_warning">Imej tidak mempunyai piksel lut sinar. Hasil mungkin kelihatan tidak tepat</string>
     <string name="adaptive_icon_created_success">Ikon adaptif telah dicipta dengan jayanya</string>
     <string name="adaptive_icon_creation_failed">Gagal untuk mencipta ikon adaptif</string>
+    <string name="adaptive_icon_label">Adaptif</string>
+    <string name="adaptive_icon_monochrome_label">Monokrom</string>
+    <string name="adaptive_icon_guide">Panduan penciptaan ikon</string>
+    <string name="adaptive_icon_guide_png_title">Gunakan PNG dengan latar belakang lut sinar</string>
+    <string name="adaptive_icon_guide_safe_zones_title">Zon selamat</string>
+    <string name="adaptive_icon_guide_notification_title">Ikon pemberitahuan</string>
+    <string name="adaptive_icon_guide_monochrome_title">Ikon monokrom</string>
+    <string name="notification_icon_preview">Pemberitahuan</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Cipta tajuk khusus</string>
     <string name="header_creator_light_theme">Tajuk tema terang</string>
@@ -229,6 +248,11 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="header_creator_no_image">Tiada imej dipilih</string>
     <string name="header_creator_success">Tajuk telah dicipta dengan jayanya</string>
     <string name="header_creator_failed">Gagal untuk mencipta tajuk</string>
+    <string name="header_creator_guide">Panduan penciptaan pengepala</string>
+    <string name="header_creator_guide_image_title">Keperluan imej</string>
+    <string name="header_creator_guide_themes_title">Tema cerah dan gelap</string>
+    <string name="header_creator_guide_themes_body">Kebanyakan aplikasi memerlukan imej berasingan untuk tema cerah dan gelap. Sesetengah aplikasi (seperti YouTube Music) hanya menggunakan tema gelap, jadi hanya bahagian itu yang ditunjukkan.</string>
+    <string name="header_creator_guide_positioning_title">Kedudukan dan penskalaan</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Adakah anda pasti mahu menyahpasang aplikasi ini?</string>
     <string name="home_app_info_remove_app_warning">Ini akan dipadam secara kekal:</string>
@@ -249,6 +273,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="home_app_info_patch_update_available_description">Versi patch yang lebih baru tersedia. Repatch aplikasi anda untuk mendapatkan penambahbaikan dan pembaikan terkini</string>
     <string name="home_app_info_app_deleted_warning">Aplikasi telah dinyahpasangkan</string>
     <string name="home_app_info_app_deleted_description">Aplikasi ini telah dinyahpasangkan di luar Morphe. Kembalikan ia untuk memulihkan fungsi</string>
+    <string name="home_app_info_apk_size">Saiz APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Mod root memerlukan APK asal diinstal pada peranti anda sebelum menampal</string>
     <string name="root_gmscore_excluded">Tampalan sokongan GmsCore dikecualikan dalam mod root</string>
@@ -256,11 +281,15 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="root_pre_patch_installer_description">Peranti anda mempunyai akses root. Pilih cara anda ingin memasang aplikasi yang ditampal</string>
     <string name="root_pre_patch_installer_mount_title">Mount Root</string>
     <string name="root_pre_patch_installer_standard_title">Pemasangan Standard</string>
+    <string name="root_pre_patch_installer_standard_description">Pasang sebagai aplikasi berasingan dengan sokongan GmsCore. Pemasang boleh dipilih selepas tampalan dibuat</string>
     <string name="root_pre_patch_installer_hint">Kaedah pemasangan menentukan tampalan mana yang disertakan dan tidak boleh diubah selepas tampalan</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Ralat disalin ke papan keratan</string>
     <string name="patcher_error_log">Log ralat</string>
     <string name="patcher_error_technical">Perincian teknikal</string>
+    <string name="patcher_error_dialog_app_info">Maklumat aplikasi</string>
+    <string name="patcher_tab_logs">Log penampal</string>
+    <string name="patcher_tab_game">Permainan</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin mengambil sedikit masa. Sila tunggu…</string>
     <string name="patcher_installing_subtitle">Hampir bersedia untuk beraksi! 🎸</string>
     <string name="patcher_success_title">Semua Selesai! 🎉</string>
@@ -611,6 +640,7 @@ Dimensi gambar mestilah seperti berikut:
     <string name="warning">Amaran</string>
     <string name="error_">Ralat</string>
     <string name="retry">Cuba semula</string>
+    <string name="refresh">Segar semula</string>
     <string name="add">Tambah</string>
     <string name="close">Tutup</string>
     <string name="clear">Kosongkan</string>
@@ -623,6 +653,7 @@ Dimensi gambar mestilah seperti berikut:
     <string name="view">Lihat</string>
     <string name="search">Cari</string>
     <string name="search_no_results">Tiada hasil ditemui</string>
+    <string name="sort">Isih</string>
     <string name="any_version">Mana-mana</string>
     <string name="enabled">Dayakan</string>
     <string name="disabled">Dilumpuhkan</string>

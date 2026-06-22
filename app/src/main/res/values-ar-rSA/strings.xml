@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">انقر على زر \'%s\' أدناه</string>
     <string name="home_download_instructions_step2_part1">مرر لأسفل صفحة الويب واضغط</string>
     <string name="home_download_instructions_download_button_toast">اضغط على التنزيل من الموقع الإلكتروني، وليس هنا 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">مثالي! الآن انقر على متابعة أدناه وانتقل إلى الموقع الإلكتروني 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">الممارسة تُؤدي إلى الإتقان، أنت تقترب من ذلك! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">رائع! الآن انقر على متابعة وانتقل إلى الموقع الإلكتروني 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">الممارسة تؤدي إلى الإتقان، وأنت تقترب من ذلك 💪</string>
     <string name="home_download_instructions_download_button_toast_4">ليس هنا بعد… ليس هنا بعد… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">حسنًا، أنا أحترم هذا التفاني 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">أنت الآن مختبر رسمي لزر Morphe 🏅</string>

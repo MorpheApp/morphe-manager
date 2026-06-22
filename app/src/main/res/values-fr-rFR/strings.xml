@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">Appuyez sur le bouton \'%s\' ci-dessous</string>
     <string name="home_download_instructions_step2_part1">Faites défiler la page Web et appuyez sur</string>
     <string name="home_download_instructions_download_button_toast">Appuyez sur télécharger sur le site Web, et non ici 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Parfait ! Maintenant cliquez sur \'Continuer\' ci-dessous et allez sur le site 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">C\'est en forgeant qu\'on devient forgeron, vous y êtes presque ! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Parfait ! Maintenant, appuyez sur \'Continuer\' et rendez-vous sur le site web 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">C\'est en pratiquant qu\'on devient meilleur, et tu es sur la bonne voie 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Toujours pas là… toujours pas là… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, je respecte le dévouement 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Vous êtes maintenant un testeur officiel du bouton Morphe 🏅</string>

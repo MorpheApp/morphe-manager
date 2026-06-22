@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">खालील \'%s\' बटण दाबा</string>
     <string name="home_download_instructions_step2_part1">वेबपेजवर खाली स्क्रोल करा आणि दाबा</string>
     <string name="home_download_instructions_download_button_toast">वेबसाइटवर असलेल्या डाउनलोड बटणावर दाबा, येथे नाही. 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">उत्कृष्ट! आता खालील \'सुरू ठेवा\' वर क्लिक करा आणि वेबसाइटवर जा 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">सरावाने सर्व काही साध्य होते, तुम्ही तिथे पोहोचत आहात! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">उत्तम! आता पुढे क्लिक करा आणि वेबसाइटवर जा 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">सरावाने माणूस पारंगत होतो आणि तुम्ही तिथे पोहोचत आहात 💪</string>
     <string name="home_download_instructions_download_button_toast_4">अजून इथे नाही... अजून इथे नाही... 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">ठीक आहे, मी तुमच्या समर्पणाचा आदर करतो 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">आता तुम्ही अधिकृत Morphe बटण परीक्षक आहात 🏅</string>

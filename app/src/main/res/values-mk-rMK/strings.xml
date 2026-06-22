@@ -121,8 +121,6 @@
     <string name="home_download_instructions_step1">Притиснете го копчето „%s“ подолу</string>
     <string name="home_download_instructions_step2_part1">Скролувајте надолу на веб-страницата и притиснете</string>
     <string name="home_download_instructions_download_button_toast">Притиснете „Преземи“ на веб-страницата, а не овде 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Одлично! Кликнете на „продолжете“ подолу и посетете го сајтот 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Вежбањето создава совршенство, па напред! 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Сеуште не е тука… сеуште не е тука… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Ја почитувам посветеноста 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Сега сте официјален тестер на копчето на Morphe 🏅</string>

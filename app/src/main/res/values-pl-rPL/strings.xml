@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">Naciśnij przycisk \"%s\" poniżej</string>
     <string name="home_download_instructions_step2_part1">Przewiń stronę w dół i naciśnij</string>
     <string name="home_download_instructions_download_button_toast">Naciśnij \"Download\" na stronie, a nie tutaj 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Idealnie! Teraz kliknij \"Kontynuuj\" poniżej i przejdź na stronę 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Praktyka czyni mistrza, jesteś na dobrej drodze! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Świetnie! Teraz kliknij \"Kontynuuj\" i przejdź na stronę 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Praktyka czyni mistrza, jesteś na dobrej drodze 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Dalej nie tu… dalej nie tu… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Okej, szanuję zaangażowanie 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Zostajesz oficjalnym testerem przycisków Morphe 🏅</string>

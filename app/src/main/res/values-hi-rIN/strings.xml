@@ -139,8 +139,8 @@
     <string name="home_download_instructions_step1">नीचे दिया गया \'%s\' बटन दबाएं</string>
     <string name="home_download_instructions_step2_part1">वेबपेज पर नीचे की ओर स्क्रोल करें और दबाएं</string>
     <string name="home_download_instructions_download_button_toast">वेबसाइट पर डाउनलोड बटन पर क्लिक करें, यहां नहीं 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">उत्कृष्ट! अब नीचे दिए गए जारी रखें पर क्लिक करें और वेबसाइट पर जाएं 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">अभ्यास परिपूर्ण बनाता है, आप वहां पहुंच रहे हैं! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">बहुत बढ़िया! अब जारी रखें पर क्लिक करें और वेबसाइट पर जाएं 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">अभ्यास परिपूर्ण बनाता है और आप वहां पहुंच रहे हैं 💪</string>
     <string name="home_download_instructions_download_button_toast_4">अभी भी यहां नहीं… अभी भी यहां नहीं… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">ठीक है, मैं समर्पण का सम्मान करता हूँ 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">आप अब एक आधिकारिक मोर्फ़ बटन परीक्षक हैं 🏅</string>
