@@ -1,3 +1,11 @@
+# [1.22.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.8...v1.22.0-dev.9) (2026-06-22)
+
+
+### Bug Fixes
+
+* Ensure `APKMirror` button contrasts with dialog background in all themes ([4369d24](https://github.com/MorpheApp/morphe-manager/commit/4369d24bc76c870877f3d654e358d64125f796f2))
+* Prevent `AppInfo` hero from blending into background on extreme accent colors ([742ed60](https://github.com/MorpheApp/morphe-manager/commit/742ed604df9ba260b45d21686d984d12f067f623))
+
 # [1.22.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.7...v1.22.0-dev.8) (2026-06-21)
 
 

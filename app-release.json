@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-06-21T15:53:22",
-  "description": "# [1.22.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.7...v1.22.0-dev.8) (2026-06-21)\n\n\n### Bug Fixes\n\n* Center `PulsingLogoIndicator` in `BundlePatchesDialog` and replace `LoadingIndicator` ([5bc796b](https://github.com/MorpheApp/morphe-manager/commit/5bc796be434d3254b906d68f00712212e0d4e3d0))\n* Replace `context.getString()` with `stringResource()` in composables ([c173344](https://github.com/MorpheApp/morphe-manager/commit/c1733448c6131eadcddf34ee25be2e8ca5bd5d4c))\n* Replace context resource calls with Compose APIs and clean up stale suppressions ([9cb9132](https://github.com/MorpheApp/morphe-manager/commit/9cb9132c1f79835ba11297d27401bb2ee32bda1f))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.8/morphe-manager-1.22.0-dev.8.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.8/morphe-manager-1.22.0-dev.8.apk.asc",
-  "version": "1.22.0-dev.8"
+  "created_at": "2026-06-22T07:20:12",
+  "description": "# [1.22.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.8...v1.22.0-dev.9) (2026-06-22)\n\n\n### Bug Fixes\n\n* Ensure `APKMirror` button contrasts with dialog background in all themes ([4369d24](https://github.com/MorpheApp/morphe-manager/commit/4369d24bc76c870877f3d654e358d64125f796f2))\n* Prevent `AppInfo` hero from blending into background on extreme accent colors ([742ed60](https://github.com/MorpheApp/morphe-manager/commit/742ed604df9ba260b45d21686d984d12f067f623))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.9/morphe-manager-1.22.0-dev.9.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.22.0-dev.9/morphe-manager-1.22.0-dev.9.apk.asc",
+  "version": "1.22.0-dev.9"
 }
