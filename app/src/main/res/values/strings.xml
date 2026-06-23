@@ -337,11 +337,10 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="patcher_failed_subtitle">Check the error details below</string>
     <string name="patcher_failed_dialog_title">Patching Failed</string>
     <string name="patcher_unknown_error">Unknown error occurred</string>
-    <!-- Do not translate split steps: patcher step labels are not yet localized -->
-    <string name="patcher_split_step_extracting" translatable="false">Extracting split APKs</string>
-    <string name="patcher_split_step_merging" translatable="false">Merging %s</string>
-    <string name="patcher_split_step_writing" translatable="false">Writing merged APK</string>
-    <string name="patcher_split_step_finalizing" translatable="false">Finalizing merged APK</string>
+    <string name="patcher_split_step_extracting">Extracting split APKs</string>
+    <string name="patcher_split_step_merging">Merging %s</string>
+    <string name="patcher_split_step_writing">Writing merged APK</string>
+    <string name="patcher_split_step_finalizing">Finalizing merged APK</string>
     <string name="patcher_conflict_title">Package conflict</string>
     <string name="patcher_conflict_subtitle">You need to uninstall the existing version</string>
     <string name="patcher_conflict_hint">The patched app uses a different certificate than the installed version. Uninstalling will erase all app data</string>
