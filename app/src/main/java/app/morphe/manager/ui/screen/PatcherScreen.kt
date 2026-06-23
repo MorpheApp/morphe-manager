@@ -228,8 +228,7 @@ fun PatcherScreen(
             state.hasPatchingError = true
             val steps = patcherViewModel.steps
             val failedStep = steps.firstOrNull { it.state == State.FAILED }
-            state.errorMessage = failedStep?.message
-                ?: unknownErrorText
+            state.errorMessage = failedStep?.message.orEmpty()
             state.errorInfo = patcherViewModel.buildErrorInfo()
             state.showErrorDialog = true
         }
@@ -434,7 +433,7 @@ fun PatcherScreen(
     // Error dialog
     if (state.showErrorDialog) {
         PatcherErrorDialog(
-            errorMessage = state.effectiveErrorMessage,
+            errorMessage = state.effectiveErrorMessage.ifBlank { unknownErrorText },
             errorInfo = state.errorInfo,
             onDismiss = { state.showErrorDialog = false }
         )
