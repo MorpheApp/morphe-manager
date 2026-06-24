@@ -767,8 +767,8 @@ class PatchBundleRepository(
                 val updated = src.copy(displayName = normalized)
                 val updatedInfo = ready.info[uid]?.copy(name = updated.displayTitle)
                 ready.copy(
-                    sources = ready.sources.put(uid, updated),
-                    info = if (updatedInfo != null) ready.info.put(uid, updatedInfo) else ready.info
+                    sources = ready.sources.putting(uid, updated),
+                    info = if (updatedInfo != null) ready.info.putting(uid, updatedInfo) else ready.info
                 )
             }
         }
@@ -794,7 +794,7 @@ class PatchBundleRepository(
                 is JsonPatchBundle -> src.copy(usePrerelease = usePrerelease)
                 else -> return@dispatchAction state
             }
-            ready.copy(sources = ready.sources.put(uid, updated))
+            ready.copy(sources = ready.sources.putting(uid, updated))
         }
 
         // If this is the default Morphe Patches bundle, sync FCM patches topic
@@ -1102,7 +1102,7 @@ class PatchBundleRepository(
                     if (bundle.uid == src.uid) onProgress?.invoke(bytesRead, bytesTotal)
                 }
             )
-            ready.copy(sources = ready.sources.put(src.uid, src))
+            ready.copy(sources = ready.sources.putting(src.uid, src))
         }
 
     /**
