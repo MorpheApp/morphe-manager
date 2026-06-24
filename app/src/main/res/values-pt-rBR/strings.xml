@@ -18,7 +18,7 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Atualização do Morphe disponível</string>
     <string name="home_update_available_subtitle">Nova versão pronta para instalação</string>
-    <string name="home_update_error">Falha na importação</string>
+    <string name="home_update_error">Falha na atualização</string>
     <string name="home_update_error_subtitle">Verifique sua conexão com a internet e tente novamente</string>
     <string name="home_update_skipped_metered">Atualizações ignoradas</string>
     <string name="home_update_skipped_metered_subtitle">Dados móveis estão ativos</string>
@@ -120,8 +120,8 @@
     <string name="sources_patch_expert_badge_tooltip">Ative o Modo Expert em Configurações para incluir este patch manualmente</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Precisa de ajuda para encontrar um APK original sem patches?</string>
-    <string name="home_apk_availability_dialog_simple">Para aplicar os patches no(a) &lt;b&gt;%s&lt;/b&gt;, você precisa do APK sem patches na versão:</string>
-    <string name="home_apk_availability_dialog_expert">Para aplicar os patches no(a) &lt;b&gt;%s&lt;/b&gt;, você precisa de um APK sem patches na versão:</string>
+    <string name="home_apk_availability_dialog_simple">Para aplicar os patches no app &lt;b&gt;%s&lt;/b&gt;, você precisa do APK sem patches na versão:</string>
+    <string name="home_apk_availability_dialog_expert">Para aplicar os patches no app &lt;b&gt;%s&lt;/b&gt;, você precisa de um APK sem patches na versão:</string>
     <string name="home_apk_availability_recommended_label">Recomendado</string>
     <string name="home_apk_availability_unpatched_label">Sem patches</string>
     <string name="home_apk_availability_incompatible_label">Incompatível</string>
@@ -316,6 +316,10 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="patcher_failed_subtitle">Verifique os detalhes do erro abaixo</string>
     <string name="patcher_failed_dialog_title">A aplicação de patches falhou</string>
     <string name="patcher_unknown_error">Ocorreu um erro desconhecido</string>
+    <string name="patcher_split_step_extracting">Extraindo APKs divididos</string>
+    <string name="patcher_split_step_merging">Mesclando %s</string>
+    <string name="patcher_split_step_writing">Salvando APK mesclado</string>
+    <string name="patcher_split_step_finalizing">Finalizando APK mesclado</string>
     <string name="patcher_conflict_title">Conflito de pacote</string>
     <string name="patcher_conflict_subtitle">Você precisa desinstalar a versão existente</string>
     <string name="patcher_conflict_hint">O app patcheado usa um certificado diferente da versão instalada. Desinstalar apagará todos os dados do app.</string>

@@ -316,6 +316,10 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="patcher_failed_subtitle">Aşağıdaki hata ayrıntılarını kontrol edin</string>
     <string name="patcher_failed_dialog_title">Yama Başarısız</string>
     <string name="patcher_unknown_error">Bilinmeyen bir hata oluştu</string>
+    <string name="patcher_split_step_extracting">Bölünmüş APK\'ler ayıklanıyor</string>
+    <string name="patcher_split_step_merging">%s birleştiriliyor</string>
+    <string name="patcher_split_step_writing">Birleştirilmiş APK\'ye yazılıyor</string>
+    <string name="patcher_split_step_finalizing">Birleştirilmiş APK son haline getiriliyor</string>
     <string name="patcher_conflict_title">Paket çakışması</string>
     <string name="patcher_conflict_subtitle">Mevcut sürümü kaldırmanız gerekiyor</string>
     <string name="patcher_conflict_hint">Yamalanmış uygulama, yüklü sürümden farklı bir sertifika kullanıyor. Kaldırma işlemi, tüm uygulama verilerini silecektir</string>

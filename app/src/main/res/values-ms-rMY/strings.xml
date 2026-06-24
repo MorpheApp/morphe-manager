@@ -62,8 +62,18 @@
     <string name="home_greeting_afternoon_3">Syif petang: edisi tampalan</string>
     <!-- Evening greetings (17:00–21:59) -->
     <string name="home_greeting_evening_1">Selamat petang! Tampalan petang terasa berbeza</string>
+    <string name="home_greeting_evening_2">Ingin bersantai? Buat tampalan aplikasi dahulu</string>
+    <string name="home_greeting_evening_3">Nak balik? Buat suatu tampalan dahulu</string>
     <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Masih berjaga? Begitu juga dengan aplikasi yang memerlukan tampalan</string>
+    <string name="home_greeting_late_night_2">Sesi tampalan lewat malam? Hebat</string>
+    <string name="home_greeting_late_night_3">Mod burung hantu: diaktifkan</string>
     <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Jam puncak untuk tampalan… katanyalah</string>
+    <string name="home_greeting_super_late_2">Tak boleh tidur? Tampallah sesuatu</string>
+    <string name="home_greeting_super_late_3">Pada ketika ini, teruskan sahaja bangun dan buat tampalan</string>
+    <string name="home_greeting_super_late_4">Anda dan pelayan, kedua-duanya berjaga</string>
+    <string name="home_greeting_super_late_5">Malaman dan produktif</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tampalan sumber-sumber</string>
     <string name="sources_management_open_in_browser">Buka dalam pelayar web</string>
@@ -237,6 +247,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="adaptive_icon_monochrome_label">Monokrom</string>
     <string name="adaptive_icon_guide">Panduan penciptaan ikon</string>
     <string name="adaptive_icon_guide_png_title">Gunakan PNG dengan latar belakang lut sinar</string>
+    <string name="adaptive_icon_guide_png_body">Latar depan hendaklah berupa fail PNG dengan latar belakang yang lut sinar. Latar belakang berwarna padu akan kelihatan tidak tepat - warna latar belakang hendaklah diambil daripada pemilih latar belakang di bawah.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Zon selamat</string>
     <string name="adaptive_icon_guide_notification_title">Ikon pemberitahuan</string>
     <string name="adaptive_icon_guide_monochrome_title">Ikon monokrom</string>
@@ -301,11 +312,14 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patcher_unknown_error">Ralat yang tidak diketahui berlaku</string>
     <string name="patcher_conflict_title">Konflik pakej</string>
     <string name="patcher_conflict_subtitle">Anda perlu menyahpasang versi sedia ada</string>
+    <string name="patcher_installed_conflict_title">Nyahpasang diperlukan</string>
     <string name="patcher_install_error_title">Ralat pemasangan</string>
     <string name="patcher_install_error_subtitle">Cuba nyahpasang dan pasang semula</string>
     <string name="patcher_ready_to_install_subtitle">Tekan butang dibawah untung pasang</string>
     <string name="patcher_ready_to_mount_subtitle">Tekan butang dibawah untuk memasang</string>
     <string name="patcher_storage_permission_dialog_title">Laluan storan tidak dapat diakses</string>
+    <string name="patcher_incompatible_patcher_title">Kemas kini diperlukan</string>
+    <string name="patcher_incompatible_patcher_update_button">Muat turun dan kemas kini Morphe</string>
     <string name="patcher_storage_permission_description_api30">Satu atau lebih pilihan tampalan menuju ke laluan yang Morphe tidak dapat baca. Benarkan akses storan dan tekan butang kemudian tampalan akan mula secara automatik</string>
     <string name="patcher_storage_permission_description_legacy">Satu atau lebih pilihan tampalan menuju ke laluan yang tidak dapat diakses. Kemas kini laluan pada pilihan tampalan dan cuba semula</string>
     <string name="patcher_storage_permission_grant">Berikan akses storan</string>
@@ -324,6 +338,9 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patcher_step_write_patched">Menulis fail APK yang ditampal</string>
     <string name="patcher_step_sign_apk">Menandatangani fail APK ditampal</string>
     <!-- Battery optimization pre-flight dialog -->
+    <string name="battery_optimization_dialog_title">Perlindungan tampalan latar belakang</string>
+    <string name="battery_optimization_dialog_description">Sesetengah peranti mungkin menghentikan penampal apabila aplikasi diminimumkan. Benarkan Morphe berjalan tanpa keterbatasan bateri untuk memastikan tampalan selesai dengan teliti</string>
+    <string name="battery_optimization_not_now">Bukan sekarang</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Tampalan sedang berjalan… </string>
     <string name="patcher_notification_text">Tekan untuk kembali ke penampal</string>
@@ -375,6 +392,13 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="failed_to_mount">Gagal untuk ditunggang: %s</string>
     <string name="failed_to_unmount">Gagal untuk nyah-tunggang %s</string>
     <!-- Patcher Screen - Mini-games -->
+    <string name="mini_game_score">Markah %d</string>
+    <string name="mini_game_best">Terbaik %d</string>
+    <string name="mini_game_new_record">Rekod baharu!</string>
+    <string name="mini_game_game_over">Permainan Tamat</string>
+    <string name="mini_game_try_again">Cuba Lagi</string>
+    <string name="mini_game_paused">Dijedakan</string>
+    <string name="mini_game_resume">Teruskan</string>
     <!-- Settings -->
     <string name="appearance">Penampilan</string>
     <string name="advanced">Lebih mahir</string>

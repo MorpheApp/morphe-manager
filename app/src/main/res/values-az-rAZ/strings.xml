@@ -139,6 +139,8 @@
     <string name="home_download_instructions_step1">Aşağıdakı \'%s\' düyməsinə toxun</string>
     <string name="home_download_instructions_step2_part1">Veb səhifəni aşağı sürüşdür və toxun</string>
     <string name="home_download_instructions_download_button_toast">Burada deyil, vebsaytdakı yükləməyə toxun 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Əla! İndi davam et-ə kliklə və veb sayta keç 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Təcrübə mükəmməlləşdirir və siz hədəfə yaxınlaşırsınız 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Hələ burada deyil... hələ burada deyil... 🙈 </string>
     <string name="home_download_instructions_download_button_toast_5">Yaxşı, inadkarlığa hörmət edirəm 🫡 </string>
     <string name="home_download_instructions_download_button_toast_6">Artıq rəsmi Morphe düyməsi sınaqçısısınız 🏅</string>
@@ -314,6 +316,10 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="patcher_failed_subtitle">Aşağıdakı xəta təfərrüatlarını yoxlayın</string>
     <string name="patcher_failed_dialog_title">Yamaqlanma Uğursuz Oldu</string>
     <string name="patcher_unknown_error">Bilinməyən xəta baş verdi</string>
+    <string name="patcher_split_step_extracting">Ayrılmış APK-lar çıxarılır</string>
+    <string name="patcher_split_step_merging">%s birləşdirilir</string>
+    <string name="patcher_split_step_writing">Birləşdirilmiş APK qeydə alınır</string>
+    <string name="patcher_split_step_finalizing">Birləşdirilmiş APK tamamlanır</string>
     <string name="patcher_conflict_title">Paket ziddiyyəti</string>
     <string name="patcher_conflict_subtitle">Mövcud versiyanı silməlisiniz</string>
     <string name="patcher_conflict_hint">Yamaqlanan tətbiq quraşdırılan versiyadan fərqli sertifikat istifadə edir. Quraşdırma ləğvi bütün tətbiq məlumatını siləcək</string>

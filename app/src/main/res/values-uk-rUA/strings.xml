@@ -316,6 +316,10 @@
     <string name="patcher_failed_subtitle">Перевірте деталі помилки нижче</string>
     <string name="patcher_failed_dialog_title">Помилка патчінгу</string>
     <string name="patcher_unknown_error">Сталася невідома помилка</string>
+    <string name="patcher_split_step_extracting">Видобування split APK файлів</string>
+    <string name="patcher_split_step_merging">Об\'єднання %s</string>
+    <string name="patcher_split_step_writing">Запис об\'єднаного APK файлу</string>
+    <string name="patcher_split_step_finalizing">Завершення об\'єднаного APK файлу</string>
     <string name="patcher_conflict_title">Конфлікт пакетів</string>
     <string name="patcher_conflict_subtitle">Вам потрібно видалити наявну версію</string>
     <string name="patcher_conflict_hint">Патчений застосунок використовує інший підпис, ніж встановлена версія. Після видалення всі дані застосунку буде втрачено</string>

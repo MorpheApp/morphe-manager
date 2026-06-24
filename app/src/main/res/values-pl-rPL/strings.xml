@@ -316,6 +316,10 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="patcher_failed_subtitle">Sprawdź szczegóły błędu poniżej</string>
     <string name="patcher_failed_dialog_title">Błąd modyfikacji</string>
     <string name="patcher_unknown_error">Wystąpił nieznany błąd</string>
+    <string name="patcher_split_step_extracting">Wyodrębnianie podzielonych plików APK</string>
+    <string name="patcher_split_step_merging">Scalanie %s</string>
+    <string name="patcher_split_step_writing">Zapisywanie scalonego pliku APK</string>
+    <string name="patcher_split_step_finalizing">Finalizowanie scalonego pliku APK</string>
     <string name="patcher_conflict_title">Konflikt pakietów</string>
     <string name="patcher_conflict_subtitle">Musisz odinstalować obecną wersję</string>
     <string name="patcher_conflict_hint">Zmodyfikowana aplikacja używa innego certyfikatu niż zainstalowana wersja. Odinstalowanie wyczyści wszystkie dane aplikacji</string>

@@ -316,6 +316,10 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <string name="patcher_failed_subtitle">Consulta los detalles del error a continuación</string>
     <string name="patcher_failed_dialog_title">Fallo al aplicar el parche</string>
     <string name="patcher_unknown_error">Ocurrió un error desconocido</string>
+    <string name="patcher_split_step_extracting">Extrayendo APKs divididos</string>
+    <string name="patcher_split_step_merging">Combinando %s</string>
+    <string name="patcher_split_step_writing">Guardando APK combinado</string>
+    <string name="patcher_split_step_finalizing">Completando el APK combinado</string>
     <string name="patcher_conflict_title">Conflicto de paquete</string>
     <string name="patcher_conflict_subtitle">Debe desinstalar la versión existente</string>
     <string name="patcher_conflict_hint">La aplicación parcheada utiliza un certificado diferente al de la versión instalada. Al desinstalarla, se borrarán todos los datos de la aplicación.</string>
