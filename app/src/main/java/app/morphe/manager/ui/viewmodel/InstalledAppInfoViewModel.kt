@@ -40,6 +40,7 @@ class InstalledAppInfoViewModel(
     private val installerManager: InstallerManager by inject()
     private val originalApkRepository: OriginalApkRepository by inject()
     private val filesystem: Filesystem by inject()
+    private val applicationScope: AppCoroutineScope by inject()
 
     lateinit var onBackClick: () -> Unit
     var onAppStateChanged: ((packageName: String) -> Unit)? = null
@@ -146,12 +147,15 @@ class InstalledAppInfoViewModel(
                 }
             }
 
-            InstallType.MOUNT -> viewModelScope.launch {
+            InstallType.MOUNT -> applicationScope.launch {
+                // Detached from viewModelScope: dialog dismissal must not abort the cleanup
                 rootInstaller.uninstall(app.currentPackageName)
                 // Delete record and APK but preserve selection and options
                 deleteRecordAndApk(app)
-                onAppStateChanged?.invoke(app.currentPackageName)
-                onBackClick()
+                withContext(Dispatchers.Main) {
+                    onAppStateChanged?.invoke(app.currentPackageName)
+                    onBackClick()
+                }
             }
         }
     }
@@ -160,7 +164,8 @@ class InstalledAppInfoViewModel(
      * Remove app completely: database record, patched APK and original APK.
      * Patch selection and options are preserved for future patching.
      */
-    fun removeAppCompletely() = viewModelScope.launch {
+    fun removeAppCompletely() = applicationScope.launch {
+        // Detached from viewModelScope: dialog dismissal must not abort the cleanup
         val app = installedApp ?: return@launch
         deleteRecordAndApk(app)
 
@@ -171,16 +176,18 @@ class InstalledAppInfoViewModel(
             }
         }
 
-        installedApp = null
-        appInfo = null
-        appliedPatches = null
-        isInstalledOnDevice = false
-        context.toast(context.getString(R.string.saved_app_removed_toast))
-        onAppStateChanged?.invoke(app.currentPackageName)
-        if (app.originalPackageName != app.currentPackageName) {
-            onAppStateChanged?.invoke(app.originalPackageName)
+        withContext(Dispatchers.Main) {
+            installedApp = null
+            appInfo = null
+            appliedPatches = null
+            isInstalledOnDevice = false
+            context.toast(context.getString(R.string.saved_app_removed_toast))
+            onAppStateChanged?.invoke(app.currentPackageName)
+            if (app.originalPackageName != app.currentPackageName) {
+                onAppStateChanged?.invoke(app.originalPackageName)
+            }
+            onBackClick()
         }
-        onBackClick()
     }
 
     /**
