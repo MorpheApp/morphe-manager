@@ -1,3 +1,52 @@
+# [1.22.0](https://github.com/MorpheApp/morphe-manager/compare/v1.21.0...v1.22.0) (2026-06-26)
+
+
+### Bug Fixes
+
+* Accessibility improvements for bottom sheet ([40b98cb](https://github.com/MorpheApp/morphe-manager/commit/40b98cbf9af0dacd2f559d6f91f64612f7c893d2))
+* Add Cancel button to Select APK dialog ([4b06e2e](https://github.com/MorpheApp/morphe-manager/commit/4b06e2e31b257e88df24b867c0acdf279d872746))
+* Add invisible TalkBack back button in settings ([00ffc62](https://github.com/MorpheApp/morphe-manager/commit/00ffc6283b52a16fd3659e749006ebbdc16990cc))
+* Add missing license metadata for JitPack libraries and embed offline license texts ([858aa8f](https://github.com/MorpheApp/morphe-manager/commit/858aa8fbf5c456e4336b5dc294c77f6f76f6ab0a))
+* Animate `Close` button entrance in `InstalledAppInfoDialog` ([665e360](https://github.com/MorpheApp/morphe-manager/commit/665e36059755cb82e45b8c22a92791dcc815eeda))
+* Block UI during APK selection processing ([36b0a92](https://github.com/MorpheApp/morphe-manager/commit/36b0a923bf308cfcd3bc4724469bf4985bbe7088))
+* Center `PulsingLogoIndicator` in `BundlePatchesDialog` and replace `LoadingIndicator` ([5bc796b](https://github.com/MorpheApp/morphe-manager/commit/5bc796be434d3254b906d68f00712212e0d4e3d0))
+* Decouple app DB and filesystem writes from ViewModel lifecycle ([b8776a0](https://github.com/MorpheApp/morphe-manager/commit/b8776a04cab7c1677a20ebb26f82b0041263e10d))
+* Ensure `APKMirror` button contrasts with dialog background in all themes ([4369d24](https://github.com/MorpheApp/morphe-manager/commit/4369d24bc76c870877f3d654e358d64125f796f2))
+* Exclude nested `.apk` entries from split archive detection ([#644](https://github.com/MorpheApp/morphe-manager/issues/644)) ([0b4d6ee](https://github.com/MorpheApp/morphe-manager/commit/0b4d6ee006e098cbaed7b01ec529e5a585e1e8ec))
+* Expose swipe actions and improve accessibility for screen readers ([e913918](https://github.com/MorpheApp/morphe-manager/commit/e913918a9e4814bf80e5f4045e714752dc97d2dc))
+* Handle incoming intents from any screen, not just HomeScreen ([d004c21](https://github.com/MorpheApp/morphe-manager/commit/d004c21f5198a5020274ef9b18488fdfd5712ee1))
+* Improve accessibility with screen reader actions and labeled buttons ([9753c49](https://github.com/MorpheApp/morphe-manager/commit/9753c49624859dbe81ba1747693ecb4edb9341b8))
+* Improve system tab icon ([d2c5926](https://github.com/MorpheApp/morphe-manager/commit/d2c5926b349176f322f91771ef868589437251c3))
+* Make split APK preparation step labels translatable via string resources ([6d6d444](https://github.com/MorpheApp/morphe-manager/commit/6d6d4443cb528e930577f06966c4bdcb24f40173))
+* Offload APK parsing and installer plan resolution off the main thread ([8c9125b](https://github.com/MorpheApp/morphe-manager/commit/8c9125bb6744fee382fcc48cfef2d3d7b7e0ada7))
+* Persist installed app version reliably after patching ([089cc7e](https://github.com/MorpheApp/morphe-manager/commit/089cc7e87a10322a4d19eb22bf35531e10db1728))
+* Prevent `AppInfo` hero from blending into background on extreme accent colors ([742ed60](https://github.com/MorpheApp/morphe-manager/commit/742ed604df9ba260b45d21686d984d12f067f623))
+* Prevent tab chip squishing in expert patcher on long translations ([ec720dd](https://github.com/MorpheApp/morphe-manager/commit/ec720dd56b7254fbf822227002ddf28e3e26d438))
+* Prevent text compression in headers on tablet portrait ([#651](https://github.com/MorpheApp/morphe-manager/issues/651)) ([b1783fc](https://github.com/MorpheApp/morphe-manager/commit/b1783fc5e844d256dc79c664ce8c6889d9327ca3))
+* Reduce patcher action bar button spacing on tablet portrait ([0a8b79b](https://github.com/MorpheApp/morphe-manager/commit/0a8b79b4cb1a017cb1701f6e59b4b0c108b7e70f))
+* Replace `context.getString()` with `stringResource()` in composables ([c173344](https://github.com/MorpheApp/morphe-manager/commit/c1733448c6131eadcddf34ee25be2e8ca5bd5d4c))
+* Replace context resource calls with Compose APIs and clean up stale suppressions ([9cb9132](https://github.com/MorpheApp/morphe-manager/commit/9cb9132c1f79835ba11297d27401bb2ee32bda1f))
+* Show install error instead of uninstall dialog when target package is not installed ([6a7dcc1](https://github.com/MorpheApp/morphe-manager/commit/6a7dcc1089dbff3f27539d740b1ee782bb29637d))
+* Show patching log in error dialog instead of generic placeholder when no failed step message ([bcc5f50](https://github.com/MorpheApp/morphe-manager/commit/bcc5f501fc1ded0c13a11301de5577510decf3d6))
+* Suppress completion notification when patching is canceled by the user ([5cd4509](https://github.com/MorpheApp/morphe-manager/commit/5cd4509b628f57bbde8bb88015fc9d9d6cd6b86b))
+* Suppress patching complete notification when app is in foreground or auto-install is pending ([45d78a1](https://github.com/MorpheApp/morphe-manager/commit/45d78a17b0379bdb5f2c4030df6db42a0efec41b))
+* Trigger Shizuku auto-install in the background without waiting for foreground ([#642](https://github.com/MorpheApp/morphe-manager/issues/642)) ([eee8626](https://github.com/MorpheApp/morphe-manager/commit/eee8626bb86d385a2036111cc1a75cf18dc6f141))
+* Truncate version text with ellipsis to prevent update badge from being pushed off-screen ([ee85cb2](https://github.com/MorpheApp/morphe-manager/commit/ee85cb2891d41b206ccb5375ccac9c410d20b9cc))
+* Unify vertical divider insets across home, settings and app info dialog ([681982f](https://github.com/MorpheApp/morphe-manager/commit/681982f6eacc0d7060388e2f0813d8fd649beed8))
+* Use `LinearEasing` for settings exit fade to keep slide visible ([f9be268](https://github.com/MorpheApp/morphe-manager/commit/f9be268e6f3af929418998633ddf615249b48279))
+
+
+### Features
+
+* Add app list reorder mode to home screen multiselect bar ([#645](https://github.com/MorpheApp/morphe-manager/issues/645)) ([c0939e4](https://github.com/MorpheApp/morphe-manager/commit/c0939e44976ece5e42598a9538e176d3b5a70e3b))
+* Add pulsing logo indicator ([52733f8](https://github.com/MorpheApp/morphe-manager/commit/52733f8ecd0d1f2792ec801b652139aacd8cf867))
+* Add slide-up push transition for settings screen ([d5d8fc9](https://github.com/MorpheApp/morphe-manager/commit/d5d8fc9204c1c0bb4dcca59088489e20e5a8e501))
+* Check `versionCode` when resolving patch compatibility ([#639](https://github.com/MorpheApp/morphe-manager/issues/639)) ([08889f3](https://github.com/MorpheApp/morphe-manager/commit/08889f319abc4fe41eb887e45f1666f6cbe5a014))
+* Improve adaptive layout for tablet and landscape mode ([7f997ae](https://github.com/MorpheApp/morphe-manager/commit/7f997aeb122b67d27e34283fb54c0884451ae789))
+* Parallelize bundle refresh and improve update snackbar ([b4e74a5](https://github.com/MorpheApp/morphe-manager/commit/b4e74a5ea2db17fec8d007b2d1cb5c57284421e2))
+* Show completion notification after patching finishes ([cd2da25](https://github.com/MorpheApp/morphe-manager/commit/cd2da2587fc8f2967dba61ac8ba74e36fdbfc54d))
+* Show home greetings based on time of day ([#632](https://github.com/MorpheApp/morphe-manager/issues/632)) ([1f30763](https://github.com/MorpheApp/morphe-manager/commit/1f30763833889cdea7b8e793d65bea6062edef5b))
+
 # [1.22.0-dev.12](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0-dev.11...v1.22.0-dev.12) (2026-06-24)
 
 
