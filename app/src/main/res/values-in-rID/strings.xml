@@ -317,6 +317,10 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="patcher_failed_subtitle">Periksa detail kesalahan di bawah ini</string>
     <string name="patcher_failed_dialog_title">Gagal Menambal</string>
     <string name="patcher_unknown_error">Terjadi kesalahan yang tidak diketahui</string>
+    <string name="patcher_split_step_extracting">Mengekstrak APK yang terpisah</string>
+    <string name="patcher_split_step_merging">Menggabungkan %s</string>
+    <string name="patcher_split_step_writing">Menulis APK yang telah digabungkan</string>
+    <string name="patcher_split_step_finalizing">Menyelesaikan APK hasil penggabungan</string>
     <string name="patcher_conflict_title">Paket konflik</string>
     <string name="patcher_conflict_subtitle">Anda perlu mencopot pemasangan versi yang ada</string>
     <string name="patcher_conflict_hint">Aplikasi yang ditambal menggunakan sertifikat yang berbeda dari versi yang terpasang. Mencopot pemasangan akan menghapus semua data aplikasi</string>

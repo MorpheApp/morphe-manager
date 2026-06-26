@@ -54,8 +54,15 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Поткрепено од кофеин и добри кракови</string>
     <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Стани и закрпнувај!</string>
+    <string name="home_greeting_morning_2">Добро утро! Апликациите нема самите да се закрпат</string>
     <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Попладневен умор? Закрпи нешто</string>
+    <string name="home_greeting_afternoon_2">Закрпување попладне е нешто друго</string>
+    <string name="home_greeting_afternoon_3">Попладневна смена: издание за закрпи</string>
     <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Добро вечер! Вечерните поправки се нешто друго</string>
+    <string name="home_greeting_evening_2">Се опуштате? Прво поправете апликација</string>
     <!-- Late night greetings (22:00–23:59) -->
     <!-- Super late night greetings (0:00–4:59) -->
     <!-- Home Screen - Sources Management -->

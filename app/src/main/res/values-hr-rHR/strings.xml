@@ -139,6 +139,8 @@
     <string name="home_download_instructions_step1">Dodirnite tipku \'%s\' ispod</string>
     <string name="home_download_instructions_step2_part1">Povucite stranicu prema dolje i dodirnite</string>
     <string name="home_download_instructions_download_button_toast">Dodirnite download na web stranici, a ne ovdje 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Savršeno! Sada kliknite na nastavak ispod i idite na web stranicu 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Vježba čini majstora, napreduješ 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Još uvijek nije ovdje… još uvijek nije ovdje… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">U redu, poštujem predanost 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Vi ste sada službeni tester tipke Morphe 🏅</string>
@@ -314,6 +316,10 @@ Vanjska zona (isprekidana): može biti odrezana maskom pokretača - važne detal
     <string name="patcher_failed_subtitle">Provjerite pojedinosti o pogrešci ispod</string>
     <string name="patcher_failed_dialog_title">Patchanje nije uspjelo</string>
     <string name="patcher_unknown_error">Došlo je do nepoznate pogreške</string>
+    <string name="patcher_split_step_extracting">Izdvajanje podijeljenih APK-ova</string>
+    <string name="patcher_split_step_merging">Spajanje %s</string>
+    <string name="patcher_split_step_writing">Pisanje spojenog APK-a</string>
+    <string name="patcher_split_step_finalizing">Finaliziranje spojenog APK-a</string>
     <string name="patcher_conflict_title">Konflikt paketa</string>
     <string name="patcher_conflict_subtitle">Morate deinstalirati postojeću verziju</string>
     <string name="patcher_conflict_hint">Patchana aplikacija koristi drugačiji certifikat od instalirane verzije. Deinstaliranjem će se izbrisati svi podaci aplikacije</string>
@@ -754,6 +760,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="warning">Upozorenje</string>
     <string name="error_">Pogreška</string>
     <string name="retry">Pokušaj ponovno</string>
+    <string name="refresh">Osvježi</string>
     <string name="add">Dodaj</string>
     <string name="close">Zatvori</string>
     <string name="back">Natrag</string>
@@ -770,6 +777,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="view">Prikaži</string>
     <string name="search">Traži</string>
     <string name="search_no_results">Nema pronađenih rezultata</string>
+    <string name="sort">Sortiraj</string>
     <string name="any_version">Bilo koji</string>
     <string name="enabled">Omogućeno</string>
     <string name="disabled">Onemogućeno</string>

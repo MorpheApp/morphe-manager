@@ -315,6 +315,10 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="patcher_failed_subtitle">Vérifiez les détails de l\'erreur ci-dessous</string>
     <string name="patcher_failed_dialog_title">Échec du patchage</string>
     <string name="patcher_unknown_error">Une erreur inconnue s\'est produite</string>
+    <string name="patcher_split_step_extracting">Extraction des APK fractionnés</string>
+    <string name="patcher_split_step_merging">Fusion de %s</string>
+    <string name="patcher_split_step_writing">Écriture de l’APK fusionné</string>
+    <string name="patcher_split_step_finalizing">Finalisation de la fusion de l’APK</string>
     <string name="patcher_conflict_title">Paquet en conflit</string>
     <string name="patcher_conflict_subtitle">Vous devez désinstaller la version existante</string>
     <string name="patcher_conflict_hint">L\'application patchée utilise un certificat différent de celui de la version installée. La désinstallation effacera toutes les données de l\'application</string>

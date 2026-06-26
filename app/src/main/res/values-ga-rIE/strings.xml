@@ -316,6 +316,10 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="patcher_failed_subtitle">Seiceáil na sonraí earráide thíos</string>
     <string name="patcher_failed_dialog_title">Theip ar Paisteáil</string>
     <string name="patcher_unknown_error">Tharla earráid anaithnid</string>
+    <string name="patcher_split_step_extracting">Ag baint APKanna scoilte</string>
+    <string name="patcher_split_step_merging">Ag cumasc %s</string>
+    <string name="patcher_split_step_writing">APK comhcheangailte a scríobh</string>
+    <string name="patcher_split_step_finalizing">APK cumasctha á chríochnú</string>
     <string name="patcher_conflict_title">Coinbhleacht pacáiste</string>
     <string name="patcher_conflict_subtitle">Ní mór duit an leagan reatha a dhíshuiteáil</string>
     <string name="patcher_conflict_hint">Úsáideann an aip phaisteáilte deimhniú difriúil ón leagan suiteáilte. Scriosfaidh díshuiteáil gach sonraí aip</string>
