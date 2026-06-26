@@ -15,11 +15,13 @@ import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.installer.*
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.sha256OrNull
 import app.morphe.manager.util.simpleMessage
 import app.morphe.manager.util.toast
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -39,6 +41,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     private val installerManager: InstallerManager by inject()
     private val prefs: PreferencesManager by inject()
     private val appDataResolver: AppDataResolver by inject()
+    private val applicationScope: AppCoroutineScope by inject()
 
     /**
      * Current installation state.
@@ -146,7 +149,6 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     override fun onCleared() {
-        super.onCleared()
         try {
             app.unregisterReceiver(packageReceiver)
         } catch (e: Exception) {
@@ -184,13 +186,14 @@ class InstallViewModel : ViewModel(), KoinComponent {
             installState = InstallState.Installing
 
             try {
-                val packageInfo = pm.getPackageInfo(outputFile)
-                    ?: throw Exception("Failed to load application info")
+                // APK metadata reads parse the archive on disk; keep them off the main thread
+                val (packageInfo, existingInfo) = withContext(Dispatchers.IO) {
+                    val pi = pm.getPackageInfo(outputFile)
+                        ?: throw Exception("Failed to load application info")
+                    pi to pm.getPackageInfo(pi.packageName)
+                }
 
                 val targetPackageName = packageInfo.packageName
-
-                // Check if app is already installed
-                val existingInfo = pm.getPackageInfo(targetPackageName)
 
                 if (existingInfo != null) {
                     // Check version - can't downgrade
@@ -201,64 +204,59 @@ class InstallViewModel : ViewModel(), KoinComponent {
                     }
                     // Check signature mismatch before launching the installer - avoids
                     // INSTALL_FAILED_UPDATE_INCOMPATIBLE from the system PackageInstaller
-                    if (pm.hasSignatureMismatch(targetPackageName, outputFile)) {
+                    val mismatch = withContext(Dispatchers.IO) {
+                        pm.hasSignatureMismatch(targetPackageName, outputFile)
+                    }
+                    if (mismatch) {
                         Log.i(TAG, "Signature mismatch detected for $targetPackageName - showing conflict")
                         installState = InstallState.Conflict(targetPackageName)
                         return@launch
                     }
                 }
 
-                // Resolve installation plan - use one-time token if available
-                val resolved = if (oneTimeInstallerToken != null) {
-                    // Use one-time installer token for this install
-                    val token = oneTimeInstallerToken!!
-                    selectedInstallerToken = token
-                    oneTimeInstallerToken = null
+                // Plan resolution probes installer availability on disk; keep off main
+                val resolved = withContext(Dispatchers.IO) {
+                    if (oneTimeInstallerToken != null) {
+                        val token = oneTimeInstallerToken!!
+                        selectedInstallerToken = token
+                        oneTimeInstallerToken = null
 
-                    // Check if selected installer is available
-                    val entry = installerManager.describeEntry(token, InstallerManager.InstallTarget.PATCHER)
+                        val entry = installerManager.describeEntry(token, InstallerManager.InstallTarget.PATCHER)
 
-                    if (entry != null && entry.availability.available) {
-                        // Selected installer is available - temporarily change primary
-                        val originalPrimary = installerManager.getPrimaryToken()
-
-                        // Set selected token as primary
-                        installerManager.updatePrimaryToken(token)
-
-                        // Resolve with selected token
-                        val result = installerManager.resolvePlanWithStatus(
-                            InstallerManager.InstallTarget.PATCHER,
-                            outputFile,
-                            targetPackageName,
-                            null
-                        )
-
-                        // Restore original primary
-                        installerManager.updatePrimaryToken(originalPrimary)
-
-                        result
+                        if (entry != null && entry.availability.available) {
+                            val originalPrimary = installerManager.getPrimaryToken()
+                            installerManager.updatePrimaryToken(token)
+                            val result = installerManager.resolvePlanWithStatus(
+                                InstallerManager.InstallTarget.PATCHER,
+                                outputFile,
+                                targetPackageName,
+                                null
+                            )
+                            installerManager.updatePrimaryToken(originalPrimary)
+                            result
+                        } else {
+                            // Even if the installer is unavailable, try resolve with it
+                            // to get the correct primaryToken and unavailabilityReason
+                            val originalPrimary = installerManager.getPrimaryToken()
+                            installerManager.updatePrimaryToken(token)
+                            val result = installerManager.resolvePlanWithStatus(
+                                InstallerManager.InstallTarget.PATCHER,
+                                outputFile,
+                                targetPackageName,
+                                null
+                            )
+                            installerManager.updatePrimaryToken(originalPrimary)
+                            result
+                        }
                     } else {
-                        // Even if the installer is unavailable, try resolve with it
-                        // to get the correct primaryToken and unavailabilityReason
-                        val originalPrimary = installerManager.getPrimaryToken()
-                        installerManager.updatePrimaryToken(token)
-                        val result = installerManager.resolvePlanWithStatus(
+                        selectedInstallerToken = null
+                        installerManager.resolvePlanWithStatus(
                             InstallerManager.InstallTarget.PATCHER,
                             outputFile,
                             targetPackageName,
                             null
                         )
-                        installerManager.updatePrimaryToken(originalPrimary)
-                        result
                     }
-                } else {
-                    selectedInstallerToken = null
-                    installerManager.resolvePlanWithStatus(
-                        InstallerManager.InstallTarget.PATCHER,
-                        outputFile,
-                        targetPackageName,
-                        null
-                    )
                 }
 
                 Log.d(TAG, "Resolved plan: ${resolved.plan::class.java.simpleName}")
@@ -363,13 +361,17 @@ class InstallViewModel : ViewModel(), KoinComponent {
         originalPackageName: String,
         onPersistApp: suspend (String, InstallType) -> Boolean
     ) {
-        val packageInfo = pm.getPackageInfo(outputFile)
-            ?: throw Exception("Failed to load application info")
+        val packageInfo = withContext(Dispatchers.IO) {
+            pm.getPackageInfo(outputFile)
+                ?: throw Exception("Failed to load application info")
+        }
         val targetPackageName = packageInfo.packageName
 
         // Unmount if mounted as root
-        if (rootInstaller.hasRootAccess() && rootInstaller.isAppMounted(originalPackageName)) {
-            rootInstaller.unmount(originalPackageName)
+        withContext(Dispatchers.IO) {
+            if (rootInstaller.hasRootAccess() && rootInstaller.isAppMounted(originalPackageName)) {
+                rootInstaller.unmount(originalPackageName)
+            }
         }
 
         val result = try {
@@ -394,10 +396,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 onPersistApp(targetPackageName, InstallType.DEFAULT)
                 handleInstallSuccess(targetPackageName)
             }
-            is InstallResult.Conflict -> {
-                Log.i(TAG, "Signature conflict for $targetPackageName")
-                installState = InstallState.Conflict(targetPackageName)
-            }
+            is InstallResult.Conflict -> handleConflict(targetPackageName, result.message)
             is InstallResult.Failure -> handleInstallError(
                 app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
             )
@@ -423,12 +422,16 @@ class InstallViewModel : ViewModel(), KoinComponent {
         outputFile: File,
         onPersistApp: suspend (String, InstallType) -> Boolean
     ) {
-        val packageInfo = pm.getPackageInfo(outputFile)
-            ?: throw Exception("Failed to load application info")
+        val packageInfo = withContext(Dispatchers.IO) {
+            pm.getPackageInfo(outputFile)
+                ?: throw Exception("Failed to load application info")
+        }
         val targetPackageName = packageInfo.packageName
 
-        if (rootInstaller.hasRootAccess() && rootInstaller.isAppMounted(targetPackageName)) {
-            rootInstaller.unmount(targetPackageName)
+        withContext(Dispatchers.IO) {
+            if (rootInstaller.hasRootAccess() && rootInstaller.isAppMounted(targetPackageName)) {
+                rootInstaller.unmount(targetPackageName)
+            }
         }
 
         Log.d(TAG, "Starting Shizuku install for $targetPackageName")
@@ -448,10 +451,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 installState = InstallState.Installed(targetPackageName)
                 app.toast(app.getString(R.string.install_app_success))
             }
-            is InstallResult.Conflict -> {
-                Log.i(TAG, "Signature conflict for $targetPackageName")
-                installState = InstallState.Conflict(targetPackageName)
-            }
+            is InstallResult.Conflict -> handleConflict(targetPackageName, result.message)
             is InstallResult.Failure -> handleInstallError(
                 app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
             )
@@ -492,7 +492,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
             while (true) {
                 if (pendingExternalInstall != plan) return@launch
 
-                val info = pm.getPackageInfo(plan.expectedPackage)
+                val info = withContext(Dispatchers.IO) { pm.getPackageInfo(plan.expectedPackage) }
                 if (info != null && isUpdatedSinceBaseline(info)) {
                     handleExternalInstallSuccess(plan.expectedPackage)
                     return@launch
@@ -531,8 +531,8 @@ class InstallViewModel : ViewModel(), KoinComponent {
         externalInstallStartTime = System.currentTimeMillis()
 
         // Use a lightweight sentinel so handleExternalInstallSuccess can match the package
-        // without a full External plan — we repurpose pendingExternalInstall's expectedPackage
-        // by creating a minimal sentinel object just for the package name check.
+        // without a full External plan - we repurpose pendingExternalInstall's expectedPackage
+        // by creating a minimal sentinel object just for the package name check
         pendingIntentFallbackPackage = targetPackageName
 
         sessionInstaller.launchIntentInstall(outputFile)
@@ -541,7 +541,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
             val timeoutAt = System.currentTimeMillis() + EXTERNAL_INSTALL_TIMEOUT_MS
             while (true) {
                 if (pendingIntentFallbackPackage == null) return@launch
-                val info = pm.getPackageInfo(targetPackageName)
+                val info = withContext(Dispatchers.IO) { pm.getPackageInfo(targetPackageName) }
                 if (info != null && isUpdatedSinceBaseline(info)) {
                     handleIntentFallbackSuccess(targetPackageName)
                     return@launch
@@ -563,8 +563,11 @@ class InstallViewModel : ViewModel(), KoinComponent {
         externalInstallStartTime = null
         externalPackageWasPresentAtStart = false
         pendingPersistCallback?.let { callback ->
-            viewModelScope.launch {
+            // Detached from viewModelScope: the broadcast may arrive after the VM is
+            // cleared, so persistence must run on a scope that outlives it
+            applicationScope.launch {
                 runCatching { callback(packageName, InstallType.DEFAULT) }
+                    .onFailure { Log.e(TAG, "Failed to persist app data", it) }
             }
         }
         handleInstallSuccess(packageName)
@@ -604,9 +607,9 @@ class InstallViewModel : ViewModel(), KoinComponent {
             InstallType.DEFAULT
         }
 
-        // Persist app data
+        // Detached from viewModelScope: the broadcast may arrive after the VM is cleared
         pendingPersistCallback?.let { callback ->
-            viewModelScope.launch {
+            applicationScope.launch {
                 try {
                     callback(packageName, installType)
                 } catch (e: Exception) {
@@ -637,14 +640,16 @@ class InstallViewModel : ViewModel(), KoinComponent {
             installState = InstallState.Installing
 
             try {
-                val packageInfo = pm.getPackageInfo(outputFile)
-                    ?: throw Exception("Failed to load application info")
+                val (packageInfo, stockInfo) = withContext(Dispatchers.IO) {
+                    val pi = pm.getPackageInfo(outputFile)
+                        ?: throw Exception("Failed to load application info")
+                    pi to pm.getPackageInfo(packageName)
+                }
 
                 val label = with(pm) { packageInfo.label() }
                 val patchedVersion = packageInfo.versionName ?: ""
 
                 // Check version mismatch for mount
-                val stockInfo = pm.getPackageInfo(packageName)
                 val stockVersion = stockInfo?.versionName
                 if (stockVersion != null && stockVersion != patchedVersion) {
                     handleInstallError(
@@ -943,9 +948,19 @@ class InstallViewModel : ViewModel(), KoinComponent {
         installState = InstallState.Error(message)
     }
 
+    private fun handleConflict(targetPackageName: String, conflictMessage: String?) {
+        Log.i(TAG, "Signature conflict for $targetPackageName")
+        if (pm.getPackageInfo(targetPackageName) != null) {
+            installState = InstallState.Conflict(targetPackageName)
+        } else {
+            // Target not installed - not a real signature conflict (e.g. renamed package)
+            handleInstallError(app.getString(R.string.install_app_fail, conflictMessage ?: "Unknown error"))
+        }
+    }
+
     companion object {
         private const val TAG = "Morphe Install"
         private const val EXTERNAL_INSTALL_TIMEOUT_MS = 60_000L
-        private const val INSTALL_MONITOR_POLL_MS = 1000L
+        private val INSTALL_MONITOR_POLL_MS = 1.seconds
     }
 }

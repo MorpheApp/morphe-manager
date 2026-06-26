@@ -199,7 +199,7 @@ fun PatchingSuccess(
         }
 
         // Bottom action bar (portrait only - in landscape it lives inside the left column)
-        if (!windowSize.useTwoColumnLayout) {
+        if (!isLandscape()) {
             PatcherBottomActionBar(
                 showCancelButton = false,
                 showLogsButton = isExpertMode,
@@ -245,10 +245,10 @@ private fun AdaptiveSuccessContent(
 ) {
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
-    val useTwoColumns = windowSize.useTwoColumnLayout
+    val useTwoColumns = isLandscape()
 
     if (useTwoColumns) {
-        // Two-column layout for medium/expanded windows (landscape)
+        // Two-column layout for landscape
         Row(
             modifier = Modifier
                 .fillMaxWidth()

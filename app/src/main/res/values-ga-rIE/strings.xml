@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Aipeanna á sábháil uathu féin ó inniu</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Cumhachtaithe ag caiféin agus paistí maithe</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Ardaigh agus paiste</string>
+    <string name="home_greeting_morning_2">Maidin mhaith! Ní dhéanfaidh aipeanna paistí iad féin</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Droch-mhíshuaimhneas tráthnóna? Paisteáil rud éigin</string>
+    <string name="home_greeting_afternoon_2">Buaileann paisteáil iar-lón difriúil</string>
+    <string name="home_greeting_afternoon_3">An t-athrú tráthnóna: eagrán paiste</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Tráthnóna maith! Buaileann paistí tráthnóna go difriúil</string>
+    <string name="home_greeting_evening_2">Ag sosú? Paisteáil aip ar dtús</string>
+    <string name="home_greeting_evening_3">Ag clocáil amach? Paisteáil rud éigin ar dtús</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">An bhfuil paistí ag teastáil uathu fós?</string>
+    <string name="home_greeting_late_night_2">Seisiún paiste déanach san oíche? Meas?</string>
+    <string name="home_greeting_late_night_3">Mód ulchabhán oíche: gníomhachtaithe</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Uaireanta paisteála buaic… de réir dealraimh</string>
+    <string name="home_greeting_super_late_2">Nach féidir leat codladh? Paisteáil rud éigin</string>
+    <string name="home_greeting_super_late_3">Ag an bpointe seo, fan suas agus déan paiste.</string>
+    <string name="home_greeting_super_late_4">Tusa agus na freastalaithe, an bheirt agaibh ina ndúiseacht</string>
+    <string name="home_greeting_super_late_5">Oícheanta agus táirgiúil</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Foinsí paiste</string>
     <string name="sources_management_open_in_browser">Oscail sa bhrabhsálaí</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Neamh-chomhoiriúnach</string>
     <string name="home_apk_availability_yes">Sea, cabhraigh liom APK a aimsiú</string>
     <string name="home_apk_availability_no">Níl, tá APK agam cheana féin</string>
-    <string name="home_apk_use_saved_with_version">Úsáid an APK sábháilte (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Úsáid an APK suiteáilte (v%s)</string>
+    <string name="home_apk_use_saved">Úsáid APK sábháilte</string>
+    <string name="home_apk_use_installed">Úsáid APK suiteáilte</string>
     <string name="home_app_info_no_saved_apk">Níl aon APK sábháilte. Beidh ort an comhad APK a roghnú arís le haghaidh paisteála.</string>
     <string name="home_version_requires_android">Éilíonn Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ní thacaítear leis ar an ngléas seo</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Brúigh an cnaipe \'%s\' thíos</string>
     <string name="home_download_instructions_step2_part1">Scrollaigh síos an leathanach gréasáin agus brúigh</string>
     <string name="home_download_instructions_download_button_toast">Brúigh íoslódáil ar an suíomh gréasáin, agus ní anseo 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Foirfe! Cliceáil ar lean thíos anois agus téigh chuig an suíomh gréasáin 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Cleachtadh a dhéanann máistreacht, tá tú ag teacht ann! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Go hiontach! Cliceáil ar lean anois agus téigh chuig an suíomh gréasáin 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Déanann cleachtadh foirfe agus tá tú ag teacht ann 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Níl mé anseo fós… níl mé anseo fós… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Ceart go leor, tá meas agam ar an dúthracht 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Is tástálaí oifigiúil cnaipe Morphe thú anois 🏅</string>
@@ -184,6 +205,9 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="home_dialog_unsupported_version_dialog_proceed">Lean ar aghaidh ar aon nós</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Leaganacha comhoiriúnacha:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Gan tacaíocht</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Tóg %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Is tógáil dhifriúil den leagan céanna é seo. Éilíonn na paistí tógáil shonrach</string>
     <string name="home_dialog_wrong_package_title">Pacáiste mícheart roghnaithe</string>
     <string name="home_dialog_wrong_package_description">Níl an APK roghnaithe don fheidhmchlár arbh eol duit paiste a chur air</string>
     <string name="home_dialog_expected_package">Pacáiste ionchais:</string>
@@ -292,6 +316,10 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="patcher_failed_subtitle">Seiceáil na sonraí earráide thíos</string>
     <string name="patcher_failed_dialog_title">Theip ar Paisteáil</string>
     <string name="patcher_unknown_error">Tharla earráid anaithnid</string>
+    <string name="patcher_split_step_extracting">Ag baint APKanna scoilte</string>
+    <string name="patcher_split_step_merging">Ag cumasc %s</string>
+    <string name="patcher_split_step_writing">APK comhcheangailte a scríobh</string>
+    <string name="patcher_split_step_finalizing">APK cumasctha á chríochnú</string>
     <string name="patcher_conflict_title">Coinbhleacht pacáiste</string>
     <string name="patcher_conflict_subtitle">Ní mór duit an leagan reatha a dhíshuiteáil</string>
     <string name="patcher_conflict_hint">Úsáideann an aip phaisteáilte deimhniú difriúil ón leagan suiteáilte. Scriosfaidh díshuiteáil gach sonraí aip</string>
@@ -730,6 +758,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="warning">Rabhadh</string>
     <string name="error_">Earráid</string>
     <string name="retry">Déan iarracht eile</string>
+    <string name="refresh">Athnuachan</string>
     <string name="add">Cuir leis</string>
     <string name="close">Dún</string>
     <string name="back">Ar ais</string>
@@ -746,6 +775,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="view">Amharc</string>
     <string name="search">Cuardaigh</string>
     <string name="search_no_results">Níor aimsíodh aon torthaí</string>
+    <string name="sort">Sórtáil</string>
     <string name="any_version">Aon</string>
     <string name="enabled">Cumasaithe</string>
     <string name="disabled">Díchumasaithe</string>
@@ -755,6 +785,11 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="select_all_done">Gach ceann roghnaithe</string>
     <string name="deselect_all">Díroghnaigh gach rud</string>
     <string name="deselect_all_done">Gach rud díroghnaithe</string>
+    <string name="reorder_list">Athordú an liosta</string>
+    <string name="reorder_list_hint">Tarraing chun athordú</string>
+    <string name="reorder_done">Ordú sábháilte</string>
+    <string name="reset_order">Athshocraigh an t-ordú</string>
+    <string name="reset_order_done">Athshocrú ordaithe</string>
     <string name="rename">Athainmnigh</string>
     <string name="import_">Iompórtáil</string>
     <string name="export">Easpórtáil</string>
@@ -789,6 +824,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="hide">Folaigh</string>
     <string name="hidden">I bhfolach</string>
     <string name="unhide">Nochtadh</string>
+    <string name="unhide_done">Taispeánta</string>
     <string name="logs">Logaí</string>
     <string name="sources">Foinsí</string>
     <string name="installing_ellipsis">Ag suiteáil…</string>

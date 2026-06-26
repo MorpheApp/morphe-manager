@@ -53,6 +53,27 @@
     <string name="home_greeting_9">A salvar aplicações delas próprias a partir de hoje</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Alimentado por cafeína e boas modificações</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Levante e atualize</string>
+    <string name="home_greeting_morning_2">Bom dia! Aplicativos não se atualizam sozinhos</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Deu uma queda de energia à tarde? Atualize algo</string>
+    <string name="home_greeting_afternoon_2">A pausa para o almoço e os patches têm outra vibe</string>
+    <string name="home_greeting_afternoon_3">O turno da tarde: edição de patches</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Boa noite! Os patches noturnos têm outra vibe</string>
+    <string name="home_greeting_evening_2">Relaxando? Faça o patch de um app primeiro</string>
+    <string name="home_greeting_evening_3">Saindo do trabalho? Faça o patch de algo primeiro</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Ainda acordado? Os aplicativos que precisam de patch também estão</string>
+    <string name="home_greeting_late_night_2">Sessão de patch noturna? Respeito</string>
+    <string name="home_greeting_late_night_3">Modo coruja noturna: ativado</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Horário de pico de patches... aparentemente</string>
+    <string name="home_greeting_super_late_2">Não consegue dormir? Faça o patch de algo</string>
+    <string name="home_greeting_super_late_3">A essa altura, é melhor ficar acordado e fazer o patch</string>
+    <string name="home_greeting_super_late_4">Você e os servidores, ambos acordados</string>
+    <string name="home_greeting_super_late_5">Noturno e produtivo</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fontes de modificações</string>
     <string name="sources_management_open_in_browser">Abrir links no navegador</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Incompatível</string>
     <string name="home_apk_availability_yes">Sim, ajuda-me a encontrar um APK</string>
     <string name="home_apk_availability_no">Não, já tenho um APK</string>
-    <string name="home_apk_use_saved_with_version">Utilizar APK guardado (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Usar APK instalado (v%s)</string>
+    <string name="home_apk_use_saved">Usar APK salvo</string>
+    <string name="home_apk_use_installed">Usar APK instalado</string>
     <string name="home_app_info_no_saved_apk">Não existe um APK guardado. A modificação exigirá a seleção do ficheiro APK novamente</string>
     <string name="home_version_requires_android">Requer o Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Não suportado neste dispositivo</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Pressiona o botão \"%s\" em baixo</string>
     <string name="home_download_instructions_step2_part1">Desloca a página para baixo e pressiona</string>
     <string name="home_download_instructions_download_button_toast">Pressiona o botão \"download\" no site, e não aqui 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Perfeito! Agora clique em continuar abaixo e acesse o site 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">A prática leva à perfeição, você está quase lá! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Ótimo! Agora clique em continuar e acesse o site 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">A prática leva à perfeição e você está chegando lá 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Ainda não… ainda não… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, eu respeito a dedicação 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Agora você é um testador oficial do botão Morphe 🏅</string>
@@ -184,6 +205,9 @@ Para obteres os melhores resultados, este ficheiro recomenda a modificação de 
     <string name="home_dialog_unsupported_version_dialog_proceed">Continuar na mesma</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versões compatíveis:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Não suportado</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Compilação %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Esta é uma compilação diferente da mesma versão. Os patches exigem uma compilação específica</string>
     <string name="home_dialog_wrong_package_title">Pacote incorreto selecionado</string>
     <string name="home_dialog_wrong_package_description">O APK selecionado não serve para a aplicação que pretendes modificar</string>
     <string name="home_dialog_expected_package">Pacote esperado:</string>
@@ -732,6 +756,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="warning">Aviso</string>
     <string name="error_">Erro</string>
     <string name="retry">Tentar de novo</string>
+    <string name="refresh">Atualizar</string>
     <string name="add">Adicionar</string>
     <string name="close">Fechar</string>
     <string name="back">Voltar</string>
@@ -748,6 +773,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="view">Visualizar</string>
     <string name="search">Pesquisar</string>
     <string name="search_no_results">Nenhum resultado encontrado</string>
+    <string name="sort">Ordenar</string>
     <string name="any_version">Qualquer</string>
     <string name="enabled">Ativado</string>
     <string name="disabled">Desativado</string>
@@ -757,6 +783,11 @@ As dimensões das imagens devem ser as seguintes:
     <string name="select_all_done">Todos selecionados</string>
     <string name="deselect_all">Desmarcar tudo</string>
     <string name="deselect_all_done">Todos desmarcados</string>
+    <string name="reorder_list">Reordenar lista</string>
+    <string name="reorder_list_hint">Arrastar para reordenar</string>
+    <string name="reorder_done">Ordem salva</string>
+    <string name="reset_order">Restaurar ordem</string>
+    <string name="reset_order_done">Pedido redefinido</string>
     <string name="rename">Mudar o nome</string>
     <string name="import_">Importar</string>
     <string name="export">Exportar</string>
@@ -791,6 +822,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="hide">Ocultar</string>
     <string name="hidden">Oculto</string>
     <string name="unhide">Desocultar</string>
+    <string name="unhide_done">Exibido</string>
     <string name="logs">Registos</string>
     <string name="sources">Fontes</string>
     <string name="installing_ellipsis">A Instalar…</string>

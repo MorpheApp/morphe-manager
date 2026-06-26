@@ -19,6 +19,7 @@ import app.morphe.manager.network.service.HttpService
 import app.morphe.manager.util.*
 import io.ktor.client.plugins.onDownload
 import io.ktor.client.request.url
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -252,7 +253,7 @@ class UpdateViewModel(
         state = State.INSTALLING
 
         externalInstallTimeoutJob = viewModelScope.launch {
-            delay(EXTERNAL_INSTALL_TIMEOUT_MS)
+            delay(EXTERNAL_INSTALL_TIMEOUT)
             if (pendingExternalInstall == plan) {
                 installerManager.cleanup(plan)
                 pendingExternalInstall = null
@@ -302,7 +303,6 @@ class UpdateViewModel(
     }
 
     override fun onCleared() {
-        super.onCleared()
         app.unregisterReceiver(installBroadcastReceiver)
 
         pendingExternalInstall?.let(installerManager::cleanup)
@@ -367,7 +367,7 @@ class UpdateViewModel(
     }
 
     companion object {
-        private const val EXTERNAL_INSTALL_TIMEOUT_MS = 60_000L
+        private val EXTERNAL_INSTALL_TIMEOUT = 60.seconds
     }
 
     enum class State(@param:StringRes val title: Int) {

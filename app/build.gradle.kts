@@ -255,8 +255,6 @@ kotlin {
     compilerOptions {
         jvmTarget = JvmTarget.JVM_17
         freeCompilerArgs.addAll(
-            "-Xexplicit-backing-fields",
-            "-Xcontext-parameters",
             "-opt-in=kotlin.time.ExperimentalTime"
         )
     }

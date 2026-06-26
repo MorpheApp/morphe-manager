@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.util.Log
 import android.view.HapticFeedbackConstants
@@ -21,7 +20,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.*
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -59,13 +61,12 @@ import org.koin.compose.koinInject
 import kotlin.math.exp
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * Patcher screen with progress tracking.
  * Shows patching progress, handles installation with pre-conflict detection, and provides export functionality.
  */
-@SuppressLint("LocalContextGetResourceValueCall", "AutoboxingStateCreation")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PatcherScreen(
     onBackClick: () -> Unit,
@@ -100,7 +101,7 @@ fun PatcherScreen(
     // Animated progress with dual-mode animation
     var displayProgress by rememberSaveable { mutableFloatStateOf(patcherViewModel.progress) }
     val showLongStepWarning by patcherViewModel.showLongStepWarning.collectAsStateWithLifecycle()
-    var showSuccessScreen by rememberSaveable { mutableStateOf(false) }
+    val showSuccessScreen = patcherViewModel.showSuccessScreen
 
     LaunchedEffect(showSuccessScreen) {
         if (showSuccessScreen) miniGameState.pauseActiveGame()
@@ -125,13 +126,13 @@ fun PatcherScreen(
                 movingAverage = (1 - smoothingFactor) * movingAverage +
                         smoothingFactor * displayProgress
                 onBackgroundSpeedChange(1 + movingAverage)
-                delay(250)
+                delay(250.milliseconds)
             }
         } else {
             // Patching finished - reset speed then fire completion effect
             onBackgroundSpeedChange(1f)
-            if (patcherSucceeded == true) {
-                delay(300) // small pause so speed resets before effect fires
+            if (patcherSucceeded == true && patcherViewModel.patchingCompletedInForeground) {
+                delay(300.milliseconds) // small pause so speed resets before effect fires
                 onPatchingCompleted()
                 // Haptic feedback
                 view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
@@ -151,22 +152,18 @@ fun PatcherScreen(
     val primaryInstallerPref by prefs.installerPrimary.getAsState()
     val promptInstallerOnInstall by prefs.promptInstallerOnInstall.getAsState()
 
-    // Auto-install: triggers when success screen appears with Shizuku as primary installer.
-    // Skipped when promptInstallerOnInstall is enabled - user gets the manual Install button instead.
-    LaunchedEffect(showSuccessScreen) {
-        if (!showSuccessScreen) return@LaunchedEffect
-        if (!autoInstallWithShizuku) return@LaunchedEffect
-        if (usingMountInstall) return@LaunchedEffect
-        if (patcherSucceeded != true) return@LaunchedEffect
-        if (primaryInstallerPref != InstallerPreferenceTokens.SHIZUKU) return@LaunchedEffect
-        if (promptInstallerOnInstall) return@LaunchedEffect
-        if (installViewModel.installState !is InstallViewModel.InstallState.Ready) return@LaunchedEffect
-        delay(300)
-        installViewModel.install(
-            outputFile = outputFile,
-            originalPackageName = patcherViewModel.packageName,
-            onPersistApp = { pkg, type -> patcherViewModel.persistPatchedApp(pkg, type) }
-        )
+    // Auto-install: driven by ViewModel so it fires in the background even if the app is not
+    // in the foreground when patching completes. UI-only guards checked here.
+    LaunchedEffect(Unit) {
+        patcherViewModel.autoInstallEvent.collect {
+            if (usingMountInstall) return@collect
+            if (installViewModel.installState !is InstallViewModel.InstallState.Ready) return@collect
+            installViewModel.install(
+                outputFile = outputFile,
+                originalPackageName = patcherViewModel.packageName,
+                onPersistApp = { pkg, type -> patcherViewModel.persistPatchedApp(pkg, type) }
+            )
+        }
     }
 
     // Progress animation logic: drives displayProgress and showSuccessScreen
@@ -213,22 +210,17 @@ fun PatcherScreen(
             }
 
             // Update four times a second
-            delay(250)
+            delay(250.milliseconds)
         }
 
         // Patching completed - ensure progress reaches 100%
         if (patcherSucceeded == true) {
             displayProgress = 1.0f
-            // Wait for animation to complete and add extra delay
-            delay(2000) // Wait 2 seconds at 100% before showing success screen
-            showSuccessScreen = true
-        } else {
-            // Failed - show immediately
-            showSuccessScreen = true
         }
     }
 
     val patchesProgress = patcherViewModel.patchesProgress
+    val unknownErrorText = stringResource(R.string.patcher_unknown_error)
 
     // Monitor for patching errors (not installation errors)
     LaunchedEffect(patcherSucceeded) {
@@ -236,15 +228,14 @@ fun PatcherScreen(
             state.hasPatchingError = true
             val steps = patcherViewModel.steps
             val failedStep = steps.firstOrNull { it.state == State.FAILED }
-            state.errorMessage = failedStep?.message
-                ?: context.getString(R.string.patcher_unknown_error)
+            state.errorMessage = failedStep?.message.orEmpty()
             state.errorInfo = patcherViewModel.buildErrorInfo()
             state.showErrorDialog = true
         }
     }
 
     BackHandler {
-        if (patcherSucceeded == null) {
+        if (patcherViewModel.isPatching) {
             // Show cancel dialog if patching is in progress
             state.showCancelDialog = true
         } else {
@@ -254,7 +245,7 @@ fun PatcherScreen(
     }
 
     // Keep screen on during patching
-    if (patcherSucceeded == null) {
+    if (patcherViewModel.isPatching) {
         DisposableEffect(Unit) {
             val window = (context as Activity).window
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -442,7 +433,7 @@ fun PatcherScreen(
     // Error dialog
     if (state.showErrorDialog) {
         PatcherErrorDialog(
-            errorMessage = state.effectiveErrorMessage,
+            errorMessage = state.effectiveErrorMessage.ifBlank { unknownErrorText },
             errorInfo = state.errorInfo,
             onDismiss = { state.showErrorDialog = false }
         )
@@ -477,7 +468,7 @@ fun PatcherScreen(
                     primaryToken,
                     installTarget
                 )
-                delay(1_500)
+                delay(1_500.milliseconds)
             }
         }
 
@@ -521,7 +512,7 @@ fun PatcherScreen(
                             patcherSucceeded = patcherSucceeded,
                             miniGameState = miniGameState,
                             onCancelClick = { state.showCancelDialog = true },
-                            onInstallClick = { showSuccessScreen = true },
+                            onInstallClick = { patcherViewModel.showSuccess() },
                             onHomeClick = onBackClick
                         )
                     } else {
@@ -560,7 +551,7 @@ fun PatcherScreen(
                         onDismissInstallerDialog = installViewModel::dismissInstallerUnavailableDialog,
                         usingMountInstall = usingMountInstall,
                         isExpertMode = useExpertMode,
-                        onLogsClick = { showSuccessScreen = false },
+                        onLogsClick = { patcherViewModel.hideSuccessScreen() },
                         onInstall = {
                             if (usingMountInstall) {
                                 // Mount install

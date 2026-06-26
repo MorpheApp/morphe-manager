@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Рятуємо застосунки від них самих, починаючи від сьогодні</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">На каві та хороших оновленнях</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Вставай і патчи</string>
+    <string name="home_greeting_morning_2">Доброго ранку! Застосунки самі себе не пропатчать</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Денний застій? Пропатчи щось</string>
+    <string name="home_greeting_afternoon_2">Патчінг після обіду відчувається інакше</string>
+    <string name="home_greeting_afternoon_3">Денна зміна: видання патчінгу</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Добрий вечір! Вечірній патчінг відчувається інакше</string>
+    <string name="home_greeting_evening_2">Відпочиваєте? Спочатку пропатчіть застосунок</string>
+    <string name="home_greeting_evening_3">Завершуєте день? Спочатку пропатчіть щось</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Ще не спите? Застосунки, що потребують патчінгу, теж</string>
+    <string name="home_greeting_late_night_2">Нічна сесія патчінгу? Повага</string>
+    <string name="home_greeting_late_night_3">Режим нічної сови: активовано</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Пікові години патчінгу… нібито</string>
+    <string name="home_greeting_super_late_2">Не спиться? Пропатчіть щось</string>
+    <string name="home_greeting_super_late_3">На цьому етапі просто не лягайте спати та патчіть</string>
+    <string name="home_greeting_super_late_4">Ви та сервери, обидва не сплять</string>
+    <string name="home_greeting_super_late_5">Нічний та продуктивний</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Джерела патчів</string>
     <string name="sources_management_open_in_browser">Відкрити в браузері</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Несумісна</string>
     <string name="home_apk_availability_yes">Так, допоможіть мені знайти APK</string>
     <string name="home_apk_availability_no">Ні, я вже маю APK</string>
-    <string name="home_apk_use_saved_with_version">Збережений APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Встановлений APK (v%s)</string>
+    <string name="home_apk_use_saved">Збережений APK</string>
+    <string name="home_apk_use_installed">Встановлений APK</string>
     <string name="home_app_info_no_saved_apk">Немає збереженого APK файлу. Для патчінгу потрібно буде знову вибрати APK файл</string>
     <string name="home_version_requires_android">Потрібен Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Не підтримується на цьому пристрої</string>
@@ -119,7 +140,7 @@
     <string name="home_download_instructions_step2_part1">Прокрутіть вниз і натисніть</string>
     <string name="home_download_instructions_download_button_toast">Натисніть завантажити на сайті, а не тут 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Чудово! Тепер натисніть продовжити нижче та перейдіть на сайт 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Практика веде до досконалості, ви на правильному шляху! 💪</string>
+    <string name="home_download_instructions_download_button_toast_3">Практика веде до досконалості, ви на правильному шляху 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Все ще не тут… все ще не тут… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Добре, поважаю наполегливість 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Ви тепер офіційний тестувальник кнопок Morphe 🏅</string>
@@ -184,6 +205,9 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">Продовжити все одно</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Сумісні версії:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Непідтримувана</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Збірка %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Це інша збірка тієї ж версії. Патчі вимагають конкретної збірки</string>
     <string name="home_dialog_wrong_package_title">Обрано неправильний пакет</string>
     <string name="home_dialog_wrong_package_description">Обраний APK файл не відповідає застосунку, який ви збиралися пропатчити</string>
     <string name="home_dialog_expected_package">Очікуваний пакет:</string>
@@ -292,6 +316,10 @@
     <string name="patcher_failed_subtitle">Перевірте деталі помилки нижче</string>
     <string name="patcher_failed_dialog_title">Помилка патчінгу</string>
     <string name="patcher_unknown_error">Сталася невідома помилка</string>
+    <string name="patcher_split_step_extracting">Видобування split APK файлів</string>
+    <string name="patcher_split_step_merging">Об\'єднання %s</string>
+    <string name="patcher_split_step_writing">Запис об\'єднаного APK файлу</string>
+    <string name="patcher_split_step_finalizing">Завершення об\'єднаного APK файлу</string>
     <string name="patcher_conflict_title">Конфлікт пакетів</string>
     <string name="patcher_conflict_subtitle">Вам потрібно видалити наявну версію</string>
     <string name="patcher_conflict_hint">Патчений застосунок використовує інший підпис, ніж встановлена версія. Після видалення всі дані застосунку буде втрачено</string>
@@ -732,6 +760,7 @@ morphe_header_custom_dark.png
     <string name="warning">Попередження</string>
     <string name="error_">Помилка</string>
     <string name="retry">Повторити</string>
+    <string name="refresh">Оновити</string>
     <string name="add">Додати</string>
     <string name="close">Закрити</string>
     <string name="back">Назад</string>
@@ -748,6 +777,7 @@ morphe_header_custom_dark.png
     <string name="view">Переглянути</string>
     <string name="search">Пошук</string>
     <string name="search_no_results">Не знайдено результатів</string>
+    <string name="sort">Сортувати</string>
     <string name="any_version">Будь-яка</string>
     <string name="enabled">Увімкнено</string>
     <string name="disabled">Вимкнено</string>
@@ -757,6 +787,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">Всі вибрано</string>
     <string name="deselect_all">Скасувати вибір усіх</string>
     <string name="deselect_all_done">Всі скасовано</string>
+    <string name="reorder_list">Змінити порядок списку</string>
+    <string name="reorder_list_hint">Перетягніть, щоб змінити порядок</string>
+    <string name="reorder_done">Порядок збережено</string>
+    <string name="reset_order">Скинути порядок</string>
+    <string name="reset_order_done">Порядок скинуто</string>
     <string name="rename">Перейменувати</string>
     <string name="import_">Імпорт</string>
     <string name="export">Експорт</string>
@@ -791,6 +826,7 @@ morphe_header_custom_dark.png
     <string name="hide">Приховати</string>
     <string name="hidden">Приховані</string>
     <string name="unhide">Показати</string>
+    <string name="unhide_done">Показано</string>
     <string name="logs">Журнали</string>
     <string name="sources">Джерела</string>
     <string name="installing_ellipsis">Інсталяція…</string>

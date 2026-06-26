@@ -7,6 +7,7 @@ import app.morphe.manager.domain.manager.AppIconManager
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.KeystoreManager
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
+import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.UpdateNotificationManager
 import org.koin.core.module.dsl.singleOf
@@ -22,4 +23,5 @@ val managerModule = module {
     singleOf(::AppIconManager)
     singleOf(::UpdateNotificationManager)
     singleOf(::HomeAppButtonPreferences)
+    singleOf(::AppCoroutineScope)
 }

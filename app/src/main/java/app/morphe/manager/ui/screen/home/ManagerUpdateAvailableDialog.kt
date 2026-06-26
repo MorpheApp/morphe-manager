@@ -185,27 +185,17 @@ fun ManagerUpdateDetailsDialog(
                 }
 
                 UpdateViewModel.State.INSTALLING -> {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 48.dp),
-                        contentAlignment = Alignment.Center
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(20.dp)
                     ) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(20.dp)
-                        ) {
-                            CircularProgressIndicator(
-                                color = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(48.dp)
-                            )
-                            Text(
-                                text = stringResource(R.string.installing_manager_update),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = secondaryColor,
-                                textAlign = TextAlign.Center
-                            )
-                        }
+                        PulsingLogoIndicator()
+                        Text(
+                            text = stringResource(R.string.installing_manager_update),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = secondaryColor,
+                            textAlign = TextAlign.Center
+                        )
                     }
                 }
 

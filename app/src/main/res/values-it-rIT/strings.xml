@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Salviamo le app da loro stesse sin da oggi</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Alimentato da caffeina e buone patch</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Svegliati e applica le patch</string>
+    <string name="home_greeting_morning_2">Buongiorno! Le app non si patchano da sole</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Calo di rendimento nel pomeriggio? Applica una patch</string>
+    <string name="home_greeting_afternoon_2">Patch post-pranzo, una sensazione diversa</string>
+    <string name="home_greeting_afternoon_3">Turno pomeridiano: edizione patch</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Buonasera! Le patch serali sono un\'altra cosa</string>
+    <string name="home_greeting_evening_2">Stai per rilassarti? Applica prima una patch</string>
+    <string name="home_greeting_evening_3">Stai per uscire? Applica prima una patch</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Ancora sveglio/a? Anche le app che devono essere patchate lo sono</string>
+    <string name="home_greeting_late_night_2">Sessione di patch notturna? Ottimo</string>
+    <string name="home_greeting_late_night_3">Modalità gufo notturno: attivata</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Ore di picco per le patch… si dice</string>
+    <string name="home_greeting_super_late_2">Non riesci a dormire? Applica una patch</string>
+    <string name="home_greeting_super_late_3">A questo punto, resta sveglio/a e applica le patch</string>
+    <string name="home_greeting_super_late_4">Tu e i server, entrambi svegli</string>
+    <string name="home_greeting_super_late_5">Notturno e produttivo/a</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fonti delle patch</string>
     <string name="sources_management_open_in_browser">Apri nel browser</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Incompatibile</string>
     <string name="home_apk_availability_yes">Sì, aiutami a trovare un APK</string>
     <string name="home_apk_availability_no">No, ho già un APK</string>
-    <string name="home_apk_use_saved_with_version">Usa l\'APK salvato (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Usa l\'APK installato (v%s)</string>
+    <string name="home_apk_use_saved">Usa APK salvato</string>
+    <string name="home_apk_use_installed">Usa APK installato</string>
     <string name="home_app_info_no_saved_apk">Nessun APK salvato. Il patching richiederà la selezione del file APK</string>
     <string name="home_version_requires_android">Richiede Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Non supportato su questo dispositivo</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Premi il pulsante \'%s\' qui sotto</string>
     <string name="home_download_instructions_step2_part1">Scorri verso il basso la pagina web e premi</string>
     <string name="home_download_instructions_download_button_toast">Premi scarica sul sito web, e non qui 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Perfetto! Ora clicca su continua qui sotto e vai al sito web 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">La pratica rende perfetti, ci sei quasi! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Ottimo! Ora clicca su continua e vai al sito web 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">La pratica rende perfetti e ci stai quasi arrivando 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Ancora non ci sei... ancora non ci sei... 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, rispetto la dedizione 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Ora sei un tester ufficiale del pulsante Morphe 🏅</string>
@@ -184,6 +205,9 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="home_dialog_unsupported_version_dialog_proceed">Procedi comunque</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versioni compatibili:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Non supportato</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Questa è una build diversa della stessa versione. Le patch richiedono una build specifica</string>
     <string name="home_dialog_wrong_package_title">Pacchetto selezionato errato</string>
     <string name="home_dialog_wrong_package_description">L\'APK selezionato non è per l’applicazione che volevi patchare</string>
     <string name="home_dialog_expected_package">Pacchetto atteso:</string>
@@ -732,6 +756,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="warning">Attenzione</string>
     <string name="error_">Errore</string>
     <string name="retry">Riprova</string>
+    <string name="refresh">Aggiorna</string>
     <string name="add">Aggiungi</string>
     <string name="close">Chiudi</string>
     <string name="back">Indietro</string>
@@ -748,6 +773,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="view">Visualizza</string>
     <string name="search">Cerca</string>
     <string name="search_no_results">Nessun risultato trovato</string>
+    <string name="sort">Ordina</string>
     <string name="any_version">Qualsiasi</string>
     <string name="enabled">Attivato</string>
     <string name="disabled">Disattivato</string>
@@ -757,6 +783,11 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="select_all_done">Tutto selezionato</string>
     <string name="deselect_all">Deseleziona tutto</string>
     <string name="deselect_all_done">Tutto deselezionato</string>
+    <string name="reorder_list">Riordina lista</string>
+    <string name="reorder_list_hint">Trascina per riordinare</string>
+    <string name="reorder_done">Ordine salvato</string>
+    <string name="reset_order">Ripristina ordine</string>
+    <string name="reset_order_done">Ordine resettato</string>
     <string name="rename">Rinomina</string>
     <string name="import_">Importa</string>
     <string name="export">Esporta</string>
@@ -791,6 +822,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="hide">Nascondi</string>
     <string name="hidden">Nascosto</string>
     <string name="unhide">Mostra</string>
+    <string name="unhide_done">Mostrato</string>
     <string name="logs">Tracciati</string>
     <string name="sources">Fonti</string>
     <string name="installing_ellipsis">Installazione in corso…</string>

@@ -13,7 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.dismiss
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import app.morphe.manager.R
 
 /**
  * A [ModalBottomSheet] that never overlaps the status bar.
@@ -34,7 +39,10 @@ import androidx.compose.ui.unit.dp
 fun MorpheBottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
-    sheetState: SheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+    sheetState: SheetState = rememberBottomSheetState(
+        initialValue = SheetValue.Hidden,
+        enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
+    ),
     shape: Shape = BottomSheetDefaults.ExpandedShape,
     containerColor: Color = MaterialTheme.colorScheme.surfaceContainerHigh,
     contentColor: Color = contentColorFor(containerColor),
@@ -58,12 +66,17 @@ fun MorpheBottomSheet(
         // it shifts down by exactly the status-bar height and stays visible below it.
         dragHandle = if (showDragHandle) {
             {
+                val closeLabel = stringResource(R.string.close)
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         // Push the handle below the status bar inside the drag-handle slot
                         .windowInsetsPadding(WindowInsets.statusBars)
-                        .padding(top = 12.dp, bottom = 4.dp),
+                        .padding(top = 12.dp, bottom = 4.dp)
+                        .semantics {
+                            contentDescription = closeLabel
+                            dismiss { onDismissRequest(); true }
+                        },
                     contentAlignment = Alignment.Center
                 ) {
                     Surface(

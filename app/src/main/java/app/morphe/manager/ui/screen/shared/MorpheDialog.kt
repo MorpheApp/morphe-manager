@@ -18,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
@@ -27,6 +28,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
 import app.morphe.manager.util.isDarkBackground
+import kotlin.time.Duration.Companion.milliseconds
 
 /** Provides the primary text color for dialog content. */
 val LocalDialogTextColor = compositionLocalOf { Color.White }
@@ -70,7 +72,7 @@ fun MorpheDialog(
         visible = true
         // Notify caller once the enter animation has completed
         if (onEntered != null) {
-            kotlinx.coroutines.delay(MorpheDefaults.ANIMATION_DURATION.toLong())
+            kotlinx.coroutines.delay(MorpheDefaults.ANIMATION_DURATION.toLong().milliseconds)
             onEntered()
         }
     }
@@ -124,6 +126,82 @@ fun MorpheDialog(
                 )
             }
         }
+    }
+}
+
+/**
+ * Fullscreen semi-transparent overlay dialog. Blocks all interaction behind it.
+ * Handles its own fade enter/exit animation via [MorpheAnimations].
+ */
+@Composable
+fun MorpheOverlay(
+    visible: Boolean,
+    backgroundAlpha: Float = 0.75f,
+    content: @Composable BoxScope.() -> Unit
+) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
+    ) {
+        Dialog(
+            onDismissRequest = {},
+            properties = DialogProperties(
+                usePlatformDefaultWidth = false,
+                dismissOnBackPress = false,
+                dismissOnClickOutside = false,
+                decorFitsSystemWindows = false
+            )
+        ) {
+            val dialogWindow = (LocalView.current.parent as? DialogWindowProvider)?.window
+            SideEffect {
+                dialogWindow?.let {
+                    it.setDimAmount(0f)
+                    it.setBackgroundDrawableResource(android.R.color.transparent)
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background.copy(alpha = backgroundAlpha))
+                    .pointerInput(Unit) { detectTapGestures { } },
+                contentAlignment = Alignment.Center,
+                content = content
+            )
+        }
+    }
+}
+
+/**
+ * Semi-transparent overlay within a [Box] parent. Blocks all interaction and fades in/out.
+ * Must be called inside a [BoxScope] (e.g. as the last child of a Box).
+ */
+@Composable
+fun BoxScope.MorpheContentOverlay(
+    visible: Boolean,
+    backgroundAlpha: Float = 0.8f,
+    content: @Composable BoxScope.() -> Unit
+) {
+    AnimatedVisibility(
+        visible = visible,
+        modifier = Modifier.matchParentSize(),
+        enter = MorpheAnimations.overlayEnter,
+        exit = MorpheAnimations.overlayExit
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.surface.copy(alpha = backgroundAlpha))
+                .pointerInput(Unit) {
+                    awaitPointerEventScope {
+                        while (true) {
+                            awaitPointerEvent(PointerEventPass.Initial).changes.forEach { it.consume() }
+                        }
+                    }
+                },
+            contentAlignment = Alignment.Center,
+            content = content
+        )
     }
 }
 

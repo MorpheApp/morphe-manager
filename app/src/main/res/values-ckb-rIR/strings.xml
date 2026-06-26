@@ -53,6 +53,11 @@
     <string name="home_greeting_9">پاشەکەوتکردنی ئەپەکان لە خۆیانەوە لە ئەمڕۆوە</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">بە کافایین و پینەی باش کاردەکات</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <!-- Evening greetings (17:00–21:59) -->
+    <!-- Late night greetings (22:00–23:59) -->
+    <!-- Super late night greetings (0:00–4:59) -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">سەرچاوەکانی پینە</string>
     <string name="sources_management_open_in_browser">کردنەوە لە وێبگەڕ</string>
@@ -99,8 +104,6 @@
     <string name="home_apk_availability_incompatible_label">نەگونجان</string>
     <string name="home_apk_availability_yes">بەڵێ، یارمەتیم بدە لە دۆزینەوەی APK</string>
     <string name="home_apk_availability_no">نەخێر پێشتر APK هەیە</string>
-    <string name="home_apk_use_saved_with_version">بەکارهێنانی APK پاشەکەوت کراو  (v%s)</string>
-    <string name="home_apk_use_installed_with_version">بەکارهێانی APK دابەزێندراو  (v%s)</string>
     <string name="home_app_info_no_saved_apk">APK پاشەکەوت نەکراوە. پینەکردن پێویستی بە دیاریکردنی فایلی APK دووبارە هەیە</string>
     <string name="home_version_requires_android">پێویستی بە ئەندرۆید %s+ هەیە</string>
     <string name="home_apk_no_compatible_versions_title">پشتگیری نەکراوە لەسەر ئەم ئامێرە</string>
@@ -164,6 +167,7 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">هەرچۆنێک بێت بەردەوام بە</string>
     <string name="home_dialog_unsupported_version_compatible_versions">وەشانە گونجاوەکان:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">پشتگیری نەکراوە</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_wrong_package_title">پاکەتی هەڵە هەڵبژێردراوە</string>
     <string name="home_dialog_wrong_package_description">APK ی دیاریکراو بۆ ئەو بەرجەستەکراوەیە نیە کە تۆ مەبەستت پینەکردنی بوو</string>
     <string name="home_dialog_expected_package">پاکێجی چاوەڕوانکراو:</string>

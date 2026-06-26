@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Запазваме приложения за самите себе от днес</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Захранва се от кофеин и добри кръпки</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Събуди се и закърпи</string>
+    <string name="home_greeting_morning_2">Добро утро! Приложенията няма сами да се закърпят</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Следобеден застой? Закърпи нещо</string>
+    <string name="home_greeting_afternoon_2">След обядските ъпдейти са различни</string>
+    <string name="home_greeting_afternoon_3">Следобедна смяна: издание за ъпдейти</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Добър вечер! Вечерните ъпдейти са различни</string>
+    <string name="home_greeting_evening_2">Отпускате ли? Първо направете ъпдейт на приложение</string>
+    <string name="home_greeting_evening_3">Напускате ли? Първо направете ъпдейт на нещо</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Все още буден/будна? Също и приложенията, които трябва да се ъпдейтнат</string>
+    <string name="home_greeting_late_night_2">Вечерна сесия за ъпдейти? Респект</string>
+    <string name="home_greeting_late_night_3">Нощен режим: активиран</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Върхово време за ъпдейти… уж</string>
+    <string name="home_greeting_super_late_2">Не можете да спите? Направете ъпдейт на нещо</string>
+    <string name="home_greeting_super_late_3">В този момент, просто останете будни и направете ъпдейти</string>
+    <string name="home_greeting_super_late_4">Вие и сървърите, и двамата сте будни</string>
+    <string name="home_greeting_super_late_5">Нощни птици и продуктивни</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Източници за поправки</string>
     <string name="sources_management_open_in_browser">Отваряне в браузър</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Несъвместим</string>
     <string name="home_apk_availability_yes">Да, помогнете ми да намира APK</string>
     <string name="home_apk_availability_no">Не, вече имам APK</string>
-    <string name="home_apk_use_saved_with_version">Използвайте запазеното APK (в%с)</string>
-    <string name="home_apk_use_installed_with_version">Използвайте инсталиран APK (v%s)</string>
+    <string name="home_apk_use_saved">Използвайте запазен APK</string>
+    <string name="home_apk_use_installed">Използвайте инсталиран APK</string>
     <string name="home_app_info_no_saved_apk">Няма запазено APK. Пatching ще изисква отново да изберете APK файл.</string>
     <string name="home_version_requires_android">Изисква Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Не се поддържа на това устройство</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Натиснете бутона \'%s\' отдолу</string>
     <string name="home_download_instructions_step2_part1">Скролни надолу страницата и натиснете</string>
     <string name="home_download_instructions_download_button_toast">Натиснете \"Изтеглете\" на уебсайта, а не тук 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Отлично! Кликнете продължи по-долу и отидете на уебсайта 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Практиката води до съвършенство, напредваш! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Чудесно! Сега натиснете продължи и отидете на уебсайта 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Практиката прави майстора и ти се справяш добре 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Все още не е тук… все още не е тук… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Добре, уважавам отдадеността 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Вече сте официален тестер на бутона Morphe 🏅</string>
@@ -184,6 +205,9 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">Продължаване въпреки това</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Съвместими версии:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Несъвместим</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Версия %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Това е различна версия на същата версия. Пачовете изискват определена версия</string>
     <string name="home_dialog_wrong_package_title">Грешно избрано пакети</string>
     <string name="home_dialog_wrong_package_description">Избраното APK не е за приложението, което искате да поправите</string>
     <string name="home_dialog_expected_package">Очакван пакет:</string>
@@ -732,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">Предупреждение</string>
     <string name="error_">Грешка</string>
     <string name="retry">Повтори</string>
+    <string name="refresh">Опресни</string>
     <string name="add">Добави</string>
     <string name="close">Затвори</string>
     <string name="back">Назад</string>
@@ -748,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">Просмотр</string>
     <string name="search">Търсене</string>
     <string name="search_no_results">Няма намерени резултати</string>
+    <string name="sort">Сортиране</string>
     <string name="any_version">Изтриване на запазеното приложение</string>
     <string name="enabled">Включен</string>
     <string name="disabled">Изключен</string>
@@ -757,6 +783,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">Всички избрани</string>
     <string name="deselect_all">Отмени избраното</string>
     <string name="deselect_all_done">Всички са отменени</string>
+    <string name="reorder_list">Пренареждане на списъка</string>
+    <string name="reorder_list_hint">Влачете, за да пренаредите</string>
+    <string name="reorder_done">Редът е запазен</string>
+    <string name="reset_order">Възстановяване на реда</string>
+    <string name="reset_order_done">Заявката е възстановена</string>
     <string name="rename">Преименуване</string>
     <string name="import_">Импортиране</string>
     <string name="export">Изтриване на запазена копия</string>
@@ -791,6 +822,7 @@ morphe_header_custom_dark.png
     <string name="hide">Скриване</string>
     <string name="hidden">Скрито</string>
     <string name="unhide">Покажи</string>
+    <string name="unhide_done">Показано</string>
     <string name="logs">Дневници</string>
     <string name="sources">Източници</string>
     <string name="installing_ellipsis">Инсталиране…</string>

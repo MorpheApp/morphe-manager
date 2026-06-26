@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Bugünden itibaren uygulamaları kendilerinden kurtarıyoruz</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Kafein ve iyi yamalarla güçlendirilmiştir</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Kalk ve yamala</string>
+    <string name="home_greeting_morning_2">Günaydın! Uygulamalar kendiliğinden yamalanmaz</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Öğleden sonra yorgunluğu mu? Bir şeyler yamala</string>
+    <string name="home_greeting_afternoon_2">Öğle yemeğinden sonra yama yapmak farklı hissettiriyor</string>
+    <string name="home_greeting_afternoon_3">Öğleden sonra vardiyası: yama baskısı</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">İyi akşamlar! Akşam yamaları farklı hissettiriyor</string>
+    <string name="home_greeting_evening_2">Dinleniyor musunuz? Önce bir uygulamayı yamalayın</string>
+    <string name="home_greeting_evening_3">İşten çıkıyor musunuz? Önce bir şeyleri yamalayın</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Hala ayakta mısınız? Yamalanması gereken uygulamalar da</string>
+    <string name="home_greeting_late_night_2">Gece geç saatte yama seansı mı? Saygı</string>
+    <string name="home_greeting_late_night_3">Gece baykuşu modu: etkinleştirildi</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Peak yamalama saatleri… iddiaya göre</string>
+    <string name="home_greeting_super_late_2">Uyuyamıyor musunuz? Bir şeyleri yamalayın</string>
+    <string name="home_greeting_super_late_3">Bu noktada, sadece uyanık kalın ve yamalayın</string>
+    <string name="home_greeting_super_late_4">Sen ve sunucular, ikisi de uyanık</string>
+    <string name="home_greeting_super_late_5">Gececi ve üretken</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yama kaynakları</string>
     <string name="sources_management_open_in_browser">Tarayıcıda aç</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Uyumsuz</string>
     <string name="home_apk_availability_yes">Evet, APK bulmama yardım et</string>
     <string name="home_apk_availability_no">Hayır, bende APK var</string>
-    <string name="home_apk_use_saved_with_version">Kaydedilmiş APK (v%s) kullan</string>
-    <string name="home_apk_use_installed_with_version">Yüklenmiş APK (v%s) kullan</string>
+    <string name="home_apk_use_saved">Kayıtlı APK\'yi kullan</string>
+    <string name="home_apk_use_installed">Yüklü APK\'yi kullan</string>
     <string name="home_app_info_no_saved_apk">Kayıtlı APK yok. Yamayı uygulayabilmek için tekrar APK dosyasını seçmeniz gerekiyor</string>
     <string name="home_version_requires_android">Android %s+ gerektiriyor</string>
     <string name="home_apk_no_compatible_versions_title">Bu cihazda desteklenmiyor</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Aşağıdaki \"%s\" düğmesine tıklayın</string>
     <string name="home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve</string>
     <string name="home_download_instructions_download_button_toast">Web sitesindeki indirme düğmesine basın, buradakine değil 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Harika! Şimdi aşağıdan devam\'a tıklayın ve web sitesine gidin 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Pratik mükemmelleştirir, yaklaşıyorsun! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Harika! Şimdi devam\'a tıklayın ve web sitesine gidin 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Pratik mükemmelleştirir ve yavaş yavaş ilerliyorsun 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Hala ulaşılmadı… hala ulaşılmadı… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Tamam, özveriyi anlıyorum 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Artık resmi bir Morphe butonu test kullanıcısısınız 🏅</string>
@@ -184,6 +205,9 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="home_dialog_unsupported_version_dialog_proceed">Yine de devam et</string>
     <string name="home_dialog_unsupported_version_compatible_versions"> Uyumlu sürümler:</string>
     <string name="home_dialog_unsupported_version_unsupported_label"> Uyumlu değil</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Yapı %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Bu, aynı sürüme ait farklı bir yapıdır. Yamalar belirli bir yapı gerektirir</string>
     <string name="home_dialog_wrong_package_title">Yanlış paket seçildi</string>
     <string name="home_dialog_wrong_package_description">Seçilen APK, yamalamak istediğiniz uygulama için değil</string>
     <string name="home_dialog_expected_package">Beklenen paket:</string>
@@ -292,6 +316,10 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="patcher_failed_subtitle">Aşağıdaki hata ayrıntılarını kontrol edin</string>
     <string name="patcher_failed_dialog_title">Yama Başarısız</string>
     <string name="patcher_unknown_error">Bilinmeyen bir hata oluştu</string>
+    <string name="patcher_split_step_extracting">Bölünmüş APK\'ler ayıklanıyor</string>
+    <string name="patcher_split_step_merging">%s birleştiriliyor</string>
+    <string name="patcher_split_step_writing">Birleştirilmiş APK\'ye yazılıyor</string>
+    <string name="patcher_split_step_finalizing">Birleştirilmiş APK son haline getiriliyor</string>
     <string name="patcher_conflict_title">Paket çakışması</string>
     <string name="patcher_conflict_subtitle">Mevcut sürümü kaldırmanız gerekiyor</string>
     <string name="patcher_conflict_hint">Yamalanmış uygulama, yüklü sürümden farklı bir sertifika kullanıyor. Kaldırma işlemi, tüm uygulama verilerini silecektir</string>
@@ -732,6 +760,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="warning">Uyarı</string>
     <string name="error_">Hata</string>
     <string name="retry">Tekrar deneyin</string>
+    <string name="refresh">Yenile</string>
     <string name="add">Ekle</string>
     <string name="close">Kapat</string>
     <string name="back">Geri</string>
@@ -748,6 +777,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="view">Görüntüle</string>
     <string name="search">Ara</string>
     <string name="search_no_results">Sonuç bulunamadı</string>
+    <string name="sort">Sırala</string>
     <string name="any_version">Herhangi</string>
     <string name="enabled">Etkin</string>
     <string name="disabled">Devre dışı</string>
@@ -757,6 +787,11 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="select_all_done">Hepsi seçildi</string>
     <string name="deselect_all">Hepsini kaldır</string>
     <string name="deselect_all_done">Hepsinin seçimi kaldırıldı</string>
+    <string name="reorder_list">Listeyi yeniden sırala</string>
+    <string name="reorder_list_hint">Yeniden sıralamak için sürükle</string>
+    <string name="reorder_done">Sıra kaydedildi</string>
+    <string name="reset_order">Sırayı sıfırla</string>
+    <string name="reset_order_done">Sıra sıfırlandı</string>
     <string name="rename">Yeniden adlandır</string>
     <string name="import_">İçe aktar</string>
     <string name="export">Dışa aktar</string>
@@ -789,8 +824,9 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="allow">İzin ver</string>
     <string name="details">Detaylar</string>
     <string name="hide">Gizle</string>
-    <string name="hidden">Gizli</string>
+    <string name="hidden">Gizlendi</string>
     <string name="unhide">Gizliliği kaldır</string>
+    <string name="unhide_done">Gösterildi</string>
     <string name="logs">Günlükler</string>
     <string name="sources">Kaynaklar</string>
     <string name="installing_ellipsis">Yükleniyor…</string>

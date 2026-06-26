@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Pelastamme sovelluksia itseltään tästä päivästä lähtien</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Voimanlähteenä kofeiini ja hyvät lisäosat</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Nouse ja paikkaa</string>
+    <string name="home_greeting_morning_2">Hyvää huomenta! Sovellukset eivät paikkaannu itsekseen</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Iltapäivän väsymys? Paikkaa jotain</string>
+    <string name="home_greeting_afternoon_2">Lounastauon jälkeiset päivitykset tuntuvat erilaisilta</string>
+    <string name="home_greeting_afternoon_3">Iltavuoron päivitykset</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Hyvää iltaa! Illan päivitykset tuntuvat erilaisilta</string>
+    <string name="home_greeting_evening_2">Rentoudutko? Päivitä sovellus ensin</string>
+    <string name="home_greeting_evening_3">Lopetatko työt? Päivitä ensin jokin</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Oletko vielä hereillä? Sovelluksetkin, jotka tarvitsevat päivitystä, ovat</string>
+    <string name="home_greeting_late_night_2">Myöhäinen päivityssessio? Hyvä</string>
+    <string name="home_greeting_late_night_3">Yökyykkymoodi: aktivoitu</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Päivitysten huipputunnit… väitetysti</string>
+    <string name="home_greeting_super_late_2">Etkö saa unta? Päivitä jokin</string>
+    <string name="home_greeting_super_late_3">Tässä vaiheessa vain pysy hereillä ja päivitä</string>
+    <string name="home_greeting_super_late_4">Sinä ja palvelimet, molemmat hereillä</string>
+    <string name="home_greeting_super_late_5">Yökyykkymäinen ja tuottelias</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Lisäosien lähteet</string>
     <string name="sources_management_open_in_browser">Avaa selaimessa</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Yhteensopimaton</string>
     <string name="home_apk_availability_yes">Kyllä, auta minua löytämään APK</string>
     <string name="home_apk_availability_no">Ei, minulla on jo APK</string>
-    <string name="home_apk_use_saved_with_version">Käytä tallennettua APK:ta (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Käytä asennettua APK:ta (v%s)</string>
+    <string name="home_apk_use_saved">Käytä tallennettua APK:ta</string>
+    <string name="home_apk_use_installed">Käytä asennettua APK:ta</string>
     <string name="home_app_info_no_saved_apk">Ei tallennettua APK:ta. Muokkaaminen edellyttää APK-tiedoston valitsemista uudelleen.</string>
     <string name="home_version_requires_android">Vaatii Android-version %s tai uudemman</string>
     <string name="home_apk_no_compatible_versions_title">Ei tueta tällä laitteella</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Valitse alta %s -painike</string>
     <string name="home_download_instructions_step2_part1">Vieritä verkkosivua alaspäin ja valitse</string>
     <string name="home_download_instructions_download_button_toast">Paina latauspainiketta verkkosivustolla, älä tässä 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Loistavaa! Napsauta nyt jatka-painiketta alla ja siirry verkkosivustolle 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Harjoitus tekee mestarin, olet jo pitkällä! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Hienoa! Napsauta nyt Jatka ja siirry verkkosivustolle 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Harjoitus tekee mestarin, ja olet jo pitkällä 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Ei vielä täällä… ei vielä täällä… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, kunnioitan omistautumista 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Olet nyt virallinen Morphe-painikoiden testaaja 🏅</string>
@@ -184,6 +205,9 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee &lt;b&gt;kokonaisen APK:n&
     <string name="home_dialog_unsupported_version_dialog_proceed">Jatka silti</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Yhteensopivat versiot:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Tukematon</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Rakenna %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Tämä on eri rakenne samasta versiosta. Päivitykset vaativat tietyn rakenteen</string>
     <string name="home_dialog_wrong_package_title">Väärä paketti on valittu</string>
     <string name="home_dialog_wrong_package_description">Valittu APK ei ole sovellukselle, jota aioit muokata</string>
     <string name="home_dialog_expected_package">Odotettu paketti:</string>
@@ -732,6 +756,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="warning">Varoitus</string>
     <string name="error_">Virhe</string>
     <string name="retry">Yritä uudelleen</string>
+    <string name="refresh">Päivitä</string>
     <string name="add">Lisää</string>
     <string name="close">Sulje</string>
     <string name="back">Takaisin</string>
@@ -748,6 +773,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="view">Näytä</string>
     <string name="search">Haku</string>
     <string name="search_no_results">Tuloksia ei löytynyt</string>
+    <string name="sort">Lajittele</string>
     <string name="any_version">Mikä tahansa</string>
     <string name="enabled">Käytössä</string>
     <string name="disabled">Pois käytöstä</string>
@@ -757,6 +783,11 @@ Kuvien mittojen on oltava seuraavat:
     <string name="select_all_done">Kaikki valittu</string>
     <string name="deselect_all">Poista kaikki valinnat</string>
     <string name="deselect_all_done">Kaikki poistettu valinnasta</string>
+    <string name="reorder_list">Järjestä lista uudelleen</string>
+    <string name="reorder_list_hint">Vedä järjestääksesi uudelleen</string>
+    <string name="reorder_done">Järjestys tallennettu</string>
+    <string name="reset_order">Palauta järjestys</string>
+    <string name="reset_order_done">Tilaus nollattu</string>
     <string name="rename">Nimeä uudelleen</string>
     <string name="import_">Tuo</string>
     <string name="export">Vie</string>
@@ -791,6 +822,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="hide">Piilota</string>
     <string name="hidden">Piilotettu</string>
     <string name="unhide">Näytä</string>
+    <string name="unhide_done">Näytetään</string>
     <string name="logs">Lokit</string>
     <string name="sources">Lähteet</string>
     <string name="installing_ellipsis">Asennetaan…</string>

@@ -7,6 +7,9 @@ interface PatchBundleDao {
     @Query("SELECT * FROM patch_bundles ORDER BY sort_order ASC, uid ASC")
     suspend fun all(): List<PatchBundleEntity>
 
+    @Query("SELECT uid FROM patch_bundles")
+    suspend fun allUids(): List<Int>
+
     @Query("UPDATE patch_bundles SET version = :patches WHERE uid = :uid")
     suspend fun updateVersionHash(uid: Int, patches: String?)
 

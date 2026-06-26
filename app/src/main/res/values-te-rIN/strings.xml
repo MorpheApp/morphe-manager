@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <string name="home_other_apps">మిగతా ఆప్స్</string>
+    <string name="home_not_patched_yet">ఇంకా పాచ్‌ చేయలేదు</string>
+    <string name="home_no_patches_available">ఏ పాచ్లు లేవు</string>
+    <string name="home_app_hide_title">ఈ ఆప్ దాయాలి?</string>
+    <string name="home_app_will_be_hidden">ఈ‌ ఆప్ దాచబడుతుంది</string>
+    <string name="home_app_no_hidden">ఏ ఆప్ దాచబడలేదు</string>
+    <string name="home_app_hidden_apps_title">దాచబడిన ఆప్ లు</string>
     <!-- Home Screen - Update Notifications -->
     <!-- Home Screen - Home Greetings -->
     <!-- Humorous hype message with light nostalgia -->
@@ -12,6 +19,11 @@
     <!-- From mediocrity to amazing -->
     <!-- Playful exaggeration, making patching feel heroic -->
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <!-- Morning greetings (5:00–11:59) -->
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <!-- Evening greetings (17:00–21:59) -->
+    <!-- Late night greetings (22:00–23:59) -->
+    <!-- Super late night greetings (0:00–4:59) -->
     <!-- Home Screen - Sources Management -->
     <!-- Home Screen - Sources Dialogs -->
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -19,6 +31,7 @@
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <!-- Home Screen - Home Sub-Dialogs -->
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <!-- Patch Options -->
     <!-- Adaptive Icon Creator -->
     <!-- Header Creator -->

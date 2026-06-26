@@ -53,6 +53,27 @@
     <string name="home_greeting_9">आज से ऐप्स को खुद से बचा रहे हैं</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">कैफीन और अच्छे पैच द्वारा संचालित</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">उठो और पैच करो</string>
+    <string name="home_greeting_morning_2">शुभ प्रभात! ऐप्स खुद से पैच नहीं करेंगे</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">दोपहर में सुस्ती? कुछ पैच करो</string>
+    <string name="home_greeting_afternoon_2">दोपहर के भोजन के बाद पैचिंग अलग ही लगती है</string>
+    <string name="home_greeting_afternoon_3">दोपहर की शिफ्ट: पैच संस्करण</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">शुभ संध्या! शाम के पैच अलग ही लगते हैं</string>
+    <string name="home_greeting_evening_2">शांत हो रहे हैं? पहले किसी ऐप को पैच करें</string>
+    <string name="home_greeting_evening_3">काम खत्म हो गया? पहले कुछ पैच करें</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">अभी भी जागे हैं? वे ऐप भी हैं जिन्हें पैच करने की आवश्यकता है</string>
+    <string name="home_greeting_late_night_2">देर रात पैच सत्र? सम्मान</string>
+    <string name="home_greeting_late_night_3">नाइट उल्लू मोड: सक्रिय</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">पैचिंग का चरम समय… कथित तौर पर</string>
+    <string name="home_greeting_super_late_2">सो नहीं पा रहे? कुछ पैच करें</string>
+    <string name="home_greeting_super_late_3">इस बिंदु पर, बस जागते रहें और पैच करते रहें</string>
+    <string name="home_greeting_super_late_4">आप और सर्वर, दोनों जाग रहे हैं</string>
+    <string name="home_greeting_super_late_5">रात के समय और उत्पादक</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">पैच स्रोत</string>
     <string name="sources_management_open_in_browser">खोल में खोल करना</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">असंगत</string>
     <string name="home_apk_availability_yes">हाँ, मुझे APK ढूंढने में मदद करें</string>
     <string name="home_apk_availability_no">नहीं, मेरे पास पहले से ही एक एपीके है</string>
-    <string name="home_apk_use_saved_with_version">प्रतिलिपि APK (v%s) का उपयोग करें</string>
-    <string name="home_apk_use_installed_with_version">इंस्टॉल किए गए APK (v%s) का उपयोग करें</string>
+    <string name="home_apk_use_saved">सहेजी गई APK का उपयोग करें</string>
+    <string name="home_apk_use_installed">स्थापित APK का उपयोग करें</string>
     <string name="home_app_info_no_saved_apk">कोई प्रतिलिपि APK नहीं है। पट्च करना पुनः APK फ़ाइल का चयन करना आवश्यक होगा</string>
     <string name="home_version_requires_android">Android %s+ की आवश्यकता है</string>
     <string name="home_apk_no_compatible_versions_title">इस डिवाइस पर समर्थित नहीं है</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">नीचे दिया गया \'%s\' बटन दबाएं</string>
     <string name="home_download_instructions_step2_part1">वेबपेज पर नीचे की ओर स्क्रोल करें और दबाएं</string>
     <string name="home_download_instructions_download_button_toast">वेबसाइट पर डाउनलोड बटन पर क्लिक करें, यहां नहीं 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">उत्कृष्ट! अब नीचे दिए गए जारी रखें पर क्लिक करें और वेबसाइट पर जाएं 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">अभ्यास परिपूर्ण बनाता है, आप वहां पहुंच रहे हैं! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">बहुत बढ़िया! अब जारी रखें पर क्लिक करें और वेबसाइट पर जाएं 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">अभ्यास परिपूर्ण बनाता है और आप वहां पहुंच रहे हैं 💪</string>
     <string name="home_download_instructions_download_button_toast_4">अभी भी यहां नहीं… अभी भी यहां नहीं… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">ठीक है, मैं समर्पण का सम्मान करता हूँ 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">आप अब एक आधिकारिक मोर्फ़ बटन परीक्षक हैं 🏅</string>
@@ -184,6 +205,9 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">अब भी आगे बढ़ें</string>
     <string name="home_dialog_unsupported_version_compatible_versions">संगत संस्करण:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">असंगत</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">निर्माण %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">यह उसी संस्करण का एक अलग निर्माण है। पैच को एक विशिष्ट निर्माण की आवश्यकता होती है</string>
     <string name="home_dialog_wrong_package_title">गलत पैकेज चुना गया</string>
     <string name="home_dialog_wrong_package_description">चुनी गई APK, आपने पथच करने के लिए इरादत किया गया एप्लिकेशन के लिए नहीं है।</string>
     <string name="home_dialog_expected_package">अनुकूलित पैकेज:</string>
@@ -732,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">चेतावनी</string>
     <string name="error_">त्रुटि</string>
     <string name="retry">पुनरावलोकन करें</string>
+    <string name="refresh">ताज़ा करें</string>
     <string name="add">जोड़ें</string>
     <string name="close">बंद करे</string>
     <string name="back">वापस</string>
@@ -748,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">दृश्य</string>
     <string name="search">खोज</string>
     <string name="search_no_results">कोई परिणाम नहीं मिला</string>
+    <string name="sort">क्रमबद्ध करें</string>
     <string name="any_version">Failed to import keystore</string>
     <string name="enabled">सक्षम</string>
     <string name="disabled">असक्षम</string>
@@ -757,6 +783,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">सभी चयनित</string>
     <string name="deselect_all">सभी का चयन रद्द करें</string>
     <string name="deselect_all_done">सभी अचयनित</string>
+    <string name="reorder_list">सूची को पुन: व्यवस्थित करें</string>
+    <string name="reorder_list_hint">पुन: व्यवस्थित करने के लिए खींचें</string>
+    <string name="reorder_done">क्रम सहेजा गया</string>
+    <string name="reset_order">क्रम रीसेट करें</string>
+    <string name="reset_order_done">ऑर्डर रीसेट हो गया</string>
     <string name="rename">रename</string>
     <string name="import_">आयात करें</string>
     <string name="export">निर्यात करें</string>
@@ -791,6 +822,7 @@ morphe_header_custom_dark.png
     <string name="hide">छुपायें</string>
     <string name="hidden">छिपा हुआ</string>
     <string name="unhide">अनहाइड करें</string>
+    <string name="unhide_done">दिखाया गया</string>
     <string name="logs">लॉग्स</string>
     <string name="sources">स्रोत</string>
     <string name="installing_ellipsis">इंस्टॉल हो रहा है…</string>

@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
-import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -25,7 +24,6 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
@@ -38,6 +36,7 @@ import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * Installer section.
@@ -65,7 +64,7 @@ fun InstallerSection(
     LaunchedEffect(installTarget, primaryToken) {
         while (isActive) {
             primaryEntries.value = settingsViewModel.getInstallerEntries(installTarget, primaryToken)
-            delay(1_500)
+            delay(1.5.seconds)
         }
     }
 
@@ -163,20 +162,19 @@ fun InstallerSelectionDialogContainer(
 /**
  * Installer settings item.
  */
-@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 private fun InstallerSettingsItem(
     title: String,
     entry: InstallerManager.Entry,
     onClick: () -> Unit
 ) {
-    val context = LocalContext.current
+    val availabilityReasonText = entry.availability.reason?.let { stringResource(it) }
 
     // Build supporting text from description and availability reason
-    val supportingText = remember(entry) {
+    val supportingText = remember(entry, availabilityReasonText) {
         buildList {
             entry.description?.takeIf { it.isNotBlank() }?.let { add(it) }
-            entry.availability.reason?.let { add(context.getString(it)) }
+            availabilityReasonText?.let { add(it) }
         }.joinToString("\n")
     }
 
@@ -354,7 +352,6 @@ fun InstallerSelectionDialog(
 /**
  * Single installer option item in dialog.
  */
-@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun InstallerOptionItem(
     option: InstallerManager.Entry,
@@ -363,7 +360,6 @@ fun InstallerOptionItem(
     onSelect: () -> Unit,
     stateDescription: String
 ) {
-    val context = LocalContext.current
     val colors = MaterialTheme.colorScheme
 
     // Build description with availability reason for disabled items
@@ -371,9 +367,8 @@ fun InstallerOptionItem(
         option.description?.takeIf { it.isNotBlank() }
     }
 
-    val reasonText = if (!enabled) {
-        option.availability.reason?.let { context.getString(it) }
-    } else null
+    val reasonResId = option.availability.reason
+    val reasonText = if (!enabled && reasonResId != null) stringResource(reasonResId) else null
 
     SettingsItemCard(
         onClick = onSelect,

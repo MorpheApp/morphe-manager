@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.settings.advanced
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -41,7 +40,6 @@ import kotlinx.coroutines.launch
  * Advanced patch options section.
  * Options are dynamically loaded from the patch bundle repository.
  */
-@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun PatchOptionsSection(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
@@ -50,6 +48,7 @@ fun PatchOptionsSection(
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val updatingSourcesText = stringResource(R.string.home_updating_sources)
 
     // Collect patch options from ViewModel
     val youtubePatches by patchOptionsViewModel.youtubePatches.collectAsState()
@@ -184,7 +183,7 @@ fun PatchOptionsSection(
                             scope.launch {
                                 homeViewModel.updateMorpheBundleWithChangelogClear()
                                 patchOptionsViewModel.refresh()
-                                context.toast(context.getString(R.string.home_updating_sources))
+                                context.toast(updatingSourcesText)
                             }
                         }) {
                             MorpheIcon(

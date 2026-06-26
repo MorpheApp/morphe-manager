@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Spašavamo aplikacije od njih samih od danas</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Pokrenut kofeinom i dobrim zakrpama</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Ustani i zakrpi</string>
+    <string name="home_greeting_morning_2">Dobro jutro! Aplikacije se same ne zakrpljuju</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Poslepodnevni pad koncentracije? Zakrpi nešto</string>
+    <string name="home_greeting_afternoon_2">Popravka nakon ručka ima drugačiji utisak</string>
+    <string name="home_greeting_afternoon_3">Popodnevna smena: izdanje za popravke</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Dobra večernja! Večernje popravke je drugačije raditi</string>
+    <string name="home_greeting_evening_2">Opustate se? Prvo popravite aplikaciju</string>
+    <string name="home_greeting_evening_3">Izlazite sa posla? Prvo popravite nešto</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Još budni? I aplikacije kojima je potrebna popravka su budne</string>
+    <string name="home_greeting_late_night_2">Kasno noćna sesija popravki? Respekt</string>
+    <string name="home_greeting_late_night_3">Noćni sovac mod: aktiviran</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Vrhunac sati za popravke… navodno</string>
+    <string name="home_greeting_super_late_2">Ne možete da zaspite? Popravite nešto</string>
+    <string name="home_greeting_super_late_3">U ovom trenutku, samo ostanite budni i popravite</string>
+    <string name="home_greeting_super_late_4">Ti i serveri, oboje budni</string>
+    <string name="home_greeting_super_late_5">Noćni i produktivan</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Izvori zakrpe</string>
     <string name="sources_management_open_in_browser">Otvori u pregledaču</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Nekompatibilan</string>
     <string name="home_apk_availability_yes">Da, pomozi mi da pronađem APK</string>
     <string name="home_apk_availability_no">Ne, već imam APK</string>
-    <string name="home_apk_use_saved_with_version">Koristišć saćuvani APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Koristite instalovanu APK datoteku (v%s)</string>
+    <string name="home_apk_use_saved">Koristi sačuvani APK</string>
+    <string name="home_apk_use_installed">Koristi instalirani APK</string>
     <string name="home_app_info_no_saved_apk">Nema sačuvanog APK-a. Krpljenje će zahtevati ponovni odabir APK datoteke</string>
     <string name="home_version_requires_android">Zahteva Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nije podržano na ovom uređaju</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Pritisnite dugme \'%s\' ispod</string>
     <string name="home_download_instructions_step2_part1">Pomerite se nadole na veb-stranici i pritisnite</string>
     <string name="home_download_instructions_download_button_toast">Pritisnite preuzmi na sajtu, a ne ovde 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Odlično! Sada kliknite na „nastavi“ ispod i idite na veb-sajt 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Vežba čini majstora, napreduješ! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Odlično! Sada kliknite na „nastavi“ i idite na veb-sajt 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Praksa čini savršenstvo i napreduješ 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Još nisi tu… još nisi tu… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">U redu, poštujem posvećenost 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Sada ste zvanični tester Morphe dugmeta 🏅</string>
@@ -184,6 +205,9 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Pogrešni izvor</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatibilni verzije:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nepodržano</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Izgradi %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Ovo je različita verzija iste verzije. Popravke zahteva specifična verzija</string>
     <string name="home_dialog_wrong_package_title">Izabrani APK nije za aplikaciju koju ste hteli patchirati.</string>
     <string name="home_dialog_wrong_package_description">Odabrani APK nije za aplikaciju koju ste željeli patchirati</string>
     <string name="home_dialog_expected_package">Očekivan paket:</string>
@@ -716,6 +740,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="warning">Upozorenje</string>
     <string name="error_">Greška</string>
     <string name="retry">Pokušaj ponovo</string>
+    <string name="refresh">Osveži</string>
     <string name="add">Dodaj</string>
     <string name="close">Zatvori</string>
     <string name="back">Nazad</string>
@@ -732,6 +757,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="view">Pogledaj</string>
     <string name="search">Pretraži</string>
     <string name="search_no_results">Nije pronađen nijedan rezultat</string>
+    <string name="sort">Sortiraj</string>
     <string name="any_version">Bilo koja</string>
     <string name="enabled">Omogućen</string>
     <string name="disabled">Onemogućen</string>
@@ -741,6 +767,11 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="select_all_done">Svi su izabrani</string>
     <string name="deselect_all">Poništi izbor svih</string>
     <string name="deselect_all_done">Ništa nije izabrano</string>
+    <string name="reorder_list">Ponovo sortiraj listu</string>
+    <string name="reorder_list_hint">Povucite da biste ponovo sortiralii</string>
+    <string name="reorder_done">Redosled je sačŪvan</string>
+    <string name="reset_order">Vrati redosled</string>
+    <string name="reset_order_done">Narudžba je resetovana</string>
     <string name="rename">Preimenovanje</string>
     <string name="import_">Uvoz</string>
     <string name="export">Izvezi</string>
@@ -775,6 +806,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="hide">Sakrij</string>
     <string name="hidden">Skriven</string>
     <string name="unhide">Pokaži</string>
+    <string name="unhide_done">Prikazano</string>
     <string name="logs">Dnevnici</string>
     <string name="sources">Izvori</string>
     <string name="installing_ellipsis">Instaliranje…</string>

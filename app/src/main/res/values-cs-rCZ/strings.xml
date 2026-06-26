@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Už od dneška zachraňujeme aplikace před nimi samotnými</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Běží na kofeinu a dobrých záplatách</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Vstaň a aktualizuj</string>
+    <string name="home_greeting_morning_2">Dobré ráno! Aplikace se samy aktualizovat nebudou</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Odpolední krize? Aktualizuj něco</string>
+    <string name="home_greeting_afternoon_2">Popołudniowe aktualizacje mają swój urok</string>
+    <string name="home_greeting_afternoon_3">Popołudniowa zmiana: edycja aktualizacji</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Dobry wieczór! Wieczorne aktualizacje mają swój urok</string>
+    <string name="home_greeting_evening_2">Chcesz się zrelaksować? Najpierw zaktualizuj aplikację</string>
+    <string name="home_greeting_evening_3">Kończysz pracę? Najpierw zaktualizuj coś</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Jeszcze nie śpisz? A aplikacje czekają na aktualizacje</string>
+    <string name="home_greeting_late_night_2">Sesja wieczornych aktualizacji? Szacunek</string>
+    <string name="home_greeting_late_night_3">Tryb nocnej sowy: aktywowany</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Szczyt aktualizacji… ponoć</string>
+    <string name="home_greeting_super_late_2">Nie możesz zasnąć? Zaktualizuj coś</string>
+    <string name="home_greeting_super_late_3">Na tym etapie po prostu zostań i aktualizuj</string>
+    <string name="home_greeting_super_late_4">Ty i serwery, oboje czujni</string>
+    <string name="home_greeting_super_late_5">Nocny i produktywny</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Zdroje záplat</string>
     <string name="sources_management_open_in_browser">Otevřít v prohlížeči</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Nekompatibilní</string>
     <string name="home_apk_availability_yes">Ano, pomozte mi najít APK</string>
     <string name="home_apk_availability_no">Ne, už mám APK</string>
-    <string name="home_apk_use_saved_with_version">Použít uložené APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Použijte nainstalovaný APK (v%s)</string>
+    <string name="home_apk_use_saved">Użyj zapisane APK</string>
+    <string name="home_apk_use_installed">Użyj zainstalowane APK</string>
     <string name="home_app_info_no_saved_apk">Není uložené žádné APK. Pro záplatování bude potřeba vybrat soubor APK znovu</string>
     <string name="home_version_requires_android">Vyžaduje Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Není podporováno na tomto zařízení</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Stiskněte tlačítko \'%s\' níže</string>
     <string name="home_download_instructions_step2_part1">Na webové stránce sjeďte dolů a stiskněte</string>
     <string name="home_download_instructions_download_button_toast">Na webové stránce stiskněte tlačítko stažení, ne zde 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Perfektní! Nyní klikněte na Pokračovat níže a přejděte na webové stránky 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Praxe dělá mistra, jde ti to skvěle! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Skvělé! Nyní klikněte na Pokračovat a přejděte na webovou stránku 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Praxe dělá mistra a ty se zlepšuješ 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Stále tady nejsi… stále tady nejsi… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, respektuji oddanost 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Nyní jste oficiální tester tlačítka Morphe 🏅</string>
@@ -184,6 +205,9 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="home_dialog_unsupported_version_dialog_proceed">Pokračovat i tak</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatibilní verze:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nekompatibilní</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Wersja %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">To inna kompilacja tej samej wersji. Aktualizacje wymagają określonej kompilacji</string>
     <string name="home_dialog_wrong_package_title">Vybrán špatný balíček</string>
     <string name="home_dialog_wrong_package_description">Vybrané APK není pro aplikaci, kterou jste chtěli záplatovat</string>
     <string name="home_dialog_expected_package">Očekávaný balíček:</string>
@@ -732,6 +756,7 @@ Rozměry obrázků musí být následující:
     <string name="warning">Varování</string>
     <string name="error_">Chyba</string>
     <string name="retry">Zkuste znova</string>
+    <string name="refresh">Obnovit</string>
     <string name="add">Přidat</string>
     <string name="close">Zavřít</string>
     <string name="back">Zpět</string>
@@ -748,6 +773,7 @@ Rozměry obrázků musí být následující:
     <string name="view">Zobrazit</string>
     <string name="search">Hledat</string>
     <string name="search_no_results">Nebyly nalezeny žádné výsledky</string>
+    <string name="sort">Řazení</string>
     <string name="any_version">Libovolná</string>
     <string name="enabled">Zapnuto</string>
     <string name="disabled">Vypnuto</string>
@@ -757,6 +783,11 @@ Rozměry obrázků musí být následující:
     <string name="select_all_done">Vše vybráno</string>
     <string name="deselect_all">Zrušit výběr všech</string>
     <string name="deselect_all_done">Vše zrušeno</string>
+    <string name="reorder_list">Změnit pořadí seznamu</string>
+    <string name="reorder_list_hint">Přetáhněte pro změnu pořadí</string>
+    <string name="reorder_done">Pořadí uloženo</string>
+    <string name="reset_order">Obnovit pořadí</string>
+    <string name="reset_order_done">Objednávka resetována</string>
     <string name="rename">Přejmenovat</string>
     <string name="import_">Importovat</string>
     <string name="export">Exportovat</string>
@@ -791,6 +822,7 @@ Rozměry obrázků musí být následující:
     <string name="hide">Skrýt</string>
     <string name="hidden">Skrytý</string>
     <string name="unhide">Zobrazit</string>
+    <string name="unhide_done">Zobrazeno</string>
     <string name="logs">Protokoly</string>
     <string name="sources">Zdroje</string>
     <string name="installing_ellipsis">Instaluje se…</string>

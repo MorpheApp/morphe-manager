@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Rešujemo aplikacije od samih sebe, od danes naprej</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Delujemo na kofein in dobre popravke</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Vstani in posodobi</string>
+    <string name="home_greeting_morning_2">Dobro jutro! Aplikacije se same ne bodo posodobile.</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Popoldanski zaspanc? Posodobi nekaj.</string>
+    <string name="home_greeting_afternoon_2">Popoldanska razširitev obroka ima drugačen učinek</string>
+    <string name="home_greeting_afternoon_3">Popoldanska izmena: izdaja popravkov</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Dober večer! Večerni popravki imajo drugačen učinek</string>
+    <string name="home_greeting_evening_2">Se sproščate? Najprej popravite aplikacijo</string>
+    <string name="home_greeting_evening_3">Končujete z delom? Najprej popravite nekaj</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Ste še budni? So tudi aplikacije, ki potrebujejo popravke</string>
+    <string name="home_greeting_late_night_2">Pozna noč za popravljanje? Res spoštovanje</string>
+    <string name="home_greeting_late_night_3">Nočni način: aktiviran</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Vrhunec popravkov… navzven</string>
+    <string name="home_greeting_super_late_2">Ne morete zaspati? Popravite nekaj</string>
+    <string name="home_greeting_super_late_3">V tem trenutku, ostanite budni in popravite</string>
+    <string name="home_greeting_super_late_4">Vi in strežniki, oba budna</string>
+    <string name="home_greeting_super_late_5">Nočni in produktivni</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Popravi vire</string>
     <string name="sources_management_open_in_browser">Odpri v brskalniku</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Nezdružljivo</string>
     <string name="home_apk_availability_yes">Da, pomagajte mi najti APK</string>
     <string name="home_apk_availability_no">Ne, že imam APK</string>
-    <string name="home_apk_use_saved_with_version">Uporabite shranjen APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Uporabi nameščeno datoteko APK (v%s)</string>
+    <string name="home_apk_use_saved">Uporabite shranjen APK</string>
+    <string name="home_apk_use_installed">Uporabite nameščen APK</string>
     <string name="home_app_info_no_saved_apk">Ni shranjenega APK. Popravilo bo zahtevalo ponovno izbiro datoteke APK.</string>
     <string name="home_version_requires_android">Zahteva Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ni podprto na tej napravi</string>
@@ -119,7 +140,7 @@
     <string name="home_download_instructions_step2_part1">Podrsajte po spletni strani navzdol in pritisni</string>
     <string name="home_download_instructions_download_button_toast">Pritisnite na gumb za prenos na spletni strani, ne tukaj 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Super! Sedaj kliknite na gumb \"nadaljuj\" spodaj in obiščite spletno stran 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Vaja dela mojstra, skoraj si že tam! 💪</string>
+    <string name="home_download_instructions_download_button_toast_3">Vaja dela mojstra, skoraj si že tam 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Ne še tukaj… ne še tukaj… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK spoštujem predanost 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Zdaj ste uradni Morphe preizkuševalec gumbov 🏅</string>
@@ -184,6 +205,9 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polnega A
     <string name="home_dialog_unsupported_version_dialog_proceed">Vseeno nadaljuj</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Združljive različice:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nepodprto</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Izdelava %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">To je druga različica iste različice. Popravki zahtevajo določeno različico</string>
     <string name="home_dialog_wrong_package_title">Izbrana napačna datoteka</string>
     <string name="home_dialog_wrong_package_description">Izbrana datoteka APK ni za aplikacijo, ki jo želite popraviti.</string>
     <string name="home_dialog_expected_package">Pričakovan paket:</string>
@@ -732,6 +756,7 @@ Dimenzije slike morajo biti naslednje:
     <string name="warning">Opozorilo</string>
     <string name="error_">Napaka</string>
     <string name="retry">Poskusite znova</string>
+    <string name="refresh">Osveži</string>
     <string name="add">Dodaj</string>
     <string name="close">Zapri</string>
     <string name="back">Nazaj</string>
@@ -748,6 +773,7 @@ Dimenzije slike morajo biti naslednje:
     <string name="view">Poglej</string>
     <string name="search">Poišči</string>
     <string name="search_no_results">Ni najdenih rezultatov</string>
+    <string name="sort">Razvrsti</string>
     <string name="any_version">Kateri koli</string>
     <string name="enabled">Omogočeno</string>
     <string name="disabled">Onemogočeno</string>
@@ -757,6 +783,11 @@ Dimenzije slike morajo biti naslednje:
     <string name="select_all_done">Vse izbrano</string>
     <string name="deselect_all">Ne izberi nič</string>
     <string name="deselect_all_done">Nič več izbrano</string>
+    <string name="reorder_list">Ponovno uredi seznam</string>
+    <string name="reorder_list_hint">Povlecite za ponovno ureditev</string>
+    <string name="reorder_done">Vrstni red shranjen</string>
+    <string name="reset_order">Ponastavi vrstni red</string>
+    <string name="reset_order_done">Ponastavitev naročila</string>
     <string name="rename">Preimenuj</string>
     <string name="import_">Uvozi</string>
     <string name="export">Izvozi</string>
@@ -791,6 +822,7 @@ Dimenzije slike morajo biti naslednje:
     <string name="hide">Skrij</string>
     <string name="hidden">Skrit</string>
     <string name="unhide">Pokaži</string>
+    <string name="unhide_done">Prikazano</string>
     <string name="logs">Dnevnik</string>
     <string name="sources">Viri</string>
     <string name="installing_ellipsis">Nameščanje…</string>

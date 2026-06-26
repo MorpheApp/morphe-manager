@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withTimeoutOrNull
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * Redux-like state container backed by coroutines.
@@ -51,7 +52,7 @@ class Store<S>(private val coroutineScope: CoroutineScope, initialState: S) : Ac
     @OptIn(ExperimentalCoroutinesApi::class)
     private suspend fun runActions() {
         while (true) {
-            val action = withTimeoutOrNull(200L) { queueChannel.receive() }
+            val action = withTimeoutOrNull(200L.milliseconds) { queueChannel.receive() }
             if (action == null) {
                 Log.d(tag, "Stopping action runner")
                 lock.withLock {

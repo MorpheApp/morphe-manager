@@ -7,18 +7,20 @@ package app.morphe.manager.domain.manager
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import androidx.core.content.edit
 
 /**
- * Manages user preferences for home screen app buttons.
+ * Manages user preferences for home screen app buttons: hidden packages and custom sort order.
  *
- * Ordering is handled automatically:
+ * Default ordering (applied when no custom order is set):
  * 1. Patched (installed) apps first
  * 2. Apps with isPinnedByDefault = true
- * 3. All other apps — alphabetical
+ * 3. All other apps, alphabetical
+ *
+ * A custom order overrides the default sort and is persisted across sessions.
  */
 class HomeAppButtonPreferences(context: Context) {
 
@@ -28,12 +30,17 @@ class HomeAppButtonPreferences(context: Context) {
     private val _hiddenPackages = MutableStateFlow(loadHiddenPackages())
     val hiddenPackages: StateFlow<Set<String>> = _hiddenPackages.asStateFlow()
 
+    private val _customOrder = MutableStateFlow(loadCustomOrder())
+    val customOrder: StateFlow<List<String>> = _customOrder.asStateFlow()
+
     private fun loadHiddenPackages(): Set<String> {
         return prefs.getStringSet(KEY_HIDDEN, null) ?: emptySet()
     }
 
-    fun isHidden(packageName: String): Boolean =
-        _hiddenPackages.value.contains(packageName)
+    private fun loadCustomOrder(): List<String> {
+        val raw = prefs.getString(KEY_CUSTOM_ORDER, null) ?: return emptyList()
+        return raw.split("\n").filter { it.isNotEmpty() }
+    }
 
     fun hide(packageName: String) {
         val current = _hiddenPackages.value.toMutableSet()
@@ -47,10 +54,15 @@ class HomeAppButtonPreferences(context: Context) {
         saveHiddenPackages(current)
     }
 
-    /**
-     * Get all currently hidden packages (for "show hidden" UI).
-     */
-    fun getHiddenPackages(): Set<String> = _hiddenPackages.value
+    fun saveOrder(packageNames: List<String>) {
+        prefs.edit { putString(KEY_CUSTOM_ORDER, packageNames.joinToString("\n")) }
+        _customOrder.value = packageNames
+    }
+
+    fun resetOrder() {
+        prefs.edit { remove(KEY_CUSTOM_ORDER) }
+        _customOrder.value = emptyList()
+    }
 
     private fun saveHiddenPackages(packages: Set<String>) {
         prefs.edit {
@@ -62,5 +74,6 @@ class HomeAppButtonPreferences(context: Context) {
     companion object {
         private const val PREFS_NAME = "home_app_buttons"
         private const val KEY_HIDDEN = "hidden_packages"
+        private const val KEY_CUSTOM_ORDER = "custom_order"
     }
 }

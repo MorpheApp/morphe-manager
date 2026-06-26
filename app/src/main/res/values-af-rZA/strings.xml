@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Besig om programme te red van hulself sedert vandag</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Aangedryf deur kafeeïen en goeie veranderinge</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Staan op en plak</string>
+    <string name="home_greeting_morning_2">Goeie môre! Programmeer self nie</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Middagmoeë? Plak iets</string>
+    <string name="home_greeting_afternoon_2">Nag-ete lappie-vlekke is anders</string>
+    <string name="home_greeting_afternoon_3">Die middagshift: lappie-uitgawe</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Goeienaand! Naglappies doen dit anders</string>
+    <string name="home_greeting_evening_2">Ontspan? Laai eerste \'n program by</string>
+    <string name="home_greeting_evening_3">Klok uit? Laai eers iets by</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Nog wakker? So ook die programme wat \'n lappie nodig het</string>
+    <string name="home_greeting_late_night_2">Nag lappie-sessie? Respek</string>
+    <string name="home_greeting_late_night_3">Nag-uilmodus: geaktiveer</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Piek lappie-ure… so beweer mense</string>
+    <string name="home_greeting_super_late_2">Kan nie slaap nie? Laai iets by</string>
+    <string name="home_greeting_super_late_3">Op hierdie stadium, bly net wakker en laai iets by</string>
+    <string name="home_greeting_super_late_4">Jy en die bedieners, albei wakker</string>
+    <string name="home_greeting_super_late_5">Nagtelike en produktief</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Verandering oorspronge</string>
     <string name="sources_management_open_in_browser">Maak oop in blaaier</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Onversoenbaar</string>
     <string name="home_apk_availability_yes">Ja, help my om \'n APK te vind</string>
     <string name="home_apk_availability_no">Nee, ek het reeds \'n APK</string>
-    <string name="home_apk_use_saved_with_version">Gebruik gestoorde APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Gebruik geïnstalleerde APK (v%s)</string>
+    <string name="home_apk_use_saved">Gebruik gestoorde APK</string>
+    <string name="home_apk_use_installed">Gebruik geïnstalleerde APK</string>
     <string name="home_app_info_no_saved_apk">Geen gestoorde APK nie. Verandering sal vereis dat jy die APK vyl weer kies</string>
     <string name="home_version_requires_android">Vereis Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nie op hierdie toestel ondersteun nie</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Druk op die \'%s\' knoppie hieronder</string>
     <string name="home_download_instructions_step2_part1">Rol af op die webblad en druk</string>
     <string name="home_download_instructions_download_button_toast">Druk op aflaai op die webwerf, en nie hier nie 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Perfek! Klik nou voortgaan hieronder en gaan na die webwerf 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Oefening maak perfeks, jy is daarby besig! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Fantasties! Klik nou op \"Gaan voort\" en besoek die webwerf 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Oefening maak perfeksie en jy kom daar 🔥</string>
     <string name="home_download_instructions_download_button_toast_4">Nog nie hier nie… nog nie hier nie… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, ek respekteer die toewyding 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Jy is nou \'n amptelike Morphe-knoptoetser 🏅</string>
@@ -184,6 +205,9 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="home_dialog_unsupported_version_dialog_proceed">Gaan voort tog</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versoenbare weergawes:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nie ondersteun nie</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Bou %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Dit is \'n ander weergawe van dieselfde weergawe. Die lappies vereis \'n spesifieke weergawe</string>
     <string name="home_dialog_wrong_package_title">Verkeerde pakket gekies</string>
     <string name="home_dialog_wrong_package_description">Die gekose APK is nie vir die aansoek wat jy wou patch nie</string>
     <string name="home_dialog_expected_package">Verwagte pakket:</string>
@@ -732,6 +756,7 @@ Die beeld afmetings moet soos volg wees:
     <string name="warning">Waarskuwing</string>
     <string name="error_">Fout</string>
     <string name="retry">Probeer weer</string>
+    <string name="refresh">Herlaai</string>
     <string name="add">Voeg by</string>
     <string name="close">Sluit</string>
     <string name="back">Terug</string>
@@ -748,6 +773,7 @@ Die beeld afmetings moet soos volg wees:
     <string name="view">Beskou</string>
     <string name="search">Soek</string>
     <string name="search_no_results">Geen resultate gevind nie</string>
+    <string name="sort">Sorteer</string>
     <string name="any_version">Enige</string>
     <string name="enabled">Geaktiveer</string>
     <string name="disabled">Gedeaktiveer</string>
@@ -757,6 +783,11 @@ Die beeld afmetings moet soos volg wees:
     <string name="select_all_done">Alles gekies</string>
     <string name="deselect_all">Deselekteer alles</string>
     <string name="deselect_all_done">Alles ontkies</string>
+    <string name="reorder_list">Lysordening</string>
+    <string name="reorder_list_hint">Sleep om te herordeneer</string>
+    <string name="reorder_done">Volgorde stoor</string>
+    <string name="reset_order">Herstel volgorde</string>
+    <string name="reset_order_done">Bestelling terugstel</string>
     <string name="rename">Hernoem</string>
     <string name="import_">Importeer</string>
     <string name="export">Uitvoer</string>
@@ -791,6 +822,7 @@ Die beeld afmetings moet soos volg wees:
     <string name="hide">Verberg</string>
     <string name="hidden">Versteek</string>
     <string name="unhide">Herstel</string>
+    <string name="unhide_done">Wys</string>
     <string name="logs">Logboeke</string>
     <string name="sources">Bronne</string>
     <string name="installing_ellipsis">Installeer…</string>

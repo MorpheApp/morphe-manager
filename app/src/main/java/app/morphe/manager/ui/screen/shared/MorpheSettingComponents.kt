@@ -46,6 +46,8 @@ object MorpheDefaults {
     val SectionCornerRadius = 18.dp
     val IconSize = 24.dp
     val ContentPadding = 16.dp
+    val ContentPaddingMedium = 24.dp
+    val ContentPaddingExpanded = 32.dp
     val ItemSpacing = 12.dp
 
     // Gradient colors for GradientCircleIcon
@@ -119,6 +121,14 @@ object MorpheAnimations {
     // Slide Transitions
     val slideUpFadeEnter = slideInVertically(defaultTween()) { -it } + fadeIn
     val slideUpFadeExit = slideOutVertically(defaultTween()) { -it } + fadeOut
+
+    // Push Transitions (Settings screen slides up over home, returns by sliding down)
+    val pushEnter = slideInVertically(
+        animationSpec = defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
+    ) { it } + fadeIn(defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION))
+    val pushExit = slideOutVertically(
+        animationSpec = defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
+    ) { it } + fadeOut(tween(MorpheDefaults.SCREEN_ENTER_DURATION, easing = LinearEasing))
 
     // Spring & Custom Transitions
     val springSlideUpEnter = slideInVertically(

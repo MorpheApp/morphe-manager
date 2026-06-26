@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Salvăm aplicațiile de azi</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Oferit de cafea și patch-uri bune</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Ridică-te și aplică patch-uri</string>
+    <string name="home_greeting_morning_2">Bună dimineața! Aplicațiile nu se vor aplica singure</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">După-amiază mohorâtă? Aplică un patch</string>
+    <string name="home_greeting_afternoon_2">Pachetele de după prânz par altfel</string>
+    <string name="home_greeting_afternoon_3">Schimbul de după-amiază: ediția pachetelor</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Bună seara! Pachetele de seară par altfel</string>
+    <string name="home_greeting_evening_2">Te relaxezi? Aplică un patch mai întâi</string>
+    <string name="home_greeting_evening_3">Te pregătești să pleci? Aplică un patch mai întâi</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Încă treaz? Și aplicațiile care au nevoie de patch-uri sunt</string>
+    <string name="home_greeting_late_night_2">Sesiune de patch-uri târzie în noapte? Respect</string>
+    <string name="home_greeting_late_night_3">Mod bufniță nocturnă: activat</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Orele de vârf pentru patch-uri… presupunerea</string>
+    <string name="home_greeting_super_late_2">Nu poți dormi? Aplică un patch</string>
+    <string name="home_greeting_super_late_3">La acest moment, rămâi treaz și aplică patch-uri</string>
+    <string name="home_greeting_super_late_4">Tu și serverele, ambele treze</string>
+    <string name="home_greeting_super_late_5">Nocturn și productiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Surse de patch-uri</string>
     <string name="sources_management_open_in_browser">Deschide în browser</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Incompatibil</string>
     <string name="home_apk_availability_yes">Da, ajută-mă să găsesc un APK</string>
     <string name="home_apk_availability_no">Nu, am deja un APK</string>
-    <string name="home_apk_use_saved_with_version">Folosește APK salvat (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Utilizați APK instalat (v%s)</string>
+    <string name="home_apk_use_saved">Utilizează APK salvat</string>
+    <string name="home_apk_use_installed">Utilizează APK instalat</string>
     <string name="home_app_info_no_saved_apk">Niciun APK salvat. Patch-uirea necesită selectarea APK-ului din nou</string>
     <string name="home_version_requires_android">Necesită Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nu este suportat pe acest dispozitiv</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Apasă pe butonul \'%s\' de mai jos</string>
     <string name="home_download_instructions_step2_part1">Derulează în josul paginii și apasă</string>
     <string name="home_download_instructions_download_button_toast">Apasă butonul pe site, nu aici 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Perfect! Acum apasă pe continuare mai jos și accesează site-ul web 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Exercițiul este cheia succesului, ești pe drumul cel bun! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Excelent! Acum apasă pe continuare și mergi pe site-ul web 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Exercițiul este cheia succesului și te apropii din ce în ce mai mult 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Încă nu ești aici… încă nu ești aici… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Bine, respect dedicarea 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Acum ești un tester oficial Morphe 🏅</string>
@@ -184,6 +205,9 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="home_dialog_unsupported_version_dialog_proceed">Continuă oricum</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versiuni compatibile:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Incompatibil</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Versiunea %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Aceasta este o versiune diferită a aceleiași versiuni. Pachetele necesită o versiune specifică</string>
     <string name="home_dialog_wrong_package_title">Pachet greșit selectat</string>
     <string name="home_dialog_wrong_package_description">APK-ul selectat nu este pentru aplicația pe care dorești să o patch-uiești</string>
     <string name="home_dialog_expected_package">Pachet așteptat:</string>
@@ -732,6 +756,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="warning">Atenție</string>
     <string name="error_">Eroare</string>
     <string name="retry">Reîncearcă</string>
+    <string name="refresh">Reîmprospătează</string>
     <string name="add">Adaugă</string>
     <string name="close">Închide</string>
     <string name="back">Înapoi</string>
@@ -748,6 +773,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="view">Vizualizează</string>
     <string name="search">Caută</string>
     <string name="search_no_results">Nu s-au găsit rezultate</string>
+    <string name="sort">Sortare</string>
     <string name="any_version">Orice</string>
     <string name="enabled">Activat</string>
     <string name="disabled">Dezactivat</string>
@@ -757,6 +783,11 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="select_all_done">Toate selectate</string>
     <string name="deselect_all">Deselecteazã totul</string>
     <string name="deselect_all_done">Toate deselectorizate</string>
+    <string name="reorder_list">Reordonare listă</string>
+    <string name="reorder_list_hint">Glisați pentru a reordona</string>
+    <string name="reorder_done">Ordine salvată</string>
+    <string name="reset_order">Resetează ordinea</string>
+    <string name="reset_order_done">Comanda resetată</string>
     <string name="rename">Redenumește</string>
     <string name="import_">Importă</string>
     <string name="export">Exportă</string>
@@ -791,6 +822,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="hide">Ascunde</string>
     <string name="hidden">Ascuns</string>
     <string name="unhide">Dezascunde</string>
+    <string name="unhide_done">Afișat</string>
     <string name="logs">Jurnale</string>
     <string name="sources">Surse</string>
     <string name="installing_ellipsis">Se instalează…</string>

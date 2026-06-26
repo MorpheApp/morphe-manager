@@ -21,6 +21,7 @@ import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
+import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
@@ -55,6 +56,8 @@ import java.nio.file.Files
 import java.util.UUID
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 @OptIn(SavedStateHandleSaveableApi::class)
 class PatcherViewModel(
@@ -103,6 +106,24 @@ class PatcherViewModel(
     private var launchedActivity: CompletableDeferred<ActivityResult>? = null
     private val launchActivityChannel = Channel<Intent>()
     val launchActivityFlow = launchActivityChannel.receiveAsFlow()
+
+    private val _autoInstallChannel = Channel<Unit>(Channel.CONFLATED)
+    val autoInstallEvent: Flow<Unit> = _autoInstallChannel.receiveAsFlow()
+
+    var patchingCompletedAt: Long? = null
+        private set
+
+    var patchingCompletedInForeground: Boolean = false
+        private set
+
+    var showSuccessScreen: Boolean by mutableStateOf(false)
+        private set
+
+    fun showSuccess() { showSuccessScreen = true }
+    fun hideSuccessScreen() { showSuccessScreen = false }
+
+    var isPatching: Boolean by mutableStateOf(true)
+        private set
 
     private val selectedApp = input.selectedApp
     val packageName = selectedApp.packageName
@@ -186,7 +207,8 @@ class PatcherViewModel(
     private suspend fun gatherScopedBundles(): Map<Int, PatchBundleInfo.Scoped> =
         patchBundleRepository.scopedBundleInfoFlow(
             packageName,
-            input.selectedApp.version
+            input.selectedApp.version,
+            input.selectedApp.versionCode
         ).first().associateBy { it.uid }
 
     suspend fun collectSelectedBundleMetadata(): Pair<List<String>, List<String>> {
@@ -320,9 +342,9 @@ class PatcherViewModel(
     }
 
     private val workManager = WorkManager.getInstance(app)
-    private val _patcherSucceeded = MediatorLiveData<Boolean?>()
-    val patcherSucceeded: LiveData<Boolean?> get() = _patcherSucceeded
-    private var currentWorkSource: LiveData<WorkInfo?>? = null
+    val patcherSucceeded: LiveData<Boolean?>
+        field: MutableLiveData<Boolean?> = MutableLiveData()
+    private var observeWorkerJob: Job? = null
     private val handledFailureIds = mutableSetOf<UUID>()
     private var forceKeepLocalInput = false
 
@@ -555,7 +577,9 @@ class PatcherViewModel(
     suspend fun persistPatchedApp(
         currentPackageName: String?,
         installType: InstallType
-    ): Boolean = withContext(Dispatchers.IO) {
+    ): Boolean = withContext(NonCancellable + Dispatchers.IO) {
+        // NonCancellable: this body must run to completion even if the caller's scope is
+        // cancelled mid-way, so the DB row never diverges from the installed APK
         val installedPackageInfo = currentPackageName?.let(pm::getPackageInfo)
         val patchedPackageInfo = pm.getPackageInfo(outputFile)
         val packageInfo = patchedPackageInfo ?: installedPackageInfo
@@ -603,7 +627,8 @@ class PatcherViewModel(
         // This ensures all applied patches are correctly saved
         val scopedBundlesForSelection = patchBundleRepository.scopedBundleInfoFlow(
             packageName,
-            input.selectedApp.version
+            input.selectedApp.version,
+            input.selectedApp.versionCode
         ).first().associateBy { it.uid }
         val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundlesForSelection)
         val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundlesForSelection)
@@ -679,7 +704,7 @@ class PatcherViewModel(
             app.toast(app.getString(R.string.patched_app_save_failed_toast))
         } else {
             app.toast(app.getString(R.string.save_apk_success))
-            delay(2000)
+            delay(2.seconds)
         }
 
         if (saved) triggerNotificationPromptIfNeeded()
@@ -774,7 +799,7 @@ class PatcherViewModel(
                 ) {
                     _showLongStepWarning.value = true
                 }
-                delay(250)
+                delay(250.milliseconds)
             }
             _showLongStepWarning.value = false
         }
@@ -880,40 +905,65 @@ class PatcherViewModel(
     }
 
     private fun observeWorker(id: UUID) {
-        val source = workManager.getWorkInfoByIdLiveData(id)
-        currentWorkSource?.let { _patcherSucceeded.removeSource(it) }
-        currentWorkSource = source
-        _patcherSucceeded.addSource(source) { workInfo ->
-            when (workInfo?.state) {
-                WorkInfo.State.SUCCEEDED -> {
-                    forceKeepLocalInput = false
+        observeWorkerJob?.cancel()
+        observeWorkerJob = viewModelScope.launch {
+            workManager.getWorkInfoByIdFlow(id).collect { workInfo ->
+                when (workInfo?.state) {
+                    WorkInfo.State.SUCCEEDED -> {
+                        forceKeepLocalInput = false
 
-                    // Save original APK before deleting temporary file (blocking)
-                    viewModelScope.launch(Dispatchers.IO) {
-                        try {
-                            saveOriginalApkIfNeeded()
-                        } finally {
-                            withContext(Dispatchers.Main) {
-                                // Delete temporary input file after saving
-                                cleanupTemporaryInput()
-                                refreshExportMetadata()
-                                _patcherSucceeded.value = true
+                        // Save original APK before deleting temporary file (blocking).
+                        // Launched independently so cancelling observeWorkerJob (new patch run)
+                        // does not interrupt cleanup that is already in progress.
+                        viewModelScope.launch(Dispatchers.IO) {
+                            try {
+                                saveOriginalApkIfNeeded()
+                            } finally {
+                                withContext(Dispatchers.Main) {
+                                    // Delete temporary input file after saving
+                                    cleanupTemporaryInput()
+                                    refreshExportMetadata()
+                                    patchingCompletedAt = System.currentTimeMillis()
+                                    patchingCompletedInForeground = patcherSucceeded.hasActiveObservers()
+                                    isPatching = false
+                                    patcherSucceeded.value = true
+                                    scheduleAutoInstallIfNeeded()
+                                    scheduleSuccessScreen()
+                                }
                             }
                         }
                     }
-                }
 
-                WorkInfo.State.FAILED -> {
-                    handleWorkerFailure(workInfo)
-                    _patcherSucceeded.value = false
-                }
+                    WorkInfo.State.FAILED -> {
+                        handleWorkerFailure(workInfo)
+                        isPatching = false
+                        patcherSucceeded.value = false
+                        showSuccessScreen = true
+                    }
 
-                WorkInfo.State.RUNNING,
-                WorkInfo.State.ENQUEUED,
-                WorkInfo.State.BLOCKED -> _patcherSucceeded.value = null
-                else -> _patcherSucceeded.value = null
+                    WorkInfo.State.RUNNING,
+                    WorkInfo.State.ENQUEUED,
+                    WorkInfo.State.BLOCKED -> {
+                        isPatching = true
+                        patcherSucceeded.value = null
+                    }
+                    else -> patcherSucceeded.value = null
+                }
             }
         }
+    }
+
+    private fun scheduleSuccessScreen() = viewModelScope.launch {
+        val elapsed = patchingCompletedAt?.let { System.currentTimeMillis() - it } ?: 0L
+        delay((2000L - elapsed).coerceAtLeast(0L).milliseconds)
+        showSuccessScreen = true
+    }
+
+    private fun scheduleAutoInstallIfNeeded() = viewModelScope.launch {
+        if (!prefs.autoInstallWithShizuku.get()) return@launch
+        if (prefs.installerPrimary.get() != InstallerPreferenceTokens.SHIZUKU) return@launch
+        if (prefs.promptInstallerOnInstall.get()) return@launch
+        _autoInstallChannel.trySend(Unit)
     }
 
     private fun handleWorkerFailure(workInfo: WorkInfo) {
@@ -1080,7 +1130,6 @@ class PatcherViewModel(
     }
 
     override fun onCleared() {
-        super.onCleared()
         patcherWorkerId?.uuid?.let(workManager::cancelWorkById)
         cleanupTemporaryInput()
 

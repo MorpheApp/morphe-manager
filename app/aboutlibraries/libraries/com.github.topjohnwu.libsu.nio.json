@@ -1,0 +1,11 @@
+{
+  "uniqueId": "com.github.topjohnwu.libsu:nio",
+  "name": "libsu (nio)",
+  "developers": [{"name": "John Wu"}],
+  "website": "https://github.com/topjohnwu/libsu",
+  "scm": {
+    "connection": "scm:git:https://github.com/topjohnwu/libsu.git",
+    "url": "https://github.com/topjohnwu/libsu"
+  },
+  "licenses": ["Apache-2.0"]
+}

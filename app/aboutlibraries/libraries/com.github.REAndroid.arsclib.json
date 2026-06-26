@@ -1,0 +1,11 @@
+{
+  "uniqueId": "com.github.REAndroid:arsclib",
+  "name": "ARSCLib",
+  "developers": [{"name": "REAndroid"}],
+  "website": "https://github.com/REAndroid/ARSCLib",
+  "scm": {
+    "connection": "scm:git:https://github.com/REAndroid/ARSCLib.git",
+    "url": "https://github.com/REAndroid/ARSCLib"
+  },
+  "licenses": ["Apache-2.0"]
+}

@@ -53,6 +53,27 @@
     <string name="home_greeting_9">आजपासून ॲप्सना त्यांच्याच दोषांपासून वाचवत आहे</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">कॉफी आणि उत्तम सुधारणांच्या जोरावर काम सुरू</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">उठून पॅच करा</string>
+    <string name="home_greeting_morning_2">शुभ सकाळ! ॲप्स स्वतःहून पॅच होणार नाहीत</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">दुपारच्या सुस्तीमुळे पॅच करण्याची इच्छा आहे?</string>
+    <string name="home_greeting_afternoon_2">दुपारच्या जेवणानंतर पॅचिंग करणं खूप वेगळं आहे</string>
+    <string name="home_greeting_afternoon_3">दुपारचा shift: पॅच एडिशन</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">शुभ संध्याकाळ! संध्याकाळचे पॅच वेगळे असतात</string>
+    <string name="home_greeting_evening_2">आराम करत आहात? आधी ॲप पॅच करा</string>
+    <string name="home_greeting_evening_3">काम संपवून जात आहात? आधी काहीतरी पॅच करा</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">अजून जागे आहात? पॅचिंगची गरज असलेले ॲप्स पण जागे आहेत</string>
+    <string name="home_greeting_late_night_2">मध्यरात्री पॅच सेशन? छान</string>
+    <string name="home_greeting_late_night_3">नाईट owl मोड: सक्रिय</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">पॅचिंगची वेळ…असे म्हणतात</string>
+    <string name="home_greeting_super_late_2">झोप येत नाहीये? काहीतरी पॅच करा</string>
+    <string name="home_greeting_super_late_3">आता तर फक्त जागे राहा आणि पॅचिंग करा</string>
+    <string name="home_greeting_super_late_4">तुम्ही आणि सर्व्हर, दोघेही जागे</string>
+    <string name="home_greeting_super_late_5">रात्रीचे आणि productive</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">सुधारणांची मुळे</string>
     <string name="sources_management_open_in_browser">लिंक बाहेर नेटवर उघडा</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">असंगत</string>
     <string name="home_apk_availability_yes">हो, मला APK शोधण्यात मदत करा.</string>
     <string name="home_apk_availability_no">नाही, माझ्याकडे आधीपासूनच APK आहे.</string>
-    <string name="home_apk_use_saved_with_version">आधीच साठवलेली APK (v%s) वापरा</string>
-    <string name="home_apk_use_installed_with_version">इंस्टॉल केलेली APK (v%s) वापरा</string>
+    <string name="home_apk_use_saved">आधीच साठवलेली APK वापरा</string>
+    <string name="home_apk_use_installed">इंस्टॉल केलेली APK वापरा</string>
     <string name="home_app_info_no_saved_apk">कोणतीही साठवलेली APK नाही. तुम्हाला पुन्हा एकदा APK फाईल निवडावी लागेल.</string>
     <string name="home_version_requires_android">Android %s+ आवश्यक आहे</string>
     <string name="home_apk_no_compatible_versions_title">या डिव्हाइसवर समर्थित नाही</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">खालील \'%s\' बटण दाबा</string>
     <string name="home_download_instructions_step2_part1">वेबपेजवर खाली स्क्रोल करा आणि दाबा</string>
     <string name="home_download_instructions_download_button_toast">वेबसाइटवर असलेल्या डाउनलोड बटणावर दाबा, येथे नाही. 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">उत्कृष्ट! आता खालील \'सुरू ठेवा\' वर क्लिक करा आणि वेबसाइटवर जा 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">सरावाने सर्व काही साध्य होते, तुम्ही तिथे पोहोचत आहात! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">उत्तम! आता पुढे क्लिक करा आणि वेबसाइटवर जा 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">सरावाने माणूस पारंगत होतो आणि तुम्ही तिथे पोहोचत आहात 💪</string>
     <string name="home_download_instructions_download_button_toast_4">अजून इथे नाही... अजून इथे नाही... 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">ठीक आहे, मी तुमच्या समर्पणाचा आदर करतो 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">आता तुम्ही अधिकृत Morphe बटण परीक्षक आहात 🏅</string>
@@ -165,6 +186,9 @@
 सर्वोत्तम परिणामांसाठी, हे ॲप &lt;b&gt;full APK&lt;/b&gt; पॅच करण्याची शिफारस करते"</string>
     <string name="home_dialog_unsupported_version_dialog_title">समर्थित नसलेली आवृत्ती</string>
     <string name="home_dialog_unsupported_version_dialog_description">ही APK शिफारस केलेली app version नाही. पुढे गेल्यास app काम न करण्याची शक्यता आहे</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">हेच version चं वेगळं build आहे. पॅचिंगसाठी विशिष्ट build आवश्यक आहे</string>
     <string name="home_dialog_wrong_package_title">चुकीचे संकुल निवडले आहे</string>
     <string name="home_outdated_patches_dialog_message">मोबाइल डेटा सक्रिय आहे आणि पॅच अपडेट्स बंद आहेत</string>
     <string name="home_low_disk_space_dialog_message">फक्त %1$.2f GB मोफत स्टोरेज उपलब्ध आहे. पॅचिंगसाठी योग्यरित्या कार्य करण्यासाठी किमान %2$.2f GB मोफत जागा आवश्यक आहे.</string>
@@ -422,14 +446,21 @@
     <string name="all">सर्व</string>
     <string name="filter">गाळण</string>
     <string name="reset_all">सर्व रीसेट करा</string>
+    <string name="refresh">ताजे करा</string>
     <string name="back">मागे</string>
     <string name="next">पुढे</string>
     <string name="done">झाले</string>
     <string name="skip">वगळा</string>
+    <string name="sort">क्रमवारी लावा</string>
     <string name="select_all">सर्व निवडा</string>
     <string name="select_all_done">सर्व निवडले</string>
     <string name="deselect_all">सर्व निवड रद्द करा</string>
     <string name="deselect_all_done">सर्व निवड रद्द केली</string>
+    <string name="reorder_list">सूची पुन्हा क्रमवारी लावा</string>
+    <string name="reorder_list_hint">पुन्हा क्रमवारी लावण्यासाठी ड्रॅग करा</string>
+    <string name="reorder_done">क्रम जतन केला</string>
+    <string name="reset_order">क्रम रीसेट करा</string>
+    <string name="reset_order_done">ऑर्डर रीसेट केली</string>
     <string name="import_">आयात</string>
     <string name="unmount">डिमाउंट</string>
     <string name="share">शेअर करा</string>
@@ -439,6 +470,7 @@
     <string name="hide">लपवा</string>
     <string name="hidden">लपलेले</string>
     <string name="unhide">उघड करा</string>
+    <string name="unhide_done">दर्शविले</string>
     <string name="sources">स्त्रोत</string>
     <string name="imported_successfully">यशस्वीरित्या आयात केले</string>
     <!-- Onboarding coach marks -->

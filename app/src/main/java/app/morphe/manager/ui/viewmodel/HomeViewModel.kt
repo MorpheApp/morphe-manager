@@ -65,6 +65,8 @@ import java.util.zip.CRC32
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import kotlin.time.Clock
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 /** Bundle update status for snackbar display. */
 enum class BundleUpdateStatus {
@@ -78,8 +80,11 @@ enum class BundleUpdateStatus {
 data class UnsupportedVersionDialogState(
     val packageName: String,
     val version: String,
+    val versionCode: Long? = null,
     val recommendedVersion: AppTarget?,
-    val allCompatibleVersions: List<AppTarget> = emptyList(),
+    val compatibleVersionNames: List<String> = emptyList(),
+    val compatibleVersionDescriptions: Map<String, String> = emptyMap(),
+    val compatibleVersionCodes: Map<String, Set<Int>> = emptyMap(),
     /** True if the selected version is marked as experimental in the patch bundle. */
     val isExperimental: Boolean = false
 )
@@ -91,7 +96,9 @@ data class UnsupportedVersionDialogState(
 data class BundledAppTarget(
     val target: AppTarget,
     val bundleUid: Int,
-    val bundleName: String
+    val bundleName: String,
+    /** Allowed build codes for this version, sourced from the patch bundle. Null means no constraint. */
+    val buildCodes: Set<Int>? = null
 )
 
 /** Dialog state for wrong package warning. */
@@ -121,12 +128,14 @@ data class QuickPatchParams(
 data class SavedApkInfo(
     val fileName: String,
     val filePath: String,
-    val version: String
+    val version: String,
+    val versionCode: Long? = null
 )
 
 /** Installed APK information for display in APK selection dialog. */
 data class InstalledApkInfo(
     val version: String,
+    val versionCode: Long? = null,
     val apkPath: String,
     val splitPaths: List<String> = emptyList()
 ) {
@@ -270,6 +279,8 @@ class HomeViewModel(
     var showInstalledAppPickerDialog by mutableStateOf(false)
     var loadingInstalledApps by mutableStateOf(false)
     var installedAppsForPicker by mutableStateOf<List<InstalledAppPickerItem>>(emptyList())
+    // True while APK loading/processing runs in the background
+    var processingApkSelection by mutableStateOf(false)
 
     // Error/warning dialogs
     var showUnsupportedVersionDialog by mutableStateOf<UnsupportedVersionDialogState?>(null)
@@ -757,7 +768,7 @@ class HomeViewModel(
             try {
                 patchBundleRepository.updateCheck()
                 checkForManagerUpdates()
-                delay(500)
+                delay(500.milliseconds)
             } finally {
                 _isRefreshing.value = false
             }
@@ -861,7 +872,6 @@ class HomeViewModel(
      * is likely fully uploaded. If the release is newer than [MANAGER_UPDATE_SHOW_DELAY_SECONDS],
      * the banner is shown immediately; otherwise we wait out the remaining time.
      */
-    @OptIn(kotlin.time.ExperimentalTime::class)
     suspend fun checkForManagerUpdates() {
         uiSafe(app, R.string.failed_to_check_updates, "Failed to check for updates") {
             val update = morpheAPI.getAppUpdate() ?: return@uiSafe
@@ -872,7 +882,7 @@ class HomeViewModel(
             if (releaseAgeSeconds < MANAGER_UPDATE_SHOW_DELAY_SECONDS) {
                 val remainingMs = (MANAGER_UPDATE_SHOW_DELAY_SECONDS - releaseAgeSeconds) * 1_000L
                 Log.d(tag, "Manager update ${update.version} is ${releaseAgeSeconds}s old, waiting ${remainingMs / 1000}s before showing banner")
-                delay(remainingMs)
+                delay(remainingMs.milliseconds)
             }
 
             updatedManagerVersion = update.version
@@ -973,7 +983,7 @@ class HomeViewModel(
         val toastRepeater = launch(Dispatchers.Main) {
             try {
                 while (isActive) {
-                    delay(1_750)
+                    delay(1_750.milliseconds)
                     progressToast.show()
                 }
             } catch (_: CancellationException) {
@@ -1048,9 +1058,8 @@ class HomeViewModel(
         }
         patchBundleRepository.bundleUpdateProgress
             .dropWhile { it == null }
-            .filter { it == null }
-            .first()
-        delay(1_500)
+            .first { it == null }
+        delay(1.5.seconds)
         showSwipeGestureHint.value = true
     }
 
@@ -1092,28 +1101,44 @@ class HomeViewModel(
     val bundleAppMetadataFlow: StateFlow<Map<String, BundleAppMetadata>> =
         patchBundleRepository.appMetadata
 
+    private val _homePrefsFlow = combine(
+        homeAppButtonPrefs.hiddenPackages,
+        homeAppButtonPrefs.customOrder,
+    ) { hidden, order -> Pair(hidden, order) }
+
     /**
-     * Combined flow that produces the sorted list of home app items.
-     *
-     * Sorting order by display name:
-     * 1. Patched (installed) apps first
-     * 2. Non-patched apps
-     * Hidden apps are excluded.
-     */
+    * Sorted list of visible and hidden home app items.
+    *
+    * Default sort order:
+    * 1. Patched (installed) apps first
+    * 2. Apps with isPinnedByDefault = true
+    * 3. All other apps, alphabetical
+    *
+    * If the user has saved a custom order it is applied on top of the default sort.
+    * Hidden apps are excluded from [HomeAppState.visible].
+    */
     val homeAppState: StateFlow<HomeAppState?> = combine(
         patchBundleRepository.bundleState,
-        homeAppButtonPrefs.hiddenPackages,
+        _homePrefsFlow,
         installedAppRepository.getAll().onEach { apps ->
             apps.forEach { app ->
                 appDataResolver.invalidate(app.currentPackageName)
                 if (app.originalPackageName != app.currentPackageName) {
                     appDataResolver.invalidate(app.originalPackageName)
                 }
+                // Reconcile DB version with the actually-installed version.
+                // Skipped for MOUNT (PM reports the stock APK) and SAVED (no live install)
+                if (app.installType != InstallType.MOUNT && app.installType != InstallType.SAVED) {
+                    val liveVersion = pm.getPackageInfo(app.currentPackageName)?.versionName
+                    if (!liveVersion.isNullOrBlank() && liveVersion != app.version) {
+                        installedAppRepository.updateInstalledVersion(app, liveVersion)
+                    }
+                }
             }
         },
         _appUpdatesAvailable,
         _appStateTicker,
-    ) { bundleState, hiddenPackages, installedApps, updatesMap, _ ->
+    ) { bundleState, (hiddenPackages, customOrder), installedApps, updatesMap, _ ->
         val ready = bundleState as? PatchBundleRepository.BundleState.Ready
             ?: return@combine null
 
@@ -1168,12 +1193,18 @@ class HomeViewModel(
         val visiblePackages = packages.filter { it !in hiddenPackages }
         val visibleItems = ArrayList<HomeAppItem>(visiblePackages.size)
         for (pkg in visiblePackages) visibleItems.add(buildItem(pkg))
-        val visible = visibleItems.sortedWith(
+        val defaultSorted = visibleItems.sortedWith(
             compareByDescending<HomeAppItem> { it.installedApp != null }
                 .thenByDescending { it.isPinnedByDefault }
                 .thenByDescending { it.packageInfo != null }
                 .thenBy(String.CASE_INSENSITIVE_ORDER) { it.displayName }
         )
+        val visible = if (customOrder.isEmpty()) {
+            defaultSorted
+        } else {
+            val indexMap = customOrder.mapIndexed { i, pkg -> pkg to i }.toMap()
+            defaultSorted.sortedBy { indexMap[it.packageName] ?: Int.MAX_VALUE }
+        }
 
         val hiddenItems = ArrayList<HomeAppItem>(activeHidden.size)
         for (pkg in activeHidden) hiddenItems.add(buildItem(pkg))
@@ -1236,6 +1267,14 @@ class HomeViewModel(
      */
     fun getBundleDisplayName(uid: Int): String? =
         allBundlesInfoState.value[uid]?.name
+
+    fun saveAppOrder(packageNames: List<String>) {
+        homeAppButtonPrefs.saveOrder(packageNames)
+    }
+
+    fun resetAppOrder() {
+        homeAppButtonPrefs.resetOrder()
+    }
 
     /**
      * Hide an app from the home screen.
@@ -1438,7 +1477,7 @@ class HomeViewModel(
             savedJob?.await()?.let { pendingSavedApkInfo = it }
             installedJob?.await()?.let { (installed, info) ->
                 pendingTargetAppInstalled = installed
-                pendingInstalledApkInfo = info?.takeIf { isInstalledVersionCompatible(it.version) }
+                pendingInstalledApkInfo = info?.takeIf { isInstalledVersionCompatible(it.version, it.versionCode) }
             }
         }
 
@@ -1480,7 +1519,8 @@ class HomeViewModel(
             return SavedApkInfo(
                 fileName = file.name,
                 filePath = file.absolutePath,
-                version = version
+                version = version,
+                versionCode = resolvedData.packageInfo?.let { pm.getVersionCode(it) }
             )
         } catch (e: Exception) {
             Log.e(tag, "Failed to load saved APK info", e)
@@ -1492,10 +1532,13 @@ class HomeViewModel(
      * Returns true if [installedVersion] is listed in [pendingCompatibleVersions],
      * or if the compatible list is empty / contains an "any version" target.
      */
-    private fun isInstalledVersionCompatible(installedVersion: String): Boolean {
+    private fun isInstalledVersionCompatible(installedVersion: String, installedVersionCode: Long?): Boolean {
         val compatible = pendingCompatibleVersions
         if (compatible.isEmpty() || compatible.any { it.target.version == null }) return true
-        return compatible.any { it.target.version == installedVersion }
+        return compatible.any { entry ->
+            entry.target.version == installedVersion &&
+                (entry.buildCodes == null || installedVersionCode == null || installedVersionCode.toInt() in entry.buildCodes)
+        }
     }
 
     /**
@@ -1549,7 +1592,7 @@ class HomeViewModel(
             val splitPaths = appInfo.splitSourceDirs
                 ?.filter { File(it).exists() }
                 ?: emptyList()
-            true to InstalledApkInfo(version = version, apkPath = sourceDir, splitPaths = splitPaths)
+            true to InstalledApkInfo(version = version, versionCode = pm.getVersionCode(pkgInfo), apkPath = sourceDir, splitPaths = splitPaths)
         } catch (e: Exception) {
             Log.e(tag, "Failed to load installed app info", e)
             false to null
@@ -1572,44 +1615,50 @@ class HomeViewModel(
 
         viewModelScope.launch {
             showApkAvailabilityDialog = false
-
-            val selectedApp = withContext(Dispatchers.IO) {
-                try {
-                    if (installedInfo.isSplit) {
-                        val archive = File(filesystem.uiTempDir, "${packageName}_installed.apks")
-                        createApksArchive(installedInfo, archive)
-                        SelectedApp.Local(
-                            packageName = packageName,
-                            version = installedInfo.version,
-                            file = archive,
-                            temporary = true,
-                            fromInstalledDevice = true
-                        )
-                    } else {
-                        val source = File(installedInfo.apkPath)
-                        if (!source.exists()) return@withContext null
-                        val tempFile = File(filesystem.uiTempDir, "${packageName}_installed.apk")
-                        source.copyTo(tempFile, overwrite = true)
-                        SelectedApp.Local(
-                            packageName = packageName,
-                            version = installedInfo.version,
-                            file = tempFile,
-                            temporary = true,
-                            fromInstalledDevice = true
-                        )
+            processingApkSelection = true
+            try {
+                val selectedApp = withContext(Dispatchers.IO) {
+                    try {
+                        if (installedInfo.isSplit) {
+                            val archive = File(filesystem.uiTempDir, "${packageName}_installed.apks")
+                            createApksArchive(installedInfo, archive)
+                            SelectedApp.Local(
+                                packageName = packageName,
+                                version = installedInfo.version,
+                                versionCode = installedInfo.versionCode,
+                                file = archive,
+                                temporary = true,
+                                fromInstalledDevice = true
+                            )
+                        } else {
+                            val source = File(installedInfo.apkPath)
+                            if (!source.exists()) return@withContext null
+                            val tempFile = File(filesystem.uiTempDir, "${packageName}_installed.apk")
+                            source.copyTo(tempFile, overwrite = true)
+                            SelectedApp.Local(
+                                packageName = packageName,
+                                version = installedInfo.version,
+                                versionCode = installedInfo.versionCode,
+                                file = tempFile,
+                                temporary = true,
+                                fromInstalledDevice = true
+                            )
+                        }
+                    } catch (e: Exception) {
+                        Log.e(tag, "Failed to prepare installed APK", e)
+                        null
                     }
-                } catch (e: Exception) {
-                    Log.e(tag, "Failed to prepare installed APK", e)
-                    null
                 }
-            }
 
-            if (selectedApp != null) {
-                // Skip signature check: the installed APK may already be patched with our key
-                processSelectedAppIgnoringSignature(selectedApp)
-            } else {
-                app.toast(app.getString(R.string.home_invalid_apk_io_error))
-                cleanupPendingData()
+                if (selectedApp != null) {
+                    // Skip signature check: the installed APK may already be patched with our key
+                    processSelectedAppIgnoringSignature(selectedApp)
+                } else {
+                    app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                    cleanupPendingData()
+                }
+            } finally {
+                processingApkSelection = false
             }
         }
     }
@@ -1647,6 +1696,7 @@ class HomeViewModel(
                                     isSystemApp = (appInfo.flags and ApplicationInfo.FLAG_SYSTEM) != 0,
                                     info = InstalledApkInfo(
                                         version = version,
+                                        versionCode = pm.getVersionCode(pkgInfo),
                                         apkPath = sourceDir,
                                         splitPaths = splitPaths
                                     )
@@ -1673,41 +1723,50 @@ class HomeViewModel(
         showInstalledAppPickerDialog = false
         pendingAppName = item.label
         viewModelScope.launch {
-            val selectedApp = withContext(Dispatchers.IO) {
-                try {
-                    if (item.info.isSplit) {
-                        val archive = File(filesystem.uiTempDir, "${item.packageName}_installed.apks")
-                        createApksArchive(item.info, archive)
-                        SelectedApp.Local(
-                            packageName = item.packageName,
-                            version = item.info.version,
-                            file = archive,
-                            temporary = true,
-                            fromInstalledDevice = true
-                        )
-                    } else {
-                        val source = File(item.info.apkPath)
-                        if (!source.exists()) return@withContext null
-                        val tempFile = File(filesystem.uiTempDir, "${item.packageName}_installed.apk")
-                        source.copyTo(tempFile, overwrite = true)
-                        SelectedApp.Local(
-                            packageName = item.packageName,
-                            version = item.info.version,
-                            file = tempFile,
-                            temporary = true,
-                            fromInstalledDevice = true
-                        )
+            processingApkSelection = true
+            try {
+                val selectedApp = withContext(Dispatchers.IO) {
+                    try {
+                        if (item.info.isSplit) {
+                            val archive = File(filesystem.uiTempDir, "${item.packageName}_installed.apks")
+                            createApksArchive(item.info, archive)
+                            SelectedApp.Local(
+                                packageName = item.packageName,
+                                version = item.info.version,
+                                versionCode = item.info.versionCode,
+                                file = archive,
+                                temporary = true,
+                                fromInstalledDevice = true
+                            )
+                        } else {
+                            val source = File(item.info.apkPath)
+                            if (!source.exists()) return@withContext null
+                            val tempFile = File(filesystem.uiTempDir, "${item.packageName}_installed.apk")
+                            source.copyTo(tempFile, overwrite = true)
+                            SelectedApp.Local(
+                                packageName = item.packageName,
+                                version = item.info.version,
+                                versionCode = item.info.versionCode,
+                                file = tempFile,
+                                temporary = true,
+                                fromInstalledDevice = true
+                            )
+                        }
+                    } catch (e: Exception) {
+                        Log.e(tag, "Failed to prepare APK from picker", e)
+                        null
                     }
-                } catch (e: Exception) {
-                    Log.e(tag, "Failed to prepare APK from picker", e)
-                    null
                 }
-            }
-            if (selectedApp != null) {
-                processSelectedAppIgnoringSignature(selectedApp)
-            } else {
-                app.toast(app.getString(R.string.home_invalid_apk_io_error))
-                cleanupPendingData()
+                if (selectedApp != null) {
+                    // Installed APK may be signed with our keystore - skip signature check.
+                    // Version/versionCode check still runs via processSelectedApp.
+                    processSelectedApp(selectedApp, skipSplitCheck = true)
+                } else {
+                    app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                    cleanupPendingData()
+                }
+            } finally {
+                processingApkSelection = false
             }
         }
     }
@@ -1757,7 +1816,7 @@ class HomeViewModel(
             }
             // Wait for patches to be ready. Cap at 30 s to avoid hanging forever when
             // no patch sources are configured (installedAppsLoading never clears in that case)
-            withTimeoutOrNull(30_000L) {
+            withTimeoutOrNull(30.seconds) {
                 snapshotFlow { installedAppsLoading }.first { !it }
             }
             handleApkSelection(uri)
@@ -1774,15 +1833,20 @@ class HomeViewModel(
         }
 
         viewModelScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                loadLocalApk(app, uri)
-            }
+            processingApkSelection = true
+            try {
+                val result = withContext(Dispatchers.IO) {
+                    loadLocalApk(app, uri)
+                }
 
-            when (result) {
-                is ApkLoadResult.Success -> processSelectedApp(result.app)
-                is ApkLoadResult.Unreadable -> app.toast(app.getString(R.string.home_invalid_apk_unreadable))
-                is ApkLoadResult.NotAnApk -> app.toast(app.getString(R.string.home_invalid_apk_not_an_apk))
-                is ApkLoadResult.IoError -> app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                when (result) {
+                    is ApkLoadResult.Success -> processSelectedApp(result.app)
+                    is ApkLoadResult.Unreadable -> app.toast(app.getString(R.string.home_invalid_apk_unreadable))
+                    is ApkLoadResult.NotAnApk -> app.toast(app.getString(R.string.home_invalid_apk_not_an_apk))
+                    is ApkLoadResult.IoError -> app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                }
+            } finally {
+                processingApkSelection = false
             }
         }
     }
@@ -1802,37 +1866,42 @@ class HomeViewModel(
 
         viewModelScope.launch {
             showApkAvailabilityDialog = false
+            processingApkSelection = true
+            try {
+                // Create SelectedApp from saved APK file
+                val selectedApp = withContext(Dispatchers.IO) {
+                    try {
+                        val file = File(savedInfo.filePath)
+                        if (!file.exists()) {
+                            app.toast(app.getString(R.string.home_app_info_repatch_no_original_apk))
+                            return@withContext null
+                        }
 
-            // Create SelectedApp from saved APK file
-            val selectedApp = withContext(Dispatchers.IO) {
-                try {
-                    val file = File(savedInfo.filePath)
-                    if (!file.exists()) {
-                        app.toast(app.getString(R.string.home_app_info_repatch_no_original_apk))
-                        return@withContext null
+                        // Mark as used
+                        originalApkRepository.markUsed(packageName)
+
+                        SelectedApp.Local(
+                            packageName = packageName,
+                            version = savedInfo.version,
+                            versionCode = savedInfo.versionCode,
+                            file = file,
+                            temporary = false // Don't delete saved APK files
+                        )
+                    } catch (e: Exception) {
+                        Log.e(tag, "Failed to load saved APK", e)
+                        null
                     }
-
-                    // Mark as used
-                    originalApkRepository.markUsed(packageName)
-
-                    SelectedApp.Local(
-                        packageName = packageName,
-                        version = savedInfo.version,
-                        file = file,
-                        temporary = false // Don't delete saved APK files
-                    )
-                } catch (e: Exception) {
-                    Log.e(tag, "Failed to load saved APK", e)
-                    null
                 }
-            }
 
-            if (selectedApp != null) {
-                // The saved file is a merged mono-APK signed with our keystore.
-                // Skip signature verification to avoid a false "invalid signature" dialog
-                processSelectedAppIgnoringSignature(selectedApp)
-            } else {
-                cleanupPendingData()
+                if (selectedApp != null) {
+                    // Saved file may be signed with our keystore - skip signature check.
+                    // Version/versionCode check still runs via processSelectedApp.
+                    processSelectedApp(selectedApp, skipSplitCheck = true)
+                } else {
+                    cleanupPendingData()
+                }
+            } finally {
+                processingApkSelection = false
             }
         }
     }
@@ -1925,7 +1994,7 @@ class HomeViewModel(
         // Scoped.universal = compatiblePackages == null (applies to any package/version).
         val bundles = withContext(Dispatchers.IO) {
             patchBundleRepository
-                .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
+                .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version, selectedApp.versionCode)
                 .first()
         }
 
@@ -1967,13 +2036,24 @@ class HomeViewModel(
 
         if (versionMismatch && !allowIncompatible) {
             val recommendedVersion = recommendedVersions[selectedApp.packageName]
-            val allVersions = compatibleVersions[selectedApp.packageName]?.map { it.target } ?: emptyList()
+            val allBundled = compatibleVersions[selectedApp.packageName] ?: emptyList()
             pendingSelectedApp = selectedApp
             showUnsupportedVersionDialog = UnsupportedVersionDialogState(
                 packageName = selectedApp.packageName,
                 version = selectedApp.version ?: "unknown",
+                versionCode = selectedApp.versionCode,
                 recommendedVersion = recommendedVersion,
-                allCompatibleVersions = allVersions,
+                compatibleVersionNames = allBundled.mapNotNull { it.target.version },
+                compatibleVersionDescriptions = allBundled.mapNotNull { b ->
+                    val v = b.target.version ?: return@mapNotNull null
+                    val d = b.target.description ?: return@mapNotNull null
+                    v to d
+                }.toMap(),
+                compatibleVersionCodes = allBundled.mapNotNull { b ->
+                    val v = b.target.version ?: return@mapNotNull null
+                    val codes = b.buildCodes ?: return@mapNotNull null
+                    v to codes
+                }.toMap(),
                 isExperimental = isVersionExperimental
             )
             cleanupPendingData(keepSelectedApp = true, keepBundleUid = true)
@@ -1985,13 +2065,24 @@ class HomeViewModel(
         // - Experimental mode OFF → UnsupportedVersionWarningDialog
         if (isVersionExperimental && !allowIncompatible) {
             val recommendedVersion = recommendedVersions[selectedApp.packageName]
-            val allVersions = compatibleVersions[selectedApp.packageName]?.map { it.target } ?: emptyList()
+            val allBundled = compatibleVersions[selectedApp.packageName] ?: emptyList()
             pendingSelectedApp = selectedApp
             val state = UnsupportedVersionDialogState(
                 packageName = selectedApp.packageName,
                 version = selectedApp.version ?: "unknown",
+                versionCode = selectedApp.versionCode,
                 recommendedVersion = recommendedVersion,
-                allCompatibleVersions = allVersions,
+                compatibleVersionNames = allBundled.mapNotNull { it.target.version },
+                compatibleVersionDescriptions = allBundled.mapNotNull { b ->
+                    val v = b.target.version ?: return@mapNotNull null
+                    val d = b.target.description ?: return@mapNotNull null
+                    v to d
+                }.toMap(),
+                compatibleVersionCodes = allBundled.mapNotNull { b ->
+                    val v = b.target.version ?: return@mapNotNull null
+                    val codes = b.buildCodes ?: return@mapNotNull null
+                    v to codes
+                }.toMap(),
                 isExperimental = true
             )
             if (isExperimentalModeEnabled) {
@@ -2034,7 +2125,7 @@ class HomeViewModel(
         allowIncompatible: Boolean
     ) {
         val allBundles = patchBundleRepository
-            .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
+            .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version, selectedApp.versionCode)
             .first()
 
         if (allBundles.isEmpty()) {
@@ -2585,6 +2676,8 @@ class HomeViewModel(
     ): Map<String, List<BundledAppTarget>> {
         // packageName → bundleUid → version → AppTarget
         val targetsByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, AppTarget>>>()
+        // packageName → bundleUid → version → build codes (parallel to targetsByPackage)
+        val codesByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, Set<Int>>>>()
 
         bundleInfo.forEach { (bundleUid, info) ->
             if (enabledBundleUids.isNotEmpty() && bundleUid !in enabledBundleUids) return@forEach
@@ -2595,19 +2688,23 @@ class HomeViewModel(
                     val bundleMap = targetsByPackage
                         .getOrPut(packageName) { mutableMapOf() }
                         .getOrPut(bundleUid) { mutableMapOf() }
+                    val codesMap = codesByPackage
+                        .getOrPut(packageName) { mutableMapOf() }
+                        .getOrPut(bundleUid) { mutableMapOf() }
 
                     pkg.versions?.forEach { version ->
                         val isExperimental = pkg.experimentalVersions?.contains(version) == true
                         // If a version appears in multiple patches of the same bundle, prefer stable
                         if (version !in bundleMap || !isExperimental) {
-                            val description = pkg.versionDescriptions?.get(version)
-                            val minSdk = pkg.versionMinSdks?.get(version)
                             bundleMap[version] = AppTarget(
                                 version = version,
                                 isExperimental = isExperimental,
-                                description = description,
-                                minSdk = minSdk,
+                                description = pkg.versionDescriptions?.get(version),
+                                minSdk = pkg.versionMinSdks?.get(version),
                             )
+                            pkg.versionCodes?.get(version)?.takeIf { it.isNotEmpty() }?.let {
+                                codesMap[version] = it.toSet()
+                            }
                         }
                     }
                 }
@@ -2616,17 +2713,19 @@ class HomeViewModel(
 
         // Flatten: bundles ordered by display name, versions newest→oldest within each bundle
         return targetsByPackage
-            .mapValues { (_, byBundle) ->
+            .mapValues { (packageName, byBundle) ->
                 byBundle.entries
                     .sortedWith(compareBy({ it.key != DEFAULT_SOURCE_UID }, { bundleNames[it.key] ?: "" }))
                     .flatMap { (uid, versionMap) ->
+                        val codesForBundle = codesByPackage[packageName]?.get(uid)
                         versionMap.values
                             .sortedDescending()
                             .map { target ->
                                 BundledAppTarget(
                                     target = target,
                                     bundleUid = uid,
-                                    bundleName = bundleNames[uid] ?: "Bundle $uid"
+                                    bundleName = bundleNames[uid] ?: "Bundle $uid",
+                                    buildCodes = target.version?.let { codesForBundle?.get(it) }
                                 )
                             }
                     }
@@ -2640,7 +2739,6 @@ class HomeViewModel(
      * the ViewModel while a temporary APK file is still held in pendingSelectedApp.
      */
     override fun onCleared() {
-        super.onCleared()
         val pending = pendingSelectedApp
         if (pending is SelectedApp.Local && pending.temporary) {
             pending.file.delete()
@@ -2711,6 +2809,7 @@ class HomeViewModel(
                 SelectedApp.Local(
                     packageName = packageInfo.packageName,
                     version = packageInfo.versionName ?: "unknown",
+                    versionCode = pm.getVersionCode(packageInfo),
                     file = tempFile,
                     temporary = true
                 )

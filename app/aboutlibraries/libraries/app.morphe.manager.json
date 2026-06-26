@@ -2,5 +2,10 @@
   "uniqueId": "app.morphe.manager",
   "name": "Morphe Manager",
   "developers": [{"name": "Morphe"}],
+  "website": "https://Morphe.software",
+  "scm": {
+    "connection": "scm:git:https://github.com/MorpheApp/morphe-manager.git",
+    "url": "https://github.com/MorpheApp/morphe-manager"
+  },
   "licenses": ["GPL-3.0-only"]
 }

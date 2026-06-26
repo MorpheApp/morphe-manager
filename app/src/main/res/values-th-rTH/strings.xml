@@ -53,6 +53,27 @@
     <string name="home_greeting_9">ช่วยแอปพลิเคชันปรับปรุงให้ดีขึ้นตั้งแต่วันนี้</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">สนับสนุนโดยกาแฟหนึ่งแก้วกับแพตซ์ที่มีคุณภาพ</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">ตื่นเช้าและอัปเดต</string>
+    <string name="home_greeting_morning_2">อรุณสวัสดิ์! แอปจะไม่ทำการอัปเดตเองได้</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">ช่วงบ่ายง่วงๆ? อัปเดตอะไรสักอย่างหน่อยสิ</string>
+    <string name="home_greeting_afternoon_2">หลังอาหารกลางวันก็อัปเดตแอปแบบนี้แหละ</string>
+    <string name="home_greeting_afternoon_3">กะกลางวัน: อัปเดตแอป</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">สวัสดีตอนเย็น! การอัปเดตแอปตอนเย็นให้ความรู้สึกที่แตกต่าง</string>
+    <string name="home_greeting_evening_2">กำลังพักผ่อน? อัปเดตแอปก่อนเลย</string>
+    <string name="home_greeting_evening_3">เลิกงานแล้ว? อัปเดตอะไรก่อนก็ได้</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">ยังไม่นอนเหรอ? แอปที่ต้องอัปเดตก็ยังรออยู่</string>
+    <string name="home_greeting_late_night_2">ช่วงดึกมาอัปเดตแอป? นับถือ</string>
+    <string name="home_greeting_late_night_3">โหมดนกกลางคืน: เปิดใช้งานแล้ว</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">ช่วงเวลาอัปเดตแอปสูงสุด… ว่ากันว่านะ</string>
+    <string name="home_greeting_super_late_2">นอนไม่หลับ? อัปเดตอะไรสักอย่างสิ</string>
+    <string name="home_greeting_super_late_3">ตอนนี้ก็อยู่ตื่นแล้วอัปเดตแอปเลยก็ได้</string>
+    <string name="home_greeting_super_late_4">คุณกับเซิร์ฟเวอร์ต่างก็ยังตื่นอยู่</string>
+    <string name="home_greeting_super_late_5">ตื่นตอนกลางคืนและยังทำงานได้</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">จัดการแหล่งที่มา</string>
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">ไม่รองรับ</string>
     <string name="home_apk_availability_yes">ใช่, ช่วยฉันค้นหา APK</string>
     <string name="home_apk_availability_no">ไม่, ฉันมี APK แล้ว</string>
-    <string name="home_apk_use_saved_with_version">ใช้ APK ที่ถูกบันทึก (เวอร์ชัน %s)</string>
-    <string name="home_apk_use_installed_with_version">ใช้ APK ที่ติดตั้งไว้ (v%s)</string>
+    <string name="home_apk_use_saved">ใช้ APK ที่บันทึกไว้</string>
+    <string name="home_apk_use_installed">ใช้ APK ที่ติดตั้งไว้</string>
     <string name="home_app_info_no_saved_apk">ไม่มี APK ที่ถูกบันทึก การแพตซ์จะต้องเลือกไฟล์ APK อีกครั้ง</string>
     <string name="home_version_requires_android">ต้องใช้ Android %s ขึ้นไป</string>
     <string name="home_apk_no_compatible_versions_title">ไม่รองรับบนอุปกรณ์นี้</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">กดปุ่ม \'%s\' ด้านล่าง</string>
     <string name="home_download_instructions_step2_part1">เลื่อนลงมาที่หน้าเว็บแล้วกดปุ่ม</string>
     <string name="home_download_instructions_download_button_toast">กดดาวน์โหลดบนเว็บไซต์ อย่ากดที่นี่ 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">ยอดเยี่ยม! ตอนนี้คลิกดำเนินการต่อด้านล่างและไปที่เว็บไซต์ 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">การฝึกฝนทำให้เกิดความสมบูรณ์แบบ คุณทำได้ดีขึ้นเรื่อยๆ แล้ว! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">เยี่ยมเลย! ตอนนี้คลิกดำเนินการต่อแล้วไปที่เว็บไซต์ 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">การฝึกฝนทำให้สมบูรณ์แบบ และคุณก็กำลังไปถึงจุดนั้น 💪</string>
     <string name="home_download_instructions_download_button_toast_4">ยังไม่มา… ยังไม่มา… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">ตกลง ฉันเคารพในการทุ่มเท 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">ตอนนี้คุณเป็นผู้ทดสอบปุ่ม Morphe อย่างเป็นทางการแล้ว 🏅</string>
@@ -184,6 +205,9 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">ดำเนินต่อไป</string>
     <string name="home_dialog_unsupported_version_compatible_versions">เวอร์ชันที่เข้ากันได้:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">ไม่รองรับ</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">บิลด์ %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">นี่เป็นบิลด์ที่แตกต่างของเวอร์ชันเดียวกัน การอัปเดตต้องการบิลด์ที่เฉพาะเจาะจง</string>
     <string name="home_dialog_wrong_package_title">แพ็กเกจที่เลือกไม่ถูกต้อง</string>
     <string name="home_dialog_wrong_package_description">ไฟล์ APK ที่เลือกไว้ ไม่ใช่แอปพลิเคชันสำหรับทำการแพตซ์</string>
     <string name="home_dialog_expected_package">แพคเกจที่คาดหวัง:</string>
@@ -732,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">คำเตือน</string>
     <string name="error_">ขยาย</string>
     <string name="retry">ลองใหม่อีกครั้ง</string>
+    <string name="refresh">รีเฟรช</string>
     <string name="add">เพิ่ม</string>
     <string name="close">ปิด</string>
     <string name="back">ย้อนกลับ</string>
@@ -748,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">ดู</string>
     <string name="search">ค้นหา</string>
     <string name="search_no_results">เปิด</string>
+    <string name="sort">เรียงลำดับ</string>
     <string name="any_version">เวอร์ชันใดก็ได้</string>
     <string name="enabled">เปิดใช้งานแล้ว</string>
     <string name="disabled">ปิดการใช้งานอยู่</string>
@@ -757,6 +783,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">เลือกทั้งหมดแล้ว</string>
     <string name="deselect_all">ยกเลิกการเลือกทั้งหมด</string>
     <string name="deselect_all_done">ยกเลิกการเลือกทั้งหมดแล้ว</string>
+    <string name="reorder_list">จัดเรียงรายการใหม่</string>
+    <string name="reorder_list_hint">ลากเพื่อจัดเรียงใหม่</string>
+    <string name="reorder_done">บันทึกการจัดเรียงแล้ว</string>
+    <string name="reset_order">รีเซ็ตการจัดเรียง</string>
+    <string name="reset_order_done">รีเซ็ตคำสั่งซื้อ</string>
     <string name="rename">เปลี่ยนชื่อ</string>
     <string name="import_">นำเข้า</string>
     <string name="export">ส่งออก</string>
@@ -791,6 +822,7 @@ morphe_header_custom_dark.png
     <string name="hide">ซ่อน</string>
     <string name="hidden">ซ่อน</string>
     <string name="unhide">แสดง</string>
+    <string name="unhide_done">แสดงแล้ว</string>
     <string name="logs">บันทึก</string>
     <string name="sources">แหล่งที่มา</string>
     <string name="installing_ellipsis">กำลังติดตั้ง…</string>

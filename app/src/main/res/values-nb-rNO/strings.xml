@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Sparer apper fra seg selv siden i dag</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Drevet av koffein og gode patcher</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Stå opp og oppdater</string>
+    <string name="home_greeting_morning_2">God morgen! Apper oppdaterer seg ikke av seg selv</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Ettermiddagstrøtt? Oppdater noe</string>
+    <string name="home_greeting_afternoon_2">Etterlunsjpausing er annerledes</string>
+    <string name="home_greeting_afternoon_3">Ettermiddagsskiftet: patch-utgave</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">God kveld! Kveldspatching er annerledes</string>
+    <string name="home_greeting_evening_2">Slapper av? Patc en app først</string>
+    <string name="home_greeting_evening_3">Slutter for dagen? Patc noe først</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Våken fortsatt? Appene som trenger patching er det også</string>
+    <string name="home_greeting_late_night_2">Sen natt patch-økt? Respekt</string>
+    <string name="home_greeting_late_night_3">Nattuglemodus: aktivert</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Høysesong for patching… visstnok</string>
+    <string name="home_greeting_super_late_2">Kan ikke sove? Patc noe</string>
+    <string name="home_greeting_super_late_3">På dette tidspunktet, bare bli våken og patc</string>
+    <string name="home_greeting_super_late_4">Du og serverne, begge våkne</string>
+    <string name="home_greeting_super_late_5">Nattaktiv og produktiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patchkilder</string>
     <string name="sources_management_open_in_browser">Åpne i nettleser</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Inkompatibel</string>
     <string name="home_apk_availability_yes">Ja, hjelp meg å finne en APK-fil</string>
     <string name="home_apk_availability_no">Nei, jeg har allerede en APK-fil</string>
-    <string name="home_apk_use_saved_with_version">Bruk lagret APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Bruk installert APK (v%s)</string>
+    <string name="home_apk_use_saved">Bruk lagret APK</string>
+    <string name="home_apk_use_installed">Bruk installert APK</string>
     <string name="home_app_info_no_saved_apk">Ingen lagret APK. Patching krever at du velger APK-filen på nytt</string>
     <string name="home_version_requires_android">Krever Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ikke støttes på denne enheten</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Trykk på \'%s\'-knappen nedenfor</string>
     <string name="home_download_instructions_step2_part1">Rull nedover nettsiden og trykk på</string>
     <string name="home_download_instructions_download_button_toast">Trykk på nedlastingsknappen på nettsiden, og ikke her 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Perfekt! Klikk fortsett nedenfor og gå til nettstedet 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Øvelse gjør mester, du er på vei! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Flott! Klikk nå fortsett og gå til nettsiden 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Øvelse gjør mester, og du er på vei 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Fortsatt ikke her… fortsatt ikke her… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, jeg respekterer dedikasjonen 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Du er nå en offisiell Morphe-knapptester 🏅</string>
@@ -184,6 +205,9 @@ For de beste resultatene anbefaler denne appen å patche en &lt;b&gt;full APK-fi
     <string name="home_dialog_unsupported_version_dialog_proceed">Fortsett uansett</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatible versjoner:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Ikke støttet</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Bygg %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Dette er en annen build av samme versjon. Patchene krever en spesifikk build</string>
     <string name="home_dialog_wrong_package_title">Feil pakke valgt</string>
     <string name="home_dialog_wrong_package_description">Den valgte APK-en er ikke for applikasjonen du hadde tenkt å patche</string>
     <string name="home_dialog_expected_package">Forventet pakke:</string>
@@ -732,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">Advarsel</string>
     <string name="error_">Feil</string>
     <string name="retry">Prøv igjen</string>
+    <string name="refresh">Oppdater</string>
     <string name="add">Legg til</string>
     <string name="close">Lukk</string>
     <string name="back">Tilbake</string>
@@ -748,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">Vis</string>
     <string name="search">Søk</string>
     <string name="search_no_results">Ingen resultater funnet</string>
+    <string name="sort">Sorter</string>
     <string name="any_version">Hvilken som helst</string>
     <string name="enabled">Aktivert</string>
     <string name="disabled">Deaktivert</string>
@@ -757,6 +783,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">Alle valgt</string>
     <string name="deselect_all">Fjern markeringen fra alle</string>
     <string name="deselect_all_done">Alle fjernet valgt</string>
+    <string name="reorder_list">Omorganisér liste</string>
+    <string name="reorder_list_hint">Dra for å omorganisere</string>
+    <string name="reorder_done">Rekkefølge lagret</string>
+    <string name="reset_order">Tilbakestill rekkefølge</string>
+    <string name="reset_order_done">Bestilling tilbakestilt</string>
     <string name="rename">Gi nytt navn</string>
     <string name="import_">Importer</string>
     <string name="export">Eksporter</string>
@@ -791,6 +822,7 @@ morphe_header_custom_dark.png
     <string name="hide">Skjul</string>
     <string name="hidden">Skjult</string>
     <string name="unhide">Vis</string>
+    <string name="unhide_done">Vises</string>
     <string name="logs">Logger</string>
     <string name="sources">Kilder</string>
     <string name="installing_ellipsis">Installerer…</string>

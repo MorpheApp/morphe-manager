@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.Image
@@ -40,7 +39,6 @@ import org.koin.androidx.compose.koinViewModel
  * About section.
  * Contains app info and website sharing.
  */
-@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun AboutSection(
     onAboutClick: () -> Unit,
@@ -49,6 +47,8 @@ fun AboutSection(
     updateViewModel: UpdateViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
+    val noNetworkToast = stringResource(R.string.no_network_toast)
+    val shareWebsiteChooserTitle = stringResource(R.string.settings_system_share_website)
 
     Column {
         // App info item
@@ -86,7 +86,7 @@ fun AboutSection(
             description = stringResource(R.string.changelog_description),
             onClick = {
                 if (!updateViewModel.isConnected) {
-                    context.toast(context.getString(R.string.no_network_toast))
+                    context.toast(noNetworkToast)
                     return@SettingsItem
                 }
                 onChangelogClick()
@@ -109,7 +109,7 @@ fun AboutSection(
                     context.startActivity(
                         Intent.createChooser(
                             shareIntent,
-                            context.getString(R.string.settings_system_share_website)
+                            shareWebsiteChooserTitle
                         )
                     )
                 }.onFailure {

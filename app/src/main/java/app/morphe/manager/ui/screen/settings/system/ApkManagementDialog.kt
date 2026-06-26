@@ -5,8 +5,6 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -40,7 +38,6 @@ import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.util.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -48,17 +45,13 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import java.io.File
 
-/**
- * Type of APKs to manage.
- */
+/** Type of APKs to manage. */
 enum class ApkManagementType {
     PATCHED,
     ORIGINAL
 }
 
-/**
- * Data class representing an APK item for display.
- */
+/** Data class representing an APK item for display. */
 data class ApkItemData(
     val packageName: String,
     val displayName: String,
@@ -68,9 +61,7 @@ data class ApkItemData(
     val installType: InstallType? = null
 )
 
-/**
- * Data class representing an APK item with reference to InstalledApp.
- */
+/** Data class representing an APK item with reference to InstalledApp. */
 private data class ApkItemDataWithApp(
     val packageName: String,
     val displayName: String,
@@ -93,36 +84,26 @@ private data class ApkItemDataWithApp(
 /**
  * Universal dialog for managing APK files (patched or original).
  */
-@SuppressLint("LocalContextGetResourceValueCheck")
 @Composable
 fun ApkManagementDialog(
     type: ApkManagementType,
     onDismissRequest: () -> Unit
 ) {
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-
     when (type) {
-        ApkManagementType.PATCHED -> PatchedApksContent(
-            onDismissRequest = onDismissRequest,
-            context = context,
-            scope = scope
-        )
-        ApkManagementType.ORIGINAL -> OriginalApksContent(
-            onDismissRequest = onDismissRequest,
-            context = context,
-            scope = scope
-        )
+        ApkManagementType.PATCHED -> PatchedApksContent(onDismissRequest = onDismissRequest)
+        ApkManagementType.ORIGINAL -> OriginalApksContent(onDismissRequest = onDismissRequest)
     }
 }
 
 @Composable
 private fun PatchedApksContent(
     onDismissRequest: () -> Unit,
-    context: Context,
-    scope: CoroutineScope,
     installViewModel: InstallViewModel = koinViewModel()
 ) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val saveApkSuccessText = stringResource(R.string.save_apk_success)
+    val patchedApksDeletedText = stringResource(R.string.settings_system_patched_apks_deleted)
     val repository: InstalledAppRepository = koinInject()
     val filesystem: Filesystem = koinInject()
     val appDataResolver: AppDataResolver = koinInject()
@@ -184,7 +165,7 @@ private fun PatchedApksContent(
                         }
                     }
                 }
-                context.toast(context.getString(R.string.save_apk_success))
+                context.toast(saveApkSuccessText)
             }
         }
     }
@@ -260,7 +241,7 @@ private fun PatchedApksContent(
             onConfirm = {
                 scope.launch {
                     repository.delete(itemToDelete.value!!)
-                    context.toast(context.getString(R.string.settings_system_patched_apks_deleted))
+                    context.toast(patchedApksDeletedText)
                     itemToDelete.value = null
                 }
             }
@@ -270,10 +251,12 @@ private fun PatchedApksContent(
 
 @Composable
 private fun OriginalApksContent(
-    onDismissRequest: () -> Unit,
-    context: Context,
-    scope: CoroutineScope
+    onDismissRequest: () -> Unit
 ) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val saveApkSuccessText = stringResource(R.string.save_apk_success)
+    val originalApksDeletedText = stringResource(R.string.settings_system_original_apks_deleted)
     val repository: OriginalApkRepository = koinInject()
     val appDataResolver: AppDataResolver = koinInject()
 
@@ -326,7 +309,7 @@ private fun OriginalApksContent(
                         }
                     }
                 }
-                context.toast(context.getString(R.string.save_apk_success))
+                context.toast(saveApkSuccessText)
             }
         }
     }
@@ -379,7 +362,7 @@ private fun OriginalApksContent(
             onConfirm = {
                 scope.launch {
                     repository.delete(itemToDelete.value!!)
-                    context.toast(context.getString(R.string.settings_system_original_apks_deleted))
+                    context.toast(originalApksDeletedText)
                     itemToDelete.value = null
                 }
             }

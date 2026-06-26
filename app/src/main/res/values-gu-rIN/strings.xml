@@ -42,6 +42,11 @@
     <string name="home_greeting_9">આજથી એપ્સને પોતાની પાસેથી સેવ કરી રહ્યા છીએ</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">કેફીન અને સારા પેચો દ્વારા સંચાલિત</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <!-- Evening greetings (17:00–21:59) -->
+    <!-- Late night greetings (22:00–23:59) -->
+    <!-- Super late night greetings (0:00–4:59) -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">પેચ સ્ત્રોતો</string>
     <string name="sources_management_open_in_browser">બ્રાઉઝરમાં ખોલો</string>
@@ -73,6 +78,7 @@
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">અસમર્થિત સંસ્કરણ</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">ઘરની ધોરાજી ચલાવો</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_wrong_package_title">ખોટું પેકેજ પસંદ કર્યું</string>
     <string name="home_dialog_expected_package">અપેક્ષિત પેકેજ:</string>
     <string name="home_dialog_selected_package">પસંદ કરેલ પેકેજ:</string>

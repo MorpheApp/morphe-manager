@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Salvando aplicaciones de sí mismas desde hoy</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Impulsado por cafeína y buenos parches</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Levántate y parchea</string>
+    <string name="home_greeting_morning_2">¡Buenos días! Las aplicaciones no se parchean solas</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">¿Bajón de la tarde? Parchea algo</string>
+    <string name="home_greeting_afternoon_2">El parcheo después de almorzar se siente diferente</string>
+    <string name="home_greeting_afternoon_3">La jornada de la tarde: edición parcheo</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">¡Buenas noches! Los parches nocturnos son diferentes</string>
+    <string name="home_greeting_evening_2">¿Relajándote? Parchea una app primero</string>
+    <string name="home_greeting_evening_3">¿Terminando el trabajo? Parchea algo primero</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">¿Sigues despierto? También lo están las apps que necesitan un parcheo</string>
+    <string name="home_greeting_late_night_2">¿Sesión de parcheo nocturna? Respeto</string>
+    <string name="home_greeting_late_night_3">Modo búho nocturno: activado</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Horas pico de parcheo… supuestamente</string>
+    <string name="home_greeting_super_late_2">¿No puedes dormir? Parchea algo</string>
+    <string name="home_greeting_super_late_3">A estas alturas, quédate despierto y parchea</string>
+    <string name="home_greeting_super_late_4">Tú y los servidores, ambos despiertos</string>
+    <string name="home_greeting_super_late_5">Nocturno y productivo</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fuentes de parches</string>
     <string name="sources_management_open_in_browser">Abrir en el navegador</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Incompatible</string>
     <string name="home_apk_availability_yes">Sí, ayúdame a encontrar un APK</string>
     <string name="home_apk_availability_no">No, ya tengo un APK</string>
-    <string name="home_apk_use_saved_with_version">Usar APK guardado (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Usar APK instalada (v%s)</string>
+    <string name="home_apk_use_saved">Usar APK guardado</string>
+    <string name="home_apk_use_installed">Usar APK instalado</string>
     <string name="home_app_info_no_saved_apk">No hay APK guardado. Para aplicar los parches será necesario seleccionar el archivo APK nuevamente.</string>
     <string name="home_version_requires_android">Requiere Android %s o superior</string>
     <string name="home_apk_no_compatible_versions_title">No compatible en este dispositivo</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Pulsa el botón \"%s\" de abajo</string>
     <string name="home_download_instructions_step2_part1">Desplázate hacia abajo en la página web y pulsa</string>
     <string name="home_download_instructions_download_button_toast">Pulsa descargar en el sitio web, y no aquí 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">¡Perfecto! Ahora pulsa en \"Continuar\" abajo y ve al sitio web 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">La práctica hace al maestro, ¡ya casi lo logras! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">¡Genial! Ahora haz clic en \"Continuar\" y ve al sitio web 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">La práctica hace al maestro y estás en camino 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Todavía no está aquí… todavía no está aquí… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">De acuerdo, respeto la dedicación 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Ahora eres un probador oficial del botón Morphe 🏅</string>
@@ -184,6 +205,9 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="home_dialog_unsupported_version_dialog_proceed">Continuar de todos modos</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versiones compatibles:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">No soportado</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Compilación %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Esta es una compilación diferente de la misma versión. Los parches requieren una compilación específica</string>
     <string name="home_dialog_wrong_package_title">Paquete incorrecto seleccionado</string>
     <string name="home_dialog_wrong_package_description">El APK seleccionado no es para la aplicación que pretendías parchear</string>
     <string name="home_dialog_expected_package">Paquete esperado:</string>
@@ -292,6 +316,10 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <string name="patcher_failed_subtitle">Consulta los detalles del error a continuación</string>
     <string name="patcher_failed_dialog_title">Fallo al aplicar el parche</string>
     <string name="patcher_unknown_error">Ocurrió un error desconocido</string>
+    <string name="patcher_split_step_extracting">Extrayendo APKs divididos</string>
+    <string name="patcher_split_step_merging">Combinando %s</string>
+    <string name="patcher_split_step_writing">Guardando APK combinado</string>
+    <string name="patcher_split_step_finalizing">Completando el APK combinado</string>
     <string name="patcher_conflict_title">Conflicto de paquete</string>
     <string name="patcher_conflict_subtitle">Debe desinstalar la versión existente</string>
     <string name="patcher_conflict_hint">La aplicación parcheada utiliza un certificado diferente al de la versión instalada. Al desinstalarla, se borrarán todos los datos de la aplicación.</string>
@@ -732,6 +760,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="warning">Advertencia</string>
     <string name="error_">Error</string>
     <string name="retry">Reintentar</string>
+    <string name="refresh">Actualizar</string>
     <string name="add">Añadir</string>
     <string name="close">Cerrar</string>
     <string name="back">Atrás</string>
@@ -748,6 +777,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="view">Ver</string>
     <string name="search">Búsqueda</string>
     <string name="search_no_results">No se encontraron resultados para «»</string>
+    <string name="sort">Ordenar</string>
     <string name="any_version">Cualquiera</string>
     <string name="enabled">Activado</string>
     <string name="disabled">Desactivado</string>
@@ -757,6 +787,11 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="select_all_done">Todo seleccionado</string>
     <string name="deselect_all">Desmarcar todo</string>
     <string name="deselect_all_done">Todo deseleccionado</string>
+    <string name="reorder_list">Reordenar lista</string>
+    <string name="reorder_list_hint">Arrastra para reordenar</string>
+    <string name="reorder_done">Orden guardado</string>
+    <string name="reset_order">Restablecer orden</string>
+    <string name="reset_order_done">Orden restablecido</string>
     <string name="rename">Renombrar</string>
     <string name="import_">Importar</string>
     <string name="export">Exportar</string>
@@ -791,6 +826,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="hide">Ocultar</string>
     <string name="hidden">Oculto</string>
     <string name="unhide">Mostrar</string>
+    <string name="unhide_done">Mostrado</string>
     <string name="logs">Registros</string>
     <string name="sources">Fuentes</string>
     <string name="installing_ellipsis">Instalando…</string>

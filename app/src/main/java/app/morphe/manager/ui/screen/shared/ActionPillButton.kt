@@ -29,15 +29,17 @@ fun ActionPillButton(
     val iconSize = if (large) 20.dp else 18.dp
     val textStyle = if (large) MaterialTheme.typography.labelLarge else MaterialTheme.typography.labelSmall
 
-    val button: @Composable () -> Unit = {
+    val buttonModifier = Modifier
+        .height(height)
+        .widthIn(min = minWidth)
+
+    val button: @Composable (Modifier) -> Unit = { outerModifier ->
         FilledTonalIconButton(
             onClick = onClick,
             enabled = enabled,
             colors = colors,
             shape = RoundedCornerShape(50),
-            modifier = modifier
-                .height(height)
-                .widthIn(min = minWidth)
+            modifier = outerModifier.then(buttonModifier)
         ) {
             if (label != null) {
                 Row(
@@ -59,7 +61,7 @@ fun ActionPillButton(
                 Icon(
                     imageVector = icon,
                     contentDescription = contentDescription,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(iconSize)
                 )
             }
         }
@@ -69,11 +71,12 @@ fun ActionPillButton(
         TooltipBox(
             positionProvider = TooltipDefaults.rememberTooltipPositionProvider(TooltipAnchorPosition.Above),
             tooltip = { PlainTooltip { Text(tooltip) } },
-            state = rememberTooltipState()
+            state = rememberTooltipState(),
+            modifier = modifier
         ) {
-            button()
+            button(modifier)
         }
     } else {
-        button()
+        button(modifier)
     }
 }

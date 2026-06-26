@@ -407,7 +407,6 @@ fun BatteryOptimizationDialog(
 /**
  * Full-screen error dialog shown when patching fails.
  */
-@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun PatcherErrorDialog(
     errorMessage: String,
@@ -415,6 +414,7 @@ fun PatcherErrorDialog(
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
+    val errorCopiedText = stringResource(R.string.patcher_error_copied)
     @Suppress("DEPRECATION")
     val clipboardManager = LocalClipboardManager.current
 
@@ -428,7 +428,7 @@ fun PatcherErrorDialog(
                 primaryText = stringResource(android.R.string.copy),
                 onPrimaryClick = {
                     clipboardManager.setText(AnnotatedString(errorMessage))
-                    context.toast(context.getString(R.string.patcher_error_copied))
+                    context.toast(errorCopiedText)
                 },
                 primaryIcon = Icons.Default.ContentCopy,
                 secondaryText = stringResource(R.string.close),

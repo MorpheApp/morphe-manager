@@ -1,24 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <string name="home_other_apps">ಇತರ ಆ್ಯಪ್‌‌ಗಳು</string>
+    <string name="home_not_patched_yet">ಹಾನಿಯಾದರೆ ಸರಿಪಡಿಸಲಾಗಿಲ್ಲ</string>
+    <string name="home_no_patches_available">ಪ್ಯಾಚ್‌ಗಳು ಲಭ್ಯವಿಲ್ಲ</string>
+    <string name="home_app_hide_title">ಈ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಮರೆ?</string>
+    <string name="home_app_hide_message">ಈ ಅಪ್ಲಿಕೇಶನ್ ಹೋಮ್ ಸ್ಕ್ರೀನ್‌ನಿಂದ ಮರೆಮಾಡಲಾಗುತ್ತದೆ. ನೀವು ಅದನ್ನು ನಂತರ ಮರೆಮಾಡಿದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಂದ ಕೆಳಗಿನ ಪಟ್ಟಿಯಲ್ಲಿರುವ ಬಟನ್ ಬಳಸಿ ಪುನರಾರಂಭಿಸಬಹುದು</string>
+    <string name="home_app_will_be_hidden">ಈ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಮರೆಮಾಡಲಾಗುತ್ತದೆ</string>
+    <string name="home_app_no_hidden">ಮರೆಮಾಡಿದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಇಲ್ಲ</string>
+    <string name="home_app_hidden_apps_hint">ಟ್ಯಾಪ್ చేసి ಮರೆಮಾಡಲು ಬಿಡುಗಡೆ చేయಿರಿ</string>
+    <string name="android_11_bug_dialog_title">Android 11 ಸಮಸ್ಯೆಯಿತ್ತು</string>
+    <string name="android_11_bug_dialog_description">ಆ್ಯಪ್‌ ಅನ್ನು ಸ್ಥಾಪಿಸಲು ಅನುಮತಿ ನೀಡಬೇಕು, ಇಲ್ಲವಾದರೆ Android 11 ಸಿಸ್ಟಮ್‌ನಲ್ಲಿ ಒಂದು ತಪ್ಪು ಸಂಭವಿಸುತ್ತದೆ, ಅದು ಬಳಕೆದಾರರ ಅನುಭವವನ್ನು ದುಷ್ಪರಿಣಾಮ ಬೀರುತ್ತದೆ</string>
+    <string name="deep_link_add_source_title">ಉৎস ಸೇರಿಸಿ</string>
+    <string name="deep_link_add_source_message">Morpheಗೆ ಈ ಪ್ಯಾಚ್ ಮೂಲವನ್ನು ಸೇರಿಸಬೇಕೆಂದು ನೀವು ಬಯಸುತ್ತೀರಾ?</string>
+    <string name="deep_link_add_source_warning">ನೀವು ನಂಬುವಿರುವ ಮೂಲಗಳನ್ನು ಮಾತ್ರ ಸೇರಿಸಿ</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">Morphe ನವೀಕರಣ ಲಭ್ಯವಿದೆ</string>
+    <string name="home_update_error_subtitle">ಇಂಟರ್‌ನೆಟ್‌ ಕನೆಕ್ಷನ್‌ ಪರಿಶೀಲಿಸಿ, ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="home_update_skipped_metered">಑ಠಿಟವಿఅ ದ್ರಿಟಸಾ಻ನಿ಍಻ಜವಟ</string>
+    <string name="home_update_skipped_metered_subtitle">ಮೊಬೈಲ್ ಡೇಟಾ ಸಕ್ರಿಯವಾಗಿದೆ</string>
+    <string name="home_updating_sources">ಬೋರಿಸ್ಸಿನ ಪರಿಮಾಣವನ್ನು ನವೀಕರಿಸುತ್ತಿರುವುದು…</string>
+    <string name="home_update_success">ಮקורಗಳನ್ನು ನವೀಕರಿಸಲಾಗಿದೆ</string>
+    <string name="home_update_success_subtitle">ನಿಮ್ಮ ಮೂಲಗಳು ನವೀಕೃತಗೊಂಡಿವೆ</string>
+    <string name="home_sources_are_loading">ಕರೋತಾರೆಗಳನ್ನು ಲೋಡ್ ಮಾಡುತ್ತಿದ್ದೇವೆ, ದಯವಿಟ್ಟು ಕಾಯಿರಿ…</string>
+    <string name="home_search_apps">ಅಪ್ಲಿಕೇಷನ್‌ಗಳನ್ನು ಹುಡುಕಿ</string>
+    <string name="home_no_apps_title">ಆ್ಯಪ್‌ಗಳು ಲಭ್ಯವಿಲ್ಲ</string>
+    <string name="home_no_apps_subtitle">ಒಂದು ಪ್ಯಾಚ್ ಮೂಲವನ್ನು ಸೇರಿಸಿ ಅಥವಾ %s ನಲ್ಲಿ ಈಗಾಗಲೇ ಇರುವものを ಸಕ್ರಿಯಗೊಳಿಸಿ</string>
+    <string name="home_no_apps_search_subtitle">\"%s\"ಗೆ ಹೊಂದಿಕೆಯಾಗುವ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಯಾವುದೂ ಇಲ್ಲ</string>
+    <string name="home_all_apps_hidden_title">ಎಲ್ಲಾ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಮರೆಮಾಡಲಾಗಿದೆ</string>
+    <string name="home_all_apps_hidden_subtitle">ನೀವು ಹೋಮ್ ಸ್ಕ್ರೀನ್‌ನಿಂದ ಎಲ್ಲಾ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಮರೆಮಾಡಿದ್ದೀರಿ</string>
     <!-- Home Screen - Home Greetings -->
+    <string name="home_greeting_1">ನೀವು ಯಾವ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಪ್ಯಾಚ್ ಮಾಡಲು ಬಯಸುತ್ತೀರಿ?</string>
     <!-- Humorous hype message with light nostalgia -->
+    <string name="home_greeting_2">ಪುಸ್ತಕಗಳನ್ನು ಮತ್ತೆ ಚರಿತ್ರವಾಗಿಸಲು ಸಿದ್ಧರಾಗಿದೆಯೇ?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
+    <string name="home_greeting_3">ಸಿಟ್ ಬೆಲ್ಟ್ ಹಾಕ್ತಿಕೊಳ್ಳಿ, ಪ್ಯಾಚ್ ಮಾಡುವ ಸಮಯ ಇದು</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="home_greeting_4">ಮತ್ತೆ ಒಂದು ದಿನ, ಮತ್ತೊಂದು ಜಾಹೀರಾತು-ತಡೆಯಲ್ಪಟ್ಟ ಮೇರುಕೃತಿ</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="home_greeting_5">ಸ ಜಾಹೀರಾತುಗಳನ್ನು ವೀಕ್ಷಿಸಲು ಬಯಸುತ್ತೀರಾ? ನನಗೆ ಅಲ್ಲ.</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="home_greeting_6">ನಮ್ಮ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿಮ್ಮ ರೀತಿಯಲ್ಲಿ ನಡೆಸಲು ಅವಕಾಶ ಮಾಡೋಣ</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="home_greeting_7" formatted="false">ಈ ದಿನದ ಮುನ್ಸೂಚನೆ: ಪ್ಯಾಚ್ ಮಾಡುವ ಸಾಧ್ಯತೆ 100%</string>
     <!-- From mediocrity to amazing -->
+    <string name="home_greeting_8">ಸಾಧಾರಣವನ್ನು ಅದ್భుತವಾಗಿ ಬದಲಿಸಲು ಸಿದ್ಧರರಾ?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="home_greeting_9">ಇಂದು മുതൽ ತಮ್ಮ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ತಾವು ಉಳಿಸಿಕೊಳ್ಳುತ್ತೀರಿ</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="home_greeting_10">ಕ್ಯಾಫೀನ್ ಮತ್ತು ಉತ್ತಮ ಪ್ಯಾಚ್‌ಗಳಿಂದ ಚಾಲಿತ</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <!-- Evening greetings (17:00–21:59) -->
+    <!-- Late night greetings (22:00–23:59) -->
+    <!-- Super late night greetings (0:00–4:59) -->
     <!-- Home Screen - Sources Management -->
+    <string name="sources_management_title">ಸೋಸ್ ಕೋಡ್‌ಗಳನ್ನು ಸರಿಪಡಿಸು</string>
+    <string name="sources_management_open_in_browser">ಬ್ರೌಸರ್‌ನಲ್ಲಿ ತೆರೆ</string>
+    <string name="sources_management_failed_to_open_url">URL ಅನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ</string>
+    <string name="sources_management_prerelease_toggle">ಪರಿ- ಬಿಡುಗಡೆ ಪ್ಯಾचಗಳು</string>
+    <string name="sources_management_prerelease_toggle_description">ಹೊಚ್ಚಹೊತ್ತಾದ ಪ್ರಾಯೋಗಿಕ ಪ್ಯಾಚ್ಅವಕಾಶ ಪಡೆಯಿರಿ</string>
+    <string name="sources_management_experimental_versions_toggle">ಪ್ರಾಯೋಗಿಕ ಅಪ್ಲಿಕೇಶನ್ आवृತ್ತಿಗಳು</string>
+    <string name="sources_management_experimental_versions_toggle_description">ಪ್ಯಾಚೆಸ್ ಪ್ರಾಯೋಗಿಕ ಅಪ್ಲಿಕೇಶನ್ ಗುರಿಗಳು ಲಭ್ಯವಿದ್ದರೆ</string>
+    <string name="sources_management_already_exists">ಈ ಮೂಲವನ್ನು ಈಗಾಗಲೇ ಸೇರಿಸಲಾಗಿದೆ</string>
+    <string name="sources_management_invalid_url">చెల్లని మూల URL. దయచేసి చిరునామాను తనిఖీ చేసి మళ్లీ ప్రయత్నించండి</string>
+    <string name="sources_management_metadata_unavailable">ಮೆಟಾಡೇಟಾ ಲಭ್ಯವಿಲ್ಲ</string>
+    <string name="sources_management_metadata_unavailable_hint">ದೂರದ metadata file ಲಭ್ಯವಿಲ್ಲ. ಸ್ಥಾಪಿತ bundle ನಿಂದ Patching ಇನ್ನೂ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ, ಆದರೆ ಈ ಮೂಲಕ್ಕೆ auto-update ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">ಪ್ಯಾಚ್ ಬಂಡಲ್ ಅನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ಮೂಲ URL ತಪ್ಪು ಆಗಿರಬಹುದು ಅಥವಾ ಫೈಲ್ ಇಲ್ಲದಿರಬಹುದು</string>
+    <string name="sources_management_source_enabled">ಮೂಲ ಸಕ್ರಿಯಗೊಂಡಿತು</string>
+    <string name="sources_management_source_disabled">ಮೂಲ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ</string>
+    <string name="sources_management_source_updating">ಮקורವನ್ನು ನವೀಕರಿಸುತ್ತోంది</string>
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_dialog_display_name">ಪ್ರದರ್ಶನ ಹೆಸರು</string>
+    <string name="sources_dialog_rename">ರೆಮನೆಚ್ ಪ್ಯಾಚ್ ಸೋರ್ಸ್</string>
+    <string name="sources_dialog_duplicate_name_error">ಈ ಹೆಸರಿನ ಪ್ಯಾಚ್ ಮೂಲ ಈಗಾಗಲೇ ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ</string>
+    <string name="sources_dialog_missing_error">ಈ ಪ್ಯಾಚ್ ಮೂಲವನ್ನು ನವೀಕರಿಸುವ ಸಾಧ್ಯವಿಲ್ಲ</string>
+    <string name="sources_dialog_view_any_version">ಯಾವುದೇ ಆವೃತ್ತಿ</string>
+    <string name="sources_dialog_view_any_package">ಯಾವುದೇ ಪ್ಯಾಕೇಜ್</string>
+    <string name="sources_dialog_add_source">ಪ್ಯಾಚ್ ಮೂಲವನ್ನು ಸೇರಿಸಿ</string>
+    <string name="sources_dialog_delete_confirm_message">ಮೂಲ \"%s\" ಅನ್ನು ಅಳಿಸಲು ಬಯಸುತ್ತೀರಾ? ಇದನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗುವುದಿಲ್ಲ</string>
+    <string name="sources_dialog_remote">ರಿಮೋಟ್</string>
+    <string name="sources_dialog_remote_url">ಮೂಲ URL</string>
+    <string name="sources_dialog_remote_url_formats_title">ಉದಾಹರಣೆಗಳು:</string>
+    <string name="sources_dialog_local">ಸ್ಥಳೀಯ</string>
+    <string name="sources_dialog_local_file">ಫಾಚ್್ ಸೋರ್ಸ್ ಫೈಲ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
+    <string name="home_use_installed_app">ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿದ ಅಪ್ಲಿಕೇಶನ್ ಬಳಸಿ</string>
+    <string name="home_installed_app_picker_title">ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿದ ಅಪ್ಲಿಕೇಶನ್ ಬಳಸಿ</string>
+    <string name="home_installed_app_picker_empty">ಆ್ಯಪ್‌ಗಳು ಕಂಡುಬರಲಿಲ್ಲ</string>
+    <string name="home_installed_app_picker_filter_all">ಎಲ್ಲಾ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು</string>
+    <string name="home_installed_app_picker_filter_user">రಪರಸಲ್ి్ಕಾರ್సేరు಻స్వ్సై</string>
+    <string name="home_installed_app_picker_filter_system">రಪರಸಲ್ి్ಕಾರ್సేరు಻స్వ్సై</string>
+    <string name="home_invalid_apk_unreadable">\'External Storage\' ಬ್ಯಾಟರಿ ನಿರ್ಬಂಧಿತವಾಗಿಲ್ಲ ಎಂದು ಪರಿಶೀಲಿಸಿ.</string>
+    <string name="home_invalid_apk_io_error">ಫೈಲ್ ತೆರೆಯಲು ವಿಫಲವಾಯಿತು. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="home_external_apk_expert_mode_required">ಈ ವೈಶಿಷ್ಟ್ಯವು ತಜ್ಞ ಮೋಡ್‌ನಲ್ಲಿ ಮಾತ್ರ ಲಭ್ಯವಿದೆ</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <string name="expert_mode_title">ಜ್ಞಾನಿ ಮೋಡ್</string>
+    <string name="expert_mode_search">ಪ್ಯಾಚ್‌ಗಳನ್ನು ಹುಡುಕಿ</string>
+    <string name="expert_mode_proceed">ಪ್ಯಾಚ್ ಮಾಡುವತ್ತ ಮುಂದುelಗ</string>
+    <string name="expert_mode_disable_all">ಎಲ್ಲವನ್ನೂ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ</string>
+    <string name="expert_mode_disable_all_done">ಎಲ್ಲಾ ಪ್ಯಾಚ್‌ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ</string>
+    <string name="expert_mode_enable_all">ಎಲ್ಲ ಸಕ್ರಿಯಗೊಳಿಸಿ</string>
+    <string name="expert_mode_enable_all_done">ಎಲ್ಲಾ ಪ್ಯಾಚ್\'ಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <!-- Patch Options -->
     <!-- Adaptive Icon Creator -->
     <!-- Header Creator -->

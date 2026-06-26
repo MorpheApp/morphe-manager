@@ -31,6 +31,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * Simple mode patching screen.
@@ -60,7 +61,7 @@ fun SimplePatchingInProgress(
     // Rotate messages every 10 seconds
     LaunchedEffect(Unit) {
         while (true) {
-            delay(10000)
+            delay(10.seconds)
             currentMessage.intValue = HomeAndPatcherMessages.getPatcherMessage(context)
         }
     }
@@ -92,7 +93,7 @@ fun SimplePatchingInProgress(
         }
 
         // Bottom action bar
-        if (!windowSize.useTwoColumnLayout) {
+        if (!isLandscape()) {
             PatcherBottomActionBar(
                 showCancelButton = true,
                 showHomeButton = false,
@@ -124,10 +125,10 @@ private fun AdaptiveProgressContent(
 ) {
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
-    val useTwoColumns = windowSize.useTwoColumnLayout
+    val useTwoColumns = isLandscape()
 
     if (useTwoColumns) {
-        // Two-column layout for medium/expanded windows (landscape)
+        // Two-column layout for landscape
         Row(
             modifier = Modifier
                 .fillMaxWidth()

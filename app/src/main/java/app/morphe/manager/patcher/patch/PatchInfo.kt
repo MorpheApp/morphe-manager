@@ -1,6 +1,7 @@
 package app.morphe.manager.patcher.patch
 
 import androidx.compose.runtime.Immutable
+import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.ApkFileType
 import kotlinx.collections.immutable.ImmutableList
@@ -59,6 +60,15 @@ data class PatchInfo(
                         .toMap()
                         .toImmutableMap()
                         .takeIf { it.isNotEmpty() },
+                    versionCodes = compatibility.targets
+                        .mapNotNull { target ->
+                            val v = target.version ?: return@mapNotNull null
+                            val codes = target.buildCodesOrNull()?.toImmutableSet() ?: return@mapNotNull null
+                            v to codes
+                        }
+                        .toMap()
+                        .toImmutableMap()
+                        .takeIf { it.isNotEmpty() },
                 )
             }
             ?.toImmutableList()
@@ -76,7 +86,7 @@ data class PatchInfo(
         compatiblePackages == null ||
                 compatiblePackages.any { it.packageName == null || it.packageName == packageName }
 
-    fun supports(packageName: String, versionName: String?): Boolean {
+    fun supports(packageName: String, versionName: String?, versionCode: Long? = null): Boolean {
         val packages = compatiblePackages ?: return true // Universal patch
 
         return packages.any { pkg ->
@@ -84,8 +94,9 @@ data class PatchInfo(
             if (pkg.packageName == null) return@any true
             if (pkg.packageName != packageName) return@any false
             if (pkg.versions == null) return@any true
-
-            versionName != null && versionName in pkg.versions
+            if (versionName == null || versionName !in pkg.versions) return@any false
+            val allowedCodes = pkg.versionCodes?.get(versionName) ?: return@any true
+            versionCode == null || versionCode.toInt() in allowedCodes
         }
     }
 
@@ -142,7 +153,12 @@ data class CompatiblePackage(
     val versionDescriptions: ImmutableMap<String, String>? = null,
     /** Minimum Android SDK version required per app version. */
     val versionMinSdks: ImmutableMap<String, Int>? = null,
+    /** Per-version allowed version codes (union of all declared ABI codes). Null means no constraint. */
+    val versionCodes: ImmutableMap<String, ImmutableSet<Int>>? = null,
 )
+
+/** Returns the union of all ABI-specific version codes, or null if none are declared. */
+fun AppTarget.buildCodesOrNull(): Set<Int>? = versionCodes?.values?.toSet()?.ifEmpty { null }
 
 @Immutable
 data class Option<T>(

@@ -39,7 +39,7 @@ sealed class PatchBundleInfo {
         /**
          * Create a [PatchBundleInfo.Scoped] that only contains information about patches that are relevant for a specific [packageName].
          */
-        fun forPackage(packageName: String, version: String?): Scoped {
+        fun forPackage(packageName: String, version: String?, versionCode: Long? = null): Scoped {
             val relevantPatches = patches.filter { it.compatibleWith(packageName) }
             val compatible = mutableListOf<PatchInfo>()
             val incompatible = mutableListOf<PatchInfo>()
@@ -56,7 +56,7 @@ sealed class PatchBundleInfo {
                 // Categorise into compatible / incompatible / universal
                 val targetList = when {
                     patch.compatiblePackages == null -> universal
-                    patch.supports(packageName, version) -> compatible
+                    patch.supports(packageName, version, versionCode) -> compatible
                     else -> incompatible
                 }
                 targetList.add(patch)
@@ -147,29 +147,6 @@ sealed class PatchBundleInfo {
                     }
 
             bundle.uid to patches
-        }
-
-        /**
-         * Algorithm for determining whether all required options have been set.
-         */
-        inline fun Iterable<Scoped>.requiredOptionsSet(
-            allowIncompatible: Boolean,
-            crossinline isSelected: (Scoped, PatchInfo) -> Boolean,
-            crossinline optionsForPatch: (Scoped, PatchInfo) -> Map<String, Any?>?
-        ) = all bundle@{ bundle ->
-            bundle
-                .patchSequence(allowIncompatible)
-                .filter { isSelected(bundle, it) }
-                .all patch@{
-                    if (it.options.isNullOrEmpty()) return@patch true
-                    val opts by lazy { optionsForPatch(bundle, it).orEmpty() }
-
-                    it.options.all option@{ option ->
-                        if (!option.required || option.default != null) return@option true
-
-                        option.key in opts
-                    }
-                }
         }
     }
 }

@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Hefur bjargað appum frá sjálfum sér frá þessu degi</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Knúin af koffeini og góðum breytistillingum</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Rísa og flíkja</string>
+    <string name="home_greeting_morning_2">Góðan daginn! Forrit flíkja sig ekki sjálf</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Hálfsvefn á eftir hádegi? Flíkja eitthvað</string>
+    <string name="home_greeting_afternoon_2">Eftir hádegi viðgerðir eru öðruvísi</string>
+    <string name="home_greeting_afternoon_3">Eftirmiðdagsvaktin: viðgerðarútgáfa</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Gott kvöld! Kvöldviðgerðir eru öðruvísi</string>
+    <string name="home_greeting_evening_2">Er búið að slappa af? Viðgerðu app fyrst</string>
+    <string name="home_greeting_evening_3">Hættir að vinna? Viðgerðu eitthvað fyrst</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Vaknar enn? Svo eru þau forrit sem þurfa að vera viðgerð</string>
+    <string name="home_greeting_late_night_2">Sein kvölds viðgerðarhlaup? Virkilega vel</string>
+    <string name="home_greeting_late_night_3">Náttúrufuglhamur: virkjaður</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Hámark viðgerðartími… sagt er</string>
+    <string name="home_greeting_super_late_2">Gat ekki sofnað? Viðgerðu eitthvað</string>
+    <string name="home_greeting_super_late_3">Á þessum tíma, bara vertu vökur og gerðu við</string>
+    <string name="home_greeting_super_late_4">Þú og netþjónarnir, báðir vakin</string>
+    <string name="home_greeting_super_late_5">Næturhægur og afkastamikill</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Heimildir breytistillinga</string>
     <string name="sources_management_open_in_browser">Opna í vafra</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Ósamhæft</string>
     <string name="home_apk_availability_yes">Já, hjálpaðu mér að finna APK</string>
     <string name="home_apk_availability_no">Nei, ég á nú þegar APK</string>
-    <string name="home_apk_use_saved_with_version">Nota geymda APK (%s)</string>
-    <string name="home_apk_use_installed_with_version">Nota installaða APK (v%s)</string>
+    <string name="home_apk_use_saved">Nota vistað APK</string>
+    <string name="home_apk_use_installed">Nota upphætt APK</string>
     <string name="home_app_info_no_saved_apk">Engin geymd APK. Pökkun mun þurfa að velja APK skrá aftur</string>
     <string name="home_version_requires_android">Krefst Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ekki studd á þessari tæki</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Ýttu á \"%s\" hnappinn hér að neðan</string>
     <string name="home_download_instructions_step2_part1">Scrollaðu niður á vefsíðuna og ýttu á</string>
     <string name="home_download_instructions_download_button_toast">Ýttu á niðuhlaðningu á vefsíðunni, og ekki hér 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Frábært! Núna smelltu á „Hafðu áfram“ hér að neðan og farðu á vefsíðuna 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Æfing gerir meistara, þú ert á leiðinni! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Frábært! Smelltu áfram og farðu á vefsíðuna 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Æfingin skapar meistarann og þú ert á góðri leið 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Enn ekki hér… enn ekki hér… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Í lagi, ég virði einbeitinguna 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Þú ert nú það sem kalla má áhugaverðan prófunarhnappur 🏅</string>
@@ -183,6 +204,9 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="home_dialog_unsupported_version_dialog_proceed">Halda áfram samt sem áður</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Samhæfar útgáfur:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Stuðlað er við</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Gerð %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Þetta er önnur gerð af sömu útgáfu. Viðgerðirnar krefjast sérstakrar gerðar</string>
     <string name="home_dialog_wrong_package_title">Rangur pakki valinn</string>
     <string name="home_dialog_wrong_package_description">Valin pakkning er ekki fyrir það app sem þú ætlaðir að patta</string>
     <string name="home_dialog_expected_package">Vænt pakkning:</string>
@@ -727,6 +751,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="warning">Vara</string>
     <string name="error_">Villa</string>
     <string name="retry">Reyna aftur</string>
+    <string name="refresh">Endurhæfa</string>
     <string name="add">Bæta við</string>
     <string name="close">Loka</string>
     <string name="back">Til baka</string>
@@ -743,6 +768,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="view">Skoða</string>
     <string name="search">Leita</string>
     <string name="search_no_results">Engin niðurstöður fundust</string>
+    <string name="sort">Raða</string>
     <string name="any_version">Hver sem er</string>
     <string name="enabled">Virkt</string>
     <string name="disabled">Óvirkt</string>
@@ -752,6 +778,11 @@ Myndastærðin verður að vera sem hér segir:
     <string name="select_all_done">Allt valið</string>
     <string name="deselect_all">Afvelja allt</string>
     <string name="deselect_all_done">Allt afveldur</string>
+    <string name="reorder_list">Endurreikning á lista</string>
+    <string name="reorder_list_hint">Drag til að endurreikna</string>
+    <string name="reorder_done">Röð vistuð</string>
+    <string name="reset_order">Endurstilla röð</string>
+    <string name="reset_order_done">Pöntun endurstillt</string>
     <string name="rename">Endurnefna</string>
     <string name="import_">Flytja</string>
     <string name="export">Flytja út</string>
@@ -786,6 +817,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="hide">Húð</string>
     <string name="hidden">Falinn</string>
     <string name="unhide">Afhylja</string>
+    <string name="unhide_done">Sýnt</string>
     <string name="logs">Logs</string>
     <string name="sources">Heimildir</string>
     <string name="installing_ellipsis">Sæti…</string>

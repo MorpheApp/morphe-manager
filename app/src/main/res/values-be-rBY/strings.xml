@@ -23,6 +23,11 @@
     <string name="home_greeting_9">Захоўванне праграм ад саміх сябе з сённяшняга дня</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Працуе на кафеіне і добрых патчах</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <!-- Evening greetings (17:00–21:59) -->
+    <!-- Late night greetings (22:00–23:59) -->
+    <!-- Super late night greetings (0:00–4:59) -->
     <!-- Home Screen - Sources Management -->
     <!-- Home Screen - Sources Dialogs -->
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -30,6 +35,7 @@
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <!-- Home Screen - Home Sub-Dialogs -->
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <!-- Patch Options -->
     <!-- Adaptive Icon Creator -->
     <!-- Header Creator -->

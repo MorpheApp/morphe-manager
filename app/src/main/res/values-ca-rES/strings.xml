@@ -41,6 +41,11 @@
     <string name="home_greeting_9">Salvant aplicacions de si mateixes des d\'avui</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Funciona a base de cafeïna i bons pedaços</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <!-- Evening greetings (17:00–21:59) -->
+    <!-- Late night greetings (22:00–23:59) -->
+    <!-- Super late night greetings (0:00–4:59) -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fonts de pegats</string>
     <string name="sources_management_open_in_browser">Obrir al navegador</string>
@@ -61,6 +66,7 @@
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <!-- Home Screen - Home Sub-Dialogs -->
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <!-- Patch Options -->
     <string name="patch_option_instructions">Instruccions</string>
     <!-- Adaptive Icon Creator -->

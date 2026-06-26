@@ -8,24 +8,18 @@ import android.os.Bundle
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.di.*
-import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.gitlabAvatarUrl
-import app.morphe.manager.util.UpdateNotificationManager
-import app.morphe.manager.util.applyAppLanguage
-import app.morphe.manager.util.loadRemoteAvatar
-import app.morphe.manager.util.readLanguageFromPrefs
-import app.morphe.manager.util.saveLanguageToPrefs
-import app.morphe.manager.util.syncFcmTopics
-import app.morphe.manager.util.tag
+import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
+import app.morphe.manager.util.*
 import app.morphe.manager.worker.UpdateCheckWorker
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
 import coil.Coil
 import coil.ImageLoader
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -41,6 +35,10 @@ import org.koin.core.context.startKoin
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 
 class ManagerApplication : Application() {
+    companion object {
+        @Volatile var startedActivityCount: Int = 0
+            private set
+    }
     private val scope = MainScope()
     private val prefs: PreferencesManager by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
@@ -162,10 +160,10 @@ class ManagerApplication : Application() {
                 } else Log.d(tag, "System-initiated process death detected")
             }
 
-            override fun onActivityStarted(activity: Activity) {}
+            override fun onActivityStarted(activity: Activity) { startedActivityCount++ }
             override fun onActivityResumed(activity: Activity) {}
             override fun onActivityPaused(activity: Activity) {}
-            override fun onActivityStopped(activity: Activity) {}
+            override fun onActivityStopped(activity: Activity) { startedActivityCount-- }
             override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
             override fun onActivityDestroyed(activity: Activity) {}
         })

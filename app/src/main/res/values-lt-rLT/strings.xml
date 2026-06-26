@@ -53,6 +53,11 @@
     <string name="home_greeting_9">Saugome programas nuo pačių saves nuo šiandien</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Veikia nuo kofeino ir gerų pataisų</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <!-- Evening greetings (17:00–21:59) -->
+    <!-- Late night greetings (22:00–23:59) -->
+    <!-- Super late night greetings (0:00–4:59) -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Pataisų šaltiniai</string>
     <string name="sources_management_open_in_browser">Atidaryti naršyklėje</string>
@@ -106,8 +111,6 @@
     <string name="home_apk_availability_incompatible_label">Nesuderinama</string>
     <string name="home_apk_availability_yes">Taip, padėkite man rasti APK</string>
     <string name="home_apk_availability_no">Ne, jau turiu APK</string>
-    <string name="home_apk_use_saved_with_version">Naudoti išsaugotą APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Naudoti įdiegtą APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Nėra išsaugoto APK. Siekiant pataisyti, reikės dar karta pasirinkti APK failą</string>
     <string name="home_version_requires_android">Privaloma Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nesuportuota ant sio įrenginio</string>
@@ -118,8 +121,6 @@
     <string name="home_download_instructions_step1">Paspauskite \'%s\' mygtuką apačioje</string>
     <string name="home_download_instructions_step2_part1">Slinkite žemyn tinklalapyje ir paspauskite</string>
     <string name="home_download_instructions_download_button_toast">Paspauskite atsisiųsti (Download) puslapyje, o ne čia 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Puiku! Dabar spustelėkite tęsti (continue) apacioje, svetainėje 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Praktika daro tobulą, jūs artėjate prie tikslo! 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Vis dar nėra… vis dar nėra… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Gerai, aš gerbiu įsipareigojimą 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Jūs dabar oficialus Morphe mygtuko bandytojas 🏅</string>
@@ -184,6 +185,7 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="home_dialog_unsupported_version_dialog_proceed">Vis tiek tęsti</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Suderinamos versijos:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nepalaikomas</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_wrong_package_title">Pasirinktas netinkamas failas</string>
     <string name="home_dialog_wrong_package_description">Pasirinktas APK failas nėra skirtas jums reikiamo programavimo apipavidalinimui</string>
     <string name="home_dialog_expected_package">Lauktas paketas:</string>

@@ -12,6 +12,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
@@ -37,19 +38,18 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -70,6 +70,9 @@ import app.morphe.manager.util.KnownApps
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import sh.calvin.reorderable.ReorderableItem
+import sh.calvin.reorderable.rememberReorderableLazyListState
+import kotlin.time.Duration.Companion.milliseconds
 
 /** Data describing one side of a swipe action - icon, label, and colors. */
 private data class SwipeActionConfig(
@@ -126,7 +129,14 @@ fun SectionsLayout(
     isExpertModeEnabled: Boolean = false,
 
     // Onboarding
-    onboardingState: OnboardingState? = null
+    onboardingState: OnboardingState? = null,
+
+    // Reorder
+    onSaveOrder: (List<String>) -> Unit = {},
+    onResetOrder: () -> Unit = {},
+
+    // Accessibility
+    onRefreshGreeting: (() -> Unit)? = null
 ) {
     val windowSize = rememberWindowSize()
 
@@ -176,12 +186,15 @@ fun SectionsLayout(
                     onBundlesClick = onBundlesClick,
                     onSettingsClick = onSettingsClick,
                     isExpertModeEnabled = isExpertModeEnabled,
-                    onboardingState = onboardingState
+                    onboardingState = onboardingState,
+                    onSaveOrder = onSaveOrder,
+                    onResetOrder = onResetOrder,
+                    onRefreshGreeting = onRefreshGreeting
                 )
             }
 
             // Section 5: Bottom action bar - тільки для одноколонкового (portrait) режиму
-            if (!windowSize.useTwoColumnLayout) {
+            if (!isLandscape()) {
                 HomeBottomActionBar(
                     onBundlesClick = onBundlesClick,
                     onSettingsClick = onSettingsClick,
@@ -195,7 +208,8 @@ fun SectionsLayout(
             }
         }
 
-        // Section 1: Notifications overlay
+        // Section 1: Notifications overlay - matches maxCardWidth in AdaptiveContent
+        val maxCardWidth = if (isLandscape()) 700.dp else 560.dp
         NotificationsOverlay(
             hasManagerUpdate = hasManagerUpdate,
             onShowUpdateDetails = onShowUpdateDetails,
@@ -203,7 +217,7 @@ fun SectionsLayout(
             snackbarStatus = snackbarStatus,
             bundleUpdateProgress = bundleUpdateProgress,
             modifier = Modifier
-                .fillMaxWidth()
+                .widthIn(max = maxCardWidth)
                 .align(Alignment.TopCenter)
                 .statusBarsPadding()
         )
@@ -237,95 +251,95 @@ private fun AdaptiveContent(
     onBundlesClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
     isExpertModeEnabled: Boolean = false,
-    onboardingState: OnboardingState? = null
+    onboardingState: OnboardingState? = null,
+    onSaveOrder: (List<String>) -> Unit = {},
+    onResetOrder: () -> Unit = {},
+    onRefreshGreeting: (() -> Unit)? = null
 ) {
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
-    val useTwoColumns = windowSize.useTwoColumnLayout
+    val useTwoColumns = isLandscape()
+    val maxCardWidth = if (useTwoColumns) 700.dp else 560.dp
 
     // True empty state: loaded and no items from any bundle: all disabled or no sources
     val isAppsEmpty by remember(homeAppItems, installedAppsLoading) {
         derivedStateOf { !installedAppsLoading && homeAppItems.isEmpty() }
     }
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(itemSpacing)
-    ) {
+    Column(modifier = Modifier.fillMaxSize()) {
         if (useTwoColumns) {
-            // Two-column layout for medium/expanded windows (landscape)
+            // Sidebar layout for landscape
             Row(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth()
-                    .padding(horizontal = contentPadding),
-                horizontalArrangement = Arrangement.spacedBy(itemSpacing * 2),
+                    .statusBarsPadding(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Left column: Greeting + Bottom action bar
+                HomeSidebarPanel(
+                    showSearchButton = showSearchButton && !isAppsEmpty,
+                    searchActive = searchVisible,
+                    isExpertModeEnabled = isExpertModeEnabled,
+                    onSearchClick = onSearchToggle,
+                    onBundlesClick = onBundlesClick,
+                    onSettingsClick = onSettingsClick,
+                    onSourcesPositioned = onboardingState?.let { s -> { b -> s.sourcesButtonBounds = b } },
+                    onSettingsPositioned = onboardingState?.let { s -> { b -> s.settingsButtonBounds = b } }
+                )
+                VerticalDivider(modifier = Modifier.padding(vertical = 20.dp))
                 Column(
                     modifier = Modifier
-                        .weight(0.5f)
-                        .fillMaxHeight(),
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .padding(horizontal = contentPadding),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
-                        GreetingSection(message = greetingMessage)
+                    if (!greetingMessage.isNullOrEmpty()) {
+                        GreetingSection(
+                            message = greetingMessage,
+                            modifier = Modifier.widthIn(max = maxCardWidth).fillMaxWidth(),
+                            onRefresh = onRefreshGreeting
+                        )
+                        Spacer(modifier = Modifier.height(itemSpacing))
                     }
-
-                    // Section 5: Bottom action bar
-                    HomeBottomActionBar(
-                        onBundlesClick = onBundlesClick,
-                        onSettingsClick = onSettingsClick,
-                        isExpertModeEnabled = isExpertModeEnabled,
-                        showSearchButton = showSearchButton && !isAppsEmpty,
-                        searchActive = searchVisible,
-                        onSearchClick = onSearchToggle,
-                        onSourcesPositioned = onboardingState?.let { s -> { b -> s.sourcesButtonBounds = b } },
-                        onSettingsPositioned = onboardingState?.let { s -> { b -> s.settingsButtonBounds = b } },
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                }
-
-                // Right column: App buttons + Other apps
-                Column(
-                    modifier = Modifier
-                        .weight(0.5f)
-                        .fillMaxHeight(),
-                    verticalArrangement = Arrangement.spacedBy(itemSpacing)
-                ) {
-                    MainAppsSection(
-                        homeAppItems = homeAppItems,
-                        itemSpacing = itemSpacing,
-                        onAppClick = onAppClick,
-                        onHideApp = onHideApp,
-                        onHideMultiple = onHideMultiple,
-                        onUnhideApp = onUnhideApp,
-                        onShowPatches = onShowPatches,
-                        showGestureHint = showGestureHint,
-                        onGestureHintShown = onGestureHintShown,
-                        hiddenAppItems = hiddenAppItems,
-                        installedAppsLoading = installedAppsLoading,
-                        searchVisible = searchVisible,
-                        searchQuery = searchQuery,
-                        onSearchQueryChange = onSearchQueryChange,
-                        onBundlesClick = onBundlesClick,
-                        onboardingState = onboardingState,
-                        showFadeOverlay = false,
-                        modifier = Modifier.weight(1f)
-                    )
-
-                    // Section 4: Other apps - hidden when no apps available or bundles loading
+                    Box(modifier = Modifier.weight(1f, fill = false)) {
+                        MainAppsSection(
+                            homeAppItems = homeAppItems,
+                            itemSpacing = itemSpacing,
+                            maxCardWidth = maxCardWidth,
+                            onAppClick = onAppClick,
+                            onHideApp = onHideApp,
+                            onHideMultiple = onHideMultiple,
+                            onUnhideApp = onUnhideApp,
+                            onShowPatches = onShowPatches,
+                            showGestureHint = showGestureHint,
+                            onGestureHintShown = onGestureHintShown,
+                            hiddenAppItems = hiddenAppItems,
+                            installedAppsLoading = installedAppsLoading,
+                            searchVisible = searchVisible,
+                            searchQuery = searchQuery,
+                            onSearchQueryChange = onSearchQueryChange,
+                            onBundlesClick = onBundlesClick,
+                            onboardingState = onboardingState,
+                            showFadeOverlay = false,
+                            onSaveOrder = onSaveOrder,
+                            onResetOrder = onResetOrder,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
                     AnimatedVisibility(
                         visible = !isAppsEmpty && showOtherAppsButton,
                         enter = MorpheAnimations.expandFadeEnter,
                         exit = MorpheAnimations.shrinkFadeExit
                     ) {
-                        OtherAppsSection(
-                            onClick = onOtherAppsClick,
-                            modifier = Modifier.fillMaxWidth()
-                        )
+                        Column {
+                            Spacer(modifier = Modifier.height(itemSpacing))
+                            OtherAppsSection(
+                                onClick = onOtherAppsClick,
+                                modifier = Modifier.widthIn(max = maxCardWidth).fillMaxWidth()
+                            )
+                        }
                     }
                 }
             }
@@ -340,7 +354,8 @@ private fun AdaptiveContent(
                 if (!greetingMessage.isNullOrEmpty()) {
                     GreetingSection(
                         message = greetingMessage,
-                        modifier = Modifier.padding(horizontal = contentPadding)
+                        modifier = Modifier.padding(horizontal = contentPadding),
+                        onRefresh = onRefreshGreeting
                     )
                     Spacer(modifier = Modifier.height(itemSpacing))
                 } else {
@@ -353,6 +368,7 @@ private fun AdaptiveContent(
                         homeAppItems = homeAppItems,
                         itemSpacing = itemSpacing,
                         horizontalPadding = contentPadding,
+                        maxCardWidth = maxCardWidth,
                         onAppClick = onAppClick,
                         onHideApp = onHideApp,
                         onHideMultiple = onHideMultiple,
@@ -367,6 +383,8 @@ private fun AdaptiveContent(
                         onSearchQueryChange = onSearchQueryChange,
                         onBundlesClick = onBundlesClick,
                         onboardingState = onboardingState,
+                        onSaveOrder = onSaveOrder,
+                        onResetOrder = onResetOrder,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -379,12 +397,19 @@ private fun AdaptiveContent(
                 ) {
                     Column {
                         Spacer(modifier = Modifier.height(itemSpacing))
-                        OtherAppsSection(
-                            onClick = onOtherAppsClick,
+                        Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = contentPadding)
-                        )
+                                .padding(horizontal = contentPadding),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            OtherAppsSection(
+                                onClick = onOtherAppsClick,
+                                modifier = Modifier
+                                    .widthIn(max = maxCardWidth - contentPadding * 2)
+                                    .fillMaxWidth()
+                            )
+                        }
                     }
                 }
             }
@@ -405,22 +430,12 @@ fun NotificationsOverlay(
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
     modifier: Modifier = Modifier
 ) {
-    val windowSize = rememberWindowSize()
-    val useTwoColumns = windowSize.useTwoColumnLayout
-
     Box(
         modifier = modifier,
-        contentAlignment = if (useTwoColumns) Alignment.TopStart else Alignment.TopCenter
+        contentAlignment = Alignment.TopCenter
     ) {
         Column(
-            modifier = Modifier
-                .then(
-                    if (useTwoColumns) {
-                        Modifier.fillMaxWidth(0.5f) // 50% width in landscape
-                    } else {
-                        Modifier.fillMaxWidth() // Full width in portrait
-                    }
-                ),
+            modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             // Manager update snackbar
@@ -444,7 +459,6 @@ fun NotificationsOverlay(
 /**
  * Manager update snackbar.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ManagerUpdateSnackbar(
     visible: Boolean,
@@ -520,7 +534,6 @@ fun ManagerUpdateSnackbar(
 /**
  * Bundle update snackbar.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BundleUpdateSnackbar(
     visible: Boolean,
@@ -571,39 +584,39 @@ private fun BundleUpdateSnackbarContent(
     status: BundleUpdateStatus,
     progress: PatchBundleRepository.BundleUpdateProgress?
 ) {
-    // Calculate bundle processing progress
-    val fraction = if (progress?.total == 0 || progress == null) {
-        0f
-    } else {
-        progress.completed.toFloat() / progress.total
-    }
+    val fraction = if (progress == null || progress.total == 0) 0f
+                   else progress.completed.toFloat() / progress.total
 
-    // Calculate download progress
-    val downloadFraction = if (progress?.bytesTotal == null || progress.bytesTotal == 0L) {
-        0f
-    } else {
-        progress.bytesRead.toFloat() / progress.bytesTotal.toFloat()
-    }
+    val downloadFraction = progress?.bytesTotal
+        ?.takeIf { it > 0L }
+        ?.let { progress.bytesRead.toFloat() / it }
+        ?: 0f
 
-    // Determine which progress to show
     val isDownloading = progress?.phase == PatchBundleRepository.BundleUpdatePhase.Downloading &&
-            progress.bytesTotal != null &&
-            progress.bytesTotal > 0L
+            downloadFraction > 0f
     val displayProgress = if (isDownloading) downloadFraction else fraction
 
-    val containerColor = when (status) {
-        BundleUpdateStatus.Success -> MaterialTheme.colorScheme.primaryContainer
-        BundleUpdateStatus.Warning -> MaterialTheme.colorScheme.secondaryContainer
-        BundleUpdateStatus.Error -> MaterialTheme.colorScheme.errorContainer
-        BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.surfaceVariant
-    }
+    val containerColor by animateColorAsState(
+        targetValue = when (status) {
+            BundleUpdateStatus.Success -> MaterialTheme.colorScheme.primaryContainer
+            BundleUpdateStatus.Warning -> MaterialTheme.colorScheme.secondaryContainer
+            BundleUpdateStatus.Error -> MaterialTheme.colorScheme.errorContainer
+            BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.surfaceVariant
+        },
+        animationSpec = tween(durationMillis = 300),
+        label = "containerColor"
+    )
 
-    val contentColor = when (status) {
-        BundleUpdateStatus.Success -> MaterialTheme.colorScheme.onPrimaryContainer
-        BundleUpdateStatus.Warning -> MaterialTheme.colorScheme.onSecondaryContainer
-        BundleUpdateStatus.Error -> MaterialTheme.colorScheme.onErrorContainer
-        BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.onSurfaceVariant
-    }
+    val contentColor by animateColorAsState(
+        targetValue = when (status) {
+            BundleUpdateStatus.Success -> MaterialTheme.colorScheme.onPrimaryContainer
+            BundleUpdateStatus.Warning -> MaterialTheme.colorScheme.onSecondaryContainer
+            BundleUpdateStatus.Error -> MaterialTheme.colorScheme.onErrorContainer
+            BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.onSurfaceVariant
+        },
+        animationSpec = tween(durationMillis = 300),
+        label = "contentColor"
+    )
 
     Card(
         modifier = Modifier
@@ -622,69 +635,103 @@ private fun BundleUpdateSnackbarContent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Icon based on status
-                when (status) {
-                    BundleUpdateStatus.Success -> MorpheIcon(
-                        icon = Icons.Outlined.CheckCircle,
-                        tint = contentColor
-                    )
-                    BundleUpdateStatus.Warning -> MorpheIcon(
-                        icon = Icons.Outlined.SignalCellularAlt,
-                        tint = contentColor
-                    )
-                    BundleUpdateStatus.Error -> MorpheIcon(
-                        icon = Icons.Outlined.Warning,
-                        tint = contentColor
-                    )
-                    BundleUpdateStatus.Updating -> CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        strokeWidth = 2.5.dp,
-                        color = contentColor
-                    )
+                Crossfade(targetState = status, label = "snackbarIcon") { s ->
+                    when (s) {
+                        BundleUpdateStatus.Success -> MorpheIcon(
+                            icon = Icons.Outlined.CheckCircle,
+                            tint = contentColor
+                        )
+                        BundleUpdateStatus.Warning -> MorpheIcon(
+                            icon = Icons.Outlined.SignalCellularAlt,
+                            tint = contentColor
+                        )
+                        BundleUpdateStatus.Error -> MorpheIcon(
+                            icon = Icons.Outlined.Warning,
+                            tint = contentColor
+                        )
+                        BundleUpdateStatus.Updating -> CircularProgressIndicator(
+                            modifier = Modifier.size(24.dp),
+                            strokeWidth = 2.5.dp,
+                            color = contentColor
+                        )
+                    }
                 }
 
                 // Text content
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = when (status) {
-                            BundleUpdateStatus.Success -> stringResource(R.string.home_update_success)
-                            BundleUpdateStatus.Warning -> stringResource(R.string.home_update_skipped_metered)
-                            BundleUpdateStatus.Error -> stringResource(R.string.home_update_error)
-                            BundleUpdateStatus.Updating -> stringResource(R.string.home_updating_sources)
-                        },
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = contentColor
-                    )
+                    Crossfade(targetState = status, label = "snackbarTitle") { s ->
+                        Text(
+                            text = when (s) {
+                                BundleUpdateStatus.Success -> stringResource(R.string.home_update_success)
+                                BundleUpdateStatus.Warning -> stringResource(R.string.home_update_skipped_metered)
+                                BundleUpdateStatus.Error -> stringResource(R.string.home_update_error)
+                                BundleUpdateStatus.Updating -> stringResource(R.string.home_updating_sources)
+                            },
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = contentColor
+                        )
+                    }
+
+                    val subtitleColor = contentColor.copy(alpha = 0.8f)
 
                     if (status == BundleUpdateStatus.Warning) {
                         Text(
                             text = stringResource(R.string.home_update_skipped_metered_subtitle),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = contentColor.copy(alpha = 0.8f)
+                            color = subtitleColor
                         )
                     }
 
                     if (status == BundleUpdateStatus.Updating && progress != null) {
-                        if (isDownloading) {
-                            val readMb = progress.bytesRead.toFloat() / (1024 * 1024)
-                            val totalMb = progress.bytesTotal.toFloat() / (1024 * 1024)
-                            val percent = (downloadFraction * 100).toInt()
-                            Text(
-                                text = stringResource(
-                                    R.string.home_update_download_progress,
-                                    readMb, totalMb, percent.toString()
-                                ),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = contentColor.copy(alpha = 0.8f)
+                        val totalMb = (progress.bytesTotal ?: 0L).toFloat() / (1024 * 1024)
+                        val readMb = progress.bytesRead.toFloat() / (1024 * 1024)
+                        val percent = (downloadFraction * 100).toInt()
+                        val (subtitleKey, subtitle) = when {
+                            progress.total > 1 && isDownloading -> 1 to stringResource(
+                                R.string.home_update_bundle_count_with_bytes,
+                                progress.completed, progress.total, readMb, totalMb, percent
                             )
-                        } else if (progress.currentBundleName != null) {
-                            Text(
-                                text = progress.currentBundleName,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = contentColor.copy(alpha = 0.8f),
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
+                            progress.total > 1 -> 2 to stringResource(
+                                R.string.home_update_bundle_count,
+                                progress.completed, progress.total
                             )
+                            isDownloading -> 3 to stringResource(
+                                R.string.home_update_download_progress,
+                                readMb, totalMb, percent.toString()
+                            )
+                            progress.currentBundleName != null -> 4 to progress.currentBundleName
+                            else -> 0 to null
+                        }
+                        AnimatedContent(
+                            targetState = subtitleKey to subtitle,
+                            contentKey = { it.first },
+                            transitionSpec = MorpheAnimations.fadeCrossfade(200),
+                            label = "subtitle"
+                        ) { (_, text) ->
+                            if (text != null) {
+                                Text(
+                                    text = text,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = subtitleColor,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
+                        }
+                        AnimatedVisibility(visible = progress.activeNames.isNotEmpty()) {
+                            Crossfade(
+                                targetState = progress.activeNames.joinToString(", "),
+                                label = "activeNames"
+                            ) { names ->
+                                Text(
+                                    text = names,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = contentColor.copy(alpha = 0.6f),
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
                         }
                     }
 
@@ -692,14 +739,14 @@ private fun BundleUpdateSnackbarContent(
                         Text(
                             text = stringResource(R.string.home_update_success_subtitle),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = contentColor.copy(alpha = 0.8f)
+                            color = subtitleColor
                         )
                     }
                     if (status == BundleUpdateStatus.Error) {
                         Text(
                             text = stringResource(R.string.home_update_error_subtitle),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = contentColor.copy(alpha = 0.8f)
+                            color = subtitleColor
                         )
                     }
                 }
@@ -724,10 +771,21 @@ private fun BundleUpdateSnackbarContent(
 @Composable
 fun GreetingSection(
     message: String?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onRefresh: (() -> Unit)? = null
 ) {
     if (message.isNullOrEmpty()) return
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+    val refreshLabel = stringResource(R.string.refresh)
+    Box(
+        modifier = modifier.then(
+            if (onRefresh != null) Modifier.semantics {
+                customActions = listOf(
+                    CustomAccessibilityAction(refreshLabel) { onRefresh(); true }
+                )
+            } else Modifier
+        ),
+        contentAlignment = Alignment.Center
+    ) {
         AnimatedContent(
             targetState = message,
             transitionSpec = MorpheAnimations.slideUpContentTransitionSpec,
@@ -755,6 +813,7 @@ fun MainAppsSection(
     homeAppItems: List<HomeAppItem>,
     itemSpacing: Dp = 16.dp,
     horizontalPadding: Dp = 0.dp,
+    maxCardWidth: Dp = 500.dp,
     onAppClick: (HomeAppItem) -> Unit,
     onHideApp: (String) -> Unit,
     onHideMultiple: (Set<String>) -> Unit = {},
@@ -769,11 +828,18 @@ fun MainAppsSection(
     onSearchQueryChange: (String) -> Unit = {},
     onBundlesClick: () -> Unit = {},
     onboardingState: OnboardingState? = null,
-    showFadeOverlay: Boolean = true
+    showFadeOverlay: Boolean = true,
+    onSaveOrder: (List<String>) -> Unit = {},
+    onResetOrder: () -> Unit = {}
 ) {
     // Multi-select state - set of packageNames chosen for bulk hide
     val isMultiSelectMode = remember { mutableStateOf(false) }
     val selectedPackages = remember { mutableStateOf(emptySet<String>()) }
+
+    // Reorder state
+    val isReorderMode = remember { mutableStateOf(false) }
+    var localOrder by remember { mutableStateOf(homeAppItems.map { it.packageName }) }
+    val haptic = LocalHapticFeedback.current
 
     // Back gesture/button cancels multi-select instead of navigating back
     BackHandler(enabled = isMultiSelectMode.value) {
@@ -781,13 +847,29 @@ fun MainAppsSection(
         selectedPackages.value = emptySet()
     }
 
-    // Sync selection with current item list; exit mode if no items remain
+    // Back gesture/button exits reorder mode without saving
+    BackHandler(enabled = isReorderMode.value) {
+        isReorderMode.value = false
+        localOrder = homeAppItems.map { it.packageName }
+    }
+
+    // Sync selection and local order with current item list
     LaunchedEffect(homeAppItems) {
         val filtered = selectedPackages.value.filter { pkg ->
             homeAppItems.any { it.packageName == pkg }
         }.toSet()
         selectedPackages.value = filtered
         if (filtered.isEmpty()) isMultiSelectMode.value = false
+
+        if (!isReorderMode.value) {
+            localOrder = homeAppItems.map { it.packageName }
+        } else {
+            val pkgSet = homeAppItems.map { it.packageName }.toSet()
+            val kept = localOrder.filter { it in pkgSet }
+            val keptSet = kept.toSet()
+            val added = pkgSet.filter { it !in keptSet }
+            localOrder = kept + added
+        }
     }
 
     // Track if real content has ever arrived so we never re-show the shimmer on resume
@@ -810,7 +892,7 @@ fun MainAppsSection(
         } else {
             // Small delay so Compose has one frame to lay out the real cards before the
             // shimmer fades out - prevents a single-frame empty gap.
-            if (stableLoadingState.value) delay(50)
+            if (stableLoadingState.value) delay(50.milliseconds)
             stableLoadingState.value = false
         }
     }
@@ -852,6 +934,16 @@ fun MainAppsSection(
     }
 
     val listState = rememberLazyListState()
+    val reorderableState = rememberReorderableLazyListState(listState) { from, to ->
+        val newOrder = localOrder.toMutableList()
+        val moved = newOrder.removeAt(from.index)
+        newOrder.add(to.index, moved)
+        localOrder = newOrder
+    }
+    val orderedItems = remember(localOrder, homeAppItems) {
+        val byPackage = homeAppItems.associateBy { it.packageName }
+        localOrder.mapNotNull { byPackage[it] }
+    }
 
     // True empty state: loaded, no apps from any bundle (no sources / all disabled)
     val isNoSourcesState = !stableLoadingState.value && homeAppItems.isEmpty() && hiddenAppItems.isEmpty()
@@ -894,7 +986,7 @@ fun MainAppsSection(
             } else {
                 Box(
                     modifier = Modifier
-                        .widthIn(max = 500.dp)
+                        .widthIn(max = maxCardWidth)
                         .fillMaxWidth()
                 ) {
                     Column(modifier = Modifier.fillMaxWidth()) {
@@ -925,8 +1017,14 @@ fun MainAppsSection(
                                 contentPadding = PaddingValues(
                                     start = horizontalPadding,
                                     end = horizontalPadding,
-                                    // Extra bottom padding so cards aren't hidden behind the multi-select bar
-                                    bottom = if (isMultiSelectMode.value) 120.dp else 0.dp
+                                    // Extra bottom padding so cards aren't hidden behind the action bar
+                                    // MultiSelectBar surface heights (144dp / 100dp) minus bar's own
+                                    // 8dp top padding, plus itemSpacing for consistent card gap
+                                    bottom = when {
+                                        isMultiSelectMode.value -> 136.dp + itemSpacing
+                                        isReorderMode.value -> 92.dp + itemSpacing
+                                        else -> 0.dp
+                                    }
                                 )
                             ) {
                                 // Cold start: homeAppItems still empty - show placeholder shimmer cards
@@ -936,6 +1034,33 @@ fun MainAppsSection(
                                             gradientColors = placeholderGradients[index % placeholderGradients.size],
                                             modifier = Modifier.animateItem()
                                         )
+                                    }
+                                } else if (isReorderMode.value) {
+                                    itemsIndexed(
+                                        items = orderedItems,
+                                        key = { _, item -> item.packageName }
+                                    ) { _, item ->
+                                        ReorderableItem(reorderableState, key = item.packageName) { _ ->
+                                            DynamicAppCard(
+                                                item = item,
+                                                isLoading = false,
+                                                hasUpdate = item.hasUpdate,
+                                                onAppClick = {},
+                                                onHide = {},
+                                                onShowPatches = {},
+                                                showGestureHint = false,
+                                                onGestureHintShown = {},
+                                                isSelected = false,
+                                                isMultiSelectMode = true,
+                                                onLongPress = {},
+                                                dragHandleModifier = Modifier.draggableHandle(
+                                                    onDragStarted = {
+                                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                    }
+                                                ),
+                                                modifier = Modifier.animateItem()
+                                            )
+                                        }
                                     }
                                 } else {
                                     itemsIndexed(
@@ -1111,11 +1236,12 @@ fun MainAppsSection(
                         }
                     }
 
-                    // Multi-select confirmation bar - slides up from bottom
+                    // Multi-select / reorder bar - slides up from bottom
                     MultiSelectBar(
                         selectedCount = selectedPackages.value.size,
                         totalCount = homeAppItems.size,
-                        visible = isMultiSelectMode.value,
+                        visible = isMultiSelectMode.value || isReorderMode.value,
+                        isReorderMode = isReorderMode.value,
                         onSelectAll = {
                             selectedPackages.value = homeAppItems.map { it.packageName }.toSet()
                         },
@@ -1127,9 +1253,28 @@ fun MainAppsSection(
                         },
                         actionIcon = Icons.Outlined.VisibilityOff,
                         actionContentDescription = stringResource(R.string.hide),
+                        actionDoneMessage = stringResource(R.string.hidden),
                         onCancel = {
                             isMultiSelectMode.value = false
                             selectedPackages.value = emptySet()
+                        },
+                        onEnterReorder = {
+                            isMultiSelectMode.value = false
+                            selectedPackages.value = emptySet()
+                            isReorderMode.value = true
+                        },
+                        onSaveOrder = {
+                            onSaveOrder(localOrder)
+                            isReorderMode.value = false
+                        },
+                        onResetOrder = {
+                            onResetOrder()
+                            localOrder = homeAppItems.map { it.packageName }
+                            isReorderMode.value = false
+                        },
+                        onCancelReorder = {
+                            isReorderMode.value = false
+                            localOrder = homeAppItems.map { it.packageName }
                         },
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
@@ -1333,7 +1478,8 @@ private fun DynamicAppCard(
     onGestureHintShown: () -> Unit,
     isSelected: Boolean = false,
     isMultiSelectMode: Boolean = false,
-    onLongPress: () -> Unit = {}
+    onLongPress: () -> Unit = {},
+    dragHandleModifier: Modifier? = null
 ) {
     val showHideDialog = remember { mutableStateOf(false) }
     val density = LocalDensity.current
@@ -1353,11 +1499,11 @@ private fun DynamicAppCard(
             offsetX.snapTo(0f)
             return@LaunchedEffect
         }
-        delay(800)
+        delay(800.milliseconds)
         val nudge = with(density) { 72.dp.toPx() }
         offsetX.animateTo(nudge,  tween(500, easing = FastOutSlowInEasing))
         offsetX.animateTo(0f,     tween(400, easing = FastOutSlowInEasing))
-        delay(250)
+        delay(250.milliseconds)
         offsetX.animateTo(-nudge, tween(500, easing = FastOutSlowInEasing))
         offsetX.animateTo(0f,     tween(400, easing = FastOutSlowInEasing))
         onGestureHintShown()
@@ -1387,7 +1533,12 @@ private fun DynamicAppCard(
         )
     }
 
-    Box(modifier = modifier.fillMaxWidth()) {
+    Box(modifier = modifier.fillMaxWidth().semantics {
+        customActions = listOf(
+            CustomAccessibilityAction(hideLabel) { showHideDialog.value = true; true },
+            CustomAccessibilityAction(patchesLabel) { onShowPatches(); true }
+        )
+    }) {
         SwipeableCardContainer(
             offsetX = offsetX,
             actionThresholdPx = actionThresholdPx,
@@ -1450,6 +1601,23 @@ private fun DynamicAppCard(
             }
         }
 
+        if (dragHandleModifier != null) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .size(48.dp)
+                    .then(dragHandleModifier),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.DragHandle,
+                    contentDescription = null,
+                    modifier = Modifier.size(28.dp),
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+            }
+        }
+
         if (showHideDialog.value) {
             HideAppDialog(
                 item = item,
@@ -1477,13 +1645,22 @@ private fun MultiSelectBar(
     onAction: () -> Unit,
     actionIcon: ImageVector,
     actionContentDescription: String,
+    actionDoneMessage: String,
     onCancel: () -> Unit,
+    onEnterReorder: () -> Unit,
+    onSaveOrder: () -> Unit,
+    onResetOrder: () -> Unit,
+    onCancelReorder: () -> Unit,
     modifier: Modifier = Modifier,
+    isReorderMode: Boolean = false,
+    showReorderButton: Boolean = true,
     actionColors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors(
         containerColor = MaterialTheme.colorScheme.errorContainer,
         contentColor = MaterialTheme.colorScheme.onErrorContainer
     )
 ) {
+    val effectiveReorderMode = isReorderMode && showReorderButton
+
     val context = LocalContext.current
     fun withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
         context.toast(doneMessage)
@@ -1495,6 +1672,12 @@ private fun MultiSelectBar(
     val deselectAllLabel = stringResource(R.string.deselect_all)
     val deselectAllDone = stringResource(R.string.deselect_all_done)
     val cancelLabel = stringResource(android.R.string.cancel)
+    val reorderListLabel = stringResource(R.string.reorder_list)
+    val reorderListHint = stringResource(R.string.reorder_list_hint)
+    val reorderDone = stringResource(R.string.reorder_done)
+    val resetOrderLabel = stringResource(R.string.reset_order)
+    val resetOrderDone = stringResource(R.string.reset_order_done)
+    val doneLabel = stringResource(R.string.done)
 
     AnimatedVisibility(
         visible = visible,
@@ -1511,58 +1694,127 @@ private fun MultiSelectBar(
             shadowElevation = 8.dp,
             tonalElevation = 4.dp
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                AnimatedContent(
-                    targetState = selectedCount,
-                    transitionSpec = MorpheAnimations.compactCounterTransitionSpec,
-                    label = "selected_count"
-                ) { count ->
-                    Text(
-                        text = "$count ${stringResource(R.string.selected).lowercase()}",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
+            AnimatedContent(
+                targetState = effectiveReorderMode,
+                transitionSpec = MorpheAnimations.fadeCrossfade(200),
+                label = "multibar_mode"
+            ) { inReorder ->
+                if (inReorder) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 12.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = reorderListHint,
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                            ActionPillButton(
+                                onClick = withToast(resetOrderDone, onResetOrder),
+                                icon = Icons.Outlined.Restore,
+                                contentDescription = resetOrderLabel,
+                                tooltip = resetOrderLabel
+                            )
+                            ActionPillButton(
+                                onClick = onCancelReorder,
+                                icon = Icons.Outlined.Close,
+                                contentDescription = cancelLabel,
+                                tooltip = cancelLabel
+                            )
+                            ActionPillButton(
+                                onClick = withToast(reorderDone, onSaveOrder),
+                                icon = Icons.Outlined.Check,
+                                contentDescription = doneLabel,
+                                tooltip = doneLabel
+                            )
+                        }
+                    }
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 12.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        val landscape = isLandscape()
 
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        ActionPillButton(
-                            onClick = withToast(selectAllDone, onSelectAll),
-                            icon = Icons.Outlined.DoneAll,
-                            contentDescription = selectAllLabel,
-                            tooltip = selectAllLabel,
-                            enabled = selectedCount < totalCount
-                        )
-                        ActionPillButton(
-                            onClick = withToast(deselectAllDone, onDeselectAll),
-                            icon = Icons.Outlined.RemoveDone,
-                            contentDescription = deselectAllLabel,
-                            tooltip = deselectAllLabel,
-                            enabled = selectedCount > 0
-                        )
-                        ActionPillButton(
-                            onClick = onCancel,
-                            icon = Icons.Outlined.Close,
-                            contentDescription = cancelLabel,
-                            tooltip = cancelLabel
-                        )
-                        ActionPillButton(
-                            onClick = withToast(actionContentDescription, onAction),
-                            icon = actionIcon,
-                            contentDescription = actionContentDescription,
-                            tooltip = actionContentDescription,
-                            enabled = selectedCount > 0,
-                            colors = actionColors
-                        )
+                        AnimatedContent(
+                            targetState = selectedCount,
+                            transitionSpec = MorpheAnimations.compactCounterTransitionSpec,
+                            label = "selected_count"
+                        ) { count ->
+                            Text(
+                                text = "$count ${stringResource(R.string.selected).lowercase()}",
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+
+                        BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
+                            val btnCount = if (showReorderButton && landscape) 5 else 4
+                            val btnWidth = (maxWidth - 12.dp * (btnCount - 1)) / btnCount
+                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                ActionPillButton(
+                                    onClick = withToast(selectAllDone, onSelectAll),
+                                    icon = Icons.Outlined.DoneAll,
+                                    contentDescription = selectAllLabel,
+                                    tooltip = selectAllLabel,
+                                    enabled = selectedCount < totalCount,
+                                    modifier = Modifier.width(btnWidth)
+                                )
+                                ActionPillButton(
+                                    onClick = withToast(deselectAllDone, onDeselectAll),
+                                    icon = Icons.Outlined.RemoveDone,
+                                    contentDescription = deselectAllLabel,
+                                    tooltip = deselectAllLabel,
+                                    enabled = selectedCount > 0,
+                                    modifier = Modifier.width(btnWidth)
+                                )
+                                ActionPillButton(
+                                    onClick = onCancel,
+                                    icon = Icons.Outlined.Close,
+                                    contentDescription = cancelLabel,
+                                    tooltip = cancelLabel,
+                                    modifier = Modifier.width(btnWidth)
+                                )
+                                ActionPillButton(
+                                    onClick = withToast(actionDoneMessage, onAction),
+                                    icon = actionIcon,
+                                    contentDescription = actionContentDescription,
+                                    tooltip = actionContentDescription,
+                                    enabled = selectedCount > 0,
+                                    colors = actionColors,
+                                    modifier = Modifier.width(btnWidth)
+                                )
+                                // In landscape, reorder fits as 5th button in the same row
+                                if (showReorderButton && landscape) {
+                                    ActionPillButton(
+                                        onClick = onEnterReorder,
+                                        icon = Icons.Outlined.Reorder,
+                                        contentDescription = reorderListLabel,
+                                        tooltip = reorderListLabel,
+                                        modifier = Modifier.width(btnWidth)
+                                    )
+                                }
+                            }
+                        }
+
+                        // Portrait: reorder stays below as a full-width button with label
+                        if (showReorderButton && !landscape) {
+                            ActionPillButton(
+                                onClick = onEnterReorder,
+                                icon = Icons.Outlined.Reorder,
+                                contentDescription = reorderListLabel,
+                                tooltip = reorderListLabel,
+                                label = reorderListLabel,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
                     }
                 }
             }
@@ -1885,7 +2137,6 @@ fun AppPatchesDialog(
     val searchQuery = remember { mutableStateOf("") }
     val selectedBundle = remember { mutableStateOf<Int?>(null) }
     val showFilterSheet = remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     val filteredPatches = remember(allPatches, searchQuery.value, selectedBundle.value) {
         allPatches.filter { (uid, patch) ->
@@ -2205,9 +2456,7 @@ fun AppPatchesDialog(
     // Bundle filter bottom sheet (multi-bundle only)
     if (showFilterSheet.value && isMultiBundle) {
         MorpheBottomSheet(
-            onDismissRequest = { showFilterSheet.value = false },
-            sheetState = sheetState,
-            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+            onDismissRequest = { showFilterSheet.value = false }
         ) {
             Column(
                 modifier = Modifier
@@ -2329,6 +2578,7 @@ internal fun HiddenAppsDialog(
     onShowPatches: (HomeAppItem) -> Unit,
     onDismiss: () -> Unit
 ) {
+    val itemSpacing = rememberWindowSize().itemSpacing
     val isMultiSelectMode = remember { mutableStateOf(false) }
     val selectedPackages = remember { mutableStateOf(emptySet<String>()) }
 
@@ -2386,6 +2636,7 @@ internal fun HiddenAppsDialog(
                     selectedCount = selectedPackages.value.size,
                     totalCount = hiddenAppItems.size,
                     visible = true,
+                    showReorderButton = false,
                     onSelectAll = {
                         selectedPackages.value = hiddenAppItems.map { it.packageName }.toSet()
                     },
@@ -2397,6 +2648,7 @@ internal fun HiddenAppsDialog(
                     },
                     actionIcon = Icons.Outlined.Visibility,
                     actionContentDescription = stringResource(R.string.unhide),
+                    actionDoneMessage = stringResource(R.string.unhide_done),
                     actionColors = IconButtonDefaults.filledTonalIconButtonColors(
                         containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                         contentColor = MaterialTheme.colorScheme.onTertiaryContainer
@@ -2404,7 +2656,11 @@ internal fun HiddenAppsDialog(
                     onCancel = {
                         isMultiSelectMode.value = false
                         selectedPackages.value = emptySet()
-                    }
+                    },
+                    onEnterReorder = {},
+                    onSaveOrder = {},
+                    onResetOrder = {},
+                    onCancelReorder = {}
                 )
             } else {
                 MorpheDialogOutlinedButton(
@@ -2425,7 +2681,7 @@ internal fun HiddenAppsDialog(
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(itemSpacing)
             ) {
                 items(
                     items = hiddenAppItems,
@@ -2694,7 +2950,10 @@ fun InstalledAppCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
+                    modifier = Modifier.weight(1f, fill = false),
                     text = version,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.bodyMedium.copy(
                         shadow = Shadow(
                             color = Color.Black.copy(alpha = 0.4f),
@@ -2878,7 +3137,6 @@ private fun HomeGlassPillButton(
  * - subtle horizontal frost band
  * - gradient border
  */
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun AppCardLayout(
     modifier: Modifier = Modifier,
@@ -3141,6 +3399,116 @@ fun AppLoadingCard(
                     baseColor = Color.White.copy(alpha = 0.15f)
                 )
             }
+        }
+    }
+}
+
+/**
+ * Landscape sidebar panel: nav items (Search / Sources / Settings) centered vertically.
+ */
+@Composable
+private fun HomeSidebarPanel(
+    showSearchButton: Boolean,
+    searchActive: Boolean,
+    isExpertModeEnabled: Boolean,
+    onSearchClick: () -> Unit,
+    onBundlesClick: () -> Unit,
+    onSettingsClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    onSourcesPositioned: ((Rect) -> Unit)? = null,
+    onSettingsPositioned: ((Rect) -> Unit)? = null
+) {
+    Column(
+        modifier = modifier
+            .width(220.dp)
+            .fillMaxHeight()
+            .navigationBarsPadding()
+            .padding(horizontal = 12.dp, vertical = 24.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
+    ) {
+        if (showSearchButton) {
+            HomeSidebarNavItem(
+                icon = if (searchActive) Icons.Outlined.SearchOff else Icons.Outlined.Search,
+                label = stringResource(R.string.home_search_apps),
+                isSelected = searchActive,
+                onClick = onSearchClick
+            )
+        }
+        HomeSidebarNavItem(
+            icon = Icons.Outlined.Source,
+            label = stringResource(R.string.sources),
+            isSelected = false,
+            onClick = onBundlesClick,
+            modifier = Modifier.then(
+                if (onSourcesPositioned != null) Modifier.onGloballyPositioned { coords ->
+                    onSourcesPositioned(coords.boundsInWindow())
+                } else Modifier
+            )
+        )
+        HomeSidebarNavItem(
+            icon = if (isExpertModeEnabled) Icons.Outlined.Engineering else Icons.Outlined.Settings,
+            label = stringResource(R.string.settings),
+            isSelected = false,
+            onClick = onSettingsClick,
+            modifier = Modifier.then(
+                if (onSettingsPositioned != null) Modifier.onGloballyPositioned { coords ->
+                    onSettingsPositioned(coords.boundsInWindow())
+                } else Modifier
+            )
+        )
+    }
+}
+
+/**
+ * Single sidebar nav item: 52dp tall, 16dp rounded corners, animated colors.
+ */
+@Composable
+private fun HomeSidebarNavItem(
+    icon: ImageVector,
+    label: String,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val containerColor by animateColorAsState(
+        targetValue = if (isSelected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent,
+        label = "sidebarNavItemBg"
+    )
+    val contentColor by animateColorAsState(
+        targetValue = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer
+        else MaterialTheme.colorScheme.onSurfaceVariant,
+        label = "sidebarNavItemFg"
+    )
+    Surface(
+        onClick = onClick,
+        modifier = modifier
+            .fillMaxWidth()
+            .height(52.dp)
+            .semantics { role = Role.Button; selected = isSelected },
+        color = containerColor,
+        shape = RoundedCornerShape(16.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = contentColor,
+                modifier = Modifier.size(22.dp)
+            )
+            Text(
+                text = label,
+                style = MaterialTheme.typography.labelLarge,
+                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                color = contentColor,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
         }
     }
 }

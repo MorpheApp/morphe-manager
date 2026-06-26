@@ -53,6 +53,27 @@
     <string name="home_greeting_9">অ্যাপ কে অ্যাপের থেকেই সাহায্য করছি আজ থেকে</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">ক্যাফেইন ও ভালো প্যাচ দিয়ে চালিত</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">জেগে উঠুন এবং প্যাচ করুন</string>
+    <string name="home_greeting_morning_2">শুভ সকাল! অ্যাপগুলো নিজে থেকে প্যাচ হবে না</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">দুপুরে ঝিমুনি আসছে? চলুন কিছু একটা প্যাচ করে নেওয়া যাক</string>
+    <string name="home_greeting_afternoon_2">দুপুরে লাঞ্চের পর প্যাচিং করার মজাই আলাদা, ট্রাই করে দেখুন</string>
+    <string name="home_greeting_afternoon_3">বিকেলের শিফট: প্যাচ এডিশন পরখ করে দেখুন</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">শুভ সন্ধ্যা! সন্ধ্যার প্যাচগুলো সত্যিই দারুণ কাজ করে</string>
+    <string name="home_greeting_evening_2">এবার বিশ্রামের পালা? তার আগে একটা অ্যাপ প্যাচ করে ফেলুন</string>
+    <string name="home_greeting_evening_3">ছুটি নিয়ে নিচ্ছেন? যাওয়ার আগে একটা কিছু প্যাচ করে ফেলুন</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">ঘুম আসলো না বুঝি? আপনার যে অ্যাপগুলোর প্যাচ দরকার, সেগুলোও কিন্তু জেগে আছে</string>
+    <string name="home_greeting_late_night_2">গভীর রাতে প্যাচ সেশন? আপনার ডেডিকেশনকে রেসপেক্ট জানাই</string>
+    <string name="home_greeting_late_night_3">নাইট আউল মোড: অ্যাক্টিভেট হয়ে গেছে</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">প্যাচ করার ব্যস্ততম সময়… অন্তত লোকে তো তাই বলে</string>
+    <string name="home_greeting_super_late_2">ঘুম উধাও? তার চেয়ে বরং একটা কিছু প্যাচ করে ফেলুন</string>
+    <string name="home_greeting_super_late_3">এখন আর ঘুমিয়ে কী হবে, বরং জেগেই থাকুন আর একটা কিছু প্যাচ করে ফেলুন</string>
+    <string name="home_greeting_super_late_4">আপনি এবং সার্ভার, দুজনেই কিন্তু এখনো জেগে আছেন</string>
+    <string name="home_greeting_super_late_5">রাতও জাগছেন, আবার কাজের কাজও করে ফেলছেন</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">প্যাচ সোর্সগুলো</string>
     <string name="sources_management_open_in_browser">ব্রাউজারে ওপেন করুন</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">অসঙ্গতিপূর্ণ</string>
     <string name="home_apk_availability_yes">হ্যাঁ, আমাকে একটি APK খুঁজতে সাহায্য করুন</string>
     <string name="home_apk_availability_no">না, আমি ইতিমধ্যে একটি APK পেয়েছি</string>
-    <string name="home_apk_use_saved_with_version">বর্তমান সংরক্ষিত APK (v%s) ব্যবহার করুন</string>
-    <string name="home_apk_use_installed_with_version">APK (v%s) ব্যবহার করুন</string>
+    <string name="home_apk_use_saved">সেভ করে রাখা APK-টি ব্যবহার করুন</string>
+    <string name="home_apk_use_installed">ফোনে ইনস্টল থাকা APK-টি ব্যবহার করুন</string>
     <string name="home_app_info_no_saved_apk">কোন সংরক্ষিত APK নেই। প্যাচিংয়ের জন্য আবার APK ফাইল নির্বাচন করতে হবে</string>
     <string name="home_version_requires_android">Android %s+ প্রয়োজন</string>
     <string name="home_apk_no_compatible_versions_title">এই ডিভাইসে সমর্থিত নয়</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">নিচের \'%s\' বোতামটি চাপুন</string>
     <string name="home_download_instructions_step2_part1">ওয়েবপেজটি স্ক্রোল করুন এবং চাপুন</string>
     <string name="home_download_instructions_download_button_toast">এখানে নয়, ওয়েবসাইটে ডাউনলোড করুন 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">দারুণ! এখন নিচের দিকে ‘जारी রাখুন’ এ ক্লিক করুন এবং ওয়েবসাইটে যান 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">চর্চা চলতে থাকলে নিখুঁত হওয়া যায়, আপনি প্রায় সেখানে পৌঁছে গেছেন! 💪 </string>
+    <string name="home_download_instructions_download_button_toast_2">চমৎকার! এখন কন্টিনিউ বাটনে ক্লিক করে ওয়েবসাইটে চলে যান 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">অনুশীলনের মাধ্যমেই নিখুঁত হওয়া যায় এবং আপনি সঠিক পথেই এগোচ্ছেন 💪</string>
     <string name="home_download_instructions_download_button_toast_4">এখনো এখানে নেই… এখনো এখানে নেই… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">ঠিক আছে, আমি আপনার নিষ্ঠা সম্মান করি 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">আপনি এখন একজন অফিসিয়াল Morphe বোতাম পরীক্ষক 🏅</string>
@@ -184,6 +205,9 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">এগো চলুন</string>
     <string name="home_dialog_unsupported_version_compatible_versions">সমর্থিত সংস্করণ:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">সমর্থিত হয়নি</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">বিল্ড %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">এটি একই সংস্করণের একটি ভিন্ন বিল্ড। প্যাচগুলো কাজ করার জন্য একটি নির্দিষ্ট বিল্ডের প্রয়োজন</string>
     <string name="home_dialog_wrong_package_title">ভুলি প্যাকেজ নির্বাচন করা হয়েছে</string>
     <string name="home_dialog_wrong_package_description">নির্বাচিত APK অ্যাপের জন্য নির্বাচিত হয়নি</string>
     <string name="home_dialog_expected_package">অ্যাপের নাম:</string>
@@ -724,6 +748,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="warning">সতর্কবার্তা</string>
     <string name="error_">ত্রুটি</string>
     <string name="retry">আবার চেষ্টা করুন</string>
+    <string name="refresh">রিফ্রেশ করুন</string>
     <string name="add">যোগ করুন</string>
     <string name="close">বন্ধ করুন</string>
     <string name="back">পিছিয়ে যান</string>
@@ -740,6 +765,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="view">দেখুন</string>
     <string name="search">অনুসন্ধান</string>
     <string name="search_no_results">কোনো ফলাফল পাওয়া যায়নি</string>
+    <string name="sort">ক্রমানুসারে সাজান</string>
     <string name="any_version">যেকোনো</string>
     <string name="enabled">ক্ষমতাকার্তা করা হয়েছে</string>
     <string name="disabled">নিষ্ক্রিয় হয়েছে</string>
@@ -749,6 +775,11 @@ morphe_adaptive_monochrome_custom.xml
     <string name="select_all_done">সব নির্বাচন করা হয়েছে</string>
     <string name="deselect_all">সবগুলি নির্বাচন বাতিল করুন</string>
     <string name="deselect_all_done">সব ডি-সিলেক্ট করা হয়েছে</string>
+    <string name="reorder_list">তালিকাটি নতুন করে সাজান</string>
+    <string name="reorder_list_hint">নতুন করে সাজাতে টেনে আনুন</string>
+    <string name="reorder_done">নতুন ক্রমটি সেভ করা হয়েছে</string>
+    <string name="reset_order">পূর্বের ক্রমে ফিরে যান</string>
+    <string name="reset_order_done">পূর্বের ক্রমে ফিরে যাওয়া হয়েছে</string>
     <string name="rename">রেনেম করুন</string>
     <string name="import_">আমদানি করুন</string>
     <string name="export">এক্সপোর্ট করুন</string>
@@ -783,6 +814,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="hide">গোপন রাখুন</string>
     <string name="hidden">লুকানো</string>
     <string name="unhide">আনলুকানো</string>
+    <string name="unhide_done">দেখানো হচ্ছে</string>
     <string name="logs">লগসমূহ</string>
     <string name="sources">\"সোর্স\"</string>
     <string name="installing_ellipsis">ইনস্টল হচ্ছে…</string>

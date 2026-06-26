@@ -1,0 +1,11 @@
+{
+  "uniqueId": "com.github.GIGAMOLE:ComposeScrollbars",
+  "name": "ComposeScrollbars",
+  "developers": [{"name": "GIGAMOLE"}],
+  "website": "https://github.com/GIGAMOLE/ComposeScrollbars",
+  "scm": {
+    "connection": "scm:git:https://github.com/GIGAMOLE/ComposeScrollbars.git",
+    "url": "https://github.com/GIGAMOLE/ComposeScrollbars"
+  },
+  "licenses": ["MIT"]
+}

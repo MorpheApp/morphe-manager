@@ -6,11 +6,7 @@
 package app.morphe.manager.ui.screen.settings
 
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -23,14 +19,12 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import kotlin.math.roundToInt
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.settings.system.*
-import app.morphe.manager.ui.screen.shared.SectionCard
-import app.morphe.manager.ui.screen.shared.SectionTitle
+import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
+import kotlin.math.roundToInt
 
 /**
  * System tab content.
@@ -58,12 +52,13 @@ fun SystemTabContent(
 ) {
     val useExpertMode by settingsViewModel.prefs.useExpertMode.getAsState()
 
+    val contentPadding = rememberWindowSize().contentPadding
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(horizontal = contentPadding, vertical = MorpheDefaults.ContentPadding),
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
     ) {
         // Installers
         SectionTitle(

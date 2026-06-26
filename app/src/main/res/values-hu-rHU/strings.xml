@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Alkalmazásmentés felsőfokon - mától élesben</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Koffein és jó módosítások által hajtva</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Ébredés és javítás</string>
+    <string name="home_greeting_morning_2">Jó reggelt! Az alkalmazások nem javítják magukat.</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Délutáni holtpon? Javíts valamit.</string>
+    <string name="home_greeting_afternoon_2">Az ebéd utáni frissítések másképp hatnak</string>
+    <string name="home_greeting_afternoon_3">A délutáni műszak: frissítés kiadás</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Jó estét! Az esti frissítések másképp hatnak</string>
+    <string name="home_greeting_evening_2">Pihenésre készülsz? Először frissíts egy alkalmazást</string>
+    <string name="home_greeting_evening_3">Már munkahelyet hagyod? Először frissíts valamit</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Még ébren vagy? Az alkalmazások is, amiket frissíteni kell</string>
+    <string name="home_greeting_late_night_2">Éjszakai frissítési maraton? Tisztelet</string>
+    <string name="home_greeting_late_night_3">Éjjeli bagoly mód: aktiválva</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">A frissítések csúcsideje… állítólag</string>
+    <string name="home_greeting_super_late_2">Nem tudsz aludni? Frissíts valamit</string>
+    <string name="home_greeting_super_late_3">Ezen a ponton csak maradj ébren és frissíts</string>
+    <string name="home_greeting_super_late_4">Te és a szerverek, mindketten ébren</string>
+    <string name="home_greeting_super_late_5">Éjszakai és produktív</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Módosításforrások</string>
     <string name="sources_management_open_in_browser">Megnyitás böngészőben</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Nem kompatibilis</string>
     <string name="home_apk_availability_yes">Igen, segíts megtalálni az APK-t</string>
     <string name="home_apk_availability_no">Nem, már megvan az APK</string>
-    <string name="home_apk_use_saved_with_version">Mentett APK használata (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Használd a telepített APK-t (v%s)</string>
+    <string name="home_apk_use_saved">Mentett APK használata</string>
+    <string name="home_apk_use_installed">Telepített APK használata</string>
     <string name="home_app_info_no_saved_apk">Nincs mentett APK. A módosításhoz újra ki kell választanod az APK-fájlt.</string>
     <string name="home_version_requires_android">Android %s+ verziót igényel</string>
     <string name="home_apk_no_compatible_versions_title">Nem támogatott ezen az eszközen</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Koppints az alábbi „%s” gombra</string>
     <string name="home_download_instructions_step2_part1">Görgess le a weboldalon, majd nyomd meg:</string>
     <string name="home_download_instructions_download_button_toast">​A weboldalon nyomj a letöltésre, ne itt 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Tökéletes! Most kattints a folytatás gombra lent és látogass el a weboldalra 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">A gyakorlás teszi a mestert, már jól mennek a dolgok! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Szuper! Most kattints a folytatásra, és látogass el a weboldalra 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">A gyakorlás tökéletessé tesz, és már jó úton vagy 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Még mindig nem itt… még mindig nem itt… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Rendben, tiszteletben tartom a szentelt időt 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Mostantól hivatalos Morphe gomb tesztelő lettél 🏅</string>
@@ -184,6 +205,9 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="home_dialog_unsupported_version_dialog_proceed">Folytatás mégis</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatibilis verziók:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nem támogatott</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Verzió %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Ez a verzió egy másik kiadás ugyanabból a verzióból. A frissítésekhez egy adott kiadás szükséges.</string>
     <string name="home_dialog_wrong_package_title">Nem megfelelő csomag</string>
     <string name="home_dialog_wrong_package_description">​A kiválasztott APK nem a módosítani kívánt alkalmazáshoz tartozik</string>
     <string name="home_dialog_expected_package">Várt csomag:</string>
@@ -733,6 +757,7 @@ Forrás: #%2$s</string>
     <string name="warning">Figyelmeztetés</string>
     <string name="error_">Hiba</string>
     <string name="retry">Újra</string>
+    <string name="refresh">Frissítés</string>
     <string name="add">Hozzáadás</string>
     <string name="close">Bezárás</string>
     <string name="back">Vissza</string>
@@ -749,6 +774,7 @@ Forrás: #%2$s</string>
     <string name="view">Megtekintés</string>
     <string name="search">Keresés</string>
     <string name="search_no_results">Nincs találat</string>
+    <string name="sort">Rendezés</string>
     <string name="any_version">Bármelyik</string>
     <string name="enabled">Engedélyezve</string>
     <string name="disabled">Kikapcsolva</string>
@@ -758,6 +784,11 @@ Forrás: #%2$s</string>
     <string name="select_all_done">Mind kiválasztva</string>
     <string name="deselect_all">Összes kijelölés visszavonása</string>
     <string name="deselect_all_done">Mind törölve</string>
+    <string name="reorder_list">Lista átrendezése</string>
+    <string name="reorder_list_hint">Húzza át a pozíciók módosításához</string>
+    <string name="reorder_done">Rendezés mentve</string>
+    <string name="reset_order">Rendezés alaphelyzetbe állítása</string>
+    <string name="reset_order_done">Rendelés visszaállítva</string>
     <string name="rename">Átnevezés</string>
     <string name="import_">Importálás</string>
     <string name="export">Exportálás</string>
@@ -792,6 +823,7 @@ Forrás: #%2$s</string>
     <string name="hide">Elrejtés</string>
     <string name="hidden">Elrejtve</string>
     <string name="unhide">Feloldás</string>
+    <string name="unhide_done">Megjelenítve</string>
     <string name="logs">Naplók</string>
     <string name="sources">Források</string>
     <string name="installing_ellipsis">Telepítés…</string>

@@ -27,8 +27,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -410,22 +410,8 @@ fun HeaderCreatorDialog(
                     }
                 }
             }
-            if (isCreating) {
-                Box(
-                    modifier = Modifier
-                        .matchParentSize()
-                        .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
-                        .pointerInput(Unit) {
-                            awaitPointerEventScope {
-                                while (true) {
-                                    awaitPointerEvent(PointerEventPass.Initial).changes.forEach { it.consume() }
-                                }
-                            }
-                        },
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
+            MorpheContentOverlay(visible = isCreating) {
+                PulsingLogoIndicator()
             }
         }
     }
@@ -483,7 +469,6 @@ private fun HeaderCreatorGuideSection(title: String, body: String) {
 /**
  * Preview component for header with transform gestures.
  */
-@SuppressLint("LocalContextResourcesRead")
 @Composable
 private fun HeaderPreview(
     headerBitmap: Bitmap?,
@@ -494,11 +479,7 @@ private fun HeaderPreview(
     onScaleChange: (Float) -> Unit,
     onOffsetChange: (Float, Float) -> Unit
 ) {
-    val context = LocalContext.current
-
-    // Get current device density and determine target size
-    val displayMetrics = context.resources.displayMetrics
-    val density = displayMetrics.densityDpi
+    val density = LocalConfiguration.current.densityDpi
 
     // Determine which size to use based on density
     val (_, targetSize) = HeaderConfig.DENSITY_CONFIGS

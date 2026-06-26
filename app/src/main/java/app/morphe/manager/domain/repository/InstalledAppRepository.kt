@@ -22,6 +22,7 @@ class InstalledAppRepository(
     private val filesystem: Filesystem
 ) {
     private val dao = db.installedAppDao()
+    private val bundleDao = db.patchBundleDao()
 
     fun getAll() = dao.getAll().distinctUntilChanged()
 
@@ -55,6 +56,25 @@ class InstalledAppRepository(
         val staleEntries = dao.getStaleEntries(originalPackageName, currentPackageName)
         staleEntries.forEach { dao.delete(it) }
 
+        // Skip applied patches whose bundle uid is no longer in patch_bundles:
+        // the FK constraint would otherwise abort the entire upsert transaction.
+        // Unknown uids are still preserved in selectionPayload (JSON)
+        val knownBundleUids = bundleDao.allUids().toSet()
+        val appliedPatches = patchSelection.flatMap { (uid, patches) ->
+            if (uid !in knownBundleUids) {
+                Log.w(TAG, "Skipping applied patches for unknown bundle uid=$uid (kept in selectionPayload)")
+                return@flatMap emptyList()
+            }
+            patches.map { patch ->
+                AppliedPatch(
+                    packageName = currentPackageName,
+                    bundle = uid,
+                    patchName = patch,
+                    bundleVersion = bundleVersions[uid] // Store bundle version at patch time
+                )
+            }
+        }
+
         dao.upsertApp(
             InstalledApp(
                 currentPackageName = currentPackageName,
@@ -64,18 +84,32 @@ class InstalledAppRepository(
                 selectionPayload = selectionPayload,
                 patchedAt = patchedAt
             ),
-            patchSelection.flatMap { (uid, patches) ->
-                patches.map { patch ->
-                    AppliedPatch(
-                        packageName = currentPackageName,
-                        bundle = uid,
-                        patchName = patch,
-                        bundleVersion = bundleVersions[uid] // Store bundle version at patch time
-                    )
-                }
-            }
+            appliedPatches
         )
     }
+
+    /**
+     * Update only the [InstalledApp.version] of an existing record and drop the orphan
+     * patched APK at the old version path. Applied patches and selectionPayload are
+     * left untouched.
+     */
+    suspend fun updateInstalledVersion(app: InstalledApp, newVersion: String) =
+        withContext(Dispatchers.IO) {
+            if (app.version == newVersion) return@withContext
+            dao.upsertApp(app.copy(version = newVersion))
+            val orphans = listOf(
+                filesystem.getPatchedAppFile(app.currentPackageName, app.version),
+                filesystem.getPatchedAppFile(app.originalPackageName, app.version)
+            ).distinctBy { it.absolutePath }
+            orphans.forEach { file ->
+                if (file.exists()) {
+                    runCatching { file.delete() }.onFailure {
+                        Log.w(TAG, "Failed to delete ${file.absolutePath}", it)
+                    }
+                }
+            }
+            Log.i(TAG, "Reconciled version for ${app.currentPackageName}: ${app.version} → $newVersion")
+        }
 
     /**
      * Delete installed app record and its saved patched APK file from storage.

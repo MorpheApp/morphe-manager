@@ -7,8 +7,8 @@ package app.morphe.manager.ui.screen.settings
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -21,12 +21,10 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
-import kotlin.math.roundToInt
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.settings.advanced.GitHubPatSettingsItem
 import app.morphe.manager.ui.screen.settings.advanced.PatchOptionsSection
@@ -35,6 +33,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.PatchOptionsViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
+import kotlin.math.roundToInt
 
 /**
  * Advanced tab content.
@@ -77,13 +76,14 @@ fun AdvancedTabContent(
         )
     }
 
+    val contentPadding = rememberWindowSize().contentPadding
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
             .animateContentSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(horizontal = contentPadding, vertical = MorpheDefaults.ContentPadding),
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
     ) {
         // Updates section
         SectionTitle(
@@ -135,7 +135,7 @@ fun AdvancedTabContent(
             label = "expert_mode_crossfade"
         ) { expertMode ->
             if (expertMode) {
-                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
                     // GitHub PAT
                     GitHubPatSettingsItem(
                         currentPat = gitHubPat,
@@ -179,7 +179,7 @@ fun AdvancedTabContent(
                     }
                 }
             } else {
-                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
                     // Patch Options (Simple mode only)
                     SectionTitle(
                         text = stringResource(R.string.settings_advanced_patch_options),

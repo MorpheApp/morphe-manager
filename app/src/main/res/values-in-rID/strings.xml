@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Menyelamatkan aplikasi dari diri mereka sendiri sejak hari ini</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Didukung oleh kafein dan tambalan yang bagus</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Bangkit dan tambal</string>
+    <string name="home_greeting_morning_2">Selamat pagi! Aplikasi tidak akan menambal dirinya sendiri</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Lemas di siang hari? Tambal sesuatu</string>
+    <string name="home_greeting_afternoon_2">Menambal setelah makan siang terasa berbeda</string>
+    <string name="home_greeting_afternoon_3">Shift sore: edisi menambal</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Selamat malam! Menambal di malam hari terasa berbeda</string>
+    <string name="home_greeting_evening_2">Mau bersantai? Tambal dulu aplikasinya</string>
+    <string name="home_greeting_evening_3">Mau pulang? Tambal dulu aplikasinya</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Masih terjaga? Aplikasi yang perlu ditambal juga demikian</string>
+    <string name="home_greeting_late_night_2">Sesi penambalan larut malam? Salut!</string>
+    <string name="home_greeting_late_night_3">Mode burung hantu malam: diaktifkan</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Jam-jam sibuk untuk menambal… kata orang sih</string>
+    <string name="home_greeting_super_late_2">Tidak bisa tidur? Tambal sesuatu lah</string>
+    <string name="home_greeting_super_late_3">Saat ini, mending tetap bangun dan tambal</string>
+    <string name="home_greeting_super_late_4">Kamu dan server, sama-sama terjaga</string>
+    <string name="home_greeting_super_late_5">Aktif di malam hari dan produktif</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Sumber tambalan</string>
     <string name="sources_management_open_in_browser">Buka di peramban</string>
@@ -62,7 +83,7 @@
     <string name="sources_management_experimental_versions_toggle">Versi aplikasi eksperimental</string>
     <string name="sources_management_experimental_versions_toggle_description">Menambal aplikasi eksperimental jika tersedia</string>
     <string name="sources_management_already_exists">Sumber ini sudah ditambahkan</string>
-    <string name="sources_management_invalid_url">URL tidak valid. Harap periksa alamatnya dan coba lagi</string>
+    <string name="sources_management_invalid_url">URL sumber tidak sah. Harap periksa alamatnya dan coba lagi</string>
     <string name="sources_management_metadata_unavailable">Metadata Tidak Tersedia</string>
     <string name="sources_management_metadata_unavailable_hint">Berkas metadata daring tidak tersedia. Penambalan dengan bundel yang terpasang masih berfungsi, tetapi pembaruan otomatis dinonaktifkan untuk sumber ini</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Bundel tambalan tidak dapat diunduh. Sumber URL mungkin salah atau berkas tidak ada</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Tidak kompatibel</string>
     <string name="home_apk_availability_yes">Ya, bantu saya mencari APK</string>
     <string name="home_apk_availability_no">Tidak, saya sudah memiliki APK</string>
-    <string name="home_apk_use_saved_with_version">Gunakan APK yang tersimpan (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Gunakan APK yang terpasang (v%s)</string>
+    <string name="home_apk_use_saved">Gunakan APK yang tersimpan</string>
+    <string name="home_apk_use_installed">Gunakan APK yang terpasang</string>
     <string name="home_app_info_no_saved_apk">Tidak ada APK yang disimpan. Penambalan akan memerlukan memilih berkas APK lagi</string>
     <string name="home_version_requires_android">Membutuhkan Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Tidak didukung di perangkat ini</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Tekan tombol \'%s\' di bawah ini</string>
     <string name="home_download_instructions_step2_part1">Geser halaman web ke bawah dan tekan</string>
     <string name="home_download_instructions_download_button_toast">Tekan unduh di situs web, dan bukan di sini 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Sempurna! Sekarang klik lanjutkan di bawah ini dan kunjungi situs webnya 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Latihan membuat sempurna, kamu semakin mahir! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Bagus! Sekarang klik lanjutkan dan kunjungi situs webnya 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Latihan membuat sempurna dan kamu sudah hampir sampai 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Masih belum di sini… masih belum di sini… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Oke, saya menghormati dedikasinya 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Selamat Anda sekarang adalah penguji resmi tombol Morphe 🏅</string>
@@ -156,8 +177,8 @@
     <string name="expert_mode_enable_all_done">Semua tambalan diaktifkan</string>
     <string name="expert_mode_reset_to_default">Aktifkan tambalan yang direkomendasikan</string>
     <string name="expert_mode_reset_to_default_done">Tambalan yang direkomendasikan diterapkan</string>
-    <string name="expert_mode_restore_saved">Pulihkan pilihan yang tersimpan</string>
-    <string name="expert_mode_restore_saved_done">Pilihan yang disimpan dipulihkan</string>
+    <string name="expert_mode_restore_saved">Kembalikan pilihan yang disimpan</string>
+    <string name="expert_mode_restore_saved_done">Pilihan yang disimpan dikembalikan</string>
     <string name="expert_mode_no_results">Tambalan tidak ditemukan</string>
     <string name="expert_mode_universal_patches">Tambalan universal</string>
     <string name="expert_mode_new_patches">Baru</string>
@@ -185,6 +206,9 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <string name="home_dialog_unsupported_version_dialog_proceed">Tetap lanjutkan</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versi yang cocok:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Tidak didukung</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Ini adalah build yang berbeda dari versi yang sama. Tambalan memerlukan build tertentu</string>
     <string name="home_dialog_wrong_package_title">Salah memilih paket</string>
     <string name="home_dialog_wrong_package_description">APK yang dipilih bukan untuk aplikasi yang Anda harapkan untuk ditambal</string>
     <string name="home_dialog_expected_package">Paket yang diharapkan:</string>
@@ -265,7 +289,7 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="home_app_info_patch_update_available">Pembaruan tambalan tersedia</string>
     <string name="home_app_info_patch_update_available_description">Versi tambalan lebih baru tersedia. Tambal ulang aplikasi Anda untuk mendapatkan pembaruan terbaru dan perbaikan</string>
     <string name="home_app_info_app_deleted_warning">Aplikasi telah dihapus</string>
-    <string name="home_app_info_app_deleted_description">Aplikasi ini telah dihapus di luar Morphe. Tambal ulang untuk memulihkan fungsinya</string>
+    <string name="home_app_info_app_deleted_description">Aplikasi ini telah dihapus di luar Morphe. Tambal ulang untuk mengembalikan fungsinya</string>
     <string name="home_app_info_apk_size">Ukuran APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Mode root memerlukan APK asli untuk dipasang di perangkat Anda sebelum menambal</string>
@@ -293,6 +317,10 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="patcher_failed_subtitle">Periksa detail kesalahan di bawah ini</string>
     <string name="patcher_failed_dialog_title">Gagal Menambal</string>
     <string name="patcher_unknown_error">Terjadi kesalahan yang tidak diketahui</string>
+    <string name="patcher_split_step_extracting">Mengekstrak APK yang terpisah</string>
+    <string name="patcher_split_step_merging">Menggabungkan %s</string>
+    <string name="patcher_split_step_writing">Menulis APK yang telah digabungkan</string>
+    <string name="patcher_split_step_finalizing">Menyelesaikan APK hasil penggabungan</string>
     <string name="patcher_conflict_title">Paket konflik</string>
     <string name="patcher_conflict_subtitle">Anda perlu mencopot pemasangan versi yang ada</string>
     <string name="patcher_conflict_hint">Aplikasi yang ditambal menggunakan sertifikat yang berbeda dari versi yang terpasang. Mencopot pemasangan akan menghapus semua data aplikasi</string>
@@ -643,7 +671,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_system_show_password_field">Tampilkan kata sandi</string>
     <string name="settings_system_hide_password_field">Sembunyikan kata sandi</string>
     <string name="settings_system_morphe_settings">Pengaturan Morphe</string>
-    <string name="settings_system_import_manager_settings_description">Mencadangkan dan memulihkan pengaturan Morphe Anda</string>
+    <string name="settings_system_import_manager_settings_description">Mencadangkan dan mengembalikan pengaturan Morphe Anda</string>
     <string name="settings_system_import_manager_settings_fail">Gagal mengimpor pengaturan Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Pengaturan Morphe diimpor</string>
     <string name="settings_system_export_manager_settings_fail">Gagal mengekspor pengaturan Morphe: %s</string>
@@ -733,6 +761,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="warning">Peringatan</string>
     <string name="error_">Kesalahan</string>
     <string name="retry">Coba lagi</string>
+    <string name="refresh">Segarkan</string>
     <string name="add">Tambah</string>
     <string name="close">Tutup</string>
     <string name="back">Kembali</string>
@@ -749,6 +778,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="view">Lihat</string>
     <string name="search">Pencarian</string>
     <string name="search_no_results">Tidak ada hasil yang ditemukan</string>
+    <string name="sort">Urutkan</string>
     <string name="any_version">Apa pun</string>
     <string name="enabled"> Diaktifkan</string>
     <string name="disabled">Dinonaktifkan</string>
@@ -758,6 +788,11 @@ Dimensi gambar harus sebagai berikut:
     <string name="select_all_done">Semua dipilih</string>
     <string name="deselect_all">Batal pilih semua</string>
     <string name="deselect_all_done">Semua tidak dipilih</string>
+    <string name="reorder_list">Urutkan ulang daftar</string>
+    <string name="reorder_list_hint">Seret untuk mengurutkan ulang</string>
+    <string name="reorder_done">Urutan disimpan</string>
+    <string name="reset_order">Atur ulang urutan</string>
+    <string name="reset_order_done">Urutan diatur ulang</string>
     <string name="rename">Ganti nama</string>
     <string name="import_">Impor</string>
     <string name="export">Ekspor</string>
@@ -792,6 +827,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="hide">Sembunyikan</string>
     <string name="hidden">Disembunyikan</string>
     <string name="unhide">Tampilkan</string>
+    <string name="unhide_done">Ditampilkan</string>
     <string name="logs">Catatan</string>
     <string name="sources">Sumber</string>
     <string name="installing_ellipsis">Memasang…</string>

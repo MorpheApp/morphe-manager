@@ -12,9 +12,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
@@ -34,11 +32,20 @@ import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
 import com.mikepenz.aboutlibraries.ui.compose.m3.chipColors
 import com.mikepenz.aboutlibraries.ui.compose.m3.libraryColors
 import com.mikepenz.aboutlibraries.ui.compose.util.strippedLicenseContent
+import com.mikepenz.aboutlibraries.ui.compose.variant.LibraryActionKind
 
 private const val NOTICE_UNIQUE_ID = "app.morphe.manager"
 private val urlRegex = Regex("(https?://[\\w./?=&%-]+)")
 // Copied verbatim from NOTICE in project root. Update manually if NOTICE changes.
-private const val NOTICE_TEXT = "Morphe NOTICE\n\nhttps://github.com/MorpheApp/morphe-manager\n\n=============\n\n7c. Project Name Restriction\n----------------------------\n\nThe project name \"Morphe\" is a protected identifier. Derivative works\nmust adopt a completely different identity that is not related to,\nconfusingly similar to, or an imitation of the name \"Morphe\".\n"
+private const val NOTICE_TEXT =
+    "Morphe NOTICE\n\n" +
+    "https://github.com/MorpheApp/morphe-manager\n\n" +
+    "=============\n\n" +
+    "7c. Project Name Restriction\n" +
+    "----------------------------\n\n" +
+    "The project name \"Morphe\" is a protected identifier. Derivative works\n" +
+    "must adopt a completely different identity that is not related to,\n" +
+    "confusingly similar to, or an imitation of the name \"Morphe\".\n"
 
 /**
  * Licenses dialog.
@@ -65,24 +72,37 @@ fun LicensesDialog(onDismiss: () -> Unit) {
         val lazyListState = rememberLazyListState()
         val libraries by produceLibraries(R.raw.aboutlibraries)
 
+        var openDialog by remember { mutableStateOf<Library?>(null) }
+        var openSheet by remember { mutableStateOf<Library?>(null) }
+
         val chipColors = LibraryDefaults.chipColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary,
         )
+        val colors = LibraryDefaults.libraryColors(
+            libraryBackgroundColor = MaterialTheme.colorScheme.background,
+            libraryContentColor = textColor,
+            versionChipColors = chipColors,
+            licenseChipColors = chipColors,
+            fundingChipColors = chipColors,
+        )
 
         Box(modifier = Modifier.weight(1f)) {
-            val colors = LibraryDefaults.libraryColors(
-                libraryBackgroundColor = MaterialTheme.colorScheme.background,
-                libraryContentColor = textColor,
-                versionChipColors = chipColors,
-                licenseChipColors = chipColors,
-                fundingChipColors = chipColors,
-            )
             LibrariesContainer(
                 modifier = Modifier.fillMaxSize(),
                 libraries = libraries,
+                dialogLibrary = openDialog,
+                sheetLibrary = openSheet,
+                onDialogLibraryChange = { openDialog = it },
+                onSheetLibraryChange = { openSheet = it },
                 lazyListState = lazyListState,
                 colors = colors,
+                onActionClick = { library, kind ->
+                    if (kind == LibraryActionKind.License) {
+                        openDialog = library
+                        true
+                    } else false
+                },
                 licenseDialogBody = { library, modifier ->
                     if (library.uniqueId == NOTICE_UNIQUE_ID) {
                         AutoLinkText(

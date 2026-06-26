@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Nagliligtas ng mga aplikasyon mula sa kanilang sarili simula ngayon</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Pinapatakbo ng kape at magagandang patch</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Bumangon at mag-patch</string>
+    <string name="home_greeting_morning_2">Magandang umaga! Ang mga app ay hindi magpe-patch ng kusa</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Nababagot sa hapon? Mag-patch ng isang bagay</string>
+    <string name="home_greeting_afternoon_2">Iba ang dating ng pag-patch pagkatapos ng tanghalian</string>
+    <string name="home_greeting_afternoon_3">Ang shift sa hapon: edisyon ng pag-patch</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Magandang gabi! Iba ang dating ng pag-patch sa gabi</string>
+    <string name="home_greeting_evening_2">Nagpapahinga ka na ba? Mag-patch muna ng app</string>
+    <string name="home_greeting_evening_3">Nag-o-out ka na ba? Mag-patch muna</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Gising ka pa rin? Gising din ang mga app na kailangang i-patch</string>
+    <string name="home_greeting_late_night_2">Late night patch session? Respeto</string>
+    <string name="home_greeting_late_night_3">Night owl mode: naka-activate</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Pinakamataas na oras ng pag-patch… di umano</string>
+    <string name="home_greeting_super_late_2">Hindi makatulog? Mag-patch ka na lang</string>
+    <string name="home_greeting_super_late_3">Sa puntong ito, magising na lang at mag-patch na lang</string>
+    <string name="home_greeting_super_late_4">Ikaw at ang mga server, parehong gising</string>
+    <string name="home_greeting_super_late_5">Pang-gabi at produktibo</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">I-patch ang mapagkukunan</string>
     <string name="sources_management_open_in_browser">Buksan sa browser</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Hindi tugma</string>
     <string name="home_apk_availability_yes">Oo, tulungan mo akong hanapin ang APK</string>
     <string name="home_apk_availability_no">Hindi, mayroon na akong APK</string>
-    <string name="home_apk_use_saved_with_version">Gamitin ang nakaimbak na APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Gamitin ang naka-install na APK (v%s)</string>
+    <string name="home_apk_use_saved">Gamitin ang nakaimbak na APK</string>
+    <string name="home_apk_use_installed">Gamitin ang naka-install na APK</string>
     <string name="home_app_info_no_saved_apk">Walang nakaimbak na APK. Ang pag-patch na ito ay mangangailangan ng muling pagpili ng APK file</string>
     <string name="home_version_requires_android">Nangangailangan ng Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Hindi suportado sa aparatong ito</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Pindutin ang \'%s\' na button sa ibaba</string>
     <string name="home_download_instructions_step2_part1">I-scroll pababa ang webpage at pindutin</string>
     <string name="home_download_instructions_download_button_toast">Pindutin ang download sa website, at hindi dito 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Perpekto! Ngayon, i-click ang magpatuloy sa ibaba at pumunta sa website 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Ang pagsasanay ang magpapahusay, malapit ka na! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Mahusay! I-click ngayon ang magpatuloy at pumunta sa website 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Ang pagsasanay ang magpapahusay sa iyo at papalapit ka na! 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Wala pa rin… wala pa rin… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, iginagalang ko ang dedikasyon 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Opisyal ka nang Morphe button tester 🏅</string>
@@ -184,6 +205,9 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="home_dialog_unsupported_version_dialog_proceed">Magpatuloy pa rin</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Mga bersyong tutugma:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Hindi suportado</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Buuin %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Ito ay ibang build ng parehong bersyon. Ang mga patch ay nangangailangan ng isang partikular na build</string>
     <string name="home_dialog_wrong_package_title">Maling pakete ang napili</string>
     <string name="home_dialog_wrong_package_description">Ang pinili mong APK ay hindi para sa aplikasyon na sinubukan mong i-patch</string>
     <string name="home_dialog_expected_package">Inaasahang pakete:</string>
@@ -732,6 +756,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="warning">Babala</string>
     <string name="error_">Pagkakamali</string>
     <string name="retry">Subukan muli</string>
+    <string name="refresh">I-refresh</string>
     <string name="add">Idagdag</string>
     <string name="close">Isara</string>
     <string name="back">Bumalik</string>
@@ -748,6 +773,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="view">Tingnan</string>
     <string name="search">Hanapin</string>
     <string name="search_no_results">Walang mahanap na mga resulta</string>
+    <string name="sort">Pagbukud-bukurin</string>
     <string name="any_version">Anuman</string>
     <string name="enabled">Pinagana</string>
     <string name="disabled">Nakapatay</string>
@@ -757,6 +783,11 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="select_all_done">Lahat ay napili</string>
     <string name="deselect_all">Alisin ang pagpili sa lahat</string>
     <string name="deselect_all_done">Lahat ay hindi napili</string>
+    <string name="reorder_list">Ayusin muli ang listahan</string>
+    <string name="reorder_list_hint">I-drag upang ayusin muli</string>
+    <string name="reorder_done">Nai-save ang pagkakasunud-sunod</string>
+    <string name="reset_order">Ibalik sa orihinal na pagkakasunud-sunod</string>
+    <string name="reset_order_done">Naibalik ang order</string>
     <string name="rename">Palitan</string>
     <string name="import_">I-import</string>
     <string name="export">I-export</string>
@@ -791,6 +822,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="hide">Itago</string>
     <string name="hidden">Nakatago</string>
     <string name="unhide">Ipakita</string>
+    <string name="unhide_done">Ipinakita</string>
     <string name="logs">Mga log</string>
     <string name="sources">Mga mapagkukunan</string>
     <string name="installing_ellipsis">Ini-install…</string>

@@ -53,6 +53,27 @@
     <string name="home_greeting_9">إنقاذ التطبيقات من نفسها منذ اليوم</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">مدعوم بالكافيين والتعديلات الجيدة</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">استيقظ وقم بالتعديل</string>
+    <string name="home_greeting_morning_2">صباح الخير! التطبيقات لا تعدل نفسها</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">كسل بعد الظهر؟ قم بتعديل شيء ما</string>
+    <string name="home_greeting_afternoon_2">تعديل ما بعد الغداء له نكهة خاصة</string>
+    <string name="home_greeting_afternoon_3">نوبة ما بعد الظهر: نسخة معدلة</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">مساء الخير! تعديلات المساء لها نكهة خاصة</string>
+    <string name="home_greeting_evening_2">هل تسترخي؟ قم بتعديل تطبيق أولًا</string>
+    <string name="home_greeting_evening_3">هل تنهي عملك؟ قم بتعديل شيء أولًا</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">لا تزال مستيقظًا؟ التطبيقات التي تحتاج إلى تعديل كذلك</string>
+    <string name="home_greeting_late_night_2">جلسة تعديل ليلية متأخرة؟ كل الاحترام</string>
+    <string name="home_greeting_late_night_3">وضع البومة الليلية: قيد التفعيل</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">ذروة ساعات التعديل… على ما يبدو</string>
+    <string name="home_greeting_super_late_2">هل لا تستطيع النوم؟ قم بتعديل شيء ما</string>
+    <string name="home_greeting_super_late_3">في هذه المرحلة، ابق مستيقظًا وقم بالتعديل</string>
+    <string name="home_greeting_super_late_4">أنت والخوادم، كلاكما مستيقظان</string>
+    <string name="home_greeting_super_late_5">ليلي ومنتج</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">مصادر التعديل</string>
     <string name="sources_management_open_in_browser">فتح في المتصفح</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">غير متوافق</string>
     <string name="home_apk_availability_yes">نعم، ساعدني في العثور على ملف APK</string>
     <string name="home_apk_availability_no">لا، لدي ملف APK بالفعل</string>
-    <string name="home_apk_use_saved_with_version">استخدام ملف APK المحفوظ (v%s)</string>
-    <string name="home_apk_use_installed_with_version">استخدام ملف APK المثبت (v%s)</string>
+    <string name="home_apk_use_saved">استخدام ملف APK المحفوظ</string>
+    <string name="home_apk_use_installed">استخدام ملف APK المثبت</string>
     <string name="home_app_info_no_saved_apk">لا يوجد ملف APK محفوظ. ستتطلب عملية التعديل إعادة اختيار ملف APK</string>
     <string name="home_version_requires_android">يتطلب Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">غير مدعوم على هذا الجهاز</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">انقر على زر \'%s\' أدناه</string>
     <string name="home_download_instructions_step2_part1">مرر لأسفل صفحة الويب واضغط</string>
     <string name="home_download_instructions_download_button_toast">اضغط على التنزيل من الموقع الإلكتروني، وليس هنا 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">مثالي! الآن انقر على متابعة أدناه وانتقل إلى الموقع الإلكتروني 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">الممارسة تُؤدي إلى الإتقان، أنت تقترب من ذلك! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">رائع! الآن انقر على متابعة وانتقل إلى الموقع الإلكتروني 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">الممارسة تؤدي إلى الإتقان، وأنت تقترب من ذلك 💪</string>
     <string name="home_download_instructions_download_button_toast_4">ليس هنا بعد… ليس هنا بعد… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">حسنًا، أنا أحترم هذا التفاني 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">أنت الآن مختبر رسمي لزر Morphe 🏅</string>
@@ -184,6 +205,9 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">المتابعة على أي حال</string>
     <string name="home_dialog_unsupported_version_compatible_versions">الإصدارات المتوافقة:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">غير مدعوم</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">البناء ‎%d‎</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">هذا بناء مختلف من نفس الاصدار. تتطلب التعديلات بناءً معينًا</string>
     <string name="home_dialog_wrong_package_title">تم اختيار حزمة تطبيق خاطئة</string>
     <string name="home_dialog_wrong_package_description">ملف APK المحدد ليس للتطبيق الذي كنت تنوي تعديله</string>
     <string name="home_dialog_expected_package">الحزمة المتوقعة:</string>
@@ -733,6 +757,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="warning">تحذير</string>
     <string name="error_">خطأ</string>
     <string name="retry">إعادة المحاولة</string>
+    <string name="refresh">تحديث</string>
     <string name="add">إضافة</string>
     <string name="close">إغلاق</string>
     <string name="back">رجوع</string>
@@ -749,6 +774,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="view">عرض</string>
     <string name="search">البحث</string>
     <string name="search_no_results">لم يتم العثور على نتائج</string>
+    <string name="sort">فرز</string>
     <string name="any_version">أي شي</string>
     <string name="enabled">تمكين</string>
     <string name="disabled">معطّل</string>
@@ -758,6 +784,11 @@ morphe_adaptive_monochrome_custom.xml
     <string name="select_all_done">تم تحديد الكل</string>
     <string name="deselect_all">إلغاء تحديد الكل</string>
     <string name="deselect_all_done">تم إلغاء تحديد الكل</string>
+    <string name="reorder_list">إعادة ترتيب القائمة</string>
+    <string name="reorder_list_hint">اسحب لإعادة الترتيب</string>
+    <string name="reorder_done">تم حفظ الترتيب</string>
+    <string name="reset_order">إعادة تعيين الترتيب</string>
+    <string name="reset_order_done">تم إعادة تعيين الترتيب</string>
     <string name="rename">إعادة تسمية</string>
     <string name="import_">استيراد</string>
     <string name="export">تصدير</string>
@@ -792,6 +823,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="hide">إخفاء</string>
     <string name="hidden">مخفي</string>
     <string name="unhide">إظهار</string>
+    <string name="unhide_done">تمّ العرض</string>
     <string name="logs">السجلات</string>
     <string name="sources">المصادر</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>

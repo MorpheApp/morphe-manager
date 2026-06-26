@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -113,7 +114,8 @@ fun MorpheDialogOutlinedButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     icon: ImageVector? = null,
-    isDestructive: Boolean = false
+    isDestructive: Boolean = false,
+    textSuffix: String? = null
 ) {
     val colors = resolveButtonColors(isDestructive, filled = false)
 
@@ -143,8 +145,21 @@ fun MorpheDialogOutlinedButton(
             text = text,
             style = MaterialTheme.typography.labelLarge,
             maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+            softWrap = false,
+            overflow = if (textSuffix == null) TextOverflow.Ellipsis else TextOverflow.Clip
         )
+        if (textSuffix != null) {
+            Spacer(Modifier.width(4.dp))
+            Text(
+                text = textSuffix,
+                style = MaterialTheme.typography.labelLarge,
+                maxLines = 1,
+                overflow = TextOverflow.Clip,
+                modifier = Modifier
+                    .weight(1f, fill = false)
+                    .basicMarquee()
+            )
+        }
     }
 }
 

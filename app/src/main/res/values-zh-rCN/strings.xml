@@ -53,6 +53,27 @@
     <string name="home_greeting_9">从今天开始,拯救应用程序</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">本应用的动力来自咖啡因和优秀的补丁</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">起床并修补</string>
+    <string name="home_greeting_morning_2">早上好！应用不会自行修补</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">下午低迷？修补点什么</string>
+    <string name="home_greeting_afternoon_2">午饭后更新真香</string>
+    <string name="home_greeting_afternoon_3">下午班次：更新时刻</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">晚上好！晚间更新，别有一番风味</string>
+    <string name="home_greeting_evening_2">准备休息？先更新个应用吧</string>
+    <string name="home_greeting_evening_3">准备下班？先更新个应用再说</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">还在熬夜？应用们也在等待更新</string>
+    <string name="home_greeting_late_night_2">深夜更新会话？点赞</string>
+    <string name="home_greeting_late_night_3">夜猫模式：已启动</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">更新高峰时段…据说</string>
+    <string name="home_greeting_super_late_2">睡不着？更新个应用</string>
+    <string name="home_greeting_super_late_3">到这个点，干脆起来更新吧</string>
+    <string name="home_greeting_super_late_4">你和服务器，都在线上</string>
+    <string name="home_greeting_super_late_5">夜间且高效</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">补丁源</string>
     <string name="sources_management_open_in_browser">在浏览器中打开链接</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">不兼容</string>
     <string name="home_apk_availability_yes">是的，帮我找个 APK</string>
     <string name="home_apk_availability_no">不，我已经有APK了</string>
-    <string name="home_apk_use_saved_with_version">使用保存的APK（v%s）</string>
-    <string name="home_apk_use_installed_with_version">使用已安装的 APK (v%s)</string>
+    <string name="home_apk_use_saved">使用保存的 APK</string>
+    <string name="home_apk_use_installed">使用已安装的 APK</string>
     <string name="home_app_info_no_saved_apk">没有已保存的 APK 文件, 需要重新选择 APK 文件进行修补</string>
     <string name="home_version_requires_android">需要 Android %s+。</string>
     <string name="home_apk_no_compatible_versions_title">不支持此设备</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">请按下下面的“%s”按钮。</string>
     <string name="home_download_instructions_step2_part1">向下滚动网页并按</string>
     <string name="home_download_instructions_download_button_toast">在网站上按下下载，而不是在这里 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">完美！现在点击下面的“继续”并访问网站👆</string>
-    <string name="home_download_instructions_download_button_toast_3">熟能生巧，你正在进步！💪</string>
+    <string name="home_download_instructions_download_button_toast_2">太棒了！现在点击继续并访问网站👆</string>
+    <string name="home_download_instructions_download_button_toast_3">熟能生巧，你做得越来越好了💪</string>
     <string name="home_download_instructions_download_button_toast_4">还没到…还没到…🙈</string>
     <string name="home_download_instructions_download_button_toast_5">好的，我尊重您的奉献精神 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">您现在是 Morphe 按钮的官方测试员 🏅</string>
@@ -184,6 +205,9 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">仍然继续</string>
     <string name="home_dialog_unsupported_version_compatible_versions">兼容版本：</string>
     <string name="home_dialog_unsupported_version_unsupported_label">不支持</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">构建 %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">这是同一版本的不同构建。补丁需要特定的构建</string>
     <string name="home_dialog_wrong_package_title">选择的 APK 不是您打算修补的应用。</string>
     <string name="home_dialog_wrong_package_description">您选择的 APK 不是您打算修补的应用</string>
     <string name="home_dialog_expected_package">预期包：</string>
@@ -732,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">警告</string>
     <string name="error_">错误</string>
     <string name="retry">重试</string>
+    <string name="refresh">刷新</string>
     <string name="add">添加</string>
     <string name="close">关闭</string>
     <string name="back">返回</string>
@@ -748,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">查看</string>
     <string name="search">搜索</string>
     <string name="search_no_results">找不到结果</string>
+    <string name="sort">排序</string>
     <string name="any_version">任意</string>
     <string name="enabled">已启用</string>
     <string name="disabled">已禁用</string>
@@ -757,6 +783,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">全部已选</string>
     <string name="deselect_all">取消全选</string>
     <string name="deselect_all_done">全部已取消</string>
+    <string name="reorder_list">重新排序列表</string>
+    <string name="reorder_list_hint">拖动以重新排序</string>
+    <string name="reorder_done">排序已保存</string>
+    <string name="reset_order">重置排序</string>
+    <string name="reset_order_done">订单已重置</string>
     <string name="rename">重命名</string>
     <string name="import_">导入</string>
     <string name="export">导出</string>
@@ -791,6 +822,7 @@ morphe_header_custom_dark.png
     <string name="hide">隐藏</string>
     <string name="hidden">隐藏</string>
     <string name="unhide">显示</string>
+    <string name="unhide_done">已显示</string>
     <string name="logs">日志</string>
     <string name="sources">来源</string>
     <string name="installing_ellipsis">正在安装…</string>

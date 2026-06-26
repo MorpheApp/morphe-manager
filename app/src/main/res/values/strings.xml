@@ -26,6 +26,8 @@
     <string name="home_updating_sources">Updating sources…</string>
     <string name="home_update_progress_format">%s processed</string>
     <string name="home_update_download_progress" translatable="false">%1$.1f MB / %2$.1f MB (%3$s%%)</string>
+    <string name="home_update_bundle_count" translatable="false">%1$d / %2$d</string>
+    <string name="home_update_bundle_count_with_bytes" translatable="false">%1$d / %2$d  ·  %3$.1f / %4$.1f MB (%5$d%%)</string>
     <string name="home_update_success">Update sources complete</string>
     <string name="home_update_success_subtitle">Your sources are up to date</string>
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>
@@ -56,6 +58,27 @@
     <string name="home_greeting_9">Saving apps from themselves since today</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Powered by caffeine and good patches</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Rise and patch</string>
+    <string name="home_greeting_morning_2">Good morning! Apps won\'t patch themselves</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Afternoon slump? Patch something</string>
+    <string name="home_greeting_afternoon_2">Post-lunch patching hits different</string>
+    <string name="home_greeting_afternoon_3">The afternoon shift: patch edition</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Good evening! Evening patches hit different</string>
+    <string name="home_greeting_evening_2">Winding down? Patch an app first</string>
+    <string name="home_greeting_evening_3">Clocking out? Patch something first</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Still up? So are the apps that need patching</string>
+    <string name="home_greeting_late_night_2">Late night patch session? Respect</string>
+    <string name="home_greeting_late_night_3">Night owl mode: activated</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Peak patching hours… allegedly</string>
+    <string name="home_greeting_super_late_2">Can\'t sleep? Patch something</string>
+    <string name="home_greeting_super_late_3">At this point, just stay up and patch</string>
+    <string name="home_greeting_super_late_4">You and the servers, both awake</string>
+    <string name="home_greeting_super_late_5">Nocturnal and productive</string>
 
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch sources</string>
@@ -112,8 +135,8 @@
     <string name="home_apk_availability_incompatible_label">Incompatible</string>
     <string name="home_apk_availability_yes">Yes, help me find an APK</string>
     <string name="home_apk_availability_no">No, I already have an APK</string>
-    <string name="home_apk_use_saved_with_version">Use saved APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Use installed APK (v%s)</string>
+    <string name="home_apk_use_saved">Use saved APK</string>
+    <string name="home_apk_use_installed">Use installed APK</string>
     <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
     <string name="home_version_requires_android">Requires Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Not supported on this device</string>
@@ -125,8 +148,8 @@
     <string name="home_download_instructions_step1">Press the \'%s\' button below</string>
     <string name="home_download_instructions_step2_part1">Scroll down the webpage and press</string>
     <string name="home_download_instructions_download_button_toast">Press download on the website, and not here 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Perfect! Now click continue below and go to the website 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Practice makes perfect, you\'re getting there! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Great! Now click continue and go to the website 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Practice makes perfect and you\'re getting there 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Still not here… still not here… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK I respect the dedication 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">You are now an official Morphe button tester 🏅</string>
@@ -194,6 +217,9 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_dialog_unsupported_version_dialog_proceed">Proceed anyway</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Compatible versions:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Unsupported</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">This is a different build of the same version. The patches require a specific build</string>
     <string name="home_dialog_wrong_package_title">Wrong package selected</string>
     <string name="home_dialog_wrong_package_description">The selected APK is not for the application you intended to patch</string>
     <string name="home_dialog_expected_package">Expected package:</string>
@@ -311,6 +337,10 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="patcher_failed_subtitle">Check the error details below</string>
     <string name="patcher_failed_dialog_title">Patching Failed</string>
     <string name="patcher_unknown_error">Unknown error occurred</string>
+    <string name="patcher_split_step_extracting">Extracting split APKs</string>
+    <string name="patcher_split_step_merging">Merging %s</string>
+    <string name="patcher_split_step_writing">Writing merged APK</string>
+    <string name="patcher_split_step_finalizing">Finalizing merged APK</string>
     <string name="patcher_conflict_title">Package conflict</string>
     <string name="patcher_conflict_subtitle">You need to uninstall the existing version</string>
     <string name="patcher_conflict_hint">The patched app uses a different certificate than the installed version. Uninstalling will erase all app data</string>
@@ -800,6 +830,7 @@ The image dimensions must be as follows:
     <string name="warning">Warning</string>
     <string name="error_">Error</string>
     <string name="retry">Retry</string>
+    <string name="refresh">Refresh</string>
     <string name="add">Add</string>
     <string name="close">Close</string>
     <string name="back">Back</string>
@@ -816,6 +847,7 @@ The image dimensions must be as follows:
     <string name="view">View</string>
     <string name="search">Search</string>
     <string name="search_no_results">No results found</string>
+    <string name="sort">Sort</string>
     <string name="any_version">Any</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
@@ -825,6 +857,11 @@ The image dimensions must be as follows:
     <string name="select_all_done">All selected</string>
     <string name="deselect_all">Deselect all</string>
     <string name="deselect_all_done">All deselected</string>
+    <string name="reorder_list">Reorder list</string>
+    <string name="reorder_list_hint">Drag to reorder</string>
+    <string name="reorder_done">Order saved</string>
+    <string name="reset_order">Reset order</string>
+    <string name="reset_order_done">Order reset</string>
     <string name="rename">Rename</string>
     <string name="import_">Import</string>
     <string name="export">Export</string>
@@ -859,6 +896,7 @@ The image dimensions must be as follows:
     <string name="hide">Hide</string>
     <string name="hidden">Hidden</string>
     <string name="unhide">Unhide</string>
+    <string name="unhide_done">Shown</string>
     <string name="logs">Logs</string>
     <string name="sources">Sources</string>
     <string name="installing_ellipsis">Installing…</string>

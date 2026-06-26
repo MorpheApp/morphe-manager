@@ -14,10 +14,12 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import app.morphe.manager.MainActivity
+import app.morphe.manager.ManagerApplication
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.installer.RootInstaller
+import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.domain.manager.KeystoreManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
@@ -73,18 +75,20 @@ class PatcherWorker(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE else 0
         )
 
+    private fun mainActivityPendingIntent(): PendingIntent {
+        val intent = Intent(applicationContext, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        return PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+    }
+
     @SuppressLint("WrongConstant")
     private fun createNotification(
         stepName: String? = null,
         patchProgress: Pair<Int, Int>? = null,  // completed to total patches
         contentText: String? = null,
     ): Notification {
-        val notificationIntent = Intent(applicationContext, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        val pendingIntent = PendingIntent.getActivity(
-            applicationContext, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE
-        )
+        val pendingIntent = mainActivityPendingIntent()
         val channel = NotificationChannel(
             "morphe-patcher-patching",
             applicationContext.getString(R.string.notification_channel_patcher),
@@ -123,9 +127,32 @@ class PatcherWorker(
             applicationContext.getSystemService(NotificationManager::class.java)
         // Android won't visually switch from indeterminate → determinate on the same notification
         // ID unless we first post a brief non-indeterminate update. Post the real notification
-        // directly — the determinate bar replaces the spinning one cleanly this way
+        // directly - the determinate bar replaces the spinning one cleanly this way
         notificationManager.notify(NOTIFICATION_ID, createNotification(stepName, patchProgress, contentText))
     }
+
+    private fun showCompletionNotification(succeeded: Boolean, autoInstallPending: Boolean) {
+        // Don't notify when the app is in the foreground - user sees the result on screen
+        if (isAppInForeground()) return
+        // Don't show "patching complete" when Shizuku auto-install will immediately follow
+        if (succeeded && autoInstallPending) return
+        val notification = Notification.Builder(applicationContext, "morphe-patcher-patching")
+            .setContentTitle(
+                applicationContext.getString(
+                    if (succeeded) R.string.patcher_complete_title else R.string.patcher_failed_title
+                )
+            )
+            .setContentText(applicationContext.getText(R.string.patcher_notification_text))
+            .setSmallIcon(Icon.createWithResource(applicationContext, R.drawable.ic_notification))
+            .setContentIntent(mainActivityPendingIntent())
+            .setAutoCancel(true)
+            .build()
+        applicationContext.getSystemService(NotificationManager::class.java)
+            .notify(COMPLETION_NOTIFICATION_ID, notification)
+    }
+
+    private fun isAppInForeground(): Boolean =
+        ManagerApplication.startedActivityCount > 0
 
     override suspend fun doWork(): Result {
         if (runAttemptCount > 0) {
@@ -137,14 +164,19 @@ class PatcherWorker(
             // This does not always show up for some reason.
             setForeground(getForegroundInfo())
         } catch (e: Exception) {
-            Log.d(tag, "Failed to set foreground info:", e)
+            // Foreground promotion can fail on some devices or when notification permission is
+            // denied. Log it but continue - patching still works, just with less OS protection.
+            Log.w(tag, "Failed to promote worker to foreground service:".logFmt(), e)
         }
 
         val wakeLock: PowerManager.WakeLock =
             (applicationContext.getSystemService(Context.POWER_SERVICE) as PowerManager)
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "$tag::Patcher")
                 .apply {
-                    acquire(10 * 60 * 1000L)
+                    // No timeout: the finally block below always releases this lock, so a cap
+                    // would only risk the CPU sleeping mid-patch on large or slow devices
+                    @Suppress("WakelockTimeout")
+                    acquire()
                     Log.d(tag, "Acquired wakelock.")
                 }
 
@@ -210,6 +242,8 @@ class PatcherWorker(
         }
 
         val patchedApk = fs.tempDir.resolve("patched.apk")
+        var succeeded = false
+        var autoInstallPending = false
 
         return try {
             val startTime = System.currentTimeMillis()
@@ -350,6 +384,10 @@ class PatcherWorker(
             )
 
             Log.i(tag, "Patching succeeded".logFmt())
+            autoInstallPending = prefs.autoInstallWithShizuku.get() &&
+                prefs.installerPrimary.get() == InstallerPreferenceTokens.SHIZUKU &&
+                !prefs.promptInstallerOnInstall.get()
+            succeeded = true
             Result.success()
         } catch (e: ProcessRuntime.ProcessExitException) {
             Log.e(
@@ -389,6 +427,7 @@ class PatcherWorker(
             if (!patchedApk.delete() && patchedApk.exists()) {
                 Log.w(tag, "Failed to delete temporary patched APK: ${patchedApk.absolutePath}".logFmt())
             }
+            if (!isStopped) showCompletionNotification(succeeded, autoInstallPending)
         }
     }
 
@@ -405,6 +444,7 @@ class PatcherWorker(
         private fun String.logFmt() = "$LOG_PREFIX $this"
 
         const val NOTIFICATION_ID = 1
+        const val COMPLETION_NOTIFICATION_ID = 2
 
         const val PROCESS_EXIT_CODE_KEY = "process_exit_code"
         const val PROCESS_PREVIOUS_LIMIT_KEY = "process_previous_limit"

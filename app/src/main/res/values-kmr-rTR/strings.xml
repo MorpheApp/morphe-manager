@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Ez aplikasyonên ji wan dixihîne ji roja niha ve.</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Bi kofeyînê u bandorên baş girtîye.</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Rabe û çîçekê</string>
+    <string name="home_greeting_morning_2">Silav! Bername ne li ser xwe xêr dibin</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Naxweşiya dîroşê? Çîyekî çîçekê</string>
+    <string name="home_greeting_afternoon_2">Piştî nûçikan guherîn cuda ye</string>
+    <string name="home_greeting_afternoon_3">Şîfta êvarê: guhertoyek nû</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Êvarê xêr hat! Guherînên êvarê cuda ne</string>
+    <string name="home_greeting_evening_2">Li ser pêşê veguherî? Berê sepanek guhêrîne</string>
+    <string name="home_greeting_evening_3">Bi dawîkirinê? Berê tiştek guhêrîne</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Hêj serî li ser şînê yî? Sepanê jî hewce ne ku werin guhêrîn</string>
+    <string name="home_greeting_late_night_2">Sevisa guherîna şevê? Respekt</string>
+    <string name="home_greeting_late_night_3">Moda şevê: aktîv kirin</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Demên herî baş ên guherînê… têkbirin</string>
+    <string name="home_greeting_super_late_2">Naxewî? Tiştek guhêrîne</string>
+    <string name="home_greeting_super_late_3">Niha, tenê serî li ser şînê bimîne û guhêrîne</string>
+    <string name="home_greeting_super_late_4">Tu û serveran, her wekî hev serî li ser şînê</string>
+    <string name="home_greeting_super_late_5">Şevparêz û berdêl</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Kanalan saz bike</string>
     <string name="sources_management_open_in_browser">Di ragirinê de vebêje</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Nakamkirê</string>
     <string name="home_apk_availability_yes">Ew, min alîkarê dîtina APK-yê bikîn</string>
     <string name="home_apk_availability_no">Na, ez APK-yek heznikim</string>
-    <string name="home_apk_use_saved_with_version">APK a vekirî te (v%s) bejin</string>
-    <string name="home_apk_use_installed_with_version">APK-ya sazkirî (v%s) bikar bîne</string>
+    <string name="home_apk_use_saved">APK ya saved bikar bîne</string>
+    <string name="home_apk_use_installed">APK ya sazkirî bikar bîne</string>
     <string name="home_app_info_no_saved_apk">APK kume ne. Berî ev, wê APK ava beke</string>
     <string name="home_version_requires_android">Android %s+ hewce dike.</string>
     <string name="home_apk_no_compatible_versions_title">Li vê cihazê de ne piştgirîkirî</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Butona \'%s\' ya jêr lê deynin.</string>
     <string name="home_download_instructions_step2_part1">Li ser rûbera malperê biqewime û bikşîne</string>
     <string name="home_download_instructions_download_button_toast">Li ser malpera çapa serdest bike, ne ku xwer li vir 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Bêhtirîn! Naha li ser dewam bike tıklake bike û biçin ser malperê 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Temaşekirîn çêtir dike, hûn nêzîk dibin! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Serkeftî! Naha bikîne virê û biçin ser malperê 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Ezberkirin baş e û hûn nêzîk dibin 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Hê jî li vir nînê... hîş li vir nînê... 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Tamam, adaneliğinize saygı duyuyorum 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Artık resmi bir Morphe düğme test cihazısın 🏅</string>
@@ -182,6 +203,9 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_dialog_unsupported_version_dialog_proceed">Belaş veşêre</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versiyonên hevrek:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nefixî</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Ev guherînek din a heman versiyonê ye. Guherîn bi hewcehiya buildek taybet hewce ne</string>
     <string name="home_dialog_wrong_package_title">Pakêta xeberdar hilbijartin</string>
     <string name="home_dialog_wrong_package_description">APK ya hilbijartin ji bo sepanek lê çêkirin dirêj nadê</string>
     <string name="home_dialog_expected_package">Pakê dîtbar:</string>
@@ -730,6 +754,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="warning">Îşar</string>
     <string name="error_">Xeṭ</string>
     <string name="retry">Dilo</string>
+    <string name="refresh">Nûvekirin</string>
     <string name="add">Zêde bike</string>
     <string name="close">Vediwere</string>
     <string name="back">Paşve</string>
@@ -746,6 +771,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="view">Dîtin</string>
     <string name="search">Lêwî</string>
     <string name="search_no_results">Tu encamedan ne heye</string>
+    <string name="sort">Rêbertkirin</string>
     <string name="any_version">Her</string>
     <string name="enabled">Destûrxast kirin</string>
     <string name="disabled">Ne destûrxast kirin</string>
@@ -755,6 +781,11 @@ Qasîyên wêneyan divê wiha bin:
     <string name="select_all_done">Hemûyan hilbijartin</string>
     <string name="deselect_all">Hemûyan hilbijêre</string>
     <string name="deselect_all_done">Hemûyan bêhilbijartin</string>
+    <string name="reorder_list">Lîsteyê dîsa rêzekirin</string>
+    <string name="reorder_list_hint">Bixistin da ku dîsa rêzekirin</string>
+    <string name="reorder_done">Rêzê hat xêzkirin</string>
+    <string name="reset_order">Rêzê dîsa serî hildin</string>
+    <string name="reset_order_done">Fermanê sîparîşê nûkirin</string>
     <string name="rename">Navê nû bigere</string>
     <string name="import_">Hez kirin</string>
     <string name="export">Dernake</string>
@@ -789,6 +820,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="hide">Vêşêrîn</string>
     <string name="hidden">Veşartî</string>
     <string name="unhide">Neveşartîne</string>
+    <string name="unhide_done">Nîşan dayin</string>
     <string name="logs">Log</string>
     <string name="sources">Çavkanî</string>
     <string name="installing_ellipsis">Dikuştin…</string>

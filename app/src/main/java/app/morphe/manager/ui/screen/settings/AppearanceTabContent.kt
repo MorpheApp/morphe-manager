@@ -25,7 +25,6 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
-import kotlin.math.roundToInt
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -40,6 +39,8 @@ import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.saveLanguageToPrefs
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * Appearance tab content.
@@ -71,14 +72,15 @@ fun AppearanceTabContent(
     val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
 
+    val contentPadding = rememberWindowSize().contentPadding
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
-            .padding(16.dp)
+            .padding(horizontal = contentPadding, vertical = MorpheDefaults.ContentPadding)
     ) {
         // Language Section
-        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             LanguageSection(
                 appLanguage = appLanguage,
                 onLanguageClick = { showTranslationInfoDialog.value = true }
@@ -86,7 +88,7 @@ fun AppearanceTabContent(
         }
 
         // Home Screen Section
-        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             SectionTitle(
                 text = stringResource(R.string.settings_appearance_home_screen),
                 icon = Icons.Outlined.Dashboard
@@ -94,7 +96,7 @@ fun AppearanceTabContent(
         }
 
         RichSettingsItem(
-            modifier = Modifier.padding(bottom = 16.dp),
+            modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding),
             onClick = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
             showBorder = true,
             title = stringResource(R.string.settings_appearance_greeting_phrases),
@@ -114,7 +116,7 @@ fun AppearanceTabContent(
         )
 
         // Theme Mode Section
-        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             SectionTitle(
                 text = stringResource(R.string.settings_appearance_theme),
                 icon = Icons.Outlined.Palette
@@ -122,7 +124,7 @@ fun AppearanceTabContent(
         }
 
         Box(
-            Modifier.padding(bottom = 16.dp).fillMaxWidth().then(
+            Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth().then(
                 if (onThemeSelectorPositioned != null || onThemeSelectorScrollTarget != null)
                     Modifier.onGloballyPositioned { coords ->
                         onThemeSelectorPositioned?.invoke(coords.boundsInWindow())
@@ -148,7 +150,7 @@ fun AppearanceTabContent(
             exit = MorpheAnimations.shrinkFadeExit
         ) {
             RichSettingsItem(
-                modifier = Modifier.padding(bottom = 16.dp),
+                modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding),
                 onClick = { themeViewModel.togglePureBlackTheme(pureBlackTheme) },
                 showBorder = true,
                 title = stringResource(R.string.settings_appearance_pure_black),
@@ -175,13 +177,13 @@ fun AppearanceTabContent(
             exit = MorpheAnimations.shrinkFadeExit
         ) {
             Column {
-                Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+                Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
                     SectionTitle(
                         text = stringResource(R.string.settings_appearance_accent_color),
                         icon = Icons.Outlined.ColorLens
                     )
                 }
-                Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+                Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
                     AccentColorSelector(
                         selectedColorHex = customAccentColorHex,
                         onColorSelected = { color -> themeViewModel.setCustomAccentColor(color) },
@@ -192,14 +194,14 @@ fun AppearanceTabContent(
         }
 
         // Background Type Section
-        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             SectionTitle(
                 text = stringResource(R.string.settings_appearance_background),
                 icon = Icons.Outlined.Wallpaper
             )
         }
 
-        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             BackgroundSelector(
                 selectedBackground = backgroundType,
                 onBackgroundSelected = { selectedType ->
@@ -219,7 +221,7 @@ fun AppearanceTabContent(
             exit = MorpheAnimations.shrinkFadeExit
         ) {
             RichSettingsItem(
-                modifier = Modifier.padding(bottom = 16.dp),
+                modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding),
                 onClick = { themeViewModel.toggleBackgroundParallax(enableParallax) },
                 showBorder = true,
                 title = stringResource(R.string.settings_appearance_parallax_effect),
@@ -240,7 +242,7 @@ fun AppearanceTabContent(
         }
 
         // App Icon Section
-        Box(Modifier.padding(bottom = 16.dp).fillMaxWidth()) {
+        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             SectionTitle(
                 text = stringResource(R.string.settings_appearance_app_icon_selector_title),
                 icon = Icons.Outlined.Apps
@@ -266,7 +268,7 @@ fun AppearanceTabContent(
             onDismiss = {
                 showTranslationInfoDialog.value = false
                 scope.launch {
-                    delay(50)
+                    delay(50.milliseconds)
                     showLanguageDialog.value = true
                 }
             }

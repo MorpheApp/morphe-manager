@@ -1,0 +1,11 @@
+{
+  "uniqueId": "com.github.GIGAMOLE:ComposeFadingEdges",
+  "name": "ComposeFadingEdges",
+  "developers": [{"name": "GIGAMOLE"}],
+  "website": "https://github.com/GIGAMOLE/ComposeFadingEdges",
+  "scm": {
+    "connection": "scm:git:https://github.com/GIGAMOLE/ComposeFadingEdges.git",
+    "url": "https://github.com/GIGAMOLE/ComposeFadingEdges"
+  },
+  "licenses": ["MIT"]
+}

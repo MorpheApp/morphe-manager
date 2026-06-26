@@ -38,7 +38,7 @@ import app.morphe.patcher.dex.BytecodeMode
 /**
  * Performance section.
  */
-@SuppressLint("LocalContextGetResourceValueCheck", "BatteryLife")
+@SuppressLint("BatteryLife")
 @Composable
 fun PerformanceSection(
     settingsViewModel: SettingsViewModel,

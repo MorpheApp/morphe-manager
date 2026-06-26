@@ -53,6 +53,27 @@
     <string name="home_greeting_9">アプリを救う救世主になろう</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">カフェインと良質なパッチで動作中</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">起床してパッチを適用</string>
+    <string name="home_greeting_morning_2">おはよう！アプリは自分自身でパッチを適用しないよ</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">午後の眠気？何かパッチを当ててみて</string>
+    <string name="home_greeting_afternoon_2">昼食後のパッチ適用は格別</string>
+    <string name="home_greeting_afternoon_3">午後のシフト：パッチ適用版</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">こんばんは！夕方のパッチ適用は格別です</string>
+    <string name="home_greeting_evening_2">一息つきますか？まずはアプリをパッチ適用しましょう</string>
+    <string name="home_greeting_evening_3">退勤しますか？まずは何かをパッチ適用しましょう</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">まだ起きてますか？パッチが必要なアプリも起きてますよ</string>
+    <string name="home_greeting_late_night_2">夜遅くにパッチ適用セッション？素晴らしい</string>
+    <string name="home_greeting_late_night_3">夜間モード：起動</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">パッチ適用時間のピーク…たぶん</string>
+    <string name="home_greeting_super_late_2">眠れない？何かパッチ適用しましょう</string>
+    <string name="home_greeting_super_late_3">この時点で、起きてパッチを適用するだけです</string>
+    <string name="home_greeting_super_late_4">あなたとサーバー、両方とも起きています</string>
+    <string name="home_greeting_super_late_5">夜行性で生産的</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">パッチソース</string>
     <string name="sources_management_open_in_browser">ブラウザで開く</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">非対応</string>
     <string name="home_apk_availability_yes">はい、 APK を探すのを手伝ってください</string>
     <string name="home_apk_availability_no">いいえ、既に APK を持っています</string>
-    <string name="home_apk_use_saved_with_version">保存済みの APK (v%s) を使用する</string>
-    <string name="home_apk_use_installed_with_version">インストール済みの APK (v%s) を使用する</string>
+    <string name="home_apk_use_saved">保存済みのAPKを使用する</string>
+    <string name="home_apk_use_installed">インストール済みのAPKを使用する</string>
     <string name="home_app_info_no_saved_apk">保存済みの APK がありません。パッチを適用するには、 APK ファイルを再度選択してください</string>
     <string name="home_version_requires_android">Android %s 以降が必要です</string>
     <string name="home_apk_no_compatible_versions_title">このデバイスではサポートされていません</string>
@@ -184,6 +205,9 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">このまま続行する</string>
     <string name="home_dialog_unsupported_version_compatible_versions">互換性のあるバージョン:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">未対応</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">ビルド %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">これは同じバージョンの別のビルドです。パッチには特定のビルドが必要です</string>
     <string name="home_dialog_wrong_package_title">無効なパッケージが選択されました</string>
     <string name="home_dialog_wrong_package_description">選択された APK は、パッチを適用しようとしているアプリのものではありません</string>
     <string name="home_dialog_expected_package">想定されるパッケージ:</string>
@@ -732,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">警告</string>
     <string name="error_">エラー</string>
     <string name="retry">再試行</string>
+    <string name="refresh">更新</string>
     <string name="add">追加</string>
     <string name="close">閉じる</string>
     <string name="back">戻る</string>
@@ -748,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">表示</string>
     <string name="search">検索</string>
     <string name="search_no_results">検索結果は見つかりませんでした</string>
+    <string name="sort">並べ替え</string>
     <string name="any_version">すべて</string>
     <string name="enabled">有効化</string>
     <string name="disabled">無効</string>
@@ -757,6 +783,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">すべて選択</string>
     <string name="deselect_all">すべて選択解除</string>
     <string name="deselect_all_done">すべて選択解除</string>
+    <string name="reorder_list">リストの並べ替え</string>
+    <string name="reorder_list_hint">並べ替えるにはドラッグしてください</string>
+    <string name="reorder_done">順序を保存しました</string>
+    <string name="reset_order">順序をリセット</string>
+    <string name="reset_order_done">注文をリセットしました</string>
     <string name="rename">名前を変更する</string>
     <string name="import_">インポート</string>
     <string name="export">エクスポート</string>
@@ -791,6 +822,7 @@ morphe_header_custom_dark.png
     <string name="hide">非表示にする</string>
     <string name="hidden">非表示</string>
     <string name="unhide">再表示</string>
+    <string name="unhide_done">表示</string>
     <string name="logs">ログ</string>
     <string name="sources">ソース</string>
     <string name="installing_ellipsis">インストール中…</string>

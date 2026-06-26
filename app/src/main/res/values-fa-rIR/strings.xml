@@ -45,6 +45,11 @@
     <string name="home_greeting_9">نجات اپ‌ها از دست خودشون، از امروز!</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">قدرت گرفته از کافئین و پچ‌های خوب</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <!-- Evening greetings (17:00–21:59) -->
+    <!-- Late night greetings (22:00–23:59) -->
+    <!-- Super late night greetings (0:00–4:59) -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">منابع پچ </string>
     <string name="sources_management_open_in_browser">باز کردن در مرورگر</string>
@@ -78,7 +83,6 @@
     <string name="home_apk_availability_unpatched_label">پچ نشده</string>
     <string name="home_apk_availability_yes">بله، کمکم کن یک APK پیدا کنم</string>
     <string name="home_apk_availability_no">نه، من قبلا یک APK دارم</string>
-    <string name="home_apk_use_saved_with_version">از APK ذخیره شده (v%s) استفاده کنید</string>
     <string name="home_app_info_no_saved_apk">هیچ APK ذخیره شده ای وجود ندارد. پچینگ نیازمند انتخاب مجدد فایل APK است</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">دانلود فایل apk اصلی</string>
@@ -130,6 +134,7 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">با این حال ادامه دهید</string>
     <string name="home_dialog_unsupported_version_compatible_versions">نسخه‌های سازگار:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">پشتیبانی نشده</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_wrong_package_title">بسته اشتباه انتخاب شد</string>
     <string name="home_dialog_wrong_package_description">APK انتخاب شده برای برنامه ای که قصد وصله آن را داشتید نیست </string>
     <string name="home_dialog_expected_package">بسته مورد انتظار:</string>

@@ -26,10 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.shared.MorpheIcon
-import app.morphe.manager.ui.screen.shared.WindowWidthSizeClass
-import app.morphe.manager.ui.screen.shared.isLandscape
-import app.morphe.manager.ui.screen.shared.rememberWindowSize
+import app.morphe.manager.ui.screen.shared.*
 
 /**
  * Standard icon-based option card for appearance settings.
@@ -59,7 +56,7 @@ fun ModernIconOptionCard(
 
     Surface(
         modifier = modifier.height(cardHeight),
-        shape = RoundedCornerShape(14.dp),
+        shape = RoundedCornerShape(MorpheDefaults.SettingsCornerRadius),
         color = if (selected) {
             MaterialTheme.colorScheme.primaryContainer
         } else {
@@ -79,7 +76,7 @@ fun ModernIconOptionCard(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(12.dp)
+                .padding(MorpheDefaults.ItemSpacing)
                 .semantics(mergeDescendants = true) {
                     role = Role.RadioButton
                     stateDescription = if (selected) selectedText else notSelectedText
@@ -137,7 +134,7 @@ fun CompactOptionCard(
 
     Surface(
         modifier = modifier.height(cardHeight),
-        shape = RoundedCornerShape(14.dp),
+        shape = RoundedCornerShape(MorpheDefaults.SettingsCornerRadius),
         color = if (selected) {
             MaterialTheme.colorScheme.primaryContainer
         } else {
@@ -157,7 +154,7 @@ fun CompactOptionCard(
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp, vertical = 12.dp)
+                .padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ItemSpacing)
                 .semantics(mergeDescendants = true) {
                     role = Role.RadioButton
                     stateDescription = if (selected) selectedText else notSelectedText

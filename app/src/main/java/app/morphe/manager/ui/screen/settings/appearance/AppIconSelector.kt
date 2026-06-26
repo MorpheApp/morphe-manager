@@ -13,7 +13,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,7 +53,7 @@ fun AppIconSelector() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(MorpheDefaults.ContentPadding),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             // Icon grid - 3 columns
@@ -124,7 +127,7 @@ private fun AppIconCard(
 
     Surface(
         modifier = modifier.height(cardHeight),
-        shape = RoundedCornerShape(14.dp),
+        shape = RoundedCornerShape(MorpheDefaults.SettingsCornerRadius),
         color = if (isSelected) {
             MaterialTheme.colorScheme.primaryContainer
         } else {
@@ -143,7 +146,7 @@ private fun AppIconCard(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(12.dp)
+                .padding(MorpheDefaults.ItemSpacing)
                 .semantics(mergeDescendants = true) {
                     role = Role.RadioButton
                     stateDescription = if (isSelected) selectedText else notSelectedText

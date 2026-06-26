@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Спасаем приложения от них самих с сегодняшнего дня</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Работаем на кофеине и хороших патчах</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Вставай и пропатчивай</string>
+    <string name="home_greeting_morning_2">Доброе утро! Приложения сами себя не пропатчат.</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Послеполуденный спад? Пора что-нибудь пропатчить</string>
+    <string name="home_greeting_afternoon_2">Патчи после обеда воспринимаются иначе</string>
+    <string name="home_greeting_afternoon_3">Смена после обеда: редакция патчей</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Добрый вечер! Вечерние патчи воспринимаются иначе</string>
+    <string name="home_greeting_evening_2">Развлекаетесь перед сном? Сначала пропатчите приложение</string>
+    <string name="home_greeting_evening_3">Собираетесь с работы? Сначала пропатчьте что-нибудь</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Ещё не спите? Так же, как приложения, которым нужны патчи</string>
+    <string name="home_greeting_late_night_2">Ночная сессия патчей? Уважение</string>
+    <string name="home_greeting_late_night_3">Режим совы: активирован</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Пик патчей... якобы</string>
+    <string name="home_greeting_super_late_2">Не можете уснуть? Попатчите что-нибудь</string>
+    <string name="home_greeting_super_late_3">В этот момент просто не ложитесь спать и пропатчьте всё</string>
+    <string name="home_greeting_super_late_4">И вы, и серверы – оба в сети</string>
+    <string name="home_greeting_super_late_5">Ночной и продуктивный</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Источники патчей</string>
     <string name="sources_management_open_in_browser">Открыть в браузере</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Несовместимый</string>
     <string name="home_apk_availability_yes">Да, помогите мне найти APK</string>
     <string name="home_apk_availability_no">Нет, у меня уже есть APK</string>
-    <string name="home_apk_use_saved_with_version">Сохраненный APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Установленный APK (v%s)</string>
+    <string name="home_apk_use_saved">Использовать сохраненный APK</string>
+    <string name="home_apk_use_installed">Использовать установленный APK</string>
     <string name="home_app_info_no_saved_apk">Нет сохраненного APK. Для патча нужно будет снова выбрать APK файл</string>
     <string name="home_version_requires_android">Требуется Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Не поддерживается на этом устройстве</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Нажмите \'%s\' кнопке ниже</string>
     <string name="home_download_instructions_step2_part1">Прокрутите страницу вниз и нажмите</string>
     <string name="home_download_instructions_download_button_toast">Нажмите скачать на веб-сайте, а не здесь 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Отлично! Теперь нажмите \"Продолжить\" ниже и перейдите на сайт 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Практика ведет к совершенству, вы почти у цели! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Отлично! Теперь нажмите \"Продолжить\" и перейдите на сайт 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Практика — залог успеха, и у вас всё получается 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Все еще не здесь… все еще не здесь… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">ОК, я уважаю вашу целеустремлённость 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Теперь вы официальный тестер кнопки Morphe 🏅</string>
@@ -184,6 +205,9 @@
     <string name="home_dialog_unsupported_version_dialog_proceed"> Продолжить в любом случае.</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Совместимые версии:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Неподдерживаемые</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Сборка %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Это другая сборка той же версии. Патчи требуют конкретную сборку</string>
     <string name="home_dialog_wrong_package_title">Неверно выбранный пакет</string>
     <string name="home_dialog_wrong_package_description">Выбранный APK не соответствует приложению, которое вы собирались пропатчить</string>
     <string name="home_dialog_expected_package">Ожидаемый пакет:</string>
@@ -732,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">Предупреждение</string>
     <string name="error_">Ошибка</string>
     <string name="retry">Повторить попытку</string>
+    <string name="refresh">Обновить</string>
     <string name="add">Добавить</string>
     <string name="close">Закрыть</string>
     <string name="back">Назад</string>
@@ -748,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">Просмотр</string>
     <string name="search">Поиск</string>
     <string name="search_no_results">Ничего не найдено</string>
+    <string name="sort">Сортировать</string>
     <string name="any_version">Любая</string>
     <string name="enabled">Включено</string>
     <string name="disabled">Выключено</string>
@@ -757,6 +783,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">Все выбрано</string>
     <string name="deselect_all">Снять выделение со всех</string>
     <string name="deselect_all_done">Все снято</string>
+    <string name="reorder_list">Переупорядочить список</string>
+    <string name="reorder_list_hint">Перетащите, чтобы изменить порядок</string>
+    <string name="reorder_done">Порядок сохранен</string>
+    <string name="reset_order">Сбросить порядок</string>
+    <string name="reset_order_done">Сброс заказа</string>
     <string name="rename">Переименовать</string>
     <string name="import_">Импортировать</string>
     <string name="export">Экспорт</string>
@@ -791,6 +822,7 @@ morphe_header_custom_dark.png
     <string name="hide">Скрыть</string>
     <string name="hidden">Скрыто</string>
     <string name="unhide">Показать</string>
+    <string name="unhide_done">Показано</string>
     <string name="logs">Журналы</string>
     <string name="sources">Источники</string>
     <string name="installing_ellipsis">Установка…</string>

@@ -53,6 +53,27 @@
     <string name="home_greeting_9">מצילים אפליקציות מעצמן מהיום</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">מופעל על ידי קפאין ותיקונים טובים</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">קום ותקן</string>
+    <string name="home_greeting_morning_2">בוקר טוב! אפליקציות לא מתקנות את עצמן</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">שקיעה של אחרי הצהריים? תקן משהו</string>
+    <string name="home_greeting_afternoon_2">תיקונים אחרי הצהריים זה אחרת</string>
+    <string name="home_greeting_afternoon_3">משמרת אחר הצהריים: מהדורת התיקונים</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">ערב טוב! תיקונים בערב זה אחרת</string>
+    <string name="home_greeting_evening_2">מתחילים להירגע? תטפל באפליקציה קודם</string>
+    <string name="home_greeting_evening_3">יוצאים מהעבודה? תטפל במשהו קודם</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">עדיין ערים? גם האפליקציות שצריכות תיקון</string>
+    <string name="home_greeting_late_night_2">סשן תיקונים לילי מאוחר? כבוד</string>
+    <string name="home_greeting_late_night_3">מצב ינשוף לילה: הופעל</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">שעות תיקונים שיא... כביכול</string>
+    <string name="home_greeting_super_late_2">לא מצליחים להירדם? תטפל במשהו</string>
+    <string name="home_greeting_super_late_3">בנקודה הזאת, פשוט תישאר ער ותטפל</string>
+    <string name="home_greeting_super_late_4">אתם והשרתים, שניהם ערים</string>
+    <string name="home_greeting_super_late_5">ליליים ופרודוקטיביים</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">מקורות תיקונים</string>
     <string name="sources_management_open_in_browser">פתח בדפדפן</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">לא תואם</string>
     <string name="home_apk_availability_yes">כן, עזור לי למצוא APK</string>
     <string name="home_apk_availability_no">לא, אני כבר מחזיק APK</string>
-    <string name="home_apk_use_saved_with_version">השתמש באפאק שמור (גרסה %s)</string>
-    <string name="home_apk_use_installed_with_version">השתמש ב-APK מותקן (v%s)</string>
+    <string name="home_apk_use_saved">השתמש ב-APK שמור</string>
+    <string name="home_apk_use_installed">השתמש ב-APK מותקן</string>
     <string name="home_app_info_no_saved_apk">אין אפאק שמור. תיקון ידרש לבחור את קובץ האפאק שוב</string>
     <string name="home_version_requires_android">דורש Android %s+‎</string>
     <string name="home_apk_no_compatible_versions_title">לא נתמך במכשיר זה</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">לחץ על הכפתור \'%s\' למטה כדי להוריד</string>
     <string name="home_download_instructions_step2_part1">גלול מטה בדף האינטרנט ולחץ על</string>
     <string name="home_download_instructions_download_button_toast">לחץ הורד באתר, ולא כאן 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">מושלם! עכשיו לחץ על המשך למטה וגש לאתר 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">תרגול הופך למושלם, אתה מתקדם! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">נפלא! עכשיו לחץ על המשך וכנס לאתר 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">תרגול הופך את הדברים לשלמים ואתה בדרך הנכונה 💪</string>
     <string name="home_download_instructions_download_button_toast_4">עדיין לא כאן… עדיין לא כאן… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">בסדר, אני מכבד את המסירות 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">אתה עכשיו בודק רשמי של כפתור Morphe 🏅</string>
@@ -184,6 +205,9 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">המשך בכל זאת</string>
     <string name="home_dialog_unsupported_version_compatible_versions">גרסאות תואמות:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">לא תואם</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">גרסה %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">זו גרסה אחרת של אותה גרסה. התיקונים דורשים גרסה ספציפית</string>
     <string name="home_dialog_wrong_package_title">גרסה לא מתאימה</string>
     <string name="home_dialog_wrong_package_description">הקובץ APK שבחרת אינו עבור האפליקציה שברצונך לתקן</string>
     <string name="home_dialog_expected_package">תיקיית חבילה צפויה:</string>
@@ -716,6 +740,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="warning">אזהרה</string>
     <string name="error_">שגגה</string>
     <string name="retry">נסה שוב</string>
+    <string name="refresh">רענן</string>
     <string name="add">הוסף</string>
     <string name="close">סגור</string>
     <string name="back">חזרה</string>
@@ -732,6 +757,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="view">צפה</string>
     <string name="search">חיפוש</string>
     <string name="search_no_results">לא נמצאו תוצאות</string>
+    <string name="sort">מיון</string>
     <string name="any_version">כל</string>
     <string name="enabled">הפעל</string>
     <string name="disabled">מושבת</string>
@@ -741,6 +767,11 @@ morphe_adaptive_monochrome_custom.xml
     <string name="select_all_done">הכל נבחר</string>
     <string name="deselect_all">בטל בחירה של הכל</string>
     <string name="deselect_all_done">הכל בוטל</string>
+    <string name="reorder_list">סדר מחדש רשימה</string>
+    <string name="reorder_list_hint">גרור לסדר מחדש</string>
+    <string name="reorder_done">הסדר נשמר</string>
+    <string name="reset_order">אפס סדר</string>
+    <string name="reset_order_done">איפוס ההזמנה</string>
     <string name="rename">שנה שם</string>
     <string name="import_">ייבוא</string>
     <string name="export">יְצוּא</string>
@@ -775,6 +806,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="hide">הסתר</string>
     <string name="hidden">מוסתר</string>
     <string name="unhide">הסתר</string>
+    <string name="unhide_done">הוצג</string>
     <string name="logs">יומן</string>
     <string name="sources">מקורות</string>
     <string name="installing_ellipsis">מתקין…</string>

@@ -57,7 +57,6 @@ import kotlinx.coroutines.launch
  * Advanced patch selection and configuration dialog.
  * Shown before patching when expert mode is enabled.
  */
-@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun ExpertModeDialog(
     newPatches: Map<Int, Set<String>> = emptyMap(),
@@ -436,7 +435,10 @@ fun ExpertModeDialog(
     }
 
     // Options dialog
-    selectedPatchForOptions.value?.let { (bundleUid, patch) ->
+    val patchForOptions = selectedPatchForOptions.value
+    if (patchForOptions != null) {
+        val (bundleUid, patch) = patchForOptions
+        val missingOptionsMessage = stringResource(R.string.patch_option_required_missing, patch.name)
         PatchOptionsDialog(
             patch = patch,
             isDefaultBundle = bundleUid == 0,
@@ -450,7 +452,7 @@ fun ExpertModeDialog(
             onDismiss = {
                 // Show a toast if the patch still has unfilled required options
                 if (patch.name in patchesWithMissingRequired) {
-                    context.toast(context.getString(R.string.patch_option_required_missing, patch.name))
+                    context.toast(missingOptionsMessage)
                 }
                 selectedPatchForOptions.value = null
             }

@@ -576,7 +576,6 @@ class ImportExportViewModel(
     }
 
     override fun onCleared() {
-        super.onCleared()
         cancelKeystoreImport()
     }
 

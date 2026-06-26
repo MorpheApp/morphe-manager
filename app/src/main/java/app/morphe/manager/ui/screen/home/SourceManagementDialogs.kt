@@ -5,14 +5,12 @@
 
 package app.morphe.manager.ui.screen.home
 
-import android.annotation.SuppressLint
 import android.graphics.Color.argb
 import android.graphics.Color.colorToHSV
 import android.net.Uri
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
@@ -74,7 +72,6 @@ private val ColorValid = Color(0xFF4CAF50)
 /**
  * Dialog for adding patch bundles.
  */
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AddSourceDialog(
     onDismiss: () -> Unit,
@@ -527,7 +524,6 @@ fun RenameBundleDialog(
 /**
  * Dialog displaying patches from a bundle with search field and chips.
  */
-@SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BundlePatchesDialog(
@@ -542,7 +538,6 @@ fun BundlePatchesDialog(
     var searchQuery by remember { mutableStateOf("") }
     var selectedPackages by remember { mutableStateOf(emptySet<String>()) }
     val showFilterSheet = remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     val isLoading = patches.isEmpty()
 
@@ -602,13 +597,10 @@ fun BundlePatchesDialog(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 48.dp),
+                    .weight(1f),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator(
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(48.dp)
-                )
+                PulsingLogoIndicator()
             }
         } else {
             LazyColumn(
@@ -818,13 +810,14 @@ fun BundlePatchesDialog(
                     }
                 ) { patch ->
                     val context = LocalContext.current
+                    val expertBadgeTooltip = stringResource(R.string.sources_patch_expert_badge_tooltip)
                     val accentColor = patchAccentColors[patch.name]
                         ?.takeIf { it != Color.Unspecified }
                     PatchItemCard(
                         patch = patch,
                         saveStateKey = "bundle_${src.uid}",
                         onExpertBadgeClick = if (!patch.include) {
-                            { context.toast(context.getString(R.string.sources_patch_expert_badge_tooltip)) }
+                            { context.toast(expertBadgeTooltip) }
                         } else null,
                         accentColor = accentColor,
                         modifier = Modifier.animateItem(
@@ -841,9 +834,7 @@ fun BundlePatchesDialog(
     // App filter bottom sheet
     if (showFilterSheet.value) {
         MorpheBottomSheet(
-            onDismissRequest = { showFilterSheet.value = false },
-            sheetState = sheetState,
-            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+            onDismissRequest = { showFilterSheet.value = false }
         ) {
             Column(
                 modifier = Modifier
@@ -902,7 +893,6 @@ fun BundlePatchesDialog(
 /**
  * Patch item card.
  */
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun PatchItemCard(
     modifier: Modifier = Modifier,

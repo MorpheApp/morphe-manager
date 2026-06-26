@@ -3,6 +3,8 @@ package app.morphe.manager.util
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
 import android.text.style.StyleSpan
 import android.util.Log
@@ -21,11 +23,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 import kotlin.properties.PropertyDelegateProvider
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -59,21 +57,14 @@ fun Context.toast(string: String, duration: Int = Toast.LENGTH_SHORT) {
  * @param logMsg The log message.
  * @param block The code to execute.
  */
-@OptIn(DelicateCoroutinesApi::class)
 inline fun uiSafe(context: Context, @StringRes toastMsg: Int, logMsg: String, block: () -> Unit) {
     try {
         block()
     } catch (error: Exception) {
-        // You can only toast on the main thread.
-        GlobalScope.launch(Dispatchers.Main) {
-            context.toast(
-                context.getString(
-                    toastMsg,
-                    error.simpleMessage()
-                )
-            )
+        // Toast must be posted to the main thread
+        Handler(Looper.getMainLooper()).post {
+            context.toast(context.getString(toastMsg, error.simpleMessage()))
         }
-
         Log.e(tag, logMsg, error)
     }
 }

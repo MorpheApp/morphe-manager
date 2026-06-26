@@ -53,6 +53,11 @@
     <string name="home_greeting_9">Salvando as aplicacións de si mesmas dende hoxe</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Propulsado por cafeína e bos parches</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <!-- Evening greetings (17:00–21:59) -->
+    <!-- Late night greetings (22:00–23:59) -->
+    <!-- Super late night greetings (0:00–4:59) -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fonte de parches</string>
     <string name="sources_management_open_in_browser">Abrir no navegador</string>
@@ -106,8 +111,6 @@
     <string name="home_apk_availability_incompatible_label">Incompatible</string>
     <string name="home_apk_availability_yes">Sí, axúdame a encontrar un APK</string>
     <string name="home_apk_availability_no">Non, xa teño un APK</string>
-    <string name="home_apk_use_saved_with_version">Empregar APK gardado (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Empregar APK instalado (v%s)</string>
     <string name="home_app_info_no_saved_apk">Sen APK gardado. O parche precisa seleccionar o arquivo APK de novo</string>
     <string name="home_version_requires_android">Require Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Non compatible con este dispositivo</string>
@@ -170,6 +173,7 @@ Para obter os mellores resultados, esta aplicación recomenda parchear &lt;b&gt;
     <string name="home_dialog_unsupported_version_dialog_proceed">Proceder de todas maneiras</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versións compatibles:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Non compatible</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_wrong_package_title">Paquete incorrecto seleccionado</string>
     <string name="home_dialog_wrong_package_description">O arquivo APK seleccionado non é para a aplicación que pretende parchear</string>
     <string name="home_dialog_expected_package">Paquete esperado:</string>

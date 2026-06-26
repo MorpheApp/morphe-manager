@@ -53,6 +53,27 @@
     <string name="home_greeting_9">오늘부터 앱을 스스로 구해드리겠습니다</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">카페인과 좋은 패치로 가동 중</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">일어나서 패치하세요</string>
+    <string name="home_greeting_morning_2">좋은 아침입니다! 앱은 스스로 패치되지 않아요</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">오후에 나른해지나요? 무언가를 패치해 보세요</string>
+    <string name="home_greeting_afternoon_2">점심 식사 후에 하는 패치는 느낌이 달라요</string>
+    <string name="home_greeting_afternoon_3">오후 시간에는 패치 모드 돌입</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">안녕하세요! 저녁 패치는 또 다른 느낌입니다</string>
+    <string name="home_greeting_evening_2">좀 쉬고 싶나요? 먼저 앱을 패치해 보세요</string>
+    <string name="home_greeting_evening_3">퇴근하시나요? 먼저 무언가 패치해 보세요</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">아직 안 주무시나요? 패치가 필요한 앱들도 깨어 있습니다</string>
+    <string name="home_greeting_late_night_2">늦은 밤까지 패치 작업 중이라고요? 존경합니다</string>
+    <string name="home_greeting_late_night_3">야행성 모드: ON</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">패치 최적 시간... 이라고 합니다</string>
+    <string name="home_greeting_super_late_2">잠이 안 오나요? 무언가 패치해 보세요</string>
+    <string name="home_greeting_super_late_3">이 정도면 그냥 안 자고 패치하는 게 낫겠네요</string>
+    <string name="home_greeting_super_late_4">당신과 서버, 둘 다 깨어있네요</string>
+    <string name="home_greeting_super_late_5">야행성이면서 생산적이네요</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">패치 소스</string>
     <string name="sources_management_open_in_browser">브라우저에서 열기</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">호환되지 않음</string>
     <string name="home_apk_availability_yes">네, APK를 찾는데 도움을 주세요</string>
     <string name="home_apk_availability_no">아니요, 이미 APK를 가지고 있습니다</string>
-    <string name="home_apk_use_saved_with_version">저장된 APK 사용 (v%s)</string>
-    <string name="home_apk_use_installed_with_version">설치된 APK 사용 (v%s)</string>
+    <string name="home_apk_use_saved">저장된 APK 사용</string>
+    <string name="home_apk_use_installed">설치된 APK 사용</string>
     <string name="home_app_info_no_saved_apk">저장된 APK가 없습니다. 패치하려면 APK 파일을 다시 선택하세요</string>
     <string name="home_version_requires_android">Android %s+ 필요</string>
     <string name="home_apk_no_compatible_versions_title">이 기기에서는 지원되지 않음</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">아래 \'%s\' 버튼을 탭하세요</string>
     <string name="home_download_instructions_step2_part1">웹페이지를 아래로 스크롤 한 후에 이 버튼을 탭하세요</string>
     <string name="home_download_instructions_download_button_toast">여기 말고, 웹사이트에서 다운로드 버튼을 탭하세요 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">완벽해요! 이제 아래 이동 버튼을 탭하여 웹사이트로 이동하세요 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">연습이 완벽을 만듭니다. 거의 다 왔어요! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">좋아요! 이제 계속 버튼을 탭하여 웹사이트로 이동하세요 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">연습할수록 실력이 늘고, 당신도 잘하고 있어요 💪</string>
     <string name="home_download_instructions_download_button_toast_4">여기는 아니예요… 여기는 아니예요… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">좋아요, 그 끈기는 인정합니다 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">이제 당신은 공식 Morphe 버튼 테스터입니다 🏅</string>
@@ -184,6 +205,9 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">계속 진행</string>
     <string name="home_dialog_unsupported_version_compatible_versions">호환 가능한 버전:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">지원되지 않음</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">동일 버전이지만 다른 빌드입니다. 패치하려면 특정 빌드가 필요합니다</string>
     <string name="home_dialog_wrong_package_title">잘못된 패키지가 선택됨</string>
     <string name="home_dialog_wrong_package_description">선택된 APK는 패치하려는 애플리케이션이 아닙니다</string>
     <string name="home_dialog_expected_package">예상된 패키지:</string>
@@ -292,6 +316,10 @@
     <string name="patcher_failed_subtitle">아래에서 오류 세부 정보를 확인하세요</string>
     <string name="patcher_failed_dialog_title">패치 실패</string>
     <string name="patcher_unknown_error">알 수 없는 오류가 발생하였습니다</string>
+    <string name="patcher_split_step_extracting">분할 APK를 추출하는 중</string>
+    <string name="patcher_split_step_merging">%s를 병합하는 중</string>
+    <string name="patcher_split_step_writing">병합된 APK를 작성하는 중</string>
+    <string name="patcher_split_step_finalizing">병합된 APK를 마무리하는 중</string>
     <string name="patcher_conflict_title">패키지 충돌</string>
     <string name="patcher_conflict_subtitle">기존 버전을 제거해야 합니다</string>
     <string name="patcher_conflict_hint">패치된 앱은 설치된 버전과 다른 인증서를 사용합니다. 제거하면 앱 데이터가 모두 삭제됩니다</string>
@@ -589,7 +617,7 @@ morphe_header_custom_dark.png
     <string name="installer_option_none">대체 없음</string>
     <string name="installer_none_description">설정된 대체 설치 프로그램이 없습니다</string>
     <string name="installer_status_requires_root">루트 접근 권한이 필요합니다</string>
-    <string name="installer_status_not_supported">이 동작에는 지원되지 않습니다</string>
+    <string name="installer_status_not_supported">이 작업에는 지원되지 않습니다</string>
     <string name="installer_status_shizuku_not_installed">이 옵션을 사용하려면 Shizuku 또는 Sui를 설치하세요</string>
     <string name="installer_status_shizuku_not_running">Shizuku 또는 Sui 을 시작하고 다시 시도하세요</string>
     <string name="installer_status_shizuku_permission">Shizuku 앱에서 Morphe에 Shizuku 권한을 부여하세요</string>
@@ -733,6 +761,7 @@ morphe_header_custom_dark.png
     <string name="warning">경고</string>
     <string name="error_">오류</string>
     <string name="retry">다시 시도</string>
+    <string name="refresh">새로고침</string>
     <string name="add">추가</string>
     <string name="close">닫기</string>
     <string name="back">뒤로</string>
@@ -749,6 +778,7 @@ morphe_header_custom_dark.png
     <string name="view">보기</string>
     <string name="search">검색</string>
     <string name="search_no_results">검색 결과가 없습니다</string>
+    <string name="sort">정렬</string>
     <string name="any_version">모든 버전</string>
     <string name="enabled">활성화됨</string>
     <string name="disabled">비활성화됨</string>
@@ -758,6 +788,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">모두 선택하였습니다</string>
     <string name="deselect_all">모두 선택 해제</string>
     <string name="deselect_all_done">모두 선택 해제하였습니다</string>
+    <string name="reorder_list">목록 다시 정렬</string>
+    <string name="reorder_list_hint">다시 정렬하려면 드래그하세요</string>
+    <string name="reorder_done">순서를 저장하였습니다</string>
+    <string name="reset_order">순서 초기화</string>
+    <string name="reset_order_done">순서를 초기화하였습니다</string>
     <string name="rename">이름 변경</string>
     <string name="import_">가져오기</string>
     <string name="export">내보내기</string>
@@ -792,6 +827,7 @@ morphe_header_custom_dark.png
     <string name="hide">숨기기</string>
     <string name="hidden">숨겨짐</string>
     <string name="unhide">숨기기 해제</string>
+    <string name="unhide_done">표시됨</string>
     <string name="logs">로그</string>
     <string name="sources">소스</string>
     <string name="installing_ellipsis">설치하는 중…</string>

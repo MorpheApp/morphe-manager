@@ -21,7 +21,7 @@
     <string name="home_update_error">Yenilənmə uğursuz oldu</string>
     <string name="home_update_error_subtitle">İnternet bağlantınızı yoxlayın və təkrar cəhd edin</string>
     <string name="home_update_skipped_metered">Yenilənmələr ötürüldü</string>
-    <string name="home_update_skipped_metered_subtitle">Mobil məlumat işləkdir</string>
+    <string name="home_update_skipped_metered_subtitle">Mobil data işləkdir</string>
     <string name="home_updating_sources">Mənbələr yenilənir…</string>
     <string name="home_update_progress_format">%s emal olundu</string>
     <string name="home_update_success">Mənbələri yeniləmə tamamlandı</string>
@@ -53,6 +53,27 @@
     <string name="home_greeting_9">Bu gündən etibarən tətbiqlər özlərindən azad olunur</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Kofein və yaxşı yamaqlar ilə gücləndirilib</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Ayağa dur və yamaqla</string>
+    <string name="home_greeting_morning_2">Sabahınız xeyir! Tətbiqlər öz-özünə yamaqlanmayacaq</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Günortadan sonra yorğunluq? Bir şeyi yamaqla</string>
+    <string name="home_greeting_afternoon_2">Nahar sonrası yamaqlama başqa cür toxunur</string>
+    <string name="home_greeting_afternoon_3">Günorta növbəsi: yamaq buraxılışı</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Axşamınız xeyir! Axşam yamaqları başqa bir toxunuşdur</string>
+    <string name="home_greeting_evening_2">Dincəlirsən? Əvvəlcə tətbiqi yamaqla</string>
+    <string name="home_greeting_evening_3">Günü bitirirsən? Əvvəlcə nəyisə yamaqla</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Hələ oyaqsan? Yamaqlanmalı olan tətbiqlər də gözləyir</string>
+    <string name="home_greeting_late_night_2">Gecənin bu vaxtı yamaq sessiyası? Eşq olsun!</string>
+    <string name="home_greeting_late_night_3">Gecə bayquşu rejimi: işləkdir</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Yamaqlanma pik saatları... guya ki</string>
+    <string name="home_greeting_super_late_2">Yatanmırsan? Bir şey yamaqla</string>
+    <string name="home_greeting_super_late_3">Artıq bu yerdə, oyaq qal və yamaqla</string>
+    <string name="home_greeting_super_late_4">Sən və serverlər, ikiniz də oyaqsınız</string>
+    <string name="home_greeting_super_late_5">Gecəcil və səmərəli</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yamaq mənbələri</string>
     <string name="sources_management_open_in_browser">Brauzerdə açın</string>
@@ -60,7 +81,7 @@
     <string name="sources_management_prerelease_toggle">İlkin-buraxılış yamaqları</string>
     <string name="sources_management_prerelease_toggle_description">Yeni təcrübi yamaq versiyalarına erkən keçid əldə edilir</string>
     <string name="sources_management_experimental_versions_toggle">Təcrübi tətbiq versiyaları</string>
-    <string name="sources_management_experimental_versions_toggle_description">Əlçatandırsa təcrübi tətbiq hədəflərin yamaqlayır</string>
+    <string name="sources_management_experimental_versions_toggle_description">Əgər varsa təcrübi tətbiq hədəflərin yamaqlayır</string>
     <string name="sources_management_already_exists">Bu mənbə artıq əlavə edilib</string>
     <string name="sources_management_invalid_url">Etibarsız mənbə URL-si. Xahiş olunur, ünvanı yoxla və təkrar cəhd et</string>
     <string name="sources_management_metadata_unavailable">Əlavə Məlumat Yoxdur</string>
@@ -106,8 +127,8 @@
     <string name="home_apk_availability_incompatible_label">Uyuşmaz</string>
     <string name="home_apk_availability_yes">Bəli, APK tapmağa mənə kömək et</string>
     <string name="home_apk_availability_no">Xeyr, Mənim artıq APK-m var</string>
-    <string name="home_apk_use_saved_with_version">Saxlanılan APK-nı istifadə et (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Quraşdırılan APK-nı istifadə et (v%s)</string>
+    <string name="home_apk_use_saved">Saxlanılan APK-nı istifadə et</string>
+    <string name="home_apk_use_installed">Quraşdırılan APK-nı istifadə et</string>
     <string name="home_app_info_no_saved_apk">Saxlanılan APK yoxdur. Yamaqlanma APK faylını təkrar seçmək istəyəcək</string>
     <string name="home_version_requires_android">Android %s+ tələb olunur</string>
     <string name="home_apk_no_compatible_versions_title">Bu cihazda dəstəklənmir</string>
@@ -118,8 +139,8 @@
     <string name="home_download_instructions_step1">Aşağıdakı \'%s\' düyməsinə toxun</string>
     <string name="home_download_instructions_step2_part1">Veb səhifəni aşağı sürüşdür və toxun</string>
     <string name="home_download_instructions_download_button_toast">Burada deyil, vebsaytdakı yükləməyə toxun 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Mükəmməl ! İndi aşağıda \"Davam et\"-ə kliklə və veb sayta keç 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Təcrübə mükəmməlləşdirir, hədəfə yaxınlaşırsınız! 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Əla! İndi davam et-ə kliklə və veb sayta keç 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Təcrübə mükəmməlləşdirir və siz hədəfə yaxınlaşırsınız 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Hələ burada deyil... hələ burada deyil... 🙈 </string>
     <string name="home_download_instructions_download_button_toast_5">Yaxşı, inadkarlığa hörmət edirəm 🫡 </string>
     <string name="home_download_instructions_download_button_toast_6">Artıq rəsmi Morphe düyməsi sınaqçısısınız 🏅</string>
@@ -135,7 +156,7 @@
     <string name="home_recommended_version">Tövsiyə olunan versiya</string>
     <string name="home_selected_version">Seçilən versiya</string>
     <string name="home_select_apk_title">APK Seçin</string>
-    <string name="home_select_any_apk_description">İstənilən tətbiqin APK faylın yaxud bu cihazda artıq quraşdırılan tətbiq seç</string>
+    <string name="home_select_any_apk_description">İstənilən tətbiqin APK faylını yaxud bu cihazda artıq quraşdırılan tətbiqi seç</string>
     <string name="home_use_installed_app">Quraşdırılan tətbiqi istifadə et</string>
     <string name="home_installed_app_picker_title">Quraşdırılan tətbiqi seç</string>
     <string name="home_installed_app_picker_empty">Tətbiq tapılmadı</string>
@@ -184,12 +205,15 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Yenə də davam edilsin?</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Uyuşan versiyalar:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Dəstəklənməyən</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Qurulma %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Bu, eyni versiyanın fərqli quruluşudur. Yamaqlar xüsusi quruluş tələb edir</string>
     <string name="home_dialog_wrong_package_title">Yanlış paket seçildi</string>
     <string name="home_dialog_wrong_package_description">Seçilən APK, yamaq üçün təyin etdiyiniz tətbiq üçün deyil</string>
     <string name="home_dialog_expected_package">Gözlənilən paket:</string>
     <string name="home_dialog_selected_package">Seçilən paket:</string>
     <string name="home_outdated_patches_dialog_title">Yamaqlar köhnəlmiş ola bilər</string>
-    <string name="home_outdated_patches_dialog_message">Mobil məlumat işləkdir və yamaq yeniləmələri qapalıdır</string>
+    <string name="home_outdated_patches_dialog_message">Mobil data işləkdir və yamaq yeniləmələri qapalıdır</string>
     <string name="home_outdated_patches_dialog_warning">Köhnə yamaqlarla yamaqlanma tətbiq pozulmasına səbəb ola bilər</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Yenilənmə &amp; yamaq</string>
     <string name="home_low_disk_space_dialog_title">Az disk yaddaşı</string>
@@ -292,6 +316,10 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="patcher_failed_subtitle">Aşağıdakı xəta təfərrüatlarını yoxlayın</string>
     <string name="patcher_failed_dialog_title">Yamaqlanma Uğursuz Oldu</string>
     <string name="patcher_unknown_error">Bilinməyən xəta baş verdi</string>
+    <string name="patcher_split_step_extracting">Ayrılmış APK-lar çıxarılır</string>
+    <string name="patcher_split_step_merging">%s birləşdirilir</string>
+    <string name="patcher_split_step_writing">Birləşdirilmiş APK qeydə alınır</string>
+    <string name="patcher_split_step_finalizing">Birləşdirilmiş APK tamamlanır</string>
     <string name="patcher_conflict_title">Paket ziddiyyəti</string>
     <string name="patcher_conflict_subtitle">Mövcud versiyanı silməlisiniz</string>
     <string name="patcher_conflict_hint">Yamaqlanan tətbiq quraşdırılan versiyadan fərqli sertifikat istifadə edir. Quraşdırma ləğvi bütün tətbiq məlumatını siləcək</string>
@@ -446,8 +474,8 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Yenilənmələr</string>
     <string name="settings_advanced_updates_use_prereleases">İlkin-buraxılış yeniləmələri</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Yeni Morphe tətbiq versiyalarına erkən keçid. Yamaq mənbələrində hər mənbənin ilkin buraxılışın aktivləşdir</string>
-    <string name="settings_advanced_updates_allow_metered">Mobil məlumat yenilənmələri</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Yeni Morphe tətbiq versiyalarına erkən keçid. Hər mənbənin ilkin buraxılışın yamaq mənbələrində aktivləşdir</string>
+    <string name="settings_advanced_updates_allow_metered">Mobil data yenilənmələri</string>
     <string name="settings_advanced_updates_allow_metered_description">Morphe və yamaq yeniləmələrini mobil məlumat üzərindən yükləməyə icazə verilir</string>
     <string name="settings_advanced_updates_background_notifications">Fon yenilənmə bildirişləri</string>
     <string name="settings_advanced_updates_background_notifications_description">Fonda yeniləmələri dövri yoxla və əlçatandırsa elan et</string>
@@ -731,6 +759,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="warning">Xəbərdarlıq</string>
     <string name="error_">Xəta</string>
     <string name="retry">Təkrar sına</string>
+    <string name="refresh">Təzələ</string>
     <string name="add">Əlavə et</string>
     <string name="close">Qapa</string>
     <string name="back">Geri</string>
@@ -747,6 +776,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="view">Baxın</string>
     <string name="search">Axtarış</string>
     <string name="search_no_results">Nəticə tapılmadı</string>
+    <string name="sort">Çeşidlə</string>
     <string name="any_version">İstənilən</string>
     <string name="enabled">İşləkdi</string>
     <string name="disabled">Qapalıdı</string>
@@ -756,6 +786,11 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="select_all_done">Hamısı seçilib</string>
     <string name="deselect_all">Hamısın seçməyin</string>
     <string name="deselect_all_done">Hamısı seçilməyib</string>
+    <string name="reorder_list">Siyahını yenidən sırala</string>
+    <string name="reorder_list_hint">Yenidən sıralamaq üçün sürüklə</string>
+    <string name="reorder_done">Düzülüş saxlanıldı</string>
+    <string name="reset_order">Düzülüşü sıfırla</string>
+    <string name="reset_order_done">Düzülüş sıfırlandı</string>
     <string name="rename">Təkrar adlandır</string>
     <string name="import_">İdxal et</string>
     <string name="export">Köçür</string>
@@ -788,8 +823,9 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="allow">İcazə verin</string>
     <string name="details">Təfərrüatlar</string>
     <string name="hide">Gizlət</string>
-    <string name="hidden">Gizlədilən</string>
+    <string name="hidden">Gizlədildi</string>
     <string name="unhide">Göstər</string>
+    <string name="unhide_done">Göründü</string>
     <string name="logs">Jurnallar</string>
     <string name="sources">Mənbələr</string>
     <string name="installing_ellipsis">Quraşdırılır…</string>

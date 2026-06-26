@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.home
 
-import android.annotation.SuppressLint
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
@@ -77,7 +76,6 @@ import sh.calvin.reorderable.rememberReorderableLazyListState
 /**
  * Bottom sheet for managing patch bundles.
  */
-@SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BundleManagementSheet(
@@ -167,13 +165,10 @@ fun BundleManagementSheet(
         }
     }
 
-    MorpheBottomSheet(
-        onDismissRequest = onDismissRequest,
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
-    ) {
+    MorpheBottomSheet(onDismissRequest = onDismissRequest) {
         val context = LocalContext.current
         val uriHandler = LocalUriHandler.current
+        val failedToOpenUrlText = stringResource(R.string.sources_management_failed_to_open_url)
 
         Box {
             Column(Modifier.fillMaxWidth()) {
@@ -309,7 +304,7 @@ fun BundleManagementSheet(
                                     try {
                                         uriHandler.openUri(pageUrl)
                                     } catch (_: Exception) {
-                                        context.toast(context.getString(R.string.sources_management_failed_to_open_url))
+                                        context.toast(failedToOpenUrlText)
                                     }
                                 },
                                 forceExpanded = isSingleDefaultBundle,

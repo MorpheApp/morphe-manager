@@ -43,6 +43,9 @@ import java.nio.ByteOrder
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.util.Locale
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicInteger
+import kotlin.time.Duration.Companion.seconds
 import app.morphe.manager.data.room.bundles.Source as SourceInfo
 
 class PatchBundleRepository(
@@ -82,12 +85,9 @@ class PatchBundleRepository(
             .map { BundleAppMetadata.buildFrom(it) }
             .stateIn(scope, SharingStarted.Eagerly, emptyMap())
 
-    fun scopedBundleInfoFlow(packageName: String, version: String?) = enabledBundlesInfoFlow.map {
+    fun scopedBundleInfoFlow(packageName: String, version: String?, versionCode: Long? = null) = enabledBundlesInfoFlow.map {
         it.map { (_, bundleInfo) ->
-            bundleInfo.forPackage(
-                packageName,
-                version
-            )
+            bundleInfo.forPackage(packageName, version, versionCode)
         }
     }
 
@@ -140,7 +140,7 @@ class PatchBundleRepository(
         if (!isDone) return
 
         bundleImportAutoClearJob = scope.launch {
-            delay(8_000)
+            delay(8.seconds)
             val current = bundleImportProgressFlow.value ?: return@launch
             val currentDownloadComplete = current.bytesTotal?.takeIf { it > 0L }?.let { total ->
                 current.bytesRead >= total
@@ -767,8 +767,8 @@ class PatchBundleRepository(
                 val updated = src.copy(displayName = normalized)
                 val updatedInfo = ready.info[uid]?.copy(name = updated.displayTitle)
                 ready.copy(
-                    sources = ready.sources.put(uid, updated),
-                    info = if (updatedInfo != null) ready.info.put(uid, updatedInfo) else ready.info
+                    sources = ready.sources.putting(uid, updated),
+                    info = if (updatedInfo != null) ready.info.putting(uid, updatedInfo) else ready.info
                 )
             }
         }
@@ -794,7 +794,7 @@ class PatchBundleRepository(
                 is JsonPatchBundle -> src.copy(usePrerelease = usePrerelease)
                 else -> return@dispatchAction state
             }
-            ready.copy(sources = ready.sources.put(uid, updated))
+            ready.copy(sources = ready.sources.putting(uid, updated))
         }
 
         // If this is the default Morphe Patches bundle, sync FCM patches topic
@@ -1102,7 +1102,7 @@ class PatchBundleRepository(
                     if (bundle.uid == src.uid) onProgress?.invoke(bytesRead, bytesTotal)
                 }
             )
-            ready.copy(sources = ready.sources.put(src.uid, src))
+            ready.copy(sources = ready.sources.putting(src.uid, src))
         }
 
     /**
@@ -1535,7 +1535,7 @@ class PatchBundleRepository(
                 bundleUpdateProgressFlow.value = noInternetProgress
 
                 scope.launch {
-                    delay(3500)
+                    delay(3.5.seconds)
                     if (bundleUpdateProgressFlow.value == noInternetProgress) {
                         bundleUpdateProgressFlow.value = null
                     }
@@ -1554,7 +1554,7 @@ class PatchBundleRepository(
                 )
                 bundleUpdateProgressFlow.value = skippedProgress
                 scope.launch {
-                    delay(3500)
+                    delay(3.5.seconds)
                     if (bundleUpdateProgressFlow.value == skippedProgress) {
                         bundleUpdateProgressFlow.value = null
                     }
@@ -1582,87 +1582,72 @@ class PatchBundleRepository(
                 result = BundleUpdateResult.None,
             )
 
+            val bundleBytes = ConcurrentHashMap<Int, Pair<Long, Long?>>()
+            val completedCount = AtomicInteger(0)
+            val downloadDispatcher = Dispatchers.IO.limitedParallelism(4)
+
+            val activeNamesMap = ConcurrentHashMap<Int, String>()
+
             val updated: Map<RemotePatchBundle, PatchBundleDownloadResult> = try {
-                val results = LinkedHashMap<RemotePatchBundle, PatchBundleDownloadResult>()
-                var completed = 0
+                coroutineScope {
+                    targets.map { bundle ->
+                        async(downloadDispatcher) {
+                            if (isRemoteUpdateCancelled(bundle.uid)) return@async null
 
-                for (bundle in targets) {
-                    val total = currentUpdateTotal(targets.size)
-                    if (total <= 0) {
-                        bundleUpdateProgressFlow.value = null
-                        return@coroutineScope
-                    }
-                    if (isRemoteUpdateCancelled(bundle.uid)) {
-                        continue
-                    }
+                            Log.d(tag, "Updating patch bundle: ${bundle.name}")
 
-                    Log.d(tag, "Updating patch bundle: ${bundle.name}")
+                            activeNamesMap[bundle.uid] = progressLabelFor(bundle)
+                            bundleUpdateProgressFlow.update { it?.copy(activeNames = activeNamesMap.values.toList()) }
 
-                    bundleUpdateProgressFlow.value = BundleUpdateProgress(
-                        total = total,
-                        completed = completed.coerceAtMost(total),
-                        currentBundleName = progressLabelFor(bundle),
-                        phase = BundleUpdatePhase.Checking,
-                        bytesRead = 0L,
-                        bytesTotal = null,
-                        result = BundleUpdateResult.None,
-                    )
+                            val result = try {
+                                val onProgress: PatchBundleDownloadProgress = { bytesRead, bytesTotal ->
+                                    if (isRemoteUpdateCancelled(bundle.uid)) throw BundleUpdateCancelled()
+                                    bundleBytes[bundle.uid] = bytesRead to bytesTotal
+                                    val snapshot = bundleBytes.values.toList()
+                                    val aggRead = snapshot.sumOf { it.first }
+                                    val knownTotals = snapshot.mapNotNull { it.second }
+                                    val aggTotal = if (knownTotals.size == snapshot.size) knownTotals.sum() else null
+                                    bundleUpdateProgressFlow.update { progress ->
+                                        progress?.copy(
+                                            phase = BundleUpdatePhase.Downloading,
+                                            bytesRead = aggRead,
+                                            bytesTotal = aggTotal,
+                                        )
+                                    }
+                                    onPerBundleProgress?.invoke(bundle, bytesRead, bytesTotal)
+                                }
+                                val r = if (force) bundle.downloadLatest(onProgress) else bundle.update(onProgress)
+                                // Clear any previous metadata error on success
+                                metadataFetchErrorsFlow.update { it - bundle.uid }
+                                r
+                            } catch (_: BundleUpdateCancelled) {
+                                bundleBytes.remove(bundle.uid)
+                                null
+                            } catch (e: CancellationException) {
+                                bundleBytes.remove(bundle.uid)
+                                activeNamesMap.remove(bundle.uid)
+                                throw e
+                            } catch (e: Exception) {
+                                bundleBytes.remove(bundle.uid)
+                                metadataFetchErrorsFlow.update { it + (bundle.uid to e) }
+                                handleBundleDownloadError(e, bundle)
+                                null
+                            }
 
-                    val onProgress: PatchBundleDownloadProgress = { bytesRead, bytesTotal ->
-                        if (isRemoteUpdateCancelled(bundle.uid)) {
-                            throw BundleUpdateCancelled()
+                            val nextTotal = currentUpdateTotal(targets.size)
+                            val newCompleted = completedCount.incrementAndGet().coerceAtMost(nextTotal)
+                            activeNamesMap.remove(bundle.uid)
+                            bundleUpdateProgressFlow.update { progress ->
+                                progress?.copy(
+                                    completed = newCompleted,
+                                    activeNames = activeNamesMap.values.toList(),
+                                )
+                            }
+
+                            if (result != null) bundle to result else null
                         }
-                        bundleUpdateProgressFlow.update { progress ->
-                            progress?.copy(
-                                currentBundleName = progressLabelFor(bundle),
-                                phase = BundleUpdatePhase.Downloading,
-                                bytesRead = bytesRead,
-                                bytesTotal = bytesTotal,
-                            )
-                        }
-                        onPerBundleProgress?.invoke(bundle, bytesRead, bytesTotal)
-                    }
-
-                    val result = try {
-                        val r = if (force) bundle.downloadLatest(onProgress) else bundle.update(onProgress)
-                        // Clear any previous metadata error on success
-                        metadataFetchErrorsFlow.update { it - bundle.uid }
-                        r
-                    } catch (_: BundleUpdateCancelled) {
-                        continue
-                    } catch (e: Exception) {
-                        metadataFetchErrorsFlow.update { it + (bundle.uid to e) }
-                        handleBundleDownloadError(e, bundle)
-                        continue
-                    }
-
-                    val downloadedName = runCatching {
-                        PatchBundle(bundle.patchesJarFile.absolutePath).manifestAttributes?.name
-                    }.getOrNull()?.trim().takeUnless { it.isNullOrBlank() }
-                    if (downloadedName != null) {
-                        bundleUpdateProgressFlow.update { progress ->
-                            progress?.copy(currentBundleName = downloadedName)
-                        }
-                    }
-
-                    val nextTotal = currentUpdateTotal(targets.size)
-                    completed = (completed + 1).coerceAtMost(nextTotal)
-                    bundleUpdateProgressFlow.update { progress ->
-                        progress?.copy(
-                            completed = completed,
-                            currentBundleName = downloadedName ?: progressLabelFor(bundle),
-                            phase = BundleUpdatePhase.Finalizing,
-                            bytesRead = 0L,
-                            bytesTotal = null,
-                        )
-                    }
-
-                    if (result != null) {
-                        results[bundle] = result
-                    }
+                    }.awaitAll().filterNotNull().toMap()
                 }
-
-                results
             } catch (e: Exception) {
                 Log.e(tag, "Failed to update patches", e)
 
@@ -1676,7 +1661,7 @@ class PatchBundleRepository(
                 bundleUpdateProgressFlow.value = errorProgress
 
                 scope.launch {
-                    delay(3500)
+                    delay(3.5.seconds)
                     if (bundleUpdateProgressFlow.value == errorProgress) {
                         bundleUpdateProgressFlow.value = null
                     }
@@ -1699,7 +1684,7 @@ class PatchBundleRepository(
                 bundleUpdateProgressFlow.value = noUpdatesProgress
 
                 scope.launch {
-                    delay(3500)
+                    delay(3.5.seconds)
                     if (bundleUpdateProgressFlow.value == noUpdatesProgress) {
                         bundleUpdateProgressFlow.value = null
                     }
@@ -1743,7 +1728,7 @@ class PatchBundleRepository(
             bundleUpdateProgressFlow.value = successProgress
 
             scope.launch {
-                delay(3500)
+                delay(3.5.seconds)
                 if (bundleUpdateProgressFlow.value == successProgress) {
                     bundleUpdateProgressFlow.value = null
                 }
@@ -1845,6 +1830,7 @@ class PatchBundleRepository(
         val total: Int,
         val completed: Int,
         val currentBundleName: String? = null,
+        val activeNames: List<String> = emptyList(),
         val phase: BundleUpdatePhase = BundleUpdatePhase.Checking,
         val bytesRead: Long = 0L,
         val bytesTotal: Long? = null,

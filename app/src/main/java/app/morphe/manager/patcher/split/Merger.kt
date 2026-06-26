@@ -23,7 +23,7 @@ import java.util.Locale
 const val TAG = "Morphe APKEditor"
 
 private class ApkEditorLogger(
-    private val onProgress: ((String) -> Unit)? = null
+    private val onEvent: ((SplitPreparationEvent) -> Unit)? = null
 ) : APKLogger {
     private companion object {
         val MERGE_PATTERN = Regex("Merging\\s*:?\\s*(.+)", RegexOption.IGNORE_CASE)
@@ -48,7 +48,7 @@ private class ApkEditorLogger(
         val moduleName = match.groupValues.getOrNull(1)?.trim().orEmpty()
         val normalized = normalizeMergeModuleName(moduleName)
         if (normalized.isBlank()) return
-        onProgress?.invoke("Merging $normalized")
+        onEvent?.invoke(SplitPreparationEvent.Merging(normalized))
     }
 
     private fun normalizeMergeModuleName(name: String): String {
@@ -67,14 +67,14 @@ internal object Merger {
         apkDir: Path,
         outputApk: File,
         skipModules: Set<String> = emptySet(),
-        onProgress: ((String) -> Unit)? = null,
+        onEvent: ((SplitPreparationEvent) -> Unit)? = null,
         sortApkEntries: Boolean = false
     ) {
         val closeables = mutableSetOf<Closeable>()
         try {
             val merged = runInterruptible(Dispatchers.Default) {
                 try {
-                    val logger = ApkEditorLogger(onProgress)
+                    val logger = ApkEditorLogger(onEvent)
                     val bundle = ApkBundle().apply {
                         setAPKLogger(logger)
                         loadApkDirectory(apkDir.toFile())
@@ -102,6 +102,7 @@ internal object Merger {
                     closeables.add(bundle)
 
                     val mergedModule = bundle.mergeModules(false).apply {
+                        @Suppress("UsePropertyAccessSyntax")
                         setAPKLogger(logger)
                         setLoadDefaultFramework(false)
                     }
@@ -197,7 +198,7 @@ internal object Merger {
 
             outputApk.parentFile?.mkdirs()
             runInterruptible(Dispatchers.IO) {
-                onProgress?.invoke("Writing merged APK")
+                onEvent?.invoke(SplitPreparationEvent.Writing)
                 merged.writeApk(outputApk)
             }
         } finally {

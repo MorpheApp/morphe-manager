@@ -53,6 +53,18 @@
     <string name="home_greeting_9">Спасуваме апликации од нивните проблеми од денес</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Поткрепено од кофеин и добри кракови</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Стани и закрпнувај!</string>
+    <string name="home_greeting_morning_2">Добро утро! Апликациите нема самите да се закрпат</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Попладневен умор? Закрпи нешто</string>
+    <string name="home_greeting_afternoon_2">Закрпување попладне е нешто друго</string>
+    <string name="home_greeting_afternoon_3">Попладневна смена: издание за закрпи</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">Добро вечер! Вечерните поправки се нешто друго</string>
+    <string name="home_greeting_evening_2">Се опуштате? Прво поправете апликација</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <!-- Super late night greetings (0:00–4:59) -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Извори на поправки</string>
     <string name="sources_management_open_in_browser">Отвори во прелистувач</string>
@@ -106,8 +118,6 @@
     <string name="home_apk_availability_incompatible_label">Некомпатибилен</string>
     <string name="home_apk_availability_yes">Да, помогнете ми да најдам APK</string>
     <string name="home_apk_availability_no">Не, веќе имам APK</string>
-    <string name="home_apk_use_saved_with_version">Користи зачуван APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">Користете инсталиран APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">Не се зачувани APK-а. За да закрпите ќе треба повторно да изберете APK датотека</string>
     <string name="home_version_requires_android">Бара Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Не е поддржано на овој уред</string>
@@ -118,8 +128,6 @@
     <string name="home_download_instructions_step1">Притиснете го копчето „%s“ подолу</string>
     <string name="home_download_instructions_step2_part1">Скролувајте надолу на веб-страницата и притиснете</string>
     <string name="home_download_instructions_download_button_toast">Притиснете „Преземи“ на веб-страницата, а не овде 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Одлично! Кликнете на „продолжете“ подолу и посетете го сајтот 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Вежбањето создава совршенство, па напред! 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Сеуште не е тука… сеуште не е тука… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Ја почитувам посветеноста 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Сега сте официјален тестер на копчето на Morphe 🏅</string>
@@ -182,6 +190,7 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">Продолжи сепак</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Компатибилни верзии:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Неподдржано</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_wrong_package_title">Избран погрешен пакет</string>
     <string name="home_dialog_wrong_package_description">Избраниот APK не е за апликацијата за која сте сакале да закрпите</string>
     <string name="home_dialog_expected_package">Очекуван пакет:</string>

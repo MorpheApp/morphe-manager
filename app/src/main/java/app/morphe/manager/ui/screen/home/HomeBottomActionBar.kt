@@ -32,8 +32,7 @@ import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.shared.MorpheAnimations
-import app.morphe.manager.ui.screen.shared.MorpheIcon
+import app.morphe.manager.ui.screen.shared.*
 
 /**
  * Section 5: Bottom action bar.
@@ -51,8 +50,9 @@ fun HomeBottomActionBar(
     onSourcesPositioned: ((Rect) -> Unit)? = null,
     onSettingsPositioned: ((Rect) -> Unit)? = null
 ) {
-    // Show labels only when there are 2 buttons, buttons are wider so there's space
-    val showLabels = !showSearchButton
+    // Show labels when there are 2 buttons, or on wider screens where 3 buttons still have room
+    val windowSize = rememberWindowSize()
+    val showLabels = !showSearchButton || windowSize.widthSizeClass != WindowWidthSizeClass.Compact
 
     Box(
         modifier = modifier.fillMaxWidth(),
@@ -60,7 +60,7 @@ fun HomeBottomActionBar(
     ) {
         Row(
             modifier = Modifier
-                .widthIn(max = 448.dp)
+                .widthIn(max = 540.dp)
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
                 .padding(horizontal = 16.dp),
@@ -95,7 +95,7 @@ fun HomeBottomActionBar(
                     onClick = onSearchClick,
                     icon = if (searchActive) Icons.Outlined.SearchOff else Icons.Outlined.Search,
                     text = stringResource(R.string.home_search_apps),
-                    showLabel = false,
+                    showLabel = showLabels,
                     searchStateDescription = if (searchActive) searchExpandedLabel else searchCollapsedLabel,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -138,7 +138,7 @@ fun BottomActionButton(
     isExpertMode: Boolean = false,
     searchStateDescription: String? = null
 ) {
-    val shape = RoundedCornerShape(16.dp)
+    val shape = RoundedCornerShape(MorpheDefaults.CardCornerRadius)
     val view = LocalView.current
 
     // Use expert mode colors if enabled
@@ -209,7 +209,7 @@ fun BottomActionButton(
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 12.dp),
+                .padding(horizontal = MorpheDefaults.ItemSpacing),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {

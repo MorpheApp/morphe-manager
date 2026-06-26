@@ -5,34 +5,34 @@
     <string name="home_not_patched_yet">尚未修補</string>
     <string name="home_no_patches_available">沒有可用的修補程式</string>
     <string name="home_app_hide_title">要隱藏這個應用程式嗎？</string>
-    <string name="home_app_hide_message">此應用程式將從主螢幕隱藏。您可以稍後透過清單底部的按鈕從隱藏的應用程式中將其還原</string>
-    <string name="home_app_will_be_hidden">這個應用程式將被隱藏</string>
+    <string name="home_app_hide_message">此應用程式將從主螢幕隱藏。您之後可以在 [隱藏的應用程式] 中，使用清單底部的按鈕將其還原</string>
+    <string name="home_app_will_be_hidden">此應用程式將會隱藏</string>
     <string name="home_app_no_hidden">沒有隱藏的應用程式</string>
     <string name="home_app_hidden_apps_title">隱藏的應用程式</string>
     <string name="home_app_hidden_apps_hint">輕觸以取消隱藏</string>
     <string name="android_11_bug_dialog_title">Android 11 相關問題</string>
-    <string name="android_11_bug_dialog_description">必須提前授予應用程式安裝權限，以避免 Android 11 系統中的錯誤對使用者體驗產生負面影響</string>
+    <string name="android_11_bug_dialog_description">請先授予應用程式安裝權限，避免 Android 11 系統的錯誤影響使用者體驗</string>
     <string name="deep_link_add_source_title">新增來源</string>
-    <string name="deep_link_add_source_message">您要將此修補來源新增至 Morphe 嗎？</string>
-    <string name="deep_link_add_source_warning">僅新增您信任的來源</string>
+    <string name="deep_link_add_source_message">確定要將這個修補來源新增至 Morphe 嗎？</string>
+    <string name="deep_link_add_source_warning">只新增您信任的來源</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">有可用的 Morphe 更新</string>
     <string name="home_update_available_subtitle">新版本已準備好安裝</string>
     <string name="home_update_error">更新失敗</string>
-    <string name="home_update_error_subtitle">請檢查您的網際網路連線並重試</string>
+    <string name="home_update_error_subtitle">請檢查網際網路連線，然後再試一次</string>
     <string name="home_update_skipped_metered">已略過更新</string>
     <string name="home_update_skipped_metered_subtitle">已啟用行動數據</string>
-    <string name="home_updating_sources">正在更新來源……</string>
+    <string name="home_updating_sources">正在更新來源…</string>
     <string name="home_update_progress_format">已處理 %s</string>
     <string name="home_update_success">更新來源完成</string>
-    <string name="home_update_success_subtitle">您的來源已是最新版本</string>
-    <string name="home_sources_are_loading">正在載入來源，請稍候……</string>
+    <string name="home_update_success_subtitle">來源已是最新狀態</string>
+    <string name="home_sources_are_loading">正在載入來源，請稍候…</string>
     <string name="home_search_apps">搜尋應用程式</string>
     <string name="home_no_apps_title">沒有可用的應用程式</string>
-    <string name="home_no_apps_subtitle">請在 %s 中新增修補來源或啟用現有來源</string>
+    <string name="home_no_apps_subtitle">在 %s 新增修補程式來源，或啟用現有來源</string>
     <string name="home_no_apps_search_subtitle">沒有符合「%s」的應用程式</string>
-    <string name="home_all_apps_hidden_title">所有應用程式已隱藏</string>
-    <string name="home_all_apps_hidden_subtitle">您已隱藏主螢幕上的所有應用程式</string>
+    <string name="home_all_apps_hidden_title">所有應用程式皆已隱藏</string>
+    <string name="home_all_apps_hidden_subtitle">您已從主畫面隱藏所有應用程式</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">你想修補哪個應用程式？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -53,31 +53,52 @@
     <string name="home_greeting_9">從今天起，從應用程式手中拯救應用程式</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">由咖啡因和優質修補程式提供動力</string>
+    <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">起床並修補</string>
+    <string name="home_greeting_morning_2">早安！應用程式不會自行修補</string>
+    <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">午后疲怠？修補一下吧</string>
+    <string name="home_greeting_afternoon_2">午餐後的修補程式就是不一樣</string>
+    <string name="home_greeting_afternoon_3">下午班段：修補程式版本</string>
+    <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">晚安！夜幕降臨後的修補程式就是不一樣</string>
+    <string name="home_greeting_evening_2">準備休息了？先修補一個應用程式</string>
+    <string name="home_greeting_evening_3">準備下班了？先修補一些東西</string>
+    <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">還沒睡？需要修補的應用程式也沒有睡著</string>
+    <string name="home_greeting_late_night_2">深夜修補課程？敬佩</string>
+    <string name="home_greeting_late_night_3">夜貓模式：已啟動</string>
+    <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">修補高峰時段……據說</string>
+    <string name="home_greeting_super_late_2">睡不著？修補一些東西</string>
+    <string name="home_greeting_super_late_3">到這時候，還是繼續修補吧</string>
+    <string name="home_greeting_super_late_4">你和伺服器，都還醒著</string>
+    <string name="home_greeting_super_late_5">夜間且有效率</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">修補來源</string>
     <string name="sources_management_open_in_browser">在瀏覽器中開啟</string>
     <string name="sources_management_failed_to_open_url">無法開啟網址</string>
-    <string name="sources_management_prerelease_toggle">使用預發佈修補程式</string>
-    <string name="sources_management_prerelease_toggle_description">獲得新實驗性修補程式版本的搶先體驗</string>
+    <string name="sources_management_prerelease_toggle">預先發布版修補程式</string>
+    <string name="sources_management_prerelease_toggle_description">搶先取得新實驗性修補程式版本</string>
     <string name="sources_management_experimental_versions_toggle">實驗性應用程式版本</string>
-    <string name="sources_management_experimental_versions_toggle_description">若有可用的實驗性應用程式目標，則對其進行修補</string>
+    <string name="sources_management_experimental_versions_toggle_description">若有可用的實驗性應用程式，則對其進行修補</string>
     <string name="sources_management_already_exists">已新增此來源</string>
     <string name="sources_management_invalid_url">來源 URL 無效。請檢查位址並重試</string>
     <string name="sources_management_metadata_unavailable">中繼資料無法使用</string>
-    <string name="sources_management_metadata_unavailable_hint">遠端中繼資料檔案無法使用。仍可使用已安裝的套件進行修補，但此來源的自動更新已停用</string>
-    <string name="sources_management_metadata_unavailable_hint_missing">無法下載修補套件。來源 URL 可能不正確或檔案不存在</string>
+    <string name="sources_management_metadata_unavailable_hint">遠端中繼資料檔案無法使用。您仍可使用已安裝的套件進行修補，但此來源的自動更新已停用</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">無法下載修補套件。來源 URL 可能不正確，或檔案不存在</string>
     <string name="sources_management_source_enabled">來源已啟用</string>
     <string name="sources_management_source_disabled">來源已停用</string>
     <string name="sources_management_source_updating">正在更新來源…</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">顯示名稱</string>
     <string name="sources_dialog_rename">重新命名修補來源</string>
-    <string name="sources_dialog_duplicate_name_error">已存在具有此名稱的修補來源</string>
+    <string name="sources_dialog_duplicate_name_error">已存在同名的修補程式來源</string>
     <string name="sources_dialog_missing_error">無法更新此修補來源</string>
     <string name="sources_dialog_view_any_version">任何版本</string>
     <string name="sources_dialog_view_any_package">任何套件</string>
-    <string name="sources_dialog_add_source">新增修補來源</string>
-    <string name="sources_dialog_delete_confirm_message">確定要刪除來源「%s」？這無法復原</string>
+    <string name="sources_dialog_add_source">新增修補程式來源</string>
+    <string name="sources_dialog_delete_confirm_message">確定要刪除來源「%s」？此操作無法復原</string>
     <string name="sources_dialog_remote">遠端</string>
     <string name="sources_dialog_remote_url">來源 URL</string>
     <string name="sources_dialog_remote_url_formats_title">範例：</string>
@@ -92,36 +113,36 @@
     <string name="sources_dialog_preinstalled">預先安裝</string>
     <string name="sources_update_success">更新成功</string>
     <string name="sources_update_unavailable">沒有可用的更新</string>
-    <string name="sources_download_fail">無法下載來源：%s</string>
-    <string name="sources_download_fail_named">無法更新「%s」。請檢查您的網際網路連線並重試</string>
-    <string name="sources_download_endpoint_not_found">「%s」：找不到修補中繼資料</string>
+    <string name="sources_download_fail">無法下載來源: %s</string>
+    <string name="sources_download_fail_named">無法更新「%s」。請檢查網際網路連線，然後再試一次</string>
+    <string name="sources_download_endpoint_not_found">「%s」: 找不到修補中繼資料</string>
     <string name="sources_patch_expert_badge">專家</string>
-    <string name="sources_patch_expert_badge_tooltip">在「設定」中啟用「專家模式」以手動包含此修補程式</string>
+    <string name="sources_patch_expert_badge_tooltip">在 [設定] 啟用專家模式，以手動納入此修補程式</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">需要協助尋找原始未修補的 APK 嗎？</string>
-    <string name="home_apk_availability_dialog_simple">若要修補 <b>%s</b>，您需要未修補的 APK 版本：</string>
-    <string name="home_apk_availability_dialog_expert">若要修補 <b>%s</b>，您需要以下版本的未修補 APK：</string>
+    <string name="home_apk_availability_dialog_simple">若要修補 &lt;b&gt;%s&lt;/b&gt;，您需要這個版本的未修補 APK:</string>
+    <string name="home_apk_availability_dialog_expert">若要修補 &lt;b&gt;%s&lt;/b&gt;，您需要以下版本的未修補 APK:</string>
     <string name="home_apk_availability_recommended_label">推薦</string>
     <string name="home_apk_availability_unpatched_label">未修補</string>
     <string name="home_apk_availability_incompatible_label">不相容</string>
     <string name="home_apk_availability_yes">是，協助我尋找 APK</string>
     <string name="home_apk_availability_no">否，我已經有 APK 了</string>
-    <string name="home_apk_use_saved_with_version">使用儲存的 APK (v%s)</string>
-    <string name="home_apk_use_installed_with_version">使用已安裝的 APK (v%s)</string>
-    <string name="home_app_info_no_saved_apk">沒有儲存的 APK。修補將需要再次選取 APK 檔案</string>
-    <string name="home_version_requires_android">需要 Android %s+</string>
-    <string name="home_apk_no_compatible_versions_title">在此裝置上不支援</string>
-    <string name="home_apk_no_compatible_versions_message"><b>%1$s</b> 沒有適用於 Android %2$d (API %3$d) 的支援版本。所有宣告的版本都需要較高的 Android 版本</string>
+    <string name="home_apk_use_saved">使用已儲存的 APK</string>
+    <string name="home_apk_use_installed">使用已安裝的 APK</string>
+    <string name="home_app_info_no_saved_apk">沒有已儲存的 APK。修補時需要再次選取 APK 檔案</string>
+    <string name="home_version_requires_android">需要 Android %s 以上版本</string>
+    <string name="home_apk_no_compatible_versions_title">此裝置不支援</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; 沒有支援 Android %2$d (API %3$d) 的版本。所有已宣告的版本都需要更高版本的 Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">下載原始 APK</string>
     <string name="home_download_instructions_steps_title">步驟如下：</string>
-    <string name="home_download_instructions_step1">點擊下方的「%s」按鈕</string>
-    <string name="home_download_instructions_step2_part1">向下捲動網頁並點擊</string>
-    <string name="home_download_instructions_download_button_toast">在網站上按下下載，而不是在這裡 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">太棒了！現在點擊下方「繼續」並前往網站 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">熟能生巧，你快要成功了！ 💪</string>
-    <string name="home_download_instructions_download_button_toast_4">還沒到…還沒到… 🙈</string>
-    <string name="home_download_instructions_download_button_toast_5">好的，我尊重您的奉獻 🫡</string>
+    <string name="home_download_instructions_step1">請選取下方的「%s」按鈕</string>
+    <string name="home_download_instructions_step2_part1">請往下滑動網頁，然後點選</string>
+    <string name="home_download_instructions_download_button_toast">請到網站上點選 [下載]，不是這裡的範例按鈕 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">太棒了！現在點擊繼續並前往網站 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">熟能生巧，你快要掌握了 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">不是這個按鈕… 這只是範例按鈕… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">好吧，您的毅力我收到了 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">您現在是 Morphe 官方按鈕測試員 🏅</string>
     <string name="home_download_instructions_step3">等待下載完成，並且 <b>請勿安裝</b> 該 APK</string>
     <string name="home_download_instructions_step3_mount">等待下載完成，然後 <b>安裝該 APK</b></string>
@@ -142,48 +163,51 @@
     <string name="home_installed_app_picker_filter_all">所有應用程式</string>
     <string name="home_installed_app_picker_filter_user">僅限使用者應用程式</string>
     <string name="home_installed_app_picker_filter_system">僅限系統應用程式</string>
-    <string name="home_invalid_apk_unreadable">無法讀取檔案。請檢查「外部儲存空間」是否未受電池限制</string>
-    <string name="home_invalid_apk_not_an_apk">所選檔案不是有效的 APK</string>
-    <string name="home_invalid_apk_io_error">無法開啟檔案。請重試</string>
-    <string name="home_external_apk_expert_mode_required">此功能僅在專家模式下可用</string>
+    <string name="home_invalid_apk_unreadable">無法讀取檔案。請檢查「外部儲存空間」不受電池限制</string>
+    <string name="home_invalid_apk_not_an_apk">選取的檔案不是有效的 APK</string>
+    <string name="home_invalid_apk_io_error">無法開啟檔案。請再試一次</string>
+    <string name="home_external_apk_expert_mode_required">此功能僅在專家模式中提供</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">專家模式</string>
     <string name="expert_mode_search">搜尋修補程式</string>
     <string name="expert_mode_proceed">繼續修補</string>
     <string name="expert_mode_disable_all">全部停用</string>
-    <string name="expert_mode_disable_all_done">所有修補程式已停用</string>
+    <string name="expert_mode_disable_all_done">已停用所有修補程式</string>
     <string name="expert_mode_enable_all">全部啟用</string>
-    <string name="expert_mode_enable_all_done">所有修補程式已啟用</string>
+    <string name="expert_mode_enable_all_done">已啟用所有修補程式</string>
     <string name="expert_mode_reset_to_default">啟用推薦的修補程式</string>
-    <string name="expert_mode_reset_to_default_done">已套用建議修補程式</string>
+    <string name="expert_mode_reset_to_default_done">已套用推薦的修補程式</string>
     <string name="expert_mode_restore_saved">還原儲存的選取範圍</string>
     <string name="expert_mode_restore_saved_done">已儲存的選取已還原</string>
     <string name="expert_mode_no_results">找不到修補程式</string>
-    <string name="expert_mode_universal_patches">通用修補程式</string>
+    <string name="expert_mode_universal_patches">通用型修補程式</string>
     <string name="expert_mode_new_patches">新增</string>
     <string name="expert_mode_multiple_sources_warning_title">選取了多個修補來源</string>
-    <string name="expert_mode_multiple_sources_warning_message">"\"您已從多個修補來源中選取修補程式。這可能會導致相容性問題或意外行為。
+    <string name="expert_mode_multiple_sources_warning_message">"您已從多個修補來源中選取修補程式，可能會造成相容性問題或非預期行為。
 
-確定要繼續嗎？\""</string>
+確定要繼續嗎？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">未驗證的 APK</string>
-    <string name="home_invalid_signature_message">您為 <b>%s</b> 選取的 APK 與預期的簽署憑證不符。它可能已被修改或來自不受信任的來源</string>
+    <string name="home_invalid_signature_message">您為 &lt;b&gt;%s&lt;/b&gt; 選取的 APK 與預期的簽署憑證不符。APK 可能已遭修改，或來自不受信任的來源</string>
     <string name="home_invalid_signature_badge">此 APK 可能不是原始版本</string>
-    <string name="home_split_apk_warning_title">偵測到分割 APK</string>
-    <string name="home_split_apk_warning_message">"\"此檔案是一個 APK 組合包
-(<b>APKM / APKS / XAPK</b>)。
+    <string name="home_split_apk_warning_title">偵測到分割型 APK</string>
+    <string name="home_split_apk_warning_message">"此檔案是 APK 套件組合
+(&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;)。
 
-為獲得最佳結果，此應用程式建議修補 <b>完整的 APK</b>\""</string>
-    <string name="home_split_apk_warning_pick_another">選取另一個 APK</string>
+為取得最佳結果，建議以&lt;b&gt;完整 APK&lt;/b&gt;檔案進行修補"</string>
+    <string name="home_split_apk_warning_pick_another">選擇其他 APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">實驗性</string>
     <string name="home_dialog_unsupported_version_experimental_description">此版本具有實驗性支援，可能不穩定或不完整</string>
-    <string name="morphe_experimental_app_version_dialog_title">您想嘗試實驗性版本嗎？ 🧪</string>
+    <string name="morphe_experimental_app_version_dialog_title">確定要嘗試實驗性版本嗎？ 🧪</string>
     <string name="morphe_experimental_app_version_dialog_message"><b>%s</b> 的此版本具有早期實驗性支援<br/><br/>🔧 由於針對此應用程式版本的修補程式仍在完善中，因此請預期會出現奇怪的應用程式行為或未知的錯誤</string>
     <string name="home_dialog_unsupported_version_dialog_title">不支援的版本</string>
     <string name="home_dialog_unsupported_version_dialog_description">此 APK 不是推薦的應用程式版本。繼續操作可能會導致應用程式無法正常運作</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">仍要繼續</string>
     <string name="home_dialog_unsupported_version_compatible_versions">相容版本：</string>
     <string name="home_dialog_unsupported_version_unsupported_label">不支援</string>
+    <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">這是相同版本的不同組建。修補程式需要特定的組建</string>
     <string name="home_dialog_wrong_package_title">選取了錯誤的套件</string>
     <string name="home_dialog_wrong_package_description">所選的 APK 不是您打算修補的應用程式</string>
     <string name="home_dialog_expected_package">預期套件：</string>
@@ -445,8 +469,8 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">變更圖示</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
-    <string name="settings_advanced_updates_use_prereleases">預發佈更新</string>
-    <string name="settings_advanced_updates_use_prereleases_description">搶先體驗最新 Morphe 應用程式版本。在修補來源中啟用預發佈版本</string>
+    <string name="settings_advanced_updates_use_prereleases">預先發布版更新</string>
+    <string name="settings_advanced_updates_use_prereleases_description">搶先體驗最新 Morphe 應用程式版本。在修補來源中啟用預先發布版</string>
     <string name="settings_advanced_updates_allow_metered">行動數據更新</string>
     <string name="settings_advanced_updates_allow_metered_description">允許 Morphe 和修補更新在使用行動數據時進行下載</string>
     <string name="settings_advanced_updates_background_notifications">背景更新通知</string>
@@ -648,10 +672,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_manager_settings_fail">無法匯出 Morphe 設定：%s</string>
     <string name="settings_system_export_manager_settings_success">已匯出 Morphe 設定</string>
     <string name="settings_system_debug">偵錯</string>
-    <string name="settings_system_export_debug_logs_description">儲存系統日誌以進行疑難排解</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">無法讀取日誌（結束代碼 %s）</string>
-    <string name="settings_system_export_debug_logs_export_failed">無法匯出日誌</string>
-    <string name="settings_system_export_debug_logs_export_success">日誌已匯出</string>
+    <string name="settings_system_export_debug_logs_description">儲存系統紀錄以進行疑難排解</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">無法讀取紀錄（結束代碼 %s）</string>
+    <string name="settings_system_export_debug_logs_export_failed">無法匯出紀錄</string>
+    <string name="settings_system_export_debug_logs_export_success">記錄已匯出</string>
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">檔案與儲存空間</string>
     <string name="settings_system_apks_size">總大小：%s</string>
@@ -732,6 +756,7 @@ morphe_header_custom_dark.png
     <string name="warning">警告</string>
     <string name="error_">錯誤</string>
     <string name="retry">重試</string>
+    <string name="refresh">重新整理</string>
     <string name="add">新增</string>
     <string name="close">關閉</string>
     <string name="back">返回</string>
@@ -748,6 +773,7 @@ morphe_header_custom_dark.png
     <string name="view">檢視</string>
     <string name="search">搜尋</string>
     <string name="search_no_results">找不到結果</string>
+    <string name="sort">排序</string>
     <string name="any_version">任何</string>
     <string name="enabled">已啟用</string>
     <string name="disabled">已停用</string>
@@ -757,6 +783,11 @@ morphe_header_custom_dark.png
     <string name="select_all_done">全部選取</string>
     <string name="deselect_all">取消全選</string>
     <string name="deselect_all_done">全部取消選取</string>
+    <string name="reorder_list">重新排序列表</string>
+    <string name="reorder_list_hint">拖曳以重新排序</string>
+    <string name="reorder_done">排序已儲存</string>
+    <string name="reset_order">重設排序</string>
+    <string name="reset_order_done">訂單已重置</string>
     <string name="rename">重新命名</string>
     <string name="import_">匯入</string>
     <string name="export">匯出</string>
@@ -791,6 +822,7 @@ morphe_header_custom_dark.png
     <string name="hide">隱藏</string>
     <string name="hidden">已隱藏</string>
     <string name="unhide">取消隱藏</string>
+    <string name="unhide_done">已顯示</string>
     <string name="logs">記錄</string>
     <string name="sources">來源</string>
     <string name="installing_ellipsis">安裝中……</string>
@@ -798,11 +830,11 @@ morphe_header_custom_dark.png
     <string name="unmounting_ellipsis">正在解除掛載……</string>
     <string name="importing_ellipsis">匯入……</string>
     <string name="imported_successfully">匯入成功</string>
-    <string name="changelog">檢視更新日誌</string>
+    <string name="changelog">檢視變更紀錄</string>
     <string name="changelog_description">查看此更新中的最新變更</string>
-    <string name="changelog_download_fail">無法下載更新日誌：%s</string>
+    <string name="changelog_download_fail">無法下載變更紀錄：%s</string>
     <string name="changelog_retry">重試</string>
-    <string name="changelog_empty">沒有可用的更新日誌</string>
+    <string name="changelog_empty">沒有可用的變更紀錄</string>
     <string name="no_network_toast">沒有可用的網際網路連線</string>
     <string name="update_available">有可用的更新</string>
     <string name="ready_to_install_update">準備安裝更新</string>
@@ -821,16 +853,16 @@ morphe_header_custom_dark.png
     <!-- Onboarding coach marks -->
     <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%1$d / %2$d</string>
-    <string name="onboarding_sources_desc">管理您的補丁來源。每個來源提供可應用於您的應用程式的補丁</string>
+    <string name="onboarding_sources_desc">管理您的修補檔案來源。每個來源都提供可用於您應用程式的修補檔案</string>
     <string name="onboarding_swipe_title">手勢</string>
-    <string name="onboarding_swipe_desc">向右滑動應用程式卡片以查看其可用補丁。向左滑動可從主螢幕隱藏卡片</string>
+    <string name="onboarding_swipe_desc">向右滑動應用程式卡片以查看其可用的修補。向左滑動可從主螢幕隱藏卡片</string>
     <string name="onboarding_settings_desc">自訂 Morphe：外觀、進階選項和系統工具</string>
-    <string name="onboarding_sources_patches_desc">點擊以查看此來源提供的所有補丁</string>
-    <string name="onboarding_sources_version_desc">點擊版本以查看此來源的完整變更日誌</string>
-    <string name="onboarding_sources_prerelease_desc">啟用此選項可從此來源接收預發布補丁版本</string>
+    <string name="onboarding_sources_patches_desc">點擊以查看此來源提供的可用修補</string>
+    <string name="onboarding_sources_version_desc">點擊版本以查看此來源的完整變更紀錄</string>
+    <string name="onboarding_sources_prerelease_desc">啟用此選項可從此來源接收預先發布版</string>
     <string name="onboarding_appearance_tab_desc">自訂應用程式的外觀：主題、重點顏色和背景</string>
     <string name="onboarding_appearance_theme_desc">在淺色、深色或系統主題之間切換。您還可以選擇自訂重點顏色或啟用動態色彩</string>
-    <string name="onboarding_expert_mode_desc">啟用專家模式以解鎖補丁選擇、自訂選項和其他進階功能</string>
+    <string name="onboarding_expert_mode_desc">啟用專家模式以解鎖修補選擇、自訂選項和其他進階功能</string>
     <!-- Translate "System" the same way as the System settings tab -->
     <string name="onboarding_system_tab_title">系統標籤</string>
     <string name="onboarding_system_tab_desc">金鑰庫管理、匯入/匯出工具和應用程式資訊</string>
