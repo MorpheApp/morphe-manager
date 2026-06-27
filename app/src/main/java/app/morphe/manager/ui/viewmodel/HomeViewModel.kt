@@ -258,16 +258,6 @@ class HomeViewModel(
     // Patches that are new in the current bundle version relative to the last saved selection
     var expertModeNewPatches by mutableStateOf<Map<Int, Set<String>>>(emptyMap())
 
-    /**
-     * Set when ExpertModeDialog is opened from InstalledAppInfoDialog (repatch flow).
-     * Called with the final patches/options when the user confirms, so the info dialog
-     * can persist selections and navigate to the patcher without holding any patch state itself.
-     * Null when the dialog is opened from the normal home-screen patching flow.
-     */
-    var onRepatchProceed: ((patches: PatchSelection, options: Options) -> Unit)? = null
-    /** Package name captured for the repatch flow, used to save seen-patch snapshots. */
-    private var repatchPackageName: String? = null
-
     // Bundle file selection
     var selectedBundleUri by mutableStateOf<Uri?>(null)
     var selectedBundlePath by mutableStateOf<String?>(null)
@@ -2493,8 +2483,6 @@ class HomeViewModel(
         expertModeInitialPatches = emptyMap()
         expertModeOptions = emptyMap()
         expertModeNewPatches = emptyMap()
-        onRepatchProceed = null
-        repatchPackageName = null
     }
 
     private suspend fun saveSeenPatchesForBundles(packageName: String) {
@@ -2508,49 +2496,31 @@ class HomeViewModel(
     }
 
     /**
-     * Called when the user confirms the ExpertModeDialog.
-     * Routes to the repatch flow (via [onRepatchProceed]) or the normal patching flow
-     * (via [proceedWithPatching]) depending on how the dialog was opened.
-     * Saving options and cleaning up state is handled here so HomeDialogs stays thin.
+     * Called when the user confirms the ExpertModeDialog. Persists the final selection
+     * and options, then navigates to the patcher.
      */
     fun proceedExpertMode() {
+        val selectedApp = expertModeSelectedApp ?: return
         val finalPatches = expertModePatches
         val finalOptions = expertModeOptions
         // Strip UI-only empty strings (fields cleared via ✕) so the patcher engine
         // receives null / no key for those options and falls back to its own default,
         // rather than receiving a literal empty string.
         val patcherOptions = finalOptions.sanitizeForPatcher()
-        val repatchCallback = onRepatchProceed
-        val selectedApp = expertModeSelectedApp
 
         showExpertModeDialog = false
 
         viewModelScope.launch(Dispatchers.IO) {
-            if (repatchCallback != null) {
-                // Repatch flow: delegate fully to the callback set by InstalledAppInfoViewModel.
-                // Persisting selections/options is the callback's responsibility.
-                // Snapshot seen patches before cleanup clears expertModeBundles.
-                val pkgName = repatchPackageName
-                if (pkgName != null) {
-                    saveSeenPatchesForBundles(pkgName)
-                }
-                withContext(Dispatchers.Main) {
-                    repatchCallback(finalPatches, patcherOptions)
-                    cleanupExpertModeData()
-                }
-            } else if (selectedApp != null) {
-                // Persist the final selection (already validated + merged with new patches)
-                patchSelectionRepository.updateSelection(
-                    packageName = selectedApp.packageName,
-                    selection = finalPatches
-                )
-                saveOptions(selectedApp.packageName, finalOptions)
-                // Snapshot all bundle patch names so next open can detect genuinely new patches.
-                saveSeenPatchesForBundles(selectedApp.packageName)
-                withContext(Dispatchers.Main) {
-                    proceedWithPatching(selectedApp, finalPatches, patcherOptions)
-                    cleanupExpertModeData()
-                }
+            patchSelectionRepository.updateSelection(
+                packageName = selectedApp.packageName,
+                selection = finalPatches
+            )
+            saveOptions(selectedApp.packageName, finalOptions)
+            // Snapshot all bundle patch names so next open can detect genuinely new patches.
+            saveSeenPatchesForBundles(selectedApp.packageName)
+            withContext(Dispatchers.Main) {
+                proceedWithPatching(selectedApp, finalPatches, patcherOptions)
+                cleanupExpertModeData()
             }
         }
     }
