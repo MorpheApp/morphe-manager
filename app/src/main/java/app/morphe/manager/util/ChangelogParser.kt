@@ -8,6 +8,7 @@ data class ChangelogEntry(
     val date: String?,
     val content: String,
     val affectedScopes: Set<String> = emptySet(),
+    val scopedBullets: Map<String, List<String>> = emptyMap(),
 )
 
 /**
@@ -43,6 +44,22 @@ object ChangelogParser {
      */
     private val BULLET_SCOPE_RE = Regex("""^\* \*\*(.+?):\*\*""")
 
+    /**
+     * Matches a bullet that *only* adds experimental support for a new app
+     * version, e.g. "Add experimental support for `21.25.523`" (or the past
+     * tense "Added ..."). Conventional-changelog emits these for every new
+     * experimental version target, even when no patch logic actually changed.
+     *
+     * Such bullets don't affect anyone who isn't already running that exact
+     * experimental version, so they shouldn't by themselves count as a "real"
+     * change for the purposes of [hasChangesFor] (see #622). A scope is still
+     * considered changed if it has at least one *other* bullet alongside this.
+     */
+    private val EXPERIMENTAL_VERSION_ADDITION_RE = Regex(
+        """^Add(?:ed)?\s+experimental\s+support\s+for\b""",
+        RegexOption.IGNORE_CASE
+    )
+
     // Commit hash links: ([abc1234](https://...commit/...)) → removed, noise with no value in UI
     private val COMMIT_LINK_REGEX = Regex("""\s*\(\[([0-9a-f]{7,})]\([^)]+/commit/[^)]+\)\)""")
 
@@ -51,15 +68,19 @@ object ChangelogParser {
         .trimEnd()
 
     /**
-     * Extracts the set of raw scope prefixes from one version entry's content.
+     * Extracts, per scope, the list of raw bullet bodies (the text following
+     * the `**Scope:**` prefix) from one version entry's content.
      */
-    private fun resolveAffectedScopes(content: String): Set<String> {
-        val scopes = mutableSetOf<String>()
-        for (line in content.lines()) {
-            val scope = BULLET_SCOPE_RE.find(line.trim())?.groupValues?.get(1) ?: continue
-            scopes += scope
+    private fun resolveScopedBullets(content: String): Map<String, List<String>> {
+        val scoped = mutableMapOf<String, MutableList<String>>()
+        for (rawLine in content.lines()) {
+            val line = rawLine.trim()
+            val match = BULLET_SCOPE_RE.find(line) ?: continue
+            val scope = match.groupValues[1]
+            val body = line.substring(match.range.last + 1).trim()
+            scoped.getOrPut(scope) { mutableListOf() }.add(body)
         }
-        return scopes
+        return scoped
     }
 
     /**
@@ -82,11 +103,13 @@ object ChangelogParser {
         fun flush() {
             val v = currentVersion ?: return
             val raw = currentContent.toString()
+            val scopedBullets = resolveScopedBullets(raw)
             entries += ChangelogEntry(
                 version = v,
                 date = currentDate,
                 content = raw.sanitizeContent(),
-                affectedScopes = resolveAffectedScopes(raw),
+                affectedScopes = scopedBullets.keys,
+                scopedBullets = scopedBullets,
             )
         }
 
@@ -129,8 +152,15 @@ object ChangelogParser {
 
     /**
      * Returns true if any changelog entry newer than [installedVersion] has a
-     * scoped bullet whose scope exactly matches [appName] or starts with `"$appName - "`.
-     * Comparison is case-insensitive.
+     * scoped bullet whose scope exactly matches [appName] or starts with `"$appName - "`,
+     * and that bullet is more than just adding support for a new experimental
+     * version. Comparison is case-insensitive.
+     *
+     * A bullet that purely adds experimental version support (see
+     * [EXPERIMENTAL_VERSION_ADDITION_RE]) is ignored: it doesn't affect anyone
+     * who isn't already on that experimental version, so it shouldn't by
+     * itself trigger an update badge (#622). A scope with at least one other,
+     * non-experimental-addition bullet still counts as changed.
      */
     fun hasChangesFor(
         entries: List<ChangelogEntry>,
@@ -140,9 +170,12 @@ object ChangelogParser {
         val newerEntries = entriesNewerThan(entries, installedVersion)
         if (newerEntries.isEmpty()) return false
         return newerEntries.any { entry ->
-            entry.affectedScopes.any { scope ->
-                scope.equals(appName, ignoreCase = true) ||
+            entry.scopedBullets.any { (scope, bullets) ->
+                val scopeMatches = scope.equals(appName, ignoreCase = true) ||
                         scope.startsWith("$appName - ", ignoreCase = true)
+                scopeMatches && bullets.any { bullet ->
+                    !EXPERIMENTAL_VERSION_ADDITION_RE.containsMatchIn(bullet)
+                }
             }
         }
     }
