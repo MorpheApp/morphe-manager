@@ -44,10 +44,7 @@ import app.morphe.manager.ui.screen.home.GlobalOnboardingState
 import app.morphe.manager.ui.screen.settings.AdvancedTabContent
 import app.morphe.manager.ui.screen.settings.AppearanceTabContent
 import app.morphe.manager.ui.screen.settings.SystemTabContent
-import app.morphe.manager.ui.screen.settings.system.AboutDialog
-import app.morphe.manager.ui.screen.settings.system.ChangelogDialog
-import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialogContainer
-import app.morphe.manager.ui.screen.settings.system.KeystoreCredentialsDialog
+import app.morphe.manager.ui.screen.settings.system.*
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.screen.shared.isLandscape
 import app.morphe.manager.ui.viewmodel.*

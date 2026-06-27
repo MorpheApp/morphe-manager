@@ -11,7 +11,10 @@ import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.platform.NetworkInfo
-import app.morphe.manager.domain.installer.*
+import app.morphe.manager.domain.installer.InstallCancelledException
+import app.morphe.manager.domain.installer.InstallResult
+import app.morphe.manager.domain.installer.InstallerManager
+import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.network.dto.MorpheAsset
@@ -19,10 +22,10 @@ import app.morphe.manager.network.service.HttpService
 import app.morphe.manager.util.*
 import io.ktor.client.plugins.onDownload
 import io.ktor.client.request.url
-import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import kotlin.time.Duration.Companion.seconds
 
 class UpdateViewModel(
     private val downloadOnScreenEntry: Boolean,
@@ -66,6 +69,17 @@ class UpdateViewModel(
     // All changelog entries newer than the currently installed version (shown in update dialog)
     var missedChangelogEntries: List<ChangelogEntry>? by mutableStateOf(null)
         private set
+
+    // Older changelog entries loaded on-demand by the "Show older releases" expander.
+    // Reset on dialog dismiss so the expander reopens in a collapsed state next time
+    var olderManagerEntries: List<ChangelogEntry>? by mutableStateOf(null)
+        private set
+    var isLoadingOlderEntries by mutableStateOf(false)
+        private set
+
+    // Parsed CHANGELOG.md per branch (false = main, true = dev). Shared across all loaders
+    // and the older-entries expander to avoid duplicate fetches inside one VM lifetime
+    private val managerEntriesCache = mutableMapOf<Boolean, List<ChangelogEntry>>()
 
     var canResumeDownload by mutableStateOf(false)
         private set
@@ -345,7 +359,9 @@ class UpdateViewModel(
             // is available and its changelog lives on the dev branch
             val targetIsPrerelease = releaseInfo?.version?.contains('-') == true
             val forDevBranch = morpheAPI.isDevBuild || targetIsPrerelease
-            val entries = morpheAPI.fetchManagerChangelog(forDevBranch = forDevBranch)
+            val entries = managerEntriesCache.getOrPut(forDevBranch) {
+                morpheAPI.fetchManagerChangelog(forDevBranch = forDevBranch)
+            }
             val newer = ChangelogParser.entriesNewerThan(entries, installedVersion)
             // Strip pre-release entries when on stable channel - main CHANGELOG.md
             // contains merged pre-release entries that stable users should not see
@@ -361,9 +377,40 @@ class UpdateViewModel(
     fun loadCurrentVersionChangelog() = viewModelScope.launch {
         uiSafe(app, R.string.download_manager_failed, "Failed to load changelog") {
             val currentVersion = BuildConfig.VERSION_NAME.removePrefix("v")
-            val entries = morpheAPI.fetchManagerChangelog()
+            val entries = managerEntriesCache.getOrPut(morpheAPI.isDevBuild) {
+                morpheAPI.fetchManagerChangelog()
+            }
             currentVersionChangelogEntry = ChangelogParser.findVersion(entries, currentVersion)
         }
+    }
+
+    /**
+     * Loads older stable changelog entries on demand, dropping versions in [exclude].
+     * Always reads from main; older history is the stable release timeline by definition,
+     * regardless of which channel the user is currently on.
+     * Idempotent: repeat calls while loading or after a successful load are a no-op.
+     */
+    fun loadOlderManagerEntries(exclude: Set<String>) {
+        if (isLoadingOlderEntries || olderManagerEntries != null) return
+        isLoadingOlderEntries = true
+        viewModelScope.launch(Dispatchers.Default) {
+            uiSafe(app, R.string.download_manager_failed, "Failed to load older releases") {
+                val entries = managerEntriesCache.getOrPut(false) {
+                    morpheAPI.fetchManagerChangelog(forDevBranch = false)
+                }
+                val normalize = { v: String -> v.removePrefix("v").trim() }
+                val excludeNorm = exclude.map(normalize).toSet()
+                olderManagerEntries = entries.filter {
+                    normalize(it.version) !in excludeNorm && !it.version.contains('-')
+                }
+            }
+            isLoadingOlderEntries = false
+        }
+    }
+
+    fun resetOlderManagerEntries() {
+        olderManagerEntries = null
+        isLoadingOlderEntries = false
     }
 
     companion object {
