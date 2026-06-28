@@ -291,21 +291,20 @@ fun ManagerUpdateDetailsDialog(
                             items = entries,
                             key = { index, _ -> "missed_$index" }
                         ) { index, entry ->
-                            Column(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalArrangement = Arrangement.spacedBy(20.dp)
-                            ) {
-                                if (index > 0) {
-                                    HorizontalDivider(
-                                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
-                                    )
-                                }
-                                ChangelogEntrySection(
-                                    entry = entry,
-                                    headerIcon = Icons.Outlined.NewReleases,
-                                    textColor = textColor
+                            if (index > 0) {
+                                HorizontalDivider(
+                                    modifier = Modifier.padding(
+                                        top = MorpheDefaults.ContentPaddingSmall,
+                                        bottom = MorpheDefaults.ContentPadding
+                                    ),
+                                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
                                 )
                             }
+                            ChangelogEntrySection(
+                                entry = entry,
+                                headerIcon = Icons.Outlined.NewReleases,
+                                textColor = textColor
+                            )
                         }
                         changelogOlderItems(
                             entries = updateViewModel.olderManagerEntries,

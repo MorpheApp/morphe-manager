@@ -45,6 +45,7 @@ object MorpheDefaults {
     val SettingsCornerRadius = 14.dp
     val SectionCornerRadius = 18.dp
     val IconSize = 24.dp
+    val ContentPaddingSmall = 8.dp
     val ContentPadding = 16.dp
     val ContentPaddingMedium = 24.dp
     val ContentPaddingExpanded = 32.dp

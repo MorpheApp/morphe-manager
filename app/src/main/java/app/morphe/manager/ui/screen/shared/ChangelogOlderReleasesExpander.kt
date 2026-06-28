@@ -5,8 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
@@ -19,7 +17,6 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.util.ChangelogEntry
 
@@ -40,7 +37,10 @@ fun LazyListScope.changelogOlderItems(
         HorizontalDivider(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 20.dp),
+                .padding(
+                    top = MorpheDefaults.ContentPaddingSmall,
+                    bottom = MorpheDefaults.ContentPadding
+                ),
             color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
         )
     }
@@ -67,21 +67,20 @@ fun LazyListScope.changelogOlderItems(
             items = entries,
             key = { index, _ -> "changelog_older_$index" }
         ) { index, entry ->
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(20.dp)
-            ) {
-                if (index > 0) {
-                    HorizontalDivider(
-                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
-                    )
-                }
-                ChangelogEntrySection(
-                    entry = entry,
-                    headerIcon = Icons.Outlined.History,
-                    textColor = textColor
+            if (index > 0) {
+                HorizontalDivider(
+                    modifier = Modifier.padding(
+                        top = MorpheDefaults.ContentPaddingSmall,
+                        bottom = MorpheDefaults.ContentPadding
+                    ),
+                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
                 )
             }
+            ChangelogEntrySection(
+                entry = entry,
+                headerIcon = Icons.Outlined.History,
+                textColor = textColor
+            )
         }
     }
 }

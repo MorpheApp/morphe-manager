@@ -1330,7 +1330,10 @@ private fun BundleChangelogContent(
                         itemsIndexed(current.entries) { index, entry ->
                             if (index > 0) {
                                 HorizontalDivider(
-                                    modifier = Modifier.padding(vertical = 20.dp),
+                                    modifier = Modifier.padding(
+                                        top = MorpheDefaults.ContentPaddingSmall,
+                                        bottom = MorpheDefaults.ContentPadding
+                                    ),
                                     color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
                                 )
                             }
