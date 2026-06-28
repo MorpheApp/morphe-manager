@@ -296,6 +296,18 @@ class PatcherViewModel(
         get() = _inputFile
         set(value) { _inputFile = value }
 
+    /**
+     * True when [inputFile] is owned by this VM and safe to drop after install.
+     */
+    val inputFileIsDisposable: Boolean
+        get() {
+            val file = inputFile ?: return false
+            // Files under originalApksDir back the repatch flow and outlive this VM.
+            val savedOriginalsRoot = fs.originalApksDir.absolutePath + File.separator
+            if (file.absolutePath.startsWith(savedOriginalsRoot)) return false
+            return (selectedApp as? SelectedApp.Local)?.temporary == true
+        }
+
     private var requiresSplitPreparation by savedStateHandle.saveableVar {
         initialSplitRequirement(input.selectedApp)
     }
@@ -579,7 +591,7 @@ class PatcherViewModel(
         installType: InstallType
     ): Boolean = withContext(NonCancellable + Dispatchers.IO) {
         // NonCancellable: this body must run to completion even if the caller's scope is
-        // cancelled mid-way, so the DB row never diverges from the installed APK
+        // canceled mid-way, so the DB row never diverges from the installed APK
         val installedPackageInfo = currentPackageName?.let(pm::getPackageInfo)
         val patchedPackageInfo = pm.getPackageInfo(outputFile)
         val packageInfo = patchedPackageInfo ?: installedPackageInfo

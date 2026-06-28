@@ -162,8 +162,6 @@ class RootInstaller(
             }
 
             execute("pm install \"${stockApp.absolutePath}\"").assertSuccess("Failed to install stock app")
-
-            stockApp.delete()
         }
 
         val moduleDir = remoteFS.getFile(modulePath)

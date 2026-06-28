@@ -630,6 +630,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     fun installMount(
         outputFile: File,
         inputFile: File?,
+        inputIsTemporary: Boolean,
         packageName: String,
         inputVersion: String,
         onPersistApp: suspend (String, InstallType) -> Boolean
@@ -684,6 +685,10 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
                 // Mount
                 rootInstaller.mount(packageName)
+
+                // Drop the input only when the caller marked it disposable; persistent copies
+                // (saved originals) must survive for future repatching
+                if (inputIsTemporary) inputFile?.delete()
 
                 // Success
                 handleInstallSuccess(packageName)
