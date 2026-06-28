@@ -354,8 +354,8 @@ class PatcherViewModel(
     }
 
     private val workManager = WorkManager.getInstance(app)
-    val patcherSucceeded: LiveData<Boolean?>
-        field: MutableLiveData<Boolean?> = MutableLiveData()
+    private val _patcherSucceeded = MutableLiveData<Boolean?>()
+    val patcherSucceeded: LiveData<Boolean?> = _patcherSucceeded
     private var observeWorkerJob: Job? = null
     private val handledFailureIds = mutableSetOf<UUID>()
     private var forceKeepLocalInput = false
@@ -936,9 +936,9 @@ class PatcherViewModel(
                                     cleanupTemporaryInput()
                                     refreshExportMetadata()
                                     patchingCompletedAt = System.currentTimeMillis()
-                                    patchingCompletedInForeground = patcherSucceeded.hasActiveObservers()
+                                    patchingCompletedInForeground = _patcherSucceeded.hasActiveObservers()
                                     isPatching = false
-                                    patcherSucceeded.value = true
+                                    _patcherSucceeded.value = true
                                     scheduleAutoInstallIfNeeded()
                                     scheduleSuccessScreen()
                                 }
@@ -949,7 +949,7 @@ class PatcherViewModel(
                     WorkInfo.State.FAILED -> {
                         handleWorkerFailure(workInfo)
                         isPatching = false
-                        patcherSucceeded.value = false
+                        _patcherSucceeded.value = false
                         showSuccessScreen = true
                     }
 
@@ -957,9 +957,9 @@ class PatcherViewModel(
                     WorkInfo.State.ENQUEUED,
                     WorkInfo.State.BLOCKED -> {
                         isPatching = true
-                        patcherSucceeded.value = null
+                        _patcherSucceeded.value = null
                     }
-                    else -> patcherSucceeded.value = null
+                    else -> _patcherSucceeded.value = null
                 }
             }
         }
