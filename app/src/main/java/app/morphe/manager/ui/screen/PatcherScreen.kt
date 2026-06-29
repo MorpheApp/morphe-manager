@@ -561,6 +561,7 @@ fun PatcherScreen(
                                 installViewModel.installMount(
                                     outputFile = outputFile,
                                     inputFile = patcherViewModel.inputFile,
+                                    inputIsTemporary = patcherViewModel.inputFileIsDisposable,
                                     packageName = patcherViewModel.packageName,
                                     inputVersion = inputVersion,
                                     onPersistApp = { pkg, type ->
