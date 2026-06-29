@@ -96,12 +96,9 @@
     <string name="patcher_error_copied">ભૂલ ક્લિપબોર્ડ પર કૉપિ કરવામાં આવેલ છે</string>
     <string name="patcher_long_step_warning">આ પગલામાં થોડો સમય લાગી શકે છે. કૃપા કરીને રાહ જુઓ...</string>
     <string name="patcher_installing_subtitle">લગભગ નાચવા માટે તૈયાર! 🎸</string>
-    <string name="patcher_success_title">બધું થઈ ગયું! 🎉</string>
     <string name="patcher_success_subtitle">તમારી એપ્લિકેશન પેચ અને ઇન્સ્ટોલ કરેલી છે!</string>
-    <string name="patcher_complete_title">પૅચિંગ પૂર્ણ! ✨</string>
     <string name="patcher_failed_title">અરે! કંઈક ખોટું થયું</string>
     <string name="patcher_failed_subtitle">ભૂલની વિગતો નીચે તપાસો</string>
-    <string name="patcher_failed_dialog_title">પૅચિંગ નિષ્ફળ થયું</string>
     <string name="patcher_unknown_error">અજાણી ભૂલ આવી</string>
     <string name="patcher_conflict_title">પેકેજ સંઘર્ષ</string>
     <string name="patcher_conflict_subtitle">તમારે વર્તમાન સંસ્કરણને અનઇન્સ્ટોલ કરવાની જરૂર છે</string>

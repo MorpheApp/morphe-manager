@@ -296,7 +296,7 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="root_gmscore_excluded">Dukungan tambalan GmsCore dikecualikan dalam mode root</string>
     <string name="root_pre_patch_installer_title">Pilih metode pemasangan</string>
     <string name="root_pre_patch_installer_description">Perangkat Anda mempunyai akses root. Pilih cara memasang aplikasi yang ditambal</string>
-    <string name="root_pre_patch_installer_mount_title">Mount Root</string>
+    <string name="root_pre_patch_installer_mount_title">Mount root</string>
     <string name="root_pre_patch_installer_mount_description">Mount APK yang ditambal di atas aplikasi bawaan. Tidak membutuhkan GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Pemasangan Standar</string>
     <string name="root_pre_patch_installer_standard_description">Pasang sebagai aplikasi terpisah dengan dukungan GmsCore. Pemasang dapat dipilih setelah proses penambalan</string>
@@ -310,9 +310,9 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="patcher_tab_game">Permainan</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin memerlukan waktu. Harap tunggu…</string>
     <string name="patcher_installing_subtitle">Hampir siap! 🎸</string>
-    <string name="patcher_success_title">Semua Selesai! 🎉</string>
+    <string name="patcher_success_title">Selesai! 🎉</string>
     <string name="patcher_success_subtitle">Aplikasi Anda telah ditambal dan dipasang!</string>
-    <string name="patcher_complete_title">Penambalan Selesai! ✨</string>
+    <string name="patcher_complete_title">Penambalan selesai! ✨</string>
     <string name="patcher_failed_title">Oops! Terjadi kesalahan</string>
     <string name="patcher_failed_subtitle">Periksa detail kesalahan di bawah ini</string>
     <string name="patcher_failed_dialog_title">Gagal Menambal</string>
@@ -839,6 +839,8 @@ Dimensi gambar harus sebagai berikut:
     <string name="changelog_description">Lihat perubahan terbaru dalam pembaruan ini</string>
     <string name="changelog_download_fail">Gagal mengunduh catatan perubahan: %s</string>
     <string name="changelog_empty">Tidak ada catatan perubahan tersedia</string>
+    <string name="changelog_show_older">Tampilkan rilis yang lebih lama</string>
+    <string name="changelog_older_empty">Tidak ada rilis yang lebih lama untuk ditampilkan</string>
     <string name="no_network_toast">Tidak ada sambungan internet yang tersedia</string>
     <string name="update_available">Pembaruan tersedia</string>
     <string name="ready_to_install_update">Siap memasang pembaruan</string>

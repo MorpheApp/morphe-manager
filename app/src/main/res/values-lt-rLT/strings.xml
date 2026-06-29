@@ -268,7 +268,6 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="root_gmscore_excluded">GmsCore palaikymo pataisa neįtraukta į root režimą</string>
     <string name="root_pre_patch_installer_title">Pasirinkite diegimo būdą</string>
     <string name="root_pre_patch_installer_description">Jūsų įrenginys turi root prieigą. Pasirinkite, kaip norite įdiegti pataisytą programą</string>
-    <string name="root_pre_patch_installer_mount_title">Root montavimas</string>
     <string name="root_pre_patch_installer_mount_description">Montuoja pataisyta APK ant originalios programos. Nereikia GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Standartinis įdiegimas</string>
     <string name="root_pre_patch_installer_standard_description">Instaliuojamas kaip atskira programa su GmsCore palaikymu. Po pataisymo galima pasirinkti diegiklį.</string>
@@ -276,16 +275,12 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="patcher_error_log">Klaidų žurnalas</string>
     <string name="patcher_error_technical">Techninė informacija</string>
     <string name="patcher_error_dialog_app_info">Programos inform</string>
-    <string name="patcher_tab_logs">Pataisų žurnalai</string>
     <string name="patcher_tab_game">Žaidimai</string>
     <string name="patcher_long_step_warning">Šis žingsnis gali užtrupti. Palaukite…</string>
     <string name="patcher_installing_subtitle">Beveik laikas rokenrolui! 🎸</string>
-    <string name="patcher_success_title">Viskas padaryta! 🎉</string>
     <string name="patcher_success_subtitle">Jūsų programėlė pataisyta ir įdiegta!</string>
-    <string name="patcher_complete_title">Įdiegimas baigtas! ✨</string>
     <string name="patcher_failed_title">Oops! Kažkas nepavyko</string>
     <string name="patcher_failed_subtitle">Patikrinkite klaidų išsamią informaciją žemiau</string>
-    <string name="patcher_failed_dialog_title">Nepavyko pataisyti</string>
     <string name="patcher_unknown_error">Įvyko nežinoma klaida</string>
     <string name="patcher_conflict_title">Paketų konfliktas</string>
     <string name="patcher_conflict_subtitle">Jums reikia išdiegti egzistuoja versija</string>

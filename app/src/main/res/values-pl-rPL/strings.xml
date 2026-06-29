@@ -295,7 +295,7 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="root_gmscore_excluded">Wsparcie dla GmsCore jest wyłączone w trybie root</string>
     <string name="root_pre_patch_installer_title">Wybierz metodę instalacji</string>
     <string name="root_pre_patch_installer_description">Wykryto uprawnienia root. Wybierz sposób instalacji zmodyfikowanej aplikacji</string>
-    <string name="root_pre_patch_installer_mount_title">Montowanie Root</string>
+    <string name="root_pre_patch_installer_mount_title">Montowanie root</string>
     <string name="root_pre_patch_installer_mount_description">Montuje zmodyfikowany plik APK nad oryginalną aplikacją. GmsCore nie jest wymagany</string>
     <string name="root_pre_patch_installer_standard_title">Standardowa instalacja</string>
     <string name="root_pre_patch_installer_standard_description">Instaluje jako oddzielną aplikację ze wsparciem GmsCore. Instalator można wybrać po modyfikowaniu</string>
@@ -838,6 +838,8 @@ Wymagane są następujące wymiary obrazów:
     <string name="changelog_description">Sprawdź ostatnie zmiany w tej aktualizacji</string>
     <string name="changelog_download_fail">Nie udało się pobrać historii zmian: %s</string>
     <string name="changelog_empty">Brak dostępnej historii zmian</string>
+    <string name="changelog_show_older">Pokaż starsze wersje</string>
+    <string name="changelog_older_empty">Brak starszych wersji do wyświetlenia</string>
     <string name="no_network_toast">Brak połączenia z internetem</string>
     <string name="update_available">Dostępna jest aktualizacja</string>
     <string name="ready_to_install_update">Gotowy do zainstalowania aktualizacji</string>

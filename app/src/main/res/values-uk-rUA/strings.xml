@@ -838,6 +838,8 @@ morphe_header_custom_dark.png
     <string name="changelog_description">Перегляньте останні зміни цього оновлення</string>
     <string name="changelog_download_fail">Не вдалося завантажити список змін: %s</string>
     <string name="changelog_empty">Список змін відсутній</string>
+    <string name="changelog_show_older">Показати старіші релізи</string>
+    <string name="changelog_older_empty">Немає старіших релізів для показу</string>
     <string name="no_network_toast">Немає підключення до Інтернету</string>
     <string name="update_available">У наявності є оновлення</string>
     <string name="ready_to_install_update">Готово до установки оновлення</string>

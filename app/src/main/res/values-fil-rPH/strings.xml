@@ -295,7 +295,7 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="root_gmscore_excluded">Hindi kasama ang GmsCore support patch sa root mode</string>
     <string name="root_pre_patch_installer_title">Piliin ang paraan ng pag-install</string>
     <string name="root_pre_patch_installer_description">May access sa root ang iyong device. Piliin kung paano mong i-install ang na-patch na aplikasyon</string>
-    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_title">I-mount ang root</string>
     <string name="root_pre_patch_installer_mount_description">I-mount ang na-patch na APK sa ilalim ng stock na aplikasyon. Hindi na kailangan ang GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Standard na pag-install</string>
     <string name="root_pre_patch_installer_standard_description">I-install bilang isang hiwalay na app na may suporta sa GmsCore. Maaaring pumili ng installer pagkatapos ng pag-patch</string>
@@ -305,7 +305,7 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="patcher_error_log">Tala ng pagkakamali</string>
     <string name="patcher_error_technical">Teknikal na detalye</string>
     <string name="patcher_error_dialog_app_info">Impormasyon ng app</string>
-    <string name="patcher_tab_logs">Mga Log ng Patcher</string>
+    <string name="patcher_tab_logs">Mga log ng Patcher</string>
     <string name="patcher_tab_game">Mga Laro</string>
     <string name="patcher_long_step_warning">Maaaring magtagal ang hakbang ito. Mangyaring maghintay…</string>
     <string name="patcher_installing_subtitle">Halos handa na sa rock! 🎸</string>

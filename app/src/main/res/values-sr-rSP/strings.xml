@@ -295,7 +295,7 @@
     <string name="root_gmscore_excluded">Печ подршке GmsCore је искључен у root режиму</string>
     <string name="root_pre_patch_installer_title">Odaberi metodu instalacije</string>
     <string name="root_pre_patch_installer_description">Vaš uređaj ima pristup korenovom direktorijumu. Odaberite kako želite da instaliraćete patčirani app</string>
-    <string name="root_pre_patch_installer_mount_title">Koren Mount</string>
+    <string name="root_pre_patch_installer_mount_title">Монтирај корен</string>
     <string name="root_pre_patch_installer_mount_description">Монтира пачовани APK преко стандардне апликације. Није потребан GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Standardna instalacija</string>
     <string name="root_pre_patch_installer_standard_description">Инсталира се као засебна апликација са GmsCore подршком. Инсталатер се може одабрати након закрпе</string>
@@ -309,12 +309,12 @@
     <string name="patcher_tab_game">Игре</string>
     <string name="patcher_long_step_warning">Овај корак може потрајати. Молимо сачекајте…</string>
     <string name="patcher_installing_subtitle">Скоро спремно за рад! 🎸</string>
-    <string name="patcher_success_title">Све готово! 🎉</string>
+    <string name="patcher_success_title">Готово! 🎉</string>
     <string name="patcher_success_subtitle">Ваша апликација је печована и инсталирана!</string>
-    <string name="patcher_complete_title">Печовање завршено! ✨</string>
+    <string name="patcher_complete_title">Закрапа завршено! ✨</string>
     <string name="patcher_failed_title">Упс! Дошло је до грешке</string>
     <string name="patcher_failed_subtitle">Проверите детаље грешке испод</string>
-    <string name="patcher_failed_dialog_title">Печовање није успело</string>
+    <string name="patcher_failed_dialog_title">Закрапа није успела</string>
     <string name="patcher_unknown_error">Дошло је до непознате грешке</string>
     <string name="patcher_conflict_title">Конфликт пакета</string>
     <string name="patcher_conflict_subtitle">Морате деинсталирати постојећу верзију</string>

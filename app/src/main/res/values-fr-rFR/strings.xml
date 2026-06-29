@@ -839,6 +839,8 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="changelog_description">Découvrez les dernières modifications de cette mise à jour</string>
     <string name="changelog_download_fail">Échec du téléchargement du journal des modifications : %s</string>
     <string name="changelog_empty">Aucun journal des modifications disponible</string>
+    <string name="changelog_show_older">Afficher les sorties plus anciennes</string>
+    <string name="changelog_older_empty">Aucune sortie plus ancienne à afficher</string>
     <string name="no_network_toast">Aucune connexion internet disponible</string>
     <string name="update_available">Une mise à jour est disponible</string>
     <string name="ready_to_install_update">Prêt à installer la mise à jour</string>

@@ -839,6 +839,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="changelog_description">اطّلع على آخر التغييرات في هذا التحديث</string>
     <string name="changelog_download_fail">فشل تنزيل سجل التغييرات: %s</string>
     <string name="changelog_empty">لا يتوفر سجل تغييرات</string>
+    <string name="changelog_show_older">عرض الإصدارات الأقدم</string>
+    <string name="changelog_older_empty">لا توجد إصدارات أقدم لعرضها</string>
     <string name="no_network_toast">لا يوجد اتصال بالإنترنت متاح</string>
     <string name="update_available">يتوفر تحديث</string>
     <string name="ready_to_install_update">جاهز لتثبيت التحديث</string>

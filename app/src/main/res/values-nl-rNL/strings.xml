@@ -292,7 +292,7 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="root_gmscore_excluded">GmsCore-ondersteuningspatch is uitgesloten in rootmodus</string>
     <string name="root_pre_patch_installer_title">Kies installatiemethode</string>
     <string name="root_pre_patch_installer_description">Uw apparaten heeft root-toegang. Kies hoe u de gepatchte app wilt installeren.</string>
-    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_title">Root mount</string>
     <string name="root_pre_patch_installer_mount_description">Mount de gepatchte APK over de standaard app. Geen GmsCore nodig</string>
     <string name="root_pre_patch_installer_standard_title">Standaard Installatie</string>
     <string name="root_pre_patch_installer_standard_description">Installeert als een afzonderlijke app met GmsCore-ondersteuning. Een installer kan worden geselecteerd na het patchen</string>
@@ -302,7 +302,7 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="patcher_error_log">Foutlogboek</string>
     <string name="patcher_error_technical">Technische details</string>
     <string name="patcher_error_dialog_app_info">App-info</string>
-    <string name="patcher_tab_logs">Patcher Logs</string>
+    <string name="patcher_tab_logs">Patchlogboeken</string>
     <string name="patcher_tab_game">Spellen</string>
     <string name="patcher_long_step_warning">Deze stap kan even duren. Een ogenblik geduld...</string>
     <string name="patcher_installing_subtitle">Bijna klaar om te knallen! 🎸</string>

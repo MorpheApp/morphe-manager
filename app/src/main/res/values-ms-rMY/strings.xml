@@ -290,7 +290,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="root_gmscore_excluded">Tampalan sokongan GmsCore dikecualikan dalam mod root</string>
     <string name="root_pre_patch_installer_title">Pilih kaedah pemasangan</string>
     <string name="root_pre_patch_installer_description">Peranti anda mempunyai akses root. Pilih cara anda ingin memasang aplikasi yang ditampal</string>
-    <string name="root_pre_patch_installer_mount_title">Mount Root</string>
     <string name="root_pre_patch_installer_standard_title">Pemasangan Standard</string>
     <string name="root_pre_patch_installer_standard_description">Pasang sebagai aplikasi berasingan dengan sokongan GmsCore. Pemasang boleh dipilih selepas tampalan dibuat</string>
     <string name="root_pre_patch_installer_hint">Kaedah pemasangan menentukan tampalan mana yang disertakan dan tidak boleh diubah selepas tampalan</string>
@@ -299,16 +298,12 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patcher_error_log">Log ralat</string>
     <string name="patcher_error_technical">Perincian teknikal</string>
     <string name="patcher_error_dialog_app_info">Maklumat aplikasi</string>
-    <string name="patcher_tab_logs">Log penampal</string>
     <string name="patcher_tab_game">Permainan</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin mengambil sedikit masa. Sila tunggu…</string>
     <string name="patcher_installing_subtitle">Hampir bersedia untuk beraksi! 🎸</string>
-    <string name="patcher_success_title">Semua Selesai! 🎉</string>
     <string name="patcher_success_subtitle">Aplikasi anda ditampal dan dipasang!</string>
-    <string name="patcher_complete_title">Tampalan Selesai! ✨</string>
     <string name="patcher_failed_title">Oops! Ada sesuatu yang tidak kena</string>
     <string name="patcher_failed_subtitle">Semak butiran ralat di bawah</string>
-    <string name="patcher_failed_dialog_title">Tampalan Gagal</string>
     <string name="patcher_unknown_error">Ralat yang tidak diketahui berlaku</string>
     <string name="patcher_conflict_title">Konflik pakej</string>
     <string name="patcher_conflict_subtitle">Anda perlu menyahpasang versi sedia ada</string>

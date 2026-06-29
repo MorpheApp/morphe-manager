@@ -838,6 +838,8 @@ Dimenzije slike moraju biti sljedeće:
     <string name="changelog_description">Pogledajte najnovije promjene u ovom ažuriranju</string>
     <string name="changelog_download_fail">Neuspjelo preuzimanje zapisa promjena: %s</string>
     <string name="changelog_empty">Nema dostupnog zapisa o promjenama</string>
+    <string name="changelog_show_older">Pokaži starije verzije</string>
+    <string name="changelog_older_empty">Nema starijih verzija za prikaz</string>
     <string name="no_network_toast">Nema dostupne internet veze</string>
     <string name="update_available">Dostupno je ažuriranje</string>
     <string name="ready_to_install_update">Spremno za instalaciju ažuriranja</string>

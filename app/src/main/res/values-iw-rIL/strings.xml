@@ -295,7 +295,7 @@
     <string name="root_gmscore_excluded">תיקון תמיכה ב-GmsCore אינו נכלל במצב Root</string>
     <string name="root_pre_patch_installer_title">בחר את שיטת התקנה</string>
     <string name="root_pre_patch_installer_description">החלק של המכשיר שלך הוא שור. בחר כיצד תרצה להתקין את האפליקציה הפגומה</string>
-    <string name="root_pre_patch_installer_mount_title">הרכבת שור</string>
+    <string name="root_pre_patch_installer_mount_title">הרכבת שורש</string>
     <string name="root_pre_patch_installer_mount_description">מטען את קובץ ה-APK הלא-מובנה מעל האפליקציה המקורית. אין צורך ב-GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">התקנה סטנדרטית</string>
     <string name="root_pre_patch_installer_standard_description">מותקן כאפליקציה נפרדת עם תמיכת GmsCore. ניתן לבחור מתקין לאחר תיקון</string>
@@ -309,7 +309,7 @@
     <string name="patcher_tab_game">משחקים</string>
     <string name="patcher_long_step_warning">שלב זה עשוי לקחת זמן. אנא המתן…</string>
     <string name="patcher_installing_subtitle">כמעט מוכן לרוק! 🎸</string>
-    <string name="patcher_success_title">הכל מוכן! 🎉</string>
+    <string name="patcher_success_title">סיימנו! 🎉</string>
     <string name="patcher_success_subtitle">האפליקציה שלך מתוקנת ומותקנת!</string>
     <string name="patcher_complete_title">התיקון הושלם! ✨</string>
     <string name="patcher_failed_title">אופס! משהו השתבש</string>

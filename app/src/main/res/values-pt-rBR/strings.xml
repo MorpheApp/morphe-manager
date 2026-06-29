@@ -295,7 +295,7 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="root_gmscore_excluded">O patch de suporte do GmsCore está excluído no modo root</string>
     <string name="root_pre_patch_installer_title">Escolha o método de instalação</string>
     <string name="root_pre_patch_installer_description">Seu dispositivo tem acesso root. Escolha como deseja instalar o app patchado.</string>
-    <string name="root_pre_patch_installer_mount_title">Montagem Root</string>
+    <string name="root_pre_patch_installer_mount_title">Montar raiz</string>
     <string name="root_pre_patch_installer_mount_description">Sobrepor o APK patcheado ao app original. Não requer GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Instalação Padrão</string>
     <string name="root_pre_patch_installer_standard_description">Instala como um app separado com suporte ao GmsCore. Escolha o instalador (Instalador do sistema, Shizuku, etc.) após a aplicação de patches</string>
@@ -309,7 +309,7 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="patcher_tab_game">Jogos</string>
     <string name="patcher_long_step_warning">Esta etapa pode demorar um pouco. Por favor, aguarde…</string>
     <string name="patcher_installing_subtitle">Tá quase na hora do show! 🎸</string>
-    <string name="patcher_success_title">Tudo pronto! 🎉</string>
+    <string name="patcher_success_title">Pronto! 🎉</string>
     <string name="patcher_success_subtitle">Seu app está patcheado e instalado!</string>
     <string name="patcher_complete_title">Patches aplicados com sucesso! ✨</string>
     <string name="patcher_failed_title">Oops! Algo deu errado</string>

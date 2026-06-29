@@ -305,7 +305,7 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <string name="patcher_error_log">Dnevnik napak</string>
     <string name="patcher_error_technical">Tehnične podrobnosti</string>
     <string name="patcher_error_dialog_app_info">Podatki o aplikaciji</string>
-    <string name="patcher_tab_logs">Dnevnik popravkov</string>
+    <string name="patcher_tab_logs">Dnevniki popravkov</string>
     <string name="patcher_tab_game">Igre</string>
     <string name="patcher_long_step_warning">Ta korak lahko traja nekaj časa. Prosim, počakajte…</string>
     <string name="patcher_installing_subtitle">Skoraj pripravljeni na zažiganje! 🎸</string>

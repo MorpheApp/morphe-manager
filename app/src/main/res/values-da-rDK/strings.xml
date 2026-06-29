@@ -295,7 +295,7 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="root_gmscore_excluded">GmsCore-supportpatch er udeladt i root-tilstand</string>
     <string name="root_pre_patch_installer_title">Vælg installationsmetode</string>
     <string name="root_pre_patch_installer_description">Din enhed har root-adgang. Vælg hvordan du vil installere den patchede app</string>
-    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_title">Root-montering</string>
     <string name="root_pre_patch_installer_mount_description">Mount patchet APK over den originale app. Ingen GmsCore nødvendig</string>
     <string name="root_pre_patch_installer_standard_title">Standard Install</string>
     <string name="root_pre_patch_installer_standard_description">Installeres som en separat app med GmsCore-understøttelse. En installatør kan vælges efter patching</string>
@@ -305,7 +305,7 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_error_log">Fejllog</string>
     <string name="patcher_error_technical">Tekniske oplysninger</string>
     <string name="patcher_error_dialog_app_info">App-oplysninger</string>
-    <string name="patcher_tab_logs">Patcher Logs</string>
+    <string name="patcher_tab_logs">Patch-logfiler</string>
     <string name="patcher_tab_game">Spil</string>
     <string name="patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
     <string name="patcher_installing_subtitle">Næsten klar til at rocke! 🎸</string>
@@ -316,6 +316,7 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_failed_subtitle">Se fejldetaljerne nedenfor</string>
     <string name="patcher_failed_dialog_title">Patch mislykkedes</string>
     <string name="patcher_unknown_error">Ukendt fejl opstod</string>
+    <string name="patcher_split_step_extracting">Udpakker split-APK\'er</string>
     <string name="patcher_conflict_title">Pakkekonflikt</string>
     <string name="patcher_conflict_subtitle">Du skal afinstallere den eksisterende version</string>
     <string name="patcher_conflict_hint">Den patched app bruger et andet certifikat end den installerede version. Afinstallation vil slette alle app-data</string>
@@ -834,6 +835,8 @@ Størrelsesformatet skal være som følger:
     <string name="changelog_description">Se de seneste ændringer i denne opdatering</string>
     <string name="changelog_download_fail">Kunne ikke downloade ændringslog: %s</string>
     <string name="changelog_empty">Ingen ændringslog tilgængelig</string>
+    <string name="changelog_show_older">Vis ældre udgivelser</string>
+    <string name="changelog_older_empty">Ingen ældre udgivelser at vise</string>
     <string name="no_network_toast">Ingen internetforbindelse tilgængelig</string>
     <string name="update_available">En opdatering er tilgængelig</string>
     <string name="ready_to_install_update">Klar til at installere opdatering</string>

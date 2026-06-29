@@ -238,6 +238,9 @@
     <string name="patcher_error_dialog_app_info">ॲप माहिती</string>
     <string name="patcher_tab_logs">पॅचर लॉग</string>
     <string name="patcher_tab_game">गेम</string>
+    <string name="patcher_success_title">सर्व पूर्ण झाले! 🎉</string>
+    <string name="patcher_complete_title">पॅचिंग पूर्ण झाले! ✨</string>
+    <string name="patcher_failed_dialog_title">पॅचिंग अयशस्वी झाले</string>
     <string name="patcher_conflict_hint">पॅच केलेले ॲप इंस्टॉल केलेल्या आवृत्तीपेक्षा वेगळे प्रमाणपत्र वापरते. अनइंस्टॉल केल्याने ॲपचा सर्व डेटा पुसला जाईल.</string>
     <string name="patcher_installed_conflict_title">अस्थापित करणे आवश्यक आहे</string>
     <string name="patcher_installed_conflict_body">"Morphe तुमच्या स्थापित ॲप्सना स्वतःच्या प्रमाणपत्राने प्रमाणित करते, जे मूळ प्रमाणपत्रापेक्षा वेगळे आहे. प्रमाणित ॲप स्थापित करण्यापूर्वी, Android ला विद्यमान आवृत्ती काढणे आवश्यक आहे.

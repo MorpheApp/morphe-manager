@@ -309,12 +309,12 @@
     <string name="patcher_tab_game">游戏</string>
     <string name="patcher_long_step_warning">此步骤可能需要一段时间。请稍候…</string>
     <string name="patcher_installing_subtitle">准备摇滚！ 🎸</string>
-    <string name="patcher_success_title">全部完成！ 🎉</string>
+    <string name="patcher_success_title">完成！🎉</string>
     <string name="patcher_success_subtitle">您的应用已修补并安装！</string>
-    <string name="patcher_complete_title">修补完成！ ✨</string>
+    <string name="patcher_complete_title">补丁完成！✨</string>
     <string name="patcher_failed_title">哎呀！出现错误</string>
     <string name="patcher_failed_subtitle">请查看下方的错误详情</string>
-    <string name="patcher_failed_dialog_title">修补失败</string>
+    <string name="patcher_failed_dialog_title">补丁失败</string>
     <string name="patcher_unknown_error">发生未知错误</string>
     <string name="patcher_conflict_title">包冲突</string>
     <string name="patcher_conflict_subtitle">您需要卸载现有版本</string>

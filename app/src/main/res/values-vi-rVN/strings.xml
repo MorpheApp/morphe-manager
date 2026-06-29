@@ -125,7 +125,7 @@
     <string name="home_apk_availability_recommended_label">Khuyên dùng</string>
     <string name="home_apk_availability_unpatched_label">Chưa vá</string>
     <string name="home_apk_availability_incompatible_label">Không tương thích</string>
-    <string name="home_apk_availability_yes">Có, giúp tôi vs</string>
+    <string name="home_apk_availability_yes">Có, giúp tôi với</string>
     <string name="home_apk_availability_no">Không, tôi có APK rồi</string>
     <string name="home_apk_use_saved">Sử dụng APK đã lưu</string>
     <string name="home_apk_use_installed">Sử dụng APK đã cài đặt</string>
@@ -839,6 +839,8 @@ Kích thước hình ảnh yêu cầu:
     <string name="changelog_description">Xem những thay đổi mới nhất trong bản cập nhật này</string>
     <string name="changelog_download_fail">Không thể tải lịch sử cập nhật: %s</string>
     <string name="changelog_empty">Không có lịch sử cập nhật</string>
+    <string name="changelog_show_older">Hiển thị các bản phát hành cũ</string>
+    <string name="changelog_older_empty">Không có bản phát hành cũ nào để hiển thị</string>
     <string name="no_network_toast">Không có kết nối mạng</string>
     <string name="update_available">Đã có bản cập nhật mới</string>
     <string name="ready_to_install_update">Sẵn sàng cài đặt bản cập nhật</string>
