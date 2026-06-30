@@ -594,6 +594,7 @@ private fun BundleManagementCard(
                                 .toggleable(
                                     value = currentUsePrerelease,
                                     role = Role.Switch,
+                                    enabled = !isUpdating,
                                     onValueChange = onPrereleasesToggle
                                 )
                                 .semantics {
@@ -625,10 +626,28 @@ private fun BundleManagementCard(
 
                             Spacer(Modifier.width(8.dp))
 
-                            MorpheSwitch(
-                                checked = currentUsePrerelease,
-                                onCheckedChange = null
-                            )
+                            Crossfade(
+                                targetState = isUpdating,
+                                modifier = Modifier.size(width = 52.dp, height = 32.dp),
+                                label = "prerelease_toggle_loading"
+                            ) { updating ->
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    if (updating) {
+                                        CircularProgressIndicator(
+                                            modifier = Modifier.size(24.dp),
+                                            strokeWidth = 2.dp
+                                        )
+                                    } else {
+                                        MorpheSwitch(
+                                            checked = currentUsePrerelease,
+                                            onCheckedChange = null
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
 
