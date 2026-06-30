@@ -133,7 +133,13 @@ class InstalledAppInfoViewModel(
     fun uninstall() {
         val app = installedApp ?: return
         when (app.installType) {
-            InstallType.DEFAULT, InstallType.CUSTOM, InstallType.SHIZUKU, InstallType.SAVED -> {
+            InstallType.DEFAULT,
+            InstallType.PLAY_STORE,
+            InstallType.ROOT_PLAY_STORE,
+            InstallType.CUSTOM,
+            InstallType.SHIZUKU,
+            InstallType.SHIZUKU_PLAY_STORE,
+            InstallType.SAVED -> {
                 viewModelScope.launch {
                     try {
                         sessionInstaller.uninstall(app.currentPackageName)

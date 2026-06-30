@@ -20,6 +20,7 @@ import android.util.Log
 import androidx.core.net.toUri
 import app.morphe.manager.R
 import app.morphe.manager.util.APK_MIMETYPE
+import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
 import kotlinx.coroutines.suspendCancellableCoroutine
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
@@ -181,8 +182,22 @@ class SessionInstaller(private val app: Application) {
     @SuppressLint("RequestInstallPackagesPolicy")
     @Suppress("DEPRECATION")
     fun launchIntentInstall(apkFile: File) {
+        launchPackageInstall(apkFile, app.packageName)
+    }
+
+    /**
+     * Launches the system package installer while asking Android to record Google Play Store
+     * as the installer package. This mirrors KingInstaller's non-root install behavior.
+     */
+    @SuppressLint("RequestInstallPackagesPolicy")
+    @Suppress("DEPRECATION")
+    fun launchPlayStoreInstall(apkFile: File) {
+        launchPackageInstall(apkFile, PLAY_STORE_INSTALLER_PACKAGE)
+    }
+
+    private fun launchPackageInstall(apkFile: File, installerPackageName: String) {
         require(apkFile.exists()) { "APK does not exist: ${apkFile.path}" }
-        Log.d(TAG, "launchIntentInstall: ${apkFile.name}")
+        Log.d(TAG, "launchPackageInstall: ${apkFile.name}, installer=$installerPackageName")
         val uri = InstallerFileProvider.getUriForFile(app, apkFile)
         val intent = Intent(Intent.ACTION_INSTALL_PACKAGE).apply {
             setDataAndType(uri, APK_MIMETYPE)
@@ -192,7 +207,7 @@ class SessionInstaller(private val app: Application) {
             )
             putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true)
             putExtra(Intent.EXTRA_RETURN_RESULT, false)
-            putExtra(Intent.EXTRA_INSTALLER_PACKAGE_NAME, app.packageName)
+            putExtra(Intent.EXTRA_INSTALLER_PACKAGE_NAME, installerPackageName)
         }
         app.startActivity(intent)
     }
@@ -205,8 +220,22 @@ class SessionInstaller(private val app: Application) {
     suspend fun installShizuku(apkFile: File, expectedPackage: String): InstallResult {
         require(apkFile.exists()) { "APK does not exist: ${apkFile.path}" }
         Log.d(TAG, "installShizuku: ${apkFile.name} (${apkFile.length()} bytes)")
+        return installShizukuWithInstallerPackage(apkFile, expectedPackage, null)
+    }
+
+    suspend fun installShizukuAsPlayStore(apkFile: File, expectedPackage: String): InstallResult {
+        require(apkFile.exists()) { "APK does not exist: ${apkFile.path}" }
+        Log.d(TAG, "installShizukuAsPlayStore: ${apkFile.name} (${apkFile.length()} bytes)")
+        return installShizukuWithInstallerPackage(apkFile, expectedPackage, PLAY_STORE_INSTALLER_PACKAGE)
+    }
+
+    private suspend fun installShizukuWithInstallerPackage(
+        apkFile: File,
+        expectedPackage: String,
+        installerPackageName: String?
+    ): InstallResult {
         return try {
-            val result = shizukuInstaller.install(apkFile, expectedPackage)
+            val result = shizukuInstaller.install(apkFile, expectedPackage, installerPackageName)
             if (result.status == PackageInstaller.STATUS_SUCCESS) {
                 InstallResult.Success
             } else {

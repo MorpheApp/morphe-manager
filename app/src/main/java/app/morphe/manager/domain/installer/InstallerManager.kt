@@ -21,6 +21,7 @@ import app.morphe.manager.util.AOSP_INSTALLER_LABEL
 import app.morphe.manager.util.AOSP_INSTALLER_PACKAGE
 import app.morphe.manager.util.AOSP_INSTALLER_PACKAGE_LEGACY
 import app.morphe.manager.util.APK_MIMETYPE
+import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
 import java.io.File
 
 private const val TAG = "Morphe InstallerManager"
@@ -46,8 +47,11 @@ class InstallerManager(
         val entries = mutableListOf<Entry>()
 
         entryFor(Token.Internal, target, checkRoot = false)?.let(entries::add)
+        entryFor(Token.PlayStore, target, checkRoot = false)?.let(entries::add)
+        entryFor(Token.RootPlayStore, target, checkRoot = false)?.let(entries::add)
         entryFor(Token.AutoSaved, target, checkRoot = false)?.let(entries::add)
         entryFor(Token.Shizuku, target, checkRoot = false)?.let(entries::add)
+        entryFor(Token.ShizukuPlayStore, target, checkRoot = false)?.let(entries::add)
 
         val activityEntries = queryInstallerActivities()
             .filter(::isInstallerCandidate)
@@ -94,8 +98,11 @@ class InstallerManager(
             InstallerPreferenceTokens.AUTO_SAVED,
             InstallerPreferenceTokens.ROOT -> Token.AutoSaved
             InstallerPreferenceTokens.SYSTEM -> Token.Internal
+            InstallerPreferenceTokens.PLAY_STORE -> Token.PlayStore
+            InstallerPreferenceTokens.ROOT_PLAY_STORE -> Token.RootPlayStore
             InstallerPreferenceTokens.NONE -> Token.None
             InstallerPreferenceTokens.SHIZUKU -> Token.Shizuku
+            InstallerPreferenceTokens.SHIZUKU_PLAY_STORE -> Token.ShizukuPlayStore
             InstallerPreferenceTokens.INTERNAL, null, "" -> Token.Internal
             else -> ComponentName.unflattenFromString(value)?.let { component ->
                 if (isDefaultComponent(component)) Token.Internal else Token.Component(component)
@@ -107,9 +114,12 @@ class InstallerManager(
 
     fun tokenToPreference(token: Token): String = when (token) {
         Token.Internal -> InstallerPreferenceTokens.INTERNAL
+        Token.PlayStore -> InstallerPreferenceTokens.PLAY_STORE
+        Token.RootPlayStore -> InstallerPreferenceTokens.ROOT_PLAY_STORE
         Token.AutoSaved -> InstallerPreferenceTokens.AUTO_SAVED
         Token.None -> InstallerPreferenceTokens.NONE
         Token.Shizuku -> InstallerPreferenceTokens.SHIZUKU
+        Token.ShizukuPlayStore -> InstallerPreferenceTokens.SHIZUKU_PLAY_STORE
         is Token.Component -> token.componentName.flattenToString()
     }
 
@@ -148,7 +158,10 @@ class InstallerManager(
         }
 
         // Primary is unavailable - check if it's Shizuku or AutoSaved (special cases)
-        val isSpecialInstaller = primaryToken == Token.Shizuku || primaryToken == Token.AutoSaved
+        val isSpecialInstaller = primaryToken == Token.Shizuku ||
+                primaryToken == Token.ShizukuPlayStore ||
+                primaryToken == Token.AutoSaved ||
+                primaryToken == Token.RootPlayStore
 
         if (isSpecialInstaller) {
             // Return info about unavailability so UI can show appropriate dialog
@@ -216,6 +229,14 @@ class InstallerManager(
     ): InstallPlan? {
         return when (token) {
             Token.Internal -> InstallPlan.Internal(target)
+            Token.PlayStore -> if (availabilityFor(Token.PlayStore, target, checkRoot = true).available) {
+                InstallPlan.PlayStore(target)
+            } else null
+
+            Token.RootPlayStore -> if (availabilityFor(Token.RootPlayStore, target, checkRoot = true).available) {
+                InstallPlan.RootPlayStore(target)
+            } else null
+
             Token.None -> null
             Token.AutoSaved -> if (availabilityFor(Token.AutoSaved, target, checkRoot = true).available) {
                 InstallPlan.Mount(target)
@@ -223,6 +244,10 @@ class InstallerManager(
 
             Token.Shizuku -> if (availabilityFor(Token.Shizuku, target, checkRoot = true).available) {
                 InstallPlan.Shizuku(target)
+            } else null
+
+            Token.ShizukuPlayStore -> if (availabilityFor(Token.ShizukuPlayStore, target, checkRoot = true).available) {
+                InstallPlan.ShizukuPlayStore(target)
             } else null
 
             is Token.Component -> {
@@ -296,6 +321,22 @@ class InstallerManager(
             icon = null
         )
 
+        Token.PlayStore -> Entry(
+            token = Token.PlayStore,
+            label = app.getString(R.string.installer_play_store_name),
+            description = app.getString(R.string.installer_play_store_description),
+            availability = availabilityFor(Token.PlayStore, target, checkRoot),
+            icon = loadInstallerIcon(PLAY_STORE_INSTALLER_PACKAGE)
+        )
+
+        Token.RootPlayStore -> Entry(
+            token = Token.RootPlayStore,
+            label = app.getString(R.string.installer_root_play_store_name),
+            description = app.getString(R.string.installer_root_play_store_description),
+            availability = availabilityFor(Token.RootPlayStore, target, checkRoot),
+            icon = loadInstallerIcon(PLAY_STORE_INSTALLER_PACKAGE)
+        )
+
         Token.AutoSaved -> Entry(
             token = Token.AutoSaved,
             label = app.getString(R.string.installer_auto_saved_name),
@@ -309,6 +350,14 @@ class InstallerManager(
             label = app.getString(R.string.installer_shizuku_name),
             description = app.getString(R.string.installer_shizuku_description),
             availability = availabilityFor(Token.Shizuku, target, checkRoot),
+            icon = sessionInstaller.shizukuPackageName()?.let { loadInstallerIcon(it) }
+        )
+
+        Token.ShizukuPlayStore -> Entry(
+            token = Token.ShizukuPlayStore,
+            label = app.getString(R.string.installer_shizuku_play_store_name),
+            description = app.getString(R.string.installer_shizuku_play_store_description),
+            availability = availabilityFor(Token.ShizukuPlayStore, target, checkRoot),
             icon = sessionInstaller.shizukuPackageName()?.let { loadInstallerIcon(it) }
         )
 
@@ -345,6 +394,26 @@ class InstallerManager(
 
     private fun availabilityFor(token: Token, target: InstallTarget, checkRoot: Boolean = true): Availability = when (token) {
         Token.Internal -> Availability(true)
+        Token.PlayStore -> if (target == InstallTarget.PATCHER) {
+            Availability(true)
+        } else {
+            Availability(false, R.string.installer_status_not_supported)
+        }
+        Token.RootPlayStore -> if (!target.supportsRoot) {
+            Availability(false, R.string.installer_status_not_supported)
+        } else if (checkRoot) {
+            if (!rootInstaller.hasRootAccess()) {
+                Availability(false, R.string.installer_status_requires_root)
+            } else {
+                Availability(true)
+            }
+        } else {
+            if (!rootInstaller.isDeviceRooted()) {
+                Availability(false, R.string.installer_status_requires_root)
+            } else {
+                Availability(true)
+            }
+        }
         Token.None -> Availability(true)
 
         Token.AutoSaved -> if (!target.supportsRoot) {
@@ -375,6 +444,18 @@ class InstallerManager(
                 sessionInstaller.shizukuAvailability(target)
             } else {
                 // Just verify Shizuku is installed (for UI display)
+                Availability(true)
+            }
+        }
+
+        Token.ShizukuPlayStore -> {
+            if (target != InstallTarget.PATCHER) {
+                Availability(false, R.string.installer_status_not_supported)
+            } else if (!sessionInstaller.isShizukuInstalled()) {
+                Availability(false, R.string.installer_status_shizuku_not_installed)
+            } else if (checkRoot) {
+                sessionInstaller.shizukuAvailability(target)
+            } else {
                 Availability(true)
             }
         }
@@ -487,16 +568,22 @@ class InstallerManager(
 
     sealed class Token {
         object Internal : Token()
+        object PlayStore : Token()
+        object RootPlayStore : Token()
         object AutoSaved : Token()
         object Shizuku : Token()
+        object ShizukuPlayStore : Token()
         object None : Token()
         data class Component(val componentName: ComponentName) : Token()
     }
 
     sealed class InstallPlan {
         data class Internal(val target: InstallTarget) : InstallPlan()
+        data class PlayStore(val target: InstallTarget) : InstallPlan()
+        data class RootPlayStore(val target: InstallTarget) : InstallPlan()
         data class Mount(val target: InstallTarget) : InstallPlan()
         data class Shizuku(val target: InstallTarget) : InstallPlan()
+        data class ShizukuPlayStore(val target: InstallTarget) : InstallPlan()
         data class External(
             val target: InstallTarget,
             val intent: Intent,
@@ -536,7 +623,10 @@ class InstallerManager(
             }
         }
         val tokenExists = token == Token.Internal ||
+                token == Token.PlayStore ||
+                token == Token.RootPlayStore ||
                 token == Token.AutoSaved ||
+                token == Token.ShizukuPlayStore ||
                 normalized.any { tokensEqual(it.token, token) }
         return if (tokenExists) normalized
         else describeEntry(token, target)?.let { normalized + it } ?: normalized
@@ -545,8 +635,11 @@ class InstallerManager(
 
 private fun InstallerManager.Token.describe(): String = when (this) {
     InstallerManager.Token.Internal -> "Internal"
+    InstallerManager.Token.PlayStore -> "PlayStore"
+    InstallerManager.Token.RootPlayStore -> "RootPlayStore"
     InstallerManager.Token.AutoSaved -> "AutoSaved"
     InstallerManager.Token.Shizuku -> "Shizuku"
+    InstallerManager.Token.ShizukuPlayStore -> "ShizukuPlayStore"
     InstallerManager.Token.None -> "None"
     is InstallerManager.Token.Component -> "Component(${componentName.flattenToString()})"
 }

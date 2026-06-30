@@ -181,6 +181,9 @@ fun InstalledAppInfoDialog(
                 val newInstallType = when (installViewModel.currentInstallType) {
                     InstallType.MOUNT -> InstallType.MOUNT
                     InstallType.SHIZUKU -> InstallType.SHIZUKU
+                    InstallType.SHIZUKU_PLAY_STORE -> InstallType.SHIZUKU_PLAY_STORE
+                    InstallType.PLAY_STORE -> InstallType.PLAY_STORE
+                    InstallType.ROOT_PLAY_STORE -> InstallType.ROOT_PLAY_STORE
                     InstallType.CUSTOM -> InstallType.CUSTOM
                     else -> InstallType.DEFAULT
                 }
@@ -751,6 +754,9 @@ private fun AppHeroHeader(
             val (chipIcon, chipLabel) = when (installedApp.installType) {
                 InstallType.MOUNT   -> Icons.Outlined.Link to R.string.mount
                 InstallType.SHIZUKU -> Icons.Outlined.Terminal to R.string.home_app_info_install_type_shizuku
+                InstallType.SHIZUKU_PLAY_STORE -> Icons.Outlined.Terminal to R.string.home_app_info_install_type_shizuku_play_store
+                InstallType.PLAY_STORE -> Icons.Outlined.InstallMobile to R.string.home_app_info_install_type_play_store
+                InstallType.ROOT_PLAY_STORE -> Icons.Outlined.Security to R.string.home_app_info_install_type_root_play_store
                 InstallType.CUSTOM  -> Icons.Outlined.Build to R.string.home_app_info_install_type_custom_installer
                 InstallType.SAVED   -> Icons.Outlined.Save to R.string.saved
                 InstallType.DEFAULT -> Icons.Outlined.InstallMobile to R.string.home_app_info_install_type_system_installer

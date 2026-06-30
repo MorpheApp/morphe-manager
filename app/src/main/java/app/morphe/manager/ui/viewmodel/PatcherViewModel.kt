@@ -973,7 +973,10 @@ class PatcherViewModel(
 
     private fun scheduleAutoInstallIfNeeded() = viewModelScope.launch {
         if (!prefs.autoInstallWithShizuku.get()) return@launch
-        if (prefs.installerPrimary.get() != InstallerPreferenceTokens.SHIZUKU) return@launch
+        val installerPrimary = prefs.installerPrimary.get()
+        if (installerPrimary != InstallerPreferenceTokens.SHIZUKU &&
+            installerPrimary != InstallerPreferenceTokens.SHIZUKU_PLAY_STORE
+        ) return@launch
         if (prefs.promptInstallerOnInstall.get()) return@launch
         _autoInstallChannel.trySend(Unit)
     }

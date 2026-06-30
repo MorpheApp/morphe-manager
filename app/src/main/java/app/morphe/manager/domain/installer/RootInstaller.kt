@@ -8,6 +8,7 @@ import android.os.IBinder
 import android.os.SystemClock
 import app.morphe.manager.IRootSystemService
 import app.morphe.manager.service.ManagerRootService
+import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
 import app.morphe.manager.util.PM
 import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.ipc.RootService
@@ -211,6 +212,14 @@ class RootInstaller(
         execute("am force-stop \"$packageName\"")
     }
 
+    suspend fun installAsPlayStore(apkFile: File) = withContext(Dispatchers.IO) {
+        if (!apkFile.exists()) throw Exception("File doesn't exist")
+
+        execute(
+            "pm install -t -i ${PLAY_STORE_INSTALLER_PACKAGE.shellQuote()} -r ${apkFile.absolutePath.shellQuote()}"
+        ).assertSuccess("Failed to install APK as Play Store")
+    }
+
     suspend fun uninstall(packageName: String) {
         val remoteFS = awaitRemoteFS()
         if (isAppMounted(packageName))
@@ -240,8 +249,13 @@ class RootInstaller(
         const val MODULES_PATH = "/data/adb/modules"
 
         private fun Shell.Result.assertSuccess(errorMessage: String) {
-            if (!isSuccess) throw Exception(errorMessage)
+            if (!isSuccess) {
+                val detail = (err + out).joinToString("\n").trim()
+                throw Exception(if (detail.isBlank()) errorMessage else "$errorMessage: $detail")
+            }
         }
+
+        private fun String.shellQuote() = "'${replace("'", "'\"'\"'")}'"
 
         private const val ROOT_CHECK_INTERVAL_MS = 1_000L
     }

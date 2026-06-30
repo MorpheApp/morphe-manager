@@ -301,7 +301,10 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="home_app_info_patch_source_used">Patch source used</string>
     <string name="home_app_info_install_type_custom_installer">Custom installer</string>
     <string name="home_app_info_install_type_system_installer">System installer</string>
+    <string name="home_app_info_install_type_play_store">Play Store install</string>
+    <string name="home_app_info_install_type_root_play_store">Root Play Store install</string>
     <string name="home_app_info_install_type_shizuku" translatable="false">Shizuku</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store install</string>
     <string name="home_app_info_patch_update_available">Patch update available</string>
     <string name="home_app_info_patch_update_available_description">A newer version of patches is available. Repatch your app to get the latest improvements and fixes</string>
     <string name="home_app_info_app_deleted_warning">App was uninstalled</string>
@@ -667,10 +670,16 @@ The image dimensions must be as follows:
     <string name="installer_title">Select installer</string>
     <string name="installer_internal_name">System installer</string>
     <string name="installer_internal_description">Uses the Android package installer</string>
+    <string name="installer_play_store_name">Play Store install</string>
+    <string name="installer_play_store_description">Uses the system installer and sets Google Play Store as the install source</string>
+    <string name="installer_root_play_store_name">Root Play Store install</string>
+    <string name="installer_root_play_store_description">Installs silently with root and sets Google Play Store as the install source</string>
     <string name="installer_auto_saved_name">Rooted mount installer</string>
     <string name="installer_auto_saved_description">Mounts the patched APK over the installed app</string>
     <string name="installer_shizuku_name" translatable="false">Shizuku</string>
     <string name="installer_shizuku_description">Installs silently using Shizuku or Sui</string>
+    <string name="installer_shizuku_play_store_name">Shizuku Play Store install</string>
+    <string name="installer_shizuku_play_store_description">Installs silently through Shizuku or Sui and sets Google Play Store as the install source</string>
     <string name="installer_option_none">No fallback</string>
     <string name="installer_none_description">No fallback installer is configured</string>
     <string name="installer_status_requires_root">Requires root access</string>

@@ -194,6 +194,27 @@ class UpdateViewModel(
                 // cancellation handled by resetIfInstallCancelled() in the dialog
             }
 
+            is InstallerManager.InstallPlan.PlayStore -> {
+                state = State.INSTALLING
+                sessionInstaller.launchPlayStoreInstall(location)
+            }
+
+            is InstallerManager.InstallPlan.RootPlayStore -> {
+                val hint = app.getString(R.string.installer_status_not_supported)
+                app.toast(app.getString(R.string.install_app_fail, hint))
+                installError = hint
+                canResumeDownload = false
+                state = State.FAILED
+            }
+
+            is InstallerManager.InstallPlan.ShizukuPlayStore -> {
+                val hint = app.getString(R.string.installer_status_not_supported)
+                app.toast(app.getString(R.string.install_app_fail, hint))
+                installError = hint
+                canResumeDownload = false
+                state = State.FAILED
+            }
+
             is InstallerManager.InstallPlan.Mount -> {
                 val hint = app.getString(R.string.installer_status_not_supported)
                 app.toast(app.getString(R.string.install_app_fail, hint))

@@ -183,6 +183,9 @@ private fun InstallerSettingsItem(
         leadingContent = {
             if (entry.icon != null &&
                 (entry.token == InstallerManager.Token.Shizuku ||
+                        entry.token == InstallerManager.Token.ShizukuPlayStore ||
+                        entry.token == InstallerManager.Token.PlayStore ||
+                        entry.token == InstallerManager.Token.RootPlayStore ||
                         entry.token is InstallerManager.Token.Component)
             ) {
                 InstallerIconPreview(
@@ -260,7 +263,9 @@ fun InstallerSelectionDialog(
             options.forEach { option ->
                 val enabled = option.availability.available
                 val isSelected = currentSelection.value == option.token
-                val showShizukuAction = option.token == InstallerManager.Token.Shizuku &&
+                val isShizukuOption = option.token == InstallerManager.Token.Shizuku ||
+                        option.token == InstallerManager.Token.ShizukuPlayStore
+                val showShizukuAction = isShizukuOption &&
                         option.availability.reason in shizukuPromptReasons &&
                         onOpenShizuku != null
 
@@ -296,7 +301,8 @@ fun InstallerSelectionDialog(
 
             // Auto-install toggle
             AnimatedVisibility(
-                visible = currentSelection.value == InstallerManager.Token.Shizuku &&
+                visible = (currentSelection.value == InstallerManager.Token.Shizuku ||
+                        currentSelection.value == InstallerManager.Token.ShizukuPlayStore) &&
                         onAutoInstallToggle != null,
                 enter = MorpheAnimations.expandFadeEnter,
                 exit = MorpheAnimations.shrinkFadeExit
@@ -389,6 +395,9 @@ fun InstallerOptionItem(
             IconTextRow(
                 leadingContent = if (option.icon != null &&
                     (option.token == InstallerManager.Token.Shizuku ||
+                            option.token == InstallerManager.Token.ShizukuPlayStore ||
+                            option.token == InstallerManager.Token.PlayStore ||
+                            option.token == InstallerManager.Token.RootPlayStore ||
                             option.token is InstallerManager.Token.Component)
                 ) {
                     {
@@ -493,7 +502,9 @@ fun InstallerUnavailableDialog(
 ) {
     val installerName = when (state.installerToken) {
         InstallerManager.Token.Shizuku -> stringResource(R.string.installer_shizuku_name)
+        InstallerManager.Token.ShizukuPlayStore -> stringResource(R.string.installer_shizuku_play_store_name)
         InstallerManager.Token.AutoSaved -> stringResource(R.string.installer_auto_saved_name)
+        InstallerManager.Token.RootPlayStore -> stringResource(R.string.installer_root_play_store_name)
         else -> stringResource(R.string.installer_internal_name)
     }
 
@@ -516,6 +527,7 @@ fun InstallerUnavailableDialog(
                     MorpheDialogButton(
                         text = when (state.installerToken) {
                             InstallerManager.Token.Shizuku -> stringResource(R.string.installer_action_open_shizuku)
+                            InstallerManager.Token.ShizukuPlayStore -> stringResource(R.string.installer_action_open_shizuku)
                             else -> stringResource(R.string.open)
                         },
                         onClick = onOpenApp,
@@ -561,7 +573,10 @@ fun InstallerUnavailableDialog(
             }
 
             // Shizuku-specific hint
-            if (state.canOpenApp && state.installerToken == InstallerManager.Token.Shizuku) {
+            if (state.canOpenApp &&
+                (state.installerToken == InstallerManager.Token.Shizuku ||
+                        state.installerToken == InstallerManager.Token.ShizukuPlayStore)
+            ) {
                 InfoBadge(
                     text = stringResource(R.string.installer_unavailable_shizuku_hint),
                     style = InfoBadgeStyle.Primary,

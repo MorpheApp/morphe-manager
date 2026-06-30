@@ -295,6 +295,9 @@ object InstallerPreferenceTokens {
     const val SYSTEM = ":system:"
     const val ROOT = ":root:" // Legacy value, mapped to AUTO_SAVED.
     const val AUTO_SAVED = ":auto_saved:"
+    const val PLAY_STORE = ":play_store:"
+    const val ROOT_PLAY_STORE = ":root_play_store:"
     const val SHIZUKU = ":shizuku:"
+    const val SHIZUKU_PLAY_STORE = ":shizuku_play_store:"
     const val NONE = ":none:"
 }
