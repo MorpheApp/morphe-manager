@@ -20,11 +20,6 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.LiveRegionMode
-import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.liveRegion
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -71,35 +66,12 @@ fun SimplePatchingInProgress(
         }
     }
 
-    // Throttle to 10% increments to prevent TalkBack TTS flood on low-end devices
-    val announcedPercent by remember {
-        derivedStateOf { ((progress * 10).toInt() * 10).coerceIn(0, 100) }
-    }
-    val runningStepName by remember {
-        derivedStateOf {
-            patcherViewModel.steps.firstOrNull { it.state == State.RUNNING }?.name
-        }
-    }
-    val applyingPatchesLabel = stringResource(R.string.applying_patches)
-    val accessibilityProgressDescription = remember(runningStepName, announcedPercent, completed, total) {
-        val label = runningStepName ?: applyingPatchesLabel
-        "$label, $announcedPercent%, $completed/$total"
-    }
-
     // Main content area
     Column(
         modifier = Modifier
             .fillMaxSize()
             .navigationBarsPadding()
     ) {
-        // Hidden polite live region; visual widgets below are silenced via clearAndSetSemantics
-        Spacer(
-            modifier = Modifier.semantics {
-                contentDescription = accessibilityProgressDescription
-                liveRegion = LiveRegionMode.Polite
-            }
-        )
-
         // Content with weight to push bottom bar down
         Box(
             modifier = Modifier
@@ -240,14 +212,13 @@ private fun AdaptiveProgressContent(
     }
 }
 
-/** Progress message section. Silenced for a11y; status comes from the live region in [SimplePatchingInProgress]. */
+/** Rotating greeting / status section. */
 @Composable
 private fun ProgressMessageSection(currentMessage: Int) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(120.dp)
-            .clearAndSetSemantics { },
+            .height(120.dp),
         contentAlignment = Alignment.Center
     ) {
         AnimatedMessage(currentMessage)
@@ -294,14 +265,14 @@ private fun ProgressDetailsSection(
 
 /**
  * Animated message with fade transitions.
+ * When TalkBack is active the crossfade is skipped and the new text replaces the old instantly,
+ * which keeps the main thread free so the screen reader can announce the new content
  */
 @Composable
 private fun AnimatedMessage(messageResId: Int) {
-    AnimatedContent(
-        targetState = stringResource(messageResId),
-        transitionSpec = MorpheAnimations.fadeCrossfade(1000),
-        label = "message_animation"
-    ) { message ->
+    val reduceMotion = rememberAccessibilityEnabled()
+    val message = stringResource(messageResId)
+    if (reduceMotion) {
         Text(
             text = message,
             style = MaterialTheme.typography.titleLarge,
@@ -311,6 +282,22 @@ private fun AnimatedMessage(messageResId: Int) {
             maxLines = 4,
             overflow = TextOverflow.Ellipsis
         )
+    } else {
+        AnimatedContent(
+            targetState = message,
+            transitionSpec = MorpheAnimations.fadeCrossfade(1000),
+            label = "message_animation"
+        ) { rotatingMessage ->
+            Text(
+                text = rotatingMessage,
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 4,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
     }
 }
 
@@ -326,8 +313,7 @@ private fun CircularProgressWithStats(
 ) {
     Box(
         contentAlignment = Alignment.Center,
-        // Silence; the live region in [SimplePatchingInProgress] reports throttled progress instead
-        modifier = modifier.clearAndSetSemantics { }
+        modifier = modifier
     ) {
         // Background track
         CircularProgressIndicator(
@@ -395,25 +381,40 @@ fun CurrentStepIndicator(
             patcherViewModel.steps.firstOrNull { it.state == State.RUNNING }
         }
     }
+    val reduceMotion = rememberAccessibilityEnabled()
+    val stepName = currentStep?.name
 
-    AnimatedContent(
-        targetState = currentStep?.name,
-        transitionSpec = MorpheAnimations.fadeCrossfade(400),
-        label = "step_animation",
-        // Silence; step changes come from the live region in [SimplePatchingInProgress]
-        modifier = Modifier.clearAndSetSemantics { }
-    ) { stepName ->
+    val stepStyle = when (windowSize.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> MaterialTheme.typography.bodyLarge
+        else -> MaterialTheme.typography.titleMedium
+    }
+
+    if (reduceMotion) {
+        // Skip crossfade so the main thread isn't busy animating when TalkBack tries to announce
         if (stepName != null) {
             Text(
                 text = stepName,
-                style = when (windowSize.widthSizeClass) {
-                    WindowWidthSizeClass.Compact -> MaterialTheme.typography.bodyLarge
-                    else -> MaterialTheme.typography.titleMedium
-                },
+                style = stepStyle,
                 color = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
+        }
+    } else {
+        AnimatedContent(
+            targetState = stepName,
+            transitionSpec = MorpheAnimations.fadeCrossfade(400),
+            label = "step_animation"
+        ) { name ->
+            if (name != null) {
+                Text(
+                    text = name,
+                    style = stepStyle,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     }
 }
