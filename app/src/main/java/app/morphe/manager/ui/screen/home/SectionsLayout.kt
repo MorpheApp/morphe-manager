@@ -948,6 +948,11 @@ fun MainAppsSection(
         localOrder.mapNotNull { byPackage[it] }
     }
 
+    // Polite TalkBack announcement after a screen-reader-triggered Move action.
+    // Empty until the first move; cleared by the next compose if needed
+    var moveAnnouncement by remember { mutableStateOf("") }
+    val moveAnnouncementFormat = stringResource(R.string.accessibility_app_moved_announcement)
+
     // True empty state: loaded, no apps from any bundle (no sources / all disabled)
     val isNoSourcesState = !stableLoadingState.value && homeAppItems.isEmpty() && hiddenAppItems.isEmpty()
     // All-hidden state: apps exist but all are hidden
@@ -961,6 +966,14 @@ fun MainAppsSection(
         modifier = modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
+        // Hidden polite live region used to announce the result of TalkBack Move up/down actions
+        Spacer(
+            modifier = Modifier.semantics {
+                liveRegion = LiveRegionMode.Polite
+                contentDescription = moveAnnouncement
+            }
+        )
+
         AnimatedContent(
             targetState = isEmptyState,
             transitionSpec = MorpheAnimations.fadeCrossfade(300),
@@ -1035,10 +1048,13 @@ fun MainAppsSection(
                                         )
                                     }
                                 } else if (isReorderMode.value) {
+                                    // Reorder mode is the sighted drag-and-drop entry point.
+                                    // Screen-reader users get Move up/down directly on each card in normal mode,
+                                    // so we don't duplicate those a11y actions here
                                     itemsIndexed(
                                         items = orderedItems,
                                         key = { _, item -> item.packageName }
-                                    ) { index, item ->
+                                    ) { _, item ->
                                         ReorderableItem(reorderableState, key = item.packageName) { _ ->
                                             DynamicAppCard(
                                                 item = item,
@@ -1057,35 +1073,14 @@ fun MainAppsSection(
                                                         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                                     }
                                                 ),
-                                                onMoveUp = if (index > 0) {
-                                                    {
-                                                        val current = localOrder.toMutableList()
-                                                        val from = current.indexOf(item.packageName)
-                                                        if (from > 0) {
-                                                            val moved = current.removeAt(from)
-                                                            current.add(from - 1, moved)
-                                                            localOrder = current
-                                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                        }
-                                                    }
-                                                } else null,
-                                                onMoveDown = if (index < orderedItems.size - 1) {
-                                                    {
-                                                        val current = localOrder.toMutableList()
-                                                        val from = current.indexOf(item.packageName)
-                                                        if (from in 0 until current.size - 1) {
-                                                            val moved = current.removeAt(from)
-                                                            current.add(from + 1, moved)
-                                                            localOrder = current
-                                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                        }
-                                                    }
-                                                } else null,
                                                 modifier = Modifier.animateItem()
                                             )
                                         }
                                     }
                                 } else {
+                                    // Direct reorder a11y actions are exposed only when there's no search
+                                    // filter and no multi-select active so the indices match localOrder
+                                    val directReorderAllowed = searchQuery.isBlank() && !isMultiSelectMode.value
                                     itemsIndexed(
                                         items = filteredItems,
                                         key = { _, item -> item.packageName }
@@ -1121,6 +1116,36 @@ fun MainAppsSection(
                                                 else
                                                     selectedPackages.value + item.packageName
                                             },
+                                            onMoveUp = if (directReorderAllowed && index > 0) {
+                                                {
+                                                    val current = localOrder.toMutableList()
+                                                    val from = current.indexOf(item.packageName)
+                                                    if (from > 0) {
+                                                        val moved = current.removeAt(from)
+                                                        current.add(from - 1, moved)
+                                                        localOrder = current
+                                                        onSaveOrder(current)
+                                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                        moveAnnouncement = moveAnnouncementFormat
+                                                            .format(item.displayName, from, current.size)
+                                                    }
+                                                }
+                                            } else null,
+                                            onMoveDown = if (directReorderAllowed && index < filteredItems.size - 1) {
+                                                {
+                                                    val current = localOrder.toMutableList()
+                                                    val from = current.indexOf(item.packageName)
+                                                    if (from in 0 until current.size - 1) {
+                                                        val moved = current.removeAt(from)
+                                                        current.add(from + 1, moved)
+                                                        localOrder = current
+                                                        onSaveOrder(current)
+                                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                        moveAnnouncement = moveAnnouncementFormat
+                                                            .format(item.displayName, from + 2, current.size)
+                                                    }
+                                                }
+                                            } else null,
                                             modifier = Modifier
                                                 .animateItem()
                                                 .then(
