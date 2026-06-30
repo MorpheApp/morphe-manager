@@ -1038,7 +1038,7 @@ fun MainAppsSection(
                                     itemsIndexed(
                                         items = orderedItems,
                                         key = { _, item -> item.packageName }
-                                    ) { _, item ->
+                                    ) { index, item ->
                                         ReorderableItem(reorderableState, key = item.packageName) { _ ->
                                             DynamicAppCard(
                                                 item = item,
@@ -1057,6 +1057,30 @@ fun MainAppsSection(
                                                         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                                     }
                                                 ),
+                                                onMoveUp = if (index > 0) {
+                                                    {
+                                                        val current = localOrder.toMutableList()
+                                                        val from = current.indexOf(item.packageName)
+                                                        if (from > 0) {
+                                                            val moved = current.removeAt(from)
+                                                            current.add(from - 1, moved)
+                                                            localOrder = current
+                                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                        }
+                                                    }
+                                                } else null,
+                                                onMoveDown = if (index < orderedItems.size - 1) {
+                                                    {
+                                                        val current = localOrder.toMutableList()
+                                                        val from = current.indexOf(item.packageName)
+                                                        if (from in 0 until current.size - 1) {
+                                                            val moved = current.removeAt(from)
+                                                            current.add(from + 1, moved)
+                                                            localOrder = current
+                                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                        }
+                                                    }
+                                                } else null,
                                                 modifier = Modifier.animateItem()
                                             )
                                         }
@@ -1478,7 +1502,9 @@ private fun DynamicAppCard(
     isSelected: Boolean = false,
     isMultiSelectMode: Boolean = false,
     onLongPress: () -> Unit = {},
-    dragHandleModifier: Modifier? = null
+    dragHandleModifier: Modifier? = null,
+    onMoveUp: (() -> Unit)? = null,
+    onMoveDown: (() -> Unit)? = null
 ) {
     val showHideDialog = remember { mutableStateOf(false) }
     val density = LocalDensity.current
@@ -1510,6 +1536,8 @@ private fun DynamicAppCard(
 
     val hideLabel = stringResource(R.string.hide)
     val patchesLabel = stringResource(R.string.patches)
+    val moveUpLabel = stringResource(R.string.accessibility_move_up)
+    val moveDownLabel = stringResource(R.string.accessibility_move_down)
     val errorContainer = MaterialTheme.colorScheme.errorContainer
     val onErrorContainer = MaterialTheme.colorScheme.onErrorContainer
     val primaryContainer = MaterialTheme.colorScheme.primaryContainer
@@ -1533,10 +1561,16 @@ private fun DynamicAppCard(
     }
 
     Box(modifier = modifier.fillMaxWidth().semantics {
-        customActions = listOf(
-            CustomAccessibilityAction(hideLabel) { showHideDialog.value = true; true },
-            CustomAccessibilityAction(patchesLabel) { onShowPatches(); true }
-        )
+        customActions = buildList {
+            add(CustomAccessibilityAction(hideLabel) { showHideDialog.value = true; true })
+            add(CustomAccessibilityAction(patchesLabel) { onShowPatches(); true })
+            if (onMoveUp != null) {
+                add(CustomAccessibilityAction(moveUpLabel) { onMoveUp(); true })
+            }
+            if (onMoveDown != null) {
+                add(CustomAccessibilityAction(moveDownLabel) { onMoveDown(); true })
+            }
+        }
     }) {
         SwipeableCardContainer(
             offsetX = offsetX,

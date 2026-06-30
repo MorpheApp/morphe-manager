@@ -862,6 +862,8 @@ The image dimensions must be as follows:
     <string name="reorder_done">Order saved</string>
     <string name="reset_order">Reset order</string>
     <string name="reset_order_done">Order reset</string>
+    <string name="accessibility_move_up">Move up</string>
+    <string name="accessibility_move_down">Move down</string>
     <string name="rename">Rename</string>
     <string name="import_">Import</string>
     <string name="export">Export</string>

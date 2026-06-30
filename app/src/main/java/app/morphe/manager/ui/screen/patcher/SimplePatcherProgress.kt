@@ -20,6 +20,11 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -66,12 +71,35 @@ fun SimplePatchingInProgress(
         }
     }
 
+    // Throttle to 10% increments to prevent TalkBack TTS flood on low-end devices
+    val announcedPercent by remember {
+        derivedStateOf { ((progress * 10).toInt() * 10).coerceIn(0, 100) }
+    }
+    val runningStepName by remember {
+        derivedStateOf {
+            patcherViewModel.steps.firstOrNull { it.state == State.RUNNING }?.name
+        }
+    }
+    val applyingPatchesLabel = stringResource(R.string.applying_patches)
+    val accessibilityProgressDescription = remember(runningStepName, announcedPercent, completed, total) {
+        val label = runningStepName ?: applyingPatchesLabel
+        "$label, $announcedPercent%, $completed/$total"
+    }
+
     // Main content area
     Column(
         modifier = Modifier
             .fillMaxSize()
             .navigationBarsPadding()
     ) {
+        // Hidden polite live region; visual widgets below are silenced via clearAndSetSemantics
+        Spacer(
+            modifier = Modifier.semantics {
+                contentDescription = accessibilityProgressDescription
+                liveRegion = LiveRegionMode.Polite
+            }
+        )
+
         // Content with weight to push bottom bar down
         Box(
             modifier = Modifier
@@ -212,15 +240,14 @@ private fun AdaptiveProgressContent(
     }
 }
 
-/**
- * Progress message section.
- */
+/** Progress message section. Silenced for a11y; status comes from the live region in [SimplePatchingInProgress]. */
 @Composable
 private fun ProgressMessageSection(currentMessage: Int) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(120.dp),
+            .height(120.dp)
+            .clearAndSetSemantics { },
         contentAlignment = Alignment.Center
     ) {
         AnimatedMessage(currentMessage)
@@ -299,7 +326,8 @@ private fun CircularProgressWithStats(
 ) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = modifier
+        // Silence; the live region in [SimplePatchingInProgress] reports throttled progress instead
+        modifier = modifier.clearAndSetSemantics { }
     ) {
         // Background track
         CircularProgressIndicator(
@@ -371,7 +399,9 @@ fun CurrentStepIndicator(
     AnimatedContent(
         targetState = currentStep?.name,
         transitionSpec = MorpheAnimations.fadeCrossfade(400),
-        label = "step_animation"
+        label = "step_animation",
+        // Silence; step changes come from the live region in [SimplePatchingInProgress]
+        modifier = Modifier.clearAndSetSemantics { }
     ) { stepName ->
         if (stepName != null) {
             Text(

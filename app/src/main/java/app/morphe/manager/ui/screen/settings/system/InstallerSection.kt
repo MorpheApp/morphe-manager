@@ -10,8 +10,8 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
@@ -103,6 +103,10 @@ fun InstallerSection(
                 onClick = {
                     settingsViewModel.setPromptInstallerOnInstall(!promptInstallerOnInstall)
                 },
+                modifier = Modifier.semantics {
+                    role = Role.Switch
+                    stateDescription = if (promptInstallerOnInstall) enabledState else disabledState
+                },
                 leadingContent = {
                     MorpheIcon(icon = Icons.Outlined.Android)
                 },
@@ -111,10 +115,7 @@ fun InstallerSection(
                 trailingContent = {
                     MorpheSwitch(
                         checked = promptInstallerOnInstall,
-                        onCheckedChange = null,
-                        modifier = Modifier.semantics {
-                            stateDescription = if (promptInstallerOnInstall) enabledState else disabledState
-                        }
+                        onCheckedChange = null
                     )
                 }
             )
@@ -238,6 +239,7 @@ fun InstallerSelectionDialog(
     // Localized strings for accessibility
     val selectedState = stringResource(R.string.selected)
     val notSelectedState = stringResource(R.string.not_selected)
+    val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
 
     MorpheDialog(
@@ -307,7 +309,14 @@ fun InstallerSelectionDialog(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(MaterialTheme.shapes.medium)
-                            .clickable { onAutoInstallToggle?.invoke(!autoInstallEnabled) }
+                            .toggleable(
+                                value = autoInstallEnabled,
+                                role = Role.Switch,
+                                onValueChange = { onAutoInstallToggle?.invoke(it) }
+                            )
+                            .semantics {
+                                stateDescription = if (autoInstallEnabled) enabledState else disabledState
+                            }
                             .padding(vertical = 12.dp, horizontal = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(16.dp)

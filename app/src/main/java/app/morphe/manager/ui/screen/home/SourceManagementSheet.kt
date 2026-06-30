@@ -17,6 +17,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -468,22 +469,8 @@ private fun BundleManagementCard(
             }
         }
 
-        Column(modifier = Modifier
-            .clickable(
-                indication = null,
-                interactionSource = remember { MutableInteractionSource() }
-            ) {
-                if (!forceExpanded) onToggleExpanded()
-            }
-            .semantics {
-                if (!forceExpanded) {
-                    role = Role.Button
-                    stateDescription = if (expanded) expandedState else collapsedState
-                }
-                this.contentDescription = contentDesc
-            }
-            .padding(16.dp)) {
-            // Header
+        Column(modifier = Modifier.padding(16.dp)) {
+            // Click target only on the header so expanded children stay independently focusable for screen readers
             BundleCardHeader(
                 bundle = bundle,
                 updateInfo = updateInfo,
@@ -492,6 +479,19 @@ private fun BundleManagementCard(
                 enabled = isEnabled,
                 metadataFetchError = metadataFetchError,
                 modifier = longPressModifier
+                    .clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) {
+                        if (!forceExpanded) onToggleExpanded()
+                    }
+                    .semantics(mergeDescendants = true) {
+                        if (!forceExpanded) {
+                            role = Role.Button
+                            stateDescription = if (expanded) expandedState else collapsedState
+                        }
+                        this.contentDescription = contentDesc
+                    }
             )
 
             // Expanded content
@@ -591,7 +591,14 @@ private fun BundleManagementCard(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { onPrereleasesToggle(!currentUsePrerelease) }
+                                .toggleable(
+                                    value = currentUsePrerelease,
+                                    role = Role.Switch,
+                                    onValueChange = onPrereleasesToggle
+                                )
+                                .semantics {
+                                    stateDescription = if (currentUsePrerelease) enabledState else disabledState
+                                }
                                 .padding(vertical = 4.dp)
                                 .then(
                                     if (onPrereleaseBtnPositioned != null)
@@ -620,7 +627,7 @@ private fun BundleManagementCard(
 
                             MorpheSwitch(
                                 checked = currentUsePrerelease,
-                                onCheckedChange = onPrereleasesToggle
+                                onCheckedChange = null
                             )
                         }
                     }
@@ -636,8 +643,13 @@ private fun BundleManagementCard(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable {
-                                    onExperimentalVersionsToggle?.invoke(!useExperimentalVersions)
+                                .toggleable(
+                                    value = useExperimentalVersions,
+                                    role = Role.Switch,
+                                    onValueChange = { onExperimentalVersionsToggle?.invoke(it) }
+                                )
+                                .semantics {
+                                    stateDescription = if (useExperimentalVersions) enabledState else disabledState
                                 }
                                 .padding(vertical = 4.dp),
                             verticalAlignment = Alignment.CenterVertically,
@@ -660,7 +672,7 @@ private fun BundleManagementCard(
 
                             MorpheSwitch(
                                 checked = useExperimentalVersions,
-                                onCheckedChange = { onExperimentalVersionsToggle?.invoke(it) }
+                                onCheckedChange = null
                             )
                         }
                     }
