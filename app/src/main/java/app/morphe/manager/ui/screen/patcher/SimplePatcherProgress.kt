@@ -212,7 +212,9 @@ private fun AdaptiveProgressContent(
     }
 }
 
-/** Rotating greeting / status section. */
+/**
+ * Progress message section.
+ */
 @Composable
 private fun ProgressMessageSection(currentMessage: Int) {
     Box(
@@ -265,8 +267,6 @@ private fun ProgressDetailsSection(
 
 /**
  * Animated message with fade transitions.
- * When TalkBack is active the crossfade is skipped and the new text replaces the old instantly,
- * which keeps the main thread free so the screen reader can announce the new content
  */
 @Composable
 private fun AnimatedMessage(messageResId: Int) {

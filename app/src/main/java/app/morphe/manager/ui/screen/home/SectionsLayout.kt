@@ -1048,9 +1048,6 @@ fun MainAppsSection(
                                         )
                                     }
                                 } else if (isReorderMode.value) {
-                                    // Reorder mode is the sighted drag-and-drop entry point.
-                                    // Screen-reader users get Move up/down directly on each card in normal mode,
-                                    // so we don't duplicate those a11y actions here
                                     itemsIndexed(
                                         items = orderedItems,
                                         key = { _, item -> item.packageName }
