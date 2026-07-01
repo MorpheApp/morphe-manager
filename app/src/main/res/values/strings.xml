@@ -733,6 +733,14 @@ The image dimensions must be as follows:
     <string name="settings_system_import_manager_settings_description">Backs up and restores your Morphe settings</string>
     <string name="settings_system_import_manager_settings_fail">Failed to import Morphe settings: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe settings imported</string>
+    <string name="settings_system_import_manager_settings_mode_title">Import Morphe settings</string>
+    <string name="settings_system_import_manager_settings_mode_description">Choose how the imported settings and sources should be applied</string>
+    <string name="settings_system_import_selections_mode_title">Import patch selections</string>
+    <string name="settings_system_import_selections_mode_description">Choose how the imported selections and patch options should be applied</string>
+    <string name="import_mode_replace_title">Replace existing</string>
+    <string name="import_mode_replace_description">Match the backup exactly. Items missing from the backup will be removed</string>
+    <string name="import_mode_merge_title">Merge with existing</string>
+    <string name="import_mode_merge_description">Add missing items from the backup. Existing items are kept unchanged</string>
     <string name="settings_system_export_manager_settings_fail">Failed to export Morphe settings: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe settings exported</string>
     <string name="settings_system_debug">Debug</string>

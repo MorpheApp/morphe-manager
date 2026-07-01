@@ -202,7 +202,10 @@ class ImportExportViewModel(
         }
     }
 
-    fun importManagerSettings(source: Uri) = viewModelScope.launch {
+    fun importManagerSettings(
+        source: Uri,
+        mode: PatchBundleRepository.ImportMode = PatchBundleRepository.ImportMode.Merge,
+    ) = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_import_manager_settings_fail, "Failed to import manager settings") {
             val exportFile = withContext(Dispatchers.IO) {
                 contentResolver.openInputStream(source)!!.use {
@@ -218,10 +221,11 @@ class ImportExportViewModel(
                 applyAppLanguage(it)
             }
 
-            val bundles = exportFile.settings.customBundles
-            if (!bundles.isNullOrEmpty()) {
-                patchBundleRepository.importCustomBundles(bundles)
-            }
+            // Always call the repository so Replace can clear existing custom sources even when the backup has none
+            patchBundleRepository.importCustomBundles(
+                exportFile.settings.customBundles.orEmpty(),
+                mode,
+            )
 
             app.toast(app.getString(R.string.settings_system_import_manager_settings_success))
         }
@@ -352,9 +356,16 @@ class ImportExportViewModel(
      * Import patch selections and options from a file.
      * Supports both [PatchBundleDataExportFile] (single bundle) and
      * [AllSelectionsExportFile] (all bundles) formats, detected automatically.
-     * Merges into existing selections without clearing them first.
+     *
+     * In [PatchBundleRepository.ImportMode.Merge] mode existing selections are preserved
+     * and new ones are added on top. In [PatchBundleRepository.ImportMode.Replace] mode the
+     * imported state fully overwrites the current state: bundles absent from the backup have
+     * their selections and options cleared.
      */
-    fun importAllSelections(source: Uri) = viewModelScope.launch {
+    fun importAllSelections(
+        source: Uri,
+        mode: PatchBundleRepository.ImportMode = PatchBundleRepository.ImportMode.Merge,
+    ) = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_import_source_data_fail, "Failed to import selections") {
             val bytes = withContext(Dispatchers.IO) {
                 contentResolver.openInputStream(source)!!.use { it.readBytes() }
@@ -375,29 +386,63 @@ class ImportExportViewModel(
             }
 
             withContext(Dispatchers.IO) {
-                bundleFiles.forEach { exportFile ->
-                    // Remap the exported UID to the current device's UID for the same bundle.
-                    // Without this, imported selections are silently discarded on fresh installs
-                    // because bundle UIDs are randomly generated and don't match across devices.
-                    val bundleUid = exportFile.bundleSource
+                // Remap exported UIDs to current-device UIDs. Bundle UIDs are randomly generated
+                // per device so the raw exported value only matches on the origin device
+                val remapped = bundleFiles.map { file ->
+                    val uid = file.bundleSource
                         ?.let { patchBundleRepository.resolveUidForEndpoint(it) }
-                        ?: exportFile.bundleUid
-                    // Skip if the bundle is not loaded - inserting with an unknown UID would
-                    // violate the patch_selections FK constraint on patch_bundles.uid.
-                    if (!patchBundleRepository.isUidLoaded(bundleUid)) return@forEach
-                    exportFile.selections.forEach { (packageName, patchList) ->
-                        patchSelectionRepository.importForPackageAndBundle(
-                            packageName = packageName,
-                            bundleUid = bundleUid,
-                            patches = patchList
-                        )
+                        ?: file.bundleUid
+                    file to uid
+                }
+                val incomingUids = remapped
+                    .map { it.second }
+                    .filter { patchBundleRepository.isUidLoaded(it) }
+                    .toSet()
+
+                // Replace mode: clear selections/options for bundles that currently have data
+                // but are not represented in the backup
+                if (mode == PatchBundleRepository.ImportMode.Replace) {
+                    val existingUids = patchSelectionRepository.getAllBundleUids().toSet()
+                    (existingUids - incomingUids).forEach { uid ->
+                        patchSelectionRepository.import(uid, emptyMap())
+                        patchOptionsRepository.resetOptionsForPatchBundle(uid)
                     }
-                    exportFile.options?.forEach { (packageName, packageOptions) ->
-                        patchOptionsRepository.importOptionsForBundle(
-                            packageName = packageName,
-                            bundleUid = bundleUid,
-                            options = packageOptions
-                        )
+                }
+
+                remapped.forEach { (exportFile, bundleUid) ->
+                    // Skip if the bundle is not loaded - inserting with an unknown UID would
+                    // violate the patch_selections FK constraint on patch_bundles.uid
+                    if (!patchBundleRepository.isUidLoaded(bundleUid)) return@forEach
+
+                    when (mode) {
+                        PatchBundleRepository.ImportMode.Replace -> {
+                            // Full per-bundle replace: reset first, then load from backup
+                            patchSelectionRepository.import(bundleUid, exportFile.selections)
+                            patchOptionsRepository.resetOptionsForPatchBundle(bundleUid)
+                            exportFile.options?.forEach { (packageName, packageOptions) ->
+                                patchOptionsRepository.importOptionsForBundle(
+                                    packageName = packageName,
+                                    bundleUid = bundleUid,
+                                    options = packageOptions
+                                )
+                            }
+                        }
+                        PatchBundleRepository.ImportMode.Merge -> {
+                            exportFile.selections.forEach { (packageName, patchList) ->
+                                patchSelectionRepository.importForPackageAndBundle(
+                                    packageName = packageName,
+                                    bundleUid = bundleUid,
+                                    patches = patchList
+                                )
+                            }
+                            exportFile.options?.forEach { (packageName, packageOptions) ->
+                                patchOptionsRepository.importOptionsForBundle(
+                                    packageName = packageName,
+                                    bundleUid = bundleUid,
+                                    options = packageOptions
+                                )
+                            }
+                        }
                     }
                 }
             }
