@@ -657,6 +657,14 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_manager_settings_description">גיבוי ושחזור של הגדרות Morphe שלך</string>
     <string name="settings_system_import_manager_settings_fail">נכשל ייבוא הגדרות Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">הגדרות Morphe יובאו</string>
+    <string name="settings_system_import_manager_settings_mode_title">ייבוא הגדרות Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">בחר כיצד יש ליישם את ההגדרות והמקורות המיובאים</string>
+    <string name="settings_system_import_selections_mode_title">ייבוא בחירות תיקונים</string>
+    <string name="settings_system_import_selections_mode_description">בחר כיצד יש ליישם את הפריטים המיובאים ואת אפשרויות התיקון</string>
+    <string name="import_mode_replace_title">החלף קיימים</string>
+    <string name="import_mode_replace_description">התאם במדויק את הגיבוי. פריטים חסרים מהגיבוי יוסרו</string>
+    <string name="import_mode_merge_title">מזג עם קיימים</string>
+    <string name="import_mode_merge_description">הוסף פריטים חסרים מהגיבוי. פריטים קיימים יישארו ללא שינוי</string>
     <string name="settings_system_export_manager_settings_fail">נכשל לייצא הגדרות Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">הגדרות Morphe ייצאו</string>
     <string name="settings_system_debug">debug</string>

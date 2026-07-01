@@ -673,6 +673,14 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_import_manager_settings_description">Fazer cópia de segurança e restaurar as tuas definições do Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Erro ao importar as definições do Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Definições do Morphe importadas</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importar definições do Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Escolha como as definições e fontes importadas devem ser aplicadas</string>
+    <string name="settings_system_import_selections_mode_title">Importar seleções de modificação</string>
+    <string name="settings_system_import_selections_mode_description">Escolha como as seleções e opções de patch importadas devem ser aplicadas</string>
+    <string name="import_mode_replace_title">Substituir existentes</string>
+    <string name="import_mode_replace_description">Corresponder exatamente com o backup. Itens ausentes no backup serão removidos</string>
+    <string name="import_mode_merge_title">Combinar com os existentes</string>
+    <string name="import_mode_merge_description">Adicionar itens ausentes do backup. Itens existentes serão mantidos inalterados</string>
     <string name="settings_system_export_manager_settings_fail">Erro ao exportar as definições do Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Definições do Morphe exportadas</string>
     <string name="settings_system_debug">Depuração</string>

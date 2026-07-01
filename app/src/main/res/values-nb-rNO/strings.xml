@@ -673,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Sikkerhetskopierer og gjenoppretter Morphe-innstillingene dine</string>
     <string name="settings_system_import_manager_settings_fail">Kunne ikke importere Morphe-innstillinger: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-innstillinger importert</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importer Morphe-innstillinger</string>
+    <string name="settings_system_import_manager_settings_mode_description">Velg hvordan de importerte innstillingene og kildene skal brukes</string>
+    <string name="settings_system_import_selections_mode_title">Importer utvalg av endringer</string>
+    <string name="settings_system_import_selections_mode_description">Velg hvordan de importerte utvalgene og patch-alternativene skal brukes</string>
+    <string name="import_mode_replace_title">Erstatt eksisterende</string>
+    <string name="import_mode_replace_description">Samsvar nøyaktig med sikkerhetskopien. Elementer som mangler fra sikkerhetskopien vil bli fjernet</string>
+    <string name="import_mode_merge_title">Slå sammen med eksisterende</string>
+    <string name="import_mode_merge_description">Legg til manglende elementer fra sikkerhetskopien. Eksisterende elementer forblir uendret</string>
     <string name="settings_system_export_manager_settings_fail">Kunne ikke eksportere Morphe-innstillinger: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe-innstillinger eksportert</string>
     <string name="settings_system_debug">Feilsøking</string>

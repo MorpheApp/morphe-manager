@@ -673,6 +673,14 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_import_manager_settings_description">Maakt een back-up van en herstelt uw Morphe-instellingen</string>
     <string name="settings_system_import_manager_settings_fail">Importeren van Morphe-instellingen mislukt: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-instellingen geïmporteerd</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe-instellingen importeren</string>
+    <string name="settings_system_import_manager_settings_mode_description">Kies hoe de geïmporteerde instellingen en bronnen moeten worden toegepast</string>
+    <string name="settings_system_import_selections_mode_title">Patch-selecties importeren</string>
+    <string name="settings_system_import_selections_mode_description">Kies hoe de geïmporteerde selecties en patch-opties moeten worden toegepast</string>
+    <string name="import_mode_replace_title">Bestaande vervangen</string>
+    <string name="import_mode_replace_description">De back-up exact overeenkomen. Items die ontbreken in de back-up worden verwijderd</string>
+    <string name="import_mode_merge_title">Samenvoegen met bestaande</string>
+    <string name="import_mode_merge_description">Ontbrekende items vanuit de back-up toevoegen. Bestaande items blijven ongewijzigd</string>
     <string name="settings_system_export_manager_settings_fail">Exporteren van Morphe-instellingen mislukt: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe-instellingen geëxporteerd</string>
     <string name="settings_system_debug">Debug</string>

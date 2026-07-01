@@ -669,6 +669,14 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_system_import_manager_settings_description">Varmuuskopioi ja palauta Morphen asetukset</string>
     <string name="settings_system_import_manager_settings_fail">Morphen asetusten tuonti epäonnistui: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphen asetukset tuotu</string>
+    <string name="settings_system_import_manager_settings_mode_title">Tuo Morphen asetukset</string>
+    <string name="settings_system_import_manager_settings_mode_description">Valitse, miten tuodut asetukset ja lähteet käytetään</string>
+    <string name="settings_system_import_selections_mode_title">Tuo korjausvalinnat</string>
+    <string name="settings_system_import_selections_mode_description">Valitse, miten tuodut valinnat ja korjausvaihtoehdot käytetään.</string>
+    <string name="import_mode_replace_title">Korvaa olemassaolevat</string>
+    <string name="import_mode_replace_description">Täsmää varmuuskopion kanssa täsmälleen. Varmuuskopiosta puuttuvat kohteet poistetaan.</string>
+    <string name="import_mode_merge_title">Yhdistä olemassaoleviin</string>
+    <string name="import_mode_merge_description">Lisää varmuuskopiosta puuttuvat kohteet. Olemassaolevat kohteet säilytetään muuttumattomina.</string>
     <string name="settings_system_export_manager_settings_fail">Morphen asetusten vienti epäonnistui: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphen asetukset viety</string>
     <string name="settings_system_debug">Virheenkorjaus</string>

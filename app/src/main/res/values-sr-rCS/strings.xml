@@ -657,6 +657,14 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_system_import_manager_settings_description">Pravi backup i vraća vaše podešavanje aplikacije Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Није успело увожење подешавања Morphe-а: %s</string>
     <string name="settings_system_import_manager_settings_success">Увезена су подешавања Morphe-а</string>
+    <string name="settings_system_import_manager_settings_mode_title">Uvoz podešavanja Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Izaberite kako da se primene uvezeni podaci i izvori</string>
+    <string name="settings_system_import_selections_mode_title">Uvoz izbora paketa</string>
+    <string name="settings_system_import_selections_mode_description">Izaberite kako da se primene uvezeni izbori i opcije zakrpe</string>
+    <string name="import_mode_replace_title">Zameni postojeće</string>
+    <string name="import_mode_replace_description">Tačno uporedi sa rezervnom kopijom. Stavke koje nedostaju u rezervnoj kopiji biće uklonjene</string>
+    <string name="import_mode_merge_title">Spoji sa postojećim</string>
+    <string name="import_mode_merge_description">Dodaj nedostajuće stavke iz rezervne kopije. Postojeće stavke ostaju nepromenjene</string>
     <string name="settings_system_export_manager_settings_fail">Није успело извожење подешавања Morphe-а: %s</string>
     <string name="settings_system_export_manager_settings_success">Извезена су подешавања Morphe-а</string>
     <string name="settings_system_debug">Debug</string>

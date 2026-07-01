@@ -673,6 +673,14 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_import_manager_settings_description">Realizează copii de rezervă și restaurează setările Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Eșec la importarea setărilor Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Setările Morphe au fost importate</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importă setări Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Alegeți modul în care setările și sursele importate trebuie aplicate</string>
+    <string name="settings_system_import_selections_mode_title">Importă selecții de patch-uri</string>
+    <string name="settings_system_import_selections_mode_description">Alegeți modul în care selecțiile și opțiunile de corecție importate ar trebui aplicate</string>
+    <string name="import_mode_replace_title">Înlocuire existente</string>
+    <string name="import_mode_replace_description">Corespondența exactă cu copia de rezervă. Elementele lipsă din copia de rezervă vor fi eliminate</string>
+    <string name="import_mode_merge_title">Combinare cu cele existente</string>
+    <string name="import_mode_merge_description">Adăugare elemente lipsă din copia de rezervă. Elementele existente rămân neschimbate</string>
     <string name="settings_system_export_manager_settings_fail">A eșuat exportarea setărilor Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Setările Morphe au fost exportate</string>
     <string name="settings_system_debug">Depanare</string>

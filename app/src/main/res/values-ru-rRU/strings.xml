@@ -673,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Создает резервные копии и восстанавливает настройки Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Не удалось импортировать настройки Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe настройки импортированы</string>
+    <string name="settings_system_import_manager_settings_mode_title">Импортировать настройки Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Выберите, как применить импортированные настройки и источники</string>
+    <string name="settings_system_import_selections_mode_title">Импортировать выбор патчей</string>
+    <string name="settings_system_import_selections_mode_description">Выберите, как применять импортированные выбранные элементы и параметры патча</string>
+    <string name="import_mode_replace_title">Заменить существующие</string>
+    <string name="import_mode_replace_description">Точно соответствовать резервной копии. Элементы, отсутствующие в резервной копии, будут удалены</string>
+    <string name="import_mode_merge_title">Объединить с существующими</string>
+    <string name="import_mode_merge_description">Добавить отсутствующие элементы из резервной копии. Существующие элементы остаются без изменений</string>
     <string name="settings_system_export_manager_settings_fail">Не удалось экспортировать настройки Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe настройки экспортированы</string>
     <string name="settings_system_debug">Отладка</string>

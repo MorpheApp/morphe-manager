@@ -673,6 +673,14 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_system_import_manager_settings_description">Maak \'n rugsteun van en herstel jou Morphe-instellings</string>
     <string name="settings_system_import_manager_settings_fail">Kon Morphe-instellings nie importeer nie: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-instellings geïmporteer</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importeer Morphe-instellings</string>
+    <string name="settings_system_import_manager_settings_mode_description">Kies hoe die ingevoerde instellings en bronne toegepas moet word</string>
+    <string name="settings_system_import_selections_mode_title">Importeer keurse weergawe</string>
+    <string name="settings_system_import_selections_mode_description">Kies hoe die ingevoerde seleksies en pleisteropsies toegepas moet word</string>
+    <string name="import_mode_replace_title">Vervang bestaande</string>
+    <string name="import_mode_replace_description">Pas die rugsteun presies by. Ontbrekende items van die rugsteun sal verwyder word</string>
+    <string name="import_mode_merge_title">Voeg by bestaande</string>
+    <string name="import_mode_merge_description">Voeg ontbrekende items van die rugsteun by. Bestaande items bly onveranderd</string>
     <string name="settings_system_export_manager_settings_fail">Kon Morphe-instellings nie uitvoer nie: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe-instellings uitgevoer</string>
     <string name="settings_system_debug">Ontfout</string>

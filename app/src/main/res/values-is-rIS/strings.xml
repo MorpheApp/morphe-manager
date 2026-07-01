@@ -668,6 +668,14 @@ Myndastærðin verður að vera sem hér segir:
     <string name="settings_system_import_manager_settings_description">Backup og endurheimta Morphe áhorf</string>
     <string name="settings_system_import_manager_settings_fail">Ekki tókst að flytja inn Morphe stillingar: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe stillingar fluttar inn</string>
+    <string name="settings_system_import_manager_settings_mode_title">Innflutning stillinga Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Veldu hvernig innfluttu stillingar og heimildir á að nota</string>
+    <string name="settings_system_import_selections_mode_title">Innflutning valda á plottum</string>
+    <string name="settings_system_import_selections_mode_description">Veldu hvernig innflutt val og breytingar á stillingum eiga að vera notaðar</string>
+    <string name="import_mode_replace_title">Skipta út núverandi</string>
+    <string name="import_mode_replace_description">Samsvarinnu nákvæmlega við afritið. Hlutir sem vantar úr afritinu verða fjarlægðir</string>
+    <string name="import_mode_merge_title">Samfella við núverandi</string>
+    <string name="import_mode_merge_description">Bæta við vöntunum hlutum úr afritinu. Núverandi hlutir eru óbreyttir</string>
     <string name="settings_system_export_manager_settings_fail">Ekki tókst að flytja út Morphe stillingar: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe stillingar fluttar út</string>
     <string name="settings_system_debug">Debug</string>

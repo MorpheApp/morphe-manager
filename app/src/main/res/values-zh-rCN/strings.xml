@@ -673,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">备份和还原您的 Morphe 设置</string>
     <string name="settings_system_import_manager_settings_fail">导入 Morphe 设置失败：%s</string>
     <string name="settings_system_import_manager_settings_success">Morphe 设置已导入</string>
+    <string name="settings_system_import_manager_settings_mode_title">导入 Morphe 设置</string>
+    <string name="settings_system_import_manager_settings_mode_description">选择导入的设置和资源的应用方式</string>
+    <string name="settings_system_import_selections_mode_title">导入补丁选择</string>
+    <string name="settings_system_import_selections_mode_description">选择如何应用导入的选择和补丁选项</string>
+    <string name="import_mode_replace_title">替换现有</string>
+    <string name="import_mode_replace_description">完全匹配备份。如果备份中缺少项目，则会被移除</string>
+    <string name="import_mode_merge_title">合并现有</string>
+    <string name="import_mode_merge_description">添加备份中缺失的项目。现有项目保持不变</string>
     <string name="settings_system_export_manager_settings_fail">导出 Morphe 设置失败：%s</string>
     <string name="settings_system_export_manager_settings_success">Morphe 设置已导出</string>
     <string name="settings_system_debug">调试</string>

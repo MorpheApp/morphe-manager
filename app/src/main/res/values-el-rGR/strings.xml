@@ -673,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Δημιουργεί αντίγραφα ασφαλείας και επαναφέρει τις ρυθμίσεις του Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Αποτυχία εισαγωγής των ρυθμίσεων του Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Επιτυχής εισαγωγή ρυθμίσεων του Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_title">Εισαγωγή ρυθμίσεων του Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Επιλέξτε πώς θα εφαρμοστούν οι εισαγόμενες ρυθμίσεις και οι πηγές</string>
+    <string name="settings_system_import_selections_mode_title">Εισαγωγή επιλεγμένων τροποποιήσεων</string>
+    <string name="settings_system_import_selections_mode_description">Επιλέξτε τον τρόπο με τον οποίο θα εφαρμοστούν οι εισαγόμενες επιλογές και οι επιλογές επιδιόρθωσης</string>
+    <string name="import_mode_replace_title">Αντικατάσταση υπάρχοντος</string>
+    <string name="import_mode_replace_description">Ακριβής αντιστοίχιση με το αντίγραφο ασφαλείας. Τα στοιχεία που λείπουν από το αντίγραφο ασφαλείας θα διαγραφούν</string>
+    <string name="import_mode_merge_title">Συγχώνευση με υπάρχοντα</string>
+    <string name="import_mode_merge_description">Προσθήκη στοιχείων που λείπουν από το αντίγραφο ασφαλείας. Τα υπάρχοντα στοιχεία θα παραμείνουν χωρίς αλλαγές</string>
     <string name="settings_system_export_manager_settings_fail">Αποτυχία εξαγωγής των ρυθμίσεων του Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Επιτυχής εξαγωγή ρυθμίσεων του Morphe</string>
     <string name="settings_system_debug">Εντοπισμός σφαλμάτων</string>

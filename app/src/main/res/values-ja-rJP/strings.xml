@@ -673,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Morphe の設定をバックアップおよび復元します</string>
     <string name="settings_system_import_manager_settings_fail">Morphe の設定のインポートに失敗しました: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe の設定をインポートしました</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe の設定をインポート</string>
+    <string name="settings_system_import_manager_settings_mode_description">インポートした設定とソースの適用方法を選択してください</string>
+    <string name="settings_system_import_selections_mode_title">パッチ選択をインポート</string>
+    <string name="settings_system_import_selections_mode_description">インポートした選択項目とパッチオプションの適用方法を選択してください。</string>
+    <string name="import_mode_replace_title">既存のものを置き換える</string>
+    <string name="import_mode_replace_description">バックアップと完全に一致させます。バックアップにない項目は削除されます</string>
+    <string name="import_mode_merge_title">既存のものをマージする</string>
+    <string name="import_mode_merge_description">バックアップから不足している項目を追加します。既存の項目は変更されません</string>
     <string name="settings_system_export_manager_settings_fail">Morphe の設定のエクスポートに失敗しました: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe の設定をエクスポートしました</string>
     <string name="settings_system_debug">デバッグ</string>

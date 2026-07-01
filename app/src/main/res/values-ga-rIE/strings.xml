@@ -671,6 +671,14 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_import_manager_settings_description">Déanann sé cúltaca de do shocruithe Morphe agus athchóiríonn sé iad</string>
     <string name="settings_system_import_manager_settings_fail">Theip ar shocruithe Morphe a iompórtáil: %s</string>
     <string name="settings_system_import_manager_settings_success">Socruithe Morphe allmhairithe</string>
+    <string name="settings_system_import_manager_settings_mode_title">Iompórtáil socruithe Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Roghnaigh conas a dhéanfar socruithe agus foinsí allmhairithe a chur i bhfeidhm</string>
+    <string name="settings_system_import_selections_mode_title">Iompórtáil roghanna paiste</string>
+    <string name="settings_system_import_selections_mode_description">Roghnaigh conas ba cheart na roghanna allmhairithe agus na roghanna páirce a chur i bhfeidhm</string>
+    <string name="import_mode_replace_title">Athraigh an ceann atá ann cheana</string>
+    <string name="import_mode_replace_description">Comhthacaigh go cruinn leis an gcóip bhreise. Bainfear na míreanna atá ar iarraidh ón gcóip bhreise</string>
+    <string name="import_mode_merge_title">Comhthacaigh le ceann atá ann cheana</string>
+    <string name="import_mode_merge_description">Cuir na míreanna atá ar iarraidh ón gcóip bhreise. Déantar na míreanna atá ann cheana a choinneáil gan athrú</string>
     <string name="settings_system_export_manager_settings_fail">Theip ar shocruithe Morphe a easpórtáil: %s</string>
     <string name="settings_system_export_manager_settings_success">Socruithe Morphe onnmhairithe</string>
     <string name="settings_system_debug">Dífhabhtú</string>

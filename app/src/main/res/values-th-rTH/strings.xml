@@ -673,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">สำรองและกู้คืนการตั้งค่า Morphe ของคุณ</string>
     <string name="settings_system_import_manager_settings_fail">การนำเข้าการตั้งค่า Morphe ไม่สำเร็จ: %s</string>
     <string name="settings_system_import_manager_settings_success">นำเข้าการตั้งค่า Morphe สำเร็จ</string>
+    <string name="settings_system_import_manager_settings_mode_title">นำเข้าการตั้งค่า Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">เลือกวิธีการใช้การตั้งค่าและแหล่งที่มาที่นำเข้า</string>
+    <string name="settings_system_import_selections_mode_title">นำเข้าการเลือกแพตช์</string>
+    <string name="settings_system_import_selections_mode_description">เลือกวิธีการนำเข้าตัวเลือกที่เลือกและตัวเลือกการแพทช์ไปใช้</string>
+    <string name="import_mode_replace_title">แทนที่ที่มีอยู่</string>
+    <string name="import_mode_replace_description">ตรงกับข้อมูลสำรองอย่างแน่นอน รายการที่ไม่มีในข้อมูลสำรองจะถูกลบออก</string>
+    <string name="import_mode_merge_title">รวมเข้ากับที่มีอยู่</string>
+    <string name="import_mode_merge_description">เพิ่มรายการที่ไม่มีในข้อมูลสำรอง รายการที่มีอยู่จะยังคงเดิม</string>
     <string name="settings_system_export_manager_settings_fail">การส่งออกการตั้งค่า Morphe ไม่สำเร็จ: %s</string>
     <string name="settings_system_export_manager_settings_success">ส่งออกการตั้งค่า Morphe สำเร็จ</string>
     <string name="settings_system_debug">ส่งออกไฟล์การพัฒยายสำหรับการแก้ไข</string>

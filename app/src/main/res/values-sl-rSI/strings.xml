@@ -673,6 +673,14 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_system_import_manager_settings_description">Varnostno kopira in obnovi nastavitve Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Ni bilo mogoče uvoziti nastavitev Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Nastavitve Morphe so bile uvožene</string>
+    <string name="settings_system_import_manager_settings_mode_title">Uvoz nastavitev Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Izberite, kako naj se uporabijo uvožene nastavitve in viri.</string>
+    <string name="settings_system_import_selections_mode_title">Uvoz izbire popravkov</string>
+    <string name="settings_system_import_selections_mode_description">Izberite, kako naj bodo uporabljene uvožene izbire in možnosti popravka.</string>
+    <string name="import_mode_replace_title">Zamenjaj obstoječe</string>
+    <string name="import_mode_replace_description">Natančno ujemaj z varnostno kopijo. Postavke, ki manjkajo v varnostni kopiji, bodo odstranjene.</string>
+    <string name="import_mode_merge_title">Združi z obstoječim</string>
+    <string name="import_mode_merge_description">Dodaj manjkajoče postavke iz varnostne kopije. Obstoječe postavke ostanejo nespremenjene.</string>
     <string name="settings_system_export_manager_settings_fail">Ni bilo mogoče izvoziti nastavitev Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Izvožene so bile nastavitve Morphe</string>
     <string name="settings_system_debug">Razhroščevanje</string>

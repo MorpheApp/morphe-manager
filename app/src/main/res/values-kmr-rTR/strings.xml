@@ -671,6 +671,14 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_import_manager_settings_description">Mîhengên Morphe’yê pişgîrî u dîsa vekirin</string>
     <string name="settings_system_import_manager_settings_fail">Ne serketî sawekirina sazkirina Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Sawekirina sazkirina Morphe serketî</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe mîhengên îthalkirin</string>
+    <string name="settings_system_import_manager_settings_mode_description">Hilbijêrin ka mîhengên îthalkirî û çavkanî çawa bên bikar anîn</string>
+    <string name="settings_system_import_selections_mode_title">Vebijarkên patchê yên îthalkirî</string>
+    <string name="settings_system_import_selections_mode_description">Hilbijartina ku pêşniyarên hatinî û vebijarkên patchê bên bikaranîn destnîşan bike</string>
+    <string name="import_mode_replace_title">Berhev kirina heyî bi yekê veguherîne</string>
+    <string name="import_mode_replace_description">Paşgirtina hevkirinê bi tevahî. Hêmanên winda ne ji paşgirtinê dê werin nehev kirin</string>
+    <string name="import_mode_merge_title">Bi heyî vekirin</string>
+    <string name="import_mode_merge_description">Hêmanên winda ji paşgirtinê zêde bike. Hêmanên heyî nehatin guhertin</string>
     <string name="settings_system_export_manager_settings_fail">Ne serketî sawekirina sazkirina Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Sawekirina sazkirina Morphe serketî</string>
     <string name="settings_system_debug">Debug</string>

@@ -673,6 +673,14 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_import_manager_settings_description">Salva i logs del sistema per la risoluzione dei problemi</string>
     <string name="settings_system_import_manager_settings_fail">Impossibile importare le impostazioni di Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Impostazioni di Morphe importate</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importa impostazioni di Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Scegli come applicare le impostazioni e le risorse importate</string>
+    <string name="settings_system_import_selections_mode_title">Importa selezioni patch</string>
+    <string name="settings_system_import_selections_mode_description">Scegli come applicare le selezioni importate e le opzioni di patch</string>
+    <string name="import_mode_replace_title">Sostituisci gli elementi esistenti</string>
+    <string name="import_mode_replace_description">Corrispondi esattamente al backup. Gli elementi mancanti nel backup verranno rimossi</string>
+    <string name="import_mode_merge_title">Unisci con gli elementi esistenti</string>
+    <string name="import_mode_merge_description">Aggiungi gli elementi mancanti dal backup. Gli elementi esistenti rimangono invariati</string>
     <string name="settings_system_export_manager_settings_fail">Impossibile esportare le impostazioni di Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Impostazioni di Morphe esportate</string>
     <string name="settings_system_debug">Debug</string>

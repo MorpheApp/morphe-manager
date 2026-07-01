@@ -673,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Прави резервне копије и враћа подешавања апликације Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Неуспело увожење подешавања Morphe-а: %s</string>
     <string name="settings_system_import_manager_settings_success">Подешавања Morphe-а су увезена</string>
+    <string name="settings_system_import_manager_settings_mode_title">Увоз подешавања Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Изаберите како да се примене увезена подешавања и извори</string>
+    <string name="settings_system_import_selections_mode_title">Увоз изабраних подешавања</string>
+    <string name="settings_system_import_selections_mode_description">Изаберите како ће увезене селекције и опције за подешавање да буду примењене</string>
+    <string name="import_mode_replace_title">Замени постојеће</string>
+    <string name="import_mode_replace_description">Тачно поклапање са резервном копијом. Ставке које нису у резервној копији ће бити уклоњене</string>
+    <string name="import_mode_merge_title">Спајање са постојећим</string>
+    <string name="import_mode_merge_description">Додајте ставке које недостају из резервне копије. Постојеће ставке остају непромењене</string>
     <string name="settings_system_export_manager_settings_fail">Неуспео извоз подешавања Morphe-а: %s</string>
     <string name="settings_system_export_manager_settings_success">Подешавања Morphe-а су извезена</string>
     <string name="settings_system_debug">Дебаг</string>

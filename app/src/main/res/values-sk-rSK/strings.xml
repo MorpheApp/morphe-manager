@@ -673,6 +673,14 @@ Rozmery obrázka musia byť nasledovné:
     <string name="settings_system_import_manager_settings_description">Zálohuje a obnovuje nastavenia Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Nepodarilo sa importovať nastavenia Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Nastavenia Morphe boli importované</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importovať nastavenia Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Vyberte, ako sa majú použiť importované nastavenia a zdroje</string>
+    <string name="settings_system_import_selections_mode_title">Importovať výbery záplat</string>
+    <string name="settings_system_import_selections_mode_description">Vyberte, ako sa majú použiť importované výbery a možnosti záplat</string>
+    <string name="import_mode_replace_title">Nahradiť existujúce</string>
+    <string name="import_mode_replace_description">Presne zhodovať zálohu. Položky chýbajúce v zálohe budú odstránené</string>
+    <string name="import_mode_merge_title">Spojiť s existujúcimi</string>
+    <string name="import_mode_merge_description">Pridať chýbajúce položky zo zálohy. Existujúce položky zostanú nezmenené</string>
     <string name="settings_system_export_manager_settings_fail">Nepodarilo sa exportovať nastavenia Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Nastavenia Morphe boli exportované</string>
     <string name="settings_system_debug">Ladenie</string>

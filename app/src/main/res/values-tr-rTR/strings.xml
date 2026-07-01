@@ -673,6 +673,14 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_import_manager_settings_description">Morphe ayarlarınızı yedekler ve geri yükler</string>
     <string name="settings_system_import_manager_settings_fail">Morphe ayarları içe aktarılamadı: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe ayarları içe aktarıldı</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe ayarlarını içe aktar</string>
+    <string name="settings_system_import_manager_settings_mode_description">İçe aktarılan ayarların ve kaynakların nasıl uygulanacağını seçin</string>
+    <string name="settings_system_import_selections_mode_title">Yama seçimlerini içe aktar</string>
+    <string name="settings_system_import_selections_mode_description">İçe aktarılan seçimlerin ve yama seçeneklerinin nasıl uygulanacağını seçin</string>
+    <string name="import_mode_replace_title">Mevcut olanları değiştir</string>
+    <string name="import_mode_replace_description">Yedeklemeyi tam olarak eşleştirin. Yedeklemede eksik olan öğeler kaldırılacaktır</string>
+    <string name="import_mode_merge_title">Mevcut olanlarla birleştir</string>
+    <string name="import_mode_merge_description">Yedeklemeden eksik öğeleri ekleyin. Mevcut öğeler değişmeden bırakılır</string>
     <string name="settings_system_export_manager_settings_fail">Morphe ayarları dışa aktarılamadı: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe ayarları dışa aktarıldı</string>
     <string name="settings_system_debug">Hata ayıklama</string>

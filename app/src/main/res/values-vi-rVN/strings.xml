@@ -674,6 +674,14 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_import_manager_settings_description">Sao lưu và khôi phục lại cài đặt Morphe của bạn</string>
     <string name="settings_system_import_manager_settings_fail">Không thể nhập cài đặt Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Đã nhập cài đặt Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_title">Nhập cài đặt Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Chọn cách áp dụng các cài đặt và nguồn đã nhập</string>
+    <string name="settings_system_import_selections_mode_title">Nhập lựa chọn bản vá</string>
+    <string name="settings_system_import_selections_mode_description">Chọn cách áp dụng các lựa chọn và tùy chọn vá đã nhập</string>
+    <string name="import_mode_replace_title">Thay thế hiện có</string>
+    <string name="import_mode_replace_description">Khớp chính xác với bản sao lưu. Các mục không có trong bản sao lưu sẽ bị xóa</string>
+    <string name="import_mode_merge_title">Hợp nhất với hiện có</string>
+    <string name="import_mode_merge_description">Thêm các mục còn thiếu từ bản sao lưu. Các mục hiện có sẽ không thay đổi</string>
     <string name="settings_system_export_manager_settings_fail">Không thể xuất cài đặt Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Đã xuất cài đặt Morphe</string>
     <string name="settings_system_debug">Gỡ lỗi</string>

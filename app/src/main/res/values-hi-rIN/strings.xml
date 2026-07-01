@@ -673,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">आपकी Morphe सेटिंग्स का बैकअप और पुनर्स्थापित करता है।</string>
     <string name="settings_system_import_manager_settings_fail">मोर्फ़ सेटिंग्स आयात करने में विफल: %s</string>
     <string name="settings_system_import_manager_settings_success">मोर्फ़ सेटिंग्स आयात की गईं</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe सेटिंग्स आयात करें</string>
+    <string name="settings_system_import_manager_settings_mode_description">चुनें कि आयात की गई सेटिंग्स और स्रोतों को कैसे लागू किया जाना चाहिए</string>
+    <string name="settings_system_import_selections_mode_title">आयात पैच चयन</string>
+    <string name="settings_system_import_selections_mode_description">आयातित चयन और पैच विकल्पों को कैसे लागू किया जाना चाहिए, चुनें</string>
+    <string name="import_mode_replace_title">मौजूदा को बदलें</string>
+    <string name="import_mode_replace_description">बैकअप से बिल्कुल मेल खाएं। बैकअप से गायब आइटम हटा दिए जाएंगे</string>
+    <string name="import_mode_merge_title">मौजूदा के साथ मिलाएं</string>
+    <string name="import_mode_merge_description">बैकअप से गायब आइटम जोड़ें। मौजूदा आइटम अपरिवर्तित रहेंगे</string>
     <string name="settings_system_export_manager_settings_fail">मोर्फ़ सेटिंग्स निर्यात करने में विफल: %s</string>
     <string name="settings_system_export_manager_settings_success">मोर्फ़ सेटिंग्स निर्यात की गईं</string>
     <string name="settings_system_debug">डिबग</string>

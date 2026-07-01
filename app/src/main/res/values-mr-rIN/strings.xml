@@ -672,6 +672,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">तुमच्या Morphe सेटिंग्जचा बॅकअप घेते आणि पुनर्संचयित करते</string>
     <string name="settings_system_import_manager_settings_fail">Morphe सेटिंग्ज आयात करण्यात अयशस्वी: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe सेटिंग्ज आयात केली</string>
+    <string name="settings_system_import_manager_settings_mode_title">मॉर्फ सेटिंग्स आयात करा</string>
+    <string name="settings_system_import_manager_settings_mode_description">आयात केलेल्या सेटिंग्स आणि स्त्रोत कसे लागू करायचे ते निवडा</string>
+    <string name="settings_system_import_selections_mode_title">आयात पॅच निवड</string>
+    <string name="settings_system_import_selections_mode_description">आयात केलेल्या निवड आणि पॅच पर्याय कसे लागू करायचे ते निवडा</string>
+    <string name="import_mode_replace_title">अस्तित्वात असलेले बदला</string>
+    <string name="import_mode_replace_description">बॅकअप तंतोतंत जुळवा. बॅकअपमधून गहाळ आयटम काढले जातील</string>
+    <string name="import_mode_merge_title">अस्तित्वाबरोबर विलीन करा</string>
+    <string name="import_mode_merge_description">बॅकअपमधील गहाळ आयटम जोडा. अस्तित्वात असलेले आयटम जैसे थे ठेवले जातील</string>
     <string name="settings_system_export_manager_settings_fail">Morphe सेटिंग्ज निर्यात करण्यात अयशस्वी: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe सेटिंग्ज निर्यात केली</string>
     <string name="settings_system_debug">डीबग</string>

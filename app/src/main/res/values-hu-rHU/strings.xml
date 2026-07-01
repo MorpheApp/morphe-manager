@@ -673,6 +673,14 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_import_manager_settings_description">A Morphe beállításainak biztonsági mentése és visszaállítása.</string>
     <string name="settings_system_import_manager_settings_fail">Hiba történt a Morphe beállításainak importálásakor: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe beállítások importálva</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe beállítások importálása</string>
+    <string name="settings_system_import_manager_settings_mode_description">Válassza ki, hogyan alkalmazzák az importált beállításokat és forrásokat</string>
+    <string name="settings_system_import_selections_mode_title">Módosítások importálása</string>
+    <string name="settings_system_import_selections_mode_description">Válassza ki, hogyan kell alkalmazni az importált beállításokat és javítási lehetőségeket</string>
+    <string name="import_mode_replace_title">Létező felülírása</string>
+    <string name="import_mode_replace_description">Pontosan illeszkedjen a biztonsági mentéshez. A biztonsági mentésből hiányzó elemek törlésre kerülnek.</string>
+    <string name="import_mode_merge_title">Összefonódás a meglévőkkel</string>
+    <string name="import_mode_merge_description">A biztonsági mentésből hiányzó elemek hozzáadása. A meglévő elemek változatlanok maradnak.</string>
     <string name="settings_system_export_manager_settings_fail">Hiba történt a Morphe beállításainak exportálásakor: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe beállítások exportálva</string>
     <string name="settings_system_debug">Hibakeresés</string>

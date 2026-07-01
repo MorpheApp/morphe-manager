@@ -665,6 +665,14 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_manager_settings_description">আপনার Morphe সেটিংসের ব্যাকআপ এবং পুনরুদ্ধার করে।</string>
     <string name="settings_system_import_manager_settings_fail">Morphe সেটিংস আমদানি করতে ব্যর্থ হয়েছে: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe সেটিংস আমদানি করা হয়েছে</string>
+    <string name="settings_system_import_manager_settings_mode_title">মর্ফে সেটিংস আমদানি</string>
+    <string name="settings_system_import_manager_settings_mode_description">আমদানি করা সেটিংস এবং উৎসগুলি কীভাবে প্রয়োগ করা উচিত তা নির্বাচন করুন</string>
+    <string name="settings_system_import_selections_mode_title">প্যাচ নির্বাচন আমদানি করুন</string>
+    <string name="settings_system_import_selections_mode_description">আমদানি করা নির্বাচন এবং প্যাচ অপশনগুলো কীভাবে প্রয়োগ করা হবে তা নির্বাচন করুন</string>
+    <string name="import_mode_replace_title">বিদ্যমান প্রতিস্থাপন করুন</string>
+    <string name="import_mode_replace_description">ব্যাকআপের সাথে হুবহু মিলবে। ব্যাকআপ থেকে অনুপস্থিত আইটেমগুলি সরানো হবে</string>
+    <string name="import_mode_merge_title">বিদ্যমানের সাথে মার্জ করুন</string>
+    <string name="import_mode_merge_description">ব্যাকআপ থেকে অনুপস্থিত আইটেমগুলি যোগ করুন। বিদ্যমান আইটেমগুলি অপরিবর্তিত থাকবে</string>
     <string name="settings_system_export_manager_settings_fail">Morphe সেটিংস রপ্তানি করতে ব্যর্থ হয়েছে: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe সেটিংস রপ্তানি করা হয়েছে</string>
     <string name="settings_system_debug">ডিবাগ</string>
