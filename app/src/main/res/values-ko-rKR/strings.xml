@@ -793,6 +793,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">순서를 저장하였습니다</string>
     <string name="reset_order">순서 초기화</string>
     <string name="reset_order_done">순서를 초기화하였습니다</string>
+    <string name="accessibility_move_up">위로 이동</string>
+    <string name="accessibility_move_down">아래로 이동</string>
+    <string name="accessibility_app_moved_announcement">\'%1$s\'가 %3$d 개 중 %2$d 번째 위치로 이동하였습니다</string>
     <string name="rename">이름 변경</string>
     <string name="import_">가져오기</string>
     <string name="export">내보내기</string>
@@ -839,7 +842,7 @@ morphe_header_custom_dark.png
     <string name="changelog_description">이 업데이트의 최신 변경 사항을 확인해 보세요</string>
     <string name="changelog_download_fail">변경 사항을 다운로드할 수 없습니다: %s</string>
     <string name="changelog_empty">변경 사항이 없습니다</string>
-    <string name="changelog_show_older">이전 릴리스 표시</string>
+    <string name="changelog_show_older">이전 릴리스 보기</string>
     <string name="changelog_older_empty">표시할 이전 릴리스가 없습니다</string>
     <string name="no_network_toast">인터넷에 연결할 수 없습니다</string>
     <string name="update_available">업데이트 사용 가능</string>

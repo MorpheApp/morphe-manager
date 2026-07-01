@@ -788,6 +788,9 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="reorder_done">Nai-save ang pagkakasunud-sunod</string>
     <string name="reset_order">Ibalik sa orihinal na pagkakasunud-sunod</string>
     <string name="reset_order_done">Naibalik ang order</string>
+    <string name="accessibility_move_up">Ilipat paitaas</string>
+    <string name="accessibility_move_down">Ilipat pababa</string>
+    <string name="accessibility_app_moved_announcement">Inilipat ang %1$s sa posisyon %2$d ng %3$d</string>
     <string name="rename">Palitan</string>
     <string name="import_">I-import</string>
     <string name="export">I-export</string>

@@ -295,7 +295,7 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="root_gmscore_excluded">Tá paiste tacaíochta GmsCore eiscthe i mód fréimhe</string>
     <string name="root_pre_patch_installer_title">Roghnaigh modh suiteála</string>
     <string name="root_pre_patch_installer_description">Tá rochtain fréimhe ag do ghléas. Roghnaigh conas is mian leat an aip phaisteáilte a shuiteáil.</string>
-    <string name="root_pre_patch_installer_mount_title">Ceangal Fréimhe</string>
+    <string name="root_pre_patch_installer_mount_title">Gléasadh fréimhe</string>
     <string name="root_pre_patch_installer_mount_description">Suiteálann sé an APK paisteáilte thar an aip stoic. Níl GmsCore ag teastáil.</string>
     <string name="root_pre_patch_installer_standard_title">Suiteáil Chaighdeánach</string>
     <string name="root_pre_patch_installer_standard_description">Suiteáiltear é mar aip ar leith le tacaíocht GmsCore. Is féidir suiteálaí a roghnú tar éis paisteála.</string>
@@ -305,16 +305,16 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="patcher_error_log">Log earráide</string>
     <string name="patcher_error_technical">Sonraí teicniúla</string>
     <string name="patcher_error_dialog_app_info">Eolas faoin aip</string>
-    <string name="patcher_tab_logs">Logaí Paisteora</string>
+    <string name="patcher_tab_logs">Logaí paisteora</string>
     <string name="patcher_tab_game">Cluichí</string>
     <string name="patcher_long_step_warning">D’fhéadfadh sé go dtógfadh an chéim seo tamall. Fan le do thoil…</string>
     <string name="patcher_installing_subtitle">Beagnach réidh le tosú! 🎸</string>
     <string name="patcher_success_title">Gach rud déanta! 🎉</string>
     <string name="patcher_success_subtitle">Tá do aip paisteáilte agus suiteáilte!</string>
-    <string name="patcher_complete_title">Paisteáilte Críochnaithe! ✨</string>
+    <string name="patcher_complete_title">Paisteáil críochnaithe! ✨</string>
     <string name="patcher_failed_title">Úps! Chuaigh rud éigin mícheart.</string>
     <string name="patcher_failed_subtitle">Seiceáil na sonraí earráide thíos</string>
-    <string name="patcher_failed_dialog_title">Theip ar Paisteáil</string>
+    <string name="patcher_failed_dialog_title">Theip ar phaisteáil</string>
     <string name="patcher_unknown_error">Tharla earráid anaithnid</string>
     <string name="patcher_split_step_extracting">Ag baint APKanna scoilte</string>
     <string name="patcher_split_step_merging">Ag cumasc %s</string>
@@ -790,6 +790,9 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="reorder_done">Ordú sábháilte</string>
     <string name="reset_order">Athshocraigh an t-ordú</string>
     <string name="reset_order_done">Athshocrú ordaithe</string>
+    <string name="accessibility_move_up">Bogadh suas</string>
+    <string name="accessibility_move_down">Bogadh síos</string>
+    <string name="accessibility_app_moved_announcement">%1$s aistríodh go dtí an t-ionad %2$d de %3$d</string>
     <string name="rename">Athainmnigh</string>
     <string name="import_">Iompórtáil</string>
     <string name="export">Easpórtáil</string>
@@ -836,6 +839,8 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="changelog_description">Féach ar na hathruithe is déanaí sa nuashonrú seo</string>
     <string name="changelog_download_fail">Theip ar an logála hathruithe a íoslódáil: %s</string>
     <string name="changelog_empty">Níl aon loga athraithe ar fáil</string>
+    <string name="changelog_show_older">Taispeáin eisiúintí níos sine</string>
+    <string name="changelog_older_empty">Gan aon eisiúintí níos sine le taispeáint</string>
     <string name="no_network_toast">Níl aon nasc idirlín ar fáil</string>
     <string name="update_available">Tá nuashonrú ar fáil</string>
     <string name="ready_to_install_update">Réidh le nuashonrú a shuiteáil</string>

@@ -316,6 +316,7 @@ Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio:
     <string name="patcher_failed_subtitle">Controlla i dettagli dell\'errore qui sotto</string>
     <string name="patcher_failed_dialog_title">Patching fallito</string>
     <string name="patcher_unknown_error">Si è verificato un errore sconosciuto</string>
+    <string name="patcher_split_step_extracting">Estrazione degli APK divisi</string>
     <string name="patcher_split_step_merging">Unione %s</string>
     <string name="patcher_split_step_writing">Scrittura APK unito</string>
     <string name="patcher_split_step_finalizing">Finalizzazione APK unito</string>
@@ -791,6 +792,9 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="reorder_done">Ordine salvato</string>
     <string name="reset_order">Ripristina ordine</string>
     <string name="reset_order_done">Ordine resettato</string>
+    <string name="accessibility_move_up">Sposta in alto</string>
+    <string name="accessibility_move_down">Sposta in basso</string>
+    <string name="accessibility_app_moved_announcement">%1$s spostato nella posizione %2$d di %3$d</string>
     <string name="rename">Rinomina</string>
     <string name="import_">Importa</string>
     <string name="export">Esporta</string>

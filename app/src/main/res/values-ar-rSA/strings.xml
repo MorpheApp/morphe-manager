@@ -793,6 +793,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="reorder_done">تم حفظ الترتيب</string>
     <string name="reset_order">إعادة تعيين الترتيب</string>
     <string name="reset_order_done">تم إعادة تعيين الترتيب</string>
+    <string name="accessibility_move_up">حرّك لأعلى</string>
+    <string name="accessibility_move_down">حرّك لأسفل</string>
+    <string name="accessibility_app_moved_announcement">%1$s حرّك إلى الموضع %2$d من %3$d</string>
     <string name="rename">إعادة تسمية</string>
     <string name="import_">استيراد</string>
     <string name="export">تصدير</string>

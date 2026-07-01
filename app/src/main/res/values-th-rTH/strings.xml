@@ -316,6 +316,10 @@
     <string name="patcher_failed_subtitle">ตรวจสอบรายละเอียดข้อผิดพลาดด้านล่าง</string>
     <string name="patcher_failed_dialog_title">การแก้ไขล้มเหลว</string>
     <string name="patcher_unknown_error">เกิดข้อผิดพลาดที่ไม่รู้จัก</string>
+    <string name="patcher_split_step_extracting">กำลังแยกไฟล์ APK</string>
+    <string name="patcher_split_step_merging">กำลังรวม %s</string>
+    <string name="patcher_split_step_writing">กำลังเขียนไฟล์ APK ที่รวมแล้ว</string>
+    <string name="patcher_split_step_finalizing">กำลังสรุปผลไฟล์ APK ที่รวมแล้ว</string>
     <string name="patcher_conflict_title">ข้อขัดแย้งของแพ็กเกจ</string>
     <string name="patcher_conflict_subtitle">คุณต้องถอนการติดตั้งเวอร์ชันที่มีอยู่ออกก่อน</string>
     <string name="patcher_conflict_hint">แอปที่ปรับแก้แล้วใช้ใบรับรองที่แตกต่างจากเวอร์ชันที่ติดตั้ง การถอนการติดตั้งจะลบข้อมูลแอปทั้งหมด</string>
@@ -788,6 +792,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">บันทึกการจัดเรียงแล้ว</string>
     <string name="reset_order">รีเซ็ตการจัดเรียง</string>
     <string name="reset_order_done">รีเซ็ตคำสั่งซื้อ</string>
+    <string name="accessibility_move_up">ย้ายขึ้น</string>
+    <string name="accessibility_move_down">ย้ายลง</string>
+    <string name="accessibility_app_moved_announcement">%1$s ย้ายไปยังตำแหน่งที่ %2$d จากทั้งหมด %3$d</string>
     <string name="rename">เปลี่ยนชื่อ</string>
     <string name="import_">นำเข้า</string>
     <string name="export">ส่งออก</string>
@@ -834,6 +841,8 @@ morphe_header_custom_dark.png
     <string name="changelog_description">ดูการเปลี่ยนแปลงล่าสุดในอัปเดตนี้</string>
     <string name="changelog_download_fail">ดาวน์โหลดบันทึกการเปลี่ยนแปลงไม่สำเร็จ: %s</string>
     <string name="changelog_empty">ไม่มีรายการอัปเดต</string>
+    <string name="changelog_show_older">แสดงเวอร์ชันเก่ากว่า</string>
+    <string name="changelog_older_empty">ไม่มีเวอร์ชันเก่ากว่าให้แสดง</string>
     <string name="no_network_toast">ไม่มีการเชื่อมต่ออินเทอร์เน็ต</string>
     <string name="update_available">มีอัปเดตพร้อมใช้งาน</string>
     <string name="ready_to_install_update">พร้อมติดตั้งอัปเดต</string>

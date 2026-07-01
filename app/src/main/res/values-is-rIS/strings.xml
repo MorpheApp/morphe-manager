@@ -314,6 +314,10 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="patcher_failed_subtitle">Vinsamlegast skoðaðu villuupplýsingarnar hér að neðan</string>
     <string name="patcher_failed_dialog_title">Viðgerðin mislukkaðist</string>
     <string name="patcher_unknown_error">Óþekkt villa kom upp</string>
+    <string name="patcher_split_step_extracting">Útdráttur af flíknum APK</string>
+    <string name="patcher_split_step_merging">Samruni %s</string>
+    <string name="patcher_split_step_writing">Ritun samrunins APK</string>
+    <string name="patcher_split_step_finalizing">Lokun samrunins APK</string>
     <string name="patcher_conflict_title">Pakkaárekstur</string>
     <string name="patcher_conflict_subtitle">Þú þarft að afinstallera núverandi útgáfuna</string>
     <string name="patcher_conflict_hint">Breytt app notar mismunandi vottorð og installaðri útgáfu. Afnám eyðir öllum forritsgögnum</string>
@@ -783,6 +787,9 @@ Myndastærðin verður að vera sem hér segir:
     <string name="reorder_done">Röð vistuð</string>
     <string name="reset_order">Endurstilla röð</string>
     <string name="reset_order_done">Pöntun endurstillt</string>
+    <string name="accessibility_move_up">Færa upp</string>
+    <string name="accessibility_move_down">Færa niður</string>
+    <string name="accessibility_app_moved_announcement">%1$s fært á stöðu %2$d af %3$d</string>
     <string name="rename">Endurnefna</string>
     <string name="import_">Flytja</string>
     <string name="export">Flytja út</string>
@@ -829,6 +836,8 @@ Myndastærðin verður að vera sem hér segir:
     <string name="changelog_description">Skoða nýjustu breytingarnar í þessari uppfærslu</string>
     <string name="changelog_download_fail">Ekki tókst að sækja breytingaskrá: %s</string>
     <string name="changelog_empty">Engin breytingaskrá í boði</string>
+    <string name="changelog_show_older">Sýna eldri útgáfur</string>
+    <string name="changelog_older_empty">Engar eldri útgáfur til sýnis</string>
     <string name="no_network_toast">Engin nettenging í boði</string>
     <string name="update_available">Uppfærsla er til staðar</string>
     <string name="ready_to_install_update">Tilbúið til að setja upp uppfærslu</string>

@@ -316,6 +316,10 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <string name="patcher_failed_subtitle">Sjekk feildetaljene nedenfor</string>
     <string name="patcher_failed_dialog_title">Oppdateringen mislyktes</string>
     <string name="patcher_unknown_error">Ukjent feil oppstod</string>
+    <string name="patcher_split_step_extracting">Utpakking av delte APK-er</string>
+    <string name="patcher_split_step_merging">Slår sammen %s</string>
+    <string name="patcher_split_step_writing">Skriver sammenslått APK</string>
+    <string name="patcher_split_step_finalizing">Fullfører sammenslått APK</string>
     <string name="patcher_conflict_title">Pakke konflikt</string>
     <string name="patcher_conflict_subtitle">Du må avinstallere den eksisterende versjonen</string>
     <string name="patcher_conflict_hint">Den patchede appen bruker et annet sertifikat enn den installerte versjonen. Avinstallering vil slette alle appdata</string>
@@ -788,6 +792,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">Rekkefølge lagret</string>
     <string name="reset_order">Tilbakestill rekkefølge</string>
     <string name="reset_order_done">Bestilling tilbakestilt</string>
+    <string name="accessibility_move_up">Flytt opp</string>
+    <string name="accessibility_move_down">Flytt ned</string>
+    <string name="accessibility_app_moved_announcement">%1$s flyttet til posisjon %2$d av %3$d</string>
     <string name="rename">Gi nytt navn</string>
     <string name="import_">Importer</string>
     <string name="export">Eksporter</string>
@@ -834,6 +841,8 @@ morphe_header_custom_dark.png
     <string name="changelog_description">Se de siste endringene i denne oppdateringen</string>
     <string name="changelog_download_fail">Kunne ikke laste ned endringslogg: %s</string>
     <string name="changelog_empty">Ingen endringslogg tilgjengelig</string>
+    <string name="changelog_show_older">Vis eldre utgivelser</string>
+    <string name="changelog_older_empty">Ingen eldre utgivelser å vise</string>
     <string name="no_network_toast">Ingen internettforbindelse tilgjengelig</string>
     <string name="update_available">En oppdatering er tilgjengelig</string>
     <string name="ready_to_install_update">Klar til å installere oppdatering</string>

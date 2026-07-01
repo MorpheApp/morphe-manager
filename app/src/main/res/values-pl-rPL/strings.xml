@@ -792,6 +792,9 @@ Wymagane są następujące wymiary obrazów:
     <string name="reorder_done">Zapisano kolejność</string>
     <string name="reset_order">Zresetuj kolejność</string>
     <string name="reset_order_done">Zresetowano kolejność</string>
+    <string name="accessibility_move_up">Przesuń w górę</string>
+    <string name="accessibility_move_down">Przesuń w dół</string>
+    <string name="accessibility_app_moved_announcement">%1$s przeniesiono na pozycję %2$d z %3$d</string>
     <string name="rename">Zmień nazwę</string>
     <string name="import_">Importuj</string>
     <string name="export">Eksportuj</string>

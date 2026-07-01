@@ -788,6 +788,9 @@ Kuvien mittojen on oltava seuraavat:
     <string name="reorder_done">Järjestys tallennettu</string>
     <string name="reset_order">Palauta järjestys</string>
     <string name="reset_order_done">Tilaus nollattu</string>
+    <string name="accessibility_move_up">Siirrä ylös</string>
+    <string name="accessibility_move_down">Siirrä alas</string>
+    <string name="accessibility_app_moved_announcement">%1$s siirrettiin kohtaan %2$d / %3$d</string>
     <string name="rename">Nimeä uudelleen</string>
     <string name="import_">Tuo</string>
     <string name="export">Vie</string>

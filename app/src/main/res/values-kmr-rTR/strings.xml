@@ -314,6 +314,10 @@ Herêma derveyî (qutkirî): dikare ji aliyê maskeya launcher'ê ve were qutkir
     <string name="patcher_failed_subtitle">Hêsanî xetalî di binê vê de binêre</string>
     <string name="patcher_failed_dialog_title">Patchkirin têk çû</string>
     <string name="patcher_unknown_error">Xetalî nenas çê bû</string>
+    <string name="patcher_split_step_extracting">Derxistina APKyên parvekirî</string>
+    <string name="patcher_split_step_merging">Têkelkirina %s</string>
+    <string name="patcher_split_step_writing">Nivîsîna APKya têkelkirî</string>
+    <string name="patcher_split_step_finalizing">Temamkirina APKya têkelkirî</string>
     <string name="patcher_conflict_title">Tengava pakêt</string>
     <string name="patcher_conflict_subtitle">Divê hûn guhertoyek hebin</string>
     <string name="patcher_conflict_hint">Serîlêdana rasterkirî sertîfîka jûda li gorî guhertoya sazkirî bikar tîne. Rakirin dê hemû daneyên serîlêdanê tune bike</string>
@@ -786,6 +790,9 @@ Qasîyên wêneyan divê wiha bin:
     <string name="reorder_done">Rêzê hat xêzkirin</string>
     <string name="reset_order">Rêzê dîsa serî hildin</string>
     <string name="reset_order_done">Fermanê sîparîşê nûkirin</string>
+    <string name="accessibility_move_up">Bilindabin</string>
+    <string name="accessibility_move_down">Bilindabîn</string>
+    <string name="accessibility_app_moved_announcement">%1$s pozîsyona %2$d\'yê ji %3$d\'yê ve guherî</string>
     <string name="rename">Navê nû bigere</string>
     <string name="import_">Hez kirin</string>
     <string name="export">Dernake</string>
@@ -832,6 +839,8 @@ Qasîyên wêneyan divê wiha bin:
     <string name="changelog_description">Guherînên dawî ti vê nûvekirinê binêrin</string>
     <string name="changelog_download_fail">Degerandina guhezgarîyan ji destûr ve çû: %s</string>
     <string name="changelog_empty">Nê ji ber ku wê bigihîne</string>
+    <string name="changelog_show_older">Nîşan bide berhemên keviner</string>
+    <string name="changelog_older_empty">Tu berhemên keviner tune ne ku bên nîşandan</string>
     <string name="no_network_toast">Girêdayî pêşbaziyê nîne</string>
     <string name="update_available">Nûvekirin heye</string>
     <string name="ready_to_install_update">Amade ye ku nûvekirin saz bike</string>

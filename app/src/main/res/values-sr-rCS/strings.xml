@@ -316,6 +316,10 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="patcher_failed_subtitle">Proverite detalje greške ispod</string>
     <string name="patcher_failed_dialog_title">Pečanje je neuspešno</string>
     <string name="patcher_unknown_error">Dogodila se nepoznata greška</string>
+    <string name="patcher_split_step_extracting">Ekstrahovanje split APK-ova</string>
+    <string name="patcher_split_step_merging">Spajanje %s</string>
+    <string name="patcher_split_step_writing">Upis spojenog APK-a</string>
+    <string name="patcher_split_step_finalizing">Završetak spojenog APK-a</string>
     <string name="patcher_conflict_title">Konflikt paketa</string>
     <string name="patcher_conflict_subtitle">Morate deinstalirati postojeću verziju</string>
     <string name="patcher_conflict_hint">Popravljena aplikacija koristi drugačiji sertifikat od instalirane verzije. Deinstalacija će obrisati sve podatke aplikacije.</string>
@@ -772,6 +776,9 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="reorder_done">Redosled je sačŪvan</string>
     <string name="reset_order">Vrati redosled</string>
     <string name="reset_order_done">Narudžba je resetovana</string>
+    <string name="accessibility_move_up">Pomeri se nagore</string>
+    <string name="accessibility_move_down">Pomeri se nadole</string>
+    <string name="accessibility_app_moved_announcement">%1$s je pomeren na poziciju %2$d od %3$d</string>
     <string name="rename">Preimenovanje</string>
     <string name="import_">Uvoz</string>
     <string name="export">Izvezi</string>
@@ -818,6 +825,8 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="changelog_description">Pogledaj najnovije promene u ovom ažuriranju</string>
     <string name="changelog_download_fail">Preuzimanje zapisa o promenama nije uspelo: %s</string>
     <string name="changelog_empty">Nema dostupne verzije promjene</string>
+    <string name="changelog_show_older">Prikaži starije verzije</string>
+    <string name="changelog_older_empty">Nema starijih verzija za prikaz</string>
     <string name="no_network_toast">Nema dostupne mrežne veze</string>
     <string name="update_available">Dostupno je ažuriranje</string>
     <string name="ready_to_install_update">Spremno za instaliranje ažuriranja</string>

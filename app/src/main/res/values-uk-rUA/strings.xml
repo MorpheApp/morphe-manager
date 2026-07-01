@@ -792,6 +792,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">Порядок збережено</string>
     <string name="reset_order">Скинути порядок</string>
     <string name="reset_order_done">Порядок скинуто</string>
+    <string name="accessibility_move_up">Перемістити вгору</string>
+    <string name="accessibility_move_down">Перемістити вниз</string>
+    <string name="accessibility_app_moved_announcement">%1$s переміщено на позицію %2$d з %3$d</string>
     <string name="rename">Перейменувати</string>
     <string name="import_">Імпорт</string>
     <string name="export">Експорт</string>

@@ -316,6 +316,10 @@
     <string name="patcher_failed_subtitle">Прегледайте детайлите на грешката по-долу</string>
     <string name="patcher_failed_dialog_title">Пачването не успя</string>
     <string name="patcher_unknown_error">Грешка: Неизвестна грешка</string>
+    <string name="patcher_split_step_extracting">Извличане на разделени APK файлове</string>
+    <string name="patcher_split_step_merging">Обединяване на %s</string>
+    <string name="patcher_split_step_writing">Запис на обединен APK</string>
+    <string name="patcher_split_step_finalizing">Завършване на обединен APK</string>
     <string name="patcher_conflict_title">Конфликт на пакети</string>
     <string name="patcher_conflict_subtitle">Трябва да деинсталирате текущата версия</string>
     <string name="patcher_conflict_hint">Коригираното приложение използва различен сертификат от инсталираната версия. Деинсталирането ще изтрие всички данни на приложението.</string>
@@ -788,6 +792,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">Редът е запазен</string>
     <string name="reset_order">Възстановяване на реда</string>
     <string name="reset_order_done">Заявката е възстановена</string>
+    <string name="accessibility_move_up">Преместване нагоре</string>
+    <string name="accessibility_move_down">Преместване надолу</string>
+    <string name="accessibility_app_moved_announcement">%1$s беше преместен на позиция %2$d от %3$d</string>
     <string name="rename">Преименуване</string>
     <string name="import_">Импортиране</string>
     <string name="export">Изтриване на запазена копия</string>
@@ -834,6 +841,8 @@ morphe_header_custom_dark.png
     <string name="changelog_description">Погледете последното обновяване</string>
     <string name="changelog_download_fail">Неуспешно сваляне на дневника на промените: %s</string>
     <string name="changelog_empty">Няма налични промени</string>
+    <string name="changelog_show_older">Показване на по-стари версии</string>
+    <string name="changelog_older_empty">Няма по-стари издания за показване</string>
     <string name="no_network_toast">Няма достъп до интернет</string>
     <string name="update_available">Налично е актуализиране</string>
     <string name="ready_to_install_update">Готово за инсталиране на актуализиране</string>

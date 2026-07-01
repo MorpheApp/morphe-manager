@@ -793,6 +793,9 @@ Dimensi gambar harus sebagai berikut:
     <string name="reorder_done">Urutan disimpan</string>
     <string name="reset_order">Atur ulang urutan</string>
     <string name="reset_order_done">Urutan diatur ulang</string>
+    <string name="accessibility_move_up">Pindah ke atas</string>
+    <string name="accessibility_move_down">Pindah ke bawah</string>
+    <string name="accessibility_app_moved_announcement">%1$s dipindahkan ke posisi %2$d dari %3$d</string>
     <string name="rename">Ganti nama</string>
     <string name="import_">Impor</string>
     <string name="export">Ekspor</string>

@@ -316,6 +316,10 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="patcher_failed_subtitle">Kontroleer die foutdetail hieronder</string>
     <string name="patcher_failed_dialog_title">Patcher het misluk</string>
     <string name="patcher_unknown_error">Onbekende fout het voorgekom</string>
+    <string name="patcher_split_step_extracting">Ekstraheer gesplitte APK\'s</string>
+    <string name="patcher_split_step_merging">Voeg %s saam</string>
+    <string name="patcher_split_step_writing">Skryf saamgevoegde APK</string>
+    <string name="patcher_split_step_finalizing">Voltooi saamgevoegde APK</string>
     <string name="patcher_conflict_title">Pakket konflik</string>
     <string name="patcher_conflict_subtitle">Jy moet die bestaande weergawe deïnstalleer</string>
     <string name="patcher_conflict_hint">Die aangepaste app gebruik \'n ander sertifikaat as die geïnstalleerde weergawe. Deïnstallering sal alle app-data uitwis.</string>
@@ -788,6 +792,9 @@ Die beeld afmetings moet soos volg wees:
     <string name="reorder_done">Volgorde stoor</string>
     <string name="reset_order">Herstel volgorde</string>
     <string name="reset_order_done">Bestelling terugstel</string>
+    <string name="accessibility_move_up">Beweeg op</string>
+    <string name="accessibility_move_down">Beweeg af</string>
+    <string name="accessibility_app_moved_announcement">%1$s is na posisie %2$d van %3$d geskuif</string>
     <string name="rename">Hernoem</string>
     <string name="import_">Importeer</string>
     <string name="export">Uitvoer</string>
@@ -834,6 +841,8 @@ Die beeld afmetings moet soos volg wees:
     <string name="changelog_description">Kyk na die nuutste veranderinge in hierdie opdatering</string>
     <string name="changelog_download_fail">Kon nie veranderingslogboek aflaai nie: %s</string>
     <string name="changelog_empty">Geen wysiging beskikbaar nie</string>
+    <string name="changelog_show_older">Wys ouer vrystellings</string>
+    <string name="changelog_older_empty">Geen ouer vrystellings om te wys nie</string>
     <string name="no_network_toast">Geen internet verbinding beskikbaar nie</string>
     <string name="update_available">\'n Opdatering is beskikbaar</string>
     <string name="ready_to_install_update">Klaar om opdatering te installeer</string>

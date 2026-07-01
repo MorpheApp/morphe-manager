@@ -316,6 +316,10 @@ Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - ud
     <string name="patcher_failed_subtitle">Zkontrolujte podrobnosti chyby níže</string>
     <string name="patcher_failed_dialog_title">Záplatování selhalo</string>
     <string name="patcher_unknown_error">Došlo k neznámé chybě</string>
+    <string name="patcher_split_step_extracting">Extrahování rozdělených APK</string>
+    <string name="patcher_split_step_merging">Slévání %s</string>
+    <string name="patcher_split_step_writing">Zápis sloučeného APK</string>
+    <string name="patcher_split_step_finalizing">Finalizování sloučeného APK</string>
     <string name="patcher_conflict_title">Konflikt balíčku</string>
     <string name="patcher_conflict_subtitle">Musíte odinstalovat stávající verzi</string>
     <string name="patcher_conflict_hint">Opravená aplikace používá jiný certifikát než nainstalovaná verze. Odinstalování smaže všechna data aplikace.</string>
@@ -788,6 +792,9 @@ Rozměry obrázků musí být následující:
     <string name="reorder_done">Pořadí uloženo</string>
     <string name="reset_order">Obnovit pořadí</string>
     <string name="reset_order_done">Objednávka resetována</string>
+    <string name="accessibility_move_up">Posunout nahoru</string>
+    <string name="accessibility_move_down">Posunout dolů</string>
+    <string name="accessibility_app_moved_announcement">%1$s byla přesunuta na pozici %2$d z %3$d</string>
     <string name="rename">Přejmenovat</string>
     <string name="import_">Importovat</string>
     <string name="export">Exportovat</string>
@@ -834,6 +841,8 @@ Rozměry obrázků musí být následující:
     <string name="changelog_description">Zjistěte nejaktuálnější změny v této aktualizaci</string>
     <string name="changelog_download_fail">Selhání stažení poznámek k vydání: %s</string>
     <string name="changelog_empty">Nejsou dostupné žádné záznamy změn</string>
+    <string name="changelog_show_older">Zobrazit starší verze</string>
+    <string name="changelog_older_empty">Nejsou k dispozici žádné starší verze</string>
     <string name="no_network_toast">Žádné připojení k internetu</string>
     <string name="update_available">Je k dispozici aktualizace</string>
     <string name="ready_to_install_update">Připraveno k instalaci aktualizace</string>

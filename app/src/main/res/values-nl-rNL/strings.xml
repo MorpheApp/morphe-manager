@@ -114,6 +114,8 @@
     <string name="sources_update_success">Bijwerken geslaagd</string>
     <string name="sources_update_unavailable">Geen bijwerken beschikbaar</string>
     <string name="sources_download_fail">Kan bronnen niet downloaden: %s</string>
+    <string name="sources_download_fail_named">\'%s\' kon niet worden bijgewerkt. Controleer je internetverbinding en probeer het opnieuw</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': patch metadata niet gevonden</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Schakel Expertmodus in Instellingen in om deze patch handmatig toe te voegen</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -134,6 +136,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download de originele .APK-bestand</string>
     <string name="home_download_instructions_steps_title">Instructies:</string>
+    <string name="home_download_instructions_step1">Druk op de \'%s\' knop hieronder</string>
     <string name="home_download_instructions_step2_part1">Scroll naar beneden op de webpagina en druk op</string>
     <string name="home_download_instructions_download_button_toast">Druk op de download op de website, en niet hier 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Geweldig! Klik nu op doorgaan en ga naar de website 👆</string>
@@ -313,6 +316,10 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="patcher_failed_subtitle">Controleer de onderstaande foutdetails</string>
     <string name="patcher_failed_dialog_title">Patchen mislukt</string>
     <string name="patcher_unknown_error">Onbekende fout opgetreden</string>
+    <string name="patcher_split_step_extracting">Het uitpakken van split APKs</string>
+    <string name="patcher_split_step_merging">Het samenvoegen van %s</string>
+    <string name="patcher_split_step_writing">Het schrijven van het samengevoegde APK</string>
+    <string name="patcher_split_step_finalizing">Finalisatie van het samengevoegde APK</string>
     <string name="patcher_conflict_title">Pakketconflict</string>
     <string name="patcher_conflict_subtitle">Je moet de bestaande versie verwijderen</string>
     <string name="patcher_conflict_hint">De aangepaste app gebruikt een ander certificaat dan de geïnstalleerde versie. Door het verwijderen worden alle app-gegevens gewist.</string>
@@ -785,6 +792,9 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="reorder_done">Volgorde opgeslagen</string>
     <string name="reset_order">Volgorde herstellen</string>
     <string name="reset_order_done">Bestelling gereset</string>
+    <string name="accessibility_move_up">Omhoog verplaatsen</string>
+    <string name="accessibility_move_down">Omlaag verplaatsen</string>
+    <string name="accessibility_app_moved_announcement">%1$s verplaatst naar positie %2$d van %3$d</string>
     <string name="rename">Hernoemen</string>
     <string name="import_">Importeren</string>
     <string name="export">Exporteren</string>
@@ -831,6 +841,8 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="changelog_description">Bekijk de laatste wijzigingen in deze update</string>
     <string name="changelog_download_fail">Fout bij het downloaden van de wijzigingslogboek: %s</string>
     <string name="changelog_empty">Geen changelog beschikbaar</string>
+    <string name="changelog_show_older">Oudere versies weergeven</string>
+    <string name="changelog_older_empty">Er zijn geen oudere releases om te tonen</string>
     <string name="no_network_toast">Geen internetverbinding beschikbaar</string>
     <string name="update_available">Een update is beschikbaar</string>
     <string name="ready_to_install_update">Klaar om update te installeren</string>

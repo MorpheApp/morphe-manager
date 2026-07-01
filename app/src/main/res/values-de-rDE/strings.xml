@@ -316,6 +316,10 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <string name="patcher_failed_subtitle">Überprüfe die Fehlerdetails unten</string>
     <string name="patcher_failed_dialog_title">Patchen fehlgeschlagen</string>
     <string name="patcher_unknown_error">Ein unbekannter Fehler ist aufgetreten</string>
+    <string name="patcher_split_step_extracting">Extrahieren von Split-APKs</string>
+    <string name="patcher_split_step_merging">%s wird zusammengeführt</string>
+    <string name="patcher_split_step_writing">Zusammengeführte APK wird geschrieben</string>
+    <string name="patcher_split_step_finalizing">Zusammengeführte APK wird fertiggestellt</string>
     <string name="patcher_conflict_title">Paketkonflikt</string>
     <string name="patcher_conflict_subtitle">Du musst die vorhandene Version deinstallieren</string>
     <string name="patcher_conflict_hint">Die gepatchte App verwendet ein anderes Zertifikat als die installierte Version. Die Deinstallation löscht alle App-Daten</string>
@@ -788,6 +792,9 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="reorder_done">Reihenfolge gespeichert</string>
     <string name="reset_order">Reihenfolge zurücksetzen</string>
     <string name="reset_order_done">Bestellung zurückgesetzt</string>
+    <string name="accessibility_move_up">Nach oben verschieben</string>
+    <string name="accessibility_move_down">Nach unten verschieben</string>
+    <string name="accessibility_app_moved_announcement">%1$s wurde auf Position %2$d von %3$d verschoben</string>
     <string name="rename">Umbenennen</string>
     <string name="import_">Importieren</string>
     <string name="export">Exportieren</string>
@@ -834,6 +841,8 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="changelog_description">Entdecken Sie die neuesten Änderungen in diesem Update</string>
     <string name="changelog_download_fail">Download des Changelogs fehlgeschlagen: %s</string>
     <string name="changelog_empty">Kein Changelog verfügbar</string>
+    <string name="changelog_show_older">Ältere Versionen anzeigen</string>
+    <string name="changelog_older_empty">Keine älteren Versionen zum Anzeigen</string>
     <string name="no_network_toast">Keine Internetverbindung verfügbar</string>
     <string name="update_available">Ein Update ist verfügbar</string>
     <string name="ready_to_install_update">Bereit, das Update zu installieren</string>

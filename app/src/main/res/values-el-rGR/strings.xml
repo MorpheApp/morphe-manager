@@ -792,6 +792,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">Η σειρά αποθηκεύτηκε</string>
     <string name="reset_order">Επαναφορά σειράς</string>
     <string name="reset_order_done">Επαναφορά παραγγελίας</string>
+    <string name="accessibility_move_up">Μετακίνηση προς τα πάνω</string>
+    <string name="accessibility_move_down">Μετακίνηση προς τα κάτω</string>
+    <string name="accessibility_app_moved_announcement">Το %1$s μετακινήθηκε στη θέση %2$d από %3$d</string>
     <string name="rename">Μετονομασία</string>
     <string name="import_">Εισαγωγή</string>
     <string name="export">Εξαγωγή</string>
@@ -838,6 +841,8 @@ morphe_header_custom_dark.png
     <string name="changelog_description">Έλεγξε τις τελευταίες αλλαγές σε αυτή την ενημέρωση</string>
     <string name="changelog_download_fail">Αποτυχία λήψης αρχείου καταγραφής αλλαγών: %s</string>
     <string name="changelog_empty">Δεν υπάρχει διαθέσιμο αρχείο καταγραφών αλλαγών </string>
+    <string name="changelog_show_older">Εμφάνιση παλαιότερων εκδόσεων</string>
+    <string name="changelog_older_empty">Δεν υπάρχουν παλαιότερες εκδόσεις για εμφάνιση</string>
     <string name="no_network_toast">Δεν υπάρχει διαθέσιμη σύνδεση στο διαδίκτυο</string>
     <string name="update_available">Μία ενημέρωση είναι διαθέσιμη</string>
     <string name="ready_to_install_update">Έτοιμο για εγκατάσταση ενημέρωσης</string>

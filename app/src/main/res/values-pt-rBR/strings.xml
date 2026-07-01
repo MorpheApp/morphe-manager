@@ -2,7 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Outros apps</string>
-    <string name="home_not_patched_yet">Não patcheado ainda</string>
+    <string name="home_not_patched_yet">Ainda não corrigido</string>
     <string name="home_no_patches_available">Não há patches disponíveis</string>
     <string name="home_app_hide_title">Ocultar esse app?</string>
     <string name="home_app_hide_message">Este app será oculto da tela inicial. Você pode restaurá-lo mais tarde usando o botão na parte inferior da lista</string>
@@ -792,6 +792,9 @@ As dimensões das imagens devem ser as seguintes:
     <string name="reorder_done">Ordem salva</string>
     <string name="reset_order">Restaurar ordem</string>
     <string name="reset_order_done">Pedido redefinido</string>
+    <string name="accessibility_move_up">Mover para cima</string>
+    <string name="accessibility_move_down">Mover para baixo</string>
+    <string name="accessibility_app_moved_announcement">%1$s movido para a posição %2$d de %3$d</string>
     <string name="rename">Renomear</string>
     <string name="import_">Importar</string>
     <string name="export">Exportar</string>
@@ -838,6 +841,8 @@ As dimensões das imagens devem ser as seguintes:
     <string name="changelog_description">Veja as últimas alterações nesta atualização</string>
     <string name="changelog_download_fail">Falha ao baixar changelog: %s</string>
     <string name="changelog_empty">Não há registro de alterações disponíveis</string>
+    <string name="changelog_show_older">Exibir versões anteriores</string>
+    <string name="changelog_older_empty">Sem versões anteriores para exibir</string>
     <string name="no_network_toast">Não há conexão com a internet disponível</string>
     <string name="update_available">Uma atualização está disponível</string>
     <string name="ready_to_install_update">Pronto para instalar a atualização</string>

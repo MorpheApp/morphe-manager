@@ -316,6 +316,10 @@
     <string name="patcher_failed_subtitle">請檢查下方的錯誤細節</string>
     <string name="patcher_failed_dialog_title">修補失敗</string>
     <string name="patcher_unknown_error">發生未知錯誤</string>
+    <string name="patcher_split_step_extracting">提取分割 APK</string>
+    <string name="patcher_split_step_merging">合併 %s</string>
+    <string name="patcher_split_step_writing">撰寫合併 APK</string>
+    <string name="patcher_split_step_finalizing">完成合併後的 APK 檔案生成</string>
     <string name="patcher_conflict_title">套件衝突</string>
     <string name="patcher_conflict_subtitle">你需要解除安裝現有版本</string>
     <string name="patcher_conflict_hint">修補後的應用程式使用的憑證與已安裝版本不同。解除安裝會清除所有應用程式資料</string>
@@ -788,6 +792,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">排序已儲存</string>
     <string name="reset_order">重設排序</string>
     <string name="reset_order_done">訂單已重置</string>
+    <string name="accessibility_move_up">向上移動</string>
+    <string name="accessibility_move_down">向下移動</string>
+    <string name="accessibility_app_moved_announcement">%1$s 已移動至 %3$d 的第 %2$d 個位置</string>
     <string name="rename">重新命名</string>
     <string name="import_">匯入</string>
     <string name="export">匯出</string>
@@ -834,6 +841,8 @@ morphe_header_custom_dark.png
     <string name="changelog_description">查看此更新中的最新變更</string>
     <string name="changelog_download_fail">無法下載變更紀錄：%s</string>
     <string name="changelog_empty">沒有可用的變更紀錄</string>
+    <string name="changelog_show_older">顯示舊版本</string>
+    <string name="changelog_older_empty">尚無較舊版本可顯示</string>
     <string name="no_network_toast">沒有可用的網際網路連線</string>
     <string name="update_available">有可用的更新</string>
     <string name="ready_to_install_update">準備安裝更新</string>
