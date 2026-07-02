@@ -675,11 +675,11 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_import_manager_settings_success">Zaimportowano ustawienia Morphe</string>
     <string name="settings_system_import_manager_settings_mode_title">Importuj ustawienia Morphe</string>
     <string name="settings_system_import_manager_settings_mode_description">Wybierz sposób zastosowania zaimportowanych ustawień i źródeł</string>
-    <string name="settings_system_import_selections_mode_title">Zaimportuj wybór modyfikacji</string>
-    <string name="settings_system_import_selections_mode_description">Wybierz, w jaki sposób zaimportowane zaznaczenia i opcje łatki mają zostać zastosowane</string>
+    <string name="settings_system_import_selections_mode_title">Importuj wybrane modyfikacje</string>
+    <string name="settings_system_import_selections_mode_description">Wybierz sposób zastosowania zaimportowanych modyfikacji i ich opcji</string>
     <string name="import_mode_replace_title">Zastąp istniejące</string>
-    <string name="import_mode_replace_description">Dokładnie dopasuj kopię zapasową. Elementy brakujące w kopii zapasowej zostaną usunięte</string>
-    <string name="import_mode_merge_title">Połącz z istniejącymi</string>
+    <string name="import_mode_replace_description">Odtwórz dokładnie z kopii zapasowej. Elementy brakujące w kopii zostaną usunięte</string>
+    <string name="import_mode_merge_title">Scal z istniejącymi</string>
     <string name="import_mode_merge_description">Dodaj brakujące elementy z kopii zapasowej. Istniejące elementy pozostaną bez zmian</string>
     <string name="settings_system_export_manager_settings_fail">Nie udało się wyeksportować ustawień Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Wyeksportowano ustawienia Morphe</string>

@@ -55,13 +55,13 @@
     <string name="home_greeting_10">Nạp caffein có ngay bản vá xịn</string>
     <!-- Morning greetings (5:00–11:59) -->
     <string name="home_greeting_morning_1">Dậy đi, vá thôi</string>
-    <string name="home_greeting_morning_2">Chào ngày mới! Ứng dụng không tự vá đâu nhá</string>
+    <string name="home_greeting_morning_2">Chào ngày mới! Ứng dụng không tự vá được đâu đấy</string>
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">Chiều nay hơi đuối? Thử vá một ứng dụng xem</string>
     <string name="home_greeting_afternoon_2">Sau bữa trưa mà vá thì cuốn lắm</string>
     <string name="home_greeting_afternoon_3">Nhiệm vụ ca chiều: vá ứng dụng</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Tối rồi! Giờ mà vá mới khác bọt</string>
+    <string name="home_greeting_evening_1">Trời tối rồi! Thử vá đi, khác bọt lắm đấy</string>
     <string name="home_greeting_evening_2">Đang thư giãn đấy ah? Hay là vá một ứng dụng đi</string>
     <string name="home_greeting_evening_3">Sắp tan làm chưa? Về nhớ vá đấy</string>
     <!-- Late night greetings (22:00–23:59) -->
@@ -675,13 +675,13 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_import_manager_settings_fail">Không thể nhập cài đặt Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Đã nhập cài đặt Morphe</string>
     <string name="settings_system_import_manager_settings_mode_title">Nhập cài đặt Morphe</string>
-    <string name="settings_system_import_manager_settings_mode_description">Chọn cách áp dụng các cài đặt và nguồn đã nhập</string>
+    <string name="settings_system_import_manager_settings_mode_description">Chọn cách áp dụng các cài đặt và nguồn vá vừa nhập</string>
     <string name="settings_system_import_selections_mode_title">Nhập lựa chọn bản vá</string>
-    <string name="settings_system_import_selections_mode_description">Chọn cách áp dụng các lựa chọn và tùy chọn vá đã nhập</string>
-    <string name="import_mode_replace_title">Thay thế hiện có</string>
-    <string name="import_mode_replace_description">Khớp chính xác với bản sao lưu. Các mục không có trong bản sao lưu sẽ bị xóa</string>
+    <string name="settings_system_import_selections_mode_description">Chọn cách áp dụng các bản vá từng chọn và tùy chỉnh vừa nhập</string>
+    <string name="import_mode_replace_title">Thay thế hiện có</string>
+    <string name="import_mode_replace_description">Thay thế toàn bộ dữ liệu hiện tại bằng dữ liệu trong bản sao lưu. Các mục (có trong dữ liệu hiện tại) mà không có trong bản sao lưu sẽ bị xóa</string>
     <string name="import_mode_merge_title">Hợp nhất với hiện có</string>
-    <string name="import_mode_merge_description">Thêm các mục còn thiếu từ bản sao lưu. Các mục hiện có sẽ không thay đổi</string>
+    <string name="import_mode_merge_description">Chỉ thêm các mục còn thiếu từ bản sao lưu. Các mục hiện tại sẽ không bị ảnh hưởng</string>
     <string name="settings_system_export_manager_settings_fail">Không thể xuất cài đặt Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Đã xuất cài đặt Morphe</string>
     <string name="settings_system_debug">Gỡ lỗi</string>
@@ -850,8 +850,8 @@ Kích thước hình ảnh yêu cầu:
     <string name="changelog_description">Xem những thay đổi mới nhất trong bản cập nhật này</string>
     <string name="changelog_download_fail">Không thể tải lịch sử cập nhật: %s</string>
     <string name="changelog_empty">Không có lịch sử cập nhật</string>
-    <string name="changelog_show_older">Hiển thị các bản phát hành cũ</string>
-    <string name="changelog_older_empty">Không có bản phát hành cũ nào để hiển thị</string>
+    <string name="changelog_show_older">Các bản phát hành cũ</string>
+    <string name="changelog_older_empty">Không có bản phát hành nào trước đây</string>
     <string name="no_network_toast">Không có kết nối mạng</string>
     <string name="update_available">Đã có bản cập nhật mới</string>
     <string name="ready_to_install_update">Sẵn sàng cài đặt bản cập nhật</string>

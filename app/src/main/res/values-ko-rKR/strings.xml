@@ -675,9 +675,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_fail">Morphe 설정을 가져올 수 없습니다: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe 설정을 가져왔습니다</string>
     <string name="settings_system_import_manager_settings_mode_title">Morphe 설정 가져오기</string>
-    <string name="settings_system_import_manager_settings_mode_description">가져온 설정 및 소스가 적용되는 방식을 선택하세요</string>
+    <string name="settings_system_import_manager_settings_mode_description">가져온 설정 및 소스를 적용하는 방식을 선택하세요</string>
     <string name="settings_system_import_selections_mode_title">패치 선택 목록 가져오기</string>
-    <string name="settings_system_import_selections_mode_description">가져온 선택 항목 및 패치 옵션을 적용하는 방법을 선택하세요</string>
+    <string name="settings_system_import_selections_mode_description">가져온 선택 목록 및 패치 옵션을 적용하는 방법을 선택하세요</string>
     <string name="import_mode_replace_title">기존 항목 바꾸기</string>
     <string name="import_mode_replace_description">백업과 정확히 일치합니다. 백업에 없는 항목은 제거됩니다</string>
     <string name="import_mode_merge_title">기존 항목과 병합</string>

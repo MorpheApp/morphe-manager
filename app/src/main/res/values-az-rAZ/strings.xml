@@ -672,6 +672,14 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Morphe tənzimləmələrinizi nüsxələyir və bərpa edir</string>
     <string name="settings_system_import_manager_settings_fail">Morphe tənzimləmələrin idxal etmək olmadı: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe tənzimləmələri idxal edildi</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe tənzimləmələrin idxal et</string>
+    <string name="settings_system_import_manager_settings_mode_description">İdxal olunmuş tənzimləmələrin və mənbələrin necə tətbiq olunacağını seç</string>
+    <string name="settings_system_import_selections_mode_title">Yamaq seçimlərini idxal et</string>
+    <string name="settings_system_import_selections_mode_description">İdxal olunmuş seçimlərin və yamaq üstünlüklərinin necə tətbiq olunacağını seç</string>
+    <string name="import_mode_replace_title">Mövcud olanı əvəzlə</string>
+    <string name="import_mode_replace_description">Nüsxələməni tam olaraq uyğunlaşdır. Nüsxələmədən çatışmayan elementlər silinəcək</string>
+    <string name="import_mode_merge_title">Mövcud olanla birləşdir</string>
+    <string name="import_mode_merge_description">Nüsxələmədən çatışmayan elementləri əlavə et. Mövcud elementlər dəyişməz saxlanılır</string>
     <string name="settings_system_export_manager_settings_fail">Morphe tənzimləmələrin ixrac etmək olmadı: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe tənzimləmələri ixrac olundu</string>
     <string name="settings_system_debug">Yaxşılaşdırma</string>

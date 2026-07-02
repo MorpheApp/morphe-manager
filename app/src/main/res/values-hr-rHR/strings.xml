@@ -673,6 +673,14 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_import_manager_settings_description">Izrađuje sigurnosne kopije i vraća Morphe postavke</string>
     <string name="settings_system_import_manager_settings_fail">Uvoz postavki Morphea nije uspio: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe postavke uvezene</string>
+    <string name="settings_system_import_manager_settings_mode_title">Uvezi Morphe postavke</string>
+    <string name="settings_system_import_manager_settings_mode_description">Odaberite kako bi se uvezane postavke i izvori trebali primijeniti</string>
+    <string name="settings_system_import_selections_mode_title">Uvezi odabire patcha</string>
+    <string name="settings_system_import_selections_mode_description">Odaberite kako će se primijeniti uvezeni odabiri i opcije patcha</string>
+    <string name="import_mode_replace_title">Zamijeni postojeće</string>
+    <string name="import_mode_replace_description">Točno uskladite sigurnosnu kopiju. Predmeti koji nedostaju u sigurnosnoj kopiji bit će uklonjeni</string>
+    <string name="import_mode_merge_title">Spoji sa postojećim</string>
+    <string name="import_mode_merge_description">Dodaj nedostajuće stavke iz sigurnosne kopije. Postojeće stavke ostaju netaknute</string>
     <string name="settings_system_export_manager_settings_fail">Izvoz postavki Morphea nije uspio: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe postavke izvezene</string>
     <string name="settings_system_debug">Otklanjanje grešaka</string>

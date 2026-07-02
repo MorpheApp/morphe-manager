@@ -802,7 +802,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="reset_order_done">Sıra sıfırlandı</string>
     <string name="accessibility_move_up">Yukarı taşı</string>
     <string name="accessibility_move_down">Aşağı taşı</string>
-    <string name="accessibility_app_moved_announcement">%1$s %3$d öğesinin %2$d konumuna taşındı</string>
+    <string name="accessibility_app_moved_announcement">%1$s, %3$d\'nin %2$d konumuna taşındı</string>
     <string name="rename">Yeniden adlandır</string>
     <string name="import_">İçe aktar</string>
     <string name="export">Dışa aktar</string>
