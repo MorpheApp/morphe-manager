@@ -608,7 +608,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">安装程序</string>
     <string name="installer_title">选择安装程序</string>
-    <string name="installer_internal_name">系统安装程序</string>
     <string name="installer_internal_description">使用 Android 包安装程序</string>
     <string name="installer_auto_saved_name">Rooted 挂载安装器</string>
     <string name="installer_auto_saved_description">将修补后的 APK 安装在已安装的应用程序上</string>

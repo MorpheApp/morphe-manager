@@ -551,7 +551,6 @@ Bildernas mått ska vara följande:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installerare</string>
     <string name="installer_title">Välj installerare</string>
-    <string name="installer_internal_name">Systemets installerare</string>
     <string name="installer_internal_description">Använder Androids paketinstallerare</string>
     <string name="installer_auto_saved_name">Rootad monteringsinstallerare</string>
     <string name="installer_auto_saved_description">Monterar den modifierade APK-filen över den installerade appen</string>

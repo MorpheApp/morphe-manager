@@ -603,7 +603,6 @@ Myndastærðin verður að vera sem hér segir:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Uppsetjari</string>
     <string name="installer_title">Velji uppsetjara</string>
-    <string name="installer_internal_name">Kerfisuppsetjari</string>
     <string name="installer_internal_description">Installerar hljóðlega með Shizuku eða Sui</string>
     <string name="installer_auto_saved_name">Rooted festa uppsetjari</string>
     <string name="installer_auto_saved_description">Uppsetta pattaða APK yfir uppsett app</string>

@@ -606,7 +606,6 @@ Qasîyên wêneyan divê wiha bin:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Saçik</string>
     <string name="installer_title">Sazkerê hilbijêre</string>
-    <string name="installer_internal_name">Ferqendera sistemê</string>
     <string name="installer_internal_description">Sazkera pakketa Android’ê bikar bîne</string>
     <string name="installer_auto_saved_name">Ferqendera ku bi rûsyê ve çêkiriye</string>
     <string name="installer_auto_saved_description">APK-ya dirûtîkirî ser navberê serdana sepanê ava dike</string>

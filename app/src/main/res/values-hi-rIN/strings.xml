@@ -608,7 +608,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">इंस्टॉलर</string>
     <string name="installer_title">इंस्टॉलर चुनें</string>
-    <string name="installer_internal_name">सिस्टम इन्स्टॉलर</string>
     <string name="installer_internal_description">एंड्रॉइड पैकेज इंस्टॉलर का उपयोग करें।</string>
     <string name="installer_auto_saved_name">रूट्ड माउंट इंस्टॉलर</string>
     <string name="installer_auto_saved_description">संस्थापित एप्लिकेशन पर पथचिह्नित एपीके को माउंट करता है</string>

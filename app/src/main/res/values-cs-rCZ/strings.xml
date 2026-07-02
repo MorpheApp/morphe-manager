@@ -608,7 +608,6 @@ Rozměry obrázků musí být následující:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalátor</string>
     <string name="installer_title">Vyberte instalátor</string>
-    <string name="installer_internal_name">Systémový instalátor</string>
     <string name="installer_internal_description">Používá vestavěný správce balíčků Androidu</string>
     <string name="installer_auto_saved_name">Instalátor s kořenovým připojením</string>
     <string name="installer_auto_saved_description">Nainstaluje upravený APK nad instalovanou aplikací</string>

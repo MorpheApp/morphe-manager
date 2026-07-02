@@ -606,7 +606,6 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Suiteálaí</string>
     <string name="installer_title">Roghnaigh suiteálaí</string>
-    <string name="installer_internal_name">Suiteálaí córais</string>
     <string name="installer_internal_description">Úsáideann sé suiteálaí an phacáiste Android</string>
     <string name="installer_auto_saved_name">Suiteálaí gléasta fréamhaithe</string>
     <string name="installer_auto_saved_description">Suiteálann sé an APK paisteáilte thar an aip suiteáilte</string>

@@ -608,7 +608,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">安裝程式</string>
     <string name="installer_title">選取安裝程式</string>
-    <string name="installer_internal_name">系統安裝程式</string>
     <string name="installer_internal_description">使用 Android 封裝安裝程式</string>
     <string name="installer_auto_saved_name">根目錄掛載安裝程式</string>
     <string name="installer_auto_saved_description">將修補後的 APK 掛載到已安裝的應用程式上</string>

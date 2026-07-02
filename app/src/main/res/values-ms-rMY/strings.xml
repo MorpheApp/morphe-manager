@@ -552,7 +552,6 @@ Dimensi gambar mestilah seperti berikut:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Pemasang</string>
     <string name="installer_title">Pilih pemasang</string>
-    <string name="installer_internal_name">Pemasang sistem</string>
     <string name="installer_auto_saved_name">Pemasang pemasang berakar</string>
     <string name="installer_auto_saved_description">Memasang APK yang ditampal di atas aplikasi yang dipasang</string>
     <string name="installer_option_none">Tiada kejatuhan</string>

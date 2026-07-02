@@ -607,7 +607,6 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Quraşdırıcı</string>
     <string name="installer_title">Quraşdırıcını seç</string>
-    <string name="installer_internal_name">Sistem quraşdırıcısı</string>
     <string name="installer_internal_description">Android paket quraşdırıcısı istifadə edilir</string>
     <string name="installer_auto_saved_name">Root-lu montajlama quraşdırıcısı</string>
     <string name="installer_auto_saved_description">Yamaqlanan APK-nı quraşdırılan tətbiq üzərinə montajlayır</string>

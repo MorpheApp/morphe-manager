@@ -609,7 +609,6 @@ Kích thước hình ảnh yêu cầu:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Trình cài đặt</string>
     <string name="installer_title">Trình cài đặt</string>
-    <string name="installer_internal_name">Trình cài đặt hệ thống</string>
     <string name="installer_internal_description">Dùng trình cài đặt gói của Android</string>
     <string name="installer_auto_saved_name">Trình cài đặt gắn kết đã root</string>
     <string name="installer_auto_saved_description">Gắn APK đã vá lên ứng dụng đã được cài đặt</string>

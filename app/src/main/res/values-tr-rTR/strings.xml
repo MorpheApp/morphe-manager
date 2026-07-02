@@ -608,7 +608,6 @@ Resim boyutları şu şekilde olmalıdır:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Yükleyici</string>
     <string name="installer_title">Yükleyici seçin</string>
-    <string name="installer_internal_name">Sistem yükleyicisi</string>
     <string name="installer_internal_description">Android paket yükleyicisini kullanır</string>
     <string name="installer_auto_saved_name">Rootlu bağlama yükleyicisi</string>
     <string name="installer_auto_saved_description">Yamalanmış APK\'yi yüklü uygulamaya bağlar</string>

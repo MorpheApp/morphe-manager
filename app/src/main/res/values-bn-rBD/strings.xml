@@ -598,7 +598,6 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">పరిష్కరణ</string>
     <string name="installer_title">ইনস্টলার নির্বাচন করুন</string>
-    <string name="installer_internal_name">সিস্টেম ইনস্টলার</string>
     <string name="installer_internal_description">অ্যান্ড্রয়েড প্যাকেজ ইনস্টলার ব্যবহার করে।</string>
     <string name="installer_auto_saved_name">রুট করা মাউন্ট ইনস্টলার</string>
     <string name="installer_auto_saved_description">এপিকে (APK) প্যাচ করা ইনস্টল করা অ্যাপের উপরে স্থাপন করা হয়</string>

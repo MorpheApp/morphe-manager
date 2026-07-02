@@ -608,7 +608,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Установщик</string>
     <string name="installer_title">Выберите установщик</string>
-    <string name="installer_internal_name">Системный установщик</string>
     <string name="installer_internal_description">Использует установщик пакетов Android</string>
     <string name="installer_auto_saved_name">Установщик с root-доступом</string>
     <string name="installer_auto_saved_description">Монтирует патченый APK поверх установленного приложения</string>

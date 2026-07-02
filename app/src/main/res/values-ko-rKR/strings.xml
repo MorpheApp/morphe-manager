@@ -609,7 +609,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">설치 프로그램</string>
     <string name="installer_title">설치 프로그램 선택</string>
-    <string name="installer_internal_name">시스템 설치 프로그램</string>
     <string name="installer_internal_description">Android 패키지 설치 프로그램을 사용합니다</string>
     <string name="installer_auto_saved_name">루팅된 마운트 설치 프로그램</string>
     <string name="installer_auto_saved_description">설치된 앱 위에 패치된 APK를 마운트합니다</string>

@@ -608,7 +608,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installasjonsprogram</string>
     <string name="installer_title">Velg installasjonsprogram</string>
-    <string name="installer_internal_name">Systeminstallasjonsprogram</string>
     <string name="installer_internal_description">Bruker Android-pakkeinstallasjonsprogrammet</string>
     <string name="installer_auto_saved_name">Root-montert installasjonsprogram</string>
     <string name="installer_auto_saved_description">Monter den patched APK-filen over den installerte appen</string>

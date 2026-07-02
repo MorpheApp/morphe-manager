@@ -307,7 +307,7 @@ class InstallerManager(
     private fun entryFor(token: Token, target: InstallTarget, checkRoot: Boolean = true): Entry? = when (token) {
         Token.Internal -> Entry(
             token = Token.Internal,
-            label = app.getString(R.string.installer_internal_name),
+            label = app.getString(R.string.home_app_info_install_type_system_installer),
             description = app.getString(R.string.installer_internal_description),
             availability = Availability(true),
             icon = loadInstallerIcon(defaultInstallerPackage)
@@ -323,7 +323,7 @@ class InstallerManager(
 
         Token.PlayStore -> Entry(
             token = Token.PlayStore,
-            label = app.getString(R.string.installer_play_store_name),
+            label = app.getString(R.string.home_app_info_install_type_play_store),
             description = app.getString(R.string.installer_play_store_description),
             availability = availabilityFor(Token.PlayStore, target, checkRoot),
             icon = loadInstallerIcon(PLAY_STORE_INSTALLER_PACKAGE)
@@ -331,7 +331,7 @@ class InstallerManager(
 
         Token.RootPlayStore -> Entry(
             token = Token.RootPlayStore,
-            label = app.getString(R.string.installer_root_play_store_name),
+            label = app.getString(R.string.home_app_info_install_type_root_play_store),
             description = app.getString(R.string.installer_root_play_store_description),
             availability = availabilityFor(Token.RootPlayStore, target, checkRoot),
             icon = loadInstallerIcon(PLAY_STORE_INSTALLER_PACKAGE)
@@ -347,7 +347,7 @@ class InstallerManager(
 
         Token.Shizuku -> Entry(
             token = Token.Shizuku,
-            label = app.getString(R.string.installer_shizuku_name),
+            label = app.getString(R.string.home_app_info_install_type_shizuku),
             description = app.getString(R.string.installer_shizuku_description),
             availability = availabilityFor(Token.Shizuku, target, checkRoot),
             icon = sessionInstaller.shizukuPackageName()?.let { loadInstallerIcon(it) }
@@ -355,7 +355,7 @@ class InstallerManager(
 
         Token.ShizukuPlayStore -> Entry(
             token = Token.ShizukuPlayStore,
-            label = app.getString(R.string.installer_shizuku_play_store_name),
+            label = app.getString(R.string.home_app_info_install_type_shizuku_play_store),
             description = app.getString(R.string.installer_shizuku_play_store_description),
             availability = availabilityFor(Token.ShizukuPlayStore, target, checkRoot),
             icon = sessionInstaller.shizukuPackageName()?.let { loadInstallerIcon(it) }

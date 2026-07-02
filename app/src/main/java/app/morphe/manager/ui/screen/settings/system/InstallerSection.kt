@@ -533,11 +533,11 @@ fun InstallerUnavailableDialog(
     onDismiss: () -> Unit
 ) {
     val installerName = when (state.installerToken) {
-        InstallerManager.Token.Shizuku -> stringResource(R.string.installer_shizuku_name)
-        InstallerManager.Token.ShizukuPlayStore -> stringResource(R.string.installer_shizuku_play_store_name)
+        InstallerManager.Token.Shizuku -> stringResource(R.string.home_app_info_install_type_shizuku)
+        InstallerManager.Token.ShizukuPlayStore -> stringResource(R.string.home_app_info_install_type_shizuku_play_store)
         InstallerManager.Token.AutoSaved -> stringResource(R.string.installer_auto_saved_name)
-        InstallerManager.Token.RootPlayStore -> stringResource(R.string.installer_root_play_store_name)
-        else -> stringResource(R.string.installer_internal_name)
+        InstallerManager.Token.RootPlayStore -> stringResource(R.string.home_app_info_install_type_root_play_store)
+        else -> stringResource(R.string.home_app_info_install_type_system_installer)
     }
 
     val reasonText = state.reason?.let { stringResource(it) }

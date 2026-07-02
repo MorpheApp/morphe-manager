@@ -608,7 +608,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">インストーラー</string>
     <string name="installer_title">インストーラーを選択</string>
-    <string name="installer_internal_name">システムのインストーラー</string>
     <string name="installer_internal_description">Android パッケージインストーラーを使用します</string>
     <string name="installer_auto_saved_name">root 権限マウント式インストーラー</string>
     <string name="installer_auto_saved_description">パッチ適用済み APK をインストール済みアプリの上にマウントします</string>

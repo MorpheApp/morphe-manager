@@ -609,7 +609,6 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installateur</string>
     <string name="installer_title">Sélectionner l\'installateur</string>
-    <string name="installer_internal_name">Installateur système</string>
     <string name="installer_internal_description">Utilise l\'installateur de paquets Android</string>
     <string name="installer_auto_saved_name">Installateur par montage root</string>
     <string name="installer_auto_saved_description">Monte l\'APK patché par-dessus l\'application installée</string>

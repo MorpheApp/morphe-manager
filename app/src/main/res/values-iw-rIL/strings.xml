@@ -592,7 +592,6 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Установщик</string>
     <string name="installer_title">בחר התקן</string>
-    <string name="installer_internal_name">מתקין מערכת</string>
     <string name="installer_internal_description">משתמש במתקין החבילות של Android</string>
     <string name="installer_auto_saved_name">מתקין מאונטר עם רוט</string>
     <string name="installer_auto_saved_description">העלה את APK המותקן על האפליקציה המותקנת</string>

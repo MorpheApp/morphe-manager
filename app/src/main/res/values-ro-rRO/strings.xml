@@ -608,7 +608,6 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
     <string name="installer_title">Selectați instalatorul</string>
-    <string name="installer_internal_name">Instalator de sistem</string>
     <string name="installer_internal_description">Utilizează installerul de pachete Android</string>
     <string name="installer_auto_saved_name">Instalator de montare root</string>
     <string name="installer_auto_saved_description">Instalează APK-ul patcheat peste aplicația instalată</string>

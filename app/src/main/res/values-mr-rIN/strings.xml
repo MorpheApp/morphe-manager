@@ -607,7 +607,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">इंस्टॉलर</string>
     <string name="installer_title">इंस्टॉलर निवडा</string>
-    <string name="installer_internal_name">सिस्टम इंस्टॉलर</string>
     <string name="installer_internal_description">Android पॅकेज इंस्टॉलर वापरतो</string>
     <string name="installer_auto_saved_name">रूटेड माउंट इंस्टॉलर</string>
     <string name="installer_auto_saved_description">पॅच केलेले APK स्थापित ॲपवर माउंट करते</string>

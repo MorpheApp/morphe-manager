@@ -608,7 +608,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">การติดตั้ง</string>
     <string name="installer_title">เลือกตัวติดตั้ง</string>
-    <string name="installer_internal_name">โปรแกรมติดตั้งระบบ</string>
     <string name="installer_internal_description">ใช้ตัวติดตั้งแพ็คเกจ Android</string>
     <string name="installer_auto_saved_name">ตัวติดตั้งแบบ Rooted mount</string>
     <string name="installer_auto_saved_description">ติดตั้ง APK ที่ถูกแก้ไขทับแทนแอปที่ถูกติดตั้งอยู่</string>

@@ -608,7 +608,6 @@ Størrelsesformatet skal være som følger:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
     <string name="installer_title">Vælg installer</string>
-    <string name="installer_internal_name">Systeminstallationsprogram</string>
     <string name="installer_internal_description">Bruger Android-pakkeinstallationsprogrammet</string>
     <string name="installer_auto_saved_name">Root monteringsinstallationsprogram</string>
     <string name="installer_auto_saved_description">Monterer den patchede APK over den installerede app</string>

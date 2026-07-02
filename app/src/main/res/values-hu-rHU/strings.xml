@@ -608,7 +608,6 @@ A képek méreteinek a következőknek kell lennie:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Telepítő</string>
     <string name="installer_title">Telepítő kiválasztása</string>
-    <string name="installer_internal_name">Rendszertelepítő</string>
     <string name="installer_internal_description">Az Android csomagtelepítő használata</string>
     <string name="installer_auto_saved_name">Root telepítő</string>
     <string name="installer_auto_saved_description">A módosított APK-t a telepített alkalmazás fölé csatolja</string>

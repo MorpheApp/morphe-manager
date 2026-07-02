@@ -608,7 +608,6 @@ Dimenzije slike moraju biti sljedeće:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalacijski program</string>
     <string name="installer_title">Odaberite program instalacije</string>
-    <string name="installer_internal_name">Sustav</string>
     <string name="installer_internal_description">Koristi Android instalater paketa</string>
     <string name="installer_auto_saved_name">Rootani učitani instalater</string>
     <string name="installer_auto_saved_description">Učitava patchanu aplikaciju preko instalirane aplikacije</string>

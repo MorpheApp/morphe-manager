@@ -609,7 +609,6 @@ Dimensi gambar harus sebagai berikut:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Pemasang</string>
     <string name="installer_title">Pilih pemasang</string>
-    <string name="installer_internal_name">Pemasang sistem</string>
     <string name="installer_internal_description">Menggunakan pemasang paket Android</string>
     <string name="installer_auto_saved_name">Pemasang mount root</string>
     <string name="installer_auto_saved_description">Mount APK yang ditambal di atas aplikasi yang terpasang</string>

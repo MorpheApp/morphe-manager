@@ -608,7 +608,6 @@ Dimenzije slike morajo biti naslednje:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Namestitveni program</string>
     <string name="installer_title">Izberi namestitveni program</string>
-    <string name="installer_internal_name">Sistemski namestitveni program</string>
     <string name="installer_internal_description">Uporablja namestitveni program Android</string>
     <string name="installer_auto_saved_name">Namestitveni program z root dostopom</string>
     <string name="installer_auto_saved_description">Namesti popravljen APK prek nameščene aplikacije</string>

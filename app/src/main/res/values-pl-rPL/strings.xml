@@ -608,7 +608,6 @@ Wymagane są następujące wymiary obrazów:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
     <string name="installer_title">Wybierz instalator</string>
-    <string name="installer_internal_name">Instalator systemowy</string>
     <string name="installer_internal_description">Używa instalatora pakietów Androida</string>
     <string name="installer_auto_saved_name">Instalator z montowaniem roota</string>
     <string name="installer_auto_saved_description">Montuje zmodyfikowany plik APK nad zainstalowaną aplikacją</string>

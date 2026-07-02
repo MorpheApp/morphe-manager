@@ -592,7 +592,6 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
     <string name="installer_title">Odaberite instalera</string>
-    <string name="installer_internal_name">Sistemski instalacioni program</string>
     <string name="installer_internal_description">Koristi Android paketni instalator</string>
     <string name="installer_auto_saved_name">Instalator za montažu sa root-om</string>
     <string name="installer_auto_saved_description">Instalira nadinstaliranu APK na postojeću aplikaciju</string>

@@ -608,7 +608,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Εγκαταστάτης</string>
     <string name="installer_title">Επιλέξτε εγκαταστάτη</string>
-    <string name="installer_internal_name">Εγκαταστάτης συστήματος</string>
     <string name="installer_internal_description">Χρησιμοποιεί τον ενσωματωμένο εγκαταστάτη πακέτων Android</string>
     <string name="installer_auto_saved_name">Εγκαταστάτης προσάρτησης με root</string>
     <string name="installer_auto_saved_description">Προσαρτά την τροποποιημένη APK πάνω από την εγκατεστημένη εφαρμογή</string>

@@ -604,7 +604,6 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
     <string name="installer_title">Piliin ang installer</string>
-    <string name="installer_internal_name">System installer</string>
     <string name="installer_internal_description">Gamitin ang Android package installer</string>
     <string name="installer_auto_saved_name">Na-root na mount installer</string>
     <string name="installer_auto_saved_description">Mina-mount ang na-patch na APK sa naka-install na aplikasyon</string>

@@ -440,7 +440,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         launchMonitoredIntentInstall(
             targetPackageName = targetPackageName,
             installType = InstallType.PLAY_STORE,
-            installerLabel = app.getString(R.string.installer_play_store_name),
+            installerLabel = app.getString(R.string.home_app_info_install_type_play_store),
             onPersistApp = onPersistApp
         ) {
             sessionInstaller.launchPlayStoreInstall(outputFile)
@@ -634,7 +634,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         launchMonitoredIntentInstall(
             targetPackageName = targetPackageName,
             installType = InstallType.DEFAULT,
-            installerLabel = app.getString(R.string.installer_internal_name),
+            installerLabel = app.getString(R.string.home_app_info_install_type_system_installer),
             onPersistApp = onPersistApp
         ) {
             sessionInstaller.launchIntentInstall(outputFile)

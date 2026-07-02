@@ -608,7 +608,6 @@ Die beeld afmetings moet soos volg wees:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
     <string name="installer_title">Kies installer</string>
-    <string name="installer_internal_name">Stelsel installer</string>
     <string name="installer_internal_description">Gebruik die Android pakketinstalleerder</string>
     <string name="installer_auto_saved_name">Gewortelde monteer installer</string>
     <string name="installer_auto_saved_description">Monteer die gepleisterde APK oor die geïnstalleerde app</string>

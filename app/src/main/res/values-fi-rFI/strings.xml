@@ -604,7 +604,6 @@ Kuvien mittojen on oltava seuraavat:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Asennusohjelma</string>
     <string name="installer_title">Valitse asennusohjelma</string>
-    <string name="installer_internal_name">Järjestelmän asennusohjelma</string>
     <string name="installer_internal_description">Käytä Androidin pakettien asennusohjelmaa</string>
     <string name="installer_auto_saved_name">Root-liitosasennusohjelma</string>
     <string name="installer_auto_saved_description">Asentaa korjattua APK:tä asennetun sovelluksen päälle</string>

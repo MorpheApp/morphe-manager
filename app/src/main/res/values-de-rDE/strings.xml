@@ -608,7 +608,6 @@ Die Bildgrößen müssen wie folgt sein:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
     <string name="installer_title">Installer auswählen</string>
-    <string name="installer_internal_name">System-Installer</string>
     <string name="installer_internal_description">Verwendet den Android-Paketinstaller</string>
     <string name="installer_auto_saved_name">Root-Mount-Installer</string>
     <string name="installer_auto_saved_description">Die gepatchte APK über die installierte App mounten</string>

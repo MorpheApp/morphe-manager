@@ -668,17 +668,12 @@ The image dimensions must be as follows:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
     <string name="installer_title">Select installer</string>
-    <string name="installer_internal_name">System installer</string>
     <string name="installer_internal_description">Uses the Android package installer</string>
-    <string name="installer_play_store_name">Play Store install</string>
     <string name="installer_play_store_description">Uses the system installer and sets Google Play Store as the install source</string>
-    <string name="installer_root_play_store_name">Root Play Store install</string>
     <string name="installer_root_play_store_description">Installs silently with root and sets Google Play Store as the install source</string>
     <string name="installer_auto_saved_name">Rooted mount installer</string>
     <string name="installer_auto_saved_description">Mounts the patched APK over the installed app</string>
-    <string name="installer_shizuku_name" translatable="false">Shizuku</string>
     <string name="installer_shizuku_description">Installs silently using Shizuku or Sui</string>
-    <string name="installer_shizuku_play_store_name">Shizuku Play Store install</string>
     <string name="installer_shizuku_play_store_description">Installs silently through Shizuku or Sui and sets Google Play Store as the install source</string>
     <string name="installer_option_none">No fallback</string>
     <string name="installer_none_description">No fallback installer is configured</string>

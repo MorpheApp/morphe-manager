@@ -608,7 +608,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
     <string name="installer_title">Изаберите инсталатор.</string>
-    <string name="installer_internal_name">Системски инсталатер</string>
     <string name="installer_internal_description">Користи Android пакетни инсталатер</string>
     <string name="installer_auto_saved_name">Инсталатер монтирања са рут приступом</string>
     <string name="installer_auto_saved_description">Montira patirane APK preko instalirane aplikacije</string>

@@ -608,7 +608,6 @@ De afbeelddimensionen moeten als volgt zijn:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
     <string name="installer_title">Installatieprogramma selecteren</string>
-    <string name="installer_internal_name">Systeeminstaller</string>
     <string name="installer_internal_description">Gebruikt de Android-pakketinstaller</string>
     <string name="installer_auto_saved_name">Geroot geïnstalleerde versie</string>
     <string name="installer_auto_saved_description">Installeert het gepatchte APK over de ge├»nstalleerde app</string>
