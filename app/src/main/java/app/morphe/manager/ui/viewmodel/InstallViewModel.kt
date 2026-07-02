@@ -521,9 +521,18 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 app.toast(app.getString(R.string.install_app_success))
             }
             is InstallResult.Conflict -> handleConflict(targetPackageName, result.message)
-            is InstallResult.Failure -> handleInstallError(
-                app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
-            )
+            is InstallResult.Failure -> {
+                if (confirmInstallCompleted(outputFile, targetPackageName)) {
+                    Log.w(TAG, "Shizuku Play Store result failed but APK SHA-256 verification succeeded for $targetPackageName")
+                    onPersistApp(targetPackageName, InstallType.SHIZUKU_PLAY_STORE)
+                    handleInstallSuccess(targetPackageName)
+                    app.toast(app.getString(R.string.install_app_success))
+                } else {
+                    handleInstallError(
+                        app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
+                    )
+                }
+            }
         }
     }
 
@@ -561,9 +570,18 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 app.toast(app.getString(R.string.install_app_success))
             }
             is InstallResult.Conflict -> handleConflict(targetPackageName, result.message)
-            is InstallResult.Failure -> handleInstallError(
-                app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
-            )
+            is InstallResult.Failure -> {
+                if (confirmInstallCompleted(outputFile, targetPackageName)) {
+                    Log.w(TAG, "Shizuku result failed but APK SHA-256 verification succeeded for $targetPackageName")
+                    onPersistApp(targetPackageName, InstallType.SHIZUKU)
+                    handleInstallSuccess(targetPackageName)
+                    app.toast(app.getString(R.string.install_app_success))
+                } else {
+                    handleInstallError(
+                        app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
+                    )
+                }
+            }
         }
     }
 
@@ -1036,14 +1054,27 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
     /**
      * Launches system uninstall UI for [packageName] and suspends until the user confirms.
-     * Resets [installState] to [InstallState.Ready] after successful uninstall so the user
-     * can immediately retry installation.
+     * Resets [installState] to [InstallState.Ready] after successful uninstall, or retries
+     * the pending install request when [installAfterUninstall] is true.
      */
-    fun requestUninstall(packageName: String) {
+    fun requestUninstall(packageName: String, installAfterUninstall: Boolean = false) {
         viewModelScope.launch {
             try {
                 sessionInstaller.uninstall(packageName)
-                installState = InstallState.Ready
+                if (installAfterUninstall) {
+                    val file = pendingInstallFile
+                    val originalPkg = pendingOriginalPackageName
+                    val callback = pendingPersistCallback
+                    if (file != null && originalPkg != null && callback != null) {
+                        installState = InstallState.Ready
+                        install(file, originalPkg, callback)
+                    } else {
+                        Log.w(TAG, "Cannot restart install after uninstall: pending install data missing")
+                        installState = InstallState.Ready
+                    }
+                } else {
+                    installState = InstallState.Ready
+                }
             } catch (_: UninstallCancelledException) {
                 // User dismissed the dialog - keep current state
             }

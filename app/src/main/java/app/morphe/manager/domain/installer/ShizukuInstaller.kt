@@ -17,6 +17,7 @@ import android.os.RemoteException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeout
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuBinderWrapper
 import rikka.shizuku.ShizukuProvider
@@ -25,6 +26,7 @@ import rikka.sui.Sui
 import java.io.File
 import java.io.IOException
 import java.lang.reflect.Constructor
+import kotlin.time.Duration.Companion.minutes
 
 /**
  * Performs silent APK installation via the Shizuku/Sui privileged service.
@@ -85,6 +87,7 @@ class ShizukuInstaller(private val app: Application) {
             ShizukuBinderWrapper(packageInstaller.openSession(sessionId).asBinder())
         )
         val session = PackageInstallerCompat.createSession(sessionBinder)
+        var completed = false
 
         try {
             sourceFile.inputStream().use { input ->
@@ -102,12 +105,16 @@ class ShizukuInstaller(private val app: Application) {
             }
 
             session.commit(intentSender)
-            val result = resultDeferred.await()
+            val result = withTimeout(INSTALL_RESULT_TIMEOUT) { resultDeferred.await() }
+            completed = true
             if (result.status != PackageInstaller.STATUS_SUCCESS) {
                 throw InstallerOperationException(result.status, result.message)
             }
             result
         } finally {
+            if (!completed) {
+                runCatching { packageInstallerWrapper.abandonSession(sessionId) }
+            }
             runCatching { session.close() }
         }
     }
@@ -134,6 +141,7 @@ class ShizukuInstaller(private val app: Application) {
     companion object {
         private const val SHELL_PACKAGE = "com.android.shell"
         private const val BASE_APK_NAME = "base.apk"
+        private val INSTALL_RESULT_TIMEOUT = 5.minutes
         internal const val PACKAGE_NAME = "moe.shizuku.privileged.api"
     }
 }

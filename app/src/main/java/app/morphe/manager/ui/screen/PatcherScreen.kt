@@ -299,7 +299,9 @@ fun PatcherScreen(
         InstalledSourceConflictDialog(
             onUninstall = {
                 showInstalledSourceConflictDialog.value = false
-                conflictPackageName?.let { installViewModel.requestUninstall(it) }
+                conflictPackageName?.let {
+                    installViewModel.requestUninstall(it, installAfterUninstall = true)
+                }
             },
             onDismiss = {
                 showInstalledSourceConflictDialog.value = false
@@ -593,7 +595,7 @@ fun PatcherScreen(
                             }
                         },
                         onUninstall = { packageName ->
-                            installViewModel.requestUninstall(packageName)
+                            installViewModel.requestUninstall(packageName, installAfterUninstall = true)
                         },
                         onOpen = {
                             installViewModel.openApp()

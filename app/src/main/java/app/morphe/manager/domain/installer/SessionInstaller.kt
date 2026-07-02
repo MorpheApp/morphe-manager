@@ -21,6 +21,7 @@ import androidx.core.net.toUri
 import app.morphe.manager.R
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.suspendCancellableCoroutine
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
@@ -247,6 +248,8 @@ class SessionInstaller(private val app: Application) {
                 PackageInstaller.STATUS_FAILURE_ABORTED -> throw InstallCancelledException()
                 else -> InstallResult.Failure(e.message)
             }
+        } catch (_: TimeoutCancellationException) {
+            InstallResult.Failure("Timed out waiting for Shizuku install result")
         }
     }
 
