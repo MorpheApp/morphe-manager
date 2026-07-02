@@ -755,7 +755,7 @@ private fun AppHeroHeader(
                 InstallType.MOUNT   -> Icons.Outlined.Link to R.string.mount
                 InstallType.SHIZUKU -> Icons.Outlined.Terminal to R.string.home_app_info_install_type_shizuku
                 InstallType.SHIZUKU_PLAY_STORE -> Icons.Outlined.Terminal to R.string.home_app_info_install_type_shizuku_play_store
-                InstallType.PLAY_STORE -> Icons.Outlined.InstallMobile to R.string.home_app_info_install_type_play_store
+                InstallType.PLAY_STORE -> Icons.Outlined.Shop to R.string.home_app_info_install_type_play_store
                 InstallType.ROOT_PLAY_STORE -> Icons.Outlined.Security to R.string.home_app_info_install_type_root_play_store
                 InstallType.CUSTOM  -> Icons.Outlined.Build to R.string.home_app_info_install_type_custom_installer
                 InstallType.SAVED   -> Icons.Outlined.Save to R.string.saved

@@ -394,11 +394,7 @@ class InstallerManager(
 
     private fun availabilityFor(token: Token, target: InstallTarget, checkRoot: Boolean = true): Availability = when (token) {
         Token.Internal -> Availability(true)
-        Token.PlayStore -> if (target == InstallTarget.PATCHER) {
-            Availability(true)
-        } else {
-            Availability(false, R.string.installer_status_not_supported)
-        }
+        Token.PlayStore -> Availability(true)
         Token.RootPlayStore -> if (!target.supportsRoot) {
             Availability(false, R.string.installer_status_not_supported)
         } else if (checkRoot) {
