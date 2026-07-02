@@ -239,6 +239,9 @@ fun InstallerSelectionDialog(
 
     val confirmEnabled = options.find { it.token == currentSelection.value }?.availability?.available != false
 
+    // Warn once when the user is switching TO a Play Store variant they didn't have before
+    var pendingPlayStoreConfirm by remember { mutableStateOf<InstallerManager.Token?>(null) }
+
     // Localized strings for accessibility
     val selectedState = stringResource(R.string.selected)
     val notSelectedState = stringResource(R.string.not_selected)
@@ -251,7 +254,17 @@ fun InstallerSelectionDialog(
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.confirm),
-                onPrimaryClick = { onConfirm(currentSelection.value) },
+                onPrimaryClick = {
+                    val token = currentSelection.value
+                    val isPlayStoreVariant = token == InstallerManager.Token.PlayStore ||
+                            token == InstallerManager.Token.RootPlayStore ||
+                            token == InstallerManager.Token.ShizukuPlayStore
+                    if (isPlayStoreVariant && token != selected) {
+                        pendingPlayStoreConfirm = token
+                    } else {
+                        onConfirm(token)
+                    }
+                },
                 primaryEnabled = confirmEnabled,
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
@@ -361,6 +374,16 @@ fun InstallerSelectionDialog(
                 }
             }
         }
+    }
+
+    pendingPlayStoreConfirm?.let { token ->
+        PlayStoreInstallerWarningDialog(
+            onConfirm = {
+                pendingPlayStoreConfirm = null
+                onConfirm(token)
+            },
+            onDismiss = { pendingPlayStoreConfirm = null }
+        )
     }
 }
 
@@ -592,6 +615,55 @@ fun InstallerUnavailableDialog(
                     isExpanded = true
                 )
             }
+        }
+    }
+}
+
+/**
+ * Warning shown when the user picks a Play Store install variant.
+ *
+ * Recording Google Play Store as the installation source lets Play Store offer updates for the patched
+ * app - accepting the update overwrites the patched APK with the stock one and loses the patches.
+ */
+@Composable
+fun PlayStoreInstallerWarningDialog(
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.installer_play_store_warning_title),
+        footer = {
+            MorpheDialogButtonColumn {
+                MorpheDialogButton(
+                    text = stringResource(R.string.installer_play_store_warning_continue),
+                    onClick = onConfirm,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                MorpheDialogOutlinedButton(
+                    text = stringResource(android.R.string.cancel),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.installer_play_store_warning_message),
+                style = MaterialTheme.typography.bodyMedium,
+                color = LocalDialogSecondaryTextColor.current
+            )
+
+            InfoBadge(
+                text = stringResource(R.string.installer_play_store_warning_risk),
+                style = InfoBadgeStyle.Error,
+                icon = Icons.Outlined.Warning,
+                isExpanded = true
+            )
         }
     }
 }

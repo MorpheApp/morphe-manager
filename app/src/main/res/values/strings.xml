@@ -700,6 +700,10 @@ The image dimensions must be as follows:
     <string name="installer_unavailable_message">Your preferred installer (%s) is currently unavailable. You can fix the issue and retry, or use the standard installer instead</string>
     <string name="installer_unavailable_shizuku_hint">Make sure Shizuku is running and permission is granted to this app</string>
     <string name="installer_use_standard">Use standard</string>
+    <string name="installer_play_store_warning_title">Install as Play Store?</string>
+    <string name="installer_play_store_warning_message">The patched app will be recorded as installed from Google Play Store. This lets services like Android Auto recognize it as a Play Store app</string>
+    <string name="installer_play_store_warning_risk">Play Store may offer updates for the patched app. Installing that update will overwrite the patched APK with the original version and remove the patches. If prompted to update, tap the three-dot menu on the app\'s Play Store page and choose \"Turn off updates\"</string>
+    <string name="installer_play_store_warning_continue">I understand, continue</string>
     <string name="settings_prompt_installer_on_install">Installer selection prompt</string>
     <string name="settings_prompt_installer_on_install_description">Shows installer selection dialog each time a patched app is installed</string>
     <string name="settings_auto_install_with_shizuku">Auto-install after patching</string>
