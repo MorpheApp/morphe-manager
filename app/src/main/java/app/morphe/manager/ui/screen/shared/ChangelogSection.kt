@@ -60,7 +60,7 @@ fun ChangelogSectionLoading(
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
     ) {
         // Header shimmer
         ShimmerChangelogHeader()
@@ -82,7 +82,7 @@ fun ChangelogEntrySection(
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
     ) {
         ChangelogEntryHeader(
             version = entry.version,
@@ -92,47 +92,6 @@ fun ChangelogEntrySection(
         )
         if (entry.content.isNotBlank()) {
             Changelog(markdown = entry.content, precomputedState = precomputedMarkdown)
-        }
-    }
-}
-
-/**
- * Displays a list of [ChangelogEntry] items, separated by dividers.
- */
-@Composable
-fun ChangelogEntriesList(
-    entries: List<ChangelogEntry>,
-    headerIcon: ImageVector = Icons.Outlined.NewReleases,
-    emptyText: String? = null,
-    textColor: Color = LocalDialogTextColor.current
-) {
-    if (entries.isEmpty()) {
-        if (emptyText != null) {
-            Text(
-                text = emptyText,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-        return
-    }
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(0.dp)
-    ) {
-        entries.forEachIndexed { index, entry ->
-            if (index > 0) {
-                HorizontalDivider(
-                    modifier = Modifier.padding(vertical = 20.dp),
-                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
-                )
-            }
-            ChangelogEntrySection(
-                entry = entry,
-                headerIcon = headerIcon,
-                textColor = textColor
-            )
         }
     }
 }
@@ -208,7 +167,7 @@ private fun ChangelogEntryHeader(
 }
 
 /**
- * Renders sanitized changelog markdown.
+ * Renders sanitized changelog Markdown.
  */
 @Composable
 fun Changelog(

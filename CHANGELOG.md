@@ -1,3 +1,50 @@
+# [1.23.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0-dev.3...v1.23.0-dev.4) (2026-07-01)
+
+
+### Features
+
+* Add Replace/Merge choice dialog on settings and selections import ([#683](https://github.com/MorpheApp/morphe-manager/issues/683)) ([fc9c892](https://github.com/MorpheApp/morphe-manager/commit/fc9c892ddbc28c89136d09c1caabe4fdae50804b))
+
+# [1.23.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0-dev.2...v1.23.0-dev.3) (2026-07-01)
+
+
+### Bug Fixes
+
+* Resolve TalkBack accessibility issues ([#676](https://github.com/MorpheApp/morphe-manager/issues/676)) ([1b9c246](https://github.com/MorpheApp/morphe-manager/commit/1b9c2467670b02861e9a8c42a182f02fca4df099))
+
+
+### Features
+
+* Adaptive `ActionPillRow` with compress-to-fit ([9554fb3](https://github.com/MorpheApp/morphe-manager/commit/9554fb3f8adb67dcfa09814c37a40d6120da0b82))
+
+# [1.23.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0-dev.1...v1.23.0-dev.2) (2026-06-29)
+
+
+### Bug Fixes
+
+* Apply imported manager language immediately ([5722523](https://github.com/MorpheApp/morphe-manager/commit/5722523d01d66db37eb38c563d87da97641b6407))
+* Preserve saved original APK after root mount installation ([#673](https://github.com/MorpheApp/morphe-manager/issues/673)) ([2a36543](https://github.com/MorpheApp/morphe-manager/commit/2a36543580b9dca8e8eeea100b0085867cb2e73e))
+
+
+### Features
+
+* Include file picker preferences in settings export/import ([46e37e2](https://github.com/MorpheApp/morphe-manager/commit/46e37e2915dc92b6a655127155935e63c0b04efc))
+
+# [1.23.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0...v1.23.0-dev.1) (2026-06-28)
+
+
+### Bug Fixes
+
+* Exit remote patcher process on cancellation to release wakelock ([46ed1be](https://github.com/MorpheApp/morphe-manager/commit/46ed1be52a327cedfb4fa4982e31ac0a4f378dc4))
+* Preserve localized step name when preparing split APKs ([290ea99](https://github.com/MorpheApp/morphe-manager/commit/290ea99b471f4277cc81c5504232001765fc052b))
+* Remember patch selection across multiple sources ([#667](https://github.com/MorpheApp/morphe-manager/issues/667)) ([262b4ea](https://github.com/MorpheApp/morphe-manager/commit/262b4eab8991a03428dc2eaf0ab5c487b2137426))
+* Use perceptual luminance midpoint for content color on brand backgrounds ([164fc6e](https://github.com/MorpheApp/morphe-manager/commit/164fc6e032c49f460f4b879b1cf4e7a0f861de7d))
+
+
+### Features
+
+* Add `Show older releases` expander to changelog dialogs ([#668](https://github.com/MorpheApp/morphe-manager/issues/668)) ([2ad8756](https://github.com/MorpheApp/morphe-manager/commit/2ad87560038f04b90fcc8dabb46132e9f626d381))
+
 # [1.22.0](https://github.com/MorpheApp/morphe-manager/compare/v1.21.0...v1.22.0) (2026-06-26)
 
 

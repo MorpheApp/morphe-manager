@@ -17,6 +17,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -468,22 +469,8 @@ private fun BundleManagementCard(
             }
         }
 
-        Column(modifier = Modifier
-            .clickable(
-                indication = null,
-                interactionSource = remember { MutableInteractionSource() }
-            ) {
-                if (!forceExpanded) onToggleExpanded()
-            }
-            .semantics {
-                if (!forceExpanded) {
-                    role = Role.Button
-                    stateDescription = if (expanded) expandedState else collapsedState
-                }
-                this.contentDescription = contentDesc
-            }
-            .padding(16.dp)) {
-            // Header
+        Column(modifier = Modifier.padding(16.dp)) {
+            // Click target only on the header so expanded children stay independently focusable for screen readers
             BundleCardHeader(
                 bundle = bundle,
                 updateInfo = updateInfo,
@@ -492,6 +479,19 @@ private fun BundleManagementCard(
                 enabled = isEnabled,
                 metadataFetchError = metadataFetchError,
                 modifier = longPressModifier
+                    .clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) {
+                        if (!forceExpanded) onToggleExpanded()
+                    }
+                    .semantics(mergeDescendants = true) {
+                        if (!forceExpanded) {
+                            role = Role.Button
+                            stateDescription = if (expanded) expandedState else collapsedState
+                        }
+                        this.contentDescription = contentDesc
+                    }
             )
 
             // Expanded content
@@ -591,7 +591,15 @@ private fun BundleManagementCard(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { onPrereleasesToggle(!currentUsePrerelease) }
+                                .toggleable(
+                                    value = currentUsePrerelease,
+                                    role = Role.Switch,
+                                    enabled = !isUpdating,
+                                    onValueChange = onPrereleasesToggle
+                                )
+                                .semantics {
+                                    stateDescription = if (currentUsePrerelease) enabledState else disabledState
+                                }
                                 .padding(vertical = 4.dp)
                                 .then(
                                     if (onPrereleaseBtnPositioned != null)
@@ -618,10 +626,28 @@ private fun BundleManagementCard(
 
                             Spacer(Modifier.width(8.dp))
 
-                            MorpheSwitch(
-                                checked = currentUsePrerelease,
-                                onCheckedChange = onPrereleasesToggle
-                            )
+                            Crossfade(
+                                targetState = isUpdating,
+                                modifier = Modifier.size(width = 52.dp, height = 32.dp),
+                                label = "prerelease_toggle_loading"
+                            ) { updating ->
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    if (updating) {
+                                        CircularProgressIndicator(
+                                            modifier = Modifier.size(24.dp),
+                                            strokeWidth = 2.dp
+                                        )
+                                    } else {
+                                        MorpheSwitch(
+                                            checked = currentUsePrerelease,
+                                            onCheckedChange = null
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -636,8 +662,13 @@ private fun BundleManagementCard(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable {
-                                    onExperimentalVersionsToggle?.invoke(!useExperimentalVersions)
+                                .toggleable(
+                                    value = useExperimentalVersions,
+                                    role = Role.Switch,
+                                    onValueChange = { onExperimentalVersionsToggle?.invoke(it) }
+                                )
+                                .semantics {
+                                    stateDescription = if (useExperimentalVersions) enabledState else disabledState
                                 }
                                 .padding(vertical = 4.dp),
                             verticalAlignment = Alignment.CenterVertically,
@@ -660,7 +691,7 @@ private fun BundleManagementCard(
 
                             MorpheSwitch(
                                 checked = useExperimentalVersions,
-                                onCheckedChange = { onExperimentalVersionsToggle?.invoke(it) }
+                                onCheckedChange = null
                             )
                         }
                     }
@@ -670,77 +701,73 @@ private fun BundleManagementCard(
                     }
 
                     // Action bar
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            if (!forceExpanded) {
-                                val disableEnableDesc = if (bundle.enabled) {
-                                    stringResource(R.string.disable) + " " + bundle.displayTitle
-                                } else {
-                                    stringResource(R.string.enable) + " " + bundle.displayTitle
-                                }
-                                val disableToast = stringResource(
-                                    if (bundle.enabled) R.string.sources_management_source_disabled
-                                    else R.string.sources_management_source_enabled
-                                )
+                    ActionPillRow {
+                        if (!forceExpanded) {
+                            val disableEnableVerb = stringResource(
+                                if (bundle.enabled) R.string.disable else R.string.enable
+                            )
+                            val disableEnableDesc = disableEnableVerb + " " + bundle.displayTitle
+                            val disableToast = stringResource(
+                                if (bundle.enabled) R.string.sources_management_source_disabled
+                                else R.string.sources_management_source_enabled
+                            )
 
-                                val disableIcon = if (bundle.enabled)
-                                    Icons.Outlined.Block
-                                else
-                                    Icons.Outlined.CheckCircle
+                            val disableIcon = if (bundle.enabled)
+                                Icons.Outlined.Block
+                            else
+                                Icons.Outlined.CheckCircle
 
-                                Crossfade(
-                                    targetState = disableIcon,
-                                    label = "disable_icon"
-                                ) { icon ->
-                                    // Disable button
-                                    ActionPillButton(
-                                        onClick = withToast(disableToast, onDisable),
-                                        icon = icon,
-                                        contentDescription = disableEnableDesc,
-                                        tooltip = disableEnableDesc
-                                    )
-                                }
-                            }
-
-                            if (bundle is RemotePatchBundle) {
-                                val updateDesc = stringResource(R.string.update) + " " + bundle.displayTitle
-                                val updateToast = stringResource(R.string.sources_management_source_updating)
-                                // Update button
+                            Crossfade(
+                                targetState = disableIcon,
+                                label = "disable_icon"
+                            ) { icon ->
+                                // Disable button
                                 ActionPillButton(
-                                    onClick = withToast(updateToast, onUpdate),
-                                    icon = Icons.Outlined.Refresh,
-                                    contentDescription = updateDesc,
-                                    tooltip = updateDesc
+                                    onClick = withToast(disableToast, onDisable),
+                                    icon = icon,
+                                    contentDescription = disableEnableDesc,
+                                    tooltip = disableEnableVerb
                                 )
                             }
+                        }
 
-                            if (!bundle.isDefault) {
-                                val renameDesc = stringResource(R.string.rename) + " " + bundle.displayTitle
-                                val deleteDesc = stringResource(R.string.delete) + " " + bundle.displayTitle
-                                // Rename button
-                                ActionPillButton(
-                                    onClick = onRename,
-                                    icon = Icons.Outlined.Edit,
-                                    contentDescription = renameDesc,
-                                    tooltip = renameDesc
-                                )
+                        if (bundle is RemotePatchBundle) {
+                            val updateVerb = stringResource(R.string.update)
+                            val updateDesc = updateVerb + " " + bundle.displayTitle
+                            val updateToast = stringResource(R.string.sources_management_source_updating)
+                            // Update button
+                            ActionPillButton(
+                                onClick = withToast(updateToast, onUpdate),
+                                icon = Icons.Outlined.Refresh,
+                                contentDescription = updateDesc,
+                                tooltip = updateVerb
+                            )
+                        }
 
-                                // Delete button
-                                ActionPillButton(
-                                    onClick = onDelete,
-                                    icon = Icons.Outlined.Delete,
-                                    contentDescription = deleteDesc,
-                                    tooltip = deleteDesc,
-                                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                                        containerColor = MaterialTheme.colorScheme.errorContainer,
-                                        contentColor = MaterialTheme.colorScheme.onErrorContainer
-                                    )
+                        if (!bundle.isDefault) {
+                            val renameVerb = stringResource(R.string.rename)
+                            val deleteVerb = stringResource(R.string.delete)
+                            val renameDesc = renameVerb + " " + bundle.displayTitle
+                            val deleteDesc = deleteVerb + " " + bundle.displayTitle
+                            // Rename button
+                            ActionPillButton(
+                                onClick = onRename,
+                                icon = Icons.Outlined.Edit,
+                                contentDescription = renameDesc,
+                                tooltip = renameVerb
+                            )
+
+                            // Delete button
+                            ActionPillButton(
+                                onClick = onDelete,
+                                icon = Icons.Outlined.Delete,
+                                contentDescription = deleteDesc,
+                                tooltip = deleteVerb,
+                                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                    containerColor = MaterialTheme.colorScheme.errorContainer,
+                                    contentColor = MaterialTheme.colorScheme.onErrorContainer
                                 )
-                            }
+                            )
                         }
                     }
                 }

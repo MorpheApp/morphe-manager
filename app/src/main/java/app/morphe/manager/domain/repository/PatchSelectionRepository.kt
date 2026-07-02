@@ -28,14 +28,17 @@ class PatchSelectionRepository(db: AppDatabase) {
             .mapValues { it.value.toSet() }
             .filterValues { it.isNotEmpty() }
 
-    /** Update selections for multiple bundles for a package. */
-    suspend fun updateSelection(packageName: String, selection: Map<Int, Set<String>>) =
-        dao.updateSelections(selection.mapKeys { (sourceUid, _) ->
-            getOrCreateSelection(
-                sourceUid,
-                packageName
-            )
+    /**
+     * Replace the full set of selections for a package. Bundles that previously had
+     * selections but are absent from [selection] are cleared so no orphan rows remain.
+     */
+    suspend fun updateSelection(packageName: String, selection: Map<Int, Set<String>>) {
+        val previousBundles = dao.getAllSelectionsForPackage(packageName).keys
+        val full = (previousBundles + selection.keys).associateWith { selection[it] ?: emptySet() }
+        dao.updateSelections(full.mapKeys { (sourceUid, _) ->
+            getOrCreateSelection(sourceUid, packageName)
         })
+    }
 
     /** Get all packages that have saved selections for any bundle. */
     fun getPackagesWithSavedSelection() =

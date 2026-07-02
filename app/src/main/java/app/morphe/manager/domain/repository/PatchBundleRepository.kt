@@ -1234,7 +1234,7 @@ class PatchBundleRepository(
             // Check if this is already a raw URL: owner/repo/-/raw/branch/path
             val rawIndex = pathSegments.indexOf("raw")
             if (rawIndex >= 2 && pathSegments.getOrNull(rawIndex - 1) == "-") {
-                // Already a raw URL — normalize it
+                // Already a raw URL - normalize it
                 val normalizedPath = "/" + pathSegments.joinToString("/")
                 val pathNoQuery = normalizedPath.substringBefore('?').substringBefore('#')
                 if (!pathNoQuery.endsWith(".json", ignoreCase = true)) {
@@ -1807,7 +1807,7 @@ class PatchBundleRepository(
     }
 
     sealed class BundleState {
-        /** DB not yet read — UI shows shimmer */
+        /** DB not yet read - UI shows shimmer */
         data object Loading : BundleState()
 
         /** Pipeline ready (even if sources list is empty) */
@@ -1885,26 +1885,73 @@ class PatchBundleRepository(
     }
 
     /**
-     * Import a list of [BundleSnapshot] entries produced by [exportCustomBundles].
-     * Skips bundles whose source URL already exists, so this is safe to call on repeated imports.
-     * Triggers a full reload and starts a download job for newly added bundles.
+     * Import strategy for [importCustomBundles].
      */
-    suspend fun importCustomBundles(snapshots: List<BundleSnapshot>) {
-        if (snapshots.isEmpty()) return
-        dispatchAction("Import custom bundles") { state ->
+    enum class ImportMode {
+        /** Add only bundles whose endpoint is not present. Keep everything else. */
+        Merge,
+        /** Match the backup exactly: remove custom remotes not in the backup, then add missing ones. */
+        Replace,
+    }
+
+    /**
+     * Import a list of [BundleSnapshot] entries produced by [exportCustomBundles].
+     *
+     * In [ImportMode.Merge] mode this only adds bundles whose endpoint is not already present.
+     * In [ImportMode.Replace] mode this first removes existing custom remote bundles that are
+     * absent from [snapshots] (the default source and local bundles are always kept), then adds
+     * the missing ones. Triggers a full reload and starts a download job for newly added bundles.
+     */
+    suspend fun importCustomBundles(
+        snapshots: List<BundleSnapshot>,
+        mode: ImportMode = ImportMode.Merge,
+    ) {
+        // Empty snapshot in Merge mode is a no-op; in Replace mode it still needs to clear existing customs
+        if (snapshots.isEmpty() && mode == ImportMode.Merge) return
+
+        dispatchAction("Import custom bundles ($mode)") { state ->
             val ready = state as? BundleState.Ready ?: return@dispatchAction state
-            val existingEndpoints = ready.sources.values
+
+            val incomingEndpoints = snapshots
+                .mapNotNull { runCatching { normalizeRemoteBundleUrl(it.source) }.getOrNull() }
+                .map { it.lowercase(Locale.US) }
+                .toSet()
+
+            val customRemotes = ready.sources.values
                 .filterIsInstance<RemotePatchBundle>()
+                .filter { it.uid != DEFAULT_SOURCE_UID }
+
+            var changedAny = false
+
+            // Replace mode: remove custom remotes whose endpoint is not in the backup
+            if (mode == ImportMode.Replace) {
+                val toRemove = customRemotes
+                    .filter { it.endpoint.lowercase(Locale.US) !in incomingEndpoints }
+                if (toRemove.isNotEmpty()) {
+                    toRemove.forEach { bundle ->
+                        dao.remove(bundle.uid)
+                        directoryOf(bundle.uid).deleteRecursively()
+                    }
+                    val removedUids = toRemove.map { it.uid }.toSet()
+                    metadataFetchErrorsFlow.update { it - removedUids }
+                    val (affectedCount, remaining) = cancelRemoteUpdates(removedUids)
+                    updateProgressAfterRemoval(affectedCount, remaining)
+                    changedAny = true
+                }
+            }
+
+            // Endpoints that survive the (possible) Replace pruning - used to skip duplicates
+            val keptEndpoints = customRemotes
+                .filter { mode == ImportMode.Merge || it.endpoint.lowercase(Locale.US) in incomingEndpoints }
                 .map { it.endpoint.lowercase(Locale.US) }
                 .toSet()
 
-            var addedAny = false
             snapshots.forEach { snapshot ->
                 val normalizedUrl = runCatching {
                     normalizeRemoteBundleUrl(snapshot.source)
                 }.getOrNull() ?: return@forEach
 
-                if (normalizedUrl.lowercase(Locale.US) in existingEndpoints) return@forEach
+                if (normalizedUrl.lowercase(Locale.US) in keptEndpoints) return@forEach
 
                 createEntity(
                     name = snapshot.name,
@@ -1915,10 +1962,10 @@ class PatchBundleRepository(
                     createdAt = snapshot.createdAt,
                     updatedAt = snapshot.updatedAt,
                 )
-                addedAny = true
+                changedAny = true
             }
 
-            if (!addedAny) return@dispatchAction state
+            if (!changedAny) return@dispatchAction state
 
             val newState = doReload()
 

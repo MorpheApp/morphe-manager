@@ -8,10 +8,13 @@ import kotlinx.serialization.Serializable
 
 enum class InstallType(val stringResource: Int) {
     DEFAULT(R.string.home_app_info_install_type_system_installer),
+    PLAY_STORE(R.string.home_app_info_install_type_play_store),
+    ROOT_PLAY_STORE(R.string.home_app_info_install_type_root_play_store),
     CUSTOM(R.string.home_app_info_install_type_custom_installer),
     MOUNT(R.string.mount),
     SAVED(R.string.saved),
-    SHIZUKU(R.string.home_app_info_install_type_shizuku)
+    SHIZUKU(R.string.home_app_info_install_type_shizuku),
+    SHIZUKU_PLAY_STORE(R.string.home_app_info_install_type_shizuku_play_store)
 }
 
 /**

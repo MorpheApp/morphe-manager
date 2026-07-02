@@ -124,6 +124,8 @@ object KnownApps {
 
 const val APK_MIMETYPE  = "application/vnd.android.package-archive"
 
+const val PLAY_STORE_INSTALLER_PACKAGE = "com.android.vending"
+
 const val AOSP_INSTALLER_PACKAGE        = "com.google.android.packageinstaller"
 const val AOSP_INSTALLER_PACKAGE_LEGACY = "com.android.packageinstaller"
 const val AOSP_INSTALLER_LABEL          = "Package installer"

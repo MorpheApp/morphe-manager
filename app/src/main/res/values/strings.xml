@@ -301,7 +301,10 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="home_app_info_patch_source_used">Patch source used</string>
     <string name="home_app_info_install_type_custom_installer">Custom installer</string>
     <string name="home_app_info_install_type_system_installer">System installer</string>
+    <string name="home_app_info_install_type_play_store">Play Store install</string>
+    <string name="home_app_info_install_type_root_play_store">Root Play Store install</string>
     <string name="home_app_info_install_type_shizuku" translatable="false">Shizuku</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store install</string>
     <string name="home_app_info_patch_update_available">Patch update available</string>
     <string name="home_app_info_patch_update_available_description">A newer version of patches is available. Repatch your app to get the latest improvements and fixes</string>
     <string name="home_app_info_app_deleted_warning">App was uninstalled</string>
@@ -313,7 +316,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="root_gmscore_excluded">GmsCore support patch is excluded in root mode</string>
     <string name="root_pre_patch_installer_title">Choose installation method</string>
     <string name="root_pre_patch_installer_description">Your device has root access. Choose how you want to install the patched app</string>
-    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_title">Root mount</string>
     <string name="root_pre_patch_installer_mount_description">Mounts the patched APK over the stock app. No GmsCore needed</string>
     <string name="root_pre_patch_installer_standard_title">Standard Install</string>
     <string name="root_pre_patch_installer_standard_description">Installs as a separate app with GmsCore support. An installer can be selected after patching</string>
@@ -326,16 +329,16 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="patcher_error_dialog_app_info">App info</string>
     <string name="patcher_patches_progress_format" translatable="false">%1$s / %2$s</string>
     <string name="patcher_percentage" translatable="false">%s%%</string>
-    <string name="patcher_tab_logs">Patcher Logs</string>
+    <string name="patcher_tab_logs">Patcher logs</string>
     <string name="patcher_tab_game">Games</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="patcher_installing_subtitle">Almost ready to rock! 🎸</string>
-    <string name="patcher_success_title">All Done! 🎉</string>
+    <string name="patcher_success_title">All done! 🎉</string>
     <string name="patcher_success_subtitle">Your app is patched and installed!</string>
-    <string name="patcher_complete_title">Patching Complete! ✨</string>
+    <string name="patcher_complete_title">Patching complete! ✨</string>
     <string name="patcher_failed_title">Oops! Something went wrong</string>
     <string name="patcher_failed_subtitle">Check the error details below</string>
-    <string name="patcher_failed_dialog_title">Patching Failed</string>
+    <string name="patcher_failed_dialog_title">Patching failed</string>
     <string name="patcher_unknown_error">Unknown error occurred</string>
     <string name="patcher_split_step_extracting">Extracting split APKs</string>
     <string name="patcher_split_step_merging">Merging %s</string>
@@ -667,10 +670,16 @@ The image dimensions must be as follows:
     <string name="installer_title">Select installer</string>
     <string name="installer_internal_name">System installer</string>
     <string name="installer_internal_description">Uses the Android package installer</string>
+    <string name="installer_play_store_name">Play Store install</string>
+    <string name="installer_play_store_description">Uses the system installer and sets Google Play Store as the install source</string>
+    <string name="installer_root_play_store_name">Root Play Store install</string>
+    <string name="installer_root_play_store_description">Installs silently with root and sets Google Play Store as the install source</string>
     <string name="installer_auto_saved_name">Rooted mount installer</string>
     <string name="installer_auto_saved_description">Mounts the patched APK over the installed app</string>
     <string name="installer_shizuku_name" translatable="false">Shizuku</string>
     <string name="installer_shizuku_description">Installs silently using Shizuku or Sui</string>
+    <string name="installer_shizuku_play_store_name">Shizuku Play Store install</string>
+    <string name="installer_shizuku_play_store_description">Installs silently through Shizuku or Sui and sets Google Play Store as the install source</string>
     <string name="installer_option_none">No fallback</string>
     <string name="installer_none_description">No fallback installer is configured</string>
     <string name="installer_status_requires_root">Requires root access</string>
@@ -691,6 +700,10 @@ The image dimensions must be as follows:
     <string name="installer_unavailable_message">Your preferred installer (%s) is currently unavailable. You can fix the issue and retry, or use the standard installer instead</string>
     <string name="installer_unavailable_shizuku_hint">Make sure Shizuku is running and permission is granted to this app</string>
     <string name="installer_use_standard">Use standard</string>
+    <string name="installer_play_store_warning_title">Install as Play Store?</string>
+    <string name="installer_play_store_warning_message">The patched app will be recorded as installed from Google Play Store. This lets services like Android Auto recognize it as a Play Store app</string>
+    <string name="installer_play_store_warning_risk">Play Store may offer updates for the patched app. Installing that update will overwrite the patched APK with the original version and remove the patches. If prompted to update, tap the three-dot menu on the app\'s Play Store page and choose \"Turn off updates\"</string>
+    <string name="installer_play_store_warning_continue">I understand, continue</string>
     <string name="settings_prompt_installer_on_install">Installer selection prompt</string>
     <string name="settings_prompt_installer_on_install_description">Shows installer selection dialog each time a patched app is installed</string>
     <string name="settings_auto_install_with_shizuku">Auto-install after patching</string>
@@ -733,6 +746,14 @@ The image dimensions must be as follows:
     <string name="settings_system_import_manager_settings_description">Backs up and restores your Morphe settings</string>
     <string name="settings_system_import_manager_settings_fail">Failed to import Morphe settings: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe settings imported</string>
+    <string name="settings_system_import_manager_settings_mode_title">Import Morphe settings</string>
+    <string name="settings_system_import_manager_settings_mode_description">Choose how the imported settings and sources should be applied</string>
+    <string name="settings_system_import_selections_mode_title">Import patch selections</string>
+    <string name="settings_system_import_selections_mode_description">Choose how the imported selections and patch options should be applied</string>
+    <string name="import_mode_replace_title">Replace existing</string>
+    <string name="import_mode_replace_description">Match the backup exactly. Items missing from the backup will be removed</string>
+    <string name="import_mode_merge_title">Merge with existing</string>
+    <string name="import_mode_merge_description">Add missing items from the backup. Existing items are kept unchanged</string>
     <string name="settings_system_export_manager_settings_fail">Failed to export Morphe settings: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe settings exported</string>
     <string name="settings_system_debug">Debug</string>
@@ -862,6 +883,9 @@ The image dimensions must be as follows:
     <string name="reorder_done">Order saved</string>
     <string name="reset_order">Reset order</string>
     <string name="reset_order_done">Order reset</string>
+    <string name="accessibility_move_up">Move up</string>
+    <string name="accessibility_move_down">Move down</string>
+    <string name="accessibility_app_moved_announcement">%1$s moved to position %2$d of %3$d</string>
     <string name="rename">Rename</string>
     <string name="import_">Import</string>
     <string name="export">Export</string>
@@ -908,8 +932,9 @@ The image dimensions must be as follows:
     <string name="changelog">View changelogs</string>
     <string name="changelog_description">Check out the latest changes in this update</string>
     <string name="changelog_download_fail">Failed to download changelog: %s</string>
-    <string name="changelog_retry">Retry</string>
     <string name="changelog_empty">No changelog available</string>
+    <string name="changelog_show_older">Show older releases</string>
+    <string name="changelog_older_empty">No older releases to show</string>
     <string name="no_network_toast">No internet connection available</string>
 
     <string name="update_available">An update is available</string>

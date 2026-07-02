@@ -498,12 +498,8 @@ private fun ApkItemCard(
             MorpheSettingsDivider()
 
             // Action buttons
-            FlowRow(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 12.dp, vertical = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ActionPillRow(
+                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
             ) {
                 if (onShare != null) {
                     val shareLabel = stringResource(R.string.share)

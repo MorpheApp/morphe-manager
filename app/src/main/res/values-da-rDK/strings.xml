@@ -292,10 +292,10 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="home_app_info_apk_size">APK-størrelse</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-tilstand kræver at original APK er installeret på din enhed før patching</string>
-    <string name="root_gmscore_excluded">GmsCore support patch er udelukket i root-tilstand</string>
+    <string name="root_gmscore_excluded">GmsCore-supportpatch er udeladt i root-tilstand</string>
     <string name="root_pre_patch_installer_title">Vælg installationsmetode</string>
     <string name="root_pre_patch_installer_description">Din enhed har root-adgang. Vælg hvordan du vil installere den patchede app</string>
-    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_title">Root-montering</string>
     <string name="root_pre_patch_installer_mount_description">Mount patchet APK over den originale app. Ingen GmsCore nødvendig</string>
     <string name="root_pre_patch_installer_standard_title">Standard Install</string>
     <string name="root_pre_patch_installer_standard_description">Installeres som en separat app med GmsCore-understøttelse. En installatør kan vælges efter patching</string>
@@ -305,18 +305,22 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_error_log">Fejllog</string>
     <string name="patcher_error_technical">Tekniske oplysninger</string>
     <string name="patcher_error_dialog_app_info">App-oplysninger</string>
-    <string name="patcher_tab_logs">Patcher Logs</string>
+    <string name="patcher_tab_logs">Patch-logfiler</string>
     <string name="patcher_tab_game">Spil</string>
     <string name="patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
     <string name="patcher_installing_subtitle">Næsten klar til at rocke! 🎸</string>
-    <string name="patcher_success_title">Alt færdigt! 🎉</string>
+    <string name="patcher_success_title">Færdig! 🎉</string>
     <string name="patcher_success_subtitle">Din app er patchet og installeret!</string>
-    <string name="patcher_complete_title">Patching fuldført! ✨</string>
-    <string name="patcher_failed_title">Hovsa! Noget gik galt</string>
-    <string name="patcher_failed_subtitle">Tjek fejldetaljerne herunder</string>
-    <string name="patcher_failed_dialog_title">Patching mislykkedes</string>
+    <string name="patcher_complete_title">Patch fuldført! ✨</string>
+    <string name="patcher_failed_title">Ups! Noget gik galt</string>
+    <string name="patcher_failed_subtitle">Se fejldetaljerne nedenfor</string>
+    <string name="patcher_failed_dialog_title">Patch mislykkedes</string>
     <string name="patcher_unknown_error">Ukendt fejl opstod</string>
-    <string name="patcher_conflict_title">Pakke konflikt</string>
+    <string name="patcher_split_step_extracting">Udpakker split-APK\'er</string>
+    <string name="patcher_split_step_merging">Sammenlægning af %s</string>
+    <string name="patcher_split_step_writing">Skrivning af samlet APK</string>
+    <string name="patcher_split_step_finalizing">Finalisering af samlet APK</string>
+    <string name="patcher_conflict_title">Pakkekonflikt</string>
     <string name="patcher_conflict_subtitle">Du skal afinstallere den eksisterende version</string>
     <string name="patcher_conflict_hint">Den patched app bruger et andet certifikat end den installerede version. Afinstallation vil slette alle app-data</string>
     <string name="patcher_installed_conflict_title">Afinstallation påkrævet</string>
@@ -358,25 +362,25 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="patcher_stop_confirm_title">Stop patcher</string>
     <string name="patcher_stop_confirm_description">Er du sikker på, at du vil stoppe patchprocessen?</string>
     <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Morphing af din app til noget fantastisk… 🏆</string>
+    <string name="patcher_message_1">Forvandler din app til noget fedt… 🏆</string>
     <string name="patcher_message_2">Lærer gamle apps nye tricks… 🎩</string>
     <string name="patcher_message_3">Giver din app en digital opgradering… 🔧</string>
     <string name="patcher_message_4">Brygger digital magi… ☕</string>
     <string name="patcher_message_5">Kaffepause anbefales… ☕</string>
     <string name="patcher_message_6">Kig udenfor, det er dejligt derude… 🌤️</string>
     <string name="patcher_message_7">Justerer 1-er og 0-er… 🤖</string>
-    <string name="patcher_message_8">Redder digitale spaghetti ud… 🍝</string>
+    <string name="patcher_message_8">Udreder digital spaghetti… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="patcher_message_9">Retter fejl i den upatchede app… 🪲</string>
-    <string name="patcher_message_10">Store patches er ventetiden værd… ⏳</string>
+    <string name="patcher_message_10">Gode patches er ventetiden værd… ⏳</string>
     <string name="patcher_message_11">Pudser pixels, indtil de skinner… 💎</string>
-    <string name="patcher_message_12">Bliv venligst siddende, indtil kaptajnen slukker for \"Udbedring i gang\" skiltet... 💺✈️</string>
+    <string name="patcher_message_12">Bliv venligst siddende, indtil kaptajnen slukker skiltet \"Patch i gang\"… 💺✈️</string>
     <string name="patcher_message_13">Tilbereder din patchede app, varm og frisk… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="patcher_message_14">Forhandler høfligt med bytekode… 🤝</string>
     <!-- Space flight communications callout. -->
     <string name="patcher_message_15">Alle systemer er nominelle… patche-bane er stabil… 🚀</string>
-    <string name="patcher_message_16">Presser ekstra strøm ud, som saft fra en digital citron… 🍋</string>
+    <string name="patcher_message_16">Presser ekstra kraft ud som saft af en digital citron… 🍋</string>
     <string name="patcher_message_17">Opfordrer appen til at acceptere sit nye, bedre jeg… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="patcher_message_18">Ændrer appens superposition fra upatchet til patchet… 📦⚛️</string>
@@ -393,7 +397,7 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="patched_app_save_failed_toast">Kunne ikke gemme patchet app</string>
     <string name="plugin_activity_dialog_body">Brugerinteraktion er nødvendig for at fortsætte med dette plugin</string>
     <string name="patcher_process_exit_message">Patcher-processen lukkede med koden %s</string>
-    <string name="install_app_success">Installeret succesfuldt</string>
+    <string name="install_app_success">Installeret</string>
     <string name="install_app_fail">Kunne ikke installere app: %s</string>
     <string name="save_apk_success">APK gemt</string>
     <string name="saved_app_export_failed">Kunne ikke eksportere patchet app</string>
@@ -669,6 +673,14 @@ Størrelsesformatet skal være som følger:
     <string name="settings_system_import_manager_settings_description">Sikkerhedskopierer og gendanner dine Morphe-indstillinger</string>
     <string name="settings_system_import_manager_settings_fail">Fejl ved import af Morphe-indstillinger: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-indstillinger importeret</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importér Morphe-indstillinger</string>
+    <string name="settings_system_import_manager_settings_mode_description">Vælg, hvordan de importerede indstillinger og kilder skal anvendes</string>
+    <string name="settings_system_import_selections_mode_title">Importér patch-valg</string>
+    <string name="settings_system_import_selections_mode_description">Vælg hvordan de importerede valg og patch-optioner skal anvendes</string>
+    <string name="import_mode_replace_title">Erstat eksisterende</string>
+    <string name="import_mode_replace_description">Match sikkerhedskopien præcist. Elementer, der mangler fra sikkerhedskopien, vil blive fjernet</string>
+    <string name="import_mode_merge_title">Flet med eksisterende</string>
+    <string name="import_mode_merge_description">Tilføj manglende elementer fra sikkerhedskopien. Eksisterende elementer bevares uændret</string>
     <string name="settings_system_export_manager_settings_fail">Fejl ved eksport af Morphe-indstillinger: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe-indstillinger eksporteret</string>
     <string name="settings_system_debug">Fejlfinding</string>
@@ -788,9 +800,12 @@ Størrelsesformatet skal være som følger:
     <string name="reorder_done">Rækkefølge gemt</string>
     <string name="reset_order">Nulstil rækkefølge</string>
     <string name="reset_order_done">Ordre nulstillet</string>
+    <string name="accessibility_move_up">Flyt op</string>
+    <string name="accessibility_move_down">Flyt ned</string>
+    <string name="accessibility_app_moved_announcement">%1$s er blevet flyttet til position %2$d ud af %3$d</string>
     <string name="rename">Omdøb</string>
     <string name="import_">Importer</string>
-    <string name="export">Eksporter</string>
+    <string name="export">Eksportér</string>
     <string name="download">Download</string>
     <string name="less">Mindre</string>
     <string name="expand">Udvid</string>
@@ -801,7 +816,7 @@ Størrelsesformatet skal være som følger:
     <string name="continue_">Fortsæt</string>
     <string name="version">Version</string>
     <string name="patch">Patch</string>
-    <string name="repatch">Genanvend patch</string>
+    <string name="repatch">Patch igen</string>
     <string name="open">Åben</string>
     <string name="mount">Monter</string>
     <string name="mounted">Monteret</string>
@@ -826,15 +841,16 @@ Størrelsesformatet skal være som følger:
     <string name="logs">Logge</string>
     <string name="sources">Kilder</string>
     <string name="installing_ellipsis">Installerer…</string>
-    <string name="mounting_ellipsis">Montering…</string>
+    <string name="mounting_ellipsis">Monterer…</string>
     <string name="unmounting_ellipsis">Afmontere…</string>
     <string name="importing_ellipsis">Importerer…</string>
     <string name="imported_successfully">Importeret med succes</string>
     <string name="changelog">Se ændringslogge</string>
     <string name="changelog_description">Se de seneste ændringer i denne opdatering</string>
     <string name="changelog_download_fail">Kunne ikke downloade ændringslog: %s</string>
-    <string name="changelog_retry">Prøv igen</string>
     <string name="changelog_empty">Ingen ændringslog tilgængelig</string>
+    <string name="changelog_show_older">Vis ældre udgivelser</string>
+    <string name="changelog_older_empty">Ingen ældre udgivelser at vise</string>
     <string name="no_network_toast">Ingen internetforbindelse tilgængelig</string>
     <string name="update_available">En opdatering er tilgængelig</string>
     <string name="ready_to_install_update">Klar til at installere opdatering</string>

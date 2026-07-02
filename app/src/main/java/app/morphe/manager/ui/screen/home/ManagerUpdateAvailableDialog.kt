@@ -6,6 +6,8 @@
 package app.morphe.manager.ui.screen.home
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -53,6 +55,11 @@ fun ManagerUpdateDetailsDialog(
         }
     }
 
+    // Collapse "Show older releases" when the dialog closes so it reopens fresh next time
+    DisposableEffect(Unit) {
+        onDispose { updateViewModel.resetOlderManagerEntries() }
+    }
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(
@@ -65,6 +72,7 @@ fun ManagerUpdateDetailsDialog(
                 UpdateViewModel.State.SUCCESS -> R.string.update_completed
             }
         ),
+        scrollable = false,
         footer = {
             when (state) {
                 UpdateViewModel.State.CAN_DOWNLOAD -> {
@@ -170,12 +178,9 @@ fun ManagerUpdateDetailsDialog(
         val textColor = LocalDialogTextColor.current
         val secondaryColor = LocalDialogSecondaryTextColor.current
 
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
-        ) {
+        LazyColumn(modifier = Modifier.fillMaxWidth()) {
             when (state) {
-                UpdateViewModel.State.DOWNLOADING -> {
+                UpdateViewModel.State.DOWNLOADING -> item("download_progress") {
                     DownloadProgressSection(
                         downloadedSize = updateViewModel.downloadedSize,
                         totalSize = updateViewModel.totalSize,
@@ -184,8 +189,9 @@ fun ManagerUpdateDetailsDialog(
                     )
                 }
 
-                UpdateViewModel.State.INSTALLING -> {
+                UpdateViewModel.State.INSTALLING -> item("installing") {
                     Column(
+                        modifier = Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(20.dp)
                     ) {
@@ -200,7 +206,7 @@ fun ManagerUpdateDetailsDialog(
                 }
 
                 UpdateViewModel.State.FAILED -> {
-                    if (updateViewModel.installError.isNotEmpty()) {
+                    if (updateViewModel.installError.isNotEmpty()) item("failed_error") {
                         Surface(
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(16.dp),
@@ -239,7 +245,7 @@ fun ManagerUpdateDetailsDialog(
                     }
                 }
 
-                UpdateViewModel.State.SUCCESS -> {
+                UpdateViewModel.State.SUCCESS -> item("success") {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -279,18 +285,45 @@ fun ManagerUpdateDetailsDialog(
                 UpdateViewModel.State.CAN_DOWNLOAD, UpdateViewModel.State.CAN_INSTALL -> {
                     val entries = updateViewModel.missedChangelogEntries
                     if (entries == null) {
-                        // Shimmer loading state
-                        ChangelogSectionLoading()
+                        item("missed_loading") { ChangelogSectionLoading() }
                     } else {
-                        ChangelogEntriesList(
-                            entries = entries,
-                            headerIcon = Icons.Outlined.NewReleases,
+                        itemsIndexed(
+                            items = entries,
+                            key = { index, _ -> "missed_$index" }
+                        ) { index, entry ->
+                            if (index > 0) {
+                                HorizontalDivider(
+                                    modifier = Modifier.padding(
+                                        top = MorpheDefaults.ContentPaddingSmall,
+                                        bottom = MorpheDefaults.ContentPadding
+                                    ),
+                                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
+                                )
+                            }
+                            ChangelogEntrySection(
+                                entry = entry,
+                                headerIcon = Icons.Outlined.NewReleases,
+                                textColor = textColor
+                            )
+                        }
+                        changelogOlderItems(
+                            entries = updateViewModel.olderManagerEntries,
+                            isLoading = updateViewModel.isLoadingOlderEntries,
+                            onExpand = {
+                                updateViewModel.loadOlderManagerEntries(
+                                    exclude = entries.map { it.version }.toSet()
+                                )
+                            },
                             textColor = textColor
                         )
                     }
                 }
             }
         }
+    }
+
+    MorpheOverlay(visible = updateViewModel.isLoadingOlderEntries) {
+        PulsingLogoIndicator()
     }
 
     // Internet check dialog

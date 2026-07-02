@@ -10,12 +10,9 @@ import androidx.core.content.ContextCompat
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.patcher.LibraryResolver
 import app.morphe.manager.patcher.logger.Logger
-import app.morphe.manager.patcher.runtime.process.IPatcherEvents
-import app.morphe.manager.patcher.runtime.process.IPatcherProcess
-import app.morphe.manager.patcher.runtime.process.Parameters
-import app.morphe.manager.patcher.runtime.process.PatchConfiguration
-import app.morphe.manager.patcher.runtime.process.PatcherProcess
+import app.morphe.manager.patcher.runtime.process.*
 import app.morphe.manager.patcher.split.SplitApkPreparer
+import app.morphe.manager.patcher.split.SplitPreparationEvent
 import app.morphe.manager.patcher.worker.ProgressEventHandler
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.Options
@@ -24,19 +21,17 @@ import app.morphe.manager.util.PatchSelection
 import app.morphe.manager.util.tag
 import com.github.pgreze.process.Redirect
 import com.github.pgreze.process.process
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.*
 import org.koin.core.component.inject
 import java.io.File
+import java.util.concurrent.atomic.AtomicReference
 import kotlin.math.max
+import kotlin.time.Duration.Companion.seconds
 
 // Max memory value. Slightly higher values may work for some devices
 // but patching YT is the same time with both 1024 and 1600 memory.
 // If too much memory is requested then some devices become extremely slow
-// for unknown reason (using flash memory as swap file?).
+// for unknown reason (using flash memory as swap file?)
 const val PROCESS_RUNTIME_MEMORY_MINIMUM = 512
 const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT = 1280
 const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION = 1024
@@ -96,7 +91,7 @@ class ProcessRuntime(
         }, ContextCompat.RECEIVER_NOT_EXPORTED)
 
         return try {
-            withTimeout(10000L) {
+            withTimeout(10.seconds) {
                 binderFuture.await()
             }
         } finally {
@@ -114,7 +109,7 @@ class ProcessRuntime(
         onPatchCompleted: suspend (String) -> Unit,
         onProgress: ProgressEventHandler,
         skipUnneededSplits: Boolean,
-        onMergedApkReady: (suspend (File) -> Unit)?,
+        onMergedApkReady: (suspend (File) -> Unit)?
     ) = coroutineScope {
         val minMemoryLimit = 256
         var memoryMB = max(minMemoryLimit, prefs.patcherProcessMemoryLimit.get())
@@ -166,7 +161,7 @@ class ProcessRuntime(
         onProgress: ProgressEventHandler,
         onMergedApkReady: (suspend (File) -> Unit)?,
     ) = coroutineScope {
-        // Get the location of our own Apk.
+        // Get the location of our own Apk
         val managerBaseApk = pm.getPackageInfo(context.packageName)!!.applicationInfo!!.sourceDir
         val propOverride = resolvePropOverride(context)?.absolutePath
 
@@ -175,7 +170,7 @@ class ProcessRuntime(
             System.getenv().toMutableMap().apply {
                 put("CLASSPATH", managerBaseApk)
                 if (propOverride != null) {
-                    // Override the props used by ART to set the memory limit.
+                    // Override the props used by ART to set the memory limit
                     put("LD_PRELOAD", propOverride)
                     put("PROP_dalvik.vm.heapgrowthlimit", heapSizeString)
                     put("PROP_dalvik.vm.heapsize", heapSizeString)
@@ -197,16 +192,16 @@ class ProcessRuntime(
         launch(Dispatchers.IO) {
             val result = process(
                 appProcessBin,
-                "-Djava.io.tmpdir=$cacheDir", // The process will use /tmp if this isn't set, which is a problem because that folder is not accessible on Android.
+                "-Djava.io.tmpdir=$cacheDir", // The process will use /tmp if this isn't set, which is a problem because that folder is not accessible on Android
                 "/", // The unused cmd-dir parameter
                 "--nice-name=${context.packageName}:Patcher",
-                PatcherProcess::class.java.name, // The class with the main function.
+                PatcherProcess::class.java.name, // The class with the main function
                 context.packageName,
                 env = env,
                 stdout = Redirect.CAPTURE,
-                stderr = Redirect.CAPTURE,
+                stderr = Redirect.CAPTURE
             ) { line ->
-                // The process shouldn't generally be writing to stdio. Log any lines we get as warnings.
+                // The process shouldn't generally be writing to stdio. Log any lines we get as warnings
                 logger.warn("[STDIO]: $line")
             }
 
@@ -217,15 +212,18 @@ class ProcessRuntime(
 
         val patching = CompletableDeferred<Unit>()
         val scope = this
+        // Held outside the launch so cancel() can tell app_process to exit and release its wakelock
+        val binderRef = AtomicReference<IPatcherProcess?>()
 
         launch(Dispatchers.IO) {
             val binder = awaitBinderConnection()
-//            binderRef.set(binder)
+            binderRef.set(binder)
 
             // Android Studio's fast deployment feature causes an issue where the other process will be running older code compared to the main process.
             // The patcher process is running outdated code if the randomly generated BUILD_ID numbers don't match.
             // To fix it, clear the cache in the Android settings or disable fast deployment (Run configurations -> Edit Configurations -> app -> Enable "always deploy with package manager").
-            if (binder.buildId() != BuildConfig.BUILD_ID) throw Exception("app_process is running outdated code. Clear the app cache or disable disable Android 11 deployment optimizations in your IDE")
+            if (binder.buildId() != BuildConfig.BUILD_ID)
+                throw Exception("app_process is running outdated code. Clear the app cache or disable disable Android 11 deployment optimizations in your IDE")
 
             val eventHandler = object : IPatcherEvents.Stub() {
                 override fun log(level: String, msg: String) = logger.log(enumValueOf(level), msg)
@@ -236,6 +234,19 @@ class ProcessRuntime(
 
                 override fun progress(name: String?, state: String?, msg: String?) =
                     onProgress(name, state?.let { enumValueOf<State>(it) }, msg)
+
+                override fun splitProgress(eventType: String?, apkName: String?) {
+                    val event = when (eventType) {
+                        "Extracting" -> SplitPreparationEvent.Extracting
+                        "Merging" -> SplitPreparationEvent.Merging(apkName.orEmpty())
+                        "Writing" -> SplitPreparationEvent.Writing
+                        "Finalizing" -> SplitPreparationEvent.Finalizing
+                        else -> return
+                    }
+                    val message = event.toLocalizedString(context)
+                    logger.info(message)
+                    onProgress(message, State.RUNNING, null)
+                }
 
                 override fun finished(exceptionStackTrace: String?) {
                     runCatching { binder.exit() }
@@ -263,7 +274,7 @@ class ProcessRuntime(
                 },
                 skipUnneededSplits = skipUnneededSplits,
                 mergedInputFile = mergedInputPath,
-                bytecodeMode = prefs.bytecodeModePreference.get(),
+                bytecodeMode = prefs.bytecodeModePreference.get()
             )
 
             binder.start(parameters, eventHandler)
@@ -279,6 +290,9 @@ class ProcessRuntime(
                 onMergedApkReady?.invoke(mergedFile)
             }
         } finally {
+            // Tell app_process to exit on cancellation. After normal completion finished()
+            // already called exit(), so runCatching swallows the DeadObjectException
+            runCatching { binderRef.get()?.exit() }
             // Always clean up the temporary merged file regardless of success or failure
             mergedFile?.takeIf { it.exists() }?.delete()
         }

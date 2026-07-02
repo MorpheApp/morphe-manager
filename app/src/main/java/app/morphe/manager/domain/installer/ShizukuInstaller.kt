@@ -49,13 +49,19 @@ class ShizukuInstaller(private val app: Application) {
      *
      * @param sourceFile The APK file to install.
      * @param expectedPackage The expected package name of the APK, used to configure the session.
+     * @param installerPackageNameOverride Optional package name to report as the installer.
      * @throws InstallerOperationException if the installation fails or is aborted.
      */
     @SuppressLint("RequestInstallPackagesPolicy")
-    suspend fun install(sourceFile: File, expectedPackage: String): InstallResult = withContext(Dispatchers.IO) {
+    suspend fun install(
+        sourceFile: File,
+        expectedPackage: String,
+        installerPackageNameOverride: String? = null
+    ): InstallResult = withContext(Dispatchers.IO) {
         val packageInstaller = obtainPackageInstaller()
         val isRoot = runCatching { Shizuku.getUid() }.getOrDefault(-1) == 0
-        val installerPackageName = if (isRoot) app.packageName else SHELL_PACKAGE
+        val installerPackageName = installerPackageNameOverride
+            ?: if (isRoot) app.packageName else SHELL_PACKAGE
         val installerAttributionTag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) app.attributionTag else null
         val userId = if (isRoot) currentUserId() else 0
 

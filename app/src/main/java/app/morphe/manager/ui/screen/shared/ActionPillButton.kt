@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.foundation.layout.*
@@ -7,6 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
@@ -54,7 +62,9 @@ fun ActionPillButton(
                     )
                     Text(
                         text = label,
-                        style = textStyle
+                        style = textStyle,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
             } else {
@@ -78,5 +88,54 @@ fun ActionPillButton(
         }
     } else {
         button(modifier)
+    }
+}
+
+private enum class ActionPillRowSlot { Natural, Compressed }
+
+/**
+ * Row that lays out its [ActionPillButton] children at their natural width and centers them.
+ * If the natural total overflows the available width, all pills are compressed equally to fit.
+ */
+@Composable
+fun ActionPillRow(
+    modifier: Modifier = Modifier,
+    spacing: Dp = 8.dp,
+    content: @Composable () -> Unit
+) {
+    SubcomposeLayout(modifier = modifier.fillMaxWidth()) { constraints ->
+        val spacingPx = spacing.roundToPx()
+        val looseConstraints = constraints.copy(minWidth = 0, maxWidth = constraints.maxWidth)
+
+        val naturalMeasurables = subcompose(ActionPillRowSlot.Natural) { content() }
+        if (naturalMeasurables.isEmpty()) {
+            return@SubcomposeLayout layout(constraints.maxWidth, 0) {}
+        }
+
+        val naturalPlaceables = naturalMeasurables.map { it.measure(looseConstraints) }
+        val n = naturalPlaceables.size
+        val totalSpacing = spacingPx * (n - 1)
+        val naturalWidth = naturalPlaceables.sumOf { it.width } + totalSpacing
+
+        val finalPlaceables = if (naturalWidth <= constraints.maxWidth) {
+            naturalPlaceables
+        } else {
+            val itemWidth = ((constraints.maxWidth - totalSpacing) / n).coerceAtLeast(0)
+            val itemConstraints = constraints.copy(minWidth = itemWidth, maxWidth = itemWidth)
+            val compressed = subcompose(ActionPillRowSlot.Compressed) { content() }
+            compressed.map { it.measure(itemConstraints) }
+        }
+
+        val contentWidth = finalPlaceables.sumOf { it.width } + totalSpacing
+        val height = finalPlaceables.maxOfOrNull { it.height } ?: 0
+        val xStart = ((constraints.maxWidth - contentWidth) / 2).coerceAtLeast(0)
+
+        layout(constraints.maxWidth, height) {
+            var x = xStart
+            finalPlaceables.forEach { placeable ->
+                placeable.placeRelative(x, 0)
+                x += placeable.width + spacingPx
+            }
+        }
     }
 }

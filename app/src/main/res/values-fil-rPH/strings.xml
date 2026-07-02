@@ -295,7 +295,7 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="root_gmscore_excluded">Hindi kasama ang GmsCore support patch sa root mode</string>
     <string name="root_pre_patch_installer_title">Piliin ang paraan ng pag-install</string>
     <string name="root_pre_patch_installer_description">May access sa root ang iyong device. Piliin kung paano mong i-install ang na-patch na aplikasyon</string>
-    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_title">I-mount ang root</string>
     <string name="root_pre_patch_installer_mount_description">I-mount ang na-patch na APK sa ilalim ng stock na aplikasyon. Hindi na kailangan ang GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Standard na pag-install</string>
     <string name="root_pre_patch_installer_standard_description">I-install bilang isang hiwalay na app na may suporta sa GmsCore. Maaaring pumili ng installer pagkatapos ng pag-patch</string>
@@ -305,7 +305,7 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="patcher_error_log">Tala ng pagkakamali</string>
     <string name="patcher_error_technical">Teknikal na detalye</string>
     <string name="patcher_error_dialog_app_info">Impormasyon ng app</string>
-    <string name="patcher_tab_logs">Mga Log ng Patcher</string>
+    <string name="patcher_tab_logs">Mga log ng Patcher</string>
     <string name="patcher_tab_game">Mga Laro</string>
     <string name="patcher_long_step_warning">Maaaring magtagal ang hakbang ito. Mangyaring maghintay…</string>
     <string name="patcher_installing_subtitle">Halos handa na sa rock! 🎸</string>
@@ -669,6 +669,14 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_import_manager_settings_description">Ibinabalik at ibinubuhay ang iyong mga setting ng Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Nabigong ma-import ang mga setting ng Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Na-import ang mga setting ng Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_title">I-import ang mga setting ng Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Piliin kung paano iaaplay ang mga in-import na setting at source</string>
+    <string name="settings_system_import_selections_mode_title">I-import ang mga pagpipilian ng patch</string>
+    <string name="settings_system_import_selections_mode_description">Pumili ng kung paano ilalapat ang mga napiling import at opsyon sa patch.</string>
+    <string name="import_mode_replace_title">Palitan ang mga kasalukuyan</string>
+    <string name="import_mode_replace_description">Tumpak na itugma ang backup. Ang mga item na wala sa backup ay tatanggalin.</string>
+    <string name="import_mode_merge_title">Pagsamahin sa mga kasalukuyan</string>
+    <string name="import_mode_merge_description">Idagdag ang mga nawawalang item mula sa backup. Ang mga kasalukuyang item ay mananatiling hindi nababago.</string>
     <string name="settings_system_export_manager_settings_fail">Nabigong ma-export ang mga setting ng Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Na-export ang mga setting ng Morphe</string>
     <string name="settings_system_debug">Debug</string>
@@ -788,6 +796,9 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="reorder_done">Nai-save ang pagkakasunud-sunod</string>
     <string name="reset_order">Ibalik sa orihinal na pagkakasunud-sunod</string>
     <string name="reset_order_done">Naibalik ang order</string>
+    <string name="accessibility_move_up">Ilipat paitaas</string>
+    <string name="accessibility_move_down">Ilipat pababa</string>
+    <string name="accessibility_app_moved_announcement">Inilipat ang %1$s sa posisyon %2$d ng %3$d</string>
     <string name="rename">Palitan</string>
     <string name="import_">I-import</string>
     <string name="export">I-export</string>
@@ -833,7 +844,6 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="changelog">Tingnan ang mga changelog</string>
     <string name="changelog_description">Tingnan ang mga pinakabagong pagbabago sa update na ito</string>
     <string name="changelog_download_fail">Nabigong mag-download ang changelog: %s</string>
-    <string name="changelog_retry">Subukan muli</string>
     <string name="changelog_empty">Walang magagamit na changelog</string>
     <string name="no_network_toast">Walang magagamit na koneksyon sa internet</string>
     <string name="update_available">Magagamit ang isang update</string>

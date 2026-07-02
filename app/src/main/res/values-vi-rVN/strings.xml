@@ -125,7 +125,7 @@
     <string name="home_apk_availability_recommended_label">Khuyên dùng</string>
     <string name="home_apk_availability_unpatched_label">Chưa vá</string>
     <string name="home_apk_availability_incompatible_label">Không tương thích</string>
-    <string name="home_apk_availability_yes">Có, giúp tôi vs</string>
+    <string name="home_apk_availability_yes">Có, giúp tôi với</string>
     <string name="home_apk_availability_no">Không, tôi có APK rồi</string>
     <string name="home_apk_use_saved">Sử dụng APK đã lưu</string>
     <string name="home_apk_use_installed">Sử dụng APK đã cài đặt</string>
@@ -316,6 +316,10 @@ Vùng ngoài (nét đứt): có thể bị cắt theo hình dạng biểu tượ
     <string name="patcher_failed_subtitle">Xem chi tiết lỗi bên dưới</string>
     <string name="patcher_failed_dialog_title">Không thể vá</string>
     <string name="patcher_unknown_error">Đã xảy ra lỗi không xác định</string>
+    <string name="patcher_split_step_extracting">Đang giải nén các APK chia nhỏ</string>
+    <string name="patcher_split_step_merging">Đang gộp %s</string>
+    <string name="patcher_split_step_writing">Đang viết APK đã gộp</string>
+    <string name="patcher_split_step_finalizing">Đang hoàn thiện APK đã gộp</string>
     <string name="patcher_conflict_title">Phát hiện xung đột</string>
     <string name="patcher_conflict_subtitle">Bạn cần gỡ cài đặt phiên bản hiện có</string>
     <string name="patcher_conflict_hint">Ứng dụng đã vá dùng chứng chỉ khác với phiên bản đã cài đặt. Gỡ cài đặt sẽ xóa tất cả dữ liệu ứng dụng</string>
@@ -670,6 +674,14 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_import_manager_settings_description">Sao lưu và khôi phục lại cài đặt Morphe của bạn</string>
     <string name="settings_system_import_manager_settings_fail">Không thể nhập cài đặt Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Đã nhập cài đặt Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_title">Nhập cài đặt Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Chọn cách áp dụng các cài đặt và nguồn đã nhập</string>
+    <string name="settings_system_import_selections_mode_title">Nhập lựa chọn bản vá</string>
+    <string name="settings_system_import_selections_mode_description">Chọn cách áp dụng các lựa chọn và tùy chọn vá đã nhập</string>
+    <string name="import_mode_replace_title">Thay thế hiện có</string>
+    <string name="import_mode_replace_description">Khớp chính xác với bản sao lưu. Các mục không có trong bản sao lưu sẽ bị xóa</string>
+    <string name="import_mode_merge_title">Hợp nhất với hiện có</string>
+    <string name="import_mode_merge_description">Thêm các mục còn thiếu từ bản sao lưu. Các mục hiện có sẽ không thay đổi</string>
     <string name="settings_system_export_manager_settings_fail">Không thể xuất cài đặt Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Đã xuất cài đặt Morphe</string>
     <string name="settings_system_debug">Gỡ lỗi</string>
@@ -789,6 +801,9 @@ Kích thước hình ảnh yêu cầu:
     <string name="reorder_done">Đã lưu thứ tự</string>
     <string name="reset_order">Đặt lại thứ tự</string>
     <string name="reset_order_done">Đặt lại thứ tự</string>
+    <string name="accessibility_move_up">Di chuyển lên</string>
+    <string name="accessibility_move_down">Di chuyển xuống</string>
+    <string name="accessibility_app_moved_announcement">%1$s đã được di chuyển đến vị trí %2$d trong %3$d</string>
     <string name="rename">Đổi tên</string>
     <string name="import_">Nhập</string>
     <string name="export">Xuất</string>
@@ -834,8 +849,9 @@ Kích thước hình ảnh yêu cầu:
     <string name="changelog">Lịch sử cập nhật</string>
     <string name="changelog_description">Xem những thay đổi mới nhất trong bản cập nhật này</string>
     <string name="changelog_download_fail">Không thể tải lịch sử cập nhật: %s</string>
-    <string name="changelog_retry">Thử lại</string>
     <string name="changelog_empty">Không có lịch sử cập nhật</string>
+    <string name="changelog_show_older">Hiển thị các bản phát hành cũ</string>
+    <string name="changelog_older_empty">Không có bản phát hành cũ nào để hiển thị</string>
     <string name="no_network_toast">Không có kết nối mạng</string>
     <string name="update_available">Đã có bản cập nhật mới</string>
     <string name="ready_to_install_update">Sẵn sàng cài đặt bản cập nhật</string>

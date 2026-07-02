@@ -263,7 +263,6 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="root_gmscore_excluded">Tillägget för GmsCore-stöd exkluderas i rotläge</string>
     <string name="root_pre_patch_installer_title">Välj installationsmetod</string>
     <string name="root_pre_patch_installer_description">Din enhet har rotåtkomst. Välj hur du vill installera den modifierade appen</string>
-    <string name="root_pre_patch_installer_mount_title">Rotmontering</string>
     <string name="root_pre_patch_installer_mount_description">Monterar den modifierade APK-filen över standardappen. Inget GmsCore behövs</string>
     <string name="root_pre_patch_installer_standard_title">Standardinstallation</string>
     <string name="root_pre_patch_installer_standard_description">Installerar som en separat app med stöd för GmsCore. En installerare kan väljas efter modifieringen</string>
@@ -275,12 +274,9 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="patcher_error_dialog_app_info">Appinformation</string>
     <string name="patcher_long_step_warning">Det här steget kan ta en stund. Vänta …</string>
     <string name="patcher_installing_subtitle">Nästan redo att rocka loss! 🎸</string>
-    <string name="patcher_success_title">Klart! 🎉</string>
     <string name="patcher_success_subtitle">Appen är modifierad och installerad!</string>
-    <string name="patcher_complete_title">Modifieringen är klar! ✨</string>
     <string name="patcher_failed_title">Hoppsan! Något gick fel</string>
     <string name="patcher_failed_subtitle">Kontrollera felinformationen nedan</string>
-    <string name="patcher_failed_dialog_title">Modifieringen misslyckades</string>
     <string name="patcher_unknown_error">Okänt fel uppstod</string>
     <string name="patcher_conflict_title">Paketkonflikt</string>
     <string name="patcher_conflict_subtitle">Du måste avinstallera den befintliga versionen</string>
@@ -769,7 +765,6 @@ Bildernas mått ska vara följande:
     <string name="changelog">Visa ändringsloggar</string>
     <string name="changelog_description">Kolla in de senaste ändringarna i den här uppdateringen</string>
     <string name="changelog_download_fail">Det gick inte att ladda ned ändringsloggen: %s</string>
-    <string name="changelog_retry">Försök igen</string>
     <string name="changelog_empty">Ingen ändringslogg är tillgänglig</string>
     <string name="no_network_toast">Ingen internetanslutning är tillgänglig</string>
     <string name="update_available">En uppdatering är tillgänglig</string>

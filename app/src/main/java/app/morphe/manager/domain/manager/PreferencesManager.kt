@@ -138,13 +138,6 @@ class PreferencesManager(
                 patcherProcessMemoryLimit.update(adaptive)
             }
 
-            // TODO: remove after 1.18.0 stable - migrates expert mode users who upgraded before
-            //  custom file picker toggle existed; without this they'd get the new default (false)
-            //  even though they should have it on.
-            if (useExpertMode.get() && !customFilePickerUserConfigured.get()) {
-                useCustomFilePicker.update(true)
-            }
-
             // Auto-enable prereleases for dev versions
             if (isDevVersion() && !prereleaseAutoEnabled.get()) {
                 Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
@@ -208,6 +201,9 @@ class PreferencesManager(
         val updateCheckInterval: UpdateCheckInterval? = null,
         val customBundles: List<BundleSnapshot>? = null,
         val bytecodeModePreference: BytecodeMode? = null,
+        val filePickerSortMode: String? = null,
+        val useCustomFilePicker: Boolean? = null,
+        val customFilePickerUserConfigured: Boolean? = null
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -242,6 +238,9 @@ class PreferencesManager(
         useExpertMode = useExpertMode.get(),
         updateCheckInterval = updateCheckInterval.get(),
         bytecodeModePreference = bytecodeModePreference.get(),
+        filePickerSortMode = filePickerSortMode.get(),
+        useCustomFilePicker = useCustomFilePicker.get(),
+        customFilePickerUserConfigured = customFilePickerUserConfigured.get()
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -276,6 +275,9 @@ class PreferencesManager(
         snapshot.useExpertMode?.let { useExpertMode.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
         snapshot.bytecodeModePreference?.let { bytecodeModePreference.value = it }
+        snapshot.filePickerSortMode?.let { filePickerSortMode.value = it }
+        snapshot.useCustomFilePicker?.let { useCustomFilePicker.value = it }
+        snapshot.customFilePickerUserConfigured?.let { customFilePickerUserConfigured.value = it }
     }
 
     companion object {
@@ -293,6 +295,9 @@ object InstallerPreferenceTokens {
     const val SYSTEM = ":system:"
     const val ROOT = ":root:" // Legacy value, mapped to AUTO_SAVED.
     const val AUTO_SAVED = ":auto_saved:"
+    const val PLAY_STORE = ":play_store:"
+    const val ROOT_PLAY_STORE = ":root_play_store:"
     const val SHIZUKU = ":shizuku:"
+    const val SHIZUKU_PLAY_STORE = ":shizuku_play_store:"
     const val NONE = ":none:"
 }

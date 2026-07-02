@@ -673,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Створює резервну копію та відновлює ваші налаштування Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Не вдалося імпортувати налаштування Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Налаштування Morphe імпортовано</string>
+    <string name="settings_system_import_manager_settings_mode_title">Імпорт налаштувань Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Виберіть, як застосувати імпортовані налаштування та джерела</string>
+    <string name="settings_system_import_selections_mode_title">Імпортувати вибір патчів</string>
+    <string name="settings_system_import_selections_mode_description">Оберіть, як застосувати імпортовані виділені елементи та параметри патчу.</string>
+    <string name="import_mode_replace_title">Замінити існуючі</string>
+    <string name="import_mode_replace_description">Точно відповідати резервній копії. Елементи, відсутні в резервній копії, будуть видалені</string>
+    <string name="import_mode_merge_title">Об’єднати з існуючими</string>
+    <string name="import_mode_merge_description">Додати відсутні елементи з резервної копії. Існуючі елементи залишаються без змін</string>
     <string name="settings_system_export_manager_settings_fail">Не вдалося експортувати налаштування Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Налаштування Morphe експортовано</string>
     <string name="settings_system_debug">Налагодження</string>
@@ -792,6 +800,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">Порядок збережено</string>
     <string name="reset_order">Скинути порядок</string>
     <string name="reset_order_done">Порядок скинуто</string>
+    <string name="accessibility_move_up">Перемістити вгору</string>
+    <string name="accessibility_move_down">Перемістити вниз</string>
+    <string name="accessibility_app_moved_announcement">%1$s переміщено на позицію %2$d з %3$d</string>
     <string name="rename">Перейменувати</string>
     <string name="import_">Імпорт</string>
     <string name="export">Експорт</string>
@@ -837,8 +848,9 @@ morphe_header_custom_dark.png
     <string name="changelog">Переглянути списки змін</string>
     <string name="changelog_description">Перегляньте останні зміни цього оновлення</string>
     <string name="changelog_download_fail">Не вдалося завантажити список змін: %s</string>
-    <string name="changelog_retry">Повторити</string>
     <string name="changelog_empty">Список змін відсутній</string>
+    <string name="changelog_show_older">Показати старіші релізи</string>
+    <string name="changelog_older_empty">Немає старіших релізів для показу</string>
     <string name="no_network_toast">Немає підключення до Інтернету</string>
     <string name="update_available">У наявності є оновлення</string>
     <string name="ready_to_install_update">Готово до установки оновлення</string>

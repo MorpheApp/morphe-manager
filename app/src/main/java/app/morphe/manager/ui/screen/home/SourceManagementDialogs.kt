@@ -56,14 +56,14 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.*
-import com.mikepenz.markdown.model.parseMarkdownFlow
 import compose.icons.FontAwesomeIcons
 import compose.icons.fontawesomeicons.Brands
 import compose.icons.fontawesomeicons.brands.Github
 import compose.icons.fontawesomeicons.brands.Gitlab
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 import com.mikepenz.markdown.model.State as MarkdownRenderState
 
@@ -1140,6 +1140,8 @@ fun BundleChangelogDialog(
     onDismissRequest: () -> Unit
 ) {
     var state: BundleChangelogState by remember { mutableStateOf(BundleChangelogState.Loading) }
+    var olderState: OlderBundleState by remember { mutableStateOf(OlderBundleState.Collapsed) }
+    val scope = rememberCoroutineScope()
     // 0 = waiting for dialog enter; incremented to trigger fetch, again on retry
     var fetchTrigger by remember { mutableIntStateOf(0) }
 
@@ -1183,7 +1185,7 @@ fun BundleChangelogDialog(
                 if (entries.isNotEmpty()) {
                     BundleChangelogState.Entries(
                         entries = entries,
-                        parsedMarkdown = preParseEntries(entries),
+                        parsedMarkdown = preParseChangelogEntries(entries),
                         latestPageUrl = latestPageUrl
                     )
                 } else {
@@ -1198,12 +1200,39 @@ fun BundleChangelogDialog(
                     )
                     BundleChangelogState.Entries(
                         entries = fallbackEntries,
-                        parsedMarkdown = preParseEntries(fallbackEntries),
+                        parsedMarkdown = preParseChangelogEntries(fallbackEntries),
                         latestPageUrl = asset.pageUrl
                     )
                 }
             } catch (t: Throwable) {
                 BundleChangelogState.Error(t)
+            }
+        }
+    }
+
+    val loadOlder: () -> Unit = load@{
+        if (olderState !is OlderBundleState.Collapsed) return@load
+        val shownVersions = (state as? BundleChangelogState.Entries)
+            ?.entries
+            ?.map { it.version.removePrefix("v").trim() }
+            ?.toSet()
+            .orEmpty()
+        olderState = OlderBundleState.Loading
+        scope.launch {
+            olderState = withContext(Dispatchers.Default) {
+                runCatching {
+                    val all = src.fetchFullChangelogEntries()
+                    val filtered = all.filter {
+                        // Skip versions already shown above and any pre-release leftovers;
+                        // history is meaningful only as the stable timeline
+                        it.version.removePrefix("v").trim() !in shownVersions
+                                && !it.version.contains("-")
+                    }
+                    OlderBundleState.Loaded(filtered)
+                }.getOrElse {
+                    // Surface failure as collapsed so a retry click re-triggers the fetch
+                    OlderBundleState.Collapsed
+                }
             }
         }
     }
@@ -1239,7 +1268,7 @@ fun BundleChangelogDialog(
                 is BundleChangelogState.Error -> {
                     MorpheDialogButtonColumn {
                         MorpheDialogButton(
-                            text = stringResource(R.string.changelog_retry),
+                            text = stringResource(R.string.retry),
                             onClick = { fetchTrigger++ },
                             modifier = Modifier.fillMaxWidth()
                         )
@@ -1260,12 +1289,24 @@ fun BundleChangelogDialog(
             }
         }
     ) {
-        BundleChangelogContent(state)
+        BundleChangelogContent(
+            state = state,
+            olderState = olderState,
+            onExpandOlder = loadOlder
+        )
+    }
+
+    MorpheOverlay(visible = olderState is OlderBundleState.Loading) {
+        PulsingLogoIndicator()
     }
 }
 
 @Composable
-private fun BundleChangelogContent(state: BundleChangelogState) {
+private fun BundleChangelogContent(
+    state: BundleChangelogState,
+    olderState: OlderBundleState,
+    onExpandOlder: () -> Unit,
+) {
     Crossfade(
         targetState = state,
         animationSpec = tween(MorpheDefaults.ANIMATION_DURATION),
@@ -1289,7 +1330,10 @@ private fun BundleChangelogContent(state: BundleChangelogState) {
                         itemsIndexed(current.entries) { index, entry ->
                             if (index > 0) {
                                 HorizontalDivider(
-                                    modifier = Modifier.padding(vertical = 20.dp),
+                                    modifier = Modifier.padding(
+                                        top = MorpheDefaults.ContentPaddingSmall,
+                                        bottom = MorpheDefaults.ContentPadding
+                                    ),
                                     color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
                                 )
                             }
@@ -1300,6 +1344,12 @@ private fun BundleChangelogContent(state: BundleChangelogState) {
                                 precomputedMarkdown = current.parsedMarkdown.getOrNull(index)
                             )
                         }
+                        changelogOlderItems(
+                            entries = (olderState as? OlderBundleState.Loaded)?.entries,
+                            isLoading = olderState is OlderBundleState.Loading,
+                            onExpand = onExpandOlder,
+                            textColor = textColor
+                        )
                     }
                 }
             }
@@ -1362,18 +1412,12 @@ private sealed interface BundleChangelogState {
     data class Error(val throwable: Throwable) : BundleChangelogState
 }
 
-private suspend fun preParseEntries(entries: List<ChangelogEntry>): List<MarkdownRenderState?> =
-    coroutineScope {
-        entries.map { entry ->
-            async {
-                if (entry.content.isBlank()) null
-                else runCatching {
-                    parseMarkdownFlow(entry.content.trimIndent())
-                        .first { it !is MarkdownRenderState.Loading }
-                }.getOrNull()
-            }
-        }.awaitAll()
-    }
+private sealed interface OlderBundleState {
+    data object Collapsed : OlderBundleState
+    data object Loading : OlderBundleState
+    /** [entries] are full-history stable entries, already filtered to exclude what's shown above. */
+    data class Loaded(val entries: List<ChangelogEntry>) : OlderBundleState
+}
 
 private val doubleBracketLinkRegex = Regex("""\[\[([^]]+)]\(([^)]+)\)]""")
 

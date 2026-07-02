@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen
 
+import android.net.Uri
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -44,10 +45,7 @@ import app.morphe.manager.ui.screen.home.GlobalOnboardingState
 import app.morphe.manager.ui.screen.settings.AdvancedTabContent
 import app.morphe.manager.ui.screen.settings.AppearanceTabContent
 import app.morphe.manager.ui.screen.settings.SystemTabContent
-import app.morphe.manager.ui.screen.settings.system.AboutDialog
-import app.morphe.manager.ui.screen.settings.system.ChangelogDialog
-import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialogContainer
-import app.morphe.manager.ui.screen.settings.system.KeystoreCredentialsDialog
+import app.morphe.manager.ui.screen.settings.system.*
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.screen.shared.isLandscape
 import app.morphe.manager.ui.viewmodel.*
@@ -184,10 +182,12 @@ fun SettingsScreen(
         onResult = { uri -> uri?.let { importExportViewModel.startKeystoreImport(it) } }
     )
 
+    // Import goes through a mode dialog so the user chooses between Replace and Merge
+    var pendingSettingsImportUri by remember { mutableStateOf<Uri?>(null) }
     val importSettingsLauncher = rememberAdaptiveFilePicker(
         mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE),
         customPickerMimeTypes = arrayOf(JSON_MIMETYPE),
-        onResult = { uri -> uri?.let { importExportViewModel.importManagerSettings(it) } }
+        onResult = { uri -> uri?.let { pendingSettingsImportUri = it } }
     )
 
     // Export launchers
@@ -239,6 +239,19 @@ fun SettingsScreen(
         ChangelogDialog(
             onDismiss = { showChangelogDialog.value = false },
             updateViewModel = updateViewModel
+        )
+    }
+
+    // Import-mode dialog for manager settings: user picks Replace or Merge
+    pendingSettingsImportUri?.let { uri ->
+        ImportModeDialog(
+            titleRes = R.string.settings_system_import_manager_settings_mode_title,
+            descriptionRes = R.string.settings_system_import_manager_settings_mode_description,
+            onDismiss = { pendingSettingsImportUri = null },
+            onSelect = { mode ->
+                importExportViewModel.importManagerSettings(uri, mode)
+                pendingSettingsImportUri = null
+            }
         )
     }
 

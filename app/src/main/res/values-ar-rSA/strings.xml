@@ -316,6 +316,10 @@
     <string name="patcher_failed_subtitle">تحقق من تفاصيل الخطأ أدناه</string>
     <string name="patcher_failed_dialog_title">فشل التعديل</string>
     <string name="patcher_unknown_error">حدث خطأ غير معروف</string>
+    <string name="patcher_split_step_extracting">استخراج ملفات APK المقسمة</string>
+    <string name="patcher_split_step_merging">دمج %s</string>
+    <string name="patcher_split_step_writing">كتابة ملف APK المدمج</string>
+    <string name="patcher_split_step_finalizing">تتم المعالجة النهائية لملف APK المدمج</string>
     <string name="patcher_conflict_title">تعارض الحزمة</string>
     <string name="patcher_conflict_subtitle">تحتاج إلى إلغاء تثبيت الإصدار الحالي</string>
     <string name="patcher_conflict_hint">يستخدم التطبيق الذي تم تعديله شهادة مختلفة عن الإصدار المثبت. سيؤدي إلغاء التثبيت إلى محو جميع بيانات التطبيق.</string>
@@ -670,6 +674,14 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_manager_settings_description">ينسخ إعدادات Morphe احتياطيًا ويستعيدها</string>
     <string name="settings_system_import_manager_settings_fail">تعذر استيراد إعدادات Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">تم استيراد إعدادات Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_title">استيراد إعدادات Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">اختر كيفية تطبيق الإعدادات والمصادر المستوردة</string>
+    <string name="settings_system_import_selections_mode_title">استيراد تحديدات التعديل</string>
+    <string name="settings_system_import_selections_mode_description">اختر كيفية تطبيق التحديدات والخيارات الملحقة المستوردة</string>
+    <string name="import_mode_replace_title">استبدال الموجود</string>
+    <string name="import_mode_replace_description">مطابقة النسخة الاحتياطية تمامًا. سيتم حذف العناصر المفقودة من النسخة الاحتياطية</string>
+    <string name="import_mode_merge_title">الدمج مع الموجود</string>
+    <string name="import_mode_merge_description">إضافة العناصر المفقودة من النسخة الاحتياطية. سيتم الحفاظ على العناصر الموجودة دون تغيير</string>
     <string name="settings_system_export_manager_settings_fail">تعذر تصدير إعدادات Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">تم تصدير إعدادات Morphe</string>
     <string name="settings_system_debug">Debug</string>
@@ -789,6 +801,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="reorder_done">تم حفظ الترتيب</string>
     <string name="reset_order">إعادة تعيين الترتيب</string>
     <string name="reset_order_done">تم إعادة تعيين الترتيب</string>
+    <string name="accessibility_move_up">حرّك لأعلى</string>
+    <string name="accessibility_move_down">حرّك لأسفل</string>
+    <string name="accessibility_app_moved_announcement">%1$s حُرِّك إلى الموضع %2$d من %3$d</string>
     <string name="rename">إعادة تسمية</string>
     <string name="import_">استيراد</string>
     <string name="export">تصدير</string>
@@ -834,8 +849,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="changelog">عرض سجل التغييرات</string>
     <string name="changelog_description">اطّلع على آخر التغييرات في هذا التحديث</string>
     <string name="changelog_download_fail">فشل تنزيل سجل التغييرات: %s</string>
-    <string name="changelog_retry">إعادة المحاولة</string>
     <string name="changelog_empty">لا يتوفر سجل تغييرات</string>
+    <string name="changelog_show_older">عرض الإصدارات الأقدم</string>
+    <string name="changelog_older_empty">لا توجد إصدارات أقدم لعرضها</string>
     <string name="no_network_toast">لا يوجد اتصال بالإنترنت متاح</string>
     <string name="update_available">يتوفر تحديث</string>
     <string name="ready_to_install_update">جاهز لتثبيت التحديث</string>

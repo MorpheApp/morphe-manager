@@ -70,7 +70,7 @@
     <string name="home_greeting_late_night_3">Режим совы: активирован</string>
     <!-- Super late night greetings (0:00–4:59) -->
     <string name="home_greeting_super_late_1">Пик патчей... якобы</string>
-    <string name="home_greeting_super_late_2">Не можете уснуть? Попатчите что-нибудь</string>
+    <string name="home_greeting_super_late_2">Не можете уснуть? Пропатчите что-нибудь</string>
     <string name="home_greeting_super_late_3">В этот момент просто не ложитесь спать и пропатчьте всё</string>
     <string name="home_greeting_super_late_4">И вы, и серверы – оба в сети</string>
     <string name="home_greeting_super_late_5">Ночной и продуктивный</string>
@@ -316,6 +316,10 @@
     <string name="patcher_failed_subtitle">Проверьте детали ошибки ниже</string>
     <string name="patcher_failed_dialog_title">Установка патча не удалась</string>
     <string name="patcher_unknown_error">Произошла неизвестная ошибка</string>
+    <string name="patcher_split_step_extracting">Извлечение разделенных APK</string>
+    <string name="patcher_split_step_merging">Объединение %s</string>
+    <string name="patcher_split_step_writing">Запись объединенного APK</string>
+    <string name="patcher_split_step_finalizing">Завершение объединения APK</string>
     <string name="patcher_conflict_title">Конфликт пакетов</string>
     <string name="patcher_conflict_subtitle">Вам необходимо удалить существующую версию</string>
     <string name="patcher_conflict_hint">Исправленный файл приложения использует другой сертификат, чем установленная версия. Удаление приведет к удалению всех данных приложения</string>
@@ -669,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Создает резервные копии и восстанавливает настройки Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Не удалось импортировать настройки Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe настройки импортированы</string>
+    <string name="settings_system_import_manager_settings_mode_title">Импортировать настройки Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Выберите, как применить импортированные настройки и источники</string>
+    <string name="settings_system_import_selections_mode_title">Импортировать выбор патчей</string>
+    <string name="settings_system_import_selections_mode_description">Выберите, как применять импортированные выбранные элементы и параметры патча</string>
+    <string name="import_mode_replace_title">Заменить существующие</string>
+    <string name="import_mode_replace_description">Точно соответствовать резервной копии. Элементы, отсутствующие в резервной копии, будут удалены</string>
+    <string name="import_mode_merge_title">Объединить с существующими</string>
+    <string name="import_mode_merge_description">Добавить отсутствующие элементы из резервной копии. Существующие элементы остаются без изменений</string>
     <string name="settings_system_export_manager_settings_fail">Не удалось экспортировать настройки Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe настройки экспортированы</string>
     <string name="settings_system_debug">Отладка</string>
@@ -788,6 +800,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">Порядок сохранен</string>
     <string name="reset_order">Сбросить порядок</string>
     <string name="reset_order_done">Сброс заказа</string>
+    <string name="accessibility_move_up">Переместить вверх</string>
+    <string name="accessibility_move_down">Переместить вниз</string>
+    <string name="accessibility_app_moved_announcement">%1$s перемещен на позицию %2$d из %3$d</string>
     <string name="rename">Переименовать</string>
     <string name="import_">Импортировать</string>
     <string name="export">Экспорт</string>
@@ -833,8 +848,9 @@ morphe_header_custom_dark.png
     <string name="changelog">Просмотр истории изменений</string>
     <string name="changelog_description">Просмотрите последние изменения в этом обновлении</string>
     <string name="changelog_download_fail">Не удалось загрузить историю изменений: %s</string>
-    <string name="changelog_retry">Повторить попытку</string>
     <string name="changelog_empty">Нет доступных изменений</string>
+    <string name="changelog_show_older">Показать более старые версии</string>
+    <string name="changelog_older_empty">Нет более старых версий для отображения</string>
     <string name="no_network_toast">Нет подключения к Интернету</string>
     <string name="update_available">Доступно обновление</string>
     <string name="ready_to_install_update">Готово к установке обновления</string>
