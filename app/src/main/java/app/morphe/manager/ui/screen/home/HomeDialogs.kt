@@ -545,8 +545,20 @@ fun HomeDialogs(
 
     // Patches preview dialog (swipe-right on home app card)
     patchesItem.value?.let { item ->
-        val patchesByBundle = remember(item.packageName) {
-            homeViewModel.getPatchesForPackage(item.packageName)
+        // Cards without bundle metadata were patched via "Other apps" with universal patches -
+        // show what was actually applied instead of an empty "available" list
+        val isUniversalOnly = remember(item.packageName) {
+            item.installedApp != null &&
+                    item.packageName !in homeViewModel.bundleAppMetadataFlow.value
+        }
+        val patchesByBundle = if (isUniversalOnly) {
+            produceState(initialValue = emptyMap(), item.packageName) {
+                value = homeViewModel.getAppliedPatchesForPackage(item.packageName)
+            }.value
+        } else {
+            remember(item.packageName) {
+                homeViewModel.getPatchesForPackage(item.packageName)
+            }
         }
         val bundleNames = remember(patchesByBundle) {
             patchesByBundle.keys.associateWith { uid ->

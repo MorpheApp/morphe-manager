@@ -1177,10 +1177,18 @@ class HomeViewModel(
             )
         }
 
-        // Active bundle packages filtered to those in patchablePackages
-        val activeHidden = hiddenPackages.filter { it in packages }
+        // Include apps patched with universal patches through "Other apps": they have no bundle
+        // metadata but must still appear as cards so users can reinstall/uninstall/see updates
+        val universalOnlyPackages = installedApps
+            .map { it.originalPackageName }
+            .filter { it !in packages }
+            .toSet()
+        val allPackages = packages + universalOnlyPackages
 
-        val visiblePackages = packages.filter { it !in hiddenPackages }
+        // Active bundle packages filtered to those in patchablePackages
+        val activeHidden = hiddenPackages.filter { it in allPackages }
+
+        val visiblePackages = allPackages.filter { it !in hiddenPackages }
         val visibleItems = ArrayList<HomeAppItem>(visiblePackages.size)
         for (pkg in visiblePackages) visibleItems.add(buildItem(pkg))
         val defaultSorted = visibleItems.sortedWith(
@@ -1250,6 +1258,26 @@ class HomeViewModel(
                     if (patches.isNotEmpty()) put(uid, patches)
                 }
         }
+    }
+
+    /**
+     * Returns patches actually applied to [packageName], grouped as Map<BundleUid, List<PatchInfo>>.
+     * Used by the swipe-right dialog for cards patched via "Other apps" (universal patches),
+     * where getPatchesForPackage would return empty because no bundle declares them compatible.
+     * Names that reference bundles no longer available are silently dropped.
+     */
+    suspend fun getAppliedPatchesForPackage(packageName: String): Map<Int, List<PatchInfo>> {
+        val bundleInfo = allBundlesInfoState.value
+        val applied = installedAppRepository.getAppliedPatches(packageName)
+        return applied.entries.mapNotNull { (uid, patchNames) ->
+            if (patchNames.isEmpty()) return@mapNotNull null
+            val patchInfos = bundleInfo[uid]?.patches
+                ?.filter { it.name in patchNames }
+                ?.distinctBy { it.name }
+                ?.sortedBy { it.name }
+                ?: return@mapNotNull null
+            if (patchInfos.isEmpty()) null else uid to patchInfos
+        }.toMap()
     }
 
     /**
