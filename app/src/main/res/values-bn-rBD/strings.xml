@@ -316,6 +316,10 @@
     <string name="patcher_failed_subtitle">নীচে ত্রুটির বিবরণ দেখুন</string>
     <string name="patcher_failed_dialog_title">প্যাচিং ব্যর্থ হয়েছে</string>
     <string name="patcher_unknown_error">অজানা ত্রুটি ঘটেছে</string>
+    <string name="patcher_split_step_extracting">স্প্লিট APK এক্সট্রাক্ট করা হচ্ছে</string>
+    <string name="patcher_split_step_merging">মার্জ করা হচ্ছে %s</string>
+    <string name="patcher_split_step_writing">মার্জ করা APK লেখা হচ্ছে</string>
+    <string name="patcher_split_step_finalizing">মার্জ করা APK ফাইনাল করা হচ্ছে</string>
     <string name="patcher_conflict_title">প্যাকেজ দ্বন্দ্ব</string>
     <string name="patcher_conflict_subtitle">আপনাকে বিদ্যমান সংস্করণটি আনইনস্টল করতে হবে</string>
     <string name="patcher_conflict_hint">প্যাচ করা অ্যাপটি ইনস্টল করা সংস্করণের চেয়ে আলাদা সার্টিফিকেট ব্যবহার করে। আনইনস্টল করলে অ্যাপের সমস্ত ডেটা মুছে যাবে।</string>
@@ -661,6 +665,14 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_manager_settings_description">আপনার Morphe সেটিংসের ব্যাকআপ এবং পুনরুদ্ধার করে।</string>
     <string name="settings_system_import_manager_settings_fail">Morphe সেটিংস আমদানি করতে ব্যর্থ হয়েছে: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe সেটিংস আমদানি করা হয়েছে</string>
+    <string name="settings_system_import_manager_settings_mode_title">মর্ফে সেটিংস আমদানি</string>
+    <string name="settings_system_import_manager_settings_mode_description">আমদানি করা সেটিংস এবং উৎসগুলি কীভাবে প্রয়োগ করা উচিত তা নির্বাচন করুন</string>
+    <string name="settings_system_import_selections_mode_title">প্যাচ নির্বাচন আমদানি করুন</string>
+    <string name="settings_system_import_selections_mode_description">আমদানি করা নির্বাচন এবং প্যাচ অপশনগুলো কীভাবে প্রয়োগ করা হবে তা নির্বাচন করুন</string>
+    <string name="import_mode_replace_title">বিদ্যমান প্রতিস্থাপন করুন</string>
+    <string name="import_mode_replace_description">ব্যাকআপের সাথে হুবহু মিলবে। ব্যাকআপ থেকে অনুপস্থিত আইটেমগুলি সরানো হবে</string>
+    <string name="import_mode_merge_title">বিদ্যমানের সাথে মার্জ করুন</string>
+    <string name="import_mode_merge_description">ব্যাকআপ থেকে অনুপস্থিত আইটেমগুলি যোগ করুন। বিদ্যমান আইটেমগুলি অপরিবর্তিত থাকবে</string>
     <string name="settings_system_export_manager_settings_fail">Morphe সেটিংস রপ্তানি করতে ব্যর্থ হয়েছে: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe সেটিংস রপ্তানি করা হয়েছে</string>
     <string name="settings_system_debug">ডিবাগ</string>
@@ -780,6 +792,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="reorder_done">নতুন ক্রমটি সেভ করা হয়েছে</string>
     <string name="reset_order">পূর্বের ক্রমে ফিরে যান</string>
     <string name="reset_order_done">পূর্বের ক্রমে ফিরে যাওয়া হয়েছে</string>
+    <string name="accessibility_move_up">উপরে সরান</string>
+    <string name="accessibility_move_down">নিচে সরান</string>
+    <string name="accessibility_app_moved_announcement">%1$s %3$d-এর মধ্যে %2$d অবস্থানে স্থানান্তরিত হয়েছে</string>
     <string name="rename">রেনেম করুন</string>
     <string name="import_">আমদানি করুন</string>
     <string name="export">এক্সপোর্ট করুন</string>
@@ -826,6 +841,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="changelog_description">এই আপডেটে সর্বশেষ পরিবর্তনের জন্য চেক করুন</string>
     <string name="changelog_download_fail">চেঞ্জলগ ডাউনলোড করা যায়নি: %s</string>
     <string name="changelog_empty">কোনো চ্যাঞলগ উপলব্ধ নেই</string>
+    <string name="changelog_show_older">পুরোনো রিলিজগুলো দেখান</string>
+    <string name="changelog_older_empty">দেখানোর জন্য পুরোনো রিলিজ নেই</string>
     <string name="no_network_toast">ইন্টারনেট সংযোগ উপলব্ধ নয়</string>
     <string name="update_available">একটি আপডেট উপলব্ধ</string>
     <string name="ready_to_install_update">আপডেট ইনস্টল করার জন্য প্রস্তুত</string>

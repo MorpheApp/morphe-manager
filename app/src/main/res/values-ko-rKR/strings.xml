@@ -674,6 +674,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Morphe 설정을 백업하고 복원합니다</string>
     <string name="settings_system_import_manager_settings_fail">Morphe 설정을 가져올 수 없습니다: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe 설정을 가져왔습니다</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe 설정 가져오기</string>
+    <string name="settings_system_import_manager_settings_mode_description">가져온 설정 및 소스가 적용되는 방식을 선택하세요</string>
+    <string name="settings_system_import_selections_mode_title">패치 선택 목록 가져오기</string>
+    <string name="settings_system_import_selections_mode_description">가져온 선택 항목 및 패치 옵션을 적용하는 방법을 선택하세요</string>
+    <string name="import_mode_replace_title">기존 항목 바꾸기</string>
+    <string name="import_mode_replace_description">백업과 정확히 일치합니다. 백업에 없는 항목은 제거됩니다</string>
+    <string name="import_mode_merge_title">기존 항목과 병합</string>
+    <string name="import_mode_merge_description">백업에서 누락된 항목을 추가합니다. 기존 항목은 변경되지 않습니다</string>
     <string name="settings_system_export_manager_settings_fail">Morphe 설정을 내보낼 수 없습니다: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe 설정을 내보냈습니다</string>
     <string name="settings_system_debug">디버그</string>
@@ -793,6 +801,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">순서를 저장하였습니다</string>
     <string name="reset_order">순서 초기화</string>
     <string name="reset_order_done">순서를 초기화하였습니다</string>
+    <string name="accessibility_move_up">위로 이동</string>
+    <string name="accessibility_move_down">아래로 이동</string>
+    <string name="accessibility_app_moved_announcement">\'%1$s\'가 %3$d 개 중 %2$d 번째 위치로 이동하였습니다</string>
     <string name="rename">이름 변경</string>
     <string name="import_">가져오기</string>
     <string name="export">내보내기</string>
@@ -839,7 +850,7 @@ morphe_header_custom_dark.png
     <string name="changelog_description">이 업데이트의 최신 변경 사항을 확인해 보세요</string>
     <string name="changelog_download_fail">변경 사항을 다운로드할 수 없습니다: %s</string>
     <string name="changelog_empty">변경 사항이 없습니다</string>
-    <string name="changelog_show_older">이전 릴리스 표시</string>
+    <string name="changelog_show_older">이전 릴리스 보기</string>
     <string name="changelog_older_empty">표시할 이전 릴리스가 없습니다</string>
     <string name="no_network_toast">인터넷에 연결할 수 없습니다</string>
     <string name="update_available">업데이트 사용 가능</string>

@@ -792,6 +792,9 @@ Dimenzije slike moraju biti sljedeće:
     <string name="reorder_done">Redoslijed je spremljen</string>
     <string name="reset_order">Poništite redoslijed</string>
     <string name="reset_order_done">Redoslijed poništen</string>
+    <string name="accessibility_move_up">Pomakni gore</string>
+    <string name="accessibility_move_down">Pomakni dolje</string>
+    <string name="accessibility_app_moved_announcement">%1$s premješten na poziciju %2$d od %3$d</string>
     <string name="rename">Preimenuj</string>
     <string name="import_">Uvezi</string>
     <string name="export">Izvezi</string>

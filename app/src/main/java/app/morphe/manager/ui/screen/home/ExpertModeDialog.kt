@@ -1980,16 +1980,16 @@ fun ExpandableSurface(
     Surface(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
-            .clickable { expanded = !expanded },
+            .clip(RoundedCornerShape(12.dp)),
         shape = RoundedCornerShape(12.dp),
         color = headerTint.copy(alpha = 0.05f)
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            // Header
+            // Click target only on the header so expanded content stays independently focusable for screen readers
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .clickable { expanded = !expanded }
                     .padding(12.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically

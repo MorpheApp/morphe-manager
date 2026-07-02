@@ -316,6 +316,10 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="patcher_failed_subtitle">Verifică detaliile erorii de mai jos</string>
     <string name="patcher_failed_dialog_title">Aplicarea patch-ului a eșuat</string>
     <string name="patcher_unknown_error">A apărut o eroare necunoscută</string>
+    <string name="patcher_split_step_extracting">Extragerea fișierelor APK divizate</string>
+    <string name="patcher_split_step_merging">Îmbinarea %s</string>
+    <string name="patcher_split_step_writing">Scrierea fișierului APK îmbinat</string>
+    <string name="patcher_split_step_finalizing">Finalizarea fișierului APK îmbinat</string>
     <string name="patcher_conflict_title">Conflict de pachet</string>
     <string name="patcher_conflict_subtitle">Trebuie să dezinstalați versiunea existentă</string>
     <string name="patcher_conflict_hint">Aplicația modificată utilizează un certificat diferit față de versiunea instalată. Dezinstalarea va șterge toate datele aplicației.</string>
@@ -669,6 +673,14 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_import_manager_settings_description">Realizează copii de rezervă și restaurează setările Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Eșec la importarea setărilor Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Setările Morphe au fost importate</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importă setări Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Alegeți modul în care setările și sursele importate trebuie aplicate</string>
+    <string name="settings_system_import_selections_mode_title">Importă selecții de patch-uri</string>
+    <string name="settings_system_import_selections_mode_description">Alegeți modul în care selecțiile și opțiunile de corecție importate ar trebui aplicate</string>
+    <string name="import_mode_replace_title">Înlocuire existente</string>
+    <string name="import_mode_replace_description">Corespondența exactă cu copia de rezervă. Elementele lipsă din copia de rezervă vor fi eliminate</string>
+    <string name="import_mode_merge_title">Combinare cu cele existente</string>
+    <string name="import_mode_merge_description">Adăugare elemente lipsă din copia de rezervă. Elementele existente rămân neschimbate</string>
     <string name="settings_system_export_manager_settings_fail">A eșuat exportarea setărilor Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Setările Morphe au fost exportate</string>
     <string name="settings_system_debug">Depanare</string>
@@ -788,6 +800,9 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="reorder_done">Ordine salvată</string>
     <string name="reset_order">Resetează ordinea</string>
     <string name="reset_order_done">Comanda resetată</string>
+    <string name="accessibility_move_up">Mută în sus</string>
+    <string name="accessibility_move_down">Mută în jos</string>
+    <string name="accessibility_app_moved_announcement">%1$s a fost mutat în poziția %2$d din %3$d</string>
     <string name="rename">Redenumește</string>
     <string name="import_">Importă</string>
     <string name="export">Exportă</string>
@@ -834,6 +849,8 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="changelog_description">Explorează ultimele schimbări din această actualizare</string>
     <string name="changelog_download_fail">Nu s-a putut descărca jurnalul de modificări: %s</string>
     <string name="changelog_empty">Nu există jurnale disponibile</string>
+    <string name="changelog_show_older">Afișează versiunile mai vechi</string>
+    <string name="changelog_older_empty">Nu există versiuni mai vechi de afișat</string>
     <string name="no_network_toast">Nu există conexiune la internet</string>
     <string name="update_available">Este disponibilă o actualizare</string>
     <string name="ready_to_install_update">Actualizare pregătită pentru instalare</string>

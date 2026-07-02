@@ -673,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Δημιουργεί αντίγραφα ασφαλείας και επαναφέρει τις ρυθμίσεις του Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Αποτυχία εισαγωγής των ρυθμίσεων του Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Επιτυχής εισαγωγή ρυθμίσεων του Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_title">Εισαγωγή ρυθμίσεων του Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Επιλέξτε πώς θα εφαρμοστούν οι εισαγόμενες ρυθμίσεις και οι πηγές</string>
+    <string name="settings_system_import_selections_mode_title">Εισαγωγή επιλεγμένων τροποποιήσεων</string>
+    <string name="settings_system_import_selections_mode_description">Επιλέξτε τον τρόπο με τον οποίο θα εφαρμοστούν οι εισαγόμενες επιλογές και οι επιλογές επιδιόρθωσης</string>
+    <string name="import_mode_replace_title">Αντικατάσταση υπάρχοντος</string>
+    <string name="import_mode_replace_description">Ακριβής αντιστοίχιση με το αντίγραφο ασφαλείας. Τα στοιχεία που λείπουν από το αντίγραφο ασφαλείας θα διαγραφούν</string>
+    <string name="import_mode_merge_title">Συγχώνευση με υπάρχοντα</string>
+    <string name="import_mode_merge_description">Προσθήκη στοιχείων που λείπουν από το αντίγραφο ασφαλείας. Τα υπάρχοντα στοιχεία θα παραμείνουν χωρίς αλλαγές</string>
     <string name="settings_system_export_manager_settings_fail">Αποτυχία εξαγωγής των ρυθμίσεων του Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Επιτυχής εξαγωγή ρυθμίσεων του Morphe</string>
     <string name="settings_system_debug">Εντοπισμός σφαλμάτων</string>
@@ -792,6 +800,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">Η σειρά αποθηκεύτηκε</string>
     <string name="reset_order">Επαναφορά σειράς</string>
     <string name="reset_order_done">Επαναφορά παραγγελίας</string>
+    <string name="accessibility_move_up">Μετακίνηση προς τα πάνω</string>
+    <string name="accessibility_move_down">Μετακίνηση προς τα κάτω</string>
+    <string name="accessibility_app_moved_announcement">Το %1$s μετακινήθηκε στη θέση %2$d από %3$d</string>
     <string name="rename">Μετονομασία</string>
     <string name="import_">Εισαγωγή</string>
     <string name="export">Εξαγωγή</string>
@@ -838,6 +849,8 @@ morphe_header_custom_dark.png
     <string name="changelog_description">Έλεγξε τις τελευταίες αλλαγές σε αυτή την ενημέρωση</string>
     <string name="changelog_download_fail">Αποτυχία λήψης αρχείου καταγραφής αλλαγών: %s</string>
     <string name="changelog_empty">Δεν υπάρχει διαθέσιμο αρχείο καταγραφών αλλαγών </string>
+    <string name="changelog_show_older">Εμφάνιση παλαιότερων εκδόσεων</string>
+    <string name="changelog_older_empty">Δεν υπάρχουν παλαιότερες εκδόσεις για εμφάνιση</string>
     <string name="no_network_toast">Δεν υπάρχει διαθέσιμη σύνδεση στο διαδίκτυο</string>
     <string name="update_available">Μία ενημέρωση είναι διαθέσιμη</string>
     <string name="ready_to_install_update">Έτοιμο για εγκατάσταση ενημέρωσης</string>

@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
+import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
@@ -53,6 +54,7 @@ fun PatchSelectionManagementDialog(
     val showResetAllConfirmation = remember { mutableStateOf(false) }
     val resetTarget = remember { mutableStateOf<ResetTarget?>(null) }
     val showPatchDetailsTarget = remember { mutableStateOf<PatchDetailsTarget?>(null) }
+    var pendingImportUri by remember { mutableStateOf<Uri?>(null) }
 
     val selections by settingsViewModel.selectionsSummary.collectAsStateWithLifecycle()
     val bundleNames by settingsViewModel.bundleNames.collectAsStateWithLifecycle()
@@ -70,8 +72,22 @@ fun PatchSelectionManagementDialog(
         onDismiss = onDismiss,
         onShowResetAllConfirmation = { showResetAllConfirmation.value = true },
         onSetResetTarget = { resetTarget.value = it },
-        onShowPatchDetails = { showPatchDetailsTarget.value = it }
+        onShowPatchDetails = { showPatchDetailsTarget.value = it },
+        onImportUriPicked = { pendingImportUri = it }
     )
+
+    // Import-mode dialog: user picks Replace or Merge before selections are applied
+    pendingImportUri?.let { uri ->
+        ImportModeDialog(
+            titleRes = R.string.settings_system_import_selections_mode_title,
+            descriptionRes = R.string.settings_system_import_selections_mode_description,
+            onDismiss = { pendingImportUri = null },
+            onSelect = { mode ->
+                importExportViewModel.importAllSelections(uri, mode)
+                pendingImportUri = null
+            }
+        )
+    }
 
     // Reset all confirmation dialog
     if (showResetAllConfirmation.value) {
@@ -159,14 +175,13 @@ private fun PatchSelectionManagementDialogContent(
     onDismiss: () -> Unit,
     onShowResetAllConfirmation: () -> Unit,
     onSetResetTarget: (ResetTarget) -> Unit,
-    onShowPatchDetails: (PatchDetailsTarget) -> Unit
+    onShowPatchDetails: (PatchDetailsTarget) -> Unit,
+    onImportUriPicked: (Uri) -> Unit
 ) {
     val openImportAllSelectionsPicker = rememberAdaptiveFilePicker(
         mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE),
         customPickerMimeTypes = arrayOf(JSON_MIMETYPE),
-        onResult = { uri ->
-            uri?.let { importExportViewModel.importAllSelections(it) }
-        }
+        onResult = { uri -> uri?.let(onImportUriPicked) }
     )
 
     val exportAllSelectionsLauncher = rememberLauncherForActivityResult(

@@ -13,9 +13,13 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -46,6 +50,7 @@ import app.morphe.manager.ui.screen.shared.LocalDialogSecondaryTextColor
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.screen.shared.MorpheDialog
 import app.morphe.manager.ui.screen.shared.MorpheDialogButtonRow
+import app.morphe.manager.ui.screen.shared.rememberAccessibilityEnabled
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.util.APK_MIMETYPE
@@ -107,9 +112,12 @@ fun PatcherScreen(
         if (showSuccessScreen) miniGameState.pauseActiveGame()
     }
 
+    // Skip the 1.5s tween on every progress tick when TalkBack is active so the main thread
+    // isn't constantly busy interpolating and can serve accessibility events instead
+    val reduceMotion = rememberAccessibilityEnabled()
     val displayProgressAnimate by animateFloatAsState(
         targetValue = displayProgress,
-        animationSpec = tween(durationMillis = 1500, easing = FastOutSlowInEasing),
+        animationSpec = if (reduceMotion) snap() else tween(durationMillis = 1500, easing = FastOutSlowInEasing),
         label = "progress_animation"
     )
 
@@ -499,7 +507,11 @@ fun PatcherScreen(
 
         AnimatedContent(
             targetState = if (showSuccessScreen) state.currentPatcherState else PatcherState.IN_PROGRESS,
-            transitionSpec = MorpheAnimations.fadeCrossfade(800),
+            transitionSpec = if (reduceMotion) {
+                { EnterTransition.None togetherWith ExitTransition.None }
+            } else {
+                MorpheAnimations.fadeCrossfade(800)
+            },
             label = "patcher_state_animation"
         ) { patcherState ->
             when (patcherState) {

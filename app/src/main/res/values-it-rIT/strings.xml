@@ -316,6 +316,7 @@ Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio:
     <string name="patcher_failed_subtitle">Controlla i dettagli dell\'errore qui sotto</string>
     <string name="patcher_failed_dialog_title">Patching fallito</string>
     <string name="patcher_unknown_error">Si è verificato un errore sconosciuto</string>
+    <string name="patcher_split_step_extracting">Estrazione degli APK divisi</string>
     <string name="patcher_split_step_merging">Unione %s</string>
     <string name="patcher_split_step_writing">Scrittura APK unito</string>
     <string name="patcher_split_step_finalizing">Finalizzazione APK unito</string>
@@ -672,6 +673,14 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_import_manager_settings_description">Salva i logs del sistema per la risoluzione dei problemi</string>
     <string name="settings_system_import_manager_settings_fail">Impossibile importare le impostazioni di Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Impostazioni di Morphe importate</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importa impostazioni di Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Scegli come applicare le impostazioni e le risorse importate</string>
+    <string name="settings_system_import_selections_mode_title">Importa selezioni patch</string>
+    <string name="settings_system_import_selections_mode_description">Scegli come applicare le selezioni importate e le opzioni di patch</string>
+    <string name="import_mode_replace_title">Sostituisci gli elementi esistenti</string>
+    <string name="import_mode_replace_description">Corrispondi esattamente al backup. Gli elementi mancanti nel backup verranno rimossi</string>
+    <string name="import_mode_merge_title">Unisci con gli elementi esistenti</string>
+    <string name="import_mode_merge_description">Aggiungi gli elementi mancanti dal backup. Gli elementi esistenti rimangono invariati</string>
     <string name="settings_system_export_manager_settings_fail">Impossibile esportare le impostazioni di Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Impostazioni di Morphe esportate</string>
     <string name="settings_system_debug">Debug</string>
@@ -791,6 +800,9 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="reorder_done">Ordine salvato</string>
     <string name="reset_order">Ripristina ordine</string>
     <string name="reset_order_done">Ordine resettato</string>
+    <string name="accessibility_move_up">Sposta in alto</string>
+    <string name="accessibility_move_down">Sposta in basso</string>
+    <string name="accessibility_app_moved_announcement">%1$s spostato nella posizione %2$d di %3$d</string>
     <string name="rename">Rinomina</string>
     <string name="import_">Importa</string>
     <string name="export">Esporta</string>

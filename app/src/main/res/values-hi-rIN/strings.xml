@@ -316,6 +316,10 @@
     <string name="patcher_failed_subtitle">Check the error details below</string>
     <string name="patcher_failed_dialog_title">पैचिंग विफल रही</string>
     <string name="patcher_unknown_error">Unknown error occurred</string>
+    <string name="patcher_split_step_extracting">स्प्लिट APK निकाल रहे हैं</string>
+    <string name="patcher_split_step_merging">%s मिला रहे हैं</string>
+    <string name="patcher_split_step_writing">मर्ज किया गया APK लिख रहे हैं</string>
+    <string name="patcher_split_step_finalizing">मर्ज किए गए APK को अंतिम रूप दे रहे हैं</string>
     <string name="patcher_conflict_title">Package conflict</string>
     <string name="patcher_conflict_subtitle">You need to uninstall the existing version</string>
     <string name="patcher_conflict_hint">पैच किया गया ऐप इंस्टॉल किए गए संस्करण से अलग प्रमाणपत्र का उपयोग करता है। अनइंस्टॉल करने से सभी ऐप डेटा मिट जाएगा।</string>
@@ -669,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">आपकी Morphe सेटिंग्स का बैकअप और पुनर्स्थापित करता है।</string>
     <string name="settings_system_import_manager_settings_fail">मोर्फ़ सेटिंग्स आयात करने में विफल: %s</string>
     <string name="settings_system_import_manager_settings_success">मोर्फ़ सेटिंग्स आयात की गईं</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe सेटिंग्स आयात करें</string>
+    <string name="settings_system_import_manager_settings_mode_description">चुनें कि आयात की गई सेटिंग्स और स्रोतों को कैसे लागू किया जाना चाहिए</string>
+    <string name="settings_system_import_selections_mode_title">आयात पैच चयन</string>
+    <string name="settings_system_import_selections_mode_description">आयातित चयन और पैच विकल्पों को कैसे लागू किया जाना चाहिए, चुनें</string>
+    <string name="import_mode_replace_title">मौजूदा को बदलें</string>
+    <string name="import_mode_replace_description">बैकअप से बिल्कुल मेल खाएं। बैकअप से गायब आइटम हटा दिए जाएंगे</string>
+    <string name="import_mode_merge_title">मौजूदा के साथ मिलाएं</string>
+    <string name="import_mode_merge_description">बैकअप से गायब आइटम जोड़ें। मौजूदा आइटम अपरिवर्तित रहेंगे</string>
     <string name="settings_system_export_manager_settings_fail">मोर्फ़ सेटिंग्स निर्यात करने में विफल: %s</string>
     <string name="settings_system_export_manager_settings_success">मोर्फ़ सेटिंग्स निर्यात की गईं</string>
     <string name="settings_system_debug">डिबग</string>
@@ -788,6 +800,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">क्रम सहेजा गया</string>
     <string name="reset_order">क्रम रीसेट करें</string>
     <string name="reset_order_done">ऑर्डर रीसेट हो गया</string>
+    <string name="accessibility_move_up">ऊपर ले जाएं</string>
+    <string name="accessibility_move_down">नीचे ले जाएं</string>
+    <string name="accessibility_app_moved_announcement">%1$s को %3$d में से %2$d स्थान पर ले जाया गया</string>
     <string name="rename">रename</string>
     <string name="import_">आयात करें</string>
     <string name="export">निर्यात करें</string>
@@ -834,6 +849,8 @@ morphe_header_custom_dark.png
     <string name="changelog_description">इस अपडेट में नवीनतम बदलाव देखें</string>
     <string name="changelog_download_fail">परिवर्तन लॉग डाउनलोड करने में विफल: %s</string>
     <string name="changelog_empty">कोई चेंजलॉग उपलब्ध नहीं है</string>
+    <string name="changelog_show_older">पुराने रिलीज़ दिखाएं</string>
+    <string name="changelog_older_empty">दिखाने के लिए कोई पुराना रिलीज़ नहीं है</string>
     <string name="no_network_toast">इंटरनेट कनेक्शन उपलब्ध नहीं है</string>
     <string name="update_available">An update is available</string>
     <string name="ready_to_install_update">Ready to install update</string>

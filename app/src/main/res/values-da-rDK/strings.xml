@@ -317,6 +317,9 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_failed_dialog_title">Patch mislykkedes</string>
     <string name="patcher_unknown_error">Ukendt fejl opstod</string>
     <string name="patcher_split_step_extracting">Udpakker split-APK\'er</string>
+    <string name="patcher_split_step_merging">Sammenlægning af %s</string>
+    <string name="patcher_split_step_writing">Skrivning af samlet APK</string>
+    <string name="patcher_split_step_finalizing">Finalisering af samlet APK</string>
     <string name="patcher_conflict_title">Pakkekonflikt</string>
     <string name="patcher_conflict_subtitle">Du skal afinstallere den eksisterende version</string>
     <string name="patcher_conflict_hint">Den patched app bruger et andet certifikat end den installerede version. Afinstallation vil slette alle app-data</string>
@@ -670,6 +673,14 @@ Størrelsesformatet skal være som følger:
     <string name="settings_system_import_manager_settings_description">Sikkerhedskopierer og gendanner dine Morphe-indstillinger</string>
     <string name="settings_system_import_manager_settings_fail">Fejl ved import af Morphe-indstillinger: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-indstillinger importeret</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importér Morphe-indstillinger</string>
+    <string name="settings_system_import_manager_settings_mode_description">Vælg, hvordan de importerede indstillinger og kilder skal anvendes</string>
+    <string name="settings_system_import_selections_mode_title">Importér patch-valg</string>
+    <string name="settings_system_import_selections_mode_description">Vælg hvordan de importerede valg og patch-optioner skal anvendes</string>
+    <string name="import_mode_replace_title">Erstat eksisterende</string>
+    <string name="import_mode_replace_description">Match sikkerhedskopien præcist. Elementer, der mangler fra sikkerhedskopien, vil blive fjernet</string>
+    <string name="import_mode_merge_title">Flet med eksisterende</string>
+    <string name="import_mode_merge_description">Tilføj manglende elementer fra sikkerhedskopien. Eksisterende elementer bevares uændret</string>
     <string name="settings_system_export_manager_settings_fail">Fejl ved eksport af Morphe-indstillinger: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe-indstillinger eksporteret</string>
     <string name="settings_system_debug">Fejlfinding</string>
@@ -789,6 +800,9 @@ Størrelsesformatet skal være som følger:
     <string name="reorder_done">Rækkefølge gemt</string>
     <string name="reset_order">Nulstil rækkefølge</string>
     <string name="reset_order_done">Ordre nulstillet</string>
+    <string name="accessibility_move_up">Flyt op</string>
+    <string name="accessibility_move_down">Flyt ned</string>
+    <string name="accessibility_app_moved_announcement">%1$s er blevet flyttet til position %2$d ud af %3$d</string>
     <string name="rename">Omdøb</string>
     <string name="import_">Importer</string>
     <string name="export">Eksportér</string>

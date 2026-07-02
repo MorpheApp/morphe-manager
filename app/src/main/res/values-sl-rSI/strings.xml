@@ -316,6 +316,10 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <string name="patcher_failed_subtitle">Preverite podrobnosti napake spodaj</string>
     <string name="patcher_failed_dialog_title">Popravljanje je spodletelo</string>
     <string name="patcher_unknown_error">Prišlo je do neznane napake</string>
+    <string name="patcher_split_step_extracting">Izvlečenje razdeljenih datotek APK</string>
+    <string name="patcher_split_step_merging">Združevanje %s</string>
+    <string name="patcher_split_step_writing">Zapisovanje združene datoteke APK</string>
+    <string name="patcher_split_step_finalizing">Zaključevanje združene datoteke APK</string>
     <string name="patcher_conflict_title">Konflikt paketov</string>
     <string name="patcher_conflict_subtitle">Obstoječo različico morate odstraniti</string>
     <string name="patcher_conflict_hint">Popravljena aplikacija uporablja drug certifikat kot nameščena različica. Odstranitev bo izbrisala vse podatke aplikacije.</string>
@@ -669,6 +673,14 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_system_import_manager_settings_description">Varnostno kopira in obnovi nastavitve Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Ni bilo mogoče uvoziti nastavitev Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Nastavitve Morphe so bile uvožene</string>
+    <string name="settings_system_import_manager_settings_mode_title">Uvoz nastavitev Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Izberite, kako naj se uporabijo uvožene nastavitve in viri.</string>
+    <string name="settings_system_import_selections_mode_title">Uvoz izbire popravkov</string>
+    <string name="settings_system_import_selections_mode_description">Izberite, kako naj bodo uporabljene uvožene izbire in možnosti popravka.</string>
+    <string name="import_mode_replace_title">Zamenjaj obstoječe</string>
+    <string name="import_mode_replace_description">Natančno ujemaj z varnostno kopijo. Postavke, ki manjkajo v varnostni kopiji, bodo odstranjene.</string>
+    <string name="import_mode_merge_title">Združi z obstoječim</string>
+    <string name="import_mode_merge_description">Dodaj manjkajoče postavke iz varnostne kopije. Obstoječe postavke ostanejo nespremenjene.</string>
     <string name="settings_system_export_manager_settings_fail">Ni bilo mogoče izvoziti nastavitev Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Izvožene so bile nastavitve Morphe</string>
     <string name="settings_system_debug">Razhroščevanje</string>
@@ -788,6 +800,9 @@ Dimenzije slike morajo biti naslednje:
     <string name="reorder_done">Vrstni red shranjen</string>
     <string name="reset_order">Ponastavi vrstni red</string>
     <string name="reset_order_done">Ponastavitev naročila</string>
+    <string name="accessibility_move_up">Pomakni se gor</string>
+    <string name="accessibility_move_down">Pomakni se dol</string>
+    <string name="accessibility_app_moved_announcement">%1$s je premaknjeno na položaj %2$d od %3$d</string>
     <string name="rename">Preimenuj</string>
     <string name="import_">Uvozi</string>
     <string name="export">Izvozi</string>
@@ -834,6 +849,8 @@ Dimenzije slike morajo biti naslednje:
     <string name="changelog_description">Oglejte si najnovejše spremembe v tej posodobitvi</string>
     <string name="changelog_download_fail">Ni mogoče prenesti dnevnika sprememb: %s</string>
     <string name="changelog_empty">Ni na voljo dnevnika sprememb</string>
+    <string name="changelog_show_older">Prikaži starejše različice</string>
+    <string name="changelog_older_empty">Ni starejših različic za prikaz</string>
     <string name="no_network_toast">Internetna povezava ni na voljo</string>
     <string name="update_available">Na voljo je posodobitev</string>
     <string name="ready_to_install_update">Pripravljen na namestitev posodobitve</string>

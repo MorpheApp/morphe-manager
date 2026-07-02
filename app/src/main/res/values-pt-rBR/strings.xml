@@ -2,7 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Outros apps</string>
-    <string name="home_not_patched_yet">Não patcheado ainda</string>
+    <string name="home_not_patched_yet">Ainda não corrigido</string>
     <string name="home_no_patches_available">Não há patches disponíveis</string>
     <string name="home_app_hide_title">Ocultar esse app?</string>
     <string name="home_app_hide_message">Este app será oculto da tela inicial. Você pode restaurá-lo mais tarde usando o botão na parte inferior da lista</string>
@@ -673,6 +673,14 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_import_manager_settings_description">Faz backup e restaura suas configurações do Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Falha ao importar as configurações do Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Configurações do Morphe importadas</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importar configurações do Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Escolha como as configurações e fontes importadas devem ser aplicadas</string>
+    <string name="settings_system_import_selections_mode_title">Importar seleções de patch</string>
+    <string name="settings_system_import_selections_mode_description">Escolha como as seleções importadas e as opções de correção devem ser aplicadas</string>
+    <string name="import_mode_replace_title">Substituir existentes</string>
+    <string name="import_mode_replace_description">Corresponder exatamente ao backup. Itens ausentes no backup serão removidos</string>
+    <string name="import_mode_merge_title">Mesclar com os existentes</string>
+    <string name="import_mode_merge_description">Adicionar itens ausentes do backup. Itens existentes permanecerão inalterados</string>
     <string name="settings_system_export_manager_settings_fail">Falha ao exportar as configurações do Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Configurações do Morphe exportadas</string>
     <string name="settings_system_debug">Depuração</string>
@@ -792,6 +800,9 @@ As dimensões das imagens devem ser as seguintes:
     <string name="reorder_done">Ordem salva</string>
     <string name="reset_order">Restaurar ordem</string>
     <string name="reset_order_done">Pedido redefinido</string>
+    <string name="accessibility_move_up">Mover para cima</string>
+    <string name="accessibility_move_down">Mover para baixo</string>
+    <string name="accessibility_app_moved_announcement">%1$s movido para a posição %2$d de %3$d</string>
     <string name="rename">Renomear</string>
     <string name="import_">Importar</string>
     <string name="export">Exportar</string>
@@ -838,6 +849,8 @@ As dimensões das imagens devem ser as seguintes:
     <string name="changelog_description">Veja as últimas alterações nesta atualização</string>
     <string name="changelog_download_fail">Falha ao baixar changelog: %s</string>
     <string name="changelog_empty">Não há registro de alterações disponíveis</string>
+    <string name="changelog_show_older">Exibir versões anteriores</string>
+    <string name="changelog_older_empty">Sem versões anteriores para exibir</string>
     <string name="no_network_toast">Não há conexão com a internet disponível</string>
     <string name="update_available">Uma atualização está disponível</string>
     <string name="ready_to_install_update">Pronto para instalar a atualização</string>

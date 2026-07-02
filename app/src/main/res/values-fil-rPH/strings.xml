@@ -669,6 +669,14 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_import_manager_settings_description">Ibinabalik at ibinubuhay ang iyong mga setting ng Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Nabigong ma-import ang mga setting ng Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Na-import ang mga setting ng Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_title">I-import ang mga setting ng Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Piliin kung paano iaaplay ang mga in-import na setting at source</string>
+    <string name="settings_system_import_selections_mode_title">I-import ang mga pagpipilian ng patch</string>
+    <string name="settings_system_import_selections_mode_description">Pumili ng kung paano ilalapat ang mga napiling import at opsyon sa patch.</string>
+    <string name="import_mode_replace_title">Palitan ang mga kasalukuyan</string>
+    <string name="import_mode_replace_description">Tumpak na itugma ang backup. Ang mga item na wala sa backup ay tatanggalin.</string>
+    <string name="import_mode_merge_title">Pagsamahin sa mga kasalukuyan</string>
+    <string name="import_mode_merge_description">Idagdag ang mga nawawalang item mula sa backup. Ang mga kasalukuyang item ay mananatiling hindi nababago.</string>
     <string name="settings_system_export_manager_settings_fail">Nabigong ma-export ang mga setting ng Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Na-export ang mga setting ng Morphe</string>
     <string name="settings_system_debug">Debug</string>
@@ -788,6 +796,9 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="reorder_done">Nai-save ang pagkakasunud-sunod</string>
     <string name="reset_order">Ibalik sa orihinal na pagkakasunud-sunod</string>
     <string name="reset_order_done">Naibalik ang order</string>
+    <string name="accessibility_move_up">Ilipat paitaas</string>
+    <string name="accessibility_move_down">Ilipat pababa</string>
+    <string name="accessibility_app_moved_announcement">Inilipat ang %1$s sa posisyon %2$d ng %3$d</string>
     <string name="rename">Palitan</string>
     <string name="import_">I-import</string>
     <string name="export">I-export</string>

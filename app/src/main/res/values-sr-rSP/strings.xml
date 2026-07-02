@@ -316,6 +316,10 @@
     <string name="patcher_failed_subtitle">Проверите детаље грешке испод</string>
     <string name="patcher_failed_dialog_title">Закрапа није успела</string>
     <string name="patcher_unknown_error">Дошло је до непознате грешке</string>
+    <string name="patcher_split_step_extracting">Екстракција подељених APK-ова</string>
+    <string name="patcher_split_step_merging">Спајање %s</string>
+    <string name="patcher_split_step_writing">Уписивање спајеног APK-а</string>
+    <string name="patcher_split_step_finalizing">Завршавање спајања APK-а</string>
     <string name="patcher_conflict_title">Конфликт пакета</string>
     <string name="patcher_conflict_subtitle">Морате деинсталирати постојећу верзију</string>
     <string name="patcher_conflict_hint">Modifikovana aplikacija koristi drugačiji sertifikat od instalirane verzije. Deinstalacija će obrisati sve podatke aplikacije.</string>
@@ -669,6 +673,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Прави резервне копије и враћа подешавања апликације Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Неуспело увожење подешавања Morphe-а: %s</string>
     <string name="settings_system_import_manager_settings_success">Подешавања Morphe-а су увезена</string>
+    <string name="settings_system_import_manager_settings_mode_title">Увоз подешавања Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Изаберите како да се примене увезена подешавања и извори</string>
+    <string name="settings_system_import_selections_mode_title">Увоз изабраних подешавања</string>
+    <string name="settings_system_import_selections_mode_description">Изаберите како ће увезене селекције и опције за подешавање да буду примењене</string>
+    <string name="import_mode_replace_title">Замени постојеће</string>
+    <string name="import_mode_replace_description">Тачно поклапање са резервном копијом. Ставке које нису у резервној копији ће бити уклоњене</string>
+    <string name="import_mode_merge_title">Спајање са постојећим</string>
+    <string name="import_mode_merge_description">Додајте ставке које недостају из резервне копије. Постојеће ставке остају непромењене</string>
     <string name="settings_system_export_manager_settings_fail">Неуспео извоз подешавања Morphe-а: %s</string>
     <string name="settings_system_export_manager_settings_success">Подешавања Morphe-а су извезена</string>
     <string name="settings_system_debug">Дебаг</string>
@@ -788,6 +800,9 @@ morphe_header_custom_dark.png
     <string name="reorder_done">Ред је сачуван</string>
     <string name="reset_order">Ресетуј ред</string>
     <string name="reset_order_done">Ресет поруџбине</string>
+    <string name="accessibility_move_up">Помери нагоре</string>
+    <string name="accessibility_move_down">Помери надоле</string>
+    <string name="accessibility_app_moved_announcement">%1$s померен на позицију %2$d од %3$d</string>
     <string name="rename">Преименуј</string>
     <string name="import_">Увоз</string>
     <string name="export">Извези</string>
@@ -834,6 +849,8 @@ morphe_header_custom_dark.png
     <string name="changelog_description">Pogledajte najnovije promene u ovom ažuriranju</string>
     <string name="changelog_download_fail">Није успело преузимање дневника промена: %s</string>
     <string name="changelog_empty">Нема доступних промена</string>
+    <string name="changelog_show_older">Прикажи старије верзије</string>
+    <string name="changelog_older_empty">Нема старијих верзија за приказ</string>
     <string name="no_network_toast">Nema dostupne internet veze</string>
     <string name="update_available">Ажурирање је доступно</string>
     <string name="ready_to_install_update">Спреман за инсталирање ажурирања</string>

@@ -316,6 +316,10 @@
     <string name="patcher_failed_subtitle">בדוק את פרטי השגיאה למטה</string>
     <string name="patcher_failed_dialog_title">התיקון נכשל</string>
     <string name="patcher_unknown_error">אירעה שגיאה לא ידועה</string>
+    <string name="patcher_split_step_extracting">חילוץ קבצי APK מפוצלים</string>
+    <string name="patcher_split_step_merging">מיזוג %s</string>
+    <string name="patcher_split_step_writing">כתיבת קובץ APK מאוחד</string>
+    <string name="patcher_split_step_finalizing">סיום מיזוג קובץ APK</string>
     <string name="patcher_conflict_title">התנגשות חבילה</string>
     <string name="patcher_conflict_subtitle">עליך להסיר את ההתקנה של הגרסה הקיימת</string>
     <string name="patcher_conflict_hint">האפליקציה שעברה תיקון משתמשת בתעודה שונה מזו של הגרסה המותקנת. הסרת ההתקנה תמחק את כל נתוני האפליקציה.</string>
@@ -653,6 +657,14 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_manager_settings_description">גיבוי ושחזור של הגדרות Morphe שלך</string>
     <string name="settings_system_import_manager_settings_fail">נכשל ייבוא הגדרות Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">הגדרות Morphe יובאו</string>
+    <string name="settings_system_import_manager_settings_mode_title">ייבוא הגדרות Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">בחר כיצד יש ליישם את ההגדרות והמקורות המיובאים</string>
+    <string name="settings_system_import_selections_mode_title">ייבוא בחירות תיקונים</string>
+    <string name="settings_system_import_selections_mode_description">בחר כיצד יש ליישם את הפריטים המיובאים ואת אפשרויות התיקון</string>
+    <string name="import_mode_replace_title">החלף קיימים</string>
+    <string name="import_mode_replace_description">התאם במדויק את הגיבוי. פריטים חסרים מהגיבוי יוסרו</string>
+    <string name="import_mode_merge_title">מזג עם קיימים</string>
+    <string name="import_mode_merge_description">הוסף פריטים חסרים מהגיבוי. פריטים קיימים יישארו ללא שינוי</string>
     <string name="settings_system_export_manager_settings_fail">נכשל לייצא הגדרות Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">הגדרות Morphe ייצאו</string>
     <string name="settings_system_debug">debug</string>
@@ -772,6 +784,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="reorder_done">הסדר נשמר</string>
     <string name="reset_order">אפס סדר</string>
     <string name="reset_order_done">איפוס ההזמנה</string>
+    <string name="accessibility_move_up">עלה</string>
+    <string name="accessibility_move_down">רד</string>
+    <string name="accessibility_app_moved_announcement">%1$s עבר למיקום %2$d מתוך %3$d</string>
     <string name="rename">שנה שם</string>
     <string name="import_">ייבוא</string>
     <string name="export">יְצוּא</string>
@@ -818,6 +833,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="changelog_description">בדוק את השינויים האחרונים בסוג זה של עדכון</string>
     <string name="changelog_download_fail">שגיאה בהורדת היסטוריית שינויים: %s</string>
     <string name="changelog_empty">אין תיקון זמין זמין</string>
+    <string name="changelog_show_older">הצגת גרסאות ישנות יותר</string>
+    <string name="changelog_older_empty">אין גרסאות ישנות יותר להצגה</string>
     <string name="no_network_toast">אין חיבור אינטרנט זמין</string>
     <string name="update_available">עדכון זמין</string>
     <string name="ready_to_install_update">מוכן להתקנת עדכון</string>

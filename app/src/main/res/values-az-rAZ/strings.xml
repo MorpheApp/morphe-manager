@@ -791,6 +791,9 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="reorder_done">Düzülüş saxlanıldı</string>
     <string name="reset_order">Düzülüşü sıfırla</string>
     <string name="reset_order_done">Düzülüş sıfırlandı</string>
+    <string name="accessibility_move_up">Yuxarı köçür</string>
+    <string name="accessibility_move_down">Aşağı köçür</string>
+    <string name="accessibility_app_moved_announcement">%1$s %3$d-dən %2$d mövqeyinə köçürüldü</string>
     <string name="rename">Təkrar adlandır</string>
     <string name="import_">İdxal et</string>
     <string name="export">Köçür</string>
