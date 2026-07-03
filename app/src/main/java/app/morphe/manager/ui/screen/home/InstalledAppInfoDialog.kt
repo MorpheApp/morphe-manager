@@ -262,7 +262,9 @@ fun InstalledAppInfoDialog(
         show = showSignatureConflictDialog.value,
         onUninstall = {
             showSignatureConflictDialog.value = false
-            conflictPackageName.value?.let { installViewModel.requestUninstall(it) }
+            conflictPackageName.value?.let {
+                installViewModel.requestUninstall(it, installAfterUninstall = true)
+            }
         },
         onDismiss = {
             showSignatureConflictDialog.value = false
