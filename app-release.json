@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-07-01T15:04:21",
-  "description": "# [1.23.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0-dev.3...v1.23.0-dev.4) (2026-07-01)\n\n\n### Features\n\n* Add Replace/Merge choice dialog on settings and selections import ([#683](https://github.com/MorpheApp/morphe-manager/issues/683)) ([fc9c892](https://github.com/MorpheApp/morphe-manager/commit/fc9c892ddbc28c89136d09c1caabe4fdae50804b))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.23.0-dev.4/morphe-manager-1.23.0-dev.4.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.23.0-dev.4/morphe-manager-1.23.0-dev.4.apk.asc",
-  "version": "1.23.0-dev.4"
+  "created_at": "2026-07-03T05:39:23",
+  "description": "# [1.23.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0-dev.4...v1.23.0-dev.5) (2026-07-03)\n\n\n### Bug Fixes\n\n* Always show Reinstall when a saved patched APK exists ([d7cb9de](https://github.com/MorpheApp/morphe-manager/commit/d7cb9de6bc4048bed35962acd8b90f03d6f94fe5))\n\n\n### Features\n\n* Add home cards for universal-patched apps ([d6cd985](https://github.com/MorpheApp/morphe-manager/commit/d6cd985dd84ae581f67a776aeff57538b0348220))\n* add Play Store installer modes ([#681](https://github.com/MorpheApp/morphe-manager/issues/681)) ([7e24461](https://github.com/MorpheApp/morphe-manager/commit/7e24461c1454b712da4df21440db6f417c94ce58))\n* Add sort toggle for patch sources ([658ceee](https://github.com/MorpheApp/morphe-manager/commit/658ceeec49c956ccff7b2109d7970ab937fbc8ba))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.23.0-dev.5/morphe-manager-1.23.0-dev.5.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.23.0-dev.5/morphe-manager-1.23.0-dev.5.apk.asc",
+  "version": "1.23.0-dev.5"
 }

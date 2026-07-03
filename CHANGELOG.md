@@ -1,3 +1,17 @@
+# [1.23.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0-dev.4...v1.23.0-dev.5) (2026-07-03)
+
+
+### Bug Fixes
+
+* Always show Reinstall when a saved patched APK exists ([d7cb9de](https://github.com/MorpheApp/morphe-manager/commit/d7cb9de6bc4048bed35962acd8b90f03d6f94fe5))
+
+
+### Features
+
+* Add home cards for universal-patched apps ([d6cd985](https://github.com/MorpheApp/morphe-manager/commit/d6cd985dd84ae581f67a776aeff57538b0348220))
+* add Play Store installer modes ([#681](https://github.com/MorpheApp/morphe-manager/issues/681)) ([7e24461](https://github.com/MorpheApp/morphe-manager/commit/7e24461c1454b712da4df21440db6f417c94ce58))
+* Add sort toggle for patch sources ([658ceee](https://github.com/MorpheApp/morphe-manager/commit/658ceeec49c956ccff7b2109d7970ab937fbc8ba))
+
 # [1.23.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0-dev.3...v1.23.0-dev.4) (2026-07-01)
 
 
