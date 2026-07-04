@@ -763,6 +763,8 @@ The image dimensions must be as follows:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Files &amp; storage</string>
     <string name="settings_system_apks_size">Total size: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">This will permanently delete the saved APK files shown here</string>
+    <string name="settings_system_apks_deleted_all">APKs deleted successfully</string>
     <string name="settings_system_apk_item_info" translatable="false">v%s • %s</string>
 
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
@@ -773,8 +775,6 @@ The image dimensions must be as follows:
     <string name="settings_system_patched_apks_delete_confirm">Are you sure you want to delete the saved patched APK for %s?</string>
     <string name="settings_system_patched_apks_deleted">Patched APK deleted successfully</string>
     <string name="settings_system_patched_apks_delete_all_title">Delete all patched APKs?</string>
-    <string name="settings_system_patched_apks_delete_all_confirm">This will permanently delete every saved patched APK file</string>
-    <string name="settings_system_patched_apks_deleted_all">Patched APKs deleted successfully</string>
 
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Original APKs</string>
@@ -784,8 +784,6 @@ The image dimensions must be as follows:
     <string name="settings_system_original_apks_delete_title">Delete original APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Delete original APK for %s? You won\'t be able to repatch without providing a new APK</string>
     <string name="settings_system_original_apks_delete_all_title">Delete all original APKs?</string>
-    <string name="settings_system_original_apks_delete_all_confirm">This will permanently delete every saved original APK file. You won\'t be able to repatch without providing new APKs</string>
-    <string name="settings_system_original_apks_deleted_all">Original APKs deleted successfully</string>
 
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch selections</string>
