@@ -452,10 +452,12 @@ private fun ApkManagementDialogContent(
             R.plurals.settings_system_apks_selected_count,
             selectedItems.size,
             selectedItems.size
-        ) + " - " + formatBytes(selectedTotalSize)
+        )
     } else {
         title
     }
+    val summaryCount = if (selectedItems.isNotEmpty()) selectedItems.size else count
+    val summarySize = if (selectedItems.isNotEmpty()) selectedTotalSize else totalSize
     var zipExportItems by remember { mutableStateOf<List<ApkItemData>>(emptyList()) }
 
     LaunchedEffect(items) {
@@ -575,15 +577,15 @@ private fun ApkManagementDialogContent(
                 InfoBox(
                     title = pluralStringResource(
                         R.plurals.settings_system_apks_count,
-                        count,
-                        count
+                        summaryCount,
+                        summaryCount
                     ),
                     containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
                     titleColor = MaterialTheme.colorScheme.primary,
                     icon = icon
                 ) {
                     Text(
-                        text = stringResource(R.string.settings_system_apks_size, formatBytes(totalSize)),
+                        text = stringResource(R.string.settings_system_apks_size, formatBytes(summarySize)),
                         style = MaterialTheme.typography.bodyMedium,
                         color = LocalDialogSecondaryTextColor.current
                     )
