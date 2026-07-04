@@ -14,6 +14,7 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.Checkbox
@@ -536,7 +537,7 @@ private fun ApkManagementDialogContent(
                     IconButton(onClick = { selectedKeys.clear() }) {
                         Icon(
                             imageVector = Icons.Outlined.Close,
-                            contentDescription = stringResource(R.string.close),
+                            contentDescription = stringResource(R.string.deselect_all),
                             tint = LocalDialogTextColor.current
                         )
                     }
@@ -594,8 +595,7 @@ private fun ApkManagementDialogContent(
                 // Show shimmer while loading
                 isLoading -> items(3) { ShimmerApkItem() }
                 isEmpty -> item { EmptyState(message = emptyMessage) }
-                else -> items(items = items, key = { it.selectionKey }) { item ->
-                    val index = items.indexOf(item)
+                else -> itemsIndexed(items = items, key = { _, item -> item.selectionKey }) { index, item ->
                     val selected = item.selectionKey in selectedKeys
                     ApkItemCard(
                         data = item,
