@@ -50,6 +50,9 @@ import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
@@ -443,6 +446,15 @@ private fun ApkManagementDialogContent(
     val selectedItems = items.filter { it.selectionKey in selectedKeys }
     val selectedFiles = selectedItems.mapNotNull { item -> item.file?.takeIf { it.exists() } }
     val selectedTotalSize = selectedItems.sumOf { it.fileSize }
+    val selectionTitle = if (selectedItems.isNotEmpty()) {
+        pluralStringResource(
+            R.plurals.settings_system_apks_selected_count,
+            selectedItems.size,
+            selectedItems.size
+        ) + " - " + formatBytes(selectedTotalSize)
+    } else {
+        title
+    }
     var zipExportItems by remember { mutableStateOf<List<ApkItemData>>(emptyList()) }
 
     LaunchedEffect(items) {
@@ -471,18 +483,23 @@ private fun ApkManagementDialogContent(
 
     MorpheDialog(
         onDismissRequest = onDismissRequest,
-        title = if (selectedItems.isNotEmpty()) {
-            pluralStringResource(
-                R.plurals.settings_system_apks_selected_count,
-                selectedItems.size,
-                selectedItems.size
-            )
-        } else {
-            title
-        },
+        title = selectionTitle,
         titleTrailingContent = if (selectedItems.isNotEmpty()) {
             {
                 Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (selectedItems.size < items.size) {
+                        IconButton(onClick = {
+                            selectedKeys.clear()
+                            selectedKeys += items.map { it.selectionKey }
+                        }) {
+                            Icon(
+                                imageVector = Icons.Outlined.DoneAll,
+                                contentDescription = stringResource(R.string.select_all),
+                                tint = LocalDialogTextColor.current
+                            )
+                        }
+                    }
+
                     if (selectedFiles.isNotEmpty()) {
                         IconButton(onClick = {
                             scope.launch {
@@ -498,7 +515,7 @@ private fun ApkManagementDialogContent(
 
                         IconButton(onClick = {
                             zipExportItems = selectedItems
-                            zipExportLauncher.launch(zipExportFileName)
+                            zipExportLauncher.launch(timestampedZipFileName(zipExportFileName))
                         }) {
                             Icon(
                                 imageVector = Icons.Outlined.Upload,
@@ -864,6 +881,12 @@ private fun exportSelectedApksToZip(
             }
         } ?: error("Failed to open export stream")
     }.isSuccess
+}
+
+private fun timestampedZipFileName(fileName: String): String {
+    val timestamp = SimpleDateFormat("yyyy-MM-dd-HHmmss", Locale.US).format(Date())
+    val baseName = fileName.removeSuffix(".zip")
+    return "$baseName-$timestamp.zip"
 }
 
 private fun uniqueZipEntryName(file: File, usedNames: MutableSet<String>): String {
