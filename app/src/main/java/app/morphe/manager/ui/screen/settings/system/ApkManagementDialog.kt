@@ -13,6 +13,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -149,6 +151,7 @@ private fun PatchedApksContent(
 
     val totalSize = remember(apkItems) { apkItems.sumOf { it.fileSize } }
     val itemToDelete = remember { mutableStateOf<InstalledApp?>(null) }
+    val showDeleteAllConfirmation = remember { mutableStateOf(false) }
 
     var itemToExport by remember { mutableStateOf<ApkItemData?>(null) }
     val exportLauncher = rememberLauncherForActivityResult(
@@ -227,6 +230,9 @@ private fun PatchedApksContent(
         },
         onDelete = { index ->
             itemToDelete.value = apkItems[index].installedApp
+        },
+        onDeleteAll = {
+            showDeleteAllConfirmation.value = true
         }
     )
 
@@ -243,6 +249,24 @@ private fun PatchedApksContent(
                     repository.delete(itemToDelete.value!!)
                     context.toast(patchedApksDeletedText)
                     itemToDelete.value = null
+                }
+            }
+        )
+    }
+
+    if (showDeleteAllConfirmation.value) {
+        DeleteAllConfirmationDialog(
+            title = stringResource(R.string.settings_system_patched_apks_delete_all_title),
+            message = stringResource(R.string.settings_system_patched_apks_delete_all_confirm),
+            count = apkItems.size,
+            totalSize = totalSize,
+            onDismiss = { showDeleteAllConfirmation.value = false },
+            onConfirm = {
+                val appsToDelete = apkItems.map { it.installedApp }
+                scope.launch {
+                    appsToDelete.forEach { repository.delete(it) }
+                    context.toast(context.getString(R.string.settings_system_patched_apks_deleted_all))
+                    showDeleteAllConfirmation.value = false
                 }
             }
         )
@@ -293,6 +317,7 @@ private fun OriginalApksContent(
 
     val totalSize = remember(apkItems) { apkItems.sumOf { it.fileSize } }
     val itemToDelete = remember { mutableStateOf<OriginalApk?>(null) }
+    val showDeleteAllConfirmation = remember { mutableStateOf(false) }
 
     var itemToExport by remember { mutableStateOf<ApkItemData?>(null) }
     val exportLauncher = rememberLauncherForActivityResult(
@@ -348,6 +373,9 @@ private fun OriginalApksContent(
         onInstall = null,
         onDelete = { index ->
             itemToDelete.value = originalApks[index]
+        },
+        onDeleteAll = {
+            showDeleteAllConfirmation.value = true
         }
     )
 
@@ -368,6 +396,24 @@ private fun OriginalApksContent(
             }
         )
     }
+
+    if (showDeleteAllConfirmation.value) {
+        DeleteAllConfirmationDialog(
+            title = stringResource(R.string.settings_system_original_apks_delete_all_title),
+            message = stringResource(R.string.settings_system_original_apks_delete_all_confirm),
+            count = apkItems.size,
+            totalSize = totalSize,
+            onDismiss = { showDeleteAllConfirmation.value = false },
+            onConfirm = {
+                val apksToDelete = originalApks
+                scope.launch {
+                    apksToDelete.forEach { repository.delete(it) }
+                    context.toast(context.getString(R.string.settings_system_original_apks_deleted_all))
+                    showDeleteAllConfirmation.value = false
+                }
+            }
+        )
+    }
 }
 
 @Composable
@@ -384,11 +430,25 @@ private fun ApkManagementDialogContent(
     onShare: ((ApkItemData) -> Unit)?,
     onExport: ((ApkItemData) -> Unit)?,
     onInstall: ((ApkItemData) -> Unit)?,
-    onDelete: (Int) -> Unit
+    onDelete: (Int) -> Unit,
+    onDeleteAll: (() -> Unit)?
 ) {
     MorpheDialog(
         onDismissRequest = onDismissRequest,
         title = title,
+        titleTrailingContent = if (items.isNotEmpty() && onDeleteAll != null) {
+            {
+                IconButton(onClick = onDeleteAll) {
+                    Icon(
+                        imageVector = Icons.Outlined.DeleteForever,
+                        contentDescription = stringResource(R.string.delete_all),
+                        tint = LocalDialogTextColor.current
+                    )
+                }
+            }
+        } else {
+            null
+        },
         footer = {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.close),
@@ -542,6 +602,55 @@ private fun ApkItemCard(
                         containerColor = MaterialTheme.colorScheme.errorContainer,
                         contentColor = MaterialTheme.colorScheme.onErrorContainer
                     )
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun DeleteAllConfirmationDialog(
+    title: String,
+    message: String,
+    count: Int,
+    totalSize: Long,
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = title,
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.delete_all),
+                onPrimaryClick = onConfirm,
+                isPrimaryDestructive = true,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
+            Text(
+                text = message,
+                style = MaterialTheme.typography.bodyMedium,
+                color = LocalDialogTextColor.current
+            )
+
+            DeletionWarningBox(
+                warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
+            ) {
+                DeleteListItem(
+                    icon = Icons.Outlined.Delete,
+                    text = pluralStringResource(
+                        R.plurals.settings_system_apks_count,
+                        count,
+                        count
+                    )
+                )
+                DeleteListItem(
+                    icon = Icons.Outlined.Storage,
+                    text = stringResource(R.string.settings_system_apks_size, formatBytes(totalSize))
                 )
             }
         }

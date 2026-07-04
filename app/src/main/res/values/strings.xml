@@ -772,6 +772,9 @@ The image dimensions must be as follows:
     <string name="settings_system_patched_apks_delete_title">Delete patched APK?</string>
     <string name="settings_system_patched_apks_delete_confirm">Are you sure you want to delete the saved patched APK for %s?</string>
     <string name="settings_system_patched_apks_deleted">Patched APK deleted successfully</string>
+    <string name="settings_system_patched_apks_delete_all_title">Delete all patched APKs?</string>
+    <string name="settings_system_patched_apks_delete_all_confirm">This will permanently delete every saved patched APK file</string>
+    <string name="settings_system_patched_apks_deleted_all">Patched APKs deleted successfully</string>
 
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Original APKs</string>
@@ -780,6 +783,9 @@ The image dimensions must be as follows:
     <string name="settings_system_original_apks_deleted">Original APK deleted successfully</string>
     <string name="settings_system_original_apks_delete_title">Delete original APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Delete original APK for %s? You won\'t be able to repatch without providing a new APK</string>
+    <string name="settings_system_original_apks_delete_all_title">Delete all original APKs?</string>
+    <string name="settings_system_original_apks_delete_all_confirm">This will permanently delete every saved original APK file. You won\'t be able to repatch without providing new APKs</string>
+    <string name="settings_system_original_apks_deleted_all">Original APKs deleted successfully</string>
 
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch selections</string>
@@ -858,6 +864,7 @@ The image dimensions must be as follows:
     <string name="skip">Skip</string>
     <string name="clear">Clear</string>
     <string name="delete">Delete</string>
+    <string name="delete_all">Delete All</string>
     <string name="remove">Remove</string>
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
