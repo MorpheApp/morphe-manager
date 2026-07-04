@@ -10,6 +10,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -436,13 +437,9 @@ private fun ApkManagementDialogContent(
     var showDeleteAllConfirmation by remember { mutableStateOf(false) }
     var showDeleteSelectedConfirmation by remember { mutableStateOf(false) }
     val selectedKeys = remember { mutableStateListOf<String>() }
-    val selectedItems = remember(items, selectedKeys.size) {
-        items.filter { it.selectionKey in selectedKeys }
-    }
-    val selectedFiles = remember(selectedItems) {
-        selectedItems.mapNotNull { item -> item.file?.takeIf { it.exists() } }
-    }
-    val selectedTotalSize = remember(selectedItems) { selectedItems.sumOf { it.fileSize } }
+    val selectedItems = items.filter { it.selectionKey in selectedKeys }
+    val selectedFiles = selectedItems.mapNotNull { item -> item.file?.takeIf { it.exists() } }
+    val selectedTotalSize = selectedItems.sumOf { it.fileSize }
     var zipExportItems by remember { mutableStateOf<List<ApkItemData>>(emptyList()) }
 
     LaunchedEffect(items) {
@@ -584,6 +581,13 @@ private fun ApkManagementDialogContent(
                         data = item,
                         selected = selected,
                         selectionMode = selectedItems.isNotEmpty(),
+                        onToggleSelection = {
+                            if (item.selectionKey in selectedKeys) {
+                                selectedKeys -= item.selectionKey
+                            } else {
+                                selectedKeys += item.selectionKey
+                            }
+                        },
                         onSelectedChange = { checked ->
                             if (checked) {
                                 if (item.selectionKey !in selectedKeys) selectedKeys += item.selectionKey
@@ -641,6 +645,7 @@ private fun ApkItemCard(
     data: ApkItemData,
     selected: Boolean,
     selectionMode: Boolean,
+    onToggleSelection: () -> Unit,
     onSelectedChange: (Boolean) -> Unit,
     onShare: (() -> Unit)?,
     onExport: (() -> Unit)?,
@@ -652,14 +657,22 @@ private fun ApkItemCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .combinedClickable(
+                        onClick = {
+                            if (selectionMode) onToggleSelection()
+                        },
+                        onLongClick = onToggleSelection
+                    )
                     .padding(horizontal = MorpheDefaults.ItemSpacing, vertical = MorpheDefaults.ItemSpacing),
                 horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Checkbox(
-                    checked = selected,
-                    onCheckedChange = onSelectedChange
-                )
+                if (selectionMode) {
+                    Checkbox(
+                        checked = selected,
+                        onCheckedChange = onSelectedChange
+                    )
+                }
 
                 // App icon
                 AppIcon(
