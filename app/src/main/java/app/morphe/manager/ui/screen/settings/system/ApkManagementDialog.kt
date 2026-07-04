@@ -8,26 +8,35 @@ package app.morphe.manager.ui.screen.settings.system
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -487,65 +496,7 @@ private fun ApkManagementDialogContent(
     MorpheDialog(
         onDismissRequest = onDismissRequest,
         title = selectionTitle,
-        titleTrailingContent = if (selectedItems.isNotEmpty()) {
-            {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    if (selectedItems.size < items.size) {
-                        IconButton(onClick = {
-                            selectedKeys.clear()
-                            selectedKeys += items.map { it.selectionKey }
-                        }) {
-                            Icon(
-                                imageVector = Icons.Outlined.DoneAll,
-                                contentDescription = stringResource(R.string.select_all),
-                                tint = LocalDialogTextColor.current
-                            )
-                        }
-                    }
-
-                    if (selectedFiles.isNotEmpty()) {
-                        IconButton(onClick = {
-                            scope.launch {
-                                shareApkFiles(context, selectedFiles)
-                            }
-                        }) {
-                            Icon(
-                                imageVector = Icons.Outlined.Share,
-                                contentDescription = stringResource(R.string.share),
-                                tint = LocalDialogTextColor.current
-                            )
-                        }
-
-                        IconButton(onClick = {
-                            zipExportItems = selectedItems
-                            zipExportLauncher.launch(timestampedZipFileName(zipExportFileName))
-                        }) {
-                            Icon(
-                                imageVector = Icons.Outlined.Upload,
-                                contentDescription = stringResource(R.string.export),
-                                tint = LocalDialogTextColor.current
-                            )
-                        }
-                    }
-
-                    IconButton(onClick = { showDeleteSelectedConfirmation = true }) {
-                        Icon(
-                            imageVector = Icons.Outlined.Delete,
-                            contentDescription = stringResource(R.string.delete),
-                            tint = MaterialTheme.colorScheme.error
-                        )
-                    }
-
-                    IconButton(onClick = { selectedKeys.clear() }) {
-                        Icon(
-                            imageVector = Icons.Outlined.Close,
-                            contentDescription = stringResource(R.string.deselect_all),
-                            tint = LocalDialogTextColor.current
-                        )
-                    }
-                }
-            }
-        } else if (items.isNotEmpty() && onDeleteAllConfirm != null) {
+        titleTrailingContent = if (selectedItems.isEmpty() && items.isNotEmpty() && onDeleteAllConfirm != null) {
             {
                 IconButton(onClick = { showDeleteAllConfirmation = true }) {
                     Icon(
@@ -574,21 +525,94 @@ private fun ApkManagementDialogContent(
         ) {
             // Summary box
             item(key = "summary") {
-                InfoBox(
-                    title = pluralStringResource(
-                        R.plurals.settings_system_apks_count,
-                        summaryCount,
-                        summaryCount
-                    ),
-                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                    titleColor = MaterialTheme.colorScheme.primary,
-                    icon = icon
-                ) {
-                    Text(
-                        text = stringResource(R.string.settings_system_apks_size, formatBytes(summarySize)),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = LocalDialogSecondaryTextColor.current
-                    )
+                Column {
+                    AnimatedVisibility(
+                        visible = selectedItems.isNotEmpty(),
+                        enter = MorpheAnimations.expandFadeEnter,
+                        exit = MorpheAnimations.shrinkFadeExit
+                    ) {
+                        ActionPillRow(
+                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = MorpheDefaults.ItemSpacing)
+                        ) {
+                            val selectAllLabel = stringResource(R.string.select_all)
+                            ActionPillButton(
+                                onClick = {
+                                    selectedKeys.clear()
+                                    selectedKeys += items.map { it.selectionKey }
+                                },
+                                icon = Icons.Outlined.DoneAll,
+                                contentDescription = selectAllLabel,
+                                tooltip = selectAllLabel,
+                                enabled = selectedItems.isNotEmpty() && selectedItems.size < items.size
+                            )
+
+                            if (selectedFiles.isNotEmpty()) {
+                                val shareLabel = stringResource(R.string.share)
+                                ActionPillButton(
+                                    onClick = {
+                                        scope.launch {
+                                            shareApkFiles(context, selectedFiles)
+                                        }
+                                    },
+                                    icon = Icons.Outlined.Share,
+                                    contentDescription = shareLabel,
+                                    tooltip = shareLabel
+                                )
+
+                                val exportLabel = stringResource(R.string.export)
+                                ActionPillButton(
+                                    onClick = {
+                                        zipExportItems = selectedItems
+                                        zipExportLauncher.launch(timestampedZipFileName(zipExportFileName))
+                                    },
+                                    icon = Icons.Outlined.Upload,
+                                    contentDescription = exportLabel,
+                                    tooltip = exportLabel
+                                )
+                            }
+
+                            val deleteLabel = stringResource(R.string.delete)
+                            ActionPillButton(
+                                onClick = {
+                                    if (selectedItems.isNotEmpty()) showDeleteSelectedConfirmation = true
+                                },
+                                icon = Icons.Outlined.Delete,
+                                contentDescription = deleteLabel,
+                                tooltip = deleteLabel,
+                                enabled = selectedItems.isNotEmpty(),
+                                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                    containerColor = MaterialTheme.colorScheme.errorContainer,
+                                    contentColor = MaterialTheme.colorScheme.onErrorContainer
+                                )
+                            )
+
+                            val deselectAllLabel = stringResource(R.string.deselect_all)
+                            ActionPillButton(
+                                onClick = { selectedKeys.clear() },
+                                icon = Icons.Outlined.Close,
+                                contentDescription = deselectAllLabel,
+                                tooltip = deselectAllLabel,
+                                enabled = selectedItems.isNotEmpty()
+                            )
+                        }
+                    }
+
+                    InfoBox(
+                        title = pluralStringResource(
+                            R.plurals.settings_system_apks_count,
+                            summaryCount,
+                            summaryCount
+                        ),
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                        titleColor = MaterialTheme.colorScheme.primary,
+                        icon = icon
+                    ) {
+                        Text(
+                            text = stringResource(R.string.settings_system_apks_size, formatBytes(summarySize)),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
+                    }
                 }
             }
 
@@ -608,13 +632,6 @@ private fun ApkManagementDialogContent(
                                 selectedKeys -= item.selectionKey
                             } else {
                                 selectedKeys += item.selectionKey
-                            }
-                        },
-                        onSelectedChange = { checked ->
-                            if (checked) {
-                                if (item.selectionKey !in selectedKeys) selectedKeys += item.selectionKey
-                            } else {
-                                selectedKeys -= item.selectionKey
                             }
                         },
                         onShare = if (item.file != null) { { onShare?.invoke(item) } } else null,
@@ -668,117 +685,161 @@ private fun ApkItemCard(
     selected: Boolean,
     selectionMode: Boolean,
     onToggleSelection: () -> Unit,
-    onSelectedChange: (Boolean) -> Unit,
     onShare: (() -> Unit)?,
     onExport: (() -> Unit)?,
     onInstall: (() -> Unit)?,
     onDelete: () -> Unit
 ) {
-    SectionCard {
-        Column {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .combinedClickable(
-                        onClick = {
-                            if (selectionMode) onToggleSelection()
-                        },
-                        onLongClick = onToggleSelection
-                    )
-                    .padding(horizontal = MorpheDefaults.ItemSpacing, vertical = MorpheDefaults.ItemSpacing),
-                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                if (selectionMode) {
-                    Checkbox(
-                        checked = selected,
-                        onCheckedChange = onSelectedChange
-                    )
-                }
+    val view = LocalView.current
+    val checkScale by animateFloatAsState(
+        targetValue = if (selected) 1f else 0f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMedium
+        ),
+        label = "apk_selection_check_scale"
+    )
+    val cardAlpha by animateFloatAsState(
+        targetValue = if (selectionMode && !selected) 0.55f else 1f,
+        animationSpec = tween(200),
+        label = "apk_card_alpha"
+    )
 
-                // App icon
-                AppIcon(
-                    packageName = data.packageName,
-                    contentDescription = null,
-                    modifier = Modifier.size(48.dp)
-                )
+    Box(modifier = Modifier.fillMaxWidth()) {
+        Box(modifier = Modifier.graphicsLayer { alpha = cardAlpha }) {
+            SectionCard {
+                Column {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .combinedClickable(
+                                onClick = {
+                                    if (selectionMode) onToggleSelection()
+                                },
+                                onLongClick = {
+                                    view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                                    onToggleSelection()
+                                }
+                            )
+                            .padding(horizontal = MorpheDefaults.ItemSpacing, vertical = MorpheDefaults.ItemSpacing),
+                        horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        // App icon
+                        AppIcon(
+                            packageName = data.packageName,
+                            contentDescription = null,
+                            modifier = Modifier.size(48.dp)
+                        )
 
-                // App info
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(2.dp)
-                ) {
-                    Text(
-                        text = data.displayName,
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Medium,
-                        color = LocalDialogTextColor.current
-                    )
-                    Text(
-                        text = data.packageName,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                    Text(
-                        text = stringResource(
-                            R.string.settings_system_apk_item_info,
-                            data.version,
-                            formatBytes(data.fileSize)
-                        ),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = LocalDialogSecondaryTextColor.current
-                    )
+                        // App info
+                        Column(
+                            modifier = Modifier.weight(1f),
+                            verticalArrangement = Arrangement.spacedBy(2.dp)
+                        ) {
+                            Text(
+                                text = data.displayName,
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Medium,
+                                color = LocalDialogTextColor.current
+                            )
+                            Text(
+                                text = data.packageName,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = LocalDialogSecondaryTextColor.current
+                            )
+                            Text(
+                                text = stringResource(
+                                    R.string.settings_system_apk_item_info,
+                                    data.version,
+                                    formatBytes(data.fileSize)
+                                ),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = LocalDialogSecondaryTextColor.current
+                            )
+                        }
+                    }
+
+                    AnimatedVisibility(
+                        visible = !selectionMode,
+                        enter = MorpheAnimations.expandFadeEnter,
+                        exit = MorpheAnimations.shrinkFadeExit
+                    ) {
+                        Column {
+                            MorpheSettingsDivider()
+
+                            // Action buttons
+                            ActionPillRow(
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+                            ) {
+                                if (onShare != null) {
+                                    val shareLabel = stringResource(R.string.share)
+                                    ActionPillButton(
+                                        onClick = onShare,
+                                        icon = Icons.Outlined.Share,
+                                        contentDescription = shareLabel,
+                                        tooltip = shareLabel
+                                    )
+                                }
+
+                                if (onExport != null) {
+                                    val exportLabel = stringResource(R.string.export)
+                                    ActionPillButton(
+                                        onClick = onExport,
+                                        icon = Icons.Outlined.Upload,
+                                        contentDescription = exportLabel,
+                                        tooltip = exportLabel
+                                    )
+                                }
+
+                                if (onInstall != null) {
+                                    val isMountType = data.installType == InstallType.MOUNT
+                                    val installLabel = stringResource(if (isMountType) R.string.mount else R.string.install)
+                                    ActionPillButton(
+                                        onClick = onInstall,
+                                        icon = if (isMountType) Icons.Outlined.Link else Icons.Outlined.InstallMobile,
+                                        contentDescription = installLabel,
+                                        tooltip = installLabel
+                                    )
+                                }
+
+                                val deleteLabel = stringResource(R.string.delete)
+                                ActionPillButton(
+                                    onClick = onDelete,
+                                    icon = Icons.Outlined.Delete,
+                                    contentDescription = deleteLabel,
+                                    tooltip = deleteLabel,
+                                    colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                        containerColor = MaterialTheme.colorScheme.errorContainer,
+                                        contentColor = MaterialTheme.colorScheme.onErrorContainer
+                                    )
+                                )
+                            }
+                        }
+                    }
                 }
             }
+        }
 
-            if (!selectionMode) {
-                MorpheSettingsDivider()
-
-                // Action buttons
-                ActionPillRow(
-                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
-                ) {
-                    if (onShare != null) {
-                        val shareLabel = stringResource(R.string.share)
-                        ActionPillButton(
-                            onClick = onShare,
-                            icon = Icons.Outlined.Share,
-                            contentDescription = shareLabel,
-                            tooltip = shareLabel
-                        )
+        if (checkScale > 0f) {
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(top = 8.dp, end = 8.dp)
+                    .size(28.dp)
+                    .graphicsLayer {
+                        scaleX = checkScale
+                        scaleY = checkScale
                     }
-
-                    if (onExport != null) {
-                        val exportLabel = stringResource(R.string.export)
-                        ActionPillButton(
-                            onClick = onExport,
-                            icon = Icons.Outlined.Upload,
-                            contentDescription = exportLabel,
-                            tooltip = exportLabel
-                        )
-                    }
-
-                    if (onInstall != null) {
-                        val isMountType = data.installType == InstallType.MOUNT
-                        val installLabel = stringResource(if (isMountType) R.string.mount else R.string.install)
-                        ActionPillButton(
-                            onClick = onInstall,
-                            icon = if (isMountType) Icons.Outlined.Link else Icons.Outlined.InstallMobile,
-                            contentDescription = installLabel,
-                            tooltip = installLabel
-                        )
-                    }
-
-                    val deleteLabel = stringResource(R.string.delete)
-                    ActionPillButton(
-                        onClick = onDelete,
-                        icon = Icons.Outlined.Delete,
-                        contentDescription = deleteLabel,
-                        tooltip = deleteLabel,
-                        colors = IconButtonDefaults.filledTonalIconButtonColors(
-                            containerColor = MaterialTheme.colorScheme.errorContainer,
-                            contentColor = MaterialTheme.colorScheme.onErrorContainer
-                        )
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = Icons.Outlined.Check,
+                        contentDescription = stringResource(R.string.selected),
+                        tint = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier.size(16.dp)
                     )
                 }
             }
