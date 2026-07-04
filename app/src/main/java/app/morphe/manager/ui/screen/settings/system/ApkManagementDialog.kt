@@ -192,6 +192,7 @@ private fun PatchedApksContent(
         emptyMessage = stringResource(R.string.settings_system_patched_apks_empty),
         onDismissRequest = onDismissRequest,
         items = apkItems.map { it.toApkItemData() },
+        zipExportFileName = stringResource(R.string.settings_system_patched_apks_export_zip_name),
         onShare = { item ->
             item.file?.let { file ->
                 scope.launch {
@@ -352,6 +353,7 @@ private fun OriginalApksContent(
         emptyMessage = stringResource(R.string.settings_system_original_apks_empty),
         onDismissRequest = onDismissRequest,
         items = apkItems,
+        zipExportFileName = stringResource(R.string.settings_system_original_apks_export_zip_name),
         onShare = { item ->
             item.file?.let { file ->
                 scope.launch {
@@ -424,6 +426,7 @@ private fun ApkManagementDialogContent(
     emptyMessage: String,
     onDismissRequest: () -> Unit,
     items: List<ApkItemData>,
+    zipExportFileName: String,
     onShare: ((ApkItemData) -> Unit)?,
     onExport: ((ApkItemData) -> Unit)?,
     onInstall: ((ApkItemData) -> Unit)?,
@@ -495,7 +498,7 @@ private fun ApkManagementDialogContent(
 
                         IconButton(onClick = {
                             zipExportItems = selectedItems
-                            zipExportLauncher.launch("morphe-apks.zip")
+                            zipExportLauncher.launch(zipExportFileName)
                         }) {
                             Icon(
                                 imageVector = Icons.Outlined.Upload,

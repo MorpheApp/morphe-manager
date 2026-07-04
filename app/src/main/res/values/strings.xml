@@ -779,6 +779,7 @@ The image dimensions must be as follows:
     <string name="settings_system_patched_apks_delete_confirm">Are you sure you want to delete the saved patched APK for %s?</string>
     <string name="settings_system_patched_apks_deleted">Patched APK deleted successfully</string>
     <string name="settings_system_patched_apks_delete_all_title">Delete all patched APKs?</string>
+    <string name="settings_system_patched_apks_export_zip_name" translatable="false">morphe-patched-apks.zip</string>
 
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Original APKs</string>
@@ -788,6 +789,7 @@ The image dimensions must be as follows:
     <string name="settings_system_original_apks_delete_title">Delete original APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Delete original APK for %s? You won\'t be able to repatch without providing a new APK</string>
     <string name="settings_system_original_apks_delete_all_title">Delete all original APKs?</string>
+    <string name="settings_system_original_apks_export_zip_name" translatable="false">morphe-original-apks.zip</string>
 
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch selections</string>
