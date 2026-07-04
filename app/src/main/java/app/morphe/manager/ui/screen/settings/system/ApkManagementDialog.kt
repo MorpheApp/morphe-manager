@@ -5,7 +5,9 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
@@ -13,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -46,6 +49,8 @@ import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import java.io.File
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 
 /** Type of APKs to manage. */
 enum class ApkManagementType {
@@ -62,6 +67,9 @@ data class ApkItemData(
     val file: File? = null,
     val installType: InstallType? = null
 )
+
+private val ApkItemData.selectionKey: String
+    get() = file?.absolutePath ?: "$packageName:$version"
 
 /** Data class representing an APK item with reference to InstalledApp. */
 private data class ApkItemDataWithApp(
@@ -231,6 +239,13 @@ private fun PatchedApksContent(
         onDelete = { index ->
             itemToDelete.value = apkItems[index].installedApp
         },
+        onDeleteSelectedConfirm = { selectedIndexes ->
+            val appsToDelete = selectedIndexes.map { apkItems[it].installedApp }
+            scope.launch {
+                appsToDelete.forEach { repository.delete(it) }
+                context.toast(apksDeletedAllText)
+            }
+        },
         deleteAllTitle = stringResource(R.string.settings_system_patched_apks_delete_all_title),
         onDeleteAllConfirm = {
             val appsToDelete = apkItems.map { it.installedApp }
@@ -361,6 +376,13 @@ private fun OriginalApksContent(
         onDelete = { index ->
             itemToDelete.value = originalApks[index]
         },
+        onDeleteSelectedConfirm = { selectedIndexes ->
+            val apksToDelete = selectedIndexes.map { originalApks[it] }
+            scope.launch {
+                apksToDelete.forEach { repository.delete(it) }
+                context.toast(apksDeletedAllText)
+            }
+        },
         deleteAllTitle = stringResource(R.string.settings_system_original_apks_delete_all_title),
         onDeleteAllConfirm = {
             val apksToDelete = originalApks
@@ -405,15 +427,105 @@ private fun ApkManagementDialogContent(
     onExport: ((ApkItemData) -> Unit)?,
     onInstall: ((ApkItemData) -> Unit)?,
     onDelete: (Int) -> Unit,
+    onDeleteSelectedConfirm: (List<Int>) -> Unit,
     deleteAllTitle: String?,
     onDeleteAllConfirm: (() -> Unit)?
 ) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     var showDeleteAllConfirmation by remember { mutableStateOf(false) }
+    var showDeleteSelectedConfirmation by remember { mutableStateOf(false) }
+    val selectedKeys = remember { mutableStateListOf<String>() }
+    val selectedItems = remember(items, selectedKeys.size) {
+        items.filter { it.selectionKey in selectedKeys }
+    }
+    val selectedFiles = remember(selectedItems) {
+        selectedItems.mapNotNull { item -> item.file?.takeIf { it.exists() } }
+    }
+    val selectedTotalSize = remember(selectedItems) { selectedItems.sumOf { it.fileSize } }
+    var zipExportItems by remember { mutableStateOf<List<ApkItemData>>(emptyList()) }
+
+    LaunchedEffect(items) {
+        val currentKeys = items.map { it.selectionKey }.toSet()
+        selectedKeys.removeAll { it !in currentKeys }
+    }
+
+    val zipExportLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("application/zip")
+    ) { uri ->
+        val itemsToExport = zipExportItems
+        zipExportItems = emptyList()
+        uri ?: return@rememberLauncherForActivityResult
+        scope.launch {
+            val exported = withContext(Dispatchers.IO) {
+                exportSelectedApksToZip(context, uri, itemsToExport)
+            }
+            context.toast(
+                context.getString(
+                    if (exported) R.string.settings_system_apks_export_zip_success
+                    else R.string.settings_system_apks_export_zip_failed
+                )
+            )
+        }
+    }
 
     MorpheDialog(
         onDismissRequest = onDismissRequest,
-        title = title,
-        titleTrailingContent = if (items.isNotEmpty() && onDeleteAllConfirm != null) {
+        title = if (selectedItems.isNotEmpty()) {
+            pluralStringResource(
+                R.plurals.settings_system_apks_selected_count,
+                selectedItems.size,
+                selectedItems.size
+            )
+        } else {
+            title
+        },
+        titleTrailingContent = if (selectedItems.isNotEmpty()) {
+            {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (selectedFiles.isNotEmpty()) {
+                        IconButton(onClick = {
+                            scope.launch {
+                                shareApkFiles(context, selectedFiles)
+                            }
+                        }) {
+                            Icon(
+                                imageVector = Icons.Outlined.Share,
+                                contentDescription = stringResource(R.string.share),
+                                tint = LocalDialogTextColor.current
+                            )
+                        }
+
+                        IconButton(onClick = {
+                            zipExportItems = selectedItems
+                            zipExportLauncher.launch("morphe-apks.zip")
+                        }) {
+                            Icon(
+                                imageVector = Icons.Outlined.Upload,
+                                contentDescription = stringResource(R.string.export),
+                                tint = LocalDialogTextColor.current
+                            )
+                        }
+                    }
+
+                    IconButton(onClick = { showDeleteSelectedConfirmation = true }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Delete,
+                            contentDescription = stringResource(R.string.delete),
+                            tint = MaterialTheme.colorScheme.error
+                        )
+                    }
+
+                    IconButton(onClick = { selectedKeys.clear() }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Close,
+                            contentDescription = stringResource(R.string.close),
+                            tint = LocalDialogTextColor.current
+                        )
+                    }
+                }
+            }
+        } else if (items.isNotEmpty() && onDeleteAllConfirm != null) {
             {
                 IconButton(onClick = { showDeleteAllConfirmation = true }) {
                     Icon(
@@ -465,10 +577,20 @@ private fun ApkManagementDialogContent(
                 // Show shimmer while loading
                 isLoading -> items(3) { ShimmerApkItem() }
                 isEmpty -> item { EmptyState(message = emptyMessage) }
-                else -> items(items = items, key = { it.packageName }) { item ->
+                else -> items(items = items, key = { it.selectionKey }) { item ->
                     val index = items.indexOf(item)
+                    val selected = item.selectionKey in selectedKeys
                     ApkItemCard(
                         data = item,
+                        selected = selected,
+                        selectionMode = selectedItems.isNotEmpty(),
+                        onSelectedChange = { checked ->
+                            if (checked) {
+                                if (item.selectionKey !in selectedKeys) selectedKeys += item.selectionKey
+                            } else {
+                                selectedKeys -= item.selectionKey
+                            }
+                        },
                         onShare = if (item.file != null) { { onShare?.invoke(item) } } else null,
                         onExport = if (item.file != null) { { onExport?.invoke(item) } } else null,
                         onInstall = if (item.file != null && onInstall != null) { { onInstall(item) } } else null,
@@ -482,6 +604,8 @@ private fun ApkManagementDialogContent(
     if (showDeleteAllConfirmation && deleteAllTitle != null && onDeleteAllConfirm != null) {
         DeleteAllConfirmationDialog(
             title = deleteAllTitle,
+            message = stringResource(R.string.settings_system_apks_delete_all_confirm),
+            primaryText = stringResource(R.string.delete_all),
             count = count,
             totalSize = totalSize,
             onDismiss = { showDeleteAllConfirmation = false },
@@ -491,11 +615,33 @@ private fun ApkManagementDialogContent(
             }
         )
     }
+
+    if (showDeleteSelectedConfirmation) {
+        val selectedIndexes = items.mapIndexedNotNull { index, item ->
+            index.takeIf { item.selectionKey in selectedKeys }
+        }
+        DeleteAllConfirmationDialog(
+            title = stringResource(R.string.settings_system_apks_delete_selected_title),
+            message = stringResource(R.string.settings_system_apks_delete_selected_confirm),
+            primaryText = stringResource(R.string.delete),
+            count = selectedItems.size,
+            totalSize = selectedTotalSize,
+            onDismiss = { showDeleteSelectedConfirmation = false },
+            onConfirm = {
+                onDeleteSelectedConfirm(selectedIndexes)
+                selectedKeys.clear()
+                showDeleteSelectedConfirmation = false
+            }
+        )
+    }
 }
 
 @Composable
 private fun ApkItemCard(
     data: ApkItemData,
+    selected: Boolean,
+    selectionMode: Boolean,
+    onSelectedChange: (Boolean) -> Unit,
     onShare: (() -> Unit)?,
     onExport: (() -> Unit)?,
     onInstall: (() -> Unit)?,
@@ -510,6 +656,11 @@ private fun ApkItemCard(
                 horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                Checkbox(
+                    checked = selected,
+                    onCheckedChange = onSelectedChange
+                )
+
                 // App icon
                 AppIcon(
                     packageName = data.packageName,
@@ -545,54 +696,56 @@ private fun ApkItemCard(
                 }
             }
 
-            MorpheSettingsDivider()
+            if (!selectionMode) {
+                MorpheSettingsDivider()
 
-            // Action buttons
-            ActionPillRow(
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
-            ) {
-                if (onShare != null) {
-                    val shareLabel = stringResource(R.string.share)
+                // Action buttons
+                ActionPillRow(
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+                ) {
+                    if (onShare != null) {
+                        val shareLabel = stringResource(R.string.share)
+                        ActionPillButton(
+                            onClick = onShare,
+                            icon = Icons.Outlined.Share,
+                            contentDescription = shareLabel,
+                            tooltip = shareLabel
+                        )
+                    }
+
+                    if (onExport != null) {
+                        val exportLabel = stringResource(R.string.export)
+                        ActionPillButton(
+                            onClick = onExport,
+                            icon = Icons.Outlined.Upload,
+                            contentDescription = exportLabel,
+                            tooltip = exportLabel
+                        )
+                    }
+
+                    if (onInstall != null) {
+                        val isMountType = data.installType == InstallType.MOUNT
+                        val installLabel = stringResource(if (isMountType) R.string.mount else R.string.install)
+                        ActionPillButton(
+                            onClick = onInstall,
+                            icon = if (isMountType) Icons.Outlined.Link else Icons.Outlined.InstallMobile,
+                            contentDescription = installLabel,
+                            tooltip = installLabel
+                        )
+                    }
+
+                    val deleteLabel = stringResource(R.string.delete)
                     ActionPillButton(
-                        onClick = onShare,
-                        icon = Icons.Outlined.Share,
-                        contentDescription = shareLabel,
-                        tooltip = shareLabel
+                        onClick = onDelete,
+                        icon = Icons.Outlined.Delete,
+                        contentDescription = deleteLabel,
+                        tooltip = deleteLabel,
+                        colors = IconButtonDefaults.filledTonalIconButtonColors(
+                            containerColor = MaterialTheme.colorScheme.errorContainer,
+                            contentColor = MaterialTheme.colorScheme.onErrorContainer
+                        )
                     )
                 }
-
-                if (onExport != null) {
-                    val exportLabel = stringResource(R.string.export)
-                    ActionPillButton(
-                        onClick = onExport,
-                        icon = Icons.Outlined.Upload,
-                        contentDescription = exportLabel,
-                        tooltip = exportLabel
-                    )
-                }
-
-                if (onInstall != null) {
-                    val isMountType = data.installType == InstallType.MOUNT
-                    val installLabel = stringResource(if (isMountType) R.string.mount else R.string.install)
-                    ActionPillButton(
-                        onClick = onInstall,
-                        icon = if (isMountType) Icons.Outlined.Link else Icons.Outlined.InstallMobile,
-                        contentDescription = installLabel,
-                        tooltip = installLabel
-                    )
-                }
-
-                val deleteLabel = stringResource(R.string.delete)
-                ActionPillButton(
-                    onClick = onDelete,
-                    icon = Icons.Outlined.Delete,
-                    contentDescription = deleteLabel,
-                    tooltip = deleteLabel,
-                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                        containerColor = MaterialTheme.colorScheme.errorContainer,
-                        contentColor = MaterialTheme.colorScheme.onErrorContainer
-                    )
-                )
             }
         }
     }
@@ -601,6 +754,8 @@ private fun ApkItemCard(
 @Composable
 private fun DeleteAllConfirmationDialog(
     title: String,
+    message: String,
+    primaryText: String,
     count: Int,
     totalSize: Long,
     onDismiss: () -> Unit,
@@ -611,7 +766,7 @@ private fun DeleteAllConfirmationDialog(
         title = title,
         footer = {
             MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.delete_all),
+                primaryText = primaryText,
                 onPrimaryClick = onConfirm,
                 isPrimaryDestructive = true,
                 secondaryText = stringResource(android.R.string.cancel),
@@ -621,7 +776,7 @@ private fun DeleteAllConfirmationDialog(
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
             Text(
-                text = stringResource(R.string.settings_system_apks_delete_all_confirm),
+                text = message,
                 style = MaterialTheme.typography.bodyMedium,
                 color = LocalDialogTextColor.current
             )
@@ -644,6 +799,71 @@ private fun DeleteAllConfirmationDialog(
             }
         }
     }
+}
+
+private suspend fun shareApkFiles(context: Context, files: List<File>) {
+    val existingFiles = files.filter { it.exists() }
+    if (existingFiles.isEmpty()) return
+
+    val uris = withContext(Dispatchers.IO) {
+        existingFiles.map { InstallerFileProvider.getUriForFile(context, it) }
+    }
+
+    val intent = if (uris.size == 1) {
+        Intent(Intent.ACTION_SEND).apply {
+            type = APK_MIMETYPE
+            putExtra(Intent.EXTRA_STREAM, uris.first())
+        }
+    } else {
+        Intent(Intent.ACTION_SEND_MULTIPLE).apply {
+            type = APK_MIMETYPE
+            putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList<Uri>(uris))
+        }
+    }.apply {
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    }
+
+    try {
+        context.startActivity(Intent.createChooser(intent, null))
+    } catch (_: android.content.ActivityNotFoundException) { }
+}
+
+private fun exportSelectedApksToZip(
+    context: Context,
+    uri: Uri,
+    items: List<ApkItemData>
+): Boolean {
+    val files = items.mapNotNull { it.file?.takeIf { file -> file.exists() } }
+    if (files.isEmpty()) return false
+
+    return runCatching {
+        context.contentResolver.openOutputStream(uri)?.use { output ->
+            val usedNames = mutableSetOf<String>()
+            ZipOutputStream(output).use { zip ->
+                files.forEach { file ->
+                    zip.putNextEntry(ZipEntry(uniqueZipEntryName(file, usedNames)))
+                    file.inputStream().use { input -> input.copyTo(zip) }
+                    zip.closeEntry()
+                }
+            }
+        } ?: error("Failed to open export stream")
+    }.isSuccess
+}
+
+private fun uniqueZipEntryName(file: File, usedNames: MutableSet<String>): String {
+    val originalName = file.name.ifBlank { "apk-${usedNames.size + 1}.apk" }
+    var candidate = originalName
+    val dotIndex = originalName.lastIndexOf('.')
+    val base = if (dotIndex > 0) originalName.substring(0, dotIndex) else originalName
+    val extension = if (dotIndex > 0) originalName.substring(dotIndex) else ".apk"
+    var suffix = 2
+
+    while (!usedNames.add(candidate)) {
+        candidate = "$base-$suffix$extension"
+        suffix++
+    }
+
+    return candidate
 }
 
 @Composable
