@@ -912,13 +912,11 @@ private fun PatchOptionsDialog(
         onDismissRequest = onDismiss,
         title = patch.name,
         titleTrailingContent = {
-            IconButton(onClick = onReset) {
-                Icon(
-                    imageVector = Icons.Outlined.Restore,
-                    contentDescription = stringResource(R.string.reset),
-                    tint = LocalDialogTextColor.current
-                )
-            }
+            DialogTitleAction(
+                icon = Icons.Outlined.Restore,
+                contentDescription = stringResource(R.string.reset),
+                onClick = onReset
+            )
         },
         footer = {
             MorpheDialogOutlinedButton(

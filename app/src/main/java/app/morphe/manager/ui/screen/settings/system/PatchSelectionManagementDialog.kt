@@ -252,20 +252,12 @@ private fun PatchSelectionManagementDialogContent(
         title = stringResource(R.string.settings_system_patch_selections_title),
         titleTrailingContent = if (!isSelectionMode && selections.isNotEmpty()) {
             {
-                FilledTonalIconButton(
+                DialogTitleAction(
+                    icon = Icons.Outlined.Restore,
+                    contentDescription = stringResource(R.string.reset),
                     onClick = onShowResetAllConfirmation,
-                    modifier = Modifier.size(36.dp),
-                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                        containerColor = MaterialTheme.colorScheme.errorContainer,
-                        contentColor = MaterialTheme.colorScheme.onErrorContainer
-                    )
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Restore,
-                        contentDescription = stringResource(R.string.reset),
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
+                    style = DialogTitleActionStyle.Destructive
+                )
             }
         } else {
             null
