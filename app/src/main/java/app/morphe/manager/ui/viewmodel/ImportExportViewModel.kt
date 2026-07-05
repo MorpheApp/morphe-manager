@@ -347,10 +347,8 @@ class ImportExportViewModel(
     /**
      * Filename for the all-selections export file.
      */
-    fun getAllSelectionsExportFileName(): String {
-        val time = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now())
-        return "morphe_all_selections_$time.json"
-    }
+    fun getAllSelectionsExportFileName(): String =
+        FilenameUtils.timestamped("morphe_all_selections.json")
 
     /**
      * Import patch selections and options from a file.
@@ -455,17 +453,13 @@ class ImportExportViewModel(
      * Get filename for package+bundle data export.
      */
     fun getPackageBundleDataExportFileName(packageName: String, bundleUid: Int, bundleName: String?): String {
-        val time = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now())
         val bundle = bundleName?.replace(" ", "_")?.take(20) ?: "bundle_$bundleUid"
         val pkg = packageName.substringAfterLast('.').take(15)
-        return "morphe_${bundle}_${pkg}_$time.json"
+        return FilenameUtils.timestamped("morphe_${bundle}_${pkg}.json")
     }
 
     val debugLogFileName: String
-        get() {
-            val time = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm").format(LocalDateTime.now())
-            return "morphe_logcat_$time.log"
-        }
+        get() = FilenameUtils.timestamped("morphe_logcat.log")
 
     /**
      * Writes the debug log content to [writer]. Returns the logcat exit code.

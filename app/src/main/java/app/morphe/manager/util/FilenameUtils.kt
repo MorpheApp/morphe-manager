@@ -28,14 +28,13 @@ object FilenameUtils {
         }
 
         return raw
-            .replace(Regex("[_]{2,}"), "_")
-            .replace(Regex("[-]{2,}"), "-")
+            .replace(Regex("_{2,}"), "_")
+            .replace(Regex("-{2,}"), "-")
             .trim('_', '-')
     }
 
     /**
-     * Insert a "yyyy-MM-dd-HHmmss" timestamp before the extension of [fileName],
-     * e.g. "backup.zip" -> "backup-2026-07-05-153000.zip".
+     * Insert a "yyyy-MM-dd-HHmmss" timestamp before the extension of [fileName].
      */
     fun timestamped(fileName: String): String {
         val timestamp = TIMESTAMP_FORMAT.format(java.util.Date())
