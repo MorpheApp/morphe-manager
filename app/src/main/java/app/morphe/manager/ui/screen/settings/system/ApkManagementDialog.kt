@@ -486,7 +486,9 @@ private fun ApkManagementDialogContent(
     }
 
     MorpheDialog(
-        onDismissRequest = onDismissRequest,
+        onDismissRequest = {
+            if (selection.isNotEmpty) selection.clear() else onDismissRequest()
+        },
         title = title,
         titleTrailingContent = if (selectedItems.isEmpty() && items.isNotEmpty() && onDeleteAllConfirm != null) {
             {
