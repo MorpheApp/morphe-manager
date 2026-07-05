@@ -834,7 +834,7 @@ fun MainAppsSection(
 ) {
     // Multi-select state - set of packageNames chosen for bulk hide
     val isMultiSelectMode = remember { mutableStateOf(false) }
-    val selectedPackages = remember { mutableStateOf(emptySet<String>()) }
+    val selectedPackages = rememberSelectionState<String>()
 
     // Reorder state
     val isReorderMode = remember { mutableStateOf(false) }
@@ -847,7 +847,7 @@ fun MainAppsSection(
     // Back gesture/button cancels multi-select instead of navigating back
     BackHandler(enabled = isMultiSelectMode.value) {
         isMultiSelectMode.value = false
-        selectedPackages.value = emptySet()
+        selectedPackages.clear()
     }
 
     // Back gesture/button exits reorder mode without saving
@@ -858,11 +858,9 @@ fun MainAppsSection(
 
     // Sync selection and local order with current item list
     LaunchedEffect(homeAppItems) {
-        val filtered = selectedPackages.value.filter { pkg ->
-            homeAppItems.any { it.packageName == pkg }
-        }.toSet()
-        selectedPackages.value = filtered
-        if (filtered.isEmpty()) isMultiSelectMode.value = false
+        val currentPackages = homeAppItems.mapTo(mutableSetOf()) { it.packageName }
+        selectedPackages.retain { it in currentPackages }
+        if (selectedPackages.isEmpty) isMultiSelectMode.value = false
 
         if (!isReorderMode.value) {
             localOrder = homeAppItems.map { it.packageName }
@@ -1082,7 +1080,7 @@ fun MainAppsSection(
                                         items = filteredItems,
                                         key = { _, item -> item.packageName }
                                     ) { index, item ->
-                                        val isSelected = item.packageName in selectedPackages.value
+                                        val isSelected = selectedPackages.contains(item.packageName)
                                         DynamicAppCard(
                                             item = item,
                                             isLoading = stableLoadingState.value,
@@ -1090,10 +1088,7 @@ fun MainAppsSection(
                                             onAppClick = {
                                                 if (isMultiSelectMode.value) {
                                                     // In multi-select mode taps toggle selection
-                                                    selectedPackages.value = if (isSelected)
-                                                        selectedPackages.value - item.packageName
-                                                    else
-                                                        selectedPackages.value + item.packageName
+                                                    selectedPackages.toggle(item.packageName)
                                                 } else {
                                                     onAppClick(item)
                                                 }
@@ -1108,10 +1103,7 @@ fun MainAppsSection(
                                             onLongPress = {
                                                 // Long-press enters multi-select and toggles this card
                                                 isMultiSelectMode.value = true
-                                                selectedPackages.value = if (isSelected)
-                                                    selectedPackages.value - item.packageName
-                                                else
-                                                    selectedPackages.value + item.packageName
+                                                selectedPackages.toggle(item.packageName)
                                             },
                                             onMoveUp = if (directReorderAllowed && index > 0) {
                                                 {
@@ -1283,29 +1275,29 @@ fun MainAppsSection(
 
                     // Multi-select / reorder bar - slides up from bottom
                     MultiSelectBar(
-                        selectedCount = selectedPackages.value.size,
+                        selectedCount = selectedPackages.size,
                         totalCount = homeAppItems.size,
                         visible = isMultibarVisible,
                         isReorderMode = isReorderMode.value,
                         onSelectAll = {
-                            selectedPackages.value = homeAppItems.map { it.packageName }.toSet()
+                            selectedPackages.setAll(homeAppItems.map { it.packageName })
                         },
-                        onDeselectAll = { selectedPackages.value = emptySet() },
+                        onDeselectAll = { selectedPackages.clear() },
                         onAction = {
-                            onHideMultiple(selectedPackages.value)
+                            onHideMultiple(selectedPackages.keys.toSet())
                             isMultiSelectMode.value = false
-                            selectedPackages.value = emptySet()
+                            selectedPackages.clear()
                         },
                         actionIcon = Icons.Outlined.VisibilityOff,
                         actionContentDescription = stringResource(R.string.hide),
                         actionDoneMessage = stringResource(R.string.hidden),
                         onCancel = {
                             isMultiSelectMode.value = false
-                            selectedPackages.value = emptySet()
+                            selectedPackages.clear()
                         },
                         onEnterReorder = {
                             isMultiSelectMode.value = false
-                            selectedPackages.value = emptySet()
+                            selectedPackages.clear()
                             isReorderMode.value = true
                         },
                         onSaveOrder = {
@@ -2554,15 +2546,13 @@ internal fun HiddenAppsDialog(
 ) {
     val itemSpacing = rememberWindowSize().itemSpacing
     val isMultiSelectMode = remember { mutableStateOf(false) }
-    val selectedPackages = remember { mutableStateOf(emptySet<String>()) }
+    val selectedPackages = rememberSelectionState<String>()
 
     // Sync selection with current item list; exit mode if no items remain
     LaunchedEffect(hiddenAppItems) {
-        val filtered = selectedPackages.value.filter { pkg ->
-            hiddenAppItems.any { it.packageName == pkg }
-        }.toSet()
-        selectedPackages.value = filtered
-        if (filtered.isEmpty()) isMultiSelectMode.value = false
+        val currentPackages = hiddenAppItems.mapTo(mutableSetOf()) { it.packageName }
+        selectedPackages.retain { it in currentPackages }
+        if (selectedPackages.isEmpty) isMultiSelectMode.value = false
     }
 
     val view = LocalView.current
@@ -2597,7 +2587,7 @@ internal fun HiddenAppsDialog(
         onDismissRequest = {
             if (isMultiSelectMode.value) {
                 isMultiSelectMode.value = false
-                selectedPackages.value = emptySet()
+                selectedPackages.clear()
             } else {
                 onDismiss()
             }
@@ -2607,18 +2597,18 @@ internal fun HiddenAppsDialog(
         footer = {
             if (isMultiSelectMode.value) {
                 MultiSelectBar(
-                    selectedCount = selectedPackages.value.size,
+                    selectedCount = selectedPackages.size,
                     totalCount = hiddenAppItems.size,
                     visible = true,
                     showReorderButton = false,
                     onSelectAll = {
-                        selectedPackages.value = hiddenAppItems.map { it.packageName }.toSet()
+                        selectedPackages.setAll(hiddenAppItems.map { it.packageName })
                     },
-                    onDeselectAll = { selectedPackages.value = emptySet() },
+                    onDeselectAll = { selectedPackages.clear() },
                     onAction = {
-                        onUnhideMultiple(selectedPackages.value)
+                        onUnhideMultiple(selectedPackages.keys.toSet())
                         isMultiSelectMode.value = false
-                        selectedPackages.value = emptySet()
+                        selectedPackages.clear()
                     },
                     actionIcon = Icons.Outlined.Visibility,
                     actionContentDescription = stringResource(R.string.unhide),
@@ -2629,7 +2619,7 @@ internal fun HiddenAppsDialog(
                     ),
                     onCancel = {
                         isMultiSelectMode.value = false
-                        selectedPackages.value = emptySet()
+                        selectedPackages.clear()
                     },
                     onEnterReorder = {},
                     onSaveOrder = {},
@@ -2661,7 +2651,7 @@ internal fun HiddenAppsDialog(
                     items = hiddenAppItems,
                     key = { it.packageName }
                 ) { item ->
-                    val isSelected = item.packageName in selectedPackages.value
+                    val isSelected = selectedPackages.contains(item.packageName)
                     val offsetX = remember(item.packageName) { Animatable(0f) }
 
                     // Snap card back when entering multi-select
@@ -2703,10 +2693,7 @@ internal fun HiddenAppsDialog(
                                 enabled = true,
                                 onClick = {
                                     if (isMultiSelectMode.value) {
-                                        selectedPackages.value = if (isSelected)
-                                            selectedPackages.value - item.packageName
-                                        else
-                                            selectedPackages.value + item.packageName
+                                        selectedPackages.toggle(item.packageName)
                                     } else {
                                         onUnhide(item.packageName)
                                     }
@@ -2714,10 +2701,7 @@ internal fun HiddenAppsDialog(
                                 onLongClick = {
                                     view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                                     isMultiSelectMode.value = true
-                                    selectedPackages.value = if (isSelected)
-                                        selectedPackages.value - item.packageName
-                                    else
-                                        selectedPackages.value + item.packageName
+                                    selectedPackages.toggle(item.packageName)
                                 },
                                 modifier = Modifier.fillMaxWidth()
                             ) {

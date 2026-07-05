@@ -456,8 +456,8 @@ private fun ApkManagementDialogContent(
     val scope = rememberCoroutineScope()
     var showDeleteAllConfirmation by remember { mutableStateOf(false) }
     var showDeleteSelectedConfirmation by remember { mutableStateOf(false) }
-    val selectedKeys = remember { mutableStateListOf<String>() }
-    val selectedItems = items.filter { it.selectionKey in selectedKeys }
+    val selection = rememberSelectionState<String>()
+    val selectedItems = items.filter { selection.contains(it.selectionKey) }
     val selectedFiles = selectedItems.mapNotNull { item -> item.file?.takeIf { it.exists() } }
     val selectedTotalSize = selectedItems.sumOf { it.fileSize }
     val selectionTitle = if (selectedItems.isNotEmpty()) {
@@ -477,7 +477,7 @@ private fun ApkManagementDialogContent(
 
     LaunchedEffect(items) {
         val currentKeys = items.map { it.selectionKey }.toSet()
-        selectedKeys.removeAll { it !in currentKeys }
+        selection.retain { it in currentKeys }
     }
 
     val zipExportLauncher = rememberLauncherForActivityResult(
@@ -537,10 +537,7 @@ private fun ApkManagementDialogContent(
                         ) {
                             val selectAllLabel = stringResource(R.string.select_all)
                             ActionPillButton(
-                                onClick = {
-                                    selectedKeys.clear()
-                                    selectedKeys += items.map { it.selectionKey }
-                                },
+                                onClick = { selection.setAll(items.map { it.selectionKey }) },
                                 icon = Icons.Outlined.DoneAll,
                                 contentDescription = selectAllLabel,
                                 tooltip = selectAllLabel,
@@ -589,7 +586,7 @@ private fun ApkManagementDialogContent(
 
                             val deselectAllLabel = stringResource(R.string.deselect_all)
                             ActionPillButton(
-                                onClick = { selectedKeys.clear() },
+                                onClick = { selection.clear() },
                                 icon = Icons.Outlined.Close,
                                 contentDescription = deselectAllLabel,
                                 tooltip = deselectAllLabel,
@@ -623,18 +620,12 @@ private fun ApkManagementDialogContent(
                 isLoading -> items(3) { ShimmerApkItem() }
                 isEmpty -> item { EmptyState(message = emptyMessage) }
                 else -> items(items = items, key = { it.selectionKey }) { item ->
-                    val selected = item.selectionKey in selectedKeys
+                    val selected = selection.contains(item.selectionKey)
                     ApkItemCard(
                         data = item,
                         selected = selected,
                         selectionMode = selectedItems.isNotEmpty(),
-                        onToggleSelection = {
-                            if (item.selectionKey in selectedKeys) {
-                                selectedKeys -= item.selectionKey
-                            } else {
-                                selectedKeys += item.selectionKey
-                            }
-                        },
+                        onToggleSelection = { selection.toggle(item.selectionKey) },
                         onShare = if (item.file != null) { { onShare?.invoke(item) } } else null,
                         onExport = if (item.file != null) { { onExport?.invoke(item) } } else null,
                         onInstall = if (item.file != null && onInstall != null) { { onInstall(item) } } else null,
@@ -670,7 +661,7 @@ private fun ApkManagementDialogContent(
             onDismiss = { showDeleteSelectedConfirmation = false },
             onConfirm = {
                 onDeleteSelectedConfirm(selectedItems)
-                selectedKeys.clear()
+                selection.clear()
                 showDeleteSelectedConfirmation = false
             }
         )
