@@ -20,7 +20,6 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
@@ -105,6 +104,12 @@ private data class ApkItemDataWithApp(
     )
 }
 
+/** Pairs a rendered [ApkItemData] with the underlying [OriginalApk] row. */
+private data class OriginalApkEntry(
+    val data: ApkItemData,
+    val apk: OriginalApk
+)
+
 /**
  * Universal dialog for managing APK files (patched or original).
  */
@@ -175,6 +180,13 @@ private fun PatchedApksContent(
     val totalSize = remember(apkItems) { apkItems.sumOf { it.fileSize } }
     val itemToDelete = remember { mutableStateOf<InstalledApp?>(null) }
 
+    // Resolve callbacks by selectionKey so a concurrent apkItems update between
+    // dialog interaction and confirmation cannot shift indexes onto the wrong app
+    val displayItems = remember(apkItems) { apkItems.map { it.toApkItemData() } }
+    val appByKey = remember(apkItems) {
+        apkItems.associate { it.toApkItemData().selectionKey to it.installedApp }
+    }
+
     var itemToExport by remember { mutableStateOf<ApkItemData?>(null) }
     val exportLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument(APK_MIMETYPE)
@@ -198,13 +210,13 @@ private fun PatchedApksContent(
     ApkManagementDialogContent(
         title = stringResource(R.string.settings_system_patched_apks_title),
         icon = Icons.Outlined.Apps,
-        count = apkItems.size,
+        count = displayItems.size,
         totalSize = totalSize,
         isLoading = isLoading,
-        isEmpty = apkItems.isEmpty() && !isLoading,
+        isEmpty = displayItems.isEmpty() && !isLoading,
         emptyMessage = stringResource(R.string.settings_system_patched_apks_empty),
         onDismissRequest = onDismissRequest,
-        items = apkItems.map { it.toApkItemData() },
+        items = displayItems,
         zipExportFileName = stringResource(R.string.settings_system_patched_apks_export_zip_name),
         onShare = { item ->
             item.file?.let { file ->
@@ -251,11 +263,11 @@ private fun PatchedApksContent(
                 }
             }
         },
-        onDelete = { index ->
-            itemToDelete.value = apkItems[index].installedApp
+        onDelete = { item ->
+            itemToDelete.value = appByKey[item.selectionKey] ?: return@ApkManagementDialogContent
         },
-        onDeleteSelectedConfirm = { selectedIndexes ->
-            val appsToDelete = selectedIndexes.map { apkItems[it].installedApp }
+        onDeleteSelectedConfirm = { selectedItems ->
+            val appsToDelete = selectedItems.mapNotNull { appByKey[it.selectionKey] }
             scope.launch {
                 appsToDelete.forEach { repository.delete(it) }
                 context.toast(apksDeletedAllText)
@@ -307,32 +319,38 @@ private fun OriginalApksContent(
     // Track loading state
     var isLoading by remember { mutableStateOf(true) }
 
-    // Pre-resolve all app data in a single effect
-    val apkItems by produceState(
+    // Pre-resolve all app data in a single effect and keep the raw OriginalApk
+    // alongside each rendered ApkItemData so callbacks can resolve rows by
+    // selectionKey without relying on positional indexes
+    val entries by produceState<List<OriginalApkEntry>>(
         initialValue = emptyList(),
         key1 = originalApks
     ) {
         isLoading = true
         value = withContext(Dispatchers.IO) {
             originalApks.map { apk ->
-                // Use AppDataResolver to get data
                 val resolvedData = appDataResolver.resolveAppData(
                     apk.packageName,
                     preferredSource = AppDataSource.ORIGINAL_APK
                 )
 
-                ApkItemData(
-                    packageName = apk.packageName,
-                    displayName = resolvedData.displayName,
-                    version = apk.version,
-                    fileSize = apk.fileSize,
-                    file = File(apk.filePath).takeIf { it.exists() }
+                OriginalApkEntry(
+                    data = ApkItemData(
+                        packageName = apk.packageName,
+                        displayName = resolvedData.displayName,
+                        version = apk.version,
+                        fileSize = apk.fileSize,
+                        file = File(apk.filePath).takeIf { it.exists() }
+                    ),
+                    apk = apk
                 )
             }
         }
         isLoading = false
     }
 
+    val apkItems = remember(entries) { entries.map { it.data } }
+    val apkByKey = remember(entries) { entries.associate { it.data.selectionKey to it.apk } }
     val totalSize = remember(apkItems) { apkItems.sumOf { it.fileSize } }
     val itemToDelete = remember { mutableStateOf<OriginalApk?>(null) }
 
@@ -389,11 +407,11 @@ private fun OriginalApksContent(
             exportLauncher.launch("${item.displayName.replace(" ", "_")}.apk")
         },
         onInstall = null,
-        onDelete = { index ->
-            itemToDelete.value = originalApks[index]
+        onDelete = { item ->
+            itemToDelete.value = apkByKey[item.selectionKey] ?: return@ApkManagementDialogContent
         },
-        onDeleteSelectedConfirm = { selectedIndexes ->
-            val apksToDelete = selectedIndexes.map { originalApks[it] }
+        onDeleteSelectedConfirm = { selectedItems ->
+            val apksToDelete = selectedItems.mapNotNull { apkByKey[it.selectionKey] }
             scope.launch {
                 apksToDelete.forEach { repository.delete(it) }
                 context.toast(apksDeletedAllText)
@@ -401,7 +419,7 @@ private fun OriginalApksContent(
         },
         deleteAllTitle = stringResource(R.string.settings_system_original_apks_delete_all_title),
         onDeleteAllConfirm = {
-            val apksToDelete = originalApks
+            val apksToDelete = entries.map { it.apk }
             scope.launch {
                 apksToDelete.forEach { repository.delete(it) }
                 context.toast(apksDeletedAllText)
@@ -443,8 +461,8 @@ private fun ApkManagementDialogContent(
     onShare: ((ApkItemData) -> Unit)?,
     onExport: ((ApkItemData) -> Unit)?,
     onInstall: ((ApkItemData) -> Unit)?,
-    onDelete: (Int) -> Unit,
-    onDeleteSelectedConfirm: (List<Int>) -> Unit,
+    onDelete: (ApkItemData) -> Unit,
+    onDeleteSelectedConfirm: (List<ApkItemData>) -> Unit,
     deleteAllTitle: String?,
     onDeleteAllConfirm: (() -> Unit)?
 ) {
@@ -621,7 +639,7 @@ private fun ApkManagementDialogContent(
                 // Show shimmer while loading
                 isLoading -> items(3) { ShimmerApkItem() }
                 isEmpty -> item { EmptyState(message = emptyMessage) }
-                else -> itemsIndexed(items = items, key = { _, item -> item.selectionKey }) { index, item ->
+                else -> items(items = items, key = { it.selectionKey }) { item ->
                     val selected = item.selectionKey in selectedKeys
                     ApkItemCard(
                         data = item,
@@ -637,7 +655,7 @@ private fun ApkManagementDialogContent(
                         onShare = if (item.file != null) { { onShare?.invoke(item) } } else null,
                         onExport = if (item.file != null) { { onExport?.invoke(item) } } else null,
                         onInstall = if (item.file != null && onInstall != null) { { onInstall(item) } } else null,
-                        onDelete = { onDelete(index) }
+                        onDelete = { onDelete(item) }
                     )
                 }
             }
@@ -660,9 +678,6 @@ private fun ApkManagementDialogContent(
     }
 
     if (showDeleteSelectedConfirmation) {
-        val selectedIndexes = items.mapIndexedNotNull { index, item ->
-            index.takeIf { item.selectionKey in selectedKeys }
-        }
         DeleteAllConfirmationDialog(
             title = stringResource(R.string.settings_system_apks_delete_selected_title),
             message = stringResource(R.string.settings_system_apks_delete_selected_confirm),
@@ -671,7 +686,7 @@ private fun ApkManagementDialogContent(
             totalSize = selectedTotalSize,
             onDismiss = { showDeleteSelectedConfirmation = false },
             onConfirm = {
-                onDeleteSelectedConfirm(selectedIndexes)
+                onDeleteSelectedConfirm(selectedItems)
                 selectedKeys.clear()
                 showDeleteSelectedConfirmation = false
             }
