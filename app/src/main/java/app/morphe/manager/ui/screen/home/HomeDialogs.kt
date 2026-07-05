@@ -76,7 +76,7 @@ fun HomeDialogs(
 
     // APK selection processing overlay - blocks interaction while APK is loaded/validated in background
     MorpheOverlay(visible = homeViewModel.processingApkSelection) {
-        PulsingLogoIndicator()
+        PulsingLogoWithCaption(caption = stringResource(R.string.processing_apk))
     }
 
     // Dialog 1: APK availability

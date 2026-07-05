@@ -411,7 +411,7 @@ fun HeaderCreatorDialog(
                 }
             }
             MorpheContentOverlay(visible = isCreating) {
-                PulsingLogoIndicator()
+                PulsingLogoWithCaption(caption = stringResource(R.string.creating))
             }
         }
     }

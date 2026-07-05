@@ -84,6 +84,6 @@ fun ChangelogDialog(
     }
 
     MorpheOverlay(visible = updateViewModel.isLoadingOlderEntries) {
-        PulsingLogoIndicator()
+        PulsingLogoWithCaption(caption = stringResource(R.string.loading_older_releases))
     }
 }

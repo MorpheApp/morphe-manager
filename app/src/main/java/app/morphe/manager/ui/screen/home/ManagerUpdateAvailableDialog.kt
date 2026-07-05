@@ -176,7 +176,6 @@ fun ManagerUpdateDetailsDialog(
         }
     ) {
         val textColor = LocalDialogTextColor.current
-        val secondaryColor = LocalDialogSecondaryTextColor.current
 
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             when (state) {
@@ -190,19 +189,9 @@ fun ManagerUpdateDetailsDialog(
                 }
 
                 UpdateViewModel.State.INSTALLING -> item("installing") {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(20.dp)
-                    ) {
-                        PulsingLogoIndicator()
-                        Text(
-                            text = stringResource(R.string.installing_manager_update),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = secondaryColor,
-                            textAlign = TextAlign.Center
-                        )
-                    }
+                    PulsingLogoWithCaption(
+                        caption = stringResource(R.string.installing_manager_update)
+                    )
                 }
 
                 UpdateViewModel.State.FAILED -> {
@@ -323,7 +312,7 @@ fun ManagerUpdateDetailsDialog(
     }
 
     MorpheOverlay(visible = updateViewModel.isLoadingOlderEntries) {
-        PulsingLogoIndicator()
+        PulsingLogoWithCaption(caption = stringResource(R.string.loading_older_releases))
     }
 
     // Internet check dialog

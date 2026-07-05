@@ -1297,7 +1297,7 @@ fun BundleChangelogDialog(
     }
 
     MorpheOverlay(visible = olderState is OlderBundleState.Loading) {
-        PulsingLogoIndicator()
+        PulsingLogoWithCaption(caption = stringResource(R.string.loading_older_releases))
     }
 }
 

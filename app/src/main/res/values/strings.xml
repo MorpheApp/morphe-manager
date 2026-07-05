@@ -874,6 +874,10 @@ The image dimensions must be as follows:
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
     <string name="loading">Loading…</string>
+    <string name="loading_older_releases">Loading older releases…</string>
+    <string name="creating">Creating…</string>
+    <string name="processing_apk">Processing APK…</string>
+    <string name="exporting_apks">Exporting APKs…</string>
     <string name="not_installed">Not installed</string>
     <string name="view">View</string>
     <string name="search">Search</string>

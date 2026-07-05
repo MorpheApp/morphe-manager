@@ -532,7 +532,7 @@ fun AdaptiveIconCreatorDialog(
                 }
             }
             MorpheContentOverlay(visible = isCreating) {
-                PulsingLogoIndicator()
+                PulsingLogoWithCaption(caption = stringResource(R.string.creating))
             }
         }
     }

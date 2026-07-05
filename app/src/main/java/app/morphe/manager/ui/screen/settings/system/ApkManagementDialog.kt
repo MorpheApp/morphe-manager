@@ -622,7 +622,7 @@ private fun ApkManagementDialogContent(
     }
 
     MorpheOverlay(visible = isExporting) {
-        PulsingLogoIndicator()
+        PulsingLogoWithCaption(caption = stringResource(R.string.exporting_apks))
     }
 
     if (showDeleteAllConfirmation && deleteAllTitle != null && onDeleteAllConfirm != null) {
