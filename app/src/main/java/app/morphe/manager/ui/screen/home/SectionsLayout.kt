@@ -1447,63 +1447,6 @@ private fun HomeSearchTextField(
 }
 
 /**
- * App card with optional selection overlay - shared between [DynamicAppCard] and [HiddenAppsDialog].
- *
- * Renders [AppCardLayout] with the given [content], and overlays an animated checkmark badge
- * when [isSelected] is true. Dims the card when [isMultiSelectMode] is active but this card
- * is not selected.
- */
-@Composable
-private fun SelectableAppCard(
-    modifier: Modifier = Modifier,
-    isSelected: Boolean,
-    isMultiSelectMode: Boolean,
-    content: @Composable () -> Unit
-) {
-    val checkScale by animateFloatAsState(
-        targetValue = if (isSelected) 1f else 0f,
-        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMedium),
-        label = "check_scale"
-    )
-    val cardAlpha by animateFloatAsState(
-        targetValue = if (isMultiSelectMode && !isSelected) 0.55f else 1f,
-        animationSpec = tween(200),
-        label = "card_alpha"
-    )
-
-    Box(modifier = modifier) {
-        Box(modifier = Modifier.graphicsLayer { alpha = cardAlpha }) {
-            content()
-        }
-
-        // Animated checkmark badge - top-right corner
-        if (checkScale > 0f) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(top = 8.dp, end = 8.dp)
-                    .graphicsLayer { scaleX = checkScale; scaleY = checkScale }
-            ) {
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(28.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Outlined.Check,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimary,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-/**
  * Single dynamic app card with horizontal swipe gestures:
  * - Swipe LEFT  → reveal hide action
  * - Swipe RIGHT → reveal patches dialog
@@ -1612,9 +1555,9 @@ private fun DynamicAppCard(
                 )
             }
         ) {
-            SelectableAppCard(
+            SelectableCard(
                 isSelected = isSelected,
-                isMultiSelectMode = isMultiSelectMode
+                isSelectionMode = isMultiSelectMode
             ) {
                 Crossfade(
                     targetState = isLoading,
@@ -2726,14 +2669,14 @@ internal fun HiddenAppsDialog(
                         if (isMultiSelectMode.value) offsetX.animateTo(0f, tween(200))
                     }
 
-                    SelectableAppCard(
+                    SelectableCard(
                         modifier = Modifier.animateItem(
                             fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
                             fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
                             placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
                         ),
                         isSelected = isSelected,
-                        isMultiSelectMode = isMultiSelectMode.value
+                        isSelectionMode = isMultiSelectMode.value
                     ) {
                         SwipeableCardContainer(
                             offsetX = offsetX,
