@@ -96,7 +96,7 @@ fun PulsingLogoWithCaption(
         PulsingLogoIndicator(size = size, contentDescription = caption)
         Text(
             text = caption,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
