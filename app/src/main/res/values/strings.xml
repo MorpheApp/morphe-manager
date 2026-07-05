@@ -796,6 +796,7 @@ The image dimensions must be as follows:
     <string name="settings_system_patch_selections_description">Saved patch selections, retained after uninstall</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Reset all selections?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Reset package selections?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Reset selected selections?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Reset source selection?</string>
     <string name="settings_system_patch_selection_no_saved">No saved patch selections</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s across %2$s</string>
