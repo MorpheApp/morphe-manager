@@ -66,6 +66,7 @@ fun SelectionActionBar(
     totalCount: Int,
     onSelectAll: () -> Unit,
     modifier: Modifier = Modifier,
+    subtitle: String? = null,
     onDeselectAll: (() -> Unit)? = null,
     onCancel: (() -> Unit)? = null,
     actions: @Composable () -> Unit = {}
@@ -98,6 +99,20 @@ fun SelectionActionBar(
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
+        }
+
+        if (subtitle != null) {
+            AnimatedContent(
+                targetState = subtitle,
+                transitionSpec = MorpheAnimations.compactCounterTransitionSpec,
+                label = "selection_subtitle"
+            ) { text ->
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.75f)
+                )
+            }
         }
 
         ActionPillRow {

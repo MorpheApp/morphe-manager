@@ -460,8 +460,6 @@ private fun ApkManagementDialogContent(
     val selectedItems = items.filter { selection.contains(it.selectionKey) }
     val selectedFiles = selectedItems.mapNotNull { item -> item.file?.takeIf { it.exists() } }
     val selectedTotalSize = selectedItems.sumOf { it.fileSize }
-    val summaryCount = if (selectedItems.isNotEmpty()) selectedItems.size else count
-    val summarySize = if (selectedItems.isNotEmpty()) selectedTotalSize else totalSize
     val zipExportSuccessText = stringResource(R.string.settings_system_apks_export_zip_success)
     val zipExportFailedText = stringResource(R.string.settings_system_apks_export_zip_failed)
     var zipExportItems by remember { mutableStateOf<List<ApkItemData>>(emptyList()) }
@@ -517,6 +515,10 @@ private fun ApkManagementDialogContent(
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
                         selectedCount = selectedItems.size,
                         totalCount = items.size,
+                        subtitle = stringResource(
+                            R.string.settings_system_apks_size,
+                            formatBytes(selectedTotalSize)
+                        ),
                         onSelectAll = { selection.setAll(items.map { it.selectionKey }) },
                         onCancel = { selection.clear() }
                     ) {
@@ -579,15 +581,15 @@ private fun ApkManagementDialogContent(
                 InfoBox(
                     title = pluralStringResource(
                         R.plurals.settings_system_apks_count,
-                        summaryCount,
-                        summaryCount
+                        count,
+                        count
                     ),
                     containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
                     titleColor = MaterialTheme.colorScheme.primary,
                     icon = icon
                 ) {
                     Text(
-                        text = stringResource(R.string.settings_system_apks_size, formatBytes(summarySize)),
+                        text = stringResource(R.string.settings_system_apks_size, formatBytes(totalSize)),
                         style = MaterialTheme.typography.bodyMedium,
                         color = LocalDialogSecondaryTextColor.current
                     )
