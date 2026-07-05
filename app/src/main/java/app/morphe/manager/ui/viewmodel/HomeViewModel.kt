@@ -923,7 +923,7 @@ class HomeViewModel(
         installedApps.forEach { app ->
             // Get stored bundle versions for this app
             val storedVersions = installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
-            val appName = resolveChangelogName(app.originalPackageName)
+            val appNames = resolveChangelogNames(app.originalPackageName)
 
             // Check if any bundle used for this app has been updated
             val hasUpdate = storedVersions.any { (bundleUid, storedVersion) ->
@@ -932,14 +932,14 @@ class HomeViewModel(
 
                 // Bundle is newer - refine with changelog if available.
                 // No changelog (null) → show badge (network error or local bundle).
-                // Unknown app name (null) → show badge (can't match scopes).
+                // No resolvable app name → show badge (can't match scopes).
                 // Known name, no matching scope → no badge.
                 val entries = changelogByUid[bundleUid] ?: return@any true
-                if (appName == null) return@any true
+                if (appNames.isEmpty()) return@any true
                 ChangelogParser.hasChangesFor(
                     entries = entries,
                     installedVersion = storedVersion,
-                    appName = appName,
+                    appNames = appNames,
                 )
             }
 
@@ -950,14 +950,25 @@ class HomeViewModel(
     }
 
     /**
-     * Resolves the changelog scope name for [packageName].
-     * 1. [KnownApps.fallbackName] - static registry (offline, reliable).
-     * 2. [PM] label - system label for any installed app not in the registry.
-     * Returns null when neither source yields a name.
+     * Resolves candidate changelog scope names for [packageName].
+     *
+     * Returns the union of:
+     *  1. Bundle Compatibility declaration displayName (canonical, not localized,
+     *     controlled by the same author who writes the changelog scopes).
+     *     Falls back to [KnownApps.fallbackName] inside [BundleAppMetadata.buildFrom].
+     *  2. System PM label (localized, may differ per user locale).
+     *
+     * Matching against any candidate is enough. This handles the common case where
+     * the PM label is localized ("Шахи") while the changelog scope uses the
+     * canonical English name ("Chess.com"), and also tolerates author drift when
+     * the bundle displayName and the changelog scope diverge slightly.
      */
-    private fun resolveChangelogName(packageName: String): String? =
-        KnownApps.fallbackName(packageName)
-            ?: pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } }
+    private fun resolveChangelogNames(packageName: String): Set<String> {
+        val names = mutableSetOf<String>()
+        bundleAppMetadataFlow.value[packageName]?.displayName?.let { names += it }
+        pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } }?.let { names += it }
+        return names
+    }
 
     @SuppressLint("ShowToast")
     private suspend fun <T> withPersistentImportToast(block: suspend () -> T): T = coroutineScope {
