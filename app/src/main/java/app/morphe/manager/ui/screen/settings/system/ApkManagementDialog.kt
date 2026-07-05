@@ -308,8 +308,8 @@ private fun OriginalApksContent(
     var isLoading by remember { mutableStateOf(true) }
 
     // Pair raw OriginalApk with each rendered ApkItemData so callbacks resolve by key
-    val entries by produceState<List<OriginalApkEntry>>(
-        initialValue = emptyList(),
+    val entries by produceState(
+        initialValue = emptyList<OriginalApkEntry>(),
         key1 = originalApks
     ) {
         isLoading = true
@@ -460,15 +460,6 @@ private fun ApkManagementDialogContent(
     val selectedItems = items.filter { selection.contains(it.selectionKey) }
     val selectedFiles = selectedItems.mapNotNull { item -> item.file?.takeIf { it.exists() } }
     val selectedTotalSize = selectedItems.sumOf { it.fileSize }
-    val selectionTitle = if (selectedItems.isNotEmpty()) {
-        pluralStringResource(
-            R.plurals.settings_system_apks_selected_count,
-            selectedItems.size,
-            selectedItems.size
-        )
-    } else {
-        title
-    }
     val summaryCount = if (selectedItems.isNotEmpty()) selectedItems.size else count
     val summarySize = if (selectedItems.isNotEmpty()) selectedTotalSize else totalSize
     val zipExportSuccessText = stringResource(R.string.settings_system_apks_export_zip_success)
@@ -496,7 +487,7 @@ private fun ApkManagementDialogContent(
 
     MorpheDialog(
         onDismissRequest = onDismissRequest,
-        title = selectionTitle,
+        title = title,
         titleTrailingContent = if (selectedItems.isEmpty() && items.isNotEmpty() && onDeleteAllConfirm != null) {
             {
                 IconButton(onClick = { showDeleteAllConfirmation = true }) {
@@ -511,11 +502,61 @@ private fun ApkManagementDialogContent(
             null
         },
         footer = {
-            MorpheDialogOutlinedButton(
-                text = stringResource(R.string.close),
-                onClick = onDismissRequest,
-                modifier = Modifier.fillMaxWidth()
-            )
+            if (selectedItems.isNotEmpty()) {
+                MultiSelectShell(visible = true) {
+                    SelectionActionBar(
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+                        selectedCount = selectedItems.size,
+                        totalCount = items.size,
+                        onSelectAll = { selection.setAll(items.map { it.selectionKey }) },
+                        onCancel = { selection.clear() }
+                    ) {
+                        if (selectedFiles.isNotEmpty()) {
+                            val shareLabel = stringResource(R.string.share)
+                            ActionPillButton(
+                                onClick = {
+                                    scope.launch {
+                                        shareApkFiles(context, selectedFiles)
+                                    }
+                                },
+                                icon = Icons.Outlined.Share,
+                                contentDescription = shareLabel,
+                                tooltip = shareLabel
+                            )
+
+                            val exportLabel = stringResource(R.string.export)
+                            ActionPillButton(
+                                onClick = {
+                                    zipExportItems = selectedItems
+                                    zipExportLauncher.launch(timestampedZipFileName(zipExportFileName))
+                                },
+                                icon = Icons.Outlined.Upload,
+                                contentDescription = exportLabel,
+                                tooltip = exportLabel
+                            )
+                        }
+
+                        val deleteLabel = stringResource(R.string.delete)
+                        ActionPillButton(
+                            onClick = { showDeleteSelectedConfirmation = true },
+                            icon = Icons.Outlined.Delete,
+                            contentDescription = deleteLabel,
+                            tooltip = deleteLabel,
+                            enabled = selectedItems.isNotEmpty(),
+                            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                containerColor = MaterialTheme.colorScheme.errorContainer,
+                                contentColor = MaterialTheme.colorScheme.onErrorContainer
+                            )
+                        )
+                    }
+                }
+            } else {
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.close),
+                    onClick = onDismissRequest,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         },
         scrollable = false,
         compactPadding = true
@@ -526,91 +567,21 @@ private fun ApkManagementDialogContent(
         ) {
             // Summary box
             item(key = "summary") {
-                Column {
-                    AnimatedVisibility(
-                        visible = selectedItems.isNotEmpty(),
-                        enter = MorpheAnimations.expandFadeEnter,
-                        exit = MorpheAnimations.shrinkFadeExit
-                    ) {
-                        ActionPillRow(
-                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = MorpheDefaults.ItemSpacing)
-                        ) {
-                            val selectAllLabel = stringResource(R.string.select_all)
-                            ActionPillButton(
-                                onClick = { selection.setAll(items.map { it.selectionKey }) },
-                                icon = Icons.Outlined.DoneAll,
-                                contentDescription = selectAllLabel,
-                                tooltip = selectAllLabel,
-                                enabled = selectedItems.isNotEmpty() && selectedItems.size < items.size
-                            )
-
-                            if (selectedFiles.isNotEmpty()) {
-                                val shareLabel = stringResource(R.string.share)
-                                ActionPillButton(
-                                    onClick = {
-                                        scope.launch {
-                                            shareApkFiles(context, selectedFiles)
-                                        }
-                                    },
-                                    icon = Icons.Outlined.Share,
-                                    contentDescription = shareLabel,
-                                    tooltip = shareLabel
-                                )
-
-                                val exportLabel = stringResource(R.string.export)
-                                ActionPillButton(
-                                    onClick = {
-                                        zipExportItems = selectedItems
-                                        zipExportLauncher.launch(timestampedZipFileName(zipExportFileName))
-                                    },
-                                    icon = Icons.Outlined.Upload,
-                                    contentDescription = exportLabel,
-                                    tooltip = exportLabel
-                                )
-                            }
-
-                            val deleteLabel = stringResource(R.string.delete)
-                            ActionPillButton(
-                                onClick = {
-                                    if (selectedItems.isNotEmpty()) showDeleteSelectedConfirmation = true
-                                },
-                                icon = Icons.Outlined.Delete,
-                                contentDescription = deleteLabel,
-                                tooltip = deleteLabel,
-                                enabled = selectedItems.isNotEmpty(),
-                                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                                    contentColor = MaterialTheme.colorScheme.onErrorContainer
-                                )
-                            )
-
-                            val deselectAllLabel = stringResource(R.string.deselect_all)
-                            ActionPillButton(
-                                onClick = { selection.clear() },
-                                icon = Icons.Outlined.Close,
-                                contentDescription = deselectAllLabel,
-                                tooltip = deselectAllLabel,
-                                enabled = selectedItems.isNotEmpty()
-                            )
-                        }
-                    }
-
-                    InfoBox(
-                        title = pluralStringResource(
-                            R.plurals.settings_system_apks_count,
-                            summaryCount,
-                            summaryCount
-                        ),
-                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                        titleColor = MaterialTheme.colorScheme.primary,
-                        icon = icon
-                    ) {
-                        Text(
-                            text = stringResource(R.string.settings_system_apks_size, formatBytes(summarySize)),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = LocalDialogSecondaryTextColor.current
-                        )
-                    }
+                InfoBox(
+                    title = pluralStringResource(
+                        R.plurals.settings_system_apks_count,
+                        summaryCount,
+                        summaryCount
+                    ),
+                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                    titleColor = MaterialTheme.colorScheme.primary,
+                    icon = icon
+                ) {
+                    Text(
+                        text = stringResource(R.string.settings_system_apks_size, formatBytes(summarySize)),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = LocalDialogSecondaryTextColor.current
+                    )
                 }
             }
 

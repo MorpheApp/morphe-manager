@@ -1657,10 +1657,6 @@ private fun MultiSelectBar(
         action()
     }
 
-    val selectAllLabel = stringResource(R.string.select_all)
-    val selectAllDone = stringResource(R.string.select_all_done)
-    val deselectAllLabel = stringResource(R.string.deselect_all)
-    val deselectAllDone = stringResource(R.string.deselect_all_done)
     val cancelLabel = stringResource(android.R.string.cancel)
     val reorderListLabel = stringResource(R.string.reorder_list)
     val reorderListHint = stringResource(R.string.reorder_list_hint)
@@ -1669,118 +1665,70 @@ private fun MultiSelectBar(
     val resetOrderDone = stringResource(R.string.reset_order_done)
     val doneLabel = stringResource(R.string.done)
 
-    AnimatedVisibility(
-        visible = visible,
-        enter = MorpheAnimations.springSlideUpEnter,
-        exit = MorpheAnimations.springSlideDownExit,
-        modifier = modifier
-    ) {
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            shape = RoundedCornerShape(16.dp),
-            color = MaterialTheme.colorScheme.surfaceContainerHigh,
-            shadowElevation = 8.dp,
-            tonalElevation = 4.dp
-        ) {
-            AnimatedContent(
-                targetState = effectiveReorderMode,
-                transitionSpec = MorpheAnimations.fadeCrossfade(200),
-                label = "multibar_mode"
-            ) { inReorder ->
-                if (inReorder) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp, vertical = 12.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Text(
-                            text = reorderListHint,
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+    MultiSelectShell(visible = visible, modifier = modifier) {
+        AnimatedContent(
+            targetState = effectiveReorderMode,
+            transitionSpec = MorpheAnimations.fadeCrossfade(200),
+            label = "multibar_mode"
+        ) { inReorder ->
+            if (inReorder) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = reorderListHint,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    ActionPillRow {
+                        ActionPillButton(
+                            onClick = withToast(resetOrderDone, onResetOrder),
+                            icon = Icons.Outlined.Restore,
+                            contentDescription = resetOrderLabel,
+                            tooltip = resetOrderLabel
                         )
-                        ActionPillRow {
-                            ActionPillButton(
-                                onClick = withToast(resetOrderDone, onResetOrder),
-                                icon = Icons.Outlined.Restore,
-                                contentDescription = resetOrderLabel,
-                                tooltip = resetOrderLabel
-                            )
-                            ActionPillButton(
-                                onClick = onCancelReorder,
-                                icon = Icons.Outlined.Close,
-                                contentDescription = cancelLabel,
-                                tooltip = cancelLabel
-                            )
-                            ActionPillButton(
-                                onClick = withToast(reorderDone, onSaveOrder),
-                                icon = Icons.Outlined.Check,
-                                contentDescription = doneLabel,
-                                tooltip = doneLabel
-                            )
-                        }
+                        ActionPillButton(
+                            onClick = onCancelReorder,
+                            icon = Icons.Outlined.Close,
+                            contentDescription = cancelLabel,
+                            tooltip = cancelLabel
+                        )
+                        ActionPillButton(
+                            onClick = withToast(reorderDone, onSaveOrder),
+                            icon = Icons.Outlined.Check,
+                            contentDescription = doneLabel,
+                            tooltip = doneLabel
+                        )
                     }
-                } else {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp, vertical = 12.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        AnimatedContent(
-                            targetState = selectedCount,
-                            transitionSpec = MorpheAnimations.compactCounterTransitionSpec,
-                            label = "selected_count"
-                        ) { count ->
-                            Text(
-                                text = "$count ${stringResource(R.string.selected).lowercase()}",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-
-                        ActionPillRow {
-                            ActionPillButton(
-                                onClick = withToast(selectAllDone, onSelectAll),
-                                icon = Icons.Outlined.DoneAll,
-                                contentDescription = selectAllLabel,
-                                tooltip = selectAllLabel,
-                                enabled = selectedCount < totalCount
-                            )
-                            ActionPillButton(
-                                onClick = withToast(deselectAllDone, onDeselectAll),
-                                icon = Icons.Outlined.RemoveDone,
-                                contentDescription = deselectAllLabel,
-                                tooltip = deselectAllLabel,
-                                enabled = selectedCount > 0
-                            )
-                            ActionPillButton(
-                                onClick = onCancel,
-                                icon = Icons.Outlined.Close,
-                                contentDescription = cancelLabel,
-                                tooltip = cancelLabel
-                            )
-                            ActionPillButton(
-                                onClick = withToast(actionDoneMessage, onAction),
-                                icon = actionIcon,
-                                contentDescription = actionContentDescription,
-                                tooltip = actionContentDescription,
-                                enabled = selectedCount > 0,
-                                colors = actionColors
-                            )
-                            if (showReorderButton) {
-                                ActionPillButton(
-                                    onClick = onEnterReorder,
-                                    icon = Icons.Outlined.Reorder,
-                                    contentDescription = reorderListLabel,
-                                    tooltip = reorderListLabel
-                                )
-                            }
-                        }
+                }
+            } else {
+                SelectionActionBar(
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+                    selectedCount = selectedCount,
+                    totalCount = totalCount,
+                    onSelectAll = onSelectAll,
+                    onDeselectAll = onDeselectAll,
+                    onCancel = onCancel
+                ) {
+                    ActionPillButton(
+                        onClick = withToast(actionDoneMessage, onAction),
+                        icon = actionIcon,
+                        contentDescription = actionContentDescription,
+                        tooltip = actionContentDescription,
+                        enabled = selectedCount > 0,
+                        colors = actionColors
+                    )
+                    if (showReorderButton) {
+                        ActionPillButton(
+                            onClick = onEnterReorder,
+                            icon = Icons.Outlined.Reorder,
+                            contentDescription = reorderListLabel,
+                            tooltip = reorderListLabel
+                        )
                     }
                 }
             }
