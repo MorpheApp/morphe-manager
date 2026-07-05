@@ -309,7 +309,7 @@ private fun OriginalApksContent(
 
     // Pair raw OriginalApk with each rendered ApkItemData so callbacks resolve by key
     val entries by produceState(
-        initialValue = emptyList<OriginalApkEntry>(),
+        initialValue = emptyList(),
         key1 = originalApks
     ) {
         isLoading = true
