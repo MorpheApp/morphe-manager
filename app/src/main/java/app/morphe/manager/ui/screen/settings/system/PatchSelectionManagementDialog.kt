@@ -195,11 +195,18 @@ private fun PatchSelectionManagementDialogContent(
         title = stringResource(R.string.settings_system_patch_selections_title),
         titleTrailingContent = if (selections.isNotEmpty()) {
             {
-                IconButton(onClick = onShowResetAllConfirmation) {
+                FilledTonalIconButton(
+                    onClick = onShowResetAllConfirmation,
+                    modifier = Modifier.size(36.dp),
+                    colors = IconButtonDefaults.filledTonalIconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer,
+                        contentColor = MaterialTheme.colorScheme.onErrorContainer
+                    )
+                ) {
                     Icon(
                         imageVector = Icons.Outlined.Restore,
                         contentDescription = stringResource(R.string.reset),
-                        tint = LocalDialogTextColor.current
+                        modifier = Modifier.size(20.dp)
                     )
                 }
             }
