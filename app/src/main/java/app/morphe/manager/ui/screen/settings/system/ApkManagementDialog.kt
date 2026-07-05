@@ -490,11 +490,18 @@ private fun ApkManagementDialogContent(
         title = title,
         titleTrailingContent = if (selectedItems.isEmpty() && items.isNotEmpty() && onDeleteAllConfirm != null) {
             {
-                IconButton(onClick = { showDeleteAllConfirmation = true }) {
+                FilledTonalIconButton(
+                    onClick = { showDeleteAllConfirmation = true },
+                    modifier = Modifier.size(36.dp),
+                    colors = IconButtonDefaults.filledTonalIconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer,
+                        contentColor = MaterialTheme.colorScheme.onErrorContainer
+                    )
+                ) {
                     Icon(
                         imageVector = Icons.Outlined.DeleteForever,
                         contentDescription = stringResource(R.string.delete_all),
-                        tint = LocalDialogTextColor.current
+                        modifier = Modifier.size(20.dp)
                     )
                 }
             }
