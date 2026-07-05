@@ -48,11 +48,6 @@ import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.zip.ZipEntry
-import java.util.zip.ZipOutputStream
 
 /** Type of APKs to manage. */
 enum class ApkManagementType {
@@ -456,6 +451,7 @@ private fun ApkManagementDialogContent(
     val scope = rememberCoroutineScope()
     var showDeleteAllConfirmation by remember { mutableStateOf(false) }
     var showDeleteSelectedConfirmation by remember { mutableStateOf(false) }
+    var isExporting by remember { mutableStateOf(false) }
     val selection = rememberSelectionState<String>()
     val selectedItems = items.filter { selection.contains(it.selectionKey) }
     val selectedFiles = selectedItems.mapNotNull { item -> item.file?.takeIf { it.exists() } }
@@ -476,15 +472,22 @@ private fun ApkManagementDialogContent(
         zipExportItems = emptyList()
         uri ?: return@rememberLauncherForActivityResult
         scope.launch {
-            val exported = withContext(Dispatchers.IO) {
-                exportSelectedApksToZip(context, uri, itemsToExport)
+            isExporting = true
+            try {
+                val exported = withContext(Dispatchers.IO) {
+                    ZipUtils.zip(context, uri, itemsToExport.mapNotNull { it.file })
+                }
+                context.toast(if (exported) zipExportSuccessText else zipExportFailedText)
+                if (exported) selection.clear()
+            } finally {
+                isExporting = false
             }
-            context.toast(if (exported) zipExportSuccessText else zipExportFailedText)
         }
     }
 
     MorpheDialog(
         onDismissRequest = {
+            if (isExporting) return@MorpheDialog
             if (selection.isNotEmpty) selection.clear() else onDismissRequest()
         },
         title = title,
@@ -539,7 +542,7 @@ private fun ApkManagementDialogContent(
                             ActionPillButton(
                                 onClick = {
                                     zipExportItems = selectedItems
-                                    zipExportLauncher.launch(timestampedZipFileName(zipExportFileName))
+                                    zipExportLauncher.launch(FilenameUtils.timestamped(zipExportFileName))
                                 },
                                 icon = Icons.Outlined.Upload,
                                 contentDescription = exportLabel,
@@ -616,6 +619,10 @@ private fun ApkManagementDialogContent(
                 }
             }
         }
+    }
+
+    MorpheOverlay(visible = isExporting) {
+        PulsingLogoIndicator()
     }
 
     if (showDeleteAllConfirmation && deleteAllTitle != null && onDeleteAllConfirm != null) {
@@ -859,50 +866,6 @@ private suspend fun shareApkFiles(context: Context, files: List<File>) {
     try {
         context.startActivity(Intent.createChooser(intent, null))
     } catch (_: android.content.ActivityNotFoundException) { }
-}
-
-private fun exportSelectedApksToZip(
-    context: Context,
-    uri: Uri,
-    items: List<ApkItemData>
-): Boolean {
-    val files = items.mapNotNull { it.file?.takeIf { file -> file.exists() } }
-    if (files.isEmpty()) return false
-
-    return runCatching {
-        context.contentResolver.openOutputStream(uri)?.use { output ->
-            val usedNames = mutableSetOf<String>()
-            ZipOutputStream(output).use { zip ->
-                files.forEach { file ->
-                    zip.putNextEntry(ZipEntry(uniqueZipEntryName(file, usedNames)))
-                    file.inputStream().use { input -> input.copyTo(zip) }
-                    zip.closeEntry()
-                }
-            }
-        } ?: error("Failed to open export stream")
-    }.isSuccess
-}
-
-private fun timestampedZipFileName(fileName: String): String {
-    val timestamp = SimpleDateFormat("yyyy-MM-dd-HHmmss", Locale.US).format(Date())
-    val baseName = fileName.removeSuffix(".zip")
-    return "$baseName-$timestamp.zip"
-}
-
-private fun uniqueZipEntryName(file: File, usedNames: MutableSet<String>): String {
-    val originalName = file.name.ifBlank { "apk-${usedNames.size + 1}.apk" }
-    var candidate = originalName
-    val dotIndex = originalName.lastIndexOf('.')
-    val base = if (dotIndex > 0) originalName.substring(0, dotIndex) else originalName
-    val extension = if (dotIndex > 0) originalName.substring(dotIndex) else ".apk"
-    var suffix = 2
-
-    while (!usedNames.add(candidate)) {
-        candidate = "$base-$suffix$extension"
-        suffix++
-    }
-
-    return candidate
 }
 
 @Composable
