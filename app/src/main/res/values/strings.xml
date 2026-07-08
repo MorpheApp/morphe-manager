@@ -32,6 +32,17 @@
     <string name="home_update_success_subtitle">Your sources are up to date</string>
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>
     <string name="home_search_apps">Search apps</string>
+    <string name="home_app_sort_title">Sort apps</string>
+    <string name="home_app_sort_custom">Custom order</string>
+    <string name="home_app_sort_custom_description">Use your saved manual order</string>
+    <string name="home_app_sort_recommended">Recommended order</string>
+    <string name="home_app_sort_recommended_description">Installed and pinned apps first</string>
+    <string name="home_app_sort_name_asc">Name (A-Z)</string>
+    <string name="home_app_sort_name_asc_description">Sort app names from A to Z</string>
+    <string name="home_app_sort_name_desc">Name (Z-A)</string>
+    <string name="home_app_sort_name_desc_description">Sort app names from Z to A</string>
+    <string name="home_app_sort_updates_first">Patch updates first</string>
+    <string name="home_app_sort_updates_first_description">Apps with update badges first, then recommended order</string>
     <string name="home_no_apps_title">No apps available</string>
     <string name="home_no_apps_subtitle">Add a patch source or enable an existing one in %s</string>
     <string name="home_no_apps_search_subtitle">No apps match \"%s\"</string>
@@ -82,9 +93,17 @@
 
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch sources</string>
+    <string name="sources_sort_title">Sort patch sources</string>
     <string name="sources_sort_manual">Manual order</string>
     <string name="sources_sort_manual_hint">Long-press a source to reorder</string>
     <string name="sources_sort_last_updated">Last updated</string>
+    <string name="sources_sort_last_updated_description">Newest source updates first</string>
+    <string name="sources_sort_name_asc">Name (A-Z)</string>
+    <string name="sources_sort_name_asc_description">Source display names from A to Z</string>
+    <string name="sources_sort_name_desc">Name (Z-A)</string>
+    <string name="sources_sort_name_desc_description">Source display names from Z to A</string>
+    <string name="sources_sort_enabled_first">Enabled first</string>
+    <string name="sources_sort_enabled_first_description">Show active sources before disabled sources</string>
     <string name="sources_management_open_in_browser">Open in browser</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
     <string name="sources_management_prerelease_toggle">Pre-release patches</string>

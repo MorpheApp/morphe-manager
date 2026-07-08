@@ -31,6 +31,7 @@ import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOr
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
+import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
@@ -157,7 +158,14 @@ data class InstalledAppPickerItem(
  */
 data class HomeAppState(
     val visible: List<HomeAppItem>,
-    val hidden: List<HomeAppItem>
+    val hidden: List<HomeAppItem>,
+    val sortMode: HomeAppSortMode
+)
+
+private data class HomePrefs(
+    val hiddenPackages: Set<String>,
+    val customOrder: List<String>,
+    val sortMode: HomeAppSortMode
 )
 
 /**
@@ -1105,17 +1113,16 @@ class HomeViewModel(
     private val _homePrefsFlow = combine(
         homeAppButtonPrefs.hiddenPackages,
         homeAppButtonPrefs.customOrder,
-    ) { hidden, order -> Pair(hidden, order) }
+        homeAppButtonPrefs.sortMode,
+    ) { hidden, order, sortMode ->
+        HomePrefs(hiddenPackages = hidden, customOrder = order, sortMode = sortMode)
+    }
 
     /**
     * Sorted list of visible and hidden home app items.
     *
-    * Default sort order:
-    * 1. Patched (installed) apps first
-    * 2. Apps with isPinnedByDefault = true
-    * 3. All other apps, alphabetical
-    *
-    * If the user has saved a custom order it is applied on top of the default sort.
+    * Sort mode is persisted with the home app button preferences. Custom mode applies
+    * the user's saved manual order and falls back to Morphe ordering when no saved order exists.
     * Hidden apps are excluded from [HomeAppState.visible].
     */
     val homeAppState: StateFlow<HomeAppState?> = combine(
@@ -1139,7 +1146,7 @@ class HomeViewModel(
         },
         _appUpdatesAvailable,
         _appStateTicker,
-    ) { bundleState, (hiddenPackages, customOrder), installedApps, updatesMap, _ ->
+    ) { bundleState, homePrefs, installedApps, updatesMap, _ ->
         val ready = bundleState as? PatchBundleRepository.BundleState.Ready
             ?: return@combine null
 
@@ -1197,31 +1204,66 @@ class HomeViewModel(
         val allPackages = packages + universalOnlyPackages
 
         // Active bundle packages filtered to those in patchablePackages
-        val activeHidden = hiddenPackages.filter { it in allPackages }
+        val activeHidden = homePrefs.hiddenPackages.filter { it in allPackages }
 
-        val visiblePackages = allPackages.filter { it !in hiddenPackages }
+        val visiblePackages = allPackages.filter { it !in homePrefs.hiddenPackages }
         val visibleItems = ArrayList<HomeAppItem>(visiblePackages.size)
         for (pkg in visiblePackages) visibleItems.add(buildItem(pkg))
-        val defaultSorted = visibleItems.sortedWith(
-            compareByDescending<HomeAppItem> { it.installedApp != null }
-                .thenByDescending { it.isPinnedByDefault }
-                .thenByDescending { it.packageInfo != null }
-                .thenBy(String.CASE_INSENSITIVE_ORDER) { it.displayName }
+        val visible = sortHomeAppItems(
+            items = visibleItems,
+            sortMode = homePrefs.sortMode,
+            customOrder = homePrefs.customOrder
         )
-        val visible = if (customOrder.isEmpty()) {
-            defaultSorted
-        } else {
-            val indexMap = customOrder.mapIndexed { i, pkg -> pkg to i }.toMap()
-            defaultSorted.sortedBy { indexMap[it.packageName] ?: Int.MAX_VALUE }
-        }
 
         val hiddenItems = ArrayList<HomeAppItem>(activeHidden.size)
         for (pkg in activeHidden) hiddenItems.add(buildItem(pkg))
+        val hidden = sortHomeAppItems(
+            items = hiddenItems,
+            sortMode = homePrefs.sortMode,
+            customOrder = homePrefs.customOrder
+        )
 
-        HomeAppState(visible = visible, hidden = hiddenItems)
+        HomeAppState(visible = visible, hidden = hidden, sortMode = homePrefs.sortMode)
     }
         .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    private fun sortHomeAppItems(
+        items: List<HomeAppItem>,
+        sortMode: HomeAppSortMode,
+        customOrder: List<String>
+    ): List<HomeAppItem> {
+        val morpheComparator = compareByDescending<HomeAppItem> { it.installedApp != null }
+            .thenByDescending { it.isPinnedByDefault }
+            .thenByDescending { it.packageInfo != null }
+            .thenBy(String.CASE_INSENSITIVE_ORDER) { it.displayName }
+            .thenBy(String.CASE_INSENSITIVE_ORDER) { it.packageName }
+
+        return when (sortMode) {
+            HomeAppSortMode.CUSTOM -> {
+                val defaultSorted = items.sortedWith(morpheComparator)
+                if (customOrder.isEmpty()) {
+                    defaultSorted
+                } else {
+                    val indexMap = customOrder.mapIndexed { index, packageName -> packageName to index }.toMap()
+                    defaultSorted.sortedBy { indexMap[it.packageName] ?: Int.MAX_VALUE }
+                }
+            }
+            HomeAppSortMode.RECOMMENDED -> items.sortedWith(morpheComparator)
+            HomeAppSortMode.NAME_ASC -> items.sortedWith(
+                compareBy<HomeAppItem, String>(String.CASE_INSENSITIVE_ORDER) { it.displayName }
+                    .thenBy(String.CASE_INSENSITIVE_ORDER) { it.packageName }
+            )
+            HomeAppSortMode.NAME_DESC -> items.sortedWith(
+                compareByDescending<HomeAppItem> { it.displayName.lowercase() }
+                    .thenByDescending { it.packageName.lowercase() }
+            )
+            HomeAppSortMode.UPDATES_FIRST -> items.sortedWith(
+                compareByDescending<HomeAppItem> { it.hasUpdate }
+                    .then(morpheComparator)
+            )
+        }
+    }
 
     /**
      * Resets the swipe gesture hint after it has been shown.
@@ -1303,6 +1345,10 @@ class HomeViewModel(
 
     fun resetAppOrder() {
         homeAppButtonPrefs.resetOrder()
+    }
+
+    fun setAppSortMode(sortMode: HomeAppSortMode) {
+        homeAppButtonPrefs.setSortMode(sortMode)
     }
 
     /**

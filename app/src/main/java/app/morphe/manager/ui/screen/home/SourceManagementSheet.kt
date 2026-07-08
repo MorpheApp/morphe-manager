@@ -63,6 +63,7 @@ import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.gitlabAvat
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.manager.SourceBundleSortMode
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.RemoteAvatar
@@ -70,6 +71,7 @@ import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.getRelativeTimeString
 import app.morphe.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import java.util.Locale
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import sh.calvin.reorderable.ReorderableItem
@@ -105,6 +107,7 @@ fun BundleManagementSheet(
     val showSheetOnboarding = globalOnboardingState?.sheetOnboardingActive == true
 
     val bundleToDelete = remember { mutableStateOf<PatchBundleSource?>(null) }
+    var showSortDialog by remember { mutableStateOf(false) }
     // Expanded state lifted out of LazyColumn so it survives scroll-off-screen recomposition
     var expandedBundleUids by remember { mutableStateOf<Set<Int>>(emptySet()) }
 
@@ -133,14 +136,11 @@ fun BundleManagementSheet(
         val merged = existing + added
         if (merged != localOrder) localOrder = merged
     }
-    val sortMode by prefs.sourceBundleSortMode.getAsState()
-    val isLastUpdatedSort = sortMode == "LAST_UPDATED"
-    val orderedSources = remember(localOrder, sources, sortMode) {
-        if (sortMode == "LAST_UPDATED") {
-            sources.sortedByDescending { it.updatedAt ?: it.createdAt ?: 0L }
-        } else {
-            localOrder.mapNotNull { uid -> sources.find { it.uid == uid } }
-        }
+    val sortModePreference by prefs.sourceBundleSortMode.getAsState()
+    val sourceSortMode = SourceBundleSortMode.fromPreference(sortModePreference)
+    val isManualSort = sourceSortMode == SourceBundleSortMode.MANUAL
+    val orderedSources = remember(localOrder, sources, sourceSortMode) {
+        sources.sortedForSourceSort(sourceSortMode, localOrder)
     }
     val haptic = LocalHapticFeedback.current
     val reorderableState = rememberReorderableLazyListState(listState) { from, to ->
@@ -210,22 +210,12 @@ fun BundleManagementSheet(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            val manualLabel = stringResource(R.string.sources_sort_manual)
-                            val manualHint = stringResource(R.string.sources_sort_manual_hint)
-                            val lastUpdatedLabel = stringResource(R.string.sources_sort_last_updated)
-                            val activeLabel = if (isLastUpdatedSort) lastUpdatedLabel else manualLabel
+                            val activeSortLabel = sourceBundleSortModeLabel(sourceSortMode)
                             FilledIconButton(
-                                onClick = {
-                                    val next = if (isLastUpdatedSort) "MANUAL" else "LAST_UPDATED"
-                                    scope.launch { prefs.sourceBundleSortMode.update(next) }
-                                    context.toast(
-                                        if (next == "LAST_UPDATED") lastUpdatedLabel
-                                        else "$manualLabel. $manualHint"
-                                    )
-                                },
+                                onClick = { showSortDialog = true },
                                 modifier = Modifier.semantics {
                                     role = Role.Button
-                                    stateDescription = activeLabel
+                                    stateDescription = activeSortLabel
                                 },
                                 colors = IconButtonDefaults.filledIconButtonColors(
                                     containerColor = MaterialTheme.colorScheme.primaryContainer
@@ -352,9 +342,7 @@ fun BundleManagementSheet(
                                     },
                                     forceExpanded = isSingleDefaultBundle,
                                     isDragging = itemIsDragging,
-                                    longPressModifier = if (isLastUpdatedSort) {
-                                        Modifier
-                                    } else {
+                                    longPressModifier = if (isManualSort) {
                                         Modifier.longPressDraggableHandle(
                                             onDragStarted = {
                                                 isDragging = true
@@ -365,6 +353,8 @@ fun BundleManagementSheet(
                                                 onReorder(localOrder)
                                             }
                                         )
+                                    } else {
+                                        Modifier
                                     },
                                     onPatchesBtnPositioned = if (isFirstCard) { b -> globalOnboardingState?.sourcesPatchesBounds = b } else null,
                                     onVersionPositioned = if (isFirstCard) { b -> globalOnboardingState?.sourcesVersionBounds = b } else null,
@@ -379,6 +369,17 @@ fun BundleManagementSheet(
                 }
             }
         }
+    }
+
+    if (showSortDialog) {
+        SourceBundleSortDialog(
+            current = sourceSortMode,
+            onSelect = { mode ->
+                scope.launch { prefs.sourceBundleSortMode.update(mode.name) }
+                showSortDialog = false
+            },
+            onDismiss = { showSortDialog = false }
+        )
     }
 
     // Delete confirmation dialog
@@ -411,6 +412,88 @@ fun BundleManagementSheet(
         }
     }
 }
+
+@Composable
+private fun SourceBundleSortDialog(
+    current: SourceBundleSortMode,
+    onSelect: (SourceBundleSortMode) -> Unit,
+    onDismiss: () -> Unit
+) {
+    SortModeSelectionDialog(
+        title = stringResource(R.string.sources_sort_title),
+        current = current,
+        options = sourceBundleSortOptions(),
+        onSelect = onSelect,
+        onDismiss = onDismiss
+    )
+}
+
+@Composable
+private fun sourceBundleSortOptions(): List<SortModeOption<SourceBundleSortMode>> =
+    SourceBundleSortMode.entries.map { mode ->
+        SortModeOption(
+            value = mode,
+            title = sourceBundleSortModeLabel(mode),
+            description = stringResource(mode.descriptionRes())
+        )
+    }
+
+@Composable
+private fun sourceBundleSortModeLabel(mode: SourceBundleSortMode): String =
+    stringResource(mode.labelRes())
+
+private fun SourceBundleSortMode.labelRes(): Int = when (this) {
+    SourceBundleSortMode.MANUAL -> R.string.sources_sort_manual
+    SourceBundleSortMode.LAST_UPDATED -> R.string.sources_sort_last_updated
+    SourceBundleSortMode.NAME_ASC -> R.string.sources_sort_name_asc
+    SourceBundleSortMode.NAME_DESC -> R.string.sources_sort_name_desc
+    SourceBundleSortMode.ENABLED_FIRST -> R.string.sources_sort_enabled_first
+}
+
+private fun SourceBundleSortMode.descriptionRes(): Int = when (this) {
+    SourceBundleSortMode.MANUAL -> R.string.sources_sort_manual_hint
+    SourceBundleSortMode.LAST_UPDATED -> R.string.sources_sort_last_updated_description
+    SourceBundleSortMode.NAME_ASC -> R.string.sources_sort_name_asc_description
+    SourceBundleSortMode.NAME_DESC -> R.string.sources_sort_name_desc_description
+    SourceBundleSortMode.ENABLED_FIRST -> R.string.sources_sort_enabled_first_description
+}
+
+private fun List<PatchBundleSource>.sortedForSourceSort(
+    sortMode: SourceBundleSortMode,
+    manualOrder: List<Int>
+): List<PatchBundleSource> = when (sortMode) {
+    SourceBundleSortMode.MANUAL -> {
+        val byUid = associateBy { it.uid }
+        val ordered = manualOrder.mapNotNull { uid -> byUid[uid] }
+        val orderedUids = ordered.map { it.uid }.toSet()
+        ordered + filter { it.uid !in orderedUids }
+    }
+
+    SourceBundleSortMode.LAST_UPDATED -> sortedWith(
+        compareByDescending<PatchBundleSource> { it.updatedAt ?: it.createdAt ?: 0L }
+            .thenBy { it.sourceSortTitle() }
+            .thenBy { it.uid }
+    )
+
+    SourceBundleSortMode.NAME_ASC -> sortedWith(
+        compareBy<PatchBundleSource> { it.sourceSortTitle() }
+            .thenBy { it.uid }
+    )
+
+    SourceBundleSortMode.NAME_DESC -> sortedWith(
+        compareByDescending<PatchBundleSource> { it.sourceSortTitle() }
+            .thenBy { it.uid }
+    )
+
+    SourceBundleSortMode.ENABLED_FIRST -> sortedWith(
+        compareByDescending<PatchBundleSource> { it.enabled }
+            .thenBy { it.sourceSortTitle() }
+            .thenBy { it.uid }
+    )
+}
+
+private fun PatchBundleSource.sourceSortTitle(): String =
+    displayTitle.lowercase(Locale.ROOT)
 
 /**
  * Card for individual bundle management.

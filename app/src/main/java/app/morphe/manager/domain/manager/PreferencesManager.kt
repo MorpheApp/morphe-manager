@@ -22,6 +22,19 @@ import app.morphe.patcher.dex.BytecodeMode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
+enum class SourceBundleSortMode {
+    MANUAL,
+    LAST_UPDATED,
+    NAME_ASC,
+    NAME_DESC,
+    ENABLED_FIRST;
+
+    companion object {
+        fun fromPreference(value: String?): SourceBundleSortMode =
+            entries.firstOrNull { it.name == value } ?: MANUAL
+    }
+}
+
 class PreferencesManager(
     context: Context
 ) : BasePreferencesManager(context, "settings") {
@@ -109,8 +122,8 @@ class PreferencesManager(
     val lastFilePickerPath = stringPreference("last_file_picker_path", "")
     val filePickerSortMode = stringPreference("file_picker_sort_mode", "NAME_ASC")
 
-    // "MANUAL" (drag-drop order) or "LAST_UPDATED" (descending by updatedAt ?: createdAt)
-    val sourceBundleSortMode = stringPreference("source_bundle_sort_mode", "MANUAL")
+    // Patch source list ordering mode.
+    val sourceBundleSortMode = stringPreference("source_bundle_sort_mode", SourceBundleSortMode.MANUAL.name)
 
     /** Tracks whether the user has explicitly toggled the custom file picker preference. */
     val customFilePickerUserConfigured = booleanPreference("custom_file_picker_user_configured", false)

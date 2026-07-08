@@ -26,6 +26,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -60,6 +61,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstalledApp
+import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.model.HomeAppItem
@@ -98,7 +100,8 @@ data class HomeAppListUi(
     val visible: List<HomeAppItem>,
     val hidden: List<HomeAppItem>,
     val installedAppsLoading: Boolean,
-    val showGestureHint: Boolean
+    val showGestureHint: Boolean,
+    val sortMode: HomeAppSortMode
 )
 
 /** Callbacks fired from an app card. */
@@ -111,7 +114,8 @@ class HomeAppActions(
     val onShowPatches: (HomeAppItem) -> Unit,
     val onGestureHintShown: () -> Unit,
     val onSaveOrder: (List<String>) -> Unit,
-    val onResetOrder: () -> Unit
+    val onResetOrder: () -> Unit,
+    val onSortModeChange: (HomeAppSortMode) -> Unit
 )
 
 /** Callbacks for surrounding chrome elements. */
@@ -180,6 +184,20 @@ fun SectionsLayout(
         onToggle = { searchVisible.value = !searchVisible.value },
         onClose = { searchVisible.value = false }
     )
+    var showSortDialog by remember { mutableStateOf(false) }
+
+    if (showSortDialog) {
+        SortModeSelectionDialog(
+            title = stringResource(R.string.home_app_sort_title),
+            current = apps.sortMode,
+            options = homeAppSortOptions(),
+            onSelect = { mode ->
+                appActions.onSortModeChange(mode)
+                showSortDialog = false
+            },
+            onDismiss = { showSortDialog = false }
+        )
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         // Main layout structure
@@ -202,6 +220,7 @@ fun SectionsLayout(
                     searchState = searchState,
                     chromeActions = chromeActions,
                     chromeFlags = chromeFlags,
+                    onSortClick = { showSortDialog = true },
                     onboardingState = onboardingState
                 )
             }
@@ -213,8 +232,11 @@ fun SectionsLayout(
                     onSettingsClick = chromeActions.onSettingsClick,
                     isExpertModeEnabled = chromeFlags.isExpertModeEnabled,
                     showSearchButton = chromeFlags.showSearchButton,
+                    showSortButton = apps.visible.isNotEmpty(),
+                    sortMode = apps.sortMode,
                     searchActive = searchState.visible,
                     onSearchClick = searchState.onToggle,
+                    onSortClick = { showSortDialog = true },
                     onSourcesPositioned = onboardingState?.let { s -> { b -> s.sourcesButtonBounds = b } },
                     onSettingsPositioned = onboardingState?.let { s -> { b -> s.settingsButtonBounds = b } }
                 )
@@ -249,6 +271,7 @@ private fun AdaptiveContent(
     searchState: HomeSearchState,
     chromeActions: HomeChromeActions,
     chromeFlags: HomeChromeFlags,
+    onSortClick: () -> Unit,
     onboardingState: OnboardingState? = null
 ) {
     val contentPadding = windowSize.contentPadding
@@ -275,7 +298,10 @@ private fun AdaptiveContent(
                     showSearchButton = chromeFlags.showSearchButton && !isAppsEmpty,
                     searchActive = searchState.visible,
                     isExpertModeEnabled = chromeFlags.isExpertModeEnabled,
+                    showSortButton = !isAppsEmpty,
+                    sortMode = apps.sortMode,
                     onSearchClick = searchState.onToggle,
+                    onSortClick = onSortClick,
                     onBundlesClick = chromeActions.onBundlesClick,
                     onSettingsClick = chromeActions.onSettingsClick,
                     onSourcesPositioned = onboardingState?.let { s -> { b -> s.sourcesButtonBounds = b } },
@@ -1293,6 +1319,7 @@ fun MainAppsSection(
                         },
                         onResetOrder = {
                             appActions.onResetOrder()
+                            appActions.onSortModeChange(HomeAppSortMode.CUSTOM)
                             localOrder = homeAppItems.map { it.packageName }
                             isReorderMode.value = false
                         },
@@ -1423,6 +1450,36 @@ private fun HomeSearchTextField(
             modifier = modifier.focusRequester(focusRequester)
         )
     }
+}
+
+@Composable
+private fun homeAppSortOptions(): List<SortModeOption<HomeAppSortMode>> =
+    HomeAppSortMode.entries.map { mode ->
+        SortModeOption(
+            value = mode,
+            title = homeAppSortModeLabel(mode),
+            description = stringResource(mode.descriptionRes())
+        )
+    }
+
+@Composable
+internal fun homeAppSortModeLabel(mode: HomeAppSortMode): String =
+    stringResource(mode.labelRes())
+
+private fun HomeAppSortMode.labelRes(): Int = when (this) {
+    HomeAppSortMode.CUSTOM -> R.string.home_app_sort_custom
+    HomeAppSortMode.RECOMMENDED -> R.string.home_app_sort_recommended
+    HomeAppSortMode.NAME_ASC -> R.string.home_app_sort_name_asc
+    HomeAppSortMode.NAME_DESC -> R.string.home_app_sort_name_desc
+    HomeAppSortMode.UPDATES_FIRST -> R.string.home_app_sort_updates_first
+}
+
+private fun HomeAppSortMode.descriptionRes(): Int = when (this) {
+    HomeAppSortMode.CUSTOM -> R.string.home_app_sort_custom_description
+    HomeAppSortMode.RECOMMENDED -> R.string.home_app_sort_recommended_description
+    HomeAppSortMode.NAME_ASC -> R.string.home_app_sort_name_asc_description
+    HomeAppSortMode.NAME_DESC -> R.string.home_app_sort_name_desc_description
+    HomeAppSortMode.UPDATES_FIRST -> R.string.home_app_sort_updates_first_description
 }
 
 /**
@@ -3310,7 +3367,10 @@ private fun HomeSidebarPanel(
     showSearchButton: Boolean,
     searchActive: Boolean,
     isExpertModeEnabled: Boolean,
+    showSortButton: Boolean,
+    sortMode: HomeAppSortMode,
     onSearchClick: () -> Unit,
+    onSortClick: () -> Unit,
     onBundlesClick: () -> Unit,
     onSettingsClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -3331,6 +3391,15 @@ private fun HomeSidebarPanel(
                 label = stringResource(R.string.home_search_apps),
                 isSelected = searchActive,
                 onClick = onSearchClick
+            )
+        }
+        if (showSortButton) {
+            HomeSidebarNavItem(
+                icon = Icons.AutoMirrored.Outlined.Sort,
+                label = stringResource(R.string.sort),
+                isSelected = sortMode != HomeAppSortMode.CUSTOM,
+                stateDescription = homeAppSortModeLabel(sortMode),
+                onClick = onSortClick
             )
         }
         HomeSidebarNavItem(
@@ -3367,7 +3436,8 @@ private fun HomeSidebarNavItem(
     label: String,
     isSelected: Boolean,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    stateDescription: String? = null
 ) {
     val containerColor by animateColorAsState(
         targetValue = if (isSelected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent,
@@ -3383,7 +3453,11 @@ private fun HomeSidebarNavItem(
         modifier = modifier
             .fillMaxWidth()
             .height(52.dp)
-            .semantics { role = Role.Button; selected = isSelected },
+            .semantics {
+                role = Role.Button
+                selected = isSelected
+                if (stateDescription != null) this.stateDescription = stateDescription
+            },
         color = containerColor,
         shape = RoundedCornerShape(16.dp)
     ) {
