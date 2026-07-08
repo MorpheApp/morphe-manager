@@ -1469,8 +1469,8 @@ internal fun homeAppSortModeLabel(mode: HomeAppSortMode): String =
 private fun HomeAppSortMode.labelRes(): Int = when (this) {
     HomeAppSortMode.CUSTOM -> R.string.home_app_sort_custom
     HomeAppSortMode.RECOMMENDED -> R.string.home_app_sort_recommended
-    HomeAppSortMode.NAME_ASC -> R.string.home_app_sort_name_asc
-    HomeAppSortMode.NAME_DESC -> R.string.home_app_sort_name_desc
+    HomeAppSortMode.NAME_ASC -> R.string.file_picker_sort_name_asc
+    HomeAppSortMode.NAME_DESC -> R.string.file_picker_sort_name_desc
     HomeAppSortMode.UPDATES_FIRST -> R.string.home_app_sort_updates_first
 }
 

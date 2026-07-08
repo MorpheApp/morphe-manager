@@ -445,8 +445,8 @@ private fun sourceBundleSortModeLabel(mode: SourceBundleSortMode): String =
 private fun SourceBundleSortMode.labelRes(): Int = when (this) {
     SourceBundleSortMode.MANUAL -> R.string.sources_sort_manual
     SourceBundleSortMode.LAST_UPDATED -> R.string.sources_sort_last_updated
-    SourceBundleSortMode.NAME_ASC -> R.string.sources_sort_name_asc
-    SourceBundleSortMode.NAME_DESC -> R.string.sources_sort_name_desc
+    SourceBundleSortMode.NAME_ASC -> R.string.file_picker_sort_name_asc
+    SourceBundleSortMode.NAME_DESC -> R.string.file_picker_sort_name_desc
     SourceBundleSortMode.ENABLED_FIRST -> R.string.sources_sort_enabled_first
 }
 
