@@ -22,19 +22,6 @@ import app.morphe.patcher.dex.BytecodeMode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
-enum class SourceBundleSortMode {
-    MANUAL,
-    LAST_UPDATED,
-    NAME_ASC,
-    NAME_DESC,
-    ENABLED_FIRST;
-
-    companion object {
-        fun fromPreference(value: String?): SourceBundleSortMode =
-            entries.firstOrNull { it.name == value } ?: MANUAL
-    }
-}
-
 class PreferencesManager(
     context: Context
 ) : BasePreferencesManager(context, "settings") {

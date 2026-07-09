@@ -21,12 +21,24 @@ import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.SortModeSpec
 
 data class SortModeOption<T>(
     val value: T,
     val title: String,
     val description: String
 )
+
+@Composable
+inline fun <reified T> sortModeOptions(): List<SortModeOption<T>>
+    where T : Enum<T>, T : SortModeSpec =
+    enumValues<T>().map { mode ->
+        SortModeOption(
+            value = mode,
+            title = stringResource(mode.labelRes),
+            description = stringResource(mode.descriptionRes)
+        )
+    }
 
 @Composable
 fun <T> SortModeSelectionDialog(

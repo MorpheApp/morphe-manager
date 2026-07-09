@@ -12,19 +12,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-enum class HomeAppSortMode {
-    CUSTOM,
-    RECOMMENDED,
-    NAME_ASC,
-    NAME_DESC,
-    UPDATES_FIRST;
-
-    companion object {
-        fun fromPreference(value: String?): HomeAppSortMode =
-            entries.firstOrNull { it.name == value } ?: CUSTOM
-    }
-}
-
 /**
  * Manages user preferences for home screen app buttons: hidden packages, custom order, and sort mode.
  *

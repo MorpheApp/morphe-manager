@@ -190,7 +190,7 @@ fun SectionsLayout(
         SortModeSelectionDialog(
             title = stringResource(R.string.home_app_sort_title),
             current = apps.sortMode,
-            options = homeAppSortOptions(),
+            options = sortModeOptions<HomeAppSortMode>(),
             onSelect = { mode ->
                 appActions.onSortModeChange(mode)
                 showSortDialog = false
@@ -1449,36 +1449,6 @@ private fun HomeSearchTextField(
             modifier = modifier.focusRequester(focusRequester)
         )
     }
-}
-
-@Composable
-private fun homeAppSortOptions(): List<SortModeOption<HomeAppSortMode>> =
-    HomeAppSortMode.entries.map { mode ->
-        SortModeOption(
-            value = mode,
-            title = homeAppSortModeLabel(mode),
-            description = stringResource(mode.descriptionRes())
-        )
-    }
-
-@Composable
-internal fun homeAppSortModeLabel(mode: HomeAppSortMode): String =
-    stringResource(mode.labelRes())
-
-private fun HomeAppSortMode.labelRes(): Int = when (this) {
-    HomeAppSortMode.CUSTOM -> R.string.home_app_sort_custom
-    HomeAppSortMode.RECOMMENDED -> R.string.home_app_sort_recommended
-    HomeAppSortMode.NAME_ASC -> R.string.file_picker_sort_name_asc
-    HomeAppSortMode.NAME_DESC -> R.string.file_picker_sort_name_desc
-    HomeAppSortMode.UPDATES_FIRST -> R.string.home_app_sort_updates_first
-}
-
-private fun HomeAppSortMode.descriptionRes(): Int = when (this) {
-    HomeAppSortMode.CUSTOM -> R.string.home_app_sort_custom_description
-    HomeAppSortMode.RECOMMENDED -> R.string.home_app_sort_recommended_description
-    HomeAppSortMode.NAME_ASC -> R.string.home_app_sort_name_asc_description
-    HomeAppSortMode.NAME_DESC -> R.string.home_app_sort_name_desc_description
-    HomeAppSortMode.UPDATES_FIRST -> R.string.home_app_sort_updates_first_description
 }
 
 /**
@@ -3397,7 +3367,7 @@ private fun HomeSidebarPanel(
                 icon = Icons.AutoMirrored.Outlined.Sort,
                 label = stringResource(R.string.sort),
                 isSelected = sortMode != HomeAppSortMode.CUSTOM,
-                stateDescription = homeAppSortModeLabel(sortMode),
+                stateDescription = stringResource(sortMode.labelRes),
                 onClick = onSortClick
             )
         }

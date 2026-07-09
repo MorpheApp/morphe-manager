@@ -121,7 +121,7 @@ fun HomeBottomActionBar(
                     icon = Icons.AutoMirrored.Outlined.Sort,
                     text = stringResource(R.string.sort),
                     showLabel = showLabels,
-                    stateDescription = homeAppSortModeLabel(sortMode),
+                    stateDescription = stringResource(sortMode.labelRes),
                     modifier = Modifier.fillMaxWidth()
                 )
             }

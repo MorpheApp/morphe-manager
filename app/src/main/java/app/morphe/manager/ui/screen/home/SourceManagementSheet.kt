@@ -71,11 +71,11 @@ import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.getRelativeTimeString
 import app.morphe.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
-import java.util.Locale
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
+import java.util.Locale
 
 /**
  * Bottom sheet for managing patch bundles.
@@ -210,7 +210,7 @@ fun BundleManagementSheet(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            val activeSortLabel = sourceBundleSortModeLabel(sourceSortMode)
+                            val activeSortLabel = stringResource(sourceSortMode.labelRes)
                             FilledIconButton(
                                 onClick = { showSortDialog = true },
                                 modifier = Modifier.semantics {
@@ -372,8 +372,10 @@ fun BundleManagementSheet(
     }
 
     if (showSortDialog) {
-        SourceBundleSortDialog(
+        SortModeSelectionDialog(
+            title = stringResource(R.string.sources_sort_title),
             current = sourceSortMode,
+            options = sortModeOptions<SourceBundleSortMode>(),
             onSelect = { mode ->
                 scope.launch { prefs.sourceBundleSortMode.update(mode.name) }
                 showSortDialog = false
@@ -411,51 +413,6 @@ fun BundleManagementSheet(
             )
         }
     }
-}
-
-@Composable
-private fun SourceBundleSortDialog(
-    current: SourceBundleSortMode,
-    onSelect: (SourceBundleSortMode) -> Unit,
-    onDismiss: () -> Unit
-) {
-    SortModeSelectionDialog(
-        title = stringResource(R.string.sources_sort_title),
-        current = current,
-        options = sourceBundleSortOptions(),
-        onSelect = onSelect,
-        onDismiss = onDismiss
-    )
-}
-
-@Composable
-private fun sourceBundleSortOptions(): List<SortModeOption<SourceBundleSortMode>> =
-    SourceBundleSortMode.entries.map { mode ->
-        SortModeOption(
-            value = mode,
-            title = sourceBundleSortModeLabel(mode),
-            description = stringResource(mode.descriptionRes())
-        )
-    }
-
-@Composable
-private fun sourceBundleSortModeLabel(mode: SourceBundleSortMode): String =
-    stringResource(mode.labelRes())
-
-private fun SourceBundleSortMode.labelRes(): Int = when (this) {
-    SourceBundleSortMode.MANUAL -> R.string.sources_sort_manual
-    SourceBundleSortMode.LAST_UPDATED -> R.string.sources_sort_last_updated
-    SourceBundleSortMode.NAME_ASC -> R.string.file_picker_sort_name_asc
-    SourceBundleSortMode.NAME_DESC -> R.string.file_picker_sort_name_desc
-    SourceBundleSortMode.ENABLED_FIRST -> R.string.sources_sort_enabled_first
-}
-
-private fun SourceBundleSortMode.descriptionRes(): Int = when (this) {
-    SourceBundleSortMode.MANUAL -> R.string.sources_sort_manual_hint
-    SourceBundleSortMode.LAST_UPDATED -> R.string.sources_sort_last_updated_description
-    SourceBundleSortMode.NAME_ASC -> R.string.sources_sort_name_asc_description
-    SourceBundleSortMode.NAME_DESC -> R.string.sources_sort_name_desc_description
-    SourceBundleSortMode.ENABLED_FIRST -> R.string.sources_sort_enabled_first_description
 }
 
 private fun List<PatchBundleSource>.sortedForSourceSort(
