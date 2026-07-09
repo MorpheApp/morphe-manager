@@ -232,8 +232,11 @@ fun SectionsLayout(
                     onSettingsClick = chromeActions.onSettingsClick,
                     isExpertModeEnabled = chromeFlags.isExpertModeEnabled,
                     showSearchButton = chromeFlags.showSearchButton,
+                    showSortButton = apps.visible.isNotEmpty(),
+                    sortMode = apps.sortMode,
                     searchActive = searchState.visible,
                     onSearchClick = searchState.onToggle,
+                    onSortClick = { showSortDialog = true },
                     onSourcesPositioned = onboardingState?.let { s -> { b -> s.sourcesButtonBounds = b } },
                     onSettingsPositioned = onboardingState?.let { s -> { b -> s.settingsButtonBounds = b } }
                 )
@@ -295,7 +298,10 @@ private fun AdaptiveContent(
                     showSearchButton = chromeFlags.showSearchButton && !isAppsEmpty,
                     searchActive = searchState.visible,
                     isExpertModeEnabled = chromeFlags.isExpertModeEnabled,
+                    showSortButton = !isAppsEmpty,
+                    sortMode = apps.sortMode,
                     onSearchClick = searchState.onToggle,
+                    onSortClick = onSortClick,
                     onBundlesClick = chromeActions.onBundlesClick,
                     onSettingsClick = chromeActions.onSettingsClick,
                     onSourcesPositioned = onboardingState?.let { s -> { b -> s.sourcesButtonBounds = b } },
@@ -324,7 +330,6 @@ private fun AdaptiveContent(
                             appActions = appActions,
                             searchState = searchState,
                             onBundlesClick = chromeActions.onBundlesClick,
-                            onSortClick = onSortClick,
                             itemSpacing = itemSpacing,
                             maxCardWidth = maxCardWidth,
                             onboardingState = onboardingState,
@@ -373,7 +378,6 @@ private fun AdaptiveContent(
                         appActions = appActions,
                         searchState = searchState,
                         onBundlesClick = chromeActions.onBundlesClick,
-                        onSortClick = onSortClick,
                         itemSpacing = itemSpacing,
                         horizontalPadding = contentPadding,
                         maxCardWidth = maxCardWidth,
@@ -806,7 +810,6 @@ fun MainAppsSection(
     appActions: HomeAppActions,
     searchState: HomeSearchState,
     onBundlesClick: () -> Unit,
-    onSortClick: () -> Unit,
     modifier: Modifier = Modifier,
     itemSpacing: Dp = 16.dp,
     horizontalPadding: Dp = 0.dp,
@@ -1006,20 +1009,6 @@ fun MainAppsSection(
                         .fillMaxWidth()
                 ) {
                     Column(modifier = Modifier.fillMaxWidth()) {
-                        AnimatedVisibility(
-                            visible = homeAppItems.isNotEmpty(),
-                            enter = MorpheAnimations.expandFadeEnter,
-                            exit = MorpheAnimations.shrinkFadeExit
-                        ) {
-                            AppListActionRow(
-                                sortMode = apps.sortMode,
-                                onSortClick = onSortClick,
-                                modifier = Modifier
-                                    .padding(horizontal = horizontalPadding)
-                                    .padding(bottom = 8.dp)
-                            )
-                        }
-
                         // Search bar
                         AnimatedVisibility(
                             visible = searchState.visible,
@@ -1364,46 +1353,6 @@ private fun ShowHiddenAppsButton(
         icon = Icons.Outlined.Visibility,
         text = pluralStringResource(R.plurals.home_app_show_hidden_count, count, count.toString())
     )
-}
-
-/**
- * Compact app-list actions shown with the app cards rather than global navigation.
- */
-@Composable
-private fun AppListActionRow(
-    sortMode: HomeAppSortMode,
-    onSortClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val sortTitle = stringResource(R.string.home_app_sort_title)
-    val currentSortLabel = homeAppSortModeLabel(sortMode)
-    val selected = sortMode != HomeAppSortMode.CUSTOM
-    val colors = if (selected) {
-        IconButtonDefaults.filledTonalIconButtonColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-        )
-    } else {
-        IconButtonDefaults.filledTonalIconButtonColors()
-    }
-
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.End,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        ActionPillButton(
-            onClick = onSortClick,
-            icon = Icons.AutoMirrored.Outlined.Sort,
-            contentDescription = sortTitle,
-            label = stringResource(R.string.sort),
-            tooltip = sortTitle,
-            colors = colors,
-            modifier = Modifier.semantics {
-                stateDescription = currentSortLabel
-            }
-        )
-    }
 }
 
 /**
@@ -3418,7 +3367,10 @@ private fun HomeSidebarPanel(
     showSearchButton: Boolean,
     searchActive: Boolean,
     isExpertModeEnabled: Boolean,
+    showSortButton: Boolean,
+    sortMode: HomeAppSortMode,
     onSearchClick: () -> Unit,
+    onSortClick: () -> Unit,
     onBundlesClick: () -> Unit,
     onSettingsClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -3439,6 +3391,15 @@ private fun HomeSidebarPanel(
                 label = stringResource(R.string.home_search_apps),
                 isSelected = searchActive,
                 onClick = onSearchClick
+            )
+        }
+        if (showSortButton) {
+            HomeSidebarNavItem(
+                icon = Icons.AutoMirrored.Outlined.Sort,
+                label = stringResource(R.string.sort),
+                isSelected = sortMode != HomeAppSortMode.CUSTOM,
+                stateDescription = homeAppSortModeLabel(sortMode),
+                onClick = onSortClick
             )
         }
         HomeSidebarNavItem(
