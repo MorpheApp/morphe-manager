@@ -129,10 +129,12 @@ const val PLAY_STORE_INSTALLER_PACKAGE = "com.android.vending"
 const val AOSP_INSTALLER_PACKAGE        = "com.google.android.packageinstaller"
 const val AOSP_INSTALLER_PACKAGE_LEGACY = "com.android.packageinstaller"
 const val AOSP_INSTALLER_LABEL          = "Package installer"
-const val JSON_MIMETYPE = "application/json"
-const val BIN_MIMETYPE  = "application/octet-stream"
-const val TEXT_MIMETYPE = "text/plain"
-const val MPP_MIMETYPE  = "application/vnd.ms-project"
+const val JSON_MIMETYPE     = "application/json"
+const val BIN_MIMETYPE      = "application/octet-stream"
+const val TEXT_MIMETYPE     = "text/plain"
+const val MPP_MIMETYPE      = "application/vnd.ms-project"
+const val IMAGE_MIMETYPE    = "image/*"
+const val WILDCARD_MIMETYPE = "*/*"
 
 val APK_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
