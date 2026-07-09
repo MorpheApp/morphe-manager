@@ -1,3 +1,10 @@
+# [1.23.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0-dev.8...v1.23.0-dev.9) (2026-07-09)
+
+
+### Bug Fixes
+
+* use latest patcher ([ac68411](https://github.com/MorpheApp/morphe-manager/commit/ac68411e4f19f245454a8173c88f7d47da71e418))
+
 # [1.23.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0-dev.7...v1.23.0-dev.8) (2026-07-07)
 
 

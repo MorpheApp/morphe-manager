@@ -41,6 +41,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -247,6 +250,7 @@ fun FilePicker(
     var sortMode by remember {
         mutableStateOf(runCatching { SortMode.valueOf(prefs.filePickerSortMode.getBlocking()) }.getOrDefault(SortMode.NAME_ASC))
     }
+    var showHiddenFiles by remember { mutableStateOf(prefs.filePickerShowHiddenFiles.getBlocking()) }
     var showSortMenu by remember { mutableStateOf(false) }
     var showSearch by remember { mutableStateOf(false) }
     var searchQuery by remember { mutableStateOf("") }
@@ -296,8 +300,11 @@ fun FilePicker(
         }
     }
 
-    val sortedContents = remember(dirContents, sortMode) {
-        dirContents?.getOrNull()?.let { applySort(it, sortMode) } ?: emptyList()
+    val sortedContents = remember(dirContents, sortMode, showHiddenFiles) {
+        dirContents?.getOrNull()
+            ?.let { if (showHiddenFiles) it else it.filterNot { file -> file.name.startsWith(".") } }
+            ?.let { applySort(it, sortMode) }
+            ?: emptyList()
     }
     val displayedContents = remember(sortedContents, searchQuery) {
         if (searchQuery.isBlank()) sortedContents
@@ -436,6 +443,22 @@ fun FilePicker(
                                         }
                                     )
                                 }
+                                HorizontalDivider()
+                                DropdownMenuItem(
+                                    text = { Text(stringResource(R.string.file_picker_show_hidden_files)) },
+                                    trailingIcon = {
+                                        Checkbox(
+                                            checked = showHiddenFiles,
+                                            onCheckedChange = null
+                                        )
+                                    },
+                                    modifier = Modifier.semantics { role = Role.Checkbox },
+                                    onClick = {
+                                        val next = !showHiddenFiles
+                                        showHiddenFiles = next
+                                        coroutineScope.launch { prefs.filePickerShowHiddenFiles.update(next) }
+                                    }
+                                )
                             }
                         }
                         IconButton(onClick = { refreshKey++ }) {

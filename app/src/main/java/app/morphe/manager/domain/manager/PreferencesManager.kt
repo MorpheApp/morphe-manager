@@ -108,6 +108,7 @@ class PreferencesManager(
     val useCustomFilePicker = booleanPreference("use_custom_file_picker", false)
     val lastFilePickerPath = stringPreference("last_file_picker_path", "")
     val filePickerSortMode = stringPreference("file_picker_sort_mode", "NAME_ASC")
+    val filePickerShowHiddenFiles = booleanPreference("file_picker_show_hidden_files", false)
 
     // Patch source list ordering mode.
     val sourceBundleSortMode = stringPreference("source_bundle_sort_mode", SourceBundleSortMode.MANUAL.name)
@@ -205,6 +206,7 @@ class PreferencesManager(
         val customBundles: List<BundleSnapshot>? = null,
         val bytecodeModePreference: BytecodeMode? = null,
         val filePickerSortMode: String? = null,
+        val filePickerShowHiddenFiles: Boolean? = null,
         val useCustomFilePicker: Boolean? = null,
         val customFilePickerUserConfigured: Boolean? = null,
         val sourceBundleSortMode: String? = null
@@ -243,6 +245,7 @@ class PreferencesManager(
         updateCheckInterval = updateCheckInterval.get(),
         bytecodeModePreference = bytecodeModePreference.get(),
         filePickerSortMode = filePickerSortMode.get(),
+        filePickerShowHiddenFiles = filePickerShowHiddenFiles.get(),
         useCustomFilePicker = useCustomFilePicker.get(),
         customFilePickerUserConfigured = customFilePickerUserConfigured.get(),
         sourceBundleSortMode = sourceBundleSortMode.get()
@@ -281,6 +284,7 @@ class PreferencesManager(
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
         snapshot.bytecodeModePreference?.let { bytecodeModePreference.value = it }
         snapshot.filePickerSortMode?.let { filePickerSortMode.value = it }
+        snapshot.filePickerShowHiddenFiles?.let { filePickerShowHiddenFiles.value = it }
         snapshot.useCustomFilePicker?.let { useCustomFilePicker.value = it }
         snapshot.customFilePickerUserConfigured?.let { customFilePickerUserConfigured.value = it }
         snapshot.sourceBundleSortMode?.let { sourceBundleSortMode.value = it }

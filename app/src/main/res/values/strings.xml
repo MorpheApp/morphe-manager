@@ -845,6 +845,7 @@ The image dimensions must be as follows:
     <string name="file_picker_sort_size_asc">Size (smallest first)</string>
     <string name="file_picker_sort_date_desc">Date (newest first)</string>
     <string name="file_picker_sort_date_asc">Date (oldest first)</string>
+    <string name="file_picker_show_hidden_files">Show hidden files</string>
 
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>
