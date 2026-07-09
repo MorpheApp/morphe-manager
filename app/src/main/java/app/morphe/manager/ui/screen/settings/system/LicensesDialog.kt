@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
@@ -69,6 +70,7 @@ service marks, or logos.
  * Licenses dialog.
  * Shows open-source library licenses via aboutlibraries.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LicensesDialog(onDismiss: () -> Unit) {
     MorpheDialog(
