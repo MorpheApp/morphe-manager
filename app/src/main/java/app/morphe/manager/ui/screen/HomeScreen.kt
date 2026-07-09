@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.model.HomeAppItem
@@ -91,6 +92,7 @@ fun HomeScreen(
     val homeAppState by homeViewModel.homeAppState.collectAsStateWithLifecycle()
     val homeAppItems = homeAppState?.visible ?: emptyList()
     val hiddenAppItems = homeAppState?.hidden ?: emptyList()
+    val homeAppSortMode = homeAppState?.sortMode ?: HomeAppSortMode.MANUAL
     val bundlePipelineLoading = homeAppState == null
     val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
@@ -207,7 +209,8 @@ fun HomeScreen(
                     visible = homeAppItems,
                     hidden = hiddenAppItems,
                     installedAppsLoading = bundlePipelineLoading || homeViewModel.installedAppsLoading,
-                    showGestureHint = showGestureHint
+                    showGestureHint = showGestureHint,
+                    sortMode = homeAppSortMode
                 ),
                 appActions = HomeAppActions(
                     onAppClick = { item ->
@@ -236,7 +239,8 @@ fun HomeScreen(
                         }
                     },
                     onSaveOrder = { packageNames -> homeViewModel.saveAppOrder(packageNames) },
-                    onResetOrder = { homeViewModel.resetAppOrder() }
+                    onResetOrder = { homeViewModel.resetAppOrder() },
+                    onSortModeChange = { mode -> homeViewModel.setAppSortMode(mode) }
                 ),
                 chromeActions = HomeChromeActions(
                     onOtherAppsClick = {
@@ -255,6 +259,7 @@ fun HomeScreen(
                 ),
                 chromeFlags = HomeChromeFlags(
                     showSearchButton = showSearchButton,
+                    showSortButton = showSearchButton,
                     showOtherAppsButton = showOtherAppsButton,
                     isExpertModeEnabled = useExpertMode
                 ),

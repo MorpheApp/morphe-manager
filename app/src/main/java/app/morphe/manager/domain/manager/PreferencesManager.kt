@@ -110,8 +110,8 @@ class PreferencesManager(
     val filePickerSortMode = stringPreference("file_picker_sort_mode", "NAME_ASC")
     val filePickerShowHiddenFiles = booleanPreference("file_picker_show_hidden_files", false)
 
-    // "MANUAL" (drag-drop order) or "LAST_UPDATED" (descending by updatedAt ?: createdAt)
-    val sourceBundleSortMode = stringPreference("source_bundle_sort_mode", "MANUAL")
+    // Patch source list ordering mode.
+    val sourceBundleSortMode = stringPreference("source_bundle_sort_mode", SourceBundleSortMode.MANUAL.name)
 
     /** Tracks whether the user has explicitly toggled the custom file picker preference. */
     val customFilePickerUserConfigured = booleanPreference("custom_file_picker_user_configured", false)
