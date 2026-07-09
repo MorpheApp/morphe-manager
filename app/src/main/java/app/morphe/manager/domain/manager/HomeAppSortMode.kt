@@ -12,7 +12,7 @@ enum class HomeAppSortMode(
     @param:StringRes override val labelRes: Int,
     @param:StringRes override val descriptionRes: Int
 ) : SortModeSpec {
-    CUSTOM(R.string.home_app_sort_custom, R.string.home_app_sort_custom_description),
+    CUSTOM(R.string.sources_sort_manual, R.string.home_app_sort_manual_description),
     RECOMMENDED(R.string.home_app_sort_recommended, R.string.home_app_sort_recommended_description),
     NAME_ASC(R.string.file_picker_sort_name_asc, R.string.home_app_sort_name_asc_description),
     NAME_DESC(R.string.file_picker_sort_name_desc, R.string.home_app_sort_name_desc_description),

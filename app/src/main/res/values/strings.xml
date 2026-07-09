@@ -33,8 +33,7 @@
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>
     <string name="home_search_apps">Search apps</string>
     <string name="home_app_sort_title">Sort apps</string>
-    <string name="home_app_sort_custom">Custom order</string>
-    <string name="home_app_sort_custom_description">Long-press an app, then tap reorder button</string>
+    <string name="home_app_sort_manual_description">Long-press an app, then tap reorder button</string>
     <string name="home_app_sort_recommended">Recommended order</string>
     <string name="home_app_sort_recommended_description">Installed and pinned apps first</string>
     <string name="home_app_sort_name_asc_description">Alphabetical, A to Z</string>
