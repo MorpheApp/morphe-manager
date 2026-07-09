@@ -1319,7 +1319,6 @@ fun MainAppsSection(
                         },
                         onResetOrder = {
                             appActions.onResetOrder()
-                            appActions.onSortModeChange(HomeAppSortMode.CUSTOM)
                             localOrder = homeAppItems.map { it.packageName }
                             isReorderMode.value = false
                         },

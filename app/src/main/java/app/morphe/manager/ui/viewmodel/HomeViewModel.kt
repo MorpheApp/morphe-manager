@@ -1255,8 +1255,9 @@ class HomeViewModel(
                     .thenBy(String.CASE_INSENSITIVE_ORDER) { it.packageName }
             )
             HomeAppSortMode.NAME_DESC -> items.sortedWith(
-                compareByDescending<HomeAppItem> { it.displayName.lowercase() }
-                    .thenByDescending { it.packageName.lowercase() }
+                compareBy<HomeAppItem, String>(String.CASE_INSENSITIVE_ORDER) { it.displayName }
+                    .thenBy(String.CASE_INSENSITIVE_ORDER) { it.packageName }
+                    .reversed()
             )
             HomeAppSortMode.UPDATES_FIRST -> items.sortedWith(
                 compareByDescending<HomeAppItem> { it.hasUpdate }

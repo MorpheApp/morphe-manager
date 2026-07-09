@@ -21,10 +21,7 @@ enum class HomeAppSortMode {
 
     companion object {
         fun fromPreference(value: String?): HomeAppSortMode =
-            when (value) {
-                "MORPHE" -> RECOMMENDED
-                else -> entries.firstOrNull { it.name == value } ?: CUSTOM
-            }
+            entries.firstOrNull { it.name == value } ?: CUSTOM
     }
 }
 
@@ -86,8 +83,12 @@ class HomeAppButtonPreferences(context: Context) {
     }
 
     fun resetOrder() {
-        prefs.edit { remove(KEY_CUSTOM_ORDER) }
+        prefs.edit {
+            remove(KEY_CUSTOM_ORDER)
+            putString(KEY_SORT_MODE, HomeAppSortMode.CUSTOM.name)
+        }
         _customOrder.value = emptyList()
+        _sortMode.value = HomeAppSortMode.CUSTOM
     }
 
     fun setSortMode(mode: HomeAppSortMode) {
