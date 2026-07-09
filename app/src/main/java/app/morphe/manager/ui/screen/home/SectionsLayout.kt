@@ -131,6 +131,7 @@ class HomeChromeActions(
 @Immutable
 data class HomeChromeFlags(
     val showSearchButton: Boolean,
+    val showSortButton: Boolean,
     val showOtherAppsButton: Boolean,
     val isExpertModeEnabled: Boolean
 )
@@ -232,7 +233,7 @@ fun SectionsLayout(
                     onSettingsClick = chromeActions.onSettingsClick,
                     isExpertModeEnabled = chromeFlags.isExpertModeEnabled,
                     showSearchButton = chromeFlags.showSearchButton,
-                    showSortButton = apps.visible.isNotEmpty(),
+                    showSortButton = chromeFlags.showSortButton,
                     sortMode = apps.sortMode,
                     searchActive = searchState.visible,
                     onSearchClick = searchState.onToggle,
@@ -298,7 +299,7 @@ private fun AdaptiveContent(
                     showSearchButton = chromeFlags.showSearchButton && !isAppsEmpty,
                     searchActive = searchState.visible,
                     isExpertModeEnabled = chromeFlags.isExpertModeEnabled,
-                    showSortButton = !isAppsEmpty,
+                    showSortButton = chromeFlags.showSortButton,
                     sortMode = apps.sortMode,
                     onSearchClick = searchState.onToggle,
                     onSortClick = onSortClick,

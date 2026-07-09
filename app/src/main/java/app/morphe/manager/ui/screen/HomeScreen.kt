@@ -259,6 +259,7 @@ fun HomeScreen(
                 ),
                 chromeFlags = HomeChromeFlags(
                     showSearchButton = showSearchButton,
+                    showSortButton = showSearchButton,
                     showOtherAppsButton = showOtherAppsButton,
                     isExpertModeEnabled = useExpertMode
                 ),

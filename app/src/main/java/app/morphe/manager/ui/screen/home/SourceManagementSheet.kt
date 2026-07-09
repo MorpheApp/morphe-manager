@@ -210,21 +210,23 @@ fun BundleManagementSheet(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            val activeSortLabel = stringResource(sourceSortMode.labelRes)
-                            FilledIconButton(
-                                onClick = { showSortDialog = true },
-                                modifier = Modifier.semantics {
-                                    role = Role.Button
-                                    stateDescription = activeSortLabel
-                                },
-                                colors = IconButtonDefaults.filledIconButtonColors(
-                                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                                )
-                            ) {
-                                Icon(
-                                    imageVector = Icons.AutoMirrored.Outlined.Sort,
-                                    contentDescription = stringResource(R.string.sort)
-                                )
+                            AnimatedVisibility(visible = sources.size >= 2) {
+                                val activeSortLabel = stringResource(sourceSortMode.labelRes)
+                                FilledIconButton(
+                                    onClick = { showSortDialog = true },
+                                    modifier = Modifier.semantics {
+                                        role = Role.Button
+                                        stateDescription = activeSortLabel
+                                    },
+                                    colors = IconButtonDefaults.filledIconButtonColors(
+                                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                                    )
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.AutoMirrored.Outlined.Sort,
+                                        contentDescription = stringResource(R.string.sort)
+                                    )
+                                }
                             }
                             FilledIconButton(
                                 onClick = onAddSource,

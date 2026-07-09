@@ -1396,8 +1396,9 @@ class HomeViewModel(
         }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     /**
-     * Whether the search button should be visible.
-     * Shown when there are more than 4 app buttons or a third-party source is active.
+     * Whether the search and sort buttons should be visible.
+     * Shown when there are more than 4 app buttons or a third-party source is active: fewer
+     * apps than that fit on screen at a glance, so both search and reordering are noise.
      */
     val showSearchButton: StateFlow<Boolean> =
         combine(
