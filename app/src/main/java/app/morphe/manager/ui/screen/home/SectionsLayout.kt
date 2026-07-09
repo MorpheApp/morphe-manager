@@ -3367,7 +3367,7 @@ private fun HomeSidebarPanel(
             HomeSidebarNavItem(
                 icon = Icons.AutoMirrored.Outlined.Sort,
                 label = stringResource(R.string.sort),
-                isSelected = sortMode != HomeAppSortMode.CUSTOM,
+                isSelected = sortMode != HomeAppSortMode.MANUAL,
                 stateDescription = stringResource(sortMode.labelRes),
                 onClick = onSortClick
             )

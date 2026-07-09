@@ -1240,7 +1240,7 @@ class HomeViewModel(
             .thenBy(String.CASE_INSENSITIVE_ORDER) { it.packageName }
 
         return when (sortMode) {
-            HomeAppSortMode.CUSTOM -> {
+            HomeAppSortMode.MANUAL -> {
                 val defaultSorted = items.sortedWith(morpheComparator)
                 if (customOrder.isEmpty()) {
                     defaultSorted

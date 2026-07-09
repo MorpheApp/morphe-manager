@@ -92,7 +92,7 @@ fun HomeScreen(
     val homeAppState by homeViewModel.homeAppState.collectAsStateWithLifecycle()
     val homeAppItems = homeAppState?.visible ?: emptyList()
     val hiddenAppItems = homeAppState?.hidden ?: emptyList()
-    val homeAppSortMode = homeAppState?.sortMode ?: HomeAppSortMode.CUSTOM
+    val homeAppSortMode = homeAppState?.sortMode ?: HomeAppSortMode.MANUAL
     val bundlePipelineLoading = homeAppState == null
     val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()

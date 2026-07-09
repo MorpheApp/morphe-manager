@@ -48,7 +48,7 @@ fun HomeBottomActionBar(
     isExpertModeEnabled: Boolean = false,
     showSearchButton: Boolean = false,
     showSortButton: Boolean = false,
-    sortMode: HomeAppSortMode = HomeAppSortMode.CUSTOM,
+    sortMode: HomeAppSortMode = HomeAppSortMode.MANUAL,
     searchActive: Boolean = false,
     onSearchClick: () -> Unit = {},
     onSortClick: () -> Unit = {},
