@@ -803,7 +803,7 @@ morphe_header_custom_dark.png
     <string name="patch">Патч</string>
     <string name="repatch">Применить патч</string>
     <string name="open">Открыть</string>
-    <string name="mount">Смонтировано</string>
+    <string name="mount">Смонтировать</string>
     <string name="mounted">Смонтировано</string>
     <string name="unmount">Демонтировать</string>
     <string name="unmounted">Размонтировано</string>
