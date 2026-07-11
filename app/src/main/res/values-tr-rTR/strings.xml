@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Kaynaklarınız güncel</string>
     <string name="home_sources_are_loading">Kaynaklar yükleniyor, lütfen bekleyin…</string>
     <string name="home_search_apps">Uygulamaları ara</string>
+    <string name="home_app_sort_title">Uygulamaları sırala</string>
+    <string name="home_app_sort_manual_description">Bir uygulamaya uzun basın, ardından yeniden sıralama düğmesine dokunun</string>
+    <string name="home_app_sort_recommended">Önerilen sıra</string>
+    <string name="home_app_sort_recommended_description">Yüklenen ve sabitlenen uygulamalar önce</string>
+    <string name="home_app_sort_name_asc_description">Alfabetik, A\'dan Z\'ye</string>
+    <string name="home_app_sort_name_desc_description">Ters alfabetik, Z\'den A\'ya</string>
+    <string name="home_app_sort_updates_first">Önce yama güncellemeleri</string>
+    <string name="home_app_sort_updates_first_description">Güncelleme rozeti olan uygulamalar önce, ardından önerilen sıra</string>
     <string name="home_no_apps_title">Uygulama bulunamadı</string>
     <string name="home_no_apps_subtitle">Bir yama kaynağı ekleyin veya %s içinde mevcut olanı etkinleştirin</string>
     <string name="home_no_apps_search_subtitle">\"%s\" ile eşleşen uygulama yok</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Gececi ve üretken</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yama kaynakları</string>
+    <string name="sources_sort_title">Yama kaynaklarını sırala</string>
+    <string name="sources_sort_manual">Manuel sıra</string>
+    <string name="sources_sort_manual_hint">Yeniden sıralamak için bir kaynağa uzun basın</string>
+    <string name="sources_sort_last_updated">Son güncelleme</string>
+    <string name="sources_sort_last_updated_description">En yeni kaynak güncellemeleri önce</string>
+    <string name="sources_sort_enabled_first">Etkin olanlar önce</string>
+    <string name="sources_sort_enabled_first_description">Devre dışı kaynaklardan önce etkin kaynakları göster</string>
     <string name="sources_management_open_in_browser">Tarayıcıda aç</string>
     <string name="sources_management_failed_to_open_url">URL açılamadı</string>
     <string name="sources_management_prerelease_toggle">Ön sürüm yamalar</string>
@@ -285,6 +300,9 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="home_app_info_patch_source_used">Kullanılan yama kaynağı</string>
     <string name="home_app_info_install_type_custom_installer">Özel yükleyici</string>
     <string name="home_app_info_install_type_system_installer">Sistem yükleyicisi</string>
+    <string name="home_app_info_install_type_play_store">Play Store yükle</string>
+    <string name="home_app_info_install_type_root_play_store">Root Play Store yükle</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store yükle</string>
     <string name="home_app_info_patch_update_available">Yama paketi güncellemesi mevcut</string>
     <string name="home_app_info_patch_update_available_description">Daha yeni sürüm yamalar mevcut. En son iyileştirmeleri ve düzeltmeleri almak için uygulamayı yeniden yamalayın</string>
     <string name="home_app_info_app_deleted_warning">Uygulama kaldırıldı</string>
@@ -295,7 +313,7 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="root_gmscore_excluded">GmsCore destek yaması root modunda hariç tutulmuştur</string>
     <string name="root_pre_patch_installer_title">Yükleme yöntemini seçin</string>
     <string name="root_pre_patch_installer_description">Cihazınızın root erişimi var. Yamalanmış uygulamayı nasıl yüklemek istediğinizi seçin</string>
-    <string name="root_pre_patch_installer_mount_title">Root ile Bağlama</string>
+    <string name="root_pre_patch_installer_mount_title">Root ile bağlama</string>
     <string name="root_pre_patch_installer_mount_description">Yamalanmış APK\'yi stok uygulamaya bağlar. GmsCore gerektirmez</string>
     <string name="root_pre_patch_installer_standard_title">Standart Yükleme</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore desteğiyle ayrı bir uygulama olarak yüklenir. Yamalamadan sonra bir yükleyici seçilebilir</string>
@@ -305,16 +323,16 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="patcher_error_log">Hata günlüğü</string>
     <string name="patcher_error_technical">Teknik ayrıntılar</string>
     <string name="patcher_error_dialog_app_info">Uygulama bilgisi</string>
-    <string name="patcher_tab_logs">Yama Günlükleri</string>
+    <string name="patcher_tab_logs">Patcher günlükleri</string>
     <string name="patcher_tab_game">Oyunlar</string>
     <string name="patcher_long_step_warning">Bu adım biraz zaman alabilir. Lütfen bekleyin…</string>
     <string name="patcher_installing_subtitle">Neredeyse hazırız! 🎸</string>
-    <string name="patcher_success_title">Hepsi Bitti! 🎉</string>
+    <string name="patcher_success_title">Tamamlandı! 🎉</string>
     <string name="patcher_success_subtitle">Uygulamanız yamalandı ve yüklendi!</string>
-    <string name="patcher_complete_title">Yamalama Tamamlandı! ✨</string>
+    <string name="patcher_complete_title">Yamalama tamamlandı! ✨</string>
     <string name="patcher_failed_title">Eyvah! Bir şeyler ters gitti</string>
     <string name="patcher_failed_subtitle">Aşağıdaki hata ayrıntılarını kontrol edin</string>
-    <string name="patcher_failed_dialog_title">Yama Başarısız</string>
+    <string name="patcher_failed_dialog_title">Yamalama başarısız oldu</string>
     <string name="patcher_unknown_error">Bilinmeyen bir hata oluştu</string>
     <string name="patcher_split_step_extracting">Bölünmüş APK\'ler ayıklanıyor</string>
     <string name="patcher_split_step_merging">%s birleştiriliyor</string>
@@ -608,11 +626,13 @@ Resim boyutları şu şekilde olmalıdır:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Yükleyici</string>
     <string name="installer_title">Yükleyici seçin</string>
-    <string name="installer_internal_name">Sistem yükleyicisi</string>
     <string name="installer_internal_description">Android paket yükleyicisini kullanır</string>
+    <string name="installer_play_store_description">Sistem yükleyicisini kullanır ve Google Play Store\'u yükleme kaynağı olarak ayarlar</string>
+    <string name="installer_root_play_store_description">Root erişimiyle sessizce yükler ve Google Play Store\'u yükleme kaynağı olarak ayarlar</string>
     <string name="installer_auto_saved_name">Rootlu bağlama yükleyicisi</string>
     <string name="installer_auto_saved_description">Yamalanmış APK\'yi yüklü uygulamaya bağlar</string>
     <string name="installer_shizuku_description">Shizuku veya Sui kullanılarak sessiz modda yüklenir</string>
+    <string name="installer_shizuku_play_store_description">Shizuku veya Sui aracılığıyla sessizce yükler ve Google Play Store\'u yükleme kaynağı olarak ayarlar</string>
     <string name="installer_option_none">Yedek yok</string>
     <string name="installer_none_description">Yedek yükleyici yapılandırılmamış</string>
     <string name="installer_status_requires_root">Root erişimi gerektirir</string>
@@ -633,6 +653,10 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_unavailable_message">Tercih ettiğiniz yükleyici (%s) şu anda kullanılamıyor. Sorunu çözüp tekrar deneyebilir veya standart yükleyiciyi kullanabilirsiniz</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku\'nun çalıştığından ve ve bu uygulama için izin verildiğinden emin olun</string>
     <string name="installer_use_standard">Standardı kullan</string>
+    <string name="installer_play_store_warning_title">Play Store olarak mı yüklensin?</string>
+    <string name="installer_play_store_warning_message">Değiştirilmiş uygulama Google Play Store\'dan yüklenmiş olarak kaydedilecektir. Bu, Android Auto gibi hizmetlerin uygulamayı bir Play Store uygulaması olarak tanımasını sağlar</string>
+    <string name="installer_play_store_warning_risk">Play Store, değiştirilmiş uygulama için güncelleme sunabilir. Bu güncellemeyi yüklemek, değiştirilmiş APK\'yı orijinal sürümüyle değiştirir ve değişiklikleri kaldırır. Güncelleme yapmanız istenirse, uygulamanın Play Store sayfasındaki üç nokta menüsüne dokunun ve \"Güncellemeleri kapat\" seçeneğini seçin</string>
+    <string name="installer_play_store_warning_continue">Anladım, devam et</string>
     <string name="settings_prompt_installer_on_install">Yükleyici seçimi istemi</string>
     <string name="settings_prompt_installer_on_install_description">Yamalanmış bir uygulama her yüklendiğinde yükleyici seçim penceresini gösterir</string>
     <string name="settings_auto_install_with_shizuku">Yamalama sonrası otomatik yükle</string>
@@ -673,6 +697,14 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_import_manager_settings_description">Morphe ayarlarınızı yedekler ve geri yükler</string>
     <string name="settings_system_import_manager_settings_fail">Morphe ayarları içe aktarılamadı: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe ayarları içe aktarıldı</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe ayarlarını içe aktar</string>
+    <string name="settings_system_import_manager_settings_mode_description">İçe aktarılan ayarların ve kaynakların nasıl uygulanacağını seçin</string>
+    <string name="settings_system_import_selections_mode_title">Yama seçimlerini içe aktar</string>
+    <string name="settings_system_import_selections_mode_description">İçe aktarılan seçimlerin ve yama seçeneklerinin nasıl uygulanacağını seçin</string>
+    <string name="import_mode_replace_title">Mevcut olanları değiştir</string>
+    <string name="import_mode_replace_description">Yedeklemeyi tam olarak eşleştirin. Yedeklemede eksik olan öğeler kaldırılacaktır</string>
+    <string name="import_mode_merge_title">Mevcut olanlarla birleştir</string>
+    <string name="import_mode_merge_description">Yedeklemeden eksik öğeleri ekleyin. Mevcut öğeler değişmeden bırakılır</string>
     <string name="settings_system_export_manager_settings_fail">Morphe ayarları dışa aktarılamadı: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe ayarları dışa aktarıldı</string>
     <string name="settings_system_debug">Hata ayıklama</string>
@@ -683,6 +715,12 @@ Resim boyutları şu şekilde olmalıdır:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Dosyalar &amp; depolama</string>
     <string name="settings_system_apks_size">Toplam boyut: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Bu, burada gösterilen kaydedilmiş APK dosyalarını kalıcı olarak silecektir</string>
+    <string name="settings_system_apks_delete_selected_title">Seçili APK\'ler silinsin mi?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Bu, seçili APK dosyalarını kalıcı olarak silecektir</string>
+    <string name="settings_system_apks_deleted_all">APK\'ler başarıyla silindi</string>
+    <string name="settings_system_apks_export_zip_success">Seçili APK\'ler dışa aktarıldı</string>
+    <string name="settings_system_apks_export_zip_failed">Seçili APK\'lerin dışa aktarılması başarısız oldu</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Yamalanmış APK\'ler</string>
     <string name="settings_system_patched_apks_description">Kayıtlı yamalanmış uygulama dosyalarını yönetir</string>
@@ -690,6 +728,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_patched_apks_delete_title">Yamalanmış APK silinsin mi?</string>
     <string name="settings_system_patched_apks_delete_confirm">%s için kaydedilen yamalanmış APK\'yi silmek istediğinizden emin misiniz?</string>
     <string name="settings_system_patched_apks_deleted">Yamalanmış APK başarıyla silindi</string>
+    <string name="settings_system_patched_apks_delete_all_title">Tüm yamalanmış APK\'ler silinsin mi?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Orijinal APK\'ler</string>
     <string name="settings_system_original_apks_description">Yeniden yamalamak için kaydedildi. Her uygulama için bir sürüm tutulur</string>
@@ -697,11 +736,13 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_original_apks_deleted">Orijinal APK başarıyla silindi</string>
     <string name="settings_system_original_apks_delete_title">Orijinal APK silinsin mi?</string>
     <string name="settings_system_original_apks_delete_confirm">%s için orijinal APK silinsin mi? Yeni bir APK sağlamadan yeniden yama yapamazsınız</string>
+    <string name="settings_system_original_apks_delete_all_title">Tüm orijinal APK\'ler silinsin mi?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Yama seçenekleri</string>
     <string name="settings_system_patch_selections_description">Kayıtlı yama seçimleri, kaldırıldıktan sonra saklanır</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Tüm seçimler sıfırlansın mı?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Paket seçimleri sıfırlansın mı?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Seçili paketler sıfırlansın mı?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Kaynak seçimi sıfırlansın mı?</string>
     <string name="settings_system_patch_selection_no_saved">Kaydedilmiş yama seçimi yok</string>
     <string name="settings_system_patch_selection_total_summary_format">%2$sten %1$s</string>
@@ -735,6 +776,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="file_picker_sort_size_asc">Boyut (en küçüğü önce)</string>
     <string name="file_picker_sort_date_desc">Tarih (en yenisi önce)</string>
     <string name="file_picker_sort_date_asc">Tarih (en eskisi önce)</string>
+    <string name="file_picker_show_hidden_files">Gizli dosyaları göster</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Hakkında</string>
     <string name="settings_system_share_website">Web sitesini paylaş</string>
@@ -769,10 +811,15 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="skip">Atla</string>
     <string name="clear">Temizle</string>
     <string name="delete">Sil</string>
+    <string name="delete_all">Tümünü sil</string>
     <string name="remove">Kaldır</string>
     <string name="disable">Devre dışı bırak</string>
     <string name="enable">Etkinleştir</string>
     <string name="loading">Yükleniyor…</string>
+    <string name="loading_older_releases">Daha eski sürümler yükleniyor…</string>
+    <string name="creating">Oluşturuluyor…</string>
+    <string name="processing_apk">APK işleniyor…</string>
+    <string name="exporting_apks">APK\'ler dışa aktarılıyor…</string>
     <string name="not_installed">Yüklü değil</string>
     <string name="view">Görüntüle</string>
     <string name="search">Ara</string>
@@ -792,6 +839,10 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="reorder_done">Sıra kaydedildi</string>
     <string name="reset_order">Sırayı sıfırla</string>
     <string name="reset_order_done">Sıra sıfırlandı</string>
+    <string name="accessibility_move_up">Yukarı taşı</string>
+    <string name="accessibility_move_down">Aşağı taşı</string>
+    <string name="accessibility_app_moved_announcement">%1$s, %3$d\'nin %2$d konumuna taşındı</string>
+    <string name="accessibility_scroll_to_top">Listenin en üstüne kaydır</string>
     <string name="rename">Yeniden adlandır</string>
     <string name="import_">İçe aktar</string>
     <string name="export">Dışa aktar</string>
@@ -837,8 +888,9 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="changelog">Değişiklik günlüklerini görüntüle</string>
     <string name="changelog_description">Bu güncellemede yapılmış son değişiklikleri inceleyin</string>
     <string name="changelog_download_fail">Değişiklik günlüğü indirilemedi: %s</string>
-    <string name="changelog_retry">Yeniden dene</string>
     <string name="changelog_empty">Değişiklik günlüğü yok</string>
+    <string name="changelog_show_older">Daha eski sürümleri göster</string>
+    <string name="changelog_older_empty">Gösterilebilecek daha eski sürüm yok</string>
     <string name="no_network_toast">İnternet bağlantısı mevcut değil</string>
     <string name="update_available">Bir güncelleme mevcut</string>
     <string name="ready_to_install_update">Güncelleme yüklenmeye hazır</string>

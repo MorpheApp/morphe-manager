@@ -226,7 +226,9 @@ class SettingsViewModel(
      */
     fun confirmInstallerSelection(token: InstallerManager.Token) =
         viewModelScope.launch(Dispatchers.IO) {
-            if (token == InstallerManager.Token.AutoSaved) {
+            if (token == InstallerManager.Token.AutoSaved ||
+                token == InstallerManager.Token.RootPlayStore
+            ) {
                 runCatching { rootInstaller.hasRootAccess() }
             }
             installerManager.updatePrimaryToken(token)

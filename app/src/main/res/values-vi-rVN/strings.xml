@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Đã cập nhật tất cả nguồn lên mới nhất</string>
     <string name="home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
     <string name="home_search_apps">Tìm ứng dụng</string>
+    <string name="home_app_sort_title">Sắp xếp ứng dụng</string>
+    <string name="home_app_sort_manual_description">Nhấn và giữ một ứng dụng, sau đó chạm vào nút sắp xếp lại</string>
+    <string name="home_app_sort_recommended">Thứ tự đề xuất</string>
+    <string name="home_app_sort_recommended_description">Ưu tiên ứng dụng đã cài đặt và ghim</string>
+    <string name="home_app_sort_name_asc_description">Theo thứ tự bảng chữ cái, A đến Z</string>
+    <string name="home_app_sort_name_desc_description">Đảo ngược theo thứ tự bảng chữ cái, Z đến A</string>
+    <string name="home_app_sort_updates_first">Ưu tiên cập nhật vá lỗi</string>
+    <string name="home_app_sort_updates_first_description">Ưu tiên các ứng dụng có huy hiệu cập nhật, sau đó theo thứ tự đề xuất</string>
     <string name="home_no_apps_title">Không có ứng dụng nào có sẵn</string>
     <string name="home_no_apps_subtitle">Thêm nguồn vá mới hoặc bật nguồn có sẵn trong %s</string>
     <string name="home_no_apps_search_subtitle">Không có ứng dụng nào khớp với \"%s\"</string>
@@ -55,13 +63,13 @@
     <string name="home_greeting_10">Nạp caffein có ngay bản vá xịn</string>
     <!-- Morning greetings (5:00–11:59) -->
     <string name="home_greeting_morning_1">Dậy đi, vá thôi</string>
-    <string name="home_greeting_morning_2">Chào ngày mới! Ứng dụng không tự vá đâu nhá</string>
+    <string name="home_greeting_morning_2">Chào ngày mới! Ứng dụng không tự vá được đâu đấy</string>
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">Chiều nay hơi đuối? Thử vá một ứng dụng xem</string>
     <string name="home_greeting_afternoon_2">Sau bữa trưa mà vá thì cuốn lắm</string>
     <string name="home_greeting_afternoon_3">Nhiệm vụ ca chiều: vá ứng dụng</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Tối rồi! Giờ mà vá mới khác bọt</string>
+    <string name="home_greeting_evening_1">Trời tối rồi! Thử vá đi, khác bọt lắm đấy</string>
     <string name="home_greeting_evening_2">Đang thư giãn đấy ah? Hay là vá một ứng dụng đi</string>
     <string name="home_greeting_evening_3">Sắp tan làm chưa? Về nhớ vá đấy</string>
     <!-- Late night greetings (22:00–23:59) -->
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Cú đêm năng suất thật đấy</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Nguồn vá</string>
+    <string name="sources_sort_title">Sắp xếp các nguồn vá lỗi</string>
+    <string name="sources_sort_manual">Sắp xếp thủ công</string>
+    <string name="sources_sort_manual_hint">Bấm giữ một nguồn để sắp xếp lại</string>
+    <string name="sources_sort_last_updated">Cập nhật lần cuối</string>
+    <string name="sources_sort_last_updated_description">Ưu tiên cập nhật nguồn mới nhất</string>
+    <string name="sources_sort_enabled_first">Bật trước</string>
+    <string name="sources_sort_enabled_first_description">Hiển thị các nguồn đang hoạt động trước các nguồn đã tắt</string>
     <string name="sources_management_open_in_browser">Mở trong trình duyệt</string>
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
     <string name="sources_management_prerelease_toggle">Bản vá phát hành trước</string>
@@ -125,7 +140,7 @@
     <string name="home_apk_availability_recommended_label">Khuyên dùng</string>
     <string name="home_apk_availability_unpatched_label">Chưa vá</string>
     <string name="home_apk_availability_incompatible_label">Không tương thích</string>
-    <string name="home_apk_availability_yes">Có, giúp tôi vs</string>
+    <string name="home_apk_availability_yes">Có, giúp tôi với</string>
     <string name="home_apk_availability_no">Không, tôi có APK rồi</string>
     <string name="home_apk_use_saved">Sử dụng APK đã lưu</string>
     <string name="home_apk_use_installed">Sử dụng APK đã cài đặt</string>
@@ -285,6 +300,9 @@ Vùng ngoài (nét đứt): có thể bị cắt theo hình dạng biểu tượ
     <string name="home_app_info_patch_source_used">Nguồn vá đã dùng</string>
     <string name="home_app_info_install_type_custom_installer">Trình cài đặt tùy chỉnh</string>
     <string name="home_app_info_install_type_system_installer">Trình cài đặt hệ thống</string>
+    <string name="home_app_info_install_type_play_store">Cài đặt từ Cửa hàng Play</string>
+    <string name="home_app_info_install_type_root_play_store">Cài đặt từ Cửa hàng Play (Root)</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Cài đặt từ Cửa hàng Play (Shizuku)</string>
     <string name="home_app_info_patch_update_available"> Đã có bản vá mới</string>
     <string name="home_app_info_patch_update_available_description">Đã có bản vá mới. Hãy vá lại ứng dụng để áp dụng các cải tiến và bản sửa lỗi mới nhất</string>
     <string name="home_app_info_app_deleted_warning">Ứng dụng đã bị gỡ cài đặt</string>
@@ -316,6 +334,10 @@ Vùng ngoài (nét đứt): có thể bị cắt theo hình dạng biểu tượ
     <string name="patcher_failed_subtitle">Xem chi tiết lỗi bên dưới</string>
     <string name="patcher_failed_dialog_title">Không thể vá</string>
     <string name="patcher_unknown_error">Đã xảy ra lỗi không xác định</string>
+    <string name="patcher_split_step_extracting">Đang giải nén các APK chia nhỏ</string>
+    <string name="patcher_split_step_merging">Đang gộp %s</string>
+    <string name="patcher_split_step_writing">Đang viết APK đã gộp</string>
+    <string name="patcher_split_step_finalizing">Đang hoàn thiện APK đã gộp</string>
     <string name="patcher_conflict_title">Phát hiện xung đột</string>
     <string name="patcher_conflict_subtitle">Bạn cần gỡ cài đặt phiên bản hiện có</string>
     <string name="patcher_conflict_hint">Ứng dụng đã vá dùng chứng chỉ khác với phiên bản đã cài đặt. Gỡ cài đặt sẽ xóa tất cả dữ liệu ứng dụng</string>
@@ -605,11 +627,13 @@ Kích thước hình ảnh yêu cầu:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Trình cài đặt</string>
     <string name="installer_title">Trình cài đặt</string>
-    <string name="installer_internal_name">Trình cài đặt hệ thống</string>
     <string name="installer_internal_description">Dùng trình cài đặt gói của Android</string>
+    <string name="installer_play_store_description">Sử dụng trình cài đặt hệ thống và đặt Cửa hàng Play làm nguồn cài đặt</string>
+    <string name="installer_root_play_store_description">Cài đặt bằng root mà không cần xác nhận, đồng thời đặt Google Play Store làm nguồn cài đặt</string>
     <string name="installer_auto_saved_name">Trình cài đặt gắn kết đã root</string>
     <string name="installer_auto_saved_description">Gắn APK đã vá lên ứng dụng đã được cài đặt</string>
     <string name="installer_shizuku_description">Cài ẩn bằng Shizuku hoặc Sui</string>
+    <string name="installer_shizuku_play_store_description">Cài đặt thông qua Shizuku mà không cần xác nhận, đồng thời đặt Google Play Store làm nguồn cài đặt</string>
     <string name="installer_option_none">Không có</string>
     <string name="installer_none_description">Chưa cấu hình trình cài đặt dự phòng</string>
     <string name="installer_status_requires_root">Yêu cầu quyền root</string>
@@ -630,6 +654,10 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_unavailable_message">Trình cài đặt mà bạn ưu tiên (%s) hiện đang không khả dụng. Hãy thử lại sau khi sửa lỗi hoặc chuyển sang dùng trình cài đặt tiêu chuẩn</string>
     <string name="installer_unavailable_shizuku_hint">Hãy đảm bảo rằng Shizuku đang chạy và bạn đã cấp quyền cho ứng dụng này</string>
     <string name="installer_use_standard">Trình cài đặt tiêu chuẩn</string>
+    <string name="installer_play_store_warning_title">Cài đặt như được tải từ Cửa hàng Play?</string>
+    <string name="installer_play_store_warning_message">Ứng dụng đã vá sẽ được coi như tải và cài đặt từ Cửa hàng Play của Google. Nhờ đó, các dịch vụ như Android Auto có thể nhận diện ứng dụng này</string>
+    <string name="installer_play_store_warning_risk">Google Play Store có thể hiển thị bản cập nhật cho ứng dụng đã vá. Nếu bạn bấm cập nhật, APK đã vá sẽ bị ghi đè bởi phiên bản gốc và mọi bản vá cũng bị gỡ bỏ. Để tránh điều đó, hãy chọn dấu ba chấm trên cùng bên phải trong trang ứng dụng của Cửa hàng Play và tắt \"Bật tự động cập nhật\"</string>
+    <string name="installer_play_store_warning_continue">Tôi hiểu, tiếp đi</string>
     <string name="settings_prompt_installer_on_install">Hỏi chọn trình cài đặt</string>
     <string name="settings_prompt_installer_on_install_description">Luôn hiện hộp thoại chọn trình cài đặt khi cài ứng dụng đã vá</string>
     <string name="settings_auto_install_with_shizuku">Tự động cài đặt sau khi vá</string>
@@ -670,6 +698,14 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_import_manager_settings_description">Sao lưu và khôi phục lại cài đặt Morphe của bạn</string>
     <string name="settings_system_import_manager_settings_fail">Không thể nhập cài đặt Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Đã nhập cài đặt Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_title">Nhập cài đặt Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Chọn cách áp dụng các cài đặt và nguồn vá vừa nhập</string>
+    <string name="settings_system_import_selections_mode_title">Nhập lựa chọn bản vá</string>
+    <string name="settings_system_import_selections_mode_description">Chọn cách áp dụng các bản vá từng chọn và tùy chỉnh vừa nhập</string>
+    <string name="import_mode_replace_title">Thay thế hiện có</string>
+    <string name="import_mode_replace_description">Thay thế toàn bộ dữ liệu hiện tại bằng dữ liệu trong bản sao lưu. Các mục (có trong dữ liệu hiện tại) mà không có trong bản sao lưu sẽ bị xóa</string>
+    <string name="import_mode_merge_title">Hợp nhất với hiện có</string>
+    <string name="import_mode_merge_description">Chỉ thêm các mục còn thiếu từ bản sao lưu. Các mục hiện tại sẽ không bị ảnh hưởng</string>
     <string name="settings_system_export_manager_settings_fail">Không thể xuất cài đặt Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Đã xuất cài đặt Morphe</string>
     <string name="settings_system_debug">Gỡ lỗi</string>
@@ -680,6 +716,12 @@ Kích thước hình ảnh yêu cầu:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Tệp &amp; bộ nhớ</string>
     <string name="settings_system_apks_size">Tổng kích thước: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Thao tác này sẽ xóa vĩnh viễn các tệp APK đã lưu được hiển thị ở đây</string>
+    <string name="settings_system_apks_delete_selected_title">Xóa các tệp APK đã chọn?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Thao tác này sẽ xóa vĩnh viễn các tệp APK đã chọn</string>
+    <string name="settings_system_apks_deleted_all">Đã xóa các tệp APK thành công</string>
+    <string name="settings_system_apks_export_zip_success">Đã xuất APK đã chọn</string>
+    <string name="settings_system_apks_export_zip_failed">Không thể xuất các APK đã chọn</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK đã vá</string>
     <string name="settings_system_patched_apks_description">Quản lý tệp ứng dụng đã vá</string>
@@ -687,6 +729,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_patched_apks_delete_title">Xóa APK đã vá?</string>
     <string name="settings_system_patched_apks_delete_confirm">Bạn có chắc muốn xóa tệp APK đã vá cho %s không?</string>
     <string name="settings_system_patched_apks_deleted">Đã xóa APK đã vá thành công</string>
+    <string name="settings_system_patched_apks_delete_all_title">Xóa tất cả các APK đã vá?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APK gốc</string>
     <string name="settings_system_original_apks_description">Lưu để vá lại sau này. Mỗi ứng dụng chỉ lưu một phiên bản</string>
@@ -694,11 +737,13 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_original_apks_deleted">Đã xóa APK gốc thành công</string>
     <string name="settings_system_original_apks_delete_title">Xóa APK gốc?</string>
     <string name="settings_system_original_apks_delete_confirm">Bạn có muốn xóa tệp APK gốc của %s? Nếu không có APK mới, bạn sẽ không thể vá lại đâu</string>
+    <string name="settings_system_original_apks_delete_all_title">Xóa tất cả các APK gốc?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Bản vá đã chọn</string>
     <string name="settings_system_patch_selections_description">Lưu các bản vá đã chọn khi vá, kể cả sau khi gỡ cài đặt</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Đặt lại toàn bộ bản vá đã chọn?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Đặt lại gói đã chọn?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Đặt lại các gói đã chọn?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Đặt lại nguồn đã chọn?</string>
     <string name="settings_system_patch_selection_no_saved">Không có bản vá đã chọn được lưu</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s đến %2$s</string>
@@ -732,6 +777,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="file_picker_sort_size_asc">Kích thước (nhỏ nhất trước)</string>
     <string name="file_picker_sort_date_desc">Ngày (mới nhất trước)</string>
     <string name="file_picker_sort_date_asc">Ngày (cũ nhất trước)</string>
+    <string name="file_picker_show_hidden_files">Hiển thị tệp ẩn</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Giới thiệu</string>
     <string name="settings_system_share_website">Chia sẻ</string>
@@ -766,10 +812,15 @@ Kích thước hình ảnh yêu cầu:
     <string name="skip">Thôi</string>
     <string name="clear">Dọn dẹp</string>
     <string name="delete">Xoá</string>
+    <string name="delete_all">Xóa tất cả</string>
     <string name="remove">Xóa</string>
     <string name="disable">Tắt</string>
     <string name="enable">Không sợ</string>
     <string name="loading">Đang tải…</string>
+    <string name="loading_older_releases">Đang tải các bản phát hành cũ…</string>
+    <string name="creating">Đang tạo…</string>
+    <string name="processing_apk">Đang xử lý APK…</string>
+    <string name="exporting_apks">Đang xuất APK…</string>
     <string name="not_installed">Chưa cài đặt</string>
     <string name="view">Xem</string>
     <string name="search">Tìm kiếm</string>
@@ -789,6 +840,10 @@ Kích thước hình ảnh yêu cầu:
     <string name="reorder_done">Đã lưu thứ tự</string>
     <string name="reset_order">Đặt lại thứ tự</string>
     <string name="reset_order_done">Đặt lại thứ tự</string>
+    <string name="accessibility_move_up">Di chuyển lên</string>
+    <string name="accessibility_move_down">Di chuyển xuống</string>
+    <string name="accessibility_app_moved_announcement">%1$s đã được di chuyển đến vị trí %2$d trong %3$d</string>
+    <string name="accessibility_scroll_to_top">Về đầu danh sách</string>
     <string name="rename">Đổi tên</string>
     <string name="import_">Nhập</string>
     <string name="export">Xuất</string>
@@ -834,8 +889,9 @@ Kích thước hình ảnh yêu cầu:
     <string name="changelog">Lịch sử cập nhật</string>
     <string name="changelog_description">Xem những thay đổi mới nhất trong bản cập nhật này</string>
     <string name="changelog_download_fail">Không thể tải lịch sử cập nhật: %s</string>
-    <string name="changelog_retry">Thử lại</string>
     <string name="changelog_empty">Không có lịch sử cập nhật</string>
+    <string name="changelog_show_older">Các bản phát hành cũ</string>
+    <string name="changelog_older_empty">Không có bản phát hành nào trước đây</string>
     <string name="no_network_toast">Không có kết nối mạng</string>
     <string name="update_available">Đã có bản cập nhật mới</string>
     <string name="ready_to_install_update">Sẵn sàng cài đặt bản cập nhật</string>

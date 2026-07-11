@@ -24,7 +24,7 @@ fun Color.compositeOver(background: Color, alpha: Float = this.alpha): Color = C
  * Returns true if this color, when used as a background, requires light (white) content for contrast.
  * Uses WCAG relative luminance threshold.
  */
-fun Color.requiresLightContent(): Boolean = luminance() <= 0.179f
+fun Color.requiresLightContent(): Boolean = luminance() < 0.5f
 
 /**
  * Lighten a color by mixing with white

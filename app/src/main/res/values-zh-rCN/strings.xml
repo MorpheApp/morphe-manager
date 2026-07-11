@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">您的源已是最新的</string>
     <string name="home_sources_are_loading">源正在加载，请稍等…</string>
     <string name="home_search_apps">搜索应用</string>
+    <string name="home_app_sort_title">排序应用</string>
+    <string name="home_app_sort_manual_description">长按一个应用，然后点击重新排序按钮</string>
+    <string name="home_app_sort_recommended">推荐顺序</string>
+    <string name="home_app_sort_recommended_description">优先显示已安装和固定应用</string>
+    <string name="home_app_sort_name_asc_description">字母顺序，A 到 Z</string>
+    <string name="home_app_sort_name_desc_description">反向字母顺序，Z 到 A</string>
+    <string name="home_app_sort_updates_first">补丁更新优先</string>
+    <string name="home_app_sort_updates_first_description">有更新标记的应用优先，然后按推荐顺序排列</string>
     <string name="home_no_apps_title">没有可用的应用</string>
     <string name="home_no_apps_subtitle">添加一个补丁源或在 %s 中启用现有补丁源</string>
     <string name="home_no_apps_search_subtitle">没有应用匹配“%s”</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">夜间且高效</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">补丁源</string>
+    <string name="sources_sort_title">对补丁源进行排序</string>
+    <string name="sources_sort_manual">手动排序</string>
+    <string name="sources_sort_manual_hint">长按源以重新排序</string>
+    <string name="sources_sort_last_updated">上次更新</string>
+    <string name="sources_sort_last_updated_description">最新更新的源优先</string>
+    <string name="sources_sort_enabled_first">已启用优先</string>
+    <string name="sources_sort_enabled_first_description">在禁用源之前显示活动源</string>
     <string name="sources_management_open_in_browser">在浏览器中打开链接</string>
     <string name="sources_management_failed_to_open_url">无法打开URL</string>
     <string name="sources_management_prerelease_toggle">预发布补丁</string>
@@ -285,6 +300,9 @@
     <string name="home_app_info_patch_source_used">使用的补丁源</string>
     <string name="home_app_info_install_type_custom_installer">自定义安装程序</string>
     <string name="home_app_info_install_type_system_installer">系统安装程序</string>
+    <string name="home_app_info_install_type_play_store">Play商店安装</string>
+    <string name="home_app_info_install_type_root_play_store">Root Play商店安装</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play商店安装</string>
     <string name="home_app_info_patch_update_available">有可用的补丁更新</string>
     <string name="home_app_info_patch_update_available_description">有新的修补版本可用。重新修补您的应用以获取最新改进和修复</string>
     <string name="home_app_info_app_deleted_warning">应用已卸载</string>
@@ -309,13 +327,17 @@
     <string name="patcher_tab_game">游戏</string>
     <string name="patcher_long_step_warning">此步骤可能需要一段时间。请稍候…</string>
     <string name="patcher_installing_subtitle">准备摇滚！ 🎸</string>
-    <string name="patcher_success_title">全部完成！ 🎉</string>
+    <string name="patcher_success_title">完成！🎉</string>
     <string name="patcher_success_subtitle">您的应用已修补并安装！</string>
-    <string name="patcher_complete_title">修补完成！ ✨</string>
+    <string name="patcher_complete_title">补丁完成！✨</string>
     <string name="patcher_failed_title">哎呀！出现错误</string>
     <string name="patcher_failed_subtitle">请查看下方的错误详情</string>
-    <string name="patcher_failed_dialog_title">修补失败</string>
+    <string name="patcher_failed_dialog_title">补丁失败</string>
     <string name="patcher_unknown_error">发生未知错误</string>
+    <string name="patcher_split_step_extracting">提取拆分 APK</string>
+    <string name="patcher_split_step_merging">合并 %s</string>
+    <string name="patcher_split_step_writing">正在写入合并后的 APK</string>
+    <string name="patcher_split_step_finalizing">正在完成合并后的 APK</string>
     <string name="patcher_conflict_title">包冲突</string>
     <string name="patcher_conflict_subtitle">您需要卸载现有版本</string>
     <string name="patcher_conflict_hint">修补后的应用使用的证书与已安装版本不同。卸载将清除所有应用数据</string>
@@ -604,11 +626,13 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">安装程序</string>
     <string name="installer_title">选择安装程序</string>
-    <string name="installer_internal_name">系统安装程序</string>
     <string name="installer_internal_description">使用 Android 包安装程序</string>
+    <string name="installer_play_store_description">使用系统安装程序，并将Google Play商店设置为安装来源</string>
+    <string name="installer_root_play_store_description">以 root 权限静默安装，并将 Google Play Store 设置为安装来源</string>
     <string name="installer_auto_saved_name">Rooted 挂载安装器</string>
     <string name="installer_auto_saved_description">将修补后的 APK 安装在已安装的应用程序上</string>
     <string name="installer_shizuku_description">使用 Shizuku 或 Sui 静默安装。</string>
+    <string name="installer_shizuku_play_store_description">通过 Shizuku 或 Sui 静默安装，并将 Google Play Store 设置为安装来源</string>
     <string name="installer_option_none">无备用</string>
     <string name="installer_none_description">未配置备用安装程序</string>
     <string name="installer_status_requires_root">需要 root 权限</string>
@@ -629,6 +653,10 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_message">您的首选安装程序（%s）当前不可用。您可以修复问题并重试，或使用标准安装程序</string>
     <string name="installer_unavailable_shizuku_hint">确保 Shizuku 正在运行并已授予此应用权限</string>
     <string name="installer_use_standard">使用标准</string>
+    <string name="installer_play_store_warning_title">作为 Play Store 安装？</string>
+    <string name="installer_play_store_warning_message">补丁应用将被记录为从 Google Play Store 安装。这可以让 Android Auto 等服务将其识别为 Play Store 应用</string>
+    <string name="installer_play_store_warning_risk">Play Store 可能会为补丁应用提供更新。安装该更新将用原始版本覆盖补丁 APK 并移除补丁。如果提示更新，请点击应用在 Play Store 页面上的三点菜单，然后选择“关闭更新”</string>
+    <string name="installer_play_store_warning_continue">我知道了，继续</string>
     <string name="settings_prompt_installer_on_install">安装程序选择提示</string>
     <string name="settings_prompt_installer_on_install_description">每次安装已修补的应用时，都会显示安装程序选择对话框</string>
     <string name="settings_auto_install_with_shizuku">补丁应用后自动安装</string>
@@ -669,6 +697,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">备份和还原您的 Morphe 设置</string>
     <string name="settings_system_import_manager_settings_fail">导入 Morphe 设置失败：%s</string>
     <string name="settings_system_import_manager_settings_success">Morphe 设置已导入</string>
+    <string name="settings_system_import_manager_settings_mode_title">导入 Morphe 设置</string>
+    <string name="settings_system_import_manager_settings_mode_description">选择导入的设置和资源的应用方式</string>
+    <string name="settings_system_import_selections_mode_title">导入补丁选择</string>
+    <string name="settings_system_import_selections_mode_description">选择如何应用导入的选择和补丁选项</string>
+    <string name="import_mode_replace_title">替换现有</string>
+    <string name="import_mode_replace_description">完全匹配备份。如果备份中缺少项目，则会被移除</string>
+    <string name="import_mode_merge_title">合并现有</string>
+    <string name="import_mode_merge_description">添加备份中缺失的项目。现有项目保持不变</string>
     <string name="settings_system_export_manager_settings_fail">导出 Morphe 设置失败：%s</string>
     <string name="settings_system_export_manager_settings_success">Morphe 设置已导出</string>
     <string name="settings_system_debug">调试</string>
@@ -679,6 +715,12 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">文件和存储</string>
     <string name="settings_system_apks_size">总大小：%s</string>
+    <string name="settings_system_apks_delete_all_confirm">这将永久删除此处显示的已保存 APK 文件</string>
+    <string name="settings_system_apks_delete_selected_title">删除选中的 APK？</string>
+    <string name="settings_system_apks_delete_selected_confirm">这将永久删除选中的 APK 文件</string>
+    <string name="settings_system_apks_deleted_all">已成功删除 APK</string>
+    <string name="settings_system_apks_export_zip_success">已导出的 APK</string>
+    <string name="settings_system_apks_export_zip_failed">导出选定的 APK 失败</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">已修补 APK</string>
     <string name="settings_system_patched_apks_description">管理保存的已修补应用文件</string>
@@ -686,6 +728,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_delete_title">是否要删除已保存的修补 APK？</string>
     <string name="settings_system_patched_apks_delete_confirm">是否要删除选中的修补 APK？</string>
     <string name="settings_system_patched_apks_deleted">已成功删除修补 APK</string>
+    <string name="settings_system_patched_apks_delete_all_title">删除所有已修补的 APK？</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">原始 APK</string>
     <string name="settings_system_original_apks_description">保留应用以供重新修补。每个应用只会保留一个版本</string>
@@ -693,11 +736,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_deleted">已成功删除原始 APK</string>
     <string name="settings_system_original_apks_delete_title">是否要删除原始 APK？</string>
     <string name="settings_system_original_apks_delete_confirm">删除 %s 的原始 APK？没有新的 APK，您将无法重新修补</string>
+    <string name="settings_system_original_apks_delete_all_title">删除所有原始 APK？</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">补丁选择项</string>
     <string name="settings_system_patch_selections_description">保存的补丁选择项，在程序卸载后也会保留</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">重置补丁选择?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">重置补丁选择?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">重置选定的软件包？</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">重置补丁选择?</string>
     <string name="settings_system_patch_selection_no_saved">重置补丁选择</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s 到 %2$s</string>
@@ -731,6 +776,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_size_asc">大小 (从小到大)</string>
     <string name="file_picker_sort_date_desc">日期 (最新到旧)</string>
     <string name="file_picker_sort_date_asc">日期 (从旧到新)</string>
+    <string name="file_picker_show_hidden_files">显示隐藏的文件</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">关于</string>
     <string name="settings_system_share_website">分享网站</string>
@@ -765,10 +811,15 @@ morphe_header_custom_dark.png
     <string name="skip">跳过</string>
     <string name="clear">清除</string>
     <string name="delete">删除</string>
+    <string name="delete_all">全部删除</string>
     <string name="remove">移除</string>
     <string name="disable">禁用</string>
     <string name="enable">启用</string>
     <string name="loading">正在加载…</string>
+    <string name="loading_older_releases">正在加载旧版本…</string>
+    <string name="creating">创建中…</string>
+    <string name="processing_apk">正在处理 APK…</string>
+    <string name="exporting_apks">正在导出 APK…</string>
     <string name="not_installed">未安装</string>
     <string name="view">查看</string>
     <string name="search">搜索</string>
@@ -788,6 +839,10 @@ morphe_header_custom_dark.png
     <string name="reorder_done">排序已保存</string>
     <string name="reset_order">重置排序</string>
     <string name="reset_order_done">订单已重置</string>
+    <string name="accessibility_move_up">上移</string>
+    <string name="accessibility_move_down">下移</string>
+    <string name="accessibility_app_moved_announcement">%1$s 移动到 %3$d 中的第 %2$d 个位置</string>
+    <string name="accessibility_scroll_to_top">滚动到列表顶部</string>
     <string name="rename">重命名</string>
     <string name="import_">导入</string>
     <string name="export">导出</string>
@@ -833,8 +888,9 @@ morphe_header_custom_dark.png
     <string name="changelog">查看更新日志</string>
     <string name="changelog_description">查看此更新中的最新更改</string>
     <string name="changelog_download_fail">下载更新日志失败：%s</string>
-    <string name="changelog_retry">重试</string>
     <string name="changelog_empty">无可用更新日志</string>
+    <string name="changelog_show_older">显示旧版本</string>
+    <string name="changelog_older_empty">没有更多旧版本显示</string>
     <string name="no_network_toast">无可用网络连接</string>
     <string name="update_available">有可用更新</string>
     <string name="ready_to_install_update">准备安装更新</string>

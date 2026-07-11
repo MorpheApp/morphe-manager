@@ -104,6 +104,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
     // For intent-based fallback monitoring (when session dies on OEM devices)
     private var pendingIntentFallbackPackage: String? = null
+    private var pendingIntentFallbackInstallType: InstallType = InstallType.DEFAULT
 
     // Store pending install params for retry
     private var pendingInstallFile: File? = null
@@ -265,7 +266,8 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 if (resolved.primaryUnavailable) {
                     val actualToken = selectedInstallerToken ?: resolved.primaryToken
                     when (actualToken) {
-                        InstallerManager.Token.Shizuku -> {
+                        InstallerManager.Token.Shizuku,
+                        InstallerManager.Token.ShizukuPlayStore -> {
                             Log.d(TAG, "Shizuku unavailable, showing dialog")
                             installerUnavailableDialog = InstallerUnavailableState(
                                 installerToken = actualToken,
@@ -276,7 +278,8 @@ class InstallViewModel : ViewModel(), KoinComponent {
                             selectedInstallerToken = null
                             return@launch
                         }
-                        InstallerManager.Token.AutoSaved -> {
+                        InstallerManager.Token.AutoSaved,
+                        InstallerManager.Token.RootPlayStore -> {
                             Log.d(TAG, "Root unavailable, showing dialog")
                             installerUnavailableDialog = InstallerUnavailableState(
                                 installerToken = actualToken,
@@ -325,10 +328,28 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 performStandardInstall(outputFile, originalPackageName, onPersistApp)
             }
 
+            is InstallerManager.InstallPlan.PlayStore -> {
+                Log.d(TAG, "Using Play Store installer")
+                currentInstallType = InstallType.PLAY_STORE
+                performPlayStoreInstall(outputFile, onPersistApp)
+            }
+
+            is InstallerManager.InstallPlan.RootPlayStore -> {
+                Log.d(TAG, "Using root Play Store installer")
+                currentInstallType = InstallType.ROOT_PLAY_STORE
+                performRootPlayStoreInstall(outputFile, onPersistApp)
+            }
+
             is InstallerManager.InstallPlan.Shizuku -> {
                 Log.d(TAG, "Using Shizuku installer")
                 currentInstallType = InstallType.SHIZUKU
                 performShizukuInstall(outputFile, onPersistApp)
+            }
+
+            is InstallerManager.InstallPlan.ShizukuPlayStore -> {
+                Log.d(TAG, "Using Shizuku Play Store installer")
+                currentInstallType = InstallType.SHIZUKU_PLAY_STORE
+                performShizukuPlayStoreInstall(outputFile, onPersistApp)
             }
 
             is InstallerManager.InstallPlan.Mount -> {
@@ -403,6 +424,54 @@ class InstallViewModel : ViewModel(), KoinComponent {
         }
     }
 
+    /**
+     * Intent-based install that asks Android to record Google Play Store as the installer.
+     */
+    private suspend fun performPlayStoreInstall(
+        outputFile: File,
+        onPersistApp: suspend (String, InstallType) -> Boolean
+    ) {
+        val packageInfo = withContext(Dispatchers.IO) {
+            pm.getPackageInfo(outputFile)
+                ?: throw Exception("Failed to load application info")
+        }
+        val targetPackageName = packageInfo.packageName
+
+        launchMonitoredIntentInstall(
+            targetPackageName = targetPackageName,
+            installType = InstallType.PLAY_STORE,
+            installerLabel = app.getString(R.string.home_app_info_install_type_play_store),
+            onPersistApp = onPersistApp
+        ) {
+            sessionInstaller.launchPlayStoreInstall(outputFile)
+        }
+    }
+
+    /**
+     * Root install that asks PackageManager to record Google Play Store as the installer.
+     */
+    private suspend fun performRootPlayStoreInstall(
+        outputFile: File,
+        onPersistApp: suspend (String, InstallType) -> Boolean
+    ) {
+        val packageInfo = withContext(Dispatchers.IO) {
+            pm.getPackageInfo(outputFile)
+                ?: throw Exception("Failed to load application info")
+        }
+        val targetPackageName = packageInfo.packageName
+
+        withContext(Dispatchers.IO) {
+            if (rootInstaller.hasRootAccess() && rootInstaller.isAppMounted(targetPackageName)) {
+                rootInstaller.unmount(targetPackageName)
+            }
+            rootInstaller.installAsPlayStore(outputFile)
+        }
+
+        onPersistApp(targetPackageName, InstallType.ROOT_PLAY_STORE)
+        handleInstallSuccess(targetPackageName)
+        app.toast(app.getString(R.string.install_app_success))
+    }
+
     private suspend fun confirmInstallCompleted(
         outputFile: File,
         targetPackageName: String
@@ -418,6 +487,55 @@ class InstallViewModel : ViewModel(), KoinComponent {
     /**
      * Silent install via Shizuku/Sui.
      */
+    private suspend fun performShizukuPlayStoreInstall(
+        outputFile: File,
+        onPersistApp: suspend (String, InstallType) -> Boolean
+    ) {
+        val packageInfo = withContext(Dispatchers.IO) {
+            pm.getPackageInfo(outputFile)
+                ?: throw Exception("Failed to load application info")
+        }
+        val targetPackageName = packageInfo.packageName
+
+        withContext(Dispatchers.IO) {
+            if (rootInstaller.hasRootAccess() && rootInstaller.isAppMounted(targetPackageName)) {
+                rootInstaller.unmount(targetPackageName)
+            }
+        }
+
+        Log.d(TAG, "Starting Shizuku Play Store install for $targetPackageName")
+
+        val result = try {
+            sessionInstaller.installShizukuAsPlayStore(outputFile, targetPackageName)
+        } catch (_: InstallCancelledException) {
+            installState = InstallState.Ready
+            return
+        }
+
+        when (result) {
+            InstallResult.Success -> {
+                Log.d(TAG, "Shizuku Play Store install successful")
+                onPersistApp(targetPackageName, InstallType.SHIZUKU_PLAY_STORE)
+                installedPackageName = targetPackageName
+                installState = InstallState.Installed(targetPackageName)
+                app.toast(app.getString(R.string.install_app_success))
+            }
+            is InstallResult.Conflict -> handleConflict(targetPackageName, result.message)
+            is InstallResult.Failure -> {
+                if (confirmInstallCompleted(outputFile, targetPackageName)) {
+                    Log.w(TAG, "Shizuku Play Store result failed but APK SHA-256 verification succeeded for $targetPackageName")
+                    onPersistApp(targetPackageName, InstallType.SHIZUKU_PLAY_STORE)
+                    handleInstallSuccess(targetPackageName)
+                    app.toast(app.getString(R.string.install_app_success))
+                } else {
+                    handleInstallError(
+                        app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
+                    )
+                }
+            }
+        }
+    }
+
     private suspend fun performShizukuInstall(
         outputFile: File,
         onPersistApp: suspend (String, InstallType) -> Boolean
@@ -452,9 +570,18 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 app.toast(app.getString(R.string.install_app_success))
             }
             is InstallResult.Conflict -> handleConflict(targetPackageName, result.message)
-            is InstallResult.Failure -> handleInstallError(
-                app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
-            )
+            is InstallResult.Failure -> {
+                if (confirmInstallCompleted(outputFile, targetPackageName)) {
+                    Log.w(TAG, "Shizuku result failed but APK SHA-256 verification succeeded for $targetPackageName")
+                    onPersistApp(targetPackageName, InstallType.SHIZUKU)
+                    handleInstallSuccess(targetPackageName)
+                    app.toast(app.getString(R.string.install_app_success))
+                } else {
+                    handleInstallError(
+                        app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
+                    )
+                }
+            }
         }
     }
 
@@ -522,20 +649,45 @@ class InstallViewModel : ViewModel(), KoinComponent {
         targetPackageName: String,
         onPersistApp: suspend (String, InstallType) -> Boolean
     ) {
+        launchMonitoredIntentInstall(
+            targetPackageName = targetPackageName,
+            installType = InstallType.DEFAULT,
+            installerLabel = app.getString(R.string.home_app_info_install_type_system_installer),
+            onPersistApp = onPersistApp
+        ) {
+            sessionInstaller.launchIntentInstall(outputFile)
+        }
+    }
+
+    private fun launchMonitoredIntentInstall(
+        targetPackageName: String,
+        installType: InstallType,
+        installerLabel: String,
+        onPersistApp: suspend (String, InstallType) -> Boolean,
+        launchInstaller: () -> Unit
+    ) {
+        externalInstallTimeoutJob?.cancel()
         pendingPersistCallback = onPersistApp
-        currentInstallType = InstallType.DEFAULT
+        currentInstallType = installType
 
         val baselineInfo = pm.getPackageInfo(targetPackageName)
         externalPackageWasPresentAtStart = baselineInfo != null
         externalInstallBaseline = baselineInfo?.let { pm.getVersionCode(it) to it.lastUpdateTime }
         externalInstallStartTime = System.currentTimeMillis()
 
-        // Use a lightweight sentinel so handleExternalInstallSuccess can match the package
-        // without a full External plan - we repurpose pendingExternalInstall's expectedPackage
-        // by creating a minimal sentinel object just for the package name check
+        // Use a lightweight sentinel so package broadcasts can be matched without a full
+        // External installer plan.
         pendingIntentFallbackPackage = targetPackageName
+        pendingIntentFallbackInstallType = installType
 
-        sessionInstaller.launchIntentInstall(outputFile)
+        try {
+            launchInstaller()
+        } catch (e: ActivityNotFoundException) {
+            pendingIntentFallbackPackage = null
+            pendingIntentFallbackInstallType = InstallType.DEFAULT
+            handleInstallError(app.getString(R.string.install_app_fail, e.simpleMessage()))
+            return
+        }
 
         externalInstallTimeoutJob = viewModelScope.launch {
             val timeoutAt = System.currentTimeMillis() + EXTERNAL_INSTALL_TIMEOUT_MS
@@ -551,13 +703,16 @@ class InstallViewModel : ViewModel(), KoinComponent {
             }
             if (pendingIntentFallbackPackage != null) {
                 pendingIntentFallbackPackage = null
-                handleInstallError(app.getString(R.string.installer_external_timeout, app.getString(R.string.installer_internal_name)))
+                pendingIntentFallbackInstallType = InstallType.DEFAULT
+                handleInstallError(app.getString(R.string.installer_external_timeout, installerLabel))
             }
         }
     }
 
     private fun handleIntentFallbackSuccess(packageName: String) {
+        val installType = pendingIntentFallbackInstallType
         pendingIntentFallbackPackage = null
+        pendingIntentFallbackInstallType = InstallType.DEFAULT
         externalInstallTimeoutJob?.cancel()
         externalInstallBaseline = null
         externalInstallStartTime = null
@@ -566,7 +721,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
             // Detached from viewModelScope: the broadcast may arrive after the VM is
             // cleared, so persistence must run on a scope that outlives it
             applicationScope.launch {
-                runCatching { callback(packageName, InstallType.DEFAULT) }
+                runCatching { callback(packageName, installType) }
                     .onFailure { Log.e(TAG, "Failed to persist app data", it) }
             }
         }
@@ -630,6 +785,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     fun installMount(
         outputFile: File,
         inputFile: File?,
+        inputIsTemporary: Boolean,
         packageName: String,
         inputVersion: String,
         onPersistApp: suspend (String, InstallType) -> Boolean
@@ -684,6 +840,10 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
                 // Mount
                 rootInstaller.mount(packageName)
+
+                // Drop the input only when the caller marked it disposable; persistent copies
+                // (saved originals) must survive for future repatching
+                if (inputIsTemporary) inputFile?.delete()
 
                 // Success
                 handleInstallSuccess(packageName)
@@ -818,7 +978,8 @@ class InstallViewModel : ViewModel(), KoinComponent {
     fun openInstallerApp() {
         val dialog = installerUnavailableDialog ?: return
         when (dialog.installerToken) {
-            InstallerManager.Token.Shizuku -> {
+            InstallerManager.Token.Shizuku,
+            InstallerManager.Token.ShizukuPlayStore -> {
                 val opened = installerManager.openShizukuApp()
                 if (!opened) {
                     app.toast(app.getString(R.string.installer_status_shizuku_not_installed))
@@ -893,14 +1054,27 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
     /**
      * Launches system uninstall UI for [packageName] and suspends until the user confirms.
-     * Resets [installState] to [InstallState.Ready] after successful uninstall so the user
-     * can immediately retry installation.
+     * Resets [installState] to [InstallState.Ready] after successful uninstall, or retries
+     * the pending install request when [installAfterUninstall] is true.
      */
-    fun requestUninstall(packageName: String) {
+    fun requestUninstall(packageName: String, installAfterUninstall: Boolean = false) {
         viewModelScope.launch {
             try {
                 sessionInstaller.uninstall(packageName)
-                installState = InstallState.Ready
+                if (installAfterUninstall) {
+                    val file = pendingInstallFile
+                    val originalPkg = pendingOriginalPackageName
+                    val callback = pendingPersistCallback
+                    if (file != null && originalPkg != null && callback != null) {
+                        installState = InstallState.Ready
+                        install(file, originalPkg, callback)
+                    } else {
+                        Log.w(TAG, "Cannot restart install after uninstall: pending install data missing")
+                        installState = InstallState.Ready
+                    }
+                } else {
+                    installState = InstallState.Ready
+                }
             } catch (_: UninstallCancelledException) {
                 // User dismissed the dialog - keep current state
             }

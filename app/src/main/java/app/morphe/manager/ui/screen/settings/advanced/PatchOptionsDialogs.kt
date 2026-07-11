@@ -75,7 +75,9 @@ fun ThemeColorDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_advanced_patch_options_theme_colors),
         titleTrailingContent = {
-            IconButton(
+            DialogTitleAction(
+                icon = Icons.Outlined.Restore,
+                contentDescription = stringResource(R.string.reset),
                 onClick = {
                     patchOptionsViewModel.resetThemeColors(
                         prefs = patchOptionsPrefs,
@@ -83,12 +85,7 @@ fun ThemeColorDialog(
                         isYouTube = packageName == KnownApps.YOUTUBE
                     )
                 }
-            ) {
-                MorpheIcon(
-                    icon = Icons.Outlined.Restore,
-                    tint = LocalDialogTextColor.current
-                )
-            }
+            )
         },
         footer = {
             MorpheDialogButton(

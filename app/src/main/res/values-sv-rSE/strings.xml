@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Dina källor är uppdaterade</string>
     <string name="home_sources_are_loading">Källor läses in, vänta …</string>
     <string name="home_search_apps">Sök efter appar</string>
+    <string name="home_app_sort_title">Sortera appar</string>
+    <string name="home_app_sort_manual_description">Tryck länge på en app och tryck sedan på knappen för att ändra ordning</string>
+    <string name="home_app_sort_recommended">Rekommenderad ordning</string>
+    <string name="home_app_sort_recommended_description">Installerade och fästa appar först</string>
+    <string name="home_app_sort_name_asc_description">Alfabetisk ordning, A till Ö</string>
+    <string name="home_app_sort_name_desc_description">Omvänd alfabetisk ordning, Ö till A</string>
+    <string name="home_app_sort_updates_first">Tilläggsuppdateringar först</string>
+    <string name="home_app_sort_updates_first_description">Appar med uppdateringsbrickan först, sedan rekommenderad ordning</string>
     <string name="home_no_apps_title">Inga appar är tillgängliga</string>
     <string name="home_no_apps_subtitle">Lägg till en källa eller aktivera en befintlig i %s</string>
     <string name="home_no_apps_search_subtitle">Inga appar matchar \"%s\"</string>
@@ -54,12 +62,35 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Drivs av koffein och bra tillägg</string>
     <!-- Morning greetings (5:00–11:59) -->
+    <string name="home_greeting_morning_1">Upp och modifiera</string>
+    <string name="home_greeting_morning_2">God morgon! Apparna modifierar ju inte sig själva</string>
     <!-- Afternoon greetings (12:00–16:59) -->
+    <string name="home_greeting_afternoon_1">Eftermiddagssvacka? Modifiera något</string>
+    <string name="home_greeting_afternoon_2">Modifiering efter lunchen har en annan känsla</string>
+    <string name="home_greeting_afternoon_3">Eftermiddagsskiftet: modifieringsversionen</string>
     <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">God kväll! Modifiering på kvällen har en annan känsla</string>
+    <string name="home_greeting_evening_2">Varvar du ned? Modifiera en app först</string>
+    <string name="home_greeting_evening_3">Stämplar du ut? Modifiera något först</string>
     <!-- Late night greetings (22:00–23:59) -->
+    <string name="home_greeting_late_night_1">Fortfarande vaken? Det är också apparna som behöver modifieras</string>
+    <string name="home_greeting_late_night_2">Modifierar du sent på kvällen? Respekt</string>
+    <string name="home_greeting_late_night_3">Nattuggleläge: aktiverat</string>
     <!-- Super late night greetings (0:00–4:59) -->
+    <string name="home_greeting_super_late_1">Den bästa tiden för modifiering … sägs det</string>
+    <string name="home_greeting_super_late_2">Kan du inte sova? Modifiera något</string>
+    <string name="home_greeting_super_late_3">Vid det här laget, håll dig bara vaken och modifiera</string>
+    <string name="home_greeting_super_late_4">Du och servrarna – båda är vakna</string>
+    <string name="home_greeting_super_late_5">Nattaktiv och produktiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tilläggskällor</string>
+    <string name="sources_sort_title">Sortera tilläggskällor</string>
+    <string name="sources_sort_manual">Manuell ordning</string>
+    <string name="sources_sort_manual_hint">Tryck länge på en källa är att ändra ordning</string>
+    <string name="sources_sort_last_updated">Senast uppdaterad</string>
+    <string name="sources_sort_last_updated_description">Nyaste källuppdateringarna först</string>
+    <string name="sources_sort_enabled_first">Aktiverade först</string>
+    <string name="sources_sort_enabled_first_description">Visa aktiva källor före inaktiverade källor</string>
     <string name="sources_management_open_in_browser">Öppna i webbläsaren</string>
     <string name="sources_management_failed_to_open_url">Det gick inte att öppna webbadressen</string>
     <string name="sources_management_prerelease_toggle">Förhandsversioner av tillägg</string>
@@ -111,6 +142,8 @@
     <string name="home_apk_availability_incompatible_label">Inkompatibel</string>
     <string name="home_apk_availability_yes">Ja, hjälp mig att hitta en APK-fil</string>
     <string name="home_apk_availability_no">Nej, jag har redan en APK-fil</string>
+    <string name="home_apk_use_saved">Använd den sparade APK-filen</string>
+    <string name="home_apk_use_installed">Använd den installerade APK-filen</string>
     <string name="home_app_info_no_saved_apk">Ingen sparad APK-fil. Modifieringen kräver att du väljer APK-filen igen</string>
     <string name="home_version_requires_android">Kräver Android %s eller senare</string>
     <string name="home_apk_no_compatible_versions_title">Stöds inte på den här enheten</string>
@@ -121,6 +154,11 @@
     <string name="home_download_instructions_step1">Tryck på knappen %s nedan</string>
     <string name="home_download_instructions_step2_part1">Skrolla ned på webbsidan och tryck på</string>
     <string name="home_download_instructions_download_button_toast">Tryck på nedladdningsknappen på webbplatsen, inte här 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Toppen! Tryck nu på knappen för att fortsätta till webbplatsen 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Övning ger färdighet, och du är på god väg 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Fortfarande inte här … fortfarande inte här … 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">OK, jag respekterar engagemanget 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Du är nu en officiell Morphe-knapptestare🏅</string>
     <string name="home_download_instructions_step3">Vänta tills nedladdningen är klar och &lt;b&gt;installera inte&lt;/b&gt; APK-filen</string>
     <string name="home_download_instructions_step3_mount">Vänta tills nedladdningen är klar och &lt;b&gt;installera sedan APK-filen&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Öppna Morphe igen när nedladdningen har slutförts</string>
@@ -133,6 +171,13 @@
     <string name="home_recommended_version">Rekommenderad version</string>
     <string name="home_selected_version">Vald version</string>
     <string name="home_select_apk_title">Välj APK-fil</string>
+    <string name="home_select_any_apk_description">Välj en APK-fil för valfri app, eller välj en app som redan är installerad på enheten</string>
+    <string name="home_use_installed_app">Använd en installerad app</string>
+    <string name="home_installed_app_picker_title">Välj installerad app</string>
+    <string name="home_installed_app_picker_empty">Inga appar hittades</string>
+    <string name="home_installed_app_picker_filter_all">Alla appar</string>
+    <string name="home_installed_app_picker_filter_user">Endast användarappar</string>
+    <string name="home_installed_app_picker_filter_system">Endast systemappar</string>
     <string name="home_invalid_apk_unreadable">Det gick inte att läsa filen. Kontrollera att Extern lagring inte har batteribegränsningar</string>
     <string name="home_invalid_apk_not_an_apk">Den valda filen är inte en giltig APK-fil</string>
     <string name="home_invalid_apk_io_error">Det gick inte att öppna filen. Försök igen</string>
@@ -176,6 +221,8 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatibla versioner:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Stöds inte</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Bygge %d</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Det här är ett annat bygge av samma version. Tilläggen kräver ett specifikt bygge. </string>
     <string name="home_dialog_wrong_package_title">Fel paket har valts</string>
     <string name="home_dialog_wrong_package_description">Den valda APK-filen är inte för den app du avsåg att modifiera</string>
     <string name="home_dialog_expected_package">Förväntat paket:</string>
@@ -253,6 +300,9 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="home_app_info_patch_source_used">Tilläggskälla som används</string>
     <string name="home_app_info_install_type_custom_installer">Anpassad installerare</string>
     <string name="home_app_info_install_type_system_installer">Systemets installerare</string>
+    <string name="home_app_info_install_type_play_store">Play Butik-installation</string>
+    <string name="home_app_info_install_type_root_play_store">Play Butik-installation med rot</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Play Butik-installation med Shizuku</string>
     <string name="home_app_info_patch_update_available">Tilläggsuppdatering är tillgänglig</string>
     <string name="home_app_info_patch_update_available_description">En nyare version av tilläggen är tillgänglig. Modifiera appen igen för att få de senaste förbättringarna och felkorrigeringarna</string>
     <string name="home_app_info_app_deleted_warning">Appen har avinstallerats</string>
@@ -273,15 +323,21 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="patcher_error_log">Fellogg</string>
     <string name="patcher_error_technical">Teknisk information</string>
     <string name="patcher_error_dialog_app_info">Appinformation</string>
+    <string name="patcher_tab_logs">Modifieringsloggar</string>
+    <string name="patcher_tab_game">Spel</string>
     <string name="patcher_long_step_warning">Det här steget kan ta en stund. Vänta …</string>
     <string name="patcher_installing_subtitle">Nästan redo att rocka loss! 🎸</string>
-    <string name="patcher_success_title">Klart! 🎉</string>
+    <string name="patcher_success_title">Allt är klart! 🎉</string>
     <string name="patcher_success_subtitle">Appen är modifierad och installerad!</string>
     <string name="patcher_complete_title">Modifieringen är klar! ✨</string>
     <string name="patcher_failed_title">Hoppsan! Något gick fel</string>
     <string name="patcher_failed_subtitle">Kontrollera felinformationen nedan</string>
     <string name="patcher_failed_dialog_title">Modifieringen misslyckades</string>
     <string name="patcher_unknown_error">Okänt fel uppstod</string>
+    <string name="patcher_split_step_extracting">Extraherar delade APK-filer</string>
+    <string name="patcher_split_step_merging">Slår samman %s</string>
+    <string name="patcher_split_step_writing">Skriver sammanslagen APK-fil</string>
+    <string name="patcher_split_step_finalizing">Slutför sammanslagen APK-fil</string>
     <string name="patcher_conflict_title">Paketkonflikt</string>
     <string name="patcher_conflict_subtitle">Du måste avinstallera den befintliga versionen</string>
     <string name="patcher_conflict_hint">Den modifierade appen använder ett annat certifikat än den installerade versionen. Om du avinstallerar raderas alla appdata</string>
@@ -367,7 +423,20 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="failed_to_mount">Det gick inte att montera: %s</string>
     <string name="failed_to_unmount">Det gick inte att avmontera: %s</string>
     <!-- Patcher Screen - Mini-games -->
+    <string name="mini_game_score">Poäng %d</string>
+    <string name="mini_game_best">Rekord %d</string>
+    <string name="mini_game_new_record">Nytt rekord!</string>
+    <string name="mini_game_game_over">Spelet är slut</string>
+    <string name="mini_game_try_again">Försök igen</string>
+    <string name="mini_game_paused">Pausat</string>
     <string name="mini_game_resume">Fortsätt</string>
+    <string name="mini_game_2048_picker_subtitle">Flytta brickorna och slå ihop dem</string>
+    <string name="mini_game_flappy_picker_subtitle">Tryck för att flyga mellan rören</string>
+    <string name="mini_game_flappy_tap_to_start">Tryck för att flyga</string>
+    <string name="mini_game_snake_picker_subtitle">Ät mat och träffa inte dig själv</string>
+    <string name="mini_game_snake_swipe_to_start">Svep för att starta</string>
+    <string name="mini_game_dino_picker_subtitle">Tryck för att hoppa över kaktusarna</string>
+    <string name="mini_game_dino_tap_to_start">Tryck för att springa</string>
     <!-- Settings -->
     <string name="appearance">Utseende</string>
     <string name="advanced">Avancerat</string>
@@ -555,11 +624,13 @@ Bildernas mått ska vara följande:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installerare</string>
     <string name="installer_title">Välj installerare</string>
-    <string name="installer_internal_name">Systemets installerare</string>
     <string name="installer_internal_description">Använder Androids paketinstallerare</string>
+    <string name="installer_play_store_description">Använder systemets installerare och anger Google Play Butik som installationskälla</string>
+    <string name="installer_root_play_store_description">Installerar tyst med rot och anger Google Play Butik som installationskälla</string>
     <string name="installer_auto_saved_name">Rootad monteringsinstallerare</string>
     <string name="installer_auto_saved_description">Monterar den modifierade APK-filen över den installerade appen</string>
     <string name="installer_shizuku_description">Installerar tyst med Shizuku eller Sui</string>
+    <string name="installer_shizuku_play_store_description">Installerar tyst genom Shizuku eller Sui och anger Google Play Butik som installationskälla</string>
     <string name="installer_option_none">Ingen alternativ installerare</string>
     <string name="installer_none_description">Ingen alternativ installerare har konfigurerats</string>
     <string name="installer_status_requires_root">Kräver rotåtkomst</string>
@@ -580,8 +651,15 @@ Bildernas mått ska vara följande:
     <string name="installer_unavailable_message">Din föredragna installerare (%s) är för närvarande inte tillgänglig. Du kan åtgärda problemet och försöka igen eller använda standardinstalleraren istället</string>
     <string name="installer_unavailable_shizuku_hint">Se till att Shizuku körs och att appen har tilldelats behörighet</string>
     <string name="installer_use_standard">Använd standardinstalleraren</string>
+    <string name="installer_play_store_warning_title">Installera som Play Butik?</string>
+    <string name="installer_play_store_warning_message">Den modifierade appen registreras som installerad från Google Play Butik. Detta låter tjänster som Android Auto känna igen den som en Play Butik-app</string>
+    <string name="installer_play_store_warning_risk">Play Butik kan erbjuda uppdateringar för den modifierade appen. Om du installerar den uppdateringen skrivs den modifierade APK-filen över med den ursprungliga versionen och tilläggen tas bort. Om du uppmanas att uppdatera, tryck på trepunktsmenyn på appens Play Butik-sida och välj Inaktivera uppdateringar</string>
+    <string name="installer_play_store_warning_continue">Jag förstår, fortsätt</string>
     <string name="settings_prompt_installer_on_install">Uppmaning om val av installerare</string>
     <string name="settings_prompt_installer_on_install_description">Visar en dialogruta för att välja en installerare varje gång en modifierad app installeras</string>
+    <string name="settings_auto_install_with_shizuku">Installera automatiskt efter modifiering</string>
+    <string name="settings_auto_install_with_shizuku_description">Installerar den modifierade APK-filen tyst så snart modifieringen är klar</string>
+    <string name="settings_auto_install_prompt_conflict">\"%s\" är aktiverat – automatisk installation hoppas över</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterioptimering</string>
     <string name="settings_system_battery_optimization_description">Låter modifieringsverktyget fortsätta köras när appen minimeras</string>
@@ -617,6 +695,14 @@ Bildernas mått ska vara följande:
     <string name="settings_system_import_manager_settings_description">Säkerhetskopierar och återställer dina Morphe-inställningar</string>
     <string name="settings_system_import_manager_settings_fail">Det gick inte att importera Morphe-inställningar: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-inställningar importerades</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importera Morphe-inställningar</string>
+    <string name="settings_system_import_manager_settings_mode_description">Välj hur de importerade inställningarna och källorna ska tillämpas</string>
+    <string name="settings_system_import_selections_mode_title">Importera tillägsurval</string>
+    <string name="settings_system_import_selections_mode_description">Välj hur de importerade urvalen och tilläggsalternativen ska tillämpas</string>
+    <string name="import_mode_replace_title">Ersätt befintliga</string>
+    <string name="import_mode_replace_description">Matcha säkerhetskopian exakt. Objekt som inte finns med i säkerhetskopian tas bort</string>
+    <string name="import_mode_merge_title">Slå samman med befintliga</string>
+    <string name="import_mode_merge_description">Lägg till saknade objekt från säkerhetskopian. Befintliga objekt ändras inte</string>
     <string name="settings_system_export_manager_settings_fail">Det gick inte att exportera Morphe-inställningar: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe-inställningar exporterades</string>
     <string name="settings_system_debug">Felsökning</string>
@@ -627,6 +713,12 @@ Bildernas mått ska vara följande:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Filer och lagring</string>
     <string name="settings_system_apks_size">Total storlek: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Det här raderar de sparade APK-filerna som visas här permanent</string>
+    <string name="settings_system_apks_delete_selected_title">Radera markerade APK-filer?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Det här raderar de markerade APK-filerna permanent</string>
+    <string name="settings_system_apks_deleted_all">APK-filerna har raderats</string>
+    <string name="settings_system_apks_export_zip_success">De markerade APK-filerna har exporterats</string>
+    <string name="settings_system_apks_export_zip_failed">Det gick inte att exportera de markerade APK-filerna</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Modifierade APK-filer</string>
     <string name="settings_system_patched_apks_description">Hanterar sparade modifierade appfiler</string>
@@ -634,6 +726,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_patched_apks_delete_title">Radera modifierad APK-fil?</string>
     <string name="settings_system_patched_apks_delete_confirm">Är du säker på att du vill radera den sparade modifierade APK-filen för %s?</string>
     <string name="settings_system_patched_apks_deleted">Modifierad APK-fil har raderats</string>
+    <string name="settings_system_patched_apks_delete_all_title">Radera alla modifierade APK-filer?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Ursprungliga APK-filer</string>
     <string name="settings_system_original_apks_description">Sparas för att modifieras igen. En version per app hålls kvar</string>
@@ -641,11 +734,13 @@ Bildernas mått ska vara följande:
     <string name="settings_system_original_apks_deleted">Ursprunglig APK-fil har tagits bort</string>
     <string name="settings_system_original_apks_delete_title">Radera ursprunglig APK-fil?</string>
     <string name="settings_system_original_apks_delete_confirm">Radera den ursprungliga APK-filen för %s? Du kan inte modifiera appen igen utan att ange en ny APK-fil</string>
+    <string name="settings_system_original_apks_delete_all_title">Radera alla ursprungliga APK-filer?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Tilläggsurval</string>
     <string name="settings_system_patch_selections_description">Sparade tilläggsurval som blir kvar om appar avinstalleras</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Återställ alla urval?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Återställ paketurvalen?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Återställ de markerade paketen?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Återställ källurvalet?</string>
     <string name="settings_system_patch_selection_no_saved">Inga sparade tilläggsurval</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s i %2$s</string>
@@ -669,6 +764,7 @@ Bildernas mått ska vara följande:
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Föregående katalog</string>
     <string name="file_picker_no_files">Inga filer här</string>
+    <string name="file_picker_read_error">Det går inte att läsa den här katalogen</string>
     <string name="file_picker_internal_storage">Intern lagring</string>
     <string name="file_picker_sd_card">SD-kort</string>
     <string name="file_picker_root">Rotkatalog (/)</string>
@@ -678,6 +774,7 @@ Bildernas mått ska vara följande:
     <string name="file_picker_sort_size_asc">Storlek (minsta först)</string>
     <string name="file_picker_sort_date_desc">Datum (nyaste först)</string>
     <string name="file_picker_sort_date_asc">Datum (äldsta först)</string>
+    <string name="file_picker_show_hidden_files">Visa dolda filer</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Dela webbplatsen</string>
@@ -703,19 +800,29 @@ Bildernas mått ska vara följande:
     <string name="warning">Varning</string>
     <string name="error_">Fel</string>
     <string name="retry">Försök igen</string>
+    <string name="refresh">Uppdatera</string>
     <string name="add">Lägg till</string>
     <string name="close">Stäng</string>
+    <string name="back">Tillbaka</string>
+    <string name="next">Nästa</string>
+    <string name="done">Klart</string>
     <string name="skip">Hoppa över</string>
     <string name="clear">Rensa</string>
     <string name="delete">Radera</string>
+    <string name="delete_all">Radera alla</string>
     <string name="remove">Ta bort</string>
     <string name="disable">Inaktivera</string>
     <string name="enable">Aktivera</string>
     <string name="loading">Läser in …</string>
+    <string name="loading_older_releases">Läser in äldre versioner …</string>
+    <string name="creating">Skapar …</string>
+    <string name="processing_apk">Behandlar APK-fil …</string>
+    <string name="exporting_apks">Exporterar APK-filer …</string>
     <string name="not_installed">Inte installerad</string>
     <string name="view">Visa</string>
     <string name="search">Sök</string>
     <string name="search_no_results">Inga resultat hittades</string>
+    <string name="sort">Sortera</string>
     <string name="any_version">Valfri</string>
     <string name="enabled">Aktiverad</string>
     <string name="disabled">Inaktiverad</string>
@@ -725,6 +832,15 @@ Bildernas mått ska vara följande:
     <string name="select_all_done">Alla markerades</string>
     <string name="deselect_all">Avmarkera alla</string>
     <string name="deselect_all_done">Alla avmarkerades</string>
+    <string name="reorder_list">Ordna om listan</string>
+    <string name="reorder_list_hint">Dra för att ändra ordning</string>
+    <string name="reorder_done">Ordningen sparades</string>
+    <string name="reset_order">Återställ ordning</string>
+    <string name="reset_order_done">Ordningen återställdes</string>
+    <string name="accessibility_move_up">Flytta uppåt</string>
+    <string name="accessibility_move_down">Flytta nedåt</string>
+    <string name="accessibility_app_moved_announcement">%1$s flyttades till position %2$d av %3$d</string>
+    <string name="accessibility_scroll_to_top">Skrolla till toppen av listan</string>
     <string name="rename">Byt namn</string>
     <string name="import_">Importera</string>
     <string name="export">Exportera</string>
@@ -759,6 +875,7 @@ Bildernas mått ska vara följande:
     <string name="hide">Dölj</string>
     <string name="hidden">Dolt</string>
     <string name="unhide">Visa</string>
+    <string name="unhide_done">Visas</string>
     <string name="logs">Loggar</string>
     <string name="sources">Källor</string>
     <string name="installing_ellipsis">Installerar …</string>
@@ -769,8 +886,9 @@ Bildernas mått ska vara följande:
     <string name="changelog">Visa ändringsloggar</string>
     <string name="changelog_description">Kolla in de senaste ändringarna i den här uppdateringen</string>
     <string name="changelog_download_fail">Det gick inte att ladda ned ändringsloggen: %s</string>
-    <string name="changelog_retry">Försök igen</string>
     <string name="changelog_empty">Ingen ändringslogg är tillgänglig</string>
+    <string name="changelog_show_older">Visa äldre versioner</string>
+    <string name="changelog_older_empty">Inga äldre versioner att visa</string>
     <string name="no_network_toast">Ingen internetanslutning är tillgänglig</string>
     <string name="update_available">En uppdatering är tillgänglig</string>
     <string name="ready_to_install_update">Redo att installera uppdateringen</string>
@@ -788,6 +906,27 @@ Vill du fortsätta ändå?"</string>
     <string name="download_update_confirmation">Ladda ned uppdatering?</string>
     <!-- Onboarding coach marks -->
     <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$d av %2$d</string>
+    <string name="onboarding_sources_desc">Hantera dina tilläggskällor. Varje källa tillhandahåller tillägg som kan tillämpas i dina appar</string>
+    <string name="onboarding_swipe_title">Svepgester</string>
+    <string name="onboarding_swipe_desc">Svep ett appkort åt höger för att visa dess tillgängliga tillägg. Svep åt vänster för att dölja kortet från startskärmen</string>
+    <string name="onboarding_settings_desc">Anpassa Morphe: utseende, avancerade alternativ och systemverktyg</string>
+    <string name="onboarding_sources_patches_desc">Tryck för att visa alla tillägg som är tillgängliga från den här källan</string>
+    <string name="onboarding_sources_version_desc">Tryck på versionen för att visa den fullständiga ändringsloggen för den här källan</string>
+    <string name="onboarding_sources_prerelease_desc">Aktivera det här alternativet om du vill få förhandsversioner av tillägg från den här källan</string>
+    <string name="onboarding_appearance_tab_desc">Anpassa appens utseende: tema, accentfärg och bakgrund</string>
+    <string name="onboarding_appearance_theme_desc">Välj mellan ljust, mörkt och systemets tema. Du kan även välja en egen accentfärg eller aktivera Dynamisk färg</string>
+    <string name="onboarding_expert_mode_desc">Aktivera Expertläge för att låsa upp förmågan att välja tillägg, anpassade alternativ och andra avancerade funktioner</string>
     <!-- Translate "System" the same way as the System settings tab -->
+    <string name="onboarding_system_tab_title">Fliken System</string>
+    <string name="onboarding_system_tab_desc">Nyckellagerhantering, verktyg för att importera/exportera och appinformation</string>
+    <string name="onboarding_system_installer_desc">Välj hur modifierade appar installeras: standardinstallering, rotmontering eller Shizuku</string>
+    <string name="onboarding_system_process_runtime_desc">Kör modifieringen i en separat process för att förbättra stabiliteten och kontrollera minnesanvändningen. Rekommenderas för större appar</string>
+    <string name="onboarding_system_file_picker_desc">Aktivera för att använda den inbyggda filväljaren istället för systemets filväljare när du väljer APK-filer eller nyckellager</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
+    <string name="tour_prompt_title">Snabb funktionsgenomgång</string>
+    <string name="tour_prompt_desc">Vill du få en snabb genomgång av Morphes grundläggande funktioner?</string>
+    <string name="tour_prompt_confirm">Visa mig runt</string>
+    <string name="onboarding_restart_title">Funktionsgenomgång</string>
+    <string name="onboarding_restart_desc">Få en guidad genomgång av Morphes grundläggande funktioner</string>
 </resources>

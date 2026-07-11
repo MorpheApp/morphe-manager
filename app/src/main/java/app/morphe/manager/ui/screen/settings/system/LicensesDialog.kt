@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
@@ -24,6 +25,7 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
 import app.morphe.manager.ui.screen.shared.MorpheDialog
 import app.morphe.manager.ui.screen.shared.MorpheDialogOutlinedButton
+import app.morphe.manager.ui.screen.shared.ScrollToTopButton
 import com.mikepenz.aboutlibraries.entity.Library
 import com.mikepenz.aboutlibraries.ui.compose.LibraryColors
 import com.mikepenz.aboutlibraries.ui.compose.LibraryDefaults
@@ -37,20 +39,38 @@ import com.mikepenz.aboutlibraries.ui.compose.variant.LibraryActionKind
 private const val NOTICE_UNIQUE_ID = "app.morphe.manager"
 private val urlRegex = Regex("(https?://[\\w./?=&%-]+)")
 // Copied verbatim from NOTICE in project root. Update manually if NOTICE changes.
-private const val NOTICE_TEXT =
-    "Morphe NOTICE\n\n" +
-    "https://github.com/MorpheApp/morphe-manager\n\n" +
-    "=============\n\n" +
-    "7c. Project Name Restriction\n" +
-    "----------------------------\n\n" +
-    "The project name \"Morphe\" is a protected identifier. Derivative works\n" +
-    "must adopt a completely different identity that is not related to,\n" +
-    "confusingly similar to, or an imitation of the name \"Morphe\".\n"
+private const val NOTICE_TEXT = """
+Morphe NOTICE
+
+https://github.com/MorpheApp/morphe-manager
+
+=============
+
+Portions of this software are provided "AS IS" by the Morphe software project.
+Any express or implied warranties, including the implied warranties of
+merchantability and fitness for a particular purpose, are disclaimed.
+
+
+GPLv3 Section 7c: Prohibiting Misrepresentation of Origin
+
+You are prohibited from misrepresenting the origin of the Program,
+and modified versions of the Program must be identified and marked in
+reasonable ways as different from the original version so as not to cause
+confusion regarding their origin.
+
+
+GPLv3 Section 7e: Declining Grant of Trademark Rights
+
+This License does not grant any rights or permission under trademark law
+to use the name "Morphe" or any of the Program's trade names, trademarks,
+service marks, or logos.
+"""
 
 /**
  * Licenses dialog.
  * Shows open-source library licenses via aboutlibraries.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LicensesDialog(onDismiss: () -> Unit) {
     MorpheDialog(
@@ -119,6 +139,8 @@ fun LicensesDialog(onDismiss: () -> Unit) {
                     }
                 }
             )
+
+            ScrollToTopButton(listState = lazyListState)
         }
     }
 }

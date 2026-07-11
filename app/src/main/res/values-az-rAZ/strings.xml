@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Mənbələriniz yenilənib</string>
     <string name="home_sources_are_loading">Mənbələr yüklənilir, xahiş olunur gözləyin...</string>
     <string name="home_search_apps">Tətbiqləri axtar</string>
+    <string name="home_app_sort_title">Tətbiqləri sırala</string>
+    <string name="home_app_sort_manual_description">Tətbiqə uzun bas, sonra yenidən sıralama düyməsinə toxun</string>
+    <string name="home_app_sort_recommended">Tövsiyə olunan düzülüş</string>
+    <string name="home_app_sort_recommended_description">Əvvəlcə quraşdırılmış və nişanlanmış tətbiqlər</string>
+    <string name="home_app_sort_name_asc_description">Əlifbaya uyğun, A-dan Z-yə</string>
+    <string name="home_app_sort_name_desc_description">Əlifbanın əksinə uyğun, Z-dən A-ya</string>
+    <string name="home_app_sort_updates_first">Əvvəlcə yamaq yeniləmələri olan</string>
+    <string name="home_app_sort_updates_first_description">Əvvəlcə yeniləmə nişanları, sonra tövsiyə olunan düzülüşü olan tətbiqlər</string>
     <string name="home_no_apps_title">Mövcud tətbiq yoxdur</string>
     <string name="home_no_apps_subtitle">%s bölməsində yamaq mənbəyi əlavə edin və ya mövcud olanı aktivləşdir</string>
     <string name="home_no_apps_search_subtitle">\"%s\" ilə uyuşan tətbiq yoxdur</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Gecəcil və səmərəli</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yamaq mənbələri</string>
+    <string name="sources_sort_title">Yamaq mənbələrini sırala</string>
+    <string name="sources_sort_manual">Əl ilə sıralama</string>
+    <string name="sources_sort_manual_hint">Təkrar sıralamaq üçün mənbəyə uzun bas</string>
+    <string name="sources_sort_last_updated">Axırıncı dəfə yeniləndi</string>
+    <string name="sources_sort_last_updated_description">Əvvəlcə ən yeni mənbə yeniləmələri</string>
+    <string name="sources_sort_enabled_first">Əvvəlcə aktivləşdirilmiş</string>
+    <string name="sources_sort_enabled_first_description">İşlək mənbələri qapalı mənbələrdən əvvəl göstər</string>
     <string name="sources_management_open_in_browser">Brauzerdə açın</string>
     <string name="sources_management_failed_to_open_url">URL açmaq uğursuzdu</string>
     <string name="sources_management_prerelease_toggle">İlkin-buraxılış yamaqları</string>
@@ -236,7 +251,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="adaptive_icon_select_image">Şəkil seçin</string>
     <string name="adaptive_icon_change_image">Şəkli dəyişdir</string>
     <string name="adaptive_icon_background_color">Fon rəngi</string>
-    <string name="adaptive_icon_reset_transform">Mövqeyi və miqyası qaytar</string>
+    <string name="adaptive_icon_reset_transform">Mövqeyi və miqyası standarta qaytar</string>
     <string name="adaptive_icon_safe_zone_inner">Etibarlı yer (həmişə görünən)</string>
     <string name="adaptive_icon_safe_zone_outer">Örtük yeri (kəsilmiş ola bilər)</string>
     <string name="adaptive_icon_no_transparency_warning">Şəklin pikselləri şəffaf deyil. Nəticə səhv görünə bilər</string>
@@ -285,6 +300,9 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="home_app_info_patch_source_used">İşlədilən yamaq mənbəsi</string>
     <string name="home_app_info_install_type_custom_installer">Xüsusi quraşdırıcı</string>
     <string name="home_app_info_install_type_system_installer">Sistem quraşdırıcısı</string>
+    <string name="home_app_info_install_type_play_store">Play Store quraşdırması</string>
+    <string name="home_app_info_install_type_root_play_store">Root Play Store quraşdırması</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Shizuku, Play Store quraşdırması</string>
     <string name="home_app_info_patch_update_available">Yamaq yenilənməsi var</string>
     <string name="home_app_info_patch_update_available_description">Yamaqların daha yeni versiyası var. Ən son təkmilləşdirmələr və düzəlişlər üçün tətbiqinizi təkrar yamaqlayın</string>
     <string name="home_app_info_app_deleted_warning">Tətbiq quraşdırması silindi</string>
@@ -295,7 +313,7 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="root_gmscore_excluded">GmsCore dəstək yamağı root rejimində çıxarılır</string>
     <string name="root_pre_patch_installer_title">Quraşdırma üsulunu seç</string>
     <string name="root_pre_patch_installer_description">Cihazınızın root girişi var. Yamaqlanan tətbiqi necə quraşdırmaq istədiyinizi seçin</string>
-    <string name="root_pre_patch_installer_mount_title">Root Montajlamaq</string>
+    <string name="root_pre_patch_installer_mount_title">Root montajlama</string>
     <string name="root_pre_patch_installer_mount_description">Yamaqlanan APK-nı əsas tətbiq üzərinə montajlayır. GmsCore ehtiyacı yoxdur</string>
     <string name="root_pre_patch_installer_standard_title">Standart Quraşdırmaq</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore dəstəyi ilə ayrı tətbiq kimi quraşdırılır. Quraşdırıcı yamaqlanmadan sonra seçilə bilər</string>
@@ -305,16 +323,16 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="patcher_error_log">Xəta jurnalı</string>
     <string name="patcher_error_technical">Texniki təfsilatlar</string>
     <string name="patcher_error_dialog_app_info">Tətbiq məlumatı</string>
-    <string name="patcher_tab_logs">Yamaqlayıcı Qeydləri</string>
+    <string name="patcher_tab_logs">Yamaqlayıcı qeydləri</string>
     <string name="patcher_tab_game">Oyunlar</string>
     <string name="patcher_long_step_warning">Bu keçid bir müddət çəkə bilər. Zəhmət olmasa, gözləyin...</string>
     <string name="patcher_installing_subtitle">Təqribən rok-a hazırdır! 🎸</string>
-    <string name="patcher_success_title">Hamısı Bitdi! 🎉</string>
+    <string name="patcher_success_title">Hamısı bitdi! 🎉</string>
     <string name="patcher_success_subtitle">Tətbiqiniz yamaqlanıb və quraşdırılıb!</string>
-    <string name="patcher_complete_title">Yamaqlanma Tamamlandı! ✨</string>
+    <string name="patcher_complete_title">Yamaqlanma tamamlandı! ✨</string>
     <string name="patcher_failed_title">Vay! Nəsə səhv baş verdi</string>
     <string name="patcher_failed_subtitle">Aşağıdakı xəta təfərrüatlarını yoxlayın</string>
-    <string name="patcher_failed_dialog_title">Yamaqlanma Uğursuz Oldu</string>
+    <string name="patcher_failed_dialog_title">Yamaqlanma uğursuz oldu</string>
     <string name="patcher_unknown_error">Bilinməyən xəta baş verdi</string>
     <string name="patcher_split_step_extracting">Ayrılmış APK-lar çıxarılır</string>
     <string name="patcher_split_step_merging">%s birləşdirilir</string>
@@ -607,11 +625,13 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Quraşdırıcı</string>
     <string name="installer_title">Quraşdırıcını seç</string>
-    <string name="installer_internal_name">Sistem quraşdırıcısı</string>
     <string name="installer_internal_description">Android paket quraşdırıcısı istifadə edilir</string>
+    <string name="installer_play_store_description">Sistem quraşdırıcısın istifadə edir və Google Play Store-u quraşdırma mənbəyi kimi təyin edir</string>
+    <string name="installer_root_play_store_description">Səssizcə root ilə quraşdırır və Google Play Store-u quraşdırma mənbəyi kimi təyin edir</string>
     <string name="installer_auto_saved_name">Root-lu montajlama quraşdırıcısı</string>
     <string name="installer_auto_saved_description">Yamaqlanan APK-nı quraşdırılan tətbiq üzərinə montajlayır</string>
     <string name="installer_shizuku_description">Shizuku və ya Sui istifadə edərək səssizcə quraşdırır</string>
+    <string name="installer_shizuku_play_store_description">Shizuku yaxud Sui vasitəsilə səssizcə quraşdırır və Google Play Store-u quraşdırma mənbəyi kimi təyin edir</string>
     <string name="installer_option_none">Ehtiyat yoxdur</string>
     <string name="installer_none_description">Ehtiyat quraşdırıcı qurulan deyil</string>
     <string name="installer_status_requires_root">Root girişi ehtiyacı var</string>
@@ -632,6 +652,10 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_unavailable_message">Üstünlük verdiyiniz quraşdırıcı (%s) hazırda əlçatan deyil. Problemi təyin edə və təkrar sınaya yaxud əvəzinə standart quraşdırıcı istifadə edə bilərsiniz</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku-nun işlədiyinə və bu tətbiqə icazə verildiyinə əmin olun</string>
     <string name="installer_use_standard">İlkin olanı istifadə et</string>
+    <string name="installer_play_store_warning_title">Play Store mənbəli quraşdırılsın?</string>
+    <string name="installer_play_store_warning_message">Yamaqlanmış tətbiq Google Play Store-dan quraşdırılmış kimi qeyd olunacaq. Bu, Android Auto kimi xidmətlərin onu Play Store tətbiqi kimi tanımasına imkan verir</string>
+    <string name="installer_play_store_warning_risk">Play Store yamaqlanmış tətbiq üçün yeniləmələr təklif edə bilər. Həmin yeniləməni quraşdırma yamaqlanmış APK-nı orijinal versiya ilə əvəzləyəcək və yamaqlar silinəcək. Yenilənməyə sövq edildikdə, tətbiqin Play Store səhifəsindəki üç nöqtəli menyuya toxunun və \"Yenilənmələri qapa\" seçimini edin</string>
+    <string name="installer_play_store_warning_continue">Başa düşdüm, davam et</string>
     <string name="settings_prompt_installer_on_install">Quraşdırıcı seçimi müraciəti</string>
     <string name="settings_prompt_installer_on_install_description">Yamaqlanan tətbiqi quraşdırdığınız hər vaxt quraşdırıcı seçimi dialoqunu göstərir</string>
     <string name="settings_auto_install_with_shizuku">Yamaqlamadan sonra birbaşa quraşdır</string>
@@ -672,6 +696,14 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Morphe tənzimləmələrinizi nüsxələyir və bərpa edir</string>
     <string name="settings_system_import_manager_settings_fail">Morphe tənzimləmələrin idxal etmək olmadı: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe tənzimləmələri idxal edildi</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe tənzimləmələrin idxal et</string>
+    <string name="settings_system_import_manager_settings_mode_description">İdxal olunmuş tənzimləmələrin və mənbələrin necə tətbiq olunacağını seç</string>
+    <string name="settings_system_import_selections_mode_title">Yamaq seçimlərini idxal et</string>
+    <string name="settings_system_import_selections_mode_description">İdxal olunmuş seçimlərin və yamaq üstünlüklərinin necə tətbiq olunacağını seç</string>
+    <string name="import_mode_replace_title">Mövcud olanı əvəzlə</string>
+    <string name="import_mode_replace_description">Nüsxələməni tam olaraq uyğunlaşdır. Nüsxələmədən çatışmayan elementlər silinəcək</string>
+    <string name="import_mode_merge_title">Mövcud olanla birləşdir</string>
+    <string name="import_mode_merge_description">Nüsxələmədən çatışmayan elementləri əlavə et. Mövcud elementlər dəyişməz saxlanılır</string>
     <string name="settings_system_export_manager_settings_fail">Morphe tənzimləmələrin ixrac etmək olmadı: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe tənzimləmələri ixrac olundu</string>
     <string name="settings_system_debug">Yaxşılaşdırma</string>
@@ -682,6 +714,12 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Fayllar &amp; saxlanc</string>
     <string name="settings_system_apks_size">Tam həcm: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Bu, burada görünən saxlanılmış APK fayllarını həmişəlik siləcək</string>
+    <string name="settings_system_apks_delete_selected_title">Seçilmiş APK-lar silinsin?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Bu, seçilmiş APK fayllarını həmişəlik siləcək</string>
+    <string name="settings_system_apks_deleted_all">APK-lar uğurla silindi</string>
+    <string name="settings_system_apks_export_zip_success">Seçilmiş APK-lar köçürüldü</string>
+    <string name="settings_system_apks_export_zip_failed">Seçilmiş APK-ları köçürmək olmadı</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Yamaqlanan APK-lar</string>
     <string name="settings_system_patched_apks_description">Yamaqlanıb saxlanılan tətbiq fayllarını idarə edir</string>
@@ -689,6 +727,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_delete_title">Yamaqlanan APK silinsin?</string>
     <string name="settings_system_patched_apks_delete_confirm">%s üçün saxlanılan, yamaqlanmış APK-nı silmək istədiyinizə əminsiniz?</string>
     <string name="settings_system_patched_apks_deleted">Yamaqlanan APK uğurla silindi</string>
+    <string name="settings_system_patched_apks_delete_all_title">Bütün yamaqlanmış APK-lar silinsin?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Əsil APK-lar</string>
     <string name="settings_system_original_apks_description">Təkrar yamaqlama üçün saxlanılıb. Hər tətbiqə bir versiya saxlanılır</string>
@@ -696,11 +735,13 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_original_apks_deleted">Əsil APK uğurla silindi</string>
     <string name="settings_system_original_apks_delete_title">Əsil APK silinsin?</string>
     <string name="settings_system_original_apks_delete_confirm">%s üçün əsil APK silinsin? Yeni APK təmin etmədən təkrar yamaqlaya bilməyəcəksiniz.</string>
+    <string name="settings_system_original_apks_delete_all_title">Bütün orijinal APK-lar silinsin?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Yamaq seçimləri</string>
     <string name="settings_system_patch_selections_description">Saxlanılan yamaq seçimləri, quraşdırma ləğvi sonrası saxlanılır</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Bütün seçimlər sıfırlansın?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Paket seçimləri sıfırlansın?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Seçilmiş paketlər ilkin vəziyyətinə qaytarılsın?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Mənbə seçimi sıfırlansın?</string>
     <string name="settings_system_patch_selection_no_saved">Saxlanılan yamaq seçimləri yoxdur</string>
     <string name="settings_system_patch_selection_total_summary_format">%2$s üzrə %1$s</string>
@@ -734,6 +775,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="file_picker_sort_size_asc">Həcm (əvvəlcə ən az)</string>
     <string name="file_picker_sort_date_desc">Tarix (öncə ən yeni)</string>
     <string name="file_picker_sort_date_asc">Tarix (öncə ən köhnə)</string>
+    <string name="file_picker_show_hidden_files">Gizli faylları göstər</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Haqqında</string>
     <string name="settings_system_share_website">Veb saytı paylaş</string>
@@ -768,10 +810,15 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="skip">Ötür</string>
     <string name="clear">Təmizlə</string>
     <string name="delete">Sil</string>
+    <string name="delete_all">Hamısını sil</string>
     <string name="remove">Sil</string>
     <string name="disable">Qapadın</string>
     <string name="enable">Aktivləşdir</string>
     <string name="loading">Yüklənilir…</string>
+    <string name="loading_older_releases">Daha köhnə buraxılışlar yüklənilir…</string>
+    <string name="creating">Yaradılır…</string>
+    <string name="processing_apk">APK emal olunur…</string>
+    <string name="exporting_apks">APK-lar ixrac olunur…</string>
     <string name="not_installed">Quraşdırılmayıb</string>
     <string name="view">Baxın</string>
     <string name="search">Axtarış</string>
@@ -791,6 +838,10 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="reorder_done">Düzülüş saxlanıldı</string>
     <string name="reset_order">Düzülüşü sıfırla</string>
     <string name="reset_order_done">Düzülüş sıfırlandı</string>
+    <string name="accessibility_move_up">Yuxarı köçür</string>
+    <string name="accessibility_move_down">Aşağı köçür</string>
+    <string name="accessibility_app_moved_announcement">%1$s %3$d-dən %2$d mövqeyinə köçürüldü</string>
+    <string name="accessibility_scroll_to_top">Siyahının ən yuxarısına sürüşdür</string>
     <string name="rename">Təkrar adlandır</string>
     <string name="import_">İdxal et</string>
     <string name="export">Köçür</string>
@@ -836,8 +887,9 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="changelog">Dəyişiklik jurnallarına bax</string>
     <string name="changelog_description">Bu yeniləmədəki ən son dəyişikliklərə nəzər sal</string>
     <string name="changelog_download_fail">Dəyişiklik jurnalın yükləmək olmadı: %s</string>
-    <string name="changelog_retry">Təkrar yoxla</string>
     <string name="changelog_empty">Dəyişiklik jurnalı mövcud deyil</string>
+    <string name="changelog_show_older">Daha köhnə buraxılışları göstər</string>
+    <string name="changelog_older_empty">Göstəriləcək daha köhnə buraxılışlar yoxdur</string>
     <string name="no_network_toast">İnternet bağlantısı əlçatan deyil</string>
     <string name="update_available">Yenilənmə mövcuddur</string>
     <string name="ready_to_install_update">Yenilənmə quraşdırılmağa hazırdır</string>

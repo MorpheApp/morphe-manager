@@ -66,7 +66,11 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
                 workspace = File(cacheDir),
                 logger = logger,
                 skipUnneededSplits = skipUnneededSplits,
-                onEvent = { event -> onProgress(event.toLocalizedString(context), State.RUNNING, null) }
+                onEvent = { event ->
+                    val message = event.toLocalizedString(context)
+                    logger.info(message)
+                    onProgress(message, State.RUNNING, null)
+                }
             )
 
             try {

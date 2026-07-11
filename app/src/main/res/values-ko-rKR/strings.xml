@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">소스가 최신 상태입니다</string>
     <string name="home_sources_are_loading">소스를 불러오는 중, 잠시만 기다려 주세요…</string>
     <string name="home_search_apps">앱 검색</string>
+    <string name="home_app_sort_title">앱 정렬</string>
+    <string name="home_app_sort_manual_description">앱을 길게 탭한 후에 정렬 버튼을 탭하면 순서를 변경할 수 있습니다</string>
+    <string name="home_app_sort_recommended">권장 순서</string>
+    <string name="home_app_sort_recommended_description">설치된 앱 및 고정된 앱을 먼저 표시</string>
+    <string name="home_app_sort_name_asc_description">알파벳 오름차순으로 표시</string>
+    <string name="home_app_sort_name_desc_description">알파벳 내림차순으로 표시</string>
+    <string name="home_app_sort_updates_first">패치 업데이트 우선</string>
+    <string name="home_app_sort_updates_first_description">업데이트 배지가 있는 앱을 먼저, 그 다음 권장 순서대로 표시</string>
     <string name="home_no_apps_title">사용 가능한 앱이 없습니다</string>
     <string name="home_no_apps_subtitle">%s에 패치 소스를 추가하거나 기존 패치 소스를 활성화하세요</string>
     <string name="home_no_apps_search_subtitle">\'%s\'와 일치하는 앱이 없습니다</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">야행성이면서 생산적이네요</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">패치 소스</string>
+    <string name="sources_sort_title">패치 소스 정렬</string>
+    <string name="sources_sort_manual">수동 정렬</string>
+    <string name="sources_sort_manual_hint">소스를 길게 탭하여 순서를 변경하세요</string>
+    <string name="sources_sort_last_updated">최근 업데이트 우선</string>
+    <string name="sources_sort_last_updated_description">최근 업데이트된 소스부터 먼저 표시</string>
+    <string name="sources_sort_enabled_first">활성화된 소스 우선</string>
+    <string name="sources_sort_enabled_first_description">비활성화된 소스보다 활성화된 소스를 먼저 표시</string>
     <string name="sources_management_open_in_browser">브라우저에서 열기</string>
     <string name="sources_management_failed_to_open_url">URL을 열 수 없습니다</string>
     <string name="sources_management_prerelease_toggle">Pre-release 패치</string>
@@ -280,11 +295,14 @@
     <string name="home_app_info_patches_name_fallback">이름 없음</string>
     <string name="home_app_info_patches_replace_fail">패치를 가져올 수 없습니다: %s</string>
     <string name="home_app_info_repatch_no_original_apk">원본 APK를 찾을 수 없습니다. 이 앱을 다시 패치할 수 없습니다</string>
-    <string name="home_app_info_original_package_name">원본 패키지 이름</string>
+    <string name="home_app_info_original_package_name">원본 앱 패키지명</string>
     <string name="home_app_info_applied_patches">적용된 패치</string>
     <string name="home_app_info_patch_source_used">사용된 패치 소스</string>
     <string name="home_app_info_install_type_custom_installer">커스텀 설치 프로그램</string>
     <string name="home_app_info_install_type_system_installer">시스템 설치 프로그램</string>
+    <string name="home_app_info_install_type_play_store">Play 스토어 설치</string>
+    <string name="home_app_info_install_type_root_play_store">루트 Play 스토어 설치</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play 스토어 설치</string>
     <string name="home_app_info_patch_update_available">패치 업데이트 사용 가능</string>
     <string name="home_app_info_patch_update_available_description">새 버전의 패치가 있습니다. 최신 개선 사항 및 수정 사항을 적용하려면 앱을 다시 패치하세요</string>
     <string name="home_app_info_app_deleted_warning">앱이 제거되었습니다</string>
@@ -403,7 +421,7 @@
     <string name="saved_app_export_failed">패치된 앱을 내보낼 수 없습니다</string>
     <string name="saved_app_removed_toast">저장된 패치된 앱을 제거하였습니다</string>
     <string name="saved_app_launch_unavailable">열기 전에 앱을 설치하세요</string>
-    <string name="package_name">패키지 이름</string>
+    <string name="package_name">앱 패키지명</string>
     <string name="failed_to_mount">마운트할 수 없습니다: %s</string>
     <string name="failed_to_unmount">마운트를 해제할 수 없습니다: %s</string>
     <!-- Patcher Screen - Mini-games -->
@@ -609,11 +627,13 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">설치 프로그램</string>
     <string name="installer_title">설치 프로그램 선택</string>
-    <string name="installer_internal_name">시스템 설치 프로그램</string>
     <string name="installer_internal_description">Android 패키지 설치 프로그램을 사용합니다</string>
+    <string name="installer_play_store_description">시스템 설치 관리자를 사용하고 Google Play 스토어를 설치 출처로 설정합니다</string>
+    <string name="installer_root_play_store_description">루트 권한으로 자듕으로 설치하고 Google Play 스토어를 설치 출처로 설정합니다</string>
     <string name="installer_auto_saved_name">루팅된 마운트 설치 프로그램</string>
     <string name="installer_auto_saved_description">설치된 앱 위에 패치된 APK를 마운트합니다</string>
     <string name="installer_shizuku_description">Shizuku 또는 Sui를 사용하여 자동으로 설치합니다</string>
+    <string name="installer_shizuku_play_store_description">Shizuku 또는 Sui를 통해 자동으로 설치하고 Google Play 스토어를 설치 출처로 설정합니다</string>
     <string name="installer_option_none">대체 없음</string>
     <string name="installer_none_description">설정된 대체 설치 프로그램이 없습니다</string>
     <string name="installer_status_requires_root">루트 접근 권한이 필요합니다</string>
@@ -626,7 +646,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_unsupported">설치된 Shizuku 버전은 지원되지 않습니다</string>
     <string name="installer_action_open_shizuku">Shizuku 열기</string>
     <string name="installer_hint_generic">설치할 수 없습니다. 다시 시도하거나 다른 설치 프로그램으로 변경하세요</string>
-    <string name="installer_hint_conflict">이 패키지 이름을 가진 다른 앱이 이미 설치되어 있습니다. 계속하기 전에 제거하세요</string>
+    <string name="installer_hint_conflict">이 앱 패키지명을 가진 다른 앱이 이미 설치되어 있습니다. 계속하기 전에 제거하세요</string>
     <string name="installer_external_launched">\'%s\'을 여는 중…</string>
     <string name="installer_external_timeout">\'%s\'에서 설치를 확인하지 못하였습니다. 다른 앱을 확인하고 다시 시도하세요</string>
     <string name="installer_external_success">\'%s\'이 설치 성공을 보고하였습니다</string>
@@ -634,6 +654,10 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_message">선택된 설치 프로그램(%s)을 현재 사용할 수 없습니다. 문제를 해결하고 다시 시도하거나 표준 설치 프로그램을 사용해 보세요</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku가 실행 중이고, 이 앱에 권한이 부여되었는지 확인하세요</string>
     <string name="installer_use_standard">표준을 사용합니다</string>
+    <string name="installer_play_store_warning_title">Play 스토어로 설치하시겠습니까?</string>
+    <string name="installer_play_store_warning_message">패치된 앱은 Google Play 스토어에서 설치된 것으로 기록됩니다. 이를 통해 Android Auto와 같은 서비스가 Play 스토어 앱으로 인식할 수 있습니다</string>
+    <string name="installer_play_store_warning_risk">Play 스토어에서 패치된 앱의 업데이트를 제공할 수 있습니다. 해당 업데이트를 설치하면 패치된 APK가 원래 버전으로 덮어쓰여지고 패치가 제거됩니다. 업데이트하라는 메시지가 표시되면 앱의 Play 스토어 페이지에서 점 3개 메뉴를 탭한 후 \'자동 업데이트 사용\'을 선택 해제하세요</string>
+    <string name="installer_play_store_warning_continue">알겠습니다. 계속하겠습니다</string>
     <string name="settings_prompt_installer_on_install">설치 프로그램 선택 프롬프트</string>
     <string name="settings_prompt_installer_on_install_description">패치된 앱을 설치할 때마다 설치 프로그램 선택 다이얼로그를 표시합니다</string>
     <string name="settings_auto_install_with_shizuku">패치 후 자동 설치</string>
@@ -674,6 +698,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Morphe 설정을 백업하고 복원합니다</string>
     <string name="settings_system_import_manager_settings_fail">Morphe 설정을 가져올 수 없습니다: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe 설정을 가져왔습니다</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe 설정 가져오기</string>
+    <string name="settings_system_import_manager_settings_mode_description">가져온 설정 및 소스를 적용하는 방식을 선택하세요</string>
+    <string name="settings_system_import_selections_mode_title">패치 선택 목록 가져오기</string>
+    <string name="settings_system_import_selections_mode_description">가져온 선택 목록 및 패치 옵션을 적용하는 방법을 선택하세요</string>
+    <string name="import_mode_replace_title">기존 항목 바꾸기</string>
+    <string name="import_mode_replace_description">백업과 정확히 일치합니다. 백업에 없는 항목은 제거됩니다</string>
+    <string name="import_mode_merge_title">기존 항목과 병합</string>
+    <string name="import_mode_merge_description">백업에서 누락된 항목을 추가합니다. 기존 항목은 변경되지 않습니다</string>
     <string name="settings_system_export_manager_settings_fail">Morphe 설정을 내보낼 수 없습니다: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe 설정을 내보냈습니다</string>
     <string name="settings_system_debug">디버그</string>
@@ -684,6 +716,12 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">파일 &amp; 저장소</string>
     <string name="settings_system_apks_size">전체 용량: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">저장된 APK 파일을 영구적으로 삭제합니다.</string>
+    <string name="settings_system_apks_delete_selected_title">선택된 APK를 삭제하시겠습니까?</string>
+    <string name="settings_system_apks_delete_selected_confirm">선택된 APK 파일을 영구적으로 삭제합니다</string>
+    <string name="settings_system_apks_deleted_all">APK를 성공적으로 삭제하였습니다</string>
+    <string name="settings_system_apks_export_zip_success">선택된 APK를 내보냈습니다</string>
+    <string name="settings_system_apks_export_zip_failed">선택된 APK를 내보낼 수 없습니다</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">패치된 APK</string>
     <string name="settings_system_patched_apks_description">저장된 패치된 앱 파일을 관리합니다</string>
@@ -691,6 +729,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_delete_title">패치된 APK 삭제</string>
     <string name="settings_system_patched_apks_delete_confirm">\'%s\'에 대한 저장된 패치된 APK를 삭제하시겠습니까?</string>
     <string name="settings_system_patched_apks_deleted">패치된 APK를 성공적으로 삭제하였습니다</string>
+    <string name="settings_system_patched_apks_delete_all_title">패치된 APK 모두 삭제</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">원본 APK</string>
     <string name="settings_system_original_apks_description">나중에 다시 패치할 경우를 위해 저장됩니다. 앱별로 한 개의 버전만 보관됩니다</string>
@@ -698,11 +737,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_deleted">원본 APK를 성공적으로 삭제하였습니다</string>
     <string name="settings_system_original_apks_delete_title">원본 APK 삭제</string>
     <string name="settings_system_original_apks_delete_confirm">\'%s\'에 대한 원본 APK를 삭제하시겠습니까? 다시 패치할 경우에 새 APK를 사용해야 합니다</string>
+    <string name="settings_system_original_apks_delete_all_title">원본 APK 모두 삭제</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">패치 선택 목록</string>
     <string name="settings_system_patch_selections_description">저장된 패치 선택 목록은 앱을 제거한 후에도 유지됩니다</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">모든 선택 목록 초기화</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">패키지 선택 목록 초기화</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">선택된 패키지 초기화</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">스소 선택 목록 초기화</string>
     <string name="settings_system_patch_selection_no_saved">저장된 패치 선택 목록이 없습니다</string>
     <string name="settings_system_patch_selection_total_summary_format">%2$s의 %1$s</string>
@@ -722,7 +763,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_no_patches_or_options">저장된 패치 또는 옵션이 없습니다</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">사용자 정의 파일 선택기</string>
-    <string name="settings_system_custom_file_picker_description">시스템 기본 파일 선택기가 아닌 Morphe에 내장된 파일 선택기를 사용하여 저장소를 탐색합니다</string>
+    <string name="settings_system_custom_file_picker_description">시스템 기본 파일 선택기 대신 Morphe에 내장된 파일 선택기를 사용하여 저장소를 탐색합니다</string>
     <!-- File Picker -->
     <string name="file_picker_previous_directory">이전 디렉터리</string>
     <string name="file_picker_no_files">파일이 없습니다</string>
@@ -736,6 +777,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_size_asc">크기 (작은 순)</string>
     <string name="file_picker_sort_date_desc">날짜 (최신순)</string>
     <string name="file_picker_sort_date_asc">날짜 (오래된 순)</string>
+    <string name="file_picker_show_hidden_files">숨겨진 파일 표시</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">정보</string>
     <string name="settings_system_share_website">웹사이트 공유</string>
@@ -770,10 +812,15 @@ morphe_header_custom_dark.png
     <string name="skip">건너뛰기</string>
     <string name="clear">지우기</string>
     <string name="delete">파일 삭제</string>
+    <string name="delete_all">모두 삭제</string>
     <string name="remove">제거</string>
     <string name="disable">비활성화</string>
     <string name="enable">활성화</string>
     <string name="loading">불러오는 중…</string>
+    <string name="loading_older_releases">이전 릴리스를 불러오는 중…</string>
+    <string name="creating">생성하는 중…</string>
+    <string name="processing_apk">APK를 처리하는 중…</string>
+    <string name="exporting_apks">APK를 내보내는 중…</string>
     <string name="not_installed">설치되지 않음</string>
     <string name="view">보기</string>
     <string name="search">검색</string>
@@ -789,10 +836,14 @@ morphe_header_custom_dark.png
     <string name="deselect_all">모두 선택 해제</string>
     <string name="deselect_all_done">모두 선택 해제하였습니다</string>
     <string name="reorder_list">목록 다시 정렬</string>
-    <string name="reorder_list_hint">다시 정렬하려면 드래그하세요</string>
+    <string name="reorder_list_hint">앱을 드래그하여 순서를 변경하세요</string>
     <string name="reorder_done">순서를 저장하였습니다</string>
     <string name="reset_order">순서 초기화</string>
     <string name="reset_order_done">순서를 초기화하였습니다</string>
+    <string name="accessibility_move_up">위로 이동</string>
+    <string name="accessibility_move_down">아래로 이동</string>
+    <string name="accessibility_app_moved_announcement">\'%1$s\'가 %3$d 개 중 %2$d 번째 위치로 이동하였습니다</string>
+    <string name="accessibility_scroll_to_top">목록 맨 위로 스크롤</string>
     <string name="rename">이름 변경</string>
     <string name="import_">가져오기</string>
     <string name="export">내보내기</string>
@@ -838,8 +889,9 @@ morphe_header_custom_dark.png
     <string name="changelog">변경 사항 보기</string>
     <string name="changelog_description">이 업데이트의 최신 변경 사항을 확인해 보세요</string>
     <string name="changelog_download_fail">변경 사항을 다운로드할 수 없습니다: %s</string>
-    <string name="changelog_retry">다시 시도</string>
     <string name="changelog_empty">변경 사항이 없습니다</string>
+    <string name="changelog_show_older">이전 릴리스 보기</string>
+    <string name="changelog_older_empty">표시할 이전 릴리스가 없습니다</string>
     <string name="no_network_toast">인터넷에 연결할 수 없습니다</string>
     <string name="update_available">업데이트 사용 가능</string>
     <string name="ready_to_install_update">업데이트 설치 준비 완료</string>
@@ -873,7 +925,7 @@ morphe_header_custom_dark.png
     <string name="onboarding_system_tab_desc">키스토어 관리, 가져오기/내보내기 도구 및 앱 정보를 사용할 수 있습니다</string>
     <string name="onboarding_system_installer_desc">일반 설치, 루트 마운트 또는 Shizuku와 같은 패치된 앱의 설치 방식을 선택할 수 있습니다</string>
     <string name="onboarding_system_process_runtime_desc">안정성을 높이고 메모리 사용량을 관리하기 위해 패치 작업을 별도 프로세스에서 실행할 수 있습니다. 대용량 앱에 권장됩니다</string>
-    <string name="onboarding_system_file_picker_desc">APK 또는 키스토어를 선택 시 시스템 기본 파일 선택기가 아닌 앱에 내장된 파일 선택기를 사용할 수 있습니다</string>
+    <string name="onboarding_system_file_picker_desc">APK 또는 키스토어를 선택 시 시스템 기본 파일 선택기 대신 앱에 내장된 파일 선택기를 사용할 수 있습니다</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">빠른 기능 투어</string>
     <string name="tour_prompt_desc">Morphe의 주요 기능을 빠르게 둘러보시겠습니까?</string>

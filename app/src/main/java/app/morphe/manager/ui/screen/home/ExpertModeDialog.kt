@@ -53,6 +53,18 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.*
 import kotlinx.coroutines.launch
 
+/** Callbacks the expert-mode dialog invokes on the underlying patch selection. */
+@Stable
+class ExpertPatchActions(
+    val onPatchToggle: (bundleUid: Int, patchName: String) -> Unit,
+    val onSelectAll: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Unit,
+    val onDeselectAll: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Unit,
+    val onResetToDefault: (bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) -> Unit,
+    val onRestoreSaved: (bundleUid: Int) -> Unit,
+    val onOptionChange: (bundleUid: Int, patchName: String, optionKey: String, value: Any?) -> Unit,
+    val onResetOptions: (bundleUid: Int, patchName: String) -> Unit
+)
+
 /**
  * Advanced patch selection and configuration dialog.
  * Shown before patching when expert mode is enabled.
@@ -65,14 +77,8 @@ fun ExpertModeDialog(
     totalSelectedCount: Int,
     totalPatchesCount: Int,
     hasMultipleBundles: Boolean,
-    onPatchToggle: (bundleUid: Int, patchName: String) -> Unit,
-    onSelectAll: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Unit,
-    onDeselectAll: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Unit,
-    onResetToDefault: (bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) -> Unit,
-    onRestoreSaved: (bundleUid: Int) -> Unit = {},
+    patchActions: ExpertPatchActions,
     savedPatches: PatchSelection = emptyMap(),
-    onOptionChange: (bundleUid: Int, patchName: String, optionKey: String, value: Any?) -> Unit,
-    onResetOptions: (bundleUid: Int, patchName: String) -> Unit,
     onDismiss: () -> Unit,
     onProceed: () -> Unit
 ) {
@@ -248,10 +254,10 @@ fun ExpertModeDialog(
                 BundlePatchControls(
                     enabledCount = enabledCount,
                     totalCount = totalCount,
-                    onSelectAll = { onSelectAll(bundle.uid, displayPatches) },
-                    onDeselectAll = { onDeselectAll(bundle.uid, displayPatches) },
-                    onResetToDefault = { onResetToDefault(bundle.uid, allPatches) },
-                    onRestoreSaved = { onRestoreSaved(bundle.uid) },
+                    onSelectAll = { patchActions.onSelectAll(bundle.uid, displayPatches) },
+                    onDeselectAll = { patchActions.onDeselectAll(bundle.uid, displayPatches) },
+                    onResetToDefault = { patchActions.onResetToDefault(bundle.uid, allPatches) },
+                    onRestoreSaved = { patchActions.onRestoreSaved(bundle.uid) },
                     hasSavedSelection = savedPatches[bundle.uid]?.isNotEmpty() == true
                 )
 
@@ -263,22 +269,30 @@ fun ExpertModeDialog(
                             .weight(1f)
                     )
                 } else {
-                    Column(
+                    val singleBundleScroll = rememberScrollState()
+                    Box(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f)
-                            .verticalScroll(rememberScrollState()),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        PatchListWithUniversalSection(
-                            patches = filteredPatches,
-                            newPatchNames = newPatches[bundle.uid] ?: emptySet(),
-                            missingRequiredOptions = patchesWithMissingRequired,
-                            onToggle = { onPatchToggle(bundle.uid, it) },
-                            onConfigureOptions = {
-                                if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
-                            }
-                        )
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .verticalScroll(singleBundleScroll),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            PatchListWithUniversalSection(
+                                patches = filteredPatches,
+                                newPatchNames = newPatches[bundle.uid] ?: emptySet(),
+                                missingRequiredOptions = patchesWithMissingRequired,
+                                onToggle = { patchActions.onPatchToggle(bundle.uid, it) },
+                                onConfigureOptions = {
+                                    if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
+                                }
+                            )
+                        }
+
+                        ScrollToTopButton(scrollState = singleBundleScroll)
                     }
                 }
             } else {
@@ -354,10 +368,10 @@ fun ExpertModeDialog(
                         BundlePatchControls(
                             enabledCount = currentFiltered.count { it.second },
                             totalCount = currentFiltered.size,
-                            onSelectAll = { onSelectAll(currentBundle.uid, currentFiltered) },
-                            onDeselectAll = { onDeselectAll(currentBundle.uid, currentFiltered) },
-                            onResetToDefault = { onResetToDefault(currentBundle.uid, currentAllPatches) },
-                            onRestoreSaved = { onRestoreSaved(currentBundle.uid) },
+                            onSelectAll = { patchActions.onSelectAll(currentBundle.uid, currentFiltered) },
+                            onDeselectAll = { patchActions.onDeselectAll(currentBundle.uid, currentFiltered) },
+                            onResetToDefault = { patchActions.onResetToDefault(currentBundle.uid, currentAllPatches) },
+                            onRestoreSaved = { patchActions.onRestoreSaved(currentBundle.uid) },
                             hasSavedSelection = savedPatches[currentBundle.uid]?.isNotEmpty() == true,
                             modifier = Modifier.padding(vertical = 8.dp)
                         )
@@ -384,21 +398,25 @@ fun ExpertModeDialog(
                                     .fillMaxHeight()
                             )
                         } else {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .verticalScroll(rememberScrollState()),
-                                verticalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                PatchListWithUniversalSection(
-                                    patches = patches,
-                                    newPatchNames = newPatches[bundle.uid] ?: emptySet(),
-                                    missingRequiredOptions = patchesWithMissingRequired,
-                                    onToggle = { onPatchToggle(bundle.uid, it) },
-                                    onConfigureOptions = {
-                                        if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
-                                    }
-                                )
+                            val pageScroll = rememberScrollState()
+                            Box(modifier = Modifier.fillMaxSize()) {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .verticalScroll(pageScroll),
+                                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    PatchListWithUniversalSection(
+                                        patches = patches,
+                                        newPatchNames = newPatches[bundle.uid] ?: emptySet(),
+                                        missingRequiredOptions = patchesWithMissingRequired,
+                                        onToggle = { patchActions.onPatchToggle(bundle.uid, it) },
+                                        onConfigureOptions = {
+                                            if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
+                                        }
+                                    )
+                                }
+                                ScrollToTopButton(scrollState = pageScroll)
                             }
                         }
                     }
@@ -444,10 +462,10 @@ fun ExpertModeDialog(
             isDefaultBundle = bundleUid == 0,
             values = options[bundleUid]?.get(patch.name),
             onValueChange = { key, value ->
-                onOptionChange(bundleUid, patch.name, key, value)
+                patchActions.onOptionChange(bundleUid, patch.name, key, value)
             },
             onReset = {
-                onResetOptions(bundleUid, patch.name)
+                patchActions.onResetOptions(bundleUid, patch.name)
             },
             onDismiss = {
                 // Show a toast if the patch still has unfilled required options
@@ -574,10 +592,7 @@ private fun BundlePatchControls(
     val resetDone = stringResource(R.string.expert_mode_reset_to_default_done)
     val restoredDone = stringResource(R.string.expert_mode_restore_saved_done)
 
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
-    ) {
+    ActionPillRow(modifier = modifier) {
         ActionPillButton(
             onClick = withToast(enabledDone, onSelectAll),
             icon = Icons.Outlined.DoneAll,
@@ -915,13 +930,11 @@ private fun PatchOptionsDialog(
         onDismissRequest = onDismiss,
         title = patch.name,
         titleTrailingContent = {
-            IconButton(onClick = onReset) {
-                Icon(
-                    imageVector = Icons.Outlined.Restore,
-                    contentDescription = stringResource(R.string.reset),
-                    tint = LocalDialogTextColor.current
-                )
-            }
+            DialogTitleAction(
+                icon = Icons.Outlined.Restore,
+                contentDescription = stringResource(R.string.reset),
+                onClick = onReset
+            )
         },
         footer = {
             MorpheDialogOutlinedButton(
@@ -1983,16 +1996,16 @@ fun ExpandableSurface(
     Surface(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
-            .clickable { expanded = !expanded },
+            .clip(RoundedCornerShape(12.dp)),
         shape = RoundedCornerShape(12.dp),
         color = headerTint.copy(alpha = 0.05f)
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            // Header
+            // Click target only on the header so expanded content stays independently focusable for screen readers
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .clickable { expanded = !expanded }
                     .padding(12.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically

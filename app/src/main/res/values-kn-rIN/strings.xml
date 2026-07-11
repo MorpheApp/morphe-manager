@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
-    <string name="home_other_apps">ಇತರ ಆ್ಯಪ್‌‌ಗಳು</string>
+    <string name="home_other_apps">ಇತರ ಆ್ಯಪ್‌‌ಗಳು
+</string>
     <string name="home_not_patched_yet">ಹಾನಿಯಾದರೆ ಸರಿಪಡಿಸಲಾಗಿಲ್ಲ</string>
     <string name="home_no_patches_available">ಪ್ಯಾಚ್‌ಗಳು ಲಭ್ಯವಿಲ್ಲ</string>
     <string name="home_app_hide_title">ಈ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಮರೆ?</string>

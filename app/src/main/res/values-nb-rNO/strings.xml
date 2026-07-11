@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Kildene dine er oppdatert</string>
     <string name="home_sources_are_loading">Kilder lastes, vennligst vent…</string>
     <string name="home_search_apps">Søk etter apper</string>
+    <string name="home_app_sort_title">Sorter apper</string>
+    <string name="home_app_sort_manual_description">Trykk og hold på en app, og trykk deretter på sorter-knappen</string>
+    <string name="home_app_sort_recommended">Anbefalt rekkefølge</string>
+    <string name="home_app_sort_recommended_description">Installerte og fastsatte apper først</string>
+    <string name="home_app_sort_name_asc_description">Alfabetisk, A til Å</string>
+    <string name="home_app_sort_name_desc_description">Omvendt alfabetisk, Z til A</string>
+    <string name="home_app_sort_updates_first">Først oppdateringer</string>
+    <string name="home_app_sort_updates_first_description">Apper med oppdateringsmerker først, deretter anbefalt rekkefølge</string>
     <string name="home_no_apps_title">Ingen apper tilgjengelig</string>
     <string name="home_no_apps_subtitle">Legg til en patch-kilde eller aktiver en eksisterende i %s</string>
     <string name="home_no_apps_search_subtitle">Ingen apper samsvarer med \"%s\"</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Nattaktiv og produktiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patchkilder</string>
+    <string name="sources_sort_title">Sorter oppdateringskilder</string>
+    <string name="sources_sort_manual">Manuell rekkefølge</string>
+    <string name="sources_sort_manual_hint">Trykk og hold nede en kilde for å endre rekkefølgen</string>
+    <string name="sources_sort_last_updated">Sist oppdatert</string>
+    <string name="sources_sort_last_updated_description">Nyeste oppdateringer først</string>
+    <string name="sources_sort_enabled_first">Aktiverte først</string>
+    <string name="sources_sort_enabled_first_description">Vis aktive kilder før deaktiverte kilder</string>
     <string name="sources_management_open_in_browser">Åpne i nettleser</string>
     <string name="sources_management_failed_to_open_url">Kunne ikke åpne URL</string>
     <string name="sources_management_prerelease_toggle">Forhåndsutgitte oppdateringer</string>
@@ -285,6 +300,9 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <string name="home_app_info_patch_source_used">Patch-kilde brukt</string>
     <string name="home_app_info_install_type_custom_installer">Tilpasset installasjonsprogram</string>
     <string name="home_app_info_install_type_system_installer">Systeminstallasjonsprogram</string>
+    <string name="home_app_info_install_type_play_store">Installer fra Play Butikk</string>
+    <string name="home_app_info_install_type_root_play_store">Root-installasjon fra Play Butikk</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Butikk-installasjon</string>
     <string name="home_app_info_patch_update_available">Patch-oppdatering tilgjengelig</string>
     <string name="home_app_info_patch_update_available_description">En nyere versjon av patcher er tilgjengelig. Patch appen din på nytt for å få de nyeste forbedringene og reparasjonene</string>
     <string name="home_app_info_app_deleted_warning">Appen ble avinstallert</string>
@@ -295,7 +313,7 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <string name="root_gmscore_excluded">GmsCore-støttepakken er ekskludert i rotmodus</string>
     <string name="root_pre_patch_installer_title">Velg installasjonsmetode</string>
     <string name="root_pre_patch_installer_description">Enheten din har root-tilgang. Velg hvordan du vil installere den patchede appen</string>
-    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_title">Rotmontering</string>
     <string name="root_pre_patch_installer_mount_description">Monterer den patched APK-filen over standardappen. Ingen GmsCore nødvendig</string>
     <string name="root_pre_patch_installer_standard_title">Standard installasjon</string>
     <string name="root_pre_patch_installer_standard_description">Installeres som en separat app med GmsCore-støtte. En installasjonsprogram kan velges etter oppdatering</string>
@@ -305,17 +323,21 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <string name="patcher_error_log">Feillogg</string>
     <string name="patcher_error_technical">Tekniske detaljer</string>
     <string name="patcher_error_dialog_app_info">App info</string>
-    <string name="patcher_tab_logs">Patcherlogger</string>
+    <string name="patcher_tab_logs">Patcher-logger</string>
     <string name="patcher_tab_game">Spill</string>
     <string name="patcher_long_step_warning">Dette trinnet kan ta en stund. Vennligst vent…</string>
     <string name="patcher_installing_subtitle">Snart klar! 🎸</string>
     <string name="patcher_success_title">Ferdig! 🎉</string>
     <string name="patcher_success_subtitle">Appen din er patchet og installert!</string>
-    <string name="patcher_complete_title">Patching fullført! ✨</string>
+    <string name="patcher_complete_title">Oppdateringen er fullført! ✨</string>
     <string name="patcher_failed_title">Oops! Noe gikk galt</string>
     <string name="patcher_failed_subtitle">Sjekk feildetaljene nedenfor</string>
-    <string name="patcher_failed_dialog_title">Patching mislyktes</string>
+    <string name="patcher_failed_dialog_title">Oppdateringen mislyktes</string>
     <string name="patcher_unknown_error">Ukjent feil oppstod</string>
+    <string name="patcher_split_step_extracting">Utpakking av delte APK-er</string>
+    <string name="patcher_split_step_merging">Slår sammen %s</string>
+    <string name="patcher_split_step_writing">Skriver sammenslått APK</string>
+    <string name="patcher_split_step_finalizing">Fullfører sammenslått APK</string>
     <string name="patcher_conflict_title">Pakke konflikt</string>
     <string name="patcher_conflict_subtitle">Du må avinstallere den eksisterende versjonen</string>
     <string name="patcher_conflict_hint">Den patchede appen bruker et annet sertifikat enn den installerte versjonen. Avinstallering vil slette alle appdata</string>
@@ -604,11 +626,13 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installasjonsprogram</string>
     <string name="installer_title">Velg installasjonsprogram</string>
-    <string name="installer_internal_name">Systeminstallasjonsprogram</string>
     <string name="installer_internal_description">Bruker Android-pakkeinstallasjonsprogrammet</string>
+    <string name="installer_play_store_description">Bruker systeminstallatøren og angir Google Play Butikk som installasjonskilde</string>
+    <string name="installer_root_play_store_description">Installeres stille med root og angir Google Play Store som installasjonskilde</string>
     <string name="installer_auto_saved_name">Root-montert installasjonsprogram</string>
     <string name="installer_auto_saved_description">Monter den patched APK-filen over den installerte appen</string>
     <string name="installer_shizuku_description">Installerer lydløst ved hjelp av Shizuku eller Sui</string>
+    <string name="installer_shizuku_play_store_description">Installeres stille via Shizuku eller Sui og angir Google Play Store som installasjonskilde</string>
     <string name="installer_option_none">Ingen fallback</string>
     <string name="installer_none_description">Ingen fallback-installasjonsprogram er konfigurert</string>
     <string name="installer_status_requires_root">Krever rottilgang</string>
@@ -629,6 +653,10 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_message">Din foretrukne installasjonsprogram (%s) er for øyeblikket ikke tilgjengelig. Du kan fikse problemet og prøve igjen, eller bruke standardinstallasjonsprogrammet i stedet</string>
     <string name="installer_unavailable_shizuku_hint">Sørg for at Shizuku kjører og tillatelse er gitt til denne appen</string>
     <string name="installer_use_standard">Bruk standard</string>
+    <string name="installer_play_store_warning_title">Installer som Play Store?</string>
+    <string name="installer_play_store_warning_message">Den patchede appen vil bli registrert som installert fra Google Play Store. Dette lar tjenester som Android Auto gjenkjenne den som en Play Store-app</string>
+    <string name="installer_play_store_warning_risk">Play Store kan tilby oppdateringer for den patchede appen. Hvis du installerer den oppdateringen, vil den overskrive den patchede APK-filen med den originale versjonen og fjerne patchene. Hvis du blir bedt om å oppdatere, trykker du på menyen med tre prikker på appens Play Store-side og velger \"Slå av oppdateringer\"</string>
+    <string name="installer_play_store_warning_continue">Jeg forstår, fortsett</string>
     <string name="settings_prompt_installer_on_install">Installeringsvalg-melding</string>
     <string name="settings_prompt_installer_on_install_description">Viser installasjonsvalgdialogen hver gang en oppdatert app installeres</string>
     <string name="settings_auto_install_with_shizuku">Automatisk installasjon etter patching</string>
@@ -669,6 +697,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Sikkerhetskopierer og gjenoppretter Morphe-innstillingene dine</string>
     <string name="settings_system_import_manager_settings_fail">Kunne ikke importere Morphe-innstillinger: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-innstillinger importert</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importer Morphe-innstillinger</string>
+    <string name="settings_system_import_manager_settings_mode_description">Velg hvordan de importerte innstillingene og kildene skal brukes</string>
+    <string name="settings_system_import_selections_mode_title">Importer utvalg av endringer</string>
+    <string name="settings_system_import_selections_mode_description">Velg hvordan de importerte utvalgene og patch-alternativene skal brukes</string>
+    <string name="import_mode_replace_title">Erstatt eksisterende</string>
+    <string name="import_mode_replace_description">Samsvar nøyaktig med sikkerhetskopien. Elementer som mangler fra sikkerhetskopien vil bli fjernet</string>
+    <string name="import_mode_merge_title">Slå sammen med eksisterende</string>
+    <string name="import_mode_merge_description">Legg til manglende elementer fra sikkerhetskopien. Eksisterende elementer forblir uendret</string>
     <string name="settings_system_export_manager_settings_fail">Kunne ikke eksportere Morphe-innstillinger: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe-innstillinger eksportert</string>
     <string name="settings_system_debug">Feilsøking</string>
@@ -679,6 +715,12 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Filer og lagringsplass</string>
     <string name="settings_system_apks_size">Total størrelse: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Dette vil slette de lagrede APK-filene som vises her permanent.</string>
+    <string name="settings_system_apks_delete_selected_title">Slette valgte APK-er?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Dette vil slette de valgte APK-filene permanent.</string>
+    <string name="settings_system_apks_deleted_all">APK-er slettet.</string>
+    <string name="settings_system_apks_export_zip_success">Valgte APK-er eksportert</string>
+    <string name="settings_system_apks_export_zip_failed">Kunne ikke eksportere valgte APK-er</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patchede APK-er</string>
     <string name="settings_system_patched_apks_description">Administrerer lagrede oppdaterte applikasjonsfiler</string>
@@ -686,6 +728,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_delete_title">Slett patched APK?</string>
     <string name="settings_system_patched_apks_delete_confirm">Er du sikker på at du vil slette den lagrede patchede APK-en for %s?</string>
     <string name="settings_system_patched_apks_deleted">Patchet APK slettet</string>
+    <string name="settings_system_patched_apks_delete_all_title">Slette alle patchede APK-er?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Originale APK-er</string>
     <string name="settings_system_original_apks_description">Lagret for oppdatering på nytt. Én versjon per app holdes</string>
@@ -693,11 +736,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_deleted">Original APK slettet</string>
     <string name="settings_system_original_apks_delete_title">Slett original APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Slett original APK for %s? Du kan ikke patche på nytt uten å levere en ny APK</string>
+    <string name="settings_system_original_apks_delete_all_title">Slette alle originale APK-er?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch-valg</string>
     <string name="settings_system_patch_selections_description">Lagrede oppdateringsvalg, beholdes etter avinstallasjon</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Tilbakestill alle valg?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Tilbakestill pakkevalg?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Tilbakestille valgte pakker?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Tilbakestill kildevalg?</string>
     <string name="settings_system_patch_selection_no_saved">Ingen lagrede patch-valg</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s på tvers av %2$s</string>
@@ -731,6 +776,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_size_asc">Størrelse (minst først)</string>
     <string name="file_picker_sort_date_desc">Dato (nyeste først)</string>
     <string name="file_picker_sort_date_asc">Dato (eldste først)</string>
+    <string name="file_picker_show_hidden_files">Vis skjulte filer</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Del nettsiden</string>
@@ -765,10 +811,15 @@ morphe_header_custom_dark.png
     <string name="skip">Hopp over</string>
     <string name="clear">Fjern</string>
     <string name="delete">Slett</string>
+    <string name="delete_all">Slette alt</string>
     <string name="remove">Fjern</string>
     <string name="disable">Deaktiver</string>
     <string name="enable">Aktiver</string>
     <string name="loading">Laster…</string>
+    <string name="loading_older_releases">Laster inn eldre versjoner…</string>
+    <string name="creating">Opprettes…</string>
+    <string name="processing_apk">Behandler APK…</string>
+    <string name="exporting_apks">Eksporterer APK-er…</string>
     <string name="not_installed">Ikke installert</string>
     <string name="view">Vis</string>
     <string name="search">Søk</string>
@@ -788,6 +839,10 @@ morphe_header_custom_dark.png
     <string name="reorder_done">Rekkefølge lagret</string>
     <string name="reset_order">Tilbakestill rekkefølge</string>
     <string name="reset_order_done">Bestilling tilbakestilt</string>
+    <string name="accessibility_move_up">Flytt opp</string>
+    <string name="accessibility_move_down">Flytt ned</string>
+    <string name="accessibility_app_moved_announcement">%1$s flyttet til posisjon %2$d av %3$d</string>
+    <string name="accessibility_scroll_to_top">Rull til toppen av listen</string>
     <string name="rename">Gi nytt navn</string>
     <string name="import_">Importer</string>
     <string name="export">Eksporter</string>
@@ -833,8 +888,9 @@ morphe_header_custom_dark.png
     <string name="changelog">Vis endringslogger</string>
     <string name="changelog_description">Se de siste endringene i denne oppdateringen</string>
     <string name="changelog_download_fail">Kunne ikke laste ned endringslogg: %s</string>
-    <string name="changelog_retry">Prøv igjen</string>
     <string name="changelog_empty">Ingen endringslogg tilgjengelig</string>
+    <string name="changelog_show_older">Vis eldre utgivelser</string>
+    <string name="changelog_older_empty">Ingen eldre utgivelser å vise</string>
     <string name="no_network_toast">Ingen internettforbindelse tilgjengelig</string>
     <string name="update_available">En oppdatering er tilgjengelig</string>
     <string name="ready_to_install_update">Klar til å installere oppdatering</string>

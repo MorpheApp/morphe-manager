@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Uw bronnen zijn up-to-date</string>
     <string name="home_sources_are_loading">Bronnen worden geladen, even geduld…</string>
     <string name="home_search_apps">Apps zoeken</string>
+    <string name="home_app_sort_title">Sorteer apps</string>
+    <string name="home_app_sort_manual_description">Houd een app ingedrukt en tik vervolgens op de herordenen-knop</string>
+    <string name="home_app_sort_recommended">Aanbevolen volgorde</string>
+    <string name="home_app_sort_recommended_description">Geïnstalleerde en vastgezette apps eerst</string>
+    <string name="home_app_sort_name_asc_description">Alfabetisch, A tot Z</string>
+    <string name="home_app_sort_name_desc_description">Omgekeerd alfabetisch, Z tot A</string>
+    <string name="home_app_sort_updates_first">Eerst patches bijwerken</string>
+    <string name="home_app_sort_updates_first_description">Apps met update-badges eerst, daarna in aanbevolen volgorde</string>
     <string name="home_no_apps_title">Geen apps beschikbaar</string>
     <string name="home_no_apps_subtitle">Voeg een patchbron toe of schakel een bestaande in %s</string>
     <string name="home_no_apps_search_subtitle">Er zijn geen apps die overeenkomen met \"%s\"</string>
@@ -54,7 +62,7 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Aangedreven door cafeïne en goede patches</string>
     <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Staat op en patch</string>
+    <string name="home_greeting_morning_1">Sta op en patch</string>
     <string name="home_greeting_morning_2">Goedemorgen! Apps patchen zichzelf niet</string>
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">Middagdipje? Patch iets</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Nachtelijk en productief</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patchbronnen</string>
+    <string name="sources_sort_title">Patchbronnen sorteren</string>
+    <string name="sources_sort_manual">Handmatige volgorde</string>
+    <string name="sources_sort_manual_hint">Houd een bron ingedrukt om de volgorde te wijzigen</string>
+    <string name="sources_sort_last_updated">Laatst bijgewerkt</string>
+    <string name="sources_sort_last_updated_description">Nieuwste bronupdates eerst</string>
+    <string name="sources_sort_enabled_first">Eerst ingeschakeld</string>
+    <string name="sources_sort_enabled_first_description">Toon actieve bronnen voor uitgeschakelde bronnen</string>
     <string name="sources_management_open_in_browser">Openen in browser</string>
     <string name="sources_management_failed_to_open_url">Kan URL niet openen</string>
     <string name="sources_management_prerelease_toggle">Patches van vóór de release</string>
@@ -114,6 +129,8 @@
     <string name="sources_update_success">Bijwerken geslaagd</string>
     <string name="sources_update_unavailable">Geen bijwerken beschikbaar</string>
     <string name="sources_download_fail">Kan bronnen niet downloaden: %s</string>
+    <string name="sources_download_fail_named">\'%s\' kon niet worden bijgewerkt. Controleer je internetverbinding en probeer het opnieuw</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': patch metadata niet gevonden</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Schakel Expertmodus in Instellingen in om deze patch handmatig toe te voegen</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -134,6 +151,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download de originele .APK-bestand</string>
     <string name="home_download_instructions_steps_title">Instructies:</string>
+    <string name="home_download_instructions_step1">Druk op de \'%s\' knop hieronder</string>
     <string name="home_download_instructions_step2_part1">Scroll naar beneden op de webpagina en druk op</string>
     <string name="home_download_instructions_download_button_toast">Druk op de download op de website, en niet hier 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Geweldig! Klik nu op doorgaan en ga naar de website 👆</string>
@@ -282,6 +300,9 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="home_app_info_patch_source_used">Gebruikte bronpatch</string>
     <string name="home_app_info_install_type_custom_installer">Aangepaste installer</string>
     <string name="home_app_info_install_type_system_installer">Systeeminstaller</string>
+    <string name="home_app_info_install_type_play_store">Play Store installeren</string>
+    <string name="home_app_info_install_type_root_play_store">Root Play Store installeren</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store installeren</string>
     <string name="home_app_info_patch_update_available">Patchupdate beschikbaar</string>
     <string name="home_app_info_patch_update_available_description">Er is een nieuwere versie van patches beschikbaar. Repatch uw app om de laatste verbeteringen en correcties te krijgen</string>
     <string name="home_app_info_app_deleted_warning">App was verwijderd</string>
@@ -292,7 +313,7 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="root_gmscore_excluded">GmsCore-ondersteuningspatch is uitgesloten in rootmodus</string>
     <string name="root_pre_patch_installer_title">Kies installatiemethode</string>
     <string name="root_pre_patch_installer_description">Uw apparaten heeft root-toegang. Kies hoe u de gepatchte app wilt installeren.</string>
-    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_title">Root mount</string>
     <string name="root_pre_patch_installer_mount_description">Mount de gepatchte APK over de standaard app. Geen GmsCore nodig</string>
     <string name="root_pre_patch_installer_standard_title">Standaard Installatie</string>
     <string name="root_pre_patch_installer_standard_description">Installeert als een afzonderlijke app met GmsCore-ondersteuning. Een installer kan worden geselecteerd na het patchen</string>
@@ -302,7 +323,7 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="patcher_error_log">Foutlogboek</string>
     <string name="patcher_error_technical">Technische details</string>
     <string name="patcher_error_dialog_app_info">App-info</string>
-    <string name="patcher_tab_logs">Patcher Logs</string>
+    <string name="patcher_tab_logs">Patchlogboeken</string>
     <string name="patcher_tab_game">Spellen</string>
     <string name="patcher_long_step_warning">Deze stap kan even duren. Een ogenblik geduld...</string>
     <string name="patcher_installing_subtitle">Bijna klaar om te knallen! 🎸</string>
@@ -313,6 +334,10 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="patcher_failed_subtitle">Controleer de onderstaande foutdetails</string>
     <string name="patcher_failed_dialog_title">Patchen mislukt</string>
     <string name="patcher_unknown_error">Onbekende fout opgetreden</string>
+    <string name="patcher_split_step_extracting">Het uitpakken van split APKs</string>
+    <string name="patcher_split_step_merging">Het samenvoegen van %s</string>
+    <string name="patcher_split_step_writing">Het schrijven van het samengevoegde APK</string>
+    <string name="patcher_split_step_finalizing">Finalisatie van het samengevoegde APK</string>
     <string name="patcher_conflict_title">Pakketconflict</string>
     <string name="patcher_conflict_subtitle">Je moet de bestaande versie verwijderen</string>
     <string name="patcher_conflict_hint">De aangepaste app gebruikt een ander certificaat dan de geïnstalleerde versie. Door het verwijderen worden alle app-gegevens gewist.</string>
@@ -601,11 +626,13 @@ De afbeelddimensionen moeten als volgt zijn:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
     <string name="installer_title">Installatieprogramma selecteren</string>
-    <string name="installer_internal_name">Systeeminstaller</string>
     <string name="installer_internal_description">Gebruikt de Android-pakketinstaller</string>
+    <string name="installer_play_store_description">Gebruikt de systeeminstaller en stelt de Google Play Store in als de installatiebron</string>
+    <string name="installer_root_play_store_description">Installeert in stilte met root en stelt Google Play Store in als de installatiebron</string>
     <string name="installer_auto_saved_name">Geroot geïnstalleerde versie</string>
     <string name="installer_auto_saved_description">Installeert het gepatchte APK over de ge├»nstalleerde app</string>
     <string name="installer_shizuku_description">Installeert stil via Shizuku of Sui</string>
+    <string name="installer_shizuku_play_store_description">Installeert in stilte via Shizuku of Sui en stelt Google Play Store in als de installatiebron</string>
     <string name="installer_option_none">Geen fallback</string>
     <string name="installer_none_description">Er is geen fallback-installer geconfigureerd</string>
     <string name="installer_status_requires_root">Vereist root-toegang</string>
@@ -626,6 +653,10 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_unavailable_message">Uw voorkeursinstallatieprogramma (%s) is momenteel niet beschikbaar. U kunt het probleem oplossen en opnieuw proberen of het standaardinstallatieprogramma gebruiken</string>
     <string name="installer_unavailable_shizuku_hint">Zorg ervoor dat Shizuku draait en dat toestemming is gegeven aan deze app</string>
     <string name="installer_use_standard">Standaard gebruiken</string>
+    <string name="installer_play_store_warning_title">Installeren als Play Store?</string>
+    <string name="installer_play_store_warning_message">De gepatchte app wordt geregistreerd als geïnstalleerd vanuit Google Play Store. Hierdoor kunnen services zoals Android Auto het herkennen als een Play Store app.</string>
+    <string name="installer_play_store_warning_risk">De Play Store kan updates aanbieden voor de gepatchte app. Het installeren van die update zal de gepatchte APK overschrijven met de originele versie en de patches verwijderen. Als u wordt gevraagd om te updaten, tik op het menu met de drie puntjes op de Play Store-pagina van de app en kies \"Updates uitschakelen\".</string>
+    <string name="installer_play_store_warning_continue">Ik begrijp het, ga verder</string>
     <string name="settings_prompt_installer_on_install">Keuze van installer</string>
     <string name="settings_prompt_installer_on_install_description">Toont het dialoogvenster voor het selecteren van de installer bij elke geïnstalleerde gepatchte app</string>
     <string name="settings_auto_install_with_shizuku">Automatisch installeren na patchen</string>
@@ -666,6 +697,14 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_import_manager_settings_description">Maakt een back-up van en herstelt uw Morphe-instellingen</string>
     <string name="settings_system_import_manager_settings_fail">Importeren van Morphe-instellingen mislukt: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-instellingen geïmporteerd</string>
+    <string name="settings_system_import_manager_settings_mode_title">Morphe-instellingen importeren</string>
+    <string name="settings_system_import_manager_settings_mode_description">Kies hoe de geïmporteerde instellingen en bronnen moeten worden toegepast</string>
+    <string name="settings_system_import_selections_mode_title">Patch-selecties importeren</string>
+    <string name="settings_system_import_selections_mode_description">Kies hoe de geïmporteerde selecties en patch-opties moeten worden toegepast</string>
+    <string name="import_mode_replace_title">Bestaande vervangen</string>
+    <string name="import_mode_replace_description">De back-up exact overeenkomen. Items die ontbreken in de back-up worden verwijderd</string>
+    <string name="import_mode_merge_title">Samenvoegen met bestaande</string>
+    <string name="import_mode_merge_description">Ontbrekende items vanuit de back-up toevoegen. Bestaande items blijven ongewijzigd</string>
     <string name="settings_system_export_manager_settings_fail">Exporteren van Morphe-instellingen mislukt: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe-instellingen geëxporteerd</string>
     <string name="settings_system_debug">Debug</string>
@@ -676,6 +715,12 @@ De afbeelddimensionen moeten als volgt zijn:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Bestanden &amp; opslag</string>
     <string name="settings_system_apks_size">Totaal volume: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Dit verwijdert de opgeslagen APK-bestanden die hier worden weergegeven permanent.</string>
+    <string name="settings_system_apks_delete_selected_title">Geselecteerde APK\'s verwijderen?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Dit verwijdert de geselecteerde APK-bestanden permanent.</string>
+    <string name="settings_system_apks_deleted_all">APK\'s zijn succesvol verwijderd.</string>
+    <string name="settings_system_apks_export_zip_success">Geselecteerde APK\'s geëxporteerd</string>
+    <string name="settings_system_apks_export_zip_failed">Kon geselecteerde APK\'s niet exporteren</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatchte APK\'s</string>
     <string name="settings_system_patched_apks_description">Beheert opgeslagen gepatchte applicatiebestanden</string>
@@ -683,6 +728,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_patched_apks_delete_title">Gepatchte APK verwijderen?</string>
     <string name="settings_system_patched_apks_delete_confirm">Weet u zeker dat u de opgeslagen gepatchte APK voor %s wilt verwijderen?</string>
     <string name="settings_system_patched_apks_deleted">Gepatchte APK verwijderd</string>
+    <string name="settings_system_patched_apks_delete_all_title">Alle gepatchte APK\'s verwijderen?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Originele APK\'s</string>
     <string name="settings_system_original_apks_description">Opgeslagen voor opnieuw patchen. Er wordt één versie per app bewaard</string>
@@ -690,11 +736,13 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_original_apks_deleted">Originele APK verwijderd</string>
     <string name="settings_system_original_apks_delete_title">Originele APK verwijderen?</string>
     <string name="settings_system_original_apks_delete_confirm">Originele APK voor %s verwijderen? Je kunt deze app niet meer opnieuw patchen zonder een nieuw APK-bestand aan te leveren</string>
+    <string name="settings_system_original_apks_delete_all_title">Alle originele APK\'s verwijderen?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Geselecteerde patches</string>
     <string name="settings_system_patch_selections_description">Opgeslagen patch-selecties, bewaard na verwijdering</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Alle selecties resetten?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Pakketselecties resetten?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Geselecteerde pakketten resetten?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Bronselectie resetten?</string>
     <string name="settings_system_patch_selection_no_saved">Geen opgeslagen patchselecties</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s tot %2$s</string>
@@ -728,6 +776,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="file_picker_sort_size_asc">Grootte (kleinste eerst)</string>
     <string name="file_picker_sort_date_desc">Datum (nieuwste eerst)</string>
     <string name="file_picker_sort_date_asc">Datum (oudste eerst)</string>
+    <string name="file_picker_show_hidden_files">Verborgen bestanden tonen</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Over</string>
     <string name="settings_system_share_website">Website delen</string>
@@ -762,10 +811,15 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="skip">Overslaan</string>
     <string name="clear">Leegmaken</string>
     <string name="delete">Verwijderen</string>
+    <string name="delete_all">Alles verwijderen</string>
     <string name="remove">Verwijderen</string>
     <string name="disable">Uitschakelen</string>
     <string name="enable">Inschakelen</string>
     <string name="loading">Bezig met laden…</string>
+    <string name="loading_older_releases">Oudere versies worden geladen…</string>
+    <string name="creating">Bezig met maken…</string>
+    <string name="processing_apk">APK verwerken…</string>
+    <string name="exporting_apks">APK\'s exporteren…</string>
     <string name="not_installed">Niet geïnstalleerd</string>
     <string name="view">Bekijken</string>
     <string name="search">Zoeken</string>
@@ -785,6 +839,10 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="reorder_done">Volgorde opgeslagen</string>
     <string name="reset_order">Volgorde herstellen</string>
     <string name="reset_order_done">Bestelling gereset</string>
+    <string name="accessibility_move_up">Omhoog verplaatsen</string>
+    <string name="accessibility_move_down">Omlaag verplaatsen</string>
+    <string name="accessibility_app_moved_announcement">%1$s verplaatst naar positie %2$d van %3$d</string>
+    <string name="accessibility_scroll_to_top">Scroll naar de top van de lijst</string>
     <string name="rename">Hernoemen</string>
     <string name="import_">Importeren</string>
     <string name="export">Exporteren</string>
@@ -830,8 +888,9 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="changelog">Wijzigingslogboeken bekijken</string>
     <string name="changelog_description">Bekijk de laatste wijzigingen in deze update</string>
     <string name="changelog_download_fail">Fout bij het downloaden van de wijzigingslogboek: %s</string>
-    <string name="changelog_retry">Opnieuw proberen</string>
     <string name="changelog_empty">Geen changelog beschikbaar</string>
+    <string name="changelog_show_older">Oudere versies weergeven</string>
+    <string name="changelog_older_empty">Er zijn geen oudere releases om te tonen</string>
     <string name="no_network_toast">Geen internetverbinding beschikbaar</string>
     <string name="update_available">Een update is beschikbaar</string>
     <string name="ready_to_install_update">Klaar om update te installeren</string>

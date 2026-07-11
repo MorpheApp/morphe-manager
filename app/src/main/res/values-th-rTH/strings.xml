@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">แหล่งทีมาของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="home_sources_are_loading">กำลังโหลดแหล่งที่มา กรุณารอสักครู่…</string>
     <string name="home_search_apps">ค้นหาแอป</string>
+    <string name="home_app_sort_title">จัดเรียงแอป</string>
+    <string name="home_app_sort_manual_description">แตะแอปค้างไว้ แล้วแตะปุ่มจัดเรียงใหม่</string>
+    <string name="home_app_sort_recommended">เรียงตามที่แนะนำ</string>
+    <string name="home_app_sort_recommended_description">แอปที่ติดตั้งและตรึงไว้ก่อน</string>
+    <string name="home_app_sort_name_asc_description">ตามลำดับตัวอักษร A ถึง Z</string>
+    <string name="home_app_sort_name_desc_description">เรียงตามลำดับตัวอักษรย้อนกลับ Z ถึง A</string>
+    <string name="home_app_sort_updates_first">อัปเดตแพตช์ก่อน</string>
+    <string name="home_app_sort_updates_first_description">แอปที่มีแบทจ์อัปเดตก่อน จากนั้นตามลำดับที่แนะนำ</string>
     <string name="home_no_apps_title">ไม่มีแอปที่ใช้ได้</string>
     <string name="home_no_apps_subtitle">เพิ่มแหล่งที่มาของแพตช์หรือเปิดใช้งานแหล่งที่มาที่มีอยู่แล้วใน %s</string>
     <string name="home_no_apps_search_subtitle">ไม่พบแอปที่ตรงกับ \"%s\"</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">ตื่นตอนกลางคืนและยังทำงานได้</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">จัดการแหล่งที่มา</string>
+    <string name="sources_sort_title">เรียงลำดับแหล่งที่มาของแพตช์</string>
+    <string name="sources_sort_manual">คำสั่งซื้อด้วยตนเอง</string>
+    <string name="sources_sort_manual_hint">แตะค้างที่แหล่งข้อมูลเพื่อจัดเรียงใหม่</string>
+    <string name="sources_sort_last_updated">ปรับปรุงล่าสุด</string>
+    <string name="sources_sort_last_updated_description">อัปเดตแหล่งที่มาล่าสุดก่อน</string>
+    <string name="sources_sort_enabled_first">เปิดใช้งานก่อน</string>
+    <string name="sources_sort_enabled_first_description">แสดงแหล่งที่มาที่ใช้งานอยู่ก่อนแหล่งที่มาที่ปิดใช้งาน</string>
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="sources_management_prerelease_toggle">แพตช์ก่อนเปิดตัว</string>
@@ -285,6 +300,9 @@
     <string name="home_app_info_patch_source_used">ใช้ซอร์สปัทช์</string>
     <string name="home_app_info_install_type_custom_installer">ตัวกรองติดตั้งเอง</string>
     <string name="home_app_info_install_type_system_installer">ตัวกรองติดตั้งระบบ</string>
+    <string name="home_app_info_install_type_play_store">ติดตั้งจาก Play Store</string>
+    <string name="home_app_info_install_type_root_play_store">ติดตั้งจาก Play Store (Root)</string>
+    <string name="home_app_info_install_type_shizuku_play_store">ติดตั้งจาก Play Store (Shizuku)</string>
     <string name="home_app_info_patch_update_available">มีอัพเดทแพตซ์ใหม่ให้ใช้งานแล้ว</string>
     <string name="home_app_info_patch_update_available_description">มีแพตซ์เวอร์ชันใหม่พร้อมใช้งานแล้ว ให้แพตซ์อีกครั้งเพื่อรับการปรับปรุงและการแก้ไขสำหรับเวอร์ชันล่าสุด</string>
     <string name="home_app_info_app_deleted_warning">แอปถูกลบออก</string>
@@ -295,7 +313,7 @@
     <string name="root_gmscore_excluded">การรองรับ GmsCore ถูกยกเว้นในโหมด Root</string>
     <string name="root_pre_patch_installer_title">เลือกวิธีการติดตั้ง</string>
     <string name="root_pre_patch_installer_description">อุปกรณ์ของคุณมีสิทธิ์รูท. เลือกวิธีที่คุณต้องการติดตั้งแอปพลิเคชันที่แก้ไขแล้ว</string>
-    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_title">เมานต์รูท</string>
     <string name="root_pre_patch_installer_mount_description">เมานต์ APK ที่แพตช์แล้วทับแอปเดิม ไม่จำเป็นต้องใช้ GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">ติดตั้งแบบมาตรฐาน</string>
     <string name="root_pre_patch_installer_standard_description">ติดตั้งเป็นแอปพลิเคชันแยกต่างหากที่รองรับ GmsCore สามารถเลือกตัวติดตั้งได้หลังจากแพตช์แล้ว</string>
@@ -305,17 +323,21 @@
     <string name="patcher_error_log">บันทึกข้อผิดพลาด</string>
     <string name="patcher_error_technical">รายละเอียดทางเทคนิค</string>
     <string name="patcher_error_dialog_app_info">ข้อมูลแอป</string>
-    <string name="patcher_tab_logs">บันทึก Patcher</string>
+    <string name="patcher_tab_logs">บันทึกตัวแก้ไข</string>
     <string name="patcher_tab_game">เกม</string>
     <string name="patcher_long_step_warning">ขั้นตอนนี้อาจใช้เวลานาน โปรดรอสักครู่…</string>
     <string name="patcher_installing_subtitle">ใกล้พร้อมแล้ว! 🎸</string>
-    <string name="patcher_success_title">เสร็จสิ้นแล้ว! 🎉</string>
+    <string name="patcher_success_title">เสร็จเรียบร้อยแล้ว! 🎉</string>
     <string name="patcher_success_subtitle">แอปของคุณได้รับการแพตช์และถูกติดตั้งแล้ว!</string>
-    <string name="patcher_complete_title">การแพตช์เสร็จสมบูรณ์แล้ว! ✨</string>
+    <string name="patcher_complete_title">การแก้ไขเสร็จสมบูรณ์แล้ว! ✨</string>
     <string name="patcher_failed_title">อุ๊ย! เกิดข้อผิดพลาดบางอย่างขึ้น</string>
     <string name="patcher_failed_subtitle">ตรวจสอบรายละเอียดข้อผิดพลาดด้านล่าง</string>
-    <string name="patcher_failed_dialog_title">การแพตช์ล้มเหลว</string>
+    <string name="patcher_failed_dialog_title">การแก้ไขล้มเหลว</string>
     <string name="patcher_unknown_error">เกิดข้อผิดพลาดที่ไม่รู้จัก</string>
+    <string name="patcher_split_step_extracting">กำลังแยกไฟล์ APK</string>
+    <string name="patcher_split_step_merging">กำลังรวม %s</string>
+    <string name="patcher_split_step_writing">กำลังเขียนไฟล์ APK ที่รวมแล้ว</string>
+    <string name="patcher_split_step_finalizing">กำลังสรุปผลไฟล์ APK ที่รวมแล้ว</string>
     <string name="patcher_conflict_title">ข้อขัดแย้งของแพ็กเกจ</string>
     <string name="patcher_conflict_subtitle">คุณต้องถอนการติดตั้งเวอร์ชันที่มีอยู่ออกก่อน</string>
     <string name="patcher_conflict_hint">แอปที่ปรับแก้แล้วใช้ใบรับรองที่แตกต่างจากเวอร์ชันที่ติดตั้ง การถอนการติดตั้งจะลบข้อมูลแอปทั้งหมด</string>
@@ -604,11 +626,13 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">การติดตั้ง</string>
     <string name="installer_title">เลือกตัวติดตั้ง</string>
-    <string name="installer_internal_name">โปรแกรมติดตั้งระบบ</string>
     <string name="installer_internal_description">ใช้ตัวติดตั้งแพ็คเกจ Android</string>
+    <string name="installer_play_store_description">ใช้ตัวติดตั้งของระบบและตั้งค่า Google Play Store เป็นแหล่งติดตั้ง</string>
+    <string name="installer_root_play_store_description">ติดตั้งโดยอัตโนมัติด้วยสิทธิ์รูท และตั้งค่า Google Play Store เป็นแหล่งติดตั้ง</string>
     <string name="installer_auto_saved_name">ตัวติดตั้งแบบ Rooted mount</string>
     <string name="installer_auto_saved_description">ติดตั้ง APK ที่ถูกแก้ไขทับแทนแอปที่ถูกติดตั้งอยู่</string>
     <string name="installer_shizuku_description">ติดตั้งอย่างเงียบๆ โดยใช้ Shizuku หรือ Sui</string>
+    <string name="installer_shizuku_play_store_description">ติดตั้งโดยอัตโนมัติผ่าน Shizuku หรือ Sui และตั้งค่า Google Play Store เป็นแหล่งติดตั้ง</string>
     <string name="installer_option_none">ไม่มีตัวติดตั้งสำรอง</string>
     <string name="installer_none_description">ไม่ได้กำหนดค่าตัวติดตั้งสำรอง</string>
     <string name="installer_status_requires_root">ต้องได้รับสิทธิ์ root</string>
@@ -629,6 +653,10 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_message">ตัวติดตั้งที่คุณชอบ (%s) ไม่พร้อมใช้งานในขณะนี้. คุณสามารถแก้ไขปัญหาและลองอีกครั้งหรือใช้ตัวติดตั้งมาตรฐานแทน</string>
     <string name="installer_unavailable_shizuku_hint">ให้แน่ใจว่า Shizuku กำลังทำงานและให้สิทธิ์แก่แอปนี้</string>
     <string name="installer_use_standard">ใช้มาตรฐาน</string>
+    <string name="installer_play_store_warning_title">ติดตั้งเป็น Play Store หรือไม่?</string>
+    <string name="installer_play_store_warning_message">แอปที่ปรับแก้แล้วจะถูกบันทึกว่าติดตั้งจาก Google Play Store ซึ่งจะช่วยให้บริการต่างๆ เช่น Android Auto ตรวจจับว่าเป็นแอปจาก Play Store</string>
+    <string name="installer_play_store_warning_risk">Play Store อาจมีอัปเดตสำหรับแอปที่ปรับแก้แล้ว การติดตั้งอัปเดตนั้นจะเขียนทับ APK ที่ปรับแก้แล้วด้วยเวอร์ชันเดิม และลบการปรับแก้ หากได้รับการแจ้งให้อัปเดต ให้แตะเมนูจุดสามจุดบนหน้าแอป Play Store แล้วเลือก \"ปิดการอัปเดตโดยอัตโนมัติ\"</string>
+    <string name="installer_play_store_warning_continue">ฉันเข้าใจแล้ว ดำเนินการต่อ</string>
     <string name="settings_prompt_installer_on_install">แจ้งเตือนการเลือกตัวติดตั้ง</string>
     <string name="settings_prompt_installer_on_install_description">แสดงกล่องโต้ตอบการเลือกตัวติดตั้งทุกครั้งที่มีการติดตั้งแอปที่แพตช์แล้ว</string>
     <string name="settings_auto_install_with_shizuku">ติดตั้งอัตโนมัติหลังจากการแพตช์</string>
@@ -669,6 +697,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">สำรองและกู้คืนการตั้งค่า Morphe ของคุณ</string>
     <string name="settings_system_import_manager_settings_fail">การนำเข้าการตั้งค่า Morphe ไม่สำเร็จ: %s</string>
     <string name="settings_system_import_manager_settings_success">นำเข้าการตั้งค่า Morphe สำเร็จ</string>
+    <string name="settings_system_import_manager_settings_mode_title">นำเข้าการตั้งค่า Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">เลือกวิธีการใช้การตั้งค่าและแหล่งที่มาที่นำเข้า</string>
+    <string name="settings_system_import_selections_mode_title">นำเข้าการเลือกแพตช์</string>
+    <string name="settings_system_import_selections_mode_description">เลือกวิธีการนำเข้าตัวเลือกที่เลือกและตัวเลือกการแพทช์ไปใช้</string>
+    <string name="import_mode_replace_title">แทนที่ที่มีอยู่</string>
+    <string name="import_mode_replace_description">ตรงกับข้อมูลสำรองอย่างแน่นอน รายการที่ไม่มีในข้อมูลสำรองจะถูกลบออก</string>
+    <string name="import_mode_merge_title">รวมเข้ากับที่มีอยู่</string>
+    <string name="import_mode_merge_description">เพิ่มรายการที่ไม่มีในข้อมูลสำรอง รายการที่มีอยู่จะยังคงเดิม</string>
     <string name="settings_system_export_manager_settings_fail">การส่งออกการตั้งค่า Morphe ไม่สำเร็จ: %s</string>
     <string name="settings_system_export_manager_settings_success">ส่งออกการตั้งค่า Morphe สำเร็จ</string>
     <string name="settings_system_debug">ส่งออกไฟล์การพัฒยายสำหรับการแก้ไข</string>
@@ -679,6 +715,12 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">ไฟล์และการจัดเก็บข้อมูล</string>
     <string name="settings_system_apks_size">จัดการแอปที่ถูกนำพัท์</string>
+    <string name="settings_system_apks_delete_all_confirm">การดำเนินการนี้จะลบไฟล์ APK ที่บันทึกไว้ที่แสดงไว้ที่นี่อย่างถาวร</string>
+    <string name="settings_system_apks_delete_selected_title">ลบไฟล์ APK ที่เลือกหรือไม่</string>
+    <string name="settings_system_apks_delete_selected_confirm">การดำเนินการนี้จะลบไฟล์ APK ที่เลือกไว้อย่างถาวร</string>
+    <string name="settings_system_apks_deleted_all">ลบไฟล์ APK สำเร็จแล้ว</string>
+    <string name="settings_system_apks_export_zip_success">ส่งออก APK ที่เลือกแล้ว</string>
+    <string name="settings_system_apks_export_zip_failed">ส่งออก APK ที่เลือกไม่สำเร็จ</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">คุณแน่ใจหรือไม่ว่าต้องการลบแอปที่ถูกนำพัท์ %s?</string>
     <string name="settings_system_patched_apks_description">จัดการไฟล์แอปพลิเคชันที่แพตช์แล้วที่บันทึกไว้</string>
@@ -686,6 +728,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_delete_title">แอปต้นฉบับ</string>
     <string name="settings_system_patched_apks_delete_confirm">แอปต้นฉบับมีอยู่เพื่อนำพัท์ใหม่</string>
     <string name="settings_system_patched_apks_deleted">ไม่มีแอปต้นฉบับที่บันทึกไว้</string>
+    <string name="settings_system_patched_apks_delete_all_title">ลบ APK ที่ปรับแก้ทั้งหมดหรือไม่</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">ลบแอปต้นฉบับ %s? คุณไม่สามารถนำพัท์แอปใหม่ได้</string>
     <string name="settings_system_original_apks_description">บันทึกไว้สำหรับการแพตช์ซ้ำ เก็บเวอร์ชันละหนึ่งรายการต่อแอป</string>
@@ -693,11 +736,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_deleted">แชะเว็บไซต์อย่างเป็นทางการ</string>
     <string name="settings_system_original_apks_delete_title">Morphe เป็นโครงการโอเพ่นซอร์สที่เน้นรากและพึ่งพบค่ำชันการพัฒยายและการปรับรอง</string>
     <string name="settings_system_original_apks_delete_confirm">ลบไฟล์ APK รุ่นต้นฉบับสำหรับ %s? คุณจะไม่สามารถแก้ไขใหม่อีกได้ถ้าไม่มีไฟล์ APK ใหม่</string>
+    <string name="settings_system_original_apks_delete_all_title">ลบ APK ต้นฉบับทั้งหมดหรือไม่</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">การเลือกการแก้ไข</string>
     <string name="settings_system_patch_selections_description">บันทึกการเลือกแพตช์ที่เก็บไว้หลังการถอนการติดตั้ง</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">รีเซ็ตการเลือกทั้งหมด?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">รีเซ็ตการเลือกแพ็กเกจ?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">รีเซ็ตแพ็กเกจที่เลือกหรือไม่</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">รีเซ็ตการเลือกแหล่งที่มา?</string>
     <string name="settings_system_patch_selection_no_saved">ไม่มีการบันทึกการเลือกแพตช์</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s ถึง %2$s</string>
@@ -731,6 +776,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_size_asc">ขนาด (เล็กที่สุดก่อน)</string>
     <string name="file_picker_sort_date_desc">วันที่ (ใหม่ล่าสุดก่อน)</string>
     <string name="file_picker_sort_date_asc">วันที่ (เก่าแก่ที่สุดก่อน)</string>
+    <string name="file_picker_show_hidden_files">แสดงไฟล์ที่ซ่อนไว้</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">เกี่ยวกับ</string>
     <string name="settings_system_share_website">ไม่พบผลลัพธ์สำหรับ</string>
@@ -765,10 +811,15 @@ morphe_header_custom_dark.png
     <string name="skip">ข้าม</string>
     <string name="clear">ล้าง</string>
     <string name="delete">ลบ</string>
+    <string name="delete_all">ลบทั้งหมด</string>
     <string name="remove">นำออก</string>
     <string name="disable">ปิดการใช้งาน</string>
     <string name="enable">อนุญาต</string>
     <string name="loading">กำลังโหลด…</string>
+    <string name="loading_older_releases">กำลังโหลดเวอร์ชันก่อนหน้า…</string>
+    <string name="creating">กำลังสร้าง…</string>
+    <string name="processing_apk">กำลังประมวลผล APK…</string>
+    <string name="exporting_apks">กำลังส่งออก APK…</string>
     <string name="not_installed">ไม่ได้ติดตั้ง</string>
     <string name="view">ดู</string>
     <string name="search">ค้นหา</string>
@@ -788,6 +839,10 @@ morphe_header_custom_dark.png
     <string name="reorder_done">บันทึกการจัดเรียงแล้ว</string>
     <string name="reset_order">รีเซ็ตการจัดเรียง</string>
     <string name="reset_order_done">รีเซ็ตคำสั่งซื้อ</string>
+    <string name="accessibility_move_up">ย้ายขึ้น</string>
+    <string name="accessibility_move_down">ย้ายลง</string>
+    <string name="accessibility_app_moved_announcement">%1$s ย้ายไปยังตำแหน่งที่ %2$d จากทั้งหมด %3$d</string>
+    <string name="accessibility_scroll_to_top">เลื่อนไปยังด้านบนของรายการ</string>
     <string name="rename">เปลี่ยนชื่อ</string>
     <string name="import_">นำเข้า</string>
     <string name="export">ส่งออก</string>
@@ -833,8 +888,9 @@ morphe_header_custom_dark.png
     <string name="changelog">ดูบันทึกการเปลี่ยนแปลง</string>
     <string name="changelog_description">ดูการเปลี่ยนแปลงล่าสุดในอัปเดตนี้</string>
     <string name="changelog_download_fail">ดาวน์โหลดบันทึกการเปลี่ยนแปลงไม่สำเร็จ: %s</string>
-    <string name="changelog_retry">ลองใหม่อีกครั้ง</string>
     <string name="changelog_empty">ไม่มีรายการอัปเดต</string>
+    <string name="changelog_show_older">แสดงเวอร์ชันเก่ากว่า</string>
+    <string name="changelog_older_empty">ไม่มีเวอร์ชันเก่ากว่าให้แสดง</string>
     <string name="no_network_toast">ไม่มีการเชื่อมต่ออินเทอร์เน็ต</string>
     <string name="update_available">มีอัปเดตพร้อมใช้งาน</string>
     <string name="ready_to_install_update">พร้อมติดตั้งอัปเดต</string>

@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Lähteet ovat ajan tasalla</string>
     <string name="home_sources_are_loading">Lähteitä ladataan, odota…</string>
     <string name="home_search_apps">Hae sovelluksia</string>
+    <string name="home_app_sort_title">Järjestä sovellukset</string>
+    <string name="home_app_sort_manual_description">Paina sovellusta pitkään ja napauta sitten uudelleenjärjestä-painiketta</string>
+    <string name="home_app_sort_recommended">Suositeltu järjestys</string>
+    <string name="home_app_sort_recommended_description">Asennetut ja kiinnitetyt sovellukset ensin</string>
+    <string name="home_app_sort_name_asc_description">Aakkosjärjestyksessä, A–Z</string>
+    <string name="home_app_sort_name_desc_description">Aakkosjärjestys käänteinen, Z:sta A:han</string>
+    <string name="home_app_sort_updates_first">Asennuspaikat ensin</string>
+    <string name="home_app_sort_updates_first_description">Sovellukset, joilla on päivitysmerkintä, ensin, sitten suositellussa järjestyksessä</string>
     <string name="home_no_apps_title">Ei sovelluksia saatavilla</string>
     <string name="home_no_apps_subtitle">Lisää päivityslähde tai ota olemassa oleva käyttöön %s</string>
     <string name="home_no_apps_search_subtitle">\"%s\" ei vastaa yhtään sovellusta</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Yökyykkymäinen ja tuottelias</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Lisäosien lähteet</string>
+    <string name="sources_sort_title">Lajittele lisäosien lähteet</string>
+    <string name="sources_sort_manual">Manuaalinen järjestys</string>
+    <string name="sources_sort_manual_hint">Paina ja pidä lähdettä uudelleenjärjestämistä varten</string>
+    <string name="sources_sort_last_updated">Viimeksi päivitetty</string>
+    <string name="sources_sort_last_updated_description">Uusimmat lisäosien päivitykset ensin</string>
+    <string name="sources_sort_enabled_first">Käytössä olevat ensin</string>
+    <string name="sources_sort_enabled_first_description">Näytä aktiiviset lähteet ennen poistettuja lähteitä</string>
     <string name="sources_management_open_in_browser">Avaa selaimessa</string>
     <string name="sources_management_failed_to_open_url">URL-osoitteen avaaminen epäonnistui</string>
     <string name="sources_management_prerelease_toggle">Ennakkojulkaisupäivitykset</string>
@@ -199,7 +214,8 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee &lt;b&gt;kokonaisen APK:n&
     <string name="home_dialog_unsupported_version_experimental_label">Kokeellinen</string>
     <string name="home_dialog_unsupported_version_experimental_description">Tässä versiossa on kokeellinen tuki, ja se voi olla epävakaa tai puutteellinen</string>
     <string name="morphe_experimental_app_version_dialog_title">Haluatko kokeilla? 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">Sovelluksen &lt;b&gt;%s&lt;/b&gt; tässä versiossa on varhainen kokeellinen tuki&lt;br/&gt;&lt;br/&gt;🔧 Siinä saattaa esiintyä odottamatonta toimintaa tai tuntemattomia virheitä, sillä lisäosia hienosäädetään tälle sovellusversiolle</string>
+    <string name="morphe_experimental_app_version_dialog_message">
+Sovelluksen &lt;b&gt;%s&lt;/b&gt; tässä versiossa on varhainen kokeellinen tuki&lt;br/&gt;&lt;br/&gt;🔧 Siinä saattaa esiintyä odottamatonta toimintaa tai tuntemattomia virheitä, sillä lisäosia hienosäädetään tälle sovellusversiolle</string>
     <string name="home_dialog_unsupported_version_dialog_title">Tukematon versio</string>
     <string name="home_dialog_unsupported_version_dialog_description">Tämä APK ei ole suositeltu sovellusversio. Jos jatkat, sovellus ei ehkä enää toimi</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Jatka silti</string>
@@ -285,6 +301,9 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="home_app_info_patch_source_used">Käytetty lisäosien lähde</string>
     <string name="home_app_info_install_type_custom_installer">Oma asennusohjelma</string>
     <string name="home_app_info_install_type_system_installer">Järjestelmän asennusohjelma</string>
+    <string name="home_app_info_install_type_play_store">Play Kaupan asennus</string>
+    <string name="home_app_info_install_type_root_play_store">Root Play Kaupan asennus</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Kaupan asennus</string>
     <string name="home_app_info_patch_update_available">Lisäosien päivitys saatavilla</string>
     <string name="home_app_info_patch_update_available_description">Uudempi lisäosien versio on saatavilla. Muokkaa sovellusta uudestaan saadaksesi uusimmat parannukset ja korjaukset</string>
     <string name="home_app_info_app_deleted_warning">Sovellus poistettiin</string>
@@ -305,16 +324,16 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="patcher_error_log">Virheloki</string>
     <string name="patcher_error_technical">Tekniset tiedot</string>
     <string name="patcher_error_dialog_app_info">Sovelluksen tiedot</string>
-    <string name="patcher_tab_logs">Patcher-lokit</string>
+    <string name="patcher_tab_logs">Paikkauksien lokit</string>
     <string name="patcher_tab_game">Pelit</string>
     <string name="patcher_long_step_warning">Tämä vaihe voi kestää hetken. Odota...</string>
     <string name="patcher_installing_subtitle">Melkein valmis rokkaamaan! 🎸</string>
     <string name="patcher_success_title">Valmis! 🎉</string>
     <string name="patcher_success_subtitle">Sovellus on muokattu ja asennettu!</string>
-    <string name="patcher_complete_title">Muokkaus valmis! ✨</string>
+    <string name="patcher_complete_title">Paikkaus valmis! ✨</string>
     <string name="patcher_failed_title">Hups! Jotain meni vikaan</string>
     <string name="patcher_failed_subtitle">Tarkista virheen tiedot alta</string>
-    <string name="patcher_failed_dialog_title">Muokkaus epäonnistui</string>
+    <string name="patcher_failed_dialog_title">Paikkaus epäonnistui</string>
     <string name="patcher_unknown_error">Tapahtui tuntematon virhe</string>
     <string name="patcher_conflict_title">Pakettiristiriita</string>
     <string name="patcher_conflict_subtitle">Sinun on poistettava olemassa oleva versio</string>
@@ -604,11 +623,13 @@ Kuvien mittojen on oltava seuraavat:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Asennusohjelma</string>
     <string name="installer_title">Valitse asennusohjelma</string>
-    <string name="installer_internal_name">Järjestelmän asennusohjelma</string>
     <string name="installer_internal_description">Käytä Androidin pakettien asennusohjelmaa</string>
+    <string name="installer_play_store_description">Käyttää järjestelmän asennusohjelmaa ja asettaa Google Play Kaupan asennuslähteeksi</string>
+    <string name="installer_root_play_store_description">Asennetaan äänettömästi juurikäyttäjällä ja asetetaan Google Play Kauppa asennuslähteeksi</string>
     <string name="installer_auto_saved_name">Root-liitosasennusohjelma</string>
     <string name="installer_auto_saved_description">Asentaa korjattua APK:tä asennetun sovelluksen päälle</string>
     <string name="installer_shizuku_description">Asenna hiljaisesti Shizuku- tai Sui-ohjelmalla</string>
+    <string name="installer_shizuku_play_store_description">Asennetaan äänettömästi Shizukun tai Suin kautta ja asetetaan Google Play Kauppa asennuslähteeksi</string>
     <string name="installer_option_none">Ei varajärjestelmää</string>
     <string name="installer_none_description">Varajärjestelmää ei ole määritetty</string>
     <string name="installer_status_requires_root">Vaatii pääkäyttäjän käyttöoikeudet</string>
@@ -629,6 +650,10 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_unavailable_message">Edullisin asennuksesi (%s) on tällä hetkellä käytöstä poissa. Voit korjata ongelman ja yrittää uudelleen tai käyttää standardiasennusta.</string>
     <string name="installer_unavailable_shizuku_hint">Tarkista, että Shizuku on käynnissä ja lupa on myönnetty tälle sovellukselle.</string>
     <string name="installer_use_standard">Käytä oletusta</string>
+    <string name="installer_play_store_warning_title">Asenna Play Kauppana?</string>
+    <string name="installer_play_store_warning_message">Korjattu sovellus rekisteröidään asennetuksi Google Play Kaupasta. Tämä antaa palveluille, kuten Android Autolle, tunnistaa sen Play Kauppa -sovelluksena</string>
+    <string name="installer_play_store_warning_risk">Play Kauppa saattaa tarjota päivityksiä korjatulle sovellukselle. Päivityksen asentaminen korvaa korjatun APK:n alkuperäisellä versiolla ja poistaa korjaukset. Jos sinua pyydetään päivittämään, napauta sovelluksen Play Kauppa -sivulla olevaa kolmen pisteen valikkoa ja valitse \"Poista päivitykset käytöstä\"</string>
+    <string name="installer_play_store_warning_continue">Ymmärrän, jatka</string>
     <string name="settings_prompt_installer_on_install">Asennusohjelman valintakehote</string>
     <string name="settings_prompt_installer_on_install_description">Näytä asennusohjelman valintaikkuna aina, kun asennat paikatun sovelluksen.</string>
     <string name="settings_auto_install_with_shizuku">Asenna automaattisesti korjauksen jälkeen</string>
@@ -669,6 +694,14 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_system_import_manager_settings_description">Varmuuskopioi ja palauta Morphen asetukset</string>
     <string name="settings_system_import_manager_settings_fail">Morphen asetusten tuonti epäonnistui: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphen asetukset tuotu</string>
+    <string name="settings_system_import_manager_settings_mode_title">Tuo Morphen asetukset</string>
+    <string name="settings_system_import_manager_settings_mode_description">Valitse, miten tuodut asetukset ja lähteet käytetään</string>
+    <string name="settings_system_import_selections_mode_title">Tuo korjausvalinnat</string>
+    <string name="settings_system_import_selections_mode_description">Valitse, miten tuodut valinnat ja korjausvaihtoehdot käytetään.</string>
+    <string name="import_mode_replace_title">Korvaa olemassaolevat</string>
+    <string name="import_mode_replace_description">Täsmää varmuuskopion kanssa täsmälleen. Varmuuskopiosta puuttuvat kohteet poistetaan.</string>
+    <string name="import_mode_merge_title">Yhdistä olemassaoleviin</string>
+    <string name="import_mode_merge_description">Lisää varmuuskopiosta puuttuvat kohteet. Olemassaolevat kohteet säilytetään muuttumattomina.</string>
     <string name="settings_system_export_manager_settings_fail">Morphen asetusten vienti epäonnistui: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphen asetukset viety</string>
     <string name="settings_system_debug">Virheenkorjaus</string>
@@ -679,6 +712,12 @@ Kuvien mittojen on oltava seuraavat:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Tiedostot &amp; tallennustila</string>
     <string name="settings_system_apks_size">Koko yhteensä: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Tämä poistaa pysyvästi tässä näkyvät tallennetut APK-tiedostot</string>
+    <string name="settings_system_apks_delete_selected_title">Poistetaanko valitut APK-tiedostot?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Tämä poistaa pysyvästi valitut APK-tiedostot</string>
+    <string name="settings_system_apks_deleted_all">APK-tiedostot poistettiin onnistuneesti</string>
+    <string name="settings_system_apks_export_zip_success">Valitut APK-tiedostot viety</string>
+    <string name="settings_system_apks_export_zip_failed">Valittujen APK-tiedostojen vienti epäonnistui</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Muokatut APK:t</string>
     <string name="settings_system_patched_apks_description">Hallitse tallennettuja muokattuja sovellustiedostoja</string>
@@ -686,6 +725,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_system_patched_apks_delete_title">Poista muokattu APK?</string>
     <string name="settings_system_patched_apks_delete_confirm">Haluatko varmasti poistaa sovelluksen %s tallennettun muokatun APK:n?</string>
     <string name="settings_system_patched_apks_deleted">Muokattu APK on poistettu</string>
+    <string name="settings_system_patched_apks_delete_all_title">Poistetaanko kaikki muutetut APK-tiedostot?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Alkuperäiset APK:t</string>
     <string name="settings_system_original_apks_description">Tallennettu muokattavaksi uudelleen. Kustakin sovelluksesta säilytetään yksi versio</string>
@@ -693,11 +733,13 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_system_original_apks_deleted">Alkuperäinen APK on poistettu</string>
     <string name="settings_system_original_apks_delete_title">Poista alkuperäinen APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Poistaa sovelluksen %s alkuperäisen APK:n? Et voi muokata tätä uudelleen ilman uuden APK:n lisäämistä</string>
+    <string name="settings_system_original_apks_delete_all_title">Poistetaanko kaikki alkuperäiset APK-tiedostot?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Lisäosavalinnat</string>
     <string name="settings_system_patch_selections_description">Tallennetut lisäosavalinnat. Säilytetään, vaikka sovelluksen asennus poistetaan</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nollataanko kaikki valinnat?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Nollataanko paketin valinnat?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Nollataanko valitut paketit?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Nollataanko lähteen valinnat?</string>
     <string name="settings_system_patch_selection_no_saved">Ei tallennettuja lisäosavalintoja</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s: %2$s</string>
@@ -731,6 +773,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="file_picker_sort_size_asc">Koko (pienin ensin)</string>
     <string name="file_picker_sort_date_desc">Päivämäärä (uusin ensin)</string>
     <string name="file_picker_sort_date_asc">Päivämäärä (vanhin ensin)</string>
+    <string name="file_picker_show_hidden_files">Näytä piilotetut tiedostot</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tietoja</string>
     <string name="settings_system_share_website">Jaa verkkosivusto</string>
@@ -765,10 +808,15 @@ Kuvien mittojen on oltava seuraavat:
     <string name="skip">Ohita</string>
     <string name="clear">Tyhjennä</string>
     <string name="delete">Poista</string>
+    <string name="delete_all">Poista kaikki</string>
     <string name="remove">Poista</string>
     <string name="disable">Poista käytöstä</string>
     <string name="enable">Ota käyttöön</string>
     <string name="loading">Ladataan…</string>
+    <string name="loading_older_releases">Ladataan vanhempia julkaisuja…</string>
+    <string name="creating">Luodaan…</string>
+    <string name="processing_apk">Käsitellään APK-tiedostoa…</string>
+    <string name="exporting_apks">Viedään APK-tiedostoja…</string>
     <string name="not_installed">Ei asennettu</string>
     <string name="view">Näytä</string>
     <string name="search">Haku</string>
@@ -788,6 +836,10 @@ Kuvien mittojen on oltava seuraavat:
     <string name="reorder_done">Järjestys tallennettu</string>
     <string name="reset_order">Palauta järjestys</string>
     <string name="reset_order_done">Tilaus nollattu</string>
+    <string name="accessibility_move_up">Siirrä ylös</string>
+    <string name="accessibility_move_down">Siirrä alas</string>
+    <string name="accessibility_app_moved_announcement">%1$s siirrettiin kohtaan %2$d / %3$d</string>
+    <string name="accessibility_scroll_to_top">Siirry listan alkuun</string>
     <string name="rename">Nimeä uudelleen</string>
     <string name="import_">Tuo</string>
     <string name="export">Vie</string>
@@ -833,7 +885,6 @@ Kuvien mittojen on oltava seuraavat:
     <string name="changelog">Näytä muutoslokit</string>
     <string name="changelog_description">Katso tämän päivityksen uusimmat muutokset</string>
     <string name="changelog_download_fail">Muutoslokin lataaminen epäonnistui: %s</string>
-    <string name="changelog_retry">Yritä uudelleen</string>
     <string name="changelog_empty">Muutoslokia ei ole saatavilla</string>
     <string name="no_network_toast">Ei internetyhteyttä</string>
     <string name="update_available">Päivitys on saatavilla</string>

@@ -270,11 +270,9 @@ private fun ProgressDetailsSection(
  */
 @Composable
 private fun AnimatedMessage(messageResId: Int) {
-    AnimatedContent(
-        targetState = stringResource(messageResId),
-        transitionSpec = MorpheAnimations.fadeCrossfade(1000),
-        label = "message_animation"
-    ) { message ->
+    val reduceMotion = rememberAccessibilityEnabled()
+    val message = stringResource(messageResId)
+    if (reduceMotion) {
         Text(
             text = message,
             style = MaterialTheme.typography.titleLarge,
@@ -284,6 +282,22 @@ private fun AnimatedMessage(messageResId: Int) {
             maxLines = 4,
             overflow = TextOverflow.Ellipsis
         )
+    } else {
+        AnimatedContent(
+            targetState = message,
+            transitionSpec = MorpheAnimations.fadeCrossfade(1000),
+            label = "message_animation"
+        ) { rotatingMessage ->
+            Text(
+                text = rotatingMessage,
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 4,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
     }
 }
 
@@ -367,23 +381,40 @@ fun CurrentStepIndicator(
             patcherViewModel.steps.firstOrNull { it.state == State.RUNNING }
         }
     }
+    val reduceMotion = rememberAccessibilityEnabled()
+    val stepName = currentStep?.name
 
-    AnimatedContent(
-        targetState = currentStep?.name,
-        transitionSpec = MorpheAnimations.fadeCrossfade(400),
-        label = "step_animation"
-    ) { stepName ->
+    val stepStyle = when (windowSize.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> MaterialTheme.typography.bodyLarge
+        else -> MaterialTheme.typography.titleMedium
+    }
+
+    if (reduceMotion) {
+        // Skip crossfade so the main thread isn't busy animating when TalkBack tries to announce
         if (stepName != null) {
             Text(
                 text = stepName,
-                style = when (windowSize.widthSizeClass) {
-                    WindowWidthSizeClass.Compact -> MaterialTheme.typography.bodyLarge
-                    else -> MaterialTheme.typography.titleMedium
-                },
+                style = stepStyle,
                 color = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
+        }
+    } else {
+        AnimatedContent(
+            targetState = stepName,
+            transitionSpec = MorpheAnimations.fadeCrossfade(400),
+            label = "step_animation"
+        ) { name ->
+            if (name != null) {
+                Text(
+                    text = name,
+                    style = stepStyle,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     }
 }

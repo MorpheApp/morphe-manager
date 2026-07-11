@@ -11,24 +11,27 @@ data class ChangelogEntry(
 )
 
 /**
- * Parses the two CHANGELOG.md formats used by Morphe repositories.
+ * Parses the CHANGELOG.md formats used by Morphe repositories.
  *
  * Third-party repos using the Morphe template are expected to follow one of
- * these two patterns. Unknown heading formats are silently skipped.
+ * these patterns. Unknown heading formats are silently skipped.
  */
 object ChangelogParser {
 
     /**
-     * Matches both changelog heading styles:
-     *   `# [VERSION](url) (DATE)`         — patches / no-label style
-     *   `# app [VERSION](url) (DATE)`     — manager / labeled style
+     * Matches every changelog heading style emitted by conventional-changelog:
+     *   `# [VERSION](url) (DATE)`      - patches / no-label style with compare URL
+     *   `# app [VERSION](url) (DATE)`  - manager / labeled style with compare URL
+     *   `# VERSION (DATE)`             - initial release, no compare URL (first tag)
      *
      * Capture groups:
-     *   1 → version string
-     *   2 → date string
+     *   1 -> version string when wrapped in `[...](url)`
+     *   2 -> version string when written as a bare token (initial release)
+     *   3 -> date string
+     * Exactly one of group 1 or group 2 is populated per match.
      */
     private val VERSION_HEADING = Regex(
-        """^#{1,3}\s+(?:\S+\s+)?\[([^]]+)]\([^)]*\)\s+\((\d{4}-\d{2}-\d{2})\)""",
+        """^#{1,3}\s+(?:\S+\s+)?(?:\[([^]]+)]\([^)]*\)|([^\s\[(]+))\s+\((\d{4}-\d{2}-\d{2})\)""",
         RegexOption.IGNORE_CASE
     )
 
@@ -98,8 +101,10 @@ object ChangelogParser {
                     currentVersion = null
                     break
                 }
-                currentVersion = match.groupValues[1].trim()
-                currentDate = match.groupValues[2]
+                // Group 1 = bracketed version, group 2 = bare version (initial release).
+                // Exactly one is populated; the other is an empty string.
+                currentVersion = match.groupValues[1].ifEmpty { match.groupValues[2] }.trim()
+                currentDate = match.groupValues[3]
                 currentContent.clear()
             } else if (currentVersion != null) {
                 currentContent.appendLine(line)
@@ -129,20 +134,28 @@ object ChangelogParser {
 
     /**
      * Returns true if any changelog entry newer than [installedVersion] has a
-     * scoped bullet whose scope exactly matches [appName] or starts with `"$appName - "`.
-     * Comparison is case-insensitive.
+     * scoped bullet whose scope exactly matches one of [appNames] or starts with
+     * `"$appName - "`. Comparison is case-insensitive.
+     *
+     * Multiple candidates are accepted because the same app can be referenced by
+     * different names across sources: the canonical Compatibility declaration name
+     * from the bundle, and the (localized) system PM label. Matching any one is
+     * enough to trigger the badge.
      */
     fun hasChangesFor(
         entries: List<ChangelogEntry>,
         installedVersion: String?,
-        appName: String,
+        appNames: Collection<String>,
     ): Boolean {
+        if (appNames.isEmpty()) return false
         val newerEntries = entriesNewerThan(entries, installedVersion)
         if (newerEntries.isEmpty()) return false
         return newerEntries.any { entry ->
             entry.affectedScopes.any { scope ->
-                scope.equals(appName, ignoreCase = true) ||
-                        scope.startsWith("$appName - ", ignoreCase = true)
+                appNames.any { name ->
+                    scope.equals(name, ignoreCase = true) ||
+                            scope.startsWith("$name - ", ignoreCase = true)
+                }
             }
         }
     }

@@ -45,6 +45,7 @@ object MorpheDefaults {
     val SettingsCornerRadius = 14.dp
     val SectionCornerRadius = 18.dp
     val IconSize = 24.dp
+    val ContentPaddingSmall = 8.dp
     val ContentPadding = 16.dp
     val ContentPaddingMedium = 24.dp
     val ContentPaddingExpanded = 32.dp
@@ -144,6 +145,12 @@ object MorpheAnimations {
     // Scale Transitions
     val fadeScaleIn = fadeIn + scaleIn(defaultTween(), initialScale = MorpheDefaults.DIALOG_SCALE)
     val fadeScaleOut = fadeOut + scaleOut(defaultTween(), targetScale = MorpheDefaults.DIALOG_SCALE)
+
+    // Floating Button (FAB / scroll-to-top). Pops in from below with a stronger scale.
+    val fabEnter = fadeIn + scaleIn(defaultTween(), initialScale = 0.85f) +
+            slideInVertically(defaultTween()) { it / 2 }
+    val fabExit = fadeOut + scaleOut(defaultTween(), targetScale = 0.85f) +
+            slideOutVertically(defaultTween()) { it / 2 }
 
     // Alignment-based Transitions
     val expandTopFadeIn = fadeIn + expandVertically(defaultTween(), expandFrom = Alignment.Top)

@@ -19,6 +19,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
@@ -40,6 +41,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -246,6 +250,7 @@ fun FilePicker(
     var sortMode by remember {
         mutableStateOf(runCatching { SortMode.valueOf(prefs.filePickerSortMode.getBlocking()) }.getOrDefault(SortMode.NAME_ASC))
     }
+    var showHiddenFiles by remember { mutableStateOf(prefs.filePickerShowHiddenFiles.getBlocking()) }
     var showSortMenu by remember { mutableStateOf(false) }
     var showSearch by remember { mutableStateOf(false) }
     var searchQuery by remember { mutableStateOf("") }
@@ -295,8 +300,11 @@ fun FilePicker(
         }
     }
 
-    val sortedContents = remember(dirContents, sortMode) {
-        dirContents?.getOrNull()?.let { applySort(it, sortMode) } ?: emptyList()
+    val sortedContents = remember(dirContents, sortMode, showHiddenFiles) {
+        dirContents?.getOrNull()
+            ?.let { if (showHiddenFiles) it else it.filterNot { file -> file.name.startsWith(".") } }
+            ?.let { applySort(it, sortMode) }
+            ?: emptyList()
     }
     val displayedContents = remember(sortedContents, searchQuery) {
         if (searchQuery.isBlank()) sortedContents
@@ -435,6 +443,22 @@ fun FilePicker(
                                         }
                                     )
                                 }
+                                HorizontalDivider()
+                                DropdownMenuItem(
+                                    text = { Text(stringResource(R.string.file_picker_show_hidden_files)) },
+                                    trailingIcon = {
+                                        Checkbox(
+                                            checked = showHiddenFiles,
+                                            onCheckedChange = null
+                                        )
+                                    },
+                                    modifier = Modifier.semantics { role = Role.Checkbox },
+                                    onClick = {
+                                        val next = !showHiddenFiles
+                                        showHiddenFiles = next
+                                        coroutineScope.launch { prefs.filePickerShowHiddenFiles.update(next) }
+                                    }
+                                )
                             }
                         }
                         IconButton(onClick = { refreshKey++ }) {
@@ -521,140 +545,148 @@ fun FilePicker(
                 }
             }
 
-            LazyColumn(modifier = Modifier
+            val listState = rememberLazyListState()
+            Box(modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth()) {
-                if (currentDir == null) {
-                    items(roots, key = { it.second.absolutePath }) { (label, root) ->
-                        FilePickerRow(
-                            icon = storageRootIcon(root),
-                            name = label,
-                            detail = null,
-                            onClick = { currentDir = root }
-                        )
-                        HorizontalDivider(color = LocalDialogTextColor.current.copy(alpha = 0.06f))
-                    }
-                } else {
-                    item(key = "__back__") {
-                        FilePickerRow(
-                            icon = Icons.AutoMirrored.Outlined.ArrowBack,
-                            name = stringResource(R.string.file_picker_previous_directory),
-                            detail = null,
-                            onClick = navigateBack
-                        )
-                        HorizontalDivider(color = LocalDialogTextColor.current.copy(alpha = 0.06f))
-                    }
-
-                    val contentsLoaded = dirContents
-                    if (contentsLoaded != null && contentsLoaded.isFailure) {
-                        item(key = "__error__") {
-                            EmptyState(
-                                message = stringResource(R.string.file_picker_read_error),
-                                icon = Icons.Outlined.Lock,
-                                actionLabel = stringResource(R.string.retry),
-                                onAction = { refreshKey++ }
-                            )
-                        }
-                    } else if (contentsLoaded != null && contentsLoaded.getOrNull()!!.isEmpty()) {
-                        item(key = "__empty__") {
-                            EmptyState(
-                                message = stringResource(R.string.file_picker_no_files),
-                                icon = Icons.Outlined.FolderOff
-                            )
-                        }
-                    } else if (contentsLoaded != null && displayedContents.isEmpty()) {
-                        item(key = "__no_results__") {
-                            EmptyState(
-                                message = stringResource(R.string.search_no_results),
-                                icon = Icons.Outlined.SearchOff
-                            )
-                        }
-                    } else {
-                        items(displayedContents, key = { it.absolutePath }) { file ->
-                            val isDir = file.isDirectory
-                            val ext = if (isDir) "" else file.extension.lowercase()
-                            val isApk = ext in APK_EXTENSIONS
-                            // Only standard .apk supports getPackageArchiveInfo; bundles (.apkm/.apks/.xapk) are ZIPs
-                            val canLoadIcon = ext == "apk"
-                            val isImage = ext in IMAGE_EXTENSIONS
-                            val isSplitBundle = ext in SPLIT_ICON_EXTENSIONS
-
-                            val packageInfo by produceState<PackageInfo?>(null, file) {
-                                if (canLoadIcon) {
-                                    val cached = apkPackageInfoCache.get(file.absolutePath)
-                                    if (cached != null) {
-                                        value = cached
-                                    } else {
-                                        val info = withContext(iconLoadDispatcher) { pm.getPackageInfo(file) }
-                                        if (info != null) apkPackageInfoCache.put(file.absolutePath, info)
-                                        value = info
-                                    }
-                                }
-                            }
-
-                            val thumbnail by produceState<ImageBitmap?>(null, file) {
-                                if (isImage) {
-                                    val cached = imageThumbnailCache.get(file.absolutePath)
-                                    if (cached != null) {
-                                        value = cached
-                                    } else {
-                                        val bmp = withContext(iconLoadDispatcher) { decodeThumbnail(file) }
-                                        if (bmp != null) imageThumbnailCache.put(file.absolutePath, bmp)
-                                        value = bmp
-                                    }
-                                }
-                            }
-
-                            val splitIcon by produceState<ImageBitmap?>(null, file) {
-                                if (isSplitBundle) {
-                                    val cached = splitIconCache.get(file.absolutePath)
-                                    if (cached != null) {
-                                        value = cached
-                                    } else {
-                                        val bmp = withContext(iconLoadDispatcher) { decodeSplitIcon(file) }
-                                        if (bmp != null) splitIconCache.put(file.absolutePath, bmp)
-                                        value = bmp
-                                    }
-                                }
-                            }
-
-                            val isMpp = ext == "mpp"
-                            val isKeystore = ext in KEYSTORE_EXTENSIONS
-                            val isJson = ext == "json"
-                            val icon = when {
-                                isDir -> Icons.Outlined.Folder
-                                canLoadIcon && packageInfo == null -> Icons.Outlined.Android
-                                canLoadIcon -> null
-                                isApk -> Icons.Outlined.Android
-                                isSplitBundle && splitIcon == null -> Icons.Outlined.Android
-                                isSplitBundle -> null
-                                isMpp -> null
-                                isKeystore -> Icons.Outlined.Key
-                                isJson -> Icons.Outlined.DataObject
-                                isImage && thumbnail == null -> Icons.Outlined.Image
-                                isImage -> null
-                                else -> Icons.AutoMirrored.Outlined.InsertDriveFile
-                            }
-                            val detail = if (!isDir) {
-                                "${formatBytes(file.length())} · ${formatModDate(file.lastModified())}"
-                            } else null
-
+                LazyColumn(
+                    state = listState,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    if (currentDir == null) {
+                        items(roots, key = { it.second.absolutePath }) { (label, root) ->
                             FilePickerRow(
-                                icon = icon,
-                                iconBitmap = if (isMpp) mppIcon else null,
-                                thumbnail = if (isSplitBundle) splitIcon else thumbnail,
-                                packageInfo = packageInfo,
-                                name = file.name,
-                                detail = detail,
-                                onClick = {
-                                    if (isDir) currentDir = file
-                                    else if (!allowFolderSelection) onFilePicked(file)
-                                }
+                                icon = storageRootIcon(root),
+                                name = label,
+                                detail = null,
+                                onClick = { currentDir = root }
                             )
                             HorizontalDivider(color = LocalDialogTextColor.current.copy(alpha = 0.06f))
                         }
+                    } else {
+                        item(key = "__back__") {
+                            FilePickerRow(
+                                icon = Icons.AutoMirrored.Outlined.ArrowBack,
+                                name = stringResource(R.string.file_picker_previous_directory),
+                                detail = null,
+                                onClick = navigateBack
+                            )
+                            HorizontalDivider(color = LocalDialogTextColor.current.copy(alpha = 0.06f))
+                        }
+
+                        val contentsLoaded = dirContents
+                        if (contentsLoaded != null && contentsLoaded.isFailure) {
+                            item(key = "__error__") {
+                                EmptyState(
+                                    message = stringResource(R.string.file_picker_read_error),
+                                    icon = Icons.Outlined.Lock,
+                                    actionLabel = stringResource(R.string.retry),
+                                    onAction = { refreshKey++ }
+                                )
+                            }
+                        } else if (contentsLoaded != null && contentsLoaded.getOrNull()!!.isEmpty()) {
+                            item(key = "__empty__") {
+                                EmptyState(
+                                    message = stringResource(R.string.file_picker_no_files),
+                                    icon = Icons.Outlined.FolderOff
+                                )
+                            }
+                        } else if (contentsLoaded != null && displayedContents.isEmpty()) {
+                            item(key = "__no_results__") {
+                                EmptyState(
+                                    message = stringResource(R.string.search_no_results),
+                                    icon = Icons.Outlined.SearchOff
+                                )
+                            }
+                        } else {
+                            items(displayedContents, key = { it.absolutePath }) { file ->
+                                val isDir = file.isDirectory
+                                val ext = if (isDir) "" else file.extension.lowercase()
+                                val isApk = ext in APK_EXTENSIONS
+                                // Only standard .apk supports getPackageArchiveInfo; bundles (.apkm/.apks/.xapk) are ZIPs
+                                val canLoadIcon = ext == "apk"
+                                val isImage = ext in IMAGE_EXTENSIONS
+                                val isSplitBundle = ext in SPLIT_ICON_EXTENSIONS
+
+                                val packageInfo by produceState<PackageInfo?>(null, file) {
+                                    if (canLoadIcon) {
+                                        val cached = apkPackageInfoCache.get(file.absolutePath)
+                                        if (cached != null) {
+                                            value = cached
+                                        } else {
+                                            val info = withContext(iconLoadDispatcher) { pm.getPackageInfo(file) }
+                                            if (info != null) apkPackageInfoCache.put(file.absolutePath, info)
+                                            value = info
+                                        }
+                                    }
+                                }
+
+                                val thumbnail by produceState<ImageBitmap?>(null, file) {
+                                    if (isImage) {
+                                        val cached = imageThumbnailCache.get(file.absolutePath)
+                                        if (cached != null) {
+                                            value = cached
+                                        } else {
+                                            val bmp = withContext(iconLoadDispatcher) { decodeThumbnail(file) }
+                                            if (bmp != null) imageThumbnailCache.put(file.absolutePath, bmp)
+                                            value = bmp
+                                        }
+                                    }
+                                }
+
+                                val splitIcon by produceState<ImageBitmap?>(null, file) {
+                                    if (isSplitBundle) {
+                                        val cached = splitIconCache.get(file.absolutePath)
+                                        if (cached != null) {
+                                            value = cached
+                                        } else {
+                                            val bmp = withContext(iconLoadDispatcher) { decodeSplitIcon(file) }
+                                            if (bmp != null) splitIconCache.put(file.absolutePath, bmp)
+                                            value = bmp
+                                        }
+                                    }
+                                }
+
+                                val isMpp = ext == "mpp"
+                                val isKeystore = ext in KEYSTORE_EXTENSIONS
+                                val isJson = ext == "json"
+                                val icon = when {
+                                    isDir -> Icons.Outlined.Folder
+                                    canLoadIcon && packageInfo == null -> Icons.Outlined.Android
+                                    canLoadIcon -> null
+                                    isApk -> Icons.Outlined.Android
+                                    isSplitBundle && splitIcon == null -> Icons.Outlined.Android
+                                    isSplitBundle -> null
+                                    isMpp -> null
+                                    isKeystore -> Icons.Outlined.Key
+                                    isJson -> Icons.Outlined.DataObject
+                                    isImage && thumbnail == null -> Icons.Outlined.Image
+                                    isImage -> null
+                                    else -> Icons.AutoMirrored.Outlined.InsertDriveFile
+                                }
+                                val detail = if (!isDir) {
+                                    "${formatBytes(file.length())} · ${formatModDate(file.lastModified())}"
+                                } else null
+
+                                FilePickerRow(
+                                    icon = icon,
+                                    iconBitmap = if (isMpp) mppIcon else null,
+                                    thumbnail = if (isSplitBundle) splitIcon else thumbnail,
+                                    packageInfo = packageInfo,
+                                    name = file.name,
+                                    detail = detail,
+                                    onClick = {
+                                        if (isDir) currentDir = file
+                                        else if (!allowFolderSelection) onFilePicked(file)
+                                    }
+                                )
+                                HorizontalDivider(color = LocalDialogTextColor.current.copy(alpha = 0.06f))
+                            }
+                        }
                     }
                 }
+
+                ScrollToTopButton(listState = listState)
             }
 
             HorizontalDivider(color = LocalDialogTextColor.current.copy(alpha = 0.08f))

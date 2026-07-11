@@ -21,10 +21,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
+import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -61,6 +63,7 @@ import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.gitlabAvat
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.manager.SourceBundleSortMode
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.RemoteAvatar
@@ -72,6 +75,7 @@ import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
+import java.util.Locale
 
 /**
  * Bottom sheet for managing patch bundles.
@@ -103,6 +107,7 @@ fun BundleManagementSheet(
     val showSheetOnboarding = globalOnboardingState?.sheetOnboardingActive == true
 
     val bundleToDelete = remember { mutableStateOf<PatchBundleSource?>(null) }
+    var showSortDialog by remember { mutableStateOf(false) }
     // Expanded state lifted out of LazyColumn so it survives scroll-off-screen recomposition
     var expandedBundleUids by remember { mutableStateOf<Set<Int>>(emptySet()) }
 
@@ -131,8 +136,11 @@ fun BundleManagementSheet(
         val merged = existing + added
         if (merged != localOrder) localOrder = merged
     }
-    val orderedSources = remember(localOrder, sources) {
-        localOrder.mapNotNull { uid -> sources.find { it.uid == uid } }
+    val sortModePreference by prefs.sourceBundleSortMode.getAsState()
+    val sourceSortMode = SourceBundleSortMode.fromPreference(sortModePreference)
+    val isManualSort = sourceSortMode == SourceBundleSortMode.MANUAL
+    val orderedSources = remember(localOrder, sources, sourceSortMode) {
+        sources.sortedForSourceSort(sourceSortMode, localOrder)
     }
     val haptic = LocalHapticFeedback.current
     val reorderableState = rememberReorderableLazyListState(listState) { from, to ->
@@ -198,16 +206,39 @@ fun BundleManagementSheet(
                             )
                         }
 
-                        FilledIconButton(
-                            onClick = onAddSource,
-                            colors = IconButtonDefaults.filledIconButtonColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer
-                            )
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Icon(
-                                imageVector = Icons.Default.Add,
-                                contentDescription = stringResource(R.string.add)
-                            )
+                            AnimatedVisibility(visible = sources.size >= 2) {
+                                val activeSortLabel = stringResource(sourceSortMode.labelRes)
+                                FilledIconButton(
+                                    onClick = { showSortDialog = true },
+                                    modifier = Modifier.semantics {
+                                        role = Role.Button
+                                        stateDescription = activeSortLabel
+                                    },
+                                    colors = IconButtonDefaults.filledIconButtonColors(
+                                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                                    )
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.AutoMirrored.Outlined.Sort,
+                                        contentDescription = stringResource(R.string.sort)
+                                    )
+                                }
+                            }
+                            FilledIconButton(
+                                onClick = onAddSource,
+                                colors = IconButtonDefaults.filledIconButtonColors(
+                                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                                )
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Add,
+                                    contentDescription = stringResource(R.string.add)
+                                )
+                            }
                         }
                     }
 
@@ -215,120 +246,144 @@ fun BundleManagementSheet(
                 }
 
                 // Bundle cards
-                LazyColumn(
-                    state = listState,
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .navigationBarsPadding()
                         .weight(1f, fill = false)
-                        .onGloballyPositioned { coords -> listWindowY = coords.boundsInWindow().top },
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    contentPadding = PaddingValues(
-                        start = 16.dp,
-                        end = 16.dp,
-                        bottom = 16.dp
-                    )
                 ) {
-                    items(orderedSources, key = { bundle -> bundle.uid }) { bundle ->
-                        val hasExperimentalVersions = remember(bundle.uid, bundleInfo) {
-                            bundleInfo[bundle.uid]?.patches?.any { patch ->
-                                patch.compatiblePackages?.any { pkg ->
-                                    pkg.experimentalVersions?.isNotEmpty() == true
+                    LazyColumn(
+                        state = listState,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .navigationBarsPadding()
+                            .onGloballyPositioned { coords -> listWindowY = coords.boundsInWindow().top },
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        contentPadding = PaddingValues(
+                            start = 16.dp,
+                            end = 16.dp,
+                            bottom = 16.dp
+                        )
+                    ) {
+                        items(orderedSources, key = { bundle -> bundle.uid }) { bundle ->
+                            val hasExperimentalVersions = remember(bundle.uid, bundleInfo) {
+                                bundleInfo[bundle.uid]?.patches?.any { patch ->
+                                    patch.compatiblePackages?.any { pkg ->
+                                        pkg.experimentalVersions?.isNotEmpty() == true
+                                    } == true
                                 } == true
-                            } == true
-                        }
-                        val useExperimentalVersions = bundle.uid.toString() in experimentalVersionsEnabled
+                            }
+                            val useExperimentalVersions = bundle.uid.toString() in experimentalVersionsEnabled
 
-                        val isFirstCard = bundle.uid == orderedSources.firstOrNull()?.uid
-                        ReorderableItem(reorderableState, key = bundle.uid) { itemIsDragging ->
-                            BundleManagementCard(
-                                bundle = bundle,
-                                patchCount = patchCounts[bundle.uid] ?: 0,
-                                updateInfo = manualUpdateInfo[bundle.uid],
-                                isUpdating = bundle.uid in activeUpdateUids,
-                                metadataFetchError = metadataFetchErrors[bundle.uid],
-                                expanded = isSingleDefaultBundle || bundle.uid in expandedBundleUids ||
-                                    (showSheetOnboarding && isFirstCard),
-                                onToggleExpanded = {
-                                    expandedBundleUids = if (bundle.uid in expandedBundleUids) {
-                                        expandedBundleUids - bundle.uid
-                                    } else {
-                                        expandedBundleUids + bundle.uid
-                                    }
-                                },
-                                onDelete = { bundleToDelete.value = bundle },
-                                onDisable = { onDisable(bundle) },
-                                onUpdate = { onUpdate(bundle) },
-                                onRename = { onRename(bundle) },
-                                onPrereleasesToggle = when {
-                                    bundle is JsonPatchBundle && bundle.supportsPrerelease ||
-                                            bundle is APIPatchBundle -> { usePrerelease ->
-                                        if (bundle.uid == bundleToShowChangelogUid) {
-                                            bundleToShowChangelogUid = null
+                            val isFirstCard = bundle.uid == orderedSources.firstOrNull()?.uid
+                            ReorderableItem(reorderableState, key = bundle.uid) { itemIsDragging ->
+                                BundleManagementCard(
+                                    bundle = bundle,
+                                    patchCount = patchCounts[bundle.uid] ?: 0,
+                                    updateInfo = manualUpdateInfo[bundle.uid],
+                                    isUpdating = bundle.uid in activeUpdateUids,
+                                    metadataFetchError = metadataFetchErrors[bundle.uid],
+                                    expanded = isSingleDefaultBundle || bundle.uid in expandedBundleUids ||
+                                        (showSheetOnboarding && isFirstCard),
+                                    onToggleExpanded = {
+                                        expandedBundleUids = if (bundle.uid in expandedBundleUids) {
+                                            expandedBundleUids - bundle.uid
+                                        } else {
+                                            expandedBundleUids + bundle.uid
                                         }
-                                        bundle.clearChangelogCache()
-                                        scope.launch {
-                                            patchBundleRepository.setUsePrerelease(
-                                                bundle.uid,
-                                                usePrerelease
-                                            )
-                                        }
-                                    }
-
-                                    else -> null
-                                },
-                                onExperimentalVersionsToggle = if (hasExperimentalVersions) {
-                                    { useExperimental ->
-                                        scope.launch {
-                                            patchBundleRepository.setUseExperimentalVersions(
-                                                bundle.uid,
-                                                useExperimental
-                                            )
-                                        }
-                                    }
-                                } else null,
-                                hasExperimentalVersions = hasExperimentalVersions,
-                                useExperimentalVersions = useExperimentalVersions,
-                                onPatchesClick = { bundleToShowPatches.value = bundle },
-                                onVersionClick = {
-                                    if (bundle is RemotePatchBundle) {
-                                        bundleToShowChangelogUid = bundle.uid
-                                    }
-                                },
-                                onOpenInBrowser = {
-                                    val pageUrl = manualUpdateInfo[bundle.uid]?.pageUrl
-                                        ?: (bundle as? RemotePatchBundle)?.let { remote ->
-                                            RemotePatchBundle.inferPageUrlFromEndpoint(remote.endpoint)
-                                        }
-                                        ?: SOURCE_REPO_URL
-                                    try {
-                                        uriHandler.openUri(pageUrl)
-                                    } catch (_: Exception) {
-                                        context.toast(failedToOpenUrlText)
-                                    }
-                                },
-                                forceExpanded = isSingleDefaultBundle,
-                                isDragging = itemIsDragging,
-                                longPressModifier = Modifier.longPressDraggableHandle(
-                                    onDragStarted = {
-                                        isDragging = true
-                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                     },
-                                    onDragStopped = {
-                                        isDragging = false
-                                        onReorder(localOrder)
-                                    }
-                                ),
-                                onPatchesBtnPositioned = if (isFirstCard) { b -> globalOnboardingState?.sourcesPatchesBounds = b } else null,
-                                onVersionPositioned = if (isFirstCard) { b -> globalOnboardingState?.sourcesVersionBounds = b } else null,
-                                onPrereleaseBtnPositioned = if (isFirstCard) { b -> globalOnboardingState?.sourcesPrereleaseBounds = b } else null,
-                                modifier = Modifier.zIndex(if (itemIsDragging) 1f else 0f)
-                            )
+                                    onDelete = { bundleToDelete.value = bundle },
+                                    onDisable = { onDisable(bundle) },
+                                    onUpdate = { onUpdate(bundle) },
+                                    onRename = { onRename(bundle) },
+                                    onPrereleasesToggle = when {
+                                        bundle is JsonPatchBundle && bundle.supportsPrerelease ||
+                                                bundle is APIPatchBundle -> { usePrerelease ->
+                                            if (bundle.uid == bundleToShowChangelogUid) {
+                                                bundleToShowChangelogUid = null
+                                            }
+                                            bundle.clearChangelogCache()
+                                            scope.launch {
+                                                patchBundleRepository.setUsePrerelease(
+                                                    bundle.uid,
+                                                    usePrerelease
+                                                )
+                                            }
+                                        }
+
+                                        else -> null
+                                    },
+                                    onExperimentalVersionsToggle = if (hasExperimentalVersions) {
+                                        { useExperimental ->
+                                            scope.launch {
+                                                patchBundleRepository.setUseExperimentalVersions(
+                                                    bundle.uid,
+                                                    useExperimental
+                                                )
+                                            }
+                                        }
+                                    } else null,
+                                    hasExperimentalVersions = hasExperimentalVersions,
+                                    useExperimentalVersions = useExperimentalVersions,
+                                    onPatchesClick = { bundleToShowPatches.value = bundle },
+                                    onVersionClick = {
+                                        if (bundle is RemotePatchBundle) {
+                                            bundleToShowChangelogUid = bundle.uid
+                                        }
+                                    },
+                                    onOpenInBrowser = {
+                                        val pageUrl = manualUpdateInfo[bundle.uid]?.pageUrl
+                                            ?: (bundle as? RemotePatchBundle)?.let { remote ->
+                                                RemotePatchBundle.inferPageUrlFromEndpoint(remote.endpoint)
+                                            }
+                                            ?: SOURCE_REPO_URL
+                                        try {
+                                            uriHandler.openUri(pageUrl)
+                                        } catch (_: Exception) {
+                                            context.toast(failedToOpenUrlText)
+                                        }
+                                    },
+                                    forceExpanded = isSingleDefaultBundle,
+                                    isDragging = itemIsDragging,
+                                    longPressModifier = if (isManualSort) {
+                                        Modifier.longPressDraggableHandle(
+                                            onDragStarted = {
+                                                isDragging = true
+                                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                            },
+                                            onDragStopped = {
+                                                isDragging = false
+                                                onReorder(localOrder)
+                                            }
+                                        )
+                                    } else {
+                                        Modifier
+                                    },
+                                    onPatchesBtnPositioned = if (isFirstCard) { b -> globalOnboardingState?.sourcesPatchesBounds = b } else null,
+                                    onVersionPositioned = if (isFirstCard) { b -> globalOnboardingState?.sourcesVersionBounds = b } else null,
+                                    onPrereleaseBtnPositioned = if (isFirstCard) { b -> globalOnboardingState?.sourcesPrereleaseBounds = b } else null,
+                                    modifier = Modifier.zIndex(if (itemIsDragging) 1f else 0f)
+                                )
+                            }
                         }
                     }
+
+                    ScrollToTopButton(listState = listState)
                 }
             }
         }
+    }
+
+    if (showSortDialog) {
+        SortModeSelectionDialog(
+            title = stringResource(R.string.sources_sort_title),
+            current = sourceSortMode,
+            options = sortModeOptions<SourceBundleSortMode>(),
+            onSelect = { mode ->
+                scope.launch { prefs.sourceBundleSortMode.update(mode.name) }
+                showSortDialog = false
+            },
+            onDismiss = { showSortDialog = false }
+        )
     }
 
     // Delete confirmation dialog
@@ -361,6 +416,43 @@ fun BundleManagementSheet(
         }
     }
 }
+
+private fun List<PatchBundleSource>.sortedForSourceSort(
+    sortMode: SourceBundleSortMode,
+    manualOrder: List<Int>
+): List<PatchBundleSource> = when (sortMode) {
+    SourceBundleSortMode.MANUAL -> {
+        val byUid = associateBy { it.uid }
+        val ordered = manualOrder.mapNotNull { uid -> byUid[uid] }
+        val orderedUids = ordered.map { it.uid }.toSet()
+        ordered + filter { it.uid !in orderedUids }
+    }
+
+    SourceBundleSortMode.LAST_UPDATED -> sortedWith(
+        compareByDescending<PatchBundleSource> { it.updatedAt ?: it.createdAt ?: 0L }
+            .thenBy { it.sourceSortTitle() }
+            .thenBy { it.uid }
+    )
+
+    SourceBundleSortMode.NAME_ASC -> sortedWith(
+        compareBy<PatchBundleSource> { it.sourceSortTitle() }
+            .thenBy { it.uid }
+    )
+
+    SourceBundleSortMode.NAME_DESC -> sortedWith(
+        compareByDescending<PatchBundleSource> { it.sourceSortTitle() }
+            .thenBy { it.uid }
+    )
+
+    SourceBundleSortMode.ENABLED_FIRST -> sortedWith(
+        compareByDescending<PatchBundleSource> { it.enabled }
+            .thenBy { it.sourceSortTitle() }
+            .thenBy { it.uid }
+    )
+}
+
+private fun PatchBundleSource.sourceSortTitle(): String =
+    displayTitle.lowercase(Locale.ROOT)
 
 /**
  * Card for individual bundle management.
@@ -468,22 +560,8 @@ private fun BundleManagementCard(
             }
         }
 
-        Column(modifier = Modifier
-            .clickable(
-                indication = null,
-                interactionSource = remember { MutableInteractionSource() }
-            ) {
-                if (!forceExpanded) onToggleExpanded()
-            }
-            .semantics {
-                if (!forceExpanded) {
-                    role = Role.Button
-                    stateDescription = if (expanded) expandedState else collapsedState
-                }
-                this.contentDescription = contentDesc
-            }
-            .padding(16.dp)) {
-            // Header
+        Column(modifier = Modifier.padding(16.dp)) {
+            // Click target only on the header so expanded children stay independently focusable for screen readers
             BundleCardHeader(
                 bundle = bundle,
                 updateInfo = updateInfo,
@@ -492,6 +570,19 @@ private fun BundleManagementCard(
                 enabled = isEnabled,
                 metadataFetchError = metadataFetchError,
                 modifier = longPressModifier
+                    .clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) {
+                        if (!forceExpanded) onToggleExpanded()
+                    }
+                    .semantics(mergeDescendants = true) {
+                        if (!forceExpanded) {
+                            role = Role.Button
+                            stateDescription = if (expanded) expandedState else collapsedState
+                        }
+                        this.contentDescription = contentDesc
+                    }
             )
 
             // Expanded content
@@ -591,7 +682,15 @@ private fun BundleManagementCard(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { onPrereleasesToggle(!currentUsePrerelease) }
+                                .toggleable(
+                                    value = currentUsePrerelease,
+                                    role = Role.Switch,
+                                    enabled = !isUpdating,
+                                    onValueChange = onPrereleasesToggle
+                                )
+                                .semantics {
+                                    stateDescription = if (currentUsePrerelease) enabledState else disabledState
+                                }
                                 .padding(vertical = 4.dp)
                                 .then(
                                     if (onPrereleaseBtnPositioned != null)
@@ -618,10 +717,28 @@ private fun BundleManagementCard(
 
                             Spacer(Modifier.width(8.dp))
 
-                            MorpheSwitch(
-                                checked = currentUsePrerelease,
-                                onCheckedChange = onPrereleasesToggle
-                            )
+                            Crossfade(
+                                targetState = isUpdating,
+                                modifier = Modifier.size(width = 52.dp, height = 32.dp),
+                                label = "prerelease_toggle_loading"
+                            ) { updating ->
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    if (updating) {
+                                        CircularProgressIndicator(
+                                            modifier = Modifier.size(24.dp),
+                                            strokeWidth = 2.dp
+                                        )
+                                    } else {
+                                        MorpheSwitch(
+                                            checked = currentUsePrerelease,
+                                            onCheckedChange = null
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -636,8 +753,13 @@ private fun BundleManagementCard(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable {
-                                    onExperimentalVersionsToggle?.invoke(!useExperimentalVersions)
+                                .toggleable(
+                                    value = useExperimentalVersions,
+                                    role = Role.Switch,
+                                    onValueChange = { onExperimentalVersionsToggle?.invoke(it) }
+                                )
+                                .semantics {
+                                    stateDescription = if (useExperimentalVersions) enabledState else disabledState
                                 }
                                 .padding(vertical = 4.dp),
                             verticalAlignment = Alignment.CenterVertically,
@@ -660,7 +782,7 @@ private fun BundleManagementCard(
 
                             MorpheSwitch(
                                 checked = useExperimentalVersions,
-                                onCheckedChange = { onExperimentalVersionsToggle?.invoke(it) }
+                                onCheckedChange = null
                             )
                         }
                     }
@@ -670,77 +792,73 @@ private fun BundleManagementCard(
                     }
 
                     // Action bar
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            if (!forceExpanded) {
-                                val disableEnableDesc = if (bundle.enabled) {
-                                    stringResource(R.string.disable) + " " + bundle.displayTitle
-                                } else {
-                                    stringResource(R.string.enable) + " " + bundle.displayTitle
-                                }
-                                val disableToast = stringResource(
-                                    if (bundle.enabled) R.string.sources_management_source_disabled
-                                    else R.string.sources_management_source_enabled
-                                )
+                    ActionPillRow {
+                        if (!forceExpanded) {
+                            val disableEnableVerb = stringResource(
+                                if (bundle.enabled) R.string.disable else R.string.enable
+                            )
+                            val disableEnableDesc = disableEnableVerb + " " + bundle.displayTitle
+                            val disableToast = stringResource(
+                                if (bundle.enabled) R.string.sources_management_source_disabled
+                                else R.string.sources_management_source_enabled
+                            )
 
-                                val disableIcon = if (bundle.enabled)
-                                    Icons.Outlined.Block
-                                else
-                                    Icons.Outlined.CheckCircle
+                            val disableIcon = if (bundle.enabled)
+                                Icons.Outlined.Block
+                            else
+                                Icons.Outlined.CheckCircle
 
-                                Crossfade(
-                                    targetState = disableIcon,
-                                    label = "disable_icon"
-                                ) { icon ->
-                                    // Disable button
-                                    ActionPillButton(
-                                        onClick = withToast(disableToast, onDisable),
-                                        icon = icon,
-                                        contentDescription = disableEnableDesc,
-                                        tooltip = disableEnableDesc
-                                    )
-                                }
-                            }
-
-                            if (bundle is RemotePatchBundle) {
-                                val updateDesc = stringResource(R.string.update) + " " + bundle.displayTitle
-                                val updateToast = stringResource(R.string.sources_management_source_updating)
-                                // Update button
+                            Crossfade(
+                                targetState = disableIcon,
+                                label = "disable_icon"
+                            ) { icon ->
+                                // Disable button
                                 ActionPillButton(
-                                    onClick = withToast(updateToast, onUpdate),
-                                    icon = Icons.Outlined.Refresh,
-                                    contentDescription = updateDesc,
-                                    tooltip = updateDesc
+                                    onClick = withToast(disableToast, onDisable),
+                                    icon = icon,
+                                    contentDescription = disableEnableDesc,
+                                    tooltip = disableEnableVerb
                                 )
                             }
+                        }
 
-                            if (!bundle.isDefault) {
-                                val renameDesc = stringResource(R.string.rename) + " " + bundle.displayTitle
-                                val deleteDesc = stringResource(R.string.delete) + " " + bundle.displayTitle
-                                // Rename button
-                                ActionPillButton(
-                                    onClick = onRename,
-                                    icon = Icons.Outlined.Edit,
-                                    contentDescription = renameDesc,
-                                    tooltip = renameDesc
-                                )
+                        if (bundle is RemotePatchBundle) {
+                            val updateVerb = stringResource(R.string.update)
+                            val updateDesc = updateVerb + " " + bundle.displayTitle
+                            val updateToast = stringResource(R.string.sources_management_source_updating)
+                            // Update button
+                            ActionPillButton(
+                                onClick = withToast(updateToast, onUpdate),
+                                icon = Icons.Outlined.Refresh,
+                                contentDescription = updateDesc,
+                                tooltip = updateVerb
+                            )
+                        }
 
-                                // Delete button
-                                ActionPillButton(
-                                    onClick = onDelete,
-                                    icon = Icons.Outlined.Delete,
-                                    contentDescription = deleteDesc,
-                                    tooltip = deleteDesc,
-                                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                                        containerColor = MaterialTheme.colorScheme.errorContainer,
-                                        contentColor = MaterialTheme.colorScheme.onErrorContainer
-                                    )
+                        if (!bundle.isDefault) {
+                            val renameVerb = stringResource(R.string.rename)
+                            val deleteVerb = stringResource(R.string.delete)
+                            val renameDesc = renameVerb + " " + bundle.displayTitle
+                            val deleteDesc = deleteVerb + " " + bundle.displayTitle
+                            // Rename button
+                            ActionPillButton(
+                                onClick = onRename,
+                                icon = Icons.Outlined.Edit,
+                                contentDescription = renameDesc,
+                                tooltip = renameVerb
+                            )
+
+                            // Delete button
+                            ActionPillButton(
+                                onClick = onDelete,
+                                icon = Icons.Outlined.Delete,
+                                contentDescription = deleteDesc,
+                                tooltip = deleteVerb,
+                                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                    containerColor = MaterialTheme.colorScheme.errorContainer,
+                                    contentColor = MaterialTheme.colorScheme.onErrorContainer
                                 )
-                            }
+                            )
                         }
                     }
                 }

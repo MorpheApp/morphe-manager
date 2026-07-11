@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Vaši izvori su ažurirani</string>
     <string name="home_sources_are_loading">Izvori se učitavaju, molimo sačekajte…</string>
     <string name="home_search_apps">Pretraživanje aplikacija</string>
+    <string name="home_app_sort_title">Sortiraj aplikacije</string>
+    <string name="home_app_sort_manual_description">Pritisnite i zadržite aplikaciju, zatim dodirnite dugme za promenu reda</string>
+    <string name="home_app_sort_recommended">Preporučeni redosled</string>
+    <string name="home_app_sort_recommended_description">Instalirane i pričvršćene aplikacije prvo</string>
+    <string name="home_app_sort_name_asc_description">Abecedni redosled, A do Š</string>
+    <string name="home_app_sort_name_desc_description">Obrnuti abecedni redosled, od Z do A</string>
+    <string name="home_app_sort_updates_first">Prvo ažuriranja zakrpa</string>
+    <string name="home_app_sort_updates_first_description">Aplikacije sa oznakama ažuriranja prvo, pa preporučeni redosled</string>
     <string name="home_no_apps_title">Nema dostupnih aplikacija</string>
     <string name="home_no_apps_subtitle">Dodajte izvor aplikacije ili omogućite postojeći u %s</string>
     <string name="home_no_apps_search_subtitle">Nijedna aplikacija ne odgovara na \"%s\"</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Noćni i produktivan</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Izvori zakrpe</string>
+    <string name="sources_sort_title">Sortiraj izvore zakrpa</string>
+    <string name="sources_sort_manual">Ručna postavka</string>
+    <string name="sources_sort_manual_hint">Pritisnite i zadržite izvor da biste ga preuredili</string>
+    <string name="sources_sort_last_updated">Zadnje ažuriranje</string>
+    <string name="sources_sort_last_updated_description">Prvo najnovija ažuriranja izvora</string>
+    <string name="sources_sort_enabled_first">Omogućeni prvo</string>
+    <string name="sources_sort_enabled_first_description">Prikaži aktivne izvore pre onemogućenih izvora</string>
     <string name="sources_management_open_in_browser">Otvori u pregledaču</string>
     <string name="sources_management_failed_to_open_url">Otvaranje URL-a nije uspelo</string>
     <string name="sources_management_prerelease_toggle">Zakrpe u predprodukciji</string>
@@ -285,6 +300,9 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="home_app_info_patch_source_used">Korišten je patch izvora</string>
     <string name="home_app_info_install_type_custom_installer">Prilagođeni instalater</string>
     <string name="home_app_info_install_type_system_installer">Sistemski instalater</string>
+    <string name="home_app_info_install_type_play_store">Instalacija preko Play Store-a</string>
+    <string name="home_app_info_install_type_root_play_store">Instalacija preko Root i Play Store-a</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Instalacija preko Shizuku i Play Store-a</string>
     <string name="home_app_info_patch_update_available">Dostupno je nova verzija patchova</string>
     <string name="home_app_info_patch_update_available_description">Nova verzija patchova je dostupna. Ponovno patchirajte svoju aplikaciju da bi dobili najnovije poboljšanja i ispravke</string>
     <string name="home_app_info_app_deleted_warning">Aplikacija je deinstalirana</string>
@@ -295,7 +313,7 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="root_gmscore_excluded">GmsCore zakrpa za podršku je isključena u root modu</string>
     <string name="root_pre_patch_installer_title">Odaberi način instalacije</string>
     <string name="root_pre_patch_installer_description">Vaš uređaj ima pristup korenovom direktorijumu. Odaberite način instalacije ispravljenog programa</string>
-    <string name="root_pre_patch_installer_mount_title">Montiraj ispravljeni APK preko stokovnog programa</string>
+    <string name="root_pre_patch_installer_mount_title">Montiranje sistema</string>
     <string name="root_pre_patch_installer_mount_description">Montira zakrpljeni APK preko fabričke aplikacije. Nije potreban GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Standardna instalacija</string>
     <string name="root_pre_patch_installer_standard_description">Instalira se kao zasebna aplikacija uz podršku GmsCore. Mogući je izbor instalera nakon patchovanja</string>
@@ -305,17 +323,21 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="patcher_error_log">Dnevnik grešaka</string>
     <string name="patcher_error_technical">Tehničke informacije</string>
     <string name="patcher_error_dialog_app_info">Informacije o aplikaciji</string>
-    <string name="patcher_tab_logs">Evidencije zakrpa</string>
+    <string name="patcher_tab_logs">Evidencije peča</string>
     <string name="patcher_tab_game">Igre</string>
     <string name="patcher_long_step_warning">Ovaj korak može potrajati. Molimo sačekajte…</string>
     <string name="patcher_installing_subtitle">Skoro spremni za akciju! 🎸</string>
-    <string name="patcher_success_title">Sve je završeno! 🎉</string>
+    <string name="patcher_success_title">Završeno! 🎉</string>
     <string name="patcher_success_subtitle">Vaša aplikacija je zakrpljena i instalirana!</string>
-    <string name="patcher_complete_title">Zakrpa završena! ✨</string>
+    <string name="patcher_complete_title">Pečanje je završeno! ✨</string>
     <string name="patcher_failed_title">Ups! Nešto je pošlo po zlu</string>
     <string name="patcher_failed_subtitle">Proverite detalje greške ispod</string>
-    <string name="patcher_failed_dialog_title">Zakrpa nije uspela</string>
+    <string name="patcher_failed_dialog_title">Pečanje je neuspešno</string>
     <string name="patcher_unknown_error">Dogodila se nepoznata greška</string>
+    <string name="patcher_split_step_extracting">Ekstrahovanje split APK-ova</string>
+    <string name="patcher_split_step_merging">Spajanje %s</string>
+    <string name="patcher_split_step_writing">Upis spojenog APK-a</string>
+    <string name="patcher_split_step_finalizing">Završetak spojenog APK-a</string>
     <string name="patcher_conflict_title">Konflikt paketa</string>
     <string name="patcher_conflict_subtitle">Morate deinstalirati postojeću verziju</string>
     <string name="patcher_conflict_hint">Popravljena aplikacija koristi drugačiji sertifikat od instalirane verzije. Deinstalacija će obrisati sve podatke aplikacije.</string>
@@ -588,11 +610,13 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
     <string name="installer_title">Odaberite instalera</string>
-    <string name="installer_internal_name">Sistemski instalacioni program</string>
     <string name="installer_internal_description">Koristi Android paketni instalator</string>
+    <string name="installer_play_store_description">Koristi sistemski instalator i postavlja Google Play Store kao izvor instalacije</string>
+    <string name="installer_root_play_store_description">Tiha instalacija sa root pristupom i postavljanje Google Play Store-a kao izvora instalacije</string>
     <string name="installer_auto_saved_name">Instalator za montažu sa root-om</string>
     <string name="installer_auto_saved_description">Instalira nadinstaliranu APK na postojeću aplikaciju</string>
     <string name="installer_shizuku_description">Instalira se tiho koristeći Shizuku ili Sui</string>
+    <string name="installer_shizuku_play_store_description">Tiha instalacija putem Shizuku ili Sui i postavljanje Google Play Store-a kao izvora instalacije</string>
     <string name="installer_option_none">Bez rezervnog rešenja</string>
     <string name="installer_none_description">Nije konfigurisano nijedno rezervno instalaciono rešenje</string>
     <string name="installer_status_requires_root">Zahteva root pristup</string>
@@ -613,6 +637,10 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="installer_unavailable_message">Vaš preferirani instalera (%s) je trenutno nedostupan. Moguće je ispraviti problem i pokušati ponovo ili koristiti standardni instalera</string>
     <string name="installer_unavailable_shizuku_hint">Uvjerite se da je Shizuku pokrenut i da je dozvola dodijeljena ovoj aplikaciji</string>
     <string name="installer_use_standard">Koristi standard</string>
+    <string name="installer_play_store_warning_title">Instalirati kao Play Store?</string>
+    <string name="installer_play_store_warning_message">Aplikacija će biti zabeležena kao instalirana iz Google Play Store-a. Ovo omogućava servisima kao što je Android Auto da je prepoznaju kao Play Store aplikaciju</string>
+    <string name="installer_play_store_warning_risk">Play Store može da ponudi ažuriranja za aplikaciju. Instaliranje tog ažuriranja će prepisati patčovani APK originalnom verzijom i ukloniti patčove. Ako budete pozvani da ažurirate, dodirnite meni sa tri tačke na stranici aplikacije u Play Store-u i odaberite „Isključite ažuriranja“</string>
+    <string name="installer_play_store_warning_continue">Razumem, nastavi</string>
     <string name="settings_prompt_installer_on_install">Prompt za izbor instalera</string>
     <string name="settings_prompt_installer_on_install_description">Prikazuje dijalog za izbor instalera svaki put kada se instalira patchovana aplikacija</string>
     <string name="settings_auto_install_with_shizuku">Automatska instalacija nakon zakrpljivanja</string>
@@ -653,6 +681,14 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_system_import_manager_settings_description">Pravi backup i vraća vaše podešavanje aplikacije Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Није успело увожење подешавања Morphe-а: %s</string>
     <string name="settings_system_import_manager_settings_success">Увезена су подешавања Morphe-а</string>
+    <string name="settings_system_import_manager_settings_mode_title">Uvoz podešavanja Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Izaberite kako da se primene uvezeni podaci i izvori</string>
+    <string name="settings_system_import_selections_mode_title">Uvoz izbora paketa</string>
+    <string name="settings_system_import_selections_mode_description">Izaberite kako da se primene uvezeni izbori i opcije zakrpe</string>
+    <string name="import_mode_replace_title">Zameni postojeće</string>
+    <string name="import_mode_replace_description">Tačno uporedi sa rezervnom kopijom. Stavke koje nedostaju u rezervnoj kopiji biće uklonjene</string>
+    <string name="import_mode_merge_title">Spoji sa postojećim</string>
+    <string name="import_mode_merge_description">Dodaj nedostajuće stavke iz rezervne kopije. Postojeće stavke ostaju nepromenjene</string>
     <string name="settings_system_export_manager_settings_fail">Није успело извожење подешавања Morphe-а: %s</string>
     <string name="settings_system_export_manager_settings_success">Извезена су подешавања Morphe-а</string>
     <string name="settings_system_debug">Debug</string>
@@ -663,6 +699,12 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Datoteke i skladište</string>
     <string name="settings_system_apks_size">Ukupna veličina: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Ovo će trajno izbrisati sačuvane APK fajlove prikazane ovde</string>
+    <string name="settings_system_apks_delete_selected_title">Izbrisati izabrane APK-ove?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Ovo će trajno izbrisati izabrane APK fajlove</string>
+    <string name="settings_system_apks_deleted_all">APK-ovi su uspešno izbrisani</string>
+    <string name="settings_system_apks_export_zip_success">Izvezeni APK-ovi</string>
+    <string name="settings_system_apks_export_zip_failed">Nije uspeo izvoz selektovanih APK-ova</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patcheirani APK(s)</string>
     <string name="settings_system_patched_apks_description">Upravlja sačuvanim patchovanim datotekama aplikacija</string>
@@ -670,6 +712,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_system_patched_apks_delete_title">Da li zaista želite da obrišete ovaj patcheirani APK?</string>
     <string name="settings_system_patched_apks_delete_confirm">Da li zaista želite da obrišete patcheirani APK za %s?</string>
     <string name="settings_system_patched_apks_deleted">Patcheirani APK obrisan</string>
+    <string name="settings_system_patched_apks_delete_all_title">Brisati sve popravljene APK-ove?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Originalni APK(s)</string>
     <string name="settings_system_original_apks_description">Sačuvano za ponovno patchovanje. Čuva se jedna verzija po aplikaciji</string>
@@ -677,11 +720,13 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_system_original_apks_deleted">Da li zaista želite da obrišete ovaj originalni APK?</string>
     <string name="settings_system_original_apks_delete_title">Da li zaista želite da obrišete originalni APK za %s? Nećete moći repatchirati bez pružnog novog APK fajla.</string>
     <string name="settings_system_original_apks_delete_confirm">Izbrišite originalni fajl APK za %s? Bez novog fajla APK nećete moći ponovo patchirati</string>
+    <string name="settings_system_original_apks_delete_all_title">Brisati sve originalne APK-ove?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Upravljanje sačuvanim patch-ovima i opcijama. Ovo ostaje nakon deinstalacije aplikacije</string>
     <string name="settings_system_patch_selections_description">Čuva odabrane patchove, zadržane nakon deinstalacije</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Poništiti sve odabire?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Poništiti odabire paketa?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Resetovati selektovane pakete?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Poništiti odabir izvora?</string>
     <string name="settings_system_patch_selection_no_saved">Nema sačuvanih odabira patch-a</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s po %2$s</string>
@@ -715,6 +760,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="file_picker_sort_size_asc">Veličina (od najmanje)</string>
     <string name="file_picker_sort_date_desc">Datum (najnovije prvo)</string>
     <string name="file_picker_sort_date_asc">Datum (najstarije prvo)</string>
+    <string name="file_picker_show_hidden_files">Prikaži skrivene datoteke</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O programu</string>
     <string name="settings_system_share_website">Podeli mrežni-sajt</string>
@@ -749,10 +795,15 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="skip">Preskoči</string>
     <string name="clear">Obriši</string>
     <string name="delete">Izbriši</string>
+    <string name="delete_all">Obriši sve</string>
     <string name="remove">Ukloni</string>
     <string name="disable">Onemogući</string>
     <string name="enable">Omogući</string>
     <string name="loading">Učitavanje…</string>
+    <string name="loading_older_releases">Učitavanje starijih verzija…</string>
+    <string name="creating">Kreiranje…</string>
+    <string name="processing_apk">Obrada APK-a…</string>
+    <string name="exporting_apks">Izvoz APK-ova…</string>
     <string name="not_installed">Nije instalirano</string>
     <string name="view">Pogledaj</string>
     <string name="search">Pretraži</string>
@@ -772,6 +823,10 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="reorder_done">Redosled je sačŪvan</string>
     <string name="reset_order">Vrati redosled</string>
     <string name="reset_order_done">Narudžba je resetovana</string>
+    <string name="accessibility_move_up">Pomeri se nagore</string>
+    <string name="accessibility_move_down">Pomeri se nadole</string>
+    <string name="accessibility_app_moved_announcement">%1$s je pomeren na poziciju %2$d od %3$d</string>
+    <string name="accessibility_scroll_to_top">Skrolujte do vrha liste</string>
     <string name="rename">Preimenovanje</string>
     <string name="import_">Uvoz</string>
     <string name="export">Izvezi</string>
@@ -817,8 +872,9 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="changelog">Prikaži zapise o promenama</string>
     <string name="changelog_description">Pogledaj najnovije promene u ovom ažuriranju</string>
     <string name="changelog_download_fail">Preuzimanje zapisa o promenama nije uspelo: %s</string>
-    <string name="changelog_retry">Ponovo pokreni</string>
     <string name="changelog_empty">Nema dostupne verzije promjene</string>
+    <string name="changelog_show_older">Prikaži starije verzije</string>
+    <string name="changelog_older_empty">Nema starijih verzija za prikaz</string>
     <string name="no_network_toast">Nema dostupne mrežne veze</string>
     <string name="update_available">Dostupno je ažuriranje</string>
     <string name="ready_to_install_update">Spremno za instaliranje ažuriranja</string>

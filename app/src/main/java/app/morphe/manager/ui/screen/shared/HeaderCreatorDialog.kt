@@ -225,14 +225,11 @@ fun HeaderCreatorDialog(
         onDismissRequest = { if (!isCreating) onDismiss() },
         title = stringResource(R.string.header_creator_create),
         titleTrailingContent = {
-            IconButton(onClick = { showInfoDialog.value = true }) {
-                Icon(
-                    imageVector = Icons.Outlined.Info,
-                    contentDescription = stringResource(R.string.header_creator_guide),
-                    modifier = Modifier.size(24.dp),
-                    tint = LocalDialogTextColor.current
-                )
-            }
+            DialogTitleAction(
+                icon = Icons.Outlined.Info,
+                contentDescription = stringResource(R.string.header_creator_guide),
+                onClick = { showInfoDialog.value = true }
+            )
         },
         compactPadding = false,
         footer = {
@@ -411,7 +408,7 @@ fun HeaderCreatorDialog(
                 }
             }
             MorpheContentOverlay(visible = isCreating) {
-                PulsingLogoIndicator()
+                PulsingLogoWithCaption(caption = stringResource(R.string.creating))
             }
         }
     }

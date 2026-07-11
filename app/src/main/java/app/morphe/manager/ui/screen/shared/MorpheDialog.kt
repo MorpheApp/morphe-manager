@@ -11,6 +11,10 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,6 +22,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalView
@@ -202,6 +207,58 @@ fun BoxScope.MorpheContentOverlay(
             contentAlignment = Alignment.Center,
             content = content
         )
+    }
+}
+
+/** Visual style of a [DialogTitleAction]. */
+enum class DialogTitleActionStyle {
+    /** Flat [IconButton], 24dp icon, dialog text tint. Use for info/reset actions */
+    Plain,
+
+    /** Tonal 36dp circle with errorContainer palette, 20dp icon. Use for bulk destructive actions */
+    Destructive
+}
+
+/**
+ * Icon action rendered inside the [MorpheDialog] title trailing slot. Uniforms the two
+ * button styles used across dialogs so callers only pick an icon and a semantic style.
+ */
+@Composable
+fun DialogTitleAction(
+    icon: ImageVector,
+    contentDescription: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    style: DialogTitleActionStyle = DialogTitleActionStyle.Plain
+) {
+    when (style) {
+        DialogTitleActionStyle.Plain -> {
+            IconButton(onClick = onClick, modifier = modifier) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = contentDescription,
+                    modifier = Modifier.size(24.dp),
+                    tint = LocalDialogTextColor.current
+                )
+            }
+        }
+
+        DialogTitleActionStyle.Destructive -> {
+            FilledTonalIconButton(
+                onClick = onClick,
+                modifier = modifier.size(36.dp),
+                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.errorContainer,
+                    contentColor = MaterialTheme.colorScheme.onErrorContainer
+                )
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = contentDescription,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+        }
     }
 }
 

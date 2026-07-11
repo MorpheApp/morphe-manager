@@ -31,6 +31,7 @@ import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOr
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
+import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
@@ -157,7 +158,14 @@ data class InstalledAppPickerItem(
  */
 data class HomeAppState(
     val visible: List<HomeAppItem>,
-    val hidden: List<HomeAppItem>
+    val hidden: List<HomeAppItem>,
+    val sortMode: HomeAppSortMode
+)
+
+private data class HomePrefs(
+    val hiddenPackages: Set<String>,
+    val customOrder: List<String>,
+    val sortMode: HomeAppSortMode
 )
 
 /**
@@ -257,16 +265,6 @@ class HomeViewModel(
     var expertModeOptions by mutableStateOf<Options>(emptyMap())
     // Patches that are new in the current bundle version relative to the last saved selection
     var expertModeNewPatches by mutableStateOf<Map<Int, Set<String>>>(emptyMap())
-
-    /**
-     * Set when ExpertModeDialog is opened from InstalledAppInfoDialog (repatch flow).
-     * Called with the final patches/options when the user confirms, so the info dialog
-     * can persist selections and navigate to the patcher without holding any patch state itself.
-     * Null when the dialog is opened from the normal home-screen patching flow.
-     */
-    var onRepatchProceed: ((patches: PatchSelection, options: Options) -> Unit)? = null
-    /** Package name captured for the repatch flow, used to save seen-patch snapshots. */
-    private var repatchPackageName: String? = null
 
     // Bundle file selection
     var selectedBundleUri by mutableStateOf<Uri?>(null)
@@ -933,7 +931,7 @@ class HomeViewModel(
         installedApps.forEach { app ->
             // Get stored bundle versions for this app
             val storedVersions = installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
-            val appName = resolveChangelogName(app.originalPackageName)
+            val appNames = resolveChangelogNames(app.originalPackageName)
 
             // Check if any bundle used for this app has been updated
             val hasUpdate = storedVersions.any { (bundleUid, storedVersion) ->
@@ -942,14 +940,14 @@ class HomeViewModel(
 
                 // Bundle is newer - refine with changelog if available.
                 // No changelog (null) → show badge (network error or local bundle).
-                // Unknown app name (null) → show badge (can't match scopes).
+                // No resolvable app name → show badge (can't match scopes).
                 // Known name, no matching scope → no badge.
                 val entries = changelogByUid[bundleUid] ?: return@any true
-                if (appName == null) return@any true
+                if (appNames.isEmpty()) return@any true
                 ChangelogParser.hasChangesFor(
                     entries = entries,
                     installedVersion = storedVersion,
-                    appName = appName,
+                    appNames = appNames,
                 )
             }
 
@@ -960,14 +958,25 @@ class HomeViewModel(
     }
 
     /**
-     * Resolves the changelog scope name for [packageName].
-     * 1. [KnownApps.fallbackName] - static registry (offline, reliable).
-     * 2. [PM] label - system label for any installed app not in the registry.
-     * Returns null when neither source yields a name.
+     * Resolves candidate changelog scope names for [packageName].
+     *
+     * Returns the union of:
+     *  1. Bundle Compatibility declaration displayName (canonical, not localized,
+     *     controlled by the same author who writes the changelog scopes).
+     *     Falls back to [KnownApps.fallbackName] inside [BundleAppMetadata.buildFrom].
+     *  2. System PM label (localized, may differ per user locale).
+     *
+     * Matching against any candidate is enough. This handles the common case where
+     * the PM label is localized ("Шахи") while the changelog scope uses the
+     * canonical English name ("Chess.com"), and also tolerates author drift when
+     * the bundle displayName and the changelog scope diverge slightly.
      */
-    private fun resolveChangelogName(packageName: String): String? =
-        KnownApps.fallbackName(packageName)
-            ?: pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } }
+    private fun resolveChangelogNames(packageName: String): Set<String> {
+        val names = mutableSetOf<String>()
+        bundleAppMetadataFlow.value[packageName]?.displayName?.let { names += it }
+        pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } }?.let { names += it }
+        return names
+    }
 
     @SuppressLint("ShowToast")
     private suspend fun <T> withPersistentImportToast(block: suspend () -> T): T = coroutineScope {
@@ -1104,17 +1113,16 @@ class HomeViewModel(
     private val _homePrefsFlow = combine(
         homeAppButtonPrefs.hiddenPackages,
         homeAppButtonPrefs.customOrder,
-    ) { hidden, order -> Pair(hidden, order) }
+        homeAppButtonPrefs.sortMode,
+    ) { hidden, order, sortMode ->
+        HomePrefs(hiddenPackages = hidden, customOrder = order, sortMode = sortMode)
+    }
 
     /**
     * Sorted list of visible and hidden home app items.
     *
-    * Default sort order:
-    * 1. Patched (installed) apps first
-    * 2. Apps with isPinnedByDefault = true
-    * 3. All other apps, alphabetical
-    *
-    * If the user has saved a custom order it is applied on top of the default sort.
+    * Sort mode is persisted with the home app button preferences. Custom mode applies
+    * the user's saved manual order and falls back to Morphe ordering when no saved order exists.
     * Hidden apps are excluded from [HomeAppState.visible].
     */
     val homeAppState: StateFlow<HomeAppState?> = combine(
@@ -1138,7 +1146,7 @@ class HomeViewModel(
         },
         _appUpdatesAvailable,
         _appStateTicker,
-    ) { bundleState, (hiddenPackages, customOrder), installedApps, updatesMap, _ ->
+    ) { bundleState, homePrefs, installedApps, updatesMap, _ ->
         val ready = bundleState as? PatchBundleRepository.BundleState.Ready
             ?: return@combine null
 
@@ -1187,32 +1195,76 @@ class HomeViewModel(
             )
         }
 
-        // Active bundle packages filtered to those in patchablePackages
-        val activeHidden = hiddenPackages.filter { it in packages }
+        // Include apps patched with universal patches through "Other apps": they have no bundle
+        // metadata but must still appear as cards so users can reinstall/uninstall/see updates
+        val universalOnlyPackages = installedApps
+            .map { it.originalPackageName }
+            .filter { it !in packages }
+            .toSet()
+        val allPackages = packages + universalOnlyPackages
 
-        val visiblePackages = packages.filter { it !in hiddenPackages }
+        // Active bundle packages filtered to those in patchablePackages
+        val activeHidden = homePrefs.hiddenPackages.filter { it in allPackages }
+
+        val visiblePackages = allPackages.filter { it !in homePrefs.hiddenPackages }
         val visibleItems = ArrayList<HomeAppItem>(visiblePackages.size)
         for (pkg in visiblePackages) visibleItems.add(buildItem(pkg))
-        val defaultSorted = visibleItems.sortedWith(
-            compareByDescending<HomeAppItem> { it.installedApp != null }
-                .thenByDescending { it.isPinnedByDefault }
-                .thenByDescending { it.packageInfo != null }
-                .thenBy(String.CASE_INSENSITIVE_ORDER) { it.displayName }
+        val visible = sortHomeAppItems(
+            items = visibleItems,
+            sortMode = homePrefs.sortMode,
+            customOrder = homePrefs.customOrder
         )
-        val visible = if (customOrder.isEmpty()) {
-            defaultSorted
-        } else {
-            val indexMap = customOrder.mapIndexed { i, pkg -> pkg to i }.toMap()
-            defaultSorted.sortedBy { indexMap[it.packageName] ?: Int.MAX_VALUE }
-        }
 
         val hiddenItems = ArrayList<HomeAppItem>(activeHidden.size)
         for (pkg in activeHidden) hiddenItems.add(buildItem(pkg))
+        val hidden = sortHomeAppItems(
+            items = hiddenItems,
+            sortMode = homePrefs.sortMode,
+            customOrder = homePrefs.customOrder
+        )
 
-        HomeAppState(visible = visible, hidden = hiddenItems)
+        HomeAppState(visible = visible, hidden = hidden, sortMode = homePrefs.sortMode)
     }
         .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    private fun sortHomeAppItems(
+        items: List<HomeAppItem>,
+        sortMode: HomeAppSortMode,
+        customOrder: List<String>
+    ): List<HomeAppItem> {
+        val morpheComparator = compareByDescending<HomeAppItem> { it.installedApp != null }
+            .thenByDescending { it.isPinnedByDefault }
+            .thenByDescending { it.packageInfo != null }
+            .thenBy(String.CASE_INSENSITIVE_ORDER) { it.displayName }
+            .thenBy(String.CASE_INSENSITIVE_ORDER) { it.packageName }
+
+        return when (sortMode) {
+            HomeAppSortMode.MANUAL -> {
+                val defaultSorted = items.sortedWith(morpheComparator)
+                if (customOrder.isEmpty()) {
+                    defaultSorted
+                } else {
+                    val indexMap = customOrder.mapIndexed { index, packageName -> packageName to index }.toMap()
+                    defaultSorted.sortedBy { indexMap[it.packageName] ?: Int.MAX_VALUE }
+                }
+            }
+            HomeAppSortMode.RECOMMENDED -> items.sortedWith(morpheComparator)
+            HomeAppSortMode.NAME_ASC -> items.sortedWith(
+                compareBy<HomeAppItem, String>(String.CASE_INSENSITIVE_ORDER) { it.displayName }
+                    .thenBy(String.CASE_INSENSITIVE_ORDER) { it.packageName }
+            )
+            HomeAppSortMode.NAME_DESC -> items.sortedWith(
+                compareBy<HomeAppItem, String>(String.CASE_INSENSITIVE_ORDER) { it.displayName }
+                    .thenBy(String.CASE_INSENSITIVE_ORDER) { it.packageName }
+                    .reversed()
+            )
+            HomeAppSortMode.UPDATES_FIRST -> items.sortedWith(
+                compareByDescending<HomeAppItem> { it.hasUpdate }
+                    .then(morpheComparator)
+            )
+        }
+    }
 
     /**
      * Resets the swipe gesture hint after it has been shown.
@@ -1263,6 +1315,26 @@ class HomeViewModel(
     }
 
     /**
+     * Returns patches actually applied to [packageName], grouped as Map<BundleUid, List<PatchInfo>>.
+     * Used by the swipe-right dialog for cards patched via "Other apps" (universal patches),
+     * where getPatchesForPackage would return empty because no bundle declares them compatible.
+     * Names that reference bundles no longer available are silently dropped.
+     */
+    suspend fun getAppliedPatchesForPackage(packageName: String): Map<Int, List<PatchInfo>> {
+        val bundleInfo = allBundlesInfoState.value
+        val applied = installedAppRepository.getAppliedPatches(packageName)
+        return applied.entries.mapNotNull { (uid, patchNames) ->
+            if (patchNames.isEmpty()) return@mapNotNull null
+            val patchInfos = bundleInfo[uid]?.patches
+                ?.filter { it.name in patchNames }
+                ?.distinctBy { it.name }
+                ?.sortedBy { it.name }
+                ?: return@mapNotNull null
+            if (patchInfos.isEmpty()) null else uid to patchInfos
+        }.toMap()
+    }
+
+    /**
      * Returns the display name of the bundle with [uid], or null.
      */
     fun getBundleDisplayName(uid: Int): String? =
@@ -1274,6 +1346,10 @@ class HomeViewModel(
 
     fun resetAppOrder() {
         homeAppButtonPrefs.resetOrder()
+    }
+
+    fun setAppSortMode(sortMode: HomeAppSortMode) {
+        homeAppButtonPrefs.setSortMode(sortMode)
     }
 
     /**
@@ -1320,8 +1396,9 @@ class HomeViewModel(
         }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     /**
-     * Whether the search button should be visible.
-     * Shown when there are more than 4 app buttons or a third-party source is active.
+     * Whether the search and sort buttons should be visible.
+     * Shown when there are more than 4 app buttons or a third-party source is active: fewer
+     * apps than that fit on screen at a glance, so both search and reordering are noise.
      */
     val showSearchButton: StateFlow<Boolean> =
         combine(
@@ -2493,8 +2570,6 @@ class HomeViewModel(
         expertModeInitialPatches = emptyMap()
         expertModeOptions = emptyMap()
         expertModeNewPatches = emptyMap()
-        onRepatchProceed = null
-        repatchPackageName = null
     }
 
     private suspend fun saveSeenPatchesForBundles(packageName: String) {
@@ -2508,49 +2583,31 @@ class HomeViewModel(
     }
 
     /**
-     * Called when the user confirms the ExpertModeDialog.
-     * Routes to the repatch flow (via [onRepatchProceed]) or the normal patching flow
-     * (via [proceedWithPatching]) depending on how the dialog was opened.
-     * Saving options and cleaning up state is handled here so HomeDialogs stays thin.
+     * Called when the user confirms the ExpertModeDialog. Persists the final selection
+     * and options, then navigates to the patcher.
      */
     fun proceedExpertMode() {
+        val selectedApp = expertModeSelectedApp ?: return
         val finalPatches = expertModePatches
         val finalOptions = expertModeOptions
         // Strip UI-only empty strings (fields cleared via ✕) so the patcher engine
         // receives null / no key for those options and falls back to its own default,
         // rather than receiving a literal empty string.
         val patcherOptions = finalOptions.sanitizeForPatcher()
-        val repatchCallback = onRepatchProceed
-        val selectedApp = expertModeSelectedApp
 
         showExpertModeDialog = false
 
         viewModelScope.launch(Dispatchers.IO) {
-            if (repatchCallback != null) {
-                // Repatch flow: delegate fully to the callback set by InstalledAppInfoViewModel.
-                // Persisting selections/options is the callback's responsibility.
-                // Snapshot seen patches before cleanup clears expertModeBundles.
-                val pkgName = repatchPackageName
-                if (pkgName != null) {
-                    saveSeenPatchesForBundles(pkgName)
-                }
-                withContext(Dispatchers.Main) {
-                    repatchCallback(finalPatches, patcherOptions)
-                    cleanupExpertModeData()
-                }
-            } else if (selectedApp != null) {
-                // Persist the final selection (already validated + merged with new patches)
-                patchSelectionRepository.updateSelection(
-                    packageName = selectedApp.packageName,
-                    selection = finalPatches
-                )
-                saveOptions(selectedApp.packageName, finalOptions)
-                // Snapshot all bundle patch names so next open can detect genuinely new patches.
-                saveSeenPatchesForBundles(selectedApp.packageName)
-                withContext(Dispatchers.Main) {
-                    proceedWithPatching(selectedApp, finalPatches, patcherOptions)
-                    cleanupExpertModeData()
-                }
+            patchSelectionRepository.updateSelection(
+                packageName = selectedApp.packageName,
+                selection = finalPatches
+            )
+            saveOptions(selectedApp.packageName, finalOptions)
+            // Snapshot all bundle patch names so next open can detect genuinely new patches.
+            saveSeenPatchesForBundles(selectedApp.packageName)
+            withContext(Dispatchers.Main) {
+                proceedWithPatching(selectedApp, finalPatches, patcherOptions)
+                cleanupExpertModeData()
             }
         }
     }

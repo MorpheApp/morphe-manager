@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Napapanahon ang iyong mga mapagkukunan</string>
     <string name="home_sources_are_loading">Naglo-load ang iyong mga mapagkukunan, mangyaring maghintay…</string>
     <string name="home_search_apps">Maghanap ng mga app</string>
+    <string name="home_app_sort_title">Pagbukud-bukurin ang mga app</string>
+    <string name="home_app_sort_manual_description">Pindutin nang matagal ang isang app, pagkatapos ay i-tap ang button na muling ayusin</string>
+    <string name="home_app_sort_recommended">Inirerekomendang bersyon</string>
+    <string name="home_app_sort_recommended_description">Mga naka-install at naka-pin na app muna</string>
+    <string name="home_app_sort_name_asc_description">Alpabetiko, A hanggang Z</string>
+    <string name="home_app_sort_name_desc_description">Pabaliktad na alpabetiko, Z hanggang A</string>
+    <string name="home_app_sort_updates_first">Mga pag-update ng patch muna</string>
+    <string name="home_app_sort_updates_first_description">Mga app na may badge ng pag-update muna, pagkatapos ay inirerekomendang pagkakasunud-sunod</string>
     <string name="home_no_apps_title">Walang available na mga app</string>
     <string name="home_no_apps_subtitle">Magdagdag ng pinagmulan ng patch o paganahin ang isang umiiral na isa sa %s</string>
     <string name="home_no_apps_search_subtitle">Walang app na tumutugma sa \"%s\"</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Pang-gabi at produktibo</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">I-patch ang mapagkukunan</string>
+    <string name="sources_sort_title">Idagdag ang mapagkukunan ng patch</string>
+    <string name="sources_sort_manual">Manu-manong pagkakasunud-sunod</string>
+    <string name="sources_sort_manual_hint">Pindutin nang matagal ang isang pinagmulan upang muling ayusin</string>
+    <string name="sources_sort_last_updated">Huling in-update</string>
+    <string name="sources_sort_last_updated_description">Pinakabagong mga pag-update ng mapagkukunan muna</string>
+    <string name="sources_sort_enabled_first">Naka-enable muna</string>
+    <string name="sources_sort_enabled_first_description">Ipakita ang mga aktibong mapagkukunan bago ang mga hindi naka-enable</string>
     <string name="sources_management_open_in_browser">Buksan sa browser</string>
     <string name="sources_management_failed_to_open_url">Nabigong buksan ang URL</string>
     <string name="sources_management_prerelease_toggle">Mga patch na pre-release</string>
@@ -285,6 +300,9 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="home_app_info_patch_source_used">Nagamit ang mapagkukunang patch</string>
     <string name="home_app_info_install_type_custom_installer">Pasadyang installer</string>
     <string name="home_app_info_install_type_system_installer">System installer</string>
+    <string name="home_app_info_install_type_play_store">I-install mula sa Play Store</string>
+    <string name="home_app_info_install_type_root_play_store">I-install mula sa Play Store gamit ang Root</string>
+    <string name="home_app_info_install_type_shizuku_play_store">I-install mula sa Play Store gamit ang Shizuku</string>
     <string name="home_app_info_patch_update_available">Magagamit ang isang update sa patch</string>
     <string name="home_app_info_patch_update_available_description">Magagamit sa bagong bersyon ang mga patch. Ire-patch ang aplikasyon upang makuha ang mga pinakabagong pagpapabuti at mga pag-aayos</string>
     <string name="home_app_info_app_deleted_warning">Binura ang aplikasyon </string>
@@ -295,7 +313,7 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="root_gmscore_excluded">Hindi kasama ang GmsCore support patch sa root mode</string>
     <string name="root_pre_patch_installer_title">Piliin ang paraan ng pag-install</string>
     <string name="root_pre_patch_installer_description">May access sa root ang iyong device. Piliin kung paano mong i-install ang na-patch na aplikasyon</string>
-    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_title">I-mount ang root</string>
     <string name="root_pre_patch_installer_mount_description">I-mount ang na-patch na APK sa ilalim ng stock na aplikasyon. Hindi na kailangan ang GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Standard na pag-install</string>
     <string name="root_pre_patch_installer_standard_description">I-install bilang isang hiwalay na app na may suporta sa GmsCore. Maaaring pumili ng installer pagkatapos ng pag-patch</string>
@@ -305,7 +323,7 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="patcher_error_log">Tala ng pagkakamali</string>
     <string name="patcher_error_technical">Teknikal na detalye</string>
     <string name="patcher_error_dialog_app_info">Impormasyon ng app</string>
-    <string name="patcher_tab_logs">Mga Log ng Patcher</string>
+    <string name="patcher_tab_logs">Mga log ng Patcher</string>
     <string name="patcher_tab_game">Mga Laro</string>
     <string name="patcher_long_step_warning">Maaaring magtagal ang hakbang ito. Mangyaring maghintay…</string>
     <string name="patcher_installing_subtitle">Halos handa na sa rock! 🎸</string>
@@ -604,11 +622,13 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
     <string name="installer_title">Piliin ang installer</string>
-    <string name="installer_internal_name">System installer</string>
     <string name="installer_internal_description">Gamitin ang Android package installer</string>
+    <string name="installer_play_store_description">Gumagamit ng system installer at itinakda ang Google Play Store bilang pinagmumulan ng pag-install</string>
+    <string name="installer_root_play_store_description">Tahimik na nag-i-install gamit ang root at itinakda ang Google Play Store bilang pinagmumulan ng pag-install</string>
     <string name="installer_auto_saved_name">Na-root na mount installer</string>
     <string name="installer_auto_saved_description">Mina-mount ang na-patch na APK sa naka-install na aplikasyon</string>
     <string name="installer_shizuku_description">Mag-install nang tahimik gamit ang Shizuku o Sui</string>
+    <string name="installer_shizuku_play_store_description">Tahimik na nag-i-install sa pamamagitan ng Shizuku o Sui at itinakda ang Google Play Store bilang pinagmumulan ng pag-install</string>
     <string name="installer_option_none">Walang urong</string>
     <string name="installer_none_description">Walang fallback installer ang nakompigura</string>
     <string name="installer_status_requires_root">Kailangan ng root access</string>
@@ -629,6 +649,10 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_unavailable_message">Kasalukuyang hindi magagamit ang iyong piniling installer (%s). Maaari mong ayusin ang isyu at subukan muli, o gamitin ang standard installer sa halip</string>
     <string name="installer_unavailable_shizuku_hint">Tiyaking tumatakbo ang Shizuku at binibigyan ng pahintulot ang aplikasyong ito</string>
     <string name="installer_use_standard">Gamitin ang standard</string>
+    <string name="installer_play_store_warning_title">I-install bilang Play Store?</string>
+    <string name="installer_play_store_warning_message">Ang patched app ay itatala bilang naka-install mula sa Google Play Store. Nagbibigay-daan ito sa mga serbisyo tulad ng Android Auto upang makilala ito bilang isang Play Store app</string>
+    <string name="installer_play_store_warning_risk">Maaaring mag-alok ang Play Store ng mga update para sa patched app. Ang pag-install ng update na iyon ay mag-o-overwrite sa patched APK gamit ang orihinal na bersyon at aalisin ang mga patch. Kung hihilingin na mag-update, i-tap ang three-dot menu sa page ng Play Store ng app at piliin ang \"I-off ang mga update\"</string>
+    <string name="installer_play_store_warning_continue">Naiintindihan ko, magpatuloy</string>
     <string name="settings_prompt_installer_on_install">Prompt ng pagpili ng installer</string>
     <string name="settings_prompt_installer_on_install_description">Ipinapakita ang diyalogo ng pagpili ng installer sa tuwing mag-i-install ka ng naka-patch na aplikasyon</string>
     <string name="settings_auto_install_with_shizuku">Awtomatikong i-install pagkatapos ng pag-patch</string>
@@ -669,6 +693,14 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_import_manager_settings_description">Ibinabalik at ibinubuhay ang iyong mga setting ng Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Nabigong ma-import ang mga setting ng Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Na-import ang mga setting ng Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_title">I-import ang mga setting ng Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Piliin kung paano iaaplay ang mga in-import na setting at source</string>
+    <string name="settings_system_import_selections_mode_title">I-import ang mga pagpipilian ng patch</string>
+    <string name="settings_system_import_selections_mode_description">Pumili ng kung paano ilalapat ang mga napiling import at opsyon sa patch.</string>
+    <string name="import_mode_replace_title">Palitan ang mga kasalukuyan</string>
+    <string name="import_mode_replace_description">Tumpak na itugma ang backup. Ang mga item na wala sa backup ay tatanggalin.</string>
+    <string name="import_mode_merge_title">Pagsamahin sa mga kasalukuyan</string>
+    <string name="import_mode_merge_description">Idagdag ang mga nawawalang item mula sa backup. Ang mga kasalukuyang item ay mananatiling hindi nababago.</string>
     <string name="settings_system_export_manager_settings_fail">Nabigong ma-export ang mga setting ng Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Na-export ang mga setting ng Morphe</string>
     <string name="settings_system_debug">Debug</string>
@@ -679,6 +711,12 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Mga File at imbakan</string>
     <string name="settings_system_apks_size">Buong sukat: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Permanenteng buburahin nito ang mga naka-save na APK file na ipinapakita dito</string>
+    <string name="settings_system_apks_delete_selected_title">Burahin ang mga napiling APK?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Permanenteng buburahin nito ang mga napiling APK file</string>
+    <string name="settings_system_apks_deleted_all">Matagumpay na nabura ang mga APK</string>
+    <string name="settings_system_apks_export_zip_success">Na-export ang mga napiling APK</string>
+    <string name="settings_system_apks_export_zip_failed">Nabigo ang pag-export ng mga napiling APK</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Na-patch na mga APK</string>
     <string name="settings_system_patched_apks_description">Pamahalaan ang mga nakaimbak na naka-patch na mga file ng aplikasyon</string>
@@ -686,6 +724,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_patched_apks_delete_title">Burahin ang naka-patch na APK?</string>
     <string name="settings_system_patched_apks_delete_confirm">Nais mo bang burahin ang nakaimbak na naka-patch na APK para sa %s?</string>
     <string name="settings_system_patched_apks_deleted">Matagumpay na nabura ang naka-patch na APK</string>
+    <string name="settings_system_patched_apks_delete_all_title">Burahin ang lahat ng naka-patch na APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Mga orihinal na APK</string>
     <string name="settings_system_original_apks_description">Nai-save para sa muling pag-patch. Isang bersyon bawat app ang pinapanatili</string>
@@ -693,11 +732,13 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_original_apks_deleted">Matagumpay na nabura ang orihinal na APK</string>
     <string name="settings_system_original_apks_delete_title">Burahin ang orihinal na APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Burahin ang orihinal na APK para sa %s? Hindi ka makakapag-repatch nang hindi nagbibigay ng bagong APK</string>
+    <string name="settings_system_original_apks_delete_all_title">Burahin ang lahat ng orihinal na APK?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Mga pagpipilian ng patch</string>
     <string name="settings_system_patch_selections_description">Nai-save na mga pagpili ng patch, napanatili pagkatapos ng pag-uninstall</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Ipawalang-bisa ang lahat ng mga pagpipilian?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Ipawalang-bisa ang lahat ng mga pagpipilian ng pakete?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">I-reset ang mga napiling pakete?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Ipawalang-bisa ang pagpipilian ng mapagkukunan?</string>
     <string name="settings_system_patch_selection_no_saved">Walang naka-save na mga pagpipiliang patch</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s sa %2$s</string>
@@ -731,6 +772,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="file_picker_sort_size_asc">Laki (pinakamaliit muna)</string>
     <string name="file_picker_sort_date_desc">Petsa (pinakabago muna)</string>
     <string name="file_picker_sort_date_asc">Petsa (pinakaluma muna)</string>
+    <string name="file_picker_show_hidden_files">Ipakita ang mga nakatagong file</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tungkol sa</string>
     <string name="settings_system_share_website">Ibahagi ang website</string>
@@ -765,10 +807,15 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="skip">Laktawan</string>
     <string name="clear">Alisin</string>
     <string name="delete">Burahin</string>
+    <string name="delete_all">Burahin lahat</string>
     <string name="remove">Alisin</string>
     <string name="disable">Patayin</string>
     <string name="enable">Paganahin</string>
     <string name="loading">Naglo-load…</string>
+    <string name="loading_older_releases">Naglo-load ng mga mas lumang release…</string>
+    <string name="creating">Ginagawa…</string>
+    <string name="processing_apk">Pinoproseso ang APK…</string>
+    <string name="exporting_apks">Iniluluwas ang mga APK…</string>
     <string name="not_installed">Hindi naka-install</string>
     <string name="view">Tingnan</string>
     <string name="search">Hanapin</string>
@@ -788,6 +835,10 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="reorder_done">Nai-save ang pagkakasunud-sunod</string>
     <string name="reset_order">Ibalik sa orihinal na pagkakasunud-sunod</string>
     <string name="reset_order_done">Naibalik ang order</string>
+    <string name="accessibility_move_up">Ilipat paitaas</string>
+    <string name="accessibility_move_down">Ilipat pababa</string>
+    <string name="accessibility_app_moved_announcement">Inilipat ang %1$s sa posisyon %2$d ng %3$d</string>
+    <string name="accessibility_scroll_to_top">Mag-scroll sa tuktok ng listahan</string>
     <string name="rename">Palitan</string>
     <string name="import_">I-import</string>
     <string name="export">I-export</string>
@@ -833,7 +884,6 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="changelog">Tingnan ang mga changelog</string>
     <string name="changelog_description">Tingnan ang mga pinakabagong pagbabago sa update na ito</string>
     <string name="changelog_download_fail">Nabigong mag-download ang changelog: %s</string>
-    <string name="changelog_retry">Subukan muli</string>
     <string name="changelog_empty">Walang magagamit na changelog</string>
     <string name="no_network_toast">Walang magagamit na koneksyon sa internet</string>
     <string name="update_available">Magagamit ang isang update</string>

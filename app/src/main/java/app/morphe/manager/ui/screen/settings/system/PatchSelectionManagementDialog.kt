@@ -5,14 +5,17 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
+import android.net.Uri
+import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
@@ -21,6 +24,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -40,6 +44,23 @@ import app.morphe.manager.util.TEXT_MIMETYPE
 import app.morphe.manager.util.rememberAdaptiveFilePicker
 import kotlinx.coroutines.launch
 
+/** Snapshot of package/bundle selection counts. */
+@Immutable
+data class PatchSelectionData(
+    val selections: Map<String, Map<Int, Int>>,
+    val totalSelections: Int,
+    val bundleNames: Map<Int, String>
+)
+
+/** Multi-select state and its mutation callbacks. */
+@Stable
+class PatchSelectionMultiSelect(
+    val selectedPackages: SelectionState<String>,
+    val isSelectionMode: Boolean,
+    val onEnterSelection: (String) -> Unit,
+    val onToggleSelection: (String) -> Unit
+)
+
 /**
  * Dialog for managing patch selections.
  */
@@ -51,8 +72,10 @@ fun PatchSelectionManagementDialog(
 ) {
     val scope = rememberCoroutineScope()
     val showResetAllConfirmation = remember { mutableStateOf(false) }
+    val showResetSelectedConfirmation = remember { mutableStateOf(false) }
     val resetTarget = remember { mutableStateOf<ResetTarget?>(null) }
     val showPatchDetailsTarget = remember { mutableStateOf<PatchDetailsTarget?>(null) }
+    var pendingImportUri by remember { mutableStateOf<Uri?>(null) }
 
     val selections by settingsViewModel.selectionsSummary.collectAsStateWithLifecycle()
     val bundleNames by settingsViewModel.bundleNames.collectAsStateWithLifecycle()
@@ -61,17 +84,80 @@ fun PatchSelectionManagementDialog(
         selections.values.sumOf { bundleMap -> bundleMap.values.sum() }
     }
 
+    val selectedPackages = rememberSelectionState<String>()
+    val isSelectionMode = remember { mutableStateOf(false) }
+
+    LaunchedEffect(selections) {
+        val currentPackages = selections.keys
+        selectedPackages.retain { it in currentPackages }
+        if (selectedPackages.isEmpty) isSelectionMode.value = false
+    }
+
+    val exitSelection = {
+        isSelectionMode.value = false
+        selectedPackages.clear()
+    }
+
     PatchSelectionManagementDialogContent(
-        selections = selections,
-        totalSelections = totalSelections,
-        bundleNames = bundleNames,
+        data = PatchSelectionData(
+            selections = selections,
+            totalSelections = totalSelections,
+            bundleNames = bundleNames
+        ),
+        multiSelect = PatchSelectionMultiSelect(
+            selectedPackages = selectedPackages,
+            isSelectionMode = isSelectionMode.value,
+            onEnterSelection = { pkg ->
+                isSelectionMode.value = true
+                selectedPackages.toggle(pkg)
+            },
+            onToggleSelection = { pkg -> selectedPackages.toggle(pkg) }
+        ),
         settingsViewModel = settingsViewModel,
         importExportViewModel = importExportViewModel,
         onDismiss = onDismiss,
         onShowResetAllConfirmation = { showResetAllConfirmation.value = true },
         onSetResetTarget = { resetTarget.value = it },
-        onShowPatchDetails = { showPatchDetailsTarget.value = it }
+        onShowPatchDetails = { showPatchDetailsTarget.value = it },
+        onImportUriPicked = { pendingImportUri = it },
+        onExitSelection = exitSelection,
+        onSelectAll = { selectedPackages.setAll(selections.keys) },
+        onShowResetSelectedConfirmation = { showResetSelectedConfirmation.value = true }
     )
+
+    if (showResetSelectedConfirmation.value) {
+        val selectedKeys = selectedPackages.keys.toList()
+        val selectedTotalPatches = remember(selections, selectedKeys) {
+            selectedKeys.sumOf { pkg ->
+                selections[pkg]?.values?.sum() ?: 0
+            }
+        }
+        ConfirmResetSelectedDialog(
+            packageCount = selectedKeys.size,
+            totalPatches = selectedTotalPatches,
+            onConfirm = {
+                scope.launch {
+                    selectedKeys.forEach { settingsViewModel.resetSelectionsForPackage(it) }
+                    exitSelection()
+                    showResetSelectedConfirmation.value = false
+                }
+            },
+            onDismiss = { showResetSelectedConfirmation.value = false }
+        )
+    }
+
+    // Import-mode dialog: user picks Replace or Merge before selections are applied
+    pendingImportUri?.let { uri ->
+        ImportModeDialog(
+            titleRes = R.string.settings_system_import_selections_mode_title,
+            descriptionRes = R.string.settings_system_import_selections_mode_description,
+            onDismiss = { pendingImportUri = null },
+            onSelect = { mode ->
+                importExportViewModel.importAllSelections(uri, mode)
+                pendingImportUri = null
+            }
+        )
+    }
 
     // Reset all confirmation dialog
     if (showResetAllConfirmation.value) {
@@ -151,22 +237,24 @@ fun PatchSelectionManagementDialog(
  */
 @Composable
 private fun PatchSelectionManagementDialogContent(
-    selections: Map<String, Map<Int, Int>>,
-    totalSelections: Int,
-    bundleNames: Map<Int, String>,
+    data: PatchSelectionData,
+    multiSelect: PatchSelectionMultiSelect,
     settingsViewModel: SettingsViewModel,
     importExportViewModel: ImportExportViewModel,
     onDismiss: () -> Unit,
     onShowResetAllConfirmation: () -> Unit,
     onSetResetTarget: (ResetTarget) -> Unit,
-    onShowPatchDetails: (PatchDetailsTarget) -> Unit
+    onShowPatchDetails: (PatchDetailsTarget) -> Unit,
+    onImportUriPicked: (Uri) -> Unit,
+    onExitSelection: () -> Unit,
+    onSelectAll: () -> Unit,
+    onShowResetSelectedConfirmation: () -> Unit
 ) {
+    val selections = data.selections
     val openImportAllSelectionsPicker = rememberAdaptiveFilePicker(
         mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE),
         customPickerMimeTypes = arrayOf(JSON_MIMETYPE),
-        onResult = { uri ->
-            uri?.let { importExportViewModel.importAllSelections(it) }
-        }
+        onResult = { uri -> uri?.let(onImportUriPicked) }
     )
 
     val exportAllSelectionsLauncher = rememberLauncherForActivityResult(
@@ -176,51 +264,77 @@ private fun PatchSelectionManagementDialogContent(
     }
 
     MorpheDialog(
-        onDismissRequest = onDismiss,
+        onDismissRequest = {
+            if (multiSelect.isSelectionMode) onExitSelection() else onDismiss()
+        },
         title = stringResource(R.string.settings_system_patch_selections_title),
-        titleTrailingContent = if (selections.isNotEmpty()) {
+        titleTrailingContent = if (!multiSelect.isSelectionMode && selections.isNotEmpty()) {
             {
-                IconButton(onClick = onShowResetAllConfirmation) {
-                    Icon(
-                        imageVector = Icons.Outlined.Restore,
-                        contentDescription = stringResource(R.string.reset),
-                        tint = LocalDialogTextColor.current
-                    )
-                }
+                DialogTitleAction(
+                    icon = Icons.Outlined.Restore,
+                    contentDescription = stringResource(R.string.reset),
+                    onClick = onShowResetAllConfirmation,
+                    style = DialogTitleActionStyle.Destructive
+                )
             }
         } else {
             null
         },
         footer = {
-            MorpheDialogButtonColumn {
-                if (selections.isNotEmpty()) {
-                    MorpheDialogButtonRow(
-                        primaryText = stringResource(R.string.export),
-                        onPrimaryClick = {
-                            exportAllSelectionsLauncher.launch(
-                                importExportViewModel.getAllSelectionsExportFileName()
+            if (multiSelect.isSelectionMode) {
+                MultiSelectShell(visible = true) {
+                    SelectionActionBar(
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+                        selectedCount = multiSelect.selectedPackages.size,
+                        totalCount = selections.size,
+                        onSelectAll = onSelectAll,
+                        onCancel = onExitSelection
+                    ) {
+                        val resetLabel = stringResource(R.string.reset)
+                        ActionPillButton(
+                            onClick = onShowResetSelectedConfirmation,
+                            icon = Icons.Outlined.Delete,
+                            contentDescription = resetLabel,
+                            tooltip = resetLabel,
+                            enabled = multiSelect.selectedPackages.isNotEmpty,
+                            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                containerColor = MaterialTheme.colorScheme.errorContainer,
+                                contentColor = MaterialTheme.colorScheme.onErrorContainer
                             )
-                        },
-                        primaryIcon = Icons.Outlined.Upload,
-                        secondaryText = stringResource(R.string.import_),
-                        onSecondaryClick = { openImportAllSelectionsPicker() },
-                        secondaryIcon = Icons.Outlined.Download,
-                        isSecondaryPrimary = true,
-                        layout = DialogButtonLayout.Horizontal
-                    )
-                } else {
-                    MorpheDialogButton(
-                        text = stringResource(R.string.import_),
-                        onClick = { openImportAllSelectionsPicker() },
-                        icon = Icons.Outlined.Download,
+                        )
+                    }
+                }
+            } else {
+                MorpheDialogButtonColumn {
+                    if (selections.isNotEmpty()) {
+                        MorpheDialogButtonRow(
+                            primaryText = stringResource(R.string.export),
+                            onPrimaryClick = {
+                                exportAllSelectionsLauncher.launch(
+                                    importExportViewModel.getAllSelectionsExportFileName()
+                                )
+                            },
+                            primaryIcon = Icons.Outlined.Upload,
+                            secondaryText = stringResource(R.string.import_),
+                            onSecondaryClick = { openImportAllSelectionsPicker() },
+                            secondaryIcon = Icons.Outlined.Download,
+                            isSecondaryPrimary = true,
+                            layout = DialogButtonLayout.Horizontal
+                        )
+                    } else {
+                        MorpheDialogButton(
+                            text = stringResource(R.string.import_),
+                            onClick = { openImportAllSelectionsPicker() },
+                            icon = Icons.Outlined.Download,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                    MorpheDialogOutlinedButton(
+                        text = stringResource(R.string.close),
+                        onClick = onDismiss,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
-                MorpheDialogOutlinedButton(
-                    text = stringResource(R.string.close),
-                    onClick = onDismiss,
-                    modifier = Modifier.fillMaxWidth()
-                )
             }
         },
         scrollable = false,
@@ -230,9 +344,8 @@ private fun PatchSelectionManagementDialogContent(
             EmptyState(message = stringResource(R.string.settings_system_no_patches_or_options))
         } else {
             SelectionList(
-                selections = selections,
-                totalSelections = totalSelections,
-                bundleNames = bundleNames,
+                data = data,
+                multiSelect = multiSelect,
                 settingsViewModel = settingsViewModel,
                 importExportViewModel = importExportViewModel,
                 onSetResetTarget = onSetResetTarget,
@@ -247,62 +360,81 @@ private fun PatchSelectionManagementDialogContent(
  */
 @Composable
 private fun SelectionList(
-    selections: Map<String, Map<Int, Int>>,
-    totalSelections: Int,
-    bundleNames: Map<Int, String>,
+    data: PatchSelectionData,
+    multiSelect: PatchSelectionMultiSelect,
     settingsViewModel: SettingsViewModel,
     importExportViewModel: ImportExportViewModel,
     onSetResetTarget: (ResetTarget) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit
 ) {
-    LazyColumn(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
-    ) {
-        // Summary box
-        item(key = "summary") {
-            InfoBox(
-                title = pluralStringResource(
-                    R.plurals.package_count,
-                    selections.size,
-                    selections.size
-                ),
-                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                titleColor = MaterialTheme.colorScheme.primary,
-                icon = Icons.Outlined.Tune
-            ) {
-                Text(
-                    text = pluralStringResource(
-                        R.plurals.patch_selection_total_patches,
-                        totalSelections,
-                        totalSelections
+    val selections = data.selections
+    val listState = rememberLazyListState()
+    val expandedPackages = remember { mutableStateOf<Set<String>>(emptySet()) }
+    Box(modifier = Modifier.fillMaxWidth()) {
+        LazyColumn(
+            state = listState,
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+        ) {
+            // Summary box
+            item(key = "summary") {
+                InfoBox(
+                    title = pluralStringResource(
+                        R.plurals.package_count,
+                        selections.size,
+                        selections.size
                     ),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = LocalDialogSecondaryTextColor.current
+                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                    titleColor = MaterialTheme.colorScheme.primary,
+                    icon = Icons.Outlined.Tune
+                ) {
+                    Text(
+                        text = pluralStringResource(
+                            R.plurals.patch_selection_total_patches,
+                            data.totalSelections,
+                            data.totalSelections
+                        ),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = LocalDialogSecondaryTextColor.current
+                    )
+                }
+            }
+
+            // List of packages with selections
+            items(
+                items = selections.entries.toList(),
+                key = { it.key }
+            ) { (packageName, bundleMap) ->
+                PackageSelectionItem(
+                    packageName = packageName,
+                    bundleMap = bundleMap,
+                    bundleNames = data.bundleNames,
+                    settingsViewModel = settingsViewModel,
+                    importExportViewModel = importExportViewModel,
+                    onResetPackage = {
+                        onSetResetTarget(ResetTarget.Package(packageName))
+                    },
+                    onResetPackageBundle = { bundleUid ->
+                        onSetResetTarget(ResetTarget.PackageBundle(packageName, bundleUid))
+                    },
+                    onShowPatchDetails = onShowPatchDetails,
+                    isSelected = multiSelect.selectedPackages.contains(packageName),
+                    isSelectionMode = multiSelect.isSelectionMode,
+                    onEnterSelection = { multiSelect.onEnterSelection(packageName) },
+                    onToggleSelection = { multiSelect.onToggleSelection(packageName) },
+                    expanded = packageName in expandedPackages.value,
+                    onToggleExpanded = {
+                        expandedPackages.value = if (packageName in expandedPackages.value) {
+                            expandedPackages.value - packageName
+                        } else {
+                            expandedPackages.value + packageName
+                        }
+                    }
                 )
             }
         }
 
-        // List of packages with selections
-        items(
-            items = selections.entries.toList(),
-            key = { it.key }
-        ) { (packageName, bundleMap) ->
-            PackageSelectionItem(
-                packageName = packageName,
-                bundleMap = bundleMap,
-                bundleNames = bundleNames,
-                settingsViewModel = settingsViewModel,
-                importExportViewModel = importExportViewModel,
-                onResetPackage = {
-                    onSetResetTarget(ResetTarget.Package(packageName))
-                },
-                onResetPackageBundle = { bundleUid ->
-                    onSetResetTarget(ResetTarget.PackageBundle(packageName, bundleUid))
-                },
-                onShowPatchDetails = onShowPatchDetails
-            )
-        }
+        ScrollToTopButton(listState = listState)
     }
 }
 
@@ -318,11 +450,17 @@ private fun PackageSelectionItem(
     importExportViewModel: ImportExportViewModel,
     onResetPackage: () -> Unit,
     onResetPackageBundle: (Int) -> Unit,
-    onShowPatchDetails: (PatchDetailsTarget) -> Unit
+    onShowPatchDetails: (PatchDetailsTarget) -> Unit,
+    isSelected: Boolean,
+    isSelectionMode: Boolean,
+    onEnterSelection: () -> Unit,
+    onToggleSelection: () -> Unit,
+    expanded: Boolean,
+    onToggleExpanded: () -> Unit
 ) {
-    var expanded by remember { mutableStateOf(false) }
     var displayName by remember { mutableStateOf(packageName) }
     var appDataSource by remember { mutableStateOf(AppDataSource.INSTALLED) }
+    val view = LocalView.current
 
     // Resolve app name and source
     LaunchedEffect(packageName) {
@@ -332,115 +470,137 @@ private fun PackageSelectionItem(
     }
 
     val totalPatches = remember(bundleMap) { bundleMap.values.sum() }
+    // In selection mode force cards closed so nested bundle taps do not race with tap-to-toggle
+    val effectiveExpanded = expanded && !isSelectionMode
     val expandRotation by animateFloatAsState(
-        targetValue = if (expanded) 180f else 0f,
+        targetValue = if (effectiveExpanded) 180f else 0f,
         label = "expand_rotation"
     )
 
-    SectionCard {
-        Column {
-            // Header with app icon
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { expanded = !expanded }
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                // App icon
-                AppIcon(
-                    packageName = packageName,
-                    contentDescription = displayName,
-                    modifier = Modifier.size(48.dp),
-                    preferredSource = appDataSource
-                )
-
-                // App info
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+    SelectableCard(
+        modifier = Modifier.fillMaxWidth(),
+        isSelected = isSelected,
+        isSelectionMode = isSelectionMode
+    ) {
+        SectionCard {
+            Column {
+                // Header with app icon
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .combinedClickable(
+                            onClick = {
+                                if (isSelectionMode) onToggleSelection() else onToggleExpanded()
+                            },
+                            onLongClick = {
+                                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                                onEnterSelection()
+                            }
+                        )
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = displayName,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        color = LocalDialogTextColor.current
+                    // App icon
+                    AppIcon(
+                        packageName = packageName,
+                        contentDescription = displayName,
+                        modifier = Modifier.size(48.dp),
+                        preferredSource = appDataSource
                     )
 
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                    // App info
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
-                        InfoBadge(
-                            text = pluralStringResource(
-                                R.plurals.patch_count,
-                                totalPatches,
-                                totalPatches
-                            ),
-                            style = InfoBadgeStyle.Primary,
-                            isCompact = true
+                        Text(
+                            text = displayName,
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.SemiBold,
+                            color = LocalDialogTextColor.current
                         )
 
-                        if (bundleMap.size > 1) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
                             InfoBadge(
                                 text = pluralStringResource(
-                                    R.plurals.source_count,
-                                    bundleMap.size,
-                                    bundleMap.size
+                                    R.plurals.patch_count,
+                                    totalPatches,
+                                    totalPatches
                                 ),
-                                style = InfoBadgeStyle.Default,
+                                style = InfoBadgeStyle.Primary,
                                 isCompact = true
                             )
+
+                            if (bundleMap.size > 1) {
+                                InfoBadge(
+                                    text = pluralStringResource(
+                                        R.plurals.source_count,
+                                        bundleMap.size,
+                                        bundleMap.size
+                                    ),
+                                    style = InfoBadgeStyle.Default,
+                                    isCompact = true
+                                )
+                            }
                         }
+                    }
+
+                    // Expand icon (hidden in selection mode)
+                    AnimatedVisibility(
+                        visible = !isSelectionMode,
+                        enter = MorpheAnimations.expandFadeEnter,
+                        exit = MorpheAnimations.shrinkFadeExit
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.ExpandMore,
+                            contentDescription = if (effectiveExpanded)
+                                stringResource(R.string.collapse)
+                            else
+                                stringResource(R.string.expand),
+                            tint = LocalDialogSecondaryTextColor.current,
+                            modifier = Modifier.rotate(expandRotation)
+                        )
                     }
                 }
 
-                // Expand icon
-                Icon(
-                    imageVector = Icons.Outlined.ExpandMore,
-                    contentDescription = if (expanded)
-                        stringResource(R.string.collapse)
-                    else
-                        stringResource(R.string.expand),
-                    tint = LocalDialogSecondaryTextColor.current,
-                    modifier = Modifier.rotate(expandRotation)
-                )
-            }
-
-            // Expanded content
-            AnimatedVisibility(
-                visible = expanded,
-                enter = MorpheAnimations.expandTopFadeIn,
-                exit = MorpheAnimations.shrinkTopFadeOut
-            ) {
-                Column(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                // Expanded content
+                AnimatedVisibility(
+                    visible = effectiveExpanded,
+                    enter = MorpheAnimations.expandTopFadeIn,
+                    exit = MorpheAnimations.shrinkTopFadeOut
                 ) {
-                    bundleMap.forEach { (bundleUid, patchCount) ->
-                        BundleSelectionItem(
-                            packageName = packageName,
-                            bundleUid = bundleUid,
-                            bundleName = bundleNames[bundleUid],
-                            patchCount = patchCount,
-                            importExportViewModel = importExportViewModel,
-                            onReset = { onResetPackageBundle(bundleUid) },
-                            onShowDetails = {
-                                onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid))
-                            }
+                    Column(
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                    ) {
+                        bundleMap.forEach { (bundleUid, patchCount) ->
+                            BundleSelectionItem(
+                                packageName = packageName,
+                                bundleUid = bundleUid,
+                                bundleName = bundleNames[bundleUid],
+                                patchCount = patchCount,
+                                importExportViewModel = importExportViewModel,
+                                onReset = { onResetPackageBundle(bundleUid) },
+                                onShowDetails = {
+                                    onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid))
+                                }
+                            )
+                        }
+
+                        MorpheSettingsDivider(fullWidth = true)
+
+                        // Reset all for this package
+                        MorpheDialogButton(
+                            text = stringResource(R.string.reset_all),
+                            onClick = onResetPackage,
+                            isDestructive = true,
+                            modifier = Modifier.fillMaxWidth()
                         )
                     }
-
-                    MorpheSettingsDivider(fullWidth = true)
-
-                    // Reset all for this package
-                    MorpheDialogButton(
-                        text = stringResource(R.string.reset_all),
-                        onClick = onResetPackage,
-                        isDestructive = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
                 }
             }
         }
@@ -533,13 +693,10 @@ private fun BundleSelectionItem(
         }
 
         // Action buttons row
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
-        ) {
-            val exportLabel = stringResource(R.string.export)
-            val resetLabel = stringResource(R.string.reset)
+        val exportLabel = stringResource(R.string.export)
+        val resetLabel = stringResource(R.string.reset)
 
+        ActionPillRow {
             // Export button
             ActionPillButton(
                 onClick = {
@@ -564,6 +721,56 @@ private fun BundleSelectionItem(
                     contentColor = MaterialTheme.colorScheme.onErrorContainer
                 )
             )
+        }
+    }
+}
+
+/**
+ * Confirmation dialog for resetting selections across the currently selected packages.
+ */
+@Composable
+private fun ConfirmResetSelectedDialog(
+    packageCount: Int,
+    totalPatches: Int,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.settings_system_patch_selection_reset_selected_confirm_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.reset),
+                onPrimaryClick = onConfirm,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss,
+                isPrimaryDestructive = true
+            )
+        }
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
+            DeletionWarningBox(
+                warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
+            ) {
+                val patchesText = pluralStringResource(
+                    R.plurals.patch_count,
+                    totalPatches,
+                    totalPatches
+                )
+                val packagesText = pluralStringResource(
+                    R.plurals.package_count,
+                    packageCount,
+                    packageCount
+                )
+                DeleteListItem(
+                    icon = Icons.Outlined.Delete,
+                    text = stringResource(
+                        R.string.settings_system_patch_selection_total_summary_format,
+                        patchesText,
+                        packagesText
+                    )
+                )
+            }
         }
     }
 }

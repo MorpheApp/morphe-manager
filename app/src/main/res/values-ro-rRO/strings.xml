@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Sursele tale sunt actualizate</string>
     <string name="home_sources_are_loading">Se încarcă sursele…</string>
     <string name="home_search_apps">Caută aplicații</string>
+    <string name="home_app_sort_title">Sortați aplicațiile</string>
+    <string name="home_app_sort_manual_description">Apăsați lung pe o aplicație, apoi atingeți butonul de reordonare</string>
+    <string name="home_app_sort_recommended">Ordinare recomandată</string>
+    <string name="home_app_sort_recommended_description">Aplicațiile instalate și fixate primele</string>
+    <string name="home_app_sort_name_asc_description">Alfabetic, de la A la Z</string>
+    <string name="home_app_sort_name_desc_description">În ordine alfabetică inversă, de la Z la A</string>
+    <string name="home_app_sort_updates_first">Actualizări de patch-uri mai întâi</string>
+    <string name="home_app_sort_updates_first_description">Aplicațiile cu badge-uri de actualizare mai întâi, apoi în ordinea recomandată</string>
     <string name="home_no_apps_title">Nicio aplicație disponibilă</string>
     <string name="home_no_apps_subtitle">Adaugă o sursă de patch sau activează una existentă în %s</string>
     <string name="home_no_apps_search_subtitle">Nici o aplicație nu corespunde cu \"%s\"</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Nocturn și productiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Surse de patch-uri</string>
+    <string name="sources_sort_title">Sortare surse de patch-uri</string>
+    <string name="sources_sort_manual">Comandă manuală</string>
+    <string name="sources_sort_manual_hint">Țineți apăsat pe o sursă pentru a reordona</string>
+    <string name="sources_sort_last_updated">Ultima actualizare</string>
+    <string name="sources_sort_last_updated_description">Actualizări ale surselor cele mai recente mai întâi</string>
+    <string name="sources_sort_enabled_first">Activat mai întâi</string>
+    <string name="sources_sort_enabled_first_description">Afișează sursele active înainte de sursele dezactivate</string>
     <string name="sources_management_open_in_browser">Deschide în browser</string>
     <string name="sources_management_failed_to_open_url">Eroarea la deschiderea URL-ului</string>
     <string name="sources_management_prerelease_toggle">Patch-uri pre-lansare</string>
@@ -285,6 +300,9 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="home_app_info_patch_source_used">Sursă de actualizare utilizată</string>
     <string name="home_app_info_install_type_custom_installer">Instalator personalizat</string>
     <string name="home_app_info_install_type_system_installer">Instalator sistem</string>
+    <string name="home_app_info_install_type_play_store">Instalare de pe Play Store</string>
+    <string name="home_app_info_install_type_root_play_store">Instalare de pe Play Store cu root</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Instalare Play Store prin Shizuku</string>
     <string name="home_app_info_patch_update_available">Actualizare patach disponibilă</string>
     <string name="home_app_info_patch_update_available_description">O versiune mai nouă a modificărilor este disponibilă. Repătați aplicația pentru a obține ultimele îmbunătățiri și corectări</string>
     <string name="home_app_info_app_deleted_warning">Aplicația a fost dezinstalată</string>
@@ -295,7 +313,7 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="root_gmscore_excluded">Suportul GmsCore este exclus în modul root</string>
     <string name="root_pre_patch_installer_title">Alege metodă de instalare</string>
     <string name="root_pre_patch_installer_description">Dispozitivul are acces la root. Alegeți cum vrei să instalezi aplicația patcheată</string>
-    <string name="root_pre_patch_installer_mount_title">Montaj root</string>
+    <string name="root_pre_patch_installer_mount_title">Montare root</string>
     <string name="root_pre_patch_installer_mount_description">Montează APK-ul modificat peste aplicația originală. Nu este necesar GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Instalare standard</string>
     <string name="root_pre_patch_installer_standard_description">Instalează ca o aplicație separată cu suport GmsCore. Un installer poate fi selectat după aplicarea patch-ului</string>
@@ -305,17 +323,21 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="patcher_error_log">Jurnal erori</string>
     <string name="patcher_error_technical">Detalii tehnice</string>
     <string name="patcher_error_dialog_app_info">Informații aplicație</string>
-    <string name="patcher_tab_logs">Jurnale patcher</string>
+    <string name="patcher_tab_logs">Jurnale de patch-uri</string>
     <string name="patcher_tab_game">Jocuri</string>
     <string name="patcher_long_step_warning">Acest pas poate dura ceva timp. Vă rugăm să așteptați…</string>
     <string name="patcher_installing_subtitle">Aproape gata de distracție! 🎸</string>
-    <string name="patcher_success_title">Totul gata! 🎉</string>
+    <string name="patcher_success_title">Gata! 🎉</string>
     <string name="patcher_success_subtitle">Aplicația dvs. este modificată și instalată!</string>
-    <string name="patcher_complete_title">Modificare completă! ✨</string>
+    <string name="patcher_complete_title">Aplicarea patch-ului s-a finalizat! ✨</string>
     <string name="patcher_failed_title">Ups! Ceva nu a mers bine</string>
     <string name="patcher_failed_subtitle">Verifică detaliile erorii de mai jos</string>
-    <string name="patcher_failed_dialog_title">Eșuare la aplicarea patch-ului</string>
+    <string name="patcher_failed_dialog_title">Aplicarea patch-ului a eșuat</string>
     <string name="patcher_unknown_error">A apărut o eroare necunoscută</string>
+    <string name="patcher_split_step_extracting">Extragerea fișierelor APK divizate</string>
+    <string name="patcher_split_step_merging">Îmbinarea %s</string>
+    <string name="patcher_split_step_writing">Scrierea fișierului APK îmbinat</string>
+    <string name="patcher_split_step_finalizing">Finalizarea fișierului APK îmbinat</string>
     <string name="patcher_conflict_title">Conflict de pachet</string>
     <string name="patcher_conflict_subtitle">Trebuie să dezinstalați versiunea existentă</string>
     <string name="patcher_conflict_hint">Aplicația modificată utilizează un certificat diferit față de versiunea instalată. Dezinstalarea va șterge toate datele aplicației.</string>
@@ -604,11 +626,13 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
     <string name="installer_title">Selectați instalatorul</string>
-    <string name="installer_internal_name">Instalator de sistem</string>
     <string name="installer_internal_description">Utilizează installerul de pachete Android</string>
+    <string name="installer_play_store_description">Utilizează installer-ul sistem și setează Google Play Store ca sursă de instalare</string>
+    <string name="installer_root_play_store_description">Instalează silențios cu acces root și setează Google Play Store ca sursă de instalare</string>
     <string name="installer_auto_saved_name">Instalator de montare root</string>
     <string name="installer_auto_saved_description">Instalează APK-ul patcheat peste aplicația instalată</string>
     <string name="installer_shizuku_description">Instalează silențios folosind Shizuku sau Sui</string>
+    <string name="installer_shizuku_play_store_description">Instalează silențios prin Shizuku sau Sui și setează Google Play Store ca sursă de instalare</string>
     <string name="installer_option_none">Fără opțiuni de rezervă</string>
     <string name="installer_none_description">Nu este configurat niciun instalator de rezervă</string>
     <string name="installer_status_requires_root">Necesită acces root</string>
@@ -629,6 +653,10 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_unavailable_message">Instalatorul preferat (%s) este curent indisponibil. Poți fixa problema și reinstalare, sau folosi instalatorul standard în schimb</string>
     <string name="installer_unavailable_shizuku_hint">Aseară că Shizuku rulează și permisiunea este acordată acestei aplicații</string>
     <string name="installer_use_standard">Folosește standard</string>
+    <string name="installer_play_store_warning_title">Instalează ca Play Store?</string>
+    <string name="installer_play_store_warning_message">Aplicația modificată va fi înregistrată ca fiind instalată din Google Play Store. Acest lucru permite serviciilor precum Android Auto să o recunoască drept o aplicație Play Store</string>
+    <string name="installer_play_store_warning_risk">Play Store poate oferi actualizări pentru aplicația modificată. Instalarea acelei actualizări va suprascrie APK-ul modificat cu versiunea originală și va elimina modificările. Dacă ți se solicită să actualizezi, atinge meniul cu trei puncte pe pagina Play Store a aplicației și alege \"Dezactivează actualizările\"</string>
+    <string name="installer_play_store_warning_continue">Am înțeles, continuă</string>
     <string name="settings_prompt_installer_on_install">Solicitare de selecție a installerului</string>
     <string name="settings_prompt_installer_on_install_description">Afișează dialogul de selecție a installerului de fiecare dată când o aplicație patch-uită este instalată</string>
     <string name="settings_auto_install_with_shizuku">Instalare automată după patch-uire</string>
@@ -669,6 +697,14 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_import_manager_settings_description">Realizează copii de rezervă și restaurează setările Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Eșec la importarea setărilor Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Setările Morphe au fost importate</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importă setări Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Alegeți modul în care setările și sursele importate trebuie aplicate</string>
+    <string name="settings_system_import_selections_mode_title">Importă selecții de patch-uri</string>
+    <string name="settings_system_import_selections_mode_description">Alegeți modul în care selecțiile și opțiunile de corecție importate ar trebui aplicate</string>
+    <string name="import_mode_replace_title">Înlocuire existente</string>
+    <string name="import_mode_replace_description">Corespondența exactă cu copia de rezervă. Elementele lipsă din copia de rezervă vor fi eliminate</string>
+    <string name="import_mode_merge_title">Combinare cu cele existente</string>
+    <string name="import_mode_merge_description">Adăugare elemente lipsă din copia de rezervă. Elementele existente rămân neschimbate</string>
     <string name="settings_system_export_manager_settings_fail">A eșuat exportarea setărilor Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Setările Morphe au fost exportate</string>
     <string name="settings_system_debug">Depanare</string>
@@ -679,6 +715,12 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Fișiere și stocare</string>
     <string name="settings_system_apks_size">Dimensiune totală: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Aceasta va șterge definitiv fișierele APK salvate afișate aici</string>
+    <string name="settings_system_apks_delete_selected_title">Ștergi APK-urile selectate?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Aceasta va șterge definitiv fișierele APK selectate</string>
+    <string name="settings_system_apks_deleted_all">APK-urile au fost șterse cu succes</string>
+    <string name="settings_system_apks_export_zip_success">APK-uri selectate exportate</string>
+    <string name="settings_system_apks_export_zip_failed">Exportarea APK-urilor selectate a eșuat</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK-uri patch-uite</string>
     <string name="settings_system_patched_apks_description">Administrează fișierele patch-uite salvate ale aplicațiilor</string>
@@ -686,6 +728,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_patched_apks_delete_title">Ștergi APK-ul patch-uit?</string>
     <string name="settings_system_patched_apks_delete_confirm">Dorești să ștergi APK-ul patch-uit salvat pentru %s?</string>
     <string name="settings_system_patched_apks_deleted">APK-ul patch-uit a fost șters cu succes</string>
+    <string name="settings_system_patched_apks_delete_all_title">Ștergi toate APK-urile modificate?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APK-uri originale</string>
     <string name="settings_system_original_apks_description">Salvate pentru patch-uire ulterioară. Este păstrată o singură versiune per aplicație</string>
@@ -693,11 +736,13 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_original_apks_deleted">APK original șters cu succes</string>
     <string name="settings_system_original_apks_delete_title">Ștergi APK-ul original?</string>
     <string name="settings_system_original_apks_delete_confirm">Ștergeți fișierul APK original pentru %s? Fără un nou fișier APK nu veți putea repăta aplicația</string>
+    <string name="settings_system_original_apks_delete_all_title">Ștergi toate APK-urile originale?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Gestiune selectii de modificări</string>
     <string name="settings_system_patch_selections_description">Salvează selecțiile de patch-uri, păstrate după dezinstalare</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Resetați toate selectiile?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Resetați selectiile pachetului?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Resetezi pachetele selectate?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Resetați selectia sursei?</string>
     <string name="settings_system_patch_selection_no_saved">Nicio selectie salvată</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s peste %2$s</string>
@@ -731,6 +776,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="file_picker_sort_size_asc">Dimensiune (cea mai mică prima)</string>
     <string name="file_picker_sort_date_desc">Dată (cea mai recentă prima)</string>
     <string name="file_picker_sort_date_asc">Dată (cea mai veche prima)</string>
+    <string name="file_picker_show_hidden_files">Arată fișierele ascunse</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Despre</string>
     <string name="settings_system_share_website">Partajează website</string>
@@ -765,10 +811,15 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="skip">Omitere</string>
     <string name="clear">Golește</string>
     <string name="delete">Șterge</string>
+    <string name="delete_all">Șterge tot</string>
     <string name="remove">Elimină</string>
     <string name="disable">Dezactivează</string>
     <string name="enable">Activează</string>
     <string name="loading">Se încarcă…</string>
+    <string name="loading_older_releases">Se încarcă versiuni mai vechi…</string>
+    <string name="creating">Se creează…</string>
+    <string name="processing_apk">Se procesează APK…</string>
+    <string name="exporting_apks">Se exportă APK-uri…</string>
     <string name="not_installed">Neinstalată</string>
     <string name="view">Vizualizează</string>
     <string name="search">Caută</string>
@@ -788,6 +839,10 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="reorder_done">Ordine salvată</string>
     <string name="reset_order">Resetează ordinea</string>
     <string name="reset_order_done">Comanda resetată</string>
+    <string name="accessibility_move_up">Mută în sus</string>
+    <string name="accessibility_move_down">Mută în jos</string>
+    <string name="accessibility_app_moved_announcement">%1$s a fost mutat în poziția %2$d din %3$d</string>
+    <string name="accessibility_scroll_to_top">Derulează până în partea de sus a listei</string>
     <string name="rename">Redenumește</string>
     <string name="import_">Importă</string>
     <string name="export">Exportă</string>
@@ -833,8 +888,9 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="changelog">Vizualizează jurnalele modificărilor</string>
     <string name="changelog_description">Explorează ultimele schimbări din această actualizare</string>
     <string name="changelog_download_fail">Nu s-a putut descărca jurnalul de modificări: %s</string>
-    <string name="changelog_retry">Reîncearcă</string>
     <string name="changelog_empty">Nu există jurnale disponibile</string>
+    <string name="changelog_show_older">Afișează versiunile mai vechi</string>
+    <string name="changelog_older_empty">Nu există versiuni mai vechi de afișat</string>
     <string name="no_network_toast">Nu există conexiune la internet</string>
     <string name="update_available">Este disponibilă o actualizare</string>
     <string name="ready_to_install_update">Actualizare pregătită pentru instalare</string>

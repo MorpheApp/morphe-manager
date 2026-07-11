@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">مصادرك محدثة</string>
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
     <string name="home_search_apps">البحث عن التطبيقات</string>
+    <string name="home_app_sort_title">ترتيب التطبيقات</string>
+    <string name="home_app_sort_manual_description">اضغط مطولًا على تطبيق، ثم اضغط على زر إعادة الترتيب</string>
+    <string name="home_app_sort_recommended">الترتيب الموصى به</string>
+    <string name="home_app_sort_recommended_description">التطبيقات المثبتة والمثبتة أولًا</string>
+    <string name="home_app_sort_name_asc_description">أبجديًا، من الألف إلى الياء</string>
+    <string name="home_app_sort_name_desc_description">عكس أبجدي، من ي إلى أ</string>
+    <string name="home_app_sort_updates_first">تحديثات التعديل أولًا</string>
+    <string name="home_app_sort_updates_first_description">التطبيقات التي تحتوي على شارات التحديث أولًا، ثم الترتيب الموصى به</string>
     <string name="home_no_apps_title">لا توجد تطبيقات متاحة</string>
     <string name="home_no_apps_subtitle">أضِف مصدرًا للتعديل أو قم بتمكين مصدر موجود في %s</string>
     <string name="home_no_apps_search_subtitle">لا يوجد تطبيقات تطابق \"%s\"</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">ليلي ومنتج</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">مصادر التعديل</string>
+    <string name="sources_sort_title">فرز مصادر التعديل</string>
+    <string name="sources_sort_manual">ترتيب يدوي</string>
+    <string name="sources_sort_manual_hint">اضغط مطولًا على مصدر لإعادة الترتيب</string>
+    <string name="sources_sort_last_updated">آخر تحديث</string>
+    <string name="sources_sort_last_updated_description">آخر تحديثات المصادر أولًا</string>
+    <string name="sources_sort_enabled_first">مُمَكّن أولًا</string>
+    <string name="sources_sort_enabled_first_description">عرض المصادر النشطة قبل المصادر المعطلة</string>
     <string name="sources_management_open_in_browser">فتح في المتصفح</string>
     <string name="sources_management_failed_to_open_url">فشل في فتح الرابط</string>
     <string name="sources_management_prerelease_toggle">إصدارات ما قبل الإطلاق</string>
@@ -139,7 +154,7 @@
     <string name="home_download_instructions_step1">انقر على زر \'%s\' أدناه</string>
     <string name="home_download_instructions_step2_part1">مرر لأسفل صفحة الويب واضغط</string>
     <string name="home_download_instructions_download_button_toast">اضغط على التنزيل من الموقع الإلكتروني، وليس هنا 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">رائع! الآن انقر على متابعة وانتقل إلى الموقع الإلكتروني 👆</string>
+    <string name="home_download_instructions_download_button_toast_2">رائع! الآن انقر على المتابعة وانتقل إلى الموقع الإلكتروني 👆</string>
     <string name="home_download_instructions_download_button_toast_3">الممارسة تؤدي إلى الإتقان، وأنت تقترب من ذلك 💪</string>
     <string name="home_download_instructions_download_button_toast_4">ليس هنا بعد… ليس هنا بعد… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">حسنًا، أنا أحترم هذا التفاني 🫡</string>
@@ -285,6 +300,9 @@
     <string name="home_app_info_patch_source_used">مصدر التعديل المستخدم</string>
     <string name="home_app_info_install_type_custom_installer">أداة تثبيت مخصصة</string>
     <string name="home_app_info_install_type_system_installer">أداة تثبيت النظام</string>
+    <string name="home_app_info_install_type_play_store">تثبيت من متجر Play</string>
+    <string name="home_app_info_install_type_root_play_store">تثبيت من متجر Play مع صلاحيات Root</string>
+    <string name="home_app_info_install_type_shizuku_play_store">تثبيت من متجر Play عبر Shizuku</string>
     <string name="home_app_info_patch_update_available">تحديث تعديل متاح</string>
     <string name="home_app_info_patch_update_available_description">إصدار أحدث من التعديلات متاح. اعد تعديل التطبيق للحصول على آخر التحسينات و الإصلاحات</string>
     <string name="home_app_info_app_deleted_warning">التطبيق غير مثبت</string>
@@ -316,6 +334,10 @@
     <string name="patcher_failed_subtitle">تحقق من تفاصيل الخطأ أدناه</string>
     <string name="patcher_failed_dialog_title">فشل التعديل</string>
     <string name="patcher_unknown_error">حدث خطأ غير معروف</string>
+    <string name="patcher_split_step_extracting">استخراج ملفات APK المقسمة</string>
+    <string name="patcher_split_step_merging">دمج %s</string>
+    <string name="patcher_split_step_writing">كتابة ملف APK المدمج</string>
+    <string name="patcher_split_step_finalizing">تتم المعالجة النهائية لملف APK المدمج</string>
     <string name="patcher_conflict_title">تعارض الحزمة</string>
     <string name="patcher_conflict_subtitle">تحتاج إلى إلغاء تثبيت الإصدار الحالي</string>
     <string name="patcher_conflict_hint">يستخدم التطبيق الذي تم تعديله شهادة مختلفة عن الإصدار المثبت. سيؤدي إلغاء التثبيت إلى محو جميع بيانات التطبيق.</string>
@@ -508,11 +530,11 @@
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">وضع المعالجة Bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">يتحكم في كيفية معالجة Bytecode أثناء التعديل. يؤثر على سرعة التعديل، استخدام الذاكرة، وحجم APK الناتج</string>
-    <string name="settings_advanced_bytecode_mode_strip_fast_label">السريع (موصى به)</string>
-    <string name="settings_advanced_bytecode_mode_strip_fast">السريع</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_label">(موصى به) Fast</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast">Fast</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">تعديل أسرع واستخدام أقل للذاكرة، على حساب حجم APK أكبر. موصى به للأجهزة ذات ذاكرة الوصول العشوائي المنخفضة أو الأجهزة القديمة</string>
-    <string name="settings_advanced_bytecode_mode_full">الكامل</string>
-    <string name="settings_advanced_bytecode_mode_full_description">أبطأ في التعديل، ويُحاكي السلوك القديم. يُنصح به فقط إذا كان الوضع السريع يسبب مشكلات</string>
+    <string name="settings_advanced_bytecode_mode_full">Full</string>
+    <string name="settings_advanced_bytecode_mode_full_description">أبطأ في التعديل، ويُحاكي السلوك القديم. يُنصح به فقط إذا كان وضع Fast يسبب مشكلات</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">رمز GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">مطلوب لمصادر طلب السحب</string>
@@ -605,11 +627,13 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">أداة التثبيت</string>
     <string name="installer_title">اختر أداة التثبيت</string>
-    <string name="installer_internal_name">أداة تثبيت النظام</string>
     <string name="installer_internal_description">يستخدم أداة تثبيت حزم Android</string>
+    <string name="installer_play_store_description">يستخدم أداة تثبيت النظام ويحدد متجر Google Play كمصدر للتثبيت</string>
+    <string name="installer_root_play_store_description">يقوم بالتثبيت تلقائيًا باستخدام صلاحيات Root ويضبط متجر Google Play كمصدر للتثبيت</string>
     <string name="installer_auto_saved_name">أداة تثبيت تركيب Rooted</string>
     <string name="installer_auto_saved_description">يقوم بتركيب ملف APK المعدل فوق التطبيق المثبت</string>
-    <string name="installer_shizuku_description">يُثبّت بصمت باستخدام Shizuku أو Sui</string>
+    <string name="installer_shizuku_description">يُثبّت تلقائيًا باستخدام Shizuku أو Sui</string>
+    <string name="installer_shizuku_play_store_description">يقوم بالتثبيت تلقائيًا من خلال Shizuku أو Sui ويضبط متجر Google Play كمصدر للتثبيت</string>
     <string name="installer_option_none">لا بديل</string>
     <string name="installer_none_description">لم يتم تكوين أي أداة تثبيت بديلة</string>
     <string name="installer_status_requires_root">يتطلب صلاحيات Root</string>
@@ -630,6 +654,11 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_unavailable_message">أداة التثبيت المفضلة لديك (%s) غير متوفرة حاليًا. يمكنك إصلاح المشكلة وإعادة المحاولة، أو استخدام أداة التثبيت القياسية بدلًا من ذلك</string>
     <string name="installer_unavailable_shizuku_hint">تأكد من تشغيل Shizuku ومنح الإذن لهذا التطبيق</string>
     <string name="installer_use_standard">استخدام القياسي</string>
+    <string name="installer_play_store_warning_title">التثبيت كمتجر Play؟</string>
+    <string name="installer_play_store_warning_message">سيتم تسجيل التطبيق الذي تم تعديله على أنه مثبت من متجر Google Play. يتيح ذلك لخدمات مثل Android Auto التعرف عليه كتطبيق من متجر Play</string>
+    <string name="installer_play_store_warning_risk">قد يقدم متجر Play تحديثات للتطبيق الذي تم تعديله.
+سيؤدي تثبيت هذا التحديث إلى استبدال ملف APK الذي تم تعديله بالإصدار الأصلي وإزالة التعديلات. إذا طُلب منك التحديث، فانقر على القائمة ثلاثية النقاط في صفحة التطبيق على متجر Play وعطّل \"تفعيل التحديث التلقائي\"</string>
+    <string name="installer_play_store_warning_continue">أفهم، متابعة</string>
     <string name="settings_prompt_installer_on_install">نافذة اختيار أداة التثبيت</string>
     <string name="settings_prompt_installer_on_install_description">يعرض نافذة اختيار أداة التثبيت في كل مرة تقوم فيها بتثبيت تطبيق معدل</string>
     <string name="settings_auto_install_with_shizuku">التثبيت التلقائي بعد التعديل</string>
@@ -670,6 +699,14 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_manager_settings_description">ينسخ إعدادات Morphe احتياطيًا ويستعيدها</string>
     <string name="settings_system_import_manager_settings_fail">تعذر استيراد إعدادات Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">تم استيراد إعدادات Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_title">استيراد إعدادات Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">اختر كيفية تطبيق الإعدادات والمصادر المستوردة</string>
+    <string name="settings_system_import_selections_mode_title">استيراد التعديلات المحددة</string>
+    <string name="settings_system_import_selections_mode_description">اختر كيفية تطبيق التعديلات المحددة وخيارات التعديل المستوردة</string>
+    <string name="import_mode_replace_title">استبدال الموجود</string>
+    <string name="import_mode_replace_description">مطابقة النسخة الاحتياطية تمامًا. سيتم حذف العناصر المفقودة من النسخة الاحتياطية</string>
+    <string name="import_mode_merge_title">الدمج مع الموجود</string>
+    <string name="import_mode_merge_description">إضافة العناصر المفقودة من النسخة الاحتياطية. سيتم الحفاظ على العناصر الموجودة دون تغيير</string>
     <string name="settings_system_export_manager_settings_fail">تعذر تصدير إعدادات Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">تم تصدير إعدادات Morphe</string>
     <string name="settings_system_debug">Debug</string>
@@ -680,6 +717,12 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">الملفات &amp; مساحة التخزين</string>
     <string name="settings_system_apks_size">إجمالي الحجم: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">سيؤدي هذا إلى حذف ملفات APK المحفوظة الظاهرة هنا بشكل دائم</string>
+    <string name="settings_system_apks_delete_selected_title">حذف ملفات APK المحددة؟</string>
+    <string name="settings_system_apks_delete_selected_confirm">سيؤدي هذا إلى حذف ملفات APK المحددة بشكل دائم</string>
+    <string name="settings_system_apks_deleted_all">تم حذف ملفات APK بنجاح</string>
+    <string name="settings_system_apks_export_zip_success">تم تصدير ملفات APK المحددة</string>
+    <string name="settings_system_apks_export_zip_failed">فشل تصدير ملفات APK المحددة</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs معدلة</string>
     <string name="settings_system_patched_apks_description">يدير ملفات التطبيقات المُعدّلة المحفوظة</string>
@@ -687,6 +730,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_patched_apks_delete_title">حذف ملف APK المعدل؟</string>
     <string name="settings_system_patched_apks_delete_confirm">هل تريد بالتأكيد حذف ملف APK المعدل المحفوظ لـ %s؟</string>
     <string name="settings_system_patched_apks_deleted">تم حذف ملف APK المعدل بنجاح</string>
+    <string name="settings_system_patched_apks_delete_all_title">حذف جميع ملفات APK المعدلة؟</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">ملفات APK الأصلية</string>
     <string name="settings_system_original_apks_description">محفوظة لإعادة تعديلها. يتم الاحتفاظ بإصدار واحد لكل تطبيق</string>
@@ -694,11 +738,13 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_original_apks_deleted">تم حذف ملف APK الأصلي بنجاح</string>
     <string name="settings_system_original_apks_delete_title">حذف ملف APK الأصلي؟</string>
     <string name="settings_system_original_apks_delete_confirm">هل تريد بالتأكيد حذف ملف APK الأصلي لـ %s؟ لن تتمكن من إعادة التعديل دون توفير ملف APK جديد</string>
+    <string name="settings_system_original_apks_delete_all_title">حذف جميع ملفات APK الأصلية؟</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">اختيارات التعديل</string>
-    <string name="settings_system_patch_selections_description">يحفظ اختيارات التعديل، وتظل محفوظة بعد إلغاء التثبيت</string>
+    <string name="settings_system_patch_selections_description">يحفظ اختيارات التعديل، وتبقى محفوظة بعد إلغاء التثبيت</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">إعادة تعيين كل الاختيارات؟</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">إعادة تعيين اختيارات الحزمة؟</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">إعادة تعيين الحزم المحددة؟</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">إعادة تعيين تحديد المصدر؟</string>
     <string name="settings_system_patch_selection_no_saved">لا يوجد اختيارات تعديل محفوظة</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s عبر %2$s</string>
@@ -718,7 +764,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_no_patches_or_options">لا يوجد تعديلات أو خيارات محفوظة</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">مستعرض ملفات مخصص</string>
-    <string name="settings_system_custom_file_picker_description">استخدم متصفح التخزين المدمج في Morphe بدلًا من متصفح النظام الافتراضي</string>
+    <string name="settings_system_custom_file_picker_description">استخدم مستعرض التخزين المدمج في Morphe بدلًا من مستعرض النظام الافتراضي</string>
     <!-- File Picker -->
     <string name="file_picker_previous_directory">المجلد السابق</string>
     <string name="file_picker_no_files">لا توجد ملفات هنا</string>
@@ -732,6 +778,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="file_picker_sort_size_asc">الحجم (الأصغر أولًا)</string>
     <string name="file_picker_sort_date_desc">التاريخ (الأحدث أولًا)</string>
     <string name="file_picker_sort_date_asc">التاريخ (الأقدم أولًا)</string>
+    <string name="file_picker_show_hidden_files">إظهار الملفات المخفية</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">لمحة</string>
     <string name="settings_system_share_website">مشاركة الموقع الإلكتروني</string>
@@ -766,10 +813,15 @@ morphe_adaptive_monochrome_custom.xml
     <string name="skip">تخطي</string>
     <string name="clear">مسح</string>
     <string name="delete">حذف</string>
+    <string name="delete_all">حذف الكل</string>
     <string name="remove">إزالة</string>
     <string name="disable">تعطيل</string>
     <string name="enable">تمكين</string>
     <string name="loading">جارٍ التحميل…</string>
+    <string name="loading_older_releases">جارٍ تحميل الإصدارات الأقدم…</string>
+    <string name="creating">جارٍ الإنشاء…</string>
+    <string name="processing_apk">جارٍ معالجة ملف APK…</string>
+    <string name="exporting_apks">جارٍ تصدير ملفات APK…</string>
     <string name="not_installed">غير مثبت</string>
     <string name="view">عرض</string>
     <string name="search">البحث</string>
@@ -789,6 +841,10 @@ morphe_adaptive_monochrome_custom.xml
     <string name="reorder_done">تم حفظ الترتيب</string>
     <string name="reset_order">إعادة تعيين الترتيب</string>
     <string name="reset_order_done">تم إعادة تعيين الترتيب</string>
+    <string name="accessibility_move_up">حرّك لأعلى</string>
+    <string name="accessibility_move_down">حرّك لأسفل</string>
+    <string name="accessibility_app_moved_announcement">%1$s حُرِّك إلى الموضع %2$d من %3$d</string>
+    <string name="accessibility_scroll_to_top">التمرير إلى أعلى القائمة</string>
     <string name="rename">إعادة تسمية</string>
     <string name="import_">استيراد</string>
     <string name="export">تصدير</string>
@@ -834,8 +890,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="changelog">عرض سجل التغييرات</string>
     <string name="changelog_description">اطّلع على آخر التغييرات في هذا التحديث</string>
     <string name="changelog_download_fail">فشل تنزيل سجل التغييرات: %s</string>
-    <string name="changelog_retry">إعادة المحاولة</string>
     <string name="changelog_empty">لا يتوفر سجل تغييرات</string>
+    <string name="changelog_show_older">عرض الإصدارات الأقدم</string>
+    <string name="changelog_older_empty">لا توجد إصدارات أقدم لعرضها</string>
     <string name="no_network_toast">لا يوجد اتصال بالإنترنت متاح</string>
     <string name="update_available">يتوفر تحديث</string>
     <string name="ready_to_install_update">جاهز لتثبيت التحديث</string>
@@ -870,7 +927,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="onboarding_system_installer_desc">اختر كيفية تثبيت التطبيقات التي تم تعديلها: قياسي، Root Mount، أو Shizuku</string>
     <string name="onboarding_system_process_runtime_desc">تشغيل التعديل في عملية منفصلة لتحسين الاستقرار والتحكم في استخدام الذاكرة.
 موصى به للتطبيقات الكبيرة</string>
-    <string name="onboarding_system_file_picker_desc">قم بتمكين هذا لاستخدام متصفح الملفات المدمج بدلًا من منتقي النظام عند تحديد ملفات APK أو المفاتيح</string>
+    <string name="onboarding_system_file_picker_desc">قم بتمكين هذا لاستخدام مستعرض الملفات المدمج بدلًا من مستعرض النظام عند تحديد ملفات APK أو المفاتيح</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">جولة سريعة في الميزات</string>
     <string name="tour_prompt_desc">هل تريد جولة سريعة في الميزات الرئيسية لـ Morphe؟</string>

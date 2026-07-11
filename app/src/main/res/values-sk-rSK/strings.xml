@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Vaše zdroje sú aktuálne</string>
     <string name="home_sources_are_loading">Zdroje sa načítavajú, prosím počkajte…</string>
     <string name="home_search_apps">Vyhľadávanie aplikácií</string>
+    <string name="home_app_sort_title">Zoradiť aplikácie</string>
+    <string name="home_app_sort_manual_description">Dlhým stlačením aplikácie a potom klepnutím na tlačidlo zoradiť</string>
+    <string name="home_app_sort_recommended">Odporúčaná verzia</string>
+    <string name="home_app_sort_recommended_description">Najprv nainštalované a pripnuté aplikácie</string>
+    <string name="home_app_sort_name_asc_description">Abecedne, od A po Z</string>
+    <string name="home_app_sort_name_desc_description">Abecedne zotriedené, od Z po A</string>
+    <string name="home_app_sort_updates_first">Najprv opravy</string>
+    <string name="home_app_sort_updates_first_description">Aplikácie so zobrazenými aktualizáciami najprv, potom v odporúčanej poradí</string>
     <string name="home_no_apps_title">Nedostupné žiadne aplikácie</string>
     <string name="home_no_apps_subtitle">Pridajte zdroj záplaty alebo povoľte existujúci v %s</string>
     <string name="home_no_apps_search_subtitle">Žiadne aplikácie sa nezhodujú s \"%s\"</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Nočný a produktívny</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Zdroje záplat</string>
+    <string name="sources_sort_title">Zoradiť zdroje záplat</string>
+    <string name="sources_sort_manual">Manuálne zoradenie</string>
+    <string name="sources_sort_manual_hint">Dlhým stlačením položky zdroja ju môžete presunúť</string>
+    <string name="sources_sort_last_updated">Posledná aktualizácia</string>
+    <string name="sources_sort_last_updated_description">Najnovšie aktualizácie zdrojov najprv</string>
+    <string name="sources_sort_enabled_first">Najprv povolené</string>
+    <string name="sources_sort_enabled_first_description">Zobraziť aktívne zdroje pred zakázanými zdrojmi</string>
     <string name="sources_management_open_in_browser">Otvoriť v prehliadači</string>
     <string name="sources_management_failed_to_open_url">Nepodarilo sa otvoriť URL</string>
     <string name="sources_management_prerelease_toggle">Použiť predbežne vydané záplaty</string>
@@ -285,6 +300,9 @@ Vnútorná zóna (čiarkovaná): môže byť orezaná maskou spúšťača – uc
     <string name="home_app_info_patch_source_used">Použitý zdroj záplaty</string>
     <string name="home_app_info_install_type_custom_installer">Vlastný inštalátor</string>
     <string name="home_app_info_install_type_system_installer">Systémový inštalátor</string>
+    <string name="home_app_info_install_type_play_store">Inštalácia z Obchodu Play</string>
+    <string name="home_app_info_install_type_root_play_store">Inštalácia cez Root Play Store</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Inštalácia cez Shizuku Play Store</string>
     <string name="home_app_info_patch_update_available">Je dostupná aktualizácia záplaty</string>
     <string name="home_app_info_patch_update_available_description">Je dostupná novšia verzia záplat. Znovu zaplátajte aplikácie aby ste získali najnovšie vylepšenia a opravy.</string>
     <string name="home_app_info_app_deleted_warning">Aplikácia bola odinštalovaná</string>
@@ -295,7 +313,7 @@ Vnútorná zóna (čiarkovaná): môže byť orezaná maskou spúšťača – uc
     <string name="root_gmscore_excluded">Podporná záplata GmsCore je vylúčená v root režime</string>
     <string name="root_pre_patch_installer_title">Vyberte spôsob inštalácie</string>
     <string name="root_pre_patch_installer_description">Vaše zariadenie má root prístup. Vyberte, ako chcete nainštalovať upravenú aplikáciu</string>
-    <string name="root_pre_patch_installer_mount_title">Pripojenie koreňového systému</string>
+    <string name="root_pre_patch_installer_mount_title">Pripojenie root</string>
     <string name="root_pre_patch_installer_mount_description">Nainštaluje zaplátaný APK súbor skrz pôvodnú aplikáciu. GmsCore nie je potrebný</string>
     <string name="root_pre_patch_installer_standard_title">Štandardná inštalácia</string>
     <string name="root_pre_patch_installer_standard_description">Inštaluje sa ako samostatná aplikácia s podporou GmsCore. Inštalátor je možné vybrať po záplatovaní</string>
@@ -305,17 +323,21 @@ Vnútorná zóna (čiarkovaná): môže byť orezaná maskou spúšťača – uc
     <string name="patcher_error_log">Záznam o chybách</string>
     <string name="patcher_error_technical">Technické detaily</string>
     <string name="patcher_error_dialog_app_info">Informácie o aplikácii</string>
-    <string name="patcher_tab_logs">Logy záplat</string>
+    <string name="patcher_tab_logs">Logy aplikácie záplat</string>
     <string name="patcher_tab_game">Hry</string>
     <string name="patcher_long_step_warning">Tento krok môže chvíľu trvať. Čakajte prosím…</string>
     <string name="patcher_installing_subtitle">Ešte chvíľu a môžeme to naplno roztočiť! 🎸</string>
-    <string name="patcher_success_title">Všetko je hotové! 🎉</string>
+    <string name="patcher_success_title">Hotovo! 🎉</string>
     <string name="patcher_success_subtitle">Vaša aplikácia je zaplátaná a nainštalovaná!</string>
-    <string name="patcher_complete_title">Plátanie už máme za sebou! ✨</string>
+    <string name="patcher_complete_title">Oprava dokončená! ✨</string>
     <string name="patcher_failed_title">Ups! Niečo sa pokazilo</string>
     <string name="patcher_failed_subtitle">Skontrolujte detaily chyby nižšie</string>
-    <string name="patcher_failed_dialog_title">Plátanie zlyhalo</string>
+    <string name="patcher_failed_dialog_title">Oprava zlyhala</string>
     <string name="patcher_unknown_error">Vyskytla sa neznáma chyba</string>
+    <string name="patcher_split_step_extracting">Extrahujem rozdelené APK</string>
+    <string name="patcher_split_step_merging">Zlúčim %s</string>
+    <string name="patcher_split_step_writing">Zapisujem zlúčené APK</string>
+    <string name="patcher_split_step_finalizing">Finalizujem zlúčené APK</string>
     <string name="patcher_conflict_title">Konflikt balíkov</string>
     <string name="patcher_conflict_subtitle">Musíte odinštalovať existujúcu verziu</string>
     <string name="patcher_conflict_hint">Upravená aplikácia používa iný certifikát ako nainštalovaná verzia. Odinštalovaním sa vymažú všetky údaje aplikácie.</string>
@@ -604,11 +626,13 @@ Rozmery obrázka musia byť nasledovné:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Inštalátor</string>
     <string name="installer_title">Vybrať inštalátor</string>
-    <string name="installer_internal_name">Systémový inštalátor</string>
     <string name="installer_internal_description">Použite nástroj na inštaláciu balíkov Android</string>
+    <string name="installer_play_store_description">Používa systémový inštalátor a nastavuje Google Play Store ako zdroj inštalácie.</string>
+    <string name="installer_root_play_store_description">Inštaluje sa potichu s root právami a nastavuje Google Play Store ako zdroj inštalácie</string>
     <string name="installer_auto_saved_name">Inštalátor rootovaného mountu</string>
     <string name="installer_auto_saved_description">Mount patched APK nad nainštalovanou aplikáciou</string>
     <string name="installer_shizuku_description">Nainštalovať na pozadí pomocou Shizuku alebo Sui</string>
+    <string name="installer_shizuku_play_store_description">Inštaluje sa potichu cez Shizuku alebo Sui a nastavuje Google Play Store ako zdroj inštalácie</string>
     <string name="installer_option_none">Žiadna záloha</string>
     <string name="installer_none_description">Žiadny záložný inštalátor nie je nakonfigurovaný</string>
     <string name="installer_status_requires_root">Vyžaduje prístup s root oprávneniami</string>
@@ -629,6 +653,10 @@ Rozmery obrázka musia byť nasledovné:
     <string name="installer_unavailable_message">Vaš preferovaný inštalátor (%s) nie je dostupný. Môžete problém opraviť a skúsiť znova, alebo použiť štandardný inštalátor.</string>
     <string name="installer_unavailable_shizuku_hint">Uistite sa, že Shizuku beží a že ste mu udelili povolenie</string>
     <string name="installer_use_standard">Použiť štandardný</string>
+    <string name="installer_play_store_warning_title">Inštalovať ako Play Store?</string>
+    <string name="installer_play_store_warning_message">Opravená aplikácia bude zaznamenaná ako inštalovaná z Google Play Store. To umožní službám, ako je Android Auto, rozpoznávať ju ako aplikáciu z Play Store</string>
+    <string name="installer_play_store_warning_risk">Play Store môže ponúkať aktualizácie pre opravenú aplikáciu. Inštalácia takejto aktualizácie prepíše opravený APK originálnou verziou a odstráni opravy. Ak sa zobrazí výzva na aktualizáciu, klepnite na ponuku troch bodov na stránke aplikácie v Play Store a vyberte možnosť \"Zakázať aktualizácie\"</string>
+    <string name="installer_play_store_warning_continue">Rozumiem, pokračovať</string>
     <string name="settings_prompt_installer_on_install">Výber inštalátora</string>
     <string name="settings_prompt_installer_on_install_description">Zobraziť výber inštalátora pri každej inštalácii zaplátanej aplikácie</string>
     <string name="settings_auto_install_with_shizuku">Automatická inštalácia po záplatovaní</string>
@@ -669,6 +697,14 @@ Rozmery obrázka musia byť nasledovné:
     <string name="settings_system_import_manager_settings_description">Zálohuje a obnovuje nastavenia Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Nepodarilo sa importovať nastavenia Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Nastavenia Morphe boli importované</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importovať nastavenia Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Vyberte, ako sa majú použiť importované nastavenia a zdroje</string>
+    <string name="settings_system_import_selections_mode_title">Importovať výbery záplat</string>
+    <string name="settings_system_import_selections_mode_description">Vyberte, ako sa majú použiť importované výbery a možnosti záplat</string>
+    <string name="import_mode_replace_title">Nahradiť existujúce</string>
+    <string name="import_mode_replace_description">Presne zhodovať zálohu. Položky chýbajúce v zálohe budú odstránené</string>
+    <string name="import_mode_merge_title">Spojiť s existujúcimi</string>
+    <string name="import_mode_merge_description">Pridať chýbajúce položky zo zálohy. Existujúce položky zostanú nezmenené</string>
     <string name="settings_system_export_manager_settings_fail">Nepodarilo sa exportovať nastavenia Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Nastavenia Morphe boli exportované</string>
     <string name="settings_system_debug">Ladenie</string>
@@ -679,6 +715,12 @@ Rozmery obrázka musia byť nasledovné:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Súbory a úložisko</string>
     <string name="settings_system_apks_size">Celková veľkosť: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Týmto trvalo vymažete uložené APK súbory zobrazené tu</string>
+    <string name="settings_system_apks_delete_selected_title">Vymazať vybrané APK súbory?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Týmto trvalo vymažete vybrané APK súbory</string>
+    <string name="settings_system_apks_deleted_all">APK súbory boli úspešne vymazané</string>
+    <string name="settings_system_apks_export_zip_success">Exportované APK súbory</string>
+    <string name="settings_system_apks_export_zip_failed">Nepodarilo sa exportovať vybrané APK súbory</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Zaplátané APK súbory</string>
     <string name="settings_system_patched_apks_description">Spravovať zaplátané súbory aplikácií</string>
@@ -686,6 +728,7 @@ Rozmery obrázka musia byť nasledovné:
     <string name="settings_system_patched_apks_delete_title">Vymazať zaplátaný APK súbor?</string>
     <string name="settings_system_patched_apks_delete_confirm">Naozaj chcete odstrániť zaplátané APK súbory pre %s?</string>
     <string name="settings_system_patched_apks_deleted">Zaplátaný APK súbor bol vymazaný</string>
+    <string name="settings_system_patched_apks_delete_all_title">Vymazať všetky zaplátané APK súbory?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Pôvodné APK súbory</string>
     <string name="settings_system_original_apks_description">Uložené pre prepätie. Uchováva sa jedna verzia pre každú aplikáciu</string>
@@ -693,11 +736,13 @@ Rozmery obrázka musia byť nasledovné:
     <string name="settings_system_original_apks_deleted">Pôvodný APK súbor bol vymazaný</string>
     <string name="settings_system_original_apks_delete_title">Vymazať pôvodný APK súbor?</string>
     <string name="settings_system_original_apks_delete_confirm">Vymazať pôvodný APK súbor pre %s? Nebudete ho môcť znovu zaplátať bez poskytnutia nového APK súboru</string>
+    <string name="settings_system_original_apks_delete_all_title">Vymazať všetky pôvodné APK súbory?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Voľba záplat</string>
     <string name="settings_system_patch_selections_description">Uložené výbery záplat, uchované aj po odinštalovaní</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Obnoviť všetky výbery?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Obnoviť výbery balíkov?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Resetovať vybrané balíky?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Obnoviť výbery zdrojov?</string>
     <string name="settings_system_patch_selection_no_saved">Žiadne uložené výbery záplat</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s z %2$s</string>
@@ -731,6 +776,7 @@ Rozmery obrázka musia byť nasledovné:
     <string name="file_picker_sort_size_asc">Veľkosť (najmenšie najprv)</string>
     <string name="file_picker_sort_date_desc">Dátum (najnovšie najprv)</string>
     <string name="file_picker_sort_date_asc">Dátum (najstaršie najprv)</string>
+    <string name="file_picker_show_hidden_files">Zobraziť skryté súbory</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikácii</string>
     <string name="settings_system_share_website">Zdieľať webstránku</string>
@@ -765,10 +811,15 @@ Rozmery obrázka musia byť nasledovné:
     <string name="skip">Preskočiť</string>
     <string name="clear">Vyčistiť</string>
     <string name="delete">Odstrániť</string>
+    <string name="delete_all">Vymazať všetko</string>
     <string name="remove">Vymazať</string>
     <string name="disable">Zakázať</string>
     <string name="enable">Povoliť</string>
     <string name="loading">Načítava sa…</string>
+    <string name="loading_older_releases">Načítavam staršie verzie…</string>
+    <string name="creating">Vytváram…</string>
+    <string name="processing_apk">Spracovávam APK…</string>
+    <string name="exporting_apks">Exportujem APK súbory…</string>
     <string name="not_installed">Nenainštalované</string>
     <string name="view">Zobraziť</string>
     <string name="search">Hľadať</string>
@@ -788,6 +839,10 @@ Rozmery obrázka musia byť nasledovné:
     <string name="reorder_done">Usporiadanie uložené</string>
     <string name="reset_order">Obnoviť poradie</string>
     <string name="reset_order_done">Objednávka resetovaná</string>
+    <string name="accessibility_move_up">Presunúť hore</string>
+    <string name="accessibility_move_down">Presunúť dole</string>
+    <string name="accessibility_app_moved_announcement">%1$s presunutý na pozíciu %2$d z %3$d</string>
+    <string name="accessibility_scroll_to_top">Prejdite na začiatok zoznamu</string>
     <string name="rename">Premenovať</string>
     <string name="import_">Importovať</string>
     <string name="export">Exportovať</string>
@@ -833,8 +888,9 @@ Rozmery obrázka musia byť nasledovné:
     <string name="changelog">Zobraziť zoznam zmien</string>
     <string name="changelog_description">Pozrite si najnovšie zmeny v tejto aktualizácii</string>
     <string name="changelog_download_fail">Nepodarilo sa stiahnuť zoznam zmien: %s</string>
-    <string name="changelog_retry">Znova</string>
     <string name="changelog_empty">Zoznam zmien nie je k dispozícii</string>
+    <string name="changelog_show_older">Zobraziť staršie verzie</string>
+    <string name="changelog_older_empty">Nenašli sa žiadne staršie verzie na zobrazenie</string>
     <string name="no_network_toast">Žiadne internetové pripojenie</string>
     <string name="update_available">Je dostupná aktualizácia</string>
     <string name="ready_to_install_update">Inštalácia aktualizácie je pripravená.</string>

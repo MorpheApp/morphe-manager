@@ -11,6 +11,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -32,11 +33,12 @@ import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.ui.screen.shared.*
 
 /**
  * Section 5: Bottom action bar.
- * Sources | Search (optional, center) | Settings.
+ * Sources | Search (optional) | Sort (optional) | Settings.
  */
 @Composable
 fun HomeBottomActionBar(
@@ -45,14 +47,20 @@ fun HomeBottomActionBar(
     onSettingsClick: () -> Unit,
     isExpertModeEnabled: Boolean = false,
     showSearchButton: Boolean = false,
+    showSortButton: Boolean = false,
+    sortMode: HomeAppSortMode = HomeAppSortMode.MANUAL,
     searchActive: Boolean = false,
     onSearchClick: () -> Unit = {},
+    onSortClick: () -> Unit = {},
     onSourcesPositioned: ((Rect) -> Unit)? = null,
     onSettingsPositioned: ((Rect) -> Unit)? = null
 ) {
-    // Show labels when there are 2 buttons, or on wider screens where 3 buttons still have room
+    // Show labels when there are 2 buttons, or on wider screens where 3 buttons still have room.
+    // Four actions stay icon-only to avoid cramped labels.
     val windowSize = rememberWindowSize()
-    val showLabels = !showSearchButton || windowSize.widthSizeClass != WindowWidthSizeClass.Compact
+    val actionCount = 2 + (if (showSearchButton) 1 else 0) + (if (showSortButton) 1 else 0)
+    val showLabels = actionCount <= 2 ||
+            (actionCount <= 3 && windowSize.widthSizeClass != WindowWidthSizeClass.Compact)
 
     Box(
         modifier = modifier.fillMaxWidth(),
@@ -96,7 +104,24 @@ fun HomeBottomActionBar(
                     icon = if (searchActive) Icons.Outlined.SearchOff else Icons.Outlined.Search,
                     text = stringResource(R.string.home_search_apps),
                     showLabel = showLabels,
-                    searchStateDescription = if (searchActive) searchExpandedLabel else searchCollapsedLabel,
+                    stateDescription = if (searchActive) searchExpandedLabel else searchCollapsedLabel,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
+            // Sort button
+            AnimatedVisibility(
+                visible = showSortButton,
+                modifier = Modifier.weight(1f),
+                enter = MorpheAnimations.expandHorizFadeIn,
+                exit = MorpheAnimations.shrinkHorizFadeOut
+            ) {
+                BottomActionButton(
+                    onClick = onSortClick,
+                    icon = Icons.AutoMirrored.Outlined.Sort,
+                    text = stringResource(R.string.sort),
+                    showLabel = showLabels,
+                    stateDescription = stringResource(sortMode.labelRes),
                     modifier = Modifier.fillMaxWidth()
                 )
             }
@@ -136,7 +161,7 @@ fun BottomActionButton(
     enabled: Boolean = true,
     showProgress: Boolean = false,
     isExpertMode: Boolean = false,
-    searchStateDescription: String? = null
+    stateDescription: String? = null
 ) {
     val shape = RoundedCornerShape(MorpheDefaults.CardCornerRadius)
     val view = LocalView.current
@@ -185,8 +210,8 @@ fun BottomActionButton(
             .semantics {
                 role = Role.Button
                 this.contentDescription = contentDesc
-                if (searchStateDescription != null) {
-                    stateDescription = searchStateDescription
+                if (stateDescription != null) {
+                    this.stateDescription = stateDescription
                 }
                 if (showProgress) {
                     liveRegion = LiveRegionMode.Polite

@@ -18,7 +18,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
+      # Fork PRs cannot access repository secrets by design, so we detect them
+      # here and fall back to an unsigned debug build instead of a signed release.
+      - name: Determine if PR is from a fork
+        id: fork_check
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ] \
+             && [ "${{ github.event.pull_request.head.repo.fork }}" = "true" ]; then
+            echo "is_fork=true" >> "$GITHUB_OUTPUT"
+            echo "gradle_task=assembleDebug" >> "$GITHUB_OUTPUT"
+            echo "apk_dir=app/build/outputs/apk/debug" >> "$GITHUB_OUTPUT"
+            echo "apk_suffix=-debug" >> "$GITHUB_OUTPUT"
+            echo "PR from fork detected: building unsigned debug APK"
+          else
+            echo "is_fork=false" >> "$GITHUB_OUTPUT"
+            echo "gradle_task=assembleRelease" >> "$GITHUB_OUTPUT"
+            echo "apk_dir=app/build/outputs/apk/release" >> "$GITHUB_OUTPUT"
+            echo "apk_suffix=-release" >> "$GITHUB_OUTPUT"
+            echo "Trusted PR/dispatch: building signed release APK"
+          fi
+
       - name: Restore release keystore
+        if: steps.fork_check.outputs.is_fork == 'false'
         run: |
           echo "${{ secrets.KEYSTORE_B64 }}" | base64 -d > app/keystore.jks
           ls -la app/keystore.jks
@@ -32,7 +53,7 @@ jobs:
       - name: Cache Gradle
         uses: burrunan/gradle-cache-action@v3
 
-      - name: Build and Sign Release APK
+      - name: Build APK
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -41,16 +62,18 @@ jobs:
           _JAVA_OPTIONS: "-Djava.awt.headless=true"
         run: |
           chmod +x ./gradlew
-          ./gradlew assembleRelease --stacktrace
+          ./gradlew ${{ steps.fork_check.outputs.gradle_task }} --stacktrace
 
       - name: Rename APK
         run: |
-          for f in app/build/outputs/apk/release/*-release.apk; do
-            mv "$f" "${f/-release/}"
+          suffix="${{ steps.fork_check.outputs.apk_suffix }}"
+          for f in ${{ steps.fork_check.outputs.apk_dir }}/*${suffix}.apk; do
+            [ -e "$f" ] || continue
+            mv "$f" "${f/${suffix}/}"
           done
 
       - name: Upload APK
         uses: actions/upload-artifact@v7
         with:
           archive: false
-          path: app/build/outputs/apk/release/*.apk
+          path: ${{ steps.fork_check.outputs.apk_dir }}/*.apk

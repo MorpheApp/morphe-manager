@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.model.HomeAppItem
@@ -91,6 +92,7 @@ fun HomeScreen(
     val homeAppState by homeViewModel.homeAppState.collectAsStateWithLifecycle()
     val homeAppItems = homeAppState?.visible ?: emptyList()
     val hiddenAppItems = homeAppState?.hidden ?: emptyList()
+    val homeAppSortMode = homeAppState?.sortMode ?: HomeAppSortMode.MANUAL
     val bundlePipelineLoading = homeAppState == null
     val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
@@ -196,74 +198,72 @@ fun HomeScreen(
                 .statusBarsPadding()
         ) {
             SectionsLayout(
-                // Notifications section
-                showBundleUpdateSnackbar = homeViewModel.showBundleUpdateSnackbar,
-                snackbarStatus = homeViewModel.snackbarStatus,
-                bundleUpdateProgress = bundleUpdateProgress,
-                hasManagerUpdate = hasManagerUpdate,
-                onShowUpdateDetails = { showUpdateDetailsDialog.value = true },
-
-                // Greeting section
-                greetingMessage = greetingMessage,
-                onRefreshGreeting = onRefresh,
-
-                // Dynamic app items
-                homeAppItems = homeAppItems,
-                onAppClick = { item ->
-                    homeViewModel.handleAppClick(
-                        packageName = item.packageName,
-                        availablePatches = availablePatches,
-                        bundleUpdateInProgress = false,
-                        android11BugActive = homeViewModel.android11BugActive,
-                        installedApp = item.installedApp
-                    )
-                    item.installedApp?.let {
-                        homeViewModel.openInstalledAppInfo(it.currentPackageName)
-                    }
-                },
-                onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
-                onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.hideApp(it) } },
-                onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
-                onSaveOrder = { packageNames -> homeViewModel.saveAppOrder(packageNames) },
-                onResetOrder = { homeViewModel.resetAppOrder() },
-                onShowPatches = { item -> patchesSheetItem.value = item },
-                showGestureHint = showGestureHint,
-                onGestureHintShown = {
-                    homeViewModel.markSwipeGestureHintShown()
-                    if (onboardingState != null && onboardingState.swipeActive) {
-                        scope.launch {
-                            delay(600.milliseconds)
-                            if (onboardingState.swipeActive) homeViewModel.triggerSwipeGestureHint()
+                notifications = HomeNotificationsUi(
+                    hasManagerUpdate = hasManagerUpdate,
+                    showBundleUpdateSnackbar = homeViewModel.showBundleUpdateSnackbar,
+                    snackbarStatus = homeViewModel.snackbarStatus,
+                    bundleUpdateProgress = bundleUpdateProgress,
+                    onShowUpdateDetails = { showUpdateDetailsDialog.value = true }
+                ),
+                apps = HomeAppListUi(
+                    visible = homeAppItems,
+                    hidden = hiddenAppItems,
+                    installedAppsLoading = bundlePipelineLoading || homeViewModel.installedAppsLoading,
+                    showGestureHint = showGestureHint,
+                    sortMode = homeAppSortMode
+                ),
+                appActions = HomeAppActions(
+                    onAppClick = { item ->
+                        homeViewModel.handleAppClick(
+                            packageName = item.packageName,
+                            availablePatches = availablePatches,
+                            bundleUpdateInProgress = false,
+                            android11BugActive = homeViewModel.android11BugActive,
+                            installedApp = item.installedApp
+                        )
+                        item.installedApp?.let {
+                            homeViewModel.openInstalledAppInfo(it.currentPackageName)
                         }
-                    }
-                },
-                hiddenAppItems = hiddenAppItems,
-                installedAppsLoading = bundlePipelineLoading || homeViewModel.installedAppsLoading,
-
-                // Search
-                showSearchButton = showSearchButton,
-
-                // Other apps button
-                onOtherAppsClick = {
-                    if (availablePatches <= 0) {
-                        context.toast(sourcesLoadingText)
-                        return@SectionsLayout
-                    }
-                    homeViewModel.pendingPackageName = null
-                    homeViewModel.pendingAppName = otherAppsText
-                    homeViewModel.pendingRecommendedVersion = null
-                    homeViewModel.showFilePickerPromptDialog = true
-                },
-                showOtherAppsButton = showOtherAppsButton,
-
-                // Bottom action bar
-                onBundlesClick = { homeViewModel.showBundleManagementSheet = true },
-                onSettingsClick = onSettingsClick,
-
-                // Expert mode
-                isExpertModeEnabled = useExpertMode,
-
-                // Onboarding
+                    },
+                    onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
+                    onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.hideApp(it) } },
+                    onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
+                    onShowPatches = { item -> patchesSheetItem.value = item },
+                    onGestureHintShown = {
+                        homeViewModel.markSwipeGestureHintShown()
+                        if (onboardingState != null && onboardingState.swipeActive) {
+                            scope.launch {
+                                delay(600.milliseconds)
+                                if (onboardingState.swipeActive) homeViewModel.triggerSwipeGestureHint()
+                            }
+                        }
+                    },
+                    onSaveOrder = { packageNames -> homeViewModel.saveAppOrder(packageNames) },
+                    onResetOrder = { homeViewModel.resetAppOrder() },
+                    onSortModeChange = { mode -> homeViewModel.setAppSortMode(mode) }
+                ),
+                chromeActions = HomeChromeActions(
+                    onOtherAppsClick = {
+                        if (availablePatches <= 0) {
+                            context.toast(sourcesLoadingText)
+                        } else {
+                            homeViewModel.pendingPackageName = null
+                            homeViewModel.pendingAppName = otherAppsText
+                            homeViewModel.pendingRecommendedVersion = null
+                            homeViewModel.showFilePickerPromptDialog = true
+                        }
+                    },
+                    onBundlesClick = { homeViewModel.showBundleManagementSheet = true },
+                    onSettingsClick = onSettingsClick,
+                    onRefreshGreeting = onRefresh
+                ),
+                chromeFlags = HomeChromeFlags(
+                    showSearchButton = showSearchButton,
+                    showSortButton = showSearchButton,
+                    showOtherAppsButton = showOtherAppsButton,
+                    isExpertModeEnabled = useExpertMode
+                ),
+                greetingMessage = greetingMessage,
                 onboardingState = onboardingState
             )
         }

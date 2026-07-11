@@ -14,6 +14,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
@@ -76,7 +77,7 @@ fun HomeDialogs(
 
     // APK selection processing overlay - blocks interaction while APK is loaded/validated in background
     MorpheOverlay(visible = homeViewModel.processingApkSelection) {
-        PulsingLogoIndicator()
+        PulsingLogoWithCaption(caption = stringResource(R.string.processing_apk))
     }
 
     // Dialog 1: APK availability
@@ -387,28 +388,30 @@ fun HomeDialogs(
             totalSelectedCount = homeViewModel.expertModeTotalSelectedCount,
             totalPatchesCount = homeViewModel.expertModeTotalPatchesCount,
             hasMultipleBundles = homeViewModel.expertModeHasMultipleBundles,
-            onPatchToggle = { bundleUid, patchName ->
-                homeViewModel.togglePatchInExpertMode(bundleUid, patchName)
-            },
-            onSelectAll = { bundleUid, patches ->
-                homeViewModel.expertModeSelectAll(bundleUid, patches)
-            },
-            onDeselectAll = { bundleUid, patches ->
-                homeViewModel.expertModeDeselectAll(bundleUid, patches)
-            },
-            onResetToDefault = { bundleUid, allPatches ->
-                homeViewModel.expertModeResetToDefault(bundleUid, allPatches)
-            },
-            onRestoreSaved = { bundleUid ->
-                homeViewModel.expertModeRestoreSaved(bundleUid)
-            },
+            patchActions = ExpertPatchActions(
+                onPatchToggle = { bundleUid, patchName ->
+                    homeViewModel.togglePatchInExpertMode(bundleUid, patchName)
+                },
+                onSelectAll = { bundleUid, patches ->
+                    homeViewModel.expertModeSelectAll(bundleUid, patches)
+                },
+                onDeselectAll = { bundleUid, patches ->
+                    homeViewModel.expertModeDeselectAll(bundleUid, patches)
+                },
+                onResetToDefault = { bundleUid, allPatches ->
+                    homeViewModel.expertModeResetToDefault(bundleUid, allPatches)
+                },
+                onRestoreSaved = { bundleUid ->
+                    homeViewModel.expertModeRestoreSaved(bundleUid)
+                },
+                onOptionChange = { bundleUid, patchName, optionKey, value ->
+                    homeViewModel.updateOptionInExpertMode(bundleUid, patchName, optionKey, value)
+                },
+                onResetOptions = { bundleUid, patchName ->
+                    homeViewModel.resetOptionsInExpertMode(bundleUid, patchName)
+                }
+            ),
             savedPatches = homeViewModel.expertModeInitialPatches,
-            onOptionChange = { bundleUid, patchName, optionKey, value ->
-                homeViewModel.updateOptionInExpertMode(bundleUid, patchName, optionKey, value)
-            },
-            onResetOptions = { bundleUid, patchName ->
-                homeViewModel.resetOptionsInExpertMode(bundleUid, patchName)
-            },
             onDismiss = {
                 homeViewModel.cleanupExpertModeData()
             },
@@ -545,8 +548,20 @@ fun HomeDialogs(
 
     // Patches preview dialog (swipe-right on home app card)
     patchesItem.value?.let { item ->
-        val patchesByBundle = remember(item.packageName) {
-            homeViewModel.getPatchesForPackage(item.packageName)
+        // Cards without bundle metadata were patched via "Other apps" with universal patches -
+        // show what was actually applied instead of an empty "available" list
+        val isUniversalOnly = remember(item.packageName) {
+            item.installedApp != null &&
+                    item.packageName !in homeViewModel.bundleAppMetadataFlow.value
+        }
+        val patchesByBundle = if (isUniversalOnly) {
+            produceState(initialValue = emptyMap(), item.packageName) {
+                value = homeViewModel.getAppliedPatchesForPackage(item.packageName)
+            }.value
+        } else {
+            remember(item.packageName) {
+                homeViewModel.getPatchesForPackage(item.packageName)
+            }
         }
         val bundleNames = remember(patchesByBundle) {
             patchesByBundle.keys.associateWith { uid ->
@@ -1067,128 +1082,134 @@ private fun InstalledAppPickerDialog(
         val textColor = LocalDialogTextColor.current
         val secondaryColor = LocalDialogSecondaryTextColor.current
 
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
-            userScrollEnabled = !isLoading
-        ) {
-            stickyHeader {
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    color = MaterialTheme.colorScheme.surface
-                ) {
-                    MorpheDialogTextField(
-                        value = searchQuery.value,
-                        onValueChange = { searchQuery.value = it },
-                        placeholder = { Text(stringResource(R.string.search)) },
-                        leadingIcon = {
-                            Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
-                        },
-                        showClearButton = true,
-                        enabled = !isLoading,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 4.dp)
-                    )
-                }
-            }
-
-            if (isLoading) {
-                items(10) { index ->
-                    ShimmerInstalledAppRow()
-                    if (index < 9) {
-                        HorizontalDivider(
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f)
+        val listState = rememberLazyListState()
+        Box(modifier = Modifier.fillMaxWidth()) {
+            LazyColumn(
+                state = listState,
+                modifier = Modifier.fillMaxWidth(),
+                userScrollEnabled = !isLoading
+            ) {
+                stickyHeader {
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        color = MaterialTheme.colorScheme.surface
+                    ) {
+                        MorpheDialogTextField(
+                            value = searchQuery.value,
+                            onValueChange = { searchQuery.value = it },
+                            placeholder = { Text(stringResource(R.string.search)) },
+                            leadingIcon = {
+                                Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
+                            },
+                            showClearButton = true,
+                            enabled = !isLoading,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 4.dp)
                         )
                     }
                 }
-            } else {
-                if (filtered.isEmpty()) {
-                    item(key = "empty_state") {
-                        Box(
-                            modifier = Modifier
-                                .animateItem()
-                                .fillMaxWidth()
-                                .padding(vertical = 48.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(12.dp)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.SearchOff,
-                                    contentDescription = null,
-                                    modifier = Modifier.size(48.dp),
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                                Text(
-                                    text = stringResource(R.string.home_installed_app_picker_empty),
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    textAlign = TextAlign.Center
-                                )
-                            }
-                        }
-                    }
-                }
 
-                itemsIndexed(filtered, key = { _, item -> item.packageName }) { index, item ->
-                    Column(modifier = Modifier.animateItem()) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { onSelect(item) }
-                                .padding(horizontal = 4.dp, vertical = 10.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            AppIcon(
-                                packageInfo = item.packageInfo,
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .size(40.dp)
-                                    .clip(RoundedCornerShape(10.dp))
-                            )
-                            Column(
-                                modifier = Modifier.weight(1f),
-                                verticalArrangement = Arrangement.spacedBy(2.dp)
-                            ) {
-                                Text(
-                                    text = item.label,
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    fontWeight = FontWeight.Medium,
-                                    color = textColor,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                                Text(
-                                    text = item.packageName,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = secondaryColor,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                                Text(
-                                    text = if (item.info.versionCode != null) {
-                                        "v${item.info.version} (${item.info.versionCode})"
-                                    } else {
-                                        "v${item.info.version}"
-                                    },
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = secondaryColor.copy(alpha = 0.6f),
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                            }
-                        }
-                        if (index < filtered.size - 1) {
+                if (isLoading) {
+                    items(10) { index ->
+                        ShimmerInstalledAppRow()
+                        if (index < 9) {
                             HorizontalDivider(
                                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f)
                             )
                         }
                     }
+                } else {
+                    if (filtered.isEmpty()) {
+                        item(key = "empty_state") {
+                            Box(
+                                modifier = Modifier
+                                    .animateItem()
+                                    .fillMaxWidth()
+                                    .padding(vertical = 48.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.SearchOff,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(48.dp),
+                                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.home_installed_app_picker_empty),
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        textAlign = TextAlign.Center
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    itemsIndexed(filtered, key = { _, item -> item.packageName }) { index, item ->
+                        Column(modifier = Modifier.animateItem()) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable { onSelect(item) }
+                                    .padding(horizontal = 4.dp, vertical = 10.dp),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                AppIcon(
+                                    packageInfo = item.packageInfo,
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .size(40.dp)
+                                        .clip(RoundedCornerShape(10.dp))
+                                )
+                                Column(
+                                    modifier = Modifier.weight(1f),
+                                    verticalArrangement = Arrangement.spacedBy(2.dp)
+                                ) {
+                                    Text(
+                                        text = item.label,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        fontWeight = FontWeight.Medium,
+                                        color = textColor,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                    Text(
+                                        text = item.packageName,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = secondaryColor,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                    Text(
+                                        text = if (item.info.versionCode != null) {
+                                            "v${item.info.version} (${item.info.versionCode})"
+                                        } else {
+                                            "v${item.info.version}"
+                                        },
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = secondaryColor.copy(alpha = 0.6f),
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                }
+                            }
+                            if (index < filtered.size - 1) {
+                                HorizontalDivider(
+                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f)
+                                )
+                            }
+                        }
+                    }
                 }
             }
+
+            ScrollToTopButton(listState = listState)
         }
     }
 }

@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Sumber Anda sudah yang terbaru</string>
     <string name="home_sources_are_loading">Sumber sedang dimuat, harap tunggu…</string>
     <string name="home_search_apps">Cari aplikasi</string>
+    <string name="home_app_sort_title">Urutkan aplikasi</string>
+    <string name="home_app_sort_manual_description">Tekan lama sebuah aplikasi, lalu ketuk tombol urutkan</string>
+    <string name="home_app_sort_recommended">Urutan yang Direkomendasikan</string>
+    <string name="home_app_sort_recommended_description">Aplikasi yang sudah dipasang dan disematkan terlebih dahulu</string>
+    <string name="home_app_sort_name_asc_description">Berdasarkan abjad, A sampai Z</string>
+    <string name="home_app_sort_name_desc_description">Urutan abjad terbalik, Z sampai A</string>
+    <string name="home_app_sort_updates_first">Tambal pembaruan terlebih dahulu</string>
+    <string name="home_app_sort_updates_first_description">Aplikasi dengan lencana pembaruan terlebih dahulu, kemudian urutan rekomendasi</string>
     <string name="home_no_apps_title">Tidak ada aplikasi yang tersedia</string>
     <string name="home_no_apps_subtitle">Tambahkan sumber tambalan atau aktifkan yang sudah ada di %s</string>
     <string name="home_no_apps_search_subtitle">Tidak ada aplikasi yang cocok \"%s\"</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Aktif di malam hari dan produktif</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Sumber tambalan</string>
+    <string name="sources_sort_title">Urutkan sumber tambalan</string>
+    <string name="sources_sort_manual">Urutan manual</string>
+    <string name="sources_sort_manual_hint">Tekan lama sumber untuk mengubah urutan</string>
+    <string name="sources_sort_last_updated">Terakhir diperbarui</string>
+    <string name="sources_sort_last_updated_description">Pembaruan sumber terbaru terlebih dahulu</string>
+    <string name="sources_sort_enabled_first">Aktifkan terlebih dahulu</string>
+    <string name="sources_sort_enabled_first_description">Tampilkan sumber aktif sebelum sumber yang dinonaktifkan</string>
     <string name="sources_management_open_in_browser">Buka di peramban</string>
     <string name="sources_management_failed_to_open_url">Gagal membuka URL</string>
     <string name="sources_management_prerelease_toggle">Tambalan pra-rilis</string>
@@ -286,6 +301,9 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="home_app_info_patch_source_used">Sumber tambalan yang digunakan</string>
     <string name="home_app_info_install_type_custom_installer">Pemasang khusus</string>
     <string name="home_app_info_install_type_system_installer">Pemasang sistem</string>
+    <string name="home_app_info_install_type_play_store">Pasang dari Play Store</string>
+    <string name="home_app_info_install_type_root_play_store">Pasang Play Store melalui Root</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Pasang Play Store melalui Shizuku</string>
     <string name="home_app_info_patch_update_available">Pembaruan tambalan tersedia</string>
     <string name="home_app_info_patch_update_available_description">Versi tambalan lebih baru tersedia. Tambal ulang aplikasi Anda untuk mendapatkan pembaruan terbaru dan perbaikan</string>
     <string name="home_app_info_app_deleted_warning">Aplikasi telah dihapus</string>
@@ -296,7 +314,7 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="root_gmscore_excluded">Dukungan tambalan GmsCore dikecualikan dalam mode root</string>
     <string name="root_pre_patch_installer_title">Pilih metode pemasangan</string>
     <string name="root_pre_patch_installer_description">Perangkat Anda mempunyai akses root. Pilih cara memasang aplikasi yang ditambal</string>
-    <string name="root_pre_patch_installer_mount_title">Mount Root</string>
+    <string name="root_pre_patch_installer_mount_title">Mount root</string>
     <string name="root_pre_patch_installer_mount_description">Mount APK yang ditambal di atas aplikasi bawaan. Tidak membutuhkan GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Pemasangan Standar</string>
     <string name="root_pre_patch_installer_standard_description">Pasang sebagai aplikasi terpisah dengan dukungan GmsCore. Pemasang dapat dipilih setelah proses penambalan</string>
@@ -310,9 +328,9 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="patcher_tab_game">Permainan</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin memerlukan waktu. Harap tunggu…</string>
     <string name="patcher_installing_subtitle">Hampir siap! 🎸</string>
-    <string name="patcher_success_title">Semua Selesai! 🎉</string>
+    <string name="patcher_success_title">Selesai! 🎉</string>
     <string name="patcher_success_subtitle">Aplikasi Anda telah ditambal dan dipasang!</string>
-    <string name="patcher_complete_title">Penambalan Selesai! ✨</string>
+    <string name="patcher_complete_title">Penambalan selesai! ✨</string>
     <string name="patcher_failed_title">Oops! Terjadi kesalahan</string>
     <string name="patcher_failed_subtitle">Periksa detail kesalahan di bawah ini</string>
     <string name="patcher_failed_dialog_title">Gagal Menambal</string>
@@ -609,11 +627,13 @@ Dimensi gambar harus sebagai berikut:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Pemasang</string>
     <string name="installer_title">Pilih pemasang</string>
-    <string name="installer_internal_name">Pemasang sistem</string>
     <string name="installer_internal_description">Menggunakan pemasang paket Android</string>
+    <string name="installer_play_store_description">Menggunakan pemasang sistem dan mengatur Google Play Store sebagai sumber pemasangan</string>
+    <string name="installer_root_play_store_description">Memasang secara diam-diam dengan akses root dan mengatur Google Play Store sebagai sumber pemasangan</string>
     <string name="installer_auto_saved_name">Pemasang mount root</string>
     <string name="installer_auto_saved_description">Mount APK yang ditambal di atas aplikasi yang terpasang</string>
     <string name="installer_shizuku_description">Memasang secara senyap menggunakan Shizuku atau Sui</string>
+    <string name="installer_shizuku_play_store_description">Memasang secara diam-diam melalui Shizuku atau Sui dan mengatur Google Play Store sebagai sumber pemasangan</string>
     <string name="installer_option_none">Tidak ada pengganti</string>
     <string name="installer_none_description">Tidak ada pengganti pemasang yang dikonfigurasi</string>
     <string name="installer_status_requires_root">Memerlukan akses root</string>
@@ -634,6 +654,10 @@ Dimensi gambar harus sebagai berikut:
     <string name="installer_unavailable_message">Pemasang yang Anda pilih (%s) saat ini tidak tersedia. Anda dapat memperbaiki masalah ini dan mencobanya lagi, atau menggunakan pemasang standar untuk menggantikannya</string>
     <string name="installer_unavailable_shizuku_hint">Pastikan Shizuku berjalan dan izin diberikan ke aplikasi ini</string>
     <string name="installer_use_standard">Gunakan standar</string>
+    <string name="installer_play_store_warning_title">Pasang sebagai Play Store?</string>
+    <string name="installer_play_store_warning_message">Aplikasi yang ditambal akan dicatat sebagai terpasang dari Google Play Store. Hal ini memungkinkan layanan seperti Android Auto mengenalinya sebagai aplikasi Play Store</string>
+    <string name="installer_play_store_warning_risk">Play Store mungkin menawarkan pembaruan untuk aplikasi yang ditambal. Memasang pembaruan tersebut akan menimpa APK yang ditambal dengan versi asli dan menghapus tambalan. Jika diminta untuk memperbarui, ketuk menu tiga titik di halaman Play Store aplikasi dan pilih \"Nonaktifkan pembaruan\"</string>
+    <string name="installer_play_store_warning_continue">Saya mengerti, lanjutkan</string>
     <string name="settings_prompt_installer_on_install">Permintaan pemilihan pemasang</string>
     <string name="settings_prompt_installer_on_install_description">Menampilkan dialog pemilihan pemasang setiap kali Anda memasang aplikasi yang ditambal</string>
     <string name="settings_auto_install_with_shizuku">Pasang otomatis setelah menambal</string>
@@ -674,6 +698,14 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_system_import_manager_settings_description">Mencadangkan dan mengembalikan pengaturan Morphe Anda</string>
     <string name="settings_system_import_manager_settings_fail">Gagal mengimpor pengaturan Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Pengaturan Morphe diimpor</string>
+    <string name="settings_system_import_manager_settings_mode_title">Impor pengaturan Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Pilih cara menerapkan pengaturan dan sumber yang telah diimpor</string>
+    <string name="settings_system_import_selections_mode_title">Impor pemilihan tambalan</string>
+    <string name="settings_system_import_selections_mode_description">Pilih cara menerapkan pemilihan dan pilihan tambalan yang telah diimpor</string>
+    <string name="import_mode_replace_title">Ganti yang sudah ada</string>
+    <string name="import_mode_replace_description">Cocokkan persis dengan cadangan. Item yang hilang dari cadangan akan dihapus</string>
+    <string name="import_mode_merge_title">Gabungkan dengan yang sudah ada</string>
+    <string name="import_mode_merge_description">Tambahkan item yang hilang dari cadangan. Item yang sudah ada tetap tidak berubah</string>
     <string name="settings_system_export_manager_settings_fail">Gagal mengekspor pengaturan Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Pengaturan Morphe diekspor</string>
     <string name="settings_system_debug">Debug</string>
@@ -684,6 +716,12 @@ Dimensi gambar harus sebagai berikut:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Berkas &amp; penyimpanan</string>
     <string name="settings_system_apks_size">Ukuran total: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Ini akan menghapus secara permanen berkas APK yang disimpan yang ditampilkan di sini</string>
+    <string name="settings_system_apks_delete_selected_title">Hapus APK yang dipilih?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Ini akan menghapus secara permanen berkas APK yang dipilih</string>
+    <string name="settings_system_apks_deleted_all">APK berhasil dihapus</string>
+    <string name="settings_system_apks_export_zip_success">APK yang dipilih telah diekspor</string>
+    <string name="settings_system_apks_export_zip_failed">Gagal mengekspor APK yang dipilih</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK yang ditambal</string>
     <string name="settings_system_patched_apks_description">Mengelola berkas aplikasi yang ditambal dan disimpan</string>
@@ -691,6 +729,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_system_patched_apks_delete_title">Hapus APK yang ditambal?</string>
     <string name="settings_system_patched_apks_delete_confirm">Apakah Anda yakin ingin menghapus APK ditambal yang disimpan untuk %s?</string>
     <string name="settings_system_patched_apks_deleted">APK yang ditambal berhasil dihapus</string>
+    <string name="settings_system_patched_apks_delete_all_title">Hapus semua APK yang ditambal?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APK asli</string>
     <string name="settings_system_original_apks_description">Disimpan untuk penambalan ulang. Satu versi per aplikasi disimpan</string>
@@ -698,11 +737,13 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_system_original_apks_deleted">APK asli berhasil dihapus</string>
     <string name="settings_system_original_apks_delete_title">Hapus APK asli?</string>
     <string name="settings_system_original_apks_delete_confirm">Hapus APK asli untuk %s? Anda tidak akan dapat menambal ulang tanpa menyediakan APK baru</string>
+    <string name="settings_system_original_apks_delete_all_title">Hapus semua APK asli?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Pilihan tambalan</string>
     <string name="settings_system_patch_selections_description">Menyimpan pilihan tambalan, dipertahankan setelah mencopot aplikasinya</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Atur ulang semua pemilihan?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Atur ulang pemilihan paket?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Atur ulang paket yang dipilih?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Atur ulang pemilihan sumber?</string>
     <string name="settings_system_patch_selection_no_saved">Tidak ada pemilihan tambalan yang disimpan</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s diantara %2$s</string>
@@ -736,6 +777,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="file_picker_sort_size_asc">Ukuran (terkecil dahulu)</string>
     <string name="file_picker_sort_date_desc">Tanggal (terbaru dahulu)</string>
     <string name="file_picker_sort_date_asc">Tanggal (terlama dahulu)</string>
+    <string name="file_picker_show_hidden_files">Tampilkan berkas tersembunyi</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tentang</string>
     <string name="settings_system_share_website">Bagikan situs web</string>
@@ -770,10 +812,15 @@ Dimensi gambar harus sebagai berikut:
     <string name="skip">Lewati</string>
     <string name="clear">Bersihkan</string>
     <string name="delete">Hapus</string>
+    <string name="delete_all">Hapus semua</string>
     <string name="remove">Hapus</string>
     <string name="disable">Nonaktifkan</string>
     <string name="enable">Aktifkan</string>
     <string name="loading">Memuat…</string>
+    <string name="loading_older_releases">Memuat rilis yang lebih lama…</string>
+    <string name="creating">Membuat…</string>
+    <string name="processing_apk">Memproses APK…</string>
+    <string name="exporting_apks">Mengekspor APK…</string>
     <string name="not_installed">Tidak terpasang</string>
     <string name="view">Lihat</string>
     <string name="search">Pencarian</string>
@@ -793,6 +840,10 @@ Dimensi gambar harus sebagai berikut:
     <string name="reorder_done">Urutan disimpan</string>
     <string name="reset_order">Atur ulang urutan</string>
     <string name="reset_order_done">Urutan diatur ulang</string>
+    <string name="accessibility_move_up">Pindah ke atas</string>
+    <string name="accessibility_move_down">Pindah ke bawah</string>
+    <string name="accessibility_app_moved_announcement">%1$s dipindahkan ke posisi %2$d dari %3$d</string>
+    <string name="accessibility_scroll_to_top">Gulir ke atas daftar</string>
     <string name="rename">Ganti nama</string>
     <string name="import_">Impor</string>
     <string name="export">Ekspor</string>
@@ -838,8 +889,9 @@ Dimensi gambar harus sebagai berikut:
     <string name="changelog">Lihat catatan perubahan</string>
     <string name="changelog_description">Lihat perubahan terbaru dalam pembaruan ini</string>
     <string name="changelog_download_fail">Gagal mengunduh catatan perubahan: %s</string>
-    <string name="changelog_retry">Coba lagi</string>
     <string name="changelog_empty">Tidak ada catatan perubahan tersedia</string>
+    <string name="changelog_show_older">Tampilkan rilis yang lebih lama</string>
+    <string name="changelog_older_empty">Tidak ada rilis yang lebih lama untuk ditampilkan</string>
     <string name="no_network_toast">Tidak ada sambungan internet yang tersedia</string>
     <string name="update_available">Pembaruan tersedia</string>
     <string name="ready_to_install_update">Siap memasang pembaruan</string>

@@ -9,7 +9,8 @@
     <string name="home_app_will_be_hidden">האפליקציה הזאת תהיה מוסתרת</string>
     <string name="home_app_no_hidden">אין אפליקציות מוסתרות</string>
     <string name="home_app_hidden_apps_title">אפליקציות מוסתרות</string>
-    <string name="home_app_hidden_apps_hint">הקישו כדי להציג</string>
+    <string name="home_app_hidden_apps_hint">
+הקישו כדי להציג</string>
     <string name="android_11_bug_dialog_title">באג ב-Android 11</string>
     <string name="android_11_bug_dialog_description">ההרשאה להתקין את האפליקציה צריכה להיות מאושרת מראש כדי להימנע מבאג במערכת Android 11 שיפגע בחוויית המשתמש</string>
     <string name="deep_link_add_source_title">הוסף מקור</string>
@@ -28,6 +29,14 @@
     <string name="home_update_success_subtitle">המקורות שלך מעודכנים</string>
     <string name="home_sources_are_loading">המקורות נטענים, נא להמתין…</string>
     <string name="home_search_apps">חיפוש אפליקציות</string>
+    <string name="home_app_sort_title">מיין אפליקציות</string>
+    <string name="home_app_sort_manual_description">החזק לחיצה ארוכה על אפליקציה, ולאחר מכן הקש על כפתור הסדר מחדש</string>
+    <string name="home_app_sort_recommended">סדר מומלץ</string>
+    <string name="home_app_sort_recommended_description">אפליקציות מותקנות ומעוגנות ראשונות</string>
+    <string name="home_app_sort_name_asc_description">לפי סדר אלפביתי, מ-א\' עד ת\'</string>
+    <string name="home_app_sort_name_desc_description">הפוך אלפביתי, מ-Z ל-A</string>
+    <string name="home_app_sort_updates_first">עדכוני טלאים קודם</string>
+    <string name="home_app_sort_updates_first_description">אפליקציות עם סמני עדכון קודם, ואז לפי סדר מומלץ</string>
     <string name="home_no_apps_title">אין אפליקציות זמינות</string>
     <string name="home_no_apps_subtitle">הוסף מקור לאפליקציה או הפעל מקור קיים ב-\"%s\"</string>
     <string name="home_no_apps_search_subtitle">אף אפליקציה לא תואמת ל-\"%s\"</string>
@@ -76,6 +85,13 @@
     <string name="home_greeting_super_late_5">ליליים ופרודוקטיביים</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">מקורות תיקונים</string>
+    <string name="sources_sort_title">מקורות תיקונים</string>
+    <string name="sources_sort_manual">הזמנה ידנית</string>
+    <string name="sources_sort_manual_hint">לחץ לחיצה ארוכה על מקור כדי לשנות את הסדר</string>
+    <string name="sources_sort_last_updated">עודכן לאחרונה</string>
+    <string name="sources_sort_last_updated_description">עדכוני המקור החדשים ביותר קודם</string>
+    <string name="sources_sort_enabled_first">מופעלים קודם</string>
+    <string name="sources_sort_enabled_first_description">הצג מקורות פעילים לפני מקורות מושבתים</string>
     <string name="sources_management_open_in_browser">פתח בדפדפן</string>
     <string name="sources_management_failed_to_open_url">כישלון בפתיחת כתובת אינטרנט</string>
     <string name="sources_management_prerelease_toggle">תיקונים לפני הפצה</string>
@@ -285,6 +301,9 @@
     <string name="home_app_info_patch_source_used">החבילה הועברה</string>
     <string name="home_app_info_install_type_custom_installer">פיצ\'ח מותאם</string>
     <string name="home_app_info_install_type_system_installer">פיצ\'ח מותאם</string>
+    <string name="home_app_info_install_type_play_store">התקנה דרך חנות Play</string>
+    <string name="home_app_info_install_type_root_play_store">התקנה דרך Root של חנות Play</string>
+    <string name="home_app_info_install_type_shizuku_play_store">התקנה דרך Shizuku של חנות Play</string>
     <string name="home_app_info_patch_update_available">עדכון פיצ\'ה זמין זמין</string>
     <string name="home_app_info_patch_update_available_description">גרסה חדשה של תיקונים זמינה. תיקן את האפליקציה שלך כדי לקבל את התיקונים וההערות החדשים</string>
     <string name="home_app_info_app_deleted_warning">האפליקציה הוסרה</string>
@@ -295,7 +314,7 @@
     <string name="root_gmscore_excluded">תיקון תמיכה ב-GmsCore אינו נכלל במצב Root</string>
     <string name="root_pre_patch_installer_title">בחר את שיטת התקנה</string>
     <string name="root_pre_patch_installer_description">החלק של המכשיר שלך הוא שור. בחר כיצד תרצה להתקין את האפליקציה הפגומה</string>
-    <string name="root_pre_patch_installer_mount_title">הרכבת שור</string>
+    <string name="root_pre_patch_installer_mount_title">הרכבת שורש</string>
     <string name="root_pre_patch_installer_mount_description">מטען את קובץ ה-APK הלא-מובנה מעל האפליקציה המקורית. אין צורך ב-GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">התקנה סטנדרטית</string>
     <string name="root_pre_patch_installer_standard_description">מותקן כאפליקציה נפרדת עם תמיכת GmsCore. ניתן לבחור מתקין לאחר תיקון</string>
@@ -309,13 +328,17 @@
     <string name="patcher_tab_game">משחקים</string>
     <string name="patcher_long_step_warning">שלב זה עשוי לקחת זמן. אנא המתן…</string>
     <string name="patcher_installing_subtitle">כמעט מוכן לרוק! 🎸</string>
-    <string name="patcher_success_title">הכל מוכן! 🎉</string>
+    <string name="patcher_success_title">סיימנו! 🎉</string>
     <string name="patcher_success_subtitle">האפליקציה שלך מתוקנת ומותקנת!</string>
     <string name="patcher_complete_title">התיקון הושלם! ✨</string>
     <string name="patcher_failed_title">אופס! משהו השתבש</string>
     <string name="patcher_failed_subtitle">בדוק את פרטי השגיאה למטה</string>
     <string name="patcher_failed_dialog_title">התיקון נכשל</string>
     <string name="patcher_unknown_error">אירעה שגיאה לא ידועה</string>
+    <string name="patcher_split_step_extracting">חילוץ קבצי APK מפוצלים</string>
+    <string name="patcher_split_step_merging">מיזוג %s</string>
+    <string name="patcher_split_step_writing">כתיבת קובץ APK מאוחד</string>
+    <string name="patcher_split_step_finalizing">סיום מיזוג קובץ APK</string>
     <string name="patcher_conflict_title">התנגשות חבילה</string>
     <string name="patcher_conflict_subtitle">עליך להסיר את ההתקנה של הגרסה הקיימת</string>
     <string name="patcher_conflict_hint">האפליקציה שעברה תיקון משתמשת בתעודה שונה מזו של הגרסה המותקנת. הסרת ההתקנה תמחק את כל נתוני האפליקציה.</string>
@@ -588,11 +611,13 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Установщик</string>
     <string name="installer_title">בחר התקן</string>
-    <string name="installer_internal_name">מתקין מערכת</string>
     <string name="installer_internal_description">משתמש במתקין החבילות של Android</string>
+    <string name="installer_play_store_description">משתמש במתקין המערכת ומגדיר את חנות Google Play כמקור ההתקנה</string>
+    <string name="installer_root_play_store_description">מתקין בשקט עם הרשאות רוט ומגדיר את חנות Google Play כמקור ההתקנה</string>
     <string name="installer_auto_saved_name">מתקין מאונטר עם רוט</string>
     <string name="installer_auto_saved_description">העלה את APK המותקן על האפליקציה המותקנת</string>
     <string name="installer_shizuku_description">מתקין בשקט באמצעות Shizuku או Sui</string>
+    <string name="installer_shizuku_play_store_description">מתקין בשקט דרך Shizuku או Sui ומגדיר את חנות Google Play כמקור ההתקנה</string>
     <string name="installer_option_none">אין חלופה</string>
     <string name="installer_none_description">לא הוגדר מתקין חלופי</string>
     <string name="installer_status_requires_root">דורש גישת root</string>
@@ -613,6 +638,10 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_unavailable_message">התקן המועדף שלך (%s) אינו זמין כעת. תוכל לתקן את הבעיה ולתחל שוב, או להשתמש בהתקן סטנדרטי במקום זאת</string>
     <string name="installer_unavailable_shizuku_hint">אשר שיזוקה רץ ורשאות מובנות לאפליקציה זו</string>
     <string name="installer_use_standard">השתמש בסטנדרטי</string>
+    <string name="installer_play_store_warning_title">להתקין כ-Play Store?</string>
+    <string name="installer_play_store_warning_message">האפליקציה שעברה תיקון תירשם כמותקנת מחנות Google Play Store. זה מאפשר לשירותים כמו Android Auto לזהות אותה כאפליקציית Play Store</string>
+    <string name="installer_play_store_warning_risk">ל-Play Store עשויות להיות עדכונים עבור האפליקציה שעברה תיקון. התקנת עדכון זה תדרוס את קובץ ה-APK המתוקן עם הגרסה המקורית ותסיר את התיקונים. אם תתבקש לעדכן, הקש על תפריט שלוש הנקודות בדף של האפליקציה בחנות Play Store ובחר \"כבוי עדכונים\"</string>
+    <string name="installer_play_store_warning_continue">אני מבין, המשך</string>
     <string name="settings_prompt_installer_on_install">בקשת בחירת מתקין</string>
     <string name="settings_prompt_installer_on_install_description">מציג תיבת דו-שיח לבחירת המתקין בכל פעם שאפליקציה מתוקנת מותקנת</string>
     <string name="settings_auto_install_with_shizuku">התקנה אוטומטית לאחר תיקון</string>
@@ -653,6 +682,14 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_manager_settings_description">גיבוי ושחזור של הגדרות Morphe שלך</string>
     <string name="settings_system_import_manager_settings_fail">נכשל ייבוא הגדרות Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">הגדרות Morphe יובאו</string>
+    <string name="settings_system_import_manager_settings_mode_title">ייבוא הגדרות Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">בחר כיצד יש ליישם את ההגדרות והמקורות המיובאים</string>
+    <string name="settings_system_import_selections_mode_title">ייבוא בחירות תיקונים</string>
+    <string name="settings_system_import_selections_mode_description">בחר כיצד יש ליישם את הפריטים המיובאים ואת אפשרויות התיקון</string>
+    <string name="import_mode_replace_title">החלף קיימים</string>
+    <string name="import_mode_replace_description">התאם במדויק את הגיבוי. פריטים חסרים מהגיבוי יוסרו</string>
+    <string name="import_mode_merge_title">מזג עם קיימים</string>
+    <string name="import_mode_merge_description">הוסף פריטים חסרים מהגיבוי. פריטים קיימים יישארו ללא שינוי</string>
     <string name="settings_system_export_manager_settings_fail">נכשל לייצא הגדרות Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">הגדרות Morphe ייצאו</string>
     <string name="settings_system_debug">debug</string>
@@ -663,6 +700,12 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">קבצים ואחסון</string>
     <string name="settings_system_apks_size">גודל: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">זה ימחק לצמיתות את קבצי ה-APK השמורים המוצגים כאן</string>
+    <string name="settings_system_apks_delete_selected_title">למחוק קבצי APK שנבחרו?</string>
+    <string name="settings_system_apks_delete_selected_confirm">זה ימחק לצמיתות את קבצי ה-APK שנבחרו</string>
+    <string name="settings_system_apks_deleted_all">קבצי APK נמחקו בהצלחה</string>
+    <string name="settings_system_apks_export_zip_success">אפקים נבחרים יוצאים</string>
+    <string name="settings_system_apks_export_zip_failed">נכשל ייצוא אפקים נבחרים</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">פיצ\'ים מותאמים</string>
     <string name="settings_system_patched_apks_description">מנהל קבצי אפליקציות מתוקנים שמורים</string>
@@ -670,6 +713,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_patched_apks_delete_title">האם אתה בטוח שברצונך למחוק את הפיצ\'ה מותאם של %s? </string>
     <string name="settings_system_patched_apks_delete_confirm">פיצ\'ה מותאמה נמחק</string>
     <string name="settings_system_patched_apks_deleted">פיצ\'ה מותאמה נמחק בהצלחה</string>
+    <string name="settings_system_patched_apks_delete_all_title">למחוק את כל האפקים שעברו תיקון?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">פיצ\'ים מקוריים</string>
     <string name="settings_system_original_apks_description">שמור לתיקון מחדש. נשמרת גרסה אחת לכל אפליקציה</string>
@@ -677,11 +721,13 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_original_apks_deleted">פיצ\'ה מקורית נמחק בהצלחה</string>
     <string name="settings_system_original_apks_delete_title">האם אתה בטוח שברצונך למחוק את הפיצ\'ה המקורית של %s? </string>
     <string name="settings_system_original_apks_delete_confirm">למחוק את הקובץ APK המקורי של %s? לא תוכל לתקן מחדש ללא סיפוק APK חדש</string>
+    <string name="settings_system_original_apks_delete_all_title">למחוק את כל האפקים המקוריים?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">ניהול בחירות תיקון</string>
     <string name="settings_system_patch_selections_description">שומר בחירות תיקון, נשמר לאחר הסרה</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">להחזיר את כל הבחירות?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">להחזיר את בחירת החבילה?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">לאפס את האפקים הנבחרים?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">להחזיר את בחירת מקור?</string>
     <string name="settings_system_patch_selection_no_saved">אין בחירות שמורות</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s על %2$s</string>
@@ -715,6 +761,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="file_picker_sort_size_asc">גודל (מהקטן לגדול)</string>
     <string name="file_picker_sort_date_desc">תאריך (מהחדש לישן)</string>
     <string name="file_picker_sort_date_asc">תאריך (מהישן לחדש)</string>
+    <string name="file_picker_show_hidden_files">הצג קבצים מוסתרים</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">אודות</string>
     <string name="settings_system_share_website">שתף אתר</string>
@@ -749,10 +796,15 @@ morphe_adaptive_monochrome_custom.xml
     <string name="skip">דילוג</string>
     <string name="clear">נקה</string>
     <string name="delete">מחק</string>
+    <string name="delete_all">למחוק הכל</string>
     <string name="remove">הסר</string>
     <string name="disable">השבת</string>
     <string name="enable">Включить</string>
     <string name="loading">טוען…</string>
+    <string name="loading_older_releases">טוען גרסאות ישנות…</string>
+    <string name="creating">יוצר…</string>
+    <string name="processing_apk">מעבד APK…</string>
+    <string name="exporting_apks">מייצא APK…</string>
     <string name="not_installed">לא מותקן</string>
     <string name="view">צפה</string>
     <string name="search">חיפוש</string>
@@ -772,6 +824,10 @@ morphe_adaptive_monochrome_custom.xml
     <string name="reorder_done">הסדר נשמר</string>
     <string name="reset_order">אפס סדר</string>
     <string name="reset_order_done">איפוס ההזמנה</string>
+    <string name="accessibility_move_up">עלה</string>
+    <string name="accessibility_move_down">רד</string>
+    <string name="accessibility_app_moved_announcement">%1$s עבר למיקום %2$d מתוך %3$d</string>
+    <string name="accessibility_scroll_to_top">גלול אל ראש הרשימה</string>
     <string name="rename">שנה שם</string>
     <string name="import_">ייבוא</string>
     <string name="export">יְצוּא</string>
@@ -817,8 +873,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="changelog">הצג יומני שינויים</string>
     <string name="changelog_description">בדוק את השינויים האחרונים בסוג זה של עדכון</string>
     <string name="changelog_download_fail">שגיאה בהורדת היסטוריית שינויים: %s</string>
-    <string name="changelog_retry">נסה</string>
     <string name="changelog_empty">אין תיקון זמין זמין</string>
+    <string name="changelog_show_older">הצגת גרסאות ישנות יותר</string>
+    <string name="changelog_older_empty">אין גרסאות ישנות יותר להצגה</string>
     <string name="no_network_toast">אין חיבור אינטרנט זמין</string>
     <string name="update_available">עדכון זמין</string>
     <string name="ready_to_install_update">מוכן להתקנת עדכון</string>

@@ -235,7 +235,6 @@
     <string name="root_gmscore_excluded">پاچی پشتیوانی GmsCore لە دۆخی ڕۆت\'دا بەدەرکراوە</string>
     <string name="root_pre_patch_installer_title">شێوازی دامەزراندن هەڵبژێرە</string>
     <string name="root_pre_patch_installer_description">ئامێرەکەت دەستگەیشتنی ڕەگی هەیە. هەڵبژێرە چۆن دەتەوێت کاربەرنامە پینەکراوەکە دابمەزرێنیت</string>
-    <string name="root_pre_patch_installer_mount_title">ڕۆت بەستن</string>
     <string name="root_pre_patch_installer_standard_title">دامەزراندنی پێوانەیی</string>
     <string name="root_pre_patch_installer_hint">شێوازی دامەزراندن دیاری دەکات کام پینەی لەخۆگرتووە و ناتوانرێت بگۆڕدرێت پاش پینەکردن</string>
     <!-- Patcher Screen -->
@@ -245,12 +244,9 @@
     <string name="patcher_error_dialog_app_info">زانیاری ئەپ</string>
     <string name="patcher_long_step_warning">ئەم هەنگاوە لەوانەیە ماوەیەک بخایەنێت. تکایه چاوەڕوان بکه...</string>
     <string name="patcher_installing_subtitle">خەریکە ئامادە دەبم بۆ ڕۆک! 🎸</string>
-    <string name="patcher_success_title">هەمووی تەواو بوو! 🎉</string>
     <string name="patcher_success_subtitle">ئەپەکەت پینەکراوە و دامەزرێنراوە!</string>
-    <string name="patcher_complete_title">پینەکردن تەواو بوو! ✨</string>
     <string name="patcher_failed_title">ئۆپس! هەڵەیەک ڕوویدا</string>
     <string name="patcher_failed_subtitle">وردەکاریەکانی هەڵەکانی خوارەوە بپشکنە</string>
-    <string name="patcher_failed_dialog_title">پینەکردن سەرکەوتوو نەبوو</string>
     <string name="patcher_unknown_error">هەڵەیەکی نەناسراو ڕوویدا</string>
     <string name="patcher_conflict_title">ناکۆکی پاکەت</string>
     <string name="patcher_conflict_subtitle">پێویستە وەشانی بەردەست لاببەیت</string>

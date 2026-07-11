@@ -278,7 +278,6 @@
     <string name="root_gmscore_excluded">Поддршката за GmsCore е исклучена во root режим</string>
     <string name="root_pre_patch_installer_title">Избери метод за инсталирање</string>
     <string name="root_pre_patch_installer_description">Вашиот уред има root пристап. Изберете како сакате да ја инсталирате закрпената апликација</string>
-    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
     <string name="root_pre_patch_installer_mount_description">Монтира го закрпениот APK над сток апликацијата. Не е потребна GmsCore</string>
     <string name="root_pre_patch_installer_standard_title">Стандард Инсталирање</string>
     <string name="root_pre_patch_installer_standard_description">Инсталира тихо преку Shizuku или Sui</string>
@@ -288,16 +287,12 @@
     <string name="patcher_error_log">Дневник на грешки</string>
     <string name="patcher_error_technical">Технички детали</string>
     <string name="patcher_error_dialog_app_info">Информации за апликацијата</string>
-    <string name="patcher_tab_logs">Дневници за закрпување</string>
     <string name="patcher_tab_game">Игри</string>
     <string name="patcher_long_step_warning">Овој чекор може да потрае некое време. Ве молам, почекајте…</string>
     <string name="patcher_installing_subtitle">Почти сте спремни за акција! 🎸</string>
-    <string name="patcher_success_title">Готово! 🎉</string>
     <string name="patcher_success_subtitle">Вашата апликација е поправена и инсталирана!</string>
-    <string name="patcher_complete_title">Поправката е завршена! ✨</string>
     <string name="patcher_failed_title">Опа! Нешто се случи</string>
     <string name="patcher_failed_subtitle">Проверете ги деталите за грешката подолу</string>
-    <string name="patcher_failed_dialog_title">Поправката не успеа</string>
     <string name="patcher_unknown_error">Се случи непозната грешка</string>
     <string name="patcher_conflict_title">Конфликт на пакети</string>
     <string name="patcher_conflict_subtitle">Мора да ја деинсталирате постоечката верзија</string>
@@ -587,7 +582,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Инсталер</string>
     <string name="installer_title">Изберете инсталер</string>
-    <string name="installer_internal_name">Системски инсталер</string>
     <string name="installer_internal_description">Користи системски инсталер</string>
     <string name="installer_auto_saved_name">Инсталер за монтирање со рутување</string>
     <string name="installer_auto_saved_description">Монтира го закрпениот APK над инсталираната апликација</string>
@@ -808,7 +802,6 @@ morphe_header_custom_dark.png
     <string name="changelog">Преглед на промените</string>
     <string name="changelog_description">Проверете ги најновите промени во оваа верзија</string>
     <string name="changelog_download_fail">Не успеа да се преземе историја на промени: %s</string>
-    <string name="changelog_retry">Обиди повторно</string>
     <string name="changelog_empty">Нема достапен дневник на промени</string>
     <string name="no_network_toast">Нема достапна интернет врска</string>
     <string name="update_available">Достапна е ажурирање</string>

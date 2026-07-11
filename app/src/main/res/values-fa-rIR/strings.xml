@@ -90,7 +90,8 @@
     <string name="home_download_instructions_step1">دکمه \'%s\' رو در پایین فشار بده</string>
     <string name="home_download_instructions_step2_part1">به آخر صفحه برو و بزن</string>
     <string name="home_download_instructions_download_button_toast">دکمه دانلود رو توی وبسایتش بزن، نه اینجا ☺️</string>
-    <string name="home_download_instructions_step3">منتظر بمانید تا دانلود کامل شود، و فایل APK را &lt;b&gt;نصب نکنید&lt;/b&gt;.</string>
+    <string name="home_download_instructions_step3">منتظر بمانید تا دانلود کامل شود، و فایل APK را &lt;b&gt;نصب نکنید&lt;/b&gt;.
+</string>
     <string name="home_download_instructions_step3_mount">صبر کنید تا دانلود کامل شود، سپس &lt;b&gt;APK را نصب کنید&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">پس از پایان دانلود، به Morphe بازگردید</string>
     <string name="home_download_instructions_step4_mount">پس از نصب APK اصلی، به Morphe بازگردید</string>
@@ -116,7 +117,8 @@
 آیا مطمئن هستید که می‌خواهید ادامه دهید؟"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">تأییدنشده APK</string>
-    <string name="home_invalid_signature_message">فایل APK که برای &lt;b&gt;%s&lt;/b&gt; انتخاب کرده‌اید، با گواهی امضای موردانتظار مطابقت ندارد. ممکن است این فایل APK نسخه اصلی نباشد.</string>
+    <string name="home_invalid_signature_message">فایل APK که برای &lt;b&gt;%s&lt;/b&gt; انتخاب کرده‌اید، با گواهی امضای موردانتظار مطابقت ندارد. ممکن است این فایل APK نسخه اصلی نباشد.
+</string>
     <string name="home_invalid_signature_badge">ممکن است این APK نسخه اصلی نباشد</string>
     <string name="home_split_apk_warning_title">برنامه تقسیم‌شده شناسایی شد</string>
     <string name="home_split_apk_warning_message">"این فایل یک باندل APK است
@@ -124,11 +126,13 @@
 
 برای دریافت بهترین نتیجه، این برنامه پچ کردن یک فایل &lt;b&gt;APK کامل&lt;/b&gt; را توصیه می‌کند.
 "</string>
-    <string name="home_split_apk_warning_pick_another">انتخاب فایل APK دیگر</string>
+    <string name="home_split_apk_warning_pick_another">انتخاب فایل APK دیگر
+</string>
     <string name="home_dialog_unsupported_version_experimental_label">آزمایشی</string>
     <string name="home_dialog_unsupported_version_experimental_description">این نسخه از پشتیبانی آزمایشی برخوردار است و ممکن است ناپایدار یا ناقص باشد</string>
     <string name="morphe_experimental_app_version_dialog_title">می‌خواهید آزمایش کنید؟ 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">این نسخه از &lt;b&gt;%s&lt;/b&gt; دارای پشتیبانی آزمایشی اولیه است&lt;br/&gt;&lt;br/&gt;🔧 از آنجایی که پچ‌ها برای این نسخه در حال بهینه‌سازی هستند، احتمال بروز عملکردهای غیرمعمول یا باگ‌های ناشناخته در برنامه وجود دارد.</string>
+    <string name="morphe_experimental_app_version_dialog_message">این نسخه از &lt;b&gt;%s&lt;/b&gt; دارای پشتیبانی آزمایشی اولیه است&lt;br/&gt;&lt;br/&gt;🔧 از آنجایی که پچ‌ها برای این نسخه در حال بهینه‌سازی هستند، احتمال بروز عملکردهای غیرمعمول یا باگ‌های ناشناخته در برنامه وجود دارد.
+</string>
     <string name="home_dialog_unsupported_version_dialog_title">نسخه پشتیبانی نشده</string>
     <string name="home_dialog_unsupported_version_dialog_description">این APK نسخه پیشنهادی برنامه نیست. ادامه ممکن است باعث شود برنامه به درستی کار نکند</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">با این حال ادامه دهید</string>

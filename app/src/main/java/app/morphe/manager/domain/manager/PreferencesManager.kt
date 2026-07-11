@@ -108,6 +108,10 @@ class PreferencesManager(
     val useCustomFilePicker = booleanPreference("use_custom_file_picker", false)
     val lastFilePickerPath = stringPreference("last_file_picker_path", "")
     val filePickerSortMode = stringPreference("file_picker_sort_mode", "NAME_ASC")
+    val filePickerShowHiddenFiles = booleanPreference("file_picker_show_hidden_files", false)
+
+    // Patch source list ordering mode.
+    val sourceBundleSortMode = stringPreference("source_bundle_sort_mode", SourceBundleSortMode.MANUAL.name)
 
     /** Tracks whether the user has explicitly toggled the custom file picker preference. */
     val customFilePickerUserConfigured = booleanPreference("custom_file_picker_user_configured", false)
@@ -136,13 +140,6 @@ class PreferencesManager(
                 )
                 Log.d(tag, "Initializing process memory limit to $adaptive MB (device RAM-based)")
                 patcherProcessMemoryLimit.update(adaptive)
-            }
-
-            // TODO: remove after 1.18.0 stable - migrates expert mode users who upgraded before
-            //  custom file picker toggle existed; without this they'd get the new default (false)
-            //  even though they should have it on.
-            if (useExpertMode.get() && !customFilePickerUserConfigured.get()) {
-                useCustomFilePicker.update(true)
             }
 
             // Auto-enable prereleases for dev versions
@@ -208,6 +205,11 @@ class PreferencesManager(
         val updateCheckInterval: UpdateCheckInterval? = null,
         val customBundles: List<BundleSnapshot>? = null,
         val bytecodeModePreference: BytecodeMode? = null,
+        val filePickerSortMode: String? = null,
+        val filePickerShowHiddenFiles: Boolean? = null,
+        val useCustomFilePicker: Boolean? = null,
+        val customFilePickerUserConfigured: Boolean? = null,
+        val sourceBundleSortMode: String? = null
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -242,6 +244,11 @@ class PreferencesManager(
         useExpertMode = useExpertMode.get(),
         updateCheckInterval = updateCheckInterval.get(),
         bytecodeModePreference = bytecodeModePreference.get(),
+        filePickerSortMode = filePickerSortMode.get(),
+        filePickerShowHiddenFiles = filePickerShowHiddenFiles.get(),
+        useCustomFilePicker = useCustomFilePicker.get(),
+        customFilePickerUserConfigured = customFilePickerUserConfigured.get(),
+        sourceBundleSortMode = sourceBundleSortMode.get()
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -276,6 +283,11 @@ class PreferencesManager(
         snapshot.useExpertMode?.let { useExpertMode.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
         snapshot.bytecodeModePreference?.let { bytecodeModePreference.value = it }
+        snapshot.filePickerSortMode?.let { filePickerSortMode.value = it }
+        snapshot.filePickerShowHiddenFiles?.let { filePickerShowHiddenFiles.value = it }
+        snapshot.useCustomFilePicker?.let { useCustomFilePicker.value = it }
+        snapshot.customFilePickerUserConfigured?.let { customFilePickerUserConfigured.value = it }
+        snapshot.sourceBundleSortMode?.let { sourceBundleSortMode.value = it }
     }
 
     companion object {
@@ -293,6 +305,9 @@ object InstallerPreferenceTokens {
     const val SYSTEM = ":system:"
     const val ROOT = ":root:" // Legacy value, mapped to AUTO_SAVED.
     const val AUTO_SAVED = ":auto_saved:"
+    const val PLAY_STORE = ":play_store:"
+    const val ROOT_PLAY_STORE = ":root_play_store:"
     const val SHIZUKU = ":shizuku:"
+    const val SHIZUKU_PLAY_STORE = ":shizuku_play_store:"
     const val NONE = ":none:"
 }

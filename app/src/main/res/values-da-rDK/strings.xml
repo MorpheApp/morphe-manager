@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Dine kilder er opdaterede</string>
     <string name="home_sources_are_loading">Kilder hentes, vent venligst…</string>
     <string name="home_search_apps">Søg apps</string>
+    <string name="home_app_sort_title">Sortér apps</string>
+    <string name="home_app_sort_manual_description">Hold en app nede, og tryk derefter på omdør knappen</string>
+    <string name="home_app_sort_recommended">Anbefalet rækkefølge</string>
+    <string name="home_app_sort_recommended_description">Installerede og fastgjorte apps først</string>
+    <string name="home_app_sort_name_asc_description">Alfabetisk, A til Z</string>
+    <string name="home_app_sort_name_desc_description">Omvendt alfabetisk, fra Z til A</string>
+    <string name="home_app_sort_updates_first">Patch-opdateringer først</string>
+    <string name="home_app_sort_updates_first_description">Apps med opdateringsmærker først, derefter i anbefalet rækkefølge</string>
     <string name="home_no_apps_title">Ingen apps tilgængelige</string>
     <string name="home_no_apps_subtitle">Tilføj en patchkilde eller aktiver en eksisterende i %s</string>
     <string name="home_no_apps_search_subtitle">Ingen apps matcher \"%s\"</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Natlig og produktiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patchkilder</string>
+    <string name="sources_sort_title">Sortér patch-kilder</string>
+    <string name="sources_sort_manual">Manuel orden</string>
+    <string name="sources_sort_manual_hint">Tryk og hold på en kilde for at ændre rækkefølgen</string>
+    <string name="sources_sort_last_updated">Sidst opdateret</string>
+    <string name="sources_sort_last_updated_description">Seneste kildeopdateringer først</string>
+    <string name="sources_sort_enabled_first">Aktiveret først</string>
+    <string name="sources_sort_enabled_first_description">Vis aktive kilder før deaktiverede kilder</string>
     <string name="sources_management_open_in_browser">Åbn links i browser</string>
     <string name="sources_management_failed_to_open_url">Kunne ikke åbne URL</string>
     <string name="sources_management_prerelease_toggle">Pre-release patches</string>
@@ -285,6 +300,9 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="home_app_info_patch_source_used">Patchkilde brugt</string>
     <string name="home_app_info_install_type_custom_installer">Brugerdefineret installer</string>
     <string name="home_app_info_install_type_system_installer">Systeminstaller</string>
+    <string name="home_app_info_install_type_play_store">Installer fra Play Butik</string>
+    <string name="home_app_info_install_type_root_play_store">Root-installation fra Play Butik</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Butik-installation</string>
     <string name="home_app_info_patch_update_available">Patchopdatering tilgængelig</string>
     <string name="home_app_info_patch_update_available_description">En nyere version af patches er tilgængelig. Repatch din app for at få de seneste forbedringer og rettelser</string>
     <string name="home_app_info_app_deleted_warning">Appen blev fjernet</string>
@@ -292,10 +310,10 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="home_app_info_apk_size">APK-størrelse</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-tilstand kræver at original APK er installeret på din enhed før patching</string>
-    <string name="root_gmscore_excluded">GmsCore support patch er udelukket i root-tilstand</string>
+    <string name="root_gmscore_excluded">GmsCore-supportpatch er udeladt i root-tilstand</string>
     <string name="root_pre_patch_installer_title">Vælg installationsmetode</string>
     <string name="root_pre_patch_installer_description">Din enhed har root-adgang. Vælg hvordan du vil installere den patchede app</string>
-    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_title">Root-montering</string>
     <string name="root_pre_patch_installer_mount_description">Mount patchet APK over den originale app. Ingen GmsCore nødvendig</string>
     <string name="root_pre_patch_installer_standard_title">Standard Install</string>
     <string name="root_pre_patch_installer_standard_description">Installeres som en separat app med GmsCore-understøttelse. En installatør kan vælges efter patching</string>
@@ -305,18 +323,22 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_error_log">Fejllog</string>
     <string name="patcher_error_technical">Tekniske oplysninger</string>
     <string name="patcher_error_dialog_app_info">App-oplysninger</string>
-    <string name="patcher_tab_logs">Patcher Logs</string>
+    <string name="patcher_tab_logs">Patch-logfiler</string>
     <string name="patcher_tab_game">Spil</string>
     <string name="patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
     <string name="patcher_installing_subtitle">Næsten klar til at rocke! 🎸</string>
-    <string name="patcher_success_title">Alt færdigt! 🎉</string>
+    <string name="patcher_success_title">Færdig! 🎉</string>
     <string name="patcher_success_subtitle">Din app er patchet og installeret!</string>
-    <string name="patcher_complete_title">Patching fuldført! ✨</string>
-    <string name="patcher_failed_title">Hovsa! Noget gik galt</string>
-    <string name="patcher_failed_subtitle">Tjek fejldetaljerne herunder</string>
-    <string name="patcher_failed_dialog_title">Patching mislykkedes</string>
+    <string name="patcher_complete_title">Patch fuldført! ✨</string>
+    <string name="patcher_failed_title">Ups! Noget gik galt</string>
+    <string name="patcher_failed_subtitle">Se fejldetaljerne nedenfor</string>
+    <string name="patcher_failed_dialog_title">Patch mislykkedes</string>
     <string name="patcher_unknown_error">Ukendt fejl opstod</string>
-    <string name="patcher_conflict_title">Pakke konflikt</string>
+    <string name="patcher_split_step_extracting">Udpakker split-APK\'er</string>
+    <string name="patcher_split_step_merging">Sammenlægning af %s</string>
+    <string name="patcher_split_step_writing">Skrivning af samlet APK</string>
+    <string name="patcher_split_step_finalizing">Finalisering af samlet APK</string>
+    <string name="patcher_conflict_title">Pakkekonflikt</string>
     <string name="patcher_conflict_subtitle">Du skal afinstallere den eksisterende version</string>
     <string name="patcher_conflict_hint">Den patched app bruger et andet certifikat end den installerede version. Afinstallation vil slette alle app-data</string>
     <string name="patcher_installed_conflict_title">Afinstallation påkrævet</string>
@@ -358,25 +380,25 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="patcher_stop_confirm_title">Stop patcher</string>
     <string name="patcher_stop_confirm_description">Er du sikker på, at du vil stoppe patchprocessen?</string>
     <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Morphing af din app til noget fantastisk… 🏆</string>
+    <string name="patcher_message_1">Forvandler din app til noget fedt… 🏆</string>
     <string name="patcher_message_2">Lærer gamle apps nye tricks… 🎩</string>
     <string name="patcher_message_3">Giver din app en digital opgradering… 🔧</string>
     <string name="patcher_message_4">Brygger digital magi… ☕</string>
     <string name="patcher_message_5">Kaffepause anbefales… ☕</string>
     <string name="patcher_message_6">Kig udenfor, det er dejligt derude… 🌤️</string>
     <string name="patcher_message_7">Justerer 1-er og 0-er… 🤖</string>
-    <string name="patcher_message_8">Redder digitale spaghetti ud… 🍝</string>
+    <string name="patcher_message_8">Udreder digital spaghetti… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="patcher_message_9">Retter fejl i den upatchede app… 🪲</string>
-    <string name="patcher_message_10">Store patches er ventetiden værd… ⏳</string>
+    <string name="patcher_message_10">Gode patches er ventetiden værd… ⏳</string>
     <string name="patcher_message_11">Pudser pixels, indtil de skinner… 💎</string>
-    <string name="patcher_message_12">Bliv venligst siddende, indtil kaptajnen slukker for \"Udbedring i gang\" skiltet... 💺✈️</string>
+    <string name="patcher_message_12">Bliv venligst siddende, indtil kaptajnen slukker skiltet \"Patch i gang\"… 💺✈️</string>
     <string name="patcher_message_13">Tilbereder din patchede app, varm og frisk… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="patcher_message_14">Forhandler høfligt med bytekode… 🤝</string>
     <!-- Space flight communications callout. -->
     <string name="patcher_message_15">Alle systemer er nominelle… patche-bane er stabil… 🚀</string>
-    <string name="patcher_message_16">Presser ekstra strøm ud, som saft fra en digital citron… 🍋</string>
+    <string name="patcher_message_16">Presser ekstra kraft ud som saft af en digital citron… 🍋</string>
     <string name="patcher_message_17">Opfordrer appen til at acceptere sit nye, bedre jeg… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="patcher_message_18">Ændrer appens superposition fra upatchet til patchet… 📦⚛️</string>
@@ -393,7 +415,7 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="patched_app_save_failed_toast">Kunne ikke gemme patchet app</string>
     <string name="plugin_activity_dialog_body">Brugerinteraktion er nødvendig for at fortsætte med dette plugin</string>
     <string name="patcher_process_exit_message">Patcher-processen lukkede med koden %s</string>
-    <string name="install_app_success">Installeret succesfuldt</string>
+    <string name="install_app_success">Installeret</string>
     <string name="install_app_fail">Kunne ikke installere app: %s</string>
     <string name="save_apk_success">APK gemt</string>
     <string name="saved_app_export_failed">Kunne ikke eksportere patchet app</string>
@@ -604,11 +626,13 @@ Størrelsesformatet skal være som følger:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
     <string name="installer_title">Vælg installer</string>
-    <string name="installer_internal_name">Systeminstallationsprogram</string>
     <string name="installer_internal_description">Bruger Android-pakkeinstallationsprogrammet</string>
+    <string name="installer_play_store_description">Bruger systeminstallationsprogrammet og angiver Google Play Butik som installationskilde</string>
+    <string name="installer_root_play_store_description">Installeres lydløst med root og sætter Google Play Butik som installationskilde</string>
     <string name="installer_auto_saved_name">Root monteringsinstallationsprogram</string>
     <string name="installer_auto_saved_description">Monterer den patchede APK over den installerede app</string>
     <string name="installer_shizuku_description">Installer lydløst med Shizuku eller Sui</string>
+    <string name="installer_shizuku_play_store_description">Installeres lydløst via Shizuku eller Sui og sætter Google Play Butik som installationskilde</string>
     <string name="installer_option_none">Ingen fallback</string>
     <string name="installer_none_description">Ingen fallback-installationsprogram er konfigureret</string>
     <string name="installer_status_requires_root">Kræver root-adgang</string>
@@ -629,6 +653,10 @@ Størrelsesformatet skal være som følger:
     <string name="installer_unavailable_message">Din foretrukne installer (%s) er i øjeblikket utilgængelig. Du kan løse problemet og prøve igen, eller bruge standardinstalleren i stedet</string>
     <string name="installer_unavailable_shizuku_hint">Sørg for at Shizuku kører og at tilladelse er givet til denne app</string>
     <string name="installer_use_standard">Brug standard</string>
+    <string name="installer_play_store_warning_title">Installer som Play Butik?</string>
+    <string name="installer_play_store_warning_message">Den patched app vil blive registreret som installeret fra Google Play Butik. Dette lader tjenester som Android Auto genkende den som en Play Butik app</string>
+    <string name="installer_play_store_warning_risk">Play Butik kan tilbyde opdateringer til den patched app. Installation af den opdatering vil overskrive den patched APK med den originale version og fjerne patches. Hvis du bliver bedt om at opdatere, skal du trykke på menuen med tre prikker på appens Play Butik-side og vælge \"Slå opdateringer fra\"</string>
+    <string name="installer_play_store_warning_continue">Jeg forstår, fortsæt</string>
     <string name="settings_prompt_installer_on_install">Installatørvalgsmeddelelse</string>
     <string name="settings_prompt_installer_on_install_description">Vis installer-valgdialog hver gang du installerer en patchet app</string>
     <string name="settings_auto_install_with_shizuku">Automatisk installation efter patching</string>
@@ -669,6 +697,14 @@ Størrelsesformatet skal være som følger:
     <string name="settings_system_import_manager_settings_description">Sikkerhedskopierer og gendanner dine Morphe-indstillinger</string>
     <string name="settings_system_import_manager_settings_fail">Fejl ved import af Morphe-indstillinger: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-indstillinger importeret</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importér Morphe-indstillinger</string>
+    <string name="settings_system_import_manager_settings_mode_description">Vælg, hvordan de importerede indstillinger og kilder skal anvendes</string>
+    <string name="settings_system_import_selections_mode_title">Importér patch-valg</string>
+    <string name="settings_system_import_selections_mode_description">Vælg hvordan de importerede valg og patch-optioner skal anvendes</string>
+    <string name="import_mode_replace_title">Erstat eksisterende</string>
+    <string name="import_mode_replace_description">Match sikkerhedskopien præcist. Elementer, der mangler fra sikkerhedskopien, vil blive fjernet</string>
+    <string name="import_mode_merge_title">Flet med eksisterende</string>
+    <string name="import_mode_merge_description">Tilføj manglende elementer fra sikkerhedskopien. Eksisterende elementer bevares uændret</string>
     <string name="settings_system_export_manager_settings_fail">Fejl ved eksport af Morphe-indstillinger: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe-indstillinger eksporteret</string>
     <string name="settings_system_debug">Fejlfinding</string>
@@ -679,6 +715,12 @@ Størrelsesformatet skal være som følger:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Filer &amp; lagerplads</string>
     <string name="settings_system_apks_size">Samlet størrelse: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Dette vil permanent slette de gemte APK-filer, der vises her</string>
+    <string name="settings_system_apks_delete_selected_title">Slet valgte APK\'er?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Dette vil permanent slette de valgte APK-filer</string>
+    <string name="settings_system_apks_deleted_all">APK\'er slettet korrekt</string>
+    <string name="settings_system_apks_export_zip_success">Valgte APK\'er eksporteret</string>
+    <string name="settings_system_apks_export_zip_failed">Eksportering af valgte APK\'er mislykkedes</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patchet APK\'er</string>
     <string name="settings_system_patched_apks_description">Håndter gemte patchet APK filer</string>
@@ -686,6 +728,7 @@ Størrelsesformatet skal være som følger:
     <string name="settings_system_patched_apks_delete_title">Slet patchet APK? </string>
     <string name="settings_system_patched_apks_delete_confirm">Er du sikker på at du vil slette appen %s? </string>
     <string name="settings_system_patched_apks_deleted">App slettet</string>
+    <string name="settings_system_patched_apks_delete_all_title">Slet alle rettede APK\'er?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Originale APK-er</string>
     <string name="settings_system_original_apks_description">Gemt til repatching. Én version pr. app er bevaret</string>
@@ -693,11 +736,13 @@ Størrelsesformatet skal være som følger:
     <string name="settings_system_original_apks_deleted">Original APK slettet</string>
     <string name="settings_system_original_apks_delete_title">Slet original APK? </string>
     <string name="settings_system_original_apks_delete_confirm">Slet original APK for %s? Du vil ikke kunne repatche uden at tilbyde en ny APK</string>
+    <string name="settings_system_original_apks_delete_all_title">Slet alle originale APK\'er?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patchvalg</string>
     <string name="settings_system_patch_selections_description">Gemte patch-valg, bevares efter afinstallation</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nulstil alle valg?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Nulstil pakkevalg?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Nulstil valgte pakker?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Nulstil kildevalg?</string>
     <string name="settings_system_patch_selection_no_saved">Ingen gemte patchvalg</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s over %2$s</string>
@@ -731,6 +776,7 @@ Størrelsesformatet skal være som følger:
     <string name="file_picker_sort_size_asc">Størrelse (mindst først)</string>
     <string name="file_picker_sort_date_desc">Dato (nyeste først)</string>
     <string name="file_picker_sort_date_asc">Dato (ældste først)</string>
+    <string name="file_picker_show_hidden_files">Vis skjulte filer</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
     <string name="settings_system_share_website">Del hjemmeside</string>
@@ -765,10 +811,15 @@ Størrelsesformatet skal være som følger:
     <string name="skip">Spring over</string>
     <string name="clear">Ryd</string>
     <string name="delete">Slet</string>
+    <string name="delete_all">Slet alle</string>
     <string name="remove">Fjern</string>
     <string name="disable">Deaktivér</string>
     <string name="enable">Aktiver</string>
     <string name="loading">Indlæser…</string>
+    <string name="loading_older_releases">Indlæser ældre udgivelser…</string>
+    <string name="creating">Opretter…</string>
+    <string name="processing_apk">Behandler APK…</string>
+    <string name="exporting_apks">Eksporterer APK\'er…</string>
     <string name="not_installed">Ikke installeret</string>
     <string name="view">Vis</string>
     <string name="search">Søg</string>
@@ -788,9 +839,13 @@ Størrelsesformatet skal være som følger:
     <string name="reorder_done">Rækkefølge gemt</string>
     <string name="reset_order">Nulstil rækkefølge</string>
     <string name="reset_order_done">Ordre nulstillet</string>
+    <string name="accessibility_move_up">Flyt op</string>
+    <string name="accessibility_move_down">Flyt ned</string>
+    <string name="accessibility_app_moved_announcement">%1$s er blevet flyttet til position %2$d ud af %3$d</string>
+    <string name="accessibility_scroll_to_top">Rul til toppen af listen</string>
     <string name="rename">Omdøb</string>
     <string name="import_">Importer</string>
-    <string name="export">Eksporter</string>
+    <string name="export">Eksportér</string>
     <string name="download">Download</string>
     <string name="less">Mindre</string>
     <string name="expand">Udvid</string>
@@ -801,7 +856,7 @@ Størrelsesformatet skal være som følger:
     <string name="continue_">Fortsæt</string>
     <string name="version">Version</string>
     <string name="patch">Patch</string>
-    <string name="repatch">Genanvend patch</string>
+    <string name="repatch">Patch igen</string>
     <string name="open">Åben</string>
     <string name="mount">Monter</string>
     <string name="mounted">Monteret</string>
@@ -826,15 +881,16 @@ Størrelsesformatet skal være som følger:
     <string name="logs">Logge</string>
     <string name="sources">Kilder</string>
     <string name="installing_ellipsis">Installerer…</string>
-    <string name="mounting_ellipsis">Montering…</string>
+    <string name="mounting_ellipsis">Monterer…</string>
     <string name="unmounting_ellipsis">Afmontere…</string>
     <string name="importing_ellipsis">Importerer…</string>
     <string name="imported_successfully">Importeret med succes</string>
     <string name="changelog">Se ændringslogge</string>
     <string name="changelog_description">Se de seneste ændringer i denne opdatering</string>
     <string name="changelog_download_fail">Kunne ikke downloade ændringslog: %s</string>
-    <string name="changelog_retry">Prøv igen</string>
     <string name="changelog_empty">Ingen ændringslog tilgængelig</string>
+    <string name="changelog_show_older">Vis ældre udgivelser</string>
+    <string name="changelog_older_empty">Ingen ældre udgivelser at vise</string>
     <string name="no_network_toast">Ingen internetforbindelse tilgængelig</string>
     <string name="update_available">En opdatering er tilgængelig</string>
     <string name="ready_to_install_update">Klar til at installere opdatering</string>

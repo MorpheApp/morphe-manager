@@ -296,6 +296,18 @@ class PatcherViewModel(
         get() = _inputFile
         set(value) { _inputFile = value }
 
+    /**
+     * True when [inputFile] is owned by this VM and safe to drop after install.
+     */
+    val inputFileIsDisposable: Boolean
+        get() {
+            val file = inputFile ?: return false
+            // Files under originalApksDir back the repatch flow and outlive this VM.
+            val savedOriginalsRoot = fs.originalApksDir.absolutePath + File.separator
+            if (file.absolutePath.startsWith(savedOriginalsRoot)) return false
+            return (selectedApp as? SelectedApp.Local)?.temporary == true
+        }
+
     private var requiresSplitPreparation by savedStateHandle.saveableVar {
         initialSplitRequirement(input.selectedApp)
     }
@@ -342,8 +354,8 @@ class PatcherViewModel(
     }
 
     private val workManager = WorkManager.getInstance(app)
-    val patcherSucceeded: LiveData<Boolean?>
-        field: MutableLiveData<Boolean?> = MutableLiveData()
+    private val _patcherSucceeded = MutableLiveData<Boolean?>()
+    val patcherSucceeded: LiveData<Boolean?> = _patcherSucceeded
     private var observeWorkerJob: Job? = null
     private val handledFailureIds = mutableSetOf<UUID>()
     private var forceKeepLocalInput = false
@@ -579,7 +591,7 @@ class PatcherViewModel(
         installType: InstallType
     ): Boolean = withContext(NonCancellable + Dispatchers.IO) {
         // NonCancellable: this body must run to completion even if the caller's scope is
-        // cancelled mid-way, so the DB row never diverges from the installed APK
+        // canceled mid-way, so the DB row never diverges from the installed APK
         val installedPackageInfo = currentPackageName?.let(pm::getPackageInfo)
         val patchedPackageInfo = pm.getPackageInfo(outputFile)
         val packageInfo = patchedPackageInfo ?: installedPackageInfo
@@ -924,9 +936,9 @@ class PatcherViewModel(
                                     cleanupTemporaryInput()
                                     refreshExportMetadata()
                                     patchingCompletedAt = System.currentTimeMillis()
-                                    patchingCompletedInForeground = patcherSucceeded.hasActiveObservers()
+                                    patchingCompletedInForeground = _patcherSucceeded.hasActiveObservers()
                                     isPatching = false
-                                    patcherSucceeded.value = true
+                                    _patcherSucceeded.value = true
                                     scheduleAutoInstallIfNeeded()
                                     scheduleSuccessScreen()
                                 }
@@ -937,7 +949,7 @@ class PatcherViewModel(
                     WorkInfo.State.FAILED -> {
                         handleWorkerFailure(workInfo)
                         isPatching = false
-                        patcherSucceeded.value = false
+                        _patcherSucceeded.value = false
                         showSuccessScreen = true
                     }
 
@@ -945,9 +957,9 @@ class PatcherViewModel(
                     WorkInfo.State.ENQUEUED,
                     WorkInfo.State.BLOCKED -> {
                         isPatching = true
-                        patcherSucceeded.value = null
+                        _patcherSucceeded.value = null
                     }
-                    else -> patcherSucceeded.value = null
+                    else -> _patcherSucceeded.value = null
                 }
             }
         }
@@ -961,7 +973,10 @@ class PatcherViewModel(
 
     private fun scheduleAutoInstallIfNeeded() = viewModelScope.launch {
         if (!prefs.autoInstallWithShizuku.get()) return@launch
-        if (prefs.installerPrimary.get() != InstallerPreferenceTokens.SHIZUKU) return@launch
+        val installerPrimary = prefs.installerPrimary.get()
+        if (installerPrimary != InstallerPreferenceTokens.SHIZUKU &&
+            installerPrimary != InstallerPreferenceTokens.SHIZUKU_PLAY_STORE
+        ) return@launch
         if (prefs.promptInstallerOnInstall.get()) return@launch
         _autoInstallChannel.trySend(Unit)
     }

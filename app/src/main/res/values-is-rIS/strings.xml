@@ -28,6 +28,14 @@
     <string name="home_update_success_subtitle">Heimildir þínar eru upp til daglegt</string>
     <string name="home_sources_are_loading">Heimildir eru að hlaða, vinsamlegast bíðu…</string>
     <string name="home_search_apps">Leita að forritum</string>
+    <string name="home_app_sort_title">Raða forritum</string>
+    <string name="home_app_sort_manual_description">Langt ýta á forrit, þá smelltu á endurraða hnappinn</string>
+    <string name="home_app_sort_recommended">Rækt ráðlagður röð</string>
+    <string name="home_app_sort_recommended_description">Uppsett og fest forrit fyrst</string>
+    <string name="home_app_sort_name_asc_description">Stafrófsröð, A til Ö</string>
+    <string name="home_app_sort_name_desc_description">Omreverse alfabetískt, Z til A</string>
+    <string name="home_app_sort_updates_first">Pætingar fyrst</string>
+    <string name="home_app_sort_updates_first_description">Forrit með uppfærslumerki fyrst, svo í mæltu lagi</string>
     <string name="home_no_apps_title">Engin forrit í boði</string>
     <string name="home_no_apps_subtitle">Bættu við heimild eða virkjaðu núverandi í %s</string>
     <string name="home_no_apps_search_subtitle">Engin forrit passa við \"%s\"</string>
@@ -76,6 +84,13 @@
     <string name="home_greeting_super_late_5">Næturhægur og afkastamikill</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Heimildir breytistillinga</string>
+    <string name="sources_sort_title">Flokka uppfærslujöfn</string>
+    <string name="sources_sort_manual">Handvirkuð pöntun</string>
+    <string name="sources_sort_manual_hint">Halðu lengi á uppspretta til að raða á ný</string>
+    <string name="sources_sort_last_updated">Síðast uppfært</string>
+    <string name="sources_sort_last_updated_description">Nýjustu uppfærslur frá uppruna fyrst</string>
+    <string name="sources_sort_enabled_first">Gerilt fyrst</string>
+    <string name="sources_sort_enabled_first_description">Sýna virka uppruna á undan óvirkuppruna</string>
     <string name="sources_management_open_in_browser">Opna í vafra</string>
     <string name="sources_management_failed_to_open_url">Ekki tókst að opna vefslóð</string>
     <string name="sources_management_prerelease_toggle">For úgáfur</string>
@@ -283,6 +298,9 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="home_app_info_patch_source_used">Heimild breytinga</string>
     <string name="home_app_info_install_type_custom_installer">Sérstakur uppsetjari</string>
     <string name="home_app_info_install_type_system_installer">Kerfisuppsetjari</string>
+    <string name="home_app_info_install_type_play_store">Play Store uppsetning</string>
+    <string name="home_app_info_install_type_root_play_store">Root Play Store uppsetning</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store uppsetning</string>
     <string name="home_app_info_patch_update_available">Breytistilling er til staðar</string>
     <string name="home_app_info_patch_update_available_description">Nýrri útgáfa af patta er í boði. Endurpakkalaðu þitt app til að fá nýjustu endurbætur og lagfæringar</string>
     <string name="home_app_info_app_deleted_warning">App var afhent</string>
@@ -293,7 +311,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="root_gmscore_excluded">GmsCore stuðningsplagg er útilokað í root stillingu</string>
     <string name="root_pre_patch_installer_title">Velje uppsetningaraðferð</string>
     <string name="root_pre_patch_installer_description">Uppsetningaraðferðin ákvarðar hvaða pakkningar eru teknar með og ekki er hægt að breyta stillingum eftir pökkun</string>
-    <string name="root_pre_patch_installer_mount_title">Uppsetning á róttæki</string>
+    <string name="root_pre_patch_installer_mount_title">Rotfesting</string>
     <string name="root_pre_patch_installer_mount_description">Mountar breytta APK yfir stocks app. Engin GmsCore þarf</string>
     <string name="root_pre_patch_installer_standard_title">Staðal uppsetning</string>
     <string name="root_pre_patch_installer_standard_description">Installar hljóðlega með Shizuku eða Sui</string>
@@ -303,17 +321,21 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="patcher_error_log">Villulog</string>
     <string name="patcher_error_technical">Tæknilegar upplýsingar</string>
     <string name="patcher_error_dialog_app_info">Upplýsingar um app</string>
-    <string name="patcher_tab_logs">Patcher Logs</string>
+    <string name="patcher_tab_logs">Patcher skrá</string>
     <string name="patcher_tab_game">Leikir</string>
     <string name="patcher_long_step_warning">Þessi skref gætu tekið ákveðinn tíma. Vinsamlegast bíðu…</string>
     <string name="patcher_installing_subtitle">Næstum búið! 🎸</string>
-    <string name="patcher_success_title">Allt klárt! 🎉</string>
+    <string name="patcher_success_title">Allt klárað! 🎉</string>
     <string name="patcher_success_subtitle">Appið þitt er breytt og uppsett!</string>
-    <string name="patcher_complete_title">Breytistilling lokið! ✨</string>
+    <string name="patcher_complete_title">Viðgerð lokið! ✨</string>
     <string name="patcher_failed_title">Afsakið! Eitthvað fór úrskeikur</string>
     <string name="patcher_failed_subtitle">Vinsamlegast skoðaðu villuupplýsingarnar hér að neðan</string>
-    <string name="patcher_failed_dialog_title">Breytistilling mistóksst</string>
+    <string name="patcher_failed_dialog_title">Viðgerðin mislukkaðist</string>
     <string name="patcher_unknown_error">Óþekkt villa kom upp</string>
+    <string name="patcher_split_step_extracting">Útdráttur af flíknum APK</string>
+    <string name="patcher_split_step_merging">Samruni %s</string>
+    <string name="patcher_split_step_writing">Ritun samrunins APK</string>
+    <string name="patcher_split_step_finalizing">Lokun samrunins APK</string>
     <string name="patcher_conflict_title">Pakkaárekstur</string>
     <string name="patcher_conflict_subtitle">Þú þarft að afinstallera núverandi útgáfuna</string>
     <string name="patcher_conflict_hint">Breytt app notar mismunandi vottorð og installaðri útgáfu. Afnám eyðir öllum forritsgögnum</string>
@@ -599,11 +621,13 @@ Myndastærðin verður að vera sem hér segir:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Uppsetjari</string>
     <string name="installer_title">Velji uppsetjara</string>
-    <string name="installer_internal_name">Kerfisuppsetjari</string>
     <string name="installer_internal_description">Installerar hljóðlega með Shizuku eða Sui</string>
+    <string name="installer_play_store_description">Notar kerfiuppsetninguna og stillir Google Play Store sem uppsprettu</string>
+    <string name="installer_root_play_store_description">Uppsetja með rótaraðgangi og stillir Google Play Store sem uppsetningartöku</string>
     <string name="installer_auto_saved_name">Rooted festa uppsetjari</string>
     <string name="installer_auto_saved_description">Uppsetta pattaða APK yfir uppsett app</string>
     <string name="installer_shizuku_description">Installar biðjaðrun</string>
+    <string name="installer_shizuku_play_store_description">Uppsetja þögnrænlega í gegnum Shizuku eða Sui og stillir Google Play Store sem uppsetningartöku</string>
     <string name="installer_option_none">Engin varabreyting</string>
     <string name="installer_none_description">Enginn varabreytingaruppsetjari er stilltur</string>
     <string name="installer_status_requires_root">Krefst root aðgangs</string>
@@ -624,6 +648,10 @@ Myndastærðin verður að vera sem hér segir:
     <string name="installer_unavailable_message">Þín preferred uppsetningaraðferð (%s) er í augnablikinu óstarfbær. Þú getur lagað vandamálið og reyndu aftur, eða notað venjulega uppsetjara stað þess</string>
     <string name="installer_unavailable_shizuku_hint">Gakktu úr skugga um að Shizuku er að ganga og leyfis er veitt þessu app</string>
     <string name="installer_use_standard">Nota staðal</string>
+    <string name="installer_play_store_warning_title">Uppsetja sem Play Store?</string>
+    <string name="installer_play_store_warning_message">Breytta appið verður skráð sem uppsett frá Google Play Store. Þetta gerir þjónustum eins og Android Auto kleift að þekkja það sem Play Store app</string>
+    <string name="installer_play_store_warning_risk">Play Store gæti boðið uppfærslur fyrir breytta appið. Það að setja upp þá uppfærslu mun yfirskrifa breytta APK skrána með upprunalegu útgáfuna og fjarlægja breytingarnar. Ef þú ert beðinn um að uppfæra skaltu banka á þriggja-punkta valmyndina á Play Store síðu appsins og velja \"Slökktu á uppfærslum\"</string>
+    <string name="installer_play_store_warning_continue">Ég skil, halda áfram</string>
     <string name="settings_prompt_installer_on_install">Bestaður heimildurum í hverjum breyttu app installu</string>
     <string name="settings_prompt_installer_on_install_description">Mælt er með því að nota heimildir sem þú treystir</string>
     <string name="settings_auto_install_with_shizuku">Sjálfvirkt uppsetning eftir breytingar</string>
@@ -664,6 +692,14 @@ Myndastærðin verður að vera sem hér segir:
     <string name="settings_system_import_manager_settings_description">Backup og endurheimta Morphe áhorf</string>
     <string name="settings_system_import_manager_settings_fail">Ekki tókst að flytja inn Morphe stillingar: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe stillingar fluttar inn</string>
+    <string name="settings_system_import_manager_settings_mode_title">Innflutning stillinga Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Veldu hvernig innfluttu stillingar og heimildir á að nota</string>
+    <string name="settings_system_import_selections_mode_title">Innflutning valda á plottum</string>
+    <string name="settings_system_import_selections_mode_description">Veldu hvernig innflutt val og breytingar á stillingum eiga að vera notaðar</string>
+    <string name="import_mode_replace_title">Skipta út núverandi</string>
+    <string name="import_mode_replace_description">Samsvarinnu nákvæmlega við afritið. Hlutir sem vantar úr afritinu verða fjarlægðir</string>
+    <string name="import_mode_merge_title">Samfella við núverandi</string>
+    <string name="import_mode_merge_description">Bæta við vöntunum hlutum úr afritinu. Núverandi hlutir eru óbreyttir</string>
     <string name="settings_system_export_manager_settings_fail">Ekki tókst að flytja út Morphe stillingar: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe stillingar fluttar út</string>
     <string name="settings_system_debug">Debug</string>
@@ -674,6 +710,12 @@ Myndastærðin verður að vera sem hér segir:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Skrár &amp; Geymsla</string>
     <string name="settings_system_apks_size">Heildarstærð: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Þetta mun eyða vistuðum APK skráum hér sýndum á varanlegan hátt</string>
+    <string name="settings_system_apks_delete_selected_title">Eyða valdum APK skráum?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Þetta mun eyða valdum APK skráum á varanlegan hátt</string>
+    <string name="settings_system_apks_deleted_all">APK skrárnar voru eyðdar árangursríkt</string>
+    <string name="settings_system_apks_export_zip_success">Valdir APK-skrá</string>
+    <string name="settings_system_apks_export_zip_failed">Útflutningur valdra APK-skráa tókst ekki</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Pattað APK</string>
     <string name="settings_system_patched_apks_description">Stjórnar geymda breyttum forritsskráum</string>
@@ -681,6 +723,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="settings_system_patched_apks_delete_title">Eyða pattaðri APK?</string>
     <string name="settings_system_patched_apks_delete_confirm">Ertu viss um að þú viljir eyða pattaðri APK-skrá fyrir %s?</string>
     <string name="settings_system_patched_apks_deleted">Pattað APK skrá eytt með árangri</string>
+    <string name="settings_system_patched_apks_delete_all_title">Eyða öllum breyttu APK-skrám?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Upprunalegar APK-skrár</string>
     <string name="settings_system_original_apks_description">Geymt fyrir endurbreytingu. Ein útgáfa á app er geymd</string>
@@ -688,11 +731,13 @@ Myndastærðin verður að vera sem hér segir:
     <string name="settings_system_original_apks_deleted">Upprunaleg APK skrá eytt með árangri</string>
     <string name="settings_system_original_apks_delete_title">Eyða upprunalegri APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Eyða upprunalegu APK skrá fyrir %s? Þú muntu ekki geta endurpakkað án þess að veita nýja APK</string>
+    <string name="settings_system_original_apks_delete_all_title">Eyða öllum upprunalegu APK-skrám?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Pökkunaval</string>
     <string name="settings_system_patch_selections_description">Geymt breytingaval, haldinn eftir afnám</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Endurstilla allar valkosti?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Endurstilla pakkningaval?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Endurstilla valda pakkana?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Endurstilla gjafaval?</string>
     <string name="settings_system_patch_selection_no_saved">Engin geymd pakkningaval</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s í %2$s</string>
@@ -726,6 +771,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="file_picker_sort_size_asc">Stærð (minnst fyrst)</string>
     <string name="file_picker_sort_date_desc">Dagsetning (nýjasta fyrst)</string>
     <string name="file_picker_sort_date_asc">Dagsetning (fljótfyrst)</string>
+    <string name="file_picker_show_hidden_files">Sýna falin skrá</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Um</string>
     <string name="settings_system_share_website">Deila vefsíðu</string>
@@ -760,10 +806,15 @@ Myndastærðin verður að vera sem hér segir:
     <string name="skip">Sleppa</string>
     <string name="clear">Hreinsa</string>
     <string name="delete">Eyða</string>
+    <string name="delete_all">Eyða öllu</string>
     <string name="remove">Fjarlægja</string>
     <string name="disable">Gerðu óvirkt</string>
     <string name="enable">Gerðu virkt</string>
     <string name="loading">Hlaða…</string>
+    <string name="loading_older_releases">Hlaða eldri útgáfur…</string>
+    <string name="creating">Búa til…</string>
+    <string name="processing_apk">Vinnsla við APK…</string>
+    <string name="exporting_apks">Flytja út APK-skrár…</string>
     <string name="not_installed">Ekki uppsett</string>
     <string name="view">Skoða</string>
     <string name="search">Leita</string>
@@ -783,6 +834,10 @@ Myndastærðin verður að vera sem hér segir:
     <string name="reorder_done">Röð vistuð</string>
     <string name="reset_order">Endurstilla röð</string>
     <string name="reset_order_done">Pöntun endurstillt</string>
+    <string name="accessibility_move_up">Færa upp</string>
+    <string name="accessibility_move_down">Færa niður</string>
+    <string name="accessibility_app_moved_announcement">%1$s fært á stöðu %2$d af %3$d</string>
+    <string name="accessibility_scroll_to_top">Skrúllaðu efst á lista</string>
     <string name="rename">Endurnefna</string>
     <string name="import_">Flytja</string>
     <string name="export">Flytja út</string>
@@ -828,8 +883,9 @@ Myndastærðin verður að vera sem hér segir:
     <string name="changelog">Skoða breytingaskrá</string>
     <string name="changelog_description">Skoða nýjustu breytingarnar í þessari uppfærslu</string>
     <string name="changelog_download_fail">Ekki tókst að sækja breytingaskrá: %s</string>
-    <string name="changelog_retry">Reyna aftur</string>
     <string name="changelog_empty">Engin breytingaskrá í boði</string>
+    <string name="changelog_show_older">Sýna eldri útgáfur</string>
+    <string name="changelog_older_empty">Engar eldri útgáfur til sýnis</string>
     <string name="no_network_toast">Engin nettenging í boði</string>
     <string name="update_available">Uppfærsla er til staðar</string>
     <string name="ready_to_install_update">Tilbúið til að setja upp uppfærslu</string>

@@ -170,6 +170,13 @@ sealed class RemotePatchBundle(
         }
     }
 
+    /**
+     * Full stable history from `main`, ignoring `stopAfterFirstStable`. Older history
+     * consists of stable releases by definition, so we always fetch from `main`.
+     * Cached separately from [fetchChangelogEntries] with the `|full` suffix.
+     */
+    open suspend fun fetchFullChangelogEntries(): List<ChangelogEntry> = emptyList()
+
     fun clearChangelogCache() {
         val assetKey = "$uid|$endpoint"
         changelogCacheMutex.tryLock()
@@ -383,6 +390,15 @@ class JsonPatchBundle(
         }
     }
 
+    override suspend fun fetchFullChangelogEntries(): List<ChangelogEntry> {
+        val api: MorpheAPI by inject()
+        val stableEndpoint = switchBranchInUrl(endpoint, BRANCH_STABLE)
+        val changelogUrl = api.changelogUrlFromBundleEndpoint(stableEndpoint) ?: return emptyList()
+        return fetchAndCacheEntries("$uid|$changelogUrl|full", sinceVersion = null) {
+            api.fetchChangelogFromUrl(changelogUrl, stopAfterFirstStable = false)
+        }
+    }
+
     override fun copy(
         error: Throwable?,
         name: String,
@@ -465,6 +481,11 @@ class APIPatchBundle(
             api.fetchPatchesChangelog(branch, stopAfterFirstStable = usePrerelease)
         }
     }
+
+    override suspend fun fetchFullChangelogEntries(): List<ChangelogEntry> =
+        fetchAndCacheEntries("$uid|$BRANCH_STABLE|full", sinceVersion = null) {
+            api.fetchPatchesChangelog(BRANCH_STABLE, stopAfterFirstStable = false)
+        }
 
     override fun copy(
         error: Throwable?,

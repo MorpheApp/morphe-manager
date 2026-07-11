@@ -290,7 +290,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="root_gmscore_excluded">Tampalan sokongan GmsCore dikecualikan dalam mod root</string>
     <string name="root_pre_patch_installer_title">Pilih kaedah pemasangan</string>
     <string name="root_pre_patch_installer_description">Peranti anda mempunyai akses root. Pilih cara anda ingin memasang aplikasi yang ditampal</string>
-    <string name="root_pre_patch_installer_mount_title">Mount Root</string>
     <string name="root_pre_patch_installer_standard_title">Pemasangan Standard</string>
     <string name="root_pre_patch_installer_standard_description">Pasang sebagai aplikasi berasingan dengan sokongan GmsCore. Pemasang boleh dipilih selepas tampalan dibuat</string>
     <string name="root_pre_patch_installer_hint">Kaedah pemasangan menentukan tampalan mana yang disertakan dan tidak boleh diubah selepas tampalan</string>
@@ -299,16 +298,12 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patcher_error_log">Log ralat</string>
     <string name="patcher_error_technical">Perincian teknikal</string>
     <string name="patcher_error_dialog_app_info">Maklumat aplikasi</string>
-    <string name="patcher_tab_logs">Log penampal</string>
     <string name="patcher_tab_game">Permainan</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin mengambil sedikit masa. Sila tunggu…</string>
     <string name="patcher_installing_subtitle">Hampir bersedia untuk beraksi! 🎸</string>
-    <string name="patcher_success_title">Semua Selesai! 🎉</string>
     <string name="patcher_success_subtitle">Aplikasi anda ditampal dan dipasang!</string>
-    <string name="patcher_complete_title">Tampalan Selesai! ✨</string>
     <string name="patcher_failed_title">Oops! Ada sesuatu yang tidak kena</string>
     <string name="patcher_failed_subtitle">Semak butiran ralat di bawah</string>
-    <string name="patcher_failed_dialog_title">Tampalan Gagal</string>
     <string name="patcher_unknown_error">Ralat yang tidak diketahui berlaku</string>
     <string name="patcher_conflict_title">Konflik pakej</string>
     <string name="patcher_conflict_subtitle">Anda perlu menyahpasang versi sedia ada</string>
@@ -470,6 +465,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktifkan Mod Pakar?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mod Pakar memberikan kawalan yang lebih besar ke atas cara tampalan digunakan, tetapi tetapan yang salah konfigurasi dalam Mod Pakar boleh mengakibatkan aplikasi yang tidak berfungsi</string>
     <!-- Bytecode mode -->
+    <string name="settings_advanced_bytecode_mode_dialog_description">Mengawal cara bytecode diproses semasa patching. Mempengaruhi kelajuan patching, penggunaan memori, dan saiz APK output</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Diperlukan untuk sumber permintaan sedekah</string>
@@ -557,7 +553,6 @@ Dimensi gambar mestilah seperti berikut:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Pemasang</string>
     <string name="installer_title">Pilih pemasang</string>
-    <string name="installer_internal_name">Pemasang sistem</string>
     <string name="installer_auto_saved_name">Pemasang pemasang berakar</string>
     <string name="installer_auto_saved_description">Memasang APK yang ditampal di atas aplikasi yang dipasang</string>
     <string name="installer_option_none">Tiada kejatuhan</string>
@@ -610,6 +605,7 @@ Dimensi gambar mestilah seperti berikut:
     <string name="settings_system_export_debug_logs_export_success">Log dieksport</string>
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_apks_size">Saiz keseluruhan: %s</string>
+    <string name="settings_system_apks_deleted_all">APKs telah padam dengan jayanya</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK yang ditampal</string>
     <string name="settings_system_patched_apks_empty">Tiada APK yang ditampal disimpan lagi</string>
@@ -702,6 +698,7 @@ Dimensi gambar mestilah seperti berikut:
     <string name="mounted">Dipasang</string>
     <string name="unmounted">Dibebaskan pemasangan</string>
     <string name="remount">Pasang semula</string>
+    <string name="share">Kongsi</string>
     <string name="install">Pasang</string>
     <string name="installed">Dipasang</string>
     <string name="reinstall">Pasang semula</string>
@@ -721,7 +718,6 @@ Dimensi gambar mestilah seperti berikut:
     <string name="changelog">Lihat log perubahan</string>
     <string name="changelog_description">Lihat perubahan terkini dalam kemas kini ini</string>
     <string name="changelog_download_fail">Gagal untuk memuat turun log perubahan: %s</string>
-    <string name="changelog_retry">Cuba semula</string>
     <string name="changelog_empty">Tiada log perubahan tersedia</string>
     <string name="no_network_toast">Tiada sambungan internet tersedia</string>
     <string name="update_available">Kemas kini tersedia</string>
@@ -742,4 +738,5 @@ Adakah anda masih ingin meneruskan?"</string>
     <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->
     <!-- Tour prompt dialog shown after first successful patch install -->
+    <string name="onboarding_restart_desc">Ikuti lawatan terpandu bagi ciri-ciri utama Morphe\'s</string>
 </resources>

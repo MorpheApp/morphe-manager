@@ -3,9 +3,10 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Altre app</string>
     <string name="home_not_patched_yet">Non ancora patchato</string>
-    <string name="home_no_patches_available">Nessuna patch disponibile</string>
+    <string name="home_no_patches_available">
+Nessuna patch disponibile</string>
     <string name="home_app_hide_title">Nascondere questa app?</string>
-    <string name="home_app_hide_message">Questa app sarà nascosta dalla schermata principale. Potrai ripristinarla in seguito dalle app nascoste utilizzando il pulsante in fondo alla lista.</string>
+    <string name="home_app_hide_message">Questa app verrà nascosta dalla schermata iniziale. Puoi ripristinarla in seguito dalle app nascoste utilizzando il pulsante in fondo all\'elenco</string>
     <string name="home_app_will_be_hidden">Questa app verrà nascosta</string>
     <string name="home_app_no_hidden">Nessuna app nascosta</string>
     <string name="home_app_hidden_apps_title">App nascoste</string>
@@ -21,15 +22,23 @@
     <string name="home_update_error">Aggiornamento non riuscito</string>
     <string name="home_update_error_subtitle">Verifica la tua connessione internet e riprova</string>
     <string name="home_update_skipped_metered">Gli aggiornamenti sono stati saltati</string>
-    <string name="home_update_skipped_metered_subtitle">I dati mobili sono attivi</string>
+    <string name="home_update_skipped_metered_subtitle">Dati mobili attivi</string>
     <string name="home_updating_sources">Aggiornamento delle fonti in corso…</string>
     <string name="home_update_progress_format">%s elaborato</string>
     <string name="home_update_success">Aggiornamento delle fonti completato</string>
     <string name="home_update_success_subtitle">Le tue fonti sono aggiornate</string>
     <string name="home_sources_are_loading">Le fonti si stanno caricando, si prega di attendere…</string>
     <string name="home_search_apps">Cerca app</string>
+    <string name="home_app_sort_title">Ordina app</string>
+    <string name="home_app_sort_manual_description">Tieni premuta un\'app, quindi tocca il pulsante di riordino</string>
+    <string name="home_app_sort_recommended">Ordine consigliato</string>
+    <string name="home_app_sort_recommended_description">App installate e fissate per prime</string>
+    <string name="home_app_sort_name_asc_description">Alfabetico, da A a Z</string>
+    <string name="home_app_sort_name_desc_description">Alfabetico inverso, da Z ad A</string>
+    <string name="home_app_sort_updates_first">Aggiornamenti patch per primi</string>
+    <string name="home_app_sort_updates_first_description">App con badge di aggiornamento per prime, poi in ordine consigliato</string>
     <string name="home_no_apps_title">Nessuna app disponibile</string>
-    <string name="home_no_apps_subtitle">Aggiungi una sorgente delle patch o abilita una esistente in %s</string>
+    <string name="home_no_apps_subtitle">Aggiungi una sorgente delle patch o abilitane una esistente in %s</string>
     <string name="home_no_apps_search_subtitle">Nessuna app corrisponde a \"%s\"</string>
     <string name="home_all_apps_hidden_title">Tutte le app sono nascoste</string>
     <string name="home_all_apps_hidden_subtitle">Hai nascosto tutte le app dalla schermata Home</string>
@@ -76,6 +85,13 @@
     <string name="home_greeting_super_late_5">Notturno e produttivo/a</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fonti delle patch</string>
+    <string name="sources_sort_title">Ordina fonti patch</string>
+    <string name="sources_sort_manual">Ordine manuale</string>
+    <string name="sources_sort_manual_hint">Tieni premuto un elemento per riordinarlo</string>
+    <string name="sources_sort_last_updated">Ultimo aggiornamento</string>
+    <string name="sources_sort_last_updated_description">Aggiornamenti della fonte più recenti per primi</string>
+    <string name="sources_sort_enabled_first">Abilitate per prime</string>
+    <string name="sources_sort_enabled_first_description">Mostra fonti attive prima di quelle disabilitate</string>
     <string name="sources_management_open_in_browser">Apri nel browser</string>
     <string name="sources_management_failed_to_open_url">Impossibile aprire l’URL</string>
     <string name="sources_management_prerelease_toggle">Patch di pre-rilascio</string>
@@ -85,8 +101,8 @@
     <string name="sources_management_already_exists">Questa fonte è già stata aggiunta</string>
     <string name="sources_management_invalid_url">URL di origine non valido. Controlla l\'indirizzo e riprova</string>
     <string name="sources_management_metadata_unavailable">Metadati non disponibili</string>
-    <string name="sources_management_metadata_unavailable_hint">Il file dei metadati remoto non è disponibile. L\'applicazione della patch con il bundle installato funziona ancora, ma l\'aggiornamento automatico è disabilitato per questa sorgente</string>
-    <string name="sources_management_metadata_unavailable_hint_missing">Impossibile scaricare il bundle di patch. L\'URL di origine potrebbe essere errato oppure il file non esiste</string>
+    <string name="sources_management_metadata_unavailable_hint">Il file dei metadati remoti non è disponibile. L\'applicazione della patch con il bundle installato funziona ancora, ma l\'aggiornamento automatico è disabilitato per questa sorgente</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Impossibile scaricare il bundle di patch. L\'URL di origine potrebbe essere errato oppure il file inesistente </string>
     <string name="sources_management_source_enabled">Sorgente abilitata</string>
     <string name="sources_management_source_disabled">Sorgente disabilitata</string>
     <string name="sources_management_source_updating">Aggiornamento sorgente</string>
@@ -97,7 +113,7 @@
     <string name="sources_dialog_missing_error">Impossibile aggiornare questa fonte delle patch</string>
     <string name="sources_dialog_view_any_version">Qualsiasi versione</string>
     <string name="sources_dialog_view_any_package">Qualsiasi pacchetto</string>
-    <string name="sources_dialog_add_source">Aggiungi la fonte delle patch</string>
+    <string name="sources_dialog_add_source">Aggiungi fonte delle patch</string>
     <string name="sources_dialog_delete_confirm_message">Elimina la fonte \"%s\"? Questa operazione non può essere annullata</string>
     <string name="sources_dialog_remote">A distanza</string>
     <string name="sources_dialog_remote_url">URL della fonte</string>
@@ -285,6 +301,9 @@ Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio:
     <string name="home_app_info_patch_source_used">Fonte delle patch utilizzata</string>
     <string name="home_app_info_install_type_custom_installer">Installatore personalizzato</string>
     <string name="home_app_info_install_type_system_installer">Installatore di sistema</string>
+    <string name="home_app_info_install_type_play_store">Installa da Play Store</string>
+    <string name="home_app_info_install_type_root_play_store">Installa da Play Store (root)</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Installa da Play Store (Shizuku)</string>
     <string name="home_app_info_patch_update_available">Aggiornamento delle patch disponibile</string>
     <string name="home_app_info_patch_update_available_description">È disponibile una nuova versione delle patch. Ripatcha la tua app per ottenere gli ultimi miglioramenti e correttivi</string>
     <string name="home_app_info_app_deleted_warning">L\'app è stata disinstallata</string>
@@ -305,7 +324,7 @@ Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio:
     <string name="patcher_error_log">Log dell\'errore</string>
     <string name="patcher_error_technical">Dettagli tecnici</string>
     <string name="patcher_error_dialog_app_info">Informazioni sull\'app</string>
-    <string name="patcher_tab_logs">Log del Patcher</string>
+    <string name="patcher_tab_logs">Log del patcher</string>
     <string name="patcher_tab_game">Giochi</string>
     <string name="patcher_long_step_warning">Questo passaggio potrebbe richiedere un po\'  di tempo. Si prega di attendere…</string>
     <string name="patcher_installing_subtitle">Quasi pronti a partire! 🎸</string>
@@ -314,8 +333,12 @@ Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio:
     <string name="patcher_complete_title">Patching completato! ✨</string>
     <string name="patcher_failed_title">Ops! Qualcosa è andato storto</string>
     <string name="patcher_failed_subtitle">Controlla i dettagli dell\'errore qui sotto</string>
-    <string name="patcher_failed_dialog_title">Patching non riuscito</string>
+    <string name="patcher_failed_dialog_title">Patching fallito</string>
     <string name="patcher_unknown_error">Si è verificato un errore sconosciuto</string>
+    <string name="patcher_split_step_extracting">Estrazione degli APK divisi</string>
+    <string name="patcher_split_step_merging">Unione %s</string>
+    <string name="patcher_split_step_writing">Scrittura APK unito</string>
+    <string name="patcher_split_step_finalizing">Finalizzazione APK unito</string>
     <string name="patcher_conflict_title">Conflitto del pacchetto</string>
     <string name="patcher_conflict_subtitle">Devi disinstallare la versione già presente</string>
     <string name="patcher_conflict_hint">L\'app modificata utilizza un certificato diverso rispetto alla versione installata. La disinstallazione cancellerà tutti i dati dell\'app</string>
@@ -604,11 +627,13 @@ Le dimensioni delle immagini devono essere le seguenti:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installatore</string>
     <string name="installer_title">Seleziona l\'installatore</string>
-    <string name="installer_internal_name">Installatore di sistema</string>
     <string name="installer_internal_description">Usa l\'installatore dei pacchetti di Android</string>
+    <string name="installer_play_store_description">Utilizza l\'installer di sistema e imposta il Google Play Store come origine di installazione</string>
+    <string name="installer_root_play_store_description">Installa in silenzio con i permessi di root e imposta Google Play Store come fonte di installazione</string>
     <string name="installer_auto_saved_name">Installatore mount con privilegi di root</string>
     <string name="installer_auto_saved_description">Installa l\'APK patchata al di sopra dell\'app installata</string>
     <string name="installer_shizuku_description">Installa silenziosamente utilizzando Shizuku o Sui</string>
+    <string name="installer_shizuku_play_store_description">Installa in silenzio tramite Shizuku o Sui e imposta Google Play Store come fonte di installazione</string>
     <string name="installer_option_none">Nessun fallback</string>
     <string name="installer_none_description">Non è configurato alcun installatore di fallback</string>
     <string name="installer_status_requires_root">Richiede l\'accesso di root</string>
@@ -629,6 +654,10 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="installer_unavailable_message">Il tuo installer preferito (%s) non è attualmente disponibile. Puoi risolvere il problema e riprovare, o utilizzare l\'installer standard</string>
     <string name="installer_unavailable_shizuku_hint">Assicurati che Shizuku sia in esecuzione e che il permesso sia concesso a questa app</string>
     <string name="installer_use_standard">Usa standard</string>
+    <string name="installer_play_store_warning_title">Installa come Play Store?</string>
+    <string name="installer_play_store_warning_message">L\'app modificata verrà registrata come installata da Google Play Store. Ciò consente a servizi come Android Auto di riconoscerla come un\'app di Play Store</string>
+    <string name="installer_play_store_warning_risk">Play Store potrebbe offrire aggiornamenti per l\'app modificata. L\'installazione di tale aggiornamento sovrascriverà l\'APK modificato con la versione originale e rimuoverà le modifiche. Se richiesto di aggiornare, tocca il menu con i tre puntini sulla pagina di Play Store dell\'app e scegli \"Disattiva aggiornamenti\"</string>
+    <string name="installer_play_store_warning_continue">Ho capito, continua</string>
     <string name="settings_prompt_installer_on_install">Richiesta di selezione dell\'installer</string>
     <string name="settings_prompt_installer_on_install_description">Mostra la finestra di dialogo di selezione dell\'installer ogni volta che un\'app patchata viene installata</string>
     <string name="settings_auto_install_with_shizuku">Installa automaticamente dopo l\'applicazione della patch</string>
@@ -669,6 +698,14 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_import_manager_settings_description">Salva i logs del sistema per la risoluzione dei problemi</string>
     <string name="settings_system_import_manager_settings_fail">Impossibile importare le impostazioni di Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Impostazioni di Morphe importate</string>
+    <string name="settings_system_import_manager_settings_mode_title">Importa impostazioni di Morphe</string>
+    <string name="settings_system_import_manager_settings_mode_description">Scegli come applicare le impostazioni e le risorse importate</string>
+    <string name="settings_system_import_selections_mode_title">Importa selezioni patch</string>
+    <string name="settings_system_import_selections_mode_description">Scegli come applicare le selezioni importate e le opzioni di patch</string>
+    <string name="import_mode_replace_title">Sostituisci gli elementi esistenti</string>
+    <string name="import_mode_replace_description">Corrispondi esattamente al backup. Gli elementi mancanti nel backup verranno rimossi</string>
+    <string name="import_mode_merge_title">Unisci con gli elementi esistenti</string>
+    <string name="import_mode_merge_description">Aggiungi gli elementi mancanti dal backup. Gli elementi esistenti rimangono invariati</string>
     <string name="settings_system_export_manager_settings_fail">Impossibile esportare le impostazioni di Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Impostazioni di Morphe esportate</string>
     <string name="settings_system_debug">Debug</string>
@@ -679,6 +716,12 @@ Le dimensioni delle immagini devono essere le seguenti:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">File e spazio di archiviazione</string>
     <string name="settings_system_apks_size">Dimensione totale: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Questo cancellerà permanentemente i file APK salvati mostrati qui</string>
+    <string name="settings_system_apks_delete_selected_title">Cancellare gli APK selezionati?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Questo cancellerà permanentemente i file APK selezionati</string>
+    <string name="settings_system_apks_deleted_all">APK eliminati correttamente</string>
+    <string name="settings_system_apks_export_zip_success">APK esportati con successo</string>
+    <string name="settings_system_apks_export_zip_failed">Esportazione degli APK selezionati non riuscita</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK patchati</string>
     <string name="settings_system_patched_apks_description">Gestione dei file delle applicazioni patchate</string>
@@ -686,6 +729,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_patched_apks_delete_title">Cancellare l\'APK patchato?</string>
     <string name="settings_system_patched_apks_delete_confirm">Sei sicuro di voler eliminare l\'APK patchato per %s?</string>
     <string name="settings_system_patched_apks_deleted">L\'APK patchato è stato eliminato correttamente </string>
+    <string name="settings_system_patched_apks_delete_all_title">Eliminare tutti gli APK modificati?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APK originali</string>
     <string name="settings_system_original_apks_description">Salvato per il ri-patching. Viene mantenuta una versione per app</string>
@@ -693,11 +737,13 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_original_apks_deleted">L\'APK originale è stato eliminato correttamente </string>
     <string name="settings_system_original_apks_delete_title">Eliminare APK originale?</string>
     <string name="settings_system_original_apks_delete_confirm">Eliminare l\'APK originale per %s? Non potrai ripatchare senza fornire un nuovo APK</string>
+    <string name="settings_system_original_apks_delete_all_title">Eliminare tutti gli APK originali?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Selezioni delle patch</string>
     <string name="settings_system_patch_selections_description">Selezione patch salvata, conservata dopo la disinstallazione</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Ripristinare tutte le selezioni?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Ripristinare le selezioni del pacchetto?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Ripristinare i pacchetti selezionati?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Ripristinare la selezione della fonte?</string>
     <string name="settings_system_patch_selection_no_saved">Nessuna selezione delle patch salvata</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s su %2$s</string>
@@ -731,6 +777,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="file_picker_sort_size_asc">Dimensione (la più piccola prima)</string>
     <string name="file_picker_sort_date_desc">Data (la più recente prima)</string>
     <string name="file_picker_sort_date_asc">Data (la più vecchia prima)</string>
+    <string name="file_picker_show_hidden_files">Mostra file nascosti</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">A proposito di</string>
     <string name="settings_system_share_website">Condividi il sito</string>
@@ -765,10 +812,15 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="skip">Salta</string>
     <string name="clear">Cancella</string>
     <string name="delete">Elimina</string>
+    <string name="delete_all">Elimina tutto</string>
     <string name="remove">Rimuovi</string>
     <string name="disable">Disabilita</string>
     <string name="enable">Attiva</string>
     <string name="loading">Caricamento in corso…</string>
+    <string name="loading_older_releases">Caricamento versioni precedenti…</string>
+    <string name="creating">Creazione…</string>
+    <string name="processing_apk">Elaborazione APK…</string>
+    <string name="exporting_apks">Esportazione APK in corso…</string>
     <string name="not_installed">Non installata</string>
     <string name="view">Visualizza</string>
     <string name="search">Cerca</string>
@@ -788,6 +840,10 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="reorder_done">Ordine salvato</string>
     <string name="reset_order">Ripristina ordine</string>
     <string name="reset_order_done">Ordine resettato</string>
+    <string name="accessibility_move_up">Sposta in alto</string>
+    <string name="accessibility_move_down">Sposta in basso</string>
+    <string name="accessibility_app_moved_announcement">%1$s spostato nella posizione %2$d di %3$d</string>
+    <string name="accessibility_scroll_to_top">Vai in cima alla lista</string>
     <string name="rename">Rinomina</string>
     <string name="import_">Importa</string>
     <string name="export">Esporta</string>
@@ -833,8 +889,9 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="changelog">Visualizza registri delle modifiche</string>
     <string name="changelog_description">Scopri le ultime modifiche in questo aggiornamento</string>
     <string name="changelog_download_fail">Download del registro delle modifiche non riuscito: %s</string>
-    <string name="changelog_retry">Riprova</string>
     <string name="changelog_empty">Nessun registro delle modifiche disponibile</string>
+    <string name="changelog_show_older">Mostra versioni precedenti</string>
+    <string name="changelog_older_empty">Nessuna versione precedente da visualizzare </string>
     <string name="no_network_toast">Connessione internet non disponibile</string>
     <string name="update_available">È disponibile un aggiornamento</string>
     <string name="ready_to_install_update">Aggiornamento pronto per l\'installazione</string>

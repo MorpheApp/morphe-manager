@@ -384,8 +384,10 @@ class PatcherWorker(
             )
 
             Log.i(tag, "Patching succeeded".logFmt())
+            val installerPrimary = prefs.installerPrimary.get()
             autoInstallPending = prefs.autoInstallWithShizuku.get() &&
-                prefs.installerPrimary.get() == InstallerPreferenceTokens.SHIZUKU &&
+                (installerPrimary == InstallerPreferenceTokens.SHIZUKU ||
+                        installerPrimary == InstallerPreferenceTokens.SHIZUKU_PLAY_STORE) &&
                 !prefs.promptInstallerOnInstall.get()
             succeeded = true
             Result.success()

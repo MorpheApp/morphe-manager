@@ -19,7 +19,8 @@
     <string name="home_update_available">Actualización de Morphe dispoñible</string>
     <string name="home_update_available_subtitle">Nova versión lista para instalar</string>
     <string name="home_update_error">Erro ao actualizar</string>
-    <string name="home_update_error_subtitle">Comprobe a súa conexión a Internet e ténteo de novo</string>
+    <string name="home_update_error_subtitle">
+Comprobe a súa conexión a Internet e ténteo de novo</string>
     <string name="home_update_skipped_metered">Actualizacións omitidas</string>
     <string name="home_update_skipped_metered_subtitle">Os datos móbiles están activados</string>
     <string name="home_updating_sources">Actualizando fontes…</string>
@@ -165,7 +166,8 @@ Seguro que queres continuar?"</string>
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 
 Para obter os mellores resultados, esta aplicación recomenda parchear &lt;b&gt;APK completo&lt;/b&gt;"</string>
-    <string name="home_split_apk_warning_pick_another">Elixe outro APK</string>
+    <string name="home_split_apk_warning_pick_another">
+Elixe outro APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">Esta versión ten soporte experimental e pode ser inestable ou incompleta</string>
     <string name="morphe_experimental_app_version_dialog_title">Queres experimentar? 🧪</string>
@@ -222,7 +224,6 @@ Para obter os mellores resultados, esta aplicación recomenda parchear &lt;b&gt;
     <string name="root_gmscore_excluded">O parche de soporte para GmsCore está excluído no modo root</string>
     <string name="root_pre_patch_installer_title">Escolla método de instalación</string>
     <string name="root_pre_patch_installer_description">O seu dispositivo ten acceso root. Escolla como quere instalar a aplicación parcheada</string>
-    <string name="root_pre_patch_installer_mount_title">Montaxe root</string>
     <string name="root_pre_patch_installer_mount_description">Montar APK parcheada sobre a app orixinal. Non se precisa Gms Core</string>
     <string name="root_pre_patch_installer_standard_title">Instalación Estándar</string>
     <string name="root_pre_patch_installer_standard_description">Instalase coma unha aplicación separada con soporte para GmsCore. Podes escoller un instalador despois de parchear</string>
@@ -232,9 +233,7 @@ Para obter os mellores resultados, esta aplicación recomenda parchear &lt;b&gt;
     <string name="patcher_error_technical">Detalles técnicos</string>
     <string name="patcher_long_step_warning">Este paso poderá tardar un tempo. Por favor, agarde…</string>
     <string name="patcher_installing_subtitle">Case listo para arrasar! 🎸</string>
-    <string name="patcher_success_title">Todo listo! 🎉</string>
     <string name="patcher_success_subtitle">A súa aplicación foi parcheada e instalada!</string>
-    <string name="patcher_complete_title">Parcheado completado! ✨</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Preparando</string>
     <string name="patcher_step_load_patches">Cargando parches</string>
