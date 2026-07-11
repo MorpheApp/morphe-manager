@@ -1,3 +1,10 @@
+## [1.23.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0...v1.23.1-dev.1) (2026-07-11)
+
+
+### Bug Fixes
+
+* Don't trigger update badge for experimental-version-only changes ([#666](https://github.com/MorpheApp/morphe-manager/issues/666)) ([6854d0f](https://github.com/MorpheApp/morphe-manager/commit/6854d0f1d160c0801fc5e24ef2a4de745b2e5e51))
+
 # [1.23.0](https://github.com/MorpheApp/morphe-manager/compare/v1.22.0...v1.23.0) (2026-07-11)
 
 
