@@ -102,33 +102,35 @@ fun AdvancedTabContent(
             icon = Icons.Outlined.Engineering
         )
 
-        RichSettingsItem(
-            onClick = {
-                if (!useExpertMode) showExpertModeDialog.value = true
-                else settingsViewModel.setExpertMode(false)
-            },
-            showBorder = true,
+        SettingsGroup(
             modifier = if (onExpertModeItemPositioned != null || onExpertModeScrollTarget != null)
                 Modifier.onGloballyPositioned { coords ->
                     onExpertModeItemPositioned?.invoke(coords.boundsInWindow())
                     onExpertModeScrollTarget?.invoke(coords.boundsInParent().top.roundToInt())
                 }
-            else Modifier,
-            leadingContent = {
-                MorpheIcon(icon = Icons.Outlined.Psychology)
-            },
-            title = stringResource(R.string.settings_advanced_expert_mode),
-            subtitle = stringResource(R.string.settings_advanced_expert_mode_description),
-            trailingContent = {
-                MorpheSwitch(
-                    checked = useExpertMode,
-                    onCheckedChange = null,
-                    modifier = Modifier.semantics {
-                        stateDescription = if (useExpertMode) enabledState else disabledState
-                    }
-                )
-            }
-        )
+            else Modifier
+        ) {
+            SettingsItem(
+                onClick = {
+                    if (!useExpertMode) showExpertModeDialog.value = true
+                    else settingsViewModel.setExpertMode(false)
+                },
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.Psychology)
+                },
+                title = stringResource(R.string.settings_advanced_expert_mode),
+                subtitle = stringResource(R.string.settings_advanced_expert_mode_description),
+                trailingContent = {
+                    MorpheSwitch(
+                        checked = useExpertMode,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (useExpertMode) enabledState else disabledState
+                        }
+                    )
+                }
+            )
+        }
 
         Crossfade(
             targetState = useExpertMode,
@@ -136,37 +138,40 @@ fun AdvancedTabContent(
         ) { expertMode ->
             if (expertMode) {
                 Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
-                    // GitHub PAT
-                    GitHubPatSettingsItem(
-                        currentPat = gitHubPat,
-                        currentIncludeInExport = includeGitHubPatInExports,
-                        onSave = { pat, include ->
-                            settingsViewModel.setGitHubPat(pat, include)
-                        }
-                    )
+                    SettingsGroup {
+                        // GitHub PAT
+                        GitHubPatSettingsItem(
+                            currentPat = gitHubPat,
+                            currentIncludeInExport = includeGitHubPatInExports,
+                            onSave = { pat, include ->
+                                settingsViewModel.setGitHubPat(pat, include)
+                            }
+                        )
 
-                    // Strip unused native libraries + filter split APKs for device
-                    RichSettingsItem(
-                        onClick = {
-                            settingsViewModel.setStripUnusedNativeLibs(!stripUnusedNativeLibs)
-                        },
-                        showBorder = true,
-                        leadingContent = {
-                            MorpheIcon(icon = Icons.Outlined.LayersClear)
-                        },
-                        title = stringResource(R.string.settings_advanced_strip_unused_libs),
-                        subtitle = stringResource(R.string.settings_advanced_strip_unused_libs_description),
-                        trailingContent = {
-                            MorpheSwitch(
-                                checked = stripUnusedNativeLibs,
-                                onCheckedChange = null,
-                                modifier = Modifier.semantics {
-                                    stateDescription =
-                                        if (stripUnusedNativeLibs) enabledState else disabledState
-                                }
-                            )
-                        }
-                    )
+                        MorpheSettingsDivider()
+
+                        // Strip unused native libraries + filter split APKs for device
+                        SettingsItem(
+                            onClick = {
+                                settingsViewModel.setStripUnusedNativeLibs(!stripUnusedNativeLibs)
+                            },
+                            leadingContent = {
+                                MorpheIcon(icon = Icons.Outlined.LayersClear)
+                            },
+                            title = stringResource(R.string.settings_advanced_strip_unused_libs),
+                            subtitle = stringResource(R.string.settings_advanced_strip_unused_libs_description),
+                            trailingContent = {
+                                MorpheSwitch(
+                                    checked = stripUnusedNativeLibs,
+                                    onCheckedChange = null,
+                                    modifier = Modifier.semantics {
+                                        stateDescription =
+                                            if (stripUnusedNativeLibs) enabledState else disabledState
+                                    }
+                                )
+                            }
+                        )
+                    }
 
                     // Expert mode notice shown once after enabling
                     if (showExpertModeNotice) {

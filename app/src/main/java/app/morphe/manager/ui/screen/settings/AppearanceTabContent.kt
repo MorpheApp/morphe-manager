@@ -95,25 +95,27 @@ fun AppearanceTabContent(
             )
         }
 
-        RichSettingsItem(
-            modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding),
-            onClick = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
-            showBorder = true,
-            title = stringResource(R.string.settings_appearance_greeting_phrases),
-            subtitle = stringResource(R.string.settings_appearance_greeting_phrases_subtitle),
-            leadingContent = {
-                MorpheIcon(icon = Icons.Outlined.ChatBubbleOutline)
-            },
-            trailingContent = {
-                MorpheSwitch(
-                    checked = showGreetingPhrases,
-                    onCheckedChange = null,
-                    modifier = Modifier.semantics {
-                        stateDescription = if (showGreetingPhrases) enabledState else disabledState
-                    }
-                )
-            }
-        )
+        SettingsGroup(
+            modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)
+        ) {
+            SettingsItem(
+                onClick = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
+                title = stringResource(R.string.settings_appearance_greeting_phrases),
+                subtitle = stringResource(R.string.settings_appearance_greeting_phrases_subtitle),
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.ChatBubbleOutline)
+                },
+                trailingContent = {
+                    MorpheSwitch(
+                        checked = showGreetingPhrases,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (showGreetingPhrases) enabledState else disabledState
+                        }
+                    )
+                }
+            )
+        }
 
         // Theme Mode Section
         Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
@@ -149,25 +151,27 @@ fun AppearanceTabContent(
             enter = MorpheAnimations.expandFadeEnter,
             exit = MorpheAnimations.shrinkFadeExit
         ) {
-            RichSettingsItem(
-                modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding),
-                onClick = { themeViewModel.togglePureBlackTheme(pureBlackTheme) },
-                showBorder = true,
-                title = stringResource(R.string.settings_appearance_pure_black),
-                subtitle = stringResource(R.string.settings_appearance_pure_black_description),
-                leadingContent = {
-                    MorpheIcon(icon = Icons.Outlined.Contrast)
-                },
-                trailingContent = {
-                    MorpheSwitch(
-                        checked = pureBlackTheme,
-                        onCheckedChange = null,
-                        modifier = Modifier.semantics {
-                            stateDescription = if (pureBlackTheme) enabledState else disabledState
-                        }
-                    )
-                }
-            )
+            SettingsGroup(
+                modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)
+            ) {
+                SettingsItem(
+                    onClick = { themeViewModel.togglePureBlackTheme(pureBlackTheme) },
+                    title = stringResource(R.string.settings_appearance_pure_black),
+                    subtitle = stringResource(R.string.settings_appearance_pure_black_description),
+                    leadingContent = {
+                        MorpheIcon(icon = Icons.Outlined.Contrast)
+                    },
+                    trailingContent = {
+                        MorpheSwitch(
+                            checked = pureBlackTheme,
+                            onCheckedChange = null,
+                            modifier = Modifier.semantics {
+                                stateDescription = if (pureBlackTheme) enabledState else disabledState
+                            }
+                        )
+                    }
+                )
+            }
         }
 
         // Accent Color Section
@@ -220,25 +224,27 @@ fun AppearanceTabContent(
             enter = MorpheAnimations.expandFadeEnter,
             exit = MorpheAnimations.shrinkFadeExit
         ) {
-            RichSettingsItem(
-                modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding),
-                onClick = { themeViewModel.toggleBackgroundParallax(enableParallax) },
-                showBorder = true,
-                title = stringResource(R.string.settings_appearance_parallax_effect),
-                subtitle = stringResource(R.string.settings_appearance_parallax_effect_description),
-                leadingContent = {
-                    MorpheIcon(icon = Icons.Outlined.ScreenRotation)
-                },
-                trailingContent = {
-                    MorpheSwitch(
-                        checked = enableParallax,
-                        onCheckedChange = null,
-                        modifier = Modifier.semantics {
-                            stateDescription = if (enableParallax) enabledState else disabledState
-                        }
-                    )
-                }
-            )
+            SettingsGroup(
+                modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)
+            ) {
+                SettingsItem(
+                    onClick = { themeViewModel.toggleBackgroundParallax(enableParallax) },
+                    title = stringResource(R.string.settings_appearance_parallax_effect),
+                    subtitle = stringResource(R.string.settings_appearance_parallax_effect_description),
+                    leadingContent = {
+                        MorpheIcon(icon = Icons.Outlined.ScreenRotation)
+                    },
+                    trailingContent = {
+                        MorpheSwitch(
+                            checked = enableParallax,
+                            onCheckedChange = null,
+                            modifier = Modifier.semantics {
+                                stateDescription = if (enableParallax) enabledState else disabledState
+                            }
+                        )
+                    }
+                )
+            }
         }
 
         // App Icon Section
@@ -318,28 +324,29 @@ private fun LanguageSection(
             icon = Icons.Outlined.Language
         )
 
-        RichSettingsItem(
-            onClick = onLanguageClick,
-            showBorder = true,
-            title = stringResource(R.string.settings_appearance_app_language_current),
-            subtitle = currentLanguage,
-            leadingContent = {
-                Surface(
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                    modifier = Modifier.size(40.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Text(
-                            text = currentLanguageOption?.flag ?: "🌐",
-                            style = MaterialTheme.typography.titleLarge
-                        )
+        SettingsGroup {
+            SettingsItem(
+                onClick = onLanguageClick,
+                title = stringResource(R.string.settings_appearance_app_language_current),
+                subtitle = currentLanguage,
+                leadingContent = {
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                        modifier = Modifier.size(40.dp)
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Text(
+                                text = currentLanguageOption?.flag ?: "🌐",
+                                style = MaterialTheme.typography.titleLarge
+                            )
+                        }
                     }
+                },
+                trailingContent = {
+                    MorpheIcon(icon = Icons.Outlined.ChevronRight)
                 }
-            },
-            trailingContent = {
-                MorpheIcon(icon = Icons.Outlined.ChevronRight)
-            }
-        )
+            )
+        }
     }
 }

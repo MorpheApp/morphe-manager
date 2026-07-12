@@ -35,9 +35,8 @@ fun GitHubPatSettingsItem(
     val showDialog = rememberSaveable { mutableStateOf(false) }
     val hasPat = currentPat.isNotBlank()
 
-    RichSettingsItem(
+    SettingsItem(
         onClick = { showDialog.value = true },
-        showBorder = true,
         leadingContent = {
             MorpheIcon(icon = Icons.Outlined.VpnKey)
         },
@@ -145,7 +144,7 @@ private fun GitHubPatDialog(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                RichSettingsItem(
+                SettingsItem(
                     onClick = {
                         if (!includePatInExport.value) showIncludeWarning.value = true
                         else includePatInExport.value = false

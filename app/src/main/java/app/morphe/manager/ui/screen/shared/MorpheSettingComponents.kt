@@ -5,8 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.compose.animation.*
-import androidx.compose.animation.core.*
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -17,15 +15,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material.icons.outlined.Download
+import androidx.compose.material.icons.outlined.FolderOff
+import androidx.compose.material.icons.outlined.Upload
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
@@ -52,9 +51,7 @@ object MorpheDefaults {
     val ItemSpacing = 12.dp
 
     // Gradient colors for GradientCircleIcon
-    val GradientStartColor = Color(0xFF1E5AA8)
-    val GradientEndColor = Color(0xFF00AFAE)
-    val DefaultGradientColors = listOf(GradientStartColor, GradientEndColor)
+    val DefaultGradientColors = listOf(Color(0xFF1E5AA8), Color(0xFF00AFAE))
 
     // Animation durations
     /** Duration used for dialog enter/exit and overlay transitions. */
@@ -67,122 +64,6 @@ object MorpheDefaults {
     // Dialog animation scale
     /** Initial/target scale for dialog enter/exit scale animation. */
     const val DIALOG_SCALE = 0.95f
-}
-
-/**
- * Shared [EnterTransition] and [ExitTransition] for all MorpheDialog instances and
- * dialog-level AnimatedVisibility wrappers. Changing these values updates every dialog
- * animation in the app at once.
- */
-object MorpheAnimations {
-    // Private helper to avoid repeating tween specifications
-    private fun <T> defaultTween(
-        duration: Int = MorpheDefaults.ANIMATION_DURATION,
-        easing: Easing = LinearOutSlowInEasing
-    ) = tween<T>(duration, easing = easing)
-
-    // Base animations used for composition
-    val fadeIn = fadeIn(animationSpec = defaultTween())
-    val fadeOut = fadeOut(animationSpec = defaultTween())
-
-    // Dialog Transitions
-    val dialogEnter = fadeIn + scaleIn(
-        initialScale = MorpheDefaults.DIALOG_SCALE,
-        animationSpec = defaultTween(easing = FastOutSlowInEasing)
-    )
-    val dialogExit = fadeOut + scaleOut(
-        targetScale = MorpheDefaults.DIALOG_SCALE,
-        animationSpec = defaultTween()
-    )
-
-    // Overlays (no scale needed)
-    val overlayEnter = fadeIn
-    val overlayExit = fadeOut
-
-    // Screen Transitions
-    // Enter uses a longer duration; exit is identical to dialogExit so we reuse it directly.
-    val screenEnter = fadeIn(defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION)) +
-            scaleIn(
-                initialScale = MorpheDefaults.DIALOG_SCALE,
-                animationSpec = defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
-            )
-    val screenExit = dialogExit
-
-    // Vertical Expand/Shrink
-    val expandFadeEnter = expandVertically(defaultTween()) + fadeIn
-    val shrinkFadeExit = shrinkVertically(defaultTween()) + fadeOut
-
-    val expandVertEnter = expandVertically(defaultTween())
-    val shrinkVertExit = shrinkVertically(defaultTween())
-
-    // Horizontal Expand/Shrink
-    val expandHorizFadeIn = expandHorizontally(defaultTween()) + fadeIn
-    val shrinkHorizFadeOut = shrinkHorizontally(defaultTween()) + fadeOut
-
-    // Slide Transitions
-    val slideUpFadeEnter = slideInVertically(defaultTween()) { -it } + fadeIn
-    val slideUpFadeExit = slideOutVertically(defaultTween()) { -it } + fadeOut
-
-    // Push Transitions (Settings screen slides up over home, returns by sliding down)
-    val pushEnter = slideInVertically(
-        animationSpec = defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
-    ) { it } + fadeIn(defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION))
-    val pushExit = slideOutVertically(
-        animationSpec = defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
-    ) { it } + fadeOut(tween(MorpheDefaults.SCREEN_ENTER_DURATION, easing = LinearEasing))
-
-    // Spring & Custom Transitions
-    val springSlideUpEnter = slideInVertically(
-        animationSpec = spring(Spring.DampingRatioMediumBouncy, Spring.StiffnessMedium),
-        initialOffsetY = { it }
-    ) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
-
-    val springSlideDownExit = slideOutVertically(
-        animationSpec = defaultTween(easing = FastOutSlowInEasing),
-        targetOffsetY = { it }
-    ) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
-
-    // Scale Transitions
-    val fadeScaleIn = fadeIn + scaleIn(defaultTween(), initialScale = MorpheDefaults.DIALOG_SCALE)
-    val fadeScaleOut = fadeOut + scaleOut(defaultTween(), targetScale = MorpheDefaults.DIALOG_SCALE)
-
-    // Floating Button (FAB / scroll-to-top). Pops in from below with a stronger scale.
-    val fabEnter = fadeIn + scaleIn(defaultTween(), initialScale = 0.85f) +
-            slideInVertically(defaultTween()) { it / 2 }
-    val fabExit = fadeOut + scaleOut(defaultTween(), targetScale = 0.85f) +
-            slideOutVertically(defaultTween()) { it / 2 }
-
-    // Alignment-based Transitions
-    val expandTopFadeIn = fadeIn + expandVertically(defaultTween(), expandFrom = Alignment.Top)
-    val shrinkTopFadeOut = fadeOut + shrinkVertically(defaultTween(), shrinkTowards = Alignment.Top)
-
-    // Slide-fade content swap for AnimatedContent (counters, labels, messages).
-    // offset: fraction of height used for slide, e.g. { -it / 2 } for half-height, { -it } for full.
-    // Asymmetric duration (enter slightly longer than exit) gives a snappier feel.
-    fun slideTransitionSpec(
-        enterDuration: Int = 200,
-        exitDuration: Int = 150,
-        offset: (Int) -> Int = { -it / 2 }
-    ): AnimatedContentTransitionScope<*>.() -> ContentTransform = {
-        (fadeIn(tween(enterDuration)) + slideInVertically(tween(enterDuration)) { offset(it) })
-            .togetherWith(fadeOut(tween(exitDuration)) + slideOutVertically(tween(exitDuration)) { -offset(it) })
-    }
-
-    // Presets built on slideTransitionSpec
-    // Counter/label swap - numeric count with word label
-    val counterTransitionSpec = slideTransitionSpec(enterDuration = 200, exitDuration = 150, offset = { -it / 2 })
-    // Compact counter swap - small badge counts (e.g. selection count badge)
-    val compactCounterTransitionSpec = slideTransitionSpec(enterDuration = 150, exitDuration = 100, offset = { -it })
-    // Slide-up content swap - greeting/message text that scrolls upward on change
-    val slideUpContentTransitionSpec = slideTransitionSpec(enterDuration = 400, exitDuration = 200, offset = { it / 4 })
-
-    // Simple crossfade with configurable duration
-    fun fadeCrossfade(duration: Int = MorpheDefaults.ANIMATION_DURATION): AnimatedContentTransitionScope<*>.() -> ContentTransform = {
-        fadeIn(tween(duration)) togetherWith fadeOut(tween(duration))
-    }
-
-    // Functional Helpers
-    fun fadeOut(duration: Int): ExitTransition = fadeOut(tween(duration))
 }
 
 /**
@@ -496,17 +377,17 @@ private val defaultChevronTrailing: @Composable () -> Unit = {
 }
 
 /**
- * Base settings item component.
- * Shared implementation for SettingsItem and RichSettingsItem.
+ * Standard settings item. Pass [icon] for a simple icon leading, or [leadingContent] for custom leading.
  */
 @Composable
-fun BaseSettingsItem(
+fun SettingsItem(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    showBorder: Boolean = false,
-    leadingContent: @Composable () -> Unit,
     title: String,
-    description: String? = null,
+    modifier: Modifier = Modifier,
+    icon: ImageVector? = null,
+    leadingContent: @Composable (() -> Unit)? = null,
+    subtitle: String? = null,
+    showBorder: Boolean = false,
     trailingContent: @Composable (() -> Unit)? = defaultChevronTrailing
 ) {
     SettingsItemCard(
@@ -516,58 +397,12 @@ fun BaseSettingsItem(
     ) {
         IconTextRow(
             modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-            leadingContent = leadingContent,
+            leadingContent = leadingContent ?: icon?.let { { MorpheIcon(icon = it) } },
             title = title,
-            description = description,
+            description = subtitle,
             trailingContent = trailingContent
         )
     }
-}
-
-/**
- * Simple settings item with icon, title, and action.
- */
-@Composable
-fun SettingsItem(
-    modifier: Modifier = Modifier,
-    icon: ImageVector,
-    title: String,
-    description: String? = null,
-    onClick: () -> Unit,
-    showBorder: Boolean = false
-) {
-    BaseSettingsItem(
-        onClick = onClick,
-        modifier = modifier,
-        showBorder = showBorder,
-        leadingContent = { MorpheIcon(icon = icon) },
-        title = title,
-        description = description
-    )
-}
-
-/**
- * Rich settings item with custom leading content.
- */
-@Composable
-fun RichSettingsItem(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    showBorder: Boolean = false,
-    leadingContent: @Composable (() -> Unit) = {},
-    title: String,
-    subtitle: String? = null,
-    trailingContent: @Composable (() -> Unit)? = defaultChevronTrailing
-) {
-    BaseSettingsItem(
-        onClick = onClick,
-        modifier = modifier,
-        showBorder = showBorder,
-        leadingContent = leadingContent,
-        title = title,
-        description = subtitle,
-        trailingContent = trailingContent
-    )
 }
 
 /**
@@ -587,6 +422,19 @@ fun SectionCard(
         modifier = modifier
     ) {
         content()
+    }
+}
+
+/**
+ * Standard grouped-settings container. Wraps a stack of settings items in a single card.
+ */
+@Composable
+fun SettingsGroup(
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    SectionCard(modifier = modifier) {
+        Column(content = content)
     }
 }
 
@@ -643,71 +491,6 @@ fun CardHeader(
         }
 
         MorpheSettingsDivider(fullWidth = true)
-    }
-}
-
-/**
- * Expandable section with animated header and content.
- */
-@Composable
-fun ExpandableSection(
-    modifier: Modifier = Modifier,
-    icon: ImageVector? = null,
-    title: String,
-    description: String,
-    expanded: Boolean,
-    onExpandChange: (Boolean) -> Unit,
-    content: @Composable () -> Unit
-) {
-    val rotationAngle by animateFloatAsState(
-        targetValue = if (expanded) 180f else 0f,
-        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-        label = "expand_rotation"
-    )
-
-    MorpheCard(modifier = modifier) {
-        Column {
-            // Header
-            IconTextRow(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { onExpandChange(!expanded) }
-                    .padding(MorpheDefaults.ContentPadding),
-                leadingContent = {
-                    if (icon != null) {
-                        MorpheIcon(icon = icon)
-                    }
-                },
-                title = title,
-                description = description,
-                trailingContent = {
-                    MorpheIcon(
-                        icon = Icons.Outlined.ExpandMore,
-                        contentDescription = if (expanded)
-                            stringResource(R.string.collapse)
-                        else
-                            stringResource(R.string.expand),
-                        modifier = Modifier.rotate(rotationAngle)
-                    )
-                }
-            )
-
-            // Content
-            AnimatedVisibility(
-                visible = expanded,
-                enter = MorpheAnimations.expandFadeEnter,
-                exit = MorpheAnimations.shrinkFadeExit
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = MorpheDefaults.ContentPadding, vertical = 8.dp),
-                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
-                ) {
-                    content()
-                }
-            }
-        }
     }
 }
 

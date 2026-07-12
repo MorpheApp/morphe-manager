@@ -146,7 +146,7 @@ private fun InstallerSettingsItem(
         }.joinToString("\n")
     }
 
-    RichSettingsItem(
+    SettingsItem(
         onClick = onClick,
         leadingContent = {
             if (entry.icon != null &&

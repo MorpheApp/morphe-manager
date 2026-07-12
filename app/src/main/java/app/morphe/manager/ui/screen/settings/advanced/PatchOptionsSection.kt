@@ -286,7 +286,7 @@ private fun AppPatchOptionsCard(
             SettingsItem(
                 icon = Icons.Outlined.Palette,
                 title = stringResource(R.string.settings_advanced_patch_options_theme_colors),
-                description = stringResource(R.string.settings_advanced_patch_options_theme_colors_description),
+                subtitle = stringResource(R.string.settings_advanced_patch_options_theme_colors_description),
                 onClick = onThemeClick
             )
         }
@@ -298,7 +298,7 @@ private fun AppPatchOptionsCard(
             SettingsItem(
                 icon = Icons.Outlined.Style,
                 title = stringResource(R.string.settings_advanced_patch_options_custom_branding),
-                description = stringResource(R.string.settings_advanced_patch_options_custom_branding_description),
+                subtitle = stringResource(R.string.settings_advanced_patch_options_custom_branding_description),
                 onClick = onBrandingClick
             )
         }
@@ -310,7 +310,7 @@ private fun AppPatchOptionsCard(
             SettingsItem(
                 icon = Icons.Outlined.Image,
                 title = stringResource(R.string.settings_advanced_patch_options_custom_header),
-                description = stringResource(R.string.settings_advanced_patch_options_custom_header_description),
+                subtitle = stringResource(R.string.settings_advanced_patch_options_custom_header_description),
                 onClick = onHeaderClick
             )
         }
@@ -374,7 +374,7 @@ private fun HideShortsSection(
                 R.string.settings_advanced_patch_options_hide_shorts_app_shortcut_description
             )
 
-            RichSettingsItem(
+            SettingsItem(
                 onClick = { viewModel.toggleHideShortsAppShortcut(patchOptionsPrefs, hideShortsAppShortcut) },
                 title = title,
                 subtitle = description,
@@ -408,7 +408,7 @@ private fun HideShortsSection(
                 R.string.settings_advanced_patch_options_hide_shorts_widget_description
             )
 
-            RichSettingsItem(
+            SettingsItem(
                 onClick = { viewModel.toggleHideShortsWidget(patchOptionsPrefs, hideShortsWidget) },
                 title = title,
                 subtitle = description,

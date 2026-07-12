@@ -78,51 +78,78 @@ fun FilesAndStorageSection(
             icon = Icons.Outlined.Storage
         )
 
-        SectionCard {
-            Column {
-                // Original APKs management
-                RichSettingsItem(
-                    onClick = { showApkManagementDialog.value = ApkManagementType.ORIGINAL },
-                    title = stringResource(R.string.settings_system_original_apks_title),
-                    subtitle = stringResource(R.string.settings_system_original_apks_description),
-                    leadingContent = {
-                        MorpheIcon(icon = Icons.Outlined.Storage)
-                    },
-                    trailingContent = {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            if (originalApkCount > 0) {
-                                InfoBadge(
-                                    text = originalApkCount.toString(),
-                                    style = InfoBadgeStyle.Default,
-                                    isCompact = true
-                                )
-                            }
-                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
+        SettingsGroup {
+            // Original APKs management
+            SettingsItem(
+                onClick = { showApkManagementDialog.value = ApkManagementType.ORIGINAL },
+                title = stringResource(R.string.settings_system_original_apks_title),
+                subtitle = stringResource(R.string.settings_system_original_apks_description),
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.Storage)
+                },
+                trailingContent = {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        if (originalApkCount > 0) {
+                            InfoBadge(
+                                text = originalApkCount.toString(),
+                                style = InfoBadgeStyle.Default,
+                                isCompact = true
+                            )
                         }
+                        MorpheIcon(icon = Icons.Outlined.ChevronRight)
                     }
-                )
+                }
+            )
 
+            MorpheSettingsDivider()
+
+            // Patched APKs management
+            SettingsItem(
+                onClick = { showApkManagementDialog.value = ApkManagementType.PATCHED },
+                title = stringResource(R.string.settings_system_patched_apks_title),
+                subtitle = stringResource(R.string.settings_system_patched_apks_description),
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.Apps)
+                },
+                trailingContent = {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        if (patchedApkCount > 0) {
+                            InfoBadge(
+                                text = patchedApkCount.toString(),
+                                style = InfoBadgeStyle.Default,
+                                isCompact = true
+                            )
+                        }
+                        MorpheIcon(icon = Icons.Outlined.ChevronRight)
+                    }
+                }
+            )
+
+            // Patch Selections management (Expert mode only)
+            if (useExpertMode) {
                 MorpheSettingsDivider()
 
-                // Patched APKs management
-                RichSettingsItem(
-                    onClick = { showApkManagementDialog.value = ApkManagementType.PATCHED },
-                    title = stringResource(R.string.settings_system_patched_apks_title),
-                    subtitle = stringResource(R.string.settings_system_patched_apks_description),
+                SettingsItem(
+                    onClick = { showPatchSelectionDialog.value = true },
+                    title = stringResource(R.string.settings_system_patch_selections_title),
+                    subtitle = stringResource(R.string.settings_system_patch_selections_description),
                     leadingContent = {
-                        MorpheIcon(icon = Icons.Outlined.Apps)
+                        MorpheIcon(icon = Icons.Outlined.Tune)
                     },
                     trailingContent = {
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            if (patchedApkCount > 0) {
+                            if (patchedPackagesCount > 0) {
                                 InfoBadge(
-                                    text = patchedApkCount.toString(),
+                                    text = patchedPackagesCount.toString(),
                                     style = InfoBadgeStyle.Default,
                                     isCompact = true
                                 )
@@ -131,46 +158,17 @@ fun FilesAndStorageSection(
                         }
                     }
                 )
-
-                // Patch Selections management (Expert mode only)
-                if (useExpertMode) {
-                    MorpheSettingsDivider()
-
-                    RichSettingsItem(
-                        onClick = { showPatchSelectionDialog.value = true },
-                        title = stringResource(R.string.settings_system_patch_selections_title),
-                        subtitle = stringResource(R.string.settings_system_patch_selections_description),
-                        leadingContent = {
-                            MorpheIcon(icon = Icons.Outlined.Tune)
-                        },
-                        trailingContent = {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                if (patchedPackagesCount > 0) {
-                                    InfoBadge(
-                                        text = patchedPackagesCount.toString(),
-                                        style = InfoBadgeStyle.Default,
-                                        isCompact = true
-                                    )
-                                }
-                                MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                            }
-                        }
-                    )
-                }
             }
         }
 
         // TV always uses the custom picker regardless of this toggle, so hide it to avoid confusion
         if (!isTV) {
-            SectionCard(
+            SettingsGroup(
                 modifier = if (onFilePickerPositioned != null)
                     Modifier.onGloballyPositioned { coords -> onFilePickerPositioned(coords.boundsInWindow()) }
                 else Modifier
             ) {
-                RichSettingsItem(
+                SettingsItem(
                     onClick = { settingsViewModel.setUseCustomFilePicker(!useCustomFilePicker) },
                     leadingContent = { MorpheIcon(icon = Icons.Outlined.FolderOpen) },
                     title = stringResource(R.string.settings_system_custom_file_picker),

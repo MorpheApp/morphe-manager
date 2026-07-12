@@ -1654,7 +1654,7 @@ private fun BooleanOptionItem(
     val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
 
-    RichSettingsItem(
+    SettingsItem(
         onClick = { onValueChange(!value) },
         title = title,
         subtitle = description.ifBlank { null },

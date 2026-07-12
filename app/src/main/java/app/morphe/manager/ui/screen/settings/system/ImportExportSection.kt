@@ -42,45 +42,43 @@ fun ImportExportSection(
             icon = Icons.Outlined.SwapHoriz
         )
 
-        SectionCard {
-            Column {
-                // Keystore
-                ImportExportRow(
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Key) },
-                    title = stringResource(R.string.settings_system_keystore),
-                    description = stringResource(R.string.settings_system_import_keystore_description),
-                    onImport = onImportKeystore,
-                    onExport = {
-                        if (!importExportViewModel.canExport()) {
-                            context.toast(keystoreUnavailable)
-                        } else {
-                            onExportKeystore()
-                        }
+        SettingsGroup {
+            // Keystore
+            ImportExportRow(
+                leadingContent = { MorpheIcon(icon = Icons.Outlined.Key) },
+                title = stringResource(R.string.settings_system_keystore),
+                description = stringResource(R.string.settings_system_import_keystore_description),
+                onImport = onImportKeystore,
+                onExport = {
+                    if (!importExportViewModel.canExport()) {
+                        context.toast(keystoreUnavailable)
+                    } else {
+                        onExportKeystore()
                     }
-                )
+                }
+            )
 
-                MorpheSettingsDivider()
+            MorpheSettingsDivider()
 
-                // Manager Settings
-                ImportExportRow(
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Settings) },
-                    title = stringResource(R.string.settings_system_morphe_settings),
-                    description = stringResource(R.string.settings_system_import_manager_settings_description),
-                    onImport = onImportSettings,
-                    onExport = onExportSettings
-                )
+            // Manager Settings
+            ImportExportRow(
+                leadingContent = { MorpheIcon(icon = Icons.Outlined.Settings) },
+                title = stringResource(R.string.settings_system_morphe_settings),
+                description = stringResource(R.string.settings_system_import_manager_settings_description),
+                onImport = onImportSettings,
+                onExport = onExportSettings
+            )
 
-                MorpheSettingsDivider()
+            MorpheSettingsDivider()
 
-                // Debug Logs
-                ImportExportRow(
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.BugReport) },
-                    title = stringResource(R.string.settings_system_debug),
-                    description = stringResource(R.string.settings_system_export_debug_logs_description),
-                    onImport = null,
-                    onExport = onExportDebugLogs
-                )
-            }
+            // Debug Logs
+            ImportExportRow(
+                leadingContent = { MorpheIcon(icon = Icons.Outlined.BugReport) },
+                title = stringResource(R.string.settings_system_debug),
+                description = stringResource(R.string.settings_system_export_debug_logs_description),
+                onImport = null,
+                onExport = onExportDebugLogs
+            )
         }
     }
 }

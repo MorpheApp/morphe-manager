@@ -86,95 +86,93 @@ fun PerformanceSection(
             icon = Icons.Outlined.Speed
         )
 
-        SectionCard {
-            Column {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    RichSettingsItem(
-                        modifier = if (onProcessRuntimePositioned != null)
-                            Modifier.onGloballyPositioned { coords -> onProcessRuntimePositioned(coords.boundsInWindow()) }
-                        else Modifier,
-                        onClick = { showProcessRuntimeDialog.value = true },
-                        title = stringResource(R.string.settings_system_process_runtime),
-                        subtitle = if (useProcessRuntime)
-                            stringResource(
-                                R.string.settings_system_process_runtime_enabled_description,
-                                memoryLimit
-                            )
-                        else stringResource(R.string.settings_system_process_runtime_disabled_description),
-                        leadingContent = {
-                            MorpheIcon(icon = Icons.Outlined.Memory)
-                        },
-                        trailingContent = {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                StatusCircleIcon(
-                                    icon = Icons.Outlined.Check,
-                                    containerColor = if (useProcessRuntime) MaterialTheme.colorScheme.primaryContainer
-                                    else MaterialTheme.colorScheme.surfaceVariant,
-                                    contentColor = if (useProcessRuntime) MaterialTheme.colorScheme.onPrimaryContainer
-                                    else MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                                MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                            }
-                        }
-                    )
-                } else {
-                    IconTextRow(
-                        modifier = Modifier.padding(16.dp),
-                        leadingContent = {
-                            MorpheIcon(
-                                icon = Icons.Outlined.Memory,
-                                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
-                            )
-                        },
-                        title = stringResource(R.string.settings_system_process_runtime),
-                        description = stringResource(R.string.settings_system_process_runtime_description_not_available)
-                    )
-                }
-
-                MorpheSettingsDivider()
-
-                RichSettingsItem(
-                    onClick = { showBytecodeDialog.value = true },
-                    title = stringResource(R.string.settings_advanced_bytecode_mode),
-                    subtitle = stringResource(bytecodeMode.labelRes()),
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Code) },
-                    trailingContent = { MorpheIcon(icon = Icons.Outlined.ChevronRight) }
-                )
-
-                MorpheSettingsDivider()
-
-                RichSettingsItem(
-                    onClick = {
-                        context.startActivity(
-                            Intent(
-                                Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
-                                "package:${context.packageName}".toUri()
-                            )
+        SettingsGroup {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                SettingsItem(
+                    modifier = if (onProcessRuntimePositioned != null)
+                        Modifier.onGloballyPositioned { coords -> onProcessRuntimePositioned(coords.boundsInWindow()) }
+                    else Modifier,
+                    onClick = { showProcessRuntimeDialog.value = true },
+                    title = stringResource(R.string.settings_system_process_runtime),
+                    subtitle = if (useProcessRuntime)
+                        stringResource(
+                            R.string.settings_system_process_runtime_enabled_description,
+                            memoryLimit
                         )
+                    else stringResource(R.string.settings_system_process_runtime_disabled_description),
+                    leadingContent = {
+                        MorpheIcon(icon = Icons.Outlined.Memory)
                     },
-                    title = stringResource(R.string.settings_system_battery_optimization),
-                    subtitle = stringResource(R.string.settings_system_battery_optimization_description),
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.BatterySaver) },
                     trailingContent = {
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             StatusCircleIcon(
-                                icon = if (isIgnoringBatteryOptimizations) Icons.Outlined.Check else Icons.Outlined.Warning,
-                                containerColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.primaryContainer
-                                else MaterialTheme.colorScheme.secondaryContainer,
-                                contentColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.onPrimaryContainer
-                                else MaterialTheme.colorScheme.onSecondaryContainer
+                                icon = Icons.Outlined.Check,
+                                containerColor = if (useProcessRuntime) MaterialTheme.colorScheme.primaryContainer
+                                else MaterialTheme.colorScheme.surfaceVariant,
+                                contentColor = if (useProcessRuntime) MaterialTheme.colorScheme.onPrimaryContainer
+                                else MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             MorpheIcon(icon = Icons.Outlined.ChevronRight)
                         }
                     }
                 )
+            } else {
+                IconTextRow(
+                    modifier = Modifier.padding(16.dp),
+                    leadingContent = {
+                        MorpheIcon(
+                            icon = Icons.Outlined.Memory,
+                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                        )
+                    },
+                    title = stringResource(R.string.settings_system_process_runtime),
+                    description = stringResource(R.string.settings_system_process_runtime_description_not_available)
+                )
             }
+
+            MorpheSettingsDivider()
+
+            SettingsItem(
+                onClick = { showBytecodeDialog.value = true },
+                title = stringResource(R.string.settings_advanced_bytecode_mode),
+                subtitle = stringResource(bytecodeMode.labelRes()),
+                leadingContent = { MorpheIcon(icon = Icons.Outlined.Code) },
+                trailingContent = { MorpheIcon(icon = Icons.Outlined.ChevronRight) }
+            )
+
+            MorpheSettingsDivider()
+
+            SettingsItem(
+                onClick = {
+                    context.startActivity(
+                        Intent(
+                            Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+                            "package:${context.packageName}".toUri()
+                        )
+                    )
+                },
+                title = stringResource(R.string.settings_system_battery_optimization),
+                subtitle = stringResource(R.string.settings_system_battery_optimization_description),
+                leadingContent = { MorpheIcon(icon = Icons.Outlined.BatterySaver) },
+                trailingContent = {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        StatusCircleIcon(
+                            icon = if (isIgnoringBatteryOptimizations) Icons.Outlined.Check else Icons.Outlined.Warning,
+                            containerColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.primaryContainer
+                            else MaterialTheme.colorScheme.secondaryContainer,
+                            contentColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.onPrimaryContainer
+                            else MaterialTheme.colorScheme.onSecondaryContainer
+                        )
+                        MorpheIcon(icon = Icons.Outlined.ChevronRight)
+                    }
+                }
+            )
         }
     }
 }

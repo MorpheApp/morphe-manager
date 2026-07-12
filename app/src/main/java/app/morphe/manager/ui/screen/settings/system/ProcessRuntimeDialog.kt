@@ -68,7 +68,7 @@ fun ProcessRuntimeDialog(
             verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             // Enable/Disable toggle
-            RichSettingsItem(
+            SettingsItem(
                 onClick = {
                     enabled = !enabled
                     onEnabledChange(enabled)
