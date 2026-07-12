@@ -661,7 +661,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">जब भी पैच किए गए ऐप को इंस्टॉल किया जाता है, तो इंस्टॉलर चयन संवाद दिखाता है।</string>
     <string name="settings_auto_install_with_shizuku">पैचिंग के बाद स्वतः इंस्टॉल करें</string>
     <string name="settings_auto_install_with_shizuku_description">पैचिंग पूरा होने के तुरंत बाद पैच्ड APK चुपचाप इंस्टॉल करता है</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" सक्षम है - स्वतः इंस्टॉल छोड़ दिया जाएगा</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">बैटरी अनुकूलन</string>
     <string name="settings_system_battery_optimization_description">जब ऐप छोटा किया जाता है, तो पैचर को चालू रखता है।</string>

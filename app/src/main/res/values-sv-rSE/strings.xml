@@ -86,7 +86,7 @@
     <string name="sources_management_title">Tilläggskällor</string>
     <string name="sources_sort_title">Sortera tilläggskällor</string>
     <string name="sources_sort_manual">Manuell ordning</string>
-    <string name="sources_sort_manual_hint">Tryck länge på en källa är att ändra ordning</string>
+    <string name="sources_sort_manual_hint">Tryck länge på en källa för att ändra ordning</string>
     <string name="sources_sort_last_updated">Senast uppdaterad</string>
     <string name="sources_sort_last_updated_description">Nyaste källuppdateringarna först</string>
     <string name="sources_sort_enabled_first">Aktiverade först</string>
@@ -659,7 +659,6 @@ Bildernas mått ska vara följande:
     <string name="settings_prompt_installer_on_install_description">Visar en dialogruta för att välja en installerare varje gång en modifierad app installeras</string>
     <string name="settings_auto_install_with_shizuku">Installera automatiskt efter modifiering</string>
     <string name="settings_auto_install_with_shizuku_description">Installerar den modifierade APK-filen tyst så snart modifieringen är klar</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" är aktiverat – automatisk installation hoppas över</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterioptimering</string>
     <string name="settings_system_battery_optimization_description">Låter modifieringsverktyget fortsätta köras när appen minimeras</string>

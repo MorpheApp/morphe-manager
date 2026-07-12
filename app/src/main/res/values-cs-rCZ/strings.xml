@@ -5,7 +5,7 @@
     <string name="home_not_patched_yet">Ještě nezáplatováno</string>
     <string name="home_no_patches_available">Žádné záplaty k dispozici</string>
     <string name="home_app_hide_title">Skrýt tuto aplikaci?</string>
-    <string name="home_app_hide_message">Tato aplikace bude skryta z domovské obrazovky. Můžete ji později obnovit pomocí tlačítka \"\" na konci seznamu</string>
+    <string name="home_app_hide_message">Tato aplikace bude skryta z domovské obrazovky. Můžete ji později obnovit pomocí tlačítka na konci seznamu</string>
     <string name="home_app_will_be_hidden">Tato aplikace bude skryta</string>
     <string name="home_app_no_hidden">Žádné skryté aplikace</string>
     <string name="home_app_hidden_apps_title">Skryté aplikace</string>
@@ -661,7 +661,6 @@ Rozměry obrázků musí být následující:
     <string name="settings_prompt_installer_on_install_description">Zobrazí dialog pro výběr instalátoru pokaždé, když se nainstaluje záplatovaná aplikace</string>
     <string name="settings_auto_install_with_shizuku">Automatická instalace po opravení</string>
     <string name="settings_auto_install_with_shizuku_description">Potichu nainstaluje opravený APK, jakmile se oprava dokončí</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" je povoleno - automatická instalace bude přeskočena</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimalizace baterie</string>
     <string name="settings_system_battery_optimization_description">Udrží program záplatování spuštěný i při minimalizaci aplikace</string>

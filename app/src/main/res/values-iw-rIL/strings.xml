@@ -646,7 +646,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_prompt_installer_on_install_description">מציג תיבת דו-שיח לבחירת המתקין בכל פעם שאפליקציה מתוקנת מותקנת</string>
     <string name="settings_auto_install_with_shizuku">התקנה אוטומטית לאחר תיקון</string>
     <string name="settings_auto_install_with_shizuku_description">מתקין בשקט את קובץ ה-APK המתוקן ברגע שהתיקון הושלם</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" מופעל - התקנה אוטומטית תדלג</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">מיטוב הסוללה</string>
     <string name="settings_system_battery_optimization_description">שומר את התיקון פעיל כאשר האפליקציה ממוזערת</string>

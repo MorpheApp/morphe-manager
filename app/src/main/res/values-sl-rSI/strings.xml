@@ -661,7 +661,6 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_prompt_installer_on_install_description">Prikaže pogovorno okno za izbiro namestitvenega programa vsakokrat, ko je nameščena popravljena aplikacija</string>
     <string name="settings_auto_install_with_shizuku">Samodejna namestitev po popravku</string>
     <string name="settings_auto_install_with_shizuku_description">Tiho namesti popravljeni APK takoj po končanem popravljanju</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" je omogočen - samodejna namestitev bo preskočena</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizacija baterije</string>
     <string name="settings_system_battery_optimization_description">Ohranja popravek v teku, ko je aplikacija pomanjšana</string>

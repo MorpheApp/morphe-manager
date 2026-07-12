@@ -661,7 +661,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">Viser installasjonsvalgdialogen hver gang en oppdatert app installeres</string>
     <string name="settings_auto_install_with_shizuku">Automatisk installasjon etter patching</string>
     <string name="settings_auto_install_with_shizuku_description">Installerer APK-en stille og rolig så snart patching er fullført</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" er aktivert - automatisk installasjon vil bli hoppet over</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimalisering av batteri</string>
     <string name="settings_system_battery_optimization_description">Holder oppdatereren i gang når appen minimeres</string>

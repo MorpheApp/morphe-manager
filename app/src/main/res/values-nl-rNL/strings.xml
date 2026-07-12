@@ -661,7 +661,6 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_prompt_installer_on_install_description">Toont het dialoogvenster voor het selecteren van de installer bij elke geïnstalleerde gepatchte app</string>
     <string name="settings_auto_install_with_shizuku">Automatisch installeren na patchen</string>
     <string name="settings_auto_install_with_shizuku_description">Installeert de gepatchte APK stilzwijgend zodra het patchen is voltooid</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" is ingeschakeld - automatische installatie wordt overgeslagen</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterijoptimalisatie</string>
     <string name="settings_system_battery_optimization_description">Houdt de patcher actief wanneer de app geminimaliseerd is</string>

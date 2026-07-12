@@ -659,7 +659,6 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_prompt_installer_on_install_description">Hîşyarî her carî dema ku app’a girêtî hatî sazkirin, dîyaloga hilbijartina sazkirî nîşan bide</string>
     <string name="settings_auto_install_with_shizuku">Têxînekî otomatîkî piştî paqijkirinê</string>
     <string name="settings_auto_install_with_shizuku_description">Bi hesînî APK-ya paqijkirî piştî qedandina paqijkirinê saz dike</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" aktîv e - sazkirina otomatîkî dê derbas bibe</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Serûşê bateriyê</string>
     <string name="settings_system_battery_optimization_description">Dema ku app hatî biçikînîn, sazkirîn bidomîne</string>

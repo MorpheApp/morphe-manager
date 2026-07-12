@@ -660,7 +660,6 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">Yamaqlanan tətbiqi quraşdırdığınız hər vaxt quraşdırıcı seçimi dialoqunu göstərir</string>
     <string name="settings_auto_install_with_shizuku">Yamaqlamadan sonra birbaşa quraşdır</string>
     <string name="settings_auto_install_with_shizuku_description">Yamaqlanma bitən kimi yamaqlanan APK-nı səssizcə quraşdırır</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" işləkdir - birbaşa quraşdırma ötürüləcək</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batareya yaxşılaşdırma</string>
     <string name="settings_system_battery_optimization_description">Tətbiq qısılanda yamaqlayıcını işlək saxlayır</string>

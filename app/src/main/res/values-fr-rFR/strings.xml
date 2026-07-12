@@ -666,7 +666,6 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_prompt_installer_on_install_description">Affiche la boîte de dialogue de sélection de l\'installateur à chaque installation d’une application patchée</string>
     <string name="settings_auto_install_with_shizuku">Installer automatiquement après le patchage</string>
     <string name="settings_auto_install_with_shizuku_description">Installe silencieusement l\'APK patché dès que le patchage est terminé</string>
-    <string name="settings_auto_install_prompt_conflict">%s est activé - l\'installation automatique sera passée</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisation de la batterie</string>
     <string name="settings_system_battery_optimization_description">Maintient le patcheur en cours d\'exécution lorsque l\'application est minimisée</string>

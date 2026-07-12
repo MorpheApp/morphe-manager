@@ -28,14 +28,14 @@
     <string name="home_update_success_subtitle">Tá do foinsí suas chun dáta</string>
     <string name="home_sources_are_loading">Tá na foinsí ag lódáil, fan le do thoil…</string>
     <string name="home_search_apps">Cuardaigh aipeanna</string>
-    <string name="home_app_sort_title">Aipeanna a shórtáil</string>
-    <string name="home_app_sort_manual_description">Coinnigh app faoi bhrú ar fhad, ansin tapa ar an gcnaip cóimeála</string>
+    <string name="home_app_sort_title">Sórtáil aipeanna</string>
+    <string name="home_app_sort_manual_description">Brúigh go fada ar aip, ansin tapáil an cnaipe athordaithe</string>
     <string name="home_app_sort_recommended">Ordú molta</string>
-    <string name="home_app_sort_recommended_description">Aipeanna suiteáilte agus greanta ar dtús</string>
-    <string name="home_app_sort_name_asc_description">Aibítir, ó A go Z</string>
-    <string name="home_app_sort_name_desc_description">Ailmhnéalfabhair comhthairis, ó Z go A</string>
+    <string name="home_app_sort_recommended_description">Aipeanna suiteáilte agus bioráilte ar dtús</string>
+    <string name="home_app_sort_name_asc_description">In ord aibítre, A go Z</string>
+    <string name="home_app_sort_name_desc_description">Droim ar ais aibítreach, Z go A</string>
     <string name="home_app_sort_updates_first">Nuashonruithe paiste ar dtús</string>
-    <string name="home_app_sort_updates_first_description">Aipeanna le badgeanna nuashonraithe ar dtús, ansin de réir an ordú molta</string>
+    <string name="home_app_sort_updates_first_description">Aipeanna le suaitheantais nuashonraithe ar dtús, ansin ord molta</string>
     <string name="home_no_apps_title">Níl aon aipeanna ar fáil</string>
     <string name="home_no_apps_subtitle">Cuir foinse paiste leis nó cumasaigh ceann atá ann cheana féin i %s</string>
     <string name="home_no_apps_search_subtitle">Níl aon aip ag teacht le \"%s\"</string>
@@ -84,13 +84,13 @@
     <string name="home_greeting_super_late_5">Oícheanta agus táirgiúil</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Foinsí paiste</string>
-    <string name="sources_sort_title">Roghnaigh foinse paiste</string>
+    <string name="sources_sort_title">Sórtáil foinsí paiste</string>
     <string name="sources_sort_manual">Ordú láimhe</string>
     <string name="sources_sort_manual_hint">Brúigh suas le foinse le hathordú</string>
     <string name="sources_sort_last_updated">Nuashonraithe is déanaí</string>
     <string name="sources_sort_last_updated_description">Nuashonruithe foinse is déanaí ar dtús</string>
     <string name="sources_sort_enabled_first">Cumasaithe ar dtús</string>
-    <string name="sources_sort_enabled_first_description">Taispeáin foinseacha gníomhacha roimh foinseacha dí-chumasaithe</string>
+    <string name="sources_sort_enabled_first_description">Taispeáin foinsí gníomhacha roimh fhoinsí díchumasaithe</string>
     <string name="sources_management_open_in_browser">Oscail sa bhrabhsálaí</string>
     <string name="sources_management_failed_to_open_url">Teip ar URL a oscailt</string>
     <string name="sources_management_prerelease_toggle">Paistí réamh-eisiúna</string>
@@ -659,7 +659,6 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_prompt_installer_on_install_description">Taispeánann sé dialóg roghnúcháin suiteálaí gach uair a shuiteáiltear aip phaisteáilte</string>
     <string name="settings_auto_install_with_shizuku">Suiteáil uathoibríoch tar éis paisteála</string>
     <string name="settings_auto_install_with_shizuku_description">Suiteálann sé an APK paisteáilte go ciúin a luaithe a bheidh an paisteáil críochnaithe</string>
-    <string name="settings_auto_install_prompt_conflict">Tá \"%s\" cumasaithe - scipeálfar an suiteáil uathoibríoch</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Uasmhéadú ceallraí</string>
     <string name="settings_system_battery_optimization_description">Coinníonn an paisteálaí ag rith nuair a bhíonn an aip íoslaghdaithe</string>

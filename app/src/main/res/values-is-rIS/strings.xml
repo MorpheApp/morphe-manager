@@ -656,7 +656,6 @@ Myndastærðin verður að vera sem hér segir:
     <string name="settings_prompt_installer_on_install_description">Mælt er með því að nota heimildir sem þú treystir</string>
     <string name="settings_auto_install_with_shizuku">Sjálfvirkt uppsetning eftir breytingar</string>
     <string name="settings_auto_install_with_shizuku_description">Setur upp breytta APK sjálfkrafa strax þegar breytingum er lokið</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" er virkt - sjálfvirk uppsetning verður sleppt</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Rafhlöðu útvinnslustillingar</string>
     <string name="settings_system_battery_optimization_description">Skoða upprunaleg geymslu</string>

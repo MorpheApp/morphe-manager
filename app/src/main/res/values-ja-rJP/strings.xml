@@ -661,7 +661,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">パッチ適用済みアプリをインストールする際に、毎回インストーラー選択ダイアログを表示します</string>
     <string name="settings_auto_install_with_shizuku">パッチ適用後の自動インストール</string>
     <string name="settings_auto_install_with_shizuku_description">パッチ適用完了後、パッチ適用済み APK を自動的にインストールします</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" が有効になっています - 自動インストールはスキップされます</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">電池の最適化</string>
     <string name="settings_system_battery_optimization_description">アプリを閉じているときでも、パッチャーを実行し続けます</string>

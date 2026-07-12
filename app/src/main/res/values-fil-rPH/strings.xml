@@ -657,7 +657,6 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_prompt_installer_on_install_description">Ipinapakita ang diyalogo ng pagpili ng installer sa tuwing mag-i-install ka ng naka-patch na aplikasyon</string>
     <string name="settings_auto_install_with_shizuku">Awtomatikong i-install pagkatapos ng pag-patch</string>
     <string name="settings_auto_install_with_shizuku_description">Tahimik na i-i-install ang patched na APK sa sandaling makumpleto ang pag-patch</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" ay naka-enable - lalaktawan ang awtomatikong pag-install</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pag-optimize sa baterya</string>
     <string name="settings_system_battery_optimization_description">Pinapanatili ang patcher na tumatakbo kapag ang app ay minimize</string>

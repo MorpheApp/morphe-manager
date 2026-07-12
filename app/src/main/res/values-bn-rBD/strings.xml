@@ -651,7 +651,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_prompt_installer_on_install_description">প্যাচ করা অ্যাপ ইনস্টল করার সময়마다 ইনস্টলার নির্বাচন ডায়ালগ দেখায়।</string>
     <string name="settings_auto_install_with_shizuku">প্যাচিং করার পরে স্বয়ংক্রিয়ভাবে ইনস্টল করুন</string>
     <string name="settings_auto_install_with_shizuku_description">প্যাচিং সম্পন্ন হওয়ার সাথে সাথেই প্যাচ করা APK নিঃশব্দে ইনস্টল করে</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" সক্রিয় করা হয়েছে - স্বয়ংক্রিয় ইনস্টলেশন এড়িয়ে যাওয়া হবে</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">ব্যাটারি অপটিমাইজেশন</string>
     <string name="settings_system_battery_optimization_description">অ্যাপটি মিনিমাইজ করা হলে প্যাচার চালু রাখে।</string>

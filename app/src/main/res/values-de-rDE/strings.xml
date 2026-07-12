@@ -661,7 +661,6 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_prompt_installer_on_install_description">Zeigt jedes Mal ein Dialogfenster zur Installerauswahl an, wenn eine gepatchte App installiert wird</string>
     <string name="settings_auto_install_with_shizuku">Automatische Installation nach dem Patchen</string>
     <string name="settings_auto_install_with_shizuku_description">Installiert die gepatchte APK automatisch, sobald das Patchen abgeschlossen ist</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" ist aktiviert - die automatische Installation wird übersprungen</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterieoptimierung</string>
     <string name="settings_system_battery_optimization_description">Behält den Patcher im Betrieb, wenn die App minimiert wird</string>

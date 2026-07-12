@@ -661,7 +661,6 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_prompt_installer_on_install_description">Wys die installeerder seleksie dialoog elke keer as \'n gepatchte toepassing geïnstalleer word</string>
     <string name="settings_auto_install_with_shizuku">Outomatiese installering na patstelling</string>
     <string name="settings_auto_install_with_shizuku_description">Installeer die gepatchde APK stilweg sosoon as die patstelling voltooi is</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" is geaktiveer - outomatiese installering sal oorgeslaan word</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery-optimalisering</string>
     <string name="settings_system_battery_optimization_description">Hou die patcher lopend wanneer die toepassing geminimaliseer is</string>

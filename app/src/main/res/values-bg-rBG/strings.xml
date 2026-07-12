@@ -662,7 +662,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">Показва диалогов прозорец за избор на инсталатор всеки път, когато се инсталира приложение с пач.</string>
     <string name="settings_auto_install_with_shizuku">Автоматична инсталация след поправяне</string>
     <string name="settings_auto_install_with_shizuku_description">Инсталира поправения APK тихо веднага след завършване на поправянето</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" е включен - автоматичната инсталация ще бъде пропусната</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизация на батерията</string>
     <string name="settings_system_battery_optimization_description">Поддържа работещ патчър, когато приложението е минимизирано</string>

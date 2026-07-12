@@ -661,7 +661,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">Приказује дијалог за избор инсталатера сваки пут када се инсталира закрпљена апликација</string>
     <string name="settings_auto_install_with_shizuku">Аутоматска инсталација након закрпе</string>
     <string name="settings_auto_install_with_shizuku_description">Тихо инсталира закрпљени APK чим је закрпљивање завршено</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" је омогућено - аутоматска инсталација ће бити прескочена</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизација батерије</string>
     <string name="settings_system_battery_optimization_description">Држи закрпљивач активним када је апликација минимизирана</string>

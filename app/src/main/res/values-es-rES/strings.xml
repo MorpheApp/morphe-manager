@@ -661,7 +661,6 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_prompt_installer_on_install_description">Muestra el diálogo de selección del instalador cada vez que se instala una aplicación parcheada</string>
     <string name="settings_auto_install_with_shizuku">Instalación automática después del parcheo</string>
     <string name="settings_auto_install_with_shizuku_description">Instala silenciosamente el APK parcheado tan pronto como se completa el parcheo</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" está habilitado: la instalación automática se omitirá</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimización de batería</string>
     <string name="settings_system_battery_optimization_description">Mantiene el parcheador en funcionamiento cuando la aplicación está minimizada</string>
