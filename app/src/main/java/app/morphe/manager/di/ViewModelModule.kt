@@ -16,4 +16,5 @@ val viewModelModule = module {
     viewModelOf(::AboutViewModel)
     viewModelOf(::InstalledAppInfoViewModel)
     viewModelOf(::PatchOptionsViewModel)
+    viewModelOf(::StorageManagementViewModel)
 }

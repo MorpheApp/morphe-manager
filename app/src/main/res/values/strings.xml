@@ -781,6 +781,28 @@ The image dimensions must be as follows:
     <string name="settings_system_apks_export_zip_failed">Failed to export selected APKs</string>
     <string name="settings_system_apk_item_info" translatable="false">v%s • %s</string>
 
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Storage management</string>
+    <string name="settings_system_storage_management_description">Review disk usage and clear cached files</string>
+    <string name="settings_system_storage_keystore_title">Signing keystore</string>
+    <string name="settings_system_storage_app_data_title">App data</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch bundles</string>
+    <string name="settings_system_storage_http_cache_title">Network cache</string>
+    <string name="settings_system_storage_http_cache_description">HTTP responses cached to speed up updates</string>
+    <string name="settings_system_storage_installer_cache_title">External installer cache</string>
+    <string name="settings_system_storage_installer_cache_description">APK copies passed to third-party installers</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher workspace</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher runtime files and orphaned scratch data</string>
+    <string name="settings_system_storage_temporary_title">Temporary files</string>
+    <string name="settings_system_storage_temporary_description">Working files created during patching</string>
+    <string name="settings_system_storage_clear_all">Clear all caches</string>
+    <string name="settings_system_storage_clear_all_description">Frees all reclaimable cache space at once</string>
+    <string name="settings_system_storage_clear_all_confirm">This clears cached network responses, staged installer copies, and temporary files. Original and patched APKs are kept</string>
+    <string name="settings_system_storage_cleared">Freed %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nothing to clear</string>
+    <string name="settings_system_storage_open_app_info_title">Open Android app storage</string>
+    <string name="settings_system_storage_open_app_info_description">Manage or clear all Morphe data through system settings</string>
+
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patched APKs</string>
     <string name="settings_system_patched_apks_description">Manages saved patched application files</string>
