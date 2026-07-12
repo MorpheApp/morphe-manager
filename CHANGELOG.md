@@ -1,3 +1,13 @@
+## [1.23.1-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.23.1-dev.1...v1.23.1-dev.2) (2026-07-12)
+
+
+### Bug Fixes
+
+* Align patch options notices with `InfoBadge` component ([3b7236d](https://github.com/MorpheApp/morphe-manager/commit/3b7236d2c1a1c04ebe3718219451afbfe9ff3531))
+* Move installer prompt toggle into selection dialog ([9f96f37](https://github.com/MorpheApp/morphe-manager/commit/9f96f375ecdc7b6f69622d3a830d59c67b031562))
+* Show installer prompt toggle regardless of expert mode ([9ce1857](https://github.com/MorpheApp/morphe-manager/commit/9ce1857d3df7f571bdfe392ad6d87f5af4c376c8))
+* Unify settings tabs with `SettingsGroup` and consolidate item components ([3277958](https://github.com/MorpheApp/morphe-manager/commit/32779585a6103643116a34855a8ae36b0626f909))
+
 ## [1.23.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0...v1.23.1-dev.1) (2026-07-11)
 
 
