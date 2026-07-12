@@ -718,8 +718,6 @@ The image dimensions must be as follows:
     <string name="settings_prompt_installer_on_install_description">Shows installer selection dialog each time a patched app is installed</string>
     <string name="settings_auto_install_with_shizuku">Auto-install after patching</string>
     <string name="settings_auto_install_with_shizuku_description">Silently installs the patched APK as soon as patching completes</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" is enabled - auto-install will be skipped</string>
-
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery optimization</string>
     <string name="settings_system_battery_optimization_description">Keeps the patcher running when the app is minimized</string>

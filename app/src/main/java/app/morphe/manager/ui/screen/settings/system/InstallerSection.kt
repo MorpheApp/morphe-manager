@@ -47,7 +47,6 @@ fun InstallerSection(
     onShowInstallerDialog: () -> Unit,
     onInstallerItemPositioned: ((Rect) -> Unit)? = null
 ) {
-    val expertMode by settingsViewModel.prefs.useExpertMode.getAsState()
     val primaryPreference by settingsViewModel.prefs.installerPrimary.getAsState()
     val primaryToken = remember(primaryPreference) {
         settingsViewModel.parseInstallerToken(primaryPreference)
@@ -73,51 +72,16 @@ fun InstallerSection(
         ?: settingsViewModel.describeInstallerEntry(primaryToken, installTarget)
         ?: primaryEntries.value.firstOrNull()
 
-    // Prompt installer on installation preference
-    val promptInstallerOnInstall by settingsViewModel.prefs.promptInstallerOnInstall.getAsState()
-
-    // Localized strings for accessibility
-    val enabledState = stringResource(R.string.enabled)
-    val disabledState = stringResource(R.string.disabled)
-
-    Column {
-        if (primaryEntry != null) {
-            Box(
-                modifier = if (onInstallerItemPositioned != null)
-                    Modifier.onGloballyPositioned { coords -> onInstallerItemPositioned(coords.boundsInWindow()) }
-                else Modifier
-            ) {
-                InstallerSettingsItem(
-                    title = stringResource(R.string.installer_title),
-                    entry = primaryEntry,
-                    onClick = onShowInstallerDialog
-                )
-            }
-        }
-
-        // Prompt installer toggle (Expert mode only)
-        if (expertMode) {
-            MorpheSettingsDivider()
-
-            RichSettingsItem(
-                onClick = {
-                    settingsViewModel.setPromptInstallerOnInstall(!promptInstallerOnInstall)
-                },
-                modifier = Modifier.semantics {
-                    role = Role.Switch
-                    stateDescription = if (promptInstallerOnInstall) enabledState else disabledState
-                },
-                leadingContent = {
-                    MorpheIcon(icon = Icons.Outlined.Android)
-                },
-                title = stringResource(R.string.settings_prompt_installer_on_install),
-                subtitle = stringResource(R.string.settings_prompt_installer_on_install_description),
-                trailingContent = {
-                    MorpheSwitch(
-                        checked = promptInstallerOnInstall,
-                        onCheckedChange = null
-                    )
-                }
+    if (primaryEntry != null) {
+        Box(
+            modifier = if (onInstallerItemPositioned != null)
+                Modifier.onGloballyPositioned { coords -> onInstallerItemPositioned(coords.boundsInWindow()) }
+            else Modifier
+        ) {
+            InstallerSettingsItem(
+                title = stringResource(R.string.installer_title),
+                entry = primaryEntry,
+                onClick = onShowInstallerDialog
             )
         }
     }
@@ -143,6 +107,7 @@ fun InstallerSelectionDialogContainer(
 
     val autoInstallEnabled by settingsViewModel.prefs.autoInstallWithShizuku.getAsState()
     val promptEnabled by settingsViewModel.prefs.promptInstallerOnInstall.getAsState()
+    val expertMode by settingsViewModel.prefs.useExpertMode.getAsState()
 
     InstallerSelectionDialog(
         title = stringResource(R.string.installer_title),
@@ -156,7 +121,9 @@ fun InstallerSelectionDialogContainer(
         onOpenShizuku = settingsViewModel::openShizukuApp,
         autoInstallEnabled = autoInstallEnabled,
         onAutoInstallToggle = settingsViewModel::setAutoInstallWithShizuku,
-        installerPromptEnabled = promptEnabled
+        installerPromptEnabled = promptEnabled,
+        onInstallerPromptToggle = settingsViewModel::setPromptInstallerOnInstall,
+        expertMode = expertMode
     )
 }
 
@@ -216,7 +183,9 @@ fun InstallerSelectionDialog(
     onOpenShizuku: (() -> Boolean)?,
     autoInstallEnabled: Boolean = false,
     onAutoInstallToggle: ((Boolean) -> Unit)? = null,
-    installerPromptEnabled: Boolean = false
+    installerPromptEnabled: Boolean = false,
+    onInstallerPromptToggle: ((Boolean) -> Unit)? = null,
+    expertMode: Boolean = false
 ) {
     val shizukuPromptReasons = remember {
         setOf(
@@ -314,6 +283,53 @@ fun InstallerSelectionDialog(
                 }
             }
 
+            // Prompt on install toggle (Expert mode only)
+            if (expertMode && onInstallerPromptToggle != null) {
+                Column {
+                    HorizontalDivider(modifier = Modifier.padding(top = 4.dp))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(MaterialTheme.shapes.medium)
+                            .toggleable(
+                                value = installerPromptEnabled,
+                                role = Role.Switch,
+                                onValueChange = { newValue ->
+                                    onInstallerPromptToggle(newValue)
+                                    // Mutually exclusive with Auto-install
+                                    if (newValue && autoInstallEnabled) {
+                                        onAutoInstallToggle?.invoke(false)
+                                    }
+                                }
+                            )
+                            .semantics {
+                                stateDescription = if (installerPromptEnabled) enabledState else disabledState
+                            }
+                            .padding(vertical = 12.dp, horizontal = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        MorpheIcon(icon = Icons.Outlined.Android)
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = stringResource(R.string.settings_prompt_installer_on_install),
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                            Text(
+                                text = stringResource(R.string.settings_prompt_installer_on_install_description),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        MorpheSwitch(
+                            checked = installerPromptEnabled,
+                            onCheckedChange = null
+                        )
+                    }
+                }
+            }
+
             // Auto-install toggle
             AnimatedVisibility(
                 visible = (currentSelection.value == InstallerManager.Token.Shizuku ||
@@ -331,7 +347,13 @@ fun InstallerSelectionDialog(
                             .toggleable(
                                 value = autoInstallEnabled,
                                 role = Role.Switch,
-                                onValueChange = { onAutoInstallToggle?.invoke(it) }
+                                onValueChange = { newValue ->
+                                    onAutoInstallToggle?.invoke(newValue)
+                                    // Mutually exclusive with Prompt on install
+                                    if (newValue && installerPromptEnabled) {
+                                        onInstallerPromptToggle?.invoke(false)
+                                    }
+                                }
                             )
                             .semantics {
                                 stateDescription = if (autoInstallEnabled) enabledState else disabledState
@@ -356,19 +378,6 @@ fun InstallerSelectionDialog(
                         MorpheSwitch(
                             checked = autoInstallEnabled,
                             onCheckedChange = null
-                        )
-                    }
-
-                    if (installerPromptEnabled) {
-                        InfoBadge(
-                            text = stringResource(
-                                R.string.settings_auto_install_prompt_conflict,
-                                stringResource(R.string.settings_prompt_installer_on_install)
-                            ),
-                            style = InfoBadgeStyle.Warning,
-                            icon = Icons.Outlined.Warning,
-                            isExpanded = true,
-                            modifier = Modifier.padding(top = 4.dp)
                         )
                     }
                 }
