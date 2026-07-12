@@ -23,6 +23,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -100,6 +101,7 @@ private data class OriginalApkEntry(
 data class ApkListMeta(
     val title: String,
     val icon: ImageVector,
+    val accentColor: Color,
     val count: Int,
     val totalSize: Long,
     val isLoading: Boolean,
@@ -220,6 +222,7 @@ private fun PatchedApksContent(
         meta = ApkListMeta(
             title = stringResource(R.string.settings_system_patched_apks_title),
             icon = Icons.Outlined.Apps,
+            accentColor = StorageColors.PatchedApks,
             count = displayItems.size,
             totalSize = totalSize,
             isLoading = isLoading,
@@ -389,6 +392,7 @@ private fun OriginalApksContent(
         meta = ApkListMeta(
             title = stringResource(R.string.settings_system_original_apks_title),
             icon = Icons.Outlined.Storage,
+            accentColor = StorageColors.OriginalApks,
             count = apkItems.size,
             totalSize = totalSize,
             isLoading = isLoading,
@@ -603,8 +607,9 @@ private fun ApkManagementDialogContent(
                             meta.count,
                             meta.count
                         ),
-                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                        titleColor = MaterialTheme.colorScheme.primary,
+                        containerColor = meta.accentColor.copy(alpha = 0.15f),
+                        titleColor = meta.accentColor,
+                        iconTint = meta.accentColor,
                         icon = meta.icon
                     ) {
                         Text(

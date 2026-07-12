@@ -564,6 +564,7 @@ fun InfoBox(
     containerColor: Color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
     titleColor: Color = MaterialTheme.colorScheme.onSurface,
     icon: ImageVector? = null,
+    iconTint: Color = MaterialTheme.colorScheme.primary,
     content: @Composable ColumnScope.() -> Unit
 ) {
     Surface(
@@ -597,7 +598,7 @@ fun InfoBox(
                     imageVector = it,
                     contentDescription = null,
                     modifier = Modifier.size(32.dp),
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = iconTint
                 )
             }
         }
