@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.EaseOutCubic
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -20,7 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.ui.screen.shared.LocalDialogSecondaryTextColor
 import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
@@ -36,16 +42,14 @@ data class StorageSegment(
 )
 
 private const val SEGMENT_ANIMATION_MS = 700
-private val BAR_HEIGHT = 300.dp
+private val BAR_MIN_HEIGHT = 200.dp
 private val BAR_WIDTH = 56.dp
+private val BAR_LEGEND_SPACING = 20.dp
 
 /**
- * Vertical stacked bar with a legend column on the right. Segments animate up from zero
- * on first composition, and animate smoothly whenever their byte size changes.
- *
- * The bar always fills its full height with the composition of [segments] (proportional to
- * the sum of their bytes). [deviceFreeBytes] is only used to render the free-space subtitle
- * above the bar for context.
+ * Stacked vertical bar of [segments] (proportional to their byte sum) with a legend on the
+ * right. Segments animate up from zero on first composition and animate smoothly when their
+ * byte size changes. [deviceFreeBytes] renders as a subtitle above the bar for context only.
  */
 @Composable
 fun StorageHistogram(
@@ -70,23 +74,67 @@ fun StorageHistogram(
             color = LocalDialogTextColor.current
         )
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(20.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            HistogramBar(
-                segments = segments,
-                safeTotal = segmentsSum,
-                modifier = Modifier.width(BAR_WIDTH).height(BAR_HEIGHT)
+        HistogramLayout(
+            bar = {
+                HistogramBar(
+                    segments = segments,
+                    safeTotal = segmentsSum,
+                    modifier = Modifier.fillMaxSize()
+                )
+            },
+            legend = { HistogramLegend(visibleSegments = visibleLegend) }
+        )
+    }
+}
+
+/**
+ * Places [bar] on the left and [legend] on the right, sizing the bar to match the legend's
+ * natural height with a floor of [BAR_MIN_HEIGHT]. Height propagates one way: legend measures
+ * first at unbounded height, then the bar fits into it. A plain `Row(IntrinsicSize.Max)` would
+ * feedback-loop because the animated segment stack reports its current height as its intrinsic
+ * max, preventing the row from ever shrinking.
+ */
+@Composable
+private fun HistogramLayout(
+    bar: @Composable () -> Unit,
+    legend: @Composable () -> Unit
+) {
+    SubcomposeLayout(
+        modifier = Modifier
+            .fillMaxWidth()
+            .animateContentSize()
+    ) { constraints ->
+        val barWidthPx = BAR_WIDTH.roundToPx()
+        val spacingPx = BAR_LEGEND_SPACING.roundToPx()
+        val minHeightPx = BAR_MIN_HEIGHT.roundToPx()
+        val legendWidthPx = (constraints.maxWidth - barWidthPx - spacingPx).coerceAtLeast(0)
+
+        val legendPlaceable = subcompose(SlotId.Legend, legend).first().measure(
+            Constraints(
+                minWidth = legendWidthPx,
+                maxWidth = legendWidthPx,
+                minHeight = 0,
+                maxHeight = Constraints.Infinity
             )
-            HistogramLegend(
-                visibleSegments = visibleLegend,
-                modifier = Modifier.weight(1f)
+        )
+
+        val rowHeightPx = maxOf(legendPlaceable.height, minHeightPx)
+
+        val barPlaceable = subcompose(SlotId.Bar, bar).first().measure(
+            Constraints.fixed(barWidthPx, rowHeightPx)
+        )
+
+        layout(constraints.maxWidth, rowHeightPx) {
+            barPlaceable.place(0, 0)
+            legendPlaceable.place(
+                x = barWidthPx + spacingPx,
+                y = (rowHeightPx - legendPlaceable.height) / 2
             )
         }
     }
 }
+
+private enum class SlotId { Bar, Legend }
 
 @Composable
 private fun HistogramBar(
@@ -96,21 +144,26 @@ private fun HistogramBar(
 ) {
     val trackColor = LocalDialogSecondaryTextColor.current.copy(alpha = 0.12f)
 
+    // Captures the height assigned by [HistogramLayout] so segments can use absolute Dp values
+    var barHeightPx by remember { mutableIntStateOf(0) }
+    val barHeightDp = with(LocalDensity.current) { barHeightPx.toDp() }
+
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(percent = 50))
             .background(trackColor)
+            .onSizeChanged { barHeightPx = it.height }
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Bottom
         ) {
-            // Render all segments (including zero-byte ones) so per-segment animation state
-            // is remembered by position, not by presence
+            // Render every segment (even zero-byte) so animation state stays keyed by position
             segments.forEach { segment ->
                 key(segment.key) {
                     AnimatedSegment(
                         targetFraction = (segment.bytes.toFloat() / safeTotal.toFloat()).coerceIn(0f, 1f),
+                        barHeight = barHeightDp,
                         color = segment.color
                     )
                 }
@@ -120,8 +173,8 @@ private fun HistogramBar(
 }
 
 @Composable
-private fun AnimatedSegment(targetFraction: Float, color: Color) {
-    // Start at zero so the first frame draws nothing, then animate to the real value
+private fun AnimatedSegment(targetFraction: Float, barHeight: Dp, color: Color) {
+    // `animate` flag drives the entry animation: target is 0 on first frame, real value after
     var animate by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) { animate = true }
 
@@ -132,12 +185,11 @@ private fun AnimatedSegment(targetFraction: Float, color: Color) {
     )
 
     if (fraction <= 0f) return
-    // Use an absolute Dp height so the parent Column's `Arrangement.Bottom` does not shrink
-    // subsequent segments proportionally to the remaining space
+    // Absolute Dp: `fillMaxHeight(fraction)` compounds under `Arrangement.Bottom` in Column
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(BAR_HEIGHT * fraction)
+            .height(barHeight * fraction)
             .background(
                 Brush.verticalGradient(
                     colors = listOf(color, color.copy(alpha = 0.82f))
