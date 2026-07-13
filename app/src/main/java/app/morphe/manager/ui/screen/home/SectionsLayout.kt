@@ -441,7 +441,7 @@ fun NotificationsOverlay(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Blocked source alert takes priority over other notices
+            // Blocked source alert takes priority and cannot be dismissed while the block persists
             AlertSnackbar(
                 visible = notifications.blockedSources.visible,
                 level = AlertLevel.Error,
@@ -449,6 +449,7 @@ fun NotificationsOverlay(
                 title = stringResource(R.string.home_blocked_source_title),
                 subtitle = stringResource(R.string.home_blocked_source_subtitle),
                 onShowDetails = notifications.blockedSources.onShow,
+                swipeEnabled = false,
                 modifier = Modifier.fillMaxWidth()
             )
 

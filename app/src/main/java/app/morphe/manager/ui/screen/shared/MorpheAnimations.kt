@@ -59,9 +59,14 @@ object MorpheAnimations {
     val expandHorizFadeIn = expandHorizontally(defaultTween()) + fadeIn
     val shrinkHorizFadeOut = shrinkHorizontally(defaultTween()) + fadeOut
 
-    // Slide transitions
-    val slideUpFadeEnter = slideInVertically(defaultTween()) { -it } + fadeIn
-    val slideUpFadeExit = slideOutVertically(defaultTween()) { -it } + fadeOut
+    // Slide + fade + size collapse; the shrink/expand keeps the sibling layout in sync while the
+    // card is animating out so no empty gap lingers between neighbours
+    val slideUpFadeEnter = slideInVertically(defaultTween()) { -it } +
+        fadeIn(defaultTween()) +
+        expandVertically(defaultTween())
+    val slideUpFadeExit = slideOutVertically(defaultTween()) { -it } +
+        fadeOut(defaultTween()) +
+        shrinkVertically(defaultTween())
 
     // Push transitions (Settings screen slides up over home, returns by sliding down)
     val pushEnter = slideInVertically(
