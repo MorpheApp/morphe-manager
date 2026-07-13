@@ -85,20 +85,26 @@ private data class SwipeActionConfig(
     val contentColor: Color
 )
 
-/** Notifications strip state and its action. */
+/** Visibility flag paired with the tap callback for a single [AlertSnackbar] slot. */
+@Immutable
+data class AlertState(val visible: Boolean, val onShow: () -> Unit)
+
+/** Transient state driving the bundle-update progress snackbar. */
+@Immutable
+data class BundleUpdateState(
+    val visible: Boolean,
+    val status: BundleUpdateStatus,
+    val progress: PatchBundleRepository.BundleUpdateProgress?
+)
+
+/** Aggregate of all notification-strip inputs, grouped by alert. */
 @Immutable
 data class HomeNotificationsUi(
-    val hasManagerUpdate: Boolean,
-    val showBundleUpdateSnackbar: Boolean,
-    val snackbarStatus: BundleUpdateStatus,
-    val bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
-    val onShowUpdateDetails: () -> Unit,
-    val hasBlockedSources: Boolean,
-    val onShowBlockedSources: () -> Unit,
-    val hasMetadataErrors: Boolean,
-    val onShowMetadataErrors: () -> Unit,
-    val updatesSkippedDueToMetered: Boolean,
-    val onShowMeteredDetails: () -> Unit
+    val managerUpdate: AlertState,
+    val blockedSources: AlertState,
+    val metadataErrors: AlertState,
+    val meteredSkipped: AlertState,
+    val bundleUpdate: BundleUpdateState
 )
 
 /** Visible and hidden app lists with their loading state. */
@@ -254,17 +260,7 @@ fun SectionsLayout(
         // Section 1: Notifications overlay - matches maxCardWidth in AdaptiveContent
         val maxCardWidth = if (isLandscape()) 700.dp else 560.dp
         NotificationsOverlay(
-            hasManagerUpdate = notifications.hasManagerUpdate,
-            onShowUpdateDetails = notifications.onShowUpdateDetails,
-            showBundleUpdateSnackbar = notifications.showBundleUpdateSnackbar,
-            snackbarStatus = notifications.snackbarStatus,
-            bundleUpdateProgress = notifications.bundleUpdateProgress,
-            hasBlockedSources = notifications.hasBlockedSources,
-            onShowBlockedSources = notifications.onShowBlockedSources,
-            hasMetadataErrors = notifications.hasMetadataErrors,
-            onShowMetadataErrors = notifications.onShowMetadataErrors,
-            updatesSkippedDueToMetered = notifications.updatesSkippedDueToMetered,
-            onShowMeteredDetails = notifications.onShowMeteredDetails,
+            notifications = notifications,
             modifier = Modifier
                 .widthIn(max = maxCardWidth)
                 .align(Alignment.TopCenter)
@@ -434,17 +430,7 @@ private fun AdaptiveContent(
  */
 @Composable
 fun NotificationsOverlay(
-    hasManagerUpdate: Boolean,
-    onShowUpdateDetails: () -> Unit,
-    showBundleUpdateSnackbar: Boolean,
-    snackbarStatus: BundleUpdateStatus,
-    bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
-    hasBlockedSources: Boolean,
-    onShowBlockedSources: () -> Unit,
-    hasMetadataErrors: Boolean,
-    onShowMetadataErrors: () -> Unit,
-    updatesSkippedDueToMetered: Boolean,
-    onShowMeteredDetails: () -> Unit,
+    notifications: HomeNotificationsUi,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -457,49 +443,49 @@ fun NotificationsOverlay(
         ) {
             // Blocked source alert takes priority over other notices
             AlertSnackbar(
-                visible = hasBlockedSources,
+                visible = notifications.blockedSources.visible,
                 level = AlertLevel.Error,
                 icon = Icons.Outlined.Block,
                 title = stringResource(R.string.home_blocked_source_title),
                 subtitle = stringResource(R.string.home_blocked_source_subtitle),
-                onShowDetails = onShowBlockedSources,
+                onShowDetails = notifications.blockedSources.onShow,
                 modifier = Modifier.fillMaxWidth()
             )
 
             AlertSnackbar(
-                visible = updatesSkippedDueToMetered,
+                visible = notifications.meteredSkipped.visible,
                 level = AlertLevel.Warning,
                 icon = Icons.Outlined.SignalCellularAlt,
                 title = stringResource(R.string.home_metered_skipped_title),
                 subtitle = stringResource(R.string.home_metered_skipped_subtitle),
-                onShowDetails = onShowMeteredDetails,
+                onShowDetails = notifications.meteredSkipped.onShow,
                 modifier = Modifier.fillMaxWidth()
             )
 
             AlertSnackbar(
-                visible = hasMetadataErrors,
+                visible = notifications.metadataErrors.visible,
                 level = AlertLevel.Warning,
                 icon = Icons.Outlined.CloudOff,
                 title = stringResource(R.string.home_metadata_errors_title),
                 subtitle = stringResource(R.string.home_metadata_errors_subtitle),
-                onShowDetails = onShowMetadataErrors,
+                onShowDetails = notifications.metadataErrors.onShow,
                 modifier = Modifier.fillMaxWidth()
             )
 
             AlertSnackbar(
-                visible = hasManagerUpdate,
+                visible = notifications.managerUpdate.visible,
                 level = AlertLevel.Info,
                 icon = Icons.Outlined.Update,
                 title = stringResource(R.string.home_update_available),
                 subtitle = stringResource(R.string.home_update_available_subtitle),
-                onShowDetails = onShowUpdateDetails,
+                onShowDetails = notifications.managerUpdate.onShow,
                 modifier = Modifier.fillMaxWidth()
             )
 
             BundleUpdateSnackbar(
-                visible = showBundleUpdateSnackbar,
-                status = snackbarStatus,
-                progress = bundleUpdateProgress,
+                visible = notifications.bundleUpdate.visible,
+                status = notifications.bundleUpdate.status,
+                progress = notifications.bundleUpdate.progress,
                 modifier = Modifier.fillMaxWidth()
             )
         }

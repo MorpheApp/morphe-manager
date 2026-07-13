@@ -205,17 +205,15 @@ fun HomeScreen(
         ) {
             SectionsLayout(
                 notifications = HomeNotificationsUi(
-                    hasManagerUpdate = hasManagerUpdate,
-                    showBundleUpdateSnackbar = homeViewModel.showBundleUpdateSnackbar,
-                    snackbarStatus = homeViewModel.snackbarStatus,
-                    bundleUpdateProgress = bundleUpdateProgress,
-                    onShowUpdateDetails = { showUpdateDetailsDialog.value = true },
-                    hasBlockedSources = hasBlockedSources,
-                    onShowBlockedSources = { homeViewModel.showBundleManagementSheet = true },
-                    hasMetadataErrors = hasMetadataErrors,
-                    onShowMetadataErrors = { homeViewModel.showBundleManagementSheet = true },
-                    updatesSkippedDueToMetered = homeViewModel.updatesSkippedDueToMetered,
-                    onShowMeteredDetails = { homeViewModel.showBundleManagementSheet = true }
+                    managerUpdate = AlertState(hasManagerUpdate) { showUpdateDetailsDialog.value = true },
+                    blockedSources = AlertState(hasBlockedSources) { homeViewModel.showBundleManagementSheet = true },
+                    metadataErrors = AlertState(hasMetadataErrors) { homeViewModel.showBundleManagementSheet = true },
+                    meteredSkipped = AlertState(homeViewModel.updatesSkippedDueToMetered) { homeViewModel.showBundleManagementSheet = true },
+                    bundleUpdate = BundleUpdateState(
+                        visible = homeViewModel.showBundleUpdateSnackbar,
+                        status = homeViewModel.snackbarStatus,
+                        progress = bundleUpdateProgress
+                    )
                 ),
                 apps = HomeAppListUi(
                     visible = homeAppItems,
