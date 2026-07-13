@@ -27,10 +27,15 @@ import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.HomeAppButtonPreferences
+import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
 import app.morphe.manager.ui.screen.settings.appearance.*
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.LanguageRepository.getLanguageDisplayName
@@ -39,6 +44,7 @@ import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.saveLanguageToPrefs
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 import kotlin.math.roundToInt
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -52,6 +58,7 @@ fun AppearanceTabContent(
     dynamicColor: Boolean,
     customAccentColorHex: String?,
     themeViewModel: ThemeSettingsViewModel,
+    homeAppButtonPrefs: HomeAppButtonPreferences = koinInject(),
     scrollState: ScrollState = rememberScrollState(),
     onThemeSelectorPositioned: ((Rect) -> Unit)? = null,
     onThemeSelectorScrollTarget: ((Int) -> Unit)? = null
@@ -61,12 +68,15 @@ fun AppearanceTabContent(
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
+    val appGrouping by homeAppButtonPrefs.categoryViewMode.collectAsState()
+    val showAppGroupingSwitcher by homeAppButtonPrefs.showCategoryViewSwitcher.collectAsState()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
     val randomInterval by themeViewModel.prefs.randomBackgroundInterval.getAsState()
 
     val showLanguageDialog = remember { mutableStateOf(false) }
     val showTranslationInfoDialog = remember { mutableStateOf(false) }
+    val showAppGroupingDialog = remember { mutableStateOf(false) }
 
     // Localized strings for accessibility
     val enabledState = stringResource(R.string.enabled)
@@ -113,6 +123,18 @@ fun AppearanceTabContent(
                             stateDescription = if (showGreetingPhrases) enabledState else disabledState
                         }
                     )
+                }
+            )
+            SettingsItem(
+                onClick = { showAppGroupingDialog.value = true },
+                title = stringResource(R.string.settings_appearance_app_grouping),
+                subtitle = if (showAppGroupingSwitcher) {
+                    stringResource(R.string.settings_appearance_app_grouping_show_selector)
+                } else {
+                    appGroupingTitle(appGrouping)
+                },
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.ViewAgenda)
                 }
             )
         }
@@ -258,6 +280,23 @@ fun AppearanceTabContent(
         AppIconSelector()
     }
 
+    AnimatedVisibility(
+        visible = showAppGroupingDialog.value,
+        enter = MorpheAnimations.fadeIn,
+        exit = MorpheAnimations.fadeOut
+    ) {
+        AppGroupingDialog(
+            current = appGrouping,
+            showSwitcher = showAppGroupingSwitcher,
+            onSelect = { mode ->
+                homeAppButtonPrefs.setCategoryViewMode(mode)
+                showAppGroupingDialog.value = false
+            },
+            onShowSwitcherChange = homeAppButtonPrefs::setShowCategoryViewSwitcher,
+            onDismiss = { showAppGroupingDialog.value = false }
+        )
+    }
+
     // Translation Info Dialog
     AnimatedVisibility(
         visible = showTranslationInfoDialog.value,
@@ -299,6 +338,110 @@ fun AppearanceTabContent(
         )
     }
 }
+
+@Composable
+private fun AppGroupingDialog(
+    current: HomeAppCategoryViewMode,
+    showSwitcher: Boolean,
+    onSelect: (HomeAppCategoryViewMode) -> Unit,
+    onShowSwitcherChange: (Boolean) -> Unit,
+    onDismiss: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.settings_appearance_app_grouping),
+        footer = {
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.close),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = MorpheDefaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+        ) {
+            HomeAppCategoryViewMode.entries.forEach { mode ->
+                AppGroupingOption(
+                    title = appGroupingTitle(mode),
+                    description = appGroupingDescription(mode),
+                    selected = !showSwitcher && mode == current,
+                    onSelect = {
+                        onShowSwitcherChange(false)
+                        onSelect(mode)
+                    }
+                )
+            }
+            AppGroupingOption(
+                title = stringResource(R.string.settings_appearance_app_grouping_show_selector),
+                description = stringResource(R.string.settings_appearance_app_grouping_show_selector_description),
+                selected = showSwitcher,
+                onSelect = {
+                    onShowSwitcherChange(true)
+                    onDismiss()
+                }
+            )
+        }
+    }
+}
+
+@Composable
+private fun AppGroupingOption(
+    title: String,
+    description: String,
+    selected: Boolean,
+    onSelect: () -> Unit
+) {
+    SettingsItemCard(
+        onClick = onSelect,
+        borderWidth = 1.dp,
+        modifier = Modifier.semantics {
+            role = Role.RadioButton
+            this.selected = selected
+        }
+    ) {
+        IconTextRow(
+            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
+            leadingContent = {
+                if (selected) {
+                    StatusCircleIcon(
+                        icon = Icons.Outlined.Check,
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                } else {
+                    StatusCirclePlaceholder()
+                }
+            },
+            title = title,
+            description = description,
+            trailingContent = null
+        )
+    }
+}
+
+@Composable
+private fun appGroupingTitle(mode: HomeAppCategoryViewMode): String =
+    stringResource(
+        when (mode) {
+            HomeAppCategoryViewMode.ALL_APPS -> R.string.home_category_all_apps
+            HomeAppCategoryViewMode.SOURCES -> R.string.sources
+            HomeAppCategoryViewMode.CUSTOM -> R.string.home_category_custom
+        }
+    )
+
+@Composable
+private fun appGroupingDescription(mode: HomeAppCategoryViewMode): String =
+    stringResource(
+        when (mode) {
+            HomeAppCategoryViewMode.ALL_APPS -> R.string.settings_appearance_app_grouping_all_apps_description
+            HomeAppCategoryViewMode.SOURCES -> R.string.settings_appearance_app_grouping_sources_description
+            HomeAppCategoryViewMode.CUSTOM -> R.string.settings_appearance_app_grouping_custom_description
+        }
+    )
 
 /**
  * Language selection section.

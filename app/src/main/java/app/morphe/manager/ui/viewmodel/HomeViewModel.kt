@@ -31,6 +31,8 @@ import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOr
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
+import app.morphe.manager.domain.manager.HomeAppCategoryState
+import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
 import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
@@ -159,13 +161,33 @@ data class InstalledAppPickerItem(
 data class HomeAppState(
     val visible: List<HomeAppItem>,
     val hidden: List<HomeAppItem>,
-    val sortMode: HomeAppSortMode
+    val sortMode: HomeAppSortMode,
+    val categoryState: HomeAppCategoryState,
+    val categoryViewMode: HomeAppCategoryViewMode,
+    val showCategoryViewSwitcher: Boolean,
+    val sourceGroups: List<HomeAppSourceGroup>
+)
+
+/** Apps grouped by the enabled patch source that declares them. */
+data class HomeAppSourceGroup(
+    val uid: Int,
+    val name: String,
+    val packageNames: Set<String>
 )
 
 private data class HomePrefs(
     val hiddenPackages: Set<String>,
     val customOrder: List<String>,
-    val sortMode: HomeAppSortMode
+    val sortMode: HomeAppSortMode,
+    val categoryState: HomeAppCategoryState,
+    val categoryViewMode: HomeAppCategoryViewMode,
+    val showCategoryViewSwitcher: Boolean
+)
+
+private data class HomeCategoryPrefs(
+    val categoryState: HomeAppCategoryState,
+    val categoryViewMode: HomeAppCategoryViewMode,
+    val showCategoryViewSwitcher: Boolean
 )
 
 /**
@@ -1110,12 +1132,32 @@ class HomeViewModel(
     val bundleAppMetadataFlow: StateFlow<Map<String, BundleAppMetadata>> =
         patchBundleRepository.appMetadata
 
+    private val _homeCategoryPrefsFlow = combine(
+        homeAppButtonPrefs.categoryState,
+        homeAppButtonPrefs.categoryViewMode,
+        homeAppButtonPrefs.showCategoryViewSwitcher,
+    ) { categoryState, categoryViewMode, showCategoryViewSwitcher ->
+        HomeCategoryPrefs(
+            categoryState = categoryState,
+            categoryViewMode = categoryViewMode,
+            showCategoryViewSwitcher = showCategoryViewSwitcher
+        )
+    }
+
     private val _homePrefsFlow = combine(
         homeAppButtonPrefs.hiddenPackages,
         homeAppButtonPrefs.customOrder,
         homeAppButtonPrefs.sortMode,
-    ) { hidden, order, sortMode ->
-        HomePrefs(hiddenPackages = hidden, customOrder = order, sortMode = sortMode)
+        _homeCategoryPrefsFlow,
+    ) { hidden, order, sortMode, categoryPrefs ->
+        HomePrefs(
+            hiddenPackages = hidden,
+            customOrder = order,
+            sortMode = sortMode,
+            categoryState = categoryPrefs.categoryState,
+            categoryViewMode = categoryPrefs.categoryViewMode,
+            showCategoryViewSwitcher = categoryPrefs.showCategoryViewSwitcher
+        )
     }
 
     /**
@@ -1153,6 +1195,8 @@ class HomeViewModel(
         val enabledInfo = ready.info.filter { (_, info) -> info.enabled }
         val metadata = BundleAppMetadata.buildFrom(enabledInfo)
         val packages = metadata.keys
+        val sourceNames = ready.sources.mapValues { (_, source) -> source.displayTitle }
+        val sourceGroups = buildHomeAppSourceGroups(enabledInfo, sourceNames, homePrefs.sortMode)
 
         val installedMap = installedApps.associateBy { it.originalPackageName }
 
@@ -1223,10 +1267,73 @@ class HomeViewModel(
             customOrder = homePrefs.customOrder
         )
 
-        HomeAppState(visible = visible, hidden = hidden, sortMode = homePrefs.sortMode)
+        HomeAppState(
+            visible = visible,
+            hidden = hidden,
+            sortMode = homePrefs.sortMode,
+            categoryState = homePrefs.categoryState,
+            categoryViewMode = homePrefs.categoryViewMode,
+            showCategoryViewSwitcher = homePrefs.showCategoryViewSwitcher,
+            sourceGroups = sourceGroups
+        )
     }
         .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    private fun buildHomeAppSourceGroups(
+        enabledInfo: Map<Int, PatchBundleInfo.Global>,
+        sourceNames: Map<Int, String>,
+        sortMode: HomeAppSortMode
+    ): List<HomeAppSourceGroup> {
+        val assignedPackages = linkedSetOf<String>()
+
+        val groups = enabledInfo.values
+            .filter { it.enabled }
+            .sortedWith(
+                compareBy<PatchBundleInfo.Global>(
+                    { it.uid != DEFAULT_SOURCE_UID },
+                    { (sourceNames[it.uid] ?: it.name).lowercase() },
+                    { it.uid }
+                )
+            )
+            .mapNotNull { info ->
+                val packageNames = info.patches
+                    .asSequence()
+                    .flatMap { patch -> patch.compatiblePackages.orEmpty().asSequence() }
+                    .mapNotNull { compatiblePackage -> compatiblePackage.packageName }
+                    .distinct()
+                    .filter { packageName -> assignedPackages.add(packageName) }
+                    .toSet()
+
+                if (packageNames.isEmpty()) {
+                    null
+                } else {
+                    val sourceName = sourceNames[info.uid]
+                        ?.takeUnless { it.isBlank() }
+                        ?: info.name.takeUnless { it.isBlank() }
+                        ?: "#${info.uid}"
+                    HomeAppSourceGroup(
+                        uid = info.uid,
+                        name = sourceName,
+                        packageNames = packageNames
+                    )
+                }
+            }
+
+        return when (sortMode) {
+            HomeAppSortMode.NAME_ASC -> groups.sortedWith(
+                compareBy<HomeAppSourceGroup> { it.uid != DEFAULT_SOURCE_UID }
+                    .thenBy { it.name.lowercase() }
+                    .thenBy { it.uid }
+            )
+            HomeAppSortMode.NAME_DESC -> groups.sortedWith(
+                compareBy<HomeAppSourceGroup> { it.uid != DEFAULT_SOURCE_UID }
+                    .thenByDescending { it.name.lowercase() }
+                    .thenBy { it.uid }
+            )
+            else -> groups
+        }
+    }
 
     private fun sortHomeAppItems(
         items: List<HomeAppItem>,
@@ -1350,6 +1457,34 @@ class HomeViewModel(
 
     fun setAppSortMode(sortMode: HomeAppSortMode) {
         homeAppButtonPrefs.setSortMode(sortMode)
+    }
+
+    fun setAppCategoryViewMode(viewMode: HomeAppCategoryViewMode) {
+        homeAppButtonPrefs.setCategoryViewMode(viewMode)
+    }
+
+    fun createAppCategory(name: String) {
+        homeAppButtonPrefs.createCategory(name)
+    }
+
+    fun renameAppCategory(categoryId: String, name: String) {
+        homeAppButtonPrefs.renameCategory(categoryId, name)
+    }
+
+    fun deleteAppCategory(categoryId: String) {
+        homeAppButtonPrefs.deleteCategory(categoryId)
+    }
+
+    fun saveAppCategoryOrder(categoryIds: List<String>) {
+        homeAppButtonPrefs.saveCategoryOrder(categoryIds)
+    }
+
+    fun toggleAppCategoryCollapsed(categoryId: String) {
+        homeAppButtonPrefs.toggleCategoryCollapsed(categoryId)
+    }
+
+    fun assignAppsToCategory(packageNames: Set<String>, categoryId: String?) {
+        homeAppButtonPrefs.assignToCategory(packageNames, categoryId)
     }
 
     /**

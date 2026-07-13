@@ -45,6 +45,15 @@
     <string name="home_no_apps_search_subtitle">No apps match \"%s\"</string>
     <string name="home_all_apps_hidden_title">All apps are hidden</string>
     <string name="home_all_apps_hidden_subtitle">You\'ve hidden all apps from the home screen</string>
+    <string name="home_category_add">Add category</string>
+    <string name="home_category_all_apps">All apps</string>
+    <string name="home_category_custom">Custom</string>
+    <string name="home_category_uncategorized">Uncategorized</string>
+    <string name="home_category_new_title">New category</string>
+    <string name="home_category_rename_title">Rename category</string>
+    <string name="home_category_name">Category name</string>
+    <string name="home_category_move_to">Move to category</string>
+    <string name="home_category_move_selected_title">Move selected apps</string>
 
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">What app do you want to patch?</string>
@@ -523,6 +532,12 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_home_screen">Home screen</string>
     <string name="settings_appearance_greeting_phrases">Greeting phrases</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Show a greeting message on the home screen</string>
+    <string name="settings_appearance_app_grouping">App grouping</string>
+    <string name="settings_appearance_app_grouping_all_apps_description">Show one sortable app list</string>
+    <string name="settings_appearance_app_grouping_sources_description">Group apps by patch source</string>
+    <string name="settings_appearance_app_grouping_custom_description">Use custom categories on the home screen</string>
+    <string name="settings_appearance_app_grouping_show_selector">Show selector on home screen</string>
+    <string name="settings_appearance_app_grouping_show_selector_description">Show grouping buttons above the app list</string>
 
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App icon</string>
@@ -916,6 +931,7 @@ The image dimensions must be as follows:
     <string name="search">Search</string>
     <string name="search_no_results">No results found</string>
     <string name="sort">Sort</string>
+    <string name="more_options">More options</string>
     <string name="any_version">Any</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>

@@ -20,6 +20,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -62,12 +63,16 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstalledApp
+import app.morphe.manager.domain.manager.HomeAppCategory
+import app.morphe.manager.domain.manager.HomeAppCategoryState
+import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
 import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.BundleUpdateStatus
+import app.morphe.manager.ui.viewmodel.HomeAppSourceGroup
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.KnownApps
 import app.morphe.manager.util.toast
@@ -84,6 +89,21 @@ private data class SwipeActionConfig(
     val containerColor: Color,
     val contentColor: Color
 )
+
+private data class HomeCategoryGroup(
+    val id: String?,
+    val title: String,
+    val items: List<HomeAppItem>,
+    val collapsed: Boolean,
+    val collapsible: Boolean,
+    val editable: Boolean
+)
+
+private data class CategoryNameRequest(
+    val category: HomeAppCategory?
+)
+
+private const val SOURCE_CATEGORY_ID_PREFIX = "source_"
 
 /** Notifications strip state and its action. */
 @Immutable
@@ -102,7 +122,11 @@ data class HomeAppListUi(
     val hidden: List<HomeAppItem>,
     val installedAppsLoading: Boolean,
     val showGestureHint: Boolean,
-    val sortMode: HomeAppSortMode
+    val sortMode: HomeAppSortMode,
+    val categoryState: HomeAppCategoryState,
+    val categoryViewMode: HomeAppCategoryViewMode,
+    val showCategoryViewSwitcher: Boolean,
+    val sourceGroups: List<HomeAppSourceGroup>
 )
 
 /** Callbacks fired from an app card. */
@@ -116,7 +140,14 @@ class HomeAppActions(
     val onGestureHintShown: () -> Unit,
     val onSaveOrder: (List<String>) -> Unit,
     val onResetOrder: () -> Unit,
-    val onSortModeChange: (HomeAppSortMode) -> Unit
+    val onSortModeChange: (HomeAppSortMode) -> Unit,
+    val onCategoryViewModeChange: (HomeAppCategoryViewMode) -> Unit,
+    val onCreateCategory: (String) -> Unit,
+    val onRenameCategory: (String, String) -> Unit,
+    val onDeleteCategory: (String) -> Unit,
+    val onSaveCategoryOrder: (List<String>) -> Unit,
+    val onToggleCategoryCollapsed: (String) -> Unit,
+    val onAssignAppsToCategory: (Set<String>, String?) -> Unit
 )
 
 /** Callbacks for surrounding chrome elements. */
@@ -823,6 +854,9 @@ fun MainAppsSection(
     val homeAppItems = apps.visible
     val hiddenAppItems = apps.hidden
     val searchQuery = searchState.query
+    val appGrouping = apps.categoryViewMode
+    val isGroupedAppView = appGrouping != HomeAppCategoryViewMode.ALL_APPS
+    val isCustomCategoryView = appGrouping == HomeAppCategoryViewMode.CUSTOM
 
     // Multi-select state - set of packageNames chosen for bulk hide
     val isMultiSelectMode = remember { mutableStateOf(false) }
@@ -848,6 +882,7 @@ fun MainAppsSection(
     // Back gesture/button exits reorder mode without saving
     BackHandler(enabled = isReorderMode.value) {
         isReorderMode.value = false
+        selectedPackages.clear()
         localOrder = homeAppItems.map { it.packageName }
     }
 
@@ -898,6 +933,8 @@ fun MainAppsSection(
 
     // Hidden apps dialog state
     val showHiddenAppsDialog = remember { mutableStateOf(false) }
+    val showMoveCategoryDialog = remember { mutableStateOf(false) }
+    var categoryNameRequest by remember { mutableStateOf<CategoryNameRequest?>(null) }
 
     if (showHiddenAppsDialog.value) {
         HiddenAppsDialog(
@@ -908,6 +945,32 @@ fun MainAppsSection(
             },
             onShowPatches = appActions.onShowPatches,
             onDismiss = { showHiddenAppsDialog.value = false }
+        )
+    }
+
+    categoryNameRequest?.let { request ->
+        CategoryNameDialog(
+            category = request.category,
+            onDismiss = { categoryNameRequest = null },
+            onConfirm = { name ->
+                val category = request.category
+                if (category == null) appActions.onCreateCategory(name)
+                else appActions.onRenameCategory(category.id, name)
+                categoryNameRequest = null
+            }
+        )
+    }
+
+    if (showMoveCategoryDialog.value) {
+        MoveToCategoryDialog(
+            categories = apps.categoryState.categories,
+            onDismiss = { showMoveCategoryDialog.value = false },
+            onSelect = { categoryId ->
+                appActions.onAssignAppsToCategory(selectedPackages.keys.toSet(), categoryId)
+                selectedPackages.clear()
+                isMultiSelectMode.value = false
+                showMoveCategoryDialog.value = false
+            }
         )
     }
 
@@ -929,12 +992,80 @@ fun MainAppsSection(
         }
     }
 
+    val uncategorizedTitle = stringResource(R.string.home_category_uncategorized)
+    val categoryGroups = remember(filteredItems, apps.categoryState, searchQuery, uncategorizedTitle) {
+        buildHomeCategoryGroups(
+            items = filteredItems,
+            categoryState = apps.categoryState,
+            uncategorizedTitle = uncategorizedTitle,
+            ignoreCollapsed = searchQuery.isNotBlank()
+        )
+    }
+    val sourceCategoryGroups = remember(filteredItems, apps.sourceGroups, uncategorizedTitle) {
+        buildHomeSourceGroups(
+            items = filteredItems,
+            sourceGroups = apps.sourceGroups,
+            uncategorizedTitle = uncategorizedTitle
+        )
+    }
+
     val listState = rememberLazyListState()
+
+    fun moveAppOrder(fromIndex: Int, toIndex: Int): List<String> {
+        if (fromIndex !in localOrder.indices || toIndex !in localOrder.indices || fromIndex == toIndex) {
+            return localOrder
+        }
+
+        val draggedPackage = localOrder[fromIndex]
+        val selectedSet = selectedPackages.keys.toSet()
+        if (draggedPackage !in selectedSet || selectedSet.size <= 1) {
+            return localOrder.toMutableList().apply {
+                val moved = removeAt(fromIndex)
+                add(toIndex.coerceIn(0, size), moved)
+            }
+        }
+
+        val targetPackage = localOrder[toIndex]
+        if (targetPackage in selectedSet) return localOrder
+
+        val moving = localOrder.filter { it in selectedSet }
+        val remaining = localOrder.filter { it !in selectedSet }
+        val targetIndex = remaining.indexOf(targetPackage)
+        if (targetIndex == -1) return localOrder
+
+        val insertionIndex = if (toIndex > fromIndex) targetIndex + 1 else targetIndex
+        return buildList {
+            addAll(remaining.take(insertionIndex.coerceIn(0, remaining.size)))
+            addAll(moving)
+            addAll(remaining.drop(insertionIndex.coerceIn(0, remaining.size)))
+        }
+    }
+
     val reorderableState = rememberReorderableLazyListState(listState) { from, to ->
-        val newOrder = localOrder.toMutableList()
-        val moved = newOrder.removeAt(from.index)
-        newOrder.add(to.index, moved)
-        localOrder = newOrder
+        localOrder = moveAppOrder(from.index, to.index)
+    }
+    fun categoryIdAtListIndex(index: Int): String? {
+        var currentIndex = 0
+        categoryGroups.forEach { group ->
+            if (currentIndex == index) return group.id.takeIf { group.editable }
+            currentIndex += 1
+            if (!group.collapsed) currentIndex += group.items.size
+        }
+        return null
+    }
+    val categoryReorderableState = rememberReorderableLazyListState(listState) { from, to ->
+        val fromId = categoryIdAtListIndex(from.index) ?: return@rememberReorderableLazyListState
+        val toId = categoryIdAtListIndex(to.index) ?: return@rememberReorderableLazyListState
+        if (fromId == toId) return@rememberReorderableLazyListState
+
+        val orderedIds = apps.categoryState.categories.map { it.id }.toMutableList()
+        val fromPosition = orderedIds.indexOf(fromId)
+        val toPosition = orderedIds.indexOf(toId)
+        if (fromPosition == -1 || toPosition == -1) return@rememberReorderableLazyListState
+
+        val moved = orderedIds.removeAt(fromPosition)
+        orderedIds.add(toPosition.coerceIn(0, orderedIds.size), moved)
+        appActions.onSaveCategoryOrder(orderedIds)
     }
     val orderedItems = remember(localOrder, homeAppItems) {
         val byPackage = homeAppItems.associateBy { it.packageName }
@@ -1027,6 +1158,26 @@ fun MainAppsSection(
                             )
                         }
 
+                        AnimatedVisibility(
+                            visible = !isReorderMode.value &&
+                                    (apps.showCategoryViewSwitcher || isCustomCategoryView),
+                            enter = MorpheAnimations.expandFadeEnter,
+                            exit = MorpheAnimations.shrinkFadeExit
+                        ) {
+                            AppGroupingToolbar(
+                                mode = appGrouping,
+                                showSwitcher = apps.showCategoryViewSwitcher,
+                                onModeChange = appActions.onCategoryViewModeChange,
+                                showAddCategory = isCustomCategoryView,
+                                onAddCategory = {
+                                    categoryNameRequest = CategoryNameRequest(category = null)
+                                },
+                                modifier = Modifier
+                                    .padding(horizontal = horizontalPadding)
+                                    .padding(bottom = 8.dp)
+                            )
+                        }
+
                         // Vertical fade overlay drawn on top of LazyColumn.
                         // The overlay is pointer-transparent so swipe gestures pass through
                         Box(modifier = Modifier.fillMaxWidth()) {
@@ -1062,14 +1213,19 @@ fun MainAppsSection(
                                                 item = item,
                                                 isLoading = false,
                                                 hasUpdate = item.hasUpdate,
-                                                onAppClick = {},
+                                                onAppClick = {
+                                                    if (selectedPackages.isNotEmpty) {
+                                                        selectedPackages.toggle(item.packageName)
+                                                    }
+                                                },
                                                 onHide = {},
                                                 onShowPatches = {},
                                                 showGestureHint = false,
                                                 onGestureHintShown = {},
-                                                isSelected = false,
-                                                isMultiSelectMode = true,
-                                                onLongPress = {},
+                                                isSelected = selectedPackages.contains(item.packageName),
+                                                isMultiSelectMode = selectedPackages.isNotEmpty,
+                                                onLongPress = { selectedPackages.toggle(item.packageName) },
+                                                swipeActionsEnabled = false,
                                                 dragHandleModifier = Modifier.draggableHandle(
                                                     onDragStarted = {
                                                         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
@@ -1079,6 +1235,95 @@ fun MainAppsSection(
                                             )
                                         }
                                     }
+                                } else if (isGroupedAppView) {
+                                    val groups = when (appGrouping) {
+                                        HomeAppCategoryViewMode.ALL_APPS -> emptyList()
+                                        HomeAppCategoryViewMode.SOURCES -> sourceCategoryGroups
+                                        HomeAppCategoryViewMode.CUSTOM -> categoryGroups
+                                    }
+
+                                    groups.forEach { group ->
+                                        val headerKey = "category_${group.id ?: "uncategorized"}"
+                                        item(key = headerKey) {
+                                            val headerContent: @Composable (Modifier?) -> Unit = { dragHandleModifier ->
+                                                HomeCategoryHeader(
+                                                    group = group,
+                                                    onToggle = {
+                                                        group.id?.let(appActions.onToggleCategoryCollapsed)
+                                                    },
+                                                    onRename = {
+                                                        val category = apps.categoryState.categories
+                                                            .firstOrNull { it.id == group.id }
+                                                        if (category != null) {
+                                                            categoryNameRequest = CategoryNameRequest(category)
+                                                        }
+                                                    },
+                                                    onDelete = {
+                                                        group.id?.let(appActions.onDeleteCategory)
+                                                    },
+                                                    dragHandleModifier = dragHandleModifier,
+                                                    modifier = Modifier.animateItem()
+                                                )
+                                            }
+
+                                            if (group.editable) {
+                                                ReorderableItem(categoryReorderableState, key = headerKey) { _ ->
+                                                    headerContent(
+                                                        Modifier.draggableHandle(
+                                                            onDragStarted = {
+                                                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                            }
+                                                        )
+                                                    )
+                                                }
+                                            } else {
+                                                headerContent(null)
+                                            }
+                                        }
+
+                                        if (!group.collapsed) {
+                                            itemsIndexed(
+                                                items = group.items,
+                                                key = { _, item -> "category_${group.id ?: "uncategorized"}_${item.packageName}" }
+                                            ) { index, item ->
+                                                val isSelected = selectedPackages.contains(item.packageName)
+                                                DynamicAppCard(
+                                                    item = item,
+                                                    isLoading = stableLoadingState.value,
+                                                    hasUpdate = item.hasUpdate,
+                                                    onAppClick = {
+                                                        if (isMultiSelectMode.value) {
+                                                            selectedPackages.toggle(item.packageName)
+                                                        } else {
+                                                            appActions.onAppClick(item)
+                                                        }
+                                                    },
+                                                    onHide = { appActions.onHideApp(item.packageName) },
+                                                    onShowPatches = { appActions.onShowPatches(item) },
+                                                    showGestureHint = item.packageName == filteredItems.firstOrNull()?.packageName &&
+                                                            apps.showGestureHint,
+                                                    onGestureHintShown = appActions.onGestureHintShown,
+                                                    isSelected = isSelected,
+                                                    isMultiSelectMode = isMultiSelectMode.value,
+                                                    onLongPress = {
+                                                        isMultiSelectMode.value = true
+                                                        selectedPackages.toggle(item.packageName)
+                                                    },
+                                                    modifier = Modifier.animateItem()
+                                                )
+                                            }
+                                        }
+                                    }
+
+                                    hiddenSearchAndShowHiddenItems(
+                                        hiddenAppItems = hiddenAppItems,
+                                        filteredHiddenItems = filteredHiddenItems,
+                                        searchQuery = searchQuery,
+                                        isSearchEmpty = isSearchEmpty,
+                                        appActions = appActions,
+                                        onShowHiddenApps = { showHiddenAppsDialog.value = true },
+                                        keyPrefix = "category_"
+                                    )
                                 } else {
                                     // Direct reorder a11y actions are exposed only when there's no search
                                     // filter and no multi-select active so the indices match localOrder
@@ -1154,80 +1399,14 @@ fun MainAppsSection(
                                         )
                                     }
 
-                                    // Hidden apps that match the search query
-                                    if (filteredHiddenItems.isNotEmpty()) {
-                                        item(key = "search_hidden_header") {
-                                            Text(
-                                                text = stringResource(R.string.hidden),
-                                                style = MaterialTheme.typography.labelMedium,
-                                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
-                                                modifier = Modifier
-                                                    .fillMaxWidth()
-                                                    .padding(top = 8.dp, bottom = 4.dp)
-                                                    .animateItem()
-                                            )
-                                        }
-                                        itemsIndexed(
-                                            items = filteredHiddenItems,
-                                            key = { _, item -> "hidden_${item.packageName}" }
-                                        ) { _, item ->
-                                            HiddenSearchAppCard(
-                                                item = item,
-                                                onUnhide = { appActions.onUnhideApp(item.packageName) },
-                                                onAppClick = { appActions.onAppClick(item) },
-                                                onShowPatches = { appActions.onShowPatches(item) },
-                                                modifier = Modifier.animateItem()
-                                            )
-                                        }
-                                    }
-
-                                    // Search empty result
-                                    if (isSearchEmpty) {
-                                        item(key = "search_empty") {
-                                            Column(
-                                                modifier = Modifier
-                                                    .fillMaxWidth()
-                                                    .padding(vertical = 32.dp)
-                                                    .animateItem(),
-                                                horizontalAlignment = Alignment.CenterHorizontally,
-                                                verticalArrangement = Arrangement.spacedBy(8.dp)
-                                            ) {
-                                                Icon(
-                                                    imageVector = Icons.Outlined.SearchOff,
-                                                    contentDescription = null,
-                                                    modifier = Modifier.size(40.dp),
-                                                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
-                                                )
-                                                Text(
-                                                    text = stringResource(R.string.search_no_results),
-                                                    style = MaterialTheme.typography.titleMedium,
-                                                    fontWeight = FontWeight.SemiBold,
-                                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                                                )
-                                                Text(
-                                                    text = stringResource(R.string.home_no_apps_search_subtitle, searchQuery),
-                                                    style = MaterialTheme.typography.bodyMedium,
-                                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
-                                                    textAlign = TextAlign.Center
-                                                )
-                                            }
-                                        }
-                                    }
-
-                                    // "Show hidden apps" button
-                                    if (hiddenAppItems.isNotEmpty() && searchQuery.isBlank()) {
-                                        item(key = "show_hidden") {
-                                            ShowHiddenAppsButton(
-                                                count = hiddenAppItems.size,
-                                                onClick = { showHiddenAppsDialog.value = true },
-                                                modifier = Modifier.animateItem(
-                                                    fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-                                                    fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-                                                    placementSpec = spring(stiffness = Spring.StiffnessMediumLow)
-                                                )
-                                            )
-                                        }
-                                    }
+                                    hiddenSearchAndShowHiddenItems(
+                                        hiddenAppItems = hiddenAppItems,
+                                        filteredHiddenItems = filteredHiddenItems,
+                                        searchQuery = searchQuery,
+                                        isSearchEmpty = isSearchEmpty,
+                                        appActions = appActions,
+                                        onShowHiddenApps = { showHiddenAppsDialog.value = true }
+                                    )
                                 }
                             }
 
@@ -1304,6 +1483,9 @@ fun MainAppsSection(
                         actionIcon = Icons.Outlined.VisibilityOff,
                         actionContentDescription = stringResource(R.string.hide),
                         actionDoneMessage = stringResource(R.string.hidden),
+                        onMoveToCategory = if (isCustomCategoryView) {
+                            { showMoveCategoryDialog.value = true }
+                        } else null,
                         onCancel = {
                             isMultiSelectMode.value = false
                             selectedPackages.clear()
@@ -1311,21 +1493,23 @@ fun MainAppsSection(
                         onEnterReorder = {
                             reorderFocusPackages.value = selectedPackages.keys.toSet()
                             isMultiSelectMode.value = false
-                            selectedPackages.clear()
                             searchState.onClose()
                             isReorderMode.value = true
                         },
                         onSaveOrder = {
                             appActions.onSaveOrder(localOrder)
                             isReorderMode.value = false
+                            selectedPackages.clear()
                         },
                         onResetOrder = {
                             appActions.onResetOrder()
                             localOrder = homeAppItems.map { it.packageName }
                             isReorderMode.value = false
+                            selectedPackages.clear()
                         },
                         onCancelReorder = {
                             isReorderMode.value = false
+                            selectedPackages.clear()
                             localOrder = homeAppItems.map { it.packageName }
                         },
                         modifier = Modifier
@@ -1354,6 +1538,507 @@ private fun ShowHiddenAppsButton(
         icon = Icons.Outlined.Visibility,
         text = pluralStringResource(R.plurals.home_app_show_hidden_count, count, count.toString())
     )
+}
+
+private fun buildHomeCategoryGroups(
+    items: List<HomeAppItem>,
+    categoryState: HomeAppCategoryState,
+    uncategorizedTitle: String,
+    ignoreCollapsed: Boolean
+): List<HomeCategoryGroup> {
+    val assigned = items.groupBy { item -> categoryState.assignments[item.packageName] }
+    val groups = categoryState.categories.mapNotNull { category ->
+        val categoryItems = assigned[category.id].orEmpty()
+        if (categoryItems.isEmpty() && ignoreCollapsed) return@mapNotNull null
+        HomeCategoryGroup(
+            id = category.id,
+            title = category.name,
+            items = categoryItems,
+            collapsed = !ignoreCollapsed && category.collapsed,
+            collapsible = true,
+            editable = true
+        )
+    }
+
+    val knownCategoryIds = categoryState.categories.mapTo(mutableSetOf()) { it.id }
+    val uncategorizedItems = items.filter { item ->
+        categoryState.assignments[item.packageName] !in knownCategoryIds
+    }
+    val uncategorizedGroup = uncategorizedItems.takeIf { it.isNotEmpty() }?.let {
+        HomeCategoryGroup(
+            id = null,
+            title = uncategorizedTitle,
+            items = it,
+            collapsed = false,
+            collapsible = false,
+            editable = false
+        )
+    }
+
+    return groups + listOfNotNull(uncategorizedGroup)
+}
+
+private fun buildHomeSourceGroups(
+    items: List<HomeAppItem>,
+    sourceGroups: List<HomeAppSourceGroup>,
+    uncategorizedTitle: String
+): List<HomeCategoryGroup> {
+    val usedPackages = mutableSetOf<String>()
+
+    val groups = sourceGroups.mapNotNull { sourceGroup ->
+        val sourceItems = items
+            .filter { item ->
+                item.packageName in sourceGroup.packageNames &&
+                        usedPackages.add(item.packageName)
+            }
+
+        if (sourceItems.isEmpty()) {
+            null
+        } else {
+            HomeCategoryGroup(
+                id = "$SOURCE_CATEGORY_ID_PREFIX${sourceGroup.uid}",
+                title = sourceGroup.name,
+                items = sourceItems,
+                collapsed = false,
+                collapsible = false,
+                editable = false
+            )
+        }
+    }
+
+    val uncategorizedItems = items.filter { item -> item.packageName !in usedPackages }
+    val uncategorizedGroup = uncategorizedItems.takeIf { it.isNotEmpty() }?.let {
+        HomeCategoryGroup(
+            id = null,
+            title = uncategorizedTitle,
+            items = it,
+            collapsed = false,
+            collapsible = false,
+            editable = false
+        )
+    }
+
+    return groups + listOfNotNull(uncategorizedGroup)
+}
+
+@Composable
+private fun AppGroupingToolbar(
+    mode: HomeAppCategoryViewMode,
+    showSwitcher: Boolean,
+    onModeChange: (HomeAppCategoryViewMode) -> Unit,
+    showAddCategory: Boolean,
+    onAddCategory: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val allAppsLabel = stringResource(R.string.home_category_all_apps)
+    val sourcesLabel = stringResource(R.string.sources)
+    val customLabel = stringResource(R.string.home_category_custom)
+    val addCategoryLabel = stringResource(R.string.home_category_add)
+
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        if (showSwitcher) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                AppGroupingModeButton(
+                    onClick = { onModeChange(HomeAppCategoryViewMode.ALL_APPS) },
+                    icon = Icons.Outlined.Apps,
+                    label = allAppsLabel,
+                    selected = mode == HomeAppCategoryViewMode.ALL_APPS,
+                    modifier = Modifier.weight(1f)
+                )
+                AppGroupingModeButton(
+                    onClick = { onModeChange(HomeAppCategoryViewMode.SOURCES) },
+                    icon = Icons.Outlined.Source,
+                    label = sourcesLabel,
+                    selected = mode == HomeAppCategoryViewMode.SOURCES,
+                    modifier = Modifier.weight(1f)
+                )
+                AppGroupingModeButton(
+                    onClick = { onModeChange(HomeAppCategoryViewMode.CUSTOM) },
+                    icon = Icons.Outlined.Category,
+                    label = customLabel,
+                    selected = mode == HomeAppCategoryViewMode.CUSTOM,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
+
+        AnimatedVisibility(
+            visible = showAddCategory,
+            enter = MorpheAnimations.expandFadeEnter,
+            exit = MorpheAnimations.shrinkFadeExit
+        ) {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                FilledTonalButton(
+                    onClick = onAddCategory,
+                    shape = RoundedCornerShape(50),
+                    contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
+                    modifier = Modifier
+                        .widthIn(max = 260.dp)
+                        .fillMaxWidth()
+                        .height(40.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Add,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        text = addCategoryLabel,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AppGroupingModeButton(
+    onClick: () -> Unit,
+    icon: ImageVector,
+    label: String,
+    selected: Boolean,
+    modifier: Modifier = Modifier
+) {
+    val colors = if (selected) {
+        ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary
+        )
+    } else {
+        ButtonDefaults.filledTonalButtonColors()
+    }
+
+    FilledTonalButton(
+        onClick = onClick,
+        colors = colors,
+        shape = RoundedCornerShape(50),
+        contentPadding = PaddingValues(horizontal = 8.dp),
+        modifier = modifier.height(40.dp)
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            modifier = Modifier.size(18.dp)
+        )
+        Spacer(Modifier.width(4.dp))
+        Text(
+            text = label,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            style = MaterialTheme.typography.labelMedium
+        )
+    }
+}
+
+@Composable
+private fun HomeCategoryHeader(
+    group: HomeCategoryGroup,
+    onToggle: () -> Unit,
+    onRename: () -> Unit,
+    onDelete: () -> Unit,
+    dragHandleModifier: Modifier? = null,
+    modifier: Modifier = Modifier
+) {
+    var menuExpanded by remember { mutableStateOf(false) }
+    val countText = pluralStringResource(
+        R.plurals.home_category_app_count,
+        group.items.size,
+        group.items.size.toString()
+    )
+    val headerShape = RoundedCornerShape(18.dp)
+    val containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.38f)
+    val contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+    val leadingIcon = when {
+        group.id?.startsWith(SOURCE_CATEGORY_ID_PREFIX) == true -> Icons.Outlined.Source
+        group.collapsed -> Icons.Outlined.Folder
+        else -> Icons.Outlined.FolderOpen
+    }
+
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .then(if (group.collapsible) Modifier.clickable(onClick = onToggle) else Modifier),
+        color = containerColor,
+        contentColor = contentColor,
+        shape = headerShape,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.18f))
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 14.dp, vertical = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(36.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.16f)),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = leadingIcon,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = group.title,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    text = countText,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = contentColor.copy(alpha = 0.72f)
+                )
+            }
+
+            if (group.editable) {
+                Box {
+                    IconButton(onClick = { menuExpanded = true }) {
+                        Icon(
+                            imageVector = Icons.Outlined.MoreVert,
+                            contentDescription = stringResource(R.string.more_options)
+                        )
+                    }
+                    DropdownMenu(
+                        expanded = menuExpanded,
+                        onDismissRequest = { menuExpanded = false }
+                    ) {
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.rename)) },
+                            leadingIcon = { Icon(Icons.Outlined.Edit, contentDescription = null) },
+                            onClick = {
+                                menuExpanded = false
+                                onRename()
+                            }
+                        )
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.delete)) },
+                            leadingIcon = { Icon(Icons.Outlined.Delete, contentDescription = null) },
+                            onClick = {
+                                menuExpanded = false
+                                onDelete()
+                            }
+                        )
+                    }
+                }
+            }
+
+            if (dragHandleModifier != null) {
+                Box(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .then(dragHandleModifier),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.DragHandle,
+                        contentDescription = stringResource(R.string.reorder_list),
+                        modifier = Modifier.size(22.dp),
+                        tint = contentColor.copy(alpha = 0.72f)
+                    )
+                }
+            }
+
+            if (group.collapsible) {
+                Icon(
+                    imageVector = if (group.collapsed) Icons.Outlined.ExpandMore else Icons.Outlined.ExpandLess,
+                    contentDescription = if (group.collapsed)
+                        stringResource(R.string.expand)
+                    else
+                        stringResource(R.string.collapse),
+                    modifier = Modifier.size(22.dp),
+                    tint = contentColor.copy(alpha = 0.72f)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun CategoryNameDialog(
+    category: HomeAppCategory?,
+    onDismiss: () -> Unit,
+    onConfirm: (String) -> Unit
+) {
+    var name by remember(category?.id) { mutableStateOf(category?.name.orEmpty()) }
+    val trimmed = name.trim()
+
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(
+            if (category == null) R.string.home_category_new_title
+            else R.string.home_category_rename_title
+        ),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(if (category == null) R.string.add else R.string.rename),
+                onPrimaryClick = { onConfirm(trimmed) },
+                primaryEnabled = trimmed.isNotEmpty(),
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        MorpheDialogTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text(stringResource(R.string.home_category_name)) },
+            leadingIcon = {
+                Icon(Icons.Outlined.Category, contentDescription = null)
+            },
+            showClearButton = true,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+private fun MoveToCategoryDialog(
+    categories: List<HomeAppCategory>,
+    onDismiss: () -> Unit,
+    onSelect: (String?) -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.home_category_move_selected_title),
+        footer = {
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.close),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = MorpheDefaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+        ) {
+            SettingsItemCard(onClick = { onSelect(null) }, borderWidth = 1.dp) {
+                IconTextRow(
+                    modifier = Modifier.padding(MorpheDefaults.ContentPadding),
+                    leadingContent = { MorpheIcon(icon = Icons.Outlined.FolderOff) },
+                    title = stringResource(R.string.home_category_uncategorized),
+                    trailingContent = null
+                )
+            }
+
+            categories.forEach { category ->
+                SettingsItemCard(onClick = { onSelect(category.id) }, borderWidth = 1.dp) {
+                    IconTextRow(
+                        modifier = Modifier.padding(MorpheDefaults.ContentPadding),
+                        leadingContent = { MorpheIcon(icon = Icons.Outlined.Folder) },
+                        title = category.name,
+                        trailingContent = null
+                    )
+                }
+            }
+        }
+    }
+}
+
+private fun LazyListScope.hiddenSearchAndShowHiddenItems(
+    hiddenAppItems: List<HomeAppItem>,
+    filteredHiddenItems: List<HomeAppItem>,
+    searchQuery: String,
+    isSearchEmpty: Boolean,
+    appActions: HomeAppActions,
+    onShowHiddenApps: () -> Unit,
+    keyPrefix: String = ""
+) {
+    if (filteredHiddenItems.isNotEmpty()) {
+        item(key = "${keyPrefix}search_hidden_header") {
+            Text(
+                text = stringResource(R.string.hidden),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp, bottom = 4.dp)
+                    .animateItem()
+            )
+        }
+        itemsIndexed(
+            items = filteredHiddenItems,
+            key = { _, item -> "${keyPrefix}hidden_${item.packageName}" }
+        ) { _, item ->
+            HiddenSearchAppCard(
+                item = item,
+                onUnhide = { appActions.onUnhideApp(item.packageName) },
+                onAppClick = { appActions.onAppClick(item) },
+                onShowPatches = { appActions.onShowPatches(item) },
+                modifier = Modifier.animateItem()
+            )
+        }
+    }
+
+    if (isSearchEmpty) {
+        item(key = "${keyPrefix}search_empty") {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 32.dp)
+                    .animateItem(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.SearchOff,
+                    contentDescription = null,
+                    modifier = Modifier.size(40.dp),
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
+                )
+                Text(
+                    text = stringResource(R.string.search_no_results),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+                Text(
+                    text = stringResource(R.string.home_no_apps_search_subtitle, searchQuery),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+
+    if (hiddenAppItems.isNotEmpty() && searchQuery.isBlank()) {
+        item(key = "${keyPrefix}show_hidden") {
+            ShowHiddenAppsButton(
+                count = hiddenAppItems.size,
+                onClick = onShowHiddenApps,
+                modifier = Modifier.animateItem(
+                    fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+                    fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+                    placementSpec = spring(stiffness = Spring.StiffnessMediumLow)
+                )
+            )
+        }
+    }
 }
 
 /**
@@ -1474,6 +2159,7 @@ private fun DynamicAppCard(
     isSelected: Boolean = false,
     isMultiSelectMode: Boolean = false,
     onLongPress: () -> Unit = {},
+    swipeActionsEnabled: Boolean = true,
     dragHandleModifier: Modifier? = null,
     onMoveUp: (() -> Unit)? = null,
     onMoveDown: (() -> Unit)? = null
@@ -1534,8 +2220,10 @@ private fun DynamicAppCard(
 
     Box(modifier = modifier.fillMaxWidth().semantics {
         customActions = buildList {
-            add(CustomAccessibilityAction(hideLabel) { showHideDialog.value = true; true })
-            add(CustomAccessibilityAction(patchesLabel) { onShowPatches(); true })
+            if (swipeActionsEnabled) {
+                add(CustomAccessibilityAction(hideLabel) { showHideDialog.value = true; true })
+                add(CustomAccessibilityAction(patchesLabel) { onShowPatches(); true })
+            }
             if (onMoveUp != null) {
                 add(CustomAccessibilityAction(moveUpLabel) { onMoveUp(); true })
             }
@@ -1549,7 +2237,7 @@ private fun DynamicAppCard(
             actionThresholdPx = actionThresholdPx,
             onLeftSwipe = { showHideDialog.value = true },
             onRightSwipe = onShowPatches,
-            enabled = !isMultiSelectMode,
+            enabled = swipeActionsEnabled && !isMultiSelectMode,
             background = { leftProgress, rightProgress ->
                 SwipeBackground(
                     leftProgress = leftProgress,
@@ -1651,6 +2339,7 @@ private fun MultiSelectBar(
     actionIcon: ImageVector,
     actionContentDescription: String,
     actionDoneMessage: String,
+    onMoveToCategory: (() -> Unit)? = null,
     onCancel: () -> Unit,
     onEnterReorder: () -> Unit,
     onSaveOrder: () -> Unit,
@@ -1679,6 +2368,7 @@ private fun MultiSelectBar(
     val resetOrderLabel = stringResource(R.string.reset_order)
     val resetOrderDone = stringResource(R.string.reset_order_done)
     val doneLabel = stringResource(R.string.done)
+    val moveToCategoryLabel = stringResource(R.string.home_category_move_to)
 
     MultiSelectShell(visible = visible, modifier = modifier) {
         AnimatedContent(
@@ -1729,6 +2419,15 @@ private fun MultiSelectBar(
                     onDeselectAll = onDeselectAll,
                     onCancel = onCancel
                 ) {
+                    if (onMoveToCategory != null) {
+                        ActionPillButton(
+                            onClick = onMoveToCategory,
+                            icon = Icons.Outlined.FolderOpen,
+                            contentDescription = moveToCategoryLabel,
+                            tooltip = moveToCategoryLabel,
+                            enabled = selectedCount > 0
+                        )
+                    }
                     ActionPillButton(
                         onClick = withToast(actionDoneMessage, onAction),
                         icon = actionIcon,
@@ -1742,7 +2441,8 @@ private fun MultiSelectBar(
                             onClick = onEnterReorder,
                             icon = Icons.Outlined.Reorder,
                             contentDescription = reorderListLabel,
-                            tooltip = reorderListLabel
+                            tooltip = reorderListLabel,
+                            enabled = selectedCount > 0
                         )
                     }
                 }
