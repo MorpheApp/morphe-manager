@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe 업데이트 사용 가능</string>
     <string name="home_update_available_subtitle">새 버전 설치 준비 완료</string>
+    <string name="home_blocked_source_title">차단된 패치 소스가 감지됨</string>
+    <string name="home_blocked_source_subtitle">검토 및 제거하려면 탭하세요</string>
+    <string name="home_metadata_errors_title">일부 패치 소스를 사용할 수 없음</string>
+    <string name="home_metadata_errors_subtitle">소스를 검토하려면 탭하세요</string>
+    <string name="home_metered_skipped_title">모바일 데이터에서 업데이트가 일시 중지됨</string>
+    <string name="home_metered_skipped_subtitle">모바일 데이터에서 업데이트를 허용하려면 탭하세요</string>
     <string name="home_update_error">업데이트 실패</string>
     <string name="home_update_error_subtitle">인터넷 연결 상태를 확인하고 다시 시도하세요</string>
     <string name="home_update_skipped_metered">업데이트를 건너뜁니다</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">사용 가능한 경우에 실험 앱 버전으로 패치합니다</string>
     <string name="sources_management_already_exists">이 소스는 이미 추가되어 있습니다</string>
     <string name="sources_management_invalid_url">잘못된 소스 URL입니다. 주소를 확인하고 다시 시도하세요</string>
+    <string name="sources_management_blocked">이 패치 소스는 차단되어 추가할 수 없습니다</string>
+    <string name="sources_management_source_blocked_badge">차단됨</string>
     <string name="sources_management_metadata_unavailable">메타데이터 없음</string>
     <string name="sources_management_metadata_unavailable_hint">원격 메타데이터 파일을 사용할 수 없습니다. 설치된 번들로 패치는 계속 가능하지만, 이 소스에 대한 자동 업데이트는 비활성화됩니다</string>
     <string name="sources_management_metadata_unavailable_hint_missing">패치 번들을 다운로드할 수 없습니다. 소스 URL이 올바르지 않거나 파일이 존재하지 않을 수 있습니다</string>
@@ -721,6 +729,27 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APK를 성공적으로 삭제하였습니다</string>
     <string name="settings_system_apks_export_zip_success">선택된 APK를 내보냈습니다</string>
     <string name="settings_system_apks_export_zip_failed">선택된 APK를 내보낼 수 없습니다</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">저장소 관리</string>
+    <string name="settings_system_storage_management_description">디스크 사용량을 확인하고 캐시된 파일을 지울 수 있습니다</string>
+    <string name="settings_system_storage_keystore_title">서명 키스토어</string>
+    <string name="settings_system_storage_app_data_title">앱 데이터</string>
+    <string name="settings_system_storage_patch_bundles_title">패치 번들</string>
+    <string name="settings_system_storage_http_cache_title">네트워크 캐시</string>
+    <string name="settings_system_storage_http_cache_description">업데이트 속도를 높이기 위해 HTTP 응답이 캐시됩니다</string>
+    <string name="settings_system_storage_installer_cache_title">외부 설치 프로그램 캐시</string>
+    <string name="settings_system_storage_installer_cache_description">서드파티 설치 프로그램에 전달된 APK 복사본</string>
+    <string name="settings_system_storage_patcher_workspace_title">패처 작업 공간</string>
+    <string name="settings_system_storage_patcher_workspace_description">패처 런타임 파일 및 사용하지 않는 임시 데이터</string>
+    <string name="settings_system_storage_temporary_title">임시 파일</string>
+    <string name="settings_system_storage_temporary_description">패치 중에 생성된 작업 파일</string>
+    <string name="settings_system_storage_clear_all">모든 캐시 지우기</string>
+    <string name="settings_system_storage_clear_all_description">회수 가능한 모든 캐시 공간을 한 번에 확보합니다</string>
+    <string name="settings_system_storage_clear_all_confirm">캐시된 네트워크 응답, 설치 준비된 APK 복사본, 임시 파일을 삭제합니다. 원본 APK와 패치된 APK는 유지됩니다</string>
+    <string name="settings_system_storage_cleared">%s 확보됨</string>
+    <string name="settings_system_storage_nothing_to_clear">삭제할 항목이 없습니다</string>
+    <string name="settings_system_storage_open_app_info_title">Android 앱 저장소 열기</string>
+    <string name="settings_system_storage_open_app_info_description">시스템 설정을 통해 모든 Morphe 데이터를 관리하거나 지웁니다</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">패치된 APK</string>
     <string name="settings_system_patched_apks_description">저장된 패치된 앱 파일을 관리합니다</string>

@@ -290,6 +290,7 @@ Elixe outro APK</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_export_debug_logs_export_failed">Fallo ao exportar rexistros</string>
     <!-- Settings - System Tab - Files & Storage Section -->
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->

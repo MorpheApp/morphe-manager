@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Nûvekirina Morphe heye</string>
     <string name="home_update_available_subtitle">Nûvekirin amade ye ku were sazkirin</string>
+    <string name="home_blocked_source_title">Çavkaniya pelê ya blokkirî hat dîtin</string>
+    <string name="home_blocked_source_subtitle">Bixin da ku binêrin û bênin serbest</string>
+    <string name="home_metadata_errors_title">Hinek çavkaniyên pelê ne berdest in</string>
+    <string name="home_metadata_errors_subtitle">Bixin da ku çavkaniyan binêrin</string>
+    <string name="home_metered_skipped_title">Nûvekirin li ser data mobîlê hatin sekinin</string>
+    <string name="home_metered_skipped_subtitle">Bikîne da ku nûvekirinên li ser data mobîl destûr bidî</string>
     <string name="home_update_error">Nûvekirin ji destûr ve çû</string>
     <string name="home_update_error_subtitle">Giştîrabûnê xwe kontrol bike û dîsa hewildan bike</string>
     <string name="home_update_skipped_metered">Nûvekirin çêhatin</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Daxwazên sepanê yên ceribandinê yên hewce ne heger hebin</string>
     <string name="sources_management_already_exists">Evîn pêştirîye, berê zêdekirine.</string>
     <string name="sources_management_invalid_url">URL-a çavkaniyê nebaş e. Ji kerema xwe navnîşanê kontrol bikin û dîsa biceribîn</string>
+    <string name="sources_management_blocked">Çavkaniya vê pelikê blok kirî ye û nikare were zêdekirin</string>
+    <string name="sources_management_source_blocked_badge">Blok kirî</string>
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
     <string name="sources_management_metadata_unavailable_hint">Pelgeya metadateya dûr nepehwîze. Lê dîsa jî nûkirina bi pakêta ku hatiye saz kirin dixebite, lê nûvekirina otomatîkî ji bo vê çavkaniyê nehate çalak kirin</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Pakêta paşîn nikaribû were dakêşîn. URL-a çavkaniyê dikare ne rast be an pelge ne heye</string>
@@ -718,6 +726,27 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_apks_deleted_all">APK-yê bi serketî têne terikîn.</string>
     <string name="settings_system_apks_export_zip_success">APK-yê hilbijartî derxîne</string>
     <string name="settings_system_apks_export_zip_failed">Derxistina APK-yên hilbijartî têk çû</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Rêveberiya hêsînê</string>
+    <string name="settings_system_storage_management_description">Lêkolîna karanîna dîskê û paqijkirina pelên neyînî</string>
+    <string name="settings_system_storage_keystore_title">Keystore-a îmzeyê</string>
+    <string name="settings_system_storage_app_data_title">Daneyên sepanê</string>
+    <string name="settings_system_storage_patch_bundles_title">Pêkvekirinên paçê</string>
+    <string name="settings_system_storage_http_cache_title">Kêşeya torê</string>
+    <string name="settings_system_storage_http_cache_description">Bersivên HTTP-ê têne hêsînkirin da ku nûvekirin bileztir bibin</string>
+    <string name="settings_system_storage_installer_cache_title">Kêşeya sazkerê yê derve</string>
+    <string name="settings_system_storage_installer_cache_description">Pelên APK-yê têne radestkirin ji sazkerên serîşîn</string>
+    <string name="settings_system_storage_patcher_workspace_title">Cihê karê yê guhêrker</string>
+    <string name="settings_system_storage_patcher_workspace_description">Pelên demê yê guhêrkerê û daneyê qirêj ên têrkirî</string>
+    <string name="settings_system_storage_temporary_title">Pelên demkî</string>
+    <string name="settings_system_storage_temporary_description">Pelên kar ên di dema guhêrkirinê de hatine çêkirin</string>
+    <string name="settings_system_storage_clear_all">Paqijkirina hemû kêşeyan</string>
+    <string name="settings_system_storage_clear_all_description">Hemû cîhê kêşeyê yê ku tê dîtinê tê paqijkirin</string>
+    <string name="settings_system_storage_clear_all_confirm">Ev kêşeyên bersivên torê, pelên sazkerê ên hatine sahnekirin, û pelên demkî paqijkirine. Pelên APK-yê orjînal û guhêrkirî têne girtin</string>
+    <string name="settings_system_storage_cleared">%s azad kir</string>
+    <string name="settings_system_storage_nothing_to_clear">Tu tiştek tune ku were paqijkirin</string>
+    <string name="settings_system_storage_open_app_info_title">Veke hilanîna depoya serîşîn a Android</string>
+    <string name="settings_system_storage_open_app_info_description">Rêvebirin an paqijkirina hemû daneyê Morphe ji riya mîhengên sîstemê</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK\'yên veşartin</string>
     <string name="settings_system_patched_apks_description">Pelên programa girêtî yên tomarî birêve bibe</string>

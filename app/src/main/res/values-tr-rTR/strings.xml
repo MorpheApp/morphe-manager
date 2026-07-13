@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe güncellemesi mevcut</string>
     <string name="home_update_available_subtitle">Yeni sürüm yükleme için hazır</string>
+    <string name="home_blocked_source_title">Engellenen yama kaynağı algılandı</string>
+    <string name="home_blocked_source_subtitle">İncelemek ve kaldırmak için dokunun</string>
+    <string name="home_metadata_errors_title">Bazı yama kaynakları kullanılamıyor</string>
+    <string name="home_metadata_errors_subtitle">Kaynakları incelemek için dokunun</string>
+    <string name="home_metered_skipped_title">Mobil veride güncellemeler duraklatıldı</string>
+    <string name="home_metered_skipped_subtitle">Mobil veride güncellemeleri etkinleştirmek için dokunun</string>
     <string name="home_update_error">Güncelleme başarısız</string>
     <string name="home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
     <string name="home_update_skipped_metered">Güncellemeler atlandı</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Mevcutsa deneysel uygulama hedeflerini yamala</string>
     <string name="sources_management_already_exists">Bu kaynak zaten eklenmiş</string>
     <string name="sources_management_invalid_url">Geçersiz kaynak URL\'si. Lütfen adresi kontrol edin ve tekrar deneyin</string>
+    <string name="sources_management_blocked">Bu yama kaynağı engellenmiş ve eklenemiyor</string>
+    <string name="sources_management_source_blocked_badge">Engellendi</string>
     <string name="sources_management_metadata_unavailable">Metadata Yok</string>
     <string name="sources_management_metadata_unavailable_hint">Uzak metadata dosyası kullanılamıyor. Yüklü paketle yamalama hala çalışır, ancak bu kaynak için otomatik güncelleme devre dışı bırakıldı</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Yama paketi indirilemedi. Kaynak URL\'si yanlış olabilir veya dosya mevcut olmayabilir</string>
@@ -720,6 +728,27 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_apks_deleted_all">APK\'ler başarıyla silindi</string>
     <string name="settings_system_apks_export_zip_success">Seçili APK\'ler dışa aktarıldı</string>
     <string name="settings_system_apks_export_zip_failed">Seçili APK\'lerin dışa aktarılması başarısız oldu</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Depolama yönetimi</string>
+    <string name="settings_system_storage_management_description">Disk kullanımını gözden geçirin ve önbelleğe alınmış dosyaları temizleyin</string>
+    <string name="settings_system_storage_keystore_title">İmzalı anahtar deposu</string>
+    <string name="settings_system_storage_app_data_title">Uygulama verileri</string>
+    <string name="settings_system_storage_patch_bundles_title">Yama paketleri</string>
+    <string name="settings_system_storage_http_cache_title">Ağ önbelleği</string>
+    <string name="settings_system_storage_http_cache_description">Güncellemeleri hızlandırmak için HTTP yanıtları önbelleğe alınır</string>
+    <string name="settings_system_storage_installer_cache_title">Harici yükleyici önbelleği</string>
+    <string name="settings_system_storage_installer_cache_description">Üçüncü taraf yükleyicilere aktarılan APK kopyaları</string>
+    <string name="settings_system_storage_patcher_workspace_title">Yamacıyıcı çalışma alanı</string>
+    <string name="settings_system_storage_patcher_workspace_description">Yamacıyıcı çalışma zamanı dosyaları ve kullanılmayan geçici veriler</string>
+    <string name="settings_system_storage_temporary_title">Geçici dosyalar</string>
+    <string name="settings_system_storage_temporary_description">Yama işlemi sırasında oluşturulan çalışma dosyaları</string>
+    <string name="settings_system_storage_clear_all">Tüm önbellekleri temizle</string>
+    <string name="settings_system_storage_clear_all_description">Tek seferde tüm geri kazanılabilir önbellek alanını boşaltır</string>
+    <string name="settings_system_storage_clear_all_confirm">Bu, önbelleğe alınmış ağ yanıtlarını, aşamalı yükleyici kopyalarını ve geçici dosyaları temizler. Orijinal ve yamalı APK\'ler korunur</string>
+    <string name="settings_system_storage_cleared">%s boşaltıldı</string>
+    <string name="settings_system_storage_nothing_to_clear">Temizlenecek bir şey yok</string>
+    <string name="settings_system_storage_open_app_info_title">Android uygulama depolamasını aç</string>
+    <string name="settings_system_storage_open_app_info_description">Morphe verilerinin tamamını sistem ayarları aracılığıyla yönetin veya temizleyin</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Yamalanmış APK\'ler</string>
     <string name="settings_system_patched_apks_description">Kayıtlı yamalanmış uygulama dosyalarını yönetir</string>

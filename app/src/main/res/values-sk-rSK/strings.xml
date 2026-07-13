@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Je dostupná aktualizácia Morphe</string>
     <string name="home_update_available_subtitle">Nová verzia je pripravená na inštaláciu</string>
+    <string name="home_blocked_source_title">Zistený blokovaný zdroj záplat</string>
+    <string name="home_blocked_source_subtitle">Ťuknite na položku a skontrolujte a odstráňte ju</string>
+    <string name="home_metadata_errors_title">Niektoré zdroje záplat nie sú dostupné</string>
+    <string name="home_metadata_errors_subtitle">Ťuknite na položku a skontrolujte zdroje</string>
+    <string name="home_metered_skipped_title">Aktualizácie sú pozastavené pri používaní mobilných dát</string>
+    <string name="home_metered_skipped_subtitle">Ťuknite na položku pre povolenie aktualizácií cez mobilné dáta</string>
     <string name="home_update_error">Aktualizácia zlyhala</string>
     <string name="home_update_error_subtitle">Skontrolujte svoje internetové pripojenie a skúste to znova</string>
     <string name="home_update_skipped_metered">Aktualizácia preskočená</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Nainštaluje experimentálne verzie aplikácie, ak sú dostupné</string>
     <string name="sources_management_already_exists">Tento zdroj už bol pridaný</string>
     <string name="sources_management_invalid_url">Neplatná URL adresa zdroja. Skontrolujte adresu a skúste to znova</string>
+    <string name="sources_management_blocked">Tento zdroj záplat je zablokovaný a nie je možné ho pridať</string>
+    <string name="sources_management_source_blocked_badge">Zablokované</string>
     <string name="sources_management_metadata_unavailable">Metadáta N/A</string>
     <string name="sources_management_metadata_unavailable_hint">Diaľkový metaúdajový súbor nie je dostupný. Oprava pomocou nainštalovaného balíka stále funguje, ale automatická aktualizácia je pre tento zdroj zakázaná</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Balík opráv sa nepodarilo stiahnuť. URL adresa zdroja môže byť nesprávna alebo súbor neexistuje</string>
@@ -720,6 +728,27 @@ Rozmery obrázka musia byť nasledovné:
     <string name="settings_system_apks_deleted_all">APK súbory boli úspešne vymazané</string>
     <string name="settings_system_apks_export_zip_success">Exportované APK súbory</string>
     <string name="settings_system_apks_export_zip_failed">Nepodarilo sa exportovať vybrané APK súbory</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Správa úložiska</string>
+    <string name="settings_system_storage_management_description">Skontrolujte využitie disku a vymažte uložené súbory v pamäti cache</string>
+    <string name="settings_system_storage_keystore_title">Keystore podpisu</string>
+    <string name="settings_system_storage_app_data_title">Údaje aplikácie</string>
+    <string name="settings_system_storage_patch_bundles_title">Zdroje záplat</string>
+    <string name="settings_system_storage_http_cache_title">Sieťová cache</string>
+    <string name="settings_system_storage_http_cache_description">HTTP odpovede sú uložené v cache na zrýchlenie aktualizácií</string>
+    <string name="settings_system_storage_installer_cache_title">Cache externého inštalátora</string>
+    <string name="settings_system_storage_installer_cache_description">Kópie APK odovzdané inštalátorom tretích strán</string>
+    <string name="settings_system_storage_patcher_workspace_title">Pracovný priestor patchera</string>
+    <string name="settings_system_storage_patcher_workspace_description">Runtime súbory patchera a osamelé dočasné dáta</string>
+    <string name="settings_system_storage_temporary_title">Dočasné súbory</string>
+    <string name="settings_system_storage_temporary_description">Pracovné súbory vytvorené počas patchovania</string>
+    <string name="settings_system_storage_clear_all">Vymazať všetky cache</string>
+    <string name="settings_system_storage_clear_all_description">Vymaže všetok reclaimovateľný priestor cache naraz</string>
+    <string name="settings_system_storage_clear_all_confirm">Toto vymaže uložené sieťové odpovede, priebežne inštalované kópie a dočasné súbory. Pôvodné a opatchované APK zostanú zachované</string>
+    <string name="settings_system_storage_cleared">Uvoľnené miesto: %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nie je čo vymazať</string>
+    <string name="settings_system_storage_open_app_info_title">Otvoriť úložisko aplikácie Android</string>
+    <string name="settings_system_storage_open_app_info_description">Spravujte alebo vymažte všetky dáta Morphe cez systémové nastavenia</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Zaplátané APK súbory</string>
     <string name="settings_system_patched_apks_description">Spravovať zaplátané súbory aplikácií</string>

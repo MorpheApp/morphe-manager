@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostupno ažuriranje za Morphe</string>
     <string name="home_update_available_subtitle">Nova verzija sprema za instalaciju</string>
+    <string name="home_blocked_source_title">Detektovan blokiran izvor zakrpe</string>
+    <string name="home_blocked_source_subtitle">Dodirnite da biste pregledali i uklonili</string>
+    <string name="home_metadata_errors_title">Neki izvori zakrpe nisu dostupni</string>
+    <string name="home_metadata_errors_subtitle">Dodirnite da biste pregledali izvore</string>
+    <string name="home_metered_skipped_title">Ažuriranja su pauzirana na mobilnim podacima</string>
+    <string name="home_metered_skipped_subtitle">Dodirnite da biste dozvolili ažuriranja putem mobilnih podataka</string>
     <string name="home_update_error">Ažuriranje nije uspelo</string>
     <string name="home_update_error_subtitle">Proverite internet vezu i pokušajte ponovo</string>
     <string name="home_update_skipped_metered">Ažuriranja su preskočena</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Zakrpljuje ciljeve eksperimentalnih aplikacija ako su dostupni</string>
     <string name="sources_management_already_exists">Ovaj izvor je već dodat</string>
     <string name="sources_management_invalid_url">Nevalidna URL adresa izvora. Molimo proverite adresu i pokušajte ponovo.</string>
+    <string name="sources_management_blocked">Ovaj izvor zakrpa je blokiran i ne može biti dodat</string>
+    <string name="sources_management_source_blocked_badge">Blokirano</string>
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
     <string name="sources_management_metadata_unavailable_hint">Datoteka sa daljinskim metapodacima nije dostupna. Primena instaliranog paketa i dalje funkcioniše, ali automatsko ažuriranje je onemogućeno za ovaj izvor.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Paket zakrpa nije uspeo da se preuzme. URL adresa izvora može biti netačna ili datoteka ne postoji.</string>
@@ -704,6 +712,27 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_system_apks_deleted_all">APK-ovi su uspešno izbrisani</string>
     <string name="settings_system_apks_export_zip_success">Izvezeni APK-ovi</string>
     <string name="settings_system_apks_export_zip_failed">Nije uspeo izvoz selektovanih APK-ova</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Upravljanje skladištem</string>
+    <string name="settings_system_storage_management_description">Pregledajte iskorišćenost diska i očistite keširane datoteke</string>
+    <string name="settings_system_storage_keystore_title">Keš ključeva za potpisivanje</string>
+    <string name="settings_system_storage_app_data_title">Podaci aplikacije</string>
+    <string name="settings_system_storage_patch_bundles_title">Paketi zakrpa</string>
+    <string name="settings_system_storage_http_cache_title">Keš mreže</string>
+    <string name="settings_system_storage_http_cache_description">HTTP odgovori su keširani kako bi se ubrzale nadogradnje</string>
+    <string name="settings_system_storage_installer_cache_title">Keš eksternog instalera</string>
+    <string name="settings_system_storage_installer_cache_description">Kopije APK datoteka prosleđene instalaterima trećih strana</string>
+    <string name="settings_system_storage_patcher_workspace_title">Radni prostor modifikatora</string>
+    <string name="settings_system_storage_patcher_workspace_description">Runtime datoteke modifikatora i ostaci privremene memorije</string>
+    <string name="settings_system_storage_temporary_title">Privremene datoteke</string>
+    <string name="settings_system_storage_temporary_description">Radne datoteke kreirane tokom modifikovanja</string>
+    <string name="settings_system_storage_clear_all">Očisti sve kešove</string>
+    <string name="settings_system_storage_clear_all_description">Odmah oslobađa sav prostor koji se može povratiti iz keša</string>
+    <string name="settings_system_storage_clear_all_confirm">Ovo će obrisati keširane mrežne odgovore, pripremljene kopije instalera i privremene datoteke. Originalni i modifikovani APK-ovi će biti sačuvani</string>
+    <string name="settings_system_storage_cleared">Oslobođeno %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nema ničega za čišćenje</string>
+    <string name="settings_system_storage_open_app_info_title">Otvorite skladište Android aplikacija</string>
+    <string name="settings_system_storage_open_app_info_description">Upravljajte ili očistite sve Morphe podatke putem sistemskih postavki</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patcheirani APK(s)</string>
     <string name="settings_system_patched_apks_description">Upravlja sačuvanim patchovanim datotekama aplikacija</string>

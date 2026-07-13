@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">有可用的 Morphe 更新</string>
     <string name="home_update_available_subtitle">新版本已準備好安裝</string>
+    <string name="home_blocked_source_title">偵測到已封鎖的修補程式來源</string>
+    <string name="home_blocked_source_subtitle">點擊以檢視並移除</string>
+    <string name="home_metadata_errors_title">部分修補程式來源無法使用</string>
+    <string name="home_metadata_errors_subtitle">點擊以檢視來源</string>
+    <string name="home_metered_skipped_title">已暫停行動數據上的更新</string>
+    <string name="home_metered_skipped_subtitle">點擊以允許在行動數據上更新</string>
     <string name="home_update_error">更新失敗</string>
     <string name="home_update_error_subtitle">請檢查網際網路連線，然後再試一次</string>
     <string name="home_update_skipped_metered">已略過更新</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">若有可用的實驗性應用程式，則對其進行修補</string>
     <string name="sources_management_already_exists">已新增此來源</string>
     <string name="sources_management_invalid_url">來源 URL 無效。請檢查位址並重試</string>
+    <string name="sources_management_blocked">此修補程式來源已封鎖，無法新增</string>
+    <string name="sources_management_source_blocked_badge">封鎖</string>
     <string name="sources_management_metadata_unavailable">中繼資料無法使用</string>
     <string name="sources_management_metadata_unavailable_hint">遠端中繼資料檔案無法使用。您仍可使用已安裝的套件進行修補，但此來源的自動更新已停用</string>
     <string name="sources_management_metadata_unavailable_hint_missing">無法下載修補套件。來源 URL 可能不正確，或檔案不存在</string>
@@ -720,6 +728,27 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APK 刪除成功</string>
     <string name="settings_system_apks_export_zip_success">已匯出的 APK</string>
     <string name="settings_system_apks_export_zip_failed">匯出選取的 APK 失敗</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">儲存空間管理</string>
+    <string name="settings_system_storage_management_description">檢視磁碟用量並清除快取檔案</string>
+    <string name="settings_system_storage_keystore_title">簽署金鑰庫</string>
+    <string name="settings_system_storage_app_data_title">應用程式資料</string>
+    <string name="settings_system_storage_patch_bundles_title">修補程式套件</string>
+    <string name="settings_system_storage_http_cache_title">網路快取</string>
+    <string name="settings_system_storage_http_cache_description">為了加快更新速度，已快取 HTTP 回應</string>
+    <string name="settings_system_storage_installer_cache_title">外部安裝程式快取</string>
+    <string name="settings_system_storage_installer_cache_description">傳遞給第三方安裝程式的 APK 副本</string>
+    <string name="settings_system_storage_patcher_workspace_title">修補程式工作區</string>
+    <string name="settings_system_storage_patcher_workspace_description">修補程式執行時間檔案和孤立的暫存資料</string>
+    <string name="settings_system_storage_temporary_title">臨時檔案</string>
+    <string name="settings_system_storage_temporary_description">修補過程中建立的工作檔案</string>
+    <string name="settings_system_storage_clear_all">清除所有快取</string>
+    <string name="settings_system_storage_clear_all_description">一次釋放所有可回收的快取空間</string>
+    <string name="settings_system_storage_clear_all_confirm">這會清除已快取的網路回應、已排程的安裝程式副本和臨時檔案。原始 APK 和修補後的 APK 會保留</string>
+    <string name="settings_system_storage_cleared">釋放 %s</string>
+    <string name="settings_system_storage_nothing_to_clear">無須清除</string>
+    <string name="settings_system_storage_open_app_info_title">開啟 Android 應用程式儲存空間</string>
+    <string name="settings_system_storage_open_app_info_description">透過系統設定管理或清除所有 Morphe 資料</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">已修補的 APK</string>
     <string name="settings_system_patched_apks_description">管理儲存的修補後應用程式檔案</string>

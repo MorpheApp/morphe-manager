@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Magagamit ang update para sa Morphe</string>
     <string name="home_update_available_subtitle">Handa na mag-install ang bagong bersyon</string>
+    <string name="home_blocked_source_title">Natukoy ang naharang na pinagmulan ng patch</string>
+    <string name="home_blocked_source_subtitle">I-tap upang suriin at alisin</string>
+    <string name="home_metadata_errors_title">Mayroong ilang mga pinagmumulan ng patch na hindi magagamit</string>
+    <string name="home_metadata_errors_subtitle">I-tap upang suriin ang mga pinagmulan</string>
+    <string name="home_metered_skipped_title">Naantala ang mga update sa mobile data</string>
+    <string name="home_metered_skipped_subtitle">I-tap para payagan ang mga update sa mobile data</string>
     <string name="home_update_error">Nabigo ang pag-update</string>
     <string name="home_update_error_subtitle">Suriin ang iyong koneksyon sa internet at subukan muli</string>
     <string name="home_update_skipped_metered">Nabigo ang pag-update</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Naglalagay ng mga target na app na pang-eksperimento kung mayroon</string>
     <string name="sources_management_already_exists">Ang pinagmulang ito ay naidagdag na.</string>
     <string name="sources_management_invalid_url">Hindi balido ang source URL. Pakisuri ang address at subukang muli.</string>
+    <string name="sources_management_blocked">Ang source ng patch na ito ay naka-block at hindi maaaring idagdag</string>
+    <string name="sources_management_source_blocked_badge">Naka-block</string>
     <string name="sources_management_metadata_unavailable">Hindi available ang Metadata</string>
     <string name="sources_management_metadata_unavailable_hint">Hindi available ang remote metadata file. Gumagana pa rin ang pag-patch gamit ang naka-install na bundle, ngunit hindi pinagana ang auto-update para sa source na ito.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Hindi ma-download ang patch bundle. Maaaring mali ang source URL o hindi umiiral ang file.</string>
@@ -716,6 +724,27 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_apks_deleted_all">Matagumpay na nabura ang mga APK</string>
     <string name="settings_system_apks_export_zip_success">Na-export ang mga napiling APK</string>
     <string name="settings_system_apks_export_zip_failed">Nabigo ang pag-export ng mga napiling APK</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Pamamahala ng imbakan</string>
+    <string name="settings_system_storage_management_description">Suriin ang paggamit ng disk at i-clear ang mga naka-cache na file</string>
+    <string name="settings_system_storage_keystore_title">Pag-sign ng keystore</string>
+    <string name="settings_system_storage_app_data_title">Data ng app</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch bundle</string>
+    <string name="settings_system_storage_http_cache_title">Cache ng network</string>
+    <string name="settings_system_storage_http_cache_description">Na-cache ang mga tugon ng HTTP upang mapabilis ang mga update</string>
+    <string name="settings_system_storage_installer_cache_title">Cache ng panlabas na installer</string>
+    <string name="settings_system_storage_installer_cache_description">Mga kopya ng APK na ipinasa sa mga third-party installer</string>
+    <string name="settings_system_storage_patcher_workspace_title">Workspace ng Patcher</string>
+    <string name="settings_system_storage_patcher_workspace_description">Mga runtime file ng Patcher at mga nasirang scratch data</string>
+    <string name="settings_system_storage_temporary_title">Mga pansamantalang file</string>
+    <string name="settings_system_storage_temporary_description">Mga working file na ginawa habang nagpe-patch</string>
+    <string name="settings_system_storage_clear_all">I-clear ang lahat ng cache</string>
+    <string name="settings_system_storage_clear_all_description">Nililinis ang lahat ng puwedeng mabawi na espasyo ng cache nang sabay-sabay</string>
+    <string name="settings_system_storage_clear_all_confirm">Ito ay magcle-clear ng mga na-cache na tugon ng network, mga kopya ng installer na naka-stage, at mga pansamantalang file. Ang orihinal at na-patch na mga APK ay mananatili</string>
+    <string name="settings_system_storage_cleared">Napalaya ang %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Walang dapat i-clear</string>
+    <string name="settings_system_storage_open_app_info_title">Buksan ang storage ng Android app</string>
+    <string name="settings_system_storage_open_app_info_description">Pamahalaan o i-clear ang lahat ng data ng Morphe sa pamamagitan ng mga setting ng system</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Na-patch na mga APK</string>
     <string name="settings_system_patched_apks_description">Pamahalaan ang mga nakaimbak na naka-patch na mga file ng aplikasyon</string>

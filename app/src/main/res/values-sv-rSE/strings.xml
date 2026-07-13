@@ -718,6 +718,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_apks_deleted_all">APK-filerna har raderats</string>
     <string name="settings_system_apks_export_zip_success">De markerade APK-filerna har exporterats</string>
     <string name="settings_system_apks_export_zip_failed">Det gick inte att exportera de markerade APK-filerna</string>
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Modifierade APK-filer</string>
     <string name="settings_system_patched_apks_description">Hanterar sparade modifierade appfiler</string>

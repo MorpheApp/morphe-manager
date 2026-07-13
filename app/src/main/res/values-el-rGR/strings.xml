@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Διαθέσιμη ενημέρωση του Morphe</string>
     <string name="home_update_available_subtitle">Νέα έκδοση έτοιμη για εγκατάσταση</string>
+    <string name="home_blocked_source_title">Ανιχνεύτηκε αποκλεισμένη πηγή ενημερώσεων</string>
+    <string name="home_blocked_source_subtitle">Πατήστε για να ελέγξετε και να καταργήσετε</string>
+    <string name="home_metadata_errors_title">Ορισμένες πηγές ενημερώσεων δεν είναι διαθέσιμες</string>
+    <string name="home_metadata_errors_subtitle">Πατήστε για να ελέγξετε τις πηγές</string>
+    <string name="home_metered_skipped_title">Οι ενημερώσεις έχουν παύσει στα δεδομένα κινητής τηλεφωνίας</string>
+    <string name="home_metered_skipped_subtitle">Πατήστε για να επιτρέψετε ενημερώσεις μέσω κινητών δεδομένων</string>
     <string name="home_update_error">Η ενημέρωση απέτυχε</string>
     <string name="home_update_error_subtitle">Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και δοκιμάστε ξανά</string>
     <string name="home_update_skipped_metered">Οι ενημερώσεις παραλείφθηκαν</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Τροποποιήστε πειραματικές εκδόσεις εφαρμογών εάν υπάρχουν</string>
     <string name="sources_management_already_exists">Αυτή η πηγή έχει ήδη προστεθεί</string>
     <string name="sources_management_invalid_url">Μη έγκυρη διεύθυνση URL πηγής. Παρακαλώ ελέγξτε τη διεύθυνση και προσπαθήστε ξανά</string>
+    <string name="sources_management_blocked">Η πηγή ενημερώσεων είναι αποκλεισμένη και δεν μπορεί να προστεθεί</string>
+    <string name="sources_management_source_blocked_badge">Αποκλεισμένο</string>
     <string name="sources_management_metadata_unavailable">Μεταδεδομένα μη διαθέσιμα</string>
     <string name="sources_management_metadata_unavailable_hint">Το απομακρυσμένο αρχείο μεταδεδομένων δεν είναι διαθέσιμο. Η επιδιόρθωση με το εγκατεστημένο πακέτο εξακολουθεί να λειτουργεί, αλλά η αυτόματη ενημέρωση είναι απενεργοποιημένη για αυτήν την πηγή</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Το πακέτο επιδιόρθωσης δεν κατέβηκε. Η διεύθυνση URL της πηγής ενδέχεται να είναι λανθασμένη ή το αρχείο να μην υπάρχει</string>
@@ -720,6 +728,27 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APK διαγράφηκαν με επιτυχία</string>
     <string name="settings_system_apks_export_zip_success">Εξαγωγή επιλεγμένων APK</string>
     <string name="settings_system_apks_export_zip_failed">Αποτυχία εξαγωγής επιλεγμένων APK</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Διαχείριση αποθηκευτικού χώρου</string>
+    <string name="settings_system_storage_management_description">Επισκόπηση χρήσης δίσκου και εκκαθάριση προσωρινών αρχείων</string>
+    <string name="settings_system_storage_keystore_title">Αποθηκευτικό στοιχείο υπογραφών</string>
+    <string name="settings_system_storage_app_data_title">Δεδομένα εφαρμογής</string>
+    <string name="settings_system_storage_patch_bundles_title">Δέσμες ενημερώσεων</string>
+    <string name="settings_system_storage_http_cache_title">Κρυφή μνήμη δικτύου</string>
+    <string name="settings_system_storage_http_cache_description">Οι απαντήσεις HTTP αποθηκεύονται στην κρυφή μνήμη για ταχύτερες ενημερώσεις</string>
+    <string name="settings_system_storage_installer_cache_title">Κρυφή μνήμη εξωτερικού εγκαταστάτη</string>
+    <string name="settings_system_storage_installer_cache_description">Αντίγραφα APK που μεταβιβάζονται σε εγκαταστάτες τρίτων</string>
+    <string name="settings_system_storage_patcher_workspace_title">Χώρος εργασίας του Patcher</string>
+    <string name="settings_system_storage_patcher_workspace_description">Αρχεία χρόνου εκτέλεσης του Patcher και ορφανά δεδομένα προσωρινής αποθήκευσης</string>
+    <string name="settings_system_storage_temporary_title">Προσωρινά αρχεία</string>
+    <string name="settings_system_storage_temporary_description">Αρχεία εργασίας που δημιουργούνται κατά τη διάρκεια της επιδιόρθωσης</string>
+    <string name="settings_system_storage_clear_all">Εκκαθάριση όλων των κρυφών μνημών</string>
+    <string name="settings_system_storage_clear_all_description">Απελευθερώνει όλο τον χώρο κρυφής μνήμης που μπορεί να ανακτηθεί ταυτόχρονα</string>
+    <string name="settings_system_storage_clear_all_confirm">Αυτό θα διαγράψει τις αποθηκευμένες στην κρυφή μνήμη απαντήσεις δικτύου, τα αντίγραφα εγκαταστάτη που έχουν τοποθετηθεί σε προσωρινή αποθήκευση και τα προσωρινά αρχεία. Τα αρχικά και τα επιδιορθωμένα APK θα διατηρηθούν</string>
+    <string name="settings_system_storage_cleared">Απελευθερώθηκαν %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Δεν υπάρχουν στοιχεία για διαγραφή</string>
+    <string name="settings_system_storage_open_app_info_title">Άνοιγμα αποθήκευσης εφαρμογής Android</string>
+    <string name="settings_system_storage_open_app_info_description">Διαχείριση ή εκκαθάριση όλων των δεδομένων του Morphe μέσω των ρυθμίσεων του συστήματος</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Τροποποιημένα αρχεία APK</string>
     <string name="settings_system_patched_apks_description">Διαχείριση αποθηκευμένων αρχείων τροποποιημένων εφαρμογών</string>

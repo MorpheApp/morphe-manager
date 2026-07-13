@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Actualización de Morphe disponible</string>
     <string name="home_update_available_subtitle"></string>
+    <string name="home_blocked_source_title">Se detectó una fuente de parche bloqueada</string>
+    <string name="home_blocked_source_subtitle">Pulsa para revisar y eliminar</string>
+    <string name="home_metadata_errors_title">Algunas fuentes de parche no están disponibles</string>
+    <string name="home_metadata_errors_subtitle">Pulsa para revisar las fuentes</string>
+    <string name="home_metered_skipped_title">Actualizaciones pausadas en datos móviles</string>
+    <string name="home_metered_skipped_subtitle">Pulsa para permitir actualizaciones con datos móviles</string>
     <string name="home_update_error">La actualización falló</string>
     <string name="home_update_error_subtitle">Comprueba tu conexión a internet y vuelve a intentarlo </string>
     <string name="home_update_skipped_metered">Actualización omitida</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Parchea las versiones experimentales de la aplicación, si están disponibles</string>
     <string name="sources_management_already_exists">Esta fuente ya ha sido añadida</string>
     <string name="sources_management_invalid_url">URL de fuente no válida. Compruebe la dirección e inténtelo de nuevo</string>
+    <string name="sources_management_blocked">Esta fuente de parche está bloqueada y no se puede agregar</string>
+    <string name="sources_management_source_blocked_badge">Bloqueado</string>
     <string name="sources_management_metadata_unavailable">Metadatos no disponibles</string>
     <string name="sources_management_metadata_unavailable_hint">El archivo de metadatos remoto no está disponible. La aplicación de parches con el paquete instalado sigue funcionando, pero la actualización automática está desactivada para esta fuente</string>
     <string name="sources_management_metadata_unavailable_hint_missing">No se ha podido descargar el paquete de parches. Es posible que la URL de la fuente sea incorrecta o que el archivo no exista</string>
@@ -720,6 +728,27 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_apks_deleted_all">APKs eliminados correctamente</string>
     <string name="settings_system_apks_export_zip_success">APKs seleccionados exportados</string>
     <string name="settings_system_apks_export_zip_failed">Error al exportar los APKs seleccionados</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Administración del almacenamiento</string>
+    <string name="settings_system_storage_management_description">Revisar el uso del disco y borrar los archivos en caché</string>
+    <string name="settings_system_storage_keystore_title">Almacén de claves de firma</string>
+    <string name="settings_system_storage_app_data_title">Datos de la aplicación</string>
+    <string name="settings_system_storage_patch_bundles_title">Paquetes de parches</string>
+    <string name="settings_system_storage_http_cache_title">Caché de red</string>
+    <string name="settings_system_storage_http_cache_description">Respuestas HTTP en caché para acelerar las actualizaciones</string>
+    <string name="settings_system_storage_installer_cache_title">Caché del instalador externo</string>
+    <string name="settings_system_storage_installer_cache_description">Copias de APK pasadas a instaladores de terceros</string>
+    <string name="settings_system_storage_patcher_workspace_title">Espacio de trabajo del parcheador</string>
+    <string name="settings_system_storage_patcher_workspace_description">Archivos de tiempo de ejecución del modificador y datos temporales huérfanos</string>
+    <string name="settings_system_storage_temporary_title">Archivos temporales</string>
+    <string name="settings_system_storage_temporary_description">Archivos de trabajo creados al parchear</string>
+    <string name="settings_system_storage_clear_all">Borrar todas las cachés</string>
+    <string name="settings_system_storage_clear_all_description">Libera todo el espacio de caché recuperable a la vez</string>
+    <string name="settings_system_storage_clear_all_confirm">Esto borra las respuestas de red en caché, las copias del instalador en espera y los archivos temporales. Los APK originales y modificados se conservan</string>
+    <string name="settings_system_storage_cleared">Liberado %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nada que borrar</string>
+    <string name="settings_system_storage_open_app_info_title">Abrir almacenamiento de la aplicación Android</string>
+    <string name="settings_system_storage_open_app_info_description">Administrar o borrar todos los datos de Morphe a través de la configuración del sistema</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs parcheados</string>
     <string name="settings_system_patched_apks_description">Administra los archivos de aplicación parcheados guardados</string>

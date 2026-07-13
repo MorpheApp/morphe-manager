@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostępna aktualizacja Morphe</string>
     <string name="home_update_available_subtitle">Nowa wersja gotowa do instalacji</string>
+    <string name="home_blocked_source_title">Wykryto zablokowane źródło modyfikacji</string>
+    <string name="home_blocked_source_subtitle">Dotknij, aby przejrzeć i usunąć</string>
+    <string name="home_metadata_errors_title">Niektóre źródła modyfikacji są niedostępne</string>
+    <string name="home_metadata_errors_subtitle">Dotknij, aby przejrzeć źródła</string>
+    <string name="home_metered_skipped_title">Aktualizacje wstrzymane na danych mobilnych</string>
+    <string name="home_metered_skipped_subtitle">Dotknij, aby zezwolić na aktualizacje przez dane mobilne</string>
     <string name="home_update_error">Błąd aktualizacji</string>
     <string name="home_update_error_subtitle">Sprawdź połączenie z internetem i spróbuj ponownie</string>
     <string name="home_update_skipped_metered">Pominięto aktualizacje</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Modyfikuje wersje eksperymentalne aplikacji, jeśli są dostępne</string>
     <string name="sources_management_already_exists">To źródło zostało już dodane</string>
     <string name="sources_management_invalid_url">Nieprawidłowy adres źródła. Sprawdź adres i spróbuj ponownie</string>
+    <string name="sources_management_blocked">To źródło modyfikacji jest zablokowane i nie może zostać dodane</string>
+    <string name="sources_management_source_blocked_badge">Zablokowane</string>
     <string name="sources_management_metadata_unavailable">Brak metadanych</string>
     <string name="sources_management_metadata_unavailable_hint">Zdalny plik metadanych jest niedostępny. Modyfikowanie przy użyciu zainstalowanego pakietu nadal działa, ale automatyczna aktualizacja dla tego źródła została wyłączona</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Nie udało się pobrać pakietu modyfikacji. Adres źródła może być nieprawidłowy lub plik nie istnieje</string>
@@ -720,6 +728,27 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_apks_deleted_all">Usunięto pliki APK</string>
     <string name="settings_system_apks_export_zip_success">Wyeksportowano wybrane pliki APK</string>
     <string name="settings_system_apks_export_zip_failed">Nie udało się wyeksportować wybranych plików APK</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Zarządzanie pamięcią</string>
+    <string name="settings_system_storage_management_description">Przejrzyj zużycie dysku i wyczyść pliki pamięci podręcznej</string>
+    <string name="settings_system_storage_keystore_title">Magazyn kluczy podpisywania</string>
+    <string name="settings_system_storage_app_data_title">Dane aplikacji</string>
+    <string name="settings_system_storage_patch_bundles_title">Pakiety modyfikacji</string>
+    <string name="settings_system_storage_http_cache_title">Pamięć podręczna sieci</string>
+    <string name="settings_system_storage_http_cache_description">Odpowiedzi HTTP zapisane w pamięci podręcznej, aby przyspieszyć aktualizacje</string>
+    <string name="settings_system_storage_installer_cache_title">Pamięć podręczna zewnętrznego instalatora</string>
+    <string name="settings_system_storage_installer_cache_description">Kopie plików APK przekazywane do zewnętrznych instalatorów</string>
+    <string name="settings_system_storage_patcher_workspace_title">Obszar roboczy modyfikatora</string>
+    <string name="settings_system_storage_patcher_workspace_description">Pliki środowiska uruchomieniowego modyfikatora i osierocone dane robocze</string>
+    <string name="settings_system_storage_temporary_title">Pliki tymczasowe</string>
+    <string name="settings_system_storage_temporary_description">Pliki robocze tworzone podczas modyfikowania</string>
+    <string name="settings_system_storage_clear_all">Wyczyść całą pamięć podręczną</string>
+    <string name="settings_system_storage_clear_all_description">Zwalnia za jednym razem całe miejsce w pamięci podręcznej, które można odzyskać</string>
+    <string name="settings_system_storage_clear_all_confirm">To usunie zapisane odpowiedzi sieciowe, przygotowane kopie instalatora i pliki tymczasowe. Oryginalne i zmodyfikowane pliki APK zostaną zachowane</string>
+    <string name="settings_system_storage_cleared">Zwolniono %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nic do wyczyszczenia</string>
+    <string name="settings_system_storage_open_app_info_title">Otwórz ustawienia pamięci aplikacji w Androidzie</string>
+    <string name="settings_system_storage_open_app_info_description">Zarządzaj wszystkimi danymi Morphe lub usuń je przez ustawienia systemowe</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Zmodyfikowane pliki APK</string>
     <string name="settings_system_patched_apks_description">Zarządza zapisanymi plikami zmodyfikowanych aplikacji</string>

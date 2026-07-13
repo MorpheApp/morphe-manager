@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe uppfærsla í boði</string>
     <string name="home_update_available_subtitle">Ný útgáfa tilbúin til að setja upp</string>
+    <string name="home_blocked_source_title">Uppgildandi uppspretta fyrir breytingar greind</string>
+    <string name="home_blocked_source_subtitle">Bankaðu til að skoða og fjarlægja</string>
+    <string name="home_metadata_errors_title">Sumar uppsprettur fyrir breytingar eru ókleyfar</string>
+    <string name="home_metadata_errors_subtitle">Bankaðu til að skoða uppsprettur</string>
+    <string name="home_metered_skipped_title">Uppfærslur á vinnslasvæði eru á stöðu</string>
+    <string name="home_metered_skipped_subtitle">Tap til að leyfa uppfærslur á farsímagögnunum</string>
     <string name="home_update_error">Uppskera mistókst</string>
     <string name="home_update_error_subtitle">Vinsamlegast athugaðu internet tenginguna þína og reyndu aftur</string>
     <string name="home_update_skipped_metered">Uppfærslur höfðu</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Breytir tilrauna app markmiðum ef fáanlegt</string>
     <string name="sources_management_already_exists">Þessi heimild hefur þegar verið bætt við</string>
     <string name="sources_management_invalid_url">Ógild URL uppspretta. Vinsamlegast skoðaðu netfangið og reyndu aftur</string>
+    <string name="sources_management_blocked">Þessi uppfærslujafi er blokkaður og ekki er hægt að bæta við honum</string>
+    <string name="sources_management_source_blocked_badge">Blokkað</string>
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
     <string name="sources_management_metadata_unavailable_hint">Fjarlæg metadata skráin er ófær. Pökkun með uppsetta pakkann virkar enn, en sjálfvirk uppfærsla er óvirkjuð fyrir þessa uppsprettu</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Ekki tókst að sækja pakkann. URL uppsprettan gæti verið röng eða skráin er ekki til</string>
@@ -715,6 +723,27 @@ Myndastærðin verður að vera sem hér segir:
     <string name="settings_system_apks_deleted_all">APK skrárnar voru eyðdar árangursríkt</string>
     <string name="settings_system_apks_export_zip_success">Valdir APK-skrá</string>
     <string name="settings_system_apks_export_zip_failed">Útflutningur valdra APK-skráa tókst ekki</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Stjórnun geymslu</string>
+    <string name="settings_system_storage_management_description">Yfirfarðu disknotkun og hreinsu geymda skráa</string>
+    <string name="settings_system_storage_keystore_title">Staðfestingarlyklar</string>
+    <string name="settings_system_storage_app_data_title">Gögn appa</string>
+    <string name="settings_system_storage_patch_bundles_title">Pakkabótareindir</string>
+    <string name="settings_system_storage_http_cache_title">Vefminni</string>
+    <string name="settings_system_storage_http_cache_description">HTTP svarahafsminni til að flýta uppfærslum</string>
+    <string name="settings_system_storage_installer_cache_title">Vefjuuppsetningarminni</string>
+    <string name="settings_system_storage_installer_cache_description">APK afrit afhent þriðja aðila uppsetningum</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher vinnurými</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher hlaupatímaskrár og útgrafin skráðagagn</string>
+    <string name="settings_system_storage_temporary_title">Tímabundar skrá</string>
+    <string name="settings_system_storage_temporary_description">Vinnuskrá sem búin er til við breytingum</string>
+    <string name="settings_system_storage_clear_all">Hreinsa allar minnisafskriftir</string>
+    <string name="settings_system_storage_clear_all_description">Fríar allar endurheimtanlegar minnisafskriftir samtímis</string>
+    <string name="settings_system_storage_clear_all_confirm">Þetta hreinsar vefminnistafskriftir, uppsetningareintök og tímabundar skrá. Upprunaleg og breytt APK eru geymd</string>
+    <string name="settings_system_storage_cleared">Fríar %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Ekki hægt að hreinsa neitt</string>
+    <string name="settings_system_storage_open_app_info_title">Opna geymslu Android apps</string>
+    <string name="settings_system_storage_open_app_info_description">Stjórna eða hreinsa allar Morphe gögn í gegnum kerfisstillingar</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Pattað APK</string>
     <string name="settings_system_patched_apks_description">Stjórnar geymda breyttum forritsskráum</string>

@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe frissítés elérhető</string>
     <string name="home_update_available_subtitle">Az új verzió telepítésre vár</string>
+    <string name="home_blocked_source_title">Blokkolt patchforrás észlelve</string>
+    <string name="home_blocked_source_subtitle">Érintse meg a felülvizsgálathoz és eltávolításhoz</string>
+    <string name="home_metadata_errors_title">Egyes patchforrások nem elérhetők</string>
+    <string name="home_metadata_errors_subtitle">Érintse meg a források áttekintéséhez</string>
+    <string name="home_metered_skipped_title">A frissítések szünetelnek mobiladáton</string>
+    <string name="home_metered_skipped_subtitle">Érintse meg a frissítések engedélyezéséhez mobiladatokon keresztül</string>
     <string name="home_update_error">A frissítés sikertelen</string>
     <string name="home_update_error_subtitle">Ellenőrizd az internetkapcsolatod és próbáld újra</string>
     <string name="home_update_skipped_metered">Frissítések kihagyva</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Módosítsa a kísérleti alkalmazás célpontjait, ha elérhetők</string>
     <string name="sources_management_already_exists">Ez a forrás már hozzá lett adva</string>
     <string name="sources_management_invalid_url">Érvénytelen forrás URL. Kérjük, ellenőrizze a címet, és próbálja újra.</string>
+    <string name="sources_management_blocked">Ez a javításcsomag forrás le van blokkolva, és nem adható hozzá</string>
+    <string name="sources_management_source_blocked_badge">Blokkolva</string>
     <string name="sources_management_metadata_unavailable">Metaadatok nem állnak rendelkezésre.</string>
     <string name="sources_management_metadata_unavailable_hint">A távoli metaadatfájl nem érhető el. A telepített csomaggal történő javítás továbbra is működik, de az automatikus frissítés le van tiltva ehhez a forráshoz.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">A javítócsomag letöltése nem sikerült. A forrás URL helytelen lehet, vagy a fájl nem létezik.</string>
@@ -720,6 +728,27 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_apks_deleted_all">Az APK-k sikeresen törölve lettek.</string>
     <string name="settings_system_apks_export_zip_success">A kiválasztott APK-k exportálva</string>
     <string name="settings_system_apks_export_zip_failed">A kiválasztott APK-k exportálása sikertelen</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Tárhelykezelés</string>
+    <string name="settings_system_storage_management_description">A lemezhasználat áttekintése és a gyorsítótár törlése</string>
+    <string name="settings_system_storage_keystore_title">Aláíró kulcstár</string>
+    <string name="settings_system_storage_app_data_title">Alkalmazásadatok</string>
+    <string name="settings_system_storage_patch_bundles_title">Módosítócsomagok</string>
+    <string name="settings_system_storage_http_cache_title">Hálózati gyorsítótár</string>
+    <string name="settings_system_storage_http_cache_description">Az HTTP-válaszok gyorsítótárazása a frissítések felgyorsítása érdekében</string>
+    <string name="settings_system_storage_installer_cache_title">Külső telepítő gyorsítótár</string>
+    <string name="settings_system_storage_installer_cache_description">A harmadik fél telepítőknek átadott APK-másolatok</string>
+    <string name="settings_system_storage_patcher_workspace_title">Módosító munkaterület</string>
+    <string name="settings_system_storage_patcher_workspace_description">A módosító futásidei fájljai és az elárvult ideiglenes adatok</string>
+    <string name="settings_system_storage_temporary_title">Ideiglenes fájlok</string>
+    <string name="settings_system_storage_temporary_description">A módosítás során létrehozott munkafájlok</string>
+    <string name="settings_system_storage_clear_all">Az összes gyorsítótár törlése</string>
+    <string name="settings_system_storage_clear_all_description">Egyszerre törli az összes visszanyerhető gyorsítótár-területet</string>
+    <string name="settings_system_storage_clear_all_confirm">Ez törli a gyorsítótárazott hálózati válaszokat, a telepítők által használt példányokat és az ideiglenes fájlokat. Az eredeti és a módosított APK-k megőrizve maradnak</string>
+    <string name="settings_system_storage_cleared">Felszabadítva: %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nincs törölni való</string>
+    <string name="settings_system_storage_open_app_info_title">Megnyitás Android alkalmazástár</string>
+    <string name="settings_system_storage_open_app_info_description">Morphe adatok kezelése vagy törlése a rendszerbeállításokon keresztül</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Módosított APK-k</string>
     <string name="settings_system_patched_apks_description">Mentett módosított alkalmazásfájlok kezelése</string>

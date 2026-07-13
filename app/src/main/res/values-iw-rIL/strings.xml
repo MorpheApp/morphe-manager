@@ -19,6 +19,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">עדכון Morphe זמין</string>
     <string name="home_update_available_subtitle">גרסה חדשה מוכנה להתקנה</string>
+    <string name="home_blocked_source_title">מקור תיקון חסום מזוהה</string>
+    <string name="home_blocked_source_subtitle">הקש כדי לעיין ולהסיר</string>
+    <string name="home_metadata_errors_title">חלק ממקורות התיקונים אינם זמינים</string>
+    <string name="home_metadata_errors_subtitle">הקש כדי לעיין במקורות</string>
+    <string name="home_metered_skipped_title">עדכונים הופסקו בזמן שימוש בנתונים סלולריים</string>
+    <string name="home_metered_skipped_subtitle">הקש כדי לאפשר עדכונים בנתונים סלולריים</string>
     <string name="home_update_error">העדכון נכשל</string>
     <string name="home_update_error_subtitle">בדוק את חיבור האינטרנט שלך ונסה שוב</string>
     <string name="home_update_skipped_metered">עדכונים שדולגו</string>
@@ -100,6 +106,8 @@
     <string name="sources_management_experimental_versions_toggle_description">תקן גרסאות אפליקציה ניסיוניות זמינות</string>
     <string name="sources_management_already_exists">מקור זה כבר נוסף</string>
     <string name="sources_management_invalid_url">כתובת URL מקור לא תקינה. אנא בדוק את הכתובת ונסה שוב</string>
+    <string name="sources_management_blocked">מקור הטלאים הזה חסום ואינו יכול להיות מוסף</string>
+    <string name="sources_management_source_blocked_badge">חסום</string>
     <string name="sources_management_metadata_unavailable">מטא-נתונים לא זמינים</string>
     <string name="sources_management_metadata_unavailable_hint">קובץ המטא-נתונים המרוחק לא זמין. תיקון באמצעות החבילה המותקנת עדיין עובד, אך עדכון אוטומטי מושבת עבור מקור זה</string>
     <string name="sources_management_metadata_unavailable_hint_missing">לא ניתן להוריד את חבילת התיקון. כתובת ה-URL של המקור עשויה להיות שגויה או שהקובץ אינו קיים</string>
@@ -705,6 +713,27 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_apks_deleted_all">קבצי APK נמחקו בהצלחה</string>
     <string name="settings_system_apks_export_zip_success">אפקים נבחרים יוצאים</string>
     <string name="settings_system_apks_export_zip_failed">נכשל ייצוא אפקים נבחרים</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">ניהול אחסון</string>
+    <string name="settings_system_storage_management_description">סקירת השימוש בדיסק ומחיקת קבצים שנשמרו במטמון</string>
+    <string name="settings_system_storage_keystore_title">מאגר מפתחות חתימה</string>
+    <string name="settings_system_storage_app_data_title">נתוני אפליקציות</string>
+    <string name="settings_system_storage_patch_bundles_title">חבילות תיקונים</string>
+    <string name="settings_system_storage_http_cache_title">מטמון רשת</string>
+    <string name="settings_system_storage_http_cache_description">תגובות HTTP שמורות במטמון כדי להאיץ עדכונים</string>
+    <string name="settings_system_storage_installer_cache_title">מטמון מתקינים חיצוני</string>
+    <string name="settings_system_storage_installer_cache_description">עותקי APK המועברים למתקינים צד שלישי</string>
+    <string name="settings_system_storage_patcher_workspace_title">סביבת עבודה של תיקן</string>
+    <string name="settings_system_storage_patcher_workspace_description">קבצי זמן ריצה של תיקן ונתוני גירוד יתומים</string>
+    <string name="settings_system_storage_temporary_title">קבצים זמניים</string>
+    <string name="settings_system_storage_temporary_description">קבצי עבודה שנוצרו במהלך תיקון</string>
+    <string name="settings_system_storage_clear_all">נקה את כל המטמונים</string>
+    <string name="settings_system_storage_clear_all_description">משחרר את כל שטח המטמון הניתן לשחזור בבת אחת</string>
+    <string name="settings_system_storage_clear_all_confirm">פעולה זו מנקה תגובות רשת שמורות במטמון, עותקי מתקינים מאוחסנים וקבצים זמניים. קבצי APK מקוריים ומטופלים נשמרים</string>
+    <string name="settings_system_storage_cleared">שוחרר %s</string>
+    <string name="settings_system_storage_nothing_to_clear">אין מה לנקות</string>
+    <string name="settings_system_storage_open_app_info_title">פתח אחסון אפליקציות Android</string>
+    <string name="settings_system_storage_open_app_info_description">נהל או נקה את כל נתוני Morphe דרך הגדרות המערכת</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">פיצ\'ים מותאמים</string>
     <string name="settings_system_patched_apks_description">מנהל קבצי אפליקציות מתוקנים שמורים</string>

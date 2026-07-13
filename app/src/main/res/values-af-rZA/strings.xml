@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-opdatering beskikbaar</string>
     <string name="home_update_available_subtitle">Nuwe weergawe gereed om te installeer</string>
+    <string name="home_blocked_source_title">Geblokkeerde bron vir plakkers opgespoor</string>
+    <string name="home_blocked_source_subtitle">Tik om te hersien en te verwyder</string>
+    <string name="home_metadata_errors_title">Sommige bronne vir plakkers is nie beskikbaar nie</string>
+    <string name="home_metadata_errors_subtitle">Tik om bronne te hersien</string>
+    <string name="home_metered_skipped_title">Opdaterings gestop op mobiele data</string>
+    <string name="home_metered_skipped_subtitle">Tik om opdaterings op mobiele data toe te laat</string>
     <string name="home_update_error">Opdatering het misluk</string>
     <string name="home_update_error_subtitle">Kontroleer jou internetverbinding en probeer weer</string>
     <string name="home_update_skipped_metered">Opdaterings oorgeslaan</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Pleister eksperimentele app-teikens indien beskikbaar</string>
     <string name="sources_management_already_exists">Hierdie oorsprong is reeds bygevoeg</string>
     <string name="sources_management_invalid_url">Ongeldige bron-URL. Gaan asseblief die adres na en probeer weer</string>
+    <string name="sources_management_blocked">Hierdie bron vir pleisters is geblokkeer en kan nie bygevoeg word nie</string>
+    <string name="sources_management_source_blocked_badge">Geblokkeer</string>
     <string name="sources_management_metadata_unavailable">Metadata Nie beskikbaar nie</string>
     <string name="sources_management_metadata_unavailable_hint">Die afstandmetadata lêer is nie beskikbaar nie. Patches met die geïnstalleerde bundel werk steeds, maar outo-opdatering is vir hierdie bron afgeskakel</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Die patch bundel kon nie afgelaai word nie. Die bron-URL kan verkeerd wees of die lêer bestaan ​​nie</string>
@@ -720,6 +728,27 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_system_apks_deleted_all">APK\'s suksesvol uitgevee</string>
     <string name="settings_system_apks_export_zip_success">Geselekteerde APK\'s uitgevoer</string>
     <string name="settings_system_apks_export_zip_failed">Kon nie die geselekteerde APK\'s uitvoer nie</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Stooringsbestuur</string>
+    <string name="settings_system_storage_management_description">Hersien skyfgebruik en maak gekasste lêers skoon</string>
+    <string name="settings_system_storage_keystore_title">Ondertekeningsleutestoor</string>
+    <string name="settings_system_storage_app_data_title">Programdata</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch-bundels</string>
+    <string name="settings_system_storage_http_cache_title">Netwerkkas</string>
+    <string name="settings_system_storage_http_cache_description">HTTP-response word in kas geberg om opdaterings om vas te spoed.</string>
+    <string name="settings_system_storage_installer_cache_title">Eksterne installer kas</string>
+    <string name="settings_system_storage_installer_cache_description">APK-koppies wat oorgedra word aan derdeparty-installateurs</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher werkspasie</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher tydelike lêers en weeskindskrapdata</string>
+    <string name="settings_system_storage_temporary_title">Tydelike lêers</string>
+    <string name="settings_system_storage_temporary_description">Werk lêers wat geskep word tydens patchen</string>
+    <string name="settings_system_storage_clear_all">Maak alle kasgeheue vry</string>
+    <string name="settings_system_storage_clear_all_description">Maak alle herwinnbare kasruimte op een slag vry</string>
+    <string name="settings_system_storage_clear_all_confirm">Dit vee die gekasde netwerkresponse, gestageerde installer kopieë en tydelike lêers uit. Oorspronklike en gepatchde APK\'s word behou.</string>
+    <string name="settings_system_storage_cleared">%s vrygemaak</string>
+    <string name="settings_system_storage_nothing_to_clear">Niets om uit te vee</string>
+    <string name="settings_system_storage_open_app_info_title">Maak Android-appberging oop</string>
+    <string name="settings_system_storage_open_app_info_description">Bestuur of vee alle Morphe-data uit via stelselinstellings</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatched APK\'s</string>
     <string name="settings_system_patched_apks_description">Bestuur gestoorde gepatchte toepassingslêers</string>

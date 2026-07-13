@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe আপডেট উপলব্ধ</string>
     <string name="home_update_available_subtitle">নতুন সংস্করণ ইনস্টল করতে প্রস্তুত</string>
+    <string name="home_blocked_source_title">ব্লক করা প্যাচ সোর্স সনাক্ত করা হয়েছে</string>
+    <string name="home_blocked_source_subtitle">পর্যালোচনা ও সরানোর জন্য আলতো চাপুন</string>
+    <string name="home_metadata_errors_title">কিছু প্যাচ সোর্স অনুপলব্ধ</string>
+    <string name="home_metadata_errors_subtitle">সোর্সগুলি পর্যালোচনা করার জন্য আলতো চাপুন</string>
+    <string name="home_metered_skipped_title">মোবাইল ডেটাতে আপডেটগুলিPaused</string>
+    <string name="home_metered_skipped_subtitle">মোবাইল ডেটাতে আপডেট করার জন্য ট্যাপ করুন</string>
     <string name="home_update_error">আপডেট ব্যর্থ হয়েছে</string>
     <string name="home_update_error_subtitle">আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং আবার চেষ্টা করুন</string>
     <string name="home_update_skipped_metered">আপডেটগুলি ছাড়া রাখা হয়েছে</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">উপलब्ध থাকলে পরীক্ষামূলক অ্যাপ টার্গেট প্যাচ করে</string>
     <string name="sources_management_already_exists">এই উৎসটি ইতিমধ্যেই যোগ করা হয়েছে</string>
     <string name="sources_management_invalid_url">অবৈধ উৎস URL। অনুগ্রহ করে ঠিকানাটি পরীক্ষা করুন এবং পুনরায় চেষ্টা করুন</string>
+    <string name="sources_management_blocked">এই প্যাচ উৎসটি ব্লক করা হয়েছে এবং এটি যোগ করা যাবে না</string>
+    <string name="sources_management_source_blocked_badge">ব্লক করা হয়েছে</string>
     <string name="sources_management_metadata_unavailable">মেটাডেটা উপলব্ধ নয়</string>
     <string name="sources_management_metadata_unavailable_hint">রিমোট মেটাডেটা ফাইলটি পাওয়া যাচ্ছে না। ইনস্টল করা বান্ডেলের সাথে প্যাচিং এখনও কাজ করে, তবে এই উৎসের জন্য স্বয়ংক্রিয় আপডেট নিষ্ক্রিয় করা হয়েছে</string>
     <string name="sources_management_metadata_unavailable_hint_missing">প্যাচ বান্ডেল ডাউনলোড করা যায়নি। উৎস URL ভুল হতে পারে অথবা ফাইলটি বিদ্যমান নেই</string>
@@ -712,6 +720,27 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_apks_deleted_all">APK ফাইলগুলি সফলভাবে মুছে ফেলা হয়েছে।</string>
     <string name="settings_system_apks_export_zip_success">নির্বাচিত APK রপ্তানি করা হয়েছে</string>
     <string name="settings_system_apks_export_zip_failed">নির্বাচিত APK রপ্তানি করতে ব্যর্থ</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">স্টোরেজ ব্যবস্থাপনা</string>
+    <string name="settings_system_storage_management_description">ডিস্কের ব্যবহার পর্যালোচনা করুন এবং ক্যাশে করা ফাইলগুলি পরিষ্কার করুন</string>
+    <string name="settings_system_storage_keystore_title">সাইন করার কীস্টোর</string>
+    <string name="settings_system_storage_app_data_title">অ্যাপ ডেটা</string>
+    <string name="settings_system_storage_patch_bundles_title">প্যাচ বান্ডেল</string>
+    <string name="settings_system_storage_http_cache_title">নেটওয়ার্ক ক্যাশে</string>
+    <string name="settings_system_storage_http_cache_description">আপডেটগুলি দ্রুত করার জন্য HTTP প্রতিক্রিয়া ক্যাশে করা হয়েছে</string>
+    <string name="settings_system_storage_installer_cache_title">বাহ্যিক ইনস্টলার ক্যাশে</string>
+    <string name="settings_system_storage_installer_cache_description">তৃতীয় পক্ষের ইনস্টলারে প্রেরণ করা APK অনুলিপি</string>
+    <string name="settings_system_storage_patcher_workspace_title">প্যাচার ওয়ার্কস্পেস</string>
+    <string name="settings_system_storage_patcher_workspace_description">প্যাচার রানটাইম ফাইল এবং পরিত্যক্ত স্ক্র্যাচ ডেটা</string>
+    <string name="settings_system_storage_temporary_title">অস্থায়ী ফাইল</string>
+    <string name="settings_system_storage_temporary_description">প্যাচিংয়ের সময় তৈরি করা কার্যকরী ফাইল</string>
+    <string name="settings_system_storage_clear_all">সমস্ত ক্যাশে পরিষ্কার করুন</string>
+    <string name="settings_system_storage_clear_all_description">একবারে সমস্ত পুনরুদ্ধারযোগ্য ক্যাশে স্থান খালি করে</string>
+    <string name="settings_system_storage_clear_all_confirm">এটি ক্যাশে করা নেটওয়ার্ক প্রতিক্রিয়া, স্টেজড ইনস্টলার অনুলিপি এবং অস্থায়ী ফাইলগুলি পরিষ্কার করে। আসল এবং প্যাচ করা APKগুলি সংরক্ষণ করা হবে</string>
+    <string name="settings_system_storage_cleared">ফ্রি করা হয়েছে %s</string>
+    <string name="settings_system_storage_nothing_to_clear">পরিষ্কার করার জন্য কিছু নেই</string>
+    <string name="settings_system_storage_open_app_info_title">Android অ্যাপ স্টোরেজ খুলুন</string>
+    <string name="settings_system_storage_open_app_info_description">সিস্টেম সেটিংসের মাধ্যমে সমস্ত Morphe ডেটা পরিচালনা বা পরিষ্কার করুন</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">প্যাচ করা APK সমূহ</string>
     <string name="settings_system_patched_apks_description">সংরক্ষিত প্যাচ করা অ্যাপ্লিকেশন ফাইলগুলি পরিচালনা করে।</string>

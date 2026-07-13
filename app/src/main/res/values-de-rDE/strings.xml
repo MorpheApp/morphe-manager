@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-Update verfügbar</string>
     <string name="home_update_available_subtitle">Neue Version bereit zur Installation</string>
+    <string name="home_blocked_source_title">Erkannte blockierte Patch-Quelle</string>
+    <string name="home_blocked_source_subtitle">Tippen Sie zum Überprüfen und Entfernen</string>
+    <string name="home_metadata_errors_title">Einige Patch-Quellen sind nicht verfügbar</string>
+    <string name="home_metadata_errors_subtitle">Tippen Sie, um die Quellen zu überprüfen</string>
+    <string name="home_metered_skipped_title">Updates über mobile Daten wurden pausiert</string>
+    <string name="home_metered_skipped_subtitle">Tippen Sie auf, um Updates über mobile Daten zu erlauben</string>
     <string name="home_update_error">Update fehlgeschlagen</string>
     <string name="home_update_error_subtitle">Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut</string>
     <string name="home_update_skipped_metered">Updates übersprungen</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Experimentelle App-Versionen patchen, falls verfügbar</string>
     <string name="sources_management_already_exists">Diese Quelle wurde bereits hinzugefügt</string>
     <string name="sources_management_invalid_url">Ungültige Quell-URL. Bitte überprüfen Sie die Adresse und versuchen Sie es erneut</string>
+    <string name="sources_management_blocked">Diese Patchquelle ist blockiert und kann nicht hinzugefügt werden</string>
+    <string name="sources_management_source_blocked_badge">Blockiert</string>
     <string name="sources_management_metadata_unavailable">Metadaten nicht verfügbar</string>
     <string name="sources_management_metadata_unavailable_hint">Die Metadatei des Remote-Servers ist nicht verfügbar. Das Patchen mit dem installierten Paket funktioniert weiterhin, die automatische Aktualisierung ist jedoch für diese Quelle deaktiviert</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Das Patch-Bundle konnte nicht heruntergeladen werden. Die Quell-URL ist möglicherweise falsch oder die Datei existiert nicht</string>
@@ -720,6 +728,27 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_apks_deleted_all">APKs erfolgreich gelöscht</string>
     <string name="settings_system_apks_export_zip_success">Ausgewählte APKs exportiert</string>
     <string name="settings_system_apks_export_zip_failed">Exportieren der ausgewählten APKs fehlgeschlagen</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Speicherverwaltung</string>
+    <string name="settings_system_storage_management_description">Festplattennutzung überprüfen und zwischengespeicherte Dateien löschen</string>
+    <string name="settings_system_storage_keystore_title">Signierschlüsselbund</string>
+    <string name="settings_system_storage_app_data_title">App-Daten</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch-Bundles</string>
+    <string name="settings_system_storage_http_cache_title">Netzwerk-Cache</string>
+    <string name="settings_system_storage_http_cache_description">HTTP-Antworten werden zwischengespeichert, um Updates zu beschleunigen</string>
+    <string name="settings_system_storage_installer_cache_title">Externer Installer-Cache</string>
+    <string name="settings_system_storage_installer_cache_description">APK-Kopien, die an Drittanbieter-Installer übergeben werden</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher-Arbeitsbereich</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher-Laufzeitdateien und verwaiste Scratch-Daten</string>
+    <string name="settings_system_storage_temporary_title">Temporäre Dateien</string>
+    <string name="settings_system_storage_temporary_description">Arbeitsdateien, die beim Patchen erstellt wurden</string>
+    <string name="settings_system_storage_clear_all">Alle Caches löschen</string>
+    <string name="settings_system_storage_clear_all_description">Gibt den gesamten wiederherstellbaren Cache-Speicher auf einmal frei</string>
+    <string name="settings_system_storage_clear_all_confirm">Dadurch werden zwischengespeicherte Netzwerkantworten, gestufte Installer-Kopien und temporäre Dateien gelöscht. Originale und gepatchte APKs werden beibehalten</string>
+    <string name="settings_system_storage_cleared">Freigegeben: %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nichts zu löschen</string>
+    <string name="settings_system_storage_open_app_info_title">Android-App-Speicher öffnen</string>
+    <string name="settings_system_storage_open_app_info_description">Verwalten oder löschen Sie alle Morphe-Daten über die Systemeinstellungen</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatchte APKs</string>
     <string name="settings_system_patched_apks_description">Verwaltet gespeicherte gepatchte Anwendungsdateien</string>
