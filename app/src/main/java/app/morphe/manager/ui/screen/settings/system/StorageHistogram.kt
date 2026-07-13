@@ -203,7 +203,6 @@ private fun HistogramLegend(
     visibleSegments: List<StorageSegment>,
     modifier: Modifier = Modifier
 ) {
-    if (visibleSegments.isEmpty()) return
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(10.dp)
