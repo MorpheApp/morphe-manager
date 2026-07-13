@@ -521,9 +521,6 @@ private fun alertColorsFor(level: AlertLevel): AlertColorPair = when (level) {
 /**
  * Dismissible card-style alert used for the home-screen notification strip. Swipe-dismiss clears
  * the alert for the current session; it reappears next launch while [visible] stays true.
- *
- * Set [swipeEnabled] to `false` to force the alert to remain on-screen until the underlying
- * condition changes; useful for critical warnings that the user should not silence in-session.
  */
 @Composable
 fun AlertSnackbar(

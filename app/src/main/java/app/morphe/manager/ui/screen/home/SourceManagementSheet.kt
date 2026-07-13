@@ -611,7 +611,7 @@ private fun BundleManagementCard(
                     ) {
                         val label = stringResource(R.string.sources_management_source_blocked_badge)
                         val reason = blockedInfo?.reason?.trim()?.takeIf { it.isNotEmpty() }
-                            ?.replaceFirstChar { it.uppercase(Locale.getDefault()) }
+                            ?.replaceFirstChar { it.uppercaseChar() }
                         InfoBadge(
                             text = if (reason != null) "$label: $reason" else label,
                             icon = Icons.Outlined.Block,
@@ -834,8 +834,7 @@ private fun BundleManagementCard(
                                 targetState = disableIcon,
                                 label = "disable_icon"
                             ) { icon ->
-                                // Disable button. Locked while the source is blocked because the
-                                // enabled state is forced to false regardless of the underlying toggle.
+                                // Disable button
                                 ActionPillButton(
                                     onClick = withToast(disableToast, onDisable),
                                     icon = icon,
@@ -850,7 +849,7 @@ private fun BundleManagementCard(
                             val updateVerb = stringResource(R.string.update)
                             val updateDesc = updateVerb + " " + bundle.displayTitle
                             val updateToast = stringResource(R.string.sources_management_source_updating)
-                            // Update button. Blocked sources cannot be updated remotely.
+                            // Update button
                             ActionPillButton(
                                 onClick = withToast(updateToast, onUpdate),
                                 icon = Icons.Outlined.Refresh,
@@ -1009,7 +1008,7 @@ private fun BundleCardHeader(
                     )
                 }
 
-                // Blocked badge in the header stays terse; the reason lives in the expanded banner
+                // Blocked badge
                 AnimatedVisibility(
                     visible = blockedInfo != null,
                     enter = MorpheAnimations.expandHorizFadeIn,
@@ -1023,7 +1022,7 @@ private fun BundleCardHeader(
                     )
                 }
 
-                // Disabled badge (hidden when blocked to avoid a redundant second chip)
+                // Disabled badge
                 AnimatedVisibility(
                     visible = !enabled && blockedInfo == null,
                     enter = MorpheAnimations.expandHorizFadeIn,

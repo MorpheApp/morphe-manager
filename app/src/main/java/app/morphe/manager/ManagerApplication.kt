@@ -129,12 +129,13 @@ class ManagerApplication : Application() {
             }
         }
 
-        // Cache first for offline launches, then refresh from the network. Notify the user
-        // if any of their existing sources appeared on the blocklist since the last launch
+        // Cache first for offline launches, then refresh from the network. Any matches are
+        // logged for support diagnostics; the in-app snackbar is state-driven so it updates
+        // automatically without a callback here
         scope.launch(Dispatchers.Default) {
             blocklistRepository.loadFromCache()
             blocklistRepository.refresh()
-            patchBundleRepository.notifyBlockedSources()
+            patchBundleRepository.logBlockedSources()
         }
 
         // Preload bundle avatar images into AvatarCache while the user hasn't opened the sheet yet.

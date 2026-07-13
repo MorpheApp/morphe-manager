@@ -1072,7 +1072,7 @@ class PatchBundleRepository(
                 return@dispatchAction state
             }
 
-            // Website gate is UX-only, so enforce the blocklist here for every code path.
+            // Website gate is UX-only, so enforce the blocklist here for every code path
             val blocklistKey = toBlocklistKey(normalizedUrl)
             if (blocklistKey != null && blocklistRepository.isBlocked(blocklistKey)) {
                 Log.i(tag, "Refused blocked source: $blocklistKey")
@@ -1162,11 +1162,11 @@ class PatchBundleRepository(
         toBlocklistKey(src.endpoint)?.let { blocklistRepository.isBlocked(it) } == true
 
     /**
-     * Logs any user sources that appear on the current blocklist. The in-app snackbar
-     * is state-driven from [blockedSources], so this only exists to surface the match in
-     * logcat for support/debugging.
+     * Logs any user sources that appear on the current blocklist. The in-app snackbar is
+     * state-driven from [blockedSources], so this only exists to surface the match in
+     * logcat for support/diagnostics.
      */
-    suspend fun notifyBlockedSources() {
+    suspend fun logBlockedSources() {
         bundleState.first { it is BundleState.Ready }
         val ready = bundleState.value as? BundleState.Ready ?: return
         val blocked = blocklistRepository.entries.value
@@ -1177,7 +1177,7 @@ class PatchBundleRepository(
             val entry = blocked[key] ?: return@mapNotNull null
             Triple(remote.endpoint, remote.name, entry)
         }
-        Log.d(tag, "notifyBlockedSources: blocked=${blocked.size}, matched=${matched.size}")
+        Log.d(tag, "logBlockedSources: blocked=${blocked.size}, matched=${matched.size}")
         matched.forEach { (endpoint, name, entry) ->
             Log.i(tag, "Blocked source disabled: $name endpoint=$endpoint reason=${entry.reason}")
         }

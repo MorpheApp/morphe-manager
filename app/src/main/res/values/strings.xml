@@ -24,7 +24,7 @@
     <string name="home_metadata_errors_title">Some patch sources are unavailable</string>
     <string name="home_metadata_errors_subtitle">Tap to review sources</string>
     <string name="home_metered_skipped_title">Updates paused on mobile data</string>
-    <string name="home_metered_skipped_subtitle">Tap to review or reconnect on Wi-Fi</string>
+    <string name="home_metered_skipped_subtitle">Tap to allow updates on mobile data</string>
     <string name="home_update_error">Update failed</string>
     <string name="home_update_error_subtitle">Check your internet connection and try again</string>
     <string name="home_update_skipped_metered">Updates skipped</string>
