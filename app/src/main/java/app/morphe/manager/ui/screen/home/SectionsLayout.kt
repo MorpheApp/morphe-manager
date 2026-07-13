@@ -446,22 +446,20 @@ fun NotificationsOverlay(
             // Blocked source alert takes priority over update notices
             AlertSnackbar(
                 visible = hasBlockedSources,
+                level = AlertLevel.Error,
                 icon = Icons.Outlined.Block,
                 title = stringResource(R.string.home_blocked_source_title),
                 subtitle = stringResource(R.string.home_blocked_source_subtitle),
-                containerColor = MaterialTheme.colorScheme.errorContainer,
-                contentColor = MaterialTheme.colorScheme.onErrorContainer,
                 onShowDetails = onShowBlockedSources,
                 modifier = Modifier.fillMaxWidth()
             )
 
             AlertSnackbar(
                 visible = hasManagerUpdate,
+                level = AlertLevel.Info,
                 icon = Icons.Outlined.Update,
                 title = stringResource(R.string.home_update_available),
                 subtitle = stringResource(R.string.home_update_available_subtitle),
-                containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
                 onShowDetails = onShowUpdateDetails,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -476,21 +474,50 @@ fun NotificationsOverlay(
     }
 }
 
+/** Semantic level of an [AlertSnackbar], resolved into a Material color pair at call time. */
+enum class AlertLevel { Info, Warning, Error, Success }
+
+private data class AlertColorPair(val container: Color, val content: Color)
+
+@Composable
+private fun alertColorsFor(level: AlertLevel): AlertColorPair = when (level) {
+    AlertLevel.Info -> AlertColorPair(
+        MaterialTheme.colorScheme.tertiaryContainer,
+        MaterialTheme.colorScheme.onTertiaryContainer
+    )
+    AlertLevel.Warning -> AlertColorPair(
+        MaterialTheme.colorScheme.secondaryContainer,
+        MaterialTheme.colorScheme.onSecondaryContainer
+    )
+    AlertLevel.Error -> AlertColorPair(
+        MaterialTheme.colorScheme.errorContainer,
+        MaterialTheme.colorScheme.onErrorContainer
+    )
+    AlertLevel.Success -> AlertColorPair(
+        MaterialTheme.colorScheme.primaryContainer,
+        MaterialTheme.colorScheme.onPrimaryContainer
+    )
+}
+
 /**
- * Dismissible card-style alert used for both the manager-update and blocked-source snackbars.
- * Swipe-dismiss clears the alert for the session; it reappears next launch while [visible] stays true.
+ * Dismissible card-style alert used for the home-screen notification strip. Swipe-dismiss clears
+ * the alert for the current session; it reappears next launch while [visible] stays true.
+ *
+ * Set [swipeEnabled] to `false` to force the alert to remain on-screen until the underlying
+ * condition changes; useful for critical warnings that the user should not silence in-session.
  */
 @Composable
 fun AlertSnackbar(
     visible: Boolean,
+    level: AlertLevel,
     icon: ImageVector,
     title: String,
     subtitle: String,
-    containerColor: Color,
-    contentColor: Color,
     onShowDetails: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    swipeEnabled: Boolean = true
 ) {
+    val colors = alertColorsFor(level)
     val dismissed = remember { mutableStateOf(false) }
     LaunchedEffect(visible) { if (visible) dismissed.value = false }
 
@@ -498,7 +525,7 @@ fun AlertSnackbar(
         positionalThreshold = { totalDistance -> totalDistance * 0.4f }
     )
     LaunchedEffect(swipeState.currentValue) {
-        if (swipeState.currentValue != SwipeToDismissBoxValue.Settled) {
+        if (swipeEnabled && swipeState.currentValue != SwipeToDismissBoxValue.Settled) {
             dismissed.value = true
         }
     }
@@ -512,15 +539,15 @@ fun AlertSnackbar(
         SwipeToDismissBox(
             state = swipeState,
             backgroundContent = {},
-            enableDismissFromStartToEnd = true,
-            enableDismissFromEndToStart = true
+            enableDismissFromStartToEnd = swipeEnabled,
+            enableDismissFromEndToStart = swipeEnabled
         ) {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
                 onClick = onShowDetails,
-                colors = CardDefaults.cardColors(containerColor = containerColor),
+                colors = CardDefaults.cardColors(containerColor = colors.container),
                 elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
@@ -531,19 +558,19 @@ fun AlertSnackbar(
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    MorpheIcon(icon = icon, tint = contentColor)
+                    MorpheIcon(icon = icon, tint = colors.content)
 
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = title,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
-                            color = contentColor
+                            color = colors.content
                         )
                         Text(
                             text = subtitle,
                             style = MaterialTheme.typography.bodyMedium,
-                            color = contentColor.copy(alpha = 0.8f)
+                            color = colors.content.copy(alpha = 0.8f)
                         )
                     }
                 }
