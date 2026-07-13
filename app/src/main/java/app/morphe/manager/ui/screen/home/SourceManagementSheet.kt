@@ -64,6 +64,7 @@ import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.manager.SourceBundleSortMode
+import app.morphe.manager.domain.repository.BlocklistRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.RemoteAvatar
@@ -103,6 +104,7 @@ fun BundleManagementSheet(
     val metadataFetchErrors by patchBundleRepository.metadataFetchErrors.collectAsStateWithLifecycle(emptyMap())
     val experimentalVersionsEnabled by prefs.bundleExperimentalVersionsEnabled.getAsState()
     val bundleInfo by patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
+    val blockedSources by patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
 
     val showSheetOnboarding = globalOnboardingState?.sheetOnboardingActive == true
 
@@ -282,6 +284,7 @@ fun BundleManagementSheet(
                                     updateInfo = manualUpdateInfo[bundle.uid],
                                     isUpdating = bundle.uid in activeUpdateUids,
                                     metadataFetchError = metadataFetchErrors[bundle.uid],
+                                    blockedInfo = blockedSources[bundle.uid],
                                     expanded = isSingleDefaultBundle || bundle.uid in expandedBundleUids ||
                                         (showSheetOnboarding && isFirstCard),
                                     onToggleExpanded = {
@@ -467,6 +470,7 @@ private fun BundleManagementCard(
     isDragging: Boolean = false,
     longPressModifier: Modifier = Modifier,
     metadataFetchError: Throwable? = null,
+    blockedInfo: BlocklistRepository.BlockedEntry? = null,
     expanded: Boolean,
     onToggleExpanded: () -> Unit,
     onDelete: () -> Unit,
@@ -498,7 +502,8 @@ private fun BundleManagementCard(
         action()
     }
 
-    val isEnabled = bundle.enabled
+    val isBlocked = blockedInfo != null
+    val isEnabled = bundle.enabled && !isBlocked
     val hasMetadataError = metadataFetchError != null
     val isMissing = bundle.state is PatchBundleSource.State.Missing
 
@@ -569,6 +574,7 @@ private fun BundleManagementCard(
                 showChevron = !forceExpanded,
                 enabled = isEnabled,
                 metadataFetchError = metadataFetchError,
+                blockedInfo = blockedInfo,
                 modifier = longPressModifier
                     .clickable(
                         indication = null,
@@ -597,6 +603,22 @@ private fun BundleManagementCard(
                         .fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
+                    // Blocked source banner (shown when the source appears on the remote blocklist)
+                    AnimatedVisibility(
+                        visible = blockedInfo != null,
+                        enter = MorpheAnimations.expandFadeEnter,
+                        exit = MorpheAnimations.shrinkFadeExit
+                    ) {
+                        val label = stringResource(R.string.sources_management_source_blocked_badge)
+                        val reason = blockedInfo?.reason?.trim()?.takeIf { it.isNotEmpty() }
+                            ?.replaceFirstChar { it.uppercaseChar() }
+                        InfoBadge(
+                            text = if (reason != null) "$label: $reason" else label,
+                            icon = Icons.Outlined.Block,
+                            style = InfoBadgeStyle.Error
+                        )
+                    }
+
                     // Metadata unavailable hint (shown when patches-bundle.json / remote fetch failed)
                     AnimatedVisibility(
                         visible = metadataFetchError != null || bundle.state is PatchBundleSource.State.Missing,
@@ -817,7 +839,8 @@ private fun BundleManagementCard(
                                     onClick = withToast(disableToast, onDisable),
                                     icon = icon,
                                     contentDescription = disableEnableDesc,
-                                    tooltip = disableEnableVerb
+                                    tooltip = disableEnableVerb,
+                                    enabled = !isBlocked
                                 )
                             }
                         }
@@ -831,7 +854,8 @@ private fun BundleManagementCard(
                                 onClick = withToast(updateToast, onUpdate),
                                 icon = Icons.Outlined.Refresh,
                                 contentDescription = updateDesc,
-                                tooltip = updateVerb
+                                tooltip = updateVerb,
+                                enabled = !isBlocked
                             )
                         }
 
@@ -875,7 +899,8 @@ private fun BundleCardHeader(
     showChevron: Boolean,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    metadataFetchError: Throwable? = null
+    metadataFetchError: Throwable? = null,
+    blockedInfo: BlocklistRepository.BlockedEntry? = null,
 ) {
     val rotation by animateFloatAsState(
         targetValue = if (expanded) 180f else 0f,
@@ -983,9 +1008,23 @@ private fun BundleCardHeader(
                     )
                 }
 
+                // Blocked badge
+                AnimatedVisibility(
+                    visible = blockedInfo != null,
+                    enter = MorpheAnimations.expandHorizFadeIn,
+                    exit = MorpheAnimations.shrinkHorizFadeOut
+                ) {
+                    InfoBadge(
+                        text = stringResource(R.string.sources_management_source_blocked_badge),
+                        style = InfoBadgeStyle.Error,
+                        icon = null,
+                        isCompact = true
+                    )
+                }
+
                 // Disabled badge
                 AnimatedVisibility(
-                    visible = !enabled,
+                    visible = !enabled && blockedInfo == null,
                     enter = MorpheAnimations.expandHorizFadeIn,
                     exit = MorpheAnimations.shrinkHorizFadeOut
                 ) {

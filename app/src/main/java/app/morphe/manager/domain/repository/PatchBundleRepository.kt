@@ -52,6 +52,7 @@ class PatchBundleRepository(
     private val app: Application,
     private val networkInfo: NetworkInfo,
     private val prefs: PreferencesManager,
+    private val blocklistRepository: BlocklistRepository,
     db: AppDatabase,
 ) {
     private val dao = db.patchBundleDao()
@@ -70,8 +71,26 @@ class PatchBundleRepository(
         }?.toMap() ?: emptyMap()
     }
     val allBundlesInfoFlow = store.state.map { (it as? BundleState.Ready)?.info ?: persistentMapOf() }
-    val enabledBundlesInfoFlow = allBundlesInfoFlow.map { info ->
-        info.filter { (_, bundleInfo) -> bundleInfo.enabled }
+
+    /**
+     * Sources that appear on the remote blocklist, keyed by source uid.
+     * Combines the current source list with [BlocklistRepository.entries] so the map stays in
+     * sync as either side changes. Blocked sources are removed from [enabledBundlesInfoFlow] and
+     * skipped by update predicates, and the UI can render a badge from this map.
+     */
+    val blockedSources: StateFlow<Map<Int, BlocklistRepository.BlockedEntry>> =
+        combine(sources, blocklistRepository.entries) { srcs, blocked ->
+            srcs.asSequence()
+                .filterIsInstance<RemotePatchBundle>()
+                .mapNotNull { src ->
+                    val key = toBlocklistKey(src.endpoint) ?: return@mapNotNull null
+                    blocked[key]?.let { entry -> src.uid to entry }
+                }
+                .toMap()
+        }.stateIn(scope, SharingStarted.Eagerly, emptyMap())
+
+    val enabledBundlesInfoFlow = combine(allBundlesInfoFlow, blockedSources) { info, blocked ->
+        info.filter { (uid, bundleInfo) -> bundleInfo.enabled && uid !in blocked }
     }
     val bundleInfoFlow = enabledBundlesInfoFlow
 
@@ -1053,16 +1072,15 @@ class PatchBundleRepository(
                 return@dispatchAction state
             }
 
-            // Block adding official Morphe repository
-//            val isOfficialRepo = normalizedUrl.contains(SOURCE_REPO_URL, ignoreCase = true) ||
-//                    normalizedUrl.contains(SOURCE_REPO_URL_RAW, ignoreCase = true)
-//            if (isOfficialRepo) {
-//                withContext(Dispatchers.Main) {
-//                    app.toast(app.getString("This source cannot be added because it is already built-in"))
-//                }
-//                return@dispatchAction state
-//            }
-
+            // Website gate is UX-only, so enforce the blocklist here for every code path
+            val blocklistKey = toBlocklistKey(normalizedUrl)
+            if (blocklistKey != null && blocklistRepository.isBlocked(blocklistKey)) {
+                Log.i(tag, "Refused blocked source: $blocklistKey")
+                withContext(Dispatchers.Main) {
+                    app.toast(app.getString(R.string.sources_management_blocked))
+                }
+                return@dispatchAction state
+            }
 
             // Check for duplicate source
             val ready = state as? BundleState.Ready ?: return@dispatchAction state
@@ -1139,6 +1157,46 @@ class PatchBundleRepository(
             toast(R.string.sources_download_fail_named, bundle.displayTitle)
         }
     }
+
+    private fun isSourceBlocked(src: RemotePatchBundle): Boolean =
+        toBlocklistKey(src.endpoint)?.let { blocklistRepository.isBlocked(it) } == true
+
+    /**
+     * Logs any user sources that appear on the current blocklist. The in-app snackbar is
+     * state-driven from [blockedSources], so this only exists to surface the match in
+     * logcat for support/diagnostics.
+     */
+    suspend fun logBlockedSources() {
+        bundleState.first { it is BundleState.Ready }
+        val ready = bundleState.value as? BundleState.Ready ?: return
+        val blocked = blocklistRepository.entries.value
+
+        val matched = ready.sources.values.mapNotNull { src ->
+            val remote = src as? RemotePatchBundle ?: return@mapNotNull null
+            val key = toBlocklistKey(remote.endpoint) ?: return@mapNotNull null
+            val entry = blocked[key] ?: return@mapNotNull null
+            Triple(remote.endpoint, remote.name, entry)
+        }
+        Log.d(tag, "logBlockedSources: blocked=${blocked.size}, matched=${matched.size}")
+        matched.forEach { (endpoint, name, entry) ->
+            Log.i(tag, "Blocked source disabled: $name endpoint=$endpoint reason=${entry.reason}")
+        }
+    }
+
+    /** Returns the blocklist key for a normalized bundle URL, or null for non-GitHub/GitLab hosts. */
+    private fun toBlocklistKey(normalizedUrl: String): String? = try {
+        val parsed = Url(normalizedUrl)
+        val segments = parsed.encodedPath.trim('/').split('/').filter { it.isNotBlank() }
+        when {
+            segments.size < 2 -> null
+            parsed.host.equals("raw.githubusercontent.com", ignoreCase = true) ||
+                parsed.host.equals("github.com", ignoreCase = true) ->
+                "github=${segments[0]}/${segments[1]}".lowercase(Locale.US)
+            parsed.host.equals("gitlab.com", ignoreCase = true) ->
+                "gitlab=${segments[0]}/${segments[1]}".lowercase(Locale.US)
+            else -> null
+        }
+    } catch (_: Exception) { null }
 
     fun normalizeRemoteBundleUrl(input: String): String {
         val trimmed = input.trim()
@@ -1364,13 +1422,14 @@ class PatchBundleRepository(
             showToast = false,
             allowUnsafeNetwork = allowUnsafeNetwork,
             onPerBundleProgress = null,
-            predicate = { it.autoUpdate && it.enabled }
+            predicate = { it.autoUpdate && it.enabled && !isSourceBlocked(it) }
         )
     }
 
     /**
      * Updates all bundles that should be automatically updated AND are currently enabled.
      * Disabled bundles are skipped - they will be updated automatically when re-enabled.
+     * Blocked sources are skipped even if enabled.
      * Respects [PreferencesManager.allowMeteredUpdates]: if the network is metered and the
      * user has disabled metered updates, the update is skipped and
      * [BundleUpdateResult.SkippedMetered] is emitted so the UI can warn the user before patching.
@@ -1380,7 +1439,9 @@ class PatchBundleRepository(
      *   dialog action).
      */
     suspend fun updateCheck(allowUnsafeNetwork: Boolean = false) {
-        store.dispatch(Update(allowUnsafeNetwork = allowUnsafeNetwork) { it.autoUpdate && it.enabled })
+        store.dispatch(Update(allowUnsafeNetwork = allowUnsafeNetwork) {
+            it.autoUpdate && it.enabled && !isSourceBlocked(it)
+        })
         checkManualUpdates()
     }
 

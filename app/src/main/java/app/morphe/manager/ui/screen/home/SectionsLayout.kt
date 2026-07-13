@@ -85,14 +85,26 @@ private data class SwipeActionConfig(
     val contentColor: Color
 )
 
-/** Notifications strip state and its action. */
+/** Visibility flag paired with the tap callback for a single [AlertSnackbar] slot. */
+@Immutable
+data class AlertState(val visible: Boolean, val onShow: () -> Unit)
+
+/** Transient state driving the bundle-update progress snackbar. */
+@Immutable
+data class BundleUpdateState(
+    val visible: Boolean,
+    val status: BundleUpdateStatus,
+    val progress: PatchBundleRepository.BundleUpdateProgress?
+)
+
+/** Aggregate of all notification-strip inputs, grouped by alert. */
 @Immutable
 data class HomeNotificationsUi(
-    val hasManagerUpdate: Boolean,
-    val showBundleUpdateSnackbar: Boolean,
-    val snackbarStatus: BundleUpdateStatus,
-    val bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
-    val onShowUpdateDetails: () -> Unit
+    val managerUpdate: AlertState,
+    val blockedSources: AlertState,
+    val metadataErrors: AlertState,
+    val meteredSkipped: AlertState,
+    val bundleUpdate: BundleUpdateState
 )
 
 /** Visible and hidden app lists with their loading state. */
@@ -248,11 +260,7 @@ fun SectionsLayout(
         // Section 1: Notifications overlay - matches maxCardWidth in AdaptiveContent
         val maxCardWidth = if (isLandscape()) 700.dp else 560.dp
         NotificationsOverlay(
-            hasManagerUpdate = notifications.hasManagerUpdate,
-            onShowUpdateDetails = notifications.onShowUpdateDetails,
-            showBundleUpdateSnackbar = notifications.showBundleUpdateSnackbar,
-            snackbarStatus = notifications.snackbarStatus,
-            bundleUpdateProgress = notifications.bundleUpdateProgress,
+            notifications = notifications,
             modifier = Modifier
                 .widthIn(max = maxCardWidth)
                 .align(Alignment.TopCenter)
@@ -422,11 +430,7 @@ private fun AdaptiveContent(
  */
 @Composable
 fun NotificationsOverlay(
-    hasManagerUpdate: Boolean,
-    onShowUpdateDetails: () -> Unit,
-    showBundleUpdateSnackbar: Boolean,
-    snackbarStatus: BundleUpdateStatus,
-    bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
+    notifications: HomeNotificationsUi,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -437,33 +441,99 @@ fun NotificationsOverlay(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Manager update snackbar
-            ManagerUpdateSnackbar(
-                visible = hasManagerUpdate,
-                onShowDetails = onShowUpdateDetails,
+            // Blocked source alert takes priority and cannot be dismissed while the block persists
+            AlertSnackbar(
+                visible = notifications.blockedSources.visible,
+                level = AlertLevel.Error,
+                icon = Icons.Outlined.Block,
+                title = stringResource(R.string.home_blocked_source_title),
+                subtitle = stringResource(R.string.home_blocked_source_subtitle),
+                onShowDetails = notifications.blockedSources.onShow,
+                swipeEnabled = false,
                 modifier = Modifier.fillMaxWidth()
             )
 
-            // Bundle update snackbar
+            AlertSnackbar(
+                visible = notifications.meteredSkipped.visible,
+                level = AlertLevel.Warning,
+                icon = Icons.Outlined.SignalCellularAlt,
+                title = stringResource(R.string.home_metered_skipped_title),
+                subtitle = stringResource(R.string.home_metered_skipped_subtitle),
+                onShowDetails = notifications.meteredSkipped.onShow,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            AlertSnackbar(
+                visible = notifications.metadataErrors.visible,
+                level = AlertLevel.Warning,
+                icon = Icons.Outlined.CloudOff,
+                title = stringResource(R.string.home_metadata_errors_title),
+                subtitle = stringResource(R.string.home_metadata_errors_subtitle),
+                onShowDetails = notifications.metadataErrors.onShow,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            AlertSnackbar(
+                visible = notifications.managerUpdate.visible,
+                level = AlertLevel.Info,
+                icon = Icons.Outlined.Update,
+                title = stringResource(R.string.home_update_available),
+                subtitle = stringResource(R.string.home_update_available_subtitle),
+                onShowDetails = notifications.managerUpdate.onShow,
+                modifier = Modifier.fillMaxWidth()
+            )
+
             BundleUpdateSnackbar(
-                visible = showBundleUpdateSnackbar,
-                status = snackbarStatus,
-                progress = bundleUpdateProgress,
+                visible = notifications.bundleUpdate.visible,
+                status = notifications.bundleUpdate.status,
+                progress = notifications.bundleUpdate.progress,
                 modifier = Modifier.fillMaxWidth()
             )
         }
     }
 }
 
+/** Semantic level of an [AlertSnackbar], resolved into a Material color pair at call time. */
+enum class AlertLevel { Info, Warning, Error, Success }
+
+private data class AlertColorPair(val container: Color, val content: Color)
+
+@Composable
+private fun alertColorsFor(level: AlertLevel): AlertColorPair = when (level) {
+    AlertLevel.Info -> AlertColorPair(
+        MaterialTheme.colorScheme.tertiaryContainer,
+        MaterialTheme.colorScheme.onTertiaryContainer
+    )
+    AlertLevel.Warning -> AlertColorPair(
+        MaterialTheme.colorScheme.secondaryContainer,
+        MaterialTheme.colorScheme.onSecondaryContainer
+    )
+    AlertLevel.Error -> AlertColorPair(
+        MaterialTheme.colorScheme.errorContainer,
+        MaterialTheme.colorScheme.onErrorContainer
+    )
+    AlertLevel.Success -> AlertColorPair(
+        MaterialTheme.colorScheme.primaryContainer,
+        MaterialTheme.colorScheme.onPrimaryContainer
+    )
+}
+
 /**
- * Manager update snackbar.
+ * Dismissible card-style alert used for the home-screen notification strip. Swipe-dismiss clears
+ * the alert for the current session; it reappears next launch while [visible] stays true.
  */
 @Composable
-fun ManagerUpdateSnackbar(
+fun AlertSnackbar(
     visible: Boolean,
+    level: AlertLevel,
+    icon: ImageVector,
+    title: String,
+    subtitle: String,
     onShowDetails: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    swipeEnabled: Boolean = true
 ) {
+    val colors = alertColorsFor(level)
     val dismissed = remember { mutableStateOf(false) }
     LaunchedEffect(visible) { if (visible) dismissed.value = false }
 
@@ -471,7 +541,7 @@ fun ManagerUpdateSnackbar(
         positionalThreshold = { totalDistance -> totalDistance * 0.4f }
     )
     LaunchedEffect(swipeState.currentValue) {
-        if (swipeState.currentValue != SwipeToDismissBoxValue.Settled) {
+        if (swipeEnabled && swipeState.currentValue != SwipeToDismissBoxValue.Settled) {
             dismissed.value = true
         }
     }
@@ -485,17 +555,15 @@ fun ManagerUpdateSnackbar(
         SwipeToDismissBox(
             state = swipeState,
             backgroundContent = {},
-            enableDismissFromStartToEnd = true,
-            enableDismissFromEndToStart = true
+            enableDismissFromStartToEnd = swipeEnabled,
+            enableDismissFromEndToStart = swipeEnabled
         ) {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
                 onClick = onShowDetails,
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                ),
+                colors = CardDefaults.cardColors(containerColor = colors.container),
                 elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
@@ -506,22 +574,19 @@ fun ManagerUpdateSnackbar(
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    MorpheIcon(
-                        icon = Icons.Outlined.Update,
-                        tint = MaterialTheme.colorScheme.onTertiaryContainer
-                    )
+                    MorpheIcon(icon = icon, tint = colors.content)
 
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = stringResource(R.string.home_update_available),
+                            text = title,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onTertiaryContainer
+                            color = colors.content
                         )
                         Text(
-                            text = stringResource(R.string.home_update_available_subtitle),
+                            text = subtitle,
                             style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f)
+                            color = colors.content.copy(alpha = 0.8f)
                         )
                     }
                 }

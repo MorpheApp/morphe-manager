@@ -112,8 +112,8 @@
                 <data android:mimeType="application/apks" />
             </intent-filter>
 
-            <!-- Deep link: App Links (https://morphe.software/add-source?github=...) -->
-            <intent-filter android:autoVerify="true">
+            <!-- Add-source deep link. Website acts as the gateway for repo validation -->
+            <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />

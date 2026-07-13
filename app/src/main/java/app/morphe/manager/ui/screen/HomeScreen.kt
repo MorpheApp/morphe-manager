@@ -149,6 +149,12 @@ fun HomeScreen(
     // Check for manager update
     val hasManagerUpdate = !homeViewModel.updatedManagerVersion.isNullOrEmpty()
 
+    val blockedSources by homeViewModel.patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
+    val hasBlockedSources = blockedSources.isNotEmpty()
+
+    val metadataFetchErrors by homeViewModel.patchBundleRepository.metadataFetchErrors.collectAsStateWithLifecycle(emptyMap())
+    val hasMetadataErrors = metadataFetchErrors.isNotEmpty()
+
     // Manager update details dialog
     if (showUpdateDetailsDialog.value) {
         val updateViewModel: UpdateViewModel = koinViewModel(parameters = { parametersOf(false) })
@@ -199,11 +205,15 @@ fun HomeScreen(
         ) {
             SectionsLayout(
                 notifications = HomeNotificationsUi(
-                    hasManagerUpdate = hasManagerUpdate,
-                    showBundleUpdateSnackbar = homeViewModel.showBundleUpdateSnackbar,
-                    snackbarStatus = homeViewModel.snackbarStatus,
-                    bundleUpdateProgress = bundleUpdateProgress,
-                    onShowUpdateDetails = { showUpdateDetailsDialog.value = true }
+                    managerUpdate = AlertState(hasManagerUpdate) { showUpdateDetailsDialog.value = true },
+                    blockedSources = AlertState(hasBlockedSources) { homeViewModel.showBundleManagementSheet = true },
+                    metadataErrors = AlertState(hasMetadataErrors) { homeViewModel.showBundleManagementSheet = true },
+                    meteredSkipped = AlertState(homeViewModel.updatesSkippedDueToMetered) { onSettingsClick() },
+                    bundleUpdate = BundleUpdateState(
+                        visible = homeViewModel.showBundleUpdateSnackbar,
+                        status = homeViewModel.snackbarStatus,
+                        progress = bundleUpdateProgress
+                    )
                 ),
                 apps = HomeAppListUi(
                     visible = homeAppItems,
