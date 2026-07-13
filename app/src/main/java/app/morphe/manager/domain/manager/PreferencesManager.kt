@@ -57,6 +57,12 @@ class PreferencesManager(
     /**  How often the background update check should run. */
     val updateCheckInterval = enumPreference("update_check_interval", UpdateCheckInterval.DAILY)
 
+    /** Whether to check for Morphe app updates when the app opens. */
+    val checkManagerUpdatesOnLaunch = booleanPreference("check_manager_updates_on_launch", true)
+
+    /** Whether to update patch sources when the app opens. */
+    val updatePatchSourcesOnLaunch = booleanPreference("update_patch_sources_on_launch", true)
+
     /** Tracks whether the POST_NOTIFICATIONS runtime permission dialog has already been shown at least once on first launch (Android 13+). */
     val notificationPermissionRequested = booleanPreference("notification_permission_requested", false)
 
@@ -182,6 +188,8 @@ class PreferencesManager(
         val keystorePassword: String? = null,
         val firstLaunch: Boolean? = null,
         val showManagerUpdateDialogOnLaunch: Boolean? = null,
+        val checkManagerUpdatesOnLaunch: Boolean? = null,
+        val updatePatchSourcesOnLaunch: Boolean? = null,
         val useManagerPrereleases: Boolean? = null,
         val bundlePrereleasesEnabled: Set<String>? = null,
         val bundleExperimentalVersionsEnabled: Set<String>? = null,
@@ -243,6 +251,8 @@ class PreferencesManager(
         randomBackgroundInterval = randomBackgroundInterval.get(),
         useExpertMode = useExpertMode.get(),
         updateCheckInterval = updateCheckInterval.get(),
+        checkManagerUpdatesOnLaunch = checkManagerUpdatesOnLaunch.get(),
+        updatePatchSourcesOnLaunch = updatePatchSourcesOnLaunch.get(),
         bytecodeModePreference = bytecodeModePreference.get(),
         filePickerSortMode = filePickerSortMode.get(),
         filePickerShowHiddenFiles = filePickerShowHiddenFiles.get(),
@@ -273,6 +283,10 @@ class PreferencesManager(
         snapshot.keystorePass?.let { keystorePass.value = it }
         snapshot.keystorePassword?.let { keystorePassword.value = it }
         snapshot.firstLaunch?.let { firstLaunch.value = it }
+        (snapshot.checkManagerUpdatesOnLaunch ?: snapshot.showManagerUpdateDialogOnLaunch)?.let {
+            checkManagerUpdatesOnLaunch.value = it
+        }
+        snapshot.updatePatchSourcesOnLaunch?.let { updatePatchSourcesOnLaunch.value = it }
         snapshot.useManagerPrereleases?.let { useManagerPrereleases.value = it }
         snapshot.bundlePrereleasesEnabled?.let { bundlePrereleasesEnabled.value = it }
         snapshot.bundleExperimentalVersionsEnabled?.let { bundleExperimentalVersionsEnabled.value = it }

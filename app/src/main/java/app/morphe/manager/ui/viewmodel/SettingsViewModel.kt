@@ -136,6 +136,16 @@ class SettingsViewModel(
         if (!hasGms) UpdateCheckWorker.schedule(appContext, interval)
     }
 
+    /** Persists whether Morphe checks for manager updates when the app opens. */
+    fun toggleManagerUpdatesOnLaunch(current: Boolean) = viewModelScope.launch {
+        prefs.checkManagerUpdatesOnLaunch.update(!current)
+    }
+
+    /** Persists whether Morphe updates patch sources when the app opens. */
+    fun togglePatchSourcesOnLaunch(current: Boolean) = viewModelScope.launch {
+        prefs.updatePatchSourcesOnLaunch.update(!current)
+    }
+
     /** Persists the allow-metered-updates preference. */
     fun toggleAllowMeteredUpdates(current: Boolean) = viewModelScope.launch {
         prefs.allowMeteredUpdates.update(!current)

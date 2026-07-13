@@ -649,7 +649,7 @@ class HomeViewModel(
     var onStartQuickPatch: ((QuickPatchParams) -> Unit)? = null
 
     init {
-        triggerUpdateCheck()
+        triggerLaunchUpdateCheck()
         observeLoadingState()
         observeInstalledAppUpdates()
         observeDeletedAppsStatus()
@@ -894,6 +894,14 @@ class HomeViewModel(
     fun triggerUpdateCheck() {
         viewModelScope.launch {
             checkForManagerUpdates()
+        }
+    }
+
+    private fun triggerLaunchUpdateCheck() {
+        viewModelScope.launch {
+            if (prefs.checkManagerUpdatesOnLaunch.get()) {
+                checkForManagerUpdates()
+            }
         }
     }
 

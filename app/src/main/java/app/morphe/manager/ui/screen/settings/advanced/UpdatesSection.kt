@@ -43,6 +43,8 @@ fun UpdatesSettingsItem(
     val prefs = settingsViewModel.prefs
     val backgroundUpdateNotifications by prefs.backgroundUpdateNotifications.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
+    val checkManagerUpdatesOnLaunch by prefs.checkManagerUpdatesOnLaunch.getAsState()
+    val updatePatchSourcesOnLaunch by prefs.updatePatchSourcesOnLaunch.getAsState()
     val allowMeteredUpdates by prefs.allowMeteredUpdates.getAsState()
     val useManagerPrereleases by prefs.useManagerPrereleases.getAsState()
     val usePatchesPrereleases by prefs.bundlePrereleasesEnabled.getAsState()
@@ -104,6 +106,48 @@ fun UpdatesSettingsItem(
                     onCheckedChange = null,
                     modifier = Modifier.semantics {
                         stateDescription = if (useManagerPrereleases) enabledState else disabledState
+                    }
+                )
+            }
+        )
+
+        MorpheSettingsDivider()
+
+        // Manager update check on launch toggle
+        SettingsItem(
+            onClick = {
+                settingsViewModel.toggleManagerUpdatesOnLaunch(checkManagerUpdatesOnLaunch)
+            },
+            leadingContent = { MorpheIcon(icon = Icons.Outlined.Update) },
+            title = stringResource(R.string.settings_advanced_updates_manager_on_launch),
+            subtitle = stringResource(R.string.settings_advanced_updates_manager_on_launch_description),
+            trailingContent = {
+                MorpheSwitch(
+                    checked = checkManagerUpdatesOnLaunch,
+                    onCheckedChange = null,
+                    modifier = Modifier.semantics {
+                        stateDescription = if (checkManagerUpdatesOnLaunch) enabledState else disabledState
+                    }
+                )
+            }
+        )
+
+        MorpheSettingsDivider()
+
+        // Patch source update check on launch toggle
+        SettingsItem(
+            onClick = {
+                settingsViewModel.togglePatchSourcesOnLaunch(updatePatchSourcesOnLaunch)
+            },
+            leadingContent = { MorpheIcon(icon = Icons.Outlined.Source) },
+            title = stringResource(R.string.settings_advanced_updates_patches_on_launch),
+            subtitle = stringResource(R.string.settings_advanced_updates_patches_on_launch_description),
+            trailingContent = {
+                MorpheSwitch(
+                    checked = updatePatchSourcesOnLaunch,
+                    onCheckedChange = null,
+                    modifier = Modifier.semantics {
+                        stateDescription = if (updatePatchSourcesOnLaunch) enabledState else disabledState
                     }
                 )
             }

@@ -123,7 +123,9 @@ class ManagerApplication : Application() {
         scope.launch(Dispatchers.Default) {
             with(patchBundleRepository) {
                 reload()
-                updateCheck()
+                if (prefs.updatePatchSourcesOnLaunch.get()) {
+                    updateCheck()
+                }
             }
         }
 
