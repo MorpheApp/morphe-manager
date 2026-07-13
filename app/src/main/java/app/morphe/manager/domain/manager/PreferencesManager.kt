@@ -65,6 +65,8 @@ class PreferencesManager(
 
     val useExpertMode = booleanPreference("use_expert_mode", false)
 
+    val includeUniversalPatchesByDefault = booleanPreference("include_universal_patches_by_default", true)
+
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
 
     /**
@@ -202,6 +204,7 @@ class PreferencesManager(
         val backgroundType: BackgroundType? = null,
         val randomBackgroundInterval: RandomInterval? = null,
         val useExpertMode: Boolean? = null,
+        val includeUniversalPatchesByDefault: Boolean? = null,
         val updateCheckInterval: UpdateCheckInterval? = null,
         val customBundles: List<BundleSnapshot>? = null,
         val bytecodeModePreference: BytecodeMode? = null,
@@ -242,6 +245,7 @@ class PreferencesManager(
         backgroundType = backgroundType.get(),
         randomBackgroundInterval = randomBackgroundInterval.get(),
         useExpertMode = useExpertMode.get(),
+        includeUniversalPatchesByDefault = includeUniversalPatchesByDefault.get(),
         updateCheckInterval = updateCheckInterval.get(),
         bytecodeModePreference = bytecodeModePreference.get(),
         filePickerSortMode = filePickerSortMode.get(),
@@ -281,6 +285,7 @@ class PreferencesManager(
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.randomBackgroundInterval?.let { randomBackgroundInterval.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
+        snapshot.includeUniversalPatchesByDefault?.let { includeUniversalPatchesByDefault.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
         snapshot.bytecodeModePreference?.let { bytecodeModePreference.value = it }
         snapshot.filePickerSortMode?.let { filePickerSortMode.value = it }

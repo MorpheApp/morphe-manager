@@ -49,6 +49,7 @@ fun AdvancedTabContent(
 ) {
     val prefs = settingsViewModel.prefs
     val useExpertMode by prefs.useExpertMode.getAsState()
+    val includeUniversalPatchesByDefault by prefs.includeUniversalPatchesByDefault.getAsState()
     val stripUnusedNativeLibs by prefs.stripUnusedNativeLibs.getAsState()
 
     // Notify VM on expert mode changes so it can derive showExpertModeNotice
@@ -126,6 +127,29 @@ fun AdvancedTabContent(
                         onCheckedChange = null,
                         modifier = Modifier.semantics {
                             stateDescription = if (useExpertMode) enabledState else disabledState
+                        }
+                    )
+                }
+            )
+
+            MorpheSettingsDivider()
+
+            SettingsItem(
+                onClick = {
+                    settingsViewModel.setIncludeUniversalPatchesByDefault(!includeUniversalPatchesByDefault)
+                },
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.Extension)
+                },
+                title = stringResource(R.string.settings_advanced_universal_patches_default),
+                subtitle = stringResource(R.string.settings_advanced_universal_patches_default_description),
+                trailingContent = {
+                    MorpheSwitch(
+                        checked = includeUniversalPatchesByDefault,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription =
+                                if (includeUniversalPatchesByDefault) enabledState else disabledState
                         }
                     )
                 }

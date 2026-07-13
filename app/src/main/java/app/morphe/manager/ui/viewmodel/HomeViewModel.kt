@@ -422,6 +422,12 @@ class HomeViewModel(
     /** Convenience accessor - reads expert mode preference without blocking. */
     private suspend fun isExpertMode() = prefs.useExpertMode.get()
 
+    private val PatchInfo.isUniversalPatch: Boolean
+        get() = compatiblePackages == null || compatiblePackages.any { it.packageName == null }
+
+    private fun PatchInfo.shouldEnableByDefault(includeUniversalPatches: Boolean): Boolean =
+        include && (includeUniversalPatches || !isUniversalPatch)
+
     /**
      * Per-bundle recommended version for each package.
      * Returns Map<PackageName, Map<BundleUid, AppTarget>> so the APK availability dialog
@@ -2218,6 +2224,8 @@ class HomeViewModel(
         fun PatchSelection.applyGmsCoreFilter(): PatchSelection =
             if (usingMountInstall) this.filterGmsCore() else this
 
+        val includeUniversalPatchesByDefault = prefs.includeUniversalPatchesByDefault.get()
+
         if (isExpertMode()) {
             // Expert Mode: Load saved selections and options only for current bundles
             val currentBundleUids = allBundles.map { it.uid }.toSet()
@@ -2277,7 +2285,10 @@ class HomeViewModel(
 
                         // Among the genuinely new patches, auto-select those with include=true
                         val newDefaultEnabled = bundle.patches
-                            .filter { it.name in newPatchNames && it.include }
+                            .filter {
+                                it.name in newPatchNames &&
+                                        it.shouldEnableByDefault(includeUniversalPatchesByDefault)
+                            }
                             .mapTo(mutableSetOf()) { it.name }
 
                         if (newDefaultEnabled.isNotEmpty()) {
@@ -2290,7 +2301,9 @@ class HomeViewModel(
                 mergedPatches
             } else {
                 // No saved selections - use default for all current bundles
-                allBundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
+                allBundles.toPatchSelection(allowIncompatible) { _, patch ->
+                    patch.shouldEnableByDefault(includeUniversalPatchesByDefault)
+                }
             }.applyGmsCoreFilter()
 
             // Compute new patches map for the dialog to highlight.
@@ -2339,12 +2352,13 @@ class HomeViewModel(
             // or ask the user to pick one if multiple bundles have applicable patches.
             // A patch is applicable if:
             //   - compatiblePackages == null (universal), OR
+            //   - compatiblePackages contains a null packageName (universal), OR
             //   - compatiblePackages contains this packageName
             val bundleWithPatches = allBundles
                 .filter { it.enabled }
                 .map { bundle ->
                     val patchNames = bundle.patchSequence(allowIncompatible)
-                        .filter { it.include }
+                        .filter { it.shouldEnableByDefault(includeUniversalPatchesByDefault) }
                         .mapTo(mutableSetOf()) { it.name }
                     bundle to patchNames
                 }
@@ -2384,7 +2398,7 @@ class HomeViewModel(
                 val bundle = allBundles.find { it.uid == preSelectedUid }
                 if (bundle != null) {
                     val patchNames = bundle.patchSequence(allowIncompatible = true)
-                        .filter { it.include }
+                        .filter { it.shouldEnableByDefault(includeUniversalPatchesByDefault) }
                         .mapTo(mutableSetOf()) { it.name }
                     if (patchNames.isNotEmpty()) {
                         val patches = mapOf(bundle.uid to patchNames).applyGmsCoreFilter()
@@ -2521,8 +2535,9 @@ class HomeViewModel(
      * are computed from the complete set, not just search results.
      */
     fun expertModeResetToDefault(bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) {
+        val includeUniversalPatchesByDefault = prefs.includeUniversalPatchesByDefault.getBlocking()
         val defaults = allPatches
-            .filter { (patch, _) -> patch.include }
+            .filter { (patch, _) -> patch.shouldEnableByDefault(includeUniversalPatchesByDefault) }
             .mapTo(mutableSetOf()) { (patch, _) -> patch.name }
         val current = expertModePatches.toMutableMap()
         if (defaults.isEmpty()) current.remove(bundleUid) else current[bundleUid] = defaults

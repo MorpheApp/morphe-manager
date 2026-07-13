@@ -573,6 +573,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_advanced_expert_mode_description">Enables complex Morphe patching settings and customization options</string>
     <string name="settings_advanced_expert_mode_dialog_title">Enable Expert mode?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expert mode gives more control over how patches are applied, but misconfiguring settings in expert mode can result in a non-functional app</string>
+    <string name="settings_advanced_universal_patches_default">Include universal patches by default</string>
+    <string name="settings_advanced_universal_patches_default_description">Automatically selects universal patches in recommended selections. Required dependencies still apply when this is off</string>
     <string name="settings_advanced_strip_unused_libs">Optimize for device architecture</string>
     <string name="settings_advanced_strip_unused_libs_description">Removes unused CPU architecture libs and split APK modules</string>
 

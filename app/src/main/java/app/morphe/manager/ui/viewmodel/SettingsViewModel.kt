@@ -185,6 +185,10 @@ class SettingsViewModel(
         }
     }
 
+    fun setIncludeUniversalPatchesByDefault(enabled: Boolean) = viewModelScope.launch {
+        prefs.includeUniversalPatchesByDefault.update(enabled)
+    }
+
     fun setProcessRuntime(enabled: Boolean) = viewModelScope.launch {
         prefs.useProcessRuntime.update(enabled)
     }
