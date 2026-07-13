@@ -152,6 +152,9 @@ fun HomeScreen(
     val blockedSources by homeViewModel.patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
     val hasBlockedSources = blockedSources.isNotEmpty()
 
+    val metadataFetchErrors by homeViewModel.patchBundleRepository.metadataFetchErrors.collectAsStateWithLifecycle(emptyMap())
+    val hasMetadataErrors = metadataFetchErrors.isNotEmpty()
+
     // Manager update details dialog
     if (showUpdateDetailsDialog.value) {
         val updateViewModel: UpdateViewModel = koinViewModel(parameters = { parametersOf(false) })
@@ -208,7 +211,11 @@ fun HomeScreen(
                     bundleUpdateProgress = bundleUpdateProgress,
                     onShowUpdateDetails = { showUpdateDetailsDialog.value = true },
                     hasBlockedSources = hasBlockedSources,
-                    onShowBlockedSources = { homeViewModel.showBundleManagementSheet = true }
+                    onShowBlockedSources = { homeViewModel.showBundleManagementSheet = true },
+                    hasMetadataErrors = hasMetadataErrors,
+                    onShowMetadataErrors = { homeViewModel.showBundleManagementSheet = true },
+                    updatesSkippedDueToMetered = homeViewModel.updatesSkippedDueToMetered,
+                    onShowMeteredDetails = { homeViewModel.showBundleManagementSheet = true }
                 ),
                 apps = HomeAppListUi(
                     visible = homeAppItems,

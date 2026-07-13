@@ -94,7 +94,11 @@ data class HomeNotificationsUi(
     val bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
     val onShowUpdateDetails: () -> Unit,
     val hasBlockedSources: Boolean,
-    val onShowBlockedSources: () -> Unit
+    val onShowBlockedSources: () -> Unit,
+    val hasMetadataErrors: Boolean,
+    val onShowMetadataErrors: () -> Unit,
+    val updatesSkippedDueToMetered: Boolean,
+    val onShowMeteredDetails: () -> Unit
 )
 
 /** Visible and hidden app lists with their loading state. */
@@ -257,6 +261,10 @@ fun SectionsLayout(
             bundleUpdateProgress = notifications.bundleUpdateProgress,
             hasBlockedSources = notifications.hasBlockedSources,
             onShowBlockedSources = notifications.onShowBlockedSources,
+            hasMetadataErrors = notifications.hasMetadataErrors,
+            onShowMetadataErrors = notifications.onShowMetadataErrors,
+            updatesSkippedDueToMetered = notifications.updatesSkippedDueToMetered,
+            onShowMeteredDetails = notifications.onShowMeteredDetails,
             modifier = Modifier
                 .widthIn(max = maxCardWidth)
                 .align(Alignment.TopCenter)
@@ -433,6 +441,10 @@ fun NotificationsOverlay(
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
     hasBlockedSources: Boolean,
     onShowBlockedSources: () -> Unit,
+    hasMetadataErrors: Boolean,
+    onShowMetadataErrors: () -> Unit,
+    updatesSkippedDueToMetered: Boolean,
+    onShowMeteredDetails: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -443,7 +455,7 @@ fun NotificationsOverlay(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Blocked source alert takes priority over update notices
+            // Blocked source alert takes priority over other notices
             AlertSnackbar(
                 visible = hasBlockedSources,
                 level = AlertLevel.Error,
@@ -451,6 +463,26 @@ fun NotificationsOverlay(
                 title = stringResource(R.string.home_blocked_source_title),
                 subtitle = stringResource(R.string.home_blocked_source_subtitle),
                 onShowDetails = onShowBlockedSources,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            AlertSnackbar(
+                visible = updatesSkippedDueToMetered,
+                level = AlertLevel.Warning,
+                icon = Icons.Outlined.SignalCellularAlt,
+                title = stringResource(R.string.home_metered_skipped_title),
+                subtitle = stringResource(R.string.home_metered_skipped_subtitle),
+                onShowDetails = onShowMeteredDetails,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            AlertSnackbar(
+                visible = hasMetadataErrors,
+                level = AlertLevel.Warning,
+                icon = Icons.Outlined.CloudOff,
+                title = stringResource(R.string.home_metadata_errors_title),
+                subtitle = stringResource(R.string.home_metadata_errors_subtitle),
+                onShowDetails = onShowMetadataErrors,
                 modifier = Modifier.fillMaxWidth()
             )
 
