@@ -124,13 +124,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Handles deep links for adding patch sources.
-     * Format: https://morphe.software/add-source?github=owner/repo(&name=Display+Name)
-     *         https://morphe.software/add-source?gitlab=owner/repo(&name=Display+Name)
-     * Only GitHub and GitLab URLs are accepted for safety.
+     * Handles add-source deep links from an explicit-package `intent://` fired by the website.
+     * Format: https://morphe.software/add-source?<github|gitlab>=owner/repo(&name=…)
+     * Only GitHub and GitLab URLs are accepted.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
-        // Handle APK-family file shared via system share sheet (.apk/.apks/.xapk/.apkm).
+        // Handle APK-family file shared via system share sheet (.apk/.apks/.xapk/.apkm)
         if (intent?.action == Intent.ACTION_SEND) {
             val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)
