@@ -149,6 +149,9 @@ fun HomeScreen(
     // Check for manager update
     val hasManagerUpdate = !homeViewModel.updatedManagerVersion.isNullOrEmpty()
 
+    val blockedSources by homeViewModel.patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
+    val hasBlockedSources = blockedSources.isNotEmpty()
+
     // Manager update details dialog
     if (showUpdateDetailsDialog.value) {
         val updateViewModel: UpdateViewModel = koinViewModel(parameters = { parametersOf(false) })
@@ -203,7 +206,9 @@ fun HomeScreen(
                     showBundleUpdateSnackbar = homeViewModel.showBundleUpdateSnackbar,
                     snackbarStatus = homeViewModel.snackbarStatus,
                     bundleUpdateProgress = bundleUpdateProgress,
-                    onShowUpdateDetails = { showUpdateDetailsDialog.value = true }
+                    onShowUpdateDetails = { showUpdateDetailsDialog.value = true },
+                    hasBlockedSources = hasBlockedSources,
+                    onShowBlockedSources = { homeViewModel.showBundleManagementSheet = true }
                 ),
                 apps = HomeAppListUi(
                     visible = homeAppItems,

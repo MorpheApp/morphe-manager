@@ -92,7 +92,9 @@ data class HomeNotificationsUi(
     val showBundleUpdateSnackbar: Boolean,
     val snackbarStatus: BundleUpdateStatus,
     val bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
-    val onShowUpdateDetails: () -> Unit
+    val onShowUpdateDetails: () -> Unit,
+    val hasBlockedSources: Boolean,
+    val onShowBlockedSources: () -> Unit
 )
 
 /** Visible and hidden app lists with their loading state. */
@@ -253,6 +255,8 @@ fun SectionsLayout(
             showBundleUpdateSnackbar = notifications.showBundleUpdateSnackbar,
             snackbarStatus = notifications.snackbarStatus,
             bundleUpdateProgress = notifications.bundleUpdateProgress,
+            hasBlockedSources = notifications.hasBlockedSources,
+            onShowBlockedSources = notifications.onShowBlockedSources,
             modifier = Modifier
                 .widthIn(max = maxCardWidth)
                 .align(Alignment.TopCenter)
@@ -427,6 +431,8 @@ fun NotificationsOverlay(
     showBundleUpdateSnackbar: Boolean,
     snackbarStatus: BundleUpdateStatus,
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
+    hasBlockedSources: Boolean,
+    onShowBlockedSources: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -437,6 +443,13 @@ fun NotificationsOverlay(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            // Blocked source snackbar (highest priority, security-relevant)
+            BlockedSourcesSnackbar(
+                visible = hasBlockedSources,
+                onShowDetails = onShowBlockedSources,
+                modifier = Modifier.fillMaxWidth()
+            )
+
             // Manager update snackbar
             ManagerUpdateSnackbar(
                 visible = hasManagerUpdate,
@@ -522,6 +535,82 @@ fun ManagerUpdateSnackbar(
                             text = stringResource(R.string.home_update_available_subtitle),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Blocked-sources snackbar. Dismissible for the current session but reappears next launch
+ * while any blocked source is still present.
+ */
+@Composable
+fun BlockedSourcesSnackbar(
+    visible: Boolean,
+    onShowDetails: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val dismissed = remember { mutableStateOf(false) }
+    LaunchedEffect(visible) { if (visible) dismissed.value = false }
+
+    val swipeState = rememberSwipeToDismissBoxState(
+        positionalThreshold = { totalDistance -> totalDistance * 0.4f }
+    )
+    LaunchedEffect(swipeState.currentValue) {
+        if (swipeState.currentValue != SwipeToDismissBoxValue.Settled) {
+            dismissed.value = true
+        }
+    }
+
+    AnimatedVisibility(
+        visible = visible && !dismissed.value,
+        enter = MorpheAnimations.slideUpFadeEnter,
+        exit = MorpheAnimations.slideUpFadeExit,
+        modifier = modifier
+    ) {
+        SwipeToDismissBox(
+            state = swipeState,
+            backgroundContent = {},
+            enableDismissFromStartToEnd = true,
+            enableDismissFromEndToStart = true
+        ) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                onClick = onShowDetails,
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.errorContainer
+                ),
+                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    MorpheIcon(
+                        icon = Icons.Outlined.Block,
+                        tint = MaterialTheme.colorScheme.onErrorContainer
+                    )
+
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = stringResource(R.string.home_blocked_source_title),
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onErrorContainer
+                        )
+                        Text(
+                            text = stringResource(R.string.home_blocked_source_subtitle),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.8f)
                         )
                     }
                 }

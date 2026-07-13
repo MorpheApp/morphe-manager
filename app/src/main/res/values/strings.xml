@@ -19,6 +19,8 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe update available</string>
     <string name="home_update_available_subtitle">New version ready to install</string>
+    <string name="home_blocked_source_title">Blocked patch source detected</string>
+    <string name="home_blocked_source_subtitle">Tap to review and remove</string>
     <string name="home_update_error">Update failed</string>
     <string name="home_update_error_subtitle">Check your internet connection and try again</string>
     <string name="home_update_skipped_metered">Updates skipped</string>
