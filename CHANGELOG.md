@@ -1,3 +1,10 @@
+# [1.24.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.1...v1.24.0-dev.2) (2026-07-13)
+
+
+### Bug Fixes
+
+* Prevent storage dialog crash when segments list is empty ([b155ddb](https://github.com/MorpheApp/morphe-manager/commit/b155ddb40bf84e3691e66aab03ed6b614529d1ff))
+
 # [1.24.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.23.1-dev.2...v1.24.0-dev.1) (2026-07-13)
 
 
