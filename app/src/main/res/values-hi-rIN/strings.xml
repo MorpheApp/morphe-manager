@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">मोर्फे अपडेट उपलब्ध है</string>
     <string name="home_update_available_subtitle">नई संस्करण तैयार है</string>
+    <string name="home_blocked_source_title">अवरुद्ध पैच स्रोत का पता चला</string>
+    <string name="home_blocked_source_subtitle">देखने और हटाने के लिए टैप करें</string>
+    <string name="home_metadata_errors_title">कुछ पैच स्रोत अनुपलब्ध हैं</string>
+    <string name="home_metadata_errors_subtitle">स्रोतों की समीक्षा करने के लिए टैप करें</string>
+    <string name="home_metered_skipped_title">मोबाइल डेटा पर अपडेट रोक दिए गए हैं</string>
+    <string name="home_metered_skipped_subtitle">मोबाइल डेटा पर अपडेट की अनुमति देने के लिए टैप करें</string>
     <string name="home_update_error">उपडेट विफल हुआ</string>
     <string name="home_update_error_subtitle">अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
     <string name="home_update_skipped_metered">अपडेट छोड़ दिए गए</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">यदि उपलब्ध हों तो प्रायोगिक ऐप लक्ष्यों को पैच करता है</string>
     <string name="sources_management_already_exists">यह स्रोत पहले से ही जोड़ा गया है</string>
     <string name="sources_management_invalid_url">अमान्य स्रोत URL। कृपया पता जांचें और फिर प्रयास करें</string>
+    <string name="sources_management_blocked">यह पैच स्रोत अवरुद्ध है और इसे नहीं जोड़ा जा सकता</string>
+    <string name="sources_management_source_blocked_badge">अवरुद्ध</string>
     <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नहीं है</string>
     <string name="sources_management_metadata_unavailable_hint">रिमोट मेटाडेटा फ़ाइल अनुपलब्ध है। स्थापित बंडल के साथ पैचिंग अभी भी काम करती है, लेकिन इस स्रोत के लिए ऑटो-अपडेट अक्षम कर दिया गया है</string>
     <string name="sources_management_metadata_unavailable_hint_missing">पैच बंडल डाउनलोड नहीं किया जा सका। स्रोत URL गलत हो सकता है या फ़ाइल मौजूद नहीं है</string>
@@ -720,6 +728,27 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APK सफलतापूर्वक हटाए गए</string>
     <string name="settings_system_apks_export_zip_success">निर्यात किए गए APK</string>
     <string name="settings_system_apks_export_zip_failed">चयनित APK निर्यात करने में विफल।</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">भंडारण प्रबंधन</string>
+    <string name="settings_system_storage_management_description">डिस्क उपयोग की समीक्षा करें और कैश्ड फ़ाइलों को साफ़ करें</string>
+    <string name="settings_system_storage_keystore_title">साइनिंग कीस्टोर</string>
+    <string name="settings_system_storage_app_data_title">ऐप डेटा</string>
+    <string name="settings_system_storage_patch_bundles_title">पैच बंडल</string>
+    <string name="settings_system_storage_http_cache_title">नेटवर्क कैश</string>
+    <string name="settings_system_storage_http_cache_description">अपडेट को तेज़ करने के लिए HTTP प्रतिक्रियाओं को कैश किया गया है</string>
+    <string name="settings_system_storage_installer_cache_title">बाहरी इंस्टॉलर कैश</string>
+    <string name="settings_system_storage_installer_cache_description">तीसरे पक्ष के इंस्टॉलर को सौंपे गए APK की प्रतियां</string>
+    <string name="settings_system_storage_patcher_workspace_title">पैचर कार्यक्षेत्र</string>
+    <string name="settings_system_storage_patcher_workspace_description">पैचर रनटाइम फाइलें और अनाथ स्क्रैच डेटा</string>
+    <string name="settings_system_storage_temporary_title">अस्थायी फाइलें</string>
+    <string name="settings_system_storage_temporary_description">पैचिंग के दौरान बनाई गई कार्य फाइलें</string>
+    <string name="settings_system_storage_clear_all">सभी कैश साफ़ करें</string>
+    <string name="settings_system_storage_clear_all_description">एक साथ सभी पुनर्प्राप्त करने योग्य कैश स्थान को मुक्त करता है</string>
+    <string name="settings_system_storage_clear_all_confirm">यह कैश की गई नेटवर्क प्रतिक्रियाओं, स्टेज्ड इंस्टॉलर प्रतियों और अस्थायी फ़ाइलों को साफ़ करता है। मूल और पैच किए गए APK को रखा जाएगा।</string>
+    <string name="settings_system_storage_cleared">मुक्त किया गया %s</string>
+    <string name="settings_system_storage_nothing_to_clear">साफ़ करने के लिए कुछ नहीं</string>
+    <string name="settings_system_storage_open_app_info_title">एंड्रॉइड ऐप स्टोरेज खोलें</string>
+    <string name="settings_system_storage_open_app_info_description">सिस्टम सेटिंग के माध्यम से सभी मोर्फ़ डेटा प्रबंधित या साफ़ करें।</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">पैच किए गए एपीके</string>
     <string name="settings_system_patched_apks_description">संरक्षित पैच किए गए एप्लिकेशन फ़ाइलों का प्रबंधन करता है।</string>

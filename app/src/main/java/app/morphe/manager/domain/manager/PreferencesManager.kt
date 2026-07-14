@@ -113,6 +113,9 @@ class PreferencesManager(
     /** Patch source list ordering mode */
     val sourceBundleSortMode = stringPreference("source_bundle_sort_mode", SourceBundleSortMode.MANUAL.name)
 
+    /** On-disk cache of the remote source blocklist (JSON), so offline launches still enforce it. */
+    val blocklistCache = stringPreference("blocklist_cache", "")
+
     /** Tracks whether the user has explicitly toggled the custom file picker preference. */
     val customFilePickerUserConfigured = booleanPreference("custom_file_picker_user_configured", false)
 

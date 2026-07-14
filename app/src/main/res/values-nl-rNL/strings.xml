@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-update beschikbaar</string>
     <string name="home_update_available_subtitle">Nieuwe versie gereed voor installatie</string>
+    <string name="home_blocked_source_title">Geblokkeerde patchbron gedetecteerd</string>
+    <string name="home_blocked_source_subtitle">Tik om te bekijken en te verwijderen</string>
+    <string name="home_metadata_errors_title">Sommige patchbronnen zijn niet beschikbaar</string>
+    <string name="home_metadata_errors_subtitle">Tik om bronnen te bekijken</string>
+    <string name="home_metered_skipped_title">Updates gepauzeerd op mobiele data</string>
+    <string name="home_metered_skipped_subtitle">Tik om updates via mobiele data toe te staan</string>
     <string name="home_update_error">Update mislukt</string>
     <string name="home_update_error_subtitle">Controleer uw internetverbinding en probeer het opnieuw</string>
     <string name="home_update_skipped_metered">Updates overgeslagen</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Patches experimentele app targets indien beschikbaar</string>
     <string name="sources_management_already_exists">Deze bron is al toegevoegd</string>
     <string name="sources_management_invalid_url">Ongeldige bron-URL. Controleer het adres en probeer het opnieuw</string>
+    <string name="sources_management_blocked">Deze patchbron is geblokkeerd en kan niet worden toegevoegd</string>
+    <string name="sources_management_source_blocked_badge">Geblokkeerd</string>
     <string name="sources_management_metadata_unavailable">Metadata niet beschikbaar</string>
     <string name="sources_management_metadata_unavailable_hint">Het externe metadabestand is niet beschikbaar. Patchen met het geïnstalleerde bundel werkt nog steeds, maar automatische update is uitgeschakeld voor deze bron</string>
     <string name="sources_management_metadata_unavailable_hint_missing">De patch-bundel kon niet worden gedownload. De bron-URL is mogelijk onjuist of het bestand bestaat niet</string>
@@ -720,6 +728,27 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_apks_deleted_all">APK\'s zijn succesvol verwijderd.</string>
     <string name="settings_system_apks_export_zip_success">Geselecteerde APK\'s geëxporteerd</string>
     <string name="settings_system_apks_export_zip_failed">Kon geselecteerde APK\'s niet exporteren</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Opslagbeheer</string>
+    <string name="settings_system_storage_management_description">Bekijk het schijfgebruik en wis gecachte bestanden</string>
+    <string name="settings_system_storage_keystore_title">Ondertekeningssleutelopslag</string>
+    <string name="settings_system_storage_app_data_title">App-gegevens</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch-bundels</string>
+    <string name="settings_system_storage_http_cache_title">Netwerkcache</string>
+    <string name="settings_system_storage_http_cache_description">HTTP-antwoorden gecached om updates te versnellen</string>
+    <string name="settings_system_storage_installer_cache_title">Externe installatiecache</string>
+    <string name="settings_system_storage_installer_cache_description">APK-kopieën doorgegeven aan externe installateurs</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher-werkruimte</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher-runtimebestanden en weeskrabdata</string>
+    <string name="settings_system_storage_temporary_title">Tijdelijke bestanden</string>
+    <string name="settings_system_storage_temporary_description">Werkbestanden die tijdens het patchen zijn gemaakt</string>
+    <string name="settings_system_storage_clear_all">Alle caches wissen</string>
+    <string name="settings_system_storage_clear_all_description">Maakt alle terugwinbare cache ruimte in één keer vrij</string>
+    <string name="settings_system_storage_clear_all_confirm">Hiermee worden gecachte netwerkantwoorden, staged installatiekopieën en tijdelijke bestanden gewist. Originele en gepatchte APK\'s worden bewaard</string>
+    <string name="settings_system_storage_cleared">%s vrijgemaakt</string>
+    <string name="settings_system_storage_nothing_to_clear">Niets om te wissen</string>
+    <string name="settings_system_storage_open_app_info_title">Open Android-app opslag</string>
+    <string name="settings_system_storage_open_app_info_description">Beheer of wis alle Morphe-gegevens via de systeeminstellingen</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatchte APK\'s</string>
     <string name="settings_system_patched_apks_description">Beheert opgeslagen gepatchte applicatiebestanden</string>

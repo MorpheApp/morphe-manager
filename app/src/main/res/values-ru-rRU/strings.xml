@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Доступно обновление Morphe</string>
     <string name="home_update_available_subtitle">Новая версия готова к установке.</string>
+    <string name="home_blocked_source_title">Обнаружен заблокированный источник патчей</string>
+    <string name="home_blocked_source_subtitle">Нажмите, чтобы посмотреть и удалить</string>
+    <string name="home_metadata_errors_title">Некоторые источники патчей недоступны</string>
+    <string name="home_metadata_errors_subtitle">Нажмите, чтобы посмотреть источники</string>
+    <string name="home_metered_skipped_title">Обновления приостановлены при использовании мобильного трафика</string>
+    <string name="home_metered_skipped_subtitle">Нажмите, чтобы разрешить обновления через мобильный интернет</string>
     <string name="home_update_error">Обновление не удалось</string>
     <string name="home_update_error_subtitle">Проверьте подключение к Интернету и повторите попытку</string>
     <string name="home_update_skipped_metered">Обновления пропущены</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Патч экспериментальных целевых параметров программы, если доступны</string>
     <string name="sources_management_already_exists">Этот источник уже добавлен</string>
     <string name="sources_management_invalid_url">Недопустимый URL-адрес источника. Пожалуйста, проверьте адрес и попробуйте еще раз</string>
+    <string name="sources_management_blocked">Этот источник патчей заблокирован и не может быть добавлен</string>
+    <string name="sources_management_source_blocked_badge">Заблокировано</string>
     <string name="sources_management_metadata_unavailable">Метаданные недоступны</string>
     <string name="sources_management_metadata_unavailable_hint">Удаленный файл метаданных недоступен. Применение патча к установленному пакету по-прежнему работает, но автоматическое обновление для этого источника отключено</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Не удалось загрузить пакет патчей. URL-адрес источника может быть указан неверно или файл не существует</string>
@@ -720,6 +728,27 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APK-файлы удалены успешно</string>
     <string name="settings_system_apks_export_zip_success">Выгруженные APK</string>
     <string name="settings_system_apks_export_zip_failed">Не удалось выгрузить выбранные APK</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Управление хранилищем</string>
+    <string name="settings_system_storage_management_description">Просмотрите использование диска и очистите кэшированные файлы</string>
+    <string name="settings_system_storage_keystore_title">Хранилище ключей подписи</string>
+    <string name="settings_system_storage_app_data_title">Данные приложений</string>
+    <string name="settings_system_storage_patch_bundles_title">Пакеты патчей</string>
+    <string name="settings_system_storage_http_cache_title">Кэш сети</string>
+    <string name="settings_system_storage_http_cache_description">HTTP-ответы кэшируются для ускорения обновлений</string>
+    <string name="settings_system_storage_installer_cache_title">Кэш внешних установщиков</string>
+    <string name="settings_system_storage_installer_cache_description">Копии APK, переданные сторонним установщикам</string>
+    <string name="settings_system_storage_patcher_workspace_title">Рабочее пространство патчера</string>
+    <string name="settings_system_storage_patcher_workspace_description">Файлы среды выполнения патчера и устаревшие временные данные</string>
+    <string name="settings_system_storage_temporary_title">Временные файлы</string>
+    <string name="settings_system_storage_temporary_description">Рабочие файлы, создаваемые во время патчинга</string>
+    <string name="settings_system_storage_clear_all">Очистить все кэши</string>
+    <string name="settings_system_storage_clear_all_description">Освобождает все доступное место в кэше за один раз</string>
+    <string name="settings_system_storage_clear_all_confirm">Это очищает кэшированные сетевые ответы, подготовленные копии установщиков и временные файлы. Оригинальные и пропатченные APK сохраняются</string>
+    <string name="settings_system_storage_cleared">Освобождено %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Нечего очищать</string>
+    <string name="settings_system_storage_open_app_info_title">Открыть хранилище Android-приложения</string>
+    <string name="settings_system_storage_open_app_info_description">Управляйте или очистите все данные Morphe через системные настройки</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Патченые APK</string>
     <string name="settings_system_patched_apks_description">Управление сохраненными патчеными файлами приложений</string>

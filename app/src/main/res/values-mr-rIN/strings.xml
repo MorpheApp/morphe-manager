@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe नवीन सुधारणा उपलब्ध आहे</string>
     <string name="home_update_available_subtitle">नवीन सुधारणा स्थापनेसाठी तयार आहे</string>
+    <string name="home_blocked_source_title">अवरोधित पॅच स्त्रोत आढळला</string>
+    <string name="home_blocked_source_subtitle">पुनरावलोकन करण्यासाठी आणि काढण्यासाठी टॅप करा</string>
+    <string name="home_metadata_errors_title">काही पॅच स्त्रोत अनुपलब्ध आहेत</string>
+    <string name="home_metadata_errors_subtitle">स्त्रोतांचे पुनरावलोकन करण्यासाठी टॅप करा</string>
+    <string name="home_metered_skipped_title">मोबाइल डेटावर अद्यतने थांबवली आहेत</string>
+    <string name="home_metered_skipped_subtitle">मोबाईल डेटावर अपडेट्सला अनुमती देण्यासाठी टॅप करा</string>
     <string name="home_update_error">सुधारणा अयशस्वी झाली</string>
     <string name="home_update_error_subtitle">तुमचे नेट कनेक्शन तपासा आणि पुन्हा प्रयत्न करा.</string>
     <string name="home_update_skipped_metered">सुधारणा वगळल्या</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">शक्य असल्यास प्रायोगिक ॲप्सवर पॅच लागू करा</string>
     <string name="sources_management_already_exists">हे मूळ आधीच जोडले गेले आहे</string>
     <string name="sources_management_invalid_url">अवैध स्रोत URL. कृपया पत्ता तपासा आणि पुन्हा प्रयत्न करा</string>
+    <string name="sources_management_blocked">हे पॅच स्रोत अवरोधित केले आहे आणि ते जोडले जाऊ शकत नाही</string>
+    <string name="sources_management_source_blocked_badge">अवरोधित</string>
     <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नाही</string>
     <string name="sources_management_metadata_unavailable_hint">दूरस्थ मेटाडेटा फाइल उपलब्ध नाही. स्थापित बंडलसह पॅचिंग अजूनही कार्य करते, परंतु या स्रोतासाठी स्वयंचलित अद्यतन अक्षम केले आहे</string>
     <string name="sources_management_metadata_unavailable_hint_missing">पॅच बंडल डाउनलोड करता आले नाही. स्रोत URL चुकीचा असू शकतो किंवा फाइल अस्तित्वात नाही</string>
@@ -719,6 +727,27 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APKs यशस्वीरित्या हटवले</string>
     <string name="settings_system_apks_export_zip_success">निवडलेले APK निर्यात केले</string>
     <string name="settings_system_apks_export_zip_failed">निवडलेले APK निर्यात करण्यात अयशस्वी</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">स्टोरेज व्यवस्थापन</string>
+    <string name="settings_system_storage_management_description">डिस्क वापर तपासा आणि कॅशे केलेल्या फायली साफ करा</string>
+    <string name="settings_system_storage_keystore_title">साइनिंग कीस्टोअर</string>
+    <string name="settings_system_storage_app_data_title">ॲप डेटा</string>
+    <string name="settings_system_storage_patch_bundles_title">सुधारणांचे बंडल</string>
+    <string name="settings_system_storage_http_cache_title">नेटवर्क कॅशे</string>
+    <string name="settings_system_storage_http_cache_description">अपडेट जलद करण्यासाठी HTTP प्रतिसाद कॅशे केले जातात</string>
+    <string name="settings_system_storage_installer_cache_title">बाह्य इंस्टॉलर कॅशे</string>
+    <string name="settings_system_storage_installer_cache_description">APK थर्ड-पार्टी इंस्टॉलरमध्ये पाठवलेल्या प्रती</string>
+    <string name="settings_system_storage_patcher_workspace_title">पॅचर कार्यक्षेत्र</string>
+    <string name="settings_system_storage_patcher_workspace_description">पॅचर रनटाइम फाइल्स आणि अनाथ स्क्रॅच डेटा</string>
+    <string name="settings_system_storage_temporary_title">अस्थायी फाइल्स</string>
+    <string name="settings_system_storage_temporary_description">पॅचिंग दरम्यान तयार केलेल्या कार्यरत फाइल्स</string>
+    <string name="settings_system_storage_clear_all">सर्व कॅशे साफ करा</string>
+    <string name="settings_system_storage_clear_all_description">एकाच वेळी सर्व पुनर्प्राप्त करण्यायोग्य कॅशे जागा मोकळी करते</string>
+    <string name="settings_system_storage_clear_all_confirm">हे कॅशे केलेले नेटवर्क प्रतिसाद, स्टेज केलेले इंस्टॉलर प्रती आणि अस्थायी फाइल्स साफ करते. मूळ आणि पॅच केलेले APK ठेवले जातात</string>
+    <string name="settings_system_storage_cleared">मोकळी जागा %s</string>
+    <string name="settings_system_storage_nothing_to_clear">साफ करण्यासाठी काहीही नाही</string>
+    <string name="settings_system_storage_open_app_info_title">Android ॲप स्टोरेज उघडा</string>
+    <string name="settings_system_storage_open_app_info_description">सिस्टम सेटिंग्जद्वारे सर्व मोर्फ डेटा व्यवस्थापित किंवा साफ करा</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">पॅच केलेले APK</string>
     <string name="settings_system_patched_apks_description">जतन केलेल्या पॅच केलेल्या ॲप्लिकेशन फाइल्स व्यवस्थापित करते</string>

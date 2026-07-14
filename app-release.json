@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-07-12T08:30:55",
-  "description": "## [1.23.1-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.23.1-dev.1...v1.23.1-dev.2) (2026-07-12)\n\n\n### Bug Fixes\n\n* Align patch options notices with `InfoBadge` component ([3b7236d](https://github.com/MorpheApp/morphe-manager/commit/3b7236d2c1a1c04ebe3718219451afbfe9ff3531))\n* Move installer prompt toggle into selection dialog ([9f96f37](https://github.com/MorpheApp/morphe-manager/commit/9f96f375ecdc7b6f69622d3a830d59c67b031562))\n* Show installer prompt toggle regardless of expert mode ([9ce1857](https://github.com/MorpheApp/morphe-manager/commit/9ce1857d3df7f571bdfe392ad6d87f5af4c376c8))\n* Unify settings tabs with `SettingsGroup` and consolidate item components ([3277958](https://github.com/MorpheApp/morphe-manager/commit/32779585a6103643116a34855a8ae36b0626f909))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.23.1-dev.2/morphe-manager-1.23.1-dev.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.23.1-dev.2/morphe-manager-1.23.1-dev.2.apk.asc",
-  "version": "1.23.1-dev.2"
+  "created_at": "2026-07-13T13:24:05",
+  "description": "# [1.24.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.1...v1.24.0-dev.2) (2026-07-13)\n\n\n### Bug Fixes\n\n* Prevent storage dialog crash when segments list is empty ([b155ddb](https://github.com/MorpheApp/morphe-manager/commit/b155ddb40bf84e3691e66aab03ed6b614529d1ff))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.2/morphe-manager-1.24.0-dev.2.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.2/morphe-manager-1.24.0-dev.2.apk.asc",
+  "version": "1.24.0-dev.2"
 }

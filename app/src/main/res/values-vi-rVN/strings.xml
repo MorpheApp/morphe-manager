@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Đã có bản cập nhật Morphe mới</string>
     <string name="home_update_available_subtitle">Phiên bản mới đã sẵn sàng để được cài đặt</string>
+    <string name="home_blocked_source_title">Nguồn vá bị chặn đã được phát hiện</string>
+    <string name="home_blocked_source_subtitle">Nhấn để xem và xóa</string>
+    <string name="home_metadata_errors_title">Một số nguồn vá không khả dụng</string>
+    <string name="home_metadata_errors_subtitle">Nhấn để xem các nguồn</string>
+    <string name="home_metered_skipped_title">Tạm dừng cập nhật trên dữ liệu di động</string>
+    <string name="home_metered_skipped_subtitle">Nhấn để cho phép cập nhật qua dữ liệu di động</string>
     <string name="home_update_error">Không thể cập nhật</string>
     <string name="home_update_error_subtitle">Kiểm tra kết nối mạng và thử lại</string>
     <string name="home_update_skipped_metered">Đã bỏ qua bản cập nhật</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Vá phiên bản thử nghiệm (nếu có)</string>
     <string name="sources_management_already_exists">Nguồn này đã được thêm vào rồi</string>
     <string name="sources_management_invalid_url">URL nguồn không hợp lệ. Vui lòng kiểm tra địa chỉ và thử lại</string>
+    <string name="sources_management_blocked">Nguồn vá này bị chặn và không thể thêm</string>
+    <string name="sources_management_source_blocked_badge">Bị chặn</string>
     <string name="sources_management_metadata_unavailable">Không có metadata</string>
     <string name="sources_management_metadata_unavailable_hint">Không thể truy cập tệp metadata từ máy chủ. Bạn vẫn có thể vá bằng gói ứng dụng đã cài, nhưng tính năng tự động cập nhật sẽ bị tắt cho nguồn này</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Không thể tải gói vá. URL nguồn có thể không đúng hoặc file không tồn tại</string>
@@ -721,6 +729,27 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_apks_deleted_all">Đã xóa các tệp APK thành công</string>
     <string name="settings_system_apks_export_zip_success">Đã xuất APK đã chọn</string>
     <string name="settings_system_apks_export_zip_failed">Không thể xuất các APK đã chọn</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Quản lý bộ nhớ</string>
+    <string name="settings_system_storage_management_description">Xem xét việc sử dụng đĩa và xóa các tệp bộ nhớ cache</string>
+    <string name="settings_system_storage_keystore_title">Keystore ký</string>
+    <string name="settings_system_storage_app_data_title">Dữ liệu ứng dụng</string>
+    <string name="settings_system_storage_patch_bundles_title">Gói vá</string>
+    <string name="settings_system_storage_http_cache_title">Bộ nhớ đệm mạng</string>
+    <string name="settings_system_storage_http_cache_description">Các phản hồi HTTP được lưu vào bộ nhớ đệm để tăng tốc độ cập nhật</string>
+    <string name="settings_system_storage_installer_cache_title">Bộ nhớ đệm của trình cài đặt bên ngoài</string>
+    <string name="settings_system_storage_installer_cache_description">Các bản sao APK được chuyển cho trình cài đặt của bên thứ ba</string>
+    <string name="settings_system_storage_patcher_workspace_title">Không gian làm việc của trình vá lỗi</string>
+    <string name="settings_system_storage_patcher_workspace_description">Các tệp thời gian chạy của trình vá lỗi và dữ liệu tạm thời không còn được sử dụng</string>
+    <string name="settings_system_storage_temporary_title">Tệp tạm thời</string>
+    <string name="settings_system_storage_temporary_description">Các tệp làm việc được tạo trong quá trình vá lỗi</string>
+    <string name="settings_system_storage_clear_all">Xóa tất cả bộ nhớ đệm</string>
+    <string name="settings_system_storage_clear_all_description">Giải phóng tất cả không gian bộ nhớ đệm có thể khôi phục cùng một lúc</string>
+    <string name="settings_system_storage_clear_all_confirm">Thao tác này sẽ xóa các phản hồi mạng được lưu vào bộ nhớ đệm, các bản sao trình cài đặt đã chuẩn bị và tệp tạm thời. Các tệp APK gốc và đã vá sẽ được giữ lại</string>
+    <string name="settings_system_storage_cleared">Đã giải phóng %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Không có gì để xóa</string>
+    <string name="settings_system_storage_open_app_info_title">Mở bộ nhớ ứng dụng Android</string>
+    <string name="settings_system_storage_open_app_info_description">Quản lý hoặc xóa tất cả dữ liệu Morphe thông qua cài đặt hệ thống</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK đã vá</string>
     <string name="settings_system_patched_apks_description">Quản lý tệp ứng dụng đã vá</string>

@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Доступне оновлення Morphe</string>
     <string name="home_update_available_subtitle">Нова версія готова до встановлення</string>
+    <string name="home_blocked_source_title">Виявлено заблоковане джерело патчів</string>
+    <string name="home_blocked_source_subtitle">Натисніть, щоб переглянути та видалити</string>
+    <string name="home_metadata_errors_title">Деякі джерела патчів недоступні</string>
+    <string name="home_metadata_errors_subtitle">Натисніть, щоб переглянути джерела</string>
+    <string name="home_metered_skipped_title">Оновлення призупинено в мобільній мережі</string>
+    <string name="home_metered_skipped_subtitle">Натисніть, щоб дозволити оновлення в мобільній мережі</string>
     <string name="home_update_error">Помилка оновлення</string>
     <string name="home_update_error_subtitle">Перевірте підключення до Інтернету та спробуйте знову</string>
     <string name="home_update_skipped_metered">Оновлення пропущено</string>
@@ -100,6 +106,8 @@
 </string>
     <string name="sources_management_already_exists">Це джерело вже додано</string>
     <string name="sources_management_invalid_url">Недійсна URL-адреса джерела. Перевірте адресу та спробуйте ще раз</string>
+    <string name="sources_management_blocked">Це джерело патчів заблоковано і не може бути додано</string>
+    <string name="sources_management_source_blocked_badge">Заблоковано</string>
     <string name="sources_management_metadata_unavailable">Метадані недоступні</string>
     <string name="sources_management_metadata_unavailable_hint">Віддалений файл метаданих недоступний. Патчинг з встановленим джерелом все ще працює, але автоматичне оновлення цього джерела недоступне</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Не вдалося завантажити пакет патчів. Можливо, URL-адреса джерела неправильна або файл не існує</string>
@@ -721,6 +729,27 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">Файли APK успішно видалено</string>
     <string name="settings_system_apks_export_zip_success">Вибрані APK експортовано</string>
     <string name="settings_system_apks_export_zip_failed">Не вдалося експортувати вибрані APK</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Керування сховищем</string>
+    <string name="settings_system_storage_management_description">Перегляньте використання диска та очистіть кешовані файли</string>
+    <string name="settings_system_storage_keystore_title">Сховище ключів</string>
+    <string name="settings_system_storage_app_data_title">Дані застосунку</string>
+    <string name="settings_system_storage_patch_bundles_title">Пакети патчів</string>
+    <string name="settings_system_storage_http_cache_title">Кеш мережі</string>
+    <string name="settings_system_storage_http_cache_description">HTTP-відповіді, збережені в кеші для пришвидшення оновлень</string>
+    <string name="settings_system_storage_installer_cache_title">Кеш зовнішнього інсталятора</string>
+    <string name="settings_system_storage_installer_cache_description">Копії APK файлів, передані стороннім інсталяторам</string>
+    <string name="settings_system_storage_patcher_workspace_title">Робоча область патчера</string>
+    <string name="settings_system_storage_patcher_workspace_description">Файли середовища виконання патчера та осиротілі тимчасові дані</string>
+    <string name="settings_system_storage_temporary_title">Тимчасові файли</string>
+    <string name="settings_system_storage_temporary_description">Робочі файли, створені під час патчингу</string>
+    <string name="settings_system_storage_clear_all">Очистити весь кеш</string>
+    <string name="settings_system_storage_clear_all_description">Звільняє весь кеш одночасно</string>
+    <string name="settings_system_storage_clear_all_confirm">Це очищує кешовані мережеві відповіді, проміжні копії інсталятора та тимчасові файли. Оригінальні та пропатчені APK файли зберігаються</string>
+    <string name="settings_system_storage_cleared">Звільнено %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Нічого очищати</string>
+    <string name="settings_system_storage_open_app_info_title">Відкрити сховище застосунку Android</string>
+    <string name="settings_system_storage_open_app_info_description">Керуйте або очищайте всі дані Morphe через системні налаштування</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Патчені APK файли</string>
     <string name="settings_system_patched_apks_description">Керує збереженими файлами патчених застосунків</string>

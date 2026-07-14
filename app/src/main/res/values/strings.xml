@@ -19,6 +19,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe update available</string>
     <string name="home_update_available_subtitle">New version ready to install</string>
+    <string name="home_blocked_source_title">Blocked patch source detected</string>
+    <string name="home_blocked_source_subtitle">Tap to review and remove</string>
+    <string name="home_metadata_errors_title">Some patch sources are unavailable</string>
+    <string name="home_metadata_errors_subtitle">Tap to review sources</string>
+    <string name="home_metered_skipped_title">Updates paused on mobile data</string>
+    <string name="home_metered_skipped_subtitle">Tap to allow updates on mobile data</string>
     <string name="home_update_error">Update failed</string>
     <string name="home_update_error_subtitle">Check your internet connection and try again</string>
     <string name="home_update_skipped_metered">Updates skipped</string>
@@ -114,6 +120,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Patches experimental app targets if available</string>
     <string name="sources_management_already_exists">This source has already been added</string>
     <string name="sources_management_invalid_url">Invalid source URL. Please check the address and try again</string>
+    <string name="sources_management_blocked">This patch source is blocked and cannot be added</string>
+    <string name="sources_management_source_blocked_badge">Blocked</string>
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
     <string name="sources_management_metadata_unavailable_hint">The remote metadata file is unavailable. Patching with the installed bundle still works, but auto-update is disabled for this source</string>
     <string name="sources_management_metadata_unavailable_hint_missing">The patch bundle could not be downloaded. The source URL may be incorrect or the file does not exist</string>

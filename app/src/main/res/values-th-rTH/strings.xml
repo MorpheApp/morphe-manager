@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">มีการอัปเดต Morphe พร้อมใช้งาน</string>
     <string name="home_update_available_subtitle">เวอร์ชันใหม่พร้อมถูกติดตั้งแล้ว</string>
+    <string name="home_blocked_source_title">ตรวจพบแหล่งแพตช์ที่ถูกบล็อก</string>
+    <string name="home_blocked_source_subtitle">แตะเพื่อตรวจสอบและนำออก</string>
+    <string name="home_metadata_errors_title">บางแหล่งแพตช์ไม่สามารถใช้งานได้</string>
+    <string name="home_metadata_errors_subtitle">แตะเพื่อตรวจสอบแหล่งที่มา</string>
+    <string name="home_metered_skipped_title">หยุดการอัปเดตเมื่อใช้ข้อมูลมือถือ</string>
+    <string name="home_metered_skipped_subtitle">แตะเพื่ออนุญาตการอัปเดตผ่านข้อมูลมือถือ</string>
     <string name="home_update_error">อัปเดตล้มเหลว</string>
     <string name="home_update_error_subtitle">ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
     <string name="home_update_skipped_metered">อัปเดตถูกข้าม</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">แพตซ์แอปเวอร์ชันทดลองของเป้าหมาย ถ้ามี</string>
     <string name="sources_management_already_exists">แหล่งที่มานี้ได้ถูกเพิ่มไปแล้ว</string>
     <string name="sources_management_invalid_url">URL ต้นทางไม่ถูกต้อง โปรดตรวจสอบที่อยู่และลองอีกครั้ง</string>
+    <string name="sources_management_blocked">แหล่งแพตช์นี้ถูกบล็อกและไม่สามารถเพิ่มได้</string>
+    <string name="sources_management_source_blocked_badge">ถูกบล็อก</string>
     <string name="sources_management_metadata_unavailable">ไม่มีข้อมูล Metadata</string>
     <string name="sources_management_metadata_unavailable_hint">ไฟล์ Metadata ระยะไกลไม่พร้อมใช้งาน การแก้ไขด้วยชุดติดตั้งที่มีอยู่ยังคงทำงานได้ แต่การอัปเดตอัตโนมัติถูกปิดใช้งานสำหรับแหล่งที่มานี้</string>
     <string name="sources_management_metadata_unavailable_hint_missing">ไม่สามารถดาวน์โหลดชุดแก้ไขได้ URL แหล่งที่มาอาจไม่ถูกต้อง หรือไฟล์ไม่มีอยู่</string>
@@ -720,6 +728,27 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">ลบไฟล์ APK สำเร็จแล้ว</string>
     <string name="settings_system_apks_export_zip_success">ส่งออก APK ที่เลือกแล้ว</string>
     <string name="settings_system_apks_export_zip_failed">ส่งออก APK ที่เลือกไม่สำเร็จ</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">การจัดการพื้นที่เก็บข้อมูล</string>
+    <string name="settings_system_storage_management_description">ตรวจสอบการใช้งานดิสก์และล้างไฟล์ที่แคชไว้</string>
+    <string name="settings_system_storage_keystore_title">คีย์สโตร์การลงชื่อ</string>
+    <string name="settings_system_storage_app_data_title">ข้อมูลแอป</string>
+    <string name="settings_system_storage_patch_bundles_title">ชุดแพตช์</string>
+    <string name="settings_system_storage_http_cache_title">แคชเครือข่าย</string>
+    <string name="settings_system_storage_http_cache_description">แคชการตอบกลับ HTTP เพื่อเพิ่มความเร็วในการอัปเดต</string>
+    <string name="settings_system_storage_installer_cache_title">แคชตัวติดตั้งภายนอก</string>
+    <string name="settings_system_storage_installer_cache_description">สำเนา APK ที่ส่งไปยังตัวติดตั้งของบุคคลที่สาม</string>
+    <string name="settings_system_storage_patcher_workspace_title">พื้นที่ทำงานของตัวปรับแต่งแก้ไข</string>
+    <string name="settings_system_storage_patcher_workspace_description">ไฟล์รันไทม์ของตัวปรับแต่งแก้ไขและข้อมูลขยะที่ไม่ได้ใช้งาน</string>
+    <string name="settings_system_storage_temporary_title">ไฟล์ชั่วคราว</string>
+    <string name="settings_system_storage_temporary_description">ไฟล์ทำงานที่สร้างขึ้นระหว่างการปรับแต่งแก้ไข</string>
+    <string name="settings_system_storage_clear_all">ล้างแคชทั้งหมด</string>
+    <string name="settings_system_storage_clear_all_description">ล้างพื้นที่แคชที่สามารถเรียกคืนได้ทั้งหมดในครั้งเดียว</string>
+    <string name="settings_system_storage_clear_all_confirm">การดำเนินการนี้จะล้างการตอบกลับเครือข่ายที่แคชไว้ สำเนาตัวติดตั้งที่จัดเตรียมไว้ และไฟล์ชั่วคราว ไฟล์ APK ดั้งเดิมและที่ปรับแต่งแก้ไขจะถูกเก็บไว้</string>
+    <string name="settings_system_storage_cleared">พื้นที่ว่าง %s</string>
+    <string name="settings_system_storage_nothing_to_clear">ไม่มีอะไรให้ล้าง</string>
+    <string name="settings_system_storage_open_app_info_title">เปิดที่เก็บข้อมูลแอป Android</string>
+    <string name="settings_system_storage_open_app_info_description">จัดการหรือล้างข้อมูล Morphe ทั้งหมดผ่านการตั้งค่าระบบ</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">คุณแน่ใจหรือไม่ว่าต้องการลบแอปที่ถูกนำพัท์ %s?</string>
     <string name="settings_system_patched_apks_description">จัดการไฟล์แอปพลิเคชันที่แพตช์แล้วที่บันทึกไว้</string>

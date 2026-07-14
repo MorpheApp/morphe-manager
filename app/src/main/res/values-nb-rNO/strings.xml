@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-oppdatering er tilgjengelig</string>
     <string name="home_update_available_subtitle">Ny versjon klar for installasjon</string>
+    <string name="home_blocked_source_title">Blokkert kilde for oppdateringer oppdaget</string>
+    <string name="home_blocked_source_subtitle">Trykk for å se og fjerne</string>
+    <string name="home_metadata_errors_title">Noen kilder for oppdateringer er ikke tilgjengelige</string>
+    <string name="home_metadata_errors_subtitle">Trykk for å se kildene</string>
+    <string name="home_metered_skipped_title">Oppdateringer satt på pause på mobildata</string>
+    <string name="home_metered_skipped_subtitle">Trykk for å tillate oppdateringer over mobildata</string>
     <string name="home_update_error">Oppdatering mislyktes</string>
     <string name="home_update_error_subtitle">Sjekk internettforbindelsen og prøv igjen</string>
     <string name="home_update_skipped_metered">Oppdateringer hoppet over</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Patchene eksperimentelle appmål hvis tilgjengelig</string>
     <string name="sources_management_already_exists">Denne kilden er allerede lagt til</string>
     <string name="sources_management_invalid_url">Ugyldig kilde-URL. Vennligst sjekk adressen og prøv igjen</string>
+    <string name="sources_management_blocked">Denne oppdateringskilden er blokkert og kan ikke legges til</string>
+    <string name="sources_management_source_blocked_badge">Blokkert</string>
     <string name="sources_management_metadata_unavailable">Metadata ikke tilgjengelig</string>
     <string name="sources_management_metadata_unavailable_hint">Den eksterne metadatafilen er ikke tilgjengelig. Patching med den installerte pakken fungerer fortsatt, men automatisk oppdatering er deaktivert for denne kilden</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Patch-pakken kunne ikke lastes ned. Kilde-URL-en kan være feil eller filen finnes ikke</string>
@@ -720,6 +728,27 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APK-er slettet.</string>
     <string name="settings_system_apks_export_zip_success">Valgte APK-er eksportert</string>
     <string name="settings_system_apks_export_zip_failed">Kunne ikke eksportere valgte APK-er</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Lagringshåndtering</string>
+    <string name="settings_system_storage_management_description">Gå gjennom diskbruken og slett hurtigbufferfiler</string>
+    <string name="settings_system_storage_keystore_title">Signeringsnøkkel</string>
+    <string name="settings_system_storage_app_data_title">Appdata</string>
+    <string name="settings_system_storage_patch_bundles_title">Oppdateringspakker</string>
+    <string name="settings_system_storage_http_cache_title">Nettverksbuffer</string>
+    <string name="settings_system_storage_http_cache_description">HTTP-responser er bufret for å øke hastigheten på oppdateringer</string>
+    <string name="settings_system_storage_installer_cache_title">Ekstern installasjonsprogrambuffer</string>
+    <string name="settings_system_storage_installer_cache_description">APK-kopier sendt til tredjepartsinstallasjonsprogrammer</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher arbeidsområde</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher-kjøretidsfiler og foreldreløse skrapdata</string>
+    <string name="settings_system_storage_temporary_title">Midlertidige filer</string>
+    <string name="settings_system_storage_temporary_description">Arbeidsfiler opprettet under patching</string>
+    <string name="settings_system_storage_clear_all">Tøm alle buffere</string>
+    <string name="settings_system_storage_clear_all_description">Frigjør alt tilgjengelig bufferlagring på en gang</string>
+    <string name="settings_system_storage_clear_all_confirm">Dette tømmer bufret nettverksrespons, installasjonskopier i kø og midlertidige filer. Originale og patched APK-er beholdes</string>
+    <string name="settings_system_storage_cleared">Frigjort %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Ingenting å tømme</string>
+    <string name="settings_system_storage_open_app_info_title">Åpne Android-applagring</string>
+    <string name="settings_system_storage_open_app_info_description">Administrer eller tøm alle Morphe-data via systeminnstillinger</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patchede APK-er</string>
     <string name="settings_system_patched_apks_description">Administrerer lagrede oppdaterte applikasjonsfiler</string>

@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Actualizare Morphe disponibilă</string>
     <string name="home_update_available_subtitle">Versiune nouă pregătită pentru instalare</string>
+    <string name="home_blocked_source_title">Sursă de patch blocată detectată</string>
+    <string name="home_blocked_source_subtitle">Atingeți pentru a revizui și elimina</string>
+    <string name="home_metadata_errors_title">Unele surse de patch-uri sunt indisponibile</string>
+    <string name="home_metadata_errors_subtitle">Atingeți pentru a revizui sursele</string>
+    <string name="home_metered_skipped_title">Actualizările sunt întrerupte pe date mobile</string>
+    <string name="home_metered_skipped_subtitle">Atingeți pentru a permite actualizări pe date mobile</string>
     <string name="home_update_error">Actualizarea a eșuat</string>
     <string name="home_update_error_subtitle">Verifică-ți conexiunea la internet și încearcă din nou</string>
     <string name="home_update_skipped_metered">Actualizări omise</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Patch-uiește aplicații experimentale dacă e disponibil</string>
     <string name="sources_management_already_exists">Sursă deja adăugată</string>
     <string name="sources_management_invalid_url">URL sursă invalidă. Vă rugăm să verificați adresa și încercați din nou</string>
+    <string name="sources_management_blocked">Această sursă de patch este blocată și nu poate fi adăugată</string>
+    <string name="sources_management_source_blocked_badge">Blocată</string>
     <string name="sources_management_metadata_unavailable">Metadate indisponibile</string>
     <string name="sources_management_metadata_unavailable_hint">Fișierul de metadate de la distanță nu este disponibil. Aplicarea pachetului instalat funcționează în continuare, dar actualizarea automată este dezactivată pentru această sursă</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Pachetul de corecție nu a putut fi descărcat. URL-ul sursă poate fi incorect sau fișierul nu există</string>
@@ -720,6 +728,27 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_apks_deleted_all">APK-urile au fost șterse cu succes</string>
     <string name="settings_system_apks_export_zip_success">APK-uri selectate exportate</string>
     <string name="settings_system_apks_export_zip_failed">Exportarea APK-urilor selectate a eșuat</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Gestionare spațiu de stocare</string>
+    <string name="settings_system_storage_management_description">Verificați utilizarea discului și ștergeți fișierele cache</string>
+    <string name="settings_system_storage_keystore_title">Magazie de chei de semnare</string>
+    <string name="settings_system_storage_app_data_title">Date aplicație</string>
+    <string name="settings_system_storage_patch_bundles_title">Pachete de patch-uri</string>
+    <string name="settings_system_storage_http_cache_title">Memorie cache</string>
+    <string name="settings_system_storage_http_cache_description">Răspunsurile HTTP sunt stocate în cache pentru a accelera actualizările</string>
+    <string name="settings_system_storage_installer_cache_title">Cache-ul programului de instalare extern</string>
+    <string name="settings_system_storage_installer_cache_description">Copii APK transmise programelor de instalare terțe</string>
+    <string name="settings_system_storage_patcher_workspace_title">Spațiu de lucru patcher</string>
+    <string name="settings_system_storage_patcher_workspace_description">Fișiere de rulare patcher și date temporare rămase</string>
+    <string name="settings_system_storage_temporary_title">Fișiere temporare</string>
+    <string name="settings_system_storage_temporary_description">Fișiere de lucru create în timpul aplicării patch-urilor</string>
+    <string name="settings_system_storage_clear_all">Șterge toate cache-urile</string>
+    <string name="settings_system_storage_clear_all_description">Eliberează tot spațiul cache recuperabil odată</string>
+    <string name="settings_system_storage_clear_all_confirm">Aceasta șterge răspunsurile de rețea stocate în cache, copiile programului de instalare în așteptare și fișierele temporare. APK-urile originale și patch-uite sunt păstrate</string>
+    <string name="settings_system_storage_cleared">Eliberat %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nimic de șters</string>
+    <string name="settings_system_storage_open_app_info_title">Deschide stocarea aplicației Android</string>
+    <string name="settings_system_storage_open_app_info_description">Gestionează sau șterge toate datele Morphe prin setările sistemului</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK-uri patch-uite</string>
     <string name="settings_system_patched_apks_description">Administrează fișierele patch-uite salvate ale aplicațiilor</string>

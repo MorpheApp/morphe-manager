@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Mise à jour de Morphe disponible</string>
     <string name="home_update_available_subtitle">Nouvelle version prête à installer</string>
+    <string name="home_blocked_source_title">Source de patch bloquée détectée</string>
+    <string name="home_blocked_source_subtitle">Appuyez pour consulter et supprimer</string>
+    <string name="home_metadata_errors_title">Certaines sources de patch sont indisponibles</string>
+    <string name="home_metadata_errors_subtitle">Appuyez pour consulter les sources</string>
+    <string name="home_metered_skipped_title">Mises à jour en pause sur données mobiles</string>
+    <string name="home_metered_skipped_subtitle">Touchez pour autoriser les mises à jour sur les données mobiles</string>
     <string name="home_update_error">Mise à jour échouée</string>
     <string name="home_update_error_subtitle">Vérifiez votre connexion internet et réessayez</string>
     <string name="home_update_skipped_metered">Mises à jour passées</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Patche les cibles de l\'application expérimentale si disponibles</string>
     <string name="sources_management_already_exists">Cette source a déjà été ajoutée</string>
     <string name="sources_management_invalid_url">L\'URL de la source est invalide. Vérifiez l\'adresse puis réessayez</string>
+    <string name="sources_management_blocked">Cette source de correctif est bloquée et ne peut pas être ajoutée</string>
+    <string name="sources_management_source_blocked_badge">Bloqué</string>
     <string name="sources_management_metadata_unavailable">Métadonnées ND</string>
     <string name="sources_management_metadata_unavailable_hint">Le fichier de métadonnées distant est indisponible. Le patchage avec le bundle installé fonctionne toujours, mais la mise à jour automatique est désactivée pour cette source</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Le bundle de patch n\'a pas pu être téléchargé. L\'URL de la source est peut-être incorrecte ou le fichier n’existe pas</string>
@@ -726,6 +734,27 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_apks_deleted_all">Les APK ont été supprimés avec succès</string>
     <string name="settings_system_apks_export_zip_success">Les APK sélectionnés ont été exportés</string>
     <string name="settings_system_apks_export_zip_failed">Échec de l\'exportation des APK sélectionnés</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Gestion du stockage</string>
+    <string name="settings_system_storage_management_description">Vérifier l’utilisation du disque et supprimer les fichiers mis en cache</string>
+    <string name="settings_system_storage_keystore_title">Keystore de signature</string>
+    <string name="settings_system_storage_app_data_title">Données des applications</string>
+    <string name="settings_system_storage_patch_bundles_title">Bundles de patch</string>
+    <string name="settings_system_storage_http_cache_title">Cache réseau</string>
+    <string name="settings_system_storage_http_cache_description">Les réponses HTTP sont mises en cache pour accélérer les mises à jour</string>
+    <string name="settings_system_storage_installer_cache_title">Cache des installateurs externes</string>
+    <string name="settings_system_storage_installer_cache_description">Copies APK transmises aux installateurs tiers</string>
+    <string name="settings_system_storage_patcher_workspace_title">Espace de travail du patcher</string>
+    <string name="settings_system_storage_patcher_workspace_description">Fichiers d\'exécution du patcher et données temporaires orphelines</string>
+    <string name="settings_system_storage_temporary_title">Fichiers temporaires</string>
+    <string name="settings_system_storage_temporary_description">Fichiers de travail créés lors du patching</string>
+    <string name="settings_system_storage_clear_all">Effacer tous les caches</string>
+    <string name="settings_system_storage_clear_all_description">Libère tout l\'espace cache récupérable en une seule fois</string>
+    <string name="settings_system_storage_clear_all_confirm">Cela efface les réponses réseau mises en cache, les copies d\'installateurs en attente et les fichiers temporaires. Les fichiers APK originaux et patchés sont conservés</string>
+    <string name="settings_system_storage_cleared">%s libéré(e)</string>
+    <string name="settings_system_storage_nothing_to_clear">Rien à effacer</string>
+    <string name="settings_system_storage_open_app_info_title">Ouvrir le stockage de l\'application Android</string>
+    <string name="settings_system_storage_open_app_info_description">Gérer ou effacer toutes les données de Morphe via les paramètres système</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK patchés</string>
     <string name="settings_system_patched_apks_description">Gère les fichiers d\'applications patchées enregistrés</string>

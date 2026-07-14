@@ -1,3 +1,18 @@
+# [1.24.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.1...v1.24.0-dev.2) (2026-07-13)
+
+
+### Bug Fixes
+
+* Prevent storage dialog crash when segments list is empty ([b155ddb](https://github.com/MorpheApp/morphe-manager/commit/b155ddb40bf84e3691e66aab03ed6b614529d1ff))
+
+# [1.24.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.23.1-dev.2...v1.24.0-dev.1) (2026-07-13)
+
+
+### Features
+
+* Add storage and cache management dialog ([#714](https://github.com/MorpheApp/morphe-manager/issues/714)) ([f8e354d](https://github.com/MorpheApp/morphe-manager/commit/f8e354d55ac08504212077b2d52b9257c98ed122))
+* Route add-source through the website and enforce a remote blocklist ([#715](https://github.com/MorpheApp/morphe-manager/issues/715)) ([8f1494e](https://github.com/MorpheApp/morphe-manager/commit/8f1494ef97a6f2c3f401ee5acbefafaceeb35dca))
+
 ## [1.23.1-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.23.1-dev.1...v1.23.1-dev.2) (2026-07-12)
 
 

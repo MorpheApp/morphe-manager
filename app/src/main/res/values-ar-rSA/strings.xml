@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">تحديث Morphe متاح</string>
     <string name="home_update_available_subtitle">إصدار جديد جاهز للتثبيت</string>
+    <string name="home_blocked_source_title">تم اكتشاف مصدر تصحيح محظور</string>
+    <string name="home_blocked_source_subtitle">اضغط للمراجعة والإزالة</string>
+    <string name="home_metadata_errors_title">بعض مصادر التصحيح غير متوفرة</string>
+    <string name="home_metadata_errors_subtitle">اضغط لمراجعة المصادر</string>
+    <string name="home_metered_skipped_title">توقفت التحديثات على بيانات الجوال</string>
+    <string name="home_metered_skipped_subtitle">اضغط للسماح بالتحديثات على بيانات الهاتف المحمول</string>
     <string name="home_update_error">فشل التحديث</string>
     <string name="home_update_error_subtitle">تحقق من اتصالك بالإنترنت وحاول مرة أخرى</string>
     <string name="home_update_skipped_metered">التحديثات تم تخطيها</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">تعديل الإصدارات التجريبية للتطبيقات المستهدفة إن توفرت</string>
     <string name="sources_management_already_exists">تمت إضافة هذا المصدر بالفعل</string>
     <string name="sources_management_invalid_url">عنوان URL المصدر غير صالح. يرجى التحقق من العنوان والمحاولة مرة أخرى</string>
+    <string name="sources_management_blocked">تم حظر مصدر التصحيح هذا ولا يمكن إضافته</string>
+    <string name="sources_management_source_blocked_badge">محظور</string>
     <string name="sources_management_metadata_unavailable">البيانات الوصفية غير متوفرة</string>
     <string name="sources_management_metadata_unavailable_hint">ملف البيانات الوصفية عن بعد غير متوفر. لا يزال التعديل بالحزمة المثبتة يعمل، ولكن التحديث التلقائي معطل لهذا المصدر.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">تعذر تنزيل حزمة التعديل. قد يكون عنوان URL المصدر غير صحيح أو أن الملف غير موجود.</string>
@@ -722,6 +730,27 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_apks_deleted_all">تم حذف ملفات APK بنجاح</string>
     <string name="settings_system_apks_export_zip_success">تم تصدير ملفات APK المحددة</string>
     <string name="settings_system_apks_export_zip_failed">فشل تصدير ملفات APK المحددة</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">إدارة التخزين</string>
+    <string name="settings_system_storage_management_description">مراجعة استخدام مساحة التخزين ومسح الملفات المؤقتة</string>
+    <string name="settings_system_storage_keystore_title">مخزن المفاتيح الموقّعة</string>
+    <string name="settings_system_storage_app_data_title">بيانات التطبيق</string>
+    <string name="settings_system_storage_patch_bundles_title">حُزم التعديل</string>
+    <string name="settings_system_storage_http_cache_title">ذاكرة التخزين المؤقت للشبكة</string>
+    <string name="settings_system_storage_http_cache_description">تم تخزين استجابات HTTP لتسريع التحديثات</string>
+    <string name="settings_system_storage_installer_cache_title">ذاكرة التخزين المؤقت لأداة التثبيت الخارجية</string>
+    <string name="settings_system_storage_installer_cache_description">نسخ APK التي تم تمريرها إلى أدوات التثبيت الخارجية</string>
+    <string name="settings_system_storage_patcher_workspace_title">مساحة عمل أداة التعديل</string>
+    <string name="settings_system_storage_patcher_workspace_description">ملفات وقت التشغيل لأداة التعديل والبيانات المؤقتة غير المستخدمة</string>
+    <string name="settings_system_storage_temporary_title">ملفات مؤقتة</string>
+    <string name="settings_system_storage_temporary_description">ملفات العمل التي تم إنشاؤها أثناء التعديل</string>
+    <string name="settings_system_storage_clear_all">مسح جميع ذاكرات التخزين المؤقت</string>
+    <string name="settings_system_storage_clear_all_description">يحرر كل مساحة التخزين المؤقت القابلة للاسترداد دفعة واحدة</string>
+    <string name="settings_system_storage_clear_all_confirm">يؤدي هذا إلى مسح استجابات الشبكة المخزنة مؤقتًا، نسخ أداة التثبيت المؤقتة، والملفات المؤقتة. يتم الاحتفاظ بملفات APK الأصلية والمعدلة</string>
+    <string name="settings_system_storage_cleared">تم تحرير %s</string>
+    <string name="settings_system_storage_nothing_to_clear">لا يوجد ما يمكن مسحه</string>
+    <string name="settings_system_storage_open_app_info_title">فتح مساحة تخزين تطبيق Android</string>
+    <string name="settings_system_storage_open_app_info_description">إدارة أو مسح جميع بيانات Morphe من خلال إعدادات النظام</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs معدلة</string>
     <string name="settings_system_patched_apks_description">يدير ملفات التطبيقات المُعدّلة المحفوظة</string>

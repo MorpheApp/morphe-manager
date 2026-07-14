@@ -339,6 +339,11 @@ class HomeViewModel(
     var showBundleUpdateSnackbar by mutableStateOf(false)
     var snackbarStatus by mutableStateOf(BundleUpdateStatus.Updating)
 
+    // Latches when an update cycle was skipped due to metered network; cleared on the next
+    // successful/no-change update. Independent of the transient BundleUpdateSnackbar so the
+    // user still sees a persistent alert after the transient snackbar fades
+    var updatesSkippedDueToMetered by mutableStateOf(false)
+
     // Simple mode bundle selection dialog: shown when 2+ bundles have patches for the same app
     var showSimpleBundleSelectDialog by mutableStateOf(false)
     var simpleBundleSelectApp by mutableStateOf<SelectedApp?>(null)
@@ -777,6 +782,12 @@ class HomeViewModel(
                     PatchBundleRepository.BundleUpdateResult.Error -> BundleUpdateStatus.Error
                     PatchBundleRepository.BundleUpdateResult.None -> BundleUpdateStatus.Updating
                     PatchBundleRepository.BundleUpdateResult.SkippedMetered -> BundleUpdateStatus.Warning
+                }
+                updatesSkippedDueToMetered = when (progress.result) {
+                    PatchBundleRepository.BundleUpdateResult.SkippedMetered -> true
+                    PatchBundleRepository.BundleUpdateResult.Success,
+                    PatchBundleRepository.BundleUpdateResult.NoUpdates -> false
+                    else -> updatesSkippedDueToMetered
                 }
             }
         }

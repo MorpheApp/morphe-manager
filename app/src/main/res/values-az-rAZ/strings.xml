@@ -719,6 +719,18 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APK-lar uğurla silindi</string>
     <string name="settings_system_apks_export_zip_success">Seçilmiş APK-lar köçürüldü</string>
     <string name="settings_system_apks_export_zip_failed">Seçilmiş APK-ları köçürmək olmadı</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Saxlanc idarəçiliyi</string>
+    <string name="settings_system_storage_management_description">Disk istifadəsini gözdən keçir və keşlənmiş faylları təmizlə</string>
+    <string name="settings_system_storage_keystore_title">İmzalama açar deposu</string>
+    <string name="settings_system_storage_app_data_title">Tətbiq məlumatları</string>
+    <string name="settings_system_storage_patch_bundles_title">Yamaq paketləri</string>
+    <string name="settings_system_storage_http_cache_title">Şəbəkə keşi</string>
+    <string name="settings_system_storage_http_cache_description">Yeniləmələri sürətləndirmək üçün HTTP cavabları keşləndi</string>
+    <string name="settings_system_storage_installer_cache_title">Xarici quraşdırıcı keşi</string>
+    <string name="settings_system_storage_installer_cache_description">Üçüncü tərəf quraşdırıcılarına ötürülən APK nüsxələri</string>
+    <string name="settings_system_storage_patcher_workspace_title">Yamaqlayıcı iş sahəsi</string>
+    <string name="settings_system_storage_patcher_workspace_description">Yamaqlayıcı icra vaxtı faylları və sahibsiz müvəqqəti məlumatlar</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Yamaqlanan APK-lar</string>
     <string name="settings_system_patched_apks_description">Yamaqlanıb saxlanılan tətbiq fayllarını idarə edir</string>

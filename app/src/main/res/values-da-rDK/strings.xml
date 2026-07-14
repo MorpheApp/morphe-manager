@@ -18,6 +18,12 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-opdatering tilgængelig</string>
     <string name="home_update_available_subtitle">Ny version klar til installation</string>
+    <string name="home_blocked_source_title">Blokeret patchkilde fundet</string>
+    <string name="home_blocked_source_subtitle">Tryk for at gennemgå og fjerne</string>
+    <string name="home_metadata_errors_title">Nogle patchkilder er ikke tilgængelige</string>
+    <string name="home_metadata_errors_subtitle">Tryk for at gennemgå kilder</string>
+    <string name="home_metered_skipped_title">Opdateringer pauset på mobildata</string>
+    <string name="home_metered_skipped_subtitle">Tryk for at tillade opdateringer over mobildata</string>
     <string name="home_update_error">Opdatering mislykkedes</string>
     <string name="home_update_error_subtitle">Tjek din internetforbindelse, og prøv igen.</string>
     <string name="home_update_skipped_metered">Opdateringer oversprunget</string>
@@ -99,6 +105,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Patch eksperimentelle app-targets, hvis de er tilgængelige</string>
     <string name="sources_management_already_exists">Denne kilde er allerede tilføjet</string>
     <string name="sources_management_invalid_url">Ugyldig kilde-URL. Kontroller venligst adressen og prøv igen</string>
+    <string name="sources_management_blocked">Denne patchkilde er blokeret og kan ikke tilføjes</string>
+    <string name="sources_management_source_blocked_badge">Blokeret</string>
     <string name="sources_management_metadata_unavailable">Metadata ikke tilgængelig</string>
     <string name="sources_management_metadata_unavailable_hint">Den eksterne metadatafil er ikke tilgængelig. Opdatering med den installerede pakke fungerer stadig, men automatisk opdatering er deaktiveret for denne kilde</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Opdateringspakken kunne ikke hentes. Kilde-URL\'en kan være forkert, eller filen findes ikke</string>
@@ -720,6 +728,27 @@ Størrelsesformatet skal være som følger:
     <string name="settings_system_apks_deleted_all">APK\'er slettet korrekt</string>
     <string name="settings_system_apks_export_zip_success">Valgte APK\'er eksporteret</string>
     <string name="settings_system_apks_export_zip_failed">Eksportering af valgte APK\'er mislykkedes</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Administration af lager</string>
+    <string name="settings_system_storage_management_description">Gennemgå diskbrug og ryd cachelagrede filer</string>
+    <string name="settings_system_storage_keystore_title">Signerings nøglelager</string>
+    <string name="settings_system_storage_app_data_title">App data</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch bundles</string>
+    <string name="settings_system_storage_http_cache_title">Netværkscache</string>
+    <string name="settings_system_storage_http_cache_description">HTTP-svar caches for at fremskynde opdateringer</string>
+    <string name="settings_system_storage_installer_cache_title">Ekstern installationscache</string>
+    <string name="settings_system_storage_installer_cache_description">APK-kopier sendt til tredjepartsinstallationsprogrammer</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher-arbejdsområde</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher-køretidsfiler og forladte midlertidige data</string>
+    <string name="settings_system_storage_temporary_title">Midlertidige filer</string>
+    <string name="settings_system_storage_temporary_description">Arbejdsfiler, der er oprettet under patching</string>
+    <string name="settings_system_storage_clear_all">Ryd alle caches</string>
+    <string name="settings_system_storage_clear_all_description">Frigør alt gendanvendeligt cachelager på én gang</string>
+    <string name="settings_system_storage_clear_all_confirm">Dette rydder cachelagrede netværkssvar, mellem-lagrede installationskopier og midlertidige filer. Originale og patched APK\'er bevares</string>
+    <string name="settings_system_storage_cleared">Frigivet %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Intet at rydde</string>
+    <string name="settings_system_storage_open_app_info_title">Åbn Android-applager</string>
+    <string name="settings_system_storage_open_app_info_description">Administrer eller ryd alle Morphe-data via systemindstillinger</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patchet APK\'er</string>
     <string name="settings_system_patched_apks_description">Håndter gemte patchet APK filer</string>
