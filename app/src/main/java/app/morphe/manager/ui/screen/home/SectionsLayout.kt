@@ -368,7 +368,7 @@ private fun AdaptiveContent(
                         )
                         Spacer(modifier = Modifier.height(itemSpacing))
                     }
-                    Box(modifier = Modifier.weight(1f, fill = false)) {
+                    Box(modifier = Modifier.weight(1f)) {
                         MainAppsSection(
                             apps = apps,
                             appActions = appActions,
@@ -378,7 +378,7 @@ private fun AdaptiveContent(
                             maxCardWidth = maxCardWidth,
                             onboardingState = onboardingState,
                             showFadeOverlay = false,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxSize()
                         )
                     }
                     HomeFooterControls(
@@ -415,7 +415,7 @@ private fun AdaptiveContent(
                 }
 
                 // Section 3: Scrollable app buttons
-                Box(modifier = Modifier.weight(1f, fill = false)) {
+                Box(modifier = Modifier.weight(1f)) {
                     MainAppsSection(
                         apps = apps,
                         appActions = appActions,
@@ -425,7 +425,7 @@ private fun AdaptiveContent(
                         horizontalPadding = contentPadding,
                         maxCardWidth = maxCardWidth,
                         onboardingState = onboardingState,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
                 // Section 4: footer controls - hidden when no apps are available
@@ -1219,9 +1219,9 @@ fun MainAppsSection(
                 Box(
                     modifier = Modifier
                         .widthIn(max = maxCardWidth)
-                        .fillMaxWidth()
+                        .fillMaxSize()
                 ) {
-                    Column(modifier = Modifier.fillMaxWidth()) {
+                    Column(modifier = Modifier.fillMaxSize()) {
                         // Search bar
                         AnimatedVisibility(
                             visible = searchState.visible,
@@ -1242,12 +1242,12 @@ fun MainAppsSection(
                         // The overlay is pointer-transparent so swipe gestures pass through
                         Box(
                             modifier = Modifier
-                                .weight(1f, fill = false)
+                                .weight(1f)
                                 .fillMaxWidth()
                         ) {
                             LazyColumn(
                                 state = listState,
-                                modifier = Modifier.fillMaxWidth(),
+                                modifier = Modifier.fillMaxSize(),
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.spacedBy(itemSpacing),
                                 contentPadding = PaddingValues(
