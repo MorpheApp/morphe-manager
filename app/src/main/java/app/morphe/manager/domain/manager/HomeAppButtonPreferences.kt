@@ -8,6 +8,7 @@ package app.morphe.manager.domain.manager
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -69,6 +70,9 @@ class HomeAppButtonPreferences(context: Context) {
 
     private val _showCategoryViewSwitcher = MutableStateFlow(loadShowCategoryViewSwitcher())
     val showCategoryViewSwitcher: StateFlow<Boolean> = _showCategoryViewSwitcher.asStateFlow()
+
+    private val _expandedSourceGroups = MutableStateFlow(loadExpandedSourceGroups())
+    val expandedSourceGroups: StateFlow<Set<Int>> = _expandedSourceGroups.asStateFlow()
 
     private fun loadHiddenPackages(): Set<String> {
         return prefs.getStringSet(KEY_HIDDEN, null) ?: emptySet()
@@ -187,6 +191,15 @@ class HomeAppButtonPreferences(context: Context) {
         )
     }
 
+    fun toggleSourceGroupCollapsed(sourceUid: Int) {
+        if (sourceUid == DEFAULT_SOURCE_UID) return
+        val current = _expandedSourceGroups.value.toMutableSet()
+        if (!current.add(sourceUid)) {
+            current.remove(sourceUid)
+        }
+        saveExpandedSourceGroups(current)
+    }
+
     fun assignToCategory(packageNames: Set<String>, categoryId: String?) {
         val current = _categoryState.value
         val validCategoryId = categoryId?.takeIf { id -> current.categories.any { it.id == id } }
@@ -238,6 +251,12 @@ class HomeAppButtonPreferences(context: Context) {
     private fun loadShowCategoryViewSwitcher(): Boolean =
         prefs.getBoolean(KEY_SHOW_CATEGORY_VIEW_SWITCHER, false)
 
+    private fun loadExpandedSourceGroups(): Set<Int> =
+        prefs.getStringSet(KEY_EXPANDED_SOURCE_GROUPS, null)
+            ?.mapNotNull { it.toIntOrNull() }
+            ?.toSet()
+            ?: emptySet()
+
     private fun saveCategoryState(state: HomeAppCategoryState) {
         val validIds = state.categories.mapTo(mutableSetOf()) { it.id }
         val cleanAssignments = state.assignments.filterValues { it in validIds }
@@ -265,6 +284,14 @@ class HomeAppButtonPreferences(context: Context) {
         _categoryState.value = HomeAppCategoryState(state.categories, cleanAssignments)
     }
 
+    private fun saveExpandedSourceGroups(sourceUids: Set<Int>) {
+        val cleanSourceUids = sourceUids - DEFAULT_SOURCE_UID
+        prefs.edit {
+            putStringSet(KEY_EXPANDED_SOURCE_GROUPS, cleanSourceUids.mapTo(mutableSetOf()) { it.toString() })
+        }
+        _expandedSourceGroups.value = cleanSourceUids
+    }
+
     private fun normalizeCategoryName(name: String): String? =
         name.trim().replace(Regex("\\s+"), " ").takeIf { it.isNotEmpty() }
 
@@ -282,6 +309,7 @@ class HomeAppButtonPreferences(context: Context) {
         private const val KEY_CATEGORY_ASSIGNMENTS = "category_assignments"
         private const val KEY_CATEGORY_VIEW_MODE = "category_view_mode"
         private const val KEY_SHOW_CATEGORY_VIEW_SWITCHER = "show_category_view_switcher"
+        private const val KEY_EXPANDED_SOURCE_GROUPS = "expanded_source_groups"
         private const val CATEGORY_SEPARATOR = "\t"
     }
 }

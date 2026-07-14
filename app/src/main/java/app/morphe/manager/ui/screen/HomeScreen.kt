@@ -264,6 +264,9 @@ fun HomeScreen(
                     onToggleCategoryCollapsed = { categoryId ->
                         homeViewModel.toggleAppCategoryCollapsed(categoryId)
                     },
+                    onToggleSourceGroupCollapsed = { sourceUid ->
+                        homeViewModel.toggleAppSourceGroupCollapsed(sourceUid)
+                    },
                     onAssignAppsToCategory = { packageNames, categoryId ->
                         homeViewModel.assignAppsToCategory(packageNames, categoryId)
                     }

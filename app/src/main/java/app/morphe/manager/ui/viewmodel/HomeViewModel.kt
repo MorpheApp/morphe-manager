@@ -28,6 +28,8 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
@@ -172,7 +174,12 @@ data class HomeAppState(
 data class HomeAppSourceGroup(
     val uid: Int,
     val name: String,
-    val packageNames: Set<String>
+    val packageNames: Set<String>,
+    val collapsed: Boolean,
+    val collapsible: Boolean,
+    val avatarUrl: String?,
+    val fallbackAvatarUrl: String?,
+    val isDefault: Boolean
 )
 
 private data class HomePrefs(
@@ -181,13 +188,15 @@ private data class HomePrefs(
     val sortMode: HomeAppSortMode,
     val categoryState: HomeAppCategoryState,
     val categoryViewMode: HomeAppCategoryViewMode,
-    val showCategoryViewSwitcher: Boolean
+    val showCategoryViewSwitcher: Boolean,
+    val expandedSourceGroups: Set<Int>
 )
 
 private data class HomeCategoryPrefs(
     val categoryState: HomeAppCategoryState,
     val categoryViewMode: HomeAppCategoryViewMode,
-    val showCategoryViewSwitcher: Boolean
+    val showCategoryViewSwitcher: Boolean,
+    val expandedSourceGroups: Set<Int>
 )
 
 /**
@@ -1136,11 +1145,13 @@ class HomeViewModel(
         homeAppButtonPrefs.categoryState,
         homeAppButtonPrefs.categoryViewMode,
         homeAppButtonPrefs.showCategoryViewSwitcher,
-    ) { categoryState, categoryViewMode, showCategoryViewSwitcher ->
+        homeAppButtonPrefs.expandedSourceGroups,
+    ) { categoryState, categoryViewMode, showCategoryViewSwitcher, expandedSourceGroups ->
         HomeCategoryPrefs(
             categoryState = categoryState,
             categoryViewMode = categoryViewMode,
-            showCategoryViewSwitcher = showCategoryViewSwitcher
+            showCategoryViewSwitcher = showCategoryViewSwitcher,
+            expandedSourceGroups = expandedSourceGroups
         )
     }
 
@@ -1156,7 +1167,8 @@ class HomeViewModel(
             sortMode = sortMode,
             categoryState = categoryPrefs.categoryState,
             categoryViewMode = categoryPrefs.categoryViewMode,
-            showCategoryViewSwitcher = categoryPrefs.showCategoryViewSwitcher
+            showCategoryViewSwitcher = categoryPrefs.showCategoryViewSwitcher,
+            expandedSourceGroups = categoryPrefs.expandedSourceGroups
         )
     }
 
@@ -1195,8 +1207,12 @@ class HomeViewModel(
         val enabledInfo = ready.info.filter { (_, info) -> info.enabled }
         val metadata = BundleAppMetadata.buildFrom(enabledInfo)
         val packages = metadata.keys
-        val sourceNames = ready.sources.mapValues { (_, source) -> source.displayTitle }
-        val sourceGroups = buildHomeAppSourceGroups(enabledInfo, sourceNames, homePrefs.sortMode)
+        val sourceGroups = buildHomeAppSourceGroups(
+            enabledInfo = enabledInfo,
+            sources = ready.sources,
+            sortMode = homePrefs.sortMode,
+            expandedSourceGroups = homePrefs.expandedSourceGroups
+        )
 
         val installedMap = installedApps.associateBy { it.originalPackageName }
 
@@ -1282,8 +1298,9 @@ class HomeViewModel(
 
     private fun buildHomeAppSourceGroups(
         enabledInfo: Map<Int, PatchBundleInfo.Global>,
-        sourceNames: Map<Int, String>,
-        sortMode: HomeAppSortMode
+        sources: Map<Int, PatchBundleSource>,
+        sortMode: HomeAppSortMode,
+        expandedSourceGroups: Set<Int>
     ): List<HomeAppSourceGroup> {
         val assignedPackages = linkedSetOf<String>()
 
@@ -1292,7 +1309,7 @@ class HomeViewModel(
             .sortedWith(
                 compareBy<PatchBundleInfo.Global>(
                     { it.uid != DEFAULT_SOURCE_UID },
-                    { (sourceNames[it.uid] ?: it.name).lowercase() },
+                    { (sources[it.uid]?.displayTitle ?: it.name).lowercase() },
                     { it.uid }
                 )
             )
@@ -1308,27 +1325,32 @@ class HomeViewModel(
                 if (packageNames.isEmpty()) {
                     null
                 } else {
-                    val sourceName = sourceNames[info.uid]
+                    val source = sources[info.uid]
+                    val avatarUrls = source?.avatarUrls
+                    val sourceName = source?.displayTitle
                         ?.takeUnless { it.isBlank() }
                         ?: info.name.takeUnless { it.isBlank() }
                         ?: "#${info.uid}"
                     HomeAppSourceGroup(
                         uid = info.uid,
                         name = sourceName,
-                        packageNames = packageNames
+                        packageNames = packageNames,
+                        collapsed = info.uid != DEFAULT_SOURCE_UID && info.uid !in expandedSourceGroups,
+                        collapsible = info.uid != DEFAULT_SOURCE_UID,
+                        avatarUrl = avatarUrls?.primary,
+                        fallbackAvatarUrl = avatarUrls?.fallback,
+                        isDefault = source?.isDefault == true || info.uid == DEFAULT_SOURCE_UID
                     )
                 }
             }
 
         return when (sortMode) {
             HomeAppSortMode.NAME_ASC -> groups.sortedWith(
-                compareBy<HomeAppSourceGroup> { it.uid != DEFAULT_SOURCE_UID }
-                    .thenBy { it.name.lowercase() }
+                compareBy<HomeAppSourceGroup> { it.name.lowercase() }
                     .thenBy { it.uid }
             )
             HomeAppSortMode.NAME_DESC -> groups.sortedWith(
-                compareBy<HomeAppSourceGroup> { it.uid != DEFAULT_SOURCE_UID }
-                    .thenByDescending { it.name.lowercase() }
+                compareByDescending<HomeAppSourceGroup> { it.name.lowercase() }
                     .thenBy { it.uid }
             )
             else -> groups
@@ -1463,9 +1485,8 @@ class HomeViewModel(
         homeAppButtonPrefs.setCategoryViewMode(viewMode)
     }
 
-    fun createAppCategory(name: String) {
+    fun createAppCategory(name: String): String =
         homeAppButtonPrefs.createCategory(name)
-    }
 
     fun renameAppCategory(categoryId: String, name: String) {
         homeAppButtonPrefs.renameCategory(categoryId, name)
@@ -1481,6 +1502,10 @@ class HomeViewModel(
 
     fun toggleAppCategoryCollapsed(categoryId: String) {
         homeAppButtonPrefs.toggleCategoryCollapsed(categoryId)
+    }
+
+    fun toggleAppSourceGroupCollapsed(sourceUid: Int) {
+        homeAppButtonPrefs.toggleSourceGroupCollapsed(sourceUid)
     }
 
     fun assignAppsToCategory(packageNames: Set<String>, categoryId: String?) {

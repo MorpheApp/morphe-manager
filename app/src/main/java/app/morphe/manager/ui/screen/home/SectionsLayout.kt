@@ -8,6 +8,7 @@ package app.morphe.manager.ui.screen.home
 import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -49,6 +50,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.*
@@ -75,7 +77,9 @@ import app.morphe.manager.ui.viewmodel.BundleUpdateStatus
 import app.morphe.manager.ui.viewmodel.HomeAppSourceGroup
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.KnownApps
+import app.morphe.manager.util.RemoteAvatar
 import app.morphe.manager.util.toast
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import sh.calvin.reorderable.ReorderableItem
@@ -92,6 +96,10 @@ private data class SwipeActionConfig(
 
 private data class HomeCategoryGroup(
     val id: String?,
+    val sourceUid: Int? = null,
+    val sourceAvatarUrl: String? = null,
+    val sourceFallbackAvatarUrl: String? = null,
+    val sourceIsDefault: Boolean = false,
     val title: String,
     val items: List<HomeAppItem>,
     val collapsed: Boolean,
@@ -142,11 +150,12 @@ class HomeAppActions(
     val onResetOrder: () -> Unit,
     val onSortModeChange: (HomeAppSortMode) -> Unit,
     val onCategoryViewModeChange: (HomeAppCategoryViewMode) -> Unit,
-    val onCreateCategory: (String) -> Unit,
+    val onCreateCategory: (String) -> String,
     val onRenameCategory: (String, String) -> Unit,
     val onDeleteCategory: (String) -> Unit,
     val onSaveCategoryOrder: (List<String>) -> Unit,
     val onToggleCategoryCollapsed: (String) -> Unit,
+    val onToggleSourceGroupCollapsed: (Int) -> Unit,
     val onAssignAppsToCategory: (Set<String>, String?) -> Unit
 )
 
@@ -316,6 +325,8 @@ private fun AdaptiveContent(
     val isAppsEmpty by remember(apps.visible, apps.installedAppsLoading) {
         derivedStateOf { !apps.installedAppsLoading && apps.visible.isEmpty() }
     }
+    val showGroupingFooter = !isAppsEmpty && apps.showCategoryViewSwitcher
+    val showOtherAppsFooter = !isAppsEmpty && chromeFlags.showOtherAppsButton
 
     Column(modifier = Modifier.fillMaxSize()) {
         if (useTwoColumns) {
@@ -370,19 +381,18 @@ private fun AdaptiveContent(
                             modifier = Modifier.fillMaxWidth()
                         )
                     }
-                    AnimatedVisibility(
-                        visible = !isAppsEmpty && chromeFlags.showOtherAppsButton,
-                        enter = MorpheAnimations.expandFadeEnter,
-                        exit = MorpheAnimations.shrinkFadeExit
-                    ) {
-                        Column {
-                            Spacer(modifier = Modifier.height(itemSpacing))
-                            OtherAppsSection(
-                                onClick = chromeActions.onOtherAppsClick,
-                                modifier = Modifier.widthIn(max = maxCardWidth).fillMaxWidth()
-                            )
-                        }
-                    }
+                    HomeFooterControls(
+                        showOtherApps = showOtherAppsFooter,
+                        showGroupingSelector = showGroupingFooter,
+                        mode = apps.categoryViewMode,
+                        showSwitcher = apps.showCategoryViewSwitcher,
+                        onOtherAppsClick = chromeActions.onOtherAppsClick,
+                        onModeChange = appActions.onCategoryViewModeChange,
+                        itemSpacing = itemSpacing,
+                        modifier = Modifier
+                            .widthIn(max = maxCardWidth)
+                            .fillMaxWidth()
+                    )
                 }
             }
         } else {
@@ -418,32 +428,92 @@ private fun AdaptiveContent(
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
-
-                // Section 4: Other apps - hidden when no apps available or bundles loading
-                AnimatedVisibility(
-                    visible = !isAppsEmpty && chromeFlags.showOtherAppsButton,
-                    enter = MorpheAnimations.expandFadeEnter,
-                    exit = MorpheAnimations.shrinkFadeExit
+                // Section 4: footer controls - hidden when no apps are available
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Column {
-                        Spacer(modifier = Modifier.height(itemSpacing))
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = contentPadding),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            OtherAppsSection(
-                                onClick = chromeActions.onOtherAppsClick,
-                                modifier = Modifier
-                                    .widthIn(max = maxCardWidth - contentPadding * 2)
-                                    .fillMaxWidth()
-                            )
-                        }
-                    }
+                    HomeFooterControls(
+                        showOtherApps = showOtherAppsFooter,
+                        showGroupingSelector = showGroupingFooter,
+                        mode = apps.categoryViewMode,
+                        showSwitcher = apps.showCategoryViewSwitcher,
+                        onOtherAppsClick = chromeActions.onOtherAppsClick,
+                        onModeChange = appActions.onCategoryViewModeChange,
+                        itemSpacing = itemSpacing,
+                        modifier = Modifier
+                            .padding(horizontal = contentPadding)
+                            .widthIn(max = maxCardWidth - contentPadding * 2)
+                            .fillMaxWidth()
+                    )
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun HomeFooterControls(
+    showOtherApps: Boolean,
+    showGroupingSelector: Boolean,
+    mode: HomeAppCategoryViewMode,
+    showSwitcher: Boolean,
+    onOtherAppsClick: () -> Unit,
+    onModeChange: (HomeAppCategoryViewMode) -> Unit,
+    itemSpacing: Dp,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        AnimatedVisibility(
+            visible = showOtherApps,
+            enter = MorpheAnimations.expandFadeEnter,
+            exit = MorpheAnimations.shrinkFadeExit
+        ) {
+            Column {
+                Spacer(modifier = Modifier.height(itemSpacing))
+                OtherAppsSection(
+                    onClick = onOtherAppsClick,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+        AppGroupingFooter(
+            visible = showGroupingSelector,
+            mode = mode,
+            showSwitcher = showSwitcher,
+            onModeChange = onModeChange,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    top = if (showOtherApps) 0.dp else 8.dp,
+                    bottom = 12.dp
+                )
+        )
+    }
+}
+
+@Composable
+private fun AppGroupingFooter(
+    visible: Boolean,
+    mode: HomeAppCategoryViewMode,
+    showSwitcher: Boolean,
+    onModeChange: (HomeAppCategoryViewMode) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = MorpheAnimations.expandFadeEnter,
+        exit = MorpheAnimations.shrinkFadeExit
+    ) {
+        AppGroupingToolbar(
+            mode = mode,
+            showSwitcher = showSwitcher,
+            onModeChange = onModeChange,
+            modifier = modifier
+        )
     }
 }
 
@@ -970,6 +1040,15 @@ fun MainAppsSection(
                 selectedPackages.clear()
                 isMultiSelectMode.value = false
                 showMoveCategoryDialog.value = false
+            },
+            onCreateAndSelect = { name ->
+                val categoryId = appActions.onCreateCategory(name)
+                if (categoryId.isNotBlank()) {
+                    appActions.onAssignAppsToCategory(selectedPackages.keys.toSet(), categoryId)
+                    selectedPackages.clear()
+                    isMultiSelectMode.value = false
+                    showMoveCategoryDialog.value = false
+                }
             }
         )
     }
@@ -1001,11 +1080,12 @@ fun MainAppsSection(
             ignoreCollapsed = searchQuery.isNotBlank()
         )
     }
-    val sourceCategoryGroups = remember(filteredItems, apps.sourceGroups, uncategorizedTitle) {
+    val sourceCategoryGroups = remember(filteredItems, apps.sourceGroups, searchQuery, uncategorizedTitle) {
         buildHomeSourceGroups(
             items = filteredItems,
             sourceGroups = apps.sourceGroups,
-            uncategorizedTitle = uncategorizedTitle
+            uncategorizedTitle = uncategorizedTitle,
+            ignoreCollapsed = searchQuery.isNotBlank()
         )
     }
 
@@ -1158,29 +1238,13 @@ fun MainAppsSection(
                             )
                         }
 
-                        AnimatedVisibility(
-                            visible = !isReorderMode.value &&
-                                    (apps.showCategoryViewSwitcher || isCustomCategoryView),
-                            enter = MorpheAnimations.expandFadeEnter,
-                            exit = MorpheAnimations.shrinkFadeExit
-                        ) {
-                            AppGroupingToolbar(
-                                mode = appGrouping,
-                                showSwitcher = apps.showCategoryViewSwitcher,
-                                onModeChange = appActions.onCategoryViewModeChange,
-                                showAddCategory = isCustomCategoryView,
-                                onAddCategory = {
-                                    categoryNameRequest = CategoryNameRequest(category = null)
-                                },
-                                modifier = Modifier
-                                    .padding(horizontal = horizontalPadding)
-                                    .padding(bottom = 8.dp)
-                            )
-                        }
-
                         // Vertical fade overlay drawn on top of LazyColumn.
                         // The overlay is pointer-transparent so swipe gestures pass through
-                        Box(modifier = Modifier.fillMaxWidth()) {
+                        Box(
+                            modifier = Modifier
+                                .weight(1f, fill = false)
+                                .fillMaxWidth()
+                        ) {
                             LazyColumn(
                                 state = listState,
                                 modifier = Modifier.fillMaxWidth(),
@@ -1249,7 +1313,12 @@ fun MainAppsSection(
                                                 HomeCategoryHeader(
                                                     group = group,
                                                     onToggle = {
-                                                        group.id?.let(appActions.onToggleCategoryCollapsed)
+                                                        val sourceUid = group.sourceUid
+                                                        if (sourceUid != null) {
+                                                            appActions.onToggleSourceGroupCollapsed(sourceUid)
+                                                        } else {
+                                                            group.id?.let(appActions.onToggleCategoryCollapsed)
+                                                        }
                                                     },
                                                     onRename = {
                                                         val category = apps.categoryState.categories
@@ -1463,6 +1532,7 @@ fun MainAppsSection(
                                 extraBottomPadding = if (isMultibarVisible) 96.dp else 0.dp
                             )
                         }
+
                     }
 
                     // Multi-select / reorder bar - slides up from bottom
@@ -1581,7 +1651,8 @@ private fun buildHomeCategoryGroups(
 private fun buildHomeSourceGroups(
     items: List<HomeAppItem>,
     sourceGroups: List<HomeAppSourceGroup>,
-    uncategorizedTitle: String
+    uncategorizedTitle: String,
+    ignoreCollapsed: Boolean
 ): List<HomeCategoryGroup> {
     val usedPackages = mutableSetOf<String>()
 
@@ -1597,10 +1668,14 @@ private fun buildHomeSourceGroups(
         } else {
             HomeCategoryGroup(
                 id = "$SOURCE_CATEGORY_ID_PREFIX${sourceGroup.uid}",
+                sourceUid = sourceGroup.uid,
+                sourceAvatarUrl = sourceGroup.avatarUrl,
+                sourceFallbackAvatarUrl = sourceGroup.fallbackAvatarUrl,
+                sourceIsDefault = sourceGroup.isDefault,
                 title = sourceGroup.name,
                 items = sourceItems,
-                collapsed = false,
-                collapsible = false,
+                collapsed = !ignoreCollapsed && sourceGroup.collapsed,
+                collapsible = sourceGroup.collapsible,
                 editable = false
             )
         }
@@ -1626,19 +1701,16 @@ private fun AppGroupingToolbar(
     mode: HomeAppCategoryViewMode,
     showSwitcher: Boolean,
     onModeChange: (HomeAppCategoryViewMode) -> Unit,
-    showAddCategory: Boolean,
-    onAddCategory: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val allAppsLabel = stringResource(R.string.home_category_all_apps)
     val sourcesLabel = stringResource(R.string.sources)
     val customLabel = stringResource(R.string.home_category_custom)
-    val addCategoryLabel = stringResource(R.string.home_category_add)
 
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         if (showSwitcher) {
             Row(
@@ -1669,39 +1741,6 @@ private fun AppGroupingToolbar(
                 )
             }
         }
-
-        AnimatedVisibility(
-            visible = showAddCategory,
-            enter = MorpheAnimations.expandFadeEnter,
-            exit = MorpheAnimations.shrinkFadeExit
-        ) {
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                FilledTonalButton(
-                    onClick = onAddCategory,
-                    shape = RoundedCornerShape(50),
-                    contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
-                    modifier = Modifier
-                        .widthIn(max = 260.dp)
-                        .fillMaxWidth()
-                        .height(40.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Add,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp)
-                    )
-                    Spacer(Modifier.width(8.dp))
-                    Text(
-                        text = addCategoryLabel,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-            }
-        }
     }
 }
 
@@ -1713,35 +1752,14 @@ private fun AppGroupingModeButton(
     selected: Boolean,
     modifier: Modifier = Modifier
 ) {
-    val colors = if (selected) {
-        ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary
-        )
-    } else {
-        ButtonDefaults.filledTonalButtonColors()
-    }
-
-    FilledTonalButton(
+    HomeGlassPillButton(
         onClick = onClick,
-        colors = colors,
-        shape = RoundedCornerShape(50),
-        contentPadding = PaddingValues(horizontal = 8.dp),
-        modifier = modifier.height(40.dp)
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            modifier = Modifier.size(18.dp)
-        )
-        Spacer(Modifier.width(4.dp))
-        Text(
-            text = label,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.labelMedium
-        )
-    }
+        text = label,
+        icon = icon,
+        modifier = modifier,
+        selected = selected,
+        compact = true
+    )
 }
 
 @Composable
@@ -1759,11 +1777,12 @@ private fun HomeCategoryHeader(
         group.items.size,
         group.items.size.toString()
     )
-    val headerShape = RoundedCornerShape(18.dp)
-    val containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.38f)
-    val contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+    val headerShape = RoundedCornerShape(8.dp)
+    val containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.16f)
+    val contentColor = MaterialTheme.colorScheme.onSurface
+    val mutedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+    val isSourceGroup = group.sourceUid != null
     val leadingIcon = when {
-        group.id?.startsWith(SOURCE_CATEGORY_ID_PREFIX) == true -> Icons.Outlined.Source
         group.collapsed -> Icons.Outlined.Folder
         else -> Icons.Outlined.FolderOpen
     }
@@ -1775,49 +1794,62 @@ private fun HomeCategoryHeader(
         color = containerColor,
         contentColor = contentColor,
         shape = headerShape,
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.18f))
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.10f))
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 14.dp, vertical = 10.dp),
+                .heightIn(min = 44.dp)
+                .padding(start = 10.dp, end = 6.dp, top = 6.dp, bottom = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .size(36.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.16f)),
-                contentAlignment = Alignment.Center
-            ) {
+            if (isSourceGroup) {
+                SourceCategoryIcon(
+                    group = group,
+                    modifier = Modifier.size(22.dp)
+                )
+            } else {
                 Icon(
                     imageVector = leadingIcon,
                     contentDescription = null,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(18.dp),
+                    tint = mutedContentColor
                 )
             }
-            Column(modifier = Modifier.weight(1f)) {
+
+            Row(
+                modifier = Modifier.weight(1f),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
                 Text(
                     text = group.title,
                     style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.SemiBold,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f, fill = false)
                 )
                 Text(
                     text = countText,
                     style = MaterialTheme.typography.labelSmall,
-                    color = contentColor.copy(alpha = 0.72f)
+                    color = mutedContentColor,
+                    maxLines = 1
                 )
             }
 
             if (group.editable) {
                 Box {
-                    IconButton(onClick = { menuExpanded = true }) {
+                    IconButton(
+                        onClick = { menuExpanded = true },
+                        modifier = Modifier.size(32.dp)
+                    ) {
                         Icon(
                             imageVector = Icons.Outlined.MoreVert,
-                            contentDescription = stringResource(R.string.more_options)
+                            contentDescription = stringResource(R.string.more_options),
+                            modifier = Modifier.size(18.dp),
+                            tint = mutedContentColor
                         )
                     }
                     DropdownMenu(
@@ -1847,15 +1879,15 @@ private fun HomeCategoryHeader(
             if (dragHandleModifier != null) {
                 Box(
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(32.dp)
                         .then(dragHandleModifier),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.DragHandle,
                         contentDescription = stringResource(R.string.reorder_list),
-                        modifier = Modifier.size(22.dp),
-                        tint = contentColor.copy(alpha = 0.72f)
+                        modifier = Modifier.size(20.dp),
+                        tint = mutedContentColor
                     )
                 }
             }
@@ -1867,8 +1899,62 @@ private fun HomeCategoryHeader(
                         stringResource(R.string.expand)
                     else
                         stringResource(R.string.collapse),
-                    modifier = Modifier.size(22.dp),
-                    tint = contentColor.copy(alpha = 0.72f)
+                    modifier = Modifier.size(20.dp),
+                    tint = mutedContentColor
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun SourceCategoryIcon(
+    group: HomeCategoryGroup,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier,
+        shape = CircleShape,
+        color = if (group.sourceIsDefault)
+            Color.White
+        else
+            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.55f)
+    ) {
+        when {
+            group.sourceIsDefault -> {
+                val context = LocalContext.current
+                Image(
+                    painter = rememberDrawablePainter(
+                        drawable = AppCompatResources.getDrawable(
+                            context,
+                            R.drawable.ic_launcher_foreground
+                        )
+                    ),
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .graphicsLayer {
+                            scaleX = 1.5f
+                            scaleY = 1.5f
+                        }
+                )
+            }
+
+            group.sourceAvatarUrl != null -> {
+                RemoteAvatar(
+                    url = group.sourceAvatarUrl,
+                    fallbackUrl = group.sourceFallbackAvatarUrl,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            else -> {
+                Icon(
+                    imageVector = Icons.Outlined.Source,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(4.dp)
                 )
             }
         }
@@ -1917,8 +2003,22 @@ private fun CategoryNameDialog(
 private fun MoveToCategoryDialog(
     categories: List<HomeAppCategory>,
     onDismiss: () -> Unit,
-    onSelect: (String?) -> Unit
+    onSelect: (String?) -> Unit,
+    onCreateAndSelect: (String) -> Unit
 ) {
+    var showCreateDialog by remember { mutableStateOf(false) }
+
+    if (showCreateDialog) {
+        CategoryNameDialog(
+            category = null,
+            onDismiss = { showCreateDialog = false },
+            onConfirm = { name ->
+                showCreateDialog = false
+                onCreateAndSelect(name)
+            }
+        )
+    }
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_category_move_selected_title),
@@ -1936,6 +2036,15 @@ private fun MoveToCategoryDialog(
                 .padding(vertical = MorpheDefaults.ContentPadding),
             verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
         ) {
+            SettingsItemCard(onClick = { showCreateDialog = true }, borderWidth = 1.dp) {
+                IconTextRow(
+                    modifier = Modifier.padding(MorpheDefaults.ContentPadding),
+                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Add) },
+                    title = stringResource(R.string.home_category_add),
+                    trailingContent = null
+                )
+            }
+
             SettingsItemCard(onClick = { onSelect(null) }, borderWidth = 1.dp) {
                 IconTextRow(
                     modifier = Modifier.padding(MorpheDefaults.ContentPadding),
@@ -3692,13 +3801,34 @@ private fun HomeGlassPillButton(
     onClick: () -> Unit,
     text: String,
     modifier: Modifier = Modifier,
-    icon: ImageVector? = null
+    icon: ImageVector? = null,
+    selected: Boolean = false,
+    compact: Boolean = false
 ) {
     val view = LocalView.current
     val shape = RoundedCornerShape(20.dp)
     val isDark = isSystemInDarkTheme()
     val backgroundAlpha = if (isDark) 0.35f else 0.6f
     val borderAlpha = if (isDark) 0.4f else 0.6f
+    val backgroundColor = if (selected) {
+        MaterialTheme.colorScheme.primaryContainer.copy(alpha = if (isDark) 0.55f else 0.72f)
+    } else {
+        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha)
+    }
+    val borderColor = if (selected) {
+        MaterialTheme.colorScheme.primary.copy(alpha = if (isDark) 0.55f else 0.45f)
+    } else {
+        MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)
+    }
+    val contentColor = if (selected) {
+        MaterialTheme.colorScheme.onPrimaryContainer
+    } else {
+        MaterialTheme.colorScheme.onSurfaceVariant
+    }
+    val height = if (compact) 44.dp else 48.dp
+    val horizontalPadding = if (compact) 8.dp else 16.dp
+    val spacing = if (compact) 6.dp else 8.dp
+    val textStyle = if (compact) MaterialTheme.typography.labelMedium else MaterialTheme.typography.titleMedium
 
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
@@ -3714,12 +3844,12 @@ private fun HomeGlassPillButton(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(48.dp)
+            .height(height)
             .graphicsLayer { scaleX = scale; scaleY = scale; clip = true }
             .clip(shape)
-            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha))
+            .background(backgroundColor)
             .border(
-                BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)),
+                BorderStroke(1.dp, borderColor),
                 shape = shape
             )
             .clickable(
@@ -3732,22 +3862,26 @@ private fun HomeGlassPillButton(
         contentAlignment = Alignment.Center
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+            horizontalArrangement = Arrangement.spacedBy(spacing),
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(horizontal = horizontalPadding)
         ) {
             if (icon != null) {
                 Icon(
                     imageVector = icon,
                     contentDescription = null,
                     modifier = Modifier.size(16.dp),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    tint = contentColor
                 )
             }
             Text(
                 text = text,
-                style = MaterialTheme.typography.titleMedium,
+                style = textStyle,
                 fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = contentColor,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.Center
             )
         }
     }

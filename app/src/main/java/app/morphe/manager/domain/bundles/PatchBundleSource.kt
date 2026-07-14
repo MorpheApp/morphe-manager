@@ -85,6 +85,25 @@ sealed class PatchBundleSource(
         val PatchBundleSource.isDefault inline get() = uid == 0
         val PatchBundleSource.asRemoteOrNull inline get() = this as? RemotePatchBundle
 
+        data class AvatarUrls(
+            val primary: String?,
+            val fallback: String?
+        )
+
+        val PatchBundleSource.avatarUrls: AvatarUrls get() {
+            val bundle = bundleAvatarUrl
+            val github = githubAvatarUrl
+            val gitlab = gitlabAvatarUrl
+            return AvatarUrls(
+                primary = bundle ?: github ?: gitlab,
+                fallback = when {
+                    bundle != null -> github ?: gitlab
+                    github != null -> gitlab
+                    else -> null
+                }
+            )
+        }
+
         /**
          * Get custom bundle avatar URL (patches-bundle.png next to patches-bundle.json).
          * Returns null if the endpoint does not contain patches-bundle.json.
