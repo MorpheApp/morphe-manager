@@ -11,7 +11,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
@@ -211,7 +210,6 @@ fun InstallerSelectionDialog(
     // Localized strings for accessibility
     val selectedState = stringResource(R.string.selected)
     val notSelectedState = stringResource(R.string.not_selected)
-    val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
 
     MorpheDialog(
@@ -288,96 +286,36 @@ fun InstallerSelectionDialog(
                 enter = MorpheAnimations.expandFadeEnter,
                 exit = MorpheAnimations.shrinkFadeExit
             ) {
-                Column {
-                    HorizontalDivider(modifier = Modifier.padding(top = 4.dp))
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(MaterialTheme.shapes.medium)
-                            .toggleable(
-                                value = autoInstallEnabled,
-                                role = Role.Switch,
-                                onValueChange = { newValue ->
-                                    onAutoInstallToggle?.invoke(newValue)
-                                    // Mutually exclusive with Prompt on install
-                                    if (newValue && installerPromptEnabled) {
-                                        onInstallerPromptToggle?.invoke(false)
-                                    }
-                                }
-                            )
-                            .semantics {
-                                stateDescription = if (autoInstallEnabled) enabledState else disabledState
-                            }
-                            .padding(vertical = 12.dp, horizontal = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        MorpheIcon(icon = Icons.Outlined.Bolt)
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = stringResource(R.string.settings_auto_install_with_shizuku),
-                                style = MaterialTheme.typography.titleSmall,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                            Text(
-                                text = stringResource(R.string.settings_auto_install_with_shizuku_description),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
+                MorpheDialogToggleRow(
+                    icon = Icons.Outlined.Bolt,
+                    title = stringResource(R.string.settings_auto_install_with_shizuku),
+                    description = stringResource(R.string.settings_auto_install_with_shizuku_description),
+                    checked = autoInstallEnabled,
+                    onCheckedChange = { newValue ->
+                        onAutoInstallToggle?.invoke(newValue)
+                        // Mutually exclusive with Prompt on install
+                        if (newValue && installerPromptEnabled) {
+                            onInstallerPromptToggle?.invoke(false)
                         }
-                        MorpheSwitch(
-                            checked = autoInstallEnabled,
-                            onCheckedChange = null
-                        )
                     }
-                }
+                )
             }
 
             // Prompt on install toggle
             if (onInstallerPromptToggle != null) {
-                Column {
-                    HorizontalDivider(modifier = Modifier.padding(top = 4.dp))
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(MaterialTheme.shapes.medium)
-                            .toggleable(
-                                value = installerPromptEnabled,
-                                role = Role.Switch,
-                                onValueChange = { newValue ->
-                                    onInstallerPromptToggle(newValue)
-                                    // Mutually exclusive with Auto-install
-                                    if (newValue && autoInstallEnabled) {
-                                        onAutoInstallToggle?.invoke(false)
-                                    }
-                                }
-                            )
-                            .semantics {
-                                stateDescription = if (installerPromptEnabled) enabledState else disabledState
-                            }
-                            .padding(vertical = 12.dp, horizontal = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        MorpheIcon(icon = Icons.Outlined.Android)
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = stringResource(R.string.settings_prompt_installer_on_install),
-                                style = MaterialTheme.typography.titleSmall,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                            Text(
-                                text = stringResource(R.string.settings_prompt_installer_on_install_description),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
+                MorpheDialogToggleRow(
+                    icon = Icons.Outlined.Android,
+                    title = stringResource(R.string.settings_prompt_installer_on_install),
+                    description = stringResource(R.string.settings_prompt_installer_on_install_description),
+                    checked = installerPromptEnabled,
+                    onCheckedChange = { newValue ->
+                        onInstallerPromptToggle(newValue)
+                        // Mutually exclusive with Auto-install
+                        if (newValue && autoInstallEnabled) {
+                            onAutoInstallToggle?.invoke(false)
                         }
-                        MorpheSwitch(
-                            checked = installerPromptEnabled,
-                            onCheckedChange = null
-                        )
                     }
-                }
+                )
             }
         }
     }

@@ -122,6 +122,7 @@ fun AppearanceTabContent(
                     )
                 }
             )
+            MorpheSettingsDivider()
             SettingsItem(
                 onClick = { showAppGroupingDialog.value = true },
                 title = stringResource(R.string.settings_appearance_app_grouping),
@@ -288,10 +289,7 @@ fun AppearanceTabContent(
         AppGroupingDialog(
             current = appGrouping,
             showSwitcher = showAppGroupingSwitcher,
-            onSelect = { mode ->
-                homeAppButtonPrefs.setCategoryViewMode(mode)
-                showAppGroupingDialog.value = false
-            },
+            onSelect = homeAppButtonPrefs::setCategoryViewMode,
             onShowSwitcherChange = homeAppButtonPrefs::setShowCategoryViewSwitcher,
             onDismiss = { showAppGroupingDialog.value = false }
         )
@@ -347,9 +345,6 @@ private fun AppGroupingDialog(
     onShowSwitcherChange: (Boolean) -> Unit,
     onDismiss: () -> Unit
 ) {
-    val enabledState = stringResource(R.string.enabled)
-    val disabledState = stringResource(R.string.disabled)
-
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_appearance_app_grouping),
@@ -375,26 +370,14 @@ private fun AppGroupingDialog(
                     onSelect = { onSelect(mode) }
                 )
             }
-            SettingsItemCard(
-                onClick = { onShowSwitcherChange(!showSwitcher) },
-                borderWidth = 1.dp
-            ) {
-                IconTextRow(
-                    modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.SwapHoriz) },
-                    title = stringResource(R.string.settings_appearance_app_grouping_show_selector),
-                    description = stringResource(R.string.settings_appearance_app_grouping_show_selector_description),
-                    trailingContent = {
-                        MorpheSwitch(
-                            checked = showSwitcher,
-                            onCheckedChange = null,
-                            modifier = Modifier.semantics {
-                                stateDescription = if (showSwitcher) enabledState else disabledState
-                            }
-                        )
-                    }
-                )
-            }
+
+            MorpheDialogToggleRow(
+                icon = Icons.Outlined.SwapHoriz,
+                title = stringResource(R.string.settings_appearance_app_grouping_show_selector),
+                description = stringResource(R.string.settings_appearance_app_grouping_show_selector_description),
+                checked = showSwitcher,
+                onCheckedChange = onShowSwitcherChange
+            )
         }
     }
 }
