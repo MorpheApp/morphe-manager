@@ -8,6 +8,7 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.installed.SelectionPayload
 import app.morphe.manager.util.PatchSelection
+import app.morphe.manager.util.PM
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -19,7 +20,8 @@ private const val TAG = "Morphe InstalledAppRepository"
 class InstalledAppRepository(
     db: AppDatabase,
     private val patchBundleRepository: PatchBundleRepository,
-    private val filesystem: Filesystem
+    private val filesystem: Filesystem,
+    private val pm: PM
 ) {
     private val dao = db.installedAppDao()
     private val bundleDao = db.patchBundleDao()
@@ -111,27 +113,45 @@ class InstalledAppRepository(
             Log.i(TAG, "Reconciled version for ${app.currentPackageName}: ${app.version} → $newVersion")
         }
 
-    /**
-     * Delete installed app record and its saved patched APK file from storage.
-     * Looks up the file by both currentPackageName and originalPackageName to handle renamed packages.
-     */
-    suspend fun delete(installedApp: InstalledApp) = withContext(Dispatchers.IO) {
-        // Find the saved patched APK file
-        val savedFile = listOf(
+    private fun patchedApkFiles(installedApp: InstalledApp) =
+        listOf(
             filesystem.getPatchedAppFile(installedApp.currentPackageName, installedApp.version),
             filesystem.getPatchedAppFile(installedApp.originalPackageName, installedApp.version)
-        ).distinct().firstOrNull { it.exists() }
+        ).distinctBy { it.absolutePath }
 
-        if (savedFile != null) {
-            val deleted = runCatching { savedFile.delete() }.getOrElse { false }
-            if (deleted) {
+    private fun deletePatchedApkFiles(installedApp: InstalledApp) {
+        val existingFiles = patchedApkFiles(installedApp).filter { it.exists() }
+        if (existingFiles.isEmpty()) {
+            Log.d(TAG, "No saved APK found for ${installedApp.currentPackageName} v${installedApp.version}")
+            return
+        }
+
+        existingFiles.forEach { savedFile ->
+            if (runCatching { savedFile.delete() }.getOrElse { false }) {
                 Log.d(TAG, "Deleted patched APK: ${savedFile.absolutePath}")
             } else {
                 Log.w(TAG, "Failed to delete patched APK: ${savedFile.absolutePath}")
             }
-        } else {
-            Log.d(TAG, "No saved APK found for ${installedApp.currentPackageName} v${installedApp.version}")
         }
+    }
+
+    /**
+     * Delete only the saved patched APK. Keep the app record while the app is installed so it
+     * remains visible in Morphe; saved-only and uninstalled entries are removed to avoid ghosts.
+     */
+    suspend fun deletePatchedApk(installedApp: InstalledApp) = withContext(Dispatchers.IO) {
+        deletePatchedApkFiles(installedApp)
+        val isInstalled = pm.getPackageInfo(installedApp.currentPackageName) != null
+        if (installedApp.installType == InstallType.SAVED || !isInstalled) {
+            dao.delete(installedApp)
+        }
+    }
+
+    /**
+     * Delete installed app record and its saved patched APK file from storage.
+     */
+    suspend fun delete(installedApp: InstalledApp) = withContext(Dispatchers.IO) {
+        deletePatchedApkFiles(installedApp)
 
         dao.delete(installedApp)
     }

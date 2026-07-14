@@ -283,14 +283,14 @@ private fun PatchedApksContent(
             onDeleteSelectedConfirm = { selectedItems ->
                 val appsToDelete = selectedItems.mapNotNull { appByKey[it.selectionKey] }
                 scope.launch {
-                    appsToDelete.forEach { repository.delete(it) }
+                    appsToDelete.forEach { repository.deletePatchedApk(it) }
                     context.toast(apksDeletedAllText)
                 }
             },
             onDeleteAllConfirm = {
                 val appsToDelete = apkItems.map { it.installedApp }
                 scope.launch {
-                    appsToDelete.forEach { repository.delete(it) }
+                    appsToDelete.forEach { repository.deletePatchedApk(it) }
                     context.toast(apksDeletedAllText)
                 }
             }
@@ -309,7 +309,7 @@ private fun PatchedApksContent(
             onDismiss = { itemToDelete.value = null },
             onConfirm = {
                 scope.launch {
-                    repository.delete(itemToDelete.value!!)
+                    repository.deletePatchedApk(itemToDelete.value!!)
                     context.toast(patchedApksDeletedText)
                     itemToDelete.value = null
                 }
