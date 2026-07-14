@@ -41,6 +41,7 @@ fun FilesAndStorageSection(
     val isTV = remember { context.isAndroidTv() }
     val useExpertMode by settingsViewModel.prefs.useExpertMode.getAsState()
     val useCustomFilePicker by settingsViewModel.prefs.useCustomFilePicker.getAsState()
+    val deletePatchedApkAfterInstall by settingsViewModel.prefs.deletePatchedApkAfterInstall.getAsState()
     val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
 
@@ -71,6 +72,26 @@ fun FilesAndStorageSection(
                 title = stringResource(R.string.settings_system_storage_management_title),
                 subtitle = stringResource(R.string.settings_system_storage_management_description),
                 leadingContent = { MorpheIcon(icon = Icons.Outlined.Storage) }
+            )
+
+            MorpheSettingsDivider()
+
+            SettingsItem(
+                onClick = {
+                    settingsViewModel.setDeletePatchedApkAfterInstall(!deletePatchedApkAfterInstall)
+                },
+                title = stringResource(R.string.settings_system_delete_patched_apk_after_install),
+                subtitle = stringResource(R.string.settings_system_delete_patched_apk_after_install_description),
+                leadingContent = { MorpheIcon(icon = Icons.Outlined.DeleteSweep) },
+                trailingContent = {
+                    MorpheSwitch(
+                        checked = deletePatchedApkAfterInstall,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (deletePatchedApkAfterInstall) enabledState else disabledState
+                        }
+                    )
+                }
             )
 
             // Patch Selections (Expert mode only)

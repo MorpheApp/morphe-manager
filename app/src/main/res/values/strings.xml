@@ -792,6 +792,8 @@ The image dimensions must be as follows:
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Storage management</string>
     <string name="settings_system_storage_management_description">Review disk usage and clear cached files</string>
+    <string name="settings_system_delete_patched_apk_after_install">Delete patched APK after install</string>
+    <string name="settings_system_delete_patched_apk_after_install_description">Frees storage after successful installs. Original APKs and patch selections are kept for repatching</string>
     <string name="settings_system_storage_keystore_title">Signing keystore</string>
     <string name="settings_system_storage_app_data_title">App data</string>
     <string name="settings_system_storage_patch_bundles_title">Patch bundles</string>

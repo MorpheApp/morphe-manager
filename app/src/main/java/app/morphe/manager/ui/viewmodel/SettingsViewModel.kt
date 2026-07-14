@@ -215,6 +215,10 @@ class SettingsViewModel(
         prefs.autoInstallWithShizuku.update(enabled)
     }
 
+    fun setDeletePatchedApkAfterInstall(enabled: Boolean) = viewModelScope.launch {
+        prefs.deletePatchedApkAfterInstall.update(enabled)
+    }
+
     fun setUseCustomFilePicker(enabled: Boolean) = viewModelScope.launch {
         prefs.useCustomFilePicker.update(enabled)
         prefs.customFilePickerUserConfigured.update(true)

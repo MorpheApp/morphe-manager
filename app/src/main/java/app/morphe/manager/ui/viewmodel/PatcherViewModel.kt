@@ -616,17 +616,24 @@ class PatcherViewModel(
             }
         }
 
-        // Save new version
+        // Explicit exports and root-mounted apps need a persistent patched APK. For regular
+        // installs, users can opt to keep only the original APK and patch configuration.
         val savedCopy = fs.getPatchedAppFile(finalPackageName, finalVersion)
-        try {
-            savedCopy.parentFile?.mkdirs()
-            outputFile.copyTo(savedCopy, overwrite = true)
-        } catch (error: IOException) {
-            if (installType == InstallType.SAVED) {
-                Log.e(TAG, "Failed to copy patched APK for later", error)
-                return@withContext false
-            } else {
-                Log.w(TAG, "Failed to update saved copy for $finalPackageName", error)
+        val retainPatchedApk = installType == InstallType.SAVED ||
+                installType == InstallType.MOUNT ||
+                !prefs.deletePatchedApkAfterInstall.get()
+
+        if (retainPatchedApk) {
+            try {
+                savedCopy.parentFile?.mkdirs()
+                outputFile.copyTo(savedCopy, overwrite = true)
+            } catch (error: IOException) {
+                if (installType == InstallType.SAVED) {
+                    Log.e(TAG, "Failed to copy patched APK for later", error)
+                    return@withContext false
+                } else {
+                    Log.w(TAG, "Failed to update saved copy for $finalPackageName", error)
+                }
             }
         }
 
@@ -661,7 +668,16 @@ class PatcherViewModel(
         appliedSelection = sanitizedSelection
         appliedOptions = sanitizedOptions
 
-        savedPatchedApp = savedPatchedApp || installType == InstallType.SAVED || savedCopy.exists()
+        // Delete only after all repatching metadata has been persisted successfully.
+        if (!retainPatchedApk && savedCopy.exists()) {
+            if (savedCopy.delete()) {
+                Log.d(TAG, "Deleted patched APK after successful install: ${savedCopy.name}")
+            } else {
+                Log.w(TAG, "Failed to delete patched APK after install: ${savedCopy.name}")
+            }
+        }
+
+        savedPatchedApp = savedCopy.exists()
         true
     }
 

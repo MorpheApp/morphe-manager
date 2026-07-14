@@ -82,6 +82,7 @@ class PreferencesManager(
     val installerCustomComponents = stringSetPreference("installer_custom_components", emptySet())
     val installerHiddenComponents = stringSetPreference("installer_hidden_components", emptySet())
     val autoInstallWithShizuku = booleanPreference("auto_install_with_shizuku", false)
+    val deletePatchedApkAfterInstall = booleanPreference("delete_patched_apk_after_install", false)
 
     val useProcessRuntime = booleanPreference(
         "process_runtime", // Old key was 'use_process_runtime' and may have the wrong default for some devices.
@@ -180,6 +181,7 @@ class PreferencesManager(
         val installerPrimary: String? = null,
         val installerCustomComponents: Set<String>? = null,
         val installerHiddenComponents: Set<String>? = null,
+        val deletePatchedApkAfterInstall: Boolean? = null,
         val keystoreAlias: String? = null,
         val keystorePass: String? = null,
         val keystorePassword: String? = null,
@@ -233,6 +235,7 @@ class PreferencesManager(
         installerPrimary = installerPrimary.get(),
         installerCustomComponents = installerCustomComponents.get(),
         installerHiddenComponents = installerHiddenComponents.get(),
+        deletePatchedApkAfterInstall = deletePatchedApkAfterInstall.get(),
         keystoreAlias = keystoreAlias.get(),
         keystorePass = keystorePass.get(),
         keystorePassword = keystorePassword.get().takeIf { it.isNotEmpty() },
@@ -272,6 +275,7 @@ class PreferencesManager(
         snapshot.installerPrimary?.let { installerPrimary.value = it }
         snapshot.installerCustomComponents?.let { installerCustomComponents.value = it }
         snapshot.installerHiddenComponents?.let { installerHiddenComponents.value = it }
+        snapshot.deletePatchedApkAfterInstall?.let { deletePatchedApkAfterInstall.value = it }
         snapshot.keystoreAlias?.let { keystoreAlias.value = it }
         snapshot.keystorePass?.let { keystorePass.value = it }
         snapshot.keystorePassword?.let { keystorePassword.value = it }
