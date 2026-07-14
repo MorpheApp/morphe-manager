@@ -545,7 +545,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_app_grouping_sources_description">Group apps by patch source</string>
     <string name="settings_appearance_app_grouping_custom_description">Group apps into your own sections</string>
     <string name="settings_appearance_app_grouping_show_selector">Show selector on home screen</string>
-    <string name="settings_appearance_app_grouping_show_selector_description">Show grouping controls on the home screen</string>
+    <string name="settings_appearance_app_grouping_show_selector_description">Adds a mode switch to the home screen footer</string>
+    <string name="settings_appearance_app_grouping_subtitle_with_selector">%s (selector shown)</string>
 
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App icon</string>

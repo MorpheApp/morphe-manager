@@ -8,8 +8,8 @@ package app.morphe.manager.ui.screen.home
 import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.activity.compose.BackHandler
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
@@ -20,11 +20,7 @@ import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -94,6 +90,12 @@ private data class SwipeActionConfig(
     val contentColor: Color
 )
 
+/**
+ * UI-side group backing one collapsible section in the home list. Represents either a
+ * user-defined category (has [id], [editable] true, no source fields), a source group
+ * (has [sourceUid] and avatar fields, [editable] false), or the uncategorized bucket
+ * ([id] null, [collapsible] false).
+ */
 private data class HomeCategoryGroup(
     val id: String?,
     val sourceUid: Int? = null,
@@ -335,6 +337,10 @@ private fun AdaptiveContent(
     }
     val showGroupingFooter = !isAppsEmpty && apps.showCategoryViewSwitcher
     val showOtherAppsFooter = !isAppsEmpty && chromeFlags.showOtherAppsButton
+    // Grouped views reserve the full list area so the footer keeps a stable position when
+    // groups expand or collapse; the flat All-apps view lets the list wrap to its content
+    // so the greeting and cards center together as one block
+    val isGroupedAppView = apps.categoryViewMode != HomeAppCategoryViewMode.ALL_APPS
 
     Column(modifier = Modifier.fillMaxSize()) {
         if (useTwoColumns) {
@@ -376,7 +382,7 @@ private fun AdaptiveContent(
                         )
                         Spacer(modifier = Modifier.height(itemSpacing))
                     }
-                    Box(modifier = Modifier.weight(1f)) {
+                    Box(modifier = Modifier.weight(1f, fill = isGroupedAppView)) {
                         MainAppsSection(
                             apps = apps,
                             appActions = appActions,
@@ -386,14 +392,14 @@ private fun AdaptiveContent(
                             maxCardWidth = maxCardWidth,
                             onboardingState = onboardingState,
                             showFadeOverlay = false,
-                            modifier = Modifier.fillMaxSize()
+                            fillHeight = isGroupedAppView,
+                            modifier = if (isGroupedAppView) Modifier.fillMaxSize() else Modifier.fillMaxWidth()
                         )
                     }
                     HomeFooterControls(
                         showOtherApps = showOtherAppsFooter,
                         showGroupingSelector = showGroupingFooter,
                         mode = apps.categoryViewMode,
-                        showSwitcher = apps.showCategoryViewSwitcher,
                         onOtherAppsClick = chromeActions.onOtherAppsClick,
                         onModeChange = appActions.onCategoryViewModeChange,
                         itemSpacing = itemSpacing,
@@ -423,7 +429,7 @@ private fun AdaptiveContent(
                 }
 
                 // Section 3: Scrollable app buttons
-                Box(modifier = Modifier.weight(1f)) {
+                Box(modifier = Modifier.weight(1f, fill = isGroupedAppView)) {
                     MainAppsSection(
                         apps = apps,
                         appActions = appActions,
@@ -433,7 +439,8 @@ private fun AdaptiveContent(
                         horizontalPadding = contentPadding,
                         maxCardWidth = maxCardWidth,
                         onboardingState = onboardingState,
-                        modifier = Modifier.fillMaxSize()
+                        fillHeight = isGroupedAppView,
+                        modifier = if (isGroupedAppView) Modifier.fillMaxSize() else Modifier.fillMaxWidth()
                     )
                 }
                 // Section 4: footer controls - hidden when no apps are available
@@ -445,7 +452,6 @@ private fun AdaptiveContent(
                         showOtherApps = showOtherAppsFooter,
                         showGroupingSelector = showGroupingFooter,
                         mode = apps.categoryViewMode,
-                        showSwitcher = apps.showCategoryViewSwitcher,
                         onOtherAppsClick = chromeActions.onOtherAppsClick,
                         onModeChange = appActions.onCategoryViewModeChange,
                         itemSpacing = itemSpacing,
@@ -460,12 +466,16 @@ private fun AdaptiveContent(
     }
 }
 
+/**
+ * Fixed area below the app list that hosts the "Other apps" button and the optional
+ * grouping-mode switcher. Kept as one composable so both children share a single Column
+ * and animate in step.
+ */
 @Composable
 private fun HomeFooterControls(
     showOtherApps: Boolean,
     showGroupingSelector: Boolean,
     mode: HomeAppCategoryViewMode,
-    showSwitcher: Boolean,
     onOtherAppsClick: () -> Unit,
     onModeChange: (HomeAppCategoryViewMode) -> Unit,
     itemSpacing: Dp,
@@ -491,7 +501,6 @@ private fun HomeFooterControls(
         AppGroupingFooter(
             visible = showGroupingSelector,
             mode = mode,
-            showSwitcher = showSwitcher,
             onModeChange = onModeChange,
             modifier = Modifier
                 .fillMaxWidth()
@@ -503,11 +512,11 @@ private fun HomeFooterControls(
     }
 }
 
+/** Thin wrapper that fades [AppGroupingToolbar] in and out with the standard home animations. */
 @Composable
 private fun AppGroupingFooter(
     visible: Boolean,
     mode: HomeAppCategoryViewMode,
-    showSwitcher: Boolean,
     onModeChange: (HomeAppCategoryViewMode) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -518,7 +527,6 @@ private fun AppGroupingFooter(
     ) {
         AppGroupingToolbar(
             mode = mode,
-            showSwitcher = showSwitcher,
             onModeChange = onModeChange,
             modifier = modifier
         )
@@ -983,7 +991,11 @@ fun MainAppsSection(
     horizontalPadding: Dp = 0.dp,
     maxCardWidth: Dp = 500.dp,
     onboardingState: OnboardingState? = null,
-    showFadeOverlay: Boolean = true
+    showFadeOverlay: Boolean = true,
+    // When false, the section wraps its content vertically so the parent can center it as a
+    // single block together with the greeting; when true, it takes the full available height
+    // so the footer keeps a stable position while groups expand or collapse.
+    fillHeight: Boolean = true
 ) {
     // Aliases for values used many times in the body
     val homeAppItems = apps.visible
@@ -1198,6 +1210,9 @@ fun MainAppsSection(
         }
         return null
     }
+    // Two reorder states share `listState`: app cards drag only in isReorderMode,
+    // category headers drag only in CUSTOM view via editable headers. They are never
+    // active at the same time, so the shared list state does not double-handle drags.
     val categoryReorderableState = rememberReorderableLazyListState(listState) { from, to ->
         val fromId = categoryIdAtListIndex(from.index) ?: return@rememberReorderableLazyListState
         val toId = categoryIdAtListIndex(to.index) ?: return@rememberReorderableLazyListState
@@ -1284,9 +1299,11 @@ fun MainAppsSection(
                 Box(
                     modifier = Modifier
                         .widthIn(max = maxCardWidth)
-                        .fillMaxSize()
+                        .then(if (fillHeight) Modifier.fillMaxSize() else Modifier.fillMaxWidth())
                 ) {
-                    Column(modifier = Modifier.fillMaxSize()) {
+                    Column(
+                        modifier = if (fillHeight) Modifier.fillMaxSize() else Modifier.fillMaxWidth()
+                    ) {
                         // Search bar
                         AnimatedVisibility(
                             visible = searchState.visible,
@@ -1306,15 +1323,24 @@ fun MainAppsSection(
                         // Vertical fade overlay drawn on top of LazyColumn.
                         // The overlay is pointer-transparent so swipe gestures pass through
                         Box(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxWidth()
+                            modifier = if (fillHeight) {
+                                Modifier.weight(1f).fillMaxWidth()
+                            } else {
+                                Modifier.fillMaxWidth()
+                            }
                         ) {
                             LazyColumn(
                                 state = listState,
-                                modifier = Modifier.fillMaxSize(),
+                                modifier = if (fillHeight) Modifier.fillMaxSize() else Modifier.fillMaxWidth(),
                                 horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(itemSpacing),
+                                // Center items vertically in the flat All-apps view when the list
+                                // is shorter than the viewport; grouped views stay top-aligned so
+                                // headers keep a stable position when groups expand/collapse
+                                verticalArrangement = if (isGroupedAppView) {
+                                    Arrangement.spacedBy(itemSpacing)
+                                } else {
+                                    Arrangement.spacedBy(itemSpacing, Alignment.CenterVertically)
+                                },
                                 contentPadding = PaddingValues(
                                     start = horizontalPadding,
                                     end = horizontalPadding,
@@ -1365,16 +1391,17 @@ fun MainAppsSection(
                                         }
                                     }
                                 } else if (isGroupedAppView) {
+                                    // isGroupedAppView already excludes ALL_APPS, so the switch
+                                    // only needs to distinguish between SOURCES and CUSTOM
                                     val groups = when (appGrouping) {
-                                        HomeAppCategoryViewMode.ALL_APPS -> emptyList()
                                         HomeAppCategoryViewMode.SOURCES -> sourceCategoryGroups
-                                        HomeAppCategoryViewMode.CUSTOM -> categoryGroups
+                                        else -> categoryGroups
                                     }
 
                                     groups.forEach { group ->
                                         val headerKey = "category_${group.id ?: "uncategorized"}"
                                         item(key = headerKey) {
-                                            val headerContent: @Composable (Modifier?) -> Unit = { dragHandleModifier ->
+                                            val headerContent: @Composable ((@Composable () -> Unit)?) -> Unit = { dragHandle ->
                                                 HomeCategoryHeader(
                                                     group = group,
                                                     onToggle = {
@@ -1395,20 +1422,22 @@ fun MainAppsSection(
                                                     onDelete = {
                                                         group.id?.let(appActions.onDeleteCategory)
                                                     },
-                                                    dragHandleModifier = dragHandleModifier,
-                                                    modifier = Modifier.animateItem()
+                                                    modifier = Modifier.animateItem(),
+                                                    dragHandle = dragHandle
                                                 )
                                             }
 
                                             if (group.editable) {
                                                 ReorderableItem(categoryReorderableState, key = headerKey) { _ ->
-                                                    headerContent(
-                                                        Modifier.draggableHandle(
-                                                            onDragStarted = {
-                                                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                            }
+                                                    headerContent {
+                                                        CategoryHeaderDragHandle(
+                                                            modifier = Modifier.draggableHandle(
+                                                                onDragStarted = {
+                                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                                }
+                                                            )
                                                         )
-                                                    )
+                                                    }
                                                 }
                                             } else {
                                                 headerContent(null)
@@ -1416,10 +1445,10 @@ fun MainAppsSection(
                                         }
 
                                         if (!group.collapsed) {
-                                            itemsIndexed(
+                                            items(
                                                 items = group.items,
-                                                key = { _, item -> "category_${group.id ?: "uncategorized"}_${item.packageName}" }
-                                            ) { index, item ->
+                                                key = { item -> "category_${group.id ?: "uncategorized"}_${item.packageName}" }
+                                            ) { item ->
                                                 val isSelected = selectedPackages.contains(item.packageName)
                                                 DynamicAppCard(
                                                     item = item,
@@ -1675,6 +1704,11 @@ private fun ShowHiddenAppsButton(
     )
 }
 
+/**
+ * Bucket [items] into the user's custom categories plus an uncategorized tail.
+ * [ignoreCollapsed] is used by the search flow to force every group open so matches are
+ * visible; when true, empty categories are also dropped from the result.
+ */
 private fun buildHomeCategoryGroups(
     items: List<HomeAppItem>,
     categoryState: HomeAppCategoryState,
@@ -1713,6 +1747,12 @@ private fun buildHomeCategoryGroups(
     return groups + listOfNotNull(uncategorizedGroup)
 }
 
+/**
+ * Bucket [items] into their owning source groups plus an uncategorized tail for anything
+ * a source did not claim. Sources are consumed in the order given, so if the same package
+ * is declared by multiple sources it lands in the first one only. [ignoreCollapsed]
+ * behaves as in [buildHomeCategoryGroups].
+ */
 private fun buildHomeSourceGroups(
     items: List<HomeAppItem>,
     sourceGroups: List<HomeAppSourceGroup>,
@@ -1761,80 +1801,21 @@ private fun buildHomeSourceGroups(
     return groups + listOfNotNull(uncategorizedGroup)
 }
 
-@Composable
-private fun AppGroupingToolbar(
-    mode: HomeAppCategoryViewMode,
-    showSwitcher: Boolean,
-    onModeChange: (HomeAppCategoryViewMode) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val allAppsLabel = stringResource(R.string.home_category_all_apps)
-    val sourcesLabel = stringResource(R.string.sources)
-    val customLabel = stringResource(R.string.home_category_custom)
-
-    Column(
-        modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        if (showSwitcher) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                AppGroupingModeButton(
-                    onClick = { onModeChange(HomeAppCategoryViewMode.ALL_APPS) },
-                    icon = Icons.Outlined.Apps,
-                    label = allAppsLabel,
-                    selected = mode == HomeAppCategoryViewMode.ALL_APPS,
-                    modifier = Modifier.weight(1f)
-                )
-                AppGroupingModeButton(
-                    onClick = { onModeChange(HomeAppCategoryViewMode.SOURCES) },
-                    icon = Icons.Outlined.Source,
-                    label = sourcesLabel,
-                    selected = mode == HomeAppCategoryViewMode.SOURCES,
-                    modifier = Modifier.weight(1f)
-                )
-                AppGroupingModeButton(
-                    onClick = { onModeChange(HomeAppCategoryViewMode.CUSTOM) },
-                    icon = Icons.Outlined.Category,
-                    label = customLabel,
-                    selected = mode == HomeAppCategoryViewMode.CUSTOM,
-                    modifier = Modifier.weight(1f)
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun AppGroupingModeButton(
-    onClick: () -> Unit,
-    icon: ImageVector,
-    label: String,
-    selected: Boolean,
-    modifier: Modifier = Modifier
-) {
-    HomeGlassPillButton(
-        onClick = onClick,
-        text = label,
-        icon = icon,
-        modifier = modifier,
-        selected = selected,
-        compact = true
-    )
-}
-
+/**
+ * Row that titles one collapsible section in the home list. Renders the folder or source
+ * icon, group title, item count, an optional overflow menu for editable groups (rename or
+ * delete), an optional drag-handle slot supplied by the caller (see
+ * [CategoryHeaderDragHandle]), and a chevron mirroring the collapse state. Non-collapsible
+ * groups (uncategorized, default source) omit the chevron and are not clickable as a whole.
+ */
 @Composable
 private fun HomeCategoryHeader(
     group: HomeCategoryGroup,
     onToggle: () -> Unit,
     onRename: () -> Unit,
     onDelete: () -> Unit,
-    dragHandleModifier: Modifier? = null,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    dragHandle: (@Composable () -> Unit)? = null
 ) {
     var menuExpanded by remember { mutableStateOf(false) }
     val countText = pluralStringResource(
@@ -1941,21 +1922,7 @@ private fun HomeCategoryHeader(
                 }
             }
 
-            if (dragHandleModifier != null) {
-                Box(
-                    modifier = Modifier
-                        .size(32.dp)
-                        .then(dragHandleModifier),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.DragHandle,
-                        contentDescription = stringResource(R.string.reorder_list),
-                        modifier = Modifier.size(20.dp),
-                        tint = mutedContentColor
-                    )
-                }
-            }
+            dragHandle?.invoke()
 
             if (group.collapsible) {
                 Icon(
@@ -1972,6 +1939,11 @@ private fun HomeCategoryHeader(
     }
 }
 
+/**
+ * Circular avatar for a source-group header. The default (Morphe) source gets the app
+ * launcher icon; other sources use the remote avatar from the bundle metadata, with a
+ * neutral placeholder when no URL is available.
+ */
 @Composable
 private fun SourceCategoryIcon(
     group: HomeCategoryGroup,
@@ -2026,110 +1998,23 @@ private fun SourceCategoryIcon(
     }
 }
 
+/**
+ * Drag-handle affordance for [HomeCategoryHeader]. Passed as the slot content so the caller
+ * can attach a `draggableHandle` from the reorderable library without leaking that state
+ * into the header.
+ */
 @Composable
-private fun CategoryNameDialog(
-    category: HomeAppCategory?,
-    onDismiss: () -> Unit,
-    onConfirm: (String) -> Unit
-) {
-    var name by remember(category?.id) { mutableStateOf(category?.name.orEmpty()) }
-    val trimmed = name.trim()
-
-    MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = stringResource(
-            if (category == null) R.string.home_category_new_title
-            else R.string.home_category_rename_title
-        ),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(if (category == null) R.string.add else R.string.rename),
-                onPrimaryClick = { onConfirm(trimmed) },
-                primaryEnabled = trimmed.isNotEmpty(),
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss
-            )
-        }
+private fun CategoryHeaderDragHandle(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier.size(32.dp),
+        contentAlignment = Alignment.Center
     ) {
-        MorpheDialogTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text(stringResource(R.string.home_category_name)) },
-            leadingIcon = {
-                Icon(Icons.Outlined.Category, contentDescription = null)
-            },
-            showClearButton = true,
-            modifier = Modifier.fillMaxWidth()
+        Icon(
+            imageVector = Icons.Outlined.DragHandle,
+            contentDescription = stringResource(R.string.reorder_list),
+            modifier = Modifier.size(20.dp),
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
-    }
-}
-
-@Composable
-private fun MoveToCategoryDialog(
-    categories: List<HomeAppCategory>,
-    onDismiss: () -> Unit,
-    onSelect: (String?) -> Unit,
-    onCreateAndSelect: (String) -> Unit
-) {
-    var showCreateDialog by remember { mutableStateOf(false) }
-
-    if (showCreateDialog) {
-        CategoryNameDialog(
-            category = null,
-            onDismiss = { showCreateDialog = false },
-            onConfirm = { name ->
-                showCreateDialog = false
-                onCreateAndSelect(name)
-            }
-        )
-    }
-
-    MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = stringResource(R.string.home_category_move_selected_title),
-        footer = {
-            MorpheDialogOutlinedButton(
-                text = stringResource(R.string.close),
-                onClick = onDismiss,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = MorpheDefaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
-        ) {
-            SettingsItemCard(onClick = { showCreateDialog = true }, borderWidth = 1.dp) {
-                IconTextRow(
-                    modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Add) },
-                    title = stringResource(R.string.home_category_add),
-                    trailingContent = null
-                )
-            }
-
-            SettingsItemCard(onClick = { onSelect(null) }, borderWidth = 1.dp) {
-                IconTextRow(
-                    modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.FolderOff) },
-                    title = stringResource(R.string.home_category_uncategorized),
-                    trailingContent = null
-                )
-            }
-
-            categories.forEach { category ->
-                SettingsItemCard(onClick = { onSelect(category.id) }, borderWidth = 1.dp) {
-                    IconTextRow(
-                        modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-                        leadingContent = { MorpheIcon(icon = Icons.Outlined.Folder) },
-                        title = category.name,
-                        trailingContent = null
-                    )
-                }
-            }
-        }
     }
 }
 
@@ -2513,7 +2398,6 @@ private fun MultiSelectBar(
     actionIcon: ImageVector,
     actionContentDescription: String,
     actionDoneMessage: String,
-    onMoveToCategory: (() -> Unit)? = null,
     onCancel: () -> Unit,
     onEnterReorder: () -> Unit,
     onSaveOrder: () -> Unit,
@@ -2525,7 +2409,8 @@ private fun MultiSelectBar(
     actionColors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors(
         containerColor = MaterialTheme.colorScheme.errorContainer,
         contentColor = MaterialTheme.colorScheme.onErrorContainer
-    )
+    ),
+    onMoveToCategory: (() -> Unit)? = null
 ) {
     val effectiveReorderMode = isReorderMode && showReorderButton
 
@@ -3862,7 +3747,7 @@ fun OtherAppsSection(
  * animation, and haptic feedback. Content is either icon+text or text-only.
  */
 @Composable
-private fun HomeGlassPillButton(
+internal fun HomeGlassPillButton(
     onClick: () -> Unit,
     text: String,
     modifier: Modifier = Modifier,

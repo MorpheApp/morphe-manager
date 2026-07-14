@@ -12,24 +12,39 @@ import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFA
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlin.random.Random
 
+/**
+ * A user-defined home-screen category. [id] is a stable opaque key; [name] is the
+ * user-visible label; [collapsed] mirrors the last expand/collapse state.
+ */
 data class HomeAppCategory(
     val id: String,
     val name: String,
     val collapsed: Boolean = false
 )
 
+/**
+ * Snapshot of the custom-grouping state: the ordered list of user categories plus a
+ * package-to-category assignment map. Packages absent from [assignments] are treated as
+ * uncategorized.
+ */
 data class HomeAppCategoryState(
     val categories: List<HomeAppCategory>,
     val assignments: Map<String, String>
 )
 
+/**
+ * How the home app list is grouped. [ALL_APPS] is a flat list; [SOURCES] groups by patch
+ * source; [CUSTOM] groups by user-defined categories.
+ */
 enum class HomeAppCategoryViewMode {
     ALL_APPS,
     SOURCES,
     CUSTOM;
 
     companion object {
+        /** Parse a persisted enum name; unknown values fall back to [ALL_APPS]. */
         fun fromPreference(value: String?): HomeAppCategoryViewMode =
             entries.firstOrNull { it.name == value } ?: ALL_APPS
     }
@@ -138,16 +153,28 @@ class HomeAppButtonPreferences(context: Context) {
         _showCategoryViewSwitcher.value = show
     }
 
+    /**
+     * Create a new custom category with the given user-entered [name]. Returns the new
+     * category's opaque id, or an empty string if [name] is blank after normalization.
+     */
     fun createCategory(name: String): String {
         val trimmed = normalizeCategoryName(name) ?: return ""
         val current = _categoryState.value
-        val id = "cat_${System.currentTimeMillis().toString(36)}"
+        // Random suffix guards against millisecond-level collisions from rapid programmatic creation
+        val existingIds = current.categories.mapTo(mutableSetOf()) { it.id }
+        var id: String
+        do {
+            id = "cat_${System.currentTimeMillis().toString(36)}_${
+                Random.nextInt(0, Int.MAX_VALUE).toString(36)
+            }"
+        } while (id in existingIds)
         saveCategoryState(
             current.copy(categories = current.categories + HomeAppCategory(id, trimmed))
         )
         return id
     }
 
+    /** Rename an existing category. No-op if [categoryId] is unknown or [name] is blank. */
     fun renameCategory(categoryId: String, name: String) {
         val trimmed = normalizeCategoryName(name) ?: return
         val current = _categoryState.value
@@ -160,6 +187,10 @@ class HomeAppButtonPreferences(context: Context) {
         )
     }
 
+    /**
+     * Delete a custom category and drop any package assignments that pointed to it, so those
+     * apps fall back to uncategorized.
+     */
     fun deleteCategory(categoryId: String) {
         val current = _categoryState.value
         saveCategoryState(
@@ -170,6 +201,10 @@ class HomeAppButtonPreferences(context: Context) {
         )
     }
 
+    /**
+     * Reorder categories to match [categoryIds]. Unknown ids are ignored; categories missing
+     * from [categoryIds] are appended at the end in their original order.
+     */
     fun saveCategoryOrder(categoryIds: List<String>) {
         val current = _categoryState.value
         val byId = current.categories.associateBy { it.id }
@@ -180,6 +215,7 @@ class HomeAppButtonPreferences(context: Context) {
         )
     }
 
+    /** Flip the collapse state of a custom category. */
     fun toggleCategoryCollapsed(categoryId: String) {
         val current = _categoryState.value
         saveCategoryState(
@@ -191,6 +227,10 @@ class HomeAppButtonPreferences(context: Context) {
         )
     }
 
+    /**
+     * Flip the collapse state of a source group. The default (Morphe) source is always kept
+     * expanded, so calls with its uid are ignored.
+     */
     fun toggleSourceGroupCollapsed(sourceUid: Int) {
         if (sourceUid == DEFAULT_SOURCE_UID) return
         val current = _expandedSourceGroups.value.toMutableSet()
@@ -200,6 +240,10 @@ class HomeAppButtonPreferences(context: Context) {
         saveExpandedSourceGroups(current)
     }
 
+    /**
+     * Assign [packageNames] to [categoryId], or clear their assignment (uncategorize) when
+     * [categoryId] is null or refers to an unknown category.
+     */
     fun assignToCategory(packageNames: Set<String>, categoryId: String?) {
         val current = _categoryState.value
         val validCategoryId = categoryId?.takeIf { id -> current.categories.any { it.id == id } }

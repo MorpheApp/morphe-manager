@@ -27,12 +27,9 @@ import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.selected
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
@@ -68,8 +65,8 @@ fun AppearanceTabContent(
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
-    val appGrouping by homeAppButtonPrefs.categoryViewMode.collectAsState()
-    val showAppGroupingSwitcher by homeAppButtonPrefs.showCategoryViewSwitcher.collectAsState()
+    val appGrouping by homeAppButtonPrefs.categoryViewMode.collectAsStateWithLifecycle()
+    val showAppGroupingSwitcher by homeAppButtonPrefs.showCategoryViewSwitcher.collectAsStateWithLifecycle()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
     val randomInterval by themeViewModel.prefs.randomBackgroundInterval.getAsState()
@@ -129,7 +126,10 @@ fun AppearanceTabContent(
                 onClick = { showAppGroupingDialog.value = true },
                 title = stringResource(R.string.settings_appearance_app_grouping),
                 subtitle = if (showAppGroupingSwitcher) {
-                    stringResource(R.string.settings_appearance_app_grouping_show_selector)
+                    stringResource(
+                        R.string.settings_appearance_app_grouping_subtitle_with_selector,
+                        appGroupingTitle(appGrouping)
+                    )
                 } else {
                     appGroupingTitle(appGrouping)
                 },
@@ -347,6 +347,9 @@ private fun AppGroupingDialog(
     onShowSwitcherChange: (Boolean) -> Unit,
     onDismiss: () -> Unit
 ) {
+    val enabledState = stringResource(R.string.enabled)
+    val disabledState = stringResource(R.string.disabled)
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_appearance_app_grouping),
@@ -368,22 +371,30 @@ private fun AppGroupingDialog(
                 AppGroupingOption(
                     title = appGroupingTitle(mode),
                     description = appGroupingDescription(mode),
-                    selected = !showSwitcher && mode == current,
-                    onSelect = {
-                        onShowSwitcherChange(false)
-                        onSelect(mode)
+                    selected = mode == current,
+                    onSelect = { onSelect(mode) }
+                )
+            }
+            SettingsItemCard(
+                onClick = { onShowSwitcherChange(!showSwitcher) },
+                borderWidth = 1.dp
+            ) {
+                IconTextRow(
+                    modifier = Modifier.padding(MorpheDefaults.ContentPadding),
+                    leadingContent = { MorpheIcon(icon = Icons.Outlined.SwapHoriz) },
+                    title = stringResource(R.string.settings_appearance_app_grouping_show_selector),
+                    description = stringResource(R.string.settings_appearance_app_grouping_show_selector_description),
+                    trailingContent = {
+                        MorpheSwitch(
+                            checked = showSwitcher,
+                            onCheckedChange = null,
+                            modifier = Modifier.semantics {
+                                stateDescription = if (showSwitcher) enabledState else disabledState
+                            }
+                        )
                     }
                 )
             }
-            AppGroupingOption(
-                title = stringResource(R.string.settings_appearance_app_grouping_show_selector),
-                description = stringResource(R.string.settings_appearance_app_grouping_show_selector_description),
-                selected = showSwitcher,
-                onSelect = {
-                    onShowSwitcherChange(true)
-                    onDismiss()
-                }
-            )
         }
     }
 }

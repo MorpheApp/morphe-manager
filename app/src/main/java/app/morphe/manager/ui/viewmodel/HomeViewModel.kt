@@ -29,14 +29,9 @@ import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.manager.HomeAppButtonPreferences
-import app.morphe.manager.domain.manager.HomeAppCategoryState
-import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
-import app.morphe.manager.domain.manager.HomeAppSortMode
-import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.network.api.MorpheAPI
@@ -170,17 +165,25 @@ data class HomeAppState(
     val sourceGroups: List<HomeAppSourceGroup>
 )
 
-/** Apps grouped by the enabled patch source that declares them. */
+/**
+ * Apps grouped by the enabled patch source that declares them. Package assignments are
+ * deduplicated across sources upstream, so each [packageNames] set is disjoint from other
+ * groups' sets.
+ *
+ * The default (Morphe) source is treated specially: it can never be collapsed by the user
+ * ([collapsible] is false and [isDefault] is true), so its group always stays open.
+ */
 data class HomeAppSourceGroup(
     val uid: Int,
     val name: String,
     val packageNames: Set<String>,
     val collapsed: Boolean,
-    val collapsible: Boolean,
     val avatarUrl: String?,
-    val fallbackAvatarUrl: String?,
-    val isDefault: Boolean
-)
+    val fallbackAvatarUrl: String?
+) {
+    val isDefault: Boolean get() = uid == DEFAULT_SOURCE_UID
+    val collapsible: Boolean get() = !isDefault
+}
 
 private data class HomePrefs(
     val hiddenPackages: Set<String>,
@@ -1315,8 +1318,8 @@ class HomeViewModel(
     ): List<HomeAppSourceGroup> {
         val assignedPackages = linkedSetOf<String>()
 
+        // enabledInfo is already filtered to enabled entries by the caller
         val groups = enabledInfo.values
-            .filter { it.enabled }
             .sortedWith(
                 compareBy<PatchBundleInfo.Global>(
                     { it.uid != DEFAULT_SOURCE_UID },
@@ -1347,10 +1350,8 @@ class HomeViewModel(
                         name = sourceName,
                         packageNames = packageNames,
                         collapsed = info.uid != DEFAULT_SOURCE_UID && info.uid !in expandedSourceGroups,
-                        collapsible = info.uid != DEFAULT_SOURCE_UID,
                         avatarUrl = avatarUrls?.primary,
-                        fallbackAvatarUrl = avatarUrls?.fallback,
-                        isDefault = source?.isDefault == true || info.uid == DEFAULT_SOURCE_UID
+                        fallbackAvatarUrl = avatarUrls?.fallback
                     )
                 }
             }
