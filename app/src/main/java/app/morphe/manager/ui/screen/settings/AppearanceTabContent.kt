@@ -86,7 +86,7 @@ fun AppearanceTabContent(
             .verticalScroll(scrollState)
             .padding(horizontal = contentPadding, vertical = MorpheDefaults.ContentPadding)
     ) {
-        // Language Section
+        // Language section
         Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             LanguageSection(
                 appLanguage = appLanguage,
@@ -94,7 +94,7 @@ fun AppearanceTabContent(
             )
         }
 
-        // Home Screen Section
+        // Home screen section
         Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             SectionTitle(
                 text = stringResource(R.string.settings_appearance_home_screen),
@@ -139,7 +139,7 @@ fun AppearanceTabContent(
             )
         }
 
-        // Theme Mode Section
+        // Theme section
         Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             SectionTitle(
                 text = stringResource(R.string.settings_appearance_theme),
@@ -167,7 +167,7 @@ fun AppearanceTabContent(
             )
         }
 
-        // Pure Black Theme Toggle
+        // Pure black theme toggle
         AnimatedVisibility(
             visible = theme != Theme.LIGHT,
             enter = MorpheAnimations.expandFadeEnter,
@@ -196,7 +196,7 @@ fun AppearanceTabContent(
             }
         }
 
-        // Accent Color Section
+        // Accent color section
         AnimatedVisibility(
             visible = !dynamicColor,
             enter = MorpheAnimations.expandFadeEnter,
@@ -219,7 +219,7 @@ fun AppearanceTabContent(
             }
         }
 
-        // Background Type Section
+        // Background type section
         Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             SectionTitle(
                 text = stringResource(R.string.settings_appearance_background),
@@ -240,7 +240,7 @@ fun AppearanceTabContent(
             )
         }
 
-        // Parallax Effect Toggle
+        // Parallax effect toggle
         AnimatedVisibility(
             visible = backgroundType != BackgroundType.NONE,
             enter = MorpheAnimations.expandFadeEnter,
@@ -269,7 +269,7 @@ fun AppearanceTabContent(
             }
         }
 
-        // App Icon Section
+        // App icon section
         Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             SectionTitle(
                 text = stringResource(R.string.settings_appearance_app_icon_selector_title),
@@ -297,7 +297,7 @@ fun AppearanceTabContent(
         )
     }
 
-    // Translation Info Dialog
+    // Translation info dialog
     AnimatedVisibility(
         visible = showTranslationInfoDialog.value,
         enter = MorpheAnimations.fadeIn,
@@ -320,7 +320,7 @@ fun AppearanceTabContent(
         )
     }
 
-    // Language Picker Dialog
+    // Language picker dialog
     AnimatedVisibility(
         visible = showLanguageDialog.value,
         enter = MorpheAnimations.fadeIn,

@@ -1,0 +1,370 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
+package app.morphe.manager.ui.screen.home
+
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import app.morphe.manager.R
+import app.morphe.manager.domain.manager.HomeAppCategoryState
+import app.morphe.manager.ui.model.HomeAppItem
+import app.morphe.manager.ui.viewmodel.HomeAppSourceGroup
+import app.morphe.manager.util.RemoteAvatar
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
+
+internal const val SOURCE_CATEGORY_ID_PREFIX = "source_"
+
+/**
+ * UI-side group backing one collapsible section in the home list. Represents either a
+ * user-defined category (has [id], [editable] true, no source fields), a source group
+ * (has [sourceUid] and avatar fields, [editable] false), or the uncategorized bucket
+ * ([id] null, [collapsible] false).
+ */
+internal data class HomeCategoryGroup(
+    val id: String?,
+    val sourceUid: Int? = null,
+    val sourceAvatarUrl: String? = null,
+    val sourceFallbackAvatarUrl: String? = null,
+    val sourceIsDefault: Boolean = false,
+    val title: String,
+    val items: List<HomeAppItem>,
+    val collapsed: Boolean,
+    val collapsible: Boolean,
+    val editable: Boolean
+)
+
+/**
+ * Bucket [items] into the user's custom categories plus an uncategorized tail.
+ * [ignoreCollapsed] is used by the search flow to force every group open so matches are
+ * visible; when true, empty categories are also dropped from the result.
+ */
+internal fun buildHomeCategoryGroups(
+    items: List<HomeAppItem>,
+    categoryState: HomeAppCategoryState,
+    uncategorizedTitle: String,
+    ignoreCollapsed: Boolean
+): List<HomeCategoryGroup> {
+    val assigned = items.groupBy { item -> categoryState.assignments[item.packageName] }
+    val groups = categoryState.categories.mapNotNull { category ->
+        val categoryItems = assigned[category.id].orEmpty()
+        if (categoryItems.isEmpty() && ignoreCollapsed) return@mapNotNull null
+        HomeCategoryGroup(
+            id = category.id,
+            title = category.name,
+            items = categoryItems,
+            collapsed = !ignoreCollapsed && category.collapsed,
+            collapsible = true,
+            editable = true
+        )
+    }
+
+    val knownCategoryIds = categoryState.categories.mapTo(mutableSetOf()) { it.id }
+    val uncategorizedItems = items.filter { item ->
+        categoryState.assignments[item.packageName] !in knownCategoryIds
+    }
+    val uncategorizedGroup = uncategorizedItems.takeIf { it.isNotEmpty() }?.let {
+        HomeCategoryGroup(
+            id = null,
+            title = uncategorizedTitle,
+            items = it,
+            collapsed = false,
+            collapsible = false,
+            editable = false
+        )
+    }
+
+    return groups + listOfNotNull(uncategorizedGroup)
+}
+
+/**
+ * Bucket [items] into their owning source groups plus an uncategorized tail for anything
+ * a source did not claim. Sources are consumed in the order given, so if the same package
+ * is declared by multiple sources it lands in the first one only. [ignoreCollapsed]
+ * behaves as in [buildHomeCategoryGroups].
+ */
+internal fun buildHomeSourceGroups(
+    items: List<HomeAppItem>,
+    sourceGroups: List<HomeAppSourceGroup>,
+    uncategorizedTitle: String,
+    ignoreCollapsed: Boolean
+): List<HomeCategoryGroup> {
+    val usedPackages = mutableSetOf<String>()
+
+    val groups = sourceGroups.mapNotNull { sourceGroup ->
+        val sourceItems = items
+            .filter { item ->
+                item.packageName in sourceGroup.packageNames &&
+                        usedPackages.add(item.packageName)
+            }
+
+        if (sourceItems.isEmpty()) {
+            null
+        } else {
+            HomeCategoryGroup(
+                id = "$SOURCE_CATEGORY_ID_PREFIX${sourceGroup.uid}",
+                sourceUid = sourceGroup.uid,
+                sourceAvatarUrl = sourceGroup.avatarUrl,
+                sourceFallbackAvatarUrl = sourceGroup.fallbackAvatarUrl,
+                sourceIsDefault = sourceGroup.isDefault,
+                title = sourceGroup.name,
+                items = sourceItems,
+                collapsed = !ignoreCollapsed && sourceGroup.collapsed,
+                collapsible = sourceGroup.collapsible,
+                editable = false
+            )
+        }
+    }
+
+    val uncategorizedItems = items.filter { item -> item.packageName !in usedPackages }
+    val uncategorizedGroup = uncategorizedItems.takeIf { it.isNotEmpty() }?.let {
+        HomeCategoryGroup(
+            id = null,
+            title = uncategorizedTitle,
+            items = it,
+            collapsed = false,
+            collapsible = false,
+            editable = false
+        )
+    }
+
+    return groups + listOfNotNull(uncategorizedGroup)
+}
+
+/**
+ * Row that titles one collapsible section in the home list. Renders the folder or source
+ * icon, group title, item count, an optional overflow menu for editable groups (rename or
+ * delete), an optional drag-handle slot supplied by the caller (see
+ * [CategoryHeaderDragHandle]), and a chevron mirroring the collapse state. Non-collapsible
+ * groups (uncategorized, default source) omit the chevron and are not clickable as a whole.
+ */
+@Composable
+internal fun HomeCategoryHeader(
+    group: HomeCategoryGroup,
+    onToggle: () -> Unit,
+    onRename: () -> Unit,
+    onDelete: () -> Unit,
+    modifier: Modifier = Modifier,
+    dragHandle: (@Composable () -> Unit)? = null
+) {
+    var menuExpanded by remember { mutableStateOf(false) }
+    val countText = pluralStringResource(
+        R.plurals.home_category_app_count,
+        group.items.size,
+        group.items.size.toString()
+    )
+    val headerShape = RoundedCornerShape(8.dp)
+    val containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.16f)
+    val contentColor = MaterialTheme.colorScheme.onSurface
+    val mutedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+    val isSourceGroup = group.sourceUid != null
+    val leadingIcon = when {
+        group.collapsed -> Icons.Outlined.Folder
+        else -> Icons.Outlined.FolderOpen
+    }
+
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .then(if (group.collapsible) Modifier.clickable(onClick = onToggle) else Modifier),
+        color = containerColor,
+        contentColor = contentColor,
+        shape = headerShape,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.10f))
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 44.dp)
+                .padding(start = 10.dp, end = 6.dp, top = 6.dp, bottom = 6.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            if (isSourceGroup) {
+                SourceCategoryIcon(
+                    group = group,
+                    modifier = Modifier.size(22.dp)
+                )
+            } else {
+                Icon(
+                    imageVector = leadingIcon,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp),
+                    tint = mutedContentColor
+                )
+            }
+
+            Row(
+                modifier = Modifier.weight(1f),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                Text(
+                    text = group.title,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f, fill = false)
+                )
+                Text(
+                    text = countText,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = mutedContentColor,
+                    maxLines = 1
+                )
+            }
+
+            if (group.editable) {
+                Box {
+                    IconButton(
+                        onClick = { menuExpanded = true },
+                        modifier = Modifier.size(32.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.MoreVert,
+                            contentDescription = stringResource(R.string.more_options),
+                            modifier = Modifier.size(18.dp),
+                            tint = mutedContentColor
+                        )
+                    }
+                    DropdownMenu(
+                        expanded = menuExpanded,
+                        onDismissRequest = { menuExpanded = false }
+                    ) {
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.rename)) },
+                            leadingIcon = { Icon(Icons.Outlined.Edit, contentDescription = null) },
+                            onClick = {
+                                menuExpanded = false
+                                onRename()
+                            }
+                        )
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.delete)) },
+                            leadingIcon = { Icon(Icons.Outlined.Delete, contentDescription = null) },
+                            onClick = {
+                                menuExpanded = false
+                                onDelete()
+                            }
+                        )
+                    }
+                }
+            }
+
+            dragHandle?.invoke()
+
+            if (group.collapsible) {
+                Icon(
+                    imageVector = if (group.collapsed) Icons.Outlined.ExpandMore else Icons.Outlined.ExpandLess,
+                    contentDescription = if (group.collapsed)
+                        stringResource(R.string.expand)
+                    else
+                        stringResource(R.string.collapse),
+                    modifier = Modifier.size(20.dp),
+                    tint = mutedContentColor
+                )
+            }
+        }
+    }
+}
+
+/**
+ * Circular avatar for a source-group header. The default (Morphe) source gets the app
+ * launcher icon; other sources use the remote avatar from the bundle metadata, with a
+ * neutral placeholder when no URL is available.
+ */
+@Composable
+private fun SourceCategoryIcon(
+    group: HomeCategoryGroup,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier,
+        shape = CircleShape,
+        color = if (group.sourceIsDefault)
+            Color.White
+        else
+            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.55f)
+    ) {
+        when {
+            group.sourceIsDefault -> {
+                val context = LocalContext.current
+                Image(
+                    painter = rememberDrawablePainter(
+                        drawable = AppCompatResources.getDrawable(
+                            context,
+                            R.drawable.ic_launcher_foreground
+                        )
+                    ),
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .graphicsLayer {
+                            scaleX = 1.5f
+                            scaleY = 1.5f
+                        }
+                )
+            }
+
+            group.sourceAvatarUrl != null -> {
+                RemoteAvatar(
+                    url = group.sourceAvatarUrl,
+                    fallbackUrl = group.sourceFallbackAvatarUrl,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            else -> {
+                Icon(
+                    imageVector = Icons.Outlined.Source,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(4.dp)
+                )
+            }
+        }
+    }
+}
+
+/**
+ * Drag-handle affordance for [HomeCategoryHeader]. Passed as the slot content so the caller
+ * can attach a `draggableHandle` from the reorderable library without leaking that state
+ * into the header.
+ */
+@Composable
+internal fun CategoryHeaderDragHandle(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier.size(32.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(
+            imageVector = Icons.Outlined.DragHandle,
+            contentDescription = stringResource(R.string.reorder_list),
+            modifier = Modifier.size(20.dp),
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+}
