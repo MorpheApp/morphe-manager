@@ -12,6 +12,7 @@ import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFA
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.serialization.Serializable
 import kotlin.random.Random
 
 /**
@@ -50,6 +51,34 @@ enum class HomeAppCategoryViewMode {
             entries.firstOrNull { it.name == value } ?: ALL_APPS
     }
 }
+
+/**
+ * Serializable projection of a single [HomeAppCategory] for backup/restore.
+ */
+@Serializable
+data class HomeAppCategorySnapshot(
+    val id: String,
+    val name: String,
+    val collapsed: Boolean = false
+)
+
+/**
+ * Portable snapshot of [HomeAppButtonPreferences] for the settings export/import flow.
+ * All fields are nullable so partial or older backups apply cleanly: missing fields are
+ * left as the current on-device value. Per-device-random keys (e.g. source group uids)
+ * are intentionally excluded because they don't map across installations.
+ */
+@Serializable
+data class HomeAppButtonSnapshot(
+    val hiddenPackages: Set<String>? = null,
+    val customOrder: List<String>? = null,
+    val sortMode: String? = null,
+    val categories: List<HomeAppCategorySnapshot>? = null,
+    val assignments: Map<String, String>? = null,
+    val uncategorizedCollapsed: Boolean? = null,
+    val categoryViewMode: String? = null,
+    val showCategoryViewSwitcher: Boolean? = null
+)
 
 /**
  * Manages user preferences for home screen app buttons: hidden packages, manual order,
@@ -216,7 +245,7 @@ class HomeAppButtonPreferences(context: Context) {
         )
     }
 
-    /** Flip a custom category's collapsed state, or the Uncategorized bucket's when [categoryId] is null. */
+    /** Flip a custom category's collapsed state, or the Uncategorized buckets when [categoryId] is null. */
     fun toggleCategoryCollapsed(categoryId: String?) {
         val current = _categoryState.value
         val next = if (categoryId == null) {
@@ -257,6 +286,57 @@ class HomeAppButtonPreferences(context: Context) {
             else nextAssignments[packageName] = validCategoryId
         }
         saveCategoryState(current.copy(assignments = nextAssignments))
+    }
+
+    /** Serialize the full state for the settings backup file. */
+    fun exportState(): HomeAppButtonSnapshot {
+        val category = _categoryState.value
+        return HomeAppButtonSnapshot(
+            hiddenPackages = _hiddenPackages.value,
+            customOrder = _customOrder.value,
+            sortMode = _sortMode.value.name,
+            categories = category.categories.map { HomeAppCategorySnapshot(it.id, it.name, it.collapsed) },
+            assignments = category.assignments,
+            uncategorizedCollapsed = category.uncategorizedCollapsed,
+            categoryViewMode = _categoryViewMode.value.name,
+            showCategoryViewSwitcher = _showCategoryViewSwitcher.value
+        )
+    }
+
+    /**
+     * Apply an imported [snapshot]. Fields left as null in the snapshot keep the current
+     * value, so partial or older backups apply cleanly without wiping unrelated state.
+     */
+    fun importState(snapshot: HomeAppButtonSnapshot) {
+        prefs.edit {
+            snapshot.hiddenPackages?.let { putStringSet(KEY_HIDDEN, it) }
+            snapshot.customOrder?.let { putString(KEY_CUSTOM_ORDER, it.joinToString("\n")) }
+            snapshot.sortMode?.let { putString(KEY_SORT_MODE, it) }
+            snapshot.categoryViewMode?.let { putString(KEY_CATEGORY_VIEW_MODE, it) }
+            snapshot.showCategoryViewSwitcher?.let { putBoolean(KEY_SHOW_CATEGORY_VIEW_SWITCHER, it) }
+        }
+        snapshot.hiddenPackages?.let { _hiddenPackages.value = it }
+        snapshot.customOrder?.let { _customOrder.value = it }
+        snapshot.sortMode?.let { _sortMode.value = HomeAppSortMode.fromPreference(it) }
+        snapshot.categoryViewMode?.let { _categoryViewMode.value = HomeAppCategoryViewMode.fromPreference(it) }
+        snapshot.showCategoryViewSwitcher?.let { _showCategoryViewSwitcher.value = it }
+
+        // Route category state through saveCategoryState so persist + StateFlow stay in sync
+        val hasCategoryData = snapshot.categories != null ||
+                snapshot.assignments != null ||
+                snapshot.uncategorizedCollapsed != null
+        if (hasCategoryData) {
+            val current = _categoryState.value
+            saveCategoryState(
+                HomeAppCategoryState(
+                    categories = snapshot.categories
+                        ?.map { HomeAppCategory(it.id, it.name, it.collapsed) }
+                        ?: current.categories,
+                    assignments = snapshot.assignments ?: current.assignments,
+                    uncategorizedCollapsed = snapshot.uncategorizedCollapsed ?: current.uncategorizedCollapsed
+                )
+            )
+        }
     }
 
     private fun saveHiddenPackages(packages: Set<String>) {
