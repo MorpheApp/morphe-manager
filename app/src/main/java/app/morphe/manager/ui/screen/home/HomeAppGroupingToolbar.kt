@@ -21,8 +21,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
+import app.morphe.manager.ui.screen.shared.GlassButton
 import app.morphe.manager.ui.screen.shared.GlassButtonDefaults
-import app.morphe.manager.ui.screen.shared.SegmentedIconLabelButton
 
 /**
  * Segmented pill row for switching between [HomeAppCategoryViewMode]s from the home footer.
@@ -69,7 +69,7 @@ private fun RowScope.AppGroupingModeButton(
     label: String,
     selected: Boolean
 ) {
-    SegmentedIconLabelButton(
+    GlassButton(
         onClick = onClick,
         icon = icon,
         label = label,

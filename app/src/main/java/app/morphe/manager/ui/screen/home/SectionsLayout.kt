@@ -14,7 +14,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -458,9 +460,22 @@ private fun HomeFooterControls(
         ) {
             Column {
                 Spacer(modifier = Modifier.height(itemSpacing))
-                OtherAppsSection(
+                GlassButton(
+                    label = stringResource(R.string.home_other_apps),
+                    selected = false,
                     onClick = onOtherAppsClick,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 12.dp),
+                    icon = Icons.Outlined.Apps,
+                    containerColor = GlassButtonDefaults.containerColor(),
+                    contentColor = GlassButtonDefaults.contentColor(),
+                    shape = RoundedCornerShape(20.dp),
+                    border = BorderStroke(1.dp, GlassButtonDefaults.borderColor()),
+                    role = Role.Button,
+                    pressScale = true,
+                    hapticFeedback = true,
+                    showLabel = true
                 )
             }
         }
@@ -3105,93 +3120,6 @@ fun AppButton(
             subtitle = notPatchedText,
             gradientColors = gradientColors,
         )
-    }
-}
-
-/**
- * Section 4: Other apps button.
- */
-@Composable
-fun OtherAppsSection(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    HomeGlassPillButton(
-        onClick = onClick,
-        modifier = modifier.padding(bottom = 12.dp),
-        text = stringResource(R.string.home_other_apps)
-    )
-}
-
-/**
- * Shared frosted-glass pill button used by [OtherAppsSection] and [ShowHiddenAppsButton].
- *
- * Renders a rounded pill with semi-transparent surface background, border, press-scale
- * animation, and haptic feedback. Content is either icon+text or text-only.
- */
-@Composable
-internal fun HomeGlassPillButton(
-    onClick: () -> Unit,
-    text: String,
-    modifier: Modifier = Modifier,
-    icon: ImageVector? = null,
-    selected: Boolean = false,
-    compact: Boolean = false
-) {
-    val shape = RoundedCornerShape(20.dp)
-    val backgroundColor = GlassButtonDefaults.containerColor(selected)
-    val borderColor = GlassButtonDefaults.borderColor(selected)
-    val contentColor = GlassButtonDefaults.contentColor(selected)
-    val height = if (compact) 44.dp else 48.dp
-    val horizontalPadding = if (compact) 8.dp else 16.dp
-    val spacing = if (compact) 6.dp else 8.dp
-    val textStyle = if (compact) MaterialTheme.typography.labelMedium else MaterialTheme.typography.titleMedium
-
-    val interactionSource = remember { MutableInteractionSource() }
-    val scale = rememberPressScale(interactionSource, label = "pill_press_scale")
-    val handleClick = rememberHapticClick(onClick)
-
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(height)
-            .graphicsLayer { scaleX = scale; scaleY = scale; clip = true }
-            .clip(shape)
-            .background(backgroundColor)
-            .border(
-                BorderStroke(1.dp, borderColor),
-                shape = shape
-            )
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null,
-                onClick = handleClick
-            ),
-        contentAlignment = Alignment.Center
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(spacing),
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(horizontal = horizontalPadding)
-        ) {
-            if (icon != null) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp),
-                    tint = contentColor
-                )
-            }
-            Text(
-                text = text,
-                style = textStyle,
-                fontWeight = FontWeight.SemiBold,
-                color = contentColor,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Center
-            )
-        }
     }
 }
 

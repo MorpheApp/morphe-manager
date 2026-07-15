@@ -45,9 +45,9 @@ import app.morphe.manager.ui.screen.settings.AdvancedTabContent
 import app.morphe.manager.ui.screen.settings.AppearanceTabContent
 import app.morphe.manager.ui.screen.settings.SystemTabContent
 import app.morphe.manager.ui.screen.settings.system.*
+import app.morphe.manager.ui.screen.shared.GlassButton
 import app.morphe.manager.ui.screen.shared.GlassButtonDefaults
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
-import app.morphe.manager.ui.screen.shared.SegmentedIconLabelButton
 import app.morphe.manager.ui.screen.shared.isLandscape
 import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.*
@@ -587,7 +587,7 @@ private fun NavigationItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    SegmentedIconLabelButton(
+    GlassButton(
         icon = tab.icon,
         label = stringResource(tab.titleRes),
         selected = isSelected,

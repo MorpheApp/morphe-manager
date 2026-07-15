@@ -34,17 +34,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
- * Segmented control button that always shows an icon and shows its [label] only when
- * [selected]. When selection changes, the label expands/collapses horizontally so long
- * localized strings don't crowd the row of unselected siblings.
+ * Frosted-glass button that pairs an optional [icon] with a [label].
  */
 @Composable
-fun SegmentedIconLabelButton(
-    icon: ImageVector,
+fun GlassButton(
     label: String,
     selected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    icon: ImageVector? = null,
     containerColor: Color = MaterialTheme.colorScheme.surface,
     contentColor: Color = MaterialTheme.colorScheme.onSurface,
     shape: Shape = RoundedCornerShape(24.dp),
@@ -57,13 +55,18 @@ fun SegmentedIconLabelButton(
     fontWeight: FontWeight = FontWeight.Medium,
     role: Role = Role.Tab,
     pressScale: Boolean = false,
-    hapticFeedback: Boolean = false
+    hapticFeedback: Boolean = false,
+    showLabel: Boolean = selected
 ) {
+    // Force the label on when there's no icon to render, otherwise the pill would collapse
+    // to an empty click target
+    val effectiveShowLabel = showLabel || icon == null
+
     val interactionSource = remember { MutableInteractionSource() }
     val scale = rememberPressScale(
         interactionSource = interactionSource,
         enabled = pressScale,
-        label = "segmented_press_scale"
+        label = "glass_button_press_scale"
     )
     val clickHandler = if (hapticFeedback) rememberHapticClick(onClick) else onClick
 
@@ -92,20 +95,24 @@ fun SegmentedIconLabelButton(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = icon,
-                // Icon carries the accessible label only when the visible Text is absent
-                contentDescription = if (selected) null else label,
-                modifier = Modifier.size(iconSize),
-                tint = contentColor
-            )
+            if (icon != null) {
+                Icon(
+                    imageVector = icon,
+                    // Icon carries the accessible label only when the visible Text is absent
+                    contentDescription = if (effectiveShowLabel) null else label,
+                    modifier = Modifier.size(iconSize),
+                    tint = contentColor
+                )
+            }
             AnimatedVisibility(
-                visible = selected,
+                visible = effectiveShowLabel,
                 enter = MorpheAnimations.expandHorizFadeIn,
                 exit = MorpheAnimations.shrinkHorizFadeOut
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Spacer(modifier = Modifier.width(iconLabelSpacing))
+                    if (icon != null) {
+                        Spacer(modifier = Modifier.width(iconLabelSpacing))
+                    }
                     Text(
                         text = label,
                         style = textStyle,
