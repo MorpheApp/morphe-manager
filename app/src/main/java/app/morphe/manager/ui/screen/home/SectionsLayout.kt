@@ -569,6 +569,7 @@ fun MainAppsSection(
     // Reorder state
     val isReorderMode = remember { mutableStateOf(false) }
     var localOrder by remember { mutableStateOf(homeAppItems.map { it.packageName }) }
+    var reorderScopePackages by remember { mutableStateOf<Set<String>?>(null) }
     // Packages that were selected when entering reorder mode; used to scroll
     // the reordered list back to the card the user long-pressed (e.g. from search)
     val reorderFocusPackages = remember { mutableStateOf<Set<String>>(emptySet()) }
@@ -592,6 +593,7 @@ fun MainAppsSection(
     BackHandler(enabled = isReorderMode.value) {
         isReorderMode.value = false
         selectedPackages.clear()
+        reorderScopePackages = null
         localOrder = homeAppItems.map { it.packageName }
     }
 
@@ -769,36 +771,112 @@ fun MainAppsSection(
             ignoreCollapsed = searchQuery.isNotBlank()
         )
     }
+    val groupedReorderGroups = remember(
+        appGrouping,
+        homeAppItems,
+        apps.categoryState,
+        apps.sourceGroups,
+        uncategorizedTitle
+    ) {
+        when (appGrouping) {
+            HomeAppCategoryViewMode.SOURCES -> buildHomeSourceGroups(
+                items = homeAppItems,
+                sourceGroups = apps.sourceGroups,
+                uncategorizedTitle = uncategorizedTitle,
+                ignoreCollapsed = true
+            )
+
+            HomeAppCategoryViewMode.CUSTOM -> buildHomeCategoryGroups(
+                items = homeAppItems,
+                categoryState = apps.categoryState,
+                uncategorizedTitle = uncategorizedTitle,
+                ignoreCollapsed = true
+            )
+
+            HomeAppCategoryViewMode.ALL_APPS -> emptyList()
+        }
+    }
+    val groupedSelectionPackages = remember(
+        appGrouping,
+        selectedPackages.keys.toList(),
+        groupedReorderGroups
+    ) {
+        if (appGrouping == HomeAppCategoryViewMode.ALL_APPS || selectedPackages.isEmpty) {
+            null
+        } else {
+            val firstSelectedPackage = selectedPackages.keys.firstOrNull()
+            groupedReorderGroups
+                .firstOrNull { group ->
+                    group.items.any { item -> item.packageName == firstSelectedPackage }
+                }
+                ?.items
+                ?.mapTo(linkedSetOf()) { it.packageName }
+        }
+    }
 
     val listState = rememberLazyListState()
 
-    fun moveAppOrder(fromIndex: Int, toIndex: Int): List<String> {
-        if (fromIndex !in localOrder.indices || toIndex !in localOrder.indices || fromIndex == toIndex) {
-            return localOrder
+    fun movePackagesInOrder(
+        order: List<String>,
+        fromIndex: Int,
+        toIndex: Int,
+        selectedSet: Set<String>
+    ): List<String> {
+        if (fromIndex !in order.indices || toIndex !in order.indices || fromIndex == toIndex) {
+            return order
         }
 
-        val draggedPackage = localOrder[fromIndex]
-        val selectedSet = selectedPackages.keys.toSet()
+        val draggedPackage = order[fromIndex]
         if (draggedPackage !in selectedSet || selectedSet.size <= 1) {
-            return localOrder.toMutableList().apply {
+            return order.toMutableList().apply {
                 val moved = removeAt(fromIndex)
                 add(toIndex.coerceIn(0, size), moved)
             }
         }
 
-        val targetPackage = localOrder[toIndex]
-        if (targetPackage in selectedSet) return localOrder
+        val targetPackage = order[toIndex]
+        if (targetPackage in selectedSet) return order
 
-        val moving = localOrder.filter { it in selectedSet }
-        val remaining = localOrder.filter { it !in selectedSet }
+        val moving = order.filter { it in selectedSet }
+        val remaining = order.filter { it !in selectedSet }
         val targetIndex = remaining.indexOf(targetPackage)
-        if (targetIndex == -1) return localOrder
+        if (targetIndex == -1) return order
 
         val insertionIndex = if (toIndex > fromIndex) targetIndex + 1 else targetIndex
         return buildList {
             addAll(remaining.take(insertionIndex.coerceIn(0, remaining.size)))
             addAll(moving)
             addAll(remaining.drop(insertionIndex.coerceIn(0, remaining.size)))
+        }
+    }
+
+    fun moveAppOrder(fromIndex: Int, toIndex: Int): List<String> {
+        val scopePackages = reorderScopePackages
+        if (scopePackages == null) {
+            return movePackagesInOrder(
+                order = localOrder,
+                fromIndex = fromIndex,
+                toIndex = toIndex,
+                selectedSet = selectedPackages.keys.toSet()
+            )
+        }
+
+        val scopedOrder = localOrder.filter { it in scopePackages }
+        val movedScopedOrder = movePackagesInOrder(
+            order = scopedOrder,
+            fromIndex = fromIndex,
+            toIndex = toIndex,
+            selectedSet = selectedPackages.keys.filterTo(mutableSetOf()) { it in scopePackages }
+        )
+        if (movedScopedOrder == scopedOrder) return localOrder
+
+        val movedIterator = movedScopedOrder.iterator()
+        return localOrder.map { packageName ->
+            if (packageName in scopePackages) {
+                movedIterator.next()
+            } else {
+                packageName
+            }
         }
     }
 
@@ -835,13 +913,18 @@ fun MainAppsSection(
         val byPackage = homeAppItems.associateBy { it.packageName }
         localOrder.mapNotNull { byPackage[it] }
     }
+    val reorderItems = remember(orderedItems, reorderScopePackages) {
+        reorderScopePackages?.let { scopePackages ->
+            orderedItems.filter { it.packageName in scopePackages }
+        } ?: orderedItems
+    }
 
     // Keep the previously long-pressed card in view when switching to reorder mode
     LaunchedEffect(isReorderMode.value) {
         if (isReorderMode.value) {
             val targets = reorderFocusPackages.value
             if (targets.isNotEmpty()) {
-                val topIndex = orderedItems.indexOfFirst { it.packageName in targets }
+                val topIndex = reorderItems.indexOfFirst { it.packageName in targets }
                 if (topIndex >= 0) listState.scrollToItem(topIndex)
             }
             reorderFocusPackages.value = emptySet()
@@ -964,7 +1047,7 @@ fun MainAppsSection(
                                     }
                                 } else if (isReorderMode.value) {
                                     itemsIndexed(
-                                        items = orderedItems,
+                                        items = reorderItems,
                                         key = { _, item -> item.packageName }
                                     ) { _, item ->
                                         ReorderableItem(reorderableState, key = item.packageName) { _ ->
@@ -1238,13 +1321,17 @@ fun MainAppsSection(
                     }
 
                     // Multi-select / reorder bar - slides up from bottom
+                    val activeAppScopePackages = reorderScopePackages ?: groupedSelectionPackages
+                    val activeAppScopeItems = activeAppScopePackages?.let { scopePackages ->
+                        homeAppItems.filter { it.packageName in scopePackages }
+                    } ?: homeAppItems
                     MultiSelectBar(
                         selectedCount = selectedPackages.size,
-                        totalCount = homeAppItems.size,
+                        totalCount = activeAppScopeItems.size,
                         visible = isMultibarVisible,
                         isReorderMode = isReorderMode.value,
                         onSelectAll = {
-                            selectedPackages.setAll(homeAppItems.map { it.packageName })
+                            selectedPackages.setAll(activeAppScopeItems.map { it.packageName })
                         },
                         onDeselectAll = { selectedPackages.clear() },
                         onAction = {
@@ -1263,6 +1350,10 @@ fun MainAppsSection(
                             selectedPackages.clear()
                         },
                         onEnterReorder = {
+                            groupedSelectionPackages?.let { scopePackages ->
+                                selectedPackages.retain { it in scopePackages }
+                            }
+                            reorderScopePackages = groupedSelectionPackages
                             reorderFocusPackages.value = selectedPackages.keys.toSet()
                             isMultiSelectMode.value = false
                             searchState.onClose()
@@ -1271,16 +1362,19 @@ fun MainAppsSection(
                         onSaveOrder = {
                             appActions.onSaveOrder(localOrder)
                             isReorderMode.value = false
+                            reorderScopePackages = null
                             selectedPackages.clear()
                         },
                         onResetOrder = {
                             appActions.onResetOrder()
                             localOrder = homeAppItems.map { it.packageName }
                             isReorderMode.value = false
+                            reorderScopePackages = null
                             selectedPackages.clear()
                         },
                         onCancelReorder = {
                             isReorderMode.value = false
+                            reorderScopePackages = null
                             selectedPackages.clear()
                             localOrder = homeAppItems.map { it.packageName }
                         },
