@@ -1224,7 +1224,6 @@ class HomeViewModel(
         val sourceGroups = buildHomeAppSourceGroups(
             enabledInfo = enabledInfo,
             sources = ready.sources,
-            sortMode = homePrefs.sortMode,
             expandedSourceGroups = homePrefs.expandedSourceGroups
         )
 
@@ -1313,13 +1312,14 @@ class HomeViewModel(
     private fun buildHomeAppSourceGroups(
         enabledInfo: Map<Int, PatchBundleInfo.Global>,
         sources: Map<Int, PatchBundleSource>,
-        sortMode: HomeAppSortMode,
         expandedSourceGroups: Set<Int>
     ): List<HomeAppSourceGroup> {
         val assignedPackages = linkedSetOf<String>()
 
         // enabledInfo is already filtered to enabled entries by the caller
-        val groups = enabledInfo.values
+        // Keep source sections in source order. Home sorting should reorder app cards
+        // inside each source section, not move source headers around.
+        return enabledInfo.values
             .sortedWith(
                 compareBy<PatchBundleInfo.Global>(
                     { it.uid != DEFAULT_SOURCE_UID },
@@ -1355,18 +1355,6 @@ class HomeViewModel(
                     )
                 }
             }
-
-        return when (sortMode) {
-            HomeAppSortMode.NAME_ASC -> groups.sortedWith(
-                compareBy<HomeAppSourceGroup> { it.name.lowercase() }
-                    .thenBy { it.uid }
-            )
-            HomeAppSortMode.NAME_DESC -> groups.sortedWith(
-                compareByDescending<HomeAppSourceGroup> { it.name.lowercase() }
-                    .thenBy { it.uid }
-            )
-            else -> groups
-        }
     }
 
     private fun sortHomeAppItems(
