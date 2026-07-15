@@ -585,7 +585,7 @@ fun MainAppsSection(
     val isReorderMode = remember { mutableStateOf(false) }
     var localOrder by remember { mutableStateOf(homeAppItems.map { it.packageName }) }
     var reorderScopePackages by remember { mutableStateOf<Set<String>?>(null) }
-    // Snapshotted on drag start when the dragged card is part of a multi-selection. Only
+    // Snapshot on drag start when the dragged card is part of a multi-selection. Only
     // the dragged card moves during the drag; onDragStopped teleports these followers next
     // to it so the group lands consolidated at the drop position.
     var reorderGroupFollowers by remember { mutableStateOf<List<String>?>(null) }
@@ -930,8 +930,7 @@ fun MainAppsSection(
         } ?: orderedItems
     }
 
-    // Flat-only: grouped reorder pre-scrolls to the top from onEnterReorder before the
-    // items list flips, so it doesn't need a post-mode-change scroll here
+    // Flat-only: grouped scrolls in onEnterReorder before the items list swaps
     LaunchedEffect(isReorderMode.value) {
         if (isReorderMode.value && reorderScopePackages == null) {
             val targets = reorderFocusPackages.value
@@ -1418,24 +1417,26 @@ fun MainAppsSection(
                             selectedPackages.clear()
                         },
                         onEnterReorder = {
-                            groupedSelectionPackages?.let { packages ->
-                                selectedPackages.retain { it in packages }
+                            groupedSelectionPackages?.let { pkgs ->
+                                selectedPackages.retain { it in pkgs }
                             }
                             reorderScopePackages = groupedSelectionPackages
-                            reorderFocusPackages.value = if (groupedSelectionPackages == null) {
-                                selectedPackages.keys.toSet()
-                            } else {
-                                emptySet()
-                            }
+                            val focusTargets = selectedPackages.keys.toSet()
+                            // Grouped pre-scrolls below (before flipping mode) so the
+                            // LazyColumn doesn't hold a stale offset when items swap to the
+                            // scoped list; flat defers to the LaunchedEffect after flipping
+                            reorderFocusPackages.value = if (groupedSelectionPackages == null) focusTargets else emptySet()
                             isMultiSelectMode.value = false
                             searchState.onClose()
-                            if (groupedSelectionPackages == null) {
-                                isReorderMode.value = true
-                            } else {
+                            groupedSelectionPackages?.let { scopePackages ->
+                                val scopedItems = orderedItems.filter { it.packageName in scopePackages }
+                                val focusIndex = scopedItems.indexOfFirst { it.packageName in focusTargets }
                                 scope.launch {
-                                    listState.scrollToItem(0)
+                                    listState.scrollToItem(focusIndex.coerceAtLeast(0))
                                     isReorderMode.value = true
                                 }
+                            } ?: run {
+                                isReorderMode.value = true
                             }
                         },
                         onSaveOrder = {
