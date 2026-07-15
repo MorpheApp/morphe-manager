@@ -467,15 +467,13 @@ private fun HomeFooterControls(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 12.dp),
-                    icon = Icons.Outlined.Apps,
                     containerColor = GlassButtonDefaults.containerColor(),
                     contentColor = GlassButtonDefaults.contentColor(),
                     shape = RoundedCornerShape(20.dp),
                     border = BorderStroke(1.dp, GlassButtonDefaults.borderColor()),
                     role = Role.Button,
                     pressScale = true,
-                    hapticFeedback = true,
-                    showLabel = true
+                    hapticFeedback = true
                 )
             }
         }
