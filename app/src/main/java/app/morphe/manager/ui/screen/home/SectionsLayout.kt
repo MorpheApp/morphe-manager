@@ -57,6 +57,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.manager.HomeAppCategory
@@ -1050,7 +1051,7 @@ fun MainAppsSection(
                                         items = reorderItems,
                                         key = { _, item -> item.packageName }
                                     ) { _, item ->
-                                        ReorderableItem(reorderableState, key = item.packageName) { _ ->
+                                        ReorderableItem(reorderableState, key = item.packageName) { itemIsDragging ->
                                             DynamicAppCard(
                                                 item = item,
                                                 isLoading = false,
@@ -1073,7 +1074,7 @@ fun MainAppsSection(
                                                         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                                     }
                                                 ),
-                                                modifier = Modifier.animateItem()
+                                                modifier = Modifier.zIndex(if (itemIsDragging) 1f else 0f)
                                             )
                                         }
                                     }
