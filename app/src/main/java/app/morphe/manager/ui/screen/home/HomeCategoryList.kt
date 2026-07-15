@@ -157,11 +157,85 @@ internal fun buildHomeSourceGroups(
 }
 
 /**
- * Row that titles one collapsible section in the home list.
+ * Frosted-glass row primitive shared by [HomeCategoryHeader] and the hidden-apps button.
  *
- * [onLongPress] fires whenever it is non-null regardless of collapsible/editable state,
- * so callers can open the action bar for editable headers and surface a toast on the
- * others.
+ * When both [onClick] and [onLongClick] are non-null a `combinedClickable` is wired; when
+ * only [onLongClick] is present, [onClick] falls back to a no-op so long-press can still fire
+ * on a non-tappable row.
+ */
+@Composable
+internal fun HomeGlassCategoryRow(
+    title: String,
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
+    onLongClick: (() -> Unit)? = null,
+    leading: (@Composable () -> Unit)? = null,
+    count: String? = null,
+    trailing: @Composable RowScope.() -> Unit = {}
+) {
+    val shape = RoundedCornerShape(20.dp)
+    val containerColor = HomeGlassButtonDefaults.containerColor()
+    val borderColor = HomeGlassButtonDefaults.borderColor()
+    val contentColor = MaterialTheme.colorScheme.onSurface
+    val mutedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+
+    val interactionModifier = when {
+        onLongClick != null -> Modifier.combinedClickable(
+            onClick = onClick ?: {},
+            onLongClick = onLongClick
+        )
+        onClick != null -> Modifier.clickable(onClick = onClick)
+        else -> Modifier
+    }
+
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(shape)
+            .then(interactionModifier),
+        color = containerColor,
+        contentColor = contentColor,
+        shape = shape,
+        border = BorderStroke(1.dp, borderColor)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 48.dp)
+                .padding(horizontal = 12.dp, vertical = 6.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            leading?.invoke()
+            Row(
+                modifier = Modifier.weight(1f),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.Medium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f, fill = false)
+                )
+                if (count != null) {
+                    Text(
+                        text = count,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = mutedContentColor,
+                        maxLines = 1
+                    )
+                }
+            }
+            trailing()
+        }
+    }
+}
+
+/**
+ * Row that titles one collapsible section in the home list.
  */
 @Composable
 internal fun HomeCategoryHeader(
@@ -176,51 +250,18 @@ internal fun HomeCategoryHeader(
         group.items.size,
         group.items.size.toString()
     )
-    val headerShape = RoundedCornerShape(20.dp)
-    val isDark = isSystemInDarkTheme()
-    val backgroundAlpha = if (isDark) 0.35f else 0.6f
-    val borderAlpha = if (isDark) 0.4f else 0.6f
-    val containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha)
-    val borderColor = MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)
-    val contentColor = MaterialTheme.colorScheme.onSurface
     val mutedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
     val isSourceGroup = group.sourceUid != null
-    val leadingIcon = when {
-        group.collapsed -> Icons.Outlined.Folder
-        else -> Icons.Outlined.FolderOpen
-    }
-    val interactionModifier = when {
-        onLongPress != null -> Modifier.combinedClickable(
-            onClick = { if (group.collapsible) onToggle() },
-            onLongClick = onLongPress
-        )
-        group.collapsible -> Modifier.clickable(onClick = onToggle)
-        else -> Modifier
-    }
+    val leadingIcon = if (group.collapsed) Icons.Outlined.Folder else Icons.Outlined.FolderOpen
 
-    Surface(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(headerShape)
-            .then(interactionModifier),
-        color = containerColor,
-        contentColor = contentColor,
-        shape = headerShape,
-        border = BorderStroke(1.dp, borderColor)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(min = 48.dp)
-                .padding(horizontal = 12.dp, vertical = 6.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
+    HomeGlassCategoryRow(
+        title = group.title,
+        count = countText,
+        onClick = if (group.collapsible) onToggle else null,
+        onLongClick = onLongPress,
+        leading = {
             if (isSourceGroup) {
-                SourceCategoryIcon(
-                    group = group,
-                    modifier = Modifier.size(24.dp)
-                )
+                SourceCategoryIcon(group = group, modifier = Modifier.size(24.dp))
             } else {
                 Icon(
                     imageVector = leadingIcon,
@@ -229,30 +270,9 @@ internal fun HomeCategoryHeader(
                     tint = mutedContentColor
                 )
             }
-
-            Row(
-                modifier = Modifier.weight(1f),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(6.dp)
-            ) {
-                Text(
-                    text = group.title,
-                    style = MaterialTheme.typography.labelLarge,
-                    fontWeight = FontWeight.Medium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.weight(1f, fill = false)
-                )
-                Text(
-                    text = countText,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = mutedContentColor,
-                    maxLines = 1
-                )
-            }
-
+        },
+        trailing = {
             dragHandle?.invoke()
-
             if (group.collapsible) {
                 Icon(
                     imageVector = if (group.collapsed) Icons.Outlined.ExpandMore else Icons.Outlined.ExpandLess,
@@ -264,8 +284,9 @@ internal fun HomeCategoryHeader(
                     tint = mutedContentColor
                 )
             }
-        }
-    }
+        },
+        modifier = modifier
+    )
 }
 
 /**

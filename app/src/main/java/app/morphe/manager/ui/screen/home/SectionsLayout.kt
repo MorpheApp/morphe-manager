@@ -23,6 +23,7 @@ import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -1460,8 +1461,7 @@ fun MainAppsSection(
 }
 
 /**
- * Pill-shaped button that appears at the bottom of the app list when hidden apps exist.
- * Styled consistently with [OtherAppsSection] - frosted glass surface with border.
+ * Category-style row that opens the hidden-apps dialog.
  */
 @Composable
 private fun ShowHiddenAppsButton(
@@ -1469,11 +1469,28 @@ private fun ShowHiddenAppsButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    HomeGlassPillButton(
+    val mutedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+    HomeGlassCategoryRow(
+        title = stringResource(R.string.hidden),
+        count = pluralStringResource(R.plurals.home_category_app_count, count, count.toString()),
         onClick = onClick,
-        modifier = modifier,
-        icon = Icons.Outlined.Visibility,
-        text = pluralStringResource(R.plurals.home_app_show_hidden_count, count, count.toString())
+        leading = {
+            Icon(
+                imageVector = Icons.Outlined.Visibility,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp),
+                tint = mutedContentColor
+            )
+        },
+        trailing = {
+            Icon(
+                imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp),
+                tint = mutedContentColor
+            )
+        },
+        modifier = modifier
     )
 }
 
