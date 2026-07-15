@@ -966,8 +966,42 @@ fun MainAppsSection(
     val isSearchEmpty = !stableLoadingState.value && homeAppItems.isNotEmpty() &&
             searchQuery.isNotBlank() && filteredItems.isEmpty() && filteredHiddenItems.isEmpty()
 
+    // Horizontal swipe on the background cycles through the visible grouping modes
+    val modes = HomeAppCategoryViewMode.entries
+    val currentModeIndex = modes.indexOf(appGrouping)
+    val canSwipeMode = apps.showCategoryViewSwitcher &&
+            !isMultiSelectMode.value &&
+            !isReorderMode.value &&
+            !isCategoryBarVisible &&
+            !searchState.visible
+    val swipeThresholdPx = with(LocalDensity.current) { 64.dp.toPx() }
+    val layoutDirection = LocalLayoutDirection.current
+
     Box(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .then(
+                if (canSwipeMode) {
+                    Modifier.pointerInput(currentModeIndex, layoutDirection) {
+                        var accumulator = 0f
+                        detectHorizontalDragGestures(
+                            onDragStart = { accumulator = 0f },
+                            onDragEnd = {
+                                val direction = if (layoutDirection == LayoutDirection.Rtl) -1 else 1
+                                val delta = accumulator * direction
+                                when {
+                                    delta <= -swipeThresholdPx && currentModeIndex < modes.lastIndex ->
+                                        appActions.onCategoryViewModeChange(modes[currentModeIndex + 1])
+                                    delta >= swipeThresholdPx && currentModeIndex > 0 ->
+                                        appActions.onCategoryViewModeChange(modes[currentModeIndex - 1])
+                                }
+                                accumulator = 0f
+                            },
+                            onDragCancel = { accumulator = 0f }
+                        ) { _, dragAmount -> accumulator += dragAmount }
+                    }
+                } else Modifier
+            ),
         contentAlignment = Alignment.Center
     ) {
         // Hidden polite live region used to announce the result of TalkBack Move up/down actions
@@ -3105,9 +3139,9 @@ internal fun HomeGlassPillButton(
     compact: Boolean = false
 ) {
     val shape = RoundedCornerShape(20.dp)
-    val backgroundColor = HomeGlassButtonDefaults.containerColor(selected)
-    val borderColor = HomeGlassButtonDefaults.borderColor(selected)
-    val contentColor = HomeGlassButtonDefaults.contentColor(selected)
+    val backgroundColor = GlassButtonDefaults.containerColor(selected)
+    val borderColor = GlassButtonDefaults.borderColor(selected)
+    val contentColor = GlassButtonDefaults.contentColor(selected)
     val height = if (compact) 44.dp else 48.dp
     val horizontalPadding = if (compact) 8.dp else 16.dp
     val spacing = if (compact) 6.dp else 8.dp
@@ -3157,40 +3191,6 @@ internal fun HomeGlassPillButton(
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Center
             )
-        }
-    }
-}
-
-/**
- * Shared color tokens for the home frosted-glass pill family. Reused by
- * [HomeGlassPillButton] and by the home segmented toolbar so both stay in step when the
- * palette changes.
- */
-internal object HomeGlassButtonDefaults {
-    @Composable
-    fun containerColor(selected: Boolean = false): Color {
-        val isDark = isSystemInDarkTheme()
-        val backgroundAlpha = if (isDark) 0.35f else 0.6f
-        return if (selected) {
-            MaterialTheme.colorScheme.primaryContainer.copy(alpha = if (isDark) 0.55f else 0.72f)
-        } else {
-            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha)
-        }
-    }
-
-    @Composable
-    fun contentColor(selected: Boolean = false): Color =
-        if (selected) MaterialTheme.colorScheme.onPrimaryContainer
-        else MaterialTheme.colorScheme.onSurfaceVariant
-
-    @Composable
-    fun borderColor(selected: Boolean = false): Color {
-        val isDark = isSystemInDarkTheme()
-        val borderAlpha = if (isDark) 0.4f else 0.6f
-        return if (selected) {
-            MaterialTheme.colorScheme.primary.copy(alpha = if (isDark) 0.55f else 0.45f)
-        } else {
-            MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)
         }
     }
 }

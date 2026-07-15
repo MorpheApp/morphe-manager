@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppCategoryState
 import app.morphe.manager.ui.model.HomeAppItem
+import app.morphe.manager.ui.screen.shared.GlassButtonDefaults
 import app.morphe.manager.ui.viewmodel.HomeAppSourceGroup
 import app.morphe.manager.util.RemoteAvatar
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
@@ -174,8 +175,8 @@ internal fun HomeGlassCategoryRow(
     trailing: @Composable RowScope.() -> Unit = {}
 ) {
     val shape = RoundedCornerShape(20.dp)
-    val containerColor = HomeGlassButtonDefaults.containerColor()
-    val borderColor = HomeGlassButtonDefaults.borderColor()
+    val containerColor = GlassButtonDefaults.containerColor()
+    val borderColor = GlassButtonDefaults.borderColor()
     val contentColor = MaterialTheme.colorScheme.onSurface
     val mutedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
 

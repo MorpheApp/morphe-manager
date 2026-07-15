@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
+import app.morphe.manager.ui.screen.shared.GlassButtonDefaults
 import app.morphe.manager.ui.screen.shared.SegmentedIconLabelButton
 
 /**
@@ -74,10 +75,10 @@ private fun RowScope.AppGroupingModeButton(
         label = label,
         selected = selected,
         modifier = if (selected) Modifier.weight(1f) else Modifier.width(48.dp),
-        containerColor = HomeGlassButtonDefaults.containerColor(selected),
-        contentColor = HomeGlassButtonDefaults.contentColor(selected),
+        containerColor = GlassButtonDefaults.containerColor(selected),
+        contentColor = GlassButtonDefaults.contentColor(selected),
         shape = RoundedCornerShape(20.dp),
-        border = BorderStroke(1.dp, HomeGlassButtonDefaults.borderColor(selected)),
+        border = BorderStroke(1.dp, GlassButtonDefaults.borderColor(selected)),
         pressScale = true,
         hapticFeedback = true
     )

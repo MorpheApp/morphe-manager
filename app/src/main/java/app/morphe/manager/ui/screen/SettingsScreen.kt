@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -44,6 +45,7 @@ import app.morphe.manager.ui.screen.settings.AdvancedTabContent
 import app.morphe.manager.ui.screen.settings.AppearanceTabContent
 import app.morphe.manager.ui.screen.settings.SystemTabContent
 import app.morphe.manager.ui.screen.settings.system.*
+import app.morphe.manager.ui.screen.shared.GlassButtonDefaults
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.screen.shared.SegmentedIconLabelButton
 import app.morphe.manager.ui.screen.shared.isLandscape
@@ -585,31 +587,17 @@ private fun NavigationItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val containerColor = if (isSelected) {
-        MaterialTheme.colorScheme.primaryContainer
-    } else {
-        MaterialTheme.colorScheme.surface
-    }
-    val contentColor = if (isSelected) {
-        MaterialTheme.colorScheme.onPrimaryContainer
-    } else {
-        MaterialTheme.colorScheme.onSurfaceVariant
-    }
-
     SegmentedIconLabelButton(
         icon = tab.icon,
         label = stringResource(tab.titleRes),
         selected = isSelected,
         onClick = onClick,
         modifier = modifier,
-        containerColor = containerColor,
-        contentColor = contentColor,
-        shape = RoundedCornerShape(24.dp),
-        iconSize = 24.dp,
-        height = 48.dp,
-        horizontalPadding = 12.dp,
-        iconLabelSpacing = 8.dp,
-        textStyle = MaterialTheme.typography.labelLarge,
-        fontWeight = FontWeight.Medium
+        containerColor = GlassButtonDefaults.containerColor(isSelected),
+        contentColor = GlassButtonDefaults.contentColor(isSelected),
+        shape = RoundedCornerShape(20.dp),
+        border = BorderStroke(1.dp, GlassButtonDefaults.borderColor(isSelected)),
+        pressScale = true,
+        hapticFeedback = true
     )
 }
