@@ -585,6 +585,10 @@ fun MainAppsSection(
     val isReorderMode = remember { mutableStateOf(false) }
     var localOrder by remember { mutableStateOf(homeAppItems.map { it.packageName }) }
     var reorderScopePackages by remember { mutableStateOf<Set<String>?>(null) }
+    // Snapshotted on drag start when the dragged card is part of a multi-selection. Only
+    // the dragged card moves during the drag; onDragStopped teleports these followers next
+    // to it so the group lands consolidated at the drop position.
+    var reorderGroupFollowers by remember { mutableStateOf<List<String>?>(null) }
     // Packages that were selected when entering reorder mode; used to scroll
     // the reordered list back to the card the user long-pressed (e.g. from search)
     val reorderFocusPackages = remember { mutableStateOf<Set<String>>(emptySet()) }
@@ -610,6 +614,7 @@ fun MainAppsSection(
         isReorderMode.value = false
         selectedPackages.clear()
         reorderScopePackages = null
+        reorderGroupFollowers = null
         localOrder = homeAppItems.map { it.packageName }
     }
 
@@ -850,34 +855,14 @@ fun MainAppsSection(
     fun movePackagesInOrder(
         order: List<String>,
         fromIndex: Int,
-        toIndex: Int,
-        selectedSet: Set<String>
+        toIndex: Int
     ): List<String> {
         if (fromIndex !in order.indices || toIndex !in order.indices || fromIndex == toIndex) {
             return order
         }
-
-        val draggedPackage = order[fromIndex]
-        if (draggedPackage !in selectedSet || selectedSet.size <= 1) {
-            return order.toMutableList().apply {
-                val moved = removeAt(fromIndex)
-                add(toIndex.coerceIn(0, size), moved)
-            }
-        }
-
-        val targetPackage = order[toIndex]
-        if (targetPackage in selectedSet) return order
-
-        val moving = order.filter { it in selectedSet }
-        val remaining = order.filter { it !in selectedSet }
-        val targetIndex = remaining.indexOf(targetPackage)
-        if (targetIndex == -1) return order
-
-        val insertionIndex = if (toIndex > fromIndex) targetIndex + 1 else targetIndex
-        return buildList {
-            addAll(remaining.take(insertionIndex.coerceIn(0, remaining.size)))
-            addAll(moving)
-            addAll(remaining.drop(insertionIndex.coerceIn(0, remaining.size)))
+        return order.toMutableList().apply {
+            val moved = removeAt(fromIndex)
+            add(toIndex.coerceIn(0, size), moved)
         }
     }
 
@@ -885,16 +870,14 @@ fun MainAppsSection(
         val scopePackages = reorderScopePackages ?: return movePackagesInOrder(
             order = localOrder,
             fromIndex = fromIndex,
-            toIndex = toIndex,
-            selectedSet = selectedPackages.keys.toSet()
+            toIndex = toIndex
         )
 
         val scopedOrder = localOrder.filter { it in scopePackages }
         val movedScopedOrder = movePackagesInOrder(
             order = scopedOrder,
             fromIndex = fromIndex,
-            toIndex = toIndex,
-            selectedSet = selectedPackages.keys.filterTo(mutableSetOf()) { it in scopePackages }
+            toIndex = toIndex
         )
         if (movedScopedOrder == scopedOrder) return localOrder
 
@@ -1134,6 +1117,24 @@ fun MainAppsSection(
                                                 dragHandleModifier = Modifier.draggableHandle(
                                                     onDragStarted = {
                                                         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                        val currentPkg = item.packageName
+                                                        val selected = selectedPackages.keys
+                                                        reorderGroupFollowers = if (selected.size > 1 && currentPkg in selected) {
+                                                            localOrder.filter { it in selected && it != currentPkg }
+                                                        } else null
+                                                    },
+                                                    onDragStopped = {
+                                                        val followers = reorderGroupFollowers
+                                                        reorderGroupFollowers = null
+                                                        if (followers.isNullOrEmpty()) return@draggableHandle
+                                                        val withoutFollowers = localOrder.filter { it !in followers }
+                                                        val dropIdx = withoutFollowers.indexOf(item.packageName)
+                                                        if (dropIdx < 0) return@draggableHandle
+                                                        localOrder = buildList {
+                                                            addAll(withoutFollowers.take(dropIdx + 1))
+                                                            addAll(followers)
+                                                            addAll(withoutFollowers.drop(dropIdx + 1))
+                                                        }
                                                     }
                                                 ),
                                                 modifier = Modifier.zIndex(if (itemIsDragging) 1f else 0f)
@@ -1441,6 +1442,7 @@ fun MainAppsSection(
                             appActions.onSaveOrder(localOrder)
                             isReorderMode.value = false
                             reorderScopePackages = null
+                            reorderGroupFollowers = null
                             selectedPackages.clear()
                         },
                         onResetOrder = {
@@ -1448,11 +1450,13 @@ fun MainAppsSection(
                             localOrder = homeAppItems.map { it.packageName }
                             isReorderMode.value = false
                             reorderScopePackages = null
+                            reorderGroupFollowers = null
                             selectedPackages.clear()
                         },
                         onCancelReorder = {
                             isReorderMode.value = false
                             reorderScopePackages = null
+                            reorderGroupFollowers = null
                             selectedPackages.clear()
                             localOrder = homeAppItems.map { it.packageName }
                         },
