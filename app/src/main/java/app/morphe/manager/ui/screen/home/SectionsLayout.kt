@@ -575,6 +575,7 @@ fun MainAppsSection(
     // the reordered list back to the card the user long-pressed (e.g. from search)
     val reorderFocusPackages = remember { mutableStateOf<Set<String>>(emptySet()) }
     val haptic = LocalHapticFeedback.current
+    val scope = rememberCoroutineScope()
 
     // Split into two flags so the app multi-select and category context bars stay
     // mutually exclusive at the footer slot
@@ -920,15 +921,22 @@ fun MainAppsSection(
         } ?: orderedItems
     }
 
-    // Keep the previously long-pressed card in view when switching to reorder mode
-    LaunchedEffect(isReorderMode.value) {
+    // Keep the previously long-pressed card in view when switching to flat reorder mode.
+    // Grouped reorder swaps from the full grouped list to a scoped group list, so reusing
+    // the old selected-card position can point into the wrong list shape on large lists.
+    LaunchedEffect(isReorderMode.value, reorderScopePackages) {
         if (isReorderMode.value) {
-            val targets = reorderFocusPackages.value
-            if (targets.isNotEmpty()) {
-                val topIndex = reorderItems.indexOfFirst { it.packageName in targets }
-                if (topIndex >= 0) listState.scrollToItem(topIndex)
+            if (reorderScopePackages != null) {
+                listState.scrollToItem(0)
+                reorderFocusPackages.value = emptySet()
+            } else {
+                val targets = reorderFocusPackages.value
+                if (targets.isNotEmpty()) {
+                    val topIndex = reorderItems.indexOfFirst { it.packageName in targets }
+                    if (topIndex >= 0) listState.scrollToItem(topIndex)
+                }
+                reorderFocusPackages.value = emptySet()
             }
-            reorderFocusPackages.value = emptySet()
         }
     }
 
@@ -1351,14 +1359,26 @@ fun MainAppsSection(
                             selectedPackages.clear()
                         },
                         onEnterReorder = {
-                            groupedSelectionPackages?.let { scopePackages ->
+                            val scopePackages = groupedSelectionPackages
+                            scopePackages?.let {
                                 selectedPackages.retain { it in scopePackages }
                             }
-                            reorderScopePackages = groupedSelectionPackages
-                            reorderFocusPackages.value = selectedPackages.keys.toSet()
+                            reorderScopePackages = scopePackages
+                            reorderFocusPackages.value = if (scopePackages == null) {
+                                selectedPackages.keys.toSet()
+                            } else {
+                                emptySet()
+                            }
                             isMultiSelectMode.value = false
                             searchState.onClose()
-                            isReorderMode.value = true
+                            if (scopePackages == null) {
+                                isReorderMode.value = true
+                            } else {
+                                scope.launch {
+                                    listState.scrollToItem(0)
+                                    isReorderMode.value = true
+                                }
+                            }
                         },
                         onSaveOrder = {
                             appActions.onSaveOrder(localOrder)
