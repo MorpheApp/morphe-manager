@@ -2870,41 +2870,18 @@ internal fun HomeGlassPillButton(
     selected: Boolean = false,
     compact: Boolean = false
 ) {
-    val view = LocalView.current
     val shape = RoundedCornerShape(20.dp)
-    val isDark = isSystemInDarkTheme()
-    val backgroundAlpha = if (isDark) 0.35f else 0.6f
-    val borderAlpha = if (isDark) 0.4f else 0.6f
-    val backgroundColor = if (selected) {
-        MaterialTheme.colorScheme.primaryContainer.copy(alpha = if (isDark) 0.55f else 0.72f)
-    } else {
-        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha)
-    }
-    val borderColor = if (selected) {
-        MaterialTheme.colorScheme.primary.copy(alpha = if (isDark) 0.55f else 0.45f)
-    } else {
-        MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)
-    }
-    val contentColor = if (selected) {
-        MaterialTheme.colorScheme.onPrimaryContainer
-    } else {
-        MaterialTheme.colorScheme.onSurfaceVariant
-    }
+    val backgroundColor = HomeGlassButtonDefaults.containerColor(selected)
+    val borderColor = HomeGlassButtonDefaults.borderColor(selected)
+    val contentColor = HomeGlassButtonDefaults.contentColor(selected)
     val height = if (compact) 44.dp else 48.dp
     val horizontalPadding = if (compact) 8.dp else 16.dp
     val spacing = if (compact) 6.dp else 8.dp
     val textStyle = if (compact) MaterialTheme.typography.labelMedium else MaterialTheme.typography.titleMedium
 
     val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
-    val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.97f else 1f,
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy,
-            stiffness = Spring.StiffnessMedium
-        ),
-        label = "pill_press_scale"
-    )
+    val scale = rememberPressScale(interactionSource, label = "pill_press_scale")
+    val handleClick = rememberHapticClick(onClick)
 
     Box(
         modifier = modifier
@@ -2919,11 +2896,9 @@ internal fun HomeGlassPillButton(
             )
             .clickable(
                 interactionSource = interactionSource,
-                indication = null
-            ) {
-                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                onClick()
-            },
+                indication = null,
+                onClick = handleClick
+            ),
         contentAlignment = Alignment.Center
     ) {
         Row(
@@ -2948,6 +2923,40 @@ internal fun HomeGlassPillButton(
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Center
             )
+        }
+    }
+}
+
+/**
+ * Shared color tokens for the home frosted-glass pill family. Reused by
+ * [HomeGlassPillButton] and by the home segmented toolbar so both stay in step when the
+ * palette changes.
+ */
+internal object HomeGlassButtonDefaults {
+    @Composable
+    fun containerColor(selected: Boolean = false): Color {
+        val isDark = isSystemInDarkTheme()
+        val backgroundAlpha = if (isDark) 0.35f else 0.6f
+        return if (selected) {
+            MaterialTheme.colorScheme.primaryContainer.copy(alpha = if (isDark) 0.55f else 0.72f)
+        } else {
+            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha)
+        }
+    }
+
+    @Composable
+    fun contentColor(selected: Boolean = false): Color =
+        if (selected) MaterialTheme.colorScheme.onPrimaryContainer
+        else MaterialTheme.colorScheme.onSurfaceVariant
+
+    @Composable
+    fun borderColor(selected: Boolean = false): Color {
+        val isDark = isSystemInDarkTheme()
+        val borderAlpha = if (isDark) 0.4f else 0.6f
+        return if (selected) {
+            MaterialTheme.colorScheme.primary.copy(alpha = if (isDark) 0.55f else 0.45f)
+        } else {
+            MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)
         }
     }
 }

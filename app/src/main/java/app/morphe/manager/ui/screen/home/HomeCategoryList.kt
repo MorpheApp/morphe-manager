@@ -203,21 +203,21 @@ internal fun HomeCategoryHeader(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 44.dp)
-                .padding(start = 10.dp, end = 6.dp, top = 6.dp, bottom = 6.dp),
+                .heightIn(min = 48.dp)
+                .padding(start = 12.dp, end = 6.dp, top = 6.dp, bottom = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             if (isSourceGroup) {
                 SourceCategoryIcon(
                     group = group,
-                    modifier = Modifier.size(22.dp)
+                    modifier = Modifier.size(24.dp)
                 )
             } else {
                 Icon(
                     imageVector = leadingIcon,
                     contentDescription = null,
-                    modifier = Modifier.size(18.dp),
+                    modifier = Modifier.size(24.dp),
                     tint = mutedContentColor
                 )
             }
@@ -229,15 +229,15 @@ internal fun HomeCategoryHeader(
             ) {
                 Text(
                     text = group.title,
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.Medium,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f, fill = false)
                 )
                 Text(
                     text = countText,
-                    style = MaterialTheme.typography.labelSmall,
+                    style = MaterialTheme.typography.labelMedium,
                     color = mutedContentColor,
                     maxLines = 1
                 )
@@ -252,7 +252,7 @@ internal fun HomeCategoryHeader(
                         Icon(
                             imageVector = Icons.Outlined.MoreVert,
                             contentDescription = stringResource(R.string.more_options),
-                            modifier = Modifier.size(18.dp),
+                            modifier = Modifier.size(24.dp),
                             tint = mutedContentColor
                         )
                     }
@@ -289,7 +289,7 @@ internal fun HomeCategoryHeader(
                         stringResource(R.string.expand)
                     else
                         stringResource(R.string.collapse),
-                    modifier = Modifier.size(20.dp),
+                    modifier = Modifier.size(24.dp),
                     tint = mutedContentColor
                 )
             }
@@ -370,7 +370,7 @@ internal fun CategoryHeaderDragHandle(modifier: Modifier = Modifier) {
         Icon(
             imageVector = Icons.Outlined.DragHandle,
             contentDescription = stringResource(R.string.reorder_list),
-            modifier = Modifier.size(20.dp),
+            modifier = Modifier.size(24.dp),
             tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }

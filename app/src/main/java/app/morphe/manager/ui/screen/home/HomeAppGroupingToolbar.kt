@@ -5,9 +5,10 @@
 
 package app.morphe.manager.ui.screen.home
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Category
@@ -20,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
+import app.morphe.manager.ui.screen.shared.SegmentedIconLabelButton
 
 /**
  * Segmented pill row for switching between [HomeAppCategoryViewMode]s from the home footer.
@@ -32,7 +34,9 @@ internal fun AppGroupingToolbar(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .animateContentSize(),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -40,40 +44,41 @@ internal fun AppGroupingToolbar(
             onClick = { onModeChange(HomeAppCategoryViewMode.ALL_APPS) },
             icon = Icons.Outlined.Apps,
             label = stringResource(R.string.home_category_all_apps),
-            selected = mode == HomeAppCategoryViewMode.ALL_APPS,
-            modifier = Modifier.weight(1f)
+            selected = mode == HomeAppCategoryViewMode.ALL_APPS
         )
         AppGroupingModeButton(
             onClick = { onModeChange(HomeAppCategoryViewMode.SOURCES) },
             icon = Icons.Outlined.Source,
             label = stringResource(R.string.sources),
-            selected = mode == HomeAppCategoryViewMode.SOURCES,
-            modifier = Modifier.weight(1f)
+            selected = mode == HomeAppCategoryViewMode.SOURCES
         )
         AppGroupingModeButton(
             onClick = { onModeChange(HomeAppCategoryViewMode.CUSTOM) },
             icon = Icons.Outlined.Category,
             label = stringResource(R.string.home_category_custom),
-            selected = mode == HomeAppCategoryViewMode.CUSTOM,
-            modifier = Modifier.weight(1f)
+            selected = mode == HomeAppCategoryViewMode.CUSTOM
         )
     }
 }
 
 @Composable
-private fun AppGroupingModeButton(
+private fun RowScope.AppGroupingModeButton(
     onClick: () -> Unit,
     icon: ImageVector,
     label: String,
-    selected: Boolean,
-    modifier: Modifier = Modifier
+    selected: Boolean
 ) {
-    HomeGlassPillButton(
+    SegmentedIconLabelButton(
         onClick = onClick,
-        text = label,
         icon = icon,
-        modifier = modifier,
+        label = label,
         selected = selected,
-        compact = true
+        modifier = if (selected) Modifier.weight(1f) else Modifier.width(48.dp),
+        containerColor = HomeGlassButtonDefaults.containerColor(selected),
+        contentColor = HomeGlassButtonDefaults.contentColor(selected),
+        shape = RoundedCornerShape(20.dp),
+        border = BorderStroke(1.dp, HomeGlassButtonDefaults.borderColor(selected)),
+        pressScale = true,
+        hapticFeedback = true
     )
 }
