@@ -938,7 +938,6 @@ The image dimensions must be as follows:
     <string name="search">Search</string>
     <string name="search_no_results">No results found</string>
     <string name="sort">Sort</string>
-    <string name="more_options">More options</string>
     <string name="any_version">Any</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
