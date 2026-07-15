@@ -89,6 +89,9 @@ class HomeAppButtonPreferences(context: Context) {
     private val _expandedSourceGroups = MutableStateFlow(loadExpandedSourceGroups())
     val expandedSourceGroups: StateFlow<Set<Int>> = _expandedSourceGroups.asStateFlow()
 
+    private val _uncategorizedCollapsed = MutableStateFlow(loadUncategorizedCollapsed())
+    val uncategorizedCollapsed: StateFlow<Boolean> = _uncategorizedCollapsed.asStateFlow()
+
     private fun loadHiddenPackages(): Set<String> {
         return prefs.getStringSet(KEY_HIDDEN, null) ?: emptySet()
     }
@@ -227,6 +230,13 @@ class HomeAppButtonPreferences(context: Context) {
         )
     }
 
+    /** Flip the collapse state of the Uncategorized bucket. */
+    fun toggleUncategorizedCollapsed() {
+        val next = !_uncategorizedCollapsed.value
+        prefs.edit { putBoolean(KEY_UNCATEGORIZED_COLLAPSED, next) }
+        _uncategorizedCollapsed.value = next
+    }
+
     /**
      * Flip the collapse state of a source group. The default (Morphe) source is always kept
      * expanded, so calls with its uid are ignored.
@@ -301,6 +311,9 @@ class HomeAppButtonPreferences(context: Context) {
             ?.toSet()
             ?: emptySet()
 
+    private fun loadUncategorizedCollapsed(): Boolean =
+        prefs.getBoolean(KEY_UNCATEGORIZED_COLLAPSED, false)
+
     private fun saveCategoryState(state: HomeAppCategoryState) {
         val validIds = state.categories.mapTo(mutableSetOf()) { it.id }
         val cleanAssignments = state.assignments.filterValues { it in validIds }
@@ -354,6 +367,7 @@ class HomeAppButtonPreferences(context: Context) {
         private const val KEY_CATEGORY_VIEW_MODE = "category_view_mode"
         private const val KEY_SHOW_CATEGORY_VIEW_SWITCHER = "show_category_view_switcher"
         private const val KEY_EXPANDED_SOURCE_GROUPS = "expanded_source_groups"
+        private const val KEY_UNCATEGORIZED_COLLAPSED = "uncategorized_collapsed"
         private const val CATEGORY_SEPARATOR = "\t"
     }
 }

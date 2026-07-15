@@ -66,6 +66,7 @@ internal fun buildHomeCategoryGroups(
     items: List<HomeAppItem>,
     categoryState: HomeAppCategoryState,
     uncategorizedTitle: String,
+    uncategorizedCollapsed: Boolean,
     ignoreCollapsed: Boolean
 ): List<HomeCategoryGroup> {
     val assigned = items.groupBy { item -> categoryState.assignments[item.packageName] }
@@ -91,8 +92,8 @@ internal fun buildHomeCategoryGroups(
             id = null,
             title = uncategorizedTitle,
             items = it,
-            collapsed = false,
-            collapsible = false,
+            collapsed = !ignoreCollapsed && uncategorizedCollapsed,
+            collapsible = true,
             editable = false
         )
     }
@@ -110,6 +111,7 @@ internal fun buildHomeSourceGroups(
     items: List<HomeAppItem>,
     sourceGroups: List<HomeAppSourceGroup>,
     uncategorizedTitle: String,
+    uncategorizedCollapsed: Boolean,
     ignoreCollapsed: Boolean
 ): List<HomeCategoryGroup> {
     val usedPackages = mutableSetOf<String>()
@@ -145,8 +147,8 @@ internal fun buildHomeSourceGroups(
             id = null,
             title = uncategorizedTitle,
             items = it,
-            collapsed = false,
-            collapsible = false,
+            collapsed = !ignoreCollapsed && uncategorizedCollapsed,
+            collapsible = true,
             editable = false
         )
     }
