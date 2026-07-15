@@ -798,15 +798,17 @@ fun MainAppsSection(
             HomeAppCategoryViewMode.ALL_APPS -> emptyList()
         }
     }
+    // Cheap key - the block only reads firstSelectedPackage, so passing the full keys
+    // list would allocate on every recomp
+    val firstSelectedPackage = selectedPackages.keys.firstOrNull()
     val groupedSelectionPackages = remember(
         appGrouping,
-        selectedPackages.keys.toList(),
+        firstSelectedPackage,
         groupedReorderGroups
     ) {
-        if (appGrouping == HomeAppCategoryViewMode.ALL_APPS || selectedPackages.isEmpty) {
+        if (appGrouping == HomeAppCategoryViewMode.ALL_APPS || firstSelectedPackage == null) {
             null
         } else {
-            val firstSelectedPackage = selectedPackages.keys.firstOrNull()
             groupedReorderGroups
                 .firstOrNull { group ->
                     group.items.any { item -> item.packageName == firstSelectedPackage }
@@ -853,15 +855,12 @@ fun MainAppsSection(
     }
 
     fun moveAppOrder(fromIndex: Int, toIndex: Int): List<String> {
-        val scopePackages = reorderScopePackages
-        if (scopePackages == null) {
-            return movePackagesInOrder(
-                order = localOrder,
-                fromIndex = fromIndex,
-                toIndex = toIndex,
-                selectedSet = selectedPackages.keys.toSet()
-            )
-        }
+        val scopePackages = reorderScopePackages ?: return movePackagesInOrder(
+            order = localOrder,
+            fromIndex = fromIndex,
+            toIndex = toIndex,
+            selectedSet = selectedPackages.keys.toSet()
+        )
 
         val scopedOrder = localOrder.filter { it in scopePackages }
         val movedScopedOrder = movePackagesInOrder(
@@ -921,22 +920,16 @@ fun MainAppsSection(
         } ?: orderedItems
     }
 
-    // Keep the previously long-pressed card in view when switching to flat reorder mode.
-    // Grouped reorder swaps from the full grouped list to a scoped group list, so reusing
-    // the old selected-card position can point into the wrong list shape on large lists.
-    LaunchedEffect(isReorderMode.value, reorderScopePackages) {
-        if (isReorderMode.value) {
-            if (reorderScopePackages != null) {
-                listState.scrollToItem(0)
-                reorderFocusPackages.value = emptySet()
-            } else {
-                val targets = reorderFocusPackages.value
-                if (targets.isNotEmpty()) {
-                    val topIndex = reorderItems.indexOfFirst { it.packageName in targets }
-                    if (topIndex >= 0) listState.scrollToItem(topIndex)
-                }
-                reorderFocusPackages.value = emptySet()
+    // Flat-only: grouped reorder pre-scrolls to the top from onEnterReorder before the
+    // items list flips, so it doesn't need a post-mode-change scroll here
+    LaunchedEffect(isReorderMode.value) {
+        if (isReorderMode.value && reorderScopePackages == null) {
+            val targets = reorderFocusPackages.value
+            if (targets.isNotEmpty()) {
+                val topIndex = reorderItems.indexOfFirst { it.packageName in targets }
+                if (topIndex >= 0) listState.scrollToItem(topIndex)
             }
+            reorderFocusPackages.value = emptySet()
         }
     }
 
@@ -1331,9 +1324,12 @@ fun MainAppsSection(
 
                     // Multi-select / reorder bar - slides up from bottom
                     val activeAppScopePackages = reorderScopePackages ?: groupedSelectionPackages
-                    val activeAppScopeItems = activeAppScopePackages?.let { scopePackages ->
-                        homeAppItems.filter { it.packageName in scopePackages }
-                    } ?: homeAppItems
+                    // Memoized - otherwise selection toggles refilter homeAppItems each pass
+                    val activeAppScopeItems = remember(activeAppScopePackages, homeAppItems) {
+                        activeAppScopePackages?.let { scopePackages ->
+                            homeAppItems.filter { it.packageName in scopePackages }
+                        } ?: homeAppItems
+                    }
                     MultiSelectBar(
                         selectedCount = selectedPackages.size,
                         totalCount = activeAppScopeItems.size,
@@ -1359,19 +1355,18 @@ fun MainAppsSection(
                             selectedPackages.clear()
                         },
                         onEnterReorder = {
-                            val scopePackages = groupedSelectionPackages
-                            scopePackages?.let {
-                                selectedPackages.retain { it in scopePackages }
+                            groupedSelectionPackages?.let { packages ->
+                                selectedPackages.retain { it in packages }
                             }
-                            reorderScopePackages = scopePackages
-                            reorderFocusPackages.value = if (scopePackages == null) {
+                            reorderScopePackages = groupedSelectionPackages
+                            reorderFocusPackages.value = if (groupedSelectionPackages == null) {
                                 selectedPackages.keys.toSet()
                             } else {
                                 emptySet()
                             }
                             isMultiSelectMode.value = false
                             searchState.onClose()
-                            if (scopePackages == null) {
+                            if (groupedSelectionPackages == null) {
                                 isReorderMode.value = true
                             } else {
                                 scope.launch {
