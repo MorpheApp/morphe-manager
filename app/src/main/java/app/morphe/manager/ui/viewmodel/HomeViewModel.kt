@@ -1161,9 +1161,13 @@ class HomeViewModel(
         homeAppButtonPrefs.showCategoryViewSwitcher,
         homeAppButtonPrefs.expandedSourceGroups,
     ) { categoryState, categoryViewMode, showCategoryViewSwitcher, expandedSourceGroups ->
+        // When the switcher is off, treat the home as flat All-apps but keep the
+        // persisted mode so re-enabling the switcher restores the user's last choice
+        val effectiveMode = if (showCategoryViewSwitcher) categoryViewMode
+        else HomeAppCategoryViewMode.ALL_APPS
         HomeCategoryPrefs(
             categoryState = categoryState,
-            categoryViewMode = categoryViewMode,
+            categoryViewMode = effectiveMode,
             showCategoryViewSwitcher = showCategoryViewSwitcher,
             expandedSourceGroups = expandedSourceGroups
         )

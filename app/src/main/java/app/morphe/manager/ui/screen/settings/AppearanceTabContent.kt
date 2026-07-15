@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
-import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
 import app.morphe.manager.ui.screen.settings.appearance.*
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.LanguageRepository.getLanguageDisplayName
@@ -65,7 +64,6 @@ fun AppearanceTabContent(
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
-    val appGrouping by homeAppButtonPrefs.categoryViewMode.collectAsStateWithLifecycle()
     val showAppGroupingSwitcher by homeAppButtonPrefs.showCategoryViewSwitcher.collectAsStateWithLifecycle()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
@@ -73,7 +71,6 @@ fun AppearanceTabContent(
 
     val showLanguageDialog = remember { mutableStateOf(false) }
     val showTranslationInfoDialog = remember { mutableStateOf(false) }
-    val showAppGroupingDialog = remember { mutableStateOf(false) }
 
     // Localized strings for accessibility
     val enabledState = stringResource(R.string.enabled)
@@ -124,18 +121,20 @@ fun AppearanceTabContent(
             )
             MorpheSettingsDivider()
             SettingsItem(
-                onClick = { showAppGroupingDialog.value = true },
+                onClick = { homeAppButtonPrefs.setShowCategoryViewSwitcher(!showAppGroupingSwitcher) },
                 title = stringResource(R.string.settings_appearance_app_grouping),
-                subtitle = if (showAppGroupingSwitcher) {
-                    stringResource(
-                        R.string.settings_appearance_app_grouping_subtitle_with_selector,
-                        appGroupingTitle(appGrouping)
-                    )
-                } else {
-                    appGroupingTitle(appGrouping)
-                },
+                subtitle = stringResource(R.string.settings_appearance_app_grouping_description),
                 leadingContent = {
                     MorpheIcon(icon = Icons.Outlined.ViewAgenda)
+                },
+                trailingContent = {
+                    MorpheSwitch(
+                        checked = showAppGroupingSwitcher,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (showAppGroupingSwitcher) enabledState else disabledState
+                        }
+                    )
                 }
             )
         }
@@ -281,20 +280,6 @@ fun AppearanceTabContent(
         AppIconSelector()
     }
 
-    AnimatedVisibility(
-        visible = showAppGroupingDialog.value,
-        enter = MorpheAnimations.fadeIn,
-        exit = MorpheAnimations.fadeOut
-    ) {
-        AppGroupingDialog(
-            current = appGrouping,
-            showSwitcher = showAppGroupingSwitcher,
-            onSelect = homeAppButtonPrefs::setCategoryViewMode,
-            onShowSwitcherChange = homeAppButtonPrefs::setShowCategoryViewSwitcher,
-            onDismiss = { showAppGroupingDialog.value = false }
-        )
-    }
-
     // Translation info dialog
     AnimatedVisibility(
         visible = showTranslationInfoDialog.value,
@@ -337,105 +322,6 @@ fun AppearanceTabContent(
     }
 }
 
-@Composable
-private fun AppGroupingDialog(
-    current: HomeAppCategoryViewMode,
-    showSwitcher: Boolean,
-    onSelect: (HomeAppCategoryViewMode) -> Unit,
-    onShowSwitcherChange: (Boolean) -> Unit,
-    onDismiss: () -> Unit
-) {
-    MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = stringResource(R.string.settings_appearance_app_grouping),
-        footer = {
-            MorpheDialogOutlinedButton(
-                text = stringResource(R.string.close),
-                onClick = onDismiss,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = MorpheDefaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
-        ) {
-            HomeAppCategoryViewMode.entries.forEach { mode ->
-                AppGroupingOption(
-                    title = appGroupingTitle(mode),
-                    description = appGroupingDescription(mode),
-                    selected = mode == current,
-                    onSelect = { onSelect(mode) }
-                )
-            }
-
-            MorpheDialogToggleRow(
-                icon = Icons.Outlined.SwapHoriz,
-                title = stringResource(R.string.settings_appearance_app_grouping_show_selector),
-                description = stringResource(R.string.settings_appearance_app_grouping_show_selector_description),
-                checked = showSwitcher,
-                onCheckedChange = onShowSwitcherChange
-            )
-        }
-    }
-}
-
-@Composable
-private fun AppGroupingOption(
-    title: String,
-    description: String,
-    selected: Boolean,
-    onSelect: () -> Unit
-) {
-    SettingsItemCard(
-        onClick = onSelect,
-        borderWidth = 1.dp,
-        modifier = Modifier.semantics {
-            role = Role.RadioButton
-            this.selected = selected
-        }
-    ) {
-        IconTextRow(
-            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-            leadingContent = {
-                if (selected) {
-                    StatusCircleIcon(
-                        icon = Icons.Outlined.Check,
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                } else {
-                    StatusCirclePlaceholder()
-                }
-            },
-            title = title,
-            description = description,
-            trailingContent = null
-        )
-    }
-}
-
-@Composable
-private fun appGroupingTitle(mode: HomeAppCategoryViewMode): String =
-    stringResource(
-        when (mode) {
-            HomeAppCategoryViewMode.ALL_APPS -> R.string.home_category_all_apps
-            HomeAppCategoryViewMode.SOURCES -> R.string.sources
-            HomeAppCategoryViewMode.CUSTOM -> R.string.home_category_custom
-        }
-    )
-
-@Composable
-private fun appGroupingDescription(mode: HomeAppCategoryViewMode): String =
-    stringResource(
-        when (mode) {
-            HomeAppCategoryViewMode.ALL_APPS -> R.string.settings_appearance_app_grouping_all_apps_description
-            HomeAppCategoryViewMode.SOURCES -> R.string.settings_appearance_app_grouping_sources_description
-            HomeAppCategoryViewMode.CUSTOM -> R.string.settings_appearance_app_grouping_custom_description
-        }
-    )
 
 /**
  * Language selection section.
