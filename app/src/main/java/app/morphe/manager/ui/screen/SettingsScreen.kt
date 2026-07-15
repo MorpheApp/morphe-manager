@@ -527,51 +527,45 @@ private fun MorpheBottomNavigation(
     onAppearanceTabPositioned: ((Rect) -> Unit)? = null,
     onSystemTabPositioned: ((Rect) -> Unit)? = null
 ) {
-    Surface(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .navigationBarsPadding(),
-        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
-        tonalElevation = 3.dp
+        contentAlignment = Alignment.Center
     ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
+        Row(
+            modifier = Modifier
+                .widthIn(max = 448.dp)
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 12.dp)
+                .animateContentSize(),
+            horizontalArrangement = Arrangement.spacedBy(32.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier
-                    .widthIn(max = 448.dp)
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
-                    .animateContentSize(),
-                horizontalArrangement = Arrangement.spacedBy(32.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                SettingsTab.entries.forEach { tab ->
-                    val isSelected = currentTab == tab
-                    NavigationItem(
-                        tab = tab,
-                        isSelected = isSelected,
-                        onClick = { onTabSelected(tab) },
-                        modifier = Modifier
-                            .then(if (isSelected) Modifier.weight(1f) else Modifier.width(64.dp))
-                            .then(
-                                when (tab) {
-                                    SettingsTab.APPEARANCE if onAppearanceTabPositioned != null ->
-                                        Modifier.onGloballyPositioned { coords ->
-                                            onAppearanceTabPositioned(coords.boundsInWindow())
-                                        }
+            SettingsTab.entries.forEach { tab ->
+                val isSelected = currentTab == tab
+                NavigationItem(
+                    tab = tab,
+                    isSelected = isSelected,
+                    onClick = { onTabSelected(tab) },
+                    modifier = Modifier
+                        .then(if (isSelected) Modifier.weight(1f) else Modifier.width(64.dp))
+                        .then(
+                            when (tab) {
+                                SettingsTab.APPEARANCE if onAppearanceTabPositioned != null ->
+                                    Modifier.onGloballyPositioned { coords ->
+                                        onAppearanceTabPositioned(coords.boundsInWindow())
+                                    }
 
-                                    SettingsTab.SYSTEM if onSystemTabPositioned != null ->
-                                        Modifier.onGloballyPositioned { coords ->
-                                            onSystemTabPositioned(coords.boundsInWindow())
-                                        }
+                                SettingsTab.SYSTEM if onSystemTabPositioned != null ->
+                                    Modifier.onGloballyPositioned { coords ->
+                                        onSystemTabPositioned(coords.boundsInWindow())
+                                    }
 
-                                    else -> Modifier
-                                }
-                            )
-                    )
-                }
+                                else -> Modifier
+                            }
+                        )
+                )
             }
         }
     }
