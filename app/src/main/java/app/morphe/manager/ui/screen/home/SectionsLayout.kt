@@ -321,31 +321,39 @@ private fun AdaptiveContent(
                         .weight(1f)
                         .fillMaxHeight()
                         .padding(horizontal = contentPadding),
-                    verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    if (!greetingMessage.isNullOrEmpty()) {
-                        GreetingSection(
-                            message = greetingMessage,
-                            modifier = Modifier.widthIn(max = maxCardWidth).fillMaxWidth(),
-                            onRefresh = chromeActions.onRefreshGreeting
-                        )
-                        Spacer(modifier = Modifier.height(itemSpacing))
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxWidth(),
+                        verticalArrangement = if (isGroupedAppView) Arrangement.Top else Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        if (!greetingMessage.isNullOrEmpty()) {
+                            GreetingSection(
+                                message = greetingMessage,
+                                modifier = Modifier.widthIn(max = maxCardWidth).fillMaxWidth(),
+                                onRefresh = chromeActions.onRefreshGreeting
+                            )
+                            Spacer(modifier = Modifier.height(itemSpacing))
+                        }
+                        Box(modifier = Modifier.weight(1f, fill = isGroupedAppView)) {
+                            MainAppsSection(
+                                apps = apps,
+                                appActions = appActions,
+                                searchState = searchState,
+                                onBundlesClick = chromeActions.onBundlesClick,
+                                itemSpacing = itemSpacing,
+                                maxCardWidth = maxCardWidth,
+                                onboardingState = onboardingState,
+                                showFadeOverlay = false,
+                                fillHeight = isGroupedAppView,
+                                modifier = if (isGroupedAppView) Modifier.fillMaxSize() else Modifier.fillMaxWidth()
+                            )
+                        }
                     }
-                    Box(modifier = Modifier.weight(1f, fill = isGroupedAppView)) {
-                        MainAppsSection(
-                            apps = apps,
-                            appActions = appActions,
-                            searchState = searchState,
-                            onBundlesClick = chromeActions.onBundlesClick,
-                            itemSpacing = itemSpacing,
-                            maxCardWidth = maxCardWidth,
-                            onboardingState = onboardingState,
-                            showFadeOverlay = false,
-                            fillHeight = isGroupedAppView,
-                            modifier = if (isGroupedAppView) Modifier.fillMaxSize() else Modifier.fillMaxWidth()
-                        )
-                    }
+                    // Footer stays pinned to the bottom of the pane regardless of view mode
                     HomeFooterControls(
                         showOtherApps = showOtherAppsFooter,
                         showGroupingSelector = showGroupingFooter,
@@ -362,8 +370,10 @@ private fun AdaptiveContent(
         } else {
             // Single-column layout for compact windows (portrait)
             Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth(),
+                verticalArrangement = if (isGroupedAppView) Arrangement.Top else Arrangement.Center
             ) {
                 // Section 2: Greeting - when disabled, show a small top spacer so
                 // the app cards don't sit flush against the top of the screen
@@ -374,7 +384,7 @@ private fun AdaptiveContent(
                         onRefresh = chromeActions.onRefreshGreeting
                     )
                     Spacer(modifier = Modifier.height(itemSpacing))
-                } else {
+                } else if (isGroupedAppView) {
                     Spacer(modifier = Modifier.height(24.dp))
                 }
 
@@ -393,24 +403,25 @@ private fun AdaptiveContent(
                         modifier = if (isGroupedAppView) Modifier.fillMaxSize() else Modifier.fillMaxWidth()
                     )
                 }
-                // Section 4: footer controls - hidden when no apps are available
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    HomeFooterControls(
-                        showOtherApps = showOtherAppsFooter,
-                        showGroupingSelector = showGroupingFooter,
-                        mode = apps.categoryViewMode,
-                        onOtherAppsClick = chromeActions.onOtherAppsClick,
-                        onModeChange = appActions.onCategoryViewModeChange,
-                        itemSpacing = itemSpacing,
-                        modifier = Modifier
-                            .padding(horizontal = contentPadding)
-                            .widthIn(max = maxCardWidth - contentPadding * 2)
-                            .fillMaxWidth()
-                    )
-                }
+            }
+            // Section 4: footer controls - pinned to the bottom of the screen,
+            // hidden when no apps are available
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                HomeFooterControls(
+                    showOtherApps = showOtherAppsFooter,
+                    showGroupingSelector = showGroupingFooter,
+                    mode = apps.categoryViewMode,
+                    onOtherAppsClick = chromeActions.onOtherAppsClick,
+                    onModeChange = appActions.onCategoryViewModeChange,
+                    itemSpacing = itemSpacing,
+                    modifier = Modifier
+                        .padding(horizontal = contentPadding)
+                        .widthIn(max = maxCardWidth - contentPadding * 2)
+                        .fillMaxWidth()
+                )
             }
         }
     }
