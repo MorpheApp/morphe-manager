@@ -67,7 +67,6 @@ internal fun buildHomeCategoryGroups(
     items: List<HomeAppItem>,
     categoryState: HomeAppCategoryState,
     uncategorizedTitle: String,
-    uncategorizedCollapsed: Boolean,
     ignoreCollapsed: Boolean
 ): List<HomeCategoryGroup> {
     val assigned = items.groupBy { item -> categoryState.assignments[item.packageName] }
@@ -93,7 +92,7 @@ internal fun buildHomeCategoryGroups(
             id = null,
             title = uncategorizedTitle,
             items = it,
-            collapsed = !ignoreCollapsed && uncategorizedCollapsed,
+            collapsed = !ignoreCollapsed && categoryState.uncategorizedCollapsed,
             collapsible = true,
             editable = false
         )

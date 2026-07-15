@@ -162,7 +162,6 @@ data class HomeAppState(
     val categoryState: HomeAppCategoryState,
     val categoryViewMode: HomeAppCategoryViewMode,
     val showCategoryViewSwitcher: Boolean,
-    val uncategorizedCollapsed: Boolean,
     val sourceGroups: List<HomeAppSourceGroup>
 )
 
@@ -193,7 +192,6 @@ private data class HomePrefs(
     val categoryState: HomeAppCategoryState,
     val categoryViewMode: HomeAppCategoryViewMode,
     val showCategoryViewSwitcher: Boolean,
-    val uncategorizedCollapsed: Boolean,
     val expandedSourceGroups: Set<Int>
 )
 
@@ -201,7 +199,6 @@ private data class HomeCategoryPrefs(
     val categoryState: HomeAppCategoryState,
     val categoryViewMode: HomeAppCategoryViewMode,
     val showCategoryViewSwitcher: Boolean,
-    val uncategorizedCollapsed: Boolean,
     val expandedSourceGroups: Set<Int>
 )
 
@@ -1163,8 +1160,7 @@ class HomeViewModel(
         homeAppButtonPrefs.categoryViewMode,
         homeAppButtonPrefs.showCategoryViewSwitcher,
         homeAppButtonPrefs.expandedSourceGroups,
-        homeAppButtonPrefs.uncategorizedCollapsed,
-    ) { categoryState, categoryViewMode, showCategoryViewSwitcher, expandedSourceGroups, uncategorizedCollapsed ->
+    ) { categoryState, categoryViewMode, showCategoryViewSwitcher, expandedSourceGroups ->
         // When the switcher is off, treat the home as flat All-apps but keep the
         // persisted mode so re-enabling the switcher restores the user's last choice
         val effectiveMode = if (showCategoryViewSwitcher) categoryViewMode
@@ -1173,7 +1169,6 @@ class HomeViewModel(
             categoryState = categoryState,
             categoryViewMode = effectiveMode,
             showCategoryViewSwitcher = showCategoryViewSwitcher,
-            uncategorizedCollapsed = uncategorizedCollapsed,
             expandedSourceGroups = expandedSourceGroups
         )
     }
@@ -1191,7 +1186,6 @@ class HomeViewModel(
             categoryState = categoryPrefs.categoryState,
             categoryViewMode = categoryPrefs.categoryViewMode,
             showCategoryViewSwitcher = categoryPrefs.showCategoryViewSwitcher,
-            uncategorizedCollapsed = categoryPrefs.uncategorizedCollapsed,
             expandedSourceGroups = categoryPrefs.expandedSourceGroups
         )
     }
@@ -1313,7 +1307,6 @@ class HomeViewModel(
             categoryState = homePrefs.categoryState,
             categoryViewMode = homePrefs.categoryViewMode,
             showCategoryViewSwitcher = homePrefs.showCategoryViewSwitcher,
-            uncategorizedCollapsed = homePrefs.uncategorizedCollapsed,
             sourceGroups = sourceGroups
         )
     }
@@ -1511,12 +1504,8 @@ class HomeViewModel(
         homeAppButtonPrefs.saveCategoryOrder(categoryIds)
     }
 
-    fun toggleAppCategoryCollapsed(categoryId: String) {
+    fun toggleAppCategoryCollapsed(categoryId: String?) {
         homeAppButtonPrefs.toggleCategoryCollapsed(categoryId)
-    }
-
-    fun toggleAppUncategorizedCollapsed() {
-        homeAppButtonPrefs.toggleUncategorizedCollapsed()
     }
 
     fun toggleAppSourceGroupCollapsed(sourceUid: Int) {

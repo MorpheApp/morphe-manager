@@ -103,7 +103,6 @@ data class HomeAppListUi(
     val categoryState: HomeAppCategoryState,
     val categoryViewMode: HomeAppCategoryViewMode,
     val showCategoryViewSwitcher: Boolean,
-    val uncategorizedCollapsed: Boolean,
     val sourceGroups: List<HomeAppSourceGroup>
 )
 
@@ -124,8 +123,7 @@ class HomeAppActions(
     val onRenameCategory: (String, String) -> Unit,
     val onDeleteCategory: (String) -> Unit,
     val onSaveCategoryOrder: (List<String>) -> Unit,
-    val onToggleCategoryCollapsed: (String) -> Unit,
-    val onToggleUncategorizedCollapsed: () -> Unit,
+    val onToggleCategoryCollapsed: (String?) -> Unit,
     val onToggleSourceGroupCollapsed: (Int) -> Unit,
     val onAssignAppsToCategory: (Set<String>, String?) -> Unit
 )
@@ -776,7 +774,6 @@ fun MainAppsSection(
     val categoryGroups = remember(
         filteredItems,
         apps.categoryState,
-        apps.uncategorizedCollapsed,
         searchQuery,
         uncategorizedTitle
     ) {
@@ -784,14 +781,13 @@ fun MainAppsSection(
             items = filteredItems,
             categoryState = apps.categoryState,
             uncategorizedTitle = uncategorizedTitle,
-            uncategorizedCollapsed = apps.uncategorizedCollapsed,
             ignoreCollapsed = searchQuery.isNotBlank()
         )
     }
     val sourceCategoryGroups = remember(
         filteredItems,
         apps.sourceGroups,
-        apps.uncategorizedCollapsed,
+        apps.categoryState.uncategorizedCollapsed,
         searchQuery,
         uncategorizedTitle
     ) {
@@ -799,7 +795,7 @@ fun MainAppsSection(
             items = filteredItems,
             sourceGroups = apps.sourceGroups,
             uncategorizedTitle = uncategorizedTitle,
-            uncategorizedCollapsed = apps.uncategorizedCollapsed,
+            uncategorizedCollapsed = apps.categoryState.uncategorizedCollapsed,
             ignoreCollapsed = searchQuery.isNotBlank()
         )
     }
@@ -821,9 +817,8 @@ fun MainAppsSection(
 
             HomeAppCategoryViewMode.CUSTOM -> buildHomeCategoryGroups(
                 items = homeAppItems,
-                categoryState = apps.categoryState,
+                categoryState = apps.categoryState.copy(uncategorizedCollapsed = false),
                 uncategorizedTitle = uncategorizedTitle,
-                uncategorizedCollapsed = false,
                 ignoreCollapsed = true
             )
 
@@ -1171,10 +1166,11 @@ fun MainAppsSection(
                                                     group = group,
                                                     onToggle = {
                                                         val sourceUid = group.sourceUid
-                                                        when {
-                                                            sourceUid != null -> appActions.onToggleSourceGroupCollapsed(sourceUid)
-                                                            group.id != null -> appActions.onToggleCategoryCollapsed(group.id)
-                                                            else -> appActions.onToggleUncategorizedCollapsed()
+                                                        if (sourceUid != null) {
+                                                            appActions.onToggleSourceGroupCollapsed(sourceUid)
+                                                        } else {
+                                                            // null id = uncategorized bucket
+                                                            appActions.onToggleCategoryCollapsed(group.id)
                                                         }
                                                     },
                                                     onLongPress = headerLongPress,

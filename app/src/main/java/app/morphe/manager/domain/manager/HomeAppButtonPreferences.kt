@@ -25,13 +25,14 @@ data class HomeAppCategory(
 )
 
 /**
- * Snapshot of the custom-grouping state: the ordered list of user categories plus a
- * package-to-category assignment map. Packages absent from [assignments] are treated as
- * uncategorized.
+ * Snapshot of the custom-grouping state: ordered user categories, package assignments, and
+ * the uncategorized bucket's collapse flag. Packages not in [assignments] are uncategorized;
+ * the bucket flag rides here so it persists alongside the rest of the category state.
  */
 data class HomeAppCategoryState(
     val categories: List<HomeAppCategory>,
-    val assignments: Map<String, String>
+    val assignments: Map<String, String>,
+    val uncategorizedCollapsed: Boolean = false
 )
 
 /**
@@ -88,9 +89,6 @@ class HomeAppButtonPreferences(context: Context) {
 
     private val _expandedSourceGroups = MutableStateFlow(loadExpandedSourceGroups())
     val expandedSourceGroups: StateFlow<Set<Int>> = _expandedSourceGroups.asStateFlow()
-
-    private val _uncategorizedCollapsed = MutableStateFlow(loadUncategorizedCollapsed())
-    val uncategorizedCollapsed: StateFlow<Boolean> = _uncategorizedCollapsed.asStateFlow()
 
     private fun loadHiddenPackages(): Set<String> {
         return prefs.getStringSet(KEY_HIDDEN, null) ?: emptySet()
@@ -197,7 +195,7 @@ class HomeAppButtonPreferences(context: Context) {
     fun deleteCategory(categoryId: String) {
         val current = _categoryState.value
         saveCategoryState(
-            HomeAppCategoryState(
+            current.copy(
                 categories = current.categories.filterNot { it.id == categoryId },
                 assignments = current.assignments.filterValues { it != categoryId }
             )
@@ -218,23 +216,19 @@ class HomeAppButtonPreferences(context: Context) {
         )
     }
 
-    /** Flip the collapse state of a custom category. */
-    fun toggleCategoryCollapsed(categoryId: String) {
+    /** Flip a custom category's collapsed state, or the Uncategorized bucket's when [categoryId] is null. */
+    fun toggleCategoryCollapsed(categoryId: String?) {
         val current = _categoryState.value
-        saveCategoryState(
+        val next = if (categoryId == null) {
+            current.copy(uncategorizedCollapsed = !current.uncategorizedCollapsed)
+        } else {
             current.copy(
                 categories = current.categories.map { category ->
                     if (category.id == categoryId) category.copy(collapsed = !category.collapsed) else category
                 }
             )
-        )
-    }
-
-    /** Flip the collapse state of the Uncategorized bucket. */
-    fun toggleUncategorizedCollapsed() {
-        val next = !_uncategorizedCollapsed.value
-        prefs.edit { putBoolean(KEY_UNCATEGORIZED_COLLAPSED, next) }
-        _uncategorizedCollapsed.value = next
+        }
+        saveCategoryState(next)
     }
 
     /**
@@ -296,7 +290,11 @@ class HomeAppButtonPreferences(context: Context) {
             ?.toMap()
             ?: emptyMap()
 
-        return HomeAppCategoryState(categories, assignments)
+        return HomeAppCategoryState(
+            categories = categories,
+            assignments = assignments,
+            uncategorizedCollapsed = prefs.getBoolean(KEY_UNCATEGORIZED_COLLAPSED, false)
+        )
     }
 
     private fun loadCategoryViewMode(): HomeAppCategoryViewMode =
@@ -310,9 +308,6 @@ class HomeAppButtonPreferences(context: Context) {
             ?.mapNotNull { it.toIntOrNull() }
             ?.toSet()
             ?: emptySet()
-
-    private fun loadUncategorizedCollapsed(): Boolean =
-        prefs.getBoolean(KEY_UNCATEGORIZED_COLLAPSED, false)
 
     private fun saveCategoryState(state: HomeAppCategoryState) {
         val validIds = state.categories.mapTo(mutableSetOf()) { it.id }
@@ -337,8 +332,13 @@ class HomeAppButtonPreferences(context: Context) {
                     ).joinToString(CATEGORY_SEPARATOR)
                 }
             )
+            putBoolean(KEY_UNCATEGORIZED_COLLAPSED, state.uncategorizedCollapsed)
         }
-        _categoryState.value = HomeAppCategoryState(state.categories, cleanAssignments)
+        _categoryState.value = HomeAppCategoryState(
+            categories = state.categories,
+            assignments = cleanAssignments,
+            uncategorizedCollapsed = state.uncategorizedCollapsed
+        )
     }
 
     private fun saveExpandedSourceGroups(sourceUids: Set<Int>) {

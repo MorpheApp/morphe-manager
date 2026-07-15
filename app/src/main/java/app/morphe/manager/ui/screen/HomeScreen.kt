@@ -99,8 +99,7 @@ fun HomeScreen(
     val homeAppCategoryState = homeAppState?.categoryState ?: HomeAppCategoryState(emptyList(), emptyMap())
     val homeAppCategoryViewMode = homeAppState?.categoryViewMode ?: HomeAppCategoryViewMode.ALL_APPS
     val showCategoryViewSwitcher = homeAppState?.showCategoryViewSwitcher == true
-    val uncategorizedCollapsed = homeAppState?.uncategorizedCollapsed == true
-    val homeAppSourceGroups = homeAppState?.sourceGroups ?: emptyList<HomeAppSourceGroup>()
+    val homeAppSourceGroups = homeAppState?.sourceGroups ?: emptyList()
     val bundlePipelineLoading = homeAppState == null
     val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
@@ -232,7 +231,6 @@ fun HomeScreen(
                     categoryState = homeAppCategoryState,
                     categoryViewMode = homeAppCategoryViewMode,
                     showCategoryViewSwitcher = showCategoryViewSwitcher,
-                    uncategorizedCollapsed = uncategorizedCollapsed,
                     sourceGroups = homeAppSourceGroups
                 ),
                 appActions = HomeAppActions(
@@ -275,9 +273,6 @@ fun HomeScreen(
                     },
                     onToggleCategoryCollapsed = { categoryId ->
                         homeViewModel.toggleAppCategoryCollapsed(categoryId)
-                    },
-                    onToggleUncategorizedCollapsed = {
-                        homeViewModel.toggleAppUncategorizedCollapsed()
                     },
                     onToggleSourceGroupCollapsed = { sourceUid ->
                         homeViewModel.toggleAppSourceGroupCollapsed(sourceUid)
