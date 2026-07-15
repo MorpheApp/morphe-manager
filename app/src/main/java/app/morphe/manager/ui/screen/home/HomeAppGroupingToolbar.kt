@@ -38,7 +38,7 @@ internal fun AppGroupingToolbar(
         modifier = modifier
             .fillMaxWidth()
             .animateContentSize(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         AppGroupingModeButton(

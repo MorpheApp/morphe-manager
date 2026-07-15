@@ -539,7 +539,7 @@ private fun MorpheBottomNavigation(
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 12.dp)
                 .animateContentSize(),
-            horizontalArrangement = Arrangement.spacedBy(32.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             SettingsTab.entries.forEach { tab ->
