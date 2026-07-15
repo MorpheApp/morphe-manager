@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
@@ -146,6 +147,103 @@ internal fun MultiSelectBar(
                             contentDescription = reorderListLabel,
                             tooltip = reorderListLabel,
                             enabled = selectedCount > 0
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Slide-up bar for the currently long-pressed category header.
+ */
+@Composable
+internal fun CategoryActionBar(
+    activeCategoryTitle: String?,
+    visible: Boolean,
+    isReorderMode: Boolean,
+    onRename: () -> Unit,
+    onDelete: () -> Unit,
+    onEnterReorder: () -> Unit,
+    onExitReorder: () -> Unit,
+    onCancel: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val cancelLabel = stringResource(android.R.string.cancel)
+    val renameLabel = stringResource(R.string.rename)
+    val deleteLabel = stringResource(R.string.delete)
+    val reorderListLabel = stringResource(R.string.reorder_list)
+    val reorderListHint = stringResource(R.string.reorder_list_hint)
+    val doneLabel = stringResource(R.string.done)
+
+    val destructiveColors = IconButtonDefaults.filledTonalIconButtonColors(
+        containerColor = MaterialTheme.colorScheme.errorContainer,
+        contentColor = MaterialTheme.colorScheme.onErrorContainer
+    )
+
+    MultiSelectShell(visible = visible, modifier = modifier) {
+        AnimatedContent(
+            targetState = isReorderMode,
+            transitionSpec = MorpheAnimations.fadeCrossfade(200),
+            label = "category_bar_mode"
+        ) { inReorder ->
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                if (inReorder) {
+                    Text(
+                        text = reorderListHint,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    ActionPillRow {
+                        ActionPillButton(
+                            onClick = onExitReorder,
+                            icon = Icons.Outlined.Check,
+                            contentDescription = doneLabel,
+                            tooltip = doneLabel
+                        )
+                    }
+                } else {
+                    if (activeCategoryTitle != null) {
+                        Text(
+                            text = activeCategoryTitle,
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                    ActionPillRow {
+                        ActionPillButton(
+                            onClick = onRename,
+                            icon = Icons.Outlined.Edit,
+                            contentDescription = renameLabel,
+                            tooltip = renameLabel
+                        )
+                        ActionPillButton(
+                            onClick = onEnterReorder,
+                            icon = Icons.Outlined.Reorder,
+                            contentDescription = reorderListLabel,
+                            tooltip = reorderListLabel
+                        )
+                        ActionPillButton(
+                            onClick = onDelete,
+                            icon = Icons.Outlined.Delete,
+                            contentDescription = deleteLabel,
+                            tooltip = deleteLabel,
+                            colors = destructiveColors
+                        )
+                        ActionPillButton(
+                            onClick = onCancel,
+                            icon = Icons.Outlined.Close,
+                            contentDescription = cancelLabel,
+                            tooltip = cancelLabel
                         )
                     }
                 }

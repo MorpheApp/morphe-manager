@@ -15,14 +15,17 @@ import androidx.compose.material.icons.outlined.Category
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.FolderOff
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppCategory
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.util.htmlAnnotatedString
 
 /**
  * Prompt for a category name. Reused for both create and rename flows: pass a non-null
@@ -63,6 +66,46 @@ internal fun CategoryNameDialog(
             },
             showClearButton = true,
             modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+/**
+ * Confirmation prompt shown when the user taps Delete in the category action bar.
+ * Category deletion drops assignments back to Uncategorized rather than removing apps,
+ * so the message reflects that instead of implying data loss.
+ */
+@Composable
+internal fun CategoryDeleteConfirmDialog(
+    category: HomeAppCategory,
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.home_category_delete_confirm_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.delete),
+                onPrimaryClick = onConfirm,
+                isPrimaryDestructive = true,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        val secondaryColor = LocalDialogSecondaryTextColor.current
+        Text(
+            text = htmlAnnotatedString(
+                stringResource(
+                    R.string.home_category_delete_confirm_message,
+                    category.name,
+                    stringResource(R.string.home_category_uncategorized)
+                )
+            ),
+            style = MaterialTheme.typography.bodyLarge,
+            color = secondaryColor,
+            textAlign = TextAlign.Center
         )
     }
 }

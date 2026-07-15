@@ -69,6 +69,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeAppSourceGroup
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.KnownApps
+import app.morphe.manager.util.toast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import sh.calvin.reorderable.ReorderableItem
@@ -573,8 +574,13 @@ fun MainAppsSection(
     val reorderFocusPackages = remember { mutableStateOf<Set<String>>(emptySet()) }
     val haptic = LocalHapticFeedback.current
 
-    // True when the multibar (select or reorder action bar) is visible
-    val isMultibarVisible = isMultiSelectMode.value || isReorderMode.value
+    // Split into two flags so the app multi-select and category context bars stay
+    // mutually exclusive at the footer slot
+    var activeCategoryId by remember { mutableStateOf<String?>(null) }
+    val isCategoryReorderMode = remember { mutableStateOf(false) }
+    val isCategoryBarVisible = activeCategoryId != null || isCategoryReorderMode.value
+
+    val isMultibarVisible = isMultiSelectMode.value || isReorderMode.value || isCategoryBarVisible
 
     // Back gesture/button cancels multi-select instead of navigating back
     BackHandler(enabled = isMultiSelectMode.value) {
@@ -587,6 +593,26 @@ fun MainAppsSection(
         isReorderMode.value = false
         selectedPackages.clear()
         localOrder = homeAppItems.map { it.packageName }
+    }
+
+    BackHandler(enabled = isCategoryBarVisible) {
+        activeCategoryId = null
+        isCategoryReorderMode.value = false
+    }
+
+    // Retire stale bar state when leaving CUSTOM view or when the active id vanishes
+    // from the category list (e.g. deleted from elsewhere)
+    LaunchedEffect(isCustomCategoryView) {
+        if (!isCustomCategoryView) {
+            activeCategoryId = null
+            isCategoryReorderMode.value = false
+        }
+    }
+    LaunchedEffect(apps.categoryState.categories) {
+        val currentIds = apps.categoryState.categories.mapTo(mutableSetOf()) { it.id }
+        if (activeCategoryId != null && activeCategoryId !in currentIds) {
+            activeCategoryId = null
+        }
     }
 
     // Sync selection and local order with current item list
@@ -638,6 +664,11 @@ fun MainAppsSection(
     val showHiddenAppsDialog = remember { mutableStateOf(false) }
     val showMoveCategoryDialog = remember { mutableStateOf(false) }
     var categoryNameRequest by remember { mutableStateOf<CategoryNameRequest?>(null) }
+    var pendingDeleteCategoryId by remember { mutableStateOf<String?>(null) }
+
+    // Resolved outside the LazyColumn DSL scope since @Composable calls aren't allowed there
+    val context = LocalContext.current
+    val categoryActionsUnavailableToast = stringResource(R.string.home_category_actions_unavailable)
 
     if (showHiddenAppsDialog.value) {
         HiddenAppsDialog(
@@ -662,6 +693,23 @@ fun MainAppsSection(
                 categoryNameRequest = null
             }
         )
+    }
+
+    // Held in local state so the dialog outlives the bar closing on Delete tap
+    pendingDeleteCategoryId?.let { pendingId ->
+        val category = apps.categoryState.categories.firstOrNull { it.id == pendingId }
+        if (category == null) {
+            pendingDeleteCategoryId = null
+        } else {
+            CategoryDeleteConfirmDialog(
+                category = category,
+                onDismiss = { pendingDeleteCategoryId = null },
+                onConfirm = {
+                    appActions.onDeleteCategory(pendingId)
+                    pendingDeleteCategoryId = null
+                }
+            )
+        }
     }
 
     if (showMoveCategoryDialog.value) {
@@ -957,6 +1005,16 @@ fun MainAppsSection(
                                     groups.forEach { group ->
                                         val headerKey = "category_${group.id ?: "uncategorized"}"
                                         item(key = headerKey) {
+                                            // Long-press is gated while any other footer mode is
+                                            // already using the slot
+                                            val isFooterBusy = isMultiSelectMode.value ||
+                                                    isReorderMode.value ||
+                                                    isCategoryReorderMode.value
+                                            val headerLongPress: (() -> Unit)? = when {
+                                                isFooterBusy -> null
+                                                group.editable -> { -> activeCategoryId = group.id }
+                                                else -> { -> context.toast(categoryActionsUnavailableToast) }
+                                            }
                                             val headerContent: @Composable ((@Composable () -> Unit)?) -> Unit = { dragHandle ->
                                                 HomeCategoryHeader(
                                                     group = group,
@@ -968,22 +1026,13 @@ fun MainAppsSection(
                                                             group.id?.let(appActions.onToggleCategoryCollapsed)
                                                         }
                                                     },
-                                                    onRename = {
-                                                        val category = apps.categoryState.categories
-                                                            .firstOrNull { it.id == group.id }
-                                                        if (category != null) {
-                                                            categoryNameRequest = CategoryNameRequest(category)
-                                                        }
-                                                    },
-                                                    onDelete = {
-                                                        group.id?.let(appActions.onDeleteCategory)
-                                                    },
+                                                    onLongPress = headerLongPress,
                                                     modifier = Modifier.animateItem(),
                                                     dragHandle = dragHandle
                                                 )
                                             }
 
-                                            if (group.editable) {
+                                            if (group.editable && isCategoryReorderMode.value) {
                                                 ReorderableItem(categoryReorderableState, key = headerKey) { _ ->
                                                     headerContent {
                                                         CategoryHeaderDragHandle(
@@ -1025,8 +1074,11 @@ fun MainAppsSection(
                                                     isSelected = isSelected,
                                                     isMultiSelectMode = isMultiSelectMode.value,
                                                     onLongPress = {
-                                                        isMultiSelectMode.value = true
-                                                        selectedPackages.toggle(item.packageName)
+                                                        // Skip so the category bar doesn't overlap with app multi-select
+                                                        if (!isCategoryBarVisible) {
+                                                            isMultiSelectMode.value = true
+                                                            selectedPackages.toggle(item.packageName)
+                                                        }
                                                     },
                                                     modifier = Modifier.animateItem()
                                                 )
@@ -1231,6 +1283,43 @@ fun MainAppsSection(
                             isReorderMode.value = false
                             selectedPackages.clear()
                             localOrder = homeAppItems.map { it.packageName }
+                        },
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .padding(horizontal = horizontalPadding)
+                    )
+
+                    val activeCategoryTitle = activeCategoryId?.let { id ->
+                        apps.categoryState.categories.firstOrNull { it.id == id }?.name
+                    }
+                    CategoryActionBar(
+                        activeCategoryTitle = activeCategoryTitle,
+                        visible = isCategoryBarVisible,
+                        isReorderMode = isCategoryReorderMode.value,
+                        onRename = {
+                            val category = apps.categoryState.categories
+                                .firstOrNull { it.id == activeCategoryId }
+                            if (category != null) {
+                                categoryNameRequest = CategoryNameRequest(category)
+                            }
+                            activeCategoryId = null
+                        },
+                        onDelete = {
+                            // Hand off to the confirmation dialog; actual deletion runs only if
+                            // the user confirms. Close the bar so the dialog isn't shadowed.
+                            pendingDeleteCategoryId = activeCategoryId
+                            activeCategoryId = null
+                        },
+                        onEnterReorder = {
+                            activeCategoryId = null
+                            searchState.onClose()
+                            isCategoryReorderMode.value = true
+                        },
+                        onExitReorder = {
+                            isCategoryReorderMode.value = false
+                        },
+                        onCancel = {
+                            activeCategoryId = null
                         },
                         modifier = Modifier
                             .align(Alignment.BottomCenter)

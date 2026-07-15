@@ -60,6 +60,9 @@
     <string name="home_category_name">Category name</string>
     <string name="home_category_move_to">Move to category</string>
     <string name="home_category_move_selected_title">Move selected apps</string>
+    <string name="home_category_delete_confirm_title">Delete category</string>
+    <string name="home_category_delete_confirm_message">Delete category &lt;b&gt;%1$s&lt;/b&gt;? Apps in it will move back to &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Actions unavailable for this category</string>
 
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">What app do you want to patch?</string>
