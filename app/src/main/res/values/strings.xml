@@ -26,7 +26,7 @@
     <string name="home_metered_skipped_title">Updates paused on mobile data</string>
     <string name="home_metered_skipped_subtitle">Tap to allow updates on mobile data</string>
     <string name="home_update_error">Update failed</string>
-    <string name="home_update_error_subtitle">Check your internet connection and try again</string>
+    <string name="home_update_error_subtitle">Something went wrong while updating sources</string>
     <string name="home_update_skipped_metered">Updates skipped</string>
     <string name="home_update_skipped_metered_subtitle">Mobile data is active</string>
     <string name="home_updating_sources">Updating sources…</string>

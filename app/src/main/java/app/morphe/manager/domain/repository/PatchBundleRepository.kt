@@ -1647,6 +1647,10 @@ class PatchBundleRepository(
             val completedCount = AtomicInteger(0)
             val downloadDispatcher = Dispatchers.IO.limitedParallelism(4)
 
+            // Read snapshots below use toMutableList() rather than toList(): the latter's
+            // size==1 fast path calls iterator().next() without a hasNext() guard, so
+            // concurrent removal (many parallel downloads race here) can throw
+            // NoSuchElementException between the size check and the read
             val activeNamesMap = ConcurrentHashMap<Int, String>()
 
             val updated: Map<RemotePatchBundle, PatchBundleDownloadResult> = try {
@@ -1658,7 +1662,7 @@ class PatchBundleRepository(
                             Log.d(tag, "Updating patch bundle: ${bundle.name}")
 
                             activeNamesMap[bundle.uid] = progressLabelFor(bundle)
-                            bundleUpdateProgressFlow.update { it?.copy(activeNames = activeNamesMap.values.toList()) }
+                            bundleUpdateProgressFlow.update { it?.copy(activeNames = activeNamesMap.values.toMutableList()) }
 
                             val result = try {
                                 val onProgress: PatchBundleDownloadProgress = { bytesRead, bytesTotal ->
@@ -1701,7 +1705,7 @@ class PatchBundleRepository(
                             bundleUpdateProgressFlow.update { progress ->
                                 progress?.copy(
                                     completed = newCompleted,
-                                    activeNames = activeNamesMap.values.toList(),
+                                    activeNames = activeNamesMap.values.toMutableList(),
                                 )
                             }
 
