@@ -9,6 +9,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,6 +19,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
@@ -174,8 +176,12 @@ internal fun HomeCategoryHeader(
         group.items.size,
         group.items.size.toString()
     )
-    val headerShape = RoundedCornerShape(8.dp)
-    val containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.16f)
+    val headerShape = RoundedCornerShape(20.dp)
+    val isDark = isSystemInDarkTheme()
+    val backgroundAlpha = if (isDark) 0.35f else 0.6f
+    val borderAlpha = if (isDark) 0.4f else 0.6f
+    val containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = backgroundAlpha)
+    val borderColor = MaterialTheme.colorScheme.outline.copy(alpha = borderAlpha)
     val contentColor = MaterialTheme.colorScheme.onSurface
     val mutedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
     val isSourceGroup = group.sourceUid != null
@@ -187,11 +193,12 @@ internal fun HomeCategoryHeader(
     Surface(
         modifier = modifier
             .fillMaxWidth()
+            .clip(headerShape)
             .then(if (group.collapsible) Modifier.clickable(onClick = onToggle) else Modifier),
         color = containerColor,
         contentColor = contentColor,
         shape = headerShape,
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.10f))
+        border = BorderStroke(1.dp, borderColor)
     ) {
         Row(
             modifier = Modifier
