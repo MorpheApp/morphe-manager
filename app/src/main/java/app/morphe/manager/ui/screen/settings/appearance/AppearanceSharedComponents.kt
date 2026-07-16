@@ -5,22 +5,15 @@
 
 package app.morphe.manager.ui.screen.settings.appearance
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -41,9 +34,6 @@ fun ModernIconOptionCard(
     modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
-    val selectedText = stringResource(R.string.selected)
-    val notSelectedText = stringResource(R.string.not_selected)
-
     val windowSize = rememberWindowSize()
     val iconSize = when (windowSize.widthSizeClass) {
         WindowWidthSizeClass.Compact -> 32.dp
@@ -54,33 +44,19 @@ fun ModernIconOptionCard(
     // Increase height in landscape to prevent text clipping
     val cardHeight = if (isLandscape()) 92.dp else 80.dp
 
-    Surface(
-        modifier = modifier.height(cardHeight),
-        shape = RoundedCornerShape(MorpheDefaults.SettingsCornerRadius),
-        color = if (selected) {
-            MaterialTheme.colorScheme.primaryContainer
-        } else {
-            MaterialTheme.colorScheme.surface
-        },
-        border = BorderStroke(
-            width = if (selected) 2.dp else 1.dp,
-            color = if (selected) {
-                MaterialTheme.colorScheme.primary
-            } else {
-                MaterialTheme.colorScheme.outline
-            }
-        ),
+    SelectionTile(
+        selected = selected,
         onClick = onClick,
-        enabled = enabled
+        enabled = enabled,
+        stateDescription = stringResource(
+            if (selected) R.string.selected else R.string.not_selected
+        ),
+        modifier = modifier.height(cardHeight)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(MorpheDefaults.ItemSpacing)
-                .semantics(mergeDescendants = true) {
-                    role = Role.RadioButton
-                    stateDescription = if (selected) selectedText else notSelectedText
-                },
+                .padding(MorpheDefaults.ItemSpacing),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -126,39 +102,22 @@ fun CompactOptionCard(
     modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
-    val selectedText = stringResource(R.string.selected)
-    val notSelectedText = stringResource(R.string.not_selected)
-
     // Increase height slightly in landscape for better text display
     val cardHeight = if (isLandscape()) 60.dp else 56.dp
 
-    Surface(
-        modifier = modifier.height(cardHeight),
-        shape = RoundedCornerShape(MorpheDefaults.SettingsCornerRadius),
-        color = if (selected) {
-            MaterialTheme.colorScheme.primaryContainer
-        } else {
-            MaterialTheme.colorScheme.surface
-        },
-        border = BorderStroke(
-            width = if (selected) 2.dp else 1.dp,
-            color = if (selected) {
-                MaterialTheme.colorScheme.primary
-            } else {
-                MaterialTheme.colorScheme.outline
-            }
-        ),
+    SelectionTile(
+        selected = selected,
         onClick = onClick,
-        enabled = enabled
+        enabled = enabled,
+        stateDescription = stringResource(
+            if (selected) R.string.selected else R.string.not_selected
+        ),
+        modifier = modifier.height(cardHeight)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ItemSpacing)
-                .semantics(mergeDescendants = true) {
-                    role = Role.RadioButton
-                    stateDescription = if (selected) selectedText else notSelectedText
-                },
+                .padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ItemSpacing),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
