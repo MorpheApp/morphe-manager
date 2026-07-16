@@ -85,6 +85,13 @@ sealed class PatchBundleSource(
         val PatchBundleSource.isDefault inline get() = uid == 0
         val PatchBundleSource.asRemoteOrNull inline get() = this as? RemotePatchBundle
 
+        /** Classifies a [PatchBundleSource] into its user-visible type. */
+        val PatchBundleSource.sourceType: BundleSourceType get() = when {
+            isDefault -> BundleSourceType.PreInstalled
+            this is RemotePatchBundle -> BundleSourceType.Remote
+            else -> BundleSourceType.Local
+        }
+
         /**
          * Resolved avatar URLs for a source in preference order. [primary] is the URL to try
          * first; [fallback] is what to load if the primary fails (or null when no second
@@ -186,4 +193,11 @@ sealed class PatchBundleSource(
             }
         }
     }
+}
+
+/** User-visible classification of a [PatchBundleSource]. */
+enum class BundleSourceType {
+    PreInstalled,
+    Remote,
+    Local
 }

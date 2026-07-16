@@ -9,18 +9,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.selected
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.patcher.dex.BytecodeMode
@@ -57,54 +50,19 @@ fun BytecodeModeDialog(
                 color = LocalDialogSecondaryTextColor.current,
             )
 
-            BytecodeModeOption(
-                titleRes = R.string.settings_advanced_bytecode_mode_strip_fast_label,
-                subtitleRes = R.string.settings_advanced_bytecode_mode_strip_fast_description,
-                isSelected = current == BytecodeMode.STRIP_FAST,
+            RadioSelectionCard(
+                selected = current == BytecodeMode.STRIP_FAST,
                 onSelect = { onSelect(BytecodeMode.STRIP_FAST) },
+                title = stringResource(R.string.settings_advanced_bytecode_mode_strip_fast_label),
+                description = stringResource(R.string.settings_advanced_bytecode_mode_strip_fast_description)
             )
 
-            BytecodeModeOption(
-                titleRes = R.string.settings_advanced_bytecode_mode_full,
-                subtitleRes = R.string.settings_advanced_bytecode_mode_full_description,
-                isSelected = current == BytecodeMode.FULL,
+            RadioSelectionCard(
+                selected = current == BytecodeMode.FULL,
                 onSelect = { onSelect(BytecodeMode.FULL) },
+                title = stringResource(R.string.settings_advanced_bytecode_mode_full),
+                description = stringResource(R.string.settings_advanced_bytecode_mode_full_description)
             )
         }
-    }
-}
-
-@Composable
-private fun BytecodeModeOption(
-    titleRes: Int,
-    subtitleRes: Int,
-    isSelected: Boolean,
-    onSelect: () -> Unit,
-) {
-    SettingsItemCard(
-        onClick = onSelect,
-        borderWidth = 1.dp,
-        modifier = Modifier.semantics {
-            role = Role.RadioButton
-            selected = isSelected
-        }
-    ) {
-        IconTextRow(
-            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-            leadingContent = {
-                if (isSelected) {
-                    StatusCircleIcon(
-                        icon = Icons.Outlined.Check,
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                } else {
-                    StatusCirclePlaceholder()
-                }
-            },
-            title = stringResource(titleRes),
-            description = stringResource(subtitleRes),
-            trailingContent = null
-        )
     }
 }

@@ -56,9 +56,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.APIPatchBundle
 import app.morphe.manager.domain.bundles.JsonPatchBundle
+import app.morphe.manager.domain.bundles.BundleSourceType
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.sourceType
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.manager.SourceBundleSortMode
@@ -990,7 +992,7 @@ private fun BundleCardHeader(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 // Bundle type badge
-                BundleTypeBadge(bundle)
+                BundleTypeBadge(bundle.sourceType)
 
                 // Metadata unavailable badge
                 AnimatedVisibility(
@@ -1136,13 +1138,12 @@ private fun BundleInfoCard(
 }
 
 @Composable
-private fun BundleTypeBadge(bundle: PatchBundleSource) {
-    val text = when {
-        bundle.isDefault -> stringResource(R.string.sources_dialog_preinstalled)
-        bundle is RemotePatchBundle -> stringResource(R.string.sources_dialog_remote)
-        else -> stringResource(R.string.sources_dialog_local)
+fun BundleTypeBadge(type: BundleSourceType) {
+    val text = when (type) {
+        BundleSourceType.PreInstalled -> stringResource(R.string.sources_dialog_preinstalled)
+        BundleSourceType.Remote -> stringResource(R.string.sources_dialog_remote)
+        BundleSourceType.Local -> stringResource(R.string.sources_dialog_local)
     }
-
     InfoBadge(
         text = text,
         isCompact = true

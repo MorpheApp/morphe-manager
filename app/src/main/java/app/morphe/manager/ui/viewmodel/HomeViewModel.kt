@@ -1442,6 +1442,14 @@ class HomeViewModel(
         patchBundleRepository.allBundlesInfoFlow
             .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
+    private val patchSourcesState: StateFlow<Map<Int, PatchBundleSource>> =
+        patchBundleRepository.sources
+            .map { list -> list.associateBy { it.uid } }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
+    /** Returns the [PatchBundleSource] with [uid], or null if it has not been loaded yet. */
+    fun getPatchSource(uid: Int): PatchBundleSource? = patchSourcesState.value[uid]
+
     /**
      * Returns all patches available for [packageName] across all enabled bundles.
      * Groups them as Map<BundleUid, List<PatchInfo>> for the swipe-right patches dialog.

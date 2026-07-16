@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -352,52 +351,35 @@ fun InstallerOptionItem(
     val reasonResId = option.availability.reason
     val reasonText = if (!enabled && reasonResId != null) stringResource(reasonResId) else null
 
-    SettingsItemCard(
-        onClick = onSelect,
+    val hasCustomIcon = option.icon != null &&
+        (option.token == InstallerManager.Token.Shizuku ||
+                option.token == InstallerManager.Token.ShizukuPlayStore ||
+                option.token == InstallerManager.Token.PlayStore ||
+                option.token == InstallerManager.Token.RootPlayStore ||
+                option.token is InstallerManager.Token.Component)
+
+    RadioSelectionCard(
+        selected = selected,
+        onSelect = onSelect,
         enabled = enabled,
-        borderWidth = 1.dp,
-        modifier = Modifier
-            .padding(vertical = 2.dp)
-            .semantics {
-                role = Role.RadioButton
-                this.selected = selected
-                this.stateDescription = stateDescription
+        stateDescription = stateDescription,
+        modifier = Modifier.padding(vertical = 2.dp),
+        leadingContent = if (hasCustomIcon) {
+            {
+                InstallerIconPreview(
+                    drawable = option.icon,
+                    selected = selected,
+                    enabled = enabled
+                )
             }
+        } else null
     ) {
         Column(
-            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
         ) {
             IconTextRow(
-                leadingContent = if (option.icon != null &&
-                    (option.token == InstallerManager.Token.Shizuku ||
-                            option.token == InstallerManager.Token.ShizukuPlayStore ||
-                            option.token == InstallerManager.Token.PlayStore ||
-                            option.token == InstallerManager.Token.RootPlayStore ||
-                            option.token is InstallerManager.Token.Component)
-                ) {
-                    {
-                        InstallerIconPreview(
-                            drawable = option.icon,
-                            selected = selected,
-                            enabled = enabled
-                        )
-                    }
-                } else {
-                    {
-                        if (selected) {
-                            StatusCircleIcon(
-                                icon = Icons.Outlined.Check,
-                                containerColor = if (enabled) colors.primaryContainer
-                                else colors.primaryContainer.copy(alpha = 0.38f),
-                                contentColor = if (enabled) colors.onPrimaryContainer
-                                else colors.onPrimaryContainer.copy(alpha = 0.38f)
-                            )
-                        } else {
-                            StatusCirclePlaceholder()
-                        }
-                    }
-                },
+                leadingContent = null,
                 title = option.label,
                 description = description,
                 titleColor = if (enabled) colors.onSurface else colors.onSurface.copy(alpha = 0.38f),
