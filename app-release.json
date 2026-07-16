@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-07-16T10:03:24",
-  "description": "# [1.24.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.2...v1.24.0-dev.3) (2026-07-16)\n\n\n### Features\n\n* Add home app grouping controls ([#725](https://github.com/MorpheApp/morphe-manager/issues/725)) ([6b10955](https://github.com/MorpheApp/morphe-manager/commit/6b109551655cf0b296468edd5767e93e247ccb87))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.3/morphe-manager-1.24.0-dev.3.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.3/morphe-manager-1.24.0-dev.3.apk.asc",
-  "version": "1.24.0-dev.3"
+  "created_at": "2026-07-16T12:42:36",
+  "description": "# [1.24.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.3...v1.24.0-dev.4) (2026-07-16)\n\n\n### Bug Fixes\n\n* Extract `CardActionRow` and align card paddings ([7d2aabf](https://github.com/MorpheApp/morphe-manager/commit/7d2aabf32c649f1a5651243b83a71e1dec8d9b3d))\n* Show intermediate dev versions in changelog dialog ([44a9948](https://github.com/MorpheApp/morphe-manager/commit/44a994824be1fa5d45bbb7e1b3212059ddce9945))\n\n\n### Features\n\n* Add APK retention toggles in storage management ([c57edb7](https://github.com/MorpheApp/morphe-manager/commit/c57edb7692f249e7b81450082bd076b16bc40a13))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.4/morphe-manager-1.24.0-dev.4.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.4/morphe-manager-1.24.0-dev.4.apk.asc",
+  "version": "1.24.0-dev.4"
 }
