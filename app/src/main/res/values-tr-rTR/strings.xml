@@ -689,7 +689,6 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_performance">Performans</string>
     <string name="settings_system_process_runtime">Çalışma süreci</string>
     <string name="settings_system_process_runtime_description">Daha iyi istikrar için yamalamayı ayrı bir süreçte gerçekleştirir</string>
-    <string name="settings_system_process_runtime_memory_limit">Bellek limiti</string>
     <string name="settings_system_process_runtime_memory_limit_description">Daha yüksek limitler, uygun cihazlarda yamalamayı hızlandırır</string>
     <string name="settings_system_process_runtime_enable">Çalışma sürecini etkinleştir</string>
     <string name="settings_system_memory_limit_subtitle">Yamalama için kullanılabilir bellek</string>
@@ -763,6 +762,10 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_storage_nothing_to_clear">Temizlenecek bir şey yok</string>
     <string name="settings_system_storage_open_app_info_title">Android uygulama depolamasını aç</string>
     <string name="settings_system_storage_open_app_info_description">Morphe verilerinin tamamını sistem ayarları aracılığıyla yönetin veya temizleyin</string>
+    <string name="settings_system_save_original_apks_title">Orijinal APK\'ları sakla</string>
+    <string name="settings_system_save_original_apks_description">Yeniden yama yapmak için APK\'yı yeniden seçmeden tekrar kullanabilmeniz için yama öncesi APK\'yı kaydedin</string>
+    <string name="settings_system_save_patched_apks_title">Yamalı APK\'ları sakla</string>
+    <string name="settings_system_save_patched_apks_description">Yönetici üzerinden daha sonra dışa aktarmak veya yeniden yüklemek için yamalı APK\'nın bir kopyasını kaydedin</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Yamalanmış APK\'ler</string>
     <string name="settings_system_patched_apks_description">Kayıtlı yamalanmış uygulama dosyalarını yönetir</string>

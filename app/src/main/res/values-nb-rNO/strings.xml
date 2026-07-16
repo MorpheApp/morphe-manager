@@ -689,7 +689,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_performance">Ytelse</string>
     <string name="settings_system_process_runtime">Prosesskjøretid</string>
     <string name="settings_system_process_runtime_description">Kjører oppdatering i en separat prosess for bedre stabilitet</string>
-    <string name="settings_system_process_runtime_memory_limit">Minnebegrensning</string>
     <string name="settings_system_process_runtime_memory_limit_description">Høyere grenser øker hastigheten på oppdatering på kompatible enheter</string>
     <string name="settings_system_process_runtime_enable">Aktiver prosesskjøretid</string>
     <string name="settings_system_memory_limit_subtitle">Minne tilgjengelig for patching</string>
@@ -763,6 +762,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_nothing_to_clear">Ingenting å tømme</string>
     <string name="settings_system_storage_open_app_info_title">Åpne Android-applagring</string>
     <string name="settings_system_storage_open_app_info_description">Administrer eller tøm alle Morphe-data via systeminnstillinger</string>
+    <string name="settings_system_save_original_apks_title">Behold originale APK-filer</string>
+    <string name="settings_system_save_original_apks_description">Lagre APK-en før oppdatering, slik at den kan brukes på nytt for oppdatering uten å måtte velge filen på nytt</string>
+    <string name="settings_system_save_patched_apks_title">Behold oppdaterte APK-filer</string>
+    <string name="settings_system_save_patched_apks_description">Lagre en kopi av den oppdaterte APK-en for senere eksport eller installasjon fra administratoren</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patchede APK-er</string>
     <string name="settings_system_patched_apks_description">Administrerer lagrede oppdaterte applikasjonsfiler</string>

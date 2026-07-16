@@ -52,7 +52,7 @@
     <string name="home_category_custom">Khusus</string>
     <string name="home_category_uncategorized">Tidak berkategori</string>
     <string name="home_category_new_title">Kategori baru</string>
-    <string name="home_category_rename_title">Ubah nama kategori</string>
+    <string name="home_category_rename_title">Ganti nama kategori</string>
     <string name="home_category_name">Nama kategori</string>
     <string name="home_category_move_to">Pindahkan ke kategori</string>
     <string name="home_category_move_selected_title">Pindahkan aplikasi terpilih</string>
@@ -690,7 +690,6 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_system_performance">Performa</string>
     <string name="settings_system_process_runtime">Proses runtime</string>
     <string name="settings_system_process_runtime_description">Menjalankan penambalan di proses terpisah untuk stabilitas yang lebih baik</string>
-    <string name="settings_system_process_runtime_memory_limit">Batas memori</string>
     <string name="settings_system_process_runtime_memory_limit_description">Batas yang lebih tinggi mempercepat penambalan pada perangkat yang mendukung</string>
     <string name="settings_system_process_runtime_enable">Aktifkan proses runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memori tersedia untuk penambalan</string>
@@ -764,6 +763,10 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_system_storage_nothing_to_clear">Tidak ada yang bisa dihapus</string>
     <string name="settings_system_storage_open_app_info_title">Buka penyimpanan aplikasi Android</string>
     <string name="settings_system_storage_open_app_info_description">Kelola atau hapus semua data Morphe melalui pengaturan sistem</string>
+    <string name="settings_system_save_original_apks_title">Simpan APK asli</string>
+    <string name="settings_system_save_original_apks_description">Simpan APK sebelum ditambal agar dapat digunakan kembali untuk penambalan ulang tanpa memilih berkas lagi</string>
+    <string name="settings_system_save_patched_apks_title">Simpan APK yang ditambal</string>
+    <string name="settings_system_save_patched_apks_description">Simpan salinan APK yang ditambal untuk diekspor atau dipasang kembali nanti dari pengelola</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK yang ditambal</string>
     <string name="settings_system_patched_apks_description">Mengelola berkas aplikasi yang ditambal dan disimpan</string>

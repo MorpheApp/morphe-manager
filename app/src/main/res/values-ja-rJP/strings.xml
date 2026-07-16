@@ -689,7 +689,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_performance">パフォーマンス</string>
     <string name="settings_system_process_runtime">別プロセスで実行</string>
     <string name="settings_system_process_runtime_description">安定性を向上させるために、パッチ処理を別プロセスで実行します</string>
-    <string name="settings_system_process_runtime_memory_limit">メモリ制限</string>
     <string name="settings_system_process_runtime_memory_limit_description">高性能なデバイスでは、制限値を高くすることでパッチ処理を高速化できます</string>
     <string name="settings_system_process_runtime_enable">別プロセスでの実行を有効化</string>
     <string name="settings_system_memory_limit_subtitle">パッチに使用できるメモリ</string>
@@ -763,6 +762,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_nothing_to_clear">クリアするものがありません</string>
     <string name="settings_system_storage_open_app_info_title">Android アプリのストレージを開く</string>
     <string name="settings_system_storage_open_app_info_description">システム設定を通じて Morphe のすべてのデータを管理またはクリアします。</string>
+    <string name="settings_system_save_original_apks_title">元の APK を保持</string>
+    <string name="settings_system_save_original_apks_description">再パッチ適用時に再びファイルを選択することなく、パッチ適用前の APK を保存します</string>
+    <string name="settings_system_save_patched_apks_title">パッチ適用済み APK を保持</string>
+    <string name="settings_system_save_patched_apks_description">後でエクスポートしたり、マネージャーから再インストールしたりするために、パッチ適用済み APK のコピーを保存します</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">パッチ適用済み APK</string>
     <string name="settings_system_patched_apks_description">保存されたパッチ適用済みのアプリファイルを管理します</string>

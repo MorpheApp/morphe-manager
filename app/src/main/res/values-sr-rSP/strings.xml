@@ -689,7 +689,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_performance">Начин</string>
     <string name="settings_system_process_runtime">Трајање времена</string>
     <string name="settings_system_process_runtime_description">Покреће закрпљивање у засебном процесу за већу стабилност</string>
-    <string name="settings_system_process_runtime_memory_limit">Ограничење меморије</string>
     <string name="settings_system_process_runtime_memory_limit_description">Већи лимити убрзавају закрпљивање на уређајима који то подржавају</string>
     <string name="settings_system_process_runtime_enable">Омогући меморије</string>
     <string name="settings_system_memory_limit_subtitle">Кликните да конфигуришете</string>
@@ -763,6 +762,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_nothing_to_clear">Ништа за брисање</string>
     <string name="settings_system_storage_open_app_info_title">Отвори складиште апликација за Android</string>
     <string name="settings_system_storage_open_app_info_description">Управљајте или избришите све податке Morphe-а преко подешавања система</string>
+    <string name="settings_system_save_original_apks_title">Сачувај оригиналне APK фајлове</string>
+    <string name="settings_system_save_original_apks_description">Сачувај пре-патчovani APK да би могао поново да се користи за патч без поновног бирања фајла</string>
+    <string name="settings_system_save_patched_apks_title">Сачувај патчоване APK фајлове</string>
+    <string name="settings_system_save_patched_apks_description">Сачувај копију патчованог APK-а за каснији извоз или поновну инсталацију из менаџера</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Патчеви</string>
     <string name="settings_system_patched_apks_description">Управља сачуваним закрпљеним датотекама апликација</string>

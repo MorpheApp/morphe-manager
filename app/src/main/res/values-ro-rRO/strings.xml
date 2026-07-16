@@ -689,7 +689,6 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_performance">Performanță</string>
     <string name="settings_system_process_runtime">Runtime proces</string>
     <string name="settings_system_process_runtime_description">Rulează patch-uirea într-un proces separat pentru o stabilitate mai bună</string>
-    <string name="settings_system_process_runtime_memory_limit">Limita memorie</string>
     <string name="settings_system_process_runtime_memory_limit_description">Limite mai mari accelerează patch-uirea pe dispozitivele capabile</string>
     <string name="settings_system_process_runtime_enable">Activează proces runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memorie disponibilă pentru patachizare</string>
@@ -763,6 +762,10 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_storage_nothing_to_clear">Nimic de șters</string>
     <string name="settings_system_storage_open_app_info_title">Deschide stocarea aplicației Android</string>
     <string name="settings_system_storage_open_app_info_description">Gestionează sau șterge toate datele Morphe prin setările sistemului</string>
+    <string name="settings_system_save_original_apks_title">Păstrează fișierele APK originale</string>
+    <string name="settings_system_save_original_apks_description">Salvează fișierul APK pre-patch pentru a-l putea refolosi pentru repatch-uire fără a selecta din nou fișierul</string>
+    <string name="settings_system_save_patched_apks_title">Păstrează fișierele APK patch-uite</string>
+    <string name="settings_system_save_patched_apks_description">Salvează o copie a fișierului APK patch-uit pentru export ulterior sau reinstalare din manager</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK-uri patch-uite</string>
     <string name="settings_system_patched_apks_description">Administrează fișierele patch-uite salvate ale aplicațiilor</string>

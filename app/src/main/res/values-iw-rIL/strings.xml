@@ -674,7 +674,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_performance">מוצא איבוד... </string>
     <string name="settings_system_process_runtime">מוצא איבוד... </string>
     <string name="settings_system_process_runtime_description">מריץ תיקון בתהליך נפרד ליציבות טובה יותר</string>
-    <string name="settings_system_process_runtime_memory_limit">מוצא איבוד... </string>
     <string name="settings_system_process_runtime_memory_limit_description">מגבלות גבוהות יותר מאיצות את התיקון במכשירים מתאימים</string>
     <string name="settings_system_process_runtime_enable">מוצא איבוד... </string>
     <string name="settings_system_memory_limit_subtitle">מוצא איבוד... </string>
@@ -748,6 +747,10 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_storage_nothing_to_clear">אין מה לנקות</string>
     <string name="settings_system_storage_open_app_info_title">פתח אחסון אפליקציות Android</string>
     <string name="settings_system_storage_open_app_info_description">נהל או נקה את כל נתוני Morphe דרך הגדרות המערכת</string>
+    <string name="settings_system_save_original_apks_title">שמור APKs מקוריים</string>
+    <string name="settings_system_save_original_apks_description">שמור את קובץ ה-APK לפני התיקון, כך שניתן יהיה להשתמש בו מחדש לתיקון חוזר מבלי לבחור את הקובץ שוב</string>
+    <string name="settings_system_save_patched_apks_title">שמור APKs מתוקנים</string>
+    <string name="settings_system_save_patched_apks_description">שמור עותק של קובץ ה-APK המתוקן לייצוא מאוחר יותר או להתקנה מחדש מהמנהל</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">פיצ\'ים מותאמים</string>
     <string name="settings_system_patched_apks_description">מנהל קבצי אפליקציות מתוקנים שמורים</string>

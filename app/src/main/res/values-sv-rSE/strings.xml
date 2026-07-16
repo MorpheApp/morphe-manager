@@ -664,7 +664,6 @@ Bildernas mått ska vara följande:
     <string name="settings_system_performance">Prestanda</string>
     <string name="settings_system_process_runtime">Processexekvering</string>
     <string name="settings_system_process_runtime_description">Kör modifieringen i en separat process för bättre stabilitet</string>
-    <string name="settings_system_process_runtime_memory_limit">Minnesgräns</string>
     <string name="settings_system_process_runtime_memory_limit_description">Högre gränser gör modifieringen snabbare på kompatibla enheter</string>
     <string name="settings_system_process_runtime_enable">Aktivera processexekvering</string>
     <string name="settings_system_memory_limit_subtitle">Tillgängligt minne för modifieringen</string>

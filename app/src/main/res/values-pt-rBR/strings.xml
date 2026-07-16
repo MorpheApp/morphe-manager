@@ -689,7 +689,6 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_performance">Desempenho</string>
     <string name="settings_system_process_runtime">Processos de runtime</string>
     <string name="settings_system_process_runtime_description">Executa o patch em um processo separado para melhor estabilidade</string>
-    <string name="settings_system_process_runtime_memory_limit">Limite de memória</string>
     <string name="settings_system_process_runtime_memory_limit_description">Limites mais altos aceleram o patching em dispositivos compatíveis</string>
     <string name="settings_system_process_runtime_enable">Habilitar processo de runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memória disponível para patching</string>
@@ -763,6 +762,10 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_storage_nothing_to_clear">Nada para limpar</string>
     <string name="settings_system_storage_open_app_info_title">Abrir armazenamento de aplicativos Android</string>
     <string name="settings_system_storage_open_app_info_description">Gerenciar ou limpar todos os dados do Morphe pelas configurações do sistema</string>
+    <string name="settings_system_save_original_apks_title">Manter APKs originais</string>
+    <string name="settings_system_save_original_apks_description">Salve o APK pré-patch para que ele possa ser reutilizado para repatching sem precisar selecionar o arquivo novamente</string>
+    <string name="settings_system_save_patched_apks_title">Manter APKs corrigidos</string>
+    <string name="settings_system_save_patched_apks_description">Salve uma cópia do APK corrigido para exportação posterior ou reinstalação a partir do gerenciador</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs patcheados</string>
     <string name="settings_system_patched_apks_description">Gerencia arquivos de aplicativos patcheados salvos</string>

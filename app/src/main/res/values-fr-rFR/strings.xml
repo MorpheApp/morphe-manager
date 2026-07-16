@@ -502,7 +502,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_appearance_greeting_phrases">Phrases de salutation</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Afficher un message de salutation sur l\'écran d\'accueil</string>
     <string name="settings_appearance_app_grouping">Regroupement d\'applications</string>
-    <string name="settings_appearance_app_grouping_description">Affiche un sélecteur sur l\'écran d\'accueil pour regrouper les applications par source ou selon vos propres catégories, en conservant la sélection lorsqu\'il est désactivé</string>
+    <string name="settings_appearance_app_grouping_description">Afficher un sélecteur sur l\'écran d\'accueil pour regrouper les applications par source ou selon vos propres catégories, en conservant la sélection lorsqu\'il est désactivé</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icône de l\'application</string>
     <string name="settings_appearance_app_icon_default">Par défaut</string>
@@ -694,7 +694,6 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_performance">Performance</string>
     <string name="settings_system_process_runtime">Temps d\'exécution du processus</string>
     <string name="settings_system_process_runtime_description">Exécute le patchage dans un processus séparé pour une meilleure stabilité</string>
-    <string name="settings_system_process_runtime_memory_limit">Limite de mémoire</string>
     <string name="settings_system_process_runtime_memory_limit_description">Des limites plus élevées accélèrent le patchage sur les appareils compatibles</string>
     <string name="settings_system_process_runtime_enable">Activer le temps d\'exécution du processus</string>
     <string name="settings_system_memory_limit_subtitle">Mémoire disponible pour le patchage</string>
@@ -769,6 +768,10 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_storage_nothing_to_clear">Rien à effacer</string>
     <string name="settings_system_storage_open_app_info_title">Ouvrir le stockage de l\'application Android</string>
     <string name="settings_system_storage_open_app_info_description">Gérez ou effacez toutes les données de Morphe via les paramètres du système</string>
+    <string name="settings_system_save_original_apks_title">Conserver les APK d\'origine</string>
+    <string name="settings_system_save_original_apks_description">Enregistrez l\'APK pré-patché afin de pouvoir le réutiliser pour un repatchage sans avoir à sélectionner de nouveau le fichier</string>
+    <string name="settings_system_save_patched_apks_title">Conserver les APK patchés</string>
+    <string name="settings_system_save_patched_apks_description">Enregistrez une copie de l\'APK patché pour pouvoir l\'exporter ou le réinstaller ultérieurement depuis le gestionnaire</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK patchés</string>
     <string name="settings_system_patched_apks_description">Gère les fichiers d\'applications patchées enregistrés</string>

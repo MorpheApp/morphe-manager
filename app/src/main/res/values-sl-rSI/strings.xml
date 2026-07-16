@@ -689,7 +689,6 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_system_performance">Učinkovitost</string>
     <string name="settings_system_process_runtime">Čas izvajanja procesa</string>
     <string name="settings_system_process_runtime_description">Izvaja popravljanje v ločenem procesu za boljšo stabilnost</string>
-    <string name="settings_system_process_runtime_memory_limit">Omejitev pomnilnika</string>
     <string name="settings_system_process_runtime_memory_limit_description">Višje omejitve pospešijo popravljanje na zmogljivih napravah</string>
     <string name="settings_system_process_runtime_enable">Omogoči izvajanje procesa</string>
     <string name="settings_system_memory_limit_subtitle">Razpoložljiv pomnilnik za popravilo</string>
@@ -763,6 +762,10 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_system_storage_nothing_to_clear">Nič za izbris</string>
     <string name="settings_system_storage_open_app_info_title">Odprite shranjevanje aplikacije Android</string>
     <string name="settings_system_storage_open_app_info_description">Upravljajte ali izbrišite vse podatke Morphe prek sistemskih nastavitev</string>
+    <string name="settings_system_save_original_apks_title">Shrani originalne datoteke APK</string>
+    <string name="settings_system_save_original_apks_description">Shrani datoteko APK pred spremembo, da jo lahko ponovno uporabiš za ponovno spremembo brez ponovnega izbiranja datoteke</string>
+    <string name="settings_system_save_patched_apks_title">Shrani spremenjene datoteke APK</string>
+    <string name="settings_system_save_patched_apks_description">Shrani kopijo spremenjene datoteke APK za kasnejši izvoz ali ponovno namestitev iz upravitelja</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Popravljeni APK-ji</string>
     <string name="settings_system_patched_apks_description">Upravlja shranjene datoteke popravljenih aplikacij</string>

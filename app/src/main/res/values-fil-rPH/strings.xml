@@ -685,7 +685,6 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_performance">Pagganap</string>
     <string name="settings_system_process_runtime">Runtime ng proseso</string>
     <string name="settings_system_process_runtime_description">Pinapatakbo ang pag-patch sa isang hiwalay na proseso para sa mas mahusay na katatagan</string>
-    <string name="settings_system_process_runtime_memory_limit">Limitasyon ng memorya</string>
     <string name="settings_system_process_runtime_memory_limit_description">Ang mas mataas na limitasyon ay nagpapabilis ng pag-patch sa mga kayang device</string>
     <string name="settings_system_process_runtime_enable">Paganahin ang runtime ng proseso</string>
     <string name="settings_system_memory_limit_subtitle">Magagamit ang memorya para sa pagpa-patch</string>
@@ -759,6 +758,10 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_storage_nothing_to_clear">Walang dapat i-clear</string>
     <string name="settings_system_storage_open_app_info_title">Buksan ang storage ng Android app</string>
     <string name="settings_system_storage_open_app_info_description">Pamahalaan o i-clear ang lahat ng data ng Morphe sa pamamagitan ng mga setting ng system</string>
+    <string name="settings_system_save_original_apks_title">Panatilihin ang orihinal na mga APK</string>
+    <string name="settings_system_save_original_apks_description">I-save ang pre-patch na APK upang magamit muli para sa pag-patch nang hindi na kailangang piliin muli ang file</string>
+    <string name="settings_system_save_patched_apks_title">Panatilihin ang mga naka-patch na APK</string>
+    <string name="settings_system_save_patched_apks_description">I-save ang kopya ng naka-patch na APK para sa ibang pagkakataon na i-export o i-reinstall mula sa manager</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Na-patch na mga APK</string>
     <string name="settings_system_patched_apks_description">Pamahalaan ang mga nakaimbak na naka-patch na mga file ng aplikasyon</string>

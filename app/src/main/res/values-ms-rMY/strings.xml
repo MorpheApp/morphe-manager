@@ -575,7 +575,6 @@ Dimensi gambar mestilah seperti berikut:
     <string name="settings_system_battery_optimization">Optimisasi bateri</string>
     <string name="settings_system_performance">Prestasi</string>
     <string name="settings_system_process_runtime">Masa runtime proses</string>
-    <string name="settings_system_process_runtime_memory_limit">Had memori</string>
     <string name="settings_system_process_runtime_enable">Aktifkan masa runtime proses</string>
     <string name="settings_system_memory_limit_subtitle">Memori tersedia untuk tampalan</string>
     <string name="settings_system_memory_limit_warning">Had memori yang rendah mungkin menyebabkan kegagalan semasa menampal aplikasi yang lebih besar</string>

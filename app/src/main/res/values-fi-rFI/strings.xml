@@ -686,7 +686,6 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_system_performance">Suorituskyky</string>
     <string name="settings_system_process_runtime">Prosessin suoritus</string>
     <string name="settings_system_process_runtime_description">Suorita muokkaaminen erillisessä prosessissa paremman vakauden vuoksi</string>
-    <string name="settings_system_process_runtime_memory_limit">Muistirajoitus</string>
     <string name="settings_system_process_runtime_memory_limit_description">Korkeammat rajat nopeuttavat muokkaamista tehokkailla laitteilla</string>
     <string name="settings_system_process_runtime_enable">Ota prosessin suoritus käyttöön</string>
     <string name="settings_system_memory_limit_subtitle">Muokkaamiseen käytettävissä oleva muisti</string>
@@ -760,6 +759,10 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_system_storage_nothing_to_clear">Ei tyhjennettävää</string>
     <string name="settings_system_storage_open_app_info_title">Avaa Android-sovellustilan tallennustiedot</string>
     <string name="settings_system_storage_open_app_info_description">Hallitse tai tyhjennä kaikki Morphe-tiedot järjestelmäasetusten kautta</string>
+    <string name="settings_system_save_original_apks_title">Säilytä alkuperäiset APK-tiedostot</string>
+    <string name="settings_system_save_original_apks_description">Tallenna korjaamaton APK-tiedosto, jotta sitä voidaan käyttää uudelleen korjaamiseen ilman, että tiedostoa tarvitsee valita uudelleen</string>
+    <string name="settings_system_save_patched_apks_title">Säilytä korjatut APK-tiedostot</string>
+    <string name="settings_system_save_patched_apks_description">Tallenna kopio korjatusta APK-tiedostosta myöhempää vientiä tai asennusta varten hallinnan kautta</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Muokatut APK:t</string>
     <string name="settings_system_patched_apks_description">Hallitse tallennettuja muokattuja sovellustiedostoja</string>

@@ -37,9 +37,9 @@
     <string name="home_app_sort_title">ترتيب التطبيقات</string>
     <string name="home_app_sort_manual_description">اضغط مطولًا على تطبيق، ثم اضغط على زر إعادة الترتيب</string>
     <string name="home_app_sort_recommended">الترتيب الموصى به</string>
-    <string name="home_app_sort_recommended_description">التطبيقات المثبتة والمثبتة أولًا</string>
+    <string name="home_app_sort_recommended_description">التطبيقات المنصَّبة والمثبتة أولًا</string>
     <string name="home_app_sort_name_asc_description">أبجديًا، من الألف إلى الياء</string>
-    <string name="home_app_sort_name_desc_description">عكس أبجدي، من ي إلى أ</string>
+    <string name="home_app_sort_name_desc_description">عكس أبجدي، من الياء إلى الألف</string>
     <string name="home_app_sort_updates_first">تحديثات التعديل أولًا</string>
     <string name="home_app_sort_updates_first_description">التطبيقات التي تحتوي على شارات التحديث أولًا، ثم الترتيب الموصى به</string>
     <string name="home_no_apps_title">لا توجد تطبيقات متاحة</string>
@@ -500,7 +500,7 @@
     <string name="settings_appearance_greeting_phrases">عبارات الترحيب</string>
     <string name="settings_appearance_greeting_phrases_subtitle">عرض رسالة ترحيب على الشاشة الرئيسية</string>
     <string name="settings_appearance_app_grouping">تجميع التطبيقات</string>
-    <string name="settings_appearance_app_grouping_description">عرض محول شاشة رئيسية لتجميع التطبيقات حسب المصدر أو فئاتك الخاصة، مع الحفاظ على التحديد عند إيقافه</string>
+    <string name="settings_appearance_app_grouping_description">عرض مُبدِّل الشاشة الرئيسية لتجميع التطبيقات حسب المصدر أو فئاتك الخاصة، مع الاحتفاظ بالتحديد عند إيقاف تشغيلها</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">أيقونة التطبيق</string>
     <string name="settings_appearance_app_icon_default">الافتراضي</string>
@@ -691,7 +691,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_performance">الأداء</string>
     <string name="settings_system_process_runtime">مدة التشغيل</string>
     <string name="settings_system_process_runtime_description">يُشغّل عملية التعديل في عملية منفصلة لتحسين الاستقرار</string>
-    <string name="settings_system_process_runtime_memory_limit">حد الذاكرة</string>
     <string name="settings_system_process_runtime_memory_limit_description">رفع الحدود يزيد سرعة التعديل على الأجهزة القادرة</string>
     <string name="settings_system_process_runtime_enable">تمكين وقت تشغيل العملية</string>
     <string name="settings_system_memory_limit_subtitle">الذاكرة المتاحة للتعديل</string>
@@ -765,6 +764,10 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_storage_nothing_to_clear">لا يوجد ما يمكن مسحه</string>
     <string name="settings_system_storage_open_app_info_title">فتح مساحة تخزين تطبيق Android</string>
     <string name="settings_system_storage_open_app_info_description">إدارة أو مسح جميع بيانات Morphe من خلال إعدادات النظام</string>
+    <string name="settings_system_save_original_apks_title">احتفظ بملفات APK الأصلية</string>
+    <string name="settings_system_save_original_apks_description">حفظ ملف APK قبل التعديل حتى يمكن إعادة استخدامه للتعديل مرة أخرى دون الحاجة إلى تحميله وتحديده من مستعرض الملفات مرة أخرى</string>
+    <string name="settings_system_save_patched_apks_title">احتفظ بملفات APK المعدلة</string>
+    <string name="settings_system_save_patched_apks_description">حفظ نسخة من ملف APK المعدل للتصدير لاحقًا أو لإعادة التثبيت من خلال المدير</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs معدلة</string>
     <string name="settings_system_patched_apks_description">يدير ملفات التطبيقات المُعدّلة المحفوظة</string>

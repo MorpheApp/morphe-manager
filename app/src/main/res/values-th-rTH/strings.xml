@@ -689,7 +689,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_performance">การตั้งค่า</string>
     <string name="settings_system_process_runtime">การทำงานของโปรเซส</string>
     <string name="settings_system_process_runtime_description">เรียกใช้การแพตช์ในกระบวนการแยกต่างหากเพื่อเพิ่มความเสถียร</string>
-    <string name="settings_system_process_runtime_memory_limit">ขนาดความจำ</string>
     <string name="settings_system_process_runtime_memory_limit_description">ขีดจำกัดที่สูงขึ้นช่วยเพิ่มความเร็วในการแพตช์บนอุปกรณ์ที่รองรับ</string>
     <string name="settings_system_process_runtime_enable">เปิดใช้การทำงานของโปรเซส</string>
     <string name="settings_system_memory_limit_subtitle">ขนาดความจำที่ใช้สำหรับการแพตซ์</string>
@@ -763,6 +762,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_nothing_to_clear">ไม่มีอะไรให้ล้าง</string>
     <string name="settings_system_storage_open_app_info_title">เปิดที่เก็บข้อมูลแอป Android</string>
     <string name="settings_system_storage_open_app_info_description">จัดการหรือล้างข้อมูล Morphe ทั้งหมดผ่านการตั้งค่าระบบ</string>
+    <string name="settings_system_save_original_apks_title">เก็บ APK ต้นฉบับ</string>
+    <string name="settings_system_save_original_apks_description">บันทึก APK ก่อนแพตช์ เพื่อนำกลับมาแพตช์ใหม่ได้โดยไม่ต้องเลือกไฟล์อีกครั้ง</string>
+    <string name="settings_system_save_patched_apks_title">เก็บ APK ที่แพตช์แล้ว</string>
+    <string name="settings_system_save_patched_apks_description">บันทึกสำเนา APK ที่แพตช์แล้วสำหรับการส่งออกหรือติดตั้งภายหลังผ่านตัวจัดการ</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">คุณแน่ใจหรือไม่ว่าต้องการลบแอปที่ถูกนำพัท์ %s?</string>
     <string name="settings_system_patched_apks_description">จัดการไฟล์แอปพลิเคชันที่แพตช์แล้วที่บันทึกไว้</string>

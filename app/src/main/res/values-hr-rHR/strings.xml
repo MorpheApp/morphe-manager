@@ -669,7 +669,6 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_performance">Performanse</string>
     <string name="settings_system_process_runtime">Izvođenje procesa</string>
     <string name="settings_system_process_runtime_description">Pokrenite patchanje u zasebnom procesu za bolju stabilnost</string>
-    <string name="settings_system_process_runtime_memory_limit">Ograničenje memorije</string>
     <string name="settings_system_process_runtime_memory_limit_description">Viša ograničenja ubrzavaju instaliranje patcheva na uređajima koji to podržavaju</string>
     <string name="settings_system_process_runtime_enable">Omogući izvođenje procesa</string>
     <string name="settings_system_memory_limit_subtitle">Memorija dostupna za patchanje </string>

@@ -689,7 +689,6 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_performance">Leistung</string>
     <string name="settings_system_process_runtime">Prozesslaufzeit</string>
     <string name="settings_system_process_runtime_description">Führt das Patchen in einem separaten Prozess für bessere Stabilität aus</string>
-    <string name="settings_system_process_runtime_memory_limit">Speicherlimit</string>
     <string name="settings_system_process_runtime_memory_limit_description">Höhere Limits beschleunigen das Patchen auf kompatiblen Geräten</string>
     <string name="settings_system_process_runtime_enable">Prozesslaufzeit aktivieren</string>
     <string name="settings_system_memory_limit_subtitle">Verfügbarer Speicher für das Patchen</string>
@@ -763,6 +762,10 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_storage_nothing_to_clear">Nichts zu löschen</string>
     <string name="settings_system_storage_open_app_info_title">Android-App-Speicher öffnen</string>
     <string name="settings_system_storage_open_app_info_description">Verwalten oder löschen Sie alle Morphe-Daten über die Systemeinstellungen</string>
+    <string name="settings_system_save_original_apks_title">Originale APKs beibehalten</string>
+    <string name="settings_system_save_original_apks_description">Speichern Sie die APK vor dem Patch, damit sie ohne erneutes Auswählen der Datei für erneutes Patchen wiederverwendet werden kann</string>
+    <string name="settings_system_save_patched_apks_title">Gepatchte APKs beibehalten</string>
+    <string name="settings_system_save_patched_apks_description">Speichern Sie eine Kopie der gepatchten APK für späteren Export oder die Neuinstallation über den Manager</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatchte APKs</string>
     <string name="settings_system_patched_apks_description">Verwaltet gespeicherte gepatchte Anwendungsdateien</string>

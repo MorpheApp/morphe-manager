@@ -690,7 +690,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_performance">Перформанс</string>
     <string name="settings_system_process_runtime">Време на изпълнение</string>
     <string name="settings_system_process_runtime_description">Изпълнява прилагането на пачове в отделен процес за по-добра стабилност.</string>
-    <string name="settings_system_process_runtime_memory_limit">Ограничение на памет</string>
     <string name="settings_system_process_runtime_memory_limit_description">По-високите лимити ускоряват прилагането на пачове на съвместими устройства.</string>
     <string name="settings_system_process_runtime_enable">Включване на изпълнение на различни процеси</string>
     <string name="settings_system_memory_limit_subtitle">Памет, достъпен за заместителния процес</string>
@@ -764,6 +763,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_nothing_to_clear">Няма какво да се изчиства</string>
     <string name="settings_system_storage_open_app_info_title">Отваряне на хранилището на Android приложението</string>
     <string name="settings_system_storage_open_app_info_description">Управление или изчистване на всички данни на Morphe чрез системните настройки</string>
+    <string name="settings_system_save_original_apks_title">Запазване на оригиналните APK файлове</string>
+    <string name="settings_system_save_original_apks_description">Запазете APK файла преди промяна, за да може да бъде използван повторно за повторно прилагане на промените, без да се избира файлът отново</string>
+    <string name="settings_system_save_patched_apks_title">Запазване на променените APK файлове</string>
+    <string name="settings_system_save_patched_apks_description">Запазете копие от променения APK файл за по-късен експорт или преинсталиране от мениджъра</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Променени APK</string>
     <string name="settings_system_patched_apks_description">Управлява запазените файлове на приложения с пач</string>

@@ -679,7 +679,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_performance">প্রোফাইল</string>
     <string name="settings_system_process_runtime">প্রক্রিয় রান্টাইম</string>
     <string name="settings_system_process_runtime_description">আরও ভালো স্থিতিশীলতার জন্য একটি পৃথক প্রক্রিয়ায় প্যাচিং চালায়।</string>
-    <string name="settings_system_process_runtime_memory_limit">প্রক্রিয় রান্টাইম মেমরি সীমিত</string>
     <string name="settings_system_process_runtime_memory_limit_description">উচ্চতর সীমা সক্ষম ডিভাইসে প্যাচিংকে দ্রুত করে।</string>
     <string name="settings_system_process_runtime_enable">প্রক্রিয় রান্টাইম সক্রিয় করুন</string>
     <string name="settings_system_memory_limit_subtitle">মেমরি সীমিত</string>
@@ -755,6 +754,10 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_storage_nothing_to_clear">পরিষ্কার করার জন্য কিছু নেই</string>
     <string name="settings_system_storage_open_app_info_title">Android অ্যাপ স্টোরেজ খুলুন</string>
     <string name="settings_system_storage_open_app_info_description">সিস্টেম সেটিংসের মাধ্যমে সমস্ত Morphe ডেটা পরিচালনা বা পরিষ্কার করুন</string>
+    <string name="settings_system_save_original_apks_title">মূল APK সমূহ</string>
+    <string name="settings_system_save_original_apks_description">প্যাচ করার আগে APK টি সেভ করুন যাতে এটি ফাইলটি পুনরায় নির্বাচন না করে রিপ্যাচিংয়ের জন্য পুনরায় ব্যবহার করা যায়।</string>
+    <string name="settings_system_save_patched_apks_title">প্যাচ করা APK সমূহ রাখুন</string>
+    <string name="settings_system_save_patched_apks_description">পরে এক্সপোর্ট বা ম্যানেজার থেকে পুনরায় ইনস্টল করার জন্য প্যাচ করা APK-এর একটি কপি সেভ করুন।</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">প্যাচ করা APK সমূহ</string>
     <string name="settings_system_patched_apks_description">সংরক্ষিত প্যাচ করা অ্যাপ্লিকেশন ফাইলগুলি পরিচালনা করে।</string>

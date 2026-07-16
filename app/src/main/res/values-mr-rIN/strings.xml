@@ -688,7 +688,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_performance">कार्यक्षमता</string>
     <string name="settings_system_process_runtime">प्रक्रिया रनटाइम</string>
     <string name="settings_system_process_runtime_description">उत्तम स्थिरतेसाठी पॅचिंग वेगळ्या प्रक्रियेत चालवतो</string>
-    <string name="settings_system_process_runtime_memory_limit">मेमरी मर्यादा</string>
     <string name="settings_system_process_runtime_memory_limit_description">उच्च मर्यादा सक्षम उपकरणांवर पॅचिंगला गती देते</string>
     <string name="settings_system_process_runtime_enable">प्रक्रिया रनटाइम सक्षम करा</string>
     <string name="settings_system_memory_limit_subtitle">पॅचिंगसाठी उपलब्ध मेमरी</string>
@@ -762,6 +761,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_nothing_to_clear">साफ करण्यासाठी काहीही नाही</string>
     <string name="settings_system_storage_open_app_info_title">Android ॲप स्टोरेज उघडा</string>
     <string name="settings_system_storage_open_app_info_description">सिस्टम सेटिंग्जद्वारे सर्व मोर्फ डेटा व्यवस्थापित किंवा साफ करा</string>
+    <string name="settings_system_save_original_apks_title">मूळ APKs ठेवा</string>
+    <string name="settings_system_save_original_apks_description">फाईल पुन्हा निवडण्याची आवश्यकता नसेल, यासाठी पॅच केलेली APK पुन्हा पॅचिंगसाठी वापरता यावी म्हणून जतन करा.</string>
+    <string name="settings_system_save_patched_apks_title">पॅच केलेले APKs ठेवा</string>
+    <string name="settings_system_save_patched_apks_description">नंतर निर्यात करण्यासाठी किंवा व्यवस्थापकातून पुन्हा स्थापित करण्यासाठी पॅच केलेल्या APK ची एक प्रत जतन करा.</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">पॅच केलेले APK</string>
     <string name="settings_system_patched_apks_description">जतन केलेल्या पॅच केलेल्या ॲप्लिकेशन फाइल्स व्यवस्थापित करते</string>

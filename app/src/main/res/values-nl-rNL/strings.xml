@@ -689,7 +689,6 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_performance">Prestaties</string>
     <string name="settings_system_process_runtime">Processruntime</string>
     <string name="settings_system_process_runtime_description">Voert patchen uit in een apart proces voor betere stabiliteit</string>
-    <string name="settings_system_process_runtime_memory_limit">Geheugenlimiet</string>
     <string name="settings_system_process_runtime_memory_limit_description">Hogere limieten versnellen het patchen op capabele apparaten</string>
     <string name="settings_system_process_runtime_enable">Schakel processruntime in</string>
     <string name="settings_system_memory_limit_subtitle">Geheugen beschikbaar voor patching</string>
@@ -763,6 +762,10 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_storage_nothing_to_clear">Niets om te wissen</string>
     <string name="settings_system_storage_open_app_info_title">Open Android-app opslag</string>
     <string name="settings_system_storage_open_app_info_description">Beheer of wis alle Morphe-gegevens via de systeeminstellingen</string>
+    <string name="settings_system_save_original_apks_title">Bewaar originele APK\'s</string>
+    <string name="settings_system_save_original_apks_description">Bewaar de APK vóór het patchen, zodat deze opnieuw kan worden gebruikt voor het opnieuw patchen zonder het bestand opnieuw te selecteren</string>
+    <string name="settings_system_save_patched_apks_title">Bewaar gepatchte APK\'s</string>
+    <string name="settings_system_save_patched_apks_description">Bewaar een kopie van de gepatchte APK voor later exporteren of opnieuw installeren vanuit de manager</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatchte APK\'s</string>
     <string name="settings_system_patched_apks_description">Beheert opgeslagen gepatchte applicatiebestanden</string>

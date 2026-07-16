@@ -57,7 +57,7 @@
     <string name="home_category_move_to">Mover a la categoría</string>
     <string name="home_category_move_selected_title">Mover aplicaciones seleccionadas</string>
     <string name="home_category_delete_confirm_title">Eliminar categoría</string>
-    <string name="home_category_delete_confirm_message">Eliminar la categoría &lt;b&gt;%1$s&lt;/b&gt;? Las aplicaciones que contiene volverán a &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_delete_confirm_message">¿Eliminar la categoría &lt;b&gt;%1$s&lt;/b&gt;? Las aplicaciones que contiene volverán a &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="home_category_actions_unavailable">No hay opciones disponibles para esta categoría</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">¿Qué aplicación quieres parchear?</string>
@@ -689,7 +689,6 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_performance">Rendimiento</string>
     <string name="settings_system_process_runtime">Tiempo de ejecución del proceso</string>
     <string name="settings_system_process_runtime_description">Ejecuta el parcheo en un proceso separado para mejorar la estabilidad</string>
-    <string name="settings_system_process_runtime_memory_limit">Límite de memoria</string>
     <string name="settings_system_process_runtime_memory_limit_description">Los límites superiores aceleran el parcheo en los dispositivos compatibles</string>
     <string name="settings_system_process_runtime_enable">Activar tiempo de ejecución del proceso</string>
     <string name="settings_system_memory_limit_subtitle">Memoria disponible para parches</string>
@@ -763,6 +762,10 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_storage_nothing_to_clear">Nada que borrar</string>
     <string name="settings_system_storage_open_app_info_title">Abrir almacenamiento de la aplicación Android</string>
     <string name="settings_system_storage_open_app_info_description">Administrar o borrar todos los datos de Morphe a través de la configuración del sistema</string>
+    <string name="settings_system_save_original_apks_title">Conservar los APK originales</string>
+    <string name="settings_system_save_original_apks_description">Guardar el APK previo al parche para reutilizarlo al volver a parchear sin tener que seleccionar el archivo nuevamente</string>
+    <string name="settings_system_save_patched_apks_title">Conservar los APK parcheados</string>
+    <string name="settings_system_save_patched_apks_description">Guardar una copia del APK parcheado para exportarlo o volver a instalarlo más tarde desde el administrador</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs parcheados</string>
     <string name="settings_system_patched_apks_description">Administra los archivos de aplicación parcheados guardados</string>

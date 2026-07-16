@@ -690,7 +690,6 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_performance">Prestazioni</string>
     <string name="settings_system_process_runtime">Processo di esecuzione</string>
     <string name="settings_system_process_runtime_description">Esegue il patching in un processo separato per una maggiore stabilità</string>
-    <string name="settings_system_process_runtime_memory_limit">Limite di memoria</string>
     <string name="settings_system_process_runtime_memory_limit_description">Limiti più alti velocizzano il patching su dispositivi compatibili</string>
     <string name="settings_system_process_runtime_enable">Abilita il processo di esecuzione</string>
     <string name="settings_system_memory_limit_subtitle">Memoria disponibile per il patching</string>
@@ -764,6 +763,10 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_storage_nothing_to_clear">Niente da cancellare</string>
     <string name="settings_system_storage_open_app_info_title">Apri l\'archiviazione dell\'app Android</string>
     <string name="settings_system_storage_open_app_info_description">Gestisci o cancella tutti i dati di Morphe tramite le impostazioni di sistema</string>
+    <string name="settings_system_save_original_apks_title">Conserva gli APK originali</string>
+    <string name="settings_system_save_original_apks_description">Salva l\'APK pre-patch in modo che possa essere riutilizzato per il ri-patching senza dover selezionare nuovamente il file</string>
+    <string name="settings_system_save_patched_apks_title">Conserva gli APK patchati</string>
+    <string name="settings_system_save_patched_apks_description">Salva una copia dell\'APK patchato per un\'esportazione successiva o per la reinstallazione tramite il gestore</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK patchati</string>
     <string name="settings_system_patched_apks_description">Gestione dei file delle applicazioni patchate</string>

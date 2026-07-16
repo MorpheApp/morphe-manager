@@ -689,7 +689,6 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_performance">Teljesítmény</string>
     <string name="settings_system_process_runtime">Folyamat futási ideje</string>
     <string name="settings_system_process_runtime_description">A javítás külön folyamatban történő futtatása a jobb stabilitás érdekében.</string>
-    <string name="settings_system_process_runtime_memory_limit">Memóriakorlát</string>
     <string name="settings_system_process_runtime_memory_limit_description">Magasabb korlátok gyorsítják a javítást a képességekkel rendelkező eszközökön.</string>
     <string name="settings_system_process_runtime_enable">Folyamatfutási környezet engedélyezése</string>
     <string name="settings_system_memory_limit_subtitle">Módosításhoz rendelkezésre álló memória</string>
@@ -763,6 +762,10 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_storage_nothing_to_clear">Nincs törölni való</string>
     <string name="settings_system_storage_open_app_info_title">Megnyitás Android alkalmazástár</string>
     <string name="settings_system_storage_open_app_info_description">Morphe adatok kezelése vagy törlése a rendszerbeállításokon keresztül</string>
+    <string name="settings_system_save_original_apks_title">Tartsd meg az eredeti APK fájlokat</string>
+    <string name="settings_system_save_original_apks_description">Mentsd el a patch-elés előtti APK fájlt, hogy újrahasználd a későbbi patch-elésekhez anélkül, hogy újra ki kellene választanod a fájlt.</string>
+    <string name="settings_system_save_patched_apks_title">Tartsd meg a patch-elt APK fájlokat</string>
+    <string name="settings_system_save_patched_apks_description">Mentsd el a patch-elt APK fájl egy másolatát későbbi exportáláshoz vagy a kezelőből való újratelepítéshez.</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Módosított APK-k</string>
     <string name="settings_system_patched_apks_description">Mentett módosított alkalmazásfájlok kezelése</string>

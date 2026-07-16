@@ -690,7 +690,6 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_performance">Hiệu suất</string>
     <string name="settings_system_process_runtime">Tiến trình riêng</string>
     <string name="settings_system_process_runtime_description">Chạy quá trình vá trong tiến trình riêng biệt để cải thiện độ ổn định</string>
-    <string name="settings_system_process_runtime_memory_limit">Giới hạn bộ nhớ</string>
     <string name="settings_system_process_runtime_memory_limit_description">Tăng giới hạn có thể giúp vá nhanh hơn nếu thiết bị đủ mạnh</string>
     <string name="settings_system_process_runtime_enable">Bật tiến trình riêng</string>
     <string name="settings_system_memory_limit_subtitle">Bộ nhớ cho quá trình vá</string>
@@ -764,6 +763,10 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_storage_nothing_to_clear">Không có gì để xóa</string>
     <string name="settings_system_storage_open_app_info_title">Mở bộ nhớ ứng dụng Android</string>
     <string name="settings_system_storage_open_app_info_description">Quản lý hoặc xóa tất cả dữ liệu Morphe thông qua cài đặt hệ thống</string>
+    <string name="settings_system_save_original_apks_title">Giữ lại các tệp APK gốc</string>
+    <string name="settings_system_save_original_apks_description">Lưu tệp APK trước khi vá để có thể tái sử dụng cho việc vá lại mà không cần chọn lại tệp</string>
+    <string name="settings_system_save_patched_apks_title">Giữ lại các tệp APK đã vá</string>
+    <string name="settings_system_save_patched_apks_description">Lưu một bản sao của tệp APK đã vá để xuất hoặc cài đặt lại sau này từ trình quản lý</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK đã vá</string>
     <string name="settings_system_patched_apks_description">Quản lý tệp ứng dụng đã vá</string>

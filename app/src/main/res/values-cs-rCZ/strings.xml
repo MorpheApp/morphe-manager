@@ -689,7 +689,6 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_performance">Výkonnost</string>
     <string name="settings_system_process_runtime">Doba běhu procesů</string>
     <string name="settings_system_process_runtime_description">Spustí záplatování v odděleném procesu pro lepší stabilitu</string>
-    <string name="settings_system_process_runtime_memory_limit">Limit paměti</string>
     <string name="settings_system_process_runtime_memory_limit_description">Vyšší limity urychlí záplatování na zařízeních, která to podporují</string>
     <string name="settings_system_process_runtime_enable">Povolit běhové prostředí procesů</string>
     <string name="settings_system_memory_limit_subtitle">Paměť k dispozici pro záplatování</string>
@@ -763,6 +762,10 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_storage_nothing_to_clear">Není co mazat</string>
     <string name="settings_system_storage_open_app_info_title">Otevřít úložiště aplikace Android</string>
     <string name="settings_system_storage_open_app_info_description">Spravujte nebo vymažte všechna data Morphe prostřednictvím nastavení systému</string>
+    <string name="settings_system_save_original_apks_title">Zachovat původní APK</string>
+    <string name="settings_system_save_original_apks_description">Uložit původní APK před záplatováním, aby bylo možné jej znovu použít pro další záplatování bez opětovného výběru souboru</string>
+    <string name="settings_system_save_patched_apks_title">Zachovat záplatované APK</string>
+    <string name="settings_system_save_patched_apks_description">Uložit kopii záplatovaného APK pro pozdější export nebo přeinstalaci z manažeru</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Záplatované soubory APK</string>
     <string name="settings_system_patched_apks_description">Spravuje uložené záplatované soubory aplikací</string>

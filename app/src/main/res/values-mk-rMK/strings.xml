@@ -615,7 +615,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_performance">Перформанси</string>
     <string name="settings_system_process_runtime">Време на извршување на процесот</string>
     <string name="settings_system_process_runtime_description">Преземањето може да биде затворено</string>
-    <string name="settings_system_process_runtime_memory_limit">Лимит на меморија</string>
     <string name="settings_system_process_runtime_memory_limit_description">Облога за инсталирање</string>
     <string name="settings_system_process_runtime_enable">Овозможи време на извршување на процесот</string>
     <string name="settings_system_memory_limit_subtitle">Меморија достапна за закрпување</string>
