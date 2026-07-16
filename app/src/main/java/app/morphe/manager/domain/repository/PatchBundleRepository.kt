@@ -690,11 +690,32 @@ class PatchBundleRepository(
             .map { it.uid }
             .toSet()
 
-        dispatchAction("Disable (${bundles.map { it.uid }.joinToString(",")})") {
+        dispatchAction("Disable (${bundles.map { it.uid }.joinToString(",")})") { current ->
             bundles.forEach { bundle ->
                 updateDb(bundle.uid) { it.copy(enabled = !it.enabled) }
             }
-            val newState = doReload()
+
+            // Fast path: toggling enabled needs no metadata reparse; doReload would stall the
+            // store queue by parsing every bundle's patches.jar on each flip.
+            val newState = when (current) {
+                is BundleState.Ready -> current.copy(
+                    sources = current.sources.mutate { mut ->
+                        bundles.forEach { bundle ->
+                            mut[bundle.uid]?.let { src ->
+                                mut[bundle.uid] = src.copy(enabled = !src.enabled)
+                            }
+                        }
+                    },
+                    info = current.info.mutate { mut ->
+                        bundles.forEach { bundle ->
+                            mut[bundle.uid]?.let { info ->
+                                mut[bundle.uid] = info.copy(enabled = !info.enabled)
+                            }
+                        }
+                    }
+                )
+                else -> doReload()
+            }
 
             // After store is updated, trigger update for bundles that were just enabled
             if (beingEnabledUids.isNotEmpty()) {
