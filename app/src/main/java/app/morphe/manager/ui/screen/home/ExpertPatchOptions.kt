@@ -895,6 +895,28 @@ private fun BooleanOptionItem(
 }
 
 /**
+ * Subtle tinted container used for grouped patch-option content inside dialogs.
+ * Uses the dialog text color at 5% alpha so it adapts to light/dark dialog surfaces.
+ */
+@Composable
+private fun DialogTintedSurface(
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
+    content: @Composable () -> Unit
+) {
+    val shape = RoundedCornerShape(12.dp)
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(shape)
+            .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
+        shape = shape,
+        color = LocalDialogTextColor.current.copy(alpha = 0.05f),
+        content = content
+    )
+}
+
+/**
  * Inline option row that shows current item count and opens [ListStringEditorDialog].
  */
 @Composable
@@ -908,14 +930,7 @@ private fun ListStringInputOption(
     val textColor = LocalDialogTextColor.current
     val secondaryColor = LocalDialogSecondaryTextColor.current
 
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
-            .clickable { showEditor.value = true },
-        shape = RoundedCornerShape(12.dp),
-        color = textColor.copy(alpha = 0.05f)
-    ) {
+    DialogTintedSurface(onClick = { showEditor.value = true }) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -1121,11 +1136,7 @@ private fun ListStringItemRow(
 ) {
     val textColor = LocalDialogTextColor.current
 
-    Surface(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(10.dp),
-        color = textColor.copy(alpha = 0.06f)
-    ) {
+    DialogTintedSurface {
         Row(
             modifier = Modifier
                 .fillMaxWidth()

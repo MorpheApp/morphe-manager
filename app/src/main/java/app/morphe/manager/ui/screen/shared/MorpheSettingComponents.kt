@@ -708,12 +708,13 @@ fun InfoBox(
 @Composable
 fun EmptyState(
     message: String,
+    modifier: Modifier = Modifier,
     icon: ImageVector? = Icons.Outlined.FolderOff,
     actionLabel: String? = null,
     onAction: (() -> Unit)? = null
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,

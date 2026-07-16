@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
@@ -26,7 +25,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -212,20 +210,12 @@ fun ExpertModeDialog(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Surface(
-                        modifier = Modifier.size(32.dp),
-                        shape = RoundedCornerShape(50),
-                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
-                    ) {
-                        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                            Icon(
-                                imageVector = Icons.Outlined.Source,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                                modifier = Modifier.size(18.dp)
-                            )
-                        }
-                    }
+                    StatusCircleIcon(
+                        icon = Icons.Outlined.Source,
+                        size = 32.dp,
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
                     Text(
                         text = bundle.name,
                         style = MaterialTheme.typography.titleMedium,
@@ -248,10 +238,10 @@ fun ExpertModeDialog(
 
                 if (filteredPatches == null) {
                     // No search results for this bundle
-                    EmptyStateContent(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f)
+                    EmptyState(
+                        message = stringResource(R.string.expert_mode_no_results),
+                        icon = Icons.Outlined.SearchOff,
+                        modifier = Modifier.weight(1f)
                     )
                 } else {
                     val singleBundleScroll = rememberScrollState()
@@ -377,10 +367,10 @@ fun ExpertModeDialog(
 
                         if (patches == null) {
                             // No search results for this bundle
-                            EmptyStateContent(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .fillMaxHeight()
+                            EmptyState(
+                                message = stringResource(R.string.expert_mode_no_results),
+                                icon = Icons.Outlined.SearchOff,
+                                modifier = Modifier.fillMaxHeight()
                             )
                         } else {
                             val pageScroll = rememberScrollState()
@@ -540,38 +530,6 @@ private fun PatchListWithUniversalSection(
                 onToggle = { onToggle(patch.name) },
                 onConfigureOptions = { onConfigureOptions(patch) },
                 hasOptions = !patch.options.isNullOrEmpty()
-            )
-        }
-    }
-}
-
-/**
- * Empty state content when no patches match search or none selected.
- */
-@Composable
-private fun EmptyStateContent(
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier.fillMaxWidth(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
-            modifier = Modifier.padding(32.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.SearchOff,
-                contentDescription = null,
-                modifier = Modifier.size(64.dp),
-                tint = LocalDialogSecondaryTextColor.current
-            )
-            Text(
-                text = stringResource(R.string.expert_mode_no_results),
-                style = MaterialTheme.typography.bodyLarge,
-                color = LocalDialogSecondaryTextColor.current,
-                textAlign = TextAlign.Center
             )
         }
     }
