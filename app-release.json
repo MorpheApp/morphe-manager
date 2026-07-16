@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-07-13T13:24:05",
-  "description": "# [1.24.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.1...v1.24.0-dev.2) (2026-07-13)\n\n\n### Bug Fixes\n\n* Prevent storage dialog crash when segments list is empty ([b155ddb](https://github.com/MorpheApp/morphe-manager/commit/b155ddb40bf84e3691e66aab03ed6b614529d1ff))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.2/morphe-manager-1.24.0-dev.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.2/morphe-manager-1.24.0-dev.2.apk.asc",
-  "version": "1.24.0-dev.2"
+  "created_at": "2026-07-16T10:03:24",
+  "description": "# [1.24.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.2...v1.24.0-dev.3) (2026-07-16)\n\n\n### Features\n\n* Add home app grouping controls ([#725](https://github.com/MorpheApp/morphe-manager/issues/725)) ([6b10955](https://github.com/MorpheApp/morphe-manager/commit/6b109551655cf0b296468edd5767e93e247ccb87))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.3/morphe-manager-1.24.0-dev.3.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.3/morphe-manager-1.24.0-dev.3.apk.asc",
+  "version": "1.24.0-dev.3"
 }

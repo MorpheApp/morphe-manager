@@ -1,3 +1,10 @@
+# [1.24.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.2...v1.24.0-dev.3) (2026-07-16)
+
+
+### Features
+
+* Add home app grouping controls ([#725](https://github.com/MorpheApp/morphe-manager/issues/725)) ([6b10955](https://github.com/MorpheApp/morphe-manager/commit/6b109551655cf0b296468edd5767e93e247ccb87))
+
 # [1.24.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.1...v1.24.0-dev.2) (2026-07-13)
 
 
