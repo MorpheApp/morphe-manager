@@ -113,17 +113,26 @@ internal fun buildHomeSourceGroups(
     uncategorizedCollapsed: Boolean,
     ignoreCollapsed: Boolean
 ): List<HomeCategoryGroup> {
-    val claimedPackages = mutableSetOf<String>()
+    // Build a package → owning source(s) index once, then iterate items once
+    val sourcesByPackage = HashMap<String, MutableList<HomeAppSourceGroup>>()
+    sourceGroups.forEach { sourceGroup ->
+        sourceGroup.packageNames.forEach { pkg ->
+            sourcesByPackage.getOrPut(pkg) { ArrayList(2) }.add(sourceGroup)
+        }
+    }
+    val itemsPerSource = HashMap<Int, MutableList<HomeAppItem>>(sourceGroups.size)
+    val claimedPackages = HashSet<String>(items.size)
+    items.forEach { item ->
+        val owners = sourcesByPackage[item.packageName] ?: return@forEach
+        claimedPackages.add(item.packageName)
+        owners.forEach { sourceGroup ->
+            itemsPerSource.getOrPut(sourceGroup.uid) { ArrayList() }.add(item)
+        }
+    }
 
     val groups = sourceGroups.mapNotNull { sourceGroup ->
-        val sourceItems = items
-            .filter { item -> item.packageName in sourceGroup.packageNames }
-            .onEach { item ->
-                claimedPackages.add(item.packageName)
-            }
-            .orderedByPackageOrder(sourceGroup.packageOrder)
-
-        if (sourceItems.isEmpty()) {
+        val sourceItems = itemsPerSource[sourceGroup.uid]?.orderedByPackageOrder(sourceGroup.packageOrder)
+        if (sourceItems.isNullOrEmpty()) {
             null
         } else {
             HomeCategoryGroup(

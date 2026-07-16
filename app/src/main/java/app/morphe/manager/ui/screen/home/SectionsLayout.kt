@@ -665,7 +665,7 @@ fun MainAppsSection(
         if (!isReorderMode.value) {
             localOrder = homeAppItems.map { it.packageName }
         } else {
-            val pkgSet = homeAppItems.map { it.packageName }.toSet()
+            val pkgSet = homeAppItems.mapTo(mutableSetOf()) { it.packageName }
             scopedSourceOrder = scopedSourceOrder?.filter { it in pkgSet }
             val kept = localOrder.filter { it in pkgSet }
             val keptSet = kept.toSet()
@@ -1165,19 +1165,10 @@ fun MainAppsSection(
                                 Modifier.fillMaxWidth()
                             }
                         ) {
-                            LazyColumn(
-                                state = listState,
-                                modifier = if (fillHeight) Modifier.fillMaxSize() else Modifier.fillMaxWidth(),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                // Center items vertically in the flat All-apps view when the list
-                                // is shorter than the viewport; grouped views stay top-aligned so
-                                // headers keep a stable position when groups expand/collapse
-                                verticalArrangement = if (isGroupedAppView) {
-                                    Arrangement.spacedBy(itemSpacing)
-                                } else {
-                                    Arrangement.spacedBy(itemSpacing, Alignment.CenterVertically)
-                                },
-                                contentPadding = PaddingValues(
+                            // Cached so the LazyColumn doesn't allocate a new PaddingValues on
+                            // every recomposition (which can be per-frame under scroll)
+                            val listContentPadding = remember(horizontalPadding, itemSpacing, isMultibarVisible) {
+                                PaddingValues(
                                     start = horizontalPadding,
                                     end = horizontalPadding,
                                     // Extra bottom padding so cards aren't hidden behind the action bar
@@ -1185,6 +1176,20 @@ fun MainAppsSection(
                                     // 8dp top padding, plus itemSpacing for consistent card gap
                                     bottom = if (isMultibarVisible) 92.dp + itemSpacing else 0.dp
                                 )
+                            }
+                            val listArrangement = remember(itemSpacing, isGroupedAppView) {
+                                if (isGroupedAppView) Arrangement.spacedBy(itemSpacing)
+                                else Arrangement.spacedBy(itemSpacing, Alignment.CenterVertically)
+                            }
+                            LazyColumn(
+                                state = listState,
+                                modifier = if (fillHeight) Modifier.fillMaxSize() else Modifier.fillMaxWidth(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                // Center items vertically in the flat All-apps view when the list
+                                // is shorter than the viewport; grouped views stay top-aligned so
+                                // headers keep a stable position when groups expand/collapse
+                                verticalArrangement = listArrangement,
+                                contentPadding = listContentPadding
                             ) {
                                 // Cold start: homeAppItems still empty - show placeholder shimmer cards
                                 if (stableLoadingState.value && homeAppItems.isEmpty()) {
