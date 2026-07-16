@@ -25,7 +25,7 @@
     <string name="home_metered_skipped_title">Päivitykset keskeytetty mobiilidatalla</string>
     <string name="home_metered_skipped_subtitle">Napauta salliaksesi päivitykset mobiilidatalla</string>
     <string name="home_update_error">Päivitys epäonnistui</string>
-    <string name="home_update_error_subtitle">Tarkista internetyhteys ja yritä uudelleen</string>
+    <string name="home_update_error_subtitle">Päivityksessä lähteisiin meni jotain vikaa</string>
     <string name="home_update_skipped_metered">Päivitykset ohitettu</string>
     <string name="home_update_skipped_metered_subtitle">Mobiilidata on käytössä</string>
     <string name="home_updating_sources">Päivitetään lähteitä…</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">\"%s\" ei vastaa yhtään sovellusta</string>
     <string name="home_all_apps_hidden_title">Kaikki sovellukset on piilotettu</string>
     <string name="home_all_apps_hidden_subtitle">Olet piilottanut kaikki sovellukset aloitusnäytöstä</string>
+    <string name="home_category_add">Lisää kategoria</string>
+    <string name="home_category_all_apps">Kaikki sovellukset</string>
+    <string name="home_category_custom">Mukautettu</string>
+    <string name="home_category_uncategorized">Luokittelemattomat</string>
+    <string name="home_category_new_title">Uusi luokka</string>
+    <string name="home_category_rename_title">Luo luokan nimi uudelleen</string>
+    <string name="home_category_name">Luokan nimi</string>
+    <string name="home_category_move_to">Siirrä luokkaan</string>
+    <string name="home_category_move_selected_title">Siirrä valitut sovellukset</string>
+    <string name="home_category_delete_confirm_title">Poista luokka</string>
+    <string name="home_category_delete_confirm_message">Poista luokka &lt;b&gt;%1$s&lt;/b&gt;? Sen sovellukset palautetaan &lt;b&gt;%2$s&lt;/b&gt; -luokkaan</string>
+    <string name="home_category_actions_unavailable">Tämän luokan toimintoja ei ole saatavilla</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Minkä sovelluksen haluat muokata?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -483,6 +495,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_home_screen">Aloitusnäyttö</string>
     <string name="settings_appearance_greeting_phrases">Tervehdysviestit</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Näytä tervehdysviesti aloitusnäytöllä</string>
+    <string name="settings_appearance_app_grouping">Sovellusten ryhmittely</string>
+    <string name="settings_appearance_app_grouping_description">Näytä kotinäkymän vaihto, jolla voit ryhmitellä sovellukset lähteen tai omien luokkien mukaan ja säilytä valinta, kun se on poissa päältä</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Sovelluskuvake</string>
     <string name="settings_appearance_app_icon_default">Oletus</string>

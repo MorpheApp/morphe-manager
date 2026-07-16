@@ -3,7 +3,6 @@
     <!-- Home Screen -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_error">Абнаўленне не ўдалося</string>
-    <string name="home_update_error_subtitle">Праверце інтэрнэт-злучэнне і паўтарыце ізноў</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Якую праграму вы хочаце абнавіць?</string>
     <!-- Humorous hype message with light nostalgia -->

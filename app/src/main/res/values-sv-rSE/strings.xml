@@ -19,7 +19,6 @@
     <string name="home_update_available">Uppdatering för Morphe är tillgänglig</string>
     <string name="home_update_available_subtitle">Ny version är redo att installeras</string>
     <string name="home_update_error">Uppdatering misslyckades</string>
-    <string name="home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
     <string name="home_update_skipped_metered">Uppdateringar hoppas över</string>
     <string name="home_update_skipped_metered_subtitle">Mobildata är aktivt</string>
     <string name="home_updating_sources">Uppdaterar källor …</string>

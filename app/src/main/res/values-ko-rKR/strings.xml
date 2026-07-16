@@ -14,7 +14,7 @@
     <string name="android_11_bug_dialog_description">사용자 환경에 부정적인 영향을 미치는 Android 11 시스템 버그를 방지하려면 앱 설치 권한을 미리 부여해야 합니다</string>
     <string name="deep_link_add_source_title">소스 추가</string>
     <string name="deep_link_add_source_message">이 패치 소스를 Morphe에 추가하시겠습니까?</string>
-    <string name="deep_link_add_source_warning">신뢰할 수 있는 출처의 소스만 추가하세요</string>
+    <string name="deep_link_add_source_warning">신뢰할 수 있는 소스만 추가하세요</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe 업데이트 사용 가능</string>
     <string name="home_update_available_subtitle">새 버전 설치 준비 완료</string>
@@ -25,7 +25,7 @@
     <string name="home_metered_skipped_title">모바일 데이터에서 업데이트가 일시 중지됨</string>
     <string name="home_metered_skipped_subtitle">모바일 데이터에서 업데이트를 허용하려면 탭하세요</string>
     <string name="home_update_error">업데이트 실패</string>
-    <string name="home_update_error_subtitle">인터넷 연결 상태를 확인하고 다시 시도하세요</string>
+    <string name="home_update_error_subtitle">소스 업데이트 중 오류가 발생했습니다</string>
     <string name="home_update_skipped_metered">업데이트를 건너뜁니다</string>
     <string name="home_update_skipped_metered_subtitle">모바일 데이터가 활성화되어 있습니다</string>
     <string name="home_updating_sources">소스를 업데이트하는 중…</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">\'%s\'와 일치하는 앱이 없습니다</string>
     <string name="home_all_apps_hidden_title">모든 앱이 숨겨집니다</string>
     <string name="home_all_apps_hidden_subtitle">홈 화면에서 모든 앱이 숨겨집니다</string>
+    <string name="home_category_add">카테고리 추가</string>
+    <string name="home_category_all_apps">모든 앱</string>
+    <string name="home_category_custom">사용자 정의</string>
+    <string name="home_category_uncategorized">분류되지 않음</string>
+    <string name="home_category_new_title">새 카테고리</string>
+    <string name="home_category_rename_title">카테고리 이름 바꾸기</string>
+    <string name="home_category_name">카테고리 이름</string>
+    <string name="home_category_move_to">카테고리로 이동</string>
+    <string name="home_category_move_selected_title">선택한 앱 이동</string>
+    <string name="home_category_delete_confirm_title">카테고리 삭제 확인</string>
+    <string name="home_category_delete_confirm_message">&lt;b&gt;%1$s&lt;/b&gt; 카테고리를 삭제하시겠습니까? 해당 카테고리의 앱은 &lt;b&gt;%2$s&lt;/b&gt;로 돌아갑니다.</string>
+    <string name="home_category_actions_unavailable">이 카테고리에는 사용 가능한 작업이 없습니다</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">어떤 앱을 패치하시겠습니까?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -486,6 +498,8 @@
     <string name="settings_appearance_home_screen">홈 화면</string>
     <string name="settings_appearance_greeting_phrases">인사말</string>
     <string name="settings_appearance_greeting_phrases_subtitle">홈 화면에 인사말을 표시합니다</string>
+    <string name="settings_appearance_app_grouping">앱 그룹화</string>
+    <string name="settings_appearance_app_grouping_description">앱 출처 또는 사용자 정의 카테고리로 앱을 그룹화하는 홈 화면 전환기를 표시하며, 비활성화 시 선택 사항을 유지합니다.</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">앱 아이콘</string>
     <string name="settings_appearance_app_icon_default">기본값</string>
@@ -749,7 +763,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_cleared">%s 확보됨</string>
     <string name="settings_system_storage_nothing_to_clear">삭제할 항목이 없습니다</string>
     <string name="settings_system_storage_open_app_info_title">Android 앱 저장소 열기</string>
-    <string name="settings_system_storage_open_app_info_description">시스템 설정을 통해 모든 Morphe 데이터를 관리하거나 지웁니다</string>
+    <string name="settings_system_storage_open_app_info_description">시스템 설정을 통해 모든 Morphe 데이터를 관리하거나 지울 수 있습니다</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">패치된 APK</string>
     <string name="settings_system_patched_apks_description">저장된 패치된 앱 파일을 관리합니다</string>

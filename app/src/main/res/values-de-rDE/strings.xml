@@ -25,7 +25,7 @@
     <string name="home_metered_skipped_title">Updates über mobile Daten wurden pausiert</string>
     <string name="home_metered_skipped_subtitle">Tippen Sie auf, um Updates über mobile Daten zu erlauben</string>
     <string name="home_update_error">Update fehlgeschlagen</string>
-    <string name="home_update_error_subtitle">Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut</string>
+    <string name="home_update_error_subtitle">Bei der Aktualisierung der Quellen ist ein Fehler aufgetreten</string>
     <string name="home_update_skipped_metered">Updates übersprungen</string>
     <string name="home_update_skipped_metered_subtitle">Mobile Daten sind aktiv</string>
     <string name="home_updating_sources">Quellen werden aktualisiert…</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Keine Apps passen zu \"%s\"</string>
     <string name="home_all_apps_hidden_title">Alle Apps sind ausgeblendet</string>
     <string name="home_all_apps_hidden_subtitle">Sie haben alle Apps vom Startbildschirm ausgeblendet</string>
+    <string name="home_category_add">Kategorie hinzufügen</string>
+    <string name="home_category_all_apps">Alle Apps</string>
+    <string name="home_category_custom">Benutzerdefiniert</string>
+    <string name="home_category_uncategorized">Nicht kategorisiert</string>
+    <string name="home_category_new_title">Neue Kategorie</string>
+    <string name="home_category_rename_title">Kategorie umbenennen</string>
+    <string name="home_category_name">Kategoriename</string>
+    <string name="home_category_move_to">In Kategorie verschieben</string>
+    <string name="home_category_move_selected_title">Ausgewählte Apps verschieben</string>
+    <string name="home_category_delete_confirm_title">Kategorie löschen</string>
+    <string name="home_category_delete_confirm_message">Kategorie &lt;b&gt;%1$s&lt;/b&gt; löschen? Apps darin werden nach &lt;b&gt;%2$s&lt;/b&gt; verschoben</string>
+    <string name="home_category_actions_unavailable">Keine Optionen für diese Kategorie verfügbar</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Welche App möchten Sie patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -486,6 +498,8 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="settings_appearance_home_screen">Startbildschirm</string>
     <string name="settings_appearance_greeting_phrases">Begrüßungsformeln</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Auf dem Startbildschirm eine Begrüßungsnachricht anzeigen</string>
+    <string name="settings_appearance_app_grouping">App-Gruppierung</string>
+    <string name="settings_appearance_app_grouping_description">Zeigt einen Home-Bildschirm-Wechsler an, um Apps nach Quelle oder Ihren eigenen Kategorien zu gruppieren und die Auswahl bei Deaktivierung beizubehalten</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App-Icon</string>
     <string name="settings_appearance_app_icon_default">Standard</string>

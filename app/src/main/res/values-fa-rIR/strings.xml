@@ -17,7 +17,6 @@
     <string name="home_update_available">به‌روزرسانی Morphe در دسترس است</string>
     <string name="home_update_available_subtitle">نسخه جدید آماده نصب است </string>
     <string name="home_update_error">بروزرسانی شکست خورد</string>
-    <string name="home_update_error_subtitle">وضعیت اینترنتت رو چک‌ کن و دوباره امتحان کن</string>
     <string name="home_update_skipped_metered">به روزرسانی ها رد شدند </string>
     <string name="home_update_skipped_metered_subtitle">داده های موبایل فعال است </string>
     <string name="home_updating_sources">به روزرسانی منابع…</string>

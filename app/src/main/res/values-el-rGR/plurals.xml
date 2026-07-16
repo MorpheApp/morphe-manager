@@ -40,4 +40,8 @@
         <item quantity="one">%s κρυφή εφαρμογή</item>
         <item quantity="other">%s κρυφές εφαρμογές</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s εφαρμογή</item>
+        <item quantity="other">%s εφαρμογές</item>
+    </plurals>
 </resources>

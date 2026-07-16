@@ -60,4 +60,10 @@
         <item quantity="many">%s ukrytych aplikacji</item>
         <item quantity="other">%s ukrytych aplikacji</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s aplikacja</item>
+        <item quantity="few">%s aplikacje</item>
+        <item quantity="many">%s aplikacji</item>
+        <item quantity="other">%s aplikacji</item>
+    </plurals>
 </resources>

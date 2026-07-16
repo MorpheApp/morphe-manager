@@ -25,7 +25,7 @@
     <string name="home_metered_skipped_title">Nûvekirin li ser data mobîlê hatin sekinin</string>
     <string name="home_metered_skipped_subtitle">Bikîne da ku nûvekirinên li ser data mobîl destûr bidî</string>
     <string name="home_update_error">Nûvekirin ji destûr ve çû</string>
-    <string name="home_update_error_subtitle">Giştîrabûnê xwe kontrol bike û dîsa hewildan bike</string>
+    <string name="home_update_error_subtitle">Di nûkirina çavkaniyan de tiştek çewt kir</string>
     <string name="home_update_skipped_metered">Nûvekirin çêhatin</string>
     <string name="home_update_skipped_metered_subtitle">Daneya mobîl aktîv e</string>
     <string name="home_updating_sources">Kanalkan sazkirinê…</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Tu din li gor \'%s\' hene</string>
     <string name="home_all_apps_hidden_title">Hemû serlêdanan veşartin</string>
     <string name="home_all_apps_hidden_subtitle">Ez hemû serlêdanan ji ekranê pêşîn veşartim</string>
+    <string name="home_category_add">Kategoriyê zêde bike</string>
+    <string name="home_category_all_apps">Hemû sepan</string>
+    <string name="home_category_custom">Sazkirî</string>
+    <string name="home_category_uncategorized">Bêkategorî</string>
+    <string name="home_category_new_title">Kategoriya nû</string>
+    <string name="home_category_rename_title">Kategoriya biguhezîne</string>
+    <string name="home_category_name">Navê kategoriyê</string>
+    <string name="home_category_move_to">Biguhezîne kategoriyê</string>
+    <string name="home_category_move_selected_title">Biguhezîne sepanên hilbijartî</string>
+    <string name="home_category_delete_confirm_title">Kategoriya terikîne</string>
+    <string name="home_category_delete_confirm_message">Kategoriya &lt;b&gt;%1$s&lt;/b&gt; terikîne? Sepan di nav de vegerin &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Çalakiyên ji bo vê kategoriyê nayên destêrkirin</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Kudu ezîtekora kodê ji xwerêzê we yê çawa îdeal bike?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -484,6 +496,8 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="settings_appearance_home_screen">Mîna malê</string>
     <string name="settings_appearance_greeting_phrases">Frazey şahê</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Nîşanekê bi xêrhatinê li ser mîna malê nîşan bide</string>
+    <string name="settings_appearance_app_grouping">Komkirina sepanan</string>
+    <string name="settings_appearance_app_grouping_description">Nîşanekê bike ku sepanan bi çavkanî an kategoriyên te kom bike, hilbijarkirina xwe jî dema ku neçalak e parastin</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Îkonê sepanê</string>
     <string name="settings_appearance_app_icon_default">Serekî</string>

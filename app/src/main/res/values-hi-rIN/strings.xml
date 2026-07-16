@@ -25,7 +25,7 @@
     <string name="home_metered_skipped_title">मोबाइल डेटा पर अपडेट रोक दिए गए हैं</string>
     <string name="home_metered_skipped_subtitle">मोबाइल डेटा पर अपडेट की अनुमति देने के लिए टैप करें</string>
     <string name="home_update_error">उपडेट विफल हुआ</string>
-    <string name="home_update_error_subtitle">अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
+    <string name="home_update_error_subtitle">स्रोत अद्यतन करते समय कुछ गड़बड़ हो गई</string>
     <string name="home_update_skipped_metered">अपडेट छोड़ दिए गए</string>
     <string name="home_update_skipped_metered_subtitle">मोबाइल डेटा सक्रिय है</string>
     <string name="home_updating_sources">स्रोतों को अपडेट कर रहा हूँ…</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">\"%s\" से मेल खाने वाला कोई ऐप नहीं है</string>
     <string name="home_all_apps_hidden_title">सभी ऐप्स छिपे हुए हैं</string>
     <string name="home_all_apps_hidden_subtitle">आपने होम स्क्रीन से सभी ऐप्स छिपा दिए हैं</string>
+    <string name="home_category_add">श्रेणी जोड़ें</string>
+    <string name="home_category_all_apps">सभी ऐप्स</string>
+    <string name="home_category_custom">कस्टम</string>
+    <string name="home_category_uncategorized">वर्गीकृत नहीं</string>
+    <string name="home_category_new_title">नई श्रेणी</string>
+    <string name="home_category_rename_title">श्रेणी का नाम बदलें</string>
+    <string name="home_category_name">श्रेणी का नाम</string>
+    <string name="home_category_move_to">श्रेणी में ले जाएं</string>
+    <string name="home_category_move_selected_title">चयनित ऐप्स को ले जाएं</string>
+    <string name="home_category_delete_confirm_title">श्रेणी हटाएं</string>
+    <string name="home_category_delete_confirm_message">श्रेणी &lt;b&gt;%1$s&lt;/b&gt; हटाएं? इसमें ऐप्स &lt;b&gt;%2$s&lt;/b&gt; में वापस चले जाएंगे</string>
+    <string name="home_category_actions_unavailable">इस श्रेणी के लिए क्रियाएँ उपलब्ध नहीं हैं</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">आप किस ऐप को पैच करना चाहते हैं?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -486,6 +498,8 @@
     <string name="settings_appearance_home_screen">मुखपृष्ठ</string>
     <string name="settings_appearance_greeting_phrases">अभिवादन वाक्यांश</string>
     <string name="settings_appearance_greeting_phrases_subtitle">मुखपृष्ठ पर अभिवादन संदेश दिखाएँ</string>
+    <string name="settings_appearance_app_grouping">ऐप समूहीकरण</string>
+    <string name="settings_appearance_app_grouping_description">स्रोत या अपनी श्रेणियों द्वारा ऐप्स को समूहित करने के लिए होम स्क्रीन स्विचर दिखाएं, बंद होने पर चयन को बनाए रखें</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">एप्लिकेशन आइकॉन</string>
     <string name="settings_appearance_app_icon_default">डिफॉल्ट</string>

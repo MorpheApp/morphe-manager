@@ -25,7 +25,7 @@
     <string name="home_metered_skipped_title">Ažuriranja su pauzirana na mobilnim podacima</string>
     <string name="home_metered_skipped_subtitle">Dodirnite da biste dozvolili ažuriranja putem mobilnih podataka</string>
     <string name="home_update_error">Ažuriranje nije uspelo</string>
-    <string name="home_update_error_subtitle">Proverite internet vezu i pokušajte ponovo</string>
+    <string name="home_update_error_subtitle">Došlo je do greške prilikom ažuriranja izvora</string>
     <string name="home_update_skipped_metered">Ažuriranja su preskočena</string>
     <string name="home_update_skipped_metered_subtitle">Mobilni podaci su aktivni</string>
     <string name="home_updating_sources">Ažuriranje izvora…</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Nijedna aplikacija ne odgovara na \"%s\"</string>
     <string name="home_all_apps_hidden_title">Sve su aplikacije sakrivene</string>
     <string name="home_all_apps_hidden_subtitle">Sve ste aplikacije sakrili sa početnog ekrana</string>
+    <string name="home_category_add">Dodaj kategoriju</string>
+    <string name="home_category_all_apps">Sve aplikacije</string>
+    <string name="home_category_custom">Prilagođeno</string>
+    <string name="home_category_uncategorized">Bez kategorije</string>
+    <string name="home_category_new_title">Nova kategorija</string>
+    <string name="home_category_rename_title">Preimenuj kategoriju</string>
+    <string name="home_category_name">Naziv kategorije</string>
+    <string name="home_category_move_to">Premesti u kategoriju</string>
+    <string name="home_category_move_selected_title">Premesti izabrane aplikacije</string>
+    <string name="home_category_delete_confirm_title">Obriši kategoriju</string>
+    <string name="home_category_delete_confirm_message">Obriši kategoriju &lt;b&gt;%1$s&lt;/b&gt;? Aplikacije u njoj biće vraćene u &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Akcije nisu dostupne za ovu kategoriju</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Koju aplikaciju želite da zakrpite?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -486,6 +498,8 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_home_screen">Početni ekran</string>
     <string name="settings_appearance_greeting_phrases">Pozdravne poruke</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Prikaži poruku dobrodošlice na početnom ekranu</string>
+    <string name="settings_appearance_app_grouping">Grupisanje aplikacija</string>
+    <string name="settings_appearance_app_grouping_description">Pokaži prekidač na početnom ekranu da bi grupisao aplikacije po izvoru ili vlastitim kategorijama, zadržavajući selekciju kada je isključen</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikonica aplikacije</string>
     <string name="settings_appearance_app_icon_default">Podrazumevana</string>

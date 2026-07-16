@@ -40,4 +40,8 @@
         <item quantity="one">%s लपवलेले ॲप</item>
         <item quantity="other">%s लपवलेले ॲप्स</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s ॲप</item>
+        <item quantity="other">%s ॲप्स</item>
+    </plurals>
 </resources>

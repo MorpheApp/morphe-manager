@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Əlçatan Morphe yenilənməsi</string>
     <string name="home_update_available_subtitle">Yeni versiya quraşdırılmağa hazırdır</string>
+    <string name="home_blocked_source_title">Əngəllənmiş yamaq mənbəyi aşkarlandı</string>
+    <string name="home_blocked_source_subtitle">Gözdən keçirmək və silmək üçün toxun</string>
+    <string name="home_metadata_errors_title">Bəzi yamaq mənbələri əlçatmazdır</string>
+    <string name="home_metadata_errors_subtitle">Mənbələri gözdən keçirmək üçün toxun</string>
+    <string name="home_metered_skipped_title">Mobil datada yeniləmələr dayandırıldı</string>
+    <string name="home_metered_skipped_subtitle">Mobil datada yeniləmələri qəbul etmək üçün toxun</string>
     <string name="home_update_error">Yenilənmə uğursuz oldu</string>
-    <string name="home_update_error_subtitle">İnternet bağlantınızı yoxlayın və təkrar cəhd edin</string>
+    <string name="home_update_error_subtitle">Mənbələri yeniləyərkən nəsə səhv oldu</string>
     <string name="home_update_skipped_metered">Yenilənmələr ötürüldü</string>
     <string name="home_update_skipped_metered_subtitle">Mobil data işləkdir</string>
     <string name="home_updating_sources">Mənbələr yenilənir…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">\"%s\" ilə uyuşan tətbiq yoxdur</string>
     <string name="home_all_apps_hidden_title">Bütün tətbiqlər gizlidir</string>
     <string name="home_all_apps_hidden_subtitle">Bütün tətbiqləri əsas ekrandan gizlətmisiniz</string>
+    <string name="home_category_add">Kateqoriya əlavə et</string>
+    <string name="home_category_all_apps">Bütün tətbiqlər</string>
+    <string name="home_category_custom">Fərdi</string>
+    <string name="home_category_uncategorized">Kateqoriyasız</string>
+    <string name="home_category_new_title">Yeni kateqoriya</string>
+    <string name="home_category_rename_title">Kateqoriyanı yenidən adlandır</string>
+    <string name="home_category_name">Kateqoriya adı</string>
+    <string name="home_category_move_to">Kateqoriyaya köçür</string>
+    <string name="home_category_move_selected_title">Seçilmiş tətbiqləri köçür</string>
+    <string name="home_category_delete_confirm_title">Kateqoriyanı sil</string>
+    <string name="home_category_delete_confirm_message">&lt;b&gt;%1$s&lt;/b&gt; kateqoriyası silinsin? İçindəki tətbiqlər &lt;b&gt;%2$s&lt;/b&gt; bölməsinə geri köçürüləcək</string>
+    <string name="home_category_actions_unavailable">Bu kateqoriya üçün əlçatmaz fəaliyyətlər</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hansı tətbiqi yamaqlamaq istəyirsiniz?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Əgər varsa təcrübi tətbiq hədəflərin yamaqlayır</string>
     <string name="sources_management_already_exists">Bu mənbə artıq əlavə edilib</string>
     <string name="sources_management_invalid_url">Etibarsız mənbə URL-si. Xahiş olunur, ünvanı yoxla və təkrar cəhd et</string>
+    <string name="sources_management_blocked">Bu yamaq mənbəyi bloklanıb və əlavə edilə bilməz</string>
+    <string name="sources_management_source_blocked_badge">Bloklanıb</string>
     <string name="sources_management_metadata_unavailable">Əlavə Məlumat Yoxdur</string>
     <string name="sources_management_metadata_unavailable_hint">Uzaq üst məlumatı faylı mövcud deyil. Quraşdırılan paketlə yamaqlanma hələ də işləyir, lakin bu mənbə üçün birbaşa yenilənmə qapadılıb</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Yamaq paketin yükləmək olmadı. Mənbə URL-si səhv ola bilər və ya fayl mövcud deyil</string>
@@ -478,6 +498,7 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_appearance_home_screen">Əsas ekran</string>
     <string name="settings_appearance_greeting_phrases">Salamlaşma ifadələri</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Əsas ekranda salamlaşma mesajı göstər</string>
+    <string name="settings_appearance_app_grouping">Tətbiq qruplaşdırılması</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Tətbiq simvolu</string>
     <string name="settings_appearance_app_icon_default">İlkin</string>
@@ -731,6 +752,15 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_storage_installer_cache_description">Üçüncü tərəf quraşdırıcılarına ötürülən APK nüsxələri</string>
     <string name="settings_system_storage_patcher_workspace_title">Yamaqlayıcı iş sahəsi</string>
     <string name="settings_system_storage_patcher_workspace_description">Yamaqlayıcı icra vaxtı faylları və sahibsiz müvəqqəti məlumatlar</string>
+    <string name="settings_system_storage_temporary_title">Müvəqqəti fayllar</string>
+    <string name="settings_system_storage_temporary_description">Yamaqlama müddətində yaradılan işçi faylları</string>
+    <string name="settings_system_storage_clear_all">Bütün keşləri təmizlə</string>
+    <string name="settings_system_storage_clear_all_description">Geri qazanıla bilən bütün keş sahəsini bir dəfəyə boşaldır</string>
+    <string name="settings_system_storage_clear_all_confirm">Bu, keşlənmiş şəbəkə cavablarını, mərhələli quraşdırıcı nüsxələrini və müvəqqəti faylları təmizləyir. Orijinal və yamaqlanmış APK-lar saxlanılır</string>
+    <string name="settings_system_storage_cleared">%s boşaldıldı</string>
+    <string name="settings_system_storage_nothing_to_clear">Təmizlənəcək bir şey yoxdur</string>
+    <string name="settings_system_storage_open_app_info_title">Android tətbiq yaddaşını aç</string>
+    <string name="settings_system_storage_open_app_info_description">Bütün Morphe məlumatlarını sistem tənzimləmələri vasitəsilə idarə et və ya təmizlə</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Yamaqlanan APK-lar</string>
     <string name="settings_system_patched_apks_description">Yamaqlanıb saxlanılan tətbiq fayllarını idarə edir</string>

@@ -40,4 +40,8 @@
         <item quantity="one">%s application masquée</item>
         <item quantity="other">%s applications masquées</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s application</item>
+        <item quantity="other">%s applications</item>
+    </plurals>
 </resources>

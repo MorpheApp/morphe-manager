@@ -60,4 +60,10 @@
         <item quantity="many">%s skrytých aplikací</item>
         <item quantity="other">%s skrytých aplikací</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s aplikace</item>
+        <item quantity="few">%s aplikace</item>
+        <item quantity="many">%s aplikací</item>
+        <item quantity="other">%s aplikací</item>
+    </plurals>
 </resources>

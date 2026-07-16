@@ -25,7 +25,7 @@
     <string name="home_metered_skipped_title">Opdaterings gestop op mobiele data</string>
     <string name="home_metered_skipped_subtitle">Tik om opdaterings op mobiele data toe te laat</string>
     <string name="home_update_error">Opdatering het misluk</string>
-    <string name="home_update_error_subtitle">Kontroleer jou internetverbinding en probeer weer</string>
+    <string name="home_update_error_subtitle">Iets het fout geloop tydens die opdatering van bronne</string>
     <string name="home_update_skipped_metered">Opdaterings oorgeslaan</string>
     <string name="home_update_skipped_metered_subtitle">Selfoon data is aktief</string>
     <string name="home_updating_sources">Opdatering van oorspronge…</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Geen programme gelyk aan \"%s\" nie</string>
     <string name="home_all_apps_hidden_title">Alle programme is versteek</string>
     <string name="home_all_apps_hidden_subtitle">Jy het alle programme van die tuisskerm versteek</string>
+    <string name="home_category_add">Kategorie byvoeg</string>
+    <string name="home_category_all_apps">Alle toepassings</string>
+    <string name="home_category_custom">Pasgemaak</string>
+    <string name="home_category_uncategorized">Nie gekategoriseer nie</string>
+    <string name="home_category_new_title">Nuwe kategorie</string>
+    <string name="home_category_rename_title">Hernoem kategorie</string>
+    <string name="home_category_name">Kategorienaam</string>
+    <string name="home_category_move_to">Verskuif na kategorie</string>
+    <string name="home_category_move_selected_title">Verskuif gekose toepassings</string>
+    <string name="home_category_delete_confirm_title">Verwyder kategorie</string>
+    <string name="home_category_delete_confirm_message">Verwyder kategorie &lt;b&gt;%1$s&lt;/b&gt;? Toepassings daarin sal terugskuif na &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Aksies nie beskikbaar vir hierdie kategorie nie</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Watter program wil jy verander?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -486,6 +498,8 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_home_screen">Tuisskerm</string>
     <string name="settings_appearance_greeting_phrases">Groetfrases</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Wys \'n groet-boodskap op die tuisskerm</string>
+    <string name="settings_appearance_app_grouping">Toepassingsgroepering</string>
+    <string name="settings_appearance_app_grouping_description">Wys \'n tuisskermskakelaar om toepassings volgens bron of jou eie kategorieë te groepeer, en die keuse te behou wanneer dit af is</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App ikoon</string>
     <string name="settings_appearance_app_icon_default">Standaard</string>

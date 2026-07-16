@@ -25,7 +25,7 @@
     <string name="home_metered_skipped_title">মোবাইল ডেটাতে আপডেটগুলিPaused</string>
     <string name="home_metered_skipped_subtitle">মোবাইল ডেটাতে আপডেট করার জন্য ট্যাপ করুন</string>
     <string name="home_update_error">আপডেট ব্যর্থ হয়েছে</string>
-    <string name="home_update_error_subtitle">আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং আবার চেষ্টা করুন</string>
+    <string name="home_update_error_subtitle">সোর্স আপডেট করার সময় কিছু ভুল হয়েছে।</string>
     <string name="home_update_skipped_metered">আপডেটগুলি ছাড়া রাখা হয়েছে</string>
     <string name="home_update_skipped_metered_subtitle">মোবাইল ডেটা সক্রিয়</string>
     <string name="home_updating_sources">সোর্স আপডেট হচ্ছে...</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">\"%s\" এর সাথে মেলে এমন কোনো অ্যাপ নেই</string>
     <string name="home_all_apps_hidden_title">সমস্ত অ্যাপ্লিকেশন লুকানো হয়েছে</string>
     <string name="home_all_apps_hidden_subtitle">আপনি হোম স্ক্রীন থেকে সমস্ত অ্যাপ্লিকেশন লুকিয়ে ফেলেছেন</string>
+    <string name="home_category_add">বিভাগ যোগ করুন</string>
+    <string name="home_category_all_apps">সমস্ত অ্যাপস</string>
+    <string name="home_category_custom">কাস্টম</string>
+    <string name="home_category_uncategorized">শ্রেণীবিহীন</string>
+    <string name="home_category_new_title">নতুন বিভাগ</string>
+    <string name="home_category_rename_title">বিভাগটির নাম পরিবর্তন করুন</string>
+    <string name="home_category_name">বিভাগের নাম</string>
+    <string name="home_category_move_to">বিভাগে সরান</string>
+    <string name="home_category_move_selected_title">নির্বাচিত অ্যাপগুলি সরান</string>
+    <string name="home_category_delete_confirm_title">বিভাগটি মুছে ফেলুন</string>
+    <string name="home_category_delete_confirm_message">বিভাগ &lt;b&gt;%1$s&lt;/b&gt; মুছে ফেলুন? এর অন্তর্গত অ্যাপগুলি &lt;b&gt;%2$s&lt;/b&gt;-এ ফিরে যাবে।</string>
+    <string name="home_category_actions_unavailable">এই বিভাগের জন্য কোনো পদক্ষেপ উপলব্ধ নেই</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">আপনি কোন অ্যাপ প্যাচ করতে চান?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -486,6 +498,8 @@
     <string name="settings_appearance_home_screen">হোম স্ক্রিন</string>
     <string name="settings_appearance_greeting_phrases">শুভেচ্ছা বার্তা</string>
     <string name="settings_appearance_greeting_phrases_subtitle">হোম স্ক্রিনে একটি শুভেচ্ছা বার্তা দেখান</string>
+    <string name="settings_appearance_app_grouping">অ্যাপ grouping</string>
+    <string name="settings_appearance_app_grouping_description">উৎস অথবা আপনার নিজের বিভাগ অনুসারে অ্যাপ grouping করার জন্য একটি হোম স্ক্রিন সুইচ দেখান, বন্ধ থাকা অবস্থায় নির্বাচন ধরে রাখুন।</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">অ্যাপ আইকন</string>
     <string name="settings_appearance_app_icon_default">ডিফল্ট</string>

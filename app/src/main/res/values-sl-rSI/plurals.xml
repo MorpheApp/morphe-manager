@@ -60,4 +60,10 @@
         <item quantity="few">%s skrite aplikacije</item>
         <item quantity="other">%s skrite aplikacije</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s aplikacija</item>
+        <item quantity="two">%s aplikaciji</item>
+        <item quantity="few">%s aplikacij</item>
+        <item quantity="other">%s aplikacij</item>
+    </plurals>
 </resources>

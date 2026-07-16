@@ -16,7 +16,6 @@
     <string name="home_update_available">મોર્ફે અદ્યતન ઉપલબ્ધ છે</string>
     <string name="home_update_available_subtitle">નવું સંસ્કરણ ઇન્સ્ટોલ કરવા માટે તૈયાર છે</string>
     <string name="home_update_error">અપડેટ નિષ્ફળ થયું</string>
-    <string name="home_update_error_subtitle">તમારું ઇન્ટરનેટ કનેક્શન તપાસો અને ફરી પ્રયાસ કરો</string>
     <string name="home_update_skipped_metered">અદ્યતન છોડ્યાં</string>
     <string name="home_update_skipped_metered_subtitle">મોબાઇલ ડેટા સક્રિય છે</string>
     <string name="home_updating_sources">સ્ત્રોતો અધ્યતન કરી રહ્યાં છીએ...</string>

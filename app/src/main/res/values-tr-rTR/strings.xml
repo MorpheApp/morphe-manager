@@ -25,7 +25,7 @@
     <string name="home_metered_skipped_title">Mobil veride güncellemeler duraklatıldı</string>
     <string name="home_metered_skipped_subtitle">Mobil veride güncellemeleri etkinleştirmek için dokunun</string>
     <string name="home_update_error">Güncelleme başarısız</string>
-    <string name="home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
+    <string name="home_update_error_subtitle">Kaynaklar güncellenirken bir sorun oluştu</string>
     <string name="home_update_skipped_metered">Güncellemeler atlandı</string>
     <string name="home_update_skipped_metered_subtitle">Mobil veri etkin</string>
     <string name="home_updating_sources">Kaynaklar güncelleniyor…</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">\"%s\" ile eşleşen uygulama yok</string>
     <string name="home_all_apps_hidden_title">Tüm uygulamalar gizlendi</string>
     <string name="home_all_apps_hidden_subtitle">Ana ekrandaki tüm uygulamaları gizlediniz</string>
+    <string name="home_category_add">Kategori ekle</string>
+    <string name="home_category_all_apps">Tüm uygulamalar</string>
+    <string name="home_category_custom">Özel</string>
+    <string name="home_category_uncategorized">Kategorilendirilmemiş</string>
+    <string name="home_category_new_title">Yeni kategori</string>
+    <string name="home_category_rename_title">Kategoriyi yeniden adlandır</string>
+    <string name="home_category_name">Kategori adı</string>
+    <string name="home_category_move_to">Kategoriye taşı</string>
+    <string name="home_category_move_selected_title">Seçili uygulamaları taşı</string>
+    <string name="home_category_delete_confirm_title">Kategoriyi sil</string>
+    <string name="home_category_delete_confirm_message">&lt;b&gt;%1$s&lt;/b&gt; kategorisini sil? İçindeki uygulamalar &lt;b&gt;%2$s&lt;/b&gt; bölümüne geri taşınacak</string>
+    <string name="home_category_actions_unavailable">Bu kategori için kullanılamayan işlemler</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hangi uygulamayı yamalamak istiyorsunuz?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -486,6 +498,8 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_appearance_home_screen">Ana ekran</string>
     <string name="settings_appearance_greeting_phrases">Selamlama cümleleri</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ana ekranda bir selamlama mesajı göster</string>
+    <string name="settings_appearance_app_grouping">Uygulama gruplandırma</string>
+    <string name="settings_appearance_app_grouping_description">Uygulamaları kaynaklarına veya kendi kategorilerinize göre gruplamak için bir ana ekran değiştirici göster. Kapalıyken seçimi korur</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Uygulama simgesi</string>
     <string name="settings_appearance_app_icon_default">Varsayılan</string>
@@ -738,8 +752,8 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_storage_http_cache_description">Güncellemeleri hızlandırmak için HTTP yanıtları önbelleğe alınır</string>
     <string name="settings_system_storage_installer_cache_title">Harici yükleyici önbelleği</string>
     <string name="settings_system_storage_installer_cache_description">Üçüncü taraf yükleyicilere aktarılan APK kopyaları</string>
-    <string name="settings_system_storage_patcher_workspace_title">Yamacıyıcı çalışma alanı</string>
-    <string name="settings_system_storage_patcher_workspace_description">Yamacıyıcı çalışma zamanı dosyaları ve kullanılmayan geçici veriler</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher çalışma alanı</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher çalışma zamanı dosyaları ve kullanılmayan geçici veriler</string>
     <string name="settings_system_storage_temporary_title">Geçici dosyalar</string>
     <string name="settings_system_storage_temporary_description">Yama işlemi sırasında oluşturulan çalışma dosyaları</string>
     <string name="settings_system_storage_clear_all">Tüm önbellekleri temizle</string>

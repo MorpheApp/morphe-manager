@@ -18,14 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">تحديث Morphe متاح</string>
     <string name="home_update_available_subtitle">إصدار جديد جاهز للتثبيت</string>
-    <string name="home_blocked_source_title">تم اكتشاف مصدر تصحيح محظور</string>
-    <string name="home_blocked_source_subtitle">اضغط للمراجعة والإزالة</string>
-    <string name="home_metadata_errors_title">بعض مصادر التصحيح غير متوفرة</string>
-    <string name="home_metadata_errors_subtitle">اضغط لمراجعة المصادر</string>
-    <string name="home_metered_skipped_title">توقفت التحديثات على بيانات الجوال</string>
-    <string name="home_metered_skipped_subtitle">اضغط للسماح بالتحديثات على بيانات الهاتف المحمول</string>
+    <string name="home_blocked_source_title">تم اكتشاف مصدر تعديل محظور</string>
+    <string name="home_blocked_source_subtitle">انقر للمراجعة والإزالة</string>
+    <string name="home_metadata_errors_title">بعض مصادر التعديل غير متوفرة</string>
+    <string name="home_metadata_errors_subtitle">انقر لمراجعة المصادر</string>
+    <string name="home_metered_skipped_title">التحديثات متوقفة على بيانات الجوّال</string>
+    <string name="home_metered_skipped_subtitle">انقر للسماح بالتحديثات على بيانات الجوّال</string>
     <string name="home_update_error">فشل التحديث</string>
-    <string name="home_update_error_subtitle">تحقق من اتصالك بالإنترنت وحاول مرة أخرى</string>
+    <string name="home_update_error_subtitle">حدث خطأ أثناء تحديث المصادر</string>
     <string name="home_update_skipped_metered">التحديثات تم تخطيها</string>
     <string name="home_update_skipped_metered_subtitle">بيانات الجوّال نشطة</string>
     <string name="home_updating_sources">جارٍ تحديث المصادر…</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">لا يوجد تطبيقات تطابق \"%s\"</string>
     <string name="home_all_apps_hidden_title">تم إخفاء جميع التطبيقات</string>
     <string name="home_all_apps_hidden_subtitle">لقد أخفيت جميع التطبيقات من الشاشة الرئيسية</string>
+    <string name="home_category_add">إضافة فئة</string>
+    <string name="home_category_all_apps">كل التطبيقات</string>
+    <string name="home_category_custom">مخصص</string>
+    <string name="home_category_uncategorized">غير مصنف</string>
+    <string name="home_category_new_title">فئة جديدة</string>
+    <string name="home_category_rename_title">إعادة تسمية الفئة</string>
+    <string name="home_category_name">اسم الفئة</string>
+    <string name="home_category_move_to">نقل إلى فئة</string>
+    <string name="home_category_move_selected_title">نقل التطبيقات المحددة</string>
+    <string name="home_category_delete_confirm_title">حذف الفئة</string>
+    <string name="home_category_delete_confirm_message">حذف الفئة &lt;b&gt;%1$s&lt;/b&gt;؟ ستعود التطبيقات الموجودة فيها إلى &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">الإجراءات غير متوفرة لهذه الفئة</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">ما التطبيق الذي تريد تعديله؟</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -105,7 +117,7 @@
     <string name="sources_management_experimental_versions_toggle_description">تعديل الإصدارات التجريبية للتطبيقات المستهدفة إن توفرت</string>
     <string name="sources_management_already_exists">تمت إضافة هذا المصدر بالفعل</string>
     <string name="sources_management_invalid_url">عنوان URL المصدر غير صالح. يرجى التحقق من العنوان والمحاولة مرة أخرى</string>
-    <string name="sources_management_blocked">تم حظر مصدر التصحيح هذا ولا يمكن إضافته</string>
+    <string name="sources_management_blocked">تم حظر مصدر التعديل هذا ولا يمكن إضافته</string>
     <string name="sources_management_source_blocked_badge">محظور</string>
     <string name="sources_management_metadata_unavailable">البيانات الوصفية غير متوفرة</string>
     <string name="sources_management_metadata_unavailable_hint">ملف البيانات الوصفية عن بعد غير متوفر. لا يزال التعديل بالحزمة المثبتة يعمل، ولكن التحديث التلقائي معطل لهذا المصدر.</string>
@@ -487,6 +499,8 @@
     <string name="settings_appearance_home_screen">الشاشة الرئيسية</string>
     <string name="settings_appearance_greeting_phrases">عبارات الترحيب</string>
     <string name="settings_appearance_greeting_phrases_subtitle">عرض رسالة ترحيب على الشاشة الرئيسية</string>
+    <string name="settings_appearance_app_grouping">تجميع التطبيقات</string>
+    <string name="settings_appearance_app_grouping_description">عرض محول شاشة رئيسية لتجميع التطبيقات حسب المصدر أو فئاتك الخاصة، مع الحفاظ على التحديد عند إيقافه</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">أيقونة التطبيق</string>
     <string name="settings_appearance_app_icon_default">الافتراضي</string>

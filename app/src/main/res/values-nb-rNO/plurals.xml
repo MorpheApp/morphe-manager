@@ -40,4 +40,8 @@
         <item quantity="one">%s skjult app</item>
         <item quantity="other">%s skjulte apper</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s app</item>
+        <item quantity="other">%s apper</item>
+    </plurals>
 </resources>

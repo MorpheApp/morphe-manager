@@ -10,7 +10,8 @@
     </plurals>
     <plurals name="source_count">
         <item quantity="one">%s Fonte</item>
-        <item quantity="other">%s Fontes</item>
+        <item quantity="other">
+%s Fontes</item>
     </plurals>
     <plurals name="package_count">
         <item quantity="one">%s Paquete</item>

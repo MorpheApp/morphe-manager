@@ -19,7 +19,6 @@
     <string name="home_update_available">Достапно е ажурирање на Morphe</string>
     <string name="home_update_available_subtitle">Достапно е ажурирање</string>
     <string name="home_update_error">Ажурирањето не успеа</string>
-    <string name="home_update_error_subtitle">Проверете ја интернет врската и обидете се повторно</string>
     <string name="home_update_skipped_metered">Ажурирањето е прескокнато</string>
     <string name="home_update_skipped_metered_subtitle">Мобилни податоци вклучени</string>
     <string name="home_updating_sources">Ажурирање на изворите…</string>

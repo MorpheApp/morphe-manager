@@ -30,4 +30,7 @@
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">%s 個のアプリが非表示</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="other">%s 個のアプリ</item>
+    </plurals>
 </resources>

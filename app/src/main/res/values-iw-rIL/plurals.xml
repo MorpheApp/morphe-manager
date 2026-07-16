@@ -60,4 +60,10 @@
         <item quantity="many">%s אפליקציות מוסתרות</item>
         <item quantity="other">%s אפליקציות מוסתרות</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s אפליקציה</item>
+        <item quantity="two">%s אפליקציות</item>
+        <item quantity="many">%s אפליקציות</item>
+        <item quantity="other">%s אפליקציות</item>
+    </plurals>
 </resources>

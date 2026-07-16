@@ -50,4 +50,9 @@
         <item quantity="few">%s aplicații ascunse</item>
         <item quantity="other">%s aplicații ascunse</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s aplicație</item>
+        <item quantity="few">%s aplicații</item>
+        <item quantity="other">%s aplicații</item>
+    </plurals>
 </resources>

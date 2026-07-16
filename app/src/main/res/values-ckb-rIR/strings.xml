@@ -19,7 +19,6 @@
     <string name="home_update_available">Morphe نوێکردنەوە بەردەستە</string>
     <string name="home_update_available_subtitle">وەشانی نوێ ئامادەیە بۆ دابەزاندن</string>
     <string name="home_update_error">نوێکردنەوە شکستس هێنا</string>
-    <string name="home_update_error_subtitle">هێڵەکەت بپشکنە وە دووبارە هەوڵ بدەرەوە</string>
     <string name="home_update_skipped_metered">نوێکردنەوەکان پەڕێندرا</string>
     <string name="home_update_skipped_metered_subtitle">داتای مۆبایل چاڵاکە</string>
     <string name="home_updating_sources">نوێکردنەوەی سەرچاوەکان...</string>

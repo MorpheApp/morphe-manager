@@ -19,7 +19,6 @@
     <string name="home_update_available">Morphe atnaujinimas prieinamas</string>
     <string name="home_update_available_subtitle">Nauja versija paruošta įdiegti</string>
     <string name="home_update_error">Nepavyko atnaujinti</string>
-    <string name="home_update_error_subtitle">Patikrinkite savo interneto ryšį ir bandykite dar kartą</string>
     <string name="home_update_skipped_metered">Atnaujinimai praleisti</string>
     <string name="home_update_skipped_metered_subtitle">Mobilieji duomenys yra įjungti</string>
     <string name="home_updating_sources">Atnaujinami šaltiniai…</string>

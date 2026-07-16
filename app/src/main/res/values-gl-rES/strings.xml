@@ -19,8 +19,6 @@
     <string name="home_update_available">Actualización de Morphe dispoñible</string>
     <string name="home_update_available_subtitle">Nova versión lista para instalar</string>
     <string name="home_update_error">Erro ao actualizar</string>
-    <string name="home_update_error_subtitle">
-Comprobe a súa conexión a Internet e ténteo de novo</string>
     <string name="home_update_skipped_metered">Actualizacións omitidas</string>
     <string name="home_update_skipped_metered_subtitle">Os datos móbiles están activados</string>
     <string name="home_updating_sources">Actualizando fontes…</string>

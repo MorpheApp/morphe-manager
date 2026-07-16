@@ -18,14 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Mise à jour de Morphe disponible</string>
     <string name="home_update_available_subtitle">Nouvelle version prête à installer</string>
-    <string name="home_blocked_source_title">Source de patch bloquée détectée</string>
+    <string name="home_blocked_source_title">Source de patchs bloquée détectée</string>
     <string name="home_blocked_source_subtitle">Appuyez pour consulter et supprimer</string>
-    <string name="home_metadata_errors_title">Certaines sources de patch sont indisponibles</string>
+    <string name="home_metadata_errors_title">Certaines sources de patchs sont indisponibles</string>
     <string name="home_metadata_errors_subtitle">Appuyez pour consulter les sources</string>
-    <string name="home_metered_skipped_title">Mises à jour en pause sur données mobiles</string>
-    <string name="home_metered_skipped_subtitle">Touchez pour autoriser les mises à jour sur les données mobiles</string>
+    <string name="home_metered_skipped_title">Mises à jour suspendues sur les données mobiles</string>
+    <string name="home_metered_skipped_subtitle">Appuyez pour autoriser les mises à jour via les données mobiles</string>
     <string name="home_update_error">Mise à jour échouée</string>
-    <string name="home_update_error_subtitle">Vérifiez votre connexion internet et réessayez</string>
+    <string name="home_update_error_subtitle">Une erreur s\'est produite lors de la mise à jour des sources</string>
     <string name="home_update_skipped_metered">Mises à jour passées</string>
     <string name="home_update_skipped_metered_subtitle">Données mobiles activées</string>
     <string name="home_updating_sources">Mise à jour des sources…</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Aucune application ne correspond à \"%s\"</string>
     <string name="home_all_apps_hidden_title">Toutes les applications sont masquées</string>
     <string name="home_all_apps_hidden_subtitle">Vous avez masqué toutes les applications de l\'écran d\'accueil</string>
+    <string name="home_category_add">Ajouter une catégorie</string>
+    <string name="home_category_all_apps">Toutes les applications</string>
+    <string name="home_category_custom">Personnalisé</string>
+    <string name="home_category_uncategorized">Non catégorisées</string>
+    <string name="home_category_new_title">Nouvelle catégorie</string>
+    <string name="home_category_rename_title">Renommer la catégorie</string>
+    <string name="home_category_name">Nom de la catégorie</string>
+    <string name="home_category_move_to">Déplacer vers la catégorie</string>
+    <string name="home_category_move_selected_title">Déplacer les applications sélectionnées</string>
+    <string name="home_category_delete_confirm_title">Supprimer la catégorie</string>
+    <string name="home_category_delete_confirm_message">Supprimer la catégorie &lt;b&gt;%1$s&lt;/b&gt; ? Les applications qu\'elle contient seront déplacées vers &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Actions indisponibles pour cette catégorie</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quelle application voulez-vous patcher ?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -73,7 +85,7 @@
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">Coup de mou de l\'après-midi ? Patcher quelque chose</string>
     <string name="home_greeting_afternoon_2">Le patchage d\'après-déjeuner ont une autre saveur</string>
-    <string name="home_greeting_afternoon_3">L’équipe de l’après-midi : édition patch</string>
+    <string name="home_greeting_afternoon_3">L\'équipe de l\'après-midi : édition patch</string>
     <!-- Evening greetings (17:00–21:59) -->
     <string name="home_greeting_evening_1">Bonsoir ! Les patchs du soir, c’est autre chose</string>
     <string name="home_greeting_evening_2">Vous vous détendez ? Patcher une application d\'abord</string>
@@ -105,7 +117,7 @@
     <string name="sources_management_experimental_versions_toggle_description">Patche les cibles de l\'application expérimentale si disponibles</string>
     <string name="sources_management_already_exists">Cette source a déjà été ajoutée</string>
     <string name="sources_management_invalid_url">L\'URL de la source est invalide. Vérifiez l\'adresse puis réessayez</string>
-    <string name="sources_management_blocked">Cette source de correctif est bloquée et ne peut pas être ajoutée</string>
+    <string name="sources_management_blocked">Cette source de patchs est bloquée et ne peut pas être ajoutée</string>
     <string name="sources_management_source_blocked_badge">Bloqué</string>
     <string name="sources_management_metadata_unavailable">Métadonnées ND</string>
     <string name="sources_management_metadata_unavailable_hint">Le fichier de métadonnées distant est indisponible. Le patchage avec le bundle installé fonctionne toujours, mais la mise à jour automatique est désactivée pour cette source</string>
@@ -347,8 +359,8 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="patcher_unknown_error">Une erreur inconnue s\'est produite</string>
     <string name="patcher_split_step_extracting">Extraction des APK fractionnés</string>
     <string name="patcher_split_step_merging">Fusion de %s</string>
-    <string name="patcher_split_step_writing">Écriture de l’APK fusionné</string>
-    <string name="patcher_split_step_finalizing">Finalisation de la fusion de l’APK</string>
+    <string name="patcher_split_step_writing">Écriture de l\'APK fusionné</string>
+    <string name="patcher_split_step_finalizing">Finalisation de la fusion de l\'APK</string>
     <string name="patcher_conflict_title">Paquet en conflit</string>
     <string name="patcher_conflict_subtitle">Vous devez désinstaller la version existante</string>
     <string name="patcher_conflict_hint">L\'application patchée utilise un certificat différent de celui de la version installée. La désinstallation effacera toutes les données de l\'application</string>
@@ -489,6 +501,8 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_appearance_home_screen">Écran d\'accueil</string>
     <string name="settings_appearance_greeting_phrases">Phrases de salutation</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Afficher un message de salutation sur l\'écran d\'accueil</string>
+    <string name="settings_appearance_app_grouping">Regroupement d\'applications</string>
+    <string name="settings_appearance_app_grouping_description">Affiche un sélecteur sur l\'écran d\'accueil pour regrouper les applications par source ou selon vos propres catégories, en conservant la sélection lorsqu\'il est désactivé</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icône de l\'application</string>
     <string name="settings_appearance_app_icon_default">Par défaut</string>
@@ -736,25 +750,25 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_apks_export_zip_failed">Échec de l\'exportation des APK sélectionnés</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Gestion du stockage</string>
-    <string name="settings_system_storage_management_description">Vérifier l’utilisation du disque et supprimer les fichiers mis en cache</string>
+    <string name="settings_system_storage_management_description">Consulter l\'espace disque utilisé et supprimer les fichiers en cache</string>
     <string name="settings_system_storage_keystore_title">Keystore de signature</string>
-    <string name="settings_system_storage_app_data_title">Données des applications</string>
-    <string name="settings_system_storage_patch_bundles_title">Bundles de patch</string>
+    <string name="settings_system_storage_app_data_title">Données de l\'application</string>
+    <string name="settings_system_storage_patch_bundles_title">Bundles de patchs</string>
     <string name="settings_system_storage_http_cache_title">Cache réseau</string>
-    <string name="settings_system_storage_http_cache_description">Les réponses HTTP sont mises en cache pour accélérer les mises à jour</string>
-    <string name="settings_system_storage_installer_cache_title">Cache des installateurs externes</string>
-    <string name="settings_system_storage_installer_cache_description">Copies APK transmises aux installateurs tiers</string>
-    <string name="settings_system_storage_patcher_workspace_title">Espace de travail du patcher</string>
-    <string name="settings_system_storage_patcher_workspace_description">Fichiers d\'exécution du patcher et données temporaires orphelines</string>
+    <string name="settings_system_storage_http_cache_description">Réponses HTTP mises en cache pour accélérer les mises à jour</string>
+    <string name="settings_system_storage_installer_cache_title">Cache de l\'installateur externe</string>
+    <string name="settings_system_storage_installer_cache_description">Copies d\'APK transmises à des installateurs tiers</string>
+    <string name="settings_system_storage_patcher_workspace_title">Espace de travail du patcheur</string>
+    <string name="settings_system_storage_patcher_workspace_description">Fichiers d\'exécution du patcheur et données temporaires orphelines</string>
     <string name="settings_system_storage_temporary_title">Fichiers temporaires</string>
-    <string name="settings_system_storage_temporary_description">Fichiers de travail créés lors du patching</string>
+    <string name="settings_system_storage_temporary_description">Fichiers de travail créés pendant l\'application du patchage</string>
     <string name="settings_system_storage_clear_all">Effacer tous les caches</string>
-    <string name="settings_system_storage_clear_all_description">Libère tout l\'espace cache récupérable en une seule fois</string>
-    <string name="settings_system_storage_clear_all_confirm">Cela efface les réponses réseau mises en cache, les copies d\'installateurs en attente et les fichiers temporaires. Les fichiers APK originaux et patchés sont conservés</string>
-    <string name="settings_system_storage_cleared">%s libéré(e)</string>
+    <string name="settings_system_storage_clear_all_description">Libère en une seule fois tout l\'espace de cache récupérable</string>
+    <string name="settings_system_storage_clear_all_confirm">Cela efface les réponses réseau mises en cache, les copies d\'installation temporaires et les fichiers temporaires. Les APK d\'origine et patchés sont conservés</string>
+    <string name="settings_system_storage_cleared">%s libérés</string>
     <string name="settings_system_storage_nothing_to_clear">Rien à effacer</string>
     <string name="settings_system_storage_open_app_info_title">Ouvrir le stockage de l\'application Android</string>
-    <string name="settings_system_storage_open_app_info_description">Gérer ou effacer toutes les données de Morphe via les paramètres système</string>
+    <string name="settings_system_storage_open_app_info_description">Gérez ou effacez toutes les données de Morphe via les paramètres du système</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK patchés</string>
     <string name="settings_system_patched_apks_description">Gère les fichiers d\'applications patchées enregistrés</string>
@@ -853,7 +867,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="loading">Chargement…</string>
     <string name="loading_older_releases">Chargement des anciennes sorties…</string>
     <string name="creating">Création…</string>
-    <string name="processing_apk">Traitement de l’APK…</string>
+    <string name="processing_apk">Traitement de l\'APK…</string>
     <string name="exporting_apks">Exportation des APK…</string>
     <string name="not_installed">Non installé</string>
     <string name="view">Voir</string>
@@ -873,7 +887,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="reorder_list_hint">Faites glisser pour réorganiser</string>
     <string name="reorder_done">Ordre enregistré</string>
     <string name="reset_order">Réinitialiser l\'ordre</string>
-    <string name="reset_order_done">Réinitialisation de l’ordre</string>
+    <string name="reset_order_done">Réinitialisation de l\'ordre</string>
     <string name="accessibility_move_up">Déplacer vers le haut</string>
     <string name="accessibility_move_down">Déplacer vers le bas</string>
     <string name="accessibility_app_moved_announcement">%1$s a été déplacé à la position %2$d sur %3$d</string>

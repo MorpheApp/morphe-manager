@@ -19,7 +19,6 @@
     <string name="home_update_available">Dostupno ažuriranje aplikacije</string>
     <string name="home_update_available_subtitle">Nova verzija spremna za instalaciju</string>
     <string name="home_update_error">Ažuriranje nije uspjelo</string>
-    <string name="home_update_error_subtitle">Provjerite vašu internetsku vezu i pokušajte ponovno</string>
     <string name="home_update_skipped_metered">Ažuriranja preskočena</string>
     <string name="home_update_skipped_metered_subtitle">Mobilni podaci su aktivni</string>
     <string name="home_updating_sources">Ažuriranje izvora…</string>

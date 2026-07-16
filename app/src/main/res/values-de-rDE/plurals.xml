@@ -40,4 +40,8 @@
         <item quantity="one">%s ausgeblendete App</item>
         <item quantity="other">%s ausgeblendete Apps</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s App</item>
+        <item quantity="other">%s Apps</item>
+    </plurals>
 </resources>

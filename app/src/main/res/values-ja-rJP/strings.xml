@@ -25,7 +25,7 @@
     <string name="home_metered_skipped_title">モバイルデータでの更新は一時停止されています</string>
     <string name="home_metered_skipped_subtitle">モバイルデータ通信での更新を許可するにはタップしてください</string>
     <string name="home_update_error">更新に失敗しました</string>
-    <string name="home_update_error_subtitle">インターネット接続を確認して、再度お試しください</string>
+    <string name="home_update_error_subtitle">ソースの更新中にエラーが発生しました</string>
     <string name="home_update_skipped_metered">更新をスキップしました</string>
     <string name="home_update_skipped_metered_subtitle">モバイルデータ通信が有効です</string>
     <string name="home_updating_sources">ソースを更新中…</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">「%s」に一致するアプリはありません</string>
     <string name="home_all_apps_hidden_title">すべてのアプリが非表示です</string>
     <string name="home_all_apps_hidden_subtitle">ホーム画面からすべてのアプリを非表示にしました</string>
+    <string name="home_category_add">カテゴリを追加</string>
+    <string name="home_category_all_apps">すべてのアプリ</string>
+    <string name="home_category_custom">カスタム</string>
+    <string name="home_category_uncategorized">カテゴリ未分類</string>
+    <string name="home_category_new_title">新しいカテゴリ</string>
+    <string name="home_category_rename_title">カテゴリの名前変更</string>
+    <string name="home_category_name">カテゴリ名</string>
+    <string name="home_category_move_to">カテゴリへ移動</string>
+    <string name="home_category_move_selected_title">選択したアプリを移動</string>
+    <string name="home_category_delete_confirm_title">カテゴリの削除</string>
+    <string name="home_category_delete_confirm_message">カテゴリ <b>%1$s</b> を削除しますか？ その中のアプリは <b>%2$s</b> に戻ります</string>
+    <string name="home_category_actions_unavailable">このカテゴリで利用可能な操作はありません</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">どのアプリにパッチを適用しますか？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -443,7 +455,7 @@
     <string name="mini_game_2048_picker_subtitle">タイルをスライドして合体させよう</string>
     <string name="mini_game_flappy_picker_subtitle">タップしてパイプの間を飛び抜けよう</string>
     <string name="mini_game_flappy_tap_to_start">タップして開始</string>
-    <string name="mini_game_snake_picker_subtitle">食べ物を食べよう。自分にぶつかるな！</string>
+    <string name="mini_game_snake_picker_subtitle">自分にぶつからずに食べ物を食べよう</string>
     <string name="mini_game_snake_swipe_to_start">スワイプして開始</string>
     <string name="mini_game_dino_picker_subtitle">タップしてサボテンを飛び越えよう</string>
     <string name="mini_game_dino_tap_to_start">タップして開始</string>
@@ -486,6 +498,8 @@
     <string name="settings_appearance_home_screen">ホーム画面</string>
     <string name="settings_appearance_greeting_phrases">挨拶メッセージ</string>
     <string name="settings_appearance_greeting_phrases_subtitle">ホーム画面に挨拶メッセージを表示します</string>
+    <string name="settings_appearance_app_grouping">アプリのグループ化</string>
+    <string name="settings_appearance_app_grouping_description">ホーム画面スイッチャーを表示して、ソース別または独自のカテゴリでアプリをグループ化します。オフにしたときも選択内容は保持されます</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">アプリアイコン</string>
     <string name="settings_appearance_app_icon_default">デフォルト</string>

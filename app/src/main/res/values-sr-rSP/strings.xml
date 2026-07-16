@@ -25,7 +25,7 @@
     <string name="home_metered_skipped_title">Ажурирања су паузирана на мобилним подацима</string>
     <string name="home_metered_skipped_subtitle">Додирните да бисте дозволили ажурирања преко мобилних података</string>
     <string name="home_update_error">Ажурирање није успело</string>
-    <string name="home_update_error_subtitle">Проверите интернет везу и покушајте поново</string>
+    <string name="home_update_error_subtitle">Нешто је пошло по злом док се ажурирају извори</string>
     <string name="home_update_skipped_metered">Пропуштено ажурирања</string>
     <string name="home_update_skipped_metered_subtitle">Мобилни подаци су активни</string>
     <string name="home_updating_sources">Ажурирање извора…</string>
@@ -47,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Нема апликација које одговарају на \"%s\"</string>
     <string name="home_all_apps_hidden_title">Све апликације су скривене</string>
     <string name="home_all_apps_hidden_subtitle">Скрио/Скриле сте све апликације са почетног екрана</string>
+    <string name="home_category_add">Додај категорију</string>
+    <string name="home_category_all_apps">Све апликације</string>
+    <string name="home_category_custom">Прилагођено</string>
+    <string name="home_category_uncategorized">Некатегорисано</string>
+    <string name="home_category_new_title">Нова категорија</string>
+    <string name="home_category_rename_title">Преименуј категорију</string>
+    <string name="home_category_name">Назив категорије</string>
+    <string name="home_category_move_to">Премести у категорију</string>
+    <string name="home_category_move_selected_title">Премести изабране апликације</string>
+    <string name="home_category_delete_confirm_title">Обриши категорију</string>
+    <string name="home_category_delete_confirm_message">Обриши категорију &lt;b&gt;%1$s&lt;/b&gt;? Апликације у њој ће бити враћене у &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Функције нису доступне за ову категорију</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Коју апликацију желите да печујете?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -486,6 +498,8 @@
     <string name="settings_appearance_home_screen">Почетни екран</string>
     <string name="settings_appearance_greeting_phrases">Почетне фразе</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Прикажи поруку на почетном екрану</string>
+    <string name="settings_appearance_app_grouping">Груписање апликација</string>
+    <string name="settings_appearance_app_grouping_description">Прикажи прекидач почетног екрана за груписање апликација по извору или властитим категоријама, задржавајући селекцију када је искључено</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Иконица апликације</string>
     <string name="settings_appearance_app_icon_default">Подразумеван</string>

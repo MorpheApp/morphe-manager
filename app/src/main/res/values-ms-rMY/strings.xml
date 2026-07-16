@@ -19,7 +19,6 @@
     <string name="home_update_available">Kemas kini Morphie tersedia</string>
     <string name="home_update_available_subtitle">Kemas kini baharu tersedia untuk di muat turun</string>
     <string name="home_update_error">Kemas kini gagal</string>
-    <string name="home_update_error_subtitle">Semak sambungan internet kamu dan cuba lagi</string>
     <string name="home_update_skipped_metered">Kemas kini taraf dilangkau</string>
     <string name="home_update_skipped_metered_subtitle">Data mudah alih aktif</string>
     <string name="home_updating_sources">Kemas kini sumber-sumber… </string>

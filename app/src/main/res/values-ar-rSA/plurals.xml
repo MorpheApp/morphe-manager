@@ -80,4 +80,12 @@
         <item quantity="many">%s تطبيق مخفي</item>
         <item quantity="other">%s تطبيق مخفي</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="zero">%s تطبيقات</item>
+        <item quantity="one">%s تطبيق</item>
+        <item quantity="two">%s تطبيقات</item>
+        <item quantity="few">%s تطبيقات</item>
+        <item quantity="many">%s تطبيقات</item>
+        <item quantity="other">%s تطبيقات</item>
+    </plurals>
 </resources>
