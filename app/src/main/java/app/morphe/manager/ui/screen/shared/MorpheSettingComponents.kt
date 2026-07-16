@@ -135,7 +135,8 @@ fun MorpheDialogToggleRow(
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     description: String? = null,
-    showDivider: Boolean = true
+    showDivider: Boolean = true,
+    iconTint: Color = MaterialTheme.colorScheme.primary
 ) {
     val enabledLabel = stringResource(R.string.enabled)
     val disabledLabel = stringResource(R.string.disabled)
@@ -160,7 +161,7 @@ fun MorpheDialogToggleRow(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            MorpheIcon(icon = icon)
+            MorpheIcon(icon = icon, tint = iconTint)
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = title,

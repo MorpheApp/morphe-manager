@@ -19,7 +19,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,6 +41,7 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.original.OriginalApk
 import app.morphe.manager.domain.installer.InstallerFileProvider
+import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.ui.screen.shared.*
@@ -111,6 +114,15 @@ data class ApkListMeta(
     val zipExportFileName: String
 )
 
+/** Retention preference toggle rendered inside the APK management dialog. */
+@Immutable
+data class RetentionToggle(
+    val title: String,
+    val description: String,
+    val checked: Boolean,
+    val onCheckedChange: (Boolean) -> Unit
+)
+
 /** Callbacks for per-item and bulk APK operations. */
 @Stable
 class ApkListActions(
@@ -149,6 +161,8 @@ private fun PatchedApksContent(
     val repository: InstalledAppRepository = koinInject()
     val filesystem: Filesystem = koinInject()
     val appDataResolver: AppDataResolver = koinInject()
+    val prefs: PreferencesManager = koinInject()
+    val savePatchedApks by prefs.savePatchedApks.getAsState()
 
     val allInstalledApps by repository.getAll().collectAsStateWithLifecycle(emptyList())
 
@@ -230,6 +244,12 @@ private fun PatchedApksContent(
             emptyMessage = stringResource(R.string.settings_system_patched_apks_empty),
             deleteAllTitle = stringResource(R.string.settings_system_patched_apks_delete_all_title),
             zipExportFileName = stringResource(R.string.settings_system_patched_apks_export_zip_name)
+        ),
+        retentionToggle = RetentionToggle(
+            title = stringResource(R.string.settings_system_save_patched_apks_title),
+            description = stringResource(R.string.settings_system_save_patched_apks_description),
+            checked = savePatchedApks,
+            onCheckedChange = { checked -> scope.launch { prefs.savePatchedApks.update(checked) } }
         ),
         actions = ApkListActions(
             onShare = { item ->
@@ -329,6 +349,8 @@ private fun OriginalApksContent(
     val apksDeletedAllText = stringResource(R.string.settings_system_apks_deleted_all)
     val repository: OriginalApkRepository = koinInject()
     val appDataResolver: AppDataResolver = koinInject()
+    val prefs: PreferencesManager = koinInject()
+    val saveOriginalApks by prefs.saveOriginalApks.getAsState()
 
     val originalApks by repository.getAll().collectAsStateWithLifecycle(emptyList())
 
@@ -401,6 +423,12 @@ private fun OriginalApksContent(
             deleteAllTitle = stringResource(R.string.settings_system_original_apks_delete_all_title),
             zipExportFileName = stringResource(R.string.settings_system_original_apks_export_zip_name)
         ),
+        retentionToggle = RetentionToggle(
+            title = stringResource(R.string.settings_system_save_original_apks_title),
+            description = stringResource(R.string.settings_system_save_original_apks_description),
+            checked = saveOriginalApks,
+            onCheckedChange = { checked -> scope.launch { prefs.saveOriginalApks.update(checked) } }
+        ),
         actions = ApkListActions(
             onShare = { item ->
                 item.file?.let { file ->
@@ -470,7 +498,8 @@ private fun ApkManagementDialogContent(
     meta: ApkListMeta,
     actions: ApkListActions,
     items: List<ApkItemData>,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    retentionToggle: RetentionToggle? = null
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -617,6 +646,23 @@ private fun ApkManagementDialogContent(
                             style = MaterialTheme.typography.bodyMedium,
                             color = LocalDialogSecondaryTextColor.current
                         )
+                    }
+                }
+
+                if (retentionToggle != null) {
+                    item(key = "retention") {
+                        SectionCard {
+                            MorpheDialogToggleRow(
+                                icon = meta.icon,
+                                title = retentionToggle.title,
+                                description = retentionToggle.description,
+                                checked = retentionToggle.checked,
+                                onCheckedChange = retentionToggle.onCheckedChange,
+                                iconTint = meta.accentColor,
+                                showDivider = false,
+                                modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding)
+                            )
+                        }
                     }
                 }
 

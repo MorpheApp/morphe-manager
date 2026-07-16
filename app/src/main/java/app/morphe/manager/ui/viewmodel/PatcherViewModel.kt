@@ -606,6 +606,19 @@ class PatcherViewModel(
         val finalPackageName = packageInfo.packageName
         val finalVersion = packageInfo.versionName?.takeUnless { it.isBlank() } ?: version ?: "unspecified"
 
+        val savePatchedEnabled = prefs.savePatchedApks.get()
+
+        // When patched APK retention is off and the user only exported the APK, treat the export
+        // as terminal: skip both the internal copy and the DB entry so the app is not surfaced
+        // as an installed patched app with no file to back it.
+        if (!savePatchedEnabled && installType == InstallType.SAVED) {
+            val metadata = buildExportMetadata(patchedPackageInfo ?: packageInfo)
+            withContext(Dispatchers.Main) {
+                exportMetadata = metadata
+            }
+            return@withContext true
+        }
+
         // Delete old version file if it exists and is different
         val existingApp = installedAppRepository.get(finalPackageName)
         if (existingApp != null && existingApp.version != finalVersion) {
@@ -618,15 +631,17 @@ class PatcherViewModel(
 
         // Save new version
         val savedCopy = fs.getPatchedAppFile(finalPackageName, finalVersion)
-        try {
-            savedCopy.parentFile?.mkdirs()
-            outputFile.copyTo(savedCopy, overwrite = true)
-        } catch (error: IOException) {
-            if (installType == InstallType.SAVED) {
-                Log.e(TAG, "Failed to copy patched APK for later", error)
-                return@withContext false
-            } else {
-                Log.w(TAG, "Failed to update saved copy for $finalPackageName", error)
+        if (savePatchedEnabled) {
+            try {
+                savedCopy.parentFile?.mkdirs()
+                outputFile.copyTo(savedCopy, overwrite = true)
+            } catch (error: IOException) {
+                if (installType == InstallType.SAVED) {
+                    Log.e(TAG, "Failed to copy patched APK for later", error)
+                    return@withContext false
+                } else {
+                    Log.w(TAG, "Failed to update saved copy for $finalPackageName", error)
+                }
             }
         }
 
