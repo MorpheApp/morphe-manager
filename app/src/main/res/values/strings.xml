@@ -544,7 +544,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_greeting_phrases">Greeting phrases</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Show a greeting message on the home screen</string>
     <string name="settings_appearance_app_grouping">App grouping</string>
-    <string name="settings_appearance_app_grouping_description">Show a mode switcher on the home screen to group apps by source or your own categories</string>
+    <string name="settings_appearance_app_grouping_description">Show a home screen switcher to group apps by source or your own categories, keeping the selection when off</string>
 
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App icon</string>
