@@ -1285,16 +1285,22 @@ class HomeViewModel(
         val activeHidden = homePrefs.hiddenPackages.filter { it in allPackages }
 
         val visiblePackages = allPackages.filter { it !in homePrefs.hiddenPackages }
-        val visibleItems = ArrayList<HomeAppItem>(visiblePackages.size)
-        for (pkg in visiblePackages) visibleItems.add(buildItem(pkg))
+
+        // Fan out per-package resolution: buildItem is IO-bound and stalls at 400+ apps sequentially.
+        val builtItems = coroutineScope {
+            (visiblePackages + activeHidden)
+                .map { pkg -> async { buildItem(pkg) } }
+                .awaitAll()
+        }
+        val visibleItems = builtItems.subList(0, visiblePackages.size)
+        val hiddenItems = builtItems.subList(visiblePackages.size, builtItems.size)
+
         val visible = sortHomeAppItems(
             items = visibleItems,
             sortMode = homePrefs.sortMode,
             customOrder = homePrefs.customOrder
         )
 
-        val hiddenItems = ArrayList<HomeAppItem>(activeHidden.size)
-        for (pkg in activeHidden) hiddenItems.add(buildItem(pkg))
         val hidden = sortHomeAppItems(
             items = hiddenItems,
             sortMode = homePrefs.sortMode,
