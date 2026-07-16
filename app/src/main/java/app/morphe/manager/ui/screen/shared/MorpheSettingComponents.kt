@@ -83,6 +83,7 @@ fun MorpheCard(
     cornerRadius: Dp = MorpheDefaults.CardCornerRadius,
     borderWidth: Dp = 0.dp,
     borderColor: Color = MaterialTheme.colorScheme.outlineVariant,
+    color: Color = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
     content: @Composable () -> Unit
 ) {
     Surface(
@@ -95,7 +96,7 @@ fun MorpheCard(
                 } else Modifier
             ),
         shape = RoundedCornerShape(cornerRadius),
-        color = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
+        color = color,
         contentColor = MaterialTheme.colorScheme.onSurface,
         tonalElevation = elevation,
         border = if (borderWidth > 0.dp) {
@@ -417,6 +418,7 @@ fun SettingsItemCard(
     enabled: Boolean = true,
     borderWidth: Dp = 0.dp,
     borderColor: Color = MaterialTheme.colorScheme.outlineVariant,
+    color: Color = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
     content: @Composable () -> Unit
 ) {
     MorpheCard(
@@ -426,6 +428,7 @@ fun SettingsItemCard(
         cornerRadius = MorpheDefaults.SettingsCornerRadius,
         borderWidth = borderWidth,
         borderColor = borderColor,
+        color = color,
         modifier = modifier
     ) {
         content()

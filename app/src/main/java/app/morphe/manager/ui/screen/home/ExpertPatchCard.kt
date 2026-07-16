@@ -5,10 +5,7 @@
 
 package app.morphe.manager.ui.screen.home
 
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -16,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -136,42 +132,29 @@ internal fun PatchCard(
     val patchState = if (isEnabled) enabledState else disabledState
     val contentDesc = remember(patch.name, patchState) { "${patch.name}, $patchState" }
 
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .then(
-                if (hasRequiredOptionsMissing && isEnabled)
-                    Modifier.border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.error.copy(alpha = 0.6f),
-                        shape = RoundedCornerShape(14.dp)
-                    )
-                else Modifier
-            )
-            .clip(RoundedCornerShape(14.dp))
-            .clickable(onClick = onToggle)
-            .semantics {
-                stateDescription = patchState
-                contentDescription = contentDesc
-            },
-        shape = RoundedCornerShape(14.dp),
-        color = when {
-            isNew && isEnabled -> MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.55f)
-            isNew -> MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.25f)
-            isEnabled -> MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
-            else -> MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp).copy(alpha = 0.5f)
-        },
-        contentColor = if (isEnabled) {
-            MaterialTheme.colorScheme.onSurface
-        } else {
-            MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-        },
-        tonalElevation = if (isEnabled) 2.dp else 0.dp
+    val colors = MaterialTheme.colorScheme
+    val showErrorBorder = hasRequiredOptionsMissing && isEnabled
+    val containerColor = when {
+        isNew && isEnabled -> colors.tertiaryContainer.copy(alpha = 0.55f)
+        isNew -> colors.tertiaryContainer.copy(alpha = 0.25f)
+        isEnabled -> colors.surfaceColorAtElevation(2.dp)
+        else -> colors.surfaceColorAtElevation(1.dp).copy(alpha = 0.5f)
+    }
+
+    SettingsItemCard(
+        onClick = onToggle,
+        color = containerColor,
+        borderWidth = if (showErrorBorder) 1.dp else 0.dp,
+        borderColor = if (showErrorBorder) colors.error.copy(alpha = 0.6f) else colors.outlineVariant,
+        modifier = Modifier.semantics {
+            stateDescription = patchState
+            contentDescription = contentDesc
+        }
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(14.dp),
+                .padding(MorpheDefaults.ContentPadding),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
