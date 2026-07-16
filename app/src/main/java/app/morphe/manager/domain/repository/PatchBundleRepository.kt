@@ -562,7 +562,8 @@ class PatchBundleRepository(
         uid: Int? = null,
         sortOrder: Int? = null,
         createdAt: Long? = null,
-        updatedAt: Long? = null
+        updatedAt: Long? = null,
+        enabled: Boolean? = null
     ): PatchBundleEntity {
         val resolvedUid = uid ?: generateUid()
         val existingProps = dao.getProps(resolvedUid)
@@ -581,7 +582,7 @@ class PatchBundleRepository(
         val now = System.currentTimeMillis()
         val resolvedCreatedAt = createdAt ?: existingProps?.createdAt ?: now
         val resolvedUpdatedAt = updatedAt ?: now
-        val resolvedEnabled = existingProps?.enabled != false
+        val resolvedEnabled = enabled ?: (existingProps?.enabled != false)
         val entity = PatchBundleEntity(
             uid = resolvedUid,
             name = normalizedName,
@@ -2026,11 +2027,28 @@ class PatchBundleRepository(
                 }
             }
 
-            // Endpoints that survive the (possible) Replace pruning - used to skip duplicates
-            val keptEndpoints = customRemotes
-                .filter { mode == ImportMode.Merge || it.endpoint.lowercase(Locale.US) in incomingEndpoints }
-                .map { it.endpoint.lowercase(Locale.US) }
-                .toSet()
+            // Bundles that survive the (possible) Replace pruning - used to skip duplicates
+            val keptCustoms = customRemotes.filter {
+                mode == ImportMode.Merge || it.endpoint.lowercase(Locale.US) in incomingEndpoints
+            }
+            val keptEndpoints = keptCustoms.map { it.endpoint.lowercase(Locale.US) }.toSet()
+
+            // Replace mode also reconciles the enabled toggle; Merge preserves the local state.
+            if (mode == ImportMode.Replace) {
+                val snapshotByEndpoint = snapshots.mapNotNull { snapshot ->
+                    runCatching { normalizeRemoteBundleUrl(snapshot.source) }.getOrNull()
+                        ?.lowercase(Locale.US)
+                        ?.let { it to snapshot }
+                }.toMap()
+                keptCustoms.forEach { bundle ->
+                    val snapshot = snapshotByEndpoint[bundle.endpoint.lowercase(Locale.US)]
+                        ?: return@forEach
+                    if (bundle.enabled != snapshot.enabled) {
+                        updateDb(bundle.uid) { it.copy(enabled = snapshot.enabled) }
+                        changedAny = true
+                    }
+                }
+            }
 
             snapshots.forEach { snapshot ->
                 val normalizedUrl = runCatching {
@@ -2047,6 +2065,7 @@ class PatchBundleRepository(
                     sortOrder = snapshot.sortOrder,
                     createdAt = snapshot.createdAt,
                     updatedAt = snapshot.updatedAt,
+                    enabled = snapshot.enabled,
                 )
                 changedAny = true
             }
@@ -2062,6 +2081,7 @@ class PatchBundleRepository(
                 onPerBundleProgress = null,
                 predicate = { bundle ->
                     bundle.uid != DEFAULT_SOURCE_UID &&
+                            bundle.enabled &&
                             snapshots.any { s ->
                                 bundle.endpoint.equals(
                                     runCatching { normalizeRemoteBundleUrl(s.source) }.getOrNull(),
