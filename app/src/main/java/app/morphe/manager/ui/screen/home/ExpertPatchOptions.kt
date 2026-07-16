@@ -882,6 +882,7 @@ private fun BooleanOptionItem(
         onClick = { onValueChange(!value) },
         title = title,
         subtitle = description.ifBlank { null },
+        showBorder = true,
         trailingContent = {
             MorpheSwitch(
                 checked = value,

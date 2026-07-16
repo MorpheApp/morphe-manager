@@ -162,14 +162,14 @@ private fun LanguageItem(
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = language.displayName,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyLarge,
                 color = LocalDialogTextColor.current,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
             Text(
                 text = language.nativeName,
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodyMedium,
                 color = LocalDialogSecondaryTextColor.current,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis

@@ -144,8 +144,12 @@ internal fun PatchCard(
     SettingsItemCard(
         onClick = onToggle,
         color = containerColor,
-        borderWidth = if (showErrorBorder) 1.dp else 0.dp,
-        borderColor = if (showErrorBorder) colors.error.copy(alpha = 0.6f) else colors.outlineVariant,
+        borderWidth = 1.dp,
+        borderColor = when {
+            showErrorBorder -> colors.error.copy(alpha = 0.6f)
+            !isEnabled -> colors.outlineVariant.copy(alpha = 0.5f)
+            else -> colors.outlineVariant
+        },
         modifier = Modifier.semantics {
             stateDescription = patchState
             contentDescription = contentDesc

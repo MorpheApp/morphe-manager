@@ -2487,20 +2487,20 @@ fun SimpleBundleSelectDialog(
                         }
                         Text(
                             text = patchCountText,
-                            style = MaterialTheme.typography.bodySmall,
+                            style = MaterialTheme.typography.bodyMedium,
                             color = LocalDialogSecondaryTextColor.current
                         )
                         if (patchVersionText != null) {
                             Text(
                                 text = patchVersionText,
-                                style = MaterialTheme.typography.bodySmall,
+                                style = MaterialTheme.typography.bodyMedium,
                                 color = LocalDialogSecondaryTextColor.current
                             )
                         }
                         if (recommendedVersionText != null) {
                             Text(
                                 text = recommendedVersionText,
-                                style = MaterialTheme.typography.bodySmall,
+                                style = MaterialTheme.typography.bodyMedium,
                                 color = LocalDialogSecondaryTextColor.current
                             )
                         }
