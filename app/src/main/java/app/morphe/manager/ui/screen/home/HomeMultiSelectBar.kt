@@ -168,7 +168,8 @@ internal fun CategoryActionBar(
     onEnterReorder: () -> Unit,
     onExitReorder: () -> Unit,
     onCancel: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    showEditActions: Boolean = true
 ) {
     val cancelLabel = stringResource(android.R.string.cancel)
     val renameLabel = stringResource(R.string.rename)
@@ -220,25 +221,29 @@ internal fun CategoryActionBar(
                         )
                     }
                     ActionPillRow {
-                        ActionPillButton(
-                            onClick = onRename,
-                            icon = Icons.Outlined.Edit,
-                            contentDescription = renameLabel,
-                            tooltip = renameLabel
-                        )
+                        if (showEditActions) {
+                            ActionPillButton(
+                                onClick = onRename,
+                                icon = Icons.Outlined.Edit,
+                                contentDescription = renameLabel,
+                                tooltip = renameLabel
+                            )
+                        }
                         ActionPillButton(
                             onClick = onEnterReorder,
                             icon = Icons.Outlined.Reorder,
                             contentDescription = reorderListLabel,
                             tooltip = reorderListLabel
                         )
-                        ActionPillButton(
-                            onClick = onDelete,
-                            icon = Icons.Outlined.Delete,
-                            contentDescription = deleteLabel,
-                            tooltip = deleteLabel,
-                            colors = destructiveColors
-                        )
+                        if (showEditActions) {
+                            ActionPillButton(
+                                onClick = onDelete,
+                                icon = Icons.Outlined.Delete,
+                                contentDescription = deleteLabel,
+                                tooltip = deleteLabel,
+                                colors = destructiveColors
+                            )
+                        }
                         ActionPillButton(
                             onClick = onCancel,
                             icon = Icons.Outlined.Close,

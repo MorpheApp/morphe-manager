@@ -1322,13 +1322,13 @@ class HomeViewModel(
         expandedSourceGroups: Set<Int>
     ): List<HomeAppSourceGroup> {
         // enabledInfo is already filtered to enabled entries by the caller
-        // Keep source sections in source order. Home sorting should reorder app cards
+        // Keep source sections in repository order. Home sorting should reorder app cards
         // inside each source section, not move source headers around.
+        val sourceOrder = sources.keys.mapIndexed { index, uid -> uid to index }.toMap()
         return enabledInfo.values
             .sortedWith(
                 compareBy(
-                    { it.uid != DEFAULT_SOURCE_UID },
-                    { (sources[it.uid]?.displayTitle ?: it.name).lowercase() },
+                    { sourceOrder[it.uid] ?: Int.MAX_VALUE },
                     { it.uid }
                 )
             )
@@ -1495,6 +1495,17 @@ class HomeViewModel(
 
     fun resetAppSourceOrder(sourceUid: Int) {
         homeAppButtonPrefs.resetSourceOrder(sourceUid)
+    }
+
+    fun saveAppSourceGroupOrder(sourceUids: List<Int>) {
+        viewModelScope.launch {
+            val visibleUids = sourceUids.distinct()
+            val visibleUidSet = visibleUids.toSet()
+            val currentUids = patchBundleRepository.sources.first().map { it.uid }
+            val mergedUids = visibleUids + currentUids.filter { it !in visibleUidSet }
+            prefs.sourceBundleSortMode.update(SourceBundleSortMode.MANUAL.name)
+            patchBundleRepository.reorderBundles(mergedUids)
+        }
     }
 
     fun setAppSortMode(sortMode: HomeAppSortMode) {

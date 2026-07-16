@@ -122,6 +122,7 @@ class HomeAppActions(
     val onSaveSourceOrder: (Int, List<String>) -> Unit,
     val onResetOrder: () -> Unit,
     val onResetSourceOrder: (Int) -> Unit,
+    val onSaveSourceGroupOrder: (List<Int>) -> Unit,
     val onSortModeChange: (HomeAppSortMode) -> Unit,
     val onCategoryViewModeChange: (HomeAppCategoryViewMode) -> Unit,
     val onCreateCategory: (String) -> String,
@@ -606,8 +607,12 @@ fun MainAppsSection(
     // Split into two flags so the app multi-select and category context bars stay
     // mutually exclusive at the footer slot
     var activeCategoryId by remember { mutableStateOf<String?>(null) }
+    var activeSourceUid by remember { mutableStateOf<Int?>(null) }
     val isCategoryReorderMode = remember { mutableStateOf(false) }
-    val isCategoryBarVisible = activeCategoryId != null || isCategoryReorderMode.value
+    val isSourceCategoryView = appGrouping == HomeAppCategoryViewMode.SOURCES
+    val isCategoryBarVisible = activeCategoryId != null ||
+            activeSourceUid != null ||
+            isCategoryReorderMode.value
 
     val isMultibarVisible = isMultiSelectMode.value || isReorderMode.value || isCategoryBarVisible
 
@@ -632,16 +637,15 @@ fun MainAppsSection(
 
     BackHandler(enabled = isCategoryBarVisible) {
         activeCategoryId = null
+        activeSourceUid = null
         isCategoryReorderMode.value = false
     }
 
-    // Retire stale bar state when leaving CUSTOM view or when the active id vanishes
-    // from the category list (e.g. deleted from elsewhere)
-    LaunchedEffect(isCustomCategoryView) {
-        if (!isCustomCategoryView) {
-            activeCategoryId = null
-            isCategoryReorderMode.value = false
-        }
+    // Retire stale header action state when switching grouping modes.
+    LaunchedEffect(appGrouping) {
+        activeCategoryId = null
+        activeSourceUid = null
+        isCategoryReorderMode.value = false
     }
     LaunchedEffect(apps.categoryState.categories) {
         val currentIds = apps.categoryState.categories.mapTo(mutableSetOf()) { it.id }
@@ -649,7 +653,6 @@ fun MainAppsSection(
             activeCategoryId = null
         }
     }
-
     // Sync selection and local order with current item list
     LaunchedEffect(homeAppItems) {
         val currentPackages = homeAppItems.mapTo(mutableSetOf()) { it.packageName }
@@ -820,6 +823,40 @@ fun MainAppsSection(
             ignoreCollapsed = searchQuery.isNotBlank()
         )
     }
+    var localSourceGroupOrder by remember { mutableStateOf(apps.sourceGroups.map { it.uid }) }
+    LaunchedEffect(apps.sourceGroups, isCategoryReorderMode.value, isSourceCategoryView) {
+        if (isCategoryReorderMode.value && isSourceCategoryView) return@LaunchedEffect
+        val sourceUids = apps.sourceGroups.map { it.uid }
+        val kept = localSourceGroupOrder.filter { it in sourceUids }
+        val added = sourceUids.filter { it !in kept }
+        localSourceGroupOrder = kept + added
+    }
+    val displayedSourceCategoryGroups = remember(
+        sourceCategoryGroups,
+        localSourceGroupOrder,
+        isCategoryReorderMode.value,
+        isSourceCategoryView
+    ) {
+        if (!isCategoryReorderMode.value || !isSourceCategoryView) {
+            sourceCategoryGroups
+        } else {
+            val byUid = sourceCategoryGroups.mapNotNull { group ->
+                group.sourceUid?.let { uid -> uid to group }
+            }.toMap()
+            val orderedGroups = localSourceGroupOrder.mapNotNull { byUid[it] }
+            val orderedUids = orderedGroups.mapNotNullTo(mutableSetOf()) { it.sourceUid }
+            orderedGroups + sourceCategoryGroups.filter { group ->
+                val uid = group.sourceUid
+                uid == null || uid !in orderedUids
+            }
+        }
+    }
+    LaunchedEffect(sourceCategoryGroups) {
+        val currentUids = sourceCategoryGroups.mapNotNullTo(mutableSetOf()) { it.sourceUid }
+        if (activeSourceUid != null && activeSourceUid !in currentUids) {
+            activeSourceUid = null
+        }
+    }
     val groupedReorderGroups = remember(
         appGrouping,
         homeAppItems,
@@ -930,10 +967,21 @@ fun MainAppsSection(
     val reorderableState = rememberReorderableLazyListState(listState) { from, to ->
         moveReorderOrder(from.index, to.index)
     }
-    fun categoryIdAtListIndex(index: Int): String? {
+    fun headerGroupAtListIndex(index: Int): HomeCategoryGroup? {
+        val groups = when (appGrouping) {
+            HomeAppCategoryViewMode.SOURCES -> displayedSourceCategoryGroups
+            HomeAppCategoryViewMode.CUSTOM -> categoryGroups
+            HomeAppCategoryViewMode.ALL_APPS -> emptyList()
+        }
         var currentIndex = 0
-        categoryGroups.forEach { group ->
-            if (currentIndex == index) return group.id.takeIf { group.editable }
+        groups.forEach { group ->
+            if (currentIndex == index) {
+                return when (appGrouping) {
+                    HomeAppCategoryViewMode.SOURCES -> group.takeIf { it.sourceUid != null }
+                    HomeAppCategoryViewMode.CUSTOM -> group.takeIf { it.editable }
+                    HomeAppCategoryViewMode.ALL_APPS -> null
+                }
+            }
             currentIndex += 1
             if (!group.collapsed) currentIndex += group.items.size
         }
@@ -943,18 +991,39 @@ fun MainAppsSection(
     // category headers drag only in CUSTOM view via editable headers. They are never
     // active at the same time, so the shared list state does not double-handle drags.
     val categoryReorderableState = rememberReorderableLazyListState(listState) { from, to ->
-        val fromId = categoryIdAtListIndex(from.index) ?: return@rememberReorderableLazyListState
-        val toId = categoryIdAtListIndex(to.index) ?: return@rememberReorderableLazyListState
-        if (fromId == toId) return@rememberReorderableLazyListState
+        val fromGroup = headerGroupAtListIndex(from.index) ?: return@rememberReorderableLazyListState
+        val toGroup = headerGroupAtListIndex(to.index) ?: return@rememberReorderableLazyListState
+        if (fromGroup.selectionKey() == toGroup.selectionKey()) return@rememberReorderableLazyListState
 
-        val orderedIds = apps.categoryState.categories.map { it.id }.toMutableList()
-        val fromPosition = orderedIds.indexOf(fromId)
-        val toPosition = orderedIds.indexOf(toId)
-        if (fromPosition == -1 || toPosition == -1) return@rememberReorderableLazyListState
+        when (appGrouping) {
+            HomeAppCategoryViewMode.SOURCES -> {
+                val fromUid = fromGroup.sourceUid ?: return@rememberReorderableLazyListState
+                val toUid = toGroup.sourceUid ?: return@rememberReorderableLazyListState
+                val orderedUids = localSourceGroupOrder.toMutableList()
+                val fromPosition = orderedUids.indexOf(fromUid)
+                val toPosition = orderedUids.indexOf(toUid)
+                if (fromPosition == -1 || toPosition == -1) return@rememberReorderableLazyListState
 
-        val moved = orderedIds.removeAt(fromPosition)
-        orderedIds.add(toPosition.coerceIn(0, orderedIds.size), moved)
-        appActions.onSaveCategoryOrder(orderedIds)
+                val moved = orderedUids.removeAt(fromPosition)
+                orderedUids.add(toPosition.coerceIn(0, orderedUids.size), moved)
+                localSourceGroupOrder = orderedUids
+            }
+
+            HomeAppCategoryViewMode.CUSTOM -> {
+                val fromId = fromGroup.id ?: return@rememberReorderableLazyListState
+                val toId = toGroup.id ?: return@rememberReorderableLazyListState
+                val orderedIds = apps.categoryState.categories.map { it.id }.toMutableList()
+                val fromPosition = orderedIds.indexOf(fromId)
+                val toPosition = orderedIds.indexOf(toId)
+                if (fromPosition == -1 || toPosition == -1) return@rememberReorderableLazyListState
+
+                val moved = orderedIds.removeAt(fromPosition)
+                orderedIds.add(toPosition.coerceIn(0, orderedIds.size), moved)
+                appActions.onSaveCategoryOrder(orderedIds)
+            }
+
+            HomeAppCategoryViewMode.ALL_APPS -> Unit
+        }
     }
     val homeItemsByPackage = remember(homeAppItems) {
         homeAppItems.associateBy { it.packageName }
@@ -1191,7 +1260,7 @@ fun MainAppsSection(
                                     // isGroupedAppView already excludes ALL_APPS, so the switch
                                     // only needs to distinguish between SOURCES and CUSTOM
                                     val groups = when (appGrouping) {
-                                        HomeAppCategoryViewMode.SOURCES -> sourceCategoryGroups
+                                        HomeAppCategoryViewMode.SOURCES -> displayedSourceCategoryGroups
                                         else -> categoryGroups
                                     }
 
@@ -1206,6 +1275,7 @@ fun MainAppsSection(
                                             val headerLongPress: (() -> Unit)? = when {
                                                 isFooterBusy -> null
                                                 group.editable -> { -> activeCategoryId = group.id }
+                                                group.sourceUid != null -> { -> activeSourceUid = group.sourceUid }
                                                 else -> { -> context.toast(categoryActionsUnavailableToast) }
                                             }
                                             val headerContent: @Composable ((@Composable () -> Unit)?) -> Unit = { dragHandle ->
@@ -1226,7 +1296,12 @@ fun MainAppsSection(
                                                 )
                                             }
 
-                                            if (group.editable && isCategoryReorderMode.value) {
+                                            val canReorderHeader = when (appGrouping) {
+                                                HomeAppCategoryViewMode.SOURCES -> group.sourceUid != null
+                                                HomeAppCategoryViewMode.CUSTOM -> group.editable
+                                                HomeAppCategoryViewMode.ALL_APPS -> false
+                                            }
+                                            if (canReorderHeader && isCategoryReorderMode.value) {
                                                 ReorderableItem(categoryReorderableState, key = headerKey) { _ ->
                                                     headerContent {
                                                         CategoryHeaderDragHandle(
@@ -1570,8 +1645,11 @@ fun MainAppsSection(
                     val activeCategoryTitle = activeCategoryId?.let { id ->
                         apps.categoryState.categories.firstOrNull { it.id == id }?.name
                     }
+                    val activeSourceTitle = activeSourceUid?.let { uid ->
+                        displayedSourceCategoryGroups.firstOrNull { it.sourceUid == uid }?.title
+                    }
                     CategoryActionBar(
-                        activeCategoryTitle = activeCategoryTitle,
+                        activeCategoryTitle = activeCategoryTitle ?: activeSourceTitle,
                         visible = isCategoryBarVisible,
                         isReorderMode = isCategoryReorderMode.value,
                         onRename = {
@@ -1581,27 +1659,38 @@ fun MainAppsSection(
                                 categoryNameRequest = CategoryNameRequest(category)
                             }
                             activeCategoryId = null
+                            activeSourceUid = null
                         },
                         onDelete = {
                             // Hand off to the confirmation dialog; actual deletion runs only if
                             // the user confirms. Close the bar so the dialog isn't shadowed.
                             pendingDeleteCategoryId = activeCategoryId
                             activeCategoryId = null
+                            activeSourceUid = null
                         },
                         onEnterReorder = {
+                            if (activeSourceUid != null) {
+                                localSourceGroupOrder = apps.sourceGroups.map { it.uid }
+                            }
                             activeCategoryId = null
+                            activeSourceUid = null
                             searchState.onClose()
                             isCategoryReorderMode.value = true
                         },
                         onExitReorder = {
+                            if (isSourceCategoryView) {
+                                appActions.onSaveSourceGroupOrder(localSourceGroupOrder)
+                            }
                             isCategoryReorderMode.value = false
                         },
                         onCancel = {
                             activeCategoryId = null
+                            activeSourceUid = null
                         },
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
-                            .padding(horizontal = horizontalPadding)
+                            .padding(horizontal = horizontalPadding),
+                        showEditActions = activeSourceUid == null && !isSourceCategoryView
                     )
                 }
             }
