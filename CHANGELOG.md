@@ -1,3 +1,16 @@
+# [1.24.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.4...v1.24.0-dev.5) (2026-07-16)
+
+
+### Bug Fixes
+
+* Extract `SelectionTile` for grid-style appearance pickers ([7274264](https://github.com/MorpheApp/morphe-manager/commit/72742649f06e41988578a31dbe2ea36a178b5544))
+* Migrate language picker to shared `RadioSelectionCard` ([09c760b](https://github.com/MorpheApp/morphe-manager/commit/09c760b60aba85456ac3a14f83ba2c7e00a18e96))
+
+
+### Features
+
+* Add source labels and versions to patch source picker ([0b3f299](https://github.com/MorpheApp/morphe-manager/commit/0b3f299d6f05d50535b0570e565ca9aaf818c806))
+
 # [1.24.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.3...v1.24.0-dev.4) (2026-07-16)
 
 
