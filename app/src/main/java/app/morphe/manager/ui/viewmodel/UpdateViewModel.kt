@@ -62,8 +62,12 @@ class UpdateViewModel(
     var releaseInfo: MorpheAsset? by mutableStateOf(null)
         private set
 
-    // Changelog entry for the currently installed manager version (shown in Settings → Changelog)
-    var currentVersionChangelogEntry: ChangelogEntry? by mutableStateOf(null)
+    // Changelog entries for the current channel (shown in Settings → Changelog).
+    // Stable channel: single entry for the installed version.
+    // Prerelease channel: the installed dev version and every preceding dev entry down to
+    // (but not including) the last stable release; the "Show older" expander then continues
+    // from the stable baseline.
+    var currentChannelChangelogEntries: List<ChangelogEntry>? by mutableStateOf(null)
         private set
 
     // All changelog entries newer than the currently installed version (shown in update dialog)
@@ -371,7 +375,7 @@ class UpdateViewModel(
      */
     private fun loadMissedChangelog() = viewModelScope.launch {
         uiSafe(app, R.string.download_manager_failed, "Failed to load changelog") {
-            val installedVersion = BuildConfig.VERSION_NAME.removePrefix("v")
+            val installedVersion = BuildConfig.VERSION_NAME.normalizeVersion()
 
             // Use the dev branch if EITHER the installed version is a dev build OR the available
             // update is a pre-release. Without this, a stable user who has "Use pre-releases"
@@ -386,43 +390,55 @@ class UpdateViewModel(
             val newer = ChangelogParser.entriesNewerThan(entries, installedVersion)
             // Strip pre-release entries when on stable channel - main CHANGELOG.md
             // contains merged pre-release entries that stable users should not see
-            missedChangelogEntries = if (forDevBranch) newer
-                else newer.filter { !it.version.contains('-') }
+            missedChangelogEntries = if (forDevBranch) newer else newer.filter { !it.isPrerelease }
         }
     }
 
     /**
-     * Load changelog entry for the currently installed manager version from CHANGELOG.md.
-     * Reads the static CHANGELOG.md file.
+     * Load changelog entries for the current channel from CHANGELOG.md.
+     *
+     * Stable channel: the installed version's entry only.
+     * Prerelease channel: the installed dev version and every preceding dev entry down to
+     * (but not including) the last stable release.
      */
     fun loadCurrentVersionChangelog() = viewModelScope.launch {
         uiSafe(app, R.string.download_manager_failed, "Failed to load changelog") {
-            val currentVersion = BuildConfig.VERSION_NAME.removePrefix("v")
-            val entries = managerEntriesCache.getOrPut(morpheAPI.isDevBuild) {
-                morpheAPI.fetchManagerChangelog()
+            val currentVersion = BuildConfig.VERSION_NAME.normalizeVersion()
+            val forDevBranch = morpheAPI.isDevBuild
+            val entries = managerEntriesCache.getOrPut(forDevBranch) {
+                morpheAPI.fetchManagerChangelog(forDevBranch = forDevBranch)
             }
-            currentVersionChangelogEntry = ChangelogParser.findVersion(entries, currentVersion)
+            currentChannelChangelogEntries = if (forDevBranch) {
+                val installedIdx = entries.indexOfFirst { it.version.normalizeVersion() == currentVersion }
+                // Fall back to the newest dev entry when the installed version is absent
+                val start = if (installedIdx >= 0) installedIdx else 0
+                entries.drop(start).takeWhile { it.isPrerelease }
+            } else {
+                listOfNotNull(ChangelogParser.findVersion(entries, currentVersion))
+            }
         }
     }
 
     /**
-     * Loads older stable changelog entries on demand, dropping versions in [exclude].
-     * Always reads from main; older history is the stable release timeline by definition,
-     * regardless of which channel the user is currently on.
+     * Loads older stable changelog entries on demand. Always reads from main; older history
+     * is the stable release timeline by definition, regardless of which channel the user is
+     * currently on. Versions already shown above (via [currentChannelChangelogEntries] or
+     * [missedChangelogEntries]) are filtered out so the expander lists new content only.
      * Idempotent: repeat calls while loading or after a successful load are a no-op.
      */
-    fun loadOlderManagerEntries(exclude: Set<String>) {
+    fun loadOlderManagerEntries() {
         if (isLoadingOlderEntries || olderManagerEntries != null) return
         isLoadingOlderEntries = true
+        val exclude = (currentChannelChangelogEntries.orEmpty() + missedChangelogEntries.orEmpty())
+            .map { it.version.normalizeVersion() }
+            .toSet()
         viewModelScope.launch(Dispatchers.Default) {
             uiSafe(app, R.string.download_manager_failed, "Failed to load older releases") {
                 val entries = managerEntriesCache.getOrPut(false) {
                     morpheAPI.fetchManagerChangelog(forDevBranch = false)
                 }
-                val normalize = { v: String -> v.removePrefix("v").trim() }
-                val excludeNorm = exclude.map(normalize).toSet()
                 olderManagerEntries = entries.filter {
-                    normalize(it.version) !in excludeNorm && !it.version.contains('-')
+                    it.version.normalizeVersion() !in exclude && !it.isPrerelease
                 }
             }
             isLoadingOlderEntries = false

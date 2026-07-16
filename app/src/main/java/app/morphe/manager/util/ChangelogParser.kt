@@ -5,6 +5,10 @@
 
 package app.morphe.manager.util
 
+import app.morphe.manager.util.ChangelogParser.EXPERIMENTAL_VERSION_ADDITION_RE
+import app.morphe.manager.util.ChangelogParser.hasChangesFor
+
+
 /**
  * Represents a single version entry parsed from a CHANGELOG.md file.
  *
@@ -18,6 +22,12 @@ data class ChangelogEntry(
     val content: String,
     val scopedBullets: Map<String, List<String>> = emptyMap(),
 )
+
+/**
+ * True when version carries a semver pre-release suffix (e.g. `1.2.3-dev.4`).
+ * Stable releases have no dash in the version string.
+ */
+val ChangelogEntry.isPrerelease: Boolean get() = version.contains('-')
 
 /**
  * Parses the CHANGELOG.md formats used by Morphe repositories.
@@ -126,7 +136,7 @@ object ChangelogParser {
             val match = VERSION_HEADING.find(line)
             if (match != null) {
                 flush()
-                if (stopAfterFirstStable && entries.lastOrNull()?.version?.contains("-") == false) {
+                if (stopAfterFirstStable && entries.lastOrNull()?.isPrerelease == false) {
                     currentVersion = null
                     break
                 }
@@ -203,7 +213,7 @@ object ChangelogParser {
      * Find the single entry for an exact [version].
      */
     fun findVersion(entries: List<ChangelogEntry>, version: String): ChangelogEntry? {
-        val normalized = version.removePrefix("v").trim()
-        return entries.firstOrNull { it.version.removePrefix("v").trim() == normalized }
+        val normalized = version.normalizeVersion()
+        return entries.firstOrNull { it.version.normalizeVersion() == normalized }
     }
 }
