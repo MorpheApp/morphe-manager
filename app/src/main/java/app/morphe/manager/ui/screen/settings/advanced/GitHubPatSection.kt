@@ -18,7 +18,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import kotlinx.coroutines.launch
@@ -48,7 +47,7 @@ fun GitHubPatSettingsItem(
         },
         trailingContent = {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 StatusCircleIcon(
@@ -113,7 +112,7 @@ private fun GitHubPatDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             // Info button
             MorpheDialogOutlinedButton(
@@ -142,7 +141,7 @@ private fun GitHubPatDialog(
             // Export include toggle + warning
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
             ) {
                 SettingsItem(
                     onClick = {

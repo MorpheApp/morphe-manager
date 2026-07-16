@@ -612,6 +612,46 @@ fun DeletionWarningBox(
 }
 
 /**
+ * Statistical variant of [InfoBox] used to display a single prominent value with an optional
+ * caption below it. Shares the container styling of [InfoBox] but centers a headline-sized value.
+ */
+@Composable
+fun InfoStatBox(
+    value: String,
+    modifier: Modifier = Modifier,
+    subtitle: String? = null,
+    containerColor: Color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+    valueColor: Color = MaterialTheme.colorScheme.onSurface
+) {
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        color = containerColor
+    ) {
+        Column(
+            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Text(
+                text = value,
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+                color = valueColor
+            )
+            if (subtitle != null) {
+                Text(
+                    text = subtitle,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = valueColor.copy(alpha = 0.7f),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+}
+
+/**
  * Info box component to display grouped information in a visually distinct container.
  */
 @Composable
