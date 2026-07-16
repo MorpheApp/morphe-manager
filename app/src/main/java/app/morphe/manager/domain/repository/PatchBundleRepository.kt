@@ -562,7 +562,8 @@ class PatchBundleRepository(
         uid: Int? = null,
         sortOrder: Int? = null,
         createdAt: Long? = null,
-        updatedAt: Long? = null
+        updatedAt: Long? = null,
+        enabled: Boolean? = null
     ): PatchBundleEntity {
         val resolvedUid = uid ?: generateUid()
         val existingProps = dao.getProps(resolvedUid)
@@ -581,7 +582,7 @@ class PatchBundleRepository(
         val now = System.currentTimeMillis()
         val resolvedCreatedAt = createdAt ?: existingProps?.createdAt ?: now
         val resolvedUpdatedAt = updatedAt ?: now
-        val resolvedEnabled = existingProps?.enabled != false
+        val resolvedEnabled = enabled ?: (existingProps?.enabled != false)
         val entity = PatchBundleEntity(
             uid = resolvedUid,
             name = normalizedName,
@@ -690,11 +691,32 @@ class PatchBundleRepository(
             .map { it.uid }
             .toSet()
 
-        dispatchAction("Disable (${bundles.map { it.uid }.joinToString(",")})") {
+        dispatchAction("Disable (${bundles.map { it.uid }.joinToString(",")})") { current ->
             bundles.forEach { bundle ->
                 updateDb(bundle.uid) { it.copy(enabled = !it.enabled) }
             }
-            val newState = doReload()
+
+            // Fast path: toggling enabled needs no metadata reparse; doReload would stall the
+            // store queue by parsing every bundle's patches.jar on each flip.
+            val newState = when (current) {
+                is BundleState.Ready -> current.copy(
+                    sources = current.sources.mutate { mut ->
+                        bundles.forEach { bundle ->
+                            mut[bundle.uid]?.let { src ->
+                                mut[bundle.uid] = src.copy(enabled = !src.enabled)
+                            }
+                        }
+                    },
+                    info = current.info.mutate { mut ->
+                        bundles.forEach { bundle ->
+                            mut[bundle.uid]?.let { info ->
+                                mut[bundle.uid] = info.copy(enabled = !info.enabled)
+                            }
+                        }
+                    }
+                )
+                else -> doReload()
+            }
 
             // After store is updated, trigger update for bundles that were just enabled
             if (beingEnabledUids.isNotEmpty()) {
@@ -1647,6 +1669,10 @@ class PatchBundleRepository(
             val completedCount = AtomicInteger(0)
             val downloadDispatcher = Dispatchers.IO.limitedParallelism(4)
 
+            // Read snapshots below use toMutableList() rather than toList(): the latter's
+            // size==1 fast path calls iterator().next() without a hasNext() guard, so
+            // concurrent removal (many parallel downloads race here) can throw
+            // NoSuchElementException between the size check and the read
             val activeNamesMap = ConcurrentHashMap<Int, String>()
 
             val updated: Map<RemotePatchBundle, PatchBundleDownloadResult> = try {
@@ -1658,7 +1684,7 @@ class PatchBundleRepository(
                             Log.d(tag, "Updating patch bundle: ${bundle.name}")
 
                             activeNamesMap[bundle.uid] = progressLabelFor(bundle)
-                            bundleUpdateProgressFlow.update { it?.copy(activeNames = activeNamesMap.values.toList()) }
+                            bundleUpdateProgressFlow.update { it?.copy(activeNames = activeNamesMap.values.toMutableList()) }
 
                             val result = try {
                                 val onProgress: PatchBundleDownloadProgress = { bytesRead, bytesTotal ->
@@ -1701,7 +1727,7 @@ class PatchBundleRepository(
                             bundleUpdateProgressFlow.update { progress ->
                                 progress?.copy(
                                     completed = newCompleted,
-                                    activeNames = activeNamesMap.values.toList(),
+                                    activeNames = activeNamesMap.values.toMutableList(),
                                 )
                             }
 
@@ -2001,11 +2027,28 @@ class PatchBundleRepository(
                 }
             }
 
-            // Endpoints that survive the (possible) Replace pruning - used to skip duplicates
-            val keptEndpoints = customRemotes
-                .filter { mode == ImportMode.Merge || it.endpoint.lowercase(Locale.US) in incomingEndpoints }
-                .map { it.endpoint.lowercase(Locale.US) }
-                .toSet()
+            // Bundles that survive the (possible) Replace pruning - used to skip duplicates
+            val keptCustoms = customRemotes.filter {
+                mode == ImportMode.Merge || it.endpoint.lowercase(Locale.US) in incomingEndpoints
+            }
+            val keptEndpoints = keptCustoms.map { it.endpoint.lowercase(Locale.US) }.toSet()
+
+            // Replace mode also reconciles the enabled toggle; Merge preserves the local state.
+            if (mode == ImportMode.Replace) {
+                val snapshotByEndpoint = snapshots.mapNotNull { snapshot ->
+                    runCatching { normalizeRemoteBundleUrl(snapshot.source) }.getOrNull()
+                        ?.lowercase(Locale.US)
+                        ?.let { it to snapshot }
+                }.toMap()
+                keptCustoms.forEach { bundle ->
+                    val snapshot = snapshotByEndpoint[bundle.endpoint.lowercase(Locale.US)]
+                        ?: return@forEach
+                    if (bundle.enabled != snapshot.enabled) {
+                        updateDb(bundle.uid) { it.copy(enabled = snapshot.enabled) }
+                        changedAny = true
+                    }
+                }
+            }
 
             snapshots.forEach { snapshot ->
                 val normalizedUrl = runCatching {
@@ -2022,6 +2065,7 @@ class PatchBundleRepository(
                     sortOrder = snapshot.sortOrder,
                     createdAt = snapshot.createdAt,
                     updatedAt = snapshot.updatedAt,
+                    enabled = snapshot.enabled,
                 )
                 changedAny = true
             }
@@ -2037,6 +2081,7 @@ class PatchBundleRepository(
                 onPerBundleProgress = null,
                 predicate = { bundle ->
                     bundle.uid != DEFAULT_SOURCE_UID &&
+                            bundle.enabled &&
                             snapshots.any { s ->
                                 bundle.endpoint.equals(
                                     runCatching { normalizeRemoteBundleUrl(s.source) }.getOrNull(),

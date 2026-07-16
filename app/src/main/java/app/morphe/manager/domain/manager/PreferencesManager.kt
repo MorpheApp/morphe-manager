@@ -212,7 +212,8 @@ class PreferencesManager(
         val filePickerShowHiddenFiles: Boolean? = null,
         val useCustomFilePicker: Boolean? = null,
         val customFilePickerUserConfigured: Boolean? = null,
-        val sourceBundleSortMode: String? = null
+        val sourceBundleSortMode: String? = null,
+        val homeAppButtons: HomeAppButtonSnapshot? = null
     )
 
     suspend fun exportSettings() = SettingsSnapshot(

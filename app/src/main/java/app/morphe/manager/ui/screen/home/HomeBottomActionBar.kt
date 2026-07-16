@@ -5,9 +5,9 @@
 
 package app.morphe.manager.ui.screen.home
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -24,10 +24,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.style.TextOverflow
@@ -164,7 +164,6 @@ fun BottomActionButton(
     stateDescription: String? = null
 ) {
     val shape = RoundedCornerShape(MorpheDefaults.CardCornerRadius)
-    val view = LocalView.current
 
     // Use expert mode colors if enabled
     val finalContainerColor = containerColor ?: if (isExpertMode) {
@@ -197,16 +196,23 @@ fun BottomActionButton(
         }
     }
 
+    // Press-scale feedback matches the home pill and category header pattern so every
+    // interactive surface on this screen shares the same tactile response.
+    val interactionSource = remember { MutableInteractionSource() }
+    val scale = rememberPressScale(
+        interactionSource = interactionSource,
+        enabled = enabled,
+        label = "bottom_action_press_scale"
+    )
+    // Surface(enabled = enabled) already gates the click, so we can pass onClick straight
+    val handleClick = rememberHapticClick(onClick)
+
     Surface(
-        onClick = {
-            if (enabled) {
-                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                onClick()
-            }
-        },
+        onClick = handleClick,
         modifier = modifier
             .fillMaxWidth()
             .height(56.dp)
+            .graphicsLayer { scaleX = scale; scaleY = scale }
             .semantics {
                 role = Role.Button
                 this.contentDescription = contentDesc
@@ -219,7 +225,7 @@ fun BottomActionButton(
             },
         shape = shape,
         color = finalContainerColor.copy(alpha = if (enabled) 1f else 0.5f),
-        shadowElevation = if (enabled) 4.dp else 0.dp,
+        interactionSource = interactionSource,
         border = BorderStroke(
             width = 1.dp,
             brush = Brush.linearGradient(

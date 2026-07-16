@@ -8,9 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.di.*
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvatarUrl
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.gitlabAvatarUrl
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.BlocklistRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -143,14 +141,9 @@ class ManagerApplication : Application() {
         scope.launch(Dispatchers.IO) {
             patchBundleRepository.sources.first { it.isNotEmpty() }.forEach { bundle ->
                 launch {
-                    val primary = bundle.bundleAvatarUrl ?: bundle.githubAvatarUrl ?: bundle.gitlabAvatarUrl
-                    val fallback = when {
-                        bundle.bundleAvatarUrl != null -> bundle.githubAvatarUrl ?: bundle.gitlabAvatarUrl
-                        bundle.githubAvatarUrl != null -> bundle.gitlabAvatarUrl
-                        else -> null
-                    }
-                    primary?.let { loadRemoteAvatar(it) }
-                    fallback?.let { loadRemoteAvatar(it) }
+                    val avatarUrls = bundle.avatarUrls
+                    avatarUrls.primary?.let { loadRemoteAvatar(it) }
+                    avatarUrls.fallback?.let { loadRemoteAvatar(it) }
                 }
             }
         }

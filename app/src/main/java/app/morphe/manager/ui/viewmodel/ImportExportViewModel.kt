@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.KeystoreManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -104,6 +105,7 @@ class ImportExportViewModel(
     private val app: Application,
     private val keystoreManager: KeystoreManager,
     private val preferencesManager: PreferencesManager,
+    private val homeAppButtonPreferences: HomeAppButtonPreferences,
     private val patchSelectionRepository: PatchSelectionRepository,
     private val patchOptionsRepository: PatchOptionsRepository,
     private val patchBundleRepository: PatchBundleRepository
@@ -221,6 +223,10 @@ class ImportExportViewModel(
                 applyAppLanguage(it)
             }
 
+            // Home app buttons (categories, hidden apps, sort mode, etc.) live outside
+            // PreferencesManager, so they're applied here rather than in importSettings
+            exportFile.settings.homeAppButtons?.let(homeAppButtonPreferences::importState)
+
             // Always call the repository so Replace can clear existing custom sources even when the backup has none
             patchBundleRepository.importCustomBundles(
                 exportFile.settings.customBundles.orEmpty(),
@@ -235,12 +241,16 @@ class ImportExportViewModel(
         uiSafe(app, R.string.settings_system_export_manager_settings_fail, "Failed to export manager settings") {
             val snapshot = preferencesManager.exportSettings()
             val bundles = withContext(Dispatchers.IO) { patchBundleRepository.exportCustomBundles() }
+            val homeAppButtons = homeAppButtonPreferences.exportState()
 
             withContext(Dispatchers.IO) {
                 contentResolver.openOutputStream(target, "wt")!!.use { output ->
                     json.encodeToStream(
                         ManagerSettingsExportFile(
-                            settings = snapshot.copy(customBundles = bundles.ifEmpty { null })
+                            settings = snapshot.copy(
+                                customBundles = bundles.ifEmpty { null },
+                                homeAppButtons = homeAppButtons
+                            )
                         ),
                         output
                     )
@@ -589,13 +599,17 @@ class ImportExportViewModel(
         uiSafe(app, R.string.settings_system_export_manager_settings_fail, "Failed to export settings to Downloads") {
             val snapshot = preferencesManager.exportSettings()
             val bundles = withContext(Dispatchers.IO) { patchBundleRepository.exportCustomBundles() }
+            val homeAppButtons = homeAppButtonPreferences.exportState()
             withContext(Dispatchers.IO) {
                 val stream = openDownloadsOutputStream("morphe_manager_settings.json", JSON_MIMETYPE)
                     ?: throw IllegalStateException("Cannot open Downloads output stream")
                 stream.use {
                     json.encodeToStream(
                         ManagerSettingsExportFile(
-                            settings = snapshot.copy(customBundles = bundles.ifEmpty { null })
+                            settings = snapshot.copy(
+                                customBundles = bundles.ifEmpty { null },
+                                homeAppButtons = homeAppButtons
+                            )
                         ),
                         it
                     )

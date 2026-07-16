@@ -18,6 +18,8 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.HomeAppCategoryState
+import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
 import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -93,6 +95,10 @@ fun HomeScreen(
     val homeAppItems = homeAppState?.visible ?: emptyList()
     val hiddenAppItems = homeAppState?.hidden ?: emptyList()
     val homeAppSortMode = homeAppState?.sortMode ?: HomeAppSortMode.MANUAL
+    val homeAppCategoryState = homeAppState?.categoryState ?: HomeAppCategoryState(emptyList(), emptyMap())
+    val homeAppCategoryViewMode = homeAppState?.categoryViewMode ?: HomeAppCategoryViewMode.ALL_APPS
+    val showCategoryViewSwitcher = homeAppState?.showCategoryViewSwitcher == true
+    val homeAppSourceGroups = homeAppState?.sourceGroups ?: emptyList()
     val bundlePipelineLoading = homeAppState == null
     val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
@@ -220,7 +226,11 @@ fun HomeScreen(
                     hidden = hiddenAppItems,
                     installedAppsLoading = bundlePipelineLoading || homeViewModel.installedAppsLoading,
                     showGestureHint = showGestureHint,
-                    sortMode = homeAppSortMode
+                    sortMode = homeAppSortMode,
+                    categoryState = homeAppCategoryState,
+                    categoryViewMode = homeAppCategoryViewMode,
+                    showCategoryViewSwitcher = showCategoryViewSwitcher,
+                    sourceGroups = homeAppSourceGroups
                 ),
                 appActions = HomeAppActions(
                     onAppClick = { item ->
@@ -249,8 +259,33 @@ fun HomeScreen(
                         }
                     },
                     onSaveOrder = { packageNames -> homeViewModel.saveAppOrder(packageNames) },
+                    onSaveSourceOrder = { sourceUid, packageNames ->
+                        homeViewModel.saveAppSourceOrder(sourceUid, packageNames)
+                    },
                     onResetOrder = { homeViewModel.resetAppOrder() },
-                    onSortModeChange = { mode -> homeViewModel.setAppSortMode(mode) }
+                    onResetSourceOrder = { sourceUid -> homeViewModel.resetAppSourceOrder(sourceUid) },
+                    onSaveSourceGroupOrder = { sourceUids ->
+                        homeViewModel.saveAppSourceGroupOrder(sourceUids)
+                    },
+                    onSortModeChange = { mode -> homeViewModel.setAppSortMode(mode) },
+                    onCategoryViewModeChange = { mode -> homeViewModel.setAppCategoryViewMode(mode) },
+                    onCreateCategory = { name -> homeViewModel.createAppCategory(name) },
+                    onRenameCategory = { categoryId, name ->
+                        homeViewModel.renameAppCategory(categoryId, name)
+                    },
+                    onDeleteCategory = { categoryId -> homeViewModel.deleteAppCategory(categoryId) },
+                    onSaveCategoryOrder = { categoryIds ->
+                        homeViewModel.saveAppCategoryOrder(categoryIds)
+                    },
+                    onToggleCategoryCollapsed = { categoryId ->
+                        homeViewModel.toggleAppCategoryCollapsed(categoryId)
+                    },
+                    onToggleSourceGroupCollapsed = { sourceUid ->
+                        homeViewModel.toggleAppSourceGroupCollapsed(sourceUid)
+                    },
+                    onAssignAppsToCategory = { packageNames, categoryId ->
+                        homeViewModel.assignAppsToCategory(packageNames, categoryId)
+                    }
                 ),
                 chromeActions = HomeChromeActions(
                     onOtherAppsClick = {

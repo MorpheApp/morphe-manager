@@ -57,9 +57,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.APIPatchBundle
 import app.morphe.manager.domain.bundles.JsonPatchBundle
 import app.morphe.manager.domain.bundles.PatchBundleSource
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvatarUrl
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.gitlabAvatarUrl
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.manager.PreferencesManager
@@ -1158,9 +1156,7 @@ fun BundleIcon(
     enabled: Boolean = true,
     metadataFetchError: Throwable? = null
 ) {
-    val bundleAvatarUrl = bundle.bundleAvatarUrl
-    val githubAvatarUrl = bundle.githubAvatarUrl
-    val gitlabAvatarUrl = bundle.gitlabAvatarUrl
+    val avatarUrls = bundle.avatarUrls
     val hasMetadataError = metadataFetchError != null
     val hasBundleError = bundle.state is PatchBundleSource.State.Failed
     val isMissing = bundle.state is PatchBundleSource.State.Missing
@@ -1221,14 +1217,10 @@ fun BundleIcon(
                 )
             }
 
-            bundleAvatarUrl != null || githubAvatarUrl != null || gitlabAvatarUrl != null -> {
+            avatarUrls.primary != null -> {
                 RemoteAvatar(
-                    url = bundleAvatarUrl ?: githubAvatarUrl ?: gitlabAvatarUrl!!,
-                    fallbackUrl = when {
-                        bundleAvatarUrl != null -> githubAvatarUrl ?: gitlabAvatarUrl
-                        githubAvatarUrl != null -> gitlabAvatarUrl
-                        else -> null
-                    },
+                    url = avatarUrls.primary,
+                    fallbackUrl = avatarUrls.fallback,
                     modifier = Modifier.fillMaxSize()
                 )
             }

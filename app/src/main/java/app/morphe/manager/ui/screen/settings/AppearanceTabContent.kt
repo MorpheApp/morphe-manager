@@ -27,10 +27,11 @@ import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.ui.screen.settings.appearance.*
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.LanguageRepository.getLanguageDisplayName
@@ -39,6 +40,7 @@ import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.saveLanguageToPrefs
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 import kotlin.math.roundToInt
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -52,6 +54,7 @@ fun AppearanceTabContent(
     dynamicColor: Boolean,
     customAccentColorHex: String?,
     themeViewModel: ThemeSettingsViewModel,
+    homeAppButtonPrefs: HomeAppButtonPreferences = koinInject(),
     scrollState: ScrollState = rememberScrollState(),
     onThemeSelectorPositioned: ((Rect) -> Unit)? = null,
     onThemeSelectorScrollTarget: ((Int) -> Unit)? = null
@@ -61,6 +64,7 @@ fun AppearanceTabContent(
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
+    val showAppGroupingSwitcher by homeAppButtonPrefs.showCategoryViewSwitcher.collectAsStateWithLifecycle()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
     val randomInterval by themeViewModel.prefs.randomBackgroundInterval.getAsState()
@@ -79,7 +83,7 @@ fun AppearanceTabContent(
             .verticalScroll(scrollState)
             .padding(horizontal = contentPadding, vertical = MorpheDefaults.ContentPadding)
     ) {
-        // Language Section
+        // Language section
         Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             LanguageSection(
                 appLanguage = appLanguage,
@@ -87,7 +91,7 @@ fun AppearanceTabContent(
             )
         }
 
-        // Home Screen Section
+        // Home screen section
         Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             SectionTitle(
                 text = stringResource(R.string.settings_appearance_home_screen),
@@ -115,9 +119,27 @@ fun AppearanceTabContent(
                     )
                 }
             )
+            MorpheSettingsDivider()
+            SettingsItem(
+                onClick = { homeAppButtonPrefs.setShowCategoryViewSwitcher(!showAppGroupingSwitcher) },
+                title = stringResource(R.string.settings_appearance_app_grouping),
+                subtitle = stringResource(R.string.settings_appearance_app_grouping_description),
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.ViewAgenda)
+                },
+                trailingContent = {
+                    MorpheSwitch(
+                        checked = showAppGroupingSwitcher,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (showAppGroupingSwitcher) enabledState else disabledState
+                        }
+                    )
+                }
+            )
         }
 
-        // Theme Mode Section
+        // Theme section
         Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             SectionTitle(
                 text = stringResource(R.string.settings_appearance_theme),
@@ -145,7 +167,7 @@ fun AppearanceTabContent(
             )
         }
 
-        // Pure Black Theme Toggle
+        // Pure black theme toggle
         AnimatedVisibility(
             visible = theme != Theme.LIGHT,
             enter = MorpheAnimations.expandFadeEnter,
@@ -174,7 +196,7 @@ fun AppearanceTabContent(
             }
         }
 
-        // Accent Color Section
+        // Accent color section
         AnimatedVisibility(
             visible = !dynamicColor,
             enter = MorpheAnimations.expandFadeEnter,
@@ -197,7 +219,7 @@ fun AppearanceTabContent(
             }
         }
 
-        // Background Type Section
+        // Background type section
         Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             SectionTitle(
                 text = stringResource(R.string.settings_appearance_background),
@@ -218,7 +240,7 @@ fun AppearanceTabContent(
             )
         }
 
-        // Parallax Effect Toggle
+        // Parallax effect toggle
         AnimatedVisibility(
             visible = backgroundType != BackgroundType.NONE,
             enter = MorpheAnimations.expandFadeEnter,
@@ -247,7 +269,7 @@ fun AppearanceTabContent(
             }
         }
 
-        // App Icon Section
+        // App icon section
         Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
             SectionTitle(
                 text = stringResource(R.string.settings_appearance_app_icon_selector_title),
@@ -258,7 +280,7 @@ fun AppearanceTabContent(
         AppIconSelector()
     }
 
-    // Translation Info Dialog
+    // Translation info dialog
     AnimatedVisibility(
         visible = showTranslationInfoDialog.value,
         enter = MorpheAnimations.fadeIn,
@@ -281,7 +303,7 @@ fun AppearanceTabContent(
         )
     }
 
-    // Language Picker Dialog
+    // Language picker dialog
     AnimatedVisibility(
         visible = showLanguageDialog.value,
         enter = MorpheAnimations.fadeIn,
@@ -299,6 +321,7 @@ fun AppearanceTabContent(
         )
     }
 }
+
 
 /**
  * Language selection section.
