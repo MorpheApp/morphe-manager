@@ -104,6 +104,9 @@ class HomeAppButtonPreferences(context: Context) {
     private val _customOrder = MutableStateFlow(loadCustomOrder())
     val customOrder: StateFlow<List<String>> = _customOrder.asStateFlow()
 
+    private val _sourceOrders = MutableStateFlow(loadSourceOrders())
+    val sourceOrders: StateFlow<Map<Int, List<String>>> = _sourceOrders.asStateFlow()
+
     private val _sortMode = MutableStateFlow(loadSortMode())
     val sortMode: StateFlow<HomeAppSortMode> = _sortMode.asStateFlow()
 
@@ -126,6 +129,20 @@ class HomeAppButtonPreferences(context: Context) {
     private fun loadCustomOrder(): List<String> {
         val raw = prefs.getString(KEY_CUSTOM_ORDER, null) ?: return emptyList()
         return raw.split("\n").filter { it.isNotEmpty() }
+    }
+
+    private fun loadSourceOrders(): Map<Int, List<String>> {
+        val raw = prefs.getString(KEY_SOURCE_ORDERS, null) ?: return emptyMap()
+        return raw.lineSequence()
+            .mapNotNull { line ->
+                val parts = line.split(CATEGORY_SEPARATOR)
+                val uid = parts.getOrNull(0)?.toIntOrNull() ?: return@mapNotNull null
+                val packageNames = parts.drop(1)
+                    .filter { it.isNotBlank() }
+                    .distinct()
+                if (packageNames.isEmpty()) null else uid to packageNames
+            }
+            .toMap()
     }
 
     private fun loadSortMode(): HomeAppSortMode {
@@ -166,6 +183,23 @@ class HomeAppButtonPreferences(context: Context) {
         }
         _customOrder.value = emptyList()
         _sortMode.value = HomeAppSortMode.MANUAL
+    }
+
+    fun saveSourceOrder(sourceUid: Int, packageNames: List<String>) {
+        val current = _sourceOrders.value.toMutableMap()
+        val cleanPackageNames = packageNames.filter { it.isNotBlank() }.distinct()
+        if (cleanPackageNames.isEmpty()) {
+            current.remove(sourceUid)
+        } else {
+            current[sourceUid] = cleanPackageNames
+        }
+        saveSourceOrders(current, forceManualSort = true)
+    }
+
+    fun resetSourceOrder(sourceUid: Int) {
+        val current = _sourceOrders.value.toMutableMap()
+        current.remove(sourceUid)
+        saveSourceOrders(current, forceManualSort = true)
     }
 
     fun setSortMode(mode: HomeAppSortMode) {
@@ -429,6 +463,28 @@ class HomeAppButtonPreferences(context: Context) {
         _expandedSourceGroups.value = cleanSourceUids
     }
 
+    private fun saveSourceOrders(sourceOrders: Map<Int, List<String>>, forceManualSort: Boolean) {
+        val cleanSourceOrders = sourceOrders
+            .mapValues { (_, packageNames) -> packageNames.filter { it.isNotBlank() }.distinct() }
+            .filterValues { it.isNotEmpty() }
+        prefs.edit {
+            if (cleanSourceOrders.isEmpty()) {
+                remove(KEY_SOURCE_ORDERS)
+            } else {
+                putString(
+                    KEY_SOURCE_ORDERS,
+                    cleanSourceOrders.entries.joinToString("\n") { (uid, packageNames) ->
+                        (listOf(uid.toString()) + packageNames.map { it.sanitizePersistedField() })
+                            .joinToString(CATEGORY_SEPARATOR)
+                    }
+                )
+            }
+            if (forceManualSort) putString(KEY_SORT_MODE, HomeAppSortMode.MANUAL.name)
+        }
+        _sourceOrders.value = cleanSourceOrders
+        if (forceManualSort) _sortMode.value = HomeAppSortMode.MANUAL
+    }
+
     private fun normalizeCategoryName(name: String): String? =
         name.trim().replace(Regex("\\s+"), " ").takeIf { it.isNotEmpty() }
 
@@ -441,6 +497,7 @@ class HomeAppButtonPreferences(context: Context) {
         private const val PREFS_NAME = "home_app_buttons"
         private const val KEY_HIDDEN = "hidden_packages"
         private const val KEY_CUSTOM_ORDER = "custom_order"
+        private const val KEY_SOURCE_ORDERS = "source_orders"
         private const val KEY_SORT_MODE = "sort_mode"
         private const val KEY_CATEGORIES = "categories"
         private const val KEY_CATEGORY_ASSIGNMENTS = "category_assignments"

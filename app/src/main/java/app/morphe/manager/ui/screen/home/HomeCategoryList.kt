@@ -102,10 +102,9 @@ internal fun buildHomeCategoryGroups(
 }
 
 /**
- * Bucket [items] into their owning source groups plus an uncategorized tail for anything
- * a source did not claim. Sources are consumed in the order given, so if the same package
- * is declared by multiple sources it lands in the first one only. [ignoreCollapsed]
- * behaves as in [buildHomeCategoryGroups].
+ * Bucket [items] into their owning source groups plus an uncategorized tail for apps
+ * no source claimed. If the same package is declared by multiple sources, it appears in
+ * each matching source group. [ignoreCollapsed] behaves as in [buildHomeCategoryGroups].
  */
 internal fun buildHomeSourceGroups(
     items: List<HomeAppItem>,
@@ -114,14 +113,15 @@ internal fun buildHomeSourceGroups(
     uncategorizedCollapsed: Boolean,
     ignoreCollapsed: Boolean
 ): List<HomeCategoryGroup> {
-    val usedPackages = mutableSetOf<String>()
+    val claimedPackages = mutableSetOf<String>()
 
     val groups = sourceGroups.mapNotNull { sourceGroup ->
         val sourceItems = items
-            .filter { item ->
-                item.packageName in sourceGroup.packageNames &&
-                        usedPackages.add(item.packageName)
+            .filter { item -> item.packageName in sourceGroup.packageNames }
+            .onEach { item ->
+                claimedPackages.add(item.packageName)
             }
+            .orderedByPackageOrder(sourceGroup.packageOrder)
 
         if (sourceItems.isEmpty()) {
             null
@@ -141,7 +141,7 @@ internal fun buildHomeSourceGroups(
         }
     }
 
-    val uncategorizedItems = items.filter { item -> item.packageName !in usedPackages }
+    val uncategorizedItems = items.filter { item -> item.packageName !in claimedPackages }
     val uncategorizedGroup = uncategorizedItems.takeIf { it.isNotEmpty() }?.let {
         HomeCategoryGroup(
             id = null,
@@ -154,6 +154,17 @@ internal fun buildHomeSourceGroups(
     }
 
     return groups + listOfNotNull(uncategorizedGroup)
+}
+
+private fun List<HomeAppItem>.orderedByPackageOrder(packageOrder: List<String>): List<HomeAppItem> {
+    if (packageOrder.isEmpty()) return this
+
+    val packageOrderIndex = packageOrder.mapIndexed { index, packageName -> packageName to index }.toMap()
+    val fallbackIndex = mapIndexed { index, item -> item.packageName to index }.toMap()
+    return sortedWith(
+        compareBy<HomeAppItem> { item -> packageOrderIndex[item.packageName] ?: Int.MAX_VALUE }
+            .thenBy { item -> fallbackIndex[item.packageName] ?: Int.MAX_VALUE }
+    )
 }
 
 /**

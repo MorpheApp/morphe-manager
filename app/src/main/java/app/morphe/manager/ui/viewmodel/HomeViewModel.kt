@@ -166,9 +166,8 @@ data class HomeAppState(
 )
 
 /**
- * Apps grouped by the enabled patch source that declares them. Package assignments are
- * deduplicated across sources upstream, so each [packageNames] set is disjoint from other
- * groups' sets.
+ * Apps grouped by the enabled patch source that declares them. A package can appear in
+ * multiple source groups when multiple sources declare compatible patches for it.
  *
  * The default (Morphe) source is treated specially: it can never be collapsed by the user
  * ([collapsible] is false and [isDefault] is true), so its group always stays open.
@@ -177,6 +176,7 @@ data class HomeAppSourceGroup(
     val uid: Int,
     val name: String,
     val packageNames: Set<String>,
+    val packageOrder: List<String>,
     val collapsed: Boolean,
     val avatarUrl: String?,
     val fallbackAvatarUrl: String?
@@ -188,6 +188,7 @@ data class HomeAppSourceGroup(
 private data class HomePrefs(
     val hiddenPackages: Set<String>,
     val customOrder: List<String>,
+    val sourceOrders: Map<Int, List<String>>,
     val sortMode: HomeAppSortMode,
     val categoryState: HomeAppCategoryState,
     val categoryViewMode: HomeAppCategoryViewMode,
@@ -1172,12 +1173,14 @@ class HomeViewModel(
     private val _homePrefsFlow = combine(
         homeAppButtonPrefs.hiddenPackages,
         homeAppButtonPrefs.customOrder,
+        homeAppButtonPrefs.sourceOrders,
         homeAppButtonPrefs.sortMode,
         _homeCategoryPrefsFlow,
-    ) { hidden, order, sortMode, categoryPrefs ->
+    ) { hidden, order, sourceOrders, sortMode, categoryPrefs ->
         HomePrefs(
             hiddenPackages = hidden,
             customOrder = order,
+            sourceOrders = sourceOrders,
             sortMode = sortMode,
             categoryState = categoryPrefs.categoryState,
             categoryViewMode = categoryPrefs.categoryViewMode,
@@ -1224,6 +1227,8 @@ class HomeViewModel(
         val sourceGroups = buildHomeAppSourceGroups(
             enabledInfo = enabledInfo,
             sources = ready.sources,
+            sortMode = homePrefs.sortMode,
+            sourceOrders = homePrefs.sourceOrders,
             expandedSourceGroups = homePrefs.expandedSourceGroups
         )
 
@@ -1312,10 +1317,10 @@ class HomeViewModel(
     private fun buildHomeAppSourceGroups(
         enabledInfo: Map<Int, PatchBundleInfo.Global>,
         sources: Map<Int, PatchBundleSource>,
+        sortMode: HomeAppSortMode,
+        sourceOrders: Map<Int, List<String>>,
         expandedSourceGroups: Set<Int>
     ): List<HomeAppSourceGroup> {
-        val assignedPackages = linkedSetOf<String>()
-
         // enabledInfo is already filtered to enabled entries by the caller
         // Keep source sections in source order. Home sorting should reorder app cards
         // inside each source section, not move source headers around.
@@ -1333,12 +1338,18 @@ class HomeViewModel(
                     .flatMap { patch -> patch.compatiblePackages.orEmpty().asSequence() }
                     .mapNotNull { compatiblePackage -> compatiblePackage.packageName }
                     .distinct()
-                    .filter { packageName -> assignedPackages.add(packageName) }
                     .toSet()
 
                 if (packageNames.isEmpty()) {
                     null
                 } else {
+                    val packageOrder = if (sortMode == HomeAppSortMode.MANUAL) {
+                        sourceOrders[info.uid]
+                            .orEmpty()
+                            .filter { packageName -> packageName in packageNames }
+                    } else {
+                        emptyList()
+                    }
                     val source = sources[info.uid]
                     val avatarUrls = source?.avatarUrls
                     val sourceName = source?.displayTitle
@@ -1349,6 +1360,7 @@ class HomeViewModel(
                         uid = info.uid,
                         name = sourceName,
                         packageNames = packageNames,
+                        packageOrder = packageOrder,
                         collapsed = info.uid != DEFAULT_SOURCE_UID && info.uid !in expandedSourceGroups,
                         avatarUrl = avatarUrls?.primary,
                         fallbackAvatarUrl = avatarUrls?.fallback
@@ -1473,8 +1485,16 @@ class HomeViewModel(
         homeAppButtonPrefs.saveOrder(packageNames)
     }
 
+    fun saveAppSourceOrder(sourceUid: Int, packageNames: List<String>) {
+        homeAppButtonPrefs.saveSourceOrder(sourceUid, packageNames)
+    }
+
     fun resetAppOrder() {
         homeAppButtonPrefs.resetOrder()
+    }
+
+    fun resetAppSourceOrder(sourceUid: Int) {
+        homeAppButtonPrefs.resetSourceOrder(sourceUid)
     }
 
     fun setAppSortMode(sortMode: HomeAppSortMode) {

@@ -259,7 +259,11 @@ fun HomeScreen(
                         }
                     },
                     onSaveOrder = { packageNames -> homeViewModel.saveAppOrder(packageNames) },
+                    onSaveSourceOrder = { sourceUid, packageNames ->
+                        homeViewModel.saveAppSourceOrder(sourceUid, packageNames)
+                    },
                     onResetOrder = { homeViewModel.resetAppOrder() },
+                    onResetSourceOrder = { sourceUid -> homeViewModel.resetAppSourceOrder(sourceUid) },
                     onSortModeChange = { mode -> homeViewModel.setAppSortMode(mode) },
                     onCategoryViewModeChange = { mode -> homeViewModel.setAppCategoryViewMode(mode) },
                     onCreateCategory = { name -> homeViewModel.createAppCategory(name) },

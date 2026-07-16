@@ -92,6 +92,9 @@ private data class CategoryNameRequest(
     val category: HomeAppCategory?
 )
 
+private fun HomeCategoryGroup.selectionKey(): String =
+    sourceUid?.let { "source_$it" } ?: id?.let { "category_$it" } ?: "uncategorized"
+
 /** Visible and hidden app lists with their loading state. */
 @Immutable
 data class HomeAppListUi(
@@ -116,7 +119,9 @@ class HomeAppActions(
     val onShowPatches: (HomeAppItem) -> Unit,
     val onGestureHintShown: () -> Unit,
     val onSaveOrder: (List<String>) -> Unit,
+    val onSaveSourceOrder: (Int, List<String>) -> Unit,
     val onResetOrder: () -> Unit,
+    val onResetSourceOrder: (Int) -> Unit,
     val onSortModeChange: (HomeAppSortMode) -> Unit,
     val onCategoryViewModeChange: (HomeAppCategoryViewMode) -> Unit,
     val onCreateCategory: (String) -> String,
@@ -585,6 +590,9 @@ fun MainAppsSection(
     val isReorderMode = remember { mutableStateOf(false) }
     var localOrder by remember { mutableStateOf(homeAppItems.map { it.packageName }) }
     var reorderScopePackages by remember { mutableStateOf<Set<String>?>(null) }
+    var reorderScopeSourceUid by remember { mutableStateOf<Int?>(null) }
+    var scopedSourceOrder by remember { mutableStateOf<List<String>?>(null) }
+    var selectedGroupKey by remember { mutableStateOf<String?>(null) }
     // Snapshot on drag start when the dragged card is part of a multi-selection. Only
     // the dragged card moves during the drag; onDragStopped teleports these followers next
     // to it so the group lands consolidated at the drop position.
@@ -607,6 +615,7 @@ fun MainAppsSection(
     BackHandler(enabled = isMultiSelectMode.value) {
         isMultiSelectMode.value = false
         selectedPackages.clear()
+        selectedGroupKey = null
     }
 
     // Back gesture/button exits reorder mode without saving
@@ -614,6 +623,9 @@ fun MainAppsSection(
         isReorderMode.value = false
         selectedPackages.clear()
         reorderScopePackages = null
+        reorderScopeSourceUid = null
+        scopedSourceOrder = null
+        selectedGroupKey = null
         reorderGroupFollowers = null
         localOrder = homeAppItems.map { it.packageName }
     }
@@ -642,12 +654,16 @@ fun MainAppsSection(
     LaunchedEffect(homeAppItems) {
         val currentPackages = homeAppItems.mapTo(mutableSetOf()) { it.packageName }
         selectedPackages.retain { it in currentPackages }
-        if (selectedPackages.isEmpty) isMultiSelectMode.value = false
+        if (selectedPackages.isEmpty) {
+            isMultiSelectMode.value = false
+            selectedGroupKey = null
+        }
 
         if (!isReorderMode.value) {
             localOrder = homeAppItems.map { it.packageName }
         } else {
             val pkgSet = homeAppItems.map { it.packageName }.toSet()
+            scopedSourceOrder = scopedSourceOrder?.filter { it in pkgSet }
             val kept = localOrder.filter { it in pkgSet }
             val keptSet = kept.toSet()
             val added = pkgSet.filter { it !in keptSet }
@@ -833,21 +849,32 @@ fun MainAppsSection(
     // Cheap key - the block only reads firstSelectedPackage, so passing the full keys
     // list would allocate on every recomp
     val firstSelectedPackage = selectedPackages.keys.firstOrNull()
-    val groupedSelectionPackages = remember(
+    val groupedSelectionGroup = remember(
         appGrouping,
         firstSelectedPackage,
+        selectedGroupKey,
         groupedReorderGroups
     ) {
         if (appGrouping == HomeAppCategoryViewMode.ALL_APPS || firstSelectedPackage == null) {
             null
         } else {
-            groupedReorderGroups
+            selectedGroupKey
+                ?.let { key ->
+                    groupedReorderGroups.firstOrNull { group ->
+                        group.selectionKey() == key &&
+                                group.items.any { item -> item.packageName == firstSelectedPackage }
+                    }
+                }
+                ?: groupedReorderGroups
                 .firstOrNull { group ->
                     group.items.any { item -> item.packageName == firstSelectedPackage }
                 }
-                ?.items
-                ?.mapTo(linkedSetOf()) { it.packageName }
         }
+    }
+    val groupedSelectionPackages = remember(groupedSelectionGroup) {
+        groupedSelectionGroup
+            ?.items
+            ?.mapTo(linkedSetOf()) { it.packageName }
     }
 
     val listState = rememberLazyListState()
@@ -891,8 +918,17 @@ fun MainAppsSection(
         }
     }
 
+    fun moveReorderOrder(fromIndex: Int, toIndex: Int) {
+        val sourceOrder = scopedSourceOrder
+        if (sourceOrder != null) {
+            scopedSourceOrder = movePackagesInOrder(sourceOrder, fromIndex, toIndex)
+        } else {
+            localOrder = moveAppOrder(fromIndex, toIndex)
+        }
+    }
+
     val reorderableState = rememberReorderableLazyListState(listState) { from, to ->
-        localOrder = moveAppOrder(from.index, to.index)
+        moveReorderOrder(from.index, to.index)
     }
     fun categoryIdAtListIndex(index: Int): String? {
         var currentIndex = 0
@@ -920,12 +956,16 @@ fun MainAppsSection(
         orderedIds.add(toPosition.coerceIn(0, orderedIds.size), moved)
         appActions.onSaveCategoryOrder(orderedIds)
     }
-    val orderedItems = remember(localOrder, homeAppItems) {
-        val byPackage = homeAppItems.associateBy { it.packageName }
-        localOrder.mapNotNull { byPackage[it] }
+    val homeItemsByPackage = remember(homeAppItems) {
+        homeAppItems.associateBy { it.packageName }
     }
-    val reorderItems = remember(orderedItems, reorderScopePackages) {
-        reorderScopePackages?.let { scopePackages ->
+    val orderedItems = remember(localOrder, homeItemsByPackage) {
+        localOrder.mapNotNull { homeItemsByPackage[it] }
+    }
+    val reorderItems = remember(orderedItems, reorderScopePackages, scopedSourceOrder, homeItemsByPackage) {
+        scopedSourceOrder?.let { sourceOrder ->
+            sourceOrder.mapNotNull { homeItemsByPackage[it] }
+        } ?: reorderScopePackages?.let { scopePackages ->
             orderedItems.filter { it.packageName in scopePackages }
         } ?: orderedItems
     }
@@ -1119,20 +1159,27 @@ fun MainAppsSection(
                                                         val currentPkg = item.packageName
                                                         val selected = selectedPackages.keys
                                                         reorderGroupFollowers = if (selected.size > 1 && currentPkg in selected) {
-                                                            localOrder.filter { it in selected && it != currentPkg }
+                                                            (scopedSourceOrder ?: localOrder)
+                                                                .filter { it in selected && it != currentPkg }
                                                         } else null
                                                     },
                                                     onDragStopped = {
                                                         val followers = reorderGroupFollowers
                                                         reorderGroupFollowers = null
                                                         if (followers.isNullOrEmpty()) return@draggableHandle
-                                                        val withoutFollowers = localOrder.filter { it !in followers }
+                                                        val currentOrder = scopedSourceOrder ?: localOrder
+                                                        val withoutFollowers = currentOrder.filter { it !in followers }
                                                         val dropIdx = withoutFollowers.indexOf(item.packageName)
                                                         if (dropIdx < 0) return@draggableHandle
-                                                        localOrder = buildList {
+                                                        val nextOrder = buildList {
                                                             addAll(withoutFollowers.take(dropIdx + 1))
                                                             addAll(followers)
                                                             addAll(withoutFollowers.drop(dropIdx + 1))
+                                                        }
+                                                        if (scopedSourceOrder != null) {
+                                                            scopedSourceOrder = nextOrder
+                                                        } else {
+                                                            localOrder = nextOrder
                                                         }
                                                     }
                                                 ),
@@ -1201,14 +1248,21 @@ fun MainAppsSection(
                                                 items = group.items,
                                                 key = { item -> "category_${group.id ?: "uncategorized"}_${item.packageName}" }
                                             ) { item ->
-                                                val isSelected = selectedPackages.contains(item.packageName)
+                                                val groupKey = group.selectionKey()
+                                                val isSelected = selectedPackages.contains(item.packageName) &&
+                                                        (selectedGroupKey == null || selectedGroupKey == groupKey)
                                                 DynamicAppCard(
                                                     item = item,
                                                     isLoading = stableLoadingState.value,
                                                     hasUpdate = item.hasUpdate,
                                                     onAppClick = {
                                                         if (isMultiSelectMode.value) {
+                                                            if (selectedGroupKey != null && selectedGroupKey != groupKey) {
+                                                                selectedPackages.clear()
+                                                            }
+                                                            selectedGroupKey = groupKey
                                                             selectedPackages.toggle(item.packageName)
+                                                            if (selectedPackages.isEmpty) selectedGroupKey = null
                                                         } else {
                                                             appActions.onAppClick(item)
                                                         }
@@ -1223,8 +1277,10 @@ fun MainAppsSection(
                                                     onLongPress = {
                                                         // Skip so the category bar doesn't overlap with app multi-select
                                                         if (!isCategoryBarVisible) {
+                                                            selectedGroupKey = groupKey
                                                             isMultiSelectMode.value = true
                                                             selectedPackages.toggle(item.packageName)
+                                                            if (selectedPackages.isEmpty) selectedGroupKey = null
                                                         }
                                                     },
                                                     modifier = Modifier.animateItem()
@@ -1387,10 +1443,19 @@ fun MainAppsSection(
                     // Multi-select / reorder bar - slides up from bottom
                     val activeAppScopePackages = reorderScopePackages ?: groupedSelectionPackages
                     // Memoized - otherwise selection toggles refilter homeAppItems each pass
-                    val activeAppScopeItems = remember(activeAppScopePackages, homeAppItems) {
-                        activeAppScopePackages?.let { scopePackages ->
-                            homeAppItems.filter { it.packageName in scopePackages }
-                        } ?: homeAppItems
+                    val activeAppScopeItems = remember(
+                        activeAppScopePackages,
+                        groupedSelectionGroup,
+                        homeAppItems,
+                        reorderItems,
+                        isReorderMode.value
+                    ) {
+                        when {
+                            isReorderMode.value -> reorderItems
+                            groupedSelectionGroup != null -> groupedSelectionGroup.items
+                            activeAppScopePackages != null -> homeAppItems.filter { it.packageName in activeAppScopePackages }
+                            else -> homeAppItems
+                        }
                     }
                     MultiSelectBar(
                         selectedCount = selectedPackages.size,
@@ -1400,11 +1465,15 @@ fun MainAppsSection(
                         onSelectAll = {
                             selectedPackages.setAll(activeAppScopeItems.map { it.packageName })
                         },
-                        onDeselectAll = { selectedPackages.clear() },
+                        onDeselectAll = {
+                            selectedPackages.clear()
+                            selectedGroupKey = null
+                        },
                         onAction = {
                             appActions.onHideMultiple(selectedPackages.keys.toSet())
                             isMultiSelectMode.value = false
                             selectedPackages.clear()
+                            selectedGroupKey = null
                         },
                         actionIcon = Icons.Outlined.VisibilityOff,
                         actionContentDescription = stringResource(R.string.hide),
@@ -1415,21 +1484,34 @@ fun MainAppsSection(
                         onCancel = {
                             isMultiSelectMode.value = false
                             selectedPackages.clear()
+                            selectedGroupKey = null
                         },
                         onEnterReorder = {
-                            groupedSelectionPackages?.let { pkgs ->
+                            val selectionGroup = groupedSelectionGroup
+                            val selectionPackages = selectionGroup
+                                ?.items
+                                ?.mapTo(linkedSetOf()) { it.packageName }
+                            selectionPackages?.let { pkgs ->
                                 selectedPackages.retain { it in pkgs }
                             }
-                            reorderScopePackages = groupedSelectionPackages
+                            reorderScopePackages = selectionPackages
+                            reorderScopeSourceUid = selectionGroup?.sourceUid
+                            val sourceOrder = selectionGroup
+                                ?.takeIf { it.sourceUid != null }
+                                ?.items
+                                ?.map { it.packageName }
+                            scopedSourceOrder = sourceOrder
                             val focusTargets = selectedPackages.keys.toSet()
                             // Grouped pre-scrolls below (before flipping mode) so the
                             // LazyColumn doesn't hold a stale offset when items swap to the
                             // scoped list; flat defers to the LaunchedEffect after flipping
-                            reorderFocusPackages.value = if (groupedSelectionPackages == null) focusTargets else emptySet()
+                            reorderFocusPackages.value = if (selectionPackages == null) focusTargets else emptySet()
                             isMultiSelectMode.value = false
                             searchState.onClose()
-                            groupedSelectionPackages?.let { scopePackages ->
-                                val scopedItems = orderedItems.filter { it.packageName in scopePackages }
+                            selectionPackages?.let { scopePackages ->
+                                val scopedItems = sourceOrder
+                                    ?.mapNotNull { homeItemsByPackage[it] }
+                                    ?: orderedItems.filter { it.packageName in scopePackages }
                                 val focusIndex = scopedItems.indexOfFirst { it.packageName in focusTargets }
                                 scope.launch {
                                     listState.scrollToItem(focusIndex.coerceAtLeast(0))
@@ -1440,25 +1522,44 @@ fun MainAppsSection(
                             }
                         },
                         onSaveOrder = {
-                            appActions.onSaveOrder(localOrder)
+                            val sourceUid = reorderScopeSourceUid
+                            if (sourceUid != null) {
+                                appActions.onSaveSourceOrder(sourceUid, scopedSourceOrder ?: reorderItems.map { it.packageName })
+                            } else {
+                                appActions.onSaveOrder(localOrder)
+                            }
                             isReorderMode.value = false
                             reorderScopePackages = null
+                            reorderScopeSourceUid = null
+                            scopedSourceOrder = null
                             reorderGroupFollowers = null
                             selectedPackages.clear()
+                            selectedGroupKey = null
                         },
                         onResetOrder = {
-                            appActions.onResetOrder()
+                            val sourceUid = reorderScopeSourceUid
+                            if (sourceUid != null) {
+                                appActions.onResetSourceOrder(sourceUid)
+                            } else {
+                                appActions.onResetOrder()
+                            }
                             localOrder = homeAppItems.map { it.packageName }
                             isReorderMode.value = false
                             reorderScopePackages = null
+                            reorderScopeSourceUid = null
+                            scopedSourceOrder = null
                             reorderGroupFollowers = null
                             selectedPackages.clear()
+                            selectedGroupKey = null
                         },
                         onCancelReorder = {
                             isReorderMode.value = false
                             reorderScopePackages = null
+                            reorderScopeSourceUid = null
+                            scopedSourceOrder = null
                             reorderGroupFollowers = null
                             selectedPackages.clear()
+                            selectedGroupKey = null
                             localOrder = homeAppItems.map { it.packageName }
                         },
                         modifier = Modifier
