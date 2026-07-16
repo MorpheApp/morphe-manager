@@ -893,20 +893,15 @@ fun MainAppsSection(
         groupedReorderGroups
     ) {
         if (appGrouping == HomeAppCategoryViewMode.ALL_APPS || firstSelectedPackage == null) {
-            null
-        } else {
-            selectedGroupKey
-                ?.let { key ->
-                    groupedReorderGroups.firstOrNull { group ->
-                        group.selectionKey() == key &&
-                                group.items.any { item -> item.packageName == firstSelectedPackage }
-                    }
-                }
-                ?: groupedReorderGroups
-                .firstOrNull { group ->
-                    group.items.any { item -> item.packageName == firstSelectedPackage }
-                }
+            return@remember null
         }
+        val hasSelected: (HomeCategoryGroup) -> Boolean = { group ->
+            group.items.any { it.packageName == firstSelectedPackage }
+        }
+        val keyMatch = selectedGroupKey?.let { key ->
+            groupedReorderGroups.firstOrNull { it.selectionKey() == key && hasSelected(it) }
+        }
+        keyMatch ?: groupedReorderGroups.firstOrNull(hasSelected)
     }
     val groupedSelectionPackages = remember(groupedSelectionGroup) {
         groupedSelectionGroup
@@ -1562,16 +1557,12 @@ fun MainAppsSection(
                             selectedGroupKey = null
                         },
                         onEnterReorder = {
-                            val selectionGroup = groupedSelectionGroup
-                            val selectionPackages = selectionGroup
-                                ?.items
-                                ?.mapTo(linkedSetOf()) { it.packageName }
-                            selectionPackages?.let { pkgs ->
+                            groupedSelectionPackages?.let { pkgs ->
                                 selectedPackages.retain { it in pkgs }
                             }
-                            reorderScopePackages = selectionPackages
-                            reorderScopeSourceUid = selectionGroup?.sourceUid
-                            val sourceOrder = selectionGroup
+                            reorderScopePackages = groupedSelectionPackages
+                            reorderScopeSourceUid = groupedSelectionGroup?.sourceUid
+                            val sourceOrder = groupedSelectionGroup
                                 ?.takeIf { it.sourceUid != null }
                                 ?.items
                                 ?.map { it.packageName }
@@ -1580,10 +1571,10 @@ fun MainAppsSection(
                             // Grouped pre-scrolls below (before flipping mode) so the
                             // LazyColumn doesn't hold a stale offset when items swap to the
                             // scoped list; flat defers to the LaunchedEffect after flipping
-                            reorderFocusPackages.value = if (selectionPackages == null) focusTargets else emptySet()
+                            reorderFocusPackages.value = if (groupedSelectionPackages == null) focusTargets else emptySet()
                             isMultiSelectMode.value = false
                             searchState.onClose()
-                            selectionPackages?.let { scopePackages ->
+                            groupedSelectionPackages?.let { scopePackages ->
                                 val scopedItems = sourceOrder
                                     ?.mapNotNull { homeItemsByPackage[it] }
                                     ?: orderedItems.filter { it.packageName in scopePackages }
@@ -1669,9 +1660,8 @@ fun MainAppsSection(
                             activeSourceUid = null
                         },
                         onEnterReorder = {
-                            if (activeSourceUid != null) {
-                                localSourceGroupOrder = apps.sourceGroups.map { it.uid }
-                            }
+                            // localSourceGroupOrder is kept in sync by LaunchedEffect(apps.sourceGroups),
+                            // so it already reflects the current source list when reorder begins
                             activeCategoryId = null
                             activeSourceUid = null
                             searchState.onClose()

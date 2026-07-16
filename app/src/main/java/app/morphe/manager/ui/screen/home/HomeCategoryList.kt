@@ -159,12 +159,8 @@ internal fun buildHomeSourceGroups(
 private fun List<HomeAppItem>.orderedByPackageOrder(packageOrder: List<String>): List<HomeAppItem> {
     if (packageOrder.isEmpty()) return this
 
-    val packageOrderIndex = packageOrder.mapIndexed { index, packageName -> packageName to index }.toMap()
-    val fallbackIndex = mapIndexed { index, item -> item.packageName to index }.toMap()
-    return sortedWith(
-        compareBy<HomeAppItem> { item -> packageOrderIndex[item.packageName] ?: Int.MAX_VALUE }
-            .thenBy { item -> fallbackIndex[item.packageName] ?: Int.MAX_VALUE }
-    )
+    val orderIndex = packageOrder.mapIndexed { index, pkg -> pkg to index }.toMap()
+    return sortedBy { orderIndex[it.packageName] ?: Int.MAX_VALUE }
 }
 
 /**

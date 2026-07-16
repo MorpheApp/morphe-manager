@@ -193,13 +193,13 @@ class HomeAppButtonPreferences(context: Context) {
         } else {
             current[sourceUid] = cleanPackageNames
         }
-        saveSourceOrders(current, forceManualSort = true)
+        saveSourceOrders(current)
     }
 
     fun resetSourceOrder(sourceUid: Int) {
         val current = _sourceOrders.value.toMutableMap()
         current.remove(sourceUid)
-        saveSourceOrders(current, forceManualSort = true)
+        saveSourceOrders(current)
     }
 
     fun setSortMode(mode: HomeAppSortMode) {
@@ -463,7 +463,7 @@ class HomeAppButtonPreferences(context: Context) {
         _expandedSourceGroups.value = cleanSourceUids
     }
 
-    private fun saveSourceOrders(sourceOrders: Map<Int, List<String>>, forceManualSort: Boolean) {
+    private fun saveSourceOrders(sourceOrders: Map<Int, List<String>>) {
         val cleanSourceOrders = sourceOrders
             .mapValues { (_, packageNames) -> packageNames.filter { it.isNotBlank() }.distinct() }
             .filterValues { it.isNotEmpty() }
@@ -479,10 +479,10 @@ class HomeAppButtonPreferences(context: Context) {
                     }
                 )
             }
-            if (forceManualSort) putString(KEY_SORT_MODE, HomeAppSortMode.MANUAL.name)
+            putString(KEY_SORT_MODE, HomeAppSortMode.MANUAL.name)
         }
         _sourceOrders.value = cleanSourceOrders
-        if (forceManualSort) _sortMode.value = HomeAppSortMode.MANUAL
+        _sortMode.value = HomeAppSortMode.MANUAL
     }
 
     private fun normalizeCategoryName(name: String): String? =
