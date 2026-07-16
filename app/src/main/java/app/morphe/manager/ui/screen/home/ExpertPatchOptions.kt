@@ -177,7 +177,7 @@ internal fun PatchOptionsDialog(
                     color = LocalDialogSecondaryTextColor.current
                 )
                 HorizontalDivider(
-                    modifier = Modifier.padding(vertical = 12.dp),
+                    modifier = Modifier.padding(vertical = MorpheDefaults.ItemSpacing),
                     color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
                     thickness = 0.5.dp
                 )
@@ -198,10 +198,10 @@ internal fun PatchOptionsDialog(
                     // Consecutive boolean toggles get a small spacer instead of a divider.
                     // Dividers between toggles look redundant since each toggle is already a distinct row
                     if (bothBooleans) {
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(MorpheDefaults.ContentPaddingSmall))
                     } else {
                         HorizontalDivider(
-                            modifier = Modifier.padding(vertical = 12.dp),
+                            modifier = Modifier.padding(vertical = MorpheDefaults.ItemSpacing),
                             color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
                             thickness = 0.5.dp
                         )
@@ -359,7 +359,7 @@ private fun ColorOptionWithPresets(
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
     ) {
         // Title and description
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -514,7 +514,7 @@ fun ColorPresetItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (isCustom || isMaterialYou || parsedColor != null) {
@@ -576,7 +576,7 @@ private fun PathInputOption(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
     ) {
         // Folder picker button (needs permissions for icon/header creation)
         val folderPicker = rememberFolderPickerWithPermission { uri ->
@@ -680,7 +680,7 @@ private fun FilePathInputOption(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
     ) {
         MorpheDialogTextField(
             value = value,
@@ -739,7 +739,7 @@ private fun PathWithPresetsOption(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
     ) {
         // Folder picker
         val folderPicker = rememberFolderPickerWithPermission { uri ->
@@ -833,7 +833,7 @@ private fun TextInputOption(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
     ) {
         MorpheDialogTextField(
             value = value,
@@ -934,7 +934,7 @@ private fun ListStringInputOption(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp),
+                .padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ItemSpacing),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -959,7 +959,7 @@ private fun ListStringInputOption(
                 }
             }
 
-            Spacer(Modifier.width(12.dp))
+            Spacer(Modifier.width(MorpheDefaults.ItemSpacing))
 
             Row(
                 horizontalArrangement = Arrangement.spacedBy(6.dp),
@@ -1056,7 +1056,7 @@ private fun ListStringEditorDialog(
             // Input row
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 MorpheDialogTextField(
@@ -1100,7 +1100,7 @@ private fun ListStringEditorDialog(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 16.dp),
+                        .padding(vertical = MorpheDefaults.ContentPadding),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -1180,7 +1180,7 @@ private fun DropdownOptionItem(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(

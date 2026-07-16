@@ -116,7 +116,7 @@ fun ExpertModeDialog(
         title = stringResource(R.string.expert_mode_title),
         titleTrailingContent = {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Count badge
@@ -164,7 +164,7 @@ fun ExpertModeDialog(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
         ) {
             // Search bar
             AnimatedVisibility(
@@ -207,7 +207,7 @@ fun ExpertModeDialog(
 
                 // Bundle name header
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     StatusCircleIcon(
@@ -254,7 +254,7 @@ fun ExpertModeDialog(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .verticalScroll(singleBundleScroll),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
                         ) {
                             PatchListWithUniversalSection(
                                 patches = filteredPatches,
@@ -305,7 +305,7 @@ fun ExpertModeDialog(
                             ) {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
-                                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp)
+                                    modifier = Modifier.padding(horizontal = MorpheDefaults.ItemSpacing, vertical = 10.dp)
                                 ) {
                                     Text(
                                         text = bundle.name,
@@ -348,7 +348,7 @@ fun ExpertModeDialog(
                             onResetToDefault = { patchActions.onResetToDefault(currentBundle.uid, currentAllPatches) },
                             onRestoreSaved = { patchActions.onRestoreSaved(currentBundle.uid) },
                             hasSavedSelection = savedPatches[currentBundle.uid]?.isNotEmpty() == true,
-                            modifier = Modifier.padding(vertical = 8.dp)
+                            modifier = Modifier.padding(vertical = MorpheDefaults.ContentPaddingSmall)
                         )
                     } else {
                         // Reserve space so pager height stays stable when a tab has no results
@@ -379,7 +379,7 @@ fun ExpertModeDialog(
                                     modifier = Modifier
                                         .fillMaxSize()
                                         .verticalScroll(pageScroll),
-                                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
                                 ) {
                                     PatchListWithUniversalSection(
                                         patches = patches,
