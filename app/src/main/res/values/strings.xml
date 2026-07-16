@@ -746,7 +746,6 @@ The image dimensions must be as follows:
     <string name="settings_system_performance">Performance</string>
     <string name="settings_system_process_runtime">Process runtime</string>
     <string name="settings_system_process_runtime_description">Runs patching in a separate process for better stability</string>
-    <string name="settings_system_process_runtime_memory_limit">Memory limit</string>
     <string name="settings_system_process_runtime_memory_limit_description">Higher limits speed up patching on capable devices</string>
     <string name="settings_system_process_runtime_enable">Enable process runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memory available for patching</string>

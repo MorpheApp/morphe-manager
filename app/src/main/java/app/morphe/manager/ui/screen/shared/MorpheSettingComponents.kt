@@ -281,7 +281,22 @@ fun ImportExportRow(
     onImport: (() -> Unit)?,
     onExport: (() -> Unit)?
 ) {
-    val hasBoth = onImport != null && onExport != null
+    val actions = buildList {
+        if (onImport != null) add(
+            CardAction(
+                icon = Icons.Outlined.Download,
+                label = stringResource(R.string.import_),
+                onClick = onImport
+            )
+        )
+        if (onExport != null) add(
+            CardAction(
+                icon = Icons.Outlined.Upload,
+                label = stringResource(R.string.export),
+                onClick = onExport
+            )
+        )
+    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -309,30 +324,8 @@ fun ImportExportRow(
                 }
             }
         }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = if (hasBoth) Arrangement.spacedBy(8.dp) else Arrangement.Center
-        ) {
-            if (onImport != null) {
-                ActionPillButton(
-                    onClick = onImport,
-                    icon = Icons.Outlined.Download,
-                    contentDescription = stringResource(R.string.import_),
-                    modifier = if (hasBoth) Modifier.weight(1f) else Modifier.fillMaxWidth(0.5f),
-                    large = true,
-                    label = stringResource(R.string.import_)
-                )
-            }
-            if (onExport != null) {
-                ActionPillButton(
-                    onClick = onExport,
-                    icon = Icons.Outlined.Upload,
-                    contentDescription = stringResource(R.string.export),
-                    modifier = if (hasBoth) Modifier.weight(1f) else Modifier.fillMaxWidth(0.5f),
-                    large = true,
-                    label = stringResource(R.string.export)
-                )
-            }
+        if (actions.isNotEmpty()) {
+            CardActionRow(actions = actions)
         }
     }
 }

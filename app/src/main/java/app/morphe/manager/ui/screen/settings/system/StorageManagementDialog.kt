@@ -229,24 +229,17 @@ private fun CacheActionRow(
             title = title,
             description = description
         )
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            ActionPillButton(
-                onClick = onClear,
-                icon = Icons.Outlined.DeleteSweep,
-                contentDescription = stringResource(R.string.clear),
-                label = stringResource(R.string.clear),
-                enabled = enabled,
-                large = true,
-                modifier = Modifier.fillMaxWidth(0.5f),
-                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                    contentColor = MaterialTheme.colorScheme.onErrorContainer
+        CardActionRow(
+            actions = listOf(
+                CardAction(
+                    icon = Icons.Outlined.DeleteSweep,
+                    label = stringResource(R.string.clear),
+                    onClick = onClear,
+                    enabled = enabled,
+                    destructive = true
                 )
             )
-        }
+        )
     }
 }
 

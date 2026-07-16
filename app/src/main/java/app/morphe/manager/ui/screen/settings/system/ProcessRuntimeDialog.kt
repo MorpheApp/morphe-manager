@@ -11,7 +11,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Memory
-import androidx.compose.material.icons.outlined.Storage
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -78,6 +77,7 @@ fun ProcessRuntimeDialog(
                 },
                 title = stringResource(R.string.settings_system_process_runtime_enable),
                 subtitle = stringResource(R.string.settings_system_process_runtime_description),
+                showBorder = true,
                 trailingContent = {
                     MorpheSwitch(
                         checked = enabled,
@@ -100,26 +100,6 @@ fun ProcessRuntimeDialog(
                     modifier = Modifier.padding(bottom = 16.dp),
                     fullWidth = true
                 )
-
-                // Memory limit header
-                Row(
-                    modifier = Modifier.padding(bottom = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Storage,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(16.dp)
-                    )
-                    Text(
-                        text = stringResource(R.string.settings_system_process_runtime_memory_limit),
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.SemiBold,
-                        color = LocalDialogTextColor.current
-                    )
-                }
 
                 // Current value display
                 Surface(

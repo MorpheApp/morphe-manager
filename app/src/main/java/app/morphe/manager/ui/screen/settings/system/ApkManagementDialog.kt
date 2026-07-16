@@ -31,6 +31,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -561,7 +563,7 @@ private fun ApkManagementDialogContent(
             if (selectedItems.isNotEmpty()) {
                 MultiSelectShell(visible = true) {
                     SelectionActionBar(
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+                        modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ItemSpacing),
                         selectedCount = selectedItems.size,
                         totalCount = items.size,
                         subtitle = stringResource(
@@ -628,6 +630,32 @@ private fun ApkManagementDialogContent(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
             ) {
+                if (retentionToggle != null) {
+                    item(key = "retention") {
+                        val enabledState = stringResource(R.string.enabled)
+                        val disabledState = stringResource(R.string.disabled)
+                        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)) {
+                            SettingsItem(
+                                onClick = { retentionToggle.onCheckedChange(!retentionToggle.checked) },
+                                leadingContent = { MorpheIcon(icon = meta.icon, tint = meta.accentColor) },
+                                title = retentionToggle.title,
+                                subtitle = retentionToggle.description,
+                                showBorder = true,
+                                trailingContent = {
+                                    MorpheSwitch(
+                                        checked = retentionToggle.checked,
+                                        onCheckedChange = retentionToggle.onCheckedChange,
+                                        modifier = Modifier.semantics {
+                                            stateDescription = if (retentionToggle.checked) enabledState else disabledState
+                                        }
+                                    )
+                                }
+                            )
+                            MorpheSettingsDivider(fullWidth = true)
+                        }
+                    }
+                }
+
                 // Summary box
                 item(key = "summary") {
                     InfoBox(
@@ -646,23 +674,6 @@ private fun ApkManagementDialogContent(
                             style = MaterialTheme.typography.bodyMedium,
                             color = LocalDialogSecondaryTextColor.current
                         )
-                    }
-                }
-
-                if (retentionToggle != null) {
-                    item(key = "retention") {
-                        SectionCard {
-                            MorpheDialogToggleRow(
-                                icon = meta.icon,
-                                title = retentionToggle.title,
-                                description = retentionToggle.description,
-                                checked = retentionToggle.checked,
-                                onCheckedChange = retentionToggle.onCheckedChange,
-                                iconTint = meta.accentColor,
-                                showDivider = false,
-                                modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding)
-                            )
-                        }
                     }
                 }
 
@@ -748,6 +759,7 @@ private fun ApkItemCard(
     ) {
         SectionCard {
             Column {
+                // Header with app icon
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -760,7 +772,7 @@ private fun ApkItemCard(
                                 onToggleSelection()
                             }
                         )
-                        .padding(horizontal = MorpheDefaults.ItemSpacing, vertical = MorpheDefaults.ItemSpacing),
+                        .padding(MorpheDefaults.ContentPadding),
                     horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -774,7 +786,7 @@ private fun ApkItemCard(
                     // App info
                     Column(
                         modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(2.dp)
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         Text(
                             text = data.displayName,
@@ -809,7 +821,10 @@ private fun ApkItemCard(
 
                         // Action buttons
                         ActionPillRow(
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+                            modifier = Modifier.padding(
+                                horizontal = MorpheDefaults.ContentPadding,
+                                vertical = MorpheDefaults.ItemSpacing
+                            )
                         ) {
                             if (onShare != null) {
                                 val shareLabel = stringResource(R.string.share)
