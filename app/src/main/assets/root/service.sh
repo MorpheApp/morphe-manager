@@ -16,28 +16,17 @@ fi
 base_dir="$module_dir"
 mkdir -p "$module_dir"
 
-# Redirect all output (stdout + stderr) to the module log file.
 log="$module_dir/log.txt"
-rm -f "$log"
-exec >> "$log" 2>&1
+: > "$log"
+
+log_msg() {
+  echo "$*" >> "$log"
+}
 
 base_path="$base_dir/$package_name.apk"
 
 # Wait for the system to fully boot before proceeding.
 until [ "$(getprop sys.boot_completed)" = 1 ]; do sleep 3; done
-# Wait briefly for external storage to be available. On direct-boot devices this
-# path may stay unavailable until first unlock, so do not keep the root service
-# alive indefinitely.
-waited=0
-max_storage_wait=60
-while [ ! -d "/sdcard/Android" ] && [ "$waited" -lt "$max_storage_wait" ]; do
-  waited=$((waited + 1))
-  sleep 1
-done
-if [ ! -d "/sdcard/Android" ]; then
-  echo "Not mounting as external storage did not become ready"
-  exit 1
-fi
 
 mkdir -p "$base_dir"
 
@@ -58,9 +47,9 @@ resolve_apk_from_path() {
 mount_in_zygote_namespaces() {
   for zpid in $(pidof zygote64) $(pidof zygote); do
     if nsenter -t "$zpid" -m mount -o bind "$base_path" "$stock_path" 2>/dev/null; then
-      echo "Mounted in zygote namespace: $zpid"
+      log_msg "Mounted in zygote namespace: $zpid"
     else
-      echo "Failed to mount in zygote namespace: $zpid"
+      log_msg "Failed to mount in zygote namespace: $zpid"
     fi
   done
 }
@@ -74,7 +63,7 @@ unmount_from_zygote_namespaces() {
 # Unmount any existing installation to prevent multiple mounts.
 grep "$package_name" /proc/mounts | while read -r line; do
   echo "$line" | cut -d " " -f 2 | sed "s/apk.*/apk/" | xargs -r umount -l
-done
+done 2>/dev/null
 
 # Wait up to 180 seconds for PackageManager to report the stock APK path and version.
 # This is necessary because the app may not be registered immediately after boot.
@@ -85,8 +74,8 @@ stock_versions=""
 while [ "$waited" -lt "$max_wait" ]; do
   # Prefer the path under /data/app/ (user-installed); fall back to any base APK path;
   # last resort: use the lower-level `cmd package` if `pm` returns nothing.
-  stock_path_data="$(pm path "$package_name" | grep base | grep /data/app/ | head -n 1 | sed 's/package://g')"
-  stock_path_fallback="$(pm path "$package_name" | grep base | head -n 1 | sed 's/package://g')"
+  stock_path_data="$(pm path "$package_name" 2>/dev/null | grep base | grep /data/app/ | head -n 1 | sed 's/package://g')"
+  stock_path_fallback="$(pm path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
   if [ -z "$stock_path_data" ] && [ -z "$stock_path_fallback" ]; then
     stock_path_cmd="$(cmd package path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
   else
@@ -95,7 +84,7 @@ while [ "$waited" -lt "$max_wait" ]; do
 
   # Extract all versionName entries for this package from dumpsys, stopping before
   # any hidden system package section to avoid picking up OEM preinstall metadata.
-  package_dump="$(dumpsys package "$package_name")"
+  package_dump="$(dumpsys package "$package_name" 2>/dev/null)"
   stock_versions="$(echo "$package_dump" | awk -v pkg="$package_name" '
     $0 ~ ("Package \\[" pkg "\\]") { in_pkg = 1 }
     $0 ~ /Hidden system package/ { in_pkg = 0 }
@@ -127,7 +116,7 @@ while [ "$waited" -lt "$max_wait" ]; do
 
   # If dumpsys returned versions but pm returned no path, retry path resolution once more.
   if [ -n "$stock_versions" ] && [ -z "$stock_path" ]; then
-    stock_path="$(pm path "$package_name" | grep base | head -n 1 | sed 's/package://g')"
+    stock_path="$(pm path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
     if [ -z "$stock_path" ]; then
       stock_path="$(cmd package path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
     fi
@@ -143,31 +132,38 @@ while [ "$waited" -lt "$max_wait" ]; do
   sleep 1
 done
 
-echo "base_path: $base_path"
-echo "stock_path: $stock_path"
-echo "base_version: $version"
-echo "stock_versions: $(echo "$stock_versions" | tr '\n' ' ' | xargs)"
+log_msg "base_path: $base_path"
+log_msg "stock_path: $stock_path"
+log_msg "base_version: $version"
+log_msg "stock_versions: $(echo "$stock_versions" | tr '\n' ' ' | xargs)"
 
 # Abort if the patched APK version doesn't match the installed stock version.
 # Mounting a mismatched APK would cause a signature or version mismatch crash.
 if [ -n "$stock_versions" ] && ! echo "$stock_versions" | grep -Fxq "$version"; then
-  echo "Not mounting as versions don't match"
+  log_msg "Not mounting as versions don't match"
   exit 1
 fi
 
 if [ -z "$stock_path" ] || [ -z "$stock_versions" ]; then
-  echo "Not mounting as app info could not be loaded"
+  log_msg "Not mounting as app info could not be loaded"
   exit 1
 fi
 
 if [ ! -f "$base_path" ]; then
-  echo "Not mounting as patched APK is missing: $base_path"
+  log_msg "Not mounting as patched APK is missing: $base_path"
   exit 1
 fi
 
 # Set the correct SELinux context and bind-mount the patched APK over the stock one.
-chcon u:object_r:apk_data_file:s0 "$base_path"
+if ! chcon u:object_r:apk_data_file:s0 "$base_path" 2>> "$log"; then
+  log_msg "Failed to set SELinux context"
+fi
 unmount_from_zygote_namespaces
 umount -l "$stock_path" 2>/dev/null || true
-mount -o bind "$base_path" "$stock_path"
+if mount -o bind "$base_path" "$stock_path" 2>> "$log"; then
+  log_msg "Mounted in root namespace"
+else
+  log_msg "Failed to mount in root namespace"
+  exit 1
+fi
 mount_in_zygote_namespaces
