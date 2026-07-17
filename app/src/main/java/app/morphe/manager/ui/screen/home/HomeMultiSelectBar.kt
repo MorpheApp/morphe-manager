@@ -120,8 +120,7 @@ internal fun MultiSelectBar(
                     selectedCount = selectedCount,
                     totalCount = totalCount,
                     onSelectAll = onSelectAll,
-                    onDeselectAll = onDeselectAll,
-                    onCancel = onCancel
+                    onDeselectAll = onDeselectAll
                 ) {
                     if (onMoveToCategory != null) {
                         ActionPillButton(
@@ -149,6 +148,12 @@ internal fun MultiSelectBar(
                             enabled = selectedCount > 0
                         )
                     }
+                    ActionPillButton(
+                        onClick = onCancel,
+                        icon = Icons.Outlined.Close,
+                        contentDescription = cancelLabel,
+                        tooltip = cancelLabel
+                    )
                 }
             }
         }

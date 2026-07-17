@@ -2511,5 +2511,35 @@ fun SimpleBundleSelectDialog(
     }
 }
 
+/**
+ * Dialog shown on Android 11+ when install apps permission is needed.
+ */
+@Composable
+fun Android11Dialog(
+    onDismissRequest: () -> Unit,
+    onContinue: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismissRequest,
+        title = stringResource(R.string.android_11_bug_dialog_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.continue_),
+                onPrimaryClick = onContinue,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismissRequest
+            )
+        }
+    ) {
+        Text(
+            text = stringResource(R.string.android_11_bug_dialog_description),
+            style = MaterialTheme.typography.bodyLarge,
+            color = LocalDialogSecondaryTextColor.current,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
 private fun buildVersionSuffix(version: String, versionCode: Long?): String =
     if (versionCode != null) "v$version ($versionCode)" else "v$version"
