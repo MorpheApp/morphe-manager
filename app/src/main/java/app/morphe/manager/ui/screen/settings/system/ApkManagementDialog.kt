@@ -658,23 +658,25 @@ private fun ApkManagementDialogContent(
 
                 // Summary box
                 item(key = "summary") {
-                    InfoBox(
+                    HeroInfoCard(
+                        icon = meta.icon,
                         title = pluralStringResource(
                             R.plurals.settings_system_apks_count,
                             meta.count,
                             meta.count
                         ),
                         containerColor = meta.accentColor.copy(alpha = 0.15f),
-                        titleColor = meta.accentColor,
+                        iconContainerColor = meta.accentColor.copy(alpha = 0.25f),
                         iconTint = meta.accentColor,
-                        icon = meta.icon
-                    ) {
-                        Text(
-                            text = stringResource(R.string.settings_system_apks_size, formatBytes(meta.totalSize)),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = LocalDialogSecondaryTextColor.current
-                        )
-                    }
+                        titleColor = meta.accentColor,
+                        subtitle = {
+                            Text(
+                                text = stringResource(R.string.settings_system_apks_size, formatBytes(meta.totalSize)),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = LocalDialogSecondaryTextColor.current
+                            )
+                        }
+                    )
                 }
 
                 // List of APKs or loading state

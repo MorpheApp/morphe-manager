@@ -828,13 +828,18 @@ private fun AppHeroHeader(
                         verticalArrangement = Arrangement.spacedBy(6.dp),
                         horizontalAlignment = Alignment.End
                     ) {
-                        InfoChip(icon = chipIcon, text = stringResource(chipLabel), bg = chipBg, fg = onHero)
+                        PillBadge(
+                            text = stringResource(chipLabel),
+                            icon = chipIcon,
+                            containerColor = chipBg,
+                            contentColor = onHero
+                        )
                         if (relativeTime != null) {
-                            InfoChip(
-                                icon = Icons.Outlined.Schedule,
+                            PillBadge(
                                 text = relativeTime,
-                                bg = chipBg,
-                                fg = onHero
+                                icon = Icons.Outlined.Schedule,
+                                containerColor = chipBg,
+                                contentColor = onHero
                             )
                         }
                     }
@@ -855,7 +860,12 @@ private fun AppHeroHeader(
                             alpha = chipsProgress.coerceIn(0f, 1f)
                         }
                     ) {
-                        InfoChip(icon = chipIcon, text = stringResource(chipLabel), bg = chipBg, fg = onHero)
+                        PillBadge(
+                            text = stringResource(chipLabel),
+                            icon = chipIcon,
+                            containerColor = chipBg,
+                            contentColor = onHero
+                        )
                     }
                     // Animated chip 2 (sub-range: starts when chip1 is 30% done)
                     if (relativeTime != null) {
@@ -866,11 +876,11 @@ private fun AppHeroHeader(
                                 alpha = p
                             }
                         ) {
-                            InfoChip(
-                                icon = Icons.Outlined.Schedule,
+                            PillBadge(
                                 text = relativeTime,
-                                bg = chipBg,
-                                fg = onHero
+                                icon = Icons.Outlined.Schedule,
+                                containerColor = chipBg,
+                                contentColor = onHero
                             )
                         }
                     }
@@ -911,27 +921,6 @@ private fun StaggeredItem(
         }
     ) {
         content()
-    }
-}
-
-@Composable
-private fun InfoChip(icon: ImageVector, text: String, bg: Color, fg: Color) {
-    Row(
-        modifier = Modifier
-            .clip(RoundedCornerShape(50))
-            .background(bg)
-            .padding(horizontal = 10.dp, vertical = 5.dp),
-        horizontalArrangement = Arrangement.spacedBy(5.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(icon, null, tint = fg, modifier = Modifier.size(13.dp))
-        Text(
-            text,
-            style = MaterialTheme.typography.labelSmall,
-            color = fg,
-            fontWeight = FontWeight.Medium,
-            maxLines = 1
-        )
     }
 }
 

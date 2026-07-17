@@ -37,6 +37,7 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -413,7 +414,7 @@ fun IconTextRow(
  */
 @Composable
 fun SettingsItemCard(
-    onClick: () -> Unit,
+    onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     borderWidth: Dp = 0.dp,
@@ -652,6 +653,71 @@ fun InfoStatBox(
                     color = valueColor.copy(alpha = 0.7f),
                     textAlign = TextAlign.Center
                 )
+            }
+        }
+    }
+}
+
+/**
+ * Prominent hero-style header used at the top of dialogs and sections.
+ */
+@Composable
+fun HeroInfoCard(
+    icon: ImageVector,
+    title: String,
+    modifier: Modifier = Modifier,
+    containerColor: Color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+    iconContainerColor: Color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
+    iconTint: Color = MaterialTheme.colorScheme.primary,
+    titleColor: Color = LocalDialogTextColor.current,
+    subtitle: (@Composable RowScope.() -> Unit)? = null
+) {
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(MorpheDefaults.SectionCornerRadius),
+        color = containerColor
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(MorpheDefaults.ContentPadding),
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Surface(
+                shape = CircleShape,
+                color = iconContainerColor,
+                modifier = Modifier.size(56.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = null,
+                        tint = iconTint,
+                        modifier = Modifier.size(28.dp)
+                    )
+                }
+            }
+
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = titleColor,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                if (subtitle != null) {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        content = subtitle
+                    )
+                }
             }
         }
     }

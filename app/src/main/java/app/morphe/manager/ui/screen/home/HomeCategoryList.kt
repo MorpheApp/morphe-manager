@@ -28,6 +28,7 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppCategoryState
@@ -187,9 +188,10 @@ internal fun HomeGlassCategoryRow(
     onLongClick: (() -> Unit)? = null,
     leading: (@Composable () -> Unit)? = null,
     count: String? = null,
+    cornerRadius: Dp = 20.dp,
     trailing: @Composable RowScope.() -> Unit = {}
 ) {
-    val shape = RoundedCornerShape(20.dp)
+    val shape = RoundedCornerShape(cornerRadius)
     val containerColor = GlassButtonDefaults.containerColor()
     val borderColor = GlassButtonDefaults.borderColor()
     val contentColor = MaterialTheme.colorScheme.onSurface

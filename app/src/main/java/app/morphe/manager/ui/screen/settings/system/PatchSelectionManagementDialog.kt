@@ -378,26 +378,25 @@ private fun SelectionList(
         ) {
             // Summary box
             item(key = "summary") {
-                InfoBox(
+                HeroInfoCard(
+                    icon = Icons.Outlined.Tune,
                     title = pluralStringResource(
                         R.plurals.package_count,
                         selections.size,
                         selections.size
                     ),
-                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                    titleColor = MaterialTheme.colorScheme.primary,
-                    icon = Icons.Outlined.Tune
-                ) {
-                    Text(
-                        text = pluralStringResource(
-                            R.plurals.patch_selection_total_patches,
-                            data.totalSelections,
-                            data.totalSelections
-                        ),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                }
+                    subtitle = {
+                        Text(
+                            text = pluralStringResource(
+                                R.plurals.patch_selection_total_patches,
+                                data.totalSelections,
+                                data.totalSelections
+                            ),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
+                    }
+                )
             }
 
             // List of packages with selections

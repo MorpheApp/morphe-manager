@@ -22,7 +22,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
@@ -2407,6 +2406,7 @@ fun AppPatchesDialog(
     val searchQuery = remember { mutableStateOf("") }
     val selectedBundle = remember { mutableStateOf<Int?>(null) }
     val showFilterSheet = remember { mutableStateOf(false) }
+    val collapsedBundles = remember { mutableStateOf(emptySet<Int>()) }
 
     val filteredPatches = remember(allPatches, searchQuery.value, selectedBundle.value) {
         allPatches.filter { (uid, patch) ->
@@ -2421,24 +2421,19 @@ fun AppPatchesDialog(
     val isFiltering = searchQuery.value.isNotBlank() || selectedBundle.value != null
     val totalCount = allPatches.size
 
-    // Pre-compute per-bundle markers once so items{} can do O(1) lookups instead of O(n) scans
-    val firstPatchPerBundle: Map<Int, PatchInfo> = remember(filteredPatches) {
-        buildMap {
-            filteredPatches.forEach { (uid, patch) -> putIfAbsent(uid, patch) }
-        }
-    }
-    val firstUniversalPerBundle: Map<Int, PatchInfo> = remember(filteredPatches) {
-        buildMap {
-            filteredPatches.forEach { (uid, patch) ->
-                if (patch.compatiblePackages == null) putIfAbsent(uid, patch)
+    // Group filtered patches by bundle, preserving order. Consumed by the collapsible list below
+    val groupedFilteredPatches: List<Pair<Int, List<PatchInfo>>> = remember(filteredPatches) {
+        if (filteredPatches.isEmpty()) return@remember emptyList()
+        val result = mutableListOf<Pair<Int, MutableList<PatchInfo>>>()
+        filteredPatches.forEach { (uid, patch) ->
+            val last = result.lastOrNull()
+            if (last?.first == uid) {
+                last.second.add(patch)
+            } else {
+                result.add(uid to mutableListOf(patch))
             }
         }
-    }
-    val bundlesWithSpecificPatches: Set<Int> = remember(filteredPatches) {
-        filteredPatches
-            .filter { (_, patch) -> patch.compatiblePackages != null }
-            .map { it.first }
-            .toSet()
+        result.map { it.first to it.second.toList() }
     }
 
     MorpheDialog(
@@ -2459,268 +2454,170 @@ fun AppPatchesDialog(
         Box(modifier = Modifier.fillMaxWidth()) {
             LazyColumn(
                 state = listState,
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                modifier = Modifier.fillMaxWidth()
             ) {
                 // App header
                 item {
-                    Surface(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(16.dp),
-                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(14.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Surface(
-                                shape = CircleShape,
-                                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
-                                modifier = Modifier.size(56.dp)
-                            ) {
-                                Box(contentAlignment = Alignment.Center) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Extension,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.size(28.dp)
-                                    )
-                                }
-                            }
-
-                            Column(
-                                modifier = Modifier.weight(1f),
-                                verticalArrangement = Arrangement.spacedBy(4.dp)
-                            ) {
-                                Text(
-                                    text = item.displayName,
-                                    style = MaterialTheme.typography.titleLarge,
-                                    fontWeight = FontWeight.Bold,
-                                    color = LocalDialogTextColor.current,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                                Row(
-                                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Widgets,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.size(16.dp)
-                                    )
-                                    val patchCountLabel = pluralStringResource(
-                                        R.plurals.patch_count,
-                                        totalCount,
-                                        totalCount
-                                    )
-                                    val countText = if (isFiltering)
-                                        "${filteredPatches.size}/$patchCountLabel"
-                                    else
-                                        patchCountLabel
-                                    AnimatedContent(
-                                        targetState = countText,
-                                        transitionSpec = MorpheAnimations.counterTransitionSpec,
-                                        label = "app_patch_count"
-                                    ) { count ->
-                                        Text(
-                                            text = count,
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.primary,
-                                            fontWeight = FontWeight.Medium
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    PatchesListHeaderCard(
+                        title = item.displayName,
+                        totalCount = totalCount,
+                        filteredCount = filteredPatches.size,
+                        isFiltering = isFiltering,
+                        modifier = Modifier.padding(bottom = MorpheDefaults.ContentPaddingSmall)
+                    )
                 }
 
                 // Search + filter row (filter button visible only for multi-bundle)
                 stickyHeader {
-                    Surface(
-                        modifier = Modifier.fillMaxWidth(),
-                        color = MaterialTheme.colorScheme.surface
-                    ) {
-                        Row(
+                    PatchesListSearchRow(
+                        searchQuery = searchQuery.value,
+                        onSearchQueryChange = { searchQuery.value = it },
+                        showFilterButton = isMultiBundle,
+                        isFilterActive = selectedBundle.value != null,
+                        onFilterClick = { showFilterSheet.value = true }
+                    )
+                }
+
+                // Active bundle filter badge (only emitted when a bundle is selected
+                if (selectedBundle.value != null) {
+                    item(key = "filter_badges") {
+                        selectedBundle.value?.let { uid ->
+                            FlowRow(
+                                modifier = Modifier
+                                    .animateItem()
+                                    .padding(top = MorpheDefaults.ContentPaddingSmall),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                InputChip(
+                                    selected = true,
+                                    onClick = { selectedBundle.value = null },
+                                    label = { Text(bundleNames[uid] ?: uid.toString()) },
+                                    trailingIcon = {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Close,
+                                            contentDescription = stringResource(R.string.remove),
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
+
+                if (filteredPatches.isEmpty()) {
+                    item(key = "empty_state") {
+                        PatchesListEmptyState(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(bottom = 4.dp),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.Bottom
-                        ) {
-                            MorpheDialogTextField(
-                                value = searchQuery.value,
-                                onValueChange = { searchQuery.value = it },
-                                label = { Text(stringResource(R.string.expert_mode_search)) },
-                                leadingIcon = {
+                                .animateItem()
+                                .padding(top = MorpheDefaults.ContentPaddingSmall)
+                        )
+                    }
+                }
+
+                // Patch cards grouped by bundle
+                groupedFilteredPatches.forEach { (uid, bundlePatches) ->
+                    // Bundle section header (collapsible) - only for multi-bundle
+                    if (isMultiBundle) {
+                        item(key = "header_$uid") {
+                            val isCollapsed = uid in collapsedBundles.value
+                            val expandLabel = stringResource(R.string.expand)
+                            val collapseLabel = stringResource(R.string.collapse)
+                            HomeGlassCategoryRow(
+                                title = bundleNames[uid] ?: uid.toString(),
+                                leading = {
                                     Icon(
-                                        imageVector = Icons.Outlined.Search,
-                                        contentDescription = null
+                                        imageVector = Icons.Outlined.Layers,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(24.dp),
+                                        tint = MaterialTheme.colorScheme.primary
                                     )
                                 },
-                                showClearButton = true,
-                                modifier = Modifier.weight(1f)
-                            )
-
-                            if (isMultiBundle) {
-                                FilledTonalIconButton(
-                                    onClick = { showFilterSheet.value = true },
-                                    modifier = Modifier.padding(bottom = 4.dp),
-                                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                                        containerColor = if (selectedBundle.value != null)
-                                            MaterialTheme.colorScheme.primaryContainer
-                                        else
-                                            MaterialTheme.colorScheme.surfaceVariant,
-                                        contentColor = if (selectedBundle.value != null)
-                                            MaterialTheme.colorScheme.onPrimaryContainer
-                                        else
-                                            MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                ) {
+                                trailing = {
                                     Icon(
-                                        imageVector = Icons.Outlined.FilterList,
-                                        contentDescription = stringResource(R.string.filter),
-                                        modifier = Modifier.size(20.dp)
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Active bundle filter badge + empty state
-                item(key = "filter_badges_and_empty") {
-                    Column {
-                        AnimatedVisibility(
-                            visible = selectedBundle.value != null,
-                            enter = MorpheAnimations.expandFadeEnter,
-                            exit = MorpheAnimations.shrinkFadeExit
-                        ) {
-                            selectedBundle.value?.let { uid ->
-                                FlowRow(
-                                    modifier = Modifier.padding(bottom = 4.dp),
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                                ) {
-                                    InputChip(
-                                        selected = true,
-                                        onClick = { selectedBundle.value = null },
-                                        label = { Text(bundleNames[uid] ?: uid.toString()) },
-                                        trailingIcon = {
-                                            Icon(
-                                                imageVector = Icons.Outlined.Close,
-                                                contentDescription = stringResource(R.string.remove),
-                                                modifier = Modifier.size(16.dp)
-                                            )
-                                        }
-                                    )
-                                }
-                            }
-                        }
-
-                        AnimatedVisibility(
-                            visible = filteredPatches.isEmpty(),
-                            enter = MorpheAnimations.fadeScaleIn,
-                            exit = MorpheAnimations.fadeScaleOut
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 48.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.SearchOff,
-                                        contentDescription = null,
-                                        modifier = Modifier.size(48.dp),
+                                        imageVector = if (isCollapsed) Icons.Outlined.ExpandMore else Icons.Outlined.ExpandLess,
+                                        contentDescription = if (isCollapsed) expandLabel else collapseLabel,
+                                        modifier = Modifier.size(24.dp),
                                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
-                                    Text(
-                                        text = stringResource(R.string.expert_mode_no_results),
-                                        style = MaterialTheme.typography.bodyLarge,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                        textAlign = TextAlign.Center
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Patch cards
-                items(
-                    filteredPatches,
-                    key = { (uid, patch) ->
-                        "$uid:${patch.name}:${patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty()}"
-                    }
-                ) { entry ->
-                    val uid: Int = entry.first
-                    val patch: PatchInfo = entry.second
-                    val isUniversal = patch.compatiblePackages == null
-                    Column(
-                        modifier = Modifier.animateItem(
-                            fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-                            fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
-                            placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
-                        )
-                    ) {
-                        // Bundle section label - only for multi-bundle, at first patch of each bundle
-                        if (isMultiBundle) {
-                            val isFirstOfBundle = firstPatchPerBundle[uid] == patch
-                            if (isFirstOfBundle) {
-                                InfoBadge(
-                                    text = bundleNames[uid] ?: uid.toString(),
-                                    style = InfoBadgeStyle.Primary,
-                                    icon = Icons.Outlined.Layers,
-                                    isExpanded = true,
-                                    modifier = Modifier.padding(bottom = 6.dp, top = 8.dp)
-                                )
-                            }
-                        }
-
-                        // Universal patches divider - shown before the first universal patch of each bundle
-                        val isFirstUniversalOfBundle = isUniversal && firstUniversalPerBundle[uid] == patch
-                        if (isFirstUniversalOfBundle) {
-                            val hasSpecificAbove = uid in bundlesWithSpecificPatches
-                            Row(
+                                },
+                                onClick = {
+                                    collapsedBundles.value = if (isCollapsed) {
+                                        collapsedBundles.value - uid
+                                    } else {
+                                        collapsedBundles.value + uid
+                                    }
+                                },
+                                cornerRadius = MorpheDefaults.SettingsCornerRadius,
                                 modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(top = if (hasSpecificAbove) 8.dp else 0.dp, bottom = 4.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                    .padding(top = MorpheDefaults.ContentPaddingSmall)
+                                    .animateItem(
+                                        fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+                                        fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
+                                        placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
+                                    )
+                            )
+                        }
+                    }
+
+                    if (uid !in collapsedBundles.value) {
+                        val firstUniversal = bundlePatches.firstOrNull { it.compatiblePackages == null }
+                        val hasSpecificInBundle = bundlePatches.any { it.compatiblePackages != null }
+                        items(
+                            bundlePatches,
+                            key = { patch ->
+                                "$uid:${patch.name}:${patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty()}"
+                            }
+                        ) { patch ->
+                            val isUniversal = patch.compatiblePackages == null
+                            val isFirstUniversalOfBundle = isUniversal && patch === firstUniversal
+                            Column(
+                                modifier = Modifier
+                                    .padding(top = MorpheDefaults.ContentPaddingSmall)
+                                    .animateItem(
+                                        fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+                                        fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
+                                        placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
+                                    )
                             ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.Public,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    modifier = Modifier.size(14.dp)
-                                )
-                                Text(
-                                    text = stringResource(R.string.expert_mode_universal_patches),
-                                    style = MaterialTheme.typography.labelMedium,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                                HorizontalDivider(
-                                    modifier = Modifier.weight(1f),
-                                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
-                                    thickness = 0.5.dp
+                                // Universal patches divider - before first universal patch of each bundle
+                                if (isFirstUniversalOfBundle) {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(
+                                                top = if (hasSpecificInBundle) MorpheDefaults.ContentPaddingSmall else 0.dp,
+                                                bottom = 4.dp
+                                            ),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Public,
+                                            contentDescription = null,
+                                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                            modifier = Modifier.size(14.dp)
+                                        )
+                                        Text(
+                                            text = stringResource(R.string.expert_mode_universal_patches),
+                                            style = MaterialTheme.typography.labelMedium,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                        HorizontalDivider(
+                                            modifier = Modifier.weight(1f),
+                                            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
+                                            thickness = 0.5.dp
+                                        )
+                                    }
+                                }
+
+                                PatchItemCard(
+                                    patch = patch,
+                                    saveStateKey = "app_patches_${item.packageName}_$uid",
+                                    accentColor = bundleAccentColors[uid],
                                 )
                             }
                         }
-
-                        PatchItemCard(
-                            patch = patch,
-                            saveStateKey = "app_patches_${item.packageName}_$uid",
-                            accentColor = bundleAccentColors[uid],
-                        )
                     }
                 }
             }
