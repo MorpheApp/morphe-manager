@@ -941,7 +941,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
      * Mount app (for root installer).
      */
     fun mount(packageName: String, version: String) = viewModelScope.launch {
-        val stockVersion = pm.getPackageInfo(packageName)?.versionName
+        val stockVersion = getInstalledStockVersion(packageName, version)
         if (stockVersion != null && stockVersion != version) {
             handleInstallError(
                 app.getString(
@@ -987,7 +987,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
      * Remount app (unmount then mount).
      */
     fun remount(packageName: String, version: String) = viewModelScope.launch {
-        val stockVersion = pm.getPackageInfo(packageName)?.versionName
+        val stockVersion = getInstalledStockVersion(packageName, version)
         if (stockVersion != null && stockVersion != version) {
             handleInstallError(
                 app.getString(
@@ -1265,6 +1265,33 @@ class InstallViewModel : ViewModel(), KoinComponent {
         installerManager.shizukuStatus(InstallerManager.InstallTarget.PATCHER)
 
     fun requestShizukuPermission(): Boolean = installerManager.requestShizukuPermission()
+
+    private suspend fun getInstalledStockVersion(packageName: String, expectedVersion: String): String? {
+        val currentVersion = withContext(Dispatchers.IO) {
+            pm.getPackageInfo(packageName)?.versionName
+        }
+        if (currentVersion == null || currentVersion == expectedVersion) return currentVersion
+
+        return waitForInstalledStockVersion(packageName, expectedVersion)?.versionName ?: currentVersion
+    }
+
+    private suspend fun waitForInstalledStockVersion(
+        packageName: String,
+        versionName: String
+    ): PackageInfo? {
+        var matchingInfo: PackageInfo? = null
+        withTimeoutOrNull(STOCK_INSTALL_SETTLE_TIMEOUT) {
+            while (matchingInfo == null) {
+                val info = withContext(Dispatchers.IO) { pm.getPackageInfo(packageName) }
+                if (info?.versionName == versionName) {
+                    matchingInfo = info
+                } else {
+                    delay(STOCK_INSTALL_SETTLE_POLL)
+                }
+            }
+        }
+        return matchingInfo
+    }
 
     private suspend fun waitForMatchingInstalledStock(
         packageName: String,

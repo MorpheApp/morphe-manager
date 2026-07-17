@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
+import android.content.pm.PackageInfo
 import android.os.IBinder
 import android.os.SystemClock
 import app.morphe.manager.IRootSystemService
@@ -15,6 +16,7 @@ import com.topjohnwu.superuser.ipc.RootService
 import com.topjohnwu.superuser.nio.FileSystemManager
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.time.withTimeoutOrNull
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -167,7 +169,11 @@ class RootInstaller(
 
             if (!stockAlreadyInstalled) {
                 val result = installStockApp(stockApp, packageName)
-                if (!result.isSuccess) throw StockAppInstallException(result.failureDetail())
+                val stockInstalled = waitForInstalledStock(packageName, stockInfo)
+                if (!stockInstalled) {
+                    if (!result.isSuccess) throw StockAppInstallException(result.failureDetail())
+                    throw StockAppInstallException("Stock app install did not settle")
+                }
             }
         }
 
@@ -206,12 +212,7 @@ class RootInstaller(
                     }
                 }
 
-            execute(
-                "chmod 644 $apkPath",
-                "chown system:system $apkPath",
-                "chcon u:object_r:apk_data_file:s0 $apkPath",
-                "chmod +x $modulePath/service.sh"
-            ).assertSuccess("Failed to set file permissions")
+            setModuleFilePermissions(modulePath, apkPath)
         }
 
         // Force-stop the app so it restarts with the newly mounted patched APK.
@@ -266,6 +267,46 @@ class RootInstaller(
         )
     }
 
+    private suspend fun waitForInstalledStock(packageName: String, stockInfo: PackageInfo): Boolean =
+        withTimeoutOrNull(STOCK_INSTALL_SETTLE_TIMEOUT) {
+            while (true) {
+                val installedInfo = pm.getPackageInfo(packageName)
+                if (installedInfo != null &&
+                    pm.getVersionCode(installedInfo) == pm.getVersionCode(stockInfo) &&
+                    installedInfo.versionName == stockInfo.versionName
+                ) {
+                    return@withTimeoutOrNull true
+                }
+                delay(STOCK_INSTALL_SETTLE_POLL_MS)
+            }
+        } == true
+
+    private suspend fun setModuleFilePermissions(modulePath: String, apkPath: String) {
+        var lastResult: Shell.Result? = null
+        val applied = withTimeoutOrNull(MODULE_PERMISSION_SETTLE_TIMEOUT) {
+            while (true) {
+                val modulePathQuoted = modulePath.shellQuote()
+                val apkPathQuoted = apkPath.shellQuote()
+                val result = execute(
+                    "test -f $apkPathQuoted && test -f $modulePathQuoted/service.sh",
+                    "chmod 644 $apkPathQuoted",
+                    "chown system:system $apkPathQuoted",
+                    "chcon u:object_r:apk_data_file:s0 $apkPathQuoted",
+                    "chmod +x $modulePathQuoted/service.sh"
+                )
+                if (result.isSuccess) return@withTimeoutOrNull true
+
+                lastResult = result
+                delay(MODULE_PERMISSION_RETRY_MS)
+            }
+        } == true
+
+        if (!applied) {
+            lastResult?.assertSuccess("Failed to set file permissions")
+                ?: throw Exception("Failed to set file permissions")
+        }
+    }
+
     private fun mountInZygoteNamespacesCommand(sourcePath: String, targetPath: String) =
         "for zpid in \$(pidof zygote64) \$(pidof zygote); do " +
                 "nsenter -t \"\$zpid\" -m mount -o bind $sourcePath $targetPath 2>/dev/null || true; " +
@@ -292,6 +333,10 @@ class RootInstaller(
         private fun String.shellQuote() = "'${replace("'", "'\"'\"'")}'"
 
         private const val ROOT_CHECK_INTERVAL_MS = 1_000L
+        private val STOCK_INSTALL_SETTLE_TIMEOUT = Duration.ofSeconds(30L)
+        private const val STOCK_INSTALL_SETTLE_POLL_MS = 1_000L
+        private val MODULE_PERMISSION_SETTLE_TIMEOUT = Duration.ofSeconds(10L)
+        private const val MODULE_PERMISSION_RETRY_MS = 500L
     }
 }
 
