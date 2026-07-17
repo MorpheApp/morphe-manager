@@ -14,7 +14,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -27,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
@@ -357,7 +357,8 @@ private fun LanguageSection(
                     ) {
                         Text(
                             text = currentLanguageOption?.flag ?: "🌐",
-                            style = MaterialTheme.typography.titleMedium
+                            fontSize = 20.sp,
+                            lineHeight = 20.sp
                         )
                     }
                 },
