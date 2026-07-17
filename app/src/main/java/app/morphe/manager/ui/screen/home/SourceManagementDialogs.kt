@@ -589,7 +589,7 @@ fun BundlePatchesDialog(
                 onPrimaryClick = onDismissRequest
             )
         },
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         scrollable = false,
         contentArrangement = Arrangement.Top
     ) {

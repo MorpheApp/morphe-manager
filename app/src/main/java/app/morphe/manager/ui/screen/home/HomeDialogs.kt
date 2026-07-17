@@ -625,7 +625,7 @@ private fun ApkAvailabilityDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_apk_availability_dialog_title),
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         footer = {
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -1039,7 +1039,7 @@ private fun InstalledAppPickerDialog(
         onDismissRequest = onDismiss,
         dismissOnClickOutside = true,
         title = stringResource(R.string.home_installed_app_picker_title),
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         scrollable = false,
         titleTrailingContent = {
             val labelAll = stringResource(R.string.home_installed_app_picker_filter_all)
@@ -1241,7 +1241,7 @@ private fun UnsupportedVersionWarningDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_dialog_unsupported_version_dialog_title),
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
@@ -1539,7 +1539,7 @@ fun WrongPackageDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_dialog_wrong_package_title),
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         footer = {
             MorpheDialogButton(
                 text = stringResource(android.R.string.ok),
@@ -2134,7 +2134,7 @@ fun DeepLinkAddSourceDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.deep_link_add_source_title),
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.add),
@@ -2241,7 +2241,7 @@ fun MppImportDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.deep_link_add_source_title),
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.add),
@@ -2413,7 +2413,7 @@ fun SimpleBundleSelectDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_simple_bundle_select_title),
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.continue_),

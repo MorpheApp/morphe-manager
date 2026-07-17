@@ -234,7 +234,7 @@ fun AdaptiveIconCreatorDialog(
                 onClick = { showInfoDialog.value = true }
             )
         },
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         footer = {
             MorpheDialogButton(
                 text = stringResource(R.string.adaptive_icon_create),

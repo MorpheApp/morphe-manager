@@ -338,7 +338,7 @@ private fun PatchSelectionManagementDialogContent(
             }
         },
         scrollable = false,
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         contentArrangement = Arrangement.Top
     ) {
         if (selections.isEmpty()) {

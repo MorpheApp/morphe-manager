@@ -231,7 +231,6 @@ fun HeaderCreatorDialog(
                 onClick = { showInfoDialog.value = true }
             )
         },
-        compactPadding = false,
         footer = {
             MorpheDialogButton(
                 text = stringResource(R.string.header_creator_create),
