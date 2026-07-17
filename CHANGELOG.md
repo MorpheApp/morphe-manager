@@ -1,3 +1,16 @@
+# [1.24.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.5...v1.24.0-dev.6) (2026-07-17)
+
+
+### Bug Fixes
+
+* Dedupe expert-mode UI patterns and reuse shared components ([e172fda](https://github.com/MorpheApp/morphe-manager/commit/e172fda8a66f417a82df724a657693936d777c66))
+* Migrate `PatchCard` to shared `SettingsItemCard` ([4704c40](https://github.com/MorpheApp/morphe-manager/commit/4704c406c3be2ed9aac02b5c02a30f57620ae552))
+* Normalize expert-mode padding to `MorpheDefaults` ([ecb6c7b](https://github.com/MorpheApp/morphe-manager/commit/ecb6c7bccc288729a5b3154d99eebe7a0bccfb08))
+* Share patch list components and consolidate badges ([797004d](https://github.com/MorpheApp/morphe-manager/commit/797004d9c1bb94f4397a43102b84049cad8852a9))
+* Split `ExpertModeDialog` into focused files ([a9e857c](https://github.com/MorpheApp/morphe-manager/commit/a9e857c9c82fea373c3dd422b60432ef7b631e5c))
+* Top-align list-based dialogs and dedupe `MorpheDialog` ([c012263](https://github.com/MorpheApp/morphe-manager/commit/c01226307b3d6d78155f3df352005b724b967d72))
+* Unify `RadioSelectionCard` visuals across dialogs ([885dd2d](https://github.com/MorpheApp/morphe-manager/commit/885dd2d2b19606cd2ccb22b19f2f902044b63e58))
+
 # [1.24.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.4...v1.24.0-dev.5) (2026-07-16)
 
 
