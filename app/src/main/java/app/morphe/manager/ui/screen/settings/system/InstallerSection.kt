@@ -288,12 +288,22 @@ fun InstallerSelectionDialog(
                     }
                 }
 
+                val shizukuFooterText = if (isSelected &&
+                    isShizukuOption &&
+                    inlineShizukuStatus != null &&
+                    !inlineShizukuStatus!!.availability.available
+                ) {
+                    inlineShizukuStatus!!.availability.reason?.let { stringResource(it) }
+                        ?: stringResource(R.string.installer_shizuku_status_issue)
+                } else null
+
                 InstallerOptionItem(
                     option = option,
                     selected = isSelected,
                     enabled = enabled,
                     onSelect = { if (enabled) currentSelection.value = option.token },
-                    stateDescription = stateDesc
+                    stateDescription = stateDesc,
+                    footerText = shizukuFooterText
                 )
 
                 if (showShizukuAction) {
@@ -306,23 +316,6 @@ fun InstallerSelectionDialog(
                             color = MaterialTheme.colorScheme.primary
                         )
                     }
-                }
-
-                if (isSelected &&
-                    isShizukuOption &&
-                    inlineShizukuStatus != null &&
-                    !inlineShizukuStatus!!.availability.available
-                ) {
-                    val status = inlineShizukuStatus!!
-                    val statusText = status.availability.reason?.let { stringResource(it) }
-                        ?: stringResource(R.string.installer_shizuku_status_issue)
-                    InfoBadge(
-                        text = statusText,
-                        style = InfoBadgeStyle.Warning,
-                        icon = Icons.Outlined.Warning,
-                        isCompact = true,
-                        modifier = Modifier.padding(start = 56.dp)
-                    )
                 }
 
                 if (isSelected && isShizukuOption && shizukuStatusProvider != null) {
@@ -749,7 +742,8 @@ fun InstallerOptionItem(
     selected: Boolean,
     enabled: Boolean,
     onSelect: () -> Unit,
-    stateDescription: String
+    stateDescription: String,
+    footerText: String? = null
 ) {
     val colors = MaterialTheme.colorScheme
 
@@ -772,6 +766,7 @@ fun InstallerOptionItem(
         selected = selected,
         onSelect = onSelect,
         enabled = enabled,
+        hasWarning = footerText != null,
         stateDescription = stateDescription,
         leadingContent = if (hasCustomIcon) {
             {
@@ -785,9 +780,13 @@ fun InstallerOptionItem(
                 }
             }
         } else null,
-        footerContent = reasonText?.let { text ->
+        footerContent = (reasonText ?: footerText)?.let { text ->
             {
-                val tint = MaterialTheme.colorScheme.onSurfaceVariant
+                val tint = if (footerText != null) {
+                    MaterialTheme.colorScheme.onSecondaryContainer
+                } else {
+                    MaterialTheme.colorScheme.onSurfaceVariant
+                }
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
                     verticalAlignment = Alignment.CenterVertically

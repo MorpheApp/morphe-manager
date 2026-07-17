@@ -721,7 +721,7 @@ The image dimensions must be as follows:
     <string name="installer_status_not_supported">Not supported for this action</string>
     <string name="installer_status_shizuku_not_installed">Install Shizuku or Sui to use this option</string>
     <string name="installer_status_shizuku_not_running">Start Shizuku or Sui and try again</string>
-    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Morphe from the Shizuku app</string>
+    <string name="installer_status_shizuku_permission">Grant permission to Morphe from the Shizuku app</string>
     <string name="installer_mount_warning_install">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount</string>
     <string name="mount_version_mismatch_message">Stock app version (%2$s) does not match patched app version (%1$s). Mount the matching stock version, then try again</string>
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported</string>
