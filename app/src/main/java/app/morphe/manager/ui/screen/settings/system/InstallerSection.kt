@@ -333,6 +333,19 @@ fun InstallerSelectionDialog(
             val showAutoInstallToggle = selectedToken.isShizukuToken() && onAutoInstallToggle != null
             val showPromptToggle = onInstallerPromptToggle != null
 
+            AnimatedVisibility(
+                visible = currentSelection.value == InstallerManager.Token.AutoSaved,
+                enter = MorpheAnimations.expandFadeEnter,
+                exit = MorpheAnimations.shrinkFadeExit
+            ) {
+                InfoBadge(
+                    text = stringResource(R.string.root_mount_module_unmount_warning),
+                    style = InfoBadgeStyle.Warning,
+                    icon = Icons.Outlined.Warning,
+                    isExpanded = true
+                )
+            }
+
             if (showPlayStoreToggle || showAutoInstallToggle || showPromptToggle) {
                 MorpheSettingsDivider(fullWidth = true)
 
@@ -1011,6 +1024,13 @@ fun PrePatchInstallerDialog(
                 title = stringResource(R.string.root_pre_patch_installer_mount_title),
                 description = stringResource(R.string.root_pre_patch_installer_mount_description),
                 onClick = onSelectMount
+            )
+
+            InfoBadge(
+                text = stringResource(R.string.root_mount_module_unmount_warning),
+                style = InfoBadgeStyle.Warning,
+                icon = Icons.Outlined.Warning,
+                isExpanded = true
             )
 
             // Standard Install option

@@ -576,15 +576,11 @@ fun PatcherScreen(
                         onInstall = {
                             if (usingMountInstall) {
                                 // Mount install
-                                val inputVersion = patcherViewModel.version
-                                    ?: patcherViewModel.currentSelectedApp.version
-                                    ?: "unknown"
                                 installViewModel.installMount(
                                     outputFile = outputFile,
                                     inputFile = patcherViewModel.inputFile,
                                     inputIsTemporary = patcherViewModel.inputFileIsDisposable,
                                     packageName = patcherViewModel.packageName,
-                                    inputVersion = inputVersion,
                                     onPersistApp = { pkg, type ->
                                         patcherViewModel.persistPatchedApp(pkg, type)
                                     }

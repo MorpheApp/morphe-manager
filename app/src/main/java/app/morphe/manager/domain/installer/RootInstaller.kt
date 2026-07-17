@@ -106,33 +106,35 @@ class RootInstaller(
     }
 
     suspend fun mount(packageName: String) {
-        if (isAppMounted(packageName)) return
-
         withContext(Dispatchers.IO) {
             val stockAPK = pm.getPackageInfo(packageName)?.applicationInfo?.sourceDir
                 ?: throw Exception("Failed to load application info")
             val patchedAPK = resolvePatchedApkPath(packageName)
+            val stockPath = stockAPK.shellQuote()
+            val patchedPath = patchedAPK.shellQuote()
 
-            // Set SELinux context, bind-mount, and restart the app atomically
+            // Set SELinux context, bind-mount in the root and zygote namespaces, and restart
+            // the app so its next process inherits the patched APK view.
             execute(
-                "chcon u:object_r:apk_data_file:s0 \"$patchedAPK\"; " +
-                        "mount -o bind \"$patchedAPK\" \"$stockAPK\"; " +
-                        "am force-stop \"$packageName\""
+                "chcon u:object_r:apk_data_file:s0 $patchedPath; " +
+                        unmountBindCommands(stockPath) + "; " +
+                        "mount -o bind $patchedPath $stockPath; " +
+                        mountInZygoteNamespacesCommand(patchedPath, stockPath) + "; " +
+                        "am force-stop ${packageName.shellQuote()}"
             ).assertSuccess("Failed to mount APK")
         }
     }
 
     suspend fun unmount(packageName: String) {
-        if (!isAppMounted(packageName)) return
-
         withContext(Dispatchers.IO) {
             val stockAPK = pm.getPackageInfo(packageName)?.applicationInfo?.sourceDir
-                ?: throw Exception("Failed to load application info")
+                ?: return@withContext
+            val stockPath = stockAPK.shellQuote()
 
-            execute("umount -l \"$stockAPK\"").assertSuccess("Failed to unmount APK")
+            execute(unmountBindCommands(stockPath)).assertSuccess("Failed to unmount APK")
 
             // Force-stop the app so it restarts clean without the unmounted patched APK.
-            execute("am force-stop \"$packageName\"")
+            execute("am force-stop ${packageName.shellQuote()}")
         }
     }
 
@@ -152,17 +154,21 @@ class RootInstaller(
         unmount(packageName)
 
         stockAPK?.let { stockApp ->
-            pm.getPackageInfo(packageName)?.let { packageInfo ->
-                // TODO: get user id programmatically
-                if (pm.getVersionCode(packageInfo) <= pm.getVersionCode(
-                        pm.getPackageInfo(patchedAPK)
-                            ?: error("Failed to get package info for patched app")
-                    )
-                )
-                    execute("pm uninstall -k --user 0 $packageName").assertSuccess("Failed to uninstall stock app")
+            val stockInfo = pm.getPackageInfo(stockApp)
+                ?: error("Failed to get package info for stock app")
+            if (stockInfo.packageName != packageName) {
+                error("Stock APK package (${stockInfo.packageName}) does not match $packageName")
             }
 
-            execute("pm install \"${stockApp.absolutePath}\"").assertSuccess("Failed to install stock app")
+            val installedInfo = pm.getPackageInfo(packageName)
+            val stockAlreadyInstalled = installedInfo != null &&
+                    pm.getVersionCode(installedInfo) == pm.getVersionCode(stockInfo) &&
+                    installedInfo.versionName == stockInfo.versionName
+
+            if (!stockAlreadyInstalled) {
+                execute("pm install -r -d ${stockApp.absolutePath.shellQuote()}")
+                    .assertSuccess("Failed to install stock app")
+            }
         }
 
         val moduleDir = remoteFS.getFile(modulePath)
@@ -244,6 +250,17 @@ class RootInstaller(
 
         throw Exception("Patched APK not found for mount")
     }
+
+    private fun mountInZygoteNamespacesCommand(sourcePath: String, targetPath: String) =
+        "for zpid in \$(pidof zygote64) \$(pidof zygote); do " +
+                "nsenter -t \"\$zpid\" -m mount -o bind $sourcePath $targetPath 2>/dev/null || true; " +
+                "done"
+
+    private fun unmountBindCommands(targetPath: String) =
+        "for zpid in \$(pidof zygote64) \$(pidof zygote); do " +
+                "nsenter -t \"\$zpid\" -m umount -l $targetPath 2>/dev/null || true; " +
+                "done; " +
+                "umount -l $targetPath 2>/dev/null || true"
 
     companion object {
         const val MODULES_PATH = "/data/adb/modules"

@@ -354,6 +354,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="root_pre_patch_installer_description">Your device has root access. Choose how you want to install the patched app</string>
     <string name="root_pre_patch_installer_mount_title">Root mount</string>
     <string name="root_pre_patch_installer_mount_description">Mounts the patched APK over the stock app. No GmsCore needed</string>
+    <string name="root_mount_module_unmount_warning">If you use KernelSU or APatch, disable module unmounting or hiding for apps installed with root mount. Otherwise the stock app may still run even when Morphe shows it as mounted</string>
     <string name="root_pre_patch_installer_standard_title">Standard Install</string>
     <string name="root_pre_patch_installer_standard_description">Installs as a separate app with GmsCore support. An installer can be selected after patching</string>
     <string name="root_pre_patch_installer_hint">The installation method determines which patches are included and cannot be changed after patching</string>
