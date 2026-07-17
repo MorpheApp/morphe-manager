@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -128,17 +129,23 @@ fun MorpheSettingsDivider(
 }
 
 /**
- * Toggle row used inside dialogs as a supplementary switch under a list of options.
+ * Toggle row used as a supplementary switch under a list of options.
+ *
+ * @param rowModifier  Applied to the inner [Row], use for positioning callbacks.
+ * @param isLoading    When true, replaces the switch with a [CircularProgressIndicator].
  */
 @Composable
-fun MorpheDialogToggleRow(
-    icon: ImageVector,
+fun ToggleRow(
     title: String,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    rowModifier: Modifier = Modifier,
     description: String? = null,
+    enabled: Boolean = true,
+    isLoading: Boolean = false,
     showDivider: Boolean = true,
+    icon: ImageVector? = null,
     iconTint: Color = MaterialTheme.colorScheme.primary
 ) {
     val enabledLabel = stringResource(R.string.enabled)
@@ -149,22 +156,25 @@ fun MorpheDialogToggleRow(
             HorizontalDivider(modifier = Modifier.padding(top = 4.dp))
         }
         Row(
-            modifier = Modifier
+            modifier = rowModifier
                 .fillMaxWidth()
                 .clip(MaterialTheme.shapes.medium)
                 .toggleable(
                     value = checked,
                     role = Role.Switch,
+                    enabled = enabled,
                     onValueChange = onCheckedChange
                 )
                 .semantics {
                     stateDescription = if (checked) enabledLabel else disabledLabel
                 }
-                .padding(vertical = 12.dp, horizontal = 4.dp),
+                .padding(vertical = MorpheDefaults.ContentPaddingSmall, horizontal = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            MorpheIcon(icon = icon, tint = iconTint)
+            if (icon != null) {
+                MorpheIcon(icon = icon, tint = iconTint)
+            }
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = title,
@@ -179,10 +189,25 @@ fun MorpheDialogToggleRow(
                     )
                 }
             }
-            MorpheSwitch(
-                checked = checked,
-                onCheckedChange = null
-            )
+            Crossfade(
+                targetState = isLoading,
+                modifier = Modifier.size(width = 52.dp, height = 32.dp),
+                label = "toggle_row_loading"
+            ) { loading ->
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (loading) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(24.dp),
+                            strokeWidth = 2.dp
+                        )
+                    } else {
+                        MorpheSwitch(checked = checked, onCheckedChange = null)
+                    }
+                }
+            }
         }
     }
 }
