@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.HomeAppCategoryState
 import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
 import app.morphe.manager.domain.manager.HomeAppSortMode
@@ -47,6 +48,7 @@ fun HomeScreen(
     onStartQuickPatch: (QuickPatchParams) -> Unit,
     homeViewModel: HomeViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
+    homeAppButtonPrefs: HomeAppButtonPreferences = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
     onboardingState: OnboardingState? = null,
@@ -102,6 +104,7 @@ fun HomeScreen(
     val bundlePipelineLoading = homeAppState == null
     val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
+    val showSortButtonPref by homeAppButtonPrefs.showSortButton.collectAsStateWithLifecycle()
     val useExpertMode by prefs.useExpertMode.getAsState()
 
     // Gesture hint: shown once per bundle addition, in-memory
@@ -304,7 +307,7 @@ fun HomeScreen(
                 ),
                 chromeFlags = HomeChromeFlags(
                     showSearchButton = showSearchButton,
-                    showSortButton = showSearchButton,
+                    showSortButton = showSearchButton && showSortButtonPref,
                     showOtherAppsButton = showOtherAppsButton,
                     isExpertModeEnabled = useExpertMode
                 ),

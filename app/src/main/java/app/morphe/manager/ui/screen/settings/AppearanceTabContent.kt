@@ -13,8 +13,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
@@ -63,6 +64,7 @@ fun AppearanceTabContent(
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
     val showAppGroupingSwitcher by homeAppButtonPrefs.showCategoryViewSwitcher.collectAsStateWithLifecycle()
+    val showSortButton by homeAppButtonPrefs.showSortButton.collectAsStateWithLifecycle()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
     val randomInterval by themeViewModel.prefs.randomBackgroundInterval.getAsState()
@@ -113,6 +115,24 @@ fun AppearanceTabContent(
                         onCheckedChange = null,
                         modifier = Modifier.semantics {
                             stateDescription = if (showGreetingPhrases) enabledState else disabledState
+                        }
+                    )
+                }
+            )
+            MorpheSettingsDivider()
+            SettingsItem(
+                onClick = { homeAppButtonPrefs.setShowSortButton(!showSortButton) },
+                title = stringResource(R.string.settings_appearance_sort_button),
+                subtitle = stringResource(R.string.settings_appearance_sort_button_description),
+                leadingContent = {
+                    MorpheIcon(icon = Icons.AutoMirrored.Outlined.Sort)
+                },
+                trailingContent = {
+                    MorpheSwitch(
+                        checked = showSortButton,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (showSortButton) enabledState else disabledState
                         }
                     )
                 }
@@ -357,7 +377,8 @@ private fun LanguageSection(
                     ) {
                         Text(
                             text = currentLanguageOption?.flag ?: "🌐",
-                            style = MaterialTheme.typography.titleMedium
+                            fontSize = 20.sp,
+                            lineHeight = 20.sp
                         )
                     }
                 },
