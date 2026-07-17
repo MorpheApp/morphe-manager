@@ -11,7 +11,9 @@ import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
@@ -50,6 +52,7 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerUnavailableDialog
 import app.morphe.manager.ui.screen.shared.*
@@ -341,7 +344,7 @@ fun InstalledAppInfoDialog(
                             .fillMaxHeight()
                             .statusBarsPadding()
                             .navigationBarsPadding()
-                            .padding(horizontal = 16.dp)
+                            .padding(horizontal = MorpheDefaults.ContentPadding)
                     ) {
                         BoxWithConstraints(modifier = Modifier.fillMaxWidth().weight(1f)) {
                             val availableHeight = maxHeight
@@ -396,16 +399,15 @@ fun InstalledAppInfoDialog(
                         }
                     }
 
-                    VerticalDivider(modifier = Modifier.statusBarsPadding().navigationBarsPadding().padding(vertical = 20.dp))
+                    VerticalDivider(modifier = Modifier.statusBarsPadding().navigationBarsPadding().padding(vertical = MorpheDefaults.ContentPadding))
 
                     // Right panel: header + banners + info
                     LazyColumn(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxHeight()
-                            .navigationBarsPadding()
-                            .padding(start = 20.dp),
-                        contentPadding = PaddingValues(bottom = 24.dp),
+                            .navigationBarsPadding(),
+                        contentPadding = PaddingValues(bottom = MorpheDefaults.ContentPaddingMedium),
                         verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
                     ) {
                         item(contentType = "hero") {
@@ -415,11 +417,16 @@ fun InstalledAppInfoDialog(
                                 installedApp = installedApp,
                                 accentColor = appAccentColor,
                                 compact = windowSize.widthSizeClass == WindowWidthSizeClass.Expanded,
-                                modifier = Modifier.clip(RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp))
+                                modifier = Modifier
+                                    .padding(horizontal = MorpheDefaults.ContentPadding)
+                                    .clip(RoundedCornerShape(bottomStart = MorpheDefaults.CardCornerRadius, bottomEnd = MorpheDefaults.CardCornerRadius))
                             )
                         }
                         item(key = "banners") {
-                            Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)) {
+                            Column(
+                                modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding),
+                                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                            ) {
                                 AnimatedVisibility(
                                     visible = viewModel.isAppDeleted,
                                     enter = MorpheAnimations.expandFadeEnter,
@@ -465,7 +472,8 @@ fun InstalledAppInfoDialog(
                                     appliedPatches = appliedPatches,
                                     bundlesUsedSummary = bundlesUsedSummary,
                                     onShowPatches = { showAppliedPatchesDialog.value = true },
-                                    accentColor = appAccentColor
+                                    accentColor = appAccentColor,
+                                    modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding)
                                 )
                             }
                         }
@@ -476,7 +484,7 @@ fun InstalledAppInfoDialog(
                 Column(modifier = Modifier.fillMaxSize()) {
                     LazyColumn(
                         modifier = Modifier.weight(1f).fillMaxWidth(),
-                        contentPadding = PaddingValues(bottom = 24.dp)
+                        contentPadding = PaddingValues(bottom = MorpheDefaults.ContentPaddingMedium)
                     ) {
                         // Hero header
                         item(contentType = "hero") {
@@ -485,7 +493,7 @@ fun InstalledAppInfoDialog(
                                 packageName = packageName,
                                 installedApp = installedApp,
                                 accentColor = appAccentColor,
-                                modifier = Modifier.clip(RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp))
+                                modifier = Modifier.clip(RoundedCornerShape(bottomStart = MorpheDefaults.CardCornerRadius, bottomEnd = MorpheDefaults.CardCornerRadius))
                             )
                         }
 
@@ -504,7 +512,7 @@ fun InstalledAppInfoDialog(
                                     exit = MorpheAnimations.shrinkFadeExit
                                 ) {
                                     Column {
-                                        Spacer(Modifier.height(12.dp))
+                                        Spacer(Modifier.height(MorpheDefaults.ItemSpacing))
                                         StaggeredItem(entered = entered.value, index = 1) {
                                             WarningBanner(
                                                 icon = Icons.Outlined.Warning,
@@ -517,7 +525,7 @@ fun InstalledAppInfoDialog(
                                                 },
                                                 accentColor = appAccentColor,
                                                 isError = true,
-                                                modifier = Modifier.padding(horizontal = 20.dp)
+                                                modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding)
                                             )
                                         }
                                     }
@@ -528,7 +536,7 @@ fun InstalledAppInfoDialog(
                                     exit = MorpheAnimations.shrinkFadeExit
                                 ) {
                                     Column {
-                                        Spacer(Modifier.height(12.dp))
+                                        Spacer(Modifier.height(MorpheDefaults.ItemSpacing))
                                         StaggeredItem(entered = entered.value, index = 1) {
                                             WarningBanner(
                                                 icon = Icons.Outlined.Update,
@@ -541,7 +549,7 @@ fun InstalledAppInfoDialog(
                                                 },
                                                 accentColor = appAccentColor,
                                                 isError = false,
-                                                modifier = Modifier.padding(horizontal = 20.dp)
+                                                modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding)
                                             )
                                         }
                                     }
@@ -552,14 +560,15 @@ fun InstalledAppInfoDialog(
                         // Info Section
                         val infoIdx = staggerIndex++
                         item {
-                            Box(modifier = Modifier.padding(top = 12.dp)) {
+                            Box(modifier = Modifier.padding(top = MorpheDefaults.ItemSpacing)) {
                                 StaggeredItem(entered = entered.value, index = infoIdx) {
                                     InfoSection(
                                         installedApp = installedApp,
                                         appliedPatches = appliedPatches,
                                         bundlesUsedSummary = bundlesUsedSummary,
                                         onShowPatches = { showAppliedPatchesDialog.value = true },
-                                        accentColor = appAccentColor
+                                        accentColor = appAccentColor,
+                                        modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding)
                                     )
                                 }
                             }
@@ -587,8 +596,8 @@ fun InstalledAppInfoDialog(
                                         showMountWarningDialog.value = true
                                     },
                                     modifier = Modifier
-                                        .padding(horizontal = 20.dp)
-                                        .padding(top = 12.dp)
+                                        .padding(horizontal = MorpheDefaults.ContentPadding)
+                                        .padding(top = MorpheDefaults.ItemSpacing)
                                 )
                             }
                         }
@@ -605,8 +614,8 @@ fun InstalledAppInfoDialog(
                                         isExpanded = true,
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .padding(horizontal = 20.dp)
-                                            .padding(top = 12.dp)
+                                            .padding(horizontal = MorpheDefaults.ContentPadding)
+                                            .padding(top = MorpheDefaults.ItemSpacing)
                                     )
                                 }
                             }
@@ -619,8 +628,8 @@ fun InstalledAppInfoDialog(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .navigationBarsPadding()
-                                .padding(horizontal = 20.dp)
-                                .padding(vertical = 12.dp)
+                                .padding(horizontal = MorpheDefaults.ContentPadding)
+                                .padding(vertical = MorpheDefaults.ItemSpacing)
                         )
                     }
                 }
@@ -653,27 +662,32 @@ private fun WarningBanner(
     val baseColor = if (isError) MaterialTheme.colorScheme.error else accentColor
     val containerColor = if (baseColor.isExtremeAccent()) MaterialTheme.colorScheme.surfaceVariant else baseColor.copy(alpha = 0.15f)
     val contentColor = baseColor.accentContentColor(0.15f)
+    val borderColor = if (baseColor.isExtremeAccent())
+        MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f)
+    else
+        baseColor.copy(alpha = 0.35f)
 
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(MorpheDefaults.ItemSpacing))
+            .border(1.dp, borderColor, RoundedCornerShape(MorpheDefaults.ItemSpacing))
             .background(containerColor)
-            .padding(12.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+            .padding(MorpheDefaults.ItemSpacing),
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Header with icon
         Row(
             modifier = Modifier.wrapContentWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
                 tint = contentColor,
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(MorpheDefaults.ContentPadding)
             )
             Text(
                 text = title,
@@ -717,11 +731,8 @@ private fun AppHeroHeader(
     val onHero = MaterialTheme.colorScheme.onBackground
     val chipBg = if (accentColor.isExtremeAccent()) onHero.copy(alpha = 0.12f) else accentColor.copy(alpha = 0.18f)
 
-    val iconSize = if (compact) 56.dp else 88.dp
+    val iconSize = if (compact) 56.dp else 72.dp
     val iconCorner = if (compact) 14.dp else 22.dp
-    val topPadding = if (compact) 8.dp else 12.dp
-    val bottomPadding = 10.dp
-    val chipSpacerHeight = 8.dp
 
     // Entrance animations (progress-based: 0f -> 1f).
     // One Float per visual group; alpha, offset and scale are derived via lerp
@@ -759,7 +770,6 @@ private fun AppHeroHeader(
             accentColor.copy(alpha = 0.15f)
         Box(
             modifier = Modifier
-                .fillMaxWidth()
                 .matchParentSize()
                 .background(heroBg)
         )
@@ -768,7 +778,10 @@ private fun AppHeroHeader(
             modifier = Modifier
                 .fillMaxWidth()
                 .statusBarsPadding()
-                .padding(start = 20.dp, end = 20.dp, top = topPadding, bottom = bottomPadding)
+                .padding(
+                    horizontal = MorpheDefaults.ContentPadding,
+                    vertical = MorpheDefaults.ContentPaddingSmall
+                )
         ) {
             val (chipIcon, chipLabel) = when (installedApp.installType) {
                 InstallType.MOUNT   -> Icons.Outlined.Link to R.string.mount
@@ -782,7 +795,7 @@ private fun AppHeroHeader(
             }
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -802,7 +815,7 @@ private fun AppHeroHeader(
                 )
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
                 ) {
                     // Animated app name (leads textProgress)
                     Box(
@@ -832,8 +845,6 @@ private fun AppHeroHeader(
                             alpha = p
                         }
                     )
-
-
                 }
                 // Compact mode: chips column on the right
                 if (compact) {
@@ -842,7 +853,7 @@ private fun AppHeroHeader(
                             translationY = lerp(20f, 0f, chipsProgress)
                             alpha = chipsProgress.coerceIn(0f, 1f)
                         },
-                        verticalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
                         horizontalAlignment = Alignment.End
                     ) {
                         PillBadge(
@@ -865,10 +876,10 @@ private fun AppHeroHeader(
 
             // Normal mode: chips on separate row below
             if (!compact) {
-                Spacer(Modifier.height(chipSpacerHeight))
+                Spacer(Modifier.height(MorpheDefaults.ContentPaddingSmall))
 
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
                 ) {
                     // Animated chip 1
                     Box(
@@ -967,50 +978,73 @@ private fun InfoSection(
         } catch (_: Exception) { null }
     }
 
-    Column(
+    val apkAbis = remember(installedApp.currentPackageName) {
+        try {
+            val pm = context.packageManager
+            val info = pm.getPackageInfo(installedApp.currentPackageName, 0)
+            val sourceDir = info.applicationInfo?.sourceDir ?: return@remember emptyList<String>()
+            NativeLibStripper.extractAbisFromApk(File(sourceDir))
+        } catch (_: Exception) { emptyList() }
+    }
+
+    MorpheCard(
+        cornerRadius = MorpheDefaults.ItemSpacing,
+        borderWidth = 1.dp,
         modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        InfoRow(
-            icon = Icons.Outlined.Inventory2,
-            label = stringResource(R.string.package_name),
-            value = installedApp.currentPackageName
-        )
-
-        if (installedApp.originalPackageName != installedApp.currentPackageName) {
+        Column {
             InfoRow(
-                icon = Icons.Outlined.Category,
-                label = stringResource(R.string.home_app_info_original_package_name),
-                value = installedApp.originalPackageName
+                icon = Icons.Outlined.Inventory2,
+                label = stringResource(R.string.package_name),
+                value = installedApp.currentPackageName
             )
-        }
 
-        if (apkSize != null) {
-            InfoRow(
-                icon = Icons.Outlined.SdCard,
-                label = stringResource(R.string.home_app_info_apk_size),
-                value = apkSize
-            )
-        }
+            if (installedApp.originalPackageName != installedApp.currentPackageName) {
+                MorpheSettingsDivider()
+                InfoRow(
+                    icon = Icons.Outlined.Category,
+                    label = stringResource(R.string.home_app_info_original_package_name),
+                    value = installedApp.originalPackageName
+                )
+            }
 
-        if (totalPatches > 0) {
-            InfoRowWithAction(
-                icon = Icons.Outlined.DoneAll,
-                label = stringResource(R.string.home_app_info_applied_patches),
-                value = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches),
-                accentColor = accentColor,
-                onAction = onShowPatches
-            )
-        }
+            if (apkSize != null) {
+                MorpheSettingsDivider()
+                InfoRow(
+                    icon = Icons.Outlined.SdCard,
+                    label = stringResource(R.string.home_app_info_apk_size),
+                    value = apkSize
+                )
+            }
 
-        if (bundlesUsedSummary.isNotBlank()) {
-            InfoRow(
-                icon = Icons.Outlined.Source,
-                label = stringResource(R.string.home_app_info_patch_source_used),
-                value = bundlesUsedSummary
-            )
+            if (apkAbis.isNotEmpty()) {
+                MorpheSettingsDivider()
+                InfoRow(
+                    icon = Icons.Outlined.Memory,
+                    label = stringResource(R.string.home_app_info_cpu_arch),
+                    value = apkAbis.joinToString(" • ")
+                )
+            }
+
+            if (totalPatches > 0) {
+                MorpheSettingsDivider()
+                InfoRowWithAction(
+                    icon = Icons.Outlined.DoneAll,
+                    label = stringResource(R.string.home_app_info_applied_patches),
+                    value = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches),
+                    accentColor = accentColor,
+                    onAction = onShowPatches
+                )
+            }
+
+            if (bundlesUsedSummary.isNotBlank()) {
+                MorpheSettingsDivider()
+                InfoRow(
+                    icon = Icons.Outlined.Source,
+                    label = stringResource(R.string.home_app_info_patch_source_used),
+                    value = bundlesUsedSummary
+                )
+            }
         }
     }
 }
@@ -1024,7 +1058,7 @@ private fun InfoRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(horizontal = MorpheDefaults.ItemSpacing, vertical = MorpheDefaults.ContentPaddingSmall),
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -1064,7 +1098,7 @@ private fun InfoRowWithAction(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(horizontal = MorpheDefaults.ItemSpacing, vertical = MorpheDefaults.ContentPaddingSmall),
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -1343,92 +1377,35 @@ private fun LoadingOrIcon(isLoading: Boolean, action: ActionItem, tint: Color) {
     }
 }
 
-/** Full-width primary button. */
+/** Shared Surface shell for all action buttons. Color computation lives in callers. */
 @Composable
-private fun PrimaryActionButton(
+private fun ActionButton(
     action: ActionItem,
-    accentColor: Color,
+    containerColor: Color,
+    contentColor: Color,
+    borderColor: Color,
     modifier: Modifier = Modifier,
-    contentColorOverride: Color? = null
+    vertical: Boolean = false
 ) {
-    val buttonColor = if (accentColor.isExtremeAccent()) MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.9f) else accentColor.copy(alpha = 0.18f)
-    val contentColor = contentColorOverride ?: accentColor.accentContentColor(0.18f)
     Surface(
         onClick = action.onClick,
         enabled = action.enabled && !action.isLoading,
-        modifier = modifier.height(56.dp),
-        shape = RoundedCornerShape(16.dp),
-        color = buttonColor,
-        contentColor = contentColor
-    ) {
-        Row(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 24.dp),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            LoadingOrIcon(action.isLoading, action, contentColor)
-            Spacer(Modifier.width(10.dp))
-            Text(
-                text = action.text,
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.Bold,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
-    }
-}
-
-/** Tile button - vertical (icon+label) or horizontal (icon left, label right). */
-@Composable
-private fun TileActionButton(
-    action: ActionItem,
-    modifier: Modifier = Modifier,
-    horizontal: Boolean = false
-) {
-    val containerColor = when {
-        action.isDestructive -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.45f)
-        !action.enabled -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
-        else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
-    }
-    val contentColor = when {
-        action.isDestructive -> MaterialTheme.colorScheme.error
-        !action.enabled -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.35f)
-        else -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.85f)
-    }
-
-    Surface(
-        onClick = action.onClick,
-        enabled = action.enabled && !action.isLoading,
-        modifier = modifier.height(56.dp),
-        shape = RoundedCornerShape(16.dp),
+        modifier = modifier.height(52.dp),
+        shape = RoundedCornerShape(MorpheDefaults.CardCornerRadius),
         color = containerColor,
-        contentColor = contentColor
+        contentColor = contentColor,
+        border = BorderStroke(1.dp, borderColor)
     ) {
-        if (horizontal) {
-            Row(
-                modifier = Modifier.fillMaxSize().padding(horizontal = 24.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                LoadingOrIcon(action.isLoading, action, contentColor)
-                Spacer(Modifier.width(10.dp))
-                Text(
-                    text = action.text,
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-        } else {
+        if (vertical) {
             Column(
-                modifier = Modifier.fillMaxSize().padding(vertical = 6.dp, horizontal = 8.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 LoadingOrIcon(action.isLoading, action, contentColor)
-                Spacer(Modifier.height(5.dp))
+                Spacer(Modifier.height(3.dp))
                 Text(
                     text = action.text,
                     style = MaterialTheme.typography.labelMedium,
@@ -1437,8 +1414,79 @@ private fun TileActionButton(
                     overflow = TextOverflow.Ellipsis
                 )
             }
+        } else {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = MorpheDefaults.ContentPadding),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                LoadingOrIcon(action.isLoading, action, contentColor)
+                Spacer(Modifier.width(MorpheDefaults.ContentPaddingSmall))
+                Text(
+                    text = action.text,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
         }
     }
+}
+
+/** Full-width primary button with accent color palette. */
+@Composable
+private fun PrimaryActionButton(
+    action: ActionItem,
+    accentColor: Color,
+    modifier: Modifier = Modifier,
+    contentColorOverride: Color? = null
+) {
+    val containerColor = if (accentColor.isExtremeAccent())
+        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.9f)
+    else
+        accentColor.copy(alpha = 0.18f)
+    ActionButton(
+        action = action,
+        containerColor = containerColor,
+        contentColor = contentColorOverride ?: accentColor.accentContentColor(0.18f),
+        borderColor = if (accentColor.isExtremeAccent())
+            MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f)
+        else
+            accentColor.copy(alpha = 0.35f),
+        modifier = modifier
+    )
+}
+
+/** Tile button - vertical (icon+label) for grids, horizontal (icon+label) for lists. */
+@Composable
+private fun TileActionButton(
+    action: ActionItem,
+    modifier: Modifier = Modifier,
+    horizontal: Boolean = false
+) {
+    ActionButton(
+        action = action,
+        containerColor = when {
+            action.isDestructive -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.45f)
+            !action.enabled -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+            else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+        },
+        contentColor = when {
+            action.isDestructive -> MaterialTheme.colorScheme.error
+            !action.enabled -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.35f)
+            else -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.85f)
+        },
+        borderColor = when {
+            action.isDestructive -> MaterialTheme.colorScheme.error.copy(alpha = 0.35f)
+            !action.enabled -> MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.2f)
+            else -> MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+        },
+        modifier = modifier,
+        vertical = !horizontal
+    )
 }
 
 @Composable
@@ -1636,7 +1684,7 @@ private fun AppliedPatchesDialog(
             bundles.forEach { bundle ->
                 Column(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
                 ) {
                     val title = buildString {
                         append(bundle.title)

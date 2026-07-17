@@ -345,6 +345,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="home_app_info_app_deleted_warning">App was uninstalled</string>
     <string name="home_app_info_app_deleted_description">This app was uninstalled outside the Morphe. Repatch it to restore functionality</string>
     <string name="home_app_info_apk_size">APK size</string>
+    <string name="home_app_info_cpu_arch">CPU architecture</string>
 
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching</string>

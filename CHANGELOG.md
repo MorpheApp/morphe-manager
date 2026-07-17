@@ -1,3 +1,20 @@
+# [1.24.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.7...v1.24.0-dev.8) (2026-07-17)
+
+
+### Bug Fixes
+
+* Align `About section` app-info item style with installer item ([d20d23b](https://github.com/MorpheApp/morphe-manager/commit/d20d23bceaf663e9e30a319f94089cdf2c1d6f7b))
+* Replace bundle card toggles with `ToggleRow` and fix expanded card spacing ([3ca5d32](https://github.com/MorpheApp/morphe-manager/commit/3ca5d3281f7699579158baaa0c1281fe06ca3fe1))
+* Replace compactPadding/noPadding booleans with `DialogPadding` enum ([0d7758b](https://github.com/MorpheApp/morphe-manager/commit/0d7758ba623e192986959272bcc6dccd889e5491))
+* Wrap `AboutSection` items in `SettingsGroup` ([2367e6c](https://github.com/MorpheApp/morphe-manager/commit/2367e6c82ac1d020c46f3782ab9d084469e66af1))
+
+
+### Features
+
+* Add footer section to `RadioSelectionCard` and apply it to installer options ([ecfaf03](https://github.com/MorpheApp/morphe-manager/commit/ecfaf03c00ad36fc551dbd4f410eeb8f7d72669a))
+* Display CPU architecture in saved and patched APK cards ([1d2b6e8](https://github.com/MorpheApp/morphe-manager/commit/1d2b6e8304a3ff3467e7f880d64bd028546289aa))
+* Redesign `InstalledAppInfoDialog` with Morphe-style components and layout improvements ([d9e4ef3](https://github.com/MorpheApp/morphe-manager/commit/d9e4ef30d07577c973c008330d599d1c8c1e633f))
+
 # [1.24.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.6...v1.24.0-dev.7) (2026-07-17)
 
 
