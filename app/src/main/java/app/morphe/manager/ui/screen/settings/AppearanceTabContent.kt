@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -63,6 +64,7 @@ fun AppearanceTabContent(
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
     val showAppGroupingSwitcher by homeAppButtonPrefs.showCategoryViewSwitcher.collectAsStateWithLifecycle()
+    val showSortButton by homeAppButtonPrefs.showSortButton.collectAsStateWithLifecycle()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
     val randomInterval by themeViewModel.prefs.randomBackgroundInterval.getAsState()
@@ -113,6 +115,24 @@ fun AppearanceTabContent(
                         onCheckedChange = null,
                         modifier = Modifier.semantics {
                             stateDescription = if (showGreetingPhrases) enabledState else disabledState
+                        }
+                    )
+                }
+            )
+            MorpheSettingsDivider()
+            SettingsItem(
+                onClick = { homeAppButtonPrefs.setShowSortButton(!showSortButton) },
+                title = stringResource(R.string.settings_appearance_sort_button),
+                subtitle = stringResource(R.string.settings_appearance_sort_button_description),
+                leadingContent = {
+                    MorpheIcon(icon = Icons.AutoMirrored.Outlined.Sort)
+                },
+                trailingContent = {
+                    MorpheSwitch(
+                        checked = showSortButton,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (showSortButton) enabledState else disabledState
                         }
                     )
                 }
