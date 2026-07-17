@@ -117,7 +117,7 @@ fun AppPatchesDialog(
         onDismissRequest = onDismiss,
         dismissOnClickOutside = true,
         title = null,
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         scrollable = false,
         contentArrangement = Arrangement.Top,
         footer = {
@@ -379,7 +379,7 @@ internal fun HideAppDialog(
                 onSecondaryClick = onDismiss
             )
         },
-        compactPadding = true
+        padding = DialogPadding.Compact
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -519,7 +519,7 @@ internal fun HiddenAppsDialog(
                 )
             }
         },
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         scrollable = false
     ) {
         if (hiddenAppItems.isEmpty()) {

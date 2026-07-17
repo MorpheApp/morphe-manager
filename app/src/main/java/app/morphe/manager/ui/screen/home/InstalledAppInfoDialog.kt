@@ -318,7 +318,7 @@ fun InstalledAppInfoDialog(
         onDismissRequest = onDismiss,
         title = null,
         dismissOnClickOutside = true,
-        noPadding = true,
+        padding = DialogPadding.None,
         footer = null,
         onEntered = { entered.value = true }
     ) {

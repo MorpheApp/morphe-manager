@@ -154,7 +154,7 @@ fun ExpertModeDialog(
         },
         dismissOnClickOutside = false,
         footer = null,
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         scrollable = false
     ) {
         BackHandler(enabled = searchVisible) {

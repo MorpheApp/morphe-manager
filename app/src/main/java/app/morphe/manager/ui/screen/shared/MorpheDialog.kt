@@ -41,22 +41,37 @@ val LocalDialogTextColor = compositionLocalOf { Color.White }
 /** Provides the secondary/hint text color for dialog content. */
 val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha = 0.7f) }
 
-private val DialogOuterPadding = 32.dp
-private val DialogSectionSpacing = 24.dp
+
+/** Controls outer padding and inset behavior of [MorpheDialog]. */
+enum class DialogPadding {
+    /** Standard 32dp outer padding with system bar insets. */
+    Normal,
+    /** Compact 16dp outer padding with system bar insets. */
+    Compact,
+    /** No padding and no insets — caller handles layout entirely. */
+    None
+}
+
+/** Visual style of a [DialogTitleAction]. */
+enum class DialogTitleActionStyle {
+    /** Flat [IconButton], 24dp icon, dialog text tint. Use for info/reset actions */
+    Plain,
+    /** Tonal 36dp circle with errorContainer palette, 20dp icon. Use for bulk destructive actions */
+    Destructive
+}
 
 /**
  * Unified fullscreen dialog component for Morphe UI.
  *
- * @param onDismissRequest Called when user dismisses the dialog
- * @param title Optional title displayed at the top
- * @param titleTrailingContent Optional content displayed after the title (e.g., reset button)
- * @param footer Optional footer content (typically buttons)
- * @param dismissOnClickOutside Whether clicking outside dismisses the dialog
+ * @param onDismissRequest Called when user dismisses the dialog.
+ * @param title Optional title displayed at the top.
+ * @param titleTrailingContent Optional content displayed after the title.
+ * @param footer Optional footer content.
+ * @param dismissOnClickOutside Whether clicking outside dismisses the dialog.
  * @param scrollable Whether to wrap content in verticalScroll. Set to false for LazyColumn. Default is true.
- * @param compactPadding Whether to use compact padding. Default is false.
- * @param noPadding Whether to remove all padding and system bar insets. Default is false.
+ * @param padding Outer padding mode. Default is [DialogPadding.Normal].
  * @param contentArrangement Vertical arrangement of the dialog content.
- * @param content Dialog content
+ * @param content Dialog content.
  */
 @Composable
 fun MorpheDialog(
@@ -66,8 +81,7 @@ fun MorpheDialog(
     footer: (@Composable () -> Unit)? = null,
     dismissOnClickOutside: Boolean = false,
     scrollable: Boolean = true,
-    compactPadding: Boolean = false,
-    noPadding: Boolean = false,
+    padding: DialogPadding = DialogPadding.Normal,
     contentArrangement: Arrangement.Vertical = Arrangement.Center,
     onEntered: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit
@@ -127,8 +141,7 @@ fun MorpheDialog(
                     footer = footer,
                     isDarkTheme = isDarkTheme,
                     scrollable = scrollable,
-                    compactPadding = compactPadding,
-                    noPadding = noPadding,
+                    padding = padding,
                     contentArrangement = contentArrangement,
                     content = content
                 )
@@ -213,15 +226,6 @@ fun BoxScope.MorpheContentOverlay(
     }
 }
 
-/** Visual style of a [DialogTitleAction]. */
-enum class DialogTitleActionStyle {
-    /** Flat [IconButton], 24dp icon, dialog text tint. Use for info/reset actions */
-    Plain,
-
-    /** Tonal 36dp circle with errorContainer palette, 20dp icon. Use for bulk destructive actions */
-    Destructive
-}
-
 /**
  * Icon action rendered inside the [MorpheDialog] title trailing slot. Uniforms the two
  * button styles used across dialogs so callers only pick an icon and a semantic style.
@@ -275,8 +279,7 @@ private fun DialogContent(
     footer: (@Composable () -> Unit)?,
     isDarkTheme: Boolean,
     scrollable: Boolean,
-    compactPadding: Boolean,
-    noPadding: Boolean,
+    padding: DialogPadding,
     contentArrangement: Arrangement.Vertical,
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -287,8 +290,7 @@ private fun DialogContent(
     val secondaryTextColor =
         if (isDarkTheme) Color.White.copy(alpha = 0.7f) else Color.Black.copy(alpha = 0.7f)
 
-    // noPadding mode: fill entire screen, no insets, caller handles layout
-    if (noPadding) {
+    if (padding == DialogPadding.None) {
         CompositionLocalProvider(
             LocalDialogTextColor provides textColor,
             LocalDialogSecondaryTextColor provides secondaryTextColor,
@@ -310,10 +312,9 @@ private fun DialogContent(
             .fillMaxSize()
             .systemBarsPadding()
             .padding(
-                if (compactPadding) {
-                    PaddingValues(MorpheDefaults.ContentPadding)
-                } else {
-                    PaddingValues(DialogOuterPadding)
+                when (padding) {
+                    DialogPadding.Compact -> PaddingValues(MorpheDefaults.ContentPadding)
+                    else -> PaddingValues(MorpheDefaults.ContentPaddingExpanded)
                 }
             )
             .pointerInput(Unit) {
@@ -338,7 +339,7 @@ private fun DialogContent(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(bottom = DialogSectionSpacing),
+                            .padding(bottom = MorpheDefaults.ContentPadding),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -375,7 +376,7 @@ private fun DialogContent(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = DialogSectionSpacing)
+                            .padding(top = MorpheDefaults.ContentPadding)
                     ) {
                         footer()
                     }

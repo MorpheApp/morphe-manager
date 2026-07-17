@@ -78,7 +78,7 @@ fun StorageManagementDialog(
     MorpheDialog(
         onDismissRequest = onDismissRequest,
         title = stringResource(R.string.settings_system_storage_management_title),
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         titleTrailingContent = {
             DialogTitleAction(
                 icon = Icons.Outlined.Refresh,
