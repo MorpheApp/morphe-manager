@@ -2442,6 +2442,7 @@ fun AppPatchesDialog(
         title = null,
         compactPadding = true,
         scrollable = false,
+        contentArrangement = Arrangement.Top,
         footer = {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.close),

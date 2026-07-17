@@ -621,7 +621,8 @@ private fun ApkManagementDialogContent(
             }
         },
         scrollable = false,
-        compactPadding = true
+        compactPadding = true,
+        contentArrangement = Arrangement.Top
     ) {
         val listState = rememberLazyListState()
         Box(modifier = Modifier.fillMaxWidth()) {

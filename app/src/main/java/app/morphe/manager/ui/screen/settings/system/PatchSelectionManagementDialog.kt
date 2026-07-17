@@ -338,7 +338,8 @@ private fun PatchSelectionManagementDialogContent(
             }
         },
         scrollable = false,
-        compactPadding = true
+        compactPadding = true,
+        contentArrangement = Arrangement.Top
     ) {
         if (selections.isEmpty()) {
             EmptyState(message = stringResource(R.string.settings_system_no_patches_or_options))

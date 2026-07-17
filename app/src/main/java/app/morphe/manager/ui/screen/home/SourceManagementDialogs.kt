@@ -590,7 +590,8 @@ fun BundlePatchesDialog(
             )
         },
         compactPadding = true,
-        scrollable = false
+        scrollable = false,
+        contentArrangement = Arrangement.Top
     ) {
         if (isLoading) {
             Box(
