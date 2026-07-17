@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -728,14 +729,20 @@ fun HeroInfoCard(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = titleColor,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+                AnimatedContent(
+                    targetState = title,
+                    transitionSpec = MorpheAnimations.counterTransitionSpec,
+                    label = "heroTitle"
+                ) { t ->
+                    Text(
+                        text = t,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = titleColor,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
                 if (subtitle != null) {
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(6.dp),

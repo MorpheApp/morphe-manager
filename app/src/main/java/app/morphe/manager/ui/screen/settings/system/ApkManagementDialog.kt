@@ -11,7 +11,9 @@ import android.net.Uri
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -36,7 +38,6 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
@@ -46,9 +47,9 @@ import app.morphe.manager.domain.installer.InstallerFileProvider
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
+import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
-import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -104,6 +105,11 @@ private data class OriginalApkEntry(
     val data: ApkItemData,
     val apk: OriginalApk
 )
+
+private sealed interface ApkLoadState<out T> {
+    data object Loading : ApkLoadState<Nothing>
+    data class Loaded<out T>(val items: List<T>) : ApkLoadState<T>
+}
 
 /** Static metadata for the APK list header and empty state. */
 @Immutable
@@ -170,52 +176,49 @@ private fun PatchedApksContent(
     val prefs: PreferencesManager = koinInject()
     val savePatchedApks by prefs.savePatchedApks.getAsState()
 
-    val allInstalledApps by repository.getAll().collectAsStateWithLifecycle(emptyList())
+    var state by remember { mutableStateOf<ApkLoadState<ApkItemDataWithApp>>(ApkLoadState.Loading) }
 
-    // Track loading state
-    var isLoading by remember { mutableStateOf(true) }
+    LaunchedEffect(Unit) {
+        repository.getAll().collect { apps ->
+            state = ApkLoadState.Loaded(
+                withContext(Dispatchers.IO) {
+                    apps.mapNotNull { app ->
+                        // Check if saved APK file exists
+                        val savedFile = listOf(
+                            filesystem.getPatchedAppFile(app.currentPackageName, app.version),
+                            filesystem.getPatchedAppFile(app.originalPackageName, app.version)
+                        ).distinct().firstOrNull { it.exists() } ?: return@mapNotNull null
 
-    // Pre-resolve all app data in a single effect
-    val apkItems by produceState(
-        initialValue = emptyList(),
-        key1 = allInstalledApps
-    ) {
-        isLoading = true
-        value = withContext(Dispatchers.IO) {
-            allInstalledApps.mapNotNull { app ->
-                // Check if saved APK file exists
-                val savedFile = listOf(
-                    filesystem.getPatchedAppFile(app.currentPackageName, app.version),
-                    filesystem.getPatchedAppFile(app.originalPackageName, app.version)
-                ).distinct().firstOrNull { it.exists() } ?: return@mapNotNull null
+                        // Use AppDataResolver to get data
+                        val resolvedData = appDataResolver.resolveAppData(
+                            app.currentPackageName,
+                            preferredSource = AppDataSource.PATCHED_APK
+                        )
 
-                // Use AppDataResolver to get data
-                val resolvedData = appDataResolver.resolveAppData(
-                    app.currentPackageName,
-                    preferredSource = AppDataSource.PATCHED_APK
-                )
-
-                ApkItemDataWithApp(
-                    packageName = app.currentPackageName,
-                    displayName = resolvedData.displayName,
-                    version = app.version,
-                    fileSize = savedFile.length(),
-                    installedApp = app,
-                    file = savedFile,
-                    installType = app.installType,
-                    abis = NativeLibStripper.extractAbisFromApk(savedFile)
-                )
-            }
+                        ApkItemDataWithApp(
+                            packageName = app.currentPackageName,
+                            displayName = resolvedData.displayName,
+                            version = app.version,
+                            fileSize = savedFile.length(),
+                            installedApp = app,
+                            file = savedFile,
+                            installType = app.installType,
+                            abis = NativeLibStripper.extractAbisFromApk(savedFile)
+                        )
+                    }
+                }
+            )
         }
-        isLoading = false
     }
 
-    val totalSize = remember(apkItems) { apkItems.sumOf { it.fileSize } }
+    val isLoading = state is ApkLoadState.Loading
+    val apkItems = (state as? ApkLoadState.Loaded)?.items ?: emptyList()
+    val totalSize = remember(state) { apkItems.sumOf { it.fileSize } }
     val itemToDelete = remember { mutableStateOf<InstalledApp?>(null) }
 
     // Look up by selectionKey to avoid index shifts on concurrent list updates
-    val displayItems = remember(apkItems) { apkItems.map { it.toApkItemData() } }
-    val appByKey = remember(apkItems) {
+    val displayItems = remember(state) { apkItems.map { it.toApkItemData() } }
+    val appByKey = remember(state) {
         apkItems.associate { it.toApkItemData().selectionKey to it.installedApp }
     }
 
@@ -359,44 +362,41 @@ private fun OriginalApksContent(
     val prefs: PreferencesManager = koinInject()
     val saveOriginalApks by prefs.saveOriginalApks.getAsState()
 
-    val originalApks by repository.getAll().collectAsStateWithLifecycle(emptyList())
+    var state by remember { mutableStateOf<ApkLoadState<OriginalApkEntry>>(ApkLoadState.Loading) }
 
-    // Track loading state
-    var isLoading by remember { mutableStateOf(true) }
+    LaunchedEffect(Unit) {
+        repository.getAll().collect { apks ->
+            state = ApkLoadState.Loaded(
+                withContext(Dispatchers.IO) {
+                    apks.map { apk ->
+                        val resolvedData = appDataResolver.resolveAppData(
+                            apk.packageName,
+                            preferredSource = AppDataSource.ORIGINAL_APK
+                        )
+                        val apkFile = File(apk.filePath).takeIf { it.exists() }
 
-    // Pair raw OriginalApk with each rendered ApkItemData so callbacks resolve by key
-    val entries by produceState(
-        initialValue = emptyList(),
-        key1 = originalApks
-    ) {
-        isLoading = true
-        value = withContext(Dispatchers.IO) {
-            originalApks.map { apk ->
-                val resolvedData = appDataResolver.resolveAppData(
-                    apk.packageName,
-                    preferredSource = AppDataSource.ORIGINAL_APK
-                )
-                val apkFile = File(apk.filePath).takeIf { it.exists() }
-
-                OriginalApkEntry(
-                    data = ApkItemData(
-                        packageName = apk.packageName,
-                        displayName = resolvedData.displayName,
-                        version = apk.version,
-                        fileSize = apk.fileSize,
-                        file = apkFile,
-                        abis = apkFile?.let { NativeLibStripper.extractAbisFromApk(it) } ?: emptyList()
-                    ),
-                    apk = apk
-                )
-            }
+                        OriginalApkEntry(
+                            data = ApkItemData(
+                                packageName = apk.packageName,
+                                displayName = resolvedData.displayName,
+                                version = apk.version,
+                                fileSize = apk.fileSize,
+                                file = apkFile,
+                                abis = apkFile?.let { NativeLibStripper.extractAbisFromApk(it) } ?: emptyList()
+                            ),
+                            apk = apk
+                        )
+                    }
+                }
+            )
         }
-        isLoading = false
     }
 
-    val apkItems = remember(entries) { entries.map { it.data } }
-    val apkByKey = remember(entries) { entries.associate { it.data.selectionKey to it.apk } }
-    val totalSize = remember(apkItems) { apkItems.sumOf { it.fileSize } }
+    val isLoading = state is ApkLoadState.Loading
+    val entries = (state as? ApkLoadState.Loaded)?.items ?: emptyList()
+    val apkItems = remember(state) { entries.map { it.data } }
+    val apkByKey = remember(state) { entries.associate { it.data.selectionKey to it.apk } }
+    val totalSize = remember(state) { apkItems.sumOf { it.fileSize } }
     val itemToDelete = remember { mutableStateOf<OriginalApk?>(null) }
 
     var itemToExport by remember { mutableStateOf<ApkItemData?>(null) }
@@ -666,25 +666,40 @@ private fun ApkManagementDialogContent(
 
                 // Summary box
                 item(key = "summary") {
-                    HeroInfoCard(
-                        icon = meta.icon,
-                        title = pluralStringResource(
-                            R.plurals.settings_system_apks_count,
-                            meta.count,
-                            meta.count
-                        ),
-                        containerColor = meta.accentColor.copy(alpha = 0.15f),
-                        iconContainerColor = meta.accentColor.copy(alpha = 0.25f),
-                        iconTint = meta.accentColor,
-                        titleColor = meta.accentColor,
-                        subtitle = {
-                            Text(
-                                text = stringResource(R.string.settings_system_apks_size, formatBytes(meta.totalSize)),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = LocalDialogSecondaryTextColor.current
+                    Crossfade(
+                        targetState = meta.isLoading,
+                        label = "heroCard"
+                    ) { loading ->
+                        if (loading) {
+                            ShimmerHeroInfoCard(accentColor = meta.accentColor)
+                        } else {
+                            HeroInfoCard(
+                                icon = meta.icon,
+                                title = pluralStringResource(
+                                    R.plurals.settings_system_apks_count,
+                                    meta.count,
+                                    meta.count
+                                ),
+                                containerColor = meta.accentColor.copy(alpha = 0.15f),
+                                iconContainerColor = meta.accentColor.copy(alpha = 0.25f),
+                                iconTint = meta.accentColor,
+                                titleColor = meta.accentColor,
+                                subtitle = {
+                                    AnimatedContent(
+                                        targetState = stringResource(R.string.settings_system_apks_size, formatBytes(meta.totalSize)),
+                                        transitionSpec = MorpheAnimations.counterTransitionSpec,
+                                        label = "heroSize"
+                                    ) { sizeText ->
+                                        Text(
+                                            text = sizeText,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = LocalDialogSecondaryTextColor.current
+                                        )
+                                    }
+                                }
                             )
                         }
-                    )
+                    }
                 }
 
                 // List of APKs or loading state
