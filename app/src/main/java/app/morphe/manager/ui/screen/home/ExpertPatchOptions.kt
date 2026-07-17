@@ -313,6 +313,8 @@ internal fun PatchOptionsDialog(
                         title = option.title,
                         description = option.description,
                         value = value?.toString() ?: "",
+                        packageName = packageName,
+                        isDefaultBundle = isDefaultBundle,
                         required = option.required,
                         onValueChange = { onValueChange(key, it) }
                     )
@@ -1270,19 +1272,34 @@ private fun FolderPickerOption(
     title: String,
     description: String,
     value: String,
+    packageName: String,
+    isDefaultBundle: Boolean,
     required: Boolean = false,
     onValueChange: (String) -> Unit
 ) {
+    val showIconCreator = remember { mutableStateOf(false) }
+    val showHeaderCreator = remember { mutableStateOf(false) }
     val isInvalid = required && value.isBlank()
 
-    val folderPicker = rememberFolderPickerWithPermission { uri ->
-        onValueChange(uri.toFilePath())
-    }
+    // Detect if this is icon-related or header-related field.
+    // Check header first, then icon (header takes priority).
+    val isHeaderField = title.contains("header", ignoreCase = true) ||
+            description.contains("header", ignoreCase = true)
+
+    val isIconField = !isHeaderField && (
+            title.contains("icon", ignoreCase = true) ||
+                    description.contains("mipmap", ignoreCase = true)
+            )
 
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
     ) {
+        // Folder picker (needs permissions for icon/header creation)
+        val folderPicker = rememberFolderPickerWithPermission { uri ->
+            onValueChange(uri.toFilePath())
+        }
+
         PickerFieldHeader(title = title, required = required, isInvalid = isInvalid)
 
         PickerButtonRow(
@@ -1293,13 +1310,59 @@ private fun FolderPickerOption(
             onClear = { onValueChange("") },
         )
 
-        if (description.isNotBlank()) {
-            Text(
-                text = description,
-                style = MaterialTheme.typography.bodySmall,
-                color = LocalDialogSecondaryTextColor.current
+        // Create Icon button (only for the default Morphe bundle)
+        if (isIconField && isDefaultBundle) {
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.adaptive_icon_create),
+                onClick = { showIconCreator.value = true },
+                icon = Icons.Outlined.AutoAwesome,
+                modifier = Modifier.fillMaxWidth()
             )
         }
+
+        // Create Header button (only for the default Morphe bundle)
+        if (isHeaderField && isDefaultBundle) {
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.header_creator_create),
+                onClick = { showHeaderCreator.value = true },
+                icon = Icons.Outlined.Image,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        // Instructions
+        if (description.isNotBlank()) {
+            ExpandableSurface(
+                title = stringResource(R.string.patch_option_instructions),
+                content = {
+                    ScrollableInstruction(description = description, maxHeight = 280.dp)
+                }
+            )
+        }
+    }
+
+    // Icon creator dialog
+    if (showIconCreator.value) {
+        AdaptiveIconCreatorDialog(
+            packageName = packageName,
+            onDismiss = { showIconCreator.value = false },
+            onIconCreated = { path ->
+                onValueChange(path)
+                showIconCreator.value = false
+            }
+        )
+    }
+
+    // Header creator dialog
+    if (showHeaderCreator.value) {
+        HeaderCreatorDialog(
+            packageName = packageName,
+            onDismiss = { showHeaderCreator.value = false },
+            onHeaderCreated = { path ->
+                onValueChange(path)
+                showHeaderCreator.value = false
+            }
+        )
     }
 }
 
