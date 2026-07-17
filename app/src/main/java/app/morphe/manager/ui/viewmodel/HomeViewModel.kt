@@ -531,16 +531,16 @@ class HomeViewModel(
     // Using mount install (set externally)
     var usingMountInstall: Boolean = false
 
-    // Controls the pre-patching installer selection dialog for root-capable devices.
+    // Controls the pre-patching mode selection dialog for root-capable devices.
     var showPrePatchInstallerDialog by mutableStateOf(false)
 
-    // Stores the pending arguments while the pre-patching installer dialog is visible.
+    // Stores the pending arguments while the pre-patching mode dialog is visible.
     private var pendingPatchApp: SelectedApp? = null
     private var pendingPatchAllowIncompatible: Boolean = false
 
     /**
      * Called when a root-capable device triggers patching. Instead of starting immediately,
-     * opens the pre-patching installer dialog so the user can choose Root Mount vs Standard.
+     * opens the pre-patching mode dialog so the user can choose Root Mount vs Standard.
      */
     fun requestPrePatchInstallerSelection(
         selectedApp: SelectedApp,
@@ -552,7 +552,7 @@ class HomeViewModel(
     }
 
     /**
-     * Called when the user selects an installation method from the pre-patching dialog.
+     * Called when the user selects a patch mode from the pre-patching dialog.
      * Sets [usingMountInstall] and starts patching with the correct patch configuration.
      */
     fun resolvePrePatchInstallerChoice(useMount: Boolean) {
@@ -569,7 +569,7 @@ class HomeViewModel(
     }
 
     /**
-     * Dismisses the pre-patching installer dialog without starting patching.
+     * Dismisses the pre-patching mode dialog without starting patching.
      */
     fun dismissPrePatchInstallerDialog() {
         showPrePatchInstallerDialog = false
@@ -2377,9 +2377,9 @@ class HomeViewModel(
         }
 
         // Patches exist and are applicable → proceed.
-        // For root-capable devices, we must know the installation method BEFORE patching
+        // For root-capable devices, we must know the patch mode BEFORE patching
         // because it affects which patches are included (GmsCore is excluded for mount install).
-        // Show the pre-patching installer dialog so the user can choose.
+        // Show the pre-patching mode dialog so the user can choose.
         // For non-root devices, just proceed - installer selection happens after patching.
         processSelectedAppIgnoringSignature(selectedApp)
     }

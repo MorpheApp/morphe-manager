@@ -79,7 +79,7 @@ fun InstallerSection(
             else Modifier
         ) {
             InstallerSettingsItem(
-                title = stringResource(R.string.installer_title),
+                title = stringResource(R.string.installer_settings_title),
                 entry = primaryEntry,
                 onClick = onShowInstallerDialog
             )
@@ -979,9 +979,10 @@ fun PlayStoreInstallerWarningDialog(
 }
 
 /**
- * Dialog shown to root device users before patching to choose between Root Mount and Standard Install.
+ * Dialog shown to root device users before patching to choose between root mount mode and
+ * standard install mode.
  *
- * The installation method directly affects how the APK is patched:
+ * The patch mode directly affects how the APK is patched:
  * - **Root Mount** excludes the GmsCore support patch - the mounted APK replaces the
  *   stock APK in-place via bind-mount, so the original Google services remain available
  *   and GmsCore would actually interfere.

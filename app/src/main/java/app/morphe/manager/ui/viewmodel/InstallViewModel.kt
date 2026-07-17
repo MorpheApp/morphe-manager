@@ -235,47 +235,30 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
                 // Plan resolution probes installer availability on disk; keep off main
                 val resolved = withContext(Dispatchers.IO) {
-                    if (oneTimeInstallerToken != null) {
-                        val token = oneTimeInstallerToken!!
-                        selectedInstallerToken = token
-                        oneTimeInstallerToken = null
-
-                        val entry = installerManager.describeEntry(token, InstallerManager.InstallTarget.PATCHER)
-
-                        if (entry != null && entry.availability.available) {
-                            val originalPrimary = installerManager.getPrimaryToken()
-                            installerManager.updatePrimaryToken(token)
-                            val result = installerManager.resolvePlanWithStatus(
-                                InstallerManager.InstallTarget.PATCHER,
-                                outputFile,
-                                targetPackageName,
-                                null
-                            )
-                            installerManager.updatePrimaryToken(originalPrimary)
-                            result
+                    fun regularInstallToken(token: InstallerManager.Token) =
+                        if (token == InstallerManager.Token.AutoSaved) {
+                            InstallerManager.Token.Internal
                         } else {
-                            // Even if the installer is unavailable, try resolve with it
-                            // to get the correct primaryToken and unavailabilityReason
-                            val originalPrimary = installerManager.getPrimaryToken()
-                            installerManager.updatePrimaryToken(token)
-                            val result = installerManager.resolvePlanWithStatus(
-                                InstallerManager.InstallTarget.PATCHER,
-                                outputFile,
-                                targetPackageName,
-                                null
-                            )
-                            installerManager.updatePrimaryToken(originalPrimary)
-                            result
+                            token
                         }
+
+                    val token = oneTimeInstallerToken
+                    val primaryToken = if (token != null) {
+                        selectedInstallerToken = token.takeUnless { it == InstallerManager.Token.AutoSaved }
+                        oneTimeInstallerToken = null
+                        token
                     } else {
                         selectedInstallerToken = null
-                        installerManager.resolvePlanWithStatus(
-                            InstallerManager.InstallTarget.PATCHER,
-                            outputFile,
-                            targetPackageName,
-                            null
-                        )
+                        installerManager.getPrimaryToken()
                     }
+
+                    installerManager.resolvePlanWithStatus(
+                        InstallerManager.InstallTarget.PATCHER,
+                        outputFile,
+                        targetPackageName,
+                        null,
+                        primaryTokenOverride = regularInstallToken(primaryToken)
+                    )
                 }
 
                 Log.d(TAG, "Resolved plan: ${resolved.plan::class.java.simpleName}")
@@ -369,9 +352,9 @@ class InstallViewModel : ViewModel(), KoinComponent {
             }
 
             is InstallerManager.InstallPlan.Mount -> {
-                Log.d(TAG, "Using root/mount installer")
-                // Mount install requires additional parameters, handled separately
-                handleInstallError(app.getString(R.string.installer_status_not_supported))
+                Log.w(TAG, "Root mount plan resolved for regular install; using internal installer")
+                currentInstallType = InstallType.DEFAULT
+                performStandardInstall(outputFile, originalPackageName, onPersistApp)
             }
 
             is InstallerManager.InstallPlan.External -> {

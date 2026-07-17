@@ -456,24 +456,33 @@ fun PatcherScreen(
         }
 
         val installTarget = InstallerManager.InstallTarget.PATCHER
+        val selectedInstallerToken = remember(primaryToken) {
+            if (primaryToken == InstallerManager.Token.AutoSaved) {
+                InstallerManager.Token.Internal
+            } else {
+                primaryToken
+            }
+        }
 
         // Installer entries with periodic updates
-        var options by remember(primaryToken) {
+        var options by remember(selectedInstallerToken) {
             mutableStateOf(
                 installerManager.ensureValidEntries(
-                    installerManager.listEntries(installTarget, includeNone = false),
-                    primaryToken,
+                    installerManager.listEntries(installTarget, includeNone = false)
+                        .filterNot { it.token == InstallerManager.Token.AutoSaved },
+                    selectedInstallerToken,
                     installTarget
                 )
             )
         }
 
         // Periodically update installer list for availability changes
-        LaunchedEffect(installTarget, primaryToken) {
+        LaunchedEffect(installTarget, selectedInstallerToken) {
             while (isActive) {
                 options = installerManager.ensureValidEntries(
-                    installerManager.listEntries(installTarget, includeNone = false),
-                    primaryToken,
+                    installerManager.listEntries(installTarget, includeNone = false)
+                        .filterNot { it.token == InstallerManager.Token.AutoSaved },
+                    selectedInstallerToken,
                     installTarget
                 )
                 delay(1_500.milliseconds)
@@ -483,7 +492,7 @@ fun PatcherScreen(
         InstallerSelectionDialog(
             title = stringResource(R.string.installer_title),
             options = options,
-            selected = primaryToken,
+            selected = selectedInstallerToken,
             onDismiss = installViewModel::dismissInstallerSelectionDialog,
             onConfirm = { selectedToken ->
                 installViewModel.proceedWithSelectedInstaller(selectedToken)

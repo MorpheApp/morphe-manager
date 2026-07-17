@@ -139,9 +139,10 @@ class InstallerManager(
         target: InstallTarget,
         sourceFile: File,
         expectedPackage: String,
-        sourceLabel: String?
+        sourceLabel: String?,
+        primaryTokenOverride: Token? = null
     ): ResolvedPlan {
-        val primaryToken = getPrimaryToken()
+        val primaryToken = primaryTokenOverride ?: getPrimaryToken()
         val primaryAvailability = availabilityFor(primaryToken, target, checkRoot = true)
 
         // If primary is available, use it

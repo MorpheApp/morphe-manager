@@ -190,9 +190,9 @@ fun HomeScreen(
         globalOnboardingState = globalOnboardingState
     )
 
-    // Pre-patching installer selection dialog for root-capable devices.
-    // This dialog must appear before patching starts because the installation method
-    // determines which patches are applied
+    // Pre-patching mode selection dialog for root-capable devices.
+    // This dialog must appear before patching starts because the patch mode determines
+    // which patches are applied.
     if (homeViewModel.showPrePatchInstallerDialog) {
         PrePatchInstallerDialog(
             onSelectMount = { homeViewModel.resolvePrePatchInstallerChoice(useMount = true) },
