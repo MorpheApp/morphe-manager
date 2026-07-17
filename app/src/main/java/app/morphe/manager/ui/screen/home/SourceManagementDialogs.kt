@@ -33,13 +33,11 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -592,7 +590,8 @@ fun BundlePatchesDialog(
             )
         },
         compactPadding = true,
-        scrollable = false
+        scrollable = false,
+        contentArrangement = Arrangement.Top
     ) {
         if (isLoading) {
             Box(
@@ -608,201 +607,65 @@ fun BundlePatchesDialog(
             Box(modifier = Modifier.fillMaxWidth()) {
                 LazyColumn(
                     state = listState,
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     // Bundle header
                     item {
-                        Surface(
-                            modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(16.dp),
-                            color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
-                                horizontalArrangement = Arrangement.spacedBy(14.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Surface(
-                                    shape = CircleShape,
-                                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
-                                    modifier = Modifier.size(56.dp)
-                                ) {
-                                    Box(contentAlignment = Alignment.Center) {
-                                        Icon(
-                                            imageVector = Icons.Outlined.Extension,
-                                            contentDescription = null,
-                                            tint = MaterialTheme.colorScheme.primary,
-                                            modifier = Modifier.size(28.dp)
-                                        )
-                                    }
-                                }
-
-                                Column(
-                                    modifier = Modifier.weight(1f),
-                                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                                ) {
-                                    Text(
-                                        text = src.displayTitle,
-                                        style = MaterialTheme.typography.titleLarge,
-                                        fontWeight = FontWeight.Bold,
-                                        color = LocalDialogTextColor.current,
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis
-                                    )
-
-                                    Row(
-                                        horizontalArrangement = Arrangement.spacedBy(6.dp),
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Outlined.Widgets,
-                                            contentDescription = null,
-                                            tint = MaterialTheme.colorScheme.primary,
-                                            modifier = Modifier.size(16.dp)
-                                        )
-                                        val patchCountLabel = pluralStringResource(
-                                            R.plurals.patch_count,
-                                            patches.size,
-                                            patches.size
-                                        )
-                                        val countText = if (isFiltering)
-                                            "${filteredPatches.size}/${patchCountLabel}"
-                                        else
-                                            patchCountLabel
-                                        AnimatedContent(
-                                            targetState = countText,
-                                            transitionSpec = MorpheAnimations.counterTransitionSpec,
-                                            label = "patch_count"
-                                        ) { count ->
-                                            Text(
-                                                text = count,
-                                                style = MaterialTheme.typography.bodySmall,
-                                                color = MaterialTheme.colorScheme.primary,
-                                                fontWeight = FontWeight.Medium
-                                            )
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        PatchesListHeaderCard(
+                            title = src.displayTitle,
+                            totalCount = patches.size,
+                            filteredCount = filteredPatches.size,
+                            isFiltering = isFiltering,
+                            modifier = Modifier.padding(bottom = MorpheDefaults.ContentPaddingSmall)
+                        )
                     }
 
                     // Search + filter button row
                     stickyHeader {
-                        Surface(
-                            modifier = Modifier.fillMaxWidth(),
-                            color = MaterialTheme.colorScheme.surface
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(bottom = 4.dp),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                verticalAlignment = Alignment.Bottom
-                            ) {
-                                MorpheDialogTextField(
-                                    value = searchQuery,
-                                    onValueChange = { searchQuery = it },
-                                    label = { Text(stringResource(R.string.expert_mode_search)) },
-                                    leadingIcon = {
-                                        Icon(
-                                            imageVector = Icons.Outlined.Search,
-                                            contentDescription = null
-                                        )
-                                    },
-                                    showClearButton = true,
-                                    modifier = Modifier.weight(1f)
-                                )
+                        PatchesListSearchRow(
+                            searchQuery = searchQuery,
+                            onSearchQueryChange = { searchQuery = it },
+                            showFilterButton = hasMultiplePackages,
+                            isFilterActive = selectedPackages.isNotEmpty(),
+                            onFilterClick = { showFilterSheet.value = true }
+                        )
+                    }
 
-                                if (hasMultiplePackages) {
-                                    FilledTonalIconButton(
-                                        onClick = { showFilterSheet.value = true },
-                                        modifier = Modifier.padding(bottom = 4.dp),
-                                        colors = IconButtonDefaults.filledTonalIconButtonColors(
-                                            containerColor = if (selectedPackages.isNotEmpty())
-                                                MaterialTheme.colorScheme.primaryContainer
-                                            else
-                                                MaterialTheme.colorScheme.surfaceVariant,
-                                            contentColor = if (selectedPackages.isNotEmpty())
-                                                MaterialTheme.colorScheme.onPrimaryContainer
-                                            else
-                                                MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Outlined.FilterList,
-                                            contentDescription = stringResource(R.string.filter),
-                                            modifier = Modifier.size(20.dp)
-                                        )
-                                    }
+                    // Active filter badges + empty state
+                    if (selectedPackages.isNotEmpty()) {
+                        item(key = "filter_badges") {
+                            FlowRow(
+                                modifier = Modifier
+                                    .animateItem()
+                                    .padding(top = MorpheDefaults.ContentPaddingSmall),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                selectedPackages.forEach { pkg ->
+                                    val label = appLabels[pkg] ?: pkg
+                                    InputChip(
+                                        selected = true,
+                                        onClick = { selectedPackages = selectedPackages - pkg },
+                                        label = { Text(label) },
+                                        trailingIcon = {
+                                            Icon(
+                                                imageVector = Icons.Outlined.Close,
+                                                contentDescription = stringResource(R.string.remove),
+                                                modifier = Modifier.size(16.dp)
+                                            )
+                                        }
+                                    )
                                 }
                             }
                         }
                     }
 
-                    // Active filter badges + empty state
-                    item(key = "filter_badges_and_empty_state") {
-                        Column {
-                            AnimatedVisibility(
-                                visible = selectedPackages.isNotEmpty(),
-                                enter = MorpheAnimations.expandFadeEnter,
-                                exit = MorpheAnimations.shrinkFadeExit
-                            ) {
-                                FlowRow(
-                                    modifier = Modifier.padding(bottom = 4.dp),
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                                ) {
-                                    selectedPackages.forEach { pkg ->
-                                        val label = appLabels[pkg] ?: pkg
-                                        InputChip(
-                                            selected = true,
-                                            onClick = { selectedPackages = selectedPackages - pkg },
-                                            label = { Text(label) },
-                                            trailingIcon = {
-                                                Icon(
-                                                    imageVector = Icons.Outlined.Close,
-                                                    contentDescription = stringResource(R.string.remove),
-                                                    modifier = Modifier.size(16.dp)
-                                                )
-                                            }
-                                        )
-                                    }
-                                }
-                            }
-
-                            AnimatedVisibility(
-                                visible = filteredPatches.isEmpty(),
-                                enter = MorpheAnimations.fadeScaleIn,
-                                exit = MorpheAnimations.fadeScaleOut
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .fillParentMaxHeight(0.5f),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Column(
-                                        horizontalAlignment = Alignment.CenterHorizontally,
-                                        verticalArrangement = Arrangement.spacedBy(12.dp)
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Outlined.SearchOff,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(48.dp),
-                                            tint = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
-                                        Text(
-                                            text = stringResource(R.string.expert_mode_no_results),
-                                            style = MaterialTheme.typography.bodyLarge,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                            textAlign = TextAlign.Center
-                                        )
-                                    }
-                                }
-                            }
+                    if (filteredPatches.isEmpty()) {
+                        item(key = "empty_state") {
+                            PatchesListEmptyState(
+                                modifier = Modifier
+                                    .animateItem()
+                                    .padding(top = MorpheDefaults.ContentPaddingSmall)
+                            )
                         }
                     }
 
@@ -824,11 +687,13 @@ fun BundlePatchesDialog(
                                 { context.toast(expertBadgeTooltip) }
                             } else null,
                             accentColor = accentColor,
-                            modifier = Modifier.animateItem(
-                                fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-                                fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
-                                placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
-                            )
+                            modifier = Modifier
+                                .padding(top = MorpheDefaults.ContentPaddingSmall)
+                                .animateItem(
+                                    fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+                                    fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
+                                    placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
+                                )
                         )
                     }
                 }
@@ -941,16 +806,12 @@ fun PatchItemCard(
         } else null
     }
 
-    Surface(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(14.dp))
-            .then(
-                if (!patch.options.isNullOrEmpty()) {
-                    Modifier.clickable { expandOptions = !expandOptions }
-                } else Modifier
-            ),
-        shape = RoundedCornerShape(14.dp),
+    SettingsItemCard(
+        onClick = if (!patch.options.isNullOrEmpty()) {
+            { expandOptions = !expandOptions }
+        } else null,
+        modifier = modifier,
+        borderWidth = 1.dp,
         color = cardColor ?: MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
     ) {
         Column(
@@ -965,9 +826,9 @@ fun PatchItemCard(
             ) {
                 Text(
                     text = patch.name,
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
+                    color = textColor,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Medium,
                     modifier = Modifier.weight(1f)
                 )
 
@@ -978,7 +839,7 @@ fun PatchItemCard(
                             stringResource(R.string.collapse)
                         else
                             stringResource(R.string.expand),
-                        tint = MaterialTheme.colorScheme.primary,
+                        tint = secondaryColor,
                         modifier = Modifier.rotate(rotationAngle)
                     )
                 }
@@ -989,7 +850,7 @@ fun PatchItemCard(
                 Text(
                     text = it,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = textColor
+                    color = secondaryColor
                 )
             }
 
@@ -999,17 +860,13 @@ fun PatchItemCard(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    InfoBadge(
+                    PillBadge(
                         text = stringResource(R.string.sources_dialog_view_any_package),
-                        icon = Icons.Outlined.Apps,
-                        style = InfoBadgeStyle.Default,
-                        isCompact = true
+                        icon = Icons.Outlined.Apps
                     )
-                    InfoBadge(
+                    PillBadge(
                         text = stringResource(R.string.sources_dialog_view_any_version),
-                        icon = Icons.Outlined.Code,
-                        style = InfoBadgeStyle.Default,
-                        isCompact = true
+                        icon = Icons.Outlined.Code
                     )
                 }
             } else {
@@ -1025,11 +882,10 @@ fun PatchItemCard(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            InfoBadge(
+                            PillBadge(
                                 text = appName,
                                 icon = Icons.Outlined.Apps,
                                 style = InfoBadgeStyle.Primary,
-                                isCompact = true,
                                 modifier = Modifier.align(Alignment.CenterVertically)
                             )
 
@@ -1038,11 +894,10 @@ fun PatchItemCard(
                                     versions.forEach { version ->
                                         val isExperimental =
                                             compatiblePackage.experimentalVersions?.contains(version) == true
-                                        InfoBadge(
+                                        PillBadge(
                                             text = version,
                                             icon = if (isExperimental) Icons.Outlined.Science else Icons.Outlined.Code,
                                             style = if (isExperimental) InfoBadgeStyle.Warning else InfoBadgeStyle.Default,
-                                            isCompact = true,
                                             modifier = Modifier.align(Alignment.CenterVertically)
                                         )
                                     }
@@ -1050,27 +905,22 @@ fun PatchItemCard(
                                     val firstVersion = versions.first()
                                     val firstIsExperimental =
                                         compatiblePackage.experimentalVersions?.contains(firstVersion) == true
-                                    InfoBadge(
+                                    PillBadge(
                                         text = firstVersion,
                                         icon = if (firstIsExperimental) Icons.Outlined.Science else Icons.Outlined.Code,
                                         style = if (firstIsExperimental) InfoBadgeStyle.Warning else InfoBadgeStyle.Default,
-                                        isCompact = true,
                                         modifier = Modifier.align(Alignment.CenterVertically)
                                     )
                                 }
 
                                 if (versions.size > 1) {
-                                    InfoBadge(
+                                    PillBadge(
                                         text = if (expandVersions)
                                             stringResource(R.string.less)
                                         else
                                             "+${versions.size - 1}",
-                                        style = InfoBadgeStyle.Default,
-                                        isCompact = true,
-                                        modifier = Modifier
-                                            .align(Alignment.CenterVertically)
-                                            .clip(RoundedCornerShape(6.dp))
-                                            .clickable { expandVersions = !expandVersions }
+                                        modifier = Modifier.align(Alignment.CenterVertically),
+                                        onClick = { expandVersions = !expandVersions }
                                     )
                                 }
                             }
@@ -1081,12 +931,11 @@ fun PatchItemCard(
 
             // Expert badge - shown only for patches that are disabled by default
             if (!patch.include && onExpertBadgeClick != null) {
-                InfoBadge(
+                PillBadge(
                     text = stringResource(R.string.sources_patch_expert_badge),
                     icon = Icons.Outlined.Lock,
                     style = InfoBadgeStyle.Warning,
-                    isCompact = true,
-                    modifier = Modifier.clickable(onClick = onExpertBadgeClick)
+                    onClick = onExpertBadgeClick
                 )
             }
 
@@ -1115,7 +964,7 @@ fun PatchItemCard(
                                         text = option.title,
                                         style = MaterialTheme.typography.titleSmall,
                                         fontWeight = FontWeight.SemiBold,
-                                        color = MaterialTheme.colorScheme.primary
+                                        color = textColor
                                     )
                                     Text(
                                         text = option.description,

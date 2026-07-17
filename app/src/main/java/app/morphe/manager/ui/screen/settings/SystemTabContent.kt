@@ -66,7 +66,7 @@ fun SystemTabContent(
             icon = Icons.Outlined.InstallMobile
         )
 
-        SectionCard(
+        SettingsGroup(
             modifier = if (onInstallerScrollTarget != null) Modifier.onGloballyPositioned { coords ->
                 onInstallerScrollTarget(coords.boundsInParent().top.roundToInt())
             } else Modifier
@@ -121,7 +121,7 @@ fun SystemTabContent(
             icon = Icons.Outlined.Info
         )
 
-        SectionCard {
+        SettingsGroup {
             AboutSection(
                 onAboutClick = onAboutClick,
                 onChangelogClick = onChangelogClick,

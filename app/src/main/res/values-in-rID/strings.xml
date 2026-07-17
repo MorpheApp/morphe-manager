@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Pembaruan Morphe tersedia</string>
     <string name="home_update_available_subtitle">Versi baru siap dipasang</string>
+    <string name="home_blocked_source_title">Sumber tambalan yang diblokir terdeteksi</string>
+    <string name="home_blocked_source_subtitle">Ketuk untuk meninjau dan menghapus</string>
+    <string name="home_metadata_errors_title">Beberapa sumber tambalan tidak tersedia</string>
+    <string name="home_metadata_errors_subtitle">Ketuk untuk meninjau sumber</string>
+    <string name="home_metered_skipped_title">Pembaruan dijeda pada data seluler</string>
+    <string name="home_metered_skipped_subtitle">Ketuk untuk mengizinkan pembaruan pada data seluler</string>
     <string name="home_update_error">Pembaruan gagal</string>
-    <string name="home_update_error_subtitle">Periksa koneksi internet Anda dan coba lagi</string>
+    <string name="home_update_error_subtitle">Terjadi kesalahan saat memperbarui sumber</string>
     <string name="home_update_skipped_metered">Pembaruan dilewati</string>
     <string name="home_update_skipped_metered_subtitle">Data seluler aktif</string>
     <string name="home_updating_sources">Memperbarui sumber…</string>
@@ -31,16 +37,28 @@
     <string name="home_app_sort_title">Urutkan aplikasi</string>
     <string name="home_app_sort_manual_description">Tekan lama sebuah aplikasi, lalu ketuk tombol urutkan</string>
     <string name="home_app_sort_recommended">Urutan yang Direkomendasikan</string>
-    <string name="home_app_sort_recommended_description">Aplikasi yang terinstal dan dipasang terlebih dahulu</string>
-    <string name="home_app_sort_name_asc_description">Abjad, A hingga Z</string>
-    <string name="home_app_sort_name_desc_description">Urutan abjad terbalik, Z hingga A</string>
-    <string name="home_app_sort_updates_first">Pembaruan patch terlebih dahulu</string>
-    <string name="home_app_sort_updates_first_description">Aplikasi dengan lencana pembaruan terlebih dahulu, lalu urutan yang direkomendasikan</string>
+    <string name="home_app_sort_recommended_description">Aplikasi yang sudah dipasang dan disematkan terlebih dahulu</string>
+    <string name="home_app_sort_name_asc_description">Berdasarkan abjad, A sampai Z</string>
+    <string name="home_app_sort_name_desc_description">Urutan abjad terbalik, Z sampai A</string>
+    <string name="home_app_sort_updates_first">Tambal pembaruan terlebih dahulu</string>
+    <string name="home_app_sort_updates_first_description">Aplikasi dengan lencana pembaruan terlebih dahulu, kemudian urutan rekomendasi</string>
     <string name="home_no_apps_title">Tidak ada aplikasi yang tersedia</string>
     <string name="home_no_apps_subtitle">Tambahkan sumber tambalan atau aktifkan yang sudah ada di %s</string>
     <string name="home_no_apps_search_subtitle">Tidak ada aplikasi yang cocok \"%s\"</string>
     <string name="home_all_apps_hidden_title">Semua aplikasi disembunyikan</string>
     <string name="home_all_apps_hidden_subtitle">Anda telah menyembunyikan semua aplikasi dari layar utama</string>
+    <string name="home_category_add">Tambahkan kategori</string>
+    <string name="home_category_all_apps">Semua aplikasi</string>
+    <string name="home_category_custom">Khusus</string>
+    <string name="home_category_uncategorized">Tidak berkategori</string>
+    <string name="home_category_new_title">Kategori baru</string>
+    <string name="home_category_rename_title">Ganti nama kategori</string>
+    <string name="home_category_name">Nama kategori</string>
+    <string name="home_category_move_to">Pindahkan ke kategori</string>
+    <string name="home_category_move_selected_title">Pindahkan aplikasi terpilih</string>
+    <string name="home_category_delete_confirm_title">Hapus kategori</string>
+    <string name="home_category_delete_confirm_message">Hapus kategori &lt;b&gt;%1$s&lt;/b&gt;? Aplikasi di dalamnya akan dikembalikan ke &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Tindakan tidak tersedia untuk kategori ini</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Aplikasi apa yang ingin Anda tambal?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -84,13 +102,13 @@
     <string name="home_greeting_super_late_5">Aktif di malam hari dan produktif</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Sumber tambalan</string>
-    <string name="sources_sort_title">Urutkan sumber patch</string>
+    <string name="sources_sort_title">Urutkan sumber tambalan</string>
     <string name="sources_sort_manual">Urutan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk mengubah urutan</string>
     <string name="sources_sort_last_updated">Terakhir diperbarui</string>
     <string name="sources_sort_last_updated_description">Pembaruan sumber terbaru terlebih dahulu</string>
     <string name="sources_sort_enabled_first">Aktifkan terlebih dahulu</string>
-    <string name="sources_sort_enabled_first_description">Tampilkan sumber aktif sebelum sumber dinonaktifkan</string>
+    <string name="sources_sort_enabled_first_description">Tampilkan sumber aktif sebelum sumber yang dinonaktifkan</string>
     <string name="sources_management_open_in_browser">Buka di peramban</string>
     <string name="sources_management_failed_to_open_url">Gagal membuka URL</string>
     <string name="sources_management_prerelease_toggle">Tambalan pra-rilis</string>
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Menambal aplikasi eksperimental jika tersedia</string>
     <string name="sources_management_already_exists">Sumber ini sudah ditambahkan</string>
     <string name="sources_management_invalid_url">URL sumber tidak sah. Harap periksa alamatnya dan coba lagi</string>
+    <string name="sources_management_blocked">Sumber tambalan ini diblokir dan tidak dapat ditambahkan</string>
+    <string name="sources_management_source_blocked_badge">Diblokir</string>
     <string name="sources_management_metadata_unavailable">Metadata Tidak Tersedia</string>
     <string name="sources_management_metadata_unavailable_hint">Berkas metadata daring tidak tersedia. Penambalan dengan bundel yang terpasang masih berfungsi, tetapi pembaruan otomatis dinonaktifkan untuk sumber ini</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Bundel tambalan tidak dapat diunduh. Sumber URL mungkin salah atau berkas tidak ada</string>
@@ -479,6 +499,8 @@ Mencopot pemasangannya akan menghapus semua data aplikasi secara permanen"</stri
     <string name="settings_appearance_home_screen">Layar beranda</string>
     <string name="settings_appearance_greeting_phrases">Frasa sapaan</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Tampilkan pesan sapaan di layar beranda</string>
+    <string name="settings_appearance_app_grouping">Pengelompokan aplikasi</string>
+    <string name="settings_appearance_app_grouping_description">Tampilkan pengalih layar beranda untuk mengelompokkan aplikasi berdasarkan sumber atau kategori Anda sendiri, mempertahankan pilihan saat dinonaktifkan</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikon aplikasi</string>
     <string name="settings_appearance_app_icon_default">Bawaan</string>
@@ -662,14 +684,12 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_prompt_installer_on_install_description">Menampilkan dialog pemilihan pemasang setiap kali Anda memasang aplikasi yang ditambal</string>
     <string name="settings_auto_install_with_shizuku">Pasang otomatis setelah menambal</string>
     <string name="settings_auto_install_with_shizuku_description">Secara senyap memasang APK yang telah ditambal segera setelah proses penambalan selesai</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" diaktifkan - pasang otomatis akan dilewati</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisasi baterai</string>
     <string name="settings_system_battery_optimization_description">Menjaga penambal tetap berjalan saat aplikasi diminimalkan</string>
     <string name="settings_system_performance">Performa</string>
     <string name="settings_system_process_runtime">Proses runtime</string>
     <string name="settings_system_process_runtime_description">Menjalankan penambalan di proses terpisah untuk stabilitas yang lebih baik</string>
-    <string name="settings_system_process_runtime_memory_limit">Batas memori</string>
     <string name="settings_system_process_runtime_memory_limit_description">Batas yang lebih tinggi mempercepat penambalan pada perangkat yang mendukung</string>
     <string name="settings_system_process_runtime_enable">Aktifkan proses runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memori tersedia untuk penambalan</string>
@@ -722,6 +742,31 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_system_apks_deleted_all">APK berhasil dihapus</string>
     <string name="settings_system_apks_export_zip_success">APK yang dipilih telah diekspor</string>
     <string name="settings_system_apks_export_zip_failed">Gagal mengekspor APK yang dipilih</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Pengelola penyimpanan</string>
+    <string name="settings_system_storage_management_description">Tinjau penggunaan disk dan bersihkan berkas cache</string>
+    <string name="settings_system_storage_keystore_title">Keystore penandatanganan</string>
+    <string name="settings_system_storage_app_data_title">Data aplikasi</string>
+    <string name="settings_system_storage_patch_bundles_title">Paket Tambalan</string>
+    <string name="settings_system_storage_http_cache_title">Cache jaringan</string>
+    <string name="settings_system_storage_http_cache_description">Respons HTTP di-cache untuk mempercepat pembaruan</string>
+    <string name="settings_system_storage_installer_cache_title">Cache pemasang eksternal</string>
+    <string name="settings_system_storage_installer_cache_description">Salinan APK yang diteruskan ke pemasang pihak ketiga</string>
+    <string name="settings_system_storage_patcher_workspace_title">Workspace penambal</string>
+    <string name="settings_system_storage_patcher_workspace_description">Berkas runtime penambal dan data sampah yang tidak terpakai</string>
+    <string name="settings_system_storage_temporary_title">Berkas sementara</string>
+    <string name="settings_system_storage_temporary_description">Berkas yang masih dapat digunakan dibuat selama patching</string>
+    <string name="settings_system_storage_clear_all">Hapus semua cache</string>
+    <string name="settings_system_storage_clear_all_description">Mengosongkan semua ruang cache yang dapat digunakan kembali sekaligus</string>
+    <string name="settings_system_storage_clear_all_confirm">Ini akan menghapus respons jaringan yang di-cache, salinan pemasang yang disimpan, dan berkas sementara. APK asli dan yang telah ditambal tetap disimpan</string>
+    <string name="settings_system_storage_cleared">Dikosongkan %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Tidak ada yang bisa dihapus</string>
+    <string name="settings_system_storage_open_app_info_title">Buka penyimpanan aplikasi Android</string>
+    <string name="settings_system_storage_open_app_info_description">Kelola atau hapus semua data Morphe melalui pengaturan sistem</string>
+    <string name="settings_system_save_original_apks_title">Simpan APK asli</string>
+    <string name="settings_system_save_original_apks_description">Simpan APK sebelum ditambal agar dapat digunakan kembali untuk penambalan ulang tanpa memilih berkas lagi</string>
+    <string name="settings_system_save_patched_apks_title">Simpan APK yang ditambal</string>
+    <string name="settings_system_save_patched_apks_description">Simpan salinan APK yang ditambal untuk diekspor atau dipasang kembali nanti dari pengelola</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK yang ditambal</string>
     <string name="settings_system_patched_apks_description">Mengelola berkas aplikasi yang ditambal dan disimpan</string>
@@ -777,7 +822,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="file_picker_sort_size_asc">Ukuran (terkecil dahulu)</string>
     <string name="file_picker_sort_date_desc">Tanggal (terbaru dahulu)</string>
     <string name="file_picker_sort_date_asc">Tanggal (terlama dahulu)</string>
-    <string name="file_picker_show_hidden_files">Tampilkan file tersembunyi</string>
+    <string name="file_picker_show_hidden_files">Tampilkan berkas tersembunyi</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tentang</string>
     <string name="settings_system_share_website">Bagikan situs web</string>

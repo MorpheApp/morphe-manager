@@ -60,9 +60,9 @@
         <item quantity="zero">%s مصدر تم تثبيته</item>
         <item quantity="one">%s مصدر تم تثبيته</item>
         <item quantity="two">%s مصادر تم تثبيتها</item>
-        <item quantity="few">%s مصدر تم تثبيته</item>
-        <item quantity="many">%s مصدر تم تثبيته</item>
-        <item quantity="other">%s مصدر تم تثبيته</item>
+        <item quantity="few">%s مصادر تم تثبيتها</item>
+        <item quantity="many">%s مصادر تم تثبيتها</item>
+        <item quantity="other">%s مصادر تم تثبيتها</item>
     </plurals>
     <plurals name="patch_selection_total_patches">
         <item quantity="zero">%s تعديل محدد</item>
@@ -79,5 +79,13 @@
         <item quantity="few">%s تطبيق مخفي</item>
         <item quantity="many">%s تطبيق مخفي</item>
         <item quantity="other">%s تطبيق مخفي</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="zero">%s تطبيقات</item>
+        <item quantity="one">%s تطبيق</item>
+        <item quantity="two">%s تطبيقات</item>
+        <item quantity="few">%s تطبيقات</item>
+        <item quantity="many">%s تطبيقات</item>
+        <item quantity="other">%s تطبيقات</item>
     </plurals>
 </resources>

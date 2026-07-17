@@ -3,6 +3,13 @@ package app.morphe.manager.util
 import android.text.format.DateUtils
 
 /**
+ * Format a "used / free" pair as `"{used} / {free}"`. If [free] is zero or negative,
+ * returns just [used] so callers do not have to guard against unavailable device stats.
+ */
+fun formatUsedFree(used: Long, free: Long): String =
+    if (free <= 0L) formatBytes(used) else "${formatBytes(used)} / ${formatBytes(free)}"
+
+/**
  * Format bytes into readable format (B, KB, MB, GB)
  */
 fun formatBytes(bytes: Long): String {

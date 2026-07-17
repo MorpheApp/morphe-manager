@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">มีการอัปเดต Morphe พร้อมใช้งาน</string>
     <string name="home_update_available_subtitle">เวอร์ชันใหม่พร้อมถูกติดตั้งแล้ว</string>
+    <string name="home_blocked_source_title">ตรวจพบแหล่งแพตช์ที่ถูกบล็อก</string>
+    <string name="home_blocked_source_subtitle">แตะเพื่อตรวจสอบและนำออก</string>
+    <string name="home_metadata_errors_title">บางแหล่งแพตช์ไม่สามารถใช้งานได้</string>
+    <string name="home_metadata_errors_subtitle">แตะเพื่อตรวจสอบแหล่งที่มา</string>
+    <string name="home_metered_skipped_title">หยุดการอัปเดตเมื่อใช้ข้อมูลมือถือ</string>
+    <string name="home_metered_skipped_subtitle">แตะเพื่ออนุญาตการอัปเดตผ่านข้อมูลมือถือ</string>
     <string name="home_update_error">อัปเดตล้มเหลว</string>
-    <string name="home_update_error_subtitle">ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
+    <string name="home_update_error_subtitle">เกิดข้อผิดพลาดขณะอัปเดตแหล่งข้อมูล</string>
     <string name="home_update_skipped_metered">อัปเดตถูกข้าม</string>
     <string name="home_update_skipped_metered_subtitle">กำลังใช้งานข้อมูลมือถือ</string>
     <string name="home_updating_sources">กำลังอัพเดทข้อมูล…</string>
@@ -33,11 +39,26 @@
     <string name="home_app_sort_recommended">เรียงตามที่แนะนำ</string>
     <string name="home_app_sort_recommended_description">แอปที่ติดตั้งและตรึงไว้ก่อน</string>
     <string name="home_app_sort_name_asc_description">ตามลำดับตัวอักษร A ถึง Z</string>
+    <string name="home_app_sort_name_desc_description">เรียงตามลำดับตัวอักษรย้อนกลับ Z ถึง A</string>
+    <string name="home_app_sort_updates_first">อัปเดตแพตช์ก่อน</string>
+    <string name="home_app_sort_updates_first_description">แอปที่มีแบทจ์อัปเดตก่อน จากนั้นตามลำดับที่แนะนำ</string>
     <string name="home_no_apps_title">ไม่มีแอปที่ใช้ได้</string>
     <string name="home_no_apps_subtitle">เพิ่มแหล่งที่มาของแพตช์หรือเปิดใช้งานแหล่งที่มาที่มีอยู่แล้วใน %s</string>
     <string name="home_no_apps_search_subtitle">ไม่พบแอปที่ตรงกับ \"%s\"</string>
     <string name="home_all_apps_hidden_title">แอปทั้งหมดถูกซ่อน</string>
     <string name="home_all_apps_hidden_subtitle">คุณซ่อนแอปทั้งหมดออกจากหน้าจอหลัก</string>
+    <string name="home_category_add">เพิ่มหมวดหมู่</string>
+    <string name="home_category_all_apps">แอปทั้งหมด</string>
+    <string name="home_category_custom">กำหนดเอง</string>
+    <string name="home_category_uncategorized">ยังไม่ได้จัดหมวดหมู่</string>
+    <string name="home_category_new_title">หมวดหมู่ใหม่</string>
+    <string name="home_category_rename_title">เปลี่ยนชื่อหมวดหมู่</string>
+    <string name="home_category_name">ชื่อหมวดหมู่</string>
+    <string name="home_category_move_to">ย้ายไปที่หมวดหมู่</string>
+    <string name="home_category_move_selected_title">ย้ายแอปที่เลือกไว้</string>
+    <string name="home_category_delete_confirm_title">ลบหมวดหมู่</string>
+    <string name="home_category_delete_confirm_message">ลบหมวดหมู่ &lt;b&gt;%1$s&lt;/b&gt;? แอปในหมวดหมู่นี้จะย้ายกลับไปที่ &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">ไม่มีการดำเนินการสำหรับหมวดหมู่นี้</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">คุณต้องการแพตช์แอปอะไร?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -81,9 +102,13 @@
     <string name="home_greeting_super_late_5">ตื่นตอนกลางคืนและยังทำงานได้</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">จัดการแหล่งที่มา</string>
+    <string name="sources_sort_title">เรียงลำดับแหล่งที่มาของแพตช์</string>
     <string name="sources_sort_manual">คำสั่งซื้อด้วยตนเอง</string>
     <string name="sources_sort_manual_hint">แตะค้างที่แหล่งข้อมูลเพื่อจัดเรียงใหม่</string>
     <string name="sources_sort_last_updated">ปรับปรุงล่าสุด</string>
+    <string name="sources_sort_last_updated_description">อัปเดตแหล่งที่มาล่าสุดก่อน</string>
+    <string name="sources_sort_enabled_first">เปิดใช้งานก่อน</string>
+    <string name="sources_sort_enabled_first_description">แสดงแหล่งที่มาที่ใช้งานอยู่ก่อนแหล่งที่มาที่ปิดใช้งาน</string>
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="sources_management_prerelease_toggle">แพตช์ก่อนเปิดตัว</string>
@@ -92,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">แพตซ์แอปเวอร์ชันทดลองของเป้าหมาย ถ้ามี</string>
     <string name="sources_management_already_exists">แหล่งที่มานี้ได้ถูกเพิ่มไปแล้ว</string>
     <string name="sources_management_invalid_url">URL ต้นทางไม่ถูกต้อง โปรดตรวจสอบที่อยู่และลองอีกครั้ง</string>
+    <string name="sources_management_blocked">แหล่งแพตช์นี้ถูกบล็อกและไม่สามารถเพิ่มได้</string>
+    <string name="sources_management_source_blocked_badge">ถูกบล็อก</string>
     <string name="sources_management_metadata_unavailable">ไม่มีข้อมูล Metadata</string>
     <string name="sources_management_metadata_unavailable_hint">ไฟล์ Metadata ระยะไกลไม่พร้อมใช้งาน การแก้ไขด้วยชุดติดตั้งที่มีอยู่ยังคงทำงานได้ แต่การอัปเดตอัตโนมัติถูกปิดใช้งานสำหรับแหล่งที่มานี้</string>
     <string name="sources_management_metadata_unavailable_hint_missing">ไม่สามารถดาวน์โหลดชุดแก้ไขได้ URL แหล่งที่มาอาจไม่ถูกต้อง หรือไฟล์ไม่มีอยู่</string>
@@ -471,6 +498,8 @@
     <string name="settings_appearance_home_screen">หน้าจอหลัก</string>
     <string name="settings_appearance_greeting_phrases">วลีทักทาย</string>
     <string name="settings_appearance_greeting_phrases_subtitle">แสดงข้อความทักทายบนหน้าจอหลัก</string>
+    <string name="settings_appearance_app_grouping">การจัดกลุ่มแอป</string>
+    <string name="settings_appearance_app_grouping_description">แสดงตัวสลับหน้าจอหลักเพื่อจัดกลุ่มแอปตามแหล่งที่มาหรือตามหมวดหมู่ของคุณเอง โดยจะเก็บการเลือกไว้เมื่อปิด</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">ไอคอนแอป</string>
     <string name="settings_appearance_app_icon_default">ค่าเริ่มต้น</string>
@@ -654,14 +683,12 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">แสดงกล่องโต้ตอบการเลือกตัวติดตั้งทุกครั้งที่มีการติดตั้งแอปที่แพตช์แล้ว</string>
     <string name="settings_auto_install_with_shizuku">ติดตั้งอัตโนมัติหลังจากการแพตช์</string>
     <string name="settings_auto_install_with_shizuku_description">ติดตั้ง APK ที่ผ่านการแพตช์โดยอัตโนมัติเมื่อการแพตช์เสร็จสิ้น</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" เปิดใช้งานอยู่ - การติดตั้งอัตโนมัติจะถูกข้าม</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">การเพิ่มประสิทธิภาพแบตเตอรี่</string>
     <string name="settings_system_battery_optimization_description">ทำให้ตัวแพตช์ทำงานต่อไปเมื่อแอปพลิเคชันถูกลดขนาด</string>
     <string name="settings_system_performance">การตั้งค่า</string>
     <string name="settings_system_process_runtime">การทำงานของโปรเซส</string>
     <string name="settings_system_process_runtime_description">เรียกใช้การแพตช์ในกระบวนการแยกต่างหากเพื่อเพิ่มความเสถียร</string>
-    <string name="settings_system_process_runtime_memory_limit">ขนาดความจำ</string>
     <string name="settings_system_process_runtime_memory_limit_description">ขีดจำกัดที่สูงขึ้นช่วยเพิ่มความเร็วในการแพตช์บนอุปกรณ์ที่รองรับ</string>
     <string name="settings_system_process_runtime_enable">เปิดใช้การทำงานของโปรเซส</string>
     <string name="settings_system_memory_limit_subtitle">ขนาดความจำที่ใช้สำหรับการแพตซ์</string>
@@ -714,6 +741,31 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">ลบไฟล์ APK สำเร็จแล้ว</string>
     <string name="settings_system_apks_export_zip_success">ส่งออก APK ที่เลือกแล้ว</string>
     <string name="settings_system_apks_export_zip_failed">ส่งออก APK ที่เลือกไม่สำเร็จ</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">การจัดการพื้นที่เก็บข้อมูล</string>
+    <string name="settings_system_storage_management_description">ตรวจสอบการใช้งานดิสก์และล้างไฟล์ที่แคชไว้</string>
+    <string name="settings_system_storage_keystore_title">คีย์สโตร์การลงชื่อ</string>
+    <string name="settings_system_storage_app_data_title">ข้อมูลแอป</string>
+    <string name="settings_system_storage_patch_bundles_title">ชุดแพตช์</string>
+    <string name="settings_system_storage_http_cache_title">แคชเครือข่าย</string>
+    <string name="settings_system_storage_http_cache_description">แคชการตอบกลับ HTTP เพื่อเพิ่มความเร็วในการอัปเดต</string>
+    <string name="settings_system_storage_installer_cache_title">แคชตัวติดตั้งภายนอก</string>
+    <string name="settings_system_storage_installer_cache_description">สำเนา APK ที่ส่งไปยังตัวติดตั้งของบุคคลที่สาม</string>
+    <string name="settings_system_storage_patcher_workspace_title">พื้นที่ทำงานของตัวปรับแต่งแก้ไข</string>
+    <string name="settings_system_storage_patcher_workspace_description">ไฟล์รันไทม์ของตัวปรับแต่งแก้ไขและข้อมูลขยะที่ไม่ได้ใช้งาน</string>
+    <string name="settings_system_storage_temporary_title">ไฟล์ชั่วคราว</string>
+    <string name="settings_system_storage_temporary_description">ไฟล์ทำงานที่สร้างขึ้นระหว่างการปรับแต่งแก้ไข</string>
+    <string name="settings_system_storage_clear_all">ล้างแคชทั้งหมด</string>
+    <string name="settings_system_storage_clear_all_description">ล้างพื้นที่แคชที่สามารถเรียกคืนได้ทั้งหมดในครั้งเดียว</string>
+    <string name="settings_system_storage_clear_all_confirm">การดำเนินการนี้จะล้างการตอบกลับเครือข่ายที่แคชไว้ สำเนาตัวติดตั้งที่จัดเตรียมไว้ และไฟล์ชั่วคราว ไฟล์ APK ดั้งเดิมและที่ปรับแต่งแก้ไขจะถูกเก็บไว้</string>
+    <string name="settings_system_storage_cleared">พื้นที่ว่าง %s</string>
+    <string name="settings_system_storage_nothing_to_clear">ไม่มีอะไรให้ล้าง</string>
+    <string name="settings_system_storage_open_app_info_title">เปิดที่เก็บข้อมูลแอป Android</string>
+    <string name="settings_system_storage_open_app_info_description">จัดการหรือล้างข้อมูล Morphe ทั้งหมดผ่านการตั้งค่าระบบ</string>
+    <string name="settings_system_save_original_apks_title">เก็บ APK ต้นฉบับ</string>
+    <string name="settings_system_save_original_apks_description">บันทึก APK ก่อนแพตช์ เพื่อนำกลับมาแพตช์ใหม่ได้โดยไม่ต้องเลือกไฟล์อีกครั้ง</string>
+    <string name="settings_system_save_patched_apks_title">เก็บ APK ที่แพตช์แล้ว</string>
+    <string name="settings_system_save_patched_apks_description">บันทึกสำเนา APK ที่แพตช์แล้วสำหรับการส่งออกหรือติดตั้งภายหลังผ่านตัวจัดการ</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">คุณแน่ใจหรือไม่ว่าต้องการลบแอปที่ถูกนำพัท์ %s?</string>
     <string name="settings_system_patched_apks_description">จัดการไฟล์แอปพลิเคชันที่แพตช์แล้วที่บันทึกไว้</string>

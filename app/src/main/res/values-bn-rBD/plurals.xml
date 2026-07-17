@@ -40,4 +40,8 @@
         <item quantity="one">%s লুকানো অ্যাপ্লিকেশন</item>
         <item quantity="other">%s লুকানো অ্যাপ্লিকেশনগুলি</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s টি অ্যাপ</item>
+        <item quantity="other">%s টি অ্যাপস</item>
+    </plurals>
 </resources>

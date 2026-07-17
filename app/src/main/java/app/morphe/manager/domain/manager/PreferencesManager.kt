@@ -110,8 +110,17 @@ class PreferencesManager(
     val filePickerSortMode = stringPreference("file_picker_sort_mode", "NAME_ASC")
     val filePickerShowHiddenFiles = booleanPreference("file_picker_show_hidden_files", false)
 
-    // Patch source list ordering mode.
+    /** Persist the pre-patch APK so it can be reused for repatching without asking the user to reselect it. */
+    val saveOriginalApks = booleanPreference("save_original_apks", true)
+
+    /** Persist the post-patch APK so it can be exported or reinstalled after the patcher screen is closed. */
+    val savePatchedApks = booleanPreference("save_patched_apks", true)
+
+    /** Patch source list ordering mode */
     val sourceBundleSortMode = stringPreference("source_bundle_sort_mode", SourceBundleSortMode.MANUAL.name)
+
+    /** On-disk cache of the remote source blocklist (JSON), so offline launches still enforce it. */
+    val blocklistCache = stringPreference("blocklist_cache", "")
 
     /** Tracks whether the user has explicitly toggled the custom file picker preference. */
     val customFilePickerUserConfigured = booleanPreference("custom_file_picker_user_configured", false)
@@ -209,7 +218,10 @@ class PreferencesManager(
         val filePickerShowHiddenFiles: Boolean? = null,
         val useCustomFilePicker: Boolean? = null,
         val customFilePickerUserConfigured: Boolean? = null,
-        val sourceBundleSortMode: String? = null
+        val sourceBundleSortMode: String? = null,
+        val saveOriginalApks: Boolean? = null,
+        val savePatchedApks: Boolean? = null,
+        val homeAppButtons: HomeAppButtonSnapshot? = null
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -248,7 +260,9 @@ class PreferencesManager(
         filePickerShowHiddenFiles = filePickerShowHiddenFiles.get(),
         useCustomFilePicker = useCustomFilePicker.get(),
         customFilePickerUserConfigured = customFilePickerUserConfigured.get(),
-        sourceBundleSortMode = sourceBundleSortMode.get()
+        sourceBundleSortMode = sourceBundleSortMode.get(),
+        saveOriginalApks = saveOriginalApks.get(),
+        savePatchedApks = savePatchedApks.get()
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -288,6 +302,8 @@ class PreferencesManager(
         snapshot.useCustomFilePicker?.let { useCustomFilePicker.value = it }
         snapshot.customFilePickerUserConfigured?.let { customFilePickerUserConfigured.value = it }
         snapshot.sourceBundleSortMode?.let { sourceBundleSortMode.value = it }
+        snapshot.saveOriginalApks?.let { saveOriginalApks.value = it }
+        snapshot.savePatchedApks?.let { savePatchedApks.value = it }
     }
 
     companion object {

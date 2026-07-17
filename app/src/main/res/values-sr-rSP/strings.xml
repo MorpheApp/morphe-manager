@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Доступно је ажурирање за Morphe</string>
     <string name="home_update_available_subtitle">Нова верзија спремна за инсталирање</string>
+    <string name="home_blocked_source_title">Уочен блокиран извор закрпе</string>
+    <string name="home_blocked_source_subtitle">Додирните да прегледате и уклоните</string>
+    <string name="home_metadata_errors_title">Неки извори закрпа нису доступни</string>
+    <string name="home_metadata_errors_subtitle">Додирните да прегледате изворе</string>
+    <string name="home_metered_skipped_title">Ажурирања су паузирана на мобилним подацима</string>
+    <string name="home_metered_skipped_subtitle">Додирните да бисте дозволили ажурирања преко мобилних података</string>
     <string name="home_update_error">Ажурирање није успело</string>
-    <string name="home_update_error_subtitle">Проверите интернет везу и покушајте поново</string>
+    <string name="home_update_error_subtitle">Нешто је пошло по злом док се ажурирају извори</string>
     <string name="home_update_skipped_metered">Пропуштено ажурирања</string>
     <string name="home_update_skipped_metered_subtitle">Мобилни подаци су активни</string>
     <string name="home_updating_sources">Ажурирање извора…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Нема апликација које одговарају на \"%s\"</string>
     <string name="home_all_apps_hidden_title">Све апликације су скривене</string>
     <string name="home_all_apps_hidden_subtitle">Скрио/Скриле сте све апликације са почетног екрана</string>
+    <string name="home_category_add">Додај категорију</string>
+    <string name="home_category_all_apps">Све апликације</string>
+    <string name="home_category_custom">Прилагођено</string>
+    <string name="home_category_uncategorized">Некатегорисано</string>
+    <string name="home_category_new_title">Нова категорија</string>
+    <string name="home_category_rename_title">Преименуј категорију</string>
+    <string name="home_category_name">Назив категорије</string>
+    <string name="home_category_move_to">Премести у категорију</string>
+    <string name="home_category_move_selected_title">Премести изабране апликације</string>
+    <string name="home_category_delete_confirm_title">Обриши категорију</string>
+    <string name="home_category_delete_confirm_message">Обриши категорију &lt;b&gt;%1$s&lt;/b&gt;? Апликације у њој ће бити враћене у &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Функције нису доступне за ову категорију</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Коју апликацију желите да печујете?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Пачује експерименталне циљеве апликација ако су доступни</string>
     <string name="sources_management_already_exists">Ovaj izvor je već dodan</string>
     <string name="sources_management_invalid_url">Невалидна УРЛ адреса извора. Молимо проверите адресу и покушајте поново</string>
+    <string name="sources_management_blocked">Овај извор за надоградњу је блокиран и не може бити додат</string>
+    <string name="sources_management_source_blocked_badge">Блокиран</string>
     <string name="sources_management_metadata_unavailable">Метаподаци нису доступни</string>
     <string name="sources_management_metadata_unavailable_hint">Датотека метаподатка са удаљеног извора није доступна. Поправка са инсталираним пакетом и даље функционише, али аутоматска ажурирања су искључена за овај извор</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Пакест за поправку није могао да се преузме. УРЛ адреса извора може бити неисправна или датотека не постоји</string>
@@ -478,6 +498,8 @@
     <string name="settings_appearance_home_screen">Почетни екран</string>
     <string name="settings_appearance_greeting_phrases">Почетне фразе</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Прикажи поруку на почетном екрану</string>
+    <string name="settings_appearance_app_grouping">Груписање апликација</string>
+    <string name="settings_appearance_app_grouping_description">Прикажи прекидач почетног екрана за груписање апликација по извору или властитим категоријама, задржавајући селекцију када је искључено</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Иконица апликације</string>
     <string name="settings_appearance_app_icon_default">Подразумеван</string>
@@ -661,14 +683,12 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">Приказује дијалог за избор инсталатера сваки пут када се инсталира закрпљена апликација</string>
     <string name="settings_auto_install_with_shizuku">Аутоматска инсталација након закрпе</string>
     <string name="settings_auto_install_with_shizuku_description">Тихо инсталира закрпљени APK чим је закрпљивање завршено</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" је омогућено - аутоматска инсталација ће бити прескочена</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизација батерије</string>
     <string name="settings_system_battery_optimization_description">Држи закрпљивач активним када је апликација минимизирана</string>
     <string name="settings_system_performance">Начин</string>
     <string name="settings_system_process_runtime">Трајање времена</string>
     <string name="settings_system_process_runtime_description">Покреће закрпљивање у засебном процесу за већу стабилност</string>
-    <string name="settings_system_process_runtime_memory_limit">Ограничење меморије</string>
     <string name="settings_system_process_runtime_memory_limit_description">Већи лимити убрзавају закрпљивање на уређајима који то подржавају</string>
     <string name="settings_system_process_runtime_enable">Омогући меморије</string>
     <string name="settings_system_memory_limit_subtitle">Кликните да конфигуришете</string>
@@ -721,6 +741,31 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APK фајлови успешно избрисани</string>
     <string name="settings_system_apks_export_zip_success">Извезени изабрани APK-ови</string>
     <string name="settings_system_apks_export_zip_failed">Извоз изабраних APK-ова није успео</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Управљање складиштем</string>
+    <string name="settings_system_storage_management_description">Прегледајте коришћење диска и очистите кеширане фајлове</string>
+    <string name="settings_system_storage_keystore_title">Складиште потписа</string>
+    <string name="settings_system_storage_app_data_title">Подаци апликације</string>
+    <string name="settings_system_storage_patch_bundles_title">Пакет печева</string>
+    <string name="settings_system_storage_http_cache_title">Кеш мреже</string>
+    <string name="settings_system_storage_http_cache_description">HTTP одговори кеширани за брже ажурирање</string>
+    <string name="settings_system_storage_installer_cache_title">Кеш екстерног инсталера</string>
+    <string name="settings_system_storage_installer_cache_description">Копије АПК-ова прослеђене инсталерима трећих страна</string>
+    <string name="settings_system_storage_patcher_workspace_title">Радна површина подешавача</string>
+    <string name="settings_system_storage_patcher_workspace_description">Рачунарски фајлови подешавача и напуштене привремене датотеке</string>
+    <string name="settings_system_storage_temporary_title">Привремени фајлови</string>
+    <string name="settings_system_storage_temporary_description">Радни фајлови креирани током подешавања</string>
+    <string name="settings_system_storage_clear_all">Очисти све кешеве</string>
+    <string name="settings_system_storage_clear_all_description">Ослобађа све кеш просторе који се могу вратити одједном</string>
+    <string name="settings_system_storage_clear_all_confirm">Ово брише кеширане мрежне одговоре, спремљене копије инсталера и привремне фајлове. Оригинални и подешени АПК-ови су сачувани</string>
+    <string name="settings_system_storage_cleared">Ослобођено %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Ништа за брисање</string>
+    <string name="settings_system_storage_open_app_info_title">Отвори складиште апликација за Android</string>
+    <string name="settings_system_storage_open_app_info_description">Управљајте или избришите све податке Morphe-а преко подешавања система</string>
+    <string name="settings_system_save_original_apks_title">Сачувај оригиналне APK фајлове</string>
+    <string name="settings_system_save_original_apks_description">Сачувај пре-патчovani APK да би могао поново да се користи за патч без поновног бирања фајла</string>
+    <string name="settings_system_save_patched_apks_title">Сачувај патчоване APK фајлове</string>
+    <string name="settings_system_save_patched_apks_description">Сачувај копију патчованог APK-а за каснији извоз или поновну инсталацију из менаџера</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Патчеви</string>
     <string name="settings_system_patched_apks_description">Управља сачуваним закрпљеним датотекама апликација</string>

@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe güncellemesi mevcut</string>
     <string name="home_update_available_subtitle">Yeni sürüm yükleme için hazır</string>
+    <string name="home_blocked_source_title">Engellenen yama kaynağı algılandı</string>
+    <string name="home_blocked_source_subtitle">İncelemek ve kaldırmak için dokunun</string>
+    <string name="home_metadata_errors_title">Bazı yama kaynakları kullanılamıyor</string>
+    <string name="home_metadata_errors_subtitle">Kaynakları incelemek için dokunun</string>
+    <string name="home_metered_skipped_title">Mobil veride güncellemeler duraklatıldı</string>
+    <string name="home_metered_skipped_subtitle">Mobil veride güncellemeleri etkinleştirmek için dokunun</string>
     <string name="home_update_error">Güncelleme başarısız</string>
-    <string name="home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
+    <string name="home_update_error_subtitle">Kaynaklar güncellenirken bir sorun oluştu</string>
     <string name="home_update_skipped_metered">Güncellemeler atlandı</string>
     <string name="home_update_skipped_metered_subtitle">Mobil veri etkin</string>
     <string name="home_updating_sources">Kaynaklar güncelleniyor…</string>
@@ -33,11 +39,26 @@
     <string name="home_app_sort_recommended">Önerilen sıra</string>
     <string name="home_app_sort_recommended_description">Yüklenen ve sabitlenen uygulamalar önce</string>
     <string name="home_app_sort_name_asc_description">Alfabetik, A\'dan Z\'ye</string>
+    <string name="home_app_sort_name_desc_description">Ters alfabetik, Z\'den A\'ya</string>
+    <string name="home_app_sort_updates_first">Önce yama güncellemeleri</string>
+    <string name="home_app_sort_updates_first_description">Güncelleme rozeti olan uygulamalar önce, ardından önerilen sıra</string>
     <string name="home_no_apps_title">Uygulama bulunamadı</string>
     <string name="home_no_apps_subtitle">Bir yama kaynağı ekleyin veya %s içinde mevcut olanı etkinleştirin</string>
     <string name="home_no_apps_search_subtitle">\"%s\" ile eşleşen uygulama yok</string>
     <string name="home_all_apps_hidden_title">Tüm uygulamalar gizlendi</string>
     <string name="home_all_apps_hidden_subtitle">Ana ekrandaki tüm uygulamaları gizlediniz</string>
+    <string name="home_category_add">Kategori ekle</string>
+    <string name="home_category_all_apps">Tüm uygulamalar</string>
+    <string name="home_category_custom">Özel</string>
+    <string name="home_category_uncategorized">Kategorilendirilmemiş</string>
+    <string name="home_category_new_title">Yeni kategori</string>
+    <string name="home_category_rename_title">Kategoriyi yeniden adlandır</string>
+    <string name="home_category_name">Kategori adı</string>
+    <string name="home_category_move_to">Kategoriye taşı</string>
+    <string name="home_category_move_selected_title">Seçili uygulamaları taşı</string>
+    <string name="home_category_delete_confirm_title">Kategoriyi sil</string>
+    <string name="home_category_delete_confirm_message">&lt;b&gt;%1$s&lt;/b&gt; kategorisini sil? İçindeki uygulamalar &lt;b&gt;%2$s&lt;/b&gt; bölümüne geri taşınacak</string>
+    <string name="home_category_actions_unavailable">Bu kategori için kullanılamayan işlemler</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hangi uygulamayı yamalamak istiyorsunuz?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -81,9 +102,13 @@
     <string name="home_greeting_super_late_5">Gececi ve üretken</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yama kaynakları</string>
+    <string name="sources_sort_title">Yama kaynaklarını sırala</string>
     <string name="sources_sort_manual">Manuel sıra</string>
     <string name="sources_sort_manual_hint">Yeniden sıralamak için bir kaynağa uzun basın</string>
     <string name="sources_sort_last_updated">Son güncelleme</string>
+    <string name="sources_sort_last_updated_description">En yeni kaynak güncellemeleri önce</string>
+    <string name="sources_sort_enabled_first">Etkin olanlar önce</string>
+    <string name="sources_sort_enabled_first_description">Devre dışı kaynaklardan önce etkin kaynakları göster</string>
     <string name="sources_management_open_in_browser">Tarayıcıda aç</string>
     <string name="sources_management_failed_to_open_url">URL açılamadı</string>
     <string name="sources_management_prerelease_toggle">Ön sürüm yamalar</string>
@@ -92,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Mevcutsa deneysel uygulama hedeflerini yamala</string>
     <string name="sources_management_already_exists">Bu kaynak zaten eklenmiş</string>
     <string name="sources_management_invalid_url">Geçersiz kaynak URL\'si. Lütfen adresi kontrol edin ve tekrar deneyin</string>
+    <string name="sources_management_blocked">Bu yama kaynağı engellenmiş ve eklenemiyor</string>
+    <string name="sources_management_source_blocked_badge">Engellendi</string>
     <string name="sources_management_metadata_unavailable">Metadata Yok</string>
     <string name="sources_management_metadata_unavailable_hint">Uzak metadata dosyası kullanılamıyor. Yüklü paketle yamalama hala çalışır, ancak bu kaynak için otomatik güncelleme devre dışı bırakıldı</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Yama paketi indirilemedi. Kaynak URL\'si yanlış olabilir veya dosya mevcut olmayabilir</string>
@@ -471,6 +498,8 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_appearance_home_screen">Ana ekran</string>
     <string name="settings_appearance_greeting_phrases">Selamlama cümleleri</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ana ekranda bir selamlama mesajı göster</string>
+    <string name="settings_appearance_app_grouping">Uygulama gruplandırma</string>
+    <string name="settings_appearance_app_grouping_description">Uygulamaları kaynaklarına veya kendi kategorilerinize göre gruplamak için bir ana ekran değiştirici göster. Kapalıyken seçimi korur</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Uygulama simgesi</string>
     <string name="settings_appearance_app_icon_default">Varsayılan</string>
@@ -654,14 +683,12 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_prompt_installer_on_install_description">Yamalanmış bir uygulama her yüklendiğinde yükleyici seçim penceresini gösterir</string>
     <string name="settings_auto_install_with_shizuku">Yamalama sonrası otomatik yükle</string>
     <string name="settings_auto_install_with_shizuku_description">Yamalama tamamlanır tamamlanmaz yamalanmış APK\'yi sessizce yükler</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" etkinleştirildi - otomatik yükleme atlanacak</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pil optimizasyonu</string>
     <string name="settings_system_battery_optimization_description">Uygulama küçültüldüğünde patcher\'ı çalışır durumda tutar</string>
     <string name="settings_system_performance">Performans</string>
     <string name="settings_system_process_runtime">Çalışma süreci</string>
     <string name="settings_system_process_runtime_description">Daha iyi istikrar için yamalamayı ayrı bir süreçte gerçekleştirir</string>
-    <string name="settings_system_process_runtime_memory_limit">Bellek limiti</string>
     <string name="settings_system_process_runtime_memory_limit_description">Daha yüksek limitler, uygun cihazlarda yamalamayı hızlandırır</string>
     <string name="settings_system_process_runtime_enable">Çalışma sürecini etkinleştir</string>
     <string name="settings_system_memory_limit_subtitle">Yamalama için kullanılabilir bellek</string>
@@ -714,6 +741,31 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_apks_deleted_all">APK\'ler başarıyla silindi</string>
     <string name="settings_system_apks_export_zip_success">Seçili APK\'ler dışa aktarıldı</string>
     <string name="settings_system_apks_export_zip_failed">Seçili APK\'lerin dışa aktarılması başarısız oldu</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Depolama yönetimi</string>
+    <string name="settings_system_storage_management_description">Disk kullanımını gözden geçirin ve önbelleğe alınmış dosyaları temizleyin</string>
+    <string name="settings_system_storage_keystore_title">İmzalı anahtar deposu</string>
+    <string name="settings_system_storage_app_data_title">Uygulama verileri</string>
+    <string name="settings_system_storage_patch_bundles_title">Yama paketleri</string>
+    <string name="settings_system_storage_http_cache_title">Ağ önbelleği</string>
+    <string name="settings_system_storage_http_cache_description">Güncellemeleri hızlandırmak için HTTP yanıtları önbelleğe alınır</string>
+    <string name="settings_system_storage_installer_cache_title">Harici yükleyici önbelleği</string>
+    <string name="settings_system_storage_installer_cache_description">Üçüncü taraf yükleyicilere aktarılan APK kopyaları</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher çalışma alanı</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher çalışma zamanı dosyaları ve kullanılmayan geçici veriler</string>
+    <string name="settings_system_storage_temporary_title">Geçici dosyalar</string>
+    <string name="settings_system_storage_temporary_description">Yama işlemi sırasında oluşturulan çalışma dosyaları</string>
+    <string name="settings_system_storage_clear_all">Tüm önbellekleri temizle</string>
+    <string name="settings_system_storage_clear_all_description">Tek seferde tüm geri kazanılabilir önbellek alanını boşaltır</string>
+    <string name="settings_system_storage_clear_all_confirm">Bu, önbelleğe alınmış ağ yanıtlarını, aşamalı yükleyici kopyalarını ve geçici dosyaları temizler. Orijinal ve yamalı APK\'ler korunur</string>
+    <string name="settings_system_storage_cleared">%s boşaltıldı</string>
+    <string name="settings_system_storage_nothing_to_clear">Temizlenecek bir şey yok</string>
+    <string name="settings_system_storage_open_app_info_title">Android uygulama depolamasını aç</string>
+    <string name="settings_system_storage_open_app_info_description">Morphe verilerinin tamamını sistem ayarları aracılığıyla yönetin veya temizleyin</string>
+    <string name="settings_system_save_original_apks_title">Orijinal APK\'ları sakla</string>
+    <string name="settings_system_save_original_apks_description">Yeniden yama yapmak için APK\'yı yeniden seçmeden tekrar kullanabilmeniz için yama öncesi APK\'yı kaydedin</string>
+    <string name="settings_system_save_patched_apks_title">Yamalı APK\'ları sakla</string>
+    <string name="settings_system_save_patched_apks_description">Yönetici üzerinden daha sonra dışa aktarmak veya yeniden yüklemek için yamalı APK\'nın bir kopyasını kaydedin</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Yamalanmış APK\'ler</string>
     <string name="settings_system_patched_apks_description">Kayıtlı yamalanmış uygulama dosyalarını yönetir</string>

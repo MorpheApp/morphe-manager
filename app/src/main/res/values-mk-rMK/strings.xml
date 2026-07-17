@@ -19,7 +19,6 @@
     <string name="home_update_available">Достапно е ажурирање на Morphe</string>
     <string name="home_update_available_subtitle">Достапно е ажурирање</string>
     <string name="home_update_error">Ажурирањето не успеа</string>
-    <string name="home_update_error_subtitle">Проверете ја интернет врската и обидете се повторно</string>
     <string name="home_update_skipped_metered">Ажурирањето е прескокнато</string>
     <string name="home_update_skipped_metered_subtitle">Мобилни податоци вклучени</string>
     <string name="home_updating_sources">Ажурирање на изворите…</string>
@@ -610,14 +609,12 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">Го одржува закрпувачот за целосно закрпување</string>
     <string name="settings_auto_install_with_shizuku">Автоматски инсталирај по закрпа</string>
     <string name="settings_auto_install_with_shizuku_description">Тивко ја инсталира закрпената APK-датотека штом ќе заврши закрпувањето</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" е овозможено - автоматската инсталација ќе биде прескокната</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизација на батеријата</string>
     <string name="settings_system_battery_optimization_description">Слободно место на дискот</string>
     <string name="settings_system_performance">Перформанси</string>
     <string name="settings_system_process_runtime">Време на извршување на процесот</string>
     <string name="settings_system_process_runtime_description">Преземањето може да биде затворено</string>
-    <string name="settings_system_process_runtime_memory_limit">Лимит на меморија</string>
     <string name="settings_system_process_runtime_memory_limit_description">Облога за инсталирање</string>
     <string name="settings_system_process_runtime_enable">Овозможи време на извршување на процесот</string>
     <string name="settings_system_memory_limit_subtitle">Меморија достапна за закрпување</string>
@@ -656,6 +653,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Датотеки и складиште</string>
     <string name="settings_system_apks_size">Вкупна големина: %s</string>
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Исправени APK-а</string>
     <string name="settings_system_patched_apks_description">Минатата коверта на пукање</string>

@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Actualización de Morphe disponible</string>
     <string name="home_update_available_subtitle"></string>
+    <string name="home_blocked_source_title">Se detectó una fuente de parches bloqueada</string>
+    <string name="home_blocked_source_subtitle">Pulsa para revisar y eliminar</string>
+    <string name="home_metadata_errors_title">Algunas fuentes de parches no están disponibles</string>
+    <string name="home_metadata_errors_subtitle">Pulsa para revisar las fuentes</string>
+    <string name="home_metered_skipped_title">Actualizaciones pausadas en datos móviles</string>
+    <string name="home_metered_skipped_subtitle">Pulsa para permitir actualizaciones con datos móviles</string>
     <string name="home_update_error">La actualización falló</string>
-    <string name="home_update_error_subtitle">Comprueba tu conexión a internet y vuelve a intentarlo </string>
+    <string name="home_update_error_subtitle">Ocurrió un error al actualizar las fuentes</string>
     <string name="home_update_skipped_metered">Actualización omitida</string>
     <string name="home_update_skipped_metered_subtitle">Los datos móviles están activos</string>
     <string name="home_updating_sources">Actualizando fuentes…</string>
@@ -29,18 +35,30 @@
     <string name="home_sources_are_loading">Cargando fuentes, por favor espera…</string>
     <string name="home_search_apps">Buscar aplicaciones</string>
     <string name="home_app_sort_title">Ordenar aplicaciones</string>
-    <string name="home_app_sort_manual_description">Mantén pulsada una aplicación y, luego, toca el botón de reordenar</string>
+    <string name="home_app_sort_manual_description">Mantén pulsada una aplicación, luego toca el botón de reordenar</string>
     <string name="home_app_sort_recommended">Orden recomendado</string>
     <string name="home_app_sort_recommended_description">Aplicaciones instaladas y fijadas primero</string>
     <string name="home_app_sort_name_asc_description">Alfabético, de la A a la Z</string>
-    <string name="home_app_sort_name_desc_description">Inversa alfabética, de la Z a la A</string>
-    <string name="home_app_sort_updates_first">Actualizaciones de parche primero</string>
+    <string name="home_app_sort_name_desc_description">Alfabético inverso, de la Z a la A</string>
+    <string name="home_app_sort_updates_first">Actualizaciones de parches primero</string>
     <string name="home_app_sort_updates_first_description">Aplicaciones con insignias de actualización primero, luego en orden recomendado</string>
     <string name="home_no_apps_title">No hay aplicaciones disponibles</string>
     <string name="home_no_apps_subtitle">Añadir una fuente de parche o habilitar una existente en %s</string>
     <string name="home_no_apps_search_subtitle">No hay apps que coincidan con \"%s\"</string>
     <string name="home_all_apps_hidden_title">Todas las aplicaciones están ocultas</string>
     <string name="home_all_apps_hidden_subtitle">Ha ocultado todas las aplicaciones de la pantalla de inicio</string>
+    <string name="home_category_add">Añadir categoría</string>
+    <string name="home_category_all_apps">Todas las aplicaciones</string>
+    <string name="home_category_custom">Personalizado</string>
+    <string name="home_category_uncategorized">Sin categorizar</string>
+    <string name="home_category_new_title">Nueva categoría</string>
+    <string name="home_category_rename_title">Cambiar el nombre de la categoría</string>
+    <string name="home_category_name">Nombre de la categoría</string>
+    <string name="home_category_move_to">Mover a la categoría</string>
+    <string name="home_category_move_selected_title">Mover aplicaciones seleccionadas</string>
+    <string name="home_category_delete_confirm_title">Eliminar categoría</string>
+    <string name="home_category_delete_confirm_message">¿Eliminar la categoría &lt;b&gt;%1$s&lt;/b&gt;? Las aplicaciones que contiene volverán a &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">No hay opciones disponibles para esta categoría</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">¿Qué aplicación quieres parchear?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -84,12 +102,12 @@
     <string name="home_greeting_super_late_5">Nocturno y productivo</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fuentes de parches</string>
-    <string name="sources_sort_title">Seleccionar fuente de parche</string>
+    <string name="sources_sort_title">Ordenar fuentes de parches</string>
     <string name="sources_sort_manual">Orden manual</string>
     <string name="sources_sort_manual_hint">Mantén pulsada una fuente para cambiar el orden</string>
     <string name="sources_sort_last_updated">Última actualización</string>
     <string name="sources_sort_last_updated_description">Actualizaciones de fuente más recientes primero</string>
-    <string name="sources_sort_enabled_first">fuente activada</string>
+    <string name="sources_sort_enabled_first">Activadas primero</string>
     <string name="sources_sort_enabled_first_description">Mostrar fuentes activas antes que las desactivadas</string>
     <string name="sources_management_open_in_browser">Abrir en el navegador</string>
     <string name="sources_management_failed_to_open_url">No se pudo abrir la URL</string>
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Parchea las versiones experimentales de la aplicación, si están disponibles</string>
     <string name="sources_management_already_exists">Esta fuente ya ha sido añadida</string>
     <string name="sources_management_invalid_url">URL de fuente no válida. Compruebe la dirección e inténtelo de nuevo</string>
+    <string name="sources_management_blocked">Esta fuente de parches está bloqueada y no se puede agregar</string>
+    <string name="sources_management_source_blocked_badge">Bloqueado</string>
     <string name="sources_management_metadata_unavailable">Metadatos no disponibles</string>
     <string name="sources_management_metadata_unavailable_hint">El archivo de metadatos remoto no está disponible. La aplicación de parches con el paquete instalado sigue funcionando, pero la actualización automática está desactivada para esta fuente</string>
     <string name="sources_management_metadata_unavailable_hint_missing">No se ha podido descargar el paquete de parches. Es posible que la URL de la fuente sea incorrecta o que el archivo no exista</string>
@@ -478,6 +498,8 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="settings_appearance_home_screen">Pantalla de inicio</string>
     <string name="settings_appearance_greeting_phrases">Frases de saludo</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostrar un mensaje de saludo en la pantalla de inicio</string>
+    <string name="settings_appearance_app_grouping">Agrupación de aplicaciones</string>
+    <string name="settings_appearance_app_grouping_description">Mostrar un selector de pantalla de inicio para agrupar aplicaciones por origen o por sus propias categorías, manteniendo la selección cuando esté desactivado</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icono de la aplicación</string>
     <string name="settings_appearance_app_icon_default">Predeterminado</string>
@@ -661,14 +683,12 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_prompt_installer_on_install_description">Muestra el diálogo de selección del instalador cada vez que se instala una aplicación parcheada</string>
     <string name="settings_auto_install_with_shizuku">Instalación automática después del parcheo</string>
     <string name="settings_auto_install_with_shizuku_description">Instala silenciosamente el APK parcheado tan pronto como se completa el parcheo</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" está habilitado: la instalación automática se omitirá</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimización de batería</string>
     <string name="settings_system_battery_optimization_description">Mantiene el parcheador en funcionamiento cuando la aplicación está minimizada</string>
     <string name="settings_system_performance">Rendimiento</string>
     <string name="settings_system_process_runtime">Tiempo de ejecución del proceso</string>
     <string name="settings_system_process_runtime_description">Ejecuta el parcheo en un proceso separado para mejorar la estabilidad</string>
-    <string name="settings_system_process_runtime_memory_limit">Límite de memoria</string>
     <string name="settings_system_process_runtime_memory_limit_description">Los límites superiores aceleran el parcheo en los dispositivos compatibles</string>
     <string name="settings_system_process_runtime_enable">Activar tiempo de ejecución del proceso</string>
     <string name="settings_system_memory_limit_subtitle">Memoria disponible para parches</string>
@@ -721,6 +741,31 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_apks_deleted_all">APKs eliminados correctamente</string>
     <string name="settings_system_apks_export_zip_success">APKs seleccionados exportados</string>
     <string name="settings_system_apks_export_zip_failed">Error al exportar los APKs seleccionados</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Administración del almacenamiento</string>
+    <string name="settings_system_storage_management_description">Revisar el uso del disco y borrar los archivos en caché</string>
+    <string name="settings_system_storage_keystore_title">Almacén de claves de firma</string>
+    <string name="settings_system_storage_app_data_title">Datos de la aplicación</string>
+    <string name="settings_system_storage_patch_bundles_title">Paquetes de parches</string>
+    <string name="settings_system_storage_http_cache_title">Caché de red</string>
+    <string name="settings_system_storage_http_cache_description">Respuestas HTTP en caché para acelerar las actualizaciones</string>
+    <string name="settings_system_storage_installer_cache_title">Caché del instalador externo</string>
+    <string name="settings_system_storage_installer_cache_description">Copias de APK pasadas a instaladores de terceros</string>
+    <string name="settings_system_storage_patcher_workspace_title">Espacio de trabajo del parcheador</string>
+    <string name="settings_system_storage_patcher_workspace_description">Archivos de tiempo de ejecución del modificador y datos temporales huérfanos</string>
+    <string name="settings_system_storage_temporary_title">Archivos temporales</string>
+    <string name="settings_system_storage_temporary_description">Archivos de trabajo creados al parchear</string>
+    <string name="settings_system_storage_clear_all">Borrar todas las cachés</string>
+    <string name="settings_system_storage_clear_all_description">Libera todo el espacio de caché recuperable a la vez</string>
+    <string name="settings_system_storage_clear_all_confirm">Esto borra las respuestas de red en caché, las copias del instalador en espera y los archivos temporales. Los APK originales y modificados se conservan</string>
+    <string name="settings_system_storage_cleared">Liberado %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nada que borrar</string>
+    <string name="settings_system_storage_open_app_info_title">Abrir almacenamiento de la aplicación Android</string>
+    <string name="settings_system_storage_open_app_info_description">Administrar o borrar todos los datos de Morphe a través de la configuración del sistema</string>
+    <string name="settings_system_save_original_apks_title">Conservar los APK originales</string>
+    <string name="settings_system_save_original_apks_description">Guardar el APK previo al parche para reutilizarlo al volver a parchear sin tener que seleccionar el archivo nuevamente</string>
+    <string name="settings_system_save_patched_apks_title">Conservar los APK parcheados</string>
+    <string name="settings_system_save_patched_apks_description">Guardar una copia del APK parcheado para exportarlo o volver a instalarlo más tarde desde el administrador</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs parcheados</string>
     <string name="settings_system_patched_apks_description">Administra los archivos de aplicación parcheados guardados</string>

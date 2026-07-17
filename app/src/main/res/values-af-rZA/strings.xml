@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-opdatering beskikbaar</string>
     <string name="home_update_available_subtitle">Nuwe weergawe gereed om te installeer</string>
+    <string name="home_blocked_source_title">Geblokkeerde bron vir plakkers opgespoor</string>
+    <string name="home_blocked_source_subtitle">Tik om te hersien en te verwyder</string>
+    <string name="home_metadata_errors_title">Sommige bronne vir plakkers is nie beskikbaar nie</string>
+    <string name="home_metadata_errors_subtitle">Tik om bronne te hersien</string>
+    <string name="home_metered_skipped_title">Opdaterings gestop op mobiele data</string>
+    <string name="home_metered_skipped_subtitle">Tik om opdaterings op mobiele data toe te laat</string>
     <string name="home_update_error">Opdatering het misluk</string>
-    <string name="home_update_error_subtitle">Kontroleer jou internetverbinding en probeer weer</string>
+    <string name="home_update_error_subtitle">Iets het fout geloop tydens die opdatering van bronne</string>
     <string name="home_update_skipped_metered">Opdaterings oorgeslaan</string>
     <string name="home_update_skipped_metered_subtitle">Selfoon data is aktief</string>
     <string name="home_updating_sources">Opdatering van oorspronge…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Geen programme gelyk aan \"%s\" nie</string>
     <string name="home_all_apps_hidden_title">Alle programme is versteek</string>
     <string name="home_all_apps_hidden_subtitle">Jy het alle programme van die tuisskerm versteek</string>
+    <string name="home_category_add">Kategorie byvoeg</string>
+    <string name="home_category_all_apps">Alle toepassings</string>
+    <string name="home_category_custom">Pasgemaak</string>
+    <string name="home_category_uncategorized">Nie gekategoriseer nie</string>
+    <string name="home_category_new_title">Nuwe kategorie</string>
+    <string name="home_category_rename_title">Hernoem kategorie</string>
+    <string name="home_category_name">Kategorienaam</string>
+    <string name="home_category_move_to">Verskuif na kategorie</string>
+    <string name="home_category_move_selected_title">Verskuif gekose toepassings</string>
+    <string name="home_category_delete_confirm_title">Verwyder kategorie</string>
+    <string name="home_category_delete_confirm_message">Verwyder kategorie &lt;b&gt;%1$s&lt;/b&gt;? Toepassings daarin sal terugskuif na &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Aksies nie beskikbaar vir hierdie kategorie nie</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Watter program wil jy verander?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Pleister eksperimentele app-teikens indien beskikbaar</string>
     <string name="sources_management_already_exists">Hierdie oorsprong is reeds bygevoeg</string>
     <string name="sources_management_invalid_url">Ongeldige bron-URL. Gaan asseblief die adres na en probeer weer</string>
+    <string name="sources_management_blocked">Hierdie bron vir pleisters is geblokkeer en kan nie bygevoeg word nie</string>
+    <string name="sources_management_source_blocked_badge">Geblokkeer</string>
     <string name="sources_management_metadata_unavailable">Metadata Nie beskikbaar nie</string>
     <string name="sources_management_metadata_unavailable_hint">Die afstandmetadata lêer is nie beskikbaar nie. Patches met die geïnstalleerde bundel werk steeds, maar outo-opdatering is vir hierdie bron afgeskakel</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Die patch bundel kon nie afgelaai word nie. Die bron-URL kan verkeerd wees of die lêer bestaan ​​nie</string>
@@ -478,6 +498,8 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_home_screen">Tuisskerm</string>
     <string name="settings_appearance_greeting_phrases">Groetfrases</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Wys \'n groet-boodskap op die tuisskerm</string>
+    <string name="settings_appearance_app_grouping">Toepassingsgroepering</string>
+    <string name="settings_appearance_app_grouping_description">Wys \'n tuisskermskakelaar om toepassings volgens bron of jou eie kategorieë te groepeer, en die keuse te behou wanneer dit af is</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App ikoon</string>
     <string name="settings_appearance_app_icon_default">Standaard</string>
@@ -661,14 +683,12 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_prompt_installer_on_install_description">Wys die installeerder seleksie dialoog elke keer as \'n gepatchte toepassing geïnstalleer word</string>
     <string name="settings_auto_install_with_shizuku">Outomatiese installering na patstelling</string>
     <string name="settings_auto_install_with_shizuku_description">Installeer die gepatchde APK stilweg sosoon as die patstelling voltooi is</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" is geaktiveer - outomatiese installering sal oorgeslaan word</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery-optimalisering</string>
     <string name="settings_system_battery_optimization_description">Hou die patcher lopend wanneer die toepassing geminimaliseer is</string>
     <string name="settings_system_performance">Prestasie</string>
     <string name="settings_system_process_runtime">Proses tydloop</string>
     <string name="settings_system_process_runtime_description">Voer patching in \'n aparte proses uit vir beter stabiliteit</string>
-    <string name="settings_system_process_runtime_memory_limit">Geheugelimiet</string>
     <string name="settings_system_process_runtime_memory_limit_description">Hoër limiete versnel patching op toestelle wat dit kan hanteer</string>
     <string name="settings_system_process_runtime_enable">Aktiveer proses tydloop</string>
     <string name="settings_system_memory_limit_subtitle">Geheue beskikbaar vir patching</string>
@@ -721,6 +741,31 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_system_apks_deleted_all">APK\'s suksesvol uitgevee</string>
     <string name="settings_system_apks_export_zip_success">Geselekteerde APK\'s uitgevoer</string>
     <string name="settings_system_apks_export_zip_failed">Kon nie die geselekteerde APK\'s uitvoer nie</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Stooringsbestuur</string>
+    <string name="settings_system_storage_management_description">Hersien skyfgebruik en maak gekasste lêers skoon</string>
+    <string name="settings_system_storage_keystore_title">Ondertekeningsleutestoor</string>
+    <string name="settings_system_storage_app_data_title">Programdata</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch-bundels</string>
+    <string name="settings_system_storage_http_cache_title">Netwerkkas</string>
+    <string name="settings_system_storage_http_cache_description">HTTP-response word in kas geberg om opdaterings om vas te spoed.</string>
+    <string name="settings_system_storage_installer_cache_title">Eksterne installer kas</string>
+    <string name="settings_system_storage_installer_cache_description">APK-koppies wat oorgedra word aan derdeparty-installateurs</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher werkspasie</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher tydelike lêers en weeskindskrapdata</string>
+    <string name="settings_system_storage_temporary_title">Tydelike lêers</string>
+    <string name="settings_system_storage_temporary_description">Werk lêers wat geskep word tydens patchen</string>
+    <string name="settings_system_storage_clear_all">Maak alle kasgeheue vry</string>
+    <string name="settings_system_storage_clear_all_description">Maak alle herwinnbare kasruimte op een slag vry</string>
+    <string name="settings_system_storage_clear_all_confirm">Dit vee die gekasde netwerkresponse, gestageerde installer kopieë en tydelike lêers uit. Oorspronklike en gepatchde APK\'s word behou.</string>
+    <string name="settings_system_storage_cleared">%s vrygemaak</string>
+    <string name="settings_system_storage_nothing_to_clear">Niets om uit te vee</string>
+    <string name="settings_system_storage_open_app_info_title">Maak Android-appberging oop</string>
+    <string name="settings_system_storage_open_app_info_description">Bestuur of vee alle Morphe-data uit via stelselinstellings</string>
+    <string name="settings_system_save_original_apks_title">Behou die oorspronklike APK\'s</string>
+    <string name="settings_system_save_original_apks_description">Stoor die APK voor wysiging, sodat dit weer vir her-wysiging gebruik kan word sonder om die lêer weer te kies</string>
+    <string name="settings_system_save_patched_apks_title">Behou gewysigde APK\'s</string>
+    <string name="settings_system_save_patched_apks_description">Stoor \'n kopie van die gewysigde APK vir latere uitvoer of herinstallasie vanaf die bestuurder</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatched APK\'s</string>
     <string name="settings_system_patched_apks_description">Bestuur gestoorde gepatchte toepassingslêers</string>

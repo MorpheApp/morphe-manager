@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe posodobitev je pripravljena</string>
     <string name="home_update_available_subtitle">Nova verzija je pripravljena za prenos</string>
+    <string name="home_blocked_source_title">Zaznan blokiran vir popravkov</string>
+    <string name="home_blocked_source_subtitle">Tapnite za pregled in odstranitev</string>
+    <string name="home_metadata_errors_title">Nekateri viri popravkov niso na voljo</string>
+    <string name="home_metadata_errors_subtitle">Tapnite za pregled virov</string>
+    <string name="home_metered_skipped_title">Posodobitve so prekinjene pri uporabi mobilnih podatkov</string>
+    <string name="home_metered_skipped_subtitle">Tapnite za dovoljenje posodobitev prek mobilnih podatkov</string>
     <string name="home_update_error">Posodobitev ni uspela</string>
-    <string name="home_update_error_subtitle">Preverite internetno povezavo in poskusite znova</string>
+    <string name="home_update_error_subtitle">Pri posodabljanju virov je prišlo do napake</string>
     <string name="home_update_skipped_metered">Posodobitve so bile preskočene</string>
     <string name="home_update_skipped_metered_subtitle">Mobilni podatki so vklopljeni </string>
     <string name="home_updating_sources">Posodabljanje virov...</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Nobena aplikacija se ne ujema z \"%s\"</string>
     <string name="home_all_apps_hidden_title">Vse aplikacije so skrite</string>
     <string name="home_all_apps_hidden_subtitle">Skrili ste vse aplikacije z začetnega zaslona</string>
+    <string name="home_category_add">Dodaj kategorijo</string>
+    <string name="home_category_all_apps">Vse aplikacije</string>
+    <string name="home_category_custom">Prilagoditve</string>
+    <string name="home_category_uncategorized">Brez kategorije</string>
+    <string name="home_category_new_title">Nova kategorija</string>
+    <string name="home_category_rename_title">Preimenuj kategorijo</string>
+    <string name="home_category_name">Ime kategorije</string>
+    <string name="home_category_move_to">Premakni v kategorijo</string>
+    <string name="home_category_move_selected_title">Premakni izbrane aplikacije</string>
+    <string name="home_category_delete_confirm_title">Izbriši kategorijo</string>
+    <string name="home_category_delete_confirm_message">Izbriši kategorijo &lt;b&gt;%1$s&lt;/b&gt;? Aplikacije v njej se bodo premaknile nazaj v &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Dejanja niso na voljo za to kategorijo</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Katero aplikacijo želite popraviti?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Popravi cilje eksperimentalnih aplikacij, če so na voljo</string>
     <string name="sources_management_already_exists">Ta vir je bil že dodan</string>
     <string name="sources_management_invalid_url">Neveljaven izvorni URL. Preverite naslov in poskusite znova</string>
+    <string name="sources_management_blocked">Ta vir popravkov je blokiran in ga ni mogoče dodati</string>
+    <string name="sources_management_source_blocked_badge">Blokirano</string>
     <string name="sources_management_metadata_unavailable">Metapodatki N/A</string>
     <string name="sources_management_metadata_unavailable_hint">Dostop do datoteke metapodatkov na daljavo ni možen. Uporaba popravka z nameščenim paketom še vedno deluje, vendar je samodejno posodabljanje za ta vir onemogočeno.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Paketa s popravki ni bilo mogoče prenesti. Izvorni URL naslov je lahko napačen ali datoteka ne obstaja.</string>
@@ -478,6 +498,8 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="settings_appearance_home_screen">Začetni zaslon</string>
     <string name="settings_appearance_greeting_phrases">Pozdravna sporočila</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Prikaži pozdravno sporočilo na začetnem zaslonu</string>
+    <string name="settings_appearance_app_grouping">Grupiranje aplikacij</string>
+    <string name="settings_appearance_app_grouping_description">Prikaži stikalo na začetnem zaslonu za grupiranje aplikacij po izvoru ali lastnih kategorijah, obdrži izbor, ko je izklopljeno</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikona aplikacije</string>
     <string name="settings_appearance_app_icon_default">Privzeta</string>
@@ -661,14 +683,12 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_prompt_installer_on_install_description">Prikaže pogovorno okno za izbiro namestitvenega programa vsakokrat, ko je nameščena popravljena aplikacija</string>
     <string name="settings_auto_install_with_shizuku">Samodejna namestitev po popravku</string>
     <string name="settings_auto_install_with_shizuku_description">Tiho namesti popravljeni APK takoj po končanem popravljanju</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" je omogočen - samodejna namestitev bo preskočena</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizacija baterije</string>
     <string name="settings_system_battery_optimization_description">Ohranja popravek v teku, ko je aplikacija pomanjšana</string>
     <string name="settings_system_performance">Učinkovitost</string>
     <string name="settings_system_process_runtime">Čas izvajanja procesa</string>
     <string name="settings_system_process_runtime_description">Izvaja popravljanje v ločenem procesu za boljšo stabilnost</string>
-    <string name="settings_system_process_runtime_memory_limit">Omejitev pomnilnika</string>
     <string name="settings_system_process_runtime_memory_limit_description">Višje omejitve pospešijo popravljanje na zmogljivih napravah</string>
     <string name="settings_system_process_runtime_enable">Omogoči izvajanje procesa</string>
     <string name="settings_system_memory_limit_subtitle">Razpoložljiv pomnilnik za popravilo</string>
@@ -721,6 +741,31 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_system_apks_deleted_all">Datoteke APK so bile uspešno izbrisane</string>
     <string name="settings_system_apks_export_zip_success">Izbrane datoteke APK so bile izvožene</string>
     <string name="settings_system_apks_export_zip_failed">Izvoz izbranih datotek APK je spodletel</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Upravljanje s prostorom za shranjevanje</string>
+    <string name="settings_system_storage_management_description">Pregled porabe diska in izbris shranjenih datotek</string>
+    <string name="settings_system_storage_keystore_title">Datoteka ključev podpisovanja</string>
+    <string name="settings_system_storage_app_data_title">Podatki aplikacij</string>
+    <string name="settings_system_storage_patch_bundles_title">Paketi popravkov</string>
+    <string name="settings_system_storage_http_cache_title">Predpomnilnik omrežja</string>
+    <string name="settings_system_storage_http_cache_description">Predpomnjeni HTTP odzivi za pospešitev posodobitev</string>
+    <string name="settings_system_storage_installer_cache_title">Predpomnilnik zunanjega namestitvenega programa</string>
+    <string name="settings_system_storage_installer_cache_description">Kopije datotek APK, posredovane namestitvenim programom tretjih oseb</string>
+    <string name="settings_system_storage_patcher_workspace_title">Delovni prostor popravljalnika</string>
+    <string name="settings_system_storage_patcher_workspace_description">Datoteke popravljalnika za izvajanje in začasni podatki</string>
+    <string name="settings_system_storage_temporary_title">Začasne datoteke</string>
+    <string name="settings_system_storage_temporary_description">Delovne datoteke, ustvarjene med popravljanjem</string>
+    <string name="settings_system_storage_clear_all">Počisti vse predpomnilnike</string>
+    <string name="settings_system_storage_clear_all_description">Naenkrat izbriše ves prostor predpomnilnika, ki ga je mogoče povrniti</string>
+    <string name="settings_system_storage_clear_all_confirm">To počisti predpomnjene omrežne odzive, pripravljene kopije namestitvenih programov in začasne datoteke. Izvorne in popravljene datoteke APK ostanejo nedotaknjene</string>
+    <string name="settings_system_storage_cleared">Osvobojeno %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nič za izbris</string>
+    <string name="settings_system_storage_open_app_info_title">Odprite shranjevanje aplikacije Android</string>
+    <string name="settings_system_storage_open_app_info_description">Upravljajte ali izbrišite vse podatke Morphe prek sistemskih nastavitev</string>
+    <string name="settings_system_save_original_apks_title">Shrani originalne datoteke APK</string>
+    <string name="settings_system_save_original_apks_description">Shrani datoteko APK pred spremembo, da jo lahko ponovno uporabiš za ponovno spremembo brez ponovnega izbiranja datoteke</string>
+    <string name="settings_system_save_patched_apks_title">Shrani spremenjene datoteke APK</string>
+    <string name="settings_system_save_patched_apks_description">Shrani kopijo spremenjene datoteke APK za kasnejši izvoz ali ponovno namestitev iz upravitelja</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Popravljeni APK-ji</string>
     <string name="settings_system_patched_apks_description">Upravlja shranjene datoteke popravljenih aplikacij</string>

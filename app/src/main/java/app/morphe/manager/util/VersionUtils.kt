@@ -1,6 +1,12 @@
 package app.morphe.manager.util
 
 /**
+ * Strips a leading `v` and surrounding whitespace so version strings from different
+ * sources (GitHub tags, JSON metadata, BuildConfig) can be compared without mismatch.
+ */
+fun String.normalizeVersion(): String = removePrefix("v").trim()
+
+/**
  * Compare two version strings.
  * Returns: -1 if v1 < v2, 0 if v1 == v2, 1 if v1 > v2
  */
@@ -9,9 +15,8 @@ fun compareVersions(v1: String?, v2: String?): Int {
     if (v1 == null) return -1
     if (v2 == null) return 1
 
-    // Remove 'v' prefix if present
-    val version1 = v1.removePrefix("v").trim()
-    val version2 = v2.removePrefix("v").trim()
+    val version1 = v1.normalizeVersion()
+    val version2 = v2.normalizeVersion()
 
     if (version1 == version2) return 0
 

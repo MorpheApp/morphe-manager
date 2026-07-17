@@ -9,6 +9,7 @@ import android.os.Environment
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import app.morphe.manager.BuildConfig
 import app.morphe.manager.util.FilenameUtils
 import app.morphe.manager.util.RequestManageStorageContract
 import app.morphe.manager.util.formatBytes
@@ -17,6 +18,10 @@ import java.io.File
 private const val TAG = "Morphe Filesystem"
 
 class Filesystem(private val app: Application) {
+    init {
+        invalidatePatcherWorkspaceOnUpgrade()
+    }
+
     /**
      * A directory that gets cleared when the app restarts.
      * Do not store paths to this directory in a parcel.
@@ -60,6 +65,30 @@ class Filesystem(private val app: Application) {
         val safePackage = FilenameUtils.sanitize(packageName)
         val safeVersion = FilenameUtils.sanitize(version.ifBlank { "unspecified" })
         return patchedAppsDir.resolve("${safePackage}_${safeVersion}.apk")
+    }
+
+    /**
+     * Wipes `cacheDir/framework` and `cacheDir/patcher` when the persisted manager version code
+     * differs from the running one. These caches hold dex/framework files tied to the patcher
+     * module bundled with the manager, so stale entries from a previous version can cause
+     * ClassNotFoundError or ABI mismatches during patching.
+     *
+     * The version marker is kept in `noBackupFilesDir` so neither an OS cache wipe nor the
+     * user-initiated "Clear patcher workspace" action removes it.
+     */
+    private fun invalidatePatcherWorkspaceOnUpgrade() {
+        val marker = app.noBackupFilesDir.resolve(".manager_version")
+        val current = BuildConfig.VERSION_CODE
+        val stored = runCatching {
+            marker.takeIf { it.exists() }?.readText()?.trim()?.toIntOrNull()
+        }.getOrNull()
+        if (stored != null && stored != current) {
+            listOf("framework", "patcher").forEach { name ->
+                runCatching { app.cacheDir.resolve(name).deleteRecursively() }
+            }
+            Log.i(TAG, "Manager version changed ($stored -> $current), wiped patcher workspace")
+        }
+        runCatching { marker.writeText(current.toString()) }
     }
 
     /**

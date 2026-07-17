@@ -14,12 +14,18 @@
     <string name="android_11_bug_dialog_description">사용자 환경에 부정적인 영향을 미치는 Android 11 시스템 버그를 방지하려면 앱 설치 권한을 미리 부여해야 합니다</string>
     <string name="deep_link_add_source_title">소스 추가</string>
     <string name="deep_link_add_source_message">이 패치 소스를 Morphe에 추가하시겠습니까?</string>
-    <string name="deep_link_add_source_warning">신뢰할 수 있는 출처의 소스만 추가하세요</string>
+    <string name="deep_link_add_source_warning">신뢰할 수 있는 소스만 추가하세요</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe 업데이트 사용 가능</string>
     <string name="home_update_available_subtitle">새 버전 설치 준비 완료</string>
+    <string name="home_blocked_source_title">차단된 패치 소스가 감지됨</string>
+    <string name="home_blocked_source_subtitle">검토 및 제거하려면 탭하세요</string>
+    <string name="home_metadata_errors_title">일부 패치 소스를 사용할 수 없음</string>
+    <string name="home_metadata_errors_subtitle">소스를 검토하려면 탭하세요</string>
+    <string name="home_metered_skipped_title">모바일 데이터에서 업데이트가 일시 중지됨</string>
+    <string name="home_metered_skipped_subtitle">모바일 데이터에서 업데이트를 허용하려면 탭하세요</string>
     <string name="home_update_error">업데이트 실패</string>
-    <string name="home_update_error_subtitle">인터넷 연결 상태를 확인하고 다시 시도하세요</string>
+    <string name="home_update_error_subtitle">소스 업데이트 중 오류가 발생하였습니다</string>
     <string name="home_update_skipped_metered">업데이트를 건너뜁니다</string>
     <string name="home_update_skipped_metered_subtitle">모바일 데이터가 활성화되어 있습니다</string>
     <string name="home_updating_sources">소스를 업데이트하는 중…</string>
@@ -29,18 +35,30 @@
     <string name="home_sources_are_loading">소스를 불러오는 중, 잠시만 기다려 주세요…</string>
     <string name="home_search_apps">앱 검색</string>
     <string name="home_app_sort_title">앱 정렬</string>
-    <string name="home_app_sort_manual_description">앱을 길게 누른 다음 재정렬 버튼을 탭하세요.</string>
+    <string name="home_app_sort_manual_description">앱을 길게 탭한 후에 정렬 버튼을 탭하면 순서를 변경할 수 있습니다</string>
     <string name="home_app_sort_recommended">권장 순서</string>
-    <string name="home_app_sort_recommended_description">설치된 앱 및 고정된 앱을 우선적으로 표시</string>
-    <string name="home_app_sort_name_asc_description">알파벳순(A-Z)</string>
-    <string name="home_app_sort_name_desc_description">알파벳 역순, Z부터 A까지</string>
+    <string name="home_app_sort_recommended_description">설치된 앱 및 고정된 앱을 먼저 표시</string>
+    <string name="home_app_sort_name_asc_description">알파벳 오름차순으로 표시</string>
+    <string name="home_app_sort_name_desc_description">알파벳 내림차순으로 표시</string>
     <string name="home_app_sort_updates_first">패치 업데이트 우선</string>
-    <string name="home_app_sort_updates_first_description">업데이트 배지가 있는 앱을 먼저, 그 다음 권장 순서대로</string>
+    <string name="home_app_sort_updates_first_description">업데이트 배지가 있는 앱을 먼저, 그 다음 권장 순서대로 표시</string>
     <string name="home_no_apps_title">사용 가능한 앱이 없습니다</string>
     <string name="home_no_apps_subtitle">%s에 패치 소스를 추가하거나 기존 패치 소스를 활성화하세요</string>
     <string name="home_no_apps_search_subtitle">\'%s\'와 일치하는 앱이 없습니다</string>
     <string name="home_all_apps_hidden_title">모든 앱이 숨겨집니다</string>
     <string name="home_all_apps_hidden_subtitle">홈 화면에서 모든 앱이 숨겨집니다</string>
+    <string name="home_category_add">카테고리 추가</string>
+    <string name="home_category_all_apps">모든 앱</string>
+    <string name="home_category_custom">사용자 정의</string>
+    <string name="home_category_uncategorized">분류되지 않음</string>
+    <string name="home_category_new_title">새 카테고리</string>
+    <string name="home_category_rename_title">카테고리 이름 변경</string>
+    <string name="home_category_name">카테고리 이름</string>
+    <string name="home_category_move_to">카테고리로 이동</string>
+    <string name="home_category_move_selected_title">선택된 앱 이동</string>
+    <string name="home_category_delete_confirm_title">카테고리 삭제</string>
+    <string name="home_category_delete_confirm_message">&lt;b&gt;%1$s&lt;/b&gt; 카테고리를 삭제하시겠습니까? 해당 카테고리의 앱은 &lt;b&gt;%2$s&lt;/b&gt;로 돌아갑니다</string>
+    <string name="home_category_actions_unavailable">이 카테고리에 사용할 수 있는 작업이 없습니다</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">어떤 앱을 패치하시겠습니까?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -84,13 +102,13 @@
     <string name="home_greeting_super_late_5">야행성이면서 생산적이네요</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">패치 소스</string>
-    <string name="sources_sort_title">패치 소스 선택</string>
+    <string name="sources_sort_title">패치 소스 정렬</string>
     <string name="sources_sort_manual">수동 정렬</string>
     <string name="sources_sort_manual_hint">소스를 길게 탭하여 순서를 변경하세요</string>
-    <string name="sources_sort_last_updated">최근 업데이트순 정렬</string>
-    <string name="sources_sort_last_updated_description">가장 새로운 소스 업데이트 우선</string>
+    <string name="sources_sort_last_updated">최근 업데이트 우선</string>
+    <string name="sources_sort_last_updated_description">최근 업데이트된 소스부터 먼저 표시</string>
     <string name="sources_sort_enabled_first">활성화된 소스 우선</string>
-    <string name="sources_sort_enabled_first_description">비활성화된 소스보다 활성 소스 먼저 표시</string>
+    <string name="sources_sort_enabled_first_description">비활성화된 소스보다 활성화된 소스를 먼저 표시</string>
     <string name="sources_management_open_in_browser">브라우저에서 열기</string>
     <string name="sources_management_failed_to_open_url">URL을 열 수 없습니다</string>
     <string name="sources_management_prerelease_toggle">Pre-release 패치</string>
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">사용 가능한 경우에 실험 앱 버전으로 패치합니다</string>
     <string name="sources_management_already_exists">이 소스는 이미 추가되어 있습니다</string>
     <string name="sources_management_invalid_url">잘못된 소스 URL입니다. 주소를 확인하고 다시 시도하세요</string>
+    <string name="sources_management_blocked">이 패치 소스는 차단되어 추가할 수 없습니다</string>
+    <string name="sources_management_source_blocked_badge">차단됨</string>
     <string name="sources_management_metadata_unavailable">메타데이터 없음</string>
     <string name="sources_management_metadata_unavailable_hint">원격 메타데이터 파일을 사용할 수 없습니다. 설치된 번들로 패치는 계속 가능하지만, 이 소스에 대한 자동 업데이트는 비활성화됩니다</string>
     <string name="sources_management_metadata_unavailable_hint_missing">패치 번들을 다운로드할 수 없습니다. 소스 URL이 올바르지 않거나 파일이 존재하지 않을 수 있습니다</string>
@@ -478,6 +498,8 @@
     <string name="settings_appearance_home_screen">홈 화면</string>
     <string name="settings_appearance_greeting_phrases">인사말</string>
     <string name="settings_appearance_greeting_phrases_subtitle">홈 화면에 인사말을 표시합니다</string>
+    <string name="settings_appearance_app_grouping">앱 그룹화</string>
+    <string name="settings_appearance_app_grouping_description">앱 출처 또는 사용자 정의 카테고리별로 앱을 그룹화하는 홈 화면 전환기를 표시하며, 비활성화할 경우에는 선택 사항을 유지합니다</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">앱 아이콘</string>
     <string name="settings_appearance_app_icon_default">기본값</string>
@@ -662,14 +684,12 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">패치된 앱을 설치할 때마다 설치 프로그램 선택 다이얼로그를 표시합니다</string>
     <string name="settings_auto_install_with_shizuku">패치 후 자동 설치</string>
     <string name="settings_auto_install_with_shizuku_description">패치가 완료되는 즉시 패치된 APK를 자동으로 설치합니다</string>
-    <string name="settings_auto_install_prompt_conflict">\'%s\'가 활성화됨 - 자동 설치는 건너뜁니다</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">배터리 최적화</string>
     <string name="settings_system_battery_optimization_description">앱이 최소화되어도 패처가 계속 실행되도록 유지합니다</string>
     <string name="settings_system_performance">성능</string>
     <string name="settings_system_process_runtime">프로세스 런타임</string>
     <string name="settings_system_process_runtime_description">안정성 향상을 위해 별도의 프로세스에서 패치를 실행합니다</string>
-    <string name="settings_system_process_runtime_memory_limit">메모리 제한</string>
     <string name="settings_system_process_runtime_memory_limit_description">메모리 제한 값을 높이면 지원되는 기기에서 패치 속도가 향상될 수 있습니다</string>
     <string name="settings_system_process_runtime_enable">프로세스 런타임 활성화</string>
     <string name="settings_system_memory_limit_subtitle">패치에 사용 가능한 메모리</string>
@@ -722,6 +742,31 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APK를 성공적으로 삭제하였습니다</string>
     <string name="settings_system_apks_export_zip_success">선택된 APK를 내보냈습니다</string>
     <string name="settings_system_apks_export_zip_failed">선택된 APK를 내보낼 수 없습니다</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">저장소 관리</string>
+    <string name="settings_system_storage_management_description">디스크 사용량을 확인하고 캐시된 파일을 지울 수 있습니다</string>
+    <string name="settings_system_storage_keystore_title">서명 키스토어</string>
+    <string name="settings_system_storage_app_data_title">앱 데이터</string>
+    <string name="settings_system_storage_patch_bundles_title">패치 번들</string>
+    <string name="settings_system_storage_http_cache_title">네트워크 캐시</string>
+    <string name="settings_system_storage_http_cache_description">업데이트 속도를 높이기 위해 HTTP 응답이 캐시됩니다</string>
+    <string name="settings_system_storage_installer_cache_title">외부 설치 프로그램 캐시</string>
+    <string name="settings_system_storage_installer_cache_description">서드파티 설치 프로그램에 전달된 APK 복사본</string>
+    <string name="settings_system_storage_patcher_workspace_title">패처 작업 공간</string>
+    <string name="settings_system_storage_patcher_workspace_description">패처 런타임 파일 및 사용하지 않는 임시 데이터</string>
+    <string name="settings_system_storage_temporary_title">임시 파일</string>
+    <string name="settings_system_storage_temporary_description">패치 중에 생성된 작업 파일</string>
+    <string name="settings_system_storage_clear_all">모든 캐시 지우기</string>
+    <string name="settings_system_storage_clear_all_description">회수 가능한 모든 캐시 공간을 한 번에 확보합니다</string>
+    <string name="settings_system_storage_clear_all_confirm">캐시된 네트워크 응답, 설치 준비된 APK 복사본, 임시 파일을 삭제합니다. 원본 APK와 패치된 APK는 유지됩니다</string>
+    <string name="settings_system_storage_cleared">%s 확보됨</string>
+    <string name="settings_system_storage_nothing_to_clear">삭제할 항목이 없습니다</string>
+    <string name="settings_system_storage_open_app_info_title">Android 앱 저장소 열기</string>
+    <string name="settings_system_storage_open_app_info_description">시스템 설정을 통해 모든 Morphe 데이터를 관리하거나 지울 수 있습니다</string>
+    <string name="settings_system_save_original_apks_title">원본 APK 보관</string>
+    <string name="settings_system_save_original_apks_description">다시 패치할 경우에 파일을 다시 선택하지 않고 사용할 수 있도록 패치 전 APK를 저장합니다</string>
+    <string name="settings_system_save_patched_apks_title">패치된 APK 보관</string>
+    <string name="settings_system_save_patched_apks_description">나중에 내보내거나 Manager에서 다시 설치할 수 있도록 패치된 APK의 복사본을 저장합니다</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">패치된 APK</string>
     <string name="settings_system_patched_apks_description">저장된 패치된 앱 파일을 관리합니다</string>
@@ -836,7 +881,7 @@ morphe_header_custom_dark.png
     <string name="deselect_all">모두 선택 해제</string>
     <string name="deselect_all_done">모두 선택 해제하였습니다</string>
     <string name="reorder_list">목록 다시 정렬</string>
-    <string name="reorder_list_hint">다시 정렬하려면 드래그하세요</string>
+    <string name="reorder_list_hint">앱을 드래그하여 순서를 변경하세요</string>
     <string name="reorder_done">순서를 저장하였습니다</string>
     <string name="reset_order">순서 초기화</string>
     <string name="reset_order_done">순서를 초기화하였습니다</string>

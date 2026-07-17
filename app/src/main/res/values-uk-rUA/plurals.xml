@@ -60,4 +60,10 @@
         <item quantity="many">%s прихованих застосунків</item>
         <item quantity="other">%s прихованих застосунків</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s застосунок</item>
+        <item quantity="few">%s застосунки</item>
+        <item quantity="many">%s застосунків</item>
+        <item quantity="other">%s застосунків</item>
+    </plurals>
 </resources>

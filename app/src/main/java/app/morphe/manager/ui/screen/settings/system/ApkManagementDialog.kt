@@ -19,15 +19,20 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -38,6 +43,7 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.original.OriginalApk
 import app.morphe.manager.domain.installer.InstallerFileProvider
+import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.ui.screen.shared.*
@@ -100,6 +106,7 @@ private data class OriginalApkEntry(
 data class ApkListMeta(
     val title: String,
     val icon: ImageVector,
+    val accentColor: Color,
     val count: Int,
     val totalSize: Long,
     val isLoading: Boolean,
@@ -107,6 +114,15 @@ data class ApkListMeta(
     val emptyMessage: String,
     val deleteAllTitle: String?,
     val zipExportFileName: String
+)
+
+/** Retention preference toggle rendered inside the APK management dialog. */
+@Immutable
+data class RetentionToggle(
+    val title: String,
+    val description: String,
+    val checked: Boolean,
+    val onCheckedChange: (Boolean) -> Unit
 )
 
 /** Callbacks for per-item and bulk APK operations. */
@@ -147,6 +163,8 @@ private fun PatchedApksContent(
     val repository: InstalledAppRepository = koinInject()
     val filesystem: Filesystem = koinInject()
     val appDataResolver: AppDataResolver = koinInject()
+    val prefs: PreferencesManager = koinInject()
+    val savePatchedApks by prefs.savePatchedApks.getAsState()
 
     val allInstalledApps by repository.getAll().collectAsStateWithLifecycle(emptyList())
 
@@ -220,6 +238,7 @@ private fun PatchedApksContent(
         meta = ApkListMeta(
             title = stringResource(R.string.settings_system_patched_apks_title),
             icon = Icons.Outlined.Apps,
+            accentColor = StorageColors.PatchedApks,
             count = displayItems.size,
             totalSize = totalSize,
             isLoading = isLoading,
@@ -227,6 +246,12 @@ private fun PatchedApksContent(
             emptyMessage = stringResource(R.string.settings_system_patched_apks_empty),
             deleteAllTitle = stringResource(R.string.settings_system_patched_apks_delete_all_title),
             zipExportFileName = stringResource(R.string.settings_system_patched_apks_export_zip_name)
+        ),
+        retentionToggle = RetentionToggle(
+            title = stringResource(R.string.settings_system_save_patched_apks_title),
+            description = stringResource(R.string.settings_system_save_patched_apks_description),
+            checked = savePatchedApks,
+            onCheckedChange = { checked -> scope.launch { prefs.savePatchedApks.update(checked) } }
         ),
         actions = ApkListActions(
             onShare = { item ->
@@ -326,6 +351,8 @@ private fun OriginalApksContent(
     val apksDeletedAllText = stringResource(R.string.settings_system_apks_deleted_all)
     val repository: OriginalApkRepository = koinInject()
     val appDataResolver: AppDataResolver = koinInject()
+    val prefs: PreferencesManager = koinInject()
+    val saveOriginalApks by prefs.saveOriginalApks.getAsState()
 
     val originalApks by repository.getAll().collectAsStateWithLifecycle(emptyList())
 
@@ -389,6 +416,7 @@ private fun OriginalApksContent(
         meta = ApkListMeta(
             title = stringResource(R.string.settings_system_original_apks_title),
             icon = Icons.Outlined.Storage,
+            accentColor = StorageColors.OriginalApks,
             count = apkItems.size,
             totalSize = totalSize,
             isLoading = isLoading,
@@ -396,6 +424,12 @@ private fun OriginalApksContent(
             emptyMessage = stringResource(R.string.settings_system_original_apks_empty),
             deleteAllTitle = stringResource(R.string.settings_system_original_apks_delete_all_title),
             zipExportFileName = stringResource(R.string.settings_system_original_apks_export_zip_name)
+        ),
+        retentionToggle = RetentionToggle(
+            title = stringResource(R.string.settings_system_save_original_apks_title),
+            description = stringResource(R.string.settings_system_save_original_apks_description),
+            checked = saveOriginalApks,
+            onCheckedChange = { checked -> scope.launch { prefs.saveOriginalApks.update(checked) } }
         ),
         actions = ApkListActions(
             onShare = { item ->
@@ -466,7 +500,8 @@ private fun ApkManagementDialogContent(
     meta: ApkListMeta,
     actions: ApkListActions,
     items: List<ApkItemData>,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    retentionToggle: RetentionToggle? = null
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -528,7 +563,7 @@ private fun ApkManagementDialogContent(
             if (selectedItems.isNotEmpty()) {
                 MultiSelectShell(visible = true) {
                     SelectionActionBar(
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+                        modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ItemSpacing),
                         selectedCount = selectedItems.size,
                         totalCount = items.size,
                         subtitle = stringResource(
@@ -586,7 +621,8 @@ private fun ApkManagementDialogContent(
             }
         },
         scrollable = false,
-        compactPadding = true
+        compactPadding = true,
+        contentArrangement = Arrangement.Top
     ) {
         val listState = rememberLazyListState()
         Box(modifier = Modifier.fillMaxWidth()) {
@@ -595,24 +631,53 @@ private fun ApkManagementDialogContent(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
             ) {
+                if (retentionToggle != null) {
+                    item(key = "retention") {
+                        val enabledState = stringResource(R.string.enabled)
+                        val disabledState = stringResource(R.string.disabled)
+                        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)) {
+                            SettingsItem(
+                                onClick = { retentionToggle.onCheckedChange(!retentionToggle.checked) },
+                                leadingContent = { MorpheIcon(icon = meta.icon, tint = meta.accentColor) },
+                                title = retentionToggle.title,
+                                subtitle = retentionToggle.description,
+                                showBorder = true,
+                                trailingContent = {
+                                    MorpheSwitch(
+                                        checked = retentionToggle.checked,
+                                        onCheckedChange = retentionToggle.onCheckedChange,
+                                        modifier = Modifier.semantics {
+                                            stateDescription = if (retentionToggle.checked) enabledState else disabledState
+                                        }
+                                    )
+                                }
+                            )
+                            MorpheSettingsDivider(fullWidth = true)
+                        }
+                    }
+                }
+
                 // Summary box
                 item(key = "summary") {
-                    InfoBox(
+                    HeroInfoCard(
+                        icon = meta.icon,
                         title = pluralStringResource(
                             R.plurals.settings_system_apks_count,
                             meta.count,
                             meta.count
                         ),
-                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                        titleColor = MaterialTheme.colorScheme.primary,
-                        icon = meta.icon
-                    ) {
-                        Text(
-                            text = stringResource(R.string.settings_system_apks_size, formatBytes(meta.totalSize)),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = LocalDialogSecondaryTextColor.current
-                        )
-                    }
+                        containerColor = meta.accentColor.copy(alpha = 0.15f),
+                        iconContainerColor = meta.accentColor.copy(alpha = 0.25f),
+                        iconTint = meta.accentColor,
+                        titleColor = meta.accentColor,
+                        subtitle = {
+                            Text(
+                                text = stringResource(R.string.settings_system_apks_size, formatBytes(meta.totalSize)),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = LocalDialogSecondaryTextColor.current
+                            )
+                        }
+                    )
                 }
 
                 // List of APKs or loading state
@@ -697,6 +762,7 @@ private fun ApkItemCard(
     ) {
         SectionCard {
             Column {
+                // Header with app icon
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -709,7 +775,7 @@ private fun ApkItemCard(
                                 onToggleSelection()
                             }
                         )
-                        .padding(horizontal = MorpheDefaults.ItemSpacing, vertical = MorpheDefaults.ItemSpacing),
+                        .padding(MorpheDefaults.ContentPadding),
                     horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -723,7 +789,7 @@ private fun ApkItemCard(
                     // App info
                     Column(
                         modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(2.dp)
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         Text(
                             text = data.displayName,
@@ -758,7 +824,10 @@ private fun ApkItemCard(
 
                         // Action buttons
                         ActionPillRow(
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+                            modifier = Modifier.padding(
+                                horizontal = MorpheDefaults.ContentPadding,
+                                vertical = MorpheDefaults.ItemSpacing
+                            )
                         ) {
                             if (onShare != null) {
                                 val shareLabel = stringResource(R.string.share)

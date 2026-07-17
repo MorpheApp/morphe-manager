@@ -19,7 +19,6 @@
     <string name="home_update_available">Uppdatering för Morphe är tillgänglig</string>
     <string name="home_update_available_subtitle">Ny version är redo att installeras</string>
     <string name="home_update_error">Uppdatering misslyckades</string>
-    <string name="home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
     <string name="home_update_skipped_metered">Uppdateringar hoppas över</string>
     <string name="home_update_skipped_metered_subtitle">Mobildata är aktivt</string>
     <string name="home_updating_sources">Uppdaterar källor …</string>
@@ -28,6 +27,14 @@
     <string name="home_update_success_subtitle">Dina källor är uppdaterade</string>
     <string name="home_sources_are_loading">Källor läses in, vänta …</string>
     <string name="home_search_apps">Sök efter appar</string>
+    <string name="home_app_sort_title">Sortera appar</string>
+    <string name="home_app_sort_manual_description">Tryck länge på en app och tryck sedan på knappen för att ändra ordning</string>
+    <string name="home_app_sort_recommended">Rekommenderad ordning</string>
+    <string name="home_app_sort_recommended_description">Installerade och fästa appar först</string>
+    <string name="home_app_sort_name_asc_description">Alfabetisk ordning, A till Ö</string>
+    <string name="home_app_sort_name_desc_description">Omvänd alfabetisk ordning, Ö till A</string>
+    <string name="home_app_sort_updates_first">Tilläggsuppdateringar först</string>
+    <string name="home_app_sort_updates_first_description">Appar med uppdateringsbrickan först, sedan rekommenderad ordning</string>
     <string name="home_no_apps_title">Inga appar är tillgängliga</string>
     <string name="home_no_apps_subtitle">Lägg till en källa eller aktivera en befintlig i %s</string>
     <string name="home_no_apps_search_subtitle">Inga appar matchar \"%s\"</string>
@@ -76,9 +83,13 @@
     <string name="home_greeting_super_late_5">Nattaktiv och produktiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tilläggskällor</string>
+    <string name="sources_sort_title">Sortera tilläggskällor</string>
     <string name="sources_sort_manual">Manuell ordning</string>
-    <string name="sources_sort_manual_hint">Tryck länge på en källa är att ändra ordning</string>
+    <string name="sources_sort_manual_hint">Tryck länge på en källa för att ändra ordning</string>
     <string name="sources_sort_last_updated">Senast uppdaterad</string>
+    <string name="sources_sort_last_updated_description">Nyaste källuppdateringarna först</string>
+    <string name="sources_sort_enabled_first">Aktiverade först</string>
+    <string name="sources_sort_enabled_first_description">Visa aktiva källor före inaktiverade källor</string>
     <string name="sources_management_open_in_browser">Öppna i webbläsaren</string>
     <string name="sources_management_failed_to_open_url">Det gick inte att öppna webbadressen</string>
     <string name="sources_management_prerelease_toggle">Förhandsversioner av tillägg</string>
@@ -647,14 +658,12 @@ Bildernas mått ska vara följande:
     <string name="settings_prompt_installer_on_install_description">Visar en dialogruta för att välja en installerare varje gång en modifierad app installeras</string>
     <string name="settings_auto_install_with_shizuku">Installera automatiskt efter modifiering</string>
     <string name="settings_auto_install_with_shizuku_description">Installerar den modifierade APK-filen tyst så snart modifieringen är klar</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" är aktiverat – automatisk installation hoppas över</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterioptimering</string>
     <string name="settings_system_battery_optimization_description">Låter modifieringsverktyget fortsätta köras när appen minimeras</string>
     <string name="settings_system_performance">Prestanda</string>
     <string name="settings_system_process_runtime">Processexekvering</string>
     <string name="settings_system_process_runtime_description">Kör modifieringen i en separat process för bättre stabilitet</string>
-    <string name="settings_system_process_runtime_memory_limit">Minnesgräns</string>
     <string name="settings_system_process_runtime_memory_limit_description">Högre gränser gör modifieringen snabbare på kompatibla enheter</string>
     <string name="settings_system_process_runtime_enable">Aktivera processexekvering</string>
     <string name="settings_system_memory_limit_subtitle">Tillgängligt minne för modifieringen</string>
@@ -707,6 +716,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_apks_deleted_all">APK-filerna har raderats</string>
     <string name="settings_system_apks_export_zip_success">De markerade APK-filerna har exporterats</string>
     <string name="settings_system_apks_export_zip_failed">Det gick inte att exportera de markerade APK-filerna</string>
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Modifierade APK-filer</string>
     <string name="settings_system_patched_apks_description">Hanterar sparade modifierade appfiler</string>

@@ -40,4 +40,8 @@
         <item quantity="one">%s gizli uygulama</item>
         <item quantity="other">%s gizli uygulama</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s uygulama</item>
+        <item quantity="other">%s uygulama</item>
+    </plurals>
 </resources>

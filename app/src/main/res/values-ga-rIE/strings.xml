@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Nuashonrú Morphe ar fáil</string>
     <string name="home_update_available_subtitle">Tá nuashonrú nua ar fáil</string>
+    <string name="home_blocked_source_title">Braitheadh ​​foinse paiste blocáilte</string>
+    <string name="home_blocked_source_subtitle">Tapáil chun athbhreithniú a dhéanamh agus a bhaint</string>
+    <string name="home_metadata_errors_title">Níl roinnt foinsí paiste ar fáil</string>
+    <string name="home_metadata_errors_subtitle">Tapáil chun foinsí a athbhreithniú</string>
+    <string name="home_metered_skipped_title">Nuashonruithe curtha ar sos ar shonraí soghluaiste</string>
+    <string name="home_metered_skipped_subtitle">Tapáil chun nuashonruithe ar shonraí soghluaiste a cheadú</string>
     <string name="home_update_error">Theip ar nuashonrú</string>
-    <string name="home_update_error_subtitle">Seiceáil do nasc idirlín agus bain triail eile as</string>
+    <string name="home_update_error_subtitle">Thit an tarrús agus a bhí ag nuashonrú foinsí</string>
     <string name="home_update_skipped_metered">Nuashonruithe scipeáilte</string>
     <string name="home_update_skipped_metered_subtitle">Tá sonraí soghluaiste gníomhach</string>
     <string name="home_updating_sources">Ag nuashonrú na foinsí…</string>
@@ -28,19 +34,31 @@
     <string name="home_update_success_subtitle">Tá do foinsí suas chun dáta</string>
     <string name="home_sources_are_loading">Tá na foinsí ag lódáil, fan le do thoil…</string>
     <string name="home_search_apps">Cuardaigh aipeanna</string>
-    <string name="home_app_sort_title">Aipeanna a shórtáil</string>
-    <string name="home_app_sort_manual_description">Coinnigh app faoi bhrú ar fhad, ansin tapa ar an gcnaip cóimeála</string>
+    <string name="home_app_sort_title">Sórtáil aipeanna</string>
+    <string name="home_app_sort_manual_description">Brúigh go fada ar aip, ansin tapáil an cnaipe athordaithe</string>
     <string name="home_app_sort_recommended">Ordú molta</string>
-    <string name="home_app_sort_recommended_description">Aipeanna suiteáilte agus greanta ar dtús</string>
-    <string name="home_app_sort_name_asc_description">Aibítir, ó A go Z</string>
-    <string name="home_app_sort_name_desc_description">Ailmhnéalfabhair comhthairis, ó Z go A</string>
+    <string name="home_app_sort_recommended_description">Aipeanna suiteáilte agus bioráilte ar dtús</string>
+    <string name="home_app_sort_name_asc_description">In ord aibítre, A go Z</string>
+    <string name="home_app_sort_name_desc_description">Droim ar ais aibítreach, Z go A</string>
     <string name="home_app_sort_updates_first">Nuashonruithe paiste ar dtús</string>
-    <string name="home_app_sort_updates_first_description">Aipeanna le badgeanna nuashonraithe ar dtús, ansin de réir an ordú molta</string>
+    <string name="home_app_sort_updates_first_description">Aipeanna le suaitheantais nuashonraithe ar dtús, ansin ord molta</string>
     <string name="home_no_apps_title">Níl aon aipeanna ar fáil</string>
     <string name="home_no_apps_subtitle">Cuir foinse paiste leis nó cumasaigh ceann atá ann cheana féin i %s</string>
     <string name="home_no_apps_search_subtitle">Níl aon aip ag teacht le \"%s\"</string>
     <string name="home_all_apps_hidden_title">Tá gach aipeanna i bhfolach</string>
     <string name="home_all_apps_hidden_subtitle">Tá na haipeanna go léir i bhfolach agat ón scáileán baile</string>
+    <string name="home_category_add">Cuir catagóir le</string>
+    <string name="home_category_all_apps">Gach aip</string>
+    <string name="home_category_custom">Saincheaptha</string>
+    <string name="home_category_uncategorized">Gan catagóir</string>
+    <string name="home_category_new_title">Catagóir nua</string>
+    <string name="home_category_rename_title">Athainmnigh catagóir</string>
+    <string name="home_category_name">Ainm catagóire</string>
+    <string name="home_category_move_to">Gluaigh go catagóir</string>
+    <string name="home_category_move_selected_title">Gluaigh apps roghnaithe</string>
+    <string name="home_category_delete_confirm_title">Scrios catagóir</string>
+    <string name="home_category_delete_confirm_message">Scrios catagóir &lt;b&gt;%1$s&lt;/b&gt;? Beidh apps ann ag dul ar ais go &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Níl gníomhartha ar fáil don chatagóir seo</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Cén aip ar mhaith leat paiste a chur leis?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -84,13 +102,13 @@
     <string name="home_greeting_super_late_5">Oícheanta agus táirgiúil</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Foinsí paiste</string>
-    <string name="sources_sort_title">Roghnaigh foinse paiste</string>
+    <string name="sources_sort_title">Sórtáil foinsí paiste</string>
     <string name="sources_sort_manual">Ordú láimhe</string>
     <string name="sources_sort_manual_hint">Brúigh suas le foinse le hathordú</string>
     <string name="sources_sort_last_updated">Nuashonraithe is déanaí</string>
     <string name="sources_sort_last_updated_description">Nuashonruithe foinse is déanaí ar dtús</string>
     <string name="sources_sort_enabled_first">Cumasaithe ar dtús</string>
-    <string name="sources_sort_enabled_first_description">Taispeáin foinseacha gníomhacha roimh foinseacha dí-chumasaithe</string>
+    <string name="sources_sort_enabled_first_description">Taispeáin foinsí gníomhacha roimh fhoinsí díchumasaithe</string>
     <string name="sources_management_open_in_browser">Oscail sa bhrabhsálaí</string>
     <string name="sources_management_failed_to_open_url">Teip ar URL a oscailt</string>
     <string name="sources_management_prerelease_toggle">Paistí réamh-eisiúna</string>
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Paistí spriocanna aipeanna turgnamhacha más féidir</string>
     <string name="sources_management_already_exists">Tá an fhoinse seo curtha leis cheana féin</string>
     <string name="sources_management_invalid_url">URL foinse neamhbhailí. Seiceáil an seoladh agus bain triail eile as</string>
+    <string name="sources_management_blocked">Tá an foinse paiste seo blocáilte agus ní féidir í a chur leis</string>
+    <string name="sources_management_source_blocked_badge">Blocáilte</string>
     <string name="sources_management_metadata_unavailable">Meiteashonraí N/B</string>
     <string name="sources_management_metadata_unavailable_hint">Níl an cianchomhad meiteashonraí ar fáil. Oibríonn paistí leis an mbeart suiteáilte fós, ach tá uath-nuashonrú díchumasaithe don fhoinse seo</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Níorbh fhéidir an pacáiste paiste a íoslódáil. B’fhéidir go bhfuil an URL foinse mícheart nó nach bhfuil an comhad ann.</string>
@@ -478,6 +498,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_home_screen">Home screen</string>
     <string name="settings_appearance_greeting_phrases">Frásaí beannachta</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Taispeáin teachtaireacht beannachta ar an scáileán baile</string>
+    <string name="settings_appearance_app_grouping">Grúpaíocht apps</string>
+    <string name="settings_appearance_app_grouping_description">Taispeáin lascaitheoir scáileáin baile chun apps a ghrúpaíocht de réir foinse nó do chatagóirí féin, ag coimeád an roghnú nuair a bhíonn sé múchta</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Deilbhín aip</string>
     <string name="settings_appearance_app_icon_default">Réamhshocrú</string>
@@ -659,14 +681,12 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_prompt_installer_on_install_description">Taispeánann sé dialóg roghnúcháin suiteálaí gach uair a shuiteáiltear aip phaisteáilte</string>
     <string name="settings_auto_install_with_shizuku">Suiteáil uathoibríoch tar éis paisteála</string>
     <string name="settings_auto_install_with_shizuku_description">Suiteálann sé an APK paisteáilte go ciúin a luaithe a bheidh an paisteáil críochnaithe</string>
-    <string name="settings_auto_install_prompt_conflict">Tá \"%s\" cumasaithe - scipeálfar an suiteáil uathoibríoch</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Uasmhéadú ceallraí</string>
     <string name="settings_system_battery_optimization_description">Coinníonn an paisteálaí ag rith nuair a bhíonn an aip íoslaghdaithe</string>
     <string name="settings_system_performance">Feidhmíocht</string>
     <string name="settings_system_process_runtime">Am rith an phróisis</string>
     <string name="settings_system_process_runtime_description">Ritheann sé paisteáil i bpróiseas ar leithligh le haghaidh cobhsaíochta níos fearr.</string>
-    <string name="settings_system_process_runtime_memory_limit">Teorainn chuimhne</string>
     <string name="settings_system_process_runtime_memory_limit_description">Luasghéaraíonn teorainneacha níos airde paistí ar ghléasanna cumasacha</string>
     <string name="settings_system_process_runtime_enable">Cumasaigh am rith an phróisis</string>
     <string name="settings_system_memory_limit_subtitle">Cuimhne ar fáil le haghaidh paisteála</string>
@@ -719,6 +739,31 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_system_apks_deleted_all">APKanna scriosta go rathúil</string>
     <string name="settings_system_apks_export_zip_success">APKanna roghnaithe easpórtáilte</string>
     <string name="settings_system_apks_export_zip_failed">Theip ar na APKanna roghnaithe a onnmhairiú</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Bainistíocht stórála</string>
+    <string name="settings_system_storage_management_description">Athbhreithnigh úsáid diosca agus glan comhaid taisceáilte</string>
+    <string name="settings_system_storage_keystore_title">Stór eochrach sínithe</string>
+    <string name="settings_system_storage_app_data_title">Sonraí aipeanna</string>
+    <string name="settings_system_storage_patch_bundles_title">Pacáistí paiste</string>
+    <string name="settings_system_storage_http_cache_title">Taisce líonra</string>
+    <string name="settings_system_storage_http_cache_description">Freagraí HTTP curtha i dtaisce chun nuashonruithe a bhrostú</string>
+    <string name="settings_system_storage_installer_cache_title">Taisce suiteálaí seachtrach</string>
+    <string name="settings_system_storage_installer_cache_description">Cóipeanna APK curtha ar aghaidh chuig suiteálaithe tríú páirtí</string>
+    <string name="settings_system_storage_patcher_workspace_title">Spás oibre paisteora</string>
+    <string name="settings_system_storage_patcher_workspace_description">Comhaid rith-ama paisteora agus sonraí scratch dílleachtaithe</string>
+    <string name="settings_system_storage_temporary_title">Comhaid shealadacha</string>
+    <string name="settings_system_storage_temporary_description">Comhaid oibre a cruthaíodh le linn paisteála</string>
+    <string name="settings_system_storage_clear_all">Glan na taisceanna go léir</string>
+    <string name="settings_system_storage_clear_all_description">Saorann sé an spás taisce in-athúsáidte go léir ag an am céanna</string>
+    <string name="settings_system_storage_clear_all_confirm">Glanann sé seo freagraí líonra taisceáilte, cóipeanna suiteálaí céimnithe, agus comhaid shealadacha. Coinnítear APKanna bunaidh agus paisteáilte.</string>
+    <string name="settings_system_storage_cleared">%s saortha</string>
+    <string name="settings_system_storage_nothing_to_clear">Ní rud ar bith le glanadh</string>
+    <string name="settings_system_storage_open_app_info_title">Oscail stóras aipeanna Android</string>
+    <string name="settings_system_storage_open_app_info_description">Bainistigh nó glan na sonraí Morphe go léir trí shocruithe an chórais</string>
+    <string name="settings_system_save_original_apks_title">Coinnigh na comhaid APK bunaidh</string>
+    <string name="settings_system_save_original_apks_description">Sábháil an comhad APK roimh athrú chun é a athúsáid le haghaidh ath-athrú gan an comhad a roghnú arís</string>
+    <string name="settings_system_save_patched_apks_title">Coinnigh na comhaid APK athraithe</string>
+    <string name="settings_system_save_patched_apks_description">Sábháil cópia den comhad APK athraithe le haghaidh onnmhaíocháin nó ath-suiteáil níos déanaí ón mbainisteoir</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKanna paisteáilte</string>
     <string name="settings_system_patched_apks_description">Bainistíonn comhaid iarratais phaisteáilte sábháilte</string>

@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Actualizare Morphe disponibilă</string>
     <string name="home_update_available_subtitle">Versiune nouă pregătită pentru instalare</string>
+    <string name="home_blocked_source_title">Sursă de patch blocată detectată</string>
+    <string name="home_blocked_source_subtitle">Atingeți pentru a revizui și elimina</string>
+    <string name="home_metadata_errors_title">Unele surse de patch-uri sunt indisponibile</string>
+    <string name="home_metadata_errors_subtitle">Atingeți pentru a revizui sursele</string>
+    <string name="home_metered_skipped_title">Actualizările sunt întrerupte pe date mobile</string>
+    <string name="home_metered_skipped_subtitle">Atingeți pentru a permite actualizări pe date mobile</string>
     <string name="home_update_error">Actualizarea a eșuat</string>
-    <string name="home_update_error_subtitle">Verifică-ți conexiunea la internet și încearcă din nou</string>
+    <string name="home_update_error_subtitle">A apărut o eroare în timpul actualizării surselor</string>
     <string name="home_update_skipped_metered">Actualizări omise</string>
     <string name="home_update_skipped_metered_subtitle">Date mobile sunt activate</string>
     <string name="home_updating_sources">Se actualizează sursele…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Nici o aplicație nu corespunde cu \"%s\"</string>
     <string name="home_all_apps_hidden_title">Toate aplicațiile sunt ascunse</string>
     <string name="home_all_apps_hidden_subtitle">Ați ascuns toate aplicațiile de pe ecranul principal</string>
+    <string name="home_category_add">Adaugă categorie</string>
+    <string name="home_category_all_apps">Toate aplicațiile</string>
+    <string name="home_category_custom">Personalizat</string>
+    <string name="home_category_uncategorized">Necategorisite</string>
+    <string name="home_category_new_title">Categorie nouă</string>
+    <string name="home_category_rename_title">Redenumire categorie</string>
+    <string name="home_category_name">Nume categorie</string>
+    <string name="home_category_move_to">Mută în categorie</string>
+    <string name="home_category_move_selected_title">Mută aplicațiile selectate</string>
+    <string name="home_category_delete_confirm_title">Șterge categorie</string>
+    <string name="home_category_delete_confirm_message">Șterge categoria &lt;b&gt;%1$s&lt;/b&gt;? Aplicațiile din aceasta vor reveni la &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Acțiuni indisponibile pentru această categorie</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Ce aplicație dorești să patch-uiești?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Patch-uiește aplicații experimentale dacă e disponibil</string>
     <string name="sources_management_already_exists">Sursă deja adăugată</string>
     <string name="sources_management_invalid_url">URL sursă invalidă. Vă rugăm să verificați adresa și încercați din nou</string>
+    <string name="sources_management_blocked">Această sursă de patch este blocată și nu poate fi adăugată</string>
+    <string name="sources_management_source_blocked_badge">Blocată</string>
     <string name="sources_management_metadata_unavailable">Metadate indisponibile</string>
     <string name="sources_management_metadata_unavailable_hint">Fișierul de metadate de la distanță nu este disponibil. Aplicarea pachetului instalat funcționează în continuare, dar actualizarea automată este dezactivată pentru această sursă</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Pachetul de corecție nu a putut fi descărcat. URL-ul sursă poate fi incorect sau fișierul nu există</string>
@@ -478,6 +498,8 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_home_screen">Ecranul principal</string>
     <string name="settings_appearance_greeting_phrases">Fraze de salut</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Afișează un mesaj de salut pe ecranul principal</string>
+    <string name="settings_appearance_app_grouping">Gruparea aplicațiilor</string>
+    <string name="settings_appearance_app_grouping_description">Afișează un comutator al ecranului principal pentru a grupa aplicațiile după sursă sau după propriile categorii, menținând selecția când este dezactivat</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Pictogramă aplicație</string>
     <string name="settings_appearance_app_icon_default">Implicit</string>
@@ -661,14 +683,12 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_prompt_installer_on_install_description">Afișează dialogul de selecție a installerului de fiecare dată când o aplicație patch-uită este instalată</string>
     <string name="settings_auto_install_with_shizuku">Instalare automată după patch-uire</string>
     <string name="settings_auto_install_with_shizuku_description">Instalează în silențios fișierul APK patch-uit imediat ce patch-uirea este finalizată</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" este activat - instalarea automată va fi omisă</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizarea bateriei</string>
     <string name="settings_system_battery_optimization_description">Menține patcherul în funcțiune când aplicația este minimizată</string>
     <string name="settings_system_performance">Performanță</string>
     <string name="settings_system_process_runtime">Runtime proces</string>
     <string name="settings_system_process_runtime_description">Rulează patch-uirea într-un proces separat pentru o stabilitate mai bună</string>
-    <string name="settings_system_process_runtime_memory_limit">Limita memorie</string>
     <string name="settings_system_process_runtime_memory_limit_description">Limite mai mari accelerează patch-uirea pe dispozitivele capabile</string>
     <string name="settings_system_process_runtime_enable">Activează proces runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memorie disponibilă pentru patachizare</string>
@@ -721,6 +741,31 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_apks_deleted_all">APK-urile au fost șterse cu succes</string>
     <string name="settings_system_apks_export_zip_success">APK-uri selectate exportate</string>
     <string name="settings_system_apks_export_zip_failed">Exportarea APK-urilor selectate a eșuat</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Gestionare spațiu de stocare</string>
+    <string name="settings_system_storage_management_description">Verificați utilizarea discului și ștergeți fișierele cache</string>
+    <string name="settings_system_storage_keystore_title">Magazie de chei de semnare</string>
+    <string name="settings_system_storage_app_data_title">Date aplicație</string>
+    <string name="settings_system_storage_patch_bundles_title">Pachete de patch-uri</string>
+    <string name="settings_system_storage_http_cache_title">Memorie cache</string>
+    <string name="settings_system_storage_http_cache_description">Răspunsurile HTTP sunt stocate în cache pentru a accelera actualizările</string>
+    <string name="settings_system_storage_installer_cache_title">Cache-ul programului de instalare extern</string>
+    <string name="settings_system_storage_installer_cache_description">Copii APK transmise programelor de instalare terțe</string>
+    <string name="settings_system_storage_patcher_workspace_title">Spațiu de lucru patcher</string>
+    <string name="settings_system_storage_patcher_workspace_description">Fișiere de rulare patcher și date temporare rămase</string>
+    <string name="settings_system_storage_temporary_title">Fișiere temporare</string>
+    <string name="settings_system_storage_temporary_description">Fișiere de lucru create în timpul aplicării patch-urilor</string>
+    <string name="settings_system_storage_clear_all">Șterge toate cache-urile</string>
+    <string name="settings_system_storage_clear_all_description">Eliberează tot spațiul cache recuperabil odată</string>
+    <string name="settings_system_storage_clear_all_confirm">Aceasta șterge răspunsurile de rețea stocate în cache, copiile programului de instalare în așteptare și fișierele temporare. APK-urile originale și patch-uite sunt păstrate</string>
+    <string name="settings_system_storage_cleared">Eliberat %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nimic de șters</string>
+    <string name="settings_system_storage_open_app_info_title">Deschide stocarea aplicației Android</string>
+    <string name="settings_system_storage_open_app_info_description">Gestionează sau șterge toate datele Morphe prin setările sistemului</string>
+    <string name="settings_system_save_original_apks_title">Păstrează fișierele APK originale</string>
+    <string name="settings_system_save_original_apks_description">Salvează fișierul APK pre-patch pentru a-l putea refolosi pentru repatch-uire fără a selecta din nou fișierul</string>
+    <string name="settings_system_save_patched_apks_title">Păstrează fișierele APK patch-uite</string>
+    <string name="settings_system_save_patched_apks_description">Salvează o copie a fișierului APK patch-uit pentru export ulterior sau reinstalare din manager</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK-uri patch-uite</string>
     <string name="settings_system_patched_apks_description">Administrează fișierele patch-uite salvate ale aplicațiilor</string>

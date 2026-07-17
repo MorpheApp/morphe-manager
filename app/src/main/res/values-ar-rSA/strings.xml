@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">تحديث Morphe متاح</string>
     <string name="home_update_available_subtitle">إصدار جديد جاهز للتثبيت</string>
+    <string name="home_blocked_source_title">تم اكتشاف مصدر تعديل محظور</string>
+    <string name="home_blocked_source_subtitle">انقر للمراجعة والإزالة</string>
+    <string name="home_metadata_errors_title">بعض مصادر التعديل غير متوفرة</string>
+    <string name="home_metadata_errors_subtitle">انقر لمراجعة المصادر</string>
+    <string name="home_metered_skipped_title">التحديثات متوقفة على بيانات الجوّال</string>
+    <string name="home_metered_skipped_subtitle">انقر للسماح بالتحديثات على بيانات الجوّال</string>
     <string name="home_update_error">فشل التحديث</string>
-    <string name="home_update_error_subtitle">تحقق من اتصالك بالإنترنت وحاول مرة أخرى</string>
+    <string name="home_update_error_subtitle">حدث خطأ أثناء تحديث المصادر</string>
     <string name="home_update_skipped_metered">التحديثات تم تخطيها</string>
     <string name="home_update_skipped_metered_subtitle">بيانات الجوّال نشطة</string>
     <string name="home_updating_sources">جارٍ تحديث المصادر…</string>
@@ -29,18 +35,30 @@
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
     <string name="home_search_apps">البحث عن التطبيقات</string>
     <string name="home_app_sort_title">ترتيب التطبيقات</string>
-    <string name="home_app_sort_manual_description">اضغط مطولاً على تطبيق، ثم اضغط على زر إعادة الترتيب</string>
+    <string name="home_app_sort_manual_description">اضغط مطولًا على تطبيق، ثم اضغط على زر إعادة الترتيب</string>
     <string name="home_app_sort_recommended">الترتيب الموصى به</string>
-    <string name="home_app_sort_recommended_description">التطبيقات المثبتة والمثبتة أولاً</string>
+    <string name="home_app_sort_recommended_description">التطبيقات المنصَّبة والمثبتة أولًا</string>
     <string name="home_app_sort_name_asc_description">أبجديًا، من الألف إلى الياء</string>
-    <string name="home_app_sort_name_desc_description">عكس أبجدي، من ي إلى أ</string>
-    <string name="home_app_sort_updates_first">تحديثات التصحيح أولاً</string>
-    <string name="home_app_sort_updates_first_description">تطبيقات بعلامات تحديث أولاً، ثم بالترتيب الموصى به</string>
+    <string name="home_app_sort_name_desc_description">عكس أبجدي، من الياء إلى الألف</string>
+    <string name="home_app_sort_updates_first">تحديثات التعديل أولًا</string>
+    <string name="home_app_sort_updates_first_description">التطبيقات التي تحتوي على شارات التحديث أولًا، ثم الترتيب الموصى به</string>
     <string name="home_no_apps_title">لا توجد تطبيقات متاحة</string>
     <string name="home_no_apps_subtitle">أضِف مصدرًا للتعديل أو قم بتمكين مصدر موجود في %s</string>
     <string name="home_no_apps_search_subtitle">لا يوجد تطبيقات تطابق \"%s\"</string>
     <string name="home_all_apps_hidden_title">تم إخفاء جميع التطبيقات</string>
     <string name="home_all_apps_hidden_subtitle">لقد أخفيت جميع التطبيقات من الشاشة الرئيسية</string>
+    <string name="home_category_add">إضافة فئة</string>
+    <string name="home_category_all_apps">كل التطبيقات</string>
+    <string name="home_category_custom">مخصص</string>
+    <string name="home_category_uncategorized">غير مصنف</string>
+    <string name="home_category_new_title">فئة جديدة</string>
+    <string name="home_category_rename_title">إعادة تسمية الفئة</string>
+    <string name="home_category_name">اسم الفئة</string>
+    <string name="home_category_move_to">نقل إلى فئة</string>
+    <string name="home_category_move_selected_title">نقل التطبيقات المحددة</string>
+    <string name="home_category_delete_confirm_title">حذف الفئة</string>
+    <string name="home_category_delete_confirm_message">حذف الفئة &lt;b&gt;%1$s&lt;/b&gt;؟ ستعود التطبيقات الموجودة فيها إلى &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">الإجراءات غير متوفرة لهذه الفئة</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">ما التطبيق الذي تريد تعديله؟</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -84,13 +102,13 @@
     <string name="home_greeting_super_late_5">ليلي ومنتج</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">مصادر التعديل</string>
-    <string name="sources_sort_title">فرز مصادر التصحيح</string>
+    <string name="sources_sort_title">فرز مصادر التعديل</string>
     <string name="sources_sort_manual">ترتيب يدوي</string>
     <string name="sources_sort_manual_hint">اضغط مطولًا على مصدر لإعادة الترتيب</string>
     <string name="sources_sort_last_updated">آخر تحديث</string>
-    <string name="sources_sort_last_updated_description">أحدث تحديثات المصادر أولاً</string>
-    <string name="sources_sort_enabled_first">مُمَكّن أولاً</string>
-    <string name="sources_sort_enabled_first_description">إظهار المصادر النشطة قبل المصادر المعطلة</string>
+    <string name="sources_sort_last_updated_description">آخر تحديثات المصادر أولًا</string>
+    <string name="sources_sort_enabled_first">مُمَكّن أولًا</string>
+    <string name="sources_sort_enabled_first_description">عرض المصادر النشطة قبل المصادر المعطلة</string>
     <string name="sources_management_open_in_browser">فتح في المتصفح</string>
     <string name="sources_management_failed_to_open_url">فشل في فتح الرابط</string>
     <string name="sources_management_prerelease_toggle">إصدارات ما قبل الإطلاق</string>
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">تعديل الإصدارات التجريبية للتطبيقات المستهدفة إن توفرت</string>
     <string name="sources_management_already_exists">تمت إضافة هذا المصدر بالفعل</string>
     <string name="sources_management_invalid_url">عنوان URL المصدر غير صالح. يرجى التحقق من العنوان والمحاولة مرة أخرى</string>
+    <string name="sources_management_blocked">تم حظر مصدر التعديل هذا ولا يمكن إضافته</string>
+    <string name="sources_management_source_blocked_badge">محظور</string>
     <string name="sources_management_metadata_unavailable">البيانات الوصفية غير متوفرة</string>
     <string name="sources_management_metadata_unavailable_hint">ملف البيانات الوصفية عن بعد غير متوفر. لا يزال التعديل بالحزمة المثبتة يعمل، ولكن التحديث التلقائي معطل لهذا المصدر.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">تعذر تنزيل حزمة التعديل. قد يكون عنوان URL المصدر غير صحيح أو أن الملف غير موجود.</string>
@@ -479,6 +499,8 @@
     <string name="settings_appearance_home_screen">الشاشة الرئيسية</string>
     <string name="settings_appearance_greeting_phrases">عبارات الترحيب</string>
     <string name="settings_appearance_greeting_phrases_subtitle">عرض رسالة ترحيب على الشاشة الرئيسية</string>
+    <string name="settings_appearance_app_grouping">تجميع التطبيقات</string>
+    <string name="settings_appearance_app_grouping_description">عرض مُبدِّل الشاشة الرئيسية لتجميع التطبيقات حسب المصدر أو فئاتك الخاصة، مع الاحتفاظ بالتحديد عند إيقاف تشغيلها</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">أيقونة التطبيق</string>
     <string name="settings_appearance_app_icon_default">الافتراضي</string>
@@ -663,14 +685,12 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_prompt_installer_on_install_description">يعرض نافذة اختيار أداة التثبيت في كل مرة تقوم فيها بتثبيت تطبيق معدل</string>
     <string name="settings_auto_install_with_shizuku">التثبيت التلقائي بعد التعديل</string>
     <string name="settings_auto_install_with_shizuku_description">يقوم بتثبيت ملف APK المُعدّل تلقائيًا بمجرد اكتمال عملية التعديل</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" مُفعّل - سيتم تخطي التثبيت التلقائي</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">تحسينات البطارية</string>
     <string name="settings_system_battery_optimization_description">يحافظ على تشغيل أداة التعديل عند تصغير التطبيق</string>
     <string name="settings_system_performance">الأداء</string>
     <string name="settings_system_process_runtime">مدة التشغيل</string>
     <string name="settings_system_process_runtime_description">يُشغّل عملية التعديل في عملية منفصلة لتحسين الاستقرار</string>
-    <string name="settings_system_process_runtime_memory_limit">حد الذاكرة</string>
     <string name="settings_system_process_runtime_memory_limit_description">رفع الحدود يزيد سرعة التعديل على الأجهزة القادرة</string>
     <string name="settings_system_process_runtime_enable">تمكين وقت تشغيل العملية</string>
     <string name="settings_system_memory_limit_subtitle">الذاكرة المتاحة للتعديل</string>
@@ -723,6 +743,31 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_apks_deleted_all">تم حذف ملفات APK بنجاح</string>
     <string name="settings_system_apks_export_zip_success">تم تصدير ملفات APK المحددة</string>
     <string name="settings_system_apks_export_zip_failed">فشل تصدير ملفات APK المحددة</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">إدارة التخزين</string>
+    <string name="settings_system_storage_management_description">مراجعة استخدام مساحة التخزين ومسح الملفات المؤقتة</string>
+    <string name="settings_system_storage_keystore_title">مخزن المفاتيح الموقّعة</string>
+    <string name="settings_system_storage_app_data_title">بيانات التطبيق</string>
+    <string name="settings_system_storage_patch_bundles_title">حُزم التعديل</string>
+    <string name="settings_system_storage_http_cache_title">ذاكرة التخزين المؤقت للشبكة</string>
+    <string name="settings_system_storage_http_cache_description">تم تخزين استجابات HTTP لتسريع التحديثات</string>
+    <string name="settings_system_storage_installer_cache_title">ذاكرة التخزين المؤقت لأداة التثبيت الخارجية</string>
+    <string name="settings_system_storage_installer_cache_description">نسخ APK التي تم تمريرها إلى أدوات التثبيت الخارجية</string>
+    <string name="settings_system_storage_patcher_workspace_title">مساحة عمل أداة التعديل</string>
+    <string name="settings_system_storage_patcher_workspace_description">ملفات وقت التشغيل لأداة التعديل والبيانات المؤقتة غير المستخدمة</string>
+    <string name="settings_system_storage_temporary_title">ملفات مؤقتة</string>
+    <string name="settings_system_storage_temporary_description">ملفات العمل التي تم إنشاؤها أثناء التعديل</string>
+    <string name="settings_system_storage_clear_all">مسح جميع ذاكرات التخزين المؤقت</string>
+    <string name="settings_system_storage_clear_all_description">يحرر كل مساحة التخزين المؤقت القابلة للاسترداد دفعة واحدة</string>
+    <string name="settings_system_storage_clear_all_confirm">يؤدي هذا إلى مسح استجابات الشبكة المخزنة مؤقتًا، نسخ أداة التثبيت المؤقتة، والملفات المؤقتة. يتم الاحتفاظ بملفات APK الأصلية والمعدلة</string>
+    <string name="settings_system_storage_cleared">تم تحرير %s</string>
+    <string name="settings_system_storage_nothing_to_clear">لا يوجد ما يمكن مسحه</string>
+    <string name="settings_system_storage_open_app_info_title">فتح مساحة تخزين تطبيق Android</string>
+    <string name="settings_system_storage_open_app_info_description">إدارة أو مسح جميع بيانات Morphe من خلال إعدادات النظام</string>
+    <string name="settings_system_save_original_apks_title">احتفظ بملفات APK الأصلية</string>
+    <string name="settings_system_save_original_apks_description">حفظ ملف APK قبل التعديل حتى يمكن إعادة استخدامه للتعديل مرة أخرى دون الحاجة إلى تحميله وتحديده من مستعرض الملفات مرة أخرى</string>
+    <string name="settings_system_save_patched_apks_title">احتفظ بملفات APK المعدلة</string>
+    <string name="settings_system_save_patched_apks_description">حفظ نسخة من ملف APK المعدل للتصدير لاحقًا أو لإعادة التثبيت من خلال المدير</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs معدلة</string>
     <string name="settings_system_patched_apks_description">يدير ملفات التطبيقات المُعدّلة المحفوظة</string>

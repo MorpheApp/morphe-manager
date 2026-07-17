@@ -40,4 +40,8 @@
         <item quantity="one">%s rejtett alkalmazás</item>
         <item quantity="other">%s rejtett alkalmazás</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s alkalmazás</item>
+        <item quantity="other">%s alkalmazások</item>
+    </plurals>
 </resources>

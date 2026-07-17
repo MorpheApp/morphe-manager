@@ -84,95 +84,101 @@ fun UpdatesSettingsItem(
         )
     }
 
-    // Use manager prereleases toggle
-    RichSettingsItem(
-        onClick = {
-            settingsViewModel.toggleManagerPrereleases(
-                currentValue = useManagerPrereleases,
-                backgroundNotificationsEnabled = backgroundUpdateNotifications,
-                patchesPrereleaseIds = usePatchesPrereleases,
-                onCheckUpdate = onManagerPrereleasesToggle
-            )
-        },
-        showBorder = true,
-        leadingContent = { MorpheIcon(icon = Icons.Outlined.Science) },
-        title = stringResource(R.string.settings_advanced_updates_use_prereleases),
-        subtitle = stringResource(R.string.settings_advanced_updates_use_prereleases_description),
-        trailingContent = {
-            MorpheSwitch(
-                checked = useManagerPrereleases,
-                onCheckedChange = null,
-                modifier = Modifier.semantics {
-                    stateDescription = if (useManagerPrereleases) enabledState else disabledState
-                }
-            )
-        }
-    )
+    SettingsGroup {
+        // Use manager prereleases toggle
+        SettingsItem(
+            onClick = {
+                settingsViewModel.toggleManagerPrereleases(
+                    currentValue = useManagerPrereleases,
+                    backgroundNotificationsEnabled = backgroundUpdateNotifications,
+                    patchesPrereleaseIds = usePatchesPrereleases,
+                    onCheckUpdate = onManagerPrereleasesToggle
+                )
+            },
+            leadingContent = { MorpheIcon(icon = Icons.Outlined.Science) },
+            title = stringResource(R.string.settings_advanced_updates_use_prereleases),
+            subtitle = stringResource(R.string.settings_advanced_updates_use_prereleases_description),
+            trailingContent = {
+                MorpheSwitch(
+                    checked = useManagerPrereleases,
+                    onCheckedChange = null,
+                    modifier = Modifier.semantics {
+                        stateDescription = if (useManagerPrereleases) enabledState else disabledState
+                    }
+                )
+            }
+        )
 
-    // Background update notifications toggle
-    RichSettingsItem(
-        onClick = {
-            settingsViewModel.toggleBackgroundNotifications(
-                currentValue = backgroundUpdateNotifications,
-                useManagerPrereleases = useManagerPrereleases,
-                patchesPrereleaseIds = usePatchesPrereleases,
-                updateCheckInterval = updateCheckInterval,
-                onShowPermissionDialog = { showNotificationPermissionDialog.value = true }
-            )
-        },
-        showBorder = true,
-        leadingContent = { MorpheIcon(icon = Icons.Outlined.NotificationsActive) },
-        title = stringResource(R.string.settings_advanced_updates_background_notifications),
-        subtitle = stringResource(
-            if (settingsViewModel.hasGms)
-                R.string.settings_advanced_updates_background_notifications_description_fcm
-            else
-                R.string.settings_advanced_updates_background_notifications_description
-        ),
-        trailingContent = {
-            MorpheSwitch(
-                checked = backgroundUpdateNotifications,
-                onCheckedChange = null,
-                modifier = Modifier.semantics {
-                    stateDescription =
-                        if (backgroundUpdateNotifications) enabledState else disabledState
-                }
-            )
-        }
-    )
+        MorpheSettingsDivider()
 
-    // Check frequency interval selector (non-GMS only)
-    AnimatedVisibility(
-        visible = backgroundUpdateNotifications && !settingsViewModel.hasGms,
-        enter = MorpheAnimations.expandFadeEnter,
-        exit = MorpheAnimations.shrinkFadeExit
-    ) {
-        RichSettingsItem(
-            onClick = { showIntervalDialog.value = true },
-            showBorder = true,
-            leadingContent = { MorpheIcon(icon = Icons.Outlined.Schedule) },
-            title = stringResource(R.string.settings_advanced_update_interval),
-            subtitle = stringResource(updateCheckInterval.labelResId)
+        // Background update notifications toggle
+        SettingsItem(
+            onClick = {
+                settingsViewModel.toggleBackgroundNotifications(
+                    currentValue = backgroundUpdateNotifications,
+                    useManagerPrereleases = useManagerPrereleases,
+                    patchesPrereleaseIds = usePatchesPrereleases,
+                    updateCheckInterval = updateCheckInterval,
+                    onShowPermissionDialog = { showNotificationPermissionDialog.value = true }
+                )
+            },
+            leadingContent = { MorpheIcon(icon = Icons.Outlined.NotificationsActive) },
+            title = stringResource(R.string.settings_advanced_updates_background_notifications),
+            subtitle = stringResource(
+                if (settingsViewModel.hasGms)
+                    R.string.settings_advanced_updates_background_notifications_description_fcm
+                else
+                    R.string.settings_advanced_updates_background_notifications_description
+            ),
+            trailingContent = {
+                MorpheSwitch(
+                    checked = backgroundUpdateNotifications,
+                    onCheckedChange = null,
+                    modifier = Modifier.semantics {
+                        stateDescription =
+                            if (backgroundUpdateNotifications) enabledState else disabledState
+                    }
+                )
+            }
+        )
+
+        // Check frequency interval selector (non-GMS only)
+        AnimatedVisibility(
+            visible = backgroundUpdateNotifications && !settingsViewModel.hasGms,
+            enter = MorpheAnimations.expandFadeEnter,
+            exit = MorpheAnimations.shrinkFadeExit
+        ) {
+            Column {
+                MorpheSettingsDivider()
+
+                SettingsItem(
+                    onClick = { showIntervalDialog.value = true },
+                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Schedule) },
+                    title = stringResource(R.string.settings_advanced_update_interval),
+                    subtitle = stringResource(updateCheckInterval.labelResId)
+                )
+            }
+        }
+
+        MorpheSettingsDivider()
+
+        // Allow updates on metered connections
+        SettingsItem(
+            onClick = { settingsViewModel.toggleAllowMeteredUpdates(allowMeteredUpdates) },
+            leadingContent = { MorpheIcon(icon = Icons.Outlined.SignalCellularAlt) },
+            title = stringResource(R.string.settings_advanced_updates_allow_metered),
+            subtitle = stringResource(R.string.settings_advanced_updates_allow_metered_description),
+            trailingContent = {
+                MorpheSwitch(
+                    checked = allowMeteredUpdates,
+                    onCheckedChange = null,
+                    modifier = Modifier.semantics {
+                        stateDescription = if (allowMeteredUpdates) enabledState else disabledState
+                    }
+                )
+            }
         )
     }
-
-    // Allow updates on metered connections
-    RichSettingsItem(
-        onClick = { settingsViewModel.toggleAllowMeteredUpdates(allowMeteredUpdates) },
-        showBorder = true,
-        leadingContent = { MorpheIcon(icon = Icons.Outlined.SignalCellularAlt) },
-        title = stringResource(R.string.settings_advanced_updates_allow_metered),
-        subtitle = stringResource(R.string.settings_advanced_updates_allow_metered_description),
-        trailingContent = {
-            MorpheSwitch(
-                checked = allowMeteredUpdates,
-                onCheckedChange = null,
-                modifier = Modifier.semantics {
-                    stateDescription = if (allowMeteredUpdates) enabledState else disabledState
-                }
-            )
-        }
-    )
 }
 
 /**

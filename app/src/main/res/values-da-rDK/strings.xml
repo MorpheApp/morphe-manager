@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-opdatering tilgængelig</string>
     <string name="home_update_available_subtitle">Ny version klar til installation</string>
+    <string name="home_blocked_source_title">Blokeret patchkilde fundet</string>
+    <string name="home_blocked_source_subtitle">Tryk for at gennemgå og fjerne</string>
+    <string name="home_metadata_errors_title">Nogle patchkilder er ikke tilgængelige</string>
+    <string name="home_metadata_errors_subtitle">Tryk for at gennemgå kilder</string>
+    <string name="home_metered_skipped_title">Opdateringer pauset på mobildata</string>
+    <string name="home_metered_skipped_subtitle">Tryk for at tillade opdateringer over mobildata</string>
     <string name="home_update_error">Opdatering mislykkedes</string>
-    <string name="home_update_error_subtitle">Tjek din internetforbindelse, og prøv igen.</string>
+    <string name="home_update_error_subtitle">Der opstod en fejl under opdatering af kilder</string>
     <string name="home_update_skipped_metered">Opdateringer oversprunget</string>
     <string name="home_update_skipped_metered_subtitle">Mobildata er aktiv</string>
     <string name="home_updating_sources">Opdaterer kilder…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Ingen apps matcher \"%s\"</string>
     <string name="home_all_apps_hidden_title">Alle apps er skjult</string>
     <string name="home_all_apps_hidden_subtitle">Du har skjult alle apps fra startskærmen</string>
+    <string name="home_category_add">Tilføj kategori</string>
+    <string name="home_category_all_apps">Alle apps</string>
+    <string name="home_category_custom">Brugerdefineret</string>
+    <string name="home_category_uncategorized">Usorteret</string>
+    <string name="home_category_new_title">Ny kategori</string>
+    <string name="home_category_rename_title">Omdøb kategori</string>
+    <string name="home_category_name">Kategorinavn</string>
+    <string name="home_category_move_to">Flyt til kategori</string>
+    <string name="home_category_move_selected_title">Flyt valgte apps</string>
+    <string name="home_category_delete_confirm_title">Slet kategori</string>
+    <string name="home_category_delete_confirm_message">Slet kategori &lt;b&gt;%1$s&lt;/b&gt;? Apps i den vil flyttes tilbage til &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Handlinger ikke tilgængelige for denne kategori</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hvilken app vil du have til at blive opgraderet?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Patch eksperimentelle app-targets, hvis de er tilgængelige</string>
     <string name="sources_management_already_exists">Denne kilde er allerede tilføjet</string>
     <string name="sources_management_invalid_url">Ugyldig kilde-URL. Kontroller venligst adressen og prøv igen</string>
+    <string name="sources_management_blocked">Denne patchkilde er blokeret og kan ikke tilføjes</string>
+    <string name="sources_management_source_blocked_badge">Blokeret</string>
     <string name="sources_management_metadata_unavailable">Metadata ikke tilgængelig</string>
     <string name="sources_management_metadata_unavailable_hint">Den eksterne metadatafil er ikke tilgængelig. Opdatering med den installerede pakke fungerer stadig, men automatisk opdatering er deaktiveret for denne kilde</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Opdateringspakken kunne ikke hentes. Kilde-URL\'en kan være forkert, eller filen findes ikke</string>
@@ -478,6 +498,8 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_appearance_home_screen">Startskærm</string>
     <string name="settings_appearance_greeting_phrases">Hilsenfraser</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Vis en hilsenbesked på startskærmen</string>
+    <string name="settings_appearance_app_grouping">App-gruppering</string>
+    <string name="settings_appearance_app_grouping_description">Vis en hjemmeskærms-skifter til at gruppere apps efter kilde eller dine egne kategorier, og bevar udvælgelsen, når den er slået fra</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Appikon</string>
     <string name="settings_appearance_app_icon_default">Standard</string>
@@ -661,14 +683,12 @@ Størrelsesformatet skal være som følger:
     <string name="settings_prompt_installer_on_install_description">Vis installer-valgdialog hver gang du installerer en patchet app</string>
     <string name="settings_auto_install_with_shizuku">Automatisk installation efter patching</string>
     <string name="settings_auto_install_with_shizuku_description">Installerer automatisk den patched APK, så snart patching er fuldført</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" er aktiveret - automatisk installation vil blive sprunget over</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterioptimering</string>
     <string name="settings_system_battery_optimization_description">Holder patcheren kørende, når appen er minimeret</string>
     <string name="settings_system_performance">Ydelse</string>
     <string name="settings_system_process_runtime">Proces runtime</string>
     <string name="settings_system_process_runtime_description">Kør patching i separat proces for bedre stabilitet</string>
-    <string name="settings_system_process_runtime_memory_limit">Hukommelsesbegrænsning</string>
     <string name="settings_system_process_runtime_memory_limit_description">Højere grænser fremskynder patching på kompatible enheder</string>
     <string name="settings_system_process_runtime_enable">Aktiver proces runtime</string>
     <string name="settings_system_memory_limit_subtitle">Hukommelse tilgængelig til patching</string>
@@ -721,6 +741,31 @@ Størrelsesformatet skal være som følger:
     <string name="settings_system_apks_deleted_all">APK\'er slettet korrekt</string>
     <string name="settings_system_apks_export_zip_success">Valgte APK\'er eksporteret</string>
     <string name="settings_system_apks_export_zip_failed">Eksportering af valgte APK\'er mislykkedes</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Administration af lager</string>
+    <string name="settings_system_storage_management_description">Gennemgå diskbrug og ryd cachelagrede filer</string>
+    <string name="settings_system_storage_keystore_title">Signerings nøglelager</string>
+    <string name="settings_system_storage_app_data_title">App data</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch bundles</string>
+    <string name="settings_system_storage_http_cache_title">Netværkscache</string>
+    <string name="settings_system_storage_http_cache_description">HTTP-svar caches for at fremskynde opdateringer</string>
+    <string name="settings_system_storage_installer_cache_title">Ekstern installationscache</string>
+    <string name="settings_system_storage_installer_cache_description">APK-kopier sendt til tredjepartsinstallationsprogrammer</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher-arbejdsområde</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher-køretidsfiler og forladte midlertidige data</string>
+    <string name="settings_system_storage_temporary_title">Midlertidige filer</string>
+    <string name="settings_system_storage_temporary_description">Arbejdsfiler, der er oprettet under patching</string>
+    <string name="settings_system_storage_clear_all">Ryd alle caches</string>
+    <string name="settings_system_storage_clear_all_description">Frigør alt gendanvendeligt cachelager på én gang</string>
+    <string name="settings_system_storage_clear_all_confirm">Dette rydder cachelagrede netværkssvar, mellem-lagrede installationskopier og midlertidige filer. Originale og patched APK\'er bevares</string>
+    <string name="settings_system_storage_cleared">Frigivet %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Intet at rydde</string>
+    <string name="settings_system_storage_open_app_info_title">Åbn Android-applager</string>
+    <string name="settings_system_storage_open_app_info_description">Administrer eller ryd alle Morphe-data via systemindstillinger</string>
+    <string name="settings_system_save_original_apks_title">Gem originale APK\'er</string>
+    <string name="settings_system_save_original_apks_description">Gem den præ-patch APK, så den kan genbruges til repatching uden at skulle vælge filen igen</string>
+    <string name="settings_system_save_patched_apks_title">Gem patched APK\'er</string>
+    <string name="settings_system_save_patched_apks_description">Gem en kopi af den patched APK til senere eksport eller geninstallation fra manageren</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patchet APK\'er</string>
     <string name="settings_system_patched_apks_description">Håndter gemte patchet APK filer</string>

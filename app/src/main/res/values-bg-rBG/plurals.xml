@@ -40,4 +40,8 @@
         <item quantity="one">%s скрито приложение</item>
         <item quantity="other">%s скрити приложения</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s приложение</item>
+        <item quantity="other">%s приложения</item>
+    </plurals>
 </resources>

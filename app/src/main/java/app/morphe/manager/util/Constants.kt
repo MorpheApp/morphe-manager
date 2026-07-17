@@ -16,6 +16,7 @@ const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
 const val SOURCE_REPO_URL = "https://github.com/MorpheApp/morphe-patches"
 const val MORPHE_API_URL = "https://api.morphe.software"
 const val MORPHE_WEBSITE_URL = "https://morphe.software"
+const val BLOCKED_SOURCES_URL = "$MORPHE_API_URL/v2/blocked-sources"
 
 /**
  * Delay before showing a manager update notification to the user.

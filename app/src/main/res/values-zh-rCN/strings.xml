@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe更新可用</string>
     <string name="home_update_available_subtitle">新版本已准备好安装</string>
+    <string name="home_blocked_source_title">检测到已阻止的补丁源</string>
+    <string name="home_blocked_source_subtitle">点击查看并移除</string>
+    <string name="home_metadata_errors_title">部分补丁源不可用</string>
+    <string name="home_metadata_errors_subtitle">点击查看源</string>
+    <string name="home_metered_skipped_title">在移动数据上暂停更新</string>
+    <string name="home_metered_skipped_subtitle">点击允许在移动数据上更新</string>
     <string name="home_update_error">更新失败</string>
-    <string name="home_update_error_subtitle">请检查您的互联网连接并重试</string>
+    <string name="home_update_error_subtitle">更新源时发生错误</string>
     <string name="home_update_skipped_metered">更新已跳过</string>
     <string name="home_update_skipped_metered_subtitle">移动数据已激活</string>
     <string name="home_updating_sources">正在更新源…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">没有应用匹配“%s”</string>
     <string name="home_all_apps_hidden_title">所有应用已隐藏</string>
     <string name="home_all_apps_hidden_subtitle">您已将所有应用从主屏幕隐藏</string>
+    <string name="home_category_add">添加类别</string>
+    <string name="home_category_all_apps">所有应用</string>
+    <string name="home_category_custom">自定义</string>
+    <string name="home_category_uncategorized">未分类</string>
+    <string name="home_category_new_title">新建分类</string>
+    <string name="home_category_rename_title">重命名分类</string>
+    <string name="home_category_name">分类名称</string>
+    <string name="home_category_move_to">移动到分类</string>
+    <string name="home_category_move_selected_title">移动选定的应用</string>
+    <string name="home_category_delete_confirm_title">删除分类</string>
+    <string name="home_category_delete_confirm_message">删除分类&lt;b&gt;%1$s&lt;/b&gt;？其中的应用将会移回&lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">此分类不可用操作</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">您想要修补哪个应用程序？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">如果可用，对实验性应用目标进行修补</string>
     <string name="sources_management_already_exists">此资源已添加</string>
     <string name="sources_management_invalid_url">无效的源URL。请检查地址并重试</string>
+    <string name="sources_management_blocked">此补丁源被阻止，无法添加</string>
+    <string name="sources_management_source_blocked_badge">已阻止</string>
     <string name="sources_management_metadata_unavailable">元数据不可用</string>
     <string name="sources_management_metadata_unavailable_hint">远程元数据文件不可用。使用已安装的程序包进行修补仍然有效，但此源的自动更新已禁用</string>
     <string name="sources_management_metadata_unavailable_hint_missing">无法下载补丁包。源URL可能不正确或文件不存在</string>
@@ -478,6 +498,8 @@
     <string name="settings_appearance_home_screen">主屏幕</string>
     <string name="settings_appearance_greeting_phrases">问候语</string>
     <string name="settings_appearance_greeting_phrases_subtitle">在主屏幕上显示问候消息</string>
+    <string name="settings_appearance_app_grouping">应用分组</string>
+    <string name="settings_appearance_app_grouping_description">显示主屏幕切换器，按来源或您自己的分类对应用进行分组，并在关闭时保持选择</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">应用图标</string>
     <string name="settings_appearance_app_icon_default">默认</string>
@@ -661,14 +683,12 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">每次安装已修补的应用时，都会显示安装程序选择对话框</string>
     <string name="settings_auto_install_with_shizuku">补丁应用后自动安装</string>
     <string name="settings_auto_install_with_shizuku_description">在补丁完成安装后，静默安装补丁后的 APK</string>
-    <string name="settings_auto_install_prompt_conflict">已启用 \"%s\" - 将跳过自动安装</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">电池优化</string>
     <string name="settings_system_battery_optimization_description">在应用最小化时，保持修补程序运行</string>
     <string name="settings_system_performance">性能</string>
     <string name="settings_system_process_runtime">修补程序运行时</string>
     <string name="settings_system_process_runtime_description">在单独的进程中运行修补以提高稳定性</string>
-    <string name="settings_system_process_runtime_memory_limit">内存限制</string>
     <string name="settings_system_process_runtime_memory_limit_description">更高的限制可以加速在兼容设备上的修补</string>
     <string name="settings_system_process_runtime_enable">启用独立进程</string>
     <string name="settings_system_memory_limit_subtitle">修补程序可用的内存大小</string>
@@ -721,6 +741,31 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">已成功删除 APK</string>
     <string name="settings_system_apks_export_zip_success">已导出的 APK</string>
     <string name="settings_system_apks_export_zip_failed">导出选定的 APK 失败</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">存储管理</string>
+    <string name="settings_system_storage_management_description">查看磁盘使用情况和清除缓存文件</string>
+    <string name="settings_system_storage_keystore_title">签名密钥库</string>
+    <string name="settings_system_storage_app_data_title">应用数据</string>
+    <string name="settings_system_storage_patch_bundles_title">补丁包</string>
+    <string name="settings_system_storage_http_cache_title">网络缓存</string>
+    <string name="settings_system_storage_http_cache_description">为了加快更新速度，HTTP 响应已被缓存</string>
+    <string name="settings_system_storage_installer_cache_title">外部安装程序缓存</string>
+    <string name="settings_system_storage_installer_cache_description">传递给第三方安装程序的 APK 副本</string>
+    <string name="settings_system_storage_patcher_workspace_title">补丁程序工作区</string>
+    <string name="settings_system_storage_patcher_workspace_description">补丁程序运行时文件和孤立的临时数据</string>
+    <string name="settings_system_storage_temporary_title">临时文件</string>
+    <string name="settings_system_storage_temporary_description">在补丁过程中创建的工作文件</string>
+    <string name="settings_system_storage_clear_all">清除所有缓存</string>
+    <string name="settings_system_storage_clear_all_description">一次性释放所有可回收的缓存空间</string>
+    <string name="settings_system_storage_clear_all_confirm">这将清除缓存的网络响应、已暂存的安装程序副本和临时文件。原始 APK 和已修补的 APK 将被保留</string>
+    <string name="settings_system_storage_cleared">已释放 %s</string>
+    <string name="settings_system_storage_nothing_to_clear">无需清除</string>
+    <string name="settings_system_storage_open_app_info_title">打开 Android 应用存储空间</string>
+    <string name="settings_system_storage_open_app_info_description">通过系统设置管理或清除所有 Morphe 数据</string>
+    <string name="settings_system_save_original_apks_title">保留原始APK</string>
+    <string name="settings_system_save_original_apks_description">保存修改前APK，以便在无需再次选择文件的情况下重复修补</string>
+    <string name="settings_system_save_patched_apks_title">保留已修补的APK</string>
+    <string name="settings_system_save_patched_apks_description">保存已修补APK的副本，以便以后导出或从管理器重新安装</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">已修补 APK</string>
     <string name="settings_system_patched_apks_description">管理保存的已修补应用文件</string>

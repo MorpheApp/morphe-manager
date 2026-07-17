@@ -19,7 +19,6 @@
     <string name="home_update_available">Dostupno ažuriranje aplikacije</string>
     <string name="home_update_available_subtitle">Nova verzija spremna za instalaciju</string>
     <string name="home_update_error">Ažuriranje nije uspjelo</string>
-    <string name="home_update_error_subtitle">Provjerite vašu internetsku vezu i pokušajte ponovno</string>
     <string name="home_update_skipped_metered">Ažuriranja preskočena</string>
     <string name="home_update_skipped_metered_subtitle">Mobilni podaci su aktivni</string>
     <string name="home_updating_sources">Ažuriranje izvora…</string>
@@ -28,6 +27,14 @@
     <string name="home_update_success_subtitle">Vaši izvori su ažurirani</string>
     <string name="home_sources_are_loading">Izvori se učitavaju, molimo pričekajte…</string>
     <string name="home_search_apps">Pretraživanje aplikacija</string>
+    <string name="home_app_sort_title">Poredaj aplikacije</string>
+    <string name="home_app_sort_manual_description">Dugo pritisnite aplikaciju, a zatim dodirnite tipku za promjenu redoslijeda</string>
+    <string name="home_app_sort_recommended">Preporučeni redoslijed</string>
+    <string name="home_app_sort_recommended_description">Instalirane i pričvršćene aplikacije prvo</string>
+    <string name="home_app_sort_name_asc_description">Abecedno, A do Ž</string>
+    <string name="home_app_sort_name_desc_description">Obrnuto abecedno, od Ž do A</string>
+    <string name="home_app_sort_updates_first">Najprije ažuriranja patcheva</string>
+    <string name="home_app_sort_updates_first_description">Aplikacije s oznakama ažuriranja prvo, zatim preporučeni redoslijed</string>
     <string name="home_no_apps_title">Nema dostupnih aplikacija</string>
     <string name="home_no_apps_subtitle">Dodaj izvor patcha ili uključi postojeći u %s</string>
     <string name="home_no_apps_search_subtitle">Nijedna aplikacija ne odgovara \"%s\"</string>
@@ -76,6 +83,13 @@
     <string name="home_greeting_super_late_5">Noćna i produktivna</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Izvori patcheva</string>
+    <string name="sources_sort_title">Poredaj izvore patcheva</string>
+    <string name="sources_sort_manual">Ručni redoslijed</string>
+    <string name="sources_sort_manual_hint">Dugo pritisnite izvor za promjenu redoslijeda</string>
+    <string name="sources_sort_last_updated">Zadnje ažurirano</string>
+    <string name="sources_sort_last_updated_description">Najnovija ažuriranja izvora prvo</string>
+    <string name="sources_sort_enabled_first">Prvo omogućeno</string>
+    <string name="sources_sort_enabled_first_description">Prikaži aktivne izvore prije onemogućenih izvora</string>
     <string name="sources_management_open_in_browser">Otvori u pregledniku</string>
     <string name="sources_management_failed_to_open_url">Nije moguće otvoriti poveznicu</string>
     <string name="sources_management_prerelease_toggle">Pre-release patchevi</string>
@@ -287,6 +301,9 @@ Vanjska zona (isprekidana): može biti odrezana maskom pokretača - važne detal
     <string name="home_app_info_patch_source_used">Korišten izvor patcheva</string>
     <string name="home_app_info_install_type_custom_installer">Vlastiti program</string>
     <string name="home_app_info_install_type_system_installer">Sustav</string>
+    <string name="home_app_info_install_type_play_store">Instaliraj s Trgovine Play</string>
+    <string name="home_app_info_install_type_root_play_store">Instaliraj s Root Trgovine Play</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Instaliraj s Shizuku Trgovine Play</string>
     <string name="home_app_info_patch_update_available">Dostupno je ažuriranje patcheva</string>
     <string name="home_app_info_patch_update_available_description">Dostupna je novija verzija patcheva. Ponovno instalirajte patch za aplikaciju kako biste dobili najnovija poboljšanja i ispravke.
 </string>
@@ -612,9 +629,12 @@ Dimenzije slike moraju biti sljedeće:
     <string name="installer">Instalacijski program</string>
     <string name="installer_title">Odaberite program instalacije</string>
     <string name="installer_internal_description">Koristi Android instalater paketa</string>
+    <string name="installer_play_store_description">Koristi instalacijski program sustava i postavlja Trgovinu Google Play kao izvor instalacije</string>
+    <string name="installer_root_play_store_description">Instalira se tiho s root-om i postavlja Google Play Store kao izvor instalacije</string>
     <string name="installer_auto_saved_name">Rootani učitani instalater</string>
     <string name="installer_auto_saved_description">Učitava patchanu aplikaciju preko instalirane aplikacije</string>
     <string name="installer_shizuku_description">Instaliraj tiho koristeći Shizuku ili Sui</string>
+    <string name="installer_shizuku_play_store_description">Tiho se instalira putem Shizukua ili Suija i postavlja Trgovinu Google Play kao izvor instalacije</string>
     <string name="installer_option_none">Nema rezerve </string>
     <string name="installer_none_description">Nije konfigurirana zamjena  za instalaciju</string>
     <string name="installer_status_requires_root">Potreban je root pristup</string>
@@ -635,18 +655,20 @@ Dimenzije slike moraju biti sljedeće:
     <string name="installer_unavailable_message">Vaš preferirani instalacijski program (%s) trenutno nije dostupan. Možete riješiti problem i pokušati ponovno ili umjesto toga koristiti standardni instalacijski program.</string>
     <string name="installer_unavailable_shizuku_hint">Provjerite je li Shizuku pokrenut i je li ovoj aplikaciji odobreno dopuštenje</string>
     <string name="installer_use_standard">Koristi standardno</string>
+    <string name="installer_play_store_warning_title">Instalirati kao Trgovinu Play?</string>
+    <string name="installer_play_store_warning_message">Patchana aplikacija bit će zabilježena kao instalirana iz Trgovine Google Play. To omogućuje uslugama poput Android Auta da je prepoznaju kao aplikaciju iz Trgovine Play.</string>
+    <string name="installer_play_store_warning_risk">Trgovina Play može nuditi ažuriranja za patchanu aplikaciju. Instaliranjem tog ažuriranja prebrisat će se patchani APK originalnom verzijom i ukloniti patcheve. Ako se od vas zatraži ažuriranje, dodirnite izbornik s tri točke na stranici Trgovine Play aplikacije i odaberite \"Isključi ažuriranja\".</string>
+    <string name="installer_play_store_warning_continue">Razumijem, nastavi</string>
     <string name="settings_prompt_installer_on_install">Izbor instalatora</string>
     <string name="settings_prompt_installer_on_install_description">Prikazuje dijaloške okvire za odabir instalacijskog programa svaki put kada je patchana aplikacija instalirana</string>
     <string name="settings_auto_install_with_shizuku">Automatska instalacija nakon \"patchanja\"</string>
     <string name="settings_auto_install_with_shizuku_description">Tiho instalira patchanu APK odmah nakon dovršetka patchanja</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" je omogućeno - automatska instalacija će biti preskočena</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizacija baterije</string>
     <string name="settings_system_battery_optimization_description">Održava aplikaciju pokrenutom čak i kada je minimizirana</string>
     <string name="settings_system_performance">Performanse</string>
     <string name="settings_system_process_runtime">Izvođenje procesa</string>
     <string name="settings_system_process_runtime_description">Pokrenite patchanje u zasebnom procesu za bolju stabilnost</string>
-    <string name="settings_system_process_runtime_memory_limit">Ograničenje memorije</string>
     <string name="settings_system_process_runtime_memory_limit_description">Viša ograničenja ubrzavaju instaliranje patcheva na uređajima koji to podržavaju</string>
     <string name="settings_system_process_runtime_enable">Omogući izvođenje procesa</string>
     <string name="settings_system_memory_limit_subtitle">Memorija dostupna za patchanje </string>
@@ -693,6 +715,13 @@ Dimenzije slike moraju biti sljedeće:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Datoteke &amp; pohrana</string>
     <string name="settings_system_apks_size">Ukupna veličina: %s</string>
+    <string name="settings_system_apks_delete_all_confirm">Ovo će trajno izbrisati spremljene APK datoteke prikazane ovdje</string>
+    <string name="settings_system_apks_delete_selected_title">Izbrisati odabrane aplikacije?</string>
+    <string name="settings_system_apks_delete_selected_confirm">Ovo će trajno izbrisati odabrane APK datoteke</string>
+    <string name="settings_system_apks_deleted_all">APK-ovi su uspješno izbrisani</string>
+    <string name="settings_system_apks_export_zip_success">Odabrane APK datoteke izvezene</string>
+    <string name="settings_system_apks_export_zip_failed">Nije uspjelo izvesti odabrane APK datoteke</string>
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patchane aplikacije</string>
     <string name="settings_system_patched_apks_description">Upravljajte spremljenim patchanim aplikacijama</string>
@@ -700,6 +729,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_patched_apks_delete_title">Izbrisati patchanu aplikaciju?</string>
     <string name="settings_system_patched_apks_delete_confirm">Jeste li sigurni da želite izbrisati spremljeni patchiranu aplikaciju za %s?</string>
     <string name="settings_system_patched_apks_deleted">Uspješno izbrisana patchirana aplikacija</string>
+    <string name="settings_system_patched_apks_delete_all_title">Izbrisati sve patchane APK-ove?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Originalne aplikacije</string>
     <string name="settings_system_original_apks_description">Spremljeno za ponovno patchanje. Čuva se jedna verzija po aplikaciji</string>
@@ -707,11 +737,13 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_original_apks_deleted">Uspješno izbrisana originalna aplikacija</string>
     <string name="settings_system_original_apks_delete_title">Želite li izbrisati originalnu aplikaciju?</string>
     <string name="settings_system_original_apks_delete_confirm">Izbrisati originalnu aplikaciju za %s? Nećete moći ponovno patchati bez pružanja nove aplikacije.</string>
+    <string name="settings_system_original_apks_delete_all_title">Želite li izbrisati sve originalne APK datoteke?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Odabir patcheva</string>
     <string name="settings_system_patch_selections_description">Spremljeni odabiri patcheva, zadržani nakon deinstalacije</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Izbriši sve odabire?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Izbriši odabir paketa?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Želite li poništiti odabrane pakete?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Izbriši odabir izvora?</string>
     <string name="settings_system_patch_selection_no_saved">Nema spremljenih odabira patcha</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s preko %2$s</string>
@@ -745,6 +777,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="file_picker_sort_size_asc">Veličina (od najmanje)</string>
     <string name="file_picker_sort_date_desc">Datum (najnovije prvo)</string>
     <string name="file_picker_sort_date_asc">Datum (najstarije prvo)</string>
+    <string name="file_picker_show_hidden_files">Prikaži skrivene datoteke</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikaciji</string>
     <string name="settings_system_share_website">Dijeli web stranicu</string>
@@ -779,10 +812,15 @@ Dimenzije slike moraju biti sljedeće:
     <string name="skip">Preskoči</string>
     <string name="clear">Izbriši</string>
     <string name="delete">Izbriši</string>
+    <string name="delete_all">Izbriši sve</string>
     <string name="remove">Ukloni</string>
     <string name="disable">Onemogući</string>
     <string name="enable">Omogući</string>
     <string name="loading">Samo trenutak…</string>
+    <string name="loading_older_releases">Učitavanje starijih izdanja…</string>
+    <string name="creating">Izrada…</string>
+    <string name="processing_apk">Obrada APK…</string>
+    <string name="exporting_apks">Izvoz APK-ova…</string>
     <string name="not_installed">Nije instalirano</string>
     <string name="view">Prikaži</string>
     <string name="search">Traži</string>
@@ -805,6 +843,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="accessibility_move_up">Pomakni gore</string>
     <string name="accessibility_move_down">Pomakni dolje</string>
     <string name="accessibility_app_moved_announcement">%1$s premješten na poziciju %2$d od %3$d</string>
+    <string name="accessibility_scroll_to_top">Pomakni se na vrh popisa</string>
     <string name="rename">Preimenuj</string>
     <string name="import_">Uvezi</string>
     <string name="export">Izvezi</string>

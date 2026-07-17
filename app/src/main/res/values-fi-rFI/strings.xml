@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-päivitys saatavilla</string>
     <string name="home_update_available_subtitle">Uusi versio valmis asennettavaksi</string>
+    <string name="home_blocked_source_title">Estetty lisäosalähde havaittu</string>
+    <string name="home_blocked_source_subtitle">Napauta tarkistaaksesi ja poistaaksesi</string>
+    <string name="home_metadata_errors_title">Jotkin lisäosalähteet eivät ole käytettävissä</string>
+    <string name="home_metadata_errors_subtitle">Napauta tarkistaaksesi lähteet</string>
+    <string name="home_metered_skipped_title">Päivitykset keskeytetty mobiilidatalla</string>
+    <string name="home_metered_skipped_subtitle">Napauta salliaksesi päivitykset mobiilidatalla</string>
     <string name="home_update_error">Päivitys epäonnistui</string>
-    <string name="home_update_error_subtitle">Tarkista internetyhteys ja yritä uudelleen</string>
+    <string name="home_update_error_subtitle">Päivityksessä lähteisiin meni jotain vikaa</string>
     <string name="home_update_skipped_metered">Päivitykset ohitettu</string>
     <string name="home_update_skipped_metered_subtitle">Mobiilidata on käytössä</string>
     <string name="home_updating_sources">Päivitetään lähteitä…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">\"%s\" ei vastaa yhtään sovellusta</string>
     <string name="home_all_apps_hidden_title">Kaikki sovellukset on piilotettu</string>
     <string name="home_all_apps_hidden_subtitle">Olet piilottanut kaikki sovellukset aloitusnäytöstä</string>
+    <string name="home_category_add">Lisää kategoria</string>
+    <string name="home_category_all_apps">Kaikki sovellukset</string>
+    <string name="home_category_custom">Mukautettu</string>
+    <string name="home_category_uncategorized">Luokittelemattomat</string>
+    <string name="home_category_new_title">Uusi luokka</string>
+    <string name="home_category_rename_title">Luo luokan nimi uudelleen</string>
+    <string name="home_category_name">Luokan nimi</string>
+    <string name="home_category_move_to">Siirrä luokkaan</string>
+    <string name="home_category_move_selected_title">Siirrä valitut sovellukset</string>
+    <string name="home_category_delete_confirm_title">Poista luokka</string>
+    <string name="home_category_delete_confirm_message">Poista luokka &lt;b&gt;%1$s&lt;/b&gt;? Sen sovellukset palautetaan &lt;b&gt;%2$s&lt;/b&gt; -luokkaan</string>
+    <string name="home_category_actions_unavailable">Tämän luokan toimintoja ei ole saatavilla</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Minkä sovelluksen haluat muokata?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Muokkaa kokeellisia sovelluskohteita, jos saatavilla</string>
     <string name="sources_management_already_exists">Tämä lähde on jo lisätty</string>
     <string name="sources_management_invalid_url">Virheellinen lähde-URL-osoite. Tarkista osoite ja yritä uudelleen</string>
+    <string name="sources_management_blocked">Tämä päivityslähde on estetty, eikä sitä voi lisätä</string>
+    <string name="sources_management_source_blocked_badge">Estetty</string>
     <string name="sources_management_metadata_unavailable">Metatietoja ei ole saatavilla</string>
     <string name="sources_management_metadata_unavailable_hint">Etämetatietotiedosto ei ole saatavilla. Muokkaaminen asennetulla lisäosapaketilla onnistuu edelleen, mutta automaattinen päivitys on poistettu käytöstä tässä lähteessä</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Lisäosapaketin lataaminen epäonnistui. Lähteen URL-osoite saattaa olla virheellinen tai tiedostoa ei ole olemassa</string>
@@ -475,6 +495,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_home_screen">Aloitusnäyttö</string>
     <string name="settings_appearance_greeting_phrases">Tervehdysviestit</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Näytä tervehdysviesti aloitusnäytöllä</string>
+    <string name="settings_appearance_app_grouping">Sovellusten ryhmittely</string>
+    <string name="settings_appearance_app_grouping_description">Näytä kotinäkymän vaihto, jolla voit ryhmitellä sovellukset lähteen tai omien luokkien mukaan ja säilytä valinta, kun se on poissa päältä</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Sovelluskuvake</string>
     <string name="settings_appearance_app_icon_default">Oletus</string>
@@ -658,14 +680,12 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_prompt_installer_on_install_description">Näytä asennusohjelman valintaikkuna aina, kun asennat paikatun sovelluksen.</string>
     <string name="settings_auto_install_with_shizuku">Asenna automaattisesti korjauksen jälkeen</string>
     <string name="settings_auto_install_with_shizuku_description">Asentaa korjatun APK:n hiljaa heti korjauksen valmistuttua</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" on käytössä – automaattinen asennus ohitetaan</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Akun käytön optimointi</string>
     <string name="settings_system_battery_optimization_description">Pitää paikkaajan käynnissä, kun sovellus on pienennetty</string>
     <string name="settings_system_performance">Suorituskyky</string>
     <string name="settings_system_process_runtime">Prosessin suoritus</string>
     <string name="settings_system_process_runtime_description">Suorita muokkaaminen erillisessä prosessissa paremman vakauden vuoksi</string>
-    <string name="settings_system_process_runtime_memory_limit">Muistirajoitus</string>
     <string name="settings_system_process_runtime_memory_limit_description">Korkeammat rajat nopeuttavat muokkaamista tehokkailla laitteilla</string>
     <string name="settings_system_process_runtime_enable">Ota prosessin suoritus käyttöön</string>
     <string name="settings_system_memory_limit_subtitle">Muokkaamiseen käytettävissä oleva muisti</string>
@@ -718,6 +738,31 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_system_apks_deleted_all">APK-tiedostot poistettiin onnistuneesti</string>
     <string name="settings_system_apks_export_zip_success">Valitut APK-tiedostot viety</string>
     <string name="settings_system_apks_export_zip_failed">Valittujen APK-tiedostojen vienti epäonnistui</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Tallennustilan hallinta</string>
+    <string name="settings_system_storage_management_description">Tarkastele levytilan käyttöä ja tyhjennä välimuistissa olevat tiedostot</string>
+    <string name="settings_system_storage_keystore_title">Keystore-allekirjoitukset</string>
+    <string name="settings_system_storage_app_data_title">Sovelluksen tiedot</string>
+    <string name="settings_system_storage_patch_bundles_title">Paikkauspaketit</string>
+    <string name="settings_system_storage_http_cache_title">Verkkokätkö</string>
+    <string name="settings_system_storage_http_cache_description">HTTP-vastauksia on välimuistissa päivitysten nopeuttamiseksi</string>
+    <string name="settings_system_storage_installer_cache_title">Ulkoinen asennusohjelman välimuisti</string>
+    <string name="settings_system_storage_installer_cache_description">Kolmannen osapuolen asennusohjelmille välitetyt APK-tiedostojen kopiot</string>
+    <string name="settings_system_storage_patcher_workspace_title">Paikkaustyötila</string>
+    <string name="settings_system_storage_patcher_workspace_description">Paikkaajan ajonaikaiset tiedostot ja hylätty väliaikaistieto</string>
+    <string name="settings_system_storage_temporary_title">Väliaikaistiedostot</string>
+    <string name="settings_system_storage_temporary_description">Paikkauksen aikana luodut työtiedostot</string>
+    <string name="settings_system_storage_clear_all">Tyhjennä kaikki välimuistit</string>
+    <string name="settings_system_storage_clear_all_description">Tyhjentää kaikki vapautettavat välimuistit kerralla</string>
+    <string name="settings_system_storage_clear_all_confirm">Tämä tyhjentää välimuistiin tallennetut verkkovastaukset, asennusohjelman välivaihekopiot ja väliaikaistiedostot. Alkuperäiset ja paikatut APK-tiedostot säilytetään.</string>
+    <string name="settings_system_storage_cleared">Vapautettu tila: %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Ei tyhjennettävää</string>
+    <string name="settings_system_storage_open_app_info_title">Avaa Android-sovellustilan tallennustiedot</string>
+    <string name="settings_system_storage_open_app_info_description">Hallitse tai tyhjennä kaikki Morphe-tiedot järjestelmäasetusten kautta</string>
+    <string name="settings_system_save_original_apks_title">Säilytä alkuperäiset APK-tiedostot</string>
+    <string name="settings_system_save_original_apks_description">Tallenna korjaamaton APK-tiedosto, jotta sitä voidaan käyttää uudelleen korjaamiseen ilman, että tiedostoa tarvitsee valita uudelleen</string>
+    <string name="settings_system_save_patched_apks_title">Säilytä korjatut APK-tiedostot</string>
+    <string name="settings_system_save_patched_apks_description">Tallenna kopio korjatusta APK-tiedostosta myöhempää vientiä tai asennusta varten hallinnan kautta</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Muokatut APK:t</string>
     <string name="settings_system_patched_apks_description">Hallitse tallennettuja muokattuja sovellustiedostoja</string>

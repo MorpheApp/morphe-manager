@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -88,6 +89,58 @@ fun ActionPillButton(
         }
     } else {
         button(modifier)
+    }
+}
+
+/**
+ * Configuration for a single button rendered inside [CardActionRow].
+ * Set [destructive] to true for actions styled with the error container palette.
+ */
+@Immutable
+data class CardAction(
+    val icon: ImageVector,
+    val label: String,
+    val onClick: () -> Unit,
+    val enabled: Boolean = true,
+    val destructive: Boolean = false
+)
+
+/**
+ * Wide action row anchored to the bottom of a card. Accepts one or two [CardAction]s.
+ * A single action is centered at 50% width; two actions split the row equally.
+ * Buttons are rendered as [ActionPillButton] with `large = true`.
+ */
+@Composable
+fun CardActionRow(
+    actions: List<CardAction>,
+    modifier: Modifier = Modifier
+) {
+    require(actions.size in 1..2) { "CardActionRow supports 1 or 2 actions" }
+    val hasBoth = actions.size == 2
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = if (hasBoth) Arrangement.spacedBy(8.dp) else Arrangement.Center
+    ) {
+        actions.forEach { action ->
+            val colors = if (action.destructive) {
+                IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.errorContainer,
+                    contentColor = MaterialTheme.colorScheme.onErrorContainer
+                )
+            } else {
+                IconButtonDefaults.filledTonalIconButtonColors()
+            }
+            ActionPillButton(
+                onClick = action.onClick,
+                icon = action.icon,
+                contentDescription = action.label,
+                label = action.label,
+                enabled = action.enabled,
+                large = true,
+                modifier = if (hasBoth) Modifier.weight(1f) else Modifier.fillMaxWidth(0.5f),
+                colors = colors
+            )
+        }
     }
 }
 

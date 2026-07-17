@@ -30,8 +30,6 @@ import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companio
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.LIGHT_THEME_COLOR_TITLE
 import app.morphe.manager.domain.manager.getLocalizedOrCustomText
 import app.morphe.manager.ui.screen.home.ColorPresetItem
-import app.morphe.manager.ui.screen.home.ExpandableSurface
-import app.morphe.manager.ui.screen.home.ScrollableInstruction
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.PatchOptionKeys
 import app.morphe.manager.ui.viewmodel.PatchOptionsViewModel

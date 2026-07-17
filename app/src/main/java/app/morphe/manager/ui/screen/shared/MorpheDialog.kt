@@ -55,6 +55,7 @@ private val DialogSectionSpacing = 24.dp
  * @param scrollable Whether to wrap content in verticalScroll. Set to false for LazyColumn. Default is true.
  * @param compactPadding Whether to use compact padding. Default is false.
  * @param noPadding Whether to remove all padding and system bar insets. Default is false.
+ * @param contentArrangement Vertical arrangement of the dialog content.
  * @param content Dialog content
  */
 @Composable
@@ -67,6 +68,7 @@ fun MorpheDialog(
     scrollable: Boolean = true,
     compactPadding: Boolean = false,
     noPadding: Boolean = false,
+    contentArrangement: Arrangement.Vertical = Arrangement.Center,
     onEntered: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -127,6 +129,7 @@ fun MorpheDialog(
                     scrollable = scrollable,
                     compactPadding = compactPadding,
                     noPadding = noPadding,
+                    contentArrangement = contentArrangement,
                     content = content
                 )
             }
@@ -274,6 +277,7 @@ private fun DialogContent(
     scrollable: Boolean,
     compactPadding: Boolean,
     noPadding: Boolean,
+    contentArrangement: Arrangement.Vertical,
     content: @Composable ColumnScope.() -> Unit
 ) {
     val isLandscape = isLandscape()
@@ -317,80 +321,61 @@ private fun DialogContent(
             },
         contentAlignment = Alignment.Center
     ) {
-        Column(
-            modifier = Modifier
-                .widthIn(max = if (isLandscape) 600.dp else 450.dp)
-                .fillMaxHeight(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+        CompositionLocalProvider(
+            LocalDialogTextColor provides textColor,
+            LocalDialogSecondaryTextColor provides secondaryTextColor,
+            LocalContentColor provides textColor
         ) {
-            // Title section
-            if (title != null) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = DialogSectionSpacing),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = title,
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = if (titleTrailingContent != null) TextAlign.Start else TextAlign.Center,
-                        color = textColor,
-                        modifier = Modifier.weight(1f)
-                    )
-
-                    if (titleTrailingContent != null) {
-                        CompositionLocalProvider(
-                            LocalDialogTextColor provides textColor,
-                            LocalDialogSecondaryTextColor provides secondaryTextColor,
-                            LocalContentColor provides textColor
-                        ) {
-                            titleTrailingContent()
-                        }
-                    }
-                }
-            }
-
-            // Content area with conditional scrolling
-            CompositionLocalProvider(
-                LocalDialogTextColor provides textColor,
-                LocalDialogSecondaryTextColor provides secondaryTextColor,
-                LocalContentColor provides textColor
+            Column(
+                modifier = Modifier
+                    .widthIn(max = if (isLandscape) 600.dp else 450.dp)
+                    .fillMaxHeight(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = contentArrangement
             ) {
-                if (scrollable) {
-                    // Automatic scroll for regular content
-                    Column(
+                // Title section
+                if (title != null) {
+                    Row(
                         modifier = Modifier
-                            .weight(1f, fill = false)
-                            .verticalScroll(rememberScrollState())
-                            .imePadding() // Automatically adds padding when keyboard opens
+                            .fillMaxWidth()
+                            .padding(bottom = DialogSectionSpacing),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        content()
-                    }
-                } else {
-                    // No scroll wrapper, for LazyColumn use full available height
-                    Column(
-                        modifier = Modifier.weight(1f, fill = false)
-                    ) {
-                        content()
+                        Text(
+                            text = title,
+                            style = MaterialTheme.typography.headlineMedium,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = if (titleTrailingContent != null) TextAlign.Start else TextAlign.Center,
+                            color = textColor,
+                            modifier = Modifier.weight(1f)
+                        )
+                        if (titleTrailingContent != null) titleTrailingContent()
                     }
                 }
-            }
 
-            // Footer section
-            if (footer != null) {
-                Box(
+                // Content area.
+                // Scrollable variant adds verticalScroll + imePadding so the keyboard doesn't cover input fields.
+                // LazyColumn callers pass scrollable=false
+                val scrollState = if (scrollable) rememberScrollState() else null
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = DialogSectionSpacing)
+                        .weight(1f, fill = false)
+                        .then(
+                            if (scrollState != null) {
+                                Modifier.verticalScroll(scrollState).imePadding()
+                            } else Modifier
+                        )
                 ) {
-                    CompositionLocalProvider(
-                        LocalDialogTextColor provides textColor,
-                        LocalDialogSecondaryTextColor provides secondaryTextColor,
-                        LocalContentColor provides textColor
+                    content()
+                }
+
+                // Footer section
+                if (footer != null) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = DialogSectionSpacing)
                     ) {
                         footer()
                     }

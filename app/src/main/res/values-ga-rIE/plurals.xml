@@ -70,4 +70,11 @@
         <item quantity="many">%s aipeanna i bhfolach</item>
         <item quantity="other">%s aipeanna i bhfolach</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s aip</item>
+        <item quantity="two">%s aip</item>
+        <item quantity="few">%s aip</item>
+        <item quantity="many">%s aip</item>
+        <item quantity="other">%s aip</item>
+    </plurals>
 </resources>

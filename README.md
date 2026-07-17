@@ -7,6 +7,7 @@
     />
     <img 
       width="512px"
+      alt="Morphe"
       src="https://raw.githubusercontent.com/MorpheApp/.github/refs/heads/main/profile/assets/morphe-wordmark/morphe_wordmark_light.svg"
     />
 </picture>
@@ -44,8 +45,8 @@ The website will guide you to the latest release for your device. No account nee
 1. **Install Morphe** from [morphe.software](https://morphe.software).
 2. **Pick an app** - YouTube, YouTube Music, or Reddit are supported out of the box.
 3. **Choose your mode:**
-  - **Simple mode** - designed for a one-tap experience. Just tap Patch and Morphe handles the rest with sensible defaults. No configuration needed.
-  - **Expert mode** - gives you full control. Choose exactly which of the 100+ patches to apply, configure per-patch options (colors, toggles, and more), and fine-tune everything before patching.
+    - **Simple mode** - designed for a one-tap experience. Just tap Patch and Morphe handles the rest with sensible defaults. No configuration needed.
+    - **Expert mode** - gives you full control. Choose exactly which of the 100+ patches to apply, configure per-patch options (colors, toggles, and more), and fine-tune everything before patching.
 4. **Provide the APK** - Morphe guides you through obtaining the original app file via step-by-step dialogs. The patching itself happens entirely on your device. *(If you can't select the APK file, try moving it out of the Downloads folder to the root of your internal storage.)*
 5. **Install and enjoy** - once patching is complete, install the result like any normal APK.
 
@@ -61,6 +62,8 @@ Everything happens locally. Morphe never uploads your APKs or personal data anyw
 - Support for split APKs
 - Skips split APK modules for unsupported CPU architectures, locales, and screen densities during merge
 - Strips native libraries for unsupported architectures from plain APKs after patching
+- Sends a notification the moment patching finishes, so you don't have to keep the app open
+- Optional auto-install with Shizuku right after patching completes
 
 **Patch options** *(Simple mode: available in the Advanced tab; Expert mode: available on the patch selection screen)*
 - Custom app display name and header logo per app
@@ -72,28 +75,40 @@ Everything happens locally. Morphe never uploads your APKs or personal data anyw
 - Add any compatible patch bundle via GitHub URL or deep link
 - Per-source pre-release toggle to get early patch access
 - Automatic background update notifications (even when the app is closed)
+- Sort your app list and patch sources however you like (name, install date, and more)
 
 **Installer**
 - Standard Android installer
 - Root installer with Magisk module support (mount-based, no data loss on update)
+- Play Store installer variants, so Google Play recognizes itself as the install source (with a warning about the trade-off - Play Store may then offer updates that would overwrite your patched build)
 - Any third-party installer apps detected on the system are also available as an option
 - Prompt-on-install option to choose per session
+- On rooted devices, Morphe asks whether you want a Root Mount install or a Standard install before patching starts, and adjusts the applied patches to match your choice
 
 **Appearance**
 - System / Light / Dark / Material You themes
 - Pure Black mode for OLED screens
 - Accent color selection
-- Animated background selection
+- Animated backgrounds - pick one you like, or let Morphe shuffle them for you on each launch, daily, or every three days
 - App icon selection
 
+**Home screen**
+- Friendly time-of-day greeting when you open the app
+- Rearrange your app list into the order that suits you
+- Home cards for apps patched with universal patches, not just app-specific ones
+- Multi-select and bulk actions for cleaning up saved APKs and patch selections
+- Floating scroll-to-top button when your lists get long
+- A short guided tour after your first patch, so you know where everything lives
+
 **Advanced**
-- Import/export your Morphe settings as JSON
+- Import/export your Morphe settings as JSON, with a Replace or Merge choice on import
 - Import/export your signing keystore
 - Manage saved original APKs and patched APKs
 - Manage saved patch selections per app
 - GitHub Personal Access Token support for higher API rate limits
 - Process runtime - run patching in a separate process for better stability, with configurable memory limit
 - Bytecode processing mode - controls how bytecode is processed during patching, affecting patching speed, memory usage, and output APK size
+- Built-in file picker as an alternative to the system one, with an option to show hidden files
 - Export debug logs for troubleshooting
 
 ## ❓ New to GitHub?

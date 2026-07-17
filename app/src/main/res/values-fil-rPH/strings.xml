@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Magagamit ang update para sa Morphe</string>
     <string name="home_update_available_subtitle">Handa na mag-install ang bagong bersyon</string>
+    <string name="home_blocked_source_title">Natukoy ang naharang na pinagmulan ng patch</string>
+    <string name="home_blocked_source_subtitle">I-tap upang suriin at alisin</string>
+    <string name="home_metadata_errors_title">Mayroong ilang mga pinagmumulan ng patch na hindi magagamit</string>
+    <string name="home_metadata_errors_subtitle">I-tap upang suriin ang mga pinagmulan</string>
+    <string name="home_metered_skipped_title">Naantala ang mga update sa mobile data</string>
+    <string name="home_metered_skipped_subtitle">I-tap para payagan ang mga update sa mobile data</string>
     <string name="home_update_error">Nabigo ang pag-update</string>
-    <string name="home_update_error_subtitle">Suriin ang iyong koneksyon sa internet at subukan muli</string>
+    <string name="home_update_error_subtitle">Mayroong kamalian habang ina-update ang mga source</string>
     <string name="home_update_skipped_metered">Nabigo ang pag-update</string>
     <string name="home_update_skipped_metered_subtitle">Mobile data ay aktibo</string>
     <string name="home_updating_sources">Ina-update ang mga mapagkukunan…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Walang app na tumutugma sa \"%s\"</string>
     <string name="home_all_apps_hidden_title">Nakatago ang lahat ng apps</string>
     <string name="home_all_apps_hidden_subtitle">Nakatago mo ang lahat ng apps sa home screen</string>
+    <string name="home_category_add">Magdagdag ng kategorya</string>
+    <string name="home_category_all_apps">Lahat ng apps</string>
+    <string name="home_category_custom">Pasadya</string>
+    <string name="home_category_uncategorized">Hindi nakakategorya</string>
+    <string name="home_category_new_title">Bagong kategorya</string>
+    <string name="home_category_rename_title">Palitan ang pangalan ng kategorya</string>
+    <string name="home_category_name">Pangalan ng kategorya</string>
+    <string name="home_category_move_to">Ilipat sa kategorya</string>
+    <string name="home_category_move_selected_title">Ilipat ang mga napiling app</string>
+    <string name="home_category_delete_confirm_title">Burahin ang kategorya</string>
+    <string name="home_category_delete_confirm_message">Burahin ang kategorya &lt;b&gt;%1$s&lt;/b&gt;? Ang mga app dito ay ibabalik sa &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Hindi magagamit ang mga aksyon para sa kategoryang ito</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Anong app ang gusto mong i-patch?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Naglalagay ng mga target na app na pang-eksperimento kung mayroon</string>
     <string name="sources_management_already_exists">Ang pinagmulang ito ay naidagdag na.</string>
     <string name="sources_management_invalid_url">Hindi balido ang source URL. Pakisuri ang address at subukang muli.</string>
+    <string name="sources_management_blocked">Ang source ng patch na ito ay naka-block at hindi maaaring idagdag</string>
+    <string name="sources_management_source_blocked_badge">Naka-block</string>
     <string name="sources_management_metadata_unavailable">Hindi available ang Metadata</string>
     <string name="sources_management_metadata_unavailable_hint">Hindi available ang remote metadata file. Gumagana pa rin ang pag-patch gamit ang naka-install na bundle, ngunit hindi pinagana ang auto-update para sa source na ito.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Hindi ma-download ang patch bundle. Maaaring mali ang source URL o hindi umiiral ang file.</string>
@@ -474,6 +494,8 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_home_screen">Pangunahing iskrin</string>
     <string name="settings_appearance_greeting_phrases">Mga pagbati</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ipakita ang mensahe ng pagbati sa pangunahing iskrin</string>
+    <string name="settings_appearance_app_grouping">Pagpapangkat ng app</string>
+    <string name="settings_appearance_app_grouping_description">Magpakita ng home screen switcher upang pangkatin ang mga app ayon sa pinagmulan o iyong sariling mga kategorya, pinapanatili ang pagpili kapag naka-off</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icon ng aplikasyon</string>
     <string name="settings_appearance_app_icon_default">Panimula</string>
@@ -657,14 +679,12 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_prompt_installer_on_install_description">Ipinapakita ang diyalogo ng pagpili ng installer sa tuwing mag-i-install ka ng naka-patch na aplikasyon</string>
     <string name="settings_auto_install_with_shizuku">Awtomatikong i-install pagkatapos ng pag-patch</string>
     <string name="settings_auto_install_with_shizuku_description">Tahimik na i-i-install ang patched na APK sa sandaling makumpleto ang pag-patch</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" ay naka-enable - lalaktawan ang awtomatikong pag-install</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pag-optimize sa baterya</string>
     <string name="settings_system_battery_optimization_description">Pinapanatili ang patcher na tumatakbo kapag ang app ay minimize</string>
     <string name="settings_system_performance">Pagganap</string>
     <string name="settings_system_process_runtime">Runtime ng proseso</string>
     <string name="settings_system_process_runtime_description">Pinapatakbo ang pag-patch sa isang hiwalay na proseso para sa mas mahusay na katatagan</string>
-    <string name="settings_system_process_runtime_memory_limit">Limitasyon ng memorya</string>
     <string name="settings_system_process_runtime_memory_limit_description">Ang mas mataas na limitasyon ay nagpapabilis ng pag-patch sa mga kayang device</string>
     <string name="settings_system_process_runtime_enable">Paganahin ang runtime ng proseso</string>
     <string name="settings_system_memory_limit_subtitle">Magagamit ang memorya para sa pagpa-patch</string>
@@ -717,6 +737,31 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_apks_deleted_all">Matagumpay na nabura ang mga APK</string>
     <string name="settings_system_apks_export_zip_success">Na-export ang mga napiling APK</string>
     <string name="settings_system_apks_export_zip_failed">Nabigo ang pag-export ng mga napiling APK</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Pamamahala ng imbakan</string>
+    <string name="settings_system_storage_management_description">Suriin ang paggamit ng disk at i-clear ang mga naka-cache na file</string>
+    <string name="settings_system_storage_keystore_title">Pag-sign ng keystore</string>
+    <string name="settings_system_storage_app_data_title">Data ng app</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch bundle</string>
+    <string name="settings_system_storage_http_cache_title">Cache ng network</string>
+    <string name="settings_system_storage_http_cache_description">Na-cache ang mga tugon ng HTTP upang mapabilis ang mga update</string>
+    <string name="settings_system_storage_installer_cache_title">Cache ng panlabas na installer</string>
+    <string name="settings_system_storage_installer_cache_description">Mga kopya ng APK na ipinasa sa mga third-party installer</string>
+    <string name="settings_system_storage_patcher_workspace_title">Workspace ng Patcher</string>
+    <string name="settings_system_storage_patcher_workspace_description">Mga runtime file ng Patcher at mga nasirang scratch data</string>
+    <string name="settings_system_storage_temporary_title">Mga pansamantalang file</string>
+    <string name="settings_system_storage_temporary_description">Mga working file na ginawa habang nagpe-patch</string>
+    <string name="settings_system_storage_clear_all">I-clear ang lahat ng cache</string>
+    <string name="settings_system_storage_clear_all_description">Nililinis ang lahat ng puwedeng mabawi na espasyo ng cache nang sabay-sabay</string>
+    <string name="settings_system_storage_clear_all_confirm">Ito ay magcle-clear ng mga na-cache na tugon ng network, mga kopya ng installer na naka-stage, at mga pansamantalang file. Ang orihinal at na-patch na mga APK ay mananatili</string>
+    <string name="settings_system_storage_cleared">Napalaya ang %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Walang dapat i-clear</string>
+    <string name="settings_system_storage_open_app_info_title">Buksan ang storage ng Android app</string>
+    <string name="settings_system_storage_open_app_info_description">Pamahalaan o i-clear ang lahat ng data ng Morphe sa pamamagitan ng mga setting ng system</string>
+    <string name="settings_system_save_original_apks_title">Panatilihin ang orihinal na mga APK</string>
+    <string name="settings_system_save_original_apks_description">I-save ang pre-patch na APK upang magamit muli para sa pag-patch nang hindi na kailangang piliin muli ang file</string>
+    <string name="settings_system_save_patched_apks_title">Panatilihin ang mga naka-patch na APK</string>
+    <string name="settings_system_save_patched_apks_description">I-save ang kopya ng naka-patch na APK para sa ibang pagkakataon na i-export o i-reinstall mula sa manager</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Na-patch na mga APK</string>
     <string name="settings_system_patched_apks_description">Pamahalaan ang mga nakaimbak na naka-patch na mga file ng aplikasyon</string>

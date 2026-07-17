@@ -6,7 +6,6 @@
 package app.morphe.manager.ui.screen.settings.advanced
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -125,73 +124,36 @@ fun PatchOptionsSection(
             }
 
             noPatchesAvailable -> {
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(8.dp),
-                    color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.tertiary,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Text(
-                            text = stringResource(R.string.settings_advanced_patch_options_waiting_for_source),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
+                InfoBadge(
+                    text = stringResource(R.string.settings_advanced_patch_options_waiting_for_source),
+                    style = InfoBadgeStyle.Success,
+                    icon = Icons.Outlined.Info,
+                    isExpanded = true
+                )
             }
 
             loadError != null -> {
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(8.dp),
-                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Error,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.error,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = stringResource(R.string.settings_advanced_patch_options_load_error),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.error
-                            )
-                            Text(
-                                text = loadError,
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                        IconButton(onClick = {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    InfoBadge(
+                        text = stringResource(R.string.settings_advanced_patch_options_load_error) +
+                                "\n" + loadError,
+                        style = InfoBadgeStyle.Error,
+                        icon = Icons.Outlined.Error,
+                        isExpanded = true
+                    )
+                    ActionPillButton(
+                        onClick = {
                             scope.launch {
                                 homeViewModel.updateMorpheBundleWithChangelogClear()
                                 patchOptionsViewModel.refresh()
                                 context.toast(updatingSourcesText)
                             }
-                        }) {
-                            MorpheIcon(
-                                icon = Icons.Outlined.Refresh,
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
+                        },
+                        icon = Icons.Outlined.Refresh,
+                        contentDescription = stringResource(R.string.retry),
+                        label = stringResource(R.string.retry),
+                        modifier = Modifier.align(Alignment.End)
+                    )
                 }
             }
 
@@ -286,7 +248,7 @@ private fun AppPatchOptionsCard(
             SettingsItem(
                 icon = Icons.Outlined.Palette,
                 title = stringResource(R.string.settings_advanced_patch_options_theme_colors),
-                description = stringResource(R.string.settings_advanced_patch_options_theme_colors_description),
+                subtitle = stringResource(R.string.settings_advanced_patch_options_theme_colors_description),
                 onClick = onThemeClick
             )
         }
@@ -298,7 +260,7 @@ private fun AppPatchOptionsCard(
             SettingsItem(
                 icon = Icons.Outlined.Style,
                 title = stringResource(R.string.settings_advanced_patch_options_custom_branding),
-                description = stringResource(R.string.settings_advanced_patch_options_custom_branding_description),
+                subtitle = stringResource(R.string.settings_advanced_patch_options_custom_branding_description),
                 onClick = onBrandingClick
             )
         }
@@ -310,7 +272,7 @@ private fun AppPatchOptionsCard(
             SettingsItem(
                 icon = Icons.Outlined.Image,
                 title = stringResource(R.string.settings_advanced_patch_options_custom_header),
-                description = stringResource(R.string.settings_advanced_patch_options_custom_header_description),
+                subtitle = stringResource(R.string.settings_advanced_patch_options_custom_header_description),
                 onClick = onHeaderClick
             )
         }
@@ -374,7 +336,7 @@ private fun HideShortsSection(
                 R.string.settings_advanced_patch_options_hide_shorts_app_shortcut_description
             )
 
-            RichSettingsItem(
+            SettingsItem(
                 onClick = { viewModel.toggleHideShortsAppShortcut(patchOptionsPrefs, hideShortsAppShortcut) },
                 title = title,
                 subtitle = description,
@@ -408,7 +370,7 @@ private fun HideShortsSection(
                 R.string.settings_advanced_patch_options_hide_shorts_widget_description
             )
 
-            RichSettingsItem(
+            SettingsItem(
                 onClick = { viewModel.toggleHideShortsWidget(patchOptionsPrefs, hideShortsWidget) },
                 title = title,
                 subtitle = description,

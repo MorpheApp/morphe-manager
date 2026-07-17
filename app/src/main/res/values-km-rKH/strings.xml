@@ -6,7 +6,6 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available_subtitle">កំណែថ្មីត្រៀមជាស្រេច ដើម្បីដំឡើង</string>
     <string name="home_update_error">ការអាប់ដេតបានបរាជ័យ</string>
-    <string name="home_update_error_subtitle">សូមពិនិត្យមើលការតភ្ជាប់អ៊ីនធឺណិតរបស់អ្នក ហើយព្យាយាមម្តងទៀត</string>
     <string name="home_updating_sources">កំពុងអាប់ដេតប្រភព…</string>
     <string name="home_update_success">អាប់ដេតប្រភពបានបញ្ចប់</string>
     <string name="home_update_success_subtitle">ប្រភពរបស់អ្នកទាន់សម័យហើយ</string>
@@ -86,6 +85,7 @@
     <string name="settings_system_battery_optimization">ការបង្កើនប្រសិទ្ធភាពថ្ម</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <!-- Settings - System Tab - Files & Storage Section -->
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->

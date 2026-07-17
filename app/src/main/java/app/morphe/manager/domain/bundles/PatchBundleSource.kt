@@ -85,6 +85,42 @@ sealed class PatchBundleSource(
         val PatchBundleSource.isDefault inline get() = uid == 0
         val PatchBundleSource.asRemoteOrNull inline get() = this as? RemotePatchBundle
 
+        /** Classifies a [PatchBundleSource] into its user-visible type. */
+        val PatchBundleSource.sourceType: BundleSourceType get() = when {
+            isDefault -> BundleSourceType.PreInstalled
+            this is RemotePatchBundle -> BundleSourceType.Remote
+            else -> BundleSourceType.Local
+        }
+
+        /**
+         * Resolved avatar URLs for a source in preference order. [primary] is the URL to try
+         * first; [fallback] is what to load if the primary fails (or null when no second
+         * candidate exists).
+         */
+        data class AvatarUrls(
+            val primary: String?,
+            val fallback: String?
+        )
+
+        /**
+         * Pick the best avatar URLs for a source. Preference order is custom bundle avatar,
+         * then GitHub, then GitLab; whichever is chosen as [AvatarUrls.primary], the next
+         * available one becomes [AvatarUrls.fallback].
+         */
+        val PatchBundleSource.avatarUrls: AvatarUrls get() {
+            val bundle = bundleAvatarUrl
+            val github = githubAvatarUrl
+            val gitlab = gitlabAvatarUrl
+            return AvatarUrls(
+                primary = bundle ?: github ?: gitlab,
+                fallback = when {
+                    bundle != null -> github ?: gitlab
+                    github != null -> gitlab
+                    else -> null
+                }
+            )
+        }
+
         /**
          * Get custom bundle avatar URL (patches-bundle.png next to patches-bundle.json).
          * Returns null if the endpoint does not contain patches-bundle.json.
@@ -157,4 +193,11 @@ sealed class PatchBundleSource(
             }
         }
     }
+}
+
+/** User-visible classification of a [PatchBundleSource]. */
+enum class BundleSourceType {
+    PreInstalled,
+    Remote,
+    Local
 }

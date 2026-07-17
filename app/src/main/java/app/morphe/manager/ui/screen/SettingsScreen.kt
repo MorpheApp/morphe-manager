@@ -10,9 +10,9 @@ import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -28,7 +28,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -46,6 +45,8 @@ import app.morphe.manager.ui.screen.settings.AdvancedTabContent
 import app.morphe.manager.ui.screen.settings.AppearanceTabContent
 import app.morphe.manager.ui.screen.settings.SystemTabContent
 import app.morphe.manager.ui.screen.settings.system.*
+import app.morphe.manager.ui.screen.shared.GlassButton
+import app.morphe.manager.ui.screen.shared.GlassButtonDefaults
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.screen.shared.isLandscape
 import app.morphe.manager.ui.viewmodel.*
@@ -526,51 +527,45 @@ private fun MorpheBottomNavigation(
     onAppearanceTabPositioned: ((Rect) -> Unit)? = null,
     onSystemTabPositioned: ((Rect) -> Unit)? = null
 ) {
-    Surface(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .navigationBarsPadding(),
-        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
-        tonalElevation = 3.dp
+        contentAlignment = Alignment.Center
     ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
+        Row(
+            modifier = Modifier
+                .widthIn(max = 448.dp)
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 12.dp)
+                .animateContentSize(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier
-                    .widthIn(max = 448.dp)
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
-                    .animateContentSize(),
-                horizontalArrangement = Arrangement.spacedBy(32.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                SettingsTab.entries.forEach { tab ->
-                    val isSelected = currentTab == tab
-                    NavigationItem(
-                        tab = tab,
-                        isSelected = isSelected,
-                        onClick = { onTabSelected(tab) },
-                        modifier = Modifier
-                            .then(if (isSelected) Modifier.weight(1f) else Modifier.width(64.dp))
-                            .then(
-                                when (tab) {
-                                    SettingsTab.APPEARANCE if onAppearanceTabPositioned != null ->
-                                        Modifier.onGloballyPositioned { coords ->
-                                            onAppearanceTabPositioned(coords.boundsInWindow())
-                                        }
+            SettingsTab.entries.forEach { tab ->
+                val isSelected = currentTab == tab
+                NavigationItem(
+                    tab = tab,
+                    isSelected = isSelected,
+                    onClick = { onTabSelected(tab) },
+                    modifier = Modifier
+                        .then(if (isSelected) Modifier.weight(1f) else Modifier.width(64.dp))
+                        .then(
+                            when (tab) {
+                                SettingsTab.APPEARANCE if onAppearanceTabPositioned != null ->
+                                    Modifier.onGloballyPositioned { coords ->
+                                        onAppearanceTabPositioned(coords.boundsInWindow())
+                                    }
 
-                                    SettingsTab.SYSTEM if onSystemTabPositioned != null ->
-                                        Modifier.onGloballyPositioned { coords ->
-                                            onSystemTabPositioned(coords.boundsInWindow())
-                                        }
+                                SettingsTab.SYSTEM if onSystemTabPositioned != null ->
+                                    Modifier.onGloballyPositioned { coords ->
+                                        onSystemTabPositioned(coords.boundsInWindow())
+                                    }
 
-                                    else -> Modifier
-                                }
-                            )
-                    )
-                }
+                                else -> Modifier
+                            }
+                        )
+                )
             }
         }
     }
@@ -586,62 +581,17 @@ private fun NavigationItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val containerColor = if (isSelected) {
-        MaterialTheme.colorScheme.primaryContainer
-    } else {
-        MaterialTheme.colorScheme.surface
-    }
-
-    val contentColor = if (isSelected) {
-        MaterialTheme.colorScheme.onPrimaryContainer
-    } else {
-        MaterialTheme.colorScheme.onSurfaceVariant
-    }
-
-    val tabLabel = stringResource(tab.titleRes)
-
-    Surface(
+    GlassButton(
+        icon = tab.icon,
+        label = stringResource(tab.titleRes),
+        selected = isSelected,
         onClick = onClick,
-        modifier = modifier
-            .height(48.dp)
-            .clip(RoundedCornerShape(24.dp))
-            .semantics {
-                role = Role.Tab
-                selected = isSelected
-            },
-        color = containerColor,
-        contentColor = contentColor,
-        shape = RoundedCornerShape(24.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 12.dp),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = tab.icon,
-                contentDescription = tabLabel,
-                modifier = Modifier.size(24.dp)
-            )
-
-            AnimatedVisibility(
-                visible = isSelected,
-                enter = MorpheAnimations.expandHorizFadeIn,
-                exit = MorpheAnimations.shrinkHorizFadeOut
-            ) {
-                Row {
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = tabLabel,
-                        style = MaterialTheme.typography.labelLarge,
-                        fontWeight = FontWeight.Medium,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-            }
-        }
-    }
+        modifier = modifier,
+        containerColor = GlassButtonDefaults.containerColor(isSelected),
+        contentColor = GlassButtonDefaults.contentColor(isSelected),
+        shape = RoundedCornerShape(20.dp),
+        border = BorderStroke(1.dp, GlassButtonDefaults.borderColor(isSelected)),
+        pressScale = true,
+        hapticFeedback = true
+    )
 }

@@ -40,4 +40,8 @@
         <item quantity="one">%s nakatagong app</item>
         <item quantity="other">%s nakatagong apps</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s app</item>
+        <item quantity="other">%s apps</item>
+    </plurals>
 </resources>

@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe frissítés elérhető</string>
     <string name="home_update_available_subtitle">Az új verzió telepítésre vár</string>
+    <string name="home_blocked_source_title">Blokkolt patchforrás észlelve</string>
+    <string name="home_blocked_source_subtitle">Érintse meg a felülvizsgálathoz és eltávolításhoz</string>
+    <string name="home_metadata_errors_title">Egyes patchforrások nem elérhetők</string>
+    <string name="home_metadata_errors_subtitle">Érintse meg a források áttekintéséhez</string>
+    <string name="home_metered_skipped_title">A frissítések szünetelnek mobiladáton</string>
+    <string name="home_metered_skipped_subtitle">Érintse meg a frissítések engedélyezéséhez mobiladatokon keresztül</string>
     <string name="home_update_error">A frissítés sikertelen</string>
-    <string name="home_update_error_subtitle">Ellenőrizd az internetkapcsolatod és próbáld újra</string>
+    <string name="home_update_error_subtitle">Hiba történt a források frissítése közben</string>
     <string name="home_update_skipped_metered">Frissítések kihagyva</string>
     <string name="home_update_skipped_metered_subtitle">A mobiladat-forgalom aktív</string>
     <string name="home_updating_sources">Források frissítése…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Nincs találat erre: „%s”</string>
     <string name="home_all_apps_hidden_title">Minden alkalmazás el van rejtve</string>
     <string name="home_all_apps_hidden_subtitle">Minden alkalmazást elrejtettél a kezdőképernyőről</string>
+    <string name="home_category_add">Kategória hozzáadása</string>
+    <string name="home_category_all_apps">Összes alkalmazás</string>
+    <string name="home_category_custom">Egyedi</string>
+    <string name="home_category_uncategorized">Kategorizálatlan</string>
+    <string name="home_category_new_title">Új kategória</string>
+    <string name="home_category_rename_title">Kategória átnevezése</string>
+    <string name="home_category_name">Kategória neve</string>
+    <string name="home_category_move_to">Kategóriába helyezés</string>
+    <string name="home_category_move_selected_title">Kiválasztott alkalmazások áthelyezése</string>
+    <string name="home_category_delete_confirm_title">Kategória törlése</string>
+    <string name="home_category_delete_confirm_message">Törölje a &lt;b&gt;%1$s&lt;/b&gt; kategóriát? A benne lévő alkalmazások visszakerülnek a &lt;b&gt;%2$s&lt;/b&gt; kategóriába</string>
+    <string name="home_category_actions_unavailable">Ez a kategória jelenleg nem támogatja a műveleteket</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Melyik alkalmazást szeretnéd módosítani?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Módosítsa a kísérleti alkalmazás célpontjait, ha elérhetők</string>
     <string name="sources_management_already_exists">Ez a forrás már hozzá lett adva</string>
     <string name="sources_management_invalid_url">Érvénytelen forrás URL. Kérjük, ellenőrizze a címet, és próbálja újra.</string>
+    <string name="sources_management_blocked">Ez a javításcsomag forrás le van blokkolva, és nem adható hozzá</string>
+    <string name="sources_management_source_blocked_badge">Blokkolva</string>
     <string name="sources_management_metadata_unavailable">Metaadatok nem állnak rendelkezésre.</string>
     <string name="sources_management_metadata_unavailable_hint">A távoli metaadatfájl nem érhető el. A telepített csomaggal történő javítás továbbra is működik, de az automatikus frissítés le van tiltva ehhez a forráshoz.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">A javítócsomag letöltése nem sikerült. A forrás URL helytelen lehet, vagy a fájl nem létezik.</string>
@@ -478,6 +498,8 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_home_screen">Kezdőképernyő</string>
     <string name="settings_appearance_greeting_phrases">Üdvözlő szövegek</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése a kezdőképernyőn</string>
+    <string name="settings_appearance_app_grouping">Alkalmazáscsoportosítás</string>
+    <string name="settings_appearance_app_grouping_description">Mutasson egy főképernyő váltót az alkalmazások forrás vagy saját kategóriák szerinti csoportosításához, a kiválasztást megőrizve, ha ki van kapcsolva</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Alkalmazásikon</string>
     <string name="settings_appearance_app_icon_default">Alapértelmezett</string>
@@ -661,14 +683,12 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_prompt_installer_on_install_description">Telepítőválasztó ablak megjelenítése minden alkalommal, amikor módosított alkalmazást telepítesz.</string>
     <string name="settings_auto_install_with_shizuku">Automatikus telepítés a javítás után</string>
     <string name="settings_auto_install_with_shizuku_description">A javított APK automatikusan települ, amint a javítás befejeződik</string>
-    <string name="settings_auto_install_prompt_conflict">A(z) \"%s\" be van kapcsolva - az automatikus telepítés kihagyásra kerül</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Akkuoptimalizálás</string>
     <string name="settings_system_battery_optimization_description">A javító folyamat futtatása a háttérben, amikor az alkalmazás minimalizálva van.</string>
     <string name="settings_system_performance">Teljesítmény</string>
     <string name="settings_system_process_runtime">Folyamat futási ideje</string>
     <string name="settings_system_process_runtime_description">A javítás külön folyamatban történő futtatása a jobb stabilitás érdekében.</string>
-    <string name="settings_system_process_runtime_memory_limit">Memóriakorlát</string>
     <string name="settings_system_process_runtime_memory_limit_description">Magasabb korlátok gyorsítják a javítást a képességekkel rendelkező eszközökön.</string>
     <string name="settings_system_process_runtime_enable">Folyamatfutási környezet engedélyezése</string>
     <string name="settings_system_memory_limit_subtitle">Módosításhoz rendelkezésre álló memória</string>
@@ -721,6 +741,31 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_system_apks_deleted_all">Az APK-k sikeresen törölve lettek.</string>
     <string name="settings_system_apks_export_zip_success">A kiválasztott APK-k exportálva</string>
     <string name="settings_system_apks_export_zip_failed">A kiválasztott APK-k exportálása sikertelen</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Tárhelykezelés</string>
+    <string name="settings_system_storage_management_description">A lemezhasználat áttekintése és a gyorsítótár törlése</string>
+    <string name="settings_system_storage_keystore_title">Aláíró kulcstár</string>
+    <string name="settings_system_storage_app_data_title">Alkalmazásadatok</string>
+    <string name="settings_system_storage_patch_bundles_title">Módosítócsomagok</string>
+    <string name="settings_system_storage_http_cache_title">Hálózati gyorsítótár</string>
+    <string name="settings_system_storage_http_cache_description">Az HTTP-válaszok gyorsítótárazása a frissítések felgyorsítása érdekében</string>
+    <string name="settings_system_storage_installer_cache_title">Külső telepítő gyorsítótár</string>
+    <string name="settings_system_storage_installer_cache_description">A harmadik fél telepítőknek átadott APK-másolatok</string>
+    <string name="settings_system_storage_patcher_workspace_title">Módosító munkaterület</string>
+    <string name="settings_system_storage_patcher_workspace_description">A módosító futásidei fájljai és az elárvult ideiglenes adatok</string>
+    <string name="settings_system_storage_temporary_title">Ideiglenes fájlok</string>
+    <string name="settings_system_storage_temporary_description">A módosítás során létrehozott munkafájlok</string>
+    <string name="settings_system_storage_clear_all">Az összes gyorsítótár törlése</string>
+    <string name="settings_system_storage_clear_all_description">Egyszerre törli az összes visszanyerhető gyorsítótár-területet</string>
+    <string name="settings_system_storage_clear_all_confirm">Ez törli a gyorsítótárazott hálózati válaszokat, a telepítők által használt példányokat és az ideiglenes fájlokat. Az eredeti és a módosított APK-k megőrizve maradnak</string>
+    <string name="settings_system_storage_cleared">Felszabadítva: %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nincs törölni való</string>
+    <string name="settings_system_storage_open_app_info_title">Megnyitás Android alkalmazástár</string>
+    <string name="settings_system_storage_open_app_info_description">Morphe adatok kezelése vagy törlése a rendszerbeállításokon keresztül</string>
+    <string name="settings_system_save_original_apks_title">Tartsd meg az eredeti APK fájlokat</string>
+    <string name="settings_system_save_original_apks_description">Mentsd el a patch-elés előtti APK fájlt, hogy újrahasználd a későbbi patch-elésekhez anélkül, hogy újra ki kellene választanod a fájlt.</string>
+    <string name="settings_system_save_patched_apks_title">Tartsd meg a patch-elt APK fájlokat</string>
+    <string name="settings_system_save_patched_apks_description">Mentsd el a patch-elt APK fájl egy másolatát későbbi exportáláshoz vagy a kezelőből való újratelepítéshez.</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Módosított APK-k</string>
     <string name="settings_system_patched_apks_description">Mentett módosított alkalmazásfájlok kezelése</string>

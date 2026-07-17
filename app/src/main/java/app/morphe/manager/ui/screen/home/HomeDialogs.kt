@@ -8,7 +8,6 @@ package app.morphe.manager.ui.screen.home
 import android.os.Build
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -46,6 +45,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.bundles.BundleSourceType
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.sourceType
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.model.HomeAppItem
@@ -367,11 +368,16 @@ fun HomeDialogs(
         } ?: emptyMap()
         SimpleBundleSelectDialog(
             candidates = candidates.map { (bundle, patches) ->
+                val source = homeViewModel.getPatchSource(bundle.uid)
                 SimpleBundleCandidate(
                     uid = bundle.uid,
-                    displayTitle = homeViewModel.getBundleDisplayName(bundle.uid) ?: bundle.name,
+                    displayTitle = source?.displayTitle
+                        ?: homeViewModel.getBundleDisplayName(bundle.uid)
+                        ?: bundle.name,
                     patchCount = patches.size,
-                    recommendedVersion = bundleRecommendedVersions[bundle.uid]?.version
+                    recommendedVersion = bundleRecommendedVersions[bundle.uid]?.version,
+                    patchVersion = source?.version ?: bundle.version,
+                    sourceType = source?.sourceType
                 )
             },
             onSelect = { uid -> homeViewModel.proceedWithSelectedBundle(uid) },
@@ -2387,7 +2393,9 @@ data class SimpleBundleCandidate(
     val uid: Int,
     val displayTitle: String,
     val patchCount: Int,
-    val recommendedVersion: String? = null
+    val recommendedVersion: String? = null,
+    val patchVersion: String? = null,
+    val sourceType: BundleSourceType? = null
 )
 
 /**
@@ -2417,94 +2425,83 @@ fun SimpleBundleSelectDialog(
         }
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
             modifier = Modifier
                 .fillMaxWidth()
                 .selectableGroup()
         ) {
+            val preInstalledLabel = stringResource(R.string.sources_dialog_preinstalled)
+            val remoteLabel = stringResource(R.string.sources_dialog_remote)
+            val localLabel = stringResource(R.string.sources_dialog_local)
+            val patchLabel = stringResource(R.string.patch)
+            val recommendedVersionLabel = stringResource(R.string.home_recommended_version)
             candidates.forEach { candidate ->
                 val isSelected = selected.value == candidate.uid
-                val selectedLabel = stringResource(R.string.selected)
                 val patchCountText = pluralStringResource(
                     R.plurals.patch_count,
                     candidate.patchCount,
                     candidate.patchCount
                 )
-                val borderColor = if (isSelected)
-                    MaterialTheme.colorScheme.primary
-                else
-                    MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+                val patchVersionText = candidate.patchVersion
+                    ?.takeIf { it.isNotBlank() }
+                    ?.let { "$patchLabel v${it.removePrefix("v")}" }
+                val recommendedVersionText = candidate.recommendedVersion
+                    ?.let { "$recommendedVersionLabel v$it" }
+                val sourceTypeLabel = candidate.sourceType?.let { type ->
+                    when (type) {
+                        BundleSourceType.PreInstalled -> preInstalledLabel
+                        BundleSourceType.Remote -> remoteLabel
+                        BundleSourceType.Local -> localLabel
+                    }
+                }
+                val cardContentDescription = buildString {
+                    append(candidate.displayTitle)
+                    sourceTypeLabel?.let { append(", $it") }
+                    append(", $patchCountText")
+                    patchVersionText?.let { append(", $it") }
+                    recommendedVersionText?.let { append(", $it") }
+                }
 
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .selectable(
-                            selected = isSelected,
-                            onClick = { selected.value = candidate.uid },
-                            role = Role.RadioButton
-                        )
-                        .semantics {
-                            contentDescription = buildString {
-                                append(candidate.displayTitle)
-                                if (isSelected) append(", $selectedLabel")
-                            }
-                        },
-                    shape = RoundedCornerShape(14.dp),
-                    color = if (isSelected)
-                        MaterialTheme.colorScheme.primary.copy(alpha = 0.08f)
-                    else
-                        MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
-                    border = BorderStroke(
-                        width = if (isSelected) 1.5.dp else 1.dp,
-                        color = borderColor
-                    ),
-                    tonalElevation = if (isSelected) 0.dp else 1.dp
+                RadioSelectionCard(
+                    selected = isSelected,
+                    onSelect = { selected.value = candidate.uid },
+                    contentDescription = cardContentDescription
                 ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 14.dp, vertical = 12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
-                        // Checkmark - fixed width so text aligns across all rows
-                        Box(
-                            modifier = Modifier.size(20.dp),
-                            contentAlignment = Alignment.Center
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            if (isSelected) {
-                                Icon(
-                                    imageVector = Icons.Filled.Check,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
-                        }
-
-                        Column(modifier = Modifier.weight(1f)) {
                             Text(
                                 text = candidate.displayTitle,
                                 style = MaterialTheme.typography.bodyLarge,
-                                fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
-                                color = if (isSelected) MaterialTheme.colorScheme.primary
-                                else LocalDialogTextColor.current,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
+                                color = LocalDialogTextColor.current,
+                                modifier = Modifier.weight(1f, fill = false)
                             )
-                            val subtitle = buildString {
-                                append(patchCountText)
-                                if (candidate.recommendedVersion != null) {
-                                    append(" · v${candidate.recommendedVersion}")
-                                }
+                            candidate.sourceType?.let { type ->
+                                BundleTypeBadge(type)
                             }
+                        }
+                        Text(
+                            text = patchCountText,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
+                        if (patchVersionText != null) {
                             Text(
-                                text = subtitle,
-                                style = MaterialTheme.typography.bodySmall,
-                                color = if (isSelected)
-                                    MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
-                                else
-                                    LocalDialogSecondaryTextColor.current
+                                text = patchVersionText,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = LocalDialogSecondaryTextColor.current
+                            )
+                        }
+                        if (recommendedVersionText != null) {
+                            Text(
+                                text = recommendedVersionText,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = LocalDialogSecondaryTextColor.current
                             )
                         }
                     }

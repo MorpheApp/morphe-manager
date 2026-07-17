@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-07-09T16:59:07",
-  "description": "# [1.23.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0-dev.9...v1.23.0-dev.10) (2026-07-09)\n\n\n### Features\n\n* Add app and source sort options ([#703](https://github.com/MorpheApp/morphe-manager/issues/703)) ([60771c3](https://github.com/MorpheApp/morphe-manager/commit/60771c35dd09925836cbbec47843ec507094c168))\n* Add toggle for hidden files in custom file picker ([205956f](https://github.com/MorpheApp/morphe-manager/commit/205956fa9c9bdf6b4ab13cc2d1880077936bc436))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.23.0-dev.10/morphe-manager-1.23.0-dev.10.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.23.0-dev.10/morphe-manager-1.23.0-dev.10.apk.asc",
-  "version": "1.23.0-dev.10"
+  "created_at": "2026-07-16T17:29:33",
+  "description": "# [1.24.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.4...v1.24.0-dev.5) (2026-07-16)\n\n\n### Bug Fixes\n\n* Extract `SelectionTile` for grid-style appearance pickers ([7274264](https://github.com/MorpheApp/morphe-manager/commit/72742649f06e41988578a31dbe2ea36a178b5544))\n* Migrate language picker to shared `RadioSelectionCard` ([09c760b](https://github.com/MorpheApp/morphe-manager/commit/09c760b60aba85456ac3a14f83ba2c7e00a18e96))\n\n\n### Features\n\n* Add source labels and versions to patch source picker ([0b3f299](https://github.com/MorpheApp/morphe-manager/commit/0b3f299d6f05d50535b0570e565ca9aaf818c806))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.5/morphe-manager-1.24.0-dev.5.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.5/morphe-manager-1.24.0-dev.5.apk.asc",
+  "version": "1.24.0-dev.5"
 }

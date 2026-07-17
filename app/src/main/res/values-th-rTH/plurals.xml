@@ -30,4 +30,7 @@
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">แอปที่ซ่อนอยู่ %s</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="other">แอป %s แอป</item>
+    </plurals>
 </resources>

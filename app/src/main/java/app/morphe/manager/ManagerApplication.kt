@@ -8,10 +8,9 @@ import android.os.Bundle
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.di.*
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvatarUrl
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.gitlabAvatarUrl
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.repository.BlocklistRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.util.*
@@ -42,6 +41,7 @@ class ManagerApplication : Application() {
     private val scope = MainScope()
     private val prefs: PreferencesManager by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
+    private val blocklistRepository: BlocklistRepository by inject()
     private val fs: Filesystem by inject()
     private val updateNotificationManager: UpdateNotificationManager by inject()
 
@@ -127,19 +127,23 @@ class ManagerApplication : Application() {
             }
         }
 
+        // Cache first for offline launches, then refresh from the network. Any matches are
+        // logged for support diagnostics; the in-app snackbar is state-driven so it updates
+        // automatically without a callback here
+        scope.launch(Dispatchers.Default) {
+            blocklistRepository.loadFromCache()
+            blocklistRepository.refresh()
+            patchBundleRepository.logBlockedSources()
+        }
+
         // Preload bundle avatar images into AvatarCache while the user hasn't opened the sheet yet.
-        // Suspends until sources are ready, then fetches all URLs in parallel on IO threads.
+        // Suspends until sources are ready, then fetches all URLs in parallel on IO threads
         scope.launch(Dispatchers.IO) {
             patchBundleRepository.sources.first { it.isNotEmpty() }.forEach { bundle ->
                 launch {
-                    val primary = bundle.bundleAvatarUrl ?: bundle.githubAvatarUrl ?: bundle.gitlabAvatarUrl
-                    val fallback = when {
-                        bundle.bundleAvatarUrl != null -> bundle.githubAvatarUrl ?: bundle.gitlabAvatarUrl
-                        bundle.githubAvatarUrl != null -> bundle.gitlabAvatarUrl
-                        else -> null
-                    }
-                    primary?.let { loadRemoteAvatar(it) }
-                    fallback?.let { loadRemoteAvatar(it) }
+                    val avatarUrls = bundle.avatarUrls
+                    avatarUrls.primary?.let { loadRemoteAvatar(it) }
+                    avatarUrls.fallback?.let { loadRemoteAvatar(it) }
                 }
             }
         }

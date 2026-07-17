@@ -11,7 +11,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
@@ -25,7 +24,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -47,7 +45,6 @@ fun InstallerSection(
     onShowInstallerDialog: () -> Unit,
     onInstallerItemPositioned: ((Rect) -> Unit)? = null
 ) {
-    val expertMode by settingsViewModel.prefs.useExpertMode.getAsState()
     val primaryPreference by settingsViewModel.prefs.installerPrimary.getAsState()
     val primaryToken = remember(primaryPreference) {
         settingsViewModel.parseInstallerToken(primaryPreference)
@@ -73,51 +70,16 @@ fun InstallerSection(
         ?: settingsViewModel.describeInstallerEntry(primaryToken, installTarget)
         ?: primaryEntries.value.firstOrNull()
 
-    // Prompt installer on installation preference
-    val promptInstallerOnInstall by settingsViewModel.prefs.promptInstallerOnInstall.getAsState()
-
-    // Localized strings for accessibility
-    val enabledState = stringResource(R.string.enabled)
-    val disabledState = stringResource(R.string.disabled)
-
-    Column {
-        if (primaryEntry != null) {
-            Box(
-                modifier = if (onInstallerItemPositioned != null)
-                    Modifier.onGloballyPositioned { coords -> onInstallerItemPositioned(coords.boundsInWindow()) }
-                else Modifier
-            ) {
-                InstallerSettingsItem(
-                    title = stringResource(R.string.installer_title),
-                    entry = primaryEntry,
-                    onClick = onShowInstallerDialog
-                )
-            }
-        }
-
-        // Prompt installer toggle (Expert mode only)
-        if (expertMode) {
-            MorpheSettingsDivider()
-
-            RichSettingsItem(
-                onClick = {
-                    settingsViewModel.setPromptInstallerOnInstall(!promptInstallerOnInstall)
-                },
-                modifier = Modifier.semantics {
-                    role = Role.Switch
-                    stateDescription = if (promptInstallerOnInstall) enabledState else disabledState
-                },
-                leadingContent = {
-                    MorpheIcon(icon = Icons.Outlined.Android)
-                },
-                title = stringResource(R.string.settings_prompt_installer_on_install),
-                subtitle = stringResource(R.string.settings_prompt_installer_on_install_description),
-                trailingContent = {
-                    MorpheSwitch(
-                        checked = promptInstallerOnInstall,
-                        onCheckedChange = null
-                    )
-                }
+    if (primaryEntry != null) {
+        Box(
+            modifier = if (onInstallerItemPositioned != null)
+                Modifier.onGloballyPositioned { coords -> onInstallerItemPositioned(coords.boundsInWindow()) }
+            else Modifier
+        ) {
+            InstallerSettingsItem(
+                title = stringResource(R.string.installer_title),
+                entry = primaryEntry,
+                onClick = onShowInstallerDialog
             )
         }
     }
@@ -156,7 +118,8 @@ fun InstallerSelectionDialogContainer(
         onOpenShizuku = settingsViewModel::openShizukuApp,
         autoInstallEnabled = autoInstallEnabled,
         onAutoInstallToggle = settingsViewModel::setAutoInstallWithShizuku,
-        installerPromptEnabled = promptEnabled
+        installerPromptEnabled = promptEnabled,
+        onInstallerPromptToggle = settingsViewModel::setPromptInstallerOnInstall
     )
 }
 
@@ -179,7 +142,7 @@ private fun InstallerSettingsItem(
         }.joinToString("\n")
     }
 
-    RichSettingsItem(
+    SettingsItem(
         onClick = onClick,
         leadingContent = {
             if (entry.icon != null &&
@@ -216,7 +179,8 @@ fun InstallerSelectionDialog(
     onOpenShizuku: (() -> Boolean)?,
     autoInstallEnabled: Boolean = false,
     onAutoInstallToggle: ((Boolean) -> Unit)? = null,
-    installerPromptEnabled: Boolean = false
+    installerPromptEnabled: Boolean = false,
+    onInstallerPromptToggle: ((Boolean) -> Unit)? = null
 ) {
     val shizukuPromptReasons = remember {
         setOf(
@@ -245,7 +209,6 @@ fun InstallerSelectionDialog(
     // Localized strings for accessibility
     val selectedState = stringResource(R.string.selected)
     val notSelectedState = stringResource(R.string.not_selected)
-    val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
 
     MorpheDialog(
@@ -322,56 +285,36 @@ fun InstallerSelectionDialog(
                 enter = MorpheAnimations.expandFadeEnter,
                 exit = MorpheAnimations.shrinkFadeExit
             ) {
-                Column {
-                    HorizontalDivider(modifier = Modifier.padding(top = 4.dp))
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(MaterialTheme.shapes.medium)
-                            .toggleable(
-                                value = autoInstallEnabled,
-                                role = Role.Switch,
-                                onValueChange = { onAutoInstallToggle?.invoke(it) }
-                            )
-                            .semantics {
-                                stateDescription = if (autoInstallEnabled) enabledState else disabledState
-                            }
-                            .padding(vertical = 12.dp, horizontal = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        MorpheIcon(icon = Icons.Outlined.Bolt)
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = stringResource(R.string.settings_auto_install_with_shizuku),
-                                style = MaterialTheme.typography.titleSmall,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                            Text(
-                                text = stringResource(R.string.settings_auto_install_with_shizuku_description),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
+                MorpheDialogToggleRow(
+                    icon = Icons.Outlined.Bolt,
+                    title = stringResource(R.string.settings_auto_install_with_shizuku),
+                    description = stringResource(R.string.settings_auto_install_with_shizuku_description),
+                    checked = autoInstallEnabled,
+                    onCheckedChange = { newValue ->
+                        onAutoInstallToggle?.invoke(newValue)
+                        // Mutually exclusive with Prompt on install
+                        if (newValue && installerPromptEnabled) {
+                            onInstallerPromptToggle?.invoke(false)
                         }
-                        MorpheSwitch(
-                            checked = autoInstallEnabled,
-                            onCheckedChange = null
-                        )
                     }
+                )
+            }
 
-                    if (installerPromptEnabled) {
-                        InfoBadge(
-                            text = stringResource(
-                                R.string.settings_auto_install_prompt_conflict,
-                                stringResource(R.string.settings_prompt_installer_on_install)
-                            ),
-                            style = InfoBadgeStyle.Warning,
-                            icon = Icons.Outlined.Warning,
-                            isExpanded = true,
-                            modifier = Modifier.padding(top = 4.dp)
-                        )
+            // Prompt on install toggle
+            if (onInstallerPromptToggle != null) {
+                MorpheDialogToggleRow(
+                    icon = Icons.Outlined.Android,
+                    title = stringResource(R.string.settings_prompt_installer_on_install),
+                    description = stringResource(R.string.settings_prompt_installer_on_install_description),
+                    checked = installerPromptEnabled,
+                    onCheckedChange = { newValue ->
+                        onInstallerPromptToggle(newValue)
+                        // Mutually exclusive with Auto-install
+                        if (newValue && autoInstallEnabled) {
+                            onAutoInstallToggle?.invoke(false)
+                        }
                     }
-                }
+                )
             }
         }
     }
@@ -408,52 +351,35 @@ fun InstallerOptionItem(
     val reasonResId = option.availability.reason
     val reasonText = if (!enabled && reasonResId != null) stringResource(reasonResId) else null
 
-    SettingsItemCard(
-        onClick = onSelect,
+    val hasCustomIcon = option.icon != null &&
+        (option.token == InstallerManager.Token.Shizuku ||
+                option.token == InstallerManager.Token.ShizukuPlayStore ||
+                option.token == InstallerManager.Token.PlayStore ||
+                option.token == InstallerManager.Token.RootPlayStore ||
+                option.token is InstallerManager.Token.Component)
+
+    RadioSelectionCard(
+        selected = selected,
+        onSelect = onSelect,
         enabled = enabled,
-        borderWidth = 1.dp,
-        modifier = Modifier
-            .padding(vertical = 2.dp)
-            .semantics {
-                role = Role.RadioButton
-                this.selected = selected
-                this.stateDescription = stateDescription
+        stateDescription = stateDescription,
+        modifier = Modifier.padding(vertical = 2.dp),
+        leadingContent = if (hasCustomIcon) {
+            {
+                InstallerIconPreview(
+                    drawable = option.icon,
+                    selected = selected,
+                    enabled = enabled
+                )
             }
+        } else null
     ) {
         Column(
-            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
         ) {
             IconTextRow(
-                leadingContent = if (option.icon != null &&
-                    (option.token == InstallerManager.Token.Shizuku ||
-                            option.token == InstallerManager.Token.ShizukuPlayStore ||
-                            option.token == InstallerManager.Token.PlayStore ||
-                            option.token == InstallerManager.Token.RootPlayStore ||
-                            option.token is InstallerManager.Token.Component)
-                ) {
-                    {
-                        InstallerIconPreview(
-                            drawable = option.icon,
-                            selected = selected,
-                            enabled = enabled
-                        )
-                    }
-                } else {
-                    {
-                        if (selected) {
-                            StatusCircleIcon(
-                                icon = Icons.Outlined.Check,
-                                containerColor = if (enabled) colors.primaryContainer
-                                else colors.primaryContainer.copy(alpha = 0.38f),
-                                contentColor = if (enabled) colors.onPrimaryContainer
-                                else colors.onPrimaryContainer.copy(alpha = 0.38f)
-                            )
-                        } else {
-                            StatusCirclePlaceholder()
-                        }
-                    }
-                },
+                leadingContent = null,
                 title = option.label,
                 description = description,
                 titleColor = if (enabled) colors.onSurface else colors.onSurface.copy(alpha = 0.38f),

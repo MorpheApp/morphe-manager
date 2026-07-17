@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-Update verfügbar</string>
     <string name="home_update_available_subtitle">Neue Version bereit zur Installation</string>
+    <string name="home_blocked_source_title">Erkannte blockierte Patch-Quelle</string>
+    <string name="home_blocked_source_subtitle">Tippen Sie zum Überprüfen und Entfernen</string>
+    <string name="home_metadata_errors_title">Einige Patch-Quellen sind nicht verfügbar</string>
+    <string name="home_metadata_errors_subtitle">Tippen Sie, um die Quellen zu überprüfen</string>
+    <string name="home_metered_skipped_title">Updates über mobile Daten wurden pausiert</string>
+    <string name="home_metered_skipped_subtitle">Tippen Sie auf, um Updates über mobile Daten zu erlauben</string>
     <string name="home_update_error">Update fehlgeschlagen</string>
-    <string name="home_update_error_subtitle">Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut</string>
+    <string name="home_update_error_subtitle">Bei der Aktualisierung der Quellen ist ein Fehler aufgetreten</string>
     <string name="home_update_skipped_metered">Updates übersprungen</string>
     <string name="home_update_skipped_metered_subtitle">Mobile Daten sind aktiv</string>
     <string name="home_updating_sources">Quellen werden aktualisiert…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Keine Apps passen zu \"%s\"</string>
     <string name="home_all_apps_hidden_title">Alle Apps sind ausgeblendet</string>
     <string name="home_all_apps_hidden_subtitle">Sie haben alle Apps vom Startbildschirm ausgeblendet</string>
+    <string name="home_category_add">Kategorie hinzufügen</string>
+    <string name="home_category_all_apps">Alle Apps</string>
+    <string name="home_category_custom">Benutzerdefiniert</string>
+    <string name="home_category_uncategorized">Nicht kategorisiert</string>
+    <string name="home_category_new_title">Neue Kategorie</string>
+    <string name="home_category_rename_title">Kategorie umbenennen</string>
+    <string name="home_category_name">Kategoriename</string>
+    <string name="home_category_move_to">In Kategorie verschieben</string>
+    <string name="home_category_move_selected_title">Ausgewählte Apps verschieben</string>
+    <string name="home_category_delete_confirm_title">Kategorie löschen</string>
+    <string name="home_category_delete_confirm_message">Kategorie &lt;b&gt;%1$s&lt;/b&gt; löschen? Apps darin werden nach &lt;b&gt;%2$s&lt;/b&gt; verschoben</string>
+    <string name="home_category_actions_unavailable">Keine Optionen für diese Kategorie verfügbar</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Welche App möchten Sie patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Experimentelle App-Versionen patchen, falls verfügbar</string>
     <string name="sources_management_already_exists">Diese Quelle wurde bereits hinzugefügt</string>
     <string name="sources_management_invalid_url">Ungültige Quell-URL. Bitte überprüfen Sie die Adresse und versuchen Sie es erneut</string>
+    <string name="sources_management_blocked">Diese Patchquelle ist blockiert und kann nicht hinzugefügt werden</string>
+    <string name="sources_management_source_blocked_badge">Blockiert</string>
     <string name="sources_management_metadata_unavailable">Metadaten nicht verfügbar</string>
     <string name="sources_management_metadata_unavailable_hint">Die Metadatei des Remote-Servers ist nicht verfügbar. Das Patchen mit dem installierten Paket funktioniert weiterhin, die automatische Aktualisierung ist jedoch für diese Quelle deaktiviert</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Das Patch-Bundle konnte nicht heruntergeladen werden. Die Quell-URL ist möglicherweise falsch oder die Datei existiert nicht</string>
@@ -478,6 +498,8 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="settings_appearance_home_screen">Startbildschirm</string>
     <string name="settings_appearance_greeting_phrases">Begrüßungsformeln</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Auf dem Startbildschirm eine Begrüßungsnachricht anzeigen</string>
+    <string name="settings_appearance_app_grouping">App-Gruppierung</string>
+    <string name="settings_appearance_app_grouping_description">Zeigt einen Home-Bildschirm-Wechsler an, um Apps nach Quelle oder Ihren eigenen Kategorien zu gruppieren und die Auswahl bei Deaktivierung beizubehalten</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App-Icon</string>
     <string name="settings_appearance_app_icon_default">Standard</string>
@@ -661,14 +683,12 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_prompt_installer_on_install_description">Zeigt jedes Mal ein Dialogfenster zur Installerauswahl an, wenn eine gepatchte App installiert wird</string>
     <string name="settings_auto_install_with_shizuku">Automatische Installation nach dem Patchen</string>
     <string name="settings_auto_install_with_shizuku_description">Installiert die gepatchte APK automatisch, sobald das Patchen abgeschlossen ist</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" ist aktiviert - die automatische Installation wird übersprungen</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterieoptimierung</string>
     <string name="settings_system_battery_optimization_description">Behält den Patcher im Betrieb, wenn die App minimiert wird</string>
     <string name="settings_system_performance">Leistung</string>
     <string name="settings_system_process_runtime">Prozesslaufzeit</string>
     <string name="settings_system_process_runtime_description">Führt das Patchen in einem separaten Prozess für bessere Stabilität aus</string>
-    <string name="settings_system_process_runtime_memory_limit">Speicherlimit</string>
     <string name="settings_system_process_runtime_memory_limit_description">Höhere Limits beschleunigen das Patchen auf kompatiblen Geräten</string>
     <string name="settings_system_process_runtime_enable">Prozesslaufzeit aktivieren</string>
     <string name="settings_system_memory_limit_subtitle">Verfügbarer Speicher für das Patchen</string>
@@ -721,6 +741,31 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_apks_deleted_all">APKs erfolgreich gelöscht</string>
     <string name="settings_system_apks_export_zip_success">Ausgewählte APKs exportiert</string>
     <string name="settings_system_apks_export_zip_failed">Exportieren der ausgewählten APKs fehlgeschlagen</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Speicherverwaltung</string>
+    <string name="settings_system_storage_management_description">Festplattennutzung überprüfen und zwischengespeicherte Dateien löschen</string>
+    <string name="settings_system_storage_keystore_title">Signierschlüsselbund</string>
+    <string name="settings_system_storage_app_data_title">App-Daten</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch-Bundles</string>
+    <string name="settings_system_storage_http_cache_title">Netzwerk-Cache</string>
+    <string name="settings_system_storage_http_cache_description">HTTP-Antworten werden zwischengespeichert, um Updates zu beschleunigen</string>
+    <string name="settings_system_storage_installer_cache_title">Externer Installer-Cache</string>
+    <string name="settings_system_storage_installer_cache_description">APK-Kopien, die an Drittanbieter-Installer übergeben werden</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher-Arbeitsbereich</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher-Laufzeitdateien und verwaiste Scratch-Daten</string>
+    <string name="settings_system_storage_temporary_title">Temporäre Dateien</string>
+    <string name="settings_system_storage_temporary_description">Arbeitsdateien, die beim Patchen erstellt wurden</string>
+    <string name="settings_system_storage_clear_all">Alle Caches löschen</string>
+    <string name="settings_system_storage_clear_all_description">Gibt den gesamten wiederherstellbaren Cache-Speicher auf einmal frei</string>
+    <string name="settings_system_storage_clear_all_confirm">Dadurch werden zwischengespeicherte Netzwerkantworten, gestufte Installer-Kopien und temporäre Dateien gelöscht. Originale und gepatchte APKs werden beibehalten</string>
+    <string name="settings_system_storage_cleared">Freigegeben: %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nichts zu löschen</string>
+    <string name="settings_system_storage_open_app_info_title">Android-App-Speicher öffnen</string>
+    <string name="settings_system_storage_open_app_info_description">Verwalten oder löschen Sie alle Morphe-Daten über die Systemeinstellungen</string>
+    <string name="settings_system_save_original_apks_title">Originale APKs beibehalten</string>
+    <string name="settings_system_save_original_apks_description">Speichern Sie die APK vor dem Patch, damit sie ohne erneutes Auswählen der Datei für erneutes Patchen wiederverwendet werden kann</string>
+    <string name="settings_system_save_patched_apks_title">Gepatchte APKs beibehalten</string>
+    <string name="settings_system_save_patched_apks_description">Speichern Sie eine Kopie der gepatchten APK für späteren Export oder die Neuinstallation über den Manager</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatchte APKs</string>
     <string name="settings_system_patched_apks_description">Verwaltet gespeicherte gepatchte Anwendungsdateien</string>

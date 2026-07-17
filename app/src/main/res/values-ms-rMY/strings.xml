@@ -19,7 +19,6 @@
     <string name="home_update_available">Kemas kini Morphie tersedia</string>
     <string name="home_update_available_subtitle">Kemas kini baharu tersedia untuk di muat turun</string>
     <string name="home_update_error">Kemas kini gagal</string>
-    <string name="home_update_error_subtitle">Semak sambungan internet kamu dan cuba lagi</string>
     <string name="home_update_skipped_metered">Kemas kini taraf dilangkau</string>
     <string name="home_update_skipped_metered_subtitle">Data mudah alih aktif</string>
     <string name="home_updating_sources">Kemas kini sumber-sumber… </string>
@@ -576,7 +575,6 @@ Dimensi gambar mestilah seperti berikut:
     <string name="settings_system_battery_optimization">Optimisasi bateri</string>
     <string name="settings_system_performance">Prestasi</string>
     <string name="settings_system_process_runtime">Masa runtime proses</string>
-    <string name="settings_system_process_runtime_memory_limit">Had memori</string>
     <string name="settings_system_process_runtime_enable">Aktifkan masa runtime proses</string>
     <string name="settings_system_memory_limit_subtitle">Memori tersedia untuk tampalan</string>
     <string name="settings_system_memory_limit_warning">Had memori yang rendah mungkin menyebabkan kegagalan semasa menampal aplikasi yang lebih besar</string>
@@ -606,6 +604,7 @@ Dimensi gambar mestilah seperti berikut:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_apks_size">Saiz keseluruhan: %s</string>
     <string name="settings_system_apks_deleted_all">APKs telah padam dengan jayanya</string>
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK yang ditampal</string>
     <string name="settings_system_patched_apks_empty">Tiada APK yang ditampal disimpan lagi</string>

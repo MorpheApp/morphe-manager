@@ -284,7 +284,7 @@ private fun PatchSelectionManagementDialogContent(
             if (multiSelect.isSelectionMode) {
                 MultiSelectShell(visible = true) {
                     SelectionActionBar(
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+                        modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ItemSpacing),
                         selectedCount = multiSelect.selectedPackages.size,
                         totalCount = selections.size,
                         onSelectAll = onSelectAll,
@@ -338,7 +338,8 @@ private fun PatchSelectionManagementDialogContent(
             }
         },
         scrollable = false,
-        compactPadding = true
+        compactPadding = true,
+        contentArrangement = Arrangement.Top
     ) {
         if (selections.isEmpty()) {
             EmptyState(message = stringResource(R.string.settings_system_no_patches_or_options))
@@ -378,26 +379,25 @@ private fun SelectionList(
         ) {
             // Summary box
             item(key = "summary") {
-                InfoBox(
+                HeroInfoCard(
+                    icon = Icons.Outlined.Tune,
                     title = pluralStringResource(
                         R.plurals.package_count,
                         selections.size,
                         selections.size
                     ),
-                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                    titleColor = MaterialTheme.colorScheme.primary,
-                    icon = Icons.Outlined.Tune
-                ) {
-                    Text(
-                        text = pluralStringResource(
-                            R.plurals.patch_selection_total_patches,
-                            data.totalSelections,
-                            data.totalSelections
-                        ),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                }
+                    subtitle = {
+                        Text(
+                            text = pluralStringResource(
+                                R.plurals.patch_selection_total_patches,
+                                data.totalSelections,
+                                data.totalSelections
+                            ),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
+                    }
+                )
             }
 
             // List of packages with selections
@@ -497,7 +497,7 @@ private fun PackageSelectionItem(
                                 onEnterSelection()
                             }
                         )
-                        .padding(16.dp),
+                        .padding(MorpheDefaults.ContentPadding),
                     horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -522,7 +522,7 @@ private fun PackageSelectionItem(
                         )
 
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             InfoBadge(
@@ -574,7 +574,11 @@ private fun PackageSelectionItem(
                     exit = MorpheAnimations.shrinkTopFadeOut
                 ) {
                     Column(
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                        modifier = Modifier.padding(
+                            start = MorpheDefaults.ContentPadding,
+                            end = MorpheDefaults.ContentPadding,
+                            bottom = MorpheDefaults.ContentPadding
+                        ),
                         verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
                     ) {
                         bundleMap.forEach { (bundleUid, patchCount) ->
@@ -594,11 +598,15 @@ private fun PackageSelectionItem(
                         MorpheSettingsDivider(fullWidth = true)
 
                         // Reset all for this package
-                        MorpheDialogButton(
-                            text = stringResource(R.string.reset_all),
-                            onClick = onResetPackage,
-                            isDestructive = true,
-                            modifier = Modifier.fillMaxWidth()
+                        CardActionRow(
+                            actions = listOf(
+                                CardAction(
+                                    icon = Icons.Outlined.Restore,
+                                    label = stringResource(R.string.reset_all),
+                                    onClick = onResetPackage,
+                                    destructive = true
+                                )
+                            )
                         )
                     }
                 }
@@ -637,9 +645,7 @@ private fun BundleSelectionItem(
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
+        modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
     ) {
         MorpheSettingsDivider(fullWidth = true)
@@ -657,7 +663,7 @@ private fun BundleSelectionItem(
             onClick = onShowDetails
         ) {
             Row(
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
+                modifier = Modifier.padding(MorpheDefaults.ItemSpacing),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
             ) {
@@ -692,36 +698,26 @@ private fun BundleSelectionItem(
             }
         }
 
-        // Action buttons row
-        val exportLabel = stringResource(R.string.export)
-        val resetLabel = stringResource(R.string.reset)
-
-        ActionPillRow {
-            // Export button
-            ActionPillButton(
-                onClick = {
-                    val fileName = importExportViewModel.getPackageBundleDataExportFileName(
-                        packageName, bundleUid, bundleName
-                    )
-                    exportLauncher.launch(fileName)
-                },
-                icon = Icons.Outlined.Upload,
-                contentDescription = exportLabel,
-                tooltip = exportLabel
-            )
-
-            // Reset button
-            ActionPillButton(
-                onClick = onReset,
-                icon = Icons.Outlined.Delete,
-                contentDescription = resetLabel,
-                tooltip = resetLabel,
-                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                    contentColor = MaterialTheme.colorScheme.onErrorContainer
+        CardActionRow(
+            actions = listOf(
+                CardAction(
+                    icon = Icons.Outlined.Upload,
+                    label = stringResource(R.string.export),
+                    onClick = {
+                        val fileName = importExportViewModel.getPackageBundleDataExportFileName(
+                            packageName, bundleUid, bundleName
+                        )
+                        exportLauncher.launch(fileName)
+                    }
+                ),
+                CardAction(
+                    icon = Icons.Outlined.Restore,
+                    label = stringResource(R.string.reset),
+                    onClick = onReset,
+                    destructive = true
                 )
             )
-        }
+        )
     }
 }
 
@@ -1066,7 +1062,7 @@ private fun PatchDetailsDialog(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(32.dp),
+                        .padding(MorpheDefaults.ContentPaddingExpanded),
                     contentAlignment = Alignment.Center
                 ) {
                     CircularProgressIndicator()
@@ -1115,7 +1111,7 @@ private fun PatchDetailsDialog(
                                     Column(
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .padding(start = 12.dp, bottom = 4.dp)
+                                            .padding(start = MorpheDefaults.ItemSpacing, bottom = 4.dp)
                                     ) {
                                         Text(
                                             text = "• $key",
@@ -1127,14 +1123,14 @@ private fun PatchDetailsDialog(
                                             style = MaterialTheme.typography.bodySmall,
                                             color = LocalDialogTextColor.current,
                                             fontWeight = FontWeight.Medium,
-                                            modifier = Modifier.padding(start = 12.dp, top = 2.dp)
+                                            modifier = Modifier.padding(start = MorpheDefaults.ItemSpacing, top = 2.dp)
                                         )
                                     }
                                 }
                             }
 
                             if (patchName != optionsMap.keys.last()) {
-                                Spacer(modifier = Modifier.height(8.dp))
+                                Spacer(modifier = Modifier.height(MorpheDefaults.ContentPaddingSmall))
                             }
                         }
                     }

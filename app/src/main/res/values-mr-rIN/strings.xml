@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe नवीन सुधारणा उपलब्ध आहे</string>
     <string name="home_update_available_subtitle">नवीन सुधारणा स्थापनेसाठी तयार आहे</string>
+    <string name="home_blocked_source_title">अवरोधित पॅच स्त्रोत आढळला</string>
+    <string name="home_blocked_source_subtitle">पुनरावलोकन करण्यासाठी आणि काढण्यासाठी टॅप करा</string>
+    <string name="home_metadata_errors_title">काही पॅच स्त्रोत अनुपलब्ध आहेत</string>
+    <string name="home_metadata_errors_subtitle">स्त्रोतांचे पुनरावलोकन करण्यासाठी टॅप करा</string>
+    <string name="home_metered_skipped_title">मोबाइल डेटावर अद्यतने थांबवली आहेत</string>
+    <string name="home_metered_skipped_subtitle">मोबाईल डेटावर अपडेट्सला अनुमती देण्यासाठी टॅप करा</string>
     <string name="home_update_error">सुधारणा अयशस्वी झाली</string>
-    <string name="home_update_error_subtitle">तुमचे नेट कनेक्शन तपासा आणि पुन्हा प्रयत्न करा.</string>
+    <string name="home_update_error_subtitle">स्त्रोत अद्यतन करताना काहीतरी चूक झाली</string>
     <string name="home_update_skipped_metered">सुधारणा वगळल्या</string>
     <string name="home_update_skipped_metered_subtitle">मोबाईल डेटा/नेट चालू आहे</string>
     <string name="home_updating_sources">मुळांमध्ये सुधारणा करत आहे</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">\"%s\" शी जुळणारे कोणतेही ॲप्स नाहीत</string>
     <string name="home_all_apps_hidden_title">सर्व ॲप्स लपवले आहेत</string>
     <string name="home_all_apps_hidden_subtitle">तुम्ही होम स्क्रीनवरून सर्व ॲप्स लपवले आहेत</string>
+    <string name="home_category_add">श्रेणी जोडा</string>
+    <string name="home_category_all_apps">सर्व ॲप्स</string>
+    <string name="home_category_custom">सानुकूल</string>
+    <string name="home_category_uncategorized">वर्गीकरण केलेले नाही</string>
+    <string name="home_category_new_title">नवीन श्रेणी</string>
+    <string name="home_category_rename_title">श्रेणीचे नाव बदला</string>
+    <string name="home_category_name">श्रेणीचे नाव</string>
+    <string name="home_category_move_to">श्रेणीत हलवा</string>
+    <string name="home_category_move_selected_title">निवडलेले ॲप्स हलवा</string>
+    <string name="home_category_delete_confirm_title">श्रेणी हटवा</string>
+    <string name="home_category_delete_confirm_message">&lt;b&gt;%1$s&lt;/b&gt; श्रेणी हटवा? त्यातील ॲप्स &lt;b&gt;%2$s&lt;/b&gt; मध्ये परत हलतील</string>
+    <string name="home_category_actions_unavailable">या श्रेणीसाठी क्रिया उपलब्ध नाहीत</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">तुम्हाला कोणत्या ॲपमध्ये सुधारणा करायची आहे?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">शक्य असल्यास प्रायोगिक ॲप्सवर पॅच लागू करा</string>
     <string name="sources_management_already_exists">हे मूळ आधीच जोडले गेले आहे</string>
     <string name="sources_management_invalid_url">अवैध स्रोत URL. कृपया पत्ता तपासा आणि पुन्हा प्रयत्न करा</string>
+    <string name="sources_management_blocked">हे पॅच स्रोत अवरोधित केले आहे आणि ते जोडले जाऊ शकत नाही</string>
+    <string name="sources_management_source_blocked_badge">अवरोधित</string>
     <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नाही</string>
     <string name="sources_management_metadata_unavailable_hint">दूरस्थ मेटाडेटा फाइल उपलब्ध नाही. स्थापित बंडलसह पॅचिंग अजूनही कार्य करते, परंतु या स्रोतासाठी स्वयंचलित अद्यतन अक्षम केले आहे</string>
     <string name="sources_management_metadata_unavailable_hint_missing">पॅच बंडल डाउनलोड करता आले नाही. स्रोत URL चुकीचा असू शकतो किंवा फाइल अस्तित्वात नाही</string>
@@ -477,6 +497,8 @@
     <string name="settings_appearance_home_screen">मुख्य स्क्रीन</string>
     <string name="settings_appearance_greeting_phrases">शुभेच्छा संदेश</string>
     <string name="settings_appearance_greeting_phrases_subtitle">मुख्य स्क्रीनवर शुभेच्छा संदेश दर्शवा</string>
+    <string name="settings_appearance_app_grouping">ॲप समूहीकरण</string>
+    <string name="settings_appearance_app_grouping_description">ॲप्स स्रोत किंवा आपल्या स्वतःच्या श्रेणीनुसार समूहीकृत करण्यासाठी होम स्क्रीन स्विचर दाखवा, बंद केल्यावर निवड जतन करा</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">ॲप आयकॉन</string>
     <string name="settings_appearance_app_icon_default">डिफॉल्ट</string>
@@ -660,14 +682,12 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">पॅच केलेले ॲप इंस्टॉल करताना प्रत्येक वेळी इंस्टॉलर निवड संवाद दर्शवितो</string>
     <string name="settings_auto_install_with_shizuku">पॅचिंग केल्यानंतर स्वयंचलितपणे स्थापित करा</string>
     <string name="settings_auto_install_with_shizuku_description">पॅचिंग पूर्ण झाल्यावर पॅच केलेले APK शांतपणे स्थापित करते</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" सक्षम आहे - स्वयंचलितपणे स्थापित करणे वगळले जाईल</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">बॅटरी ऑप्टिमायझेशन</string>
     <string name="settings_system_battery_optimization_description">ॲप मिनिमाइज केले असताना पॅचर चालू ठेवतो</string>
     <string name="settings_system_performance">कार्यक्षमता</string>
     <string name="settings_system_process_runtime">प्रक्रिया रनटाइम</string>
     <string name="settings_system_process_runtime_description">उत्तम स्थिरतेसाठी पॅचिंग वेगळ्या प्रक्रियेत चालवतो</string>
-    <string name="settings_system_process_runtime_memory_limit">मेमरी मर्यादा</string>
     <string name="settings_system_process_runtime_memory_limit_description">उच्च मर्यादा सक्षम उपकरणांवर पॅचिंगला गती देते</string>
     <string name="settings_system_process_runtime_enable">प्रक्रिया रनटाइम सक्षम करा</string>
     <string name="settings_system_memory_limit_subtitle">पॅचिंगसाठी उपलब्ध मेमरी</string>
@@ -720,6 +740,31 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APKs यशस्वीरित्या हटवले</string>
     <string name="settings_system_apks_export_zip_success">निवडलेले APK निर्यात केले</string>
     <string name="settings_system_apks_export_zip_failed">निवडलेले APK निर्यात करण्यात अयशस्वी</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">स्टोरेज व्यवस्थापन</string>
+    <string name="settings_system_storage_management_description">डिस्क वापर तपासा आणि कॅशे केलेल्या फायली साफ करा</string>
+    <string name="settings_system_storage_keystore_title">साइनिंग कीस्टोअर</string>
+    <string name="settings_system_storage_app_data_title">ॲप डेटा</string>
+    <string name="settings_system_storage_patch_bundles_title">सुधारणांचे बंडल</string>
+    <string name="settings_system_storage_http_cache_title">नेटवर्क कॅशे</string>
+    <string name="settings_system_storage_http_cache_description">अपडेट जलद करण्यासाठी HTTP प्रतिसाद कॅशे केले जातात</string>
+    <string name="settings_system_storage_installer_cache_title">बाह्य इंस्टॉलर कॅशे</string>
+    <string name="settings_system_storage_installer_cache_description">APK थर्ड-पार्टी इंस्टॉलरमध्ये पाठवलेल्या प्रती</string>
+    <string name="settings_system_storage_patcher_workspace_title">पॅचर कार्यक्षेत्र</string>
+    <string name="settings_system_storage_patcher_workspace_description">पॅचर रनटाइम फाइल्स आणि अनाथ स्क्रॅच डेटा</string>
+    <string name="settings_system_storage_temporary_title">अस्थायी फाइल्स</string>
+    <string name="settings_system_storage_temporary_description">पॅचिंग दरम्यान तयार केलेल्या कार्यरत फाइल्स</string>
+    <string name="settings_system_storage_clear_all">सर्व कॅशे साफ करा</string>
+    <string name="settings_system_storage_clear_all_description">एकाच वेळी सर्व पुनर्प्राप्त करण्यायोग्य कॅशे जागा मोकळी करते</string>
+    <string name="settings_system_storage_clear_all_confirm">हे कॅशे केलेले नेटवर्क प्रतिसाद, स्टेज केलेले इंस्टॉलर प्रती आणि अस्थायी फाइल्स साफ करते. मूळ आणि पॅच केलेले APK ठेवले जातात</string>
+    <string name="settings_system_storage_cleared">मोकळी जागा %s</string>
+    <string name="settings_system_storage_nothing_to_clear">साफ करण्यासाठी काहीही नाही</string>
+    <string name="settings_system_storage_open_app_info_title">Android ॲप स्टोरेज उघडा</string>
+    <string name="settings_system_storage_open_app_info_description">सिस्टम सेटिंग्जद्वारे सर्व मोर्फ डेटा व्यवस्थापित किंवा साफ करा</string>
+    <string name="settings_system_save_original_apks_title">मूळ APKs ठेवा</string>
+    <string name="settings_system_save_original_apks_description">फाईल पुन्हा निवडण्याची आवश्यकता नसेल, यासाठी पॅच केलेली APK पुन्हा पॅचिंगसाठी वापरता यावी म्हणून जतन करा.</string>
+    <string name="settings_system_save_patched_apks_title">पॅच केलेले APKs ठेवा</string>
+    <string name="settings_system_save_patched_apks_description">नंतर निर्यात करण्यासाठी किंवा व्यवस्थापकातून पुन्हा स्थापित करण्यासाठी पॅच केलेल्या APK ची एक प्रत जतन करा.</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">पॅच केलेले APK</string>
     <string name="settings_system_patched_apks_description">जतन केलेल्या पॅच केलेल्या ॲप्लिकेशन फाइल्स व्यवस्थापित करते</string>

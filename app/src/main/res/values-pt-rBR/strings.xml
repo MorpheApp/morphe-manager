@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Atualização do Morphe disponível</string>
     <string name="home_update_available_subtitle">Nova versão pronta para instalação</string>
+    <string name="home_blocked_source_title">Fonte de patch bloqueada detectada</string>
+    <string name="home_blocked_source_subtitle">Toque para revisar e remover</string>
+    <string name="home_metadata_errors_title">Algumas fontes de patch estão indisponíveis</string>
+    <string name="home_metadata_errors_subtitle">Toque para revisar as fontes</string>
+    <string name="home_metered_skipped_title">Atualizações pausadas em dados móveis</string>
+    <string name="home_metered_skipped_subtitle">Toque para permitir atualizações usando dados móveis</string>
     <string name="home_update_error">Falha na atualização</string>
-    <string name="home_update_error_subtitle">Verifique sua conexão com a internet e tente novamente</string>
+    <string name="home_update_error_subtitle">Algo deu errado ao atualizar as fontes</string>
     <string name="home_update_skipped_metered">Atualizações ignoradas</string>
     <string name="home_update_skipped_metered_subtitle">Dados móveis estão ativos</string>
     <string name="home_updating_sources">Atualizando fontes…</string>
@@ -35,12 +41,24 @@
     <string name="home_app_sort_name_asc_description">Alfabética, de A a Z</string>
     <string name="home_app_sort_name_desc_description">Ordem alfabética inversa, de Z a A</string>
     <string name="home_app_sort_updates_first">Atualizações de patch primeiro</string>
-    <string name="home_app_sort_updates_first_description">Aplicativos com selos de atualização primeiro, depois em ordem recomendada</string>
+    <string name="home_app_sort_updates_first_description">Apps com selos de atualização primeiro, depois em ordem recomendada</string>
     <string name="home_no_apps_title">Nenhum app disponível</string>
     <string name="home_no_apps_subtitle">Adicione uma fonte de patches ou habilite uma existente em %s</string>
     <string name="home_no_apps_search_subtitle">Nenhum app corresponde a \"%s\"</string>
     <string name="home_all_apps_hidden_title">Todos os apps estão ocultos</string>
     <string name="home_all_apps_hidden_subtitle">Você ocultou todos os apps da tela inicial</string>
+    <string name="home_category_add">Adicionar categoria</string>
+    <string name="home_category_all_apps">Todos os apps</string>
+    <string name="home_category_custom">Personalizado</string>
+    <string name="home_category_uncategorized">Não categorizado</string>
+    <string name="home_category_new_title">Nova categoria</string>
+    <string name="home_category_rename_title">Renomear categoria</string>
+    <string name="home_category_name">Nome da categoria</string>
+    <string name="home_category_move_to">Mover para categoria</string>
+    <string name="home_category_move_selected_title">Mover aplicativos selecionados</string>
+    <string name="home_category_delete_confirm_title">Excluir categoria</string>
+    <string name="home_category_delete_confirm_message">Excluir categoria &lt;b&gt;%1$s&lt;/b&gt;? Os aplicativos nela serão movidos de volta para &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Ações indisponíveis para esta categoria</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Qual app você quer patchear?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -63,7 +81,7 @@
     <string name="home_greeting_10">Movido a cafeína e bons patches</string>
     <!-- Morning greetings (5:00–11:59) -->
     <string name="home_greeting_morning_1">Levante e atualize</string>
-    <string name="home_greeting_morning_2">Bom dia! Aplicativos não se atualizam sozinhos</string>
+    <string name="home_greeting_morning_2">Bom dia! Apps não se atualizam sozinhos</string>
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">Cai a tarde e você sem atualização? Atualize algo</string>
     <string name="home_greeting_afternoon_2">O patching pós-almoço é diferente</string>
@@ -85,7 +103,7 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fontes de patches</string>
     <string name="sources_sort_title">Ordenar fontes de patch</string>
-    <string name="sources_sort_manual">Pedido manual</string>
+    <string name="sources_sort_manual">Ordem manual</string>
     <string name="sources_sort_manual_hint">Pressione e segure uma fonte para reordenar</string>
     <string name="sources_sort_last_updated">Última atualização</string>
     <string name="sources_sort_last_updated_description">Atualizações da fonte mais recente primeiro</string>
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Aplica patches nas versões experimentais do app, se disponíveis</string>
     <string name="sources_management_already_exists">Esta fonte já foi adicionada</string>
     <string name="sources_management_invalid_url">URL de origem inválida. Verifique o endereço e tente novamente.</string>
+    <string name="sources_management_blocked">Esta fonte de atualização está bloqueada e não pode ser adicionada</string>
+    <string name="sources_management_source_blocked_badge">Bloqueado</string>
     <string name="sources_management_metadata_unavailable">Metadados N/A</string>
     <string name="sources_management_metadata_unavailable_hint">O arquivo de metadados remoto não está disponível. A aplicação de patches com o pacote instalado ainda funciona, mas a atualização automática está desativada para esta fonte.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">O pacote de patches não pôde ser baixado. A URL de origem pode estar incorreta ou o arquivo não existir.</string>
@@ -138,7 +158,7 @@
     <string name="home_apk_availability_dialog_simple">Para aplicar os patches no app &lt;b&gt;%s&lt;/b&gt;, você precisa do APK sem patches na versão:</string>
     <string name="home_apk_availability_dialog_expert">Para aplicar os patches no app &lt;b&gt;%s&lt;/b&gt;, você precisa de um APK sem patches na versão:</string>
     <string name="home_apk_availability_recommended_label">Recomendado</string>
-    <string name="home_apk_availability_unpatched_label">Sem patches</string>
+    <string name="home_apk_availability_unpatched_label">Original</string>
     <string name="home_apk_availability_incompatible_label">Incompatível</string>
     <string name="home_apk_availability_yes">Sim, me ajude a encontrar um APK</string>
     <string name="home_apk_availability_no">Não, eu já tenho um APK</string>
@@ -216,7 +236,7 @@ Para obter os melhores resultados, este app recomenda aplicar os patches em um &
     <string name="morphe_experimental_app_version_dialog_title">Você quer experimentar? 🧪</string>
     <string name="morphe_experimental_app_version_dialog_message">Esta versão de &lt;b&gt;%s&lt;/b&gt; tem suporte experimental inicial&lt;br/&gt;&lt;br/&gt;🔧 Espere comportamentos estranhos do app ou bugs não identificados, pois os patches estão sendo refinados para esta versão do app</string>
     <string name="home_dialog_unsupported_version_dialog_title">Versão não suportada</string>
-    <string name="home_dialog_unsupported_version_dialog_description">Este APK não é uma versão recomendada do app. Prosseguir pode resultar em mau funcionamento</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Este APK não é uma versão recomendada do app. Prosseguir pode resultar em um app não funcional.</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Continuar mesmo assim</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versões compatíveis:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Não suportado</string>
@@ -478,6 +498,8 @@ A desinstalação apagará permanentemente todos os dados do aplicativo."</strin
     <string name="settings_appearance_home_screen">Tela inicial</string>
     <string name="settings_appearance_greeting_phrases">Frases de saudação</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostrar uma mensagem de saudação na tela inicial</string>
+    <string name="settings_appearance_app_grouping">Agrupamento de aplicativos</string>
+    <string name="settings_appearance_app_grouping_description">Mostrar um alternador de tela inicial para agrupar aplicativos por origem ou suas próprias categorias, mantendo a seleção quando desativado</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ícone do app</string>
     <string name="settings_appearance_app_icon_default">Padrão</string>
@@ -661,14 +683,12 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_prompt_installer_on_install_description">Mostra a janela de seleção de instalador a cada vez que você instalar um app patcheado</string>
     <string name="settings_auto_install_with_shizuku">Instalação automática após a aplicação do patch</string>
     <string name="settings_auto_install_with_shizuku_description">Instala silenciosamente o APK patcheado assim que a aplicação de patches for concluída</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" está habilitado - a instalação automática será ignorada</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Otimização de bateria</string>
     <string name="settings_system_battery_optimization_description">Mantém o patcher em execução quando o app é minimizado</string>
     <string name="settings_system_performance">Desempenho</string>
     <string name="settings_system_process_runtime">Processos de runtime</string>
     <string name="settings_system_process_runtime_description">Executa o patch em um processo separado para melhor estabilidade</string>
-    <string name="settings_system_process_runtime_memory_limit">Limite de memória</string>
     <string name="settings_system_process_runtime_memory_limit_description">Limites mais altos aceleram o patching em dispositivos compatíveis</string>
     <string name="settings_system_process_runtime_enable">Habilitar processo de runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memória disponível para patching</string>
@@ -721,6 +741,31 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_apks_deleted_all">APKs excluídos com sucesso</string>
     <string name="settings_system_apks_export_zip_success">APKs selecionados exportados</string>
     <string name="settings_system_apks_export_zip_failed">Falha ao exportar os APKs selecionados</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Gerenciamento de armazenamento</string>
+    <string name="settings_system_storage_management_description">Analise o uso do disco e limpe os arquivos em cache</string>
+    <string name="settings_system_storage_keystore_title">Armazenamento de chaves de assinatura</string>
+    <string name="settings_system_storage_app_data_title">Dados do app</string>
+    <string name="settings_system_storage_patch_bundles_title">Pacotes de patch</string>
+    <string name="settings_system_storage_http_cache_title">Cache da rede</string>
+    <string name="settings_system_storage_http_cache_description">Respostas HTTP armazenadas em cache para acelerar as atualizações</string>
+    <string name="settings_system_storage_installer_cache_title">Cache do instalador externo</string>
+    <string name="settings_system_storage_installer_cache_description">Cópias de APK encaminhadas para instaladores de terceiros</string>
+    <string name="settings_system_storage_patcher_workspace_title">Espaço de trabalho do Patcher</string>
+    <string name="settings_system_storage_patcher_workspace_description">Arquivos de tempo de execução do Patcher e dados temporários descartados</string>
+    <string name="settings_system_storage_temporary_title">Arquivos temporários</string>
+    <string name="settings_system_storage_temporary_description">Arquivos de trabalho criados durante o patching</string>
+    <string name="settings_system_storage_clear_all">Limpar todos os caches</string>
+    <string name="settings_system_storage_clear_all_description">Libera todo o espaço de cache recuperável de uma vez</string>
+    <string name="settings_system_storage_clear_all_confirm">Isso limpa as respostas de rede em cache, as cópias do instalador em espera e os arquivos temporários. Os APKs originais e modificados são mantidos</string>
+    <string name="settings_system_storage_cleared">%s liberados</string>
+    <string name="settings_system_storage_nothing_to_clear">Nada para limpar</string>
+    <string name="settings_system_storage_open_app_info_title">Abrir armazenamento de aplicativos Android</string>
+    <string name="settings_system_storage_open_app_info_description">Gerenciar ou limpar todos os dados do Morphe pelas configurações do sistema</string>
+    <string name="settings_system_save_original_apks_title">Manter APKs originais</string>
+    <string name="settings_system_save_original_apks_description">Salve o APK pré-patch para que ele possa ser reutilizado para repatching sem precisar selecionar o arquivo novamente</string>
+    <string name="settings_system_save_patched_apks_title">Manter APKs corrigidos</string>
+    <string name="settings_system_save_patched_apks_description">Salve uma cópia do APK corrigido para exportação posterior ou reinstalação a partir do gerenciador</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs patcheados</string>
     <string name="settings_system_patched_apks_description">Gerencia arquivos de aplicativos patcheados salvos</string>
