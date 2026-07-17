@@ -11,12 +11,10 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -27,8 +25,8 @@ import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.*
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
@@ -353,17 +351,14 @@ private fun LanguageSection(
                 title = stringResource(R.string.settings_appearance_app_language_current),
                 subtitle = currentLanguage,
                 leadingContent = {
-                    Surface(
-                        shape = RoundedCornerShape(12.dp),
-                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                        modifier = Modifier.size(40.dp)
+                    Box(
+                        modifier = Modifier.size(MorpheDefaults.IconSize),
+                        contentAlignment = Alignment.Center
                     ) {
-                        Box(contentAlignment = Alignment.Center) {
-                            Text(
-                                text = currentLanguageOption?.flag ?: "🌐",
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                        }
+                        Text(
+                            text = currentLanguageOption?.flag ?: "🌐",
+                            style = MaterialTheme.typography.titleMedium
+                        )
                     }
                 },
                 trailingContent = {

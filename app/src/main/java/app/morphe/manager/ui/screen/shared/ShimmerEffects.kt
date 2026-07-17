@@ -244,11 +244,14 @@ fun ShimmerApkItem() {
 
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(6.dp)
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     ShimmerText(widthFraction = 0.6f, height = 18.dp)
-                    ShimmerText(widthFraction = 0.8f, height = 14.dp)
-                    ShimmerText(widthFraction = 0.4f, height = 14.dp)
+                    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                        ShimmerText(widthFraction = 0.8f, height = 14.dp)
+                        ShimmerText(widthFraction = 0.4f, height = 14.dp)
+                        ShimmerText(widthFraction = 0.25f, height = 14.dp)
+                    }
                 }
             }
 

@@ -48,6 +48,7 @@ import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
+import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -69,7 +70,8 @@ data class ApkItemData(
     val version: String,
     val fileSize: Long,
     val file: File? = null,
-    val installType: InstallType? = null
+    val installType: InstallType? = null,
+    val abis: List<String> = emptyList()
 )
 
 private val ApkItemData.selectionKey: String
@@ -83,7 +85,8 @@ private data class ApkItemDataWithApp(
     val fileSize: Long,
     val installedApp: InstalledApp,
     val file: File? = null,
-    val installType: InstallType = InstallType.SAVED
+    val installType: InstallType = InstallType.SAVED,
+    val abis: List<String> = emptyList()
 ) {
     fun toApkItemData() = ApkItemData(
         packageName = packageName,
@@ -91,7 +94,8 @@ private data class ApkItemDataWithApp(
         version = version,
         fileSize = fileSize,
         file = file,
-        installType = installType
+        installType = installType,
+        abis = abis
     )
 }
 
@@ -198,7 +202,8 @@ private fun PatchedApksContent(
                     fileSize = savedFile.length(),
                     installedApp = app,
                     file = savedFile,
-                    installType = app.installType
+                    installType = app.installType,
+                    abis = NativeLibStripper.extractAbisFromApk(savedFile)
                 )
             }
         }
@@ -371,6 +376,7 @@ private fun OriginalApksContent(
                     apk.packageName,
                     preferredSource = AppDataSource.ORIGINAL_APK
                 )
+                val apkFile = File(apk.filePath).takeIf { it.exists() }
 
                 OriginalApkEntry(
                     data = ApkItemData(
@@ -378,7 +384,8 @@ private fun OriginalApksContent(
                         displayName = resolvedData.displayName,
                         version = apk.version,
                         fileSize = apk.fileSize,
-                        file = File(apk.filePath).takeIf { it.exists() }
+                        file = apkFile,
+                        abis = apkFile?.let { NativeLibStripper.extractAbisFromApk(it) } ?: emptyList()
                     ),
                     apk = apk
                 )
@@ -797,20 +804,29 @@ private fun ApkItemCard(
                             fontWeight = FontWeight.Medium,
                             color = LocalDialogTextColor.current
                         )
-                        Text(
-                            text = data.packageName,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = LocalDialogSecondaryTextColor.current
-                        )
-                        Text(
-                            text = stringResource(
-                                R.string.settings_system_apk_item_info,
-                                data.version,
-                                formatBytes(data.fileSize)
-                            ),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = LocalDialogSecondaryTextColor.current
-                        )
+                        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                            Text(
+                                text = data.packageName,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = LocalDialogSecondaryTextColor.current
+                            )
+                            Text(
+                                text = stringResource(
+                                    R.string.settings_system_apk_item_info,
+                                    data.version,
+                                    formatBytes(data.fileSize)
+                                ),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = LocalDialogSecondaryTextColor.current
+                            )
+                            if (data.abis.isNotEmpty()) {
+                                Text(
+                                    text = data.abis.joinToString(" • "),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = LocalDialogSecondaryTextColor.current
+                                )
+                            }
+                        }
                     }
                 }
 

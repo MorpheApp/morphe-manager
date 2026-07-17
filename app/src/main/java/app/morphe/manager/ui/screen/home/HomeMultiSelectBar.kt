@@ -73,6 +73,11 @@ internal fun MultiSelectBar(
     val resetOrderDone = stringResource(R.string.reset_order_done)
     val doneLabel = stringResource(R.string.done)
     val moveToCategoryLabel = stringResource(R.string.home_category_move_to)
+    val selectAllLabel = stringResource(R.string.select_all)
+    val selectAllDone = stringResource(R.string.select_all_done)
+    val deselectAllLabel = stringResource(R.string.deselect_all)
+    val deselectAllDone = stringResource(R.string.deselect_all_done)
+    val selectedLabel = stringResource(R.string.selected).lowercase()
 
     MultiSelectShell(visible = visible, modifier = modifier) {
         AnimatedContent(
@@ -115,38 +120,70 @@ internal fun MultiSelectBar(
                     }
                 }
             } else {
-                SelectionActionBar(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
-                    selectedCount = selectedCount,
-                    totalCount = totalCount,
-                    onSelectAll = onSelectAll,
-                    onDeselectAll = onDeselectAll,
-                    onCancel = onCancel
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    if (onMoveToCategory != null) {
-                        ActionPillButton(
-                            onClick = onMoveToCategory,
-                            icon = Icons.Outlined.FolderOpen,
-                            contentDescription = moveToCategoryLabel,
-                            tooltip = moveToCategoryLabel,
-                            enabled = selectedCount > 0
+                    AnimatedContent(
+                        targetState = selectedCount,
+                        transitionSpec = MorpheAnimations.compactCounterTransitionSpec,
+                        label = "multibar_count"
+                    ) { count ->
+                        Text(
+                            text = "$count $selectedLabel",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
-                    ActionPillButton(
-                        onClick = withToast(actionDoneMessage, onAction),
-                        icon = actionIcon,
-                        contentDescription = actionContentDescription,
-                        tooltip = actionContentDescription,
-                        enabled = selectedCount > 0,
-                        colors = actionColors
-                    )
-                    if (showReorderButton) {
+                    ActionPillRow {
                         ActionPillButton(
-                            onClick = onEnterReorder,
-                            icon = Icons.Outlined.Reorder,
-                            contentDescription = reorderListLabel,
-                            tooltip = reorderListLabel,
+                            onClick = withToast(selectAllDone, onSelectAll),
+                            icon = Icons.Outlined.DoneAll,
+                            contentDescription = selectAllLabel,
+                            tooltip = selectAllLabel,
+                            enabled = selectedCount < totalCount
+                        )
+                        ActionPillButton(
+                            onClick = withToast(deselectAllDone, onDeselectAll),
+                            icon = Icons.Outlined.RemoveDone,
+                            contentDescription = deselectAllLabel,
+                            tooltip = deselectAllLabel,
                             enabled = selectedCount > 0
+                        )
+                        if (onMoveToCategory != null) {
+                            ActionPillButton(
+                                onClick = onMoveToCategory,
+                                icon = Icons.Outlined.FolderOpen,
+                                contentDescription = moveToCategoryLabel,
+                                tooltip = moveToCategoryLabel,
+                                enabled = selectedCount > 0
+                            )
+                        }
+                        ActionPillButton(
+                            onClick = withToast(actionDoneMessage, onAction),
+                            icon = actionIcon,
+                            contentDescription = actionContentDescription,
+                            tooltip = actionContentDescription,
+                            enabled = selectedCount > 0,
+                            colors = actionColors
+                        )
+                        if (showReorderButton) {
+                            ActionPillButton(
+                                onClick = onEnterReorder,
+                                icon = Icons.Outlined.Reorder,
+                                contentDescription = reorderListLabel,
+                                tooltip = reorderListLabel,
+                                enabled = selectedCount > 0
+                            )
+                        }
+                        ActionPillButton(
+                            onClick = onCancel,
+                            icon = Icons.Outlined.Close,
+                            contentDescription = cancelLabel,
+                            tooltip = cancelLabel
                         )
                     }
                 }

@@ -6,6 +6,8 @@
 package app.morphe.manager.ui.screen
 
 import android.net.Uri
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -73,7 +75,9 @@ fun SettingsScreen(
     homeViewModel: HomeViewModel,
     themeViewModel: ThemeSettingsViewModel = koinViewModel(),
     importExportViewModel: ImportExportViewModel = koinViewModel(),
-    patchOptionsViewModel: PatchOptionsViewModel = koinViewModel(),
+    patchOptionsViewModel: PatchOptionsViewModel = koinViewModel(
+        viewModelStoreOwner = LocalActivity.current as ComponentActivity
+    ),
     settingsViewModel: SettingsViewModel = koinViewModel(),
     updateViewModel: UpdateViewModel = koinViewModel {
         parametersOf(false)

@@ -10,25 +10,18 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Article
-import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.Public
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.shared.MorpheIcon
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.screen.shared.MorpheSettingsDivider
-import app.morphe.manager.ui.screen.shared.SettingsItem
 import app.morphe.manager.ui.screen.shared.SettingsItem
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
 import app.morphe.manager.util.toast
@@ -50,28 +43,17 @@ fun ColumnScope.AboutSection(
     val noNetworkToast = stringResource(R.string.no_network_toast)
     val shareWebsiteChooserTitle = stringResource(R.string.settings_system_share_website)
 
-    // App info item
-    val appIconPainter = remember {
-        AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
-    }.let { rememberDrawablePainter(it) }
-
     SettingsItem(
         onClick = onAboutClick,
         title = stringResource(R.string.app_name),
         subtitle = stringResource(R.string.version) + " " + BuildConfig.VERSION_NAME,
         leadingContent = {
             Image(
-                painter = appIconPainter,
+                painter = rememberDrawablePainter(
+                    drawable = AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
+                ),
                 contentDescription = null,
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(RoundedCornerShape(12.dp))
-            )
-        },
-        trailingContent = {
-            MorpheIcon(
-                icon = Icons.Outlined.ChevronRight,
-                tint = MaterialTheme.colorScheme.primary
+                modifier = Modifier.size(MorpheDefaults.IconSize)
             )
         }
     )

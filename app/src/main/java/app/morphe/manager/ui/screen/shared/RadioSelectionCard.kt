@@ -5,14 +5,19 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Check
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.*
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
@@ -22,6 +27,7 @@ import androidx.compose.ui.unit.dp
  *
  * @param leadingContent  Overrides the default [StatusCircleIcon]/[StatusCirclePlaceholder] leading
  *                        indicator when non-null.
+ * @param footerContent   Optional composable rendered below a divider at the bottom of the card.
  */
 @Composable
 fun RadioSelectionCard(
@@ -32,6 +38,7 @@ fun RadioSelectionCard(
     contentDescription: String? = null,
     stateDescription: String? = null,
     leadingContent: (@Composable () -> Unit)? = null,
+    footerContent: (@Composable () -> Unit)? = null,
     content: @Composable RowScope.() -> Unit
 ) {
     val colors = MaterialTheme.colorScheme
@@ -51,19 +58,36 @@ fun RadioSelectionCard(
             if (stateDescription != null) this.stateDescription = stateDescription
         }
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(MorpheDefaults.ContentPadding),
-            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            if (leadingContent != null) {
-                leadingContent()
-            } else {
-                DefaultRadioIndicator(selected = selected, enabled = enabled)
+        Column {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(MorpheDefaults.ContentPadding),
+                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if (leadingContent != null) {
+                    leadingContent()
+                } else {
+                    DefaultRadioIndicator(selected = selected, enabled = enabled)
+                }
+                content()
             }
-            content()
+            if (footerContent != null) {
+                HorizontalDivider(color = colors.outlineVariant.copy(alpha = 0.5f))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(colors.onSurface.copy(alpha = 0.06f))
+                        .padding(
+                            horizontal = MorpheDefaults.ContentPadding,
+                            vertical = MorpheDefaults.ContentPaddingSmall
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    footerContent()
+                }
+            }
         }
     }
 }
@@ -82,7 +106,8 @@ fun RadioSelectionCard(
     enabled: Boolean = true,
     contentDescription: String? = null,
     stateDescription: String? = null,
-    leadingContent: (@Composable () -> Unit)? = null
+    leadingContent: (@Composable () -> Unit)? = null,
+    footerContent: (@Composable () -> Unit)? = null
 ) {
     RadioSelectionCard(
         selected = selected,
@@ -91,7 +116,8 @@ fun RadioSelectionCard(
         enabled = enabled,
         contentDescription = contentDescription,
         stateDescription = stateDescription,
-        leadingContent = leadingContent
+        leadingContent = leadingContent,
+        footerContent = footerContent
     ) {
         val colors = MaterialTheme.colorScheme
         IconTextRow(
@@ -104,6 +130,37 @@ fun RadioSelectionCard(
             trailingContent = null
         )
     }
+}
+
+/**
+ * Bordered square container for custom leading indicators in [RadioSelectionCard].
+ * Border turns primary when selected, outlineVariant otherwise.
+ */
+@Composable
+fun SelectionLeadingBox(
+    selected: Boolean,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    size: Dp = 28.dp,
+    cornerRadius: Dp = 8.dp,
+    content: @Composable BoxScope.() -> Unit
+) {
+    val colors = MaterialTheme.colorScheme
+    Box(
+        modifier = modifier
+            .size(size)
+            .border(
+                width = 1.dp,
+                color = when {
+                    !enabled -> colors.outlineVariant.copy(alpha = 0.5f)
+                    selected -> colors.primary
+                    else -> colors.outlineVariant
+                },
+                shape = RoundedCornerShape(cornerRadius)
+            ),
+        contentAlignment = Alignment.Center,
+        content = content
+    )
 }
 
 @Composable
