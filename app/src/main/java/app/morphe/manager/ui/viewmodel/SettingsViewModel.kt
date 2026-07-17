@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
+import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
@@ -215,6 +216,10 @@ class SettingsViewModel(
         prefs.autoInstallWithShizuku.update(enabled)
     }
 
+    fun setAutoUninstallWithShizuku(enabled: Boolean) = viewModelScope.launch {
+        prefs.autoUninstallWithShizuku.update(enabled)
+    }
+
     fun setUseCustomFilePicker(enabled: Boolean) = viewModelScope.launch {
         prefs.useCustomFilePicker.update(enabled)
         prefs.customFilePickerUserConfigured.update(true)
@@ -255,6 +260,11 @@ class SettingsViewModel(
     ): InstallerManager.Entry? = installerManager.describeEntry(token, installTarget)
 
     fun openShizukuApp(): Boolean = installerManager.openShizukuApp()
+
+    fun getShizukuStatus(): SessionInstaller.ShizukuStatus =
+        installerManager.shizukuStatus(InstallerManager.InstallTarget.PATCHER)
+
+    fun requestShizukuPermission(): Boolean = installerManager.requestShizukuPermission()
 
     /** Summary flow: packageName → (bundleUid → patchCount) */
     val selectionsSummary: StateFlow<Map<String, Map<Int, Int>>> =

@@ -157,6 +157,7 @@ fun PatcherScreen(
     val outputFile = patcherViewModel.outputFile
 
     val autoInstallWithShizuku by prefs.autoInstallWithShizuku.getAsState()
+    val autoUninstallWithShizuku by prefs.autoUninstallWithShizuku.getAsState()
     val primaryInstallerPref by prefs.installerPrimary.getAsState()
     val promptInstallerOnInstall by prefs.promptInstallerOnInstall.getAsState()
 
@@ -169,7 +170,8 @@ fun PatcherScreen(
             installViewModel.install(
                 outputFile = outputFile,
                 originalPackageName = patcherViewModel.packageName,
-                onPersistApp = { pkg, type -> patcherViewModel.persistPatchedApp(pkg, type) }
+                onPersistApp = { pkg, type -> patcherViewModel.persistPatchedApp(pkg, type) },
+                autoUninstallOnConflict = true
             )
         }
     }
@@ -491,9 +493,17 @@ fun PatcherScreen(
                 installViewModel.proceedWithSelectedInstaller(selectedToken)
             },
             onOpenShizuku = installerManager::openShizukuApp,
+            shizukuStatusProvider = {
+                installerManager.shizukuStatus(InstallerManager.InstallTarget.PATCHER)
+            },
+            onRequestShizukuPermission = installerManager::requestShizukuPermission,
             autoInstallEnabled = autoInstallWithShizuku,
             onAutoInstallToggle = { enabled ->
                 scope.launch { prefs.autoInstallWithShizuku.update(enabled) }
+            },
+            autoUninstallEnabled = autoUninstallWithShizuku,
+            onAutoUninstallToggle = { enabled ->
+                scope.launch { prefs.autoUninstallWithShizuku.update(enabled) }
             },
             installerPromptEnabled = promptInstallerOnInstall
         )

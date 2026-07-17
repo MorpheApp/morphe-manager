@@ -599,6 +599,11 @@ class InstallerManager(
 
     fun openShizukuApp(): Boolean = sessionInstaller.launchShizukuApp()
 
+    fun shizukuStatus(target: InstallTarget): SessionInstaller.ShizukuStatus =
+        sessionInstaller.shizukuStatus(target)
+
+    fun requestShizukuPermission(): Boolean = sessionInstaller.requestShizukuPermission()
+
     /**
      * Returns a deduplicated list of entries for [target], ensuring [token] is always present
      * even if it's not in the raw list (e.g. a previously selected external installer).
