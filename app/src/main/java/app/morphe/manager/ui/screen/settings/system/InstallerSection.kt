@@ -237,7 +237,7 @@ fun InstallerSelectionDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
         ) {
             options.forEach { option ->
                 val enabled = option.availability.available
@@ -387,7 +387,6 @@ fun InstallerOptionItem(
         onSelect = onSelect,
         enabled = enabled,
         stateDescription = stateDescription,
-        modifier = Modifier.padding(vertical = 2.dp),
         leadingContent = if (hasCustomIcon) {
             {
                 SelectionLeadingBox(selected = selected, enabled = enabled) {
@@ -399,31 +398,38 @@ fun InstallerOptionItem(
                     )
                 }
             }
-        } else null
-    ) {
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
-        ) {
-            IconTextRow(
-                leadingContent = null,
-                title = option.label,
-                description = description,
-                titleColor = if (enabled) colors.onSurface else colors.onSurface.copy(alpha = 0.38f),
-                descriptionColor = if (enabled) colors.onSurfaceVariant else colors.onSurfaceVariant.copy(alpha = 0.38f),
-                trailingContent = null
-            )
-
-            if (reasonText != null) {
-                InfoBadge(
-                    text = reasonText,
-                    style = InfoBadgeStyle.Warning,
-                    icon = Icons.Outlined.Warning,
-                    isCompact = true,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
+        } else null,
+        footerContent = reasonText?.let { text ->
+            {
+                val tint = MaterialTheme.colorScheme.onSurfaceVariant
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Warning,
+                        contentDescription = null,
+                        tint = tint,
+                        modifier = Modifier.size(12.dp)
+                    )
+                    Text(
+                        text = text,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = tint
+                    )
+                }
             }
         }
+    ) {
+        IconTextRow(
+            modifier = Modifier.weight(1f),
+            leadingContent = null,
+            title = option.label,
+            description = description,
+            titleColor = if (enabled) colors.onSurface else colors.onSurface.copy(alpha = 0.38f),
+            descriptionColor = if (enabled) colors.onSurfaceVariant else colors.onSurfaceVariant.copy(alpha = 0.38f),
+            trailingContent = null
+        )
     }
 }
 
