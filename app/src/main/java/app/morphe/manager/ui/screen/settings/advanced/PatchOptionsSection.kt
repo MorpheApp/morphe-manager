@@ -8,7 +8,9 @@ package app.morphe.manager.ui.screen.settings.advanced
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,8 +34,6 @@ import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.PatchOptionKeys
 import app.morphe.manager.ui.viewmodel.PatchOptionsViewModel
 import app.morphe.manager.util.KnownApps
-import app.morphe.manager.util.toast
-import kotlinx.coroutines.launch
 
 /**
  * Advanced patch options section.
@@ -45,10 +45,6 @@ fun PatchOptionsSection(
     patchOptionsViewModel: PatchOptionsViewModel,
     homeViewModel: HomeViewModel
 ) {
-    val scope = rememberCoroutineScope()
-    val context = LocalContext.current
-    val updatingSourcesText = stringResource(R.string.home_updating_sources)
-
     // Collect patch options from ViewModel
     val youtubePatches by patchOptionsViewModel.youtubePatches.collectAsState()
     val youtubeMusicPatches by patchOptionsViewModel.youtubeMusicPatches.collectAsState()
@@ -57,11 +53,6 @@ fun PatchOptionsSection(
     // Track bundle update progress to show loading state
     val bundleUpdateProgress by homeViewModel.patchBundleRepository.bundleUpdateProgress.collectAsStateWithLifecycle(null)
     val isBundleUpdating = bundleUpdateProgress != null && bundleUpdateProgress!!.result == PatchBundleRepository.BundleUpdateResult.None
-
-    // Keep VM in sync with bundle-updating state
-    LaunchedEffect(isBundleUpdating) {
-        patchOptionsViewModel.onBundleUpdatingChanged(isBundleUpdating)
-    }
 
     val bundleInfo by homeViewModel.patchBundleRepository.bundleInfoFlow
         .collectAsStateWithLifecycle(emptyMap())
@@ -76,7 +67,11 @@ fun PatchOptionsSection(
         }
     }
 
-    val noPatchesAvailable = patchOptionsViewModel.noPatchesAvailable
+    // Derived in composition so Compose observes the patch flows and `isLoading`,
+    // otherwise the empty-state stays latched until the next recomposition trigger
+    val noPatchesAvailable = !isBundleUpdating && !patchOptionsViewModel.isLoading &&
+            loadError == null &&
+            youtubePatches.isEmpty() && youtubeMusicPatches.isEmpty()
 
     patchOptionsViewModel.showThemeDialogFor?.let { packageName ->
         ThemeColorDialog(
@@ -133,35 +128,21 @@ fun PatchOptionsSection(
             }
 
             loadError != null -> {
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    InfoBadge(
-                        text = stringResource(R.string.settings_advanced_patch_options_load_error) +
-                                "\n" + loadError,
-                        style = InfoBadgeStyle.Error,
-                        icon = Icons.Outlined.Error,
-                        isExpanded = true
-                    )
-                    ActionPillButton(
-                        onClick = {
-                            scope.launch {
-                                homeViewModel.updateMorpheBundleWithChangelogClear()
-                                patchOptionsViewModel.refresh()
-                                context.toast(updatingSourcesText)
-                            }
-                        },
-                        icon = Icons.Outlined.Refresh,
-                        contentDescription = stringResource(R.string.retry),
-                        label = stringResource(R.string.retry),
-                        modifier = Modifier.align(Alignment.End)
-                    )
-                }
+                InfoBadge(
+                    text = stringResource(R.string.settings_advanced_patch_options_load_error) +
+                            "\n" + loadError,
+                    style = InfoBadgeStyle.Error,
+                    icon = Icons.Outlined.Error,
+                    isExpanded = true
+                )
             }
 
             else -> {
                 InfoBadge(
                     icon = Icons.Outlined.Info,
                     text = stringResource(R.string.settings_advanced_patch_options_restart_message),
-                    style = InfoBadgeStyle.Success
+                    style = InfoBadgeStyle.Success,
+                    isExpanded = true
                 )
 
                 // YouTube
