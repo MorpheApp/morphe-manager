@@ -180,8 +180,6 @@ class SessionInstaller(private val app: Application) {
      * Fallback for when [installInternal] throws [SessionDeadException].
      * The caller is responsible for monitoring completion via package broadcasts.
      */
-    @SuppressLint("RequestInstallPackagesPolicy")
-    @Suppress("DEPRECATION")
     fun launchIntentInstall(apkFile: File) {
         launchPackageInstall(apkFile, app.packageName)
     }
@@ -190,12 +188,18 @@ class SessionInstaller(private val app: Application) {
      * Launches the system package installer while asking Android to record Google Play Store
      * as the installer package. This mirrors KingInstaller's non-root install behavior.
      */
-    @SuppressLint("RequestInstallPackagesPolicy")
-    @Suppress("DEPRECATION")
     fun launchPlayStoreInstall(apkFile: File) {
         launchPackageInstall(apkFile, PLAY_STORE_INSTALLER_PACKAGE)
     }
 
+    /**
+     * Fires the legacy [Intent.ACTION_INSTALL_PACKAGE] flow attributing the install to
+     * [installerPackageName]. Used as the fallback path when session-based installs are
+     * unavailable. All install flows are user-initiated from patcher/installer UI, which
+     * satisfies the REQUEST_INSTALL_PACKAGES policy.
+     */
+    @SuppressLint("RequestInstallPackagesPolicy")
+    @Suppress("DEPRECATION")
     private fun launchPackageInstall(apkFile: File, installerPackageName: String) {
         require(apkFile.exists()) { "APK does not exist: ${apkFile.path}" }
         Log.d(TAG, "launchPackageInstall: ${apkFile.name}, installer=$installerPackageName")
@@ -371,6 +375,13 @@ class SessionInstaller(private val app: Application) {
         )
     }
 
+    /**
+     * Dispatches Shizuku's permission prompt for this app. Returns false when Shizuku is
+     * missing, unsupported, not running, permission is already granted, or the IPC call failed.
+     *
+     * The prompt result is observed by callers via [shizukuStatus], so no
+     * [Shizuku.OnRequestPermissionResultListener] is registered here.
+     */
     fun requestShizukuPermission(): Boolean {
         val status = shizukuStatus(InstallerManager.InstallTarget.PATCHER)
         if (!status.installed || !status.supported || !status.running || status.permissionGranted) {
@@ -379,6 +390,8 @@ class SessionInstaller(private val app: Application) {
         return runCatching {
             Shizuku.requestPermission(SHIZUKU_PERMISSION_REQUEST_CODE)
             true
+        }.onFailure { error ->
+            Log.w(TAG, "Failed to request Shizuku permission", error)
         }.getOrDefault(false)
     }
 

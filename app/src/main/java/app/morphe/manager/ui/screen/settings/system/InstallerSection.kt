@@ -234,7 +234,7 @@ fun InstallerSelectionDialog(
 
         while (isActive) {
             inlineShizukuStatus = withContext(Dispatchers.IO) { shizukuStatusProvider() }
-            delay(1_500)
+            delay(1.5.seconds)
         }
     }
 
@@ -326,66 +326,59 @@ fun InstallerSelectionDialog(
                 }
 
                 if (isSelected && isShizukuOption && shizukuStatusProvider != null) {
-                    TextButton(
+                    MorpheDialogOutlinedButton(
+                        text = stringResource(R.string.installer_shizuku_status_action),
                         onClick = { showShizukuStatus = true },
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Text(
-                            text = stringResource(R.string.installer_shizuku_status_action),
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
-            }
-
-            AnimatedVisibility(
-                visible = selectedToken.supportsPlayStoreMode() &&
-                        options.any { it.token == selectedToken.withPlayStoreMode(true) },
-                enter = MorpheAnimations.expandFadeEnter,
-                exit = MorpheAnimations.shrinkFadeExit
-            ) {
-                SettingsGroup {
-                    SettingsItem(
-                        onClick = {
-                            if (installAsPlayStore) {
-                                installAsPlayStore = false
-                            } else {
-                                pendingPlayStoreModeConfirm = true
-                            }
-                        },
-                        leadingContent = { MorpheIcon(icon = Icons.Outlined.Storefront, size = 28.dp) },
-                        title = stringResource(R.string.installer_play_store_mode),
-                        subtitle = stringResource(R.string.installer_play_store_mode_description),
-                        trailingContent = {
-                            MorpheSwitch(
-                                checked = installAsPlayStore,
-                                onCheckedChange = null,
-                                modifier = Modifier.semantics {
-                                    stateDescription = if (installAsPlayStore) enabledState else disabledState
-                                }
-                            )
-                        }
+                        modifier = Modifier.fillMaxWidth(),
+                        icon = Icons.Outlined.Info
                     )
                 }
             }
 
-            MorpheSettingsDivider(fullWidth = true)
+            val showPlayStoreToggle = selectedToken.supportsPlayStoreMode() &&
+                    options.any { it.token == selectedToken.withPlayStoreMode(true) }
+            val showAutoInstallToggle = selectedToken.isShizukuToken() && onAutoInstallToggle != null
+            val showPromptToggle = onInstallerPromptToggle != null
 
-            if (onInstallerPromptToggle != null || onAutoInstallToggle != null || onAutoUninstallToggle != null) {
+            if (showPlayStoreToggle || showAutoInstallToggle || showPromptToggle) {
+                MorpheSettingsDivider(fullWidth = true)
+
                 SettingsGroup {
                     AnimatedVisibility(
-                        visible = selectedToken.isShizukuToken() &&
-                                onAutoInstallToggle != null,
+                        visible = showPlayStoreToggle,
+                        enter = MorpheAnimations.expandFadeEnter,
+                        exit = MorpheAnimations.shrinkFadeExit
+                    ) {
+                        SettingsItem(
+                            onClick = {
+                                if (installAsPlayStore) {
+                                    installAsPlayStore = false
+                                } else {
+                                    pendingPlayStoreModeConfirm = true
+                                }
+                            },
+                            leadingContent = { MorpheIcon(icon = Icons.Outlined.Storefront, size = 28.dp) },
+                            title = stringResource(R.string.installer_play_store_mode),
+                            subtitle = stringResource(R.string.installer_play_store_mode_description),
+                            trailingContent = {
+                                MorpheSwitch(
+                                    checked = installAsPlayStore,
+                                    onCheckedChange = null,
+                                    modifier = Modifier.semantics {
+                                        stateDescription = if (installAsPlayStore) enabledState else disabledState
+                                    }
+                                )
+                            }
+                        )
+                    }
+
+                    AnimatedVisibility(
+                        visible = showAutoInstallToggle,
                         enter = MorpheAnimations.expandFadeEnter,
                         exit = MorpheAnimations.shrinkFadeExit
                     ) {
                         Column {
+                            if (showPlayStoreToggle) MorpheSettingsDivider()
                             SettingsItem(
                                 onClick = {
                                     val newValue = !autoInstallEnabled
@@ -438,12 +431,11 @@ fun InstallerSelectionDialog(
                                     )
                                 }
                             }
-
-                            MorpheSettingsDivider()
                         }
                     }
 
-                    if (onInstallerPromptToggle != null) {
+                    if (showPromptToggle) {
+                        if (showPlayStoreToggle || showAutoInstallToggle) MorpheSettingsDivider()
                         SettingsItem(
                             onClick = {
                                 val newValue = !installerPromptEnabled

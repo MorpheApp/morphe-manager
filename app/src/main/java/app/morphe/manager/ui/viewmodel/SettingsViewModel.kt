@@ -14,8 +14,10 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.domain.repository.*
+import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
+import app.morphe.manager.domain.repository.PatchOptionsRepository
+import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.syncFcmTopics
@@ -38,8 +40,6 @@ class SettingsViewModel(
     private val optionsRepository: PatchOptionsRepository,
     patchBundleRepository: PatchBundleRepository,
     private val appDataResolver: AppDataResolver,
-    originalApkRepository: OriginalApkRepository,
-    installedAppRepository: InstalledAppRepository,
     private val appContext: Context,
 ) : ViewModel() {
     /** True when Google Play Services is available; FCM handles notifications on these devices. */
@@ -141,18 +141,6 @@ class SettingsViewModel(
     fun toggleAllowMeteredUpdates(current: Boolean) = viewModelScope.launch {
         prefs.allowMeteredUpdates.update(!current)
     }
-    val originalApkCount: StateFlow<Int> = originalApkRepository.getAll()
-        .map { it.size }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
-
-    val patchedApkCount: StateFlow<Int> = installedAppRepository.getAll()
-        .map { it.size }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
-
-    val patchedPackagesCount: StateFlow<Int> =
-        selectionRepository.getPackagesWithSavedSelection()
-            .map { it.size }
-            .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 
     /**
      * True for the duration of the current settings session after the user enables expert mode for the first time.

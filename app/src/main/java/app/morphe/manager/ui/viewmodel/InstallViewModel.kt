@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.*
 import android.content.pm.PackageInfo
 import android.net.Uri
+import android.os.SystemClock
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,19 +16,15 @@ import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.installer.*
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.util.AppCoroutineScope
-import app.morphe.manager.util.AppDataResolver
-import app.morphe.manager.util.PM
-import app.morphe.manager.util.sha256OrNull
-import app.morphe.manager.util.simpleMessage
-import app.morphe.manager.util.toast
-import kotlin.time.Duration.Companion.seconds
+import app.morphe.manager.util.*
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
 import java.io.IOException
 import java.nio.file.Files
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * Centralized view model for all installation operations, mounting/unmounting and exporting.
@@ -328,61 +325,67 @@ class InstallViewModel : ViewModel(), KoinComponent {
         originalPackageName: String,
         onPersistApp: suspend (String, InstallType) -> Boolean
     ) {
+        currentInstallType = plan.installType()
+        pendingInstallToken = plan.installerToken()
+
         when (plan) {
             is InstallerManager.InstallPlan.Internal -> {
                 Log.d(TAG, "Using internal (standard) installer")
-                currentInstallType = InstallType.DEFAULT
-                pendingInstallToken = InstallerManager.Token.Internal
                 performStandardInstall(outputFile, originalPackageName, onPersistApp)
             }
 
             is InstallerManager.InstallPlan.PlayStore -> {
                 Log.d(TAG, "Using Play Store installer")
-                currentInstallType = InstallType.PLAY_STORE
-                pendingInstallToken = InstallerManager.Token.PlayStore
                 performPlayStoreInstall(outputFile, onPersistApp)
             }
 
             is InstallerManager.InstallPlan.RootPlayStore -> {
                 Log.d(TAG, "Using root Play Store installer")
-                currentInstallType = InstallType.ROOT_PLAY_STORE
-                pendingInstallToken = InstallerManager.Token.RootPlayStore
                 performRootPlayStoreInstall(outputFile, onPersistApp)
             }
 
             is InstallerManager.InstallPlan.Shizuku -> {
                 Log.d(TAG, "Using Shizuku installer")
-                currentInstallType = InstallType.SHIZUKU
-                pendingInstallToken = InstallerManager.Token.Shizuku
                 performShizukuInstall(outputFile, onPersistApp)
             }
 
             is InstallerManager.InstallPlan.ShizukuPlayStore -> {
                 Log.d(TAG, "Using Shizuku Play Store installer")
-                currentInstallType = InstallType.SHIZUKU_PLAY_STORE
-                pendingInstallToken = InstallerManager.Token.ShizukuPlayStore
                 performShizukuPlayStoreInstall(outputFile, onPersistApp)
             }
 
             is InstallerManager.InstallPlan.Mount -> {
                 Log.d(TAG, "Using root/mount installer")
-                currentInstallType = InstallType.MOUNT
-                pendingInstallToken = InstallerManager.Token.AutoSaved
                 // Mount install requires additional parameters, handled separately
                 handleInstallError(app.getString(R.string.installer_status_not_supported))
             }
 
             is InstallerManager.InstallPlan.External -> {
                 Log.d(TAG, "Using external installer: ${plan.installerLabel}")
-                currentInstallType = if (plan.token is InstallerManager.Token.Component) {
-                    InstallType.CUSTOM
-                } else {
-                    InstallType.DEFAULT
-                }
-                pendingInstallToken = plan.token
                 launchExternalInstaller(plan)
             }
         }
+    }
+
+    private fun InstallerManager.InstallPlan.installerToken(): InstallerManager.Token = when (this) {
+        is InstallerManager.InstallPlan.Internal -> InstallerManager.Token.Internal
+        is InstallerManager.InstallPlan.PlayStore -> InstallerManager.Token.PlayStore
+        is InstallerManager.InstallPlan.RootPlayStore -> InstallerManager.Token.RootPlayStore
+        is InstallerManager.InstallPlan.Shizuku -> InstallerManager.Token.Shizuku
+        is InstallerManager.InstallPlan.ShizukuPlayStore -> InstallerManager.Token.ShizukuPlayStore
+        is InstallerManager.InstallPlan.Mount -> InstallerManager.Token.AutoSaved
+        is InstallerManager.InstallPlan.External -> token
+    }
+
+    private fun InstallerManager.InstallPlan.installType(): InstallType = when (this) {
+        is InstallerManager.InstallPlan.Internal -> InstallType.DEFAULT
+        is InstallerManager.InstallPlan.PlayStore -> InstallType.PLAY_STORE
+        is InstallerManager.InstallPlan.RootPlayStore -> InstallType.ROOT_PLAY_STORE
+        is InstallerManager.InstallPlan.Shizuku -> InstallType.SHIZUKU
+        is InstallerManager.InstallPlan.ShizukuPlayStore -> InstallType.SHIZUKU_PLAY_STORE
+        is InstallerManager.InstallPlan.Mount -> InstallType.MOUNT
+        is InstallerManager.InstallPlan.External ->
+            if (token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
     }
 
     /**
@@ -1147,17 +1150,17 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     private suspend fun waitUntilPackageRemoved(packageName: String): Boolean {
-        val timeoutAt = System.currentTimeMillis() + UNINSTALL_VERIFY_TIMEOUT_MS
-        while (System.currentTimeMillis() < timeoutAt) {
+        val timeoutAt = SystemClock.uptimeMillis() + UNINSTALL_VERIFY_TIMEOUT_MS
+        while (SystemClock.uptimeMillis() < timeoutAt) {
             if (withContext(Dispatchers.IO) { pm.getPackageInfo(packageName) == null }) {
                 return true
             }
-            delay(UNINSTALL_VERIFY_POLL_MS)
+            delay(UNINSTALL_VERIFY_POLL_MS.milliseconds)
         }
         return withContext(Dispatchers.IO) { pm.getPackageInfo(packageName) == null }
     }
 
-    private suspend fun shouldUseShizukuUninstallForPendingInstall(): Boolean = withContext(Dispatchers.IO) {
+    private suspend fun shouldUseShizukuUninstallForPendingInstall(): Boolean {
         val token = pendingInstallToken
             ?: oneTimeInstallerToken
             ?: selectedInstallerToken
@@ -1165,9 +1168,11 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
         val isShizukuInstall = token == InstallerManager.Token.Shizuku ||
                 token == InstallerManager.Token.ShizukuPlayStore
-        if (!isShizukuInstall) return@withContext false
+        if (!isShizukuInstall) return false
 
-        sessionInstaller.shizukuAvailability(InstallerManager.InstallTarget.PATCHER).available
+        return withContext(Dispatchers.IO) {
+            sessionInstaller.shizukuAvailability(InstallerManager.InstallTarget.PATCHER).available
+        }
     }
 
     /**
@@ -1224,15 +1229,19 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 app.getString(R.string.installer_shizuku_error_permission)
             "timed out" in lower || "timeout" in lower ->
                 app.getString(R.string.installer_shizuku_error_timeout)
-            "downgrade" in lower || "version downgrade" in lower ->
+            "downgrade" in lower ->
                 app.getString(R.string.installer_shizuku_error_downgrade)
             "update_incompatible" in lower ||
                     "signatures do not match" in lower ||
                     "signature" in lower ->
                 app.getString(R.string.installer_shizuku_error_signature)
-            "invalid_apk" in lower || "parse" in lower || "failed to parse" in lower ->
+            "invalid_apk" in lower ||
+                    "parse_error" in lower ||
+                    "failed to parse" in lower ->
                 app.getString(R.string.installer_shizuku_error_invalid_apk)
-            "user" in lower || "profile" in lower ->
+            "user_restricted" in lower ||
+                    "failed_user" in lower ||
+                    "profile" in lower ->
                 app.getString(R.string.installer_shizuku_error_user_profile)
             else -> raw ?: "Unknown error"
         }

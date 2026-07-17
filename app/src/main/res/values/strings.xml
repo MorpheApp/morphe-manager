@@ -746,8 +746,8 @@ The image dimensions must be as follows:
     <string name="settings_auto_uninstall_with_shizuku">Auto-uninstall on conflict</string>
     <string name="settings_auto_uninstall_with_shizuku_description">When auto-installing with Shizuku, uninstall the existing app first if Android reports a signature conflict. This can remove app data</string>
     <string name="settings_auto_uninstall_warning_title">Enable auto-uninstall?</string>
-    <string name="settings_auto_uninstall_warning_message">If Android reports a signature conflict during Shizuku auto-install, Morphe will uninstall the existing app before installing the patched APK.</string>
-    <string name="settings_auto_uninstall_warning_risk">This can remove app data. If the patched APK fails to install after uninstalling, the previous app may already be gone.</string>
+    <string name="settings_auto_uninstall_warning_message">If Android reports a signature conflict during Shizuku auto-install, Morphe will uninstall the existing app before installing the patched APK</string>
+    <string name="settings_auto_uninstall_warning_risk">This can remove app data. If the patched APK fails to install after uninstalling, the previous app may already be gone</string>
     <string name="installer_shizuku_status_action">Check Shizuku status</string>
     <string name="installer_shizuku_status_title">Shizuku status</string>
     <string name="installer_shizuku_status_ready">Ready</string>
@@ -761,7 +761,9 @@ The image dimensions must be as follows:
     <string name="installer_shizuku_status_missing">Missing</string>
     <string name="installer_shizuku_request_permission">Request permission</string>
     <string name="installer_shizuku_install_fail">Shizuku install failed: %s</string>
-    <string name="installer_shizuku_install_fail_with_details">Shizuku install failed: %1$s\n\nDetails: %2$s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku install failed: %1$s
+
+Details: %2$s"</string>
     <string name="installer_shizuku_error_permission">Shizuku permission is missing. Grant permission to Morphe and try again</string>
     <string name="installer_shizuku_error_timeout">Shizuku did not return an install result. Make sure it is still running and try again</string>
     <string name="installer_shizuku_error_downgrade">Android blocked this because it would downgrade the installed app</string>

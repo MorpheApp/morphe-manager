@@ -23,13 +23,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Launch
 import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.VerticalDivider
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,7 +44,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
-import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
@@ -60,9 +53,7 @@ import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.morphe.manager.util.*
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
 import java.io.File
 
 data class AppliedPatchBundleUi(
@@ -84,11 +75,9 @@ fun InstalledAppInfoDialog(
     onTriggerPatchFlow: (originalPackageName: String) -> Unit,
     homeViewModel: HomeViewModel,
     viewModel: InstalledAppInfoViewModel,
-    installViewModel: InstallViewModel = koinViewModel(),
-    prefs: PreferencesManager = koinInject()
+    installViewModel: InstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
     val installedApp = viewModel.installedApp
     val appInfo = viewModel.appInfo
     val appliedPatches = viewModel.appliedPatches
@@ -225,8 +214,6 @@ fun InstalledAppInfoDialog(
     if (installViewModel.showInstallerSelectionDialog) {
         val options = remember { installViewModel.getInstallerOptions() }
         val primaryToken = remember { installViewModel.getPrimaryInstallerToken() }
-        val autoInstallWithShizuku by prefs.autoInstallWithShizuku.getAsState()
-        val autoUninstallWithShizuku by prefs.autoUninstallWithShizuku.getAsState()
         InstallerSelectionDialog(
             title = stringResource(R.string.installer_title),
             options = options,
@@ -237,15 +224,7 @@ fun InstalledAppInfoDialog(
             },
             onOpenShizuku = installViewModel::openShizukuApp,
             shizukuStatusProvider = installViewModel::getShizukuStatus,
-            onRequestShizukuPermission = installViewModel::requestShizukuPermission,
-            autoInstallEnabled = autoInstallWithShizuku,
-            onAutoInstallToggle = { enabled ->
-                scope.launch { prefs.autoInstallWithShizuku.update(enabled) }
-            },
-            autoUninstallEnabled = autoUninstallWithShizuku,
-            onAutoUninstallToggle = { enabled ->
-                scope.launch { prefs.autoUninstallWithShizuku.update(enabled) }
-            }
+            onRequestShizukuPermission = installViewModel::requestShizukuPermission
         )
     }
 
@@ -815,7 +794,7 @@ private fun AppHeroHeader(
                 )
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
                 ) {
                     // Animated app name (leads textProgress)
                     Box(
