@@ -52,6 +52,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
+import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.*
 import org.koin.androidx.compose.koinViewModel
 import java.io.File
@@ -75,7 +76,8 @@ fun InstalledAppInfoDialog(
     onTriggerPatchFlow: (originalPackageName: String) -> Unit,
     homeViewModel: HomeViewModel,
     viewModel: InstalledAppInfoViewModel,
-    installViewModel: InstallViewModel = koinViewModel()
+    installViewModel: InstallViewModel = koinViewModel(),
+    settingsViewModel: SettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val installedApp = viewModel.installedApp
@@ -120,6 +122,10 @@ fun InstalledAppInfoDialog(
     val appliedBundles by viewModel.appliedBundles.collectAsStateWithLifecycle()
     val bundlesUsedSummary by viewModel.bundlesUsedSummary.collectAsStateWithLifecycle()
     val availablePatches by viewModel.availablePatches.collectAsStateWithLifecycle()
+
+    val appLabel = remember(appInfo, packageName) {
+        appInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString() ?: packageName
+    }
 
     // Export strings
     val exportSuccessMessage = stringResource(R.string.save_apk_success)
@@ -230,7 +236,13 @@ fun InstalledAppInfoDialog(
 
     // Sub-dialogs
     if (showAppliedPatchesDialog.value && appliedPatches != null) {
-        AppliedPatchesDialog(bundles = appliedBundles, onDismiss = { showAppliedPatchesDialog.value = false })
+        AppliedPatchesDialog(
+            appLabel = appLabel,
+            packageName = installedApp?.originalPackageName ?: packageName,
+            bundles = appliedBundles,
+            settingsViewModel = settingsViewModel,
+            onDismiss = { showAppliedPatchesDialog.value = false }
+        )
     }
 
     // Mount warning dialog
@@ -1640,73 +1652,83 @@ private fun SignatureConflictDialog(
 
 @Composable
 private fun AppliedPatchesDialog(
+    appLabel: String,
+    packageName: String,
     bundles: List<AppliedPatchBundleUi>,
+    settingsViewModel: SettingsViewModel,
     onDismiss: () -> Unit
 ) {
+    var bundleOptionsMap by remember { mutableStateOf<Map<Int, Map<String, Map<String, Any?>>>>(emptyMap()) }
+    LaunchedEffect(bundles) {
+        bundleOptionsMap = bundles.associate { bundle ->
+            bundle.uid to settingsViewModel.loadPatchDetails(packageName, bundle.uid).optionsMap
+        }
+    }
+
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.home_app_info_applied_patches),
         footer = {
-            MorpheDialogButton(
+            MorpheDialogOutlinedButton(
                 text = stringResource(android.R.string.ok),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
             )
         }
     ) {
-        val textColor = LocalDialogTextColor.current
-
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
         ) {
+            HeroInfoCard(
+                icon = Icons.Outlined.Extension,
+                title = appLabel,
+                subtitle = {
+                    if (bundles.size == 1) {
+                        Text(
+                            text = bundles[0].title,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
+                    } else {
+                        Text(
+                            text = pluralStringResource(R.plurals.source_count, bundles.size, bundles.size),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
+                    }
+                }
+            )
+
             bundles.forEach { bundle ->
+                val bundleOptions = bundleOptionsMap[bundle.uid] ?: emptyMap()
+                val patchCount = bundle.patchInfos.size + bundle.fallbackNames.size
+
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
                 ) {
-                    val title = buildString {
-                        append(bundle.title)
-                        bundle.version?.takeIf { it.isNotBlank() }?.let {
-                            append(" (")
-                            append(it)
-                            append(")")
+                    PatchBundleSection(
+                        title = stringResource(R.string.home_app_info_applied_patches),
+                        version = if (bundles.size > 1) bundle.title else null,
+                        count = patchCount
+                    ) {
+                        bundle.patchInfos.forEach { patch ->
+                            PatchNameRow(name = patch.name)
+                        }
+                        bundle.fallbackNames.forEach { patchName ->
+                            PatchNameRow(name = patchName, dimmed = true)
                         }
                     }
 
-                    Text(
-                        text = title,
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = textColor
-                    )
-
-                    bundle.patchInfos.forEach { patch ->
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
+                    if (bundleOptions.isNotEmpty()) {
+                        PatchBundleSection(
+                            title = stringResource(R.string.settings_system_patch_options_section),
+                            count = bundleOptions.size
                         ) {
-                            Box(
-                                modifier = Modifier
-                                    .size(6.dp)
-                                    .clip(RoundedCornerShape(3.dp))
-                                    .background(MaterialTheme.colorScheme.primary)
-                            )
-                            Text(
-                                text = patch.name,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = textColor.copy(alpha = 0.85f)
-                            )
+                            bundleOptions.entries.forEach { (patchName, options) ->
+                                PatchOptionsGroup(patchName = patchName, options = options)
+                            }
                         }
-                    }
-
-                    bundle.fallbackNames.forEach { patchName ->
-                        Text(
-                            text = "• $patchName",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = textColor.copy(alpha = 0.6f),
-                            modifier = Modifier.padding(start = 14.dp)
-                        )
                     }
                 }
             }

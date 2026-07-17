@@ -307,15 +307,13 @@ class SettingsViewModel(
         }
 
     data class PatchDetails(
-        val displayName: String,
         val patchList: List<String>,
         val optionsMap: Map<String, Map<String, Any?>>,
     )
 
-    /** Loads all display data for the patch-details dialog. */
+    /** Loads patch selections and options for one package+bundle. */
     suspend fun loadPatchDetails(packageName: String, bundleUid: Int): PatchDetails =
         withContext(Dispatchers.IO) {
-            val displayName = appDataResolver.resolveAppData(packageName).displayName
             val patchList = selectionRepository.exportForPackageAndBundle(packageName, bundleUid)
             val rawOptions = optionsRepository.exportOptionsForBundle(
                 packageName = packageName,
@@ -324,7 +322,7 @@ class SettingsViewModel(
             val optionsMap = rawOptions.mapValues { (_, patchOptions) ->
                 patchOptions.mapValues { (_, jsonString) -> parseJsonValue(jsonString) }
             }
-            PatchDetails(displayName, patchList, optionsMap)
+            PatchDetails(patchList, optionsMap)
         }
 
     companion object {
@@ -358,15 +356,6 @@ class SettingsViewModel(
             }
         } catch (_: Exception) {
             jsonString
-        }
-
-        fun formatOptionValue(value: Any?): String = when (value) {
-            null -> "null"
-            is String -> value
-            is Boolean -> value.toString()
-            is Number -> value.toString()
-            is List<*> -> if (value.isEmpty()) "[]" else value.joinToString(", ")
-            else -> value.toString()
         }
     }
 }

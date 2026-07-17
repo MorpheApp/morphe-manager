@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Other apps</string>
     <string name="home_not_patched_yet">Not patched yet</string>
@@ -901,9 +901,8 @@ Details: %2$s"</string>
     <string name="settings_system_export_source_data_success">Source data exported successfully</string>
     <string name="settings_system_import_source_data_fail">Failed to import source data</string>
     <string name="settings_system_import_source_data_success">Source data imported successfully</string>
-    <string name="settings_system_patch_details_title">Patch details</string>
-    <string name="settings_system_selected_patches_title">Selected patches (%s)</string>
-    <string name="settings_system_patch_options_title">Patch options (%s)</string>
+    <string name="settings_system_selected_patches_section">Selected patches</string>
+    <string name="settings_system_patch_options_section">Patch options</string>
     <string name="settings_system_no_patches_or_options">No patches or options saved</string>
 
     <!-- Settings - System Tab - Custom file picker -->

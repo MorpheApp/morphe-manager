@@ -2433,7 +2433,7 @@ fun SimpleBundleSelectDialog(
             val preInstalledLabel = stringResource(R.string.sources_dialog_preinstalled)
             val remoteLabel = stringResource(R.string.sources_dialog_remote)
             val localLabel = stringResource(R.string.sources_dialog_local)
-            val patchLabel = stringResource(R.string.patch)
+            val patchLabel = stringResource(R.string.patches)
             val recommendedVersionLabel = stringResource(R.string.home_recommended_version)
             candidates.forEach { candidate ->
                 val isSelected = selected.value == candidate.uid
