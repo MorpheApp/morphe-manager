@@ -1,3 +1,13 @@
+# [1.24.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.6...v1.24.0-dev.7) (2026-07-17)
+
+
+### Bug Fixes
+
+* Fix spurious patch source badge and refine installer dialog UI ([00059a0](https://github.com/MorpheApp/morphe-manager/commit/00059a050febb9b4fd1af99534039c1bdd262eed))
+* Inline `SelectionActionBar` into `MultiSelectBar` and reorder cancel button ([70d7991](https://github.com/MorpheApp/morphe-manager/commit/70d7991458ed41c8c22531df2e95044908f795bd))
+* Keep simple mode patch options rendered on tab re-entry ([fd33414](https://github.com/MorpheApp/morphe-manager/commit/fd3341410f056e0baffe48d303f0d044318dd60b))
+* Split `SectionsLayout` into focused files ([56085e0](https://github.com/MorpheApp/morphe-manager/commit/56085e096308ac1a49a4549a2e961e7485ff65e8))
+
 # [1.24.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.5...v1.24.0-dev.6) (2026-07-17)
 
 
