@@ -584,9 +584,10 @@ fun BundlePatchesDialog(
         onDismissRequest = onDismissRequest,
         title = null,
         footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(android.R.string.ok),
-                onPrimaryClick = onDismissRequest
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.close),
+                onClick = onDismissRequest,
+                modifier = Modifier.fillMaxWidth()
             )
         },
         padding = DialogPadding.Compact,
