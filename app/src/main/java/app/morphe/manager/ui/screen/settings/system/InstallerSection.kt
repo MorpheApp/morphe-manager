@@ -5,11 +5,8 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
-import android.graphics.drawable.Drawable
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -18,12 +15,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -152,10 +150,11 @@ private fun InstallerSettingsItem(
                         entry.token == InstallerManager.Token.RootPlayStore ||
                         entry.token is InstallerManager.Token.Component)
             ) {
-                InstallerIconPreview(
-                    drawable = entry.icon,
-                    selected = true,
-                    enabled = entry.availability.available
+                Image(
+                    painter = rememberDrawablePainter(drawable = entry.icon),
+                    contentDescription = null,
+                    modifier = Modifier.size(MorpheDefaults.IconSize),
+                    alpha = if (entry.availability.available) 1f else 0.4f
                 )
             } else {
                 MorpheIcon(icon = Icons.Outlined.Android)
@@ -209,6 +208,7 @@ fun InstallerSelectionDialog(
     // Localized strings for accessibility
     val selectedState = stringResource(R.string.selected)
     val notSelectedState = stringResource(R.string.not_selected)
+    val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
 
     MorpheDialog(
@@ -232,7 +232,8 @@ fun InstallerSelectionDialog(
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
             )
-        }
+        },
+        compactPadding = true
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -277,44 +278,67 @@ fun InstallerSelectionDialog(
                 }
             }
 
-            // Auto-install toggle
-            AnimatedVisibility(
-                visible = (currentSelection.value == InstallerManager.Token.Shizuku ||
-                        currentSelection.value == InstallerManager.Token.ShizukuPlayStore) &&
-                        onAutoInstallToggle != null,
-                enter = MorpheAnimations.expandFadeEnter,
-                exit = MorpheAnimations.shrinkFadeExit
-            ) {
-                MorpheDialogToggleRow(
-                    icon = Icons.Outlined.Bolt,
-                    title = stringResource(R.string.settings_auto_install_with_shizuku),
-                    description = stringResource(R.string.settings_auto_install_with_shizuku_description),
-                    checked = autoInstallEnabled,
-                    onCheckedChange = { newValue ->
-                        onAutoInstallToggle?.invoke(newValue)
-                        // Mutually exclusive with Prompt on install
-                        if (newValue && installerPromptEnabled) {
-                            onInstallerPromptToggle?.invoke(false)
-                        }
-                    }
-                )
-            }
+            MorpheSettingsDivider(fullWidth = true)
 
-            // Prompt on install toggle
-            if (onInstallerPromptToggle != null) {
-                MorpheDialogToggleRow(
-                    icon = Icons.Outlined.Android,
-                    title = stringResource(R.string.settings_prompt_installer_on_install),
-                    description = stringResource(R.string.settings_prompt_installer_on_install_description),
-                    checked = installerPromptEnabled,
-                    onCheckedChange = { newValue ->
-                        onInstallerPromptToggle(newValue)
-                        // Mutually exclusive with Auto-install
-                        if (newValue && autoInstallEnabled) {
-                            onAutoInstallToggle?.invoke(false)
+            if (onInstallerPromptToggle != null || onAutoInstallToggle != null) {
+                SettingsGroup {
+                    AnimatedVisibility(
+                        visible = (currentSelection.value == InstallerManager.Token.Shizuku ||
+                                currentSelection.value == InstallerManager.Token.ShizukuPlayStore) &&
+                                onAutoInstallToggle != null,
+                        enter = MorpheAnimations.expandFadeEnter,
+                        exit = MorpheAnimations.shrinkFadeExit
+                    ) {
+                        Column {
+                            SettingsItem(
+                                onClick = {
+                                    val newValue = !autoInstallEnabled
+                                    onAutoInstallToggle?.invoke(newValue)
+                                    if (newValue && installerPromptEnabled) {
+                                        onInstallerPromptToggle?.invoke(false)
+                                    }
+                                },
+                                leadingContent = { MorpheIcon(icon = Icons.Outlined.Bolt, size = 28.dp) },
+                                title = stringResource(R.string.settings_auto_install_with_shizuku),
+                                subtitle = stringResource(R.string.settings_auto_install_with_shizuku_description),
+                                trailingContent = {
+                                    MorpheSwitch(
+                                        checked = autoInstallEnabled,
+                                        onCheckedChange = null,
+                                        modifier = Modifier.semantics {
+                                            stateDescription = if (autoInstallEnabled) enabledState else disabledState
+                                        }
+                                    )
+                                }
+                            )
+                            MorpheSettingsDivider()
                         }
                     }
-                )
+
+                    if (onInstallerPromptToggle != null) {
+                        SettingsItem(
+                            onClick = {
+                                val newValue = !installerPromptEnabled
+                                onInstallerPromptToggle(newValue)
+                                if (newValue && autoInstallEnabled) {
+                                    onAutoInstallToggle?.invoke(false)
+                                }
+                            },
+                            leadingContent = { MorpheIcon(icon = Icons.Outlined.Android, size = 28.dp) },
+                            title = stringResource(R.string.settings_prompt_installer_on_install),
+                            subtitle = stringResource(R.string.settings_prompt_installer_on_install_description),
+                            trailingContent = {
+                                MorpheSwitch(
+                                    checked = installerPromptEnabled,
+                                    onCheckedChange = null,
+                                    modifier = Modifier.semantics {
+                                        stateDescription = if (installerPromptEnabled) enabledState else disabledState
+                                    }
+                                )
+                            }
+                        )
+                    }
+                }
             }
         }
     }
@@ -366,11 +390,14 @@ fun InstallerOptionItem(
         modifier = Modifier.padding(vertical = 2.dp),
         leadingContent = if (hasCustomIcon) {
             {
-                InstallerIconPreview(
-                    drawable = option.icon,
-                    selected = selected,
-                    enabled = enabled
-                )
+                SelectionLeadingBox(selected = selected, enabled = enabled) {
+                    Image(
+                        painter = rememberDrawablePainter(drawable = option.icon),
+                        contentDescription = null,
+                        modifier = Modifier.size(MorpheDefaults.IconSize),
+                        alpha = if (enabled) 1f else 0.4f
+                    )
+                }
             }
         } else null
     ) {
@@ -396,53 +423,6 @@ fun InstallerOptionItem(
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
             }
-        }
-    }
-}
-
-/**
- * Installer icon preview component.
- */
-@Composable
-fun InstallerIconPreview(
-    drawable: Drawable?,
-    selected: Boolean,
-    enabled: Boolean,
-    modifier: Modifier = Modifier
-) {
-    val colors = MaterialTheme.colorScheme
-
-    Box(
-        modifier = modifier
-            .size(40.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .background(
-                if (enabled) colors.surfaceVariant
-                else colors.surfaceVariant.copy(alpha = 0.4f)
-            )
-            .border(
-                width = if (selected && enabled) 2.dp else 1.dp,
-                color = when {
-                    !enabled -> colors.outlineVariant.copy(alpha = 0.5f)
-                    selected -> colors.primary
-                    else -> colors.outlineVariant
-                },
-                shape = RoundedCornerShape(12.dp)
-            ),
-        contentAlignment = Alignment.Center
-    ) {
-        if (drawable != null) {
-            Image(
-                painter = rememberDrawablePainter(drawable = drawable),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp),
-                alpha = if (enabled) 1f else 0.4f
-            )
-        } else {
-            MorpheIcon(
-                icon = Icons.Outlined.ChevronRight,
-                tint = colors.primary.copy(alpha = if (enabled) 1f else 0.4f)
-            )
         }
     }
 }

@@ -5,7 +5,9 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material3.MaterialTheme
@@ -13,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.*
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
@@ -104,6 +107,37 @@ fun RadioSelectionCard(
             trailingContent = null
         )
     }
+}
+
+/**
+ * Bordered square container for custom leading indicators in [RadioSelectionCard].
+ * Border turns primary when selected, outlineVariant otherwise.
+ */
+@Composable
+fun SelectionLeadingBox(
+    selected: Boolean,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    size: Dp = 28.dp,
+    cornerRadius: Dp = 8.dp,
+    content: @Composable BoxScope.() -> Unit
+) {
+    val colors = MaterialTheme.colorScheme
+    Box(
+        modifier = modifier
+            .size(size)
+            .border(
+                width = 1.dp,
+                color = when {
+                    !enabled -> colors.outlineVariant.copy(alpha = 0.5f)
+                    selected -> colors.primary
+                    else -> colors.outlineVariant
+                },
+                shape = RoundedCornerShape(cornerRadius)
+            ),
+        contentAlignment = Alignment.Center,
+        content = content
+    )
 }
 
 @Composable
