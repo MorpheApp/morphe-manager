@@ -155,6 +155,9 @@ class RootInstaller(
 
         unmount(packageName)
 
+        var installedStockInfo = pm.getPackageInfo(packageName)
+        var stockSourceFile: File? = null
+
         stockAPK?.let { stockApp ->
             val stockInfo = pm.getPackageInfo(stockApp)
                 ?: error("Failed to get package info for stock app")
@@ -175,6 +178,9 @@ class RootInstaller(
                     throw StockAppInstallException("Stock app install did not settle")
                 }
             }
+
+            installedStockInfo = pm.getPackageInfo(packageName)
+            stockSourceFile = stockApp
         }
 
         val moduleDir = remoteFS.getFile(modulePath)
@@ -184,6 +190,7 @@ class RootInstaller(
 
         listOf(
             "service.sh",
+            "post-fs-data.sh",
             "module.prop",
         ).forEach { file ->
             assets.open("root/$file").use { inputStream ->
@@ -199,6 +206,25 @@ class RootInstaller(
 
                         outputStream.write(content)
                     }
+                }
+        }
+
+        val installedStockPath = installedStockInfo?.applicationInfo?.sourceDir
+        val stockMountPaths = collectStockMountPaths(packageName, installedStockPath)
+        val stockModuleApk = "$modulePath/$packageName-stock.apk"
+        val stockSourcePath = stockSourceFile?.absolutePath ?: installedStockPath
+        val stockModuleApkWritten = !stockSourcePath.isNullOrBlank() && stockMountPaths.isNotEmpty()
+        if (stockModuleApkWritten) {
+            remoteFS.getFile(stockSourcePath)
+                .also { if (!it.exists()) throw Exception("Stock APK doesn't exist") }
+                .newInputStream().use { inputStream ->
+                    remoteFS.getFile(stockModuleApk).newOutputStream().use { outputStream ->
+                        inputStream.copyTo(outputStream)
+                    }
+                }
+
+            remoteFS.getFile("$modulePath/stock-paths.txt").newOutputStream().use { outputStream ->
+                outputStream.write(stockMountPaths.joinToString("\n", postfix = "\n").toByteArray())
             }
         }
 
@@ -212,7 +238,11 @@ class RootInstaller(
                     }
                 }
 
-            setModuleFilePermissions(modulePath, apkPath)
+            setModuleFilePermissions(
+                modulePath = modulePath,
+                patchedApkPath = apkPath,
+                stockApkPath = stockModuleApk.takeIf { stockModuleApkWritten }
+            )
         }
 
         // Force-stop the app so it restarts with the newly mounted patched APK.
@@ -281,19 +311,46 @@ class RootInstaller(
             }
         } == true
 
-    private suspend fun setModuleFilePermissions(modulePath: String, apkPath: String) {
+    private suspend fun collectStockMountPaths(
+        packageName: String,
+        installedStockPath: String?
+    ): List<String> {
+        val hiddenSystemPath = execute("dumpsys package ${packageName.shellQuote()} 2>/dev/null")
+            .out
+            .hiddenSystemPackagePath(packageName)
+
+        return listOfNotNull(
+            installedStockPath?.takeIf { it.isNotBlank() },
+            hiddenSystemPath
+        ).distinct()
+    }
+
+    private suspend fun setModuleFilePermissions(
+        modulePath: String,
+        patchedApkPath: String,
+        stockApkPath: String?
+    ) {
         var lastResult: Shell.Result? = null
         val applied = withTimeoutOrNull(MODULE_PERMISSION_SETTLE_TIMEOUT) {
             while (true) {
                 val modulePathQuoted = modulePath.shellQuote()
-                val apkPathQuoted = apkPath.shellQuote()
-                val result = execute(
-                    "test -f $apkPathQuoted && test -f $modulePathQuoted/service.sh",
-                    "chmod 644 $apkPathQuoted",
-                    "chown system:system $apkPathQuoted",
-                    "chcon u:object_r:apk_data_file:s0 $apkPathQuoted",
-                    "chmod +x $modulePathQuoted/service.sh"
-                )
+                val patchedApkPathQuoted = patchedApkPath.shellQuote()
+                val stockApkPathQuoted = stockApkPath?.shellQuote()
+                val commands = buildList {
+                    add("test -f $patchedApkPathQuoted && test -f $modulePathQuoted/service.sh && test -f $modulePathQuoted/post-fs-data.sh")
+                    add("chmod 644 $patchedApkPathQuoted")
+                    add("chown system:system $patchedApkPathQuoted")
+                    add("chcon u:object_r:apk_data_file:s0 $patchedApkPathQuoted")
+                    stockApkPathQuoted?.let { path ->
+                        add("test -f $path")
+                        add("chmod 644 $path")
+                        add("chown system:system $path")
+                        add("chcon u:object_r:apk_data_file:s0 $path")
+                    }
+                    add("chmod +x $modulePathQuoted/service.sh")
+                    add("chmod +x $modulePathQuoted/post-fs-data.sh")
+                }
+                val result = execute(*commands.toTypedArray())
                 if (result.isSuccess) return@withTimeoutOrNull true
 
                 lastResult = result
@@ -348,4 +405,31 @@ class StockAppInstallException(detail: String) : Exception(
 
 private fun Shell.Result.hasRootUid() = isSuccess && out.any { line ->
     line.contains("uid=0")
+}
+
+private fun List<String>.hiddenSystemPackagePath(packageName: String): String? {
+    var inHiddenSection = false
+    var inPackage = false
+
+    for (rawLine in this) {
+        val line = rawLine.trim()
+        if (line.contains("Hidden system package")) {
+            inHiddenSection = true
+            inPackage = false
+            continue
+        }
+        if (!inHiddenSection) continue
+
+        if (line.startsWith("Package [")) {
+            inPackage = line.startsWith("Package [$packageName]")
+            continue
+        }
+        if (!inPackage) continue
+
+        if (line.startsWith("resourcePath=") || line.startsWith("codePath=")) {
+            return line.substringAfter('=').trim().takeIf { it.isNotBlank() }
+        }
+    }
+
+    return null
 }
