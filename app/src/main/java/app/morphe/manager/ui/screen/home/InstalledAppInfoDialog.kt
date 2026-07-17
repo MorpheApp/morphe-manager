@@ -23,13 +23,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Launch
 import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.VerticalDivider
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -228,7 +222,9 @@ fun InstalledAppInfoDialog(
             onConfirm = { token ->
                 installViewModel.proceedWithSelectedInstaller(token)
             },
-            onOpenShizuku = installViewModel::openShizukuApp
+            onOpenShizuku = installViewModel::openShizukuApp,
+            shizukuStatusProvider = installViewModel::getShizukuStatus,
+            onRequestShizukuPermission = installViewModel::requestShizukuPermission
         )
     }
 
@@ -798,7 +794,7 @@ private fun AppHeroHeader(
                 )
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
                 ) {
                     // Animated app name (leads textProgress)
                     Box(

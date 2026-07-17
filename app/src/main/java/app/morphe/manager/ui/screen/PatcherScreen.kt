@@ -46,11 +46,7 @@ import app.morphe.manager.ui.screen.patcher.*
 import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
-import app.morphe.manager.ui.screen.shared.LocalDialogSecondaryTextColor
-import app.morphe.manager.ui.screen.shared.MorpheAnimations
-import app.morphe.manager.ui.screen.shared.MorpheDialog
-import app.morphe.manager.ui.screen.shared.MorpheDialogButtonRow
-import app.morphe.manager.ui.screen.shared.rememberAccessibilityEnabled
+import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.util.APK_MIMETYPE
@@ -157,6 +153,7 @@ fun PatcherScreen(
     val outputFile = patcherViewModel.outputFile
 
     val autoInstallWithShizuku by prefs.autoInstallWithShizuku.getAsState()
+    val autoUninstallWithShizuku by prefs.autoUninstallWithShizuku.getAsState()
     val primaryInstallerPref by prefs.installerPrimary.getAsState()
     val promptInstallerOnInstall by prefs.promptInstallerOnInstall.getAsState()
 
@@ -169,7 +166,8 @@ fun PatcherScreen(
             installViewModel.install(
                 outputFile = outputFile,
                 originalPackageName = patcherViewModel.packageName,
-                onPersistApp = { pkg, type -> patcherViewModel.persistPatchedApp(pkg, type) }
+                onPersistApp = { pkg, type -> patcherViewModel.persistPatchedApp(pkg, type) },
+                autoUninstallOnConflict = true
             )
         }
     }
@@ -491,9 +489,17 @@ fun PatcherScreen(
                 installViewModel.proceedWithSelectedInstaller(selectedToken)
             },
             onOpenShizuku = installerManager::openShizukuApp,
+            shizukuStatusProvider = {
+                installerManager.shizukuStatus(InstallerManager.InstallTarget.PATCHER)
+            },
+            onRequestShizukuPermission = installerManager::requestShizukuPermission,
             autoInstallEnabled = autoInstallWithShizuku,
             onAutoInstallToggle = { enabled ->
                 scope.launch { prefs.autoInstallWithShizuku.update(enabled) }
+            },
+            autoUninstallEnabled = autoUninstallWithShizuku,
+            onAutoUninstallToggle = { enabled ->
+                scope.launch { prefs.autoUninstallWithShizuku.update(enabled) }
             },
             installerPromptEnabled = promptInstallerOnInstall
         )

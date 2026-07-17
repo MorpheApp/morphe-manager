@@ -35,6 +35,7 @@ fun RadioSelectionCard(
     onSelect: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    hasWarning: Boolean = false,
     contentDescription: String? = null,
     stateDescription: String? = null,
     leadingContent: (@Composable () -> Unit)? = null,
@@ -78,7 +79,10 @@ fun RadioSelectionCard(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(colors.onSurface.copy(alpha = 0.06f))
+                        .background(
+                            if (hasWarning) colors.secondaryContainer.copy(alpha = 0.7f)
+                            else colors.onSurface.copy(alpha = 0.06f)
+                        )
                         .padding(
                             horizontal = MorpheDefaults.ContentPadding,
                             vertical = MorpheDefaults.ContentPaddingSmall
@@ -104,6 +108,7 @@ fun RadioSelectionCard(
     modifier: Modifier = Modifier,
     description: String? = null,
     enabled: Boolean = true,
+    hasWarning: Boolean = false,
     contentDescription: String? = null,
     stateDescription: String? = null,
     leadingContent: (@Composable () -> Unit)? = null,
@@ -114,6 +119,7 @@ fun RadioSelectionCard(
         onSelect = onSelect,
         modifier = modifier,
         enabled = enabled,
+        hasWarning = hasWarning,
         contentDescription = contentDescription,
         stateDescription = stateDescription,
         leadingContent = leadingContent,
