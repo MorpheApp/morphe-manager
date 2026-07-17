@@ -729,6 +729,7 @@ The image dimensions must be as follows:
     <string name="installer_status_shizuku_permission">Grant permission to Morphe from the Shizuku app</string>
     <string name="installer_mount_warning_install">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount</string>
     <string name="mount_version_mismatch_message">Stock app version (%2$s) does not match patched app version (%1$s). Mount the matching stock version, then try again</string>
+    <string name="mount_stock_restore_failed_message">Android rejected the saved original APK. Install the matching stock version, then try Mount again</string>
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">The installation failed. Try again or switch to a different installer</string>

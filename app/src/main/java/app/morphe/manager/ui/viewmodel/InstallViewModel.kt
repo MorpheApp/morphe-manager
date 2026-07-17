@@ -797,7 +797,8 @@ class InstallViewModel : ViewModel(), KoinComponent {
         inputFile: File?,
         inputIsTemporary: Boolean,
         packageName: String,
-        onPersistApp: suspend (String, InstallType) -> Boolean
+        onPersistApp: suspend (String, InstallType) -> Boolean,
+        waitForStockInstall: Boolean = false
     ) {
         if (installState is InstallState.Installing) return
 
@@ -830,25 +831,35 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 }
 
                 val packageInfo = inputs.patchedInfo
-                val stockInfo = inputs.installedInfo
+                var stockInfo = inputs.installedInfo
                 val label = with(pm) { packageInfo.label() }
                 val patchedVersion = packageInfo.versionName?.takeUnless { it.isBlank() } ?: "unknown"
                 val patchedVersionCode = pm.getVersionCode(packageInfo)
+                fun PackageInfo.matchesPatched() =
+                    packageName == this.packageName &&
+                            versionName == patchedVersion &&
+                            pm.getVersionCode(this) == patchedVersionCode
                 fun MountStockCandidate.matchesPatched() =
-                    info.packageName == packageName &&
-                            info.versionName == patchedVersion &&
-                            pm.getVersionCode(info) == patchedVersionCode
+                    info.matchesPatched()
+
+                if (waitForStockInstall && stockInfo != null && !stockInfo.matchesPatched()) {
+                    stockInfo = waitForMatchingInstalledStock(
+                        packageName = packageName,
+                        versionName = patchedVersion,
+                        versionCode = patchedVersionCode
+                    ) ?: stockInfo
+                }
+
+                val stockMatchesPatched = stockInfo?.matchesPatched() == true
 
                 val stockCandidate = listOfNotNull(
                     inputs.inputCandidate,
                     inputs.savedOriginalCandidate
-                ).firstOrNull { it.matchesPatched() }
+                ).takeUnless { stockMatchesPatched }
+                    ?.firstOrNull { it.matchesPatched() }
 
                 // Check version mismatch for mount
                 val stockVersion = stockInfo?.versionName
-                val stockMatchesPatched = stockInfo != null &&
-                        stockInfo.versionName == patchedVersion &&
-                        pm.getVersionCode(stockInfo) == patchedVersionCode
                 if (stockInfo != null && !stockMatchesPatched && stockCandidate == null) {
                     handleInstallError(
                         app.getString(
@@ -892,12 +903,15 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
             } catch (e: Exception) {
                 Log.e(TAG, "Mount install failed", e)
-                handleInstallError(
+                val message = if (e is StockAppInstallException) {
+                    app.getString(R.string.mount_stock_restore_failed_message)
+                } else {
                     app.getString(
                         R.string.install_app_fail,
                         e.simpleMessage() ?: e.javaClass.simpleName
                     )
-                )
+                }
+                handleInstallError(message)
 
                 // Cleanup on failure
                 try {
@@ -906,6 +920,22 @@ class InstallViewModel : ViewModel(), KoinComponent {
             }
         }
     }
+
+    /**
+     * Mount a saved patched APK, restoring the matching original APK first when Morphe has it.
+     */
+    fun installSavedMount(
+        outputFile: File,
+        packageName: String,
+        onPersistApp: suspend (String, InstallType) -> Boolean
+    ) = installMount(
+        outputFile = outputFile,
+        inputFile = null,
+        inputIsTemporary = false,
+        packageName = packageName,
+        onPersistApp = onPersistApp,
+        waitForStockInstall = true
+    )
 
     /**
      * Mount app (for root installer).
@@ -1236,6 +1266,29 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
     fun requestShizukuPermission(): Boolean = installerManager.requestShizukuPermission()
 
+    private suspend fun waitForMatchingInstalledStock(
+        packageName: String,
+        versionName: String,
+        versionCode: Long
+    ): PackageInfo? {
+        var matchingInfo: PackageInfo? = null
+        withTimeoutOrNull(STOCK_INSTALL_SETTLE_TIMEOUT) {
+            while (matchingInfo == null) {
+                val info = withContext(Dispatchers.IO) { pm.getPackageInfo(packageName) }
+                if (info != null &&
+                    info.packageName == packageName &&
+                    info.versionName == versionName &&
+                    pm.getVersionCode(info) == versionCode
+                ) {
+                    matchingInfo = info
+                } else {
+                    delay(STOCK_INSTALL_SETTLE_POLL)
+                }
+            }
+        }
+        return matchingInfo
+    }
+
     private fun handleInstallSuccess(packageName: String) {
         externalInstallTimeoutJob?.cancel()
         selectedInstallerToken = null
@@ -1298,5 +1351,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         private const val UNINSTALL_VERIFY_TIMEOUT_MS = 10_000L
         private const val UNINSTALL_VERIFY_POLL_MS = 250L
         private val INSTALL_MONITOR_POLL_MS = 1.seconds
+        private val STOCK_INSTALL_SETTLE_TIMEOUT = 30.seconds
+        private val STOCK_INSTALL_SETTLE_POLL = 1.seconds
     }
 }

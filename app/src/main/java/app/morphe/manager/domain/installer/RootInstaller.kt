@@ -166,8 +166,8 @@ class RootInstaller(
                     installedInfo.versionName == stockInfo.versionName
 
             if (!stockAlreadyInstalled) {
-                execute("pm install -r -d ${stockApp.absolutePath.shellQuote()}")
-                    .assertSuccess("Failed to install stock app")
+                val result = installStockApp(stockApp, packageName)
+                if (!result.isSuccess) throw StockAppInstallException(result.failureDetail())
             }
         }
 
@@ -251,6 +251,21 @@ class RootInstaller(
         throw Exception("Patched APK not found for mount")
     }
 
+    private suspend fun installStockApp(stockApp: File, packageName: String): Shell.Result {
+        val tempPath = "/data/local/tmp/morphe-stock-$packageName.apk"
+        val tempPathQuoted = tempPath.shellQuote()
+
+        return execute(
+            "rm -f $tempPathQuoted; " +
+                    "cp ${stockApp.absolutePath.shellQuote()} $tempPathQuoted && " +
+                    "chmod 644 $tempPathQuoted && " +
+                    "pm install -r -d $tempPathQuoted; " +
+                    "result=\$?; " +
+                    "rm -f $tempPathQuoted; " +
+                    "exit \$result"
+        )
+    }
+
     private fun mountInZygoteNamespacesCommand(sourcePath: String, targetPath: String) =
         "for zpid in \$(pidof zygote64) \$(pidof zygote); do " +
                 "nsenter -t \"\$zpid\" -m mount -o bind $sourcePath $targetPath 2>/dev/null || true; " +
@@ -267,10 +282,12 @@ class RootInstaller(
 
         private fun Shell.Result.assertSuccess(errorMessage: String) {
             if (!isSuccess) {
-                val detail = (err + out).joinToString("\n").trim()
+                val detail = failureDetail()
                 throw Exception(if (detail.isBlank()) errorMessage else "$errorMessage: $detail")
             }
         }
+
+        private fun Shell.Result.failureDetail() = (err + out).joinToString("\n").trim()
 
         private fun String.shellQuote() = "'${replace("'", "'\"'\"'")}'"
 
@@ -279,6 +296,10 @@ class RootInstaller(
 }
 
 class RootServiceException : Exception("Root not available")
+
+class StockAppInstallException(detail: String) : Exception(
+    if (detail.isBlank()) "Failed to install stock app" else "Failed to install stock app: $detail"
+)
 
 private fun Shell.Result.hasRootUid() = isSuccess && out.any { line ->
     line.contains("uid=0")

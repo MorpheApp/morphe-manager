@@ -1231,19 +1231,40 @@ private fun ActionsSection(
     when (installedApp.installType) {
         InstallType.MOUNT -> {
             val isMountLoading = mountOperation != null
+            val mountSavedApp: () -> Unit = {
+                val savedFile = viewModel.savedApkFile()
+                if (savedFile != null) {
+                    installViewModel.installSavedMount(
+                        outputFile = savedFile,
+                        packageName = installedApp.currentPackageName,
+                        onPersistApp = { _, _ ->
+                            viewModel.updateInstallType(
+                                packageName = installedApp.currentPackageName,
+                                newInstallType = InstallType.MOUNT
+                            )
+                            true
+                        }
+                    )
+                } else if (viewModel.isMounted) {
+                    installViewModel.remount(
+                        packageName = installedApp.currentPackageName,
+                        version = installedApp.version
+                    )
+                } else {
+                    installViewModel.mount(
+                        packageName = installedApp.currentPackageName,
+                        version = installedApp.version
+                    )
+                }
+            }
             if (viewModel.isMounted) {
                 // Remount button
                 secondaryActions.add(
                     ActionItem(
                         text = stringResource(R.string.remount),
                         icon = Icons.Outlined.Refresh,
-                        onClick = {
-                            installViewModel.remount(
-                                packageName = installedApp.currentPackageName,
-                                version = installedApp.version
-                            )
-                        },
-                        isLoading = isMountLoading
+                        onClick = mountSavedApp,
+                        isLoading = isMountLoading || isInstalling
                     )
                 )
                 // Unmount button
@@ -1265,13 +1286,8 @@ private fun ActionsSection(
                     ActionItem(
                         text = stringResource(R.string.mount),
                         icon = Icons.Outlined.Link,
-                        onClick = {
-                            installViewModel.mount(
-                                packageName = installedApp.currentPackageName,
-                                version = installedApp.version
-                            )
-                        },
-                        isLoading = isMountLoading
+                        onClick = mountSavedApp,
+                        isLoading = isMountLoading || isInstalling
                     )
                 )
             }
