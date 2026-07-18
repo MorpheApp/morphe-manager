@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 /**
  * Pill-shaped action button with an icon, optional text label, and optional long-press tooltip.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ActionPillButton(
     onClick: () -> Unit,

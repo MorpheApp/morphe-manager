@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.InsertDriveFile
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -26,6 +27,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -34,13 +36,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.patcher.patch.ExplicitOptionKind
+import app.morphe.manager.patcher.patch.ImageSize
 import app.morphe.manager.patcher.patch.Option
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.util.IMAGE_MIMETYPE
+import app.morphe.manager.util.WILDCARD_MIMETYPE
 import app.morphe.manager.util.rememberAdaptiveFilePicker
 import app.morphe.manager.util.rememberFolderPickerWithPermission
 import app.morphe.manager.util.toColorOrNull
 import app.morphe.manager.util.toFilePath
+import kotlinx.collections.immutable.ImmutableList
 
 /**
  * Represents the resolved UI kind of patch option.
@@ -51,8 +58,16 @@ private sealed interface OptionKind {
     data object Color           : OptionKind
     data object PathWithPresets : OptionKind
     data object StringDropdown  : OptionKind
+    /** Folder path detected by heuristics on an untyped string option. */
     data object Path            : OptionKind
+    /** File path detected by heuristics on an untyped string option. */
     data object FilePath        : OptionKind
+    /** Folder picker for a typed folder option. */
+    data object FolderPicker    : OptionKind
+    /** File picker for a typed single-file option. */
+    data object FilePicker      : OptionKind
+    /** Image picker for a typed image option. */
+    data object Image           : OptionKind
     data object StringText      : OptionKind
     data object BooleanToggle   : OptionKind
     data object IntLong         : OptionKind
@@ -65,6 +80,18 @@ private sealed interface OptionKind {
  * All type-detection heuristics live here, keeping the UI when-expression clean and exhaustive.
  */
 private fun resolveOptionKind(option: Option<*>, value: Any?): OptionKind {
+    // Typed options dispatch to their dedicated picker Kind. Untyped string options
+    // fall through to the heuristics below and render with the classic text field.
+    option.explicitKind?.let { kind ->
+        return when (kind) {
+            ExplicitOptionKind.Folder   -> OptionKind.FolderPicker
+            ExplicitOptionKind.FilePath -> OptionKind.FilePicker
+            ExplicitOptionKind.Files    -> OptionKind.StringList
+            ExplicitOptionKind.Image    -> OptionKind.Image
+            ExplicitOptionKind.Color    -> OptionKind.Color
+        }
+    }
+
     val t        = option.type.toString()
     val isArray  = t.contains("Array")
     val isString = t.contains("String") && !isArray
@@ -279,6 +306,35 @@ internal fun PatchOptionsDialog(
                         description = option.description,
                         value = value?.toString() ?: "",
                         required = option.required,
+                        onValueChange = { onValueChange(key, it) }
+                    )
+
+                    OptionKind.FolderPicker -> FolderPickerOption(
+                        title = option.title,
+                        description = option.description,
+                        value = value?.toString() ?: "",
+                        packageName = packageName,
+                        isDefaultBundle = isDefaultBundle,
+                        required = option.required,
+                        onValueChange = { onValueChange(key, it) }
+                    )
+
+                    OptionKind.FilePicker -> FilePickerOption(
+                        title = option.title,
+                        description = option.description,
+                        value = value?.toString() ?: "",
+                        required = option.required,
+                        allowedExtensions = option.allowedExtensions,
+                        onValueChange = { onValueChange(key, it) }
+                    )
+
+                    OptionKind.Image -> ImageInputOption(
+                        title = option.title,
+                        description = option.description,
+                        value = value?.toString() ?: "",
+                        required = option.required,
+                        allowedExtensions = option.allowedExtensions,
+                        recommendedSize = option.recommendedSize,
                         onValueChange = { onValueChange(key, it) }
                     )
 
@@ -672,10 +728,8 @@ private fun FilePathInputOption(
     val isInvalid = required && value.isBlank()
 
     val filePicker = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("*/*"),
-        onResult = { uri ->
-            uri?.toFilePath()?.let { onValueChange(it) }
-        }
+        mimeTypes = arrayOf(WILDCARD_MIMETYPE),
+        onResult = { uri -> uri?.toFilePath()?.let { onValueChange(it) } }
     )
 
     Column(
@@ -685,12 +739,8 @@ private fun FilePathInputOption(
         MorpheDialogTextField(
             value = value,
             onValueChange = onValueChange,
-            label = {
-                Text(if (required) "$title *" else title)
-            },
-            placeholder = {
-                Text("/storage/emulated/0/file")
-            },
+            label = { Text(if (required) "$title *" else title) },
+            placeholder = { Text("/storage/emulated/0/file") },
             isError = isInvalid,
             showClearButton = true,
             onFilePickerClick = { filePicker() }
@@ -1210,4 +1260,284 @@ private fun DropdownOptionItem(
             dropdownItems = dropdownItems
         )
     }
+}
+
+/**
+ * Button-only folder picker for a typed folder option
+ * (`app.morphe.patcher.patch.FolderOption`). Options declared as plain
+ * `stringOption` render via [PathInputOption] instead.
+ */
+@Composable
+private fun FolderPickerOption(
+    title: String,
+    description: String,
+    value: String,
+    packageName: String,
+    isDefaultBundle: Boolean,
+    required: Boolean = false,
+    onValueChange: (String) -> Unit
+) {
+    val showIconCreator = remember { mutableStateOf(false) }
+    val showHeaderCreator = remember { mutableStateOf(false) }
+    val isInvalid = required && value.isBlank()
+
+    // Detect if this is icon-related or header-related field.
+    // Check header first, then icon (header takes priority).
+    val isHeaderField = title.contains("header", ignoreCase = true) ||
+            description.contains("header", ignoreCase = true)
+
+    val isIconField = !isHeaderField && (
+            title.contains("icon", ignoreCase = true) ||
+                    description.contains("mipmap", ignoreCase = true)
+            )
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+    ) {
+        // Folder picker (needs permissions for icon/header creation)
+        val folderPicker = rememberFolderPickerWithPermission { uri ->
+            onValueChange(uri.toFilePath())
+        }
+
+        PickerFieldHeader(title = title, required = required, isInvalid = isInvalid)
+
+        PickerButtonRow(
+            label = stringResource(R.string.select_folder),
+            selectedPath = value,
+            icon = Icons.Outlined.Folder,
+            onPick = { folderPicker() },
+            onClear = { onValueChange("") },
+        )
+
+        // Create Icon button (only for the default Morphe bundle)
+        if (isIconField && isDefaultBundle) {
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.adaptive_icon_create),
+                onClick = { showIconCreator.value = true },
+                icon = Icons.Outlined.AutoAwesome,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        // Create Header button (only for the default Morphe bundle)
+        if (isHeaderField && isDefaultBundle) {
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.header_creator_create),
+                onClick = { showHeaderCreator.value = true },
+                icon = Icons.Outlined.Image,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        // Instructions
+        if (description.isNotBlank()) {
+            ExpandableSurface(
+                title = stringResource(R.string.patch_option_instructions),
+                content = {
+                    ScrollableInstruction(description = description, maxHeight = 280.dp)
+                }
+            )
+        }
+    }
+
+    // Icon creator dialog
+    if (showIconCreator.value) {
+        AdaptiveIconCreatorDialog(
+            packageName = packageName,
+            onDismiss = { showIconCreator.value = false },
+            onIconCreated = { path ->
+                onValueChange(path)
+                showIconCreator.value = false
+            }
+        )
+    }
+
+    // Header creator dialog
+    if (showHeaderCreator.value) {
+        HeaderCreatorDialog(
+            packageName = packageName,
+            onDismiss = { showHeaderCreator.value = false },
+            onHeaderCreated = { path ->
+                onValueChange(path)
+                showHeaderCreator.value = false
+            }
+        )
+    }
+}
+
+/**
+ * Button-only file picker for a typed file option
+ * (`app.morphe.patcher.patch.FilePathOption`). Optionally filters by
+ * [allowedExtensions] via MIME type.
+ */
+@Composable
+private fun FilePickerOption(
+    title: String,
+    description: String,
+    value: String,
+    required: Boolean = false,
+    allowedExtensions: ImmutableList<String>? = null,
+    onValueChange: (String) -> Unit
+) {
+    val isInvalid = required && value.isBlank()
+
+    val mimeTypes = remember(allowedExtensions) {
+        extensionsToMimeTypes(allowedExtensions).ifEmpty { arrayOf(WILDCARD_MIMETYPE) }
+    }
+
+    val filePicker = rememberAdaptiveFilePicker(
+        mimeTypes = mimeTypes,
+        onResult = { uri -> uri?.toFilePath()?.let { onValueChange(it) } }
+    )
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+    ) {
+        PickerFieldHeader(title = title, required = required, isInvalid = isInvalid)
+
+        PickerButtonRow(
+            label = stringResource(R.string.select_file),
+            selectedPath = value,
+            icon = Icons.AutoMirrored.Outlined.InsertDriveFile,
+            onPick = { filePicker() },
+            onClear = { onValueChange("") },
+        )
+
+        if (description.isNotBlank()) {
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodySmall,
+                color = LocalDialogSecondaryTextColor.current
+            )
+        }
+    }
+}
+
+/**
+ * Image-file picker option. Restricts the picker to image MIME types and shows an
+ * optional "recommended size" hint under the field.
+ */
+@Composable
+private fun ImageInputOption(
+    title: String,
+    description: String,
+    value: String,
+    required: Boolean = false,
+    allowedExtensions: ImmutableList<String>? = null,
+    recommendedSize: ImageSize? = null,
+    onValueChange: (String) -> Unit
+) {
+    val isInvalid = required && value.isBlank()
+
+    // Fall back to image/* when no explicit extensions are declared.
+    val mimeTypes = remember(allowedExtensions) {
+        extensionsToMimeTypes(allowedExtensions).ifEmpty { arrayOf(IMAGE_MIMETYPE) }
+    }
+
+    val filePicker = rememberAdaptiveFilePicker(
+        mimeTypes = mimeTypes,
+        onResult = { uri -> uri?.toFilePath()?.let { onValueChange(it) } }
+    )
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+    ) {
+        PickerFieldHeader(title = title, required = required, isInvalid = isInvalid)
+
+        PickerButtonRow(
+            label = stringResource(R.string.adaptive_icon_select_image),
+            selectedPath = value,
+            icon = Icons.Outlined.Image,
+            onPick = { filePicker() },
+            onClear = { onValueChange("") },
+        )
+
+        val subtitle = buildString {
+            if (description.isNotBlank()) append(description)
+            if (recommendedSize != null) {
+                if (isNotEmpty()) append(" · ")
+                append("Recommended: ${recommendedSize.width}×${recommendedSize.height}")
+            }
+        }
+        if (subtitle.isNotEmpty()) {
+            Text(
+                text = subtitle,
+                style = MaterialTheme.typography.bodySmall,
+                color = LocalDialogSecondaryTextColor.current
+            )
+        }
+    }
+}
+
+/**
+ * Header row shown above a picker button (folder/file/image options).
+ * Renders the option title, an optional "*" marker for required options,
+ * and switches to the theme's error color when the option is required but empty.
+ */
+@Composable
+private fun PickerFieldHeader(title: String, required: Boolean, isInvalid: Boolean) {
+    Text(
+        text = if (required) "$title *" else title,
+        style = MaterialTheme.typography.titleSmall,
+        fontWeight = FontWeight.Bold,
+        color = if (isInvalid) MaterialTheme.colorScheme.error else LocalDialogTextColor.current,
+    )
+}
+
+/**
+ * Picker row: the main "select…" outlined button plus an inline trailing
+ * [Icons.Outlined.Clear] icon button. The clear button is only rendered when
+ * [selectedPath] is not blank.
+ */
+@Composable
+private fun PickerButtonRow(
+    label: String,
+    selectedPath: String,
+    icon: ImageVector,
+    onPick: () -> Unit,
+    onClear: () -> Unit,
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        MorpheDialogOutlinedButton(
+            text = label,
+            textSuffix = selectedPath.takeIf { it.isNotBlank() },
+            icon = icon,
+            onClick = onPick,
+            modifier = Modifier.weight(1f),
+        )
+
+        if (selectedPath.isNotBlank()) {
+            IconButton(
+                onClick = onClear,
+                modifier = Modifier.size(40.dp),
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Clear,
+                    contentDescription = stringResource(R.string.clear),
+                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                )
+            }
+        }
+    }
+}
+
+/**
+ * Maps a list of file extensions (e.g. `["png", "jpg"]`) into MIME types suitable
+ * for [rememberAdaptiveFilePicker]. Returns an empty array when [extensions] is
+ * null or empty; callers should then substitute a default wildcard MIME type.
+ */
+private fun extensionsToMimeTypes(extensions: ImmutableList<String>?): Array<String> {
+    if (extensions.isNullOrEmpty()) return emptyArray()
+    val mimeMap = android.webkit.MimeTypeMap.getSingleton()
+    return extensions
+        .mapNotNull { mimeMap.getMimeTypeFromExtension(it.trimStart('.').lowercase()) }
+        .distinct()
+        .toTypedArray()
 }
