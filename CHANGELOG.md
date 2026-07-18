@@ -1,3 +1,11 @@
+# [1.24.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.9...v1.24.0-dev.10) (2026-07-18)
+
+
+### Features
+
+* Add press-scale animation to `ActionPillButton` ([6721137](https://github.com/MorpheApp/morphe-manager/commit/6721137320dace79180aef40ae031451ad2a19fb))
+* Add typed patch options ([#706](https://github.com/MorpheApp/morphe-manager/issues/706)) ([52727a4](https://github.com/MorpheApp/morphe-manager/commit/52727a42e14b0b478bd80343880b411021a3cc5e))
+
 # [1.24.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.8...v1.24.0-dev.9) (2026-07-18)
 
 
