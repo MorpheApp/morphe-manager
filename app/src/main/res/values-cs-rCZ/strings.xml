@@ -328,6 +328,7 @@ Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - ud
     <string name="home_app_info_app_deleted_warning">Aplikace byla odinstalována</string>
     <string name="home_app_info_app_deleted_description">Tuto aplikaci bylo odinstalováno mimo Morphe. Zápalte ji znovu, abyste obnovili funkčnost</string>
     <string name="home_app_info_apk_size">Velikost APK</string>
+    <string name="home_app_info_cpu_arch">Architektura CPU</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Režim root vyžaduje, aby před záplatováním byl na vašem zařízení nainstalován původní APK</string>
     <string name="root_gmscore_excluded">Záplata s podporou GmsCore je v root režimu vyloučena</string>
@@ -493,13 +494,15 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_app_language">Jazyk aplikace</string>
     <string name="settings_appearance_app_language_current">Aktuální jazyk</string>
     <string name="settings_appearance_translations_info_title">Pro některé jazyky mohou chybět nebo být neúplné.</string>
-    <string name="settings_appearance_translations_info_text">Chcete přidat nový jazyk nebo vylepšit existující překlady? Navštivte %s.</string>
+    <string name="settings_appearance_translations_info_text">"Chcete přidat nový jazyk nebo vylepšit existující překlady? Navštivte %s."</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Domovská obrazovka</string>
     <string name="settings_appearance_greeting_phrases">Pozdravné fráze</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zobrazit pozdravný vzkaz na domovské obrazovce</string>
     <string name="settings_appearance_app_grouping">Kreslení aplikací</string>
     <string name="settings_appearance_app_grouping_description">Zobrazit přepínač domovské obrazovky pro seskupení aplikací podle zdroje nebo vlastních kategorií, s ponecháním výběru při vypnutí</string>
+    <string name="settings_appearance_sort_button">Tlačítko pro řazení</string>
+    <string name="settings_appearance_sort_button_description">Zobrazit tlačítko pro řazení na domovské obrazovce</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikona aplikace</string>
     <string name="settings_appearance_app_icon_default">Výchozí</string>
@@ -562,7 +565,8 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_advanced_github_pat_configured">Token nakonfigurován</string>
     <string name="settings_advanced_github_pat_how_to_get">Jak získat token</string>
     <string name="settings_advanced_github_pat_dialog_title">Nastavit GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Nastavte GitHub Personal Access Token, abyste mohli přidávat žádosti jako externí zdroje. Vytvořte PAT s rozsahem public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Nastavte GitHub Personal Access Token, abyste mohli přidávat pull requesty jako externí zdroje. Vytvořte PAT s rozsahem public_repo na
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Zahrnout do exportu nastavení</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Přidá toto PAT do exportovaných nastavení Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Nesdílejte svůj PAT. Pokud ho zahrnete do exportu nastavení, uchovejte tento soubor v soukromí, protože obsahuje token</string>
@@ -661,7 +665,7 @@ Rozměry obrázků musí být následující:
     <string name="installer_status_not_supported">Nepodporováno pro tuto akci</string>
     <string name="installer_status_shizuku_not_installed">Instalujte Shizuku nebo Sui pro použití této možnosti</string>
     <string name="installer_status_shizuku_not_running">Spusťte Shizuku nebo Sui a zkuste to znovu</string>
-    <string name="installer_status_shizuku_permission">Povolte Morphe v aplikaci Shizuku</string>
+    <string name="installer_status_shizuku_permission">Povolte aplikaci Morphe přístup od aplikace Shizuku</string>
     <string name="installer_mount_warning_install">Vaš primary instalátor je nastaven na kořenový instalátor. Tato uložená aplikace nebyla nainstalována pomocí kořenového instalátoru</string>
     <string name="mount_version_mismatch_message">Verze původní aplikace (%2$s) se neshoduje s verzí upravené aplikace (%1$s). Kořenujte odpovídající původní verzi, pak zkuste to znovu</string>
     <string name="installer_status_shizuku_unsupported">Použitá verze Shizuku není podporována</string>
@@ -676,13 +680,42 @@ Rozměry obrázků musí být následující:
     <string name="installer_unavailable_shizuku_hint">Ujistěte se, že je Shizuku spuštěn a povoleno pro tuto aplikaci</string>
     <string name="installer_use_standard">Použít standard</string>
     <string name="installer_play_store_warning_title">Instalovat jako Play Store?</string>
-    <string name="installer_play_store_warning_message">Opravená aplikace bude zaznamenána jako nainstalovaná z Google Play Store. To umožní službám, jako je Android Auto, ji rozpoznat jako aplikaci z Play Store.</string>
+    <string name="installer_play_store_warning_message">Opravená aplikace bude zaznamenána jako nainstalovaná z Obchodu Google Play. To může pomoci službám, jako je Android Auto, rozpoznat ji jako aplikaci z Obchodu Play, ale není to zaručeno pro každou aplikaci nebo zařízení. Chování se může lišit v závislosti na verzi Androidu, ROM, značce zařízení a kontrolách specifických pro aplikaci.</string>
     <string name="installer_play_store_warning_risk">Play Store může nabízet aktualizace pro opravenou aplikaci. Instalace této aktualizace přepíše opravený APK s původní verzí a odstraní opravy. Pokud budete vyzváni k aktualizaci, klepněte na nabídku se třemi tečkami na stránce aplikace v Play Store a zvolte \"Vypnout aktualizace\".</string>
     <string name="installer_play_store_warning_continue">Rozumím, pokračovat</string>
+    <string name="installer_play_store_mode">Instalovat jako Obchod Play</string>
+    <string name="installer_play_store_mode_description">Zaznamenat Obchod Google Play jako zdroj instalace pro tento způsob instalace</string>
     <string name="settings_prompt_installer_on_install">Výběr instalátoru</string>
     <string name="settings_prompt_installer_on_install_description">Zobrazí dialog pro výběr instalátoru pokaždé, když se nainstaluje záplatovaná aplikace</string>
     <string name="settings_auto_install_with_shizuku">Automatická instalace po záplatování</string>
     <string name="settings_auto_install_with_shizuku_description">Potichu nainstaluje záplatovaný APK, jakmile se záplatování dokončí</string>
+    <string name="settings_auto_uninstall_with_shizuku">Automatické odinstalování v případě konfliktu</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Při automatické instalaci pomocí Shizuku nejprve odinstalujte existující aplikaci, pokud Android nahlásí konflikt podpisů. Tímto může dojít ke smazání dat aplikace.</string>
+    <string name="settings_auto_uninstall_warning_title">Povolit automatické odinstalování?</string>
+    <string name="settings_auto_uninstall_warning_message">Pokud Android během automatické instalace Shizuku nahlásí konflikt podpisů, Morphe nejprve odinstaluje existující aplikaci před instalací opraveného APK</string>
+    <string name="settings_auto_uninstall_warning_risk">Tímto může dojít ke smazání dat aplikace. Pokud se opravené APK nepodaří nainstalovat po odinstalování, předchozí aplikace může být již pryč.</string>
+    <string name="installer_shizuku_status_action">Zkontrolovat stav Shizuku</string>
+    <string name="installer_shizuku_status_title">Stav Shizuku</string>
+    <string name="installer_shizuku_status_ready">Připraveno</string>
+    <string name="installer_shizuku_status_issue">Vyžaduje pozornost</string>
+    <string name="installer_shizuku_status_supported">Podporováno</string>
+    <string name="installer_shizuku_status_running">Spuštěno</string>
+    <string name="installer_shizuku_status_permission">Oprávnění</string>
+    <string name="installer_shizuku_status_mode">Režim</string>
+    <string name="installer_shizuku_status_provider">Poskytovatel</string>
+    <string name="installer_shizuku_status_granted">Udělena</string>
+    <string name="installer_shizuku_status_missing">Chybí</string>
+    <string name="installer_shizuku_request_permission">Požádat o oprávnění</string>
+    <string name="installer_shizuku_install_fail">Instalace Shizuku selhala: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Instalace Shizuku selhala: %1$s
+
+Podrobnosti: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Chybí oprávnění Shizuku. Udělte oprávnění aplikaci Morphe a zkuste to znovu</string>
+    <string name="installer_shizuku_error_timeout">Shizuku nevrátil výsledek instalace. Ujistěte se, že stále běží a zkuste to znovu</string>
+    <string name="installer_shizuku_error_downgrade">Android tuto operaci zablokoval, protože by to znamenalo snížení verze nainstalované aplikace.</string>
+    <string name="installer_shizuku_error_signature">Android tuto operaci zablokoval, protože nainstalovaná aplikace má odlišný podpis.</string>
+    <string name="installer_shizuku_error_invalid_apk">Android nemohl přečíst tento APK</string>
+    <string name="installer_shizuku_error_user_profile">Android tuto operaci zablokoval pro aktuálního uživatele nebo pracovní profil.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimalizace baterie</string>
     <string name="settings_system_battery_optimization_description">Udrží program záplatování spuštěný i při minimalizaci aplikace</string>
@@ -801,9 +834,8 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_export_source_data_success">Data zdroje exportována úspěšně</string>
     <string name="settings_system_import_source_data_fail">Nepodařilo se importovat data zdroje</string>
     <string name="settings_system_import_source_data_success">Data zdroje importována úspěšně</string>
-    <string name="settings_system_patch_details_title">Detaily záplaty</string>
-    <string name="settings_system_selected_patches_title">Vybrané záplaty (%s)</string>
-    <string name="settings_system_patch_options_title">Nastavení záplaty (%s)</string>
+    <string name="settings_system_selected_patches_section">Vybrané záplaty</string>
+    <string name="settings_system_patch_options_section">Nastavení záplaty</string>
     <string name="settings_system_no_patches_or_options">Žádné uložené záplaty nebo nastavení</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Vlastní výběr souborů</string>

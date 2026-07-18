@@ -329,6 +329,7 @@
     <string name="home_app_info_app_deleted_warning">Приложението беше деинсталирано</string>
     <string name="home_app_info_app_deleted_description">Това приложение беше деинсталирано извън Morphe. Поправете го отново, за да възстановите функционалността</string>
     <string name="home_app_info_apk_size">Размер на APK</string>
+    <string name="home_app_info_cpu_arch">CPU архитектура</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Режимът \"Root\" изисква оригиналния APK да бъде инсталиран на вашето устройство преди да се прилагат патчове</string>
     <string name="root_gmscore_excluded">Поддръжката на GmsCore е изключена в режим на корен</string>
@@ -494,13 +495,16 @@
     <string name="settings_appearance_app_language">Език на приложението</string>
     <string name="settings_appearance_app_language_current">Текущият език</string>
     <string name="settings_appearance_translations_info_title">Недостъпни или неполни преводи за някои езици</string>
-    <string name="settings_appearance_translations_info_text">За да преведете нови езици или подобрите съществуващите преводи, посетете %s</string>
+    <string name="settings_appearance_translations_info_text">"За да преведете нови езици или да подобрите съществуващите преводи, посетете
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Начален екран</string>
     <string name="settings_appearance_greeting_phrases">Поздравителни фрази</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Показване на поздравително съобщение на началния екран</string>
     <string name="settings_appearance_app_grouping">Групиране на приложения</string>
     <string name="settings_appearance_app_grouping_description">Покажи превключвател на началния екран за групиране на приложения по източник или по твои категории, запазвайки селекцията, когато е изключено</string>
+    <string name="settings_appearance_sort_button">Бутон за сортиране</string>
+    <string name="settings_appearance_sort_button_description">Покажи бутона за сортиране на началния екран</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Икона на приложението</string>
     <string name="settings_appearance_app_icon_default">По подразбиране</string>
@@ -563,7 +567,8 @@
     <string name="settings_advanced_github_pat_configured">Конфигуриран токен</string>
     <string name="settings_advanced_github_pat_how_to_get">Как да получите токен</string>
     <string name="settings_advanced_github_pat_dialog_title">Задайте GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">За да можете да добавяте източници като външни източници, задайте GitHub Personal Access Token. Създайте PAT с обхват public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Задайте GitHub Personal Access Token, за да можете да добавяте pull requests като външни източници. Създайте PAT с обхват public_repo на
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Включи в извеждане на настройки</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Добавя този PAT към експортираните настройки на Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Не споделяйте вашия PAT. Ако го включите в извеждане на настройки, пазете този файл в приватен режим, защото съдържа токена</string>
@@ -662,7 +667,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">Неподдържано за това действие.</string>
     <string name="installer_status_shizuku_not_installed">Инсталирайте Shizuku или Sui, за да използвате тази опция.</string>
     <string name="installer_status_shizuku_not_running">Запустете Shizuku или Sui и опитайте отново.</string>
-    <string name="installer_status_shizuku_permission">Предоставете разрешение на Shizuku за Morphe от приложението Shizuku.</string>
+    <string name="installer_status_shizuku_permission">Разрешете на Morphe достъп от приложението Shizuku</string>
     <string name="installer_mount_warning_install">Основният ви инсталатор е настроен на инсталатора с коренен достъп. Това запазено приложение не бе инсталирано използвайки достъп.</string>
     <string name="mount_version_mismatch_message">Версия на приложението за акции (%2$s) не съвпада с версията на патнатото приложение (%1$s). Монтирайте съответстващата версия на приложението за акции, след това опитайте отново</string>
     <string name="installer_status_shizuku_unsupported">Версията на инсталирания Shizuku не е поддържана.</string>
@@ -677,13 +682,42 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">Уверете се, че Shizuku е стартиран и разрешението е предоставето на това приложение.</string>
     <string name="installer_use_standard">Използвайте стандартен</string>
     <string name="installer_play_store_warning_title">Инсталиране като Play Store?</string>
-    <string name="installer_play_store_warning_message">Приложението след промени ще бъде записано като инсталирано от Google Play Store. Това позволява на услуги като Android Auto да го разпознае като приложение от Play Store</string>
+    <string name="installer_play_store_warning_message">Пачнатo приложение ще бъде регистрирано като инсталирано от Google Play Store. Това може да помогне на услуги като Android Auto да го разпознае като приложение от Play Store, но това не е гарантирано за всяко приложение или устройство. Поведението може да варира в зависимост от версията на Android, ROM, марката на устройството и специфичните проверки на приложението.</string>
     <string name="installer_play_store_warning_risk">Play Store може да предложи актуализации за поправеното приложение. Инсталирането на тази актуализация ще презапише поправения APK файл с оригиналната версия и ще премахне поправките. Ако бъдете подканени да актуализирате, докоснете менюто с три точки на страницата на приложението в Play Store и изберете \"Изключване на актуализациите\".</string>
     <string name="installer_play_store_warning_continue">Разбирам, продължи</string>
+    <string name="installer_play_store_mode">Инсталиране като Play Store</string>
+    <string name="installer_play_store_mode_description">Записване на Google Play Store като източник на инсталацията за този метод на инсталиране</string>
     <string name="settings_prompt_installer_on_install">Показва се прозорец за избор на инсталатор</string>
     <string name="settings_prompt_installer_on_install_description">Показва диалогов прозорец за избор на инсталатор всеки път, когато се инсталира приложение с пач.</string>
     <string name="settings_auto_install_with_shizuku">Автоматична инсталация след поправяне</string>
     <string name="settings_auto_install_with_shizuku_description">Инсталира поправения APK тихо веднага след завършване на поправянето</string>
+    <string name="settings_auto_uninstall_with_shizuku">Автоматично деинсталиране при конфликт</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">При автоматично инсталиране със Shizuku, първо деинсталирайте съществуващото приложение, ако Android съобщи за конфликт в подписите. Това може да премахне данните на приложението.</string>
+    <string name="settings_auto_uninstall_warning_title">Активиране на автоматично деинсталиране?</string>
+    <string name="settings_auto_uninstall_warning_message">Ако Android съобщи за конфликт в подписите по време на автоматична инсталация със Shizuku, Morphe ще деинсталира съществуващото приложение, преди да инсталира пачвания APK файл.</string>
+    <string name="settings_auto_uninstall_warning_risk">Това може да премахне данните на приложението. Ако пачваният APK файл не успее да се инсталира след деинсталирането, предишното приложение може вече да е премахнато.</string>
+    <string name="installer_shizuku_status_action">Проверка на статуса на Shizuku</string>
+    <string name="installer_shizuku_status_title">Статус на Shizuku</string>
+    <string name="installer_shizuku_status_ready">Готово</string>
+    <string name="installer_shizuku_status_issue">Необходимо е внимание</string>
+    <string name="installer_shizuku_status_supported">Поддържа се</string>
+    <string name="installer_shizuku_status_running">Работи</string>
+    <string name="installer_shizuku_status_permission">Разрешение</string>
+    <string name="installer_shizuku_status_mode">Режим</string>
+    <string name="installer_shizuku_status_provider">Доставчик</string>
+    <string name="installer_shizuku_status_granted">Получено</string>
+    <string name="installer_shizuku_status_missing">Липсва</string>
+    <string name="installer_shizuku_request_permission">Заявка за разрешение</string>
+    <string name="installer_shizuku_install_fail">Инсталацията на Shizuku не успя: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Инсталацията на Shizuku не успя: %1$s
+
+Подробности: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Липсва разрешение на Shizuku. Предоставете разрешение на Morphe и опитайте отново.</string>
+    <string name="installer_shizuku_error_timeout">Shizuku не върна резултат от инсталацията. Уверете се, че все още работи и опитайте отново.</string>
+    <string name="installer_shizuku_error_downgrade">Android блокира това, защото ще понижи нивото на инсталираното приложение.</string>
+    <string name="installer_shizuku_error_signature">Android блокира това, защото инсталираното приложение има различен подпис.</string>
+    <string name="installer_shizuku_error_invalid_apk">Android не може да прочете този APK файл.</string>
+    <string name="installer_shizuku_error_user_profile">Android блокира това за текущия потребител или работен профил.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизация на батерията</string>
     <string name="settings_system_battery_optimization_description">Поддържа работещ патчър, когато приложението е минимизирано</string>
@@ -802,9 +836,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_source_data_success">Данните за източника са експортирани успешно</string>
     <string name="settings_system_import_source_data_fail">Неуспешно импортиране на данни за източника</string>
     <string name="settings_system_import_source_data_success">Данните за източника са импортирани успешно</string>
-    <string name="settings_system_patch_details_title">Детайли за пакета</string>
-    <string name="settings_system_selected_patches_title">Избрани заплашки (%s)</string>
-    <string name="settings_system_patch_options_title">Опции на заплашки (%s)</string>
+    <string name="settings_system_selected_patches_section">Избрани пачове</string>
+    <string name="settings_system_patch_options_section">Опции за пачове</string>
     <string name="settings_system_no_patches_or_options">Няма запазени пакети или опции</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Персонализиран избор на файлове</string>

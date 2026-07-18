@@ -329,6 +329,7 @@
     <string name="home_app_info_app_deleted_warning">Застосунок було видалено</string>
     <string name="home_app_info_app_deleted_description">Це застосунок було видалено поза менеджером Morphe. Перепатчіть його, щоб відновити функціональність</string>
     <string name="home_app_info_apk_size">Розмір APK</string>
+    <string name="home_app_info_cpu_arch">Архітектура процесора</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Режим root вимагає, щоб оригінальний APK файл був встановлений на вашому пристрої перед патчингом</string>
     <string name="root_gmscore_excluded">Патч підтримки GmsCore виключено у режимі root</string>
@@ -494,13 +495,16 @@
     <string name="settings_appearance_app_language">Мова застосунку</string>
     <string name="settings_appearance_app_language_current">Поточна мова</string>
     <string name="settings_appearance_translations_info_title">Переклади деяких мов можуть бути відсутніми або неповними</string>
-    <string name="settings_appearance_translations_info_text">Щоб перекласти нові мови або покращити наявні переклади, відвідайте %s</string>
+    <string name="settings_appearance_translations_info_text">"Щоб перекласти нові мови або покращити наявні переклади, відвідайте
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Головний екран</string>
     <string name="settings_appearance_greeting_phrases">Вітальні фрази</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Показувати вітальне повідомлення на головному екрані</string>
     <string name="settings_appearance_app_grouping">Групування застосунків</string>
     <string name="settings_appearance_app_grouping_description">Показує перемикач на головному екрані для групування застосунків за джерелом або власними категоріями, зберігаючи вибір при вимкненні</string>
+    <string name="settings_appearance_sort_button">Кнопка сортування</string>
+    <string name="settings_appearance_sort_button_description">Показувати кнопку сортування на головному екрані</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Іконка застосунку</string>
     <string name="settings_appearance_app_icon_default">Стандартна</string>
@@ -563,7 +567,8 @@
     <string name="settings_advanced_github_pat_configured">Токен налаштовано</string>
     <string name="settings_advanced_github_pat_how_to_get">Як отримати токен</string>
     <string name="settings_advanced_github_pat_dialog_title">Встановити GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Встановіть GitHub Personal Access Token, щоб мати змогу додавати pull requests як зовнішні джерела. Створіть PAT з ключем public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Встановіть GitHub Personal Access Token, щоб мати змогу додавати pull requests як зовнішні джерела. Створіть PAT з ключем public_repo на
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Включити в експорт налаштувань</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Додає цей PAT до експортованих налаштувань Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Не поширюйте свій PAT (Personal access token). Якщо ви включаєте його в експорт налаштувань, збережіть цей файл приватним, оскільки він містить токен</string>
@@ -662,7 +667,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">Не підтримується для цієї дії</string>
     <string name="installer_status_shizuku_not_installed">Встановіть Shizuku або Sui для використання цього варіанту</string>
     <string name="installer_status_shizuku_not_running">Запустіть Shizuku або Sui та спробуйте знову</string>
-    <string name="installer_status_shizuku_permission">Надайте дозвіл Shizuku для Morphe у застосунку Shizuku</string>
+    <string name="installer_status_shizuku_permission">Надайте дозвіл Morphe у застосунку Shizuku</string>
     <string name="installer_mount_warning_install">Ваш основний інсталятор налаштований на інсталятор із рут монтуванням. Цей збережений застосунок не був встановлений за допомогою монтування</string>
     <string name="mount_version_mismatch_message">Версія стокового застосунку (%2$s) не відповідає версії патченого (%1$s). Змонтуйте відповідну стокову версію, а потім спробуйте знову</string>
     <string name="installer_status_shizuku_unsupported">Версія встановленого Shizuku не підтримується</string>
@@ -677,13 +682,42 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">Переконайтеся, що Shizuku запущено, і менеджеру Морфе надано дозвіл</string>
     <string name="installer_use_standard">Використати стандартний</string>
     <string name="installer_play_store_warning_title">Встановити як Play Store?</string>
-    <string name="installer_play_store_warning_message">Пропатчений застосунок буде записано як встановлений з Google Play Store. Це дозволяє таким сервісам, як Android Auto, розпізнавати його як застосунок із Play Store</string>
+    <string name="installer_play_store_warning_message">Пропатчений застосунок буде записано як встановлений з Google Play Store. Це може допомогти таким сервісам, як Android Auto, розпізнавати його як застосунок із Play Store, але це не гарантовано для кожного застосунку чи пристрою. Поведінка може відрізнятися залежно від версії Android, ROM, бренду пристрою та специфічних перевірок застосунку</string>
     <string name="installer_play_store_warning_risk">Play Store може пропонувати оновлення для пропатченого застосунку. Встановлення цього оновлення перезапише пропатчений APK оригінальною версією та видалить патчі. Якщо з\'явиться запит на оновлення, натисніть меню з трьома крапками на сторінці застосунку в Play Store та виберіть \"Вимкнути оновлення\"</string>
     <string name="installer_play_store_warning_continue">Я розумію, продовжити</string>
+    <string name="installer_play_store_mode">Встановити як з Play Store</string>
+    <string name="installer_play_store_mode_description">Записувати Google Play Store як джерело встановлення для цього методу встановлення</string>
     <string name="settings_prompt_installer_on_install">Запит на вибір інсталятора</string>
     <string name="settings_prompt_installer_on_install_description">Показує діалог вибору інсталятора щоразу при встановленні патченого застосунку</string>
     <string name="settings_auto_install_with_shizuku">Автоматична інсталяція після патчингу</string>
     <string name="settings_auto_install_with_shizuku_description">Автоматично встановлює пропатчений APK одразу після завершення патчингу</string>
+    <string name="settings_auto_uninstall_with_shizuku">Автоматичне видалення при конфлікті</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">При автоматичному встановленні через Shizuku спочатку видаляти наявний застосунок, якщо Android повідомляє про конфлікт підпису. Це може видалити дані застосунку</string>
+    <string name="settings_auto_uninstall_warning_title">Увімкнути автоматичне видалення?</string>
+    <string name="settings_auto_uninstall_warning_message">Якщо Android повідомляє про конфлікт підпису під час автоматичного встановлення через Shizuku, Morphe видалить наявний застосунок перед встановленням пропатченого APK</string>
+    <string name="settings_auto_uninstall_warning_risk">Це може видалити дані застосунку. Якщо встановлення пропатченого APK не вдасться після видалення, попередній застосунок може бути вже втрачено</string>
+    <string name="installer_shizuku_status_action">Перевірити статус Shizuku</string>
+    <string name="installer_shizuku_status_title">Статус Shizuku</string>
+    <string name="installer_shizuku_status_ready">Готово</string>
+    <string name="installer_shizuku_status_issue">Потребує уваги</string>
+    <string name="installer_shizuku_status_supported">Підтримується</string>
+    <string name="installer_shizuku_status_running">Запущено</string>
+    <string name="installer_shizuku_status_permission">Дозволи</string>
+    <string name="installer_shizuku_status_mode">Режим</string>
+    <string name="installer_shizuku_status_provider">Постачальник</string>
+    <string name="installer_shizuku_status_granted">Надано</string>
+    <string name="installer_shizuku_status_missing">Відсутній</string>
+    <string name="installer_shizuku_request_permission">Запросити дозвіл</string>
+    <string name="installer_shizuku_install_fail">Встановлення через Shizuku не вдалося: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Встановлення через Shizuku не вдалося: %1$s
+
+Деталі: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Відсутній дозвіл Shizuku. Надайте дозвіл Morphe та спробуйте знову</string>
+    <string name="installer_shizuku_error_timeout">Shizuku не повернув результат встановлення. Переконайтеся, що він все ще запущений, і спробуйте знову</string>
+    <string name="installer_shizuku_error_downgrade">Android заблокував це, оскільки це призвело б до пониження версії встановленого застосунку</string>
+    <string name="installer_shizuku_error_signature">Android заблокував це, оскільки встановлений застосунок має інший підпис</string>
+    <string name="installer_shizuku_error_invalid_apk">Android не зміг прочитати цей APK</string>
+    <string name="installer_shizuku_error_user_profile">Android заблокував це для поточного користувача або робочого профілю</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимізація батареї</string>
     <string name="settings_system_battery_optimization_description">Утримує патчер активним під час згортання застосунку</string>
@@ -764,9 +798,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_open_app_info_title">Відкрити сховище застосунку Android</string>
     <string name="settings_system_storage_open_app_info_description">Керуйте або очищайте всі дані Morphe через системні налаштування</string>
     <string name="settings_system_save_original_apks_title">Зберігати оригінальні APK</string>
-    <string name="settings_system_save_original_apks_description">Збережіть APK до патчу, щоб його можна було повторно використати для повторного патчування, не вибираючи файл знову</string>
+    <string name="settings_system_save_original_apks_description">Зберігає APK перед патчингом, щоб його можна було повторно використати для повторного патчингу без повторного вибору файлу</string>
     <string name="settings_system_save_patched_apks_title">Зберігати пропатчені APK</string>
-    <string name="settings_system_save_patched_apks_description">Збережіть копію пропатченого APK для подальшого експорту або перевстановлення з менеджера</string>
+    <string name="settings_system_save_patched_apks_description">Зберігає копію пропатченого APK для подальшого експорту або повторного встановлення з менеджера</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Патчені APK файли</string>
     <string name="settings_system_patched_apks_description">Керує збереженими файлами патчених застосунків</string>
@@ -802,9 +836,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_source_data_success">Дані джерела експортовано успішно</string>
     <string name="settings_system_import_source_data_fail">Не вдалося імпортувати дані джерела</string>
     <string name="settings_system_import_source_data_success">Дані джерела імпортовано успішно</string>
-    <string name="settings_system_patch_details_title">Деталі патчу</string>
-    <string name="settings_system_selected_patches_title">Вибрані патчі (%s)</string>
-    <string name="settings_system_patch_options_title">Параметри патчів (%s)</string>
+    <string name="settings_system_selected_patches_section">Вибрані патчі</string>
+    <string name="settings_system_patch_options_section">Параметри патчів</string>
     <string name="settings_system_no_patches_or_options">Не збережено жодних патчів або параметрів</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Власний вибір файлів</string>

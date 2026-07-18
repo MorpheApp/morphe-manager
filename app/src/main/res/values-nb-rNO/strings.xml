@@ -328,6 +328,7 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <string name="home_app_info_app_deleted_warning">Appen ble avinstallert</string>
     <string name="home_app_info_app_deleted_description">Denne appen ble avinstallert utenfor Morphe. Patch den på nytt for å gjenopprette funksjonaliteten</string>
     <string name="home_app_info_apk_size">APK-størrelse</string>
+    <string name="home_app_info_cpu_arch">CPU-arkitektur</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-modus krever at den originale APK-en er installert på enheten din før patching</string>
     <string name="root_gmscore_excluded">GmsCore-støttepakken er ekskludert i rotmodus</string>
@@ -493,13 +494,16 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_app_language">Appspråk</string>
     <string name="settings_appearance_app_language_current">Gjeldende språk</string>
     <string name="settings_appearance_translations_info_title">Oversettelser for noen språk mangler eller er ufullstendige</string>
-    <string name="settings_appearance_translations_info_text">For å oversette nye språk eller forbedre de eksisterende oversettelsene, besøk %s</string>
+    <string name="settings_appearance_translations_info_text">"For å oversette nye språk eller forbedre eksisterende oversettelser, besøk
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Hjemmeskjerm</string>
     <string name="settings_appearance_greeting_phrases">Hilsenfraser</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Vis en hilsenmelding på startskjermen</string>
     <string name="settings_appearance_app_grouping">Appgruppering</string>
     <string name="settings_appearance_app_grouping_description">Vis en startskjermbryter for å gruppere apper etter kilde eller egne kategorier, og behold valget når den er slått av</string>
+    <string name="settings_appearance_sort_button">Sorter-knapp</string>
+    <string name="settings_appearance_sort_button_description">Vis sorter-knappen på hjemmeskjermen</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Appikon</string>
     <string name="settings_appearance_app_icon_default">Standard</string>
@@ -562,7 +566,8 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_advanced_github_pat_configured">Token konfigurert</string>
     <string name="settings_advanced_github_pat_how_to_get">Hvordan få et token</string>
     <string name="settings_advanced_github_pat_dialog_title">Sett GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Angi en GitHub Personal Access Token for å kunne legge til pull requests som eksterne kilder. Opprett en PAT med scope public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Angi et GitHub Personal Access Token for å legge til pull requests som eksterne kilder. Opprett en PAT med scope public_repo på
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Inkluder i eksport av innstillinger</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Legger denne PAT-en til eksporterte Morphe-innstillinger</string>
     <string name="settings_advanced_github_pat_export_warning">Ikke del din PAT. Hvis du inkluderer den i en eksport av innstillinger, må du holde den filen privat, da den inneholder tokenet</string>
@@ -661,7 +666,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">Ikke støttet for denne handlingen</string>
     <string name="installer_status_shizuku_not_installed">Installer Shizuku eller Sui for å bruke dette alternativet</string>
     <string name="installer_status_shizuku_not_running">Start Shizuku eller Sui og prøv igjen</string>
-    <string name="installer_status_shizuku_permission">Gi Shizuku tillatelse til Morphe fra Shizuku-appen</string>
+    <string name="installer_status_shizuku_permission">Gi Morphe tillatelse fra Shizuku-appen</string>
     <string name="installer_mount_warning_install">Din primære installasjonsprogram er satt til den rooted mount-installasjonsprogrammet. Denne lagrede appen ble ikke installert ved hjelp av mount</string>
     <string name="mount_version_mismatch_message">Aksjeversjonen (%2$s) stemmer ikke overens med den patchede appversjonen (%1$s). Mount den matchende aksjeversjonen og prøv igjen</string>
     <string name="installer_status_shizuku_unsupported">Den installerte Shizuku-versjonen støttes ikke</string>
@@ -676,13 +681,42 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">Sørg for at Shizuku kjører og tillatelse er gitt til denne appen</string>
     <string name="installer_use_standard">Bruk standard</string>
     <string name="installer_play_store_warning_title">Installer som Play Store?</string>
-    <string name="installer_play_store_warning_message">Den patchede appen vil bli registrert som installert fra Google Play Store. Dette lar tjenester som Android Auto gjenkjenne den som en Play Store-app</string>
+    <string name="installer_play_store_warning_message">Den patchede appen vil bli registrert som installert fra Google Play Butikk. Dette kan hjelpe tjenester som Android Auto med å gjenkjenne den som en Play Butikk-app, men det garanteres ikke for hver app eller enhet. Oppførselen kan variere avhengig av Android-versjon, ROM, enhetsmerke og app-spesifikke kontroller</string>
     <string name="installer_play_store_warning_risk">Play Store kan tilby oppdateringer for den patchede appen. Hvis du installerer den oppdateringen, vil den overskrive den patchede APK-filen med den originale versjonen og fjerne patchene. Hvis du blir bedt om å oppdatere, trykker du på menyen med tre prikker på appens Play Store-side og velger \"Slå av oppdateringer\"</string>
     <string name="installer_play_store_warning_continue">Jeg forstår, fortsett</string>
+    <string name="installer_play_store_mode">Installer som Play Butikk</string>
+    <string name="installer_play_store_mode_description">Registrer Google Play Butikk som kildefilen for denne installasjonsmetoden</string>
     <string name="settings_prompt_installer_on_install">Installeringsvalg-melding</string>
     <string name="settings_prompt_installer_on_install_description">Viser installasjonsvalgdialogen hver gang en oppdatert app installeres</string>
     <string name="settings_auto_install_with_shizuku">Automatisk installasjon etter patching</string>
     <string name="settings_auto_install_with_shizuku_description">Installerer APK-en stille og rolig så snart patching er fullført</string>
+    <string name="settings_auto_uninstall_with_shizuku">Automatisk avinstallasjon ved konflikt</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Når du installerer automatisk med Shizuku, avinstaller den eksisterende appen først hvis Android rapporterer en signaturkonflikt. Dette kan fjerne appdata</string>
+    <string name="settings_auto_uninstall_warning_title">Aktiver automatisk avinstallasjon?</string>
+    <string name="settings_auto_uninstall_warning_message">Hvis Android rapporterer en signaturkonflikt under Shizuku-autoinstallasjon, vil Morphe avinstallere den eksisterende appen før den installerer den patchede APK-en</string>
+    <string name="settings_auto_uninstall_warning_risk">Dette kan fjerne appdata. Hvis den patchede APK-en ikke klarer å installere etter avinstallasjon, kan den forrige appen allerede være borte</string>
+    <string name="installer_shizuku_status_action">Sjekk Shizuku-status</string>
+    <string name="installer_shizuku_status_title">Shizuku-status</string>
+    <string name="installer_shizuku_status_ready">Klar</string>
+    <string name="installer_shizuku_status_issue">Krever oppmerksomhet</string>
+    <string name="installer_shizuku_status_supported">Støttet</string>
+    <string name="installer_shizuku_status_running">Kjører</string>
+    <string name="installer_shizuku_status_permission">Tillatelse</string>
+    <string name="installer_shizuku_status_mode">Modus</string>
+    <string name="installer_shizuku_status_provider">Leverandør</string>
+    <string name="installer_shizuku_status_granted">Gitt</string>
+    <string name="installer_shizuku_status_missing">Manglende</string>
+    <string name="installer_shizuku_request_permission">Be om tillatelse</string>
+    <string name="installer_shizuku_install_fail">Shizuku-installasjon mislyktes: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku-installasjon mislyktes: %1$s
+
+Detaljer: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku-tillatelse mangler. Gi tillatelse til Morphe og prøv igjen</string>
+    <string name="installer_shizuku_error_timeout">Shizuku returnerte ikke et installasjonsresultat. Sørg for at den fortsatt kjører og prøv igjen</string>
+    <string name="installer_shizuku_error_downgrade">Android blokkerte dette fordi det ville nedgradere den installerte appen</string>
+    <string name="installer_shizuku_error_signature">Android blokkerte dette fordi den installerte appen har en annen signatur</string>
+    <string name="installer_shizuku_error_invalid_apk">Android kunne ikke lese denne APK-en</string>
+    <string name="installer_shizuku_error_user_profile">Android blokkerte dette for den nåværende brukeren eller arbeidsprofilen</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimalisering av batteri</string>
     <string name="settings_system_battery_optimization_description">Holder oppdatereren i gang når appen minimeres</string>
@@ -801,9 +835,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_source_data_success">Kildedata eksportert</string>
     <string name="settings_system_import_source_data_fail">Kunne ikke importere kildedata</string>
     <string name="settings_system_import_source_data_success">Kildedata importert</string>
-    <string name="settings_system_patch_details_title">Patchdetaljer</string>
-    <string name="settings_system_selected_patches_title">Valgte patcher (%s)</string>
-    <string name="settings_system_patch_options_title">Patch-alternativer (%s)</string>
+    <string name="settings_system_selected_patches_section">Valgte oppdateringer</string>
+    <string name="settings_system_patch_options_section">Oppdateringsalternativer</string>
     <string name="settings_system_no_patches_or_options">Ingen patcher eller alternativer lagret</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Egendefinert filvelger</string>

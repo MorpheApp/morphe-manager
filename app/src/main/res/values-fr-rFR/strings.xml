@@ -331,6 +331,7 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="home_app_info_app_deleted_description">Cette application a été désinstallée en dehors de Morphe. Repatchez-la pour restaurer les fonctionnalités
 </string>
     <string name="home_app_info_apk_size">Taille de l\'APK</string>
+    <string name="home_app_info_cpu_arch">Architecture du CPU</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Le mode root nécessite que l\'APK d’origine soit installé sur votre appareil avant le patchage</string>
     <string name="root_gmscore_excluded">Le patch de prise en charge de GmsCore est exclu en mode root</string>
@@ -496,13 +497,16 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_appearance_app_language">Langue de l\'application</string>
     <string name="settings_appearance_app_language_current">Langue actuelle</string>
     <string name="settings_appearance_translations_info_title">Certaines traductions peuvent être manquantes ou incomplètes</string>
-    <string name="settings_appearance_translations_info_text">Pour traduire de nouvelles langues ou améliorer les traductions existantes, visitez %s</string>
+    <string name="settings_appearance_translations_info_text">"Pour traduire de nouvelles langues ou améliorer les traductions existantes, visitez
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Écran d\'accueil</string>
     <string name="settings_appearance_greeting_phrases">Phrases de salutation</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Afficher un message de salutation sur l\'écran d\'accueil</string>
     <string name="settings_appearance_app_grouping">Regroupement d\'applications</string>
     <string name="settings_appearance_app_grouping_description">Afficher un sélecteur sur l\'écran d\'accueil pour regrouper les applications par source ou selon vos propres catégories, en conservant la sélection lorsqu\'il est désactivé</string>
+    <string name="settings_appearance_sort_button">Bouton de tri</string>
+    <string name="settings_appearance_sort_button_description">Afficher le bouton de tri sur l\'écran d\'accueil</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icône de l\'application</string>
     <string name="settings_appearance_app_icon_default">Par défaut</string>
@@ -561,11 +565,12 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_advanced_bytecode_mode_full_description">Patchage plus lent, reproduisant le comportement précédent. À utiliser uniquement si le mode rapide pose problème</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Jeton d\'accès personnel GitHub</string>
-    <string name="settings_advanced_github_pat_description">Nécessaire pour les demandes d\'ajout de sources</string>
+    <string name="settings_advanced_github_pat_description">Nécessaire pour les pull request de sources</string>
     <string name="settings_advanced_github_pat_configured">Jeton configuré</string>
     <string name="settings_advanced_github_pat_how_to_get">Comment obtenir un jeton</string>
     <string name="settings_advanced_github_pat_dialog_title">Définir un jeton d\'accès personnel GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Définissez un jeton d\'accès personnel GitHub afin de pouvoir ajouter des Demandes d\'ajout comme sources externes. Créez un jeton d\'accès personnel (PAT) GitHub avec le champ public_repo sur github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Définissez un jeton d'accès personnel GitHub afin de pouvoir ajouter des pull requests comme sources externes. Créez un PAT avec le champ public_repo sur
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Inclure dans l\'export des paramètres</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Ajoute ce jeton d\'accès personnel aux paramètres exportés de Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Ne partagez pas votre jeton d\'accès personnel. Si vous l\'incluez dans l\'export des paramètres, gardez ce fichier privé car il contient le jeton</string>
@@ -666,7 +671,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_status_not_supported">Non pris en charge pour cette action</string>
     <string name="installer_status_shizuku_not_installed">Installez Shizuku ou Sui pour utiliser cette option</string>
     <string name="installer_status_shizuku_not_running">Démarrez Shizuku ou Sui et réessayez</string>
-    <string name="installer_status_shizuku_permission">Accordez à Shizuku l\'autorisation d\'accéder à Morphe depuis l\'application Shizuku</string>
+    <string name="installer_status_shizuku_permission">Accordez l\'autorisation à Morphe depuis l\'application Shizuku</string>
     <string name="installer_mount_warning_install">Votre installateur principal est défini sur l\'installateur de montage root. Cette application enregistrée n\'a pas été installée à l\'aide du montage</string>
     <string name="mount_version_mismatch_message">La version de l\'application système (%2$s) ne correspond pas à la version de l\'application patchée (%1$s). Montez la version système correspondante, puis réessayez</string>
     <string name="installer_status_shizuku_unsupported">La version de Shizuku installée n\'est pas prise en charge</string>
@@ -681,13 +686,42 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_unavailable_shizuku_hint">Assurez-vous que Shizuku est en cours d\'exécution et que l\'autorisation a été accordée à cette application</string>
     <string name="installer_use_standard">Utiliser l\'installateur standard</string>
     <string name="installer_play_store_warning_title">Installer en tant qu\'application du Play Store ?</string>
-    <string name="installer_play_store_warning_message">L\'application patchée sera enregistrée comme ayant été installée depuis le Google Play Store. Cela permet à des services comme Android Auto de la reconnaître comme une application provenant du Play Store.</string>
+    <string name="installer_play_store_warning_message">L\'application patchée sera enregistrée comme étant installée depuis Google Play Store. Cela peut aider des services comme Android Auto à la reconnaître comme une application du Play Store, mais ce n\'est pas garanti pour chaque application ou appareil. Le comportement peut varier selon la version d\'Android, la ROM, la marque de l\'appareil et les vérifications spécifiques à l\'application</string>
     <string name="installer_play_store_warning_risk">Le Play Store peut proposer des mises à jour pour l\'application patchée. L\'installation de cette mise à jour remplacera l\'APK patché par la version d\'origine et supprimera les patchs. Si une mise à jour vous est proposée, appuyez sur le menu à trois points sur la page de l\'application dans le Play Store et choisissez \"Désactiver les mises à jour\"</string>
     <string name="installer_play_store_warning_continue">J\'ai compris, continuer</string>
+    <string name="installer_play_store_mode">Installer comme Play Store</string>
+    <string name="installer_play_store_mode_description">Enregistrer Google Play Store comme source d\'installation pour cette méthode d\'installation</string>
     <string name="settings_prompt_installer_on_install">Invite de sélection de l\'installateur</string>
     <string name="settings_prompt_installer_on_install_description">Affiche la boîte de dialogue de sélection de l\'installateur à chaque installation d’une application patchée</string>
     <string name="settings_auto_install_with_shizuku">Installer automatiquement après le patchage</string>
     <string name="settings_auto_install_with_shizuku_description">Installe silencieusement l\'APK patché dès que le patchage est terminé</string>
+    <string name="settings_auto_uninstall_with_shizuku">Désinstallation automatique en cas de conflit</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Lors de l\'installation automatique avec Shizuku, désinstaller d\'abord l\'application existante si Android signale un conflit de signature. Cela peut supprimer les données de l\'application</string>
+    <string name="settings_auto_uninstall_warning_title">Activer la désinstallation automatique ?</string>
+    <string name="settings_auto_uninstall_warning_message">Si Android signale un conflit de signature lors de l\'installation automatique avec Shizuku, Morphe désinstallera l\'application existante avant d\'installer l\'APK patché</string>
+    <string name="settings_auto_uninstall_warning_risk">Cela peut supprimer les données de l\'application. Si l\'APK patché ne parvient pas à s\'installer après la désinstallation, l\'application précédente peut déjà avoir disparu</string>
+    <string name="installer_shizuku_status_action">Vérifier le statut de Shizuku</string>
+    <string name="installer_shizuku_status_title">Statut de Shizuku</string>
+    <string name="installer_shizuku_status_ready">Prêt</string>
+    <string name="installer_shizuku_status_issue">Nécessite une attention</string>
+    <string name="installer_shizuku_status_supported">Pris en charge</string>
+    <string name="installer_shizuku_status_running">En cours d’exécution</string>
+    <string name="installer_shizuku_status_permission">Autorisation</string>
+    <string name="installer_shizuku_status_mode">Mode</string>
+    <string name="installer_shizuku_status_provider">Fournisseur</string>
+    <string name="installer_shizuku_status_granted">Accordée</string>
+    <string name="installer_shizuku_status_missing">Manquante</string>
+    <string name="installer_shizuku_request_permission">Demander l\'autorisation</string>
+    <string name="installer_shizuku_install_fail">Échec de l\'installation avec Shizuku : %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Échec de l'installation avec Shizuku : %1$s
+
+Détails : %2$s"</string>
+    <string name="installer_shizuku_error_permission">L\'autorisation Shizuku est manquante. Accordez l\'autorisation à Morphe et réessayez</string>
+    <string name="installer_shizuku_error_timeout">Shizuku n\'a pas renvoyé de résultat d\'installation. Assurez-vous qu\'il est toujours en cours d\'exécution et réessayez</string>
+    <string name="installer_shizuku_error_downgrade">Android a bloqué ceci parce que cela rétrograderait l\'application installée</string>
+    <string name="installer_shizuku_error_signature">Android a bloqué ceci parce que l\'application installée possède une signature différente</string>
+    <string name="installer_shizuku_error_invalid_apk">Android n\'a pas pu lire cet APK</string>
+    <string name="installer_shizuku_error_user_profile">Android a bloqué ceci pour l\'utilisateur actuel ou le profil professionnel</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisation de la batterie</string>
     <string name="settings_system_battery_optimization_description">Maintient le patcheur en cours d\'exécution lorsque l\'application est minimisée</string>
@@ -808,9 +842,8 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_system_export_source_data_success">Données de source exportées avec succès</string>
     <string name="settings_system_import_source_data_fail">Échec de l\'importation des données de source</string>
     <string name="settings_system_import_source_data_success">Données de source importées avec succès</string>
-    <string name="settings_system_patch_details_title">Détails du patch</string>
-    <string name="settings_system_selected_patches_title">Patchs sélectionnés (%s)</string>
-    <string name="settings_system_patch_options_title">Options de patch (%s)</string>
+    <string name="settings_system_selected_patches_section">Patchs sélectionnés</string>
+    <string name="settings_system_patch_options_section">Options de patchs</string>
     <string name="settings_system_no_patches_or_options">Aucun patch ou option enregistré</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Sélecteur de fichiers personnalisé</string>

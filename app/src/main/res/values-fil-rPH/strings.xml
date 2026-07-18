@@ -328,6 +328,7 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="home_app_info_app_deleted_warning">Binura ang aplikasyon </string>
     <string name="home_app_info_app_deleted_description">Binura ang aplikasyong ito sa labas ng Morphe. Ire-patch ito upang maibalik ang kanyang punksyonalidad</string>
     <string name="home_app_info_apk_size">Laki ng APK</string>
+    <string name="home_app_info_cpu_arch">Arkitektura ng CPU</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Kinakailangan ng root mode ang orihinal na APK upang mag-install ito sa iyong device bago ito i-patch</string>
     <string name="root_gmscore_excluded">Hindi kasama ang GmsCore support patch sa root mode</string>
@@ -489,13 +490,16 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_app_language">Wika ng aplikasyon</string>
     <string name="settings_appearance_app_language_current">Kasalukuyang wika</string>
     <string name="settings_appearance_translations_info_title">Maaaring nawawala o hindi kumpleto ang pagsasalin-wika para sa ibang wika</string>
-    <string name="settings_appearance_translations_info_text">Upang isalin ang mga bagong wika o pagbutihin ang mga umiiral na pagsasalin-wika, bisitahin ang %s</string>
+    <string name="settings_appearance_translations_info_text">"Upang isalin ang mga bagong wika o pagbutihin ang mga umiiral na pagsasalin-wika, bisitahin ang
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Pangunahing iskrin</string>
     <string name="settings_appearance_greeting_phrases">Mga pagbati</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ipakita ang mensahe ng pagbati sa pangunahing iskrin</string>
     <string name="settings_appearance_app_grouping">Pagpapangkat ng app</string>
     <string name="settings_appearance_app_grouping_description">Magpakita ng home screen switcher upang pangkatin ang mga app ayon sa pinagmulan o iyong sariling mga kategorya, pinapanatili ang pagpili kapag naka-off</string>
+    <string name="settings_appearance_sort_button">Pindutan ng Pagbukod-bukod</string>
+    <string name="settings_appearance_sort_button_description">Ipakita ang pindutan ng pagbukod-bukod sa pangunahing screen</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icon ng aplikasyon</string>
     <string name="settings_appearance_app_icon_default">Panimula</string>
@@ -558,7 +562,8 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_advanced_github_pat_configured">Nakompigura ang token</string>
     <string name="settings_advanced_github_pat_how_to_get">Paano kumuha ng token</string>
     <string name="settings_advanced_github_pat_dialog_title">Itakda ang GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Magtakda ng GitHub Personal Access Token para makapagdagdag ng mga pull request bilang mga external na source. Lumikha ng PAT na may saklaw na public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Magtakda ng GitHub Personal Access Token para makapagdagdag ng mga pull request bilang mga external na source. Lumikha ng PAT na may saklaw na public_repo on
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Isama sa settings export</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Idinaragdag ang PAT na ito sa mga na-export na setting ng Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Huwag mong ibahagi ang iyong PAT. Kung isasama mo ito sa isang settings export, panatilihing pribado ang file na iyon dahil naglalaman ito ng token</string>
@@ -657,7 +662,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_status_not_supported">Hindi suportado para sa aksyong ito</string>
     <string name="installer_status_shizuku_not_installed">I-install sa pamamagitan ng Shizuku o Sui upang gamitin ang opsyon na ito</string>
     <string name="installer_status_shizuku_not_running">Simulan ang Shizuku o Sui at subukan muli</string>
-    <string name="installer_status_shizuku_permission">Bigyan ng pahintulot ang Shizuku kay Morphe mula sa Shizuku</string>
+    <string name="installer_status_shizuku_permission">Bigyan ng pahintulot ang Morphe mula sa Shizuku app</string>
     <string name="installer_mount_warning_install">Nakatakda ang iyong primary installer sa rooted na mount installer. Hindi na-install gamit ang mount ang na-save na aplikasyong ito</string>
     <string name="mount_version_mismatch_message">Hindi tumutugma sa na-patch na bersyon ng aplikasyon (%1$s) ang stock na bersyon ng aplikasyon (%2$s). I-mount ang tumutugmang stock na bersyon, at subukan muli</string>
     <string name="installer_status_shizuku_unsupported">Hindi suportado ang naka-install na bersyon ng Shizuku</string>
@@ -672,13 +677,42 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_unavailable_shizuku_hint">Tiyaking tumatakbo ang Shizuku at binibigyan ng pahintulot ang aplikasyong ito</string>
     <string name="installer_use_standard">Gamitin ang standard</string>
     <string name="installer_play_store_warning_title">I-install bilang Play Store?</string>
-    <string name="installer_play_store_warning_message">Ang patched app ay itatala bilang naka-install mula sa Google Play Store. Nagbibigay-daan ito sa mga serbisyo tulad ng Android Auto upang makilala ito bilang isang Play Store app</string>
+    <string name="installer_play_store_warning_message">Ang na-patch na app ay itatala bilang naka-install mula sa Google Play Store. Makakatulong ito sa mga serbisyo tulad ng Android Auto na kilalanin ito bilang isang Play Store app, ngunit hindi ito garantisado para sa bawat app o device. Maaaring mag-iba ang pag-uugali depende sa bersyon ng Android, ROM, tatak ng device, at mga partikular na pagsusuri ng app</string>
     <string name="installer_play_store_warning_risk">Maaaring mag-alok ang Play Store ng mga update para sa patched app. Ang pag-install ng update na iyon ay mag-o-overwrite sa patched APK gamit ang orihinal na bersyon at aalisin ang mga patch. Kung hihilingin na mag-update, i-tap ang three-dot menu sa page ng Play Store ng app at piliin ang \"I-off ang mga update\"</string>
     <string name="installer_play_store_warning_continue">Naiintindihan ko, magpatuloy</string>
+    <string name="installer_play_store_mode">I-install bilang Play Store</string>
+    <string name="installer_play_store_mode_description">Itala ang Google Play Store bilang pinagmulan ng pag-install para sa pamamaraang ito</string>
     <string name="settings_prompt_installer_on_install">Prompt ng pagpili ng installer</string>
     <string name="settings_prompt_installer_on_install_description">Ipinapakita ang diyalogo ng pagpili ng installer sa tuwing mag-i-install ka ng naka-patch na aplikasyon</string>
     <string name="settings_auto_install_with_shizuku">Awtomatikong i-install pagkatapos ng pag-patch</string>
     <string name="settings_auto_install_with_shizuku_description">Tahimik na i-i-install ang patched na APK sa sandaling makumpleto ang pag-patch</string>
+    <string name="settings_auto_uninstall_with_shizuku">Awtomatikong i-uninstall sa pagkakasalungatan</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Kapag awtomatikong nag-i-install gamit ang Shizuku, i-uninstall muna ang kasalukuyang app kung nag-uulat ang Android ng salungatan sa lagda. Maaari nitong alisin ang data ng app</string>
+    <string name="settings_auto_uninstall_warning_title">Paganahin ang auto-uninstall?</string>
+    <string name="settings_auto_uninstall_warning_message">Kung mag-uulat ang Android ng salungatan sa lagda sa panahon ng Shizuku auto-install, ia-uninstall ng Morphe ang kasalukuyang app bago i-install ang na-patch na APK</string>
+    <string name="settings_auto_uninstall_warning_risk">Maaari nitong alisin ang data ng app. Kung mabigo ang na-patch na APK na i-install pagkatapos ng pag-uninstall, maaaring wala na ang nakaraang app</string>
+    <string name="installer_shizuku_status_action">Suriin ang katayuan ng Shizuku</string>
+    <string name="installer_shizuku_status_title">Katayuan ng Shizuku</string>
+    <string name="installer_shizuku_status_ready">Handa</string>
+    <string name="installer_shizuku_status_issue">Kailangan ng atensyon</string>
+    <string name="installer_shizuku_status_supported">Suportado</string>
+    <string name="installer_shizuku_status_running">Tumatakbo</string>
+    <string name="installer_shizuku_status_permission">Pahintulot</string>
+    <string name="installer_shizuku_status_mode">Mode</string>
+    <string name="installer_shizuku_status_provider">Tagapagkaloob</string>
+    <string name="installer_shizuku_status_granted">Ipinagkaloob</string>
+    <string name="installer_shizuku_status_missing">Nawawala</string>
+    <string name="installer_shizuku_request_permission">Humiling ng pahintulot</string>
+    <string name="installer_shizuku_install_fail">Nabigo ang pag-install ng Shizuku: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Nabigo ang pag-install ng Shizuku: %1$s
+
+Mga Detalye: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Nawawala ang pahintulot ng Shizuku. Ipagkaloob ang pahintulot sa Morphe at subukang muli</string>
+    <string name="installer_shizuku_error_timeout">Hindi nagbalik ang Shizuku ng resulta ng pag-install. Tiyakin na ito ay tumatakbo pa rin at subukang muli</string>
+    <string name="installer_shizuku_error_downgrade">Hinarangan ito ng Android dahil bababa ang bersyon ng naka-install na app</string>
+    <string name="installer_shizuku_error_signature">Hinarangan ito ng Android dahil ang naka-install na app ay mayroong ibang lagda</string>
+    <string name="installer_shizuku_error_invalid_apk">Hindi mabasa ng Android ang APK na ito</string>
+    <string name="installer_shizuku_error_user_profile">Hinarangan ito ng Android para sa kasalukuyang user o work profile</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pag-optimize sa baterya</string>
     <string name="settings_system_battery_optimization_description">Pinapanatili ang patcher na tumatakbo kapag ang app ay minimize</string>
@@ -797,9 +831,8 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_export_source_data_success">Matagumpay na na-export ang pinagmulan ng datos</string>
     <string name="settings_system_import_source_data_fail">Nabigong ma-import ang pinagmulan ng datos</string>
     <string name="settings_system_import_source_data_success">Matagumpay na na-import ang pinagmulan ng datos</string>
-    <string name="settings_system_patch_details_title">Detalye ng patch</string>
-    <string name="settings_system_selected_patches_title">Piniling mga patch (%s)</string>
-    <string name="settings_system_patch_options_title">Mga pagpipilian ng patch (%s)</string>
+    <string name="settings_system_selected_patches_section">Piniling mga patch</string>
+    <string name="settings_system_patch_options_section">Mga pagpipilian ng patch</string>
     <string name="settings_system_no_patches_or_options">Walang naka-save na mga patch o pagpipilian</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Pasadyang pumili ng file</string>

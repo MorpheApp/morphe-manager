@@ -328,6 +328,7 @@ Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafs
     <string name="home_app_info_app_deleted_warning">Ilova o\'rnatilmagan</string>
     <string name="home_app_info_app_deleted_description">Ushbu ilova Morphe tashqarisida o\'rnatilmagan. Funksiyalarni qayta tiklash uchun patchlang</string>
     <string name="home_app_info_apk_size">APK hajmi</string>
+    <string name="home_app_info_cpu_arch">CPU arxitekturasi</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Ildiz rejimida patchlashdan oldin original APK o\'rnatilgan bo\'lishi kerak</string>
     <string name="root_gmscore_excluded">Ildiz rejimida GmsCore qo‘llab-quvvatlash patchi kiritilmaydi</string>
@@ -492,13 +493,16 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_app_language">Ilova tili</string>
     <string name="settings_appearance_app_language_current">Hozirgi til</string>
     <string name="settings_appearance_translations_info_title">Ba\'zi tillar uchun tarjimaning yo\'qligi yoki to\'liq bo\'lmasligi mumkin</string>
-    <string name="settings_appearance_translations_info_text">Yangi tillarni tarjima qilish yoki mavjud tarjimalarni yaxshilash uchun %s ga tashrif buyuring</string>
+    <string name="settings_appearance_translations_info_text">"Yangi tillarni tarjima qilish yoki mavjud tarjimalarni yaxshilash uchun,
+%s ga tashrif buyuring"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Uy ekran</string>
     <string name="settings_appearance_greeting_phrases">Salomlashish iborasi</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Bosh ekranda salomlashish xabarini ko‘rsatish</string>
     <string name="settings_appearance_app_grouping">Ilovalarni guruhlash</string>
     <string name="settings_appearance_app_grouping_description">Ilovalarni manbaiga yoki o\'zingizning kategoriyalaringizga qarab guruhlash uchun uy ekrani almashtirgichni ko\'rsating, o\'chirilganda tanlovni saqlab qolish</string>
+    <string name="settings_appearance_sort_button">Tartiblash tugmasi</string>
+    <string name="settings_appearance_sort_button_description">Bosh ekranda tartiblash tugmasini ko‘rsatish</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ilona belgisi</string>
     <string name="settings_appearance_app_icon_default">Standart</string>
@@ -561,7 +565,8 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_advanced_github_pat_configured">Qanday token olish kerak</string>
     <string name="settings_advanced_github_pat_how_to_get">GitHub shaxsiy kirish tokenini sozlang</string>
     <string name="settings_advanced_github_pat_dialog_title">PATni eksport qilingan Morphe sozlamalariga kiritish</string>
-    <string name="settings_advanced_github_pat_dialog_description">GitHub Personal Access Tokenini qo\'yib boring, tashqi manbalar sifatida pull so\'rovlarini qo\'shish uchun. public_repo github.com doirasi bilan PAT yarating</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Tashqi manbalar sifatida pull so‘rovlarini qo‘shish imkoniyatiga ega bo‘lish uchun GitHub Shaxsiy Kirish Tokenini o‘rnating. 
+%s da public_repo doirasiga ega PAT yarating"</string>
     <string name="settings_advanced_github_pat_export_include_label">Ushbu PATni eksport qilingan Morphe sozlamalariga kiritmang</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Ushbu PATni eksport qilingan Morphe sozlamalariga qo\'shadi</string>
     <string name="settings_advanced_github_pat_export_warning">O\'zgarishlarni tekshiring</string>
@@ -660,7 +665,7 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="installer_status_not_supported">Ushbu harakat uchun qo\'llab-quvvatlanmaydi</string>
     <string name="installer_status_shizuku_not_installed">Ushbu variantdan foydalanish uchun Shizuku yoki Sui o\'rnating</string>
     <string name="installer_status_shizuku_not_running">Shizuku yoki Sui ishga tushiring va yana urinib ko\'ring</string>
-    <string name="installer_status_shizuku_permission">Morphe\'ga Shizuku ruxsatini bering</string>
+    <string name="installer_status_shizuku_permission">Morphe dan Shizuku ilovasidan ruxsat bering</string>
     <string name="installer_mount_warning_install">Sizning asosiy o\'rnatuvchingiz ildizga asoslangan o\'rnatuvchi sifatida belgilangan. Ushbu saqlangan ilova mount orqali o\'rnatilmagan</string>
     <string name="mount_version_mismatch_message">Versiyalar mos kelmaydi (%2$s) saqlangan ilova versiyasi (%1$s). Mount mos keladigan saqlangan versiyani, so\'ngra yana urinib ko\'ring</string>
     <string name="installer_status_shizuku_unsupported">O\'rnatilgan Shizuku versiyasi qo\'llab-quvvatlanmaydi</string>
@@ -674,13 +679,42 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="installer_unavailable_shizuku_hint">Keystore import qilishda xatolik yuzaga keldi</string>
     <string name="installer_use_standard">Standartdan foydalanish</string>
     <string name="installer_play_store_warning_title">Play Store sifatida o\'rnatishni xohlaysizmi?</string>
-    <string name="installer_play_store_warning_message">Patchlangan ilova Google Play Store dan o\'rnatilgan sifatida qayd qilinadi. Bu Android Auto kabi xizmatlarga uni Play Store ilovasi sifatida tanlashga imkon beradi</string>
+    <string name="installer_play_store_warning_message">O‘zgartirilgan ilova Google Play Do‘konidan o‘rnatilgan deb qayd etiladi. Bu Android Auto kabi xizmatlarga uni Play Do‘konidan ilova sifatida tan olishga yordam berishi mumkin, lekin har bir ilova yoki qurilma uchun kafolatlanmaydi. Xatti-harakatlar Android versiyasiga, ROM-ga, qurilma brendiga va ilovaga xos tekshiruvlarga qarab farq qilishi mumkin</string>
     <string name="installer_play_store_warning_risk">Play Store yang mungkin menawarkan pembaruan untuk aplikasi yang telah ditambal. Memasang pembaruan tersebut akan menimpa APK yang ditambal dengan versi asli dan menghapus tambalan. Jika diminta untuk memperbarui, ketuk menu tiga titik pada halaman Play Store aplikasi dan pilih \"Matikan pembaruan\"</string>
     <string name="installer_play_store_warning_continue">Saya mengerti, lanjutkan</string>
+    <string name="installer_play_store_mode">Play Do‘kon sifatida o‘rnating</string>
+    <string name="installer_play_store_mode_description">Usuli o‘rnatish manbai sifatida Google Play Do‘konini qayd eting</string>
     <string name="settings_prompt_installer_on_install">O‘rnatishni tanlash bosqichi</string>
     <string name="settings_prompt_installer_on_install_description">Har bir patchlangan ilova o‘rnatilgandan so‘ng o‘rnatishni tanlash dialogini ko‘rsatish</string>
     <string name="settings_auto_install_with_shizuku">Patchlashdan keyin avtomatik o\'rnatish</string>
     <string name="settings_auto_install_with_shizuku_description">Patchlash tugagandan so\'ng APK avtomatik ravishda o\'rnatiladi</string>
+    <string name="settings_auto_uninstall_with_shizuku">Ziddiyat yuzaga kelganda avtomatik ravishda o‘chirib tashlash</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Shizuku bilan avtomatik o‘rnatishda, agar Android imzo ziddiyati haqida xabar berarsa, mavjud ilovani avval o‘chirib tashlang. Bu ilova ma’lumotlarini o‘chirib tashlashi mumkin</string>
+    <string name="settings_auto_uninstall_warning_title">Avtomatik o‘chirib tashlashni yoqish kerakmi?</string>
+    <string name="settings_auto_uninstall_warning_message">Agar Shizuku avtomatik o‘rnatish paytida Android imzo ziddiyati haqida xabar bersa, Morphe o‘zgartirilgan APK-ni o‘rnatishdan oldin mavjud ilovani o‘chirib tashlaydi</string>
+    <string name="settings_auto_uninstall_warning_risk">Bu ilova ma’lumotlarini o‘chirib tashlashi mumkin. Agar o‘zgartirilgan APK-ni o‘chirib tashlashdan so‘ng o‘rnatish muvaffaqiyatsiz bo‘lsa, oldingi ilova allaqachon o‘chirilgan bo‘lishi mumkin</string>
+    <string name="installer_shizuku_status_action">Shizuku maqomini tekshiring</string>
+    <string name="installer_shizuku_status_title">Shizuku maqomi</string>
+    <string name="installer_shizuku_status_ready">Tayyor</string>
+    <string name="installer_shizuku_status_issue">E’tibor kerak</string>
+    <string name="installer_shizuku_status_supported">Qo‘llab-quvvatlanadi</string>
+    <string name="installer_shizuku_status_running">Ishlaydi</string>
+    <string name="installer_shizuku_status_permission">Ruxsat</string>
+    <string name="installer_shizuku_status_mode">Rejim</string>
+    <string name="installer_shizuku_status_provider">Ta’minlovchi</string>
+    <string name="installer_shizuku_status_granted">Berilgan</string>
+    <string name="installer_shizuku_status_missing">Yo‘q</string>
+    <string name="installer_shizuku_request_permission">Ruxsat so‘rang</string>
+    <string name="installer_shizuku_install_fail">Shizuku o‘rnatish muvaffaqiyatsiz yakunlandi: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku o‘rnatish muvaffaqiyatsiz yakunlandi: %1$s
+
+Ma’lumotlar: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku ruxsati yo‘q. Morphe ga ruxsat bering va yana urinib ko‘ring</string>
+    <string name="installer_shizuku_error_timeout">Shizuku o‘rnatish natijasini qaytarmadi. U hali ham ishlayotganligiga ishonch hosil qiling va yana urinib ko‘ring</string>
+    <string name="installer_shizuku_error_downgrade">Android bu amalatni bajarishni blokladi, chunki u o‘rnatilgan ilovani pasaytiradi</string>
+    <string name="installer_shizuku_error_signature">Android bu amalatni bajarishni blokladi, chunki o‘rnatilgan ilova boshqa imzolarga ega</string>
+    <string name="installer_shizuku_error_invalid_apk">Android ushbu APK-ni o‘qiy olmadi</string>
+    <string name="installer_shizuku_error_user_profile">Android bu amalatni hozirgi foydalanuvchi yoki ish profili uchun blokladi</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batareyani optimallashtirish</string>
     <string name="settings_system_battery_optimization_description">Patchlashi tugagandan keyin patcherni ishlayotgan holatda ushlab turish</string>
@@ -797,9 +831,8 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="settings_system_export_source_data_success">Manba ma\'lumotlari muvaffaqiyatli eksport qilindi</string>
     <string name="settings_system_import_source_data_fail">Manba ma\'lumotlarini import qilishda xatolik yuzaga keldi</string>
     <string name="settings_system_import_source_data_success">Manba ma\'lumotlari muvaffaqiyatli import qilindi</string>
-    <string name="settings_system_patch_details_title">Patch tafsilotlari</string>
-    <string name="settings_system_selected_patches_title">Tanlangan patchlar (%s)</string>
-    <string name="settings_system_patch_options_title">Patch opsiyalari (%s)</string>
+    <string name="settings_system_selected_patches_section">Tanlangan qismlar</string>
+    <string name="settings_system_patch_options_section">Qism sozlamalari</string>
     <string name="settings_system_no_patches_or_options">Qayta urinish</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Narsangizdan farq qiling</string>

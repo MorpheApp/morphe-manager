@@ -329,6 +329,7 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="home_app_info_app_deleted_warning">Aplikasi telah dihapus</string>
     <string name="home_app_info_app_deleted_description">Aplikasi ini telah dihapus di luar Morphe. Tambal ulang untuk mengembalikan fungsinya</string>
     <string name="home_app_info_apk_size">Ukuran APK</string>
+    <string name="home_app_info_cpu_arch">Arsitektur CPU</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Mode root memerlukan APK asli untuk dipasang di perangkat Anda sebelum menambal</string>
     <string name="root_gmscore_excluded">Dukungan tambalan GmsCore dikecualikan dalam mode root</string>
@@ -494,13 +495,16 @@ Mencopot pemasangannya akan menghapus semua data aplikasi secara permanen"</stri
     <string name="settings_appearance_app_language">Bahasa aplikasi</string>
     <string name="settings_appearance_app_language_current">Bahasa saat ini</string>
     <string name="settings_appearance_translations_info_title">Terjemahan untuk beberapa bahasa mungkin belum tersedia atau belum lengkap.</string>
-    <string name="settings_appearance_translations_info_text">Untuk menerjemahkan bahasa baru atau meningkatkan terjemahan yang ada, kunjungi %s</string>
+    <string name="settings_appearance_translations_info_text">"Untuk menerjemahkan bahasa baru atau meningkatkan terjemahan yang ada, kunjungi
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Layar beranda</string>
     <string name="settings_appearance_greeting_phrases">Frasa sapaan</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Tampilkan pesan sapaan di layar beranda</string>
     <string name="settings_appearance_app_grouping">Pengelompokan aplikasi</string>
     <string name="settings_appearance_app_grouping_description">Tampilkan pengalih layar beranda untuk mengelompokkan aplikasi berdasarkan sumber atau kategori Anda sendiri, mempertahankan pilihan saat dinonaktifkan</string>
+    <string name="settings_appearance_sort_button">Tombol urutkan</string>
+    <string name="settings_appearance_sort_button_description">Tampilkan tombol urutkan di layar utama</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikon aplikasi</string>
     <string name="settings_appearance_app_icon_default">Bawaan</string>
@@ -563,7 +567,8 @@ Mencopot pemasangannya akan menghapus semua data aplikasi secara permanen"</stri
     <string name="settings_advanced_github_pat_configured">Token dikonfigurasi</string>
     <string name="settings_advanced_github_pat_how_to_get">Cara mendapatkan token</string>
     <string name="settings_advanced_github_pat_dialog_title">Atur Token Akses Personal GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Atur Token Akses Personal GitHub untuk dapat menambahkan Permintaan Penarikan sebagai sumber eksternal. Buat PAT dengan cakupan public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Atur Token Akses Personal GitHub supaya dapat menambahkan Permintaan Penarikan sebagai sumber eksternal. Buat PAT dengan cakupan public_repo 
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Masukkan dalam ekspor pengaturan</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Menambahkan PAT ini ke pengaturan Morphe yang diekspor</string>
     <string name="settings_advanced_github_pat_export_warning">Jangan bagikan PAT Anda. Jika Anda menyertakannya dalam ekspor pengaturan, simpan berkas tersebut secara pribadi karena berisi token</string>
@@ -662,7 +667,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="installer_status_not_supported">Tidak didukung untuk aksi ini</string>
     <string name="installer_status_shizuku_not_installed">Pasang Shizuku atau Sui untuk menggunakan pilihan ini</string>
     <string name="installer_status_shizuku_not_running">Jalankan Shizuku atau Sui dan coba lagi</string>
-    <string name="installer_status_shizuku_permission">Berikan izin Shizuku ke Morphe dari aplikasi Shizuku</string>
+    <string name="installer_status_shizuku_permission">Berikan izin ke Morphe dari aplikasi Shizuku</string>
     <string name="installer_mount_warning_install">Pemasang utama Anda diatur ke pemasang mount ber-root. Aplikasi tersimpan ini tidak dipasang menggunakan mount</string>
     <string name="mount_version_mismatch_message">Versi aplikasi bawaan (%2$s) tidak cocok dengan versi aplikasi dipatch (%1$s). Pasang versi bawaan yang cocok, lalu coba lagi</string>
     <string name="installer_status_shizuku_unsupported">Versi Shizuku yang terpasang tidak didukung</string>
@@ -677,13 +682,42 @@ Dimensi gambar harus sebagai berikut:
     <string name="installer_unavailable_shizuku_hint">Pastikan Shizuku berjalan dan izin diberikan ke aplikasi ini</string>
     <string name="installer_use_standard">Gunakan standar</string>
     <string name="installer_play_store_warning_title">Pasang sebagai Play Store?</string>
-    <string name="installer_play_store_warning_message">Aplikasi yang ditambal akan dicatat sebagai terpasang dari Google Play Store. Hal ini memungkinkan layanan seperti Android Auto mengenalinya sebagai aplikasi Play Store</string>
+    <string name="installer_play_store_warning_message">Aplikasi yang telah ditambal akan dicatat sebagai terpasang dari Google Play Store. Ini dapat membantu layanan seperti Android Auto mengenalinya sebagai aplikasi Play Store, tetapi tidak dijamin untuk setiap aplikasi atau perangkat. Perilaku dapat bervariasi tergantung pada versi Android, ROM, merek perangkat, dan pemeriksaan khusus aplikasi</string>
     <string name="installer_play_store_warning_risk">Play Store mungkin menawarkan pembaruan untuk aplikasi yang ditambal. Memasang pembaruan tersebut akan menimpa APK yang ditambal dengan versi asli dan menghapus tambalan. Jika diminta untuk memperbarui, ketuk menu tiga titik di halaman Play Store aplikasi dan pilih \"Nonaktifkan pembaruan\"</string>
     <string name="installer_play_store_warning_continue">Saya mengerti, lanjutkan</string>
+    <string name="installer_play_store_mode">Pasang sebagai Play Store</string>
+    <string name="installer_play_store_mode_description">Catat Google Play Store sebagai sumber pemasangan untuk metode pemasangan ini</string>
     <string name="settings_prompt_installer_on_install">Permintaan pemilihan pemasang</string>
     <string name="settings_prompt_installer_on_install_description">Menampilkan dialog pemilihan pemasang setiap kali Anda memasang aplikasi yang ditambal</string>
     <string name="settings_auto_install_with_shizuku">Pasang otomatis setelah menambal</string>
     <string name="settings_auto_install_with_shizuku_description">Secara senyap memasang APK yang telah ditambal segera setelah proses penambalan selesai</string>
+    <string name="settings_auto_uninstall_with_shizuku">Hapus pemasangan otomatis jika terjadi konflik</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Saat memasang otomatis dengan Shizuku, hapus aplikasi yang ada terlebih dahulu jika Android melaporkan konflik tanda tangan. Ini dapat menghapus data aplikasi</string>
+    <string name="settings_auto_uninstall_warning_title">Aktifkan penghapusan pemasangan otomatis?</string>
+    <string name="settings_auto_uninstall_warning_message">Jika Android melaporkan konflik tanda tangan selama pemasangan otomatis Shizuku, Morphe akan menghapus aplikasi yang ada sebelum memasang APK yang telah ditambal</string>
+    <string name="settings_auto_uninstall_warning_risk">Ini dapat menghapus data aplikasi. Jika APK yang telah ditambal gagal dipasang setelah dihapus, aplikasi sebelumnya mungkin sudah hilang</string>
+    <string name="installer_shizuku_status_action">Periksa status Shizuku</string>
+    <string name="installer_shizuku_status_title">Status Shizuku</string>
+    <string name="installer_shizuku_status_ready">Siap</string>
+    <string name="installer_shizuku_status_issue">Perlu perhatian</string>
+    <string name="installer_shizuku_status_supported">Didukung</string>
+    <string name="installer_shizuku_status_running">Berjalan</string>
+    <string name="installer_shizuku_status_permission">Izin</string>
+    <string name="installer_shizuku_status_mode">Mode</string>
+    <string name="installer_shizuku_status_provider">Penyedia</string>
+    <string name="installer_shizuku_status_granted">Diberikan</string>
+    <string name="installer_shizuku_status_missing">Hilang</string>
+    <string name="installer_shizuku_request_permission">Minta izin</string>
+    <string name="installer_shizuku_install_fail">Pemasangan Shizuku gagal: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Pemasangan Shizuku gagal: %1$s
+
+Rincian: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Izin Shizuku hilang. Berikan izin ke Morphe dan coba lagi</string>
+    <string name="installer_shizuku_error_timeout">Shizuku tidak mengembalikan hasil pemasangan. Pastikan Shizuku masih berjalan dan coba lagi</string>
+    <string name="installer_shizuku_error_downgrade">Android memblokir ini karena akan menurunkan versi aplikasi yang terpasang</string>
+    <string name="installer_shizuku_error_signature">Android memblokir ini karena aplikasi yang terpasang memiliki tanda tangan yang berbeda</string>
+    <string name="installer_shizuku_error_invalid_apk">Android tidak dapat membaca APK ini</string>
+    <string name="installer_shizuku_error_user_profile">Android memblokir ini untuk profil pengguna atau profil kerja saat ini</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisasi baterai</string>
     <string name="settings_system_battery_optimization_description">Menjaga penambal tetap berjalan saat aplikasi diminimalkan</string>
@@ -802,9 +836,8 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_system_export_source_data_success">Data sumber berhasil diekspor</string>
     <string name="settings_system_import_source_data_fail">Gagal mengimpor data sumber</string>
     <string name="settings_system_import_source_data_success">Data sumber berhasil diimpor</string>
-    <string name="settings_system_patch_details_title">Rincian tambalan</string>
-    <string name="settings_system_selected_patches_title">Tambalan terpilih (%s)</string>
-    <string name="settings_system_patch_options_title">Pilihan tambalan (%s)</string>
+    <string name="settings_system_selected_patches_section">Tambalan yang dipilih</string>
+    <string name="settings_system_patch_options_section">Pilihan tambalan</string>
     <string name="settings_system_no_patches_or_options">Tidak ada tambalan atau pilihan yang disimpan</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Pemilih berkas khusus</string>

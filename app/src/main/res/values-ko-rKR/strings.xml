@@ -328,6 +328,7 @@
     <string name="home_app_info_app_deleted_warning">앱이 제거되었습니다</string>
     <string name="home_app_info_app_deleted_description">이 앱은 Morphe 외부에서 제거되었습니다. 기능을 복원하려면 다시 패치하세요</string>
     <string name="home_app_info_apk_size">APK 크기</string>
+    <string name="home_app_info_cpu_arch">CPU 아키텍처</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">루트 모드에서는 패치 전에 원본 APK가 기기에 설치되어 있어야 합니다</string>
     <string name="root_gmscore_excluded">루트 모드에서는 \'GmsCore support\' 패치가 제외됩니다</string>
@@ -493,13 +494,15 @@
     <string name="settings_appearance_app_language">앱 언어</string>
     <string name="settings_appearance_app_language_current">현재 언어</string>
     <string name="settings_appearance_translations_info_title">일부 언어의 번역이 누락되거나 불완전할 수 있습니다</string>
-    <string name="settings_appearance_translations_info_text">새 언어를 번역하거나 기존 번역을 개선하려면 %s 를 방문하세요</string>
+    <string name="settings_appearance_translations_info_text">"새 언어를 번역하거나 기존 번역을 개선하려면 %s 를 방문하세요"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">홈 화면</string>
     <string name="settings_appearance_greeting_phrases">인사말</string>
     <string name="settings_appearance_greeting_phrases_subtitle">홈 화면에 인사말을 표시합니다</string>
     <string name="settings_appearance_app_grouping">앱 그룹화</string>
     <string name="settings_appearance_app_grouping_description">앱 출처 또는 사용자 정의 카테고리별로 앱을 그룹화하는 홈 화면 전환기를 표시하며, 비활성화할 경우에는 선택 사항을 유지합니다</string>
+    <string name="settings_appearance_sort_button">정렬 버튼</string>
+    <string name="settings_appearance_sort_button_description">홈 화면에 정렬 버튼을 표시합니다</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">앱 아이콘</string>
     <string name="settings_appearance_app_icon_default">기본값</string>
@@ -562,8 +565,7 @@
     <string name="settings_advanced_github_pat_configured">토큰을 설정하였습니다</string>
     <string name="settings_advanced_github_pat_how_to_get">토큰 얻는 방법</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub 개인 액세스 토큰 설정</string>
-    <string name="settings_advanced_github_pat_dialog_description">풀 리퀘스트를 외부 소스로 사용하기 위해 GitHub 개인 액세스 토큰이 필요합니다.
-GitHub.com에서 public_repo 권한이 포함된 개인 액세스 토큰을 생성하세요</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Pull Requests를 외부 소스로 사용하기 위해 GitHub 개인 액세스 토큰이 필요합니다. %s에서 public_repo 권한이 포함된 개인 액세스 토큰을 생성하세요"</string>
     <string name="settings_advanced_github_pat_export_include_label">설정 내보내기에 포함</string>
     <string name="settings_advanced_github_pat_export_include_supporting">내보낼 Morphe 설정에 이 개인 액세스 토큰을 추가합니다</string>
     <string name="settings_advanced_github_pat_export_warning">개인 액세스 토큰을 공유하지 마세요. 설정 내보내기에 포함되는 경우에는 토큰이 포함되어 있으므로 해당 파일을 비공개로 유지하세요</string>
@@ -662,7 +664,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">이 작업에는 지원되지 않습니다</string>
     <string name="installer_status_shizuku_not_installed">이 옵션을 사용하려면 Shizuku 또는 Sui를 설치하세요</string>
     <string name="installer_status_shizuku_not_running">Shizuku 또는 Sui 을 시작하고 다시 시도하세요</string>
-    <string name="installer_status_shizuku_permission">Shizuku 앱에서 Morphe에 Shizuku 권한을 부여하세요</string>
+    <string name="installer_status_shizuku_permission">Shizuku 앱에서 Morphe에 권한을 부여하세요</string>
     <string name="installer_mount_warning_install">기본 설치 프로그램이 루팅된 마운트 설치 프로그램으로 설정되어 있습니다. 이 저장된 앱은 마운트를 사용하여 설치되지 않았습니다</string>
     <string name="mount_version_mismatch_message">순정 앱 버전(%2$s)이 패치된 앱 버전(%1$s)과 일치하지 않습니다. 일치하는 순정 버전을 마운트한 다음에 다시 시도하세요</string>
     <string name="installer_status_shizuku_unsupported">설치된 Shizuku 버전은 지원되지 않습니다</string>
@@ -677,13 +679,42 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">Shizuku가 실행 중이고, 이 앱에 권한이 부여되었는지 확인하세요</string>
     <string name="installer_use_standard">표준을 사용합니다</string>
     <string name="installer_play_store_warning_title">Play 스토어로 설치하시겠습니까?</string>
-    <string name="installer_play_store_warning_message">패치된 앱은 Google Play 스토어에서 설치된 것으로 기록됩니다. 이를 통해 Android Auto와 같은 서비스가 Play 스토어 앱으로 인식할 수 있습니다</string>
+    <string name="installer_play_store_warning_message">패치된 앱은 Google Play 스토어에서 설치된 것으로 기록됩니다. 이를 통해 Android Auto와 같은 서비스에서 해당 앱을 Play 스토어에서 설치된 앱으로 인식하는 데 도움이 될 수 있지만, 모든 앱이나 기기에서 이를 보장하는 것은 아닙니다. 동작 방식은 Android 버전, ROM, 기기 제조사, 그리고 앱별 검증 방식에 따라 달라질 수 있습니다</string>
     <string name="installer_play_store_warning_risk">Play 스토어에서 패치된 앱의 업데이트를 제공할 수 있습니다. 해당 업데이트를 설치하면 패치된 APK가 원래 버전으로 덮어쓰여지고 패치가 제거됩니다. 업데이트하라는 메시지가 표시되면 앱의 Play 스토어 페이지에서 점 3개 메뉴를 탭한 후 \'자동 업데이트 사용\'을 선택 해제하세요</string>
     <string name="installer_play_store_warning_continue">알겠습니다. 계속하겠습니다</string>
+    <string name="installer_play_store_mode">Play 스토어로 설치</string>
+    <string name="installer_play_store_mode_description">이 설치 방법의 설치 출처로 Google Play 스토어를 기록합니다</string>
     <string name="settings_prompt_installer_on_install">설치 프로그램 선택 프롬프트</string>
     <string name="settings_prompt_installer_on_install_description">패치된 앱을 설치할 때마다 설치 프로그램 선택 다이얼로그를 표시합니다</string>
     <string name="settings_auto_install_with_shizuku">패치 후 자동 설치</string>
     <string name="settings_auto_install_with_shizuku_description">패치가 완료되는 즉시 패치된 APK를 자동으로 설치합니다</string>
+    <string name="settings_auto_uninstall_with_shizuku">충돌 시 자동 제거</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Shizuku를 사용하여 자동 설치하는 경우에 Android에서 서명 충돌이 발생했다고 보고되면 기존 앱을 먼저 제거하세요. 이 과정에서 앱 데이터가 지워질 수 있습니다</string>
+    <string name="settings_auto_uninstall_warning_title">자동 제거 활성화</string>
+    <string name="settings_auto_uninstall_warning_message">Shizuku를 사용하여 자동 설치하는 중에 Android에서 서명 충돌이 발생했다고 보고되면, Morphe는 패치된 APK를 설치하기 전에 기존 앱을 제거합니다</string>
+    <string name="settings_auto_uninstall_warning_risk">이 과정에서 앱 데이터가 삭제될 수 있습니다. 기존 앱을 삭제한 후에 패치된 APK 설치에 실패하면 이전 앱을 복구하지 못할 수 있습니다</string>
+    <string name="installer_shizuku_status_action">Shizuku 상태 확인</string>
+    <string name="installer_shizuku_status_title">Shizuku 상태</string>
+    <string name="installer_shizuku_status_ready">준비 완료</string>
+    <string name="installer_shizuku_status_issue">주의 필요</string>
+    <string name="installer_shizuku_status_supported">지원됨</string>
+    <string name="installer_shizuku_status_running">실행하는 중</string>
+    <string name="installer_shizuku_status_permission">권한</string>
+    <string name="installer_shizuku_status_mode">모드</string>
+    <string name="installer_shizuku_status_provider">제공자</string>
+    <string name="installer_shizuku_status_granted">부여됨</string>
+    <string name="installer_shizuku_status_missing">누락되었음</string>
+    <string name="installer_shizuku_request_permission">권한 요청</string>
+    <string name="installer_shizuku_install_fail">Shizuku 설치할 수 없음: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku 설치할 수 없음: %1$s
+
+상세 정보: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku 권한이 누락되었습니다. Morphe에 권한을 부여하고 다시 시도하세요</string>
+    <string name="installer_shizuku_error_timeout">Shizuku가 설치 결과를 반환하지 않았습니다. 여전히 실행 중인지 확인하고 다시 시도하세요</string>
+    <string name="installer_shizuku_error_downgrade">Android가 설치된 앱을 다운그레이드할 수 있기 때문에 이 작업을 차단하였습니다</string>
+    <string name="installer_shizuku_error_signature">Android가 설치된 앱에 다른 서명이 있기 때문에 이 작업을 차단하였습니다</string>
+    <string name="installer_shizuku_error_invalid_apk">Android가 이 APK를 읽을 수 없습니다</string>
+    <string name="installer_shizuku_error_user_profile">Android가 현재 사용자 또는 업무 프로필에 대해 이 작업을 차단하였습니다</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">배터리 최적화</string>
     <string name="settings_system_battery_optimization_description">앱이 최소화되어도 패처가 계속 실행되도록 유지합니다</string>
@@ -802,9 +833,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_source_data_success">소스 데이터를 성공적으로 내보냈습니다</string>
     <string name="settings_system_import_source_data_fail">소스 데이터를 가저올 수 없습니다</string>
     <string name="settings_system_import_source_data_success">소스 데이터를 성공적으로 가져왔습니다</string>
-    <string name="settings_system_patch_details_title">패치 세부 정보</string>
-    <string name="settings_system_selected_patches_title">선택된 패치 (%s)</string>
-    <string name="settings_system_patch_options_title">패치 옵션 (%s)</string>
+    <string name="settings_system_selected_patches_section">선택된 패치</string>
+    <string name="settings_system_patch_options_section">패치 옵션</string>
     <string name="settings_system_no_patches_or_options">저장된 패치 또는 옵션이 없습니다</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">사용자 정의 파일 선택기</string>

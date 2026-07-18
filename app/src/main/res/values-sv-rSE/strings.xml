@@ -470,7 +470,6 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="settings_appearance_app_language">Appspråk</string>
     <string name="settings_appearance_app_language_current">Aktuellt språk</string>
     <string name="settings_appearance_translations_info_title">Översättningar till vissa språk kan saknas eller vara ofullständiga</string>
-    <string name="settings_appearance_translations_info_text">Om du vill översätta till nya språk eller förbättra de befintliga översättningarna besöker du %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Startskärm</string>
     <string name="settings_appearance_greeting_phrases">Hälsningsfraser</string>
@@ -537,7 +536,6 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="settings_advanced_github_pat_configured">Token konfigurerades</string>
     <string name="settings_advanced_github_pat_how_to_get">Så får du en token</string>
     <string name="settings_advanced_github_pat_dialog_title">Ange en personlig åtkomsttoken för GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Ange en personlig åtkomsttoken för GitHub om du vill lägga till hämtningsbegäranden (pull requests) som externa källor. Skapa en personlig åtkomsttoken med omfattningen public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Inkludera i inställningsexport</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Lägger till denna personliga åtkomsttoken i exporterade Morphe-inställningar</string>
     <string name="settings_advanced_github_pat_export_warning">Dela inte din personliga åtkomsttoken. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
@@ -636,7 +634,6 @@ Bildernas mått ska vara följande:
     <string name="installer_status_not_supported">Stöds inte för den här åtgärden</string>
     <string name="installer_status_shizuku_not_installed">Installera Shizuku eller Sui för att använda det här alternativet</string>
     <string name="installer_status_shizuku_not_running">Starta Shizuku eller Sui och försök igen</string>
-    <string name="installer_status_shizuku_permission">Ge Shizuku behörighet till Morphe från Shizuku-appen</string>
     <string name="installer_mount_warning_install">Din primära installerare har angetts till den rootade monteringsinstalleraren. Den här sparade appen installerades inte med montering</string>
     <string name="mount_version_mismatch_message">Standardappens version (%2$s) matchar inte den modifierade appens version (%1$s). Montera den matchande standardversionen och försök igen</string>
     <string name="installer_status_shizuku_unsupported">Den installerade Shizuku-versionen stöds inte</string>
@@ -651,7 +648,6 @@ Bildernas mått ska vara följande:
     <string name="installer_unavailable_shizuku_hint">Se till att Shizuku körs och att appen har tilldelats behörighet</string>
     <string name="installer_use_standard">Använd standardinstalleraren</string>
     <string name="installer_play_store_warning_title">Installera som Play Butik?</string>
-    <string name="installer_play_store_warning_message">Den modifierade appen registreras som installerad från Google Play Butik. Detta låter tjänster som Android Auto känna igen den som en Play Butik-app</string>
     <string name="installer_play_store_warning_risk">Play Butik kan erbjuda uppdateringar för den modifierade appen. Om du installerar den uppdateringen skrivs den modifierade APK-filen över med den ursprungliga versionen och tilläggen tas bort. Om du uppmanas att uppdatera, tryck på trepunktsmenyn på appens Play Butik-sida och välj Inaktivera uppdateringar</string>
     <string name="installer_play_store_warning_continue">Jag förstår, fortsätt</string>
     <string name="settings_prompt_installer_on_install">Uppmaning om val av installerare</string>
@@ -752,9 +748,6 @@ Bildernas mått ska vara följande:
     <string name="settings_system_export_source_data_success">Källdata har exporterats</string>
     <string name="settings_system_import_source_data_fail">Det gick inte att importera källdata</string>
     <string name="settings_system_import_source_data_success">Källdata har importerats</string>
-    <string name="settings_system_patch_details_title">Information om tillägg</string>
-    <string name="settings_system_selected_patches_title">Valda tillägg (%s)</string>
-    <string name="settings_system_patch_options_title">Tilläggsalternativ (%s)</string>
     <string name="settings_system_no_patches_or_options">Inga tillägg eller alternativ har sparats</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Anpassad filväljare</string>

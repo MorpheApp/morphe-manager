@@ -328,6 +328,7 @@
     <string name="home_app_info_app_deleted_warning">Η εφαρμογή έχει απεγκατασταθεί</string>
     <string name="home_app_info_app_deleted_description">Η εφαρμογή αυτή απεγκαταστάθηκε εκτός του Morphe. Τροποποιήστε την ξανά για την επαναφορά λειτουργικότητά της</string>
     <string name="home_app_info_apk_size">Μέγεθος APK</string>
+    <string name="home_app_info_cpu_arch">Αρχιτεκτονική CPU</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Η λειτουργία root απαιτεί το πρωτότυπο APK να είναι εγκατεστημένο στη συσκευή πριν τροποποιηθεί</string>
     <string name="root_gmscore_excluded">Η υποστήριξη της τροποποίησης GmsCore εξαιρείται στη λειτουργία root</string>
@@ -493,13 +494,16 @@
     <string name="settings_appearance_app_language">Γλώσσα εφαρμογής</string>
     <string name="settings_appearance_app_language_current">Τρέχουσα γλώσσα</string>
     <string name="settings_appearance_translations_info_title">Οι μεταφράσεις για ορισμένες γλώσσες μπορεί να λείπουν ή να μην είναι ολοκληρωμένες</string>
-    <string name="settings_appearance_translations_info_text">Για να μεταφράσετε νέες γλώσσες ή να βελτιώσετε τις υπάρχουσες μεταφράσεις, επισκεφτείτε %s</string>
+    <string name="settings_appearance_translations_info_text">"Για να μεταφράσετε νέες γλώσσες ή να βελτιώσετε τις υπάρχουσες μεταφράσεις, επισκεφτείτε
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Αρχική οθόνη</string>
     <string name="settings_appearance_greeting_phrases">Φράσεις υποδοχής</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Εμφάνιση μηνύματος υποδοχής στην αρχική οθόνη</string>
     <string name="settings_appearance_app_grouping">Ομαδοποίηση εφαρμογών</string>
     <string name="settings_appearance_app_grouping_description">Εμφάνιση διακόπτη στην αρχική οθόνη για ομαδοποίηση εφαρμογών κατά πηγή ή δικές σας κατηγορίες, διατηρώντας την επιλογή όταν είναι απενεργοποιημένη</string>
+    <string name="settings_appearance_sort_button">Κουμπί ταξινόμησης</string>
+    <string name="settings_appearance_sort_button_description">Εμφάνιση του κουμπιού ταξινόμησης στην αρχική οθόνη</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Εικονίδιο εφαρμογής</string>
     <string name="settings_appearance_app_icon_default">Προεπιλογή</string>
@@ -562,7 +566,6 @@
     <string name="settings_advanced_github_pat_configured">Διαμορφωμένο κλειδί</string>
     <string name="settings_advanced_github_pat_how_to_get">Πως να πάρετε ένα κλειδί</string>
     <string name="settings_advanced_github_pat_dialog_title">Ορίστε ένα GitHub προσωπικό κλειδί πρόσβασης(PAT)</string>
-    <string name="settings_advanced_github_pat_dialog_description">Ορίστε ένα PAT στο GitHub για να μπορείτε να προσθέσετε pull requests ως εξωτερικές πηγές. Δημιουργήστε ένα PAT με πρόθεση το public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Συμπερίληψη στις ρυθμίσεις εξαγωγής</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Προσθέτει αυτό το PAT στις εξαγόμενες ρυθμίσεις του Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Δεν πρέπει να μοιράζεστε το PAT. Εάν το συμπεριλάβετε στις εξαγόμενες ρυθμίσεις, διατηρήστε το αρχείο ιδιωτικό διότι περιέχει το κλειδί</string>
@@ -661,7 +664,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">Δεν υποστηρίζεται για αυτή την ενέργεια.</string>
     <string name="installer_status_shizuku_not_installed">Εγκαταστήστε το Shizuku ή Sui για να χρησιμοποιήσετε αυτή την επιλογή.</string>
     <string name="installer_status_shizuku_not_running">Εκκινήστε το Shizuku ή Sui και προσπαθήστε ξανά.</string>
-    <string name="installer_status_shizuku_permission">Δώστε άδεια στο Shizuku για να χρησιμοποιήσει το Morphe από την εφαρμογή Shizuku.</string>
+    <string name="installer_status_shizuku_permission">Δώστε άδεια στο Morphe από την εφαρμογή Shizuku</string>
     <string name="installer_mount_warning_install">Ο πρωταρχικός εγκαταστάτης σας είναι ορισμένος με τον rooted προσαρτημένο εγκαταστάτη. Αυτή η αποθηκευμένη εφαρμογή δεν εγκαταστάθηκε με προσάρτηση</string>
     <string name="mount_version_mismatch_message">Η έκδοση της αρχικής ανεπεξέργαστης εφαρμογής (%2$s) δεν ταιριάζει με την έκδοση της τροποποιημένης εφαρμογής (%1$s). Προσαρτήστε την αρχική ανεπεξέργαστη έκδοση της εφαρμογής, και μετά προσπαθήστε ξανά.</string>
     <string name="installer_status_shizuku_unsupported">Η εγκατεστημένη έκδοση του Shizuku δεν υποστηρίζεται.</string>
@@ -676,13 +679,42 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">Βεβαιωθείτε ότι το Shizuku τρέχει και ότι η άδεια έχει δοθεί σε αυτή την εφαρμογή.</string>
     <string name="installer_use_standard">Χρησιμοποιήστε τον καθορισμένο</string>
     <string name="installer_play_store_warning_title">Εγκατάσταση ως Play Store;</string>
-    <string name="installer_play_store_warning_message">Η τροποποιημένη εφαρμογή θα καταγραφεί ως εγκατεστημένη από το Google Play Store. Αυτό επιτρέπει σε υπηρεσίες όπως το Android Auto να την αναγνωρίσουν ως εφαρμογή Play Store.</string>
+    <string name="installer_play_store_warning_message">Η εφαρμογή που έχει διορθωθεί θα καταγραφεί ως εγκατεστημένη από το Google Play Store. Αυτό μπορεί να βοηθήσει υπηρεσίες όπως το Android Auto να την αναγνωρίσουν ως εφαρμογή του Play Store, αλλά δεν είναι εγγυημένο για κάθε εφαρμογή ή συσκευή. Η συμπεριφορά ενδέχεται να διαφέρει ανάλογα με την έκδοση Android, το ROM, τη μάρκα της συσκευής και τους ελέγχους της συγκεκριμένης εφαρμογής.</string>
     <string name="installer_play_store_warning_risk">Το Play Store ενδέχεται να προσφέρει ενημερώσεις για την τροποποιημένη εφαρμογή. Η εγκατάσταση αυτής της ενημέρωσης θα αντικαταστήσει το τροποποιημένο APK με την αρχική έκδοση και θα αφαιρέσει τις τροποποιήσεις. Εάν σας ζητηθεί να ενημερώσετε, πατήστε το μενού με τις τρεις τελείες στην σελίδα της εφαρμογής στο Play Store και επιλέξτε \"Απενεργοποίηση ενημερώσεων\".</string>
     <string name="installer_play_store_warning_continue">Κατανοώ, συνέχισε</string>
+    <string name="installer_play_store_mode">Εγκατάσταση ως Play Store</string>
+    <string name="installer_play_store_mode_description">Καταγράψτε το Google Play Store ως την πηγή εγκατάστασης για αυτήν τη μέθοδο</string>
     <string name="settings_prompt_installer_on_install">Εμφάνιση προτροπής επιλογής εγκαταστάτη</string>
     <string name="settings_prompt_installer_on_install_description">Εμφανίζει το διάλογο επιλογής εγκαταστάτη κάθε φορά που εγκαταστήσετε μια τροποποιημένη εφαρμογή</string>
     <string name="settings_auto_install_with_shizuku">Αυτόματη εγκατάσταση μετά την επιδιόρθωση</string>
     <string name="settings_auto_install_with_shizuku_description">Εγκαθιστά αθόρυβα το διορθωμένο APK μόλις ολοκληρωθεί η επιδιόρθωση</string>
+    <string name="settings_auto_uninstall_with_shizuku">Αυτόματη απεγκατάσταση σε περίπτωση σύγκρουσης</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Όταν γίνεται αυτόματη εγκατάσταση με το Shizuku, απεγκαταστήστε πρώτα την υπάρχουσα εφαρμογή εάν το Android αναφέρει μια σύγκρουση υπογραφών. Αυτό μπορεί να αφαιρέσει δεδομένα της εφαρμογής.</string>
+    <string name="settings_auto_uninstall_warning_title">Ενεργοποίηση αυτόματης απεγκατάστασης;</string>
+    <string name="settings_auto_uninstall_warning_message">Εάν το Android αναφέρει μια σύγκρουση υπογραφών κατά την αυτόματη εγκατάσταση του Shizuku, το Morphe θα απεγκαταστήσει την υπάρχουσα εφαρμογή πριν εγκαταστήσει το διορθωμένο APK.</string>
+    <string name="settings_auto_uninstall_warning_risk">Αυτό μπορεί να αφαιρέσει δεδομένα της εφαρμογής. Εάν το διορθωμένο APK αποτύχει να εγκατασταθεί μετά την απεγκατάσταση, η προηγούμενη εφαρμογή ενδέχεται να έχει ήδη διαγραφεί.</string>
+    <string name="installer_shizuku_status_action">Έλεγχος κατάστασης Shizuku</string>
+    <string name="installer_shizuku_status_title">Κατάσταση Shizuku</string>
+    <string name="installer_shizuku_status_ready">Έτοιμο</string>
+    <string name="installer_shizuku_status_issue">Απαιτείται προσοχή</string>
+    <string name="installer_shizuku_status_supported">Υποστηριζόμενο</string>
+    <string name="installer_shizuku_status_running">Εκτελείται</string>
+    <string name="installer_shizuku_status_permission">Άδεια</string>
+    <string name="installer_shizuku_status_mode">Λειτουργία</string>
+    <string name="installer_shizuku_status_provider">Πάροχος</string>
+    <string name="installer_shizuku_status_granted">Χορηγήθηκε</string>
+    <string name="installer_shizuku_status_missing">Λείπει</string>
+    <string name="installer_shizuku_request_permission">Αίτηση άδειας</string>
+    <string name="installer_shizuku_install_fail">Η εγκατάσταση Shizuku απέτυχε: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Η εγκατάσταση Shizuku απέτυχε: %1$s
+
+Λεπτομέρειες: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Λείπει άδεια Shizuku. Χορηγήστε άδεια στο Morphe και δοκιμάστε ξανά.</string>
+    <string name="installer_shizuku_error_timeout">Το Shizuku δεν επέστρεψε αποτέλεσμα εγκατάστασης. Βεβαιωθείτε ότι εξακολουθεί να εκτελείται και δοκιμάστε ξανά.</string>
+    <string name="installer_shizuku_error_downgrade">Το Android μπλόκαρε αυτό επειδή θα υποβάθμιζε την εγκατεστημένη εφαρμογή</string>
+    <string name="installer_shizuku_error_signature">Το Android μπλόκαρε αυτό επειδή η εγκατεστημένη εφαρμογή έχει διαφορετική υπογραφή</string>
+    <string name="installer_shizuku_error_invalid_apk">Το Android δεν μπόρεσε να διαβάσει αυτό το APK</string>
+    <string name="installer_shizuku_error_user_profile">Το Android μπλόκαρε αυτό για τον τρέχοντα χρήστη ή το επαγγελματικό προφίλ</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Βελτιστοποίηση μπαταρίας</string>
     <string name="settings_system_battery_optimization_description">Διατηρεί τον επεξεργαστή ενεργό όταν η εφαρμογή είναι ελαχιστοποιημένη</string>
@@ -801,9 +833,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_source_data_success">Επιτυχής εξαγωγή δεδομέων πηγής</string>
     <string name="settings_system_import_source_data_fail">Αποτυχία εισαγωγής δεδομένων πηγής</string>
     <string name="settings_system_import_source_data_success">Επιτυχής εισαγωγή δεδομένων πηγής</string>
-    <string name="settings_system_patch_details_title">Λεπτομέρειες τροποποιήσεων</string>
-    <string name="settings_system_selected_patches_title">Επιλεγμένες τροποποιήσεις (%s)</string>
-    <string name="settings_system_patch_options_title">Επιλογές τροποποιήσεων (%s)</string>
+    <string name="settings_system_selected_patches_section">Επιλεγμένες τροποποιήσεις</string>
+    <string name="settings_system_patch_options_section">Επιλογές τροποποιήσεων</string>
     <string name="settings_system_no_patches_or_options">Δεν υπάρχουν αποθηκευμένες τροποποιήσεις ή επιλογές</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Προσαρμοσμένη επιλογή αρχείων</string>

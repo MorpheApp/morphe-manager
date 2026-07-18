@@ -422,7 +422,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_appearance_app_language">Bahasa aplikasi</string>
     <string name="settings_appearance_app_language_current">Bahasa semasa</string>
     <string name="settings_appearance_translations_info_title">Terjemahan untuk sesetengah bahasa mungkin kurang atau tidak lengkap</string>
-    <string name="settings_appearance_translations_info_text">Untuk menterjemahkan bahasa baharu atau memperbaiki terjemahan yang sedia ada, lawati %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikon aplikasi</string>
@@ -471,7 +470,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_advanced_github_pat_configured">Token dikonfigurasikan</string>
     <string name="settings_advanced_github_pat_how_to_get">Cara mendapatkan token</string>
     <string name="settings_advanced_github_pat_dialog_title">Tetapkan GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Tetapkan Token Akses Peribadi GitHub untuk dapat menambah permintaan tarik sebagai sumber luaran. Buat PAT dengan skop awam_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Sertakan dalam eksport tetapan</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Tambahkan PAT ini ke tetapan Morphe dieksport</string>
     <string name="settings_advanced_github_pat_export_warning">Jangan kongsi PAT anda. Jika anda menyertakannya dalam satu eksport tetapan, simpan fail tersebut sebagai sulit kerana ia mengandungi token</string>
@@ -560,7 +558,6 @@ Dimensi gambar mestilah seperti berikut:
     <string name="installer_status_not_supported">Tidak disokong untuk tindakan ini</string>
     <string name="installer_status_shizuku_not_installed">Pasang Shizuku atau Sui untuk menggunakan pilihan ini</string>
     <string name="installer_status_shizuku_not_running">Mula Shizuku atau Sui dan cuba lagi</string>
-    <string name="installer_status_shizuku_permission">Berikan kebenaran Shizuku kepada Morphe dari aplikasi Shizuku</string>
     <string name="installer_mount_warning_install">Pemasang utama anda ditetapkan kepada pemasang mount berakar. Aplikasi yang disimpan ini tidak dipasang menggunakan mount</string>
     <string name="mount_version_mismatch_message">Versi aplikasi Stok (%2$s) tidak serasi dengan versi aplikasi yang dipatch (%1$s). Pasang versi Stok yang serasi, kemudian cuba lagi</string>
     <string name="installer_status_shizuku_unsupported">Pemasangan gagal. Cuba lagi atau tukar kepada pemasang yang berbeza</string>
@@ -634,9 +631,6 @@ Dimensi gambar mestilah seperti berikut:
     <string name="settings_system_export_source_data_success">Data sumber dieksport dengan jayanya</string>
     <string name="settings_system_import_source_data_fail">Gagal mengimport data sumber</string>
     <string name="settings_system_import_source_data_success">Data sumber diimport dengan jayanya</string>
-    <string name="settings_system_patch_details_title">Butiran tampalan</string>
-    <string name="settings_system_selected_patches_title">Tampalan terpilih (%s)</string>
-    <string name="settings_system_patch_options_title">Pilihan tampalan (%s)</string>
     <string name="settings_system_no_patches_or_options">Tiada tampalan atau pilihan yang disimpan</string>
     <!-- Settings - System Tab - Custom file picker -->
     <!-- File Picker -->

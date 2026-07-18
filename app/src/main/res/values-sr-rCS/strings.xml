@@ -328,6 +328,7 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="home_app_info_app_deleted_warning">Aplikacija je deinstalirana</string>
     <string name="home_app_info_app_deleted_description">Ova aplikacija je deinstalirana izvan Morphe. Ponovo je instalirajte da bi obnovili funkcionalnost</string>
     <string name="home_app_info_apk_size">Veličina APK-a</string>
+    <string name="home_app_info_cpu_arch">CPU arhitektura</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Režim korena zahteva da je originalni APK instaliran na vašem uređaju pre patchanja</string>
     <string name="root_gmscore_excluded">GmsCore zakrpa za podršku je isključena u root modu</string>
@@ -493,13 +494,16 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_app_language">Jezik aplikacije</string>
     <string name="settings_appearance_app_language_current">Trenutni jezik</string>
     <string name="settings_appearance_translations_info_title">Prevodi za neke jezike mogu biti nepotpuni ili nedostajati</string>
-    <string name="settings_appearance_translations_info_text">Da biste preveli novi jezike ili poboljšali postojeće prevode, posetite %s</string>
+    <string name="settings_appearance_translations_info_text">"Da biste preveli nove jezike ili poboljšali postojeće prevode, posetite
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Početni ekran</string>
     <string name="settings_appearance_greeting_phrases">Pozdravne poruke</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Prikaži poruku dobrodošlice na početnom ekranu</string>
     <string name="settings_appearance_app_grouping">Grupisanje aplikacija</string>
     <string name="settings_appearance_app_grouping_description">Pokaži prekidač na početnom ekranu da bi grupisao aplikacije po izvoru ili vlastitim kategorijama, zadržavajući selekciju kada je isključen</string>
+    <string name="settings_appearance_sort_button">Dugme za sortiranje</string>
+    <string name="settings_appearance_sort_button_description">Prikaži dugme za sortiranje na početnom ekranu</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikonica aplikacije</string>
     <string name="settings_appearance_app_icon_default">Podrazumevana</string>
@@ -562,7 +566,8 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="settings_advanced_github_pat_configured">Token je konfigurisan</string>
     <string name="settings_advanced_github_pat_how_to_get">Kako dobiti token</string>
     <string name="settings_advanced_github_pat_dialog_title">Postavi GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Postavite GitHub Personal Access Token kako biste mogli dodati pull requests kao vanjske izvore. Kreirajte PAT sa opsegom public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Postavite GitHub Personal Access Token kako biste mogli da dodate pull request-e kao eksterne izvore. Napravite PAT sa opsegom public_repo na
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Uključeno u postavke izvoza</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Додаје овај PAT у извозене подешавања Morphe-а</string>
     <string name="settings_advanced_github_pat_export_warning">Ne deli svoj PAT. Ako ga uključiš u postavke izvoza, drž taj fajl privatno jer sadrži token</string>
@@ -645,7 +650,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="installer_status_not_supported">Nije podržano za ovu akciju</string>
     <string name="installer_status_shizuku_not_installed">Instalirajte Shizuku ili Sui da biste koristili ovu opciju</string>
     <string name="installer_status_shizuku_not_running">Pokrenite Shizuku ili Sui i pokušajte ponovo</string>
-    <string name="installer_status_shizuku_permission">Dodijeli Morpheu odobrenje za Shizuku iz aplikacije Shizuku</string>
+    <string name="installer_status_shizuku_permission">Dajte dozvolu Morphe-u iz Shizuku aplikacije</string>
     <string name="installer_mount_warning_install">Vaš primarni instalera je postavljen na instalera s korijenskim mountom. Ova sačuvana aplikacija nije instalirana koristeći mount</string>
     <string name="mount_version_mismatch_message">Verzija originalne aplikacije (%2$s) ne podudara se sa verzijom patchane aplikacije (%1$s). Mountujte podudaranu verziju originalne aplikacije, a zatim pokušajte ponovo</string>
     <string name="installer_status_shizuku_unsupported">Instalirana verzija Shizuku nije podržana</string>
@@ -660,13 +665,42 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="installer_unavailable_shizuku_hint">Uvjerite se da je Shizuku pokrenut i da je dozvola dodijeljena ovoj aplikaciji</string>
     <string name="installer_use_standard">Koristi standard</string>
     <string name="installer_play_store_warning_title">Instalirati kao Play Store?</string>
-    <string name="installer_play_store_warning_message">Aplikacija će biti zabeležena kao instalirana iz Google Play Store-a. Ovo omogućava servisima kao što je Android Auto da je prepoznaju kao Play Store aplikaciju</string>
+    <string name="installer_play_store_warning_message">Popravljena aplikacija biće zabeležena kao instalirana iz Google Play Store-a. Ovo može pomoći uslugama kao što je Android Auto da je prepoznaju kao Play Store aplikaciju, ali to nije zagarantovano za svaku aplikaciju ili uređaj. Ponashanje može varirati u zavisnosti od verzije Androida, ROM-a, marke uređaja i specifičnih provera aplikacije</string>
     <string name="installer_play_store_warning_risk">Play Store može da ponudi ažuriranja za aplikaciju. Instaliranje tog ažuriranja će prepisati patčovani APK originalnom verzijom i ukloniti patčove. Ako budete pozvani da ažurirate, dodirnite meni sa tri tačke na stranici aplikacije u Play Store-u i odaberite „Isključite ažuriranja“</string>
     <string name="installer_play_store_warning_continue">Razumem, nastavi</string>
+    <string name="installer_play_store_mode">Instaliraj kao Play Store</string>
+    <string name="installer_play_store_mode_description">Zabeleži Google Play Store kao izvor instalacije za ovaj metod instalacije</string>
     <string name="settings_prompt_installer_on_install">Prompt za izbor instalera</string>
     <string name="settings_prompt_installer_on_install_description">Prikazuje dijalog za izbor instalera svaki put kada se instalira patchovana aplikacija</string>
     <string name="settings_auto_install_with_shizuku">Automatska instalacija nakon zakrpljivanja</string>
     <string name="settings_auto_install_with_shizuku_description">Tiho instalira zakrpljeni APK čim se zakrpljivanje završi</string>
+    <string name="settings_auto_uninstall_with_shizuku">Automatska deinstalacija u slučaju konflikta</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Kada se automatski instalira sa Shizuku, prvo deinstaliraj postojeću aplikaciju ako Android prijavljuje konflikt potpisa. Ovo može ukloniti podatke aplikacije</string>
+    <string name="settings_auto_uninstall_warning_title">Omogući automatsku deinstalaciju?</string>
+    <string name="settings_auto_uninstall_warning_message">Ako Android prijavljuje konflikt potpisa tokom Shizuku auto-instalacije, Morphe će deinstalirati postojeću aplikaciju pre instaliranja popravljenog APK-a</string>
+    <string name="settings_auto_uninstall_warning_risk">Ovo može ukloniti podatke aplikacije. Ako popravljeni APK ne uspe da se instalira nakon deinstalacije, prethodna aplikacija je možda već uklonjena</string>
+    <string name="installer_shizuku_status_action">Proveri status Shizuku-a</string>
+    <string name="installer_shizuku_status_title">Status Shizuku-a</string>
+    <string name="installer_shizuku_status_ready">Spreman</string>
+    <string name="installer_shizuku_status_issue">Potrebna je pažnja</string>
+    <string name="installer_shizuku_status_supported">Podržan</string>
+    <string name="installer_shizuku_status_running">Radi</string>
+    <string name="installer_shizuku_status_permission">Dozvola</string>
+    <string name="installer_shizuku_status_mode">Mod</string>
+    <string name="installer_shizuku_status_provider">Pružalac</string>
+    <string name="installer_shizuku_status_granted">Odobreno</string>
+    <string name="installer_shizuku_status_missing">Nedostaje</string>
+    <string name="installer_shizuku_request_permission">Zatraži dozvolu</string>
+    <string name="installer_shizuku_install_fail">Shizuku instalacija nije uspela: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku instalacija nije uspela: %1$s
+
+Detalji: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Nedostaje dozvola Shizuku-a. Dajte dozvolu Morphe-u i pokušajte ponovo</string>
+    <string name="installer_shizuku_error_timeout">Shizuku nije vratio rezultat instalacije. Uverite se da je i dalje u pokretu i pokušajte ponovo</string>
+    <string name="installer_shizuku_error_downgrade">Android je ovo blokirao jer bi to smanjilo verziju instalirane aplikacije</string>
+    <string name="installer_shizuku_error_signature">Android je ovo blokirao jer instalirana aplikacija ima drugačiji potpis</string>
+    <string name="installer_shizuku_error_invalid_apk">Android nije mogao da pročita ovaj APK</string>
+    <string name="installer_shizuku_error_user_profile">Android je ovo blokirao za trenutnog korisnika ili radni profil</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizacija baterije</string>
     <string name="settings_system_battery_optimization_description">Drži patcher pokrenutim kada je aplikacija minimizovana</string>
@@ -785,9 +819,8 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_system_export_source_data_success">Podaci izvorišta uspešno izvozeni</string>
     <string name="settings_system_import_source_data_fail">Neuspešno uvođenje podataka izvorišta</string>
     <string name="settings_system_import_source_data_success">Podaci izvorišta uspešno uvezeni</string>
-    <string name="settings_system_patch_details_title">Detalji patch-a</string>
-    <string name="settings_system_selected_patches_title">Izabrane ispravke (%s)</string>
-    <string name="settings_system_patch_options_title">Opcije ispravke (%s)</string>
+    <string name="settings_system_selected_patches_section">Izabrane zakrpe</string>
+    <string name="settings_system_patch_options_section">Opcije zakrpe za </string>
     <string name="settings_system_no_patches_or_options">Nema sačuvanih patch-ova ili opcija</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Prilagođeni odabir datoteka</string>

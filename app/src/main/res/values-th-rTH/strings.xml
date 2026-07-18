@@ -328,6 +328,7 @@
     <string name="home_app_info_app_deleted_warning">แอปถูกลบออก</string>
     <string name="home_app_info_app_deleted_description">แอปนี้ถูกลบออกนอก Morphe. แพตซ์อีกครั้งเพื่อฟื้นฟูฟังก์ชัน</string>
     <string name="home_app_info_apk_size">ขนาด APK</string>
+    <string name="home_app_info_cpu_arch">สถาปัตยกรรม CPU</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">โหมดรากรูตต้องมี APK รุ่นต้นฉบับติดตั้งบนอุปกรณ์ของคุณก่อนปรับแก้</string>
     <string name="root_gmscore_excluded">การรองรับ GmsCore ถูกยกเว้นในโหมด Root</string>
@@ -493,13 +494,16 @@
     <string name="settings_appearance_app_language">ภาษาของแอป</string>
     <string name="settings_appearance_app_language_current">ภาษาที่ใช้อยู่</string>
     <string name="settings_appearance_translations_info_title">ข้อมูลภาษาบางค์บางค์อาจไม่ครบถูกต้องหรือไม่ครบ</string>
-    <string name="settings_appearance_translations_info_text">เพื่อนำให้มีภาษาใหม่หรือปรับปรุงภาษาที่มีอยู่แล้ว ให้ไปที่ %s</string>
+    <string name="settings_appearance_translations_info_text">"หากต้องการแปลภาษาใหม่หรือปรับปรุงคำแปลที่มีอยู่ โปรดไปที่
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">หน้าจอหลัก</string>
     <string name="settings_appearance_greeting_phrases">วลีทักทาย</string>
     <string name="settings_appearance_greeting_phrases_subtitle">แสดงข้อความทักทายบนหน้าจอหลัก</string>
     <string name="settings_appearance_app_grouping">การจัดกลุ่มแอป</string>
     <string name="settings_appearance_app_grouping_description">แสดงตัวสลับหน้าจอหลักเพื่อจัดกลุ่มแอปตามแหล่งที่มาหรือตามหมวดหมู่ของคุณเอง โดยจะเก็บการเลือกไว้เมื่อปิด</string>
+    <string name="settings_appearance_sort_button">ปุ่มเรียงลำดับ</string>
+    <string name="settings_appearance_sort_button_description">แสดงปุ่มเรียงลำดับบนหน้าจอหลัก</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">ไอคอนแอป</string>
     <string name="settings_appearance_app_icon_default">ค่าเริ่มต้น</string>
@@ -562,7 +566,8 @@
     <string name="settings_advanced_github_pat_configured">โทเค็นถูกกำหนดค่าแล้ว</string>
     <string name="settings_advanced_github_pat_how_to_get">วิธีการรับโทเคน</string>
     <string name="settings_advanced_github_pat_dialog_title">ตั้งค่าโทเคนการเข้าถึงส่วนบุคคลของ GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">ตั้งค่า GitHub Personal Access Token เพื่อสามารถเพิ่ม pull requests เป็นแหล่งข้อมูลภายนอกได้. สร้าง PAT ด้วยช่วงสิทธิ์ public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"ตั้งค่า GitHub Personal Access Token เพื่อให้สามารถเพิ่ม pull requests เป็นแหล่งข้อมูลภายนอก สร้าง PAT ที่มีขอบเขต public_repo บน
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">รวมในการส่งออกของการตั้งค่า</string>
     <string name="settings_advanced_github_pat_export_include_supporting">เพิ่ม PAT นี้ในการตั้งค่า Morphe ที่ส่งออก</string>
     <string name="settings_advanced_github_pat_export_warning">อย่าแชร์โทเคนส่วนตัวของคุณ ถ้าคุณรวมมันเข้าไปในการส่งออกการตั้งค่า ให้เก็บไฟล์นั้นเป็นส่วนตัว เพราะมันมีโทเค็นไว้ในไฟล์</string>
@@ -661,7 +666,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">ไม่รองรับสำหรับการดำเนินการนี้</string>
     <string name="installer_status_shizuku_not_installed">ติดตั้ง Shizuku หรือ Sui เพื่อใช้ตัวเลือกนี้</string>
     <string name="installer_status_shizuku_not_running">เริ่มต้น Shizuku หรือ Sui และลองอีกครั้ง</string>
-    <string name="installer_status_shizuku_permission">ให้สิทธิ์ Shizuku ให้ Morphe จากแอป Shizuku</string>
+    <string name="installer_status_shizuku_permission">อนุญาตให้ Morphe จากแอป Shizuku</string>
     <string name="installer_mount_warning_install">ตัวติดตั้งหลักของคุณตั้งเป็นตัวติดตั้งมอนต์รากรูต. แอปนี้ไม่ได้ติดตั้งด้วยมอนต์</string>
     <string name="mount_version_mismatch_message">รุ่นแอปสต็อก (%2$s) ไม่ตรงกับรุ่นแอปปรับแก้ (%1$s). มอนต์รุ่นสต็อกที่ตรงกัน, แล้วลองอีกครั้ง</string>
     <string name="installer_status_shizuku_unsupported">รุ่น Shizuku ที่ติดตั้งไม่ได้รับการรองรับ</string>
@@ -676,13 +681,42 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">ให้แน่ใจว่า Shizuku กำลังทำงานและให้สิทธิ์แก่แอปนี้</string>
     <string name="installer_use_standard">ใช้มาตรฐาน</string>
     <string name="installer_play_store_warning_title">ติดตั้งเป็น Play Store หรือไม่?</string>
-    <string name="installer_play_store_warning_message">แอปที่ปรับแก้แล้วจะถูกบันทึกว่าติดตั้งจาก Google Play Store ซึ่งจะช่วยให้บริการต่างๆ เช่น Android Auto ตรวจจับว่าเป็นแอปจาก Play Store</string>
+    <string name="installer_play_store_warning_message">แอปที่แก้ไขแล้วจะถูกบันทึกว่าติดตั้งจาก Google Play Store ซึ่งจะช่วยให้บริการต่างๆ เช่น Android Auto จดจำว่าเป็นแอปจาก Play Store ได้ แต่ไม่รับประกันสำหรับแอปหรืออุปกรณ์ทุกเครื่อง พฤติกรรมอาจแตกต่างกันไปตามเวอร์ชัน Android, ROM, แบรนด์อุปกรณ์ และการตรวจสอบเฉพาะแอป</string>
     <string name="installer_play_store_warning_risk">Play Store อาจมีอัปเดตสำหรับแอปที่ปรับแก้แล้ว การติดตั้งอัปเดตนั้นจะเขียนทับ APK ที่ปรับแก้แล้วด้วยเวอร์ชันเดิม และลบการปรับแก้ หากได้รับการแจ้งให้อัปเดต ให้แตะเมนูจุดสามจุดบนหน้าแอป Play Store แล้วเลือก \"ปิดการอัปเดตโดยอัตโนมัติ\"</string>
     <string name="installer_play_store_warning_continue">ฉันเข้าใจแล้ว ดำเนินการต่อ</string>
+    <string name="installer_play_store_mode">ติดตั้งเป็น Play Store</string>
+    <string name="installer_play_store_mode_description">บันทึก Google Play Store เป็นแหล่งที่มาของการติดตั้งสำหรับวิธีการติดตั้งนี้</string>
     <string name="settings_prompt_installer_on_install">แจ้งเตือนการเลือกตัวติดตั้ง</string>
     <string name="settings_prompt_installer_on_install_description">แสดงกล่องโต้ตอบการเลือกตัวติดตั้งทุกครั้งที่มีการติดตั้งแอปที่แพตช์แล้ว</string>
     <string name="settings_auto_install_with_shizuku">ติดตั้งอัตโนมัติหลังจากการแพตช์</string>
     <string name="settings_auto_install_with_shizuku_description">ติดตั้ง APK ที่ผ่านการแพตช์โดยอัตโนมัติเมื่อการแพตช์เสร็จสิ้น</string>
+    <string name="settings_auto_uninstall_with_shizuku">ถอนการติดตั้งอัตโนมัติเมื่อเกิดข้อขัดแย้ง</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">เมื่อติดตั้งอัตโนมัติด้วย Shizuku ให้ถอนการติดตั้งแอปที่มีอยู่ก่อนหาก Android รายงานว่ามีข้อขัดแย้งของลายเซ็น ซึ่งอาจลบข้อมูลแอปได้</string>
+    <string name="settings_auto_uninstall_warning_title">เปิดใช้งานการถอนการติดตั้งอัตโนมัติหรือไม่</string>
+    <string name="settings_auto_uninstall_warning_message">หาก Android รายงานข้อขัดแย้งของลายเซ็นระหว่างการติดตั้งอัตโนมัติของ Shizuku, Morphe จะถอนการติดตั้งแอปที่มีอยู่ก่อนที่จะติดตั้ง APK ที่แก้ไขแล้ว</string>
+    <string name="settings_auto_uninstall_warning_risk">ซึ่งอาจลบข้อมูลแอปได้ หาก APK ที่แก้ไขแล้วไม่สามารถติดตั้งได้หลังจากถอนการติดตั้ง แอปก่อนหน้านี้อาจหายไปแล้ว</string>
+    <string name="installer_shizuku_status_action">ตรวจสอบสถานะ Shizuku</string>
+    <string name="installer_shizuku_status_title">สถานะ Shizuku</string>
+    <string name="installer_shizuku_status_ready">พร้อมใช้งาน</string>
+    <string name="installer_shizuku_status_issue">ต้องดำเนินการ</string>
+    <string name="installer_shizuku_status_supported">รองรับ</string>
+    <string name="installer_shizuku_status_running">กำลังทำงาน</string>
+    <string name="installer_shizuku_status_permission">สิทธิ์</string>
+    <string name="installer_shizuku_status_mode">โหมด</string>
+    <string name="installer_shizuku_status_provider">ผู้ให้บริการ</string>
+    <string name="installer_shizuku_status_granted">ได้รับอนุญาต</string>
+    <string name="installer_shizuku_status_missing">ขาดหายไป</string>
+    <string name="installer_shizuku_request_permission">ขอสิทธิ์</string>
+    <string name="installer_shizuku_install_fail">การติดตั้ง Shizuku ล้มเหลว: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"การติดตั้ง Shizuku ล้มเหลว: %1$s
+
+รายละเอียด: %2$s"</string>
+    <string name="installer_shizuku_error_permission">สิทธิ์ Shizuku หายไป อนุญาตสิทธิ์ให้ Morphe และลองอีกครั้ง</string>
+    <string name="installer_shizuku_error_timeout">Shizuku ไม่ได้ส่งคืนผลการติดตั้ง ตรวจสอบให้แน่ใจว่ายังคงทำงานอยู่และลองอีกครั้ง</string>
+    <string name="installer_shizuku_error_downgrade">Android บล็อกสิ่งนี้เนื่องจากจะลดระดับแอปที่ติดตั้ง</string>
+    <string name="installer_shizuku_error_signature">Android บล็อกสิ่งนี้เนื่องจากแอปที่ติดตั้งมีลายเซ็นที่แตกต่างกัน</string>
+    <string name="installer_shizuku_error_invalid_apk">Android ไม่สามารถอ่าน APK นี้ได้</string>
+    <string name="installer_shizuku_error_user_profile">Android บล็อกสิ่งนี้สำหรับผู้ใช้ปัจจุบันหรือโปรไฟล์การทำงาน</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">การเพิ่มประสิทธิภาพแบตเตอรี่</string>
     <string name="settings_system_battery_optimization_description">ทำให้ตัวแพตช์ทำงานต่อไปเมื่อแอปพลิเคชันถูกลดขนาด</string>
@@ -801,9 +835,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_source_data_success">ส่งออกข้อมูลแหล่งที่มาเรียบร้อยแล้ว</string>
     <string name="settings_system_import_source_data_fail">ล้มเหลวในการนำเข้าข้อมูลแหล่งที่มา</string>
     <string name="settings_system_import_source_data_success">นำเข้าข้อมูลแหล่งที่มาเรียบร้อยแล้ว</string>
-    <string name="settings_system_patch_details_title">รายละเอียดแพตช์</string>
-    <string name="settings_system_selected_patches_title">แพตซ์ที่เลือก (%s)</string>
-    <string name="settings_system_patch_options_title">ตัวเลือกแพตช์ (%s)</string>
+    <string name="settings_system_selected_patches_section">แพตช์ที่เลือก</string>
+    <string name="settings_system_patch_options_section">ตัวเลือกแพตช์</string>
     <string name="settings_system_no_patches_or_options">ไม่มีการบันทึกแพตช์หรือตัวเลือก</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">ตัวเลือกไฟล์แบบกำหนดเอง</string>
