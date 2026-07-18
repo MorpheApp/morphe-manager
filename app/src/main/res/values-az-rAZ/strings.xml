@@ -687,6 +687,33 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">Yamaqlanan tətbiqi quraşdırdığınız hər vaxt quraşdırıcı seçimi dialoqunu göstərir</string>
     <string name="settings_auto_install_with_shizuku">Yamaqlamadan sonra birbaşa quraşdır</string>
     <string name="settings_auto_install_with_shizuku_description">Yamaqlanma bitən kimi yamaqlanan APK-nı səssizcə quraşdırır</string>
+    <string name="settings_auto_uninstall_with_shizuku">Ziddiyyət zamanı avtomatik sil</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Shizuku ilə avtomatik quraşdırarkən, Android imza ziddiyyəti bildirərsə, əvvəlcə mövcud tətbiqi sil. Bu, tətbiq məlumatlarını təmizləyə bilər</string>
+    <string name="settings_auto_uninstall_warning_title">Avtomatik silmə aktivləşdirilsin?</string>
+    <string name="settings_auto_uninstall_warning_message">Android Shizuku avtomatik quraşdırılması zamanı imza münaqişəsini bildirərsə, Morphe yamaqlanmış APK-nı quraşdırmadan əvvəl mövcud tətbiqi siləcək</string>
+    <string name="settings_auto_uninstall_warning_risk">Bu, tətbiq məlumatlarını silə bilər. Silinmədən sonra yamaqlanmış APK-nı quraşdırmaq mümkün olmasa, əvvəlki tətbiq artıq itirilmiş ola bilər</string>
+    <string name="installer_shizuku_status_action">Shizuku vəziyyətini yoxla</string>
+    <string name="installer_shizuku_status_title">Shizuku vəziyyəti</string>
+    <string name="installer_shizuku_status_ready">Hazır</string>
+    <string name="installer_shizuku_status_issue">Diqqət tələb edir</string>
+    <string name="installer_shizuku_status_supported">Dəstəklənir</string>
+    <string name="installer_shizuku_status_running">İşləyir</string>
+    <string name="installer_shizuku_status_permission">İcazə</string>
+    <string name="installer_shizuku_status_mode">Rejim</string>
+    <string name="installer_shizuku_status_provider">Təminatçı</string>
+    <string name="installer_shizuku_status_granted">Qəbul edildi</string>
+    <string name="installer_shizuku_status_missing">Çatışmır</string>
+    <string name="installer_shizuku_request_permission">İcazə istə</string>
+    <string name="installer_shizuku_install_fail">Shizuku quraşdırmaq olmadı: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku quraşdırmaq olmadı: %1$s
+
+Təfərrüatlar: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku icazəsi yoxdur. Morphe üçün icazəni qəbul et və təkrar cəhd et</string>
+    <string name="installer_shizuku_error_timeout">Shizuku quraşdırma nəticəsi qaytarmadı. Onun hələ də işlədiyinə əmin ol və təkrar cəhd et</string>
+    <string name="installer_shizuku_error_downgrade">Android bunu blokladı, çünki quraşdırılmış tətbiqin versiyasını aşağı salacaqdı</string>
+    <string name="installer_shizuku_error_signature">Android bunu blokladı, çünki quraşdırılmış tətbiqin imzası fərqlidir</string>
+    <string name="installer_shizuku_error_invalid_apk">Android bu APK-nı oxuya bilmədi</string>
+    <string name="installer_shizuku_error_user_profile">Android bunu hazırkı istifadəçi və ya iş profili üçün blokladı</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batareya yaxşılaşdırma</string>
     <string name="settings_system_battery_optimization_description">Tətbiq qısılanda yamaqlayıcını işlək saxlayır</string>
@@ -805,6 +832,8 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_export_source_data_success">Mənbə məlumatı uğurla ixrac olundu</string>
     <string name="settings_system_import_source_data_fail">Mənbə məlumatını idxal etmək olmadı</string>
     <string name="settings_system_import_source_data_success">Mənbə məlumatı uğurla idxal olundu</string>
+    <string name="settings_system_selected_patches_section">Seçilmiş yamaqlar</string>
+    <string name="settings_system_patch_options_section">Yamaq seçimləri</string>
     <string name="settings_system_no_patches_or_options">Yamaqlar və ya seçimlər saxlanılmayıb</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Fərdi fayl seçici</string>

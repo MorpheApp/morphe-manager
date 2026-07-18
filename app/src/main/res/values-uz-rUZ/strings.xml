@@ -11,7 +11,7 @@
     <string name="home_app_hidden_apps_title">Yashirin ilovalar</string>
     <string name="home_app_hidden_apps_hint">Ko‘rsatish uchun bosing</string>
     <string name="android_11_bug_dialog_title">Android 11 muammosi</string>
-    <string name="android_11_bug_dialog_description">Android 11 tizimidagi xatoni oldini olish uchun ilova o‘rnatish ruxsatini oldindan bering.</string>
+    <string name="android_11_bug_dialog_description">Android 11 tizimidagi xatoni oldini olish uchun ilova o‘rnatish ruxsatini oldindan bering</string>
     <string name="deep_link_add_source_title">Manba qo‘shish</string>
     <string name="deep_link_add_source_message">Ushbu patch manbasi Morphe\'ga qo‘shilsinmi?</string>
     <string name="deep_link_add_source_warning">Faqat ishonchli manbalarni qo‘shing</string>
@@ -20,7 +20,7 @@
     <string name="home_update_available_subtitle">Yangi versiya o‘rnatishga tayyor</string>
     <string name="home_blocked_source_title">Bloklangan patch manbasi aniqlandi</string>
     <string name="home_blocked_source_subtitle">Tekshirish va olib tashlash uchun bosing</string>
-    <string name="home_metadata_errors_title">Ba\'zi patch manbalari mavjud emas</string>
+    <string name="home_metadata_errors_title"> patch manbalari mavjud emas</string>
     <string name="home_metadata_errors_subtitle">Manbalarni ko‘rib chiqish uchun bosing</string>
     <string name="home_metered_skipped_title">Mobil internet yoqilganda yangilanish to\'xtatilgan</string>
     <string name="home_metered_skipped_subtitle">Mobil internet orqali yangilashga ruxsat berish uchun bosing</string>
@@ -179,7 +179,7 @@
     <string name="home_download_instructions_download_button_toast_4">Hali ham yo\'q... hali ham yo\'q... 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, bag\'ishlanishga hurmat</string>
     <string name="home_download_instructions_download_button_toast_6">Siz endi Morphe tugmachasini sinovdan o\'tkazuvchi edingiz 🏅</string>
-    <string name="home_download_instructions_step3">Yuklab olish tugagandan so‘ng &lt;b&gt;APK ni o‘rnatmang&lt;/b&gt;</string>
+    <string name="home_download_instructions_step3">Yuklashish yakunlanishini kuting va &lt;b&gt;o\'rnatmang&lt;/b&gt; APK faylini</string>
     <string name="home_download_instructions_step3_mount">Yuklab olish tugagandan so‘ng &lt;b&gt;APK ni o‘rnating&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Yuklab olish tugagandan so\'ng, Morphe ga qayting</string>
     <string name="home_download_instructions_step4_mount">Asl APKni o\'rnatgandan so\'ng Morphe ga qayting</string>

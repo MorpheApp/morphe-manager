@@ -74,7 +74,7 @@
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7" formatted="false">Dzisiejsza prognoza: 100% szans na zmodyfikowanie</string>
     <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Czas zamienić nudę w coś świetnego?</string>
+    <string name="home_greeting_8">Gotów, by zamienić nudę w coś świetnego?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
     <string name="home_greeting_9">Od dziś ratujemy aplikacje przed nimi samymi</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
@@ -108,7 +108,7 @@
     <string name="sources_sort_last_updated">Ostatnia aktualizacja</string>
     <string name="sources_sort_last_updated_description">Najpierw najnowsze aktualizacje źródeł</string>
     <string name="sources_sort_enabled_first">Najpierw włączone</string>
-    <string name="sources_sort_enabled_first_description">Pokaż aktywne źródła przed wyłączonymi</string>
+    <string name="sources_sort_enabled_first_description">Pokaż aktywne źródła przed wyłączonymi źródłami</string>
     <string name="sources_management_open_in_browser">Otwórz w przeglądarce</string>
     <string name="sources_management_failed_to_open_url">Nie udało się otworzyć strony</string>
     <string name="sources_management_prerelease_toggle">Przedpremierowe modyfikacje</string>
