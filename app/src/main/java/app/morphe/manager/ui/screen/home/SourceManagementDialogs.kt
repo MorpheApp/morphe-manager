@@ -1182,7 +1182,6 @@ private fun BundleChangelogContent(
                         modifier = Modifier.fillMaxWidth()
                     )
                 } else {
-                    val textColor = LocalDialogTextColor.current
                     val listState = rememberLazyListState()
                     Box(modifier = Modifier.fillMaxWidth()) {
                         LazyColumn(
@@ -1202,15 +1201,13 @@ private fun BundleChangelogContent(
                                 ChangelogEntrySection(
                                     entry = entry,
                                     headerIcon = Icons.Outlined.History,
-                                    textColor = textColor,
                                     precomputedMarkdown = current.parsedMarkdown.getOrNull(index)
                                 )
                             }
                             changelogOlderItems(
                                 entries = (olderState as? OlderBundleState.Loaded)?.entries,
                                 isLoading = olderState is OlderBundleState.Loading,
-                                onExpand = onExpandOlder,
-                                textColor = textColor
+                                onExpand = onExpandOlder
                             )
                         }
 

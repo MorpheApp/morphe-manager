@@ -278,14 +278,12 @@ fun ManagerUpdateDetailsDialog(
                         changelogEntryItems(
                             entries = entries,
                             keyPrefix = "missed",
-                            headerIcon = Icons.Outlined.NewReleases,
-                            textColor = textColor,
+                            headerIcon = Icons.Outlined.NewReleases
                         )
                         changelogOlderItems(
                             entries = updateViewModel.olderManagerEntries,
                             isLoading = updateViewModel.isLoadingOlderEntries,
-                            onExpand = { updateViewModel.loadOlderManagerEntries() },
-                            textColor = textColor
+                            onExpand = { updateViewModel.loadOlderManagerEntries() }
                         )
                     }
                 }

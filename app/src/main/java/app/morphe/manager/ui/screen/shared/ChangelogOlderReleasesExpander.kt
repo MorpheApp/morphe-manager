@@ -16,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
@@ -45,7 +44,6 @@ fun LazyListScope.changelogEntryItems(
     entries: List<ChangelogEntry>,
     keyPrefix: String,
     headerIcon: ImageVector,
-    textColor: Color,
 ) {
     itemsIndexed(
         items = entries,
@@ -54,8 +52,7 @@ fun LazyListScope.changelogEntryItems(
         if (index > 0) ChangelogEntryDivider()
         ChangelogEntrySection(
             entry = entry,
-            headerIcon = headerIcon,
-            textColor = textColor
+            headerIcon = headerIcon
         )
     }
 }
@@ -70,8 +67,7 @@ fun LazyListScope.changelogEntryItems(
 fun LazyListScope.changelogOlderItems(
     entries: List<ChangelogEntry>?,
     isLoading: Boolean,
-    onExpand: () -> Unit,
-    textColor: Color,
+    onExpand: () -> Unit
 ) {
     item("changelog_older_divider") {
         HorizontalDivider(
@@ -107,7 +103,6 @@ fun LazyListScope.changelogOlderItems(
             entries = entries,
             keyPrefix = "changelog_older",
             headerIcon = Icons.Outlined.History,
-            textColor = textColor,
         )
     }
 }

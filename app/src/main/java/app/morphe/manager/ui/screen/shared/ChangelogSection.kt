@@ -18,7 +18,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
@@ -79,7 +78,6 @@ fun ChangelogSectionLoading(
 fun ChangelogEntrySection(
     entry: ChangelogEntry,
     headerIcon: ImageVector = Icons.Outlined.NewReleases,
-    textColor: Color = LocalDialogTextColor.current,
     precomputedMarkdown: MarkdownRenderState? = null
 ) {
     Column(
@@ -89,8 +87,7 @@ fun ChangelogEntrySection(
         ChangelogEntryHeader(
             version = entry.version,
             date = entry.date,
-            icon = headerIcon,
-            textColor = textColor
+            icon = headerIcon
         )
         if (entry.content.isNotBlank()) {
             Changelog(markdown = entry.content, precomputedState = precomputedMarkdown)
@@ -105,13 +102,12 @@ fun ChangelogEntrySection(
 private fun ChangelogEntryHeader(
     version: String,
     date: String?,
-    icon: ImageVector,
-    textColor: Color
+    icon: ImageVector
 ) {
     HeroInfoCard(
         icon = icon,
         title = if (version.startsWith("v")) version else "v$version",
-        titleColor = textColor,
+        titleColor = LocalDialogTextColor.current,
         subtitle = if (date != null) {
             {
                 Icon(

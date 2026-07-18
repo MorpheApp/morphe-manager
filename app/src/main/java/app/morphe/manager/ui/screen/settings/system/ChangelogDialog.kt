@@ -32,7 +32,6 @@ fun ChangelogDialog(
     onDismiss: () -> Unit,
     updateViewModel: UpdateViewModel
 ) {
-    val textColor = LocalDialogTextColor.current
     val entries = updateViewModel.currentChannelChangelogEntries
 
     LaunchedEffect(Unit) {
@@ -74,14 +73,12 @@ fun ChangelogDialog(
                     changelogEntryItems(
                         entries = entries,
                         keyPrefix = "changelog_current",
-                        headerIcon = Icons.Outlined.NewReleases,
-                        textColor = textColor,
+                        headerIcon = Icons.Outlined.NewReleases
                     )
                     changelogOlderItems(
                         entries = updateViewModel.olderManagerEntries,
                         isLoading = updateViewModel.isLoadingOlderEntries,
-                        onExpand = { updateViewModel.loadOlderManagerEntries() },
-                        textColor = textColor
+                        onExpand = { updateViewModel.loadOlderManagerEntries() }
                     )
                 }
             }
