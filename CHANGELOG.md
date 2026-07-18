@@ -1,3 +1,20 @@
+# [1.24.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.8...v1.24.0-dev.9) (2026-07-18)
+
+
+### Bug Fixes
+
+* Center text in translation info dialog and format GitHub PAT link ([74e128c](https://github.com/MorpheApp/morphe-manager/commit/74e128c9c8cfa8147e9fafad44427c5720048bf3))
+* Correct emoji flag size in language selection card ([72dd679](https://github.com/MorpheApp/morphe-manager/commit/72dd679e7a80d200a127a281a3c0bef326bfa2bd))
+* Rewrite `CreditsDialog` with Morphe-style components ([2a8eb38](https://github.com/MorpheApp/morphe-manager/commit/2a8eb38f166e464b6501f3fe7557ccc95e1234c5))
+
+
+### Features
+
+* Add sort button visibility toggle in Appearance settings ([c3c5e8b](https://github.com/MorpheApp/morphe-manager/commit/c3c5e8b86bf8224afff2384ab9843904a883b080))
+* Animate `HeroInfoCard` in APK management dialogs with shimmer and counter transitions ([f98a602](https://github.com/MorpheApp/morphe-manager/commit/f98a6026b3ff3e5b27b85605ca44bf653cd0f29b))
+* Improve Shizuku installer flow ([#734](https://github.com/MorpheApp/morphe-manager/issues/734)) ([08ab696](https://github.com/MorpheApp/morphe-manager/commit/08ab6967de5baaebb1fa4354488abc9a1e9e65be))
+* Redesign `PatchListComponents` with Morphe-style components and layout improvements ([d733da6](https://github.com/MorpheApp/morphe-manager/commit/d733da626d51dc87801107bcc06612ee48af3617))
+
 # [1.24.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.7...v1.24.0-dev.8) (2026-07-17)
 
 
