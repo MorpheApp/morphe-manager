@@ -19,11 +19,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.outlined.DeleteForever
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.InstallMobile
 import androidx.compose.material.icons.outlined.Inbox
 import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
@@ -93,6 +96,8 @@ class HomeAppActions(
     val onAppClick: (HomeAppItem) -> Unit,
     val onHideApp: (String) -> Unit,
     val onHideMultiple: (Set<String>) -> Unit,
+    val onUninstallMultiple: (List<HomeAppItem>) -> Unit,
+    val onReinstallMultiple: (List<HomeAppItem>) -> Unit,
     val onUnhideApp: (String) -> Unit,
     val onShowPatches: (HomeAppItem) -> Unit,
     val onGestureHintShown: () -> Unit,
@@ -1512,6 +1517,26 @@ fun MainAppsSection(
                             else -> homeAppItems
                         }
                     }
+                    val selectedAppItems = remember(selectedPackages.keys.toList(), homeAppItems) {
+                        val selected = selectedPackages.keys.toSet()
+                        homeAppItems.filter { it.packageName in selected }
+                    }
+                    val selectedInstalledItems = remember(selectedAppItems) {
+                        selectedAppItems.filter { it.isInstalledOnDevice }
+                    }
+                    val selectedReinstallItems = remember(selectedAppItems) {
+                        selectedAppItems.filter { !it.isInstalledOnDevice && it.hasSavedCopy && it.installedApp != null }
+                    }
+                    val contextActionIsUninstall = selectedAppItems.isNotEmpty() &&
+                            selectedInstalledItems.size == selectedAppItems.size
+                    val contextActionIsReinstall = !contextActionIsUninstall &&
+                            selectedReinstallItems.isNotEmpty() &&
+                            selectedReinstallItems.size == selectedAppItems.size
+                    val contextActionLabel = when {
+                        contextActionIsUninstall -> stringResource(R.string.uninstall)
+                        contextActionIsReinstall -> stringResource(R.string.reinstall)
+                        else -> null
+                    }
                     MultiSelectBar(
                         selectedCount = selectedPackages.size,
                         totalCount = activeAppScopeItems.size,
@@ -1533,6 +1558,39 @@ fun MainAppsSection(
                         actionIcon = Icons.Outlined.VisibilityOff,
                         actionContentDescription = stringResource(R.string.hide),
                         actionDoneMessage = stringResource(R.string.hidden),
+                        onContextAction = when {
+                            contextActionIsUninstall -> {
+                                {
+                                    appActions.onUninstallMultiple(selectedInstalledItems)
+                                    isMultiSelectMode.value = false
+                                    selectedPackages.clear()
+                                    selectedGroupKey = null
+                                }
+                            }
+                            contextActionIsReinstall -> {
+                                {
+                                    appActions.onReinstallMultiple(selectedReinstallItems)
+                                    isMultiSelectMode.value = false
+                                    selectedPackages.clear()
+                                    selectedGroupKey = null
+                                }
+                            }
+                            else -> null
+                        },
+                        contextActionIcon = when {
+                            contextActionIsUninstall -> Icons.Outlined.DeleteForever
+                            contextActionIsReinstall -> Icons.Outlined.InstallMobile
+                            else -> null
+                        },
+                        contextActionContentDescription = contextActionLabel,
+                        contextActionColors = if (contextActionIsUninstall) {
+                            IconButtonDefaults.filledTonalIconButtonColors(
+                                containerColor = MaterialTheme.colorScheme.errorContainer,
+                                contentColor = MaterialTheme.colorScheme.onErrorContainer
+                            )
+                        } else {
+                            IconButtonDefaults.filledTonalIconButtonColors()
+                        },
                         onMoveToCategory = if (isCustomCategoryView) {
                             { showMoveCategoryDialog.value = true }
                         } else null,

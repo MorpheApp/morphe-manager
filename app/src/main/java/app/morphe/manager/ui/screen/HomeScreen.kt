@@ -26,9 +26,11 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.home.*
+import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
 import app.morphe.manager.ui.screen.settings.system.PrePatchInstallerDialog
 import app.morphe.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.morphe.manager.ui.viewmodel.HomeViewModel
+import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.QuickPatchParams
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
 import app.morphe.manager.util.*
@@ -54,7 +56,8 @@ fun HomeScreen(
     onboardingState: OnboardingState? = null,
     globalOnboardingState: GlobalOnboardingState? = null,
     patchTriggerPackage: String? = null,
-    onPatchTriggerHandled: () -> Unit = {}
+    onPatchTriggerHandled: () -> Unit = {},
+    installViewModel: InstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val view = LocalView.current
@@ -147,6 +150,67 @@ fun HomeScreen(
         contract = RequestInstallAppsContract
     ) { homeViewModel.showAndroid11Dialog = false }
 
+    var reinstallQueue by remember { mutableStateOf<List<HomeAppItem>>(emptyList()) }
+    var activeReinstallItem by remember { mutableStateOf<HomeAppItem?>(null) }
+
+    fun startNextReinstall() {
+        val next = reinstallQueue.firstOrNull()
+        if (next == null) {
+            activeReinstallItem = null
+            return
+        }
+
+        reinstallQueue = reinstallQueue.drop(1)
+        val installed = next.installedApp
+        val savedFile = installed?.let(homeViewModel::savedPatchedApkFile)
+        if (installed == null || savedFile == null) {
+            startNextReinstall()
+            return
+        }
+
+        activeReinstallItem = next
+        installViewModel.install(
+            outputFile = savedFile,
+            originalPackageName = installed.originalPackageName,
+            onPersistApp = { packageName, installType ->
+                homeViewModel.persistReinstalledApp(installed, packageName, installType)
+            }
+        )
+    }
+
+    fun startBatchReinstall(items: List<HomeAppItem>) {
+        if (items.isEmpty()) return
+        reinstallQueue = items
+        activeReinstallItem = null
+        installViewModel.resetInstallState()
+        startNextReinstall()
+    }
+
+    LaunchedEffect(installViewModel.installState) {
+        if (activeReinstallItem == null) return@LaunchedEffect
+        when (val state = installViewModel.installState) {
+            is InstallViewModel.InstallState.Installed -> {
+                homeViewModel.notifyAppStateChanged(state.packageName)
+                activeReinstallItem = null
+                installViewModel.resetInstallState()
+                startNextReinstall()
+            }
+            is InstallViewModel.InstallState.Error -> {
+                context.toast(state.message)
+                reinstallQueue = emptyList()
+                activeReinstallItem = null
+                installViewModel.resetInstallState()
+            }
+            is InstallViewModel.InstallState.Conflict -> {
+                context.toast(context.getString(R.string.install_app_fail, state.packageName))
+                reinstallQueue = emptyList()
+                activeReinstallItem = null
+                installViewModel.resetInstallState()
+            }
+            else -> Unit
+        }
+    }
+
     // Handle patch trigger from dialog
     LaunchedEffect(patchTriggerPackage) {
         patchTriggerPackage?.let { packageName ->
@@ -189,6 +253,8 @@ fun HomeScreen(
         patchesItem = patchesSheetItem,
         globalOnboardingState = globalOnboardingState
     )
+
+    InstallerFlowDialogs(installViewModel = installViewModel)
 
     // Pre-patching installer selection dialog for root-capable devices.
     // This dialog must appear before patching starts because the installation method
@@ -250,6 +316,8 @@ fun HomeScreen(
                     },
                     onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
                     onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.hideApp(it) } },
+                    onUninstallMultiple = { items -> homeViewModel.uninstallApps(items) },
+                    onReinstallMultiple = { items -> startBatchReinstall(items) },
                     onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
                     onShowPatches = { item -> patchesSheetItem.value = item },
                     onGestureHintShown = {

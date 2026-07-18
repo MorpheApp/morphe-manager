@@ -30,7 +30,9 @@ import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.bundles.RemotePatchBundle
+import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
+import app.morphe.manager.domain.installer.UninstallCancelledException
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
@@ -67,6 +69,8 @@ import java.util.zip.ZipOutputStream
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
+
+private const val BATCH_UNINSTALL_TIMEOUT_MS = 120_000L
 
 /** Bundle update status for snackbar display. */
 enum class BundleUpdateStatus {
@@ -218,6 +222,7 @@ class HomeViewModel(
     val prefs: PreferencesManager,
     private val pm: PM,
     val rootInstaller: RootInstaller,
+    private val installerManager: InstallerManager,
     private val filesystem: Filesystem,
     private val homeAppButtonPrefs: HomeAppButtonPreferences,
     private val appDataResolver: AppDataResolver
@@ -1246,11 +1251,9 @@ class HomeViewModel(
             val displayName = resolvedData.displayName.takeIf {
                 resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
             } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
+            val hasSavedCopy = installedApp?.let { savedPatchedApkFile(it) != null } == true
+            val isInstalledOnDevice = installedApp?.let { pm.getPackageInfo(it.currentPackageName) != null } == true
             val isDeleted = installedApp?.let { installed ->
-                val hasSavedCopy = listOf(
-                    filesystem.getPatchedAppFile(installed.currentPackageName, installed.version),
-                    filesystem.getPatchedAppFile(installed.originalPackageName, installed.version)
-                ).distinctBy { it.absolutePath }.any { it.exists() }
                 pm.isAppDeleted(
                     packageName = installed.currentPackageName,
                     hasSavedCopy = hasSavedCopy,
@@ -1267,7 +1270,9 @@ class HomeViewModel(
                 installedApp = installedApp,
                 packageInfo = resolvedData.packageInfo,
                 isPinnedByDefault = knownApp?.isPinnedByDefault == true,
+                isInstalledOnDevice = isInstalledOnDevice,
                 isDeleted = isDeleted,
+                hasSavedCopy = hasSavedCopy,
                 hasUpdate = hasUpdate,
                 patchCount = 0
             )
@@ -1618,16 +1623,76 @@ class HomeViewModel(
      */
     fun updateDeletedAppsStatus(installedApps: List<InstalledApp>) {
         appsDeletedStatus = installedApps.associate { app ->
-            val hasSavedCopy = listOf(
-                filesystem.getPatchedAppFile(app.currentPackageName, app.version),
-                filesystem.getPatchedAppFile(app.originalPackageName, app.version)
-            ).distinctBy { it.absolutePath }.any { it.exists() }
-
             app.currentPackageName to pm.isAppDeleted(
                 packageName = app.currentPackageName,
-                hasSavedCopy = hasSavedCopy,
+                hasSavedCopy = savedPatchedApkFile(app) != null,
                 wasInstalledOnDevice = app.installType != InstallType.SAVED
             )
+        }
+    }
+
+    fun savedPatchedApkFile(app: InstalledApp): File? =
+        listOf(
+            filesystem.getPatchedAppFile(app.currentPackageName, app.version),
+            filesystem.getPatchedAppFile(app.originalPackageName, app.version)
+        ).distinctBy { it.absolutePath }.firstOrNull { it.exists() }
+
+    suspend fun persistReinstalledApp(
+        app: InstalledApp,
+        packageName: String,
+        installType: InstallType
+    ): Boolean = withContext(Dispatchers.IO) {
+        val appliedPatches = installedAppRepository.getAppliedPatches(app.currentPackageName)
+        installedAppRepository.addOrUpdate(
+            currentPackageName = packageName,
+            originalPackageName = app.originalPackageName,
+            version = app.version,
+            installType = installType,
+            patchSelection = appliedPatches,
+            selectionPayload = app.selectionPayload,
+            patchedAt = app.patchedAt
+        )
+        notifyAppStateChanged(packageName)
+        if (packageName != app.currentPackageName) notifyAppStateChanged(app.currentPackageName)
+        true
+    }
+
+    fun uninstallApps(items: Collection<HomeAppItem>) {
+        val apps = items.mapNotNull { it.installedApp }.filter { installed ->
+            installed.installType == InstallType.MOUNT || pm.getPackageInfo(installed.currentPackageName) != null
+        }
+        if (apps.isEmpty()) return
+
+        viewModelScope.launch {
+            var completed = 0
+            apps.forEach { installed ->
+                runCatching {
+                    when (installed.installType) {
+                        InstallType.MOUNT -> {
+                            installerManager.uninstallPackage(installed.currentPackageName, installed.installType)
+                            installedAppRepository.delete(installed)
+                        }
+                        else -> {
+                            val removed = withTimeoutOrNull(BATCH_UNINSTALL_TIMEOUT_MS) {
+                                installerManager.uninstallPackage(installed.currentPackageName, installed.installType)
+                                true
+                            } == true
+                            if (!removed) error("Uninstall timed out")
+                        }
+                    }
+                }.onSuccess {
+                    completed++
+                    notifyAppStateChanged(installed.currentPackageName)
+                }.onFailure { error ->
+                    if (error !is UninstallCancelledException) {
+                        app.toast(app.getString(R.string.uninstall_app_fail, error.simpleMessage()))
+                    }
+                }
+            }
+
+            if (completed > 0) {
+                app.toast(app.resources.getQuantityString(R.plurals.batch_uninstall_done, completed, completed))
+            }
         }
     }
 
