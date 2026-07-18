@@ -1159,9 +1159,19 @@ class PatcherViewModel(
         }
     }
 
+    /**
+     * Stops any patching-completion tone that might still be playing.
+     * Called directly from the UI for an instant cutoff on Home tap, and again from
+     * [onCleared] as a fallback for every other way of leaving the screen.
+     */
+    fun stopCompletionSound() {
+        PatcherWorker.stopCompletionSound()
+    }
+
     override fun onCleared() {
         patcherWorkerId?.uuid?.let(workManager::cancelWorkById)
         cleanupTemporaryInput()
+        stopCompletionSound()
 
         // Clean up the installer temp directory (contains output.apk and any intermediate files).
         // This covers the case where the user navigates away before installing/exporting,

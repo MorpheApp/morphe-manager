@@ -117,6 +117,15 @@ class PreferencesManager(
     /** Persist the post-patch APK so it can be exported or reinstalled after the patcher screen is closed. */
     val savePatchedApks = booleanPreference("save_patched_apks", true)
 
+    /** Play a distinct notification sound when patching finishes. */
+    val patcherCompletionSound = booleanPreference("patcher_completion_sound", true)
+
+    /** URI of a user-picked success tone. Empty falls back to the bundled `R.raw.success`. */
+    val patcherSuccessSoundUri = stringPreference("patcher_success_sound_uri", "")
+
+    /** URI of a user-picked failure tone. Empty falls back to the bundled `R.raw.error`. */
+    val patcherErrorSoundUri = stringPreference("patcher_error_sound_uri", "")
+
     /** Patch source list ordering mode */
     val sourceBundleSortMode = stringPreference("source_bundle_sort_mode", SourceBundleSortMode.MANUAL.name)
 
@@ -222,6 +231,9 @@ class PreferencesManager(
         val sourceBundleSortMode: String? = null,
         val saveOriginalApks: Boolean? = null,
         val savePatchedApks: Boolean? = null,
+        val patcherCompletionSound: Boolean? = null,
+        val patcherSuccessSoundUri: String? = null,
+        val patcherErrorSoundUri: String? = null,
         val homeAppButtons: HomeAppButtonSnapshot? = null
     )
 
@@ -263,7 +275,10 @@ class PreferencesManager(
         customFilePickerUserConfigured = customFilePickerUserConfigured.get(),
         sourceBundleSortMode = sourceBundleSortMode.get(),
         saveOriginalApks = saveOriginalApks.get(),
-        savePatchedApks = savePatchedApks.get()
+        savePatchedApks = savePatchedApks.get(),
+        patcherCompletionSound = patcherCompletionSound.get(),
+        patcherSuccessSoundUri = patcherSuccessSoundUri.get(),
+        patcherErrorSoundUri = patcherErrorSoundUri.get()
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -305,6 +320,9 @@ class PreferencesManager(
         snapshot.sourceBundleSortMode?.let { sourceBundleSortMode.value = it }
         snapshot.saveOriginalApks?.let { saveOriginalApks.value = it }
         snapshot.savePatchedApks?.let { savePatchedApks.value = it }
+        snapshot.patcherCompletionSound?.let { patcherCompletionSound.value = it }
+        snapshot.patcherSuccessSoundUri?.let { patcherSuccessSoundUri.value = it }
+        snapshot.patcherErrorSoundUri?.let { patcherErrorSoundUri.value = it }
     }
 
     companion object {

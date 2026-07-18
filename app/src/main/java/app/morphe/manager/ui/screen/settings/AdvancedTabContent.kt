@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.settings.advanced.GitHubPatSettingsItem
 import app.morphe.manager.ui.screen.settings.advanced.PatchOptionsSection
+import app.morphe.manager.ui.screen.settings.advanced.PatcherTuningSection
 import app.morphe.manager.ui.screen.settings.advanced.UpdatesSettingsItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
@@ -45,7 +46,9 @@ fun AdvancedTabContent(
     settingsViewModel: SettingsViewModel,
     scrollState: ScrollState = rememberScrollState(),
     onExpertModeItemPositioned: ((Rect) -> Unit)? = null,
-    onExpertModeScrollTarget: ((Int) -> Unit)? = null
+    onExpertModeScrollTarget: ((Int) -> Unit)? = null,
+    onProcessRuntimePositioned: ((Rect) -> Unit)? = null,
+    onProcessRuntimeScrollTarget: ((Int) -> Unit)? = null
 ) {
     val prefs = settingsViewModel.prefs
     val useExpertMode by prefs.useExpertMode.getAsState()
@@ -94,6 +97,15 @@ fun AdvancedTabContent(
         UpdatesSettingsItem(
             settingsViewModel = settingsViewModel,
             onManagerPrereleasesToggle = { homeViewModel.triggerUpdateCheck() }
+        )
+
+        // Patcher tuning
+        PatcherTuningSection(
+            settingsViewModel = settingsViewModel,
+            modifier = if (onProcessRuntimeScrollTarget != null) Modifier.onGloballyPositioned { coords ->
+                onProcessRuntimeScrollTarget(coords.boundsInParent().top.roundToInt())
+            } else Modifier,
+            onProcessRuntimePositioned = onProcessRuntimePositioned
         )
 
         // Expert settings section

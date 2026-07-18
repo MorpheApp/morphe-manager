@@ -131,7 +131,11 @@ fun SettingsScreen(
                 coroutineScope.launch { systemScrollState.animateScrollTo(installerScrollTarget) }
             }
             obs.onScrollToProcessRuntime = {
-                coroutineScope.launch { systemScrollState.animateScrollTo(processRuntimeScrollTarget) }
+                selectedTabIndex = SettingsTab.ADVANCED.ordinal
+                coroutineScope.launch {
+                    pagerState.animateScrollToPage(SettingsTab.ADVANCED.ordinal)
+                    advancedScrollState.animateScrollTo(processRuntimeScrollTarget)
+                }
             }
             obs.onScrollToFilePicker = {
                 coroutineScope.launch { systemScrollState.animateScrollTo(filePickerScrollTarget) }
@@ -279,7 +283,9 @@ fun SettingsScreen(
                 settingsViewModel = settingsViewModel,
                 scrollState = advancedScrollState,
                 onExpertModeItemPositioned = { globalOnboardingState?.expertModeBounds = it },
-                onExpertModeScrollTarget = { expertModeScrollTarget = it }
+                onExpertModeScrollTarget = { expertModeScrollTarget = it },
+                onProcessRuntimePositioned = { globalOnboardingState?.processRuntimeBounds = it },
+                onProcessRuntimeScrollTarget = { processRuntimeScrollTarget = it }
             )
             SettingsTab.SYSTEM -> SystemTabContent(
                 settingsViewModel = settingsViewModel,
@@ -305,8 +311,6 @@ fun SettingsScreen(
                 scrollState = systemScrollState,
                 onInstallerSectionPositioned = { globalOnboardingState?.installerSectionBounds = it },
                 onInstallerScrollTarget = { installerScrollTarget = it },
-                onProcessRuntimePositioned = { globalOnboardingState?.processRuntimeBounds = it },
-                onProcessRuntimeScrollTarget = { processRuntimeScrollTarget = it },
                 onFilePickerPositioned = { globalOnboardingState?.filePickerBounds = it },
                 onFilePickerScrollTarget = { filePickerScrollTarget = it }
             )

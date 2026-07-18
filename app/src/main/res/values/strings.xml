@@ -564,6 +564,7 @@ Uninstalling will permanently erase all app data"</string>
 
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Updates</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Pre-release updates</string>
     <string name="settings_advanced_updates_use_prereleases_description">Early access to new Morphe app versions. Enable pre-release per source in patch sources</string>
     <string name="settings_advanced_updates_allow_metered">Mobile data updates</string>
@@ -777,7 +778,7 @@ Details: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery optimization</string>
     <string name="settings_system_battery_optimization_description">Keeps the patcher running when the app is minimized</string>
-    <string name="settings_system_performance">Performance</string>
+    <string name="settings_system_background">Background</string>
     <string name="settings_system_process_runtime">Process runtime</string>
     <string name="settings_system_process_runtime_description">Runs patching in a separate process for better stability</string>
     <string name="settings_system_process_runtime_memory_limit_description">Higher limits speed up patching on capable devices</string>
@@ -787,6 +788,20 @@ Details: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Click to configure</string>
     <string name="settings_system_process_runtime_description_not_available">This feature requires Android 11 or greater</string>
+    <string name="settings_system_patcher_completion_sound">Completion sound</string>
+    <string name="settings_system_patcher_completion_sound_description">Plays a distinct tone for success or failure when patching finishes</string>
+
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Notifications</string>
+    <string name="settings_system_notifications_description">Configure background alerts and completion sounds</string>
+    <string name="settings_system_notifications_success_sound">Success sound</string>
+    <string name="settings_system_notifications_error_sound">Failure sound</string>
+    <string name="settings_system_notifications_sound_default">Default</string>
+    <string name="settings_system_notifications_sound_picker_title">Choose sound source</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">System sounds</string>
+    <string name="settings_system_notifications_sound_pick_file">Pick from files</string>
+    <string name="settings_system_notifications_sound_reset">Reset to default</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Pick a tone</string>
 
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import &amp; export</string>

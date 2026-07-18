@@ -8,7 +8,9 @@ package app.morphe.manager.ui.screen.settings.system
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.outlined.FolderOpen
+import androidx.compose.material.icons.outlined.Storage
+import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,6 +37,7 @@ import app.morphe.manager.util.isAndroidTv
 fun FilesAndStorageSection(
     settingsViewModel: SettingsViewModel,
     importExportViewModel: ImportExportViewModel,
+    modifier: Modifier = Modifier,
     onFilePickerPositioned: ((Rect) -> Unit)? = null
 ) {
     val context = LocalContext.current
@@ -59,7 +62,10 @@ fun FilesAndStorageSection(
         )
     }
 
-    Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+    ) {
         SectionTitle(
             text = stringResource(R.string.settings_system_files),
             icon = Icons.Outlined.Storage

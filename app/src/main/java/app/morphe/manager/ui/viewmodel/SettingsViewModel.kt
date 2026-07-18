@@ -213,6 +213,18 @@ class SettingsViewModel(
         prefs.customFilePickerUserConfigured.update(true)
     }
 
+    fun setPatcherCompletionSound(enabled: Boolean) = viewModelScope.launch {
+        prefs.patcherCompletionSound.update(enabled)
+    }
+
+    fun setPatcherSuccessSoundUri(uri: String) = viewModelScope.launch {
+        prefs.patcherSuccessSoundUri.update(uri)
+    }
+
+    fun setPatcherErrorSoundUri(uri: String) = viewModelScope.launch {
+        prefs.patcherErrorSoundUri.update(uri)
+    }
+
     /**
      * Requests root access when the AutoSaved (root-mount) installer is chosen,
      * then persists the selection.

@@ -6,10 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.graphics.drawable.Icon
-import android.os.Build
-import android.os.PowerManager
-import android.os.StatFs
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.media.Ringtone
+import android.media.RingtoneManager
+import android.net.Uri
+import android.os.*
 import android.util.Log
+import androidx.core.net.toUri
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
@@ -63,7 +67,7 @@ class PatcherWorker(
         val onPatchCompleted: suspend () -> Unit,
         val setInputFile: suspend (File, Boolean, Boolean) -> Unit,
         val onProgress: ProgressEventHandler,
-        val bundleVersions: List<String> = emptyList(),
+        val bundleVersions: List<String> = emptyList()
     ) {
         val packageName get() = input.packageName
     }
@@ -75,17 +79,23 @@ class PatcherWorker(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE else 0
         )
 
+    @SuppressLint("WrongConstant")
     private fun mainActivityPendingIntent(): PendingIntent {
         val intent = Intent(applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
-        return PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        return PendingIntent.getActivity(
+            applicationContext,
+            0,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
     }
 
     @SuppressLint("WrongConstant")
     private fun createNotification(
         stepName: String? = null,
-        patchProgress: Pair<Int, Int>? = null,  // completed to total patches
+        patchProgress: Pair<Int, Int>? = null, // Completed to total patches
         contentText: String? = null,
     ): Notification {
         val pendingIntent = mainActivityPendingIntent()
@@ -131,11 +141,18 @@ class PatcherWorker(
         notificationManager.notify(NOTIFICATION_ID, createNotification(stepName, patchProgress, contentText))
     }
 
-    private fun showCompletionNotification(succeeded: Boolean, autoInstallPending: Boolean) {
-        // Don't notify when the app is in the foreground - user sees the result on screen
-        if (isAppInForeground()) return
+    private fun showCompletionNotification(
+        succeeded: Boolean,
+        autoInstallPending: Boolean,
+        playSound: Boolean,
+        successSoundUri: String,
+        errorSoundUri: String,
+    ) {
+        if (playSound) playCompletionSound(succeeded, successSoundUri, errorSoundUri)
         // Don't show "patching complete" when Shizuku auto-install will immediately follow
         if (succeeded && autoInstallPending) return
+        // Don't notify when the app is in the foreground - user sees the result on screen
+        if (isAppInForeground()) return
         val notification = Notification.Builder(applicationContext, "morphe-patcher-patching")
             .setContentTitle(
                 applicationContext.getString(
@@ -151,6 +168,53 @@ class PatcherWorker(
             .notify(COMPLETION_NOTIFICATION_ID, notification)
     }
 
+    private fun playCompletionSound(
+        succeeded: Boolean,
+        successSoundUri: String,
+        errorSoundUri: String,
+    ) {
+        // Respect ringer mode and notification-stream volume.
+        // So users can silence the tone with the volume rocker before it plays
+        val audioManager = applicationContext.getSystemService(AudioManager::class.java) ?: return
+        if (audioManager.ringerMode != AudioManager.RINGER_MODE_NORMAL) return
+        if (audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION) == 0) return
+
+        val custom = if (succeeded) successSoundUri else errorSoundUri
+        val bundledRes = if (succeeded) R.raw.success else R.raw.error
+        val bundledUri = "android.resource://${applicationContext.packageName}/$bundledRes".toUri()
+        val customUri = custom.takeIf { it.isNotBlank() }?.toUri()
+
+        val ringtone = customUri?.let { tryGetRingtone(it) }
+            ?: tryGetRingtone(bundledUri)
+            ?: return
+        ringtone.audioAttributes = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_NOTIFICATION_EVENT)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+
+        // Expose the ringtone so the patcher screen can stop it when the user navigates home
+        // before it finishes on its own
+        activeCompletionRingtone = ringtone
+        try {
+            ringtone.play()
+        } catch (e: Exception) {
+            Log.w(tag, "Failed to play completion sound".logFmt(), e)
+        }
+        // Safety-net cleanup in case the user never navigates home
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (activeCompletionRingtone === ringtone) {
+                runCatching { ringtone.stop() }
+                activeCompletionRingtone = null
+            }
+        }, ACTIVE_RINGTONE_RETAIN_MS)
+    }
+
+    private fun tryGetRingtone(uri: Uri): Ringtone? = runCatching {
+        RingtoneManager.getRingtone(applicationContext, uri)
+    }.onFailure {
+        Log.w(tag, "Failed to load ringtone $uri".logFmt(), it)
+    }.getOrNull()
+
     private fun isAppInForeground(): Boolean =
         ManagerApplication.startedActivityCount > 0
 
@@ -161,11 +225,11 @@ class PatcherWorker(
         }
 
         try {
-            // This does not always show up for some reason.
+            // This does not always show up for some reason
             setForeground(getForegroundInfo())
         } catch (e: Exception) {
             // Foreground promotion can fail on some devices or when notification permission is
-            // denied. Log it but continue - patching still works, just with less OS protection.
+            // denied. Log it but continue - patching still works, just with less OS protection
             Log.w(tag, "Failed to promote worker to foreground service:".logFmt(), e)
         }
 
@@ -244,6 +308,9 @@ class PatcherWorker(
         val patchedApk = fs.tempDir.resolve("patched.apk")
         var succeeded = false
         var autoInstallPending = false
+        val completionSoundEnabled = prefs.patcherCompletionSound.get()
+        val successSoundUri = prefs.patcherSuccessSoundUri.get()
+        val errorSoundUri = prefs.patcherErrorSoundUri.get()
 
         return try {
             val startTime = System.currentTimeMillis()
@@ -386,9 +453,9 @@ class PatcherWorker(
             Log.i(tag, "Patching succeeded".logFmt())
             val installerPrimary = prefs.installerPrimary.get()
             autoInstallPending = prefs.autoInstallWithShizuku.get() &&
-                (installerPrimary == InstallerPreferenceTokens.SHIZUKU ||
-                        installerPrimary == InstallerPreferenceTokens.SHIZUKU_PLAY_STORE) &&
-                !prefs.promptInstallerOnInstall.get()
+                    (installerPrimary == InstallerPreferenceTokens.SHIZUKU ||
+                            installerPrimary == InstallerPreferenceTokens.SHIZUKU_PLAY_STORE) &&
+                    !prefs.promptInstallerOnInstall.get()
             succeeded = true
             Result.success()
         } catch (e: ProcessRuntime.ProcessExitException) {
@@ -429,7 +496,13 @@ class PatcherWorker(
             if (!patchedApk.delete() && patchedApk.exists()) {
                 Log.w(tag, "Failed to delete temporary patched APK: ${patchedApk.absolutePath}".logFmt())
             }
-            if (!isStopped) showCompletionNotification(succeeded, autoInstallPending)
+            if (!isStopped) showCompletionNotification(
+                succeeded,
+                autoInstallPending,
+                completionSoundEnabled,
+                successSoundUri,
+                errorSoundUri
+            )
         }
     }
 
@@ -447,6 +520,22 @@ class PatcherWorker(
 
         const val NOTIFICATION_ID = 1
         const val COMPLETION_NOTIFICATION_ID = 2
+
+        private const val ACTIVE_RINGTONE_RETAIN_MS = 60_000L
+
+        @Volatile
+        private var activeCompletionRingtone: Ringtone? = null
+
+        /**
+         * Stops the completion tone (if any) currently playing from the last patcher run. Safe to
+         * call from any thread and any state - a no-op when nothing is playing. Also invoked as a
+         * safety net after [ACTIVE_RINGTONE_RETAIN_MS] if nothing else stopped it by then.
+         */
+        fun stopCompletionSound() {
+            val ringtone = activeCompletionRingtone ?: return
+            activeCompletionRingtone = null
+            runCatching { ringtone.stop() }
+        }
 
         const val PROCESS_EXIT_CODE_KEY = "process_exit_code"
         const val PROCESS_PREVIOUS_LIMIT_KEY = "process_previous_limit"

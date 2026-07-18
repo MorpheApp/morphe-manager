@@ -39,7 +39,10 @@ import app.morphe.manager.ui.model.navigation.Settings
 import app.morphe.manager.ui.screen.HomeScreen
 import app.morphe.manager.ui.screen.PatcherScreen
 import app.morphe.manager.ui.screen.SettingsScreen
-import app.morphe.manager.ui.screen.home.*
+import app.morphe.manager.ui.screen.home.GlobalOnboardingState
+import app.morphe.manager.ui.screen.home.OnboardingShowcase
+import app.morphe.manager.ui.screen.home.OnboardingState
+import app.morphe.manager.ui.screen.home.StepDef
 import app.morphe.manager.ui.screen.shared.AnimatedBackground
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
@@ -303,6 +306,11 @@ private fun MorpheManager(vm: MainViewModel) {
                 onShow = { globalOnboardingState.onScrollToExpertMode?.invoke() }
             ),
             StepDef(
+                R.string.settings_system_process_runtime, R.string.onboarding_system_process_runtime_desc,
+                getBounds = { globalOnboardingState.processRuntimeBounds },
+                onShow = { globalOnboardingState.onScrollToProcessRuntime?.invoke() }
+            ),
+            StepDef(
                 R.string.onboarding_system_tab_title, R.string.onboarding_system_tab_desc,
                 getBounds = { globalOnboardingState.systemTabBounds },
                 onShow = { globalOnboardingState.onNavigateToSystemTab?.invoke() }
@@ -311,11 +319,6 @@ private fun MorpheManager(vm: MainViewModel) {
                 R.string.installer, R.string.onboarding_system_installer_desc,
                 getBounds = { globalOnboardingState.installerSectionBounds },
                 onShow = { globalOnboardingState.onScrollToInstaller?.invoke() }
-            ),
-            StepDef(
-                R.string.settings_system_process_runtime, R.string.onboarding_system_process_runtime_desc,
-                getBounds = { globalOnboardingState.processRuntimeBounds },
-                onShow = { globalOnboardingState.onScrollToProcessRuntime?.invoke() }
             ),
             StepDef(
                 R.string.settings_system_custom_file_picker, R.string.onboarding_system_file_picker_desc,
@@ -419,6 +422,7 @@ private fun MorpheManager(vm: MainViewModel) {
                 val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
                 PatcherScreen(
                     onBackClick = {
+                        patcherViewModel.stopCompletionSound()
                         patcherBackgroundSpeed.floatValue = 1f
                         patchingCompleted.value = false
                         navController.popBackStack()

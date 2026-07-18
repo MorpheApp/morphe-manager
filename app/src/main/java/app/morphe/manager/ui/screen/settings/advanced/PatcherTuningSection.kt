@@ -3,13 +3,9 @@
  * https://github.com/MorpheApp/morphe-manager
  */
 
-package app.morphe.manager.ui.screen.settings.system
+package app.morphe.manager.ui.screen.settings.advanced
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Build
-import android.os.PowerManager
-import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,28 +19,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.lifecycle.repeatOnLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.settings.system.BytecodeModeDialog
+import app.morphe.manager.ui.screen.settings.system.ProcessRuntimeDialog
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.patcher.dex.BytecodeMode
 
 /**
- * Performance section.
+ * Patcher-runtime tuning: process runtime + bytecode mode.
  */
-@SuppressLint("BatteryLife")
 @Composable
-fun PerformanceSection(
+fun PatcherTuningSection(
     settingsViewModel: SettingsViewModel,
+    modifier: Modifier = Modifier,
     onProcessRuntimePositioned: ((Rect) -> Unit)? = null
 ) {
-    val context = LocalContext.current
     val prefs = settingsViewModel.prefs
     val useProcessRuntime by prefs.useProcessRuntime.getAsState()
     val memoryLimit by prefs.patcherProcessMemoryLimit.getAsState()
@@ -52,15 +44,6 @@ fun PerformanceSection(
 
     val showProcessRuntimeDialog = remember { mutableStateOf(false) }
     val showBytecodeDialog = remember { mutableStateOf(false) }
-
-    val lifecycleOwner = LocalLifecycleOwner.current
-    val pm = remember { context.getSystemService(PowerManager::class.java) }
-    var isIgnoringBatteryOptimizations by remember { mutableStateOf(pm.isIgnoringBatteryOptimizations(context.packageName)) }
-    LaunchedEffect(lifecycleOwner) {
-        lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-            isIgnoringBatteryOptimizations = pm.isIgnoringBatteryOptimizations(context.packageName)
-        }
-    }
 
     if (showProcessRuntimeDialog.value) {
         ProcessRuntimeDialog(
@@ -80,9 +63,12 @@ fun PerformanceSection(
         )
     }
 
-    Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+    ) {
         SectionTitle(
-            text = stringResource(R.string.settings_system_performance),
+            text = stringResource(R.string.settings_advanced_patcher),
             icon = Icons.Outlined.Speed
         )
 
@@ -100,9 +86,7 @@ fun PerformanceSection(
                             memoryLimit
                         )
                     else stringResource(R.string.settings_system_process_runtime_disabled_description),
-                    leadingContent = {
-                        MorpheIcon(icon = Icons.Outlined.Memory)
-                    },
+                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Memory) },
                     trailingContent = {
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -142,42 +126,10 @@ fun PerformanceSection(
                 leadingContent = { MorpheIcon(icon = Icons.Outlined.Code) },
                 trailingContent = { MorpheIcon(icon = Icons.Outlined.ChevronRight) }
             )
-
-            MorpheSettingsDivider()
-
-            SettingsItem(
-                onClick = {
-                    context.startActivity(
-                        Intent(
-                            Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
-                            "package:${context.packageName}".toUri()
-                        )
-                    )
-                },
-                title = stringResource(R.string.settings_system_battery_optimization),
-                subtitle = stringResource(R.string.settings_system_battery_optimization_description),
-                leadingContent = { MorpheIcon(icon = Icons.Outlined.BatterySaver) },
-                trailingContent = {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        StatusCircleIcon(
-                            icon = if (isIgnoringBatteryOptimizations) Icons.Outlined.Check else Icons.Outlined.Warning,
-                            containerColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.primaryContainer
-                            else MaterialTheme.colorScheme.secondaryContainer,
-                            contentColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.onPrimaryContainer
-                            else MaterialTheme.colorScheme.onSecondaryContainer
-                        )
-                        MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                    }
-                }
-            )
         }
     }
 }
 
-/** Maps a [BytecodeMode] to its short display label string resource. */
 private fun BytecodeMode.labelRes(): Int = when (this) {
     BytecodeMode.FULL -> R.string.settings_advanced_bytecode_mode_full
     else -> R.string.settings_advanced_bytecode_mode_strip_fast
