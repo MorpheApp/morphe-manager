@@ -328,6 +328,7 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="home_app_info_app_deleted_warning">Uygulama kaldırıldı</string>
     <string name="home_app_info_app_deleted_description">Bu uygulama Morphe dışından kaldırıldı. İşlevselliği geri getirmek için yeniden yamalayın</string>
     <string name="home_app_info_apk_size">APK boyutu</string>
+    <string name="home_app_info_cpu_arch">CPU mimarisi</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root modu, yamalama yapmadan önce orijinal APK\'nin cihazınızda yüklü olmasını gerektirir</string>
     <string name="root_gmscore_excluded">GmsCore destek yaması root modunda hariç tutulmuştur</string>
@@ -493,13 +494,15 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_appearance_app_language">Uygulama dili</string>
     <string name="settings_appearance_app_language_current">Mevcut dil</string>
     <string name="settings_appearance_translations_info_title">Çeviriler bazı diller için eksik veya tamamlanmamış olabilir</string>
-    <string name="settings_appearance_translations_info_text">Yeni diller eklemek veya mevcut çevirileri iyileştirmek için %s adresini ziyaret edin</string>
+    <string name="settings_appearance_translations_info_text">"Yeni diller eklemek veya mevcut çevirileri iyileştirmek için %s adresini ziyaret edin"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Ana ekran</string>
     <string name="settings_appearance_greeting_phrases">Selamlama cümleleri</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ana ekranda bir selamlama mesajı göster</string>
     <string name="settings_appearance_app_grouping">Uygulama gruplandırma</string>
     <string name="settings_appearance_app_grouping_description">Uygulamaları kaynaklarına veya kendi kategorilerinize göre gruplamak için bir ana ekran değiştirici göster. Kapalıyken seçimi korur</string>
+    <string name="settings_appearance_sort_button">Sıralama düğmesi</string>
+    <string name="settings_appearance_sort_button_description">Ana ekranda sıralama düğmesini göster</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Uygulama simgesi</string>
     <string name="settings_appearance_app_icon_default">Varsayılan</string>
@@ -562,7 +565,7 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_advanced_github_pat_configured">Anahtar yapılandırıldı</string>
     <string name="settings_advanced_github_pat_how_to_get">Anahtar nasıl alınır</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub Kişisel Erişim Anahtarı ayarla</string>
-    <string name="settings_advanced_github_pat_dialog_description">GitHub kişisel erişim anahtarını ayarlayın ve çekme isteklerini harici kaynak olarak ekleyin. github.com\'da \"public_repo\" kapsamlı bir PAT (anahtar) oluşturun</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Çekme isteklerini harici kaynak olarak eklemek için GitHub Kişisel Erişim Anahtarı ayarlayın. %s adresinde \"public_repo\" kapsamlı bir PAT (anahtar) oluşturun"</string>
     <string name="settings_advanced_github_pat_export_include_label">Ayarları dışa aktarırken dahil et</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Bu PAT\'i dışa aktarılan Morphe ayarlarına ekler</string>
     <string name="settings_advanced_github_pat_export_warning">PAT\'i paylaşmayın. Ayarları dışa aktarırken dahil ederseniz, token içerdiği için bu dosyayı gizli tutun</string>
@@ -676,13 +679,42 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_unavailable_shizuku_hint">Shizuku\'nun çalıştığından ve ve bu uygulama için izin verildiğinden emin olun</string>
     <string name="installer_use_standard">Standardı kullan</string>
     <string name="installer_play_store_warning_title">Play Store olarak mı yüklensin?</string>
-    <string name="installer_play_store_warning_message">Değiştirilmiş uygulama Google Play Store\'dan yüklenmiş olarak kaydedilecektir. Bu, Android Auto gibi hizmetlerin uygulamayı bir Play Store uygulaması olarak tanımasını sağlar</string>
+    <string name="installer_play_store_warning_message">Yenilenen uygulama, Google Play Store\'dan yüklenmiş olarak kaydedilecektir. Bu, Android Auto gibi hizmetlerin uygulamayı bir Play Store uygulaması olarak tanımasına yardımcı olabilir, ancak her uygulama veya cihaz için garanti edilmez. Davranış, Android sürümüne, ROM\'a, cihaz markasına ve uygulamaya özel kontrollere göre değişiklik gösterebilir.</string>
     <string name="installer_play_store_warning_risk">Play Store, değiştirilmiş uygulama için güncelleme sunabilir. Bu güncellemeyi yüklemek, değiştirilmiş APK\'yı orijinal sürümüyle değiştirir ve değişiklikleri kaldırır. Güncelleme yapmanız istenirse, uygulamanın Play Store sayfasındaki üç nokta menüsüne dokunun ve \"Güncellemeleri kapat\" seçeneğini seçin</string>
     <string name="installer_play_store_warning_continue">Anladım, devam et</string>
+    <string name="installer_play_store_mode">Play Store olarak mı yüklensin</string>
+    <string name="installer_play_store_mode_description">Bu yükleme yöntemi için Google Play Store\'u kurulum kaynağı olarak kaydet</string>
     <string name="settings_prompt_installer_on_install">Yükleyici seçimi istemi</string>
     <string name="settings_prompt_installer_on_install_description">Yamalanmış bir uygulama her yüklendiğinde yükleyici seçim penceresini gösterir</string>
     <string name="settings_auto_install_with_shizuku">Yamalama sonrası otomatik yükle</string>
     <string name="settings_auto_install_with_shizuku_description">Yamalama tamamlanır tamamlanmaz yamalanmış APK\'yi sessizce yükler</string>
+    <string name="settings_auto_uninstall_with_shizuku">Çakışma durumunda otomatik olarak kaldır</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Shizuku ile otomatik yükleme yaparken, Android bir imza çakışması bildirirse mevcut uygulamayı önce kaldırın. Bu, uygulama verilerini kaldırabilir.</string>
+    <string name="settings_auto_uninstall_warning_title">Otomatik kaldırmayı etkinleştir?</string>
+    <string name="settings_auto_uninstall_warning_message">Android, Shizuku otomatik yüklemesi sırasında bir imza çakışması bildirirse, Morphe yamalı APK\'yı yüklemeden önce mevcut uygulamayı kaldıracaktır.</string>
+    <string name="settings_auto_uninstall_warning_risk">Bu, uygulama verilerini kaldırabilir. Yamalı APK, kaldırma işleminden sonra yüklenemezse, önceki uygulama zaten gitmiş olabilir.</string>
+    <string name="installer_shizuku_status_action">Shizuku durumunu kontrol et</string>
+    <string name="installer_shizuku_status_title">Shizuku durumu</string>
+    <string name="installer_shizuku_status_ready">Hazır</string>
+    <string name="installer_shizuku_status_issue">Dikkat gerektiriyor</string>
+    <string name="installer_shizuku_status_supported">Destekleniyor</string>
+    <string name="installer_shizuku_status_running">Çalışıyor</string>
+    <string name="installer_shizuku_status_permission">İzin</string>
+    <string name="installer_shizuku_status_mode">Mod</string>
+    <string name="installer_shizuku_status_provider">Sağlayıcı</string>
+    <string name="installer_shizuku_status_granted">Verildi</string>
+    <string name="installer_shizuku_status_missing">Eksik</string>
+    <string name="installer_shizuku_request_permission">İzin iste</string>
+    <string name="installer_shizuku_install_fail">Shizuku kurulumu başarısız oldu: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku kurulumu başarısız oldu: %1$s
+
+Ayrıntılar: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku izni eksik. Morphe\'ye izin verin ve tekrar deneyin.</string>
+    <string name="installer_shizuku_error_timeout">Shizuku bir kurulum sonucu döndürmedi. Hala çalıştığından emin olun ve tekrar deneyin.</string>
+    <string name="installer_shizuku_error_downgrade">Android, bunu mevcut uygulamayı düşürdüğü için engelledi.</string>
+    <string name="installer_shizuku_error_signature">Android, yüklenen uygulamanın farklı bir imzaya sahip olması nedeniyle bunu engelledi.</string>
+    <string name="installer_shizuku_error_invalid_apk">Android bu APK\'yı okuyamadı.</string>
+    <string name="installer_shizuku_error_user_profile">Android, geçerli kullanıcı veya iş profili için bunu engelledi.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pil optimizasyonu</string>
     <string name="settings_system_battery_optimization_description">Uygulama küçültüldüğünde patcher\'ı çalışır durumda tutar</string>
@@ -801,9 +833,8 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_export_source_data_success">Kaynak verisi başarıyla dışa aktarıldı</string>
     <string name="settings_system_import_source_data_fail">Kaynak verisinin içe aktarılması başarısız oldu</string>
     <string name="settings_system_import_source_data_success">Kaynak verisi başarıyla içe aktarıldı</string>
-    <string name="settings_system_patch_details_title">Yama detayları</string>
-    <string name="settings_system_selected_patches_title">Seçilen yamalar (%s)</string>
-    <string name="settings_system_patch_options_title">Yama seçenekleri (%s)</string>
+    <string name="settings_system_selected_patches_section">Seçili yamalar</string>
+    <string name="settings_system_patch_options_section">Yama seçenekleri</string>
     <string name="settings_system_no_patches_or_options">Hiçbir yama veya seçenek kaydedilmedi</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Özel dosya seçici</string>

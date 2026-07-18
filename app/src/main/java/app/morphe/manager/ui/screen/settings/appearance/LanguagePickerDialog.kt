@@ -9,15 +9,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -141,21 +137,11 @@ private fun LanguageItem(
         onSelect = onClick,
         stateDescription = stateDescription,
         leadingContent = {
-            Surface(
-                shape = RoundedCornerShape(6.dp),
-                color = if (isSelected) {
-                    MaterialTheme.colorScheme.primaryContainer
-                } else {
-                    LocalDialogTextColor.current.copy(alpha = 0.1f)
-                },
-                modifier = Modifier.size(40.dp)
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Text(
-                        text = language.flag,
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                }
+            SelectionLeadingBox(selected = isSelected, size = 40.dp) {
+                Text(
+                    text = language.flag,
+                    style = MaterialTheme.typography.titleLarge
+                )
             }
         }
     ) {
@@ -173,12 +159,6 @@ private fun LanguageItem(
                 color = LocalDialogSecondaryTextColor.current,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
-            )
-        }
-        if (isSelected) {
-            MorpheIcon(
-                icon = Icons.Outlined.Check,
-                tint = MaterialTheme.colorScheme.primary
             )
         }
     }

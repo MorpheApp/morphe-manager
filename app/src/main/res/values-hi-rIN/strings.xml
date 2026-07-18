@@ -328,6 +328,7 @@
     <string name="home_app_info_app_deleted_warning">एप्लिकेशन उन्मोदन किया गया</string>
     <string name="home_app_info_app_deleted_description">इस ऐप को बाहर से उन्मोदन किया गया था। मॉर्फी में पुनः स्थापित करें कार्यक्षमता पुनः प्राप्त करने के लिए</string>
     <string name="home_app_info_apk_size">APK आकार</string>
+    <string name="home_app_info_cpu_arch">CPU आर्किटेक्चर</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">रूट मोड के लिए, पैचिंग शुरू करने से पहले आपके डिवाइस पर APK को इंस्टॉल करना आवश्यक है।</string>
     <string name="root_gmscore_excluded">श्ळ लेरे सेप्नि साधार्य लैि लुन्यिानि ला</string>
@@ -493,13 +494,16 @@
     <string name="settings_appearance_app_language">एप्लिकेशन भाषा</string>
     <string name="settings_appearance_app_language_current">वर्तमान भाषा</string>
     <string name="settings_appearance_translations_info_title">कुछ भाषाओं के लिए अनुवाद या अपूर्ण अनुवाद उपलब्ध हो सकते हैं</string>
-    <string name="settings_appearance_translations_info_text">नई भाषाओं को अनुवाद करने के लिए या मौजूदा अनुवाद को सुधारने के लिए, %s पर जाएं</string>
+    <string name="settings_appearance_translations_info_text">"नई भाषाएँ अनुवाद करने या मौजूदा अनुवादों को बेहतर बनाने के लिए,
+%s पर जाएँ"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">मुखपृष्ठ</string>
     <string name="settings_appearance_greeting_phrases">अभिवादन वाक्यांश</string>
     <string name="settings_appearance_greeting_phrases_subtitle">मुखपृष्ठ पर अभिवादन संदेश दिखाएँ</string>
     <string name="settings_appearance_app_grouping">ऐप समूहीकरण</string>
     <string name="settings_appearance_app_grouping_description">स्रोत या अपनी श्रेणियों द्वारा ऐप्स को समूहित करने के लिए होम स्क्रीन स्विचर दिखाएं, बंद होने पर चयन को बनाए रखें</string>
+    <string name="settings_appearance_sort_button">क्रमबद्ध करें बटन</string>
+    <string name="settings_appearance_sort_button_description">होम स्क्रीन पर क्रमबद्ध करें बटन दिखाएँ</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">एप्लिकेशन आइकॉन</string>
     <string name="settings_appearance_app_icon_default">डिफॉल्ट</string>
@@ -562,7 +566,8 @@
     <string name="settings_advanced_github_pat_configured">टोकन विन्यासित</string>
     <string name="settings_advanced_github_pat_how_to_get">GitHub पर्सनल एक्सेस टोकन कैसे प्राप्त करें</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub पर्सनल एक्सेस टोकन सेट करें</string>
-    <string name="settings_advanced_github_pat_dialog_description">GitHub के लिए एक व्यक्तिगत 액ेस टोकन सेट करें ताकि आप बाहरी स्रोतों के रूप में पुल रिक्वेस्ट जोड़ सकें। github.com पर सार्वजनिक_रेपो स्कोप के साथ एक PAT बनाएं</string>
+    <string name="settings_advanced_github_pat_dialog_description">"बाहरी स्रोतों के रूप में पुल अनुरोध जोड़ने में सक्षम होने के लिए GitHub पर्सनल एक्सेस टोकन सेट करें। 
+%s पर सार्वजनिक_रेपो के दायरे के साथ एक PAT बनाएँ।"</string>
     <string name="settings_advanced_github_pat_export_include_label">सेटिंगز एक्सपोर्ट में शामिल करें</string>
     <string name="settings_advanced_github_pat_export_include_supporting">निर्यातित मोर्फ़ सेटिंग्स में यह PAT जोड़ता है</string>
     <string name="settings_advanced_github_pat_export_warning">आपका PAT को न शेयर करें। अगर आप इसे सेटिंग्ज एक्सपोर्ट में शामिल करते हैं, तो उस फाइल को निजी रखें क्योंकि इसमें टोकन है</string>
@@ -661,7 +666,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">इस क्रिया के लिए समर्थित नहीं है</string>
     <string name="installer_status_shizuku_not_installed">इस विकल्प का उपयोग करने के लिए शिज़ुकू या साई इंस्टॉल करें</string>
     <string name="installer_status_shizuku_not_running">शिज़ुकू या साई को शुरू करें और पुन: प्रयास करें</string>
-    <string name="installer_status_shizuku_permission">मोरफे से शिज़ुकू में अनुमति प्राप्त करें</string>
+    <string name="installer_status_shizuku_permission">Morphe ऐप से Shizuku की अनुमति दें</string>
     <string name="installer_mount_warning_install">आपका प्राथमिक इंस्टॉलर रूट माउंट इंस्टॉलर पर सेट है. यह सहेजा गया ऐप माउंट का उपयोग करके इंस्टॉल नहीं किया गया था।</string>
     <string name="mount_version_mismatch_message">स्टॉक ऐप वर्जन (%2$s) पैच्ड ऐप वर्जन (%1$s) से मेल नहीं खाती. माउंट मैचिंग स्टॉक वर्जन, फिर पुन: प्रयास करें।</string>
     <string name="installer_status_shizuku_unsupported">इंस्टॉल किया गया शिज़ुकू वर्जन समर्थित नहीं है</string>
@@ -676,13 +681,42 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">确保 शिज़ुकू चल रहा है और इस ऐप को अनुमति दी गई है।</string>
     <string name="installer_use_standard">स्तاندर्ड का उपयोग करें</string>
     <string name="installer_play_store_warning_title">प्ले स्टोर के रूप में इंस्टॉल करें?</string>
-    <string name="installer_play_store_warning_message">पैच किए गए ऐप को Google Play Store से इंस्टॉल के रूप में रिकॉर्ड किया जाएगा। यह Android Auto जैसे सेवाओं को इसे Play Store ऐप के रूप में पहचानने देता है।</string>
+    <string name="installer_play_store_warning_message">पैच किए गए ऐप को Google Play Store से इंस्टॉल के रूप में रिकॉर्ड किया जाएगा। यह Android Auto जैसे सेवाओं को इसे Play Store ऐप के रूप में पहचानने में मदद कर सकता है, लेकिन हर ऐप या डिवाइस के लिए इसकी गारंटी नहीं है। व्यवहार Android संस्करण, ROM, डिवाइस ब्रांड और ऐप-विशिष्ट जांच के आधार पर भिन्न हो सकता है।</string>
     <string name="installer_play_store_warning_risk">प्ले स्टोर पैच किए गए ऐप के लिए अपडेट प्रदान कर सकता है। उस अपडेट को इंस्टॉल करने से मूल संस्करण के साथ पैच किए गए APK को ओवरराइट कर दिया जाएगा और पैच हटा दिए जाएंगे। अपडेट करने के लिए प्रेरित होने पर, ऐप के Play Store पृष्ठ पर तीन-बिंदु मेनू पर टैप करें और \"अपडेट बंद करें\" चुनें।</string>
     <string name="installer_play_store_warning_continue">मुझे समझ आ गया, जारी रखें</string>
+    <string name="installer_play_store_mode">Play Store के रूप में इंस्टॉल करें</string>
+    <string name="installer_play_store_mode_description">इस इंस्टॉल विधि के लिए इंस्टॉलेशन स्रोत के रूप में Google Play Store को रिकॉर्ड करें</string>
     <string name="settings_prompt_installer_on_install">इंस्टॉलर चयन संकेत</string>
     <string name="settings_prompt_installer_on_install_description">जब भी पैच किए गए ऐप को इंस्टॉल किया जाता है, तो इंस्टॉलर चयन संवाद दिखाता है।</string>
     <string name="settings_auto_install_with_shizuku">पैचिंग के बाद स्वतः इंस्टॉल करें</string>
     <string name="settings_auto_install_with_shizuku_description">पैचिंग पूरा होने के तुरंत बाद पैच्ड APK चुपचाप इंस्टॉल करता है</string>
+    <string name="settings_auto_uninstall_with_shizuku">विवाद होने पर स्वतः अनइंस्टॉल करें</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Shizuku के साथ स्वतः इंस्टॉल करते समय, यदि Android हस्ताक्षर संघर्ष की रिपोर्ट करता है तो पहले मौजूदा ऐप को अनइंस्टॉल करें। यह ऐप डेटा को हटा सकता है</string>
+    <string name="settings_auto_uninstall_warning_title">स्वतः अनइंस्टॉल सक्षम करें?</string>
+    <string name="settings_auto_uninstall_warning_message">यदि Android Shizuku ऑटो-इंस्टॉल के दौरान हस्ताक्षर संघर्ष की रिपोर्ट करता है, तो Morphe पैच किए गए APK को इंस्टॉल करने से पहले मौजूदा ऐप को अनइंस्टॉल कर देगा</string>
+    <string name="settings_auto_uninstall_warning_risk">यह ऐप डेटा को हटा सकता है। यदि अनइंस्टॉल करने के बाद पैच किया गया APK इंस्टॉल करने में विफल रहता है, तो पिछला ऐप पहले ही चला गया होगा</string>
+    <string name="installer_shizuku_status_action">Shizuku स्थिति जांचें</string>
+    <string name="installer_shizuku_status_title">Shizuku स्थिति</string>
+    <string name="installer_shizuku_status_ready">तैयार</string>
+    <string name="installer_shizuku_status_issue">ध्यान देने की आवश्यकता है</string>
+    <string name="installer_shizuku_status_supported">समर्थित</string>
+    <string name="installer_shizuku_status_running">चल रहा है</string>
+    <string name="installer_shizuku_status_permission">अनुमति</string>
+    <string name="installer_shizuku_status_mode">मोड</string>
+    <string name="installer_shizuku_status_provider">प्रदाता</string>
+    <string name="installer_shizuku_status_granted">अनुदानित</string>
+    <string name="installer_shizuku_status_missing">लापता</string>
+    <string name="installer_shizuku_request_permission">अनुमति का अनुरोध करें</string>
+    <string name="installer_shizuku_install_fail">Shizuku इंस्टॉलेशन विफल: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku इंस्टॉलेशन विफल: %1$s
+
+विवरण: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku अनुमति गुम है। Morphe को अनुमति दें और फिर से प्रयास करें</string>
+    <string name="installer_shizuku_error_timeout">Shizuku ने इंस्टॉलेशन परिणाम नहीं लौटाया। सुनिश्चित करें कि यह अभी भी चल रहा है और फिर से प्रयास करें</string>
+    <string name="installer_shizuku_error_downgrade">Android ने इसे इस वजह से अवरुद्ध कर दिया क्योंकि यह इंस्टॉल किए गए ऐप को डिग्रेड करेगा</string>
+    <string name="installer_shizuku_error_signature">Android ने इसे रोक दिया क्योंकि इंस्टॉल किए गए ऐप में अलग हस्ताक्षर हैं</string>
+    <string name="installer_shizuku_error_invalid_apk">Android इस APK को पढ़ने में विफल रहा</string>
+    <string name="installer_shizuku_error_user_profile">Android ने वर्तमान उपयोगकर्ता या कार्य प्रोफ़ाइल के लिए इसे अवरुद्ध कर दिया</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">बैटरी अनुकूलन</string>
     <string name="settings_system_battery_optimization_description">जब ऐप छोटा किया जाता है, तो पैचर को चालू रखता है।</string>
@@ -801,9 +835,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_source_data_success">स्रोत डेटा सफलतापूर्वक निर्यात किया गया</string>
     <string name="settings_system_import_source_data_fail">स्रोत डेटा आयात करने में विफल</string>
     <string name="settings_system_import_source_data_success">स्रोत डेटा सफलतापूर्वक आयात किया गया</string>
-    <string name="settings_system_patch_details_title">पटच विवरण</string>
-    <string name="settings_system_selected_patches_title">चयनित पट्टियाँ (%s)</string>
-    <string name="settings_system_patch_options_title">पट्टी विकल्प (%s)</string>
+    <string name="settings_system_selected_patches_section">चयनित पैच</string>
+    <string name="settings_system_patch_options_section">पैच विकल्प</string>
     <string name="settings_system_no_patches_or_options">कोई पटच या विकल्प सहेजे गए नहीं</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">कस्टम फ़ाइल पिकर</string>

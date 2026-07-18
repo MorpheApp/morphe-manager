@@ -428,7 +428,6 @@
     <string name="settings_appearance_app_language">Јазик на апликацијата</string>
     <string name="settings_appearance_app_language_current">Тековен јазик</string>
     <string name="settings_appearance_translations_info_title">Преводите за некои јазици може да бидат отсутни или нецелосни</string>
-    <string name="settings_appearance_translations_info_text">За да преведете нови јазици или да ги подобрите постојните преводи, посетете %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Почетен екран</string>
     <string name="settings_appearance_greeting_phrases">Поздрави</string>
@@ -495,7 +494,6 @@
     <string name="settings_advanced_github_pat_configured">Token е конфигуриран</string>
     <string name="settings_advanced_github_pat_how_to_get">Како да добиете token</string>
     <string name="settings_advanced_github_pat_dialog_title">Постави GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Поставете GitHub Personal Access Token за да можете да ги додадете pull барањата како надворешни извори. Создајте PAT со обем public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Вклучи во извозот на поставки</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Додава овој PAT на извезените поставки на Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Не го споделувајте го вашиот PAT. Ако го вклучите во извозот на поставките, чувајте ја таа датотека приватно, бидејќи содржи token</string>
@@ -591,7 +589,6 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">Избери инсталер</string>
     <string name="installer_status_shizuku_not_installed">Не е поддржано за оваа акција</string>
     <string name="installer_status_shizuku_not_running">Инсталирај Shizuku или Sui за да ја користиш оваа опција</string>
-    <string name="installer_status_shizuku_permission">Стартирај Shizuku или Sui и обиди повторно</string>
     <string name="installer_mount_warning_install">Додели дозвола на Morphe од апликацијата Shizuku</string>
     <string name="mount_version_mismatch_message">Верзијата на инсталираната апликација (%2$s) не одговара на верзијата на закрпената апликација (%1$s). Монтирајте ја соодветната верзија на инсталираната апликација, а потоа обидете повторно.</string>
     <string name="installer_status_shizuku_unsupported">Неподдржана верзија на Shizuku</string>
@@ -686,9 +683,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_source_data_success">Податоците од изворот се успешно извезени</string>
     <string name="settings_system_import_source_data_fail">Неуспешен увоз на податоците од изворот</string>
     <string name="settings_system_import_source_data_success">Податоците од изворот се успешно увезени</string>
-    <string name="settings_system_patch_details_title">Детали за закрпување</string>
-    <string name="settings_system_selected_patches_title">Избрани закрпи (%s)</string>
-    <string name="settings_system_patch_options_title">Опции за закрпување (%s)</string>
     <string name="settings_system_no_patches_or_options">Не се зачувани закрпи или опции</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Прилагоден избирач на датотеки</string>

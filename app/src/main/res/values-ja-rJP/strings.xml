@@ -328,6 +328,7 @@
     <string name="home_app_info_app_deleted_warning">アプリがアンインストールされました</string>
     <string name="home_app_info_app_deleted_description">Morphe 外でアプリがアンインストールされました。機能を復元するには、再パッチしてください</string>
     <string name="home_app_info_apk_size">APK サイズ</string>
+    <string name="home_app_info_cpu_arch">CPUアーキテクチャ</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">root 権限モードでは、パッチ適用前にオリジナルの APK がインストールされている必要があります</string>
     <string name="root_gmscore_excluded">GmsCore サポートパッチは root モードでは除外されます</string>
@@ -493,13 +494,15 @@
     <string name="settings_appearance_app_language">アプリの言語</string>
     <string name="settings_appearance_app_language_current">現在の言語</string>
     <string name="settings_appearance_translations_info_title">一部の言語では、翻訳が存在しない、または不完全である可能性があります</string>
-    <string name="settings_appearance_translations_info_text">新しい言語の翻訳や既存の翻訳の改善には、%s にアクセスしてください</string>
+    <string name="settings_appearance_translations_info_text">"新しい言語の翻訳や既存の翻訳の改善には、%s にアクセスしてください"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">ホーム画面</string>
     <string name="settings_appearance_greeting_phrases">挨拶メッセージ</string>
     <string name="settings_appearance_greeting_phrases_subtitle">ホーム画面に挨拶メッセージを表示します</string>
     <string name="settings_appearance_app_grouping">アプリのグループ化</string>
     <string name="settings_appearance_app_grouping_description">ホーム画面スイッチャーを表示して、ソース別または独自のカテゴリでアプリをグループ化します。オフにしたときも選択内容は保持されます</string>
+    <string name="settings_appearance_sort_button">並べ替えボタン</string>
+    <string name="settings_appearance_sort_button_description">ホーム画面に並べ替えボタンを表示します</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">アプリアイコン</string>
     <string name="settings_appearance_app_icon_default">デフォルト</string>
@@ -562,7 +565,6 @@
     <string name="settings_advanced_github_pat_configured">PAT が設定されました</string>
     <string name="settings_advanced_github_pat_how_to_get">PAT を取得するには</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub の Personal Access Token の設定</string>
-    <string name="settings_advanced_github_pat_dialog_description">プルリクエストを外部ソースとして追加するには、 GitHub の Personal Access Token （PAT） を設定する必要があります。スコープ public_repo を設定した PAT を github.com で作成してください</string>
     <string name="settings_advanced_github_pat_export_include_label">設定のエクスポートに含める</string>
     <string name="settings_advanced_github_pat_export_include_supporting">この PAT をエクスポートした Morphe の設定に追加します</string>
     <string name="settings_advanced_github_pat_export_warning">PAT を共有しないでください。設定のエクスポートに含める場合、PAT が含まれるそのファイルも公開しないようにしてください</string>
@@ -661,7 +663,6 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">この操作はサポートされていません</string>
     <string name="installer_status_shizuku_not_installed">このオプションを使用するには、Shizuku または Sui をインストールしてください</string>
     <string name="installer_status_shizuku_not_running">Shizuku または Sui を起動して、もう一度お試しください</string>
-    <string name="installer_status_shizuku_permission">Shizuku アプリから Morphe に Shizuku の権限を付与してください</string>
     <string name="installer_mount_warning_install">既定のインストーラーが root 権限マウント式インストーラーに設定されています。この保存済みアプリは、マウント方式でインストールされたものではありません</string>
     <string name="mount_version_mismatch_message">オリジナルのアプリのバージョン (%2$s) がパッチ適用済みアプリのバージョン (%1$s) と一致しません。対応するオリジナルのアプリをマウントしてから、再度お試しください</string>
     <string name="installer_status_shizuku_unsupported">インストールされている Shizuku のバージョンはサポートされていません</string>
@@ -676,7 +677,6 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">Shizuku が起動中であること、およびこのアプリに権限が付与されていることを確認してください</string>
     <string name="installer_use_standard">標準を使用</string>
     <string name="installer_play_store_warning_title">Playストアとしてインストールしますか？</string>
-    <string name="installer_play_store_warning_message">パッチ適用済みアプリは、Google Play ストアからインストールされたものとして記録されます。これにより、Android Auto などのサービスが、パッチ適用済みアプリを Play ストアのアプリとして認識できるようになります</string>
     <string name="installer_play_store_warning_risk">Play ストアでパッチ適用済みアプリのアップデートが提供される場合があります。アップデートをインストールすると、パッチ適用済みの APK が元のバージョンで上書きされ、パッチが削除されます。アップデートを促された場合は、アプリの Play ストアページで 3 点メニューをタップして、「自動更新の有効化」をオフにしてください</string>
     <string name="installer_play_store_warning_continue">了解しました。続行します</string>
     <string name="settings_prompt_installer_on_install">インストーラー選択ダイアログ</string>
@@ -801,9 +801,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_source_data_success">ソースデータのエクスポートに成功しました</string>
     <string name="settings_system_import_source_data_fail">ソースデータのインポートに失敗しました</string>
     <string name="settings_system_import_source_data_success">ソースデータのインポートに成功しました</string>
-    <string name="settings_system_patch_details_title">パッチの詳細</string>
-    <string name="settings_system_selected_patches_title">選択したパッチ (%s)</string>
-    <string name="settings_system_patch_options_title">パッチ オプション (%s)</string>
+    <string name="settings_system_selected_patches_section">選択したパッチ</string>
+    <string name="settings_system_patch_options_section">パッチ オプション</string>
     <string name="settings_system_no_patches_or_options">保存されたパッチやオプションなし</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">カスタムファイルピッカー</string>

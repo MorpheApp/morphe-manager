@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Other apps</string>
     <string name="home_not_patched_yet">Not patched yet</string>
@@ -345,6 +345,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="home_app_info_app_deleted_warning">App was uninstalled</string>
     <string name="home_app_info_app_deleted_description">This app was uninstalled outside the Morphe. Repatch it to restore functionality</string>
     <string name="home_app_info_apk_size">APK size</string>
+    <string name="home_app_info_cpu_arch">CPU architecture</string>
 
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching</string>
@@ -536,7 +537,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_app_language">App language</string>
     <string name="settings_appearance_app_language_current">Current language</string>
     <string name="settings_appearance_translations_info_title">Translations for some languages may be missing or incomplete</string>
-    <string name="settings_appearance_translations_info_text">To translate new languages or improve the existing translations, visit %s</string>
+    <string name="settings_appearance_translations_info_text">"To translate new languages or improve the existing translations, visit
+%s"</string>
     <string name="settings_appearance_translations_info_url" translatable="false">morphe.software/translate</string>
 
     <!-- Settings - Appearance Tab - Home Screen Section -->
@@ -545,6 +547,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Show a greeting message on the home screen</string>
     <string name="settings_appearance_app_grouping">App grouping</string>
     <string name="settings_appearance_app_grouping_description">Show a home screen switcher to group apps by source or your own categories, keeping the selection when off</string>
+    <string name="settings_appearance_sort_button">Sort button</string>
+    <string name="settings_appearance_sort_button_description">Show the sort button on the home screen</string>
 
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App icon</string>
@@ -613,7 +617,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_advanced_github_pat_configured">Token configured</string>
     <string name="settings_advanced_github_pat_how_to_get">How to get a token</string>
     <string name="settings_advanced_github_pat_dialog_title">Set GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Set a GitHub Personal Access Token in order to be able to add pull requests as external sources. Create a PAT with scope public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Set a GitHub Personal Access Token in order to be able to add pull requests as external sources. Create a PAT with scope public_repo on
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Include in settings export</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Adds this PAT to exported Morphe settings</string>
     <string name="settings_advanced_github_pat_export_warning">Do not share your PAT. If you include it in a settings export, keep that file private because it contains the token</string>
@@ -718,7 +723,7 @@ The image dimensions must be as follows:
     <string name="installer_status_not_supported">Not supported for this action</string>
     <string name="installer_status_shizuku_not_installed">Install Shizuku or Sui to use this option</string>
     <string name="installer_status_shizuku_not_running">Start Shizuku or Sui and try again</string>
-    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Morphe from the Shizuku app</string>
+    <string name="installer_status_shizuku_permission">Grant permission to Morphe from the Shizuku app</string>
     <string name="installer_mount_warning_install">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount</string>
     <string name="mount_version_mismatch_message">Stock app version (%2$s) does not match patched app version (%1$s). Mount the matching stock version, then try again</string>
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported</string>
@@ -733,13 +738,42 @@ The image dimensions must be as follows:
     <string name="installer_unavailable_shizuku_hint">Make sure Shizuku is running and permission is granted to this app</string>
     <string name="installer_use_standard">Use standard</string>
     <string name="installer_play_store_warning_title">Install as Play Store?</string>
-    <string name="installer_play_store_warning_message">The patched app will be recorded as installed from Google Play Store. This lets services like Android Auto recognize it as a Play Store app</string>
+    <string name="installer_play_store_warning_message">The patched app will be recorded as installed from Google Play Store. This can help services like Android Auto recognize it as a Play Store app, but it is not guaranteed for every app or device. Behavior may vary by Android version, ROM, device brand, and app-specific checks</string>
     <string name="installer_play_store_warning_risk">Play Store may offer updates for the patched app. Installing that update will overwrite the patched APK with the original version and remove the patches. If prompted to update, tap the three-dot menu on the app\'s Play Store page and choose \"Turn off updates\"</string>
     <string name="installer_play_store_warning_continue">I understand, continue</string>
+    <string name="installer_play_store_mode">Install as Play Store</string>
+    <string name="installer_play_store_mode_description">Record Google Play Store as the installation source for this install method</string>
     <string name="settings_prompt_installer_on_install">Installer selection prompt</string>
     <string name="settings_prompt_installer_on_install_description">Shows installer selection dialog each time a patched app is installed</string>
     <string name="settings_auto_install_with_shizuku">Auto-install after patching</string>
     <string name="settings_auto_install_with_shizuku_description">Silently installs the patched APK as soon as patching completes</string>
+    <string name="settings_auto_uninstall_with_shizuku">Auto-uninstall on conflict</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">When auto-installing with Shizuku, uninstall the existing app first if Android reports a signature conflict. This can remove app data</string>
+    <string name="settings_auto_uninstall_warning_title">Enable auto-uninstall?</string>
+    <string name="settings_auto_uninstall_warning_message">If Android reports a signature conflict during Shizuku auto-install, Morphe will uninstall the existing app before installing the patched APK</string>
+    <string name="settings_auto_uninstall_warning_risk">This can remove app data. If the patched APK fails to install after uninstalling, the previous app may already be gone</string>
+    <string name="installer_shizuku_status_action">Check Shizuku status</string>
+    <string name="installer_shizuku_status_title">Shizuku status</string>
+    <string name="installer_shizuku_status_ready">Ready</string>
+    <string name="installer_shizuku_status_issue">Needs attention</string>
+    <string name="installer_shizuku_status_supported">Supported</string>
+    <string name="installer_shizuku_status_running">Running</string>
+    <string name="installer_shizuku_status_permission">Permission</string>
+    <string name="installer_shizuku_status_mode">Mode</string>
+    <string name="installer_shizuku_status_provider">Provider</string>
+    <string name="installer_shizuku_status_granted">Granted</string>
+    <string name="installer_shizuku_status_missing">Missing</string>
+    <string name="installer_shizuku_request_permission">Request permission</string>
+    <string name="installer_shizuku_install_fail">Shizuku install failed: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku install failed: %1$s
+
+Details: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku permission is missing. Grant permission to Morphe and try again</string>
+    <string name="installer_shizuku_error_timeout">Shizuku did not return an install result. Make sure it is still running and try again</string>
+    <string name="installer_shizuku_error_downgrade">Android blocked this because it would downgrade the installed app</string>
+    <string name="installer_shizuku_error_signature">Android blocked this because the installed app has a different signature</string>
+    <string name="installer_shizuku_error_invalid_apk">Android could not read this APK</string>
+    <string name="installer_shizuku_error_user_profile">Android blocked this for the current user or work profile</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery optimization</string>
     <string name="settings_system_battery_optimization_description">Keeps the patcher running when the app is minimized</string>
@@ -867,9 +901,8 @@ The image dimensions must be as follows:
     <string name="settings_system_export_source_data_success">Source data exported successfully</string>
     <string name="settings_system_import_source_data_fail">Failed to import source data</string>
     <string name="settings_system_import_source_data_success">Source data imported successfully</string>
-    <string name="settings_system_patch_details_title">Patch details</string>
-    <string name="settings_system_selected_patches_title">Selected patches (%s)</string>
-    <string name="settings_system_patch_options_title">Patch options (%s)</string>
+    <string name="settings_system_selected_patches_section">Selected patches</string>
+    <string name="settings_system_patch_options_section">Patch options</string>
     <string name="settings_system_no_patches_or_options">No patches or options saved</string>
 
     <!-- Settings - System Tab - Custom file picker -->

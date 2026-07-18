@@ -328,6 +328,7 @@
     <string name="home_app_info_app_deleted_warning">التطبيق غير مثبت</string>
     <string name="home_app_info_app_deleted_description">تم إلغاء تثبيت هذا التطبيق من خارج Morphe. اعد تعديله لاستعادة الوظائف</string>
     <string name="home_app_info_apk_size">حجم ملف APK</string>
+    <string name="home_app_info_cpu_arch">معمارية المعالج</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">يتطلب وضع Root تثبيت ملف APK الأصلي على جهازك قبل التعديل</string>
     <string name="root_gmscore_excluded">تم استبعاد تعديل دعم GmsCore في وضع Root</string>
@@ -374,7 +375,7 @@
     <string name="patcher_incompatible_patcher_description">تتطلب الحزمة &lt;b&gt;%1$s&lt;/b&gt; إصدار أداة التعديل &lt;b&gt;%2$s&lt;/b&gt; أو أحدث. يرجى تحديث Morphe لتعديل هذا التطبيق</string>
     <string name="patcher_incompatible_patcher_update_button">تنزيل وتحديث Morphe</string>
     <string name="patcher_storage_permission_description_api30">إحدى خيارات التعديل أو أكثر تشير إلى مسارات لا يمكن لـ Morphe قراءتها. قم بتخصيص الوصول إلى التخزين وانقر على الزر ثم سيبدأ التعديل تلقائيًا</string>
-    <string name="patcher_storage_permission_description_legacy">يشير خيار واحد أو أكثر من خيارات التعديل إلى مسارات لا يمكن الوصول إليها. قم بتحديث المسارات في خيارات التعديل وحاول مرة أخرى.</string>
+    <string name="patcher_storage_permission_description_legacy">يشير خيار واحد أو أكثر من خيارات التعديل إلى مسارات لا يمكن الوصول إليها. قم بتحديث المسارات في خيارات التعديل وحاول مرة أخرى</string>
     <string name="patcher_storage_permission_grant">منح إذن الوصول</string>
     <string name="patcher_storage_permission_denied_warning">تم رفض الإذن على التخزين. قم بإعطاء الإذن لاستخدام هذا المسار، أو نقل الملفات إلى مجلد خاص بالتطبيق.</string>
     <string name="patcher_storage_permission_open_settings">فتح إعدادات التخزين</string>
@@ -494,13 +495,16 @@
     <string name="settings_appearance_app_language">لغة التطبيق</string>
     <string name="settings_appearance_app_language_current">اللغة الحالية</string>
     <string name="settings_appearance_translations_info_title">قد تكون ترجمات بعض اللغات مفقودة أو غير مكتملة</string>
-    <string name="settings_appearance_translations_info_text">لترجمة لغات جديدة أو تحسين الترجمات الحالية، تفضل بزيارة %s</string>
+    <string name="settings_appearance_translations_info_text">"لترجمة لغات جديدة أو تحسين الترجمات الحالية، تفضل بزيارة
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">الشاشة الرئيسية</string>
     <string name="settings_appearance_greeting_phrases">عبارات الترحيب</string>
     <string name="settings_appearance_greeting_phrases_subtitle">عرض رسالة ترحيب على الشاشة الرئيسية</string>
     <string name="settings_appearance_app_grouping">تجميع التطبيقات</string>
     <string name="settings_appearance_app_grouping_description">عرض مُبدِّل الشاشة الرئيسية لتجميع التطبيقات حسب المصدر أو فئاتك الخاصة، مع الاحتفاظ بالتحديد عند إيقاف تشغيلها</string>
+    <string name="settings_appearance_sort_button">زر الفرز</string>
+    <string name="settings_appearance_sort_button_description">عرض زر الفرز على الشاشة الرئيسية</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">أيقونة التطبيق</string>
     <string name="settings_appearance_app_icon_default">الافتراضي</string>
@@ -563,7 +567,9 @@
     <string name="settings_advanced_github_pat_configured">تم تكوين الرمز</string>
     <string name="settings_advanced_github_pat_how_to_get">كيفية الحصول على رمز وصول</string>
     <string name="settings_advanced_github_pat_dialog_title">تعيين رمز وصول شخصي لـ GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">تعيين رمز وصول شخصي (PAT) على GitHub لتتمكن من إضافة طلبات السحب كمصادر خارجية. أنشئ رمز وصول شخصي (PAT) بنطاق public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"تعيين رمز وصول شخصي (PAT) على GitHub لتتمكن من إضافة طلبات السحب كمصادر خارجية.
+أنشئ رمز وصول شخصي (PAT) بنطاق public_repo 
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">تضمين في تصدير الإعدادات</string>
     <string name="settings_advanced_github_pat_export_include_supporting">يضيف هذا الرمز المميز PAT إلى إعدادات Morphe المصدرة</string>
     <string name="settings_advanced_github_pat_export_warning">لا تشارك رمز PAT الخاص بك. إذا قمت بتضمينه في إعدادات التصدير، فاحتفظ بهذا الملف خاصًا لأنه يحتوي على الرمز المميز</string>
@@ -662,7 +668,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_status_not_supported">غير مدعوم لهذا الإجراء</string>
     <string name="installer_status_shizuku_not_installed">قم بتثبيت Shizuku أو Sui لاستخدام هذا الخيار</string>
     <string name="installer_status_shizuku_not_running">ابدأ بتشغيل Shizuku أو Sui وحاول مرة أخرى</string>
-    <string name="installer_status_shizuku_permission">امنح Shizuku إذن للوصول إلى Morphe من تطبيق Shizuku</string>
+    <string name="installer_status_shizuku_permission">امنح تطبيق Shizuku الإذن بالوصول إلى Morphe من تطبيق Shizuku</string>
     <string name="installer_mount_warning_install">أداة التثبيت الأساسية الخاصة بك محددة على أداة تثبيت تركيب Rooted. لم يتم تثبيت التطبيق المحفوظ باستخدام التركيب</string>
     <string name="mount_version_mismatch_message">إصدار التطبيق الأصلي (%2$s) لا يتطابق مع إصدار التطبيق المعدل (%1$s). قم بتركيب الإصدار الأصلي المطابق، ثم حاول مرة أخرى</string>
     <string name="installer_status_shizuku_unsupported">إصدار Shizuku المثبت غير مدعوم</string>
@@ -677,14 +683,43 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_unavailable_shizuku_hint">تأكد من تشغيل Shizuku ومنح الإذن لهذا التطبيق</string>
     <string name="installer_use_standard">استخدام القياسي</string>
     <string name="installer_play_store_warning_title">التثبيت كمتجر Play؟</string>
-    <string name="installer_play_store_warning_message">سيتم تسجيل التطبيق الذي تم تعديله على أنه مثبت من متجر Google Play. يتيح ذلك لخدمات مثل Android Auto التعرف عليه كتطبيق من متجر Play</string>
+    <string name="installer_play_store_warning_message">سيتم تسجيل التطبيق الذي تم تعديله على أنه مثبّت من متجر Google Play. قد يساعد هذا الخدمات مثل Android Auto في التعرف عليه كتطبيق من متجر Play، ولكن هذا غير مضمون لكل تطبيق أو جهاز. قد يختلف السلوك حسب إصدار Android و ROM، ماركة الجهاز، والتحقق من التطبيق</string>
     <string name="installer_play_store_warning_risk">قد يقدم متجر Play تحديثات للتطبيق الذي تم تعديله.
 سيؤدي تثبيت هذا التحديث إلى استبدال ملف APK الذي تم تعديله بالإصدار الأصلي وإزالة التعديلات. إذا طُلب منك التحديث، فانقر على القائمة ثلاثية النقاط في صفحة التطبيق على متجر Play وعطّل \"تفعيل التحديث التلقائي\"</string>
     <string name="installer_play_store_warning_continue">أفهم، متابعة</string>
+    <string name="installer_play_store_mode">التثبيت كمتجر Play</string>
+    <string name="installer_play_store_mode_description">اعتبر متجر Google Play كمصدر للتثبيت لطريقة التثبيت هذه</string>
     <string name="settings_prompt_installer_on_install">نافذة اختيار أداة التثبيت</string>
     <string name="settings_prompt_installer_on_install_description">يعرض نافذة اختيار أداة التثبيت في كل مرة تقوم فيها بتثبيت تطبيق معدل</string>
     <string name="settings_auto_install_with_shizuku">التثبيت التلقائي بعد التعديل</string>
     <string name="settings_auto_install_with_shizuku_description">يقوم بتثبيت ملف APK المُعدّل تلقائيًا بمجرد اكتمال عملية التعديل</string>
+    <string name="settings_auto_uninstall_with_shizuku">إلغاء التثبيت التلقائي في حالة وجود تعارض</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">عند التثبيت التلقائي باستخدام Shizuku، قم بإلغاء تثبيت التطبيق الحالي أولًا إذا أبلغ Android عن تعارض في التوقيع. يمكن أن يؤدي ذلك إلى إزالة بيانات التطبيق</string>
+    <string name="settings_auto_uninstall_warning_title">تمكين إلغاء التثبيت التلقائي؟</string>
+    <string name="settings_auto_uninstall_warning_message">إذا أبلغ Android عن تعارض في التوقيع أثناء التثبيت التلقائي لـ Shizuku ، فسيقوم Morphe بإلغاء تثبيت التطبيق الحالي قبل تثبيت ملف APK الذي تم تعديله</string>
+    <string name="settings_auto_uninstall_warning_risk">يمكن أن يؤدي ذلك إلى إزالة بيانات التطبيق. إذا فشل ملف APK الذي تم تعديله في التثبيت بعد إلغاء التثبيت، فمن المحتمل أن يكون التطبيق السابق قد اختفى بالفعل</string>
+    <string name="installer_shizuku_status_action">تحقق من حالة Shizuku</string>
+    <string name="installer_shizuku_status_title">حالة Shizuku</string>
+    <string name="installer_shizuku_status_ready">جاهز</string>
+    <string name="installer_shizuku_status_issue">يتطلّب إجراءًا</string>
+    <string name="installer_shizuku_status_supported">مدعوم</string>
+    <string name="installer_shizuku_status_running">قيد التشغيل</string>
+    <string name="installer_shizuku_status_permission">الإذن</string>
+    <string name="installer_shizuku_status_mode">الوضع</string>
+    <string name="installer_shizuku_status_provider">المزود</string>
+    <string name="installer_shizuku_status_granted">تم منحه</string>
+    <string name="installer_shizuku_status_missing">مفقود</string>
+    <string name="installer_shizuku_request_permission">طلب الإذن</string>
+    <string name="installer_shizuku_install_fail">فشل تثبيت Shizuku: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"فشل تثبيت Shizuku: %1$s
+
+التفاصيل: %2$s"</string>
+    <string name="installer_shizuku_error_permission">إذن Shizuku مفقود. امنح الإذن لـ Morphe وحاول مرة أخرى</string>
+    <string name="installer_shizuku_error_timeout">لم تُستلم نتيجة تثبيت من Shizuku. تحقّق من أنه يعمل ثم أعد المحاولة</string>
+    <string name="installer_shizuku_error_downgrade">منع Android هذا الإجراء لأنه سيُرجع نسخة التطبيق المثبّتة إلى إصدار أقدم</string>
+    <string name="installer_shizuku_error_signature">منع Android هذا الإجراء لأن التطبيق المثبت له توقيع مختلف</string>
+    <string name="installer_shizuku_error_invalid_apk">تعذر على Android قراءة ملف APK هذا</string>
+    <string name="installer_shizuku_error_user_profile">منع Android هذا الإجراء للمستخدم الحالي أو ملف العمل</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">تحسينات البطارية</string>
     <string name="settings_system_battery_optimization_description">يحافظ على تشغيل أداة التعديل عند تصغير التطبيق</string>
@@ -803,9 +838,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_export_source_data_success">تم تصدير بيانات المصدر بنجاح</string>
     <string name="settings_system_import_source_data_fail">فشل استيراد بيانات المصدر</string>
     <string name="settings_system_import_source_data_success">تم استيراد بيانات المصدر بنجاح</string>
-    <string name="settings_system_patch_details_title">تفاصيل التعديل</string>
-    <string name="settings_system_selected_patches_title">التعديلات المحددة (%s)</string>
-    <string name="settings_system_patch_options_title">خيارات التعديل (%s)</string>
+    <string name="settings_system_selected_patches_section">التعديلات المحددة</string>
+    <string name="settings_system_patch_options_section">خيارات التعديل</string>
     <string name="settings_system_no_patches_or_options">لا يوجد تعديلات أو خيارات محفوظة</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">مستعرض ملفات مخصص</string>

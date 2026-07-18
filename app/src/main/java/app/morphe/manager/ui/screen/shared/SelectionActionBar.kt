@@ -132,6 +132,7 @@ fun SelectionActionBar(
                     enabled = selectedCount > 0
                 )
             }
+            actions()
             if (onCancel != null) {
                 ActionPillButton(
                     onClick = onCancel,
@@ -140,7 +141,6 @@ fun SelectionActionBar(
                     tooltip = cancelLabel
                 )
             }
-            actions()
         }
     }
 }

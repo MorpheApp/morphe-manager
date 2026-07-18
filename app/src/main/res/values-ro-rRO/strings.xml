@@ -328,6 +328,7 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="home_app_info_app_deleted_warning">Aplicația a fost dezinstalată</string>
     <string name="home_app_info_app_deleted_description">Această aplicație a fost dezinstalată în afara Morphe. Aplica-o din nou pentru a restabili funcționalitatea</string>
     <string name="home_app_info_apk_size">Dimensiunea APK</string>
+    <string name="home_app_info_cpu_arch">Arhitectura procesorului</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Modul radical necesită instalarea APK-ului original pe dispozitivul dvs. înainte de a pata</string>
     <string name="root_gmscore_excluded">Suportul GmsCore este exclus în modul root</string>
@@ -493,13 +494,15 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_app_language">Limbă aplicație</string>
     <string name="settings_appearance_app_language_current">Limba curentă</string>
     <string name="settings_appearance_translations_info_title">Traduțiile pentru unele limbi pot lipsi sau să fie incomplet</string>
-    <string name="settings_appearance_translations_info_text">Pentru a traduce în noi limbi sau să îmbunătățești traducerile existente, vizitează %s</string>
+    <string name="settings_appearance_translations_info_text">"Pentru a traduce în noi limbi sau să îmbunătățești traducerile existente, vizitează %s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Ecranul principal</string>
     <string name="settings_appearance_greeting_phrases">Fraze de salut</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Afișează un mesaj de salut pe ecranul principal</string>
     <string name="settings_appearance_app_grouping">Gruparea aplicațiilor</string>
     <string name="settings_appearance_app_grouping_description">Afișează un comutator al ecranului principal pentru a grupa aplicațiile după sursă sau după propriile categorii, menținând selecția când este dezactivat</string>
+    <string name="settings_appearance_sort_button">Buton sortare</string>
+    <string name="settings_appearance_sort_button_description">Afișează butonul de sortare pe ecranul principal</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Pictogramă aplicație</string>
     <string name="settings_appearance_app_icon_default">Implicit</string>
@@ -562,7 +565,8 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_advanced_github_pat_configured">Jeton configurat</string>
     <string name="settings_advanced_github_pat_how_to_get">Cum obții un jeton</string>
     <string name="settings_advanced_github_pat_dialog_title">Setează jeton de acces personal GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Setă un token de acces personal GitHub pentru a putea adăuga cereri de pull ca surse externe. Creează un token cu scopul public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Setează un token de acces personal GitHub pentru a putea adăuga cereri de tip pull ca surse externe. Creează un PAT cu domeniul public_repo pe
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Include în exportul setărilor</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Adaugă acest PAT la setările Morphe exportate</string>
     <string name="settings_advanced_github_pat_export_warning">Nu partaja PAT-ul tău. Dacă îl incluzi într-un export de setări, păstrează acel fișier privat, deoarece conține jetonul</string>
@@ -661,7 +665,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_status_not_supported">Nu este suportat pentru această acțiune</string>
     <string name="installer_status_shizuku_not_installed">Instalează Shizuku sau Sui pentru a folosi această opțiune</string>
     <string name="installer_status_shizuku_not_running">Pornește Shizuku sau Sui și încearcă din nou</string>
-    <string name="installer_status_shizuku_permission">Grantă Shizuku permisiunea pentru Morphe din aplicația Shizuku</string>
+    <string name="installer_status_shizuku_permission">Acordă permisiune aplicației Morphe din aplicația Shizuku</string>
     <string name="installer_mount_warning_install">Instalatorul principal setat la instalatorul montat radical. Această aplicație salvată nu a fost instalată folosind montaj</string>
     <string name="mount_version_mismatch_message">Versiunea aplicației de bază (%2$s) nu se potrivște cu versiunea aplicației patate (%1$s). Montează versiunea de bază potrivită, apoi reîncercați</string>
     <string name="installer_status_shizuku_unsupported">Versiunea Shizuku instalată nu este suportată</string>
@@ -676,13 +680,42 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_unavailable_shizuku_hint">Aseară că Shizuku rulează și permisiunea este acordată acestei aplicații</string>
     <string name="installer_use_standard">Folosește standard</string>
     <string name="installer_play_store_warning_title">Instalează ca Play Store?</string>
-    <string name="installer_play_store_warning_message">Aplicația modificată va fi înregistrată ca fiind instalată din Google Play Store. Acest lucru permite serviciilor precum Android Auto să o recunoască drept o aplicație Play Store</string>
+    <string name="installer_play_store_warning_message">Aplicația modificată va fi înregistrată ca fiind instalată din Google Play Store. Acest lucru poate ajuta serviciile precum Android Auto să o recunoască drept o aplicație din Play Store, dar nu este garantat pentru fiecare aplicație sau dispozitiv. Comportamentul poate varia în funcție de versiunea Android, ROM, marca dispozitivului și verificările specifice aplicației.</string>
     <string name="installer_play_store_warning_risk">Play Store poate oferi actualizări pentru aplicația modificată. Instalarea acelei actualizări va suprascrie APK-ul modificat cu versiunea originală și va elimina modificările. Dacă ți se solicită să actualizezi, atinge meniul cu trei puncte pe pagina Play Store a aplicației și alege \"Dezactivează actualizările\"</string>
     <string name="installer_play_store_warning_continue">Am înțeles, continuă</string>
+    <string name="installer_play_store_mode">Instalează ca Play Store</string>
+    <string name="installer_play_store_mode_description">Înregistrează Google Play Store ca sursă de instalare pentru această metodă</string>
     <string name="settings_prompt_installer_on_install">Solicitare de selecție a installerului</string>
     <string name="settings_prompt_installer_on_install_description">Afișează dialogul de selecție a installerului de fiecare dată când o aplicație patch-uită este instalată</string>
     <string name="settings_auto_install_with_shizuku">Instalare automată după patch-uire</string>
     <string name="settings_auto_install_with_shizuku_description">Instalează în silențios fișierul APK patch-uit imediat ce patch-uirea este finalizată</string>
+    <string name="settings_auto_uninstall_with_shizuku">Dezinstalare automată în caz de conflict</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Când se instalează automat cu Shizuku, dezinstalează mai întâi aplicația existentă dacă Android raportează un conflict de semnătură. Acest lucru poate elimina datele aplicației.</string>
+    <string name="settings_auto_uninstall_warning_title">Activează dezinstalarea automată?</string>
+    <string name="settings_auto_uninstall_warning_message">Dacă Android raportează un conflict de semnătură în timpul instalării automate Shizuku, Morphe va dezinstala aplicația existentă înainte de a instala fișierul APK modificat.</string>
+    <string name="settings_auto_uninstall_warning_risk">Acest lucru poate elimina datele aplicației. Dacă fișierul APK modificat nu se instalează după dezinstalare, este posibil ca aplicația anterioară să nu mai existe.</string>
+    <string name="installer_shizuku_status_action">Verifică starea Shizuku</string>
+    <string name="installer_shizuku_status_title">Starea Shizuku</string>
+    <string name="installer_shizuku_status_ready">Pregătit</string>
+    <string name="installer_shizuku_status_issue">Necesită atenție</string>
+    <string name="installer_shizuku_status_supported">Suportat</string>
+    <string name="installer_shizuku_status_running">Funcționând</string>
+    <string name="installer_shizuku_status_permission">Permisiune</string>
+    <string name="installer_shizuku_status_mode">Mod</string>
+    <string name="installer_shizuku_status_provider">Furnizor</string>
+    <string name="installer_shizuku_status_granted">Acordat</string>
+    <string name="installer_shizuku_status_missing">Lipsă</string>
+    <string name="installer_shizuku_request_permission">Solicită permisiune</string>
+    <string name="installer_shizuku_install_fail">Instalarea Shizuku a eșuat: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Instalarea Shizuku a eșuat: %1$s
+
+Detalii: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Permisiunea Shizuku lipsește. Acordă permisiune aplicației Morphe și încearcă din nou.</string>
+    <string name="installer_shizuku_error_timeout">Shizuku nu a returnat un rezultat de instalare. Asigură-te că rulează încă și încearcă din nou.</string>
+    <string name="installer_shizuku_error_downgrade">Android a blocat această acțiune deoarece ar face o retrogradare a aplicației instalate.</string>
+    <string name="installer_shizuku_error_signature">Android a blocat această acțiune deoarece aplicația instalată are o semnătură diferită.</string>
+    <string name="installer_shizuku_error_invalid_apk">Android nu a putut citi acest fișier APK.</string>
+    <string name="installer_shizuku_error_user_profile">Android a blocat acest lucru pentru utilizatorul curent sau profilul de lucru.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizarea bateriei</string>
     <string name="settings_system_battery_optimization_description">Menține patcherul în funcțiune când aplicația este minimizată</string>
@@ -801,9 +834,8 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_export_source_data_success">Datele sursei exportate cu succes</string>
     <string name="settings_system_import_source_data_fail">Eșec la importarea datelor sursei</string>
     <string name="settings_system_import_source_data_success">Datele sursei importate cu succes</string>
-    <string name="settings_system_patch_details_title">Detalii pachet</string>
-    <string name="settings_system_selected_patches_title">Patch-uri selectate (%s)</string>
-    <string name="settings_system_patch_options_title">Opțiuni patch-uri (%s)</string>
+    <string name="settings_system_selected_patches_section">Patch-uri selectate</string>
+    <string name="settings_system_patch_options_section">Opțiuni de patch-uri</string>
     <string name="settings_system_no_patches_or_options">Nicio pachet sau opțiune salvată</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Selector de fișiere personalizat</string>

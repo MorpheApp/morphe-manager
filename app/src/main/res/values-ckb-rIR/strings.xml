@@ -368,7 +368,6 @@
     <string name="settings_appearance_app_language">زمانی ئەپ</string>
     <string name="settings_appearance_app_language_current">زمانی ئێستا</string>
     <string name="settings_appearance_translations_info_title">وەرگێڕانەکان بۆ هەندێک زمانەکان لەوانەیە وون یان ناتەواو بن</string>
-    <string name="settings_appearance_translations_info_text">بۆ وەرگێڕانی زمانی نوێ یان باشترکردنی وەرگێڕانەکانی بەردەست، سەردانی %s بکە</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">شاشەی ماڵەوە</string>
     <string name="settings_appearance_greeting_phrases">دەستەواژەی بەخێرهاتن</string>

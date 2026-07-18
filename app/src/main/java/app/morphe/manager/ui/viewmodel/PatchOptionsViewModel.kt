@@ -69,17 +69,6 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
     fun dismissBrandingDialog() { showBrandingDialogFor = null }
     fun dismissHeaderDialog() { showHeaderDialogFor = null }
 
-    /** True when the bundle is still fetching - kept in sync by PatchOptionsSection via [onBundleUpdatingChanged]. */
-    var isBundleUpdating: Boolean by mutableStateOf(false)
-        private set
-
-    fun onBundleUpdatingChanged(updating: Boolean) { isBundleUpdating = updating }
-
-    /** True when the bundle has loaded but contains no relevant patches. */
-    val noPatchesAvailable: Boolean
-        get() = !isBundleUpdating && loadError == null &&
-                _youtubePatches.value.isEmpty() && _youtubeMusicPatches.value.isEmpty()
-
     // State for loading
     var isLoading by mutableStateOf(true)
         private set

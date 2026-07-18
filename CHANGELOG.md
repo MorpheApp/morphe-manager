@@ -1,3 +1,60 @@
+# [1.24.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.8...v1.24.0-dev.9) (2026-07-18)
+
+
+### Bug Fixes
+
+* Center text in translation info dialog and format GitHub PAT link ([74e128c](https://github.com/MorpheApp/morphe-manager/commit/74e128c9c8cfa8147e9fafad44427c5720048bf3))
+* Correct emoji flag size in language selection card ([72dd679](https://github.com/MorpheApp/morphe-manager/commit/72dd679e7a80d200a127a281a3c0bef326bfa2bd))
+* Rewrite `CreditsDialog` with Morphe-style components ([2a8eb38](https://github.com/MorpheApp/morphe-manager/commit/2a8eb38f166e464b6501f3fe7557ccc95e1234c5))
+
+
+### Features
+
+* Add sort button visibility toggle in Appearance settings ([c3c5e8b](https://github.com/MorpheApp/morphe-manager/commit/c3c5e8b86bf8224afff2384ab9843904a883b080))
+* Animate `HeroInfoCard` in APK management dialogs with shimmer and counter transitions ([f98a602](https://github.com/MorpheApp/morphe-manager/commit/f98a6026b3ff3e5b27b85605ca44bf653cd0f29b))
+* Improve Shizuku installer flow ([#734](https://github.com/MorpheApp/morphe-manager/issues/734)) ([08ab696](https://github.com/MorpheApp/morphe-manager/commit/08ab6967de5baaebb1fa4354488abc9a1e9e65be))
+* Redesign `PatchListComponents` with Morphe-style components and layout improvements ([d733da6](https://github.com/MorpheApp/morphe-manager/commit/d733da626d51dc87801107bcc06612ee48af3617))
+
+# [1.24.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.7...v1.24.0-dev.8) (2026-07-17)
+
+
+### Bug Fixes
+
+* Align `About section` app-info item style with installer item ([d20d23b](https://github.com/MorpheApp/morphe-manager/commit/d20d23bceaf663e9e30a319f94089cdf2c1d6f7b))
+* Replace bundle card toggles with `ToggleRow` and fix expanded card spacing ([3ca5d32](https://github.com/MorpheApp/morphe-manager/commit/3ca5d3281f7699579158baaa0c1281fe06ca3fe1))
+* Replace compactPadding/noPadding booleans with `DialogPadding` enum ([0d7758b](https://github.com/MorpheApp/morphe-manager/commit/0d7758ba623e192986959272bcc6dccd889e5491))
+* Wrap `AboutSection` items in `SettingsGroup` ([2367e6c](https://github.com/MorpheApp/morphe-manager/commit/2367e6c82ac1d020c46f3782ab9d084469e66af1))
+
+
+### Features
+
+* Add footer section to `RadioSelectionCard` and apply it to installer options ([ecfaf03](https://github.com/MorpheApp/morphe-manager/commit/ecfaf03c00ad36fc551dbd4f410eeb8f7d72669a))
+* Display CPU architecture in saved and patched APK cards ([1d2b6e8](https://github.com/MorpheApp/morphe-manager/commit/1d2b6e8304a3ff3467e7f880d64bd028546289aa))
+* Redesign `InstalledAppInfoDialog` with Morphe-style components and layout improvements ([d9e4ef3](https://github.com/MorpheApp/morphe-manager/commit/d9e4ef30d07577c973c008330d599d1c8c1e633f))
+
+# [1.24.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.6...v1.24.0-dev.7) (2026-07-17)
+
+
+### Bug Fixes
+
+* Fix spurious patch source badge and refine installer dialog UI ([00059a0](https://github.com/MorpheApp/morphe-manager/commit/00059a050febb9b4fd1af99534039c1bdd262eed))
+* Inline `SelectionActionBar` into `MultiSelectBar` and reorder cancel button ([70d7991](https://github.com/MorpheApp/morphe-manager/commit/70d7991458ed41c8c22531df2e95044908f795bd))
+* Keep simple mode patch options rendered on tab re-entry ([fd33414](https://github.com/MorpheApp/morphe-manager/commit/fd3341410f056e0baffe48d303f0d044318dd60b))
+* Split `SectionsLayout` into focused files ([56085e0](https://github.com/MorpheApp/morphe-manager/commit/56085e096308ac1a49a4549a2e961e7485ff65e8))
+
+# [1.24.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.5...v1.24.0-dev.6) (2026-07-17)
+
+
+### Bug Fixes
+
+* Dedupe expert-mode UI patterns and reuse shared components ([e172fda](https://github.com/MorpheApp/morphe-manager/commit/e172fda8a66f417a82df724a657693936d777c66))
+* Migrate `PatchCard` to shared `SettingsItemCard` ([4704c40](https://github.com/MorpheApp/morphe-manager/commit/4704c406c3be2ed9aac02b5c02a30f57620ae552))
+* Normalize expert-mode padding to `MorpheDefaults` ([ecb6c7b](https://github.com/MorpheApp/morphe-manager/commit/ecb6c7bccc288729a5b3154d99eebe7a0bccfb08))
+* Share patch list components and consolidate badges ([797004d](https://github.com/MorpheApp/morphe-manager/commit/797004d9c1bb94f4397a43102b84049cad8852a9))
+* Split `ExpertModeDialog` into focused files ([a9e857c](https://github.com/MorpheApp/morphe-manager/commit/a9e857c9c82fea373c3dd422b60432ef7b631e5c))
+* Top-align list-based dialogs and dedupe `MorpheDialog` ([c012263](https://github.com/MorpheApp/morphe-manager/commit/c01226307b3d6d78155f3df352005b724b967d72))
+* Unify `RadioSelectionCard` visuals across dialogs ([885dd2d](https://github.com/MorpheApp/morphe-manager/commit/885dd2d2b19606cd2ccb22b19f2f902044b63e58))
+
 # [1.24.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.4...v1.24.0-dev.5) (2026-07-16)
 
 

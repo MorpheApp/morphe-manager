@@ -475,7 +475,6 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_app_language">Jezik aplikacije</string>
     <string name="settings_appearance_app_language_current">Trenutni jezik</string>
     <string name="settings_appearance_translations_info_title">Prijevodi za neke jezike mogu nedostajati ili biti nepotpuni</string>
-    <string name="settings_appearance_translations_info_text">Da biste preveli nove jezike ili poboljšali postojeće prijevode, posjetite %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Početni zaslon</string>
     <string name="settings_appearance_greeting_phrases">Pozdravne fraze</string>
@@ -542,7 +541,6 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="settings_advanced_github_pat_configured">Token je konfiguriran</string>
     <string name="settings_advanced_github_pat_how_to_get">Kako dobiti token</string>
     <string name="settings_advanced_github_pat_dialog_title">Postavite GitHub osobni pristupni token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Postavite GitHub Personal Access Token kako biste mogli dodavati zahtjeve za povlačenjem kao vanjske izvore. Izradite PAT s opsegom public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Uključi u postavke izvoza</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Dodaje ovaj PAT izvezenim postavkama Morphea</string>
     <string name="settings_advanced_github_pat_export_warning">Ne dijelite svoj PAT. Ako ga uključite u postavke izvoza, držite tu datoteku privatnom jer sadrži token</string>
@@ -641,7 +639,6 @@ Dimenzije slike moraju biti sljedeće:
     <string name="installer_status_not_supported">Nije podržano za ovu radnju </string>
     <string name="installer_status_shizuku_not_installed">Instalirajte Shizuku ili Sui da biste koristili ovu opciju</string>
     <string name="installer_status_shizuku_not_running">Pokrenite Shizuku ili Sui i pokušajte ponovno</string>
-    <string name="installer_status_shizuku_permission">Odobrite Morpheu odobrenje Shizuku iz aplikacije Shizuku</string>
     <string name="installer_mount_warning_install">Vaš primarni instalater je postavljen na root instaliranje. Ova spremljenna aplikacija nije instalirana pomoću učitavanja</string>
     <string name="mount_version_mismatch_message">Standardna verzija aplikacije (%2$s) ne odgovara patchanoj verziji aplikacije (%1$s). Montirajte odgovarajuću standardnu ​​verziju, a zatim pokušajte ponovno.</string>
     <string name="installer_status_shizuku_unsupported">Instalirana verzija Shizuku nije podržana</string>
@@ -656,7 +653,6 @@ Dimenzije slike moraju biti sljedeće:
     <string name="installer_unavailable_shizuku_hint">Provjerite je li Shizuku pokrenut i je li ovoj aplikaciji odobreno dopuštenje</string>
     <string name="installer_use_standard">Koristi standardno</string>
     <string name="installer_play_store_warning_title">Instalirati kao Trgovinu Play?</string>
-    <string name="installer_play_store_warning_message">Patchana aplikacija bit će zabilježena kao instalirana iz Trgovine Google Play. To omogućuje uslugama poput Android Auta da je prepoznaju kao aplikaciju iz Trgovine Play.</string>
     <string name="installer_play_store_warning_risk">Trgovina Play može nuditi ažuriranja za patchanu aplikaciju. Instaliranjem tog ažuriranja prebrisat će se patchani APK originalnom verzijom i ukloniti patcheve. Ako se od vas zatraži ažuriranje, dodirnite izbornik s tri točke na stranici Trgovine Play aplikacije i odaberite \"Isključi ažuriranja\".</string>
     <string name="installer_play_store_warning_continue">Razumijem, nastavi</string>
     <string name="settings_prompt_installer_on_install">Izbor instalatora</string>
@@ -757,9 +753,6 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_export_source_data_success">Podaci izvora uspješno izvozeni</string>
     <string name="settings_system_import_source_data_fail">Neuspjeh pri uvozu podataka izvora</string>
     <string name="settings_system_import_source_data_success">Podaci izvora uspješno uvezeni</string>
-    <string name="settings_system_patch_details_title">Detalji patcha</string>
-    <string name="settings_system_selected_patches_title">Odabrani patchovi (%s)</string>
-    <string name="settings_system_patch_options_title">Opcije patchanja (%s)</string>
     <string name="settings_system_no_patches_or_options">Nema spremljenih patchova ili opcija</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Prilagođeni alat za odabir datoteka</string>

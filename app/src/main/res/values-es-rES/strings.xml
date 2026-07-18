@@ -328,6 +328,7 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <string name="home_app_info_app_deleted_warning">La app fue desinstalada</string>
     <string name="home_app_info_app_deleted_description">Esta app fue desinstalada fuera de Morphe. Vuelve a parchearla para restaurar la funcionalidad</string>
     <string name="home_app_info_apk_size">Tamaño de la APK</string>
+    <string name="home_app_info_cpu_arch">Arquitectura de la CPU</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">El modo raíz requiere que el APK original esté instalado en tu dispositivo antes de aplicar parches.</string>
     <string name="root_gmscore_excluded">El parche de soporte de GmsCore está excluido en el modo raíz</string>
@@ -493,13 +494,16 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="settings_appearance_app_language">Idioma de la aplicación</string>
     <string name="settings_appearance_app_language_current">Idioma actual</string>
     <string name="settings_appearance_translations_info_title">Las traducciones para algunos idiomas pueden faltar o estar incompletas</string>
-    <string name="settings_appearance_translations_info_text">Para traducir nuevos idiomas o mejorar las traducciones existentes, visite %s</string>
+    <string name="settings_appearance_translations_info_text">"Para traducir nuevos idiomas o mejorar las traducciones existentes, visite
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Pantalla de inicio</string>
     <string name="settings_appearance_greeting_phrases">Frases de saludo</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostrar un mensaje de saludo en la pantalla de inicio</string>
     <string name="settings_appearance_app_grouping">Agrupación de aplicaciones</string>
     <string name="settings_appearance_app_grouping_description">Mostrar un selector de pantalla de inicio para agrupar aplicaciones por origen o por sus propias categorías, manteniendo la selección cuando esté desactivado</string>
+    <string name="settings_appearance_sort_button">Botón de ordenar</string>
+    <string name="settings_appearance_sort_button_description">Muestra el botón de ordenar en la pantalla de inicio</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icono de la aplicación</string>
     <string name="settings_appearance_app_icon_default">Predeterminado</string>
@@ -562,7 +566,8 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="settings_advanced_github_pat_configured">Token configurado</string>
     <string name="settings_advanced_github_pat_how_to_get">Cómo obtener un token</string>
     <string name="settings_advanced_github_pat_dialog_title">Establecer token de acceso personal de GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Establezca un token de acceso personal (PAT) de GitHub para poder añadir solicitudes de extracción como fuentes externas. Cree un PAT con alcance public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Establezca un token de acceso personal (PAT) de GitHub para poder añadir solicitudes de extracción como fuentes externas. Cree un PAT con alcance public_repo en
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Incluir en la exportación de ajustes</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Agrega este PAT a los ajustes exportados de Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">No compartas tu PAT. Si lo incluyes en una exportación de ajustes, mantén ese archivo privado porque contiene el token</string>
@@ -661,7 +666,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="installer_status_not_supported">No compatible con esta acción.</string>
     <string name="installer_status_shizuku_not_installed">Instala Shizuku o Sui para usar esta opción.</string>
     <string name="installer_status_shizuku_not_running">Inicia Shizuku o Sui y vuelve a intentarlo.</string>
-    <string name="installer_status_shizuku_permission">Concede a Shizuku el permiso a Morphe desde la aplicación Shizuku.</string>
+    <string name="installer_status_shizuku_permission">Otorgar permiso a Morphe desde la aplicación Shizuku</string>
     <string name="installer_mount_warning_install">Tu instalador principal está configurado en el instalador montado en raíz. Esta aplicación guardada no se instaló con montaje.</string>
     <string name="mount_version_mismatch_message">La versión de la aplicación de stock (%2$s) no coincide con la versión de la aplicación parcheada (%1$s). Monta la versión de stock que coincida, luego vuelve a intentarlo.</string>
     <string name="installer_status_shizuku_unsupported">La versión de Shizuku instalada no es compatible.</string>
@@ -676,13 +681,42 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="installer_unavailable_shizuku_hint">Asegúrate de que Shizuku esté en ejecución y se haya concedido el permiso a esta aplicación.</string>
     <string name="installer_use_standard">Usar estándar</string>
     <string name="installer_play_store_warning_title">¿Instalar como Play Store?</string>
-    <string name="installer_play_store_warning_message">La aplicación modificada se registrará como instalada desde Google Play Store. Esto permite que servicios como Android Auto la reconozcan como una aplicación de Play Store</string>
+    <string name="installer_play_store_warning_message">La aplicación parcheada se registrará como instalada desde Google Play Store. Esto puede ayudar a servicios como Android Auto a reconocerla como una aplicación de Play Store, pero no está garantizado para cada aplicación o dispositivo. El comportamiento puede variar según la versión de Android, la ROM, la marca del dispositivo y las comprobaciones específicas de la aplicación.</string>
     <string name="installer_play_store_warning_risk">Play Store puede ofrecer actualizaciones para la aplicación modificada. Instalar esa actualización sobrescribirá el APK modificado con la versión original y eliminará los parches. Si se le solicita que actualice, toque el menú de los tres puntos en la página de Play Store de la aplicación y elija \"Desactivar actualizaciones\"</string>
     <string name="installer_play_store_warning_continue">Entiendo, continuar</string>
+    <string name="installer_play_store_mode">Instalar como Play Store</string>
+    <string name="installer_play_store_mode_description">Registrar Google Play Store como la fuente de instalación para este método de instalación</string>
     <string name="settings_prompt_installer_on_install">Solicitud de selección del instalador</string>
     <string name="settings_prompt_installer_on_install_description">Muestra el diálogo de selección del instalador cada vez que se instala una aplicación parcheada</string>
     <string name="settings_auto_install_with_shizuku">Instalación automática después del parcheo</string>
     <string name="settings_auto_install_with_shizuku_description">Instala silenciosamente el APK parcheado tan pronto como se completa el parcheo</string>
+    <string name="settings_auto_uninstall_with_shizuku">Desinstalación automática en caso de conflicto</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Cuando se instala automáticamente con Shizuku, desinstala primero la aplicación existente si Android informa de un conflicto de firma. Esto puede eliminar los datos de la aplicación</string>
+    <string name="settings_auto_uninstall_warning_title">¿Activar desinstalación automática?</string>
+    <string name="settings_auto_uninstall_warning_message">Si Android informa de un conflicto de firma durante la instalación automática de Shizuku, Morphe desinstalará la aplicación existente antes de instalar el APK parcheado</string>
+    <string name="settings_auto_uninstall_warning_risk">Esto puede eliminar los datos de la aplicación. Si el APK parcheado falla al instalarse después de desinstalarlo, es posible que la aplicación anterior ya haya desaparecido</string>
+    <string name="installer_shizuku_status_action">Verificar estado de Shizuku</string>
+    <string name="installer_shizuku_status_title">Estado de Shizuku</string>
+    <string name="installer_shizuku_status_ready">Listo</string>
+    <string name="installer_shizuku_status_issue">Necesita atención</string>
+    <string name="installer_shizuku_status_supported">Soportado</string>
+    <string name="installer_shizuku_status_running">Ejecutándose</string>
+    <string name="installer_shizuku_status_permission">Permiso</string>
+    <string name="installer_shizuku_status_mode">Modo</string>
+    <string name="installer_shizuku_status_provider">Proveedor</string>
+    <string name="installer_shizuku_status_granted">Concedido</string>
+    <string name="installer_shizuku_status_missing">Faltante</string>
+    <string name="installer_shizuku_request_permission">Solicitar permiso</string>
+    <string name="installer_shizuku_install_fail">Error al instalar Shizuku: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Error al instalar Shizuku: %1$s
+
+Detalles: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Falta el permiso de Shizuku. Conceda permiso a Morphe e inténtelo de nuevo</string>
+    <string name="installer_shizuku_error_timeout">Shizuku no devolvió un resultado de instalación. Asegúrate de que aún se esté ejecutando e inténtalo de nuevo</string>
+    <string name="installer_shizuku_error_downgrade">Android bloqueó esta acción porque revertiría la aplicación a una versión anterior</string>
+    <string name="installer_shizuku_error_signature">Android bloqueó esto porque la aplicación instalada tiene una firma diferente</string>
+    <string name="installer_shizuku_error_invalid_apk">Android no pudo leer este APK</string>
+    <string name="installer_shizuku_error_user_profile">Android bloqueó esto para el usuario actual o perfil de trabajo</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimización de batería</string>
     <string name="settings_system_battery_optimization_description">Mantiene el parcheador en funcionamiento cuando la aplicación está minimizada</string>
@@ -801,9 +835,8 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_export_source_data_success">Datos de fuente exportados correctamente</string>
     <string name="settings_system_import_source_data_fail">Error al importar datos de fuente</string>
     <string name="settings_system_import_source_data_success">Datos de fuente importados correctamente</string>
-    <string name="settings_system_patch_details_title">Detalles del parche</string>
-    <string name="settings_system_selected_patches_title">Parches seleccionados (%s)</string>
-    <string name="settings_system_patch_options_title">Opciones de parche (%s)</string>
+    <string name="settings_system_selected_patches_section">Parches seleccionados</string>
+    <string name="settings_system_patch_options_section">Opciones de parche</string>
     <string name="settings_system_no_patches_or_options">No hay parches ni opciones guardadas</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Selector de archivos personalizado</string>

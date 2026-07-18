@@ -326,6 +326,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="home_app_info_app_deleted_warning">App var afhent</string>
     <string name="home_app_info_app_deleted_description">Þetta app var afhent utan Morphe. Endurpakkalaðu það til að endurheimta virkni</string>
     <string name="home_app_info_apk_size">APK stærð</string>
+    <string name="home_app_info_cpu_arch">CPU arkitektúr</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Róttækni krafa er að upprunaleg APK sé uppsett á tækinu þínu áður en það er pakkað</string>
     <string name="root_gmscore_excluded">GmsCore stuðningsplagg er útilokað í root stillingu</string>
@@ -491,13 +492,16 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_app_language">App tungumál</string>
     <string name="settings_appearance_app_language_current">Núverandi tungumál</string>
     <string name="settings_appearance_translations_info_title">Þýðingar fyrir sum lönd eru kannski vantar eða eru ófullkomnar</string>
-    <string name="settings_appearance_translations_info_text">Til að þýða ný lönd eða bæta núverandi þýðingar, heimsæktu %s</string>
+    <string name="settings_appearance_translations_info_text">"Til að þýða ný tungumál eða bæta núverandi þýðingar skaltu heimsækja
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Heimaskjár</string>
     <string name="settings_appearance_greeting_phrases">Greeting frases</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Sýna kveðju skilaboð á heimaskjá</string>
     <string name="settings_appearance_app_grouping">Forritaflokkun</string>
     <string name="settings_appearance_app_grouping_description">Sýna rofasa á heimaskjá til að flokka forrit eftir uppruna eða eigin flokkum, halda vali þegar slökkt er á rofanum</string>
+    <string name="settings_appearance_sort_button">Röðunarhnappur</string>
+    <string name="settings_appearance_sort_button_description">Sýna röðunarhnapp á heimsíðunni</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App tákn</string>
     <string name="settings_appearance_app_icon_default">Sjálfgefið</string>
@@ -560,7 +564,8 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_advanced_github_pat_configured">Tákni stillt</string>
     <string name="settings_advanced_github_pat_how_to_get">Hvernig á að fá tákn</string>
     <string name="settings_advanced_github_pat_dialog_title">Stilltu GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Stilltu GitHub Personal Access Token til að geta bætt pull beiðnir sem ytri gjafir.</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Stilltu GitHub Personal Access Token til að geta bætt við pull requests sem utanaðkomandi uppspretta. Búðu til PAT með public_repo á
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Taktu með í útflutningi stillingar</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Bæta þennan PAT til fluttra Morphe stillinga</string>
     <string name="settings_advanced_github_pat_export_warning">Ekki deila þínu PAT. Ef þú tekur það með í stillingarútflutningi, geymdu þá skrána einkaleyndlega því hún inniheldur táknið</string>
@@ -656,7 +661,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="installer_status_not_supported">Ekki studd fyrir þessa athöfn</string>
     <string name="installer_status_shizuku_not_installed">Install Shizuku eða Sui til að nota þennan valkost</string>
     <string name="installer_status_shizuku_not_running">Ræsa Shizuku eða Sui og reyndu aftur</string>
-    <string name="installer_status_shizuku_permission">Veittu Shizuku heimild til Morphe úr Shizuku app</string>
+    <string name="installer_status_shizuku_permission">Leyfðu Morphe aðgang frá Shizuku appinu</string>
     <string name="installer_mount_warning_install">Uppsettur uppsetjara þinn er stilltur á róttæka uppsetjarann. Þetta vistaða app var ekki uppsett með uppsetningu</string>
     <string name="mount_version_mismatch_message">Lager gerð app útgáfa (%2$s) passar ekki við pattaða app útgáfu (%1$s). Uppsetja samsvarandi vísindalaga gerð og reyna aftur</string>
     <string name="installer_status_shizuku_unsupported">Stuðlað er ekki við uppsettu Shizuku útgáfuna</string>
@@ -671,13 +676,42 @@ Myndastærðin verður að vera sem hér segir:
     <string name="installer_unavailable_shizuku_hint">Gakktu úr skugga um að Shizuku er að ganga og leyfis er veitt þessu app</string>
     <string name="installer_use_standard">Nota staðal</string>
     <string name="installer_play_store_warning_title">Uppsetja sem Play Store?</string>
-    <string name="installer_play_store_warning_message">Breytta appið verður skráð sem uppsett frá Google Play Store. Þetta gerir þjónustum eins og Android Auto kleift að þekkja það sem Play Store app</string>
+    <string name="installer_play_store_warning_message">Pattaða appið verður skráð sem upphætt úr Google Play Store. Þetta getur hjálpað þjónustu eins og Android Auto að þekkja það sem Play Store app, en það er ekki tryggt fyrir hvert app eða tæki. Viðbrögð geta verið mismunandi eftir Android útgáfu, ROM, tækjamerki og app-tengdum prófum.</string>
     <string name="installer_play_store_warning_risk">Play Store gæti boðið uppfærslur fyrir breytta appið. Það að setja upp þá uppfærslu mun yfirskrifa breytta APK skrána með upprunalegu útgáfuna og fjarlægja breytingarnar. Ef þú ert beðinn um að uppfæra skaltu banka á þriggja-punkta valmyndina á Play Store síðu appsins og velja \"Slökktu á uppfærslum\"</string>
     <string name="installer_play_store_warning_continue">Ég skil, halda áfram</string>
+    <string name="installer_play_store_mode">Installera sem Play Store</string>
+    <string name="installer_play_store_mode_description">Skráðu Google Play Store sem uppsetningarskil á þennan uppsetningarmáta</string>
     <string name="settings_prompt_installer_on_install">Bestaður heimildurum í hverjum breyttu app installu</string>
     <string name="settings_prompt_installer_on_install_description">Mælt er með því að nota heimildir sem þú treystir</string>
     <string name="settings_auto_install_with_shizuku">Sjálfvirkt uppsetning eftir breytingar</string>
     <string name="settings_auto_install_with_shizuku_description">Setur upp breytta APK sjálfkrafa strax þegar breytingum er lokið</string>
+    <string name="settings_auto_uninstall_with_shizuku">Sjálfvirk upphæfing við átök</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Þegar sjálfvirkt uppsetning er í gangi með Shizuku, afhæfðu fyrst núverandi appið ef Android tilkynnir um signature átök. Þetta getur fjarlægt app gögn.</string>
+    <string name="settings_auto_uninstall_warning_title">Vilkja þú að virkja sjálfvirka upphæfingu?</string>
+    <string name="settings_auto_uninstall_warning_message">Ef Android tilkynnir um signature átök í sjálfvirkri uppsetningu Shizuku, mun Morphe afhæfa núverandi app áður en pattaða APK-ið er upphætt</string>
+    <string name="settings_auto_uninstall_warning_risk">Þetta getur fjarlægt app gögn. Ef pattaða APK-ið tekst ekki að upphæfa eftir upphæfingu, gæti fyrra appið þegar verið horfið.</string>
+    <string name="installer_shizuku_status_action">Athugaðu Shizuku stöðu</string>
+    <string name="installer_shizuku_status_title">Shizuku staða</string>
+    <string name="installer_shizuku_status_ready">Tilbúinn</string>
+    <string name="installer_shizuku_status_issue">Þarf athygli</string>
+    <string name="installer_shizuku_status_supported">Styrktur</string>
+    <string name="installer_shizuku_status_running">Í gangi</string>
+    <string name="installer_shizuku_status_permission">Leyfi</string>
+    <string name="installer_shizuku_status_mode">Háttur</string>
+    <string name="installer_shizuku_status_provider">Veitnari</string>
+    <string name="installer_shizuku_status_granted">Veiðrétt</string>
+    <string name="installer_shizuku_status_missing">Vantar</string>
+    <string name="installer_shizuku_request_permission">Óska um leyfi</string>
+    <string name="installer_shizuku_install_fail">Shizuku uppsetning misheppnaðist: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku uppsetning misheppnaðist: %1$s
+
+Nánari upplýsingar: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku leyfi vantar. Gefðu Morphe leyfi og reyndu aftur.</string>
+    <string name="installer_shizuku_error_timeout">Shizuku skilaði ekki uppsetningarniðurstöðu. Gakktu úr skugga um að það sé enn í gangi og reyndu aftur.</string>
+    <string name="installer_shizuku_error_downgrade">Android bannaði þetta því það myndi niðurfella sett appið.</string>
+    <string name="installer_shizuku_error_signature">Android bannaði þetta því sett appið hefur mismunandi signature.</string>
+    <string name="installer_shizuku_error_invalid_apk">Android gat ekki lesið þetta APK</string>
+    <string name="installer_shizuku_error_user_profile">Android bannaði þetta fyrir núverandi notanda eða vinnuhólinu.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Rafhlöðu útvinnslustillingar</string>
     <string name="settings_system_battery_optimization_description">Skoða upprunaleg geymslu</string>
@@ -796,9 +830,8 @@ Myndastærðin verður að vera sem hér segir:
     <string name="settings_system_export_source_data_success">Gagnagögn frá gjafa flutt úr vel</string>
     <string name="settings_system_import_source_data_fail">Ekki tókst að flytja inn gögn frá gjafa</string>
     <string name="settings_system_import_source_data_success">Gagnagögn frá gjafa flutt inn vel</string>
-    <string name="settings_system_patch_details_title">Pökkningaraðstöð</string>
-    <string name="settings_system_selected_patches_title">Valdir pakkningar (%s)</string>
-    <string name="settings_system_patch_options_title">Pökkningaval (%s)</string>
+    <string name="settings_system_selected_patches_section">Valdir brekkur</string>
+    <string name="settings_system_patch_options_section">Brekkuaðferðir</string>
     <string name="settings_system_no_patches_or_options">Engar pattaðar valkostir eða valkostir geymdar</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Sérsniðin skráaraðjari</string>

@@ -434,7 +434,6 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="settings_appearance_app_language">Programėlės kalba</string>
     <string name="settings_appearance_app_language_current">Dabartinė kalba</string>
     <string name="settings_appearance_translations_info_title">Kai kurių kalbų vertimų gali trūkti arba jie gali būti nepilni</string>
-    <string name="settings_appearance_translations_info_text">Jei norite išversti naujas kalbas arba patobulinti egzistuojančius vertimus, apsilankykite %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Pagrindinis ekranas</string>
     <string name="settings_appearance_greeting_phrases">Pasveikinimo frazės</string>

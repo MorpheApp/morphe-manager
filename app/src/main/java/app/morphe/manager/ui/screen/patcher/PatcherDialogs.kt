@@ -421,7 +421,7 @@ fun PatcherErrorDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.patcher_failed_dialog_title),
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         scrollable = false,
         footer = {
             MorpheDialogButtonRow(

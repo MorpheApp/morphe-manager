@@ -329,6 +329,7 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="home_app_info_app_deleted_warning">Sovellus poistettiin</string>
     <string name="home_app_info_app_deleted_description">Tämä sovellus poistettiin Morphen ulkopuolelta. Muokkaa sitä uudelleen palauttaaksesi toiminnot</string>
     <string name="home_app_info_apk_size">APK:n koko</string>
+    <string name="home_app_info_cpu_arch">Suorittimen arkkitehtuuri</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Pääkäyttäjätila edellyttää, että alkuperäinen APK on asennettuna laitteeseesi ennen muokkaamista</string>
     <string name="root_gmscore_excluded">GmsCore-tuen lisäosa on jätetty pois pääkäyttäjätilassa</string>
@@ -490,13 +491,16 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_app_language">Sovelluksen kieli</string>
     <string name="settings_appearance_app_language_current">Nykyinen kieli</string>
     <string name="settings_appearance_translations_info_title">Joidenkin kielten käännökset saattavat puuttua tai olla puutteellisia</string>
-    <string name="settings_appearance_translations_info_text">Jos haluat kääntää uusia kieliä tai parantaa nykyisiä käännöksiä, siirry osoitteeseen %s</string>
+    <string name="settings_appearance_translations_info_text">"Uusien kielten kääntämiseksi tai nykyisten käännösten parantamiseksi, vieraile osoitteessa
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Aloitusnäyttö</string>
     <string name="settings_appearance_greeting_phrases">Tervehdysviestit</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Näytä tervehdysviesti aloitusnäytöllä</string>
     <string name="settings_appearance_app_grouping">Sovellusten ryhmittely</string>
     <string name="settings_appearance_app_grouping_description">Näytä kotinäkymän vaihto, jolla voit ryhmitellä sovellukset lähteen tai omien luokkien mukaan ja säilytä valinta, kun se on poissa päältä</string>
+    <string name="settings_appearance_sort_button">Lajittelupainike</string>
+    <string name="settings_appearance_sort_button_description">Näytä lajittelupainike aloitusnäytöllä</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Sovelluskuvake</string>
     <string name="settings_appearance_app_icon_default">Oletus</string>
@@ -559,7 +563,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_advanced_github_pat_configured">Tunnus asetettu</string>
     <string name="settings_advanced_github_pat_how_to_get">Näin saat tunnuksen</string>
     <string name="settings_advanced_github_pat_dialog_title">Aseta GitHubin henkilökohtainen käyttöoikeustunnus</string>
-    <string name="settings_advanced_github_pat_dialog_description">Aseta GitHub Personal Access Token, jotta voit lisätä pull requestejä ulkoisina lähteinä. Luo PAT skopilla public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Määritä GitHubin henkilökohtainen käyttötoken (PAT), jotta voit lisätä pull requesteja ulkoisista lähteistä. Luo PAT, jossa on public_repo käyttöoikeus osoitteessa
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Sisällytä asetuksien viedossa</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Lisää tämä henkilökohtainen käyttöoikeustunnus vientiin vietäviin Morphen asetuksiin</string>
     <string name="settings_advanced_github_pat_export_warning">Älä jaka tämä PAT. Jos sisällytät sen asetuksien viedossa, pidä tiedosto yksityisenä, koska se sisältää tokenin</string>
@@ -658,7 +663,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_status_not_supported">Tätä toimitusta ei tueta tälle toiminnolle.</string>
     <string name="installer_status_shizuku_not_installed">Asenna Shizuku tai Sui käyttääksesi tämän vaihtoehdon.</string>
     <string name="installer_status_shizuku_not_running">Käynnistä Shizuku tai Sui ja yritä uudelleen.</string>
-    <string name="installer_status_shizuku_permission">Myönnä Shizukulle lupa Morphelle Shizuku-sovelluksesta.</string>
+    <string name="installer_status_shizuku_permission">Myönnä Morphen lupa Shizuku-sovelluksesta</string>
     <string name="installer_mount_warning_install">Pääasennuksesi on asetettu juurtimen asennukseen. Tämä tallennettu sovellus ei ole asennettu juurtimella.</string>
     <string name="mount_version_mismatch_message">Perusversion (%2$s) ei vastaa korjattua sovellusta (%1$s). Juurta korjatun perusversion kanssa, sitten yritä uudelleen.</string>
     <string name="installer_status_shizuku_unsupported">Asennettu Shizuku-versio ei ole tuettu.</string>
@@ -673,13 +678,42 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_unavailable_shizuku_hint">Tarkista, että Shizuku on käynnissä ja lupa on myönnetty tälle sovellukselle.</string>
     <string name="installer_use_standard">Käytä oletusta</string>
     <string name="installer_play_store_warning_title">Asenna Play Kauppana?</string>
-    <string name="installer_play_store_warning_message">Korjattu sovellus rekisteröidään asennetuksi Google Play Kaupasta. Tämä antaa palveluille, kuten Android Autolle, tunnistaa sen Play Kauppa -sovelluksena</string>
+    <string name="installer_play_store_warning_message">Korjattu sovellus rekisteröidään asennetuksi Google Play Kaupasta. Tämä voi auttaa palveluita, kuten Android Auto, tunnistamaan sen Play Kaupan sovellukseksi, mutta sitä ei voida taata jokaiselle sovellukselle tai laitteelle. Käyttäytyminen voi vaihdella Android-version, ROM:n, laitemerkin ja sovelluskohtaisten tarkistusten mukaan</string>
     <string name="installer_play_store_warning_risk">Play Kauppa saattaa tarjota päivityksiä korjatulle sovellukselle. Päivityksen asentaminen korvaa korjatun APK:n alkuperäisellä versiolla ja poistaa korjaukset. Jos sinua pyydetään päivittämään, napauta sovelluksen Play Kauppa -sivulla olevaa kolmen pisteen valikkoa ja valitse \"Poista päivitykset käytöstä\"</string>
     <string name="installer_play_store_warning_continue">Ymmärrän, jatka</string>
+    <string name="installer_play_store_mode">Asenna Play Kauppana</string>
+    <string name="installer_play_store_mode_description">Rekisteröi Google Play Kauppa tämän asennustavan lähteenä</string>
     <string name="settings_prompt_installer_on_install">Asennusohjelman valintakehote</string>
     <string name="settings_prompt_installer_on_install_description">Näytä asennusohjelman valintaikkuna aina, kun asennat paikatun sovelluksen.</string>
     <string name="settings_auto_install_with_shizuku">Asenna automaattisesti korjauksen jälkeen</string>
     <string name="settings_auto_install_with_shizuku_description">Asentaa korjatun APK:n hiljaa heti korjauksen valmistuttua</string>
+    <string name="settings_auto_uninstall_with_shizuku">Automaattinen poisto ristiriitatilanteissa</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Kun asennat automaattisesti Shizukun avulla, poista ensin olemassa oleva sovellus, jos Android raportoi allekirjoitusristiriidasta. Tämä voi poistaa sovelluksen tiedot</string>
+    <string name="settings_auto_uninstall_warning_title">Ota automaattinen poisto käyttöön?</string>
+    <string name="settings_auto_uninstall_warning_message">Jos Android raportoi allekirjoitusristiriidasta Shizukun automaattisen asennuksen aikana, Morphe poistaa olemassa olevan sovelluksen ennen korjatun APK:n asentamista</string>
+    <string name="settings_auto_uninstall_warning_risk">Tämä voi poistaa sovelluksen tiedot. Jos korjattu APK ei asennu poiston jälkeen, edellinen sovellus on ehkä jo poistettu</string>
+    <string name="installer_shizuku_status_action">Tarkista Shizukun tila</string>
+    <string name="installer_shizuku_status_title">Shizukun tila</string>
+    <string name="installer_shizuku_status_ready">Valmis</string>
+    <string name="installer_shizuku_status_issue">Vaatii huomiota</string>
+    <string name="installer_shizuku_status_supported">Tuettu</string>
+    <string name="installer_shizuku_status_running">Suoritetaan</string>
+    <string name="installer_shizuku_status_permission">Lupa</string>
+    <string name="installer_shizuku_status_mode">Tila</string>
+    <string name="installer_shizuku_status_provider">Tarjoaja</string>
+    <string name="installer_shizuku_status_granted">Myönnetty</string>
+    <string name="installer_shizuku_status_missing">Puuttuu</string>
+    <string name="installer_shizuku_request_permission">Pyydä lupa</string>
+    <string name="installer_shizuku_install_fail">Shizuku-asennus epäonnistui: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku-asennus epäonnistui: %1$s
+
+Yksityiskohdat: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku-lupa puuttuu. Myönnä Morphen lupa ja yritä uudelleen</string>
+    <string name="installer_shizuku_error_timeout">Shizuku ei palauttanut asennustulosta. Varmista, että se on edelleen käynnissä ja yritä uudelleen</string>
+    <string name="installer_shizuku_error_downgrade">Android esti tämän, koska se alentaisi asennettua sovellusta</string>
+    <string name="installer_shizuku_error_signature">Android esti tämän, koska asennetulla sovelluksella on eri allekirjoitus</string>
+    <string name="installer_shizuku_error_invalid_apk">Android ei pystynyt lukemaan tätä APK:ta</string>
+    <string name="installer_shizuku_error_user_profile">Android esti tämän nykyiselle käyttäjälle tai työprofiilille</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Akun käytön optimointi</string>
     <string name="settings_system_battery_optimization_description">Pitää paikkaajan käynnissä, kun sovellus on pienennetty</string>
@@ -798,9 +832,8 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_system_export_source_data_success">Lähdetiedot on viety</string>
     <string name="settings_system_import_source_data_fail">Lähdetietojen tuonti epäonnistui</string>
     <string name="settings_system_import_source_data_success">Lähdetiedot on tuotu</string>
-    <string name="settings_system_patch_details_title">Lisäosien tiedot</string>
-    <string name="settings_system_selected_patches_title">Valitut lisäosat (%s)</string>
-    <string name="settings_system_patch_options_title">Lisäosa-asetukset (%s)</string>
+    <string name="settings_system_selected_patches_section">Valitut lisäosat</string>
+    <string name="settings_system_patch_options_section">Lisäosien asetukset</string>
     <string name="settings_system_no_patches_or_options">Ei lisäosia tai asetuksia tallennettu</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Mukautettu tiedostonvalitsin</string>

@@ -347,7 +347,7 @@ fun FilePicker(
             }
         },
         title = null,
-        noPadding = true,
+        padding = DialogPadding.None,
         scrollable = false,
         footer = null
     ) {

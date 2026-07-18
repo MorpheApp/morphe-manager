@@ -225,6 +225,7 @@ fun PatchSelectionManagementDialog(
         PatchDetailsDialog(
             packageName = target.packageName,
             bundleUid = target.bundleUid,
+            appDisplayName = target.appDisplayName,
             bundleName = bundleNames[target.bundleUid],
             settingsViewModel = settingsViewModel,
             onDismiss = { showPatchDetailsTarget.value = null }
@@ -338,7 +339,7 @@ private fun PatchSelectionManagementDialogContent(
             }
         },
         scrollable = false,
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         contentArrangement = Arrangement.Top
     ) {
         if (selections.isEmpty()) {
@@ -590,7 +591,7 @@ private fun PackageSelectionItem(
                                 importExportViewModel = importExportViewModel,
                                 onReset = { onResetPackageBundle(bundleUid) },
                                 onShowDetails = {
-                                    onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid))
+                                    onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid, displayName))
                                 }
                             )
                         }
@@ -1012,6 +1013,7 @@ private fun ConfirmResetPackageBundleDialog(
 private fun PatchDetailsDialog(
     packageName: String,
     bundleUid: Int,
+    appDisplayName: String,
     bundleName: String?,
     settingsViewModel: SettingsViewModel,
     onDismiss: () -> Unit
@@ -1026,11 +1028,8 @@ private fun PatchDetailsDialog(
         isLoading = false
     }
 
-    val bundleDisplayName = bundleName ?: "Source"
-
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.settings_system_patch_details_title),
         footer = {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.close),
@@ -1041,24 +1040,21 @@ private fun PatchDetailsDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
         ) {
-            // Header info
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(
-                    text = details?.displayName ?: packageName,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = LocalDialogTextColor.current
-                )
-                Text(
-                    text = "$bundleDisplayName (#$bundleUid)",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = LocalDialogSecondaryTextColor.current
-                )
-            }
+            HeroInfoCard(
+                icon = Icons.Outlined.Extension,
+                title = appDisplayName,
+                subtitle = {
+                    Text(
+                        text = bundleName ?: stringResource(R.string.settings_system_patch_selection_source_format, bundleUid),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = LocalDialogSecondaryTextColor.current
+                    )
+                }
+            )
 
             if (isLoading) {
-                // Loading state
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -1073,65 +1069,24 @@ private fun PatchDetailsDialog(
 
                 // Patches section
                 if (patchList.isNotEmpty()) {
-                    InfoBox(
-                        title = stringResource(R.string.settings_system_selected_patches_title, patchList.size),
-                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                        titleColor = MaterialTheme.colorScheme.primary
+                    PatchBundleSection(
+                        title = stringResource(R.string.settings_system_selected_patches_section),
+                        count = patchList.size
                     ) {
                         patchList.forEach { patchName ->
-                            Text(
-                                text = "• $patchName",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = LocalDialogTextColor.current,
-                                modifier = Modifier.padding(vertical = 2.dp)
-                            )
+                            PatchNameRow(name = patchName)
                         }
                     }
                 }
 
                 // Options section
                 if (optionsMap.isNotEmpty()) {
-                    InfoBox(
-                        title = stringResource(R.string.settings_system_patch_options_title, optionsMap.size),
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
-                        titleColor = MaterialTheme.colorScheme.secondary
+                    PatchBundleSection(
+                        title = stringResource(R.string.settings_system_patch_options_section),
+                        count = optionsMap.size
                     ) {
-                        optionsMap.forEach { (patchName, options) ->
-                            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                Text(
-                                    text = patchName,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = LocalDialogTextColor.current
-                                )
-
-                                options.forEach { (key, value) ->
-                                    val formattedValue = SettingsViewModel.formatOptionValue(value)
-
-                                    Column(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(start = MorpheDefaults.ItemSpacing, bottom = 4.dp)
-                                    ) {
-                                        Text(
-                                            text = "• $key",
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = LocalDialogSecondaryTextColor.current
-                                        )
-                                        Text(
-                                            text = formattedValue,
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = LocalDialogTextColor.current,
-                                            fontWeight = FontWeight.Medium,
-                                            modifier = Modifier.padding(start = MorpheDefaults.ItemSpacing, top = 2.dp)
-                                        )
-                                    }
-                                }
-                            }
-
-                            if (patchName != optionsMap.keys.last()) {
-                                Spacer(modifier = Modifier.height(MorpheDefaults.ContentPaddingSmall))
-                            }
+                        optionsMap.entries.forEach { (patchName, options) ->
+                            PatchOptionsGroup(patchName = patchName, options = options)
                         }
                     }
                 }
@@ -1157,5 +1112,6 @@ private sealed interface ResetTarget {
 
 private data class PatchDetailsTarget(
     val packageName: String,
-    val bundleUid: Int
+    val bundleUid: Int,
+    val appDisplayName: String
 )

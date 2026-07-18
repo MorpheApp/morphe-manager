@@ -328,6 +328,7 @@ Zona externa (tracejada): pode ser cortada pela máscara do iniciador - mantenha
     <string name="home_app_info_app_deleted_warning">A aplicação foi desinstalada</string>
     <string name="home_app_info_app_deleted_description">Esta aplicação foi desinstalada fora do Morphe. Modifica-a de novo para restaurar as funcionalidades</string>
     <string name="home_app_info_apk_size">Tamanho do APK</string>
+    <string name="home_app_info_cpu_arch">Arquitetura da CPU</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">O modo root requer que o APK original esteja instalado no teu dispositivo antes de poder modificar</string>
     <string name="root_gmscore_excluded">A modificação de suporte ao GmsCore está excluída no modo root</string>
@@ -493,13 +494,16 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="settings_appearance_app_language">Idioma da aplicação</string>
     <string name="settings_appearance_app_language_current">Idioma atual</string>
     <string name="settings_appearance_translations_info_title">As traduções para alguns idiomas podem estar ausentes ou incompletas</string>
-    <string name="settings_appearance_translations_info_text">Para traduzires novos idiomas ou melhorares as traduções existentes, visita %s</string>
+    <string name="settings_appearance_translations_info_text">"Para traduzires novos idiomas ou melhorares as traduções existentes, visita
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Ecrã principal</string>
     <string name="settings_appearance_greeting_phrases">Frases de boas-vindas</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostrar uma mensagem de boas-vindas no ecrã principal</string>
     <string name="settings_appearance_app_grouping">Agrupamento de aplicativos</string>
     <string name="settings_appearance_app_grouping_description">Mostrar um seletor de tela inicial para agrupar aplicativos por origem ou suas próprias categorias, mantendo a seleção quando desativado</string>
+    <string name="settings_appearance_sort_button">Botão de ordenar</string>
+    <string name="settings_appearance_sort_button_description">Mostrar o botão de ordenar na tela inicial</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ícone da aplicação</string>
     <string name="settings_appearance_app_icon_default">Padrão</string>
@@ -562,7 +566,6 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="settings_advanced_github_pat_configured">Token configurado</string>
     <string name="settings_advanced_github_pat_how_to_get">Como obter um token</string>
     <string name="settings_advanced_github_pat_dialog_title">Definir Token de Acesso Pessoal do GitHub (PAT)</string>
-    <string name="settings_advanced_github_pat_dialog_description">Define um Token de Acesso Pessoal do GitHub para poderes adicionar solicitações de pull como fontes externas. Cria um PAT com scope public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Incluir na exportação de definições</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Adiciona este PAT às configurações exportadas do Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Não partilhes a tua PAT. Se o incluíres numa exportação de definições, mantém esse ficheiro privado pois este contém o token</string>
@@ -661,7 +664,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_status_not_supported">Não suportado para esta ação</string>
     <string name="installer_status_shizuku_not_installed">Instala o Shizuku ou o Sui para usares esta opção</string>
     <string name="installer_status_shizuku_not_running">Inicia o Shizuku ou o Sui e tenta de novo</string>
-    <string name="installer_status_shizuku_permission">Concede a permissão do Shizuku ao Morphe a partir da aplicação Shizuku</string>
+    <string name="installer_status_shizuku_permission">Conceder permissão ao Morphe do aplicativo Shizuku</string>
     <string name="installer_mount_warning_install">O teu instalador principal está definido para o instalador de montagem root. Esta aplicação guardada não foi instalada com mount</string>
     <string name="mount_version_mismatch_message">A versão da aplicação original (%2$s) não corresponde à versão da aplicação modificada (%1$s). Monta a versão original correspondente, e tenta de novo</string>
     <string name="installer_status_shizuku_unsupported">A versão do Shizuku instalada não é suportada</string>
@@ -676,13 +679,42 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_unavailable_shizuku_hint">Certifica-te de que o Shizuku está em execução e a permissão foi concedida a esta aplicação</string>
     <string name="installer_use_standard">Usar padrão</string>
     <string name="installer_play_store_warning_title">Instalar como Play Store?</string>
-    <string name="installer_play_store_warning_message">O aplicativo modificado será registrado como instalado pela Google Play Store. Isso permite que serviços como o Android Auto o reconheçam como um aplicativo da Play Store</string>
+    <string name="installer_play_store_warning_message">O aplicativo corrigido será registrado como instalado da Google Play Store. Isso pode ajudar serviços como o Android Auto a reconhecê-lo como um aplicativo da Play Store, mas não é garantido para cada aplicativo ou dispositivo. O comportamento pode variar de acordo com a versão do Android, ROM, marca do dispositivo e verificações específicas do aplicativo.</string>
     <string name="installer_play_store_warning_risk">A Play Store pode oferecer atualizações para o aplicativo modificado. A instalação dessa atualização substituirá o APK modificado pela versão original e removerá as modificações. Se for solicitado a atualizar, toque no menu de três pontos na página da Play Store do aplicativo e escolha \"Desativar atualizações\"</string>
     <string name="installer_play_store_warning_continue">Eu entendo, continuar</string>
+    <string name="installer_play_store_mode">Instalar como Play Store</string>
+    <string name="installer_play_store_mode_description">Registrar a Google Play Store como a fonte de instalação para este método de instalação</string>
     <string name="settings_prompt_installer_on_install">Solicitação de seleção do instalador</string>
     <string name="settings_prompt_installer_on_install_description">Mostrar diálogo de seleção de instalador cada vez que instalares uma aplicação modificada</string>
     <string name="settings_auto_install_with_shizuku">Instalação automática após a aplicação do patch</string>
     <string name="settings_auto_install_with_shizuku_description">Instala silenciosamente o APK corrigido assim que a correção for concluída</string>
+    <string name="settings_auto_uninstall_with_shizuku">Desinstalação automática em caso de conflito</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Ao instalar automaticamente com o Shizuku, desinstale o aplicativo existente primeiro, se o Android relatar um conflito de assinatura. Isso pode remover dados do aplicativo</string>
+    <string name="settings_auto_uninstall_warning_title">Ativar desinstalação automática?</string>
+    <string name="settings_auto_uninstall_warning_message">Se o Android relatar um conflito de assinatura durante a instalação automática do Shizuku, o Morphe desinstalará o aplicativo existente antes de instalar o APK corrigido</string>
+    <string name="settings_auto_uninstall_warning_risk">Isso pode remover dados do aplicativo. Se o APK corrigido falhar ao instalar após a desinstalação, o aplicativo anterior poderá já ter sido removido</string>
+    <string name="installer_shizuku_status_action">Verificar status do Shizuku</string>
+    <string name="installer_shizuku_status_title">Status do Shizuku</string>
+    <string name="installer_shizuku_status_ready">Pronto</string>
+    <string name="installer_shizuku_status_issue">Precisa de atenção</string>
+    <string name="installer_shizuku_status_supported">Suportado</string>
+    <string name="installer_shizuku_status_running">Em execução</string>
+    <string name="installer_shizuku_status_permission">Permissão</string>
+    <string name="installer_shizuku_status_mode">Modo</string>
+    <string name="installer_shizuku_status_provider">Provedor</string>
+    <string name="installer_shizuku_status_granted">Concedido</string>
+    <string name="installer_shizuku_status_missing">Ausente</string>
+    <string name="installer_shizuku_request_permission">Solicitar permissão</string>
+    <string name="installer_shizuku_install_fail">A instalação do Shizuku falhou: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"A instalação do Shizuku falhou: %1$s
+
+Detalhes: %2$s"</string>
+    <string name="installer_shizuku_error_permission">A permissão do Shizuku está faltando. Conceda permissão ao Morphe e tente novamente</string>
+    <string name="installer_shizuku_error_timeout">O Shizuku não retornou um resultado de instalação. Certifique-se de que ainda está em execução e tente novamente</string>
+    <string name="installer_shizuku_error_downgrade">O Android bloqueou isso porque isso rebaixaria o aplicativo instalado</string>
+    <string name="installer_shizuku_error_signature">O Android bloqueou isso porque o aplicativo instalado tem uma assinatura diferente</string>
+    <string name="installer_shizuku_error_invalid_apk">O Android não conseguiu ler este APK</string>
+    <string name="installer_shizuku_error_user_profile">O Android bloqueou isso para o usuário ou perfil de trabalho atual</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Otimização de bateria</string>
     <string name="settings_system_battery_optimization_description">Mantém o modificador em execução quando a aplicação é minimizada</string>
@@ -801,9 +833,8 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_export_source_data_success">Dados da fonte exportados com sucesso</string>
     <string name="settings_system_import_source_data_fail">Erro ao importar dados da fonte</string>
     <string name="settings_system_import_source_data_success">Dados da fonte importados com sucesso</string>
-    <string name="settings_system_patch_details_title">Detalhes da modificação</string>
-    <string name="settings_system_selected_patches_title">Modificações selecionadas (%s)</string>
-    <string name="settings_system_patch_options_title">Opções da modificação (%s)</string>
+    <string name="settings_system_selected_patches_section">Modificações selecionadas</string>
+    <string name="settings_system_patch_options_section">Opções de modificação</string>
     <string name="settings_system_no_patches_or_options"> Nenhuma modificação ou opção guardada</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Seletor de arquivos personalizado</string>

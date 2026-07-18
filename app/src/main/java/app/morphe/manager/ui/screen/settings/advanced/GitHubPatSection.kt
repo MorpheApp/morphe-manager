@@ -182,7 +182,7 @@ private fun GitHubPatDialog(
     if (showInfoDialog.value) {
         MorpheDialogWithLinks(
             title = stringResource(R.string.settings_advanced_github_pat_how_to_get),
-            message = stringResource(R.string.settings_advanced_github_pat_dialog_description),
+            message = stringResource(R.string.settings_advanced_github_pat_dialog_description, "github.com"),
             urlLink = generatePatLink,
             onDismiss = { showInfoDialog.value = false }
         )

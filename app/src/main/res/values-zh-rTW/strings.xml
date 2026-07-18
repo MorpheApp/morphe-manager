@@ -328,6 +328,7 @@
     <string name="home_app_info_app_deleted_warning">應用程式已解除安裝</string>
     <string name="home_app_info_app_deleted_description">此應用程式已在 Morphe 外部被解除安裝。重新修補以還原功能</string>
     <string name="home_app_info_apk_size">APK 大小</string>
+    <string name="home_app_info_cpu_arch">CPU 架构</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root 模式需要在修補之前將原始 APK 安裝在您的裝置上</string>
     <string name="root_gmscore_excluded">GmsCore 支援修補程式在 root 模式中被排除</string>
@@ -493,13 +494,15 @@
     <string name="settings_appearance_app_language">應用程式語言</string>
     <string name="settings_appearance_app_language_current">目前語言</string>
     <string name="settings_appearance_translations_info_title">某些語言的翻譯可能遺失或不完整</string>
-    <string name="settings_appearance_translations_info_text">若要翻譯新語言或改善現有翻譯，請造訪 %s</string>
+    <string name="settings_appearance_translations_info_text">"若要翻譯新語言或改善現有翻譯，請造訪 %s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">主螢幕</string>
     <string name="settings_appearance_greeting_phrases">問候語</string>
     <string name="settings_appearance_greeting_phrases_subtitle">在主螢幕上顯示問候訊息</string>
     <string name="settings_appearance_app_grouping">應用程式分組</string>
     <string name="settings_appearance_app_grouping_description">顯示主畫面切換器，以依來源或您自己的類別分組應用程式，並在關閉時保留選取內容</string>
+    <string name="settings_appearance_sort_button">排序按鈕</string>
+    <string name="settings_appearance_sort_button_description">在主螢幕上顯示排序按鈕</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">應用程式圖示</string>
     <string name="settings_appearance_app_icon_default">預設</string>
@@ -562,7 +565,6 @@
     <string name="settings_advanced_github_pat_configured">已設定 Token</string>
     <string name="settings_advanced_github_pat_how_to_get">如何獲取 Token</string>
     <string name="settings_advanced_github_pat_dialog_title">設定 GitHub 個人存取權杖 (PAT)</string>
-    <string name="settings_advanced_github_pat_dialog_description">設定 GitHub 個人存取權杖以便能夠將拉取請求新增為外部來源。建立具有 public_repo github.com 範圍的 PAT</string>
     <string name="settings_advanced_github_pat_export_include_label">包含在設定匯出中</string>
     <string name="settings_advanced_github_pat_export_include_supporting">將此 PAT 新增至匯出的 Morphe 設定</string>
     <string name="settings_advanced_github_pat_export_warning">請勿分享您的 PAT。如果您將其包含在設定匯出中，請將該檔案保密，因為它包含該權杖</string>
@@ -661,7 +663,6 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">不支援此操作</string>
     <string name="installer_status_shizuku_not_installed">安裝 Shizuku 或 Sui 以使用此選項</string>
     <string name="installer_status_shizuku_not_running">啟動 Shizuku 或 Sui 並重試</string>
-    <string name="installer_status_shizuku_permission">從 Shizuku 應用程式授予 Morphe Shizuku 權限</string>
     <string name="installer_mount_warning_install">您的主要安裝程式設為根目錄掛載安裝程式。此儲存的應用程式並非使用掛載安裝</string>
     <string name="mount_version_mismatch_message">原廠應用程式版本 (%2$s) 與修補後的應用程式版本 (%1$s) 不符。掛載相符的原廠版本，然後重試</string>
     <string name="installer_status_shizuku_unsupported">安裝的 Shizuku 版本不受支援</string>
@@ -676,7 +677,6 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">請確認 Shizuku 正在執行且已授予此應用程式權限</string>
     <string name="installer_use_standard">使用標準</string>
     <string name="installer_play_store_warning_title">以 Play 商店安裝？</string>
-    <string name="installer_play_store_warning_message">修補後的應用程式會記錄為從 Google Play 商店安裝。這讓 Android Auto 等服務可以將其識別為 Play 商店應用程式</string>
     <string name="installer_play_store_warning_risk">Play 商店可能會提供修補應用程式的更新。安裝該更新會用原始版本覆寫修補的 APK，並移除修補。如果提示更新，請點選應用程式 Play 商店頁面上的三點選單，然後選擇「關閉更新」</string>
     <string name="installer_play_store_warning_continue">我了解，繼續</string>
     <string name="settings_prompt_installer_on_install">安裝程式選擇提示</string>
@@ -801,9 +801,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_source_data_success">來源資料匯出成功</string>
     <string name="settings_system_import_source_data_fail">無法匯入來源資料</string>
     <string name="settings_system_import_source_data_success">來源資料匯入成功</string>
-    <string name="settings_system_patch_details_title">修補詳細資料</string>
-    <string name="settings_system_selected_patches_title">已選取的修補程式 (%s)</string>
-    <string name="settings_system_patch_options_title">修補選項 (%s)</string>
+    <string name="settings_system_selected_patches_section">已選取的修補程式</string>
+    <string name="settings_system_patch_options_section">修補選項</string>
     <string name="settings_system_no_patches_or_options">未儲存任何修補程式或選項</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">自訂檔案選擇器</string>
