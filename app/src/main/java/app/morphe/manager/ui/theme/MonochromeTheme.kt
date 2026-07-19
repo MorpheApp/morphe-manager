@@ -82,6 +82,10 @@ internal fun monochromeColorScheme(base: ColorScheme, darkTheme: Boolean): Color
 
 object MonochromeThemeDefaults {
     @Composable
+    fun accentColor(base: Color): Color =
+        if (LocalMonochromeTheme.current) MaterialTheme.colorScheme.primary else base
+
+    @Composable
     fun surfaceColor(base: Color, selected: Boolean = false): Color {
         if (!LocalMonochromeTheme.current) return base
 
