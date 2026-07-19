@@ -42,8 +42,9 @@ abstract class BasePreferencesManager(private val context: Context, name: String
 
     protected inline fun <reified E : Enum<E>> enumPreference(
         key: String,
-        default: E
-    ) = EnumPreference(dataStore, key, default, enumValues())
+        default: E,
+        aliases: Map<String, E> = emptyMap()
+    ) = EnumPreference(dataStore, key, default, enumValues(), aliases)
 
     companion object {
         suspend inline fun DataStore<Preferences>.editor(crossinline block: EditorContext.() -> Unit) {
@@ -90,12 +91,13 @@ class EnumPreference<E : Enum<E>>(
     dataStore: DataStore<Preferences>,
     key: String,
     default: E,
-    private val enumValues: Array<E>
+    private val enumValues: Array<E>,
+    private val aliases: Map<String, E> = emptyMap()
 ) : Preference<E>(dataStore, default) {
     private val key = stringPreferencesKey(key)
     override fun Preferences.read() =
         this[key]?.let { name ->
-            enumValues.find { it.name == name }
+            aliases[name] ?: enumValues.find { it.name == name }
         } ?: default
 
     override fun MutablePreferences.write(value: E) {

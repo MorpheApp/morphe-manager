@@ -19,7 +19,8 @@ enum class ThemePreset {
     DEFAULT,
     LIGHT,
     DARK,
-    DYNAMIC
+    DYNAMIC,
+    MONOCHROME
 }
 
 /**
@@ -48,7 +49,8 @@ class ThemeSettingsViewModel(
         ThemePreset.DEFAULT to ThemePresetConfig(theme = Theme.SYSTEM),
         ThemePreset.LIGHT to ThemePresetConfig(theme = Theme.LIGHT),
         ThemePreset.DARK to ThemePresetConfig(theme = Theme.DARK),
-        ThemePreset.DYNAMIC to ThemePresetConfig(theme = Theme.SYSTEM, dynamicColor = true)
+        ThemePreset.DYNAMIC to ThemePresetConfig(theme = Theme.SYSTEM, dynamicColor = true),
+        ThemePreset.MONOCHROME to ThemePresetConfig(theme = Theme.MONOCHROME)
     )
 
     /**
@@ -123,6 +125,8 @@ class ThemeSettingsViewModel(
             "LIGHT"   -> ThemePreset.LIGHT
             "DARK"    -> ThemePreset.DARK
             "DYNAMIC" -> ThemePreset.DYNAMIC
+            "MONOCHROME"  -> ThemePreset.MONOCHROME
+            "ONE_UI"  -> ThemePreset.MONOCHROME
             else      -> ThemePreset.DEFAULT
         }
         applyThemePreset(preset)
@@ -139,7 +143,7 @@ class ThemeSettingsViewModel(
             prefs.pureBlackTheme.update(false)
         }
 
-        // Only reset colors for DYNAMIC preset, preserve for others
+        // Dynamic color comes from the system palette instead of inherited custom tones.
         if (preset == ThemePreset.DYNAMIC) {
             prefs.customAccentColor.update("")
             prefs.customThemeColor.update("")

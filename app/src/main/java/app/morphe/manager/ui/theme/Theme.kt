@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Build
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -84,11 +85,19 @@ fun ManagerTheme(
     darkTheme: Boolean,
     dynamicColor: Boolean,
     pureBlackTheme: Boolean,
+    monochromeTheme: Boolean = false,
     accentColorHex: String? = null,
     themeColorHex: String? = null,
     content: @Composable () -> Unit
 ) {
     val baseScheme = when {
+        monochromeTheme -> {
+            monochromeColorScheme(
+                base = if (darkTheme) DarkColorScheme else LightColorScheme,
+                darkTheme = darkTheme
+            )
+        }
+
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
@@ -111,9 +120,13 @@ fun ManagerTheme(
         applyCustomAccent(baseScheme, it, darkTheme)
     } ?: baseScheme
 
-    val finalScheme = themeColorHex.toColorOrNull()?.let {
-        applyCustomThemeColor(schemeWithAccent, it, darkTheme)
-    } ?: schemeWithAccent
+    val finalScheme = if (monochromeTheme) {
+        schemeWithAccent
+    } else {
+        themeColorHex.toColorOrNull()?.let {
+            applyCustomThemeColor(schemeWithAccent, it, darkTheme)
+        } ?: schemeWithAccent
+    }
 
     val view = LocalView.current
     if (!view.isInEditMode) {
@@ -131,18 +144,21 @@ fun ManagerTheme(
         }
     }
 
-    MaterialTheme(
-        colorScheme = finalScheme,
-        typography = Typography,
-        content = content
-    )
+    CompositionLocalProvider(LocalMonochromeTheme provides monochromeTheme) {
+        MaterialTheme(
+            colorScheme = finalScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }
 
 @Serializable
 enum class Theme(val displayName: Int) {
     SYSTEM(R.string.settings_appearance_system),
     LIGHT(R.string.settings_appearance_light),
-    DARK(R.string.settings_appearance_dark);
+    DARK(R.string.settings_appearance_dark),
+    MONOCHROME(R.string.settings_appearance_monochrome);
 }
 
 private fun applyCustomAccent(

@@ -42,9 +42,11 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstalledApp
@@ -52,7 +54,74 @@ import app.morphe.manager.ui.screen.shared.AppIcon
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.screen.shared.ShimmerBox
 import app.morphe.manager.ui.screen.shared.drawDiagonalShimmer
+import app.morphe.manager.ui.theme.LocalMonochromeTheme
 import app.morphe.manager.util.AppDataSource
+
+private data class HomeAppCardStyle(
+    val monochrome: Boolean,
+    val iconSize: Dp,
+    val titleColor: Color,
+    val subtitleColor: Color,
+    val titleStyle: TextStyle,
+    val subtitleStyle: TextStyle,
+    val chipContainerColor: Color,
+    val chipContentColor: Color,
+    val cardColor: Color,
+    val cardRadius: Dp = 24.dp,
+    val cardHeight: Dp = 80.dp,
+    val contentPadding: Dp = 16.dp,
+    val contentSpacing: Dp = 16.dp
+)
+
+@Composable
+private fun homeAppCardStyle(subtitleAlpha: Float = 0.75f): HomeAppCardStyle {
+    val monochrome = LocalMonochromeTheme.current
+    val titleShadow = if (monochrome) {
+        null
+    } else {
+        Shadow(
+            color = Color.Black.copy(alpha = 0.4f),
+            offset = Offset(0f, 2f),
+            blurRadius = 4f
+        )
+    }
+    val subtitleShadow = if (monochrome) {
+        null
+    } else {
+        Shadow(
+            color = Color.Black.copy(alpha = 0.4f),
+            offset = Offset(0f, 1f),
+            blurRadius = 2f
+        )
+    }
+
+    return HomeAppCardStyle(
+        monochrome = monochrome,
+        iconSize = 60.dp,
+        titleColor = if (monochrome) MaterialTheme.colorScheme.onSurface else Color.White,
+        subtitleColor = if (monochrome) {
+            MaterialTheme.colorScheme.onSurfaceVariant
+        } else {
+            Color.White.copy(alpha = subtitleAlpha)
+        },
+        titleStyle = MaterialTheme.typography.titleLarge.copy(
+            fontWeight = FontWeight.Bold,
+            shadow = titleShadow
+        ),
+        subtitleStyle = MaterialTheme.typography.bodyMedium.copy(shadow = subtitleShadow),
+        chipContainerColor = if (monochrome) {
+            MaterialTheme.colorScheme.surfaceContainerHighest
+        } else {
+            Color.White.copy(alpha = 0.20f)
+        },
+        chipContentColor = if (monochrome) {
+            MaterialTheme.colorScheme.onSurfaceVariant
+        } else {
+            Color.White
+        },
+        cardColor = MaterialTheme.colorScheme.surfaceContainerHigh
+    )
+}
 
 /**
  * Shared icon + text content for [AppCardLayout] rows.
@@ -71,24 +140,13 @@ internal fun RowScope.AppCardContent(
     subtitle: String?,
     gradientColors: List<Color>
 ) {
-    val textColor = Color.White
-    val subtitleColor = Color.White.copy(alpha = 0.75f)
-    val titleShadow = Shadow(
-        color = Color.Black.copy(alpha = 0.4f),
-        offset = Offset(0f, 2f),
-        blurRadius = 4f
-    )
-    val subtitleShadow = Shadow(
-        color = Color.Black.copy(alpha = 0.4f),
-        offset = Offset(0f, 1f),
-        blurRadius = 2f
-    )
+    val cardStyle = homeAppCardStyle()
 
     AppIcon(
         packageInfo = packageInfo,
         packageName = if (packageInfo == null) packageName else null,
         contentDescription = null,
-        modifier = Modifier.size(60.dp),
+        modifier = Modifier.size(cardStyle.iconSize),
         preferredSource = AppDataSource.PATCHED_APK,
         placeholderGradientColors = gradientColors,
         placeholderInnerPadding = 6.dp
@@ -100,11 +158,8 @@ internal fun RowScope.AppCardContent(
     ) {
         Text(
             text = displayName,
-            style = MaterialTheme.typography.titleLarge.copy(
-                fontWeight = FontWeight.Bold,
-                shadow = titleShadow
-            ),
-            color = textColor,
+            style = cardStyle.titleStyle,
+            color = cardStyle.titleColor,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
@@ -112,8 +167,8 @@ internal fun RowScope.AppCardContent(
         if (subtitle != null) {
             Text(
                 text = subtitle,
-                style = MaterialTheme.typography.bodyMedium.copy(shadow = subtitleShadow),
-                color = subtitleColor
+                style = cardStyle.subtitleStyle,
+                color = cardStyle.subtitleColor
             )
         }
     }
@@ -130,10 +185,12 @@ private fun GlassChip(
     icon: ImageVector,
     modifier: Modifier = Modifier
 ) {
+    val cardStyle = homeAppCardStyle()
+
     Surface(
         modifier = modifier,
         shape = RoundedCornerShape(6.dp),
-        color = Color.White.copy(alpha = 0.20f)
+        color = cardStyle.chipContainerColor
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
@@ -143,13 +200,13 @@ private fun GlassChip(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                tint = Color.White,
+                tint = cardStyle.chipContentColor,
                 modifier = Modifier.size(12.dp)
             )
             Text(
                 text = text,
                 style = MaterialTheme.typography.labelSmall,
-                color = Color.White
+                color = cardStyle.chipContentColor
             )
         }
     }
@@ -170,7 +227,7 @@ fun InstalledAppCard(
     isAppDeleted: Boolean = false,
     onLongClick: (() -> Unit)? = null
 ) {
-    val textColor = Color.White
+    val cardStyle = homeAppCardStyle(subtitleAlpha = 0.85f)
 
     val versionLabel = stringResource(R.string.version)
     val installedLabel = stringResource(R.string.installed)
@@ -209,7 +266,7 @@ fun InstalledAppCard(
             packageInfo = packageInfo,
             packageName = installedApp.originalPackageName,
             contentDescription = null,
-            modifier = Modifier.size(60.dp),
+            modifier = Modifier.size(cardStyle.iconSize),
             preferredSource = AppDataSource.INSTALLED
         )
 
@@ -221,15 +278,8 @@ fun InstalledAppCard(
             // App name
             Text(
                 text = displayName,
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                    shadow = Shadow(
-                        color = Color.Black.copy(alpha = 0.4f),
-                        offset = Offset(0f, 2f),
-                        blurRadius = 4f
-                    )
-                ),
-                color = textColor,
+                style = cardStyle.titleStyle,
+                color = cardStyle.titleColor,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -244,14 +294,8 @@ fun InstalledAppCard(
                     text = version,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        shadow = Shadow(
-                            color = Color.Black.copy(alpha = 0.4f),
-                            offset = Offset(0f, 1f),
-                            blurRadius = 2f
-                        )
-                    ),
-                    color = textColor.copy(alpha = 0.85f)
+                    style = cardStyle.subtitleStyle,
+                    color = cardStyle.subtitleColor
                 )
 
                 if (isAppDeleted) {
@@ -349,7 +393,8 @@ internal fun AppCardLayout(
     onLongClick: (() -> Unit)? = null,
     content: @Composable RowScope.() -> Unit
 ) {
-    val shape = RoundedCornerShape(24.dp)
+    val cardStyle = homeAppCardStyle()
+    val shape = RoundedCornerShape(cardStyle.cardRadius)
     val view = LocalView.current
 
     val contentAlpha = if (enabled) 1f else 0.45f
@@ -376,14 +421,24 @@ internal fun AppCardLayout(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(80.dp)
+            .height(cardStyle.cardHeight)
             .graphicsLayer { scaleX = scale; scaleY = scale }
             .clip(shape)
             .drawWithContent {
                 val w  = size.width
                 val h  = size.height
-                val cr = CornerRadius(24.dp.toPx())
+                val cr = CornerRadius(cardStyle.cardRadius.toPx())
                 val rtl = layoutDirection == LayoutDirection.Rtl
+
+                if (cardStyle.monochrome) {
+                    drawRoundRect(
+                        color = cardStyle.cardColor,
+                        cornerRadius = cr
+                    )
+
+                    drawContent()
+                    return@drawWithContent
+                }
 
                 // Layer 1: radial base - color blooms from bottom-start
                 drawRoundRect(
@@ -491,9 +546,9 @@ internal fun AppCardLayout(
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = cardStyle.contentPadding)
                 .graphicsLayer { alpha = contentAlpha },
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(cardStyle.contentSpacing),
             verticalAlignment = Alignment.CenterVertically,
             content = content
         )
@@ -532,25 +587,32 @@ fun AppLoadingCard(
         label = "shimmer_offset"
     )
 
-    val shape = RoundedCornerShape(24.dp)
+    val cardStyle = homeAppCardStyle()
+    val shape = RoundedCornerShape(cardStyle.cardRadius)
     val rtl = LocalLayoutDirection.current == LayoutDirection.Rtl
 
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(80.dp)
+            .height(cardStyle.cardHeight)
     ) {
         // Base gradient background
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(shape)
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = gradientColors.map { it.copy(alpha = pulseAlpha) },
-                        start = Offset(if (rtl) 1000f else 0f, 0f),
-                        end = Offset(if (rtl) 0f else 1000f, 0f)
-                    )
+                .then(
+                    if (cardStyle.monochrome) {
+                        Modifier.background(cardStyle.cardColor)
+                    } else {
+                        Modifier.background(
+                            brush = Brush.linearGradient(
+                                colors = gradientColors.map { it.copy(alpha = pulseAlpha) },
+                                start = Offset(if (rtl) 1000f else 0f, 0f),
+                                end = Offset(if (rtl) 0f else 1000f, 0f)
+                            )
+                        )
+                    }
                 )
         )
 

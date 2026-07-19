@@ -104,11 +104,18 @@ class MainActivity : AppCompatActivity() {
             val pureBlackTheme by vm.prefs.pureBlackTheme.getAsState()
             val customAccentColor by vm.prefs.customAccentColor.getAsState()
             val customThemeColor by vm.prefs.customThemeColor.getAsState()
+            val systemDarkTheme = isSystemInDarkTheme()
+            val darkTheme = when (theme) {
+                Theme.SYSTEM, Theme.MONOCHROME -> systemDarkTheme
+                Theme.LIGHT -> false
+                Theme.DARK -> true
+            }
 
             ManagerTheme(
-                darkTheme = theme == Theme.SYSTEM && isSystemInDarkTheme() || theme == Theme.DARK,
+                darkTheme = darkTheme,
                 dynamicColor = dynamicColor,
                 pureBlackTheme = pureBlackTheme,
+                monochromeTheme = theme == Theme.MONOCHROME,
                 accentColorHex = customAccentColor.takeUnless { it.isBlank() },
                 themeColorHex = customThemeColor.takeUnless { it.isBlank() }
             ) {

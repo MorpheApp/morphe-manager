@@ -38,7 +38,7 @@ class PreferencesManager(
     val themePresetSelectionName = stringPreference("theme_preset_selection_name", "DEFAULT")
     val customAccentColor = stringPreference("custom_accent_color", "")
     val customThemeColor = stringPreference("custom_theme_color", "")
-    val theme = enumPreference("theme", Theme.SYSTEM)
+    val theme = enumPreference("theme", Theme.SYSTEM, aliases = mapOf("ONE_UI" to Theme.MONOCHROME))
 
     val appLanguage = stringPreference("app_language", "system")
 

@@ -37,6 +37,7 @@ fun ThemeSelector(
 
     // Determine current theme selection
     val currentTheme = when {
+        theme == Theme.MONOCHROME -> "MONOCHROME"
         dynamicColor && supportsDynamicColor -> "DYNAMIC"
         theme == Theme.SYSTEM -> "SYSTEM"
         theme == Theme.LIGHT -> "LIGHT"
@@ -76,6 +77,13 @@ fun ThemeSelector(
                 )
             )
         }
+        add(
+            Triple(
+                "MONOCHROME",
+                Icons.Outlined.Contrast,
+                stringResource(R.string.settings_appearance_monochrome)
+            )
+        )
     }
 
     SectionCard {
