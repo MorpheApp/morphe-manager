@@ -1527,16 +1527,10 @@ fun MainAppsSection(
                     val selectedReinstallItems = remember(selectedAppItems) {
                         selectedAppItems.filter { !it.isInstalledOnDevice && it.hasSavedCopy && it.installedApp != null }
                     }
-                    val contextActionIsUninstall = selectedAppItems.isNotEmpty() &&
-                            selectedInstalledItems.size == selectedAppItems.size
-                    val contextActionIsReinstall = !contextActionIsUninstall &&
-                            selectedReinstallItems.isNotEmpty() &&
-                            selectedReinstallItems.size == selectedAppItems.size
-                    val contextActionLabel = when {
-                        contextActionIsUninstall -> stringResource(R.string.uninstall)
-                        contextActionIsReinstall -> stringResource(R.string.reinstall)
-                        else -> null
-                    }
+                    val contextActionIsReinstall = selectedReinstallItems.isNotEmpty()
+                    val contextActionIsUninstall = selectedInstalledItems.isNotEmpty()
+                    val reinstallLabel = stringResource(R.string.reinstall)
+                    val uninstallLabel = stringResource(R.string.uninstall)
                     MultiSelectBar(
                         selectedCount = selectedPackages.size,
                         totalCount = activeAppScopeItems.size,
@@ -1558,32 +1552,28 @@ fun MainAppsSection(
                         actionIcon = Icons.Outlined.VisibilityOff,
                         actionContentDescription = stringResource(R.string.hide),
                         actionDoneMessage = stringResource(R.string.hidden),
-                        onContextAction = when {
-                            contextActionIsUninstall -> {
-                                {
-                                    appActions.onUninstallMultiple(selectedInstalledItems)
-                                    isMultiSelectMode.value = false
-                                    selectedPackages.clear()
-                                    selectedGroupKey = null
-                                }
+                        onContextAction = if (contextActionIsReinstall) {
+                            {
+                                appActions.onReinstallMultiple(selectedReinstallItems)
+                                isMultiSelectMode.value = false
+                                selectedPackages.clear()
+                                selectedGroupKey = null
                             }
-                            contextActionIsReinstall -> {
-                                {
-                                    appActions.onReinstallMultiple(selectedReinstallItems)
-                                    isMultiSelectMode.value = false
-                                    selectedPackages.clear()
-                                    selectedGroupKey = null
-                                }
+                        } else null,
+                        contextActionIcon = if (contextActionIsReinstall) Icons.Outlined.InstallMobile else null,
+                        contextActionContentDescription = if (contextActionIsReinstall) reinstallLabel else null,
+                        contextActionColors = IconButtonDefaults.filledTonalIconButtonColors(),
+                        onSecondaryContextAction = if (contextActionIsUninstall) {
+                            {
+                                appActions.onUninstallMultiple(selectedInstalledItems)
+                                isMultiSelectMode.value = false
+                                selectedPackages.clear()
+                                selectedGroupKey = null
                             }
-                            else -> null
-                        },
-                        contextActionIcon = when {
-                            contextActionIsUninstall -> Icons.Outlined.DeleteForever
-                            contextActionIsReinstall -> Icons.Outlined.InstallMobile
-                            else -> null
-                        },
-                        contextActionContentDescription = contextActionLabel,
-                        contextActionColors = if (contextActionIsUninstall) {
+                        } else null,
+                        secondaryContextActionIcon = if (contextActionIsUninstall) Icons.Outlined.DeleteForever else null,
+                        secondaryContextActionContentDescription = if (contextActionIsUninstall) uninstallLabel else null,
+                        secondaryContextActionColors = if (contextActionIsUninstall) {
                             IconButtonDefaults.filledTonalIconButtonColors(
                                 containerColor = MaterialTheme.colorScheme.errorContainer,
                                 contentColor = MaterialTheme.colorScheme.onErrorContainer

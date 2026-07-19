@@ -687,11 +687,9 @@ private fun ApkManagementDialogContent(
     val selectedInstallableItems = selectedItems.filter {
         !it.isInstalledOnDevice && it.isInstallableFromStorage
     }
-    val canUninstallSelected = selectedItems.isNotEmpty() &&
-            selectedInstalledItems.size == selectedItems.size &&
+    val canUninstallSelected = selectedInstalledItems.isNotEmpty() &&
             actions.onUninstallSelected != null
-    val canInstallSelected = selectedItems.isNotEmpty() &&
-            selectedInstallableItems.size == selectedItems.size &&
+    val canInstallSelected = selectedInstallableItems.isNotEmpty() &&
             actions.onInstallSelected != null
     val selectedTotalSize = selectedItems.sumOf { it.fileSize }
     val zipExportSuccessText = stringResource(R.string.settings_system_apks_export_zip_success)
@@ -753,6 +751,7 @@ private fun ApkManagementDialogContent(
                             formatBytes(selectedTotalSize)
                         ),
                         onSelectAll = { selection.setAll(items.map { it.selectionKey }) },
+                        onDeselectAll = { selection.clear() },
                         onCancel = { selection.clear() }
                     ) {
                         if (selectedFiles.isNotEmpty()) {
