@@ -126,7 +126,6 @@ class ThemeSettingsViewModel(
             "DARK"    -> ThemePreset.DARK
             "DYNAMIC" -> ThemePreset.DYNAMIC
             "MONOCHROME"  -> ThemePreset.MONOCHROME
-            "ONE_UI"  -> ThemePreset.MONOCHROME
             else      -> ThemePreset.DEFAULT
         }
         applyThemePreset(preset)
