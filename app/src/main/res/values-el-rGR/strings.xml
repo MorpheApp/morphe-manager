@@ -517,6 +517,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Αλλαγή εικονιδίου</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Ενημερώσεις</string>
+    <string name="settings_advanced_patcher">Εφαρμογέας</string>
     <string name="settings_advanced_updates_use_prereleases">Προ-κυκλοφοριακές ενημερώσεις</string>
     <string name="settings_advanced_updates_use_prereleases_description">Πρόωρη πρόσβαση στις νέες εκδόσεις της εφαρμογής Morphe. Ενεργοποιήστε τις προ-κυκλοφοριακές ενημερώσεις ανά πηγή στις πηγές των αλλαγών</string>
     <string name="settings_advanced_updates_allow_metered">Ενημερώσεις μέσω κινητής σύνδεσης</string>
@@ -718,7 +719,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Βελτιστοποίηση μπαταρίας</string>
     <string name="settings_system_battery_optimization_description">Διατηρεί τον επεξεργαστή ενεργό όταν η εφαρμογή είναι ελαχιστοποιημένη</string>
-    <string name="settings_system_performance">Απόδοση</string>
+    <string name="settings_system_background">Φόντο</string>
     <string name="settings_system_process_runtime">Χρόνος εκτέλεσης διεργασίας</string>
     <string name="settings_system_process_runtime_description">Εκτελεί την τροποποίηση σε ξεχωριστή διεργασία για καλύτερη σταθερότητα</string>
     <string name="settings_system_process_runtime_memory_limit_description">Υψηλότερες τιμές επιταχύνουν την εφαρμογή αλλαγών σε συσκευές με κατάλληλες δυνατότητες</string>
@@ -728,6 +729,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">%s MB όριο</string>
     <string name="settings_system_process_runtime_disabled_description">Κλικ για διαμόρφωση</string>
     <string name="settings_system_process_runtime_description_not_available">Αυτή η λειτουργία απαιτεί Android 11 ή νεότερη έκδοση</string>
+    <string name="settings_system_patcher_completion_sound">Ήχος ολοκλήρωσης</string>
+    <string name="settings_system_patcher_completion_sound_description">Αναπαράγει έναν διακριτό τόνο για επιτυχία ή αποτυχία κατά την ολοκλήρωση της επιδιόρθωσης</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Ειδοποιήσεις</string>
+    <string name="settings_system_notifications_description">Διαμόρφωση ειδοποιήσεων φόντου και ήχων ολοκλήρωσης</string>
+    <string name="settings_system_notifications_success_sound">Ήχος επιτυχίας</string>
+    <string name="settings_system_notifications_error_sound">Ήχος αποτυχίας</string>
+    <string name="settings_system_notifications_sound_default">Προεπιλογή</string>
+    <string name="settings_system_notifications_sound_picker_title">Επιλογή πηγής ήχου</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Ήχοι συστήματος</string>
+    <string name="settings_system_notifications_sound_pick_file">Επιλογή από αρχεία</string>
+    <string name="settings_system_notifications_sound_reset">Επαναφορά στις προεπιλογές</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Επιλέξτε τόνο</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Εισαγωγή &amp; εξαγωγή</string>
     <string name="settings_system_keystore">Χώρος αποθήκευσης κλειδιών</string>

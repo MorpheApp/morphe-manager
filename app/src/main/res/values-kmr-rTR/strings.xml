@@ -515,6 +515,7 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="settings_appearance_app_icon_change_dialog_confirm">Guhêrîna îkonê</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Nûvekirin</string>
+    <string name="settings_advanced_patcher">Patchker</string>
     <string name="settings_advanced_updates_use_prereleases">Nûvekirinên berî berhemkirinê</string>
     <string name="settings_advanced_updates_use_prereleases_description">Têkevinî pêşî li gorî nûvekirinên nû yên Morphe. Çavkaniyan li gorî nûvekirinê hilbijêrin</string>
     <string name="settings_advanced_updates_allow_metered">Nûvekirinên daneya mobîl</string>
@@ -718,7 +719,7 @@ Detay: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Serûşê bateriyê</string>
     <string name="settings_system_battery_optimization_description">Dema ku app hatî biçikînîn, sazkirîn bidomîne</string>
-    <string name="settings_system_performance">Performans</string>
+    <string name="settings_system_background">Binêre</string>
     <string name="settings_system_process_runtime">Rayedîna pêroje</string>
     <string name="settings_system_process_runtime_description">Qeyik kirina cuda ji bo aramiya çêtirîn birêve bibe</string>
     <string name="settings_system_process_runtime_memory_limit_description">Sînorên bilindtir her çûk qeyik kirinê li ser cîhazan qewimîn bike</string>
@@ -728,6 +729,19 @@ Detay: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">Sînor %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Li konfigurasyonê biklik</string>
     <string name="settings_system_process_runtime_description_not_available">Ev taybetmendî Android 11 yan zêdetir tê hewîn</string>
+    <string name="settings_system_patcher_completion_sound">Dengê qedandina</string>
+    <string name="settings_system_patcher_completion_sound_description">Dengê taybet lêdanê ji bo serkeftinê an têkçûnê dema qedandina patchkirinê</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Agahîyan</string>
+    <string name="settings_system_notifications_description">Konfîgurekirina agahiyên paşnavê û dengên qedandina</string>
+    <string name="settings_system_notifications_success_sound">Dengê serketinê</string>
+    <string name="settings_system_notifications_error_sound">Dengê xeletê</string>
+    <string name="settings_system_notifications_sound_default">Bixweber</string>
+    <string name="settings_system_notifications_sound_picker_title">Çavkaniya dengê hilbijêre</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Dengên sîstemê</string>
+    <string name="settings_system_notifications_sound_pick_file">Hilbijêre ji pelan</string>
+    <string name="settings_system_notifications_sound_reset">Vegerîne vexwêber</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Toneyek hilbijêre</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import &amp; export</string>
     <string name="settings_system_keystore">Keystore</string>

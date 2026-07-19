@@ -328,7 +328,7 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="home_app_info_app_deleted_warning">Díshuiteáladh an aip</string>
     <string name="home_app_info_app_deleted_description">Díshuiteáladh an aip seo lasmuigh de Morphe. Athphaisteáil í chun feidhmiúlacht a athbhunú.</string>
     <string name="home_app_info_apk_size">Méid APK</string>
-    <string name="home_app_info_cpu_arch">aicmiú CPU</string>
+    <string name="home_app_info_cpu_arch">Ailtireacht LAP</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Éilíonn mód fréimhe go mbeidh an APK bunaidh suiteáilte ar do ghléas sula ndéantar paisteáil</string>
     <string name="root_gmscore_excluded">Tá paiste tacaíochta GmsCore eiscthe i mód fréimhe</string>
@@ -494,7 +494,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_app_language">Teanga an aip</string>
     <string name="settings_appearance_app_language_current">Teanga reatha</string>
     <string name="settings_appearance_translations_info_title">D’fhéadfadh aistriúcháin do roinnt teangacha a bheith ar iarraidh nó neamhiomlán</string>
-    <string name="settings_appearance_translations_info_text">"Chun teangacha nua a aistriú nó na haistriúcháin atá ann cheana a fheabhsú, tabhair cuairt ar %s"</string>
+    <string name="settings_appearance_translations_info_text">"Chun teangacha nua a aistriú nó na haistriúcháin atá ann cheana a fheabhsú, tabhair cuairt ar
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Home screen</string>
     <string name="settings_appearance_greeting_phrases">Frásaí beannachta</string>
@@ -516,6 +517,7 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Athraigh deilbhín</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Nuashonruithe</string>
+    <string name="settings_advanced_patcher">Paisteálaí</string>
     <string name="settings_advanced_updates_use_prereleases">Nuashonruithe réamh-eisiúna</string>
     <string name="settings_advanced_updates_use_prereleases_description">Rochtain luath ar leaganacha nua d\'aipeanna Morphe. Cumasaigh réamhscaoileadh in aghaidh na foinse i bhfoinsí paiste</string>
     <string name="settings_advanced_updates_allow_metered">Nuashonruithe sonraí soghluaiste</string>
@@ -565,6 +567,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_advanced_github_pat_configured">Cumraithe an chomhartha</string>
     <string name="settings_advanced_github_pat_how_to_get">Conas comhartha a fháil</string>
     <string name="settings_advanced_github_pat_dialog_title">Socraigh Comhartha Rochtana Pearsanta GitHub</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Socraigh Comhartha Rochtana Pearsanta GitHub chun go mbeidh tú in ann iarratais tarraingthe a chur leis mar fhoinsí seachtracha. Cruthaigh PAT le raon feidhme public_repo ar
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Cuir san áireamh in easpórtáil socruithe</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Cuireann an PAT seo le socruithe Morphe onnmhairithe</string>
     <string name="settings_advanced_github_pat_export_warning">Ná roinn do PAT. Má chuireann tú san áireamh é in easpórtáil socruithe, coinnigh an comhad sin príobháideach mar go bhfuil an comhartha ann.</string>
@@ -661,7 +665,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_status_not_supported">Ní thacaítear leis an ngníomh seo</string>
     <string name="installer_status_shizuku_not_installed">Suiteáil Shizuku nó Sui chun an rogha seo a úsáid</string>
     <string name="installer_status_shizuku_not_running">Tosaigh Shizuku nó Sui agus déan iarracht arís</string>
-    <string name="installer_status_shizuku_permission">Tabhair cead do Shizuku Morphe a dhéanamh ón aip Shizuku</string>
+    <string name="installer_status_shizuku_permission">Tabhair cead do Morphe ón aip Shizuku</string>
     <string name="installer_mount_warning_install">Tá do phríomhshuiteálaí socraithe chuig an suiteálaí gléasta fréamhaithe. Níor suiteáladh an aip shábháilte seo ag baint úsáide as gléas gléasta</string>
     <string name="mount_version_mismatch_message">Ní hionann leagan stoic an aip (%2$s) agus an leagan paisteáilte den aip (%1$s). Suiteáil an leagan stoic comhoiriúnach, agus déan iarracht arís</string>
     <string name="installer_status_shizuku_unsupported">Ní thacaítear leis an leagan Shizuku atá suiteáilte</string>
@@ -676,46 +680,46 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_unavailable_shizuku_hint">Cinntigh go bhfuil Shizuku ag rith agus go bhfuil cead tugtha don aip seo</string>
     <string name="installer_use_standard">Úsáid caighdeánach</string>
     <string name="installer_play_store_warning_title">Suiteáil mar Play Store?</string>
-    <string name="installer_play_store_warning_message">Clárfar an aip atá patched mar suiteáil ón Google Play Store. Is féidir leis seo a chabhru aithint aipeanna mar aip Play Store, ach ní ráthítear é do gach aip nó gléas. D’fhéadfadh go difríodh an iompar de réir leagan Android, ROM, branda gléas, agus seicálacha ar leithluchtaí</string>
+    <string name="installer_play_store_warning_message">Taifeadfar an aip phaisteáilte mar a bheith suiteáilte ó Google Play Store. Is féidir leis seo cabhrú le seirbhísí cosúil le Android Auto é a aithint mar aip Play Store, ach ní ráthaítear é sin do gach aip nó gléas. Féadfaidh an t-iompar a bheith éagsúil ag brath ar leagan Android, ROM, branda gléis agus seiceálacha sonracha don aip.</string>
     <string name="installer_play_store_warning_risk">Féadfaidh Play Store nuashonruithe a thairiscint don aip bhreacach. Má shuiteáiltear an nuashonrú sin, déanfar an APK paiste a fhorscríobh leis an mbunleagan agus bainfidh sé na paistí. Má iarrtar ort nuashonrú a dhéanamh, tapáil an roghchlár trí phonc ar leathanach Play Store na haipe agus roghnaigh \"Múch nuashonruithe\"</string>
     <string name="installer_play_store_warning_continue">Tuigim, lean ar aghaidh</string>
     <string name="installer_play_store_mode">Suiteáil mar Play Store</string>
-    <string name="installer_play_store_mode_description">Taifeadfar an Google Play Store mar fhoinse suiteála don mhodh suiteála seo</string>
+    <string name="installer_play_store_mode_description">Taifead Google Play Store mar fhoinse suiteála don mhodh suiteála seo</string>
     <string name="settings_prompt_installer_on_install">Leid roghnúcháin suiteálaí</string>
     <string name="settings_prompt_installer_on_install_description">Taispeánann sé dialóg roghnúcháin suiteálaí gach uair a shuiteáiltear aip phaisteáilte</string>
     <string name="settings_auto_install_with_shizuku">Suiteáil uathoibríoch tar éis paisteála</string>
     <string name="settings_auto_install_with_shizuku_description">Suiteálann sé an APK paisteáilte go ciúin a luaithe a bheidh an paisteáil críochnaithe</string>
-    <string name="settings_auto_uninstall_with_shizuku">Dísuiteáil uathoibríoch ar an gcoimhlint</string>
-    <string name="settings_auto_uninstall_with_shizuku_description">Nuair a suiteáiltear aipeanna go uathoibríoch le Shizuku, dísuiteáil an aip atá ann cheana má tá coimhlint comharthaíochta ráite ag Android. Is féidir leis seo sonraí aipeanna a bhaint</string>
-    <string name="settings_auto_uninstall_warning_title">Comhthairtíú dísuiteáil uathoibríoch?</string>
-    <string name="settings_auto_uninstall_warning_message">Má tá comhfhlaith comharthaíochta ar aisteach ag Android le linn suiteála uathoibríoch Shizuku, déanfaidh Morphe an aip atá ann cheana a dhísuiteáil roimh suiteáil an APK atá patched</string>
-    <string name="settings_auto_uninstall_warning_risk">Is féidir leis seo sonraí aipeanna a bhaint. Má theipeann ar an APK patched suiteáil tar éis díuiteáil, d\'fhéadfadh an aip roimhe a bheith imithe cheana</string>
+    <string name="settings_auto_uninstall_with_shizuku">Díshuiteáil uathoibríoch i gcás coimhlinte</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Agus suiteáil uathoibríoch á déanamh le Shizuku, díshuiteáil an aip atá ann cheana féin ar dtús má thuairiscíonn Android coimhlint sínithe. Is féidir leis seo sonraí an aip a bhaint.</string>
+    <string name="settings_auto_uninstall_warning_title">Cumasaigh díshuiteáil uathoibríoch?</string>
+    <string name="settings_auto_uninstall_warning_message">Má thuairiscíonn Android coimhlint shínithe le linn uath-shuiteáil Shizuku, díshuiteálfaidh Morphe an aip atá ann cheana sula suiteálfar an APK paiste.</string>
+    <string name="settings_auto_uninstall_warning_risk">Féadann sé seo sonraí aipeanna a bhaint. Mura n-éiríonn leis an APK paisteáilte a shuiteáil tar éis é a dhíshuiteáil, seans go bhfuil an aip roimhe seo imithe cheana féin.</string>
     <string name="installer_shizuku_status_action">Seiceáil stádas Shizuku</string>
     <string name="installer_shizuku_status_title">Stádas Shizuku</string>
     <string name="installer_shizuku_status_ready">Réidh</string>
-    <string name="installer_shizuku_status_issue">Teastaíonn aire</string>
-    <string name="installer_shizuku_status_supported">Tacaíocht</string>
+    <string name="installer_shizuku_status_issue">Teastaíonn aird</string>
+    <string name="installer_shizuku_status_supported">Tacaithe</string>
     <string name="installer_shizuku_status_running">Ag rith</string>
-    <string name="installer_shizuku_status_permission">Ceadanna</string>
+    <string name="installer_shizuku_status_permission">Cead</string>
     <string name="installer_shizuku_status_mode">Mód</string>
     <string name="installer_shizuku_status_provider">Soláthraí</string>
-    <string name="installer_shizuku_status_granted">Bronntach</string>
+    <string name="installer_shizuku_status_granted">Deonaithe</string>
     <string name="installer_shizuku_status_missing">Ar iarraidh</string>
     <string name="installer_shizuku_request_permission">Iarr cead</string>
-    <string name="installer_shizuku_install_fail">Theip ar suiteáil Shizuku: %s</string>
-    <string name="installer_shizuku_install_fail_with_details">"Theip ar suiteáil Shizuku: %1$s
+    <string name="installer_shizuku_install_fail">Theip ar shuiteáil Shizuku: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Theip ar shuiteáil Shizuku: %1$s
 
-Details: %2$s"</string>
-    <string name="installer_shizuku_error_permission">Tá cead Shizuku ar iarraidh. Bronntach cead do Morphe agus iarr arís</string>
-    <string name="installer_shizuku_error_timeout">Níor thug Shizuku toradh suiteála ar ais. Déan cinnte go bhfuil sé fós ag rith agus iarr arís</string>
-    <string name="installer_shizuku_error_downgrade">Thoitigh Android ar a thoirmeasc mar go ndéanfadh sé aipeanna a bhaint</string>
-    <string name="installer_shizuku_error_signature">Thoitigh Android ar a thoirmeasc mar go bhfuil comharthaíocht difriúil ag an aip a suiteáladh</string>
-    <string name="installer_shizuku_error_invalid_apk">Ní féidir le Android an APK seo a léamh</string>
-    <string name="installer_shizuku_error_user_profile">Thoitigh Android ar a thoirmeasc don úsáideoir reatha nó an próifíl oibre</string>
+Sonraí: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Tá cead Shizuku ar iarraidh. Tabhair cead do Morphe agus déan iarracht arís.</string>
+    <string name="installer_shizuku_error_timeout">Níor thug Shizuku toradh suiteála ar ais. Déan cinnte go bhfuil sé fós ag rith agus déan iarracht arís.</string>
+    <string name="installer_shizuku_error_downgrade">Chuir Android bac air seo mar go ndéanfadh sé an aip suiteáilte a íosghrádú</string>
+    <string name="installer_shizuku_error_signature">Chuir Android bac air seo mar gheall go bhfuil síniú difriúil ag an aip suiteáilte</string>
+    <string name="installer_shizuku_error_invalid_apk">Níorbh fhéidir le Android an APK seo a léamh</string>
+    <string name="installer_shizuku_error_user_profile">Chuir Android bac air seo don úsáideoir nó don phróifíl oibre reatha</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Uasmhéadú ceallraí</string>
     <string name="settings_system_battery_optimization_description">Coinníonn an paisteálaí ag rith nuair a bhíonn an aip íoslaghdaithe</string>
-    <string name="settings_system_performance">Feidhmíocht</string>
+    <string name="settings_system_background">Cúlra</string>
     <string name="settings_system_process_runtime">Am rith an phróisis</string>
     <string name="settings_system_process_runtime_description">Ritheann sé paisteáil i bpróiseas ar leithligh le haghaidh cobhsaíochta níos fearr.</string>
     <string name="settings_system_process_runtime_memory_limit_description">Luasghéaraíonn teorainneacha níos airde paistí ar ghléasanna cumasacha</string>
@@ -725,6 +729,19 @@ Details: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">Teorainn %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Cliceáil chun cumrú</string>
     <string name="settings_system_process_runtime_description_not_available">Éilíonn an ghné seo Android 11 nó níos déanaí</string>
+    <string name="settings_system_patcher_completion_sound">Fuaime comhlánúcháin</string>
+    <string name="settings_system_patcher_completion_sound_description">Sníonn ton difriúil chun rath nó teipeadh nuair a chríochnaíonn paisteáil</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Fógraí</string>
+    <string name="settings_system_notifications_description">Cumraigh fógraí cúlra agus fuaimeanna comhlánúcháin</string>
+    <string name="settings_system_notifications_success_sound">Fuaime rath</string>
+    <string name="settings_system_notifications_error_sound">Fuaim theipe</string>
+    <string name="settings_system_notifications_sound_default">Réamhshocrú</string>
+    <string name="settings_system_notifications_sound_picker_title">Roghnaigh foinse fuaime</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Fuaimeanna córais</string>
+    <string name="settings_system_notifications_sound_pick_file">Roghnaigh comhad</string>
+    <string name="settings_system_notifications_sound_reset">Athshocrú</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Roghnaigh ton</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Iompórtáil &amp; easpórtáil</string>
     <string name="settings_system_keystore">Eochracha</string>

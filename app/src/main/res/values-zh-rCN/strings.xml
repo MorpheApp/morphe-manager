@@ -517,6 +517,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">更改图标</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
+    <string name="settings_advanced_patcher">修补程序</string>
     <string name="settings_advanced_updates_use_prereleases">预发布更新</string>
     <string name="settings_advanced_updates_use_prereleases_description">提前访问新的 Morphe 应用版本。在补丁来源中启用预发布版本</string>
     <string name="settings_advanced_updates_allow_metered">移动数据更新</string>
@@ -720,7 +721,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">电池优化</string>
     <string name="settings_system_battery_optimization_description">在应用最小化时，保持修补程序运行</string>
-    <string name="settings_system_performance">性能</string>
+    <string name="settings_system_background">后台</string>
     <string name="settings_system_process_runtime">修补程序运行时</string>
     <string name="settings_system_process_runtime_description">在单独的进程中运行修补以提高稳定性</string>
     <string name="settings_system_process_runtime_memory_limit_description">更高的限制可以加速在兼容设备上的修补</string>
@@ -730,6 +731,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">%s MB限制</string>
     <string name="settings_system_process_runtime_disabled_description">点击以配置</string>
     <string name="settings_system_process_runtime_description_not_available">此功能需要 Android 11 或更高版本</string>
+    <string name="settings_system_patcher_completion_sound">完成提示音</string>
+    <string name="settings_system_patcher_completion_sound_description">修补完成后，播放不同的提示音以表示成功或失败</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">通知</string>
+    <string name="settings_system_notifications_description">配置后台提醒和完成提示音</string>
+    <string name="settings_system_notifications_success_sound">成功提示音</string>
+    <string name="settings_system_notifications_error_sound">失败提示音</string>
+    <string name="settings_system_notifications_sound_default">默认</string>
+    <string name="settings_system_notifications_sound_picker_title">选择提示音来源</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">系统声音</string>
+    <string name="settings_system_notifications_sound_pick_file">从文件中选择</string>
+    <string name="settings_system_notifications_sound_reset">重置为默认值</string>
+    <string name="settings_system_notifications_ringtone_picker_title">选择铃声</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">导入 &amp; 导出</string>
     <string name="settings_system_keystore">密钥库</string>

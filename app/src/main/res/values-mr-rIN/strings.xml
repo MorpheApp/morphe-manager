@@ -516,6 +516,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">आयकॉन बदला</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">अपडेट</string>
+    <string name="settings_advanced_patcher">पॅचर</string>
     <string name="settings_advanced_updates_use_prereleases">प्रायोगिक सुधारणा अद्यतने</string>
     <string name="settings_advanced_updates_use_prereleases_description">नवीन Morphe ॲप आवृत्तीमध्ये लवकर प्रवेश. पॅच स्त्रोतांमध्ये प्रति स्रोत पूर्व-रिलीझ सक्षम करा</string>
     <string name="settings_advanced_updates_allow_metered">मोबाईल डेटा अद्यतने</string>
@@ -719,7 +720,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">बॅटरी ऑप्टिमायझेशन</string>
     <string name="settings_system_battery_optimization_description">ॲप मिनिमाइज केले असताना पॅचर चालू ठेवतो</string>
-    <string name="settings_system_performance">कार्यक्षमता</string>
+    <string name="settings_system_background">पार्श्वभूमी</string>
     <string name="settings_system_process_runtime">प्रक्रिया रनटाइम</string>
     <string name="settings_system_process_runtime_description">उत्तम स्थिरतेसाठी पॅचिंग वेगळ्या प्रक्रियेत चालवतो</string>
     <string name="settings_system_process_runtime_memory_limit_description">उच्च मर्यादा सक्षम उपकरणांवर पॅचिंगला गती देते</string>
@@ -729,6 +730,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">%s MB मर्यादा</string>
     <string name="settings_system_process_runtime_disabled_description">क्लिक करून कॉन्फिगर करा</string>
     <string name="settings_system_process_runtime_description_not_available">या वैशिष्ट्यासाठी Android 11 किंवा त्यापेक्षा नवीन आवश्यक आहे</string>
+    <string name="settings_system_patcher_completion_sound">पूर्णत्वाचा आवाज</string>
+    <string name="settings_system_patcher_completion_sound_description">पॅचिंग पूर्ण झाल्यावर यश किंवा अपयश दर्शवण्यासाठी विशिष्ट टोन प्ले करा</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">सूचना</string>
+    <string name="settings_system_notifications_description">पार्श्वभूमी सूचना आणि पूर्णत्वाचा आवाज कॉन्फिगर करा</string>
+    <string name="settings_system_notifications_success_sound">यशस्वी आवाज</string>
+    <string name="settings_system_notifications_error_sound">त्रुटी आवाज</string>
+    <string name="settings_system_notifications_sound_default">डीफॉल्ट</string>
+    <string name="settings_system_notifications_sound_picker_title">आवाज स्रोत निवडा</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">सिस्टम आवाज</string>
+    <string name="settings_system_notifications_sound_pick_file">फाईल मधून निवडा</string>
+    <string name="settings_system_notifications_sound_reset">डीफॉल्ट वर रीसेट करा</string>
+    <string name="settings_system_notifications_ringtone_picker_title">टोन निवडा</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">आयात आणि निर्यात</string>
     <string name="settings_system_keystore">कीस्टोर</string>

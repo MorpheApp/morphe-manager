@@ -517,6 +517,7 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Zmeniť ikonu</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Aktualizácie</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Predbežné vydania</string>
     <string name="settings_advanced_updates_use_prereleases_description">Skorý prístup k novým verziám aplikácie Morphe. Povoliť predbežné vydania pre zdroj v zdrojoch záplat</string>
     <string name="settings_advanced_updates_allow_metered">Aktualizácie cez mobilné dáta</string>
@@ -720,7 +721,7 @@ Podrobnosti: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimalizácia batérie</string>
     <string name="settings_system_battery_optimization_description">Udrží pátrač v prevádzke, keď je aplikácia minimalizovaná</string>
-    <string name="settings_system_performance">Výkon</string>
+    <string name="settings_system_background">Pozadie</string>
     <string name="settings_system_process_runtime">Runtime procesu</string>
     <string name="settings_system_process_runtime_description">Spustiť plátanie v samostatnom procese pre lepšiu stabilitu</string>
     <string name="settings_system_process_runtime_memory_limit_description">Vyššie limity urýchľujú záplatovanie na podporovaných zariadeniach</string>
@@ -730,6 +731,19 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Ťuknite pre nastavenie</string>
     <string name="settings_system_process_runtime_description_not_available">Táto funkcia vyžaduje Android 11 alebo vyšší</string>
+    <string name="settings_system_patcher_completion_sound">Zvuk úspešného dokončenia</string>
+    <string name="settings_system_patcher_completion_sound_description">Prehráva odlišný tón pre úspech alebo zlyhanie po dokončení záplatovania</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Upozornenia</string>
+    <string name="settings_system_notifications_description">Konfigurácia upozornení na pozadí a zvukov dokončenia</string>
+    <string name="settings_system_notifications_success_sound">Zvuk úspechu</string>
+    <string name="settings_system_notifications_error_sound">Zvuk zlyhania</string>
+    <string name="settings_system_notifications_sound_default">Predvolený</string>
+    <string name="settings_system_notifications_sound_picker_title">Vyberte zdroj zvuku</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Systémové zvuky</string>
+    <string name="settings_system_notifications_sound_pick_file">Vyberte zo súborov</string>
+    <string name="settings_system_notifications_sound_reset">Obnoviť predvolené</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Vyberte tón</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import a export</string>
     <string name="settings_system_keystore">Keystore</string>

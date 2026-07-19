@@ -518,6 +518,7 @@ Mencopot pemasangannya akan menghapus semua data aplikasi secara permanen"</stri
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ubah ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Pembaruan</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Pembaruan pra-rilis</string>
     <string name="settings_advanced_updates_use_prereleases_description">Akses awal ke versi aplikasi Morphe yang baru. Aktifkan pra-rilis per sumber di sumber tambalan</string>
     <string name="settings_advanced_updates_allow_metered">Pembaruan data seluler</string>
@@ -721,7 +722,7 @@ Rincian: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisasi baterai</string>
     <string name="settings_system_battery_optimization_description">Menjaga penambal tetap berjalan saat aplikasi diminimalkan</string>
-    <string name="settings_system_performance">Performa</string>
+    <string name="settings_system_background">Latar Belakang</string>
     <string name="settings_system_process_runtime">Proses runtime</string>
     <string name="settings_system_process_runtime_description">Menjalankan penambalan di proses terpisah untuk stabilitas yang lebih baik</string>
     <string name="settings_system_process_runtime_memory_limit_description">Batas yang lebih tinggi mempercepat penambalan pada perangkat yang mendukung</string>
@@ -731,6 +732,19 @@ Rincian: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">Batas %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Klik untuk mengonfigurasinya</string>
     <string name="settings_system_process_runtime_description_not_available">Fitur ini memerlukan Android 11 atau versi yang lebih baru</string>
+    <string name="settings_system_patcher_completion_sound">Suara penyelesaian</string>
+    <string name="settings_system_patcher_completion_sound_description">Memainkan nada berbeda untuk keberhasilan atau kegagalan saat penambalan selesai</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Notifikasi</string>
+    <string name="settings_system_notifications_description">Konfigurasikan peringatan latar belakang dan suara penyelesaian</string>
+    <string name="settings_system_notifications_success_sound">Suara keberhasilan</string>
+    <string name="settings_system_notifications_error_sound">Suara kegagalan</string>
+    <string name="settings_system_notifications_sound_default">Bawaan</string>
+    <string name="settings_system_notifications_sound_picker_title">Pilih sumber suara</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Suara sistem</string>
+    <string name="settings_system_notifications_sound_pick_file">Pilih dari berkas</string>
+    <string name="settings_system_notifications_sound_reset">Kembalikan ke bawaan</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Pilih nada dering</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Impor &amp; ekspor</string>
     <string name="settings_system_keystore">Keystore</string>

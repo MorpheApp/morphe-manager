@@ -518,6 +518,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Промяна на икона</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Актуализации</string>
+    <string name="settings_advanced_patcher">Патчер</string>
     <string name="settings_advanced_updates_use_prereleases">Предварителни версии</string>
     <string name="settings_advanced_updates_use_prereleases_description">Ранен достъп до нови версии на приложението Morphe. Активирайте предварителни версии за всеки източник в източниците на пачове.</string>
     <string name="settings_advanced_updates_allow_metered">Актуализации през мобилни данни</string>
@@ -721,7 +722,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизация на батерията</string>
     <string name="settings_system_battery_optimization_description">Поддържа работещ патчър, когато приложението е минимизирано</string>
-    <string name="settings_system_performance">Перформанс</string>
+    <string name="settings_system_background">Фон</string>
     <string name="settings_system_process_runtime">Време на изпълнение</string>
     <string name="settings_system_process_runtime_description">Изпълнява прилагането на пачове в отделен процес за по-добра стабилност.</string>
     <string name="settings_system_process_runtime_memory_limit_description">По-високите лимити ускоряват прилагането на пачове на съвместими устройства.</string>
@@ -731,6 +732,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">%s MB лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Натиснете за конфигуриране</string>
     <string name="settings_system_process_runtime_description_not_available">Това функционално възможност изисква Android 11 или по-нова версия.</string>
+    <string name="settings_system_patcher_completion_sound">Звук за завършване</string>
+    <string name="settings_system_patcher_completion_sound_description">Възпроизвежда отделен тон при успех или неуспех, когато завърши прилагането на корекциите</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Известия</string>
+    <string name="settings_system_notifications_description">Конфигуриране на фонови сигнали и звуци за завършване</string>
+    <string name="settings_system_notifications_success_sound">Звук при успех</string>
+    <string name="settings_system_notifications_error_sound">Звук за грешка</string>
+    <string name="settings_system_notifications_sound_default">По подразбиране</string>
+    <string name="settings_system_notifications_sound_picker_title">Избор на източник на звук</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Системни звуци</string>
+    <string name="settings_system_notifications_sound_pick_file">Избор от файлове</string>
+    <string name="settings_system_notifications_sound_reset">Възстановяване на настройките по подразбиране</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Изберете тон</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Импорт и износ</string>
     <string name="settings_system_keystore">Ключов магазин</string>

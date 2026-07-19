@@ -516,6 +516,7 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ikon megváltoztatása</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Frissítések</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Kiadás előtti módosítások használata</string>
     <string name="settings_advanced_updates_use_prereleases_description">Korai hozzáférés az új Morphe alkalmazásverziókhoz. Engedélyezés forrásonként a módosítás forrásoknál.</string>
     <string name="settings_advanced_updates_allow_metered">Mobiladat-forgalom aktív</string>
@@ -717,7 +718,7 @@ Részletek: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Akkuoptimalizálás</string>
     <string name="settings_system_battery_optimization_description">A javító folyamat futtatása a háttérben, amikor az alkalmazás minimalizálva van.</string>
-    <string name="settings_system_performance">Teljesítmény</string>
+    <string name="settings_system_background">Háttér</string>
     <string name="settings_system_process_runtime">Folyamat futási ideje</string>
     <string name="settings_system_process_runtime_description">A javítás külön folyamatban történő futtatása a jobb stabilitás érdekében.</string>
     <string name="settings_system_process_runtime_memory_limit_description">Magasabb korlátok gyorsítják a javítást a képességekkel rendelkező eszközökön.</string>
@@ -727,6 +728,19 @@ Részletek: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB korlát</string>
     <string name="settings_system_process_runtime_disabled_description">Koppints a konfigurálásához</string>
     <string name="settings_system_process_runtime_description_not_available">Ez a funkció Android 11 vagy újabb verziót igényel</string>
+    <string name="settings_system_patcher_completion_sound">Befejezés hangja</string>
+    <string name="settings_system_patcher_completion_sound_description">Jellegzetes hangot játszik le a sikeres vagy sikertelen javítás befejezésekor</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Értesítések</string>
+    <string name="settings_system_notifications_description">Konfigurálja a háttérértesítéseket és a befejezés hangjait</string>
+    <string name="settings_system_notifications_success_sound">Siker hangja</string>
+    <string name="settings_system_notifications_error_sound">Hibajelzés hangja</string>
+    <string name="settings_system_notifications_sound_default">Alapértelmezett</string>
+    <string name="settings_system_notifications_sound_picker_title">Hangforrás kiválasztása</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Rendszerhangok</string>
+    <string name="settings_system_notifications_sound_pick_file">Fájlból való kiválasztás</string>
+    <string name="settings_system_notifications_sound_reset">Visszaállítás alapértékre</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Hang kiválasztása</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importálás és exportálás</string>
     <string name="settings_system_keystore">Kulcstár</string>

@@ -517,6 +517,7 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Verander ikoon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Opdaterings</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Voorvrystellingsopdaterings</string>
     <string name="settings_advanced_updates_use_prereleases_description">Vroeë toegang tot nuwe Morphe-appweergawes. Skakel voorvrystelling per bron in patchbronne in</string>
     <string name="settings_advanced_updates_allow_metered">Mobiele data-opdaterings</string>
@@ -720,7 +721,7 @@ Besonderhede: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery-optimalisering</string>
     <string name="settings_system_battery_optimization_description">Hou die patcher lopend wanneer die toepassing geminimaliseer is</string>
-    <string name="settings_system_performance">Prestasie</string>
+    <string name="settings_system_background">Agtergrond</string>
     <string name="settings_system_process_runtime">Proses tydloop</string>
     <string name="settings_system_process_runtime_description">Voer patching in \'n aparte proses uit vir beter stabiliteit</string>
     <string name="settings_system_process_runtime_memory_limit_description">Hoër limiete versnel patching op toestelle wat dit kan hanteer</string>
@@ -730,6 +731,19 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limiet</string>
     <string name="settings_system_process_runtime_disabled_description">Klik om te konfigureer</string>
     <string name="settings_system_process_runtime_description_not_available">Hierdie kenmerk vereis Android 11 of later</string>
+    <string name="settings_system_patcher_completion_sound">Voltooiingklank</string>
+    <string name="settings_system_patcher_completion_sound_description">Speel \'n kenmerkende toon vir sukses of mislukking wanneer die patching voltooi is</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Kennisgewings</string>
+    <string name="settings_system_notifications_description">Konfigureer agtergrondwaarskuwings en voltooiingsklanke</string>
+    <string name="settings_system_notifications_success_sound">Suksesklank</string>
+    <string name="settings_system_notifications_error_sound">Foutklank</string>
+    <string name="settings_system_notifications_sound_default">Verstek</string>
+    <string name="settings_system_notifications_sound_picker_title">Kies klankbron</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Stelselklanke</string>
+    <string name="settings_system_notifications_sound_pick_file">Kies uit lêers</string>
+    <string name="settings_system_notifications_sound_reset">Stel terug na verstek</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Kies \'n toon</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importeer &amp; eksporteer</string>
     <string name="settings_system_keystore">Sleutelkooi</string>

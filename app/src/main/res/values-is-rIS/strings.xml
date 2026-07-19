@@ -515,6 +515,7 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Staðfestu táknbreytingu</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Uppfæra</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Uppfærsla fyrir útgáfur</string>
     <string name="settings_advanced_updates_use_prereleases_description">Snemma aðgangur að nýjum Morphe app útgáfum. Virkja for útgáfur per heimild í breytandas heimildum</string>
     <string name="settings_advanced_updates_allow_metered">Gagnagáfa á gögnum</string>
@@ -715,7 +716,7 @@ Nánari upplýsingar: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Rafhlöðu útvinnslustillingar</string>
     <string name="settings_system_battery_optimization_description">Skoða upprunaleg geymslu</string>
-    <string name="settings_system_performance">Árangur</string>
+    <string name="settings_system_background">Bakgrunnur</string>
     <string name="settings_system_process_runtime">Vinnslutími</string>
     <string name="settings_system_process_runtime_description">Skrá verður að hafa .mpp framlengingu</string>
     <string name="settings_system_process_runtime_memory_limit_description">Gilt repository eða JSON URL</string>
@@ -725,6 +726,19 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB takmörk</string>
     <string name="settings_system_process_runtime_disabled_description">Smelltu til að stilla</string>
     <string name="settings_system_process_runtime_description_not_available">Þessi staðsetning þarf Android 11 eða meira</string>
+    <string name="settings_system_patcher_completion_sound">Ljós hljóð</string>
+    <string name="settings_system_patcher_completion_sound_description">Spilar ákveðinn tón fyrir árangur eða misgengi þegar flakkast er lokið</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Tilkyntingar</string>
+    <string name="settings_system_notifications_description">Stilltu bakgrunnsviðvörun og lokhljóð</string>
+    <string name="settings_system_notifications_success_sound">Árangurshljóð</string>
+    <string name="settings_system_notifications_error_sound">Hljóð fyrir mistök</string>
+    <string name="settings_system_notifications_sound_default">Sjálfgefið</string>
+    <string name="settings_system_notifications_sound_picker_title">Veldu hljóðgjafa</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Kerfishljóð</string>
+    <string name="settings_system_notifications_sound_pick_file">Velja úr skráum</string>
+    <string name="settings_system_notifications_sound_reset">Endurreisa sjálfgefið</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Veldu tón</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Inn- og útflutningur</string>
     <string name="settings_system_keystore">Keystore</string>

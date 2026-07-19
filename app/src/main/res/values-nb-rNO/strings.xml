@@ -517,6 +517,7 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Endre ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Deaktiver</string>
+    <string name="settings_advanced_patcher">Patcner</string>
     <string name="settings_advanced_updates_use_prereleases">Forhåndsutgitte oppdateringer</string>
     <string name="settings_advanced_updates_use_prereleases_description">Tidlig tilgang til nye Morphe-appversjoner. Aktiver forhåndsutgitt per kilde i oppdateringskildene</string>
     <string name="settings_advanced_updates_allow_metered">Mobildataoppdateringer</string>
@@ -720,7 +721,7 @@ Detaljer: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimalisering av batteri</string>
     <string name="settings_system_battery_optimization_description">Holder oppdatereren i gang når appen minimeres</string>
-    <string name="settings_system_performance">Ytelse</string>
+    <string name="settings_system_background">Bakgrunn</string>
     <string name="settings_system_process_runtime">Prosesskjøretid</string>
     <string name="settings_system_process_runtime_description">Kjører oppdatering i en separat prosess for bedre stabilitet</string>
     <string name="settings_system_process_runtime_memory_limit_description">Høyere grenser øker hastigheten på oppdatering på kompatible enheter</string>
@@ -730,6 +731,19 @@ Detaljer: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB grense</string>
     <string name="settings_system_process_runtime_disabled_description">Klikk for å konfigurere</string>
     <string name="settings_system_process_runtime_description_not_available">Denne funksjonen krever Android 11 eller nyere</string>
+    <string name="settings_system_patcher_completion_sound">Fullføringslyd</string>
+    <string name="settings_system_patcher_completion_sound_description">Spiller en distinkt tone for suksess eller feil når patching er fullført</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Varsler</string>
+    <string name="settings_system_notifications_description">Konfigurer bakgrunnsvarsler og fullføringslyder</string>
+    <string name="settings_system_notifications_success_sound">Suksesslyd</string>
+    <string name="settings_system_notifications_error_sound">Feil lyd</string>
+    <string name="settings_system_notifications_sound_default">Standard</string>
+    <string name="settings_system_notifications_sound_picker_title">Velg lydkilde</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Systemlyder</string>
+    <string name="settings_system_notifications_sound_pick_file">Velg fra filer</string>
+    <string name="settings_system_notifications_sound_reset">Tilbakestill til standard</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Velg en tone</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importer og eksporter</string>
     <string name="settings_system_keystore">Nøkkelarkiv</string>

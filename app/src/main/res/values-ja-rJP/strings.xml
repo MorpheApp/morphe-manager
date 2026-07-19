@@ -516,6 +516,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">アイコンを変更</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
+    <string name="settings_advanced_patcher">パッチャー</string>
     <string name="settings_advanced_updates_use_prereleases">プレリリース版のパッチを使用</string>
     <string name="settings_advanced_updates_use_prereleases_description">新しいバージョンの Morphe をいち早く利用できます。プレリリース版を使用するには、各パッチソースにて設定を有効にしてください</string>
     <string name="settings_advanced_updates_allow_metered">モバイルデータ通信で更新</string>
@@ -686,7 +687,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">電池の最適化</string>
     <string name="settings_system_battery_optimization_description">アプリを閉じているときでも、パッチャーを実行し続けます</string>
-    <string name="settings_system_performance">パフォーマンス</string>
+    <string name="settings_system_background">背景</string>
     <string name="settings_system_process_runtime">別プロセスで実行</string>
     <string name="settings_system_process_runtime_description">安定性を向上させるために、パッチ処理を別プロセスで実行します</string>
     <string name="settings_system_process_runtime_memory_limit_description">高性能なデバイスでは、制限値を高くすることでパッチ処理を高速化できます</string>
@@ -696,6 +697,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">上限 %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">タップして構成</string>
     <string name="settings_system_process_runtime_description_not_available">本機能は Android 11 以上で利用できます</string>
+    <string name="settings_system_patcher_completion_sound">完了音</string>
+    <string name="settings_system_patcher_completion_sound_description">パッチの完了時に、成功または失敗を示す固有のトーンを再生します。</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">通知</string>
+    <string name="settings_system_notifications_description">背景アラートと完了音を設定します。</string>
+    <string name="settings_system_notifications_success_sound">成功音</string>
+    <string name="settings_system_notifications_error_sound">エラー音</string>
+    <string name="settings_system_notifications_sound_default">デフォルト</string>
+    <string name="settings_system_notifications_sound_picker_title">サウンドソースを選択</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">システムサウンド</string>
+    <string name="settings_system_notifications_sound_pick_file">ファイルから選択</string>
+    <string name="settings_system_notifications_sound_reset">デフォルトにリセット</string>
+    <string name="settings_system_notifications_ringtone_picker_title">トーンを選択</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">インポートとエクスポート</string>
     <string name="settings_system_keystore">キーストア</string>

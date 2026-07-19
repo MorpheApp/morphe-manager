@@ -513,6 +513,7 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Baguhin ang icon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Mga update</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Mga pag-update bago ang paglabas</string>
     <string name="settings_advanced_updates_use_prereleases_description">Maagang pag-access sa mga bagong bersyon ng Morphe app. I-enable ang pre-release bawat source sa mga pinagmulan ng patch</string>
     <string name="settings_advanced_updates_allow_metered">Mga pag-update ng mobile data</string>
@@ -716,7 +717,7 @@ Mga Detalye: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pag-optimize sa baterya</string>
     <string name="settings_system_battery_optimization_description">Pinapanatili ang patcher na tumatakbo kapag ang app ay minimize</string>
-    <string name="settings_system_performance">Pagganap</string>
+    <string name="settings_system_background">Likuran</string>
     <string name="settings_system_process_runtime">Runtime ng proseso</string>
     <string name="settings_system_process_runtime_description">Pinapatakbo ang pag-patch sa isang hiwalay na proseso para sa mas mahusay na katatagan</string>
     <string name="settings_system_process_runtime_memory_limit_description">Ang mas mataas na limitasyon ay nagpapabilis ng pag-patch sa mga kayang device</string>
@@ -726,6 +727,19 @@ Mga Detalye: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s limitasyon sa MB</string>
     <string name="settings_system_process_runtime_disabled_description">Pindutin upang ikonpigura</string>
     <string name="settings_system_process_runtime_description_not_available">Kailangan ng feature na ito ang Android 11 o mas mataas</string>
+    <string name="settings_system_patcher_completion_sound">Tunog ng pagkumpleto</string>
+    <string name="settings_system_patcher_completion_sound_description">Tumutugtog ng natatanging tono para sa tagumpay o kabiguan kapag natapos ang pag-patch</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Mga Abiso</string>
+    <string name="settings_system_notifications_description">I-configure ang mga alerto sa likuran at mga tunog ng pagkumpleto</string>
+    <string name="settings_system_notifications_success_sound">Tunog ng tagumpay</string>
+    <string name="settings_system_notifications_error_sound">Tunog ng pagkabigo</string>
+    <string name="settings_system_notifications_sound_default">Panimula</string>
+    <string name="settings_system_notifications_sound_picker_title">Pumili ng pinagmulan ng tunog</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Mga tunog ng sistema</string>
+    <string name="settings_system_notifications_sound_pick_file">Pumili mula sa mga file</string>
+    <string name="settings_system_notifications_sound_reset">Ibalik sa default</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Pumili ng tono</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">I-import &amp; i-export</string>
     <string name="settings_system_keystore">Keystore</string>

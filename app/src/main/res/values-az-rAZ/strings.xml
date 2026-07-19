@@ -516,6 +516,7 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Simvolu dəyişdir</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Yenilənmələr</string>
+    <string name="settings_advanced_patcher">Yamaqlayıcı</string>
     <string name="settings_advanced_updates_use_prereleases">İlkin-buraxılış yeniləmələri</string>
     <string name="settings_advanced_updates_use_prereleases_description">Yeni Morphe tətbiq versiyalarına erkən keçid. Hər mənbənin ilkin buraxılışın yamaq mənbələrində aktivləşdir</string>
     <string name="settings_advanced_updates_allow_metered">Mobil data yenilənmələri</string>
@@ -717,7 +718,7 @@ Təfərrüatlar: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batareya yaxşılaşdırma</string>
     <string name="settings_system_battery_optimization_description">Tətbiq qısılanda yamaqlayıcını işlək saxlayır</string>
-    <string name="settings_system_performance">Məhsuldarlıq</string>
+    <string name="settings_system_background">Arxa plan</string>
     <string name="settings_system_process_runtime">Emal sərf olunması müddəti</string>
     <string name="settings_system_process_runtime_description">Daha yaxşı sabitlik üçün yamaqlanmanı ayrıca emalda işlədir</string>
     <string name="settings_system_process_runtime_memory_limit_description">Daha yüksək hədlər keyfiyyətli cihazlarda yamaqlanmanı sürətləndirir</string>
@@ -727,6 +728,19 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB hədd</string>
     <string name="settings_system_process_runtime_disabled_description">Qurmaq üçün kliklə</string>
     <string name="settings_system_process_runtime_description_not_available">Bu xüsusiyyət Android 11 yaxud daha böyük istəyir</string>
+    <string name="settings_system_patcher_completion_sound">Tamamlanma səsi</string>
+    <string name="settings_system_patcher_completion_sound_description">Yamaqlama bitdikdə uğur və ya uğursuzluq üçün fərqli ton səsləndirir</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Bildirişlər</string>
+    <string name="settings_system_notifications_description">Fon xəbərdarlıqlarını və tamamlama səslərini tənzimlə</string>
+    <string name="settings_system_notifications_success_sound">Uğur səsi</string>
+    <string name="settings_system_notifications_error_sound">Uğursuzluq səsi</string>
+    <string name="settings_system_notifications_sound_default">İlkin</string>
+    <string name="settings_system_notifications_sound_picker_title">Səs mənbəyini seç</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Sistem səsləri</string>
+    <string name="settings_system_notifications_sound_pick_file">Fayllardan seç</string>
+    <string name="settings_system_notifications_sound_reset">Standarta qaytar</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Ton seç</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">İdxal &amp; ixrac</string>
     <string name="settings_system_keystore">Açar ehtiyatı</string>

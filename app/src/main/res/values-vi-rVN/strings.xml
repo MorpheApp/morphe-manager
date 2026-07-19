@@ -517,6 +517,7 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_app_icon_change_dialog_confirm">Chốt</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Cập nhật</string>
+    <string name="settings_advanced_patcher">Trình vá</string>
     <string name="settings_advanced_updates_use_prereleases">Bản cập nhật trước</string>
     <string name="settings_advanced_updates_use_prereleases_description">Trải nghiệm sớm các phiên bản mới của Morphe. Bạn có thể bật bản phát hành trước cho từng nguồn trong phần nguồn vá</string>
     <string name="settings_advanced_updates_allow_metered">Cập nhật bằng dữ liệu di động</string>
@@ -720,7 +721,7 @@ Chi tiết: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Tối ưu hóa pin</string>
     <string name="settings_system_battery_optimization_description">Duy trì trình vá tiếp tục chạy kể cả khi ứng dụng bị thu nhỏ</string>
-    <string name="settings_system_performance">Hiệu suất</string>
+    <string name="settings_system_background">Màu nền</string>
     <string name="settings_system_process_runtime">Tiến trình riêng</string>
     <string name="settings_system_process_runtime_description">Chạy quá trình vá trong tiến trình riêng biệt để cải thiện độ ổn định</string>
     <string name="settings_system_process_runtime_memory_limit_description">Tăng giới hạn có thể giúp vá nhanh hơn nếu thiết bị đủ mạnh</string>
@@ -730,6 +731,19 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">Giới hạn %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Bấm để cấu hình</string>
     <string name="settings_system_process_runtime_description_not_available">Tính năng này yêu cầu Android 11 trở lên</string>
+    <string name="settings_system_patcher_completion_sound">Âm thanh hoàn thành</string>
+    <string name="settings_system_patcher_completion_sound_description">Phát ra một âm điệu riêng biệt để báo hiệu thành công hoặc thất bại khi vá xong</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Thông báo</string>
+    <string name="settings_system_notifications_description">Cấu hình cảnh báo nền và âm thanh hoàn thành</string>
+    <string name="settings_system_notifications_success_sound">Âm thanh thành công</string>
+    <string name="settings_system_notifications_error_sound">Âm báo lỗi</string>
+    <string name="settings_system_notifications_sound_default">Mặc định</string>
+    <string name="settings_system_notifications_sound_picker_title">Chọn nguồn âm thanh</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Âm thanh hệ thống</string>
+    <string name="settings_system_notifications_sound_pick_file">Chọn từ tệp</string>
+    <string name="settings_system_notifications_sound_reset">Đặt lại về mặc định</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Chọn nhạc chuông</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Xuất &amp; Nhập</string>
     <string name="settings_system_keystore">Kho khoá</string>

@@ -514,6 +514,7 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Vaihda kuvake</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Päivitykset</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Ennakkovalmistelujen päivitykset</string>
     <string name="settings_advanced_updates_use_prereleases_description">Varhainen pääsy uusiin Morphe-sovellusversioihin. Ota ennakkovalmistelut käyttöön per lähde paikkauslähteissä</string>
     <string name="settings_advanced_updates_allow_metered">Mobiilidatan päivitykset</string>
@@ -717,7 +718,7 @@ Yksityiskohdat: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Akun käytön optimointi</string>
     <string name="settings_system_battery_optimization_description">Pitää paikkaajan käynnissä, kun sovellus on pienennetty</string>
-    <string name="settings_system_performance">Suorituskyky</string>
+    <string name="settings_system_background">Tausta</string>
     <string name="settings_system_process_runtime">Prosessin suoritus</string>
     <string name="settings_system_process_runtime_description">Suorita muokkaaminen erillisessä prosessissa paremman vakauden vuoksi</string>
     <string name="settings_system_process_runtime_memory_limit_description">Korkeammat rajat nopeuttavat muokkaamista tehokkailla laitteilla</string>
@@ -727,6 +728,19 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s Mt:n rajoitus</string>
     <string name="settings_system_process_runtime_disabled_description">Napauta määrittääksesi</string>
     <string name="settings_system_process_runtime_description_not_available">Tämä ominaisuus vaatii Android-version 11 tai uudemman </string>
+    <string name="settings_system_patcher_completion_sound">Valmistumisen ääni</string>
+    <string name="settings_system_patcher_completion_sound_description">Toistaa erillisen äänen onnistumisesta tai epäonnistumisesta paikkauksen valmistuttua</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Ilmoitukset</string>
+    <string name="settings_system_notifications_description">Määritä taustahälytykset ja valmistumisäänet</string>
+    <string name="settings_system_notifications_success_sound">Onnistumisen ääni</string>
+    <string name="settings_system_notifications_error_sound">Virhetunnus</string>
+    <string name="settings_system_notifications_sound_default">Oletus</string>
+    <string name="settings_system_notifications_sound_picker_title">Valitse äänenlähde</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Järjestelmän äänet</string>
+    <string name="settings_system_notifications_sound_pick_file">Valitse tiedostoista</string>
+    <string name="settings_system_notifications_sound_reset">Palauta oletusasetukset</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Valitse sävy</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Tuo ja vie</string>
     <string name="settings_system_keystore">Keystore</string>

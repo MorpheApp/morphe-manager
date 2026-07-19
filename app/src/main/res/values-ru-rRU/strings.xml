@@ -516,6 +516,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Изменить значок</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Обновления</string>
+    <string name="settings_advanced_patcher">Патчер</string>
     <string name="settings_advanced_updates_use_prereleases">Предварительные релизы</string>
     <string name="settings_advanced_updates_use_prereleases_description">Ранний доступ к новым версиям приложения Morphe. Включите предрелизы для каждого источника в источниках патчей</string>
     <string name="settings_advanced_updates_allow_metered">Обновления через мобильные данные</string>
@@ -718,7 +719,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизация батареи</string>
     <string name="settings_system_battery_optimization_description">Поддерживает работу патчера при минимизации приложения</string>
-    <string name="settings_system_performance">Производительность</string>
+    <string name="settings_system_background">Фон</string>
     <string name="settings_system_process_runtime">Время выполнения процесса</string>
     <string name="settings_system_process_runtime_description">Выполнять патчинг в отдельном процессе для лучшей стабильности</string>
     <string name="settings_system_process_runtime_memory_limit_description">Более высокие лимиты ускоряют патчинг на совместимых устройствах</string>
@@ -728,6 +729,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">%s MB лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Нажмите, чтобы настроить</string>
     <string name="settings_system_process_runtime_description_not_available">Эта функция требует Android 11 или выше</string>
+    <string name="settings_system_patcher_completion_sound">Звук завершения</string>
+    <string name="settings_system_patcher_completion_sound_description">Воспроизводит отличный тон при успешном или неудачном завершении патчинга</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Уведомления</string>
+    <string name="settings_system_notifications_description">Настройка фоновых оповещений и звуков завершения</string>
+    <string name="settings_system_notifications_success_sound">Звук успеха</string>
+    <string name="settings_system_notifications_error_sound">Звук сбоя</string>
+    <string name="settings_system_notifications_sound_default">По умолчанию</string>
+    <string name="settings_system_notifications_sound_picker_title">Выберите источник звука</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Системные звуки</string>
+    <string name="settings_system_notifications_sound_pick_file">Выбрать из файлов</string>
+    <string name="settings_system_notifications_sound_reset">Сбросить по умолчанию</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Выберите мелодию</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Импорт &amp; экспорт</string>
     <string name="settings_system_keystore">Кейстор</string>

@@ -517,6 +517,7 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Icon ändern</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Updates</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Updates für Vorabversionen</string>
     <string name="settings_advanced_updates_use_prereleases_description">Frühzeitiger Zugriff auf neue Morphe-App-Versionen. Aktivieren Sie Vorabversionen pro Quelle in den Patchquellen</string>
     <string name="settings_advanced_updates_allow_metered">Mobile Daten-Updates</string>
@@ -720,7 +721,7 @@ Details: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterieoptimierung</string>
     <string name="settings_system_battery_optimization_description">Behält den Patcher im Betrieb, wenn die App minimiert wird</string>
-    <string name="settings_system_performance">Leistung</string>
+    <string name="settings_system_background">Hintergrund</string>
     <string name="settings_system_process_runtime">Prozesslaufzeit</string>
     <string name="settings_system_process_runtime_description">Führt das Patchen in einem separaten Prozess für bessere Stabilität aus</string>
     <string name="settings_system_process_runtime_memory_limit_description">Höhere Limits beschleunigen das Patchen auf kompatiblen Geräten</string>
@@ -730,6 +731,19 @@ Details: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB Begrenzung</string>
     <string name="settings_system_process_runtime_disabled_description">Klicken Sie, um zu konfigurieren</string>
     <string name="settings_system_process_runtime_description_not_available">Diese Funktion erfordert Android 11 oder höher</string>
+    <string name="settings_system_patcher_completion_sound">Erfolgsmeldung</string>
+    <string name="settings_system_patcher_completion_sound_description">Spielt einen bestimmten Ton bei Erfolg oder Misserfolg ab, wenn das Patchen abgeschlossen ist</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Benachrichtigungen</string>
+    <string name="settings_system_notifications_description">Konfigurieren Sie Hintergrundwarnungen und Erfolgsmeldungen</string>
+    <string name="settings_system_notifications_success_sound">Erfolgs-Ton</string>
+    <string name="settings_system_notifications_error_sound">Fehlerton</string>
+    <string name="settings_system_notifications_sound_default">Standard</string>
+    <string name="settings_system_notifications_sound_picker_title">Tonquelle auswählen</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Systemtöne</string>
+    <string name="settings_system_notifications_sound_pick_file">Datei auswählen</string>
+    <string name="settings_system_notifications_sound_reset">Auf Standard zurücksetzen</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Ton auswählen</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import &amp; Export</string>
     <string name="settings_system_keystore">Keystore</string>

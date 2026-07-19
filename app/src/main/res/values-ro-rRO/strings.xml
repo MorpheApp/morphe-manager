@@ -516,6 +516,7 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Schimbă pictograma</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Actualizări</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Actualizări pre-lansare</string>
     <string name="settings_advanced_updates_use_prereleases_description">Acces anticipat la noile versiuni ale aplicației Morphe. Activează pre-lansarea per sursă în sursele de patch-uri</string>
     <string name="settings_advanced_updates_allow_metered">Actualizări de date mobile</string>
@@ -719,7 +720,7 @@ Detalii: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizarea bateriei</string>
     <string name="settings_system_battery_optimization_description">Menține patcherul în funcțiune când aplicația este minimizată</string>
-    <string name="settings_system_performance">Performanță</string>
+    <string name="settings_system_background">Fundal</string>
     <string name="settings_system_process_runtime">Runtime proces</string>
     <string name="settings_system_process_runtime_description">Rulează patch-uirea într-un proces separat pentru o stabilitate mai bună</string>
     <string name="settings_system_process_runtime_memory_limit_description">Limite mai mari accelerează patch-uirea pe dispozitivele capabile</string>
@@ -729,6 +730,19 @@ Detalii: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">Limită %s MO</string>
     <string name="settings_system_process_runtime_disabled_description">Clic pentru a configura</string>
     <string name="settings_system_process_runtime_description_not_available">Această funcție necesită Android 11 sau o versiune mai recentă</string>
+    <string name="settings_system_patcher_completion_sound">Sunet de finalizare</string>
+    <string name="settings_system_patcher_completion_sound_description">Redă un ton distinct pentru succes sau eșec la finalizarea aplicării patch-ului</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Notificări</string>
+    <string name="settings_system_notifications_description">Configurează alertele de fundal și sunetele de finalizare</string>
+    <string name="settings_system_notifications_success_sound">Sunet de succes</string>
+    <string name="settings_system_notifications_error_sound">Sunet de eșec</string>
+    <string name="settings_system_notifications_sound_default">Implicit</string>
+    <string name="settings_system_notifications_sound_picker_title">Alegeți sursa sunetului</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Sunete sistem</string>
+    <string name="settings_system_notifications_sound_pick_file">Alegeți din fișiere</string>
+    <string name="settings_system_notifications_sound_reset">Resetați la implicit</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Alegeți un ton</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importare și exportare</string>
     <string name="settings_system_keystore">Magazin de chei</string>

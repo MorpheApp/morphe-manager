@@ -517,6 +517,7 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Spremeni ikono</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Posodobitve</string>
+    <string name="settings_advanced_patcher">Popravek</string>
     <string name="settings_advanced_updates_use_prereleases">Predčasne posodobitve</string>
     <string name="settings_advanced_updates_use_prereleases_description">Zgodnji dostop do novih različic aplikacije Morphe. Omogočite predčasne posodobitve za vsak vir posebej v virih popravkov</string>
     <string name="settings_advanced_updates_allow_metered">Posodobitve preko mobilnih podatkov</string>
@@ -720,7 +721,7 @@ Podrobnosti: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizacija baterije</string>
     <string name="settings_system_battery_optimization_description">Ohranja popravek v teku, ko je aplikacija pomanjšana</string>
-    <string name="settings_system_performance">Učinkovitost</string>
+    <string name="settings_system_background">Ozadje</string>
     <string name="settings_system_process_runtime">Čas izvajanja procesa</string>
     <string name="settings_system_process_runtime_description">Izvaja popravljanje v ločenem procesu za boljšo stabilnost</string>
     <string name="settings_system_process_runtime_memory_limit_description">Višje omejitve pospešijo popravljanje na zmogljivih napravah</string>
@@ -730,6 +731,19 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB omejitev</string>
     <string name="settings_system_process_runtime_disabled_description">Kliknite za konfiguracijo</string>
     <string name="settings_system_process_runtime_description_not_available">Ta funkcija zahteva Android 11 ali višji</string>
+    <string name="settings_system_patcher_completion_sound">Zvočni signal ob zaključku</string>
+    <string name="settings_system_patcher_completion_sound_description">Predvaja ločen ton za uspeh ali neuspeh ob koncu popravka</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Obvestila</string>
+    <string name="settings_system_notifications_description">Konfiguriranje opozoril v ozadju in zvočnih signalov ob zaključku</string>
+    <string name="settings_system_notifications_success_sound">Zvočni signal ob uspehu</string>
+    <string name="settings_system_notifications_error_sound">Zvok napake</string>
+    <string name="settings_system_notifications_sound_default">Privzeto</string>
+    <string name="settings_system_notifications_sound_picker_title">Izbira vira zvoka</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Sistemski zvoki</string>
+    <string name="settings_system_notifications_sound_pick_file">Izbira iz datotek</string>
+    <string name="settings_system_notifications_sound_reset">Ponastavi na privzeto</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Izberi melodijo</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Uvozi &amp; izvozi</string>
     <string name="settings_system_keystore">Shramba ključev</string>

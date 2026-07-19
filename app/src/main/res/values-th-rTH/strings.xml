@@ -517,6 +517,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">เปลี่ยนไอสัญ</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">อัปเดต</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">อัปเดตแบบพรีรีลีส</string>
     <string name="settings_advanced_updates_use_prereleases_description">เข้าถึงแอป Morphe เวอร์ชันใหม่ก่อนใคร เปิดใช้งานพรีรีลีสตามแหล่งที่มาในแหล่งแพตช์</string>
     <string name="settings_advanced_updates_allow_metered">อัปเดตข้อมูลมือถือ</string>
@@ -720,7 +721,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">การเพิ่มประสิทธิภาพแบตเตอรี่</string>
     <string name="settings_system_battery_optimization_description">ทำให้ตัวแพตช์ทำงานต่อไปเมื่อแอปพลิเคชันถูกลดขนาด</string>
-    <string name="settings_system_performance">การตั้งค่า</string>
+    <string name="settings_system_background">พื้นหลัง</string>
     <string name="settings_system_process_runtime">การทำงานของโปรเซส</string>
     <string name="settings_system_process_runtime_description">เรียกใช้การแพตช์ในกระบวนการแยกต่างหากเพื่อเพิ่มความเสถียร</string>
     <string name="settings_system_process_runtime_memory_limit_description">ขีดจำกัดที่สูงขึ้นช่วยเพิ่มความเร็วในการแพตช์บนอุปกรณ์ที่รองรับ</string>
@@ -730,6 +731,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">%s MB จำกัด</string>
     <string name="settings_system_process_runtime_disabled_description">คลิกเพื่อตั้งค่า</string>
     <string name="settings_system_process_runtime_description_not_available">คุณสมบัติขั้นตอนนี้ต้องการ Android 11 หรือเวอร์ชันที่สูงกว่า</string>
+    <string name="settings_system_patcher_completion_sound">เสียงเมื่อเสร็จสิ้น</string>
+    <string name="settings_system_patcher_completion_sound_description">เล่นเสียงที่แตกต่างเมื่อการแก้ไขเสร็จสมบูรณ์ ไม่ว่าจะเป็นความสำเร็จหรือความล้มเหลว</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">การแจ้งเตือน</string>
+    <string name="settings_system_notifications_description">กำหนดการแจ้งเตือนพื้นหลังและเสียงเมื่อเสร็จสิ้น</string>
+    <string name="settings_system_notifications_success_sound">เสียงเมื่อสำเร็จ</string>
+    <string name="settings_system_notifications_error_sound">เสียงแจ้งเตือนความล้มเหลว</string>
+    <string name="settings_system_notifications_sound_default">ค่าเริ่มต้น</string>
+    <string name="settings_system_notifications_sound_picker_title">เลือกแหล่งที่มาของเสียง</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">เสียงระบบ</string>
+    <string name="settings_system_notifications_sound_pick_file">เลือกจากไฟล์</string>
+    <string name="settings_system_notifications_sound_reset">รีเซ็ตเป็นค่าเริ่มต้น</string>
+    <string name="settings_system_notifications_ringtone_picker_title">เลือกเสียงเรียกเข้า</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">นำเข้า &amp; ส่งออก</string>
     <string name="settings_system_keystore">คีย์สโตร์</string>

@@ -518,6 +518,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">שנה איקון</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">עדכונים</string>
+    <string name="settings_advanced_patcher">מטלאה</string>
     <string name="settings_advanced_updates_use_prereleases">עדכונים לפני הפצה</string>
     <string name="settings_advanced_updates_use_prereleases_description">גישה מוקדמת לגרסאות חדשות של אפליקציית Morphe. הפעלת גרסאות מוקדמות לכל מקור במקורות התיקון</string>
     <string name="settings_advanced_updates_allow_metered">עדכוני נתונים ניידים</string>
@@ -705,7 +706,7 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">מיטוב הסוללה</string>
     <string name="settings_system_battery_optimization_description">שומר את התיקון פעיל כאשר האפליקציה ממוזערת</string>
-    <string name="settings_system_performance">מוצא איבוד... </string>
+    <string name="settings_system_background">רקע</string>
     <string name="settings_system_process_runtime">מוצא איבוד... </string>
     <string name="settings_system_process_runtime_description">מריץ תיקון בתהליך נפרד ליציבות טובה יותר</string>
     <string name="settings_system_process_runtime_memory_limit_description">מגבלות גבוהות יותר מאיצות את התיקון במכשירים מתאימים</string>
@@ -715,6 +716,19 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_process_runtime_enabled_description">%s מגביל MB</string>
     <string name="settings_system_process_runtime_disabled_description">מוצא איבוד... </string>
     <string name="settings_system_process_runtime_description_not_available">תכונה זו דורשת אנדרואיד 11 ומעלה</string>
+    <string name="settings_system_patcher_completion_sound">צליל השלמה</string>
+    <string name="settings_system_patcher_completion_sound_description">מנגן צליל ייחודי להצלחה או לכישלון כאשר התיקון מסתיים</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">עדכונים</string>
+    <string name="settings_system_notifications_description">הגדרת התראות רקע וצלילי השלמה</string>
+    <string name="settings_system_notifications_success_sound">צליל הצלחה</string>
+    <string name="settings_system_notifications_error_sound">צליל כשל</string>
+    <string name="settings_system_notifications_sound_default">ברירת מחדל</string>
+    <string name="settings_system_notifications_sound_picker_title">בחר מקור צליל</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">צלילי מערכת</string>
+    <string name="settings_system_notifications_sound_pick_file">בחר מקובץ</string>
+    <string name="settings_system_notifications_sound_reset">אפס לברירת מחדל</string>
+    <string name="settings_system_notifications_ringtone_picker_title">בחר צליל התראה</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">ייבוא/ייצא הגדרות</string>
     <string name="settings_system_keystore">מחסן מפתחות</string>

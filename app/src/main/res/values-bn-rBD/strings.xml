@@ -517,6 +517,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">আইকন পরিবর্তন করুন</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">আপডেটগুলি</string>
+    <string name="settings_advanced_patcher">প্যাচার</string>
     <string name="settings_advanced_updates_use_prereleases">প্রি-রিলিজ আপডেট।</string>
     <string name="settings_advanced_updates_use_prereleases_description">নতুন Morphe অ্যাপ সংস্করণে আর্লি অ্যাক্সেস। প্যাচ সোর্সগুলিতে প্রি-রিলিজ সক্ষম করুন।</string>
     <string name="settings_advanced_updates_allow_metered">মোবাইল ডেটা আপডেট।</string>
@@ -709,7 +710,7 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">ব্যাটারি অপটিমাইজেশন</string>
     <string name="settings_system_battery_optimization_description">অ্যাপটি মিনিমাইজ করা হলে প্যাচার চালু রাখে।</string>
-    <string name="settings_system_performance">প্রোফাইল</string>
+    <string name="settings_system_background">ব্যাকগ্রাউন্ড</string>
     <string name="settings_system_process_runtime">প্রক্রিয় রান্টাইম</string>
     <string name="settings_system_process_runtime_description">আরও ভালো স্থিতিশীলতার জন্য একটি পৃথক প্রক্রিয়ায় প্যাচিং চালায়।</string>
     <string name="settings_system_process_runtime_memory_limit_description">উচ্চতর সীমা সক্ষম ডিভাইসে প্যাচিংকে দ্রুত করে।</string>
@@ -719,6 +720,19 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_process_runtime_enabled_description">%s এমবি সীমা</string>
     <string name="settings_system_process_runtime_disabled_description">ক্লিক করুন</string>
     <string name="settings_system_process_runtime_description_not_available">এই বৈশিষ্ট্যটি অ্যান্ড্রয়েড 11 বা তার চেয়ে বেশি সংস্করণের প্রয়োজন।</string>
+    <string name="settings_system_patcher_completion_sound">সম্পূর্ণ হওয়ার শব্দ</string>
+    <string name="settings_system_patcher_completion_sound_description">প্যাচিং শেষ হলে সাফল্য বা ব্যর্থতার জন্য একটি স্বতন্ত্র সুর বাজায়</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">নোটিস্য়াসেগ</string>
+    <string name="settings_system_notifications_description">ব্যাকগ্রাউন্ড সতর্কতা এবং সম্পূর্ণ হওয়ার শব্দ কনফিগার করুন</string>
+    <string name="settings_system_notifications_success_sound">সাফল্যের শব্দ</string>
+    <string name="settings_system_notifications_error_sound">ব্যর্থতার শব্দ</string>
+    <string name="settings_system_notifications_sound_default">ডিফল্ট</string>
+    <string name="settings_system_notifications_sound_picker_title">শব্দ উৎস নির্বাচন করুন</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">সিস্টেম শব্দ</string>
+    <string name="settings_system_notifications_sound_pick_file">ফাইল থেকে নির্বাচন করুন</string>
+    <string name="settings_system_notifications_sound_reset">ডিফল্টে রিসেট করুন</string>
+    <string name="settings_system_notifications_ringtone_picker_title">একটি সুর নির্বাচন করুন</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">ইমপোর্ট &amp; এক্সপোর্ট </string>
     <string name="settings_system_keystore">কীস্টোর</string>

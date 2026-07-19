@@ -517,6 +517,7 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Zmień ikonę</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Aktualizacje</string>
+    <string name="settings_advanced_patcher">Modyfikator</string>
     <string name="settings_advanced_updates_use_prereleases">Przedpremierowe aktualizacje</string>
     <string name="settings_advanced_updates_use_prereleases_description">Wczesny dostęp do nowych wersji aplikacji Morphe. Włącz wersje przedpremierowe dla konkretnych źródeł w menu źródeł modyfikacji</string>
     <string name="settings_advanced_updates_allow_metered">Aktualizacje przez dane mobilne</string>
@@ -720,7 +721,7 @@ Wymagane są następujące wymiary obrazów:
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optymalizacja baterii</string>
     <string name="settings_system_battery_optimization_description">Utrzymuje działanie modyfikatora, gdy aplikacja jest zminimalizowana</string>
-    <string name="settings_system_performance">Wydajność</string>
+    <string name="settings_system_background">Tło</string>
     <string name="settings_system_process_runtime">Osobny proces</string>
     <string name="settings_system_process_runtime_description">Uruchamia modyfikowanie w osobnym procesie dla lepszej stabilności</string>
     <string name="settings_system_process_runtime_memory_limit_description">Wyższe limity przyspieszają modyfikowanie na wydajnych urządzeniach</string>
@@ -730,6 +731,19 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_process_runtime_enabled_description">Limit: %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Dotknij, aby skonfigurować</string>
     <string name="settings_system_process_runtime_description_not_available">Ta funkcja wymaga systemu Android 11 lub nowszego</string>
+    <string name="settings_system_patcher_completion_sound">Dźwięk powiadomienia o zakończeniu</string>
+    <string name="settings_system_patcher_completion_sound_description">Odtwarza charakterystyczny dźwięk sygnalizujący powodzenie lub niepowodzenie po zakończeniu procesu modyfikacji</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Powiadomienia</string>
+    <string name="settings_system_notifications_description">Konfiguracja powiadomień tła i dźwięków o zakończeniu</string>
+    <string name="settings_system_notifications_success_sound">Dźwięk powiadomienia o powodzeniu</string>
+    <string name="settings_system_notifications_error_sound">Dźwięk niepowodzenia</string>
+    <string name="settings_system_notifications_sound_default">Domyślne</string>
+    <string name="settings_system_notifications_sound_picker_title">Wybierz źródło dźwięku</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Dźwięki systemowe</string>
+    <string name="settings_system_notifications_sound_pick_file">Wybierz z plików</string>
+    <string name="settings_system_notifications_sound_reset">Zresetuj do domyślnych</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Wybierz ton</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import i eksport</string>
     <string name="settings_system_keystore">Magazyn kluczy</string>

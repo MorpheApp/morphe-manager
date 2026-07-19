@@ -518,6 +518,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">تغيير الأيقونة</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">التحديثات</string>
+    <string name="settings_advanced_patcher">أداة التعديل</string>
     <string name="settings_advanced_updates_use_prereleases">إصدارات ما قبل الإطلاق</string>
     <string name="settings_advanced_updates_use_prereleases_description">الوصول المبكر إلى إصدارات Morphe الجديدة. فعّل إصدارات ما قبل الإطلاق لكل مصدر في مصادر التعديل</string>
     <string name="settings_advanced_updates_allow_metered">تحديثات بيانات الجوّال</string>
@@ -723,7 +724,7 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">تحسينات البطارية</string>
     <string name="settings_system_battery_optimization_description">يحافظ على تشغيل أداة التعديل عند تصغير التطبيق</string>
-    <string name="settings_system_performance">الأداء</string>
+    <string name="settings_system_background">الخلفية</string>
     <string name="settings_system_process_runtime">مدة التشغيل</string>
     <string name="settings_system_process_runtime_description">يُشغّل عملية التعديل في عملية منفصلة لتحسين الاستقرار</string>
     <string name="settings_system_process_runtime_memory_limit_description">رفع الحدود يزيد سرعة التعديل على الأجهزة القادرة</string>
@@ -733,6 +734,19 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_process_runtime_enabled_description">حد %s ميغابايت</string>
     <string name="settings_system_process_runtime_disabled_description">انقر هنا للتهيئة</string>
     <string name="settings_system_process_runtime_description_not_available">تتطلب هذه الميزة Android 11 أو أحدث</string>
+    <string name="settings_system_patcher_completion_sound">صوت الإكمال</string>
+    <string name="settings_system_patcher_completion_sound_description">تشغيل نغمة مميزة للنجاح أو الفشل عند انتهاء التعديل</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">الإشعارات</string>
+    <string name="settings_system_notifications_description">تكوين تنبيهات الخلفية وأصوات الإكمال</string>
+    <string name="settings_system_notifications_success_sound">صوت النجاح</string>
+    <string name="settings_system_notifications_error_sound">صوت الفشل</string>
+    <string name="settings_system_notifications_sound_default">الافتراضي</string>
+    <string name="settings_system_notifications_sound_picker_title">اختيار مصدر الصوت</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">أصوات النظام</string>
+    <string name="settings_system_notifications_sound_pick_file">اختيار من الملفات</string>
+    <string name="settings_system_notifications_sound_reset">إعادة الضبط إلى الافتراضي</string>
+    <string name="settings_system_notifications_ringtone_picker_title">اختر نغمة</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">استيراد &amp; تصدير</string>
     <string name="settings_system_keystore">مخزن المفاتيح</string>

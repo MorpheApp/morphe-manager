@@ -517,6 +517,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Променити икону</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Ажурирања</string>
+    <string name="settings_advanced_patcher">Пачер</string>
     <string name="settings_advanced_updates_use_prereleases">Претходне верзије</string>
     <string name="settings_advanced_updates_use_prereleases_description">Рани приступ новим верзијама апликације Morphe. Омогућите претходне верзије по извору у изворима закрпе</string>
     <string name="settings_advanced_updates_allow_metered">Ажурирања преко мобилних података</string>
@@ -720,7 +721,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизација батерије</string>
     <string name="settings_system_battery_optimization_description">Држи закрпљивач активним када је апликација минимизирана</string>
-    <string name="settings_system_performance">Начин</string>
+    <string name="settings_system_background">Позадина</string>
     <string name="settings_system_process_runtime">Трајање времена</string>
     <string name="settings_system_process_runtime_description">Покреће закрпљивање у засебном процесу за већу стабилност</string>
     <string name="settings_system_process_runtime_memory_limit_description">Већи лимити убрзавају закрпљивање на уређајима који то подржавају</string>
@@ -730,6 +731,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">%s МБ лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Упозорење: ниско ограничење меморије може довести до греша при патчирању веће апликације</string>
     <string name="settings_system_process_runtime_description_not_available">Ова карактеристика захтева Android 11 или новији</string>
+    <string name="settings_system_patcher_completion_sound">Звук завршетка</string>
+    <string name="settings_system_patcher_completion_sound_description">Пушта посебан тон за успех или неуспех када се заврши закачивање</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Обавештења</string>
+    <string name="settings_system_notifications_description">Конфигуришите обавештења у позадини и звукове завршетка</string>
+    <string name="settings_system_notifications_success_sound">Звук успеха</string>
+    <string name="settings_system_notifications_error_sound">Звук неуспеха</string>
+    <string name="settings_system_notifications_sound_default">Подразумеван</string>
+    <string name="settings_system_notifications_sound_picker_title">Изаберите извор звука</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Системски звуци</string>
+    <string name="settings_system_notifications_sound_pick_file">Изаберите из датотека</string>
+    <string name="settings_system_notifications_sound_reset">Вратите на подразумеване</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Изаберите тон</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Увоз и извоз</string>
     <string name="settings_system_keystore">Кејстор</string>

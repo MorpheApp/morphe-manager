@@ -516,6 +516,7 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Tasdiqlash</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">O\'chirish</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Yangilashdan oldin versiyalar</string>
     <string name="settings_advanced_updates_use_prereleases_description">Morphe ilovasining yangilanishlariga imkoniyat beradi. Yangilashdan oldin manbalar bo‘yicha sahifalarga tashrif buyuring</string>
     <string name="settings_advanced_updates_allow_metered">Mobil ma\'lumotlardan yangilash</string>
@@ -718,7 +719,7 @@ Ma’lumotlar: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batareyani optimallashtirish</string>
     <string name="settings_system_battery_optimization_description">Patchlashi tugagandan keyin patcherni ishlayotgan holatda ushlab turish</string>
-    <string name="settings_system_performance">Ishlash</string>
+    <string name="settings_system_background">Fondo</string>
     <string name="settings_system_process_runtime">Jarayon ishlayotgan vaqti</string>
     <string name="settings_system_process_runtime_description">Patchlash jarayonini barqarorligi oshirish uchun alohida jarayonda ishlatish</string>
     <string name="settings_system_process_runtime_memory_limit_description">Yuqori limitlar imkoniyatli moslamalarda patchlash tezligini oshiradi</string>
@@ -728,6 +729,19 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Konfiguratsiya qilish uchun bosing</string>
     <string name="settings_system_process_runtime_description_not_available">Bu funksiya Android 11 yoki undan yuqori versiyasini talab qiladi</string>
+    <string name="settings_system_patcher_completion_sound">Yakunlanish tovushi</string>
+    <string name="settings_system_patcher_completion_sound_description">Qo\'shish tugagach muvaffaqiyat yoki muvaffaqiyatsizlik uchun alohida ohang ijro etiladi</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Bildirishnomalar</string>
+    <string name="settings_system_notifications_description">Fondo alertlari va yakunlanish tovushlarini sozlang</string>
+    <string name="settings_system_notifications_success_sound">Muvaffaqiyat tovushi</string>
+    <string name="settings_system_notifications_error_sound">Xatolik ovozi</string>
+    <string name="settings_system_notifications_sound_default">Standart</string>
+    <string name="settings_system_notifications_sound_picker_title">Ovoz manbai tanlang</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Tizim ovozlari</string>
+    <string name="settings_system_notifications_sound_pick_file">Fayllardan tanlang</string>
+    <string name="settings_system_notifications_sound_reset">Standartga qaytarish</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Ohang tanlang</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import va eksport</string>
     <string name="settings_system_keystore">Keystore</string>

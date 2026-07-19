@@ -517,6 +517,7 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="settings_appearance_app_icon_change_dialog_confirm">Cambiar icono</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Actualizaciones</string>
+    <string name="settings_advanced_patcher">Parcheador</string>
     <string name="settings_advanced_updates_use_prereleases">Actualizaciones preliminares</string>
     <string name="settings_advanced_updates_use_prereleases_description">Acceso anticipado a las nuevas versiones de la aplicación Morphe. Activa las versiones preliminares por fuente en las fuentes de parches.</string>
     <string name="settings_advanced_updates_allow_metered">Actualizaciones con datos móviles</string>
@@ -720,7 +721,7 @@ Detalles: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimización de batería</string>
     <string name="settings_system_battery_optimization_description">Mantiene el parcheador en funcionamiento cuando la aplicación está minimizada</string>
-    <string name="settings_system_performance">Rendimiento</string>
+    <string name="settings_system_background">Segundo plano</string>
     <string name="settings_system_process_runtime">Tiempo de ejecución del proceso</string>
     <string name="settings_system_process_runtime_description">Ejecuta el parcheo en un proceso separado para mejorar la estabilidad</string>
     <string name="settings_system_process_runtime_memory_limit_description">Los límites superiores aceleran el parcheo en los dispositivos compatibles</string>
@@ -730,6 +731,19 @@ Detalles: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">Límite de %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Pulsa para configurar</string>
     <string name="settings_system_process_runtime_description_not_available">Esta función requiere Android 11 o superior</string>
+    <string name="settings_system_patcher_completion_sound">Sonido de finalización</string>
+    <string name="settings_system_patcher_completion_sound_description">Reproduce un tono distintivo para indicar éxito o fracaso cuando finaliza el parcheo</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Notificaciones</string>
+    <string name="settings_system_notifications_description">Configure las alertas en segundo plano y los sonidos de finalización</string>
+    <string name="settings_system_notifications_success_sound">Sonido de éxito</string>
+    <string name="settings_system_notifications_error_sound">Sonido de fallo</string>
+    <string name="settings_system_notifications_sound_default">Predeterminado</string>
+    <string name="settings_system_notifications_sound_picker_title">Elegir fuente de sonido</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Sonidos del sistema</string>
+    <string name="settings_system_notifications_sound_pick_file">Elegir de archivos</string>
+    <string name="settings_system_notifications_sound_reset">Restablecer a predeterminado</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Elegir un tono</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importar y exportar</string>
     <string name="settings_system_keystore">Almacén de claves</string>

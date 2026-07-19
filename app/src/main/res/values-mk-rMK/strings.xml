@@ -609,7 +609,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизација на батеријата</string>
     <string name="settings_system_battery_optimization_description">Слободно место на дискот</string>
-    <string name="settings_system_performance">Перформанси</string>
     <string name="settings_system_process_runtime">Време на извршување на процесот</string>
     <string name="settings_system_process_runtime_description">Преземањето може да биде затворено</string>
     <string name="settings_system_process_runtime_memory_limit_description">Облога за инсталирање</string>
@@ -619,6 +618,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">Лимит од %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Кликнете за да конфигурирате</string>
     <string name="settings_system_process_runtime_description_not_available">Оваа функција бара Android 11 или подоцна</string>
+    <!-- Settings - System Tab - Notifications Section -->
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Увоз и извоз</string>
     <string name="settings_system_keystore">Keystore</string>

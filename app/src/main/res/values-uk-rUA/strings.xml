@@ -518,6 +518,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Змінити іконку</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Оновлення</string>
+    <string name="settings_advanced_patcher">Патчер</string>
     <string name="settings_advanced_updates_use_prereleases">Передрелізні оновлення</string>
     <string name="settings_advanced_updates_use_prereleases_description">Ранній доступ до нових версій застосунку Morphe. Увімкніть попередні релізи окремо для кожного джерела в джерелах патчів</string>
     <string name="settings_advanced_updates_allow_metered">Оновлення через мобільну мережу</string>
@@ -721,7 +722,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимізація батареї</string>
     <string name="settings_system_battery_optimization_description">Утримує патчер активним під час згортання застосунку</string>
-    <string name="settings_system_performance">Продуктивність</string>
+    <string name="settings_system_background">Робота у фоні</string>
     <string name="settings_system_process_runtime">Процес патчингу</string>
     <string name="settings_system_process_runtime_description">Запускає патчинг в окремому процесі для кращої стабільності</string>
     <string name="settings_system_process_runtime_memory_limit_description">Підвищені ліміти прискорюють патчинг на продуктивних пристроях</string>
@@ -731,6 +732,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">%s МБ ліміт</string>
     <string name="settings_system_process_runtime_disabled_description">Натисніть для налаштування</string>
     <string name="settings_system_process_runtime_description_not_available">Для цієї функції потрібна версія Android 11 або новіша</string>
+    <string name="settings_system_patcher_completion_sound">Звук завершення</string>
+    <string name="settings_system_patcher_completion_sound_description">Відтворює окремий сигнал для успіху або невдачі після завершення патчингу</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Сповіщення</string>
+    <string name="settings_system_notifications_description">Налаштуйте фонові сповіщення та звуки завершення</string>
+    <string name="settings_system_notifications_success_sound">Звук успіху</string>
+    <string name="settings_system_notifications_error_sound">Звук завершення</string>
+    <string name="settings_system_notifications_sound_default">Стандартна</string>
+    <string name="settings_system_notifications_sound_picker_title">Оберіть джерело звуку</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Системні звуки</string>
+    <string name="settings_system_notifications_sound_pick_file">Вибрати з файлів</string>
+    <string name="settings_system_notifications_sound_reset">Скинути до стандартного</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Вибрати мелодію</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Імпорт та eкспорт</string>
     <string name="settings_system_keystore">Сховище ключів</string>

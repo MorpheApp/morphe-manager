@@ -516,6 +516,7 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Simgeyi değiştir</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Güncellemeler</string>
+    <string name="settings_advanced_patcher">Yamalayıcı</string>
     <string name="settings_advanced_updates_use_prereleases">Ön sürüm güncellemeleri</string>
     <string name="settings_advanced_updates_use_prereleases_description">Yeni Morphe uygulama sürümlerine erken erişim. Yama kaynaklarında her kaynak için ön sürümü etkinleştirin</string>
     <string name="settings_advanced_updates_allow_metered">Mobil veri güncellemeleri</string>
@@ -718,7 +719,7 @@ Ayrıntılar: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pil optimizasyonu</string>
     <string name="settings_system_battery_optimization_description">Uygulama küçültüldüğünde patcher\'ı çalışır durumda tutar</string>
-    <string name="settings_system_performance">Performans</string>
+    <string name="settings_system_background">Arka Plan</string>
     <string name="settings_system_process_runtime">Çalışma süreci</string>
     <string name="settings_system_process_runtime_description">Daha iyi istikrar için yamalamayı ayrı bir süreçte gerçekleştirir</string>
     <string name="settings_system_process_runtime_memory_limit_description">Daha yüksek limitler, uygun cihazlarda yamalamayı hızlandırır</string>
@@ -728,6 +729,19 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Yapılandırmak için tıklayın</string>
     <string name="settings_system_process_runtime_description_not_available">Bu özellik Android 11 veya daha yüksek bir sürüm gerektirir</string>
+    <string name="settings_system_patcher_completion_sound">Tamamlama Sesi</string>
+    <string name="settings_system_patcher_completion_sound_description">Yamalama işlemi bittiğinde başarı veya başarısızlık için farklı bir ton çalınır</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Bildirimler</string>
+    <string name="settings_system_notifications_description">Arka plan uyarılarını ve tamamlama seslerini yapılandırın</string>
+    <string name="settings_system_notifications_success_sound">Başarı Sesi</string>
+    <string name="settings_system_notifications_error_sound">Hata sesi</string>
+    <string name="settings_system_notifications_sound_default">Varsayılan</string>
+    <string name="settings_system_notifications_sound_picker_title">Ses kaynağı seçin</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Sistem sesleri</string>
+    <string name="settings_system_notifications_sound_pick_file">Dosyadan seç</string>
+    <string name="settings_system_notifications_sound_reset">Varsayılana sıfırla</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Bir ton seç</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">İçe &amp; dışa aktar</string>
     <string name="settings_system_keystore">Anahtar deposu</string>

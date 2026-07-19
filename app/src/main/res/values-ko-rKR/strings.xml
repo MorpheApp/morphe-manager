@@ -516,6 +516,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">앱 아이콘 변경</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">업데이트</string>
+    <string name="settings_advanced_patcher">패처</string>
     <string name="settings_advanced_updates_use_prereleases">Pre-release 업데이트</string>
     <string name="settings_advanced_updates_use_prereleases_description">새 Morphe 앱 버전에 미리 받아봅니다. 패치 소스는 소스별로 Pre-release 패치를 활성화하세요</string>
     <string name="settings_advanced_updates_allow_metered">모바일 데이터에서 업데이트</string>
@@ -718,7 +719,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">배터리 최적화</string>
     <string name="settings_system_battery_optimization_description">앱이 최소화되어도 패처가 계속 실행되도록 유지합니다</string>
-    <string name="settings_system_performance">성능</string>
+    <string name="settings_system_background">배경</string>
     <string name="settings_system_process_runtime">프로세스 런타임</string>
     <string name="settings_system_process_runtime_description">안정성 향상을 위해 별도의 프로세스에서 패치를 실행합니다</string>
     <string name="settings_system_process_runtime_memory_limit_description">메모리 제한 값을 높이면 지원되는 기기에서 패치 속도가 향상될 수 있습니다</string>
@@ -728,6 +729,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">%s MB 제한</string>
     <string name="settings_system_process_runtime_disabled_description">설정하려면 탭하세요</string>
     <string name="settings_system_process_runtime_description_not_available">이 기능은 Android 11 이상이 필요합니다</string>
+    <string name="settings_system_patcher_completion_sound">완료음</string>
+    <string name="settings_system_patcher_completion_sound_description">패치가 완료되면 성공 또는 실패에 대한 고유한 톤을 재생합니다</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">알림</string>
+    <string name="settings_system_notifications_description">백그라운드 알림 및 완료음을 설정합니다</string>
+    <string name="settings_system_notifications_success_sound">성공음</string>
+    <string name="settings_system_notifications_error_sound">실패음</string>
+    <string name="settings_system_notifications_sound_default">기본값</string>
+    <string name="settings_system_notifications_sound_picker_title">소리 선택</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">시스템 음향</string>
+    <string name="settings_system_notifications_sound_pick_file">파일에서 선택</string>
+    <string name="settings_system_notifications_sound_reset">기본값으로 초기화</string>
+    <string name="settings_system_notifications_ringtone_picker_title">벨소리 선택</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">가져오기 &amp; 내보내기</string>
     <string name="settings_system_keystore">키스토어</string>
