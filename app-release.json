@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-07-18T13:13:45",
-  "description": "# [1.24.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.9...v1.24.0-dev.10) (2026-07-18)\n\n\n### Features\n\n* Add press-scale animation to `ActionPillButton` ([6721137](https://github.com/MorpheApp/morphe-manager/commit/6721137320dace79180aef40ae031451ad2a19fb))\n* Add typed patch options ([#706](https://github.com/MorpheApp/morphe-manager/issues/706)) ([52727a4](https://github.com/MorpheApp/morphe-manager/commit/52727a42e14b0b478bd80343880b411021a3cc5e))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.10/morphe-manager-1.24.0-dev.10.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.10/morphe-manager-1.24.0-dev.10.apk.asc",
-  "version": "1.24.0-dev.10"
+  "created_at": "2026-07-19T05:36:36",
+  "description": "# [1.24.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.10...v1.24.0-dev.11) (2026-07-19)\n\n\n### Bug Fixes\n\n* Use correct `ChangelogEntryHeader` color ([83bc437](https://github.com/MorpheApp/morphe-manager/commit/83bc437ae19effa851d5f9cc4ad2f4626ef699eb))\n\n\n### Features\n\n* Add patcher notification sounds with settings toggle and reorganize settings tabs ([51dda37](https://github.com/MorpheApp/morphe-manager/commit/51dda37f61e229b30e7dca4dbd542899718bc86a))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.11/morphe-manager-1.24.0-dev.11.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.11/morphe-manager-1.24.0-dev.11.apk.asc",
+  "version": "1.24.0-dev.11"
 }

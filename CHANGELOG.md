@@ -1,3 +1,15 @@
+# [1.24.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.10...v1.24.0-dev.11) (2026-07-19)
+
+
+### Bug Fixes
+
+* Use correct `ChangelogEntryHeader` color ([83bc437](https://github.com/MorpheApp/morphe-manager/commit/83bc437ae19effa851d5f9cc4ad2f4626ef699eb))
+
+
+### Features
+
+* Add patcher notification sounds with settings toggle and reorganize settings tabs ([51dda37](https://github.com/MorpheApp/morphe-manager/commit/51dda37f61e229b30e7dca4dbd542899718bc86a))
+
 # [1.24.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.9...v1.24.0-dev.10) (2026-07-18)
 
 
