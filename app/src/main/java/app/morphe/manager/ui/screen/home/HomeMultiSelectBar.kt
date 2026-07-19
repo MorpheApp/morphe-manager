@@ -59,10 +59,6 @@ internal fun MultiSelectBar(
     contextActionIcon: ImageVector? = null,
     contextActionContentDescription: String? = null,
     contextActionColors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors(),
-    onSecondaryContextAction: (() -> Unit)? = null,
-    secondaryContextActionIcon: ImageVector? = null,
-    secondaryContextActionContentDescription: String? = null,
-    secondaryContextActionColors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors(),
     onMoveToCategory: (() -> Unit)? = null
 ) {
     val effectiveReorderMode = isReorderMode && showReorderButton
@@ -176,20 +172,6 @@ internal fun MultiSelectBar(
                                 tooltip = contextActionContentDescription,
                                 enabled = selectedCount > 0,
                                 colors = contextActionColors
-                            )
-                        }
-                        if (
-                            onSecondaryContextAction != null &&
-                            secondaryContextActionIcon != null &&
-                            secondaryContextActionContentDescription != null
-                        ) {
-                            ActionPillButton(
-                                onClick = onSecondaryContextAction,
-                                icon = secondaryContextActionIcon,
-                                contentDescription = secondaryContextActionContentDescription,
-                                tooltip = secondaryContextActionContentDescription,
-                                enabled = selectedCount > 0,
-                                colors = secondaryContextActionColors
                             )
                         }
                         ActionPillButton(
