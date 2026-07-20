@@ -289,6 +289,7 @@ private fun PatchSelectionManagementDialogContent(
                         selectedCount = multiSelect.selectedPackages.size,
                         totalCount = selections.size,
                         onSelectAll = onSelectAll,
+                        onDeselectAll = { multiSelect.selectedPackages.clear() },
                         onCancel = onExitSelection
                     ) {
                         val resetLabel = stringResource(R.string.reset)

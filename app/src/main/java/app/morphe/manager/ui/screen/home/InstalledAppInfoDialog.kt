@@ -163,6 +163,17 @@ fun InstalledAppInfoDialog(
         viewModel.refreshCurrentAppState()
     }
 
+    var hadMountOperation by remember { mutableStateOf(false) }
+    LaunchedEffect(mountOperation) {
+        if (mountOperation != null) {
+            hadMountOperation = true
+        } else if (hadMountOperation) {
+            hadMountOperation = false
+            viewModel.refreshCurrentAppState()
+            installedApp?.currentPackageName?.let(homeViewModel::notifyAppStateChanged)
+        }
+    }
+
     // Set back click handler
     SideEffect {
         viewModel.onBackClick = onDismiss

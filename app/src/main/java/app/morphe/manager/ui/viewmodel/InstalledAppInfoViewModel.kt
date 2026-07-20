@@ -13,7 +13,6 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.installer.UninstallCancelledException
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.ui.screen.home.AppliedPatchBundleUi
@@ -36,7 +35,6 @@ class InstalledAppInfoViewModel(
     private val installedAppRepository: InstalledAppRepository by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
     private val rootInstaller: RootInstaller by inject()
-    private val sessionInstaller: SessionInstaller by inject()
     private val installerManager: InstallerManager by inject()
     private val originalApkRepository: OriginalApkRepository by inject()
     private val filesystem: Filesystem by inject()
@@ -142,13 +140,13 @@ class InstalledAppInfoViewModel(
             InstallType.SAVED -> {
                 viewModelScope.launch {
                     try {
-                        sessionInstaller.uninstall(app.currentPackageName)
+                        installerManager.uninstallPackage(app.currentPackageName, app.installType)
                         refreshCurrentAppState()
                         onAppStateChanged?.invoke(app.currentPackageName)
                     } catch (_: UninstallCancelledException) {
                         // User dismissed dialog - do nothing
                     } catch (e: Exception) {
-                        context.toast(context.getString(R.string.install_app_fail, e.simpleMessage()))
+                        context.toast(context.getString(R.string.uninstall_app_fail, e.simpleMessage()))
                     }
                 }
             }

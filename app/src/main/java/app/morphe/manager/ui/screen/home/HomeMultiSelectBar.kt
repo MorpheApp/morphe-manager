@@ -55,6 +55,10 @@ internal fun MultiSelectBar(
         containerColor = MaterialTheme.colorScheme.errorContainer,
         contentColor = MaterialTheme.colorScheme.onErrorContainer
     ),
+    onContextAction: (() -> Unit)? = null,
+    contextActionIcon: ImageVector? = null,
+    contextActionContentDescription: String? = null,
+    contextActionColors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors(),
     onMoveToCategory: (() -> Unit)? = null
 ) {
     val effectiveReorderMode = isReorderMode && showReorderButton
@@ -78,6 +82,9 @@ internal fun MultiSelectBar(
     val deselectAllLabel = stringResource(R.string.deselect_all)
     val deselectAllDone = stringResource(R.string.deselect_all_done)
     val selectedLabel = stringResource(R.string.selected).lowercase()
+    val allSelected = selectedCount >= totalCount && totalCount > 0
+    val selectionToggleLabel = if (allSelected) deselectAllLabel else selectAllLabel
+    val selectionToggleDone = if (allSelected) deselectAllDone else selectAllDone
 
     MultiSelectShell(visible = visible, modifier = modifier) {
         AnimatedContent(
@@ -140,18 +147,13 @@ internal fun MultiSelectBar(
                     }
                     ActionPillRow {
                         ActionPillButton(
-                            onClick = withToast(selectAllDone, onSelectAll),
-                            icon = Icons.Outlined.DoneAll,
-                            contentDescription = selectAllLabel,
-                            tooltip = selectAllLabel,
-                            enabled = selectedCount < totalCount
-                        )
-                        ActionPillButton(
-                            onClick = withToast(deselectAllDone, onDeselectAll),
-                            icon = Icons.Outlined.RemoveDone,
-                            contentDescription = deselectAllLabel,
-                            tooltip = deselectAllLabel,
-                            enabled = selectedCount > 0
+                            onClick = withToast(selectionToggleDone) {
+                                if (allSelected) onDeselectAll() else onSelectAll()
+                            },
+                            icon = if (allSelected) Icons.Outlined.RemoveDone else Icons.Outlined.DoneAll,
+                            contentDescription = selectionToggleLabel,
+                            tooltip = selectionToggleLabel,
+                            enabled = totalCount > 0
                         )
                         if (onMoveToCategory != null) {
                             ActionPillButton(
@@ -160,6 +162,16 @@ internal fun MultiSelectBar(
                                 contentDescription = moveToCategoryLabel,
                                 tooltip = moveToCategoryLabel,
                                 enabled = selectedCount > 0
+                            )
+                        }
+                        if (onContextAction != null && contextActionIcon != null && contextActionContentDescription != null) {
+                            ActionPillButton(
+                                onClick = onContextAction,
+                                icon = contextActionIcon,
+                                contentDescription = contextActionContentDescription,
+                                tooltip = contextActionContentDescription,
+                                enabled = selectedCount > 0,
+                                colors = contextActionColors
                             )
                         }
                         ActionPillButton(
