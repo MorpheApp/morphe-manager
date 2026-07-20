@@ -467,6 +467,8 @@ Uninstalling will permanently erase all app data"</string>
 
     <string name="install_app_success">Installed successfully</string>
     <string name="install_app_fail">Failed to install app: %s</string>
+    <string name="uninstall_app_fail">Failed to uninstall app: %s</string>
+    <string name="uninstall_timeout">Uninstall timed out</string>
     <string name="save_apk_success">APK Saved</string>
     <string name="saved_app_export_failed">Failed to export patched app</string>
     <string name="saved_app_removed_toast">Removed saved patched app</string>
@@ -526,10 +528,14 @@ Uninstalling will permanently erase all app data"</string>
 
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Theme</string>
+    <string name="settings_appearance_theme_mode">Theme mode</string>
     <string name="settings_appearance_system">System</string>
     <string name="settings_appearance_light">Light</string>
     <string name="settings_appearance_dark">Dark</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monochrome</string>
+    <string name="settings_appearance_color_style">Color style</string>
+    <string name="settings_appearance_style_morphe" translatable="false">Morphe</string>
     <string name="settings_appearance_accent_color">Accent color</string>
     <string name="settings_appearance_pure_black">Pure Black</string>
     <string name="settings_appearance_pure_black_description">Uses true black backgrounds</string>

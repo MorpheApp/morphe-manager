@@ -26,9 +26,13 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.home.*
+import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
 import app.morphe.manager.ui.screen.settings.system.PrePatchInstallerDialog
+import app.morphe.manager.ui.screen.shared.InstallQueueRequest
+import app.morphe.manager.ui.screen.shared.rememberInstallQueue
 import app.morphe.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.morphe.manager.ui.viewmodel.HomeViewModel
+import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.QuickPatchParams
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
 import app.morphe.manager.util.*
@@ -54,7 +58,8 @@ fun HomeScreen(
     onboardingState: OnboardingState? = null,
     globalOnboardingState: GlobalOnboardingState? = null,
     patchTriggerPackage: String? = null,
-    onPatchTriggerHandled: () -> Unit = {}
+    onPatchTriggerHandled: () -> Unit = {},
+    installViewModel: InstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val view = LocalView.current
@@ -147,6 +152,29 @@ fun HomeScreen(
         contract = RequestInstallAppsContract
     ) { homeViewModel.showAndroid11Dialog = false }
 
+    val startInstallQueue = rememberInstallQueue(
+        installViewModel = installViewModel,
+        completedPluralRes = R.plurals.batch_reinstall_summary
+    )
+
+    val startBatchReinstall: (List<HomeAppItem>) -> Unit = { items ->
+        val requests = items.mapNotNull { item ->
+            val installed = item.installedApp ?: return@mapNotNull null
+            val savedFile = homeViewModel.savedPatchedApkFile(installed) ?: return@mapNotNull null
+            InstallQueueRequest(
+                file = savedFile,
+                originalPackageName = installed.originalPackageName,
+                onPersistApp = { packageName, installType ->
+                    homeViewModel.persistReinstalledApp(installed, packageName, installType)
+                },
+                onInstalled = { packageName ->
+                    homeViewModel.notifyAppStateChanged(packageName)
+                }
+            )
+        }
+        startInstallQueue(requests)
+    }
+
     // Handle patch trigger from dialog
     LaunchedEffect(patchTriggerPackage) {
         patchTriggerPackage?.let { packageName ->
@@ -189,6 +217,8 @@ fun HomeScreen(
         patchesItem = patchesSheetItem,
         globalOnboardingState = globalOnboardingState
     )
+
+    InstallerFlowDialogs(installViewModel = installViewModel)
 
     // Pre-patching mode selection dialog for root-capable devices.
     // This dialog must appear before patching starts because the patch mode determines
@@ -250,6 +280,8 @@ fun HomeScreen(
                     },
                     onHideApp = { packageName -> homeViewModel.hideApp(packageName) },
                     onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.hideApp(it) } },
+                    onUninstallMultiple = { items -> homeViewModel.uninstallApps(items) },
+                    onReinstallMultiple = { items -> startBatchReinstall(items) },
                     onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
                     onShowPatches = { item -> patchesSheetItem.value = item },
                     onGestureHintShown = {

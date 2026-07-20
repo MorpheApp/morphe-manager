@@ -48,6 +48,8 @@ import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.theme.ManagerTheme
 import app.morphe.manager.ui.theme.Theme
+import app.morphe.manager.ui.theme.ThemeStyle
+import app.morphe.manager.ui.theme.resolveThemeStyle
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.MainViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
@@ -100,15 +102,23 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             val theme by vm.prefs.theme.getAsState()
-            val dynamicColor by vm.prefs.dynamicColor.getAsState()
+            val themeStyle by vm.prefs.themeStyle.getAsState()
             val pureBlackTheme by vm.prefs.pureBlackTheme.getAsState()
             val customAccentColor by vm.prefs.customAccentColor.getAsState()
             val customThemeColor by vm.prefs.customThemeColor.getAsState()
+            val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+            val effectiveThemeStyle = resolveThemeStyle(themeStyle, supportsDynamicColor)
+            val darkTheme = when (theme) {
+                Theme.LIGHT -> false
+                Theme.DARK -> true
+                Theme.SYSTEM -> isSystemInDarkTheme()
+            }
 
             ManagerTheme(
-                darkTheme = theme == Theme.SYSTEM && isSystemInDarkTheme() || theme == Theme.DARK,
-                dynamicColor = dynamicColor,
+                darkTheme = darkTheme,
+                dynamicColor = effectiveThemeStyle == ThemeStyle.MATERIAL_YOU,
                 pureBlackTheme = pureBlackTheme,
+                monochromeTheme = effectiveThemeStyle == ThemeStyle.MONOCHROME,
                 accentColorHex = customAccentColor.takeUnless { it.isBlank() },
                 themeColorHex = customThemeColor.takeUnless { it.isBlank() }
             ) {

@@ -257,6 +257,12 @@ class RootInstaller(
         ).assertSuccess("Failed to install APK as Play Store")
     }
 
+    suspend fun uninstallPackage(packageName: String) = withContext(Dispatchers.IO) {
+        execute(
+            "pm uninstall --user 0 ${packageName.shellQuote()}"
+        ).assertSuccess("Failed to uninstall app")
+    }
+
     suspend fun uninstall(packageName: String) {
         val remoteFS = awaitRemoteFS()
         if (isAppMounted(packageName))

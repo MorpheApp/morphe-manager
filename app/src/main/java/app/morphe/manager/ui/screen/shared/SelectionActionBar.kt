@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 import app.morphe.manager.util.toast
 
 /**
@@ -47,7 +48,7 @@ fun MultiSelectShell(
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
             shape = RoundedCornerShape(16.dp),
-            color = MaterialTheme.colorScheme.surfaceContainerHigh,
+            color = MonochromeThemeDefaults.surfaceColor(MaterialTheme.colorScheme.surfaceContainerHigh),
             shadowElevation = 8.dp,
             tonalElevation = 4.dp,
             content = content
@@ -83,6 +84,10 @@ fun SelectionActionBar(
     val deselectAllDone = stringResource(R.string.deselect_all_done)
     val cancelLabel = stringResource(android.R.string.cancel)
     val selectedLabel = stringResource(R.string.selected).lowercase()
+    val allSelected = selectedCount >= totalCount && totalCount > 0
+    val canToggleToDeselect = allSelected && onDeselectAll != null
+    val selectionToggleLabel = if (canToggleToDeselect) deselectAllLabel else selectAllLabel
+    val selectionToggleDone = if (canToggleToDeselect) deselectAllDone else selectAllDone
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -117,21 +122,14 @@ fun SelectionActionBar(
 
         ActionPillRow {
             ActionPillButton(
-                onClick = withToast(selectAllDone, onSelectAll),
-                icon = Icons.Outlined.DoneAll,
-                contentDescription = selectAllLabel,
-                tooltip = selectAllLabel,
-                enabled = selectedCount < totalCount
+                onClick = withToast(selectionToggleDone) {
+                    if (canToggleToDeselect) onDeselectAll?.invoke() else onSelectAll()
+                },
+                icon = if (canToggleToDeselect) Icons.Outlined.RemoveDone else Icons.Outlined.DoneAll,
+                contentDescription = selectionToggleLabel,
+                tooltip = selectionToggleLabel,
+                enabled = canToggleToDeselect || selectedCount < totalCount
             )
-            if (onDeselectAll != null) {
-                ActionPillButton(
-                    onClick = withToast(deselectAllDone, onDeselectAll),
-                    icon = Icons.Outlined.RemoveDone,
-                    contentDescription = deselectAllLabel,
-                    tooltip = deselectAllLabel,
-                    enabled = selectedCount > 0
-                )
-            }
             actions()
             if (onCancel != null) {
                 ActionPillButton(
