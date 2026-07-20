@@ -19,6 +19,7 @@ import androidx.compose.ui.semantics.dismiss
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 
 /**
  * A [ModalBottomSheet] that never overlaps the status bar.
@@ -50,6 +51,8 @@ fun MorpheBottomSheet(
     showDragHandle: Boolean = true,
     content: @Composable ColumnScope.() -> Unit
 ) {
+    val effectiveContainerColor = MonochromeThemeDefaults.surfaceColor(containerColor)
+
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
         // statusBarsPadding() on the modifier is what physically stops the sheet
@@ -57,7 +60,7 @@ fun MorpheBottomSheet(
         modifier = modifier.statusBarsPadding(),
         sheetState = sheetState,
         shape = shape,
-        containerColor = containerColor,
+        containerColor = effectiveContainerColor,
         contentColor = contentColor,
         scrimColor = scrimColor,
         // The drag handle is rendered by ModalBottomSheet *above* the content area.
