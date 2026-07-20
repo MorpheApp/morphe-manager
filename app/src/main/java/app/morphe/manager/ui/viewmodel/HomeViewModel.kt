@@ -70,8 +70,6 @@ import kotlin.time.Clock
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
-private const val BATCH_UNINSTALL_TIMEOUT_MS = 120_000L
-
 /** Bundle update status for snackbar display. */
 enum class BundleUpdateStatus {
     Updating, // Update in progress
@@ -1143,17 +1141,6 @@ class HomeViewModel(
         deepLinkPendingBundle = null
     }
 
-    suspend fun updateMorpheBundleWithChangelogClear() {
-        patchBundleRepository.updateOnlyMorpheBundle(
-            force = false,
-            showToast = false
-        )
-        // Clear changelog cache
-        val sources = patchBundleRepository.sources.first()
-        val apiBundle = sources.firstOrNull() as? RemotePatchBundle
-        apiBundle?.clearChangelogCache()
-    }
-
     /**
      * Metadata for all apps across enabled bundles - display names, icon colors, signatures, etc.
      * Delegates to [PatchBundleRepository.appMetadata] as the single source of truth.
@@ -1674,11 +1661,11 @@ class HomeViewModel(
                             installedAppRepository.delete(installed)
                         }
                         else -> {
-                            val removed = withTimeoutOrNull(BATCH_UNINSTALL_TIMEOUT_MS) {
+                            val removed = withTimeoutOrNull(BATCH_UNINSTALL_TIMEOUT) {
                                 installerManager.uninstallPackage(installed.currentPackageName, installed.installType)
                                 true
                             } == true
-                            if (!removed) error("Uninstall timed out")
+                            if (!removed) error(app.getString(R.string.uninstall_timeout))
                         }
                     }
                 }.onSuccess {
@@ -1692,7 +1679,7 @@ class HomeViewModel(
                 }
             }
 
-            app.batchActionSummary(R.string.batch_uninstall_summary, completed, skipped)
+            app.batchActionSummary(R.plurals.batch_uninstall_summary, completed, skipped)
                 ?.let { app.toast(it) }
         }
     }

@@ -28,6 +28,8 @@ import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
 import app.morphe.manager.ui.screen.settings.system.PrePatchInstallerDialog
+import app.morphe.manager.ui.screen.shared.InstallQueueRequest
+import app.morphe.manager.ui.screen.shared.rememberInstallQueue
 import app.morphe.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
@@ -150,104 +152,27 @@ fun HomeScreen(
         contract = RequestInstallAppsContract
     ) { homeViewModel.showAndroid11Dialog = false }
 
-    var reinstallQueue by remember { mutableStateOf<List<HomeAppItem>>(emptyList()) }
-    var activeReinstallItem by remember { mutableStateOf<HomeAppItem?>(null) }
-    var activeReinstallStarted by remember { mutableStateOf(false) }
-    var reinstallCompleted by remember { mutableIntStateOf(0) }
-    var reinstallSkipped by remember { mutableIntStateOf(0) }
+    val startInstallQueue = rememberInstallQueue(
+        installViewModel = installViewModel,
+        completedPluralRes = R.plurals.batch_reinstall_summary
+    )
 
-    fun showReinstallSummary() {
-        context.batchActionSummary(R.string.batch_reinstall_summary, reinstallCompleted, reinstallSkipped)
-            ?.let { context.toast(it) }
-        reinstallCompleted = 0
-        reinstallSkipped = 0
-    }
-
-    fun startNextReinstall() {
-        val next = reinstallQueue.firstOrNull()
-        if (next == null) {
-            activeReinstallItem = null
-            activeReinstallStarted = false
-            showReinstallSummary()
-            return
-        }
-
-        reinstallQueue = reinstallQueue.drop(1)
-        val installed = next.installedApp
-        val savedFile = installed?.let(homeViewModel::savedPatchedApkFile)
-        if (installed == null || savedFile == null) {
-            reinstallSkipped++
-            startNextReinstall()
-            return
-        }
-
-        activeReinstallItem = next
-        activeReinstallStarted = true
-        installViewModel.install(
-            outputFile = savedFile,
-            originalPackageName = installed.originalPackageName,
-            onPersistApp = { packageName, installType ->
-                homeViewModel.persistReinstalledApp(installed, packageName, installType)
-            }
-        )
-    }
-
-    fun startBatchReinstall(items: List<HomeAppItem>) {
-        if (items.isEmpty()) return
-        reinstallQueue = items
-        activeReinstallItem = null
-        activeReinstallStarted = false
-        reinstallCompleted = 0
-        reinstallSkipped = 0
-        installViewModel.resetInstallState()
-        startNextReinstall()
-    }
-
-    LaunchedEffect(
-        installViewModel.installState,
-        installViewModel.installerUnavailableDialog,
-        installViewModel.showInstallerSelectionDialog
-    ) {
-        if (activeReinstallItem == null) return@LaunchedEffect
-        when (val state = installViewModel.installState) {
-            is InstallViewModel.InstallState.Ready -> {
-                if (
-                    activeReinstallStarted &&
-                    installViewModel.installerUnavailableDialog == null &&
-                    !installViewModel.showInstallerSelectionDialog
-                ) {
-                    reinstallSkipped++
-                    activeReinstallItem = null
-                    activeReinstallStarted = false
-                    startNextReinstall()
+    val startBatchReinstall: (List<HomeAppItem>) -> Unit = { items ->
+        val requests = items.mapNotNull { item ->
+            val installed = item.installedApp ?: return@mapNotNull null
+            val savedFile = homeViewModel.savedPatchedApkFile(installed) ?: return@mapNotNull null
+            InstallQueueRequest(
+                file = savedFile,
+                originalPackageName = installed.originalPackageName,
+                onPersistApp = { packageName, installType ->
+                    homeViewModel.persistReinstalledApp(installed, packageName, installType)
+                },
+                onInstalled = { packageName ->
+                    homeViewModel.notifyAppStateChanged(packageName)
                 }
-            }
-            is InstallViewModel.InstallState.Installed -> {
-                reinstallCompleted++
-                homeViewModel.notifyAppStateChanged(state.packageName)
-                activeReinstallItem = null
-                activeReinstallStarted = false
-                installViewModel.resetInstallState()
-                startNextReinstall()
-            }
-            is InstallViewModel.InstallState.Error -> {
-                reinstallSkipped++
-                context.toast(state.message)
-                activeReinstallItem = null
-                activeReinstallStarted = false
-                installViewModel.resetInstallState()
-                startNextReinstall()
-            }
-            is InstallViewModel.InstallState.Conflict -> {
-                reinstallSkipped++
-                context.toast(context.getString(R.string.install_app_fail, context.getString(R.string.installer_hint_conflict)))
-                activeReinstallItem = null
-                activeReinstallStarted = false
-                installViewModel.resetInstallState()
-                startNextReinstall()
-            }
-            else -> Unit
+            )
         }
+        startInstallQueue(requests)
     }
 
     // Handle patch trigger from dialog

@@ -61,8 +61,6 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import java.io.File
 
-private const val BATCH_UNINSTALL_TIMEOUT_MS = 120_000L
-
 /** Type of APKs to manage. */
 enum class ApkManagementType {
     PATCHED,
@@ -167,12 +165,6 @@ class ApkListActions(
     val onDeleteAllConfirm: (() -> Unit)?
 )
 
-private data class ApkInstallRequest(
-    val item: ApkItemData,
-    val originalPackageName: String,
-    val onPersistApp: suspend (String, InstallType) -> Boolean
-)
-
 /**
  * Universal dialog for managing APK files (patched or original).
  */
@@ -181,16 +173,18 @@ fun ApkManagementDialog(
     type: ApkManagementType,
     onDismissRequest: () -> Unit
 ) {
+    val installViewModel: InstallViewModel = koinViewModel()
     when (type) {
-        ApkManagementType.PATCHED -> PatchedApksContent(onDismissRequest = onDismissRequest)
-        ApkManagementType.ORIGINAL -> OriginalApksContent(onDismissRequest = onDismissRequest)
+        ApkManagementType.PATCHED -> PatchedApksContent(onDismissRequest, installViewModel)
+        ApkManagementType.ORIGINAL -> OriginalApksContent(onDismissRequest, installViewModel)
     }
+    InstallerFlowDialogs(installViewModel = installViewModel)
 }
 
 @Composable
 private fun PatchedApksContent(
     onDismissRequest: () -> Unit,
-    installViewModel: InstallViewModel = koinViewModel()
+    installViewModel: InstallViewModel
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -269,8 +263,8 @@ private fun PatchedApksContent(
         val installedApp = appByKey[item.selectionKey] ?: return@mapNotNull null
         val file = item.file?.takeIf { it.exists() } ?: return@mapNotNull null
         if (item.installType == InstallType.MOUNT) return@mapNotNull null
-        ApkInstallRequest(
-            item = item,
+        InstallQueueRequest(
+            file = file,
             originalPackageName = installedApp.originalPackageName,
             onPersistApp = { packageName, installType ->
                 val appliedPatches = repository.getAppliedPatches(installedApp.currentPackageName)
@@ -284,18 +278,21 @@ private fun PatchedApksContent(
                     patchedAt = installedApp.patchedAt
                 )
                 true
+            },
+            onInstalled = { packageName ->
+                updateInstalledState(item.packageName, true)
+                updateInstalledState(packageName, true)
             }
-        ).takeIf { file.exists() }
+        )
     }
 
-    val startInstallQueue = rememberApkInstallQueue(
+    val startInstallQueue = rememberInstallQueue(
         installViewModel = installViewModel,
-        summaryStringRes = R.string.batch_reinstall_summary,
-        onCompletedInstall = { item, packageName ->
-            updateInstalledState(item.packageName, true)
-            updateInstalledState(packageName, true)
-        }
+        completedPluralRes = R.plurals.batch_reinstall_summary
     )
+
+    val uninstallTimeoutText = stringResource(R.string.uninstall_timeout)
+    val uninstallFailTemplate = stringResource(R.string.uninstall_app_fail)
 
     fun uninstallItems(items: List<ApkItemData>) {
         if (items.isEmpty()) return
@@ -305,7 +302,7 @@ private fun PatchedApksContent(
             for (item in items) {
                 val installedApp = appByKey[item.selectionKey]
                 val result = runCatching {
-                    val removed = withTimeoutOrNull(BATCH_UNINSTALL_TIMEOUT_MS) {
+                    val removed = withTimeoutOrNull(BATCH_UNINSTALL_TIMEOUT) {
                         uninstallStorageItem(
                             item = item,
                             installedApp = installedApp,
@@ -314,7 +311,7 @@ private fun PatchedApksContent(
                         )
                         true
                     } == true
-                    if (!removed) error("Uninstall timed out")
+                    if (!removed) error(uninstallTimeoutText)
                 }
                 result.onSuccess {
                     completed++
@@ -322,11 +319,11 @@ private fun PatchedApksContent(
                 }.onFailure { error ->
                     skipped++
                     if (error !is UninstallCancelledException) {
-                        context.toast(context.getString(R.string.uninstall_app_fail, error.simpleMessage()))
+                        context.toast(uninstallFailTemplate.format(error.simpleMessage()))
                     }
                 }
             }
-            context.batchActionSummary(R.string.batch_uninstall_summary, completed, skipped)
+            context.batchActionSummary(R.plurals.batch_uninstall_summary, completed, skipped)
                 ?.let { context.toast(it) }
         }
     }
@@ -449,7 +446,7 @@ private fun PatchedApksContent(
 @Composable
 private fun OriginalApksContent(
     onDismissRequest: () -> Unit,
-    installViewModel: InstallViewModel = koinViewModel()
+    installViewModel: InstallViewModel
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -515,22 +512,25 @@ private fun OriginalApksContent(
     }
 
     fun installRequests(items: List<ApkItemData>) = items.mapNotNull { item ->
-        item.file?.takeIf { it.exists() } ?: return@mapNotNull null
-        ApkInstallRequest(
-            item = item,
+        val file = item.file?.takeIf { it.exists() } ?: return@mapNotNull null
+        InstallQueueRequest(
+            file = file,
             originalPackageName = item.packageName,
-            onPersistApp = { _, _ -> true }
+            onPersistApp = { _, _ -> true },
+            onInstalled = { packageName ->
+                updateInstalledState(item.packageName, true)
+                updateInstalledState(packageName, true)
+            }
         )
     }
 
-    val startInstallQueue = rememberApkInstallQueue(
+    val startInstallQueue = rememberInstallQueue(
         installViewModel = installViewModel,
-        summaryStringRes = R.string.batch_install_summary,
-        onCompletedInstall = { item, packageName ->
-            updateInstalledState(item.packageName, true)
-            updateInstalledState(packageName, true)
-        }
+        completedPluralRes = R.plurals.batch_install_summary
     )
+
+    val uninstallTimeoutText = stringResource(R.string.uninstall_timeout)
+    val uninstallFailTemplate = stringResource(R.string.uninstall_app_fail)
 
     fun uninstallItems(items: List<ApkItemData>) {
         if (items.isEmpty()) return
@@ -539,7 +539,7 @@ private fun OriginalApksContent(
             var skipped = 0
             for (item in items) {
                 val result = runCatching {
-                    val removed = withTimeoutOrNull(BATCH_UNINSTALL_TIMEOUT_MS) {
+                    val removed = withTimeoutOrNull(BATCH_UNINSTALL_TIMEOUT) {
                         uninstallStorageItem(
                             item = item,
                             installedApp = null,
@@ -548,7 +548,7 @@ private fun OriginalApksContent(
                         )
                         true
                     } == true
-                    if (!removed) error("Uninstall timed out")
+                    if (!removed) error(uninstallTimeoutText)
                 }
                 result.onSuccess {
                     completed++
@@ -556,11 +556,11 @@ private fun OriginalApksContent(
                 }.onFailure { error ->
                     skipped++
                     if (error !is UninstallCancelledException) {
-                        context.toast(context.getString(R.string.uninstall_app_fail, error.simpleMessage()))
+                        context.toast(uninstallFailTemplate.format(error.simpleMessage()))
                     }
                 }
             }
-            context.batchActionSummary(R.string.batch_uninstall_summary, completed, skipped)
+            context.batchActionSummary(R.plurals.batch_uninstall_summary, completed, skipped)
                 ?.let { context.toast(it) }
         }
     }
@@ -1138,121 +1138,6 @@ private fun ApkItemCard(
                     }
                 }
             }
-        }
-    }
-}
-
-@Composable
-private fun rememberApkInstallQueue(
-    installViewModel: InstallViewModel,
-    summaryStringRes: Int,
-    onCompletedInstall: (ApkItemData, String) -> Unit
-): (List<ApkInstallRequest>) -> Unit {
-    val context = LocalContext.current
-    var installQueue by remember { mutableStateOf<List<ApkInstallRequest>>(emptyList()) }
-    var activeInstallRequest by remember { mutableStateOf<ApkInstallRequest?>(null) }
-    var activeInstallStarted by remember { mutableStateOf(false) }
-    var installCompleted by remember { mutableIntStateOf(0) }
-    var installSkipped by remember { mutableIntStateOf(0) }
-
-    fun showInstallSummary() {
-        context.batchActionSummary(summaryStringRes, installCompleted, installSkipped)
-            ?.let { context.toast(it) }
-        installCompleted = 0
-        installSkipped = 0
-    }
-
-    fun startNextInstall() {
-        val next = installQueue.firstOrNull()
-        if (next == null) {
-            activeInstallRequest = null
-            activeInstallStarted = false
-            showInstallSummary()
-            return
-        }
-
-        installQueue = installQueue.drop(1)
-        val file = next.item.file?.takeIf { it.exists() }
-        if (file == null) {
-            installSkipped++
-            startNextInstall()
-            return
-        }
-
-        activeInstallRequest = next
-        activeInstallStarted = true
-        installViewModel.install(
-            outputFile = file,
-            originalPackageName = next.originalPackageName,
-            onPersistApp = next.onPersistApp
-        )
-    }
-
-    LaunchedEffect(
-        installViewModel.installState,
-        installViewModel.installerUnavailableDialog,
-        installViewModel.showInstallerSelectionDialog
-    ) {
-        val active = activeInstallRequest ?: return@LaunchedEffect
-        when (val state = installViewModel.installState) {
-            is InstallViewModel.InstallState.Ready -> {
-                if (
-                    activeInstallStarted &&
-                    installViewModel.installerUnavailableDialog == null &&
-                    !installViewModel.showInstallerSelectionDialog
-                ) {
-                    installSkipped++
-                    activeInstallRequest = null
-                    activeInstallStarted = false
-                    startNextInstall()
-                }
-            }
-            is InstallViewModel.InstallState.Installed -> {
-                installCompleted++
-                onCompletedInstall(active.item, state.packageName)
-                activeInstallRequest = null
-                activeInstallStarted = false
-                installViewModel.resetInstallState()
-                startNextInstall()
-            }
-            is InstallViewModel.InstallState.Error -> {
-                installSkipped++
-                context.toast(state.message)
-                activeInstallRequest = null
-                activeInstallStarted = false
-                installViewModel.resetInstallState()
-                startNextInstall()
-            }
-            is InstallViewModel.InstallState.Conflict -> {
-                installSkipped++
-                context.toast(context.getString(R.string.installer_hint_conflict))
-                activeInstallRequest = null
-                activeInstallStarted = false
-                installViewModel.resetInstallState()
-                startNextInstall()
-            }
-            else -> Unit
-        }
-    }
-
-    InstallerFlowDialogs(installViewModel = installViewModel)
-
-    MorpheOverlay(
-        visible = activeInstallRequest != null &&
-                installViewModel.installState is InstallViewModel.InstallState.Installing
-    ) {
-        PulsingLogoWithCaption(caption = stringResource(R.string.installing_ellipsis))
-    }
-
-    return { requests ->
-        if (requests.isNotEmpty()) {
-            installQueue = requests
-            activeInstallRequest = null
-            activeInstallStarted = false
-            installCompleted = 0
-            installSkipped = 0
-            installViewModel.resetInstallState()
-            startNextInstall()
         }
     }
 }

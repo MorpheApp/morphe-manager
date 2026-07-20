@@ -1,20 +1,25 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.util
 
 import android.content.Context
-import androidx.annotation.StringRes
+import androidx.annotation.PluralsRes
 import app.morphe.manager.R
 
 fun Context.batchActionSummary(
-    @StringRes completedActionRes: Int,
+    @PluralsRes completedActionPluralRes: Int,
     completed: Int,
     skipped: Int
 ): String? {
     val parts = buildList {
         if (completed > 0) {
-            add(getString(completedActionRes, completed))
+            add(resources.getQuantityString(completedActionPluralRes, completed, completed))
         }
         if (skipped > 0) {
-            add(getString(R.string.batch_skipped_summary, skipped))
+            add(resources.getQuantityString(R.plurals.batch_skipped_summary, skipped, skipped))
         }
     }
 

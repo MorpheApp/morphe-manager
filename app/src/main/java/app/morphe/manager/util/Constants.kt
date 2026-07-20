@@ -8,6 +8,8 @@ package app.morphe.manager.util
 import androidx.compose.ui.graphics.Color
 import app.morphe.manager.util.KnownApps.DEFAULT_COLORS
 import app.morphe.manager.util.KnownApps.getAppName
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.minutes
 
 const val tag = "Morphe Manager"
 
@@ -122,6 +124,13 @@ object KnownApps {
      */
     fun fallbackName(packageName: String): String? = FALLBACK_NAMES[packageName]
 }
+
+/**
+ * Timeout applied to a single uninstall step when running as part of a batch.
+ * The system uninstall UI can block indefinitely if the user leaves it open;
+ * this keeps the batch making forward progress.
+ */
+val BATCH_UNINSTALL_TIMEOUT: Duration = 2.minutes
 
 const val APK_MIMETYPE  = "application/vnd.android.package-archive"
 

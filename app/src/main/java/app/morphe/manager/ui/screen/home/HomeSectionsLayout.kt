@@ -1525,7 +1525,9 @@ fun MainAppsSection(
                         selectedAppItems.filter { it.isInstalledOnDevice }
                     }
                     val selectedReinstallItems = remember(selectedAppItems) {
-                        selectedAppItems.filter { !it.isInstalledOnDevice && it.hasSavedCopy && it.installedApp != null }
+                        selectedAppItems.filter {
+                            !it.isInstalledOnDevice && it.hasSavedCopy && it.installedApp != null
+                        }
                     }
                     val contextActionIsReinstall = selectedAppItems.isNotEmpty() &&
                             selectedReinstallItems.size == selectedAppItems.size

@@ -10,6 +10,13 @@ import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 
+/**
+ * Renders the installer-selection and installer-unavailable dialogs driven by
+ * [InstallViewModel] state. Called from any screen that triggers an install
+ * ([app.morphe.manager.ui.screen.HomeScreen], [ApkManagementDialog], etc.).
+ *
+ * Lives in this package because the two dialogs it composes are defined here.
+ */
 @Composable
 fun InstallerFlowDialogs(
     installViewModel: InstallViewModel

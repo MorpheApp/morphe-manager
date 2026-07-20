@@ -467,10 +467,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="install_app_success">Installed successfully</string>
     <string name="install_app_fail">Failed to install app: %s</string>
     <string name="uninstall_app_fail">Failed to uninstall app: %s</string>
-    <string name="batch_install_summary">Installed %d</string>
-    <string name="batch_reinstall_summary">Reinstalled %d</string>
-    <string name="batch_uninstall_summary">Uninstalled %d</string>
-    <string name="batch_skipped_summary">Skipped %d</string>
+    <string name="uninstall_timeout">Uninstall timed out</string>
     <string name="save_apk_success">APK Saved</string>
     <string name="saved_app_export_failed">Failed to export patched app</string>
     <string name="saved_app_removed_toast">Removed saved patched app</string>
