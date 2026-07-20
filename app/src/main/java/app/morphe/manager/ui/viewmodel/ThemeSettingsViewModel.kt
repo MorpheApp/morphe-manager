@@ -7,6 +7,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
+import app.morphe.manager.ui.theme.ThemeStyle
 import app.morphe.manager.util.applyAppLanguage
 import app.morphe.manager.util.toHexString
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,14 +15,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
-
-enum class ThemePreset {
-    DEFAULT,
-    LIGHT,
-    DARK,
-    DYNAMIC,
-    MONOCHROME
-}
 
 /**
  * How often the random background rotates.
@@ -35,24 +28,9 @@ enum class RandomInterval(val labelResId: Int) {
     EVERY_3_DAYS(R.string.settings_appearance_background_random_interval_3days)
 }
 
-private data class ThemePresetConfig(
-    val theme: Theme,
-    val dynamicColor: Boolean = false,
-    val customAccentHex: String = "",
-    val customThemeHex: String = ""
-)
-
 class ThemeSettingsViewModel(
     val prefs: PreferencesManager
 ) : ViewModel() {
-    private val presetConfigs = mapOf(
-        ThemePreset.DEFAULT to ThemePresetConfig(theme = Theme.SYSTEM),
-        ThemePreset.LIGHT to ThemePresetConfig(theme = Theme.LIGHT),
-        ThemePreset.DARK to ThemePresetConfig(theme = Theme.DARK),
-        ThemePreset.DYNAMIC to ThemePresetConfig(theme = Theme.SYSTEM, dynamicColor = true),
-        ThemePreset.MONOCHROME to ThemePresetConfig(theme = Theme.MONOCHROME)
-    )
-
     /**
      * The currently resolved background for this session when RANDOM mode is active.
      * Populated by [resolveRandomBackground]; null until first resolution.
@@ -119,35 +97,46 @@ class ThemeSettingsViewModel(
         prefs.enableBackgroundParallax.update(!current)
     }
 
-    fun applyThemePresetByKey(key: String) {
-        val preset = when (key) {
-            "SYSTEM"  -> ThemePreset.DEFAULT
-            "LIGHT"   -> ThemePreset.LIGHT
-            "DARK"    -> ThemePreset.DARK
-            "DYNAMIC" -> ThemePreset.DYNAMIC
-            "MONOCHROME"  -> ThemePreset.MONOCHROME
-            else      -> ThemePreset.DEFAULT
+    fun applyThemeSelectionByKey(key: String) {
+        when (key) {
+            "SYSTEM" -> setThemeMode(Theme.SYSTEM)
+            "LIGHT" -> setThemeMode(Theme.LIGHT)
+            "DARK" -> setThemeMode(Theme.DARK)
+            "DYNAMIC" -> setThemeStyle(ThemeStyle.MATERIAL_YOU)
+            "MONOCHROME" -> setThemeStyle(ThemeStyle.MONOCHROME)
+            else -> setThemeMode(Theme.SYSTEM)
         }
-        applyThemePreset(preset)
     }
 
-    fun applyThemePreset(preset: ThemePreset) = viewModelScope.launch {
-        val config = presetConfigs[preset] ?: return@launch
+    fun setThemeMode(theme: Theme) = viewModelScope.launch {
         prefs.themePresetSelectionEnabled.update(true)
-        prefs.theme.update(config.theme)
-        prefs.dynamicColor.update(config.dynamicColor)
+        if (prefs.theme.get() == Theme.MONOCHROME) {
+            prefs.themeStyle.update(ThemeStyle.MONOCHROME)
+            prefs.dynamicColor.update(false)
+        }
+        prefs.theme.update(theme)
 
-        // Pure Black should be disabled for incompatible themes
-        if (preset == ThemePreset.LIGHT) {
+        if (theme == Theme.LIGHT) {
             prefs.pureBlackTheme.update(false)
         }
 
-        // Dynamic color comes from the system palette instead of inherited custom tones.
-        if (preset == ThemePreset.DYNAMIC) {
+        prefs.themePresetSelectionName.update(theme.name)
+    }
+
+    fun setThemeStyle(style: ThemeStyle) = viewModelScope.launch {
+        prefs.themePresetSelectionEnabled.update(true)
+        prefs.themeStyle.update(style)
+        prefs.dynamicColor.update(style == ThemeStyle.MATERIAL_YOU)
+
+        if (prefs.theme.get() == Theme.MONOCHROME) {
+            prefs.theme.update(Theme.SYSTEM)
+        }
+
+        if (style == ThemeStyle.MATERIAL_YOU) {
             prefs.customAccentColor.update("")
             prefs.customThemeColor.update("")
         }
 
-        prefs.themePresetSelectionName.update(preset.name)
+        prefs.themePresetSelectionName.update(style.name)
     }
 }

@@ -172,6 +172,7 @@ fun SettingsScreen(
 
     // Appearance settings
     val theme by themeViewModel.prefs.theme.getAsState()
+    val themeStyle by themeViewModel.prefs.themeStyle.getAsState()
     val pureBlackTheme by themeViewModel.prefs.pureBlackTheme.getAsState()
     val dynamicColor by themeViewModel.prefs.dynamicColor.getAsState()
     val customAccentColorHex by themeViewModel.prefs.customAccentColor.getAsState()
@@ -269,6 +270,7 @@ fun SettingsScreen(
         when (tab) {
             SettingsTab.APPEARANCE -> AppearanceTabContent(
                 theme = theme,
+                themeStyle = themeStyle,
                 pureBlackTheme = pureBlackTheme,
                 dynamicColor = dynamicColor,
                 customAccentColorHex = customAccentColorHex,

@@ -158,7 +158,31 @@ enum class Theme(val displayName: Int) {
     SYSTEM(R.string.settings_appearance_system),
     LIGHT(R.string.settings_appearance_light),
     DARK(R.string.settings_appearance_dark),
+
+    /** Legacy value retained so older settings exports still deserialize. */
     MONOCHROME(R.string.settings_appearance_monochrome);
+}
+
+@Serializable
+enum class ThemeStyle(val displayName: Int) {
+    MORPHE(R.string.settings_appearance_style_morphe),
+    MATERIAL_YOU(R.string.settings_appearance_dynamic),
+    MONOCHROME(R.string.settings_appearance_monochrome);
+}
+
+fun resolveThemeStyle(
+    theme: Theme,
+    storedStyle: ThemeStyle,
+    dynamicColor: Boolean,
+    supportsDynamicColor: Boolean
+): ThemeStyle = when {
+    theme == Theme.MONOCHROME -> ThemeStyle.MONOCHROME
+    storedStyle == ThemeStyle.MONOCHROME -> ThemeStyle.MONOCHROME
+    storedStyle == ThemeStyle.MATERIAL_YOU -> {
+        if (supportsDynamicColor) ThemeStyle.MATERIAL_YOU else ThemeStyle.MORPHE
+    }
+    dynamicColor && supportsDynamicColor -> ThemeStyle.MATERIAL_YOU
+    else -> storedStyle
 }
 
 private fun applyCustomAccent(

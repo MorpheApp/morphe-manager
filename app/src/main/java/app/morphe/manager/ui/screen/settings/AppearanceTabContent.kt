@@ -35,6 +35,8 @@ import app.morphe.manager.ui.screen.settings.appearance.*
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.LanguageRepository.getLanguageDisplayName
 import app.morphe.manager.ui.theme.Theme
+import app.morphe.manager.ui.theme.ThemeStyle
+import app.morphe.manager.ui.theme.resolveThemeStyle
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.saveLanguageToPrefs
 import kotlinx.coroutines.delay
@@ -49,6 +51,7 @@ import kotlin.time.Duration.Companion.milliseconds
 @Composable
 fun AppearanceTabContent(
     theme: Theme,
+    themeStyle: ThemeStyle,
     pureBlackTheme: Boolean,
     dynamicColor: Boolean,
     customAccentColorHex: String?,
@@ -68,6 +71,13 @@ fun AppearanceTabContent(
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
     val randomInterval by themeViewModel.prefs.randomBackgroundInterval.getAsState()
+    val effectiveTheme = if (theme == Theme.MONOCHROME) Theme.SYSTEM else theme
+    val effectiveThemeStyle = resolveThemeStyle(
+        theme = theme,
+        storedStyle = themeStyle,
+        dynamicColor = dynamicColor,
+        supportsDynamicColor = supportsDynamicColor
+    )
 
     val showLanguageDialog = remember { mutableStateOf(false) }
     val showTranslationInfoDialog = remember { mutableStateOf(false) }
@@ -177,17 +187,30 @@ fun AppearanceTabContent(
         ) {
             ThemeSelector(
                 theme = theme,
-                dynamicColor = dynamicColor,
-                supportsDynamicColor = supportsDynamicColor,
                 onThemeSelected = { selectedTheme ->
-                    themeViewModel.applyThemePresetByKey(selectedTheme)
+                    themeViewModel.applyThemeSelectionByKey(selectedTheme)
                 }
             )
         }
 
-        // Pure black theme toggle
+        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
+            ThemeStyleSelector(
+                style = effectiveThemeStyle,
+                supportsDynamicColor = supportsDynamicColor,
+                onStyleSelected = themeViewModel::setThemeStyle
+            )
+        }
+
+        val supportsPureBlack = effectiveTheme != Theme.LIGHT
+
+        LaunchedEffect(supportsPureBlack, pureBlackTheme) {
+            if (!supportsPureBlack && pureBlackTheme) {
+                themeViewModel.togglePureBlackTheme(pureBlackTheme)
+            }
+        }
+
         AnimatedVisibility(
-            visible = theme != Theme.LIGHT,
+            visible = supportsPureBlack,
             enter = MorpheAnimations.expandFadeEnter,
             exit = MorpheAnimations.shrinkFadeExit
         ) {
@@ -216,7 +239,7 @@ fun AppearanceTabContent(
 
         // Accent color section
         AnimatedVisibility(
-            visible = !dynamicColor,
+            visible = effectiveThemeStyle != ThemeStyle.MATERIAL_YOU,
             enter = MorpheAnimations.expandFadeEnter,
             exit = MorpheAnimations.shrinkFadeExit
         ) {
@@ -231,7 +254,7 @@ fun AppearanceTabContent(
                     AccentColorSelector(
                         selectedColorHex = customAccentColorHex,
                         onColorSelected = { color -> themeViewModel.setCustomAccentColor(color) },
-                        dynamicColorEnabled = dynamicColor
+                        dynamicColorEnabled = effectiveThemeStyle == ThemeStyle.MATERIAL_YOU
                     )
                 }
             }

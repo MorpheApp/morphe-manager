@@ -48,6 +48,8 @@ import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.theme.ManagerTheme
 import app.morphe.manager.ui.theme.Theme
+import app.morphe.manager.ui.theme.ThemeStyle
+import app.morphe.manager.ui.theme.resolveThemeStyle
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.MainViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
@@ -100,22 +102,32 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             val theme by vm.prefs.theme.getAsState()
+            val themeStyle by vm.prefs.themeStyle.getAsState()
             val dynamicColor by vm.prefs.dynamicColor.getAsState()
             val pureBlackTheme by vm.prefs.pureBlackTheme.getAsState()
             val customAccentColor by vm.prefs.customAccentColor.getAsState()
             val customThemeColor by vm.prefs.customThemeColor.getAsState()
             val systemDarkTheme = isSystemInDarkTheme()
-            val darkTheme = when (theme) {
-                Theme.SYSTEM, Theme.MONOCHROME -> systemDarkTheme
+            val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+            val effectiveTheme = if (theme == Theme.MONOCHROME) Theme.SYSTEM else theme
+            val effectiveThemeStyle = resolveThemeStyle(
+                theme = theme,
+                storedStyle = themeStyle,
+                dynamicColor = dynamicColor,
+                supportsDynamicColor = supportsDynamicColor
+            )
+            val darkTheme = when (effectiveTheme) {
+                Theme.SYSTEM -> systemDarkTheme
                 Theme.LIGHT -> false
                 Theme.DARK -> true
+                Theme.MONOCHROME -> systemDarkTheme
             }
 
             ManagerTheme(
                 darkTheme = darkTheme,
-                dynamicColor = dynamicColor,
+                dynamicColor = effectiveThemeStyle == ThemeStyle.MATERIAL_YOU,
                 pureBlackTheme = pureBlackTheme,
-                monochromeTheme = theme == Theme.MONOCHROME,
+                monochromeTheme = effectiveThemeStyle == ThemeStyle.MONOCHROME,
                 accentColorHex = customAccentColor.takeUnless { it.isBlank() },
                 themeColorHex = customThemeColor.takeUnless { it.isBlank() }
             ) {

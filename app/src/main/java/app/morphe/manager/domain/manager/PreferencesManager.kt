@@ -13,6 +13,7 @@ import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
 import app.morphe.manager.patcher.runtime.calculateAdaptiveMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
+import app.morphe.manager.ui.theme.ThemeStyle
 import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.ui.viewmodel.RandomInterval
 import app.morphe.manager.util.isArmV7
@@ -39,6 +40,7 @@ class PreferencesManager(
     val customAccentColor = stringPreference("custom_accent_color", "")
     val customThemeColor = stringPreference("custom_theme_color", "")
     val theme = enumPreference("theme", Theme.SYSTEM)
+    val themeStyle = enumPreference("theme_style", ThemeStyle.MORPHE)
 
     val appLanguage = stringPreference("app_language", "system")
 
@@ -183,6 +185,7 @@ class PreferencesManager(
         val themePresetSelectionEnabled: Boolean? = null,
         val stripUnusedNativeLibs: Boolean? = null,
         val theme: Theme? = null,
+        val themeStyle: ThemeStyle? = null,
         val appLanguage: String? = null,
         val api: String? = null,
         val gitHubPat: String? = null,
@@ -246,6 +249,7 @@ class PreferencesManager(
         themePresetSelectionEnabled = themePresetSelectionEnabled.get(),
         stripUnusedNativeLibs = stripUnusedNativeLibs.get(),
         theme = theme.get(),
+        themeStyle = themeStyle.get(),
         appLanguage = appLanguage.get(),
         gitHubPat = gitHubPat.get().takeIf { includeGitHubPatInExports.get() },
         includeGitHubPatInExports = includeGitHubPatInExports.get(),
@@ -290,6 +294,7 @@ class PreferencesManager(
         snapshot.themePresetSelectionEnabled?.let { themePresetSelectionEnabled.value = it }
         snapshot.stripUnusedNativeLibs?.let { stripUnusedNativeLibs.value = it }
         snapshot.theme?.let { theme.value = it }
+        snapshot.themeStyle?.let { themeStyle.value = it }
         snapshot.appLanguage?.let { appLanguage.value = it }
         snapshot.gitHubPat?.let { gitHubPat.value = it }
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
