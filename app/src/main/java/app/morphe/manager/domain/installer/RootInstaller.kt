@@ -22,6 +22,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.IOException
 import java.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 
 class RootInstaller(
     private val app: Application,
@@ -206,7 +207,7 @@ class RootInstaller(
 
                         outputStream.write(content)
                     }
-                }
+            }
         }
 
         val installedStockPath = installedStockInfo?.applicationInfo?.sourceDir
@@ -293,13 +294,15 @@ class RootInstaller(
         val tempPathQuoted = tempPath.shellQuote()
 
         return execute(
-            "rm -f $tempPathQuoted; " +
-                    "cp ${stockApp.absolutePath.shellQuote()} $tempPathQuoted && " +
-                    "chmod 644 $tempPathQuoted && " +
-                    "pm install -r -d $tempPathQuoted; " +
-                    "result=\$?; " +
-                    "rm -f $tempPathQuoted; " +
-                    "exit \$result"
+            $$"""
+                rm -f $$tempPathQuoted;
+                cp $${stockApp.absolutePath.shellQuote()} $$tempPathQuoted &&
+                chmod 644 $$tempPathQuoted &&
+                pm install -r -d $$tempPathQuoted;
+                result=$?;
+                rm -f $$tempPathQuoted;
+                exit $result
+            """.trimIndent()
         )
     }
 
@@ -313,7 +316,7 @@ class RootInstaller(
                 ) {
                     return@withTimeoutOrNull true
                 }
-                delay(STOCK_INSTALL_SETTLE_POLL_MS)
+                delay(STOCK_INSTALL_SETTLE_POLL)
             }
         } == true
 
@@ -360,7 +363,7 @@ class RootInstaller(
                 if (result.isSuccess) return@withTimeoutOrNull true
 
                 lastResult = result
-                delay(MODULE_PERMISSION_RETRY_MS)
+                delay(MODULE_PERMISSION_RETRY)
             }
         } == true
 
@@ -371,15 +374,19 @@ class RootInstaller(
     }
 
     private fun mountInZygoteNamespacesCommand(sourcePath: String, targetPath: String) =
-        "for zpid in \$(pidof zygote64) \$(pidof zygote); do " +
-                "nsenter -t \"\$zpid\" -m mount -o bind $sourcePath $targetPath 2>/dev/null || true; " +
-                "done"
+        $$"""
+            for zpid in $(pidof zygote64) $(pidof zygote); do
+                nsenter -t "$zpid" -m mount -o bind $$sourcePath $$targetPath 2>/dev/null || true;
+            done
+        """.trimIndent()
 
     private fun unmountBindCommands(targetPath: String) =
-        "for zpid in \$(pidof zygote64) \$(pidof zygote); do " +
-                "nsenter -t \"\$zpid\" -m umount -l $targetPath 2>/dev/null || true; " +
-                "done; " +
-                "umount -l $targetPath 2>/dev/null || true"
+        $$"""
+            for zpid in $(pidof zygote64) $(pidof zygote); do
+                nsenter -t "$zpid" -m umount -l $$targetPath 2>/dev/null || true;
+            done;
+            umount -l $$targetPath 2>/dev/null || true
+        """.trimIndent()
 
     companion object {
         const val MODULES_PATH = "/data/adb/modules"
@@ -397,9 +404,9 @@ class RootInstaller(
 
         private const val ROOT_CHECK_INTERVAL_MS = 1_000L
         private val STOCK_INSTALL_SETTLE_TIMEOUT = Duration.ofSeconds(30L)
-        private const val STOCK_INSTALL_SETTLE_POLL_MS = 1_000L
+        private val STOCK_INSTALL_SETTLE_POLL = 1_000.milliseconds
         private val MODULE_PERMISSION_SETTLE_TIMEOUT = Duration.ofSeconds(10L)
-        private const val MODULE_PERMISSION_RETRY_MS = 500L
+        private val MODULE_PERMISSION_RETRY = 500.milliseconds
     }
 }
 

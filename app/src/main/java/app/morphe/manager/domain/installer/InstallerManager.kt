@@ -137,8 +137,7 @@ class InstallerManager(
             return
         }
 
-        val primaryToken = getPrimaryToken()
-        when (primaryToken) {
+        when (val primaryToken = getPrimaryToken()) {
             Token.Shizuku,
             Token.ShizukuPlayStore -> {
                 if (availabilityFor(primaryToken, InstallTarget.PATCHER, checkRoot = true).available) {
