@@ -152,11 +152,23 @@ fun HomeScreen(
 
     var reinstallQueue by remember { mutableStateOf<List<HomeAppItem>>(emptyList()) }
     var activeReinstallItem by remember { mutableStateOf<HomeAppItem?>(null) }
+    var activeReinstallStarted by remember { mutableStateOf(false) }
+    var reinstallCompleted by remember { mutableIntStateOf(0) }
+    var reinstallSkipped by remember { mutableIntStateOf(0) }
+
+    fun showReinstallSummary() {
+        context.batchActionSummary(R.string.batch_reinstall_summary, reinstallCompleted, reinstallSkipped)
+            ?.let { context.toast(it) }
+        reinstallCompleted = 0
+        reinstallSkipped = 0
+    }
 
     fun startNextReinstall() {
         val next = reinstallQueue.firstOrNull()
         if (next == null) {
             activeReinstallItem = null
+            activeReinstallStarted = false
+            showReinstallSummary()
             return
         }
 
@@ -164,11 +176,13 @@ fun HomeScreen(
         val installed = next.installedApp
         val savedFile = installed?.let(homeViewModel::savedPatchedApkFile)
         if (installed == null || savedFile == null) {
+            reinstallSkipped++
             startNextReinstall()
             return
         }
 
         activeReinstallItem = next
+        activeReinstallStarted = true
         installViewModel.install(
             outputFile = savedFile,
             originalPackageName = installed.originalPackageName,
@@ -182,30 +196,55 @@ fun HomeScreen(
         if (items.isEmpty()) return
         reinstallQueue = items
         activeReinstallItem = null
+        activeReinstallStarted = false
+        reinstallCompleted = 0
+        reinstallSkipped = 0
         installViewModel.resetInstallState()
         startNextReinstall()
     }
 
-    LaunchedEffect(installViewModel.installState) {
+    LaunchedEffect(
+        installViewModel.installState,
+        installViewModel.installerUnavailableDialog,
+        installViewModel.showInstallerSelectionDialog
+    ) {
         if (activeReinstallItem == null) return@LaunchedEffect
         when (val state = installViewModel.installState) {
+            is InstallViewModel.InstallState.Ready -> {
+                if (
+                    activeReinstallStarted &&
+                    installViewModel.installerUnavailableDialog == null &&
+                    !installViewModel.showInstallerSelectionDialog
+                ) {
+                    reinstallSkipped++
+                    activeReinstallItem = null
+                    activeReinstallStarted = false
+                    startNextReinstall()
+                }
+            }
             is InstallViewModel.InstallState.Installed -> {
+                reinstallCompleted++
                 homeViewModel.notifyAppStateChanged(state.packageName)
                 activeReinstallItem = null
+                activeReinstallStarted = false
                 installViewModel.resetInstallState()
                 startNextReinstall()
             }
             is InstallViewModel.InstallState.Error -> {
+                reinstallSkipped++
                 context.toast(state.message)
-                reinstallQueue = emptyList()
                 activeReinstallItem = null
+                activeReinstallStarted = false
                 installViewModel.resetInstallState()
+                startNextReinstall()
             }
             is InstallViewModel.InstallState.Conflict -> {
-                context.toast(context.getString(R.string.install_app_fail, state.packageName))
-                reinstallQueue = emptyList()
+                reinstallSkipped++
+                context.toast(context.getString(R.string.install_app_fail, context.getString(R.string.installer_hint_conflict)))
                 activeReinstallItem = null
+                activeReinstallStarted = false
                 installViewModel.resetInstallState()
+                startNextReinstall()
             }
             else -> Unit
         }

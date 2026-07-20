@@ -17,7 +17,6 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Process
 import android.util.Log
-import androidx.core.net.toUri
 import app.morphe.manager.R
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
@@ -27,12 +26,15 @@ import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
 import rikka.sui.Sui
 import java.io.File
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 private const val TAG = "Morphe SessionInstaller"
 private const val ACTION_INSTALL_STATUS = "app.morphe.manager.INSTALL_STATUS"
+private const val ACTION_UNINSTALL_STATUS = "app.morphe.manager.UNINSTALL_STATUS"
 private const val EXTRA_SESSION_ID = "session_id"
+private const val EXTRA_UNINSTALL_REQUEST_ID = "uninstall_request_id"
 
 /**
  * PackageInstaller-based installer.
@@ -47,6 +49,7 @@ private const val EXTRA_SESSION_ID = "session_id"
 class SessionInstaller(private val app: Application) {
 
     private val shizukuInstaller = ShizukuInstaller(app)
+    private val uninstallRequestIds = AtomicInteger()
 
     init {
         val isSui = Sui.init(app.packageName)
@@ -283,30 +286,74 @@ class SessionInstaller(private val app: Application) {
 
     /**
      * Launches the system uninstall UI for [packageName] and suspends until the user confirms
-     * or dismisses. Throws [UninstallCancelledException] if the user canceled.
+     * or dismisses.
+     *
+     * @throws UninstallCancelledException if the user dismissed the uninstall dialog.
      */
-    @Suppress("DEPRECATION")
     suspend fun uninstall(packageName: String) = suspendCancellableCoroutine { cont ->
+        val installer = app.packageManager.packageInstaller
+        val requestId = uninstallRequestIds.incrementAndGet()
+        val broadcastIntent = Intent(ACTION_UNINSTALL_STATUS).apply {
+            `package` = app.packageName
+            putExtra(EXTRA_UNINSTALL_REQUEST_ID, requestId)
+        }
+        @Suppress("WrongConstant")
+        val pi = PendingIntent.getBroadcast(
+            app,
+            requestId,
+            broadcastIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+        )
+
         val receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                val pkg = intent.data?.schemeSpecificPart ?: return
-                if (pkg != packageName) return
-                if (intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) return
-                app.unregisterReceiver(this)
-                cont.resume(Unit)
+                if (intent.getIntExtra(EXTRA_UNINSTALL_REQUEST_ID, -1) != requestId) return
+
+                val status = intent.getIntExtra(
+                    PackageInstaller.EXTRA_STATUS,
+                    PackageInstaller.STATUS_FAILURE
+                )
+                val message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE)
+                Log.d(TAG, "Uninstall $packageName status=$status message=$message")
+
+                when (status) {
+                    PackageInstaller.STATUS_SUCCESS -> {
+                        runCatching { app.unregisterReceiver(this) }
+                        cont.resume(Unit)
+                    }
+
+                    PackageInstaller.STATUS_PENDING_USER_ACTION -> {
+                        @Suppress("DEPRECATION", "UnsafeIntentLaunch")
+                        val confirmIntent = if (Build.VERSION.SDK_INT >= 33) {
+                            intent.getParcelableExtra(Intent.EXTRA_INTENT, Intent::class.java)
+                        } else {
+                            intent.getParcelableExtra(Intent.EXTRA_INTENT)
+                        }
+                        @Suppress("UnsafeIntentLaunch")
+                        confirmIntent?.also { it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }
+                            ?.let { app.startActivity(it) }
+                    }
+
+                    PackageInstaller.STATUS_FAILURE_ABORTED -> {
+                        runCatching { app.unregisterReceiver(this) }
+                        cont.resumeWithException(UninstallCancelledException())
+                    }
+
+                    else -> {
+                        runCatching { app.unregisterReceiver(this) }
+                        cont.resumeWithException(Exception(message ?: app.getString(R.string.installer_hint_generic)))
+                    }
+                }
             }
         }
 
-        registerReceiverCompat(
-            receiver,
-            IntentFilter(Intent.ACTION_PACKAGE_REMOVED).apply { addDataScheme("package") }
-        )
+        registerReceiverCompat(receiver, IntentFilter(ACTION_UNINSTALL_STATUS))
 
         cont.invokeOnCancellation {
             runCatching { app.unregisterReceiver(receiver) }
         }
 
-        app.startActivity(buildUninstallIntent(packageName))
+        installer.uninstall(packageName, pi.intentSender)
     }
 
     /**
@@ -417,14 +464,6 @@ class SessionInstaller(private val app: Application) {
             app.registerReceiver(receiver, filter)
         }
     }
-
-    /** Builds an [Intent.ACTION_UNINSTALL_PACKAGE] intent for [packageName]. */
-    @Suppress("DEPRECATION")
-    private fun buildUninstallIntent(packageName: String) =
-        Intent(Intent.ACTION_UNINSTALL_PACKAGE).apply {
-            data = "package:$packageName".toUri()
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
 
     data class ShizukuStatus(
         val installed: Boolean,

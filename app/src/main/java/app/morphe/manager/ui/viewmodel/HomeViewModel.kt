@@ -1665,7 +1665,8 @@ class HomeViewModel(
 
         viewModelScope.launch {
             var completed = 0
-            apps.forEach { installed ->
+            var skipped = 0
+            for (installed in apps) {
                 runCatching {
                     when (installed.installType) {
                         InstallType.MOUNT -> {
@@ -1684,15 +1685,15 @@ class HomeViewModel(
                     completed++
                     notifyAppStateChanged(installed.currentPackageName)
                 }.onFailure { error ->
+                    skipped++
                     if (error !is UninstallCancelledException) {
                         app.toast(app.getString(R.string.uninstall_app_fail, error.simpleMessage()))
                     }
                 }
             }
 
-            if (completed > 0) {
-                app.toast(app.resources.getQuantityString(R.plurals.batch_uninstall_done, completed, completed))
-            }
+            app.batchActionSummary(R.string.batch_uninstall_summary, completed, skipped)
+                ?.let { app.toast(it) }
         }
     }
 
