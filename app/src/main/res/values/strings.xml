@@ -350,13 +350,14 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching</string>
     <string name="root_gmscore_excluded">GmsCore support patch is excluded in root mode</string>
-    <string name="root_pre_patch_installer_title">Choose installation method</string>
-    <string name="root_pre_patch_installer_description">Your device has root access. Choose how you want to install the patched app</string>
-    <string name="root_pre_patch_installer_mount_title">Root mount</string>
-    <string name="root_pre_patch_installer_mount_description">Mounts the patched APK over the stock app. No GmsCore needed</string>
-    <string name="root_pre_patch_installer_standard_title">Standard Install</string>
-    <string name="root_pre_patch_installer_standard_description">Installs as a separate app with GmsCore support. An installer can be selected after patching</string>
-    <string name="root_pre_patch_installer_hint">The installation method determines which patches are included and cannot be changed after patching</string>
+    <string name="root_pre_patch_installer_title">Choose patch mode</string>
+    <string name="root_pre_patch_installer_description">Your device has root access. Choose whether this app should be patched for root mount or standard install</string>
+    <string name="root_pre_patch_installer_mount_title">Root mount mode</string>
+    <string name="root_pre_patch_installer_mount_description">Patches for root mount, then mounts the APK over the matching stock app. No GmsCore needed</string>
+    <string name="root_mount_module_unmount_warning">If you use KernelSU or APatch, disable module unmounting or hiding for apps installed with root mount. Otherwise the stock app may still run even when Morphe shows it as mounted</string>
+    <string name="root_pre_patch_installer_standard_title">Standard install mode</string>
+    <string name="root_pre_patch_installer_standard_description">Patches as a normal APK with GmsCore support. Your installer setting is used after patching</string>
+    <string name="root_pre_patch_installer_hint">This patch mode is separate from Settings > System > Installer and cannot be changed after patching</string>
 
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copied to clipboard</string>
@@ -716,12 +717,13 @@ The image dimensions must be as follows:
 
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
+    <string name="installer_settings_title">Default installer</string>
     <string name="installer_title">Select installer</string>
     <string name="installer_internal_description">Uses the Android package installer</string>
     <string name="installer_play_store_description">Uses the system installer and sets Google Play Store as the install source</string>
     <string name="installer_root_play_store_description">Installs silently with root and sets Google Play Store as the install source</string>
-    <string name="installer_auto_saved_name">Rooted mount installer</string>
-    <string name="installer_auto_saved_description">Mounts the patched APK over the installed app</string>
+    <string name="installer_auto_saved_name">Root mount</string>
+    <string name="installer_auto_saved_description">Mounts apps that were patched in root mount mode. Standard patched APKs use another installer</string>
     <string name="installer_shizuku_description">Installs silently using Shizuku or Sui</string>
     <string name="installer_shizuku_play_store_description">Installs silently through Shizuku or Sui and sets Google Play Store as the install source</string>
     <string name="installer_option_none">No fallback</string>
@@ -733,6 +735,7 @@ The image dimensions must be as follows:
     <string name="installer_status_shizuku_permission">Grant permission to Morphe from the Shizuku app</string>
     <string name="installer_mount_warning_install">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount</string>
     <string name="mount_version_mismatch_message">Stock app version (%2$s) does not match patched app version (%1$s). Mount the matching stock version, then try again</string>
+    <string name="mount_stock_restore_failed_message">Android rejected the saved original APK. Install the matching stock version, then try Mount again</string>
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">The installation failed. Try again or switch to a different installer</string>

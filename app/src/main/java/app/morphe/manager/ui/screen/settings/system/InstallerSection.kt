@@ -79,7 +79,7 @@ fun InstallerSection(
             else Modifier
         ) {
             InstallerSettingsItem(
-                title = stringResource(R.string.installer_title),
+                title = stringResource(R.string.installer_settings_title),
                 entry = primaryEntry,
                 onClick = onShowInstallerDialog
             )
@@ -332,6 +332,19 @@ fun InstallerSelectionDialog(
                     options.any { it.token == selectedToken.withPlayStoreMode(true) }
             val showAutoInstallToggle = selectedToken.isShizukuToken() && onAutoInstallToggle != null
             val showPromptToggle = onInstallerPromptToggle != null
+
+            AnimatedVisibility(
+                visible = currentSelection.value == InstallerManager.Token.AutoSaved,
+                enter = MorpheAnimations.expandFadeEnter,
+                exit = MorpheAnimations.shrinkFadeExit
+            ) {
+                InfoBadge(
+                    text = stringResource(R.string.root_mount_module_unmount_warning),
+                    style = InfoBadgeStyle.Warning,
+                    icon = Icons.Outlined.Warning,
+                    isExpanded = true
+                )
+            }
 
             if (showPlayStoreToggle || showAutoInstallToggle || showPromptToggle) {
                 MorpheSettingsDivider(fullWidth = true)
@@ -966,9 +979,10 @@ fun PlayStoreInstallerWarningDialog(
 }
 
 /**
- * Dialog shown to root device users before patching to choose between Root Mount and Standard Install.
+ * Dialog shown to root device users before patching to choose between root mount mode and
+ * standard install mode.
  *
- * The installation method directly affects how the APK is patched:
+ * The patch mode directly affects how the APK is patched:
  * - **Root Mount** excludes the GmsCore support patch - the mounted APK replaces the
  *   stock APK in-place via bind-mount, so the original Google services remain available
  *   and GmsCore would actually interfere.
@@ -1011,6 +1025,13 @@ fun PrePatchInstallerDialog(
                 title = stringResource(R.string.root_pre_patch_installer_mount_title),
                 description = stringResource(R.string.root_pre_patch_installer_mount_description),
                 onClick = onSelectMount
+            )
+
+            InfoBadge(
+                text = stringResource(R.string.root_mount_module_unmount_warning),
+                style = InfoBadgeStyle.Warning,
+                icon = Icons.Outlined.Warning,
+                isExpanded = true
             )
 
             // Standard Install option

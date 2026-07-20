@@ -15,6 +15,7 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.installer.*
+import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.*
 import kotlinx.coroutines.*
@@ -38,6 +39,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     private val installerManager: InstallerManager by inject()
     private val prefs: PreferencesManager by inject()
     private val appDataResolver: AppDataResolver by inject()
+    private val originalApkRepository: OriginalApkRepository by inject()
     private val applicationScope: AppCoroutineScope by inject()
 
     /**
@@ -73,6 +75,18 @@ class InstallViewModel : ViewModel(), KoinComponent {
      * Mount operation state.
      */
     enum class MountOperation { UNMOUNTING, MOUNTING }
+
+    private data class MountStockCandidate(
+        val file: File,
+        val info: PackageInfo
+    )
+
+    private data class MountInstallInputs(
+        val patchedInfo: PackageInfo,
+        val installedInfo: PackageInfo?,
+        val inputCandidate: MountStockCandidate?,
+        val savedOriginalCandidate: MountStockCandidate?
+    )
 
     var installState by mutableStateOf<InstallState>(InstallState.Ready)
         private set
@@ -221,47 +235,30 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
                 // Plan resolution probes installer availability on disk; keep off main
                 val resolved = withContext(Dispatchers.IO) {
-                    if (oneTimeInstallerToken != null) {
-                        val token = oneTimeInstallerToken!!
-                        selectedInstallerToken = token
-                        oneTimeInstallerToken = null
-
-                        val entry = installerManager.describeEntry(token, InstallerManager.InstallTarget.PATCHER)
-
-                        if (entry != null && entry.availability.available) {
-                            val originalPrimary = installerManager.getPrimaryToken()
-                            installerManager.updatePrimaryToken(token)
-                            val result = installerManager.resolvePlanWithStatus(
-                                InstallerManager.InstallTarget.PATCHER,
-                                outputFile,
-                                targetPackageName,
-                                null
-                            )
-                            installerManager.updatePrimaryToken(originalPrimary)
-                            result
+                    fun regularInstallToken(token: InstallerManager.Token) =
+                        if (token == InstallerManager.Token.AutoSaved) {
+                            InstallerManager.Token.Internal
                         } else {
-                            // Even if the installer is unavailable, try resolve with it
-                            // to get the correct primaryToken and unavailabilityReason
-                            val originalPrimary = installerManager.getPrimaryToken()
-                            installerManager.updatePrimaryToken(token)
-                            val result = installerManager.resolvePlanWithStatus(
-                                InstallerManager.InstallTarget.PATCHER,
-                                outputFile,
-                                targetPackageName,
-                                null
-                            )
-                            installerManager.updatePrimaryToken(originalPrimary)
-                            result
+                            token
                         }
+
+                    val token = oneTimeInstallerToken
+                    val primaryToken = if (token != null) {
+                        selectedInstallerToken = token.takeUnless { it == InstallerManager.Token.AutoSaved }
+                        oneTimeInstallerToken = null
+                        token
                     } else {
                         selectedInstallerToken = null
-                        installerManager.resolvePlanWithStatus(
-                            InstallerManager.InstallTarget.PATCHER,
-                            outputFile,
-                            targetPackageName,
-                            null
-                        )
+                        installerManager.getPrimaryToken()
                     }
+
+                    installerManager.resolvePlanWithStatus(
+                        InstallerManager.InstallTarget.PATCHER,
+                        outputFile,
+                        targetPackageName,
+                        null,
+                        primaryTokenOverride = regularInstallToken(primaryToken)
+                    )
                 }
 
                 Log.d(TAG, "Resolved plan: ${resolved.plan::class.java.simpleName}")
@@ -355,9 +352,9 @@ class InstallViewModel : ViewModel(), KoinComponent {
             }
 
             is InstallerManager.InstallPlan.Mount -> {
-                Log.d(TAG, "Using root/mount installer")
-                // Mount install requires additional parameters, handled separately
-                handleInstallError(app.getString(R.string.installer_status_not_supported))
+                Log.w(TAG, "Root mount plan resolved for regular install; using internal installer")
+                currentInstallType = InstallType.DEFAULT
+                performStandardInstall(outputFile, originalPackageName, onPersistApp)
             }
 
             is InstallerManager.InstallPlan.External -> {
@@ -800,8 +797,8 @@ class InstallViewModel : ViewModel(), KoinComponent {
         inputFile: File?,
         inputIsTemporary: Boolean,
         packageName: String,
-        inputVersion: String,
-        onPersistApp: suspend (String, InstallType) -> Boolean
+        onPersistApp: suspend (String, InstallType) -> Boolean,
+        waitForStockInstall: Boolean = false
     ) {
         if (installState is InstallState.Installing) return
 
@@ -809,23 +806,66 @@ class InstallViewModel : ViewModel(), KoinComponent {
             installState = InstallState.Installing
 
             try {
-                val (packageInfo, stockInfo) = withContext(Dispatchers.IO) {
-                    val pi = pm.getPackageInfo(outputFile)
+                val inputs = withContext(Dispatchers.IO) {
+                    val patchedInfo = pm.getPackageInfo(outputFile)
                         ?: throw Exception("Failed to load application info")
-                    pi to pm.getPackageInfo(packageName)
+                    val inputCandidate = inputFile
+                        ?.takeIf { it.exists() }
+                        ?.let { file ->
+                            pm.getPackageInfo(file)?.let { MountStockCandidate(file, it) }
+                        }
+                    val savedOriginalCandidate = originalApkRepository.get(packageName)
+                        ?.filePath
+                        ?.let(::File)
+                        ?.takeIf { it.exists() }
+                        ?.let { file ->
+                            pm.getPackageInfo(file)?.let { MountStockCandidate(file, it) }
+                        }
+
+                    MountInstallInputs(
+                        patchedInfo = patchedInfo,
+                        installedInfo = pm.getPackageInfo(packageName),
+                        inputCandidate = inputCandidate,
+                        savedOriginalCandidate = savedOriginalCandidate
+                    )
                 }
 
+                val packageInfo = inputs.patchedInfo
+                var stockInfo = inputs.installedInfo
                 val label = with(pm) { packageInfo.label() }
-                val patchedVersion = packageInfo.versionName ?: ""
+                val patchedVersion = packageInfo.versionName?.takeUnless { it.isBlank() } ?: "unknown"
+                val patchedVersionCode = pm.getVersionCode(packageInfo)
+                fun PackageInfo.matchesPatched() =
+                    packageName == this.packageName &&
+                            versionName == patchedVersion &&
+                            pm.getVersionCode(this) == patchedVersionCode
+                fun MountStockCandidate.matchesPatched() =
+                    info.matchesPatched()
+
+                if (waitForStockInstall && stockInfo != null && !stockInfo.matchesPatched()) {
+                    stockInfo = waitForMatchingInstalledStock(
+                        packageName = packageName,
+                        versionName = patchedVersion,
+                        versionCode = patchedVersionCode
+                    ) ?: stockInfo
+                }
+
+                val stockMatchesPatched = stockInfo?.matchesPatched() == true
+
+                val stockCandidate = listOfNotNull(
+                    inputs.inputCandidate,
+                    inputs.savedOriginalCandidate
+                ).takeUnless { stockMatchesPatched }
+                    ?.firstOrNull { it.matchesPatched() }
 
                 // Check version mismatch for mount
                 val stockVersion = stockInfo?.versionName
-                if (stockVersion != null && stockVersion != patchedVersion) {
+                if (stockInfo != null && !stockMatchesPatched && stockCandidate == null) {
                     handleInstallError(
                         app.getString(
                             R.string.mount_version_mismatch_message,
                             patchedVersion,
-                            stockVersion
+                            stockVersion ?: "unknown"
                         )
                     )
                     return@launch
@@ -833,7 +873,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
                 // Check for base APK - app must be installed for mount
                 if (stockInfo == null) {
-                    if (packageInfo.splitNames.isNotEmpty()) {
+                    if (stockCandidate == null || packageInfo.splitNames.isNotEmpty()) {
                         handleInstallError(app.getString(R.string.installer_hint_generic))
                         return@launch
                     }
@@ -842,9 +882,9 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 // Install as root
                 rootInstaller.install(
                     outputFile,
-                    inputFile,
+                    stockCandidate?.file,
                     packageName,
-                    inputVersion,
+                    patchedVersion,
                     label
                 )
 
@@ -854,8 +894,8 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 // Mount
                 rootInstaller.mount(packageName)
 
-                // Drop the input only when the caller marked it disposable; persistent copies
-                // (saved originals) must survive for future repatching
+                // Drop only caller-owned temporary inputs; persistent saved originals must survive
+                // for future root mount updates.
                 if (inputIsTemporary) inputFile?.delete()
 
                 // Success
@@ -863,12 +903,15 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
             } catch (e: Exception) {
                 Log.e(TAG, "Mount install failed", e)
-                handleInstallError(
+                val message = if (e is StockAppInstallException) {
+                    app.getString(R.string.mount_stock_restore_failed_message)
+                } else {
                     app.getString(
                         R.string.install_app_fail,
                         e.simpleMessage() ?: e.javaClass.simpleName
                     )
-                )
+                }
+                handleInstallError(message)
 
                 // Cleanup on failure
                 try {
@@ -879,10 +922,26 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
+     * Mount a saved patched APK, restoring the matching original APK first when Morphe has it.
+     */
+    fun installSavedMount(
+        outputFile: File,
+        packageName: String,
+        onPersistApp: suspend (String, InstallType) -> Boolean
+    ) = installMount(
+        outputFile = outputFile,
+        inputFile = null,
+        inputIsTemporary = false,
+        packageName = packageName,
+        onPersistApp = onPersistApp,
+        waitForStockInstall = true
+    )
+
+    /**
      * Mount app (for root installer).
      */
     fun mount(packageName: String, version: String) = viewModelScope.launch {
-        val stockVersion = pm.getPackageInfo(packageName)?.versionName
+        val stockVersion = getInstalledStockVersion(packageName, version)
         if (stockVersion != null && stockVersion != version) {
             handleInstallError(
                 app.getString(
@@ -928,7 +987,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
      * Remount app (unmount then mount).
      */
     fun remount(packageName: String, version: String) = viewModelScope.launch {
-        val stockVersion = pm.getPackageInfo(packageName)?.versionName
+        val stockVersion = getInstalledStockVersion(packageName, version)
         if (stockVersion != null && stockVersion != version) {
             handleInstallError(
                 app.getString(
@@ -1207,6 +1266,56 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
     fun requestShizukuPermission(): Boolean = installerManager.requestShizukuPermission()
 
+    private suspend fun getInstalledStockVersion(packageName: String, expectedVersion: String): String? {
+        val currentVersion = withContext(Dispatchers.IO) {
+            pm.getPackageInfo(packageName)?.versionName
+        }
+        if (currentVersion == null || currentVersion == expectedVersion) return currentVersion
+
+        return waitForInstalledStockVersion(packageName, expectedVersion)?.versionName ?: currentVersion
+    }
+
+    private suspend fun waitForInstalledStockVersion(
+        packageName: String,
+        versionName: String
+    ): PackageInfo? {
+        var matchingInfo: PackageInfo? = null
+        withTimeoutOrNull(STOCK_INSTALL_SETTLE_TIMEOUT) {
+            while (matchingInfo == null) {
+                val info = withContext(Dispatchers.IO) { pm.getPackageInfo(packageName) }
+                if (info?.versionName == versionName) {
+                    matchingInfo = info
+                } else {
+                    delay(STOCK_INSTALL_SETTLE_POLL)
+                }
+            }
+        }
+        return matchingInfo
+    }
+
+    private suspend fun waitForMatchingInstalledStock(
+        packageName: String,
+        versionName: String,
+        versionCode: Long
+    ): PackageInfo? {
+        var matchingInfo: PackageInfo? = null
+        withTimeoutOrNull(STOCK_INSTALL_SETTLE_TIMEOUT) {
+            while (matchingInfo == null) {
+                val info = withContext(Dispatchers.IO) { pm.getPackageInfo(packageName) }
+                if (info != null &&
+                    info.packageName == packageName &&
+                    info.versionName == versionName &&
+                    pm.getVersionCode(info) == versionCode
+                ) {
+                    matchingInfo = info
+                } else {
+                    delay(STOCK_INSTALL_SETTLE_POLL)
+                }
+            }
+        }
+        return matchingInfo
+    }
+
     private fun handleInstallSuccess(packageName: String) {
         externalInstallTimeoutJob?.cancel()
         selectedInstallerToken = null
@@ -1269,5 +1378,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         private const val UNINSTALL_VERIFY_TIMEOUT_MS = 10_000L
         private const val UNINSTALL_VERIFY_POLL_MS = 250L
         private val INSTALL_MONITOR_POLL_MS = 1.seconds
+        private val STOCK_INSTALL_SETTLE_TIMEOUT = 30.seconds
+        private val STOCK_INSTALL_SETTLE_POLL = 1.seconds
     }
 }
