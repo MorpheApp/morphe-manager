@@ -9,6 +9,8 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import app.morphe.manager.ui.theme.LocalMonochromeTheme
+import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 
 /**
  * Shared color tokens for the frosted-glass button/row family used across the home
@@ -18,6 +20,13 @@ import androidx.compose.ui.graphics.Color
 object GlassButtonDefaults {
     @Composable
     fun containerColor(selected: Boolean = false): Color {
+        if (LocalMonochromeTheme.current) {
+            return MonochromeThemeDefaults.surfaceColor(
+                base = if (selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceContainerHigh,
+                selected = selected
+            )
+        }
+
         val isDark = isSystemInDarkTheme()
         val backgroundAlpha = if (isDark) 0.35f else 0.6f
         return if (selected) {
@@ -34,6 +43,10 @@ object GlassButtonDefaults {
 
     @Composable
     fun borderColor(selected: Boolean = false): Color {
+        if (LocalMonochromeTheme.current) {
+            return MonochromeThemeDefaults.borderColor(selected)
+        }
+
         val isDark = isSystemInDarkTheme()
         val borderAlpha = if (isDark) 0.4f else 0.6f
         return if (selected) {

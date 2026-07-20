@@ -94,9 +94,7 @@ class EnumPreference<E : Enum<E>>(
 ) : Preference<E>(dataStore, default) {
     private val key = stringPreferencesKey(key)
     override fun Preferences.read() =
-        this[key]?.let { name ->
-            enumValues.find { it.name == name }
-        } ?: default
+        this[key]?.let { name -> enumValues.find { it.name == name } } ?: default
 
     override fun MutablePreferences.write(value: E) {
         this[key] = value.name

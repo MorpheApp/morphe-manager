@@ -3,6 +3,7 @@ package app.morphe.manager.domain.manager
 import android.content.Context
 import android.os.Build
 import android.util.Log
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
 import app.morphe.manager.domain.manager.base.IntPreference
@@ -13,12 +14,14 @@ import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
 import app.morphe.manager.patcher.runtime.calculateAdaptiveMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
+import app.morphe.manager.ui.theme.ThemeStyle
 import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.ui.viewmodel.RandomInterval
 import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckInterval
 import app.morphe.patcher.dex.BytecodeMode
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
@@ -31,14 +34,15 @@ class PreferencesManager(
     val enableBackgroundParallax = booleanPreference("enable_background_parallax", true)
     val randomBackgroundInterval = enumPreference("random_background_interval", RandomInterval.ON_LAUNCH)
 
-    val dynamicColor = booleanPreference("dynamic_color", true)
     val pureBlackTheme = booleanPreference("pure_black_theme", false)
     val showGreetingPhrases = booleanPreference("show_greeting_phrases", true)
-    val themePresetSelectionEnabled = booleanPreference("theme_preset_selection_enabled", true)
-    val themePresetSelectionName = stringPreference("theme_preset_selection_name", "DEFAULT")
     val customAccentColor = stringPreference("custom_accent_color", "")
     val customThemeColor = stringPreference("custom_theme_color", "")
     val theme = enumPreference("theme", Theme.SYSTEM)
+    val themeStyle = enumPreference("theme_style", ThemeStyle.MORPHE)
+
+    /** Guards the one-shot migration that folds the retired `dynamic_color` toggle into [themeStyle]. */
+    private val themeStyleMigrated = booleanPreference("theme_style_migrated_v1", false)
 
     val appLanguage = stringPreference("app_language", "system")
 
@@ -67,10 +71,7 @@ class PreferencesManager(
 
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
 
-    /**
-     * Bytecode processing mode for the patcher.
-     * Defaults to [BytecodeMode.STRIP_FAST].
-     */
+    /** Bytecode processing mode for the patcher. Defaults to [BytecodeMode.STRIP_FAST]. */
     val bytecodeModePreference = enumPreference(
         "bytecode_mode",
         BytecodeMode.STRIP_FAST
@@ -161,6 +162,17 @@ class PreferencesManager(
                 patcherProcessMemoryLimit.update(adaptive)
             }
 
+            // Existing installs stored their Material You preference in `dynamic_color`;
+            // fold it into [themeStyle] once so the new selector reflects the user's choice
+            if (!themeStyleMigrated.get()) {
+                val raw = dataStore.data.first()
+                val legacyDynamicColor = raw[booleanPreferencesKey("dynamic_color")] ?: true
+                if (legacyDynamicColor && themeStyle.get() == ThemeStyle.MORPHE) {
+                    themeStyle.update(ThemeStyle.MATERIAL_YOU)
+                }
+                themeStyleMigrated.update(true)
+            }
+
             // Auto-enable prereleases for dev versions
             if (isDevVersion() && !prereleaseAutoEnabled.get()) {
                 Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
@@ -175,14 +187,14 @@ class PreferencesManager(
 
     @Serializable
     data class SettingsSnapshot(
+        /** Retired flag, kept so pre-migration snapshots still deserialize into [themeStyle]. */
         val dynamicColor: Boolean? = null,
         val pureBlackTheme: Boolean? = null,
         val customAccentColor: String? = null,
         val customThemeColor: String? = null,
-        val themePresetSelectionName: String? = null,
-        val themePresetSelectionEnabled: Boolean? = null,
         val stripUnusedNativeLibs: Boolean? = null,
         val theme: Theme? = null,
+        val themeStyle: ThemeStyle? = null,
         val appLanguage: String? = null,
         val api: String? = null,
         val gitHubPat: String? = null,
@@ -238,14 +250,13 @@ class PreferencesManager(
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
-        dynamicColor = dynamicColor.get(),
+        dynamicColor = themeStyle.get() == ThemeStyle.MATERIAL_YOU,
         pureBlackTheme = pureBlackTheme.get(),
         customAccentColor = customAccentColor.get(),
         customThemeColor = customThemeColor.get(),
-        themePresetSelectionName = themePresetSelectionName.get(),
-        themePresetSelectionEnabled = themePresetSelectionEnabled.get(),
         stripUnusedNativeLibs = stripUnusedNativeLibs.get(),
         theme = theme.get(),
+        themeStyle = themeStyle.get(),
         appLanguage = appLanguage.get(),
         gitHubPat = gitHubPat.get().takeIf { includeGitHubPatInExports.get() },
         includeGitHubPatInExports = includeGitHubPatInExports.get(),
@@ -282,14 +293,16 @@ class PreferencesManager(
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
-        snapshot.dynamicColor?.let { dynamicColor.value = it }
         snapshot.pureBlackTheme?.let { pureBlackTheme.value = it }
         snapshot.customAccentColor?.let { customAccentColor.value = it }
         snapshot.customThemeColor?.let { customThemeColor.value = it }
-        snapshot.themePresetSelectionName?.let { themePresetSelectionName.value = it }
-        snapshot.themePresetSelectionEnabled?.let { themePresetSelectionEnabled.value = it }
         snapshot.stripUnusedNativeLibs?.let { stripUnusedNativeLibs.value = it }
         snapshot.theme?.let { theme.value = it }
+        snapshot.themeStyle?.let { themeStyle.value = it }
+            ?: run {
+                // Pre-migration snapshots only carry `dynamicColor`; treat it as the missing style
+                if (snapshot.dynamicColor == true) themeStyle.value = ThemeStyle.MATERIAL_YOU
+            }
         snapshot.appLanguage?.let { appLanguage.value = it }
         snapshot.gitHubPat?.let { gitHubPat.value = it }
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
@@ -327,7 +340,7 @@ class PreferencesManager(
 
     companion object {
         /**
-         * Check if current version is a development/prerelease version
+         * Check if current version is a development/prerelease version.
          */
         fun isDevVersion(): Boolean {
             return BuildConfig.VERSION_NAME.contains("-dev", ignoreCase = true)
@@ -338,7 +351,7 @@ class PreferencesManager(
 object InstallerPreferenceTokens {
     const val INTERNAL = ":internal:"
     const val SYSTEM = ":system:"
-    const val ROOT = ":root:" // Legacy value, mapped to AUTO_SAVED.
+    const val ROOT = ":root:" // Legacy value, mapped to AUTO_SAVED
     const val AUTO_SAVED = ":auto_saved:"
     const val PLAY_STORE = ":play_store:"
     const val ROOT_PLAY_STORE = ":root_play_store:"

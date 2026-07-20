@@ -49,6 +49,7 @@ import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerUnavailableDialog
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
@@ -105,6 +106,7 @@ fun InstalledAppInfoDialog(
                 ?: KnownApps.DEFAULT_DOWNLOAD_COLOR
         }
     }
+    val infoAccentColor = MonochromeThemeDefaults.accentColor(appAccentColor)
 
     // Dialog states
     val showUninstallConfirm = remember { mutableStateOf(false) }
@@ -366,7 +368,7 @@ fun InstalledAppInfoDialog(
                                         isInstalling = isInstalling,
                                         mountOperation = mountOperation,
                                         hasUpdate = hasUpdate,
-                                        accentColor = appAccentColor,
+                                        accentColor = infoAccentColor,
                                         onPatchClick = { handlePatchClick() },
                                         onUninstall = { showUninstallConfirm.value = true },
                                         onDelete = { showDeleteDialog.value = true },
@@ -417,7 +419,7 @@ fun InstalledAppInfoDialog(
                                 appInfo = appInfo,
                                 packageName = packageName,
                                 installedApp = installedApp,
-                                accentColor = appAccentColor,
+                                accentColor = infoAccentColor,
                                 compact = windowSize.widthSizeClass == WindowWidthSizeClass.Expanded,
                                 modifier = Modifier
                                     .padding(horizontal = MorpheDefaults.ContentPadding)
@@ -442,7 +444,7 @@ fun InstalledAppInfoDialog(
                                             buttonText = stringResource(R.string.patch),
                                             buttonIcon = Icons.Outlined.AutoFixHigh,
                                             onClick = { onTriggerPatchFlow(installedApp.originalPackageName) },
-                                            accentColor = appAccentColor,
+                                            accentColor = infoAccentColor,
                                             isError = true
                                         )
                                     }
@@ -460,7 +462,7 @@ fun InstalledAppInfoDialog(
                                             buttonText = stringResource(R.string.patch),
                                             buttonIcon = Icons.Outlined.AutoFixHigh,
                                             onClick = { onTriggerPatchFlow(installedApp.originalPackageName) },
-                                            accentColor = appAccentColor,
+                                            accentColor = infoAccentColor,
                                             isError = false
                                         )
                                     }
@@ -474,7 +476,7 @@ fun InstalledAppInfoDialog(
                                     appliedPatches = appliedPatches,
                                     bundlesUsedSummary = bundlesUsedSummary,
                                     onShowPatches = { showAppliedPatchesDialog.value = true },
-                                    accentColor = appAccentColor,
+                                    accentColor = infoAccentColor,
                                     modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding)
                                 )
                             }
@@ -494,7 +496,7 @@ fun InstalledAppInfoDialog(
                                 appInfo = appInfo,
                                 packageName = packageName,
                                 installedApp = installedApp,
-                                accentColor = appAccentColor,
+                                accentColor = infoAccentColor,
                                 modifier = Modifier.clip(RoundedCornerShape(bottomStart = MorpheDefaults.CardCornerRadius, bottomEnd = MorpheDefaults.CardCornerRadius))
                             )
                         }
@@ -525,7 +527,7 @@ fun InstalledAppInfoDialog(
                                                 onClick = {
                                                     onTriggerPatchFlow(installedApp.originalPackageName)
                                                 },
-                                                accentColor = appAccentColor,
+                                                accentColor = infoAccentColor,
                                                 isError = true,
                                                 modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding)
                                             )
@@ -549,7 +551,7 @@ fun InstalledAppInfoDialog(
                                                 onClick = {
                                                     onTriggerPatchFlow(installedApp.originalPackageName)
                                                 },
-                                                accentColor = appAccentColor,
+                                                accentColor = infoAccentColor,
                                                 isError = false,
                                                 modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding)
                                             )
@@ -569,7 +571,7 @@ fun InstalledAppInfoDialog(
                                         appliedPatches = appliedPatches,
                                         bundlesUsedSummary = bundlesUsedSummary,
                                         onShowPatches = { showAppliedPatchesDialog.value = true },
-                                        accentColor = appAccentColor,
+                                        accentColor = infoAccentColor,
                                         modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding)
                                     )
                                 }
@@ -588,7 +590,7 @@ fun InstalledAppInfoDialog(
                                     isInstalling = isInstalling,
                                     mountOperation = mountOperation,
                                     hasUpdate = hasUpdate,
-                                    accentColor = appAccentColor,
+                                    accentColor = infoAccentColor,
                                     onPatchClick = { handlePatchClick() },
                                     onUninstall = { showUninstallConfirm.value = true },
                                     onDelete = { showDeleteDialog.value = true },

@@ -28,7 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -43,6 +42,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.theme.LocalMonochromeTheme
+import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 
 // Constants
 object MorpheDefaults {
@@ -89,6 +90,13 @@ fun MorpheCard(
     color: Color = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
     content: @Composable () -> Unit
 ) {
+    val monochromeTheme = LocalMonochromeTheme.current
+    val effectiveColor = MonochromeThemeDefaults.surfaceColor(color)
+    val effectiveBorder = when {
+        borderWidth > 0.dp && !monochromeTheme -> BorderStroke(borderWidth, borderColor)
+        else -> null
+    }
+
     Surface(
         modifier = modifier
             .fillMaxWidth()
@@ -99,12 +107,11 @@ fun MorpheCard(
                 } else Modifier
             ),
         shape = RoundedCornerShape(cornerRadius),
-        color = color,
+        color = effectiveColor,
         contentColor = MaterialTheme.colorScheme.onSurface,
-        tonalElevation = elevation,
-        border = if (borderWidth > 0.dp) {
-            BorderStroke(borderWidth, borderColor)
-        } else null
+        tonalElevation = if (monochromeTheme) 0.dp else elevation,
+        shadowElevation = 0.dp,
+        border = effectiveBorder
     ) {
         content()
     }
@@ -118,10 +125,15 @@ fun MorpheSettingsDivider(
     modifier: Modifier = Modifier,
     fullWidth: Boolean = false
 ) {
+    val monochromeTheme = LocalMonochromeTheme.current
     val outlineVariant = MaterialTheme.colorScheme.outlineVariant
     val surfaceTint = MaterialTheme.colorScheme.surfaceTint
-    val color = remember(outlineVariant, surfaceTint) {
-        lerp(outlineVariant, surfaceTint, 0.18f).copy(alpha = 0.55f)
+    val color = remember(outlineVariant, surfaceTint, monochromeTheme) {
+        if (monochromeTheme) {
+            outlineVariant.copy(alpha = 0.28f)
+        } else {
+            lerp(outlineVariant, surfaceTint, 0.18f).copy(alpha = 0.55f)
+        }
     }
     HorizontalDivider(
         modifier = if (fullWidth) modifier else modifier.padding(horizontal = MorpheDefaults.ContentPadding),
@@ -375,13 +387,13 @@ fun GradientCircleIcon(
         modifier = modifier
             .size(size)
             .clip(CircleShape)
-            .background(brush = Brush.linearGradient(colors = gradientColors)),
+            .background(brush = MonochromeThemeDefaults.iconBackground(gradientColors)),
         contentAlignment = Alignment.Center
     ) {
         MorpheIcon(
             icon = icon,
             contentDescription = contentDescription,
-            tint = Color.White,
+            tint = MonochromeThemeDefaults.iconTint(Color.White),
             size = iconSize
         )
     }
