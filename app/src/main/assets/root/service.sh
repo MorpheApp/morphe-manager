@@ -61,9 +61,12 @@ unmount_from_zygote_namespaces() {
 }
 
 # Unmount any existing installation to prevent multiple mounts.
-grep "$package_name" /proc/mounts | while read -r line; do
-  echo "$line" | cut -d " " -f 2 | sed "s/apk.*/apk/" | xargs -r umount -l
-done 2>/dev/null
+# Matches the target field (2nd column) of /proc/mounts so unrelated mounts that happen
+# to contain the package name in another field are ignored, and only paths that end in
+# .apk are unmounted to avoid touching adjacent mount points.
+awk -v pkg="$package_name" '$2 ~ ("/" pkg "[/-]") && $2 ~ /\.apk$/ { print $2 }' /proc/mounts \
+  | sort -u \
+  | xargs -r umount -l 2>/dev/null
 
 # Wait up to 180 seconds for PackageManager to report the stock APK path and version.
 # This is necessary because the app may not be registered immediately after boot.

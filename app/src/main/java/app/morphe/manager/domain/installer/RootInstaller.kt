@@ -103,7 +103,7 @@ class RootInstaller(
 
     suspend fun isAppMounted(packageName: String) = withContext(Dispatchers.IO) {
         pm.getPackageInfo(packageName)?.applicationInfo?.sourceDir?.let {
-            execute("mount | grep \"$it\"").isSuccess
+            execute("mount | grep -F ${it.shellQuote()}").isSuccess
         } ?: false
     }
 
