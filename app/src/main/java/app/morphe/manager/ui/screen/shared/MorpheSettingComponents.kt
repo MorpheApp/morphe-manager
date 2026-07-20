@@ -28,7 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -384,24 +383,17 @@ fun GradientCircleIcon(
     contentDescription: String? = null,
     gradientColors: List<Color> = MorpheDefaults.DefaultGradientColors
 ) {
-    val monochromeTheme = LocalMonochromeTheme.current
     Box(
         modifier = modifier
             .size(size)
             .clip(CircleShape)
-            .then(
-                if (monochromeTheme) {
-                    Modifier.background(MaterialTheme.colorScheme.primaryContainer)
-                } else {
-                    Modifier.background(brush = Brush.linearGradient(colors = gradientColors))
-                }
-            ),
+            .background(brush = MonochromeThemeDefaults.iconBackground(gradientColors)),
         contentAlignment = Alignment.Center
     ) {
         MorpheIcon(
             icon = icon,
             contentDescription = contentDescription,
-            tint = if (monochromeTheme) MaterialTheme.colorScheme.primary else Color.White,
+            tint = MonochromeThemeDefaults.iconTint(Color.White),
             size = iconSize
         )
     }

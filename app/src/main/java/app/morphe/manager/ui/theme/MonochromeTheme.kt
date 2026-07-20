@@ -4,8 +4,7 @@ import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.graphics.*
 
 val LocalMonochromeTheme = staticCompositionLocalOf { false }
 
@@ -80,6 +79,13 @@ internal fun monochromeColorScheme(base: ColorScheme, darkTheme: Boolean): Color
         )
     }
 
+/**
+ * Adapters that flatten the app's accent-heavy visuals into neutral tokens when
+ * monochrome mode is active, and pass the original values through otherwise.
+ * Component code should route through here instead of branching on
+ * [LocalMonochromeTheme] directly so that new monochrome overrides land in a
+ * single place.
+ */
 object MonochromeThemeDefaults {
     @Composable
     fun accentColor(base: Color): Color =
@@ -104,4 +110,28 @@ object MonochromeThemeDefaults {
         val alpha = if (colors.background.luminance() < 0.5f) 0.42f else 0.34f
         return base.copy(alpha = alpha)
     }
+
+    /**
+     * Text shadows read as noise on a flat monochrome palette, so drop them
+     * when monochrome is active and pass them through otherwise.
+     */
+    @Composable
+    fun textShadow(base: Shadow): Shadow? =
+        if (LocalMonochromeTheme.current) null else base
+
+    /**
+     * Solid neutral fill in monochrome mode, gradient fill otherwise. Used by
+     * decorative circular icons that would otherwise carry a colored gradient.
+     */
+    @Composable
+    fun iconBackground(gradient: List<Color>): Brush =
+        if (LocalMonochromeTheme.current) {
+            SolidColor(MaterialTheme.colorScheme.primaryContainer)
+        } else {
+            Brush.linearGradient(gradient)
+        }
+
+    @Composable
+    fun iconTint(base: Color): Color =
+        if (LocalMonochromeTheme.current) MaterialTheme.colorScheme.primary else base
 }

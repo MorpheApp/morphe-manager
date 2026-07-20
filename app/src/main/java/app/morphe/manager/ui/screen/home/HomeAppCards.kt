@@ -45,8 +45,8 @@ import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstalledApp
@@ -55,6 +55,7 @@ import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.screen.shared.ShimmerBox
 import app.morphe.manager.ui.screen.shared.drawDiagonalShimmer
 import app.morphe.manager.ui.theme.LocalMonochromeTheme
+import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 import app.morphe.manager.util.AppDataSource
 
 private data class HomeAppCardStyle(
@@ -76,24 +77,20 @@ private data class HomeAppCardStyle(
 @Composable
 private fun homeAppCardStyle(subtitleAlpha: Float = 0.75f): HomeAppCardStyle {
     val monochrome = LocalMonochromeTheme.current
-    val titleShadow = if (monochrome) {
-        null
-    } else {
+    val titleShadow = MonochromeThemeDefaults.textShadow(
         Shadow(
             color = Color.Black.copy(alpha = 0.4f),
             offset = Offset(0f, 2f),
             blurRadius = 4f
         )
-    }
-    val subtitleShadow = if (monochrome) {
-        null
-    } else {
+    )
+    val subtitleShadow = MonochromeThemeDefaults.textShadow(
         Shadow(
             color = Color.Black.copy(alpha = 0.4f),
             offset = Offset(0f, 1f),
             blurRadius = 2f
         )
-    }
+    )
 
     return HomeAppCardStyle(
         monochrome = monochrome,

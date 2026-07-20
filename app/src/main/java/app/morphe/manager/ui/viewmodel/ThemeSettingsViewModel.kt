@@ -85,8 +85,8 @@ class ThemeSettingsViewModel(
         prefs.showGreetingPhrases.update(!current)
     }
 
-    fun togglePureBlackTheme(current: Boolean) = viewModelScope.launch {
-        prefs.pureBlackTheme.update(!current)
+    fun setPureBlackTheme(enabled: Boolean) = viewModelScope.launch {
+        prefs.pureBlackTheme.update(enabled)
     }
 
     fun setBackgroundType(type: BackgroundType) = viewModelScope.launch {
@@ -97,46 +97,19 @@ class ThemeSettingsViewModel(
         prefs.enableBackgroundParallax.update(!current)
     }
 
-    fun applyThemeSelectionByKey(key: String) {
-        when (key) {
-            "SYSTEM" -> setThemeMode(Theme.SYSTEM)
-            "LIGHT" -> setThemeMode(Theme.LIGHT)
-            "DARK" -> setThemeMode(Theme.DARK)
-            "DYNAMIC" -> setThemeStyle(ThemeStyle.MATERIAL_YOU)
-            "MONOCHROME" -> setThemeStyle(ThemeStyle.MONOCHROME)
-            else -> setThemeMode(Theme.SYSTEM)
-        }
-    }
-
     fun setThemeMode(theme: Theme) = viewModelScope.launch {
-        prefs.themePresetSelectionEnabled.update(true)
-        if (prefs.theme.get() == Theme.MONOCHROME) {
-            prefs.themeStyle.update(ThemeStyle.MONOCHROME)
-            prefs.dynamicColor.update(false)
-        }
         prefs.theme.update(theme)
-
         if (theme == Theme.LIGHT) {
             prefs.pureBlackTheme.update(false)
         }
-
-        prefs.themePresetSelectionName.update(theme.name)
     }
 
     fun setThemeStyle(style: ThemeStyle) = viewModelScope.launch {
-        prefs.themePresetSelectionEnabled.update(true)
         prefs.themeStyle.update(style)
-        prefs.dynamicColor.update(style == ThemeStyle.MATERIAL_YOU)
-
-        if (prefs.theme.get() == Theme.MONOCHROME) {
-            prefs.theme.update(Theme.SYSTEM)
-        }
-
+        // Dynamic color drives its own accent from the wallpaper, so custom overrides are cleared
         if (style == ThemeStyle.MATERIAL_YOU) {
             prefs.customAccentColor.update("")
             prefs.customThemeColor.update("")
         }
-
-        prefs.themePresetSelectionName.update(style.name)
     }
 }

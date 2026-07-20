@@ -17,67 +17,67 @@ import app.morphe.manager.util.toColorOrNull
 import kotlinx.serialization.Serializable
 
 private val DarkColorScheme = darkColorScheme(
-    primary = rv_theme_dark_primary,
-    onPrimary = rv_theme_dark_onPrimary,
-    primaryContainer = rv_theme_dark_primaryContainer,
-    onPrimaryContainer = rv_theme_dark_onPrimaryContainer,
-    secondary = rv_theme_dark_secondary,
-    onSecondary = rv_theme_dark_onSecondary,
-    secondaryContainer = rv_theme_dark_secondaryContainer,
-    onSecondaryContainer = rv_theme_dark_onSecondaryContainer,
-    tertiary = rv_theme_dark_tertiary,
-    onTertiary = rv_theme_dark_onTertiary,
-    tertiaryContainer = rv_theme_dark_tertiaryContainer,
-    onTertiaryContainer = rv_theme_dark_onTertiaryContainer,
-    error = rv_theme_dark_error,
-    errorContainer = rv_theme_dark_errorContainer,
-    onError = rv_theme_dark_onError,
-    onErrorContainer = rv_theme_dark_onErrorContainer,
-    background = rv_theme_dark_background,
-    onBackground = rv_theme_dark_onBackground,
-    surface = rv_theme_dark_surface,
-    onSurface = rv_theme_dark_onSurface,
-    surfaceVariant = rv_theme_dark_surfaceVariant,
-    onSurfaceVariant = rv_theme_dark_onSurfaceVariant,
-    outline = rv_theme_dark_outline,
-    inverseOnSurface = rv_theme_dark_inverseOnSurface,
-    inverseSurface = rv_theme_dark_inverseSurface,
-    inversePrimary = rv_theme_dark_inversePrimary,
-    surfaceTint = rv_theme_dark_surfaceTint,
-    outlineVariant = rv_theme_dark_outlineVariant,
-    scrim = rv_theme_dark_scrim,
+    primary = theme_dark_primary,
+    onPrimary = theme_dark_onPrimary,
+    primaryContainer = theme_dark_primaryContainer,
+    onPrimaryContainer = theme_dark_onPrimaryContainer,
+    secondary = theme_dark_secondary,
+    onSecondary = theme_dark_onSecondary,
+    secondaryContainer = theme_dark_secondaryContainer,
+    onSecondaryContainer = theme_dark_onSecondaryContainer,
+    tertiary = theme_dark_tertiary,
+    onTertiary = theme_dark_onTertiary,
+    tertiaryContainer = theme_dark_tertiaryContainer,
+    onTertiaryContainer = theme_dark_onTertiaryContainer,
+    error = theme_dark_error,
+    errorContainer = theme_dark_errorContainer,
+    onError = theme_dark_onError,
+    onErrorContainer = theme_dark_onErrorContainer,
+    background = theme_dark_background,
+    onBackground = theme_dark_onBackground,
+    surface = theme_dark_surface,
+    onSurface = theme_dark_onSurface,
+    surfaceVariant = theme_dark_surfaceVariant,
+    onSurfaceVariant = theme_dark_onSurfaceVariant,
+    outline = theme_dark_outline,
+    inverseOnSurface = theme_dark_inverseOnSurface,
+    inverseSurface = theme_dark_inverseSurface,
+    inversePrimary = theme_dark_inversePrimary,
+    surfaceTint = theme_dark_surfaceTint,
+    outlineVariant = theme_dark_outlineVariant,
+    scrim = theme_dark_scrim,
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = rv_theme_light_primary,
-    onPrimary = rv_theme_light_onPrimary,
-    primaryContainer = rv_theme_light_primaryContainer,
-    onPrimaryContainer = rv_theme_light_onPrimaryContainer,
-    secondary = rv_theme_light_secondary,
-    onSecondary = rv_theme_light_onSecondary,
-    secondaryContainer = rv_theme_light_secondaryContainer,
-    onSecondaryContainer = rv_theme_light_onSecondaryContainer,
-    tertiary = rv_theme_light_tertiary,
-    onTertiary = rv_theme_light_onTertiary,
-    tertiaryContainer = rv_theme_light_tertiaryContainer,
-    onTertiaryContainer = rv_theme_light_onTertiaryContainer,
-    error = rv_theme_light_error,
-    errorContainer = rv_theme_light_errorContainer,
-    onError = rv_theme_light_onError,
-    onErrorContainer = rv_theme_light_onErrorContainer,
-    background = rv_theme_light_background,
-    onBackground = rv_theme_light_onBackground,
-    surface = rv_theme_light_surface,
-    onSurface = rv_theme_light_onSurface,
-    surfaceVariant = rv_theme_light_surfaceVariant,
-    onSurfaceVariant = rv_theme_light_onSurfaceVariant,
-    outline = rv_theme_light_outline,
-    inverseOnSurface = rv_theme_light_inverseOnSurface,
-    inverseSurface = rv_theme_light_inverseSurface,
-    inversePrimary = rv_theme_light_inversePrimary,
-    surfaceTint = rv_theme_light_surfaceTint,
-    outlineVariant = rv_theme_light_outlineVariant,
-    scrim = rv_theme_light_scrim,
+    primary = theme_light_primary,
+    onPrimary = theme_light_onPrimary,
+    primaryContainer = theme_light_primaryContainer,
+    onPrimaryContainer = theme_light_onPrimaryContainer,
+    secondary = theme_light_secondary,
+    onSecondary = theme_light_onSecondary,
+    secondaryContainer = theme_light_secondaryContainer,
+    onSecondaryContainer = theme_light_onSecondaryContainer,
+    tertiary = theme_light_tertiary,
+    onTertiary = theme_light_onTertiary,
+    tertiaryContainer = theme_light_tertiaryContainer,
+    onTertiaryContainer = theme_light_onTertiaryContainer,
+    error = theme_light_error,
+    errorContainer = theme_light_errorContainer,
+    onError = theme_light_onError,
+    onErrorContainer = theme_light_onErrorContainer,
+    background = theme_light_background,
+    onBackground = theme_light_onBackground,
+    surface = theme_light_surface,
+    onSurface = theme_light_onSurface,
+    surfaceVariant = theme_light_surfaceVariant,
+    onSurfaceVariant = theme_light_onSurfaceVariant,
+    outline = theme_light_outline,
+    inverseOnSurface = theme_light_inverseOnSurface,
+    inverseSurface = theme_light_inverseSurface,
+    inversePrimary = theme_light_inversePrimary,
+    surfaceTint = theme_light_surfaceTint,
+    outlineVariant = theme_light_outlineVariant,
+    scrim = theme_light_scrim,
 )
 
 @Composable
@@ -157,10 +157,7 @@ fun ManagerTheme(
 enum class Theme(val displayName: Int) {
     SYSTEM(R.string.settings_appearance_system),
     LIGHT(R.string.settings_appearance_light),
-    DARK(R.string.settings_appearance_dark),
-
-    /** Legacy value retained so older settings exports still deserialize. */
-    MONOCHROME(R.string.settings_appearance_monochrome);
+    DARK(R.string.settings_appearance_dark);
 }
 
 @Serializable
@@ -170,20 +167,13 @@ enum class ThemeStyle(val displayName: Int) {
     MONOCHROME(R.string.settings_appearance_monochrome);
 }
 
-fun resolveThemeStyle(
-    theme: Theme,
-    storedStyle: ThemeStyle,
-    dynamicColor: Boolean,
-    supportsDynamicColor: Boolean
-): ThemeStyle = when {
-    theme == Theme.MONOCHROME -> ThemeStyle.MONOCHROME
-    storedStyle == ThemeStyle.MONOCHROME -> ThemeStyle.MONOCHROME
-    storedStyle == ThemeStyle.MATERIAL_YOU -> {
-        if (supportsDynamicColor) ThemeStyle.MATERIAL_YOU else ThemeStyle.MORPHE
-    }
-    dynamicColor && supportsDynamicColor -> ThemeStyle.MATERIAL_YOU
-    else -> storedStyle
-}
+/**
+ * Downgrades [ThemeStyle.MATERIAL_YOU] to [ThemeStyle.MORPHE] on devices that
+ * do not expose the platform dynamic color palette.
+ */
+fun resolveThemeStyle(storedStyle: ThemeStyle, supportsDynamicColor: Boolean): ThemeStyle =
+    if (storedStyle == ThemeStyle.MATERIAL_YOU && !supportsDynamicColor) ThemeStyle.MORPHE
+    else storedStyle
 
 private fun applyCustomAccent(
     colorScheme: ColorScheme,

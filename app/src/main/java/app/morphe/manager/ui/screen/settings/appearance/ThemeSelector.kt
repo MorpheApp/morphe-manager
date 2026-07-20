@@ -25,36 +25,28 @@ import app.morphe.manager.ui.theme.ThemeStyle
 @Composable
 fun ThemeSelector(
     theme: Theme,
-    onThemeSelected: (String) -> Unit
+    onThemeSelected: (Theme) -> Unit
 ) {
     val columns = 3
 
-    // Determine current theme selection
-    val currentTheme = when (theme) {
-        Theme.LIGHT -> "LIGHT"
-        Theme.DARK -> "DARK"
-        else -> "SYSTEM"
-    }
-
-    // Build theme options
     val themeOptions = buildList {
         add(
             Triple(
-                "SYSTEM",
+                Theme.SYSTEM,
                 Icons.Outlined.PhoneAndroid,
                 stringResource(R.string.settings_appearance_system)
             )
         )
         add(
             Triple(
-                "LIGHT",
+                Theme.LIGHT,
                 Icons.Outlined.LightMode,
                 stringResource(R.string.settings_appearance_light)
             )
         )
         add(
             Triple(
-                "DARK",
+                Theme.DARK,
                 Icons.Outlined.DarkMode,
                 stringResource(R.string.settings_appearance_dark)
             )
@@ -76,10 +68,10 @@ fun ThemeSelector(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    row.forEach { (key, icon, label) ->
+                    row.forEach { (mode, icon, label) ->
                         ModernIconOptionCard(
-                            selected = currentTheme == key,
-                            onClick = { onThemeSelected(key) },
+                            selected = theme == mode,
+                            onClick = { onThemeSelected(mode) },
                             icon = icon,
                             label = label,
                             modifier = Modifier.weight(1f)

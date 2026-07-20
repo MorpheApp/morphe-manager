@@ -53,7 +53,6 @@ fun AppearanceTabContent(
     theme: Theme,
     themeStyle: ThemeStyle,
     pureBlackTheme: Boolean,
-    dynamicColor: Boolean,
     customAccentColorHex: String?,
     themeViewModel: ThemeSettingsViewModel,
     homeAppButtonPrefs: HomeAppButtonPreferences = koinInject(),
@@ -71,13 +70,7 @@ fun AppearanceTabContent(
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
     val randomInterval by themeViewModel.prefs.randomBackgroundInterval.getAsState()
-    val effectiveTheme = if (theme == Theme.MONOCHROME) Theme.SYSTEM else theme
-    val effectiveThemeStyle = resolveThemeStyle(
-        theme = theme,
-        storedStyle = themeStyle,
-        dynamicColor = dynamicColor,
-        supportsDynamicColor = supportsDynamicColor
-    )
+    val effectiveThemeStyle = resolveThemeStyle(themeStyle, supportsDynamicColor)
 
     val showLanguageDialog = remember { mutableStateOf(false) }
     val showTranslationInfoDialog = remember { mutableStateOf(false) }
@@ -187,9 +180,7 @@ fun AppearanceTabContent(
         ) {
             ThemeSelector(
                 theme = theme,
-                onThemeSelected = { selectedTheme ->
-                    themeViewModel.applyThemeSelectionByKey(selectedTheme)
-                }
+                onThemeSelected = themeViewModel::setThemeMode
             )
         }
 
@@ -201,11 +192,11 @@ fun AppearanceTabContent(
             )
         }
 
-        val supportsPureBlack = effectiveTheme != Theme.LIGHT
+        val supportsPureBlack = theme != Theme.LIGHT
 
         LaunchedEffect(supportsPureBlack, pureBlackTheme) {
             if (!supportsPureBlack && pureBlackTheme) {
-                themeViewModel.togglePureBlackTheme(pureBlackTheme)
+                themeViewModel.setPureBlackTheme(false)
             }
         }
 
@@ -218,7 +209,7 @@ fun AppearanceTabContent(
                 modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)
             ) {
                 SettingsItem(
-                    onClick = { themeViewModel.togglePureBlackTheme(pureBlackTheme) },
+                    onClick = { themeViewModel.setPureBlackTheme(!pureBlackTheme) },
                     title = stringResource(R.string.settings_appearance_pure_black),
                     subtitle = stringResource(R.string.settings_appearance_pure_black_description),
                     leadingContent = {
