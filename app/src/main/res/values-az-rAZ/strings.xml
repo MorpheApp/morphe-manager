@@ -306,6 +306,7 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="header_creator_guide_positioning_body">Şəklinizi yerləşdirmək və ölçüləndirmək məqsədilə önizləmədəki birbaşa yaxınlaşdırmaq üçün çimdikləmək və sürükləmək jestlərin istifadə edin. Şəkil mərkəzə yaxındırsa, dartma göstəriciləri görünür. Önizləmənin aşağısındakı sürüşdürməni də istifadə edə bilərsiniz.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bu tətbiqi silmək istədiyinizə əminsiniz?</string>
+    <string name="batch_uninstall_confirm_body">Seçilmiş tətbiqlər cihazınızdan həmişəlik silinəcək</string>
     <string name="home_app_info_remove_app_warning">Bu, həmişəlik silinəcək:</string>
     <string name="home_app_info_delete_item_database">Məlumat saxlanma girişi</string>
     <string name="home_app_info_delete_item_patched_apk">Yamaqlanan APK faylı</string>
@@ -824,6 +825,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_patched_apks_description">Yamaqlanıb saxlanılan tətbiq fayllarını idarə edir</string>
     <string name="settings_system_patched_apks_empty">Hələ saxlanılan yamaqlanmış APK-lar yoxdur</string>
     <string name="settings_system_patched_apks_delete_title">Yamaqlanan APK silinsin?</string>
+    <string name="settings_system_patched_apks_delete_confirm">&lt;b&gt;%s&lt;/b&gt; üçün saxlanılan, yamaqlanmış APK-nı silmək istədiyinizə əminsiniz?</string>
     <string name="settings_system_patched_apks_deleted">Yamaqlanan APK uğurla silindi</string>
     <string name="settings_system_patched_apks_delete_all_title">Bütün yamaqlanmış APK-lar silinsin?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -832,6 +834,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_original_apks_empty">Əsil APK faylları saxlanılmayıb</string>
     <string name="settings_system_original_apks_deleted">Əsil APK uğurla silindi</string>
     <string name="settings_system_original_apks_delete_title">Əsil APK silinsin?</string>
+    <string name="settings_system_original_apks_delete_confirm">&lt;b&gt;%s&lt;/b&gt; üçün əsil APK silinsin? Yeni APK təmin etmədən təkrar yamaqlaya bilməyəcəksiniz</string>
     <string name="settings_system_original_apks_delete_all_title">Bütün orijinal APK-lar silinsin?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Yamaq seçimləri</string>
@@ -846,6 +849,9 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Mənbə #%s</string>
     <string name="settings_system_patch_selection_will_delete">Bu siləcək:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Bu, bütün paketlər və mənbələr üçün saxlanılan bütün yamaq seçimlərini daimi siləcək</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Bu, bütün mənbələr üzrə &lt;b&gt;%s&lt;/b&gt; üçün saxlanılan bütün yamaq seçimlərini daimi siləcək</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Bu, &lt;b&gt;%2$s&lt;/b&gt; mənbəsində &lt;b&gt;%1$s&lt;/b&gt; üçün saxlanılan yamaq seçimlərini daimi siləcək</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Bu, seçilmiş paketlər üçün saxlanılan bütün yamaq seçimlərini daimi siləcək</string>
     <string name="settings_system_export_source_data_fail">Mənbə məlumatını ixrac etmək olmadı</string>
     <string name="settings_system_export_source_data_success">Mənbə məlumatı uğurla ixrac olundu</string>
     <string name="settings_system_import_source_data_fail">Mənbə məlumatını idxal etmək olmadı</string>

@@ -829,6 +829,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">Управлява запазените файлове на приложения с пач</string>
     <string name="settings_system_patched_apks_empty">Все още няма запазени променени APK</string>
     <string name="settings_system_patched_apks_delete_title">Изтриване на променен APK?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Сигурни ли сте, че искате да изтриете запазения пачнат APK за &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">Промененият APK е изтрит успешно</string>
     <string name="settings_system_patched_apks_delete_all_title">Изтриване на всички променени APK файлове?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -837,6 +838,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">Няма запазени оригинални APK</string>
     <string name="settings_system_original_apks_deleted">Оригиналният APK е изтрит успешно</string>
     <string name="settings_system_original_apks_delete_title">Изтриване на оригиналния APK?</string>
+    <string name="settings_system_original_apks_delete_confirm">Изтриване на оригиналния APK за &lt;b&gt;%s&lt;/b&gt;? Няма да можете да го пачнете отново, освен ако не предоставите нов APK.</string>
     <string name="settings_system_original_apks_delete_all_title">Изтриване на всички оригинални APK файлове?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Избрани поправки</string>
@@ -851,6 +853,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">Източник #%s</string>
     <string name="settings_system_patch_selection_will_delete">Това ще изтрие:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Това ще изтрие всички запазени избрани пакети за всички пакети и източници завинаги</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Това ще изтрие безвъзвратно всички запазени селекции на пачове за &lt;b&gt;%s&lt;/b&gt; във всички източници.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Това ще изтрие безвъзвратно запазените селекции на пачове за &lt;b&gt;%1$s&lt;/b&gt; в &lt;b&gt;%2$s&lt;/b&gt;.</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Това ще изтрие безвъзвратно всички запазени селекции на пачове за избраните пакети.</string>
     <string name="settings_system_export_source_data_fail">Неуспешно експортиране на данни за източника</string>
     <string name="settings_system_export_source_data_success">Данните за източника са експортирани успешно</string>
     <string name="settings_system_import_source_data_fail">Неуспешно импортиране на данни за източника</string>

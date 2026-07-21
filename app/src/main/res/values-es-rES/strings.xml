@@ -105,7 +105,7 @@
     <string name="sources_sort_title">Ordenar fuentes de parches</string>
     <string name="sources_sort_manual">Orden manual</string>
     <string name="sources_sort_manual_hint">Mantén pulsada una fuente para reordenarla</string>
-    <string name="sources_sort_last_updated">Última actualizada</string>
+    <string name="sources_sort_last_updated">Último actualizado</string>
     <string name="sources_sort_last_updated_description">Actualizaciones de fuentes más recientes primero</string>
     <string name="sources_sort_enabled_first">Activadas primero</string>
     <string name="sources_sort_enabled_first_description">Mostrar fuentes activas antes que las desactivadas</string>
@@ -116,7 +116,7 @@
     <string name="sources_management_experimental_versions_toggle">Versiones experimentales de la aplicación</string>
     <string name="sources_management_experimental_versions_toggle_description">Parchea las versiones experimentales de la aplicación, si están disponibles</string>
     <string name="sources_management_already_exists">Esta fuente ya ha sido añadida</string>
-    <string name="sources_management_invalid_url">URL de fuente no válida. Compruebe la dirección e inténtelo de nuevo</string>
+    <string name="sources_management_invalid_url">La URL de la fuente no es válida. Compruebe la dirección e inténtelo de nuevo</string>
     <string name="sources_management_blocked">Esta fuente de parches está bloqueada y no se puede agregar</string>
     <string name="sources_management_source_blocked_badge">Bloqueado</string>
     <string name="sources_management_metadata_unavailable">Metadatos no disponibles</string>
@@ -126,10 +126,10 @@
     <string name="sources_management_source_disabled">Fuente desactivada</string>
     <string name="sources_management_source_updating">Actualizando fuente</string>
     <!-- Home Screen - Sources Dialogs -->
-    <string name="sources_dialog_display_name">Nombre para mostrar</string>
-    <string name="sources_dialog_rename">Agregar fuente de parches</string>
+    <string name="sources_dialog_display_name">Nombre a mostrar</string>
+    <string name="sources_dialog_rename">Renombrar fuente de parches</string>
     <string name="sources_dialog_duplicate_name_error">Ya existe una fuente de parches con este nombre</string>
-    <string name="sources_dialog_missing_error">No se pudo actualizar esta fuente de parche</string>
+    <string name="sources_dialog_missing_error">No se pudo actualizar esta fuente de parches</string>
     <string name="sources_dialog_view_any_version">Cualquier versión</string>
     <string name="sources_dialog_view_any_package">Cualquier paquete</string>
     <string name="sources_dialog_add_source">Agregar fuente de parches</string>
@@ -139,26 +139,26 @@
     <string name="sources_dialog_remote_url_formats_title">Ejemplos:</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Seleccione el archivo fuente de parches</string>
-    <string name="sources_dialog_local_file_tap_hint">Toca para explorar el almacenamiento</string>
+    <string name="sources_dialog_local_file_tap_hint">Pulsa para explorar el almacenamiento</string>
     <string name="sources_dialog_local_file_description">Seleccionar un archivo fuente de parches .mpp en el almacenamiento</string>
     <string name="sources_dialog_local_invalid_extension">El archivo debe tener una extensión .mpp</string>
     <string name="sources_dialog_url_valid">Repositorio o URL JSON válido</string>
     <string name="sources_dialog_url_invalid">La URL debe apuntar a un repositorio de GitHub/GitLab o a un archivo .json</string>
     <string name="sources_dialog_local_change_file">Cambiar archivo</string>
     <string name="sources_dialog_preinstalled">Preinstalado</string>
-    <string name="sources_update_success">Actualización correcta</string>
+    <string name="sources_update_success">Actualización exitosa</string>
     <string name="sources_update_unavailable">No hay actualización disponible</string>
-    <string name="sources_download_fail">No se pudo descargar las fuentes: %s</string>
+    <string name="sources_download_fail">No se pudieron descargar las fuentes: %s</string>
     <string name="sources_download_fail_named">\"%s\" no se pudo actualizar. Comprueba tu conexión a internet e inténtalo de nuevo</string>
-    <string name="sources_download_endpoint_not_found">\"%s\": no se encontraron metadatos del parche</string>
+    <string name="sources_download_endpoint_not_found">\"%s\": no se encontraron los metadatos del parche</string>
     <string name="sources_patch_expert_badge">Experto</string>
-    <string name="sources_patch_expert_badge_tooltip">Habilite el modo Experto en la configuración para incluir este parche manualmente</string>
+    <string name="sources_patch_expert_badge_tooltip">Activa el modo Experto en la configuración para incluir este parche manualmente</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">¿Necesitas ayuda para encontrar un APK original sin parchear?</string>
     <string name="home_apk_availability_dialog_simple">Para parchear &lt;b&gt;%s&lt;/b&gt;, necesitas la versión APK sin parchear:</string>
     <string name="home_apk_availability_dialog_expert">Para parchear &lt;b&gt;%s&lt;/b&gt;, necesitas un APK sin parchear de las versiones:</string>
     <string name="home_apk_availability_recommended_label">Recomendado</string>
-    <string name="home_apk_availability_unpatched_label">No parcheado</string>
+    <string name="home_apk_availability_unpatched_label">Sin parchear</string>
     <string name="home_apk_availability_incompatible_label">Incompatible</string>
     <string name="home_apk_availability_yes">Sí, ayúdame a encontrar un APK</string>
     <string name="home_apk_availability_no">No, ya tengo un APK</string>
@@ -166,15 +166,15 @@
     <string name="home_apk_use_installed">Usar APK instalado</string>
     <string name="home_app_info_no_saved_apk">No hay APK guardado. Para aplicar los parches será necesario seleccionar el archivo APK nuevamente.</string>
     <string name="home_version_requires_android">Requiere Android %s o superior</string>
-    <string name="home_apk_no_compatible_versions_title">No compatible en este dispositivo</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; no tiene versiones compatibles para Android %2$d (API %3$d). Todas las versiones declaradas requieren una versión de Android superior</string>
+    <string name="home_apk_no_compatible_versions_title">Incompatible con este dispositivo</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; no tiene versiones compatibles con Android %2$d (API %3$d). Todas las versiones declaradas requieren una versión de Android superior</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descargar el APK original</string>
     <string name="home_download_instructions_steps_title">Instrucciones:</string>
     <string name="home_download_instructions_step1">Pulsa el botón \"%s\" de abajo</string>
     <string name="home_download_instructions_step2_part1">Desplázate hacia abajo en la página web y pulsa</string>
-    <string name="home_download_instructions_download_button_toast">Pulsa descargar en el sitio web, y no aquí 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">¡Genial! Ahora haz clic en \"Continuar\" y ve al sitio web 👆</string>
+    <string name="home_download_instructions_download_button_toast">Pulsa descargar en el sitio web, no aquí 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">¡Genial! Ahora pulsa en \"Continuar\" y ve al sitio web 👆</string>
     <string name="home_download_instructions_download_button_toast_3">La práctica hace al maestro y estás en camino 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Todavía no está aquí… todavía no está aquí… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">De acuerdo, respeto la dedicación 🫡</string>

@@ -826,6 +826,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">Управление сохраненными патчеными файлами приложений</string>
     <string name="settings_system_patched_apks_empty">Патченые файлы APK еще не сохранены</string>
     <string name="settings_system_patched_apks_delete_title">Удалить патченный APK ?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Уверены, что хотите удалить сохраненный патченный APK для &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">Патченый APK удален успешно</string>
     <string name="settings_system_patched_apks_delete_all_title">Удалить все пропатченные APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -834,6 +835,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">Нет сохраненных оригинальных APK</string>
     <string name="settings_system_original_apks_deleted">Оригинальный APK успешно удален</string>
     <string name="settings_system_original_apks_delete_title">Удалить оригинальный APK?</string>
+    <string name="settings_system_original_apks_delete_confirm">Удалить оригинальный APK для &lt;b&gt;%s&lt;/b&gt;? Вы не сможете перепатчить приложение без предоставления нового APK</string>
     <string name="settings_system_original_apks_delete_all_title">Удалить все оригинальные APK?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Выбор патчей</string>
@@ -848,6 +850,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">Источник #%s</string>
     <string name="settings_system_patch_selection_will_delete">Будет удалено:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Это навсегда удалит все сохраненные выбранные исправления для всех пакетов и источников</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Это навсегда удалит все сохраненные выбранные патчи для &lt;b&gt;%s&lt;/b&gt; во всех источниках</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Это навсегда удалит сохраненные выбранные патчи для &lt;b&gt;%1$s&lt;/b&gt; в &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Это навсегда удалит все сохраненные выбранные патчи для выбранных пакетов</string>
     <string name="settings_system_export_source_data_fail">Не удалось экспортировать данные источника</string>
     <string name="settings_system_export_source_data_success">Данные источника экспортированы успешно</string>
     <string name="settings_system_import_source_data_fail">Не удалось импортировать данные источника</string>

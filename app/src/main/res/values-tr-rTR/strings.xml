@@ -826,6 +826,7 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_patched_apks_description">Kayıtlı yamalanmış uygulama dosyalarını yönetir</string>
     <string name="settings_system_patched_apks_empty">Henüz hiç yamalanmış APK kaydedilmedi</string>
     <string name="settings_system_patched_apks_delete_title">Yamalanmış APK silinsin mi?</string>
+    <string name="settings_system_patched_apks_delete_confirm">&lt;b&gt;%s&lt;/b&gt; için kaydedilen yamalanmış APK’yi silmek istediğinizden emin misiniz?</string>
     <string name="settings_system_patched_apks_deleted">Yamalanmış APK başarıyla silindi</string>
     <string name="settings_system_patched_apks_delete_all_title">Tüm yamalanmış APK\'ler silinsin mi?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -834,6 +835,7 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_original_apks_empty">Hiç orijinal APK saklanmıyor</string>
     <string name="settings_system_original_apks_deleted">Orijinal APK başarıyla silindi</string>
     <string name="settings_system_original_apks_delete_title">Orijinal APK silinsin mi?</string>
+    <string name="settings_system_original_apks_delete_confirm">&lt;b&gt;%s&lt;/b&gt; için orijinal APK silinsin mi? Yeni bir APK sağlamadan yeniden yama yapamazsınız</string>
     <string name="settings_system_original_apks_delete_all_title">Tüm orijinal APK\'ler silinsin mi?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Yama seçenekleri</string>
@@ -848,6 +850,9 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Kaynak #%s</string>
     <string name="settings_system_patch_selection_will_delete">Bu işlem şunları silecektir:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Bu, tüm paketler ve kaynaklar için kaydedilmiş yama seçimlerinin tamamını kalıcı olarak silecektir</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Bu, tüm kaynaklarda &lt;b&gt;%s&lt;/b&gt; için kaydedilmiş tüm yama seçimlerini kalıcı olarak silecektir</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Bu, &lt;b&gt;%1$s&lt;/b&gt; için &lt;b&gt;%2$s&lt;/b&gt; konumundaki kaydedilmiş yama seçimlerini kalıcı olarak silecektir</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Bu, seçilen paketler için kaydedilmiş tüm yama seçimlerini kalıcı olarak silecektir</string>
     <string name="settings_system_export_source_data_fail">Kaynak verisinin dışa aktarılması başarısız oldu</string>
     <string name="settings_system_export_source_data_success">Kaynak verisi başarıyla dışa aktarıldı</string>
     <string name="settings_system_import_source_data_fail">Kaynak verisinin içe aktarılması başarısız oldu</string>

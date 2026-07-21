@@ -306,6 +306,7 @@
     <string name="header_creator_guide_positioning_body">미리보기에서 핀치 확대/축소 및 드래그 제스처를 사용하여 이미지 위치와 크기를 조정할 수 있습니다. 이미지가 중앙에 가까워지면 스냅 가이드가 표시됩니다. 미리보기 아래의 슬라이더로도 조정할 수 있습니다.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">이 앱을 정말 제거하시겠습니까?</string>
+    <string name="batch_uninstall_confirm_body">선택된 앱을 기기에서 영구적으로 제거합니다</string>
     <string name="home_app_info_remove_app_warning">다음 항목들을 영구적으로 삭제합니다:</string>
     <string name="home_app_info_delete_item_database">데이터베이스 엔트리</string>
     <string name="home_app_info_delete_item_patched_apk">패치된 APK 파일</string>
@@ -825,6 +826,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">저장된 패치된 앱 파일을 관리합니다</string>
     <string name="settings_system_patched_apks_empty">저장된 패치된 APK가 없습니다</string>
     <string name="settings_system_patched_apks_delete_title">패치된 APK 삭제</string>
+    <string name="settings_system_patched_apks_delete_confirm">&lt;b&gt;%s&lt;/b&gt;에 대한 저장된 패치된 APK를 삭제하시겠습니까?</string>
     <string name="settings_system_patched_apks_deleted">패치된 APK를 성공적으로 삭제하였습니다</string>
     <string name="settings_system_patched_apks_delete_all_title">패치된 APK 모두 삭제</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -833,6 +835,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">저장된 원본 APK가 없습니다</string>
     <string name="settings_system_original_apks_deleted">원본 APK를 성공적으로 삭제하였습니다</string>
     <string name="settings_system_original_apks_delete_title">원본 APK 삭제</string>
+    <string name="settings_system_original_apks_delete_confirm">&lt;b&gt;%s&lt;/b&gt;에 대한 원본 APK를 삭제하시겠습니까? 다시 패치할 경우에 새 APK를 사용해야 합니다</string>
     <string name="settings_system_original_apks_delete_all_title">원본 APK 모두 삭제</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">패치 선택 목록</string>
@@ -847,6 +850,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">소스 #%s</string>
     <string name="settings_system_patch_selection_will_delete">다음 항목을 삭제합니다:</string>
     <string name="settings_system_patch_selection_reset_all_warning">모든 패키지 및 소스에 대해 저장된 모든 패치 선택 목록을 영구적으로 삭제합니다</string>
+    <string name="settings_system_patch_selection_reset_package_warning">모든 소스에서 &lt;b&gt;%s&lt;/b&gt;에 대한 저장된 패치 선택 목록을 영구적으로 삭제힙니다</string>
+    <string name="settings_system_patch_selection_reset_source_warning">이 작업은 &lt;b&gt;%2$s&lt;/b&gt;에서 &lt;b&gt;%1$s&lt;/b&gt;에 대한 저장된 패치 선택 목록을 영구적으로 삭제합니다</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">선택된 패키지에 대해 저장된 모든 패치 선택 목록을 영구적으로 삭제합니다</string>
     <string name="settings_system_export_source_data_fail">소스 데이터를 내보낼 수 없습니다</string>
     <string name="settings_system_export_source_data_success">소스 데이터를 성공적으로 내보냈습니다</string>
     <string name="settings_system_import_source_data_fail">소스 데이터를 가저올 수 없습니다</string>

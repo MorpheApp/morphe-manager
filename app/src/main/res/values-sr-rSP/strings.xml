@@ -827,6 +827,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">Управља сачуваним закрпљеним датотекама апликација</string>
     <string name="settings_system_patched_apks_empty">Још увек није сачуван ни један патчеви</string>
     <string name="settings_system_patched_apks_delete_title">Да ли сте сигурни да желите да обришете сачувани патчеви?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Да ли сте сигурни да желите да избришете сачувани поправљени APK за &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">Сачувани патчеви успешно обришани</string>
     <string name="settings_system_patched_apks_delete_all_title">Обрисати све подешене APK-ове?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -835,6 +836,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">Нема сачуваних оригиналних APK(и)</string>
     <string name="settings_system_original_apks_deleted">Оригинални APK успешно обришани</string>
     <string name="settings_system_original_apks_delete_title">Да ли сте сигурни да желите да обришете оригинални APK?</string>
+    <string name="settings_system_original_apks_delete_confirm">Избрисати оригинални APK за &lt;b&gt;%s&lt;/b&gt;? Нећете моћи поново да га поправљате без пружања новог APK-а</string>
     <string name="settings_system_original_apks_delete_all_title">Обрисати све оригиналне APK-ове?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Патч селекције</string>
@@ -849,6 +851,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">Извор #%s</string>
     <string name="settings_system_patch_selection_will_delete">Ово ће обрисати:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ово ће трајно обрисати све сачуване изборе пакета за све пакете и изворе</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Ово ће трајно избрисати све сачуване изборе поправки за &lt;b&gt;%s&lt;/b&gt; са свих извора</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ово ће трајно избрисати сачуване изборе поправки за &lt;b&gt;%1$s&lt;/b&gt; у &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Ово ће трајно избрисати све сачуване изборе поправки за изабране пакете</string>
     <string name="settings_system_export_source_data_fail">Неуспешан извоз података извора</string>
     <string name="settings_system_export_source_data_success">Подаци извора успешно извезени</string>
     <string name="settings_system_import_source_data_fail">Неуспешан увоз података извора</string>

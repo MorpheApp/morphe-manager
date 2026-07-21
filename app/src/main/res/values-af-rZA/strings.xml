@@ -828,6 +828,7 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_patched_apks_description">Bestuur gestoorde gepatchte toepassingslêers</string>
     <string name="settings_system_patched_apks_empty">Geen gepatched APK\'s stoor nie</string>
     <string name="settings_system_patched_apks_delete_title">Verwyder gepatched APK?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Is jy seker dat jy die gestoorde gepatchde APK vir &lt;b&gt;%s&lt;/b&gt; wil uitvee?</string>
     <string name="settings_system_patched_apks_deleted">Gepatched APK suksesvol verwyder</string>
     <string name="settings_system_patched_apks_delete_all_title">Alle patched APK\'s verwyder?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -836,6 +837,7 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_original_apks_empty">Geen original APK\'s gestoor nie</string>
     <string name="settings_system_original_apks_deleted">Original APK suksesvol verwyder</string>
     <string name="settings_system_original_apks_delete_title">Verwyder original APK?</string>
+    <string name="settings_system_original_apks_delete_confirm">Verwyder oorspronklike APK vir &lt;b&gt;%s&lt;/b&gt;? Jy sal nie in staat wees om dit weer te patch nie sonder om \'n nuwe APK te verskaf.</string>
     <string name="settings_system_original_apks_delete_all_title">Alle oorspronklike APK\'s verwyder?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch seleksies</string>
@@ -850,6 +852,9 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Bron #%s</string>
     <string name="settings_system_patch_selection_will_delete">Dit sal verwyder:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Dit sal permanent alle gestoorde patch seleksies vir alle pakkette en bronne uitvee</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Dit sal permanent alle gestoorde patch-seleksies vir &lt;b&gt;%s&lt;/b&gt; oor alle bronne verwyder.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Dit sal permanent gestoorde patch-seleksies vir &lt;b&gt;%1$s&lt;/b&gt; in &lt;b&gt;%2$s&lt;/b&gt; verwyder.</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Dit sal permanent alle gestoorde patch-seleksies vir die gekose pakkette verwyder.</string>
     <string name="settings_system_export_source_data_fail">Kon nie bron data uitvoer nie</string>
     <string name="settings_system_export_source_data_success">Bron data suksesvol uitgevoer</string>
     <string name="settings_system_import_source_data_fail">Kon nie bron data invoer nie</string>

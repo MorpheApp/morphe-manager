@@ -826,6 +826,7 @@ Detalhes: %2$s"</string>
     <string name="settings_system_patched_apks_description">Gerir ficheiros de aplicações modificadas guardadas</string>
     <string name="settings_system_patched_apks_empty">Ainda não foi guardado nenhum APK</string>
     <string name="settings_system_patched_apks_delete_title">Eliminar APK modificado?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Tens a certeza de que queres eliminar o APK modificado para <b>%s</b>?</string>
     <string name="settings_system_patched_apks_deleted">APK modificado eliminado com sucesso</string>
     <string name="settings_system_patched_apks_delete_all_title">Eliminar todos os APKs modificados?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -834,6 +835,7 @@ Detalhes: %2$s"</string>
     <string name="settings_system_original_apks_empty">Nenhum APK original guardado</string>
     <string name="settings_system_original_apks_deleted">APK original eliminado com sucesso</string>
     <string name="settings_system_original_apks_delete_title">Eliminar APK original?</string>
+    <string name="settings_system_original_apks_delete_confirm">Eliminar o APK original para <b>%s</b>? Não poderás modificar de novo sem forneceres num novo APK</string>
     <string name="settings_system_original_apks_delete_all_title">Eliminar todos os APKs originais?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Seleções de modificações</string>
@@ -848,6 +850,9 @@ Detalhes: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Fonte #%s</string>
     <string name="settings_system_patch_selection_will_delete">Isto irá eliminar:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Isto irá eliminar permanentemente todas as seleções de modificações guardadas para todos os pacotes e fontes</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Isto irá eliminar permanentemente todas as seleções de modificações para <b>%s</b> em todas as fontes</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Isto irá eliminar permanentemente as seleções de modificações guardadas para <b>%1$s</b> na <b>%2$s</b></string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Isto irá eliminar permanentemente todas as seleções de modificações guardadas para todos os pacotes e fontes</string>
     <string name="settings_system_export_source_data_fail">Erro ao exportar dados da fonte</string>
     <string name="settings_system_export_source_data_success">Dados da fonte exportados com sucesso</string>
     <string name="settings_system_import_source_data_fail">Erro ao importar dados da fonte</string>

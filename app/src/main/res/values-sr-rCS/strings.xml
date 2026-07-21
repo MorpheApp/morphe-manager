@@ -811,6 +811,7 @@ Detalji: %2$s"</string>
     <string name="settings_system_patched_apks_description">Upravlja sačuvanim patchovanim datotekama aplikacija</string>
     <string name="settings_system_patched_apks_empty">Još patcheiranih APK(s) nije sačuvano</string>
     <string name="settings_system_patched_apks_delete_title">Da li zaista želite da obrišete ovaj patcheirani APK?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Da li ste sigurni da želite da obrišete sačuvani ispravljeni APK za &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">Patcheirani APK obrisan</string>
     <string name="settings_system_patched_apks_delete_all_title">Brisati sve popravljene APK-ove?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -819,6 +820,7 @@ Detalji: %2$s"</string>
     <string name="settings_system_original_apks_empty">Nema sačuvanih originalnih APK fajlova</string>
     <string name="settings_system_original_apks_deleted">Da li zaista želite da obrišete ovaj originalni APK?</string>
     <string name="settings_system_original_apks_delete_title">Da li zaista želite da obrišete originalni APK za %s? Nećete moći repatchirati bez pružnog novog APK fajla.</string>
+    <string name="settings_system_original_apks_delete_confirm">Obriši originalni APK za &lt;b&gt;%s&lt;/b&gt;? Nećete moći ponovo da primenite zakrpu bez pružanja novog APK-a</string>
     <string name="settings_system_original_apks_delete_all_title">Brisati sve originalne APK-ove?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Upravljanje sačuvanim patch-ovima i opcijama. Ovo ostaje nakon deinstalacije aplikacije</string>
@@ -833,6 +835,9 @@ Detalji: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Izvor #%s</string>
     <string name="settings_system_patch_selection_will_delete">Ovo će da obriše:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ovo će permanentno obrisati sve sačuvane odabire patch-a za sve pakete i izvore</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Ovo će trajno obrisati sve sačuvane selekcije zakrpa za &lt;b&gt;%s&lt;/b&gt; u svim izvorima</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ovo će trajno obrisati sačuvane selekcije zakrpa za &lt;b&gt;%1$s&lt;/b&gt; u &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Ovo će trajno obrisati sve sačuvane selekcije zakrpa za izabrane pakete</string>
     <string name="settings_system_export_source_data_fail">Neuspešno izvoz podataka izvorišta</string>
     <string name="settings_system_export_source_data_success">Podaci izvorišta uspešno izvozeni</string>
     <string name="settings_system_import_source_data_fail">Neuspešno uvođenje podataka izvorišta</string>

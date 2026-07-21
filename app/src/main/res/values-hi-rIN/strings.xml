@@ -828,6 +828,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">संरक्षित पैच किए गए एप्लिकेशन फ़ाइलों का प्रबंधन करता है।</string>
     <string name="settings_system_patched_apks_empty">अभी तक कोई सहेजा गया पैच किया गया एपीके नहीं है</string>
     <string name="settings_system_patched_apks_delete_title">सहेजे गए पैच किए गए एपीके को हटाएं?</string>
+    <string name="settings_system_patched_apks_delete_confirm">क्या आप &lt;b&gt;%s&lt;/b&gt; के लिए सहेजे गए पैच्ड APK को हटाने के लिए निश्चित हैं?</string>
     <string name="settings_system_patched_apks_deleted">%s के लिए सहेजे गए पैच किए गए एपीके सफलतापूर्वक हटाए गए</string>
     <string name="settings_system_patched_apks_delete_all_title">क्या आप सभी पैच किए गए APK हटाना चाहते हैं?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -836,6 +837,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">कोई सहेजा गया अरिजनल एपीके नहीं है</string>
     <string name="settings_system_original_apks_deleted">%s के लिए अरिजनल एपीके सफलतापूर्वक हटाए गए</string>
     <string name="settings_system_original_apks_delete_title">अरिजनल एपीके को हटाएं?</string>
+    <string name="settings_system_original_apks_delete_confirm">&lt;b&gt;%s&lt;/b&gt; के लिए मूल APK को हटाएं? आप बिना नया APK प्रदान किए फिर से पैच करने में सक्षम नहीं होंगे</string>
     <string name="settings_system_original_apks_delete_all_title">क्या आप सभी मूल APK हटाना चाहते हैं?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">पथच चयन</string>
@@ -850,6 +852,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">स्रोत #%s</string>
     <string name="settings_system_patch_selection_will_delete">यह हटाएगा:</string>
     <string name="settings_system_patch_selection_reset_all_warning">यह सभी पैकेजों और स्रोतों के लिए सहेजे गए सभी पटच चयन को स्थायी रूप से हटाएगा</string>
+    <string name="settings_system_patch_selection_reset_package_warning">यह सभी स्रोतों में &lt;b&gt;%s&lt;/b&gt; के लिए सहेजे गए सभी पैच चयन को स्थायी रूप से हटा देगा</string>
+    <string name="settings_system_patch_selection_reset_source_warning">यह &lt;b&gt;%1$s&lt;/b&gt; में &lt;b&gt;%2$s&lt;/b&gt; के लिए सहेजे गए पैच चयन को स्थायी रूप से हटा देगा</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">यह चयनित पैकेजों के लिए सहेजे गए सभी पैच चयन को स्थायी रूप से हटा देगा</string>
     <string name="settings_system_export_source_data_fail">स्रोत डेटा निर्यात करने में विफल</string>
     <string name="settings_system_export_source_data_success">स्रोत डेटा सफलतापूर्वक निर्यात किया गया</string>
     <string name="settings_system_import_source_data_fail">स्रोत डेटा आयात करने में विफल</string>

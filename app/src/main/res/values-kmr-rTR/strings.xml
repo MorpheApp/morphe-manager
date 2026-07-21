@@ -826,6 +826,7 @@ Detay: %2$s"</string>
     <string name="settings_system_patched_apks_description">Pelên programa girêtî yên tomarî birêve bibe</string>
     <string name="settings_system_patched_apks_empty">Heta niha APK\'yên veşartin ne serwerastin</string>
     <string name="settings_system_patched_apks_delete_title">APK\'yên veşartin bibe serwerast bike?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Maqlû binî ku hewce ye APK-ya paqijkirî ya &lt;b&gt;%s&lt;/b&gt; were terkirin?</string>
     <string name="settings_system_patched_apks_deleted">APK\'yên veşartin bi serketinê serwerastin</string>
     <string name="settings_system_patched_apks_delete_all_title">Hemû APK-yên hatine guhertin sîl kirin?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -834,6 +835,7 @@ Detay: %2$s"</string>
     <string name="settings_system_original_apks_empty">APK\'yên orjînal ên serwerastin tune</string>
     <string name="settings_system_original_apks_deleted">APK\'yên orjînal bi serketinê serwerastin</string>
     <string name="settings_system_original_apks_delete_title">APK\'yên orjînal bibe serwerast bike?</string>
+    <string name="settings_system_original_apks_delete_confirm">APK-ya serê ya &lt;b&gt;%s&lt;/b&gt; were terkirin? Heke APK-ya nû nedin, nikaribî dîsa paqijkirî bike</string>
     <string name="settings_system_original_apks_delete_all_title">Hemû APK-yên orjînal sîl kirin?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Bijartinê qelvaton</string>
@@ -848,6 +850,9 @@ Detay: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Kanî #%s</string>
     <string name="settings_system_patch_selection_will_delete">Ev ê jêbirin:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ev hemû bejna sifira jibo baweriyan bejinê</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Evê ê hemû hilbijartinên paqijkirinê yên ku hatine tomarkirin ji bo &lt;b&gt;%s&lt;/b&gt; li ser hemû çavkaniyan bi temamî were tarandin.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Evê ê hemû hilbijartinên paqijkirinê yên ku hatine tomarkirin ji bo &lt;b&gt;%1$s&lt;/b&gt; di &lt;b&gt;%2$s&lt;/b&gt; de bi temamî were tarandin.</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Evê ê hemû hilbijartinên paqijkirinê yên ku hatine tomarkirin ji bo paketên hilbijartî bi temamî were tarandin.</string>
     <string name="settings_system_export_source_data_fail">Serûşiya dane seyarê pêş nebûne</string>
     <string name="settings_system_export_source_data_success">Dane seyarê serketine</string>
     <string name="settings_system_import_source_data_fail">Serûşiya dane hez kiriye</string>

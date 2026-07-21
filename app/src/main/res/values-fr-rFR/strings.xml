@@ -834,6 +834,8 @@ Détails : %2$s"</string>
     <string name="settings_system_patched_apks_description">Gère les fichiers d\'applications patchées enregistrés</string>
     <string name="settings_system_patched_apks_empty">Aucun APK patchés enregistrés pour l\'instant</string>
     <string name="settings_system_patched_apks_delete_title">Supprimer l\'APK patché ?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Êtes-vous sûr de vouloir supprimer l\'APK patché enregistré pour &lt;b&gt;%s&lt;/b&gt; ?
+</string>
     <string name="settings_system_patched_apks_deleted">L\'APK patché supprimé avec succès</string>
     <string name="settings_system_patched_apks_delete_all_title">Supprimer tous les APK patchés ?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -842,12 +844,13 @@ Détails : %2$s"</string>
     <string name="settings_system_original_apks_empty">Aucun APK d\'origine enregistré</string>
     <string name="settings_system_original_apks_deleted">L\'APK d\'origine supprimé avec succès</string>
     <string name="settings_system_original_apks_delete_title">Supprimer l\'APK d\'origine ?</string>
+    <string name="settings_system_original_apks_delete_confirm">Supprimer l\'APK d\'origine pour &lt;b&gt;%s&lt;/b&gt; ? Vous ne pourrez pas repatcher sans fournir un nouvel APK</string>
     <string name="settings_system_original_apks_delete_all_title">Supprimer tous les APK d\'origine ?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Sélections de patchs</string>
     <string name="settings_system_patch_selections_description">Sélections de patchs enregistrées, conservées après la désinstallation</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Réinitialiser toutes les sélections ?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Réinitialiser les sélections des paquets ?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Réinitialiser les sélections de paquets ?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Réinitialiser les paquets sélectionnés ?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Réinitialiser la sélection de sources ?</string>
     <string name="settings_system_patch_selection_no_saved">Aucune sélection de patchs enregistrée</string>
@@ -856,6 +859,9 @@ Détails : %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Source #%s</string>
     <string name="settings_system_patch_selection_will_delete">Cela supprimera :</string>
     <string name="settings_system_patch_selection_reset_all_warning">Cela supprimera définitivement toutes les sélections de patchs enregistrées pour tous les paquets et sources</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Cela supprimera définitivement toutes les sélections de patchs enregistrées pour &lt;b&gt;%s&lt;/b&gt; dans toutes les sources</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Cela supprimera définitivement les sélections de patchs enregistrées pour &lt;b&gt;%1$s&lt;/b&gt; dans &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Cela supprimera définitivement toutes les sélections de patchs enregistrées pour les paquets sélectionnés</string>
     <string name="settings_system_export_source_data_fail">Échec de l\'exportation des données de source</string>
     <string name="settings_system_export_source_data_success">Données de source exportées avec succès</string>
     <string name="settings_system_import_source_data_fail">Échec de l\'importation des données de source</string>

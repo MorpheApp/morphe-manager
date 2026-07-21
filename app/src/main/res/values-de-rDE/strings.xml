@@ -828,6 +828,7 @@ Details: %2$s"</string>
     <string name="settings_system_patched_apks_description">Verwaltet gespeicherte gepatchte Anwendungsdateien</string>
     <string name="settings_system_patched_apks_empty">Bisher keine gepatchten APKs gespeichert</string>
     <string name="settings_system_patched_apks_delete_title">Gepatchte APK löschen?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Sind Sie sicher, dass Sie die gespeicherte gepatchte APK für &lt;b&gt;%s&lt;/b&gt; löschen möchten?</string>
     <string name="settings_system_patched_apks_deleted">Gepatchte APK erfolgreich gelöscht</string>
     <string name="settings_system_patched_apks_delete_all_title">Alle gepatchten APKs löschen?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -836,6 +837,7 @@ Details: %2$s"</string>
     <string name="settings_system_original_apks_empty">Keine gespeicherten Original-APKs vorhanden</string>
     <string name="settings_system_original_apks_deleted">Originale APK erfolgreich gelöscht</string>
     <string name="settings_system_original_apks_delete_title">Originale APK löschen?</string>
+    <string name="settings_system_original_apks_delete_confirm">Originale APK für &lt;b&gt;%s&lt;/b&gt; löschen? Ohne eine neue APK ist ein erneutes Patchen nicht möglich.</string>
     <string name="settings_system_original_apks_delete_all_title">Alle Original-APKs löschen?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patchauswahlen</string>
@@ -850,6 +852,9 @@ Details: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Quelle #%s</string>
     <string name="settings_system_patch_selection_will_delete">Dies wird löschen:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Dies löscht dauerhaft alle gespeicherten Patch-Auswahlen für alle Pakete und Quellen</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Dadurch werden alle gespeicherten Patch-Auswahlen für &lt;b&gt;%s&lt;/b&gt; dauerhaft über alle Quellen hinweg gelöscht.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Dadurch werden alle gespeicherten Patch-Auswahlen für &lt;b&gt;%1$s&lt;/b&gt; in &lt;b&gt;%2$s&lt;/b&gt; dauerhaft gelöscht.</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Dadurch werden alle gespeicherten Patch-Auswahlen für die ausgewählten Pakete dauerhaft gelöscht.</string>
     <string name="settings_system_export_source_data_fail">Export der Quelldaten fehlgeschlagen</string>
     <string name="settings_system_export_source_data_success">Quelldaten erfolgreich exportiert</string>
     <string name="settings_system_import_source_data_fail">Import der Quelldaten fehlgeschlagen</string>

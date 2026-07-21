@@ -826,6 +826,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_patched_apks_description">Patchlangan ilova fayllariga boshqaruv</string>
     <string name="settings_system_patched_apks_empty">Mahalliy</string>
     <string name="settings_system_patched_apks_delete_title">Tuzatilgan APKni o‘chirib tashlash?</string>
+    <string name="settings_system_patched_apks_delete_confirm">&lt;b&gt;%s&lt;/b&gt; uchun saqlangan tuzatilgan APK ni o\'chirishni xohlayapsizmi?</string>
     <string name="settings_system_patched_apks_deleted">Tuzatilgan APK muvaffaqiyatli o‘chirildi</string>
     <string name="settings_system_patched_apks_delete_all_title">Hapus semua APK yang ditambal?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -834,6 +835,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_original_apks_empty">Yangilash mavjud emas</string>
     <string name="settings_system_original_apks_deleted">Manbalarni yuklab olishda xatolik: %s</string>
     <string name="settings_system_original_apks_delete_title">Original APKni o‘chirib tashlash?</string>
+    <string name="settings_system_original_apks_delete_confirm">&lt;b&gt;%s&lt;/b&gt; uchun asl APK ni o\'chirish? Yangi APK taqdim etmasangiz, uni qayta tuzata olmaysiz.</string>
     <string name="settings_system_original_apks_delete_all_title">Hapus semua APK asli?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Tuzatish imkoniyatlari</string>
@@ -848,6 +850,9 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Manba #%s</string>
     <string name="settings_system_patch_selection_will_delete">Bu quyidagi narsalarni o\'chirib tashlaydi:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Bu barcha paketlar va manbalar uchun saqlangan barcha patch tanlovlarini doimiy ravishda o\'chirib tashlaydi</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Bu &lt;b&gt;%s&lt;/b&gt; uchun saqlangan barcha tuzatish tanlovlarini barcha manbalar bo\'ylab doimiy ravishda o\'chirib tashlaydi.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Bu &lt;b&gt;%1$s&lt;/b&gt; uchun &lt;b&gt;%2$s&lt;/b&gt; dagi saqlangan tuzatish tanlovlarini doimiy ravishda o\'chirib tashlaydi.</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Bu tanlangan paketlar uchun saqlangan barcha tuzatish tanlovlarini doimiy ravishda o\'chirib tashlaydi.</string>
     <string name="settings_system_export_source_data_fail">Manba ma\'lumotlarini eksport qilishda xatolik yuzaga keldi</string>
     <string name="settings_system_export_source_data_success">Manba ma\'lumotlari muvaffaqiyatli eksport qilindi</string>
     <string name="settings_system_import_source_data_fail">Manba ma\'lumotlarini import qilishda xatolik yuzaga keldi</string>

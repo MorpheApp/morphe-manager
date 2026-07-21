@@ -823,6 +823,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_patched_apks_description">Stjórnar geymda breyttum forritsskráum</string>
     <string name="settings_system_patched_apks_empty">Engar pattaðar APK-skrár vistaðar enn</string>
     <string name="settings_system_patched_apks_delete_title">Eyða pattaðri APK?</string>
+    <string name="settings_system_patched_apks_delete_confirm"> Ertu viss um að þú viljir eyða vistaðri breyttu APK skúú fyrir &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">Pattað APK skrá eytt með árangri</string>
     <string name="settings_system_patched_apks_delete_all_title">Eyða öllum breyttu APK-skrám?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -831,6 +832,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_original_apks_empty">Engar upprunalegar APK-skrár geymdar</string>
     <string name="settings_system_original_apks_deleted">Upprunaleg APK skrá eytt með árangri</string>
     <string name="settings_system_original_apks_delete_title">Eyða upprunalegri APK?</string>
+    <string name="settings_system_original_apks_delete_confirm"> Eyúa upprunalegu APK skúú fyrir &lt;b&gt;%s&lt;/b&gt;?  Þ mun ekki vera hægt að að breyta aftur núúður en með athuga núðu APK</string>
     <string name="settings_system_original_apks_delete_all_title">Eyða öllum upprunalegu APK-skrám?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Pökkunaval</string>
@@ -845,6 +847,9 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Pökkning gjáfa #%s</string>
     <string name="settings_system_patch_selection_will_delete">Þetta mun eyða:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Þetta mun varanlega eyða öllum geymdum pakkningavöldum fyrir allar pakkningingar og gjafa</string>
+    <string name="settings_system_patch_selection_reset_package_warning">                                                                                                                                                                                             Þetta mun varanlega eyða öllum vistaðum valférum breytinga fyrir &lt;b&gt;%s&lt;/b&gt; fyrir allar uppsprellur.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">                                                                                                                                                                                                        Þetta mun varanlega eyða vistaðar breytingaval fyrir &lt;b&gt;%1$s&lt;/b&gt; í &lt;b&gt;%2$s&lt;/b&gt;.</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">                                                                                                                                Þetta mun varanlega eyða öllum vistaðum valférum breytinga fyrir valda pakkana.</string>
     <string name="settings_system_export_source_data_fail">Ekki tókst að flytja út gögn frá gjafa</string>
     <string name="settings_system_export_source_data_success">Gagnagögn frá gjafa flutt úr vel</string>
     <string name="settings_system_import_source_data_fail">Ekki tókst að flytja inn gögn frá gjafa</string>

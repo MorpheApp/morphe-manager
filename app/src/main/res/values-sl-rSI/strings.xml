@@ -827,6 +827,7 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_patched_apks_description">Upravlja shranjene datoteke popravljenih aplikacij</string>
     <string name="settings_system_patched_apks_empty">Ni shranjenih popravljenih APK-jev</string>
     <string name="settings_system_patched_apks_delete_title">Izbrišite popravljeni APK?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Ste prepričani, da žlite izbrisati shranjeno popravljeno datoteko APK za &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">Uspešno izbrisan popravljen APK</string>
     <string name="settings_system_patched_apks_delete_all_title">Izbrisati vse popravljene datoteke APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -835,6 +836,7 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_original_apks_empty">Ni shranjenih izvirnih APK-jev</string>
     <string name="settings_system_original_apks_deleted">Uspešno izbrisan izvirni APK</string>
     <string name="settings_system_original_apks_delete_title">Izbriši izvirni APK?</string>
+    <string name="settings_system_original_apks_delete_confirm">Izbriši izvirno datoteko APK za %s? Aplikacije ne boste mogli več popraviti brez zagotovitve nove datoteke APK.</string>
     <string name="settings_system_original_apks_delete_all_title">Izbrisati vse originalne datoteke APK?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Izbira popravkov</string>
@@ -849,6 +851,9 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Vir #%s</string>
     <string name="settings_system_patch_selection_will_delete">To bo izbrisalo:</string>
     <string name="settings_system_patch_selection_reset_all_warning">To bo trajno izbrisalo vse shranjene izbire popravkov za vse pakete in vire</string>
+    <string name="settings_system_patch_selection_reset_package_warning">To bo trajno izbrisalo vse shranjene izbire popravkov za &lt;b&gt;%s&lt;/b&gt; za vse vire.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">To bo trajno izbrisalo shranjene izbire popravkov za &lt;b&gt;%1$s&lt;/b&gt; v &lt;b&gt;%2$s&lt;/b&gt;.</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">To bo trajno izbrisalo vse shranjene izbire popravkov za izbrane pakete.</string>
     <string name="settings_system_export_source_data_fail">Ni bilo mogoče izvoziti podatkov vira</string>
     <string name="settings_system_export_source_data_success">Podatki vira so bili uspešno izvoženi</string>
     <string name="settings_system_import_source_data_fail">Ni bilo mogoče uvoziti podatkov vira</string>

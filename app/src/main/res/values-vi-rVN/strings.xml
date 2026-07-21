@@ -827,6 +827,7 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_patched_apks_description">Quản lý tệp ứng dụng đã vá</string>
     <string name="settings_system_patched_apks_empty">Chưa có tệp APK đã vá nào được lưu</string>
     <string name="settings_system_patched_apks_delete_title">Xóa APK đã vá?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Bạn có chắc muốn xóa tệp APK đã vá lưu cho &lt;b&gt;%s&lt;/b&gt; không?</string>
     <string name="settings_system_patched_apks_deleted">Đã xóa APK đã vá thành công</string>
     <string name="settings_system_patched_apks_delete_all_title">Xóa tất cả các APK đã vá?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -835,6 +836,7 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_original_apks_empty">Không có APK gốc nào được lưu</string>
     <string name="settings_system_original_apks_deleted">Đã xóa APK gốc thành công</string>
     <string name="settings_system_original_apks_delete_title">Xóa APK gốc?</string>
+    <string name="settings_system_original_apks_delete_confirm">Xóa tệp APK gốc của &lt;b&gt;%s&lt;/b&gt;? Bạn sẽ không thể vá lại nếu không cung cấp một APK mới.</string>
     <string name="settings_system_original_apks_delete_all_title">Xóa tất cả các APK gốc?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Bản vá đã chọn</string>
@@ -849,6 +851,9 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Nguồn #%s</string>
     <string name="settings_system_patch_selection_will_delete">Thao tác này sẽ xóa:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Toàn bộ bản vá đã lưu (trong mọi gói &amp; nguồn) sẽ bị xóa vĩnh viễn</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Toàn bộ bản vá đã lưu cho &lt;b&gt;%s&lt;/b&gt; (trong mọi nguồn) sẽ bị xóa vĩnh viễn.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Toàn bộ bản vá đã lưu cho &lt;b&gt;%1$s&lt;/b&gt; (trong &lt;b&gt;%2$s&lt;/b&gt;) sẽ bị xóa vĩnh viễn.</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Toàn bộ bản vá đã lưu (trong mọi gói &amp; nguồn) sẽ bị xóa vĩnh viễn.</string>
     <string name="settings_system_export_source_data_fail">Không thể xuất dữ liệu nguồn</string>
     <string name="settings_system_export_source_data_success">Đã xuất dữ liệu nguồn thành công</string>
     <string name="settings_system_import_source_data_fail">Không thể nhập dữ liệu nguồn</string>

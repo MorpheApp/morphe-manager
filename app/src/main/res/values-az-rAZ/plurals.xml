@@ -36,6 +36,10 @@
         <item quantity="one">%d tətbiq silindi</item>
         <item quantity="other">%d tətbiq silindi</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">%d tətbiq silinsin?</item>
+        <item quantity="other">%d tətbiq silinsin?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%d tətbiq ötürüldü</item>
         <item quantity="other">%d tətbiq ötürüldü</item>

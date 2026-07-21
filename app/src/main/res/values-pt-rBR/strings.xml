@@ -828,6 +828,7 @@ Detalhes: %2$s"</string>
     <string name="settings_system_patched_apks_description">Gerencia arquivos de aplicativos patcheados salvos</string>
     <string name="settings_system_patched_apks_empty">Nenhum APK patcheado salvo ainda</string>
     <string name="settings_system_patched_apks_delete_title">Excluir APK patcheado?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Tem certeza que quer excluir o APK patcheado salvo de &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">APK patcheado excluído com sucesso</string>
     <string name="settings_system_patched_apks_delete_all_title">Excluir todos os APKs modificados?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -836,6 +837,7 @@ Detalhes: %2$s"</string>
     <string name="settings_system_original_apks_empty">Nenhum APK original armazenado</string>
     <string name="settings_system_original_apks_deleted">APK original excluído com sucesso</string>
     <string name="settings_system_original_apks_delete_title">Excluir APK original?</string>
+    <string name="settings_system_original_apks_delete_confirm">Excluir o APK original para &lt;b&gt;%s&lt;/b&gt;? Você não poderá repatchear sem fornecer um novo APK</string>
     <string name="settings_system_original_apks_delete_all_title">Excluir todos os APKs originais?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Seleções de patches</string>
@@ -850,6 +852,9 @@ Detalhes: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Fonte #%s</string>
     <string name="settings_system_patch_selection_will_delete">Isso vai excluir:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Isso vai excluir permanentemente todas as seleções de patch salvas para todos os pacotes e origens</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Isso apagará permanentemente as seleções de patches salvas para &lt;b&gt;%s&lt;/b&gt; em todas as fontes</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Isso apagará permanentemente as seleções de patches salvas para &lt;b&gt;%1$s&lt;/b&gt; em &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Isso apagará permanentemente as seleções de patches salvas para os pacotes selecionados</string>
     <string name="settings_system_export_source_data_fail">Falha ao exportar dados da origem</string>
     <string name="settings_system_export_source_data_success">Dados da origem exportados com sucesso</string>
     <string name="settings_system_import_source_data_fail">Falha ao importar dados da origem</string>

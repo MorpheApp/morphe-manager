@@ -828,6 +828,7 @@ Rincian: %2$s"</string>
     <string name="settings_system_patched_apks_description">Mengelola berkas aplikasi yang ditambal dan disimpan</string>
     <string name="settings_system_patched_apks_empty">Belum ada APK yang ditambal dan disimpan hingga saat ini</string>
     <string name="settings_system_patched_apks_delete_title">Hapus APK yang ditambal?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Apakah Anda yakin ingin menghapus APK yang ditambal yang disimpan untuk &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">APK yang ditambal berhasil dihapus</string>
     <string name="settings_system_patched_apks_delete_all_title">Hapus semua APK yang ditambal?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -836,6 +837,7 @@ Rincian: %2$s"</string>
     <string name="settings_system_original_apks_empty">Tidak ada APK asli yang disimpan</string>
     <string name="settings_system_original_apks_deleted">APK asli berhasil dihapus</string>
     <string name="settings_system_original_apks_delete_title">Hapus APK asli?</string>
+    <string name="settings_system_original_apks_delete_confirm">Hapus APK asli untuk &lt;b&gt;%s&lt;/b&gt;? Anda tidak akan dapat menambal ulang tanpa menyediakan APK baru</string>
     <string name="settings_system_original_apks_delete_all_title">Hapus semua APK asli?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Pilihan tambalan</string>
@@ -850,6 +852,9 @@ Rincian: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Sumber #%s</string>
     <string name="settings_system_patch_selection_will_delete">Ini akan menghapus:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ini akan menghapus secara permanen semua pemilihan tambalan yang disimpan untuk semua paket dan sumber</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Ini akan menghapus secara permanen semua pemilihan tambalan yang disimpan untuk &lt;b&gt;%s&lt;/b&gt; diantara seluruh sumber</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Ini akan menghapus secara permanen pemilihan tambalan yang disimpan untuk &lt;b&gt;%1$s&lt;/b&gt; di &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Ini akan menghapus secara permanen semua pemilihan tambalan yang disimpan untuk paket yang dipilih</string>
     <string name="settings_system_export_source_data_fail">Gagal mengekspor data sumber</string>
     <string name="settings_system_export_source_data_success">Data sumber berhasil diekspor</string>
     <string name="settings_system_import_source_data_fail">Gagal mengimpor data sumber</string>

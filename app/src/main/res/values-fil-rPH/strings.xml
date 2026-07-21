@@ -824,6 +824,7 @@ Mga Detalye: %2$s"</string>
     <string name="settings_system_patched_apks_description">Pamahalaan ang mga nakaimbak na naka-patch na mga file ng aplikasyon</string>
     <string name="settings_system_patched_apks_empty">Wala pang naka-patch na APK</string>
     <string name="settings_system_patched_apks_delete_title">Burahin ang naka-patch na APK?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Sigurado ka bang gusto mong burahin ang nakaimbak na naka-patch na APK para sa &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">Matagumpay na nabura ang naka-patch na APK</string>
     <string name="settings_system_patched_apks_delete_all_title">Burahin ang lahat ng naka-patch na APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -832,6 +833,7 @@ Mga Detalye: %2$s"</string>
     <string name="settings_system_original_apks_empty">Walang nakaimbak na orihinal na mga APK</string>
     <string name="settings_system_original_apks_deleted">Matagumpay na nabura ang orihinal na APK</string>
     <string name="settings_system_original_apks_delete_title">Burahin ang orihinal na APK?</string>
+    <string name="settings_system_original_apks_delete_confirm">Burahin ang orihinal na APK para sa &lt;b&gt;%s&lt;/b&gt;? Hindi ka makakapag-repatch nang hindi nagbibigay ng bagong APK</string>
     <string name="settings_system_original_apks_delete_all_title">Burahin ang lahat ng orihinal na APK?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Mga pagpipilian ng patch</string>
@@ -846,6 +848,9 @@ Mga Detalye: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Pinagmulan #%s</string>
     <string name="settings_system_patch_selection_will_delete">Buburahin nito ang:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Permanenteng buburahin nito ang lahat ng naka-save na mga pagpipilian sa patch para sa lahat ng mga pakete at pinagmulan</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Permanenteng buburahin nito ang lahat ng naka-save na mga pagpipilian sa patch para sa &lt;b&gt;%s&lt;/b&gt; sa lahat ng mga mapagkukunan</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Permanenteng buburahin nito ang naka-save na mga pagpipilian ng patch para sa &lt;b&gt;%1$s&lt;/b&gt; sa &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Permanenteng buburahin nito ang lahat ng naka-save na mga pagpipilian sa patch para sa mga napiling pakete</string>
     <string name="settings_system_export_source_data_fail">Nabigong ma-export ang pinagmulan ng datos</string>
     <string name="settings_system_export_source_data_success">Matagumpay na na-export ang pinagmulan ng datos</string>
     <string name="settings_system_import_source_data_fail">Nabigong ma-import ang pinagmulan ng datos</string>

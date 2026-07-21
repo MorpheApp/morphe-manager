@@ -828,6 +828,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_patched_apks_description">Zarządza zapisanymi plikami zmodyfikowanych aplikacji</string>
     <string name="settings_system_patched_apks_empty">Brak zapisanych plików APK</string>
     <string name="settings_system_patched_apks_delete_title">Usunąć zmodyfikowany plik APK?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Czy na pewno chcesz usunąć zapisany zmodyfikowany plik APK aplikacji &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">Zmodyfikowany plik APK usunięty pomyślnie</string>
     <string name="settings_system_patched_apks_delete_all_title">Usunąć wszystkie zmodyfikowane pliki APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -836,6 +837,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_original_apks_empty">Brak zapisanych oryginalnych plików APK</string>
     <string name="settings_system_original_apks_deleted">Oryginalny plik APK usunięty pomyślnie</string>
     <string name="settings_system_original_apks_delete_title">Usunąć oryginalny plik APK?</string>
+    <string name="settings_system_original_apks_delete_confirm">Usunąć oryginalny plik APK dla aplikacji &lt;b&gt;%s&lt;/b&gt;? Nie będzie można ponownie modyfikować aplikacji bez wybrania nowego pliku APK</string>
     <string name="settings_system_original_apks_delete_all_title">Usunąć wszystkie oryginalne pliki APK?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Wybrane modyfikacje</string>
@@ -850,6 +852,9 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_patch_selection_source_format">Źródło #%s</string>
     <string name="settings_system_patch_selection_will_delete">Spowoduje to usunięcie:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla wszystkich pakietów i źródeł</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla pakietu &lt;b&gt;%s&lt;/b&gt; we wszystkich źródłach</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Spowoduje to trwałe usunięcie zapisanych wyborów modyfikacji dla aplikacji &lt;b&gt;%1$s&lt;/b&gt; w źródle &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla wybranych pakietów</string>
     <string name="settings_system_export_source_data_fail">Nie udało się wyeksportować danych źródła</string>
     <string name="settings_system_export_source_data_success">Dane źródła wyeksportowane pomyślnie</string>
     <string name="settings_system_import_source_data_fail">Nie udało się zaimportować danych źródła</string>
