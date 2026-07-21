@@ -36,6 +36,10 @@
         <item quantity="one">%d ऐप अनइंस्टॉल किए गए</item>
         <item quantity="other">%d ऐप अनइंस्टॉल किए गए</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">%d ऐप अनइंस्टॉल करें?</item>
+        <item quantity="other">%d ऐप अनइंस्टॉल करें?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%d ऐप छोड़ दिए गए</item>
         <item quantity="other">%d ऐप छोड़ दिए गए</item>

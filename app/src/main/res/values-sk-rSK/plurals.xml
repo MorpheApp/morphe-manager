@@ -54,6 +54,12 @@
         <item quantity="many">Odinštalovaných %d aplikácií</item>
         <item quantity="other">Odinštalovaných %d aplikácií</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Odinštalovať %d aplikáciu?</item>
+        <item quantity="few">Odinštalovať %d aplikácie?</item>
+        <item quantity="many">Odinštalovať %d aplikácií?</item>
+        <item quantity="other">Odinštalovať %d aplikácií?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Preskočená %d aplikácia</item>
         <item quantity="few">Preskočených %d aplikácií</item>

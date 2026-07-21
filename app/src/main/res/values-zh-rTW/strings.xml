@@ -824,7 +824,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">管理儲存的修補後應用程式檔案</string>
     <string name="settings_system_patched_apks_empty">尚未儲存已修補的 APK</string>
     <string name="settings_system_patched_apks_delete_title">刪除已修補的 APK？</string>
-    <string name="settings_system_patched_apks_delete_confirm">確定要為 %s 刪除儲存的修補後 APK 嗎？</string>
     <string name="settings_system_patched_apks_deleted">已成功刪除已修補的 APK</string>
     <string name="settings_system_patched_apks_delete_all_title">刪除所有已修補的 APK？</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -833,7 +832,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">未儲存原始 APK</string>
     <string name="settings_system_original_apks_deleted">已成功刪除原始 APK</string>
     <string name="settings_system_original_apks_delete_title">要刪除原始 APK 嗎？</string>
-    <string name="settings_system_original_apks_delete_confirm">刪除 %s 的原始 APK？若不提供新的 APK，您將無法重新修補</string>
     <string name="settings_system_original_apks_delete_all_title">刪除所有原始 APK？</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">修補選擇</string>
@@ -848,8 +846,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">來源 #%s</string>
     <string name="settings_system_patch_selection_will_delete">這將刪除：</string>
     <string name="settings_system_patch_selection_reset_all_warning">這將永久刪除所有套件和來源中儲存的所有修補選擇</string>
-    <string name="settings_system_patch_selection_reset_package_warning">這將永久刪除 %s 在所有來源中儲存的修補選擇</string>
-    <string name="settings_system_patch_selection_reset_source_warning">這將永久刪除來源 #%2$s 中 %1$s 儲存的修補選擇</string>
     <string name="settings_system_export_source_data_fail">無法匯出來源資料</string>
     <string name="settings_system_export_source_data_success">來源資料匯出成功</string>
     <string name="settings_system_import_source_data_fail">無法匯入來源資料</string>

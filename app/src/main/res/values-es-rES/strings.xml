@@ -83,7 +83,7 @@
     <string name="home_greeting_morning_1">Álzate y parchea</string>
     <string name="home_greeting_morning_2">¡Buenos días! Las aplicaciones no se parchearán solas</string>
     <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">¿Bajón de la tarde? Parchea algo</string>
+    <string name="home_greeting_afternoon_1">¿Flojera post-meridional? Parchea algo</string>
     <string name="home_greeting_afternoon_2">El parcheo después de almorzar se siente diferente</string>
     <string name="home_greeting_afternoon_3">El turno de tarde: edición parcheo</string>
     <!-- Evening greetings (17:00–21:59) -->
@@ -104,14 +104,14 @@
     <string name="sources_management_title">Fuentes de parches</string>
     <string name="sources_sort_title">Ordenar fuentes de parches</string>
     <string name="sources_sort_manual">Orden manual</string>
-    <string name="sources_sort_manual_hint">Mantén pulsada una fuente para cambiar el orden</string>
+    <string name="sources_sort_manual_hint">Mantén pulsada una fuente para reordenarla</string>
     <string name="sources_sort_last_updated">Última actualizada</string>
-    <string name="sources_sort_last_updated_description">Actualizaciones de fuente más recientes primero</string>
+    <string name="sources_sort_last_updated_description">Actualizaciones de fuentes más recientes primero</string>
     <string name="sources_sort_enabled_first">Activadas primero</string>
     <string name="sources_sort_enabled_first_description">Mostrar fuentes activas antes que las desactivadas</string>
     <string name="sources_management_open_in_browser">Abrir en el navegador</string>
     <string name="sources_management_failed_to_open_url">No se pudo abrir la URL</string>
-    <string name="sources_management_prerelease_toggle">Parches preliminares</string>
+    <string name="sources_management_prerelease_toggle">Parches pre-lanzamiento</string>
     <string name="sources_management_prerelease_toggle_description">Recibe acceso anticipado a nuevas versiones experimentales de parches</string>
     <string name="sources_management_experimental_versions_toggle">Versiones experimentales de la aplicación</string>
     <string name="sources_management_experimental_versions_toggle_description">Parchea las versiones experimentales de la aplicación, si están disponibles</string>
@@ -306,6 +306,7 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <string name="header_creator_guide_positioning_body">Use gestos de pellizcar para ampliar y arrastrar directamente en la vista previa para posicionar y escalar su imagen. Aparecen guías de ajuste cuando la imagen está cerca del centro. También puede usar el control deslizante debajo de la vista previa.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">¿Realmente quieres desinstalar esta aplicación?</string>
+    <string name="batch_uninstall_confirm_body">Las aplicaciones seleccionadas se eliminarán permanentemente de tu dispositivo</string>
     <string name="home_app_info_remove_app_warning">Esto eliminará permanentemente:</string>
     <string name="home_app_info_delete_item_database">Entrada de base de datos</string>
     <string name="home_app_info_delete_item_patched_apk">Archivo APK parcheado</string>
@@ -827,7 +828,7 @@ Detalles: %2$s"</string>
     <string name="settings_system_patched_apks_description">Administra los archivos de aplicación parcheados guardados</string>
     <string name="settings_system_patched_apks_empty">No se han guardado APKs parcheados aún</string>
     <string name="settings_system_patched_apks_delete_title">¿Eliminar APK parcheado?</string>
-    <string name="settings_system_patched_apks_delete_confirm">¿Realmente quieres eliminar el APK parcheado guardado para %s?</string>
+    <string name="settings_system_patched_apks_delete_confirm">¿Realmente quieres eliminar el APK parcheado guardado para &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">APK parcheado eliminado correctamente</string>
     <string name="settings_system_patched_apks_delete_all_title">¿Eliminar todos los APKs modificados?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -836,7 +837,7 @@ Detalles: %2$s"</string>
     <string name="settings_system_original_apks_empty">No hay APKs originales almacenados</string>
     <string name="settings_system_original_apks_deleted">APK original eliminado correctamente</string>
     <string name="settings_system_original_apks_delete_title">¿Eliminar APK original?</string>
-    <string name="settings_system_original_apks_delete_confirm">¿Eliminar el APK original para %s? No podrás volver a parchear sin proporcionar un nuevo APK</string>
+    <string name="settings_system_original_apks_delete_confirm">¿Eliminar el APK original para &lt;b&gt;%s&lt;/b&gt;? No podrás volver a parchear sin proporcionar un nuevo APK</string>
     <string name="settings_system_original_apks_delete_all_title">¿Eliminar todos los APKs originales?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Opciones de parche</string>
@@ -851,8 +852,9 @@ Detalles: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Fuente #%s</string>
     <string name="settings_system_patch_selection_will_delete">Esto eliminará:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para todos los paquetes y fuentes.</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para %s en todas las fuentes.</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Esto eliminará permanentemente las selecciones de parches guardadas para %1$s en la fuente #%2$s</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para &lt;b&gt;%s&lt;/b&gt; en todas las fuentes</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para &lt;b&gt;%1$s&lt;/b&gt; en &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para los paquetes seleccionados</string>
     <string name="settings_system_export_source_data_fail">Error al exportar datos de fuente</string>
     <string name="settings_system_export_source_data_success">Datos de fuente exportados correctamente</string>
     <string name="settings_system_import_source_data_fail">Error al importar datos de fuente</string>

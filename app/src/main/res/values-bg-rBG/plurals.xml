@@ -36,6 +36,10 @@
         <item quantity="one">Изтрито %d приложение</item>
         <item quantity="other">Изтрити %d приложения</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Премахване на %d приложение?</item>
+        <item quantity="other">Премахване на %d приложения?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Пропуснато %d приложение</item>
         <item quantity="other">Пропуснати %d приложения</item>

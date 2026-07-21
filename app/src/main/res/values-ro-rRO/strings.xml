@@ -826,7 +826,6 @@ Detalii: %2$s"</string>
     <string name="settings_system_patched_apks_description">Administrează fișierele patch-uite salvate ale aplicațiilor</string>
     <string name="settings_system_patched_apks_empty">Niciun APK patch-uit salvat încă</string>
     <string name="settings_system_patched_apks_delete_title">Ștergi APK-ul patch-uit?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Dorești să ștergi APK-ul patch-uit salvat pentru %s?</string>
     <string name="settings_system_patched_apks_deleted">APK-ul patch-uit a fost șters cu succes</string>
     <string name="settings_system_patched_apks_delete_all_title">Ștergi toate APK-urile modificate?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -835,7 +834,6 @@ Detalii: %2$s"</string>
     <string name="settings_system_original_apks_empty">Niciun APK original stocat</string>
     <string name="settings_system_original_apks_deleted">APK original șters cu succes</string>
     <string name="settings_system_original_apks_delete_title">Ștergi APK-ul original?</string>
-    <string name="settings_system_original_apks_delete_confirm">Ștergeți fișierul APK original pentru %s? Fără un nou fișier APK nu veți putea repăta aplicația</string>
     <string name="settings_system_original_apks_delete_all_title">Ștergi toate APK-urile originale?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Gestiune selectii de modificări</string>
@@ -850,8 +848,6 @@ Detalii: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Sursă #%s</string>
     <string name="settings_system_patch_selection_will_delete">Acesta va șterge:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Acesta va șterge permanent toate selectiile de pachet salvate pentru toate pachetele și sursele</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Acesta va șterge permanent toate selectiile de pachet salvate pentru %s peste toate sursele</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Acțiunea va șterge definitiv selecțiile de patch-uri salvate pentru %1$s în sursă #%2$s</string>
     <string name="settings_system_export_source_data_fail">Eșec la exportarea datelor sursei</string>
     <string name="settings_system_export_source_data_success">Datele sursei exportate cu succes</string>
     <string name="settings_system_import_source_data_fail">Eșec la importarea datelor sursei</string>

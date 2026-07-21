@@ -17,28 +17,32 @@
         <item quantity="other">%s pacchetti</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Patch %s eseguito</item>
-        <item quantity="other">Patch %s eseguiti</item>
+        <item quantity="one">Eseguita %s patch</item>
+        <item quantity="other">Eseguite %s patch</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s file APK</item>
         <item quantity="other">%s file APK</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">Installato %d app</item>
-        <item quantity="other">Installati %d app</item>
+        <item quantity="one">Installata %d app</item>
+        <item quantity="other">Installate %d app</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">Reinstallato %d app</item>
-        <item quantity="other">Reinstallati %d app</item>
+        <item quantity="one">Reinstallata %d app</item>
+        <item quantity="other">Reinstallate %d app</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">Disinstallato %d app</item>
-        <item quantity="other">Disinstallati %d app</item>
+        <item quantity="one">Disinstallata %d app</item>
+        <item quantity="other">Disinstallate %d app</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Disinstallare %d app?</item>
+        <item quantity="other">Disinstallare %d app?</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">Saltato %d app</item>
-        <item quantity="other">Saltati %d app</item>
+        <item quantity="one">Saltata %d app</item>
+        <item quantity="other">Saltate %d app</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Rimossa %s patch obsoleta dalla selezione salvata</item>

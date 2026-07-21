@@ -307,6 +307,7 @@ Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio:
     <string name="header_creator_guide_positioning_body">Utilizza i gesti di pizzicamento per zoomare e trascinare direttamente nell\'anteprima per posizionare e ridimensionare l\'immagine. Appaiono delle guide quando l\'immagine è vicino al centro. Puoi anche utilizzare il cursore sotto l\'anteprima.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Sei sicuro di voler disinstallare questa app?</string>
+    <string name="batch_uninstall_confirm_body">Le app selezionate saranno rimosse permanentemente dal tuo dispositivo</string>
     <string name="home_app_info_remove_app_warning">Questo eliminerà in modo permanente:</string>
     <string name="home_app_info_delete_item_database">Voce del database</string>
     <string name="home_app_info_delete_item_patched_apk">File APK patchato</string>
@@ -574,6 +575,8 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="settings_advanced_github_pat_configured">Token configurato</string>
     <string name="settings_advanced_github_pat_how_to_get">Come ottenere un token</string>
     <string name="settings_advanced_github_pat_dialog_title">Imposta il token di accesso personale di GitHub</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Imposta un token di accesso personale di GitHub per poter aggiungere pull request come fonti esterne. Crea un PAT con ambito public_repo su
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Includi nelle impostazioni di esportazione</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Aggiunge questa PAT alle impostazioni di Morphe esportate</string>
     <string name="settings_advanced_github_pat_export_warning">Non condividere il tuo PAT. Se lo includi in un\'esportazione delle impostazioni, mantieni quel file privato perché contiene il token</string>
@@ -826,7 +829,6 @@ Dettagli: %2$s"</string>
     <string name="settings_system_patched_apks_description">Gestione dei file delle applicazioni patchate</string>
     <string name="settings_system_patched_apks_empty">Non ci sono APK patchati salvati</string>
     <string name="settings_system_patched_apks_delete_title">Cancellare l\'APK patchato?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Sei sicuro di voler eliminare l\'APK patchato per %s?</string>
     <string name="settings_system_patched_apks_deleted">L\'APK patchato è stato eliminato correttamente </string>
     <string name="settings_system_patched_apks_delete_all_title">Eliminare tutti gli APK modificati?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -835,7 +837,6 @@ Dettagli: %2$s"</string>
     <string name="settings_system_original_apks_empty">Non ci sono APK originali archiviati</string>
     <string name="settings_system_original_apks_deleted">L\'APK originale è stato eliminato correttamente </string>
     <string name="settings_system_original_apks_delete_title">Eliminare APK originale?</string>
-    <string name="settings_system_original_apks_delete_confirm">Eliminare l\'APK originale per %s? Non potrai ripatchare senza fornire un nuovo APK</string>
     <string name="settings_system_original_apks_delete_all_title">Eliminare tutti gli APK originali?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Selezioni delle patch</string>
@@ -850,8 +851,6 @@ Dettagli: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Fonte #%s</string>
     <string name="settings_system_patch_selection_will_delete">Questo eliminerà:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Questo eliminerà permanentemente tutte le selezioni delle patch salvate per tutti i pacchetti e le fonti</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Questo eliminerà permanentemente tutte le selezioni delle patch salvate per %s su tutte le fonti</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Questo cancellerà permanentemente le selezioni delle patch salvate per %1$s nella fonte #%2$s</string>
     <string name="settings_system_export_source_data_fail">Impossibile esportare i dati della fonte</string>
     <string name="settings_system_export_source_data_success">I dati della fonte sono stati esportati con successo</string>
     <string name="settings_system_import_source_data_fail">Impossibile importare i dati della fonte</string>

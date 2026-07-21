@@ -54,6 +54,12 @@
         <item quantity="few">Odnameščeni %d appi</item>
         <item quantity="other">Odnameščeni %d appi</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Odstrani %d aplikacijo?</item>
+        <item quantity="two">Odstrani %d aplikaciji?</item>
+        <item quantity="few">Odstrani %d aplikacij?</item>
+        <item quantity="other">Odstrani %d aplikacij?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Preskočen %d app</item>
         <item quantity="two">Preskočeni %d appi</item>

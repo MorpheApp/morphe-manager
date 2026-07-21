@@ -714,7 +714,6 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_patched_apks_description">Upravljajte spremljenim patchanim aplikacijama</string>
     <string name="settings_system_patched_apks_empty">Još nema spremljenih patchanih aplikacija</string>
     <string name="settings_system_patched_apks_delete_title">Izbrisati patchanu aplikaciju?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Jeste li sigurni da želite izbrisati spremljeni patchiranu aplikaciju za %s?</string>
     <string name="settings_system_patched_apks_deleted">Uspješno izbrisana patchirana aplikacija</string>
     <string name="settings_system_patched_apks_delete_all_title">Izbrisati sve patchane APK-ove?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -723,7 +722,6 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_original_apks_empty">Nema pohranjenih originalnih aplikacija</string>
     <string name="settings_system_original_apks_deleted">Uspješno izbrisana originalna aplikacija</string>
     <string name="settings_system_original_apks_delete_title">Želite li izbrisati originalnu aplikaciju?</string>
-    <string name="settings_system_original_apks_delete_confirm">Izbrisati originalnu aplikaciju za %s? Nećete moći ponovno patchati bez pružanja nove aplikacije.</string>
     <string name="settings_system_original_apks_delete_all_title">Želite li izbrisati sve originalne APK datoteke?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Odabir patcheva</string>
@@ -738,8 +736,6 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_system_patch_selection_source_format">Izvor #%s</string>
     <string name="settings_system_patch_selection_will_delete">Ovo će izbrisati:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ovo će trajno izbrisati sve spremljene odabire patcha za sve pakete i izvor</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ovo će trajno izbrisati sve spremljene odabire patcha za %s preko svih izvora</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Ovo će trajno obrisati spremljene odabire patcha za %1$s u izvoru #%2$s</string>
     <string name="settings_system_export_source_data_fail">Neuspjeh pri izvozu podataka izvora</string>
     <string name="settings_system_export_source_data_success">Podaci izvora uspješno izvozeni</string>
     <string name="settings_system_import_source_data_fail">Neuspjeh pri uvozu podataka izvora</string>

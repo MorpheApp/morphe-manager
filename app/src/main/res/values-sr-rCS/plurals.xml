@@ -45,6 +45,11 @@
         <item quantity="few">Deinstalirane %d aplikacije</item>
         <item quantity="other">Deinstalirane %d aplikacija</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Da li ste sigurni da želite da uklonite %d aplikaciju?</item>
+        <item quantity="few">Da li ste sigurni da želite da uklonite %d aplikacije?</item>
+        <item quantity="other">Da li ste sigurni da želite da uklonite %d aplikacija?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Preskočena %d aplikacija</item>
         <item quantity="few">Preskočene %d aplikacije</item>

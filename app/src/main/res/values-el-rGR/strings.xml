@@ -306,6 +306,7 @@
     <string name="header_creator_guide_positioning_body">Χρησιμοποιήστε χειρονομίες ζουμ και μεταφοράς απευθείας στην προεπισκόπηση για να τοποθετήσετε και να κλιμακώσετε την εικόνα σας. Εμφανίζονται καθοδηγητικοί οδηγοί όταν η εικόνα είναι κοντά στο κέντρο. Μπορείτε επίσης να χρησιμοποιήσετε το ρυθμιστικό κάτω από την προεπισκόπηση.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Είστε βέβαιοι ότι θέλετε να απεγκαταστήσετε αυτή την εφαρμογή;</string>
+    <string name="batch_uninstall_confirm_body">Οι επιλεγμένες εφαρμογές θα διαγραφούν οριστικά από τη συσκευή σας</string>
     <string name="home_app_info_remove_app_warning">Αυτό θα διαγράψει οριστικά:</string>
     <string name="home_app_info_delete_item_database">Την καταχωρημένη βάση δεδομένων</string>
     <string name="home_app_info_delete_item_patched_apk">Το τροποποιημένο APK αρχείο</string>
@@ -825,7 +826,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">Διαχείριση αποθηκευμένων αρχείων τροποποιημένων εφαρμογών</string>
     <string name="settings_system_patched_apks_empty">Δεν υπάρχουν αποθηκευμένες τροποποιημένες APKs ακόμα</string>
     <string name="settings_system_patched_apks_delete_title">Διαγραφή τροποποιημένης APK;</string>
-    <string name="settings_system_patched_apks_delete_confirm">Είστε βέβαιοι ότι θέλετε να διαγράψετε την αποθηκευμένη τροποποιημένη APK για %s;</string>
     <string name="settings_system_patched_apks_deleted">Επιτυχής διαγραφή</string>
     <string name="settings_system_patched_apks_delete_all_title">Διαγραφή όλων των τροποποιημένων APK;</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -834,7 +834,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">Δεν υπάρχουν αποθηκευμένες πρωτότυπες APKs</string>
     <string name="settings_system_original_apks_deleted">Η πρωτότυπη APK διαγράφτηκε επιτυχώς</string>
     <string name="settings_system_original_apks_delete_title">Διαγραφή αρχικού APK;</string>
-    <string name="settings_system_original_apks_delete_confirm">Διαγραφή πρωτότυπης APK για %s; Δε θα μπορείτε να τροποποιήσετε ξανά χωρίς δοθεί νέο APK</string>
     <string name="settings_system_original_apks_delete_all_title">Διαγραφή όλων των αρχικών APK;</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Επιλεγμένες τροποποιήσεις</string>
@@ -849,8 +848,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">Πηγή #%s</string>
     <string name="settings_system_patch_selection_will_delete">Αυτό θα διαγράψει:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Αυτό θα διαγράψει οριστικά όλες τις αποθηκευμένες επιλεγμένες τροποποιήσεις για όλα τα πακέτα και τις πηγές</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Αυτό θα διαγράψει οριστικά όλες τις αποθηκευμένες επιλεγμένες τροποποιήσεις για το %s σε όλες τις πηγές</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Αυτό θα διαγράψει οριστικά τις επιλεγμένες τροποποιήσεις για %1$s στην πηγή #%2$s</string>
     <string name="settings_system_export_source_data_fail">Αποτυχία εξαγωγής δεδομένων πηγής</string>
     <string name="settings_system_export_source_data_success">Επιτυχής εξαγωγή δεδομέων πηγής</string>
     <string name="settings_system_import_source_data_fail">Αποτυχία εισαγωγής δεδομένων πηγής</string>

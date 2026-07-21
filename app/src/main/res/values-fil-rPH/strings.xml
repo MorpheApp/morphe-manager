@@ -306,6 +306,7 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="header_creator_guide_positioning_body">Gumamit ng pinch-to-zoom at drag gesture nang direkta sa preview para iposisyon at i-scale ang iyong imahe. Lumalabas ang mga snap guide kapag malapit na ang imahe sa gitna. Maaari mo ring gamitin ang slider sa ibaba ng preview.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Nais mo bang burahin ang aplikasyong ito? </string>
+    <string name="batch_uninstall_confirm_body">Ang mga piling app ay permanenteng tatanggalin sa iyong device</string>
     <string name="home_app_info_remove_app_warning">Permanenteng buburahin ang:</string>
     <string name="home_app_info_delete_item_database">Database entry</string>
     <string name="home_app_info_delete_item_patched_apk">Naka-patch na APK file</string>
@@ -823,7 +824,6 @@ Mga Detalye: %2$s"</string>
     <string name="settings_system_patched_apks_description">Pamahalaan ang mga nakaimbak na naka-patch na mga file ng aplikasyon</string>
     <string name="settings_system_patched_apks_empty">Wala pang naka-patch na APK</string>
     <string name="settings_system_patched_apks_delete_title">Burahin ang naka-patch na APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Nais mo bang burahin ang nakaimbak na naka-patch na APK para sa %s?</string>
     <string name="settings_system_patched_apks_deleted">Matagumpay na nabura ang naka-patch na APK</string>
     <string name="settings_system_patched_apks_delete_all_title">Burahin ang lahat ng naka-patch na APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -832,7 +832,6 @@ Mga Detalye: %2$s"</string>
     <string name="settings_system_original_apks_empty">Walang nakaimbak na orihinal na mga APK</string>
     <string name="settings_system_original_apks_deleted">Matagumpay na nabura ang orihinal na APK</string>
     <string name="settings_system_original_apks_delete_title">Burahin ang orihinal na APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Burahin ang orihinal na APK para sa %s? Hindi ka makakapag-repatch nang hindi nagbibigay ng bagong APK</string>
     <string name="settings_system_original_apks_delete_all_title">Burahin ang lahat ng orihinal na APK?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Mga pagpipilian ng patch</string>
@@ -847,8 +846,6 @@ Mga Detalye: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Pinagmulan #%s</string>
     <string name="settings_system_patch_selection_will_delete">Buburahin nito ang:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Permanenteng buburahin nito ang lahat ng naka-save na mga pagpipilian sa patch para sa lahat ng mga pakete at pinagmulan</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Permanenteng buburahin nito ang lahat ng naka-save na mga pagpipilian sa patch para %s sa lahat ng mga mapagkukunan</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Permanenteng buburahin nito ang naka-save na mga pagpipilian ng patch para sa %1$s mula sa pinagmulan #%2$s </string>
     <string name="settings_system_export_source_data_fail">Nabigong ma-export ang pinagmulan ng datos</string>
     <string name="settings_system_export_source_data_success">Matagumpay na na-export ang pinagmulan ng datos</string>
     <string name="settings_system_import_source_data_fail">Nabigong ma-import ang pinagmulan ng datos</string>

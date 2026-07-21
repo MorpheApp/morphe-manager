@@ -306,6 +306,7 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="header_creator_guide_positioning_body">Brug knib-til-zoom og trækbevægelser direkte i forhåndsvisningen for at placere og skalere dit billede. Snappingsguider vises, når billedet er tæt på midten. Du kan også bruge skyderen under forhåndsvisningen.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Er du sikker på at du vil fjerne denne app? </string>
+    <string name="batch_uninstall_confirm_body">De valgte apps vil blive permanent fjernet fra din enhed</string>
     <string name="home_app_info_remove_app_warning">Dette vil permanent slette:</string>
     <string name="home_app_info_delete_item_database">Databaseindtastning</string>
     <string name="home_app_info_delete_item_patched_apk">Patchet APK-fil</string>
@@ -825,7 +826,6 @@ Detaljer: %2$s"</string>
     <string name="settings_system_patched_apks_description">Håndter gemte patchet APK filer</string>
     <string name="settings_system_patched_apks_empty">Ingen patchet APK\'er er gemt endnu</string>
     <string name="settings_system_patched_apks_delete_title">Slet patchet APK? </string>
-    <string name="settings_system_patched_apks_delete_confirm">Er du sikker på at du vil slette appen %s? </string>
     <string name="settings_system_patched_apks_deleted">App slettet</string>
     <string name="settings_system_patched_apks_delete_all_title">Slet alle rettede APK\'er?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -834,7 +834,6 @@ Detaljer: %2$s"</string>
     <string name="settings_system_original_apks_empty">Ingen lagrede originale APK-er</string>
     <string name="settings_system_original_apks_deleted">Original APK slettet</string>
     <string name="settings_system_original_apks_delete_title">Slet original APK? </string>
-    <string name="settings_system_original_apks_delete_confirm">Slet original APK for %s? Du vil ikke kunne repatche uden at tilbyde en ny APK</string>
     <string name="settings_system_original_apks_delete_all_title">Slet alle originale APK\'er?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patchvalg</string>
@@ -849,8 +848,6 @@ Detaljer: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Kilde #%s</string>
     <string name="settings_system_patch_selection_will_delete">Dette vil slette:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Dette vil permanent slette alle gemte patchvalg for alle pakker og kilder</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Dette vil permanent slette alle gemte patchvalg for %s over alle kilder</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Dette vil permanent slette gemte patchvalg for %1$s i kilde #%2$s</string>
     <string name="settings_system_export_source_data_fail">Kunne ikke eksportere kilde-data</string>
     <string name="settings_system_export_source_data_success">Kilde-data eksporteret med succes</string>
     <string name="settings_system_import_source_data_fail">Kunne ikke importere kilde-data</string>

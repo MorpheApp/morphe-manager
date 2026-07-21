@@ -42,6 +42,13 @@
         <item quantity="many">%s comhaid APK</item>
         <item quantity="other">%s comhaid APK</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Díshuigh %d aip?</item>
+        <item quantity="two">Díshuigh %d aip?</item>
+        <item quantity="few">Díshuigh %d aip?</item>
+        <item quantity="many">Díshuigh %d aip?</item>
+        <item quantity="other">Díshuigh %d aip?</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Baineadh %s paiste atá as dáta ón rogha sábháilte</item>
         <item quantity="two">Baineadh %s paistí atá as dáta ón rogha sábháilte</item>

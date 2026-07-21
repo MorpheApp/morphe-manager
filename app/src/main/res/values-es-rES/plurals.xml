@@ -25,20 +25,24 @@
         <item quantity="other">%s archivos APK</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">Se instaló %d aplicación</item>
-        <item quantity="other">Se instalaron %d aplicaciones</item>
+        <item quantity="one">%d aplicación instalada</item>
+        <item quantity="other">%d aplicaciones instaladas</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">Se reinstaló %d aplicación</item>
-        <item quantity="other">Se reinstalaron %d aplicaciones</item>
+        <item quantity="one">%d aplicación reinstalada</item>
+        <item quantity="other">%d aplicaciones reinstaladas</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">Se desinstaló %d aplicación</item>
-        <item quantity="other">Se desinstalaron %d aplicaciones</item>
+        <item quantity="one">%d aplicación desinstalada</item>
+        <item quantity="other">%d aplicaciones desinstaladas</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">¿Desinstalar %d aplicación?</item>
+        <item quantity="other">¿Desinstalar %d aplicaciones?</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">Se omitió %d aplicación</item>
-        <item quantity="other">Se omitieron %d aplicaciones</item>
+        <item quantity="one">%d aplicación omitida</item>
+        <item quantity="other">%d aplicaciones omitidas</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Eliminado %s parche obsoleto de la selección guardada</item>

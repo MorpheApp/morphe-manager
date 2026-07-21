@@ -36,6 +36,10 @@
         <item quantity="one">%d app verwyder</item>
         <item quantity="other">%d apps verwyder</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Deïnstalleer %d program?</item>
+        <item quantity="other">Deïnstalleer %d programme?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%d app oorgeslaan</item>
         <item quantity="other">%d apps oorgeslaan</item>

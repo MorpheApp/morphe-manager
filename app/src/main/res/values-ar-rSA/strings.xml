@@ -830,7 +830,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_patched_apks_description">يدير ملفات التطبيقات المُعدّلة المحفوظة</string>
     <string name="settings_system_patched_apks_empty">لم يتم حفظ أي تعديلات تطبيقات حتى الآن</string>
     <string name="settings_system_patched_apks_delete_title">حذف ملف APK المعدل؟</string>
-    <string name="settings_system_patched_apks_delete_confirm">هل تريد بالتأكيد حذف ملف APK المعدل المحفوظ لـ %s؟</string>
     <string name="settings_system_patched_apks_deleted">تم حذف ملف APK المعدل بنجاح</string>
     <string name="settings_system_patched_apks_delete_all_title">حذف جميع ملفات APK المعدلة؟</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -839,7 +838,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_original_apks_empty">لا يوجد ملفات APK الأصلية محفوظة</string>
     <string name="settings_system_original_apks_deleted">تم حذف ملف APK الأصلي بنجاح</string>
     <string name="settings_system_original_apks_delete_title">حذف ملف APK الأصلي؟</string>
-    <string name="settings_system_original_apks_delete_confirm">هل تريد بالتأكيد حذف ملف APK الأصلي لـ %s؟ لن تتمكن من إعادة التعديل دون توفير ملف APK جديد</string>
     <string name="settings_system_original_apks_delete_all_title">حذف جميع ملفات APK الأصلية؟</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">اختيارات التعديل</string>
@@ -854,8 +852,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_patch_selection_source_format">مصدر #%s</string>
     <string name="settings_system_patch_selection_will_delete">هذا سيحذف:</string>
     <string name="settings_system_patch_selection_reset_all_warning">هذا سيحذف كل التعديلات المحددة المحفوظة بشكل دائم لجميع الحزم والمصادر</string>
-    <string name="settings_system_patch_selection_reset_package_warning">هذا سيحذف كل التعديلات المحددة المحفوظة بشكل دائم لـ %s عبر جميع المصادر</string>
-    <string name="settings_system_patch_selection_reset_source_warning">هذا سيحذف التعديلات المحددة المحفوظة لـ %1$s في مصدر #%2$s</string>
     <string name="settings_system_export_source_data_fail">فشل تصدير بيانات المصدر</string>
     <string name="settings_system_export_source_data_success">تم تصدير بيانات المصدر بنجاح</string>
     <string name="settings_system_import_source_data_fail">فشل استيراد بيانات المصدر</string>

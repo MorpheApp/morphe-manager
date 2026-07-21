@@ -307,6 +307,7 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="header_creator_guide_positioning_body">Käytä nipistyszoom- ja vedä-eleitä suoraan esikatselussa kuvan sijoittamiseen ja skaalaamiseen. Ohjaimet näkyvät, kun kuva on lähellä keskustaa. Voit käyttää myös esikatselun alla olevaa liukusäädintä.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Haluatko varmasti poistaa tämän sovelluksen?</string>
+    <string name="batch_uninstall_confirm_body">Valitut sovellukset poistetaan pysyvästi laitteestasi</string>
     <string name="home_app_info_remove_app_warning">Tämä poistaa pysyvästi:</string>
     <string name="home_app_info_delete_item_database">Tietokantamerkinnän</string>
     <string name="home_app_info_delete_item_patched_apk">Muokatun APK-tiedoston</string>
@@ -824,7 +825,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_patched_apks_description">Hallitse tallennettuja muokattuja sovellustiedostoja</string>
     <string name="settings_system_patched_apks_empty">Muokattuja APK:ita ei ole vielä tallennettu</string>
     <string name="settings_system_patched_apks_delete_title">Poista muokattu APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Haluatko varmasti poistaa sovelluksen %s tallennettun muokatun APK:n?</string>
     <string name="settings_system_patched_apks_deleted">Muokattu APK on poistettu</string>
     <string name="settings_system_patched_apks_delete_all_title">Poistetaanko kaikki muutetut APK-tiedostot?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -833,7 +833,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_original_apks_empty">Ei alkuperäisiä APK:ita tallennettu</string>
     <string name="settings_system_original_apks_deleted">Alkuperäinen APK on poistettu</string>
     <string name="settings_system_original_apks_delete_title">Poista alkuperäinen APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Poistaa sovelluksen %s alkuperäisen APK:n? Et voi muokata tätä uudelleen ilman uuden APK:n lisäämistä</string>
     <string name="settings_system_original_apks_delete_all_title">Poistetaanko kaikki alkuperäiset APK-tiedostot?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Lisäosavalinnat</string>
@@ -848,8 +847,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Lähde #%s</string>
     <string name="settings_system_patch_selection_will_delete">Tämä poistaa:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Tämä poistaa pysyvästi kaikki tallennetut lisäosavalinnat kaikista paketeista ja lähteistä</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Tämä poistaa pysyvästi kaikki tallennetut lisäosavalinnat sovelluksesta %s kaikista lähteistä</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Tämä poistaa pysyvästi tallennetut lisäosavalinnat sovelluksesta %1$s lähteestä #%2$s</string>
     <string name="settings_system_export_source_data_fail">Lähdetietojen vienti epäonnistui</string>
     <string name="settings_system_export_source_data_success">Lähdetiedot on viety</string>
     <string name="settings_system_import_source_data_fail">Lähdetietojen tuonti epäonnistui</string>

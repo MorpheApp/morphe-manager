@@ -648,7 +648,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">Минатата коверта на пукање</string>
     <string name="settings_system_patched_apks_empty">Сè уште нема зачувани закрпени APK-а</string>
     <string name="settings_system_patched_apks_delete_title">Дали да се избрише закрпениот APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Дали сте сигурни дека сакате да го избришете зачуваниот закрпен APK за %s?</string>
     <string name="settings_system_patched_apks_deleted">Закрпениот APK е успешно избришан</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Оригинални APK-а</string>
@@ -656,7 +655,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">Не се чуваат оригинални APK-а</string>
     <string name="settings_system_original_apks_deleted">Оригиналниот APK е успешно избришан</string>
     <string name="settings_system_original_apks_delete_title">Дали да се избрише оригиналниот APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Дали сигурно сакате да го избришете оригиналниот APK за %s? Не можете повторно да закрпите без да дадете нов APK</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Изборите за закрпување</string>
     <string name="settings_system_patch_selections_description">Споделување</string>
@@ -669,8 +667,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">Извор бр.%s</string>
     <string name="settings_system_patch_selection_will_delete">Ова ќе се избрише:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ова трајно ќе ги избрише сите зачувани избори за закрпување за сите пакети и извори</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ова трајно ќе ги избрише сите зачувани избори за закрпување за %s во сите извори.</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Ова трајно ќе ги избрише зачуваните избори за закрпување за %1$s во извор бр.%2$s</string>
     <string name="settings_system_export_source_data_fail">Неуспешно извезување на податоците од изворот</string>
     <string name="settings_system_export_source_data_success">Податоците од изворот се успешно извезени</string>
     <string name="settings_system_import_source_data_fail">Неуспешен увоз на податоците од изворот</string>

@@ -306,6 +306,7 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="header_creator_guide_positioning_body">Görüntünüzü konumlandırmak ve ölçeklendirmek için ön izlemede doğrudan yakınlaştırma ve sürükleme hareketlerini kullanın. Görüntü merkeze yaklaştığında hizalama kılavuzları görünür. Ön izlemenin altındaki kaydırıcıyı da kullanabilirsiniz.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bu uygulamayı kaldırmak istediğinizden emin misiniz?</string>
+    <string name="batch_uninstall_confirm_body">Seçili uygulamalar cihazınızdan kalıcı olarak silinecektir.</string>
     <string name="home_app_info_remove_app_warning">Bu, aşağıdakileri kalıcı olarak silecektir:</string>
     <string name="home_app_info_delete_item_database">Veri tabanı girişi</string>
     <string name="home_app_info_delete_item_patched_apk">Yamalanmış APK dosyası</string>
@@ -825,7 +826,6 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_patched_apks_description">Kayıtlı yamalanmış uygulama dosyalarını yönetir</string>
     <string name="settings_system_patched_apks_empty">Henüz hiç yamalanmış APK kaydedilmedi</string>
     <string name="settings_system_patched_apks_delete_title">Yamalanmış APK silinsin mi?</string>
-    <string name="settings_system_patched_apks_delete_confirm">%s için kaydedilen yamalanmış APK\'yi silmek istediğinizden emin misiniz?</string>
     <string name="settings_system_patched_apks_deleted">Yamalanmış APK başarıyla silindi</string>
     <string name="settings_system_patched_apks_delete_all_title">Tüm yamalanmış APK\'ler silinsin mi?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -834,7 +834,6 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_original_apks_empty">Hiç orijinal APK saklanmıyor</string>
     <string name="settings_system_original_apks_deleted">Orijinal APK başarıyla silindi</string>
     <string name="settings_system_original_apks_delete_title">Orijinal APK silinsin mi?</string>
-    <string name="settings_system_original_apks_delete_confirm">%s için orijinal APK silinsin mi? Yeni bir APK sağlamadan yeniden yama yapamazsınız</string>
     <string name="settings_system_original_apks_delete_all_title">Tüm orijinal APK\'ler silinsin mi?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Yama seçenekleri</string>
@@ -849,8 +848,6 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Kaynak #%s</string>
     <string name="settings_system_patch_selection_will_delete">Bu işlem şunları silecektir:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Bu, tüm paketler ve kaynaklar için kaydedilmiş yama seçimlerinin tamamını kalıcı olarak silecektir</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Bu, %s için kaydedilmiş tüm yama seçimlerini kalıcı olarak silecektir</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Bu, #%2$s kaynağında %1$s için kaydedilmiş yama seçimlerini kalıcı olarak silecektir</string>
     <string name="settings_system_export_source_data_fail">Kaynak verisinin dışa aktarılması başarısız oldu</string>
     <string name="settings_system_export_source_data_success">Kaynak verisi başarıyla dışa aktarıldı</string>
     <string name="settings_system_import_source_data_fail">Kaynak verisinin içe aktarılması başarısız oldu</string>

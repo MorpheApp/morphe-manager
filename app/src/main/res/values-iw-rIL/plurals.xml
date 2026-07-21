@@ -54,6 +54,12 @@
         <item quantity="many">הוסרו %d אפליקציות</item>
         <item quantity="other">הוסרו %d אפליקציות</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">הסר התקנה של %d אפליקציה?</item>
+        <item quantity="two">הסר התקנה של %d אפליקציות?</item>
+        <item quantity="many">הסר התקנה של %d אפליקציות?</item>
+        <item quantity="other">הסר התקנה של %d אפליקציות?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">דילג על %d אפליקציה</item>
         <item quantity="two">דילג על %d אפליקציות</item>

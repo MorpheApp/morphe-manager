@@ -27,6 +27,9 @@
     <plurals name="batch_uninstall_summary">
         <item quantity="other">已卸载 %d 个应用</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="other">卸载 %d 个应用？</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="other">已跳过 %d 个应用</item>
     </plurals>

@@ -827,7 +827,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">管理保存的已修补应用文件</string>
     <string name="settings_system_patched_apks_empty">尚未保存任何已修补 APK</string>
     <string name="settings_system_patched_apks_delete_title">是否要删除已保存的修补 APK？</string>
-    <string name="settings_system_patched_apks_delete_confirm">是否要删除选中的修补 APK？</string>
     <string name="settings_system_patched_apks_deleted">已成功删除修补 APK</string>
     <string name="settings_system_patched_apks_delete_all_title">删除所有已修补的 APK？</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -836,7 +835,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">尚未存储任何原始 APK</string>
     <string name="settings_system_original_apks_deleted">已成功删除原始 APK</string>
     <string name="settings_system_original_apks_delete_title">是否要删除原始 APK？</string>
-    <string name="settings_system_original_apks_delete_confirm">删除 %s 的原始 APK？没有新的 APK，您将无法重新修补</string>
     <string name="settings_system_original_apks_delete_all_title">删除所有原始 APK？</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">补丁选择项</string>
@@ -851,8 +849,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">源 #%s</string>
     <string name="settings_system_patch_selection_will_delete">这将删除：</string>
     <string name="settings_system_patch_selection_reset_all_warning">这将永久删除所有保存的补丁选择，适用于所有包和源</string>
-    <string name="settings_system_patch_selection_reset_package_warning">这将永久删除所有源当中, 为 %s 保存的补丁选择</string>
-    <string name="settings_system_patch_selection_reset_source_warning">这将永久删除已保存的补丁选择，包括 %1$s 在源 #%2$s 中</string>
     <string name="settings_system_export_source_data_fail">导出源数据失败</string>
     <string name="settings_system_export_source_data_success">源数据导出成功</string>
     <string name="settings_system_import_source_data_fail">导入源数据失败</string>

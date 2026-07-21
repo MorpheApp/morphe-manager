@@ -825,7 +825,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">저장된 패치된 앱 파일을 관리합니다</string>
     <string name="settings_system_patched_apks_empty">저장된 패치된 APK가 없습니다</string>
     <string name="settings_system_patched_apks_delete_title">패치된 APK 삭제</string>
-    <string name="settings_system_patched_apks_delete_confirm">\'%s\'에 대한 저장된 패치된 APK를 삭제하시겠습니까?</string>
     <string name="settings_system_patched_apks_deleted">패치된 APK를 성공적으로 삭제하였습니다</string>
     <string name="settings_system_patched_apks_delete_all_title">패치된 APK 모두 삭제</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -834,7 +833,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">저장된 원본 APK가 없습니다</string>
     <string name="settings_system_original_apks_deleted">원본 APK를 성공적으로 삭제하였습니다</string>
     <string name="settings_system_original_apks_delete_title">원본 APK 삭제</string>
-    <string name="settings_system_original_apks_delete_confirm">\'%s\'에 대한 원본 APK를 삭제하시겠습니까? 다시 패치할 경우에 새 APK를 사용해야 합니다</string>
     <string name="settings_system_original_apks_delete_all_title">원본 APK 모두 삭제</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">패치 선택 목록</string>
@@ -849,8 +847,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">소스 #%s</string>
     <string name="settings_system_patch_selection_will_delete">다음 항목을 삭제합니다:</string>
     <string name="settings_system_patch_selection_reset_all_warning">모든 패키지 및 소스에 대해 저장된 모든 패치 선택 목록을 영구적으로 삭제합니다</string>
-    <string name="settings_system_patch_selection_reset_package_warning">모든 소스에서 \'%s\'에 대한 저장된 패치 선택 목록을 영구적으로 삭제힙니다</string>
-    <string name="settings_system_patch_selection_reset_source_warning">소스 #%2$s에서 \'%1$s\'에 대한 저장된 패치 선택 목록을 영구적으로 삭제합니다</string>
     <string name="settings_system_export_source_data_fail">소스 데이터를 내보낼 수 없습니다</string>
     <string name="settings_system_export_source_data_success">소스 데이터를 성공적으로 내보냈습니다</string>
     <string name="settings_system_import_source_data_fail">소스 데이터를 가저올 수 없습니다</string>

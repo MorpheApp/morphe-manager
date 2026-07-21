@@ -27,6 +27,9 @@
     <plurals name="batch_uninstall_summary">
         <item quantity="other">%d aplikasi telah dihapus instalasinya</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="other">Hapus %d aplikasi?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="other">%d aplikasi dilewati</item>
     </plurals>

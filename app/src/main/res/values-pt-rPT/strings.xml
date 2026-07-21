@@ -306,6 +306,7 @@ Zona externa (tracejada): pode ser cortada pela máscara do iniciador - mantenha
     <string name="header_creator_guide_positioning_body">Use gestos de pinça para ampliar e arrastar diretamente na visualização para posicionar e dimensionar sua imagem. Guias de ajuste aparecem quando a imagem está perto do centro. Você também pode usar o controle deslizante abaixo da visualização.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Tens a certeza de que queres desinstalar esta aplicação?</string>
+    <string name="batch_uninstall_confirm_body">Os aplicativos selecionados serão removidos permanentemente do seu dispositivo</string>
     <string name="home_app_info_remove_app_warning">Isto irá eliminar permanentemente:</string>
     <string name="home_app_info_delete_item_database">Entrada da base de dados</string>
     <string name="home_app_info_delete_item_patched_apk">Ficheiro APK modificado</string>
@@ -825,7 +826,6 @@ Detalhes: %2$s"</string>
     <string name="settings_system_patched_apks_description">Gerir ficheiros de aplicações modificadas guardadas</string>
     <string name="settings_system_patched_apks_empty">Ainda não foi guardado nenhum APK</string>
     <string name="settings_system_patched_apks_delete_title">Eliminar APK modificado?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Tens a certeza de que queres eliminar o APK modificado para %s?</string>
     <string name="settings_system_patched_apks_deleted">APK modificado eliminado com sucesso</string>
     <string name="settings_system_patched_apks_delete_all_title">Eliminar todos os APKs modificados?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -834,7 +834,6 @@ Detalhes: %2$s"</string>
     <string name="settings_system_original_apks_empty">Nenhum APK original guardado</string>
     <string name="settings_system_original_apks_deleted">APK original eliminado com sucesso</string>
     <string name="settings_system_original_apks_delete_title">Eliminar APK original?</string>
-    <string name="settings_system_original_apks_delete_confirm">Eliminar o APK original para %s? Não poderás modificar de novo sem forneceres num novo APK</string>
     <string name="settings_system_original_apks_delete_all_title">Eliminar todos os APKs originais?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Seleções de modificações</string>
@@ -849,8 +848,6 @@ Detalhes: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Fonte #%s</string>
     <string name="settings_system_patch_selection_will_delete">Isto irá eliminar:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Isto irá eliminar permanentemente todas as seleções de modificações guardadas para todos os pacotes e fontes</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Isto irá eliminar permanentemente todas as seleções de modificações para %s em todas as fontes</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Isto irá eliminar permanentemente as seleções de modificações guardadas para %1$s na fonte #%2$s</string>
     <string name="settings_system_export_source_data_fail">Erro ao exportar dados da fonte</string>
     <string name="settings_system_export_source_data_success">Dados da fonte exportados com sucesso</string>
     <string name="settings_system_import_source_data_fail">Erro ao importar dados da fonte</string>

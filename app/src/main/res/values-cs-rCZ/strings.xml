@@ -826,7 +826,6 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_patched_apks_description">Spravuje uložené záplatované soubory aplikací</string>
     <string name="settings_system_patched_apks_empty">Nebyly uloženy žádné záplatované soubory APK</string>
     <string name="settings_system_patched_apks_delete_title">Smazat záplatovaný soubor APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Opravdu chcete smazat uložený záplatovaný soubor APK pro %s?</string>
     <string name="settings_system_patched_apks_deleted">Záplatovaný soubor APK úspěšně smazán</string>
     <string name="settings_system_patched_apks_delete_all_title">Smazat všechny záplatované APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -835,7 +834,6 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_original_apks_empty">Nejsou uloženy žádné originální soubory APK</string>
     <string name="settings_system_original_apks_deleted">Originální soubor APK úspěšně smazán</string>
     <string name="settings_system_original_apks_delete_title">Smazat původní APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Smazat originální soubor APK pro %s? Bez poskytnutí nového souboru APK nebude možné aplikaci opětovně záplatovat</string>
     <string name="settings_system_original_apks_delete_all_title">Smazat všechny původní APK?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Výběry záplat</string>
@@ -850,8 +848,6 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Zdroj #%s</string>
     <string name="settings_system_patch_selection_will_delete">Toto smaže:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Toto trvale smaže všechny uložené výběry záplaty pro všechny balíčky a zdroje</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Toto trvale smaže všechny uložené výběry záplaty pro %s po celém zdroji</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Toto trvale smaže uložené výběry záplat pro %1$s v zdroji #%2$s</string>
     <string name="settings_system_export_source_data_fail">Nepodařilo se exportovat data zdroje</string>
     <string name="settings_system_export_source_data_success">Data zdroje exportována úspěšně</string>
     <string name="settings_system_import_source_data_fail">Nepodařilo se importovat data zdroje</string>

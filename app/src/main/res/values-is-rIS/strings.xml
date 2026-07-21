@@ -304,6 +304,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="header_creator_guide_positioning_body">Nota pincu-til-zoom og dráttar hreyfingar beint í forsvísun til að staðsetja og stærð liti. Snappa leiðbeiningar birtast þegar myndin er nálæg miðju. Hægt er einnig að nota rennara hér að neðan.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Ertu viss um að þú viljir afinstallera þetta app?</string>
+    <string name="batch_uninstall_confirm_body">Appsín sem hafa verið valið verð permanentlega fjarlægt af tækjunum þínum.</string>
     <string name="home_app_info_remove_app_warning">Þetta mun varanlega eyða:</string>
     <string name="home_app_info_delete_item_database">Gagnagrunnsfærslu</string>
     <string name="home_app_info_delete_item_patched_apk">Pattað APK skrá</string>
@@ -822,7 +823,6 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_patched_apks_description">Stjórnar geymda breyttum forritsskráum</string>
     <string name="settings_system_patched_apks_empty">Engar pattaðar APK-skrár vistaðar enn</string>
     <string name="settings_system_patched_apks_delete_title">Eyða pattaðri APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Ertu viss um að þú viljir eyða pattaðri APK-skrá fyrir %s?</string>
     <string name="settings_system_patched_apks_deleted">Pattað APK skrá eytt með árangri</string>
     <string name="settings_system_patched_apks_delete_all_title">Eyða öllum breyttu APK-skrám?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -831,7 +831,6 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_original_apks_empty">Engar upprunalegar APK-skrár geymdar</string>
     <string name="settings_system_original_apks_deleted">Upprunaleg APK skrá eytt með árangri</string>
     <string name="settings_system_original_apks_delete_title">Eyða upprunalegri APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Eyða upprunalegu APK skrá fyrir %s? Þú muntu ekki geta endurpakkað án þess að veita nýja APK</string>
     <string name="settings_system_original_apks_delete_all_title">Eyða öllum upprunalegu APK-skrám?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Pökkunaval</string>
@@ -846,8 +845,6 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Pökkning gjáfa #%s</string>
     <string name="settings_system_patch_selection_will_delete">Þetta mun eyða:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Þetta mun varanlega eyða öllum geymdum pakkningavöldum fyrir allar pakkningingar og gjafa</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Þetta mun varanlega eyða öllum geymdum pakkningavöldum fyrir %s í öllum gjöfum</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Þetta mun varanlega eyða geymdum pakkningavalum fyrir %1$s í gjafa #%2$s</string>
     <string name="settings_system_export_source_data_fail">Ekki tókst að flytja út gögn frá gjafa</string>
     <string name="settings_system_export_source_data_success">Gagnagögn frá gjafa flutt úr vel</string>
     <string name="settings_system_import_source_data_fail">Ekki tókst að flytja inn gögn frá gjafa</string>

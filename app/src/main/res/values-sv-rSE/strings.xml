@@ -709,7 +709,6 @@ Bildernas mått ska vara följande:
     <string name="settings_system_patched_apks_description">Hanterar sparade modifierade appfiler</string>
     <string name="settings_system_patched_apks_empty">Inga modifierade APK-filer har sparats än</string>
     <string name="settings_system_patched_apks_delete_title">Radera modifierad APK-fil?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Är du säker på att du vill radera den sparade modifierade APK-filen för %s?</string>
     <string name="settings_system_patched_apks_deleted">Modifierad APK-fil har raderats</string>
     <string name="settings_system_patched_apks_delete_all_title">Radera alla modifierade APK-filer?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -718,7 +717,6 @@ Bildernas mått ska vara följande:
     <string name="settings_system_original_apks_empty">Inga ursprungliga APK-filer lagras</string>
     <string name="settings_system_original_apks_deleted">Ursprunglig APK-fil har tagits bort</string>
     <string name="settings_system_original_apks_delete_title">Radera ursprunglig APK-fil?</string>
-    <string name="settings_system_original_apks_delete_confirm">Radera den ursprungliga APK-filen för %s? Du kan inte modifiera appen igen utan att ange en ny APK-fil</string>
     <string name="settings_system_original_apks_delete_all_title">Radera alla ursprungliga APK-filer?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Tilläggsurval</string>
@@ -733,8 +731,6 @@ Bildernas mått ska vara följande:
     <string name="settings_system_patch_selection_source_format">Källa nr %s</string>
     <string name="settings_system_patch_selection_will_delete">Detta raderar:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Det här raderar alla sparade tilläggsurval för alla paket och källor permanent</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Det här raderar alla sparade tilläggsurval för %s i alla källor permanent</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Det här raderar det sparade tilläggsurvalet för %1$s i källa nr %2$s permanent</string>
     <string name="settings_system_export_source_data_fail">Det gick inte att exportera källdata</string>
     <string name="settings_system_export_source_data_success">Källdata har exporterats</string>
     <string name="settings_system_import_source_data_fail">Det gick inte att importera källdata</string>

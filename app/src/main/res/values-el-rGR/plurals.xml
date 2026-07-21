@@ -36,6 +36,10 @@
         <item quantity="one">Καταργήθηκε η εγκατάσταση %d εφαρμογής</item>
         <item quantity="other">Καταργήθηκε η εγκατάσταση %d εφαρμογών</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Κατάργηση εγκατάστασης %d εφαρμογής;</item>
+        <item quantity="other">Κατάργηση εγκατάστασης %d εφαρμογών;</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Παραλείφθηκε %d εφαρμογή</item>
         <item quantity="other">Παραλείφθηκαν %d εφαρμογές</item>

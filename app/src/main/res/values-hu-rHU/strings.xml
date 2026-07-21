@@ -306,6 +306,7 @@ Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos r�
     <string name="header_creator_guide_positioning_body">A pozicionáláshoz és a méretezéshez használja a csipet-zoom és a húzás gesztusokat közvetlenül az előnézetben. Rögzítővonalak jelennek meg, amikor a kép a középhez közel van. A képernyő alatti csúszkát is használhatja.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Biztosan el akarod távolítani ezt az alkalmazást?</string>
+    <string name="batch_uninstall_confirm_body">A kiválasztott alkalmazások véglegesen eltávolításra kerülnek az eszközéről</string>
     <string name="home_app_info_remove_app_warning">Ez véglegesen törli:</string>
     <string name="home_app_info_delete_item_database">Adatbázis rekord</string>
     <string name="home_app_info_delete_item_patched_apk">Módosított APK fájl</string>
@@ -824,7 +825,6 @@ Részletek: %2$s"</string>
     <string name="settings_system_patched_apks_description">Mentett módosított alkalmazásfájlok kezelése</string>
     <string name="settings_system_patched_apks_empty">Még nincsenek mentett módosított APK-k</string>
     <string name="settings_system_patched_apks_delete_title">Törlöd a módosított APK-t?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Biztosan törölni szeretnéd a mentett, módosított APK-t: %s?</string>
     <string name="settings_system_patched_apks_deleted">A módosított APK sikeresen törölve</string>
     <string name="settings_system_patched_apks_delete_all_title">Törlöm az összes módosított APK-t?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -833,7 +833,6 @@ Részletek: %2$s"</string>
     <string name="settings_system_original_apks_empty">Nincsenek mentett, eredeti APK-k</string>
     <string name="settings_system_original_apks_deleted">Az eredeti APK sikeresen törölve</string>
     <string name="settings_system_original_apks_delete_title">Törlöd az eredeti APK-t?</string>
-    <string name="settings_system_original_apks_delete_confirm">Törlöd az eredeti %s APK-t? Új APK nélkül nem fogod tudni újra elvégezni a módosítást.</string>
     <string name="settings_system_original_apks_delete_all_title">Törlöm az összes eredeti APK-t?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Módosítás kiválasztások</string>
@@ -848,9 +847,6 @@ Részletek: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Forrás: #%s</string>
     <string name="settings_system_patch_selection_will_delete">A következőket fogja törölni:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ez véglegesen törli a mentett kiválasztásokat minden csomag és forrás számára </string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ez véglegesen törli a mentett kiválasztásokat minden forrás számára ehhez: %s</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Ez véglegesen törli a mentett kiválasztásokat minden forrás számára ehhez: %1$s
-Forrás: #%2$s</string>
     <string name="settings_system_export_source_data_fail">Nem sikerült a forrásadatok exportálása</string>
     <string name="settings_system_export_source_data_success">Forrásadatok sikeresen exportálva</string>
     <string name="settings_system_import_source_data_fail">Nem sikerült a forrásadatok importálása</string>

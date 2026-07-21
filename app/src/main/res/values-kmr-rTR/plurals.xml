@@ -36,6 +36,10 @@
         <item quantity="one">%d app rakir</item>
         <item quantity="other">%d appan rakirî</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Bi serê %d sepanê ya?</item>
+        <item quantity="other">Bi serê %d sepanan ya?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%d app derbas kir</item>
         <item quantity="other">%d appan derbas kirî</item>

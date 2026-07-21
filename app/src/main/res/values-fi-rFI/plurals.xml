@@ -36,6 +36,10 @@
         <item quantity="one">Poistettu %d sovellus</item>
         <item quantity="other">Poistettu %d sovellusta</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Poista %d sovellus?</item>
+        <item quantity="other">Poista %d sovellusta?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Ohitettu %d sovellus</item>
         <item quantity="other">Ohitettu %d sovellusta</item>

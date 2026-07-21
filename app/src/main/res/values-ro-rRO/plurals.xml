@@ -45,6 +45,11 @@
         <item quantity="few">Dezinstalate %d aplicații</item>
         <item quantity="other">Dezinstalate %d aplicații</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Dezinstalezi %d aplicație?</item>
+        <item quantity="few">Dezinstalezi %d aplicații?</item>
+        <item quantity="other">Dezinstalezi %d aplicații?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Sărită %d aplicație</item>
         <item quantity="few">Sărite %d aplicații</item>

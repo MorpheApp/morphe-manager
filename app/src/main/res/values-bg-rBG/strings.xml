@@ -307,6 +307,7 @@
     <string name="header_creator_guide_positioning_body">Използвайте жестовете „щипване за увеличаване“ и плъзгане директно в прегледа, за да позиционирате и мащабирате изображението си. Появяват се направляващи линии, когато изображението е близо до центъра. Можете също да използвате плъзгача под прегледа.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Сигурни ли сте, че искате да деинсталирате това приложение?</string>
+    <string name="batch_uninstall_confirm_body">Избраните приложения ще бъдат трайно премахнати от вашето устройство</string>
     <string name="home_app_info_remove_app_warning">Това ще изтрие завинаги:</string>
     <string name="home_app_info_delete_item_database">Вход в базата данни</string>
     <string name="home_app_info_delete_item_patched_apk">Поправен APK файл</string>
@@ -828,7 +829,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">Управлява запазените файлове на приложения с пач</string>
     <string name="settings_system_patched_apks_empty">Все още няма запазени променени APK</string>
     <string name="settings_system_patched_apks_delete_title">Изтриване на променен APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Сигурни ли сте, че искате да изтриете запазения променен APK за %s?</string>
     <string name="settings_system_patched_apks_deleted">Промененият APK е изтрит успешно</string>
     <string name="settings_system_patched_apks_delete_all_title">Изтриване на всички променени APK файлове?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -837,7 +837,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">Няма запазени оригинални APK</string>
     <string name="settings_system_original_apks_deleted">Оригиналният APK е изтрит успешно</string>
     <string name="settings_system_original_apks_delete_title">Изтриване на оригиналния APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Изтриване на оригиналния APK за %s? Не ще можете да поправите без да предоставите нов APK</string>
     <string name="settings_system_original_apks_delete_all_title">Изтриване на всички оригинални APK файлове?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Избрани поправки</string>
@@ -852,8 +851,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">Източник #%s</string>
     <string name="settings_system_patch_selection_will_delete">Това ще изтрие:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Това ще изтрие всички запазени избрани пакети за всички пакети и източници завинаги</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Това ще изтрие всички запазени избрани пакети за %s по всички източници завинаги</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Това ще изтрие постоянните запаметени избрани заплашки за %1$s в източник #%2$s</string>
     <string name="settings_system_export_source_data_fail">Неуспешно експортиране на данни за източника</string>
     <string name="settings_system_export_source_data_success">Данните за източника са експортирани успешно</string>
     <string name="settings_system_import_source_data_fail">Неуспешно импортиране на данни за източника</string>

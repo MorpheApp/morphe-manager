@@ -825,7 +825,6 @@ Sonraí: %2$s"</string>
     <string name="settings_system_patched_apks_description">Bainistíonn comhaid iarratais phaisteáilte sábháilte</string>
     <string name="settings_system_patched_apks_empty">Níl aon APKanna paisteáilte sábháilte fós</string>
     <string name="settings_system_patched_apks_delete_title">APK paisteáilte a scriosadh?</string>
-    <string name="settings_system_patched_apks_delete_confirm">An bhfuil tú cinnte gur mian leat an APK paisteáilte sábháilte do %s a scriosadh?</string>
     <string name="settings_system_patched_apks_deleted">Scriosadh an APK paisteáilte go rathúil</string>
     <string name="settings_system_patched_apks_delete_all_title">Scrios gach APK paisteáilte?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -834,7 +833,6 @@ Sonraí: %2$s"</string>
     <string name="settings_system_original_apks_empty">Níl aon APKanna bunaidh stóráilte</string>
     <string name="settings_system_original_apks_deleted">Scriosadh an APK bunaidh go rathúil</string>
     <string name="settings_system_original_apks_delete_title">Scrios an APK bunaidh?</string>
-    <string name="settings_system_original_apks_delete_confirm">Scrios an APK bunaidh le haghaidh %s? Ní bheidh tú in ann athphaisteáil gan APK nua a sholáthar.</string>
     <string name="settings_system_original_apks_delete_all_title">Scrios na APKanna bunaidh go léir?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Roghanna paiste</string>
@@ -849,8 +847,6 @@ Sonraí: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Foinse #%s</string>
     <string name="settings_system_patch_selection_will_delete">Scriosfaidh sé seo:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Scriosfaidh sé seo go buan na roghanna paiste sábháilte go léir do na pacáistí agus na foinsí go léir.</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Scriosfaidh sé seo go buan gach rogha paiste sábháilte do %s thar na foinsí uile.</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Scriosfaidh sé seo roghanna paiste sábháilte do %1$s i bhfoinse #%2$s go buan.</string>
     <string name="settings_system_export_source_data_fail">Theip ar easpórtáil sonraí foinse</string>
     <string name="settings_system_export_source_data_success">Easpórtáladh sonraí foinse go rathúil</string>
     <string name="settings_system_import_source_data_fail">Theip ar shonraí foinse a iompórtáil</string>

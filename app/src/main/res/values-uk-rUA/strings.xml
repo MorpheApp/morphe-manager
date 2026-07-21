@@ -307,6 +307,7 @@
     <string name="header_creator_guide_positioning_body">Використовуйте жести зведення пальців для масштабування та перетягування безпосередньо у попередньому перегляді для позиціонування та масштабування зображення. Напрямні прив\'язки з\'являються, коли зображення наближається до центру. Також можна використовувати повзунок під попереднім переглядом.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Ви впевнені, що хочете видалити цей застосунок?</string>
+    <string name="batch_uninstall_confirm_body">Обрані застосунки будуть остаточно видалені з пристрою</string>
     <string name="home_app_info_remove_app_warning">Це назавжди видалить:</string>
     <string name="home_app_info_delete_item_database">Запис бази даних</string>
     <string name="home_app_info_delete_item_patched_apk">Патчені APK файли</string>
@@ -828,7 +829,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">Керує збереженими файлами патчених застосунків</string>
     <string name="settings_system_patched_apks_empty">Патчених APK файлів ще не збережено</string>
     <string name="settings_system_patched_apks_delete_title">Видалити патчений APK файл?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Ви впевнені, що хочете видалити збережений патчений APK файл для %s? </string>
+    <string name="settings_system_patched_apks_delete_confirm">Ви впевнені, що хочете видалити збережений пропатчений APK файл для &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">Патчений APK файл видалено успішно</string>
     <string name="settings_system_patched_apks_delete_all_title">Видалити всі пропатчені APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -837,7 +838,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">Не збережено жодних оригінальних APK файлів</string>
     <string name="settings_system_original_apks_deleted">Оригінальний APK файл видалено успішно</string>
     <string name="settings_system_original_apks_delete_title">Видалити оригінальний APK файл?</string>
-    <string name="settings_system_original_apks_delete_confirm">Видалити оригінальний APK файл для %s? Ви не зможете перепатчити застосунок без надання нового APK файлу</string>
+    <string name="settings_system_original_apks_delete_confirm">Видалити оригінальний APK файл для &lt;b&gt;%s&lt;/b&gt;? Ви не зможете повторно пропатчити без надання нового APK файлу</string>
     <string name="settings_system_original_apks_delete_all_title">Видалити всі оригінальні APK?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Вибір патчів</string>
@@ -852,8 +853,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">Джерело #%s</string>
     <string name="settings_system_patch_selection_will_delete">Це видалить:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Це назавжди видалить весь збережений вибір патчів для всіх пакетів та джерел</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Це назавжди видалить весь збережений вибір патчів для %s у всіх джерелах</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Це назавжди видалить збережений вибір патчів для %1$s у джерелі #%2$s</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Це назавжди видалить весь збережений вибір патчів для &lt;b&gt;%s&lt;/b&gt; у всіх джерелах</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Це назавжди видалить збережений вибір патчів для &lt;b&gt;%1$s&lt;/b&gt; у &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Це назавжди видалить весь збережений вибір патчів для вибраних пакетів</string>
     <string name="settings_system_export_source_data_fail">Не вдалося експортувати дані джерела</string>
     <string name="settings_system_export_source_data_success">Дані джерела експортовано успішно</string>
     <string name="settings_system_import_source_data_fail">Не вдалося імпортувати дані джерела</string>

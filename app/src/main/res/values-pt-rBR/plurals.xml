@@ -36,6 +36,10 @@
         <item quantity="one">%d app desinstalado</item>
         <item quantity="other">%d apps desinstalados</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Desinstalar %d aplicativo?</item>
+        <item quantity="other">Desinstalar %d aplicativos?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%d app ignorado</item>
         <item quantity="other">%d apps ignorados</item>

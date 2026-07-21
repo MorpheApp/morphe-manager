@@ -305,6 +305,7 @@
     <string name="header_creator_guide_positioning_body">तुमची इमेज स्थितीत ठेवण्यासाठी आणि स्केल करण्यासाठी पूर्वावलोकनामध्ये पिंच-टू-झूम आणि ड्रॅग जेस्चर वापरा. इमेज मध्यभागी जवळ असताना स्नॅप मार्गदर्शक दिसतात. तुम्ही पूर्वावलोकनाखालील स्लाइडर देखील वापरू शकता.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">तुम्ही हे ॲप अनइंस्टॉल करू इच्छिता आहात का?</string>
+    <string name="batch_uninstall_confirm_body">निवडलेले ॲप्स तुमच्या डिव्हाइसमधून कायमचे काढले जातील.</string>
     <string name="home_app_info_remove_app_warning">हे कायमचे हटवेल:</string>
     <string name="home_app_info_delete_item_database">डेटाबेस एंट्री</string>
     <string name="home_app_info_delete_item_patched_apk">पॅच केलेला APK फाइल</string>
@@ -826,7 +827,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">जतन केलेल्या पॅच केलेल्या ॲप्लिकेशन फाइल्स व्यवस्थापित करते</string>
     <string name="settings_system_patched_apks_empty">अद्याप कोणतेही पॅच केलेले APK जतन केलेले नाहीत</string>
     <string name="settings_system_patched_apks_delete_title">पॅच केलेले APK डिलीट करायचे?</string>
-    <string name="settings_system_patched_apks_delete_confirm">तुम्ही %s साठी जतन केलेले पॅच केलेले APK डिलीट करू इच्छिता आहात का?</string>
     <string name="settings_system_patched_apks_deleted">पॅच केलेले APK यशस्वीरित्या डिलीट केले</string>
     <string name="settings_system_patched_apks_delete_all_title">सर्व पॅच केलेले APKs हटवायचे?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -835,7 +835,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">मूळ APK साठवले नाहीत</string>
     <string name="settings_system_original_apks_deleted">मूळ APK यशस्वीरित्या डिलीट केले</string>
     <string name="settings_system_original_apks_delete_title">मूळ APK डिलीट करायचे?</string>
-    <string name="settings_system_original_apks_delete_confirm">%s साठी मूळ APK हटवा? तुमच्याकडे नवीन APK प्रदान केल्याशिवाय तुम्ही पुन्हा पॅच करू शकणार नाही</string>
     <string name="settings_system_original_apks_delete_all_title">सर्व मूळ APKs हटवायचे?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">पॅच निवड</string>
@@ -850,8 +849,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">स्रोत #%s</string>
     <string name="settings_system_patch_selection_will_delete">हे हटवले जाईल:</string>
     <string name="settings_system_patch_selection_reset_all_warning">हे सर्व पॅकेजेस आणि स्रोतांसाठी सेव्ह केलेल्या सर्व पॅच निवडी कायमस्वरूपी हटवेल</string>
-    <string name="settings_system_patch_selection_reset_package_warning">हे %s साठी सर्व स्रोतांमध्ये सेव्ह केलेल्या पॅच निवडी कायमस्वरूपी हटवेल</string>
-    <string name="settings_system_patch_selection_reset_source_warning">हे %1$s मध्ये स्रोत #%2$s साठी सेव्ह केलेल्या पॅच निवडी कायमस्वरूपी हटवेल</string>
     <string name="settings_system_export_source_data_fail">स्रोत डेटा निर्यात करण्यात अयशस्वी</string>
     <string name="settings_system_export_source_data_success">स्रोत डेटा यशस्वीरित्या निर्यात केला</string>
     <string name="settings_system_import_source_data_fail">स्रोत डेटा आयात करण्यात अयशस्वी</string>

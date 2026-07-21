@@ -27,6 +27,9 @@
     <plurals name="batch_uninstall_summary">
         <item quantity="other">Gỡ cài đặt %d ứng dụng</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="other">Gỡ cài đặt %d ứng dụng?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="other">Bỏ qua %d ứng dụng</item>
     </plurals>

@@ -54,6 +54,12 @@
         <item quantity="many">Удалено %d приложений</item>
         <item quantity="other">Удалено %d приложений</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Удалить %d приложение?</item>
+        <item quantity="few">Удалить %d приложения?</item>
+        <item quantity="many">Удалить %d приложений?</item>
+        <item quantity="other">Удалить %d приложений?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Пропущено %d приложений</item>
         <item quantity="few">Пропущено %d приложения</item>

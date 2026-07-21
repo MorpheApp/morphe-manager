@@ -54,6 +54,12 @@
         <item quantity="many">Видалено %d застосунків</item>
         <item quantity="other">Видалено %d застосунків</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Видалити %d застосунок?</item>
+        <item quantity="few">Видалити %d застосунки?</item>
+        <item quantity="many">Видалити %d застосунків?</item>
+        <item quantity="other">Видалити %d застосунків?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Пропущено %d застосунок</item>
         <item quantity="few">Пропущено %d застосунки</item>

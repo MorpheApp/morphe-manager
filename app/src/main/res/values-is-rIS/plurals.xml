@@ -36,6 +36,10 @@
         <item quantity="one">Afinstalluð %d app</item>
         <item quantity="other">Afinstalluð %d apps</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Afinstalla %d app?</item>
+        <item quantity="other">Afinstalla %d forrit?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Sleppt %d app</item>
         <item quantity="other">Sleppt %d apps</item>

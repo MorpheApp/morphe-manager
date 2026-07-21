@@ -306,6 +306,7 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="header_creator_guide_positioning_body">Gebruik knyp-om-zoem en sleep gebare direk in die voorskou om jou beeld te posisioneer en te skaal. Snap gidse verskyn wanneer die beeld naby die middel is. Jy kan ook die skyfie onder die voorskou gebruik.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Is jy seker jy wil hierdie app deïnstalleer?</string>
+    <string name="batch_uninstall_confirm_body">Die geselekteerde toepassings sal permanent van jou toestel verwyder word</string>
     <string name="home_app_info_remove_app_warning">Dit sal permanent uitvee:</string>
     <string name="home_app_info_delete_item_database">Database inskrywing</string>
     <string name="home_app_info_delete_item_patched_apk">Gepatched APK lêer</string>
@@ -827,7 +828,6 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_patched_apks_description">Bestuur gestoorde gepatchte toepassingslêers</string>
     <string name="settings_system_patched_apks_empty">Geen gepatched APK\'s stoor nie</string>
     <string name="settings_system_patched_apks_delete_title">Verwyder gepatched APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Is jy seker dat jy die gestoorde gepatched APK vir %s wil verwyder?</string>
     <string name="settings_system_patched_apks_deleted">Gepatched APK suksesvol verwyder</string>
     <string name="settings_system_patched_apks_delete_all_title">Alle patched APK\'s verwyder?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -836,7 +836,6 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_original_apks_empty">Geen original APK\'s gestoor nie</string>
     <string name="settings_system_original_apks_deleted">Original APK suksesvol verwyder</string>
     <string name="settings_system_original_apks_delete_title">Verwyder original APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Verwyder original APK vir %s? Jy sal nie in staat wees om te herpatch sonder om \'n nuwe APK te verskaf nie</string>
     <string name="settings_system_original_apks_delete_all_title">Alle oorspronklike APK\'s verwyder?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch seleksies</string>
@@ -851,8 +850,6 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Bron #%s</string>
     <string name="settings_system_patch_selection_will_delete">Dit sal verwyder:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Dit sal permanent alle gestoorde patch seleksies vir alle pakkette en bronne uitvee</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Dit sal permanent alle gestoorde patch seleksies vir %s oor alle bronne uitvee</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Dit sal permanent alle gestoorde patch seleksies vir %1$s in bron #%2$s uitvee</string>
     <string name="settings_system_export_source_data_fail">Kon nie bron data uitvoer nie</string>
     <string name="settings_system_export_source_data_success">Bron data suksesvol uitgevoer</string>
     <string name="settings_system_import_source_data_fail">Kon nie bron data invoer nie</string>

@@ -306,6 +306,7 @@
     <string name="header_creator_guide_positioning_body">Используйте жесты масштабирования и перетаскивания непосредственно в предварительном просмотре, чтобы позиционировать и масштабировать изображение. Направляющие появляются, когда изображение находится рядом с центром. Вы также можете использовать ползунок ниже предварительного просмотра.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Вы уверены, что хотите удалить это приложение?</string>
+    <string name="batch_uninstall_confirm_body">Выбранные приложения будут безвозвратно удалены с вашего устройства</string>
     <string name="home_app_info_remove_app_warning">Это навсегда удалит:</string>
     <string name="home_app_info_delete_item_database">Запись в базе данных</string>
     <string name="home_app_info_delete_item_patched_apk">Патченный APK файл</string>
@@ -487,7 +488,7 @@
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Тема</string>
     <string name="settings_appearance_theme_mode">Режим темы</string>
-    <string name="settings_appearance_system">Системная</string>
+    <string name="settings_appearance_system">Система</string>
     <string name="settings_appearance_light">Светлая</string>
     <string name="settings_appearance_dark">Тёмная</string>
     <string name="settings_appearance_dynamic">Material You</string>
@@ -525,8 +526,8 @@
     <string name="settings_advanced_patcher">Патчер</string>
     <string name="settings_advanced_updates_use_prereleases">Предварительные релизы</string>
     <string name="settings_advanced_updates_use_prereleases_description">Ранний доступ к новым версиям приложения Morphe. Включите предрелизы для каждого источника в источниках патчей</string>
-    <string name="settings_advanced_updates_allow_metered">Обновления через мобильные данные</string>
-    <string name="settings_advanced_updates_allow_metered_description">Разрешить загрузку обновлений Morphe и патчей через мобильные данные</string>
+    <string name="settings_advanced_updates_allow_metered">Обновление через мобильные данные</string>
+    <string name="settings_advanced_updates_allow_metered_description">Разрешает загрузку обновлений Morphe и патчей через мобильные данные</string>
     <string name="settings_advanced_updates_background_notifications">Уведомления о фоновых обновлениях</string>
     <string name="settings_advanced_updates_background_notifications_description">Периодически проверять наличие обновлений в фоновом режиме и сообщать об их доступности</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Получайте мгновенные push-уведомления о новых релизах, даже когда приложение закрыто</string>
@@ -553,7 +554,7 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Экспертные настройки</string>
     <string name="settings_advanced_expert_mode">Режим эксперта</string>
-    <string name="settings_advanced_expert_mode_description">Включить комплексные настройки патчей Morphe и параметры настройки</string>
+    <string name="settings_advanced_expert_mode_description">Включает расширенные настройки патчей Morphe и больше вариантов кастомизации</string>
     <string name="settings_advanced_expert_mode_dialog_title">Включить режим эксперта?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Экспертный режим предоставляет больше контроля над применением патчей, но неправильная настройка параметров в экспертном режиме может привести к нетрудоспособности программы.</string>
     <string name="settings_advanced_strip_unused_libs">Оптимизация для архитектуры устройства</string>
@@ -578,7 +579,7 @@
     <string name="settings_advanced_github_pat_export_warning">Не распространяйте свой Токен. Если вы включаете его в экспорт настроек, сохраните этот файл приватным, поскольку он содержит токен</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Параметры патчей</string>
-    <string name="settings_advanced_patch_options_youtube_description">Тема, брендинг, и параметры заголовка</string>
+    <string name="settings_advanced_patch_options_youtube_description">Тема, название, и параметры заголовка</string>
     <string name="settings_advanced_patch_options_restart_message">Чтобы изменения параметров патчей вступили в силу, нужно повторно запустить приложение</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">В режиме эксперта параметры патчей будут доступны во время процесса патчинга</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
@@ -593,7 +594,7 @@
     <string name="settings_advanced_patch_options_no_available">Нет доступных настроек для этого патча</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">Пользовательский брендинг</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">Изменить отображаемое имя приложения</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">Изменяет отображаемое имя приложения</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Имя приложения</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Введите своё имя</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Своя иконка</string>
@@ -631,7 +632,7 @@ morphe_adaptive_monochrome_custom.xml
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Свой заголовок</string>
-    <string name="settings_advanced_patch_options_custom_header_description">Изменить заголовок</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Изменить логотип в заголовке</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Папка с изображениями для использования в качестве своего заголовка.
 
 Папка должна содержать один или несколько из следующих папок, в зависимости от DPI устройства:
@@ -665,7 +666,7 @@ morphe_header_custom_dark.png
     <string name="installer_auto_saved_name">Root монтирование</string>
     <string name="installer_auto_saved_description">Монтирует приложения, которые были пропатчены в режиме root mount. Стандартные пропатченные APK используют другой установщик</string>
     <string name="installer_shizuku_description">Устанавливает молча, используя Shizuku или Sui</string>
-    <string name="installer_shizuku_play_store_description">Бесшумная установка через Shizuku или Sui с использованием Google Play Store в качестве источника установки</string>
+    <string name="installer_shizuku_play_store_description">Тихая установка через Shizuku или Sui с использованием Google Play Store в качестве источника установки</string>
     <string name="installer_option_none">Без запасного установщика</string>
     <string name="installer_none_description">Запасной установщик не настроен</string>
     <string name="installer_status_requires_root">Требуется root-доступ</string>
@@ -815,7 +816,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_cleared">Освобождено %s</string>
     <string name="settings_system_storage_nothing_to_clear">Нечего очищать</string>
     <string name="settings_system_storage_open_app_info_title">Открыть хранилище Android-приложения</string>
-    <string name="settings_system_storage_open_app_info_description">Управляйте или очистите все данные Morphe через системные настройки</string>
+    <string name="settings_system_storage_open_app_info_description">Управление или очистка всех данных Morphe через системные настройки</string>
     <string name="settings_system_save_original_apks_title">Сохранять оригинальные APK</string>
     <string name="settings_system_save_original_apks_description">Сохраните APK до патча, чтобы его можно было повторно использовать для повторного патчинга без повторного выбора файла</string>
     <string name="settings_system_save_patched_apks_title">Сохранять пропатченные APK</string>
@@ -825,7 +826,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_description">Управление сохраненными патчеными файлами приложений</string>
     <string name="settings_system_patched_apks_empty">Патченые файлы APK еще не сохранены</string>
     <string name="settings_system_patched_apks_delete_title">Удалить патченный APK ?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Уверены, что хотите удалить сохраненный патченный APK для %s?</string>
     <string name="settings_system_patched_apks_deleted">Патченый APK удален успешно</string>
     <string name="settings_system_patched_apks_delete_all_title">Удалить все пропатченные APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -834,7 +834,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">Нет сохраненных оригинальных APK</string>
     <string name="settings_system_original_apks_deleted">Оригинальный APK успешно удален</string>
     <string name="settings_system_original_apks_delete_title">Удалить оригинальный APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Удалить оригинальный APK для %s? Вы не сможете перепатчить приложение без предоставления нового APK</string>
     <string name="settings_system_original_apks_delete_all_title">Удалить все оригинальные APK?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Выбор патчей</string>
@@ -849,8 +848,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">Источник #%s</string>
     <string name="settings_system_patch_selection_will_delete">Будет удалено:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Это навсегда удалит все сохраненные выбранные исправления для всех пакетов и источников</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Это навсегда удалит все сохраненные выбранные исправления для %s по всем источникам</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Это навсегда удалит сохраненные выбранные патчи для %1$s в источнике #%2$s</string>
     <string name="settings_system_export_source_data_fail">Не удалось экспортировать данные источника</string>
     <string name="settings_system_export_source_data_success">Данные источника экспортированы успешно</string>
     <string name="settings_system_import_source_data_fail">Не удалось импортировать данные источника</string>
@@ -876,9 +873,9 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_date_asc">Дата (от старых к новым)</string>
     <string name="file_picker_show_hidden_files">Показать скрытые файлы</string>
     <!-- Settings - System Tab - About Section -->
-    <string name="settings_system_about">Об интеграции</string>
-    <string name="settings_system_share_website">Поделиться веб-сайтом</string>
-    <string name="settings_system_share_website_description">Делится официальным веб-сайтом Morphe</string>
+    <string name="settings_system_about">О приложении</string>
+    <string name="settings_system_share_website">Официальный сайт</string>
+    <string name="settings_system_share_website_description">Поделиться официальным веб-сайтом Morphe</string>
     <string name="settings_system_manager_description">Проект с открытым исходным кодом для современного, упрощенного патчинга популярных Android-приложений, развиваемый на основе отзывов и вкладов сообщества</string>
     <string name="credits">Благодарности</string>
     <string name="credits_current_development">Текущая разработка</string>

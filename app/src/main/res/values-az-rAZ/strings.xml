@@ -336,6 +336,10 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="root_pre_patch_installer_description">Cihazınızın root girişi var. Bu tətbiqin root montajı yoxsa standart quraşdırma məqsədilə yamaqlanmalı olub-olmadığını seçin</string>
     <string name="root_pre_patch_installer_mount_title">Root montajı rejimi</string>
     <string name="root_pre_patch_installer_mount_description">Root montajı üçün yamaqlayır, sonra APK-nı uyğun əsas tətbiqin üzərinə montaj edir. GmsCore tələb olunmur</string>
+    <string name="root_mount_module_unmount_warning">KernelSU və ya APatch istifadə edirsinizsə, root montajı ilə quraşdırılan tətbiqlər üçün modulun çıxarılmasını və ya gizlədilməsini qapadın. Əks halda, Morphe onun montaj olunduğunu göstərsə də, əsas tətbiq hələ də işləyə bilər</string>
+    <string name="root_pre_patch_installer_standard_title">Standart quraşdırma rejimi</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore dəstəyi ilə adi APK kimi yamaqlayır. Quraşdırıcı tənzimləməniz yamaqlanmadan sonra istifadə olunur</string>
+    <string name="root_pre_patch_installer_hint">Bu yamaqlama rejimi Tənzimləmələr &gt; Sistem &gt; Quraşdırıcıdan ayrıdır və yamaqlanmadan sonra dəyişdirmək olmur</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Xəta buferə köçürüldü</string>
     <string name="patcher_error_log">Xəta jurnalı</string>
@@ -435,6 +439,8 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="patcher_process_exit_message">Yamaqlayıcı emalı %s şifrəsi ilə tamamlandı</string>
     <string name="install_app_success">Uğurla quraşdırıldı</string>
     <string name="install_app_fail">Tətbiqi quraşdırmaq olmadı: %s</string>
+    <string name="uninstall_app_fail">Tətbiqi silmək olmadı: %s</string>
+    <string name="uninstall_timeout">Silinmə vaxtı bitdi</string>
     <string name="save_apk_success">APK Saxlanıldı</string>
     <string name="saved_app_export_failed">Yamaqlanan tətbiqi ixrac etmək olmadı</string>
     <string name="saved_app_removed_toast">Yamaqlanıb saxlanılan tətbiq silindi</string>
@@ -480,10 +486,13 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_appearance_parallax_effect_description">Cihazı çevirərkən fonu rəvan şəkildə tərpətmək</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Kolorit</string>
+    <string name="settings_appearance_theme_mode">Kolorit rejimi</string>
     <string name="settings_appearance_system">Sistem</string>
     <string name="settings_appearance_light">İşıqlı</string>
     <string name="settings_appearance_dark">Qaranlıq</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Saya</string>
+    <string name="settings_appearance_color_style">Rəng üslubu</string>
     <string name="settings_appearance_accent_color">Cila rəngi</string>
     <string name="settings_appearance_pure_black">Təmiz Qara</string>
     <string name="settings_appearance_pure_black_description">Təmiz qara fonlar istifadə edilir</string>
@@ -647,10 +656,13 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Başladıcı vidjetindən Shorts düyməsini silir</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Quraşdırıcı</string>
+    <string name="installer_settings_title">İlkin quraşdırıcı</string>
     <string name="installer_title">Quraşdırıcını seç</string>
     <string name="installer_internal_description">Android paket quraşdırıcısı istifadə edilir</string>
     <string name="installer_play_store_description">Sistem quraşdırıcısın istifadə edir və Google Play Store-u quraşdırma mənbəyi kimi təyin edir</string>
     <string name="installer_root_play_store_description">Səssizcə root ilə quraşdırır və Google Play Store-u quraşdırma mənbəyi kimi təyin edir</string>
+    <string name="installer_auto_saved_name">Root montajlama</string>
+    <string name="installer_auto_saved_description">Root montajı rejimində yamaqlanmış tətbiqləri montaj edir. Standart yamaqlanmış APK-lar başqa quraşdırıcı istifadə edir</string>
     <string name="installer_shizuku_description">Shizuku və ya Sui istifadə edərək səssizcə quraşdırır</string>
     <string name="installer_shizuku_play_store_description">Shizuku yaxud Sui vasitəsilə səssizcə quraşdırır və Google Play Store-u quraşdırma mənbəyi kimi təyin edir</string>
     <string name="installer_option_none">Ehtiyat yoxdur</string>
@@ -662,6 +674,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_status_shizuku_permission">Shizuku tətbiqindən Morphe üçün icazəni qəbul et</string>
     <string name="installer_mount_warning_install">İlkin quraşdırıcınız rootlu montaj quraşdırıcısına tənzimlənib. Saxlanılan bu tətbiq montaj istifadə edilərək quraşdırılan deyil</string>
     <string name="mount_version_mismatch_message">Əsas tətbiq versiyası (%2$s) yamaqlanan tətbiq versiyasına (%1$s) uyğun deyil. Uyuşan əsas versiyanı montajla, sonra təkrar sına</string>
+    <string name="mount_stock_restore_failed_message">Android saxlanılan orijinal APK-nı qəbul etmədi. Uyğun əsas versiyanı quraşdır, sonra təkrar montaj etməyə çalış</string>
     <string name="installer_status_shizuku_unsupported">Quraşdırılan Shizuku versiyası dəstəklənmir</string>
     <string name="installer_action_open_shizuku">Shizuku-nu Aç</string>
     <string name="installer_hint_generic">Quraşdırma uğursuz oldu. Təkrar sına yaxud fərqli quraşdırıcıya keç</string>
@@ -811,7 +824,6 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_patched_apks_description">Yamaqlanıb saxlanılan tətbiq fayllarını idarə edir</string>
     <string name="settings_system_patched_apks_empty">Hələ saxlanılan yamaqlanmış APK-lar yoxdur</string>
     <string name="settings_system_patched_apks_delete_title">Yamaqlanan APK silinsin?</string>
-    <string name="settings_system_patched_apks_delete_confirm">%s üçün saxlanılan, yamaqlanmış APK-nı silmək istədiyinizə əminsiniz?</string>
     <string name="settings_system_patched_apks_deleted">Yamaqlanan APK uğurla silindi</string>
     <string name="settings_system_patched_apks_delete_all_title">Bütün yamaqlanmış APK-lar silinsin?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -820,7 +832,6 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_original_apks_empty">Əsil APK faylları saxlanılmayıb</string>
     <string name="settings_system_original_apks_deleted">Əsil APK uğurla silindi</string>
     <string name="settings_system_original_apks_delete_title">Əsil APK silinsin?</string>
-    <string name="settings_system_original_apks_delete_confirm">%s üçün əsil APK silinsin? Yeni APK təmin etmədən təkrar yamaqlaya bilməyəcəksiniz.</string>
     <string name="settings_system_original_apks_delete_all_title">Bütün orijinal APK-lar silinsin?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Yamaq seçimləri</string>
@@ -835,8 +846,6 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Mənbə #%s</string>
     <string name="settings_system_patch_selection_will_delete">Bu siləcək:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Bu, bütün paketlər və mənbələr üçün saxlanılan bütün yamaq seçimlərini daimi siləcək</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Bu, bütün mənbələr üzrə %s üçün saxlanılan bütün yamaq seçimlərini daimi siləcək</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Bu, #%2$s mənbəsində %1$s üçün saxlanılan yamaq seçimlərini daimi siləcək</string>
     <string name="settings_system_export_source_data_fail">Mənbə məlumatını ixrac etmək olmadı</string>
     <string name="settings_system_export_source_data_success">Mənbə məlumatı uğurla ixrac olundu</string>
     <string name="settings_system_import_source_data_fail">Mənbə məlumatını idxal etmək olmadı</string>

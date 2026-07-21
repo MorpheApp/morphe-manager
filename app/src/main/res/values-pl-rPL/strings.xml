@@ -306,6 +306,7 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="header_creator_guide_positioning_body">Przesuwaj i powiększaj dwoma palcami bezpośrednio na podglądzie, aby dopasować i wykadrować obraz. Gdy obraz znajdzie się blisko środka, pojawią się linie pomocnicze. Możesz też użyć suwaka pod spodem.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Czy na pewno chcesz odinstalować tę aplikację?</string>
+    <string name="batch_uninstall_confirm_body">Wybrane aplikacje zostaną trwale usunięte z twojego urządzenia</string>
     <string name="home_app_info_remove_app_warning">Spowoduje to trwałe usunięcie:</string>
     <string name="home_app_info_delete_item_database">Wpis w bazie danych</string>
     <string name="home_app_info_delete_item_patched_apk">Zmodyfikowany plik APK</string>
@@ -332,14 +333,14 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Tryb root wymaga zainstalowania oryginalnego pliku APK na urządzeniu przed zmodyfikowaniem</string>
     <string name="root_gmscore_excluded">Wsparcie dla GmsCore jest wyłączone w trybie root</string>
-    <string name="root_pre_patch_installer_title">Wybierz tryb łatki</string>
-    <string name="root_pre_patch_installer_description">Twoje urządzenie ma dostęp root. Wybierz, czy aplikacja powinna zostać załatana dla montowania root, czy standardowej instalacji.</string>
-    <string name="root_pre_patch_installer_mount_title">Tryb montowania root</string>
-    <string name="root_pre_patch_installer_mount_description">Łatki dla montowania root, następnie montuje APK na odpowiadającej aplikacji stock. Nie wymaga GmsCore.</string>
-    <string name="root_mount_module_unmount_warning">Jeśli używasz KernelSU lub APatch, wyłċczył wyłċczenie modułu lub ukrywanie dla aplikacji zainstalowanych z uprawnieniami roota. W przeciwnym razie oryginalna aplikacja może nadal działał, nawet gdy Morphe pokazuje, że jest zamontowana.</string>
+    <string name="root_pre_patch_installer_title">Wybierz tryb modyfikacji</string>
+    <string name="root_pre_patch_installer_description">Twoje urządzenie ma dostęp do roota. Wybierz, czy ta aplikacja ma zostać zmodyfikowana pod montowanie z rootem, czy standardową instalację</string>
+    <string name="root_pre_patch_installer_mount_title">Tryb montowania z rootem</string>
+    <string name="root_pre_patch_installer_mount_description">Modyfikuje pod kątem montowania z rootem, a następnie montuje plik APK w miejscu oryginalnej aplikacji. Nie wymaga GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Jeśli używasz KernelSU lub APatch, wyłącz odmontowywanie lub ukrywanie modułów dla aplikacji instalowanych przez montowanie z rootem. W przeciwnym razie oryginalna aplikacja może nadal działać, nawet jeśli Morphe pokazuje ją jako zamontowaną</string>
     <string name="root_pre_patch_installer_standard_title">Standardowy tryb instalacji</string>
-    <string name="root_pre_patch_installer_standard_description">Patche jako normalny plik APK z obsługą GmsCore. Używana jest ustawienie instalatora po załataniu.</string>
-    <string name="root_pre_patch_installer_hint">Ten tryb załatania jest niezależny od Ustawień &gt; System &gt; Instalator i nie można go zmienił po załataniu.</string>
+    <string name="root_pre_patch_installer_standard_description">Modyfikuje jako zwykły plik APK z obsługą GmsCore. Po zakończeniu modyfikacji zostanie użyte twoje ustawienie instalatora</string>
+    <string name="root_pre_patch_installer_hint">Ten tryb modyfikacji jest niezależny od opcji Ustawienia &gt; System &gt; Instalator i nie można go zmienić po modyfikacji</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Skopiowano błąd do schowka</string>
     <string name="patcher_error_log">Dziennik błędów</string>
@@ -440,7 +441,7 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="install_app_success">Zainstalowano pomyślnie</string>
     <string name="install_app_fail">Nie udało się zainstalować aplikacji: %s</string>
     <string name="uninstall_app_fail">Nie udało się odinstalować aplikacji: %s</string>
-    <string name="uninstall_timeout">Czas odinstalowania upłynął</string>
+    <string name="uninstall_timeout">Przekroczono limit czasu odinstalowywania</string>
     <string name="save_apk_success">Zapisano plik APK</string>
     <string name="saved_app_export_failed">Nie udało się wyeksportować zmodyfikowanej aplikacji</string>
     <string name="saved_app_removed_toast">Usunięto zapisaną zmodyfikowaną aplikację</string>
@@ -491,7 +492,7 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_light">Jasny</string>
     <string name="settings_appearance_dark">Ciemny</string>
     <string name="settings_appearance_dynamic">Material You</string>
-    <string name="settings_appearance_monochrome">Monochromatyczna</string>
+    <string name="settings_appearance_monochrome">Monochromatyczny</string>
     <string name="settings_appearance_color_style">Styl kolorów</string>
     <string name="settings_appearance_accent_color">Kolor akcentu</string>
     <string name="settings_appearance_pure_black">Głęboka czerń</string>
@@ -664,8 +665,8 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_internal_description">Używa instalatora pakietów Androida</string>
     <string name="installer_play_store_description">Używa instalatora systemowego i ustawia Sklep Play jako źródło instalacji</string>
     <string name="installer_root_play_store_description">Instaluje w tle z użyciem roota i ustawia Sklep Play jako źródło instalacji</string>
-    <string name="installer_auto_saved_name">Montowanie root</string>
-    <string name="installer_auto_saved_description">Montuje aplikacje, ktłre zostały załatane w trybie montowania roota. Standardowe załatane pliki APK używają innego instalatora.</string>
+    <string name="installer_auto_saved_name">Montowanie z rootem</string>
+    <string name="installer_auto_saved_description">Montuje aplikacje, które zostały zmodyfikowane w trybie montowania z rootem. Standardowe, zmodyfikowane pliki APK używają innego instalatora</string>
     <string name="installer_shizuku_description">Instaluje w tle za pomocą Shizuku lub Sui</string>
     <string name="installer_shizuku_play_store_description">Instaluje w tle przez Shizuku lub Sui i ustawia Sklep Play jako źródło instalacji</string>
     <string name="installer_option_none">Brak instalatora zapasowego</string>
@@ -677,7 +678,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_status_shizuku_permission">Przyznaj uprawnienia dla Morphe w aplikacji Shizuku</string>
     <string name="installer_mount_warning_install">Główny instalator został ustawiony na instalator z montowaniem. Ta zapisana aplikacja nie została zainstalowana przy użyciu montowania</string>
     <string name="mount_version_mismatch_message">Wersja oryginalnej aplikacji (%2$s) nie jest zgodna z wersją zmodyfikowanej aplikacji (%1$s). Zamontuj zgodną wersję oryginalną, a następnie spróbuj ponownie</string>
-    <string name="mount_stock_restore_failed_message">Android odrzucił zapisany oryginalny plik APK. Zainstaluj dopasowaną oryginalną wersję, a następnnie sprłbuj zamontował ponownie.</string>
+    <string name="mount_stock_restore_failed_message">Android odrzucił zapisany, oryginalny plik APK. Zainstaluj odpowiednią, oryginalną wersję, a następnie spróbuj zamontować ponownie</string>
     <string name="installer_status_shizuku_unsupported">Zainstalowana wersja Shizuku nie jest wspierana</string>
     <string name="installer_action_open_shizuku">Otwórz Shizuku</string>
     <string name="installer_hint_generic">Instalacja nie powiodła się. Spróbuj ponownie lub wybierz inny instalator</string>
@@ -827,7 +828,6 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_patched_apks_description">Zarządza zapisanymi plikami zmodyfikowanych aplikacji</string>
     <string name="settings_system_patched_apks_empty">Brak zapisanych plików APK</string>
     <string name="settings_system_patched_apks_delete_title">Usunąć zmodyfikowany plik APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Czy na pewno chcesz usunąć zapisany zmodyfikowany plik APK aplikacji %s?</string>
     <string name="settings_system_patched_apks_deleted">Zmodyfikowany plik APK usunięty pomyślnie</string>
     <string name="settings_system_patched_apks_delete_all_title">Usunąć wszystkie zmodyfikowane pliki APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -836,7 +836,6 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_original_apks_empty">Brak zapisanych oryginalnych plików APK</string>
     <string name="settings_system_original_apks_deleted">Oryginalny plik APK usunięty pomyślnie</string>
     <string name="settings_system_original_apks_delete_title">Usunąć oryginalny plik APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Usunąć oryginalny plik APK dla aplikacji %s? Nie będzie można ponownie modyfikować aplikacji bez wybrania nowego pliku APK</string>
     <string name="settings_system_original_apks_delete_all_title">Usunąć wszystkie oryginalne pliki APK?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Wybrane modyfikacje</string>
@@ -851,8 +850,6 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_patch_selection_source_format">Źródło #%s</string>
     <string name="settings_system_patch_selection_will_delete">Spowoduje to usunięcie:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla wszystkich pakietów i źródeł</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla pakietu %s we wszystkich źródłach</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Spowoduje to trwałe usunięcie zapisanych wyborów modyfikacji dla %1$s w źródle #%2$s</string>
     <string name="settings_system_export_source_data_fail">Nie udało się wyeksportować danych źródła</string>
     <string name="settings_system_export_source_data_success">Dane źródła wyeksportowane pomyślnie</string>
     <string name="settings_system_import_source_data_fail">Nie udało się zaimportować danych źródła</string>
@@ -1022,7 +1019,7 @@ Czy mimo to chcesz kontynuować?"</string>
     <!-- Translate "System" the same way as the System settings tab -->
     <string name="onboarding_system_tab_title">Zakładka System</string>
     <string name="onboarding_system_tab_desc">Zarządzanie magazynem kluczy, narzędzia importu/eksportu oraz informacje o aplikacji</string>
-    <string name="onboarding_system_installer_desc">Wybierz sposób instalacji zmodyfikowanych aplikacji: standardowy, przez montowanie root lub Shizuku</string>
+    <string name="onboarding_system_installer_desc">Wybierz sposób instalacji zmodyfikowanych aplikacji: standardowy, przez montowanie z rootem lub Shizuku</string>
     <string name="onboarding_system_process_runtime_desc">Wykonuj modyfikacje w osobnym procesie, aby poprawić stabilność i kontrolować zużycie pamięci. Zalecane przy dużych aplikacjach</string>
     <string name="onboarding_system_file_picker_desc">Włącz, aby przy wyborze plików APK lub magazynu kluczy używać wbudowanej przeglądarki plików zamiast systemowej</string>
     <!-- Tour prompt dialog shown after first successful patch install -->

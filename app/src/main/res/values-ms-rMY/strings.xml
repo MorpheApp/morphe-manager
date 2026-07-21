@@ -599,14 +599,12 @@ Dimensi gambar mestilah seperti berikut:
     <string name="settings_system_patched_apks_title">APK yang ditampal</string>
     <string name="settings_system_patched_apks_empty">Tiada APK yang ditampal disimpan lagi</string>
     <string name="settings_system_patched_apks_delete_title">Padam APK yang ditampal?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Adakah anda pasti ingin memadam APK yang ditampal yang disimpan untuk %s?</string>
     <string name="settings_system_patched_apks_deleted">APK yang ditampal telah dipadam dengan jayanya</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APK asal</string>
     <string name="settings_system_original_apks_empty">Tiada APK asal disimpan</string>
     <string name="settings_system_original_apks_deleted">APK asal telah dipadam dengan jayanya</string>
     <string name="settings_system_original_apks_delete_title">Padam APK asal?</string>
-    <string name="settings_system_original_apks_delete_confirm">Padam APK asal untuk %s? Anda tidak dapat repatch tanpa memberikan APK baharu</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Pilihan patch</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nyah semula semua pilihan?</string>
@@ -618,8 +616,6 @@ Dimensi gambar mestilah seperti berikut:
     <string name="settings_system_patch_selection_source_format">Sumber #%s</string>
     <string name="settings_system_patch_selection_will_delete">Ini akan memadam:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ini akan memadam secara kekal semua pilihan tampalan yang disimpan untuk semua pakej dan sumber</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ini akan memadam secara kekal semua pilihan tampalan yang disimpan untuk %s merentasi semua sumber</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Ini akan memadam secara kekal pilihan tampalan yang disimpan untuk %1$s dalam sumber #%2$s</string>
     <string name="settings_system_export_source_data_fail">Gagal membaca log (kod keluar %s)</string>
     <string name="settings_system_export_source_data_success">Data sumber dieksport dengan jayanya</string>
     <string name="settings_system_import_source_data_fail">Gagal mengimport data sumber</string>

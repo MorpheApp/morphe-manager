@@ -72,6 +72,14 @@
         <item quantity="many">تم إلغاء تثبيت %d تطبيق</item>
         <item quantity="other">تم إلغاء تثبيت %d تطبيق</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="zero">إلغاء تثبيت %d تطبيقات؟</item>
+        <item quantity="one">إلغاء تثبيت %d تطبيق؟</item>
+        <item quantity="two">إلغاء تثبيت %d تطبيقات؟</item>
+        <item quantity="few">إلغاء تثبيت %d تطبيقات؟</item>
+        <item quantity="many">إلغاء تثبيت %d تطبيقات؟</item>
+        <item quantity="other">إلغاء تثبيت %d تطبيقات؟</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="zero">تم تخطي %d تطبيقًا</item>
         <item quantity="one">تم تخطي %d تطبيق</item>

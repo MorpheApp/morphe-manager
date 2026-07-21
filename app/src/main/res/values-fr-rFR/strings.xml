@@ -308,11 +308,12 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="header_creator_guide_positioning_body">Utilisez les gestes de pincement pour zoomer et de glissement directement dans l\'aperçu pour positionner et redimensionner votre image. Des guides d\'alignement apparaissent lorsque l\'image est proche du centre. Vous pouvez également utiliser le curseur sous l\'aperçu.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Êtes-vous sûr de vouloir désinstaller cette application ?</string>
+    <string name="batch_uninstall_confirm_body">Les applications sélectionnées seront définitivement supprimées de votre appareil</string>
     <string name="home_app_info_remove_app_warning">Cela supprimera définitivement :</string>
     <string name="home_app_info_delete_item_database">Entrée de base de données</string>
     <string name="home_app_info_delete_item_patched_apk">Fichier APK patché</string>
     <string name="home_app_info_delete_item_original_apk">Fichier APK d\'origine</string>
-    <string name="home_app_info_delete_preservation_note">Votre sélection de patch et vos options seront conservées pour les futurs patchage</string>
+    <string name="home_app_info_delete_preservation_note">Votre sélection de patchs et vos options seront conservées pour les futurs patchage</string>
     <string name="home_app_info_patches_name_default">Patchs</string>
     <string name="home_app_info_patches_name_fallback">Sans nom</string>
     <string name="home_app_info_patches_replace_fail">Échec de l\'importation des patchs : %s</string>
@@ -335,14 +336,14 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Le mode root nécessite que l\'APK d\'origine soit installé sur votre appareil avant le patchage</string>
     <string name="root_gmscore_excluded">Le patch de prise en charge de GmsCore est exclu en mode root</string>
-    <string name="root_pre_patch_installer_title">Choisir le mode de patch</string>
-    <string name="root_pre_patch_installer_description">Votre appareil dispose d\'un accès root. Choisissez si cette application doit être patchée pour un montage root ou une installation standard</string>
+    <string name="root_pre_patch_installer_title">Choisissez le mode patch</string>
+    <string name="root_pre_patch_installer_description">Votre appareil dispose d\'un accès root. Choisissez si cette application doit être patchée pour le montage root ou pour une installation standard</string>
     <string name="root_pre_patch_installer_mount_title">Mode de montage root</string>
-    <string name="root_pre_patch_installer_mount_description">Patches pour le montage root, puis monte le fichier APK sur l\'application système correspondante. Aucun GmsCore n\'est nécessaire</string>
-    <string name="root_mount_module_unmount_warning">Si vous utilisez KernelSU ou APatch, désactivez le démontage ou le masquage des modules pour les applications installées avec un montage root. Sinon, l\'application d\'origine peut toujours fonctionner même lorsque Morphe l\'affiche comme étant montée.</string>
+    <string name="root_pre_patch_installer_mount_description">Patche pour le montage root, puis monte l\'APK par-dessus l\'application d\'origine correspondante. GmsCore n\'est pas nécessaire</string>
+    <string name="root_mount_module_unmount_warning">Si vous utilisez KernelSU ou APatch, désactivez le démontage ou le masquage des modules pour les applications installées avec le montage root. Sinon, l\'application d\'origine peut continuer à s\'exécuter même si Morphe l\'affiche comme montée</string>
     <string name="root_pre_patch_installer_standard_title">Mode d\'installation standard</string>
-    <string name="root_pre_patch_installer_standard_description">Patches en tant qu\'APK normal avec le support GmsCore. Votre paramètre d\'installateur est utilisé après le patchage</string>
-    <string name="root_pre_patch_installer_hint">Ce mode de patch est indépendant de Paramètres > Système > Installateur et ne peut pas être modifié après le patchage.</string>
+    <string name="root_pre_patch_installer_standard_description">Patche en tant qu\'APK normal avec prise en charge de GmsCore. Votre paramètre d\'installateur est utilisé après le patchage</string>
+    <string name="root_pre_patch_installer_hint">Ce mode de patch est distinct de Paramètres &gt; Système &gt; Installateur et ne peut pas être modifié après le patchage</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Erreur copiée dans le presse-papiers</string>
     <string name="patcher_error_log">Journal d\'erreur</string>
@@ -443,7 +444,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="install_app_success">Installé avec succès</string>
     <string name="install_app_fail">Impossible d\'installer l\'application : %s</string>
     <string name="uninstall_app_fail">Échec de la désinstallation de l\'application : %s</string>
-    <string name="uninstall_timeout">Délai d\'annulation de l\'installation dépassé</string>
+    <string name="uninstall_timeout">Délai d\'attente de la désinstallation dépassé</string>
     <string name="save_apk_success">APK enregistré</string>
     <string name="saved_app_export_failed">Échec de l\'exportation de l\'application patchée</string>
     <string name="saved_app_removed_toast">Suppression de l\'application patchée enregistrée</string>
@@ -489,7 +490,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_appearance_parallax_effect_description">Déplacement d\'arrière-plan fluide lors de l\'inclinaison de l\'appareil</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Thème</string>
-    <string name="settings_appearance_theme_mode">Mode de thème</string>
+    <string name="settings_appearance_theme_mode">Mode du thème</string>
     <string name="settings_appearance_system">Système</string>
     <string name="settings_appearance_light">Clair</string>
     <string name="settings_appearance_dark">Sombre</string>
@@ -670,7 +671,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_play_store_description">Utilise l\'installateur système et définit le Google Play Store comme source d\'installation</string>
     <string name="installer_root_play_store_description">Installe silencieusement avec les droits root et définit le Google Play Store comme source d\'installation</string>
     <string name="installer_auto_saved_name">Montage root</string>
-    <string name="installer_auto_saved_description">Monte les applications qui ont été patchées en mode montage root. Les APK patchés standard utilisent un autre installateur.</string>
+    <string name="installer_auto_saved_description">Monte les applications qui ont été patchées en mode de montage root. Les APK patchés standard utilisent un autre installateur</string>
     <string name="installer_shizuku_description">Installe silencieusement via Shizuku ou Sui</string>
     <string name="installer_shizuku_play_store_description">Installe silencieusement via Shizuku ou Sui et définit le Google Play Store comme source d\'installation</string>
     <string name="installer_option_none">Aucun installateur de secours</string>
@@ -682,7 +683,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_status_shizuku_permission">Accordez l\'autorisation à Morphe depuis l\'application Shizuku</string>
     <string name="installer_mount_warning_install">Votre installateur principal est défini sur l\'installateur de montage root. Cette application enregistrée n\'a pas été installée à l\'aide du montage</string>
     <string name="mount_version_mismatch_message">La version de l\'application système (%2$s) ne correspond pas à la version de l\'application patchée (%1$s). Montez la version système correspondante, puis réessayez</string>
-    <string name="mount_stock_restore_failed_message">Android a rejeté l\'APK original enregistré. Installez la version d\'origine correspondante, puis essayez de Monter à nouveau.</string>
+    <string name="mount_stock_restore_failed_message">Android a rejeté l\'APK d\'origine enregistré. Installez la version d\'origine correspondante, puis essayez de monter à nouveau</string>
     <string name="installer_status_shizuku_unsupported">La version de Shizuku installée n\'est pas prise en charge</string>
     <string name="installer_action_open_shizuku">Ouvrir Shizuku</string>
     <string name="installer_hint_generic">L\'installation a échoué. Réessayez ou choisissez un installateur différent</string>
@@ -752,7 +753,7 @@ Détails : %2$s"</string>
     <string name="settings_system_notifications_success_sound">Son de réussite</string>
     <string name="settings_system_notifications_error_sound">Son d\'échec</string>
     <string name="settings_system_notifications_sound_default">Par défaut</string>
-    <string name="settings_system_notifications_sound_picker_title">Choisir la source sonore</string>
+    <string name="settings_system_notifications_sound_picker_title">Choisissez la source sonore</string>
     <string name="settings_system_notifications_sound_pick_ringtone">Sons système</string>
     <string name="settings_system_notifications_sound_pick_file">Choisir parmi les fichiers</string>
     <string name="settings_system_notifications_sound_reset">Réinitialiser par défaut</string>
@@ -780,8 +781,8 @@ Détails : %2$s"</string>
     <string name="settings_system_import_manager_settings_success">Paramètres de Morphe importés</string>
     <string name="settings_system_import_manager_settings_mode_title">Importer les paramètres de Morphe</string>
     <string name="settings_system_import_manager_settings_mode_description">Choisissez comment les paramètres et les sources importés doivent être appliqués</string>
-    <string name="settings_system_import_selections_mode_title">Importer les sélections de patch</string>
-    <string name="settings_system_import_selections_mode_description">Choisissez comment les sélections et les options de patch importées doivent être appliquées</string>
+    <string name="settings_system_import_selections_mode_title">Importer les sélections de patchs</string>
+    <string name="settings_system_import_selections_mode_description">Choisissez comment les sélections et les options de patchs importées doivent être appliquées</string>
     <string name="import_mode_replace_title">Remplacer l\'existant</string>
     <string name="import_mode_replace_description">Faire correspondre exactement à la sauvegarde. Les éléments absents de la sauvegarde seront supprimés</string>
     <string name="import_mode_merge_title">Fusionner avec l\'existant</string>
@@ -833,8 +834,6 @@ Détails : %2$s"</string>
     <string name="settings_system_patched_apks_description">Gère les fichiers d\'applications patchées enregistrés</string>
     <string name="settings_system_patched_apks_empty">Aucun APK patchés enregistrés pour l\'instant</string>
     <string name="settings_system_patched_apks_delete_title">Supprimer l\'APK patché ?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Êtes-vous sûr de vouloir supprimer l\'APK patché enregistré pour %s ?
-</string>
     <string name="settings_system_patched_apks_deleted">L\'APK patché supprimé avec succès</string>
     <string name="settings_system_patched_apks_delete_all_title">Supprimer tous les APK patchés ?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -843,7 +842,6 @@ Détails : %2$s"</string>
     <string name="settings_system_original_apks_empty">Aucun APK d\'origine enregistré</string>
     <string name="settings_system_original_apks_deleted">L\'APK d\'origine supprimé avec succès</string>
     <string name="settings_system_original_apks_delete_title">Supprimer l\'APK d\'origine ?</string>
-    <string name="settings_system_original_apks_delete_confirm">Supprimer l\'APK d\'origine pour %s ? Vous ne pourrez pas repatcher sans fournir un nouvel APK</string>
     <string name="settings_system_original_apks_delete_all_title">Supprimer tous les APK d\'origine ?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Sélections de patchs</string>
@@ -851,15 +849,13 @@ Détails : %2$s"</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Réinitialiser toutes les sélections ?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Réinitialiser les sélections des paquets ?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Réinitialiser les paquets sélectionnés ?</string>
-    <string name="settings_system_patch_selection_reset_source_confirm_title">Réinitialiser la sélection de source ?</string>
-    <string name="settings_system_patch_selection_no_saved">Aucune sélection de patch enregistrée</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Réinitialiser la sélection de sources ?</string>
+    <string name="settings_system_patch_selection_no_saved">Aucune sélection de patchs enregistrée</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s à %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dans %2$s</string>
     <string name="settings_system_patch_selection_source_format">Source #%s</string>
     <string name="settings_system_patch_selection_will_delete">Cela supprimera :</string>
-    <string name="settings_system_patch_selection_reset_all_warning">Cela supprimera définitivement toutes les sélections de patch enregistrées pour tous les paquets et sources</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Cela supprimera définitivement toutes les sélections de patch enregistrées pour %s dans toutes les sources</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Cela supprimera définitivement les sélections de patch enregistrées pour %1$s dans la source #%2$s</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Cela supprimera définitivement toutes les sélections de patchs enregistrées pour tous les paquets et sources</string>
     <string name="settings_system_export_source_data_fail">Échec de l\'exportation des données de source</string>
     <string name="settings_system_export_source_data_success">Données de source exportées avec succès</string>
     <string name="settings_system_import_source_data_fail">Échec de l\'importation des données de source</string>

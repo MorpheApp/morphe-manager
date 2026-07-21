@@ -812,7 +812,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_patched_apks_description">מנהל קבצי אפליקציות מתוקנים שמורים</string>
     <string name="settings_system_patched_apks_empty">אין פיצ\'ים מותאמים זמין זמין</string>
     <string name="settings_system_patched_apks_delete_title">האם אתה בטוח שברצונך למחוק את הפיצ\'ה מותאם של %s? </string>
-    <string name="settings_system_patched_apks_delete_confirm">פיצ\'ה מותאמה נמחק</string>
     <string name="settings_system_patched_apks_deleted">פיצ\'ה מותאמה נמחק בהצלחה</string>
     <string name="settings_system_patched_apks_delete_all_title">למחוק את כל האפקים שעברו תיקון?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -821,7 +820,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_original_apks_empty">אין פיצ\'ים מקוריים</string>
     <string name="settings_system_original_apks_deleted">פיצ\'ה מקורית נמחק בהצלחה</string>
     <string name="settings_system_original_apks_delete_title">האם אתה בטוח שברצונך למחוק את הפיצ\'ה המקורית של %s? </string>
-    <string name="settings_system_original_apks_delete_confirm">למחוק את הקובץ APK המקורי של %s? לא תוכל לתקן מחדש ללא סיפוק APK חדש</string>
     <string name="settings_system_original_apks_delete_all_title">למחוק את כל האפקים המקוריים?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">ניהול בחירות תיקון</string>
@@ -836,8 +834,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_patch_selection_source_format">מקור #%s</string>
     <string name="settings_system_patch_selection_will_delete">זוהי תהליך מחיקה:</string>
     <string name="settings_system_patch_selection_reset_all_warning">זוהי תהליך מחיקה קבועה של כל הבחירות שמורות עבור כל החבילות ומקורות</string>
-    <string name="settings_system_patch_selection_reset_package_warning">זוהי תהליך מחיקה קבועה של כל הבחירות שמורות עבור %s על כל המקורות</string>
-    <string name="settings_system_patch_selection_reset_source_warning">זוהי פעולה של מחיקת סלקציות פצ\' של %1$s במקור #%2$s</string>
     <string name="settings_system_export_source_data_fail">שגיאה בייצוא נתוני מקור</string>
     <string name="settings_system_export_source_data_success">נתוני מקור יוצאו בהצלחה</string>
     <string name="settings_system_import_source_data_fail">שגיאה בייבוא נתוני מקור</string>

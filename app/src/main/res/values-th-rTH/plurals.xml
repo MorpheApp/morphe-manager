@@ -27,6 +27,9 @@
     <plurals name="batch_uninstall_summary">
         <item quantity="other">ถอนการติดตั้งแอป %d แอป</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="other">ยกเลิกการติดตั้งแอป %d แอปหรือไม่?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="other">ข้ามแอป %d แอป</item>
     </plurals>

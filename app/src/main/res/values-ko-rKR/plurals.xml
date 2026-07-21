@@ -27,6 +27,9 @@
     <plurals name="batch_uninstall_summary">
         <item quantity="other">%d 개의 앱을 제거하였습니다</item>
     </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="other">%d개의 앱을 삭제하시겠습니까?</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="other">%d 개의 앱을 건너뛰었습니다</item>
     </plurals>
