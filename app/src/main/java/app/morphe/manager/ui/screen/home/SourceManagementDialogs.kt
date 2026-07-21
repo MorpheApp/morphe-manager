@@ -581,7 +581,13 @@ fun BundlePatchesDialog(
     val isFiltering = searchQuery.isNotBlank() || selectedPackages.isNotEmpty()
 
     MorpheDialog(
-        onDismissRequest = onDismissRequest,
+        onDismissRequest = {
+            when {
+                searchQuery.isNotBlank() -> searchQuery = ""
+                selectedPackages.isNotEmpty() -> selectedPackages = emptySet()
+                else -> onDismissRequest()
+            }
+        },
         title = null,
         footer = {
             MorpheDialogOutlinedButton(
@@ -605,101 +611,100 @@ fun BundlePatchesDialog(
             }
         } else {
             val listState = rememberLazyListState()
-            Box(modifier = Modifier.fillMaxWidth()) {
-                LazyColumn(
-                    state = listState,
-                    modifier = Modifier.fillMaxWidth()
+            var displayedPackages by remember { mutableStateOf(emptySet<String>()) }
+            LaunchedEffect(selectedPackages) {
+                if (selectedPackages.isNotEmpty()) displayedPackages = selectedPackages
+            }
+
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+            ) {
+                PatchesListSearchRow(
+                    searchQuery = searchQuery,
+                    onSearchQueryChange = { searchQuery = it },
+                    showFilterButton = hasMultiplePackages,
+                    isFilterActive = selectedPackages.isNotEmpty(),
+                    onFilterClick = { showFilterSheet.value = true }
+                )
+
+                AnimatedVisibility(
+                    visible = selectedPackages.isNotEmpty(),
+                    enter = MorpheAnimations.expandFadeEnter,
+                    exit = MorpheAnimations.shrinkFadeExit
                 ) {
-                    // Bundle header
-                    item {
-                        PatchesListHeaderCard(
-                            title = src.displayTitle,
-                            totalCount = patches.size,
-                            filteredCount = filteredPatches.size,
-                            isFiltering = isFiltering,
-                            modifier = Modifier.padding(bottom = MorpheDefaults.ContentPaddingSmall)
-                        )
-                    }
-
-                    // Search + filter button row
-                    stickyHeader {
-                        PatchesListSearchRow(
-                            searchQuery = searchQuery,
-                            onSearchQueryChange = { searchQuery = it },
-                            showFilterButton = hasMultiplePackages,
-                            isFilterActive = selectedPackages.isNotEmpty(),
-                            onFilterClick = { showFilterSheet.value = true }
-                        )
-                    }
-
-                    // Active filter badges + empty state
-                    if (selectedPackages.isNotEmpty()) {
-                        item(key = "filter_badges") {
-                            FlowRow(
-                                modifier = Modifier
-                                    .animateItem()
-                                    .padding(top = MorpheDefaults.ContentPaddingSmall),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                selectedPackages.forEach { pkg ->
-                                    val label = appLabels[pkg] ?: pkg
-                                    InputChip(
-                                        selected = true,
-                                        onClick = { selectedPackages = selectedPackages - pkg },
-                                        label = { Text(label) },
-                                        trailingIcon = {
-                                            Icon(
-                                                imageVector = Icons.Outlined.Close,
-                                                contentDescription = stringResource(R.string.remove),
-                                                modifier = Modifier.size(16.dp)
-                                            )
-                                        }
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        displayedPackages.forEach { pkg ->
+                            val label = appLabels[pkg] ?: pkg
+                            InputChip(
+                                selected = true,
+                                onClick = { selectedPackages = selectedPackages - pkg },
+                                label = { Text(label) },
+                                trailingIcon = {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Close,
+                                        contentDescription = stringResource(R.string.remove),
+                                        modifier = Modifier.size(16.dp)
                                     )
                                 }
-                            }
-                        }
-                    }
-
-                    if (filteredPatches.isEmpty()) {
-                        item(key = "empty_state") {
-                            PatchesListEmptyState(
-                                modifier = Modifier
-                                    .animateItem()
-                                    .padding(top = MorpheDefaults.ContentPaddingSmall)
                             )
                         }
                     }
+                }
 
-                    // Filtered patches list
-                    items(
-                        filteredPatches,
-                        key = { patch ->
-                            patch.name + (patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty())
+                Box(modifier = Modifier.fillMaxWidth().weight(1f)) {
+                    LazyColumn(
+                        state = listState,
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                    ) {
+                        // Bundle header
+                        item {
+                            PatchesListHeaderCard(
+                                title = src.displayTitle,
+                                totalCount = patches.size,
+                                filteredCount = filteredPatches.size,
+                                isFiltering = isFiltering
+                            )
                         }
-                    ) { patch ->
-                        val context = LocalContext.current
-                        val expertBadgeTooltip = stringResource(R.string.sources_patch_expert_badge_tooltip)
-                        val accentColor = patchAccentColors[patch.name]
-                            ?.takeIf { it != Color.Unspecified }
-                        PatchItemCard(
-                            patch = patch,
-                            saveStateKey = "bundle_${src.uid}",
-                            onExpertBadgeClick = if (!patch.include) {
-                                { context.toast(expertBadgeTooltip) }
-                            } else null,
-                            accentColor = accentColor,
-                            modifier = Modifier
-                                .padding(top = MorpheDefaults.ContentPaddingSmall)
-                                .animateItem(
+
+                        if (filteredPatches.isEmpty()) {
+                            item(key = "empty_state") {
+                                PatchesListEmptyState(
+                                    modifier = Modifier.animateItem()
+                                )
+                            }
+                        }
+
+                        // Filtered patches list
+                        items(
+                            filteredPatches,
+                            key = { patch ->
+                                patch.name + (patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty())
+                            }
+                        ) { patch ->
+                            val context = LocalContext.current
+                            val expertBadgeTooltip = stringResource(R.string.sources_patch_expert_badge_tooltip)
+                            val accentColor = patchAccentColors[patch.name]
+                                ?.takeIf { it != Color.Unspecified }
+                            PatchItemCard(
+                                patch = patch,
+                                saveStateKey = "bundle_${src.uid}",
+                                onExpertBadgeClick = if (!patch.include) {
+                                    { context.toast(expertBadgeTooltip) }
+                                } else null,
+                                accentColor = accentColor,
+                                modifier = Modifier.animateItem(
                                     fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
                                     fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
                                     placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
                                 )
-                        )
+                            )
+                        }
                     }
-                }
 
-                ScrollToTopButton(listState = listState)
+                    ScrollToTopButton(listState = listState)
+                }
             }
         }
     }

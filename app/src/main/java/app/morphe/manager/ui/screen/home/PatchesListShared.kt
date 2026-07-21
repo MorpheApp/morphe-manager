@@ -70,7 +70,7 @@ internal fun PatchesListHeaderCard(
 }
 
 /**
- * Search field + optional filter button row. Meant to be placed inside a `stickyHeader`.
+ * Search field + optional filter button row.
  */
 @Composable
 internal fun PatchesListSearchRow(

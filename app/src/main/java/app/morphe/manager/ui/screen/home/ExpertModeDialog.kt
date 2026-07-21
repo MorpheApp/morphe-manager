@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -558,7 +559,9 @@ private fun MultipleSourcesWarningDialog(
         Text(
             text = stringResource(R.string.expert_mode_multiple_sources_warning_message),
             style = MaterialTheme.typography.bodyLarge,
-            color = LocalDialogSecondaryTextColor.current
+            color = LocalDialogSecondaryTextColor.current,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }

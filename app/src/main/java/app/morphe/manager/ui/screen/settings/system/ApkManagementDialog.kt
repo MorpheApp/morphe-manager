@@ -50,6 +50,7 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.patcher.util.NativeLibStripper
+import app.morphe.manager.ui.screen.home.BatchUninstallConfirmDialog
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.util.*
@@ -687,6 +688,8 @@ private fun ApkManagementDialogContent(
     val scope = rememberCoroutineScope()
     var showDeleteAllConfirmation by remember { mutableStateOf(false) }
     var showDeleteSelectedConfirmation by remember { mutableStateOf(false) }
+    var showUninstallSelectedConfirmation by remember { mutableStateOf(false) }
+    var itemToUninstallConfirm by remember { mutableStateOf<ApkItemData?>(null) }
     var isExporting by remember { mutableStateOf(false) }
     val selection = rememberSelectionState<String>()
     val selectedItems = items.filter { selection.contains(it.selectionKey) }
@@ -809,10 +812,7 @@ private fun ApkManagementDialogContent(
                         if (canUninstallSelected) {
                             val uninstallLabel = stringResource(R.string.uninstall)
                             ActionPillButton(
-                                onClick = {
-                                    actions.onUninstallSelected.invoke(selectedInstalledItems)
-                                    selection.clear()
-                                },
+                                onClick = { showUninstallSelectedConfirmation = true },
                                 icon = Icons.Outlined.DeleteForever,
                                 contentDescription = uninstallLabel,
                                 tooltip = uninstallLabel,
@@ -938,7 +938,7 @@ private fun ApkManagementDialogContent(
                                 { actions.onInstall.invoke(item) }
                             } else null,
                             onUninstall = if (item.isInstalledOnDevice && actions.onUninstall != null) {
-                                { actions.onUninstall.invoke(item) }
+                                { itemToUninstallConfirm = item }
                             } else null,
                             onDelete = { actions.onDelete(item) }
                         )
@@ -982,6 +982,29 @@ private fun ApkManagementDialogContent(
                 selection.clear()
                 showDeleteSelectedConfirmation = false
             }
+        )
+    }
+
+    if (showUninstallSelectedConfirmation) {
+        BatchUninstallConfirmDialog(
+            count = selectedInstalledItems.size,
+            onConfirm = {
+                actions.onUninstallSelected?.invoke(selectedInstalledItems)
+                selection.clear()
+                showUninstallSelectedConfirmation = false
+            },
+            onDismiss = { showUninstallSelectedConfirmation = false }
+        )
+    }
+
+    itemToUninstallConfirm?.let { item ->
+        BatchUninstallConfirmDialog(
+            count = 1,
+            onConfirm = {
+                actions.onUninstall?.invoke(item)
+                itemToUninstallConfirm = null
+            },
+            onDismiss = { itemToUninstallConfirm = null }
         )
     }
 }
