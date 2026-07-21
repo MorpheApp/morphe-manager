@@ -53,14 +53,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.morphe.manager.domain.bundles.APIPatchBundle
-import app.morphe.manager.domain.bundles.JsonPatchBundle
-import app.morphe.manager.domain.bundles.BundleSourceType
-import app.morphe.manager.domain.bundles.PatchBundleSource
+import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.sourceType
-import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.manager.SourceBundleSortMode
 import app.morphe.manager.domain.repository.BlocklistRepository
@@ -390,8 +386,10 @@ fun BundleManagementSheet(
 
     // Delete confirmation dialog
     if (bundleToDelete.value != null) {
-        BundleDeleteConfirmDialog(
-            bundle = bundleToDelete.value!!,
+        ConfirmDialog(
+            title = stringResource(R.string.delete),
+            message = stringResource(R.string.sources_dialog_delete_confirm_message, bundleToDelete.value!!.displayTitle),
+            primaryText = stringResource(R.string.delete),
             onDismiss = { bundleToDelete.value = null },
             onConfirm = {
                 onDelete(bundleToDelete.value!!)

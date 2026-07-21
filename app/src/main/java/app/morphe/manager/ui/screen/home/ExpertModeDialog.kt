@@ -25,7 +25,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -419,12 +418,16 @@ fun ExpertModeDialog(
 
     // Multiple bundles warning dialog
     if (showMultipleSourcesWarning.value) {
-        MultipleSourcesWarningDialog(
-            onDismiss = { showMultipleSourcesWarning.value = false },
-            onProceed = {
+        ConfirmDialog(
+            title = stringResource(R.string.expert_mode_multiple_sources_warning_title),
+            message = stringResource(R.string.expert_mode_multiple_sources_warning_message),
+            primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
+            isPrimaryDestructive = false,
+            onConfirm = {
                 showMultipleSourcesWarning.value = false
                 onProceed()
-            }
+            },
+            onDismiss = { showMultipleSourcesWarning.value = false }
         )
     }
 
@@ -533,35 +536,5 @@ private fun PatchListWithUniversalSection(
                 hasOptions = !patch.options.isNullOrEmpty()
             )
         }
-    }
-}
-
-/**
- * Warning dialog shown when user selects patches from multiple sources.
- */
-@Composable
-private fun MultipleSourcesWarningDialog(
-    onDismiss: () -> Unit,
-    onProceed: () -> Unit
-) {
-    MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = stringResource(R.string.expert_mode_multiple_sources_warning_title),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
-                onPrimaryClick = onProceed,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss
-            )
-        }
-    ) {
-        Text(
-            text = stringResource(R.string.expert_mode_multiple_sources_warning_message),
-            style = MaterialTheme.typography.bodyLarge,
-            color = LocalDialogSecondaryTextColor.current,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
     }
 }

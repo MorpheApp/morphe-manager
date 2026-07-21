@@ -412,42 +412,6 @@ private fun LocalTabContent(
 }
 
 /**
- * Dialog for confirming bundle deletion.
- */
-@Composable
-fun BundleDeleteConfirmDialog(
-    bundle: PatchBundleSource,
-    onDismiss: () -> Unit,
-    onConfirm: () -> Unit
-) {
-    MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = stringResource(R.string.delete),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.delete),
-                onPrimaryClick = onConfirm,
-                isPrimaryDestructive = true,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss
-            )
-        }
-    ) {
-        val secondaryColor = LocalDialogSecondaryTextColor.current
-
-        Text(
-            text = stringResource(
-                R.string.sources_dialog_delete_confirm_message,
-                bundle.displayTitle
-            ),
-            style = MaterialTheme.typography.bodyLarge,
-            color = secondaryColor,
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-/**
  * Dialog for renaming a bundle.
  */
 @Composable

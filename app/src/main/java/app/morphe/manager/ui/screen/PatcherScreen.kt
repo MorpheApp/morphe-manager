@@ -294,8 +294,11 @@ fun PatcherScreen(
     }
 
     if (showInstalledSourceConflictDialog.value) {
-        InstalledSourceConflictDialog(
-            onUninstall = {
+        ConfirmDialog(
+            title = stringResource(R.string.patcher_installed_conflict_title),
+            message = stringResource(R.string.patcher_installed_conflict_body),
+            primaryText = stringResource(R.string.uninstall),
+            onConfirm = {
                 showInstalledSourceConflictDialog.value = false
                 conflictPackageName?.let {
                     installViewModel.requestUninstall(it, installAfterUninstall = true)
@@ -394,13 +397,17 @@ fun PatcherScreen(
 
     // Cancel patching confirmation dialog
     if (state.showCancelDialog) {
-        CancelPatchingDialog(
-            onDismiss = { state.showCancelDialog = false },
+        ConfirmDialog(
+            title = stringResource(R.string.patcher_stop_confirm_title),
+            message = stringResource(R.string.patcher_stop_confirm_description),
+            primaryText = stringResource(R.string.yes),
+            secondaryText = stringResource(R.string.no),
             onConfirm = {
                 state.showCancelDialog = false
                 patcherViewModel.cancelPatching()
                 onBackClick()
-            }
+            },
+            onDismiss = { state.showCancelDialog = false }
         )
     }
 

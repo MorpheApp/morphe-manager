@@ -28,7 +28,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -609,33 +608,5 @@ internal fun HiddenAppsDialog(
                 }
             }
         }
-    }
-}
-
-@Composable
-internal fun BatchUninstallConfirmDialog(
-    count: Int,
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit
-) {
-    MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = pluralStringResource(R.plurals.batch_uninstall_confirm_title, count, count),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.uninstall),
-                onPrimaryClick = onConfirm,
-                isPrimaryDestructive = true,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss
-            )
-        }
-    ) {
-        Text(
-            text = stringResource(R.string.batch_uninstall_confirm_body),
-            style = MaterialTheme.typography.bodyLarge,
-            color = LocalDialogSecondaryTextColor.current,
-            textAlign = TextAlign.Center
-        )
     }
 }

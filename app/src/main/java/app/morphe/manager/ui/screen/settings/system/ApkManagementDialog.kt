@@ -50,14 +50,13 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.patcher.util.NativeLibStripper
-import app.morphe.manager.ui.screen.home.BatchUninstallConfirmDialog
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withTimeoutOrNull
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import java.io.File
@@ -428,12 +427,10 @@ private fun PatchedApksContent(
     )
 
     if (itemToDelete.value != null) {
-        DeleteConfirmationDialog(
+        ConfirmDialog(
             title = stringResource(R.string.settings_system_patched_apks_delete_title),
-            message = stringResource(
-                R.string.settings_system_patched_apks_delete_confirm,
-                deleteDisplayName
-            ),
+            message = htmlAnnotatedString(stringResource(R.string.settings_system_patched_apks_delete_confirm, deleteDisplayName)),
+            primaryText = stringResource(R.string.delete),
             onDismiss = { itemToDelete.value = null },
             onConfirm = {
                 scope.launch {
@@ -658,12 +655,10 @@ private fun OriginalApksContent(
     )
 
     if (itemToDelete.value != null) {
-        DeleteConfirmationDialog(
+        ConfirmDialog(
             title = stringResource(R.string.settings_system_original_apks_delete_title),
-            message = stringResource(
-                R.string.settings_system_original_apks_delete_confirm,
-                deleteDisplayName
-            ),
+            message = htmlAnnotatedString(stringResource(R.string.settings_system_original_apks_delete_confirm, deleteDisplayName)),
+            primaryText = stringResource(R.string.delete),
             onDismiss = { itemToDelete.value = null },
             onConfirm = {
                 scope.launch {
@@ -988,8 +983,10 @@ private fun ApkManagementDialogContent(
     }
 
     if (showUninstallSelectedConfirmation) {
-        BatchUninstallConfirmDialog(
-            count = selectedInstalledItems.size,
+        ConfirmDialog(
+            title = pluralStringResource(R.plurals.batch_uninstall_confirm_title, selectedInstalledItems.size, selectedInstalledItems.size),
+            message = stringResource(R.string.batch_uninstall_confirm_body),
+            primaryText = stringResource(R.string.uninstall),
             onConfirm = {
                 actions.onUninstallSelected?.invoke(selectedInstalledItems)
                 selection.clear()
@@ -1001,8 +998,10 @@ private fun ApkManagementDialogContent(
     }
 
     itemToUninstallConfirm?.let { item ->
-        BatchUninstallConfirmDialog(
-            count = 1,
+        ConfirmDialog(
+            title = pluralStringResource(R.plurals.batch_uninstall_confirm_title, 1, 1),
+            message = stringResource(R.string.batch_uninstall_confirm_body),
+            primaryText = stringResource(R.string.uninstall),
             onConfirm = {
                 actions.onUninstall?.invoke(item)
                 itemToUninstallConfirm = null
@@ -1255,34 +1254,4 @@ private suspend fun shareApkFiles(context: Context, files: List<File>) {
     try {
         context.startActivity(Intent.createChooser(intent, null))
     } catch (_: android.content.ActivityNotFoundException) { }
-}
-
-@Composable
-private fun DeleteConfirmationDialog(
-    title: String,
-    message: String,
-    onDismiss: () -> Unit,
-    onConfirm: () -> Unit
-) {
-    MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = title,
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.delete),
-                onPrimaryClick = onConfirm,
-                isPrimaryDestructive = true,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss
-            )
-        }
-    ) {
-        Text(
-            text = htmlAnnotatedString(message),
-            style = MaterialTheme.typography.bodyLarge,
-            color = LocalDialogTextColor.current,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
 }

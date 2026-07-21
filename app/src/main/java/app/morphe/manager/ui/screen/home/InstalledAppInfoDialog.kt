@@ -11,14 +11,10 @@ import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Launch
 import androidx.compose.material.icons.automirrored.outlined.List
@@ -273,14 +269,18 @@ fun InstalledAppInfoDialog(
         )
     }
 
-    UninstallConfirmDialog(
-        show = showUninstallConfirm.value,
-        onConfirm = {
-            viewModel.uninstall()
-            showUninstallConfirm.value = false
-        },
-        onDismiss = { showUninstallConfirm.value = false }
-    )
+    if (showUninstallConfirm.value) {
+        ConfirmDialog(
+            title = stringResource(R.string.uninstall),
+            message = stringResource(R.string.home_app_info_uninstall_app_confirmation),
+            primaryText = stringResource(R.string.uninstall),
+            onConfirm = {
+                viewModel.uninstall()
+                showUninstallConfirm.value = false
+            },
+            onDismiss = { showUninstallConfirm.value = false }
+        )
+    }
 
     SignatureConflictDialog(
         show = showSignatureConflictDialog.value,
@@ -1528,35 +1528,6 @@ private fun MountWarningDialog(
     ) {
         Text(
             text = stringResource(R.string.installer_mount_warning_install),
-            style = MaterialTheme.typography.bodyLarge,
-            color = LocalDialogSecondaryTextColor.current
-        )
-    }
-}
-
-@Composable
-private fun UninstallConfirmDialog(
-    show: Boolean,
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit
-) {
-    if (!show) return
-
-    MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = stringResource(R.string.uninstall),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.uninstall),
-                onPrimaryClick = onConfirm,
-                isPrimaryDestructive = true,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss
-            )
-        }
-    ) {
-        Text(
-            text = stringResource(R.string.home_app_info_uninstall_app_confirmation),
             style = MaterialTheme.typography.bodyLarge,
             color = LocalDialogSecondaryTextColor.current
         )

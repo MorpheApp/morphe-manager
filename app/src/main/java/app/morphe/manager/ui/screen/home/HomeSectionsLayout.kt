@@ -19,13 +19,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.outlined.DeleteForever
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.InstallMobile
-import androidx.compose.material.icons.outlined.Inbox
-import androidx.compose.material.icons.outlined.Source
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -62,6 +57,7 @@ import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeAppSourceGroup
 import app.morphe.manager.util.KnownApps
+import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -730,8 +726,10 @@ fun MainAppsSection(
         if (category == null) {
             pendingDeleteCategoryId = null
         } else {
-            CategoryDeleteConfirmDialog(
-                category = category,
+            ConfirmDialog(
+                title = stringResource(R.string.home_category_delete_confirm_title),
+                message = htmlAnnotatedString(stringResource(R.string.home_category_delete_confirm_message, category.name, stringResource(R.string.home_category_uncategorized))),
+                primaryText = stringResource(R.string.delete),
                 onDismiss = { pendingDeleteCategoryId = null },
                 onConfirm = {
                     appActions.onDeleteCategory(pendingId)
@@ -764,8 +762,10 @@ fun MainAppsSection(
     }
 
     if (showBatchUninstallConfirm) {
-        BatchUninstallConfirmDialog(
-            count = pendingUninstallItems.size,
+        ConfirmDialog(
+            title = pluralStringResource(R.plurals.batch_uninstall_confirm_title, pendingUninstallItems.size, pendingUninstallItems.size),
+            message = stringResource(R.string.batch_uninstall_confirm_body),
+            primaryText = stringResource(R.string.uninstall),
             onConfirm = {
                 appActions.onUninstallMultiple(pendingUninstallItems)
                 isMultiSelectMode.value = false
