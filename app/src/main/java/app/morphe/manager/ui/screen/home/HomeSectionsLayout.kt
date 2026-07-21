@@ -692,6 +692,8 @@ fun MainAppsSection(
     val showMoveCategoryDialog = remember { mutableStateOf(false) }
     var categoryNameRequest by remember { mutableStateOf<CategoryNameRequest?>(null) }
     var pendingDeleteCategoryId by remember { mutableStateOf<String?>(null) }
+    var showBatchUninstallConfirm by remember { mutableStateOf(false) }
+    var pendingUninstallItems by remember { mutableStateOf<List<HomeAppItem>>(emptyList()) }
 
     // Resolved outside the LazyColumn DSL scope since @Composable calls aren't allowed there
     val context = LocalContext.current
@@ -758,6 +760,21 @@ fun MainAppsSection(
                     showMoveCategoryDialog.value = false
                 }
             }
+        )
+    }
+
+    if (showBatchUninstallConfirm) {
+        BatchUninstallConfirmDialog(
+            count = pendingUninstallItems.size,
+            onConfirm = {
+                appActions.onUninstallMultiple(pendingUninstallItems)
+                isMultiSelectMode.value = false
+                selectedPackages.clear()
+                selectedGroupKey = null
+                pendingUninstallItems = emptyList()
+                showBatchUninstallConfirm = false
+            },
+            onDismiss = { showBatchUninstallConfirm = false }
         )
     }
 
@@ -1567,10 +1584,8 @@ fun MainAppsSection(
                             }
                             contextActionIsUninstall -> {
                                 {
-                                    appActions.onUninstallMultiple(selectedInstalledItems)
-                                    isMultiSelectMode.value = false
-                                    selectedPackages.clear()
-                                    selectedGroupKey = null
+                                    pendingUninstallItems = selectedInstalledItems.toList()
+                                    showBatchUninstallConfirm = true
                                 }
                             }
                             else -> null

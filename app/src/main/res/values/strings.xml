@@ -322,6 +322,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
 
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Are you sure you want to uninstall this app?</string>
+    <string name="batch_uninstall_confirm_body">The selected apps will be permanently removed from your device</string>
     <string name="home_app_info_remove_app_warning">This will permanently delete:</string>
     <string name="home_app_info_delete_item_database">Database entry</string>
     <string name="home_app_info_delete_item_patched_apk">Patched APK file</string>
