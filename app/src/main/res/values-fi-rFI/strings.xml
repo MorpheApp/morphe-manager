@@ -333,13 +333,14 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Pääkäyttäjätila edellyttää, että alkuperäinen APK on asennettuna laitteeseesi ennen muokkaamista</string>
     <string name="root_gmscore_excluded">GmsCore-tuen lisäosa on jätetty pois pääkäyttäjätilassa</string>
-    <string name="root_pre_patch_installer_title">Valitse asennustapa</string>
-    <string name="root_pre_patch_installer_description">Laitteessasi on pääkäyttäjän oikeudet. Valitse, miten haluat asentaa muokatun sovelluksen</string>
-    <string name="root_pre_patch_installer_mount_title">Root-liitos</string>
-    <string name="root_pre_patch_installer_mount_description">Liitä muokattu APK alkuperäisen sovelluksen päälle. GmsCorea ei tarvita</string>
-    <string name="root_pre_patch_installer_standard_title">Vakioasennus</string>
-    <string name="root_pre_patch_installer_standard_description">Asenna erillisenä sovelluksena GmsCore-tuella. Valitse asennusohjelma (Järjestelmän asennusohjelma, Shizuku jne.) muokkaamisen jälkeen</string>
-    <string name="root_pre_patch_installer_hint">Asennustapa määrittää, mitkä lisäosat sisällytetään, eikä sitä voi muuttaa muokkaamisen jälkeen</string>
+    <string name="root_pre_patch_installer_title">Valitse paikkaustila</string>
+    <string name="root_pre_patch_installer_description">Laitteellasi on root-oikeudet. Valitse, tuliko sovelluksen paikkaus tehdä root-asennukselle vai tavalliseen asennukseen</string>
+    <string name="root_pre_patch_installer_mount_title">Root-liitostila</string>
+    <string name="root_pre_patch_installer_mount_description">Paikkaukset root-liitosta varten ja APK asennetaan vastaavan vakiosovelluksen päälle. GmsCorea ei tarvita.</string>
+    <string name="root_mount_module_unmount_warning">Jos käytät KernelSU:ta tai APatchia, poista moduulin purkaminen tai piilottaminen käytöstä sovelluksille, jotka on asennettu root-liitoksella. Muussa tapauksessa alkuperäinen sovellus saattaa silti käynnistyä, vaikka Morphe näyttäisi sen asennettuna.</string>
+    <string name="root_pre_patch_installer_standard_title">Vakioasennustila</string>
+    <string name="root_pre_patch_installer_standard_description">Paikkaa normaalina APK-tiedostona GmsCore-tuella. Asennusasetuksiasi käytetään paikkaamisen jälkeen.</string>
+    <string name="root_pre_patch_installer_hint">Tämä paikkaustila on erillinen Asetukset > Järjestelmä > Asennusohjelma -asetuksista, eikä sitä voi muuttaa paikkaamisen jälkeen.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Virheilmoitus kopioitu leikepöydälle</string>
     <string name="patcher_error_log">Virheloki</string>
@@ -435,6 +436,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="patcher_process_exit_message">Muokkausprosessi päättyi koodilla %s</string>
     <string name="install_app_success">Asennus onnistui</string>
     <string name="install_app_fail">Sovelluksen asentaminen epäonnistui: %s</string>
+    <string name="uninstall_app_fail">Sovelluksen poistaminen epäonnistui: %s</string>
+    <string name="uninstall_timeout">Asennuksen poistaminen aikakatkaistiin</string>
     <string name="save_apk_success">APK tallennettu</string>
     <string name="saved_app_export_failed">Muokatun sovelluksen vienti epäonnistui</string>
     <string name="saved_app_removed_toast">Poistettiin tallennettu muokattu sovellus</string>
@@ -480,10 +483,13 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_parallax_effect_description">Tausta liikkuu sulavasti, kun laitetta kallistetaan</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Teema</string>
+    <string name="settings_appearance_theme_mode">Teeman tila</string>
     <string name="settings_appearance_system">Järjestelmä</string>
     <string name="settings_appearance_light">Vaalea</string>
     <string name="settings_appearance_dark">Tumma</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monokrominen</string>
+    <string name="settings_appearance_color_style">Värityyli</string>
     <string name="settings_appearance_accent_color">Korostusväri</string>
     <string name="settings_appearance_pure_black">Täysin musta</string>
     <string name="settings_appearance_pure_black_description">Käytä täysin mustia taustoja</string>
@@ -650,12 +656,13 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Poista Shorts-painike käynnistysohjelmasta</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Asennusohjelma</string>
+    <string name="installer_settings_title">Oletusarvoinen asennusohjelma</string>
     <string name="installer_title">Valitse asennusohjelma</string>
     <string name="installer_internal_description">Käytä Androidin pakettien asennusohjelmaa</string>
     <string name="installer_play_store_description">Käyttää järjestelmän asennusohjelmaa ja asettaa Google Play Kaupan asennuslähteeksi</string>
     <string name="installer_root_play_store_description">Asennetaan äänettömästi juurikäyttäjällä ja asetetaan Google Play Kauppa asennuslähteeksi</string>
-    <string name="installer_auto_saved_name">Root-liitosasennusohjelma</string>
-    <string name="installer_auto_saved_description">Asentaa korjattua APK:tä asennetun sovelluksen päälle</string>
+    <string name="installer_auto_saved_name">Root-liitos</string>
+    <string name="installer_auto_saved_description">Liittää sovellukset, jotka on paikkattu root-liitostilassa. Tavalliset paikatut APK-tiedostot käyttävät toista asennusohjelmaa.</string>
     <string name="installer_shizuku_description">Asenna hiljaisesti Shizuku- tai Sui-ohjelmalla</string>
     <string name="installer_shizuku_play_store_description">Asennetaan äänettömästi Shizukun tai Suin kautta ja asetetaan Google Play Kauppa asennuslähteeksi</string>
     <string name="installer_option_none">Ei varajärjestelmää</string>
@@ -667,6 +674,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_status_shizuku_permission">Myönnä Morphen lupa Shizuku-sovelluksesta</string>
     <string name="installer_mount_warning_install">Pääasennuksesi on asetettu juurtimen asennukseen. Tämä tallennettu sovellus ei ole asennettu juurtimella.</string>
     <string name="mount_version_mismatch_message">Perusversion (%2$s) ei vastaa korjattua sovellusta (%1$s). Juurta korjatun perusversion kanssa, sitten yritä uudelleen.</string>
+    <string name="mount_stock_restore_failed_message">Android hylkäsi tallennetun alkuperäisen APK-tiedoston. Asenna vastaava virallinen versio ja yritä sitten Liitä uudelleen.</string>
     <string name="installer_status_shizuku_unsupported">Asennettu Shizuku-versio ei ole tuettu.</string>
     <string name="installer_action_open_shizuku">Avaa Shizuku</string>
     <string name="installer_hint_generic">Asennus epäonnistui. Yritä uudelleen tai vaihda toiseen asennukseen.</string>

@@ -332,13 +332,14 @@ Für optimale Ergebnisse empfiehlt diese App eine &lt;b&gt;vollständige APK&lt;
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-Modus erfordert, dass die originale APK-Datei auf Ihrem Gerät installiert ist, bevor Sie mit dem Patchen beginnen</string>
     <string name="root_gmscore_excluded">GmsCore-Unterstützungspatch ist im Root-Modus ausgeschlossen</string>
-    <string name="root_pre_patch_installer_title">Installationsmethode auswählen</string>
-    <string name="root_pre_patch_installer_description">Ihr Gerät hat Root-Zugriff. Wählen Sie, wie Sie die gepatchte App installieren möchten</string>
-    <string name="root_pre_patch_installer_mount_title">Root-Mount</string>
-    <string name="root_pre_patch_installer_mount_description">Gepatchte APK über die ursprüngliche App mounten. Kein GmsCore erforderlich</string>
-    <string name="root_pre_patch_installer_standard_title">Standard-Installation</string>
-    <string name="root_pre_patch_installer_standard_description">Installiert als separate App mit GmsCore-Unterstützung. Ein Installer kann nach dem Patchen ausgewählt werden.</string>
-    <string name="root_pre_patch_installer_hint">Die Installationsmethode bestimmt, welche Patches enthalten sind und kann nach dem Patchen nicht verändert werden</string>
+    <string name="root_pre_patch_installer_title">Wähle Patch-Modus</string>
+    <string name="root_pre_patch_installer_description">Dein Gerät hat Root-Zugriff. Wähle, ob diese App für Root-Mount oder Standardinstallation gepatcht werden soll.</string>
+    <string name="root_pre_patch_installer_mount_title">Root-Mount-Modus</string>
+    <string name="root_pre_patch_installer_mount_description">Patches für Root-Mount und mountet die APK dann über die passende Stock-App. Kein GmsCore erforderlich.</string>
+    <string name="root_mount_module_unmount_warning">Wenn Sie KernelSU oder APatch verwenden, deaktivieren Sie das Auslagern oder Verbergen von Modulen für Apps, die mit Root-Mount installiert wurden. Andernfalls kann die Standard-App weiterhin ausgeführt werden, auch wenn Morphe sie als gemountet anzeigt.</string>
+    <string name="root_pre_patch_installer_standard_title">Standard-Installationsmodus</string>
+    <string name="root_pre_patch_installer_standard_description">Patches als normale APK mit GmsCore-Unterstützung. Ihre Installatoreinstellung wird nach dem Patchen verwendet.</string>
+    <string name="root_pre_patch_installer_hint">Dieser Patch-Modus ist von Einstellungen &gt; System &gt; Installer getrennt und kann nach dem Patchen nicht mehr geändert werden.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">URL in Zwischenablage kopiert</string>
     <string name="patcher_error_log">Fehlerprotokoll</string>
@@ -438,6 +439,8 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="patcher_process_exit_message">Patcher-Prozess wurde mit Code %s beendet</string>
     <string name="install_app_success">Erfolgreich installiert</string>
     <string name="install_app_fail">Installation der App fehlgeschlagen: %s</string>
+    <string name="uninstall_app_fail">App konnte nicht deinstalliert werden: %s</string>
+    <string name="uninstall_timeout">Deinstallation zeitüberschritten</string>
     <string name="save_apk_success">APK gespeichert</string>
     <string name="saved_app_export_failed">Export der gepatchten App fehlgeschlagen</string>
     <string name="saved_app_removed_toast">Gespeicherte gepatchte App entfernt</string>
@@ -483,10 +486,13 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="settings_appearance_parallax_effect_description">Glatte Hintergrundverschiebung beim Neigen des Geräts</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Thema</string>
+    <string name="settings_appearance_theme_mode">Themenmodus</string>
     <string name="settings_appearance_system">System</string>
     <string name="settings_appearance_light">Hell</string>
     <string name="settings_appearance_dark">Dunkel</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monochrom</string>
+    <string name="settings_appearance_color_style">Farbdesign</string>
     <string name="settings_appearance_accent_color">Akzentfarbe</string>
     <string name="settings_appearance_pure_black">Reines Schwarz</string>
     <string name="settings_appearance_pure_black_description">Verwendet echte schwarze Hintergründe</string>
@@ -653,12 +659,13 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Entfernt die Shorts-Schaltfläche vom Launcher-Widget</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
+    <string name="installer_settings_title">Standard-Installer</string>
     <string name="installer_title">Installer auswählen</string>
     <string name="installer_internal_description">Verwendet den Android-Paketinstaller</string>
     <string name="installer_play_store_description">Verwendet den Systeminstaller und setzt den Google Play Store als Installationsquelle</string>
     <string name="installer_root_play_store_description">Installiert stumm mit Root-Rechten und setzt den Google Play Store als Installationsquelle fest</string>
-    <string name="installer_auto_saved_name">Root-Mount-Installer</string>
-    <string name="installer_auto_saved_description">Die gepatchte APK über die installierte App mounten</string>
+    <string name="installer_auto_saved_name">Root-Mount</string>
+    <string name="installer_auto_saved_description">Mountet Apps, die im Root-Mount-Modus gepatcht wurden. Standardmäßig gepatchte APKs verwenden einen anderen Installer.</string>
     <string name="installer_shizuku_description">Installiert stillschweigend mit Shizuku oder Sui</string>
     <string name="installer_shizuku_play_store_description">Installiert stumm über Shizuku oder Sui und setzt den Google Play Store als Installationsquelle fest</string>
     <string name="installer_option_none">Kein Fallback</string>
@@ -670,6 +677,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="installer_status_shizuku_permission">Erlauben Sie Morphe von der Shizuku-App die Berechtigung.</string>
     <string name="installer_mount_warning_install">Ihr primärer Installer ist auf den Root-Mount-Installer gesetzt. Diese gespeicherte App wurde nicht mit Mount installiert</string>
     <string name="mount_version_mismatch_message">Stock-App-Version (%2$s) stimmt nicht mit gepatchter App-Version (%1$s) überein. Mounten Sie die passende Stock-Version und versuchen Sie es erneut</string>
+    <string name="mount_stock_restore_failed_message">Android hat die gespeicherte ursprüngliche APK abgelehnt. Installieren Sie die passende Stock-Version und versuchen Sie es dann erneut mit Mounten.</string>
     <string name="installer_status_shizuku_unsupported">Die installierte Shizuku-Version wird nicht unterstützt</string>
     <string name="installer_action_open_shizuku">Shizuku öffnen</string>
     <string name="installer_hint_generic">Die Installation ist fehlgeschlagen. Versuchen Sie es erneut oder wechslen Sie zu einem anderen Installer</string>

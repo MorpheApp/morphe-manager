@@ -332,13 +332,14 @@ Vùng ngoài (nét đứt): có thể bị cắt theo hình dạng biểu tượ
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Chế độ root yêu cầu APK gốc phải được cài đặt trên thiết bị trước khi vá</string>
     <string name="root_gmscore_excluded">Chế độ root không cần bản vá \"GmsCore support\"</string>
-    <string name="root_pre_patch_installer_title">Chọn phương thức cài đặt</string>
-    <string name="root_pre_patch_installer_description">Thiết bị của bạn đã có quyền root. Hãy chọn cách bạn muốn cài đặt ứng dụng đã vá</string>
-    <string name="root_pre_patch_installer_mount_title">Gắn kết bằng root</string>
-    <string name="root_pre_patch_installer_mount_description">Gắn APK đã vá đè lên ứng dụng gốc (không cần GmsCore nữa)</string>
-    <string name="root_pre_patch_installer_standard_title">Cài đặt tiêu chuẩn</string>
-    <string name="root_pre_patch_installer_standard_description">Cài đặt thành một ứng dụng riêng với hỗ trợ GmsCore. Sau khi vá xong, bạn có thể chọn trình cài đặt mình muốn</string>
-    <string name="root_pre_patch_installer_hint">Phương thức cài đặt sẽ quyết định bản vá nào được áp dụng và không thể thay đổi sau khi vá</string>
+    <string name="root_pre_patch_installer_title">Chọn chế độ vá lỗi</string>
+    <string name="root_pre_patch_installer_description">Thiết bị của bạn đã có quyền root. Chọn xem ứng dụng này có nên được vá để gắn kết root hay cài đặt tiêu chuẩn không.</string>
+    <string name="root_pre_patch_installer_mount_title">Chế độ gắn kết root</string>
+    <string name="root_pre_patch_installer_mount_description">Vá lỗi cho chế độ gắn kết root, sau đó gắn kết tệp APK lên ứng dụng gốc tương ứng. Không cần GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Nếu bạn sử dụng KernelSU hoặc APatch, hãy tắt tính năng gỡ bỏ hoặc ẩn module cho các ứng dụng được cài đặt với quyền root. Nếu không, ứng dụng gốc vẫn có thể chạy ngay cả khi Morphe hiển thị nó là đã được gắn</string>
+    <string name="root_pre_patch_installer_standard_title">Chế độ cài đặt tiêu chuẩn</string>
+    <string name="root_pre_patch_installer_standard_description">Vá dưới dạng APK thông thường với hỗ trợ GmsCore. Cài đặt của bạn sẽ được sử dụng sau khi vá</string>
+    <string name="root_pre_patch_installer_hint">Chế độ vá này khác với Cài đặt > Hệ thống > Trình cài đặt và không thể thay đổi sau khi vá</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Đã sao chép lỗi vào bảng nhớ tạm</string>
     <string name="patcher_error_log">Nhật ký lỗi</string>
@@ -438,6 +439,8 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patcher_process_exit_message">Đã dừng tiến trình vá với mã lỗi %s</string>
     <string name="install_app_success">Đã cài đặt thành công</string>
     <string name="install_app_fail">Không thể cài đặt ứng dụng: %s</string>
+    <string name="uninstall_app_fail">Không thể gỡ cài đặt: %s</string>
+    <string name="uninstall_timeout">Gỡ cài đặt hết thời gian</string>
     <string name="save_apk_success">Đã lưu APK</string>
     <string name="saved_app_export_failed">Không thể xuất ứng dụng đã vá</string>
     <string name="saved_app_removed_toast">Đã xoá bản lưu ứng dụng đã vá</string>
@@ -483,10 +486,13 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_parallax_effect_description">Nền chuyển động nhẹ nhàng khi nghiêng thiết bị</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Chủ đề</string>
+    <string name="settings_appearance_theme_mode">Chế độ giao diện</string>
     <string name="settings_appearance_system">Hệ thống</string>
     <string name="settings_appearance_light">Sáng</string>
     <string name="settings_appearance_dark">Tối</string>
     <string name="settings_appearance_dynamic">Cá nhân hóa</string>
+    <string name="settings_appearance_monochrome">Đơn sắc</string>
+    <string name="settings_appearance_color_style">Phong cách màu</string>
     <string name="settings_appearance_accent_color">Màu nổi bật</string>
     <string name="settings_appearance_pure_black">Đen tuyền</string>
     <string name="settings_appearance_pure_black_description">Nền đen thực sự</string>
@@ -653,12 +659,13 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Gỡ nút Shorts khỏi tiện ích màn hình chính</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Trình cài đặt</string>
+    <string name="installer_settings_title">Trình cài đặt mặc định</string>
     <string name="installer_title">Trình cài đặt</string>
     <string name="installer_internal_description">Dùng trình cài đặt gói của Android</string>
     <string name="installer_play_store_description">Sử dụng trình cài đặt hệ thống và đặt Cửa hàng Play làm nguồn cài đặt</string>
     <string name="installer_root_play_store_description">Cài đặt bằng root mà không cần xác nhận, đồng thời đặt Google Play Store làm nguồn cài đặt</string>
-    <string name="installer_auto_saved_name">Trình cài đặt gắn kết đã root</string>
-    <string name="installer_auto_saved_description">Gắn APK đã vá lên ứng dụng đã được cài đặt</string>
+    <string name="installer_auto_saved_name">Gắn kết bằng root</string>
+    <string name="installer_auto_saved_description">Gắn kết các ứng dụng đã được vá ở chế độ gắn kết bằng root. Các APK đã vá tiêu chuẩn sử dụng một trình cài đặt khác</string>
     <string name="installer_shizuku_description">Cài ẩn bằng Shizuku hoặc Sui</string>
     <string name="installer_shizuku_play_store_description">Cài đặt thông qua Shizuku mà không cần xác nhận, đồng thời đặt Google Play Store làm nguồn cài đặt</string>
     <string name="installer_option_none">Không có</string>
@@ -670,6 +677,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_status_shizuku_permission">Cấp quyền Shizuku cho Morphe trong ứng dụng Shizuku</string>
     <string name="installer_mount_warning_install">Trình cài đặt chính của bạn đã được đặt là trình cài đặt mount gốc. Ứng dụng đã lưu này không được cài đặt bằng mount</string>
     <string name="mount_version_mismatch_message">Phiên bản ứng dụng gốc (%2$s) không khớp với phiên bản ứng dụng đã sửa (%1$s). Mount phiên bản gốc khớp, sau đó thử lại</string>
+    <string name="mount_stock_restore_failed_message">Android đã từ chối APK gốc đã lưu. Hãy cài đặt phiên bản gốc tương ứng, sau đó thử Gắn kết lại</string>
     <string name="installer_status_shizuku_unsupported">Phiên bản Shizuku đã cài không được hỗ trợ</string>
     <string name="installer_action_open_shizuku">Mở Shizuku</string>
     <string name="installer_hint_generic">Không thể cài đặt. Thử lại hoặc đổi sang trình cài đặt khác</string>

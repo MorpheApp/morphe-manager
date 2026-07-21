@@ -332,13 +332,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Для использования режима root требуется предварительная установка оригинального APK-файла на ваше устройство перед применением патча.</string>
     <string name="root_gmscore_excluded">Поддержка GmsCore отключена в режиме root</string>
-    <string name="root_pre_patch_installer_title">Выберите способ установки</string>
-    <string name="root_pre_patch_installer_description">Ваше устройство имеет root-доступ. Выберите способ установки пропатченного приложения.</string>
+    <string name="root_pre_patch_installer_title">Выберите режим патча</string>
+    <string name="root_pre_patch_installer_description">У вашего устройства есть root-доступ. Выберите, должен ли этот app быть пропатчен для root монтирования или стандартной установки</string>
     <string name="root_pre_patch_installer_mount_title">Root монтирование</string>
-    <string name="root_pre_patch_installer_mount_description">Установите пропатченный APK-файл поверх стандартного приложения. GmsCore не требуется.</string>
-    <string name="root_pre_patch_installer_standard_title">Стандартная установка</string>
-    <string name="root_pre_patch_installer_standard_description">Установите как отдельное приложение с поддержкой GmsCore. После установки патча выберите установщик (Системный установщик, Shizuku и т. д.)</string>
-    <string name="root_pre_patch_installer_hint">Способ установки определяет, какие исправления будут включены, и его нельзя изменить после установки исправлений.</string>
+    <string name="root_pre_patch_installer_mount_description">Патчи для root монтирования, затем монтирует APK поверх соответствующего стокового app. GmsCore не требуется</string>
+    <string name="root_mount_module_unmount_warning">Если вы используете KernelSU или APatch, отключите отмонтирование или скрытие модулей для приложений, установленных с root-правами. В противном случае стандартное приложение может продолжать работать, даже если Morphe показывает, что оно смонтировано.</string>
+    <string name="root_pre_patch_installer_standard_title">Стандартный режим установки</string>
+    <string name="root_pre_patch_installer_standard_description">Патчи как обычный APK с поддержкой GmsCore. Ваша настройка установщика будет использована после применения патча</string>
+    <string name="root_pre_patch_installer_hint">Этот режим патча отделен от Settings > System > Installer и не может быть изменен после применения патча</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Ошибка скопирована в буфер обмена</string>
     <string name="patcher_error_log">Журнал ошибок</string>
@@ -438,6 +439,8 @@
     <string name="patcher_process_exit_message">Процесс патчера завершился с кодом %s</string>
     <string name="install_app_success">Успешно установлено</string>
     <string name="install_app_fail">Не удалось установить приложение: %s</string>
+    <string name="uninstall_app_fail">Не удалось удалить приложение: %s</string>
+    <string name="uninstall_timeout">Время ожидания удаления истекло</string>
     <string name="save_apk_success">APK сохранен</string>
     <string name="saved_app_export_failed">Не удалось экспортировать исправленное приложение</string>
     <string name="saved_app_removed_toast">Удалено сохраненное исправленное приложение</string>
@@ -483,10 +486,13 @@
     <string name="settings_appearance_parallax_effect_description">Плавное смещение фона при наклоне устройства</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Тема</string>
+    <string name="settings_appearance_theme_mode">Режим темы</string>
     <string name="settings_appearance_system">Системная</string>
     <string name="settings_appearance_light">Светлая</string>
     <string name="settings_appearance_dark">Тёмная</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Монохромный</string>
+    <string name="settings_appearance_color_style">Стиль цвета</string>
     <string name="settings_appearance_accent_color">Цвет акцента</string>
     <string name="settings_appearance_pure_black">Чисто черный</string>
     <string name="settings_appearance_pure_black_description">Использует настоящие черные фоны</string>
@@ -651,12 +657,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Убрать кнопку Shorts из виджета запуска</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Установщик</string>
+    <string name="installer_settings_title">Установщик по умолчанию</string>
     <string name="installer_title">Выберите установщик</string>
     <string name="installer_internal_description">Использует установщик пакетов Android</string>
     <string name="installer_play_store_description">Использует системную установку и задает Google Play Store в качестве источника установки</string>
     <string name="installer_root_play_store_description">Бесшумная установка с правами root и установка Google Play Store в качестве источника установки</string>
-    <string name="installer_auto_saved_name">Установщик с root-доступом</string>
-    <string name="installer_auto_saved_description">Монтирует патченый APK поверх установленного приложения</string>
+    <string name="installer_auto_saved_name">Root монтирование</string>
+    <string name="installer_auto_saved_description">Монтирует приложения, которые были пропатчены в режиме root mount. Стандартные пропатченные APK используют другой установщик</string>
     <string name="installer_shizuku_description">Устанавливает молча, используя Shizuku или Sui</string>
     <string name="installer_shizuku_play_store_description">Бесшумная установка через Shizuku или Sui с использованием Google Play Store в качестве источника установки</string>
     <string name="installer_option_none">Без запасного установщика</string>
@@ -668,6 +675,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_permission">Предоставьте разрешение Morphe от приложения Shizuku</string>
     <string name="installer_mount_warning_install">Ваш основной установщик настроен на установщик с корневым монтированием. Это сохраненное приложение не было установлено с помощью монтирования</string>
     <string name="mount_version_mismatch_message">Версия запатченного приложения (%1$s) не совпадает с версией запатченного приложения (%2$s). Замонтируйте совпадающую версию запатченного приложения, затем повторите попытку</string>
+    <string name="mount_stock_restore_failed_message">Android отклонил сохраненный оригинальный APK. Установите соответствующую версию приложения, затем попробуйте смонтировать снова</string>
     <string name="installer_status_shizuku_unsupported">Версия установленного Shizuku не поддерживается</string>
     <string name="installer_action_open_shizuku">Открыть Shizuku</string>
     <string name="installer_hint_generic">Установка не удалась. Повторите попытку или переключитесь на другой установщик</string>

@@ -331,13 +331,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">रूट मोडसाठी तुमच्या डिव्हाइसवर मूळ APK स्थापित करणे आवश्यक आहे, पॅचिंग करण्यापूर्वी</string>
     <string name="root_gmscore_excluded">GmsCore सपोर्ट पॅच रूट मोडमध्ये वगळला गेला आहे</string>
-    <string name="root_pre_patch_installer_title">स्थापना पद्धत निवडा</string>
-    <string name="root_pre_patch_installer_description">तुमच्या डिव्हाइसमध्ये रूट ॲक्सेस आहे. तुम्हाला पॅच केलेले ॲप कसे स्थापित करायचे आहे ते निवडा</string>
-    <string name="root_pre_patch_installer_mount_title">रूट माउंट</string>
-    <string name="root_pre_patch_installer_mount_description">पॅच केलेली APK स्टॉक ॲपवर माउंट करते. GmsCore आवश्यक नाही</string>
-    <string name="root_pre_patch_installer_standard_title">मानक स्थापना</string>
-    <string name="root_pre_patch_installer_standard_description">ॲप GmsCore सपोर्टसह स्वतंत्र ॲप म्हणून इंस्टॉल करते. पॅचिंग केल्यानंतर इंस्टॉलर निवडता येतो.</string>
-    <string name="root_pre_patch_installer_hint">स्थापना पद्धत निश्चित करते की कोणते पॅच समाविष्ट आहेत आणि पॅचिंगनंतर ती बदलली जाऊ शकत नाही</string>
+    <string name="root_pre_patch_installer_title">पॅच मोड निवडा</string>
+    <string name="root_pre_patch_installer_description">तुमच्या डिव्हाइसला रूट ऍक्सेस आहे. या ॲपला रूट माउंटसाठी पॅच करायचे की स्टँडर्ड इन्स्टॉल करायचे ते निवडा.</string>
+    <string name="root_pre_patch_installer_mount_title">रूट माउंट मोड</string>
+    <string name="root_pre_patch_installer_mount_description">रूट माउंटसाठी पॅच, नंतर स्टॉक ॲपवर APK माउंट करा. GmsCore ची आवश्यकता नाही</string>
+    <string name="root_mount_module_unmount_warning">जर तुम्ही KernelSU किंवा APatch वापरत असाल, तर रूट माउंटने स्थापित केलेल्या ॲप्ससाठी मॉड्यूल अनमाउंट करणे किंवा लपवणे अक्षम करा. अन्यथा, Morphe मध्ये ते माउंट केलेले दिसत असले तरी स्टॉक ॲप अजूनही चालू होऊ शकते.</string>
+    <string name="root_pre_patch_installer_standard_title">मानक स्थापना मोड</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore सपोर्टसह सामान्य APK म्हणून पॅच. पॅच केल्यानंतर तुमची इंस्टॉलर सेटिंग वापरली जाईल.</string>
+    <string name="root_pre_patch_installer_hint">हा पॅच मोड सेटिंग्ज > सिस्टम > इंस्टॉलरपासून वेगळा आहे आणि पॅच केल्यानंतर बदलला जाऊ शकत नाही.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">एरर क्लिपबोर्डवर कॉपी केला गेला</string>
     <string name="patcher_error_log">एरर लॉग</string>
@@ -437,6 +438,8 @@
     <string name="patcher_process_exit_message">पॅचर प्रक्रिया कोड %s सह बाहेर पडली</string>
     <string name="install_app_success">इंस्टॉल यशस्वी झाले</string>
     <string name="install_app_fail">ॲप इंस्टॉल करण्यात अयशस्वी: %s</string>
+    <string name="uninstall_app_fail">ॲप अनइंस्टॉल करण्यात अयशस्वी: %s</string>
+    <string name="uninstall_timeout">अनइंस्टॉल टाइम आउट हुआ</string>
     <string name="save_apk_success">APK जतन केले</string>
     <string name="saved_app_export_failed">पॅच केलेले ॲप एक्सपोर्ट करण्यात अयशस्वी</string>
     <string name="saved_app_removed_toast">जतन केलेले पॅच केलेले ॲप काढले</string>
@@ -482,10 +485,13 @@
     <string name="settings_appearance_parallax_effect_description">डिव्हाइस झुकवताना पार्श्वभूमी सहजपणे सरकते</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">सिस्टम</string>
+    <string name="settings_appearance_theme_mode">थीम मोड</string>
     <string name="settings_appearance_system">हलका</string>
     <string name="settings_appearance_light">गडद</string>
     <string name="settings_appearance_dark">Material You</string>
     <string name="settings_appearance_dynamic">ॲक्सेंट रंग</string>
+    <string name="settings_appearance_monochrome">मोनोक्रोम</string>
+    <string name="settings_appearance_color_style">रंग शैली</string>
     <string name="settings_appearance_accent_color">ॲप भाषा</string>
     <string name="settings_appearance_pure_black">शुद्ध काळा</string>
     <string name="settings_appearance_pure_black_description">सत्य काळ्या रंगाचे बॅकग्राउंड वापरते</string>
@@ -652,12 +658,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">लाँचर विजेटमधून शॉर्ट्स बटण काढून टाकते</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">इंस्टॉलर</string>
+    <string name="installer_settings_title">डीफॉल्ट इंस्टॉलर</string>
     <string name="installer_title">इंस्टॉलर निवडा</string>
     <string name="installer_internal_description">Android पॅकेज इंस्टॉलर वापरतो</string>
     <string name="installer_play_store_description">सिस्टम इंस्टॉलर वापरतो आणि Google Play Store ला इंस्टॉलेशन स्रोत म्हणून सेट करतो</string>
     <string name="installer_root_play_store_description">रूटसह शांतपणे स्थापित करते आणि Google Play Store ला इंस्टॉलेशन स्त्रोत म्हणून सेट करते</string>
-    <string name="installer_auto_saved_name">रूटेड माउंट इंस्टॉलर</string>
-    <string name="installer_auto_saved_description">पॅच केलेले APK स्थापित ॲपवर माउंट करते</string>
+    <string name="installer_auto_saved_name">रूट माउंट</string>
+    <string name="installer_auto_saved_description">रूट माउंट मोडमध्ये पॅच केलेले ॲप्स माउंट करते. मानक पॅच केलेले APK दुसरे इंस्टॉलर वापरतात.</string>
     <string name="installer_shizuku_description">Shizuku किंवा Sui वापरून शांतपणे इंस्टॉल करते</string>
     <string name="installer_shizuku_play_store_description">शिझुकू किंवा सुईद्वारे शांतपणे स्थापित करते आणि Google Play Store ला इंस्टॉलेशन स्त्रोत म्हणून सेट करते</string>
     <string name="installer_option_none">कोणताही पर्याय नाही</string>
@@ -669,6 +676,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_permission">Morphe ॲपमधून Shizuku साठी परवानगी द्या</string>
     <string name="installer_mount_warning_install">तुमचा प्राथमिक इंस्टॉलर रूटेड माउंट इंस्टॉलरवर सेट आहे. हे सेव्ह केलेले ॲप माउंट वापरून स्थापित केलेले नव्हते</string>
     <string name="mount_version_mismatch_message">स्टॉक ॲप आवृत्ती (%2$s) पॅच केलेल्या ॲप आवृत्तीशी जुळत नाही (%1$s). जुळणारी स्टॉक आवृत्ती माउंट करा, नंतर पुन्हा प्रयत्न करा</string>
+    <string name="mount_stock_restore_failed_message">Android ने जतन केलेले मूळ APK नाकारले. संबंधित स्टॉक आवृत्ती स्थापित करा, नंतर पुन्हा माउंट करण्याचा प्रयत्न करा.</string>
     <string name="installer_status_shizuku_unsupported">स्थापित Shizuku आवृत्ती समर्थित नाही</string>
     <string name="installer_action_open_shizuku">Shizuku उघडा</string>
     <string name="installer_hint_generic">स्थापना अयशस्वी झाली. पुन्हा प्रयत्न करा किंवा दुसरा इंस्टॉलर स्विच करा</string>

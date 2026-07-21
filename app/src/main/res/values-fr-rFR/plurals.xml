@@ -24,6 +24,10 @@
         <item quantity="one">%s fichier APK</item>
         <item quantity="other">%s fichiers APK</item>
     </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">%d app désinstallée</item>
+        <item quantity="other">%d apps désinstallées</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">​%s patch obsolète a été supprimé de la sélection enregistrée</item>
         <item quantity="other">​%s patchs obsolètes ont été supprimés de la sélection enregistrée</item>

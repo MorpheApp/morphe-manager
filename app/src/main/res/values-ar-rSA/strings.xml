@@ -332,13 +332,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">يتطلب وضع Root تثبيت ملف APK الأصلي على جهازك قبل التعديل</string>
     <string name="root_gmscore_excluded">تم استبعاد تعديل دعم GmsCore في وضع Root</string>
-    <string name="root_pre_patch_installer_title">اختر طريقة التثبيت</string>
-    <string name="root_pre_patch_installer_description">جهازك لديه صلاحيات Root. اختر الطريقة التي تريد تثبيت التطبيق المُعدَّل بها</string>
-    <string name="root_pre_patch_installer_mount_title">تركيب Root</string>
-    <string name="root_pre_patch_installer_mount_description">تركيب APK المعدل فوق التطبيق الأصلي. لا تحتاج إلى GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">تثبيت قياسي</string>
-    <string name="root_pre_patch_installer_standard_description">تثبيت كتطبيق منفصل مع دعم GmsCore. يمكن اختيار أداة التثبيت بعد التعديل</string>
-    <string name="root_pre_patch_installer_hint">تحدد طريقة التثبيت أي تعديلات يتم تضمينها ولا يمكن تغييرها بعد التعديل</string>
+    <string name="root_pre_patch_installer_title">اختر وضعية التعديل</string>
+    <string name="root_pre_patch_installer_description">جهازك لديه صلاحيات Root. اختر ما إذا كان يجب تعديل هذا التطبيق بوضعية Root Mount أو التثبيت القياسي</string>
+    <string name="root_pre_patch_installer_mount_title">وضع Root Mount</string>
+    <string name="root_pre_patch_installer_mount_description">تعديلات لوضعية Root Mount، ثم يتم تركيب ملف APK فوق التطبيق الأصلي المطابق. لا حاجة إلى GmsCore</string>
+    <string name="root_mount_module_unmount_warning">إذا كنت تستخدم KernelSU أو APatch، فعطّل module unmounting أو إخفاء الوحدات النمطية للتطبيقات المثبتة باستخدام Root Mount. وإلا فقد يستمر تشغيل التطبيق الأصلي حتى عندما يعرض Morphe أنه مثبت</string>
+    <string name="root_pre_patch_installer_standard_title">وضع التثبيت القياسي</string>
+    <string name="root_pre_patch_installer_standard_description">تثبيت كملف APK عادي مع دعم GmsCore. يتم استخدام إعداد أداة التثبيت الخاصة بك بعد التعديل</string>
+    <string name="root_pre_patch_installer_hint">وضع التعديل هذا منفصل عن الإعدادات &gt; النظام &gt; أداة التثبيت ولا يمكن تغييره بعد التعديل</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">تم نسخ الخطأ إلى الحافظة</string>
     <string name="patcher_error_log">سجل الأخطاء</string>
@@ -439,6 +440,8 @@
     <string name="patcher_process_exit_message">انتهت عملية أداة التعديل بالرمز %s</string>
     <string name="install_app_success">تم التثبيت بنجاح</string>
     <string name="install_app_fail">فشل تثبيت التطبيق: %s</string>
+    <string name="uninstall_app_fail">فشل إلغاء تثبيت التطبيق: %s</string>
+    <string name="uninstall_timeout">انتهت مهلة إلغاء التثبيت</string>
     <string name="save_apk_success">تم حفظ APK</string>
     <string name="saved_app_export_failed">فشل تصدير التطبيق المعدل</string>
     <string name="saved_app_removed_toast">تمت إزالة التطبيق المعدل المحفوظ</string>
@@ -484,10 +487,13 @@
     <string name="settings_appearance_parallax_effect_description">تغيير سلس للخلفية عند إمالة الجهاز</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">المظهر</string>
+    <string name="settings_appearance_theme_mode">وضع المظهر</string>
     <string name="settings_appearance_system">النظام</string>
     <string name="settings_appearance_light">فاتح</string>
     <string name="settings_appearance_dark">داكن</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">أحادي اللون</string>
+    <string name="settings_appearance_color_style">نمط الألوان</string>
     <string name="settings_appearance_accent_color">لون التمييز</string>
     <string name="settings_appearance_pure_black">اسود نقي</string>
     <string name="settings_appearance_pure_black_description">استخدام خلفيات سوداء حقيقية</string>
@@ -655,12 +661,13 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">يُزيل زر Shorts من Widget الشاشة الرئيسية</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">أداة التثبيت</string>
+    <string name="installer_settings_title">أداة التثبيت الافتراضية</string>
     <string name="installer_title">اختر أداة التثبيت</string>
     <string name="installer_internal_description">يستخدم أداة تثبيت حزم Android</string>
     <string name="installer_play_store_description">يستخدم أداة تثبيت النظام ويحدد متجر Google Play كمصدر للتثبيت</string>
     <string name="installer_root_play_store_description">يقوم بالتثبيت تلقائيًا باستخدام صلاحيات Root ويضبط متجر Google Play كمصدر للتثبيت</string>
-    <string name="installer_auto_saved_name">أداة تثبيت تركيب Rooted</string>
-    <string name="installer_auto_saved_description">يقوم بتركيب ملف APK المعدل فوق التطبيق المثبت</string>
+    <string name="installer_auto_saved_name">Root Mount</string>
+    <string name="installer_auto_saved_description">يقوم بتركيب التطبيقات التي تم تعديلها في وضع Root Mount. تستخدم ملفات APK المعدلة القياسية أداة تثبيت أخرى</string>
     <string name="installer_shizuku_description">يُثبّت تلقائيًا باستخدام Shizuku أو Sui</string>
     <string name="installer_shizuku_play_store_description">يقوم بالتثبيت تلقائيًا من خلال Shizuku أو Sui ويضبط متجر Google Play كمصدر للتثبيت</string>
     <string name="installer_option_none">لا بديل</string>
@@ -672,6 +679,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_status_shizuku_permission">امنح تطبيق Shizuku الإذن بالوصول إلى Morphe من تطبيق Shizuku</string>
     <string name="installer_mount_warning_install">أداة التثبيت الأساسية الخاصة بك محددة على أداة تثبيت تركيب Rooted. لم يتم تثبيت التطبيق المحفوظ باستخدام التركيب</string>
     <string name="mount_version_mismatch_message">إصدار التطبيق الأصلي (%2$s) لا يتطابق مع إصدار التطبيق المعدل (%1$s). قم بتركيب الإصدار الأصلي المطابق، ثم حاول مرة أخرى</string>
+    <string name="mount_stock_restore_failed_message">رفض Android ملف APK الأصلي المحفوظ. قم بتثبيت الإصدار الأصلي المطابق، ثم حاول التركيب مرة أخرى</string>
     <string name="installer_status_shizuku_unsupported">إصدار Shizuku المثبت غير مدعوم</string>
     <string name="installer_action_open_shizuku">فتح Shizuku</string>
     <string name="installer_hint_generic">فشل التثبيت. حاول مرة أخرى أو قم بالتبديل إلى أداة تثبيت أخرى</string>

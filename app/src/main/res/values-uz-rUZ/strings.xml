@@ -332,13 +332,14 @@ Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafs
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Ildiz rejimida patchlashdan oldin original APK o\'rnatilgan bo\'lishi kerak</string>
     <string name="root_gmscore_excluded">Ildiz rejimida GmsCore qo‘llab-quvvatlash patchi kiritilmaydi</string>
-    <string name="root_pre_patch_installer_title">O\'rnatish usulini tanlang</string>
-    <string name="root_pre_patch_installer_description">Qurilmangiz root kirish huquqiga ega. Patchlangan ilovani qanday o\'rnatmoqchi ekanligingizni tanlang</string>
-    <string name="root_pre_patch_installer_mount_title">Ildizga o\'rnatish</string>
-    <string name="root_pre_patch_installer_mount_description">Patchlangan APKni ildizga o‘rnatish, GmsCorega ehtiyoj yo‘q</string>
-    <string name="root_pre_patch_installer_standard_title">Standart o\'rnatish</string>
-    <string name="root_pre_patch_installer_standard_description">O‘rnatish Shizuku yoki Sui orqali jim o‘rnatishi, GmsCoreni qo‘llab-quvvatlash</string>
-    <string name="root_pre_patch_installer_hint">O\'rnatish usuli qaysi patchlarning kiritilishini belgilaydi va patchlashdan keyin o\'zgartirib bo\'lmaydi</string>
+    <string name="root_pre_patch_installer_title">Patch rejimini tanlang</string>
+    <string name="root_pre_patch_installer_description">Sizning qurilmangizda root huquqiga ega. Ushbu ilovaning root mount uchun yoki standart o\'rnatish uchun patch ekanligini tanlang</string>
+    <string name="root_pre_patch_installer_mount_title">Root mount rejimi</string>
+    <string name="root_pre_patch_installer_mount_description">Root mount uchun patchlar, keyin APK mos keladigan to\'plam ilovasi ustidan o\'rnatiladi. GmsCore kerak emas</string>
+    <string name="root_mount_module_unmount_warning">Agar siz KernelSU yoki APatch-dan foydalansangiz, root mount bilan oʻrnatilgan ilovlar uchun modulni olib tashlash yoki yashirishni oʻchiring. Aks holda, Morphe uni mount qilingan koʻrsatsa ham, stock ilova hali ham ishlaydi</string>
+    <string name="root_pre_patch_installer_standard_title">Standart oʻrnatish rejimi</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore qoʻllab-quvvati bilan oddiy APK sifatida patchlar. Patchdan keyin sizning oʻrnatish sozlamangiz ishlatiladi</string>
+    <string name="root_pre_patch_installer_hint">Ushbu patch rejimi sozlamalar &gt; tizim &gt; oʻrnatuvchidan mustaqil va patchdan keyin oʻzgartirib boʻlmaydi</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Xatolik buferga kopyalandi</string>
     <string name="patcher_error_log">Xatolik jurnali</string>
@@ -437,6 +438,8 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="patcher_process_exit_message">Patcher jarayoni %s kodi bilan chiqdi</string>
     <string name="install_app_success">O‘rnatish muvaffaqiyatli yakunlandi</string>
     <string name="install_app_fail">Ilovni o‘rnatishda xatolik: %s</string>
+    <string name="uninstall_app_fail">Ilova o\'rnatishda xatolik: %s</string>
+    <string name="uninstall_timeout">O\'rnatish vaqti tugadi</string>
     <string name="save_apk_success">APK saqlab qolindi</string>
     <string name="saved_app_export_failed">Patchlangan ilovni eksport qilishda xatolik</string>
     <string name="saved_app_removed_toast">Saqlangan patchlangan ilov o‘chirildi</string>
@@ -482,10 +485,13 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_parallax_effect_description">Qurilmani aylantirganda fon silliq siljish effekti</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Mavzu</string>
+    <string name="settings_appearance_theme_mode">Mavzu rejim</string>
     <string name="settings_appearance_system">Tizim</string>
     <string name="settings_appearance_light">Yorqin</string>
     <string name="settings_appearance_dark">Qorong\'i</string>
     <string name="settings_appearance_dynamic">Material siz</string>
+    <string name="settings_appearance_monochrome">Monoxrom</string>
+    <string name="settings_appearance_color_style">Rang uslubi</string>
     <string name="settings_appearance_accent_color">Accent rangi</string>
     <string name="settings_appearance_pure_black">Toza qora</string>
     <string name="settings_appearance_pure_black_description">Qora fonni ishlatish</string>
@@ -652,12 +658,13 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Launcher widgetidan qisqa videolar tugmasi yashirilishi</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">O\'rnatuvchi</string>
+    <string name="installer_settings_title">Standart oʻrnatuvchi</string>
     <string name="installer_title">O\'rnatuvchini tanlang</string>
     <string name="installer_internal_description">Android paketni o‘rnatuvchidan foydalanish</string>
     <string name="installer_play_store_description">Tizim o\'rnatuvchisidan foydalanadi va o\'rnatish manbai sifatida Google Play Store ni belgilaydi</string>
     <string name="installer_root_play_store_description">Root bilan jim o\'rnatadi va o\'rnatish manbai sifatida Google Play Store ni belgilaydi</string>
-    <string name="installer_auto_saved_name">Ildiz rejimida o‘rnatuvchi o‘z-o‘zidan saqlab qolindi</string>
-    <string name="installer_auto_saved_description">Qurilmani aylantirganda fon silliq siljish effekti</string>
+    <string name="installer_auto_saved_name">Root mount</string>
+    <string name="installer_auto_saved_description">Root mount rejimida patchlangan ilovalarni mount qiladi. Standart patchlangan APK-lar boshqa oʻrnatuvchidan foydalanadi</string>
     <string name="installer_shizuku_description">Shizuku yoki Sui orqali jim o‘rnatish</string>
     <string name="installer_shizuku_play_store_description">Shizuku yoki Sui orqali jim o\'rnatadi va o\'rnatish manbai sifatida Google Play Store ni belgilaydi</string>
     <string name="installer_option_none">Hech qanday muqobil yo‘l yo‘q</string>
@@ -669,6 +676,7 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="installer_status_shizuku_permission">Morphe dan Shizuku ilovasidan ruxsat bering</string>
     <string name="installer_mount_warning_install">Sizning asosiy o\'rnatuvchingiz ildizga asoslangan o\'rnatuvchi sifatida belgilangan. Ushbu saqlangan ilova mount orqali o\'rnatilmagan</string>
     <string name="mount_version_mismatch_message">Versiyalar mos kelmaydi (%2$s) saqlangan ilova versiyasi (%1$s). Mount mos keladigan saqlangan versiyani, so\'ngra yana urinib ko\'ring</string>
+    <string name="mount_stock_restore_failed_message">Android saqlangan original APK-ni rad etdi. Mos keladigan stock versiyasini oʻrnating, keyin yana Mount qilishga harakat qiling</string>
     <string name="installer_status_shizuku_unsupported">O\'rnatilgan Shizuku versiyasi qo\'llab-quvvatlanmaydi</string>
     <string name="installer_action_open_shizuku">Shizuku ochish</string>
     <string name="installer_hint_generic">O\'rnatish muvaffaqiyatsiz yakunlandi. Yana urinib ko\'ring yoki boshqa o\'rnatuvchiga o\'ting</string>

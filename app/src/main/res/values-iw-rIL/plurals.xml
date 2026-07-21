@@ -36,6 +36,30 @@
         <item quantity="many">%s קבצי APK</item>
         <item quantity="other">%s קבצי APK</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">הותקנו %d אפליקציות</item>
+        <item quantity="two">הותקנו %d אפליקציות</item>
+        <item quantity="many">הותקנו %d אפליקציות</item>
+        <item quantity="other">הותקנו %d אפליקציות</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">הותקנו מחדש %d אפליקציות</item>
+        <item quantity="two">הותקנו מחדש %d אפליקציות</item>
+        <item quantity="many">הותקנו מחדש %d אפליקציות</item>
+        <item quantity="other">הותקנו מחדש %d אפליקציות</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">הוסרו %d אפליקציות</item>
+        <item quantity="two">הוסרו %d אפליקציות</item>
+        <item quantity="many">הוסרו %d אפליקציות</item>
+        <item quantity="other">הוסרו %d אפליקציות</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">דילג על %d אפליקציה</item>
+        <item quantity="two">דילג על %d אפליקציות</item>
+        <item quantity="many">דילג על %d אפליקציות</item>
+        <item quantity="other">דילג על %d אפליקציות</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">הוסר תיקון מיושן אחד מהמבחר השמור</item>
         <item quantity="two">הוסרו שני תיקונים מיושנים מהמבחר השמור</item>

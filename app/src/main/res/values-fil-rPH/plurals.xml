@@ -24,6 +24,22 @@
         <item quantity="one">%s APK file</item>
         <item quantity="other">%s mga APK file</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Na-install ang %d app</item>
+        <item quantity="other">Na-install ang %d apps</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Muling na-install ang %d app</item>
+        <item quantity="other">Muling na-install ang %d apps</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Binura ang %d app</item>
+        <item quantity="other">Binura ang %d apps</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Nilaktawan ang %d app</item>
+        <item quantity="other">Nilaktawan ang %d apps</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Inalis ang %s na outdated patch mula sa nakaimbak na seleksyon</item>
         <item quantity="other">Inalis ang %s na mga outdated patch mula sa nakaimbak na seleksyon</item>

@@ -310,13 +310,6 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Rotläget kräver att den ursprungliga APK-filen är installerad på din enhet innan du modifierar appen</string>
     <string name="root_gmscore_excluded">Tillägget för GmsCore-stöd exkluderas i rotläge</string>
-    <string name="root_pre_patch_installer_title">Välj installationsmetod</string>
-    <string name="root_pre_patch_installer_description">Din enhet har rotåtkomst. Välj hur du vill installera den modifierade appen</string>
-    <string name="root_pre_patch_installer_mount_title">Rotmontering</string>
-    <string name="root_pre_patch_installer_mount_description">Monterar den modifierade APK-filen över standardappen. Inget GmsCore behövs</string>
-    <string name="root_pre_patch_installer_standard_title">Standardinstallation</string>
-    <string name="root_pre_patch_installer_standard_description">Installerar som en separat app med stöd för GmsCore. En installerare kan väljas efter modifieringen</string>
-    <string name="root_pre_patch_installer_hint">Installationsmetoden bestämmer vilka tillägg som ingår och kan inte ändras efter modifieringen</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Felmeddelande kopierades till urklipp</string>
     <string name="patcher_error_log">Fellogg</string>
@@ -624,8 +617,6 @@ Bildernas mått ska vara följande:
     <string name="installer_internal_description">Använder Androids paketinstallerare</string>
     <string name="installer_play_store_description">Använder systemets installerare och anger Google Play Butik som installationskälla</string>
     <string name="installer_root_play_store_description">Installerar tyst med rot och anger Google Play Butik som installationskälla</string>
-    <string name="installer_auto_saved_name">Rootad monteringsinstallerare</string>
-    <string name="installer_auto_saved_description">Monterar den modifierade APK-filen över den installerade appen</string>
     <string name="installer_shizuku_description">Installerar tyst med Shizuku eller Sui</string>
     <string name="installer_shizuku_play_store_description">Installerar tyst genom Shizuku eller Sui och anger Google Play Butik som installationskälla</string>
     <string name="installer_option_none">Ingen alternativ installerare</string>

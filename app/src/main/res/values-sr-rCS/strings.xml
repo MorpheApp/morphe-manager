@@ -332,13 +332,14 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Režim korena zahteva da je originalni APK instaliran na vašem uređaju pre patchanja</string>
     <string name="root_gmscore_excluded">GmsCore zakrpa za podršku je isključena u root modu</string>
-    <string name="root_pre_patch_installer_title">Odaberi način instalacije</string>
-    <string name="root_pre_patch_installer_description">Vaš uređaj ima pristup korenovom direktorijumu. Odaberite način instalacije ispravljenog programa</string>
-    <string name="root_pre_patch_installer_mount_title">Montiranje sistema</string>
-    <string name="root_pre_patch_installer_mount_description">Montira zakrpljeni APK preko fabričke aplikacije. Nije potreban GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">Standardna instalacija</string>
-    <string name="root_pre_patch_installer_standard_description">Instalira se kao zasebna aplikacija uz podršku GmsCore. Mogući je izbor instalera nakon patchovanja</string>
-    <string name="root_pre_patch_installer_hint">Način instalacije određuje koje ispravke su uključene i ne može se promijeniti nakon ispravljanja</string>
+    <string name="root_pre_patch_installer_title">Izaberite režim zakrpe</string>
+    <string name="root_pre_patch_installer_description">Vaš uređaj ima root pristup. Izaberite da li bi ova aplikacija trebalo da bude zakrpljena za root montažu ili standardnu instalaciju</string>
+    <string name="root_pre_patch_installer_mount_title">Režim root montaže</string>
+    <string name="root_pre_patch_installer_mount_description">Zakrpe za root montažu, zatim montira APK preko odgovarajuće fabričke aplikacije. Nije potreban GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Ako koristite KernelSU ili APatch, onemogućite rasklapanje ili sakrivanje modula za aplikacije instalirane sa root pristupom. U suprotnom, fabrička aplikacija može i dalje da radi, čak i kada Morphe pokaže da je montirana</string>
+    <string name="root_pre_patch_installer_standard_title">Standardni način instalacije</string>
+    <string name="root_pre_patch_installer_standard_description">Paketi kao normalni APK uz podršku GmsCore-a. Vaša postavka instalera se koristi nakon pakovanja</string>
+    <string name="root_pre_patch_installer_hint">Ovaj režim pakovanja je odvojen od Podešavanja > Sistem > Instalera i ne može se menjati nakon pakovanja</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Greška kopirana u privremenu memoriju</string>
     <string name="patcher_error_log">Dnevnik grešaka</string>
@@ -438,6 +439,8 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="patcher_process_exit_message">Proces zakrpivanja je završen sa kodom %s</string>
     <string name="install_app_success">Uspešno instalirano</string>
     <string name="install_app_fail">Nije uspelo instaliranje aplikacije: %s</string>
+    <string name="uninstall_app_fail">Nije uspešno deinstalirana aplikacija: %s</string>
+    <string name="uninstall_timeout">Vreme isteka deinstalacije je isteklo</string>
     <string name="save_apk_success">Sačuvana APK datoteka</string>
     <string name="saved_app_export_failed">Nije uspelo izvoz zakrpljene aplikacije</string>
     <string name="saved_app_removed_toast">Uklonjena sačuvana zakrpljena aplikacija</string>
@@ -483,10 +486,13 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_parallax_effect_description">Glatko pomeranje pozadine pri naginjanju uređaja</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
+    <string name="settings_appearance_theme_mode">Начин рада</string>
     <string name="settings_appearance_system">Sistem</string>
     <string name="settings_appearance_light">Svetla</string>
     <string name="settings_appearance_dark">Tamna</string>
     <string name="settings_appearance_dynamic">Dinamičko</string>
+    <string name="settings_appearance_monochrome">Монохроматски</string>
+    <string name="settings_appearance_color_style">Стил боја</string>
     <string name="settings_appearance_accent_color">Naglašena boja</string>
     <string name="settings_appearance_pure_black">Čisto Crna</string>
     <string name="settings_appearance_pure_black_description">Koristi istinski crne pozadine</string>
@@ -637,12 +643,13 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Uklanja Shorts dugme iz widget-a pokretača</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
+    <string name="installer_settings_title">Podrazumevani instalater</string>
     <string name="installer_title">Odaberite instalera</string>
     <string name="installer_internal_description">Koristi Android paketni instalator</string>
     <string name="installer_play_store_description">Koristi sistemski instalator i postavlja Google Play Store kao izvor instalacije</string>
     <string name="installer_root_play_store_description">Tiha instalacija sa root pristupom i postavljanje Google Play Store-a kao izvora instalacije</string>
-    <string name="installer_auto_saved_name">Instalator za montažu sa root-om</string>
-    <string name="installer_auto_saved_description">Instalira nadinstaliranu APK na postojeću aplikaciju</string>
+    <string name="installer_auto_saved_name">Root montaža</string>
+    <string name="installer_auto_saved_description">Montira aplikacije koje su bile pakovane u režimu root montaže. Standardni paketi APK koriste drugi instalater</string>
     <string name="installer_shizuku_description">Instalira se tiho koristeći Shizuku ili Sui</string>
     <string name="installer_shizuku_play_store_description">Tiha instalacija putem Shizuku ili Sui i postavljanje Google Play Store-a kao izvora instalacije</string>
     <string name="installer_option_none">Bez rezervnog rešenja</string>
@@ -654,6 +661,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="installer_status_shizuku_permission">Dajte dozvolu Morphe-u iz Shizuku aplikacije</string>
     <string name="installer_mount_warning_install">Vaš primarni instalera je postavljen na instalera s korijenskim mountom. Ova sačuvana aplikacija nije instalirana koristeći mount</string>
     <string name="mount_version_mismatch_message">Verzija originalne aplikacije (%2$s) ne podudara se sa verzijom patchane aplikacije (%1$s). Mountujte podudaranu verziju originalne aplikacije, a zatim pokušajte ponovo</string>
+    <string name="mount_stock_restore_failed_message">Android je odbacio originalni sačuvani APK. Instalirajte odgovarajuću fabričku verziju, a zatim ponovo pokušajte sa montažom</string>
     <string name="installer_status_shizuku_unsupported">Instalirana verzija Shizuku nije podržana</string>
     <string name="installer_action_open_shizuku">Otvori Shizuku</string>
     <string name="installer_hint_generic">Instalacija nije uspjela. Pokušajte ponovo ili prebacite na različitog instalera</string>

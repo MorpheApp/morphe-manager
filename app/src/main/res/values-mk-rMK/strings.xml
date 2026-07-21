@@ -275,12 +275,6 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Оригиналниот APK не е пронајден. Не можете повторно да закрпите оваа апликација</string>
     <string name="root_gmscore_excluded">Поддршката за GmsCore е исклучена во root режим</string>
-    <string name="root_pre_patch_installer_title">Избери метод за инсталирање</string>
-    <string name="root_pre_patch_installer_description">Вашиот уред има root пристап. Изберете како сакате да ја инсталирате закрпената апликација</string>
-    <string name="root_pre_patch_installer_mount_description">Монтира го закрпениот APK над сток апликацијата. Не е потребна GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">Стандард Инсталирање</string>
-    <string name="root_pre_patch_installer_standard_description">Инсталира тихо преку Shizuku или Sui</string>
-    <string name="root_pre_patch_installer_hint">Методот на инсталација одредува кои закрпи се вклучени и не може да се промени по закрпувањето</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Грешката е копирана во штитката</string>
     <string name="patcher_error_log">Дневник на грешки</string>
@@ -580,8 +574,6 @@ morphe_header_custom_dark.png
     <string name="installer">Инсталер</string>
     <string name="installer_title">Изберете инсталер</string>
     <string name="installer_internal_description">Користи системски инсталер</string>
-    <string name="installer_auto_saved_name">Инсталер за монтирање со рутување</string>
-    <string name="installer_auto_saved_description">Монтира го закрпениот APK над инсталираната апликација</string>
     <string name="installer_shizuku_description">Инсталира тихо користејќи Shizuku или Sui</string>
     <string name="installer_option_none">Без резервна</string>
     <string name="installer_none_description">Не е конфигуриран резервен инсталер</string>

@@ -332,13 +332,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">রুট মোডে আরিজিনাল এপিকে ডিভাইসে ইনস্টল করা থাকতে হবে প্যাচিংয়ের আগে</string>
     <string name="root_gmscore_excluded">রুট মোডে GmsCore সমর্থন প্যাচ বাদ দেওয়া হয়েছে</string>
-    <string name="root_pre_patch_installer_title">স্থাপন পদ্ধতি নির্বাচন করুন</string>
-    <string name="root_pre_patch_installer_description">আপনার ডিভাইসটি রুট অ্যাক্সেস পেয়েছে। প্যাচড অ্যাপ ইনস্টল করার জন্য কিভাবে চান তা নির্বাচন করুন</string>
-    <string name="root_pre_patch_installer_mount_title">রুট মাউন্ট</string>
-    <string name="root_pre_patch_installer_mount_description">স্টক অ্যাপের উপরে প্যাচ করা APK মাউন্ট করে। GmsCore এর প্রয়োজন নেই</string>
-    <string name="root_pre_patch_installer_standard_title">স্ট্যান্ডার্ড ইনস্টল</string>
-    <string name="root_pre_patch_installer_standard_description">GmsCore সমর্থন সহ একটি পৃথক অ্যাপ হিসাবে ইনস্টল করে। প্যাচিং করার পরে একটি ইনস্টলার নির্বাচন করা যেতে পারে।</string>
-    <string name="root_pre_patch_installer_hint">ইনস্টলেশন মেথডটি প্যাচিংয়ের পরে পরিবর্তন করা যাবে না, প্যাচগুলি অন্তর্ভুক্ত করে</string>
+    <string name="root_pre_patch_installer_title">প্যাচ মোড নির্বাচন করুন</string>
+    <string name="root_pre_patch_installer_description">আপনার ডিভাইসে রুট অ্যাক্সেস আছে। এই অ্যাপটি রুট মাউন্ট এর জন্য নাকি স্ট্যান্ডার্ড ইনস্টলের জন্য প্যাচ করা উচিত তা নির্বাচন করুন</string>
+    <string name="root_pre_patch_installer_mount_title">রুট মাউন্ট মোড</string>
+    <string name="root_pre_patch_installer_mount_description">রুটের জন্য প্যাচগুলি, তারপর স্টক অ্যাপের উপরে APK মাউন্ট করে। GmsCore প্রয়োজন নেই</string>
+    <string name="root_mount_module_unmount_warning">আপনি যদি KernelSU বা APatch ব্যবহার করেন, তাহলে রুট মাউন্ট করে ইনস্টল করা অ্যাপের জন্য মডিউল আনমাউন্টিং বা লুকানো নিষ্ক্রিয় করুন। অন্যথায়, Morphe এটিকে মাউন্ট করা দেখালেও স্টক অ্যাপটি চলতে পারে।</string>
+    <string name="root_pre_patch_installer_standard_title">স্ট্যান্ডার্ড ইনস্টল মোড</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore সমর্থন সহ একটি সাধারণ APK হিসাবে প্যাচ। প্যাচিং করার পরে আপনার ইনস্টলার সেটিংস ব্যবহার করা হয়</string>
+    <string name="root_pre_patch_installer_hint">এই প্যাচ মোডটি সেটিংস > সিস্টেম > ইনস্টলার থেকে আলাদা এবং প্যাচিং করার পরে পরিবর্তন করা যাবে না।</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ত্রুটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
     <string name="patcher_error_log">ত্রুটি রিপোর্ট</string>
@@ -438,6 +439,8 @@
     <string name="patcher_process_exit_message">প্যাচার প্রক্রিয়া %s কোড দিয়ে সম্পন্ন হয়েছে</string>
     <string name="install_app_success">সাফল্য়ের সাথে ইনস্টল করা হয়েছে</string>
     <string name="install_app_fail">অ্যাপ ইনস্টল করতে ব্যর্থ: %s</string>
+    <string name="uninstall_app_fail">অ্যাপ আনইনস্টল করতে ব্যর্থ: %s</string>
+    <string name="uninstall_timeout">আনইনস্টল করার সময়সীমা উত্তীর্ণ হয়েছে</string>
     <string name="save_apk_success">APK সেভ করা হয়েছে</string>
     <string name="saved_app_export_failed">প্যাচ করা অ্যাপ এক্সপোর্ট করতে ব্যর্থ</string>
     <string name="saved_app_removed_toast">সেভ করা প্যাচ করা অ্যাপ সরানো হয়েছে</string>
@@ -483,10 +486,13 @@
     <string name="settings_appearance_parallax_effect_description">ডিভাইসকে কাঁটিলে পটভূমি পরিবর্তনের সাবলীলতা</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">সিস্টেম</string>
+    <string name="settings_appearance_theme_mode">বিষয়বস্তুর ধরণ</string>
     <string name="settings_appearance_system">লাইট</string>
     <string name="settings_appearance_light">কালো</string>
     <string name="settings_appearance_dark">কালো</string>
     <string name="settings_appearance_dynamic">এক্সেন্ট কালার</string>
+    <string name="settings_appearance_monochrome">একবর্ণ</string>
+    <string name="settings_appearance_color_style">রঙের ধরণ</string>
     <string name="settings_appearance_accent_color">অ্যাকসেন্ট রঙ</string>
     <string name="settings_appearance_pure_black">পুরো কালো</string>
     <string name="settings_appearance_pure_black_description">ব্যবহার করে খাঁটি কালো ব্যাকগ্রাউন্ড।</string>
@@ -642,12 +648,13 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">লঞ্চার উইজেট থেকে শর্টস বোতাম সরিয়ে দেয়।</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">పరిష్కరణ</string>
+    <string name="installer_settings_title">ডিফল্ট ইনস্টলার</string>
     <string name="installer_title">ইনস্টলার নির্বাচন করুন</string>
     <string name="installer_internal_description">অ্যান্ড্রয়েড প্যাকেজ ইনস্টলার ব্যবহার করে।</string>
     <string name="installer_play_store_description">সিস্টেম ইনস্টলার ব্যবহার করে এবং Google Play Store-কে ইনস্টল উৎস হিসাবে সেট করে</string>
     <string name="installer_root_play_store_description">রুট ব্যবহার করে নিঃশব্দে ইনস্টল করে এবং গুগল প্লে স্টোরকে ইনস্টল উৎস হিসেবে সেট করে</string>
-    <string name="installer_auto_saved_name">রুট করা মাউন্ট ইনস্টলার</string>
-    <string name="installer_auto_saved_description">এপিকে (APK) প্যাচ করা ইনস্টল করা অ্যাপের উপরে স্থাপন করা হয়</string>
+    <string name="installer_auto_saved_name">রুট মাউন্ট</string>
+    <string name="installer_auto_saved_description">রুট মাউন্ট মোডে প্যাচ করা অ্যাপ্লিকেশনগুলো মাউন্ট করে। স্ট্যান্ডার্ড প্যাচ করা APKs অন্য ইনস্টলার ব্যবহার করে</string>
     <string name="installer_shizuku_description">Shizuku বা Sui ব্যবহার করে নিঃশব্দে ইনস্টল করে।</string>
     <string name="installer_shizuku_play_store_description">শিজুকু অথবা সুই এর মাধ্যমে নিঃশব্দে ইনস্টল করে এবং গুগল প্লে স্টোরকে ইনস্টল উৎস হিসেবে সেট করে</string>
     <string name="installer_option_none">কোন ফলব্যাক নেই</string>
@@ -659,6 +666,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_status_shizuku_permission">Morphe-কে Shizuku অ্যাপ থেকে অনুমতি দিন</string>
     <string name="installer_mount_warning_install">তোমার প্রধান ইনস্টলার রুটেড মাউন্ট ইনস্টলার সেট করা আছে. এই সেভড অ্যাপটি মাউন্ট ব্যবহার করে ইনস্টল করা হয়নি</string>
     <string name="mount_version_mismatch_message">স্টক অ্যাপ ভার্সন (%2$s) প্যাচড অ্যাপ ভার্সন (%1$s) এর সাথে ম্যাচ করে না. ম্যাচিং স্টক ভার্সন মাউন্ট কর এবং আবার চেষ্টা করুন</string>
+    <string name="mount_stock_restore_failed_message">অ্যান্ড্রয়েড সংরক্ষিত মূল APK প্রত্যাখ্যান করেছে। ম্যাচিং স্টক সংস্করণ ইনস্টল করুন, তারপর আবার মাউন্ট করার চেষ্টা করুন।</string>
     <string name="installer_status_shizuku_unsupported">ইনস্টল করা শিজুকু ভার্সন সমর্থিত নয়</string>
     <string name="installer_action_open_shizuku">Shizuku খুলুন</string>
     <string name="installer_hint_generic">ইনস্টলেশন ব্যর্থ হয়েছে. আবার চেষ্টা করুন বা ভিন্ন ইনস্টলার ব্যবহার করুন</string>

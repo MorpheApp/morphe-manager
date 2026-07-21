@@ -18,6 +18,18 @@
     <plurals name="settings_system_apks_count">
         <item quantity="other">%s 個 APK 檔案</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="other">已安裝 %d 個應用程式</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="other">已重新安裝 %d 個應用程式</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="other">已解除安裝 %d 個應用程式</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="other">已略過 %d 個應用程式</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="other">已從儲存的選取項目移除 %s 項過時修補程式</item>
     </plurals>

@@ -232,10 +232,6 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">دۆخی ڕۆت پێویستی بە دامەزراندنی APK ی ڕەسەن هەیە لەسەر ئامێرەکەت پێش پینەکردن</string>
     <string name="root_gmscore_excluded">پاچی پشتیوانی GmsCore لە دۆخی ڕۆت\'دا بەدەرکراوە</string>
-    <string name="root_pre_patch_installer_title">شێوازی دامەزراندن هەڵبژێرە</string>
-    <string name="root_pre_patch_installer_description">ئامێرەکەت دەستگەیشتنی ڕەگی هەیە. هەڵبژێرە چۆن دەتەوێت کاربەرنامە پینەکراوەکە دابمەزرێنیت</string>
-    <string name="root_pre_patch_installer_standard_title">دامەزراندنی پێوانەیی</string>
-    <string name="root_pre_patch_installer_hint">شێوازی دامەزراندن دیاری دەکات کام پینەی لەخۆگرتووە و ناتوانرێت بگۆڕدرێت پاش پینەکردن</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">هەڵە کۆپی کرا بۆ ڕوونووسگە</string>
     <string name="patcher_error_log">تۆماری هەڵە</string>

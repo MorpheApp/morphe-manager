@@ -36,6 +36,30 @@
         <item quantity="many">%s APK файлов</item>
         <item quantity="other">%s APK файлов</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Установлено %d приложений</item>
+        <item quantity="few">Установлено %d приложения</item>
+        <item quantity="many">Установлено %d приложений</item>
+        <item quantity="other">Установлено %d приложений</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Переустановлено %d приложений</item>
+        <item quantity="few">Переустановлено %d приложения</item>
+        <item quantity="many">Переустановлено %d приложений</item>
+        <item quantity="other">Переустановлено %d приложений</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Удалено %d приложений</item>
+        <item quantity="few">Удалено %d приложения</item>
+        <item quantity="many">Удалено %d приложений</item>
+        <item quantity="other">Удалено %d приложений</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Пропущено %d приложений</item>
+        <item quantity="few">Пропущено %d приложения</item>
+        <item quantity="many">Пропущено %d приложений</item>
+        <item quantity="other">Пропущено %d приложений</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Удалено %s устаревший патч из сохраненного выбора</item>
         <item quantity="few">Удалено %s устаревшие патчи из сохраненного выбора</item>

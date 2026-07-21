@@ -333,13 +333,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">מוד רוט דורש את APK המקורי להתקין על מכשיר שלך לפני השחזור</string>
     <string name="root_gmscore_excluded">תיקון תמיכה ב-GmsCore אינו נכלל במצב Root</string>
-    <string name="root_pre_patch_installer_title">בחר את שיטת התקנה</string>
-    <string name="root_pre_patch_installer_description">החלק של המכשיר שלך הוא שור. בחר כיצד תרצה להתקין את האפליקציה הפגומה</string>
-    <string name="root_pre_patch_installer_mount_title">הרכבת שורש</string>
-    <string name="root_pre_patch_installer_mount_description">מטען את קובץ ה-APK הלא-מובנה מעל האפליקציה המקורית. אין צורך ב-GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">התקנה סטנדרטית</string>
-    <string name="root_pre_patch_installer_standard_description">מותקן כאפליקציה נפרדת עם תמיכת GmsCore. ניתן לבחור מתקין לאחר תיקון</string>
-    <string name="root_pre_patch_installer_hint">שיטת ההתקנה קובעת את הפגמים הכוללים וכאלה לא ניתן לשנות לאחר הפגמה</string>
+    <string name="root_pre_patch_installer_title">בחר מצב תיקון</string>
+    <string name="root_pre_patch_installer_description">למכשיר שלך יש גישת רוט. בחר אם האפליקציה צריכה להיות מטופלת עבור התקנת רוט או התקנה רגילה</string>
+    <string name="root_pre_patch_installer_mount_title">מצב התקנת רוט</string>
+    <string name="root_pre_patch_installer_mount_description">תיקונים להתקנת רוט, ואז מתקין את ה-APK על גבי האפליקציה המקורית המתאימה. אין צורך ב-GmsCore</string>
+    <string name="root_mount_module_unmount_warning">אם אתה משתמש ב-KernelSU או ב-APatch, השבת את הסרת המודול או הסתרתו עבור אפליקציות שהותקנו עם הרכבת root. אחרת, ייתכן שהאפליקציה המקורית עדיין תפעל גם כאשר Morphe מציג אותה כמוּרכבת.</string>
+    <string name="root_pre_patch_installer_standard_title">מצב התקנה רגיל</string>
+    <string name="root_pre_patch_installer_standard_description">התקנת תיקונים כקובץ APK רגיל עם תמיכה ב-GmsCore. הגדרת המתקין שלך משמשת לאחר תיקון</string>
+    <string name="root_pre_patch_installer_hint">מצב תיקון זה נפרד מ-Settings > System > Installer ואינו יכול להיות שונה לאחר תיקון</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">השגיאה הועתקה ללוח</string>
     <string name="patcher_error_log">יומן שגיאות</string>
@@ -439,6 +440,8 @@
     <string name="patcher_process_exit_message">פועל הפייסר יצא עם קוד %s</string>
     <string name="install_app_success">הותקן בהצלחה</string>
     <string name="install_app_fail">נכשל להתקין את האפליקציה: %s</string>
+    <string name="uninstall_app_fail">נכשלה הסרת האפליקציה: %s</string>
+    <string name="uninstall_timeout">ההתקנה בוטלה עקב פקיעת זמן</string>
     <string name="save_apk_success">APK נשמר</string>
     <string name="saved_app_export_failed">כשל בייצוא האפליקציה המתוקנת</string>
     <string name="saved_app_removed_toast">אפליקציה מתוקנת שנשמרה הוסרה</string>
@@ -484,10 +487,13 @@
     <string name="settings_appearance_parallax_effect_description">הדגמה חלקה של רקע בעת טיפוס של המכשיר</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">גרסה</string>
+    <string name="settings_appearance_theme_mode">מצב עיצוב</string>
     <string name="settings_appearance_system">מערכת</string>
     <string name="settings_appearance_light">אור</string>
     <string name="settings_appearance_dark">שחור</string>
     <string name="settings_appearance_dynamic">Morphe</string>
+    <string name="settings_appearance_monochrome">מונוכרום</string>
+    <string name="settings_appearance_color_style">סגנון צבע</string>
     <string name="settings_appearance_accent_color">צבע מוביל</string>
     <string name="settings_appearance_pure_black">שחור טהור</string>
     <string name="settings_appearance_pure_black_description">משתמש ברקעים שחורים אמיתיים</string>
@@ -638,12 +644,13 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">מסיר את כפתור Shorts מווידג\'ט המשגר</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Установщик</string>
+    <string name="installer_settings_title">מתקין ברירת מחדל</string>
     <string name="installer_title">בחר התקן</string>
     <string name="installer_internal_description">משתמש במתקין החבילות של Android</string>
     <string name="installer_play_store_description">משתמש במתקין המערכת ומגדיר את חנות Google Play כמקור ההתקנה</string>
     <string name="installer_root_play_store_description">מתקין בשקט עם הרשאות רוט ומגדיר את חנות Google Play כמקור ההתקנה</string>
-    <string name="installer_auto_saved_name">מתקין מאונטר עם רוט</string>
-    <string name="installer_auto_saved_description">העלה את APK המותקן על האפליקציה המותקנת</string>
+    <string name="installer_auto_saved_name">הרכבת root</string>
+    <string name="installer_auto_saved_description">מרכיב אפליקציות שהותקנו במצב הרכבת root. קבצי APK מתוקנים רגילים משתמשים במתקין אחר</string>
     <string name="installer_shizuku_description">מתקין בשקט באמצעות Shizuku או Sui</string>
     <string name="installer_shizuku_play_store_description">מתקין בשקט דרך Shizuku או Sui ומגדיר את חנות Google Play כמקור ההתקנה</string>
     <string name="installer_option_none">אין חלופה</string>
@@ -655,6 +662,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_status_shizuku_permission">אפשר למורפי הרשאה מאפליקציית Shizuku</string>
     <string name="installer_mount_warning_install">התקן שלך הוא מותקן על התקן שורש. אפליקציה זו לא התקינה באמצעות מותקן</string>
     <string name="mount_version_mismatch_message">גרסת אפליקציה מקורית (%2$s) אינה תואמת לגרסת אפליקציה שחורה (%1$s). מותקן את הגרסה המקורית התואמת, ואז נסה שוב</string>
+    <string name="mount_stock_restore_failed_message">Android דחה את קובץ ה-APK המקורי השמור. התקן את הגרסה המקורית התואמת, ואז נסה להרכיב שוב</string>
     <string name="installer_status_shizuku_unsupported">גרסת שיזוקה המותקנת אינה נתמכת</string>
     <string name="installer_action_open_shizuku">פתח את Shizuku</string>
     <string name="installer_hint_generic">ההתקנה נכשלה. נסה שוב או שנה להתקן אחר</string>

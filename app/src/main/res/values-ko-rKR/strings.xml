@@ -133,7 +133,7 @@
     <string name="sources_dialog_view_any_version">모든 버전</string>
     <string name="sources_dialog_view_any_package">모든 패키지</string>
     <string name="sources_dialog_add_source">패치 소스 추가</string>
-    <string name="sources_dialog_delete_confirm_message">\'%s\' 소스를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.</string>
+    <string name="sources_dialog_delete_confirm_message">\'%s\' 소스를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다</string>
     <string name="sources_dialog_remote">원격</string>
     <string name="sources_dialog_remote_url">소스 URL</string>
     <string name="sources_dialog_remote_url_formats_title">예시:</string>
@@ -201,7 +201,7 @@
     <string name="home_invalid_apk_unreadable">파일을 읽을 수 없습니다. \'외부 저장소\'가 배터리 제한되어 있는지 확인하세요</string>
     <string name="home_invalid_apk_not_an_apk">선택된 파일이 유효한 APK가 아닙니다</string>
     <string name="home_invalid_apk_io_error">파일을 열 수 없습니다. 다시 시도하세요</string>
-    <string name="home_external_apk_expert_mode_required">이 기능은 전문가 모드에서만 사용할 수 있습니다.</string>
+    <string name="home_external_apk_expert_mode_required">이 기능은 전문가 모드에서만 사용할 수 있습니다</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">전문가 모드</string>
     <string name="expert_mode_search">패치 검색</string>
@@ -332,13 +332,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">루트 모드에서는 패치 전에 원본 APK가 기기에 설치되어 있어야 합니다</string>
     <string name="root_gmscore_excluded">루트 모드에서는 \'GmsCore support\' 패치가 제외됩니다</string>
-    <string name="root_pre_patch_installer_title">설치 방법 선택</string>
-    <string name="root_pre_patch_installer_description">기기에 루트 접근 권한이 있습니다. 패치된 앱을 설치하는 방법을 선택하세요</string>
-    <string name="root_pre_patch_installer_mount_title">루트 마운트</string>
-    <string name="root_pre_patch_installer_mount_description">순정 앱 위에 패치된 APK를 마운트합니다. GmsCore가 필요하지 않습니다</string>
-    <string name="root_pre_patch_installer_standard_title">표준 설치</string>
-    <string name="root_pre_patch_installer_standard_description">GmsCore를 지원하는 별도 앱으로 설치합니다. 패치 후에 설치 프로그램을 선택할 수 있습니다</string>
-    <string name="root_pre_patch_installer_hint">설치 방법에 따라 포함되는 패치가 결정되며 패치 후에는 변경할 수 없습니다</string>
+    <string name="root_pre_patch_installer_title">패치 모드 선택</string>
+    <string name="root_pre_patch_installer_description">이 기기는 루팅되어 있습니다. 이 앱을 루트 마운트 모드로 설치할지, 일반 설치 모드로 설치할지 선택하세요</string>
+    <string name="root_pre_patch_installer_mount_title">루트 마운트 모드</string>
+    <string name="root_pre_patch_installer_mount_description">루트 마운트 모드로 패치한 후에 해당 APK를 동일한 순정 앱 위에 마운트합니다. GmsCore는 필요하지 않습니다</string>
+    <string name="root_mount_module_unmount_warning">KernelSU 또는 APatch를 사용하는 경우에는 루트 마운트 모드로 설치한 앱에 대해 모듈 언마운트 또는 숨기기 기능을 비활성화하세요. 그렇지 않으면 Morphe에서는 마운트된 것으로 표시되더라도 실제로는 순정 앱이 계속 실행될 수 있습니다</string>
+    <string name="root_pre_patch_installer_standard_title">일반 설치 모드</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore를 지원하는 일반 APK로 패치합니다. 패치가 완료된 후에는 현재 설정된 설치 프로그램 설정을 사용하여 설치됩니다</string>
+    <string name="root_pre_patch_installer_hint">이 패치 모드는 \'설정 &gt; 시스템 &gt; 설치 프로그램\' 설정과는 별개이며, 패치가 완료된 후에는 변경할 수 없습니다</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">오류 정보를 클립보드에 복사하였습니다</string>
     <string name="patcher_error_log">오류 로그</string>
@@ -363,7 +364,7 @@
     <string name="patcher_conflict_subtitle">기존 버전을 제거해야 합니다</string>
     <string name="patcher_conflict_hint">패치된 앱은 설치된 버전과 다른 인증서를 사용합니다. 제거하면 앱 데이터가 모두 삭제됩니다</string>
     <string name="patcher_installed_conflict_title">제거가 필요합니다</string>
-    <string name="patcher_installed_conflict_body">"Morphe는 자체 인증서로 패치된 앱에 서명하므로 원본 앱과 인증서가 다릅니다. Android에서는 기존 버전을 제거해야 패치된 앱을 설치할 수 있습니다.
+    <string name="patcher_installed_conflict_body">"Morphe는 자체 인증서로 패치된 앱에 서명하므로 원본 앱과 인증서가 다릅니다. Android에서는 기존 버전을 제거해야 패치된 앱을 설치할 수 있습니다
 
 앱을 제거하면 모든 앱 데이터가 영구적으로 삭제됩니다"</string>
     <string name="patcher_install_error_title">설치 오류</string>
@@ -438,6 +439,8 @@
     <string name="patcher_process_exit_message">패처 프로세스를 코드 \'%s\'로 종료하였습니다</string>
     <string name="install_app_success">성공적으로 설치하였습니다</string>
     <string name="install_app_fail">앱을 설치할 수 없습니다: %s</string>
+    <string name="uninstall_app_fail">앱을 제거할 수 없습니다: %s</string>
+    <string name="uninstall_timeout">제거 시간이 초과되었습니다</string>
     <string name="save_apk_success">APK를 저장하였습니다</string>
     <string name="saved_app_export_failed">패치된 앱을 내보낼 수 없습니다</string>
     <string name="saved_app_removed_toast">저장된 패치된 앱을 제거하였습니다</string>
@@ -483,10 +486,13 @@
     <string name="settings_appearance_parallax_effect_description">기기를 기울이면 배경이 부드럽게 이동합니다</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">테마</string>
+    <string name="settings_appearance_theme_mode">테마 모드</string>
     <string name="settings_appearance_system">시스템</string>
     <string name="settings_appearance_light">밝은</string>
     <string name="settings_appearance_dark">어두운</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">흑백</string>
+    <string name="settings_appearance_color_style">색상 스타일</string>
     <string name="settings_appearance_accent_color">강조 색상</string>
     <string name="settings_appearance_pure_black">순수 검정</string>
     <string name="settings_appearance_pure_black_description">순수 검정 배경을 사용합니다</string>
@@ -651,14 +657,15 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">런처 위젯에서 Shorts 버튼을 제거합니다</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">설치 프로그램</string>
+    <string name="installer_settings_title">기본 설치 프로그램</string>
     <string name="installer_title">설치 프로그램 선택</string>
     <string name="installer_internal_description">Android 패키지 설치 프로그램을 사용합니다</string>
-    <string name="installer_play_store_description">시스템 설치 관리자를 사용하고 Google Play 스토어를 설치 출처로 설정합니다</string>
-    <string name="installer_root_play_store_description">루트 권한으로 자듕으로 설치하고 Google Play 스토어를 설치 출처로 설정합니다</string>
-    <string name="installer_auto_saved_name">루팅된 마운트 설치 프로그램</string>
-    <string name="installer_auto_saved_description">설치된 앱 위에 패치된 APK를 마운트합니다</string>
+    <string name="installer_play_store_description">시스템 설치 관리자를 사용하고 Google Play 스토어를 앱 설치 출처로 설정합니다</string>
+    <string name="installer_root_play_store_description">루트 권한으로 자동으로 설치하고 Google Play 스토어를 앱 설치 출처로 설정합니다</string>
+    <string name="installer_auto_saved_name">루트 마운트</string>
+    <string name="installer_auto_saved_description">루트 마운트 모드로 패치된 앱을 마운트합니다. 일반 APK 방식으로 패치된 앱은 다른 설치 프로그램을 사용합니다</string>
     <string name="installer_shizuku_description">Shizuku 또는 Sui를 사용하여 자동으로 설치합니다</string>
-    <string name="installer_shizuku_play_store_description">Shizuku 또는 Sui를 통해 자동으로 설치하고 Google Play 스토어를 설치 출처로 설정합니다</string>
+    <string name="installer_shizuku_play_store_description">Shizuku 또는 Sui를 통해 자동으로 설치하고 Google Play 스토어를 앱 설치 출처로 설정합니다</string>
     <string name="installer_option_none">대체 없음</string>
     <string name="installer_none_description">설정된 대체 설치 프로그램이 없습니다</string>
     <string name="installer_status_requires_root">루트 접근 권한이 필요합니다</string>
@@ -668,6 +675,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_permission">Shizuku 앱에서 Morphe에 권한을 부여하세요</string>
     <string name="installer_mount_warning_install">기본 설치 프로그램이 루팅된 마운트 설치 프로그램으로 설정되어 있습니다. 이 저장된 앱은 마운트를 사용하여 설치되지 않았습니다</string>
     <string name="mount_version_mismatch_message">순정 앱 버전(%2$s)이 패치된 앱 버전(%1$s)과 일치하지 않습니다. 일치하는 순정 버전을 마운트한 다음에 다시 시도하세요</string>
+    <string name="mount_stock_restore_failed_message">Android에서 저장된 원본 APK를 거부하였습니다. 해당 버전과 일치하는 순정 앱을 설치한 후에 다시 마운트를 시도하세요</string>
     <string name="installer_status_shizuku_unsupported">설치된 Shizuku 버전은 지원되지 않습니다</string>
     <string name="installer_action_open_shizuku">Shizuku 열기</string>
     <string name="installer_hint_generic">설치할 수 없습니다. 다시 시도하거나 다른 설치 프로그램으로 변경하세요</string>
@@ -676,15 +684,15 @@ morphe_header_custom_dark.png
     <string name="installer_external_timeout">\'%s\'에서 설치를 확인하지 못하였습니다. 다른 앱을 확인하고 다시 시도하세요</string>
     <string name="installer_external_success">\'%s\'이 설치 성공을 보고하였습니다</string>
     <string name="installer_unavailable_title">\'%s\'를 사용할 수 없음</string>
-    <string name="installer_unavailable_message">선택된 설치 프로그램(%s)을 현재 사용할 수 없습니다. 문제를 해결하고 다시 시도하거나 표준 설치 프로그램을 사용해 보세요</string>
+    <string name="installer_unavailable_message">선택된 설치 프로그램(%s)을 현재 사용할 수 없습니다. 문제를 해결하고 다시 시도하거나 일반 설치 프로그램을 사용해 보세요</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku가 실행 중이고, 이 앱에 권한이 부여되었는지 확인하세요</string>
-    <string name="installer_use_standard">표준을 사용합니다</string>
+    <string name="installer_use_standard">일반을 사용합니다</string>
     <string name="installer_play_store_warning_title">Play 스토어로 설치하시겠습니까?</string>
     <string name="installer_play_store_warning_message">패치된 앱은 Google Play 스토어에서 설치된 것으로 기록됩니다. 이를 통해 Android Auto와 같은 서비스에서 해당 앱을 Play 스토어에서 설치된 앱으로 인식하는 데 도움이 될 수 있지만, 모든 앱이나 기기에서 이를 보장하는 것은 아닙니다. 동작 방식은 Android 버전, ROM, 기기 제조사, 그리고 앱별 검증 방식에 따라 달라질 수 있습니다</string>
     <string name="installer_play_store_warning_risk">Play 스토어에서 패치된 앱의 업데이트를 제공할 수 있습니다. 해당 업데이트를 설치하면 패치된 APK가 원래 버전으로 덮어쓰여지고 패치가 제거됩니다. 업데이트하라는 메시지가 표시되면 앱의 Play 스토어 페이지에서 점 3개 메뉴를 탭한 후 \'자동 업데이트 사용\'을 선택 해제하세요</string>
     <string name="installer_play_store_warning_continue">알겠습니다. 계속하겠습니다</string>
     <string name="installer_play_store_mode">Play 스토어로 설치</string>
-    <string name="installer_play_store_mode_description">이 설치 방법의 설치 출처로 Google Play 스토어를 기록합니다</string>
+    <string name="installer_play_store_mode_description">이 설치 방법의 앱 설치 출처로 Google Play 스토어를 기록합니다</string>
     <string name="settings_prompt_installer_on_install">설치 프로그램 선택 프롬프트</string>
     <string name="settings_prompt_installer_on_install_description">패치된 앱을 설치할 때마다 설치 프로그램 선택 다이얼로그를 표시합니다</string>
     <string name="settings_auto_install_with_shizuku">패치 후 자동 설치</string>
@@ -729,19 +737,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">%s MB 제한</string>
     <string name="settings_system_process_runtime_disabled_description">설정하려면 탭하세요</string>
     <string name="settings_system_process_runtime_description_not_available">이 기능은 Android 11 이상이 필요합니다</string>
-    <string name="settings_system_patcher_completion_sound">완료음</string>
-    <string name="settings_system_patcher_completion_sound_description">패치가 완료되면 성공 또는 실패에 대한 고유한 톤을 재생합니다</string>
+    <string name="settings_system_patcher_completion_sound">완료 알림음</string>
+    <string name="settings_system_patcher_completion_sound_description">패치가 완료되면 성공 또는 실패 여부에 따라 서로 다른 알림음을 재생합니다</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">알림</string>
-    <string name="settings_system_notifications_description">백그라운드 알림 및 완료음을 설정합니다</string>
-    <string name="settings_system_notifications_success_sound">성공음</string>
-    <string name="settings_system_notifications_error_sound">실패음</string>
+    <string name="settings_system_notifications_description">백그라운드 알림 및 완료 알림음을 설정합니다</string>
+    <string name="settings_system_notifications_success_sound">성공 알림음</string>
+    <string name="settings_system_notifications_error_sound">실패 알림음</string>
     <string name="settings_system_notifications_sound_default">기본값</string>
-    <string name="settings_system_notifications_sound_picker_title">소리 선택</string>
-    <string name="settings_system_notifications_sound_pick_ringtone">시스템 음향</string>
+    <string name="settings_system_notifications_sound_picker_title">알림음 선택</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">시스템 알림음</string>
     <string name="settings_system_notifications_sound_pick_file">파일에서 선택</string>
     <string name="settings_system_notifications_sound_reset">기본값으로 초기화</string>
-    <string name="settings_system_notifications_ringtone_picker_title">벨소리 선택</string>
+    <string name="settings_system_notifications_ringtone_picker_title">알림음 선택</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">가져오기 &amp; 내보내기</string>
     <string name="settings_system_keystore">키스토어</string>
@@ -781,7 +789,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">파일 &amp; 저장소</string>
     <string name="settings_system_apks_size">전체 용량: %s</string>
-    <string name="settings_system_apks_delete_all_confirm">저장된 APK 파일을 영구적으로 삭제합니다.</string>
+    <string name="settings_system_apks_delete_all_confirm">저장된 APK 파일을 영구적으로 삭제합니다</string>
     <string name="settings_system_apks_delete_selected_title">선택된 APK를 삭제하시겠습니까?</string>
     <string name="settings_system_apks_delete_selected_confirm">선택된 APK 파일을 영구적으로 삭제합니다</string>
     <string name="settings_system_apks_deleted_all">APK를 성공적으로 삭제하였습니다</string>
@@ -992,7 +1000,7 @@ morphe_header_custom_dark.png
     <string name="failed_to_check_updates">업데이트를 확인할 수 없습니다: %s</string>
     <string name="failed_to_download_update">업데이트를 다운로드할 수 없습니다: %s</string>
     <string name="resume_download">다운로드 재개</string>
-    <string name="download_confirmation_metered">"현재 모바일 데이터를 사용하고 있습니다. 통신사 데이터 요금이 부과될 수 있습니다.
+    <string name="download_confirmation_metered">"현재 모바일 데이터를 사용하고 있습니다. 통신사 데이터 요금이 부과될 수 있습니다
 
 그래도 계속하시겠습니까?"</string>
     <string name="download_update_confirmation">업데이트를 다운로드하시겠습니까?</string>

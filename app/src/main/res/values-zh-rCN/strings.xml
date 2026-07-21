@@ -332,13 +332,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root 模式需要先将原始 APK 安装到您的设备上再进行修补</string>
     <string name="root_gmscore_excluded">Root模式下已排除GmsCore支持补丁</string>
-    <string name="root_pre_patch_installer_title">选择安装方法</string>
-    <string name="root_pre_patch_installer_description">您的设备已获取 root 访问权限。请选择完成修补后安装应用的方式</string>
+    <string name="root_pre_patch_installer_title">选择补丁模式</string>
+    <string name="root_pre_patch_installer_description">您的设备已获取 root 权限。请选择是否为此应用应用 root 挂载补丁或标准安装</string>
     <string name="root_pre_patch_installer_mount_title">Root 挂载模式</string>
-    <string name="root_pre_patch_installer_mount_description">将修补后的APK加载到原生应用之上。无需GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">标准安装</string>
-    <string name="root_pre_patch_installer_standard_description">作为支持 GmsCore 的独立应用安装。修补后可以选择安装程序</string>
-    <string name="root_pre_patch_installer_hint">安装方法确定哪些修补程序包含，修补后无法更改</string>
+    <string name="root_pre_patch_installer_mount_description">针对 root 挂载的补丁，然后将 APK 覆盖到匹配的库存应用上。无需 GmsCore</string>
+    <string name="root_mount_module_unmount_warning">如果您使用 KernelSU 或 APatch，请禁用模块卸载或隐藏，以防止针对 root 挂载安装的应用被卸载或隐藏。否则，即使 Morphe 显示应用已挂载，系统应用也可能继续运行。</string>
+    <string name="root_pre_patch_installer_standard_title">标准安装模式</string>
+    <string name="root_pre_patch_installer_standard_description">将补丁作为带有 GmsCore 支持的普通 APK 安装。应用补丁后将使用您的安装程序设置。</string>
+    <string name="root_pre_patch_installer_hint">此补丁模式与“设置 > 系统 > 安装程序”中的设置分开，并且在应用补丁后无法更改。</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">错误已复制到剪贴板</string>
     <string name="patcher_error_log">错误日志</string>
@@ -438,6 +439,8 @@
     <string name="patcher_process_exit_message">修補程式程序結束，傳回代碼 %s</string>
     <string name="install_app_success">安装成功</string>
     <string name="install_app_fail">应用安装失败：%s</string>
+    <string name="uninstall_app_fail">卸载应用失败：%s</string>
+    <string name="uninstall_timeout">卸载超时</string>
     <string name="save_apk_success">APK 已保存</string>
     <string name="saved_app_export_failed">导出修补的应用失败</string>
     <string name="saved_app_removed_toast">已移除保存的修补应用</string>
@@ -483,10 +486,13 @@
     <string name="settings_appearance_parallax_effect_description">倾斜设备时平滑背景过渡</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">主题</string>
+    <string name="settings_appearance_theme_mode">主题模式</string>
     <string name="settings_appearance_system">系统</string>
     <string name="settings_appearance_light">浅色</string>
     <string name="settings_appearance_dark">深色</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">单色</string>
+    <string name="settings_appearance_color_style">颜色样式</string>
     <string name="settings_appearance_accent_color">强调色</string>
     <string name="settings_appearance_pure_black">纯黑</string>
     <string name="settings_appearance_pure_black_description">使用真正的黑色背景</string>
@@ -653,12 +659,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">从启动器小部件中删除 Shorts 按钮</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">安装程序</string>
+    <string name="installer_settings_title">默认安装程序</string>
     <string name="installer_title">选择安装程序</string>
     <string name="installer_internal_description">使用 Android 包安装程序</string>
     <string name="installer_play_store_description">使用系统安装程序，并将Google Play商店设置为安装来源</string>
     <string name="installer_root_play_store_description">以 root 权限静默安装，并将 Google Play Store 设置为安装来源</string>
-    <string name="installer_auto_saved_name">Rooted 挂载安装器</string>
-    <string name="installer_auto_saved_description">将修补后的 APK 安装在已安装的应用程序上</string>
+    <string name="installer_auto_saved_name">Root 挂载模式</string>
+    <string name="installer_auto_saved_description">挂载以 Root 挂载模式打补丁的应用。标准打补丁的 APK 使用另一个安装程序。</string>
     <string name="installer_shizuku_description">使用 Shizuku 或 Sui 静默安装。</string>
     <string name="installer_shizuku_play_store_description">通过 Shizuku 或 Sui 静默安装，并将 Google Play Store 设置为安装来源</string>
     <string name="installer_option_none">无备用</string>
@@ -670,6 +677,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_permission">授予 Morphe 从 Shizuku 应用权限</string>
     <string name="installer_mount_warning_install">您的主要安装程序设置为根挂载安装程序。此保存的应用未使用挂载安装</string>
     <string name="mount_version_mismatch_message">原始应用版本（%2$s）与修补后的应用版本（%1$s）不匹配。挂载匹配的原始版本，然后重试</string>
+    <string name="mount_stock_restore_failed_message">Android 拒绝了保存的原始 APK。请安装匹配的系统版本，然后重试挂载。</string>
     <string name="installer_status_shizuku_unsupported">已安装的 Shizuku 版本不受支持</string>
     <string name="installer_action_open_shizuku">打开 Shizuku</string>
     <string name="installer_hint_generic">安装失败。请重试或切换到其他安装程序</string>

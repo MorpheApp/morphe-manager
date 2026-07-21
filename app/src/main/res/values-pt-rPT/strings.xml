@@ -332,13 +332,14 @@ Zona externa (tracejada): pode ser cortada pela máscara do iniciador - mantenha
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">O modo root requer que o APK original esteja instalado no teu dispositivo antes de poder modificar</string>
     <string name="root_gmscore_excluded">A modificação de suporte ao GmsCore está excluída no modo root</string>
-    <string name="root_pre_patch_installer_title">Escolher método de instalação</string>
-    <string name="root_pre_patch_installer_description">O teu dispositivo tem acesso root. Escolhe como queres instalar a aplicação modificada</string>
-    <string name="root_pre_patch_installer_mount_title">Montagem da raiz</string>
-    <string name="root_pre_patch_installer_mount_description">Montar APK modificado por cima da aplicação original. Não é necessário o GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">Instalação Padrão</string>
-    <string name="root_pre_patch_installer_standard_description">Instala como uma aplicação separada com suporte ao GmsCore. Escolhe o instalador (Instalador do sistema, Shizuku, etc.) após a modificação</string>
-    <string name="root_pre_patch_installer_hint">O método de instalação determina quais modificações estão incluídas e não pode ser alterado após modificar</string>
+    <string name="root_pre_patch_installer_title">Escolha o modo de patch</string>
+    <string name="root_pre_patch_installer_description">Seu dispositivo tem acesso root. Escolha se este aplicativo deve ser corrigido para montagem root ou instalação padrão</string>
+    <string name="root_pre_patch_installer_mount_title">Modo de montagem root</string>
+    <string name="root_pre_patch_installer_mount_description">Patches para montagem root, então monta o APK sobre o aplicativo original correspondente. Nenhum GmsCore necessário</string>
+    <string name="root_mount_module_unmount_warning">Se você usar o KernelSU ou APatch, desative a desmontagem ou ocultação de módulos para aplicativos instalados com montagem root. Caso contrário, o aplicativo original ainda poderá ser executado, mesmo que o Morphe o mostre como montado.</string>
+    <string name="root_pre_patch_installer_standard_title">Modo de instalação padrão</string>
+    <string name="root_pre_patch_installer_standard_description">Patches como um APK normal com suporte ao GmsCore. Sua configuração de instalador será usada após a aplicação do patch.</string>
+    <string name="root_pre_patch_installer_hint">Este modo de patch é separado de Configurações > Sistema > Instalador e não pode ser alterado após a aplicação do patch.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Erro copiado para a área de transferência</string>
     <string name="patcher_error_log">Log de erros</string>
@@ -438,6 +439,8 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="patcher_process_exit_message">O processo do modificador foi encerrado com o código %s</string>
     <string name="install_app_success">Instalado com sucesso</string>
     <string name="install_app_fail">Erro ao instalar a aplicação: %s</string>
+    <string name="uninstall_app_fail">Falha ao desinstalar o aplicativo: %s</string>
+    <string name="uninstall_timeout">Tempo limite de desinstalação excedido</string>
     <string name="save_apk_success">APK guardado</string>
     <string name="saved_app_export_failed">Erro ao exportar a aplicação modificada</string>
     <string name="saved_app_removed_toast">Aplicação modificada guardada foi removida</string>
@@ -483,10 +486,13 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="settings_appearance_parallax_effect_description">Deslocamento suave do fundo ao inclinar o dispositivo</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Aparência</string>
+    <string name="settings_appearance_theme_mode">Modo de tema</string>
     <string name="settings_appearance_system">Sistema</string>
     <string name="settings_appearance_light">Claro</string>
     <string name="settings_appearance_dark">Escuro</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monocromático</string>
+    <string name="settings_appearance_color_style">Estilo de cor</string>
     <string name="settings_appearance_accent_color">Cor de destaque</string>
     <string name="settings_appearance_pure_black">Preto Puro</string>
     <string name="settings_appearance_pure_black_description">Usar fundos pretos puros</string>
@@ -651,12 +657,13 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Remover o botão dos Shorts do widget do lançador</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalador</string>
+    <string name="installer_settings_title">Instalador padrão</string>
     <string name="installer_title">Selecionar instalador</string>
     <string name="installer_internal_description">Usar o instalador de pacotes do Android</string>
     <string name="installer_play_store_description">Utiliza o instalador do sistema e define a Google Play Store como fonte de instalação</string>
     <string name="installer_root_play_store_description">Instala silenciosamente com root e define a Google Play Store como fonte de instalação</string>
-    <string name="installer_auto_saved_name">Instalador root de montagem</string>
-    <string name="installer_auto_saved_description">Substitui o APK modificado sobre a aplicação instalada</string>
+    <string name="installer_auto_saved_name">Montagem root</string>
+    <string name="installer_auto_saved_description">Monta aplicativos que foram patchados no modo de montagem root. APKs patchados padrão usam outro instalador.</string>
     <string name="installer_shizuku_description">Instalar silenciosamente utilizando o Shizuku ou o Sui</string>
     <string name="installer_shizuku_play_store_description">Instala silenciosamente através do Shizuku ou Sui e define a Google Play Store como fonte de instalação</string>
     <string name="installer_option_none">Nenhum fallback</string>
@@ -668,6 +675,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_status_shizuku_permission">Conceder permissão ao Morphe do aplicativo Shizuku</string>
     <string name="installer_mount_warning_install">O teu instalador principal está definido para o instalador de montagem root. Esta aplicação guardada não foi instalada com mount</string>
     <string name="mount_version_mismatch_message">A versão da aplicação original (%2$s) não corresponde à versão da aplicação modificada (%1$s). Monta a versão original correspondente, e tenta de novo</string>
+    <string name="mount_stock_restore_failed_message">O Android rejeitou o APK original salvo. Instale a versão original correspondente e tente Montar novamente.</string>
     <string name="installer_status_shizuku_unsupported">A versão do Shizuku instalada não é suportada</string>
     <string name="installer_action_open_shizuku">Abrir Shizuku</string>
     <string name="installer_hint_generic">A instalação falhou. Tenta de novo ou muda para um instalador diferente</string>

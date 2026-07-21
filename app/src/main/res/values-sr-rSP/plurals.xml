@@ -30,6 +30,26 @@
         <item quantity="few">%s АПК датотеке</item>
         <item quantity="other">%s АПК датотека</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Инсталирано %d апликација</item>
+        <item quantity="few">Инсталиране %d апликације</item>
+        <item quantity="other">Инсталиране %d апликација</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Поново инсталирана %d апликација</item>
+        <item quantity="few">Поново инсталиране %d апликације</item>
+        <item quantity="other">Поново инсталиране %d апликација</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Деинсталирана %d апликација</item>
+        <item quantity="few">Деинсталиране %d апликације</item>
+        <item quantity="other">Деинсталиране %d апликација</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Прескочена %d апликација</item>
+        <item quantity="few">Прескочене %d апликације</item>
+        <item quantity="other">Прескочене %d апликација</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Уклао %s стари пакет из селекције сачуваног</item>
         <item quantity="few">Уклао %s стари пакета из селекције сачуваног</item>

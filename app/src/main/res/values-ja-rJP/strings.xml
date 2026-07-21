@@ -332,13 +332,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">root 権限モードでは、パッチ適用前にオリジナルの APK がインストールされている必要があります</string>
     <string name="root_gmscore_excluded">GmsCore サポートパッチは root モードでは除外されます</string>
-    <string name="root_pre_patch_installer_title">インストール方法を選択してください</string>
-    <string name="root_pre_patch_installer_description">このデバイスには root 権限 があります。パッチしたアプリのインストール方法を選択してください</string>
-    <string name="root_pre_patch_installer_mount_title">root 権限マウント</string>
-    <string name="root_pre_patch_installer_mount_description">オリジナルのアプリの上にパッチ適用済み APK をマウントします。GmsCore は必要ありません</string>
-    <string name="root_pre_patch_installer_standard_title">標準インストール</string>
-    <string name="root_pre_patch_installer_standard_description">GmsCore のサポートを含めた状態で、オリジナルとは別アプリとしてインストールします。パッチ適用後にインストーラー (システムインストーラー、Shizuku など) を選択してください</string>
-    <string name="root_pre_patch_installer_hint">インストール方法によって適用されるパッチが決定され、パッチ適用後に変更することはできません</string>
+    <string name="root_pre_patch_installer_title">パッチモードを選択</string>
+    <string name="root_pre_patch_installer_description">このデバイスはroot権限を持っています。このアプリをrootマウント用にパッチするか、標準インストールするかを選択してください</string>
+    <string name="root_pre_patch_installer_mount_title">root権限マウントモード</string>
+    <string name="root_pre_patch_installer_mount_description">rootマウント用にパッチし、次にAPKを対応する純正アプリの上にマウントします。GmsCoreは必要ありません</string>
+    <string name="root_mount_module_unmount_warning">KernelSUまたはAPatchをご使用の場合は、rootマウントでインストールされたアプリのモジュールをアンマウントまたは非表示にしないでください。そうしないと、Morpheではマウントされているように表示されても、元のアプリが依然として実行される可能性があります。</string>
+    <string name="root_pre_patch_installer_standard_title">標準インストールモード</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCoreサポートを備えた通常のAPKとしてパッチを適用します。パッチ適用後には、インストーラーの設定が使用されます。</string>
+    <string name="root_pre_patch_installer_hint">このパッチモードは、[設定] > [システム] > [インストーラー]とは別に、パッチ適用後に変更することはできません。</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">エラーをクリップボードにコピーしました</string>
     <string name="patcher_error_log">エラーログ</string>
@@ -438,6 +439,8 @@
     <string name="patcher_process_exit_message">パッチ処理がコード %s で終了しました</string>
     <string name="install_app_success">正常にインストールされました</string>
     <string name="install_app_fail">アプリのインストールに失敗しました: %s</string>
+    <string name="uninstall_app_fail">アプリのアンインストールに失敗しました: %s</string>
+    <string name="uninstall_timeout">アンインストールがタイムアウトしました</string>
     <string name="save_apk_success">APK を保存しました</string>
     <string name="saved_app_export_failed">パッチ適用済みアプリのエクスポートに失敗しました</string>
     <string name="saved_app_removed_toast">保存されていたパッチ適用済みアプリを削除しました</string>
@@ -483,10 +486,13 @@
     <string name="settings_appearance_parallax_effect_description">デバイスを傾けた時に背景が滑らかに移動します</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">テーマ</string>
+    <string name="settings_appearance_theme_mode">テーマモード</string>
     <string name="settings_appearance_system">システム</string>
     <string name="settings_appearance_light">ライト</string>
     <string name="settings_appearance_dark">ダーク</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">モノクロ</string>
+    <string name="settings_appearance_color_style">カラーモード</string>
     <string name="settings_appearance_accent_color">アクセントカラー</string>
     <string name="settings_appearance_pure_black">ピュアブラック</string>
     <string name="settings_appearance_pure_black_description">真っ黒な背景を使用します</string>
@@ -650,12 +656,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">ホーム画面のウィジェットからショートの項目を削除します</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">インストーラー</string>
+    <string name="installer_settings_title">デフォルトインストーラー</string>
     <string name="installer_title">インストーラーを選択</string>
     <string name="installer_internal_description">Android パッケージインストーラーを使用します</string>
     <string name="installer_play_store_description">システムインストーラーを使用し、Google Play ストアをインストールソースに設定します</string>
     <string name="installer_root_play_store_description">Root 権限でサイレントインストールを実行し、Google Play ストアをインストール元に設定します</string>
-    <string name="installer_auto_saved_name">root 権限マウント式インストーラー</string>
-    <string name="installer_auto_saved_description">パッチ適用済み APK をインストール済みアプリの上にマウントします</string>
+    <string name="installer_auto_saved_name">root権限マウント</string>
+    <string name="installer_auto_saved_description">rootマウントモードでパッチが適用されたアプリをマウントします。標準のパッチ適用APKは別のインストーラーを使用します。</string>
     <string name="installer_shizuku_description">Shizuku または Sui を使用して自動インストールします</string>
     <string name="installer_shizuku_play_store_description">ShizukuまたはSuiを通じてサイレントインストールを実行し、Google Playストアをインストール元に設定します</string>
     <string name="installer_option_none">代替なし</string>
@@ -666,6 +673,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_running">Shizuku または Sui を起動して、もう一度お試しください</string>
     <string name="installer_mount_warning_install">既定のインストーラーが root 権限マウント式インストーラーに設定されています。この保存済みアプリは、マウント方式でインストールされたものではありません</string>
     <string name="mount_version_mismatch_message">オリジナルのアプリのバージョン (%2$s) がパッチ適用済みアプリのバージョン (%1$s) と一致しません。対応するオリジナルのアプリをマウントしてから、再度お試しください</string>
+    <string name="mount_stock_restore_failed_message">Androidは保存された元のAPKを拒否しました。一致するストックバージョンをインストールし、再度マウントを試してください。</string>
     <string name="installer_status_shizuku_unsupported">インストールされている Shizuku のバージョンはサポートされていません</string>
     <string name="installer_action_open_shizuku">Shizuku を開く</string>
     <string name="installer_hint_generic">インストールに失敗しました。もう一度試すか、別のインストーラーを使用してください</string>

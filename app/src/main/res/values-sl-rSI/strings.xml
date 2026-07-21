@@ -332,13 +332,14 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Za način root je potrebno, da je izvirna datoteka APK nameščena na vaši napravi, preden jo popravite.</string>
     <string name="root_gmscore_excluded">Popravek podpore GmsCore je izključen v načinu root</string>
-    <string name="root_pre_patch_installer_title">Izberite metodo namestitve</string>
-    <string name="root_pre_patch_installer_description">Vaša naprava ima dostop do root-a. Izberite, kako želite namestiti posodobljeno aplikacijo</string>
-    <string name="root_pre_patch_installer_mount_title">Namestite root</string>
-    <string name="root_pre_patch_installer_mount_description">Namesti popravljeno datoteko APK prek privzete aplikacije. GmsCore ni potreben</string>
-    <string name="root_pre_patch_installer_standard_title">Standardna namestitev</string>
-    <string name="root_pre_patch_installer_standard_description">Namesti se kot ločena aplikacija s podporo za GmsCore. Namestitveni program lahko izberete po popravljanju</string>
-    <string name="root_pre_patch_installer_hint">Metoda namestitve določa, katere popravki so vključeni in je po namestitvi ni mogoče več spreminjati</string>
+    <string name="root_pre_patch_installer_title">Izberite način obliževanja</string>
+    <string name="root_pre_patch_installer_description">Vaša naprava ima dostop do višinskih pravic. Izberite, ali naj bo ta aplikacija obliževana za root namestitev ali standardno namestitev.</string>
+    <string name="root_pre_patch_installer_mount_title">Način namestitve root</string>
+    <string name="root_pre_patch_installer_mount_description">Obliži za namestitev root, nato namesti APK prek ustrezne originalne aplikacije. GmsCore ni potreben.</string>
+    <string name="root_mount_module_unmount_warning">Če uporabljate KernelSU ali APatch, onemogočite razmontiranje ali skrivanje modulov za aplikacije, nameščene z root mountom. V nasprotnem primeru se lahko originalna aplikacija še vedno zažene, tudi če jo Morphe prikazuje kot nameščeno.</string>
+    <string name="root_pre_patch_installer_standard_title">Standardni način namestitve</string>
+    <string name="root_pre_patch_installer_standard_description">Popravki se namestijo kot običajna datoteka APK z GmsCore podporo. Vaša nastavitev namestitvenega programa se uporabi po popravku.</string>
+    <string name="root_pre_patch_installer_hint">Ta način popravka je ločen od Nastavitve > Sistem > Namestitveni program in ga ni mogoče spremeniti po popravku.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Napaka je kopirana v odložišče</string>
     <string name="patcher_error_log">Dnevnik napak</string>
@@ -438,6 +439,8 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="patcher_process_exit_message">Postopek popravljanja se je končal s kodo %s</string>
     <string name="install_app_success">Namestitev je uspela</string>
     <string name="install_app_fail">Ni uspelo namestiti aplikacije: %s</string>
+    <string name="uninstall_app_fail">Neuspelo odstranjevanje aplikacije: %s</string>
+    <string name="uninstall_timeout">Čas za odstranitev je iztekel</string>
     <string name="save_apk_success">APK shranjen</string>
     <string name="saved_app_export_failed">Ni uspelo izvoziti popravljene aplikacije</string>
     <string name="saved_app_removed_toast">Odstranjena je bila shranjena popravljena aplikacija</string>
@@ -483,10 +486,13 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="settings_appearance_parallax_effect_description">Gladko premikanje ozadja med nagibanjem naprave.</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
+    <string name="settings_appearance_theme_mode">Način teme</string>
     <string name="settings_appearance_system">Sistem</string>
     <string name="settings_appearance_light">Svetlo</string>
     <string name="settings_appearance_dark">Temno</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Enobarvno</string>
+    <string name="settings_appearance_color_style">Slog barv</string>
     <string name="settings_appearance_accent_color">Barva poudarkov</string>
     <string name="settings_appearance_pure_black">Črnina</string>
     <string name="settings_appearance_pure_black_description">Uporablja prava črne ozadja</string>
@@ -653,12 +659,13 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Odstrani gumb Shorts iz pripomočka začetnega zaslona</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Namestitveni program</string>
+    <string name="installer_settings_title">Privzeti namestitveni program</string>
     <string name="installer_title">Izberi namestitveni program</string>
     <string name="installer_internal_description">Uporablja namestitveni program Android</string>
     <string name="installer_play_store_description">Uporablja sistemski namestitveni program in nastavi Google Play Store kot vir namestitve</string>
     <string name="installer_root_play_store_description">Tiho namesti z dostopom root in nastavi Google Play Store kot vir namestitve</string>
-    <string name="installer_auto_saved_name">Namestitveni program z root dostopom</string>
-    <string name="installer_auto_saved_description">Namesti popravljen APK prek nameščene aplikacije</string>
+    <string name="installer_auto_saved_name">Namestitev root</string>
+    <string name="installer_auto_saved_description">Montira aplikacije, ki so bile popravljene v načinu root mount. Standardne popravljene datoteke APK uporabljajo drug namestitveni program.</string>
     <string name="installer_shizuku_description">Namesti tiho s pomočjo Shizuku ali Sui</string>
     <string name="installer_shizuku_play_store_description">Tiho namesti prek Shizuku ali Sui in nastavi Google Play Store kot vir namestitve</string>
     <string name="installer_option_none">Brez nadomestitve</string>
@@ -670,6 +677,7 @@ Dimenzije slike morajo biti naslednje:
     <string name="installer_status_shizuku_permission">Dovolite Morphe-u dovoljenje iz aplikacije Shizuku</string>
     <string name="installer_mount_warning_install">Vaš priljubljen namestitveni program je nastavljen na nameščeno montažo. Ta shranjena aplikacija ni bila nameščena z montažo.</string>
     <string name="mount_version_mismatch_message">Originalna različica aplikacije (%2$s) se ne ujema s popravljeno različico aplikacije (%1$s). Namestite ustrezno originalno različico, nato poskusite znova</string>
+    <string name="mount_stock_restore_failed_message">Android je zavrnil shranjeno originalno datoteko APK. Namestite ustrezno originalno različico, nato pa poskusite znova montirati.</string>
     <string name="installer_status_shizuku_unsupported">Nameščena različica Shizuku ni podprta.</string>
     <string name="installer_action_open_shizuku">Odprite Shizuku</string>
     <string name="installer_hint_generic">Namestitev je zatajila. Poskusite znova ali preklopite na drug namestitveni program.</string>

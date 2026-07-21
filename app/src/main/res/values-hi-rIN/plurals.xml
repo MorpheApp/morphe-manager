@@ -24,6 +24,22 @@
         <item quantity="one">%s एपीके फाइल</item>
         <item quantity="other">%s एपीके फाइलें</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">%d ऐप इंस्टॉल किए गए</item>
+        <item quantity="other">%d ऐप इंस्टॉल किए गए</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">%d ऐप पुनर्स्थापित किए गए</item>
+        <item quantity="other">%d ऐप पुनर्स्थापित किए गए</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">%d ऐप अनइंस्टॉल किए गए</item>
+        <item quantity="other">%d ऐप अनइंस्टॉल किए गए</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">%d ऐप छोड़ दिए गए</item>
+        <item quantity="other">%d ऐप छोड़ दिए गए</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">सохित चयन से %s पुरानी पटच को हटा दिया गया</item>
         <item quantity="other">सохित चयन से %s पुरानी पटच को हटा दिया गया</item>

@@ -332,13 +332,14 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root modu, yamalama yapmadan önce orijinal APK\'nin cihazınızda yüklü olmasını gerektirir</string>
     <string name="root_gmscore_excluded">GmsCore destek yaması root modunda hariç tutulmuştur</string>
-    <string name="root_pre_patch_installer_title">Yükleme yöntemini seçin</string>
-    <string name="root_pre_patch_installer_description">Cihazınızın root erişimi var. Yamalanmış uygulamayı nasıl yüklemek istediğinizi seçin</string>
-    <string name="root_pre_patch_installer_mount_title">Root ile bağlama</string>
-    <string name="root_pre_patch_installer_mount_description">Yamalanmış APK\'yi stok uygulamaya bağlar. GmsCore gerektirmez</string>
-    <string name="root_pre_patch_installer_standard_title">Standart Yükleme</string>
-    <string name="root_pre_patch_installer_standard_description">GmsCore desteğiyle ayrı bir uygulama olarak yüklenir. Yamalamadan sonra bir yükleyici seçilebilir</string>
-    <string name="root_pre_patch_installer_hint">Yükleme yöntemi, hangi yamaların dahil edileceğini belirler ve yama uygulandıktan sonra değiştirilemez</string>
+    <string name="root_pre_patch_installer_title">Yama modunu seçin</string>
+    <string name="root_pre_patch_installer_description">Cihazınız root erişimine sahip. Bu uygulamanın root mount için mi yoksa standart kurulum için mi yama uygulanacağını seçin</string>
+    <string name="root_pre_patch_installer_mount_title">Root bağlama modu</string>
+    <string name="root_pre_patch_installer_mount_description">Root mount için yamalar, ardından APK\'yı eşleşen stok uygulaması üzerinden bağlar. GmsCore\'a gerek yok</string>
+    <string name="root_mount_module_unmount_warning">KernelSU veya APatch kullanıyorsanız, root ile yüklenen uygulamalar için modülün sökülmesini veya gizlenmesini devre dışı bırakın. Aksi takdirde, Morphe tarafından monte edilmiş olarak gösterilse bile, stok uygulaması çalışmaya devam edebilir.</string>
+    <string name="root_pre_patch_installer_standard_title">Standart kurulum modu</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore desteğiyle normal bir APK olarak yamalar. Yamaladıktan sonra kurulum ayarınız kullanılır</string>
+    <string name="root_pre_patch_installer_hint">Bu yama modu Ayarlar > Sistem > Kurucu\'dan bağımsızdır ve yamaladıktan sonra değiştirilemez</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Hata panoya kopyalandı</string>
     <string name="patcher_error_log">Hata günlüğü</string>
@@ -438,6 +439,8 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="patcher_process_exit_message">Patcher işlemi %s kodu ile sonlandı</string>
     <string name="install_app_success">Başarıyla yüklendi</string>
     <string name="install_app_fail">Uygulama yüklenemedi: %s</string>
+    <string name="uninstall_app_fail">Uygulamaönö kurulumu özledi: %s</string>
+    <string name="uninstall_timeout">Kaldırma zaman aşımına uğradı</string>
     <string name="save_apk_success">APK Kaydedildi</string>
     <string name="saved_app_export_failed">Yamalanmış uygulama dışa aktarılamadı</string>
     <string name="saved_app_removed_toast">Kayıtlı yamalanmış uygulama kaldırıldı</string>
@@ -483,10 +486,13 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_appearance_parallax_effect_description">Cihaz eğildiğinde arka planın yumuşak bir şekilde kayması</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
+    <string name="settings_appearance_theme_mode">Tema modu</string>
     <string name="settings_appearance_system">Sistem</string>
     <string name="settings_appearance_light">Açık</string>
     <string name="settings_appearance_dark">Koyu</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Tek renk</string>
+    <string name="settings_appearance_color_style">Renk stili</string>
     <string name="settings_appearance_accent_color">Vurgu rengi</string>
     <string name="settings_appearance_pure_black">Saf Siyah</string>
     <string name="settings_appearance_pure_black_description">Gerçek siyah arka plan kullanır</string>
@@ -651,12 +657,13 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Launcher widget\'ından Shorts düğmesini kaldırır</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Yükleyici</string>
+    <string name="installer_settings_title">Varsayılan kurulum aracı</string>
     <string name="installer_title">Yükleyici seçin</string>
     <string name="installer_internal_description">Android paket yükleyicisini kullanır</string>
     <string name="installer_play_store_description">Sistem yükleyicisini kullanır ve Google Play Store\'u yükleme kaynağı olarak ayarlar</string>
     <string name="installer_root_play_store_description">Root erişimiyle sessizce yükler ve Google Play Store\'u yükleme kaynağı olarak ayarlar</string>
-    <string name="installer_auto_saved_name">Rootlu bağlama yükleyicisi</string>
-    <string name="installer_auto_saved_description">Yamalanmış APK\'yi yüklü uygulamaya bağlar</string>
+    <string name="installer_auto_saved_name">Root ile bağlama</string>
+    <string name="installer_auto_saved_description">Root ile bağlama modunda yamalanan uygulamaları bağlar. Standart yamalanmış APK\'lar başka bir kurulum aracı kullanır</string>
     <string name="installer_shizuku_description">Shizuku veya Sui kullanılarak sessiz modda yüklenir</string>
     <string name="installer_shizuku_play_store_description">Shizuku veya Sui aracılığıyla sessizce yükler ve Google Play Store\'u yükleme kaynağı olarak ayarlar</string>
     <string name="installer_option_none">Yedek yok</string>
@@ -668,6 +675,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_status_shizuku_permission">Shizuku uygulamasından Morphe\'ye Shizuku izni verin</string>
     <string name="installer_mount_warning_install">Birincil yükleyiciniz, rootlu bağlama yükleyicisi olarak ayarlanmış. Bu kaydedilmiş uygulama bağlama kullanılarak yüklenmedi</string>
     <string name="mount_version_mismatch_message">Stok uygulama sürümü (%2$s), yamalanmış uygulama sürümü (%1$s) ile eşleşmiyor. Eşleşen stok sürümü bağlayın, sonra tekrar deneyin</string>
+    <string name="mount_stock_restore_failed_message">Android, kaydedilen orijinal APK\'yı reddetti. Eşleşen stok sürümünü yükleyin, ardından tekrar Bağla\'yı deneyin</string>
     <string name="installer_status_shizuku_unsupported">Yüklü Shizuku sürümü desteklenmiyor</string>
     <string name="installer_action_open_shizuku">Shizuku\'yu Aç</string>
     <string name="installer_hint_generic">Yükleme başarısız oldu. Tekrar deneyin veya farklı bir yükleyiciye geçin</string>

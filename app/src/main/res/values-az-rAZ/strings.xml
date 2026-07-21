@@ -332,13 +332,10 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root rejimi yamaqdan əvvəl orijinal APK-nın cihazınızda quraşdırılmasını tələb edir</string>
     <string name="root_gmscore_excluded">GmsCore dəstək yamağı root rejimində çıxarılır</string>
-    <string name="root_pre_patch_installer_title">Quraşdırma üsulunu seç</string>
-    <string name="root_pre_patch_installer_description">Cihazınızın root girişi var. Yamaqlanan tətbiqi necə quraşdırmaq istədiyinizi seçin</string>
-    <string name="root_pre_patch_installer_mount_title">Root montajlama</string>
-    <string name="root_pre_patch_installer_mount_description">Yamaqlanan APK-nı əsas tətbiq üzərinə montajlayır. GmsCore ehtiyacı yoxdur</string>
-    <string name="root_pre_patch_installer_standard_title">Standart Quraşdırmaq</string>
-    <string name="root_pre_patch_installer_standard_description">GmsCore dəstəyi ilə ayrı tətbiq kimi quraşdırılır. Quraşdırıcı yamaqlanmadan sonra seçilə bilər</string>
-    <string name="root_pre_patch_installer_hint">Quraşdırma üsulu hansı yamaqların yerləşdirildiyini müəyyənləşdirir və yamaqlanma sonrası dəyişdirilə bilməz</string>
+    <string name="root_pre_patch_installer_title">Yamaqlama rejimini seç</string>
+    <string name="root_pre_patch_installer_description">Cihazınızın root girişi var. Bu tətbiqin root montajı yoxsa standart quraşdırma məqsədilə yamaqlanmalı olub-olmadığını seçin</string>
+    <string name="root_pre_patch_installer_mount_title">Root montajı rejimi</string>
+    <string name="root_pre_patch_installer_mount_description">Root montajı üçün yamaqlayır, sonra APK-nı uyğun əsas tətbiqin üzərinə montaj edir. GmsCore tələb olunmur</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Xəta buferə köçürüldü</string>
     <string name="patcher_error_log">Xəta jurnalı</string>
@@ -654,8 +651,6 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_internal_description">Android paket quraşdırıcısı istifadə edilir</string>
     <string name="installer_play_store_description">Sistem quraşdırıcısın istifadə edir və Google Play Store-u quraşdırma mənbəyi kimi təyin edir</string>
     <string name="installer_root_play_store_description">Səssizcə root ilə quraşdırır və Google Play Store-u quraşdırma mənbəyi kimi təyin edir</string>
-    <string name="installer_auto_saved_name">Root-lu montajlama quraşdırıcısı</string>
-    <string name="installer_auto_saved_description">Yamaqlanan APK-nı quraşdırılan tətbiq üzərinə montajlayır</string>
     <string name="installer_shizuku_description">Shizuku və ya Sui istifadə edərək səssizcə quraşdırır</string>
     <string name="installer_shizuku_play_store_description">Shizuku yaxud Sui vasitəsilə səssizcə quraşdırır və Google Play Store-u quraşdırma mənbəyi kimi təyin edir</string>
     <string name="installer_option_none">Ehtiyat yoxdur</string>

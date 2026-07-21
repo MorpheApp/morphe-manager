@@ -18,6 +18,18 @@
     <plurals name="settings_system_apks_count">
         <item quantity="other">APK ファイル %s 個</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="other">%d 個のアプリをインストールしました</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="other">%d 個のアプリを再インストールしました</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="other">%d 個のアプリをアンインストールしました</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="other">%d 個のアプリをスキップしました</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="other">保存済みセレクションから互換性を失った %s 個のパッチを削除しました</item>
     </plurals>

@@ -18,6 +18,18 @@
     <plurals name="settings_system_apks_count">
         <item quantity="other">%s 개의 APK 파일</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="other">%d 개의 앱을 설치하였습니다</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="other">%d 개의 앱을 다시 설치하였습니다</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="other">%d 개의 앱을 제거하였습니다</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="other">%d 개의 앱을 건너뛰었습니다</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="other">저장된 선택 목록에서 %s 개의 오래된 패치를 제거하였습니다</item>
     </plurals>

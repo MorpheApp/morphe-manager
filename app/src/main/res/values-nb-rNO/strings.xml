@@ -332,13 +332,14 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-modus krever at den originale APK-en er installert på enheten din før patching</string>
     <string name="root_gmscore_excluded">GmsCore-støttepakken er ekskludert i rotmodus</string>
-    <string name="root_pre_patch_installer_title">Velg installasjonsmetode</string>
-    <string name="root_pre_patch_installer_description">Enheten din har root-tilgang. Velg hvordan du vil installere den patchede appen</string>
-    <string name="root_pre_patch_installer_mount_title">Rotmontering</string>
-    <string name="root_pre_patch_installer_mount_description">Monterer den patched APK-filen over standardappen. Ingen GmsCore nødvendig</string>
-    <string name="root_pre_patch_installer_standard_title">Standard installasjon</string>
-    <string name="root_pre_patch_installer_standard_description">Installeres som en separat app med GmsCore-støtte. En installasjonsprogram kan velges etter oppdatering</string>
-    <string name="root_pre_patch_installer_hint">Installasjonsmetoden bestemmer hvilke patcher som inkluderes og kan ikke endres etter patching</string>
+    <string name="root_pre_patch_installer_title">Velg patch-modus</string>
+    <string name="root_pre_patch_installer_description">Enheten din har root-tilgang. Velg om denne appen skal patches for root-montering eller standardinstallasjon</string>
+    <string name="root_pre_patch_installer_mount_title">Root-monteringsmodus</string>
+    <string name="root_pre_patch_installer_mount_description">Patches for root-montering og monterer deretter APK-en over den tilsvarende standardappen. Ingen GmsCore nødvendig</string>
+    <string name="root_mount_module_unmount_warning">Hvis du bruker KernelSU eller APatch, deaktiver demontering eller skjuling av moduler for apper som er installert med rottilgang. Ellers kan standardappen fortsatt kjøre selv om Morphe viser at den er montert.</string>
+    <string name="root_pre_patch_installer_standard_title">Standard installasjonsmodus</string>
+    <string name="root_pre_patch_installer_standard_description">Installerer som en vanlig APK med GmsCore-støtte. Dine installasjonsinnstillinger brukes etter installasjonen.</string>
+    <string name="root_pre_patch_installer_hint">Denne installasjonsmodusen er separat fra Innstillinger > System > Installasjon og kan ikke endres etter installasjonen.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Feil kopiert til utklippstavlen</string>
     <string name="patcher_error_log">Feillogg</string>
@@ -438,6 +439,8 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="patcher_process_exit_message">Patcher-prosessen avsluttet med kode %s</string>
     <string name="install_app_success">Installert vellykket</string>
     <string name="install_app_fail">Kunne ikke installere app: %s</string>
+    <string name="uninstall_app_fail">Kunne ikke avinstallere app: %s</string>
+    <string name="uninstall_timeout">Avinstallasjonen tok for lang tid</string>
     <string name="save_apk_success">APK lagret</string>
     <string name="saved_app_export_failed">Kunne ikke eksportere patchad app</string>
     <string name="saved_app_removed_toast">Fjernet lagret patchad app</string>
@@ -483,10 +486,13 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_parallax_effect_description">Jevn bakgrunnsforskyvning når du heller enheten</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
+    <string name="settings_appearance_theme_mode">Temamodus</string>
     <string name="settings_appearance_system">System</string>
     <string name="settings_appearance_light">Lys</string>
     <string name="settings_appearance_dark">Mørk</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monokrom</string>
+    <string name="settings_appearance_color_style">Fargestil</string>
     <string name="settings_appearance_accent_color">Accentfarge</string>
     <string name="settings_appearance_pure_black">Pure Black</string>
     <string name="settings_appearance_pure_black_description">Bruker ekte svarte bakgrunner</string>
@@ -653,12 +659,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Fjerner Shorts-knappen fra startskjermwidgeten</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installasjonsprogram</string>
+    <string name="installer_settings_title">Standard installasjonsprogram</string>
     <string name="installer_title">Velg installasjonsprogram</string>
     <string name="installer_internal_description">Bruker Android-pakkeinstallasjonsprogrammet</string>
     <string name="installer_play_store_description">Bruker systeminstallatøren og angir Google Play Butikk som installasjonskilde</string>
     <string name="installer_root_play_store_description">Installeres stille med root og angir Google Play Store som installasjonskilde</string>
-    <string name="installer_auto_saved_name">Root-montert installasjonsprogram</string>
-    <string name="installer_auto_saved_description">Monter den patched APK-filen over den installerte appen</string>
+    <string name="installer_auto_saved_name">Rottilgang</string>
+    <string name="installer_auto_saved_description">Monterer apper som ble installert i rottilgangsmodus. Standard installerte APK-er bruker et annet installasjonsprogram.</string>
     <string name="installer_shizuku_description">Installerer lydløst ved hjelp av Shizuku eller Sui</string>
     <string name="installer_shizuku_play_store_description">Installeres stille via Shizuku eller Sui og angir Google Play Store som installasjonskilde</string>
     <string name="installer_option_none">Ingen fallback</string>
@@ -670,6 +677,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_permission">Gi Morphe tillatelse fra Shizuku-appen</string>
     <string name="installer_mount_warning_install">Din primære installasjonsprogram er satt til den rooted mount-installasjonsprogrammet. Denne lagrede appen ble ikke installert ved hjelp av mount</string>
     <string name="mount_version_mismatch_message">Aksjeversjonen (%2$s) stemmer ikke overens med den patchede appversjonen (%1$s). Mount den matchende aksjeversjonen og prøv igjen</string>
+    <string name="mount_stock_restore_failed_message">Android avviste den lagrede originale APK-en. Installer den matchende standardversjonen, og prøv å montere igjen.</string>
     <string name="installer_status_shizuku_unsupported">Den installerte Shizuku-versjonen støttes ikke</string>
     <string name="installer_action_open_shizuku">Åpne Shizuku</string>
     <string name="installer_hint_generic">Installeringen mislyktes. Prøv igjen eller bytt til en annen installasjonsprogram</string>

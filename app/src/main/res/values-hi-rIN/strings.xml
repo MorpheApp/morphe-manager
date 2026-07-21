@@ -332,13 +332,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">रूट मोड के लिए, पैचिंग शुरू करने से पहले आपके डिवाइस पर APK को इंस्टॉल करना आवश्यक है।</string>
     <string name="root_gmscore_excluded">श्ळ लेरे सेप्नि साधार्य लैि लुन्यिानि ला</string>
-    <string name="root_pre_patch_installer_title">स्थापना विधि का चयन करें</string>
-    <string name="root_pre_patch_installer_description">आपका डिवाइस रूट एक्सेस रखता है। पट्च्ड एप्लिकेशन इंस्टॉल करने का तरीका चुनें।</string>
-    <string name="root_pre_patch_installer_mount_title">रूट माउंट</string>
-    <string name="root_pre_patch_installer_mount_description">स्टॉक ऐप पर पैच किए गए APK को माउंट करता है। GmsCore की आवश्यकता नहीं है</string>
-    <string name="root_pre_patch_installer_standard_title">सामान्य इंस्टॉल</string>
-    <string name="root_pre_patch_installer_standard_description">GmsCore सपोर्ट के साथ एक अलग ऐप के रूप में इंस्टॉल करता है। पैचिंग के बाद एक इंस्टॉलर का चयन किया जा सकता है।</string>
-    <string name="root_pre_patch_installer_hint">इंस्टॉलेशन मेथड पट्चिंग के बाद बदल नहीं सकती जाती है।</string>
+    <string name="root_pre_patch_installer_title">पैच मोड चुनें</string>
+    <string name="root_pre_patch_installer_description">आपके डिवाइस में रूट एक्सेस है। चुनें कि क्या इस ऐप को रूट माउंट या मानक इंस्टॉलेशन के लिए पैच किया जाना चाहिए।</string>
+    <string name="root_pre_patch_installer_mount_title">रूट माउंट मोड</string>
+    <string name="root_pre_patch_installer_mount_description">रूट माउंट के लिए पैच, फिर स्टॉक ऐप से मेल खाने वाले APK पर माउंट करता है। GmsCore की आवश्यकता नहीं है।</string>
+    <string name="root_mount_module_unmount_warning">यदि आप KernelSU या APatch का उपयोग करते हैं, तो रूट माउंट से इंस्टॉल किए गए ऐप्स के लिए मॉड्यूल अनमाउंटिंग या छिपाने को अक्षम करें। अन्यथा स्टॉक ऐप अभी भी चल सकता है भले ही Morphe इसे माउंटेड दिखाए।</string>
+    <string name="root_pre_patch_installer_standard_title">मानक इंस्टॉलेशन मोड</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore समर्थन के साथ एक सामान्य APK के रूप में पैच। पैचिंग के बाद आपकी इंस्टॉलर सेटिंग का उपयोग किया जाता है।</string>
+    <string name="root_pre_patch_installer_hint">यह पैच मोड सेटिंग्स > सिस्टम > इंस्टॉलर से अलग है और पैचिंग के बाद इसे नहीं बदला जा सकता है।</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">त्रुटि रिपोर्ट</string>
@@ -438,6 +439,8 @@
     <string name="patcher_process_exit_message">पैचर प्रक्रिया कोड %s के साथ समाप्त हो गई।</string>
     <string name="install_app_success">सफलतापूर्वक इंस्टॉल हो गया</string>
     <string name="install_app_fail">अप्लिकेशन को तैयार करना असफल रहा: %s</string>
+    <string name="uninstall_app_fail">ऐप को अनइंस्टॉल करने में विफल: %s</string>
+    <string name="uninstall_timeout">अनइंस्टॉल समय समाप्त हो गया</string>
     <string name="save_apk_success">एपीके सहेजा गया</string>
     <string name="saved_app_export_failed">\"पैच किया गया ऐप एक्सपोर्ट करने में विफल।\"</string>
     <string name="saved_app_removed_toast">हटाया गया सहेजा गया पैच किया हुआ ऐप</string>
@@ -483,10 +486,13 @@
     <string name="settings_appearance_parallax_effect_description">डिवाइस को झुकाने पर पृष्ठभूमि को मधयम गति से बदलना</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">थीम</string>
+    <string name="settings_appearance_theme_mode">थीम मोड</string>
     <string name="settings_appearance_system">सिस्टम</string>
     <string name="settings_appearance_light">लाइट</string>
     <string name="settings_appearance_dark">डार्क</string>
     <string name="settings_appearance_dynamic">मैटेरियल यू</string>
+    <string name="settings_appearance_monochrome">मोनोक्रोम</string>
+    <string name="settings_appearance_color_style">रंग शैली</string>
     <string name="settings_appearance_accent_color">अक्सेंट रंग</string>
     <string name="settings_appearance_pure_black">शुद्ध काला</string>
     <string name="settings_appearance_pure_black_description">सही काले रंग की पृष्ठभूमि का उपयोग करता है।</string>
@@ -653,12 +659,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">लॉन्चर विजेट से शॉर्ट्स बटन को हटाता है।</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">इंस्टॉलर</string>
+    <string name="installer_settings_title">डिफ़ॉल्ट इंस्टॉलर</string>
     <string name="installer_title">इंस्टॉलर चुनें</string>
     <string name="installer_internal_description">एंड्रॉइड पैकेज इंस्टॉलर का उपयोग करें।</string>
     <string name="installer_play_store_description">सिस्टम इंस्टॉलर का उपयोग करता है और Google Play Store को इंस्टॉल स्रोत के रूप में सेट करता है</string>
     <string name="installer_root_play_store_description">रूट के साथ चुपचाप इंस्टॉल करता है और Google Play Store को इंस्टॉलेशन स्रोत के रूप में सेट करता है</string>
-    <string name="installer_auto_saved_name">रूट्ड माउंट इंस्टॉलर</string>
-    <string name="installer_auto_saved_description">संस्थापित एप्लिकेशन पर पथचिह्नित एपीके को माउंट करता है</string>
+    <string name="installer_auto_saved_name">रूट माउंट</string>
+    <string name="installer_auto_saved_description">रूट माउंट मोड में पैच किए गए ऐप्स को माउंट करता है। मानक पैच किए गए APK किसी अन्य इंस्टॉलर का उपयोग करते हैं।</string>
     <string name="installer_shizuku_description">Shizuku या Sui का उपयोग करके चुपचाप इंस्टॉल करता है।</string>
     <string name="installer_shizuku_play_store_description">शिज़ुकु या सुई के माध्यम से चुपचाप इंस्टॉल करता है और Google Play Store को इंस्टॉलेशन स्रोत के रूप में सेट करता है</string>
     <string name="installer_option_none">कोई बैकफ़ॉल नहीं</string>
@@ -670,6 +677,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_permission">Morphe ऐप से Shizuku की अनुमति दें</string>
     <string name="installer_mount_warning_install">आपका प्राथमिक इंस्टॉलर रूट माउंट इंस्टॉलर पर सेट है. यह सहेजा गया ऐप माउंट का उपयोग करके इंस्टॉल नहीं किया गया था।</string>
     <string name="mount_version_mismatch_message">स्टॉक ऐप वर्जन (%2$s) पैच्ड ऐप वर्जन (%1$s) से मेल नहीं खाती. माउंट मैचिंग स्टॉक वर्जन, फिर पुन: प्रयास करें।</string>
+    <string name="mount_stock_restore_failed_message">Android ने सहेजे गए मूल APK को अस्वीकार कर दिया है। मिलान करने वाले स्टॉक संस्करण को इंस्टॉल करें, फिर माउंट करने का प्रयास करें।</string>
     <string name="installer_status_shizuku_unsupported">इंस्टॉल किया गया शिज़ुकू वर्जन समर्थित नहीं है</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">इंस्टॉलेशन विफल रही. पुन: प्रयास करें या अलग इंस्टॉलर का उपयोग करें।</string>

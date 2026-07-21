@@ -332,13 +332,14 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Kinakailangan ng root mode ang orihinal na APK upang mag-install ito sa iyong device bago ito i-patch</string>
     <string name="root_gmscore_excluded">Hindi kasama ang GmsCore support patch sa root mode</string>
-    <string name="root_pre_patch_installer_title">Piliin ang paraan ng pag-install</string>
-    <string name="root_pre_patch_installer_description">May access sa root ang iyong device. Piliin kung paano mong i-install ang na-patch na aplikasyon</string>
-    <string name="root_pre_patch_installer_mount_title">I-mount ang root</string>
-    <string name="root_pre_patch_installer_mount_description">I-mount ang na-patch na APK sa ilalim ng stock na aplikasyon. Hindi na kailangan ang GmsCore</string>
+    <string name="root_pre_patch_installer_title">Pumili ng patch mode</string>
+    <string name="root_pre_patch_installer_description">May root access ang iyong device. Piliin kung dapat i-patch ang app na ito para sa root mount o standard install</string>
+    <string name="root_pre_patch_installer_mount_title">Root mount mode</string>
+    <string name="root_pre_patch_installer_mount_description">Mga patch para sa root mount, pagkatapos ay ima-mount ang APK sa ibabaw ng katugmang stock app. Hindi kailangan ng GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Kung gumagamit ka ng KernelSU o APatch, huwag paganahin ang pag-unmount o pagtatago ng module para sa mga app na naka-install gamit ang root mount. Kung hindi, ang stock app ay maaaring tumakbo pa rin kahit na ipinapakita ng Morphe na naka-mount ito.</string>
     <string name="root_pre_patch_installer_standard_title">Standard na pag-install</string>
-    <string name="root_pre_patch_installer_standard_description">I-install bilang isang hiwalay na app na may suporta sa GmsCore. Maaaring pumili ng installer pagkatapos ng pag-patch</string>
-    <string name="root_pre_patch_installer_hint">Tinutukoy ng pamamaraan ng installation kung alin sa mga patch ang isasama at hindi na maaaring baguhin pagkatapos ang pagpa-patch</string>
+    <string name="root_pre_patch_installer_standard_description">Mga patch bilang isang normal na APK na may suporta sa GmsCore. Ang iyong setting ng installer ay ginagamit pagkatapos ng pag-patch.</string>
+    <string name="root_pre_patch_installer_hint">Ang mode ng patch na ito ay hiwalay sa Settings > System > Installer at hindi maaaring baguhin pagkatapos ng pag-patch.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Isang pagkakamali na nakopya sa clipboard</string>
     <string name="patcher_error_log">Tala ng pagkakamali</string>
@@ -434,6 +435,8 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="patcher_process_exit_message">Lumabas ang proseso ng patcher na may code %s</string>
     <string name="install_app_success">Matagumpay na na-install</string>
     <string name="install_app_fail">Nabigong ma-install ang aplikasyon: %s</string>
+    <string name="uninstall_app_fail">Nabigong i-uninstall ang app: %s</string>
+    <string name="uninstall_timeout">Nag-time out ang pag-uninstall</string>
     <string name="save_apk_success">Na-save ang APK</string>
     <string name="saved_app_export_failed">Nabigong mag-export ang na-patch na aplikasyon</string>
     <string name="saved_app_removed_toast">Inalis ang naka-save na na-patch na aplikasyon</string>
@@ -479,10 +482,13 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_parallax_effect_description">Maayos na paglilipat ng background kapag tinatagilid ang device</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
+    <string name="settings_appearance_theme_mode">Tema</string>
     <string name="settings_appearance_system">Sistema</string>
     <string name="settings_appearance_light">Maliwanag</string>
     <string name="settings_appearance_dark">Madilim</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monokrom</string>
+    <string name="settings_appearance_color_style">Estilo ng kulay</string>
     <string name="settings_appearance_accent_color">Accent na kulay</string>
     <string name="settings_appearance_pure_black">Purong Itim</string>
     <string name="settings_appearance_pure_black_description">Gamitin ang totoong maitim na mga background</string>
@@ -649,12 +655,13 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Inaalis ang Shorts button mula sa launcher widget</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
+    <string name="installer_settings_title">Default na installer</string>
     <string name="installer_title">Piliin ang installer</string>
     <string name="installer_internal_description">Gamitin ang Android package installer</string>
     <string name="installer_play_store_description">Gumagamit ng system installer at itinakda ang Google Play Store bilang pinagmumulan ng pag-install</string>
     <string name="installer_root_play_store_description">Tahimik na nag-i-install gamit ang root at itinakda ang Google Play Store bilang pinagmumulan ng pag-install</string>
-    <string name="installer_auto_saved_name">Na-root na mount installer</string>
-    <string name="installer_auto_saved_description">Mina-mount ang na-patch na APK sa naka-install na aplikasyon</string>
+    <string name="installer_auto_saved_name">Root mount</string>
+    <string name="installer_auto_saved_description">Ikakabit ang mga app na na-patch sa root mount mode. Ang mga standard na na-patch na APK ay gumagamit ng ibang installer.</string>
     <string name="installer_shizuku_description">Mag-install nang tahimik gamit ang Shizuku o Sui</string>
     <string name="installer_shizuku_play_store_description">Tahimik na nag-i-install sa pamamagitan ng Shizuku o Sui at itinakda ang Google Play Store bilang pinagmumulan ng pag-install</string>
     <string name="installer_option_none">Walang urong</string>
@@ -666,6 +673,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_status_shizuku_permission">Bigyan ng pahintulot ang Morphe mula sa Shizuku app</string>
     <string name="installer_mount_warning_install">Nakatakda ang iyong primary installer sa rooted na mount installer. Hindi na-install gamit ang mount ang na-save na aplikasyong ito</string>
     <string name="mount_version_mismatch_message">Hindi tumutugma sa na-patch na bersyon ng aplikasyon (%1$s) ang stock na bersyon ng aplikasyon (%2$s). I-mount ang tumutugmang stock na bersyon, at subukan muli</string>
+    <string name="mount_stock_restore_failed_message">Tanggihan ng Android ang na-save na orihinal na APK. I-install ang katumbas na stock na bersyon, pagkatapos ay subukang Mount muli.</string>
     <string name="installer_status_shizuku_unsupported">Hindi suportado ang naka-install na bersyon ng Shizuku</string>
     <string name="installer_action_open_shizuku">Buksan ang Shizuku</string>
     <string name="installer_hint_generic">Nabigo ang pag-install. Subukan muli o lumipat sa ibang installer</string>

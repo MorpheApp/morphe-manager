@@ -332,13 +332,14 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-modus vereist dat de oorspronkelijke APK op uw apparaat geïnstalleerd is voordat gepatcht wordt</string>
     <string name="root_gmscore_excluded">GmsCore-ondersteuningspatch is uitgesloten in rootmodus</string>
-    <string name="root_pre_patch_installer_title">Kies installatiemethode</string>
-    <string name="root_pre_patch_installer_description">Uw apparaten heeft root-toegang. Kies hoe u de gepatchte app wilt installeren.</string>
-    <string name="root_pre_patch_installer_mount_title">Root mount</string>
-    <string name="root_pre_patch_installer_mount_description">Mount de gepatchte APK over de standaard app. Geen GmsCore nodig</string>
-    <string name="root_pre_patch_installer_standard_title">Standaard Installatie</string>
-    <string name="root_pre_patch_installer_standard_description">Installeert als een afzonderlijke app met GmsCore-ondersteuning. Een installer kan worden geselecteerd na het patchen</string>
-    <string name="root_pre_patch_installer_hint">De installatiemethode bepaalt welke patches zijn opgenomen en kan niet worden gewijzigd na het patchen.</string>
+    <string name="root_pre_patch_installer_title">Kies patch-modus</string>
+    <string name="root_pre_patch_installer_description">Je apparaat heeft root-toegang. Kies of deze app gepatcht moet worden voor root-mount of standaard installatie</string>
+    <string name="root_pre_patch_installer_mount_title">Root-mount modus</string>
+    <string name="root_pre_patch_installer_mount_description">Patches voor root-mount, en mount vervolgens de APK over de bijbehorende stock app. Geen GmsCore nodig</string>
+    <string name="root_mount_module_unmount_warning">Als je KernelSU of APatch gebruikt, schakel dan de demontage of het verbergen van modules uit voor apps die met root-rechten zijn geïnstalleerd. Anders kan de standaard app nog steeds worden uitgevoerd, zelfs als Morphe aangeeft dat deze is gemount.</string>
+    <string name="root_pre_patch_installer_standard_title">Standaard installatiemodus</string>
+    <string name="root_pre_patch_installer_standard_description">Patches als een normale APK met GmsCore-ondersteuning. Je installatie-instelling wordt gebruikt na het patchen</string>
+    <string name="root_pre_patch_installer_hint">Deze patchmodus is gescheiden van Instellingen &gt; Systeem &gt; Installateur en kan niet worden gewijzigd na het patchen</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Fout gekopieerd naar klembord</string>
     <string name="patcher_error_log">Foutlogboek</string>
@@ -438,6 +439,8 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="patcher_process_exit_message">Patcher-proces is afgesloten met code %s</string>
     <string name="install_app_success">Succesvol geïnstalleerd</string>
     <string name="install_app_fail">Kon app niet installeren: %s</string>
+    <string name="uninstall_app_fail">Kon de app niet verwijderen: %s</string>
+    <string name="uninstall_timeout">De-installatie is mislukt door time-out</string>
     <string name="save_apk_success">APK opgeslagen</string>
     <string name="saved_app_export_failed">Kan gepatchte app niet exporteren</string>
     <string name="saved_app_removed_toast">Opgeslagen gepatchte app verwijderd</string>
@@ -483,10 +486,13 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="settings_appearance_parallax_effect_description">Vloeiende achtergrondverschuiving bij het kantelen van het apparaat</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Thema</string>
+    <string name="settings_appearance_theme_mode">Themamodus</string>
     <string name="settings_appearance_system">Systeem</string>
     <string name="settings_appearance_light">Licht</string>
     <string name="settings_appearance_dark">Donker</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monochroom</string>
+    <string name="settings_appearance_color_style">Kleurstijl</string>
     <string name="settings_appearance_accent_color">Accentkleur</string>
     <string name="settings_appearance_pure_black">Puur Zwart</string>
     <string name="settings_appearance_pure_black_description">Gebruikt echte zwarte achtergronden</string>
@@ -653,12 +659,13 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Verwijdert de Shorts-knop uit het launcher-widget</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
+    <string name="installer_settings_title">Standaard installateur</string>
     <string name="installer_title">Installatieprogramma selecteren</string>
     <string name="installer_internal_description">Gebruikt de Android-pakketinstaller</string>
     <string name="installer_play_store_description">Gebruikt de systeeminstaller en stelt de Google Play Store in als de installatiebron</string>
     <string name="installer_root_play_store_description">Installeert in stilte met root en stelt Google Play Store in als de installatiebron</string>
-    <string name="installer_auto_saved_name">Geroot geïnstalleerde versie</string>
-    <string name="installer_auto_saved_description">Installeert het gepatchte APK over de ge├»nstalleerde app</string>
+    <string name="installer_auto_saved_name">Root mount</string>
+    <string name="installer_auto_saved_description">Mount apps die zijn gepatcht in root mount-modus. Standaard gepatchte APK\'s gebruiken een andere installateur</string>
     <string name="installer_shizuku_description">Installeert stil via Shizuku of Sui</string>
     <string name="installer_shizuku_play_store_description">Installeert in stilte via Shizuku of Sui en stelt Google Play Store in als de installatiebron</string>
     <string name="installer_option_none">Geen fallback</string>
@@ -670,6 +677,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_status_shizuku_permission">Geef Morphe toestemming vanuit de Shizuku-app</string>
     <string name="installer_mount_warning_install">Uw primaire installatieprogramma is ingesteld op het rooted mount-installatieprogramma. Deze opgeslagen app is niet geïnstalleerd met behulp van mount</string>
     <string name="mount_version_mismatch_message">Originele app-versie (%2$s) komt niet overeen met gepatchte app-versie (%1$s). Mount de overeenkomende originele versie, dan probeer het opnieuw</string>
+    <string name="mount_stock_restore_failed_message">Android heeft de opgeslagen originele APK geweigerd. Installeer de bijpassende stock-versie en probeer Mount dan opnieuw</string>
     <string name="installer_status_shizuku_unsupported">De geïnstalleerde Shizuku-versie wordt niet ondersteund</string>
     <string name="installer_action_open_shizuku">Shizuku openen</string>
     <string name="installer_hint_generic">De installatie is mislukt. Probeer het opnieuw of schakel over naar een ander installatieprogramma</string>

@@ -24,6 +24,22 @@
         <item quantity="one">%s αρχείο APK</item>
         <item quantity="other">%s αρχεία APK</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Εγκαταστάθηκαν %d εφαρμογές</item>
+        <item quantity="other">Εγκαταστάθηκαν %d εφαρμογές</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Επανεγκαταστάθηκε %d εφαρμογή</item>
+        <item quantity="other">Επανεγκαταστάθηκαν %d εφαρμογές</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Καταργήθηκε η εγκατάσταση %d εφαρμογής</item>
+        <item quantity="other">Καταργήθηκε η εγκατάσταση %d εφαρμογών</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Παραλείφθηκε %d εφαρμογή</item>
+        <item quantity="other">Παραλείφθηκαν %d εφαρμογές</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Αφαιρέθηκε %s παλιά τροποποίηση από την αποθηκευμένη επιλογή</item>
         <item quantity="other">Αφαιρέθηκαν %s παλιές τροποποιήσεις από τις αποθηκευμένες επιλογές</item>

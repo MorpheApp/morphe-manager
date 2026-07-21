@@ -313,13 +313,6 @@ Vanjska zona (isprekidana): može biti odrezana maskom pokretača - važne detal
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root način zahtijeva da je originalna aplikacija instalirana na vašem uređaju prije patchanja</string>
     <string name="root_gmscore_excluded">Podrška patchanja za GmsCore je isključena u root načinu</string>
-    <string name="root_pre_patch_installer_title">Odaberi način instalacije</string>
-    <string name="root_pre_patch_installer_description">Vaš uređaj ima root pristup. Odaberite kako želite instalirati patchanu aplikaciju</string>
-    <string name="root_pre_patch_installer_mount_title">Učitaj root</string>
-    <string name="root_pre_patch_installer_mount_description">Učitava  patchanu aplikaciju preko tvorničke aplikacije. Nije potreban GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">Standardna instalacija</string>
-    <string name="root_pre_patch_installer_standard_description">Instalira se kao zasebna aplikacija s podrškom za GmsCore. Instalacijski program može se odabrati nakon patchanja</string>
-    <string name="root_pre_patch_installer_hint">Metoda instalacije određuje koji patchevi su uključeni i ne može se promijeniti nakon patchanja</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Greška kopirana u međuspremnik</string>
     <string name="patcher_error_log">Zapisnici pogrešaka</string>
@@ -629,8 +622,6 @@ Dimenzije slike moraju biti sljedeće:
     <string name="installer_internal_description">Koristi Android instalater paketa</string>
     <string name="installer_play_store_description">Koristi instalacijski program sustava i postavlja Trgovinu Google Play kao izvor instalacije</string>
     <string name="installer_root_play_store_description">Instalira se tiho s root-om i postavlja Google Play Store kao izvor instalacije</string>
-    <string name="installer_auto_saved_name">Rootani učitani instalater</string>
-    <string name="installer_auto_saved_description">Učitava patchanu aplikaciju preko instalirane aplikacije</string>
     <string name="installer_shizuku_description">Instaliraj tiho koristeći Shizuku ili Sui</string>
     <string name="installer_shizuku_play_store_description">Tiho se instalira putem Shizukua ili Suija i postavlja Trgovinu Google Play kao izvor instalacije</string>
     <string name="installer_option_none">Nema rezerve </string>

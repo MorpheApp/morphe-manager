@@ -332,13 +332,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Η λειτουργία root απαιτεί το πρωτότυπο APK να είναι εγκατεστημένο στη συσκευή πριν τροποποιηθεί</string>
     <string name="root_gmscore_excluded">Η υποστήριξη της τροποποίησης GmsCore εξαιρείται στη λειτουργία root</string>
-    <string name="root_pre_patch_installer_title">Επιλογή μεθόδου εγκατάστασης</string>
-    <string name="root_pre_patch_installer_description">Η συσκευή σας έχει πρόσβαση root. Επιλέξτε τον τρόπο εγκατάστασης της τροποποιημένης εφαρμογής</string>
-    <string name="root_pre_patch_installer_mount_title">Προσάρτηση με root</string>
-    <string name="root_pre_patch_installer_mount_description">Προσάρτηση τροποποιημένης APK πάνω από την πρωτότυπη εφαρμογή. Δε χρειάζεται GmsCore</string>
+    <string name="root_pre_patch_installer_title">Επιλέξτε λειτουργία ενημέρωσης</string>
+    <string name="root_pre_patch_installer_description">Η συσκευή σας έχει πρόσβαση root. Επιλέξτε αν η εφαρμογή θα ενημερωθεί για προσάρτηση root ή τυπική εγκατάσταση</string>
+    <string name="root_pre_patch_installer_mount_title">Λειτουργία προσάρτησης root</string>
+    <string name="root_pre_patch_installer_mount_description">Ενημερώσεις για προσάρτηση root, στη συνέχεια προσαρτά το APK πάνω από την αντίστοιχη εργοστασιακή εφαρμογή. Δεν απαιτείται GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Εάν χρησιμοποιείτε KernelSU ή APatch, απενεργοποιήστε την αποσυναρμολόγηση ή απόκρυψη module για εφαρμογές που έχουν εγκατασταθεί με root mount. Διαφορετικά, η αρχική εφαρμογή ενδέχεται να εξακολουθεί να εκτελείται ακόμα και όταν το Morphe την εμφανίζει ως προσδεδεμένη</string>
     <string name="root_pre_patch_installer_standard_title">Τυπική Εγκατάσταση</string>
-    <string name="root_pre_patch_installer_standard_description">Εγκαθίσταται ως ξεχωριστή εφαρμογή με υποστήριξη GmsCore. Μπορείτε να επιλέξετε έναν εγκαταστάτη μετά την εφαρμογή των αλλαγών</string>
-    <string name="root_pre_patch_installer_hint">Η μέθοδος εγκατάστασης καθορίζει ποιες τροποποιήσεις είναι συμπεριλημμένες και δεν μπορούν να αλλάξουν μετά την τροποποίηση</string>
+    <string name="root_pre_patch_installer_standard_description">Εφαρμογές ενημέρωσης ως ένα κανονικό APK με υποστήριξη GmsCore. Η ρύθμιση του εγκαταστάτη σας χρησιμοποιείται μετά την ενημέρωση</string>
+    <string name="root_pre_patch_installer_hint">Αυτή η λειτουργία ενημέρωσης είναι ανεξάρτητη από τις Ρυθμίσεις > Σύστημα > Εγκαταστάτη και δεν μπορεί να αλλάξει μετά την ενημέρωση</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Το σφάλμα αντιγράφηκε στο πρόχειρο</string>
     <string name="patcher_error_log">Αρχείο καταγραφής σφαλμάτων</string>
@@ -438,6 +439,8 @@
     <string name="patcher_process_exit_message">Η διαδικασία του τροποποιητή σταμάτησε με κωδικό %s</string>
     <string name="install_app_success">Επιτυχής εγκατάσταση</string>
     <string name="install_app_fail">Απέτυχε η εγκατάσταση της εφαρμογής: %s</string>
+    <string name="uninstall_app_fail">Αποfailed να απεγκατασταθεί η εφαρμογή: %s</string>
+    <string name="uninstall_timeout">Η απεγκατάσταση έληξε</string>
     <string name="save_apk_success">Το APK αποθηκεύτηκε</string>
     <string name="saved_app_export_failed">Η εξαγωγή της τροποποιημένης εφαρμογής απέτυχε</string>
     <string name="saved_app_removed_toast">Η αποθηκευμένη τροποποιημένη εφαρμογή αφαιρέθηκε</string>
@@ -483,10 +486,13 @@
     <string name="settings_appearance_parallax_effect_description">Ομαλή μετατόπιση φόντου όταν αλλάξει κλίση η συσκευή</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Θέμα</string>
+    <string name="settings_appearance_theme_mode">Λειτουργία θέματος</string>
     <string name="settings_appearance_system">Σύστημα</string>
     <string name="settings_appearance_light">Φωτεινό</string>
     <string name="settings_appearance_dark">Σκοτεινό</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Μονόχρωμο</string>
+    <string name="settings_appearance_color_style">Στυλ χρώματος</string>
     <string name="settings_appearance_accent_color">Χρώμα έμφασης</string>
     <string name="settings_appearance_pure_black">Αληθινό μαύρο</string>
     <string name="settings_appearance_pure_black_description">Χρησιμοποιεί αληθινά μαύρα φόντα</string>
@@ -651,12 +657,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Διαγραφή του κουμπιού Shorts από το γραφικό στοιχείο εκκίνησης </string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Εγκαταστάτης</string>
+    <string name="installer_settings_title">Προεπιλεγμένος εγκαταστάτης</string>
     <string name="installer_title">Επιλέξτε εγκαταστάτη</string>
     <string name="installer_internal_description">Χρησιμοποιεί τον ενσωματωμένο εγκαταστάτη πακέτων Android</string>
     <string name="installer_play_store_description">Χρησιμοποιεί το συστημικό πρόγραμμα εγκατάστασης και ορίζει το Google Play Store ως πηγή εγκατάστασης</string>
     <string name="installer_root_play_store_description">Εγκαθιστά αθόρυβα με δικαιώματα root και ορίζει το Google Play Store ως πηγή εγκατάστασης</string>
-    <string name="installer_auto_saved_name">Εγκαταστάτης προσάρτησης με root</string>
-    <string name="installer_auto_saved_description">Προσαρτά την τροποποιημένη APK πάνω από την εγκατεστημένη εφαρμογή</string>
+    <string name="installer_auto_saved_name">Προσάρτηση με root</string>
+    <string name="installer_auto_saved_description">Προσάρτηση εφαρμογών που έχουν ενημερωθεί σε λειτουργία προσάρτησης με root. Οι συνηθισμένες ενημερωμένες APK χρησιμοποιούν έναν άλλο εγκαταστάτη</string>
     <string name="installer_shizuku_description">Εγκαθίσταται αθόρυβα χρησιμοποιώντας Shizuku ή Sui</string>
     <string name="installer_shizuku_play_store_description">Εγκαθιστά αθόρυβα μέσω Shizuku ή Sui και ορίζει το Google Play Store ως πηγή εγκατάστασης</string>
     <string name="installer_option_none">Χωρίς εφεδρεία</string>
@@ -668,6 +675,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_permission">Δώστε άδεια στο Morphe από την εφαρμογή Shizuku</string>
     <string name="installer_mount_warning_install">Ο πρωταρχικός εγκαταστάτης σας είναι ορισμένος με τον rooted προσαρτημένο εγκαταστάτη. Αυτή η αποθηκευμένη εφαρμογή δεν εγκαταστάθηκε με προσάρτηση</string>
     <string name="mount_version_mismatch_message">Η έκδοση της αρχικής ανεπεξέργαστης εφαρμογής (%2$s) δεν ταιριάζει με την έκδοση της τροποποιημένης εφαρμογής (%1$s). Προσαρτήστε την αρχική ανεπεξέργαστη έκδοση της εφαρμογής, και μετά προσπαθήστε ξανά.</string>
+    <string name="mount_stock_restore_failed_message">Το Android απέρριψε το αρχικό APK που αποθηκεύτηκε. Εγκαταστήστε την αντίστοιχη αρχική έκδοση, στη συνέχεια δοκιμάστε να προσαρτήσετε ξανά</string>
     <string name="installer_status_shizuku_unsupported">Η εγκατεστημένη έκδοση του Shizuku δεν υποστηρίζεται.</string>
     <string name="installer_action_open_shizuku">Άνοιγμα Shizuku</string>
     <string name="installer_hint_generic">Η εγκατάσταση απέτυχε. Προσπαθήστε ξανά ή χρησιμοποιήστε διαφορετικό εγκαταστάτη.</string>

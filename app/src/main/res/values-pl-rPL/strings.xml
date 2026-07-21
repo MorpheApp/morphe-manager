@@ -99,7 +99,7 @@
     <string name="home_greeting_super_late_2">Nie możesz spać? Zmodyfikuj coś</string>
     <string name="home_greeting_super_late_3">Na tym etapie po prostu nie idź spać i modyfikuj</string>
     <string name="home_greeting_super_late_4">Tylko ty i serwery nie śpicie</string>
-    <string name="home_greeting_super_late_5">Nocny, ale produktywny</string>
+    <string name="home_greeting_super_late_5">Nocny i produktywny</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Źródła modyfikacji</string>
     <string name="sources_sort_title">Sortuj źródła modyfikacji</string>
@@ -332,13 +332,14 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Tryb root wymaga zainstalowania oryginalnego pliku APK na urządzeniu przed zmodyfikowaniem</string>
     <string name="root_gmscore_excluded">Wsparcie dla GmsCore jest wyłączone w trybie root</string>
-    <string name="root_pre_patch_installer_title">Wybierz metodę instalacji</string>
-    <string name="root_pre_patch_installer_description">Wykryto uprawnienia root. Wybierz sposób instalacji zmodyfikowanej aplikacji</string>
-    <string name="root_pre_patch_installer_mount_title">Montowanie root</string>
-    <string name="root_pre_patch_installer_mount_description">Montuje zmodyfikowany plik APK nad oryginalną aplikacją. GmsCore nie jest wymagany</string>
-    <string name="root_pre_patch_installer_standard_title">Standardowa instalacja</string>
-    <string name="root_pre_patch_installer_standard_description">Instaluje jako oddzielną aplikację ze wsparciem GmsCore. Instalator można wybrać po modyfikowaniu</string>
-    <string name="root_pre_patch_installer_hint">Metoda instalacji określa zakres dostępnych modyfikacji i nie może zostać zmieniona po rozpoczęciu procesu</string>
+    <string name="root_pre_patch_installer_title">Wybierz tryb łatki</string>
+    <string name="root_pre_patch_installer_description">Twoje urządzenie ma dostęp root. Wybierz, czy aplikacja powinna zostać załatana dla montowania root, czy standardowej instalacji.</string>
+    <string name="root_pre_patch_installer_mount_title">Tryb montowania root</string>
+    <string name="root_pre_patch_installer_mount_description">Łatki dla montowania root, następnie montuje APK na odpowiadającej aplikacji stock. Nie wymaga GmsCore.</string>
+    <string name="root_mount_module_unmount_warning">Jeśli używasz KernelSU lub APatch, wyłċczył wyłċczenie modułu lub ukrywanie dla aplikacji zainstalowanych z uprawnieniami roota. W przeciwnym razie oryginalna aplikacja może nadal działał, nawet gdy Morphe pokazuje, że jest zamontowana.</string>
+    <string name="root_pre_patch_installer_standard_title">Standardowy tryb instalacji</string>
+    <string name="root_pre_patch_installer_standard_description">Patche jako normalny plik APK z obsługą GmsCore. Używana jest ustawienie instalatora po załataniu.</string>
+    <string name="root_pre_patch_installer_hint">Ten tryb załatania jest niezależny od Ustawień &gt; System &gt; Instalator i nie można go zmienił po załataniu.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Skopiowano błąd do schowka</string>
     <string name="patcher_error_log">Dziennik błędów</string>
@@ -438,6 +439,8 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="patcher_process_exit_message">Proces modyfikatora zakończył się kodem %s</string>
     <string name="install_app_success">Zainstalowano pomyślnie</string>
     <string name="install_app_fail">Nie udało się zainstalować aplikacji: %s</string>
+    <string name="uninstall_app_fail">Nie udało się odinstalować aplikacji: %s</string>
+    <string name="uninstall_timeout">Czas odinstalowania upłynął</string>
     <string name="save_apk_success">Zapisano plik APK</string>
     <string name="saved_app_export_failed">Nie udało się wyeksportować zmodyfikowanej aplikacji</string>
     <string name="saved_app_removed_toast">Usunięto zapisaną zmodyfikowaną aplikację</string>
@@ -483,10 +486,13 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_parallax_effect_description">Płynne przesuwanie tła przy nachyleniu urządzenia</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Motyw</string>
+    <string name="settings_appearance_theme_mode">Tryb motywu</string>
     <string name="settings_appearance_system">Systemowy</string>
     <string name="settings_appearance_light">Jasny</string>
     <string name="settings_appearance_dark">Ciemny</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monochromatyczna</string>
+    <string name="settings_appearance_color_style">Styl kolorów</string>
     <string name="settings_appearance_accent_color">Kolor akcentu</string>
     <string name="settings_appearance_pure_black">Głęboka czerń</string>
     <string name="settings_appearance_pure_black_description">Używa prawdziwie czarnego tła</string>
@@ -653,12 +659,13 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Usuwa przycisk Shorts z widżetu launchera</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
+    <string name="installer_settings_title">Domyślny instalator</string>
     <string name="installer_title">Wybierz instalator</string>
     <string name="installer_internal_description">Używa instalatora pakietów Androida</string>
     <string name="installer_play_store_description">Używa instalatora systemowego i ustawia Sklep Play jako źródło instalacji</string>
     <string name="installer_root_play_store_description">Instaluje w tle z użyciem roota i ustawia Sklep Play jako źródło instalacji</string>
-    <string name="installer_auto_saved_name">Instalator z montowaniem roota</string>
-    <string name="installer_auto_saved_description">Montuje zmodyfikowany plik APK nad zainstalowaną aplikacją</string>
+    <string name="installer_auto_saved_name">Montowanie root</string>
+    <string name="installer_auto_saved_description">Montuje aplikacje, ktłre zostały załatane w trybie montowania roota. Standardowe załatane pliki APK używają innego instalatora.</string>
     <string name="installer_shizuku_description">Instaluje w tle za pomocą Shizuku lub Sui</string>
     <string name="installer_shizuku_play_store_description">Instaluje w tle przez Shizuku lub Sui i ustawia Sklep Play jako źródło instalacji</string>
     <string name="installer_option_none">Brak instalatora zapasowego</string>
@@ -670,6 +677,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_status_shizuku_permission">Przyznaj uprawnienia dla Morphe w aplikacji Shizuku</string>
     <string name="installer_mount_warning_install">Główny instalator został ustawiony na instalator z montowaniem. Ta zapisana aplikacja nie została zainstalowana przy użyciu montowania</string>
     <string name="mount_version_mismatch_message">Wersja oryginalnej aplikacji (%2$s) nie jest zgodna z wersją zmodyfikowanej aplikacji (%1$s). Zamontuj zgodną wersję oryginalną, a następnie spróbuj ponownie</string>
+    <string name="mount_stock_restore_failed_message">Android odrzucił zapisany oryginalny plik APK. Zainstaluj dopasowaną oryginalną wersję, a następnnie sprłbuj zamontował ponownie.</string>
     <string name="installer_status_shizuku_unsupported">Zainstalowana wersja Shizuku nie jest wspierana</string>
     <string name="installer_action_open_shizuku">Otwórz Shizuku</string>
     <string name="installer_hint_generic">Instalacja nie powiodła się. Spróbuj ponownie lub wybierz inny instalator</string>
@@ -731,19 +739,19 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_process_runtime_enabled_description">Limit: %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Dotknij, aby skonfigurować</string>
     <string name="settings_system_process_runtime_description_not_available">Ta funkcja wymaga systemu Android 11 lub nowszego</string>
-    <string name="settings_system_patcher_completion_sound">Dźwięk powiadomienia o zakończeniu</string>
-    <string name="settings_system_patcher_completion_sound_description">Odtwarza charakterystyczny dźwięk sygnalizujący powodzenie lub niepowodzenie po zakończeniu procesu modyfikacji</string>
+    <string name="settings_system_patcher_completion_sound">Dźwięk ukończenia</string>
+    <string name="settings_system_patcher_completion_sound_description">Odtwarza wyraźny dźwięk powodzenia lub niepowodzenia po zakończeniu modyfikacji</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Powiadomienia</string>
-    <string name="settings_system_notifications_description">Konfiguracja powiadomień tła i dźwięków o zakończeniu</string>
-    <string name="settings_system_notifications_success_sound">Dźwięk powiadomienia o powodzeniu</string>
+    <string name="settings_system_notifications_description">Skonfiguruj alerty w tle i dźwięki ukończenia</string>
+    <string name="settings_system_notifications_success_sound">Dźwięk powodzenia</string>
     <string name="settings_system_notifications_error_sound">Dźwięk niepowodzenia</string>
-    <string name="settings_system_notifications_sound_default">Domyślne</string>
+    <string name="settings_system_notifications_sound_default">Domyślny</string>
     <string name="settings_system_notifications_sound_picker_title">Wybierz źródło dźwięku</string>
     <string name="settings_system_notifications_sound_pick_ringtone">Dźwięki systemowe</string>
     <string name="settings_system_notifications_sound_pick_file">Wybierz z plików</string>
-    <string name="settings_system_notifications_sound_reset">Zresetuj do domyślnych</string>
-    <string name="settings_system_notifications_ringtone_picker_title">Wybierz ton</string>
+    <string name="settings_system_notifications_sound_reset">Przywróć domyślny</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Wybierz dźwięk</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import i eksport</string>
     <string name="settings_system_keystore">Magazyn kluczy</string>

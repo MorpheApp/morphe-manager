@@ -330,13 +330,14 @@ Herêma derveyî (qutkirî): dikare ji aliyê maskeya launcher'ê ve were qutkir
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Tîrek xwestisê wî de qewımîr APK tê serê îzayê we ev pêwist be pêşbaziyê biqewmê pêş de bîtin da xestes numberê berıkirînda Android bi usayiastî bimezânê</string>
     <string name="root_gmscore_excluded">Pişta GmsCore di moda root de ji holê derdike</string>
-    <string name="root_pre_patch_installer_title">Destura îstikrarê bejin</string>
-    <string name="root_pre_patch_installer_description">Cihê we cih dîboz ande. çawa ji îstikrarê; bejin</string>
-    <string name="root_pre_patch_installer_mount_title">Serkirê serî</string>
-    <string name="root_pre_patch_installer_mount_description">APK-a serêkut dikêr serî lê APK-ya stokê. Pêdivî bi GmsCore nîn e</string>
-    <string name="root_pre_patch_installer_standard_title">Îstikrarê Standart</string>
-    <string name="root_pre_patch_installer_standard_description">Dê ew qappekê vekêrî bi piştgiriya GmsCore\'yê da dîsa vekirin. Dibe ku qerziqê heta qeyikî vekirin bidin hilbijartin</string>
-    <string name="root_pre_patch_installer_hint">Destura îstikrarê rê van hûn rê ew be, dê neyê qêçîn pêştirî îstikrarê</string>
+    <string name="root_pre_patch_installer_title">Modê pelikê hilbijêre</string>
+    <string name="root_pre_patch_installer_description">Cihaza te gihîştina root heye. Hilbijêre ku ev serîlêdan ji bo çîna root were pelkirin an sazkirina standard</string>
+    <string name="root_pre_patch_installer_mount_title">Moda çîna root</string>
+    <string name="root_pre_patch_installer_mount_description">Pelikên ji bo çîna root, paşê APKê li ser serîlêdana stokê yê hevdîtinî çêbike. Pêdivî bi GmsCore nîn e</string>
+    <string name="root_mount_module_unmount_warning">Heke KernelSU an APatch bikarî, rakirina modula veyaşartina moduleya veşartîna sepanên bi riya riya root hatine saz kirin hewce dikare asteng bike. Wekî din, sepanê yê orjînal dê her dem bikare bixebite, lê Morphe ew wekî veşartî nîşan dide</string>
+    <string name="root_pre_patch_installer_standard_title">Moda sazkirina standard</string>
+    <string name="root_pre_patch_installer_standard_description">Pêçekan wekî APK\'yeke normal bi piştgiriya GmsCore. Rêgeziya sazkirina we piştî pêçekirinê tê bikar anîn</string>
+    <string name="root_pre_patch_installer_hint">Ev moda pêçekirinê ji Rêgeziya > Pergal > Sazkirinê cûda ye û paşê de nikare bê guhertin</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Xetalî bi mêjiyê kopî kirin</string>
     <string name="patcher_error_log">Log xistina</string>
@@ -436,6 +437,8 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="patcher_process_exit_message">Prosesa guheztinê bi kodê %s xilas bû.</string>
     <string name="install_app_success">Bi ser ketin</string>
     <string name="install_app_fail">Serketina kuştina sepanê: %s</string>
+    <string name="uninstall_app_fail">Serêxistina rakirina sepanê têk çû: %s</string>
+    <string name="uninstall_timeout">Rakirin serbest maye</string>
     <string name="save_apk_success">APK-yê hatiye parastin</string>
     <string name="saved_app_export_failed">Serketina paşerojê ya sepanê</string>
     <string name="saved_app_removed_toast">Hateyên parastinê hatin jêbirin</string>
@@ -481,10 +484,13 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="settings_appearance_parallax_effect_description">Serdestinê pêşbazinê de girtinê tê guherandin de hîrdikê alik bê yê ew zibu âniye</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
+    <string name="settings_appearance_theme_mode">Modê tema</string>
     <string name="settings_appearance_system">Sistem</string>
     <string name="settings_appearance_light">Ronahî</string>
     <string name="settings_appearance_dark">Tirş</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Tekrêng</string>
+    <string name="settings_appearance_color_style">Şêwey reng</string>
     <string name="settings_appearance_accent_color">Rengê serdest</string>
     <string name="settings_appearance_pure_black">Rewşê veşer</string>
     <string name="settings_appearance_pure_black_description">Bêjeya paşnavê reş ê rastîn bikar bîne</string>
@@ -651,12 +657,13 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Biçikê Shorts’ê ji wîjeyê derxîne</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Saçik</string>
+    <string name="installer_settings_title">Saşkirina standard</string>
     <string name="installer_title">Sazkerê hilbijêre</string>
     <string name="installer_internal_description">Sazkera pakketa Android’ê bikar bîne</string>
     <string name="installer_play_store_description">Seta pêşnişazê sîstemê bikar tîne û Google Play Store wekî çavkaniya saetkirinê destnîşîn dike</string>
     <string name="installer_root_play_store_description">Bi rihên root ve bêdeng sazkirin û çavkaniya sazkirinê wekî Google Play Store destnîşan bike</string>
-    <string name="installer_auto_saved_name">Ferqendera ku bi rûsyê ve çêkiriye</string>
-    <string name="installer_auto_saved_description">APK-ya dirûtîkirî ser navberê serdana sepanê ava dike</string>
+    <string name="installer_auto_saved_name">Rihiya root</string>
+    <string name="installer_auto_saved_description">Sepanên ku di moda rihiya root de hatine pêçekirin, rihiya wan tê kirin. APK\'yên pêçekirî yên standard ji sazkirinê dinarê hene</string>
     <string name="installer_shizuku_description">Sazkirina bêdeng bi Shizuku an Sui’yê</string>
     <string name="installer_shizuku_play_store_description">Bi rihên Shizuku an Sui ve bêdeng sazkirin û çavkaniya sazkirinê wekî Google Play Store destnîşan bike</string>
     <string name="installer_option_none">Tu vegirtin</string>
@@ -668,6 +675,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="installer_status_shizuku_permission">Destûrê da Morphe ji bo sepina Shizuku</string>
     <string name="installer_mount_warning_install">Îstalatorek sereke we li îstalatorek qutiyelê hatiye danîn. Ev sepan bi qutiyê nehate saz kirin</string>
     <string name="mount_version_mismatch_message">Versiyona sepanê orîjînal (%2$s) bi versiyona sepanê têra sipêde nebaxe (%1$s). Versiyona orîjînal a pêşîn saz bike, paştrê dîsa hewil bide</string>
+    <string name="mount_stock_restore_failed_message">Android\'ê APK\'ya orjînal a ku hatibû tomarkirin qebûl nekir. Vebijêrka testê ya ku pêşî tê saz kirin saz bike, hewce dîtin</string>
     <string name="installer_status_shizuku_unsupported">Versiyona sazkirî ya Şizuku piştgirî nadê</string>
     <string name="installer_action_open_shizuku">Veşêre Shizuku</string>
     <string name="installer_hint_generic">Îstikrar kirin jêvir kirin. Dibe, dîsa hewil bide an li îstalatorek din zivirînê hebin</string>

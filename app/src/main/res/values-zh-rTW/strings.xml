@@ -332,13 +332,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root 模式需要在修補之前將原始 APK 安裝在您的裝置上</string>
     <string name="root_gmscore_excluded">GmsCore 支援修補程式在 root 模式中被排除</string>
-    <string name="root_pre_patch_installer_title">選擇安裝方法</string>
-    <string name="root_pre_patch_installer_description">您的裝置具有 root 存取權限。選擇您希望如何安裝修補後的應用程式</string>
-    <string name="root_pre_patch_installer_mount_title">Root 掛載</string>
-    <string name="root_pre_patch_installer_mount_description">將修補後的 APK 掛載在原廠應用程式之上。不需要 GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">標準安裝</string>
-    <string name="root_pre_patch_installer_standard_description">作為獨立的應用程式安裝，並具有 GmsCore 支援。在修補後選擇安裝程式（系統安裝程式、Shizuku 等）</string>
-    <string name="root_pre_patch_installer_hint">安裝方法決定包含哪些修補程式，且在修補後無法變更</string>
+    <string name="root_pre_patch_installer_title">選擇補丁模式</string>
+    <string name="root_pre_patch_installer_description">您的設備已獲得root權限。選擇此應用程序是否應為root掛載或標準安裝進行補丁</string>
+    <string name="root_pre_patch_installer_mount_title">Root掛載模式</string>
+    <string name="root_pre_patch_installer_mount_description">為root掛載補丁，然後將APK覆蓋在匹配的庫存應用程序上。不需要GmsCore</string>
+    <string name="root_mount_module_unmount_warning">如果您使用 KernelSU 或 APatch，請為搭配 Root 掛載安裝的應用程式停用模組卸載或隱藏功能。否則，即使 Morphe 顯示應用程式已掛載，原始應用程式仍可能繼續執行。</string>
+    <string name="root_pre_patch_installer_standard_title">標準安裝模式</string>
+    <string name="root_pre_patch_installer_standard_description">以支援 GmsCore 的一般 APK 形式修補。修補完成後，將使用您的安裝程式設定。</string>
+    <string name="root_pre_patch_installer_hint">此修補模式與「設定」>「系統」>「安裝程式」分開，且修補後無法更改。</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">已將錯誤複製到剪貼簿</string>
     <string name="patcher_error_log">錯誤記錄檔</string>
@@ -438,6 +439,8 @@
     <string name="patcher_process_exit_message">修補程序已結束，代碼為 %s</string>
     <string name="install_app_success">安裝成功</string>
     <string name="install_app_fail">無法安裝應用程式：%s</string>
+    <string name="uninstall_app_fail">無法解除安裝應用程式：%s</string>
+    <string name="uninstall_timeout">解除安裝逾時</string>
     <string name="save_apk_success">APK 已儲存</string>
     <string name="saved_app_export_failed">無法匯出已修補的應用程式</string>
     <string name="saved_app_removed_toast">已移除儲存的已修補應用程式</string>
@@ -483,10 +486,13 @@
     <string name="settings_appearance_parallax_effect_description">傾斜裝置時平滑的背景位移</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">主題</string>
+    <string name="settings_appearance_theme_mode">主題模式</string>
     <string name="settings_appearance_system">系統</string>
     <string name="settings_appearance_light">淺色</string>
     <string name="settings_appearance_dark">深色</string>
     <string name="settings_appearance_dynamic">動態顏色</string>
+    <string name="settings_appearance_monochrome">單色</string>
+    <string name="settings_appearance_color_style">顏色樣式</string>
     <string name="settings_appearance_accent_color">強調色</string>
     <string name="settings_appearance_pure_black">純黑</string>
     <string name="settings_appearance_pure_black_description">使用純黑背景</string>
@@ -566,6 +572,8 @@
     <string name="settings_advanced_github_pat_configured">已設定 Token</string>
     <string name="settings_advanced_github_pat_how_to_get">如何獲取 Token</string>
     <string name="settings_advanced_github_pat_dialog_title">設定 GitHub 個人存取權杖 (PAT)</string>
+    <string name="settings_advanced_github_pat_dialog_description">"設定 GitHub 個人存取權杖以將提取請求新增為外部來源。請在
+%s 建立一個具有 public_repo 權限範圍的 PAT"</string>
     <string name="settings_advanced_github_pat_export_include_label">包含在設定匯出中</string>
     <string name="settings_advanced_github_pat_export_include_supporting">將此 PAT 新增至匯出的 Morphe 設定</string>
     <string name="settings_advanced_github_pat_export_warning">請勿分享您的 PAT。如果您將其包含在設定匯出中，請將該檔案保密，因為它包含該權杖</string>
@@ -650,12 +658,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">從啟動器小工具中移除 Shorts 按鈕</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">安裝程式</string>
+    <string name="installer_settings_title">預設安裝程式</string>
     <string name="installer_title">選取安裝程式</string>
     <string name="installer_internal_description">使用 Android 封裝安裝程式</string>
     <string name="installer_play_store_description">使用系統安裝程式並將Google Play商店設定為安裝來源</string>
     <string name="installer_root_play_store_description">以根權限靜默安裝，並將 Google Play 商店設定為安裝來源</string>
-    <string name="installer_auto_saved_name">根目錄掛載安裝程式</string>
-    <string name="installer_auto_saved_description">將修補後的 APK 掛載到已安裝的應用程式上</string>
+    <string name="installer_auto_saved_name">Root 掛載</string>
+    <string name="installer_auto_saved_description">掛載以 Root 掛載模式修補的應用程式。標準修補的 APK 使用另一個安裝程式。</string>
     <string name="installer_shizuku_description">使用 Shizuku 或 Sui 進行靜默安裝</string>
     <string name="installer_shizuku_play_store_description">透過 Shizuku 或 Sui 靜默安裝，並將 Google Play 商店設定為安裝來源</string>
     <string name="installer_option_none">無後備選項</string>
@@ -664,8 +673,10 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">不支援此操作</string>
     <string name="installer_status_shizuku_not_installed">安裝 Shizuku 或 Sui 以使用此選項</string>
     <string name="installer_status_shizuku_not_running">啟動 Shizuku 或 Sui 並重試</string>
+    <string name="installer_status_shizuku_permission">請從 Shizuku 應用程式授予 Morphe 權限</string>
     <string name="installer_mount_warning_install">您的主要安裝程式設為根目錄掛載安裝程式。此儲存的應用程式並非使用掛載安裝</string>
     <string name="mount_version_mismatch_message">原廠應用程式版本 (%2$s) 與修補後的應用程式版本 (%1$s) 不符。掛載相符的原廠版本，然後重試</string>
+    <string name="mount_stock_restore_failed_message">Android 拒絕了儲存的原始 APK。請安裝相符的原始版本，然後再次嘗試掛載。</string>
     <string name="installer_status_shizuku_unsupported">安裝的 Shizuku 版本不受支援</string>
     <string name="installer_action_open_shizuku">開啟 Shizuku</string>
     <string name="installer_hint_generic">安裝失敗。請重試或切換至其他安裝程式</string>
@@ -678,12 +689,40 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">請確認 Shizuku 正在執行且已授予此應用程式權限</string>
     <string name="installer_use_standard">使用標準</string>
     <string name="installer_play_store_warning_title">以 Play 商店安裝？</string>
+    <string name="installer_play_store_warning_message">已修補的應用程式將被記錄為從 Google Play 商店安裝。這可以協助 Android Auto 等服務將其識別為 Play 商店應用程式，但不保證適用於所有應用程式或裝置。其行為可能因 Android 版本、ROM、裝置品牌和應用程式特定的檢查而異</string>
     <string name="installer_play_store_warning_risk">Play 商店可能會提供修補應用程式的更新。安裝該更新會用原始版本覆寫修補的 APK，並移除修補。如果提示更新，請點選應用程式 Play 商店頁面上的三點選單，然後選擇「關閉更新」</string>
     <string name="installer_play_store_warning_continue">我了解，繼續</string>
+    <string name="installer_play_store_mode">安裝為 Play 商店</string>
+    <string name="installer_play_store_mode_description">記錄 Google Play 商店為此安裝方式的安裝來源</string>
     <string name="settings_prompt_installer_on_install">安裝程式選擇提示</string>
     <string name="settings_prompt_installer_on_install_description">每次安裝修補後的應用程式時顯示安裝程式選取對話方塊</string>
     <string name="settings_auto_install_with_shizuku">修補完成後自動安裝</string>
     <string name="settings_auto_install_with_shizuku_description">修補完成後會立即自動安裝 APK</string>
+    <string name="settings_auto_uninstall_with_shizuku">衝突時自動解除安裝</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">使用 Shizuku 自動安裝時，若 Android 回報簽名衝突，則先解除安裝現有的應用程式。這可能會刪除應用程式資料</string>
+    <string name="settings_auto_uninstall_warning_title">要啟用自動解除安裝嗎？</string>
+    <string name="settings_auto_uninstall_warning_message">若 Android 在 Shizuku 自動安裝期間回報簽名衝突，Morphe 將在安裝已修補的 APK 之前先解除安裝現有的應用程式</string>
+    <string name="settings_auto_uninstall_warning_risk">這可能會刪除應用程式資料。若在解除安裝後無法安裝已修補的 APK，原本的應用程式可能已經遺失</string>
+    <string name="installer_shizuku_status_action">檢查 Shizuku 狀態</string>
+    <string name="installer_shizuku_status_title">Shizuku 狀態</string>
+    <string name="installer_shizuku_status_ready">就緒</string>
+    <string name="installer_shizuku_status_issue">需要注意</string>
+    <string name="installer_shizuku_status_supported">支援</string>
+    <string name="installer_shizuku_status_running">執行中</string>
+    <string name="installer_shizuku_status_permission">權限</string>
+    <string name="installer_shizuku_status_mode">模式</string>
+    <string name="installer_shizuku_status_provider">提供者</string>
+    <string name="installer_shizuku_status_granted">已授予</string>
+    <string name="installer_shizuku_status_missing">缺少</string>
+    <string name="installer_shizuku_request_permission">請求權限</string>
+    <string name="installer_shizuku_install_fail">Shizuku 安裝失敗：%s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku 安裝失敗：%1$s\n\n詳細資料：%2$s"</string>
+    <string name="installer_shizuku_error_permission">缺少 Shizuku 權限。請授予 Morphe 權限並重試</string>
+    <string name="installer_shizuku_error_timeout">Shizuku 未傳回安裝結果。請確認其仍在執行中並重試</string>
+    <string name="installer_shizuku_error_downgrade">Android 已封鎖此操作，因為這會降級已安裝的應用程式</string>
+    <string name="installer_shizuku_error_signature">Android 已封鎖此操作，因為已安裝的應用程式具有不同的簽名</string>
+    <string name="installer_shizuku_error_invalid_apk">Android 無法讀取此 APK</string>
+    <string name="installer_shizuku_error_user_profile">Android 已對目前的使用者或工作設定檔封鎖此操作</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">電池最佳化</string>
     <string name="settings_system_battery_optimization_description">即使應用程式被最小化，也會保持修補程式的執行</string>

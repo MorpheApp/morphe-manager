@@ -332,13 +332,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root режим захтева да оригинални APK буде инсталиран на вашем уређају пре печовања</string>
     <string name="root_gmscore_excluded">Печ подршке GmsCore је искључен у root режиму</string>
-    <string name="root_pre_patch_installer_title">Odaberi metodu instalacije</string>
-    <string name="root_pre_patch_installer_description">Vaš uređaj ima pristup korenovom direktorijumu. Odaberite kako želite da instaliraćete patčirani app</string>
-    <string name="root_pre_patch_installer_mount_title">Монтирај корен</string>
-    <string name="root_pre_patch_installer_mount_description">Монтира пачовани APK преко стандардне апликације. Није потребан GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">Standardna instalacija</string>
-    <string name="root_pre_patch_installer_standard_description">Инсталира се као засебна апликација са GmsCore подршком. Инсталатер се може одабрати након закрпе</string>
-    <string name="root_pre_patch_installer_hint">Način instalacije određuje koji patčići su uključeni i ne može se promeniti nakon patčiranja</string>
+    <string name="root_pre_patch_installer_title">Изберите режим за фластере</string>
+    <string name="root_pre_patch_installer_description">Ваш уређај има рут приступ. Изаберите да ли ће апликација бити фластерована за рут монтирање или стандардну инсталацију.</string>
+    <string name="root_pre_patch_installer_mount_title">Режим фластеровања рут монтирања</string>
+    <string name="root_pre_patch_installer_mount_description">Фластери за рут монтирање, затим монтира APK преко одговарајуће оригиналне апликације. Није потребна GmsCore.</string>
+    <string name="root_mount_module_unmount_warning">Ако користите KernelSU или APatch, онемогућите расклањање или скривање модула за апликације инсталиране са рут приступом. У супротном, оригинална апликација може и даље да ради чак и када Morphe покаже да је монтирана.</string>
+    <string name="root_pre_patch_installer_standard_title">Стандардна мода инсталације</string>
+    <string name="root_pre_patch_installer_standard_description">Закрпе као нормалан APK са GmsCore подршком. Ваша поставка инсталатера се користи након закрпе.</string>
+    <string name="root_pre_patch_installer_hint">Овај режим закрпе је посебан од Подешавања > Систем > Инсталатер и не може се променити након закрпе.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Грешка је копирана у привремену меморију</string>
     <string name="patcher_error_log">Лог грешaka</string>
@@ -438,6 +439,8 @@
     <string name="patcher_process_exit_message">Процес закрпе је завршен са кодом %s</string>
     <string name="install_app_success">Успешно инсталирано</string>
     <string name="install_app_fail">Није успело инсталирање апликације: %s</string>
+    <string name="uninstall_app_fail">Неуспешно деинсталирана апликација: %s</string>
+    <string name="uninstall_timeout">Време за деинсталацију је истекло</string>
     <string name="save_apk_success">АПК је сачуван</string>
     <string name="saved_app_export_failed">Није успео извоз покрпљене апликације</string>
     <string name="saved_app_removed_toast">Уклоњена сачувана покрпљена апликација</string>
@@ -483,10 +486,13 @@
     <string name="settings_appearance_parallax_effect_description">Umiranje pozadine pri kretanju ugao naprijed nazad</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Начин</string>
+    <string name="settings_appearance_theme_mode">Режим теме</string>
     <string name="settings_appearance_system">Системски</string>
     <string name="settings_appearance_light">Светли</string>
     <string name="settings_appearance_dark">Тамни</string>
     <string name="settings_appearance_dynamic">Материјал You</string>
+    <string name="settings_appearance_monochrome">Монохроматски</string>
+    <string name="settings_appearance_color_style">Стил боје</string>
     <string name="settings_appearance_accent_color">Акцент боја</string>
     <string name="settings_appearance_pure_black">Svetlo crno</string>
     <string name="settings_appearance_pure_black_description">Користи праву црну позадину</string>
@@ -653,12 +659,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Уклања дугме Shorts са видгета почетног екрана</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
+    <string name="installer_settings_title">Подразумевани инсталатер</string>
     <string name="installer_title">Изаберите инсталатор.</string>
     <string name="installer_internal_description">Користи Android пакетни инсталатер</string>
     <string name="installer_play_store_description">Користи системски инсталер и подешава Google Play Store као извор инсталације</string>
     <string name="installer_root_play_store_description">Тиха инсталација са рут приступом и подешавањем Гоогле Плаи Сторе као извор инсталације</string>
-    <string name="installer_auto_saved_name">Инсталатер монтирања са рут приступом</string>
-    <string name="installer_auto_saved_description">Montira patirane APK preko instalirane aplikacije</string>
+    <string name="installer_auto_saved_name">Рут монтирање</string>
+    <string name="installer_auto_saved_description">Монтира апликације које су биле закрпљене у режиму рут монтирања. Стандардне закрпљене APK-ове користе други инсталатер.</string>
     <string name="installer_shizuku_description">Инсталира тихо користећи Shizuku или Sui</string>
     <string name="installer_shizuku_play_store_description">Тиха инсталација преко Схизуку или Суи и подешавањем Гоогле Плаи Сторе као извор инсталације</string>
     <string name="installer_option_none">Без резервне опције</string>
@@ -670,6 +677,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_permission">Дозволите Morphe-у приступ од апликације Shizuku</string>
     <string name="installer_mount_warning_install">Ваш главни инсталатор је постављен на инсталатор за кореновани монтажу. Ова сачувана апликација није инсталирана коришћењем монтаже.</string>
     <string name="mount_version_mismatch_message">Верзија оригиналне апликације (%2$s) не одговара верзији патчене апликације (%1$s). Монтирајте одговараћу оригиналну верзију, а затим покушајте поново.</string>
+    <string name="mount_stock_restore_failed_message">Андроид је одбио сачувани оригинални APK. Инсталирајте одговарајућу оригиналну верзију, па покушајте да поново монтирате.</string>
     <string name="installer_status_shizuku_unsupported">Верзија Шизуку која је инсталирана није подржана.</string>
     <string name="installer_action_open_shizuku">Отвори Схизуку</string>
     <string name="installer_hint_generic">Инсталација је неуспела. Покушајте поново или пребаците на други инсталатор.</string>

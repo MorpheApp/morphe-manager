@@ -333,13 +333,14 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Mode root memerlukan APK asli untuk dipasang di perangkat Anda sebelum menambal</string>
     <string name="root_gmscore_excluded">Dukungan tambalan GmsCore dikecualikan dalam mode root</string>
-    <string name="root_pre_patch_installer_title">Pilih metode pemasangan</string>
-    <string name="root_pre_patch_installer_description">Perangkat Anda mempunyai akses root. Pilih cara memasang aplikasi yang ditambal</string>
-    <string name="root_pre_patch_installer_mount_title">Mount root</string>
-    <string name="root_pre_patch_installer_mount_description">Mount APK yang ditambal di atas aplikasi bawaan. Tidak membutuhkan GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">Pemasangan Standar</string>
-    <string name="root_pre_patch_installer_standard_description">Pasang sebagai aplikasi terpisah dengan dukungan GmsCore. Pemasang dapat dipilih setelah proses penambalan</string>
-    <string name="root_pre_patch_installer_hint">Metode pemasangan menentukan tambalan mana yang disertakan dan tidak dapat diubah setelah menambal</string>
+    <string name="root_pre_patch_installer_title">Pilih mode patch</string>
+    <string name="root_pre_patch_installer_description">Perangkat Anda memiliki akses root. Pilih apakah aplikasi ini akan di-patch untuk mount root atau instalasi standar</string>
+    <string name="root_pre_patch_installer_mount_title">Mode mount root</string>
+    <string name="root_pre_patch_installer_mount_description">Patch untuk mount root, kemudian mount APK di atas aplikasi stok yang sesuai. Tidak diperlukan GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Jika Anda menggunakan KernelSU atau APatch, nonaktifkan pelepasan atau penyembunyian modul untuk aplikasi yang diinstal dengan root mount. Jika tidak, aplikasi bawaan mungkin masih berjalan meskipun Morphe menampilkannya sebagai terpasang.</string>
+    <string name="root_pre_patch_installer_standard_title">Mode pemasangan standar</string>
+    <string name="root_pre_patch_installer_standard_description">Menambal sebagai APK normal dengan dukungan GmsCore. Pengaturan installer Anda digunakan setelah penambalan</string>
+    <string name="root_pre_patch_installer_hint">Mode penambalan ini terpisah dari Pengaturan > Sistem > Installer dan tidak dapat diubah setelah penambalan</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Kesalahan disalin ke papan klip</string>
     <string name="patcher_error_log">Catatan kesalahan</string>
@@ -439,6 +440,8 @@ Mencopot pemasangannya akan menghapus semua data aplikasi secara permanen"</stri
     <string name="patcher_process_exit_message">Proses Penambal dihentikan dengan kode %s</string>
     <string name="install_app_success">Berhasil dipasang</string>
     <string name="install_app_fail">Gagal memasang aplikasi: %s</string>
+    <string name="uninstall_app_fail">Gagal menghapus aplikasi: %s</string>
+    <string name="uninstall_timeout">Waktu penghapusan instalasi habis</string>
     <string name="save_apk_success">APK Tersimpan</string>
     <string name="saved_app_export_failed">Gagal mengekspor aplikasi hasil patch</string>
     <string name="saved_app_removed_toast">Entri aplikasi patch tersimpan dihapus</string>
@@ -484,10 +487,13 @@ Mencopot pemasangannya akan menghapus semua data aplikasi secara permanen"</stri
     <string name="settings_appearance_parallax_effect_description">Perpindahan latar belakang yang halus saat menggeser perangkat</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
+    <string name="settings_appearance_theme_mode">Mode tema</string>
     <string name="settings_appearance_system">Sistem</string>
     <string name="settings_appearance_light">Terang</string>
     <string name="settings_appearance_dark">Gelap</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monokrom</string>
+    <string name="settings_appearance_color_style">Gaya warna</string>
     <string name="settings_appearance_accent_color">Warna aksen</string>
     <string name="settings_appearance_pure_black">Hitam Pekat</string>
     <string name="settings_appearance_pure_black_description">Menggunakan latar belakang hitam pekat</string>
@@ -518,7 +524,7 @@ Mencopot pemasangannya akan menghapus semua data aplikasi secara permanen"</stri
     <string name="settings_appearance_app_icon_change_dialog_confirm">Ubah ikon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Pembaruan</string>
-    <string name="settings_advanced_patcher">Patcher</string>
+    <string name="settings_advanced_patcher">Penambal</string>
     <string name="settings_advanced_updates_use_prereleases">Pembaruan pra-rilis</string>
     <string name="settings_advanced_updates_use_prereleases_description">Akses awal ke versi aplikasi Morphe yang baru. Aktifkan pra-rilis per sumber di sumber tambalan</string>
     <string name="settings_advanced_updates_allow_metered">Pembaruan data seluler</string>
@@ -654,12 +660,13 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Menghapus tombol Shorts dari widget peluncur</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Pemasang</string>
+    <string name="installer_settings_title">Installer default</string>
     <string name="installer_title">Pilih pemasang</string>
     <string name="installer_internal_description">Menggunakan pemasang paket Android</string>
     <string name="installer_play_store_description">Menggunakan pemasang sistem dan mengatur Google Play Store sebagai sumber pemasangan</string>
     <string name="installer_root_play_store_description">Memasang secara diam-diam dengan akses root dan mengatur Google Play Store sebagai sumber pemasangan</string>
-    <string name="installer_auto_saved_name">Pemasang mount root</string>
-    <string name="installer_auto_saved_description">Mount APK yang ditambal di atas aplikasi yang terpasang</string>
+    <string name="installer_auto_saved_name">Mount root</string>
+    <string name="installer_auto_saved_description">Memasang aplikasi yang ditambal dalam mode root mount. APK yang ditambal standar menggunakan installer lain</string>
     <string name="installer_shizuku_description">Memasang secara senyap menggunakan Shizuku atau Sui</string>
     <string name="installer_shizuku_play_store_description">Memasang secara diam-diam melalui Shizuku atau Sui dan mengatur Google Play Store sebagai sumber pemasangan</string>
     <string name="installer_option_none">Tidak ada pengganti</string>
@@ -671,6 +678,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="installer_status_shizuku_permission">Berikan izin ke Morphe dari aplikasi Shizuku</string>
     <string name="installer_mount_warning_install">Pemasang utama Anda diatur ke pemasang mount ber-root. Aplikasi tersimpan ini tidak dipasang menggunakan mount</string>
     <string name="mount_version_mismatch_message">Versi aplikasi bawaan (%2$s) tidak cocok dengan versi aplikasi dipatch (%1$s). Pasang versi bawaan yang cocok, lalu coba lagi</string>
+    <string name="mount_stock_restore_failed_message">Android menolak APK asli yang disimpan. Instal versi bawaan yang sesuai, lalu coba Pasang lagi</string>
     <string name="installer_status_shizuku_unsupported">Versi Shizuku yang terpasang tidak didukung</string>
     <string name="installer_action_open_shizuku">Buka Shizuku</string>
     <string name="installer_hint_generic">Pemasangan gagal. Coba lagi atau ganti pemasang</string>

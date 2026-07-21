@@ -24,6 +24,22 @@
         <item quantity="one">%s APK файл</item>
         <item quantity="other">%s APK файлове</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Инсталирани %d приложения</item>
+        <item quantity="other">Инсталирани %d приложения</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Преинсталирани %d приложения</item>
+        <item quantity="other">Преинсталирани %d приложения</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Изтрито %d приложение</item>
+        <item quantity="other">Изтрити %d приложения</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Пропуснато %d приложение</item>
+        <item quantity="other">Пропуснати %d приложения</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Изтрит %s излишен пач от запазения избор</item>
         <item quantity="other">Изтрит %s излишни пачове от запазения избор</item>

@@ -332,13 +332,14 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Éilíonn mód fréimhe go mbeidh an APK bunaidh suiteáilte ar do ghléas sula ndéantar paisteáil</string>
     <string name="root_gmscore_excluded">Tá paiste tacaíochta GmsCore eiscthe i mód fréimhe</string>
-    <string name="root_pre_patch_installer_title">Roghnaigh modh suiteála</string>
-    <string name="root_pre_patch_installer_description">Tá rochtain fréimhe ag do ghléas. Roghnaigh conas is mian leat an aip phaisteáilte a shuiteáil.</string>
-    <string name="root_pre_patch_installer_mount_title">Gléasadh fréimhe</string>
-    <string name="root_pre_patch_installer_mount_description">Suiteálann sé an APK paisteáilte thar an aip stoic. Níl GmsCore ag teastáil.</string>
-    <string name="root_pre_patch_installer_standard_title">Suiteáil Chaighdeánach</string>
-    <string name="root_pre_patch_installer_standard_description">Suiteáiltear é mar aip ar leith le tacaíocht GmsCore. Is féidir suiteálaí a roghnú tar éis paisteála.</string>
-    <string name="root_pre_patch_installer_hint">Cinneann an modh suiteála cé na paistí atá san áireamh agus nach féidir a athrú tar éis paistí.</string>
+    <string name="root_pre_patch_installer_title">Roghnaigh mód pac</string>
+    <string name="root_pre_patch_installer_description">Tá rochtain fréimhe ag do ghléas. Cinneadh cé ba chóir don aip seo a bheith pacáilte le haghaidh fréimhe nó suiteáil caighdeánach.</string>
+    <string name="root_pre_patch_installer_mount_title">Mód gléasta fréimhe</string>
+    <string name="root_pre_patch_installer_mount_description">Pacáistí le haghaidh gléasta fréimhe, ansin gléastaigh an APK thar an aip stoic comhfhreagrach. Ní theastaíonn GmsCore.</string>
+    <string name="root_mount_module_unmount_warning">Má úsáideann tú KernelSU nó APatch, díchumasaigh an díbhaint nó an folúsadh modúl do na apps a suiteáladh le mount fréimhe. Nár lig do na apps stoc rith, fiú má thaispeánann Morphe go bhfuil siad suiteáilte</string>
+    <string name="root_pre_patch_installer_standard_title">Modh suiteála caighdeánach</string>
+    <string name="root_pre_patch_installer_standard_description">Paistí a mar APK gnáth le tacaíocht GmsCore. Bainfear úsáid as do shocruithe suiteála tar éis paistidh</string>
+    <string name="root_pre_patch_installer_hint">Tá an modh paiste seo ar leith ó Socruithe > Córas > Suiteálaí agus ní féidir a athrú tar éis paistidh</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Earráid cóipeáilte chuig gearrthaisce</string>
     <string name="patcher_error_log">Log earráide</string>
@@ -438,6 +439,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="patcher_process_exit_message">Próiseas paisteála scoirthe leis an gcód %s</string>
     <string name="install_app_success">Suiteáilte go rathúil</string>
     <string name="install_app_fail">Theip ar aip a shuiteáil: %s</string>
+    <string name="uninstall_app_fail">Theip ar aip a díchóimeáil: %s</string>
+    <string name="uninstall_timeout">Tá an díscriú faoi am</string>
     <string name="save_apk_success">APK Sábháilte</string>
     <string name="saved_app_export_failed">Theip ar aip paisteáilte a easpórtáil</string>
     <string name="saved_app_removed_toast">Baineadh an aip phaisteáilte sábháilte</string>
@@ -483,10 +486,13 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_parallax_effect_description">Bogadh réidh an chúlra agus an gléas á chlaonadh</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Téama</string>
+    <string name="settings_appearance_theme_mode">Mód téama</string>
     <string name="settings_appearance_system">Córas</string>
     <string name="settings_appearance_light">Solas</string>
     <string name="settings_appearance_dark">Dorcha</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monacrómach</string>
+    <string name="settings_appearance_color_style">Stíl datha</string>
     <string name="settings_appearance_accent_color">Dath béime</string>
     <string name="settings_appearance_pure_black">Dubh Glan</string>
     <string name="settings_appearance_pure_black_description">Úsáideann sé cúlraí fíor-dhubha</string>
@@ -651,12 +657,13 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Baintear cnaipe Shorts den ghiuirléid lainseálaí</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Suiteálaí</string>
+    <string name="installer_settings_title">Suiteálaí réamhshocraithe</string>
     <string name="installer_title">Roghnaigh suiteálaí</string>
     <string name="installer_internal_description">Úsáideann sé suiteálaí an phacáiste Android</string>
     <string name="installer_play_store_description">Úsáideann sé suiteálaí an chórais agus socraíonn sé Google Play Store mar fhoinse suiteála</string>
     <string name="installer_root_play_store_description">Suiteáil sé go ciúin le fréamh agus socraíonn sé Google Play Store mar an fhoinse suiteála</string>
-    <string name="installer_auto_saved_name">Suiteálaí gléasta fréamhaithe</string>
-    <string name="installer_auto_saved_description">Suiteálann sé an APK paisteáilte thar an aip suiteáilte</string>
+    <string name="installer_auto_saved_name">Mount fréimhe</string>
+    <string name="installer_auto_saved_description">Mounts apps a paistíodh i mód mount fréimhe. Úsáideann APKanna paisteáilte caighdeánacha suiteálaí eile</string>
     <string name="installer_shizuku_description">Suiteáiltear go ciúin ag baint úsáide as Shizuku nó Sui</string>
     <string name="installer_shizuku_play_store_description">Suiteáil sé go ciúin trí Shizuku nó Sui agus socraíonn sé Google Play Store mar fhoinse suiteála</string>
     <string name="installer_option_none">Gan aon chúltaca</string>
@@ -668,6 +675,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_status_shizuku_permission">Tabhair cead do Morphe ón aip Shizuku</string>
     <string name="installer_mount_warning_install">Tá do phríomhshuiteálaí socraithe chuig an suiteálaí gléasta fréamhaithe. Níor suiteáladh an aip shábháilte seo ag baint úsáide as gléas gléasta</string>
     <string name="mount_version_mismatch_message">Ní hionann leagan stoic an aip (%2$s) agus an leagan paisteáilte den aip (%1$s). Suiteáil an leagan stoic comhoiriúnach, agus déan iarracht arís</string>
+    <string name="mount_stock_restore_failed_message">Dhiúltaigh Android an APK bunaidh a shábháil. Suiteáil an leagan stoc comhfhreagrach, ansin iarr Mount arís</string>
     <string name="installer_status_shizuku_unsupported">Ní thacaítear leis an leagan Shizuku atá suiteáilte</string>
     <string name="installer_action_open_shizuku">Oscail Shizuku</string>
     <string name="installer_hint_generic">Theip ar an suiteáil. Bain triail eile as nó aistrigh go suiteálaí eile</string>

@@ -24,6 +24,22 @@
         <item quantity="one">%s अँड्रॉइड संच संचिका </item>
         <item quantity="other">%s अनेक अँड्रॉइड संच संचिका</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">%d ॲप स्थापित केले</item>
+        <item quantity="other">%d ॲप्स स्थापित केले</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">%d ॲप पुन्हा स्थापित केले</item>
+        <item quantity="other">%d ॲप्स पुन्हा स्थापित केले</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">%d ॲप अनइंस्टॉल केले</item>
+        <item quantity="other">%d ॲप्स अनइंस्टॉल केले</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">%d ॲप वगळले</item>
+        <item quantity="other">%d ॲप्स वगळले</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">जतन केलेल्या निवडीमधून %s जुन्या सुधारणा काढल्या आहेत.</item>
         <item quantity="other">जतन केलेल्या निवडीमधून %s जुन्या अनेक सुधारणा काढल्या आहेत.</item>

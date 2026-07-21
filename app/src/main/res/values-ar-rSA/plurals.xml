@@ -48,6 +48,38 @@
         <item quantity="many">%s ملف APK</item>
         <item quantity="other">%s ملف APK</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="zero">تم تثبيت %d تطبيقًا</item>
+        <item quantity="one">تم تثبيت %d تطبيق</item>
+        <item quantity="two">تم تثبيت %d تطبيق</item>
+        <item quantity="few">تم تثبيت %d تطبيقًا</item>
+        <item quantity="many">تم تثبيت %d تطبيقًا</item>
+        <item quantity="other">تم تثبيت %d تطبيق</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="zero">تم إعادة تثبيت %d تطبيقًا</item>
+        <item quantity="one">تم إعادة تثبيت %d تطبيق</item>
+        <item quantity="two">تم إعادة تثبيت %d تطبيق</item>
+        <item quantity="few">تم إعادة تثبيت %d تطبيق</item>
+        <item quantity="many">تم إعادة تثبيت %d تطبيق</item>
+        <item quantity="other">تم إعادة تثبيت %d تطبيق</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="zero">تم إلغاء تثبيت %d تطبيقًا</item>
+        <item quantity="one">تم إلغاء تثبيت %d تطبيق</item>
+        <item quantity="two">تم إلغاء تثبيت %d تطبيق</item>
+        <item quantity="few">تم إلغاء تثبيت %d تطبيق</item>
+        <item quantity="many">تم إلغاء تثبيت %d تطبيق</item>
+        <item quantity="other">تم إلغاء تثبيت %d تطبيق</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="zero">تم تخطي %d تطبيقًا</item>
+        <item quantity="one">تم تخطي %d تطبيق</item>
+        <item quantity="two">تم تخطي %d تطبيق</item>
+        <item quantity="few">تم تخطي %d تطبيق</item>
+        <item quantity="many">تم تخطي %d تطبيق</item>
+        <item quantity="other">تم تخطي %d تطبيق</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="zero">تمت إزالة %s تعديل قديم من التحديد المحفوظ</item>
         <item quantity="one">تمت إزالة %s تعديل قديم من التحديد المحفوظ</item>

@@ -24,6 +24,22 @@
         <item quantity="one">%s ficheiro APK</item>
         <item quantity="other">%s ficheiros APK</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">%d aplicativo instalado</item>
+        <item quantity="other">%d aplicativos instalados</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">%d aplicativo reinstalado</item>
+        <item quantity="other">%d aplicativos reinstalados</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">%d aplicativo desinstalado</item>
+        <item quantity="other">%d aplicativos desinstalados</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">%d aplicativo ignorado</item>
+        <item quantity="other">%d aplicativos ignorados</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Removido %s patch antigo da seleção guardada</item>
         <item quantity="other">Removidos %s patches antigos da seleção guardada</item>

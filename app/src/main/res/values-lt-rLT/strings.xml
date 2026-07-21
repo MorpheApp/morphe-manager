@@ -289,13 +289,6 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Norint naudoti root režimą, prieš diegiant pataisą įrenginyje turi būti įdiegtas originalus APK</string>
     <string name="root_gmscore_excluded">GmsCore palaikymo pataisa neįtraukta į root režimą</string>
-    <string name="root_pre_patch_installer_title">Pasirinkite diegimo būdą</string>
-    <string name="root_pre_patch_installer_description">Jūsų įrenginys turi root prieigą. Pasirinkite, kaip norite įdiegti pataisytą programą</string>
-    <string name="root_pre_patch_installer_mount_description">Montuoja pataisyta APK ant originalios programos. Nereikia GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">Standartinis įdiegimas</string>
-    <string name="root_pre_patch_installer_standard_description">Instaliuojamas kaip atskira programa su GmsCore palaikymu. Po pataisymo galima pasirinkti diegiklį.
-</string>
-    <string name="root_pre_patch_installer_hint">Instaliacijos metodas nustato, kurie pataisymai yra pridėti ir negalės būti pakeisti po pataisymo</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Klaida nukopijuota į iškarpinę</string>
     <string name="patcher_error_log">Klaidų žurnalas</string>

@@ -24,6 +24,22 @@
         <item quantity="one">%s pelê APK</item>
         <item quantity="other">%s pelên APK</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">%d app sazkir</item>
+        <item quantity="other">%d app sazkirî</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">%d app dîsa sazkir</item>
+        <item quantity="other">%d appan dîsa sazkirî</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">%d app rakir</item>
+        <item quantity="other">%d appan rakirî</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">%d app derbas kir</item>
+        <item quantity="other">%d appan derbas kirî</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">%s çaresera qeyî ji hejmara dane yê parastî hate rakirin</item>
         <item quantity="other">%s çareserên qeyî ji hejmara dane yê parastî hate rakirin</item>

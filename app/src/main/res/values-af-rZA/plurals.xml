@@ -24,6 +24,22 @@
         <item quantity="one">%s APK vyl</item>
         <item quantity="other">%s APK vyle</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">%d app geïnstalleer</item>
+        <item quantity="other">%d apps geïnstalleer</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">%d app weer geïnstalleer</item>
+        <item quantity="other">%d apps weer geïnstalleer</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">%d app verwyder</item>
+        <item quantity="other">%d apps verwyder</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">%d app oorgeslaan</item>
+        <item quantity="other">%d apps oorgeslaan</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Verwyder %s veroudered verandering van spaar seleksie</item>
         <item quantity="other">Verwyder %s veroudered veranderinge van spaar seleksie</item>

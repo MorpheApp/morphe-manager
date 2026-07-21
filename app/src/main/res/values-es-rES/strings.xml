@@ -2,31 +2,31 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Otras aplicaciones</string>
-    <string name="home_not_patched_yet">Aún no parcheado</string>
+    <string name="home_not_patched_yet">Aún sin parchear</string>
     <string name="home_no_patches_available">No hay parches disponibles</string>
-    <string name="home_app_hide_title">¿Ocultar esta app?</string>
-    <string name="home_app_hide_message">Esta app se ocultará de la pantalla de inicio. Puedes restaurarla más tarde desde las apps ocultas usando el botón situado en la parte inferior de la lista</string>
-    <string name="home_app_will_be_hidden">Esta app se ocultará</string>
-    <string name="home_app_no_hidden">No hay apps ocultas</string>
-    <string name="home_app_hidden_apps_title">Apps ocultas</string>
-    <string name="home_app_hidden_apps_hint">Tocar para mostrar</string>
+    <string name="home_app_hide_title">¿Ocultar esta aplicación?</string>
+    <string name="home_app_hide_message">Esta aplicación se ocultará de la pantalla de inicio. Puedes restaurarla más tarde desde las apps ocultas usando el botón situado en la parte inferior de la lista</string>
+    <string name="home_app_will_be_hidden">Esta aplicación se ocultará</string>
+    <string name="home_app_no_hidden">No hay aplicaciones ocultas</string>
+    <string name="home_app_hidden_apps_title">Aplicaciones ocultas</string>
+    <string name="home_app_hidden_apps_hint">Pulsa para mostrar</string>
     <string name="android_11_bug_dialog_title"> Error de Android 11</string>
-    <string name="android_11_bug_dialog_description">El permiso para instalar aplicaciones debe concederse antes para evitar un problema de Android 11 que afecta negativamente la experiencia del usuario</string>
+    <string name="android_11_bug_dialog_description">El permiso para instalar aplicaciones debe concederse antes para evitar un problema de Android 11 que afecta negativamente a la experiencia de usuario</string>
     <string name="deep_link_add_source_title">Agregar fuente</string>
     <string name="deep_link_add_source_message">¿Quieres agregar esta fuente de parches a Morphe?</string>
-    <string name="deep_link_add_source_warning">Solo agrega fuentes en las que confíes</string>
+    <string name="deep_link_add_source_warning">Agrega solo fuentes en las que confíes</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Actualización de Morphe disponible</string>
-    <string name="home_update_available_subtitle"></string>
+    <string name="home_update_available_subtitle">Nueva versión lista para instalar</string>
     <string name="home_blocked_source_title">Se detectó una fuente de parches bloqueada</string>
     <string name="home_blocked_source_subtitle">Pulsa para revisar y eliminar</string>
     <string name="home_metadata_errors_title">Algunas fuentes de parches no están disponibles</string>
     <string name="home_metadata_errors_subtitle">Pulsa para revisar las fuentes</string>
-    <string name="home_metered_skipped_title">Actualizaciones pausadas en datos móviles</string>
+    <string name="home_metered_skipped_title">Actualizaciones pausadas con datos móviles</string>
     <string name="home_metered_skipped_subtitle">Pulsa para permitir actualizaciones con datos móviles</string>
     <string name="home_update_error">La actualización falló</string>
-    <string name="home_update_error_subtitle">Ocurrió un error al actualizar las fuentes</string>
-    <string name="home_update_skipped_metered">Actualización omitida</string>
+    <string name="home_update_error_subtitle">Algo salió mal al actualizar las fuentes</string>
+    <string name="home_update_skipped_metered">Actualizaciones omitidas</string>
     <string name="home_update_skipped_metered_subtitle">Los datos móviles están activos</string>
     <string name="home_updating_sources">Actualizando fuentes…</string>
     <string name="home_update_progress_format">%s procesado</string>
@@ -35,44 +35,44 @@
     <string name="home_sources_are_loading">Cargando fuentes, por favor espera…</string>
     <string name="home_search_apps">Buscar aplicaciones</string>
     <string name="home_app_sort_title">Ordenar aplicaciones</string>
-    <string name="home_app_sort_manual_description">Mantén pulsada una aplicación, luego toca el botón de reordenar</string>
+    <string name="home_app_sort_manual_description">Mantén pulsada una aplicación, luego pulsa el botón de reordenar</string>
     <string name="home_app_sort_recommended">Orden recomendado</string>
     <string name="home_app_sort_recommended_description">Aplicaciones instaladas y fijadas primero</string>
     <string name="home_app_sort_name_asc_description">Alfabético, de la A a la Z</string>
     <string name="home_app_sort_name_desc_description">Alfabético inverso, de la Z a la A</string>
     <string name="home_app_sort_updates_first">Actualizaciones de parches primero</string>
-    <string name="home_app_sort_updates_first_description">Aplicaciones con insignias de actualización primero, luego en orden recomendado</string>
+    <string name="home_app_sort_updates_first_description">Aplicaciones pendientes de actualizar primero, luego en orden recomendado</string>
     <string name="home_no_apps_title">No hay aplicaciones disponibles</string>
-    <string name="home_no_apps_subtitle">Añadir una fuente de parche o habilitar una existente en %s</string>
-    <string name="home_no_apps_search_subtitle">No hay apps que coincidan con \"%s\"</string>
+    <string name="home_no_apps_subtitle">Añadir una fuente de parches o habilitar una existente en %s</string>
+    <string name="home_no_apps_search_subtitle">No hay aplicaciones que coincidan con \"%s\"</string>
     <string name="home_all_apps_hidden_title">Todas las aplicaciones están ocultas</string>
-    <string name="home_all_apps_hidden_subtitle">Ha ocultado todas las aplicaciones de la pantalla de inicio</string>
+    <string name="home_all_apps_hidden_subtitle">Has ocultado todas las aplicaciones de la pantalla de inicio</string>
     <string name="home_category_add">Añadir categoría</string>
     <string name="home_category_all_apps">Todas las aplicaciones</string>
     <string name="home_category_custom">Personalizado</string>
     <string name="home_category_uncategorized">Sin categorizar</string>
     <string name="home_category_new_title">Nueva categoría</string>
-    <string name="home_category_rename_title">Cambiar el nombre de la categoría</string>
+    <string name="home_category_rename_title">Renombrar categoría</string>
     <string name="home_category_name">Nombre de la categoría</string>
     <string name="home_category_move_to">Mover a la categoría</string>
     <string name="home_category_move_selected_title">Mover aplicaciones seleccionadas</string>
     <string name="home_category_delete_confirm_title">Eliminar categoría</string>
     <string name="home_category_delete_confirm_message">¿Eliminar la categoría &lt;b&gt;%1$s&lt;/b&gt;? Las aplicaciones que contiene volverán a &lt;b&gt;%2$s&lt;/b&gt;</string>
-    <string name="home_category_actions_unavailable">No hay opciones disponibles para esta categoría</string>
+    <string name="home_category_actions_unavailable">No hay acciones disponibles para esta categoría</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">¿Qué aplicación quieres parchear?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">¿Listo para hacer apps legendarias de nuevo?</string>
+    <string name="home_greeting_2">¿Listo para hacer que las aplicaciones sean legendarias de nuevo?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Abróchate el cinturón, es hora de parchear</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Otro día, otra obra maestra con anuncios bloqueados</string>
+    <string name="home_greeting_4">Otro día, otra obra maestra libre de anuncios</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">¿Quieres ver anuncios? Yo tampoco</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Hagamos que tus aplicaciones se comporten</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">El pronóstico de hoy: 100% de probabilidad de parchear</string>
+    <string name="home_greeting_7" formatted="false">Pronóstico para hoy: 100% de probabilidad de parcheo</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">¿Listo para cambiar lo mediocre por lo increíble?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -80,18 +80,18 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Impulsado por cafeína y buenos parches</string>
     <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Levántate y parchea</string>
-    <string name="home_greeting_morning_2">¡Buenos días! Las aplicaciones no se parchean solas</string>
+    <string name="home_greeting_morning_1">Álzate y parchea</string>
+    <string name="home_greeting_morning_2">¡Buenos días! Las aplicaciones no se parchearán solas</string>
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">¿Bajón de la tarde? Parchea algo</string>
     <string name="home_greeting_afternoon_2">El parcheo después de almorzar se siente diferente</string>
-    <string name="home_greeting_afternoon_3">La jornada de la tarde: edición parcheo</string>
+    <string name="home_greeting_afternoon_3">El turno de tarde: edición parcheo</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">¡Buenas noches! Los parches nocturnos son diferentes</string>
-    <string name="home_greeting_evening_2">¿Relajándote? Parchea una app primero</string>
-    <string name="home_greeting_evening_3">¿Terminando el trabajo? Parchea algo primero</string>
+    <string name="home_greeting_evening_1">¡Buenas noches! Los parches nocturnos tienen otro impacto</string>
+    <string name="home_greeting_evening_2">¿Relajándote? Parchea alguna aplicación primero</string>
+    <string name="home_greeting_evening_3">¿Acabando la jornada? Parchea algo antes</string>
     <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">¿Sigues despierto? También lo están las apps que necesitan un parcheo</string>
+    <string name="home_greeting_late_night_1">¿Aún despierto? También lo están las aplicaciones que necesitan parcheo</string>
     <string name="home_greeting_late_night_2">¿Sesión de parcheo nocturna? Respeto</string>
     <string name="home_greeting_late_night_3">Modo búho nocturno: activado</string>
     <!-- Super late night greetings (0:00–4:59) -->
@@ -105,7 +105,7 @@
     <string name="sources_sort_title">Ordenar fuentes de parches</string>
     <string name="sources_sort_manual">Orden manual</string>
     <string name="sources_sort_manual_hint">Mantén pulsada una fuente para cambiar el orden</string>
-    <string name="sources_sort_last_updated">Última actualización</string>
+    <string name="sources_sort_last_updated">Última actualizada</string>
     <string name="sources_sort_last_updated_description">Actualizaciones de fuente más recientes primero</string>
     <string name="sources_sort_enabled_first">Activadas primero</string>
     <string name="sources_sort_enabled_first_description">Mostrar fuentes activas antes que las desactivadas</string>
@@ -332,13 +332,14 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">El modo raíz requiere que el APK original esté instalado en tu dispositivo antes de aplicar parches.</string>
     <string name="root_gmscore_excluded">El parche de soporte de GmsCore está excluido en el modo raíz</string>
-    <string name="root_pre_patch_installer_title">Elegir método de instalación</string>
-    <string name="root_pre_patch_installer_description">Su dispositivo tiene acceso root. Elija cómo quiere instalar la aplicación parcheada.</string>
-    <string name="root_pre_patch_installer_mount_title">Montaje \"Root\"</string>
-    <string name="root_pre_patch_installer_mount_description">Monta el APK parcheado sobre la aplicación original. No se necesita GmsCore.</string>
-    <string name="root_pre_patch_installer_standard_title">Instalación estándar</string>
-    <string name="root_pre_patch_installer_standard_description">Se instala como una aplicación independiente con soporte de GmsCore. Se puede seleccionar un instalador después de aplicar el parche.</string>
-    <string name="root_pre_patch_installer_hint">El método de instalación determina qué parches se incluyen y no se puede cambiar después de parchear</string>
+    <string name="root_pre_patch_installer_title">Elige el modo de parche</string>
+    <string name="root_pre_patch_installer_description">Tu dispositivo tiene acceso root. Elige si esta aplicación debe ser parcheada para montaje root o instalación estándar</string>
+    <string name="root_pre_patch_installer_mount_title">Modo de montaje \"Root\"</string>
+    <string name="root_pre_patch_installer_mount_description">Parches para montaje root, luego monta el APK sobre la aplicación original coincidente. No se necesita GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Si utilizas KernelSU o APatch, desactiva el desmontaje o la ocultación de módulos para las aplicaciones instaladas con montaje root. De lo contrario, la aplicación original aún podría ejecutarse incluso cuando Morphe la muestre como montada.</string>
+    <string name="root_pre_patch_installer_standard_title">Modo de instalación estándar</string>
+    <string name="root_pre_patch_installer_standard_description">Parches como un APK normal con soporte para GmsCore. Se utiliza tu configuración de instalador después de aplicar los parches.</string>
+    <string name="root_pre_patch_installer_hint">Este modo de parche es independiente de Configuración > Sistema > Instalador y no se puede cambiar después de aplicar los parches</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copiado en el portapapeles</string>
     <string name="patcher_error_log">Registro de errores</string>
@@ -438,6 +439,8 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="patcher_process_exit_message">El proceso del parcheador terminó con el código %s</string>
     <string name="install_app_success">Instalado correctamente</string>
     <string name="install_app_fail">Error al instalar la aplicación: %s</string>
+    <string name="uninstall_app_fail">Error al desinstalar la aplicación: %s</string>
+    <string name="uninstall_timeout">Tiempo de espera de desinstalación agotado</string>
     <string name="save_apk_success">APK guardado</string>
     <string name="saved_app_export_failed">Error al exportar la aplicación parcheada</string>
     <string name="saved_app_removed_toast">Aplicación parcheada guardada eliminada</string>
@@ -483,10 +486,13 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="settings_appearance_parallax_effect_description">Desplazamiento suave del fondo al inclinar el dispositivo</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
+    <string name="settings_appearance_theme_mode">Modo de tema</string>
     <string name="settings_appearance_system">Sistema</string>
     <string name="settings_appearance_light">Claro</string>
     <string name="settings_appearance_dark">Oscuro</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monocromático</string>
+    <string name="settings_appearance_color_style">Estilo de color</string>
     <string name="settings_appearance_accent_color">Color de acento</string>
     <string name="settings_appearance_pure_black">Negro puro</string>
     <string name="settings_appearance_pure_black_description">Utiliza fondos de pantalla negros reales</string>
@@ -653,12 +659,13 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Elimina el botón Shorts del widget del launcher</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalador</string>
+    <string name="installer_settings_title">Instalador predeterminado</string>
     <string name="installer_title">Seleccionar instalador.</string>
     <string name="installer_internal_description">Utiliza el instalador de paquetes de Android</string>
     <string name="installer_play_store_description">Utiliza el instalador del sistema y establece Google Play Store como fuente de instalación</string>
     <string name="installer_root_play_store_description">Instala silenciosamente con root y establece Google Play Store como fuente de instalación</string>
-    <string name="installer_auto_saved_name">Instalador de montaje con root</string>
-    <string name="installer_auto_saved_description">Monta el APK parcheado sobre la app instalada</string>
+    <string name="installer_auto_saved_name">Montaje \"Root\"</string>
+    <string name="installer_auto_saved_description">Monta las aplicaciones que se parchearon en modo de montaje root. Los APK parcheados estándar utilizan otro instalador</string>
     <string name="installer_shizuku_description">Se instala silenciosamente utilizando Shizuku o Sui</string>
     <string name="installer_shizuku_play_store_description">Instala silenciosamente a través de Shizuku o Sui y establece Google Play Store como fuente de instalación</string>
     <string name="installer_option_none">Sin opción de recuperación</string>
@@ -670,6 +677,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="installer_status_shizuku_permission">Otorgar permiso a Morphe desde la aplicación Shizuku</string>
     <string name="installer_mount_warning_install">Tu instalador principal está configurado en el instalador montado en raíz. Esta aplicación guardada no se instaló con montaje.</string>
     <string name="mount_version_mismatch_message">La versión de la aplicación de stock (%2$s) no coincide con la versión de la aplicación parcheada (%1$s). Monta la versión de stock que coincida, luego vuelve a intentarlo.</string>
+    <string name="mount_stock_restore_failed_message">Android rechazó el APK original guardado. Instala la versión original correspondiente y luego intenta Montar nuevamente</string>
     <string name="installer_status_shizuku_unsupported">La versión de Shizuku instalada no es compatible.</string>
     <string name="installer_action_open_shizuku">Abrir Shizuku</string>
     <string name="installer_hint_generic">La instalación falló. Vuelve a intentarlo o cambia a un instalador diferente.</string>

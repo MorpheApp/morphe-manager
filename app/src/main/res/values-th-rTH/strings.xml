@@ -332,13 +332,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">โหมดรากรูตต้องมี APK รุ่นต้นฉบับติดตั้งบนอุปกรณ์ของคุณก่อนปรับแก้</string>
     <string name="root_gmscore_excluded">การรองรับ GmsCore ถูกยกเว้นในโหมด Root</string>
-    <string name="root_pre_patch_installer_title">เลือกวิธีการติดตั้ง</string>
-    <string name="root_pre_patch_installer_description">อุปกรณ์ของคุณมีสิทธิ์รูท. เลือกวิธีที่คุณต้องการติดตั้งแอปพลิเคชันที่แก้ไขแล้ว</string>
-    <string name="root_pre_patch_installer_mount_title">เมานต์รูท</string>
-    <string name="root_pre_patch_installer_mount_description">เมานต์ APK ที่แพตช์แล้วทับแอปเดิม ไม่จำเป็นต้องใช้ GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">ติดตั้งแบบมาตรฐาน</string>
-    <string name="root_pre_patch_installer_standard_description">ติดตั้งเป็นแอปพลิเคชันแยกต่างหากที่รองรับ GmsCore สามารถเลือกตัวติดตั้งได้หลังจากแพตช์แล้ว</string>
-    <string name="root_pre_patch_installer_hint">วิธีการติดตั้งกำหนดว่าประเภทไหนของการแก้ไขจะรวมอยู่และไม่สามารถเปลี่ยนได้หลังจากแก้ไขแล้ว</string>
+    <string name="root_pre_patch_installer_title">เลือกโหมดแพตช์</string>
+    <string name="root_pre_patch_installer_description">อุปกรณ์ของคุณมีการเข้าถึงสิทธิ์รูท โปรดเลือกแอปนี้ควรแพตช์สำหรับการติดตั้งแบบรูทหรือแบบมาตรฐาน</string>
+    <string name="root_pre_patch_installer_mount_title">โหมดการติดตั้งแบบรูท</string>
+    <string name="root_pre_patch_installer_mount_description">แพตช์สำหรับการติดตั้งแบบรูท จากนั้นจึงติดตั้ง APK ทับแอปเดิมที่ตรงกัน ไม่จำเป็นต้องใช้ GmsCore</string>
+    <string name="root_mount_module_unmount_warning">หากคุณใช้ KernelSU หรือ APatch โปรดปิดการยกเลิกการติดตั้งหรือซ่อนโมดูลสำหรับแอปที่ติดตั้งด้วยรูทมิวนต์ มิฉะนั้น แอปสต็อกอาจยังคงทำงานได้แม้ว่า Morphe จะแสดงว่าเป็นแบบติดตั้งแล้ว</string>
+    <string name="root_pre_patch_installer_standard_title">โหมดการติดตั้งแบบมาตรฐาน</string>
+    <string name="root_pre_patch_installer_standard_description">แพตช์เป็น APK ปกติพร้อมการรองรับ GmsCore การตั้งค่าตัวติดตั้งของคุณจะถูกใช้หลังจากการแพตช์</string>
+    <string name="root_pre_patch_installer_hint">โหมดแพตช์นี้แยกต่างหากจาก Settings > System > Installer และไม่สามารถเปลี่ยนแปลงได้หลังจากการแพตช์</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
     <string name="patcher_error_log">บันทึกข้อผิดพลาด</string>
@@ -438,6 +439,8 @@
     <string name="patcher_process_exit_message">กระบวนการแพตช์เสร็จสิ้นด้วยรหัส %s</string>
     <string name="install_app_success">ติดตั้งสำเร็จแล้ว</string>
     <string name="install_app_fail">ไม่สามารถติดตั้งแอปได้: %s</string>
+    <string name="uninstall_app_fail">ไม่สามารถถอนการติดตั้งแอป: %s</string>
+    <string name="uninstall_timeout">หมดเวลาในการถอนการติดตั้ง</string>
     <string name="save_apk_success">บันทึก APK สำเร็จ</string>
     <string name="saved_app_export_failed">ส่งออกแอปที่แก้ไขแล้วไม่สำเร็จ</string>
     <string name="saved_app_removed_toast">ลบแอปที่บันทึกไว้แล้ว</string>
@@ -483,10 +486,13 @@
     <string name="settings_appearance_parallax_effect_description">การเปลี่ยนแปลงพื้นหลังที่เรียบร้อยเมื่อลดทอนอุปกรณ์</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">ระบบ</string>
+    <string name="settings_appearance_theme_mode">โหมดสี</string>
     <string name="settings_appearance_system">เบา</string>
     <string name="settings_appearance_light">ดำม</string>
     <string name="settings_appearance_dark">ดำม</string>
     <string name="settings_appearance_dynamic">สีเส้น</string>
+    <string name="settings_appearance_monochrome">ขาวดำ</string>
+    <string name="settings_appearance_color_style">รูปแบบสี</string>
     <string name="settings_appearance_accent_color">สีโฆษณา</string>
     <string name="settings_appearance_pure_black">ดำสีบริสุทธิ์</string>
     <string name="settings_appearance_pure_black_description">ใช้พื้นหลังสีดำสนิท</string>
@@ -653,12 +659,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">ลบปุ่ม Shorts ออกจากวิดเจ็ตตัวเรียกใช้งาน</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">การติดตั้ง</string>
+    <string name="installer_settings_title">ตัวติดตั้งเริ่มต้น</string>
     <string name="installer_title">เลือกตัวติดตั้ง</string>
     <string name="installer_internal_description">ใช้ตัวติดตั้งแพ็คเกจ Android</string>
     <string name="installer_play_store_description">ใช้ตัวติดตั้งของระบบและตั้งค่า Google Play Store เป็นแหล่งติดตั้ง</string>
     <string name="installer_root_play_store_description">ติดตั้งโดยอัตโนมัติด้วยสิทธิ์รูท และตั้งค่า Google Play Store เป็นแหล่งติดตั้ง</string>
-    <string name="installer_auto_saved_name">ตัวติดตั้งแบบ Rooted mount</string>
-    <string name="installer_auto_saved_description">ติดตั้ง APK ที่ถูกแก้ไขทับแทนแอปที่ถูกติดตั้งอยู่</string>
+    <string name="installer_auto_saved_name">รูทมิวนต์</string>
+    <string name="installer_auto_saved_description">มิวนต์แอปที่ได้รับการแพตช์ในโหมดรูทมิวนต์ APK ที่แพตช์แบบมาตรฐานใช้ตัวติดตั้งอื่น</string>
     <string name="installer_shizuku_description">ติดตั้งอย่างเงียบๆ โดยใช้ Shizuku หรือ Sui</string>
     <string name="installer_shizuku_play_store_description">ติดตั้งโดยอัตโนมัติผ่าน Shizuku หรือ Sui และตั้งค่า Google Play Store เป็นแหล่งติดตั้ง</string>
     <string name="installer_option_none">ไม่มีตัวติดตั้งสำรอง</string>
@@ -670,6 +677,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_permission">อนุญาตให้ Morphe จากแอป Shizuku</string>
     <string name="installer_mount_warning_install">ตัวติดตั้งหลักของคุณตั้งเป็นตัวติดตั้งมอนต์รากรูต. แอปนี้ไม่ได้ติดตั้งด้วยมอนต์</string>
     <string name="mount_version_mismatch_message">รุ่นแอปสต็อก (%2$s) ไม่ตรงกับรุ่นแอปปรับแก้ (%1$s). มอนต์รุ่นสต็อกที่ตรงกัน, แล้วลองอีกครั้ง</string>
+    <string name="mount_stock_restore_failed_message">Android ปฏิเสธ APK ดั้งเดิมที่บันทึกไว้ ติดตั้งเวอร์ชันสต็อกที่ตรงกัน จากนั้นลองมิวนต์อีกครั้ง</string>
     <string name="installer_status_shizuku_unsupported">รุ่น Shizuku ที่ติดตั้งไม่ได้รับการรองรับ</string>
     <string name="installer_action_open_shizuku">เปิด Shizuku</string>
     <string name="installer_hint_generic">การติดตั้งล้มเหลว. ลองอีกครั้งหรือเปลี่ยนไปใช้ตัวติดตั้งอื่น</string>

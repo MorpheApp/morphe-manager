@@ -332,13 +332,14 @@ Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - ud
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Režim root vyžaduje, aby před záplatováním byl na vašem zařízení nainstalován původní APK</string>
     <string name="root_gmscore_excluded">Záplata s podporou GmsCore je v root režimu vyloučena</string>
-    <string name="root_pre_patch_installer_title">Vyberte způsob instalace</string>
-    <string name="root_pre_patch_installer_description">Vaše zařízení má přístup root. Vyberte, jak chcete nainstalovat opatřenou aplikaci.</string>
-    <string name="root_pre_patch_installer_mount_title">Připojit kořenový systém</string>
-    <string name="root_pre_patch_installer_mount_description">Připojí upravený APK nad původní aplikaci. Není potřeba GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">Standardní instalace</string>
-    <string name="root_pre_patch_installer_standard_description">Instaluje se jako samostatná aplikace s podporou GmsCore. Instalátor lze vybrat po záplatování</string>
-    <string name="root_pre_patch_installer_hint">Metoda instalace určuje, které záplaty jsou součástí a nelze je změnit po záplatování</string>
+    <string name="root_pre_patch_installer_title">Vyberte režim záplaty</string>
+    <string name="root_pre_patch_installer_description">Vaše zařízení má root přístup. Zvolte, zda má být tato aplikace záplatována pro root mount nebo standardní instalaci</string>
+    <string name="root_pre_patch_installer_mount_title">Režim root mount</string>
+    <string name="root_pre_patch_installer_mount_description">Patches pro root přípojný bod, poté namontuje APK nad odpovídající nativní aplikaci. Není potřeba GmsCore.</string>
+    <string name="root_mount_module_unmount_warning">Pokud používáte KernelSU nebo APatch, zakažte odpojování nebo skrývání modulů pro aplikace nainstalované s root přístupem. Jinak se původní aplikace může stále spouštět, i když Morphe ji zobrazuje jako připojenou</string>
+    <string name="root_pre_patch_installer_standard_title">Standardní režim instalace</string>
+    <string name="root_pre_patch_installer_standard_description">Patche jako běžný APK se podporou GmsCore. Vaše nastavení instalátoru bude použito po opatchování</string>
+    <string name="root_pre_patch_installer_hint">Tento režim patche je oddělený od Nastavení > Systém > Instalátor a nelze jej změnit po opatchování</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Chyba zkopírována do schránky</string>
     <string name="patcher_error_log">Protokol chyb</string>
@@ -438,6 +439,8 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="patcher_process_exit_message">Proces opravy skončil s kódem %s</string>
     <string name="install_app_success">Úspěšně nainstalováno</string>
     <string name="install_app_fail">Selhání instalace aplikace: %s</string>
+    <string name="uninstall_app_fail">Nepodařilo se odinstalovat aplikaci: %s</string>
+    <string name="uninstall_timeout">Odinstalace časově vypršela</string>
     <string name="save_apk_success">APK uložen</string>
     <string name="saved_app_export_failed">Selhání při exportu upravené aplikace</string>
     <string name="saved_app_removed_toast">Odstraněna uložená upravená aplikace</string>
@@ -483,10 +486,13 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_parallax_effect_description">Plynulé posunování pozadí při naklánění zařízení</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Téma</string>
+    <string name="settings_appearance_theme_mode">Režim tématu</string>
     <string name="settings_appearance_system">Systém</string>
     <string name="settings_appearance_light">Světlé</string>
     <string name="settings_appearance_dark">Temné</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Černobílý</string>
+    <string name="settings_appearance_color_style">Styl barvy</string>
     <string name="settings_appearance_accent_color">Barva akcentu</string>
     <string name="settings_appearance_pure_black">Čistá černá</string>
     <string name="settings_appearance_pure_black_description">Používá pravě černou barvu pozadí</string>
@@ -652,12 +658,13 @@ Rozměry obrázků musí být následující:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Odebere tlačítko Shorts z widgetu aplikace</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalátor</string>
+    <string name="installer_settings_title">Výchozí instalátor</string>
     <string name="installer_title">Vyberte instalátor</string>
     <string name="installer_internal_description">Používá vestavěný správce balíčků Androidu</string>
     <string name="installer_play_store_description">Používá systémový instalátor a nastaví Obchod Play jako zdroj instalace</string>
     <string name="installer_root_play_store_description">Instaluje se potichu s root přístupy a nastavuje Google Play Store jako zdroj instalace</string>
-    <string name="installer_auto_saved_name">Instalátor s kořenovým připojením</string>
-    <string name="installer_auto_saved_description">Nainstaluje upravený APK nad instalovanou aplikací</string>
+    <string name="installer_auto_saved_name">Připojení pomocí rootu</string>
+    <string name="installer_auto_saved_description">Připojuje aplikace, které byly opatchovány v režimu připojení pomocí rootu. Standardní opatchované APK používají jiný instalátor</string>
     <string name="installer_shizuku_description">Instaluje potichu pomocí Shizuku nebo Sui</string>
     <string name="installer_shizuku_play_store_description">Instaluje se potichu přes Shizuku nebo Sui a nastavuje Google Play Store jako zdroj instalace</string>
     <string name="installer_option_none">Žádný záložní</string>
@@ -669,6 +676,7 @@ Rozměry obrázků musí být následující:
     <string name="installer_status_shizuku_permission">Povolte aplikaci Morphe přístup od aplikace Shizuku</string>
     <string name="installer_mount_warning_install">Vaš primary instalátor je nastaven na kořenový instalátor. Tato uložená aplikace nebyla nainstalována pomocí kořenového instalátoru</string>
     <string name="mount_version_mismatch_message">Verze původní aplikace (%2$s) se neshoduje s verzí upravené aplikace (%1$s). Kořenujte odpovídající původní verzi, pak zkuste to znovu</string>
+    <string name="mount_stock_restore_failed_message">Android odmítl uložený původní APK. Nainstalujte odpovídající verzi původní aplikace a poté zkuste znovu připojit</string>
     <string name="installer_status_shizuku_unsupported">Použitá verze Shizuku není podporována</string>
     <string name="installer_action_open_shizuku">Otevřít Shizuku</string>
     <string name="installer_hint_generic">Instalace selhala. Zkuste to znovu nebo přepněte na jiný instalátor</string>

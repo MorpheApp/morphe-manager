@@ -332,13 +332,14 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Modul radical necesită instalarea APK-ului original pe dispozitivul dvs. înainte de a pata</string>
     <string name="root_gmscore_excluded">Suportul GmsCore este exclus în modul root</string>
-    <string name="root_pre_patch_installer_title">Alege metodă de instalare</string>
-    <string name="root_pre_patch_installer_description">Dispozitivul are acces la root. Alegeți cum vrei să instalezi aplicația patcheată</string>
-    <string name="root_pre_patch_installer_mount_title">Montare root</string>
-    <string name="root_pre_patch_installer_mount_description">Montează APK-ul modificat peste aplicația originală. Nu este necesar GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">Instalare standard</string>
-    <string name="root_pre_patch_installer_standard_description">Instalează ca o aplicație separată cu suport GmsCore. Un installer poate fi selectat după aplicarea patch-ului</string>
-    <string name="root_pre_patch_installer_hint">Metoda de instalare determină carele patchuri sunt incluse și nu poate fi schimbată după patchare</string>
+    <string name="root_pre_patch_installer_title">Alege modul de aplicare a patch-ului</string>
+    <string name="root_pre_patch_installer_description">Dispozitivul tău are acces root. Alege dacă această aplicație ar trebui să fie patch-uită pentru montare root sau instalare standard</string>
+    <string name="root_pre_patch_installer_mount_title">Mod de montare root</string>
+    <string name="root_pre_patch_installer_mount_description">Patch-uri pentru montare root, apoi montează APK-ul peste aplicația stock corespunzătoare. Nu este necesar GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Dacã foloseşti KernelSU sau APatch, dezactiveazã demontarea sau ascunderea modulului pentru aplicaţiile instalate cu montare root. Altfel, aplicaţia implicitã poate continua sã ruleze chiar dacã Morphe o afişeazã ca fiind montatã.</string>
+    <string name="root_pre_patch_installer_standard_title">Mod de instalare standard</string>
+    <string name="root_pre_patch_installer_standard_description">Patch-uri ca un APK normal cu suport GmsCore. Setarea de instalare este folositã dupã aplicarea patch-ului.</string>
+    <string name="root_pre_patch_installer_hint">Acest mod de patch este separat de Settings &gt; System &gt; Installer şi nu poate fi modificat dupã aplicarea patch-ului.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Eroare copiată în clipboard</string>
     <string name="patcher_error_log">Jurnal erori</string>
@@ -438,6 +439,8 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="patcher_process_exit_message">Procesul patcher-ului s-a încheiat cu codul %s</string>
     <string name="install_app_success">Instalat cu succes</string>
     <string name="install_app_fail">Nu s-a putut instala aplicația: %s</string>
+    <string name="uninstall_app_fail">Eșuat la dezinstalarea aplicației: %s</string>
+    <string name="uninstall_timeout">Depășirea limitei de timp pentru dezinstalare</string>
     <string name="save_apk_success">APK salvat</string>
     <string name="saved_app_export_failed">Nu s-a putut exporta aplicația modificată</string>
     <string name="saved_app_removed_toast">Aplicație modificată salvată eliminată</string>
@@ -483,10 +486,13 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_parallax_effect_description">Schimbare suedea a fundalului când se înclina dispozitivul</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Temă</string>
+    <string name="settings_appearance_theme_mode">Mod tematic</string>
     <string name="settings_appearance_system">Sistem</string>
     <string name="settings_appearance_light">Luminoasă</string>
     <string name="settings_appearance_dark">Întunecată</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monocrom</string>
+    <string name="settings_appearance_color_style">Stil de culoare</string>
     <string name="settings_appearance_accent_color">Culoare accent</string>
     <string name="settings_appearance_pure_black">Negru pur</string>
     <string name="settings_appearance_pure_black_description">Folosește fundaluri negre pure</string>
@@ -652,12 +658,13 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Elimină butonul Shorts din widget-ul lansatorului</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
+    <string name="installer_settings_title">Installer implicit</string>
     <string name="installer_title">Selectați instalatorul</string>
     <string name="installer_internal_description">Utilizează installerul de pachete Android</string>
     <string name="installer_play_store_description">Utilizează installer-ul sistem și setează Google Play Store ca sursă de instalare</string>
     <string name="installer_root_play_store_description">Instalează silențios cu acces root și setează Google Play Store ca sursă de instalare</string>
-    <string name="installer_auto_saved_name">Instalator de montare root</string>
-    <string name="installer_auto_saved_description">Instalează APK-ul patcheat peste aplicația instalată</string>
+    <string name="installer_auto_saved_name">Montare root</string>
+    <string name="installer_auto_saved_description">Monteazã aplicaţiile care au fost patch-uite în modul de montare root. APK-urile patch-uite standard folosesc un alt installer.</string>
     <string name="installer_shizuku_description">Instalează silențios folosind Shizuku sau Sui</string>
     <string name="installer_shizuku_play_store_description">Instalează silențios prin Shizuku sau Sui și setează Google Play Store ca sursă de instalare</string>
     <string name="installer_option_none">Fără opțiuni de rezervă</string>
@@ -669,6 +676,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_status_shizuku_permission">Acordă permisiune aplicației Morphe din aplicația Shizuku</string>
     <string name="installer_mount_warning_install">Instalatorul principal setat la instalatorul montat radical. Această aplicație salvată nu a fost instalată folosind montaj</string>
     <string name="mount_version_mismatch_message">Versiunea aplicației de bază (%2$s) nu se potrivște cu versiunea aplicației patate (%1$s). Montează versiunea de bază potrivită, apoi reîncercați</string>
+    <string name="mount_stock_restore_failed_message">Android a respins APK-ul original salvat. Instaleazã versiunea implicitã corespunzãtoare, apoi încercã din nou Montare.</string>
     <string name="installer_status_shizuku_unsupported">Versiunea Shizuku instalată nu este suportată</string>
     <string name="installer_action_open_shizuku">Deschide Shizuku</string>
     <string name="installer_hint_generic">Instalarea a eșuat. Reîncercați sau schimbați la un instalator diferit</string>

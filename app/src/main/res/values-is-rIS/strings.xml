@@ -330,13 +330,14 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Róttækni krafa er að upprunaleg APK sé uppsett á tækinu þínu áður en það er pakkað</string>
     <string name="root_gmscore_excluded">GmsCore stuðningsplagg er útilokað í root stillingu</string>
-    <string name="root_pre_patch_installer_title">Velje uppsetningaraðferð</string>
-    <string name="root_pre_patch_installer_description">Uppsetningaraðferðin ákvarðar hvaða pakkningar eru teknar með og ekki er hægt að breyta stillingum eftir pökkun</string>
-    <string name="root_pre_patch_installer_mount_title">Rotfesting</string>
-    <string name="root_pre_patch_installer_mount_description">Mountar breytta APK yfir stocks app. Engin GmsCore þarf</string>
-    <string name="root_pre_patch_installer_standard_title">Staðal uppsetning</string>
-    <string name="root_pre_patch_installer_standard_description">Installar hljóðlega með Shizuku eða Sui</string>
-    <string name="root_pre_patch_installer_hint">Uppsetningaraðferðin ákvarðar hvaða pakkningar eru teknar með og ekki er hægt að breyta stillingum eftir pökkun</string>
+    <string name="root_pre_patch_installer_title">Veldu stillingu fyrir flikka</string>
+    <string name="root_pre_patch_installer_description">Tækið þitt hefur rót aðgang. Veldu hvort þetta app á að vera flikkað fyrir rót mount eða venjulega uppsetningu</string>
+    <string name="root_pre_patch_installer_mount_title">Rót mount stilling</string>
+    <string name="root_pre_patch_installer_mount_description">Flikkar fyrir rót mount, og mountar síðan APK yfir samsvarandi lager forrit. Engin GmsCore þarf</string>
+    <string name="root_mount_module_unmount_warning">Ef þú notar KernelSU eða APatch, gerðu rafmagnsrof eða falin gögn óvirk fyrir forrit sem eru sett upp með root mount. Annars getur staðalforritið enn verið í gangi, jafnvel þótt Morphe sýni það sem mountað.</string>
+    <string name="root_pre_patch_installer_standard_title">Venjulegur uppsetningarmáti</string>
+    <string name="root_pre_patch_installer_standard_description">Pökkun sem venjulegt APK með GmsCore stuðningi. Uppsetningastillingin þín er notuð eftir pökkun</string>
+    <string name="root_pre_patch_installer_hint">Þessi pökkunarstilling er aðskilin frá Stillingum > Kerfi > Uppsetningu og ekki er hægt að breyta henni eftir pökkun</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Villa afrituð á klippiborð</string>
     <string name="patcher_error_log">Villulog</string>
@@ -436,6 +437,8 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patcher_process_exit_message">Breytingavinnsla endaði með kóða %s</string>
     <string name="install_app_success">Uppsett með góðum árangri</string>
     <string name="install_app_fail">Ekki tókst að setja upp app: %s</string>
+    <string name="uninstall_app_fail">Ekki tókst að afinstalla app: %s</string>
+    <string name="uninstall_timeout">Afhenting af uppsetningu tók of langa tíma</string>
     <string name="save_apk_success">APK skrá vistuð</string>
     <string name="saved_app_export_failed">Ekki tókst að flytja breytt app</string>
     <string name="saved_app_removed_toast">Fjarlögð vistuð breytt app</string>
@@ -481,10 +484,13 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_parallax_effect_description">Slétt bakgrunnur breytist þegar tækið er hallað</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Þema</string>
+    <string name="settings_appearance_theme_mode">Þema stilla</string>
     <string name="settings_appearance_system">Kerfi</string>
     <string name="settings_appearance_light">Ljós</string>
     <string name="settings_appearance_dark">Dökk</string>
     <string name="settings_appearance_dynamic">Efni-Þú</string>
+    <string name="settings_appearance_monochrome">Gráeinkenni</string>
+    <string name="settings_appearance_color_style">Litastíll</string>
     <string name="settings_appearance_accent_color">Aðallitur</string>
     <string name="settings_appearance_pure_black">Liturjöfur svart</string>
     <string name="settings_appearance_pure_black_description">Nota svarta bakgrunni</string>
@@ -648,12 +654,13 @@ Myndastærðin verður að vera sem hér segir:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Nota Android pakka installinn</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Uppsetjari</string>
+    <string name="installer_settings_title">Sjálfgefnari uppsetning</string>
     <string name="installer_title">Velji uppsetjara</string>
     <string name="installer_internal_description">Installerar hljóðlega með Shizuku eða Sui</string>
     <string name="installer_play_store_description">Notar kerfiuppsetninguna og stillir Google Play Store sem uppsprettu</string>
     <string name="installer_root_play_store_description">Uppsetja með rótaraðgangi og stillir Google Play Store sem uppsetningartöku</string>
-    <string name="installer_auto_saved_name">Rooted festa uppsetjari</string>
-    <string name="installer_auto_saved_description">Uppsetta pattaða APK yfir uppsett app</string>
+    <string name="installer_auto_saved_name">Root mount</string>
+    <string name="installer_auto_saved_description">Mountar forrit sem voru pökkunin í root mount ham. Venjulegar pökkaðar APK nota aðra uppsetningu</string>
     <string name="installer_shizuku_description">Installar biðjaðrun</string>
     <string name="installer_shizuku_play_store_description">Uppsetja þögnrænlega í gegnum Shizuku eða Sui og stillir Google Play Store sem uppsetningartöku</string>
     <string name="installer_option_none">Engin varabreyting</string>
@@ -665,6 +672,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="installer_status_shizuku_permission">Leyfðu Morphe aðgang frá Shizuku appinu</string>
     <string name="installer_mount_warning_install">Uppsettur uppsetjara þinn er stilltur á róttæka uppsetjarann. Þetta vistaða app var ekki uppsett með uppsetningu</string>
     <string name="mount_version_mismatch_message">Lager gerð app útgáfa (%2$s) passar ekki við pattaða app útgáfu (%1$s). Uppsetja samsvarandi vísindalaga gerð og reyna aftur</string>
+    <string name="mount_stock_restore_failed_message">Android hafnaði vistaðri upprunalegu APK. Settu upp samsvarandi staðalútgáfu, prófaðu síðan Mount aftur</string>
     <string name="installer_status_shizuku_unsupported">Stuðlað er ekki við uppsettu Shizuku útgáfuna</string>
     <string name="installer_action_open_shizuku">Opna Shizuku</string>
     <string name="installer_hint_generic">Uppsetningin tókst ekki. Reyndu aftur eða skiptu yfir á annan uppsetjara</string>
