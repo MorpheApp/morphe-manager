@@ -32,6 +32,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
@@ -39,6 +40,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.AppDataSource
+import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.JSON_MIMETYPE
 import app.morphe.manager.util.TEXT_MIMETYPE
 import app.morphe.manager.util.rememberAdaptiveFilePicker
@@ -203,6 +205,7 @@ fun PatchSelectionManagementDialog(
                 ConfirmResetPackageBundleDialog(
                     packageName = target.packageName,
                     bundleUid = target.bundleUid,
+                    bundleName = bundleNames[target.bundleUid],
                     patchCount = patchCount,
                     settingsViewModel = settingsViewModel,
                     onConfirm = {
@@ -747,19 +750,18 @@ private fun ConfirmResetSelectedDialog(
         }
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
-            DeletionWarningBox(
-                warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
-            ) {
-                val patchesText = pluralStringResource(
-                    R.plurals.patch_count,
-                    totalPatches,
-                    totalPatches
-                )
-                val packagesText = pluralStringResource(
-                    R.plurals.package_count,
-                    packageCount,
-                    packageCount
-                )
+            Text(
+                text = stringResource(R.string.settings_system_patch_selection_reset_selected_warning),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            val patchesText = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches)
+            val packagesText = pluralStringResource(R.plurals.package_count, packageCount, packageCount)
+
+            LabeledSection {
                 DeleteListItem(
                     icon = Icons.Outlined.Delete,
                     text = stringResource(
@@ -808,25 +810,16 @@ private fun ConfirmResetAllDialog(
         Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
             Text(
                 text = stringResource(R.string.settings_system_patch_selection_reset_all_warning),
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogTextColor.current
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
 
-            DeletionWarningBox(
-                warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
-            ) {
-                val patchesText = pluralStringResource(
-                    R.plurals.patch_count,
-                    totalSelections,
-                    totalSelections
-                )
+            val patchesText = pluralStringResource(R.plurals.patch_count, totalSelections, totalSelections)
+            val packagesText = pluralStringResource(R.plurals.package_count, packageCount, packageCount)
 
-                val packagesText = pluralStringResource(
-                    R.plurals.package_count,
-                    packageCount,
-                    packageCount
-                )
-
+            LabeledSection {
                 DeleteListItem(
                     icon = Icons.Outlined.Delete,
                     text = stringResource(
@@ -835,15 +828,10 @@ private fun ConfirmResetAllDialog(
                         packagesText
                     )
                 )
-
                 if (totalOptions > 0) {
                     DeleteListItem(
                         icon = Icons.Outlined.Tune,
-                        text = pluralStringResource(
-                            R.plurals.option_count,
-                            totalOptions,
-                            totalOptions
-                        )
+                        text = pluralStringResource(R.plurals.option_count, totalOptions, totalOptions)
                     )
                 }
             }
@@ -888,29 +876,20 @@ private fun ConfirmResetPackageDialog(
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
             Text(
-                text = stringResource(
+                text = htmlAnnotatedString(stringResource(
                     R.string.settings_system_patch_selection_reset_package_warning,
                     displayName
-                ),
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogTextColor.current
+                )),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
 
-            DeletionWarningBox(
-                warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
-            ) {
-                val patchesText = pluralStringResource(
-                    R.plurals.patch_count,
-                    patchCount,
-                    patchCount
-                )
+            val patchesText = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)
+            val sourcesText = pluralStringResource(R.plurals.source_count, bundleCount, bundleCount)
 
-                val sourcesText = pluralStringResource(
-                    R.plurals.source_count,
-                    bundleCount,
-                    bundleCount
-                )
-
+            LabeledSection {
                 DeleteListItem(
                     icon = Icons.Outlined.Delete,
                     text = stringResource(
@@ -919,15 +898,10 @@ private fun ConfirmResetPackageDialog(
                         sourcesText
                     )
                 )
-
                 if (optionsCount > 0) {
                     DeleteListItem(
                         icon = Icons.Outlined.Tune,
-                        text = pluralStringResource(
-                            R.plurals.option_count,
-                            optionsCount,
-                            optionsCount
-                        )
+                        text = pluralStringResource(R.plurals.option_count, optionsCount, optionsCount)
                     )
                 }
             }
@@ -942,6 +916,7 @@ private fun ConfirmResetPackageDialog(
 private fun ConfirmResetPackageBundleDialog(
     packageName: String,
     bundleUid: Int,
+    bundleName: String?,
     patchCount: Int,
     settingsViewModel: SettingsViewModel,
     onConfirm: () -> Unit,
@@ -955,6 +930,9 @@ private fun ConfirmResetPackageBundleDialog(
         displayName = name
         optionsCount = settingsViewModel.loadOptionsCountForBundle(packageName, bundleUid)
     }
+
+    val bundleDisplayName = bundleName
+        ?: stringResource(R.string.settings_system_patch_selection_source_format, bundleUid)
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -971,35 +949,26 @@ private fun ConfirmResetPackageBundleDialog(
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
             Text(
-                text = stringResource(
+                text = htmlAnnotatedString(stringResource(
                     R.string.settings_system_patch_selection_reset_source_warning,
                     displayName,
-                    bundleUid
-                ),
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogTextColor.current
+                    bundleDisplayName
+                )),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
 
-            DeletionWarningBox(
-                warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
-            ) {
+            LabeledSection {
                 DeleteListItem(
                     icon = Icons.Outlined.Delete,
-                    text = pluralStringResource(
-                        R.plurals.patch_count,
-                        patchCount,
-                        patchCount
-                    )
+                    text = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)
                 )
-
                 if (optionsCount > 0) {
                     DeleteListItem(
                         icon = Icons.Outlined.Tune,
-                        text = pluralStringResource(
-                            R.plurals.option_count,
-                            optionsCount,
-                            optionsCount
-                        )
+                        text = pluralStringResource(R.plurals.option_count, optionsCount, optionsCount)
                     )
                 }
             }
@@ -1070,7 +1039,7 @@ private fun PatchDetailsDialog(
 
                 // Patches section
                 if (patchList.isNotEmpty()) {
-                    PatchBundleSection(
+                    LabeledSection(
                         title = stringResource(R.string.settings_system_selected_patches_section),
                         count = patchList.size
                     ) {
@@ -1082,7 +1051,7 @@ private fun PatchDetailsDialog(
 
                 // Options section
                 if (optionsMap.isNotEmpty()) {
-                    PatchBundleSection(
+                    LabeledSection(
                         title = stringResource(R.string.settings_system_patch_options_section),
                         count = optionsMap.size
                     ) {

@@ -1592,14 +1592,11 @@ private fun DeleteConfirmDialog(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
-            // App Icon
             AppIcon(
                 packageInfo = appInfo,
                 contentDescription = null,
                 modifier = Modifier.size(64.dp)
             )
-
-            // App Name
             if (appLabel != null) {
                 Text(
                     text = appLabel,
@@ -1609,19 +1606,15 @@ private fun DeleteConfirmDialog(
                     textAlign = TextAlign.Center
                 )
             }
-
-            // What will be deleted
-            DeletionWarningBox(
-                warningText = stringResource(R.string.home_app_info_remove_app_warning)
+            LabeledSection(
+                title = stringResource(R.string.home_app_info_remove_app_warning)
             ) {
                 if (isSavedOnly) {
-                    // Saved app - only delete patched APK
                     DeleteListItem(
                         icon = Icons.Outlined.Delete,
                         text = stringResource(R.string.home_app_info_delete_item_patched_apk)
                     )
                 } else {
-                    // Full deletion
                     DeleteListItem(
                         icon = Icons.Outlined.Storage,
                         text = stringResource(R.string.home_app_info_delete_item_database)
@@ -1636,8 +1629,6 @@ private fun DeleteConfirmDialog(
                     )
                 }
             }
-
-            // Description
             if (!isSavedOnly) {
                 InfoBadge(
                     text = stringResource(R.string.home_app_info_delete_preservation_note),
@@ -1736,7 +1727,7 @@ private fun AppliedPatchesDialog(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
                 ) {
-                    PatchBundleSection(
+                    LabeledSection(
                         title = stringResource(R.string.home_app_info_applied_patches),
                         version = if (bundles.size > 1) bundle.title else null,
                         count = patchCount
@@ -1750,7 +1741,7 @@ private fun AppliedPatchesDialog(
                     }
 
                     if (bundleOptions.isNotEmpty()) {
-                        PatchBundleSection(
+                        LabeledSection(
                             title = stringResource(R.string.settings_system_patch_options_section),
                             count = bundleOptions.size
                         ) {

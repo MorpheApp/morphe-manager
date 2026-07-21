@@ -892,7 +892,7 @@ Details: %2$s"</string>
     <string name="settings_system_patched_apks_description">Manages saved patched application files</string>
     <string name="settings_system_patched_apks_empty">No patched APKs saved yet</string>
     <string name="settings_system_patched_apks_delete_title">Delete patched APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Are you sure you want to delete the saved patched APK for %s?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Are you sure you want to delete the saved patched APK for &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">Patched APK deleted successfully</string>
     <string name="settings_system_patched_apks_delete_all_title">Delete all patched APKs?</string>
     <string name="settings_system_patched_apks_export_zip_name" translatable="false">morphe-patched-apks.zip</string>
@@ -903,7 +903,7 @@ Details: %2$s"</string>
     <string name="settings_system_original_apks_empty">No original APKs stored</string>
     <string name="settings_system_original_apks_deleted">Original APK deleted successfully</string>
     <string name="settings_system_original_apks_delete_title">Delete original APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Delete original APK for %s? You won\'t be able to repatch without providing a new APK</string>
+    <string name="settings_system_original_apks_delete_confirm">Delete original APK for &lt;b&gt;%s&lt;/b&gt;? You won\'t be able to repatch without providing a new APK</string>
     <string name="settings_system_original_apks_delete_all_title">Delete all original APKs?</string>
     <string name="settings_system_original_apks_export_zip_name" translatable="false">morphe-original-apks.zip</string>
 
@@ -920,8 +920,9 @@ Details: %2$s"</string>
     <string name="settings_system_patch_selection_source_format">Source #%s</string>
     <string name="settings_system_patch_selection_will_delete">This will delete:</string>
     <string name="settings_system_patch_selection_reset_all_warning">This will permanently delete all saved patch selections for all packages and sources</string>
-    <string name="settings_system_patch_selection_reset_package_warning">This will permanently delete all saved patch selections for %s across all sources</string>
-    <string name="settings_system_patch_selection_reset_source_warning">This will permanently delete saved patch selections for %1$s in source #%2$s</string>
+    <string name="settings_system_patch_selection_reset_package_warning">This will permanently delete all saved patch selections for &lt;b&gt;%s&lt;/b&gt; across all sources</string>
+    <string name="settings_system_patch_selection_reset_source_warning">This will permanently delete saved patch selections for &lt;b&gt;%1$s&lt;/b&gt; in &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">This will permanently delete all saved patch selections for the selected packages</string>
     <string name="settings_system_export_source_data_fail">Failed to export source data</string>
     <string name="settings_system_export_source_data_success">Source data exported successfully</string>
     <string name="settings_system_import_source_data_fail">Failed to import source data</string>

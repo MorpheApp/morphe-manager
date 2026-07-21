@@ -239,6 +239,7 @@ private fun PatchedApksContent(
     val apkItems = (state as? ApkLoadState.Loaded)?.items ?: emptyList()
     val totalSize = remember(state) { apkItems.sumOf { it.fileSize } }
     val itemToDelete = remember { mutableStateOf<InstalledApp?>(null) }
+    var deleteDisplayName by remember { mutableStateOf("") }
 
     // Look up by selectionKey to avoid index shifts on concurrent list updates
     val displayItems = remember(state) { apkItems.map { it.toApkItemData() } }
@@ -403,6 +404,7 @@ private fun PatchedApksContent(
             onUninstall = { item -> uninstallItems(listOf(item)) },
             onUninstallSelected = { selectedItems -> uninstallItems(selectedItems) },
             onDelete = { item ->
+                deleteDisplayName = item.displayName
                 appByKey[item.selectionKey]?.let { itemToDelete.value = it }
             },
             onDeleteSelectedConfirm = { selectedItems ->
@@ -429,7 +431,7 @@ private fun PatchedApksContent(
             title = stringResource(R.string.settings_system_patched_apks_delete_title),
             message = stringResource(
                 R.string.settings_system_patched_apks_delete_confirm,
-                itemToDelete.value!!.currentPackageName
+                deleteDisplayName
             ),
             onDismiss = { itemToDelete.value = null },
             onConfirm = {
@@ -497,6 +499,7 @@ private fun OriginalApksContent(
     val apkByKey = remember(state) { entries.associate { it.data.selectionKey to it.apk } }
     val totalSize = remember(state) { apkItems.sumOf { it.fileSize } }
     val itemToDelete = remember { mutableStateOf<OriginalApk?>(null) }
+    var deleteDisplayName by remember { mutableStateOf("") }
 
     fun updateInstalledState(packageName: String, installed: Boolean) {
         val loaded = state as? ApkLoadState.Loaded ?: return
@@ -631,6 +634,7 @@ private fun OriginalApksContent(
             onUninstall = { item -> uninstallItems(listOf(item)) },
             onUninstallSelected = { selectedItems -> uninstallItems(selectedItems) },
             onDelete = { item ->
+                deleteDisplayName = item.displayName
                 apkByKey[item.selectionKey]?.let { itemToDelete.value = it }
             },
             onDeleteSelectedConfirm = { selectedItems ->
@@ -657,7 +661,7 @@ private fun OriginalApksContent(
             title = stringResource(R.string.settings_system_original_apks_delete_title),
             message = stringResource(
                 R.string.settings_system_original_apks_delete_confirm,
-                itemToDelete.value!!.packageName
+                deleteDisplayName
             ),
             onDismiss = { itemToDelete.value = null },
             onConfirm = {
@@ -1180,20 +1184,16 @@ private fun DeleteAllConfirmationDialog(
         Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
             Text(
                 text = message,
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogTextColor.current
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
 
-            DeletionWarningBox(
-                warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
-            ) {
+            LabeledSection {
                 DeleteListItem(
                     icon = Icons.Outlined.Delete,
-                    text = pluralStringResource(
-                        R.plurals.settings_system_apks_count,
-                        count,
-                        count
-                    )
+                    text = pluralStringResource(R.plurals.settings_system_apks_count, count, count)
                 )
                 DeleteListItem(
                     icon = Icons.Outlined.Storage,
@@ -1252,7 +1252,7 @@ private fun DeleteConfirmationDialog(
         }
     ) {
         Text(
-            text = message,
+            text = htmlAnnotatedString(message),
             style = MaterialTheme.typography.bodyLarge,
             color = LocalDialogTextColor.current,
             textAlign = TextAlign.Center,

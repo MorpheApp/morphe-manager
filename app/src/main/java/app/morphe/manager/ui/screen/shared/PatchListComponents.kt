@@ -27,7 +27,7 @@ fun PatchNameRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ContentPaddingSmall),
+            .padding(horizontal = MorpheDefaults.ContentPadding),
         horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -45,49 +45,61 @@ fun PatchNameRow(
 }
 
 @Composable
-fun PatchBundleSection(
-    title: String,
+fun LabeledSection(
+    title: String? = null,
     modifier: Modifier = Modifier,
     version: String? = null,
     count: Int? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
+    val effectiveVersion = version?.takeIf { it.isNotBlank() }
     Column(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
-        ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.labelMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            version?.takeIf { it.isNotBlank() }?.let { v ->
-                Surface(
-                    shape = RoundedCornerShape(4.dp),
-                    color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f)
-                ) {
+        if (title != null || effectiveVersion != null || count != null) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+            ) {
+                if (title != null) {
                     Text(
-                        text = v,
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer,
-                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                        text = title,
+                        style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                effectiveVersion?.let { v ->
+                    Surface(
+                        shape = RoundedCornerShape(4.dp),
+                        color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f)
+                    ) {
+                        Text(
+                            text = v,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSecondaryContainer,
+                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                        )
+                    }
+                }
+                if (count != null) {
+                    InfoBadge(
+                        text = count.toString(),
+                        style = InfoBadgeStyle.Primary,
+                        isCompact = true
                     )
                 }
             }
-            if (count != null) {
-                InfoBadge(
-                    text = count.toString(),
-                    style = InfoBadgeStyle.Primary,
-                    isCompact = true
-                )
+        }
+        SettingsGroup {
+            Column(
+                modifier = Modifier.padding(vertical = MorpheDefaults.ItemSpacing),
+                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+            ) {
+                content()
             }
         }
-        SettingsGroup(content = content)
     }
 }
 
@@ -99,7 +111,7 @@ fun PatchOptionsGroup(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ContentPaddingSmall),
+            .padding(horizontal = MorpheDefaults.ContentPadding),
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Row(

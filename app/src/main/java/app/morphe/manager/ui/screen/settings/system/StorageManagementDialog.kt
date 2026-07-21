@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.repository.StorageStats
@@ -265,11 +266,14 @@ private fun ClearCachesConfirmationDialog(
         Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
             Text(
                 text = stringResource(R.string.settings_system_storage_clear_all_confirm),
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogTextColor.current
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
-            DeletionWarningBox(
-                warningText = stringResource(R.string.settings_system_apks_size, formatBytes(totalBytes))
+
+            LabeledSection(
+                version = stringResource(R.string.settings_system_apks_size, formatBytes(totalBytes))
             ) {
                 DeleteListItem(
                     icon = Icons.Outlined.CloudDownload,

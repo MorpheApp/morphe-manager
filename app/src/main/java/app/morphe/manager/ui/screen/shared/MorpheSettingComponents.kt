@@ -598,7 +598,7 @@ fun CardHeader(
 
 /**
  * A single item in a deletion list with an icon and text.
- * Used in confirmation dialogs to show what will be deleted.
+ * Used inside [LabeledSection] in destructive confirmation dialogs.
  */
 @Composable
 fun DeleteListItem(
@@ -607,52 +607,22 @@ fun DeleteListItem(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = MorpheDefaults.ContentPadding),
+        horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            modifier = Modifier.size(16.dp),
-            tint = LocalDialogSecondaryTextColor.current
+        MorpheIcon(
+            icon = icon,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Text(
             text = text,
-            style = MaterialTheme.typography.bodySmall,
-            color = LocalDialogSecondaryTextColor.current
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.weight(1f)
         )
-    }
-}
-
-/**
- * A container showing what will be deleted in a destructive action.
- * Displays a warning message followed by a list of items.
- */
-@Composable
-fun DeletionWarningBox(
-    warningText: String,
-    modifier: Modifier = Modifier,
-    content: @Composable ColumnScope.() -> Unit
-) {
-    Surface(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(
-                text = warningText,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium,
-                color = MaterialTheme.colorScheme.error
-            )
-
-            content()
-        }
     }
 }
 
