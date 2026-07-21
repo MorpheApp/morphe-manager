@@ -1,3 +1,16 @@
+# [1.24.0-dev.13](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.12...v1.24.0-dev.13) (2026-07-21)
+
+
+### Bug Fixes
+
+* Add confirmation dialog before batch uninstall ([3486b62](https://github.com/MorpheApp/morphe-manager/commit/3486b62a9ee79cc49eb61e21463338651b4aeb63))
+* Show music note icon for audio files in custom file picker ([ac082cf](https://github.com/MorpheApp/morphe-manager/commit/ac082cf5a3dcd9c4320bbf4da66ba6abeb7072b1))
+
+
+### Features
+
+* Redesign destructive confirmation dialogs ([85dfad9](https://github.com/MorpheApp/morphe-manager/commit/85dfad99455c2203c2327e70ad307566386e5b9e))
+
 # [1.24.0-dev.12](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.11...v1.24.0-dev.12) (2026-07-21)
 
 
