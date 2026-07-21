@@ -1,3 +1,16 @@
+# [1.24.0-dev.12](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.11...v1.24.0-dev.12) (2026-07-21)
+
+
+### Bug Fixes
+
+* Harden root mount installs ([#737](https://github.com/MorpheApp/morphe-manager/issues/737)) ([5f05273](https://github.com/MorpheApp/morphe-manager/commit/5f0527333c4ac7668eca61fe9db0312a496ba277))
+
+
+### Features
+
+* Add batch app uninstall and reinstall actions ([#739](https://github.com/MorpheApp/morphe-manager/issues/739)) ([998e943](https://github.com/MorpheApp/morphe-manager/commit/998e94394ddff1bbee5e8c41d7091dff3b1cd4ab))
+* Add monochrome theme ([#740](https://github.com/MorpheApp/morphe-manager/issues/740)) ([1e3d0b7](https://github.com/MorpheApp/morphe-manager/commit/1e3d0b7591f8eb952f5b3d79b9f9a05f0518b711))
+
 # [1.24.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.10...v1.24.0-dev.11) (2026-07-19)
 
 
