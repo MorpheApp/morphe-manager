@@ -690,6 +690,7 @@ private fun ApkManagementDialogContent(
     var showDeleteSelectedConfirmation by remember { mutableStateOf(false) }
     var showUninstallSelectedConfirmation by remember { mutableStateOf(false) }
     var itemToUninstallConfirm by remember { mutableStateOf<ApkItemData?>(null) }
+    var isMultiSelectMode by remember { mutableStateOf(false) }
     var isExporting by remember { mutableStateOf(false) }
     val selection = rememberSelectionState<String>()
     val selectedItems = items.filter { selection.contains(it.selectionKey) }
@@ -737,7 +738,7 @@ private fun ApkManagementDialogContent(
     MorpheDialog(
         onDismissRequest = {
             if (isExporting) return@MorpheDialog
-            if (selection.isNotEmpty) selection.clear() else onDismissRequest()
+            if (isMultiSelectMode) { selection.clear(); isMultiSelectMode = false } else onDismissRequest()
         },
         title = meta.title,
         titleTrailingContent = if (selectedItems.isEmpty() && items.isNotEmpty() && actions.onDeleteAllConfirm != null) {
@@ -753,7 +754,7 @@ private fun ApkManagementDialogContent(
             null
         },
         footer = {
-            if (selectedItems.isNotEmpty()) {
+            if (isMultiSelectMode) {
                 MultiSelectShell(visible = true) {
                     SelectionActionBar(
                         modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ItemSpacing),
@@ -765,7 +766,7 @@ private fun ApkManagementDialogContent(
                         ),
                         onSelectAll = { selection.setAll(items.map { it.selectionKey }) },
                         onDeselectAll = { selection.clear() },
-                        onCancel = { selection.clear() }
+                        onCancel = { selection.clear(); isMultiSelectMode = false }
                     ) {
                         if (selectedFiles.isNotEmpty()) {
                             val shareLabel = stringResource(R.string.share)
@@ -930,8 +931,8 @@ private fun ApkManagementDialogContent(
                         ApkItemCard(
                             data = item,
                             selected = selected,
-                            selectionMode = selectedItems.isNotEmpty(),
-                            onToggleSelection = { selection.toggle(item.selectionKey) },
+                            selectionMode = isMultiSelectMode,
+                            onToggleSelection = { isMultiSelectMode = true; selection.toggle(item.selectionKey) },
                             onShare = if (item.file != null) { { actions.onShare?.invoke(item) } } else null,
                             onExport = if (item.file != null) { { actions.onExport?.invoke(item) } } else null,
                             onInstall = if (!item.isInstalledOnDevice && item.file != null && actions.onInstall != null) {
@@ -980,6 +981,7 @@ private fun ApkManagementDialogContent(
             onConfirm = {
                 actions.onDeleteSelectedConfirm(selectedItems)
                 selection.clear()
+                isMultiSelectMode = false
                 showDeleteSelectedConfirmation = false
             }
         )
@@ -991,6 +993,7 @@ private fun ApkManagementDialogContent(
             onConfirm = {
                 actions.onUninstallSelected?.invoke(selectedInstalledItems)
                 selection.clear()
+                isMultiSelectMode = false
                 showUninstallSelectedConfirmation = false
             },
             onDismiss = { showUninstallSelectedConfirmation = false }
