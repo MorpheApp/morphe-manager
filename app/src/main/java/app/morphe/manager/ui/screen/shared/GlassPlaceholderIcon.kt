@@ -10,7 +10,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 
 /**
@@ -29,6 +31,7 @@ fun GlassPlaceholderIcon(
     val baseColor = gradientColors.firstOrNull() ?: Color.White
     val midColor = gradientColors.getOrElse(1) { baseColor }
     val endColor = gradientColors.lastOrNull() ?: baseColor
+    val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
 
     Box(
         modifier = modifier
@@ -38,6 +41,8 @@ fun GlassPlaceholderIcon(
                 val cr = CornerRadius(minOf(size.width, size.height) * 0.20f)
                 val w = size.width
                 val h = size.height
+                val startX = if (isRtl) w else 0f
+                val endX = if (isRtl) 0f else w
 
                 // Layer 1: tinted frosted base
                 drawRoundRect(
@@ -46,8 +51,8 @@ fun GlassPlaceholderIcon(
                             Color.White.copy(alpha = 0.22f),
                             baseColor.copy(alpha = 0.12f)
                         ),
-                        start = Offset(0f, 0f),
-                        end = Offset(w, h)
+                        start = Offset(startX, 0f),
+                        end = Offset(endX, h)
                     ),
                     cornerRadius = cr
                 )
@@ -60,7 +65,7 @@ fun GlassPlaceholderIcon(
                             Color.White.copy(alpha = 0.10f),
                             Color.Transparent
                         ),
-                        center = Offset(0f, 0f),
+                        center = Offset(startX, 0f),
                         radius = w * 0.75f
                     ),
                     cornerRadius = cr
@@ -73,7 +78,7 @@ fun GlassPlaceholderIcon(
                             Color.Transparent,
                             endColor.copy(alpha = 0.18f)
                         ),
-                        center = Offset(w, h),
+                        center = Offset(endX, h),
                         radius = w * 0.9f
                     ),
                     cornerRadius = cr
@@ -102,7 +107,7 @@ fun GlassPlaceholderIcon(
                             Color.Transparent,
                             Color.Black.copy(alpha = 0.12f)
                         ),
-                        center = Offset(w, h),
+                        center = Offset(endX, h),
                         radius = w * 0.6f
                     ),
                     cornerRadius = cr
@@ -116,8 +121,8 @@ fun GlassPlaceholderIcon(
                             midColor.copy(alpha = 0.30f),
                             Color.White.copy(alpha = 0.35f)
                         ),
-                        start = Offset(0f, 0f),
-                        end = Offset(w, h)
+                        start = Offset(startX, 0f),
+                        end = Offset(endX, h)
                     ),
                     cornerRadius = cr,
                     style = Stroke(width = 1.dp.toPx())

@@ -8,6 +8,7 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
+import app.morphe.manager.util.AppCardColorMode
 import app.morphe.manager.util.applyAppLanguage
 import app.morphe.manager.util.toHexString
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -69,6 +70,22 @@ class ThemeSettingsViewModel(
     fun setCustomAccentColor(color: Color?) = viewModelScope.launch {
         val value = color?.toHexString().orEmpty()
         prefs.customAccentColor.update(value)
+    }
+
+    fun applyAppCardColors(
+        mode: AppCardColorMode,
+        startColorHex: String,
+        middleColorHex: String,
+        endColorHex: String,
+        solidColorHex: String
+    ) = viewModelScope.launch {
+        prefs.edit {
+            prefs.appCardColorMode.value = mode
+            prefs.customAppCardGradientStart.value = startColorHex.takeUnless { mode == AppCardColorMode.DEFAULT }.orEmpty()
+            prefs.customAppCardGradientMiddle.value = middleColorHex.takeUnless { mode == AppCardColorMode.DEFAULT }.orEmpty()
+            prefs.customAppCardGradientEnd.value = endColorHex.takeUnless { mode == AppCardColorMode.DEFAULT }.orEmpty()
+            prefs.customAppCardSolidColor.value = solidColorHex.takeUnless { mode == AppCardColorMode.DEFAULT }.orEmpty()
+        }
     }
 
     /**

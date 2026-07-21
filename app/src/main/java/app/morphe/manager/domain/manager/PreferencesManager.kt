@@ -17,6 +17,7 @@ import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
 import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.ui.viewmodel.RandomInterval
+import app.morphe.manager.util.AppCardColorMode
 import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckInterval
@@ -38,6 +39,11 @@ class PreferencesManager(
     val showGreetingPhrases = booleanPreference("show_greeting_phrases", true)
     val customAccentColor = stringPreference("custom_accent_color", "")
     val customThemeColor = stringPreference("custom_theme_color", "")
+    val appCardColorMode = enumPreference("app_card_color_mode", AppCardColorMode.DEFAULT)
+    val customAppCardGradientStart = stringPreference("custom_app_card_gradient_start", "")
+    val customAppCardGradientMiddle = stringPreference("custom_app_card_gradient_middle", "")
+    val customAppCardGradientEnd = stringPreference("custom_app_card_gradient_end", "")
+    val customAppCardSolidColor = stringPreference("custom_app_card_solid_color", "")
     val theme = enumPreference("theme", Theme.SYSTEM)
     val themeStyle = enumPreference("theme_style", ThemeStyle.MORPHE)
 
@@ -192,6 +198,11 @@ class PreferencesManager(
         val pureBlackTheme: Boolean? = null,
         val customAccentColor: String? = null,
         val customThemeColor: String? = null,
+        val appCardColorMode: AppCardColorMode? = null,
+        val customAppCardGradientStart: String? = null,
+        val customAppCardGradientMiddle: String? = null,
+        val customAppCardGradientEnd: String? = null,
+        val customAppCardSolidColor: String? = null,
         val stripUnusedNativeLibs: Boolean? = null,
         val theme: Theme? = null,
         val themeStyle: ThemeStyle? = null,
@@ -254,6 +265,11 @@ class PreferencesManager(
         pureBlackTheme = pureBlackTheme.get(),
         customAccentColor = customAccentColor.get(),
         customThemeColor = customThemeColor.get(),
+        appCardColorMode = appCardColorMode.get(),
+        customAppCardGradientStart = customAppCardGradientStart.get(),
+        customAppCardGradientMiddle = customAppCardGradientMiddle.get(),
+        customAppCardGradientEnd = customAppCardGradientEnd.get(),
+        customAppCardSolidColor = customAppCardSolidColor.get(),
         stripUnusedNativeLibs = stripUnusedNativeLibs.get(),
         theme = theme.get(),
         themeStyle = themeStyle.get(),
@@ -296,6 +312,11 @@ class PreferencesManager(
         snapshot.pureBlackTheme?.let { pureBlackTheme.value = it }
         snapshot.customAccentColor?.let { customAccentColor.value = it }
         snapshot.customThemeColor?.let { customThemeColor.value = it }
+        snapshot.appCardColorMode?.let { appCardColorMode.value = it }
+        snapshot.customAppCardGradientStart?.let { customAppCardGradientStart.value = it }
+        snapshot.customAppCardGradientMiddle?.let { customAppCardGradientMiddle.value = it }
+        snapshot.customAppCardGradientEnd?.let { customAppCardGradientEnd.value = it }
+        snapshot.customAppCardSolidColor?.let { customAppCardSolidColor.value = it }
         snapshot.stripUnusedNativeLibs?.let { stripUnusedNativeLibs.value = it }
         snapshot.theme?.let { theme.value = it }
         snapshot.themeStyle?.let { themeStyle.value = it }

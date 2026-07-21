@@ -18,9 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowUpward
 import androidx.compose.material.icons.outlined.DeleteOutline
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -51,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.ui.screen.shared.AppIcon
+import app.morphe.manager.ui.screen.shared.FrostedGlassChip
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.screen.shared.ShimmerBox
 import app.morphe.manager.ui.screen.shared.drawDiagonalShimmer
@@ -184,29 +183,13 @@ private fun GlassChip(
 ) {
     val cardStyle = homeAppCardStyle()
 
-    Surface(
+    FrostedGlassChip(
+        text = text,
+        icon = icon,
+        containerColor = cardStyle.chipContainerColor,
+        contentColor = cardStyle.chipContentColor,
         modifier = modifier,
-        shape = RoundedCornerShape(6.dp),
-        color = cardStyle.chipContainerColor
-    ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = cardStyle.chipContentColor,
-                modifier = Modifier.size(12.dp)
-            )
-            Text(
-                text = text,
-                style = MaterialTheme.typography.labelSmall,
-                color = cardStyle.chipContentColor
-            )
-        }
-    }
+    )
 }
 
 /**

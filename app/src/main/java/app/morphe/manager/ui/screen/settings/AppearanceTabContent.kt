@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
@@ -38,6 +39,8 @@ import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
 import app.morphe.manager.ui.theme.resolveThemeStyle
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
+import app.morphe.manager.util.AppCardColorDefaults
+import app.morphe.manager.util.AppCardColorMode
 import app.morphe.manager.util.saveLanguageToPrefs
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -65,19 +68,45 @@ fun AppearanceTabContent(
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
+    val appCardColorMode by themeViewModel.prefs.appCardColorMode.getAsState()
+    val customAppCardGradientStart by themeViewModel.prefs.customAppCardGradientStart.getAsState()
+    val customAppCardGradientMiddle by themeViewModel.prefs.customAppCardGradientMiddle.getAsState()
+    val customAppCardGradientEnd by themeViewModel.prefs.customAppCardGradientEnd.getAsState()
+    val customAppCardSolidColor by themeViewModel.prefs.customAppCardSolidColor.getAsState()
     val showAppGroupingSwitcher by homeAppButtonPrefs.showCategoryViewSwitcher.collectAsStateWithLifecycle()
     val showSortButton by homeAppButtonPrefs.showSortButton.collectAsStateWithLifecycle()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
     val randomInterval by themeViewModel.prefs.randomBackgroundInterval.getAsState()
     val effectiveThemeStyle = resolveThemeStyle(themeStyle, supportsDynamicColor)
+    val showAppCardColorSetting = effectiveThemeStyle != ThemeStyle.MONOCHROME
 
     val showLanguageDialog = remember { mutableStateOf(false) }
     val showTranslationInfoDialog = remember { mutableStateOf(false) }
+    val showAppCardColorDialog = remember { mutableStateOf(false) }
+    val appCardColors = remember(
+        appCardColorMode,
+        customAppCardGradientStart,
+        customAppCardGradientMiddle,
+        customAppCardGradientEnd,
+        customAppCardSolidColor
+    ) {
+        AppCardColorDefaults.previewColors(
+            mode = appCardColorMode,
+            startHex = customAppCardGradientStart,
+            middleHex = customAppCardGradientMiddle,
+            endHex = customAppCardGradientEnd,
+            solidHex = customAppCardSolidColor
+        )
+    }
 
     // Localized strings for accessibility
     val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
+
+    LaunchedEffect(showAppCardColorSetting) {
+        if (!showAppCardColorSetting) showAppCardColorDialog.value = false
+    }
 
     val contentPadding = rememberWindowSize().contentPadding
     Column(
@@ -158,6 +187,38 @@ fun AppearanceTabContent(
                     )
                 }
             )
+            AnimatedVisibility(
+                visible = showAppCardColorSetting,
+                enter = MorpheAnimations.expandFadeEnter,
+                exit = MorpheAnimations.shrinkFadeExit
+            ) {
+                Column {
+                    MorpheSettingsDivider()
+                    SettingsItem(
+                        onClick = { showAppCardColorDialog.value = true },
+                        title = stringResource(R.string.settings_appearance_app_card_colors),
+                        subtitle = stringResource(
+                            when (appCardColorMode) {
+                                AppCardColorMode.DEFAULT -> R.string.settings_appearance_app_card_colors_default_description
+                                AppCardColorMode.GRADIENT -> R.string.settings_appearance_app_card_colors_gradient_description
+                                AppCardColorMode.SOLID -> R.string.settings_appearance_app_card_colors_solid_description
+                            }
+                        ),
+                        leadingContent = {
+                            MorpheIcon(icon = Icons.Outlined.ColorLens)
+                        },
+                        trailingContent = {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                AppCardColorMiniPreview(colors = appCardColors)
+                                MorpheIcon(icon = Icons.Outlined.ChevronRight)
+                            }
+                        }
+                    )
+                }
+            }
         }
 
         // Theme section
@@ -310,6 +371,23 @@ fun AppearanceTabContent(
         }
 
         AppIconSelector()
+    }
+
+    // App card color dialog
+    AnimatedVisibility(
+        visible = showAppCardColorDialog.value && showAppCardColorSetting,
+        enter = MorpheAnimations.fadeIn,
+        exit = MorpheAnimations.fadeOut
+    ) {
+        AppCardColorDialog(
+            mode = appCardColorMode,
+            startColorHex = customAppCardGradientStart,
+            middleColorHex = customAppCardGradientMiddle,
+            endColorHex = customAppCardGradientEnd,
+            solidColorHex = customAppCardSolidColor,
+            onApply = themeViewModel::applyAppCardColors,
+            onDismiss = { showAppCardColorDialog.value = false }
+        )
     }
 
     // Translation info dialog
