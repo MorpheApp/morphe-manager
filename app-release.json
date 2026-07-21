@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-07-21T14:53:11",
-  "description": "# [1.24.0-dev.13](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.12...v1.24.0-dev.13) (2026-07-21)\n\n\n### Bug Fixes\n\n* Add confirmation dialog before batch uninstall ([3486b62](https://github.com/MorpheApp/morphe-manager/commit/3486b62a9ee79cc49eb61e21463338651b4aeb63))\n* Show music note icon for audio files in custom file picker ([ac082cf](https://github.com/MorpheApp/morphe-manager/commit/ac082cf5a3dcd9c4320bbf4da66ba6abeb7072b1))\n\n\n### Features\n\n* Redesign destructive confirmation dialogs ([85dfad9](https://github.com/MorpheApp/morphe-manager/commit/85dfad99455c2203c2327e70ad307566386e5b9e))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.13/morphe-manager-1.24.0-dev.13.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.13/morphe-manager-1.24.0-dev.13.apk.asc",
-  "version": "1.24.0-dev.13"
+  "created_at": "2026-07-21T17:34:41",
+  "description": "# [1.24.0-dev.14](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.13...v1.24.0-dev.14) (2026-07-21)\n\n\n### Bug Fixes\n\n* Consistent search field spacing in patch list dialogs ([1103fda](https://github.com/MorpheApp/morphe-manager/commit/1103fda7ea2820e38f7b798257f271d78f198fb5))\n* Deduplicate confirmation dialogs with shared `ConfirmDialog` ([f954119](https://github.com/MorpheApp/morphe-manager/commit/f9541196d0f3eefecc419d2b81dd0dce7ff14084))\n* Fix multiselect mode in APK dialogs ([b6f4f63](https://github.com/MorpheApp/morphe-manager/commit/b6f4f63c7b9fe131981e7fba218670f100452480))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.14/morphe-manager-1.24.0-dev.14.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.24.0-dev.14/morphe-manager-1.24.0-dev.14.apk.asc",
+  "version": "1.24.0-dev.14"
 }

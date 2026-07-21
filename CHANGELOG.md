@@ -1,3 +1,12 @@
+# [1.24.0-dev.14](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.13...v1.24.0-dev.14) (2026-07-21)
+
+
+### Bug Fixes
+
+* Consistent search field spacing in patch list dialogs ([1103fda](https://github.com/MorpheApp/morphe-manager/commit/1103fda7ea2820e38f7b798257f271d78f198fb5))
+* Deduplicate confirmation dialogs with shared `ConfirmDialog` ([f954119](https://github.com/MorpheApp/morphe-manager/commit/f9541196d0f3eefecc419d2b81dd0dce7ff14084))
+* Fix multiselect mode in APK dialogs ([b6f4f63](https://github.com/MorpheApp/morphe-manager/commit/b6f4f63c7b9fe131981e7fba218670f100452480))
+
 # [1.24.0-dev.13](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.12...v1.24.0-dev.13) (2026-07-21)
 
 
