@@ -47,7 +47,6 @@ import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
-import app.morphe.manager.util.PatchSelectionUtils.filterGmsCore
 import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
 import app.morphe.manager.util.PatchSelectionUtils.togglePatch
@@ -2482,12 +2481,8 @@ class HomeViewModel(
         // No patch conditions on ABI today, so UNIVERSAL is a stable default
         val apkArchitecture = ApkArchitecture.UNIVERSAL
 
-        // Apply patch-declared rules first, then keep the legacy GmsCore filter as a safety
-        // net for bundles that have not adopted the availability API
-        @Suppress("DEPRECATION")
         fun PatchSelection.applyInstallerRules(): PatchSelection =
             applyAvailability(installerType, apkArchitecture, bundlesMap)
-                .let { if (usingMountInstall) it.filterGmsCore() else it }
 
         if (isExpertMode()) {
             // Expert Mode: Load saved selections and options only for current bundles
