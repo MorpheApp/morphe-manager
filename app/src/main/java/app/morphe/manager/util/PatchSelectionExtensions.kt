@@ -235,7 +235,7 @@ object PatchSelectionUtils {
             patchesInBundle.values.forEach { info ->
                 val resolver = info.availabilityResolver ?: return@forEach
 
-                when (resolver(installerType, apkArchitecture)) {
+                when (resolver.resolve(installerType, apkArchitecture)) {
                     PatchAvailability.REQUIRED    -> current.add(info.name)
                     PatchAvailability.UNAVAILABLE -> current.remove(info.name)
                     PatchAvailability.ENABLED,

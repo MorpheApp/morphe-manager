@@ -102,7 +102,7 @@ data class PatchInfo(
      */
     fun defaultSelected(installerType: InstallerType, apkArchitecture: ApkArchitecture): Boolean {
         val resolver = availabilityResolver ?: return include
-        return when (resolver(installerType, apkArchitecture)) {
+        return when (resolver.resolve(installerType, apkArchitecture)) {
             PatchAvailability.REQUIRED, PatchAvailability.ENABLED -> true
             PatchAvailability.UNAVAILABLE, PatchAvailability.DISABLED -> false
         }
@@ -114,7 +114,7 @@ data class PatchInfo(
      */
     fun lockState(installerType: InstallerType, apkArchitecture: ApkArchitecture): PatchLockState {
         val resolver = availabilityResolver ?: return PatchLockState.NONE
-        return when (resolver(installerType, apkArchitecture)) {
+        return when (resolver.resolve(installerType, apkArchitecture)) {
             PatchAvailability.REQUIRED    -> PatchLockState.LOCKED_ON
             PatchAvailability.UNAVAILABLE -> PatchLockState.LOCKED_OFF
             PatchAvailability.ENABLED,
