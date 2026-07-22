@@ -307,16 +307,22 @@ private fun DialogContent(
         return
     }
 
+    // Compact mode zeroes its top padding when there is no title to fill it
+    val outerPadding = when (padding) {
+        DialogPadding.Compact -> PaddingValues(
+            start = MorpheDefaults.ContentPadding,
+            end = MorpheDefaults.ContentPadding,
+            top = if (title != null) MorpheDefaults.ContentPadding else 0.dp,
+            bottom = MorpheDefaults.ContentPadding
+        )
+        else -> PaddingValues(MorpheDefaults.ContentPaddingExpanded)
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .systemBarsPadding()
-            .padding(
-                when (padding) {
-                    DialogPadding.Compact -> PaddingValues(MorpheDefaults.ContentPadding)
-                    else -> PaddingValues(MorpheDefaults.ContentPaddingExpanded)
-                }
-            )
+            .padding(outerPadding)
             .pointerInput(Unit) {
                 detectTapGestures { /* Consume clicks */ }
             },
