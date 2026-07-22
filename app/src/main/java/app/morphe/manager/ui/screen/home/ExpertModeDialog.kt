@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PatchSelection
@@ -62,6 +63,7 @@ fun ExpertModeDialog(
     hasMultipleBundles: Boolean,
     patchActions: ExpertPatchActions,
     savedPatches: PatchSelection = emptyMap(),
+    lockStateOf: (PatchInfo) -> PatchLockState = { PatchLockState.NONE },
     onDismiss: () -> Unit,
     onProceed: () -> Unit
 ) {
@@ -260,6 +262,7 @@ fun ExpertModeDialog(
                                 patches = filteredPatches,
                                 newPatchNames = newPatches[bundle.uid] ?: emptySet(),
                                 missingRequiredOptions = patchesWithMissingRequired,
+                                lockStateOf = lockStateOf,
                                 onToggle = { patchActions.onPatchToggle(bundle.uid, it) },
                                 onConfigureOptions = {
                                     if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
@@ -466,6 +469,7 @@ private fun PatchListWithUniversalSection(
     patches: List<Pair<PatchInfo, Boolean>>,
     newPatchNames: Set<String> = emptySet(),
     missingRequiredOptions: Set<String> = emptySet(),
+    lockStateOf: (PatchInfo) -> PatchLockState = { PatchLockState.NONE },
     onToggle: (String) -> Unit,
     onConfigureOptions: (PatchInfo) -> Unit,
 ) {
@@ -493,6 +497,7 @@ private fun PatchListWithUniversalSection(
             isEnabled = isEnabled,
             isNew = patch.name in newPatchNames,
             hasRequiredOptionsMissing = patch.name in missingRequiredOptions,
+            lockState = lockStateOf(patch),
             onToggle = { onToggle(patch.name) },
             onConfigureOptions = { onConfigureOptions(patch) },
             hasOptions = !patch.options.isNullOrEmpty()

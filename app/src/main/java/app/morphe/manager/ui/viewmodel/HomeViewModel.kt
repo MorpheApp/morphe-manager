@@ -41,6 +41,7 @@ import app.morphe.manager.patcher.patch.BundleAppMetadata
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.HomeAppItem
@@ -538,11 +539,11 @@ class HomeViewModel(
 
     // Install target passed to patch availability resolvers. Only mount vs non-mount is known at
     // patch-selection time; the concrete non-mount installer is picked later
-    private val currentInstallerType: InstallerType
+    val currentInstallerType: InstallerType
         get() = if (usingMountInstall) InstallerType.MOUNT else InstallerType.STANDARD
 
     // No patch conditions on ABI today, so UNIVERSAL is a stable default
-    private val currentApkArchitecture: ApkArchitecture
+    val currentApkArchitecture: ApkArchitecture
         get() = ApkArchitecture.UNIVERSAL
 
     // Controls the pre-patching mode selection dialog for root-capable devices.
@@ -2758,29 +2759,42 @@ class HomeViewModel(
      * Supports adding patches from bundles not yet in the selection.
      */
     fun togglePatchInExpertMode(bundleUid: Int, patchName: String) {
+        // Locked patches are toggled only through availability rules; no-op here
+        val patch = expertModeBundles
+            .firstOrNull { it.uid == bundleUid }
+            ?.patches
+            ?.firstOrNull { it.name == patchName }
+        if (patch != null && patch.lockState(currentInstallerType, currentApkArchitecture) != PatchLockState.NONE) return
+
         expertModePatches = expertModePatches.togglePatch(bundleUid, patchName)
     }
 
     /**
      * Select all given patches for a bundle.
-     * Only adds patches that are not already selected.
+     * Only adds patches that are not already selected. LOCKED_OFF patches are skipped.
      */
     fun expertModeSelectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
         val current = expertModePatches.toMutableMap()
         val set = current[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        patches.forEach { (patch, enabled) -> if (!enabled) set.add(patch.name) }
+        patches.forEach { (patch, enabled) ->
+            if (patch.lockState(currentInstallerType, currentApkArchitecture) == PatchLockState.LOCKED_OFF) return@forEach
+            if (!enabled) set.add(patch.name)
+        }
         current[bundleUid] = set
         expertModePatches = current
     }
 
     /**
      * Deselect all given patches for a bundle.
-     * Removes the bundle entry entirely if nothing remains selected.
+     * Removes the bundle entry entirely if nothing remains selected. LOCKED_ON patches are kept.
      */
     fun expertModeDeselectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
         val current = expertModePatches.toMutableMap()
         val set = current[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        patches.forEach { (patch, enabled) -> if (enabled) set.remove(patch.name) }
+        patches.forEach { (patch, enabled) ->
+            if (patch.lockState(currentInstallerType, currentApkArchitecture) == PatchLockState.LOCKED_ON) return@forEach
+            if (enabled) set.remove(patch.name)
+        }
         if (set.isEmpty()) current.remove(bundleUid) else current[bundleUid] = set
         expertModePatches = current
     }

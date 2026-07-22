@@ -108,6 +108,20 @@ data class PatchInfo(
         }
     }
 
+    /**
+     * Whether the user can toggle this patch for the given install target, and in which direction
+     * it is locked when they cannot.
+     */
+    fun lockState(installerType: InstallerType, apkArchitecture: ApkArchitecture): PatchLockState {
+        val resolver = availabilityResolver ?: return PatchLockState.NONE
+        return when (resolver(installerType, apkArchitecture)) {
+            PatchAvailability.REQUIRED    -> PatchLockState.LOCKED_ON
+            PatchAvailability.UNAVAILABLE -> PatchLockState.LOCKED_OFF
+            PatchAvailability.ENABLED,
+            PatchAvailability.DISABLED    -> PatchLockState.NONE
+        }
+    }
+
     fun compatibleWith(packageName: String) =
         compatiblePackages == null ||
                 compatiblePackages.any { it.packageName == null || it.packageName == packageName }
