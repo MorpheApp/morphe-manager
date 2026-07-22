@@ -1,9 +1,12 @@
 package app.morphe.manager.patcher.patch
 
 import androidx.compose.runtime.Immutable
+import app.morphe.patcher.patch.ApkArchitecture
 import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.AvailabilityResolver
+import app.morphe.patcher.patch.InstallerType
 import app.morphe.patcher.patch.Patch
+import app.morphe.patcher.patch.PatchAvailability
 import app.morphe.patcher.patch.ApkFileType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap
@@ -89,6 +92,21 @@ data class PatchInfo(
         options = patch.options.map { (_, option) -> Option(option) }.ifEmpty { null }?.toImmutableList(),
         availabilityResolver = patch.availability,
     )
+
+    /**
+     * Whether this patch should be selected by default for the given install target.
+     *
+     * When the patch ships an [availabilityResolver], it is the authoritative source:
+     * REQUIRED and ENABLED count as selected, UNAVAILABLE and DISABLED as unselected.
+     * Patches without a resolver fall back to [include].
+     */
+    fun defaultSelected(installerType: InstallerType, apkArchitecture: ApkArchitecture): Boolean {
+        val resolver = availabilityResolver ?: return include
+        return when (resolver(installerType, apkArchitecture)) {
+            PatchAvailability.REQUIRED, PatchAvailability.ENABLED -> true
+            PatchAvailability.UNAVAILABLE, PatchAvailability.DISABLED -> false
+        }
+    }
 
     fun compatibleWith(packageName: String) =
         compatiblePackages == null ||
