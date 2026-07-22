@@ -2,6 +2,7 @@ package app.morphe.manager.patcher.patch
 
 import androidx.compose.runtime.Immutable
 import app.morphe.patcher.patch.AppTarget
+import app.morphe.patcher.patch.AvailabilityResolver
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.ApkFileType
 import kotlinx.collections.immutable.ImmutableList
@@ -23,7 +24,8 @@ data class PatchInfo(
     val description: String?,
     val include: Boolean,
     val compatiblePackages: ImmutableList<CompatiblePackage>?,
-    val options: ImmutableList<Option<*>>?
+    val options: ImmutableList<Option<*>>?,
+    val availabilityResolver: AvailabilityResolver? = null,
 ) {
     @Suppress("DEPRECATION")
     constructor(patch: Patch<*>) : this(
@@ -77,14 +79,15 @@ data class PatchInfo(
                 )
             }
             ?.toImmutableList()
-        // Fallback to legacy API if new compatibility is not available
+            // Fallback to legacy API if new compatibility is not available
             ?: patch.compatiblePackages?.map { (pkgName, versions) ->
                 CompatiblePackage(
                     packageName = pkgName,
                     versions = versions?.toImmutableSet()
                 )
             }?.toImmutableList(),
-        options = patch.options.map { (_, option) -> Option(option) }.ifEmpty { null }?.toImmutableList()
+        options = patch.options.map { (_, option) -> Option(option) }.ifEmpty { null }?.toImmutableList(),
+        availabilityResolver = patch.availability,
     )
 
     fun compatibleWith(packageName: String) =

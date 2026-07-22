@@ -46,6 +46,7 @@ import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.*
+import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
 import app.morphe.manager.util.PatchSelectionUtils.filterGmsCore
 import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
@@ -53,7 +54,9 @@ import app.morphe.manager.util.PatchSelectionUtils.togglePatch
 import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
+import app.morphe.patcher.patch.ApkArchitecture
 import app.morphe.patcher.patch.AppTarget
+import app.morphe.patcher.patch.InstallerType
 import io.ktor.http.encodeURLPath
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -2472,9 +2475,19 @@ class HomeViewModel(
         // Create bundles map for validation
         val bundlesMap = allBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
 
-        // Helper function to apply GmsCore filter if needed
-        fun PatchSelection.applyGmsCoreFilter(): PatchSelection =
-            if (usingMountInstall) this.filterGmsCore() else this
+        // Only mount vs non-mount is known at this point; the concrete non-mount installer is
+        // picked later and behaves identically for the availability rules that ship today
+        val installerType = if (usingMountInstall) InstallerType.MOUNT else InstallerType.STANDARD
+
+        // No patch conditions on ABI today, so UNIVERSAL is a stable default
+        val apkArchitecture = ApkArchitecture.UNIVERSAL
+
+        // Apply patch-declared rules first, then keep the legacy GmsCore filter as a safety
+        // net for bundles that have not adopted the availability API
+        @Suppress("DEPRECATION")
+        fun PatchSelection.applyInstallerRules(): PatchSelection =
+            applyAvailability(installerType, apkArchitecture, bundlesMap)
+                .let { if (usingMountInstall) it.filterGmsCore() else it }
 
         if (isExpertMode()) {
             // Expert Mode: Load saved selections and options only for current bundles
@@ -2549,7 +2562,7 @@ class HomeViewModel(
             } else {
                 // No saved selections - use default for all current bundles
                 allBundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
-            }.applyGmsCoreFilter()
+            }.applyInstallerRules()
 
             // Compute new patches map for the dialog to highlight.
             // Only populated when a previous selection exists - on first run there is nothing
@@ -2645,7 +2658,7 @@ class HomeViewModel(
                         .filter { it.include }
                         .mapTo(mutableSetOf()) { it.name }
                     if (patchNames.isNotEmpty()) {
-                        val patches = mapOf(bundle.uid to patchNames).applyGmsCoreFilter()
+                        val patches = mapOf(bundle.uid to patchNames).applyInstallerRules()
                         proceedWithPatching(selectedApp, patches, emptyMap())
                         return
                     }
@@ -2664,7 +2677,7 @@ class HomeViewModel(
             // Only one bundle has patches - use it directly (no prompt needed)
             val patches = bundleWithPatches
                 .associate { (bundle, patches) -> bundle.uid to patches }
-                .applyGmsCoreFilter()
+                .applyInstallerRules()
 
             proceedWithPatching(selectedApp, patches, emptyMap())
         }
