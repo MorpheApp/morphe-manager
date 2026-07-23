@@ -530,6 +530,7 @@ fun BundlePatchesDialog(
                 packageMatch && queryMatch
             }
             .sortedBy { it.name }
+            .distinctBy { it.name }
     }
 
     // Per-patch accent color: first non-null appIconColor across all compatible packages,
