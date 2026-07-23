@@ -1452,10 +1452,12 @@ class HomeViewModel(
             bundleInfo
                 .filter { (_, info) -> info.enabled }
                 .forEach { (uid, info) ->
-                    val patches = info.patches.filter { patch ->
-                        patch.compatiblePackages == null ||
-                                patch.compatiblePackages.any { it.packageName == packageName }
-                    }
+                    val patches = info.patches
+                        .filter { patch ->
+                            patch.compatiblePackages == null ||
+                                    patch.compatiblePackages.any { it.packageName == packageName }
+                        }
+                        .distinctBy { it.name }
                     if (patches.isNotEmpty()) put(uid, patches)
                 }
         }
