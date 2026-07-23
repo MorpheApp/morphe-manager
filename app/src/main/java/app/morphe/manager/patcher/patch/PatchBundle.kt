@@ -37,6 +37,10 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
                 website = readManifestAttribute("Website"),
                 license = readManifestAttribute("License"),
                 patcherVersion = readManifestAttribute("Patcher-Version"),
+                addOnBundles = readManifestAttribute("Add-On-Bundle")
+                    ?.split(",")
+                    ?.map { it.trim() }
+                    ?.filter { it.isNotEmpty() },
             ) else
             null
     }
@@ -53,16 +57,31 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
         val contact: String?,
         val website: String?,
         val license: String?,
-        val patcherVersion: String?
+        val patcherVersion: String?,
+        /** Names of parent bundles from the `Add-On-Bundle` manifest attribute (comma-separated). */
+        val addOnBundles: List<String>? = null,
     )
 
     object Loader {
-        private fun loadBundle(bundle: PatchBundle): Collection<Patch<*>> {
+        /**
+         * Load patches declared by [bundle]. If [bundle] declares `Add-On-Bundle`, matching
+         * parents from [availableBundles] are added to the class loader (add-on only; fork
+         * bundles stay isolated). Returned patches are from [bundle] itself only.
+         */
+        private fun loadBundle(
+            bundle: PatchBundle,
+            availableBundles: Iterable<PatchBundle> = emptyList()
+        ): Collection<Patch<*>> {
             validateDexEntries(bundle.patchesJar)
+            val jarFile = File(bundle.patchesJar)
+            val parentJars = resolveParentBundleJars(bundle, availableBundles)
+            val allJars = buildSet {
+                add(jarFile)
+                parentJars.forEach { add(it) }
+            }
             val patchFiles = runCatching {
-                val jarFile = File(bundle.patchesJar)
                 loadPatchesFromDex(
-                    setOf(jarFile),
+                    allJars,
                     if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
                         null
                     } else {
@@ -75,22 +94,42 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
             }.getOrElse { error ->
                 throw IllegalStateException("Patch bundle is corrupted or incomplete", error)
             }
-            val entry = patchFiles.entries.singleOrNull()
+            return patchFiles[jarFile]
                 ?: throw IllegalStateException("Unexpected patch bundle load result for ${bundle.patchesJar}")
-
-            return entry.value
         }
 
-        private fun metadataFor(bundle: PatchBundle) = loadBundle(bundle).map(::PatchInfo)
+        private fun resolveParentBundleJars(
+            bundle: PatchBundle,
+            availableBundles: Iterable<PatchBundle>
+        ): List<File> {
+            val parentNames = bundle.manifestAttributes?.addOnBundles.orEmpty()
+            if (parentNames.isEmpty()) return emptyList()
+            return availableBundles.mapNotNull { other ->
+                if (other === bundle) return@mapNotNull null
+                val otherName = other.manifestAttributes?.name ?: return@mapNotNull null
+                if (otherName in parentNames) File(other.patchesJar) else null
+            }
+        }
 
-        fun metadata(bundles: Iterable<PatchBundle>) =
-            bundles.associateWith(::metadataFor)
+        private fun metadataFor(
+            bundle: PatchBundle,
+            availableBundles: Iterable<PatchBundle> = emptyList()
+        ) = loadBundle(bundle, availableBundles).map(::PatchInfo)
 
-        fun metadata(bundle: PatchBundle) = metadataFor(bundle)
+        fun metadata(bundles: Iterable<PatchBundle>): Map<PatchBundle, Collection<PatchInfo>> {
+            val list = bundles.toList()
+            return list.associateWith { bundle -> metadataFor(bundle, list) }
+        }
 
-        fun patches(bundles: Iterable<PatchBundle>, packageName: String) =
-            bundles.associateWith { bundle ->
-                loadBundle(bundle).filter { patch ->
+        fun metadata(
+            bundle: PatchBundle,
+            availableBundles: Iterable<PatchBundle> = emptyList()
+        ) = metadataFor(bundle, availableBundles)
+
+        fun patches(bundles: Iterable<PatchBundle>, packageName: String): Map<PatchBundle, Set<Patch<*>>> {
+            val list = bundles.toList()
+            return loadGrouped(list).mapValues { (_, patches) ->
+                patches.filter { patch ->
                     val compatibility = patch.compatibility
                         ?: return@filter true // Universal patch
 
@@ -100,6 +139,69 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
                     }
                 }.toSet()
             }
+        }
+
+        /**
+         * Splits [bundles] into class-loading groups and loads each group through its own
+         * DexClassLoader. Add-on bundles (declaring `Add-On-Bundle`) are unioned with their
+         * declared parents so shared classes resolve to one Class → one static instance across
+         * the group. Fork bundles without add-on declarations stay in their own singleton
+         * groups (isolated), preserving current behavior for third-party forks that ship
+         * divergent copies of shared classes.
+         */
+        private fun loadGrouped(bundles: List<PatchBundle>): Map<PatchBundle, Collection<Patch<*>>> {
+            if (bundles.isEmpty()) return emptyMap()
+            val groups = buildClassLoaderGroups(bundles)
+            val result = mutableMapOf<PatchBundle, Collection<Patch<*>>>()
+            groups.forEach { group ->
+                if (group.size == 1) {
+                    val only = group.single()
+                    result[only] = loadBundle(only)
+                } else {
+                    result.putAll(loadSharedGroup(group))
+                }
+            }
+            return result
+        }
+
+        /** Union-Find: merge each add-on with the declared parents present in [bundles]. */
+        private fun buildClassLoaderGroups(bundles: List<PatchBundle>): List<List<PatchBundle>> {
+            val nameToBundle = bundles.mapNotNull { b ->
+                b.manifestAttributes?.name?.let { it to b }
+            }.toMap()
+            val parent = bundles.associateWithTo(mutableMapOf()) { it }
+            fun find(x: PatchBundle): PatchBundle {
+                var r = x
+                while (parent.getValue(r) !== r) r = parent.getValue(r)
+                return r
+            }
+            fun union(a: PatchBundle, b: PatchBundle) {
+                val ra = find(a); val rb = find(b)
+                if (ra !== rb) parent[ra] = rb
+            }
+            bundles.forEach { bundle ->
+                bundle.manifestAttributes?.addOnBundles?.forEach { parentName ->
+                    nameToBundle[parentName]?.let { union(bundle, it) }
+                }
+            }
+            return bundles.groupBy(::find).values.toList()
+        }
+
+        private fun loadSharedGroup(group: List<PatchBundle>): Map<PatchBundle, Collection<Patch<*>>> {
+            group.forEach { validateDexEntries(it.patchesJar) }
+            val jarByBundle = group.associateWith { File(it.patchesJar) }
+            val allJars = jarByBundle.values.toSet()
+            val result = runCatching {
+                loadPatchesFromDex(
+                    allJars,
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) null
+                    else jarByBundle.values.first().parentFile
+                ).byPatchesFile
+            }.getOrElse { error ->
+                throw IllegalStateException("Patch bundle is corrupted or incomplete", error)
+            }
+            return group.associateWith { result[jarByBundle[it]!!] ?: emptyList() }
+        }
 
         private fun validateDexEntries(jarPath: String) {
             JarFile(jarPath).use { jar ->

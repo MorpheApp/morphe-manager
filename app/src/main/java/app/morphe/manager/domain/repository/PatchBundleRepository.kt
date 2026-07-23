@@ -428,6 +428,8 @@ class PatchBundleRepository(
 
         val failures = mutableListOf<Pair<Int, Throwable>>()
 
+        // Pass every bundle so add-ons can resolve their declared parents (see Add-On-Bundle).
+        val allBundles = map.keys
         val metadata = map.mapNotNull { (bundle, src) ->
             try {
                 src.uid to PatchBundleInfo.Global(
@@ -435,7 +437,7 @@ class PatchBundleRepository(
                     version = bundle.manifestAttributes?.version,
                     uid = src.uid,
                     enabled = src.enabled,
-                    patches = PatchBundle.Loader.metadata(bundle),
+                    patches = PatchBundle.Loader.metadata(bundle, allBundles),
                     patcherVersion = bundle.manifestAttributes?.patcherVersion,
                 )
             } catch (error: Throwable) {
