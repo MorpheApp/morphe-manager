@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -54,16 +53,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.morphe.manager.domain.bundles.APIPatchBundle
-import app.morphe.manager.domain.bundles.JsonPatchBundle
-import app.morphe.manager.domain.bundles.PatchBundleSource
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.bundleAvatarUrl
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.gitlabAvatarUrl
+import app.morphe.manager.domain.bundles.*
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
-import app.morphe.manager.domain.bundles.RemotePatchBundle
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.sourceType
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.manager.SourceBundleSortMode
+import app.morphe.manager.domain.repository.BlocklistRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.RemoteAvatar
@@ -103,6 +99,7 @@ fun BundleManagementSheet(
     val metadataFetchErrors by patchBundleRepository.metadataFetchErrors.collectAsStateWithLifecycle(emptyMap())
     val experimentalVersionsEnabled by prefs.bundleExperimentalVersionsEnabled.getAsState()
     val bundleInfo by patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
+    val blockedSources by patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
 
     val showSheetOnboarding = globalOnboardingState?.sheetOnboardingActive == true
 
@@ -282,6 +279,7 @@ fun BundleManagementSheet(
                                     updateInfo = manualUpdateInfo[bundle.uid],
                                     isUpdating = bundle.uid in activeUpdateUids,
                                     metadataFetchError = metadataFetchErrors[bundle.uid],
+                                    blockedInfo = blockedSources[bundle.uid],
                                     expanded = isSingleDefaultBundle || bundle.uid in expandedBundleUids ||
                                         (showSheetOnboarding && isFirstCard),
                                     onToggleExpanded = {
@@ -388,8 +386,10 @@ fun BundleManagementSheet(
 
     // Delete confirmation dialog
     if (bundleToDelete.value != null) {
-        BundleDeleteConfirmDialog(
-            bundle = bundleToDelete.value!!,
+        ConfirmDialog(
+            title = stringResource(R.string.delete),
+            message = stringResource(R.string.sources_dialog_delete_confirm_message, bundleToDelete.value!!.displayTitle),
+            primaryText = stringResource(R.string.delete),
             onDismiss = { bundleToDelete.value = null },
             onConfirm = {
                 onDelete(bundleToDelete.value!!)
@@ -467,6 +467,7 @@ private fun BundleManagementCard(
     isDragging: Boolean = false,
     longPressModifier: Modifier = Modifier,
     metadataFetchError: Throwable? = null,
+    blockedInfo: BlocklistRepository.BlockedEntry? = null,
     expanded: Boolean,
     onToggleExpanded: () -> Unit,
     onDelete: () -> Unit,
@@ -498,7 +499,8 @@ private fun BundleManagementCard(
         action()
     }
 
-    val isEnabled = bundle.enabled
+    val isBlocked = blockedInfo != null
+    val isEnabled = bundle.enabled && !isBlocked
     val hasMetadataError = metadataFetchError != null
     val isMissing = bundle.state is PatchBundleSource.State.Missing
 
@@ -560,7 +562,7 @@ private fun BundleManagementCard(
             }
         }
 
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(MorpheDefaults.ContentPadding)) {
             // Click target only on the header so expanded children stay independently focusable for screen readers
             BundleCardHeader(
                 bundle = bundle,
@@ -569,6 +571,7 @@ private fun BundleManagementCard(
                 showChevron = !forceExpanded,
                 enabled = isEnabled,
                 metadataFetchError = metadataFetchError,
+                blockedInfo = blockedInfo,
                 modifier = longPressModifier
                     .clickable(
                         indication = null,
@@ -592,27 +595,43 @@ private fun BundleManagementCard(
                 exit = MorpheAnimations.shrinkVertExit
             ) {
                 Column(
-                    modifier = Modifier
-                        .padding(top = 16.dp)
-                        .fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
                 ) {
-                    // Metadata unavailable hint (shown when patches-bundle.json / remote fetch failed)
-                    AnimatedVisibility(
-                        visible = metadataFetchError != null || bundle.state is PatchBundleSource.State.Missing,
-                        enter = MorpheAnimations.expandFadeEnter,
-                        exit = MorpheAnimations.shrinkFadeExit
-                    ) {
-                        val hintText = if (bundle.state is PatchBundleSource.State.Missing) {
-                            stringResource(R.string.sources_management_metadata_unavailable_hint_missing)
-                        } else {
-                            stringResource(R.string.sources_management_metadata_unavailable_hint)
+                    Column {
+                        // Blocked source banner (shown when the source appears on the remote blocklist)
+                        AnimatedVisibility(
+                            visible = blockedInfo != null,
+                            enter = MorpheAnimations.expandFadeEnter,
+                            exit = MorpheAnimations.shrinkFadeExit
+                        ) {
+                            val label = stringResource(R.string.sources_management_source_blocked_badge)
+                            val reason = blockedInfo?.reason?.trim()?.takeIf { it.isNotEmpty() }
+                                ?.replaceFirstChar { it.uppercaseChar() }
+                            InfoBadge(
+                                text = if (reason != null) "$label: $reason" else label,
+                                icon = Icons.Outlined.Block,
+                                style = InfoBadgeStyle.Error
+                            )
                         }
-                        InfoBadge(
-                            text = hintText,
-                            icon = Icons.Outlined.CloudOff,
-                            style = InfoBadgeStyle.Error
-                        )
+
+                        // Metadata unavailable hint (shown when patches-bundle.json / remote fetch failed)
+                        AnimatedVisibility(
+                            visible = metadataFetchError != null || bundle.state is PatchBundleSource.State.Missing,
+                            enter = MorpheAnimations.expandFadeEnter,
+                            exit = MorpheAnimations.shrinkFadeExit
+                        ) {
+                            val hintText = if (bundle.state is PatchBundleSource.State.Missing) {
+                                stringResource(R.string.sources_management_metadata_unavailable_hint_missing)
+                            } else {
+                                stringResource(R.string.sources_management_metadata_unavailable_hint)
+                            }
+                            InfoBadge(
+                                text = hintText,
+                                icon = Icons.Outlined.CloudOff,
+                                style = InfoBadgeStyle.Error
+                            )
+                        }
                     }
 
                     // Patches
@@ -668,7 +687,7 @@ private fun BundleManagementCard(
                         }
                     }
 
-                    MorpheSettingsDivider(modifier = Modifier.padding(vertical = 8.dp), fullWidth = true)
+                    MorpheSettingsDivider(fullWidth = true)
 
                     // Resolve prerelease state once
                     val currentUsePrerelease = when (bundle) {
@@ -679,67 +698,18 @@ private fun BundleManagementCard(
 
                     // Prerelease toggle (for JsonPatchBundle with GitHub endpoint or APIPatchBundle)
                     if (onPrereleasesToggle != null) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .toggleable(
-                                    value = currentUsePrerelease,
-                                    role = Role.Switch,
-                                    enabled = !isUpdating,
-                                    onValueChange = onPrereleasesToggle
-                                )
-                                .semantics {
-                                    stateDescription = if (currentUsePrerelease) enabledState else disabledState
-                                }
-                                .padding(vertical = 4.dp)
-                                .then(
-                                    if (onPrereleaseBtnPositioned != null)
-                                        Modifier.onGloballyPositioned { coords ->
-                                            onPrereleaseBtnPositioned(coords.boundsInWindow())
-                                        }
-                                    else Modifier
-                                ),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = stringResource(R.string.sources_management_prerelease_toggle),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Medium
-                                )
-                                Text(
-                                    text = stringResource(R.string.sources_management_prerelease_toggle_description),
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-
-                            Spacer(Modifier.width(8.dp))
-
-                            Crossfade(
-                                targetState = isUpdating,
-                                modifier = Modifier.size(width = 52.dp, height = 32.dp),
-                                label = "prerelease_toggle_loading"
-                            ) { updating ->
-                                Box(
-                                    modifier = Modifier.fillMaxSize(),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    if (updating) {
-                                        CircularProgressIndicator(
-                                            modifier = Modifier.size(24.dp),
-                                            strokeWidth = 2.dp
-                                        )
-                                    } else {
-                                        MorpheSwitch(
-                                            checked = currentUsePrerelease,
-                                            onCheckedChange = null
-                                        )
-                                    }
-                                }
-                            }
-                        }
+                        ToggleRow(
+                            title = stringResource(R.string.sources_management_prerelease_toggle),
+                            description = stringResource(R.string.sources_management_prerelease_toggle_description),
+                            checked = currentUsePrerelease,
+                            onCheckedChange = onPrereleasesToggle,
+                            enabled = !isUpdating,
+                            isLoading = isUpdating,
+                            showDivider = false,
+                            rowModifier = if (onPrereleaseBtnPositioned != null)
+                                Modifier.onGloballyPositioned { coords -> onPrereleaseBtnPositioned(coords.boundsInWindow()) }
+                            else Modifier
+                        )
                     }
 
                     // Experimental versions toggle - shown for any bundle type that has experimental app version targets.
@@ -750,49 +720,21 @@ private fun BundleManagementCard(
                         enter = MorpheAnimations.expandFadeEnter,
                         exit = MorpheAnimations.shrinkFadeExit
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .toggleable(
-                                    value = useExperimentalVersions,
-                                    role = Role.Switch,
-                                    onValueChange = { onExperimentalVersionsToggle?.invoke(it) }
-                                )
-                                .semantics {
-                                    stateDescription = if (useExperimentalVersions) enabledState else disabledState
-                                }
-                                .padding(vertical = 4.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = stringResource(R.string.sources_management_experimental_versions_toggle),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Medium
-                                )
-                                Text(
-                                    text = stringResource(R.string.sources_management_experimental_versions_toggle_description),
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-
-                            Spacer(Modifier.width(8.dp))
-
-                            MorpheSwitch(
-                                checked = useExperimentalVersions,
-                                onCheckedChange = null
-                            )
-                        }
+                        ToggleRow(
+                            title = stringResource(R.string.sources_management_experimental_versions_toggle),
+                            description = stringResource(R.string.sources_management_experimental_versions_toggle_description),
+                            checked = useExperimentalVersions,
+                            onCheckedChange = { onExperimentalVersionsToggle?.invoke(it) },
+                            showDivider = false
+                        )
                     }
 
                     if (onPrereleasesToggle != null || (hasExperimentalVersions && onExperimentalVersionsToggle != null)) {
-                        MorpheSettingsDivider(modifier = Modifier.padding(vertical = 8.dp), fullWidth = true)
+                        MorpheSettingsDivider(fullWidth = true)
                     }
 
                     // Action bar
-                    ActionPillRow {
+                    ActionPillRow(modifier = Modifier.padding(top = 4.dp)) {
                         if (!forceExpanded) {
                             val disableEnableVerb = stringResource(
                                 if (bundle.enabled) R.string.disable else R.string.enable
@@ -817,7 +759,8 @@ private fun BundleManagementCard(
                                     onClick = withToast(disableToast, onDisable),
                                     icon = icon,
                                     contentDescription = disableEnableDesc,
-                                    tooltip = disableEnableVerb
+                                    tooltip = disableEnableVerb,
+                                    enabled = !isBlocked
                                 )
                             }
                         }
@@ -831,7 +774,8 @@ private fun BundleManagementCard(
                                 onClick = withToast(updateToast, onUpdate),
                                 icon = Icons.Outlined.Refresh,
                                 contentDescription = updateDesc,
-                                tooltip = updateVerb
+                                tooltip = updateVerb,
+                                enabled = !isBlocked
                             )
                         }
 
@@ -875,7 +819,8 @@ private fun BundleCardHeader(
     showChevron: Boolean,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    metadataFetchError: Throwable? = null
+    metadataFetchError: Throwable? = null,
+    blockedInfo: BlocklistRepository.BlockedEntry? = null,
 ) {
     val rotation by animateFloatAsState(
         targetValue = if (expanded) 180f else 0f,
@@ -967,7 +912,7 @@ private fun BundleCardHeader(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 // Bundle type badge
-                BundleTypeBadge(bundle)
+                BundleTypeBadge(bundle.sourceType)
 
                 // Metadata unavailable badge
                 AnimatedVisibility(
@@ -983,9 +928,23 @@ private fun BundleCardHeader(
                     )
                 }
 
+                // Blocked badge
+                AnimatedVisibility(
+                    visible = blockedInfo != null,
+                    enter = MorpheAnimations.expandHorizFadeIn,
+                    exit = MorpheAnimations.shrinkHorizFadeOut
+                ) {
+                    InfoBadge(
+                        text = stringResource(R.string.sources_management_source_blocked_badge),
+                        style = InfoBadgeStyle.Error,
+                        icon = null,
+                        isCompact = true
+                    )
+                }
+
                 // Disabled badge
                 AnimatedVisibility(
-                    visible = !enabled,
+                    visible = !enabled && blockedInfo == null,
                     enter = MorpheAnimations.expandHorizFadeIn,
                     exit = MorpheAnimations.shrinkHorizFadeOut
                 ) {
@@ -1099,13 +1058,12 @@ private fun BundleInfoCard(
 }
 
 @Composable
-private fun BundleTypeBadge(bundle: PatchBundleSource) {
-    val text = when {
-        bundle.isDefault -> stringResource(R.string.sources_dialog_preinstalled)
-        bundle is RemotePatchBundle -> stringResource(R.string.sources_dialog_remote)
-        else -> stringResource(R.string.sources_dialog_local)
+fun BundleTypeBadge(type: BundleSourceType) {
+    val text = when (type) {
+        BundleSourceType.PreInstalled -> stringResource(R.string.sources_dialog_preinstalled)
+        BundleSourceType.Remote -> stringResource(R.string.sources_dialog_remote)
+        BundleSourceType.Local -> stringResource(R.string.sources_dialog_local)
     }
-
     InfoBadge(
         text = text,
         isCompact = true
@@ -1119,9 +1077,7 @@ fun BundleIcon(
     enabled: Boolean = true,
     metadataFetchError: Throwable? = null
 ) {
-    val bundleAvatarUrl = bundle.bundleAvatarUrl
-    val githubAvatarUrl = bundle.githubAvatarUrl
-    val gitlabAvatarUrl = bundle.gitlabAvatarUrl
+    val avatarUrls = bundle.avatarUrls
     val hasMetadataError = metadataFetchError != null
     val hasBundleError = bundle.state is PatchBundleSource.State.Failed
     val isMissing = bundle.state is PatchBundleSource.State.Missing
@@ -1182,14 +1138,10 @@ fun BundleIcon(
                 )
             }
 
-            bundleAvatarUrl != null || githubAvatarUrl != null || gitlabAvatarUrl != null -> {
+            avatarUrls.primary != null -> {
                 RemoteAvatar(
-                    url = bundleAvatarUrl ?: githubAvatarUrl ?: gitlabAvatarUrl!!,
-                    fallbackUrl = when {
-                        bundleAvatarUrl != null -> githubAvatarUrl ?: gitlabAvatarUrl
-                        githubAvatarUrl != null -> gitlabAvatarUrl
-                        else -> null
-                    },
+                    url = avatarUrls.primary,
+                    fallbackUrl = avatarUrls.fallback,
                     modifier = Modifier.fillMaxSize()
                 )
             }

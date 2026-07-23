@@ -12,9 +12,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
+import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.domain.repository.*
+import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
+import app.morphe.manager.domain.repository.PatchOptionsRepository
+import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.syncFcmTopics
@@ -37,8 +40,6 @@ class SettingsViewModel(
     private val optionsRepository: PatchOptionsRepository,
     patchBundleRepository: PatchBundleRepository,
     private val appDataResolver: AppDataResolver,
-    originalApkRepository: OriginalApkRepository,
-    installedAppRepository: InstalledAppRepository,
     private val appContext: Context,
 ) : ViewModel() {
     /** True when Google Play Services is available; FCM handles notifications on these devices. */
@@ -140,18 +141,6 @@ class SettingsViewModel(
     fun toggleAllowMeteredUpdates(current: Boolean) = viewModelScope.launch {
         prefs.allowMeteredUpdates.update(!current)
     }
-    val originalApkCount: StateFlow<Int> = originalApkRepository.getAll()
-        .map { it.size }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
-
-    val patchedApkCount: StateFlow<Int> = installedAppRepository.getAll()
-        .map { it.size }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
-
-    val patchedPackagesCount: StateFlow<Int> =
-        selectionRepository.getPackagesWithSavedSelection()
-            .map { it.size }
-            .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 
     /**
      * True for the duration of the current settings session after the user enables expert mode for the first time.
@@ -215,9 +204,25 @@ class SettingsViewModel(
         prefs.autoInstallWithShizuku.update(enabled)
     }
 
+    fun setAutoUninstallWithShizuku(enabled: Boolean) = viewModelScope.launch {
+        prefs.autoUninstallWithShizuku.update(enabled)
+    }
+
     fun setUseCustomFilePicker(enabled: Boolean) = viewModelScope.launch {
         prefs.useCustomFilePicker.update(enabled)
         prefs.customFilePickerUserConfigured.update(true)
+    }
+
+    fun setPatcherCompletionSound(enabled: Boolean) = viewModelScope.launch {
+        prefs.patcherCompletionSound.update(enabled)
+    }
+
+    fun setPatcherSuccessSoundUri(uri: String) = viewModelScope.launch {
+        prefs.patcherSuccessSoundUri.update(uri)
+    }
+
+    fun setPatcherErrorSoundUri(uri: String) = viewModelScope.launch {
+        prefs.patcherErrorSoundUri.update(uri)
     }
 
     /**
@@ -255,6 +260,11 @@ class SettingsViewModel(
     ): InstallerManager.Entry? = installerManager.describeEntry(token, installTarget)
 
     fun openShizukuApp(): Boolean = installerManager.openShizukuApp()
+
+    fun getShizukuStatus(): SessionInstaller.ShizukuStatus =
+        installerManager.shizukuStatus(InstallerManager.InstallTarget.PATCHER)
+
+    fun requestShizukuPermission(): Boolean = installerManager.requestShizukuPermission()
 
     /** Summary flow: packageName → (bundleUid → patchCount) */
     val selectionsSummary: StateFlow<Map<String, Map<Int, Int>>> =
@@ -309,15 +319,13 @@ class SettingsViewModel(
         }
 
     data class PatchDetails(
-        val displayName: String,
         val patchList: List<String>,
         val optionsMap: Map<String, Map<String, Any?>>,
     )
 
-    /** Loads all display data for the patch-details dialog. */
+    /** Loads patch selections and options for one package+bundle. */
     suspend fun loadPatchDetails(packageName: String, bundleUid: Int): PatchDetails =
         withContext(Dispatchers.IO) {
-            val displayName = appDataResolver.resolveAppData(packageName).displayName
             val patchList = selectionRepository.exportForPackageAndBundle(packageName, bundleUid)
             val rawOptions = optionsRepository.exportOptionsForBundle(
                 packageName = packageName,
@@ -326,7 +334,7 @@ class SettingsViewModel(
             val optionsMap = rawOptions.mapValues { (_, patchOptions) ->
                 patchOptions.mapValues { (_, jsonString) -> parseJsonValue(jsonString) }
             }
-            PatchDetails(displayName, patchList, optionsMap)
+            PatchDetails(patchList, optionsMap)
         }
 
     companion object {
@@ -360,15 +368,6 @@ class SettingsViewModel(
             }
         } catch (_: Exception) {
             jsonString
-        }
-
-        fun formatOptionValue(value: Any?): String = when (value) {
-            null -> "null"
-            is String -> value
-            is Boolean -> value.toString()
-            is Number -> value.toString()
-            is List<*> -> if (value.isEmpty()) "[]" else value.joinToString(", ")
-            else -> value.toString()
         }
     }
 }

@@ -19,7 +19,6 @@
     <string name="home_update_available">Достапно е ажурирање на Morphe</string>
     <string name="home_update_available_subtitle">Достапно е ажурирање</string>
     <string name="home_update_error">Ажурирањето не успеа</string>
-    <string name="home_update_error_subtitle">Проверете ја интернет врската и обидете се повторно</string>
     <string name="home_update_skipped_metered">Ажурирањето е прескокнато</string>
     <string name="home_update_skipped_metered_subtitle">Мобилни податоци вклучени</string>
     <string name="home_updating_sources">Ажурирање на изворите…</string>
@@ -276,12 +275,6 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Оригиналниот APK не е пронајден. Не можете повторно да закрпите оваа апликација</string>
     <string name="root_gmscore_excluded">Поддршката за GmsCore е исклучена во root режим</string>
-    <string name="root_pre_patch_installer_title">Избери метод за инсталирање</string>
-    <string name="root_pre_patch_installer_description">Вашиот уред има root пристап. Изберете како сакате да ја инсталирате закрпената апликација</string>
-    <string name="root_pre_patch_installer_mount_description">Монтира го закрпениот APK над сток апликацијата. Не е потребна GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">Стандард Инсталирање</string>
-    <string name="root_pre_patch_installer_standard_description">Инсталира тихо преку Shizuku или Sui</string>
-    <string name="root_pre_patch_installer_hint">Методот на инсталација одредува кои закрпи се вклучени и не може да се промени по закрпувањето</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Грешката е копирана во штитката</string>
     <string name="patcher_error_log">Дневник на грешки</string>
@@ -429,7 +422,6 @@
     <string name="settings_appearance_app_language">Јазик на апликацијата</string>
     <string name="settings_appearance_app_language_current">Тековен јазик</string>
     <string name="settings_appearance_translations_info_title">Преводите за некои јазици може да бидат отсутни или нецелосни</string>
-    <string name="settings_appearance_translations_info_text">За да преведете нови јазици или да ги подобрите постојните преводи, посетете %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Почетен екран</string>
     <string name="settings_appearance_greeting_phrases">Поздрави</string>
@@ -496,7 +488,6 @@
     <string name="settings_advanced_github_pat_configured">Token е конфигуриран</string>
     <string name="settings_advanced_github_pat_how_to_get">Како да добиете token</string>
     <string name="settings_advanced_github_pat_dialog_title">Постави GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Поставете GitHub Personal Access Token за да можете да ги додадете pull барањата како надворешни извори. Создајте PAT со обем public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Вклучи во извозот на поставки</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Додава овој PAT на извезените поставки на Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Не го споделувајте го вашиот PAT. Ако го вклучите во извозот на поставките, чувајте ја таа датотека приватно, бидејќи содржи token</string>
@@ -583,8 +574,6 @@ morphe_header_custom_dark.png
     <string name="installer">Инсталер</string>
     <string name="installer_title">Изберете инсталер</string>
     <string name="installer_internal_description">Користи системски инсталер</string>
-    <string name="installer_auto_saved_name">Инсталер за монтирање со рутување</string>
-    <string name="installer_auto_saved_description">Монтира го закрпениот APK над инсталираната апликација</string>
     <string name="installer_shizuku_description">Инсталира тихо користејќи Shizuku или Sui</string>
     <string name="installer_option_none">Без резервна</string>
     <string name="installer_none_description">Не е конфигуриран резервен инсталер</string>
@@ -592,7 +581,6 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">Избери инсталер</string>
     <string name="installer_status_shizuku_not_installed">Не е поддржано за оваа акција</string>
     <string name="installer_status_shizuku_not_running">Инсталирај Shizuku или Sui за да ја користиш оваа опција</string>
-    <string name="installer_status_shizuku_permission">Стартирај Shizuku или Sui и обиди повторно</string>
     <string name="installer_mount_warning_install">Додели дозвола на Morphe од апликацијата Shizuku</string>
     <string name="mount_version_mismatch_message">Верзијата на инсталираната апликација (%2$s) не одговара на верзијата на закрпената апликација (%1$s). Монтирајте ја соодветната верзија на инсталираната апликација, а потоа обидете повторно.</string>
     <string name="installer_status_shizuku_unsupported">Неподдржана верзија на Shizuku</string>
@@ -610,14 +598,11 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install_description">Го одржува закрпувачот за целосно закрпување</string>
     <string name="settings_auto_install_with_shizuku">Автоматски инсталирај по закрпа</string>
     <string name="settings_auto_install_with_shizuku_description">Тивко ја инсталира закрпената APK-датотека штом ќе заврши закрпувањето</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" е овозможено - автоматската инсталација ќе биде прескокната</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизација на батеријата</string>
     <string name="settings_system_battery_optimization_description">Слободно место на дискот</string>
-    <string name="settings_system_performance">Перформанси</string>
     <string name="settings_system_process_runtime">Време на извршување на процесот</string>
     <string name="settings_system_process_runtime_description">Преземањето може да биде затворено</string>
-    <string name="settings_system_process_runtime_memory_limit">Лимит на меморија</string>
     <string name="settings_system_process_runtime_memory_limit_description">Облога за инсталирање</string>
     <string name="settings_system_process_runtime_enable">Овозможи време на извршување на процесот</string>
     <string name="settings_system_memory_limit_subtitle">Меморија достапна за закрпување</string>
@@ -625,6 +610,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">Лимит од %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Кликнете за да конфигурирате</string>
     <string name="settings_system_process_runtime_description_not_available">Оваа функција бара Android 11 или подоцна</string>
+    <!-- Settings - System Tab - Notifications Section -->
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Увоз и извоз</string>
     <string name="settings_system_keystore">Keystore</string>
@@ -656,12 +642,12 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_files">Датотеки и складиште</string>
     <string name="settings_system_apks_size">Вкупна големина: %s</string>
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Исправени APK-а</string>
     <string name="settings_system_patched_apks_description">Минатата коверта на пукање</string>
     <string name="settings_system_patched_apks_empty">Сè уште нема зачувани закрпени APK-а</string>
     <string name="settings_system_patched_apks_delete_title">Дали да се избрише закрпениот APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Дали сте сигурни дека сакате да го избришете зачуваниот закрпен APK за %s?</string>
     <string name="settings_system_patched_apks_deleted">Закрпениот APK е успешно избришан</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Оригинални APK-а</string>
@@ -669,7 +655,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">Не се чуваат оригинални APK-а</string>
     <string name="settings_system_original_apks_deleted">Оригиналниот APK е успешно избришан</string>
     <string name="settings_system_original_apks_delete_title">Дали да се избрише оригиналниот APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Дали сигурно сакате да го избришете оригиналниот APK за %s? Не можете повторно да закрпите без да дадете нов APK</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Изборите за закрпување</string>
     <string name="settings_system_patch_selections_description">Споделување</string>
@@ -682,15 +667,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">Извор бр.%s</string>
     <string name="settings_system_patch_selection_will_delete">Ова ќе се избрише:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ова трајно ќе ги избрише сите зачувани избори за закрпување за сите пакети и извори</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ова трајно ќе ги избрише сите зачувани избори за закрпување за %s во сите извори.</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Ова трајно ќе ги избрише зачуваните избори за закрпување за %1$s во извор бр.%2$s</string>
     <string name="settings_system_export_source_data_fail">Неуспешно извезување на податоците од изворот</string>
     <string name="settings_system_export_source_data_success">Податоците од изворот се успешно извезени</string>
     <string name="settings_system_import_source_data_fail">Неуспешен увоз на податоците од изворот</string>
     <string name="settings_system_import_source_data_success">Податоците од изворот се успешно увезени</string>
-    <string name="settings_system_patch_details_title">Детали за закрпување</string>
-    <string name="settings_system_selected_patches_title">Избрани закрпи (%s)</string>
-    <string name="settings_system_patch_options_title">Опции за закрпување (%s)</string>
     <string name="settings_system_no_patches_or_options">Не се зачувани закрпи или опции</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Прилагоден избирач на датотеки</string>

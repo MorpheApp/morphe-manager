@@ -9,7 +9,7 @@ import android.net.Uri
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
@@ -31,17 +31,16 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
-import app.morphe.manager.util.AppDataSource
-import app.morphe.manager.util.JSON_MIMETYPE
-import app.morphe.manager.util.TEXT_MIMETYPE
-import app.morphe.manager.util.rememberAdaptiveFilePicker
+import app.morphe.manager.util.*
 import kotlinx.coroutines.launch
 
 /** Snapshot of package/bundle selection counts. */
@@ -203,6 +202,7 @@ fun PatchSelectionManagementDialog(
                 ConfirmResetPackageBundleDialog(
                     packageName = target.packageName,
                     bundleUid = target.bundleUid,
+                    bundleName = bundleNames[target.bundleUid],
                     patchCount = patchCount,
                     settingsViewModel = settingsViewModel,
                     onConfirm = {
@@ -225,6 +225,7 @@ fun PatchSelectionManagementDialog(
         PatchDetailsDialog(
             packageName = target.packageName,
             bundleUid = target.bundleUid,
+            appDisplayName = target.appDisplayName,
             bundleName = bundleNames[target.bundleUid],
             settingsViewModel = settingsViewModel,
             onDismiss = { showPatchDetailsTarget.value = null }
@@ -284,10 +285,11 @@ private fun PatchSelectionManagementDialogContent(
             if (multiSelect.isSelectionMode) {
                 MultiSelectShell(visible = true) {
                     SelectionActionBar(
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+                        modifier = Modifier.padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ItemSpacing),
                         selectedCount = multiSelect.selectedPackages.size,
                         totalCount = selections.size,
                         onSelectAll = onSelectAll,
+                        onDeselectAll = { multiSelect.selectedPackages.clear() },
                         onCancel = onExitSelection
                     ) {
                         val resetLabel = stringResource(R.string.reset)
@@ -338,7 +340,8 @@ private fun PatchSelectionManagementDialogContent(
             }
         },
         scrollable = false,
-        compactPadding = true
+        padding = DialogPadding.Compact,
+        contentArrangement = Arrangement.Top
     ) {
         if (selections.isEmpty()) {
             EmptyState(message = stringResource(R.string.settings_system_no_patches_or_options))
@@ -378,26 +381,25 @@ private fun SelectionList(
         ) {
             // Summary box
             item(key = "summary") {
-                InfoBox(
+                HeroInfoCard(
+                    icon = Icons.Outlined.Tune,
                     title = pluralStringResource(
                         R.plurals.package_count,
                         selections.size,
                         selections.size
                     ),
-                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                    titleColor = MaterialTheme.colorScheme.primary,
-                    icon = Icons.Outlined.Tune
-                ) {
-                    Text(
-                        text = pluralStringResource(
-                            R.plurals.patch_selection_total_patches,
-                            data.totalSelections,
-                            data.totalSelections
-                        ),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                }
+                    subtitle = {
+                        Text(
+                            text = pluralStringResource(
+                                R.plurals.patch_selection_total_patches,
+                                data.totalSelections,
+                                data.totalSelections
+                            ),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
+                    }
+                )
             }
 
             // List of packages with selections
@@ -497,7 +499,7 @@ private fun PackageSelectionItem(
                                 onEnterSelection()
                             }
                         )
-                        .padding(16.dp),
+                        .padding(MorpheDefaults.ContentPadding),
                     horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -522,7 +524,7 @@ private fun PackageSelectionItem(
                         )
 
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             InfoBadge(
@@ -574,7 +576,11 @@ private fun PackageSelectionItem(
                     exit = MorpheAnimations.shrinkTopFadeOut
                 ) {
                     Column(
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                        modifier = Modifier.padding(
+                            start = MorpheDefaults.ContentPadding,
+                            end = MorpheDefaults.ContentPadding,
+                            bottom = MorpheDefaults.ContentPadding
+                        ),
                         verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
                     ) {
                         bundleMap.forEach { (bundleUid, patchCount) ->
@@ -586,7 +592,7 @@ private fun PackageSelectionItem(
                                 importExportViewModel = importExportViewModel,
                                 onReset = { onResetPackageBundle(bundleUid) },
                                 onShowDetails = {
-                                    onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid))
+                                    onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid, displayName))
                                 }
                             )
                         }
@@ -594,11 +600,15 @@ private fun PackageSelectionItem(
                         MorpheSettingsDivider(fullWidth = true)
 
                         // Reset all for this package
-                        MorpheDialogButton(
-                            text = stringResource(R.string.reset_all),
-                            onClick = onResetPackage,
-                            isDestructive = true,
-                            modifier = Modifier.fillMaxWidth()
+                        CardActionRow(
+                            actions = listOf(
+                                CardAction(
+                                    icon = Icons.Outlined.Restore,
+                                    label = stringResource(R.string.reset_all),
+                                    onClick = onResetPackage,
+                                    destructive = true
+                                )
+                            )
                         )
                     }
                 }
@@ -637,9 +647,7 @@ private fun BundleSelectionItem(
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
+        modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
     ) {
         MorpheSettingsDivider(fullWidth = true)
@@ -657,7 +665,7 @@ private fun BundleSelectionItem(
             onClick = onShowDetails
         ) {
             Row(
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
+                modifier = Modifier.padding(MorpheDefaults.ItemSpacing),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
             ) {
@@ -692,35 +700,60 @@ private fun BundleSelectionItem(
             }
         }
 
-        // Action buttons row
-        val exportLabel = stringResource(R.string.export)
-        val resetLabel = stringResource(R.string.reset)
-
-        ActionPillRow {
-            // Export button
-            ActionPillButton(
-                onClick = {
-                    val fileName = importExportViewModel.getPackageBundleDataExportFileName(
-                        packageName, bundleUid, bundleName
-                    )
-                    exportLauncher.launch(fileName)
-                },
-                icon = Icons.Outlined.Upload,
-                contentDescription = exportLabel,
-                tooltip = exportLabel
-            )
-
-            // Reset button
-            ActionPillButton(
-                onClick = onReset,
-                icon = Icons.Outlined.Delete,
-                contentDescription = resetLabel,
-                tooltip = resetLabel,
-                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                    contentColor = MaterialTheme.colorScheme.onErrorContainer
+        CardActionRow(
+            actions = listOf(
+                CardAction(
+                    icon = Icons.Outlined.Upload,
+                    label = stringResource(R.string.export),
+                    onClick = {
+                        val fileName = importExportViewModel.getPackageBundleDataExportFileName(
+                            packageName, bundleUid, bundleName
+                        )
+                        exportLauncher.launch(fileName)
+                    }
+                ),
+                CardAction(
+                    icon = Icons.Outlined.Restore,
+                    label = stringResource(R.string.reset),
+                    onClick = onReset,
+                    destructive = true
                 )
             )
+        )
+    }
+}
+
+@Composable
+private fun ConfirmResetDialog(
+    title: String,
+    message: AnnotatedString,
+    primaryText: String,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit,
+    summaryItems: @Composable () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = title,
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = primaryText,
+                onPrimaryClick = onConfirm,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss,
+                isPrimaryDestructive = true
+            )
+        }
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
+            Text(
+                text = message,
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogSecondaryTextColor.current,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+            LabeledSection { summaryItems() }
         }
     }
 }
@@ -735,43 +768,19 @@ private fun ConfirmResetSelectedDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    MorpheDialog(
-        onDismissRequest = onDismiss,
+    val patchesText = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches)
+    val packagesText = pluralStringResource(R.plurals.package_count, packageCount, packageCount)
+    ConfirmResetDialog(
         title = stringResource(R.string.settings_system_patch_selection_reset_selected_confirm_title),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.reset),
-                onPrimaryClick = onConfirm,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss,
-                isPrimaryDestructive = true
-            )
-        }
+        message = AnnotatedString(stringResource(R.string.settings_system_patch_selection_reset_selected_warning)),
+        primaryText = stringResource(R.string.reset),
+        onConfirm = onConfirm,
+        onDismiss = onDismiss
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
-            DeletionWarningBox(
-                warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
-            ) {
-                val patchesText = pluralStringResource(
-                    R.plurals.patch_count,
-                    totalPatches,
-                    totalPatches
-                )
-                val packagesText = pluralStringResource(
-                    R.plurals.package_count,
-                    packageCount,
-                    packageCount
-                )
-                DeleteListItem(
-                    icon = Icons.Outlined.Delete,
-                    text = stringResource(
-                        R.string.settings_system_patch_selection_total_summary_format,
-                        patchesText,
-                        packagesText
-                    )
-                )
-            }
-        }
+        DeleteListItem(
+            icon = Icons.Outlined.Delete,
+            text = stringResource(R.string.settings_system_patch_selection_total_summary_format, patchesText, packagesText)
+        )
     }
 }
 
@@ -789,66 +798,28 @@ private fun ConfirmResetAllDialog(
 ) {
     var totalOptions by remember { mutableIntStateOf(0) }
 
-    // Load total options count
     LaunchedEffect(Unit) {
         totalOptions = settingsViewModel.loadTotalOptionsCount()
     }
 
-    MorpheDialog(
-        onDismissRequest = onDismiss,
+    val patchesText = pluralStringResource(R.plurals.patch_count, totalSelections, totalSelections)
+    val packagesText = pluralStringResource(R.plurals.package_count, packageCount, packageCount)
+    ConfirmResetDialog(
         title = stringResource(R.string.settings_system_patch_selection_reset_all_confirm_title),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.reset_all),
-                onPrimaryClick = onConfirm,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss,
-                isPrimaryDestructive = true
-            )
-        }
+        message = AnnotatedString(stringResource(R.string.settings_system_patch_selection_reset_all_warning)),
+        primaryText = stringResource(R.string.reset_all),
+        onConfirm = onConfirm,
+        onDismiss = onDismiss
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
-            Text(
-                text = stringResource(R.string.settings_system_patch_selection_reset_all_warning),
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogTextColor.current
+        DeleteListItem(
+            icon = Icons.Outlined.Delete,
+            text = stringResource(R.string.settings_system_patch_selection_total_summary_format, patchesText, packagesText)
+        )
+        if (totalOptions > 0) {
+            DeleteListItem(
+                icon = Icons.Outlined.Tune,
+                text = pluralStringResource(R.plurals.option_count, totalOptions, totalOptions)
             )
-
-            DeletionWarningBox(
-                warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
-            ) {
-                val patchesText = pluralStringResource(
-                    R.plurals.patch_count,
-                    totalSelections,
-                    totalSelections
-                )
-
-                val packagesText = pluralStringResource(
-                    R.plurals.package_count,
-                    packageCount,
-                    packageCount
-                )
-
-                DeleteListItem(
-                    icon = Icons.Outlined.Delete,
-                    text = stringResource(
-                        R.string.settings_system_patch_selection_total_summary_format,
-                        patchesText,
-                        packagesText
-                    )
-                )
-
-                if (totalOptions > 0) {
-                    DeleteListItem(
-                        icon = Icons.Outlined.Tune,
-                        text = pluralStringResource(
-                            R.plurals.option_count,
-                            totalOptions,
-                            totalOptions
-                        )
-                    )
-                }
-            }
         }
     }
 }
@@ -868,71 +839,30 @@ private fun ConfirmResetPackageDialog(
     var displayName by remember { mutableStateOf(packageName) }
     var optionsCount by remember { mutableIntStateOf(0) }
 
-    // Load options count for this package
     LaunchedEffect(packageName) {
         val (name, _) = settingsViewModel.resolveAppDisplayName(packageName)
         displayName = name
         optionsCount = settingsViewModel.loadOptionsCountForPackage(packageName)
     }
 
-    MorpheDialog(
-        onDismissRequest = onDismiss,
+    val patchesText = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)
+    val sourcesText = pluralStringResource(R.plurals.source_count, bundleCount, bundleCount)
+    ConfirmResetDialog(
         title = stringResource(R.string.settings_system_patch_selection_reset_package_confirm_title),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.reset),
-                onPrimaryClick = onConfirm,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss,
-                isPrimaryDestructive = true
-            )
-        }
+        message = htmlAnnotatedString(stringResource(R.string.settings_system_patch_selection_reset_package_warning, displayName)),
+        primaryText = stringResource(R.string.reset),
+        onConfirm = onConfirm,
+        onDismiss = onDismiss
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
-            Text(
-                text = stringResource(
-                    R.string.settings_system_patch_selection_reset_package_warning,
-                    displayName
-                ),
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogTextColor.current
+        DeleteListItem(
+            icon = Icons.Outlined.Delete,
+            text = stringResource(R.string.settings_system_patch_selection_patches_in_sources_format, patchesText, sourcesText)
+        )
+        if (optionsCount > 0) {
+            DeleteListItem(
+                icon = Icons.Outlined.Tune,
+                text = pluralStringResource(R.plurals.option_count, optionsCount, optionsCount)
             )
-
-            DeletionWarningBox(
-                warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
-            ) {
-                val patchesText = pluralStringResource(
-                    R.plurals.patch_count,
-                    patchCount,
-                    patchCount
-                )
-
-                val sourcesText = pluralStringResource(
-                    R.plurals.source_count,
-                    bundleCount,
-                    bundleCount
-                )
-
-                DeleteListItem(
-                    icon = Icons.Outlined.Delete,
-                    text = stringResource(
-                        R.string.settings_system_patch_selection_patches_in_sources_format,
-                        patchesText,
-                        sourcesText
-                    )
-                )
-
-                if (optionsCount > 0) {
-                    DeleteListItem(
-                        icon = Icons.Outlined.Tune,
-                        text = pluralStringResource(
-                            R.plurals.option_count,
-                            optionsCount,
-                            optionsCount
-                        )
-                    )
-                }
-            }
         }
     }
 }
@@ -944,6 +874,7 @@ private fun ConfirmResetPackageDialog(
 private fun ConfirmResetPackageBundleDialog(
     packageName: String,
     bundleUid: Int,
+    bundleName: String?,
     patchCount: Int,
     settingsViewModel: SettingsViewModel,
     onConfirm: () -> Unit,
@@ -958,53 +889,24 @@ private fun ConfirmResetPackageBundleDialog(
         optionsCount = settingsViewModel.loadOptionsCountForBundle(packageName, bundleUid)
     }
 
-    MorpheDialog(
-        onDismissRequest = onDismiss,
+    val bundleDisplayName = bundleName
+        ?: stringResource(R.string.settings_system_patch_selection_source_format, bundleUid)
+    ConfirmResetDialog(
         title = stringResource(R.string.settings_system_patch_selection_reset_source_confirm_title),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.reset),
-                onPrimaryClick = onConfirm,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss,
-                isPrimaryDestructive = true
-            )
-        }
+        message = htmlAnnotatedString(stringResource(R.string.settings_system_patch_selection_reset_source_warning, displayName, bundleDisplayName)),
+        primaryText = stringResource(R.string.reset),
+        onConfirm = onConfirm,
+        onDismiss = onDismiss
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
-            Text(
-                text = stringResource(
-                    R.string.settings_system_patch_selection_reset_source_warning,
-                    displayName,
-                    bundleUid
-                ),
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogTextColor.current
+        DeleteListItem(
+            icon = Icons.Outlined.Delete,
+            text = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)
+        )
+        if (optionsCount > 0) {
+            DeleteListItem(
+                icon = Icons.Outlined.Tune,
+                text = pluralStringResource(R.plurals.option_count, optionsCount, optionsCount)
             )
-
-            DeletionWarningBox(
-                warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
-            ) {
-                DeleteListItem(
-                    icon = Icons.Outlined.Delete,
-                    text = pluralStringResource(
-                        R.plurals.patch_count,
-                        patchCount,
-                        patchCount
-                    )
-                )
-
-                if (optionsCount > 0) {
-                    DeleteListItem(
-                        icon = Icons.Outlined.Tune,
-                        text = pluralStringResource(
-                            R.plurals.option_count,
-                            optionsCount,
-                            optionsCount
-                        )
-                    )
-                }
-            }
         }
     }
 }
@@ -1016,6 +918,7 @@ private fun ConfirmResetPackageBundleDialog(
 private fun PatchDetailsDialog(
     packageName: String,
     bundleUid: Int,
+    appDisplayName: String,
     bundleName: String?,
     settingsViewModel: SettingsViewModel,
     onDismiss: () -> Unit
@@ -1030,11 +933,8 @@ private fun PatchDetailsDialog(
         isLoading = false
     }
 
-    val bundleDisplayName = bundleName ?: "Source"
-
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.settings_system_patch_details_title),
         footer = {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.close),
@@ -1045,28 +945,25 @@ private fun PatchDetailsDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
         ) {
-            // Header info
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(
-                    text = details?.displayName ?: packageName,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = LocalDialogTextColor.current
-                )
-                Text(
-                    text = "$bundleDisplayName (#$bundleUid)",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = LocalDialogSecondaryTextColor.current
-                )
-            }
+            HeroInfoCard(
+                icon = Icons.Outlined.Extension,
+                title = appDisplayName,
+                subtitle = {
+                    Text(
+                        text = bundleName ?: stringResource(R.string.settings_system_patch_selection_source_format, bundleUid),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = LocalDialogSecondaryTextColor.current
+                    )
+                }
+            )
 
             if (isLoading) {
-                // Loading state
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(32.dp),
+                        .padding(MorpheDefaults.ContentPaddingExpanded),
                     contentAlignment = Alignment.Center
                 ) {
                     CircularProgressIndicator()
@@ -1077,65 +974,24 @@ private fun PatchDetailsDialog(
 
                 // Patches section
                 if (patchList.isNotEmpty()) {
-                    InfoBox(
-                        title = stringResource(R.string.settings_system_selected_patches_title, patchList.size),
-                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                        titleColor = MaterialTheme.colorScheme.primary
+                    LabeledSection(
+                        title = stringResource(R.string.settings_system_selected_patches_section),
+                        count = patchList.size
                     ) {
                         patchList.forEach { patchName ->
-                            Text(
-                                text = "• $patchName",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = LocalDialogTextColor.current,
-                                modifier = Modifier.padding(vertical = 2.dp)
-                            )
+                            PatchNameRow(name = patchName)
                         }
                     }
                 }
 
                 // Options section
                 if (optionsMap.isNotEmpty()) {
-                    InfoBox(
-                        title = stringResource(R.string.settings_system_patch_options_title, optionsMap.size),
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
-                        titleColor = MaterialTheme.colorScheme.secondary
+                    LabeledSection(
+                        title = stringResource(R.string.settings_system_patch_options_section),
+                        count = optionsMap.size
                     ) {
-                        optionsMap.forEach { (patchName, options) ->
-                            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                Text(
-                                    text = patchName,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = LocalDialogTextColor.current
-                                )
-
-                                options.forEach { (key, value) ->
-                                    val formattedValue = SettingsViewModel.formatOptionValue(value)
-
-                                    Column(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(start = 12.dp, bottom = 4.dp)
-                                    ) {
-                                        Text(
-                                            text = "• $key",
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = LocalDialogSecondaryTextColor.current
-                                        )
-                                        Text(
-                                            text = formattedValue,
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = LocalDialogTextColor.current,
-                                            fontWeight = FontWeight.Medium,
-                                            modifier = Modifier.padding(start = 12.dp, top = 2.dp)
-                                        )
-                                    }
-                                }
-                            }
-
-                            if (patchName != optionsMap.keys.last()) {
-                                Spacer(modifier = Modifier.height(8.dp))
-                            }
+                        optionsMap.entries.forEach { (patchName, options) ->
+                            PatchOptionsGroup(patchName = patchName, options = options)
                         }
                     }
                 }
@@ -1161,5 +1017,6 @@ private sealed interface ResetTarget {
 
 private data class PatchDetailsTarget(
     val packageName: String,
-    val bundleUid: Int
+    val bundleUid: Int,
+    val appDisplayName: String
 )

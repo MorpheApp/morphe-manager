@@ -17,7 +17,6 @@
     <string name="deep_link_add_source_warning">ನೀವು ನಂಬುವಿರುವ ಮೂಲಗಳನ್ನು ಮಾತ್ರ ಸೇರಿಸಿ</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe ನವೀಕರಣ ಲಭ್ಯವಿದೆ</string>
-    <string name="home_update_error_subtitle">ಇಂಟರ್‌ನೆಟ್‌ ಕನೆಕ್ಷನ್‌ ಪರಿಶೀಲಿಸಿ, ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ</string>
     <string name="home_update_skipped_metered">಑ಠಿಟವಿఅ ದ್ರಿಟಸಾ಻ನಿ಍಻ಜವಟ</string>
     <string name="home_update_skipped_metered_subtitle">ಮೊಬೈಲ್ ಡೇಟಾ ಸಕ್ರಿಯವಾಗಿದೆ</string>
     <string name="home_updating_sources">ಬೋರಿಸ್ಸಿನ ಪರಿಮಾಣವನ್ನು ನವೀಕರಿಸುತ್ತಿರುವುದು…</string>
@@ -143,8 +142,10 @@
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <!-- Settings - System Tab - Installer Section -->
     <!-- Settings - System Tab - Performance Section -->
+    <!-- Settings - System Tab - Notifications Section -->
     <!-- Settings - System Tab - Import and Export Section -->
     <!-- Settings - System Tab - Files & Storage Section -->
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->

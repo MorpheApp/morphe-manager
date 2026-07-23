@@ -14,6 +14,8 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.InstallMobile
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.boundsInParent
@@ -45,14 +47,20 @@ fun SystemTabContent(
     scrollState: ScrollState = rememberScrollState(),
     onInstallerSectionPositioned: ((Rect) -> Unit)? = null,
     onInstallerScrollTarget: ((Int) -> Unit)? = null,
-    onProcessRuntimePositioned: ((Rect) -> Unit)? = null,
-    onProcessRuntimeScrollTarget: ((Int) -> Unit)? = null,
     onFilePickerPositioned: ((Rect) -> Unit)? = null,
     onFilePickerScrollTarget: ((Int) -> Unit)? = null
 ) {
     val useExpertMode by settingsViewModel.prefs.useExpertMode.getAsState()
+    val showNotificationsDialog = remember { mutableStateOf(false) }
 
     val contentPadding = rememberWindowSize().contentPadding
+
+    if (showNotificationsDialog.value) {
+        NotificationsDialog(
+            settingsViewModel = settingsViewModel,
+            onDismiss = { showNotificationsDialog.value = false }
+        )
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -66,7 +74,7 @@ fun SystemTabContent(
             icon = Icons.Outlined.InstallMobile
         )
 
-        SectionCard(
+        SettingsGroup(
             modifier = if (onInstallerScrollTarget != null) Modifier.onGloballyPositioned { coords ->
                 onInstallerScrollTarget(coords.boundsInParent().top.roundToInt())
             } else Modifier
@@ -78,17 +86,8 @@ fun SystemTabContent(
             )
         }
 
-        // Performance
-        Box(
-            modifier = if (onProcessRuntimeScrollTarget != null) Modifier.onGloballyPositioned { coords ->
-                onProcessRuntimeScrollTarget(coords.boundsInParent().top.roundToInt())
-            } else Modifier
-        ) {
-            PerformanceSection(
-                settingsViewModel = settingsViewModel,
-                onProcessRuntimePositioned = onProcessRuntimePositioned
-            )
-        }
+        // Background execution & notifications
+        BackgroundSection(onNotificationsClick = { showNotificationsDialog.value = true })
 
         // Import & Export (Expert mode only)
         if (useExpertMode) {
@@ -103,17 +102,14 @@ fun SystemTabContent(
         }
 
         // Files & Storage
-        Box(
+        FilesAndStorageSection(
+            settingsViewModel = settingsViewModel,
+            importExportViewModel = importExportViewModel,
             modifier = if (onFilePickerScrollTarget != null) Modifier.onGloballyPositioned { coords ->
                 onFilePickerScrollTarget(coords.boundsInParent().top.roundToInt())
-            } else Modifier
-        ) {
-            FilesAndStorageSection(
-                settingsViewModel = settingsViewModel,
-                importExportViewModel = importExportViewModel,
-                onFilePickerPositioned = onFilePickerPositioned
-            )
-        }
+            } else Modifier,
+            onFilePickerPositioned = onFilePickerPositioned
+        )
 
         // About
         SectionTitle(
@@ -121,7 +117,7 @@ fun SystemTabContent(
             icon = Icons.Outlined.Info
         )
 
-        SectionCard {
+        SettingsGroup {
             AboutSection(
                 onAboutClick = onAboutClick,
                 onChangelogClick = onChangelogClick,

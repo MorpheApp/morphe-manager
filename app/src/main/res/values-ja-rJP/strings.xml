@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe の更新が利用可能です</string>
     <string name="home_update_available_subtitle">新しいバージョンがインストール可能です</string>
+    <string name="home_blocked_source_title">ブロックされたパッチソースが検出されました</string>
+    <string name="home_blocked_source_subtitle">確認と削除のためにタップしてください</string>
+    <string name="home_metadata_errors_title">一部のパッチソースは利用できません</string>
+    <string name="home_metadata_errors_subtitle">ソースの確認のためタップしてください</string>
+    <string name="home_metered_skipped_title">モバイルデータでの更新は一時停止されています</string>
+    <string name="home_metered_skipped_subtitle">モバイルデータ通信での更新を許可するにはタップしてください</string>
     <string name="home_update_error">更新に失敗しました</string>
-    <string name="home_update_error_subtitle">インターネット接続を確認して、再度お試しください</string>
+    <string name="home_update_error_subtitle">ソースの更新中にエラーが発生しました</string>
     <string name="home_update_skipped_metered">更新をスキップしました</string>
     <string name="home_update_skipped_metered_subtitle">モバイルデータ通信が有効です</string>
     <string name="home_updating_sources">ソースを更新中…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">「%s」に一致するアプリはありません</string>
     <string name="home_all_apps_hidden_title">すべてのアプリが非表示です</string>
     <string name="home_all_apps_hidden_subtitle">ホーム画面からすべてのアプリを非表示にしました</string>
+    <string name="home_category_add">カテゴリを追加</string>
+    <string name="home_category_all_apps">すべてのアプリ</string>
+    <string name="home_category_custom">カスタム</string>
+    <string name="home_category_uncategorized">カテゴリ未分類</string>
+    <string name="home_category_new_title">新しいカテゴリ</string>
+    <string name="home_category_rename_title">カテゴリの名前変更</string>
+    <string name="home_category_name">カテゴリ名</string>
+    <string name="home_category_move_to">カテゴリへ移動</string>
+    <string name="home_category_move_selected_title">選択したアプリを移動</string>
+    <string name="home_category_delete_confirm_title">カテゴリの削除</string>
+    <string name="home_category_delete_confirm_message">カテゴリ <b>%1$s</b> を削除しますか？ その中のアプリは <b>%2$s</b> に戻ります</string>
+    <string name="home_category_actions_unavailable">このカテゴリで利用可能な操作はありません</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">どのアプリにパッチを適用しますか？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">利用可能な場合に、実験的なバージョンのアプリをパッチ対象にします</string>
     <string name="sources_management_already_exists">このソースは既に存在します</string>
     <string name="sources_management_invalid_url">無効なソースURLです。アドレスを確認して、もう一度試してください。</string>
+    <string name="sources_management_blocked">このパッチソースはブロックされており、追加できません</string>
+    <string name="sources_management_source_blocked_badge">ブロック済み</string>
     <string name="sources_management_metadata_unavailable">メタデータがありません</string>
     <string name="sources_management_metadata_unavailable_hint">接続先のメタデータファイルが利用できません。インストール済みバンドルでのパッチ適用は可能ですが、このソースからの自動更新は無効になります。</string>
     <string name="sources_management_metadata_unavailable_hint_missing">パッチバンドルのダウンロードに失敗しました。ソースURLが正しくないか、ファイルが存在しない可能性があります。</string>
@@ -308,16 +328,18 @@
     <string name="home_app_info_app_deleted_warning">アプリがアンインストールされました</string>
     <string name="home_app_info_app_deleted_description">Morphe 外でアプリがアンインストールされました。機能を復元するには、再パッチしてください</string>
     <string name="home_app_info_apk_size">APK サイズ</string>
+    <string name="home_app_info_cpu_arch">CPUアーキテクチャ</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">root 権限モードでは、パッチ適用前にオリジナルの APK がインストールされている必要があります</string>
     <string name="root_gmscore_excluded">GmsCore サポートパッチは root モードでは除外されます</string>
-    <string name="root_pre_patch_installer_title">インストール方法を選択してください</string>
-    <string name="root_pre_patch_installer_description">このデバイスには root 権限 があります。パッチしたアプリのインストール方法を選択してください</string>
-    <string name="root_pre_patch_installer_mount_title">root 権限マウント</string>
-    <string name="root_pre_patch_installer_mount_description">オリジナルのアプリの上にパッチ適用済み APK をマウントします。GmsCore は必要ありません</string>
-    <string name="root_pre_patch_installer_standard_title">標準インストール</string>
-    <string name="root_pre_patch_installer_standard_description">GmsCore のサポートを含めた状態で、オリジナルとは別アプリとしてインストールします。パッチ適用後にインストーラー (システムインストーラー、Shizuku など) を選択してください</string>
-    <string name="root_pre_patch_installer_hint">インストール方法によって適用されるパッチが決定され、パッチ適用後に変更することはできません</string>
+    <string name="root_pre_patch_installer_title">パッチモードを選択</string>
+    <string name="root_pre_patch_installer_description">このデバイスはroot権限を持っています。このアプリをrootマウント用にパッチするか、標準インストールするかを選択してください</string>
+    <string name="root_pre_patch_installer_mount_title">root権限マウントモード</string>
+    <string name="root_pre_patch_installer_mount_description">rootマウント用にパッチし、次にAPKを対応する純正アプリの上にマウントします。GmsCoreは必要ありません</string>
+    <string name="root_mount_module_unmount_warning">KernelSUまたはAPatchをご使用の場合は、rootマウントでインストールされたアプリのモジュールをアンマウントまたは非表示にしないでください。そうしないと、Morpheではマウントされているように表示されても、元のアプリが依然として実行される可能性があります。</string>
+    <string name="root_pre_patch_installer_standard_title">標準インストールモード</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCoreサポートを備えた通常のAPKとしてパッチを適用します。パッチ適用後には、インストーラーの設定が使用されます。</string>
+    <string name="root_pre_patch_installer_hint">このパッチモードは、[設定] > [システム] > [インストーラー]とは別に、パッチ適用後に変更することはできません。</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">エラーをクリップボードにコピーしました</string>
     <string name="patcher_error_log">エラーログ</string>
@@ -417,6 +439,8 @@
     <string name="patcher_process_exit_message">パッチ処理がコード %s で終了しました</string>
     <string name="install_app_success">正常にインストールされました</string>
     <string name="install_app_fail">アプリのインストールに失敗しました: %s</string>
+    <string name="uninstall_app_fail">アプリのアンインストールに失敗しました: %s</string>
+    <string name="uninstall_timeout">アンインストールがタイムアウトしました</string>
     <string name="save_apk_success">APK を保存しました</string>
     <string name="saved_app_export_failed">パッチ適用済みアプリのエクスポートに失敗しました</string>
     <string name="saved_app_removed_toast">保存されていたパッチ適用済みアプリを削除しました</string>
@@ -435,7 +459,7 @@
     <string name="mini_game_2048_picker_subtitle">タイルをスライドして合体させよう</string>
     <string name="mini_game_flappy_picker_subtitle">タップしてパイプの間を飛び抜けよう</string>
     <string name="mini_game_flappy_tap_to_start">タップして開始</string>
-    <string name="mini_game_snake_picker_subtitle">食べ物を食べよう。自分にぶつかるな！</string>
+    <string name="mini_game_snake_picker_subtitle">自分にぶつからずに食べ物を食べよう</string>
     <string name="mini_game_snake_swipe_to_start">スワイプして開始</string>
     <string name="mini_game_dino_picker_subtitle">タップしてサボテンを飛び越えよう</string>
     <string name="mini_game_dino_tap_to_start">タップして開始</string>
@@ -462,10 +486,13 @@
     <string name="settings_appearance_parallax_effect_description">デバイスを傾けた時に背景が滑らかに移動します</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">テーマ</string>
+    <string name="settings_appearance_theme_mode">テーマモード</string>
     <string name="settings_appearance_system">システム</string>
     <string name="settings_appearance_light">ライト</string>
     <string name="settings_appearance_dark">ダーク</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">モノクロ</string>
+    <string name="settings_appearance_color_style">カラーモード</string>
     <string name="settings_appearance_accent_color">アクセントカラー</string>
     <string name="settings_appearance_pure_black">ピュアブラック</string>
     <string name="settings_appearance_pure_black_description">真っ黒な背景を使用します</string>
@@ -473,11 +500,15 @@
     <string name="settings_appearance_app_language">アプリの言語</string>
     <string name="settings_appearance_app_language_current">現在の言語</string>
     <string name="settings_appearance_translations_info_title">一部の言語では、翻訳が存在しない、または不完全である可能性があります</string>
-    <string name="settings_appearance_translations_info_text">新しい言語の翻訳や既存の翻訳の改善には、%s にアクセスしてください</string>
+    <string name="settings_appearance_translations_info_text">"新しい言語の翻訳や既存の翻訳の改善には、%s にアクセスしてください"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">ホーム画面</string>
     <string name="settings_appearance_greeting_phrases">挨拶メッセージ</string>
     <string name="settings_appearance_greeting_phrases_subtitle">ホーム画面に挨拶メッセージを表示します</string>
+    <string name="settings_appearance_app_grouping">アプリのグループ化</string>
+    <string name="settings_appearance_app_grouping_description">ホーム画面スイッチャーを表示して、ソース別または独自のカテゴリでアプリをグループ化します。オフにしたときも選択内容は保持されます</string>
+    <string name="settings_appearance_sort_button">並べ替えボタン</string>
+    <string name="settings_appearance_sort_button_description">ホーム画面に並べ替えボタンを表示します</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">アプリアイコン</string>
     <string name="settings_appearance_app_icon_default">デフォルト</string>
@@ -491,6 +522,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">アイコンを変更</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
+    <string name="settings_advanced_patcher">パッチャー</string>
     <string name="settings_advanced_updates_use_prereleases">プレリリース版のパッチを使用</string>
     <string name="settings_advanced_updates_use_prereleases_description">新しいバージョンの Morphe をいち早く利用できます。プレリリース版を使用するには、各パッチソースにて設定を有効にしてください</string>
     <string name="settings_advanced_updates_allow_metered">モバイルデータ通信で更新</string>
@@ -540,7 +572,6 @@
     <string name="settings_advanced_github_pat_configured">PAT が設定されました</string>
     <string name="settings_advanced_github_pat_how_to_get">PAT を取得するには</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub の Personal Access Token の設定</string>
-    <string name="settings_advanced_github_pat_dialog_description">プルリクエストを外部ソースとして追加するには、 GitHub の Personal Access Token （PAT） を設定する必要があります。スコープ public_repo を設定した PAT を github.com で作成してください</string>
     <string name="settings_advanced_github_pat_export_include_label">設定のエクスポートに含める</string>
     <string name="settings_advanced_github_pat_export_include_supporting">この PAT をエクスポートした Morphe の設定に追加します</string>
     <string name="settings_advanced_github_pat_export_warning">PAT を共有しないでください。設定のエクスポートに含める場合、PAT が含まれるそのファイルも公開しないようにしてください</string>
@@ -625,12 +656,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">ホーム画面のウィジェットからショートの項目を削除します</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">インストーラー</string>
+    <string name="installer_settings_title">デフォルトインストーラー</string>
     <string name="installer_title">インストーラーを選択</string>
     <string name="installer_internal_description">Android パッケージインストーラーを使用します</string>
     <string name="installer_play_store_description">システムインストーラーを使用し、Google Play ストアをインストールソースに設定します</string>
     <string name="installer_root_play_store_description">Root 権限でサイレントインストールを実行し、Google Play ストアをインストール元に設定します</string>
-    <string name="installer_auto_saved_name">root 権限マウント式インストーラー</string>
-    <string name="installer_auto_saved_description">パッチ適用済み APK をインストール済みアプリの上にマウントします</string>
+    <string name="installer_auto_saved_name">root権限マウント</string>
+    <string name="installer_auto_saved_description">rootマウントモードでパッチが適用されたアプリをマウントします。標準のパッチ適用APKは別のインストーラーを使用します。</string>
     <string name="installer_shizuku_description">Shizuku または Sui を使用して自動インストールします</string>
     <string name="installer_shizuku_play_store_description">ShizukuまたはSuiを通じてサイレントインストールを実行し、Google Playストアをインストール元に設定します</string>
     <string name="installer_option_none">代替なし</string>
@@ -639,9 +671,9 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">この操作はサポートされていません</string>
     <string name="installer_status_shizuku_not_installed">このオプションを使用するには、Shizuku または Sui をインストールしてください</string>
     <string name="installer_status_shizuku_not_running">Shizuku または Sui を起動して、もう一度お試しください</string>
-    <string name="installer_status_shizuku_permission">Shizuku アプリから Morphe に Shizuku の権限を付与してください</string>
     <string name="installer_mount_warning_install">既定のインストーラーが root 権限マウント式インストーラーに設定されています。この保存済みアプリは、マウント方式でインストールされたものではありません</string>
     <string name="mount_version_mismatch_message">オリジナルのアプリのバージョン (%2$s) がパッチ適用済みアプリのバージョン (%1$s) と一致しません。対応するオリジナルのアプリをマウントしてから、再度お試しください</string>
+    <string name="mount_stock_restore_failed_message">Androidは保存された元のAPKを拒否しました。一致するストックバージョンをインストールし、再度マウントを試してください。</string>
     <string name="installer_status_shizuku_unsupported">インストールされている Shizuku のバージョンはサポートされていません</string>
     <string name="installer_action_open_shizuku">Shizuku を開く</string>
     <string name="installer_hint_generic">インストールに失敗しました。もう一度試すか、別のインストーラーを使用してください</string>
@@ -654,21 +686,18 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">Shizuku が起動中であること、およびこのアプリに権限が付与されていることを確認してください</string>
     <string name="installer_use_standard">標準を使用</string>
     <string name="installer_play_store_warning_title">Playストアとしてインストールしますか？</string>
-    <string name="installer_play_store_warning_message">パッチ適用済みアプリは、Google Play ストアからインストールされたものとして記録されます。これにより、Android Auto などのサービスが、パッチ適用済みアプリを Play ストアのアプリとして認識できるようになります</string>
     <string name="installer_play_store_warning_risk">Play ストアでパッチ適用済みアプリのアップデートが提供される場合があります。アップデートをインストールすると、パッチ適用済みの APK が元のバージョンで上書きされ、パッチが削除されます。アップデートを促された場合は、アプリの Play ストアページで 3 点メニューをタップして、「自動更新の有効化」をオフにしてください</string>
     <string name="installer_play_store_warning_continue">了解しました。続行します</string>
     <string name="settings_prompt_installer_on_install">インストーラー選択ダイアログ</string>
     <string name="settings_prompt_installer_on_install_description">パッチ適用済みアプリをインストールする際に、毎回インストーラー選択ダイアログを表示します</string>
     <string name="settings_auto_install_with_shizuku">パッチ適用後の自動インストール</string>
     <string name="settings_auto_install_with_shizuku_description">パッチ適用完了後、パッチ適用済み APK を自動的にインストールします</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" が有効になっています - 自動インストールはスキップされます</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">電池の最適化</string>
     <string name="settings_system_battery_optimization_description">アプリを閉じているときでも、パッチャーを実行し続けます</string>
-    <string name="settings_system_performance">パフォーマンス</string>
+    <string name="settings_system_background">背景</string>
     <string name="settings_system_process_runtime">別プロセスで実行</string>
     <string name="settings_system_process_runtime_description">安定性を向上させるために、パッチ処理を別プロセスで実行します</string>
-    <string name="settings_system_process_runtime_memory_limit">メモリ制限</string>
     <string name="settings_system_process_runtime_memory_limit_description">高性能なデバイスでは、制限値を高くすることでパッチ処理を高速化できます</string>
     <string name="settings_system_process_runtime_enable">別プロセスでの実行を有効化</string>
     <string name="settings_system_memory_limit_subtitle">パッチに使用できるメモリ</string>
@@ -676,6 +705,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">上限 %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">タップして構成</string>
     <string name="settings_system_process_runtime_description_not_available">本機能は Android 11 以上で利用できます</string>
+    <string name="settings_system_patcher_completion_sound">完了音</string>
+    <string name="settings_system_patcher_completion_sound_description">パッチの完了時に、成功または失敗を示す固有のトーンを再生します。</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">通知</string>
+    <string name="settings_system_notifications_description">背景アラートと完了音を設定します。</string>
+    <string name="settings_system_notifications_success_sound">成功音</string>
+    <string name="settings_system_notifications_error_sound">エラー音</string>
+    <string name="settings_system_notifications_sound_default">デフォルト</string>
+    <string name="settings_system_notifications_sound_picker_title">サウンドソースを選択</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">システムサウンド</string>
+    <string name="settings_system_notifications_sound_pick_file">ファイルから選択</string>
+    <string name="settings_system_notifications_sound_reset">デフォルトにリセット</string>
+    <string name="settings_system_notifications_ringtone_picker_title">トーンを選択</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">インポートとエクスポート</string>
     <string name="settings_system_keystore">キーストア</string>
@@ -721,6 +763,31 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APK を正常に削除しました</string>
     <string name="settings_system_apks_export_zip_success">選択された APK をエクスポートしました</string>
     <string name="settings_system_apks_export_zip_failed">選択された APK のエクスポートに失敗しました</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">ストレージの管理</string>
+    <string name="settings_system_storage_management_description">ディスク使用状況を確認し、キャッシュファイルを削除します。</string>
+    <string name="settings_system_storage_keystore_title">署名キーストア</string>
+    <string name="settings_system_storage_app_data_title">アプリのデータ</string>
+    <string name="settings_system_storage_patch_bundles_title">パッチバンドル</string>
+    <string name="settings_system_storage_http_cache_title">ネットワーク キャッシュ</string>
+    <string name="settings_system_storage_http_cache_description">アップデートを高速化するために HTTP レスポンスをキャッシュします。</string>
+    <string name="settings_system_storage_installer_cache_title">外部インストーラー キャッシュ</string>
+    <string name="settings_system_storage_installer_cache_description">サードパーティのインストーラーに渡される APK のコピー</string>
+    <string name="settings_system_storage_patcher_workspace_title">パッチャー ワークスペース</string>
+    <string name="settings_system_storage_patcher_workspace_description">パッチャー ランタイム ファイルと孤立したスクラッチ データ</string>
+    <string name="settings_system_storage_temporary_title">一時ファイル</string>
+    <string name="settings_system_storage_temporary_description">パッチ適用中に作成された作業ファイル</string>
+    <string name="settings_system_storage_clear_all">すべてのキャッシュをクリア</string>
+    <string name="settings_system_storage_clear_all_description">一度にすべての回収可能なキャッシュ スペースを解放します。</string>
+    <string name="settings_system_storage_clear_all_confirm">これにより、キャッシュされたネットワーク レスポンス、ステージングされたインストーラーのコピー、および一時ファイルがクリアされます。元の APK とパッチが適用された APK は保持されます。</string>
+    <string name="settings_system_storage_cleared">解放済み %s</string>
+    <string name="settings_system_storage_nothing_to_clear">クリアするものがありません</string>
+    <string name="settings_system_storage_open_app_info_title">Android アプリのストレージを開く</string>
+    <string name="settings_system_storage_open_app_info_description">システム設定を通じて Morphe のすべてのデータを管理またはクリアします。</string>
+    <string name="settings_system_save_original_apks_title">元の APK を保持</string>
+    <string name="settings_system_save_original_apks_description">再パッチ適用時に再びファイルを選択することなく、パッチ適用前の APK を保存します</string>
+    <string name="settings_system_save_patched_apks_title">パッチ適用済み APK を保持</string>
+    <string name="settings_system_save_patched_apks_description">後でエクスポートしたり、マネージャーから再インストールしたりするために、パッチ適用済み APK のコピーを保存します</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">パッチ適用済み APK</string>
     <string name="settings_system_patched_apks_description">保存されたパッチ適用済みのアプリファイルを管理します</string>
@@ -752,13 +819,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_reset_all_warning">すべてのパッケージとソースの保存済みパッチ セレクションを完全に削除します</string>
     <string name="settings_system_patch_selection_reset_package_warning">%s のすべてのソースの保存済みパッチ セレクションを完全に削除します</string>
     <string name="settings_system_patch_selection_reset_source_warning">%1$s のソース #%2$s の保存済みパッチ セレクションを完全に削除します</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">すべてのパッケージとソースの保存済みパッチ セレクションを完全に削除します</string>
     <string name="settings_system_export_source_data_fail">ソースデータのエクスポートに失敗しました</string>
     <string name="settings_system_export_source_data_success">ソースデータのエクスポートに成功しました</string>
     <string name="settings_system_import_source_data_fail">ソースデータのインポートに失敗しました</string>
     <string name="settings_system_import_source_data_success">ソースデータのインポートに成功しました</string>
-    <string name="settings_system_patch_details_title">パッチの詳細</string>
-    <string name="settings_system_selected_patches_title">選択したパッチ (%s)</string>
-    <string name="settings_system_patch_options_title">パッチ オプション (%s)</string>
+    <string name="settings_system_selected_patches_section">選択したパッチ</string>
+    <string name="settings_system_patch_options_section">パッチ オプション</string>
     <string name="settings_system_no_patches_or_options">保存されたパッチやオプションなし</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">カスタムファイルピッカー</string>

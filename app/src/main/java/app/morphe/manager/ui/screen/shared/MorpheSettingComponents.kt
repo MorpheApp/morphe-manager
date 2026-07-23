@@ -5,38 +5,45 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.compose.animation.*
-import androidx.compose.animation.core.*
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material.icons.outlined.Download
+import androidx.compose.material.icons.outlined.FolderOff
+import androidx.compose.material.icons.outlined.Upload
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.theme.LocalMonochromeTheme
+import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 
 // Constants
 object MorpheDefaults {
@@ -52,9 +59,7 @@ object MorpheDefaults {
     val ItemSpacing = 12.dp
 
     // Gradient colors for GradientCircleIcon
-    val GradientStartColor = Color(0xFF1E5AA8)
-    val GradientEndColor = Color(0xFF00AFAE)
-    val DefaultGradientColors = listOf(GradientStartColor, GradientEndColor)
+    val DefaultGradientColors = listOf(Color(0xFF1E5AA8), Color(0xFF00AFAE))
 
     // Animation durations
     /** Duration used for dialog enter/exit and overlay transitions. */
@@ -70,122 +75,6 @@ object MorpheDefaults {
 }
 
 /**
- * Shared [EnterTransition] and [ExitTransition] for all MorpheDialog instances and
- * dialog-level AnimatedVisibility wrappers. Changing these values updates every dialog
- * animation in the app at once.
- */
-object MorpheAnimations {
-    // Private helper to avoid repeating tween specifications
-    private fun <T> defaultTween(
-        duration: Int = MorpheDefaults.ANIMATION_DURATION,
-        easing: Easing = LinearOutSlowInEasing
-    ) = tween<T>(duration, easing = easing)
-
-    // Base animations used for composition
-    val fadeIn = fadeIn(animationSpec = defaultTween())
-    val fadeOut = fadeOut(animationSpec = defaultTween())
-
-    // Dialog Transitions
-    val dialogEnter = fadeIn + scaleIn(
-        initialScale = MorpheDefaults.DIALOG_SCALE,
-        animationSpec = defaultTween(easing = FastOutSlowInEasing)
-    )
-    val dialogExit = fadeOut + scaleOut(
-        targetScale = MorpheDefaults.DIALOG_SCALE,
-        animationSpec = defaultTween()
-    )
-
-    // Overlays (no scale needed)
-    val overlayEnter = fadeIn
-    val overlayExit = fadeOut
-
-    // Screen Transitions
-    // Enter uses a longer duration; exit is identical to dialogExit so we reuse it directly.
-    val screenEnter = fadeIn(defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION)) +
-            scaleIn(
-                initialScale = MorpheDefaults.DIALOG_SCALE,
-                animationSpec = defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
-            )
-    val screenExit = dialogExit
-
-    // Vertical Expand/Shrink
-    val expandFadeEnter = expandVertically(defaultTween()) + fadeIn
-    val shrinkFadeExit = shrinkVertically(defaultTween()) + fadeOut
-
-    val expandVertEnter = expandVertically(defaultTween())
-    val shrinkVertExit = shrinkVertically(defaultTween())
-
-    // Horizontal Expand/Shrink
-    val expandHorizFadeIn = expandHorizontally(defaultTween()) + fadeIn
-    val shrinkHorizFadeOut = shrinkHorizontally(defaultTween()) + fadeOut
-
-    // Slide Transitions
-    val slideUpFadeEnter = slideInVertically(defaultTween()) { -it } + fadeIn
-    val slideUpFadeExit = slideOutVertically(defaultTween()) { -it } + fadeOut
-
-    // Push Transitions (Settings screen slides up over home, returns by sliding down)
-    val pushEnter = slideInVertically(
-        animationSpec = defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
-    ) { it } + fadeIn(defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION))
-    val pushExit = slideOutVertically(
-        animationSpec = defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
-    ) { it } + fadeOut(tween(MorpheDefaults.SCREEN_ENTER_DURATION, easing = LinearEasing))
-
-    // Spring & Custom Transitions
-    val springSlideUpEnter = slideInVertically(
-        animationSpec = spring(Spring.DampingRatioMediumBouncy, Spring.StiffnessMedium),
-        initialOffsetY = { it }
-    ) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
-
-    val springSlideDownExit = slideOutVertically(
-        animationSpec = defaultTween(easing = FastOutSlowInEasing),
-        targetOffsetY = { it }
-    ) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
-
-    // Scale Transitions
-    val fadeScaleIn = fadeIn + scaleIn(defaultTween(), initialScale = MorpheDefaults.DIALOG_SCALE)
-    val fadeScaleOut = fadeOut + scaleOut(defaultTween(), targetScale = MorpheDefaults.DIALOG_SCALE)
-
-    // Floating Button (FAB / scroll-to-top). Pops in from below with a stronger scale.
-    val fabEnter = fadeIn + scaleIn(defaultTween(), initialScale = 0.85f) +
-            slideInVertically(defaultTween()) { it / 2 }
-    val fabExit = fadeOut + scaleOut(defaultTween(), targetScale = 0.85f) +
-            slideOutVertically(defaultTween()) { it / 2 }
-
-    // Alignment-based Transitions
-    val expandTopFadeIn = fadeIn + expandVertically(defaultTween(), expandFrom = Alignment.Top)
-    val shrinkTopFadeOut = fadeOut + shrinkVertically(defaultTween(), shrinkTowards = Alignment.Top)
-
-    // Slide-fade content swap for AnimatedContent (counters, labels, messages).
-    // offset: fraction of height used for slide, e.g. { -it / 2 } for half-height, { -it } for full.
-    // Asymmetric duration (enter slightly longer than exit) gives a snappier feel.
-    fun slideTransitionSpec(
-        enterDuration: Int = 200,
-        exitDuration: Int = 150,
-        offset: (Int) -> Int = { -it / 2 }
-    ): AnimatedContentTransitionScope<*>.() -> ContentTransform = {
-        (fadeIn(tween(enterDuration)) + slideInVertically(tween(enterDuration)) { offset(it) })
-            .togetherWith(fadeOut(tween(exitDuration)) + slideOutVertically(tween(exitDuration)) { -offset(it) })
-    }
-
-    // Presets built on slideTransitionSpec
-    // Counter/label swap - numeric count with word label
-    val counterTransitionSpec = slideTransitionSpec(enterDuration = 200, exitDuration = 150, offset = { -it / 2 })
-    // Compact counter swap - small badge counts (e.g. selection count badge)
-    val compactCounterTransitionSpec = slideTransitionSpec(enterDuration = 150, exitDuration = 100, offset = { -it })
-    // Slide-up content swap - greeting/message text that scrolls upward on change
-    val slideUpContentTransitionSpec = slideTransitionSpec(enterDuration = 400, exitDuration = 200, offset = { it / 4 })
-
-    // Simple crossfade with configurable duration
-    fun fadeCrossfade(duration: Int = MorpheDefaults.ANIMATION_DURATION): AnimatedContentTransitionScope<*>.() -> ContentTransform = {
-        fadeIn(tween(duration)) togetherWith fadeOut(tween(duration))
-    }
-
-    // Functional Helpers
-    fun fadeOut(duration: Int): ExitTransition = fadeOut(tween(duration))
-}
-
-/**
  * Elevated card with proper Material 3 theming.
  * Base card for all other card types.
  */
@@ -197,8 +86,17 @@ fun MorpheCard(
     elevation: Dp = MorpheDefaults.CardElevation,
     cornerRadius: Dp = MorpheDefaults.CardCornerRadius,
     borderWidth: Dp = 0.dp,
+    borderColor: Color = MaterialTheme.colorScheme.outlineVariant,
+    color: Color = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
     content: @Composable () -> Unit
 ) {
+    val monochromeTheme = LocalMonochromeTheme.current
+    val effectiveColor = MonochromeThemeDefaults.surfaceColor(color)
+    val effectiveBorder = when {
+        borderWidth > 0.dp && !monochromeTheme -> BorderStroke(borderWidth, borderColor)
+        else -> null
+    }
+
     Surface(
         modifier = modifier
             .fillMaxWidth()
@@ -209,12 +107,11 @@ fun MorpheCard(
                 } else Modifier
             ),
         shape = RoundedCornerShape(cornerRadius),
-        color = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
+        color = effectiveColor,
         contentColor = MaterialTheme.colorScheme.onSurface,
-        tonalElevation = elevation,
-        border = if (borderWidth > 0.dp) {
-            BorderStroke(borderWidth, MaterialTheme.colorScheme.outlineVariant)
-        } else null
+        tonalElevation = if (monochromeTheme) 0.dp else elevation,
+        shadowElevation = 0.dp,
+        border = effectiveBorder
     ) {
         content()
     }
@@ -228,15 +125,104 @@ fun MorpheSettingsDivider(
     modifier: Modifier = Modifier,
     fullWidth: Boolean = false
 ) {
+    val monochromeTheme = LocalMonochromeTheme.current
     val outlineVariant = MaterialTheme.colorScheme.outlineVariant
     val surfaceTint = MaterialTheme.colorScheme.surfaceTint
-    val color = remember(outlineVariant, surfaceTint) {
-        lerp(outlineVariant, surfaceTint, 0.18f).copy(alpha = 0.55f)
+    val color = remember(outlineVariant, surfaceTint, monochromeTheme) {
+        if (monochromeTheme) {
+            outlineVariant.copy(alpha = 0.28f)
+        } else {
+            lerp(outlineVariant, surfaceTint, 0.18f).copy(alpha = 0.55f)
+        }
     }
     HorizontalDivider(
         modifier = if (fullWidth) modifier else modifier.padding(horizontal = MorpheDefaults.ContentPadding),
         color = color
     )
+}
+
+/**
+ * Toggle row used as a supplementary switch under a list of options.
+ *
+ * @param rowModifier  Applied to the inner [Row], use for positioning callbacks.
+ * @param isLoading    When true, replaces the switch with a [CircularProgressIndicator].
+ */
+@Composable
+fun ToggleRow(
+    title: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    rowModifier: Modifier = Modifier,
+    description: String? = null,
+    enabled: Boolean = true,
+    isLoading: Boolean = false,
+    showDivider: Boolean = true,
+    icon: ImageVector? = null,
+    iconTint: Color = MaterialTheme.colorScheme.primary
+) {
+    val enabledLabel = stringResource(R.string.enabled)
+    val disabledLabel = stringResource(R.string.disabled)
+
+    Column(modifier = modifier) {
+        if (showDivider) {
+            HorizontalDivider(modifier = Modifier.padding(top = 4.dp))
+        }
+        Row(
+            modifier = rowModifier
+                .fillMaxWidth()
+                .clip(MaterialTheme.shapes.medium)
+                .toggleable(
+                    value = checked,
+                    role = Role.Switch,
+                    enabled = enabled,
+                    onValueChange = onCheckedChange
+                )
+                .semantics {
+                    stateDescription = if (checked) enabledLabel else disabledLabel
+                }
+                .padding(vertical = MorpheDefaults.ContentPaddingSmall, horizontal = 4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            if (icon != null) {
+                MorpheIcon(icon = icon, tint = iconTint)
+            }
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                if (description != null) {
+                    Text(
+                        text = description,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+            Crossfade(
+                targetState = isLoading,
+                modifier = Modifier.size(width = 52.dp, height = 32.dp),
+                label = "toggle_row_loading"
+            ) { loading ->
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (loading) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(24.dp),
+                            strokeWidth = 2.dp
+                        )
+                    } else {
+                        MorpheSwitch(checked = checked, onCheckedChange = null)
+                    }
+                }
+            }
+        }
+    }
 }
 
 /**
@@ -336,7 +322,22 @@ fun ImportExportRow(
     onImport: (() -> Unit)?,
     onExport: (() -> Unit)?
 ) {
-    val hasBoth = onImport != null && onExport != null
+    val actions = buildList {
+        if (onImport != null) add(
+            CardAction(
+                icon = Icons.Outlined.Download,
+                label = stringResource(R.string.import_),
+                onClick = onImport
+            )
+        )
+        if (onExport != null) add(
+            CardAction(
+                icon = Icons.Outlined.Upload,
+                label = stringResource(R.string.export),
+                onClick = onExport
+            )
+        )
+    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -364,30 +365,8 @@ fun ImportExportRow(
                 }
             }
         }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = if (hasBoth) Arrangement.spacedBy(8.dp) else Arrangement.Center
-        ) {
-            if (onImport != null) {
-                ActionPillButton(
-                    onClick = onImport,
-                    icon = Icons.Outlined.Download,
-                    contentDescription = stringResource(R.string.import_),
-                    modifier = if (hasBoth) Modifier.weight(1f) else Modifier.fillMaxWidth(0.5f),
-                    large = true,
-                    label = stringResource(R.string.import_)
-                )
-            }
-            if (onExport != null) {
-                ActionPillButton(
-                    onClick = onExport,
-                    icon = Icons.Outlined.Upload,
-                    contentDescription = stringResource(R.string.export),
-                    modifier = if (hasBoth) Modifier.weight(1f) else Modifier.fillMaxWidth(0.5f),
-                    large = true,
-                    label = stringResource(R.string.export)
-                )
-            }
+        if (actions.isNotEmpty()) {
+            CardActionRow(actions = actions)
         }
     }
 }
@@ -408,13 +387,13 @@ fun GradientCircleIcon(
         modifier = modifier
             .size(size)
             .clip(CircleShape)
-            .background(brush = Brush.linearGradient(colors = gradientColors)),
+            .background(brush = MonochromeThemeDefaults.iconBackground(gradientColors)),
         contentAlignment = Alignment.Center
     ) {
         MorpheIcon(
             icon = icon,
             contentDescription = contentDescription,
-            tint = Color.White,
+            tint = MonochromeThemeDefaults.iconTint(Color.White),
             size = iconSize
         )
     }
@@ -473,10 +452,12 @@ fun IconTextRow(
  */
 @Composable
 fun SettingsItemCard(
-    onClick: () -> Unit,
+    onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     borderWidth: Dp = 0.dp,
+    borderColor: Color = MaterialTheme.colorScheme.outlineVariant,
+    color: Color = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
     content: @Composable () -> Unit
 ) {
     MorpheCard(
@@ -485,6 +466,8 @@ fun SettingsItemCard(
         elevation = 1.dp,
         cornerRadius = MorpheDefaults.SettingsCornerRadius,
         borderWidth = borderWidth,
+        borderColor = borderColor,
+        color = color,
         modifier = modifier
     ) {
         content()
@@ -496,17 +479,17 @@ private val defaultChevronTrailing: @Composable () -> Unit = {
 }
 
 /**
- * Base settings item component.
- * Shared implementation for SettingsItem and RichSettingsItem.
+ * Standard settings item. Pass [icon] for a simple icon leading, or [leadingContent] for custom leading.
  */
 @Composable
-fun BaseSettingsItem(
+fun SettingsItem(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    showBorder: Boolean = false,
-    leadingContent: @Composable () -> Unit,
     title: String,
-    description: String? = null,
+    modifier: Modifier = Modifier,
+    icon: ImageVector? = null,
+    leadingContent: @Composable (() -> Unit)? = null,
+    subtitle: String? = null,
+    showBorder: Boolean = false,
     trailingContent: @Composable (() -> Unit)? = defaultChevronTrailing
 ) {
     SettingsItemCard(
@@ -516,58 +499,12 @@ fun BaseSettingsItem(
     ) {
         IconTextRow(
             modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-            leadingContent = leadingContent,
+            leadingContent = leadingContent ?: icon?.let { { MorpheIcon(icon = it) } },
             title = title,
-            description = description,
+            description = subtitle,
             trailingContent = trailingContent
         )
     }
-}
-
-/**
- * Simple settings item with icon, title, and action.
- */
-@Composable
-fun SettingsItem(
-    modifier: Modifier = Modifier,
-    icon: ImageVector,
-    title: String,
-    description: String? = null,
-    onClick: () -> Unit,
-    showBorder: Boolean = false
-) {
-    BaseSettingsItem(
-        onClick = onClick,
-        modifier = modifier,
-        showBorder = showBorder,
-        leadingContent = { MorpheIcon(icon = icon) },
-        title = title,
-        description = description
-    )
-}
-
-/**
- * Rich settings item with custom leading content.
- */
-@Composable
-fun RichSettingsItem(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    showBorder: Boolean = false,
-    leadingContent: @Composable (() -> Unit) = {},
-    title: String,
-    subtitle: String? = null,
-    trailingContent: @Composable (() -> Unit)? = defaultChevronTrailing
-) {
-    BaseSettingsItem(
-        onClick = onClick,
-        modifier = modifier,
-        showBorder = showBorder,
-        leadingContent = leadingContent,
-        title = title,
-        description = subtitle,
-        trailingContent = trailingContent
-    )
 }
 
 /**
@@ -587,6 +524,19 @@ fun SectionCard(
         modifier = modifier
     ) {
         content()
+    }
+}
+
+/**
+ * Standard grouped-settings container. Wraps a stack of settings items in a single card.
+ */
+@Composable
+fun SettingsGroup(
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    SectionCard(modifier = modifier) {
+        Column(content = content)
     }
 }
 
@@ -647,73 +597,8 @@ fun CardHeader(
 }
 
 /**
- * Expandable section with animated header and content.
- */
-@Composable
-fun ExpandableSection(
-    modifier: Modifier = Modifier,
-    icon: ImageVector? = null,
-    title: String,
-    description: String,
-    expanded: Boolean,
-    onExpandChange: (Boolean) -> Unit,
-    content: @Composable () -> Unit
-) {
-    val rotationAngle by animateFloatAsState(
-        targetValue = if (expanded) 180f else 0f,
-        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-        label = "expand_rotation"
-    )
-
-    MorpheCard(modifier = modifier) {
-        Column {
-            // Header
-            IconTextRow(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { onExpandChange(!expanded) }
-                    .padding(MorpheDefaults.ContentPadding),
-                leadingContent = {
-                    if (icon != null) {
-                        MorpheIcon(icon = icon)
-                    }
-                },
-                title = title,
-                description = description,
-                trailingContent = {
-                    MorpheIcon(
-                        icon = Icons.Outlined.ExpandMore,
-                        contentDescription = if (expanded)
-                            stringResource(R.string.collapse)
-                        else
-                            stringResource(R.string.expand),
-                        modifier = Modifier.rotate(rotationAngle)
-                    )
-                }
-            )
-
-            // Content
-            AnimatedVisibility(
-                visible = expanded,
-                enter = MorpheAnimations.expandFadeEnter,
-                exit = MorpheAnimations.shrinkFadeExit
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = MorpheDefaults.ContentPadding, vertical = 8.dp),
-                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
-                ) {
-                    content()
-                }
-            }
-        }
-    }
-}
-
-/**
  * A single item in a deletion list with an icon and text.
- * Used in confirmation dialogs to show what will be deleted.
+ * Used inside [LabeledSection] in destructive confirmation dialogs.
  */
 @Composable
 fun DeleteListItem(
@@ -722,51 +607,132 @@ fun DeleteListItem(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = MorpheDefaults.ContentPadding),
+        horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            modifier = Modifier.size(16.dp),
-            tint = LocalDialogSecondaryTextColor.current
+        MorpheIcon(
+            icon = icon,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Text(
             text = text,
-            style = MaterialTheme.typography.bodySmall,
-            color = LocalDialogSecondaryTextColor.current
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.weight(1f)
         )
     }
 }
 
 /**
- * A container showing what will be deleted in a destructive action.
- * Displays a warning message followed by a list of items.
+ * Statistical variant of [InfoBox] used to display a single prominent value with an optional
+ * caption below it. Shares the container styling of [InfoBox] but centers a headline-sized value.
  */
 @Composable
-fun DeletionWarningBox(
-    warningText: String,
+fun InfoStatBox(
+    value: String,
     modifier: Modifier = Modifier,
-    content: @Composable ColumnScope.() -> Unit
+    subtitle: String? = null,
+    containerColor: Color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+    valueColor: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+        color = containerColor
     ) {
         Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(
-                text = warningText,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium,
-                color = MaterialTheme.colorScheme.error
+                text = value,
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+                color = valueColor
             )
+            if (subtitle != null) {
+                Text(
+                    text = subtitle,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = valueColor.copy(alpha = 0.7f),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+}
 
-            content()
+/**
+ * Prominent hero-style header used at the top of dialogs and sections.
+ */
+@Composable
+fun HeroInfoCard(
+    icon: ImageVector,
+    title: String,
+    modifier: Modifier = Modifier,
+    containerColor: Color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+    iconContainerColor: Color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
+    iconTint: Color = MaterialTheme.colorScheme.primary,
+    titleColor: Color = LocalDialogTextColor.current,
+    subtitle: (@Composable RowScope.() -> Unit)? = null
+) {
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(MorpheDefaults.SectionCornerRadius),
+        color = containerColor
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(MorpheDefaults.ContentPadding),
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Surface(
+                shape = CircleShape,
+                color = iconContainerColor,
+                modifier = Modifier.size(56.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = null,
+                        tint = iconTint,
+                        modifier = Modifier.size(28.dp)
+                    )
+                }
+            }
+
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                AnimatedContent(
+                    targetState = title,
+                    transitionSpec = MorpheAnimations.counterTransitionSpec,
+                    label = "heroTitle"
+                ) { t ->
+                    Text(
+                        text = t,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = titleColor,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+                if (subtitle != null) {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        content = subtitle
+                    )
+                }
+            }
         }
     }
 }
@@ -781,6 +747,7 @@ fun InfoBox(
     containerColor: Color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
     titleColor: Color = MaterialTheme.colorScheme.onSurface,
     icon: ImageVector? = null,
+    iconTint: Color = MaterialTheme.colorScheme.primary,
     content: @Composable ColumnScope.() -> Unit
 ) {
     Surface(
@@ -814,7 +781,7 @@ fun InfoBox(
                     imageVector = it,
                     contentDescription = null,
                     modifier = Modifier.size(32.dp),
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = iconTint
                 )
             }
         }
@@ -824,12 +791,13 @@ fun InfoBox(
 @Composable
 fun EmptyState(
     message: String,
+    modifier: Modifier = Modifier,
     icon: ImageVector? = Icons.Outlined.FolderOff,
     actionLabel: String? = null,
     onAction: (() -> Unit)? = null
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,

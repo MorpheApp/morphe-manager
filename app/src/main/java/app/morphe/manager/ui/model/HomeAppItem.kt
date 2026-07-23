@@ -17,7 +17,9 @@ data class HomeAppItem(
     val installedApp: InstalledApp?,
     val packageInfo: PackageInfo?,
     val isPinnedByDefault: Boolean,
+    val isInstalledOnDevice: Boolean,
     val isDeleted: Boolean,
+    val hasSavedCopy: Boolean,
     val hasUpdate: Boolean,
     val patchCount: Int
 )

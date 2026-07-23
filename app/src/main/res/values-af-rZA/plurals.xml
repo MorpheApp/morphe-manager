@@ -24,6 +24,26 @@
         <item quantity="one">%s APK vyl</item>
         <item quantity="other">%s APK vyle</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">%d app geïnstalleer</item>
+        <item quantity="other">%d apps geïnstalleer</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">%d app weer geïnstalleer</item>
+        <item quantity="other">%d apps weer geïnstalleer</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">%d app verwyder</item>
+        <item quantity="other">%d apps verwyder</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Deïnstalleer %d program?</item>
+        <item quantity="other">Deïnstalleer %d programme?</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">%d app oorgeslaan</item>
+        <item quantity="other">%d apps oorgeslaan</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Verwyder %s veroudered verandering van spaar seleksie</item>
         <item quantity="other">Verwyder %s veroudered veranderinge van spaar seleksie</item>
@@ -39,5 +59,9 @@
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s versteek program</item>
         <item quantity="other">%s versteek programme</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s app</item>
+        <item quantity="other">%s apps</item>
     </plurals>
 </resources>

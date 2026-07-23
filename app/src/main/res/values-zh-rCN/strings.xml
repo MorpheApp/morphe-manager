@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe更新可用</string>
     <string name="home_update_available_subtitle">新版本已准备好安装</string>
+    <string name="home_blocked_source_title">检测到已阻止的补丁源</string>
+    <string name="home_blocked_source_subtitle">点击查看并移除</string>
+    <string name="home_metadata_errors_title">部分补丁源不可用</string>
+    <string name="home_metadata_errors_subtitle">点击查看源</string>
+    <string name="home_metered_skipped_title">在移动数据上暂停更新</string>
+    <string name="home_metered_skipped_subtitle">点击允许在移动数据上更新</string>
     <string name="home_update_error">更新失败</string>
-    <string name="home_update_error_subtitle">请检查您的互联网连接并重试</string>
+    <string name="home_update_error_subtitle">更新源时发生错误</string>
     <string name="home_update_skipped_metered">更新已跳过</string>
     <string name="home_update_skipped_metered_subtitle">移动数据已激活</string>
     <string name="home_updating_sources">正在更新源…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">没有应用匹配“%s”</string>
     <string name="home_all_apps_hidden_title">所有应用已隐藏</string>
     <string name="home_all_apps_hidden_subtitle">您已将所有应用从主屏幕隐藏</string>
+    <string name="home_category_add">添加类别</string>
+    <string name="home_category_all_apps">所有应用</string>
+    <string name="home_category_custom">自定义</string>
+    <string name="home_category_uncategorized">未分类</string>
+    <string name="home_category_new_title">新建分类</string>
+    <string name="home_category_rename_title">重命名分类</string>
+    <string name="home_category_name">分类名称</string>
+    <string name="home_category_move_to">移动到分类</string>
+    <string name="home_category_move_selected_title">移动选定的应用</string>
+    <string name="home_category_delete_confirm_title">删除分类</string>
+    <string name="home_category_delete_confirm_message">删除分类&lt;b&gt;%1$s&lt;/b&gt;？其中的应用将会移回&lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">此分类不可用操作</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">您想要修补哪个应用程序？</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">如果可用，对实验性应用目标进行修补</string>
     <string name="sources_management_already_exists">此资源已添加</string>
     <string name="sources_management_invalid_url">无效的源URL。请检查地址并重试</string>
+    <string name="sources_management_blocked">此补丁源被阻止，无法添加</string>
+    <string name="sources_management_source_blocked_badge">已阻止</string>
     <string name="sources_management_metadata_unavailable">元数据不可用</string>
     <string name="sources_management_metadata_unavailable_hint">远程元数据文件不可用。使用已安装的程序包进行修补仍然有效，但此源的自动更新已禁用</string>
     <string name="sources_management_metadata_unavailable_hint_missing">无法下载补丁包。源URL可能不正确或文件不存在</string>
@@ -308,16 +328,18 @@
     <string name="home_app_info_app_deleted_warning">应用已卸载</string>
     <string name="home_app_info_app_deleted_description">此应用已在 Morphe 外卸载。重新安装以恢复功能</string>
     <string name="home_app_info_apk_size">APK大小</string>
+    <string name="home_app_info_cpu_arch">CPU 架构</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root 模式需要先将原始 APK 安装到您的设备上再进行修补</string>
     <string name="root_gmscore_excluded">Root模式下已排除GmsCore支持补丁</string>
-    <string name="root_pre_patch_installer_title">选择安装方法</string>
-    <string name="root_pre_patch_installer_description">您的设备已获取 root 访问权限。请选择完成修补后安装应用的方式</string>
+    <string name="root_pre_patch_installer_title">选择补丁模式</string>
+    <string name="root_pre_patch_installer_description">您的设备已获取 root 权限。请选择是否为此应用应用 root 挂载补丁或标准安装</string>
     <string name="root_pre_patch_installer_mount_title">Root 挂载模式</string>
-    <string name="root_pre_patch_installer_mount_description">将修补后的APK加载到原生应用之上。无需GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">标准安装</string>
-    <string name="root_pre_patch_installer_standard_description">作为支持 GmsCore 的独立应用安装。修补后可以选择安装程序</string>
-    <string name="root_pre_patch_installer_hint">安装方法确定哪些修补程序包含，修补后无法更改</string>
+    <string name="root_pre_patch_installer_mount_description">针对 root 挂载的补丁，然后将 APK 覆盖到匹配的库存应用上。无需 GmsCore</string>
+    <string name="root_mount_module_unmount_warning">如果您使用 KernelSU 或 APatch，请禁用模块卸载或隐藏，以防止针对 root 挂载安装的应用被卸载或隐藏。否则，即使 Morphe 显示应用已挂载，系统应用也可能继续运行。</string>
+    <string name="root_pre_patch_installer_standard_title">标准安装模式</string>
+    <string name="root_pre_patch_installer_standard_description">将补丁作为带有 GmsCore 支持的普通 APK 安装。应用补丁后将使用您的安装程序设置。</string>
+    <string name="root_pre_patch_installer_hint">此补丁模式与“设置 > 系统 > 安装程序”中的设置分开，并且在应用补丁后无法更改。</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">错误已复制到剪贴板</string>
     <string name="patcher_error_log">错误日志</string>
@@ -417,6 +439,8 @@
     <string name="patcher_process_exit_message">修補程式程序結束，傳回代碼 %s</string>
     <string name="install_app_success">安装成功</string>
     <string name="install_app_fail">应用安装失败：%s</string>
+    <string name="uninstall_app_fail">卸载应用失败：%s</string>
+    <string name="uninstall_timeout">卸载超时</string>
     <string name="save_apk_success">APK 已保存</string>
     <string name="saved_app_export_failed">导出修补的应用失败</string>
     <string name="saved_app_removed_toast">已移除保存的修补应用</string>
@@ -462,10 +486,13 @@
     <string name="settings_appearance_parallax_effect_description">倾斜设备时平滑背景过渡</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">主题</string>
+    <string name="settings_appearance_theme_mode">主题模式</string>
     <string name="settings_appearance_system">系统</string>
     <string name="settings_appearance_light">浅色</string>
     <string name="settings_appearance_dark">深色</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">单色</string>
+    <string name="settings_appearance_color_style">颜色样式</string>
     <string name="settings_appearance_accent_color">强调色</string>
     <string name="settings_appearance_pure_black">纯黑</string>
     <string name="settings_appearance_pure_black_description">使用真正的黑色背景</string>
@@ -473,11 +500,16 @@
     <string name="settings_appearance_app_language">应用语言</string>
     <string name="settings_appearance_app_language_current">当前语言</string>
     <string name="settings_appearance_translations_info_title">某些语言的翻译可能缺失或不完整</string>
-    <string name="settings_appearance_translations_info_text">访问 %s 以翻译新语言或改进现有翻译。</string>
+    <string name="settings_appearance_translations_info_text">"要翻译新的语言或改进现有的翻译，请访问
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">主屏幕</string>
     <string name="settings_appearance_greeting_phrases">问候语</string>
     <string name="settings_appearance_greeting_phrases_subtitle">在主屏幕上显示问候消息</string>
+    <string name="settings_appearance_app_grouping">应用分组</string>
+    <string name="settings_appearance_app_grouping_description">显示主屏幕切换器，按来源或您自己的分类对应用进行分组，并在关闭时保持选择</string>
+    <string name="settings_appearance_sort_button">排序按钮</string>
+    <string name="settings_appearance_sort_button_description">在主屏幕上显示排序按钮</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">应用图标</string>
     <string name="settings_appearance_app_icon_default">默认</string>
@@ -491,6 +523,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">更改图标</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
+    <string name="settings_advanced_patcher">修补程序</string>
     <string name="settings_advanced_updates_use_prereleases">预发布更新</string>
     <string name="settings_advanced_updates_use_prereleases_description">提前访问新的 Morphe 应用版本。在补丁来源中启用预发布版本</string>
     <string name="settings_advanced_updates_allow_metered">移动数据更新</string>
@@ -540,7 +573,8 @@
     <string name="settings_advanced_github_pat_configured">已配置令牌</string>
     <string name="settings_advanced_github_pat_how_to_get">如何获取令牌</string>
     <string name="settings_advanced_github_pat_dialog_title">设置 GitHub 个人访问令牌</string>
-    <string name="settings_advanced_github_pat_dialog_description">设置 GitHub 个人访问令牌以能够将 pull 请求添加为外部源。创建具有公共仓库范围的 PAT</string>
+    <string name="settings_advanced_github_pat_dialog_description">"为了能够添加来自外部资源的 pull request，请设置 GitHub 个人访问令牌 (Personal Access Token)。在
+%s 上创建一个具有 public_repo 权限的 PAT"</string>
     <string name="settings_advanced_github_pat_export_include_label">包含在设置导出中</string>
     <string name="settings_advanced_github_pat_export_include_supporting">在导出 Morphe 设置时也导出令牌</string>
     <string name="settings_advanced_github_pat_export_warning">请勿共享您的 PAT。如果您在设置导出中包含它，请将该文件保持为私有，因为它包含令牌</string>
@@ -625,12 +659,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">从启动器小部件中删除 Shorts 按钮</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">安装程序</string>
+    <string name="installer_settings_title">默认安装程序</string>
     <string name="installer_title">选择安装程序</string>
     <string name="installer_internal_description">使用 Android 包安装程序</string>
     <string name="installer_play_store_description">使用系统安装程序，并将Google Play商店设置为安装来源</string>
     <string name="installer_root_play_store_description">以 root 权限静默安装，并将 Google Play Store 设置为安装来源</string>
-    <string name="installer_auto_saved_name">Rooted 挂载安装器</string>
-    <string name="installer_auto_saved_description">将修补后的 APK 安装在已安装的应用程序上</string>
+    <string name="installer_auto_saved_name">Root 挂载模式</string>
+    <string name="installer_auto_saved_description">挂载以 Root 挂载模式打补丁的应用。标准打补丁的 APK 使用另一个安装程序。</string>
     <string name="installer_shizuku_description">使用 Shizuku 或 Sui 静默安装。</string>
     <string name="installer_shizuku_play_store_description">通过 Shizuku 或 Sui 静默安装，并将 Google Play Store 设置为安装来源</string>
     <string name="installer_option_none">无备用</string>
@@ -639,9 +674,10 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">此操作不支持</string>
     <string name="installer_status_shizuku_not_installed">安装 Shizuku 或 Sui 以使用此选项</string>
     <string name="installer_status_shizuku_not_running">启动 Shizuku 或 Sui 后重试</string>
-    <string name="installer_status_shizuku_permission">从 Shizuku 应用授予 Morphe Shizuku 权限</string>
+    <string name="installer_status_shizuku_permission">授予 Morphe 从 Shizuku 应用权限</string>
     <string name="installer_mount_warning_install">您的主要安装程序设置为根挂载安装程序。此保存的应用未使用挂载安装</string>
     <string name="mount_version_mismatch_message">原始应用版本（%2$s）与修补后的应用版本（%1$s）不匹配。挂载匹配的原始版本，然后重试</string>
+    <string name="mount_stock_restore_failed_message">Android 拒绝了保存的原始 APK。请安装匹配的系统版本，然后重试挂载。</string>
     <string name="installer_status_shizuku_unsupported">已安装的 Shizuku 版本不受支持</string>
     <string name="installer_action_open_shizuku">打开 Shizuku</string>
     <string name="installer_hint_generic">安装失败。请重试或切换到其他安装程序</string>
@@ -654,21 +690,48 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">确保 Shizuku 正在运行并已授予此应用权限</string>
     <string name="installer_use_standard">使用标准</string>
     <string name="installer_play_store_warning_title">作为 Play Store 安装？</string>
-    <string name="installer_play_store_warning_message">补丁应用将被记录为从 Google Play Store 安装。这可以让 Android Auto 等服务将其识别为 Play Store 应用</string>
+    <string name="installer_play_store_warning_message">修补后的应用将被记录为从 Google Play 商店安装。这可以帮助像 Android Auto 这样的服务将其识别为 Play 商店应用，但并非对于每个应用或设备都有保证。行为可能因 Android 版本、ROM、设备品牌和应用特定的检查而异。</string>
     <string name="installer_play_store_warning_risk">Play Store 可能会为补丁应用提供更新。安装该更新将用原始版本覆盖补丁 APK 并移除补丁。如果提示更新，请点击应用在 Play Store 页面上的三点菜单，然后选择“关闭更新”</string>
     <string name="installer_play_store_warning_continue">我知道了，继续</string>
+    <string name="installer_play_store_mode">作为 Play 商店安装</string>
+    <string name="installer_play_store_mode_description">将 Google Play 商店记录为该安装方法的安装来源</string>
     <string name="settings_prompt_installer_on_install">安装程序选择提示</string>
     <string name="settings_prompt_installer_on_install_description">每次安装已修补的应用时，都会显示安装程序选择对话框</string>
     <string name="settings_auto_install_with_shizuku">补丁应用后自动安装</string>
     <string name="settings_auto_install_with_shizuku_description">在补丁完成安装后，静默安装补丁后的 APK</string>
-    <string name="settings_auto_install_prompt_conflict">已启用 \"%s\" - 将跳过自动安装</string>
+    <string name="settings_auto_uninstall_with_shizuku">冲突时自动卸载</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">使用 Shizuku 自动安装时，如果 Android 报告签名冲突，则先卸载现有的应用。这可能会删除应用数据</string>
+    <string name="settings_auto_uninstall_warning_title">启用自动卸载？</string>
+    <string name="settings_auto_uninstall_warning_message">如果在 Shizuku 自动安装期间，Android 报告签名冲突，Morphe 将在安装修补后的 APK 之前卸载现有的应用</string>
+    <string name="settings_auto_uninstall_warning_risk">这可能会删除应用数据。如果卸载后修补后的 APK 安装失败，则以前的应用可能已经消失</string>
+    <string name="installer_shizuku_status_action">检查 Shizuku 状态</string>
+    <string name="installer_shizuku_status_title">Shizuku 状态</string>
+    <string name="installer_shizuku_status_ready">已准备就绪</string>
+    <string name="installer_shizuku_status_issue">需要关注</string>
+    <string name="installer_shizuku_status_supported">支持</string>
+    <string name="installer_shizuku_status_running">运行中</string>
+    <string name="installer_shizuku_status_permission">权限</string>
+    <string name="installer_shizuku_status_mode">模式</string>
+    <string name="installer_shizuku_status_provider">提供程序</string>
+    <string name="installer_shizuku_status_granted">已授予</string>
+    <string name="installer_shizuku_status_missing">缺失</string>
+    <string name="installer_shizuku_request_permission">请求权限</string>
+    <string name="installer_shizuku_install_fail">Shizuku 安装失败：%s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku 安装失败：%1$s
+
+详细信息：%2$s"</string>
+    <string name="installer_shizuku_error_permission">缺少 Shizuku 权限。授予 Morphe 权限并重试</string>
+    <string name="installer_shizuku_error_timeout">Shizuku 没有返回安装结果。请确保它仍在运行并重试</string>
+    <string name="installer_shizuku_error_downgrade">Android 阻止了此操作，因为它会降级已安装的应用</string>
+    <string name="installer_shizuku_error_signature">Android 阻止了此操作，因为已安装的应用具有不同的签名</string>
+    <string name="installer_shizuku_error_invalid_apk">Android 无法读取此 APK</string>
+    <string name="installer_shizuku_error_user_profile">Android 阻止了当前用户或工作配置文件中的此操作</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">电池优化</string>
     <string name="settings_system_battery_optimization_description">在应用最小化时，保持修补程序运行</string>
-    <string name="settings_system_performance">性能</string>
+    <string name="settings_system_background">后台</string>
     <string name="settings_system_process_runtime">修补程序运行时</string>
     <string name="settings_system_process_runtime_description">在单独的进程中运行修补以提高稳定性</string>
-    <string name="settings_system_process_runtime_memory_limit">内存限制</string>
     <string name="settings_system_process_runtime_memory_limit_description">更高的限制可以加速在兼容设备上的修补</string>
     <string name="settings_system_process_runtime_enable">启用独立进程</string>
     <string name="settings_system_memory_limit_subtitle">修补程序可用的内存大小</string>
@@ -676,6 +739,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">%s MB限制</string>
     <string name="settings_system_process_runtime_disabled_description">点击以配置</string>
     <string name="settings_system_process_runtime_description_not_available">此功能需要 Android 11 或更高版本</string>
+    <string name="settings_system_patcher_completion_sound">完成提示音</string>
+    <string name="settings_system_patcher_completion_sound_description">修补完成后，播放不同的提示音以表示成功或失败</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">通知</string>
+    <string name="settings_system_notifications_description">配置后台提醒和完成提示音</string>
+    <string name="settings_system_notifications_success_sound">成功提示音</string>
+    <string name="settings_system_notifications_error_sound">失败提示音</string>
+    <string name="settings_system_notifications_sound_default">默认</string>
+    <string name="settings_system_notifications_sound_picker_title">选择提示音来源</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">系统声音</string>
+    <string name="settings_system_notifications_sound_pick_file">从文件中选择</string>
+    <string name="settings_system_notifications_sound_reset">重置为默认值</string>
+    <string name="settings_system_notifications_ringtone_picker_title">选择铃声</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">导入 &amp; 导出</string>
     <string name="settings_system_keystore">密钥库</string>
@@ -721,12 +797,37 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">已成功删除 APK</string>
     <string name="settings_system_apks_export_zip_success">已导出的 APK</string>
     <string name="settings_system_apks_export_zip_failed">导出选定的 APK 失败</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">存储管理</string>
+    <string name="settings_system_storage_management_description">查看磁盘使用情况和清除缓存文件</string>
+    <string name="settings_system_storage_keystore_title">签名密钥库</string>
+    <string name="settings_system_storage_app_data_title">应用数据</string>
+    <string name="settings_system_storage_patch_bundles_title">补丁包</string>
+    <string name="settings_system_storage_http_cache_title">网络缓存</string>
+    <string name="settings_system_storage_http_cache_description">为了加快更新速度，HTTP 响应已被缓存</string>
+    <string name="settings_system_storage_installer_cache_title">外部安装程序缓存</string>
+    <string name="settings_system_storage_installer_cache_description">传递给第三方安装程序的 APK 副本</string>
+    <string name="settings_system_storage_patcher_workspace_title">补丁程序工作区</string>
+    <string name="settings_system_storage_patcher_workspace_description">补丁程序运行时文件和孤立的临时数据</string>
+    <string name="settings_system_storage_temporary_title">临时文件</string>
+    <string name="settings_system_storage_temporary_description">在补丁过程中创建的工作文件</string>
+    <string name="settings_system_storage_clear_all">清除所有缓存</string>
+    <string name="settings_system_storage_clear_all_description">一次性释放所有可回收的缓存空间</string>
+    <string name="settings_system_storage_clear_all_confirm">这将清除缓存的网络响应、已暂存的安装程序副本和临时文件。原始 APK 和已修补的 APK 将被保留</string>
+    <string name="settings_system_storage_cleared">已释放 %s</string>
+    <string name="settings_system_storage_nothing_to_clear">无需清除</string>
+    <string name="settings_system_storage_open_app_info_title">打开 Android 应用存储空间</string>
+    <string name="settings_system_storage_open_app_info_description">通过系统设置管理或清除所有 Morphe 数据</string>
+    <string name="settings_system_save_original_apks_title">保留原始APK</string>
+    <string name="settings_system_save_original_apks_description">保存修改前APK，以便在无需再次选择文件的情况下重复修补</string>
+    <string name="settings_system_save_patched_apks_title">保留已修补的APK</string>
+    <string name="settings_system_save_patched_apks_description">保存已修补APK的副本，以便以后导出或从管理器重新安装</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">已修补 APK</string>
     <string name="settings_system_patched_apks_description">管理保存的已修补应用文件</string>
     <string name="settings_system_patched_apks_empty">尚未保存任何已修补 APK</string>
     <string name="settings_system_patched_apks_delete_title">是否要删除已保存的修补 APK？</string>
-    <string name="settings_system_patched_apks_delete_confirm">是否要删除选中的修补 APK？</string>
+    <string name="settings_system_patched_apks_delete_confirm">您确定要删除已保存的已修补APK，用于&lt;b&gt;%s&lt;/b&gt;吗？</string>
     <string name="settings_system_patched_apks_deleted">已成功删除修补 APK</string>
     <string name="settings_system_patched_apks_delete_all_title">删除所有已修补的 APK？</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -735,7 +836,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">尚未存储任何原始 APK</string>
     <string name="settings_system_original_apks_deleted">已成功删除原始 APK</string>
     <string name="settings_system_original_apks_delete_title">是否要删除原始 APK？</string>
-    <string name="settings_system_original_apks_delete_confirm">删除 %s 的原始 APK？没有新的 APK，您将无法重新修补</string>
+    <string name="settings_system_original_apks_delete_confirm">删除&lt;b&gt;%s&lt;/b&gt;的原始APK？ 如果没有提供新的APK，您将无法重新修补。</string>
     <string name="settings_system_original_apks_delete_all_title">删除所有原始 APK？</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">补丁选择项</string>
@@ -750,15 +851,15 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">源 #%s</string>
     <string name="settings_system_patch_selection_will_delete">这将删除：</string>
     <string name="settings_system_patch_selection_reset_all_warning">这将永久删除所有保存的补丁选择，适用于所有包和源</string>
-    <string name="settings_system_patch_selection_reset_package_warning">这将永久删除所有源当中, 为 %s 保存的补丁选择</string>
-    <string name="settings_system_patch_selection_reset_source_warning">这将永久删除已保存的补丁选择，包括 %1$s 在源 #%2$s 中</string>
+    <string name="settings_system_patch_selection_reset_package_warning">这将永久删除所有来源中，为&lt;b&gt;%s&lt;/b&gt;保存的补丁选择。</string>
+    <string name="settings_system_patch_selection_reset_source_warning">这将永久删除在&lt;b&gt;%2$s&lt;/b&gt;中，为&lt;b&gt;%1$s&lt;/b&gt;保存的补丁选择。</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">这将永久删除所选软件包的所有已保存的补丁选择。</string>
     <string name="settings_system_export_source_data_fail">导出源数据失败</string>
     <string name="settings_system_export_source_data_success">源数据导出成功</string>
     <string name="settings_system_import_source_data_fail">导入源数据失败</string>
     <string name="settings_system_import_source_data_success">源数据导入成功</string>
-    <string name="settings_system_patch_details_title">补丁详情</string>
-    <string name="settings_system_selected_patches_title">已选择的补丁 (%s)</string>
-    <string name="settings_system_patch_options_title">补丁选项 (%s)</string>
+    <string name="settings_system_selected_patches_section">所选补丁</string>
+    <string name="settings_system_patch_options_section">补丁选项</string>
     <string name="settings_system_no_patches_or_options">没有保存的补丁或选项</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">自定义文件选择器</string>

@@ -36,6 +36,36 @@
         <item quantity="few">%s datoteke APK</item>
         <item quantity="other">%s datoteke APK</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Nameščen %d app</item>
+        <item quantity="two">Nameščeni %d appi</item>
+        <item quantity="few">Nameščeni %d appi</item>
+        <item quantity="other">Nameščeni %d appi</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Ponovno nameščen %d app</item>
+        <item quantity="two">Ponovno nameščeni %d appi</item>
+        <item quantity="few">Ponovno nameščeni %d appi</item>
+        <item quantity="other">Ponovno nameščeni %d appi</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Odnameščen %d app</item>
+        <item quantity="two">Odnameščeni %d appi</item>
+        <item quantity="few">Odnameščeni %d appi</item>
+        <item quantity="other">Odnameščeni %d appi</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Odstrani %d aplikacijo?</item>
+        <item quantity="two">Odstrani %d aplikaciji?</item>
+        <item quantity="few">Odstrani %d aplikacij?</item>
+        <item quantity="other">Odstrani %d aplikacij?</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Preskočen %d app</item>
+        <item quantity="two">Preskočeni %d appi</item>
+        <item quantity="few">Preskočeni %d appi</item>
+        <item quantity="other">Preskočeni %d appi</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Odstranjena %s zastarela posodobitev iz shranjenega izbora</item>
         <item quantity="two">Odstranjena %s zastarela popravka iz shranjene izbire</item>
@@ -59,5 +89,11 @@
         <item quantity="two">%s skriti aplikaciji</item>
         <item quantity="few">%s skrite aplikacije</item>
         <item quantity="other">%s skrite aplikacije</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s aplikacija</item>
+        <item quantity="two">%s aplikaciji</item>
+        <item quantity="few">%s aplikacij</item>
+        <item quantity="other">%s aplikacij</item>
     </plurals>
 </resources>

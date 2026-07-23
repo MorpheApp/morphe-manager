@@ -30,6 +30,31 @@
         <item quantity="few">%s fișiere APK</item>
         <item quantity="other">%s de fișiere APK</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Instalat %d aplicație</item>
+        <item quantity="few">Instalate %d aplicații</item>
+        <item quantity="other">Instalate %d aplicații</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Reinstalată %d aplicație</item>
+        <item quantity="few">Reinstalate %d aplicații</item>
+        <item quantity="other">Reinstalate %d aplicații</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Dezinstalată %d aplicație</item>
+        <item quantity="few">Dezinstalate %d aplicații</item>
+        <item quantity="other">Dezinstalate %d aplicații</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Dezinstalezi %d aplicație?</item>
+        <item quantity="few">Dezinstalezi %d aplicații?</item>
+        <item quantity="other">Dezinstalezi %d aplicații?</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Sărită %d aplicație</item>
+        <item quantity="few">Sărite %d aplicații</item>
+        <item quantity="other">Sărite %d aplicații</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">A fost eliminat %s patch vechi din selecție salvată</item>
         <item quantity="few">Eliminat %s patch-uri vechi din selecție salvată</item>
@@ -49,5 +74,10 @@
         <item quantity="one">%s aplicație ascunsă</item>
         <item quantity="few">%s aplicații ascunse</item>
         <item quantity="other">%s aplicații ascunse</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s aplicație</item>
+        <item quantity="few">%s aplicații</item>
+        <item quantity="other">%s aplicații</item>
     </plurals>
 </resources>

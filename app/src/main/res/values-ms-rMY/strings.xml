@@ -19,7 +19,6 @@
     <string name="home_update_available">Kemas kini Morphie tersedia</string>
     <string name="home_update_available_subtitle">Kemas kini baharu tersedia untuk di muat turun</string>
     <string name="home_update_error">Kemas kini gagal</string>
-    <string name="home_update_error_subtitle">Semak sambungan internet kamu dan cuba lagi</string>
     <string name="home_update_skipped_metered">Kemas kini taraf dilangkau</string>
     <string name="home_update_skipped_metered_subtitle">Data mudah alih aktif</string>
     <string name="home_updating_sources">Kemas kini sumber-sumber… </string>
@@ -288,11 +287,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Mod root memerlukan APK asal diinstal pada peranti anda sebelum menampal</string>
     <string name="root_gmscore_excluded">Tampalan sokongan GmsCore dikecualikan dalam mod root</string>
-    <string name="root_pre_patch_installer_title">Pilih kaedah pemasangan</string>
-    <string name="root_pre_patch_installer_description">Peranti anda mempunyai akses root. Pilih cara anda ingin memasang aplikasi yang ditampal</string>
-    <string name="root_pre_patch_installer_standard_title">Pemasangan Standard</string>
-    <string name="root_pre_patch_installer_standard_description">Pasang sebagai aplikasi berasingan dengan sokongan GmsCore. Pemasang boleh dipilih selepas tampalan dibuat</string>
-    <string name="root_pre_patch_installer_hint">Kaedah pemasangan menentukan tampalan mana yang disertakan dan tidak boleh diubah selepas tampalan</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Ralat disalin ke papan keratan</string>
     <string name="patcher_error_log">Log ralat</string>
@@ -423,7 +417,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_appearance_app_language">Bahasa aplikasi</string>
     <string name="settings_appearance_app_language_current">Bahasa semasa</string>
     <string name="settings_appearance_translations_info_title">Terjemahan untuk sesetengah bahasa mungkin kurang atau tidak lengkap</string>
-    <string name="settings_appearance_translations_info_text">Untuk menterjemahkan bahasa baharu atau memperbaiki terjemahan yang sedia ada, lawati %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ikon aplikasi</string>
@@ -472,7 +465,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="settings_advanced_github_pat_configured">Token dikonfigurasikan</string>
     <string name="settings_advanced_github_pat_how_to_get">Cara mendapatkan token</string>
     <string name="settings_advanced_github_pat_dialog_title">Tetapkan GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Tetapkan Token Akses Peribadi GitHub untuk dapat menambah permintaan tarik sebagai sumber luaran. Buat PAT dengan skop awam_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Sertakan dalam eksport tetapan</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Tambahkan PAT ini ke tetapan Morphe dieksport</string>
     <string name="settings_advanced_github_pat_export_warning">Jangan kongsi PAT anda. Jika anda menyertakannya dalam satu eksport tetapan, simpan fail tersebut sebagai sulit kerana ia mengandungi token</string>
@@ -553,15 +545,12 @@ Dimensi gambar mestilah seperti berikut:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Pemasang</string>
     <string name="installer_title">Pilih pemasang</string>
-    <string name="installer_auto_saved_name">Pemasang pemasang berakar</string>
-    <string name="installer_auto_saved_description">Memasang APK yang ditampal di atas aplikasi yang dipasang</string>
     <string name="installer_option_none">Tiada kejatuhan</string>
     <string name="installer_none_description">Tiada kejatuhan pemasang yang dikonfigurasi</string>
     <string name="installer_status_requires_root">Memerlukan akses akar</string>
     <string name="installer_status_not_supported">Tidak disokong untuk tindakan ini</string>
     <string name="installer_status_shizuku_not_installed">Pasang Shizuku atau Sui untuk menggunakan pilihan ini</string>
     <string name="installer_status_shizuku_not_running">Mula Shizuku atau Sui dan cuba lagi</string>
-    <string name="installer_status_shizuku_permission">Berikan kebenaran Shizuku kepada Morphe dari aplikasi Shizuku</string>
     <string name="installer_mount_warning_install">Pemasang utama anda ditetapkan kepada pemasang mount berakar. Aplikasi yang disimpan ini tidak dipasang menggunakan mount</string>
     <string name="mount_version_mismatch_message">Versi aplikasi Stok (%2$s) tidak serasi dengan versi aplikasi yang dipatch (%1$s). Pasang versi Stok yang serasi, kemudian cuba lagi</string>
     <string name="installer_status_shizuku_unsupported">Pemasangan gagal. Cuba lagi atau tukar kepada pemasang yang berbeza</string>
@@ -574,15 +563,14 @@ Dimensi gambar mestilah seperti berikut:
     <string name="installer_use_standard">Gunakan standard</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisasi bateri</string>
-    <string name="settings_system_performance">Prestasi</string>
     <string name="settings_system_process_runtime">Masa runtime proses</string>
-    <string name="settings_system_process_runtime_memory_limit">Had memori</string>
     <string name="settings_system_process_runtime_enable">Aktifkan masa runtime proses</string>
     <string name="settings_system_memory_limit_subtitle">Memori tersedia untuk tampalan</string>
     <string name="settings_system_memory_limit_warning">Had memori yang rendah mungkin menyebabkan kegagalan semasa menampal aplikasi yang lebih besar</string>
     <string name="settings_system_process_runtime_enabled_description">%s hadkan MB</string>
     <string name="settings_system_process_runtime_disabled_description">Klik untuk konfigurasi</string>
     <string name="settings_system_process_runtime_description_not_available">Ciri ini memerlukan Android 11 atau lebih tinggi</string>
+    <!-- Settings - System Tab - Notifications Section -->
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import &amp; eksport</string>
     <string name="settings_system_import_keystore_dialog_title">Masukkan kelayakan kunci simpanan</string>
@@ -606,18 +594,17 @@ Dimensi gambar mestilah seperti berikut:
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_apks_size">Saiz keseluruhan: %s</string>
     <string name="settings_system_apks_deleted_all">APKs telah padam dengan jayanya</string>
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK yang ditampal</string>
     <string name="settings_system_patched_apks_empty">Tiada APK yang ditampal disimpan lagi</string>
     <string name="settings_system_patched_apks_delete_title">Padam APK yang ditampal?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Adakah anda pasti ingin memadam APK yang ditampal yang disimpan untuk %s?</string>
     <string name="settings_system_patched_apks_deleted">APK yang ditampal telah dipadam dengan jayanya</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APK asal</string>
     <string name="settings_system_original_apks_empty">Tiada APK asal disimpan</string>
     <string name="settings_system_original_apks_deleted">APK asal telah dipadam dengan jayanya</string>
     <string name="settings_system_original_apks_delete_title">Padam APK asal?</string>
-    <string name="settings_system_original_apks_delete_confirm">Padam APK asal untuk %s? Anda tidak dapat repatch tanpa memberikan APK baharu</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Pilihan patch</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nyah semula semua pilihan?</string>
@@ -629,15 +616,10 @@ Dimensi gambar mestilah seperti berikut:
     <string name="settings_system_patch_selection_source_format">Sumber #%s</string>
     <string name="settings_system_patch_selection_will_delete">Ini akan memadam:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ini akan memadam secara kekal semua pilihan tampalan yang disimpan untuk semua pakej dan sumber</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ini akan memadam secara kekal semua pilihan tampalan yang disimpan untuk %s merentasi semua sumber</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Ini akan memadam secara kekal pilihan tampalan yang disimpan untuk %1$s dalam sumber #%2$s</string>
     <string name="settings_system_export_source_data_fail">Gagal membaca log (kod keluar %s)</string>
     <string name="settings_system_export_source_data_success">Data sumber dieksport dengan jayanya</string>
     <string name="settings_system_import_source_data_fail">Gagal mengimport data sumber</string>
     <string name="settings_system_import_source_data_success">Data sumber diimport dengan jayanya</string>
-    <string name="settings_system_patch_details_title">Butiran tampalan</string>
-    <string name="settings_system_selected_patches_title">Tampalan terpilih (%s)</string>
-    <string name="settings_system_patch_options_title">Pilihan tampalan (%s)</string>
     <string name="settings_system_no_patches_or_options">Tiada tampalan atau pilihan yang disimpan</string>
     <!-- Settings - System Tab - Custom file picker -->
     <!-- File Picker -->

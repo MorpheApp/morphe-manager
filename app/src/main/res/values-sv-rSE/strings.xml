@@ -19,7 +19,6 @@
     <string name="home_update_available">Uppdatering för Morphe är tillgänglig</string>
     <string name="home_update_available_subtitle">Ny version är redo att installeras</string>
     <string name="home_update_error">Uppdatering misslyckades</string>
-    <string name="home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
     <string name="home_update_skipped_metered">Uppdateringar hoppas över</string>
     <string name="home_update_skipped_metered_subtitle">Mobildata är aktivt</string>
     <string name="home_updating_sources">Uppdaterar källor …</string>
@@ -86,7 +85,7 @@
     <string name="sources_management_title">Tilläggskällor</string>
     <string name="sources_sort_title">Sortera tilläggskällor</string>
     <string name="sources_sort_manual">Manuell ordning</string>
-    <string name="sources_sort_manual_hint">Tryck länge på en källa är att ändra ordning</string>
+    <string name="sources_sort_manual_hint">Tryck länge på en källa för att ändra ordning</string>
     <string name="sources_sort_last_updated">Senast uppdaterad</string>
     <string name="sources_sort_last_updated_description">Nyaste källuppdateringarna först</string>
     <string name="sources_sort_enabled_first">Aktiverade först</string>
@@ -311,13 +310,6 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Rotläget kräver att den ursprungliga APK-filen är installerad på din enhet innan du modifierar appen</string>
     <string name="root_gmscore_excluded">Tillägget för GmsCore-stöd exkluderas i rotläge</string>
-    <string name="root_pre_patch_installer_title">Välj installationsmetod</string>
-    <string name="root_pre_patch_installer_description">Din enhet har rotåtkomst. Välj hur du vill installera den modifierade appen</string>
-    <string name="root_pre_patch_installer_mount_title">Rotmontering</string>
-    <string name="root_pre_patch_installer_mount_description">Monterar den modifierade APK-filen över standardappen. Inget GmsCore behövs</string>
-    <string name="root_pre_patch_installer_standard_title">Standardinstallation</string>
-    <string name="root_pre_patch_installer_standard_description">Installerar som en separat app med stöd för GmsCore. En installerare kan väljas efter modifieringen</string>
-    <string name="root_pre_patch_installer_hint">Installationsmetoden bestämmer vilka tillägg som ingår och kan inte ändras efter modifieringen</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Felmeddelande kopierades till urklipp</string>
     <string name="patcher_error_log">Fellogg</string>
@@ -471,7 +463,6 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="settings_appearance_app_language">Appspråk</string>
     <string name="settings_appearance_app_language_current">Aktuellt språk</string>
     <string name="settings_appearance_translations_info_title">Översättningar till vissa språk kan saknas eller vara ofullständiga</string>
-    <string name="settings_appearance_translations_info_text">Om du vill översätta till nya språk eller förbättra de befintliga översättningarna besöker du %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Startskärm</string>
     <string name="settings_appearance_greeting_phrases">Hälsningsfraser</string>
@@ -538,7 +529,6 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="settings_advanced_github_pat_configured">Token konfigurerades</string>
     <string name="settings_advanced_github_pat_how_to_get">Så får du en token</string>
     <string name="settings_advanced_github_pat_dialog_title">Ange en personlig åtkomsttoken för GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Ange en personlig åtkomsttoken för GitHub om du vill lägga till hämtningsbegäranden (pull requests) som externa källor. Skapa en personlig åtkomsttoken med omfattningen public_repo github.com</string>
     <string name="settings_advanced_github_pat_export_include_label">Inkludera i inställningsexport</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Lägger till denna personliga åtkomsttoken i exporterade Morphe-inställningar</string>
     <string name="settings_advanced_github_pat_export_warning">Dela inte din personliga åtkomsttoken. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
@@ -627,8 +617,6 @@ Bildernas mått ska vara följande:
     <string name="installer_internal_description">Använder Androids paketinstallerare</string>
     <string name="installer_play_store_description">Använder systemets installerare och anger Google Play Butik som installationskälla</string>
     <string name="installer_root_play_store_description">Installerar tyst med rot och anger Google Play Butik som installationskälla</string>
-    <string name="installer_auto_saved_name">Rootad monteringsinstallerare</string>
-    <string name="installer_auto_saved_description">Monterar den modifierade APK-filen över den installerade appen</string>
     <string name="installer_shizuku_description">Installerar tyst med Shizuku eller Sui</string>
     <string name="installer_shizuku_play_store_description">Installerar tyst genom Shizuku eller Sui och anger Google Play Butik som installationskälla</string>
     <string name="installer_option_none">Ingen alternativ installerare</string>
@@ -637,7 +625,6 @@ Bildernas mått ska vara följande:
     <string name="installer_status_not_supported">Stöds inte för den här åtgärden</string>
     <string name="installer_status_shizuku_not_installed">Installera Shizuku eller Sui för att använda det här alternativet</string>
     <string name="installer_status_shizuku_not_running">Starta Shizuku eller Sui och försök igen</string>
-    <string name="installer_status_shizuku_permission">Ge Shizuku behörighet till Morphe från Shizuku-appen</string>
     <string name="installer_mount_warning_install">Din primära installerare har angetts till den rootade monteringsinstalleraren. Den här sparade appen installerades inte med montering</string>
     <string name="mount_version_mismatch_message">Standardappens version (%2$s) matchar inte den modifierade appens version (%1$s). Montera den matchande standardversionen och försök igen</string>
     <string name="installer_status_shizuku_unsupported">Den installerade Shizuku-versionen stöds inte</string>
@@ -652,21 +639,17 @@ Bildernas mått ska vara följande:
     <string name="installer_unavailable_shizuku_hint">Se till att Shizuku körs och att appen har tilldelats behörighet</string>
     <string name="installer_use_standard">Använd standardinstalleraren</string>
     <string name="installer_play_store_warning_title">Installera som Play Butik?</string>
-    <string name="installer_play_store_warning_message">Den modifierade appen registreras som installerad från Google Play Butik. Detta låter tjänster som Android Auto känna igen den som en Play Butik-app</string>
     <string name="installer_play_store_warning_risk">Play Butik kan erbjuda uppdateringar för den modifierade appen. Om du installerar den uppdateringen skrivs den modifierade APK-filen över med den ursprungliga versionen och tilläggen tas bort. Om du uppmanas att uppdatera, tryck på trepunktsmenyn på appens Play Butik-sida och välj Inaktivera uppdateringar</string>
     <string name="installer_play_store_warning_continue">Jag förstår, fortsätt</string>
     <string name="settings_prompt_installer_on_install">Uppmaning om val av installerare</string>
     <string name="settings_prompt_installer_on_install_description">Visar en dialogruta för att välja en installerare varje gång en modifierad app installeras</string>
     <string name="settings_auto_install_with_shizuku">Installera automatiskt efter modifiering</string>
     <string name="settings_auto_install_with_shizuku_description">Installerar den modifierade APK-filen tyst så snart modifieringen är klar</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" är aktiverat – automatisk installation hoppas över</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterioptimering</string>
     <string name="settings_system_battery_optimization_description">Låter modifieringsverktyget fortsätta köras när appen minimeras</string>
-    <string name="settings_system_performance">Prestanda</string>
     <string name="settings_system_process_runtime">Processexekvering</string>
     <string name="settings_system_process_runtime_description">Kör modifieringen i en separat process för bättre stabilitet</string>
-    <string name="settings_system_process_runtime_memory_limit">Minnesgräns</string>
     <string name="settings_system_process_runtime_memory_limit_description">Högre gränser gör modifieringen snabbare på kompatibla enheter</string>
     <string name="settings_system_process_runtime_enable">Aktivera processexekvering</string>
     <string name="settings_system_memory_limit_subtitle">Tillgängligt minne för modifieringen</string>
@@ -674,6 +657,7 @@ Bildernas mått ska vara följande:
     <string name="settings_system_process_runtime_enabled_description">Gräns på %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Tryck för att konfigurera</string>
     <string name="settings_system_process_runtime_description_not_available">Den här funktionen kräver Android 11 eller senare</string>
+    <!-- Settings - System Tab - Notifications Section -->
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importera och exportera</string>
     <string name="settings_system_keystore">Nyckellager</string>
@@ -719,12 +703,12 @@ Bildernas mått ska vara följande:
     <string name="settings_system_apks_deleted_all">APK-filerna har raderats</string>
     <string name="settings_system_apks_export_zip_success">De markerade APK-filerna har exporterats</string>
     <string name="settings_system_apks_export_zip_failed">Det gick inte att exportera de markerade APK-filerna</string>
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Modifierade APK-filer</string>
     <string name="settings_system_patched_apks_description">Hanterar sparade modifierade appfiler</string>
     <string name="settings_system_patched_apks_empty">Inga modifierade APK-filer har sparats än</string>
     <string name="settings_system_patched_apks_delete_title">Radera modifierad APK-fil?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Är du säker på att du vill radera den sparade modifierade APK-filen för %s?</string>
     <string name="settings_system_patched_apks_deleted">Modifierad APK-fil har raderats</string>
     <string name="settings_system_patched_apks_delete_all_title">Radera alla modifierade APK-filer?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -733,7 +717,6 @@ Bildernas mått ska vara följande:
     <string name="settings_system_original_apks_empty">Inga ursprungliga APK-filer lagras</string>
     <string name="settings_system_original_apks_deleted">Ursprunglig APK-fil har tagits bort</string>
     <string name="settings_system_original_apks_delete_title">Radera ursprunglig APK-fil?</string>
-    <string name="settings_system_original_apks_delete_confirm">Radera den ursprungliga APK-filen för %s? Du kan inte modifiera appen igen utan att ange en ny APK-fil</string>
     <string name="settings_system_original_apks_delete_all_title">Radera alla ursprungliga APK-filer?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Tilläggsurval</string>
@@ -748,15 +731,10 @@ Bildernas mått ska vara följande:
     <string name="settings_system_patch_selection_source_format">Källa nr %s</string>
     <string name="settings_system_patch_selection_will_delete">Detta raderar:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Det här raderar alla sparade tilläggsurval för alla paket och källor permanent</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Det här raderar alla sparade tilläggsurval för %s i alla källor permanent</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Det här raderar det sparade tilläggsurvalet för %1$s i källa nr %2$s permanent</string>
     <string name="settings_system_export_source_data_fail">Det gick inte att exportera källdata</string>
     <string name="settings_system_export_source_data_success">Källdata har exporterats</string>
     <string name="settings_system_import_source_data_fail">Det gick inte att importera källdata</string>
     <string name="settings_system_import_source_data_success">Källdata har importerats</string>
-    <string name="settings_system_patch_details_title">Information om tillägg</string>
-    <string name="settings_system_selected_patches_title">Valda tillägg (%s)</string>
-    <string name="settings_system_patch_options_title">Tilläggsalternativ (%s)</string>
     <string name="settings_system_no_patches_or_options">Inga tillägg eller alternativ har sparats</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Anpassad filväljare</string>

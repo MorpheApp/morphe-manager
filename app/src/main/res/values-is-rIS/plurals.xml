@@ -24,6 +24,26 @@
         <item quantity="one">%s APK skrá</item>
         <item quantity="other">%s APK skrár</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Installuð %d app</item>
+        <item quantity="other">Installuð %d apps</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Endurinstalluð %d app</item>
+        <item quantity="other">Endurinstalluð %d apps</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Afinstalluð %d app</item>
+        <item quantity="other">Afinstalluð %d apps</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Afinstalla %d app?</item>
+        <item quantity="other">Afinstalla %d forrit?</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Sleppt %d app</item>
+        <item quantity="other">Sleppt %d apps</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Fjarlægði %s úreldna flákann frá vistaðri vali</item>
         <item quantity="other">Fjarlægði %s úreldna fláka frá vistaðri vali</item>
@@ -39,5 +59,9 @@
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s falinn app</item>
         <item quantity="other">%s falin app</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s app</item>
+        <item quantity="other">%s apps</item>
     </plurals>
 </resources>

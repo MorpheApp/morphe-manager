@@ -18,7 +18,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import kotlinx.coroutines.launch
@@ -35,9 +34,8 @@ fun GitHubPatSettingsItem(
     val showDialog = rememberSaveable { mutableStateOf(false) }
     val hasPat = currentPat.isNotBlank()
 
-    RichSettingsItem(
+    SettingsItem(
         onClick = { showDialog.value = true },
-        showBorder = true,
         leadingContent = {
             MorpheIcon(icon = Icons.Outlined.VpnKey)
         },
@@ -49,7 +47,7 @@ fun GitHubPatSettingsItem(
         },
         trailingContent = {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 StatusCircleIcon(
@@ -114,7 +112,7 @@ private fun GitHubPatDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             // Info button
             MorpheDialogOutlinedButton(
@@ -143,9 +141,9 @@ private fun GitHubPatDialog(
             // Export include toggle + warning
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
             ) {
-                RichSettingsItem(
+                SettingsItem(
                     onClick = {
                         if (!includePatInExport.value) showIncludeWarning.value = true
                         else includePatInExport.value = false
@@ -184,7 +182,7 @@ private fun GitHubPatDialog(
     if (showInfoDialog.value) {
         MorpheDialogWithLinks(
             title = stringResource(R.string.settings_advanced_github_pat_how_to_get),
-            message = stringResource(R.string.settings_advanced_github_pat_dialog_description),
+            message = stringResource(R.string.settings_advanced_github_pat_dialog_description, "github.com"),
             urlLink = generatePatLink,
             onDismiss = { showInfoDialog.value = false }
         )

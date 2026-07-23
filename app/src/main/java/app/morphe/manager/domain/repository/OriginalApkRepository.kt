@@ -4,6 +4,7 @@ import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.AppDatabase
 import app.morphe.manager.data.room.apps.original.OriginalApk
+import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.FilenameUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -14,7 +15,8 @@ private const val TAG = "Morphe OriginalApkRepository"
 
 class OriginalApkRepository(
     db: AppDatabase,
-    fs: Filesystem
+    fs: Filesystem,
+    private val prefs: PreferencesManager
 ) {
     private val dao = db.originalApkDao()
     // Use permanent directory from Filesystem instead of temporary directory
@@ -27,12 +29,17 @@ class OriginalApkRepository(
     /**
      * Save original APK file for later repatching.
      * Automatically deletes old version if exists.
+     * Returns null and skips persistence when the user has disabled original APK retention.
      */
     suspend fun saveOriginalApk(
         packageName: String,
         version: String,
         sourceFile: File
     ): File? = withContext(Dispatchers.IO) {
+        if (!prefs.saveOriginalApks.get()) {
+            Log.d(TAG, "Original APK retention disabled, skipping save for $packageName")
+            return@withContext null
+        }
         try {
             // Delete old version if exists
             val existing = dao.get(packageName)

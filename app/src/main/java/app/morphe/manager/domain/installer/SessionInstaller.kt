@@ -17,7 +17,6 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Process
 import android.util.Log
-import androidx.core.net.toUri
 import app.morphe.manager.R
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
@@ -27,12 +26,15 @@ import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
 import rikka.sui.Sui
 import java.io.File
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 private const val TAG = "Morphe SessionInstaller"
 private const val ACTION_INSTALL_STATUS = "app.morphe.manager.INSTALL_STATUS"
+private const val ACTION_UNINSTALL_STATUS = "app.morphe.manager.UNINSTALL_STATUS"
 private const val EXTRA_SESSION_ID = "session_id"
+private const val EXTRA_UNINSTALL_REQUEST_ID = "uninstall_request_id"
 
 /**
  * PackageInstaller-based installer.
@@ -47,6 +49,7 @@ private const val EXTRA_SESSION_ID = "session_id"
 class SessionInstaller(private val app: Application) {
 
     private val shizukuInstaller = ShizukuInstaller(app)
+    private val uninstallRequestIds = AtomicInteger()
 
     init {
         val isSui = Sui.init(app.packageName)
@@ -180,8 +183,6 @@ class SessionInstaller(private val app: Application) {
      * Fallback for when [installInternal] throws [SessionDeadException].
      * The caller is responsible for monitoring completion via package broadcasts.
      */
-    @SuppressLint("RequestInstallPackagesPolicy")
-    @Suppress("DEPRECATION")
     fun launchIntentInstall(apkFile: File) {
         launchPackageInstall(apkFile, app.packageName)
     }
@@ -190,12 +191,18 @@ class SessionInstaller(private val app: Application) {
      * Launches the system package installer while asking Android to record Google Play Store
      * as the installer package. This mirrors KingInstaller's non-root install behavior.
      */
-    @SuppressLint("RequestInstallPackagesPolicy")
-    @Suppress("DEPRECATION")
     fun launchPlayStoreInstall(apkFile: File) {
         launchPackageInstall(apkFile, PLAY_STORE_INSTALLER_PACKAGE)
     }
 
+    /**
+     * Fires the legacy [Intent.ACTION_INSTALL_PACKAGE] flow attributing the install to
+     * [installerPackageName]. Used as the fallback path when session-based installs are
+     * unavailable. All install flows are user-initiated from patcher/installer UI, which
+     * satisfies the REQUEST_INSTALL_PACKAGES policy.
+     */
+    @SuppressLint("RequestInstallPackagesPolicy")
+    @Suppress("DEPRECATION")
     private fun launchPackageInstall(apkFile: File, installerPackageName: String) {
         require(apkFile.exists()) { "APK does not exist: ${apkFile.path}" }
         Log.d(TAG, "launchPackageInstall: ${apkFile.name}, installer=$installerPackageName")
@@ -254,31 +261,99 @@ class SessionInstaller(private val app: Application) {
     }
 
     /**
-     * Launches the system uninstall UI for [packageName] and suspends until the user confirms
-     * or dismisses. Throws [UninstallCancelledException] if the user canceled.
+     * Silent uninstall via Shizuku/Sui. Suspends until the uninstall completes.
+     *
+     * @throws UninstallCancelledException if the uninstall was aborted or the coroutine was canceled.
      */
-    @Suppress("DEPRECATION")
+    suspend fun uninstallShizuku(packageName: String): UninstallResult {
+        Log.d(TAG, "uninstallShizuku: $packageName")
+        return try {
+            val result = shizukuInstaller.uninstall(packageName)
+            if (result.status == PackageInstaller.STATUS_SUCCESS) {
+                UninstallResult.Success
+            } else {
+                UninstallResult.Failure(result.message)
+            }
+        } catch (e: ShizukuInstaller.InstallerOperationException) {
+            when (e.status) {
+                PackageInstaller.STATUS_FAILURE_ABORTED -> throw UninstallCancelledException()
+                else -> UninstallResult.Failure(e.message)
+            }
+        } catch (_: TimeoutCancellationException) {
+            UninstallResult.Failure("Timed out waiting for Shizuku uninstall result")
+        }
+    }
+
+    /**
+     * Launches the system uninstall UI for [packageName] and suspends until the user confirms
+     * or dismisses.
+     *
+     * @throws UninstallCancelledException if the user dismissed the uninstall dialog.
+     */
     suspend fun uninstall(packageName: String) = suspendCancellableCoroutine { cont ->
+        val installer = app.packageManager.packageInstaller
+        val requestId = uninstallRequestIds.incrementAndGet()
+        val broadcastIntent = Intent(ACTION_UNINSTALL_STATUS).apply {
+            `package` = app.packageName
+            putExtra(EXTRA_UNINSTALL_REQUEST_ID, requestId)
+        }
+        @Suppress("WrongConstant")
+        val pi = PendingIntent.getBroadcast(
+            app,
+            requestId,
+            broadcastIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+        )
+
         val receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                val pkg = intent.data?.schemeSpecificPart ?: return
-                if (pkg != packageName) return
-                if (intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) return
-                app.unregisterReceiver(this)
-                cont.resume(Unit)
+                if (intent.getIntExtra(EXTRA_UNINSTALL_REQUEST_ID, -1) != requestId) return
+
+                val status = intent.getIntExtra(
+                    PackageInstaller.EXTRA_STATUS,
+                    PackageInstaller.STATUS_FAILURE
+                )
+                val message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE)
+                Log.d(TAG, "Uninstall $packageName status=$status message=$message")
+
+                when (status) {
+                    PackageInstaller.STATUS_SUCCESS -> {
+                        runCatching { app.unregisterReceiver(this) }
+                        cont.resume(Unit)
+                    }
+
+                    PackageInstaller.STATUS_PENDING_USER_ACTION -> {
+                        @Suppress("DEPRECATION", "UnsafeIntentLaunch")
+                        val confirmIntent = if (Build.VERSION.SDK_INT >= 33) {
+                            intent.getParcelableExtra(Intent.EXTRA_INTENT, Intent::class.java)
+                        } else {
+                            intent.getParcelableExtra(Intent.EXTRA_INTENT)
+                        }
+                        @Suppress("UnsafeIntentLaunch")
+                        confirmIntent?.also { it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }
+                            ?.let { app.startActivity(it) }
+                    }
+
+                    PackageInstaller.STATUS_FAILURE_ABORTED -> {
+                        runCatching { app.unregisterReceiver(this) }
+                        cont.resumeWithException(UninstallCancelledException())
+                    }
+
+                    else -> {
+                        runCatching { app.unregisterReceiver(this) }
+                        cont.resumeWithException(Exception(message ?: app.getString(R.string.installer_hint_generic)))
+                    }
+                }
             }
         }
 
-        registerReceiverCompat(
-            receiver,
-            IntentFilter(Intent.ACTION_PACKAGE_REMOVED).apply { addDataScheme("package") }
-        )
+        registerReceiverCompat(receiver, IntentFilter(ACTION_UNINSTALL_STATUS))
 
         cont.invokeOnCancellation {
             runCatching { app.unregisterReceiver(receiver) }
         }
 
-        app.startActivity(buildUninstallIntent(packageName))
+        installer.uninstall(packageName, pi.intentSender)
     }
 
     /**
@@ -286,13 +361,13 @@ class SessionInstaller(private val app: Application) {
      * Works in stealth mode where the package name differs from the canonical one.
      */
     fun shizukuPackageName(): String? {
-        if (Sui.isSui()) return ShizukuInstaller.PACKAGE_NAME
+        if (isSuiMode()) return ShizukuInstaller.PACKAGE_NAME
         return shizukuPermissionInfo()?.packageName
     }
 
     /** Returns true if Shizuku or Sui is installed on the device. */
     fun isShizukuInstalled(): Boolean {
-        if (Sui.isSui()) return true
+        if (isSuiMode()) return true
         // Use permission-based detection to support Shizuku's stealth/hide mode,
         // which clones the APK under a different package name
         return shizukuPermissionInfo() != null
@@ -308,24 +383,63 @@ class SessionInstaller(private val app: Application) {
         app.packageManager.getPermissionInfo(ShizukuProvider.PERMISSION, 0)
     }.getOrNull()
 
+    private fun isSuiMode(): Boolean = runCatching { Sui.isSui() }.getOrDefault(false)
+
     /** Returns the current [InstallerManager.Availability] of Shizuku for the given [target]. */
     fun shizukuAvailability(
+        target: InstallerManager.InstallTarget
+    ): InstallerManager.Availability = shizukuStatus(target).availability
+
+    fun shizukuStatus(
         @Suppress("UNUSED_PARAMETER") target: InstallerManager.InstallTarget
-    ): InstallerManager.Availability {
-        if (Shizuku.isPreV11()) {
-            return InstallerManager.Availability(false, R.string.installer_status_shizuku_unsupported)
-        }
-        val binderReady = runCatching { Shizuku.pingBinder() }.getOrElse { false }
-        if (!binderReady) {
-            return InstallerManager.Availability(false, R.string.installer_status_shizuku_not_running)
-        }
-        val permissionGranted = runCatching {
+    ): ShizukuStatus {
+        val isSui = isSuiMode()
+        val mode = if (isSui) ShizukuMode.Sui else ShizukuMode.Shizuku
+        val packageName = shizukuPackageName()
+        val installed = isSui || packageName != null
+        val supported = installed && !runCatching { Shizuku.isPreV11() }.getOrDefault(true)
+        val running = supported && runCatching { Shizuku.pingBinder() }.getOrElse { false }
+        val permissionGranted = running && runCatching {
             Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED
         }.getOrElse { false }
-        if (!permissionGranted) {
-            return InstallerManager.Availability(false, R.string.installer_status_shizuku_permission)
+
+        val availability = when {
+            !installed -> InstallerManager.Availability(false, R.string.installer_status_shizuku_not_installed)
+            !supported -> InstallerManager.Availability(false, R.string.installer_status_shizuku_unsupported)
+            !running -> InstallerManager.Availability(false, R.string.installer_status_shizuku_not_running)
+            !permissionGranted -> InstallerManager.Availability(false, R.string.installer_status_shizuku_permission)
+            else -> InstallerManager.Availability(true)
         }
-        return InstallerManager.Availability(true)
+
+        return ShizukuStatus(
+            installed = installed,
+            supported = supported,
+            running = running,
+            permissionGranted = permissionGranted,
+            mode = mode,
+            packageName = packageName,
+            availability = availability
+        )
+    }
+
+    /**
+     * Dispatches Shizuku's permission prompt for this app. Returns false when Shizuku is
+     * missing, unsupported, not running, permission is already granted, or the IPC call failed.
+     *
+     * The prompt result is observed by callers via [shizukuStatus], so no
+     * [Shizuku.OnRequestPermissionResultListener] is registered here.
+     */
+    fun requestShizukuPermission(): Boolean {
+        val status = shizukuStatus(InstallerManager.InstallTarget.PATCHER)
+        if (!status.installed || !status.supported || !status.running || status.permissionGranted) {
+            return false
+        }
+        return runCatching {
+            Shizuku.requestPermission(SHIZUKU_PERMISSION_REQUEST_CODE)
+            true
+        }.onFailure { error ->
+            Log.w(TAG, "Failed to request Shizuku permission", error)
+        }.getOrDefault(false)
     }
 
     /** Launches the Shizuku app. Returns false if it is not installed. */
@@ -351,19 +465,35 @@ class SessionInstaller(private val app: Application) {
         }
     }
 
-    /** Builds an [Intent.ACTION_UNINSTALL_PACKAGE] intent for [packageName]. */
-    @Suppress("DEPRECATION")
-    private fun buildUninstallIntent(packageName: String) =
-        Intent(Intent.ACTION_UNINSTALL_PACKAGE).apply {
-            data = "package:$packageName".toUri()
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
+    data class ShizukuStatus(
+        val installed: Boolean,
+        val supported: Boolean,
+        val running: Boolean,
+        val permissionGranted: Boolean,
+        val mode: ShizukuMode,
+        val packageName: String?,
+        val availability: InstallerManager.Availability
+    )
+
+    enum class ShizukuMode {
+        Shizuku,
+        Sui
+    }
+
+    companion object {
+        private const val SHIZUKU_PERMISSION_REQUEST_CODE = 9162
+    }
 }
 
 sealed class InstallResult {
     data object Success : InstallResult()
     data class Conflict(val message: String?) : InstallResult()
     data class Failure(val message: String?) : InstallResult()
+}
+
+sealed class UninstallResult {
+    data object Success : UninstallResult()
+    data class Failure(val message: String?) : UninstallResult()
 }
 
 /** Thrown when the user dismissed the installation dialog or the installation was aborted. */

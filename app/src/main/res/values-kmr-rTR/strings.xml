@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Nûvekirina Morphe heye</string>
     <string name="home_update_available_subtitle">Nûvekirin amade ye ku were sazkirin</string>
+    <string name="home_blocked_source_title">Çavkaniya pelê ya blokkirî hat dîtin</string>
+    <string name="home_blocked_source_subtitle">Bixin da ku binêrin û bênin serbest</string>
+    <string name="home_metadata_errors_title">Hinek çavkaniyên pelê ne berdest in</string>
+    <string name="home_metadata_errors_subtitle">Bixin da ku çavkaniyan binêrin</string>
+    <string name="home_metered_skipped_title">Nûvekirin li ser data mobîlê hatin sekinin</string>
+    <string name="home_metered_skipped_subtitle">Bikîne da ku nûvekirinên li ser data mobîl destûr bidî</string>
     <string name="home_update_error">Nûvekirin ji destûr ve çû</string>
-    <string name="home_update_error_subtitle">Giştîrabûnê xwe kontrol bike û dîsa hewildan bike</string>
+    <string name="home_update_error_subtitle">Di nûkirina çavkaniyan de tiştek çewt kir</string>
     <string name="home_update_skipped_metered">Nûvekirin çêhatin</string>
     <string name="home_update_skipped_metered_subtitle">Daneya mobîl aktîv e</string>
     <string name="home_updating_sources">Kanalkan sazkirinê…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Tu din li gor \'%s\' hene</string>
     <string name="home_all_apps_hidden_title">Hemû serlêdanan veşartin</string>
     <string name="home_all_apps_hidden_subtitle">Ez hemû serlêdanan ji ekranê pêşîn veşartim</string>
+    <string name="home_category_add">Kategoriyê zêde bike</string>
+    <string name="home_category_all_apps">Hemû sepan</string>
+    <string name="home_category_custom">Sazkirî</string>
+    <string name="home_category_uncategorized">Bêkategorî</string>
+    <string name="home_category_new_title">Kategoriya nû</string>
+    <string name="home_category_rename_title">Kategoriya biguhezîne</string>
+    <string name="home_category_name">Navê kategoriyê</string>
+    <string name="home_category_move_to">Biguhezîne kategoriyê</string>
+    <string name="home_category_move_selected_title">Biguhezîne sepanên hilbijartî</string>
+    <string name="home_category_delete_confirm_title">Kategoriya terikîne</string>
+    <string name="home_category_delete_confirm_message">Kategoriya &lt;b&gt;%1$s&lt;/b&gt; terikîne? Sepan di nav de vegerin &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Çalakiyên ji bo vê kategoriyê nayên destêrkirin</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Kudu ezîtekora kodê ji xwerêzê we yê çawa îdeal bike?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Daxwazên sepanê yên ceribandinê yên hewce ne heger hebin</string>
     <string name="sources_management_already_exists">Evîn pêştirîye, berê zêdekirine.</string>
     <string name="sources_management_invalid_url">URL-a çavkaniyê nebaş e. Ji kerema xwe navnîşanê kontrol bikin û dîsa biceribîn</string>
+    <string name="sources_management_blocked">Çavkaniya vê pelikê blok kirî ye û nikare were zêdekirin</string>
+    <string name="sources_management_source_blocked_badge">Blok kirî</string>
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
     <string name="sources_management_metadata_unavailable_hint">Pelgeya metadateya dûr nepehwîze. Lê dîsa jî nûkirina bi pakêta ku hatiye saz kirin dixebite, lê nûvekirina otomatîkî ji bo vê çavkaniyê nehate çalak kirin</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Pakêta paşîn nikaribû were dakêşîn. URL-a çavkaniyê dikare ne rast be an pelge ne heye</string>
@@ -284,6 +304,7 @@ Herêma derveyî (qutkirî): dikare ji aliyê maskeya launcher'ê ve were qutkir
     <string name="header_creator_guide_positioning_body">Ji bo cîkirin û mezînkirina wêneya we rasterast di pêşdîtinê de tevgerên dîtin û drag bikar bîne. Rêberên snap-ê dema ku wêne nêzî navendê dibe xuya dibin. Hûn dikarin her wiha ji slidera jorîn jî bikar bînin.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Ma hûn pê ewaz in ku ev sepan paqij bikin?</string>
+    <string name="batch_uninstall_confirm_body">Serîlêdanên ku hatine hilbijartîn êdî ji cîhazê we yê nehere dê bên neqewirandin.</string>
     <string name="home_app_info_remove_app_warning">Ev dê bi dawîbûna domdar:</string>
     <string name="home_app_info_delete_item_database">Qeyda databazeyê</string>
     <string name="home_app_info_delete_item_patched_apk">APK fîla xelatandî</string>
@@ -306,16 +327,18 @@ Herêma derveyî (qutkirî): dikare ji aliyê maskeya launcher'ê ve were qutkir
     <string name="home_app_info_app_deleted_warning">App hate laşkirin</string>
     <string name="home_app_info_app_deleted_description">Epp li derve ji Morphe hate laşkirin. Serpêş pêlavînê da serê ku serê bi sist ki.</string>
     <string name="home_app_info_apk_size">Mezinahiya APK\'yê</string>
+    <string name="home_app_info_cpu_arch">mîmarîya CPU</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Tîrek xwestisê wî de qewımîr APK tê serê îzayê we ev pêwist be pêşbaziyê biqewmê pêş de bîtin da xestes numberê berıkirînda Android bi usayiastî bimezânê</string>
     <string name="root_gmscore_excluded">Pişta GmsCore di moda root de ji holê derdike</string>
-    <string name="root_pre_patch_installer_title">Destura îstikrarê bejin</string>
-    <string name="root_pre_patch_installer_description">Cihê we cih dîboz ande. çawa ji îstikrarê; bejin</string>
-    <string name="root_pre_patch_installer_mount_title">Serkirê serî</string>
-    <string name="root_pre_patch_installer_mount_description">APK-a serêkut dikêr serî lê APK-ya stokê. Pêdivî bi GmsCore nîn e</string>
-    <string name="root_pre_patch_installer_standard_title">Îstikrarê Standart</string>
-    <string name="root_pre_patch_installer_standard_description">Dê ew qappekê vekêrî bi piştgiriya GmsCore\'yê da dîsa vekirin. Dibe ku qerziqê heta qeyikî vekirin bidin hilbijartin</string>
-    <string name="root_pre_patch_installer_hint">Destura îstikrarê rê van hûn rê ew be, dê neyê qêçîn pêştirî îstikrarê</string>
+    <string name="root_pre_patch_installer_title">Modê pelikê hilbijêre</string>
+    <string name="root_pre_patch_installer_description">Cihaza te gihîştina root heye. Hilbijêre ku ev serîlêdan ji bo çîna root were pelkirin an sazkirina standard</string>
+    <string name="root_pre_patch_installer_mount_title">Moda çîna root</string>
+    <string name="root_pre_patch_installer_mount_description">Pelikên ji bo çîna root, paşê APKê li ser serîlêdana stokê yê hevdîtinî çêbike. Pêdivî bi GmsCore nîn e</string>
+    <string name="root_mount_module_unmount_warning">Heke KernelSU an APatch bikarî, rakirina modula veyaşartina moduleya veşartîna sepanên bi riya riya root hatine saz kirin hewce dikare asteng bike. Wekî din, sepanê yê orjînal dê her dem bikare bixebite, lê Morphe ew wekî veşartî nîşan dide</string>
+    <string name="root_pre_patch_installer_standard_title">Moda sazkirina standard</string>
+    <string name="root_pre_patch_installer_standard_description">Pêçekan wekî APK\'yeke normal bi piştgiriya GmsCore. Rêgeziya sazkirina we piştî pêçekirinê tê bikar anîn</string>
+    <string name="root_pre_patch_installer_hint">Ev moda pêçekirinê ji Rêgeziya > Pergal > Sazkirinê cûda ye û paşê de nikare bê guhertin</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Xetalî bi mêjiyê kopî kirin</string>
     <string name="patcher_error_log">Log xistina</string>
@@ -415,6 +438,8 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="patcher_process_exit_message">Prosesa guheztinê bi kodê %s xilas bû.</string>
     <string name="install_app_success">Bi ser ketin</string>
     <string name="install_app_fail">Serketina kuştina sepanê: %s</string>
+    <string name="uninstall_app_fail">Serêxistina rakirina sepanê têk çû: %s</string>
+    <string name="uninstall_timeout">Rakirin serbest maye</string>
     <string name="save_apk_success">APK-yê hatiye parastin</string>
     <string name="saved_app_export_failed">Serketina paşerojê ya sepanê</string>
     <string name="saved_app_removed_toast">Hateyên parastinê hatin jêbirin</string>
@@ -460,10 +485,13 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="settings_appearance_parallax_effect_description">Serdestinê pêşbazinê de girtinê tê guherandin de hîrdikê alik bê yê ew zibu âniye</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
+    <string name="settings_appearance_theme_mode">Modê tema</string>
     <string name="settings_appearance_system">Sistem</string>
     <string name="settings_appearance_light">Ronahî</string>
     <string name="settings_appearance_dark">Tirş</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Tekrêng</string>
+    <string name="settings_appearance_color_style">Şêwey reng</string>
     <string name="settings_appearance_accent_color">Rengê serdest</string>
     <string name="settings_appearance_pure_black">Rewşê veşer</string>
     <string name="settings_appearance_pure_black_description">Bêjeya paşnavê reş ê rastîn bikar bîne</string>
@@ -471,11 +499,16 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="settings_appearance_app_language">Zimanê sepanê</string>
     <string name="settings_appearance_app_language_current">Zimana niha</string>
     <string name="settings_appearance_translations_info_title">Wergerandin ji bo hin zimanên kêmtir an jî ne tamkirin</string>
-    <string name="settings_appearance_translations_info_text">Ji bo wergerandina zimanên nû an jî pêşxistina wergerandinên hebin, serdana %s bikin</string>
+    <string name="settings_appearance_translations_info_text">"Zî de nava zimanên nû wergerandin an pêşkeftina wergerên heyî, biçîn
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Mîna malê</string>
     <string name="settings_appearance_greeting_phrases">Frazey şahê</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Nîşanekê bi xêrhatinê li ser mîna malê nîşan bide</string>
+    <string name="settings_appearance_app_grouping">Komkirina sepanan</string>
+    <string name="settings_appearance_app_grouping_description">Nîşanekê bike ku sepanan bi çavkanî an kategoriyên te kom bike, hilbijarkirina xwe jî dema ku neçalak e parastin</string>
+    <string name="settings_appearance_sort_button">Dugmeya rêberkirinê</string>
+    <string name="settings_appearance_sort_button_description">Dugmeya rêberkirinê li ser mîhengê nîşan bide</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Îkonê sepanê</string>
     <string name="settings_appearance_app_icon_default">Serekî</string>
@@ -489,6 +522,7 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="settings_appearance_app_icon_change_dialog_confirm">Guhêrîna îkonê</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Nûvekirin</string>
+    <string name="settings_advanced_patcher">Patchker</string>
     <string name="settings_advanced_updates_use_prereleases">Nûvekirinên berî berhemkirinê</string>
     <string name="settings_advanced_updates_use_prereleases_description">Têkevinî pêşî li gorî nûvekirinên nû yên Morphe. Çavkaniyan li gorî nûvekirinê hilbijêrin</string>
     <string name="settings_advanced_updates_allow_metered">Nûvekirinên daneya mobîl</string>
@@ -538,7 +572,8 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="settings_advanced_github_pat_configured">Token sazkirin</string>
     <string name="settings_advanced_github_pat_how_to_get">Meriv token çawa bidestxistin</string>
     <string name="settings_advanced_github_pat_dialog_title">Token Personal Access ya GitHub saz kîn</string>
-    <string name="settings_advanced_github_pat_dialog_description">Ji bo ku pêlavê rojnameyên unîwersal îzabethên ji bo derbarê zafî nxwistinê be, Token API ji bo pêla bi neyî pêlavan zafî pêla bi pêlav betonê wê pijînire. Çęs ma rakişîne a sezne zifî ma toke.</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Ji bo ku bikaribe daxwazên hilbigire wekî çavkaniyên derve, tokena gihîştina kesane ya GitHub'ê têne çêkirin. Tokenek bi scope public_repo li
+%s çêbikin"</string>
     <string name="settings_advanced_github_pat_export_include_label">Di qeyrek sazî de zêde bike</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Ev PAT bi danan Morphe sazkirina xwe vekirî</string>
     <string name="settings_advanced_github_pat_export_warning">PAT xwe veqêtin neyê. Ger ew di qeyrek sazî de zêde kirin, wê qeyrê têr çaveke rê bibe ji ber ew token hegirdê</string>
@@ -623,12 +658,13 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Biçikê Shorts’ê ji wîjeyê derxîne</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Saçik</string>
+    <string name="installer_settings_title">Saşkirina standard</string>
     <string name="installer_title">Sazkerê hilbijêre</string>
     <string name="installer_internal_description">Sazkera pakketa Android’ê bikar bîne</string>
     <string name="installer_play_store_description">Seta pêşnişazê sîstemê bikar tîne û Google Play Store wekî çavkaniya saetkirinê destnîşîn dike</string>
     <string name="installer_root_play_store_description">Bi rihên root ve bêdeng sazkirin û çavkaniya sazkirinê wekî Google Play Store destnîşan bike</string>
-    <string name="installer_auto_saved_name">Ferqendera ku bi rûsyê ve çêkiriye</string>
-    <string name="installer_auto_saved_description">APK-ya dirûtîkirî ser navberê serdana sepanê ava dike</string>
+    <string name="installer_auto_saved_name">Rihiya root</string>
+    <string name="installer_auto_saved_description">Sepanên ku di moda rihiya root de hatine pêçekirin, rihiya wan tê kirin. APK\'yên pêçekirî yên standard ji sazkirinê dinarê hene</string>
     <string name="installer_shizuku_description">Sazkirina bêdeng bi Shizuku an Sui’yê</string>
     <string name="installer_shizuku_play_store_description">Bi rihên Shizuku an Sui ve bêdeng sazkirin û çavkaniya sazkirinê wekî Google Play Store destnîşan bike</string>
     <string name="installer_option_none">Tu vegirtin</string>
@@ -637,9 +673,10 @@ Qasîyên wêneyan divê wiha bin:
     <string name="installer_status_not_supported">Ji bo ev çalakîyê piştgirî nîne</string>
     <string name="installer_status_shizuku_not_installed">Ji bo vê vebijarkê Shizuku an Sui saz bike</string>
     <string name="installer_status_shizuku_not_running">Shizuku anîye yê an Suiyê dest pê bike û dîsa hewil bide</string>
-    <string name="installer_status_shizuku_permission">Ji nav Şizukuyê rêxistinê bidê Morpheyê</string>
+    <string name="installer_status_shizuku_permission">Destûrê da Morphe ji bo sepina Shizuku</string>
     <string name="installer_mount_warning_install">Îstalatorek sereke we li îstalatorek qutiyelê hatiye danîn. Ev sepan bi qutiyê nehate saz kirin</string>
     <string name="mount_version_mismatch_message">Versiyona sepanê orîjînal (%2$s) bi versiyona sepanê têra sipêde nebaxe (%1$s). Versiyona orîjînal a pêşîn saz bike, paştrê dîsa hewil bide</string>
+    <string name="mount_stock_restore_failed_message">Android\'ê APK\'ya orjînal a ku hatibû tomarkirin qebûl nekir. Vebijêrka testê ya ku pêşî tê saz kirin saz bike, hewce dîtin</string>
     <string name="installer_status_shizuku_unsupported">Versiyona sazkirî ya Şizuku piştgirî nadê</string>
     <string name="installer_action_open_shizuku">Veşêre Shizuku</string>
     <string name="installer_hint_generic">Îstikrar kirin jêvir kirin. Dibe, dîsa hewil bide an li îstalatorek din zivirînê hebin</string>
@@ -652,21 +689,48 @@ Qasîyên wêneyan divê wiha bin:
     <string name="installer_unavailable_shizuku_hint">Ew bigihine Şizuku xela, be ew ragihina ito sepanê dest pê ke</string>
     <string name="installer_use_standard">Standard bikarîne</string>
     <string name="installer_play_store_warning_title">Sa zkirin wekî Play Store?</string>
-    <string name="installer_play_store_warning_message">Aplikasyona guhertoyî wekî ku ji Google Play Store hatî sazkirin tomarkirin dê were. Ewîde karûbarên mîna Android Auto wê wekî aplikasyonek Play Store nas dikin</string>
+    <string name="installer_play_store_warning_message">Aplikasyona hatî guhartin wekî ku ji Google Play Store hatî saz kirin, wê were tomarkirin. Ew dikare alîkariya xizmetên wekî Android Auto bike ku wê wekî aplikasyonek Play Store nas bike, lê ne ji bo her aplikasyon an cîhazê garantî ye. Çalakbûna dikare li gorî guhertoya Android, ROM, marqeya cîhazê û kontrolên taybet ên aplikasyonê cûda be.</string>
     <string name="installer_play_store_warning_risk">Dibe ku Play Store nûvekirinên ji bo aplikasyona guhertoyî pêşkêş bike. Sa zkirina wê nûvekirinê dê APK-ya guhertoyî bi guhertoya orjînal ferz bike û guhertoyînan rake. Ger ji we re nûvekirin were pirsîn, li ser menuya sê nuqtan li ser rûpelê yê Play Store ya aplikasyonê bikirin û \"Veberhêrkirina nûvekirinan\" hilbijêrin</string>
     <string name="installer_play_store_warning_continue">Min fêhm kir, bidomînin</string>
+    <string name="installer_play_store_mode">Sazkirin wek Play Store</string>
+    <string name="installer_play_store_mode_description">Play Store wekî çavkaniya sazkirinê ji bo vê rêbazê qeyd bike</string>
     <string name="settings_prompt_installer_on_install">Dîyaloga hilbijartina sazkirî</string>
     <string name="settings_prompt_installer_on_install_description">Hîşyarî her carî dema ku app’a girêtî hatî sazkirin, dîyaloga hilbijartina sazkirî nîşan bide</string>
     <string name="settings_auto_install_with_shizuku">Têxînekî otomatîkî piştî paqijkirinê</string>
     <string name="settings_auto_install_with_shizuku_description">Bi hesînî APK-ya paqijkirî piştî qedandina paqijkirinê saz dike</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" aktîv e - sazkirina otomatîkî dê derbas bibe</string>
+    <string name="settings_auto_uninstall_with_shizuku">Lêgerîna otomatîkî li ser derengî</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Dema ku bi Shizuku saz kirin, eger Android rapor bide ku kêşekê qebûl kir, berê aplikasyona heyî ya ku heye rake. Ew dikare daneyên aplikasyonê jê der bike.</string>
+    <string name="settings_auto_uninstall_warning_title">Destûrê dayî lêgerîna otomatîkî?</string>
+    <string name="settings_auto_uninstall_warning_message">Eger Android di dema saz kirina otomatîkî ya Shizuku de rapor bide ku kêşek heye, Morphe dê berî saz kirina APKya guhartî aplikasyona heyî rake.</string>
+    <string name="settings_auto_uninstall_warning_risk">Ew dikare daneyên aplikasyonê jê bike. Ger APK ya guhartî piştî rakirina sazkirinê têk bibe, dibe ku aplikasyona berê jû dest nebe.</string>
+    <string name="installer_shizuku_status_action">Statusa Shizuku kontrol bike</string>
+    <string name="installer_shizuku_status_title">Statusa Shizuku</string>
+    <string name="installer_shizuku_status_ready">Amade</string>
+    <string name="installer_shizuku_status_issue">Xweşiya fêrkirin hewce ye</string>
+    <string name="installer_shizuku_status_supported">Piştgirî kirin</string>
+    <string name="installer_shizuku_status_running">Dixebite</string>
+    <string name="installer_shizuku_status_permission">Destûr</string>
+    <string name="installer_shizuku_status_mode">Mod</string>
+    <string name="installer_shizuku_status_provider">Pêşkêşker</string>
+    <string name="installer_shizuku_status_granted">Hatî danîn</string>
+    <string name="installer_shizuku_status_missing">Windabûyî</string>
+    <string name="installer_shizuku_request_permission">Daxwaza destûrê</string>
+    <string name="installer_shizuku_install_fail">Sazkirina Shizuku têk çû: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Sazkirina Shizuku têk çû: %1$s
+
+Detay: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Destûra Shizuku winda bûye. Destûrê da Morphe û dîsa bicûrbîne.</string>
+    <string name="installer_shizuku_error_timeout">Shizuku encûmek saz kirinê ne xist. Misoger bike ku ew hîn dixebite û dîsa bicûrbîne.</string>
+    <string name="installer_shizuku_error_downgrade">Android vê blok kir ji ber ku ewê aplikasyona hatî saz kirin kêm bike</string>
+    <string name="installer_shizuku_error_signature">Android vê blok kir ji ber ku aplikasyona hatî saz kirin îmzayek cûda heye</string>
+    <string name="installer_shizuku_error_invalid_apk">Android nikaribû vê APKê bixwîne</string>
+    <string name="installer_shizuku_error_user_profile">Android vê ji bo profîla xebatê an bikarhênerê heyî blok kir</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Serûşê bateriyê</string>
     <string name="settings_system_battery_optimization_description">Dema ku app hatî biçikînîn, sazkirîn bidomîne</string>
-    <string name="settings_system_performance">Performans</string>
+    <string name="settings_system_background">Binêre</string>
     <string name="settings_system_process_runtime">Rayedîna pêroje</string>
     <string name="settings_system_process_runtime_description">Qeyik kirina cuda ji bo aramiya çêtirîn birêve bibe</string>
-    <string name="settings_system_process_runtime_memory_limit">Sînorê bîra</string>
     <string name="settings_system_process_runtime_memory_limit_description">Sînorên bilindtir her çûk qeyik kirinê li ser cîhazan qewimîn bike</string>
     <string name="settings_system_process_runtime_enable">Rayekirina pêroje</string>
     <string name="settings_system_memory_limit_subtitle">Bira ku ji bo rayekirinê heye</string>
@@ -674,6 +738,19 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_process_runtime_enabled_description">Sînor %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Li konfigurasyonê biklik</string>
     <string name="settings_system_process_runtime_description_not_available">Ev taybetmendî Android 11 yan zêdetir tê hewîn</string>
+    <string name="settings_system_patcher_completion_sound">Dengê qedandina</string>
+    <string name="settings_system_patcher_completion_sound_description">Dengê taybet lêdanê ji bo serkeftinê an têkçûnê dema qedandina patchkirinê</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Agahîyan</string>
+    <string name="settings_system_notifications_description">Konfîgurekirina agahiyên paşnavê û dengên qedandina</string>
+    <string name="settings_system_notifications_success_sound">Dengê serketinê</string>
+    <string name="settings_system_notifications_error_sound">Dengê xeletê</string>
+    <string name="settings_system_notifications_sound_default">Bixweber</string>
+    <string name="settings_system_notifications_sound_picker_title">Çavkaniya dengê hilbijêre</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Dengên sîstemê</string>
+    <string name="settings_system_notifications_sound_pick_file">Hilbijêre ji pelan</string>
+    <string name="settings_system_notifications_sound_reset">Vegerîne vexwêber</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Toneyek hilbijêre</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import &amp; export</string>
     <string name="settings_system_keystore">Keystore</string>
@@ -719,12 +796,37 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_apks_deleted_all">APK-yê bi serketî têne terikîn.</string>
     <string name="settings_system_apks_export_zip_success">APK-yê hilbijartî derxîne</string>
     <string name="settings_system_apks_export_zip_failed">Derxistina APK-yên hilbijartî têk çû</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Rêveberiya hêsînê</string>
+    <string name="settings_system_storage_management_description">Lêkolîna karanîna dîskê û paqijkirina pelên neyînî</string>
+    <string name="settings_system_storage_keystore_title">Keystore-a îmzeyê</string>
+    <string name="settings_system_storage_app_data_title">Daneyên sepanê</string>
+    <string name="settings_system_storage_patch_bundles_title">Pêkvekirinên paçê</string>
+    <string name="settings_system_storage_http_cache_title">Kêşeya torê</string>
+    <string name="settings_system_storage_http_cache_description">Bersivên HTTP-ê têne hêsînkirin da ku nûvekirin bileztir bibin</string>
+    <string name="settings_system_storage_installer_cache_title">Kêşeya sazkerê yê derve</string>
+    <string name="settings_system_storage_installer_cache_description">Pelên APK-yê têne radestkirin ji sazkerên serîşîn</string>
+    <string name="settings_system_storage_patcher_workspace_title">Cihê karê yê guhêrker</string>
+    <string name="settings_system_storage_patcher_workspace_description">Pelên demê yê guhêrkerê û daneyê qirêj ên têrkirî</string>
+    <string name="settings_system_storage_temporary_title">Pelên demkî</string>
+    <string name="settings_system_storage_temporary_description">Pelên kar ên di dema guhêrkirinê de hatine çêkirin</string>
+    <string name="settings_system_storage_clear_all">Paqijkirina hemû kêşeyan</string>
+    <string name="settings_system_storage_clear_all_description">Hemû cîhê kêşeyê yê ku tê dîtinê tê paqijkirin</string>
+    <string name="settings_system_storage_clear_all_confirm">Ev kêşeyên bersivên torê, pelên sazkerê ên hatine sahnekirin, û pelên demkî paqijkirine. Pelên APK-yê orjînal û guhêrkirî têne girtin</string>
+    <string name="settings_system_storage_cleared">%s azad kir</string>
+    <string name="settings_system_storage_nothing_to_clear">Tu tiştek tune ku were paqijkirin</string>
+    <string name="settings_system_storage_open_app_info_title">Veke hilanîna depoya serîşîn a Android</string>
+    <string name="settings_system_storage_open_app_info_description">Rêvebirin an paqijkirina hemû daneyê Morphe ji riya mîhengên sîstemê</string>
+    <string name="settings_system_save_original_apks_title">APK-yên orjînal bişopîne</string>
+    <string name="settings_system_save_original_apks_description">APK-ya pêş-patchê şêwirîne da ku li ser dubarekirinê bêyî hilbijartina dîsa pelê bikaribe</string>
+    <string name="settings_system_save_patched_apks_title">APK-yên patchkirî bişopîne</string>
+    <string name="settings_system_save_patched_apks_description">Nêrînek ji APK-ya patchkirî şêwirîne bo hinara derxistina paşê an veqetandina ji rêvebêr</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK\'yên veşartin</string>
     <string name="settings_system_patched_apks_description">Pelên programa girêtî yên tomarî birêve bibe</string>
     <string name="settings_system_patched_apks_empty">Heta niha APK\'yên veşartin ne serwerastin</string>
     <string name="settings_system_patched_apks_delete_title">APK\'yên veşartin bibe serwerast bike?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Ma tu pir başî ku APK\'yên veşartin ên serwerastin ji bo %s bibe serwerast bike?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Maqlû binî ku hewce ye APK-ya paqijkirî ya &lt;b&gt;%s&lt;/b&gt; were terkirin?</string>
     <string name="settings_system_patched_apks_deleted">APK\'yên veşartin bi serketinê serwerastin</string>
     <string name="settings_system_patched_apks_delete_all_title">Hemû APK-yên hatine guhertin sîl kirin?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -733,7 +835,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_original_apks_empty">APK\'yên orjînal ên serwerastin tune</string>
     <string name="settings_system_original_apks_deleted">APK\'yên orjînal bi serketinê serwerastin</string>
     <string name="settings_system_original_apks_delete_title">APK\'yên orjînal bibe serwerast bike?</string>
-    <string name="settings_system_original_apks_delete_confirm">APK orîjînal ji bo %s difilîn? Hûn dê bêyî pejdanîns pek APKa nû nesazîtin, nikaribin vê sepanê biqewmê</string>
+    <string name="settings_system_original_apks_delete_confirm">APK-ya serê ya &lt;b&gt;%s&lt;/b&gt; were terkirin? Heke APK-ya nû nedin, nikaribî dîsa paqijkirî bike</string>
     <string name="settings_system_original_apks_delete_all_title">Hemû APK-yên orjînal sîl kirin?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Bijartinê qelvaton</string>
@@ -748,15 +850,15 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_system_patch_selection_source_format">Kanî #%s</string>
     <string name="settings_system_patch_selection_will_delete">Ev ê jêbirin:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ev hemû bejna sifira jibo baweriyan bejinê</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ev hemû bejna sifira jibo %s hera gûlî gûleyî bejinê</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Ev ê ji pêşbazê ve bijarteyên pêlavînê yên ku hatine qeyd kirin ji bo %1$s di kanê #%2$s de silave bike.</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Evê ê hemû hilbijartinên paqijkirinê yên ku hatine tomarkirin ji bo &lt;b&gt;%s&lt;/b&gt; li ser hemû çavkaniyan bi temamî were tarandin.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Evê ê hemû hilbijartinên paqijkirinê yên ku hatine tomarkirin ji bo &lt;b&gt;%1$s&lt;/b&gt; di &lt;b&gt;%2$s&lt;/b&gt; de bi temamî were tarandin.</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Evê ê hemû hilbijartinên paqijkirinê yên ku hatine tomarkirin ji bo paketên hilbijartî bi temamî were tarandin.</string>
     <string name="settings_system_export_source_data_fail">Serûşiya dane seyarê pêş nebûne</string>
     <string name="settings_system_export_source_data_success">Dane seyarê serketine</string>
     <string name="settings_system_import_source_data_fail">Serûşiya dane hez kiriye</string>
     <string name="settings_system_import_source_data_success">Dane seyarê serketine</string>
-    <string name="settings_system_patch_details_title">Têgiya îstikrarê</string>
-    <string name="settings_system_selected_patches_title">Patchên betal kirin (%s)</string>
-    <string name="settings_system_patch_options_title">Ji bo Patch-an (%s)</string>
+    <string name="settings_system_selected_patches_section">Patchên hilbijartî</string>
+    <string name="settings_system_patch_options_section">Vêjeyên Patchê</string>
     <string name="settings_system_no_patches_or_options">Ke tu bejna yâ bejna diteya ne</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Hilbijêrkê pelan yê xwerû</string>

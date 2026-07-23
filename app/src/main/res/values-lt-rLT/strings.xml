@@ -19,7 +19,6 @@
     <string name="home_update_available">Morphe atnaujinimas prieinamas</string>
     <string name="home_update_available_subtitle">Nauja versija paruošta įdiegti</string>
     <string name="home_update_error">Nepavyko atnaujinti</string>
-    <string name="home_update_error_subtitle">Patikrinkite savo interneto ryšį ir bandykite dar kartą</string>
     <string name="home_update_skipped_metered">Atnaujinimai praleisti</string>
     <string name="home_update_skipped_metered_subtitle">Mobilieji duomenys yra įjungti</string>
     <string name="home_updating_sources">Atnaujinami šaltiniai…</string>
@@ -290,13 +289,6 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Norint naudoti root režimą, prieš diegiant pataisą įrenginyje turi būti įdiegtas originalus APK</string>
     <string name="root_gmscore_excluded">GmsCore palaikymo pataisa neįtraukta į root režimą</string>
-    <string name="root_pre_patch_installer_title">Pasirinkite diegimo būdą</string>
-    <string name="root_pre_patch_installer_description">Jūsų įrenginys turi root prieigą. Pasirinkite, kaip norite įdiegti pataisytą programą</string>
-    <string name="root_pre_patch_installer_mount_description">Montuoja pataisyta APK ant originalios programos. Nereikia GmsCore</string>
-    <string name="root_pre_patch_installer_standard_title">Standartinis įdiegimas</string>
-    <string name="root_pre_patch_installer_standard_description">Instaliuojamas kaip atskira programa su GmsCore palaikymu. Po pataisymo galima pasirinkti diegiklį.
-</string>
-    <string name="root_pre_patch_installer_hint">Instaliacijos metodas nustato, kurie pataisymai yra pridėti ir negalės būti pakeisti po pataisymo</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Klaida nukopijuota į iškarpinę</string>
     <string name="patcher_error_log">Klaidų žurnalas</string>
@@ -435,7 +427,6 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="settings_appearance_app_language">Programėlės kalba</string>
     <string name="settings_appearance_app_language_current">Dabartinė kalba</string>
     <string name="settings_appearance_translations_info_title">Kai kurių kalbų vertimų gali trūkti arba jie gali būti nepilni</string>
-    <string name="settings_appearance_translations_info_text">Jei norite išversti naujas kalbas arba patobulinti egzistuojančius vertimus, apsilankykite %s</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Pagrindinis ekranas</string>
     <string name="settings_appearance_greeting_phrases">Pasveikinimo frazės</string>
@@ -519,8 +510,10 @@ Pasirinktinai, nuoroda gali turėti pranešimo piktogramą viename iš išvardin
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <!-- Settings - System Tab - Installer Section -->
     <!-- Settings - System Tab - Performance Section -->
+    <!-- Settings - System Tab - Notifications Section -->
     <!-- Settings - System Tab - Import and Export Section -->
     <!-- Settings - System Tab - Files & Storage Section -->
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->

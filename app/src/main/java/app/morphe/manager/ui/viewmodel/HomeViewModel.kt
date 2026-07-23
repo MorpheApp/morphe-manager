@@ -28,11 +28,12 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.bundles.RemotePatchBundle
+import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.manager.HomeAppButtonPreferences
-import app.morphe.manager.domain.manager.HomeAppSortMode
-import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.installer.UninstallCancelledException
+import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.network.api.MorpheAPI
@@ -159,13 +160,49 @@ data class InstalledAppPickerItem(
 data class HomeAppState(
     val visible: List<HomeAppItem>,
     val hidden: List<HomeAppItem>,
-    val sortMode: HomeAppSortMode
+    val sortMode: HomeAppSortMode,
+    val categoryState: HomeAppCategoryState,
+    val categoryViewMode: HomeAppCategoryViewMode,
+    val showCategoryViewSwitcher: Boolean,
+    val sourceGroups: List<HomeAppSourceGroup>
 )
+
+/**
+ * Apps grouped by the enabled patch source that declares them. A package can appear in
+ * multiple source groups when multiple sources declare compatible patches for it.
+ *
+ * The default (Morphe) source is treated specially: it can never be collapsed by the user
+ * ([collapsible] is false and [isDefault] is true), so its group always stays open.
+ */
+data class HomeAppSourceGroup(
+    val uid: Int,
+    val name: String,
+    val packageNames: Set<String>,
+    val packageOrder: List<String>,
+    val collapsed: Boolean,
+    val avatarUrl: String?,
+    val fallbackAvatarUrl: String?
+) {
+    val isDefault: Boolean get() = uid == DEFAULT_SOURCE_UID
+    val collapsible: Boolean get() = !isDefault
+}
 
 private data class HomePrefs(
     val hiddenPackages: Set<String>,
     val customOrder: List<String>,
-    val sortMode: HomeAppSortMode
+    val sourceOrders: Map<Int, List<String>>,
+    val sortMode: HomeAppSortMode,
+    val categoryState: HomeAppCategoryState,
+    val categoryViewMode: HomeAppCategoryViewMode,
+    val showCategoryViewSwitcher: Boolean,
+    val expandedSourceGroups: Set<Int>
+)
+
+private data class HomeCategoryPrefs(
+    val categoryState: HomeAppCategoryState,
+    val categoryViewMode: HomeAppCategoryViewMode,
+    val showCategoryViewSwitcher: Boolean,
+    val expandedSourceGroups: Set<Int>
 )
 
 /**
@@ -183,6 +220,7 @@ class HomeViewModel(
     val prefs: PreferencesManager,
     private val pm: PM,
     val rootInstaller: RootInstaller,
+    private val installerManager: InstallerManager,
     private val filesystem: Filesystem,
     private val homeAppButtonPrefs: HomeAppButtonPreferences,
     private val appDataResolver: AppDataResolver
@@ -307,6 +345,11 @@ class HomeViewModel(
     // Bundle update snackbar state
     var showBundleUpdateSnackbar by mutableStateOf(false)
     var snackbarStatus by mutableStateOf(BundleUpdateStatus.Updating)
+
+    // Latches when an update cycle was skipped due to metered network; cleared on the next
+    // successful/no-change update. Independent of the transient BundleUpdateSnackbar so the
+    // user still sees a persistent alert after the transient snackbar fades
+    var updatesSkippedDueToMetered by mutableStateOf(false)
 
     // Simple mode bundle selection dialog: shown when 2+ bundles have patches for the same app
     var showSimpleBundleSelectDialog by mutableStateOf(false)
@@ -491,16 +534,16 @@ class HomeViewModel(
     // Using mount install (set externally)
     var usingMountInstall: Boolean = false
 
-    // Controls the pre-patching installer selection dialog for root-capable devices.
+    // Controls the pre-patching mode selection dialog for root-capable devices.
     var showPrePatchInstallerDialog by mutableStateOf(false)
 
-    // Stores the pending arguments while the pre-patching installer dialog is visible.
+    // Stores the pending arguments while the pre-patching mode dialog is visible.
     private var pendingPatchApp: SelectedApp? = null
     private var pendingPatchAllowIncompatible: Boolean = false
 
     /**
      * Called when a root-capable device triggers patching. Instead of starting immediately,
-     * opens the pre-patching installer dialog so the user can choose Root Mount vs Standard.
+     * opens the pre-patching mode dialog so the user can choose Root Mount vs Standard.
      */
     fun requestPrePatchInstallerSelection(
         selectedApp: SelectedApp,
@@ -512,7 +555,7 @@ class HomeViewModel(
     }
 
     /**
-     * Called when the user selects an installation method from the pre-patching dialog.
+     * Called when the user selects a patch mode from the pre-patching dialog.
      * Sets [usingMountInstall] and starts patching with the correct patch configuration.
      */
     fun resolvePrePatchInstallerChoice(useMount: Boolean) {
@@ -529,7 +572,7 @@ class HomeViewModel(
     }
 
     /**
-     * Dismisses the pre-patching installer dialog without starting patching.
+     * Dismisses the pre-patching mode dialog without starting patching.
      */
     fun dismissPrePatchInstallerDialog() {
         showPrePatchInstallerDialog = false
@@ -746,6 +789,12 @@ class HomeViewModel(
                     PatchBundleRepository.BundleUpdateResult.Error -> BundleUpdateStatus.Error
                     PatchBundleRepository.BundleUpdateResult.None -> BundleUpdateStatus.Updating
                     PatchBundleRepository.BundleUpdateResult.SkippedMetered -> BundleUpdateStatus.Warning
+                }
+                updatesSkippedDueToMetered = when (progress.result) {
+                    PatchBundleRepository.BundleUpdateResult.SkippedMetered -> true
+                    PatchBundleRepository.BundleUpdateResult.Success,
+                    PatchBundleRepository.BundleUpdateResult.NoUpdates -> false
+                    else -> updatesSkippedDueToMetered
                 }
             }
         }
@@ -1092,17 +1141,6 @@ class HomeViewModel(
         deepLinkPendingBundle = null
     }
 
-    suspend fun updateMorpheBundleWithChangelogClear() {
-        patchBundleRepository.updateOnlyMorpheBundle(
-            force = false,
-            showToast = false
-        )
-        // Clear changelog cache
-        val sources = patchBundleRepository.sources.first()
-        val apiBundle = sources.firstOrNull() as? RemotePatchBundle
-        apiBundle?.clearChangelogCache()
-    }
-
     /**
      * Metadata for all apps across enabled bundles - display names, icon colors, signatures, etc.
      * Delegates to [PatchBundleRepository.appMetadata] as the single source of truth.
@@ -1110,12 +1148,37 @@ class HomeViewModel(
     val bundleAppMetadataFlow: StateFlow<Map<String, BundleAppMetadata>> =
         patchBundleRepository.appMetadata
 
+    private val _homeCategoryPrefsFlow = combine(
+        homeAppButtonPrefs.categoryState,
+        homeAppButtonPrefs.categoryViewMode,
+        homeAppButtonPrefs.showCategoryViewSwitcher,
+        homeAppButtonPrefs.expandedSourceGroups,
+    ) { categoryState, categoryViewMode, showCategoryViewSwitcher, expandedSourceGroups ->
+        HomeCategoryPrefs(
+            categoryState = categoryState,
+            categoryViewMode = categoryViewMode,
+            showCategoryViewSwitcher = showCategoryViewSwitcher,
+            expandedSourceGroups = expandedSourceGroups
+        )
+    }
+
     private val _homePrefsFlow = combine(
         homeAppButtonPrefs.hiddenPackages,
         homeAppButtonPrefs.customOrder,
+        homeAppButtonPrefs.sourceOrders,
         homeAppButtonPrefs.sortMode,
-    ) { hidden, order, sortMode ->
-        HomePrefs(hiddenPackages = hidden, customOrder = order, sortMode = sortMode)
+        _homeCategoryPrefsFlow,
+    ) { hidden, order, sourceOrders, sortMode, categoryPrefs ->
+        HomePrefs(
+            hiddenPackages = hidden,
+            customOrder = order,
+            sourceOrders = sourceOrders,
+            sortMode = sortMode,
+            categoryState = categoryPrefs.categoryState,
+            categoryViewMode = categoryPrefs.categoryViewMode,
+            showCategoryViewSwitcher = categoryPrefs.showCategoryViewSwitcher,
+            expandedSourceGroups = categoryPrefs.expandedSourceGroups
+        )
     }
 
     /**
@@ -1153,6 +1216,13 @@ class HomeViewModel(
         val enabledInfo = ready.info.filter { (_, info) -> info.enabled }
         val metadata = BundleAppMetadata.buildFrom(enabledInfo)
         val packages = metadata.keys
+        val sourceGroups = buildHomeAppSourceGroups(
+            enabledInfo = enabledInfo,
+            sources = ready.sources,
+            sortMode = homePrefs.sortMode,
+            sourceOrders = homePrefs.sourceOrders,
+            expandedSourceGroups = homePrefs.expandedSourceGroups
+        )
 
         val installedMap = installedApps.associateBy { it.originalPackageName }
 
@@ -1168,11 +1238,9 @@ class HomeViewModel(
             val displayName = resolvedData.displayName.takeIf {
                 resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
             } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
+            val hasSavedCopy = installedApp?.let { savedPatchedApkFile(it) != null } == true
+            val isInstalledOnDevice = installedApp?.let { pm.getPackageInfo(it.currentPackageName) != null } == true
             val isDeleted = installedApp?.let { installed ->
-                val hasSavedCopy = listOf(
-                    filesystem.getPatchedAppFile(installed.currentPackageName, installed.version),
-                    filesystem.getPatchedAppFile(installed.originalPackageName, installed.version)
-                ).distinctBy { it.absolutePath }.any { it.exists() }
                 pm.isAppDeleted(
                     packageName = installed.currentPackageName,
                     hasSavedCopy = hasSavedCopy,
@@ -1189,7 +1257,9 @@ class HomeViewModel(
                 installedApp = installedApp,
                 packageInfo = resolvedData.packageInfo,
                 isPinnedByDefault = knownApp?.isPinnedByDefault == true,
+                isInstalledOnDevice = isInstalledOnDevice,
                 isDeleted = isDeleted,
+                hasSavedCopy = hasSavedCopy,
                 hasUpdate = hasUpdate,
                 patchCount = 0
             )
@@ -1207,26 +1277,95 @@ class HomeViewModel(
         val activeHidden = homePrefs.hiddenPackages.filter { it in allPackages }
 
         val visiblePackages = allPackages.filter { it !in homePrefs.hiddenPackages }
-        val visibleItems = ArrayList<HomeAppItem>(visiblePackages.size)
-        for (pkg in visiblePackages) visibleItems.add(buildItem(pkg))
+
+        // Fan out per-package resolution: buildItem is IO-bound and stalls at 400+ apps sequentially.
+        val builtItems = coroutineScope {
+            (visiblePackages + activeHidden)
+                .map { pkg -> async { buildItem(pkg) } }
+                .awaitAll()
+        }
+        val visibleItems = builtItems.subList(0, visiblePackages.size)
+        val hiddenItems = builtItems.subList(visiblePackages.size, builtItems.size)
+
         val visible = sortHomeAppItems(
             items = visibleItems,
             sortMode = homePrefs.sortMode,
             customOrder = homePrefs.customOrder
         )
 
-        val hiddenItems = ArrayList<HomeAppItem>(activeHidden.size)
-        for (pkg in activeHidden) hiddenItems.add(buildItem(pkg))
         val hidden = sortHomeAppItems(
             items = hiddenItems,
             sortMode = homePrefs.sortMode,
             customOrder = homePrefs.customOrder
         )
 
-        HomeAppState(visible = visible, hidden = hidden, sortMode = homePrefs.sortMode)
+        HomeAppState(
+            visible = visible,
+            hidden = hidden,
+            sortMode = homePrefs.sortMode,
+            categoryState = homePrefs.categoryState,
+            categoryViewMode = homePrefs.categoryViewMode,
+            showCategoryViewSwitcher = homePrefs.showCategoryViewSwitcher,
+            sourceGroups = sourceGroups
+        )
     }
         .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    private fun buildHomeAppSourceGroups(
+        enabledInfo: Map<Int, PatchBundleInfo.Global>,
+        sources: Map<Int, PatchBundleSource>,
+        sortMode: HomeAppSortMode,
+        sourceOrders: Map<Int, List<String>>,
+        expandedSourceGroups: Set<Int>
+    ): List<HomeAppSourceGroup> {
+        // enabledInfo is already filtered to enabled entries by the caller
+        // Keep source sections in repository order. Home sorting should reorder app cards
+        // inside each source section, not move source headers around.
+        val sourceOrder = sources.keys.mapIndexed { index, uid -> uid to index }.toMap()
+        return enabledInfo.values
+            .sortedWith(
+                compareBy(
+                    { sourceOrder[it.uid] ?: Int.MAX_VALUE },
+                    { it.uid }
+                )
+            )
+            .mapNotNull { info ->
+                val packageNames = info.patches
+                    .asSequence()
+                    .flatMap { patch -> patch.compatiblePackages.orEmpty().asSequence() }
+                    .mapNotNull { compatiblePackage -> compatiblePackage.packageName }
+                    .distinct()
+                    .toSet()
+
+                if (packageNames.isEmpty()) {
+                    null
+                } else {
+                    val packageOrder = if (sortMode == HomeAppSortMode.MANUAL) {
+                        sourceOrders[info.uid]
+                            .orEmpty()
+                            .filter { packageName -> packageName in packageNames }
+                    } else {
+                        emptyList()
+                    }
+                    val source = sources[info.uid]
+                    val avatarUrls = source?.avatarUrls
+                    val sourceName = source?.displayTitle
+                        ?.takeUnless { it.isBlank() }
+                        ?: info.name.takeUnless { it.isBlank() }
+                        ?: "#${info.uid}"
+                    HomeAppSourceGroup(
+                        uid = info.uid,
+                        name = sourceName,
+                        packageNames = packageNames,
+                        packageOrder = packageOrder,
+                        collapsed = info.uid != DEFAULT_SOURCE_UID && info.uid !in expandedSourceGroups,
+                        avatarUrl = avatarUrls?.primary,
+                        fallbackAvatarUrl = avatarUrls?.fallback
+                    )
+                }
+            }
+    }
 
     private fun sortHomeAppItems(
         items: List<HomeAppItem>,
@@ -1295,6 +1434,14 @@ class HomeViewModel(
         patchBundleRepository.allBundlesInfoFlow
             .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
+    private val patchSourcesState: StateFlow<Map<Int, PatchBundleSource>> =
+        patchBundleRepository.sources
+            .map { list -> list.associateBy { it.uid } }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
+    /** Returns the [PatchBundleSource] with [uid], or null if it has not been loaded yet. */
+    fun getPatchSource(uid: Int): PatchBundleSource? = patchSourcesState.value[uid]
+
     /**
      * Returns all patches available for [packageName] across all enabled bundles.
      * Groups them as Map<BundleUid, List<PatchInfo>> for the swipe-right patches dialog.
@@ -1344,12 +1491,62 @@ class HomeViewModel(
         homeAppButtonPrefs.saveOrder(packageNames)
     }
 
+    fun saveAppSourceOrder(sourceUid: Int, packageNames: List<String>) {
+        homeAppButtonPrefs.saveSourceOrder(sourceUid, packageNames)
+    }
+
     fun resetAppOrder() {
         homeAppButtonPrefs.resetOrder()
     }
 
+    fun resetAppSourceOrder(sourceUid: Int) {
+        homeAppButtonPrefs.resetSourceOrder(sourceUid)
+    }
+
+    fun saveAppSourceGroupOrder(sourceUids: List<Int>) {
+        viewModelScope.launch {
+            val visibleUids = sourceUids.distinct()
+            val visibleUidSet = visibleUids.toSet()
+            val currentUids = patchBundleRepository.sources.first().map { it.uid }
+            val mergedUids = visibleUids + currentUids.filter { it !in visibleUidSet }
+            prefs.sourceBundleSortMode.update(SourceBundleSortMode.MANUAL.name)
+            patchBundleRepository.reorderBundles(mergedUids)
+        }
+    }
+
     fun setAppSortMode(sortMode: HomeAppSortMode) {
         homeAppButtonPrefs.setSortMode(sortMode)
+    }
+
+    fun setAppCategoryViewMode(viewMode: HomeAppCategoryViewMode) {
+        homeAppButtonPrefs.setCategoryViewMode(viewMode)
+    }
+
+    fun createAppCategory(name: String): String =
+        homeAppButtonPrefs.createCategory(name)
+
+    fun renameAppCategory(categoryId: String, name: String) {
+        homeAppButtonPrefs.renameCategory(categoryId, name)
+    }
+
+    fun deleteAppCategory(categoryId: String) {
+        homeAppButtonPrefs.deleteCategory(categoryId)
+    }
+
+    fun saveAppCategoryOrder(categoryIds: List<String>) {
+        homeAppButtonPrefs.saveCategoryOrder(categoryIds)
+    }
+
+    fun toggleAppCategoryCollapsed(categoryId: String?) {
+        homeAppButtonPrefs.toggleCategoryCollapsed(categoryId)
+    }
+
+    fun toggleAppSourceGroupCollapsed(sourceUid: Int) {
+        homeAppButtonPrefs.toggleSourceGroupCollapsed(sourceUid)
+    }
+
+    fun assignAppsToCategory(packageNames: Set<String>, categoryId: String?) {
+        homeAppButtonPrefs.assignToCategory(packageNames, categoryId)
     }
 
     /**
@@ -1413,16 +1610,77 @@ class HomeViewModel(
      */
     fun updateDeletedAppsStatus(installedApps: List<InstalledApp>) {
         appsDeletedStatus = installedApps.associate { app ->
-            val hasSavedCopy = listOf(
-                filesystem.getPatchedAppFile(app.currentPackageName, app.version),
-                filesystem.getPatchedAppFile(app.originalPackageName, app.version)
-            ).distinctBy { it.absolutePath }.any { it.exists() }
-
             app.currentPackageName to pm.isAppDeleted(
                 packageName = app.currentPackageName,
-                hasSavedCopy = hasSavedCopy,
+                hasSavedCopy = savedPatchedApkFile(app) != null,
                 wasInstalledOnDevice = app.installType != InstallType.SAVED
             )
+        }
+    }
+
+    fun savedPatchedApkFile(app: InstalledApp): File? =
+        listOf(
+            filesystem.getPatchedAppFile(app.currentPackageName, app.version),
+            filesystem.getPatchedAppFile(app.originalPackageName, app.version)
+        ).distinctBy { it.absolutePath }.firstOrNull { it.exists() }
+
+    suspend fun persistReinstalledApp(
+        app: InstalledApp,
+        packageName: String,
+        installType: InstallType
+    ): Boolean = withContext(Dispatchers.IO) {
+        val appliedPatches = installedAppRepository.getAppliedPatches(app.currentPackageName)
+        installedAppRepository.addOrUpdate(
+            currentPackageName = packageName,
+            originalPackageName = app.originalPackageName,
+            version = app.version,
+            installType = installType,
+            patchSelection = appliedPatches,
+            selectionPayload = app.selectionPayload,
+            patchedAt = app.patchedAt
+        )
+        notifyAppStateChanged(packageName)
+        if (packageName != app.currentPackageName) notifyAppStateChanged(app.currentPackageName)
+        true
+    }
+
+    fun uninstallApps(items: Collection<HomeAppItem>) {
+        val apps = items.mapNotNull { it.installedApp }.filter { installed ->
+            installed.installType == InstallType.MOUNT || pm.getPackageInfo(installed.currentPackageName) != null
+        }
+        if (apps.isEmpty()) return
+
+        viewModelScope.launch {
+            var completed = 0
+            var skipped = 0
+            for (installed in apps) {
+                runCatching {
+                    when (installed.installType) {
+                        InstallType.MOUNT -> {
+                            installerManager.uninstallPackage(installed.currentPackageName, installed.installType)
+                            installedAppRepository.delete(installed)
+                        }
+                        else -> {
+                            val removed = withTimeoutOrNull(BATCH_UNINSTALL_TIMEOUT) {
+                                installerManager.uninstallPackage(installed.currentPackageName, installed.installType)
+                                true
+                            } == true
+                            if (!removed) error(app.getString(R.string.uninstall_timeout))
+                        }
+                    }
+                }.onSuccess {
+                    completed++
+                    notifyAppStateChanged(installed.currentPackageName)
+                }.onFailure { error ->
+                    skipped++
+                    if (error !is UninstallCancelledException) {
+                        app.toast(app.getString(R.string.uninstall_app_fail, error.simpleMessage()))
+                    }
+                }
+            }
+
+            app.batchActionSummary(R.plurals.batch_uninstall_summary, completed, skipped)
+                ?.let { app.toast(it) }
         }
     }
 
@@ -2172,9 +2430,9 @@ class HomeViewModel(
         }
 
         // Patches exist and are applicable → proceed.
-        // For root-capable devices, we must know the installation method BEFORE patching
+        // For root-capable devices, we must know the patch mode BEFORE patching
         // because it affects which patches are included (GmsCore is excluded for mount install).
-        // Show the pre-patching installer dialog so the user can choose.
+        // Show the pre-patching mode dialog so the user can choose.
         // For non-root devices, just proceed - installer selection happens after patching.
         processSelectedAppIgnoringSignature(selectedApp)
     }

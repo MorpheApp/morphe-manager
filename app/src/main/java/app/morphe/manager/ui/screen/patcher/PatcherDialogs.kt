@@ -99,70 +99,6 @@ fun IncompatiblePatcherVersionDialog(
 }
 
 /**
- * Shown when a conflict is detected after patching from the installed app (non-root).
- * Explains why uninstall is needed and warns about data loss, then triggers system uninstall.
- */
-@Composable
-fun InstalledSourceConflictDialog(
-    onUninstall: () -> Unit,
-    onDismiss: () -> Unit
-) {
-    MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = stringResource(R.string.patcher_installed_conflict_title),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.uninstall),
-                onPrimaryClick = onUninstall,
-                isPrimaryDestructive = true,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss
-            )
-        }
-    ) {
-        Text(
-            text = stringResource(R.string.patcher_installed_conflict_body),
-            style = MaterialTheme.typography.bodyLarge,
-            color = LocalDialogSecondaryTextColor.current
-        )
-    }
-}
-
-/**
- * Cancel patching confirmation dialog.
- * Warns user about stopping patching process.
- */
-@Composable
-fun CancelPatchingDialog(
-    onDismiss: () -> Unit,
-    onConfirm: () -> Unit
-) {
-    MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = stringResource(R.string.patcher_stop_confirm_title),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.yes),
-                onPrimaryClick = onConfirm,
-                isPrimaryDestructive = true,
-                secondaryText = stringResource(R.string.no),
-                onSecondaryClick = onDismiss
-            )
-        }
-    ) {
-        val secondaryColor = LocalDialogSecondaryTextColor.current
-
-        Text(
-            text = stringResource(R.string.patcher_stop_confirm_description),
-            style = MaterialTheme.typography.bodyLarge,
-            color = secondaryColor,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
-}
-
-/**
  * Pre-flight dialog shown when one or more patch option paths cannot be read.
  *
  * Android permission models:
@@ -421,7 +357,7 @@ fun PatcherErrorDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.patcher_failed_dialog_title),
-        compactPadding = true,
+        padding = DialogPadding.Compact,
         scrollable = false,
         footer = {
             MorpheDialogButtonRow(

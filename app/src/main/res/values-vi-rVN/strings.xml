@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Đã có bản cập nhật Morphe mới</string>
     <string name="home_update_available_subtitle">Phiên bản mới đã sẵn sàng để được cài đặt</string>
+    <string name="home_blocked_source_title">Nguồn vá bị chặn đã được phát hiện</string>
+    <string name="home_blocked_source_subtitle">Nhấn để xem và xóa</string>
+    <string name="home_metadata_errors_title">Một số nguồn vá không khả dụng</string>
+    <string name="home_metadata_errors_subtitle">Nhấn để xem các nguồn</string>
+    <string name="home_metered_skipped_title">Tạm dừng cập nhật trên dữ liệu di động</string>
+    <string name="home_metered_skipped_subtitle">Nhấn để cho phép cập nhật qua dữ liệu di động</string>
     <string name="home_update_error">Không thể cập nhật</string>
-    <string name="home_update_error_subtitle">Kiểm tra kết nối mạng và thử lại</string>
+    <string name="home_update_error_subtitle">Đã xảy ra lỗi trong khi cập nhật nguồn</string>
     <string name="home_update_skipped_metered">Đã bỏ qua bản cập nhật</string>
     <string name="home_update_skipped_metered_subtitle">Đang bật dữ liệu di động</string>
     <string name="home_updating_sources">Đang cập nhật nguồn…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Không có ứng dụng nào khớp với \"%s\"</string>
     <string name="home_all_apps_hidden_title">Tất cả ứng dụng đã bị ẩn</string>
     <string name="home_all_apps_hidden_subtitle">Bạn đã ẩn tất cả ứng dụng khỏi trang chủ</string>
+    <string name="home_category_add">Thêm danh mục</string>
+    <string name="home_category_all_apps">Tất cả ứng dụng</string>
+    <string name="home_category_custom">Tùy chỉnh</string>
+    <string name="home_category_uncategorized">Chưa phân loại</string>
+    <string name="home_category_new_title">Danh mục mới</string>
+    <string name="home_category_rename_title">Đổi tên danh mục</string>
+    <string name="home_category_name">Tên danh mục</string>
+    <string name="home_category_move_to">Di chuyển đến danh mục</string>
+    <string name="home_category_move_selected_title">Di chuyển ứng dụng đã chọn</string>
+    <string name="home_category_delete_confirm_title">Xóa danh mục</string>
+    <string name="home_category_delete_confirm_message">Xóa danh mục &lt;b&gt;%1$s&lt;/b&gt;? Các ứng dụng trong danh mục này sẽ được chuyển về &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Không khả dụng cho danh mục này</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Bạn muốn vá ứng dụng nào?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Vá phiên bản thử nghiệm (nếu có)</string>
     <string name="sources_management_already_exists">Nguồn này đã được thêm vào rồi</string>
     <string name="sources_management_invalid_url">URL nguồn không hợp lệ. Vui lòng kiểm tra địa chỉ và thử lại</string>
+    <string name="sources_management_blocked">Nguồn vá này bị chặn và không thể thêm</string>
+    <string name="sources_management_source_blocked_badge">Bị chặn</string>
     <string name="sources_management_metadata_unavailable">Không có metadata</string>
     <string name="sources_management_metadata_unavailable_hint">Không thể truy cập tệp metadata từ máy chủ. Bạn vẫn có thể vá bằng gói ứng dụng đã cài, nhưng tính năng tự động cập nhật sẽ bị tắt cho nguồn này</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Không thể tải gói vá. URL nguồn có thể không đúng hoặc file không tồn tại</string>
@@ -308,16 +328,18 @@ Vùng ngoài (nét đứt): có thể bị cắt theo hình dạng biểu tượ
     <string name="home_app_info_app_deleted_warning">Ứng dụng đã bị gỡ cài đặt</string>
     <string name="home_app_info_app_deleted_description">Ứng dụng này đã bị gỡ bên ngoài Morphe. Hãy vá lại để khôi phục chức năng</string>
     <string name="home_app_info_apk_size">Kích thước APK</string>
+    <string name="home_app_info_cpu_arch">Kiến trúc CPU</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Chế độ root yêu cầu APK gốc phải được cài đặt trên thiết bị trước khi vá</string>
     <string name="root_gmscore_excluded">Chế độ root không cần bản vá \"GmsCore support\"</string>
-    <string name="root_pre_patch_installer_title">Chọn phương thức cài đặt</string>
-    <string name="root_pre_patch_installer_description">Thiết bị của bạn đã có quyền root. Hãy chọn cách bạn muốn cài đặt ứng dụng đã vá</string>
-    <string name="root_pre_patch_installer_mount_title">Gắn kết bằng root</string>
-    <string name="root_pre_patch_installer_mount_description">Gắn APK đã vá đè lên ứng dụng gốc (không cần GmsCore nữa)</string>
-    <string name="root_pre_patch_installer_standard_title">Cài đặt tiêu chuẩn</string>
-    <string name="root_pre_patch_installer_standard_description">Cài đặt thành một ứng dụng riêng với hỗ trợ GmsCore. Sau khi vá xong, bạn có thể chọn trình cài đặt mình muốn</string>
-    <string name="root_pre_patch_installer_hint">Phương thức cài đặt sẽ quyết định bản vá nào được áp dụng và không thể thay đổi sau khi vá</string>
+    <string name="root_pre_patch_installer_title">Chọn chế độ vá lỗi</string>
+    <string name="root_pre_patch_installer_description">Thiết bị của bạn đã có quyền root. Chọn xem ứng dụng này có nên được vá để gắn kết root hay cài đặt tiêu chuẩn không.</string>
+    <string name="root_pre_patch_installer_mount_title">Chế độ gắn kết root</string>
+    <string name="root_pre_patch_installer_mount_description">Vá lỗi cho chế độ gắn kết root, sau đó gắn kết tệp APK lên ứng dụng gốc tương ứng. Không cần GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Nếu bạn sử dụng KernelSU hoặc APatch, hãy tắt tính năng gỡ bỏ hoặc ẩn module cho các ứng dụng được cài đặt với quyền root. Nếu không, ứng dụng gốc vẫn có thể chạy ngay cả khi Morphe hiển thị nó là đã được gắn</string>
+    <string name="root_pre_patch_installer_standard_title">Chế độ cài đặt tiêu chuẩn</string>
+    <string name="root_pre_patch_installer_standard_description">Vá dưới dạng APK thông thường với hỗ trợ GmsCore. Cài đặt của bạn sẽ được sử dụng sau khi vá</string>
+    <string name="root_pre_patch_installer_hint">Chế độ vá này khác với Cài đặt > Hệ thống > Trình cài đặt và không thể thay đổi sau khi vá</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Đã sao chép lỗi vào bảng nhớ tạm</string>
     <string name="patcher_error_log">Nhật ký lỗi</string>
@@ -417,6 +439,8 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patcher_process_exit_message">Đã dừng tiến trình vá với mã lỗi %s</string>
     <string name="install_app_success">Đã cài đặt thành công</string>
     <string name="install_app_fail">Không thể cài đặt ứng dụng: %s</string>
+    <string name="uninstall_app_fail">Không thể gỡ cài đặt: %s</string>
+    <string name="uninstall_timeout">Gỡ cài đặt hết thời gian</string>
     <string name="save_apk_success">Đã lưu APK</string>
     <string name="saved_app_export_failed">Không thể xuất ứng dụng đã vá</string>
     <string name="saved_app_removed_toast">Đã xoá bản lưu ứng dụng đã vá</string>
@@ -462,10 +486,13 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_parallax_effect_description">Nền chuyển động nhẹ nhàng khi nghiêng thiết bị</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Chủ đề</string>
+    <string name="settings_appearance_theme_mode">Chế độ giao diện</string>
     <string name="settings_appearance_system">Hệ thống</string>
     <string name="settings_appearance_light">Sáng</string>
     <string name="settings_appearance_dark">Tối</string>
     <string name="settings_appearance_dynamic">Cá nhân hóa</string>
+    <string name="settings_appearance_monochrome">Đơn sắc</string>
+    <string name="settings_appearance_color_style">Phong cách màu</string>
     <string name="settings_appearance_accent_color">Màu nổi bật</string>
     <string name="settings_appearance_pure_black">Đen tuyền</string>
     <string name="settings_appearance_pure_black_description">Nền đen thực sự</string>
@@ -473,11 +500,16 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_app_language">Ngôn ngữ</string>
     <string name="settings_appearance_app_language_current">Ngôn ngữ hiện tại</string>
     <string name="settings_appearance_translations_info_title">Một số ngôn ngữ có thể bị thiếu hoặc chưa hoàn thiện</string>
-    <string name="settings_appearance_translations_info_text">Bạn có thể yêu cầu thêm ngôn ngữ hoặc cải thiện bản dịch hiện tại bằng cách truy cập %s</string>
+    <string name="settings_appearance_translations_info_text">"Để dịch các ngôn ngữ mới hoặc cải thiện bản dịch hiện có, vui lòng truy cập
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Trang chủ</string>
     <string name="settings_appearance_greeting_phrases">Thông điệp</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Hiện thông điệp trên trang chủ</string>
+    <string name="settings_appearance_app_grouping">Nhóm ứng dụng</string>
+    <string name="settings_appearance_app_grouping_description">Hiển thị công tắc màn hình chính để nhóm ứng dụng theo nguồn hoặc danh mục của riêng bạn, giữ lựa chọn khi tắt</string>
+    <string name="settings_appearance_sort_button">Nút sắp xếp</string>
+    <string name="settings_appearance_sort_button_description">Hiển thị nút sắp xếp trên màn hình chính</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Biểu tượng</string>
     <string name="settings_appearance_app_icon_default">Mặc định</string>
@@ -491,6 +523,7 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_app_icon_change_dialog_confirm">Chốt</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Cập nhật</string>
+    <string name="settings_advanced_patcher">Trình vá</string>
     <string name="settings_advanced_updates_use_prereleases">Bản cập nhật trước</string>
     <string name="settings_advanced_updates_use_prereleases_description">Trải nghiệm sớm các phiên bản mới của Morphe. Bạn có thể bật bản phát hành trước cho từng nguồn trong phần nguồn vá</string>
     <string name="settings_advanced_updates_allow_metered">Cập nhật bằng dữ liệu di động</string>
@@ -540,7 +573,7 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_advanced_github_pat_configured">Đã cấu hình token</string>
     <string name="settings_advanced_github_pat_how_to_get">Cách lấy token</string>
     <string name="settings_advanced_github_pat_dialog_title">Thiết lập Personal Access Token của GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">Thiết lập GitHub Personal Access Token để có thể thêm Pull Request làm nguồn. Hãy tạo một PAT với quyền public_repo tại github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Thiết lập GitHub Personal Access Token để có thể thêm Pull Request làm nguồn. Hãy tạo một PAT với quyền public_repo tại %s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Thêm vào khi xuất cài đặt</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Thêm PAT vào khi xuất cài đặt Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Đừng chia sẻ PAT. Nếu bạn xuất cài đặt có chứa nó, hãy giữ tệp đó thật kín vì bên trong có token</string>
@@ -626,12 +659,13 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Gỡ nút Shorts khỏi tiện ích màn hình chính</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Trình cài đặt</string>
+    <string name="installer_settings_title">Trình cài đặt mặc định</string>
     <string name="installer_title">Trình cài đặt</string>
     <string name="installer_internal_description">Dùng trình cài đặt gói của Android</string>
     <string name="installer_play_store_description">Sử dụng trình cài đặt hệ thống và đặt Cửa hàng Play làm nguồn cài đặt</string>
     <string name="installer_root_play_store_description">Cài đặt bằng root mà không cần xác nhận, đồng thời đặt Google Play Store làm nguồn cài đặt</string>
-    <string name="installer_auto_saved_name">Trình cài đặt gắn kết đã root</string>
-    <string name="installer_auto_saved_description">Gắn APK đã vá lên ứng dụng đã được cài đặt</string>
+    <string name="installer_auto_saved_name">Gắn kết bằng root</string>
+    <string name="installer_auto_saved_description">Gắn kết các ứng dụng đã được vá ở chế độ gắn kết bằng root. Các APK đã vá tiêu chuẩn sử dụng một trình cài đặt khác</string>
     <string name="installer_shizuku_description">Cài ẩn bằng Shizuku hoặc Sui</string>
     <string name="installer_shizuku_play_store_description">Cài đặt thông qua Shizuku mà không cần xác nhận, đồng thời đặt Google Play Store làm nguồn cài đặt</string>
     <string name="installer_option_none">Không có</string>
@@ -643,6 +677,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_status_shizuku_permission">Cấp quyền Shizuku cho Morphe trong ứng dụng Shizuku</string>
     <string name="installer_mount_warning_install">Trình cài đặt chính của bạn đã được đặt là trình cài đặt mount gốc. Ứng dụng đã lưu này không được cài đặt bằng mount</string>
     <string name="mount_version_mismatch_message">Phiên bản ứng dụng gốc (%2$s) không khớp với phiên bản ứng dụng đã sửa (%1$s). Mount phiên bản gốc khớp, sau đó thử lại</string>
+    <string name="mount_stock_restore_failed_message">Android đã từ chối APK gốc đã lưu. Hãy cài đặt phiên bản gốc tương ứng, sau đó thử Gắn kết lại</string>
     <string name="installer_status_shizuku_unsupported">Phiên bản Shizuku đã cài không được hỗ trợ</string>
     <string name="installer_action_open_shizuku">Mở Shizuku</string>
     <string name="installer_hint_generic">Không thể cài đặt. Thử lại hoặc đổi sang trình cài đặt khác</string>
@@ -655,21 +690,48 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_unavailable_shizuku_hint">Hãy đảm bảo rằng Shizuku đang chạy và bạn đã cấp quyền cho ứng dụng này</string>
     <string name="installer_use_standard">Trình cài đặt tiêu chuẩn</string>
     <string name="installer_play_store_warning_title">Cài đặt như được tải từ Cửa hàng Play?</string>
-    <string name="installer_play_store_warning_message">Ứng dụng đã vá sẽ được coi như tải và cài đặt từ Cửa hàng Play của Google. Nhờ đó, các dịch vụ như Android Auto có thể nhận diện ứng dụng này</string>
+    <string name="installer_play_store_warning_message">Ứng dụng đã vá sẽ được ghi nhận là đã cài đặt từ Cửa hàng Google Play. Điều này có thể giúp các dịch vụ như Android Auto nhận ra nó là một ứng dụng từ Cửa hàng Play, nhưng điều đó không được đảm bảo cho mọi ứng dụng hoặc thiết bị. Hành vi có thể khác nhau tùy thuộc vào phiên bản Android, ROM, thương hiệu thiết bị và các kiểm tra cụ thể của ứng dụng.</string>
     <string name="installer_play_store_warning_risk">Google Play Store có thể hiển thị bản cập nhật cho ứng dụng đã vá. Nếu bạn bấm cập nhật, APK đã vá sẽ bị ghi đè bởi phiên bản gốc và mọi bản vá cũng bị gỡ bỏ. Để tránh điều đó, hãy chọn dấu ba chấm trên cùng bên phải trong trang ứng dụng của Cửa hàng Play và tắt \"Bật tự động cập nhật\"</string>
     <string name="installer_play_store_warning_continue">Tôi hiểu, tiếp đi</string>
+    <string name="installer_play_store_mode">Cài đặt dưới dạng Cửa hàng Play</string>
+    <string name="installer_play_store_mode_description">Ghi lại Cửa hàng Google Play là nguồn cài đặt cho phương pháp cài đặt này</string>
     <string name="settings_prompt_installer_on_install">Hỏi chọn trình cài đặt</string>
     <string name="settings_prompt_installer_on_install_description">Luôn hiện hộp thoại chọn trình cài đặt khi cài ứng dụng đã vá</string>
     <string name="settings_auto_install_with_shizuku">Tự động cài đặt sau khi vá</string>
     <string name="settings_auto_install_with_shizuku_description">Tự động cài đặt APK đã vá ngay sau khi quá trình vá hoàn tất</string>
-    <string name="settings_auto_install_prompt_conflict">Đã bật \"%s\" - cài đặt tự động sẽ bị bỏ qua</string>
+    <string name="settings_auto_uninstall_with_shizuku">Gỡ cài đặt tự động khi có xung đột</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Khi tự động cài đặt bằng Shizuku, hãy gỡ cài đặt ứng dụng hiện có trước nếu Android báo cáo xung đột chữ ký. Việc này có thể xóa dữ liệu ứng dụng.</string>
+    <string name="settings_auto_uninstall_warning_title">Bật tính năng gỡ cài đặt tự động?</string>
+    <string name="settings_auto_uninstall_warning_message">Nếu Android báo cáo xung đột chữ ký trong quá trình tự động cài đặt Shizuku, Morphe sẽ gỡ cài đặt ứng dụng hiện có trước khi cài đặt APK đã vá</string>
+    <string name="settings_auto_uninstall_warning_risk">Việc này có thể xóa dữ liệu ứng dụng. Nếu APK đã vá không cài đặt được sau khi gỡ cài đặt, ứng dụng trước đó có thể đã biến mất</string>
+    <string name="installer_shizuku_status_action">Kiểm tra trạng thái Shizuku</string>
+    <string name="installer_shizuku_status_title">Trạng thái Shizuku</string>
+    <string name="installer_shizuku_status_ready">Sẵn sàng</string>
+    <string name="installer_shizuku_status_issue">Cần chú ý</string>
+    <string name="installer_shizuku_status_supported">Được hỗ trợ</string>
+    <string name="installer_shizuku_status_running">Đang chạy</string>
+    <string name="installer_shizuku_status_permission">Quyền</string>
+    <string name="installer_shizuku_status_mode">Chế độ</string>
+    <string name="installer_shizuku_status_provider">Nhà cung cấp</string>
+    <string name="installer_shizuku_status_granted">Đã cấp</string>
+    <string name="installer_shizuku_status_missing">Thiếu</string>
+    <string name="installer_shizuku_request_permission">Yêu cầu quyền</string>
+    <string name="installer_shizuku_install_fail">Cài đặt Shizuku thất bại: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Cài đặt Shizuku thất bại: %1$s
+
+Chi tiết: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Quyền Shizuku bị thiếu. Cấp quyền cho Morphe và thử lại</string>
+    <string name="installer_shizuku_error_timeout">Shizuku không trả về kết quả cài đặt. Đảm bảo nó vẫn đang chạy và thử lại</string>
+    <string name="installer_shizuku_error_downgrade">Android chặn điều này vì nó sẽ hạ cấp ứng dụng đã cài đặt</string>
+    <string name="installer_shizuku_error_signature">Android chặn điều này vì ứng dụng đã cài đặt có chữ ký khác</string>
+    <string name="installer_shizuku_error_invalid_apk">Android không thể đọc APK này</string>
+    <string name="installer_shizuku_error_user_profile">Android chặn điều này đối với người dùng hiện tại hoặc cấu hình làm việc</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Tối ưu hóa pin</string>
     <string name="settings_system_battery_optimization_description">Duy trì trình vá tiếp tục chạy kể cả khi ứng dụng bị thu nhỏ</string>
-    <string name="settings_system_performance">Hiệu suất</string>
+    <string name="settings_system_background">Màu nền</string>
     <string name="settings_system_process_runtime">Tiến trình riêng</string>
     <string name="settings_system_process_runtime_description">Chạy quá trình vá trong tiến trình riêng biệt để cải thiện độ ổn định</string>
-    <string name="settings_system_process_runtime_memory_limit">Giới hạn bộ nhớ</string>
     <string name="settings_system_process_runtime_memory_limit_description">Tăng giới hạn có thể giúp vá nhanh hơn nếu thiết bị đủ mạnh</string>
     <string name="settings_system_process_runtime_enable">Bật tiến trình riêng</string>
     <string name="settings_system_memory_limit_subtitle">Bộ nhớ cho quá trình vá</string>
@@ -677,6 +739,19 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_process_runtime_enabled_description">Giới hạn %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Bấm để cấu hình</string>
     <string name="settings_system_process_runtime_description_not_available">Tính năng này yêu cầu Android 11 trở lên</string>
+    <string name="settings_system_patcher_completion_sound">Âm thanh hoàn thành</string>
+    <string name="settings_system_patcher_completion_sound_description">Phát ra một âm điệu riêng biệt để báo hiệu thành công hoặc thất bại khi vá xong</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Thông báo</string>
+    <string name="settings_system_notifications_description">Cấu hình cảnh báo nền và âm thanh hoàn thành</string>
+    <string name="settings_system_notifications_success_sound">Âm thanh thành công</string>
+    <string name="settings_system_notifications_error_sound">Âm báo lỗi</string>
+    <string name="settings_system_notifications_sound_default">Mặc định</string>
+    <string name="settings_system_notifications_sound_picker_title">Chọn nguồn âm thanh</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Âm thanh hệ thống</string>
+    <string name="settings_system_notifications_sound_pick_file">Chọn từ tệp</string>
+    <string name="settings_system_notifications_sound_reset">Đặt lại về mặc định</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Chọn nhạc chuông</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Xuất &amp; Nhập</string>
     <string name="settings_system_keystore">Kho khoá</string>
@@ -722,12 +797,37 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_apks_deleted_all">Đã xóa các tệp APK thành công</string>
     <string name="settings_system_apks_export_zip_success">Đã xuất APK đã chọn</string>
     <string name="settings_system_apks_export_zip_failed">Không thể xuất các APK đã chọn</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Quản lý bộ nhớ</string>
+    <string name="settings_system_storage_management_description">Xem xét việc sử dụng đĩa và xóa các tệp bộ nhớ cache</string>
+    <string name="settings_system_storage_keystore_title">Keystore ký</string>
+    <string name="settings_system_storage_app_data_title">Dữ liệu ứng dụng</string>
+    <string name="settings_system_storage_patch_bundles_title">Gói vá</string>
+    <string name="settings_system_storage_http_cache_title">Bộ nhớ đệm mạng</string>
+    <string name="settings_system_storage_http_cache_description">Các phản hồi HTTP được lưu vào bộ nhớ đệm để tăng tốc độ cập nhật</string>
+    <string name="settings_system_storage_installer_cache_title">Bộ nhớ đệm của trình cài đặt bên ngoài</string>
+    <string name="settings_system_storage_installer_cache_description">Các bản sao APK được chuyển cho trình cài đặt của bên thứ ba</string>
+    <string name="settings_system_storage_patcher_workspace_title">Không gian làm việc của trình vá lỗi</string>
+    <string name="settings_system_storage_patcher_workspace_description">Các tệp thời gian chạy của trình vá lỗi và dữ liệu tạm thời không còn được sử dụng</string>
+    <string name="settings_system_storage_temporary_title">Tệp tạm thời</string>
+    <string name="settings_system_storage_temporary_description">Các tệp làm việc được tạo trong quá trình vá lỗi</string>
+    <string name="settings_system_storage_clear_all">Xóa tất cả bộ nhớ đệm</string>
+    <string name="settings_system_storage_clear_all_description">Giải phóng tất cả không gian bộ nhớ đệm có thể khôi phục cùng một lúc</string>
+    <string name="settings_system_storage_clear_all_confirm">Thao tác này sẽ xóa các phản hồi mạng được lưu vào bộ nhớ đệm, các bản sao trình cài đặt đã chuẩn bị và tệp tạm thời. Các tệp APK gốc và đã vá sẽ được giữ lại</string>
+    <string name="settings_system_storage_cleared">Đã giải phóng %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Không có gì để xóa</string>
+    <string name="settings_system_storage_open_app_info_title">Mở bộ nhớ ứng dụng Android</string>
+    <string name="settings_system_storage_open_app_info_description">Quản lý hoặc xóa tất cả dữ liệu Morphe thông qua cài đặt hệ thống</string>
+    <string name="settings_system_save_original_apks_title">Giữ lại các tệp APK gốc</string>
+    <string name="settings_system_save_original_apks_description">Lưu tệp APK trước khi vá để có thể tái sử dụng cho việc vá lại mà không cần chọn lại tệp</string>
+    <string name="settings_system_save_patched_apks_title">Giữ lại các tệp APK đã vá</string>
+    <string name="settings_system_save_patched_apks_description">Lưu một bản sao của tệp APK đã vá để xuất hoặc cài đặt lại sau này từ trình quản lý</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK đã vá</string>
     <string name="settings_system_patched_apks_description">Quản lý tệp ứng dụng đã vá</string>
     <string name="settings_system_patched_apks_empty">Chưa có tệp APK đã vá nào được lưu</string>
     <string name="settings_system_patched_apks_delete_title">Xóa APK đã vá?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Bạn có chắc muốn xóa tệp APK đã vá cho %s không?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Bạn có chắc muốn xóa tệp APK đã vá lưu cho &lt;b&gt;%s&lt;/b&gt; không?</string>
     <string name="settings_system_patched_apks_deleted">Đã xóa APK đã vá thành công</string>
     <string name="settings_system_patched_apks_delete_all_title">Xóa tất cả các APK đã vá?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -736,7 +836,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_original_apks_empty">Không có APK gốc nào được lưu</string>
     <string name="settings_system_original_apks_deleted">Đã xóa APK gốc thành công</string>
     <string name="settings_system_original_apks_delete_title">Xóa APK gốc?</string>
-    <string name="settings_system_original_apks_delete_confirm">Bạn có muốn xóa tệp APK gốc của %s? Nếu không có APK mới, bạn sẽ không thể vá lại đâu</string>
+    <string name="settings_system_original_apks_delete_confirm">Xóa tệp APK gốc của &lt;b&gt;%s&lt;/b&gt;? Bạn sẽ không thể vá lại nếu không cung cấp một APK mới.</string>
     <string name="settings_system_original_apks_delete_all_title">Xóa tất cả các APK gốc?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Bản vá đã chọn</string>
@@ -751,15 +851,15 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_patch_selection_source_format">Nguồn #%s</string>
     <string name="settings_system_patch_selection_will_delete">Thao tác này sẽ xóa:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Toàn bộ bản vá đã lưu (trong mọi gói &amp; nguồn) sẽ bị xóa vĩnh viễn</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Toàn bộ bản vá đã lưu cho %s (trong mọi nguồn) sẽ bị xóa vĩnh viễn</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Toàn bộ bản vá đã lưu cho %1$s (trong nguồn #%2$s) sẽ bị xóa vĩnh viễn</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Toàn bộ bản vá đã lưu cho &lt;b&gt;%s&lt;/b&gt; (trong mọi nguồn) sẽ bị xóa vĩnh viễn.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Toàn bộ bản vá đã lưu cho &lt;b&gt;%1$s&lt;/b&gt; (trong &lt;b&gt;%2$s&lt;/b&gt;) sẽ bị xóa vĩnh viễn.</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Toàn bộ bản vá đã lưu (trong mọi gói &amp; nguồn) sẽ bị xóa vĩnh viễn.</string>
     <string name="settings_system_export_source_data_fail">Không thể xuất dữ liệu nguồn</string>
     <string name="settings_system_export_source_data_success">Đã xuất dữ liệu nguồn thành công</string>
     <string name="settings_system_import_source_data_fail">Không thể nhập dữ liệu nguồn</string>
     <string name="settings_system_import_source_data_success">Đã nhập dữ liệu nguồn thành công</string>
-    <string name="settings_system_patch_details_title">Chi tiết bản vá</string>
-    <string name="settings_system_selected_patches_title">Số bản vá đã chọn (%s)</string>
-    <string name="settings_system_patch_options_title">Số bản vá đã chỉnh (%s)</string>
+    <string name="settings_system_selected_patches_section">Số bản vá đã chọn</string>
+    <string name="settings_system_patch_options_section">Tùy chỉnh</string>
     <string name="settings_system_no_patches_or_options">Không có bản vá hoặc tùy chỉnh được lưu</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Tùy chỉnh trình chọn tệp</string>

@@ -18,6 +18,21 @@
     <plurals name="settings_system_apks_count">
         <item quantity="other">%s 个 APK 文件</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="other">已安装 %d 个应用</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="other">已重新安装 %d 个应用</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="other">已卸载 %d 个应用</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="other">卸载 %d 个应用？</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="other">已跳过 %d 个应用</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="other">从保存的选择中移除了 %s 个过期补丁</item>
     </plurals>
@@ -29,5 +44,8 @@
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">%s 个隐藏的应用</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="other">%s 个应用</item>
     </plurals>
 </resources>

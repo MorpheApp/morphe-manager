@@ -8,6 +8,8 @@ package app.morphe.manager.util
 import androidx.compose.ui.graphics.Color
 import app.morphe.manager.util.KnownApps.DEFAULT_COLORS
 import app.morphe.manager.util.KnownApps.getAppName
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.minutes
 
 const val tag = "Morphe Manager"
 
@@ -16,6 +18,7 @@ const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
 const val SOURCE_REPO_URL = "https://github.com/MorpheApp/morphe-patches"
 const val MORPHE_API_URL = "https://api.morphe.software"
 const val MORPHE_WEBSITE_URL = "https://morphe.software"
+const val BLOCKED_SOURCES_URL = "$MORPHE_API_URL/v2/blocked-sources"
 
 /**
  * Delay before showing a manager update notification to the user.
@@ -122,6 +125,13 @@ object KnownApps {
     fun fallbackName(packageName: String): String? = FALLBACK_NAMES[packageName]
 }
 
+/**
+ * Timeout applied to a single uninstall step when running as part of a batch.
+ * The system uninstall UI can block indefinitely if the user leaves it open;
+ * this keeps the batch making forward progress.
+ */
+val BATCH_UNINSTALL_TIMEOUT: Duration = 2.minutes
+
 const val APK_MIMETYPE  = "application/vnd.android.package-archive"
 
 const val PLAY_STORE_INSTALLER_PACKAGE = "com.android.vending"
@@ -129,10 +139,12 @@ const val PLAY_STORE_INSTALLER_PACKAGE = "com.android.vending"
 const val AOSP_INSTALLER_PACKAGE        = "com.google.android.packageinstaller"
 const val AOSP_INSTALLER_PACKAGE_LEGACY = "com.android.packageinstaller"
 const val AOSP_INSTALLER_LABEL          = "Package installer"
-const val JSON_MIMETYPE = "application/json"
-const val BIN_MIMETYPE  = "application/octet-stream"
-const val TEXT_MIMETYPE = "text/plain"
-const val MPP_MIMETYPE  = "application/vnd.ms-project"
+const val JSON_MIMETYPE     = "application/json"
+const val BIN_MIMETYPE      = "application/octet-stream"
+const val TEXT_MIMETYPE     = "text/plain"
+const val MPP_MIMETYPE      = "application/vnd.ms-project"
+const val IMAGE_MIMETYPE    = "image/*"
+const val WILDCARD_MIMETYPE = "*/*"
 
 val APK_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,

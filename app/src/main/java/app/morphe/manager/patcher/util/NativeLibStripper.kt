@@ -116,6 +116,17 @@ object NativeLibStripper {
         return name.substring(4, secondSlash)
     }
 
+    fun extractAbisFromApk(apkFile: File): List<String> =
+        runCatching {
+            ZipFile(apkFile).use { zip ->
+                zip.entries().asSequence()
+                    .map { it.name }
+                    .mapNotNull(::extractAbiFromEntry)
+                    .distinct()
+                    .toList()
+            }
+        }.getOrDefault(emptyList())
+
     private fun determinePreferredAbi(apkFile: File, supportedAbis: List<String>): String? =
         runCatching {
             ZipFile(apkFile).use { zip ->

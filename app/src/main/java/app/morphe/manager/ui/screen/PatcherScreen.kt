@@ -46,11 +46,7 @@ import app.morphe.manager.ui.screen.patcher.*
 import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
-import app.morphe.manager.ui.screen.shared.LocalDialogSecondaryTextColor
-import app.morphe.manager.ui.screen.shared.MorpheAnimations
-import app.morphe.manager.ui.screen.shared.MorpheDialog
-import app.morphe.manager.ui.screen.shared.MorpheDialogButtonRow
-import app.morphe.manager.ui.screen.shared.rememberAccessibilityEnabled
+import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.util.APK_MIMETYPE
@@ -157,6 +153,7 @@ fun PatcherScreen(
     val outputFile = patcherViewModel.outputFile
 
     val autoInstallWithShizuku by prefs.autoInstallWithShizuku.getAsState()
+    val autoUninstallWithShizuku by prefs.autoUninstallWithShizuku.getAsState()
     val primaryInstallerPref by prefs.installerPrimary.getAsState()
     val promptInstallerOnInstall by prefs.promptInstallerOnInstall.getAsState()
 
@@ -169,7 +166,8 @@ fun PatcherScreen(
             installViewModel.install(
                 outputFile = outputFile,
                 originalPackageName = patcherViewModel.packageName,
-                onPersistApp = { pkg, type -> patcherViewModel.persistPatchedApp(pkg, type) }
+                onPersistApp = { pkg, type -> patcherViewModel.persistPatchedApp(pkg, type) },
+                autoUninstallOnConflict = true
             )
         }
     }
@@ -296,8 +294,11 @@ fun PatcherScreen(
     }
 
     if (showInstalledSourceConflictDialog.value) {
-        InstalledSourceConflictDialog(
-            onUninstall = {
+        ConfirmDialog(
+            title = stringResource(R.string.patcher_installed_conflict_title),
+            message = stringResource(R.string.patcher_installed_conflict_body),
+            primaryText = stringResource(R.string.uninstall),
+            onConfirm = {
                 showInstalledSourceConflictDialog.value = false
                 conflictPackageName?.let {
                     installViewModel.requestUninstall(it, installAfterUninstall = true)
@@ -396,13 +397,17 @@ fun PatcherScreen(
 
     // Cancel patching confirmation dialog
     if (state.showCancelDialog) {
-        CancelPatchingDialog(
-            onDismiss = { state.showCancelDialog = false },
+        ConfirmDialog(
+            title = stringResource(R.string.patcher_stop_confirm_title),
+            message = stringResource(R.string.patcher_stop_confirm_description),
+            primaryText = stringResource(R.string.yes),
+            secondaryText = stringResource(R.string.no),
             onConfirm = {
                 state.showCancelDialog = false
                 patcherViewModel.cancelPatching()
                 onBackClick()
-            }
+            },
+            onDismiss = { state.showCancelDialog = false }
         )
     }
 
@@ -458,24 +463,33 @@ fun PatcherScreen(
         }
 
         val installTarget = InstallerManager.InstallTarget.PATCHER
+        val selectedInstallerToken = remember(primaryToken) {
+            if (primaryToken == InstallerManager.Token.AutoSaved) {
+                InstallerManager.Token.Internal
+            } else {
+                primaryToken
+            }
+        }
 
         // Installer entries with periodic updates
-        var options by remember(primaryToken) {
+        var options by remember(selectedInstallerToken) {
             mutableStateOf(
                 installerManager.ensureValidEntries(
-                    installerManager.listEntries(installTarget, includeNone = false),
-                    primaryToken,
+                    installerManager.listEntries(installTarget, includeNone = false)
+                        .filterNot { it.token == InstallerManager.Token.AutoSaved },
+                    selectedInstallerToken,
                     installTarget
                 )
             )
         }
 
         // Periodically update installer list for availability changes
-        LaunchedEffect(installTarget, primaryToken) {
+        LaunchedEffect(installTarget, selectedInstallerToken) {
             while (isActive) {
                 options = installerManager.ensureValidEntries(
-                    installerManager.listEntries(installTarget, includeNone = false),
-                    primaryToken,
+                    installerManager.listEntries(installTarget, includeNone = false)
+                        .filterNot { it.token == InstallerManager.Token.AutoSaved },
+                    selectedInstallerToken,
                     installTarget
                 )
                 delay(1_500.milliseconds)
@@ -485,15 +499,23 @@ fun PatcherScreen(
         InstallerSelectionDialog(
             title = stringResource(R.string.installer_title),
             options = options,
-            selected = primaryToken,
+            selected = selectedInstallerToken,
             onDismiss = installViewModel::dismissInstallerSelectionDialog,
             onConfirm = { selectedToken ->
                 installViewModel.proceedWithSelectedInstaller(selectedToken)
             },
             onOpenShizuku = installerManager::openShizukuApp,
+            shizukuStatusProvider = {
+                installerManager.shizukuStatus(InstallerManager.InstallTarget.PATCHER)
+            },
+            onRequestShizukuPermission = installerManager::requestShizukuPermission,
             autoInstallEnabled = autoInstallWithShizuku,
             onAutoInstallToggle = { enabled ->
                 scope.launch { prefs.autoInstallWithShizuku.update(enabled) }
+            },
+            autoUninstallEnabled = autoUninstallWithShizuku,
+            onAutoUninstallToggle = { enabled ->
+                scope.launch { prefs.autoUninstallWithShizuku.update(enabled) }
             },
             installerPromptEnabled = promptInstallerOnInstall
         )
@@ -543,14 +565,14 @@ fun PatcherScreen(
 
                 PatcherState.SUCCESS -> {
                     val effectiveIsInstalling = isInstalling || (
-                        autoInstallWithShizuku &&
-                        (primaryInstallerPref == InstallerPreferenceTokens.SHIZUKU ||
-                                primaryInstallerPref == InstallerPreferenceTokens.SHIZUKU_PLAY_STORE) &&
-                        patcherSucceeded == true &&
-                        !usingMountInstall &&
-                        !promptInstallerOnInstall &&
-                        installState is InstallViewModel.InstallState.Ready
-                    )
+                            autoInstallWithShizuku &&
+                                    (primaryInstallerPref == InstallerPreferenceTokens.SHIZUKU ||
+                                            primaryInstallerPref == InstallerPreferenceTokens.SHIZUKU_PLAY_STORE) &&
+                                    patcherSucceeded == true &&
+                                    !usingMountInstall &&
+                                    !promptInstallerOnInstall &&
+                                    installState is InstallViewModel.InstallState.Ready
+                            )
                     PatchingSuccess(
                         isInstalling = effectiveIsInstalling,
                         isInstalled = isInstalled,
@@ -570,15 +592,11 @@ fun PatcherScreen(
                         onInstall = {
                             if (usingMountInstall) {
                                 // Mount install
-                                val inputVersion = patcherViewModel.version
-                                    ?: patcherViewModel.currentSelectedApp.version
-                                    ?: "unknown"
                                 installViewModel.installMount(
                                     outputFile = outputFile,
                                     inputFile = patcherViewModel.inputFile,
                                     inputIsTemporary = patcherViewModel.inputFileIsDisposable,
                                     packageName = patcherViewModel.packageName,
-                                    inputVersion = inputVersion,
                                     onPersistApp = { pkg, type ->
                                         patcherViewModel.persistPatchedApp(pkg, type)
                                     }

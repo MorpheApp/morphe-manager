@@ -36,6 +36,36 @@
         <item quantity="many">%s APK souborů</item>
         <item quantity="other">%s APK souborů</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Nainstalována %d aplikace</item>
+        <item quantity="few">Nainstalovány %d aplikace</item>
+        <item quantity="many">Nainstalovány %d aplikace</item>
+        <item quantity="other">Nainstalovány %d aplikace</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Přeinstalována %d aplikace</item>
+        <item quantity="few">Přeinstalovány %d aplikace</item>
+        <item quantity="many">Přeinstalovány %d aplikace</item>
+        <item quantity="other">Přeinstalovány %d aplikace</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Odinstalována %d aplikace</item>
+        <item quantity="few">Odinstalovány %d aplikace</item>
+        <item quantity="many">Odinstalovány %d aplikace</item>
+        <item quantity="other">Odinstalovány %d aplikace</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Odinstalovat %d aplikaci?</item>
+        <item quantity="few">Odinstalovat %d aplikace?</item>
+        <item quantity="many">Odinstalovat %d aplikací?</item>
+        <item quantity="other">Odinstalovat %d aplikací?</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Přeskočena %d aplikace</item>
+        <item quantity="few">Přeskočeny %d aplikace</item>
+        <item quantity="many">Přeskočeny %d aplikace</item>
+        <item quantity="other">Přeskočeny %d aplikace</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Odstranil %s zastaralou záplatu ze seznamu uložených</item>
         <item quantity="few">Odstranil %s zastaralé záplaty ze seznamu uložených</item>
@@ -59,5 +89,11 @@
         <item quantity="few">%s skryté aplikace</item>
         <item quantity="many">%s skrytých aplikací</item>
         <item quantity="other">%s skrytých aplikací</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s aplikace</item>
+        <item quantity="few">%s aplikace</item>
+        <item quantity="many">%s aplikací</item>
+        <item quantity="other">%s aplikací</item>
     </plurals>
 </resources>

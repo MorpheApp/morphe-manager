@@ -7,7 +7,6 @@ package app.morphe.manager.ui.screen.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -276,34 +275,15 @@ fun ManagerUpdateDetailsDialog(
                     if (entries == null) {
                         item("missed_loading") { ChangelogSectionLoading() }
                     } else {
-                        itemsIndexed(
-                            items = entries,
-                            key = { index, _ -> "missed_$index" }
-                        ) { index, entry ->
-                            if (index > 0) {
-                                HorizontalDivider(
-                                    modifier = Modifier.padding(
-                                        top = MorpheDefaults.ContentPaddingSmall,
-                                        bottom = MorpheDefaults.ContentPadding
-                                    ),
-                                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
-                                )
-                            }
-                            ChangelogEntrySection(
-                                entry = entry,
-                                headerIcon = Icons.Outlined.NewReleases,
-                                textColor = textColor
-                            )
-                        }
+                        changelogEntryItems(
+                            entries = entries,
+                            keyPrefix = "missed",
+                            headerIcon = Icons.Outlined.NewReleases
+                        )
                         changelogOlderItems(
                             entries = updateViewModel.olderManagerEntries,
                             isLoading = updateViewModel.isLoadingOlderEntries,
-                            onExpand = {
-                                updateViewModel.loadOlderManagerEntries(
-                                    exclude = entries.map { it.version }.toSet()
-                                )
-                            },
-                            textColor = textColor
+                            onExpand = { updateViewModel.loadOlderManagerEntries() }
                         )
                     }
                 }

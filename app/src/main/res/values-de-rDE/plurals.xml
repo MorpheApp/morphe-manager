@@ -24,6 +24,26 @@
         <item quantity="one">%s APK-Datei</item>
         <item quantity="other">%s APK-Dateien</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">%d App installiert</item>
+        <item quantity="other">%d Apps installiert</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">%d App erneut installiert</item>
+        <item quantity="other">%d Apps erneut installiert</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">%d App deinstalliert</item>
+        <item quantity="other">%d Apps deinstalliert</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">%d App deinstallieren?</item>
+        <item quantity="other">%d Apps deinstallieren?</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">%d App übersprungen</item>
+        <item quantity="other">%d Apps übersprungen</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Veralteten %s Patch von der gespeicherten Auswahl entfernt</item>
         <item quantity="other">Entfernt %s veraltete Patches von der gespeicherten Auswahl</item>
@@ -39,5 +59,9 @@
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s ausgeblendete App</item>
         <item quantity="other">%s ausgeblendete Apps</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s App</item>
+        <item quantity="other">%s Apps</item>
     </plurals>
 </resources>

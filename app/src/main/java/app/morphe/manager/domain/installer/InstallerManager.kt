@@ -15,6 +15,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.annotation.StringRes
 import app.morphe.manager.R
+import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.AOSP_INSTALLER_LABEL
@@ -130,6 +131,39 @@ class InstallerManager(
         prefs.installerPrimary.update(tokenToPreference(token))
     }
 
+    suspend fun uninstallPackage(packageName: String, installType: InstallType?) {
+        if (installType == InstallType.MOUNT) {
+            rootInstaller.uninstall(packageName)
+            return
+        }
+
+        when (val primaryToken = getPrimaryToken()) {
+            Token.Shizuku,
+            Token.ShizukuPlayStore -> {
+                if (availabilityFor(primaryToken, InstallTarget.PATCHER, checkRoot = true).available) {
+                    when (val result = sessionInstaller.uninstallShizuku(packageName)) {
+                        UninstallResult.Success -> return
+                        is UninstallResult.Failure -> throw Exception(
+                            result.message ?: app.getString(R.string.installer_hint_generic)
+                        )
+                    }
+                }
+                sessionInstaller.uninstall(packageName)
+            }
+
+            Token.AutoSaved,
+            Token.RootPlayStore -> {
+                if (availabilityFor(primaryToken, InstallTarget.PATCHER, checkRoot = true).available) {
+                    rootInstaller.uninstallPackage(packageName)
+                } else {
+                    sessionInstaller.uninstall(packageName)
+                }
+            }
+
+            else -> sessionInstaller.uninstall(packageName)
+        }
+    }
+
     /**
      * Resolves the installation plan based on user's preferred installer.
      * Returns a [ResolvedPlan] which includes the plan and information about
@@ -139,9 +173,10 @@ class InstallerManager(
         target: InstallTarget,
         sourceFile: File,
         expectedPackage: String,
-        sourceLabel: String?
+        sourceLabel: String?,
+        primaryTokenOverride: Token? = null
     ): ResolvedPlan {
-        val primaryToken = getPrimaryToken()
+        val primaryToken = primaryTokenOverride ?: getPrimaryToken()
         val primaryAvailability = availabilityFor(primaryToken, target, checkRoot = true)
 
         // If primary is available, use it
@@ -598,6 +633,11 @@ class InstallerManager(
     }
 
     fun openShizukuApp(): Boolean = sessionInstaller.launchShizukuApp()
+
+    fun shizukuStatus(target: InstallTarget): SessionInstaller.ShizukuStatus =
+        sessionInstaller.shizukuStatus(target)
+
+    fun requestShizukuPermission(): Boolean = sessionInstaller.requestShizukuPermission()
 
     /**
      * Returns a deduplicated list of entries for [target], ensuring [token] is always present

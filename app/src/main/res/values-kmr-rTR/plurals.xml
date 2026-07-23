@@ -24,6 +24,26 @@
         <item quantity="one">%s pelê APK</item>
         <item quantity="other">%s pelên APK</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">%d app sazkir</item>
+        <item quantity="other">%d app sazkirî</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">%d app dîsa sazkir</item>
+        <item quantity="other">%d appan dîsa sazkirî</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">%d app rakir</item>
+        <item quantity="other">%d appan rakirî</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Bi serê %d sepanê ya?</item>
+        <item quantity="other">Bi serê %d sepanan ya?</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">%d app derbas kir</item>
+        <item quantity="other">%d appan derbas kirî</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">%s çaresera qeyî ji hejmara dane yê parastî hate rakirin</item>
         <item quantity="other">%s çareserên qeyî ji hejmara dane yê parastî hate rakirin</item>
@@ -39,5 +59,9 @@
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s sepanêyê veşartî</item>
         <item quantity="other">%s sepanên veşartî</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s app</item>
+        <item quantity="other">%s apps</item>
     </plurals>
 </resources>

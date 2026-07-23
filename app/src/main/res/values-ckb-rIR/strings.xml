@@ -19,7 +19,6 @@
     <string name="home_update_available">Morphe نوێکردنەوە بەردەستە</string>
     <string name="home_update_available_subtitle">وەشانی نوێ ئامادەیە بۆ دابەزاندن</string>
     <string name="home_update_error">نوێکردنەوە شکستس هێنا</string>
-    <string name="home_update_error_subtitle">هێڵەکەت بپشکنە وە دووبارە هەوڵ بدەرەوە</string>
     <string name="home_update_skipped_metered">نوێکردنەوەکان پەڕێندرا</string>
     <string name="home_update_skipped_metered_subtitle">داتای مۆبایل چاڵاکە</string>
     <string name="home_updating_sources">نوێکردنەوەی سەرچاوەکان...</string>
@@ -233,10 +232,6 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">دۆخی ڕۆت پێویستی بە دامەزراندنی APK ی ڕەسەن هەیە لەسەر ئامێرەکەت پێش پینەکردن</string>
     <string name="root_gmscore_excluded">پاچی پشتیوانی GmsCore لە دۆخی ڕۆت\'دا بەدەرکراوە</string>
-    <string name="root_pre_patch_installer_title">شێوازی دامەزراندن هەڵبژێرە</string>
-    <string name="root_pre_patch_installer_description">ئامێرەکەت دەستگەیشتنی ڕەگی هەیە. هەڵبژێرە چۆن دەتەوێت کاربەرنامە پینەکراوەکە دابمەزرێنیت</string>
-    <string name="root_pre_patch_installer_standard_title">دامەزراندنی پێوانەیی</string>
-    <string name="root_pre_patch_installer_hint">شێوازی دامەزراندن دیاری دەکات کام پینەی لەخۆگرتووە و ناتوانرێت بگۆڕدرێت پاش پینەکردن</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">هەڵە کۆپی کرا بۆ ڕوونووسگە</string>
     <string name="patcher_error_log">تۆماری هەڵە</string>
@@ -369,7 +364,6 @@
     <string name="settings_appearance_app_language">زمانی ئەپ</string>
     <string name="settings_appearance_app_language_current">زمانی ئێستا</string>
     <string name="settings_appearance_translations_info_title">وەرگێڕانەکان بۆ هەندێک زمانەکان لەوانەیە وون یان ناتەواو بن</string>
-    <string name="settings_appearance_translations_info_text">بۆ وەرگێڕانی زمانی نوێ یان باشترکردنی وەرگێڕانەکانی بەردەست، سەردانی %s بکە</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">شاشەی ماڵەوە</string>
     <string name="settings_appearance_greeting_phrases">دەستەواژەی بەخێرهاتن</string>
@@ -444,8 +438,10 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - System Tab - Installer Section -->
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">باشکردنی پاتری</string>
+    <!-- Settings - System Tab - Notifications Section -->
     <!-- Settings - System Tab - Import and Export Section -->
     <!-- Settings - System Tab - Files & Storage Section -->
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->

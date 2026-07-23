@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Magagamit ang update para sa Morphe</string>
     <string name="home_update_available_subtitle">Handa na mag-install ang bagong bersyon</string>
+    <string name="home_blocked_source_title">Natukoy ang naharang na pinagmulan ng patch</string>
+    <string name="home_blocked_source_subtitle">I-tap upang suriin at alisin</string>
+    <string name="home_metadata_errors_title">Mayroong ilang mga pinagmumulan ng patch na hindi magagamit</string>
+    <string name="home_metadata_errors_subtitle">I-tap upang suriin ang mga pinagmulan</string>
+    <string name="home_metered_skipped_title">Naantala ang mga update sa mobile data</string>
+    <string name="home_metered_skipped_subtitle">I-tap para payagan ang mga update sa mobile data</string>
     <string name="home_update_error">Nabigo ang pag-update</string>
-    <string name="home_update_error_subtitle">Suriin ang iyong koneksyon sa internet at subukan muli</string>
+    <string name="home_update_error_subtitle">Mayroong kamalian habang ina-update ang mga source</string>
     <string name="home_update_skipped_metered">Nabigo ang pag-update</string>
     <string name="home_update_skipped_metered_subtitle">Mobile data ay aktibo</string>
     <string name="home_updating_sources">Ina-update ang mga mapagkukunan…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Walang app na tumutugma sa \"%s\"</string>
     <string name="home_all_apps_hidden_title">Nakatago ang lahat ng apps</string>
     <string name="home_all_apps_hidden_subtitle">Nakatago mo ang lahat ng apps sa home screen</string>
+    <string name="home_category_add">Magdagdag ng kategorya</string>
+    <string name="home_category_all_apps">Lahat ng apps</string>
+    <string name="home_category_custom">Pasadya</string>
+    <string name="home_category_uncategorized">Hindi nakakategorya</string>
+    <string name="home_category_new_title">Bagong kategorya</string>
+    <string name="home_category_rename_title">Palitan ang pangalan ng kategorya</string>
+    <string name="home_category_name">Pangalan ng kategorya</string>
+    <string name="home_category_move_to">Ilipat sa kategorya</string>
+    <string name="home_category_move_selected_title">Ilipat ang mga napiling app</string>
+    <string name="home_category_delete_confirm_title">Burahin ang kategorya</string>
+    <string name="home_category_delete_confirm_message">Burahin ang kategorya &lt;b&gt;%1$s&lt;/b&gt;? Ang mga app dito ay ibabalik sa &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Hindi magagamit ang mga aksyon para sa kategoryang ito</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Anong app ang gusto mong i-patch?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Naglalagay ng mga target na app na pang-eksperimento kung mayroon</string>
     <string name="sources_management_already_exists">Ang pinagmulang ito ay naidagdag na.</string>
     <string name="sources_management_invalid_url">Hindi balido ang source URL. Pakisuri ang address at subukang muli.</string>
+    <string name="sources_management_blocked">Ang source ng patch na ito ay naka-block at hindi maaaring idagdag</string>
+    <string name="sources_management_source_blocked_badge">Naka-block</string>
     <string name="sources_management_metadata_unavailable">Hindi available ang Metadata</string>
     <string name="sources_management_metadata_unavailable_hint">Hindi available ang remote metadata file. Gumagana pa rin ang pag-patch gamit ang naka-install na bundle, ngunit hindi pinagana ang auto-update para sa source na ito.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Hindi ma-download ang patch bundle. Maaaring mali ang source URL o hindi umiiral ang file.</string>
@@ -286,6 +306,7 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="header_creator_guide_positioning_body">Gumamit ng pinch-to-zoom at drag gesture nang direkta sa preview para iposisyon at i-scale ang iyong imahe. Lumalabas ang mga snap guide kapag malapit na ang imahe sa gitna. Maaari mo ring gamitin ang slider sa ibaba ng preview.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Nais mo bang burahin ang aplikasyong ito? </string>
+    <string name="batch_uninstall_confirm_body">Ang mga piling app ay permanenteng tatanggalin sa iyong device</string>
     <string name="home_app_info_remove_app_warning">Permanenteng buburahin ang:</string>
     <string name="home_app_info_delete_item_database">Database entry</string>
     <string name="home_app_info_delete_item_patched_apk">Naka-patch na APK file</string>
@@ -308,16 +329,18 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="home_app_info_app_deleted_warning">Binura ang aplikasyon </string>
     <string name="home_app_info_app_deleted_description">Binura ang aplikasyong ito sa labas ng Morphe. Ire-patch ito upang maibalik ang kanyang punksyonalidad</string>
     <string name="home_app_info_apk_size">Laki ng APK</string>
+    <string name="home_app_info_cpu_arch">Arkitektura ng CPU</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Kinakailangan ng root mode ang orihinal na APK upang mag-install ito sa iyong device bago ito i-patch</string>
     <string name="root_gmscore_excluded">Hindi kasama ang GmsCore support patch sa root mode</string>
-    <string name="root_pre_patch_installer_title">Piliin ang paraan ng pag-install</string>
-    <string name="root_pre_patch_installer_description">May access sa root ang iyong device. Piliin kung paano mong i-install ang na-patch na aplikasyon</string>
-    <string name="root_pre_patch_installer_mount_title">I-mount ang root</string>
-    <string name="root_pre_patch_installer_mount_description">I-mount ang na-patch na APK sa ilalim ng stock na aplikasyon. Hindi na kailangan ang GmsCore</string>
+    <string name="root_pre_patch_installer_title">Pumili ng patch mode</string>
+    <string name="root_pre_patch_installer_description">May root access ang iyong device. Piliin kung dapat i-patch ang app na ito para sa root mount o standard install</string>
+    <string name="root_pre_patch_installer_mount_title">Root mount mode</string>
+    <string name="root_pre_patch_installer_mount_description">Mga patch para sa root mount, pagkatapos ay ima-mount ang APK sa ibabaw ng katugmang stock app. Hindi kailangan ng GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Kung gumagamit ka ng KernelSU o APatch, huwag paganahin ang pag-unmount o pagtatago ng module para sa mga app na naka-install gamit ang root mount. Kung hindi, ang stock app ay maaaring tumakbo pa rin kahit na ipinapakita ng Morphe na naka-mount ito.</string>
     <string name="root_pre_patch_installer_standard_title">Standard na pag-install</string>
-    <string name="root_pre_patch_installer_standard_description">I-install bilang isang hiwalay na app na may suporta sa GmsCore. Maaaring pumili ng installer pagkatapos ng pag-patch</string>
-    <string name="root_pre_patch_installer_hint">Tinutukoy ng pamamaraan ng installation kung alin sa mga patch ang isasama at hindi na maaaring baguhin pagkatapos ang pagpa-patch</string>
+    <string name="root_pre_patch_installer_standard_description">Mga patch bilang isang normal na APK na may suporta sa GmsCore. Ang iyong setting ng installer ay ginagamit pagkatapos ng pag-patch.</string>
+    <string name="root_pre_patch_installer_hint">Ang mode ng patch na ito ay hiwalay sa Settings > System > Installer at hindi maaaring baguhin pagkatapos ng pag-patch.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Isang pagkakamali na nakopya sa clipboard</string>
     <string name="patcher_error_log">Tala ng pagkakamali</string>
@@ -413,6 +436,8 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="patcher_process_exit_message">Lumabas ang proseso ng patcher na may code %s</string>
     <string name="install_app_success">Matagumpay na na-install</string>
     <string name="install_app_fail">Nabigong ma-install ang aplikasyon: %s</string>
+    <string name="uninstall_app_fail">Nabigong i-uninstall ang app: %s</string>
+    <string name="uninstall_timeout">Nag-time out ang pag-uninstall</string>
     <string name="save_apk_success">Na-save ang APK</string>
     <string name="saved_app_export_failed">Nabigong mag-export ang na-patch na aplikasyon</string>
     <string name="saved_app_removed_toast">Inalis ang naka-save na na-patch na aplikasyon</string>
@@ -458,10 +483,13 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_parallax_effect_description">Maayos na paglilipat ng background kapag tinatagilid ang device</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
+    <string name="settings_appearance_theme_mode">Tema</string>
     <string name="settings_appearance_system">Sistema</string>
     <string name="settings_appearance_light">Maliwanag</string>
     <string name="settings_appearance_dark">Madilim</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monokrom</string>
+    <string name="settings_appearance_color_style">Estilo ng kulay</string>
     <string name="settings_appearance_accent_color">Accent na kulay</string>
     <string name="settings_appearance_pure_black">Purong Itim</string>
     <string name="settings_appearance_pure_black_description">Gamitin ang totoong maitim na mga background</string>
@@ -469,11 +497,16 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_app_language">Wika ng aplikasyon</string>
     <string name="settings_appearance_app_language_current">Kasalukuyang wika</string>
     <string name="settings_appearance_translations_info_title">Maaaring nawawala o hindi kumpleto ang pagsasalin-wika para sa ibang wika</string>
-    <string name="settings_appearance_translations_info_text">Upang isalin ang mga bagong wika o pagbutihin ang mga umiiral na pagsasalin-wika, bisitahin ang %s</string>
+    <string name="settings_appearance_translations_info_text">"Upang isalin ang mga bagong wika o pagbutihin ang mga umiiral na pagsasalin-wika, bisitahin ang
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Pangunahing iskrin</string>
     <string name="settings_appearance_greeting_phrases">Mga pagbati</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ipakita ang mensahe ng pagbati sa pangunahing iskrin</string>
+    <string name="settings_appearance_app_grouping">Pagpapangkat ng app</string>
+    <string name="settings_appearance_app_grouping_description">Magpakita ng home screen switcher upang pangkatin ang mga app ayon sa pinagmulan o iyong sariling mga kategorya, pinapanatili ang pagpili kapag naka-off</string>
+    <string name="settings_appearance_sort_button">Pindutan ng Pagbukod-bukod</string>
+    <string name="settings_appearance_sort_button_description">Ipakita ang pindutan ng pagbukod-bukod sa pangunahing screen</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Icon ng aplikasyon</string>
     <string name="settings_appearance_app_icon_default">Panimula</string>
@@ -487,6 +520,7 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Baguhin ang icon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Mga update</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Mga pag-update bago ang paglabas</string>
     <string name="settings_advanced_updates_use_prereleases_description">Maagang pag-access sa mga bagong bersyon ng Morphe app. I-enable ang pre-release bawat source sa mga pinagmulan ng patch</string>
     <string name="settings_advanced_updates_allow_metered">Mga pag-update ng mobile data</string>
@@ -536,7 +570,8 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_advanced_github_pat_configured">Nakompigura ang token</string>
     <string name="settings_advanced_github_pat_how_to_get">Paano kumuha ng token</string>
     <string name="settings_advanced_github_pat_dialog_title">Itakda ang GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Magtakda ng GitHub Personal Access Token para makapagdagdag ng mga pull request bilang mga external na source. Lumikha ng PAT na may saklaw na public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Magtakda ng GitHub Personal Access Token para makapagdagdag ng mga pull request bilang mga external na source. Lumikha ng PAT na may saklaw na public_repo on
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Isama sa settings export</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Idinaragdag ang PAT na ito sa mga na-export na setting ng Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Huwag mong ibahagi ang iyong PAT. Kung isasama mo ito sa isang settings export, panatilihing pribado ang file na iyon dahil naglalaman ito ng token</string>
@@ -621,12 +656,13 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Inaalis ang Shorts button mula sa launcher widget</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
+    <string name="installer_settings_title">Default na installer</string>
     <string name="installer_title">Piliin ang installer</string>
     <string name="installer_internal_description">Gamitin ang Android package installer</string>
     <string name="installer_play_store_description">Gumagamit ng system installer at itinakda ang Google Play Store bilang pinagmumulan ng pag-install</string>
     <string name="installer_root_play_store_description">Tahimik na nag-i-install gamit ang root at itinakda ang Google Play Store bilang pinagmumulan ng pag-install</string>
-    <string name="installer_auto_saved_name">Na-root na mount installer</string>
-    <string name="installer_auto_saved_description">Mina-mount ang na-patch na APK sa naka-install na aplikasyon</string>
+    <string name="installer_auto_saved_name">Root mount</string>
+    <string name="installer_auto_saved_description">Ikakabit ang mga app na na-patch sa root mount mode. Ang mga standard na na-patch na APK ay gumagamit ng ibang installer.</string>
     <string name="installer_shizuku_description">Mag-install nang tahimik gamit ang Shizuku o Sui</string>
     <string name="installer_shizuku_play_store_description">Tahimik na nag-i-install sa pamamagitan ng Shizuku o Sui at itinakda ang Google Play Store bilang pinagmumulan ng pag-install</string>
     <string name="installer_option_none">Walang urong</string>
@@ -635,9 +671,10 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_status_not_supported">Hindi suportado para sa aksyong ito</string>
     <string name="installer_status_shizuku_not_installed">I-install sa pamamagitan ng Shizuku o Sui upang gamitin ang opsyon na ito</string>
     <string name="installer_status_shizuku_not_running">Simulan ang Shizuku o Sui at subukan muli</string>
-    <string name="installer_status_shizuku_permission">Bigyan ng pahintulot ang Shizuku kay Morphe mula sa Shizuku</string>
+    <string name="installer_status_shizuku_permission">Bigyan ng pahintulot ang Morphe mula sa Shizuku app</string>
     <string name="installer_mount_warning_install">Nakatakda ang iyong primary installer sa rooted na mount installer. Hindi na-install gamit ang mount ang na-save na aplikasyong ito</string>
     <string name="mount_version_mismatch_message">Hindi tumutugma sa na-patch na bersyon ng aplikasyon (%1$s) ang stock na bersyon ng aplikasyon (%2$s). I-mount ang tumutugmang stock na bersyon, at subukan muli</string>
+    <string name="mount_stock_restore_failed_message">Tanggihan ng Android ang na-save na orihinal na APK. I-install ang katumbas na stock na bersyon, pagkatapos ay subukang Mount muli.</string>
     <string name="installer_status_shizuku_unsupported">Hindi suportado ang naka-install na bersyon ng Shizuku</string>
     <string name="installer_action_open_shizuku">Buksan ang Shizuku</string>
     <string name="installer_hint_generic">Nabigo ang pag-install. Subukan muli o lumipat sa ibang installer</string>
@@ -650,21 +687,48 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_unavailable_shizuku_hint">Tiyaking tumatakbo ang Shizuku at binibigyan ng pahintulot ang aplikasyong ito</string>
     <string name="installer_use_standard">Gamitin ang standard</string>
     <string name="installer_play_store_warning_title">I-install bilang Play Store?</string>
-    <string name="installer_play_store_warning_message">Ang patched app ay itatala bilang naka-install mula sa Google Play Store. Nagbibigay-daan ito sa mga serbisyo tulad ng Android Auto upang makilala ito bilang isang Play Store app</string>
+    <string name="installer_play_store_warning_message">Ang na-patch na app ay itatala bilang naka-install mula sa Google Play Store. Makakatulong ito sa mga serbisyo tulad ng Android Auto na kilalanin ito bilang isang Play Store app, ngunit hindi ito garantisado para sa bawat app o device. Maaaring mag-iba ang pag-uugali depende sa bersyon ng Android, ROM, tatak ng device, at mga partikular na pagsusuri ng app</string>
     <string name="installer_play_store_warning_risk">Maaaring mag-alok ang Play Store ng mga update para sa patched app. Ang pag-install ng update na iyon ay mag-o-overwrite sa patched APK gamit ang orihinal na bersyon at aalisin ang mga patch. Kung hihilingin na mag-update, i-tap ang three-dot menu sa page ng Play Store ng app at piliin ang \"I-off ang mga update\"</string>
     <string name="installer_play_store_warning_continue">Naiintindihan ko, magpatuloy</string>
+    <string name="installer_play_store_mode">I-install bilang Play Store</string>
+    <string name="installer_play_store_mode_description">Itala ang Google Play Store bilang pinagmulan ng pag-install para sa pamamaraang ito</string>
     <string name="settings_prompt_installer_on_install">Prompt ng pagpili ng installer</string>
     <string name="settings_prompt_installer_on_install_description">Ipinapakita ang diyalogo ng pagpili ng installer sa tuwing mag-i-install ka ng naka-patch na aplikasyon</string>
     <string name="settings_auto_install_with_shizuku">Awtomatikong i-install pagkatapos ng pag-patch</string>
     <string name="settings_auto_install_with_shizuku_description">Tahimik na i-i-install ang patched na APK sa sandaling makumpleto ang pag-patch</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" ay naka-enable - lalaktawan ang awtomatikong pag-install</string>
+    <string name="settings_auto_uninstall_with_shizuku">Awtomatikong i-uninstall sa pagkakasalungatan</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Kapag awtomatikong nag-i-install gamit ang Shizuku, i-uninstall muna ang kasalukuyang app kung nag-uulat ang Android ng salungatan sa lagda. Maaari nitong alisin ang data ng app</string>
+    <string name="settings_auto_uninstall_warning_title">Paganahin ang auto-uninstall?</string>
+    <string name="settings_auto_uninstall_warning_message">Kung mag-uulat ang Android ng salungatan sa lagda sa panahon ng Shizuku auto-install, ia-uninstall ng Morphe ang kasalukuyang app bago i-install ang na-patch na APK</string>
+    <string name="settings_auto_uninstall_warning_risk">Maaari nitong alisin ang data ng app. Kung mabigo ang na-patch na APK na i-install pagkatapos ng pag-uninstall, maaaring wala na ang nakaraang app</string>
+    <string name="installer_shizuku_status_action">Suriin ang katayuan ng Shizuku</string>
+    <string name="installer_shizuku_status_title">Katayuan ng Shizuku</string>
+    <string name="installer_shizuku_status_ready">Handa</string>
+    <string name="installer_shizuku_status_issue">Kailangan ng atensyon</string>
+    <string name="installer_shizuku_status_supported">Suportado</string>
+    <string name="installer_shizuku_status_running">Tumatakbo</string>
+    <string name="installer_shizuku_status_permission">Pahintulot</string>
+    <string name="installer_shizuku_status_mode">Mode</string>
+    <string name="installer_shizuku_status_provider">Tagapagkaloob</string>
+    <string name="installer_shizuku_status_granted">Ipinagkaloob</string>
+    <string name="installer_shizuku_status_missing">Nawawala</string>
+    <string name="installer_shizuku_request_permission">Humiling ng pahintulot</string>
+    <string name="installer_shizuku_install_fail">Nabigo ang pag-install ng Shizuku: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Nabigo ang pag-install ng Shizuku: %1$s
+
+Mga Detalye: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Nawawala ang pahintulot ng Shizuku. Ipagkaloob ang pahintulot sa Morphe at subukang muli</string>
+    <string name="installer_shizuku_error_timeout">Hindi nagbalik ang Shizuku ng resulta ng pag-install. Tiyakin na ito ay tumatakbo pa rin at subukang muli</string>
+    <string name="installer_shizuku_error_downgrade">Hinarangan ito ng Android dahil bababa ang bersyon ng naka-install na app</string>
+    <string name="installer_shizuku_error_signature">Hinarangan ito ng Android dahil ang naka-install na app ay mayroong ibang lagda</string>
+    <string name="installer_shizuku_error_invalid_apk">Hindi mabasa ng Android ang APK na ito</string>
+    <string name="installer_shizuku_error_user_profile">Hinarangan ito ng Android para sa kasalukuyang user o work profile</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pag-optimize sa baterya</string>
     <string name="settings_system_battery_optimization_description">Pinapanatili ang patcher na tumatakbo kapag ang app ay minimize</string>
-    <string name="settings_system_performance">Pagganap</string>
+    <string name="settings_system_background">Likuran</string>
     <string name="settings_system_process_runtime">Runtime ng proseso</string>
     <string name="settings_system_process_runtime_description">Pinapatakbo ang pag-patch sa isang hiwalay na proseso para sa mas mahusay na katatagan</string>
-    <string name="settings_system_process_runtime_memory_limit">Limitasyon ng memorya</string>
     <string name="settings_system_process_runtime_memory_limit_description">Ang mas mataas na limitasyon ay nagpapabilis ng pag-patch sa mga kayang device</string>
     <string name="settings_system_process_runtime_enable">Paganahin ang runtime ng proseso</string>
     <string name="settings_system_memory_limit_subtitle">Magagamit ang memorya para sa pagpa-patch</string>
@@ -672,6 +736,19 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_process_runtime_enabled_description">%s limitasyon sa MB</string>
     <string name="settings_system_process_runtime_disabled_description">Pindutin upang ikonpigura</string>
     <string name="settings_system_process_runtime_description_not_available">Kailangan ng feature na ito ang Android 11 o mas mataas</string>
+    <string name="settings_system_patcher_completion_sound">Tunog ng pagkumpleto</string>
+    <string name="settings_system_patcher_completion_sound_description">Tumutugtog ng natatanging tono para sa tagumpay o kabiguan kapag natapos ang pag-patch</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Mga Abiso</string>
+    <string name="settings_system_notifications_description">I-configure ang mga alerto sa likuran at mga tunog ng pagkumpleto</string>
+    <string name="settings_system_notifications_success_sound">Tunog ng tagumpay</string>
+    <string name="settings_system_notifications_error_sound">Tunog ng pagkabigo</string>
+    <string name="settings_system_notifications_sound_default">Panimula</string>
+    <string name="settings_system_notifications_sound_picker_title">Pumili ng pinagmulan ng tunog</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Mga tunog ng sistema</string>
+    <string name="settings_system_notifications_sound_pick_file">Pumili mula sa mga file</string>
+    <string name="settings_system_notifications_sound_reset">Ibalik sa default</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Pumili ng tono</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">I-import &amp; i-export</string>
     <string name="settings_system_keystore">Keystore</string>
@@ -717,12 +794,37 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_apks_deleted_all">Matagumpay na nabura ang mga APK</string>
     <string name="settings_system_apks_export_zip_success">Na-export ang mga napiling APK</string>
     <string name="settings_system_apks_export_zip_failed">Nabigo ang pag-export ng mga napiling APK</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Pamamahala ng imbakan</string>
+    <string name="settings_system_storage_management_description">Suriin ang paggamit ng disk at i-clear ang mga naka-cache na file</string>
+    <string name="settings_system_storage_keystore_title">Pag-sign ng keystore</string>
+    <string name="settings_system_storage_app_data_title">Data ng app</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch bundle</string>
+    <string name="settings_system_storage_http_cache_title">Cache ng network</string>
+    <string name="settings_system_storage_http_cache_description">Na-cache ang mga tugon ng HTTP upang mapabilis ang mga update</string>
+    <string name="settings_system_storage_installer_cache_title">Cache ng panlabas na installer</string>
+    <string name="settings_system_storage_installer_cache_description">Mga kopya ng APK na ipinasa sa mga third-party installer</string>
+    <string name="settings_system_storage_patcher_workspace_title">Workspace ng Patcher</string>
+    <string name="settings_system_storage_patcher_workspace_description">Mga runtime file ng Patcher at mga nasirang scratch data</string>
+    <string name="settings_system_storage_temporary_title">Mga pansamantalang file</string>
+    <string name="settings_system_storage_temporary_description">Mga working file na ginawa habang nagpe-patch</string>
+    <string name="settings_system_storage_clear_all">I-clear ang lahat ng cache</string>
+    <string name="settings_system_storage_clear_all_description">Nililinis ang lahat ng puwedeng mabawi na espasyo ng cache nang sabay-sabay</string>
+    <string name="settings_system_storage_clear_all_confirm">Ito ay magcle-clear ng mga na-cache na tugon ng network, mga kopya ng installer na naka-stage, at mga pansamantalang file. Ang orihinal at na-patch na mga APK ay mananatili</string>
+    <string name="settings_system_storage_cleared">Napalaya ang %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Walang dapat i-clear</string>
+    <string name="settings_system_storage_open_app_info_title">Buksan ang storage ng Android app</string>
+    <string name="settings_system_storage_open_app_info_description">Pamahalaan o i-clear ang lahat ng data ng Morphe sa pamamagitan ng mga setting ng system</string>
+    <string name="settings_system_save_original_apks_title">Panatilihin ang orihinal na mga APK</string>
+    <string name="settings_system_save_original_apks_description">I-save ang pre-patch na APK upang magamit muli para sa pag-patch nang hindi na kailangang piliin muli ang file</string>
+    <string name="settings_system_save_patched_apks_title">Panatilihin ang mga naka-patch na APK</string>
+    <string name="settings_system_save_patched_apks_description">I-save ang kopya ng naka-patch na APK para sa ibang pagkakataon na i-export o i-reinstall mula sa manager</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Na-patch na mga APK</string>
     <string name="settings_system_patched_apks_description">Pamahalaan ang mga nakaimbak na naka-patch na mga file ng aplikasyon</string>
     <string name="settings_system_patched_apks_empty">Wala pang naka-patch na APK</string>
     <string name="settings_system_patched_apks_delete_title">Burahin ang naka-patch na APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Nais mo bang burahin ang nakaimbak na naka-patch na APK para sa %s?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Sigurado ka bang gusto mong burahin ang nakaimbak na naka-patch na APK para sa &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">Matagumpay na nabura ang naka-patch na APK</string>
     <string name="settings_system_patched_apks_delete_all_title">Burahin ang lahat ng naka-patch na APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -731,7 +833,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_original_apks_empty">Walang nakaimbak na orihinal na mga APK</string>
     <string name="settings_system_original_apks_deleted">Matagumpay na nabura ang orihinal na APK</string>
     <string name="settings_system_original_apks_delete_title">Burahin ang orihinal na APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Burahin ang orihinal na APK para sa %s? Hindi ka makakapag-repatch nang hindi nagbibigay ng bagong APK</string>
+    <string name="settings_system_original_apks_delete_confirm">Burahin ang orihinal na APK para sa &lt;b&gt;%s&lt;/b&gt;? Hindi ka makakapag-repatch nang hindi nagbibigay ng bagong APK</string>
     <string name="settings_system_original_apks_delete_all_title">Burahin ang lahat ng orihinal na APK?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Mga pagpipilian ng patch</string>
@@ -746,15 +848,15 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_system_patch_selection_source_format">Pinagmulan #%s</string>
     <string name="settings_system_patch_selection_will_delete">Buburahin nito ang:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Permanenteng buburahin nito ang lahat ng naka-save na mga pagpipilian sa patch para sa lahat ng mga pakete at pinagmulan</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Permanenteng buburahin nito ang lahat ng naka-save na mga pagpipilian sa patch para %s sa lahat ng mga mapagkukunan</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Permanenteng buburahin nito ang naka-save na mga pagpipilian ng patch para sa %1$s mula sa pinagmulan #%2$s </string>
+    <string name="settings_system_patch_selection_reset_package_warning">Permanenteng buburahin nito ang lahat ng naka-save na mga pagpipilian sa patch para sa &lt;b&gt;%s&lt;/b&gt; sa lahat ng mga mapagkukunan</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Permanenteng buburahin nito ang naka-save na mga pagpipilian ng patch para sa &lt;b&gt;%1$s&lt;/b&gt; sa &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Permanenteng buburahin nito ang lahat ng naka-save na mga pagpipilian sa patch para sa mga napiling pakete</string>
     <string name="settings_system_export_source_data_fail">Nabigong ma-export ang pinagmulan ng datos</string>
     <string name="settings_system_export_source_data_success">Matagumpay na na-export ang pinagmulan ng datos</string>
     <string name="settings_system_import_source_data_fail">Nabigong ma-import ang pinagmulan ng datos</string>
     <string name="settings_system_import_source_data_success">Matagumpay na na-import ang pinagmulan ng datos</string>
-    <string name="settings_system_patch_details_title">Detalye ng patch</string>
-    <string name="settings_system_selected_patches_title">Piniling mga patch (%s)</string>
-    <string name="settings_system_patch_options_title">Mga pagpipilian ng patch (%s)</string>
+    <string name="settings_system_selected_patches_section">Piniling mga patch</string>
+    <string name="settings_system_patch_options_section">Mga pagpipilian ng patch</string>
     <string name="settings_system_no_patches_or_options">Walang naka-save na mga patch o pagpipilian</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Pasadyang pumili ng file</string>

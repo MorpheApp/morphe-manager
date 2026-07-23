@@ -36,6 +36,36 @@
         <item quantity="many">%s APK файлів</item>
         <item quantity="other">%s APK файлів</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Встановлено %d застосунок</item>
+        <item quantity="few">Встановлено %d застосунки</item>
+        <item quantity="many">Встановлено %d застосунків</item>
+        <item quantity="other">Встановлено %d застосунків</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Перевстановлено %d застосунок</item>
+        <item quantity="few">Перевстановлено %d застосунки</item>
+        <item quantity="many">Перевстановлено %d застосунків</item>
+        <item quantity="other">Перевстановлено %d застосунків</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Видалено %d застосунок</item>
+        <item quantity="few">Видалено %d застосунки</item>
+        <item quantity="many">Видалено %d застосунків</item>
+        <item quantity="other">Видалено %d застосунків</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Видалити %d застосунок?</item>
+        <item quantity="few">Видалити %d застосунки?</item>
+        <item quantity="many">Видалити %d застосунків?</item>
+        <item quantity="other">Видалити %d застосунків?</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Пропущено %d застосунок</item>
+        <item quantity="few">Пропущено %d застосунки</item>
+        <item quantity="many">Пропущено %d застосунків</item>
+        <item quantity="other">Пропущено %d застосунків</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Видалено %s застарілий патч зі збереженого вибору</item>
         <item quantity="few">Видалено %s застарілі патчі зі збереженого вибору</item>
@@ -59,5 +89,11 @@
         <item quantity="few">%s приховані застосунки</item>
         <item quantity="many">%s прихованих застосунків</item>
         <item quantity="other">%s прихованих застосунків</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s застосунок</item>
+        <item quantity="few">%s застосунки</item>
+        <item quantity="many">%s застосунків</item>
+        <item quantity="other">%s застосунків</item>
     </plurals>
 </resources>

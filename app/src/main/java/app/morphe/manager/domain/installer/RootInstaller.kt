@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
+import android.content.pm.PackageInfo
 import android.os.IBinder
 import android.os.SystemClock
 import app.morphe.manager.IRootSystemService
@@ -15,11 +16,13 @@ import com.topjohnwu.superuser.ipc.RootService
 import com.topjohnwu.superuser.nio.FileSystemManager
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.time.withTimeoutOrNull
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.IOException
 import java.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 
 class RootInstaller(
     private val app: Application,
@@ -101,38 +104,40 @@ class RootInstaller(
 
     suspend fun isAppMounted(packageName: String) = withContext(Dispatchers.IO) {
         pm.getPackageInfo(packageName)?.applicationInfo?.sourceDir?.let {
-            execute("mount | grep \"$it\"").isSuccess
+            execute("mount | grep -F ${it.shellQuote()}").isSuccess
         } ?: false
     }
 
     suspend fun mount(packageName: String) {
-        if (isAppMounted(packageName)) return
-
         withContext(Dispatchers.IO) {
             val stockAPK = pm.getPackageInfo(packageName)?.applicationInfo?.sourceDir
                 ?: throw Exception("Failed to load application info")
             val patchedAPK = resolvePatchedApkPath(packageName)
+            val stockPath = stockAPK.shellQuote()
+            val patchedPath = patchedAPK.shellQuote()
 
-            // Set SELinux context, bind-mount, and restart the app atomically
+            // Set SELinux context, bind-mount in the root and zygote namespaces, and restart
+            // the app so its next process inherits the patched APK view.
             execute(
-                "chcon u:object_r:apk_data_file:s0 \"$patchedAPK\"; " +
-                        "mount -o bind \"$patchedAPK\" \"$stockAPK\"; " +
-                        "am force-stop \"$packageName\""
+                "chcon u:object_r:apk_data_file:s0 $patchedPath; " +
+                        unmountBindCommands(stockPath) + "; " +
+                        "mount -o bind $patchedPath $stockPath; " +
+                        mountInZygoteNamespacesCommand(patchedPath, stockPath) + "; " +
+                        "am force-stop ${packageName.shellQuote()}"
             ).assertSuccess("Failed to mount APK")
         }
     }
 
     suspend fun unmount(packageName: String) {
-        if (!isAppMounted(packageName)) return
-
         withContext(Dispatchers.IO) {
             val stockAPK = pm.getPackageInfo(packageName)?.applicationInfo?.sourceDir
-                ?: throw Exception("Failed to load application info")
+                ?: return@withContext
+            val stockPath = stockAPK.shellQuote()
 
-            execute("umount -l \"$stockAPK\"").assertSuccess("Failed to unmount APK")
+            execute(unmountBindCommands(stockPath)).assertSuccess("Failed to unmount APK")
 
             // Force-stop the app so it restarts clean without the unmounted patched APK.
-            execute("am force-stop \"$packageName\"")
+            execute("am force-stop ${packageName.shellQuote()}")
         }
     }
 
@@ -151,18 +156,32 @@ class RootInstaller(
 
         unmount(packageName)
 
+        var installedStockInfo = pm.getPackageInfo(packageName)
+        var stockSourceFile: File? = null
+
         stockAPK?.let { stockApp ->
-            pm.getPackageInfo(packageName)?.let { packageInfo ->
-                // TODO: get user id programmatically
-                if (pm.getVersionCode(packageInfo) <= pm.getVersionCode(
-                        pm.getPackageInfo(patchedAPK)
-                            ?: error("Failed to get package info for patched app")
-                    )
-                )
-                    execute("pm uninstall -k --user 0 $packageName").assertSuccess("Failed to uninstall stock app")
+            val stockInfo = pm.getPackageInfo(stockApp)
+                ?: error("Failed to get package info for stock app")
+            if (stockInfo.packageName != packageName) {
+                error("Stock APK package (${stockInfo.packageName}) does not match $packageName")
             }
 
-            execute("pm install \"${stockApp.absolutePath}\"").assertSuccess("Failed to install stock app")
+            val installedInfo = pm.getPackageInfo(packageName)
+            val stockAlreadyInstalled = installedInfo != null &&
+                    pm.getVersionCode(installedInfo) == pm.getVersionCode(stockInfo) &&
+                    installedInfo.versionName == stockInfo.versionName
+
+            if (!stockAlreadyInstalled) {
+                val result = installStockApp(stockApp, packageName)
+                val stockInstalled = waitForInstalledStock(packageName, stockInfo)
+                if (!stockInstalled) {
+                    if (!result.isSuccess) throw StockAppInstallException(result.failureDetail())
+                    throw StockAppInstallException("Stock app install did not settle")
+                }
+            }
+
+            installedStockInfo = pm.getPackageInfo(packageName)
+            stockSourceFile = stockApp
         }
 
         val moduleDir = remoteFS.getFile(modulePath)
@@ -172,6 +191,7 @@ class RootInstaller(
 
         listOf(
             "service.sh",
+            "post-fs-data.sh",
             "module.prop",
         ).forEach { file ->
             assets.open("root/$file").use { inputStream ->
@@ -190,6 +210,25 @@ class RootInstaller(
             }
         }
 
+        val installedStockPath = installedStockInfo?.applicationInfo?.sourceDir
+        val stockMountPaths = collectStockMountPaths(packageName, installedStockPath)
+        val stockModuleApk = "$modulePath/$packageName-stock.apk"
+        val stockSourcePath = stockSourceFile?.absolutePath ?: installedStockPath
+        val stockModuleApkWritten = !stockSourcePath.isNullOrBlank() && stockMountPaths.isNotEmpty()
+        if (stockModuleApkWritten) {
+            remoteFS.getFile(stockSourcePath)
+                .also { if (!it.exists()) throw Exception("Stock APK doesn't exist") }
+                .newInputStream().use { inputStream ->
+                    remoteFS.getFile(stockModuleApk).newOutputStream().use { outputStream ->
+                        inputStream.copyTo(outputStream)
+                    }
+                }
+
+            remoteFS.getFile("$modulePath/stock-paths.txt").newOutputStream().use { outputStream ->
+                outputStream.write(stockMountPaths.joinToString("\n", postfix = "\n").toByteArray())
+            }
+        }
+
         "$modulePath/$packageName.apk".let { apkPath ->
 
             remoteFS.getFile(patchedAPK.absolutePath)
@@ -200,12 +239,11 @@ class RootInstaller(
                     }
                 }
 
-            execute(
-                "chmod 644 $apkPath",
-                "chown system:system $apkPath",
-                "chcon u:object_r:apk_data_file:s0 $apkPath",
-                "chmod +x $modulePath/service.sh"
-            ).assertSuccess("Failed to set file permissions")
+            setModuleFilePermissions(
+                modulePath = modulePath,
+                patchedApkPath = apkPath,
+                stockApkPath = stockModuleApk.takeIf { stockModuleApkWritten }
+            )
         }
 
         // Force-stop the app so it restarts with the newly mounted patched APK.
@@ -218,6 +256,12 @@ class RootInstaller(
         execute(
             "pm install -t -i ${PLAY_STORE_INSTALLER_PACKAGE.shellQuote()} -r ${apkFile.absolutePath.shellQuote()}"
         ).assertSuccess("Failed to install APK as Play Store")
+    }
+
+    suspend fun uninstallPackage(packageName: String) = withContext(Dispatchers.IO) {
+        execute(
+            "pm uninstall --user 0 ${packageName.shellQuote()}"
+        ).assertSuccess("Failed to uninstall app")
     }
 
     suspend fun uninstall(packageName: String) {
@@ -245,24 +289,160 @@ class RootInstaller(
         throw Exception("Patched APK not found for mount")
     }
 
+    private suspend fun installStockApp(stockApp: File, packageName: String): Shell.Result {
+        val tempPath = "/data/local/tmp/morphe-stock-$packageName.apk"
+        val tempPathQuoted = tempPath.shellQuote()
+
+        return execute(
+            $$"""
+                rm -f $$tempPathQuoted;
+                cp $${stockApp.absolutePath.shellQuote()} $$tempPathQuoted &&
+                chmod 644 $$tempPathQuoted &&
+                pm install -r -d $$tempPathQuoted;
+                result=$?;
+                rm -f $$tempPathQuoted;
+                exit $result
+            """.trimIndent()
+        )
+    }
+
+    private suspend fun waitForInstalledStock(packageName: String, stockInfo: PackageInfo): Boolean =
+        withTimeoutOrNull(STOCK_INSTALL_SETTLE_TIMEOUT) {
+            while (true) {
+                val installedInfo = pm.getPackageInfo(packageName)
+                if (installedInfo != null &&
+                    pm.getVersionCode(installedInfo) == pm.getVersionCode(stockInfo) &&
+                    installedInfo.versionName == stockInfo.versionName
+                ) {
+                    return@withTimeoutOrNull true
+                }
+                delay(STOCK_INSTALL_SETTLE_POLL)
+            }
+        } == true
+
+    private suspend fun collectStockMountPaths(
+        packageName: String,
+        installedStockPath: String?
+    ): List<String> {
+        val hiddenSystemPath = execute("dumpsys package ${packageName.shellQuote()} 2>/dev/null")
+            .out
+            .hiddenSystemPackagePath(packageName)
+
+        return listOfNotNull(
+            installedStockPath?.takeIf { it.isNotBlank() },
+            hiddenSystemPath
+        ).distinct()
+    }
+
+    private suspend fun setModuleFilePermissions(
+        modulePath: String,
+        patchedApkPath: String,
+        stockApkPath: String?
+    ) {
+        var lastResult: Shell.Result? = null
+        val applied = withTimeoutOrNull(MODULE_PERMISSION_SETTLE_TIMEOUT) {
+            while (true) {
+                val modulePathQuoted = modulePath.shellQuote()
+                val patchedApkPathQuoted = patchedApkPath.shellQuote()
+                val stockApkPathQuoted = stockApkPath?.shellQuote()
+                val commands = buildList {
+                    add("test -f $patchedApkPathQuoted && test -f $modulePathQuoted/service.sh && test -f $modulePathQuoted/post-fs-data.sh")
+                    add("chmod 644 $patchedApkPathQuoted")
+                    add("chown system:system $patchedApkPathQuoted")
+                    add("chcon u:object_r:apk_data_file:s0 $patchedApkPathQuoted")
+                    stockApkPathQuoted?.let { path ->
+                        add("test -f $path")
+                        add("chmod 644 $path")
+                        add("chown system:system $path")
+                        add("chcon u:object_r:apk_data_file:s0 $path")
+                    }
+                    add("chmod +x $modulePathQuoted/service.sh")
+                    add("chmod +x $modulePathQuoted/post-fs-data.sh")
+                }
+                val result = execute(*commands.toTypedArray())
+                if (result.isSuccess) return@withTimeoutOrNull true
+
+                lastResult = result
+                delay(MODULE_PERMISSION_RETRY)
+            }
+        } == true
+
+        if (!applied) {
+            lastResult?.assertSuccess("Failed to set file permissions")
+                ?: throw Exception("Failed to set file permissions")
+        }
+    }
+
+    private fun mountInZygoteNamespacesCommand(sourcePath: String, targetPath: String) =
+        $$"""
+            for zpid in $(pidof zygote64) $(pidof zygote); do
+                nsenter -t "$zpid" -m mount -o bind $$sourcePath $$targetPath 2>/dev/null || true;
+            done
+        """.trimIndent()
+
+    private fun unmountBindCommands(targetPath: String) =
+        $$"""
+            for zpid in $(pidof zygote64) $(pidof zygote); do
+                nsenter -t "$zpid" -m umount -l $$targetPath 2>/dev/null || true;
+            done;
+            umount -l $$targetPath 2>/dev/null || true
+        """.trimIndent()
+
     companion object {
         const val MODULES_PATH = "/data/adb/modules"
 
         private fun Shell.Result.assertSuccess(errorMessage: String) {
             if (!isSuccess) {
-                val detail = (err + out).joinToString("\n").trim()
+                val detail = failureDetail()
                 throw Exception(if (detail.isBlank()) errorMessage else "$errorMessage: $detail")
             }
         }
 
+        private fun Shell.Result.failureDetail() = (err + out).joinToString("\n").trim()
+
         private fun String.shellQuote() = "'${replace("'", "'\"'\"'")}'"
 
         private const val ROOT_CHECK_INTERVAL_MS = 1_000L
+        private val STOCK_INSTALL_SETTLE_TIMEOUT = Duration.ofSeconds(30L)
+        private val STOCK_INSTALL_SETTLE_POLL = 1_000.milliseconds
+        private val MODULE_PERMISSION_SETTLE_TIMEOUT = Duration.ofSeconds(10L)
+        private val MODULE_PERMISSION_RETRY = 500.milliseconds
     }
 }
 
 class RootServiceException : Exception("Root not available")
 
+class StockAppInstallException(detail: String) : Exception(
+    if (detail.isBlank()) "Failed to install stock app" else "Failed to install stock app: $detail"
+)
+
 private fun Shell.Result.hasRootUid() = isSuccess && out.any { line ->
     line.contains("uid=0")
+}
+
+private fun List<String>.hiddenSystemPackagePath(packageName: String): String? {
+    var inHiddenSection = false
+    var inPackage = false
+
+    for (rawLine in this) {
+        val line = rawLine.trim()
+        if (line.contains("Hidden system package")) {
+            inHiddenSection = true
+            inPackage = false
+            continue
+        }
+        if (!inHiddenSection) continue
+
+        if (line.startsWith("Package [")) {
+            inPackage = line.startsWith("Package [$packageName]")
+            continue
+        }
+        if (!inPackage) continue
+
+        if (line.startsWith("resourcePath=") || line.startsWith("codePath=")) {
+            return line.substringAfter('=').trim().takeIf { it.isNotBlank() }
+        }
+    }
+
+    return null
 }

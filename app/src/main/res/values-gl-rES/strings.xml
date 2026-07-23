@@ -19,8 +19,6 @@
     <string name="home_update_available">Actualización de Morphe dispoñible</string>
     <string name="home_update_available_subtitle">Nova versión lista para instalar</string>
     <string name="home_update_error">Erro ao actualizar</string>
-    <string name="home_update_error_subtitle">
-Comprobe a súa conexión a Internet e ténteo de novo</string>
     <string name="home_update_skipped_metered">Actualizacións omitidas</string>
     <string name="home_update_skipped_metered_subtitle">Os datos móbiles están activados</string>
     <string name="home_updating_sources">Actualizando fontes…</string>
@@ -222,11 +220,6 @@ Elixe outro APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">O modo raíz (root) require que o arquivo APK orixinal estea instalado no teu dispositivo antes de ser parcheado</string>
     <string name="root_gmscore_excluded">O parche de soporte para GmsCore está excluído no modo root</string>
-    <string name="root_pre_patch_installer_title">Escolla método de instalación</string>
-    <string name="root_pre_patch_installer_description">O seu dispositivo ten acceso root. Escolla como quere instalar a aplicación parcheada</string>
-    <string name="root_pre_patch_installer_mount_description">Montar APK parcheada sobre a app orixinal. Non se precisa Gms Core</string>
-    <string name="root_pre_patch_installer_standard_title">Instalación Estándar</string>
-    <string name="root_pre_patch_installer_standard_description">Instalase coma unha aplicación separada con soporte para GmsCore. Podes escoller un instalador despois de parchear</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copiado ao portapapeis</string>
     <string name="patcher_error_log">Rexistro de erros</string>
@@ -287,9 +280,11 @@ Elixe outro APK</string>
     <!-- Settings - System Tab - Installer Section -->
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimización de batería</string>
+    <!-- Settings - System Tab - Notifications Section -->
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_export_debug_logs_export_failed">Fallo ao exportar rexistros</string>
     <!-- Settings - System Tab - Files & Storage Section -->
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->

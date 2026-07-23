@@ -16,7 +16,6 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
@@ -33,9 +32,7 @@ fun ChangelogDialog(
     onDismiss: () -> Unit,
     updateViewModel: UpdateViewModel
 ) {
-    val textColor = LocalDialogTextColor.current
-    val entry = updateViewModel.currentVersionChangelogEntry
-    val installedVersion = BuildConfig.VERSION_NAME.removePrefix("v")
+    val entries = updateViewModel.currentChannelChangelogEntries
 
     LaunchedEffect(Unit) {
         updateViewModel.loadCurrentVersionChangelog()
@@ -51,7 +48,9 @@ fun ChangelogDialog(
         footer = {
             MorpheDialogButtonColumn {
                 ChangelogButton(
-                    pageUrl = entry?.version?.let { releasePageUrl(MANAGER_REPO_URL, it) },
+                    pageUrl = entries?.firstOrNull()?.version?.let {
+                        releasePageUrl(MANAGER_REPO_URL, it)
+                    },
                     modifier = Modifier.fillMaxWidth()
                 )
                 MorpheDialogButton(
@@ -68,23 +67,18 @@ fun ChangelogDialog(
                 state = listState,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                if (entry == null) {
+                if (entries == null) {
                     item("changelog_loading") { ChangelogSectionLoading() }
                 } else {
-                    item("changelog_installed_${entry.version}") {
-                        ChangelogEntrySection(
-                            entry = entry,
-                            headerIcon = Icons.Outlined.NewReleases,
-                            textColor = textColor
-                        )
-                    }
+                    changelogEntryItems(
+                        entries = entries,
+                        keyPrefix = "changelog_current",
+                        headerIcon = Icons.Outlined.NewReleases
+                    )
                     changelogOlderItems(
                         entries = updateViewModel.olderManagerEntries,
                         isLoading = updateViewModel.isLoadingOlderEntries,
-                        onExpand = {
-                            updateViewModel.loadOlderManagerEntries(exclude = setOf(installedVersion))
-                        },
-                        textColor = textColor
+                        onExpand = { updateViewModel.loadOlderManagerEntries() }
                     )
                 }
             }

@@ -22,6 +22,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.shared.DialogPadding
 import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
 import app.morphe.manager.ui.screen.shared.MorpheDialog
 import app.morphe.manager.ui.screen.shared.MorpheDialogOutlinedButton
@@ -84,7 +85,7 @@ fun LicensesDialog(onDismiss: () -> Unit) {
                 modifier = Modifier.fillMaxWidth()
             )
         },
-        compactPadding = true
+        padding = DialogPadding.Compact
     ) {
         val textColor = LocalDialogTextColor.current
 

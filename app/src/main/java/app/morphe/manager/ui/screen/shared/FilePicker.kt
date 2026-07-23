@@ -136,6 +136,7 @@ private fun storageRootIcon(root: File): ImageVector {
 }
 
 private val IMAGE_EXTENSIONS = setOf("png", "jpg", "jpeg", "gif", "webp", "bmp")
+private val AUDIO_EXTENSIONS = setOf("mp3", "wav", "ogg", "flac", "aac", "m4a", "opus", "wma", "mid", "midi")
 private val SPLIT_ICON_EXTENSIONS = setOf("apkm", "xapk")
 private val KEYSTORE_EXTENSIONS = setOf("jks", "keystore", "bks", "p12", "pfx")
 
@@ -347,7 +348,7 @@ fun FilePicker(
             }
         },
         title = null,
-        noPadding = true,
+        padding = DialogPadding.None,
         scrollable = false,
         footer = null
     ) {
@@ -650,6 +651,7 @@ fun FilePicker(
                                 val isMpp = ext == "mpp"
                                 val isKeystore = ext in KEYSTORE_EXTENSIONS
                                 val isJson = ext == "json"
+                                val isAudio = ext in AUDIO_EXTENSIONS
                                 val icon = when {
                                     isDir -> Icons.Outlined.Folder
                                     canLoadIcon && packageInfo == null -> Icons.Outlined.Android
@@ -662,6 +664,7 @@ fun FilePicker(
                                     isJson -> Icons.Outlined.DataObject
                                     isImage && thumbnail == null -> Icons.Outlined.Image
                                     isImage -> null
+                                    isAudio -> Icons.Outlined.MusicNote
                                     else -> Icons.AutoMirrored.Outlined.InsertDriveFile
                                 }
                                 val detail = if (!isDir) {

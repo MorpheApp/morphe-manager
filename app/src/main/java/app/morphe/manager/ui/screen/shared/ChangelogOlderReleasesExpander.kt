@@ -14,11 +14,48 @@ import androidx.compose.material.icons.outlined.History
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
 import app.morphe.manager.util.ChangelogEntry
+
+/**
+ * Divider that visually separates consecutive changelog entries inside a shared LazyColumn.
+ */
+@Composable
+private fun ChangelogEntryDivider() {
+    HorizontalDivider(
+        modifier = Modifier.padding(
+            top = MorpheDefaults.ContentPaddingSmall,
+            bottom = MorpheDefaults.ContentPadding
+        ),
+        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
+    )
+}
+
+/**
+ * Emits a list of changelog entries into the caller's [LazyListScope], separated by a
+ * thin divider between each entry. [keyPrefix] must be unique within the enclosing
+ * LazyColumn to avoid key collisions with other item groups.
+ */
+fun LazyListScope.changelogEntryItems(
+    entries: List<ChangelogEntry>,
+    keyPrefix: String,
+    headerIcon: ImageVector,
+) {
+    itemsIndexed(
+        items = entries,
+        key = { index, _ -> "${keyPrefix}_$index" }
+    ) { index, entry ->
+        if (index > 0) ChangelogEntryDivider()
+        ChangelogEntrySection(
+            entry = entry,
+            headerIcon = headerIcon
+        )
+    }
+}
 
 /**
  * Adds a "Show older releases" section to a [LazyListScope].
@@ -30,8 +67,7 @@ import app.morphe.manager.util.ChangelogEntry
 fun LazyListScope.changelogOlderItems(
     entries: List<ChangelogEntry>?,
     isLoading: Boolean,
-    onExpand: () -> Unit,
-    textColor: Color,
+    onExpand: () -> Unit
 ) {
     item("changelog_older_divider") {
         HorizontalDivider(
@@ -63,24 +99,10 @@ fun LazyListScope.changelogOlderItems(
                 modifier = Modifier.fillMaxWidth()
             )
         }
-        else -> itemsIndexed(
-            items = entries,
-            key = { index, _ -> "changelog_older_$index" }
-        ) { index, entry ->
-            if (index > 0) {
-                HorizontalDivider(
-                    modifier = Modifier.padding(
-                        top = MorpheDefaults.ContentPaddingSmall,
-                        bottom = MorpheDefaults.ContentPadding
-                    ),
-                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
-                )
-            }
-            ChangelogEntrySection(
-                entry = entry,
-                headerIcon = Icons.Outlined.History,
-                textColor = textColor
-            )
-        }
+        else -> changelogEntryItems(
+            entries = entries,
+            keyPrefix = "changelog_older",
+            headerIcon = Icons.Outlined.History,
+        )
     }
 }

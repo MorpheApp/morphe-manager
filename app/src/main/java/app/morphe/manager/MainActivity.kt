@@ -39,12 +39,17 @@ import app.morphe.manager.ui.model.navigation.Settings
 import app.morphe.manager.ui.screen.HomeScreen
 import app.morphe.manager.ui.screen.PatcherScreen
 import app.morphe.manager.ui.screen.SettingsScreen
-import app.morphe.manager.ui.screen.home.*
+import app.morphe.manager.ui.screen.home.GlobalOnboardingState
+import app.morphe.manager.ui.screen.home.OnboardingShowcase
+import app.morphe.manager.ui.screen.home.OnboardingState
+import app.morphe.manager.ui.screen.home.StepDef
 import app.morphe.manager.ui.screen.shared.AnimatedBackground
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.theme.ManagerTheme
 import app.morphe.manager.ui.theme.Theme
+import app.morphe.manager.ui.theme.ThemeStyle
+import app.morphe.manager.ui.theme.resolveThemeStyle
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.MainViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
@@ -97,15 +102,23 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             val theme by vm.prefs.theme.getAsState()
-            val dynamicColor by vm.prefs.dynamicColor.getAsState()
+            val themeStyle by vm.prefs.themeStyle.getAsState()
             val pureBlackTheme by vm.prefs.pureBlackTheme.getAsState()
             val customAccentColor by vm.prefs.customAccentColor.getAsState()
             val customThemeColor by vm.prefs.customThemeColor.getAsState()
+            val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+            val effectiveThemeStyle = resolveThemeStyle(themeStyle, supportsDynamicColor)
+            val darkTheme = when (theme) {
+                Theme.LIGHT -> false
+                Theme.DARK -> true
+                Theme.SYSTEM -> isSystemInDarkTheme()
+            }
 
             ManagerTheme(
-                darkTheme = theme == Theme.SYSTEM && isSystemInDarkTheme() || theme == Theme.DARK,
-                dynamicColor = dynamicColor,
+                darkTheme = darkTheme,
+                dynamicColor = effectiveThemeStyle == ThemeStyle.MATERIAL_YOU,
                 pureBlackTheme = pureBlackTheme,
+                monochromeTheme = effectiveThemeStyle == ThemeStyle.MONOCHROME,
                 accentColorHex = customAccentColor.takeUnless { it.isBlank() },
                 themeColorHex = customThemeColor.takeUnless { it.isBlank() }
             ) {
@@ -124,13 +137,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Handles deep links for adding patch sources.
-     * Format: https://morphe.software/add-source?github=owner/repo(&name=Display+Name)
-     *         https://morphe.software/add-source?gitlab=owner/repo(&name=Display+Name)
-     * Only GitHub and GitLab URLs are accepted for safety.
+     * Handles add-source deep links from an explicit-package `intent://` fired by the website.
+     * Format: https://morphe.software/add-source?<github|gitlab>=owner/repo(&name=…)
+     * Only GitHub and GitLab URLs are accepted.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
-        // Handle APK-family file shared via system share sheet (.apk/.apks/.xapk/.apkm).
+        // Handle APK-family file shared via system share sheet (.apk/.apks/.xapk/.apkm)
         if (intent?.action == Intent.ACTION_SEND) {
             val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)
@@ -304,6 +316,11 @@ private fun MorpheManager(vm: MainViewModel) {
                 onShow = { globalOnboardingState.onScrollToExpertMode?.invoke() }
             ),
             StepDef(
+                R.string.settings_system_process_runtime, R.string.onboarding_system_process_runtime_desc,
+                getBounds = { globalOnboardingState.processRuntimeBounds },
+                onShow = { globalOnboardingState.onScrollToProcessRuntime?.invoke() }
+            ),
+            StepDef(
                 R.string.onboarding_system_tab_title, R.string.onboarding_system_tab_desc,
                 getBounds = { globalOnboardingState.systemTabBounds },
                 onShow = { globalOnboardingState.onNavigateToSystemTab?.invoke() }
@@ -312,11 +329,6 @@ private fun MorpheManager(vm: MainViewModel) {
                 R.string.installer, R.string.onboarding_system_installer_desc,
                 getBounds = { globalOnboardingState.installerSectionBounds },
                 onShow = { globalOnboardingState.onScrollToInstaller?.invoke() }
-            ),
-            StepDef(
-                R.string.settings_system_process_runtime, R.string.onboarding_system_process_runtime_desc,
-                getBounds = { globalOnboardingState.processRuntimeBounds },
-                onShow = { globalOnboardingState.onScrollToProcessRuntime?.invoke() }
             ),
             StepDef(
                 R.string.settings_system_custom_file_picker, R.string.onboarding_system_file_picker_desc,
@@ -420,6 +432,7 @@ private fun MorpheManager(vm: MainViewModel) {
                 val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
                 PatcherScreen(
                     onBackClick = {
+                        patcherViewModel.stopCompletionSound()
                         patcherBackgroundSpeed.floatValue = 1f
                         patchingCompleted.value = false
                         navController.popBackStack()

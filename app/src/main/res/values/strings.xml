@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Other apps</string>
     <string name="home_not_patched_yet">Not patched yet</string>
@@ -19,8 +19,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe update available</string>
     <string name="home_update_available_subtitle">New version ready to install</string>
+    <string name="home_blocked_source_title">Blocked patch source detected</string>
+    <string name="home_blocked_source_subtitle">Tap to review and remove</string>
+    <string name="home_metadata_errors_title">Some patch sources are unavailable</string>
+    <string name="home_metadata_errors_subtitle">Tap to review sources</string>
+    <string name="home_metered_skipped_title">Updates paused on mobile data</string>
+    <string name="home_metered_skipped_subtitle">Tap to allow updates on mobile data</string>
     <string name="home_update_error">Update failed</string>
-    <string name="home_update_error_subtitle">Check your internet connection and try again</string>
+    <string name="home_update_error_subtitle">Something went wrong while updating sources</string>
     <string name="home_update_skipped_metered">Updates skipped</string>
     <string name="home_update_skipped_metered_subtitle">Mobile data is active</string>
     <string name="home_updating_sources">Updating sources…</string>
@@ -45,6 +51,18 @@
     <string name="home_no_apps_search_subtitle">No apps match \"%s\"</string>
     <string name="home_all_apps_hidden_title">All apps are hidden</string>
     <string name="home_all_apps_hidden_subtitle">You\'ve hidden all apps from the home screen</string>
+    <string name="home_category_add">Add category</string>
+    <string name="home_category_all_apps">All apps</string>
+    <string name="home_category_custom">Custom</string>
+    <string name="home_category_uncategorized">Uncategorized</string>
+    <string name="home_category_new_title">New category</string>
+    <string name="home_category_rename_title">Rename category</string>
+    <string name="home_category_name">Category name</string>
+    <string name="home_category_move_to">Move to category</string>
+    <string name="home_category_move_selected_title">Move selected apps</string>
+    <string name="home_category_delete_confirm_title">Delete category</string>
+    <string name="home_category_delete_confirm_message">Delete category &lt;b&gt;%1$s&lt;/b&gt;? Apps in it will move back to &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Actions unavailable for this category</string>
 
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">What app do you want to patch?</string>
@@ -105,6 +123,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Patches experimental app targets if available</string>
     <string name="sources_management_already_exists">This source has already been added</string>
     <string name="sources_management_invalid_url">Invalid source URL. Please check the address and try again</string>
+    <string name="sources_management_blocked">This patch source is blocked and cannot be added</string>
+    <string name="sources_management_source_blocked_badge">Blocked</string>
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
     <string name="sources_management_metadata_unavailable_hint">The remote metadata file is unavailable. Patching with the installed bundle still works, but auto-update is disabled for this source</string>
     <string name="sources_management_metadata_unavailable_hint_missing">The patch bundle could not be downloaded. The source URL may be incorrect or the file does not exist</string>
@@ -302,6 +322,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
 
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Are you sure you want to uninstall this app?</string>
+    <string name="batch_uninstall_confirm_body">The selected apps will be permanently removed from your device</string>
     <string name="home_app_info_remove_app_warning">This will permanently delete:</string>
     <string name="home_app_info_delete_item_database">Database entry</string>
     <string name="home_app_info_delete_item_patched_apk">Patched APK file</string>
@@ -325,17 +346,19 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="home_app_info_app_deleted_warning">App was uninstalled</string>
     <string name="home_app_info_app_deleted_description">This app was uninstalled outside the Morphe. Repatch it to restore functionality</string>
     <string name="home_app_info_apk_size">APK size</string>
+    <string name="home_app_info_cpu_arch">CPU architecture</string>
 
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching</string>
     <string name="root_gmscore_excluded">GmsCore support patch is excluded in root mode</string>
-    <string name="root_pre_patch_installer_title">Choose installation method</string>
-    <string name="root_pre_patch_installer_description">Your device has root access. Choose how you want to install the patched app</string>
-    <string name="root_pre_patch_installer_mount_title">Root mount</string>
-    <string name="root_pre_patch_installer_mount_description">Mounts the patched APK over the stock app. No GmsCore needed</string>
-    <string name="root_pre_patch_installer_standard_title">Standard Install</string>
-    <string name="root_pre_patch_installer_standard_description">Installs as a separate app with GmsCore support. An installer can be selected after patching</string>
-    <string name="root_pre_patch_installer_hint">The installation method determines which patches are included and cannot be changed after patching</string>
+    <string name="root_pre_patch_installer_title">Choose patch mode</string>
+    <string name="root_pre_patch_installer_description">Your device has root access. Choose whether this app should be patched for root mount or standard install</string>
+    <string name="root_pre_patch_installer_mount_title">Root mount mode</string>
+    <string name="root_pre_patch_installer_mount_description">Patches for root mount, then mounts the APK over the matching stock app. No GmsCore needed</string>
+    <string name="root_mount_module_unmount_warning">If you use KernelSU or APatch, disable module unmounting or hiding for apps installed with root mount. Otherwise the stock app may still run even when Morphe shows it as mounted</string>
+    <string name="root_pre_patch_installer_standard_title">Standard install mode</string>
+    <string name="root_pre_patch_installer_standard_description">Patches as a normal APK with GmsCore support. Your installer setting is used after patching</string>
+    <string name="root_pre_patch_installer_hint">This patch mode is separate from Settings > System > Installer and cannot be changed after patching</string>
 
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copied to clipboard</string>
@@ -445,6 +468,8 @@ Uninstalling will permanently erase all app data"</string>
 
     <string name="install_app_success">Installed successfully</string>
     <string name="install_app_fail">Failed to install app: %s</string>
+    <string name="uninstall_app_fail">Failed to uninstall app: %s</string>
+    <string name="uninstall_timeout">Uninstall timed out</string>
     <string name="save_apk_success">APK Saved</string>
     <string name="saved_app_export_failed">Failed to export patched app</string>
     <string name="saved_app_removed_toast">Removed saved patched app</string>
@@ -504,10 +529,14 @@ Uninstalling will permanently erase all app data"</string>
 
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Theme</string>
+    <string name="settings_appearance_theme_mode">Theme mode</string>
     <string name="settings_appearance_system">System</string>
     <string name="settings_appearance_light">Light</string>
     <string name="settings_appearance_dark">Dark</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monochrome</string>
+    <string name="settings_appearance_color_style">Color style</string>
+    <string name="settings_appearance_style_morphe" translatable="false">Morphe</string>
     <string name="settings_appearance_accent_color">Accent color</string>
     <string name="settings_appearance_pure_black">Pure Black</string>
     <string name="settings_appearance_pure_black_description">Uses true black backgrounds</string>
@@ -516,13 +545,18 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_app_language">App language</string>
     <string name="settings_appearance_app_language_current">Current language</string>
     <string name="settings_appearance_translations_info_title">Translations for some languages may be missing or incomplete</string>
-    <string name="settings_appearance_translations_info_text">To translate new languages or improve the existing translations, visit %s</string>
+    <string name="settings_appearance_translations_info_text">"To translate new languages or improve the existing translations, visit
+%s"</string>
     <string name="settings_appearance_translations_info_url" translatable="false">morphe.software/translate</string>
 
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Home screen</string>
     <string name="settings_appearance_greeting_phrases">Greeting phrases</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Show a greeting message on the home screen</string>
+    <string name="settings_appearance_app_grouping">App grouping</string>
+    <string name="settings_appearance_app_grouping_description">Show a home screen switcher to group apps by source or your own categories, keeping the selection when off</string>
+    <string name="settings_appearance_sort_button">Sort button</string>
+    <string name="settings_appearance_sort_button_description">Show the sort button on the home screen</string>
 
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App icon</string>
@@ -538,6 +572,7 @@ Uninstalling will permanently erase all app data"</string>
 
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Updates</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Pre-release updates</string>
     <string name="settings_advanced_updates_use_prereleases_description">Early access to new Morphe app versions. Enable pre-release per source in patch sources</string>
     <string name="settings_advanced_updates_allow_metered">Mobile data updates</string>
@@ -591,7 +626,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_advanced_github_pat_configured">Token configured</string>
     <string name="settings_advanced_github_pat_how_to_get">How to get a token</string>
     <string name="settings_advanced_github_pat_dialog_title">Set GitHub Personal Access Token</string>
-    <string name="settings_advanced_github_pat_dialog_description">Set a GitHub Personal Access Token in order to be able to add pull requests as external sources. Create a PAT with scope public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Set a GitHub Personal Access Token in order to be able to add pull requests as external sources. Create a PAT with scope public_repo on
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Include in settings export</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Adds this PAT to exported Morphe settings</string>
     <string name="settings_advanced_github_pat_export_warning">Do not share your PAT. If you include it in a settings export, keep that file private because it contains the token</string>
@@ -682,12 +718,13 @@ The image dimensions must be as follows:
 
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
+    <string name="installer_settings_title">Default installer</string>
     <string name="installer_title">Select installer</string>
     <string name="installer_internal_description">Uses the Android package installer</string>
     <string name="installer_play_store_description">Uses the system installer and sets Google Play Store as the install source</string>
     <string name="installer_root_play_store_description">Installs silently with root and sets Google Play Store as the install source</string>
-    <string name="installer_auto_saved_name">Rooted mount installer</string>
-    <string name="installer_auto_saved_description">Mounts the patched APK over the installed app</string>
+    <string name="installer_auto_saved_name">Root mount</string>
+    <string name="installer_auto_saved_description">Mounts apps that were patched in root mount mode. Standard patched APKs use another installer</string>
     <string name="installer_shizuku_description">Installs silently using Shizuku or Sui</string>
     <string name="installer_shizuku_play_store_description">Installs silently through Shizuku or Sui and sets Google Play Store as the install source</string>
     <string name="installer_option_none">No fallback</string>
@@ -696,9 +733,10 @@ The image dimensions must be as follows:
     <string name="installer_status_not_supported">Not supported for this action</string>
     <string name="installer_status_shizuku_not_installed">Install Shizuku or Sui to use this option</string>
     <string name="installer_status_shizuku_not_running">Start Shizuku or Sui and try again</string>
-    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Morphe from the Shizuku app</string>
+    <string name="installer_status_shizuku_permission">Grant permission to Morphe from the Shizuku app</string>
     <string name="installer_mount_warning_install">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount</string>
     <string name="mount_version_mismatch_message">Stock app version (%2$s) does not match patched app version (%1$s). Mount the matching stock version, then try again</string>
+    <string name="mount_stock_restore_failed_message">Android rejected the saved original APK. Install the matching stock version, then try Mount again</string>
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">The installation failed. Try again or switch to a different installer</string>
@@ -711,22 +749,48 @@ The image dimensions must be as follows:
     <string name="installer_unavailable_shizuku_hint">Make sure Shizuku is running and permission is granted to this app</string>
     <string name="installer_use_standard">Use standard</string>
     <string name="installer_play_store_warning_title">Install as Play Store?</string>
-    <string name="installer_play_store_warning_message">The patched app will be recorded as installed from Google Play Store. This lets services like Android Auto recognize it as a Play Store app</string>
+    <string name="installer_play_store_warning_message">The patched app will be recorded as installed from Google Play Store. This can help services like Android Auto recognize it as a Play Store app, but it is not guaranteed for every app or device. Behavior may vary by Android version, ROM, device brand, and app-specific checks</string>
     <string name="installer_play_store_warning_risk">Play Store may offer updates for the patched app. Installing that update will overwrite the patched APK with the original version and remove the patches. If prompted to update, tap the three-dot menu on the app\'s Play Store page and choose \"Turn off updates\"</string>
     <string name="installer_play_store_warning_continue">I understand, continue</string>
+    <string name="installer_play_store_mode">Install as Play Store</string>
+    <string name="installer_play_store_mode_description">Record Google Play Store as the installation source for this install method</string>
     <string name="settings_prompt_installer_on_install">Installer selection prompt</string>
     <string name="settings_prompt_installer_on_install_description">Shows installer selection dialog each time a patched app is installed</string>
     <string name="settings_auto_install_with_shizuku">Auto-install after patching</string>
     <string name="settings_auto_install_with_shizuku_description">Silently installs the patched APK as soon as patching completes</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" is enabled - auto-install will be skipped</string>
+    <string name="settings_auto_uninstall_with_shizuku">Auto-uninstall on conflict</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">When auto-installing with Shizuku, uninstall the existing app first if Android reports a signature conflict. This can remove app data</string>
+    <string name="settings_auto_uninstall_warning_title">Enable auto-uninstall?</string>
+    <string name="settings_auto_uninstall_warning_message">If Android reports a signature conflict during Shizuku auto-install, Morphe will uninstall the existing app before installing the patched APK</string>
+    <string name="settings_auto_uninstall_warning_risk">This can remove app data. If the patched APK fails to install after uninstalling, the previous app may already be gone</string>
+    <string name="installer_shizuku_status_action">Check Shizuku status</string>
+    <string name="installer_shizuku_status_title">Shizuku status</string>
+    <string name="installer_shizuku_status_ready">Ready</string>
+    <string name="installer_shizuku_status_issue">Needs attention</string>
+    <string name="installer_shizuku_status_supported">Supported</string>
+    <string name="installer_shizuku_status_running">Running</string>
+    <string name="installer_shizuku_status_permission">Permission</string>
+    <string name="installer_shizuku_status_mode">Mode</string>
+    <string name="installer_shizuku_status_provider">Provider</string>
+    <string name="installer_shizuku_status_granted">Granted</string>
+    <string name="installer_shizuku_status_missing">Missing</string>
+    <string name="installer_shizuku_request_permission">Request permission</string>
+    <string name="installer_shizuku_install_fail">Shizuku install failed: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku install failed: %1$s
 
+Details: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku permission is missing. Grant permission to Morphe and try again</string>
+    <string name="installer_shizuku_error_timeout">Shizuku did not return an install result. Make sure it is still running and try again</string>
+    <string name="installer_shizuku_error_downgrade">Android blocked this because it would downgrade the installed app</string>
+    <string name="installer_shizuku_error_signature">Android blocked this because the installed app has a different signature</string>
+    <string name="installer_shizuku_error_invalid_apk">Android could not read this APK</string>
+    <string name="installer_shizuku_error_user_profile">Android blocked this for the current user or work profile</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery optimization</string>
     <string name="settings_system_battery_optimization_description">Keeps the patcher running when the app is minimized</string>
-    <string name="settings_system_performance">Performance</string>
+    <string name="settings_system_background">Background</string>
     <string name="settings_system_process_runtime">Process runtime</string>
     <string name="settings_system_process_runtime_description">Runs patching in a separate process for better stability</string>
-    <string name="settings_system_process_runtime_memory_limit">Memory limit</string>
     <string name="settings_system_process_runtime_memory_limit_description">Higher limits speed up patching on capable devices</string>
     <string name="settings_system_process_runtime_enable">Enable process runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memory available for patching</string>
@@ -734,6 +798,20 @@ The image dimensions must be as follows:
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Click to configure</string>
     <string name="settings_system_process_runtime_description_not_available">This feature requires Android 11 or greater</string>
+    <string name="settings_system_patcher_completion_sound">Completion sound</string>
+    <string name="settings_system_patcher_completion_sound_description">Plays a distinct tone for success or failure when patching finishes</string>
+
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Notifications</string>
+    <string name="settings_system_notifications_description">Configure background alerts and completion sounds</string>
+    <string name="settings_system_notifications_success_sound">Success sound</string>
+    <string name="settings_system_notifications_error_sound">Failure sound</string>
+    <string name="settings_system_notifications_sound_default">Default</string>
+    <string name="settings_system_notifications_sound_picker_title">Choose sound source</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">System sounds</string>
+    <string name="settings_system_notifications_sound_pick_file">Pick from files</string>
+    <string name="settings_system_notifications_sound_reset">Reset to default</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Pick a tone</string>
 
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import &amp; export</string>
@@ -783,12 +861,38 @@ The image dimensions must be as follows:
     <string name="settings_system_apks_export_zip_failed">Failed to export selected APKs</string>
     <string name="settings_system_apk_item_info" translatable="false">v%s • %s</string>
 
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Storage management</string>
+    <string name="settings_system_storage_management_description">Review disk usage and clear cached files</string>
+    <string name="settings_system_storage_keystore_title">Signing keystore</string>
+    <string name="settings_system_storage_app_data_title">App data</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch bundles</string>
+    <string name="settings_system_storage_http_cache_title">Network cache</string>
+    <string name="settings_system_storage_http_cache_description">HTTP responses cached to speed up updates</string>
+    <string name="settings_system_storage_installer_cache_title">External installer cache</string>
+    <string name="settings_system_storage_installer_cache_description">APK copies passed to third-party installers</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher workspace</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher runtime files and orphaned scratch data</string>
+    <string name="settings_system_storage_temporary_title">Temporary files</string>
+    <string name="settings_system_storage_temporary_description">Working files created during patching</string>
+    <string name="settings_system_storage_clear_all">Clear all caches</string>
+    <string name="settings_system_storage_clear_all_description">Frees all reclaimable cache space at once</string>
+    <string name="settings_system_storage_clear_all_confirm">This clears cached network responses, staged installer copies, and temporary files. Original and patched APKs are kept</string>
+    <string name="settings_system_storage_cleared">Freed %s</string>
+    <string name="settings_system_storage_nothing_to_clear">Nothing to clear</string>
+    <string name="settings_system_storage_open_app_info_title">Open Android app storage</string>
+    <string name="settings_system_storage_open_app_info_description">Manage or clear all Morphe data through system settings</string>
+    <string name="settings_system_save_original_apks_title">Keep original APKs</string>
+    <string name="settings_system_save_original_apks_description">Save the pre-patch APK so it can be reused for repatching without picking the file again</string>
+    <string name="settings_system_save_patched_apks_title">Keep patched APKs</string>
+    <string name="settings_system_save_patched_apks_description">Save a copy of the patched APK for later export or reinstall from the manager</string>
+
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patched APKs</string>
     <string name="settings_system_patched_apks_description">Manages saved patched application files</string>
     <string name="settings_system_patched_apks_empty">No patched APKs saved yet</string>
     <string name="settings_system_patched_apks_delete_title">Delete patched APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Are you sure you want to delete the saved patched APK for %s?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Are you sure you want to delete the saved patched APK for &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">Patched APK deleted successfully</string>
     <string name="settings_system_patched_apks_delete_all_title">Delete all patched APKs?</string>
     <string name="settings_system_patched_apks_export_zip_name" translatable="false">morphe-patched-apks.zip</string>
@@ -799,7 +903,7 @@ The image dimensions must be as follows:
     <string name="settings_system_original_apks_empty">No original APKs stored</string>
     <string name="settings_system_original_apks_deleted">Original APK deleted successfully</string>
     <string name="settings_system_original_apks_delete_title">Delete original APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Delete original APK for %s? You won\'t be able to repatch without providing a new APK</string>
+    <string name="settings_system_original_apks_delete_confirm">Delete original APK for &lt;b&gt;%s&lt;/b&gt;? You won\'t be able to repatch without providing a new APK</string>
     <string name="settings_system_original_apks_delete_all_title">Delete all original APKs?</string>
     <string name="settings_system_original_apks_export_zip_name" translatable="false">morphe-original-apks.zip</string>
 
@@ -816,15 +920,15 @@ The image dimensions must be as follows:
     <string name="settings_system_patch_selection_source_format">Source #%s</string>
     <string name="settings_system_patch_selection_will_delete">This will delete:</string>
     <string name="settings_system_patch_selection_reset_all_warning">This will permanently delete all saved patch selections for all packages and sources</string>
-    <string name="settings_system_patch_selection_reset_package_warning">This will permanently delete all saved patch selections for %s across all sources</string>
-    <string name="settings_system_patch_selection_reset_source_warning">This will permanently delete saved patch selections for %1$s in source #%2$s</string>
+    <string name="settings_system_patch_selection_reset_package_warning">This will permanently delete all saved patch selections for &lt;b&gt;%s&lt;/b&gt; across all sources</string>
+    <string name="settings_system_patch_selection_reset_source_warning">This will permanently delete saved patch selections for &lt;b&gt;%1$s&lt;/b&gt; in &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">This will permanently delete all saved patch selections for the selected packages</string>
     <string name="settings_system_export_source_data_fail">Failed to export source data</string>
     <string name="settings_system_export_source_data_success">Source data exported successfully</string>
     <string name="settings_system_import_source_data_fail">Failed to import source data</string>
     <string name="settings_system_import_source_data_success">Source data imported successfully</string>
-    <string name="settings_system_patch_details_title">Patch details</string>
-    <string name="settings_system_selected_patches_title">Selected patches (%s)</string>
-    <string name="settings_system_patch_options_title">Patch options (%s)</string>
+    <string name="settings_system_selected_patches_section">Selected patches</string>
+    <string name="settings_system_patch_options_section">Patch options</string>
     <string name="settings_system_no_patches_or_options">No patches or options saved</string>
 
     <!-- Settings - System Tab - Custom file picker -->

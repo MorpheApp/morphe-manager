@@ -42,6 +42,41 @@
         <item quantity="many">%s comhaid APK</item>
         <item quantity="other">%s comhaid APK</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">%d aip suiteáilte</item>
+        <item quantity="two">%d aip suiteáilte</item>
+        <item quantity="few">%d aip suiteáilte</item>
+        <item quantity="many">%d aip suiteáilte</item>
+        <item quantity="other">%d aip suiteáilte</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">%d aip athshuiteáilte</item>
+        <item quantity="two">%d aip athshuiteáilte</item>
+        <item quantity="few">%d aip athshuiteáilte</item>
+        <item quantity="many">%d aip athshuiteáilte</item>
+        <item quantity="other">%d aip athshuiteáilte</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">%d aip díshuiteáilte</item>
+        <item quantity="two">%d aip díshuiteáilte</item>
+        <item quantity="few">%d aip díshuiteáilte</item>
+        <item quantity="many">%d aip díshuiteáilte</item>
+        <item quantity="other">%d aip díshuiteáilte</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Díshuiteáil %d aip?</item>
+        <item quantity="two">Díshuiteáil %d aip?</item>
+        <item quantity="few">Díshuiteáil %d aip?</item>
+        <item quantity="many">Díshuiteáil %d aip?</item>
+        <item quantity="other">Díshuiteáil %d aip?</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">%d aip scipeáilte</item>
+        <item quantity="two">%d aip scipeáilte</item>
+        <item quantity="few">%d aip scipeáilte</item>
+        <item quantity="many">%d aip scipeáilte</item>
+        <item quantity="other">%d aip scipeáilte</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Baineadh %s paiste atá as dáta ón rogha sábháilte</item>
         <item quantity="two">Baineadh %s paistí atá as dáta ón rogha sábháilte</item>
@@ -69,5 +104,12 @@
         <item quantity="few">%s aipeanna i bhfolach</item>
         <item quantity="many">%s aipeanna i bhfolach</item>
         <item quantity="other">%s aipeanna i bhfolach</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s aip</item>
+        <item quantity="two">%s aip</item>
+        <item quantity="few">%s aip</item>
+        <item quantity="many">%s aip</item>
+        <item quantity="other">%s aip</item>
     </plurals>
 </resources>

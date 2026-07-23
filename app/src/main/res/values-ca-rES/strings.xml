@@ -13,7 +13,6 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available_subtitle">Nova versió disponible per instal·lar</string>
     <string name="home_update_error">Actualització fallida</string>
-    <string name="home_update_error_subtitle">Comproveu la connexió a la xarxa i proveu-ho de nou</string>
     <string name="home_update_skipped_metered">Actualització ignorada</string>
     <string name="home_update_skipped_metered_subtitle">Les dades mòbils estan actives</string>
     <string name="home_updating_sources">Actualitzant fonts…</string>
@@ -104,8 +103,10 @@
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <!-- Settings - System Tab - Installer Section -->
     <!-- Settings - System Tab - Performance Section -->
+    <!-- Settings - System Tab - Notifications Section -->
     <!-- Settings - System Tab - Import and Export Section -->
     <!-- Settings - System Tab - Files & Storage Section -->
+    <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->

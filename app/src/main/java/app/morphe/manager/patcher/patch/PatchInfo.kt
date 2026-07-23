@@ -11,6 +11,11 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.collections.immutable.toImmutableSet
 import kotlin.reflect.KType
+import app.morphe.patcher.patch.ColorOption as PatchColorOption
+import app.morphe.patcher.patch.FilePathOption as PatchFilePathOption
+import app.morphe.patcher.patch.FilesOption as PatchFilesOption
+import app.morphe.patcher.patch.FolderOption as PatchFolderOption
+import app.morphe.patcher.patch.ImageOption as PatchImageOption
 import app.morphe.patcher.patch.Option as PatchOption
 
 data class PatchInfo(
@@ -160,6 +165,16 @@ data class CompatiblePackage(
 /** Returns the union of all ABI-specific version codes, or null if none are declared. */
 fun AppTarget.buildCodesOrNull(): Set<Int>? = versionCodes?.values?.toSet()?.ifEmpty { null }
 
+/**
+ * Semantic UI hint produced by a typed patcher [PatchOption] subclass
+ * (e.g. [PatchFolderOption], [PatchFilePathOption]). Null when the underlying
+ * option is a plain untyped [PatchOption].
+ */
+enum class ExplicitOptionKind { Folder, FilePath, Files, Image, Color }
+
+/** Recommended pixel dimensions for an [ExplicitOptionKind.Image] option. */
+data class ImageSize(val width: Int, val height: Int)
+
 @Immutable
 data class Option<T>(
     val title: String,
@@ -170,16 +185,46 @@ data class Option<T>(
     val default: T?,
     val presets: Map<String, T?>?,
     val validator: (T?) -> Boolean,
+    /** Non-null when the patch declared a typed option (FolderOption, FilePathOption, etc.). */
+    val explicitKind: ExplicitOptionKind? = null,
+    /** File extensions filter for FilePath, Files, or Image options. Null when unrestricted. */
+    val allowedExtensions: ImmutableList<String>? = null,
+    /** Recommended image dimensions declared by an Image option. */
+    val recommendedSize: ImageSize? = null,
 ) {
     @Suppress("DEPRECATION")
     constructor(option: PatchOption<T>) : this(
-        option.title ?: option.key,
-        option.key,
-        option.description.orEmpty(),
-        option.required,
-        option.type,
-        option.default,
-        option.values,
-        { option.validator(option, it) },
+        title = option.title ?: option.key,
+        key = option.key,
+        description = option.description.orEmpty(),
+        required = option.required,
+        type = option.type,
+        default = option.default,
+        presets = option.values,
+        validator = { option.validator(option, it) },
+        explicitKind = extractExplicitKind(option),
+        allowedExtensions = extractAllowedExtensions(option)?.toImmutableList(),
+        recommendedSize = extractRecommendedSize(option),
     )
+}
+
+private fun extractExplicitKind(option: PatchOption<*>): ExplicitOptionKind? = when (option) {
+    is PatchFolderOption   -> ExplicitOptionKind.Folder
+    is PatchFilePathOption -> ExplicitOptionKind.FilePath
+    is PatchFilesOption    -> ExplicitOptionKind.Files
+    is PatchImageOption    -> ExplicitOptionKind.Image
+    is PatchColorOption    -> ExplicitOptionKind.Color
+    else -> null
+}
+
+private fun extractAllowedExtensions(option: PatchOption<*>): List<String>? = when (option) {
+    is PatchFilePathOption -> option.allowedExtensions
+    is PatchFilesOption    -> option.allowedExtensions
+    is PatchImageOption    -> option.allowedExtensions
+    else -> null
+}
+
+private fun extractRecommendedSize(option: PatchOption<*>): ImageSize? = when (option) {
+    is PatchImageOption -> option.recommendedSize?.let { ImageSize(it.width, it.height) }
+    else -> null
 }

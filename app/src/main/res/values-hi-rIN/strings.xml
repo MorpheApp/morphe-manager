@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">मोर्फे अपडेट उपलब्ध है</string>
     <string name="home_update_available_subtitle">नई संस्करण तैयार है</string>
+    <string name="home_blocked_source_title">अवरुद्ध पैच स्रोत का पता चला</string>
+    <string name="home_blocked_source_subtitle">देखने और हटाने के लिए टैप करें</string>
+    <string name="home_metadata_errors_title">कुछ पैच स्रोत अनुपलब्ध हैं</string>
+    <string name="home_metadata_errors_subtitle">स्रोतों की समीक्षा करने के लिए टैप करें</string>
+    <string name="home_metered_skipped_title">मोबाइल डेटा पर अपडेट रोक दिए गए हैं</string>
+    <string name="home_metered_skipped_subtitle">मोबाइल डेटा पर अपडेट की अनुमति देने के लिए टैप करें</string>
     <string name="home_update_error">उपडेट विफल हुआ</string>
-    <string name="home_update_error_subtitle">अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
+    <string name="home_update_error_subtitle">स्रोत अद्यतन करते समय कुछ गड़बड़ हो गई</string>
     <string name="home_update_skipped_metered">अपडेट छोड़ दिए गए</string>
     <string name="home_update_skipped_metered_subtitle">मोबाइल डेटा सक्रिय है</string>
     <string name="home_updating_sources">स्रोतों को अपडेट कर रहा हूँ…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">\"%s\" से मेल खाने वाला कोई ऐप नहीं है</string>
     <string name="home_all_apps_hidden_title">सभी ऐप्स छिपे हुए हैं</string>
     <string name="home_all_apps_hidden_subtitle">आपने होम स्क्रीन से सभी ऐप्स छिपा दिए हैं</string>
+    <string name="home_category_add">श्रेणी जोड़ें</string>
+    <string name="home_category_all_apps">सभी ऐप्स</string>
+    <string name="home_category_custom">कस्टम</string>
+    <string name="home_category_uncategorized">वर्गीकृत नहीं</string>
+    <string name="home_category_new_title">नई श्रेणी</string>
+    <string name="home_category_rename_title">श्रेणी का नाम बदलें</string>
+    <string name="home_category_name">श्रेणी का नाम</string>
+    <string name="home_category_move_to">श्रेणी में ले जाएं</string>
+    <string name="home_category_move_selected_title">चयनित ऐप्स को ले जाएं</string>
+    <string name="home_category_delete_confirm_title">श्रेणी हटाएं</string>
+    <string name="home_category_delete_confirm_message">श्रेणी &lt;b&gt;%1$s&lt;/b&gt; हटाएं? इसमें ऐप्स &lt;b&gt;%2$s&lt;/b&gt; में वापस चले जाएंगे</string>
+    <string name="home_category_actions_unavailable">इस श्रेणी के लिए क्रियाएँ उपलब्ध नहीं हैं</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">आप किस ऐप को पैच करना चाहते हैं?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">यदि उपलब्ध हों तो प्रायोगिक ऐप लक्ष्यों को पैच करता है</string>
     <string name="sources_management_already_exists">यह स्रोत पहले से ही जोड़ा गया है</string>
     <string name="sources_management_invalid_url">अमान्य स्रोत URL। कृपया पता जांचें और फिर प्रयास करें</string>
+    <string name="sources_management_blocked">यह पैच स्रोत अवरुद्ध है और इसे नहीं जोड़ा जा सकता</string>
+    <string name="sources_management_source_blocked_badge">अवरुद्ध</string>
     <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नहीं है</string>
     <string name="sources_management_metadata_unavailable_hint">रिमोट मेटाडेटा फ़ाइल अनुपलब्ध है। स्थापित बंडल के साथ पैचिंग अभी भी काम करती है, लेकिन इस स्रोत के लिए ऑटो-अपडेट अक्षम कर दिया गया है</string>
     <string name="sources_management_metadata_unavailable_hint_missing">पैच बंडल डाउनलोड नहीं किया जा सका। स्रोत URL गलत हो सकता है या फ़ाइल मौजूद नहीं है</string>
@@ -286,6 +306,7 @@
     <string name="header_creator_guide_positioning_body">अपनी छवि को स्थिति और स्केल करने के लिए पूर्वावलोकन में सीधे पिंच-टू-ज़ूम और ड्रैग जेस्चर का उपयोग करें। जब छवि केंद्र के पास होती है तो स्नैप गाइड दिखाई देती हैं। आप पूर्वावलोकन के नीचे स्लाइडर का भी उपयोग कर सकते हैं।</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">क्या आप वाकई तौर पर इस ऐप को अनइंस्टॉल करना चाहते हैं?</string>
+    <string name="batch_uninstall_confirm_body">चुने गए ऐप आपके डिवाइस से स्थायी रूप से हटा दिए जाएंगे</string>
     <string name="home_app_info_remove_app_warning">यह स्थायी रूप से मिटाएगा:</string>
     <string name="home_app_info_delete_item_database">डेटाबेस एंट्री</string>
     <string name="home_app_info_delete_item_patched_apk">पथचित APK फ़ाइल</string>
@@ -308,16 +329,18 @@
     <string name="home_app_info_app_deleted_warning">एप्लिकेशन उन्मोदन किया गया</string>
     <string name="home_app_info_app_deleted_description">इस ऐप को बाहर से उन्मोदन किया गया था। मॉर्फी में पुनः स्थापित करें कार्यक्षमता पुनः प्राप्त करने के लिए</string>
     <string name="home_app_info_apk_size">APK आकार</string>
+    <string name="home_app_info_cpu_arch">CPU आर्किटेक्चर</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">रूट मोड के लिए, पैचिंग शुरू करने से पहले आपके डिवाइस पर APK को इंस्टॉल करना आवश्यक है।</string>
     <string name="root_gmscore_excluded">श्ळ लेरे सेप्नि साधार्य लैि लुन्यिानि ला</string>
-    <string name="root_pre_patch_installer_title">स्थापना विधि का चयन करें</string>
-    <string name="root_pre_patch_installer_description">आपका डिवाइस रूट एक्सेस रखता है। पट्च्ड एप्लिकेशन इंस्टॉल करने का तरीका चुनें।</string>
-    <string name="root_pre_patch_installer_mount_title">रूट माउंट</string>
-    <string name="root_pre_patch_installer_mount_description">स्टॉक ऐप पर पैच किए गए APK को माउंट करता है। GmsCore की आवश्यकता नहीं है</string>
-    <string name="root_pre_patch_installer_standard_title">सामान्य इंस्टॉल</string>
-    <string name="root_pre_patch_installer_standard_description">GmsCore सपोर्ट के साथ एक अलग ऐप के रूप में इंस्टॉल करता है। पैचिंग के बाद एक इंस्टॉलर का चयन किया जा सकता है।</string>
-    <string name="root_pre_patch_installer_hint">इंस्टॉलेशन मेथड पट्चिंग के बाद बदल नहीं सकती जाती है।</string>
+    <string name="root_pre_patch_installer_title">पैच मोड चुनें</string>
+    <string name="root_pre_patch_installer_description">आपके डिवाइस में रूट एक्सेस है। चुनें कि क्या इस ऐप को रूट माउंट या मानक इंस्टॉलेशन के लिए पैच किया जाना चाहिए।</string>
+    <string name="root_pre_patch_installer_mount_title">रूट माउंट मोड</string>
+    <string name="root_pre_patch_installer_mount_description">रूट माउंट के लिए पैच, फिर स्टॉक ऐप से मेल खाने वाले APK पर माउंट करता है। GmsCore की आवश्यकता नहीं है।</string>
+    <string name="root_mount_module_unmount_warning">यदि आप KernelSU या APatch का उपयोग करते हैं, तो रूट माउंट से इंस्टॉल किए गए ऐप्स के लिए मॉड्यूल अनमाउंटिंग या छिपाने को अक्षम करें। अन्यथा स्टॉक ऐप अभी भी चल सकता है भले ही Morphe इसे माउंटेड दिखाए।</string>
+    <string name="root_pre_patch_installer_standard_title">मानक इंस्टॉलेशन मोड</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore समर्थन के साथ एक सामान्य APK के रूप में पैच। पैचिंग के बाद आपकी इंस्टॉलर सेटिंग का उपयोग किया जाता है।</string>
+    <string name="root_pre_patch_installer_hint">यह पैच मोड सेटिंग्स > सिस्टम > इंस्टॉलर से अलग है और पैचिंग के बाद इसे नहीं बदला जा सकता है।</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">त्रुटि रिपोर्ट</string>
@@ -417,6 +440,8 @@
     <string name="patcher_process_exit_message">पैचर प्रक्रिया कोड %s के साथ समाप्त हो गई।</string>
     <string name="install_app_success">सफलतापूर्वक इंस्टॉल हो गया</string>
     <string name="install_app_fail">अप्लिकेशन को तैयार करना असफल रहा: %s</string>
+    <string name="uninstall_app_fail">ऐप को अनइंस्टॉल करने में विफल: %s</string>
+    <string name="uninstall_timeout">अनइंस्टॉल समय समाप्त हो गया</string>
     <string name="save_apk_success">एपीके सहेजा गया</string>
     <string name="saved_app_export_failed">\"पैच किया गया ऐप एक्सपोर्ट करने में विफल।\"</string>
     <string name="saved_app_removed_toast">हटाया गया सहेजा गया पैच किया हुआ ऐप</string>
@@ -462,10 +487,13 @@
     <string name="settings_appearance_parallax_effect_description">डिवाइस को झुकाने पर पृष्ठभूमि को मधयम गति से बदलना</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">थीम</string>
+    <string name="settings_appearance_theme_mode">थीम मोड</string>
     <string name="settings_appearance_system">सिस्टम</string>
     <string name="settings_appearance_light">लाइट</string>
     <string name="settings_appearance_dark">डार्क</string>
     <string name="settings_appearance_dynamic">मैटेरियल यू</string>
+    <string name="settings_appearance_monochrome">मोनोक्रोम</string>
+    <string name="settings_appearance_color_style">रंग शैली</string>
     <string name="settings_appearance_accent_color">अक्सेंट रंग</string>
     <string name="settings_appearance_pure_black">शुद्ध काला</string>
     <string name="settings_appearance_pure_black_description">सही काले रंग की पृष्ठभूमि का उपयोग करता है।</string>
@@ -473,11 +501,16 @@
     <string name="settings_appearance_app_language">एप्लिकेशन भाषा</string>
     <string name="settings_appearance_app_language_current">वर्तमान भाषा</string>
     <string name="settings_appearance_translations_info_title">कुछ भाषाओं के लिए अनुवाद या अपूर्ण अनुवाद उपलब्ध हो सकते हैं</string>
-    <string name="settings_appearance_translations_info_text">नई भाषाओं को अनुवाद करने के लिए या मौजूदा अनुवाद को सुधारने के लिए, %s पर जाएं</string>
+    <string name="settings_appearance_translations_info_text">"नई भाषाएँ अनुवाद करने या मौजूदा अनुवादों को बेहतर बनाने के लिए,
+%s पर जाएँ"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">मुखपृष्ठ</string>
     <string name="settings_appearance_greeting_phrases">अभिवादन वाक्यांश</string>
     <string name="settings_appearance_greeting_phrases_subtitle">मुखपृष्ठ पर अभिवादन संदेश दिखाएँ</string>
+    <string name="settings_appearance_app_grouping">ऐप समूहीकरण</string>
+    <string name="settings_appearance_app_grouping_description">स्रोत या अपनी श्रेणियों द्वारा ऐप्स को समूहित करने के लिए होम स्क्रीन स्विचर दिखाएं, बंद होने पर चयन को बनाए रखें</string>
+    <string name="settings_appearance_sort_button">क्रमबद्ध करें बटन</string>
+    <string name="settings_appearance_sort_button_description">होम स्क्रीन पर क्रमबद्ध करें बटन दिखाएँ</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">एप्लिकेशन आइकॉन</string>
     <string name="settings_appearance_app_icon_default">डिफॉल्ट</string>
@@ -491,6 +524,7 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">आइकॉन बदलें</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">अपडेट</string>
+    <string name="settings_advanced_patcher">पैचर</string>
     <string name="settings_advanced_updates_use_prereleases">प्री-रिलीज़ अपडेट</string>
     <string name="settings_advanced_updates_use_prereleases_description">नए Morphe ऐप संस्करणों तक प्रारंभिक पहुंच। पैच स्रोतों में प्रति स्रोत प्री-रिलीज़ सक्षम करें।</string>
     <string name="settings_advanced_updates_allow_metered">मोबाइल डेटा अपडेट</string>
@@ -540,7 +574,8 @@
     <string name="settings_advanced_github_pat_configured">टोकन विन्यासित</string>
     <string name="settings_advanced_github_pat_how_to_get">GitHub पर्सनल एक्सेस टोकन कैसे प्राप्त करें</string>
     <string name="settings_advanced_github_pat_dialog_title">GitHub पर्सनल एक्सेस टोकन सेट करें</string>
-    <string name="settings_advanced_github_pat_dialog_description">GitHub के लिए एक व्यक्तिगत 액ेस टोकन सेट करें ताकि आप बाहरी स्रोतों के रूप में पुल रिक्वेस्ट जोड़ सकें। github.com पर सार्वजनिक_रेपो स्कोप के साथ एक PAT बनाएं</string>
+    <string name="settings_advanced_github_pat_dialog_description">"बाहरी स्रोतों के रूप में पुल अनुरोध जोड़ने में सक्षम होने के लिए GitHub पर्सनल एक्सेस टोकन सेट करें। 
+%s पर सार्वजनिक_रेपो के दायरे के साथ एक PAT बनाएँ।"</string>
     <string name="settings_advanced_github_pat_export_include_label">सेटिंगز एक्सपोर्ट में शामिल करें</string>
     <string name="settings_advanced_github_pat_export_include_supporting">निर्यातित मोर्फ़ सेटिंग्स में यह PAT जोड़ता है</string>
     <string name="settings_advanced_github_pat_export_warning">आपका PAT को न शेयर करें। अगर आप इसे सेटिंग्ज एक्सपोर्ट में शामिल करते हैं, तो उस फाइल को निजी रखें क्योंकि इसमें टोकन है</string>
@@ -625,12 +660,13 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">लॉन्चर विजेट से शॉर्ट्स बटन को हटाता है।</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">इंस्टॉलर</string>
+    <string name="installer_settings_title">डिफ़ॉल्ट इंस्टॉलर</string>
     <string name="installer_title">इंस्टॉलर चुनें</string>
     <string name="installer_internal_description">एंड्रॉइड पैकेज इंस्टॉलर का उपयोग करें।</string>
     <string name="installer_play_store_description">सिस्टम इंस्टॉलर का उपयोग करता है और Google Play Store को इंस्टॉल स्रोत के रूप में सेट करता है</string>
     <string name="installer_root_play_store_description">रूट के साथ चुपचाप इंस्टॉल करता है और Google Play Store को इंस्टॉलेशन स्रोत के रूप में सेट करता है</string>
-    <string name="installer_auto_saved_name">रूट्ड माउंट इंस्टॉलर</string>
-    <string name="installer_auto_saved_description">संस्थापित एप्लिकेशन पर पथचिह्नित एपीके को माउंट करता है</string>
+    <string name="installer_auto_saved_name">रूट माउंट</string>
+    <string name="installer_auto_saved_description">रूट माउंट मोड में पैच किए गए ऐप्स को माउंट करता है। मानक पैच किए गए APK किसी अन्य इंस्टॉलर का उपयोग करते हैं।</string>
     <string name="installer_shizuku_description">Shizuku या Sui का उपयोग करके चुपचाप इंस्टॉल करता है।</string>
     <string name="installer_shizuku_play_store_description">शिज़ुकु या सुई के माध्यम से चुपचाप इंस्टॉल करता है और Google Play Store को इंस्टॉलेशन स्रोत के रूप में सेट करता है</string>
     <string name="installer_option_none">कोई बैकफ़ॉल नहीं</string>
@@ -639,9 +675,10 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">इस क्रिया के लिए समर्थित नहीं है</string>
     <string name="installer_status_shizuku_not_installed">इस विकल्प का उपयोग करने के लिए शिज़ुकू या साई इंस्टॉल करें</string>
     <string name="installer_status_shizuku_not_running">शिज़ुकू या साई को शुरू करें और पुन: प्रयास करें</string>
-    <string name="installer_status_shizuku_permission">मोरफे से शिज़ुकू में अनुमति प्राप्त करें</string>
+    <string name="installer_status_shizuku_permission">Morphe ऐप से Shizuku की अनुमति दें</string>
     <string name="installer_mount_warning_install">आपका प्राथमिक इंस्टॉलर रूट माउंट इंस्टॉलर पर सेट है. यह सहेजा गया ऐप माउंट का उपयोग करके इंस्टॉल नहीं किया गया था।</string>
     <string name="mount_version_mismatch_message">स्टॉक ऐप वर्जन (%2$s) पैच्ड ऐप वर्जन (%1$s) से मेल नहीं खाती. माउंट मैचिंग स्टॉक वर्जन, फिर पुन: प्रयास करें।</string>
+    <string name="mount_stock_restore_failed_message">Android ने सहेजे गए मूल APK को अस्वीकार कर दिया है। मिलान करने वाले स्टॉक संस्करण को इंस्टॉल करें, फिर माउंट करने का प्रयास करें।</string>
     <string name="installer_status_shizuku_unsupported">इंस्टॉल किया गया शिज़ुकू वर्जन समर्थित नहीं है</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">इंस्टॉलेशन विफल रही. पुन: प्रयास करें या अलग इंस्टॉलर का उपयोग करें।</string>
@@ -654,21 +691,48 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">确保 शिज़ुकू चल रहा है और इस ऐप को अनुमति दी गई है।</string>
     <string name="installer_use_standard">स्तاندर्ड का उपयोग करें</string>
     <string name="installer_play_store_warning_title">प्ले स्टोर के रूप में इंस्टॉल करें?</string>
-    <string name="installer_play_store_warning_message">पैच किए गए ऐप को Google Play Store से इंस्टॉल के रूप में रिकॉर्ड किया जाएगा। यह Android Auto जैसे सेवाओं को इसे Play Store ऐप के रूप में पहचानने देता है।</string>
+    <string name="installer_play_store_warning_message">पैच किए गए ऐप को Google Play Store से इंस्टॉल के रूप में रिकॉर्ड किया जाएगा। यह Android Auto जैसे सेवाओं को इसे Play Store ऐप के रूप में पहचानने में मदद कर सकता है, लेकिन हर ऐप या डिवाइस के लिए इसकी गारंटी नहीं है। व्यवहार Android संस्करण, ROM, डिवाइस ब्रांड और ऐप-विशिष्ट जांच के आधार पर भिन्न हो सकता है।</string>
     <string name="installer_play_store_warning_risk">प्ले स्टोर पैच किए गए ऐप के लिए अपडेट प्रदान कर सकता है। उस अपडेट को इंस्टॉल करने से मूल संस्करण के साथ पैच किए गए APK को ओवरराइट कर दिया जाएगा और पैच हटा दिए जाएंगे। अपडेट करने के लिए प्रेरित होने पर, ऐप के Play Store पृष्ठ पर तीन-बिंदु मेनू पर टैप करें और \"अपडेट बंद करें\" चुनें।</string>
     <string name="installer_play_store_warning_continue">मुझे समझ आ गया, जारी रखें</string>
+    <string name="installer_play_store_mode">Play Store के रूप में इंस्टॉल करें</string>
+    <string name="installer_play_store_mode_description">इस इंस्टॉल विधि के लिए इंस्टॉलेशन स्रोत के रूप में Google Play Store को रिकॉर्ड करें</string>
     <string name="settings_prompt_installer_on_install">इंस्टॉलर चयन संकेत</string>
     <string name="settings_prompt_installer_on_install_description">जब भी पैच किए गए ऐप को इंस्टॉल किया जाता है, तो इंस्टॉलर चयन संवाद दिखाता है।</string>
     <string name="settings_auto_install_with_shizuku">पैचिंग के बाद स्वतः इंस्टॉल करें</string>
     <string name="settings_auto_install_with_shizuku_description">पैचिंग पूरा होने के तुरंत बाद पैच्ड APK चुपचाप इंस्टॉल करता है</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" सक्षम है - स्वतः इंस्टॉल छोड़ दिया जाएगा</string>
+    <string name="settings_auto_uninstall_with_shizuku">विवाद होने पर स्वतः अनइंस्टॉल करें</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Shizuku के साथ स्वतः इंस्टॉल करते समय, यदि Android हस्ताक्षर संघर्ष की रिपोर्ट करता है तो पहले मौजूदा ऐप को अनइंस्टॉल करें। यह ऐप डेटा को हटा सकता है</string>
+    <string name="settings_auto_uninstall_warning_title">स्वतः अनइंस्टॉल सक्षम करें?</string>
+    <string name="settings_auto_uninstall_warning_message">यदि Android Shizuku ऑटो-इंस्टॉल के दौरान हस्ताक्षर संघर्ष की रिपोर्ट करता है, तो Morphe पैच किए गए APK को इंस्टॉल करने से पहले मौजूदा ऐप को अनइंस्टॉल कर देगा</string>
+    <string name="settings_auto_uninstall_warning_risk">यह ऐप डेटा को हटा सकता है। यदि अनइंस्टॉल करने के बाद पैच किया गया APK इंस्टॉल करने में विफल रहता है, तो पिछला ऐप पहले ही चला गया होगा</string>
+    <string name="installer_shizuku_status_action">Shizuku स्थिति जांचें</string>
+    <string name="installer_shizuku_status_title">Shizuku स्थिति</string>
+    <string name="installer_shizuku_status_ready">तैयार</string>
+    <string name="installer_shizuku_status_issue">ध्यान देने की आवश्यकता है</string>
+    <string name="installer_shizuku_status_supported">समर्थित</string>
+    <string name="installer_shizuku_status_running">चल रहा है</string>
+    <string name="installer_shizuku_status_permission">अनुमति</string>
+    <string name="installer_shizuku_status_mode">मोड</string>
+    <string name="installer_shizuku_status_provider">प्रदाता</string>
+    <string name="installer_shizuku_status_granted">अनुदानित</string>
+    <string name="installer_shizuku_status_missing">लापता</string>
+    <string name="installer_shizuku_request_permission">अनुमति का अनुरोध करें</string>
+    <string name="installer_shizuku_install_fail">Shizuku इंस्टॉलेशन विफल: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku इंस्टॉलेशन विफल: %1$s
+
+विवरण: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku अनुमति गुम है। Morphe को अनुमति दें और फिर से प्रयास करें</string>
+    <string name="installer_shizuku_error_timeout">Shizuku ने इंस्टॉलेशन परिणाम नहीं लौटाया। सुनिश्चित करें कि यह अभी भी चल रहा है और फिर से प्रयास करें</string>
+    <string name="installer_shizuku_error_downgrade">Android ने इसे इस वजह से अवरुद्ध कर दिया क्योंकि यह इंस्टॉल किए गए ऐप को डिग्रेड करेगा</string>
+    <string name="installer_shizuku_error_signature">Android ने इसे रोक दिया क्योंकि इंस्टॉल किए गए ऐप में अलग हस्ताक्षर हैं</string>
+    <string name="installer_shizuku_error_invalid_apk">Android इस APK को पढ़ने में विफल रहा</string>
+    <string name="installer_shizuku_error_user_profile">Android ने वर्तमान उपयोगकर्ता या कार्य प्रोफ़ाइल के लिए इसे अवरुद्ध कर दिया</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">बैटरी अनुकूलन</string>
     <string name="settings_system_battery_optimization_description">जब ऐप छोटा किया जाता है, तो पैचर को चालू रखता है।</string>
-    <string name="settings_system_performance">प्रदर्शन</string>
+    <string name="settings_system_background">पृष्ठभूमि</string>
     <string name="settings_system_process_runtime">प्रोसेस रनटाइम</string>
     <string name="settings_system_process_runtime_description">बेहतर स्थिरता के लिए एक अलग प्रक्रिया में पैचिंग करता है।</string>
-    <string name="settings_system_process_runtime_memory_limit">मेमोरी लिमिट</string>
     <string name="settings_system_process_runtime_memory_limit_description">उच्च सीमाएं सक्षम उपकरणों पर पैचिंग को गति देती हैं।</string>
     <string name="settings_system_process_runtime_enable">प्रोसेस रनटाइम सक्षम करें</string>
     <string name="settings_system_memory_limit_subtitle">पैचिंग के लिए उपलब्ध मेमोरी</string>
@@ -676,6 +740,19 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enabled_description">%s एमबी सीमा</string>
     <string name="settings_system_process_runtime_disabled_description">कन्फ़िगरेशन के लिए क्लिक करें</string>
     <string name="settings_system_process_runtime_description_not_available">यह सुविधा Android 11 या उसके बाद के संस्करण की आवश्यकता है</string>
+    <string name="settings_system_patcher_completion_sound">पूर्ण होने की ध्वनि</string>
+    <string name="settings_system_patcher_completion_sound_description">पैचिंग समाप्त होने पर सफलता या विफलता के लिए एक विशिष्ट टोन चलाता है</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">सूचनाएं</string>
+    <string name="settings_system_notifications_description">पृष्ठभूमि अलर्ट और पूर्ण होने की ध्वनियों को कॉन्फ़िगर करें</string>
+    <string name="settings_system_notifications_success_sound">सफलता ध्वनि</string>
+    <string name="settings_system_notifications_error_sound">विफलता ध्वनि</string>
+    <string name="settings_system_notifications_sound_default">डिफ़ॉल्ट</string>
+    <string name="settings_system_notifications_sound_picker_title">ध्वनि स्रोत चुनें</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">सिस्टम ध्वनियाँ</string>
+    <string name="settings_system_notifications_sound_pick_file">फ़ाइल से चुनें</string>
+    <string name="settings_system_notifications_sound_reset">डिफ़ॉल्ट पर रीसेट करें</string>
+    <string name="settings_system_notifications_ringtone_picker_title">एक धुन चुनें</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">आइमपोर्ट और एक्सपोर्ट</string>
     <string name="settings_system_keystore">कीस्टोर</string>
@@ -721,12 +798,37 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_deleted_all">APK सफलतापूर्वक हटाए गए</string>
     <string name="settings_system_apks_export_zip_success">निर्यात किए गए APK</string>
     <string name="settings_system_apks_export_zip_failed">चयनित APK निर्यात करने में विफल।</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">भंडारण प्रबंधन</string>
+    <string name="settings_system_storage_management_description">डिस्क उपयोग की समीक्षा करें और कैश्ड फ़ाइलों को साफ़ करें</string>
+    <string name="settings_system_storage_keystore_title">साइनिंग कीस्टोर</string>
+    <string name="settings_system_storage_app_data_title">ऐप डेटा</string>
+    <string name="settings_system_storage_patch_bundles_title">पैच बंडल</string>
+    <string name="settings_system_storage_http_cache_title">नेटवर्क कैश</string>
+    <string name="settings_system_storage_http_cache_description">अपडेट को तेज़ करने के लिए HTTP प्रतिक्रियाओं को कैश किया गया है</string>
+    <string name="settings_system_storage_installer_cache_title">बाहरी इंस्टॉलर कैश</string>
+    <string name="settings_system_storage_installer_cache_description">तीसरे पक्ष के इंस्टॉलर को सौंपे गए APK की प्रतियां</string>
+    <string name="settings_system_storage_patcher_workspace_title">पैचर कार्यक्षेत्र</string>
+    <string name="settings_system_storage_patcher_workspace_description">पैचर रनटाइम फाइलें और अनाथ स्क्रैच डेटा</string>
+    <string name="settings_system_storage_temporary_title">अस्थायी फाइलें</string>
+    <string name="settings_system_storage_temporary_description">पैचिंग के दौरान बनाई गई कार्य फाइलें</string>
+    <string name="settings_system_storage_clear_all">सभी कैश साफ़ करें</string>
+    <string name="settings_system_storage_clear_all_description">एक साथ सभी पुनर्प्राप्त करने योग्य कैश स्थान को मुक्त करता है</string>
+    <string name="settings_system_storage_clear_all_confirm">यह कैश की गई नेटवर्क प्रतिक्रियाओं, स्टेज्ड इंस्टॉलर प्रतियों और अस्थायी फ़ाइलों को साफ़ करता है। मूल और पैच किए गए APK को रखा जाएगा।</string>
+    <string name="settings_system_storage_cleared">मुक्त किया गया %s</string>
+    <string name="settings_system_storage_nothing_to_clear">साफ़ करने के लिए कुछ नहीं</string>
+    <string name="settings_system_storage_open_app_info_title">एंड्रॉइड ऐप स्टोरेज खोलें</string>
+    <string name="settings_system_storage_open_app_info_description">सिस्टम सेटिंग के माध्यम से सभी मोर्फ़ डेटा प्रबंधित या साफ़ करें।</string>
+    <string name="settings_system_save_original_apks_title">मूल APKs सुरक्षित रखें</string>
+    <string name="settings_system_save_original_apks_description">पुनः पैचिंग के लिए APK को फिर से चुनने की आवश्यकता के बिना, पूर्व-पैच APK को सहेजें ताकि इसे फिर से इस्तेमाल किया जा सके</string>
+    <string name="settings_system_save_patched_apks_title">पैच किए गए APKs सुरक्षित रखें</string>
+    <string name="settings_system_save_patched_apks_description">प्रबंधक से बाद में निर्यात या पुनर्स्थापित करने के लिए पैच किए गए APK की एक प्रति सहेजें</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">पैच किए गए एपीके</string>
     <string name="settings_system_patched_apks_description">संरक्षित पैच किए गए एप्लिकेशन फ़ाइलों का प्रबंधन करता है।</string>
     <string name="settings_system_patched_apks_empty">अभी तक कोई सहेजा गया पैच किया गया एपीके नहीं है</string>
     <string name="settings_system_patched_apks_delete_title">सहेजे गए पैच किए गए एपीके को हटाएं?</string>
-    <string name="settings_system_patched_apks_delete_confirm">%s के लिए सहेजे गए पैच किए गए एपीके को हटाना चाहते हैं?</string>
+    <string name="settings_system_patched_apks_delete_confirm">क्या आप &lt;b&gt;%s&lt;/b&gt; के लिए सहेजे गए पैच्ड APK को हटाने के लिए निश्चित हैं?</string>
     <string name="settings_system_patched_apks_deleted">%s के लिए सहेजे गए पैच किए गए एपीके सफलतापूर्वक हटाए गए</string>
     <string name="settings_system_patched_apks_delete_all_title">क्या आप सभी पैच किए गए APK हटाना चाहते हैं?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -735,7 +837,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">कोई सहेजा गया अरिजनल एपीके नहीं है</string>
     <string name="settings_system_original_apks_deleted">%s के लिए अरिजनल एपीके सफलतापूर्वक हटाए गए</string>
     <string name="settings_system_original_apks_delete_title">अरिजनल एपीके को हटाएं?</string>
-    <string name="settings_system_original_apks_delete_confirm">%s के लिए मूल APK मिटाएं? बिना नई APK प्रदान किए पुनः पथच करना संभव नहीं होगा।</string>
+    <string name="settings_system_original_apks_delete_confirm">&lt;b&gt;%s&lt;/b&gt; के लिए मूल APK को हटाएं? आप बिना नया APK प्रदान किए फिर से पैच करने में सक्षम नहीं होंगे</string>
     <string name="settings_system_original_apks_delete_all_title">क्या आप सभी मूल APK हटाना चाहते हैं?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">पथच चयन</string>
@@ -750,15 +852,15 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_source_format">स्रोत #%s</string>
     <string name="settings_system_patch_selection_will_delete">यह हटाएगा:</string>
     <string name="settings_system_patch_selection_reset_all_warning">यह सभी पैकेजों और स्रोतों के लिए सहेजे गए सभी पटच चयन को स्थायी रूप से हटाएगा</string>
-    <string name="settings_system_patch_selection_reset_package_warning">%s के लिए सहेजे गए सभी पटच चयन को स्थायी रूप से हटाएगा</string>
-    <string name="settings_system_patch_selection_reset_source_warning">%1$s के लिए संरक्षित पट्टी चयन को स्थायी रूप से मिटा दिया जाएगा, स्रोत #%2$s में</string>
+    <string name="settings_system_patch_selection_reset_package_warning">यह सभी स्रोतों में &lt;b&gt;%s&lt;/b&gt; के लिए सहेजे गए सभी पैच चयन को स्थायी रूप से हटा देगा</string>
+    <string name="settings_system_patch_selection_reset_source_warning">यह &lt;b&gt;%1$s&lt;/b&gt; में &lt;b&gt;%2$s&lt;/b&gt; के लिए सहेजे गए पैच चयन को स्थायी रूप से हटा देगा</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">यह चयनित पैकेजों के लिए सहेजे गए सभी पैच चयन को स्थायी रूप से हटा देगा</string>
     <string name="settings_system_export_source_data_fail">स्रोत डेटा निर्यात करने में विफल</string>
     <string name="settings_system_export_source_data_success">स्रोत डेटा सफलतापूर्वक निर्यात किया गया</string>
     <string name="settings_system_import_source_data_fail">स्रोत डेटा आयात करने में विफल</string>
     <string name="settings_system_import_source_data_success">स्रोत डेटा सफलतापूर्वक आयात किया गया</string>
-    <string name="settings_system_patch_details_title">पटच विवरण</string>
-    <string name="settings_system_selected_patches_title">चयनित पट्टियाँ (%s)</string>
-    <string name="settings_system_patch_options_title">पट्टी विकल्प (%s)</string>
+    <string name="settings_system_selected_patches_section">चयनित पैच</string>
+    <string name="settings_system_patch_options_section">पैच विकल्प</string>
     <string name="settings_system_no_patches_or_options">कोई पटच या विकल्प सहेजे गए नहीं</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">कस्टम फ़ाइल पिकर</string>

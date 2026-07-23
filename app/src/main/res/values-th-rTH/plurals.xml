@@ -18,6 +18,21 @@
     <plurals name="settings_system_apks_count">
         <item quantity="other">%s ไฟล์ APK</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="other">ติดตั้งแอป %d แอป</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="other">ติดตั้งแอปใหม่ %d แอป</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="other">ถอนการติดตั้งแอป %d แอป</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="other">ยกเลิกการติดตั้งแอป %d แอปหรือไม่?</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="other">ข้ามแอป %d แอป</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="other">ลบ %s แพตช์เก่าไปจากตัวเลือกที่ถูกบันทึกไว้</item>
     </plurals>
@@ -29,5 +44,8 @@
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">แอปที่ซ่อนอยู่ %s</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="other">แอป %s แอป</item>
     </plurals>
 </resources>

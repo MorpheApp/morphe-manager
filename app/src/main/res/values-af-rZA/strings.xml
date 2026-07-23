@@ -18,8 +18,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-opdatering beskikbaar</string>
     <string name="home_update_available_subtitle">Nuwe weergawe gereed om te installeer</string>
+    <string name="home_blocked_source_title">Geblokkeerde bron vir plakkers opgespoor</string>
+    <string name="home_blocked_source_subtitle">Tik om te hersien en te verwyder</string>
+    <string name="home_metadata_errors_title">Sommige bronne vir plakkers is nie beskikbaar nie</string>
+    <string name="home_metadata_errors_subtitle">Tik om bronne te hersien</string>
+    <string name="home_metered_skipped_title">Opdaterings gestop op mobiele data</string>
+    <string name="home_metered_skipped_subtitle">Tik om opdaterings op mobiele data toe te laat</string>
     <string name="home_update_error">Opdatering het misluk</string>
-    <string name="home_update_error_subtitle">Kontroleer jou internetverbinding en probeer weer</string>
+    <string name="home_update_error_subtitle">Iets het fout geloop tydens die opdatering van bronne</string>
     <string name="home_update_skipped_metered">Opdaterings oorgeslaan</string>
     <string name="home_update_skipped_metered_subtitle">Selfoon data is aktief</string>
     <string name="home_updating_sources">Opdatering van oorspronge…</string>
@@ -41,6 +47,18 @@
     <string name="home_no_apps_search_subtitle">Geen programme gelyk aan \"%s\" nie</string>
     <string name="home_all_apps_hidden_title">Alle programme is versteek</string>
     <string name="home_all_apps_hidden_subtitle">Jy het alle programme van die tuisskerm versteek</string>
+    <string name="home_category_add">Kategorie byvoeg</string>
+    <string name="home_category_all_apps">Alle toepassings</string>
+    <string name="home_category_custom">Pasgemaak</string>
+    <string name="home_category_uncategorized">Nie gekategoriseer nie</string>
+    <string name="home_category_new_title">Nuwe kategorie</string>
+    <string name="home_category_rename_title">Hernoem kategorie</string>
+    <string name="home_category_name">Kategorienaam</string>
+    <string name="home_category_move_to">Verskuif na kategorie</string>
+    <string name="home_category_move_selected_title">Verskuif gekose toepassings</string>
+    <string name="home_category_delete_confirm_title">Verwyder kategorie</string>
+    <string name="home_category_delete_confirm_message">Verwyder kategorie &lt;b&gt;%1$s&lt;/b&gt;? Toepassings daarin sal terugskuif na &lt;b&gt;%2$s&lt;/b&gt;</string>
+    <string name="home_category_actions_unavailable">Aksies nie beskikbaar vir hierdie kategorie nie</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Watter program wil jy verander?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -99,6 +117,8 @@
     <string name="sources_management_experimental_versions_toggle_description">Pleister eksperimentele app-teikens indien beskikbaar</string>
     <string name="sources_management_already_exists">Hierdie oorsprong is reeds bygevoeg</string>
     <string name="sources_management_invalid_url">Ongeldige bron-URL. Gaan asseblief die adres na en probeer weer</string>
+    <string name="sources_management_blocked">Hierdie bron vir pleisters is geblokkeer en kan nie bygevoeg word nie</string>
+    <string name="sources_management_source_blocked_badge">Geblokkeer</string>
     <string name="sources_management_metadata_unavailable">Metadata Nie beskikbaar nie</string>
     <string name="sources_management_metadata_unavailable_hint">Die afstandmetadata lêer is nie beskikbaar nie. Patches met die geïnstalleerde bundel werk steeds, maar outo-opdatering is vir hierdie bron afgeskakel</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Die patch bundel kon nie afgelaai word nie. Die bron-URL kan verkeerd wees of die lêer bestaan ​​nie</string>
@@ -286,6 +306,7 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="header_creator_guide_positioning_body">Gebruik knyp-om-zoem en sleep gebare direk in die voorskou om jou beeld te posisioneer en te skaal. Snap gidse verskyn wanneer die beeld naby die middel is. Jy kan ook die skyfie onder die voorskou gebruik.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Is jy seker jy wil hierdie app deïnstalleer?</string>
+    <string name="batch_uninstall_confirm_body">Die geselekteerde toepassings sal permanent van jou toestel verwyder word</string>
     <string name="home_app_info_remove_app_warning">Dit sal permanent uitvee:</string>
     <string name="home_app_info_delete_item_database">Database inskrywing</string>
     <string name="home_app_info_delete_item_patched_apk">Gepatched APK lêer</string>
@@ -308,16 +329,18 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="home_app_info_app_deleted_warning">App is verwyder</string>
     <string name="home_app_info_app_deleted_description">Hierdie app is buite Morphe verwyder. Pleister dit weer om funksionaliteit te herstel</string>
     <string name="home_app_info_apk_size">APK-grootte</string>
+    <string name="home_app_info_cpu_arch">Sentrale prosessorargitektuur</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root modus vereis dat die original APK op jou toestel geïnstalleer moet word voor patching</string>
     <string name="root_gmscore_excluded">GmsCore ondersteuningspatch is uitgesluit in wortelmodus</string>
-    <string name="root_pre_patch_installer_title">Kies installasiemetode</string>
-    <string name="root_pre_patch_installer_description">Jou toestel het root toegang. Kies hoe jy wil die gepatched app installeer</string>
-    <string name="root_pre_patch_installer_mount_title">Root-montering</string>
-    <string name="root_pre_patch_installer_mount_description">Monteer die gepatchte APK oor die standaard app. Geen GmsCore nodig</string>
-    <string name="root_pre_patch_installer_standard_title">Standard Install</string>
-    <string name="root_pre_patch_installer_standard_description">Installeer as \'n afsonderlike toepassing met GmsCore-ondersteuning. \'n Installeerder kan gekies word ná patching</string>
-    <string name="root_pre_patch_installer_hint">Die installasiemetode bepaal watter patches ingesluit is en kan nie verander word na patching nie</string>
+    <string name="root_pre_patch_installer_title">Kies pleistermodus</string>
+    <string name="root_pre_patch_installer_description">Jou toestel het worteltoegang. Kies of hierdie program gepatch moet word vir wortelmontering of standaardinstallasie</string>
+    <string name="root_pre_patch_installer_mount_title">Wortelmonteringsmodus</string>
+    <string name="root_pre_patch_installer_mount_description">Patches vir wortelmontering, monteer dan die APK oor die ooreenstemmende standaardprogram. Geen GmsCore benodig nie</string>
+    <string name="root_mount_module_unmount_warning">As jy KernelSU of APatch gebruik, deaktiveer die ontkoppeling of verberging van modules vir toepassings wat met root mount geïnstalleer is. Anders kan die standaard toepassing steeds werk, selfs wanneer Morphe dit as gemonteerd wys.</string>
+    <string name="root_pre_patch_installer_standard_title">Standaard installasiemodus</string>
+    <string name="root_pre_patch_installer_standard_description">Patches as \'n normale APK met GmsCore ondersteuning. Jou installeringsinstelling word gebruik na die patching.</string>
+    <string name="root_pre_patch_installer_hint">Hierdie patch modus is afsonderlik van Instellings > Stelsel > Installeerder en kan nie verander word ná patching nie.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Fout gekopieer na knipbord</string>
     <string name="patcher_error_log">Foutlog</string>
@@ -417,6 +440,8 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="patcher_process_exit_message">Patcherproses het met kode %s afgehandel</string>
     <string name="install_app_success">Suksesvol geïnstalleer</string>
     <string name="install_app_fail">Kon nie app installeer nie: %s</string>
+    <string name="uninstall_app_fail">Kon nie app verwyder nie: %s</string>
+    <string name="uninstall_timeout">Ontinstallering het tyd uitgeloop</string>
     <string name="save_apk_success">APK Gestoor</string>
     <string name="saved_app_export_failed">Kon nie gepatchte app uitvoer nie</string>
     <string name="saved_app_removed_toast">Verwyder gestoorde gepatchte app</string>
@@ -462,10 +487,13 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_parallax_effect_description">Glat agtergrondverskuiwing wanneer jy die toestel kantel</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
+    <string name="settings_appearance_theme_mode">Tema-modus</string>
     <string name="settings_appearance_system">Stelsel</string>
     <string name="settings_appearance_light">Ligte</string>
     <string name="settings_appearance_dark">Donker</string>
     <string name="settings_appearance_dynamic">Material You</string>
+    <string name="settings_appearance_monochrome">Monochroom</string>
+    <string name="settings_appearance_color_style">Kleurstyl</string>
     <string name="settings_appearance_accent_color">Aksentkleur</string>
     <string name="settings_appearance_pure_black">Pure Black</string>
     <string name="settings_appearance_pure_black_description">Gebruik ware swart agtergronde</string>
@@ -473,11 +501,16 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_app_language">App taal</string>
     <string name="settings_appearance_app_language_current">Huidige taal</string>
     <string name="settings_appearance_translations_info_title">Vertalings vir sommige tale is dalk ontbrekend of onvoltooid</string>
-    <string name="settings_appearance_translations_info_text">Om nuwe tale te vertaal of die bestaande vertalings te verbeter, besoek %s</string>
+    <string name="settings_appearance_translations_info_text">"Om nuwe tale te vertaal of die bestaande vertalings te verbeter, besoek
+%s"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Tuisskerm</string>
     <string name="settings_appearance_greeting_phrases">Groetfrases</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Wys \'n groet-boodskap op die tuisskerm</string>
+    <string name="settings_appearance_app_grouping">Toepassingsgroepering</string>
+    <string name="settings_appearance_app_grouping_description">Wys \'n tuisskermskakelaar om toepassings volgens bron of jou eie kategorieë te groepeer, en die keuse te behou wanneer dit af is</string>
+    <string name="settings_appearance_sort_button">Sorteer knoppie</string>
+    <string name="settings_appearance_sort_button_description">Wys die sorteer knoppie op die tuisskerm</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App ikoon</string>
     <string name="settings_appearance_app_icon_default">Standaard</string>
@@ -491,6 +524,7 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Verander ikoon</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Opdaterings</string>
+    <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Voorvrystellingsopdaterings</string>
     <string name="settings_advanced_updates_use_prereleases_description">Vroeë toegang tot nuwe Morphe-appweergawes. Skakel voorvrystelling per bron in patchbronne in</string>
     <string name="settings_advanced_updates_allow_metered">Mobiele data-opdaterings</string>
@@ -540,7 +574,8 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_advanced_github_pat_configured">Token gekonfigureer</string>
     <string name="settings_advanced_github_pat_how_to_get">Hoe kry jy \'n token</string>
     <string name="settings_advanced_github_pat_dialog_title">Stel GitHub Persoonlike Toegangs Token in</string>
-    <string name="settings_advanced_github_pat_dialog_description">Stel \'n GitHub Personal Access Token in om pull-versoeke as eksterne bronne te kan byvoeg. Skep \'n PAT met bereik public_repo github.com</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Stel 'n GitHub Personal Access Token in om trekversoeke as eksterne bronne te kan byvoeg. Skep 'n PAT met 'n publieke_repo-omvang op
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Insluit in settings eksport</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Voeg hierdie PAT by uitgevoerde Morphe-instellings</string>
     <string name="settings_advanced_github_pat_export_warning">Moenie jou PAT deel nie. As jy dit in \'n settings eksport insluit, hou daardie lêer privaat want dit bevat die token</string>
@@ -625,12 +660,13 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Verwyder die Shorts-knoppie uit die lanseerder-widget</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
+    <string name="installer_settings_title">Standaard installer</string>
     <string name="installer_title">Kies installer</string>
     <string name="installer_internal_description">Gebruik die Android pakketinstalleerder</string>
     <string name="installer_play_store_description">Gebruik die stelsel se installeerder en stel Google Play Winkel as die installasiefontein in</string>
     <string name="installer_root_play_store_description">Installeer stilweg met wortelregte en stel Google Play Winkel as die installasiebron in</string>
-    <string name="installer_auto_saved_name">Gewortelde monteer installer</string>
-    <string name="installer_auto_saved_description">Monteer die gepleisterde APK oor die geïnstalleerde app</string>
+    <string name="installer_auto_saved_name">Root mount</string>
+    <string name="installer_auto_saved_description">Monteer toepassings wat in root mount modus gepatched is. Standaard gepatched APK\'s gebruik \'n ander installer.</string>
     <string name="installer_shizuku_description">Installeer stilweg met behulp van Shizuku of Sui</string>
     <string name="installer_shizuku_play_store_description">Installeer stilweg deur Shizuku of Sui en stel Google Play Winkel as die installasiebron in</string>
     <string name="installer_option_none">Geen terugval</string>
@@ -639,9 +675,10 @@ Die beeld afmetings moet soos volg wees:
     <string name="installer_status_not_supported">Nie ondersteun vir hierdie aksie nie</string>
     <string name="installer_status_shizuku_not_installed">Installeer Shizuku of Sui om hierdie opsie te gebruik</string>
     <string name="installer_status_shizuku_not_running">Begin Shizuku of Sui en probeer weer</string>
-    <string name="installer_status_shizuku_permission">Gee Shizuku toestemming aan Morphe vanuit die Shizuku app</string>
+    <string name="installer_status_shizuku_permission">Vergunning verleen aan Morphe vanaf die Shizuku-app</string>
     <string name="installer_mount_warning_install">Die geïnstalleerde Shizuku weergawe is nie ondersteun nie</string>
     <string name="mount_version_mismatch_message">Die stock app weergawe (%2$s) stem nie ooreen met die gepatched app weergawe (%1$s). Herstel die ooreenstemmende stock weergawe, en probeer weer</string>
+    <string name="mount_stock_restore_failed_message">Android het die gestoorde oorspronklike APK verwerp. Installeer die ooreenstemmende standaard weergawe, en probeer dan weer Mount.</string>
     <string name="installer_status_shizuku_unsupported">Die geïnstalleerde Shizuku weergawe is nie ondersteun nie</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">Die installasie het misluk. Probeer weer of skakel oor na \'n ander installer</string>
@@ -654,21 +691,48 @@ Die beeld afmetings moet soos volg wees:
     <string name="installer_unavailable_shizuku_hint">Maak seker Shizuku loop en toestemming is aan hierdie app gegee</string>
     <string name="installer_use_standard">Gebruik standaard</string>
     <string name="installer_play_store_warning_title">As Play Winkel installeer?</string>
-    <string name="installer_play_store_warning_message">Die gewysigde app sal as geïnstalleer vanaf Google Play Winkel aangeteken word. Dit laat dienste soos Android Auto dit herken as \'n Play Winkel app</string>
+    <string name="installer_play_store_warning_message">Die gepatchte app sal as geïnstalleer vanaf die Google Play Winkel aangeteken word. Dit kan dienste soos Android Auto help om dit as \'n Play Winkel-app te herken, maar dit is nie vir elke app of toestel gewaarborg nie. Gedrag kan verskil na gelang van die Android-weergawe, ROM, toestelhandelsmerk en app-spesifieke kontroles.</string>
     <string name="installer_play_store_warning_risk">Play Winkel kan opdaterings aanbied vir die gewysigde app. Die installering van daardie opdatering sal die gewysigde APK vervang met die oorspronklike weergawe en die wysigings verwyder. As u gevra word om op te dateer, tik op die drie-punt-menu op die app se Play Winkel-bladsy en kies \"Deaktiveer opdaterings\"</string>
     <string name="installer_play_store_warning_continue">Ek verstaan, gaan voort</string>
+    <string name="installer_play_store_mode">Installeer as Play Winkel</string>
+    <string name="installer_play_store_mode_description">Teken die Google Play Winkel as die installasiebron vir hierdie installasiemetode aan.</string>
     <string name="settings_prompt_installer_on_install">Installeerder seleksie prompt</string>
     <string name="settings_prompt_installer_on_install_description">Wys die installeerder seleksie dialoog elke keer as \'n gepatchte toepassing geïnstalleer word</string>
     <string name="settings_auto_install_with_shizuku">Outomatiese installering na patstelling</string>
     <string name="settings_auto_install_with_shizuku_description">Installeer die gepatchde APK stilweg sosoon as die patstelling voltooi is</string>
-    <string name="settings_auto_install_prompt_conflict">\"%s\" is geaktiveer - outomatiese installering sal oorgeslaan word</string>
+    <string name="settings_auto_uninstall_with_shizuku">Outo-deïnstallering by konflik</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Wanneer outo-installasie met Shizuku gebruik word, deïnstalleer eers die bestaande app as Android \'n handtekeningskonflik rapporteer. Dit kan appdata verwyder.</string>
+    <string name="settings_auto_uninstall_warning_title">Outo-deïnstallering aktiveer?</string>
+    <string name="settings_auto_uninstall_warning_message">As Android \'n handtekeningskonflik tydens Shizuku-outo-installasie rapporteer, sal Morphe die bestaande app deïnstalleer voordat die gepatchte APK geïnstalleer word.</string>
+    <string name="settings_auto_uninstall_warning_risk">Dit kan appdata verwyder. Indien die gepatchte APK nie na deïnstallering kan installeer nie, is die vorige app dalk reeds verwyder.</string>
+    <string name="installer_shizuku_status_action">Kontroleer Shizuku-status</string>
+    <string name="installer_shizuku_status_title">Shizuku-status</string>
+    <string name="installer_shizuku_status_ready">Klaar</string>
+    <string name="installer_shizuku_status_issue">Aandag vereis</string>
+    <string name="installer_shizuku_status_supported">Ondersteun</string>
+    <string name="installer_shizuku_status_running">Besig</string>
+    <string name="installer_shizuku_status_permission">Toestemming</string>
+    <string name="installer_shizuku_status_mode">Modus</string>
+    <string name="installer_shizuku_status_provider">Verskaffer</string>
+    <string name="installer_shizuku_status_granted">Verleen</string>
+    <string name="installer_shizuku_status_missing">Ontbrekend</string>
+    <string name="installer_shizuku_request_permission">Versoek toestemming</string>
+    <string name="installer_shizuku_install_fail">Shizuku installasie het gefaal: %s</string>
+    <string name="installer_shizuku_install_fail_with_details">"Shizuku installasie het gefaal: %1$s
+
+Besonderhede: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku toestemming is ontbrekend. Verleen toestemming aan Morphe en probeer weer.</string>
+    <string name="installer_shizuku_error_timeout">Shizuku het nie \'n installasieresultaat teruggegee nie. Maak seker dit is nog steeds besig en probeer weer.</string>
+    <string name="installer_shizuku_error_downgrade">Android het dit geblokkeer omdat dit die geïnstalleerde app sou teruggradeer.</string>
+    <string name="installer_shizuku_error_signature">Android het dit geblokkeer omdat die geïnstalleerde app \'n ander handtekening het.</string>
+    <string name="installer_shizuku_error_invalid_apk">Android kon hierdie APK nie lees nie.</string>
+    <string name="installer_shizuku_error_user_profile">Android het dit vir die huidige gebruiker of werksprofil geblokkeer.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery-optimalisering</string>
     <string name="settings_system_battery_optimization_description">Hou die patcher lopend wanneer die toepassing geminimaliseer is</string>
-    <string name="settings_system_performance">Prestasie</string>
+    <string name="settings_system_background">Agtergrond</string>
     <string name="settings_system_process_runtime">Proses tydloop</string>
     <string name="settings_system_process_runtime_description">Voer patching in \'n aparte proses uit vir beter stabiliteit</string>
-    <string name="settings_system_process_runtime_memory_limit">Geheugelimiet</string>
     <string name="settings_system_process_runtime_memory_limit_description">Hoër limiete versnel patching op toestelle wat dit kan hanteer</string>
     <string name="settings_system_process_runtime_enable">Aktiveer proses tydloop</string>
     <string name="settings_system_memory_limit_subtitle">Geheue beskikbaar vir patching</string>
@@ -676,6 +740,19 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_system_process_runtime_enabled_description">%s MB limiet</string>
     <string name="settings_system_process_runtime_disabled_description">Klik om te konfigureer</string>
     <string name="settings_system_process_runtime_description_not_available">Hierdie kenmerk vereis Android 11 of later</string>
+    <string name="settings_system_patcher_completion_sound">Voltooiingklank</string>
+    <string name="settings_system_patcher_completion_sound_description">Speel \'n kenmerkende toon vir sukses of mislukking wanneer die patching voltooi is</string>
+    <!-- Settings - System Tab - Notifications Section -->
+    <string name="settings_system_notifications">Kennisgewings</string>
+    <string name="settings_system_notifications_description">Konfigureer agtergrondwaarskuwings en voltooiingsklanke</string>
+    <string name="settings_system_notifications_success_sound">Suksesklank</string>
+    <string name="settings_system_notifications_error_sound">Foutklank</string>
+    <string name="settings_system_notifications_sound_default">Verstek</string>
+    <string name="settings_system_notifications_sound_picker_title">Kies klankbron</string>
+    <string name="settings_system_notifications_sound_pick_ringtone">Stelselklanke</string>
+    <string name="settings_system_notifications_sound_pick_file">Kies uit lêers</string>
+    <string name="settings_system_notifications_sound_reset">Stel terug na verstek</string>
+    <string name="settings_system_notifications_ringtone_picker_title">Kies \'n toon</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importeer &amp; eksporteer</string>
     <string name="settings_system_keystore">Sleutelkooi</string>
@@ -721,12 +798,37 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_system_apks_deleted_all">APK\'s suksesvol uitgevee</string>
     <string name="settings_system_apks_export_zip_success">Geselekteerde APK\'s uitgevoer</string>
     <string name="settings_system_apks_export_zip_failed">Kon nie die geselekteerde APK\'s uitvoer nie</string>
+    <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_management_title">Stooringsbestuur</string>
+    <string name="settings_system_storage_management_description">Hersien skyfgebruik en maak gekasste lêers skoon</string>
+    <string name="settings_system_storage_keystore_title">Ondertekeningsleutestoor</string>
+    <string name="settings_system_storage_app_data_title">Programdata</string>
+    <string name="settings_system_storage_patch_bundles_title">Patch-bundels</string>
+    <string name="settings_system_storage_http_cache_title">Netwerkkas</string>
+    <string name="settings_system_storage_http_cache_description">HTTP-response word in kas geberg om opdaterings om vas te spoed.</string>
+    <string name="settings_system_storage_installer_cache_title">Eksterne installer kas</string>
+    <string name="settings_system_storage_installer_cache_description">APK-koppies wat oorgedra word aan derdeparty-installateurs</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcher werkspasie</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcher tydelike lêers en weeskindskrapdata</string>
+    <string name="settings_system_storage_temporary_title">Tydelike lêers</string>
+    <string name="settings_system_storage_temporary_description">Werk lêers wat geskep word tydens patchen</string>
+    <string name="settings_system_storage_clear_all">Maak alle kasgeheue vry</string>
+    <string name="settings_system_storage_clear_all_description">Maak alle herwinnbare kasruimte op een slag vry</string>
+    <string name="settings_system_storage_clear_all_confirm">Dit vee die gekasde netwerkresponse, gestageerde installer kopieë en tydelike lêers uit. Oorspronklike en gepatchde APK\'s word behou.</string>
+    <string name="settings_system_storage_cleared">%s vrygemaak</string>
+    <string name="settings_system_storage_nothing_to_clear">Niets om uit te vee</string>
+    <string name="settings_system_storage_open_app_info_title">Maak Android-appberging oop</string>
+    <string name="settings_system_storage_open_app_info_description">Bestuur of vee alle Morphe-data uit via stelselinstellings</string>
+    <string name="settings_system_save_original_apks_title">Behou die oorspronklike APK\'s</string>
+    <string name="settings_system_save_original_apks_description">Stoor die APK voor wysiging, sodat dit weer vir her-wysiging gebruik kan word sonder om die lêer weer te kies</string>
+    <string name="settings_system_save_patched_apks_title">Behou gewysigde APK\'s</string>
+    <string name="settings_system_save_patched_apks_description">Stoor \'n kopie van die gewysigde APK vir latere uitvoer of herinstallasie vanaf die bestuurder</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatched APK\'s</string>
     <string name="settings_system_patched_apks_description">Bestuur gestoorde gepatchte toepassingslêers</string>
     <string name="settings_system_patched_apks_empty">Geen gepatched APK\'s stoor nie</string>
     <string name="settings_system_patched_apks_delete_title">Verwyder gepatched APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Is jy seker dat jy die gestoorde gepatched APK vir %s wil verwyder?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Is jy seker dat jy die gestoorde gepatchde APK vir &lt;b&gt;%s&lt;/b&gt; wil uitvee?</string>
     <string name="settings_system_patched_apks_deleted">Gepatched APK suksesvol verwyder</string>
     <string name="settings_system_patched_apks_delete_all_title">Alle patched APK\'s verwyder?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -735,7 +837,7 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_system_original_apks_empty">Geen original APK\'s gestoor nie</string>
     <string name="settings_system_original_apks_deleted">Original APK suksesvol verwyder</string>
     <string name="settings_system_original_apks_delete_title">Verwyder original APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Verwyder original APK vir %s? Jy sal nie in staat wees om te herpatch sonder om \'n nuwe APK te verskaf nie</string>
+    <string name="settings_system_original_apks_delete_confirm">Verwyder oorspronklike APK vir &lt;b&gt;%s&lt;/b&gt;? Jy sal nie in staat wees om dit weer te patch nie sonder om \'n nuwe APK te verskaf.</string>
     <string name="settings_system_original_apks_delete_all_title">Alle oorspronklike APK\'s verwyder?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch seleksies</string>
@@ -750,15 +852,15 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_system_patch_selection_source_format">Bron #%s</string>
     <string name="settings_system_patch_selection_will_delete">Dit sal verwyder:</string>
     <string name="settings_system_patch_selection_reset_all_warning">Dit sal permanent alle gestoorde patch seleksies vir alle pakkette en bronne uitvee</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Dit sal permanent alle gestoorde patch seleksies vir %s oor alle bronne uitvee</string>
-    <string name="settings_system_patch_selection_reset_source_warning">Dit sal permanent alle gestoorde patch seleksies vir %1$s in bron #%2$s uitvee</string>
+    <string name="settings_system_patch_selection_reset_package_warning">Dit sal permanent alle gestoorde patch-seleksies vir &lt;b&gt;%s&lt;/b&gt; oor alle bronne verwyder.</string>
+    <string name="settings_system_patch_selection_reset_source_warning">Dit sal permanent gestoorde patch-seleksies vir &lt;b&gt;%1$s&lt;/b&gt; in &lt;b&gt;%2$s&lt;/b&gt; verwyder.</string>
+    <string name="settings_system_patch_selection_reset_selected_warning">Dit sal permanent alle gestoorde patch-seleksies vir die gekose pakkette verwyder.</string>
     <string name="settings_system_export_source_data_fail">Kon nie bron data uitvoer nie</string>
     <string name="settings_system_export_source_data_success">Bron data suksesvol uitgevoer</string>
     <string name="settings_system_import_source_data_fail">Kon nie bron data invoer nie</string>
     <string name="settings_system_import_source_data_success">Bron data suksesvol uitgevoer</string>
-    <string name="settings_system_patch_details_title">Patch besonderhede</string>
-    <string name="settings_system_selected_patches_title">Gekose patches (%s)</string>
-    <string name="settings_system_patch_options_title">Patch opsies (%s)</string>
+    <string name="settings_system_selected_patches_section">Gekose patchs</string>
+    <string name="settings_system_patch_options_section">Verandering opsies</string>
     <string name="settings_system_no_patches_or_options">Geen patches of opsies gered nie</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Pasgemaakte lêerkeurder</string>

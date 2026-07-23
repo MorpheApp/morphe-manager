@@ -36,6 +36,36 @@
         <item quantity="many">%s plików APK</item>
         <item quantity="other">%s plików APK</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Zainstalowano %d aplikację</item>
+        <item quantity="few">Zainstalowano %d aplikacje</item>
+        <item quantity="many">Zainstalowano %d aplikacji</item>
+        <item quantity="other">Zainstalowano %d aplikacji</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Ponownie zainstalowano %d aplikację</item>
+        <item quantity="few">Ponownie zainstalowano %d aplikacje</item>
+        <item quantity="many">Ponownie zainstalowano %d aplikacji</item>
+        <item quantity="other">Ponownie zainstalowano %d aplikacji</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Odinstalowano %d aplikację</item>
+        <item quantity="few">Odinstalowano %d aplikacje</item>
+        <item quantity="many">Odinstalowano %d aplikacji</item>
+        <item quantity="other">Odinstalowano %d aplikacji</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Odinstalować %d aplikację?</item>
+        <item quantity="few">Odinstalować %d aplikacje?</item>
+        <item quantity="many">Odinstalować %d aplikacji?</item>
+        <item quantity="other">Odinstalować %d aplikacji?</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Pominięto %d aplikację</item>
+        <item quantity="few">Pominięto %d aplikacje</item>
+        <item quantity="many">Pominięto %d aplikacji</item>
+        <item quantity="other">Pominięto %d aplikacji</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Usunięto %s przestarzałą modyfikację z zapisanych wyborów</item>
         <item quantity="few">Usunięto %s przestarzałe modyfikacje z zapisanych wyborów</item>
@@ -59,5 +89,11 @@
         <item quantity="few">%s ukryte aplikacje</item>
         <item quantity="many">%s ukrytych aplikacji</item>
         <item quantity="other">%s ukrytych aplikacji</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s aplikacja</item>
+        <item quantity="few">%s aplikacje</item>
+        <item quantity="many">%s aplikacji</item>
+        <item quantity="other">%s aplikacji</item>
     </plurals>
 </resources>

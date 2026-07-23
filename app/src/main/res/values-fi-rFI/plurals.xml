@@ -24,6 +24,26 @@
         <item quantity="one">%s APK-tiedosto</item>
         <item quantity="other">%s APK-tiedostoa</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Asennettu %d sovellus</item>
+        <item quantity="other">Asennettu %d sovellusta</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Asennettu uudelleen %d sovellus</item>
+        <item quantity="other">Asennettu uudelleen %d sovellusta</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Poistettu %d sovellus</item>
+        <item quantity="other">Poistettu %d sovellusta</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Poista %d sovellus?</item>
+        <item quantity="other">Poista %d sovellusta?</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Ohitettu %d sovellus</item>
+        <item quantity="other">Ohitettu %d sovellusta</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Poistettiin %s vanhentunut lisäosa tallennetusta valinnasta</item>
         <item quantity="other">Poistettiin %s vanhentunutta lisäosaa tallennetusta valinnasta</item>
@@ -39,5 +59,9 @@
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s piilotettu sovellus</item>
         <item quantity="other">%s piilotettua sovellusta</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s sovellus</item>
+        <item quantity="other">%s sovellusta</item>
     </plurals>
 </resources>
