@@ -306,7 +306,8 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="header_creator_guide_positioning_title">Pemosisian dan penskalaan</string>
     <string name="header_creator_guide_positioning_body">Gunakan gerakan mencubit dan menyeret langsung di jendela pratinjau untuk mengatur posisi dan memperbesar atau memperkecil gambar Anda. Garis panduan akan muncul saat gambar berada mendekati bagian tengah. Anda juga dapat menggunakan bilah geser di bawah jendela pratinjau.</string>
     <!-- Home Screen - App Info Screen -->
-    <string name="home_app_info_uninstall_app_confirmation">Apakah Anda yakin ingin mencopot pemasangan aplikasi ini?</string>
+    <string name="home_app_info_uninstall_app_confirmation">Apakah Anda yakin ingin menghapus pemasangan aplikasi ini?</string>
+    <string name="batch_uninstall_confirm_body">Aplikasi yang dipilih akan dihapus secara permanen dari perangkat Anda</string>
     <string name="home_app_info_remove_app_warning">Ini akan menghapus secara permanen:</string>
     <string name="home_app_info_delete_item_database">Entri basis data</string>
     <string name="home_app_info_delete_item_patched_apk">Berkas APK yang ditambal</string>
@@ -333,14 +334,14 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Mode root memerlukan APK asli untuk dipasang di perangkat Anda sebelum menambal</string>
     <string name="root_gmscore_excluded">Dukungan tambalan GmsCore dikecualikan dalam mode root</string>
-    <string name="root_pre_patch_installer_title">Pilih mode patch</string>
-    <string name="root_pre_patch_installer_description">Perangkat Anda memiliki akses root. Pilih apakah aplikasi ini akan di-patch untuk mount root atau instalasi standar</string>
+    <string name="root_pre_patch_installer_title">Pilih mode tambal</string>
+    <string name="root_pre_patch_installer_description">Perangkat Anda memiliki akses root. Pilih apakah aplikasi ini akan ditambal untuk mount root atau pemasangan standar</string>
     <string name="root_pre_patch_installer_mount_title">Mode mount root</string>
-    <string name="root_pre_patch_installer_mount_description">Patch untuk mount root, kemudian mount APK di atas aplikasi stok yang sesuai. Tidak diperlukan GmsCore</string>
-    <string name="root_mount_module_unmount_warning">Jika Anda menggunakan KernelSU atau APatch, nonaktifkan pelepasan atau penyembunyian modul untuk aplikasi yang diinstal dengan root mount. Jika tidak, aplikasi bawaan mungkin masih berjalan meskipun Morphe menampilkannya sebagai terpasang.</string>
-    <string name="root_pre_patch_installer_standard_title">Mode pemasangan standar</string>
-    <string name="root_pre_patch_installer_standard_description">Menambal sebagai APK normal dengan dukungan GmsCore. Pengaturan installer Anda digunakan setelah penambalan</string>
-    <string name="root_pre_patch_installer_hint">Mode penambalan ini terpisah dari Pengaturan > Sistem > Installer dan tidak dapat diubah setelah penambalan</string>
+    <string name="root_pre_patch_installer_mount_description">Tambalan untuk mount root, kemudian mount APK di atas aplikasi original yang cocok. Tidak diperlukan GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Jika Anda menggunakan KernelSU atau APatch, nonaktifkan modul pelepasan atau penyembunyian untuk aplikasi yang dipasang dengan mount root. Jika tidak, aplikasi bawaan mungkin masih berjalan meskipun Morphe menampilkannya sebagai di-mount</string>
+    <string name="root_pre_patch_installer_standard_title">Mode pasang standar</string>
+    <string name="root_pre_patch_installer_standard_description">Tambalan sebagai APK normal dengan dukungan GmsCore. Pengaturan pemasang Anda digunakan setelah penambalan</string>
+    <string name="root_pre_patch_installer_hint">Mode tambal ini terpisah dari Pengaturan &gt; Sistem &gt; Pemasang dan tidak dapat diubah setelah penambalan</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Kesalahan disalin ke papan klip</string>
     <string name="patcher_error_log">Catatan kesalahan</string>
@@ -362,14 +363,14 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="patcher_split_step_writing">Menulis APK yang telah digabungkan</string>
     <string name="patcher_split_step_finalizing">Menyelesaikan APK hasil penggabungan</string>
     <string name="patcher_conflict_title">Paket konflik</string>
-    <string name="patcher_conflict_subtitle">Anda perlu mencopot pemasangan versi yang ada</string>
+    <string name="patcher_conflict_subtitle">Anda perlu menghapus pemasangan versi yang ada</string>
     <string name="patcher_conflict_hint">Aplikasi yang ditambal menggunakan sertifikat yang berbeda dari versi yang terpasang. Mencopot pemasangan akan menghapus semua data aplikasi</string>
-    <string name="patcher_installed_conflict_title">Diperlukan mencopot pemasangan</string>
+    <string name="patcher_installed_conflict_title">Diperlukan menghapus pemasangan</string>
     <string name="patcher_installed_conflict_body">"Morphe menandatangani aplikasi yang ditambal dengan sertifikatnya sendiri, yang berbeda dari yang asli. Android mengharuskan penghapusan versi yang sudah ada sebelum aplikasi yang ditambal dapat dipasang.
 
-Mencopot pemasangannya akan menghapus semua data aplikasi secara permanen"</string>
+Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</string>
     <string name="patcher_install_error_title">Kesalahan pemasangan</string>
-    <string name="patcher_install_error_subtitle">Coba copot pemasangan dan pasang lagi</string>
+    <string name="patcher_install_error_subtitle">Coba hapus pemasangan dan pasang lagi</string>
     <string name="patcher_ready_to_install_subtitle">Tekan tombol di bawah untuk memasang</string>
     <string name="patcher_ready_to_mount_subtitle">Tekan tombol di bawah untuk mount</string>
     <string name="patcher_storage_permission_dialog_title">Tidak dapat mengakses jalur penyimpanan</string>
@@ -660,13 +661,13 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Menghapus tombol Shorts dari widget peluncur</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Pemasang</string>
-    <string name="installer_settings_title">Installer default</string>
+    <string name="installer_settings_title">Pemasang bawaan</string>
     <string name="installer_title">Pilih pemasang</string>
     <string name="installer_internal_description">Menggunakan pemasang paket Android</string>
     <string name="installer_play_store_description">Menggunakan pemasang sistem dan mengatur Google Play Store sebagai sumber pemasangan</string>
     <string name="installer_root_play_store_description">Memasang secara diam-diam dengan akses root dan mengatur Google Play Store sebagai sumber pemasangan</string>
     <string name="installer_auto_saved_name">Mount root</string>
-    <string name="installer_auto_saved_description">Memasang aplikasi yang ditambal dalam mode root mount. APK yang ditambal standar menggunakan installer lain</string>
+    <string name="installer_auto_saved_description">Mount aplikasi yang ditambal dalam mode mount root. APK yang ditambal secara standar menggunakan pemasang lainnya</string>
     <string name="installer_shizuku_description">Memasang secara senyap menggunakan Shizuku atau Sui</string>
     <string name="installer_shizuku_play_store_description">Memasang secara diam-diam melalui Shizuku atau Sui dan mengatur Google Play Store sebagai sumber pemasangan</string>
     <string name="installer_option_none">Tidak ada pengganti</string>
@@ -678,11 +679,11 @@ Dimensi gambar harus sebagai berikut:
     <string name="installer_status_shizuku_permission">Berikan izin ke Morphe dari aplikasi Shizuku</string>
     <string name="installer_mount_warning_install">Pemasang utama Anda diatur ke pemasang mount ber-root. Aplikasi tersimpan ini tidak dipasang menggunakan mount</string>
     <string name="mount_version_mismatch_message">Versi aplikasi bawaan (%2$s) tidak cocok dengan versi aplikasi dipatch (%1$s). Pasang versi bawaan yang cocok, lalu coba lagi</string>
-    <string name="mount_stock_restore_failed_message">Android menolak APK asli yang disimpan. Instal versi bawaan yang sesuai, lalu coba Pasang lagi</string>
+    <string name="mount_stock_restore_failed_message">Android menolak APK asli yang disimpan. Pasang versi bawaan yang sesuai, lalu coba Mount lagi</string>
     <string name="installer_status_shizuku_unsupported">Versi Shizuku yang terpasang tidak didukung</string>
     <string name="installer_action_open_shizuku">Buka Shizuku</string>
     <string name="installer_hint_generic">Pemasangan gagal. Coba lagi atau ganti pemasang</string>
-    <string name="installer_hint_conflict">Aplikasi lain dengan nama paket ini sudah terpasang. Copot pemasangannya terlebih dahulu sebelum melanjutkan</string>
+    <string name="installer_hint_conflict">Aplikasi lain dengan nama paket ini sudah terpasang. Hapus pemasangannya terlebih dahulu sebelum melanjutkan</string>
     <string name="installer_external_launched">Membuka %s…</string>
     <string name="installer_external_timeout">%s tidak mengonfirmasi pemasangan. Periksa aplikasi lain dan coba lagi</string>
     <string name="installer_external_success">%s melaporkan pemasangan berhasil</string>
@@ -828,7 +829,7 @@ Rincian: %2$s"</string>
     <string name="settings_system_patched_apks_description">Mengelola berkas aplikasi yang ditambal dan disimpan</string>
     <string name="settings_system_patched_apks_empty">Belum ada APK yang ditambal dan disimpan hingga saat ini</string>
     <string name="settings_system_patched_apks_delete_title">Hapus APK yang ditambal?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Apakah Anda yakin ingin menghapus APK yang ditambal yang disimpan untuk &lt;b&gt;%s&lt;/b&gt;?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Apakah Anda yakin ingin menghapus APK yang disimpan dan ditambal untuk &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="settings_system_patched_apks_deleted">APK yang ditambal berhasil dihapus</string>
     <string name="settings_system_patched_apks_delete_all_title">Hapus semua APK yang ditambal?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
@@ -841,7 +842,7 @@ Rincian: %2$s"</string>
     <string name="settings_system_original_apks_delete_all_title">Hapus semua APK asli?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Pilihan tambalan</string>
-    <string name="settings_system_patch_selections_description">Menyimpan pilihan tambalan, dipertahankan setelah mencopot aplikasinya</string>
+    <string name="settings_system_patch_selections_description">Menyimpan pilihan tambalan, dipertahankan setelah menghapus aplikasinya</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Atur ulang semua pemilihan?</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Atur ulang pemilihan paket?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Atur ulang paket yang dipilih?</string>
@@ -969,8 +970,8 @@ Rincian: %2$s"</string>
     <string name="install">Pasang</string>
     <string name="installed">Terpasang</string>
     <string name="reinstall">Pasang ulang</string>
-    <string name="uninstall">Copot pemasangan</string>
-    <string name="uninstalled">Dicopot pemasangannya</string>
+    <string name="uninstall">Hapus pemasangan</string>
+    <string name="uninstalled">Dihapus pemasangannya</string>
     <string name="save">Simpan</string>
     <string name="saved">Disimpan</string>
     <string name="update">Perbarui</string>

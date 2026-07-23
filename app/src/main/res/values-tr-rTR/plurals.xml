@@ -37,8 +37,8 @@
         <item quantity="other">%d uygulama kaldırıldı</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">%d uygulamayı kaldır?</item>
-        <item quantity="other">%d uygulamayı kaldır?</item>
+        <item quantity="one">%d uygulama kaldırılsın mı?</item>
+        <item quantity="other">%d uygulama kaldırılsın mı?</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%d uygulama atlandı</item>

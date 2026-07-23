@@ -134,7 +134,7 @@
     <string name="sources_dialog_view_any_package">N\'importe quel paquet</string>
     <string name="sources_dialog_add_source">Ajouter une source de patchs</string>
     <string name="sources_dialog_delete_confirm_message">Supprimer la source \"%s\" ? Cela ne peut pas être réversible</string>
-    <string name="sources_dialog_remote">Distant</string>
+    <string name="sources_dialog_remote">Distante</string>
     <string name="sources_dialog_remote_url">URL de la source</string>
     <string name="sources_dialog_remote_url_formats_title">Exemples :</string>
     <string name="sources_dialog_local">Local</string>
@@ -145,7 +145,7 @@
     <string name="sources_dialog_url_valid">URL JSON ou dépôt valide</string>
     <string name="sources_dialog_url_invalid">L\'URL doit pointer vers un dépôt GitHub/GitLab ou un fichier .json</string>
     <string name="sources_dialog_local_change_file">Changer de fichier</string>
-    <string name="sources_dialog_preinstalled">Préinstallé</string>
+    <string name="sources_dialog_preinstalled">Préinstallée</string>
     <string name="sources_update_success">Mise à jour réussie</string>
     <string name="sources_update_unavailable">Aucune mise à jour disponible</string>
     <string name="sources_download_fail">Échec du téléchargement des sources : %s</string>
@@ -271,7 +271,7 @@ Pour de meilleurs résultats, cette application recommande de patcher un &lt;b&g
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Créer une icône adaptative</string>
     <string name="adaptive_icon_select_image">Sélectionner une image</string>
-    <string name="adaptive_icon_change_image">Changer l\'image</string>
+    <string name="adaptive_icon_change_image">Changer d\'image</string>
     <string name="adaptive_icon_background_color">Couleur d\'arrière-plan</string>
     <string name="adaptive_icon_reset_transform">Réinitialiser la position et la taille</string>
     <string name="adaptive_icon_safe_zone_inner">Zone de sécurité (toujours visible)</string>
@@ -427,7 +427,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="patcher_message_16">Pressage d\'un maximum de puissance, comme le jus d\'un citron numérique… 🍋</string>
     <string name="patcher_message_17">Encouragez l\'application à accepter sa nouvelle version améliorée… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
-    <string name="patcher_message_18">Changement de la superposition de l\'application de non patchée à patchée… 📦⚛️</string>
+    <string name="patcher_message_18">Modification de la superposition de l\'application, de non patchée à patchée… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Votre application a de la fièvre, et la seule prescription, c’est plus de patchs… 🩺🔔</string>
     <string name="patcher_message_20">Suppression des absurdités. Veuillez patienter… 🗑️</string>
@@ -585,7 +585,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Options de patch</string>
     <string name="settings_advanced_patch_options_youtube_description">Thème, branding et options d\'en-tête</string>
-    <string name="settings_advanced_patch_options_restart_message">Changer les options de patch nécessite de repatcher l\'application pour prendre effet</string>
+    <string name="settings_advanced_patch_options_restart_message">La modification des options de patch nécessite de repatcher l\'application pour qu\'elles prennent effet</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">En mode Expert, les options de patch seront disponibles pendant le processus de patchage</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">Couleurs du thème de l\'application</string>

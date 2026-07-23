@@ -244,10 +244,10 @@
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Збірка %d</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Це інша збірка тієї ж версії. Патчі вимагають конкретної збірки</string>
-    <string name="home_dialog_wrong_package_title">Обрано неправильний пакет</string>
-    <string name="home_dialog_wrong_package_description">Обраний APK файл не відповідає застосунку, який ви збиралися пропатчити</string>
+    <string name="home_dialog_wrong_package_title">Вибрано неправильний пакет</string>
+    <string name="home_dialog_wrong_package_description">Вибраний APK файл не відповідає застосунку, який ви збиралися пропатчити</string>
     <string name="home_dialog_expected_package">Очікуваний пакет:</string>
-    <string name="home_dialog_selected_package">Обраний пакет:</string>
+    <string name="home_dialog_selected_package">Вибраний пакет:</string>
     <string name="home_outdated_patches_dialog_title">Патчі можуть бути застарілими</string>
     <string name="home_outdated_patches_dialog_message">Мобільна мережа активна, оновлення патчів вимкнено</string>
     <string name="home_outdated_patches_dialog_warning">Патчинг застарілими патчами може призвести до несправності застосунку</string>
@@ -307,7 +307,7 @@
     <string name="header_creator_guide_positioning_body">Використовуйте жести зведення пальців для масштабування та перетягування безпосередньо у попередньому перегляді для позиціонування та масштабування зображення. Напрямні прив\'язки з\'являються, коли зображення наближається до центру. Також можна використовувати повзунок під попереднім переглядом.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Ви впевнені, що хочете видалити цей застосунок?</string>
-    <string name="batch_uninstall_confirm_body">Обрані застосунки будуть остаточно видалені з пристрою</string>
+    <string name="batch_uninstall_confirm_body">Вибрані застосунки будуть остаточно видалені з пристрою</string>
     <string name="home_app_info_remove_app_warning">Це назавжди видалить:</string>
     <string name="home_app_info_delete_item_database">Запис бази даних</string>
     <string name="home_app_info_delete_item_patched_apk">Патчені APK файли</string>
@@ -427,7 +427,7 @@
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="patcher_message_18">Зміна стану застосунку з непатченого на патчений… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Ваш застосунок має підвищену температуру, і єдиний рятунок — більше патчів… 🩺🔔</string>
+    <string name="patcher_message_19">Ваш застосунок має підвищену температуру, і єдиний рятунок - більше патчів… 🩺🔔</string>
     <string name="patcher_message_20">Видалення нісенітниці. Будь ласка, зачекайте… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Патчинг застосунку</string>

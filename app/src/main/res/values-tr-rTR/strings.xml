@@ -37,11 +37,11 @@
     <string name="home_app_sort_title">Uygulamaları sırala</string>
     <string name="home_app_sort_manual_description">Bir uygulamaya uzun basın, ardından yeniden sıralama düğmesine dokunun</string>
     <string name="home_app_sort_recommended">Önerilen sıra</string>
-    <string name="home_app_sort_recommended_description">Yüklenen ve sabitlenen uygulamalar önce</string>
+    <string name="home_app_sort_recommended_description">Önce yüklenen ve sabitlenen uygulamalar</string>
     <string name="home_app_sort_name_asc_description">Alfabetik, A\'dan Z\'ye</string>
     <string name="home_app_sort_name_desc_description">Ters alfabetik, Z\'den A\'ya</string>
     <string name="home_app_sort_updates_first">Önce yama güncellemeleri</string>
-    <string name="home_app_sort_updates_first_description">Güncelleme rozeti olan uygulamalar önce, ardından önerilen sıra</string>
+    <string name="home_app_sort_updates_first_description">Önce güncelleme rozeti olan uygulamalar, ardından önerilen sıra</string>
     <string name="home_no_apps_title">Uygulama bulunamadı</string>
     <string name="home_no_apps_subtitle">Bir yama kaynağı ekleyin veya %s içinde mevcut olanı etkinleştirin</string>
     <string name="home_no_apps_search_subtitle">\"%s\" ile eşleşen uygulama yok</string>
@@ -106,9 +106,9 @@
     <string name="sources_sort_manual">Manuel sıra</string>
     <string name="sources_sort_manual_hint">Yeniden sıralamak için bir kaynağa uzun basın</string>
     <string name="sources_sort_last_updated">Son güncelleme</string>
-    <string name="sources_sort_last_updated_description">En yeni kaynak güncellemeleri önce</string>
-    <string name="sources_sort_enabled_first">Etkin olanlar önce</string>
-    <string name="sources_sort_enabled_first_description">Devre dışı kaynaklardan önce etkin kaynakları göster</string>
+    <string name="sources_sort_last_updated_description">Önce en yeni kaynak güncellemeleri</string>
+    <string name="sources_sort_enabled_first">Önce ekin olanlar</string>
+    <string name="sources_sort_enabled_first_description">Etkin kaynakları devre dışı kaynaklardan önce göster</string>
     <string name="sources_management_open_in_browser">Tarayıcıda aç</string>
     <string name="sources_management_failed_to_open_url">URL açılamadı</string>
     <string name="sources_management_prerelease_toggle">Ön sürüm yamalar</string>
@@ -658,7 +658,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Launcher widget\'ından Shorts düğmesini kaldırır</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Yükleyici</string>
-    <string name="installer_settings_title">Varsayılan kurulum aracı</string>
+    <string name="installer_settings_title">Varsayılan yükleyici</string>
     <string name="installer_title">Yükleyici seçin</string>
     <string name="installer_internal_description">Android paket yükleyicisini kullanır</string>
     <string name="installer_play_store_description">Sistem yükleyicisini kullanır ve Google Play Store\'u yükleme kaynağı olarak ayarlar</string>
@@ -799,9 +799,9 @@ Ayrıntılar: %2$s"</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Depolama yönetimi</string>
     <string name="settings_system_storage_management_description">Disk kullanımını gözden geçirin ve önbelleğe alınmış dosyaları temizleyin</string>
-    <string name="settings_system_storage_keystore_title">İmzalı anahtar deposu</string>
+    <string name="settings_system_storage_keystore_title">İmzalama anahtar deposu</string>
     <string name="settings_system_storage_app_data_title">Uygulama verileri</string>
-    <string name="settings_system_storage_patch_bundles_title">Yama paketleri</string>
+    <string name="settings_system_storage_patch_bundles_title">Yama bundle\'ları</string>
     <string name="settings_system_storage_http_cache_title">Ağ önbelleği</string>
     <string name="settings_system_storage_http_cache_description">Güncellemeleri hızlandırmak için HTTP yanıtları önbelleğe alınır</string>
     <string name="settings_system_storage_installer_cache_title">Harici yükleyici önbelleği</string>
@@ -809,7 +809,7 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_storage_patcher_workspace_title">Patcher çalışma alanı</string>
     <string name="settings_system_storage_patcher_workspace_description">Patcher çalışma zamanı dosyaları ve kullanılmayan geçici veriler</string>
     <string name="settings_system_storage_temporary_title">Geçici dosyalar</string>
-    <string name="settings_system_storage_temporary_description">Yama işlemi sırasında oluşturulan çalışma dosyaları</string>
+    <string name="settings_system_storage_temporary_description">Yamalamada oluşturulan çalışma dosyaları</string>
     <string name="settings_system_storage_clear_all">Tüm önbellekleri temizle</string>
     <string name="settings_system_storage_clear_all_description">Tek seferde tüm geri kazanılabilir önbellek alanını boşaltır</string>
     <string name="settings_system_storage_clear_all_confirm">Bu, önbelleğe alınmış ağ yanıtlarını, aşamalı yükleyici kopyalarını ve geçici dosyaları temizler. Orijinal ve yamalı APK\'ler korunur</string>

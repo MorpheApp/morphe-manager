@@ -176,8 +176,8 @@
     <string name="home_download_instructions_download_button_toast">Pulsa descargar en el sitio web, no aquí 😊</string>
     <string name="home_download_instructions_download_button_toast_2">¡Genial! Ahora pulsa en \"Continuar\" y ve al sitio web 👆</string>
     <string name="home_download_instructions_download_button_toast_3">La práctica hace al maestro y estás en camino 💪</string>
-    <string name="home_download_instructions_download_button_toast_4">Todavía no está aquí… todavía no está aquí… 🙈</string>
-    <string name="home_download_instructions_download_button_toast_5">De acuerdo, respeto la dedicación 🫡</string>
+    <string name="home_download_instructions_download_button_toast_4">Aún no llega… aún no llega… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">Muy bien, respeto la dedicación 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Ahora eres un probador oficial del botón Morphe 🏅</string>
     <string name="home_download_instructions_step3">Espera a que la descarga se complete, y &lt;b&gt;no instales&lt;/b&gt; el APK</string>
     <string name="home_download_instructions_step3_mount">Espera a que la descarga se complete, luego &lt;b&gt;instala el APK&lt;/b&gt;</string>
@@ -185,12 +185,12 @@
     <string name="home_download_instructions_step4_mount">Después de instalar el APK original, vuelve a Morphe</string>
     <string name="home_download_instructions_continue">Continuar a APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">Seleccionar APK descargado</string>
+    <string name="home_file_picker_prompt_title">Selecciona el APK descargado</string>
     <string name="home_file_picker_prompt_description">Selecciona el archivo APK de &lt;b&gt;%s&lt;/b&gt; que acabas de descargar</string>
-    <string name="home_file_picker_prompt_open_apk">Abrir archivo APK</string>
+    <string name="home_file_picker_prompt_open_apk">Abrir el archivo APK</string>
     <string name="home_recommended_version">Versión recomendada</string>
     <string name="home_selected_version">Versión seleccionada</string>
-    <string name="home_select_apk_title">Seleccionar APK</string>
+    <string name="home_select_apk_title">Selecciona el APK</string>
     <string name="home_select_any_apk_description">Selecciona un archivo APK de cualquier aplicación o elige una aplicación que ya esté instalada en este dispositivo</string>
     <string name="home_use_installed_app">Usar aplicación instalada</string>
     <string name="home_installed_app_picker_title">Seleccionar aplicación instalada</string>
@@ -200,12 +200,12 @@
     <string name="home_installed_app_picker_filter_system">Solo aplicaciones del sistema</string>
     <string name="home_invalid_apk_unreadable">No se pudo leer el archivo. Verifique que \'Almacenamiento externo\' no esté restringido por la batería</string>
     <string name="home_invalid_apk_not_an_apk">El archivo seleccionado no es un APK válido</string>
-    <string name="home_invalid_apk_io_error">No se pudo abrir el archivo. Intente nuevamente</string>
-    <string name="home_external_apk_expert_mode_required">Esta función solo está disponible en modo Experto</string>
+    <string name="home_invalid_apk_io_error">No se ha podido abrir el archivo. Por favor, inténtalo de nuevo</string>
+    <string name="home_external_apk_expert_mode_required">Esta función solo está disponible en el modo Experto</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Modo experto</string>
+    <string name="expert_mode_title">Modo Experto</string>
     <string name="expert_mode_search">Buscar parches</string>
-    <string name="expert_mode_proceed">Proceder al parcheado</string>
+    <string name="expert_mode_proceed">Proceder al parcheo</string>
     <string name="expert_mode_disable_all">Desactivar todo</string>
     <string name="expert_mode_disable_all_done">Todos los parches desactivados</string>
     <string name="expert_mode_enable_all">Activar todo</string>
@@ -223,14 +223,14 @@
 ¿Realmente quieres continuar?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">APK no verificado</string>
-    <string name="home_invalid_signature_message">El APK que seleccionó para &lt;b&gt;%s&lt;/b&gt; no coincide con el certificado de firma esperado. Es posible que esté modificado o provenga de una fuente no confiable</string>
-    <string name="home_invalid_signature_badge">Este APK podría no ser el original</string>
+    <string name="home_invalid_signature_message">El APK que has seleccionado para &lt;b&gt;%s&lt;/b&gt; no coincide con el certificado de firma esperado. Puede que esté modificado o provenga de una fuente no fiable</string>
+    <string name="home_invalid_signature_badge">Puede que este APK no sea original</string>
     <string name="home_split_apk_warning_title">APK dividido detectado</string>
     <string name="home_split_apk_warning_message">"Este archivo es un paquete APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 
-Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt;b&gt;APK completo&lt;/b&gt;"</string>
-    <string name="home_split_apk_warning_pick_another">Seleccione otro APK</string>
+Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK completo&lt;/b&gt;"</string>
+    <string name="home_split_apk_warning_pick_another">Selecciona otro APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">Esta versión tiene soporte experimental y podría ser inestable o incompleta</string>
     <string name="morphe_experimental_app_version_dialog_title">¿Quieres experimentar? 🧪</string>
@@ -247,14 +247,14 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="home_dialog_wrong_package_description">El APK seleccionado no es para la aplicación que pretendías parchear</string>
     <string name="home_dialog_expected_package">Paquete esperado:</string>
     <string name="home_dialog_selected_package">Paquete seleccionado:</string>
-    <string name="home_outdated_patches_dialog_title">Los parches pueden estar desactualizados</string>
+    <string name="home_outdated_patches_dialog_title">Los parches podrían estar desactualizados</string>
     <string name="home_outdated_patches_dialog_message">Los datos móviles están activos y las actualizaciones de parches están desactivadas</string>
-    <string name="home_outdated_patches_dialog_warning">La app podría no funcionar correctamente si se aplican parches obsoletos</string>
+    <string name="home_outdated_patches_dialog_warning">La aplicación podría no funcionar correctamente si se aplican parches obsoletos</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Actualizar y parchear</string>
-    <string name="home_low_disk_space_dialog_title">Poco espacio en disco</string>
-    <string name="home_low_disk_space_dialog_message">Solo hay %1$.2f GB de almacenamiento libre disponible. El parcheo requiere al menos %2$.2f GB de espacio libre para funcionar correctamente</string>
-    <string name="home_low_disk_space_dialog_warning">Continuar puede provocar un error de \"archivo no encontrado\" o un APK de salida corrupto</string>
-    <string name="home_simple_bundle_select_title">Seleccionar fuente de parche</string>
+    <string name="home_low_disk_space_dialog_title">Poco espacio de almacenamiento</string>
+    <string name="home_low_disk_space_dialog_message">Solo hay %1$.2f GB de almacenamiento libre. El parcheo requiere al menos %2$.2f GB de espacio libre para funcionar correctamente</string>
+    <string name="home_low_disk_space_dialog_warning">Continuar puede provocar un error de \"archivo no encontrado\" o un APK final corrupto</string>
+    <string name="home_simple_bundle_select_title">Selecciona la fuente de parcheo</string>
     <!-- Patch Options -->
     <string name="custom_color">Color personalizado</string>
     <string name="hex_color">Color HEX</string>
@@ -265,7 +265,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="patch_option_list_duplicate">Este valor ya existe</string>
     <string name="patch_option_list_empty">El valor no puede estar vacío</string>
     <string name="patch_option_list_empty_state">No se han añadido valores todavía</string>
-    <string name="patch_option_required_missing">%s: complete todas las opciones requeridas</string>
+    <string name="patch_option_required_missing">%s: completa todas las opciones necesarias</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Crear icono adaptable</string>
     <string name="adaptive_icon_select_image">Seleccionar imagen</string>
@@ -274,7 +274,7 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="adaptive_icon_reset_transform">Restablecer posición y escala</string>
     <string name="adaptive_icon_safe_zone_inner">Zona segura (siempre visible)</string>
     <string name="adaptive_icon_safe_zone_outer">Zona de máscara (puede ser recortada)</string>
-    <string name="adaptive_icon_no_transparency_warning">La imagen no tiene píxeles transparentes. El resultado puede verse incorrecto</string>
+    <string name="adaptive_icon_no_transparency_warning">La imagen no tiene píxeles transparentes. El resultado puede tener un aspecto incorrecto</string>
     <string name="adaptive_icon_created_success">Ícono adaptativo creado con éxito</string>
     <string name="adaptive_icon_creation_failed">No se pudo crear el ícono adaptativo</string>
     <string name="adaptive_icon_label">Adaptable</string>
@@ -283,12 +283,12 @@ Para obtener los mejores resultados, esta aplicación recomienda parchear un &lt
     <string name="adaptive_icon_guide_png_title">Usar un PNG con fondo transparente</string>
     <string name="adaptive_icon_guide_png_body">El primer plano debe ser un archivo PNG con un fondo transparente. Un fondo de color sólido se verá incorrecto: el color de fondo debe provenir del selector de fondo que se encuentra más abajo.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Zonas seguras</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Zona interior (sólida): el contenido siempre es totalmente visible en todas las formas del launcher.
+    <string name="adaptive_icon_guide_safe_zones_body">"Zona interior (sólida): el contenido siempre queda a la vista en todas las formas del launcher.
 Zona exterior (discontinua): puede quedar recortada por la máscara del launcher; mantén los detalles importantes dentro de la zona interior."</string>
     <string name="adaptive_icon_guide_notification_title">Icono de notificación</string>
     <string name="adaptive_icon_guide_notification_body">Generado automáticamente a partir de la imagen del primer plano. Ajuste su tamaño usando el control deslizante de Notificación. Todo el contenido visible aparece en blanco en la barra de estado.</string>
     <string name="adaptive_icon_guide_monochrome_title">Icono monocromático</string>
-    <string name="adaptive_icon_guide_monochrome_body">Generado automáticamente a partir de la imagen del primer plano utilizando las mismas transformaciones de icono adaptable. Aparece con un tono del color de acento del fondo de pantalla en Android 13 y versiones posteriores.</string>
+    <string name="adaptive_icon_guide_monochrome_body">Generado automáticamente a partir de la imagen del primer plano utilizando las mismas transformaciones de icono adaptable. Aparece tintado del color de acento del fondo de pantalla en Android 13 y versiones posteriores.</string>
     <string name="notification_icon_preview">Notificación</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Crear encabezado personalizado</string>
@@ -298,12 +298,12 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <string name="header_creator_success">Encabezado creado con éxito</string>
     <string name="header_creator_failed">No se pudo crear el encabezado</string>
     <string name="header_creator_guide">Guía de creación de encabezados</string>
-    <string name="header_creator_guide_image_title">Requisitos de imagen</string>
-    <string name="header_creator_guide_image_body">Use cualquier archivo de imagen (PNG o JPEG). Para obtener los mejores resultados, use una imagen de formato ancho con una relación de aspecto de aproximadamente 2.7:1. Los archivos PNG con fondos transparentes se integrarán de forma natural con el tema de la aplicación.</string>
+    <string name="header_creator_guide_image_title">Requisitos de la imagen</string>
+    <string name="header_creator_guide_image_body">Use cualquier archivo de imagen (PNG o JPEG). Para mejores resultados, use una imagen de formato ancho con una relación de aspecto de aprox. 2.7:1. Los archivos PNG con fondos transparentes se integrarán de forma natural con el tema de la aplicación.</string>
     <string name="header_creator_guide_themes_title">Temas claros y oscuros</string>
     <string name="header_creator_guide_themes_body">La mayoría de las aplicaciones requieren imágenes separadas para los temas claro y oscuro. Algunas aplicaciones (como YouTube Music) solo utilizan el tema oscuro, por lo que solo se muestra esa sección.</string>
     <string name="header_creator_guide_positioning_title">Posicionamiento y escalado</string>
-    <string name="header_creator_guide_positioning_body">Use gestos de pellizcar para ampliar y arrastrar directamente en la vista previa para posicionar y escalar su imagen. Aparecen guías de ajuste cuando la imagen está cerca del centro. También puede usar el control deslizante debajo de la vista previa.</string>
+    <string name="header_creator_guide_positioning_body">Usa gestos de pellizcar y arrastrar directamente en la vista previa para posicionar y escalar la imagen. Las guías de ajuste aparecen cuando la imagen está cerca del centro. También puedes usar el control deslizante debajo de la vista previa.</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">¿Realmente quieres desinstalar esta aplicación?</string>
     <string name="batch_uninstall_confirm_body">Las aplicaciones seleccionadas se eliminarán permanentemente de tu dispositivo</string>
@@ -316,40 +316,40 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <string name="home_app_info_patches_name_fallback">Sin nombre</string>
     <string name="home_app_info_patches_replace_fail">No se pudieron importar los parches: %s</string>
     <string name="home_app_info_repatch_no_original_apk">APK original no encontrado. No se puede volver a parchear esta aplicación</string>
-    <string name="home_app_info_original_package_name">Nombre del paquete original</string>
+    <string name="home_app_info_original_package_name">Nombre original del paquete</string>
     <string name="home_app_info_applied_patches">Parches aplicados</string>
     <string name="home_app_info_patch_source_used">Fuente de parches utilizada</string>
     <string name="home_app_info_install_type_custom_installer">Instalador personalizado</string>
     <string name="home_app_info_install_type_system_installer">Instalador del sistema</string>
-    <string name="home_app_info_install_type_play_store">Instalación Play Store</string>
-    <string name="home_app_info_install_type_root_play_store">Instalación Play Store con acceso root</string>
-    <string name="home_app_info_install_type_shizuku_play_store">Instalación Play Store con Shizuku</string>
+    <string name="home_app_info_install_type_play_store">Instalación desde la Play Store</string>
+    <string name="home_app_info_install_type_root_play_store">Instalación desde la Play Store con acceso root</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Instalación desde la Play Store con Shizuku</string>
     <string name="home_app_info_patch_update_available">Actualización de parches disponible</string>
     <string name="home_app_info_patch_update_available_description">Hay disponible una versión más reciente de los parches. Vuelve a parchear tu aplicación para obtener las últimas mejoras y correcciones</string>
-    <string name="home_app_info_app_deleted_warning">La app fue desinstalada</string>
-    <string name="home_app_info_app_deleted_description">Esta app fue desinstalada fuera de Morphe. Vuelve a parchearla para restaurar la funcionalidad</string>
-    <string name="home_app_info_apk_size">Tamaño de la APK</string>
+    <string name="home_app_info_app_deleted_warning">La aplicación fue desinstalada</string>
+    <string name="home_app_info_app_deleted_description">Esta aplicación fue desinstalada fuera de Morphe. Vuelve a parchearla para restaurar su funcionalidad</string>
+    <string name="home_app_info_apk_size">Tamaño del APK</string>
     <string name="home_app_info_cpu_arch">Arquitectura de la CPU</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">El modo raíz requiere que el APK original esté instalado en tu dispositivo antes de aplicar parches.</string>
-    <string name="root_gmscore_excluded">El parche de soporte de GmsCore está excluido en el modo raíz</string>
-    <string name="root_pre_patch_installer_title">Elige el modo de parche</string>
+    <string name="root_install_apk_required">El modo root requiere que el APK original esté instalado en tu dispositivo antes de aplicar parches.</string>
+    <string name="root_gmscore_excluded">El parche de soporte de GmsCore está excluido en modo root</string>
+    <string name="root_pre_patch_installer_title">Elige el modo de parcheo</string>
     <string name="root_pre_patch_installer_description">Tu dispositivo tiene acceso root. Elige si esta aplicación debe ser parcheada para montaje root o instalación estándar</string>
-    <string name="root_pre_patch_installer_mount_title">Modo de montaje \"Root\"</string>
-    <string name="root_pre_patch_installer_mount_description">Parches para montaje root, luego monta el APK sobre la aplicación original coincidente. No se necesita GmsCore</string>
+    <string name="root_pre_patch_installer_mount_title">Modo de montaje root</string>
+    <string name="root_pre_patch_installer_mount_description">Parchea para montaje root, luego monta el APK sobre la aplicación original coincidente. No se necesita GmsCore</string>
     <string name="root_mount_module_unmount_warning">Si utilizas KernelSU o APatch, desactiva el desmontaje o la ocultación de módulos para las aplicaciones instaladas con montaje root. De lo contrario, la aplicación original aún podría ejecutarse incluso cuando Morphe la muestre como montada.</string>
     <string name="root_pre_patch_installer_standard_title">Modo de instalación estándar</string>
-    <string name="root_pre_patch_installer_standard_description">Parches como un APK normal con soporte para GmsCore. Se utiliza tu configuración de instalador después de aplicar los parches.</string>
-    <string name="root_pre_patch_installer_hint">Este modo de parche es independiente de Configuración > Sistema > Instalador y no se puede cambiar después de aplicar los parches</string>
+    <string name="root_pre_patch_installer_standard_description">Parchea como un APK normal con soporte para GmsCore. Se utilizará tu configuración del instalador tras aplicar los parches.</string>
+    <string name="root_pre_patch_installer_hint">Este modo de parcheo es independiente de Configuración &gt; Sistema &gt; Instalador y no se puede cambiar después de aplicar los parches</string>
     <!-- Patcher Screen -->
-    <string name="patcher_error_copied">Error copiado en el portapapeles</string>
+    <string name="patcher_error_copied">Error copiado al portapapeles</string>
     <string name="patcher_error_log">Registro de errores</string>
     <string name="patcher_error_technical">Detalles técnicos</string>
-    <string name="patcher_error_dialog_app_info">Información de la app</string>
-    <string name="patcher_tab_logs">Registros del parcheador</string>
+    <string name="patcher_error_dialog_app_info">Información de la aplicación</string>
+    <string name="patcher_tab_logs">Registro del parcheador</string>
     <string name="patcher_tab_game">Juegos</string>
-    <string name="patcher_long_step_warning">Este paso puede tardar un tiempo. Por favor, espere…</string>
-    <string name="patcher_installing_subtitle">¡Casi listo para empezar! 🎸</string>
+    <string name="patcher_long_step_warning">Este paso puede tardar un tiempo. Por favor, espera…</string>
+    <string name="patcher_installing_subtitle">¡Casi listo para arrasar! 🎸</string>
     <string name="patcher_success_title">¡Listo! 🎉</string>
     <string name="patcher_success_subtitle">¡Tu aplicación está parcheada e instalada!</string>
     <string name="patcher_complete_title">¡Parcheo completado! ✨</string>
@@ -361,29 +361,29 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <string name="patcher_split_step_merging">Combinando %s</string>
     <string name="patcher_split_step_writing">Guardando APK combinado</string>
     <string name="patcher_split_step_finalizing">Completando el APK combinado</string>
-    <string name="patcher_conflict_title">Conflicto de paquete</string>
-    <string name="patcher_conflict_subtitle">Debe desinstalar la versión existente</string>
+    <string name="patcher_conflict_title">Conflicto del paquete</string>
+    <string name="patcher_conflict_subtitle">Debes desinstalar la versión existente</string>
     <string name="patcher_conflict_hint">La aplicación parcheada utiliza un certificado diferente al de la versión instalada. Al desinstalarla, se borrarán todos los datos de la aplicación.</string>
-    <string name="patcher_installed_conflict_title">Desinstalación requerida</string>
-    <string name="patcher_installed_conflict_body">"Morphe firma las aplicaciones parcheadas con su propio certificado, que es diferente del original. Android requiere eliminar la versión existente antes de que se pueda instalar la aplicación parcheada.
+    <string name="patcher_installed_conflict_title">Desinstalación necesaria</string>
+    <string name="patcher_installed_conflict_body">"Morphe firma las aplicaciones parcheadas con su propio certificado, que es diferente al original. Android requiere eliminar la versión existente antes de que se pueda instalar la aplicación parcheada.
 
 Desinstalar borrará permanentemente todos los datos de la aplicación."</string>
     <string name="patcher_install_error_title">Error de instalación</string>
     <string name="patcher_install_error_subtitle">Intente desinstalar y volver a instalar</string>
-    <string name="patcher_ready_to_install_subtitle">Pulse el botón de abajo para instalar</string>
-    <string name="patcher_ready_to_mount_subtitle">Pulse el botón de abajo para montar</string>
+    <string name="patcher_ready_to_install_subtitle">Pulsa el botón más abajo para instalar</string>
+    <string name="patcher_ready_to_mount_subtitle">Pulsa el botón más abajo para montar</string>
     <string name="patcher_storage_permission_dialog_title">No se puede acceder a la ruta de almacenamiento</string>
-    <string name="patcher_incompatible_patcher_title">Actualización requerida</string>
-    <string name="patcher_incompatible_patcher_description">El paquete &lt;b&gt;%1$s&lt;/b&gt; requiere la versión &lt;b&gt;%2$s&lt;/b&gt; o más reciente del parcheador. Actualiza Morphe para parchear esta aplicación</string>
-    <string name="patcher_incompatible_patcher_update_button">Descargar y actualizar Morphe</string>
-    <string name="patcher_storage_permission_description_api30">Una o más opciones de parcheo apuntan a rutas que Morphe no puede leer. Conceda acceso al almacenamiento y toque el botón para que el parcheo empiece automáticamente</string>
-    <string name="patcher_storage_permission_description_legacy">Una o varias opciones de parcheo apuntan a rutas que no se pueden acceder. Actualice las rutas en las opciones de parcheo y vuelva a intentarlo</string>
+    <string name="patcher_incompatible_patcher_title">Actualización necesaria</string>
+    <string name="patcher_incompatible_patcher_description">El paquete &lt;b&gt;%1$s&lt;/b&gt; requiere la versión &lt;b&gt;%2$s&lt;/b&gt; o más reciente del parcheador. Por favor, actualiza Morphe para parchear esta aplicación</string>
+    <string name="patcher_incompatible_patcher_update_button">Descarga y actualiza Morphe</string>
+    <string name="patcher_storage_permission_description_api30">Una o más opciones de parcheo apuntan a rutas que Morphe no puede leer. Concede acceso al almacenamiento y pulsa el botón para que el parcheo empiece automáticamente</string>
+    <string name="patcher_storage_permission_description_legacy">Una o varias opciones de parcheo apuntan a rutas que no se pueden acceder. Actualiza las rutas en las opciones de parcheo y vuelve a intentarlo</string>
     <string name="patcher_storage_permission_grant">Conceder permiso de almacenamiento</string>
-    <string name="patcher_storage_permission_denied_warning">Permiso de almacenamiento denegado. Conceda el permiso para usar esta ruta o mueva los archivos al directorio privado de la aplicación</string>
+    <string name="patcher_storage_permission_denied_warning">Permiso de almacenamiento denegado. Concede el permiso para usar esta ruta o mueve los archivos al directorio privado de la aplicación</string>
     <string name="patcher_storage_permission_open_settings">Abrir ajustes de almacenamiento</string>
     <string name="patcher_storage_badge_denied">Permiso denegado</string>
     <string name="patcher_storage_badge_missing">No encontrado</string>
-    <string name="patcher_storage_permission_hint">Consejo: Mueva los archivos a /Android/data/app.morphe.manager/files/ - no se necesitan permisos adicionales</string>
+    <string name="patcher_storage_permission_hint">Consejo: Mueve los archivos a /Android/data/app.morphe.manager/files/ - no se necesitan permisos adicionales</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Preparando</string>
     <string name="patcher_step_load_patches">Cargando parches</string>
@@ -391,34 +391,34 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="patcher_step_unpack">Leer archivo APK</string>
     <string name="patcher_step_group_patching">Aplicando parches</string>
     <string name="patcher_step_group_saving">Guardando</string>
-    <string name="patcher_step_write_patched">Escribiendo archivo APK parcheado</string>
+    <string name="patcher_step_write_patched">Guardando archivo APK parcheado</string>
     <string name="patcher_step_sign_apk">Firmando archivo APK parcheado</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Protección de parcheo en segundo plano</string>
-    <string name="battery_optimization_dialog_description">Algunos dispositivos pueden detener el parcheador cuando la aplicación se minimiza. Permita que Morphe se ejecute sin restricciones de batería para garantizar que el parcheo se complete de forma confiable.</string>
+    <string name="battery_optimization_dialog_description">Algunos dispositivos pueden detener el parcheador cuando la aplicación se minimiza. Permite que Morphe se ejecute sin restricciones de batería para garantizar que el parcheo se complete de manera fiable.</string>
     <string name="battery_optimization_not_now">Ahora no</string>
     <!-- Patcher Screen - Patcher Worker -->
-    <string name="patcher_notification_title">Aplicando parches en curso...</string>
-    <string name="patcher_notification_text">Toca para volver al parcheador</string>
+    <string name="patcher_notification_title">Aplicando parches...</string>
+    <string name="patcher_notification_text">Pulsa para volver al parcheador</string>
     <string name="patcher_stop_confirm_title">Detener parcheador</string>
     <string name="patcher_stop_confirm_description">¿Estás seguro de que quieres detener el proceso de parcheo?</string>
     <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Transformando tu app en algo increíble… 🏆</string>
-    <string name="patcher_message_2">Enseñando trucos nuevos a apps antiguas… 🎩</string>
-    <string name="patcher_message_3">Haciendo un ajuste digital a tu app… 🔧</string>
+    <string name="patcher_message_1">Transformando tu aplicación en algo increíble… 🏆</string>
+    <string name="patcher_message_2">Enseñando trucos nuevos a aplicaciones viejas… 🎩</string>
+    <string name="patcher_message_3">Haciendo un tuneo digital a tu aplicación… 🔧</string>
     <string name="patcher_message_4">Preparando magia digital… ☕</string>
     <string name="patcher_message_5">Se recomienda un descanso para el café… ☕</string>
-    <string name="patcher_message_6">Mira afuera, hace buen tiempo… 🌤️</string>
-    <string name="patcher_message_7">Ajustando unos (1) y ceros (0)… 🤖</string>
-    <string name="patcher_message_8">Deshaciendo el espagueti digital… 🍝</string>
+    <string name="patcher_message_6">Mira afuera, que tiempo más agradable… 🌤️</string>
+    <string name="patcher_message_7">Ajustando 1s y 0s… 🤖</string>
+    <string name="patcher_message_8">Desenredando los espaguetis digitales… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="patcher_message_9">Arreglando errores en la aplicación no parcheada… 🪲</string>
-    <string name="patcher_message_10">Los buenos parches valen la pena esperar… ⏳</string>
+    <string name="patcher_message_10">Los buenos parches merecen ser esperarados… ⏳</string>
     <string name="patcher_message_11">Puliendo píxeles hasta que brillen… 💎</string>
     <string name="patcher_message_12">Por favor, permanezca sentado hasta que el capitán apague el letrero de \"Parche en progreso\"... 💺✈️</string>
     <string name="patcher_message_13">Cocinando tu aplicación parcheada, caliente y fresca… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Negociando de forma educada con el código de la aplicación… 🤝</string>
+    <string name="patcher_message_14">Negociando educadamente con el bytecode… 🤝</string>
     <!-- Space flight communications callout. -->
     <string name="patcher_message_15">Todos los sistemas nominales… la trayectoria de parcheo es estable… 🚀</string>
     <string name="patcher_message_16">Exprimiendo potencia extra, como jugo de un limón digital… 🍋</string>
@@ -426,17 +426,17 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="patcher_message_18">Cambiando la superposición de la aplicación de sin parchear a parcheada… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Tu aplicación tiene fiebre y la única receta son más parches… 🩺🔔</string>
+    <string name="patcher_message_19">Tu aplicación esta enferma y la única cura son más parches… 🩺🔔</string>
     <string name="patcher_message_20">Eliminando tonterías. Por favor, espere… 🗑️</string>
     <!-- Expert patcher Screen -->
-    <string name="patching_app">Parcheando la app</string>
+    <string name="patching_app">Parcheando la aplicación</string>
     <string name="memory_usage">Uso de memoria</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Aplicando parches</string>
     <string name="failed_to_execute_patch">Error al aplicar %s</string>
-    <string name="patched_app_saved_toast">App parcheada guardada para más tarde</string>
-    <string name="patched_app_save_failed_toast">Error al guardar la app parcheada</string>
-    <string name="plugin_activity_dialog_body">Se requiere interacción del usuario para continuar con este complemento.</string>
+    <string name="patched_app_saved_toast">Aplicación parcheada guardada para más tarde</string>
+    <string name="patched_app_save_failed_toast">Error al guardar la aplicación parcheada</string>
+    <string name="plugin_activity_dialog_body">Es necesaria la interacción del usuario para continuar con este complemento</string>
     <string name="patcher_process_exit_message">El proceso del parcheador terminó con el código %s</string>
     <string name="install_app_success">Instalado correctamente</string>
     <string name="install_app_fail">Error al instalar la aplicación: %s</string>
@@ -444,8 +444,8 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="uninstall_timeout">Tiempo de espera de desinstalación agotado</string>
     <string name="save_apk_success">APK guardado</string>
     <string name="saved_app_export_failed">Error al exportar la aplicación parcheada</string>
-    <string name="saved_app_removed_toast">Aplicación parcheada guardada eliminada</string>
-    <string name="saved_app_launch_unavailable">Instala la aplicación antes de abrirla.</string>
+    <string name="saved_app_removed_toast">La aplicación parcheada guardada se ha eliminado</string>
+    <string name="saved_app_launch_unavailable">Instala la aplicación antes de abrirla</string>
     <string name="package_name">Nombre del paquete</string>
     <string name="failed_to_mount">Error al montar: %s</string>
     <string name="failed_to_unmount">Error al desmontar: %s</string>
@@ -454,16 +454,16 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="mini_game_best">Mejor %d</string>
     <string name="mini_game_new_record">¡Nuevo récord!</string>
     <string name="mini_game_game_over">Fin del juego</string>
-    <string name="mini_game_try_again">Volver a intentar</string>
-    <string name="mini_game_paused">Pausado</string>
+    <string name="mini_game_try_again">Inténtalo de nuevo</string>
+    <string name="mini_game_paused">En pausa</string>
     <string name="mini_game_resume">Continuar</string>
     <string name="mini_game_2048_picker_subtitle">Desliza las fichas para combinarlas</string>
-    <string name="mini_game_flappy_picker_subtitle">Toca para volar entre los tubos</string>
-    <string name="mini_game_flappy_tap_to_start">Toca para volar</string>
-    <string name="mini_game_snake_picker_subtitle">Come comida, no te golpees a ti mismo</string>
+    <string name="mini_game_flappy_picker_subtitle">Pulsa para volar entre los tubos</string>
+    <string name="mini_game_flappy_tap_to_start">Pulsa para volar</string>
+    <string name="mini_game_snake_picker_subtitle">Engulle comida, no te golpees a ti mismo</string>
     <string name="mini_game_snake_swipe_to_start">Desliza para empezar</string>
-    <string name="mini_game_dino_picker_subtitle">Toca para saltar sobre los cactus</string>
-    <string name="mini_game_dino_tap_to_start">Toca para correr</string>
+    <string name="mini_game_dino_picker_subtitle">Pulsa para saltar sobre los cactus</string>
+    <string name="mini_game_dino_tap_to_start">Pulsa para correr</string>
     <!-- Settings -->
     <string name="appearance">Apariencia</string>
     <string name="advanced">Avanzado</string>
@@ -483,11 +483,11 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="settings_appearance_background_random_interval_launch">Al inicio</string>
     <string name="settings_appearance_background_random_interval_daily">Diario</string>
     <string name="settings_appearance_background_random_interval_3days">Cada 3 días</string>
-    <string name="settings_appearance_parallax_effect">Efecto de paralaje</string>
+    <string name="settings_appearance_parallax_effect">Efecto parallax</string>
     <string name="settings_appearance_parallax_effect_description">Desplazamiento suave del fondo al inclinar el dispositivo</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
-    <string name="settings_appearance_theme_mode">Modo de tema</string>
+    <string name="settings_appearance_theme_mode">Modo del tema</string>
     <string name="settings_appearance_system">Sistema</string>
     <string name="settings_appearance_light">Claro</string>
     <string name="settings_appearance_dark">Oscuro</string>
@@ -496,7 +496,7 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="settings_appearance_color_style">Estilo de color</string>
     <string name="settings_appearance_accent_color">Color de acento</string>
     <string name="settings_appearance_pure_black">Negro puro</string>
-    <string name="settings_appearance_pure_black_description">Utiliza fondos de pantalla negros reales</string>
+    <string name="settings_appearance_pure_black_description">Utiliza fondos de pantalla realmente negros</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Idioma de la aplicación</string>
     <string name="settings_appearance_app_language_current">Idioma actual</string>
@@ -518,15 +518,15 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="settings_appearance_app_icon_light_3">Atardecer</string>
     <string name="settings_appearance_app_icon_dark_1">Océano</string>
     <string name="settings_appearance_app_icon_dark_2">Vacío</string>
-    <string name="settings_appearance_app_icon_dark_3">Indigo</string>
+    <string name="settings_appearance_app_icon_dark_3">Índigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">¿Cambiar el icono de la aplicación?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">¿Cambiar a &lt;b&gt;%s&lt;/b&gt; y reiniciar?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Cambiar icono</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Actualizaciones</string>
     <string name="settings_advanced_patcher">Parcheador</string>
-    <string name="settings_advanced_updates_use_prereleases">Actualizaciones preliminares</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Acceso anticipado a las nuevas versiones de la aplicación Morphe. Activa las versiones preliminares por fuente en las fuentes de parches.</string>
+    <string name="settings_advanced_updates_use_prereleases">Actualizaciones pre-lanzamiento</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Acceso anticipado a las nuevas versiones de la aplicación Morphe. Activa las versiones pre-lanzamiento en cada fuente de parches.</string>
     <string name="settings_advanced_updates_allow_metered">Actualizaciones con datos móviles</string>
     <string name="settings_advanced_updates_allow_metered_description">Permite que Morphe y las actualizaciones de los parches se descarguen a través de datos móviles</string>
     <string name="settings_advanced_updates_background_notifications">Notificaciones de actualización en segundo plano</string>
@@ -539,12 +539,12 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="settings_advanced_update_interval_weekly">Una vez a la semana</string>
     <string name="settings_advanced_update_interval_monthly">Una vez al mes</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Frecuencia de comprobación en segundo plano</string>
-    <string name="settings_advanced_update_interval_battery_warning">Las comprobaciones en segundo plano pueden no funcionar de forma fiable en algunos dispositivos. Los fabricantes como Xiaomi, Huawei, Samsung y OnePlus a menudo restringen agresivamente los procesos en segundo plano para ahorrar batería</string>
+    <string name="settings_advanced_update_interval_battery_warning">Las comprobaciones en segundo plano pueden no funcionar de forma fiable en algunos dispositivos. Fabricantes como Xiaomi, Huawei, Samsung u OnePlus, a menudo restringen agresivamente los procesos en segundo plano para ahorrar batería</string>
     <!-- Notification content -->
     <string name="notification_manager_update_title">Actualización de Morphe disponible</string>
     <string name="notification_bundle_update_title">Nuevos parches disponibles</string>
     <string name="notification_update_text">La versión %s está lista para descargarse</string>
-    <string name="notification_bundle_update_text_unversioned">Toca para abrir Morphe y actualizar</string>
+    <string name="notification_bundle_update_text_unversioned">Pulsa para abrir Morphe y actualizar</string>
     <string name="notification_permission_dialog_title">Permitir notificaciones</string>
     <string name="notification_permission_dialog_description">Morphe necesita el permiso de notificación para avisarte cuando haya actualizaciones disponibles en segundo plano</string>
     <string name="notification_post_patch_dialog_title">¿Quieres ser notificado cuando haya actualizaciones disponibles?</string>
@@ -553,11 +553,11 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="notification_channel_patcher">Parcheando</string>
     <string name="notification_channel_patcher_description">Se muestra mientras Morphe está parcheando una aplicación en segundo plano</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Ajustes avanzados</string>
-    <string name="settings_advanced_expert_mode">Modo experto</string>
+    <string name="settings_advanced_expert">Ajustes Expertos</string>
+    <string name="settings_advanced_expert_mode">Modo Experto</string>
     <string name="settings_advanced_expert_mode_description">Activa ajustes complejos de parcheo de Morphe y opciones de personalización</string>
-    <string name="settings_advanced_expert_mode_dialog_title">¿Activar el modo experto?</string>
-    <string name="settings_advanced_expert_mode_dialog_message">El modo experto ofrece más control sobre cómo se aplican los parches, pero configurar incorrectamente los ajustes en modo experto puede resultar en una aplicación no funcional</string>
+    <string name="settings_advanced_expert_mode_dialog_title">¿Activar el modo Experto?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">El modo Experto ofrece más control sobre cómo se aplican los parches, pero configurar incorrectamente estos ajustes puede resultar en una aplicación no funcional</string>
     <string name="settings_advanced_strip_unused_libs">Optimizar para la arquitectura del dispositivo</string>
     <string name="settings_advanced_strip_unused_libs_description">Elimina las bibliotecas de arquitectura de CPU no utilizadas y los módulos APK divididos</string>
     <!-- Bytecode mode -->
@@ -567,42 +567,42 @@ Desinstalar borrará permanentemente todos los datos de la aplicación."</string
     <string name="settings_advanced_bytecode_mode_strip_fast">Rápido</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">Parcheo más rápido y menor uso de memoria, a costa de un APK más grande. Recomendado para dispositivos con poca memoria RAM o más antiguos.</string>
     <string name="settings_advanced_bytecode_mode_full">Completo</string>
-    <string name="settings_advanced_bytecode_mode_full_description">Parcheo más lento, replica el comportamiento anterior. Se recomienda solo si el modo rápido causa problemas</string>
+    <string name="settings_advanced_bytecode_mode_full_description">Parcheo más lento, replica el comportamiento antiguo. Se recomienda solo si el modo rápido causa problemas</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">Token de acceso personal de GitHub</string>
-    <string name="settings_advanced_github_pat_description">Requerido para fuentes de solicitud de extracción</string>
+    <string name="settings_advanced_github_pat_description">Necesario para fuentes de pull request</string>
     <string name="settings_advanced_github_pat_configured">Token configurado</string>
     <string name="settings_advanced_github_pat_how_to_get">Cómo obtener un token</string>
     <string name="settings_advanced_github_pat_dialog_title">Establecer token de acceso personal de GitHub</string>
-    <string name="settings_advanced_github_pat_dialog_description">"Establezca un token de acceso personal (PAT) de GitHub para poder añadir solicitudes de extracción como fuentes externas. Cree un PAT con alcance public_repo en
+    <string name="settings_advanced_github_pat_dialog_description">"Establece un token de acceso personal (PAT) de GitHub para poder añadir pull requests como fuentes externas. Crea un PAT con alcance public_repo en
 %s"</string>
-    <string name="settings_advanced_github_pat_export_include_label">Incluir en la exportación de ajustes</string>
-    <string name="settings_advanced_github_pat_export_include_supporting">Agrega este PAT a los ajustes exportados de Morphe</string>
-    <string name="settings_advanced_github_pat_export_warning">No compartas tu PAT. Si lo incluyes en una exportación de ajustes, mantén ese archivo privado porque contiene el token</string>
+    <string name="settings_advanced_github_pat_export_include_label">Incluir al exportar los ajustes</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Agrega este token de acceso personal a los ajustes exportados de Morphe</string>
+    <string name="settings_advanced_github_pat_export_warning">No compartas tu token de acceso personal. Si lo incluyes al exportar las configuraciones, mantén ese archivo privado porque contiene el token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
-    <string name="settings_advanced_patch_options">Opciones de parche</string>
+    <string name="settings_advanced_patch_options">Opciones de parcheo</string>
     <string name="settings_advanced_patch_options_youtube_description">Opciones de tema, marca y encabezado</string>
-    <string name="settings_advanced_patch_options_restart_message">Para que los cambios en las opciones de parche surtan efecto, es necesario volver a parchear la aplicación</string>
-    <string name="settings_advanced_patch_options_expert_mode_notice">En el modo experto, las opciones de parches estarán disponibles durante el proceso de parcheo</string>
+    <string name="settings_advanced_patch_options_restart_message">Para que los cambios en las opciones de parcheo surtan efecto, es necesario volver a parchear la aplicación</string>
+    <string name="settings_advanced_patch_options_expert_mode_notice">En el modo Experto, las opciones de parcheo estarán disponibles durante el proceso de parcheo</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
-    <string name="settings_advanced_patch_options_theme_colors">Colores del tema de la app</string>
+    <string name="settings_advanced_patch_options_theme_colors">Colores del tema de la aplicación</string>
     <string name="settings_advanced_patch_options_theme_colors_description">Cambia el color de fondo</string>
     <string name="settings_advanced_patch_options_dark_theme_color">Color de fondo del tema oscuro</string>
     <string name="settings_advanced_patch_options_light_theme_color">Color de fondo del tema claro</string>
     <string name="settings_advanced_patch_options_theme_color_description">Puede ser un color hexadecimal (#RRGGBB) o una referencia de recurso de color</string>
-    <string name="settings_advanced_patch_options_loading">Cargando opciones de parche…</string>
+    <string name="settings_advanced_patch_options_loading">Cargando opciones del parche…</string>
     <string name="settings_advanced_patch_options_waiting_for_source">Esperar hasta que la fuente de parches se actualice</string>
-    <string name="settings_advanced_patch_options_load_error">No se pudieron cargar las opciones de parches</string>
+    <string name="settings_advanced_patch_options_load_error">No se pudieron cargar las opciones del parche</string>
     <string name="settings_advanced_patch_options_no_available">No hay opciones disponibles para este parche</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">Marca personalizada</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">Cambia el nombre de visualización de la aplicación</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">Cambia el nombre para mostrar de la aplicación</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Nombre de la aplicación</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Introduzca un nombre personalizado</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Icono personalizado</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Carpeta con imágenes para usar como un icono personalizado.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Carpeta con imágenes para usar como icono personalizado.
 
-La carpeta debe contener uno o más de los siguientes carpetas, dependiendo de los DPI del dispositivo:
+La carpeta debe contener uno o más de las siguientes carpetas, dependiendo del DPI del dispositivo:
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
@@ -613,18 +613,18 @@ Cada una de las carpetas debe contener todos los siguientes archivos:
 morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
-Las dimensiones de la imagen deben ser las siguientes:
+Las dimensiones de las imagenes deben ser las siguientes:
 - mipmap-mdpi: 108x108 px
 - mipmap-hdpi: 162x162 px
 - mipmap-xhdpi: 216x216 px
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-Opcionalmente, la ruta contiene una carpeta 'drawable' con un archivo de icono monocromático:
+Opcionalmente, la ruta puede contener una carpeta 'drawable' con un archivo de icono monocromático:
 morphe_adaptive_monochrome_custom.xml
 
-Opcionalmente, la ruta contiene un icono de notificación en uno de los siguientes formatos:
-- Dibujable vectorial XML en 'drawable':
+Opcionalmente, la ruta puede contener un icono de notificación en uno de los siguientes formatos:
+- Imagen vectorial XML en 'drawable':
   morphe_notification_icon_custom.xml
 - Imágenes rasterizadas PNG en carpetas 'drawable-dpi':
   drawable-mdpi/morphe_notification_icon_custom.png (24x24 px)
