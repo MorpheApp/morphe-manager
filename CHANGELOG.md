@@ -1,3 +1,10 @@
+## [1.24.3](https://github.com/MorpheApp/morphe-manager/compare/v1.24.2...v1.24.3) (2026-07-23)
+
+
+### Bug Fixes
+
+* Allow root mount when only versionCode differs from patched APK ([#760](https://github.com/MorpheApp/morphe-manager/issues/760)) ([05717c8](https://github.com/MorpheApp/morphe-manager/commit/05717c81874c8a27e0b33d2b00d600a62c0166bf))
+
 ## [1.24.2](https://github.com/MorpheApp/morphe-manager/compare/v1.24.1...v1.24.2) (2026-07-23)
 
 
