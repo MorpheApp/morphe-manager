@@ -1,3 +1,10 @@
+## [1.24.1](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0...v1.24.1) (2026-07-23)
+
+
+### Bug Fixes
+
+* Crash opening patch list due to duplicate LazyColumn keys ([02e874a](https://github.com/MorpheApp/morphe-manager/commit/02e874aee03791b2ed606b191cb7b7ae62a173cb))
+
 # [1.24.0](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0...v1.24.0) (2026-07-23)
 
 
