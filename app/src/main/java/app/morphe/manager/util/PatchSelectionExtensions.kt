@@ -4,6 +4,9 @@ import app.morphe.manager.data.room.apps.installed.SelectionPayload
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
+import app.morphe.patcher.patch.ApkArchitecture
+import app.morphe.patcher.patch.InstallerType
+import app.morphe.patcher.patch.PatchAvailability
 
 /**
  * Converts SelectionPayload back to PatchSelection for runtime use.
@@ -211,11 +214,39 @@ object PatchSelectionUtils {
     }
 
     /**
-     * Filter out GmsCore support patch from selection (for mount installs).
+     * Apply per-patch availability rules to a selection.
+     *
+     * For every patch that ships an availability resolver in its bundle, resolve it against the
+     * current [installerType] and [apkArchitecture] and adjust the selection:
+     *  - REQUIRED: force the patch into the selection even if the user did not pick it
+     *  - UNAVAILABLE: remove the patch from the selection even if the user did pick it
+     *  - ENABLED / DISABLED: leave the selection untouched (user choice wins)
      */
-    fun PatchSelection.filterGmsCore(): PatchSelection {
-        return mapValues { (_, patches) ->
-            patches.filterNot { it.equals("GmsCore support", ignoreCase = true) }.toSet()
-        }.filterValues { it.isNotEmpty() }
+    fun PatchSelection.applyAvailability(
+        installerType: InstallerType,
+        apkArchitecture: ApkArchitecture,
+        allBundlePatches: Map<Int, Map<String, PatchInfo>>,
+    ): PatchSelection {
+        val result = this.toMutableMap()
+
+        allBundlePatches.forEach { (bundleUid, patchesInBundle) ->
+            val current = result[bundleUid]?.toMutableSet() ?: mutableSetOf()
+
+            patchesInBundle.values.forEach { info ->
+                val resolver = info.availabilityResolver ?: return@forEach
+
+                when (resolver.resolve(installerType, apkArchitecture)) {
+                    PatchAvailability.REQUIRED    -> current.add(info.name)
+                    PatchAvailability.UNAVAILABLE -> current.remove(info.name)
+                    PatchAvailability.ENABLED,
+                    PatchAvailability.DISABLED    -> Unit
+                }
+            }
+
+            if (current.isEmpty()) result.remove(bundleUid) else result[bundleUid] = current
+        }
+
+        return result
     }
+
 }

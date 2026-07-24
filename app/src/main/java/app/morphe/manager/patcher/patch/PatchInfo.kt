@@ -1,8 +1,12 @@
 package app.morphe.manager.patcher.patch
 
 import androidx.compose.runtime.Immutable
+import app.morphe.patcher.patch.ApkArchitecture
 import app.morphe.patcher.patch.AppTarget
+import app.morphe.patcher.patch.AvailabilityResolver
+import app.morphe.patcher.patch.InstallerType
 import app.morphe.patcher.patch.Patch
+import app.morphe.patcher.patch.PatchAvailability
 import app.morphe.patcher.patch.ApkFileType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap
@@ -23,7 +27,8 @@ data class PatchInfo(
     val description: String?,
     val include: Boolean,
     val compatiblePackages: ImmutableList<CompatiblePackage>?,
-    val options: ImmutableList<Option<*>>?
+    val options: ImmutableList<Option<*>>?,
+    val availabilityResolver: AvailabilityResolver? = null,
 ) {
     @Suppress("DEPRECATION")
     constructor(patch: Patch<*>) : this(
@@ -77,15 +82,45 @@ data class PatchInfo(
                 )
             }
             ?.toImmutableList()
-        // Fallback to legacy API if new compatibility is not available
+            // Fallback to legacy API if new compatibility is not available
             ?: patch.compatiblePackages?.map { (pkgName, versions) ->
                 CompatiblePackage(
                     packageName = pkgName,
                     versions = versions?.toImmutableSet()
                 )
             }?.toImmutableList(),
-        options = patch.options.map { (_, option) -> Option(option) }.ifEmpty { null }?.toImmutableList()
+        options = patch.options.map { (_, option) -> Option(option) }.ifEmpty { null }?.toImmutableList(),
+        availabilityResolver = patch.availability,
     )
+
+    /**
+     * Whether this patch should be selected by default for the given install target.
+     *
+     * When the patch ships an [availabilityResolver], it is the authoritative source:
+     * REQUIRED and ENABLED count as selected, UNAVAILABLE and DISABLED as unselected.
+     * Patches without a resolver fall back to [include].
+     */
+    fun defaultSelected(installerType: InstallerType, apkArchitecture: ApkArchitecture): Boolean {
+        val resolver = availabilityResolver ?: return include
+        return when (resolver.resolve(installerType, apkArchitecture)) {
+            PatchAvailability.REQUIRED, PatchAvailability.ENABLED -> true
+            PatchAvailability.UNAVAILABLE, PatchAvailability.DISABLED -> false
+        }
+    }
+
+    /**
+     * Whether the user can toggle this patch for the given install target, and in which direction
+     * it is locked when they cannot.
+     */
+    fun lockState(installerType: InstallerType, apkArchitecture: ApkArchitecture): PatchLockState {
+        val resolver = availabilityResolver ?: return PatchLockState.NONE
+        return when (resolver.resolve(installerType, apkArchitecture)) {
+            PatchAvailability.REQUIRED    -> PatchLockState.LOCKED_ON
+            PatchAvailability.UNAVAILABLE -> PatchLockState.LOCKED_OFF
+            PatchAvailability.ENABLED,
+            PatchAvailability.DISABLED    -> PatchLockState.NONE
+        }
+    }
 
     fun compatibleWith(packageName: String) =
         compatiblePackages == null ||

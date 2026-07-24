@@ -41,19 +41,22 @@ import app.morphe.manager.patcher.patch.BundleAppMetadata
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.*
-import app.morphe.manager.util.PatchSelectionUtils.filterGmsCore
+import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
 import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
 import app.morphe.manager.util.PatchSelectionUtils.togglePatch
 import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
+import app.morphe.patcher.patch.ApkArchitecture
 import app.morphe.patcher.patch.AppTarget
+import app.morphe.patcher.patch.InstallerType
 import io.ktor.http.encodeURLPath
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -533,6 +536,15 @@ class HomeViewModel(
 
     // Using mount install (set externally)
     var usingMountInstall: Boolean = false
+
+    // Install target passed to patch availability resolvers. Only mount vs non-mount is known at
+    // patch-selection time; the concrete non-mount installer is picked later
+    val currentInstallerType: InstallerType
+        get() = if (usingMountInstall) InstallerType.MOUNT else InstallerType.STANDARD
+
+    // No patch conditions on ABI today, so UNIVERSAL is a stable default
+    val currentApkArchitecture: ApkArchitecture
+        get() = ApkArchitecture.UNIVERSAL
 
     // Controls the pre-patching mode selection dialog for root-capable devices.
     var showPrePatchInstallerDialog by mutableStateOf(false)
@@ -2474,9 +2486,8 @@ class HomeViewModel(
         // Create bundles map for validation
         val bundlesMap = allBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
 
-        // Helper function to apply GmsCore filter if needed
-        fun PatchSelection.applyGmsCoreFilter(): PatchSelection =
-            if (usingMountInstall) this.filterGmsCore() else this
+        fun PatchSelection.applyInstallerRules(): PatchSelection =
+            applyAvailability(currentInstallerType, currentApkArchitecture, bundlesMap)
 
         if (isExpertMode()) {
             // Expert Mode: Load saved selections and options only for current bundles
@@ -2535,9 +2546,9 @@ class HomeViewModel(
                         val newPatchNames = currentPatchNames - knownNames
                         if (newPatchNames.isEmpty()) return@forEach
 
-                        // Among the genuinely new patches, auto-select those with include=true
+                        // Among the genuinely new patches, auto-select those enabled by default
                         val newDefaultEnabled = bundle.patches
-                            .filter { it.name in newPatchNames && it.include }
+                            .filter { it.name in newPatchNames && it.defaultSelected(currentInstallerType, currentApkArchitecture) }
                             .mapTo(mutableSetOf()) { it.name }
 
                         if (newDefaultEnabled.isNotEmpty()) {
@@ -2550,8 +2561,10 @@ class HomeViewModel(
                 mergedPatches
             } else {
                 // No saved selections - use default for all current bundles
-                allBundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
-            }.applyGmsCoreFilter()
+                allBundles.toPatchSelection(allowIncompatible) { _, patch ->
+                    patch.defaultSelected(currentInstallerType, currentApkArchitecture)
+                }
+            }.applyInstallerRules()
 
             // Compute new patches map for the dialog to highlight.
             // Only populated when a previous selection exists - on first run there is nothing
@@ -2604,7 +2617,7 @@ class HomeViewModel(
                 .filter { it.enabled }
                 .map { bundle ->
                     val patchNames = bundle.patchSequence(allowIncompatible)
-                        .filter { it.include }
+                        .filter { it.defaultSelected(currentInstallerType, currentApkArchitecture) }
                         .mapTo(mutableSetOf()) { it.name }
                     bundle to patchNames
                 }
@@ -2644,10 +2657,10 @@ class HomeViewModel(
                 val bundle = allBundles.find { it.uid == preSelectedUid }
                 if (bundle != null) {
                     val patchNames = bundle.patchSequence(allowIncompatible = true)
-                        .filter { it.include }
+                        .filter { it.defaultSelected(currentInstallerType, currentApkArchitecture) }
                         .mapTo(mutableSetOf()) { it.name }
                     if (patchNames.isNotEmpty()) {
-                        val patches = mapOf(bundle.uid to patchNames).applyGmsCoreFilter()
+                        val patches = mapOf(bundle.uid to patchNames).applyInstallerRules()
                         proceedWithPatching(selectedApp, patches, emptyMap())
                         return
                     }
@@ -2666,7 +2679,7 @@ class HomeViewModel(
             // Only one bundle has patches - use it directly (no prompt needed)
             val patches = bundleWithPatches
                 .associate { (bundle, patches) -> bundle.uid to patches }
-                .applyGmsCoreFilter()
+                .applyInstallerRules()
 
             proceedWithPatching(selectedApp, patches, emptyMap())
         }
@@ -2748,41 +2761,54 @@ class HomeViewModel(
      * Supports adding patches from bundles not yet in the selection.
      */
     fun togglePatchInExpertMode(bundleUid: Int, patchName: String) {
+        // Locked patches are toggled only through availability rules; no-op here
+        val patch = expertModeBundles
+            .firstOrNull { it.uid == bundleUid }
+            ?.patches
+            ?.firstOrNull { it.name == patchName }
+        if (patch != null && patch.lockState(currentInstallerType, currentApkArchitecture) != PatchLockState.NONE) return
+
         expertModePatches = expertModePatches.togglePatch(bundleUid, patchName)
     }
 
     /**
      * Select all given patches for a bundle.
-     * Only adds patches that are not already selected.
+     * Only adds patches that are not already selected. LOCKED_OFF patches are skipped.
      */
     fun expertModeSelectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
         val current = expertModePatches.toMutableMap()
         val set = current[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        patches.forEach { (patch, enabled) -> if (!enabled) set.add(patch.name) }
+        patches.forEach { (patch, enabled) ->
+            if (patch.lockState(currentInstallerType, currentApkArchitecture) == PatchLockState.LOCKED_OFF) return@forEach
+            if (!enabled) set.add(patch.name)
+        }
         current[bundleUid] = set
         expertModePatches = current
     }
 
     /**
      * Deselect all given patches for a bundle.
-     * Removes the bundle entry entirely if nothing remains selected.
+     * Removes the bundle entry entirely if nothing remains selected. LOCKED_ON patches are kept.
      */
     fun expertModeDeselectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
         val current = expertModePatches.toMutableMap()
         val set = current[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        patches.forEach { (patch, enabled) -> if (enabled) set.remove(patch.name) }
+        patches.forEach { (patch, enabled) ->
+            if (patch.lockState(currentInstallerType, currentApkArchitecture) == PatchLockState.LOCKED_ON) return@forEach
+            if (enabled) set.remove(patch.name)
+        }
         if (set.isEmpty()) current.remove(bundleUid) else current[bundleUid] = set
         expertModePatches = current
     }
 
     /**
-     * Reset a bundle's selection to the default (include=true) patches.
+     * Reset a bundle's selection to the default patches for the current install target.
      * [allPatches] is the full unfiltered list for that bundle so defaults
      * are computed from the complete set, not just search results.
      */
     fun expertModeResetToDefault(bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) {
         val defaults = allPatches
-            .filter { (patch, _) -> patch.include }
+            .filter { (patch, _) -> patch.defaultSelected(currentInstallerType, currentApkArchitecture) }
             .mapTo(mutableSetOf()) { (patch, _) -> patch.name }
         val current = expertModePatches.toMutableMap()
         if (defaults.isEmpty()) current.remove(bundleUid) else current[bundleUid] = defaults
