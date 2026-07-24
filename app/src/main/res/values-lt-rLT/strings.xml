@@ -295,7 +295,7 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="patcher_error_technical">Techninė informacija</string>
     <string name="patcher_error_dialog_app_info">Programos inform</string>
     <string name="patcher_tab_game">Žaidimai</string>
-    <string name="patcher_long_step_warning">Šis žingsnis gali užtrupti. Palaukite…</string>
+    <string name="patcher_long_step_warning">Šis žingsnis gali užtrukti. Palaukite…</string>
     <string name="patcher_installing_subtitle">Beveik laikas rokenrolui! 🎸</string>
     <string name="patcher_success_title">Baigta! 🎉</string>
     <string name="patcher_success_subtitle">Jūsų programėlė pataisyta ir įdiegta!</string>

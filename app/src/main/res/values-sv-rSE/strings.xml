@@ -34,7 +34,7 @@
     <string name="home_app_sort_name_asc_description">Alfabetisk ordning, A till Ö</string>
     <string name="home_app_sort_name_desc_description">Omvänd alfabetisk ordning, Ö till A</string>
     <string name="home_app_sort_updates_first">Tilläggsuppdateringar först</string>
-    <string name="home_app_sort_updates_first_description">Appar med uppdateringsbrickan först, sedan rekommenderad ordning</string>
+    <string name="home_app_sort_updates_first_description">Appar med uppdateringsbricka först, sedan rekommenderad ordning</string>
     <string name="home_no_apps_title">Inga appar är tillgängliga</string>
     <string name="home_no_apps_subtitle">Lägg till en källa eller aktivera en befintlig i %s</string>
     <string name="home_no_apps_search_subtitle">Inga appar matchar \"%s\"</string>
@@ -704,6 +704,8 @@ Bildernas mått ska vara följande:
     <string name="settings_system_apks_export_zip_success">De markerade APK-filerna har exporterats</string>
     <string name="settings_system_apks_export_zip_failed">Det gick inte att exportera de markerade APK-filerna</string>
     <!-- Settings - System Tab - Storage Management screen -->
+    <string name="settings_system_storage_temporary_title">Tillfälliga filer</string>
+    <string name="settings_system_storage_temporary_description">Arbetsfiler som skapas under modifiering</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Modifierade APK-filer</string>
     <string name="settings_system_patched_apks_description">Hanterar sparade modifierade appfiler</string>
@@ -735,6 +737,8 @@ Bildernas mått ska vara följande:
     <string name="settings_system_export_source_data_success">Källdata har exporterats</string>
     <string name="settings_system_import_source_data_fail">Det gick inte att importera källdata</string>
     <string name="settings_system_import_source_data_success">Källdata har importerats</string>
+    <string name="settings_system_selected_patches_section">Valda tillägg</string>
+    <string name="settings_system_patch_options_section">Tilläggsalternativ</string>
     <string name="settings_system_no_patches_or_options">Inga tillägg eller alternativ har sparats</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Anpassad filväljare</string>

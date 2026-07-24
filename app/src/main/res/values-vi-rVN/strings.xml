@@ -35,13 +35,13 @@
     <string name="home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
     <string name="home_search_apps">Tìm ứng dụng</string>
     <string name="home_app_sort_title">Sắp xếp ứng dụng</string>
-    <string name="home_app_sort_manual_description">Nhấn và giữ một ứng dụng, sau đó chạm vào nút sắp xếp lại</string>
+    <string name="home_app_sort_manual_description">Bấm giữ một ứng dụng, sau đó chọn nút sắp xếp lại</string>
     <string name="home_app_sort_recommended">Thứ tự đề xuất</string>
-    <string name="home_app_sort_recommended_description">Ưu tiên ứng dụng đã cài đặt và ghim</string>
+    <string name="home_app_sort_recommended_description">Ưu tiên ứng dụng đã cài đặt và được ghim trước</string>
     <string name="home_app_sort_name_asc_description">Theo thứ tự bảng chữ cái, A đến Z</string>
     <string name="home_app_sort_name_desc_description">Đảo ngược theo thứ tự bảng chữ cái, Z đến A</string>
-    <string name="home_app_sort_updates_first">Ưu tiên cập nhật vá lỗi</string>
-    <string name="home_app_sort_updates_first_description">Ưu tiên các ứng dụng có huy hiệu cập nhật, sau đó theo thứ tự đề xuất</string>
+    <string name="home_app_sort_updates_first">Ưu tiên vá cập nhật</string>
+    <string name="home_app_sort_updates_first_description">Ưu tiên các ứng dụng cần cập nhật trước, sau đó theo thứ tự đề xuất</string>
     <string name="home_no_apps_title">Không có ứng dụng nào có sẵn</string>
     <string name="home_no_apps_subtitle">Thêm nguồn vá mới hoặc bật nguồn có sẵn trong %s</string>
     <string name="home_no_apps_search_subtitle">Không có ứng dụng nào khớp với \"%s\"</string>
@@ -102,13 +102,13 @@
     <string name="home_greeting_super_late_5">Cú đêm năng suất thật đấy</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Nguồn vá</string>
-    <string name="sources_sort_title">Sắp xếp các nguồn vá lỗi</string>
+    <string name="sources_sort_title">Sắp xếp các nguồn vá</string>
     <string name="sources_sort_manual">Sắp xếp thủ công</string>
     <string name="sources_sort_manual_hint">Bấm giữ một nguồn để sắp xếp lại</string>
     <string name="sources_sort_last_updated">Cập nhật lần cuối</string>
-    <string name="sources_sort_last_updated_description">Ưu tiên cập nhật nguồn mới nhất</string>
-    <string name="sources_sort_enabled_first">Bật trước</string>
-    <string name="sources_sort_enabled_first_description">Hiển thị các nguồn đang hoạt động trước các nguồn đã tắt</string>
+    <string name="sources_sort_last_updated_description">Ưu tiên cập nhật nguồn mới nhất trước</string>
+    <string name="sources_sort_enabled_first">Ưu tiên đã kích hoạt trước</string>
+    <string name="sources_sort_enabled_first_description">Hiển thị các nguồn đang hoạt động trước các nguồn đã bị vô hiệu hóa</string>
     <string name="sources_management_open_in_browser">Mở trong trình duyệt</string>
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
     <string name="sources_management_prerelease_toggle">Bản vá phát hành trước</string>
@@ -776,9 +776,9 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_import_manager_settings_mode_title">Nhập cài đặt Morphe</string>
     <string name="settings_system_import_manager_settings_mode_description">Chọn cách áp dụng các cài đặt và nguồn vá vừa nhập</string>
     <string name="settings_system_import_selections_mode_title">Nhập lựa chọn bản vá</string>
-    <string name="settings_system_import_selections_mode_description">Chọn cách áp dụng các bản vá từng chọn và tùy chỉnh vừa nhập</string>
+    <string name="settings_system_import_selections_mode_description">Chọn cách áp dụng các tùy chỉnh và bản vá từng chọn vừa nhập</string>
     <string name="import_mode_replace_title">Thay thế hiện có</string>
-    <string name="import_mode_replace_description">Thay thế toàn bộ dữ liệu hiện tại bằng dữ liệu trong bản sao lưu. Các mục (có trong dữ liệu hiện tại) mà không có trong bản sao lưu sẽ bị xóa</string>
+    <string name="import_mode_replace_description">Thay thế toàn bộ dữ liệu hiện tại bằng dữ liệu sao lưu. Các mục (có trong dữ liệu hiện tại) mà không có trong bản sao lưu sẽ bị xóa</string>
     <string name="import_mode_merge_title">Hợp nhất với hiện có</string>
     <string name="import_mode_merge_description">Chỉ thêm các mục còn thiếu từ bản sao lưu. Các mục hiện tại sẽ không bị ảnh hưởng</string>
     <string name="settings_system_export_manager_settings_fail">Không thể xuất cài đặt Morphe: %s</string>
@@ -877,7 +877,7 @@ Chi tiết: %2$s"</string>
     <string name="file_picker_sort_size_asc">Kích thước (nhỏ nhất trước)</string>
     <string name="file_picker_sort_date_desc">Ngày (mới nhất trước)</string>
     <string name="file_picker_sort_date_asc">Ngày (cũ nhất trước)</string>
-    <string name="file_picker_show_hidden_files">Hiển thị tệp ẩn</string>
+    <string name="file_picker_show_hidden_files">Hiện tệp ẩn</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Giới thiệu</string>
     <string name="settings_system_share_website">Chia sẻ</string>
@@ -940,9 +940,9 @@ Chi tiết: %2$s"</string>
     <string name="reorder_done">Đã lưu thứ tự</string>
     <string name="reset_order">Đặt lại thứ tự</string>
     <string name="reset_order_done">Đặt lại thứ tự</string>
-    <string name="accessibility_move_up">Di chuyển lên</string>
-    <string name="accessibility_move_down">Di chuyển xuống</string>
-    <string name="accessibility_app_moved_announcement">%1$s đã được di chuyển đến vị trí %2$d trong %3$d</string>
+    <string name="accessibility_move_up">Lên trên</string>
+    <string name="accessibility_move_down">Xuống dưới</string>
+    <string name="accessibility_app_moved_announcement">Đã chuyển %1$s đến vị trí %2$d/%3$d</string>
     <string name="accessibility_scroll_to_top">Về đầu danh sách</string>
     <string name="rename">Đổi tên</string>
     <string name="import_">Nhập</string>

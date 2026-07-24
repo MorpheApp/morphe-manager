@@ -323,7 +323,7 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="home_app_info_install_type_system_installer">Instalador do sistema</string>
     <string name="home_app_info_install_type_play_store">Instalação via Play Store</string>
     <string name="home_app_info_install_type_root_play_store">Instalação via Play Store com root</string>
-    <string name="home_app_info_install_type_shizuku_play_store">Instalação via Shizuku e Play Store</string>
+    <string name="home_app_info_install_type_shizuku_play_store">Instalação via Shizuku como Play Store</string>
     <string name="home_app_info_patch_update_available">Nova versão de patches disponível</string>
     <string name="home_app_info_patch_update_available_description">Uma versão mais nova dos patches está disponível. Reaplique os patches no seu app para obter as últimas melhorias e correções</string>
     <string name="home_app_info_app_deleted_warning">App desinstalado</string>
@@ -509,8 +509,8 @@ A desinstalação apagará permanentemente todos os dados do aplicativo."</strin
     <string name="settings_appearance_greeting_phrases_subtitle">Mostrar uma mensagem de saudação na tela inicial</string>
     <string name="settings_appearance_app_grouping">Agrupamento de apps</string>
     <string name="settings_appearance_app_grouping_description">Mostrar um alternador de tela inicial para agrupar aplicativos por origem ou suas próprias categorias, mantendo a seleção quando desativado</string>
-    <string name="settings_appearance_sort_button">Botão de classificação</string>
-    <string name="settings_appearance_sort_button_description">Mostrar o botão de classificação na tela inicial</string>
+    <string name="settings_appearance_sort_button">Botão de Ordenação</string>
+    <string name="settings_appearance_sort_button_description">Mostrar o botão de ordenação dos apps na tela inicial</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ícone do app</string>
     <string name="settings_appearance_app_icon_default">Padrão</string>
@@ -714,7 +714,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_shizuku_status_permission">Permissão</string>
     <string name="installer_shizuku_status_mode">Modo</string>
     <string name="installer_shizuku_status_provider">Provedor</string>
-    <string name="installer_shizuku_status_granted">Concedido</string>
+    <string name="installer_shizuku_status_granted">Concedida</string>
     <string name="installer_shizuku_status_missing">Ausente</string>
     <string name="installer_shizuku_request_permission">Solicitar permissão</string>
     <string name="installer_shizuku_install_fail">Falha ao instalar o Shizuku: %s</string>
