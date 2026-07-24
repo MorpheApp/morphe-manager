@@ -271,6 +271,9 @@ internal fun HomeCategoryHeader(
     val mutedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
     val isSourceGroup = group.sourceUid != null
     val leadingIcon = if (group.collapsed) Icons.Outlined.Folder else Icons.Outlined.FolderOpen
+    // Surface pending updates on the header so collapsed groups still hint at work to do
+    val hasPendingUpdate = group.items.any { it.hasUpdate }
+    val folderTint = if (hasPendingUpdate) MaterialTheme.colorScheme.primary else mutedContentColor
 
     HomeGlassCategoryRow(
         title = group.title,
@@ -285,7 +288,7 @@ internal fun HomeCategoryHeader(
                     imageVector = leadingIcon,
                     contentDescription = null,
                     modifier = Modifier.size(24.dp),
-                    tint = mutedContentColor
+                    tint = folderTint
                 )
             }
         },
