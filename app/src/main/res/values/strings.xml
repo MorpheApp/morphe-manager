@@ -225,6 +225,8 @@
     <string name="expert_mode_reset_to_default_done">Recommended patches applied</string>
     <string name="expert_mode_restore_saved">Restore saved selection</string>
     <string name="expert_mode_restore_saved_done">Saved selection restored</string>
+    <string name="expert_mode_copy_from_bundle">Copy selection from another bundle</string>
+    <string name="expert_mode_copy_from_bundle_no_patches">No matching patches in this bundle</string>
     <string name="expert_mode_no_results">No patches found</string>
     <string name="expert_mode_universal_patches">Universal patches</string>
     <string name="expert_mode_new_patches">New</string>
@@ -931,6 +933,13 @@ Details: %2$s"</string>
     <string name="settings_system_patch_options_section">Patch options</string>
     <string name="settings_system_no_patches_or_options">No patches or options saved</string>
 
+    <!-- Copy selection from another bundle -->
+    <string name="copy_selection_title">Copy selection from…</string>
+    <string name="copy_selection_confirm_with_count">Copy %s</string>
+    <string name="copy_selection_empty">No other saved selections to copy from</string>
+    <string name="copy_selection_available_format">%1$s of %2$s available</string>
+    <string name="copy_selection_same_source">Same source</string>
+
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Custom file picker</string>
     <string name="settings_system_custom_file_picker_description">Browse storage with Morphe\'s built-in file picker instead of the system default</string>
@@ -1021,6 +1030,7 @@ Details: %2$s"</string>
     <string name="rename">Rename</string>
     <string name="import_">Import</string>
     <string name="export">Export</string>
+    <string name="copy">Copy</string>
     <string name="download">Download</string>
     <string name="less">Less</string>
     <string name="expand">Expand</string>

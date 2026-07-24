@@ -410,6 +410,9 @@ fun HomeDialogs(
                 onRestoreSaved = { bundleUid ->
                     homeViewModel.expertModeRestoreSaved(bundleUid)
                 },
+                onCopyFromBundle = { bundleUid ->
+                    homeViewModel.openExpertModeCopyDialog(bundleUid)
+                },
                 onOptionChange = { bundleUid, patchName, optionKey, value ->
                     homeViewModel.updateOptionInExpertMode(bundleUid, patchName, optionKey, value)
                 },
@@ -425,6 +428,24 @@ fun HomeDialogs(
                 homeViewModel.proceedExpertMode()
             }
         )
+
+        homeViewModel.expertModeCopyTargetBundleUid?.let { targetUid ->
+            val selectedApp = homeViewModel.expertModeSelectedApp ?: return@let
+            val targetBundle = homeViewModel.expertModeBundles.firstOrNull { it.uid == targetUid }
+                ?: return@let
+            val appDisplayName = targetBundle.displayName ?: selectedApp.packageName
+            CopySelectionFromBundleDialog(
+                target = CopySelectionTarget(
+                    packageName = selectedApp.packageName,
+                    bundleUid = targetUid,
+                    bundleName = targetBundle.name,
+                    appDisplayName = appDisplayName
+                ),
+                candidates = homeViewModel.expertModeCopyCandidates,
+                onConfirm = { homeViewModel.applyExpertModeCopy(it) },
+                onDismiss = { homeViewModel.closeExpertModeCopyDialog() }
+            )
+        }
     }
 
     // Bundle management sheet

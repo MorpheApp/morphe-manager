@@ -26,7 +26,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.toast
 
 /**
- * Bundle controls: three action buttons (Select All / Default / Deselect All).
+ * Bundle controls: pill row with per-bundle bulk actions.
  */
 @Composable
 internal fun BundlePatchControls(
@@ -36,6 +36,7 @@ internal fun BundlePatchControls(
     onDeselectAll: () -> Unit,
     onResetToDefault: () -> Unit,
     onRestoreSaved: () -> Unit,
+    onCopyFromBundle: () -> Unit,
     hasSavedSelection: Boolean,
     modifier: Modifier = Modifier
 ) {
@@ -50,6 +51,7 @@ internal fun BundlePatchControls(
     val selectAllLabel = stringResource(R.string.expert_mode_enable_all)
     val defaultLabel = stringResource(R.string.expert_mode_reset_to_default)
     val restoreLabel = stringResource(R.string.expert_mode_restore_saved)
+    val copyLabel = stringResource(R.string.expert_mode_copy_from_bundle)
     val deselectAllLabel = stringResource(R.string.expert_mode_disable_all)
 
     val enabledDone = stringResource(R.string.expert_mode_enable_all_done)
@@ -91,6 +93,18 @@ internal fun BundlePatchControls(
             enabled = hasSavedSelection,
             colors = IconButtonDefaults.filledTonalIconButtonColors(
                 containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+            )
+        )
+        ActionPillButton(
+            onClick = onCopyFromBundle,
+            icon = Icons.Outlined.ContentCopy,
+            contentDescription = copyLabel,
+            tooltip = copyLabel,
+            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.4f),
                 contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
                 disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
                 disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
