@@ -64,4 +64,8 @@
         <item quantity="one">%s app</item>
         <item quantity="other">%s apps</item>
     </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Copied %s patch from selected bundle</item>
+        <item quantity="other">Copied %s patches from selected bundle</item>
+    </plurals>
 </resources>

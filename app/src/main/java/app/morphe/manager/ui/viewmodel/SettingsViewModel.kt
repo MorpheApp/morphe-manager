@@ -14,10 +14,15 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.manager.filterOptionsForTarget
+import app.morphe.manager.domain.manager.loadCopySelectionCandidates as loadCopySelectionCandidatesShared
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.domain.repository.PatchOptionsRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
+import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.ui.screen.settings.system.CopyTarget
+import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.syncFcmTopics
@@ -38,7 +43,7 @@ class SettingsViewModel(
     private val rootInstaller: RootInstaller,
     private val selectionRepository: PatchSelectionRepository,
     private val optionsRepository: PatchOptionsRepository,
-    patchBundleRepository: PatchBundleRepository,
+    private val patchBundleRepository: PatchBundleRepository,
     private val appDataResolver: AppDataResolver,
     private val appContext: Context,
 ) : ViewModel() {
@@ -336,6 +341,68 @@ class SettingsViewModel(
             }
             PatchDetails(patchList, optionsMap)
         }
+
+    /** Assemble picker candidates intersected against the target bundle's patch list. */
+    suspend fun loadCopySelectionCandidates(
+        targetPackageName: String,
+        targetBundleUid: Int
+    ): List<CopySelectionCandidate> = withContext(Dispatchers.IO) {
+        val targetPatchNames = targetBundlePatchNames(targetBundleUid)
+        loadCopySelectionCandidatesShared(
+            patchSelectionRepository = selectionRepository,
+            patchBundleRepository = patchBundleRepository,
+            appDataResolver = appDataResolver,
+            targetPackageName = targetPackageName,
+            targetBundleUid = targetBundleUid,
+            targetPatchNames = targetPatchNames
+        )
+    }
+
+    /**
+     * Replace the target's saved selection (and matching options) with a filtered copy of
+     * [candidate]'s data. Entries the target bundle no longer defines are silently dropped.
+     */
+    fun copySelectionFromBundle(
+        target: CopyTarget,
+        candidate: CopySelectionCandidate
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        val targetPatches = targetBundlePatchInfos(target.bundleUid)
+        val sourcePatchNames = selectionRepository.exportForPackageAndBundle(
+            candidate.packageName,
+            candidate.bundleUid
+        )
+        val filteredPatches = sourcePatchNames.filter { it in targetPatches }
+        if (filteredPatches.isEmpty()) return@launch
+
+        selectionRepository.importForPackageAndBundle(
+            packageName = target.packageName,
+            bundleUid = target.bundleUid,
+            patches = filteredPatches
+        )
+
+        val sourceOptions = optionsRepository.exportOptionsForBundle(
+            packageName = candidate.packageName,
+            bundleUid = candidate.bundleUid
+        )
+        val filteredOptions = filterOptionsForTarget(sourceOptions, targetPatches)
+        if (filteredOptions.isNotEmpty()) {
+            optionsRepository.importOptionsForBundle(
+                packageName = target.packageName,
+                bundleUid = target.bundleUid,
+                options = filteredOptions
+            )
+        }
+    }
+
+    private suspend fun targetBundlePatchNames(bundleUid: Int): Set<String> {
+        val info = patchBundleRepository.allBundlesInfoFlow.first()[bundleUid] ?: return emptySet()
+        return info.patches.mapTo(mutableSetOf()) { it.name }
+    }
+
+    private suspend fun targetBundlePatchInfos(bundleUid: Int): Map<String, PatchInfo> {
+        val info = patchBundleRepository.allBundlesInfoFlow.first()[bundleUid] ?: return emptyMap()
+        return info.patches.associateBy { it.name }
+    }
 
     companion object {
         fun parseJsonValue(jsonString: String): Any? = try {

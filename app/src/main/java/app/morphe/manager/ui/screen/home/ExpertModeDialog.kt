@@ -44,6 +44,7 @@ class ExpertPatchActions(
     val onDeselectAll: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Unit,
     val onResetToDefault: (bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) -> Unit,
     val onRestoreSaved: (bundleUid: Int) -> Unit,
+    val onCopyFromBundle: (bundleUid: Int) -> Unit,
     val onOptionChange: (bundleUid: Int, patchName: String, optionKey: String, value: Any?) -> Unit,
     val onResetOptions: (bundleUid: Int, patchName: String) -> Unit
 )
@@ -233,6 +234,7 @@ fun ExpertModeDialog(
                     onDeselectAll = { patchActions.onDeselectAll(bundle.uid, displayPatches) },
                     onResetToDefault = { patchActions.onResetToDefault(bundle.uid, allPatches) },
                     onRestoreSaved = { patchActions.onRestoreSaved(bundle.uid) },
+                    onCopyFromBundle = { patchActions.onCopyFromBundle(bundle.uid) },
                     hasSavedSelection = savedPatches[bundle.uid]?.isNotEmpty() == true
                 )
 
@@ -347,6 +349,7 @@ fun ExpertModeDialog(
                             onDeselectAll = { patchActions.onDeselectAll(currentBundle.uid, currentFiltered) },
                             onResetToDefault = { patchActions.onResetToDefault(currentBundle.uid, currentAllPatches) },
                             onRestoreSaved = { patchActions.onRestoreSaved(currentBundle.uid) },
+                            onCopyFromBundle = { patchActions.onCopyFromBundle(currentBundle.uid) },
                             hasSavedSelection = savedPatches[currentBundle.uid]?.isNotEmpty() == true,
                             modifier = Modifier.padding(vertical = MorpheDefaults.ContentPaddingSmall)
                         )
