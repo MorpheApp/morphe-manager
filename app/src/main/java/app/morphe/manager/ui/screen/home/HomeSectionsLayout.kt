@@ -825,6 +825,8 @@ fun MainAppsSection(
             ignoreCollapsed = searchQuery.isNotBlank()
         )
     }
+    // Drag updates this in place and the final order is flushed to preferences on reorder
+    // exit, so ReorderableLazyListState indices stay in sync with the rendered groups mid-drag
     var localSourceGroupOrder by remember { mutableStateOf(apps.sourceGroups.map { it.uid }) }
     LaunchedEffect(apps.sourceGroups, isCategoryReorderMode.value, isSourceCategoryView) {
         if (isCategoryReorderMode.value && isSourceCategoryView) return@LaunchedEffect
@@ -850,6 +852,38 @@ fun MainAppsSection(
             orderedGroups + sourceCategoryGroups.filter { group ->
                 val uid = group.sourceUid
                 uid == null || uid !in orderedUids
+            }
+        }
+    }
+    // Drag updates this in place and the final order is flushed to preferences on reorder
+    // exit, so ReorderableLazyListState indices stay in sync with the rendered groups mid-drag
+    var localCategoryOrder by remember {
+        mutableStateOf(apps.categoryState.categories.map { it.id })
+    }
+    LaunchedEffect(apps.categoryState.categories, isCategoryReorderMode.value, isSourceCategoryView) {
+        if (isCategoryReorderMode.value && !isSourceCategoryView) return@LaunchedEffect
+        val categoryIds = apps.categoryState.categories.map { it.id }
+        val kept = localCategoryOrder.filter { it in categoryIds }
+        val added = categoryIds.filter { it !in kept }
+        localCategoryOrder = kept + added
+    }
+    val displayedCategoryGroups = remember(
+        categoryGroups,
+        localCategoryOrder,
+        isCategoryReorderMode.value,
+        isSourceCategoryView
+    ) {
+        if (!isCategoryReorderMode.value || isSourceCategoryView) {
+            categoryGroups
+        } else {
+            val byId = categoryGroups.mapNotNull { group ->
+                group.id?.let { id -> id to group }
+            }.toMap()
+            val orderedGroups = localCategoryOrder.mapNotNull { byId[it] }
+            val orderedIds = orderedGroups.mapNotNullTo(mutableSetOf()) { it.id }
+            orderedGroups + categoryGroups.filter { group ->
+                val id = group.id
+                id == null || id !in orderedIds
             }
         }
     }
@@ -967,7 +1001,7 @@ fun MainAppsSection(
     fun headerGroupAtListIndex(index: Int): HomeCategoryGroup? {
         val groups = when (appGrouping) {
             HomeAppCategoryViewMode.SOURCES -> displayedSourceCategoryGroups
-            HomeAppCategoryViewMode.CUSTOM -> categoryGroups
+            HomeAppCategoryViewMode.CUSTOM -> displayedCategoryGroups
             HomeAppCategoryViewMode.ALL_APPS -> emptyList()
         }
         var currentIndex = 0
@@ -1009,14 +1043,14 @@ fun MainAppsSection(
             HomeAppCategoryViewMode.CUSTOM -> {
                 val fromId = fromGroup.id ?: return@rememberReorderableLazyListState
                 val toId = toGroup.id ?: return@rememberReorderableLazyListState
-                val orderedIds = apps.categoryState.categories.map { it.id }.toMutableList()
+                val orderedIds = localCategoryOrder.toMutableList()
                 val fromPosition = orderedIds.indexOf(fromId)
                 val toPosition = orderedIds.indexOf(toId)
                 if (fromPosition == -1 || toPosition == -1) return@rememberReorderableLazyListState
 
                 val moved = orderedIds.removeAt(fromPosition)
                 orderedIds.add(toPosition.coerceIn(0, orderedIds.size), moved)
-                appActions.onSaveCategoryOrder(orderedIds)
+                localCategoryOrder = orderedIds
             }
 
             HomeAppCategoryViewMode.ALL_APPS -> Unit
@@ -1263,7 +1297,7 @@ fun MainAppsSection(
                                     // only needs to distinguish between SOURCES and CUSTOM
                                     val groups = when (appGrouping) {
                                         HomeAppCategoryViewMode.SOURCES -> displayedSourceCategoryGroups
-                                        else -> categoryGroups
+                                        else -> displayedCategoryGroups
                                     }
 
                                     groups.forEach { group ->
@@ -1730,6 +1764,8 @@ fun MainAppsSection(
                         onExitReorder = {
                             if (isSourceCategoryView) {
                                 appActions.onSaveSourceGroupOrder(localSourceGroupOrder)
+                            } else {
+                                appActions.onSaveCategoryOrder(localCategoryOrder)
                             }
                             isCategoryReorderMode.value = false
                         },
