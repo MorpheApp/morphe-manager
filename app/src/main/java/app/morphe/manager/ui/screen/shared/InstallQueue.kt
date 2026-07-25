@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
+import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.util.batchActionSummary
 import app.morphe.manager.util.toast
@@ -25,14 +26,17 @@ import java.io.File
 /**
  * A single install request queued by [rememberInstallQueue].
  *
- * @param onPersistApp forwarded to [InstallViewModel.install]; runs after a successful install
- *        to persist app metadata (patch selection, install type) in the caller's repository.
+ * @param mountPackageName package to mount when this request targets a saved patched APK and
+ *        Mount is the primary installer.
+ * @param onPersistApp forwarded to [InstallViewModel.install] or [InstallViewModel.installSavedMount];
+ *        runs after a successful install to persist app metadata in the caller's repository.
  * @param onInstalled invoked with the installed package name after a successful install,
  *        before the next queue item starts.
  */
 data class InstallQueueRequest(
     val file: File,
     val originalPackageName: String,
+    val mountPackageName: String? = null,
     val onPersistApp: suspend (String, InstallType) -> Boolean,
     val onInstalled: (installedPackageName: String) -> Unit = {}
 )
@@ -88,11 +92,23 @@ fun rememberInstallQueue(
 
         active = next
         activeStarted = true
-        installViewModel.install(
-            outputFile = file,
-            originalPackageName = next.originalPackageName,
-            onPersistApp = next.onPersistApp
-        )
+        val mountPackageName = next.mountPackageName
+        if (
+            mountPackageName != null &&
+            installViewModel.getPrimaryInstallerToken() == InstallerManager.Token.AutoSaved
+        ) {
+            installViewModel.installSavedMount(
+                outputFile = file,
+                packageName = mountPackageName,
+                onPersistApp = next.onPersistApp
+            )
+        } else {
+            installViewModel.install(
+                outputFile = file,
+                originalPackageName = next.originalPackageName,
+                onPersistApp = next.onPersistApp
+            )
+        }
     }
 
     LaunchedEffect(

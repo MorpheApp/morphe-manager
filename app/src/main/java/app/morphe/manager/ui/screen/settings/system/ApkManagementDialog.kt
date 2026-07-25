@@ -263,10 +263,10 @@ private fun PatchedApksContent(
     fun installRequests(items: List<ApkItemData>) = items.mapNotNull { item ->
         val installedApp = appByKey[item.selectionKey] ?: return@mapNotNull null
         val file = item.file?.takeIf { it.exists() } ?: return@mapNotNull null
-        if (item.installType == InstallType.MOUNT) return@mapNotNull null
         InstallQueueRequest(
             file = file,
             originalPackageName = installedApp.originalPackageName,
+            mountPackageName = installedApp.currentPackageName,
             onPersistApp = { packageName, installType ->
                 val appliedPatches = repository.getAppliedPatches(installedApp.currentPackageName)
                 repository.addOrUpdate(

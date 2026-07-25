@@ -803,6 +803,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         if (installState is InstallState.Installing) return
 
         viewModelScope.launch {
+            currentInstallType = InstallType.MOUNT
             installState = InstallState.Installing
 
             try {

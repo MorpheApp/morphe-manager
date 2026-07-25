@@ -164,6 +164,7 @@ fun HomeScreen(
             InstallQueueRequest(
                 file = savedFile,
                 originalPackageName = installed.originalPackageName,
+                mountPackageName = installed.currentPackageName,
                 onPersistApp = { packageName, installType ->
                     homeViewModel.persistReinstalledApp(installed, packageName, installType)
                 },
