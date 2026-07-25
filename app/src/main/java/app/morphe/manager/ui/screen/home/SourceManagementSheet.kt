@@ -139,6 +139,11 @@ fun BundleManagementSheet(
     val orderedSources = remember(localOrder, sources, sourceSortMode) {
         sources.sortedForSourceSort(sourceSortMode, localOrder)
     }
+    val sourceScrollTargets = remember(orderedSources) {
+        buildIndexedScrollTargets(orderedSources) { source -> source.displayTitle }
+    }
+    val alphabetScrollbar = sourceSortMode == SourceBundleSortMode.NAME_ASC ||
+            sourceSortMode == SourceBundleSortMode.NAME_DESC
     val haptic = LocalHapticFeedback.current
     val reorderableState = rememberReorderableLazyListState(listState) { from, to ->
         val newOrder = localOrder.toMutableList()
@@ -364,6 +369,13 @@ fun BundleManagementSheet(
                             }
                         }
                     }
+
+                    HomeListScrollbar(
+                        listState = listState,
+                        alphabetTargets = sourceScrollTargets,
+                        alphabetMode = alphabetScrollbar,
+                        extraBottomPadding = 64.dp
+                    )
 
                     ScrollToTopButton(listState = listState)
                 }

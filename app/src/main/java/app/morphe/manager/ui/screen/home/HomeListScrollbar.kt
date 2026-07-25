@@ -55,13 +55,19 @@ internal data class HomeScrollTarget(
     val label: String
 )
 
-internal fun buildFlatHomeScrollTargets(items: List<HomeAppItem>): List<HomeScrollTarget> =
+internal fun <T> buildIndexedScrollTargets(
+    items: List<T>,
+    label: (T) -> String
+): List<HomeScrollTarget> =
     items.mapIndexed { index, item ->
         HomeScrollTarget(
             listIndex = index,
-            label = item.scrollLabel()
+            label = label(item).scrollLabel()
         )
     }
+
+internal fun buildFlatHomeScrollTargets(items: List<HomeAppItem>): List<HomeScrollTarget> =
+    buildIndexedScrollTargets(items) { item -> item.displayName.ifBlank { item.packageName } }
 
 internal fun buildGroupedHomeScrollTargets(groups: List<HomeCategoryGroup>): List<HomeScrollTarget> {
     var listIndex = 0
@@ -73,7 +79,7 @@ internal fun buildGroupedHomeScrollTargets(groups: List<HomeCategoryGroup>): Lis
                     add(
                         HomeScrollTarget(
                             listIndex = listIndex,
-                            label = item.scrollLabel()
+                            label = item.displayName.ifBlank { item.packageName }.scrollLabel()
                         )
                     )
                     listIndex += 1
@@ -338,8 +344,8 @@ private fun LazyListState.scrollbarMetrics(): ScrollbarMetrics {
     )
 }
 
-private fun HomeAppItem.scrollLabel(): String {
-    val source = displayName.ifBlank { packageName }.trim()
+private fun String.scrollLabel(): String {
+    val source = trim()
     val first = source.firstOrNull { !it.isWhitespace() } ?: return "#"
     return if (first.isLetter()) {
         first.uppercase(Locale.getDefault())
