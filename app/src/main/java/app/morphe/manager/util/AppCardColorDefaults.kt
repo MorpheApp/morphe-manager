@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 
 enum class AppCardColorMode {
     DEFAULT,
+    ACCENT,
     GRADIENT,
     SOLID
 }
@@ -29,26 +30,33 @@ object AppCardColorDefaults {
             defaultGradientColors.firstOrNull() ?: Color.White
         }
 
+    val defaultAccentColor: Color
+        get() = KnownApps.GRADIENT_MID
+
     fun colors(
         mode: AppCardColorMode,
+        accentHex: String,
         startHex: String,
         middleHex: String,
         endHex: String,
         solidHex: String
     ): List<Color> = when (mode) {
         AppCardColorMode.DEFAULT -> defaultColors()
+        AppCardColorMode.ACCENT -> accentColors(accentHex)
         AppCardColorMode.GRADIENT -> gradientColors(startHex, middleHex, endHex)
         AppCardColorMode.SOLID -> solidColors(solidHex)
     }
 
     fun previewColors(
         mode: AppCardColorMode,
+        accentHex: String,
         startHex: String,
         middleHex: String,
         endHex: String,
         solidHex: String
     ): List<Color> = colors(
         mode = mode,
+        accentHex = accentHex,
         startHex = startHex,
         middleHex = middleHex,
         endHex = endHex,
@@ -56,6 +64,18 @@ object AppCardColorDefaults {
     )
 
     fun defaultColors(): List<Color> = defaultGradientColors
+
+    fun accentColors(accentHex: String): List<Color> {
+        val accent = accentHex.toColorOrNull() ?: defaultAccentColor
+        return accentColors(accent)
+    }
+
+    fun accentColors(accent: Color): List<Color> =
+        listOf(
+            accent.darken(if (accent.requiresLightContent()) 0.16f else 0.46f),
+            accent,
+            if (accent.requiresLightContent()) accent.lighten(0.22f) else accent.darken(0.18f)
+        )
 
     fun gradientColors(
         startHex: String,

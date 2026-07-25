@@ -89,10 +89,12 @@ fun AppearanceTabContent(
         customAppCardGradientStart,
         customAppCardGradientMiddle,
         customAppCardGradientEnd,
-        customAppCardSolidColor
+        customAppCardSolidColor,
+        customAccentColorHex
     ) {
         AppCardColorDefaults.previewColors(
             mode = appCardColorMode,
+            accentHex = customAccentColorHex.orEmpty(),
             startHex = customAppCardGradientStart,
             middleHex = customAppCardGradientMiddle,
             endHex = customAppCardGradientEnd,
@@ -200,6 +202,7 @@ fun AppearanceTabContent(
                         subtitle = stringResource(
                             when (appCardColorMode) {
                                 AppCardColorMode.DEFAULT -> R.string.settings_appearance_app_card_colors_default_description
+                                AppCardColorMode.ACCENT -> R.string.settings_appearance_app_card_colors_accent_description
                                 AppCardColorMode.GRADIENT -> R.string.settings_appearance_app_card_colors_gradient_description
                                 AppCardColorMode.SOLID -> R.string.settings_appearance_app_card_colors_solid_description
                             }
@@ -381,6 +384,7 @@ fun AppearanceTabContent(
     ) {
         AppCardColorDialog(
             mode = appCardColorMode,
+            accentColorHex = customAccentColorHex.orEmpty(),
             startColorHex = customAppCardGradientStart,
             middleColorHex = customAppCardGradientMiddle,
             endColorHex = customAppCardGradientEnd,
