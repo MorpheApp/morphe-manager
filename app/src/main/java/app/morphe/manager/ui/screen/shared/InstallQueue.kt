@@ -27,7 +27,8 @@ import java.io.File
  * A single install request queued by [rememberInstallQueue].
  *
  * @param mountPackageName package to mount when this request targets a saved patched APK and
- *        Mount is the primary installer.
+ *        Mount is the primary installer. Null for apps that patching renamed, since mount
+ *        replaces the stock APK in place and cannot serve a different package.
  * @param onPersistApp forwarded to [InstallViewModel.install] or [InstallViewModel.installSavedMount];
  *        runs after a successful install to persist app metadata in the caller's repository.
  * @param onInstalled invoked with the installed package name after a successful install,

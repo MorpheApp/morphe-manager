@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.data.room.apps.installed.supportsMount
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.HomeAppCategoryState
 import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
@@ -164,7 +165,7 @@ fun HomeScreen(
             InstallQueueRequest(
                 file = savedFile,
                 originalPackageName = installed.originalPackageName,
-                mountPackageName = installed.currentPackageName,
+                mountPackageName = installed.currentPackageName.takeIf { installed.supportsMount },
                 onPersistApp = { packageName, installType ->
                     homeViewModel.persistReinstalledApp(installed, packageName, installType)
                 },

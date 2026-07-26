@@ -42,6 +42,7 @@ import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
+import app.morphe.manager.data.room.apps.installed.supportsMount
 import app.morphe.manager.data.room.apps.original.OriginalApk
 import app.morphe.manager.domain.installer.InstallerFileProvider
 import app.morphe.manager.domain.installer.InstallerManager
@@ -266,7 +267,7 @@ private fun PatchedApksContent(
         InstallQueueRequest(
             file = file,
             originalPackageName = installedApp.originalPackageName,
-            mountPackageName = installedApp.currentPackageName,
+            mountPackageName = installedApp.currentPackageName.takeIf { installedApp.supportsMount },
             onPersistApp = { packageName, installType ->
                 val appliedPatches = repository.getAppliedPatches(installedApp.currentPackageName)
                 repository.addOrUpdate(

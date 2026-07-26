@@ -40,6 +40,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
+import app.morphe.manager.data.room.apps.installed.supportsMount
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
@@ -1197,6 +1198,8 @@ private fun ActionsSection(
         )
     }
 
+    val installsThroughMount = viewModel.primaryInstallerIsMount && installedApp.supportsMount
+
     val mountSavedApp: () -> Unit = {
         val savedFile = viewModel.savedApkFile()
         if (savedFile != null) {
@@ -1239,7 +1242,7 @@ private fun ActionsSection(
                     val savedFile = viewModel.savedApkFile()
                     if (savedFile != null) {
                         val installAction = {
-                            if (viewModel.primaryInstallerIsMount) {
+                            if (installsThroughMount) {
                                 mountSavedApp()
                             } else {
                                 installViewModel.install(

@@ -42,3 +42,10 @@ data class InstalledApp(
     @ColumnInfo(name = "selection_payload") val selectionPayload: SelectionPayload? = null,
     @ColumnInfo(name = "patched_at") val patchedAt: Long? = null
 )
+
+/**
+ * Root mount binds the patched APK over the stock one, so it only applies while patching kept
+ * the original package name. Apps renamed by patches (GmsCore builds) must use a regular install.
+ */
+val InstalledApp.supportsMount: Boolean
+    get() = currentPackageName == originalPackageName
