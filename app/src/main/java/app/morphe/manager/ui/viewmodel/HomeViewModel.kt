@@ -216,10 +216,7 @@ private data class HomeDisplayPrefs(
 
 private data class HomeAppCardColorPrefs(
     val accentHex: String,
-    val startHex: String,
-    val middleHex: String,
-    val endHex: String,
-    val solidHex: String
+    val values: AppCardColorValues
 )
 
 private data class HomeAppCardColors(
@@ -1212,17 +1209,11 @@ class HomeViewModel(
 
     private val _appCardColorPrefsFlow = combine(
         prefs.customAccentColor.flow,
-        prefs.customAppCardGradientStart.flow,
-        prefs.customAppCardGradientMiddle.flow,
-        prefs.customAppCardGradientEnd.flow,
-        prefs.customAppCardSolidColor.flow
-    ) { accent, start, middle, end, solid ->
+        prefs.customAppCardColors.flow
+    ) { accent, colors ->
         HomeAppCardColorPrefs(
             accentHex = accent,
-            startHex = start,
-            middleHex = middle,
-            endHex = end,
-            solidHex = solid
+            values = AppCardColorDefaults.decodeColorValues(colors)
         )
     }
 
@@ -1235,10 +1226,7 @@ class HomeViewModel(
             colors = AppCardColorDefaults.colors(
                 mode = mode,
                 accentHex = colorPrefs.accentHex,
-                startHex = colorPrefs.startHex,
-                middleHex = colorPrefs.middleHex,
-                endHex = colorPrefs.endHex,
-                solidHex = colorPrefs.solidHex
+                values = colorPrefs.values
             )
         )
     }

@@ -8,6 +8,7 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
+import app.morphe.manager.util.AppCardColorDefaults
 import app.morphe.manager.util.AppCardColorMode
 import app.morphe.manager.util.applyAppLanguage
 import app.morphe.manager.util.toHexString
@@ -81,10 +82,16 @@ class ThemeSettingsViewModel(
     ) = viewModelScope.launch {
         prefs.edit {
             prefs.appCardColorMode.value = mode
-            prefs.customAppCardGradientStart.value = startColorHex.takeUnless { mode == AppCardColorMode.DEFAULT }.orEmpty()
-            prefs.customAppCardGradientMiddle.value = middleColorHex.takeUnless { mode == AppCardColorMode.DEFAULT }.orEmpty()
-            prefs.customAppCardGradientEnd.value = endColorHex.takeUnless { mode == AppCardColorMode.DEFAULT }.orEmpty()
-            prefs.customAppCardSolidColor.value = solidColorHex.takeUnless { mode == AppCardColorMode.DEFAULT }.orEmpty()
+            prefs.customAppCardColors.value = if (mode == AppCardColorMode.DEFAULT) {
+                ""
+            } else {
+                AppCardColorDefaults.encodeColorValues(
+                    startHex = startColorHex,
+                    middleHex = middleColorHex,
+                    endHex = endColorHex,
+                    solidHex = solidColorHex
+                )
+            }
         }
     }
 

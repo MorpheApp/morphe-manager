@@ -40,10 +40,7 @@ class PreferencesManager(
     val customAccentColor = stringPreference("custom_accent_color", "")
     val customThemeColor = stringPreference("custom_theme_color", "")
     val appCardColorMode = enumPreference("app_card_color_mode", AppCardColorMode.DEFAULT)
-    val customAppCardGradientStart = stringPreference("custom_app_card_gradient_start", "")
-    val customAppCardGradientMiddle = stringPreference("custom_app_card_gradient_middle", "")
-    val customAppCardGradientEnd = stringPreference("custom_app_card_gradient_end", "")
-    val customAppCardSolidColor = stringPreference("custom_app_card_solid_color", "")
+    val customAppCardColors = stringPreference("custom_app_card_colors", "")
     val theme = enumPreference("theme", Theme.SYSTEM)
     val themeStyle = enumPreference("theme_style", ThemeStyle.MORPHE)
 
@@ -199,10 +196,7 @@ class PreferencesManager(
         val customAccentColor: String? = null,
         val customThemeColor: String? = null,
         val appCardColorMode: AppCardColorMode? = null,
-        val customAppCardGradientStart: String? = null,
-        val customAppCardGradientMiddle: String? = null,
-        val customAppCardGradientEnd: String? = null,
-        val customAppCardSolidColor: String? = null,
+        val customAppCardColors: String? = null,
         val stripUnusedNativeLibs: Boolean? = null,
         val theme: Theme? = null,
         val themeStyle: ThemeStyle? = null,
@@ -266,10 +260,7 @@ class PreferencesManager(
         customAccentColor = customAccentColor.get(),
         customThemeColor = customThemeColor.get(),
         appCardColorMode = appCardColorMode.get(),
-        customAppCardGradientStart = customAppCardGradientStart.get(),
-        customAppCardGradientMiddle = customAppCardGradientMiddle.get(),
-        customAppCardGradientEnd = customAppCardGradientEnd.get(),
-        customAppCardSolidColor = customAppCardSolidColor.get(),
+        customAppCardColors = customAppCardColors.get(),
         stripUnusedNativeLibs = stripUnusedNativeLibs.get(),
         theme = theme.get(),
         themeStyle = themeStyle.get(),
@@ -313,10 +304,7 @@ class PreferencesManager(
         snapshot.customAccentColor?.let { customAccentColor.value = it }
         snapshot.customThemeColor?.let { customThemeColor.value = it }
         snapshot.appCardColorMode?.let { appCardColorMode.value = it }
-        snapshot.customAppCardGradientStart?.let { customAppCardGradientStart.value = it }
-        snapshot.customAppCardGradientMiddle?.let { customAppCardGradientMiddle.value = it }
-        snapshot.customAppCardGradientEnd?.let { customAppCardGradientEnd.value = it }
-        snapshot.customAppCardSolidColor?.let { customAppCardSolidColor.value = it }
+        snapshot.customAppCardColors?.let { customAppCardColors.value = it }
         snapshot.stripUnusedNativeLibs?.let { stripUnusedNativeLibs.value = it }
         snapshot.theme?.let { theme.value = it }
         snapshot.themeStyle?.let { themeStyle.value = it }

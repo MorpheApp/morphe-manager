@@ -69,10 +69,7 @@ fun AppearanceTabContent(
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
     val appCardColorMode by themeViewModel.prefs.appCardColorMode.getAsState()
-    val customAppCardGradientStart by themeViewModel.prefs.customAppCardGradientStart.getAsState()
-    val customAppCardGradientMiddle by themeViewModel.prefs.customAppCardGradientMiddle.getAsState()
-    val customAppCardGradientEnd by themeViewModel.prefs.customAppCardGradientEnd.getAsState()
-    val customAppCardSolidColor by themeViewModel.prefs.customAppCardSolidColor.getAsState()
+    val customAppCardColors by themeViewModel.prefs.customAppCardColors.getAsState()
     val showAppGroupingSwitcher by homeAppButtonPrefs.showCategoryViewSwitcher.collectAsStateWithLifecycle()
     val showSortButton by homeAppButtonPrefs.showSortButton.collectAsStateWithLifecycle()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
@@ -84,21 +81,18 @@ fun AppearanceTabContent(
     val showLanguageDialog = remember { mutableStateOf(false) }
     val showTranslationInfoDialog = remember { mutableStateOf(false) }
     val showAppCardColorDialog = remember { mutableStateOf(false) }
+    val appCardColorValues = remember(customAppCardColors) {
+        AppCardColorDefaults.decodeColorValues(customAppCardColors)
+    }
     val appCardColors = remember(
         appCardColorMode,
-        customAppCardGradientStart,
-        customAppCardGradientMiddle,
-        customAppCardGradientEnd,
-        customAppCardSolidColor,
+        appCardColorValues,
         customAccentColorHex
     ) {
         AppCardColorDefaults.previewColors(
             mode = appCardColorMode,
             accentHex = customAccentColorHex.orEmpty(),
-            startHex = customAppCardGradientStart,
-            middleHex = customAppCardGradientMiddle,
-            endHex = customAppCardGradientEnd,
-            solidHex = customAppCardSolidColor
+            values = appCardColorValues
         )
     }
 
@@ -385,10 +379,10 @@ fun AppearanceTabContent(
         AppCardColorDialog(
             mode = appCardColorMode,
             accentColorHex = customAccentColorHex.orEmpty(),
-            startColorHex = customAppCardGradientStart,
-            middleColorHex = customAppCardGradientMiddle,
-            endColorHex = customAppCardGradientEnd,
-            solidColorHex = customAppCardSolidColor,
+            startColorHex = appCardColorValues.startHex,
+            middleColorHex = appCardColorValues.middleHex,
+            endColorHex = appCardColorValues.endHex,
+            solidColorHex = appCardColorValues.solidHex,
             onApply = themeViewModel::applyAppCardColors,
             onDismiss = { showAppCardColorDialog.value = false }
         )

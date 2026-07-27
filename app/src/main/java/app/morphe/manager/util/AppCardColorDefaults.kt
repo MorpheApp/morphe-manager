@@ -21,7 +21,16 @@ enum class AppCardColorStop {
     SOLID
 }
 
+data class AppCardColorValues(
+    val startHex: String = "",
+    val middleHex: String = "",
+    val endHex: String = "",
+    val solidHex: String = ""
+)
+
 object AppCardColorDefaults {
+    private const val COLOR_VALUES_SEPARATOR = "|"
+
     val defaultGradientColors: List<Color>
         get() = KnownApps.DEFAULT_COLORS
 
@@ -50,18 +59,45 @@ object AppCardColorDefaults {
     fun previewColors(
         mode: AppCardColorMode,
         accentHex: String,
+        values: AppCardColorValues
+    ): List<Color> = colors(
+        mode = mode,
+        accentHex = accentHex,
+        values = values
+    )
+
+    fun colors(
+        mode: AppCardColorMode,
+        accentHex: String,
+        values: AppCardColorValues
+    ): List<Color> = colors(
+        mode = mode,
+        accentHex = accentHex,
+        startHex = values.startHex,
+        middleHex = values.middleHex,
+        endHex = values.endHex,
+        solidHex = values.solidHex
+    )
+
+    fun encodeColorValues(
         startHex: String,
         middleHex: String,
         endHex: String,
         solidHex: String
-    ): List<Color> = colors(
-        mode = mode,
-        accentHex = accentHex,
-        startHex = startHex,
-        middleHex = middleHex,
-        endHex = endHex,
-        solidHex = solidHex
-    )
+    ): String = listOf(startHex, middleHex, endHex, solidHex)
+        .joinToString(COLOR_VALUES_SEPARATOR)
+
+    fun decodeColorValues(value: String): AppCardColorValues {
+        if (value.isBlank()) return AppCardColorValues()
+
+        val parts = value.split(COLOR_VALUES_SEPARATOR)
+        return AppCardColorValues(
+            startHex = parts.getOrNull(0).orEmpty(),
+            middleHex = parts.getOrNull(1).orEmpty(),
+            endHex = parts.getOrNull(2).orEmpty(),
+            solidHex = parts.getOrNull(3).orEmpty()
+        )
+    }
 
     fun defaultColors(): List<Color> = defaultGradientColors
 
