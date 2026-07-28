@@ -44,10 +44,10 @@ private val ScrollbarTouchWidth = 32.dp
 private val ScrollbarOverlayWidth = 104.dp
 private val ScrollbarTrackWidth = 4.dp
 private val ScrollbarMinThumbHeight = 36.dp
+private val AlphabetThumbHeight = 28.dp
 private val AlphabetBubbleWidth = 58.dp
 private val AlphabetBubbleHeight = 42.dp
-private val AlphabetConnectorWidth = 14.dp
-private val AlphabetConnectorHeight = 4.dp
+private val AlphabetBubbleGap = 14.dp
 
 @Immutable
 internal data class HomeScrollTarget(
@@ -58,30 +58,43 @@ internal data class HomeScrollTarget(
 internal fun <T> buildIndexedScrollTargets(
     items: List<T>,
     label: (T) -> String
-): List<HomeScrollTarget> =
-    items.mapIndexed { index, item ->
-        HomeScrollTarget(
-            listIndex = index,
-            label = label(item).scrollLabel()
-        )
+): List<HomeScrollTarget> {
+    val seenLabels = HashSet<String>()
+    return buildList {
+        items.forEachIndexed { index, item ->
+            val targetLabel = label(item).scrollLabel()
+            if (seenLabels.add(targetLabel)) {
+                add(
+                    HomeScrollTarget(
+                        listIndex = index,
+                        label = targetLabel
+                    )
+                )
+            }
+        }
     }
+}
 
 internal fun buildFlatHomeScrollTargets(items: List<HomeAppItem>): List<HomeScrollTarget> =
     buildIndexedScrollTargets(items) { item -> item.displayName.ifBlank { item.packageName } }
 
 internal fun buildGroupedHomeScrollTargets(groups: List<HomeCategoryGroup>): List<HomeScrollTarget> {
     var listIndex = 0
+    val seenLabels = HashSet<String>()
     return buildList {
         groups.forEach { group ->
             listIndex += 1 // Header row
             if (!group.collapsed) {
                 group.items.forEach { item ->
-                    add(
-                        HomeScrollTarget(
-                            listIndex = listIndex,
-                            label = item.displayName.ifBlank { item.packageName }.scrollLabel()
+                    val targetLabel = item.displayName.ifBlank { item.packageName }.scrollLabel()
+                    if (seenLabels.add(targetLabel)) {
+                        add(
+                            HomeScrollTarget(
+                                listIndex = listIndex,
+                                label = targetLabel
+                            )
                         )
-                    )
+                    }
                     listIndex += 1
                 }
             }
@@ -106,6 +119,8 @@ internal fun BoxScope.HomeListScrollbar(
     val layoutDirection = LocalLayoutDirection.current
     val sideAlignment = if (layoutDirection == LayoutDirection.Rtl) Alignment.CenterStart else Alignment.CenterEnd
     val topSideAlignment = if (layoutDirection == LayoutDirection.Rtl) Alignment.TopStart else Alignment.TopEnd
+    val trackAlignment = if (layoutDirection == LayoutDirection.Rtl) Alignment.CenterStart else Alignment.CenterEnd
+    val thumbAlignment = if (layoutDirection == LayoutDirection.Rtl) Alignment.TopStart else Alignment.TopEnd
     val colors = MaterialTheme.colorScheme
     val trackColor = colors.outlineVariant.copy(alpha = 0.34f)
     val thumbColor = colors.primary.copy(alpha = 0.78f)
@@ -161,15 +176,18 @@ internal fun BoxScope.HomeListScrollbar(
         val density = LocalDensity.current
         val trackHeightPx = with(density) { maxHeight.toPx() }.coerceAtLeast(1f)
         val bubbleHeightPx = with(density) { AlphabetBubbleHeight.toPx() }
+        val alphabetThumbHeightPx = with(density) { AlphabetThumbHeight.toPx() }
         val minThumbHeightPx = with(density) { ScrollbarMinThumbHeight.toPx() }
         val thumbHeightPx = (trackHeightPx * metrics.thumbFraction)
             .coerceIn(minThumbHeightPx, trackHeightPx)
+        val visibleThumbHeightPx = if (alphabetEnabled) alphabetThumbHeightPx else thumbHeightPx
         val thumbTopPx = ((trackHeightPx - thumbHeightPx) * metrics.progress)
             .roundToInt()
             .coerceAtLeast(0)
-        val bubbleTopPx = ((trackHeightPx - bubbleHeightPx).coerceAtLeast(0f) * metrics.progress)
+        val maxBubbleTopPx = (trackHeightPx - bubbleHeightPx).coerceAtLeast(0f).roundToInt()
+        val bubbleTopPx = (thumbTopPx + visibleThumbHeightPx / 2f - bubbleHeightPx / 2f)
             .roundToInt()
-            .coerceAtLeast(0)
+            .coerceIn(0, maxBubbleTopPx)
 
         Box(
             modifier = Modifier
@@ -219,7 +237,7 @@ internal fun BoxScope.HomeListScrollbar(
                 .fillMaxHeight()
                 .width(ScrollbarTouchWidth)
                 .graphicsLayer { alpha = visibilityAlpha },
-            contentAlignment = Alignment.Center
+            contentAlignment = trackAlignment
         ) {
             Box(
                 modifier = Modifier
@@ -231,7 +249,7 @@ internal fun BoxScope.HomeListScrollbar(
             if (!alphabetEnabled) {
                 Box(
                     modifier = Modifier
-                        .align(Alignment.TopCenter)
+                        .align(thumbAlignment)
                         .offset { IntOffset(x = 0, y = thumbTopPx) }
                         .width(ScrollbarTrackWidth)
                         .height(with(density) { thumbHeightPx.toDp() })
@@ -241,10 +259,10 @@ internal fun BoxScope.HomeListScrollbar(
             } else {
                 Box(
                     modifier = Modifier
-                        .align(Alignment.TopCenter)
+                        .align(thumbAlignment)
                         .offset { IntOffset(x = 0, y = thumbTopPx) }
                         .width(ScrollbarTrackWidth + 2.dp)
-                        .height(28.dp)
+                        .height(AlphabetThumbHeight)
                         .clip(RoundedCornerShape(50))
                         .background(thumbColor)
                 )
@@ -277,11 +295,11 @@ private fun AlphabetScrollCallout(
     val colors = MaterialTheme.colorScheme
     Row(
         modifier = modifier
-            .width(AlphabetBubbleWidth + AlphabetConnectorWidth)
+            .width(AlphabetBubbleWidth + AlphabetBubbleGap)
             .height(AlphabetBubbleHeight),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        if (rtl) AlphabetScrollConnector()
+        if (rtl) Spacer(Modifier.width(AlphabetBubbleGap))
         Surface(
             modifier = Modifier.size(AlphabetBubbleWidth, AlphabetBubbleHeight),
             shape = RoundedCornerShape(18.dp),
@@ -300,19 +318,8 @@ private fun AlphabetScrollCallout(
                 )
             }
         }
-        if (!rtl) AlphabetScrollConnector()
+        if (!rtl) Spacer(Modifier.width(AlphabetBubbleGap))
     }
-}
-
-@Composable
-private fun AlphabetScrollConnector() {
-    Box(
-        modifier = Modifier
-            .width(AlphabetConnectorWidth)
-            .height(AlphabetConnectorHeight)
-            .clip(RoundedCornerShape(50))
-            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.82f))
-    )
 }
 
 private data class ScrollbarMetrics(
