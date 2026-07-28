@@ -17,6 +17,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -285,10 +287,19 @@ fun ExpertModeDialog(
                 // Multiple bundles tab layout
                 val pagerState = rememberPagerState { allPatchesInfo.size }
                 val coroutineScope = rememberCoroutineScope()
-                // Hoisted outside the pager so the scrollbar overlay below can track whichever
-                // page is current. HorizontalPager clips each page to its own bounds, so a
-                // scrollbar drawn inside a page can never bleed out to the true dialog edge
-                val pageScrollStates = remember { mutableStateMapOf<Int, ScrollState>() }
+                // Created up front, outside the pager, so the scrollbar overlay below can track
+                // whichever page is current. HorizontalPager clips each page to its own bounds, so
+                // a scrollbar drawn inside a page can never bleed out to the true dialog edge.
+                // Keyed on the bundle count so pages never inherit a stale sibling's position
+                val pageScrollStates = rememberSaveable(
+                    allPatchesInfo.size,
+                    saver = listSaver(
+                        save = { states -> states.map { it.value } },
+                        restore = { offsets -> offsets.map { ScrollState(it) } }
+                    )
+                ) {
+                    List(allPatchesInfo.size) { ScrollState(0) }
+                }
 
                 Column(
                     modifier = Modifier
@@ -392,7 +403,7 @@ fun ExpertModeDialog(
                                     modifier = Modifier.fillMaxHeight()
                                 )
                             } else {
-                                val pageScroll = pageScrollStates.getOrPut(pageIndex) { ScrollState(0) }
+                                val pageScroll = pageScrollStates[pageIndex]
                                 Column(
                                     modifier = Modifier
                                         .fillMaxSize()
@@ -414,8 +425,12 @@ fun ExpertModeDialog(
 
                         // Single overlay for the whole pager, tracking whichever page is current,
                         // instead of one per page - a page-local scrollbar would be clipped by the
-                        // pager before it could reach the true dialog edge
-                        pageScrollStates[pagerState.currentPage]?.let { currentPageScroll ->
+                        // pager before it could reach the true dialog edge. Pages filtered down to
+                        // an empty state have nothing to scroll, so they get no overlay
+                        val currentPageScroll = allPatchesInfo.getOrNull(pagerState.currentPage)
+                            ?.takeIf { (bundle, _) -> filteredPatchesInfo.any { it.first.uid == bundle.uid } }
+                            ?.let { pageScrollStates.getOrNull(pagerState.currentPage) }
+                        if (currentPageScroll != null) {
                             ListScrollbar(
                                 scrollState = currentPageScroll,
                                 modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)

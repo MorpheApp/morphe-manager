@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -82,11 +83,22 @@ internal fun buildScrollTargets(
     }
 }
 
+/** [buildScrollTargets] for a flat list, where each item occupies the list index it sits at. */
 fun <T> buildIndexedScrollTargets(
     items: List<T>,
     label: (T) -> String
 ): List<ScrollTarget> = buildScrollTargets { emit ->
     items.forEachIndexed { index, item -> emit(index, label(item)) }
+}
+
+/** Runs seek scrolls one at a time, dropping the in-flight one when the thumb moves again. */
+private class ScrollbarSeekController(private val scope: CoroutineScope) {
+    private var job: Job? = null
+
+    fun seek(block: suspend () -> Unit) {
+        job?.cancel()
+        job = scope.launch { block() }
+    }
 }
 
 /**
@@ -103,11 +115,8 @@ fun BoxScope.ListScrollbar(
     alphabetMode: Boolean = false,
     extraBottomPadding: Dp = 0.dp
 ) {
-    // Real sizes of every item measured so far, kept across scrolling so expanded cards keep
-    // contributing their true height to the estimate even after they leave the viewport
-    val sizeCache = remember(listState) { mutableMapOf<Int, Int>() }
     val metrics = remember(listState) {
-        derivedStateOf { listState.scrollbarMetrics(sizeCache) }
+        derivedStateOf { listState.scrollbarMetrics() }
     }
     val thumbFraction by remember(metrics) {
         derivedStateOf { metrics.value.thumbFraction }
@@ -116,8 +125,17 @@ fun BoxScope.ListScrollbar(
         derivedStateOf { listState.canScrollBackward || listState.canScrollForward }
     }
     val alphabetEnabled = alphabetMode && alphabetTargets.isNotEmpty()
-    val scope = rememberCoroutineScope()
-    var scrollJob by remember { mutableStateOf<Job?>(null) }
+
+    // Resolved together so the callout announces the row the scroll is actually heading to
+    fun targetFor(progress: Float): ScrollTarget? = if (alphabetEnabled) {
+        alphabetTargets[
+            (progress * alphabetTargets.lastIndex)
+                .roundToInt()
+                .coerceIn(alphabetTargets.indices)
+        ]
+    } else {
+        null
+    }
 
     ScrollbarOverlay(
         progress = { metrics.value.progress },
@@ -127,23 +145,13 @@ fun BoxScope.ListScrollbar(
         alphabetEnabled = alphabetEnabled,
         modifier = modifier,
         extraBottomPadding = extraBottomPadding,
-        onSeek = { progress ->
-            val target = if (alphabetEnabled) {
-                alphabetTargets[
-                    (progress * alphabetTargets.lastIndex)
-                        .roundToInt()
-                        .coerceIn(alphabetTargets.indices)
-                ]
-            } else {
-                null
-            }
-            val targetIndex = target?.listIndex ?: run {
+        labelFor = { progress -> targetFor(progress)?.label },
+        scrollTo = { progress ->
+            val targetIndex = targetFor(progress)?.listIndex ?: run {
                 val lastIndex = (listState.layoutInfo.totalItemsCount - 1).coerceAtLeast(0)
                 (progress * lastIndex).roundToInt().coerceIn(0, lastIndex)
             }
-            scrollJob?.cancel()
-            scrollJob = scope.launch { listState.scrollToItem(targetIndex) }
-            target?.label
+            listState.scrollToItem(targetIndex)
         }
     )
 }
@@ -167,8 +175,6 @@ fun BoxScope.ListScrollbar(
     val canScroll by remember(scrollState) {
         derivedStateOf { scrollState.maxValue > 0 }
     }
-    val scope = rememberCoroutineScope()
-    var scrollJob by remember { mutableStateOf<Job?>(null) }
 
     ScrollbarOverlay(
         progress = { metrics.value.progress },
@@ -178,19 +184,16 @@ fun BoxScope.ListScrollbar(
         alphabetEnabled = false,
         modifier = modifier,
         extraBottomPadding = extraBottomPadding,
-        onSeek = { progress ->
-            scrollJob?.cancel()
-            scrollJob = scope.launch {
-                scrollState.scrollTo((progress * scrollState.maxValue).roundToInt())
-            }
-            null
+        labelFor = { null },
+        scrollTo = { progress ->
+            scrollState.scrollTo((progress * scrollState.maxValue).roundToInt())
         }
     )
 }
 
 /**
- * Shared track, thumb and callout. [onSeek] receives the dragged position as a 0..1 fraction and
- * returns the label to show on the callout, or null when there is nothing to announce.
+ * Shared track, thumb and callout. Both [labelFor] and [scrollTo] receive the dragged position as a
+ * 0..1 fraction; [labelFor] returns the callout text, or null when there is nothing to announce.
  *
  * [progress] is a lambda rather than a value so the thumb position is read during layout: scrolling
  * then only re-lays out the thumb instead of recomposing the whole overlay on every frame.
@@ -202,14 +205,18 @@ private fun BoxScope.ScrollbarOverlay(
     canScroll: Boolean,
     isScrolling: Boolean,
     alphabetEnabled: Boolean,
-    onSeek: (progress: Float) -> String?,
+    labelFor: (progress: Float) -> String?,
+    scrollTo: suspend (progress: Float) -> Unit,
     modifier: Modifier = Modifier,
     extraBottomPadding: Dp = 0.dp
 ) {
     val rtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     val sideAlignment = if (rtl) Alignment.CenterStart else Alignment.CenterEnd
     val topSideAlignment = if (rtl) Alignment.TopStart else Alignment.TopEnd
-    val currentOnSeek by rememberUpdatedState(onSeek)
+    val currentLabelFor by rememberUpdatedState(labelFor)
+    val currentScrollTo by rememberUpdatedState(scrollTo)
+    val scope = rememberCoroutineScope()
+    val seekController = remember(scope) { ScrollbarSeekController(scope) }
     val colors = MaterialTheme.colorScheme
     val trackColor = colors.outlineVariant.copy(alpha = 0.34f)
     val thumbColor = colors.primary.copy(alpha = 0.78f)
@@ -286,7 +293,9 @@ private fun BoxScope.ScrollbarOverlay(
                                 dragStarted = true
                                 dragging = true
                             }
-                            activeLabel = currentOnSeek((change.position.y / trackHeightPx).coerceIn(0f, 1f))
+                            val seekProgress = (change.position.y / trackHeightPx).coerceIn(0f, 1f)
+                            activeLabel = currentLabelFor(seekProgress)
+                            seekController.seek { currentScrollTo(seekProgress) }
                             change.consume()
                         }
                         if (dragStarted) {
@@ -390,38 +399,28 @@ private data class ScrollbarMetrics(
     val thumbFraction: Float
 )
 
-private fun LazyListState.scrollbarMetrics(sizeCache: MutableMap<Int, Int>): ScrollbarMetrics {
+private fun LazyListState.scrollbarMetrics(): ScrollbarMetrics {
     val info = layoutInfo
     val visibleItems = info.visibleItemsInfo
     val totalItems = info.totalItemsCount
     if (visibleItems.isEmpty() || totalItems <= 0) {
         return ScrollbarMetrics(progress = 0f, thumbFraction = 1f)
     }
-    // Stale tail entries would keep inflating the estimate after the list shrinks
-    if (sizeCache.keys.any { it >= totalItems }) {
-        sizeCache.keys.retainAll { it < totalItems }
-    }
-    visibleItems.forEach { sizeCache[it.index] = it.size }
 
     val viewportSize = (info.viewportEndOffset - info.viewportStartOffset).coerceAtLeast(1)
-    val averageItemSize = sizeCache.values.sum().toFloat() / sizeCache.size
-    // Both sums use the measured size where one is known and the average as the fallback, so an
-    // expanded card advances the thumb by its real height while it scrolls past instead of
-    // surging ahead on the offset and snapping back when the first visible index increments
-    var scrollOffset = firstVisibleItemScrollOffset.toFloat()
-    for (index in 0 until firstVisibleItemIndex) {
-        scrollOffset += sizeCache[index]?.toFloat() ?: averageItemSize
-    }
-    var estimatedItemsSize = 0f
-    for (index in 0 until totalItems) {
-        estimatedItemsSize += sizeCache[index]?.toFloat() ?: averageItemSize
-    }
-    val contentSize = (estimatedItemsSize + info.beforeContentPadding + info.afterContentPadding)
+    val averageItemSize = (visibleItems.sumOf { it.size }.toFloat() / visibleItems.size)
+        .coerceAtLeast(1f)
+    // How far the first visible item has itself scrolled past, as a fraction of its own height:
+    // measuring the partial item against its real size keeps a tall expanded card advancing the
+    // thumb smoothly, instead of racing ahead on raw pixels and snapping back once the index ticks
+    val firstItemSize = visibleItems.first().size.coerceAtLeast(1)
+    val scrolledItems = firstVisibleItemIndex + firstVisibleItemScrollOffset.toFloat() / firstItemSize
+    val contentSize = (averageItemSize * totalItems + info.beforeContentPadding + info.afterContentPadding)
         .coerceAtLeast(viewportSize.toFloat())
     val maxScrollOffset = (contentSize - viewportSize).coerceAtLeast(1f)
 
     return ScrollbarMetrics(
-        progress = (scrollOffset / maxScrollOffset).coerceIn(0f, 1f),
+        progress = (scrolledItems * averageItemSize / maxScrollOffset).coerceIn(0f, 1f),
         thumbFraction = (viewportSize / contentSize).coerceIn(MinThumbFraction, 1f)
     )
 }
