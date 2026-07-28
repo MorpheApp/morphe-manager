@@ -3,11 +3,12 @@
  * https://github.com/MorpheApp/morphe-manager
  */
 
-package app.morphe.manager.ui.screen.home
+package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -31,13 +32,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import app.morphe.manager.ui.model.HomeAppItem
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Locale
 import kotlin.math.abs
 import kotlin.math.roundToInt
+import kotlin.time.Duration.Companion.milliseconds
 
 private val ScrollbarEdgePadding = 4.dp
 private val ScrollbarVerticalPadding = 8.dp
@@ -46,72 +47,60 @@ private val ScrollbarOverlayWidth = 104.dp
 private val ScrollbarTrackWidth = 4.dp
 private val ScrollbarMinThumbHeight = 36.dp
 private val AlphabetThumbHeight = 28.dp
-private val AlphabetThumbExtraWidth = 2.dp
 private val AlphabetBubbleWidth = 58.dp
 private val AlphabetBubbleHeight = 42.dp
 private val AlphabetBubbleGap = 14.dp
 
 /** How long the scrollbar stays visible after scrolling stops. */
-private const val ScrollbarIdleTimeoutMs = 650L
+private val ScrollbarIdleTimeout = 650.milliseconds
 
 /** Keeps the thumb grabbable on very long lists, where the true ratio would be a few pixels. */
 private const val MinThumbFraction = 0.08f
 
+/** First row carrying a given leading letter, used to drive the alphabet fast scroll. */
 @Immutable
-internal data class HomeScrollTarget(
+data class ScrollTarget(
     val listIndex: Int,
     val label: String
 )
 
 /**
  * Collects the first list index for every distinct leading letter. [emit] walks the rendered
- * rows in order, reporting each labelled row alongside the list index it occupies.
+ * rows in order, reporting each labeled row alongside the list index it occupies.
  */
-private fun buildScrollTargets(
+internal fun buildScrollTargets(
     emit: ((listIndex: Int, label: String) -> Unit) -> Unit
-): List<HomeScrollTarget> {
+): List<ScrollTarget> {
     val seenLabels = HashSet<String>()
     return buildList {
         emit { listIndex, label ->
             val targetLabel = label.scrollLabel()
             if (seenLabels.add(targetLabel)) {
-                add(HomeScrollTarget(listIndex = listIndex, label = targetLabel))
+                add(ScrollTarget(listIndex = listIndex, label = targetLabel))
             }
         }
     }
 }
 
-internal fun <T> buildIndexedScrollTargets(
+fun <T> buildIndexedScrollTargets(
     items: List<T>,
     label: (T) -> String
-): List<HomeScrollTarget> = buildScrollTargets { emit ->
+): List<ScrollTarget> = buildScrollTargets { emit ->
     items.forEachIndexed { index, item -> emit(index, label(item)) }
 }
 
-internal fun buildFlatHomeScrollTargets(items: List<HomeAppItem>): List<HomeScrollTarget> =
-    buildIndexedScrollTargets(items) { item -> item.scrollLabelSource() }
-
-internal fun buildGroupedHomeScrollTargets(groups: List<HomeCategoryGroup>): List<HomeScrollTarget> =
-    buildScrollTargets { emit ->
-        var listIndex = 0
-        groups.forEach { group ->
-            listIndex += 1 // Header row
-            if (group.collapsed) return@forEach
-            group.items.forEach { item ->
-                emit(listIndex, item.scrollLabelSource())
-                listIndex += 1
-            }
-        }
-    }
-
-private fun HomeAppItem.scrollLabelSource(): String = displayName.ifBlank { packageName }
-
+/**
+ * Scrollbar overlay for a [LazyListState]. Place inside a Box that overlays the list.
+ *
+ * Passing [alphabetTargets] together with [alphabetMode] turns the thumb into an alphabet fast
+ * scroll that shows the leading letter while dragging; without them, it stays a plain scrollbar.
+ */
 @Composable
-internal fun BoxScope.HomeListScrollbar(
+fun BoxScope.ListScrollbar(
     listState: LazyListState,
-    alphabetTargets: List<HomeScrollTarget>,
-    alphabetMode: Boolean,
     modifier: Modifier = Modifier,
+    alphabetTargets: List<ScrollTarget> = emptyList(),
+    alphabetMode: Boolean = false,
     extraBottomPadding: Dp = 0.dp
 ) {
     val metrics by remember(listState) {
@@ -120,46 +109,116 @@ internal fun BoxScope.HomeListScrollbar(
     val canScroll by remember(listState) {
         derivedStateOf { listState.canScrollBackward || listState.canScrollForward }
     }
-    val layoutDirection = LocalLayoutDirection.current
-    val rtl = layoutDirection == LayoutDirection.Rtl
+    val alphabetEnabled = alphabetMode && alphabetTargets.isNotEmpty()
+    val scope = rememberCoroutineScope()
+    var scrollJob by remember { mutableStateOf<Job?>(null) }
+
+    ScrollbarOverlay(
+        metrics = metrics,
+        canScroll = canScroll,
+        isScrolling = listState.isScrollInProgress,
+        alphabetEnabled = alphabetEnabled,
+        modifier = modifier,
+        extraBottomPadding = extraBottomPadding,
+        onSeek = { progress ->
+            val target = if (alphabetEnabled) {
+                alphabetTargets[
+                    (progress * alphabetTargets.lastIndex)
+                        .roundToInt()
+                        .coerceIn(alphabetTargets.indices)
+                ]
+            } else {
+                null
+            }
+            val targetIndex = target?.listIndex ?: run {
+                val lastIndex = (listState.layoutInfo.totalItemsCount - 1).coerceAtLeast(0)
+                (progress * lastIndex).roundToInt().coerceIn(0, lastIndex)
+            }
+            scrollJob?.cancel()
+            scrollJob = scope.launch { listState.scrollToItem(targetIndex) }
+            target?.label
+        }
+    )
+}
+
+/**
+ * Scrollbar overlay for a Column with `verticalScroll`. Place inside a Box that overlays the
+ * content. Alphabet fast scroll needs row indices and is therefore list-only.
+ */
+@Composable
+fun BoxScope.ListScrollbar(
+    scrollState: ScrollState,
+    modifier: Modifier = Modifier,
+    extraBottomPadding: Dp = 0.dp
+) {
+    val metrics by remember(scrollState) {
+        derivedStateOf { scrollState.scrollbarMetrics() }
+    }
+    val canScroll by remember(scrollState) {
+        derivedStateOf { scrollState.maxValue > 0 }
+    }
+    val scope = rememberCoroutineScope()
+    var scrollJob by remember { mutableStateOf<Job?>(null) }
+
+    ScrollbarOverlay(
+        metrics = metrics,
+        canScroll = canScroll,
+        isScrolling = scrollState.isScrollInProgress,
+        alphabetEnabled = false,
+        modifier = modifier,
+        extraBottomPadding = extraBottomPadding,
+        onSeek = { progress ->
+            scrollJob?.cancel()
+            scrollJob = scope.launch {
+                scrollState.scrollTo((progress * scrollState.maxValue).roundToInt())
+            }
+            null
+        }
+    )
+}
+
+/**
+ * Shared track, thumb and callout. [onSeek] receives the dragged position as a 0..1 fraction and
+ * returns the label to show on the callout, or null when there is nothing to announce.
+ */
+@Composable
+private fun BoxScope.ScrollbarOverlay(
+    metrics: ScrollbarMetrics,
+    canScroll: Boolean,
+    isScrolling: Boolean,
+    alphabetEnabled: Boolean,
+    onSeek: (progress: Float) -> String?,
+    modifier: Modifier = Modifier,
+    extraBottomPadding: Dp = 0.dp
+) {
+    val rtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     val sideAlignment = if (rtl) Alignment.CenterStart else Alignment.CenterEnd
     val topSideAlignment = if (rtl) Alignment.TopStart else Alignment.TopEnd
     val colors = MaterialTheme.colorScheme
     val trackColor = colors.outlineVariant.copy(alpha = 0.34f)
     val thumbColor = colors.primary.copy(alpha = 0.78f)
     val activeTrackColor = colors.primary.copy(alpha = 0.24f)
-    val scrollScope = rememberCoroutineScope()
-    var scrollJob by remember { mutableStateOf<Job?>(null) }
     var dragging by remember { mutableStateOf(false) }
-    var activeAlphabetLabel by remember { mutableStateOf<String?>(null) }
+    var activeLabel by remember { mutableStateOf<String?>(null) }
     var indicatorVisible by remember { mutableStateOf(false) }
 
-    LaunchedEffect(canScroll, listState.isScrollInProgress, dragging) {
+    LaunchedEffect(canScroll, isScrolling, dragging) {
         if (!canScroll) {
             indicatorVisible = false
             return@LaunchedEffect
         }
-        if (listState.isScrollInProgress || dragging) {
+        if (isScrolling || dragging) {
             indicatorVisible = true
         } else {
-            delay(ScrollbarIdleTimeoutMs)
+            delay(ScrollbarIdleTimeout)
             indicatorVisible = false
         }
     }
 
-    val currentAlphabetTarget by remember(listState, alphabetTargets) {
-        derivedStateOf {
-            val firstVisibleIndex = listState.firstVisibleItemIndex
-            alphabetTargets.lastOrNull { it.listIndex <= firstVisibleIndex }
-                ?: alphabetTargets.firstOrNull()
-        }
-    }
-    val alphabetEnabled = alphabetMode && alphabetTargets.isNotEmpty()
-    val shownAlphabetLabel = activeAlphabetLabel ?: currentAlphabetTarget?.label
     val visibilityAlpha by animateFloatAsState(
         targetValue = if (canScroll && indicatorVisible) 1f else 0f,
         animationSpec = tween(160),
-        label = "home_scrollbar_alpha"
+        label = "list_scrollbar_alpha"
     )
 
     if (!canScroll) return
@@ -178,45 +237,25 @@ internal fun BoxScope.HomeListScrollbar(
     ) {
         val density = LocalDensity.current
         val trackHeightPx = with(density) { maxHeight.toPx() }.coerceAtLeast(1f)
-        val bubbleHeightPx = with(density) { AlphabetBubbleHeight.toPx() }
-        val alphabetThumbHeightPx = with(density) { AlphabetThumbHeight.toPx() }
-        val minThumbHeightPx = with(density) { ScrollbarMinThumbHeight.toPx() }
-        val thumbHeightPx = (trackHeightPx * metrics.thumbFraction)
-            .coerceIn(minThumbHeightPx, trackHeightPx)
-        val visibleThumbHeightPx = if (alphabetEnabled) alphabetThumbHeightPx else thumbHeightPx
-        // Travel is measured against the thumb actually drawn, otherwise the shorter alphabet
-        // thumb stops short of the track end
-        val thumbTopPx = ((trackHeightPx - visibleThumbHeightPx) * metrics.progress)
+        // The alphabet thumb is a fixed handle; the plain one grows with the visible fraction
+        val thumbHeightPx = with(density) {
+            if (alphabetEnabled) {
+                AlphabetThumbHeight.toPx()
+            } else {
+                (trackHeightPx * metrics.thumbFraction)
+                    .coerceIn(ScrollbarMinThumbHeight.toPx(), trackHeightPx)
+            }
+        }
+        val thumbTopPx = ((trackHeightPx - thumbHeightPx) * metrics.progress)
             .roundToInt()
             .coerceAtLeast(0)
-        val maxBubbleTopPx = (trackHeightPx - bubbleHeightPx).coerceAtLeast(0f).roundToInt()
-        val bubbleTopPx = (thumbTopPx + visibleThumbHeightPx / 2f - bubbleHeightPx / 2f)
-            .roundToInt()
-            .coerceIn(0, maxBubbleTopPx)
 
         Box(
             modifier = Modifier
                 .align(sideAlignment)
                 .fillMaxHeight()
                 .width(ScrollbarTouchWidth)
-                .pointerInput(alphabetEnabled, alphabetTargets, trackHeightPx) {
-                    fun scrollToOffset(y: Float) {
-                        val progress = (y / trackHeightPx).coerceIn(0f, 1f)
-                        val targetIndex = if (alphabetEnabled) {
-                            val targetIndex = (progress * alphabetTargets.lastIndex)
-                                .roundToInt()
-                                .coerceIn(alphabetTargets.indices)
-                            val target = alphabetTargets[targetIndex]
-                            activeAlphabetLabel = target.label
-                            target.listIndex
-                        } else {
-                            val lastIndex = (listState.layoutInfo.totalItemsCount - 1).coerceAtLeast(0)
-                            (progress * lastIndex).roundToInt().coerceIn(0, lastIndex)
-                        }
-                        scrollJob?.cancel()
-                        scrollJob = scrollScope.launch { listState.scrollToItem(targetIndex) }
-                    }
-
+                .pointerInput(alphabetEnabled, trackHeightPx) {
                     awaitEachGesture {
                         // The strip overlays full-width rows, so nothing is consumed until the
                         // gesture is clearly a vertical drag. A tap still reaches the row below
@@ -231,18 +270,18 @@ internal fun BoxScope.HomeListScrollbar(
                                 dragStarted = true
                                 dragging = true
                             }
-                            scrollToOffset(change.position.y)
+                            activeLabel = onSeek((change.position.y / trackHeightPx).coerceIn(0f, 1f))
                             change.consume()
                         }
                         if (dragStarted) {
                             dragging = false
-                            activeAlphabetLabel = null
+                            activeLabel = null
                         }
                     }
                 }
         )
 
-        // Track, thumb and callout mirror the list position rather than carrying information of
+        // Track, thumb and callout mirror the scroll position rather than carrying information of
         // their own, and dragging is unavailable under touch exploration, so screen readers get
         // nothing useful from them
         Box(
@@ -261,31 +300,42 @@ internal fun BoxScope.HomeListScrollbar(
                     .clip(RoundedCornerShape(50))
                     .background(if (alphabetEnabled) activeTrackColor else trackColor)
             )
+        }
+
+        // Thumb and callout share one anchor as tall as the thumb, so centring the callout on it
+        // is a layout constraint rather than two offsets that have to agree. The anchor spans the
+        // full overlay width, otherwise the callout would be squeezed into the thumb's column
+        Box(
+            modifier = Modifier
+                .align(topSideAlignment)
+                .offset { IntOffset(x = 0, y = thumbTopPx) }
+                .fillMaxWidth()
+                .height(with(density) { thumbHeightPx.toDp() })
+                .graphicsLayer { alpha = visibilityAlpha }
+                .clearAndSetSemantics { },
+            contentAlignment = sideAlignment
+        ) {
             Box(
                 modifier = Modifier
-                    .align(topSideAlignment)
-                    .offset { IntOffset(x = 0, y = thumbTopPx) }
-                    .width(if (alphabetEnabled) ScrollbarTrackWidth + AlphabetThumbExtraWidth else ScrollbarTrackWidth)
-                    .height(with(density) { visibleThumbHeightPx.toDp() })
+                    .fillMaxHeight()
+                    .width(ScrollbarTrackWidth)
                     .clip(RoundedCornerShape(50))
                     .background(thumbColor)
             )
-        }
 
-        if (alphabetEnabled && dragging && shownAlphabetLabel != null) {
-            AlphabetScrollCallout(
-                label = shownAlphabetLabel,
-                rtl = rtl,
-                modifier = Modifier
-                    .align(topSideAlignment)
-                    .offset { IntOffset(x = 0, y = bubbleTopPx) }
-                    .graphicsLayer {
-                        alpha = visibilityAlpha
-                        scaleX = 0.94f + visibilityAlpha * 0.06f
-                        scaleY = 0.94f + visibilityAlpha * 0.06f
-                    }
-                    .clearAndSetSemantics { }
-            )
+            val label = activeLabel
+            if (dragging && label != null) {
+                AlphabetScrollCallout(
+                    label = label,
+                    rtl = rtl,
+                    modifier = Modifier
+                        .align(sideAlignment)
+                        .graphicsLayer {
+                            scaleX = 0.94f + visibilityAlpha * 0.06f
+                            scaleY = 0.94f + visibilityAlpha * 0.06f
+                        }
+                )
+            }
         }
     }
 }
@@ -352,6 +402,16 @@ private fun LazyListState.scrollbarMetrics(): ScrollbarMetrics {
     return ScrollbarMetrics(
         progress = (scrollOffset / maxScrollOffset).coerceIn(0f, 1f),
         thumbFraction = (viewportSize / contentSize).coerceIn(MinThumbFraction, 1f)
+    )
+}
+
+private fun ScrollState.scrollbarMetrics(): ScrollbarMetrics {
+    if (maxValue <= 0) return ScrollbarMetrics(progress = 0f, thumbFraction = 1f)
+
+    val contentSize = (viewportSize + maxValue).coerceAtLeast(1)
+    return ScrollbarMetrics(
+        progress = (value.toFloat() / maxValue).coerceIn(0f, 1f),
+        thumbFraction = (viewportSize.toFloat() / contentSize).coerceIn(MinThumbFraction, 1f)
     )
 }
 

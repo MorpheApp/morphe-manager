@@ -1586,7 +1586,7 @@ fun MainAppsSection(
                                 )
                             }
 
-                            HomeListScrollbar(
+                            ListScrollbar(
                                 listState = listState,
                                 alphabetTargets = scrollTargets,
                                 alphabetMode = alphabetScrollMode,

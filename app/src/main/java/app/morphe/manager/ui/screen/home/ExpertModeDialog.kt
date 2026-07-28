@@ -269,6 +269,8 @@ fun ExpertModeDialog(
                             )
                         }
 
+                        ListScrollbar(scrollState = singleBundleScroll)
+
                         ScrollToTopButton(scrollState = singleBundleScroll)
                     }
                 }
@@ -394,6 +396,9 @@ fun ExpertModeDialog(
                                         }
                                     )
                                 }
+
+                                ListScrollbar(scrollState = pageScroll)
+
                                 ScrollToTopButton(scrollState = pageScroll)
                             }
                         }

@@ -377,7 +377,7 @@ fun BundleManagementSheet(
                         }
                     }
 
-                    HomeListScrollbar(
+                    ListScrollbar(
                         listState = listState,
                         alphabetTargets = sourceScrollTargets,
                         alphabetMode = alphabetScrollMode,
