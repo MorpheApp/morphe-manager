@@ -149,7 +149,10 @@ fun LicensesDialog(onDismiss: () -> Unit) {
                 modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
             )
 
-            ScrollToTopButton(listState = lazyListState)
+            ScrollToTopButton(
+                listState = lazyListState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
         }
     }
 }

@@ -936,7 +936,10 @@ private fun ApkManagementDialogContent(
                 modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
             )
 
-            ScrollToTopButton(listState = listState)
+            ScrollToTopButton(
+                listState = listState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
         }
     }
 

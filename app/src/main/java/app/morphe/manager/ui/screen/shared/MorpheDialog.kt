@@ -71,8 +71,8 @@ enum class DialogTitleActionStyle {
  * @param titleTrailingContent Optional content displayed after the title.
  * @param footer Optional footer content.
  * @param dismissOnClickOutside Whether clicking outside dismisses the dialog.
- * @param scrollable Whether to wrap content in verticalScroll and draw a [ListScrollbar] over it.
- * Set to false for LazyColumn, where the caller wires up its own scroll state and scrollbar. Default is true.
+ * @param scrollable Whether to wrap content in verticalScroll and draw a [ListScrollbar] and [ScrollToTopButton] over it.
+ * Set to false for LazyColumn, where the caller wires up its own scroll state, scrollbar and button. Default is true.
  * @param padding Outer padding mode. Default is [DialogPadding.Normal].
  * @param contentArrangement Vertical arrangement of the dialog content.
  * @param content Dialog content.
@@ -397,6 +397,7 @@ private fun DialogContent(
 
                     if (scrollState != null) {
                         ListScrollbar(scrollState = scrollState)
+                        ScrollToTopButton(scrollState = scrollState)
                     }
                 }
 

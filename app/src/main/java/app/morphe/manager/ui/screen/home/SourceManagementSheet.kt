@@ -384,7 +384,10 @@ fun BundleManagementSheet(
                         extraBottomPadding = SourceListScrollbarBottomInset
                     )
 
-                    ScrollToTopButton(listState = listState)
+                    ScrollToTopButton(
+                        listState = listState,
+                        extraBottomPadding = SourceListScrollbarBottomInset
+                    )
                 }
             }
         }

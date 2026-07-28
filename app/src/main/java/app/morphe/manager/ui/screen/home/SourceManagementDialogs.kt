@@ -673,7 +673,10 @@ fun BundlePatchesDialog(
                         modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
                     )
 
-                    ScrollToTopButton(listState = listState)
+                    ScrollToTopButton(
+                        listState = listState,
+                        modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+                    )
                 }
             }
         }
@@ -1191,7 +1194,10 @@ private fun BundleChangelogContent(
                             modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
                         )
 
-                        ScrollToTopButton(listState = listState)
+                        ScrollToTopButton(
+                            listState = listState,
+                            modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+                        )
                     }
                 }
             }

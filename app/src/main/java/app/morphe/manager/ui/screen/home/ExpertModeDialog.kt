@@ -275,7 +275,10 @@ fun ExpertModeDialog(
                             modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
                         )
 
-                        ScrollToTopButton(scrollState = singleBundleScroll)
+                        ScrollToTopButton(
+                            scrollState = singleBundleScroll,
+                            modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+                        )
                     }
                 }
             } else {
@@ -418,7 +421,10 @@ fun ExpertModeDialog(
                                 modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
                             )
 
-                            ScrollToTopButton(scrollState = currentPageScroll)
+                            ScrollToTopButton(
+                                scrollState = currentPageScroll,
+                                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+                            )
                         }
                     }
                 }
