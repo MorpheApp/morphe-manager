@@ -18,7 +18,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,16 +25,18 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.ui.model.HomeAppItem
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Locale
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 private val ScrollbarEdgePadding = 4.dp
@@ -45,9 +46,16 @@ private val ScrollbarOverlayWidth = 104.dp
 private val ScrollbarTrackWidth = 4.dp
 private val ScrollbarMinThumbHeight = 36.dp
 private val AlphabetThumbHeight = 28.dp
+private val AlphabetThumbExtraWidth = 2.dp
 private val AlphabetBubbleWidth = 58.dp
 private val AlphabetBubbleHeight = 42.dp
 private val AlphabetBubbleGap = 14.dp
+
+/** How long the scrollbar stays visible after scrolling stops. */
+private const val ScrollbarIdleTimeoutMs = 650L
+
+/** Keeps the thumb grabbable on very long lists, where the true ratio would be a few pixels. */
+private const val MinThumbFraction = 0.08f
 
 @Immutable
 internal data class HomeScrollTarget(
@@ -55,52 +63,48 @@ internal data class HomeScrollTarget(
     val label: String
 )
 
-internal fun <T> buildIndexedScrollTargets(
-    items: List<T>,
-    label: (T) -> String
+/**
+ * Collects the first list index for every distinct leading letter. [emit] walks the rendered
+ * rows in order, reporting each labelled row alongside the list index it occupies.
+ */
+private fun buildScrollTargets(
+    emit: ((listIndex: Int, label: String) -> Unit) -> Unit
 ): List<HomeScrollTarget> {
     val seenLabels = HashSet<String>()
     return buildList {
-        items.forEachIndexed { index, item ->
-            val targetLabel = label(item).scrollLabel()
+        emit { listIndex, label ->
+            val targetLabel = label.scrollLabel()
             if (seenLabels.add(targetLabel)) {
-                add(
-                    HomeScrollTarget(
-                        listIndex = index,
-                        label = targetLabel
-                    )
-                )
+                add(HomeScrollTarget(listIndex = listIndex, label = targetLabel))
             }
         }
     }
+}
+
+internal fun <T> buildIndexedScrollTargets(
+    items: List<T>,
+    label: (T) -> String
+): List<HomeScrollTarget> = buildScrollTargets { emit ->
+    items.forEachIndexed { index, item -> emit(index, label(item)) }
 }
 
 internal fun buildFlatHomeScrollTargets(items: List<HomeAppItem>): List<HomeScrollTarget> =
-    buildIndexedScrollTargets(items) { item -> item.displayName.ifBlank { item.packageName } }
+    buildIndexedScrollTargets(items) { item -> item.scrollLabelSource() }
 
-internal fun buildGroupedHomeScrollTargets(groups: List<HomeCategoryGroup>): List<HomeScrollTarget> {
-    var listIndex = 0
-    val seenLabels = HashSet<String>()
-    return buildList {
+internal fun buildGroupedHomeScrollTargets(groups: List<HomeCategoryGroup>): List<HomeScrollTarget> =
+    buildScrollTargets { emit ->
+        var listIndex = 0
         groups.forEach { group ->
             listIndex += 1 // Header row
-            if (!group.collapsed) {
-                group.items.forEach { item ->
-                    val targetLabel = item.displayName.ifBlank { item.packageName }.scrollLabel()
-                    if (seenLabels.add(targetLabel)) {
-                        add(
-                            HomeScrollTarget(
-                                listIndex = listIndex,
-                                label = targetLabel
-                            )
-                        )
-                    }
-                    listIndex += 1
-                }
+            if (group.collapsed) return@forEach
+            group.items.forEach { item ->
+                emit(listIndex, item.scrollLabelSource())
+                listIndex += 1
             }
         }
     }
-}
+
+private fun HomeAppItem.scrollLabelSource(): String = displayName.ifBlank { packageName }
 
 @Composable
 internal fun BoxScope.HomeListScrollbar(
@@ -117,10 +121,9 @@ internal fun BoxScope.HomeListScrollbar(
         derivedStateOf { listState.canScrollBackward || listState.canScrollForward }
     }
     val layoutDirection = LocalLayoutDirection.current
-    val sideAlignment = if (layoutDirection == LayoutDirection.Rtl) Alignment.CenterStart else Alignment.CenterEnd
-    val topSideAlignment = if (layoutDirection == LayoutDirection.Rtl) Alignment.TopStart else Alignment.TopEnd
-    val trackAlignment = if (layoutDirection == LayoutDirection.Rtl) Alignment.CenterStart else Alignment.CenterEnd
-    val thumbAlignment = if (layoutDirection == LayoutDirection.Rtl) Alignment.TopStart else Alignment.TopEnd
+    val rtl = layoutDirection == LayoutDirection.Rtl
+    val sideAlignment = if (rtl) Alignment.CenterStart else Alignment.CenterEnd
+    val topSideAlignment = if (rtl) Alignment.TopStart else Alignment.TopEnd
     val colors = MaterialTheme.colorScheme
     val trackColor = colors.outlineVariant.copy(alpha = 0.34f)
     val thumbColor = colors.primary.copy(alpha = 0.78f)
@@ -139,7 +142,7 @@ internal fun BoxScope.HomeListScrollbar(
         if (listState.isScrollInProgress || dragging) {
             indicatorVisible = true
         } else {
-            delay(650)
+            delay(ScrollbarIdleTimeoutMs)
             indicatorVisible = false
         }
     }
@@ -181,7 +184,9 @@ internal fun BoxScope.HomeListScrollbar(
         val thumbHeightPx = (trackHeightPx * metrics.thumbFraction)
             .coerceIn(minThumbHeightPx, trackHeightPx)
         val visibleThumbHeightPx = if (alphabetEnabled) alphabetThumbHeightPx else thumbHeightPx
-        val thumbTopPx = ((trackHeightPx - thumbHeightPx) * metrics.progress)
+        // Travel is measured against the thumb actually drawn, otherwise the shorter alphabet
+        // thumb stops short of the track end
+        val thumbTopPx = ((trackHeightPx - visibleThumbHeightPx) * metrics.progress)
             .roundToInt()
             .coerceAtLeast(0)
         val maxBubbleTopPx = (trackHeightPx - bubbleHeightPx).coerceAtLeast(0f).roundToInt()
@@ -194,7 +199,7 @@ internal fun BoxScope.HomeListScrollbar(
                 .align(sideAlignment)
                 .fillMaxHeight()
                 .width(ScrollbarTouchWidth)
-                .pointerInput(alphabetEnabled, alphabetTargets, trackHeightPx, listState.layoutInfo.totalItemsCount) {
+                .pointerInput(alphabetEnabled, alphabetTargets, trackHeightPx) {
                     fun scrollToOffset(y: Float) {
                         val progress = (y / trackHeightPx).coerceIn(0f, 1f)
                         val targetIndex = if (alphabetEnabled) {
@@ -213,31 +218,41 @@ internal fun BoxScope.HomeListScrollbar(
                     }
 
                     awaitEachGesture {
+                        // The strip overlays full-width rows, so nothing is consumed until the
+                        // gesture is clearly a vertical drag. A tap still reaches the row below
                         val down = awaitFirstDown(requireUnconsumed = false)
-                        dragging = true
-                        scrollToOffset(down.position.y)
-                        down.consume()
-                        val pointerId = down.id
+                        var dragStarted = false
                         while (true) {
                             val event = awaitPointerEvent()
-                            val change = event.changes.firstOrNull { it.id == pointerId } ?: break
+                            val change = event.changes.firstOrNull { it.id == down.id } ?: break
                             if (!change.pressed) break
+                            if (!dragStarted) {
+                                if (abs(change.position.y - down.position.y) < viewConfiguration.touchSlop) continue
+                                dragStarted = true
+                                dragging = true
+                            }
                             scrollToOffset(change.position.y)
                             change.consume()
                         }
-                        dragging = false
-                        activeAlphabetLabel = null
+                        if (dragStarted) {
+                            dragging = false
+                            activeAlphabetLabel = null
+                        }
                     }
                 }
         )
 
+        // Track, thumb and callout mirror the list position rather than carrying information of
+        // their own, and dragging is unavailable under touch exploration, so screen readers get
+        // nothing useful from them
         Box(
             modifier = Modifier
                 .align(sideAlignment)
                 .fillMaxHeight()
                 .width(ScrollbarTouchWidth)
-                .graphicsLayer { alpha = visibilityAlpha },
-            contentAlignment = trackAlignment
+                .graphicsLayer { alpha = visibilityAlpha }
+                .clearAndSetSemantics { },
+            contentAlignment = sideAlignment
         ) {
             Box(
                 modifier = Modifier
@@ -246,33 +261,21 @@ internal fun BoxScope.HomeListScrollbar(
                     .clip(RoundedCornerShape(50))
                     .background(if (alphabetEnabled) activeTrackColor else trackColor)
             )
-            if (!alphabetEnabled) {
-                Box(
-                    modifier = Modifier
-                        .align(thumbAlignment)
-                        .offset { IntOffset(x = 0, y = thumbTopPx) }
-                        .width(ScrollbarTrackWidth)
-                        .height(with(density) { thumbHeightPx.toDp() })
-                        .clip(RoundedCornerShape(50))
-                        .background(thumbColor)
-                )
-            } else {
-                Box(
-                    modifier = Modifier
-                        .align(thumbAlignment)
-                        .offset { IntOffset(x = 0, y = thumbTopPx) }
-                        .width(ScrollbarTrackWidth + 2.dp)
-                        .height(AlphabetThumbHeight)
-                        .clip(RoundedCornerShape(50))
-                        .background(thumbColor)
-                )
-            }
+            Box(
+                modifier = Modifier
+                    .align(topSideAlignment)
+                    .offset { IntOffset(x = 0, y = thumbTopPx) }
+                    .width(if (alphabetEnabled) ScrollbarTrackWidth + AlphabetThumbExtraWidth else ScrollbarTrackWidth)
+                    .height(with(density) { visibleThumbHeightPx.toDp() })
+                    .clip(RoundedCornerShape(50))
+                    .background(thumbColor)
+            )
         }
 
         if (alphabetEnabled && dragging && shownAlphabetLabel != null) {
             AlphabetScrollCallout(
                 label = shownAlphabetLabel,
-                rtl = layoutDirection == LayoutDirection.Rtl,
+                rtl = rtl,
                 modifier = Modifier
                     .align(topSideAlignment)
                     .offset { IntOffset(x = 0, y = bubbleTopPx) }
@@ -281,6 +284,7 @@ internal fun BoxScope.HomeListScrollbar(
                         scaleX = 0.94f + visibilityAlpha * 0.06f
                         scaleY = 0.94f + visibilityAlpha * 0.06f
                     }
+                    .clearAndSetSemantics { }
             )
         }
     }
@@ -347,16 +351,15 @@ private fun LazyListState.scrollbarMetrics(): ScrollbarMetrics {
 
     return ScrollbarMetrics(
         progress = (scrollOffset / maxScrollOffset).coerceIn(0f, 1f),
-        thumbFraction = (viewportSize / contentSize).coerceIn(0.08f, 1f)
+        thumbFraction = (viewportSize / contentSize).coerceIn(MinThumbFraction, 1f)
     )
 }
 
+/**
+ * Leading letter shown on the callout, or `#` for names that do not start with one.
+ * Uses the root locale to stay consistent with the case-insensitive list sorting.
+ */
 private fun String.scrollLabel(): String {
-    val source = trim()
-    val first = source.firstOrNull { !it.isWhitespace() } ?: return "#"
-    return if (first.isLetter()) {
-        first.uppercase(Locale.getDefault())
-    } else {
-        "#"
-    }
+    val first = trim().firstOrNull { !it.isWhitespace() } ?: return "#"
+    return if (first.isLetter()) first.uppercase(Locale.ROOT) else "#"
 }

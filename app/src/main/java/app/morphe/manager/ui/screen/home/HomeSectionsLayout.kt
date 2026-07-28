@@ -1082,27 +1082,27 @@ fun MainAppsSection(
             HomeAppCategoryViewMode.ALL_APPS -> emptyList()
         }
     }
+    // Reordering and the Sources grouping have no alphabetical order to jump through
+    val alphabetScrollMode = (apps.sortMode == HomeAppSortMode.NAME_ASC ||
+            apps.sortMode == HomeAppSortMode.NAME_DESC) &&
+            appGrouping != HomeAppCategoryViewMode.SOURCES &&
+            !isReorderMode.value &&
+            !isCategoryReorderMode.value
     val scrollTargets = remember(
+        alphabetScrollMode,
         stableLoadingState.value,
         homeAppItems.isEmpty(),
-        isReorderMode.value,
         isGroupedAppView,
-        reorderItems,
         filteredItems,
         displayedAppGroups
     ) {
-        if (stableLoadingState.value && homeAppItems.isEmpty()) {
-            emptyList()
-        } else if (isReorderMode.value) {
-            buildFlatHomeScrollTargets(reorderItems)
-        } else if (isGroupedAppView) {
-            buildGroupedHomeScrollTargets(displayedAppGroups)
-        } else {
-            buildFlatHomeScrollTargets(filteredItems)
+        when {
+            !alphabetScrollMode -> emptyList()
+            stableLoadingState.value && homeAppItems.isEmpty() -> emptyList()
+            isGroupedAppView -> buildGroupedHomeScrollTargets(displayedAppGroups)
+            else -> buildFlatHomeScrollTargets(filteredItems)
         }
     }
-    val alphabetScrollbar = apps.sortMode == HomeAppSortMode.NAME_ASC ||
-            apps.sortMode == HomeAppSortMode.NAME_DESC
 
     // Cards that arrive after the first frame can sort above the anchor, and LazyColumn keeps
     // the keyed first visible item in place, leaving the list scrolled past its top. Pin to the
@@ -1589,10 +1589,7 @@ fun MainAppsSection(
                             HomeListScrollbar(
                                 listState = listState,
                                 alphabetTargets = scrollTargets,
-                                alphabetMode = alphabetScrollbar &&
-                                        appGrouping != HomeAppCategoryViewMode.SOURCES &&
-                                        !isReorderMode.value &&
-                                        !isCategoryReorderMode.value,
+                                alphabetMode = alphabetScrollMode,
                                 extraBottomPadding = if (isMultibarVisible) 96.dp else 0.dp
                             )
 
