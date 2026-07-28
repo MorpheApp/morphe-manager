@@ -103,8 +103,11 @@ fun BoxScope.ListScrollbar(
     alphabetMode: Boolean = false,
     extraBottomPadding: Dp = 0.dp
 ) {
+    // Real sizes of every item measured so far, kept across scrolling so expanded cards keep
+    // contributing their true height to the estimate even after they leave the viewport
+    val sizeCache = remember(listState) { mutableMapOf<Int, Int>() }
     val metrics = remember(listState) {
-        derivedStateOf { listState.scrollbarMetrics() }
+        derivedStateOf { listState.scrollbarMetrics(sizeCache) }
     }
     val thumbFraction by remember(metrics) {
         derivedStateOf { metrics.value.thumbFraction }
@@ -387,19 +390,34 @@ private data class ScrollbarMetrics(
     val thumbFraction: Float
 )
 
-private fun LazyListState.scrollbarMetrics(): ScrollbarMetrics {
+private fun LazyListState.scrollbarMetrics(sizeCache: MutableMap<Int, Int>): ScrollbarMetrics {
     val info = layoutInfo
     val visibleItems = info.visibleItemsInfo
     val totalItems = info.totalItemsCount
     if (visibleItems.isEmpty() || totalItems <= 0) {
         return ScrollbarMetrics(progress = 0f, thumbFraction = 1f)
     }
+    // Stale tail entries would keep inflating the estimate after the list shrinks
+    if (sizeCache.keys.any { it >= totalItems }) {
+        sizeCache.keys.retainAll { it < totalItems }
+    }
+    visibleItems.forEach { sizeCache[it.index] = it.size }
 
     val viewportSize = (info.viewportEndOffset - info.viewportStartOffset).coerceAtLeast(1)
-    val averageItemSize = visibleItems.sumOf { it.size }.toFloat() / visibleItems.size
-    val contentSize = (averageItemSize * totalItems + info.beforeContentPadding + info.afterContentPadding)
+    val averageItemSize = sizeCache.values.sum().toFloat() / sizeCache.size
+    // Both sums use the measured size where one is known and the average as the fallback, so an
+    // expanded card advances the thumb by its real height while it scrolls past instead of
+    // surging ahead on the offset and snapping back when the first visible index increments
+    var scrollOffset = firstVisibleItemScrollOffset.toFloat()
+    for (index in 0 until firstVisibleItemIndex) {
+        scrollOffset += sizeCache[index]?.toFloat() ?: averageItemSize
+    }
+    var estimatedItemsSize = 0f
+    for (index in 0 until totalItems) {
+        estimatedItemsSize += sizeCache[index]?.toFloat() ?: averageItemSize
+    }
+    val contentSize = (estimatedItemsSize + info.beforeContentPadding + info.afterContentPadding)
         .coerceAtLeast(viewportSize.toFloat())
-    val scrollOffset = firstVisibleItemIndex * averageItemSize + firstVisibleItemScrollOffset
     val maxScrollOffset = (contentSize - viewportSize).coerceAtLeast(1f)
 
     return ScrollbarMetrics(
