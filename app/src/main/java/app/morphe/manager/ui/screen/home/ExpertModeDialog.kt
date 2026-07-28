@@ -7,6 +7,7 @@ package app.morphe.manager.ui.screen.home
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -269,7 +270,10 @@ fun ExpertModeDialog(
                             )
                         }
 
-                        ListScrollbar(scrollState = singleBundleScroll)
+                        ListScrollbar(
+                            scrollState = singleBundleScroll,
+                            modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+                        )
 
                         ScrollToTopButton(scrollState = singleBundleScroll)
                     }
@@ -278,6 +282,10 @@ fun ExpertModeDialog(
                 // Multiple bundles tab layout
                 val pagerState = rememberPagerState { allPatchesInfo.size }
                 val coroutineScope = rememberCoroutineScope()
+                // Hoisted outside the pager so the scrollbar overlay below can track whichever
+                // page is current. HorizontalPager clips each page to its own bounds, so a
+                // scrollbar drawn inside a page can never bleed out to the true dialog edge
+                val pageScrollStates = remember { mutableStateMapOf<Int, ScrollState>() }
 
                 Column(
                     modifier = Modifier
@@ -361,25 +369,27 @@ fun ExpertModeDialog(
                     }
 
                     // Pager
-                    HorizontalPager(
-                        state = pagerState,
+                    Box(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f)
-                    ) { pageIndex ->
-                        val (bundle, _) = allPatchesInfo.getOrNull(pageIndex) ?: return@HorizontalPager
-                        val patches = filteredPatchesInfo.firstOrNull { it.first.uid == bundle.uid }?.second
+                    ) {
+                        HorizontalPager(
+                            state = pagerState,
+                            modifier = Modifier.fillMaxSize()
+                        ) { pageIndex ->
+                            val (bundle, _) = allPatchesInfo.getOrNull(pageIndex) ?: return@HorizontalPager
+                            val patches = filteredPatchesInfo.firstOrNull { it.first.uid == bundle.uid }?.second
 
-                        if (patches == null) {
-                            // No search results for this bundle
-                            EmptyState(
-                                message = stringResource(R.string.expert_mode_no_results),
-                                icon = Icons.Outlined.SearchOff,
-                                modifier = Modifier.fillMaxHeight()
-                            )
-                        } else {
-                            val pageScroll = rememberScrollState()
-                            Box(modifier = Modifier.fillMaxSize()) {
+                            if (patches == null) {
+                                // No search results for this bundle
+                                EmptyState(
+                                    message = stringResource(R.string.expert_mode_no_results),
+                                    icon = Icons.Outlined.SearchOff,
+                                    modifier = Modifier.fillMaxHeight()
+                                )
+                            } else {
+                                val pageScroll = pageScrollStates.getOrPut(pageIndex) { ScrollState(0) }
                                 Column(
                                     modifier = Modifier
                                         .fillMaxSize()
@@ -396,11 +406,19 @@ fun ExpertModeDialog(
                                         }
                                     )
                                 }
-
-                                ListScrollbar(scrollState = pageScroll)
-
-                                ScrollToTopButton(scrollState = pageScroll)
                             }
+                        }
+
+                        // Single overlay for the whole pager, tracking whichever page is current,
+                        // instead of one per page - a page-local scrollbar would be clipped by the
+                        // pager before it could reach the true dialog edge
+                        pageScrollStates[pagerState.currentPage]?.let { currentPageScroll ->
+                            ListScrollbar(
+                                scrollState = currentPageScroll,
+                                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+                            )
+
+                            ScrollToTopButton(scrollState = currentPageScroll)
                         }
                     }
                 }

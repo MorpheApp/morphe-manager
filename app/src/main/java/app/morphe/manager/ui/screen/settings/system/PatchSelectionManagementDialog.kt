@@ -486,6 +486,11 @@ private fun SelectionList(
             }
         }
 
+        ListScrollbar(
+            listState = listState,
+            modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+        )
+
         ScrollToTopButton(listState = listState)
     }
 }

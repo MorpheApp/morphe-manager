@@ -668,6 +668,11 @@ fun BundlePatchesDialog(
                         }
                     }
 
+                    ListScrollbar(
+                        listState = listState,
+                        modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+                    )
+
                     ScrollToTopButton(listState = listState)
                 }
             }
@@ -1180,6 +1185,11 @@ private fun BundleChangelogContent(
                                 onExpand = onExpandOlder
                             )
                         }
+
+                        ListScrollbar(
+                            listState = listState,
+                            modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+                        )
 
                         ScrollToTopButton(listState = listState)
                     }

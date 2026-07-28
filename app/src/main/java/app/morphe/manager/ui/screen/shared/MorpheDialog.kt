@@ -41,6 +41,9 @@ val LocalDialogTextColor = compositionLocalOf { Color.White }
 /** Provides the secondary/hint text color for dialog content. */
 val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha = 0.7f) }
 
+/** Horizontal inset of the active [DialogPadding], for offsetting a caller-managed [ListScrollbar] out to the true dialog edge. */
+val LocalDialogHorizontalInset = compositionLocalOf { 0.dp }
+
 
 /** Controls outer padding and inset behavior of [MorpheDialog]. */
 enum class DialogPadding {
@@ -68,7 +71,8 @@ enum class DialogTitleActionStyle {
  * @param titleTrailingContent Optional content displayed after the title.
  * @param footer Optional footer content.
  * @param dismissOnClickOutside Whether clicking outside dismisses the dialog.
- * @param scrollable Whether to wrap content in verticalScroll. Set to false for LazyColumn. Default is true.
+ * @param scrollable Whether to wrap content in verticalScroll and draw a [ListScrollbar] over it.
+ * Set to false for LazyColumn, where the caller wires up its own scroll state and scrollbar. Default is true.
  * @param padding Outer padding mode. Default is [DialogPadding.Normal].
  * @param contentArrangement Vertical arrangement of the dialog content.
  * @param content Dialog content.
@@ -307,22 +311,30 @@ private fun DialogContent(
         return
     }
 
+    // Horizontal inset is applied per-section below rather than on this outer Box, so the content
+    // Box stays full width and its ListScrollbar can sit flush with the dialog edge instead of
+    // being pushed inward by the padding
+    val horizontalPadding = if (padding == DialogPadding.Compact) {
+        MorpheDefaults.ContentPadding
+    } else {
+        MorpheDefaults.ContentPaddingExpanded
+    }
     // Compact mode zeroes its top padding when there is no title to fill it
-    val outerPadding = when (padding) {
-        DialogPadding.Compact -> PaddingValues(
-            start = MorpheDefaults.ContentPadding,
-            end = MorpheDefaults.ContentPadding,
-            top = if (title != null) MorpheDefaults.ContentPadding else 0.dp,
-            bottom = MorpheDefaults.ContentPadding
-        )
-        else -> PaddingValues(MorpheDefaults.ContentPaddingExpanded)
+    val topPadding = when (padding) {
+        DialogPadding.Compact -> if (title != null) MorpheDefaults.ContentPadding else 0.dp
+        else -> MorpheDefaults.ContentPaddingExpanded
+    }
+    val bottomPadding = if (padding == DialogPadding.Compact) {
+        MorpheDefaults.ContentPadding
+    } else {
+        MorpheDefaults.ContentPaddingExpanded
     }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .systemBarsPadding()
-            .padding(outerPadding)
+            .padding(top = topPadding, bottom = bottomPadding)
             .pointerInput(Unit) {
                 detectTapGestures { /* Consume clicks */ }
             },
@@ -331,7 +343,8 @@ private fun DialogContent(
         CompositionLocalProvider(
             LocalDialogTextColor provides textColor,
             LocalDialogSecondaryTextColor provides secondaryTextColor,
-            LocalContentColor provides textColor
+            LocalContentColor provides textColor,
+            LocalDialogHorizontalInset provides horizontalPadding
         ) {
             Column(
                 modifier = Modifier
@@ -345,7 +358,7 @@ private fun DialogContent(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(bottom = MorpheDefaults.ContentPadding),
+                            .padding(start = horizontalPadding, end = horizontalPadding, bottom = MorpheDefaults.ContentPadding),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -361,20 +374,30 @@ private fun DialogContent(
                     }
                 }
 
-                // Content area.
+                // Content area, wrapped in a Box so ListScrollbar can anchor to the true dialog
+                // edge while the scrollable column keeps its own horizontal inset.
                 // Scrollable variant adds verticalScroll + imePadding so the keyboard doesn't cover input fields.
-                // LazyColumn callers pass scrollable=false
+                // LazyColumn callers pass scrollable=false and wire up their own scrollbar
                 val scrollState = if (scrollable) rememberScrollState() else null
-                Column(
-                    modifier = Modifier
-                        .weight(1f, fill = false)
-                        .then(
-                            if (scrollState != null) {
-                                Modifier.verticalScroll(scrollState).imePadding()
-                            } else Modifier
-                        )
+                Box(
+                    modifier = Modifier.weight(1f, fill = false)
                 ) {
-                    content()
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = horizontalPadding)
+                            .then(
+                                if (scrollState != null) {
+                                    Modifier.verticalScroll(scrollState).imePadding()
+                                } else Modifier
+                            )
+                    ) {
+                        content()
+                    }
+
+                    if (scrollState != null) {
+                        ListScrollbar(scrollState = scrollState)
+                    }
                 }
 
                 // Footer section
@@ -382,7 +405,7 @@ private fun DialogContent(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = MorpheDefaults.ContentPadding)
+                            .padding(start = horizontalPadding, end = horizontalPadding, top = MorpheDefaults.ContentPadding)
                     ) {
                         footer()
                     }
