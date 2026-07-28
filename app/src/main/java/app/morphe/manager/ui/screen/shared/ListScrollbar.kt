@@ -103,8 +103,11 @@ fun BoxScope.ListScrollbar(
     alphabetMode: Boolean = false,
     extraBottomPadding: Dp = 0.dp
 ) {
-    val metrics by remember(listState) {
+    val metrics = remember(listState) {
         derivedStateOf { listState.scrollbarMetrics() }
+    }
+    val thumbFraction by remember(metrics) {
+        derivedStateOf { metrics.value.thumbFraction }
     }
     val canScroll by remember(listState) {
         derivedStateOf { listState.canScrollBackward || listState.canScrollForward }
@@ -114,7 +117,8 @@ fun BoxScope.ListScrollbar(
     var scrollJob by remember { mutableStateOf<Job?>(null) }
 
     ScrollbarOverlay(
-        metrics = metrics,
+        progress = { metrics.value.progress },
+        thumbFraction = thumbFraction,
         canScroll = canScroll,
         isScrolling = listState.isScrollInProgress,
         alphabetEnabled = alphabetEnabled,
@@ -151,8 +155,11 @@ fun BoxScope.ListScrollbar(
     modifier: Modifier = Modifier,
     extraBottomPadding: Dp = 0.dp
 ) {
-    val metrics by remember(scrollState) {
+    val metrics = remember(scrollState) {
         derivedStateOf { scrollState.scrollbarMetrics() }
+    }
+    val thumbFraction by remember(metrics) {
+        derivedStateOf { metrics.value.thumbFraction }
     }
     val canScroll by remember(scrollState) {
         derivedStateOf { scrollState.maxValue > 0 }
@@ -161,7 +168,8 @@ fun BoxScope.ListScrollbar(
     var scrollJob by remember { mutableStateOf<Job?>(null) }
 
     ScrollbarOverlay(
-        metrics = metrics,
+        progress = { metrics.value.progress },
+        thumbFraction = thumbFraction,
         canScroll = canScroll,
         isScrolling = scrollState.isScrollInProgress,
         alphabetEnabled = false,
@@ -180,10 +188,14 @@ fun BoxScope.ListScrollbar(
 /**
  * Shared track, thumb and callout. [onSeek] receives the dragged position as a 0..1 fraction and
  * returns the label to show on the callout, or null when there is nothing to announce.
+ *
+ * [progress] is a lambda rather than a value so the thumb position is read during layout: scrolling
+ * then only re-lays out the thumb instead of recomposing the whole overlay on every frame.
  */
 @Composable
 private fun BoxScope.ScrollbarOverlay(
-    metrics: ScrollbarMetrics,
+    progress: () -> Float,
+    thumbFraction: Float,
     canScroll: Boolean,
     isScrolling: Boolean,
     alphabetEnabled: Boolean,
@@ -194,6 +206,7 @@ private fun BoxScope.ScrollbarOverlay(
     val rtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     val sideAlignment = if (rtl) Alignment.CenterStart else Alignment.CenterEnd
     val topSideAlignment = if (rtl) Alignment.TopStart else Alignment.TopEnd
+    val currentOnSeek by rememberUpdatedState(onSeek)
     val colors = MaterialTheme.colorScheme
     val trackColor = colors.outlineVariant.copy(alpha = 0.34f)
     val thumbColor = colors.primary.copy(alpha = 0.78f)
@@ -242,20 +255,20 @@ private fun BoxScope.ScrollbarOverlay(
             if (alphabetEnabled) {
                 AlphabetThumbHeight.toPx()
             } else {
-                (trackHeightPx * metrics.thumbFraction)
+                (trackHeightPx * thumbFraction)
                     .coerceIn(ScrollbarMinThumbHeight.toPx(), trackHeightPx)
             }
         }
-        val thumbTopPx = ((trackHeightPx - thumbHeightPx) * metrics.progress)
-            .roundToInt()
-            .coerceAtLeast(0)
+        val thumbTopPx = {
+            ((trackHeightPx - thumbHeightPx) * progress()).roundToInt().coerceAtLeast(0)
+        }
 
         Box(
             modifier = Modifier
                 .align(sideAlignment)
                 .fillMaxHeight()
                 .width(ScrollbarTouchWidth)
-                .pointerInput(alphabetEnabled, trackHeightPx) {
+                .pointerInput(trackHeightPx) {
                     awaitEachGesture {
                         // The strip overlays full-width rows, so nothing is consumed until the
                         // gesture is clearly a vertical drag. A tap still reaches the row below
@@ -270,7 +283,7 @@ private fun BoxScope.ScrollbarOverlay(
                                 dragStarted = true
                                 dragging = true
                             }
-                            activeLabel = onSeek((change.position.y / trackHeightPx).coerceIn(0f, 1f))
+                            activeLabel = currentOnSeek((change.position.y / trackHeightPx).coerceIn(0f, 1f))
                             change.consume()
                         }
                         if (dragStarted) {
@@ -288,19 +301,12 @@ private fun BoxScope.ScrollbarOverlay(
             modifier = Modifier
                 .align(sideAlignment)
                 .fillMaxHeight()
-                .width(ScrollbarTouchWidth)
+                .width(ScrollbarTrackWidth)
                 .graphicsLayer { alpha = visibilityAlpha }
-                .clearAndSetSemantics { },
-            contentAlignment = sideAlignment
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .width(ScrollbarTrackWidth)
-                    .clip(RoundedCornerShape(50))
-                    .background(if (alphabetEnabled) activeTrackColor else trackColor)
-            )
-        }
+                .clip(RoundedCornerShape(50))
+                .background(if (alphabetEnabled) activeTrackColor else trackColor)
+                .clearAndSetSemantics { }
+        )
 
         // Thumb and callout share one anchor as tall as the thumb, so centring the callout on it
         // is a layout constraint rather than two offsets that have to agree. The anchor spans the
@@ -308,7 +314,7 @@ private fun BoxScope.ScrollbarOverlay(
         Box(
             modifier = Modifier
                 .align(topSideAlignment)
-                .offset { IntOffset(x = 0, y = thumbTopPx) }
+                .offset { IntOffset(x = 0, y = thumbTopPx()) }
                 .fillMaxWidth()
                 .height(with(density) { thumbHeightPx.toDp() })
                 .graphicsLayer { alpha = visibilityAlpha }
@@ -393,10 +399,7 @@ private fun LazyListState.scrollbarMetrics(): ScrollbarMetrics {
     val averageItemSize = visibleItems.sumOf { it.size }.toFloat() / visibleItems.size
     val contentSize = (averageItemSize * totalItems + info.beforeContentPadding + info.afterContentPadding)
         .coerceAtLeast(viewportSize.toFloat())
-    val firstItem = visibleItems.first()
-    val firstItemOffset = firstItem.offset - info.viewportStartOffset
-    val scrollOffset = (firstItem.index * averageItemSize - firstItemOffset)
-        .coerceAtLeast(0f)
+    val scrollOffset = firstVisibleItemIndex * averageItemSize + firstVisibleItemScrollOffset
     val maxScrollOffset = (contentSize - viewportSize).coerceAtLeast(1f)
 
     return ScrollbarMetrics(
