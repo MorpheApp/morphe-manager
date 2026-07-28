@@ -28,8 +28,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
@@ -919,23 +917,12 @@ private fun BooleanOptionItem(
     value: Boolean,
     onValueChange: (Boolean) -> Unit
 ) {
-    val enabledState = stringResource(R.string.enabled)
-    val disabledState = stringResource(R.string.disabled)
-
-    SettingsItem(
-        onClick = { onValueChange(!value) },
+    SettingsSwitchItem(
+        checked = value,
+        onToggle = { onValueChange(!value) },
         title = title,
         subtitle = description.ifBlank { null },
-        showBorder = true,
-        trailingContent = {
-            MorpheSwitch(
-                checked = value,
-                onCheckedChange = onValueChange,
-                modifier = Modifier.semantics {
-                    stateDescription = if (value) enabledState else disabledState
-                }
-            )
-        }
+        showBorder = true
     )
 }
 

@@ -33,8 +33,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -855,24 +853,14 @@ private fun ApkManagementDialogContent(
             ) {
                 if (retentionToggle != null) {
                     item(key = "retention") {
-                        val enabledState = stringResource(R.string.enabled)
-                        val disabledState = stringResource(R.string.disabled)
                         Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)) {
-                            SettingsItem(
-                                onClick = { retentionToggle.onCheckedChange(!retentionToggle.checked) },
+                            SettingsSwitchItem(
+                                checked = retentionToggle.checked,
+                                onToggle = { retentionToggle.onCheckedChange(!retentionToggle.checked) },
                                 leadingContent = { MorpheIcon(icon = meta.icon, tint = meta.accentColor) },
                                 title = retentionToggle.title,
                                 subtitle = retentionToggle.description,
-                                showBorder = true,
-                                trailingContent = {
-                                    MorpheSwitch(
-                                        checked = retentionToggle.checked,
-                                        onCheckedChange = retentionToggle.onCheckedChange,
-                                        modifier = Modifier.semantics {
-                                            stateDescription = if (retentionToggle.checked) enabledState else disabledState
-                                        }
-                                    )
-                                }
+                                showBorder = true
                             )
                             MorpheSettingsDivider(fullWidth = true)
                         }

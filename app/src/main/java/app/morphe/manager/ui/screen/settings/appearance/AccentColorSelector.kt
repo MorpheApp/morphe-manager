@@ -13,7 +13,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -25,9 +27,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.screen.shared.SectionCard
-import app.morphe.manager.ui.screen.shared.WindowWidthSizeClass
-import app.morphe.manager.ui.screen.shared.rememberWindowSize
 import app.morphe.manager.util.darken
 import app.morphe.manager.util.toColorOrNull
 
@@ -48,7 +49,11 @@ val THEME_PRESET_COLORS = listOf(
     Color(0xFF1DE9B6),
     Color(0xFFFFC400),
     Color(0xFF00B8D4),
-    Color(0xFFBA68C8)
+    Color(0xFFBA68C8),
+    Color(0xFFD32F2F),
+    Color(0xFFAFB42B),
+    Color(0xFF795548),
+    Color(0xFF546E7A)
 )
 
 /**
@@ -60,13 +65,6 @@ fun AccentColorSelector(
     onColorSelected: (Color?) -> Unit,
     dynamicColorEnabled: Boolean
 ) {
-    val windowSize = rememberWindowSize()
-    val columns = when (windowSize.widthSizeClass) {
-        WindowWidthSizeClass.Compact -> 7
-        WindowWidthSizeClass.Medium -> 9
-        WindowWidthSizeClass.Expanded -> 11
-    }
-
     val selectedArgb = selectedColorHex.toColorOrNull()?.toArgb()
     val isEnabled = !dynamicColorEnabled
     val selectedText = stringResource(R.string.selected)
@@ -77,46 +75,47 @@ fun AccentColorSelector(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Color grid
-            THEME_PRESET_COLORS.chunked(columns).forEach { row ->
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    row.forEach { preset ->
-                        val isSelected = selectedArgb != null && preset.toArgb() == selectedArgb
-                        Box(
-                            modifier = Modifier
-                                .weight(1f)
-                                .aspectRatio(1f)
-                                .clip(RoundedCornerShape(12.dp))
-                                .border(
-                                    width = if (isSelected) 3.dp else 1.dp,
-                                    color = if (isSelected)
-                                        preset.darken(0.4f)
-                                    else
-                                        MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
-                                    shape = RoundedCornerShape(12.dp)
-                                )
-                                .background(
-                                    preset.copy(alpha = if (isEnabled) 1f else 0.5f),
-                                    RoundedCornerShape(12.dp)
-                                )
-                                .clickable(enabled = isEnabled) {
-                                    if (isEnabled) {
-                                        onColorSelected(preset)
-                                    }
+            Text(
+                text = stringResource(R.string.settings_appearance_accent_color),
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+
+            // Swatches keep a fixed touch-target size and wrap to as many rows as the width needs.
+            // Centering keeps a partially filled last row balanced under the ones above it
+            FlowRow(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                THEME_PRESET_COLORS.forEach { preset ->
+                    val isSelected = selectedArgb != null && preset.toArgb() == selectedArgb
+                    Box(
+                        modifier = Modifier
+                            .size(MorpheDefaults.MinTouchTarget)
+                            .clip(RoundedCornerShape(12.dp))
+                            .border(
+                                width = if (isSelected) 3.dp else 1.dp,
+                                color = if (isSelected)
+                                    preset.darken(0.4f)
+                                else
+                                    MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
+                                shape = RoundedCornerShape(12.dp)
+                            )
+                            .background(
+                                preset.copy(alpha = if (isEnabled) 1f else 0.5f),
+                                RoundedCornerShape(12.dp)
+                            )
+                            .clickable(enabled = isEnabled) {
+                                if (isEnabled) {
+                                    onColorSelected(preset)
                                 }
-                                .semantics(mergeDescendants = true) {
-                                    role = Role.RadioButton
-                                    stateDescription = if (isSelected) selectedText else notSelectedText
-                                }
-                        )
-                    }
-                    // Fill remaining space if row is incomplete
-                    repeat(columns - row.size) {
-                        Spacer(modifier = Modifier.weight(1f))
-                    }
+                            }
+                            .semantics(mergeDescendants = true) {
+                                role = Role.RadioButton
+                                stateDescription = if (isSelected) selectedText else notSelectedText
+                            }
+                    )
                 }
             }
 

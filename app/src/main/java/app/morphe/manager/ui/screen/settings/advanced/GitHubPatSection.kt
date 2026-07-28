@@ -143,8 +143,9 @@ private fun GitHubPatDialog(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
             ) {
-                SettingsItem(
-                    onClick = {
+                SettingsSwitchItem(
+                    checked = includePatInExport.value,
+                    onToggle = {
                         if (!includePatInExport.value) showIncludeWarning.value = true
                         else includePatInExport.value = false
                     },
@@ -156,13 +157,7 @@ private fun GitHubPatDialog(
                         )
                     },
                     title = stringResource(R.string.settings_advanced_github_pat_export_include_label),
-                    subtitle = stringResource(R.string.settings_advanced_github_pat_export_include_supporting),
-                    trailingContent = {
-                        MorpheSwitch(
-                            checked = includePatInExport.value,
-                            onCheckedChange = null
-                        )
-                    }
+                    subtitle = stringResource(R.string.settings_advanced_github_pat_export_include_supporting)
                 )
 
                 // Warning badge if PAT will be included

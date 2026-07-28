@@ -21,13 +21,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -39,8 +39,10 @@ import app.morphe.manager.ui.screen.shared.LanguageRepository.getLanguageDisplay
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
 import app.morphe.manager.ui.theme.resolveThemeStyle
+import app.morphe.manager.ui.viewmodel.RandomInterval
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.AppCardColorDefaults
+import app.morphe.manager.util.AppCardColorMode
 import app.morphe.manager.util.saveLanguageToPrefs
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -99,9 +101,13 @@ fun AppearanceTabContent(
         ) ?: AppCardColorDefaults.defaultGradientColors
     }
 
-    // Localized strings for accessibility
-    val enabledState = stringResource(R.string.enabled)
-    val disabledState = stringResource(R.string.disabled)
+    val supportsPureBlack = theme != Theme.LIGHT
+
+    LaunchedEffect(supportsPureBlack, pureBlackTheme) {
+        if (!supportsPureBlack && pureBlackTheme) {
+            themeViewModel.setPureBlackTheme(false)
+        }
+    }
 
     LaunchedEffect(showAppCardColorSetting) {
         if (!showAppCardColorSetting) showAppCardColorDialog.value = false
@@ -114,256 +120,53 @@ fun AppearanceTabContent(
             .verticalScroll(scrollState)
             .padding(horizontal = contentPadding, vertical = MorpheDefaults.ContentPadding)
     ) {
-        // Language section
-        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
-            LanguageSection(
-                appLanguage = appLanguage,
-                onLanguageClick = { showTranslationInfoDialog.value = true }
-            )
-        }
+        LanguageSection(
+            appLanguage = appLanguage,
+            onLanguageClick = { showTranslationInfoDialog.value = true }
+        )
 
-        // Home screen section
-        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
-            SectionTitle(
-                text = stringResource(R.string.settings_appearance_home_screen),
-                icon = Icons.Outlined.Dashboard
-            )
-        }
+        ThemeSection(
+            theme = theme,
+            themeStyle = effectiveThemeStyle,
+            supportsDynamicColor = supportsDynamicColor,
+            pureBlackTheme = pureBlackTheme,
+            supportsPureBlack = supportsPureBlack,
+            onThemeSelected = themeViewModel::setThemeMode,
+            onStyleSelected = themeViewModel::setThemeStyle,
+            onPureBlackToggle = { themeViewModel.setPureBlackTheme(!pureBlackTheme) },
+            onSelectorPositioned = onThemeSelectorPositioned,
+            onSelectorScrollTarget = onThemeSelectorScrollTarget
+        )
 
-        SettingsGroup(
-            modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)
-        ) {
-            SettingsItem(
-                onClick = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
-                title = stringResource(R.string.settings_appearance_greeting_phrases),
-                subtitle = stringResource(R.string.settings_appearance_greeting_phrases_subtitle),
-                leadingContent = {
-                    MorpheIcon(icon = Icons.Outlined.ChatBubbleOutline)
-                },
-                trailingContent = {
-                    MorpheSwitch(
-                        checked = showGreetingPhrases,
-                        onCheckedChange = null,
-                        modifier = Modifier.semantics {
-                            stateDescription = if (showGreetingPhrases) enabledState else disabledState
-                        }
-                    )
-                }
-            )
-            MorpheSettingsDivider()
-            SettingsItem(
-                onClick = { homeAppButtonPrefs.setShowSortButton(!showSortButton) },
-                title = stringResource(R.string.settings_appearance_sort_button),
-                subtitle = stringResource(R.string.settings_appearance_sort_button_description),
-                leadingContent = {
-                    MorpheIcon(icon = Icons.AutoMirrored.Outlined.Sort)
-                },
-                trailingContent = {
-                    MorpheSwitch(
-                        checked = showSortButton,
-                        onCheckedChange = null,
-                        modifier = Modifier.semantics {
-                            stateDescription = if (showSortButton) enabledState else disabledState
-                        }
-                    )
-                }
-            )
-            MorpheSettingsDivider()
-            SettingsItem(
-                onClick = { homeAppButtonPrefs.setShowCategoryViewSwitcher(!showAppGroupingSwitcher) },
-                title = stringResource(R.string.settings_appearance_app_grouping),
-                subtitle = stringResource(R.string.settings_appearance_app_grouping_description),
-                leadingContent = {
-                    MorpheIcon(icon = Icons.Outlined.ViewAgenda)
-                },
-                trailingContent = {
-                    MorpheSwitch(
-                        checked = showAppGroupingSwitcher,
-                        onCheckedChange = null,
-                        modifier = Modifier.semantics {
-                            stateDescription = if (showAppGroupingSwitcher) enabledState else disabledState
-                        }
-                    )
-                }
-            )
-            AnimatedVisibility(
-                visible = showAppCardColorSetting,
-                enter = MorpheAnimations.expandFadeEnter,
-                exit = MorpheAnimations.shrinkFadeExit
-            ) {
-                Column {
-                    MorpheSettingsDivider()
-                    SettingsItem(
-                        onClick = { showAppCardColorDialog.value = true },
-                        title = stringResource(R.string.settings_appearance_app_card_colors),
-                        subtitle = stringResource(appCardColorMode.descriptionResId),
-                        leadingContent = {
-                            MorpheIcon(icon = Icons.Outlined.ColorLens)
-                        },
-                        trailingContent = {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                AppCardColorMiniPreview(colors = appCardColors)
-                                MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                            }
-                        }
-                    )
-                }
-            }
-        }
+        ColorsSection(
+            themeStyle = effectiveThemeStyle,
+            accentColorHex = customAccentColorHex,
+            appCardColorMode = appCardColorMode,
+            appCardColors = appCardColors,
+            showAppCardColors = showAppCardColorSetting,
+            onAccentSelected = themeViewModel::setCustomAccentColor,
+            onAppCardColorsClick = { showAppCardColorDialog.value = true }
+        )
 
-        // Theme section
-        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
-            SectionTitle(
-                text = stringResource(R.string.settings_appearance_theme),
-                icon = Icons.Outlined.Palette
-            )
-        }
+        HomeScreenSection(
+            showGreetingPhrases = showGreetingPhrases,
+            showSortButton = showSortButton,
+            showAppGrouping = showAppGroupingSwitcher,
+            onGreetingPhrasesToggle = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
+            onSortButtonToggle = { homeAppButtonPrefs.setShowSortButton(!showSortButton) },
+            onAppGroupingToggle = { homeAppButtonPrefs.setShowCategoryViewSwitcher(!showAppGroupingSwitcher) }
+        )
 
-        Box(
-            Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth().then(
-                if (onThemeSelectorPositioned != null || onThemeSelectorScrollTarget != null)
-                    Modifier.onGloballyPositioned { coords ->
-                        onThemeSelectorPositioned?.invoke(coords.boundsInWindow())
-                        onThemeSelectorScrollTarget?.invoke(coords.boundsInParent().top.roundToInt())
-                    }
-                else Modifier
-            )
-        ) {
-            ThemeSelector(
-                theme = theme,
-                onThemeSelected = themeViewModel::setThemeMode
-            )
-        }
+        BackgroundSection(
+            backgroundType = backgroundType,
+            randomInterval = randomInterval,
+            enableParallax = enableParallax,
+            onBackgroundSelected = themeViewModel::setBackgroundType,
+            onIntervalSelected = themeViewModel::setRandomInterval,
+            onParallaxToggle = { themeViewModel.toggleBackgroundParallax(enableParallax) }
+        )
 
-        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
-            ThemeStyleSelector(
-                style = effectiveThemeStyle,
-                supportsDynamicColor = supportsDynamicColor,
-                onStyleSelected = themeViewModel::setThemeStyle
-            )
-        }
-
-        val supportsPureBlack = theme != Theme.LIGHT
-
-        LaunchedEffect(supportsPureBlack, pureBlackTheme) {
-            if (!supportsPureBlack && pureBlackTheme) {
-                themeViewModel.setPureBlackTheme(false)
-            }
-        }
-
-        AnimatedVisibility(
-            visible = supportsPureBlack,
-            enter = MorpheAnimations.expandFadeEnter,
-            exit = MorpheAnimations.shrinkFadeExit
-        ) {
-            SettingsGroup(
-                modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)
-            ) {
-                SettingsItem(
-                    onClick = { themeViewModel.setPureBlackTheme(!pureBlackTheme) },
-                    title = stringResource(R.string.settings_appearance_pure_black),
-                    subtitle = stringResource(R.string.settings_appearance_pure_black_description),
-                    leadingContent = {
-                        MorpheIcon(icon = Icons.Outlined.Contrast)
-                    },
-                    trailingContent = {
-                        MorpheSwitch(
-                            checked = pureBlackTheme,
-                            onCheckedChange = null,
-                            modifier = Modifier.semantics {
-                                stateDescription = if (pureBlackTheme) enabledState else disabledState
-                            }
-                        )
-                    }
-                )
-            }
-        }
-
-        // Accent color section
-        AnimatedVisibility(
-            visible = effectiveThemeStyle != ThemeStyle.MATERIAL_YOU,
-            enter = MorpheAnimations.expandFadeEnter,
-            exit = MorpheAnimations.shrinkFadeExit
-        ) {
-            Column {
-                Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
-                    SectionTitle(
-                        text = stringResource(R.string.settings_appearance_accent_color),
-                        icon = Icons.Outlined.ColorLens
-                    )
-                }
-                Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
-                    AccentColorSelector(
-                        selectedColorHex = customAccentColorHex,
-                        onColorSelected = { color -> themeViewModel.setCustomAccentColor(color) },
-                        dynamicColorEnabled = effectiveThemeStyle == ThemeStyle.MATERIAL_YOU
-                    )
-                }
-            }
-        }
-
-        // Background type section
-        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
-            SectionTitle(
-                text = stringResource(R.string.settings_appearance_background),
-                icon = Icons.Outlined.Wallpaper
-            )
-        }
-
-        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
-            BackgroundSelector(
-                selectedBackground = backgroundType,
-                onBackgroundSelected = { selectedType ->
-                    themeViewModel.setBackgroundType(selectedType)
-                },
-                selectedInterval = randomInterval,
-                onIntervalSelected = { interval ->
-                    themeViewModel.setRandomInterval(interval)
-                }
-            )
-        }
-
-        // Parallax effect toggle
-        AnimatedVisibility(
-            visible = backgroundType != BackgroundType.NONE,
-            enter = MorpheAnimations.expandFadeEnter,
-            exit = MorpheAnimations.shrinkFadeExit
-        ) {
-            SettingsGroup(
-                modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)
-            ) {
-                SettingsItem(
-                    onClick = { themeViewModel.toggleBackgroundParallax(enableParallax) },
-                    title = stringResource(R.string.settings_appearance_parallax_effect),
-                    subtitle = stringResource(R.string.settings_appearance_parallax_effect_description),
-                    leadingContent = {
-                        MorpheIcon(icon = Icons.Outlined.ScreenRotation)
-                    },
-                    trailingContent = {
-                        MorpheSwitch(
-                            checked = enableParallax,
-                            onCheckedChange = null,
-                            modifier = Modifier.semantics {
-                                stateDescription = if (enableParallax) enabledState else disabledState
-                            }
-                        )
-                    }
-                )
-            }
-        }
-
-        // App icon section
-        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
-            SectionTitle(
-                text = stringResource(R.string.settings_appearance_app_icon_selector_title),
-                icon = Icons.Outlined.Apps
-            )
-        }
-
-        AppIconSelector()
+        AppIconSection()
     }
 
     // App card color dialog
@@ -426,7 +229,6 @@ fun AppearanceTabContent(
     }
 }
 
-
 /**
  * Language selection section.
  */
@@ -451,7 +253,7 @@ private fun LanguageSection(
             icon = Icons.Outlined.Language
         )
 
-        SettingsGroup {
+        SettingsGroup(modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)) {
             SettingsItem(
                 onClick = onLanguageClick,
                 title = stringResource(R.string.settings_appearance_app_language_current),
@@ -475,3 +277,239 @@ private fun LanguageSection(
         }
     }
 }
+
+/**
+ * Theme mode, color style and the pure black toggle.
+ */
+@Composable
+private fun ThemeSection(
+    theme: Theme,
+    themeStyle: ThemeStyle,
+    supportsDynamicColor: Boolean,
+    pureBlackTheme: Boolean,
+    supportsPureBlack: Boolean,
+    onThemeSelected: (Theme) -> Unit,
+    onStyleSelected: (ThemeStyle) -> Unit,
+    onPureBlackToggle: () -> Unit,
+    onSelectorPositioned: ((Rect) -> Unit)?,
+    onSelectorScrollTarget: ((Int) -> Unit)?
+) {
+    SectionHeader(
+        text = stringResource(R.string.settings_appearance_theme),
+        icon = Icons.Outlined.Palette
+    )
+
+    Box(
+        Modifier
+            .padding(bottom = MorpheDefaults.ContentPadding)
+            .fillMaxWidth()
+            .then(
+                if (onSelectorPositioned != null || onSelectorScrollTarget != null)
+                    Modifier.onGloballyPositioned { coords ->
+                        onSelectorPositioned?.invoke(coords.boundsInWindow())
+                        onSelectorScrollTarget?.invoke(coords.boundsInParent().top.roundToInt())
+                    }
+                else Modifier
+            )
+    ) {
+        ThemeSelector(
+            theme = theme,
+            onThemeSelected = onThemeSelected
+        )
+    }
+
+    Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
+        ThemeStyleSelector(
+            style = themeStyle,
+            supportsDynamicColor = supportsDynamicColor,
+            onStyleSelected = onStyleSelected
+        )
+    }
+
+    AnimatedVisibility(
+        visible = supportsPureBlack,
+        enter = MorpheAnimations.expandFadeEnter,
+        exit = MorpheAnimations.shrinkFadeExit
+    ) {
+        SettingsGroup(modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)) {
+            SettingsSwitchItem(
+                title = stringResource(R.string.settings_appearance_pure_black),
+                subtitle = stringResource(R.string.settings_appearance_pure_black_description),
+                icon = Icons.Outlined.Contrast,
+                checked = pureBlackTheme,
+                onToggle = onPureBlackToggle
+            )
+        }
+    }
+}
+
+/**
+ * Accent color and home app card colors, both driven by the active theme style.
+ */
+@Composable
+private fun ColorsSection(
+    themeStyle: ThemeStyle,
+    accentColorHex: String?,
+    appCardColorMode: AppCardColorMode,
+    appCardColors: List<Color>,
+    showAppCardColors: Boolean,
+    onAccentSelected: (Color?) -> Unit,
+    onAppCardColorsClick: () -> Unit
+) {
+    SectionHeader(
+        text = stringResource(R.string.settings_appearance_colors),
+        icon = Icons.Outlined.ColorLens
+    )
+
+    // Dynamic color derives the accent from the wallpaper, leaving nothing to pick here
+    AnimatedVisibility(
+        visible = themeStyle != ThemeStyle.MATERIAL_YOU,
+        enter = MorpheAnimations.expandFadeEnter,
+        exit = MorpheAnimations.shrinkFadeExit
+    ) {
+        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
+            AccentColorSelector(
+                selectedColorHex = accentColorHex,
+                onColorSelected = onAccentSelected,
+                dynamicColorEnabled = themeStyle == ThemeStyle.MATERIAL_YOU
+            )
+        }
+    }
+
+    AnimatedVisibility(
+        visible = showAppCardColors,
+        enter = MorpheAnimations.expandFadeEnter,
+        exit = MorpheAnimations.shrinkFadeExit
+    ) {
+        SettingsGroup(modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)) {
+            SettingsItem(
+                onClick = onAppCardColorsClick,
+                title = stringResource(R.string.settings_appearance_app_card_colors),
+                subtitle = stringResource(appCardColorMode.descriptionResId),
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.Style)
+                },
+                trailingContent = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        AppCardColorMiniPreview(colors = appCardColors)
+                        MorpheIcon(icon = Icons.Outlined.ChevronRight)
+                    }
+                }
+            )
+        }
+    }
+}
+
+/**
+ * Toggles for what the home screen shows.
+ */
+@Composable
+private fun HomeScreenSection(
+    showGreetingPhrases: Boolean,
+    showSortButton: Boolean,
+    showAppGrouping: Boolean,
+    onGreetingPhrasesToggle: () -> Unit,
+    onSortButtonToggle: () -> Unit,
+    onAppGroupingToggle: () -> Unit
+) {
+    SectionHeader(
+        text = stringResource(R.string.settings_appearance_home_screen),
+        icon = Icons.Outlined.Dashboard
+    )
+
+    SettingsGroup(modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)) {
+        SettingsSwitchItem(
+            title = stringResource(R.string.settings_appearance_greeting_phrases),
+            subtitle = stringResource(R.string.settings_appearance_greeting_phrases_subtitle),
+            icon = Icons.Outlined.ChatBubbleOutline,
+            checked = showGreetingPhrases,
+            onToggle = onGreetingPhrasesToggle
+        )
+        MorpheSettingsDivider()
+        SettingsSwitchItem(
+            title = stringResource(R.string.settings_appearance_sort_button),
+            subtitle = stringResource(R.string.settings_appearance_sort_button_description),
+            icon = Icons.AutoMirrored.Outlined.Sort,
+            checked = showSortButton,
+            onToggle = onSortButtonToggle
+        )
+        MorpheSettingsDivider()
+        SettingsSwitchItem(
+            title = stringResource(R.string.settings_appearance_app_grouping),
+            subtitle = stringResource(R.string.settings_appearance_app_grouping_description),
+            icon = Icons.Outlined.ViewAgenda,
+            checked = showAppGrouping,
+            onToggle = onAppGroupingToggle
+        )
+    }
+}
+
+/**
+ * Background picker and the parallax toggle it enables.
+ */
+@Composable
+private fun BackgroundSection(
+    backgroundType: BackgroundType,
+    randomInterval: RandomInterval,
+    enableParallax: Boolean,
+    onBackgroundSelected: (BackgroundType) -> Unit,
+    onIntervalSelected: (RandomInterval) -> Unit,
+    onParallaxToggle: () -> Unit
+) {
+    SectionHeader(
+        text = stringResource(R.string.settings_appearance_background),
+        icon = Icons.Outlined.Wallpaper
+    )
+
+    Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
+        BackgroundSelector(
+            selectedBackground = backgroundType,
+            onBackgroundSelected = onBackgroundSelected,
+            selectedInterval = randomInterval,
+            onIntervalSelected = onIntervalSelected
+        )
+    }
+
+    AnimatedVisibility(
+        visible = backgroundType != BackgroundType.NONE,
+        enter = MorpheAnimations.expandFadeEnter,
+        exit = MorpheAnimations.shrinkFadeExit
+    ) {
+        SettingsGroup(modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)) {
+            SettingsSwitchItem(
+                title = stringResource(R.string.settings_appearance_parallax_effect),
+                subtitle = stringResource(R.string.settings_appearance_parallax_effect_description),
+                icon = Icons.Outlined.ScreenRotation,
+                checked = enableParallax,
+                onToggle = onParallaxToggle
+            )
+        }
+    }
+}
+
+/**
+ * Launcher icon picker.
+ */
+@Composable
+private fun AppIconSection() {
+    SectionHeader(
+        text = stringResource(R.string.settings_appearance_app_icon_selector_title),
+        icon = Icons.Outlined.Apps
+    )
+
+    AppIconSelector()
+}
+
+/**
+ * [SectionTitle] with the spacing every section on this tab uses.
+ */
+@Composable
+private fun SectionHeader(text: String, icon: ImageVector) {
+    Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
+        SectionTitle(text = text, icon = icon)
+    }
+}
+

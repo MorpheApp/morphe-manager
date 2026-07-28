@@ -24,8 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.core.net.toUri
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.settings.advanced.NotificationPermissionDialog
@@ -49,13 +47,10 @@ fun NotificationsDialog(
     val useManagerPrereleases by prefs.useManagerPrereleases.getAsState()
     val patchesPrereleaseIds by prefs.bundlePrereleasesEnabled.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
-
     val completionSound by prefs.patcherCompletionSound.getAsState()
     val successSoundUri by prefs.patcherSuccessSoundUri.getAsState()
     val errorSoundUri by prefs.patcherErrorSoundUri.getAsState()
 
-    val enabledState = stringResource(R.string.enabled)
-    val disabledState = stringResource(R.string.disabled)
     val defaultLabel = stringResource(R.string.settings_system_notifications_sound_default)
     val ringtoneTitle = stringResource(R.string.settings_system_notifications_ringtone_picker_title)
 
@@ -163,8 +158,9 @@ fun NotificationsDialog(
             verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
         ) {
             SettingsGroup {
-                SettingsItem(
-                    onClick = {
+                SettingsSwitchItem(
+                    checked = backgroundUpdateNotifications,
+                    onToggle = {
                         settingsViewModel.toggleBackgroundNotifications(
                             currentValue = backgroundUpdateNotifications,
                             useManagerPrereleases = useManagerPrereleases,
@@ -173,42 +169,24 @@ fun NotificationsDialog(
                             onShowPermissionDialog = { showPermissionDialog = true }
                         )
                     },
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.NotificationsActive) },
+                    icon = Icons.Outlined.NotificationsActive,
                     title = stringResource(R.string.settings_advanced_updates_background_notifications),
                     subtitle = stringResource(
                         if (settingsViewModel.hasGms)
                             R.string.settings_advanced_updates_background_notifications_description_fcm
                         else
                             R.string.settings_advanced_updates_background_notifications_description
-                    ),
-                    trailingContent = {
-                        MorpheSwitch(
-                            checked = backgroundUpdateNotifications,
-                            onCheckedChange = null,
-                            modifier = Modifier.semantics {
-                                stateDescription =
-                                    if (backgroundUpdateNotifications) enabledState else disabledState
-                            }
-                        )
-                    }
+                    )
                 )
 
                 MorpheSettingsDivider()
 
-                SettingsItem(
-                    onClick = { settingsViewModel.setPatcherCompletionSound(!completionSound) },
-                    leadingContent = { MorpheIcon(icon = Icons.AutoMirrored.Outlined.VolumeUp) },
+                SettingsSwitchItem(
+                    checked = completionSound,
+                    onToggle = { settingsViewModel.setPatcherCompletionSound(!completionSound) },
+                    icon = Icons.AutoMirrored.Outlined.VolumeUp,
                     title = stringResource(R.string.settings_system_patcher_completion_sound),
-                    subtitle = stringResource(R.string.settings_system_patcher_completion_sound_description),
-                    trailingContent = {
-                        MorpheSwitch(
-                            checked = completionSound,
-                            onCheckedChange = null,
-                            modifier = Modifier.semantics {
-                                stateDescription = if (completionSound) enabledState else disabledState
-                            }
-                        )
-                    }
+                    subtitle = stringResource(R.string.settings_system_patcher_completion_sound_description)
                 )
             }
 

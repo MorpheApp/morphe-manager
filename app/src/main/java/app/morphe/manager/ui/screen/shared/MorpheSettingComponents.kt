@@ -52,6 +52,8 @@ object MorpheDefaults {
     val SettingsCornerRadius = 14.dp
     val SectionCornerRadius = 18.dp
     val IconSize = 24.dp
+
+    val MinTouchTarget = 48.dp
     val ContentPaddingSmall = 8.dp
     val ContentPadding = 16.dp
     val ContentPaddingMedium = 24.dp
@@ -505,6 +507,44 @@ fun SettingsItem(
             trailingContent = trailingContent
         )
     }
+}
+
+/**
+ * [SettingsItem] trailed by a switch that reflects [checked]. Tapping anywhere on the row
+ * toggles it, so the switch itself stays non-interactive.
+ */
+@Composable
+fun SettingsSwitchItem(
+    checked: Boolean,
+    onToggle: () -> Unit,
+    title: String,
+    modifier: Modifier = Modifier,
+    icon: ImageVector? = null,
+    leadingContent: @Composable (() -> Unit)? = null,
+    subtitle: String? = null,
+    showBorder: Boolean = false
+) {
+    val enabledLabel = stringResource(R.string.enabled)
+    val disabledLabel = stringResource(R.string.disabled)
+
+    SettingsItem(
+        onClick = onToggle,
+        title = title,
+        modifier = modifier,
+        icon = icon,
+        leadingContent = leadingContent,
+        subtitle = subtitle,
+        showBorder = showBorder,
+        trailingContent = {
+            MorpheSwitch(
+                checked = checked,
+                onCheckedChange = null,
+                modifier = Modifier.semantics {
+                    stateDescription = if (checked) enabledLabel else disabledLabel
+                }
+            )
+        }
+    )
 }
 
 /**

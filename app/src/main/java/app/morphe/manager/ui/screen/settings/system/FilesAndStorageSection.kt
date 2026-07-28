@@ -21,8 +21,6 @@ import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
@@ -44,9 +42,6 @@ fun FilesAndStorageSection(
     val isTV = remember { context.isAndroidTv() }
     val useExpertMode by settingsViewModel.prefs.useExpertMode.getAsState()
     val useCustomFilePicker by settingsViewModel.prefs.useCustomFilePicker.getAsState()
-    val enabledState = stringResource(R.string.enabled)
-    val disabledState = stringResource(R.string.disabled)
-
     val showStorageDialog = remember { mutableStateOf(false) }
     val showPatchSelectionDialog = remember { mutableStateOf(false) }
 
@@ -99,20 +94,12 @@ fun FilesAndStorageSection(
                     Modifier.onGloballyPositioned { coords -> onFilePickerPositioned(coords.boundsInWindow()) }
                 else Modifier
             ) {
-                SettingsItem(
-                    onClick = { settingsViewModel.setUseCustomFilePicker(!useCustomFilePicker) },
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.FolderOpen) },
+                SettingsSwitchItem(
+                    checked = useCustomFilePicker,
+                    onToggle = { settingsViewModel.setUseCustomFilePicker(!useCustomFilePicker) },
+                    icon = Icons.Outlined.FolderOpen,
                     title = stringResource(R.string.settings_system_custom_file_picker),
-                    subtitle = stringResource(R.string.settings_system_custom_file_picker_description),
-                    trailingContent = {
-                        MorpheSwitch(
-                            checked = useCustomFilePicker,
-                            onCheckedChange = null,
-                            modifier = Modifier.semantics {
-                                stateDescription = if (useCustomFilePicker) enabledState else disabledState
-                            }
-                        )
-                    }
+                    subtitle = stringResource(R.string.settings_system_custom_file_picker_description)
                 )
             }
         }

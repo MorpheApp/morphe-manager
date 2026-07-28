@@ -17,8 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
@@ -289,10 +287,6 @@ private fun HideShortsSection(
     val appShortcutOption = viewModel.getOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_APP_SHORTCUT)
     val widgetOption = viewModel.getOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_WIDGET)
 
-    // Localized strings for accessibility
-    val enabledState = stringResource(R.string.enabled)
-    val disabledState = stringResource(R.string.disabled)
-
     Column {
         // Header
         CardHeader(
@@ -317,19 +311,11 @@ private fun HideShortsSection(
                 R.string.settings_advanced_patch_options_hide_shorts_app_shortcut_description
             )
 
-            SettingsItem(
-                onClick = { viewModel.toggleHideShortsAppShortcut(patchOptionsPrefs, hideShortsAppShortcut) },
+            SettingsSwitchItem(
+                checked = hideShortsAppShortcut,
+                onToggle = { viewModel.toggleHideShortsAppShortcut(patchOptionsPrefs, hideShortsAppShortcut) },
                 title = title,
-                subtitle = description,
-                trailingContent = {
-                    MorpheSwitch(
-                        checked = hideShortsAppShortcut,
-                        onCheckedChange = null,
-                        modifier = Modifier.semantics {
-                            stateDescription = if (hideShortsAppShortcut) enabledState else disabledState
-                        }
-                    )
-                }
+                subtitle = description
             )
         }
 
@@ -351,19 +337,11 @@ private fun HideShortsSection(
                 R.string.settings_advanced_patch_options_hide_shorts_widget_description
             )
 
-            SettingsItem(
-                onClick = { viewModel.toggleHideShortsWidget(patchOptionsPrefs, hideShortsWidget) },
+            SettingsSwitchItem(
+                checked = hideShortsWidget,
+                onToggle = { viewModel.toggleHideShortsWidget(patchOptionsPrefs, hideShortsWidget) },
                 title = title,
-                subtitle = description,
-                trailingContent = {
-                    MorpheSwitch(
-                        checked = hideShortsWidget,
-                        onCheckedChange = null,
-                        modifier = Modifier.semantics {
-                            stateDescription = if (hideShortsWidget) enabledState else disabledState
-                        }
-                    )
-                }
+                subtitle = description
             )
         }
     }

@@ -21,8 +21,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -248,7 +246,6 @@ fun InstallerSelectionDialog(
     // Localized strings for accessibility
     val selectedState = stringResource(R.string.selected)
     val notSelectedState = stringResource(R.string.not_selected)
-    val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
 
     MorpheDialog(
@@ -355,8 +352,9 @@ fun InstallerSelectionDialog(
                         enter = MorpheAnimations.expandFadeEnter,
                         exit = MorpheAnimations.shrinkFadeExit
                     ) {
-                        SettingsItem(
-                            onClick = {
+                        SettingsSwitchItem(
+                            checked = installAsPlayStore,
+                            onToggle = {
                                 if (installAsPlayStore) {
                                     installAsPlayStore = false
                                 } else {
@@ -365,16 +363,7 @@ fun InstallerSelectionDialog(
                             },
                             leadingContent = { MorpheIcon(icon = Icons.Outlined.Storefront, size = 28.dp) },
                             title = stringResource(R.string.installer_play_store_mode),
-                            subtitle = stringResource(R.string.installer_play_store_mode_description),
-                            trailingContent = {
-                                MorpheSwitch(
-                                    checked = installAsPlayStore,
-                                    onCheckedChange = null,
-                                    modifier = Modifier.semantics {
-                                        stateDescription = if (installAsPlayStore) enabledState else disabledState
-                                    }
-                                )
-                            }
+                            subtitle = stringResource(R.string.installer_play_store_mode_description)
                         )
                     }
 
@@ -385,8 +374,9 @@ fun InstallerSelectionDialog(
                     ) {
                         Column {
                             if (showPlayStoreToggle) MorpheSettingsDivider()
-                            SettingsItem(
-                                onClick = {
+                            SettingsSwitchItem(
+                                checked = autoInstallEnabled,
+                                onToggle = {
                                     val newValue = !autoInstallEnabled
                                     onAutoInstallToggle?.invoke(newValue)
                                     if (newValue && installerPromptEnabled) {
@@ -395,16 +385,7 @@ fun InstallerSelectionDialog(
                                 },
                                 leadingContent = { MorpheIcon(icon = Icons.Outlined.Bolt, size = 28.dp) },
                                 title = stringResource(R.string.settings_auto_install_with_shizuku),
-                                subtitle = stringResource(R.string.settings_auto_install_with_shizuku_description),
-                                trailingContent = {
-                                    MorpheSwitch(
-                                        checked = autoInstallEnabled,
-                                        onCheckedChange = null,
-                                        modifier = Modifier.semantics {
-                                            stateDescription = if (autoInstallEnabled) enabledState else disabledState
-                                        }
-                                    )
-                                }
+                                subtitle = stringResource(R.string.settings_auto_install_with_shizuku_description)
                             )
 
                             AnimatedVisibility(
@@ -414,8 +395,9 @@ fun InstallerSelectionDialog(
                             ) {
                                 Column {
                                     MorpheSettingsDivider()
-                                    SettingsItem(
-                                        onClick = {
+                                    SettingsSwitchItem(
+                                        checked = autoUninstallEnabled,
+                                        onToggle = {
                                             if (autoUninstallEnabled) {
                                                 onAutoUninstallToggle?.invoke(false)
                                             } else {
@@ -424,16 +406,7 @@ fun InstallerSelectionDialog(
                                         },
                                         leadingContent = { MorpheIcon(icon = Icons.Outlined.Delete, size = 28.dp) },
                                         title = stringResource(R.string.settings_auto_uninstall_with_shizuku),
-                                        subtitle = stringResource(R.string.settings_auto_uninstall_with_shizuku_description),
-                                        trailingContent = {
-                                            MorpheSwitch(
-                                                checked = autoUninstallEnabled,
-                                                onCheckedChange = null,
-                                                modifier = Modifier.semantics {
-                                                    stateDescription = if (autoUninstallEnabled) enabledState else disabledState
-                                                }
-                                            )
-                                        }
+                                        subtitle = stringResource(R.string.settings_auto_uninstall_with_shizuku_description)
                                     )
                                 }
                             }
@@ -442,8 +415,9 @@ fun InstallerSelectionDialog(
 
                     if (showPromptToggle) {
                         if (showPlayStoreToggle || showAutoInstallToggle) MorpheSettingsDivider()
-                        SettingsItem(
-                            onClick = {
+                        SettingsSwitchItem(
+                            checked = installerPromptEnabled,
+                            onToggle = {
                                 val newValue = !installerPromptEnabled
                                 onInstallerPromptToggle(newValue)
                                 if (newValue && autoInstallEnabled) {
@@ -452,16 +426,7 @@ fun InstallerSelectionDialog(
                             },
                             leadingContent = { MorpheIcon(icon = Icons.Outlined.Android, size = 28.dp) },
                             title = stringResource(R.string.settings_prompt_installer_on_install),
-                            subtitle = stringResource(R.string.settings_prompt_installer_on_install_description),
-                            trailingContent = {
-                                MorpheSwitch(
-                                    checked = installerPromptEnabled,
-                                    onCheckedChange = null,
-                                    modifier = Modifier.semantics {
-                                        stateDescription = if (installerPromptEnabled) enabledState else disabledState
-                                    }
-                                )
-                            }
+                            subtitle = stringResource(R.string.settings_prompt_installer_on_install_description)
                         )
                     }
                 }

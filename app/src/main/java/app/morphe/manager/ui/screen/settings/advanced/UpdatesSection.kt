@@ -22,8 +22,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -46,10 +44,6 @@ fun UpdatesSettingsItem(
     val allowMeteredUpdates by prefs.allowMeteredUpdates.getAsState()
     val useManagerPrereleases by prefs.useManagerPrereleases.getAsState()
     val usePatchesPrereleases by prefs.bundlePrereleasesEnabled.getAsState()
-
-    val enabledState = stringResource(R.string.enabled)
-    val disabledState = stringResource(R.string.disabled)
-
     val showIntervalDialog = remember { mutableStateOf(false) }
 
     if (showIntervalDialog.value) {
@@ -65,8 +59,9 @@ fun UpdatesSettingsItem(
 
     SettingsGroup {
         // Use manager prereleases toggle
-        SettingsItem(
-            onClick = {
+        SettingsSwitchItem(
+            checked = useManagerPrereleases,
+            onToggle = {
                 settingsViewModel.toggleManagerPrereleases(
                     currentValue = useManagerPrereleases,
                     backgroundNotificationsEnabled = backgroundUpdateNotifications,
@@ -74,18 +69,9 @@ fun UpdatesSettingsItem(
                     onCheckUpdate = onManagerPrereleasesToggle
                 )
             },
-            leadingContent = { MorpheIcon(icon = Icons.Outlined.Science) },
+            icon = Icons.Outlined.Science,
             title = stringResource(R.string.settings_advanced_updates_use_prereleases),
-            subtitle = stringResource(R.string.settings_advanced_updates_use_prereleases_description),
-            trailingContent = {
-                MorpheSwitch(
-                    checked = useManagerPrereleases,
-                    onCheckedChange = null,
-                    modifier = Modifier.semantics {
-                        stateDescription = if (useManagerPrereleases) enabledState else disabledState
-                    }
-                )
-            }
+            subtitle = stringResource(R.string.settings_advanced_updates_use_prereleases_description)
         )
 
         // Check frequency interval selector (non-GMS only), shown when background notifications
@@ -110,20 +96,12 @@ fun UpdatesSettingsItem(
         MorpheSettingsDivider()
 
         // Allow updates on metered connections
-        SettingsItem(
-            onClick = { settingsViewModel.toggleAllowMeteredUpdates(allowMeteredUpdates) },
-            leadingContent = { MorpheIcon(icon = Icons.Outlined.SignalCellularAlt) },
+        SettingsSwitchItem(
+            checked = allowMeteredUpdates,
+            onToggle = { settingsViewModel.toggleAllowMeteredUpdates(allowMeteredUpdates) },
+            icon = Icons.Outlined.SignalCellularAlt,
             title = stringResource(R.string.settings_advanced_updates_allow_metered),
-            subtitle = stringResource(R.string.settings_advanced_updates_allow_metered_description),
-            trailingContent = {
-                MorpheSwitch(
-                    checked = allowMeteredUpdates,
-                    onCheckedChange = null,
-                    modifier = Modifier.semantics {
-                        stateDescription = if (allowMeteredUpdates) enabledState else disabledState
-                    }
-                )
-            }
+            subtitle = stringResource(R.string.settings_advanced_updates_allow_metered_description)
         )
     }
 }
