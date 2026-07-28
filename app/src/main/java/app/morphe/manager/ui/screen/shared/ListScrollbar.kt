@@ -13,7 +13,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyListItemInfo
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -92,34 +91,6 @@ fun <T> buildIndexedScrollTargets(
     items.forEachIndexed { index, item -> emit(index, label(item)) }
 }
 
-/**
- * Running mean row height over every item measured so far. Averaging only what is on screen would
- * swing the content estimate every time a tall expanded card scrolls into view, resizing the thumb
- * with it; keeping earlier measurements holds the estimate steady. Keyed by item key so filtering
- * or reordering cannot leave a size attributed to a different row.
- */
-@Stable
-private class ItemSizeTracker {
-    private val sizes = HashMap<Any, Int>()
-    private var measuredTotal = 0L
-
-    /** Zero until the first row is measured, so callers know to fall back. */
-    var average by mutableFloatStateOf(0f)
-        private set
-
-    fun record(items: List<LazyListItemInfo>) {
-        var changed = false
-        items.forEach { item ->
-            val previous = sizes.put(item.key, item.size)
-            if (previous != item.size) {
-                measuredTotal += item.size - (previous ?: 0)
-                changed = true
-            }
-        }
-        if (changed) average = measuredTotal.toFloat() / sizes.size
-    }
-}
-
 /** Runs seek scrolls one at a time, dropping the in-flight one when the thumb moves again. */
 private class ScrollbarSeekController(private val scope: CoroutineScope) {
     private var job: Job? = null
@@ -144,15 +115,11 @@ fun BoxScope.ListScrollbar(
     alphabetMode: Boolean = false,
     extraBottomPadding: Dp = 0.dp
 ) {
-    val sizeTracker = remember(listState) { ItemSizeTracker() }
-    // Collected rather than folded into the metrics below, so the derived computation stays a pure
-    // read of state it does not also mutate
-    LaunchedEffect(listState, sizeTracker) {
-        snapshotFlow { listState.layoutInfo.visibleItemsInfo }
-            .collect(sizeTracker::record)
-    }
-    val metrics = remember(listState, sizeTracker) {
-        derivedStateOf { listState.scrollbarMetrics(sizeTracker.average) }
+    // Row heights measured so far, kept for the whole scroll session so a tall expanded card still
+    // contributes its real height once it scrolls off-screen
+    val sizeCache = remember(listState) { mutableMapOf<Int, Int>() }
+    val metrics = remember(listState) {
+        derivedStateOf { listState.scrollbarMetrics(sizeCache) }
     }
     val thumbFraction by remember(metrics) {
         derivedStateOf { metrics.value.thumbFraction }
@@ -435,31 +402,38 @@ private data class ScrollbarMetrics(
     val thumbFraction: Float
 )
 
-private fun LazyListState.scrollbarMetrics(trackedAverageItemSize: Float): ScrollbarMetrics {
+private fun LazyListState.scrollbarMetrics(sizeCache: MutableMap<Int, Int>): ScrollbarMetrics {
     val info = layoutInfo
     val visibleItems = info.visibleItemsInfo
     val totalItems = info.totalItemsCount
     if (visibleItems.isEmpty() || totalItems <= 0) {
         return ScrollbarMetrics(progress = 0f, thumbFraction = 1f)
     }
+    // Stale tail entries would keep inflating the estimate after the list shrinks
+    if (sizeCache.keys.any { it >= totalItems }) {
+        sizeCache.keys.retainAll { it < totalItems }
+    }
+    visibleItems.forEach { sizeCache[it.index] = it.size }
 
     val viewportSize = (info.viewportEndOffset - info.viewportStartOffset).coerceAtLeast(1)
-    // Falls back to the on-screen mean for the first frame, before any row has been tracked
-    val averageItemSize = trackedAverageItemSize
-        .takeIf { it > 0f }
-        ?.coerceAtLeast(1f)
-        ?: (visibleItems.sumOf { it.size }.toFloat() / visibleItems.size).coerceAtLeast(1f)
-    // How far the first visible item has itself scrolled past, as a fraction of its own height:
-    // measuring the partial item against its real size keeps a tall expanded card advancing the
-    // thumb smoothly, instead of racing ahead on raw pixels and snapping back once the index ticks
-    val firstItemSize = visibleItems.first().size.coerceAtLeast(1)
-    val scrolledItems = firstVisibleItemIndex + firstVisibleItemScrollOffset.toFloat() / firstItemSize
-    val contentSize = (averageItemSize * totalItems + info.beforeContentPadding + info.afterContentPadding)
+    val averageItemSize = sizeCache.values.sum().toFloat() / sizeCache.size
+    // Real pixels on both sides of the ratio, using the measured size where one is known and the
+    // average as the fallback, so a tall card advances the thumb by exactly its own height as it
+    // scrolls past and the thumb reaches the end only when the content does
+    var scrollOffset = firstVisibleItemScrollOffset.toFloat()
+    for (index in 0 until firstVisibleItemIndex) {
+        scrollOffset += sizeCache[index]?.toFloat() ?: averageItemSize
+    }
+    var estimatedItemsSize = 0f
+    for (index in 0 until totalItems) {
+        estimatedItemsSize += sizeCache[index]?.toFloat() ?: averageItemSize
+    }
+    val contentSize = (estimatedItemsSize + info.beforeContentPadding + info.afterContentPadding)
         .coerceAtLeast(viewportSize.toFloat())
     val maxScrollOffset = (contentSize - viewportSize).coerceAtLeast(1f)
 
     return ScrollbarMetrics(
-        progress = (scrolledItems * averageItemSize / maxScrollOffset).coerceIn(0f, 1f),
+        progress = (scrollOffset / maxScrollOffset).coerceIn(0f, 1f),
         thumbFraction = (viewportSize / contentSize).coerceIn(MinThumbFraction, 1f)
     )
 }
