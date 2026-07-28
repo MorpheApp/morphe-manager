@@ -6,6 +6,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
@@ -13,6 +14,9 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.WindowCompat
 import app.morphe.manager.R
+import app.morphe.manager.util.AppCardColorDefaults
+import app.morphe.manager.util.AppCardColorMode
+import app.morphe.manager.util.AppCardColorValues
 import app.morphe.manager.util.toColorOrNull
 import kotlinx.serialization.Serializable
 
@@ -80,6 +84,12 @@ private val LightColorScheme = lightColorScheme(
     scrim = theme_light_scrim,
 )
 
+/**
+ * Home app card colors chosen in the appearance settings, or `null` when cards keep the
+ * per-app colors declared by their bundle.
+ */
+val LocalAppCardColors = staticCompositionLocalOf<List<Color>?> { null }
+
 @Composable
 fun ManagerTheme(
     darkTheme: Boolean,
@@ -88,6 +98,8 @@ fun ManagerTheme(
     monochromeTheme: Boolean = false,
     accentColorHex: String? = null,
     themeColorHex: String? = null,
+    appCardColorMode: AppCardColorMode = AppCardColorMode.DEFAULT,
+    appCardColorValues: AppCardColorValues = AppCardColorValues(),
     content: @Composable () -> Unit
 ) {
     val baseScheme = when {
@@ -144,7 +156,22 @@ fun ManagerTheme(
         }
     }
 
-    CompositionLocalProvider(LocalMonochromeTheme provides monochromeTheme) {
+    // Monochrome cards draw on neutral theme surfaces, so custom card colors never apply there
+    val appCardColors = if (monochromeTheme) {
+        null
+    } else {
+        AppCardColorDefaults.colors(
+            mode = appCardColorMode,
+            accentHex = accentColorHex.orEmpty(),
+            accentFallback = finalScheme.primary,
+            values = appCardColorValues
+        )
+    }
+
+    CompositionLocalProvider(
+        LocalMonochromeTheme provides monochromeTheme,
+        LocalAppCardColors provides appCardColors
+    ) {
         MaterialTheme(
             colorScheme = finalScheme,
             typography = Typography,

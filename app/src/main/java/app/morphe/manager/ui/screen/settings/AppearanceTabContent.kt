@@ -15,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.outlined.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -40,7 +41,6 @@ import app.morphe.manager.ui.theme.ThemeStyle
 import app.morphe.manager.ui.theme.resolveThemeStyle
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.AppCardColorDefaults
-import app.morphe.manager.util.AppCardColorMode
 import app.morphe.manager.util.saveLanguageToPrefs
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -84,16 +84,19 @@ fun AppearanceTabContent(
     val appCardColorValues = remember(customAppCardColors) {
         AppCardColorDefaults.decodeColorValues(customAppCardColors)
     }
+    val themeAccent = MaterialTheme.colorScheme.primary
     val appCardColors = remember(
         appCardColorMode,
         appCardColorValues,
-        customAccentColorHex
+        customAccentColorHex,
+        themeAccent
     ) {
-        AppCardColorDefaults.previewColors(
+        AppCardColorDefaults.colors(
             mode = appCardColorMode,
             accentHex = customAccentColorHex.orEmpty(),
+            accentFallback = themeAccent,
             values = appCardColorValues
-        )
+        ) ?: AppCardColorDefaults.defaultGradientColors
     }
 
     // Localized strings for accessibility
@@ -193,14 +196,7 @@ fun AppearanceTabContent(
                     SettingsItem(
                         onClick = { showAppCardColorDialog.value = true },
                         title = stringResource(R.string.settings_appearance_app_card_colors),
-                        subtitle = stringResource(
-                            when (appCardColorMode) {
-                                AppCardColorMode.DEFAULT -> R.string.settings_appearance_app_card_colors_default_description
-                                AppCardColorMode.ACCENT -> R.string.settings_appearance_app_card_colors_accent_description
-                                AppCardColorMode.GRADIENT -> R.string.settings_appearance_app_card_colors_gradient_description
-                                AppCardColorMode.SOLID -> R.string.settings_appearance_app_card_colors_solid_description
-                            }
-                        ),
+                        subtitle = stringResource(appCardColorMode.descriptionResId),
                         leadingContent = {
                             MorpheIcon(icon = Icons.Outlined.ColorLens)
                         },

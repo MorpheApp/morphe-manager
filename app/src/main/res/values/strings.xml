@@ -560,9 +560,10 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_sort_button">Sort button</string>
     <string name="settings_appearance_sort_button_description">Show the sort button on the home screen</string>
     <string name="settings_appearance_app_card_colors">App card colors</string>
-    <string name="settings_appearance_app_card_colors_default_description">Use Morphe gradient</string>
+    <string name="settings_appearance_app_card_colors_default">Default</string>
+    <string name="settings_appearance_app_card_colors_default_description">Give each app the color of its own bundle</string>
     <string name="settings_appearance_app_card_colors_accent">Accent</string>
-    <string name="settings_appearance_app_card_colors_accent_description">Use the selected accent color for home app cards</string>
+    <string name="settings_appearance_app_card_colors_accent_description">Use the app accent color for home app cards</string>
     <string name="settings_appearance_app_card_colors_gradient">Gradient</string>
     <string name="settings_appearance_app_card_colors_gradient_description">Use one custom gradient for home app cards</string>
     <string name="settings_appearance_app_card_colors_solid">Solid</string>

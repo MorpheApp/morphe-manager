@@ -5,19 +5,19 @@
 
 package app.morphe.manager.ui.screen.settings.appearance
 
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Circle
 import androidx.compose.material.icons.outlined.ColorLens
-import androidx.compose.material.icons.outlined.Extension
 import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material.icons.outlined.Restore
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithCache
@@ -26,18 +26,28 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.home.AppCardContent
+import app.morphe.manager.ui.screen.home.AppCardLayout
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.theme.LocalAppCardColors
 import app.morphe.manager.util.AppCardColorDefaults
 import app.morphe.manager.util.AppCardColorMode
 import app.morphe.manager.util.AppCardColorStop
-import app.morphe.manager.util.requiresLightContent
+import app.morphe.manager.util.toColorOrNull
 import app.morphe.manager.util.toHexString
+
+private const val MODE_COLUMNS = 2
+
+private val MODE_OPTIONS = listOf(
+    AppCardColorMode.DEFAULT to Icons.Outlined.Apps,
+    AppCardColorMode.ACCENT to Icons.Outlined.ColorLens,
+    AppCardColorMode.GRADIENT to Icons.Outlined.Palette,
+    AppCardColorMode.SOLID to Icons.Outlined.Circle
+)
 
 @Composable
 fun AppCardColorDialog(
@@ -88,9 +98,13 @@ fun AppCardColorDialog(
     val solidColors = remember(draftSolidColorHex) {
         AppCardColorDefaults.solidColors(draftSolidColorHex)
     }
+    // Null keeps the preview card on the default palette, matching how DEFAULT leaves every
+    // home card on the colors declared by its bundle
     val previewColors = when (draftMode) {
-        AppCardColorMode.DEFAULT -> AppCardColorDefaults.defaultColors()
-        AppCardColorMode.ACCENT -> AppCardColorDefaults.accentColors(accentColorHex)
+        AppCardColorMode.DEFAULT -> null
+        AppCardColorMode.ACCENT -> AppCardColorDefaults.accentColors(
+            accentColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.primary
+        )
         AppCardColorMode.GRADIENT -> gradientColors
         AppCardColorMode.SOLID -> solidColors
     }
@@ -99,21 +113,33 @@ fun AppCardColorDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_appearance_app_card_colors),
         footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.save),
-                onPrimaryClick = {
-                    onApply(
-                        draftMode,
-                        draftStartColorHex,
-                        draftMiddleColorHex,
-                        draftEndColorHex,
-                        draftSolidColorHex
-                    )
-                    onDismiss()
-                },
-                secondaryText = stringResource(R.string.reset),
-                onSecondaryClick = resetDraft
-            )
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+            ) {
+                MorpheDialogButtonRow(
+                    primaryText = stringResource(R.string.save),
+                    onPrimaryClick = {
+                        onApply(
+                            draftMode,
+                            draftStartColorHex,
+                            draftMiddleColorHex,
+                            draftEndColorHex,
+                            draftSolidColorHex
+                        )
+                        onDismiss()
+                    },
+                    secondaryText = stringResource(R.string.reset),
+                    onSecondaryClick = resetDraft,
+                    secondaryIcon = Icons.Outlined.Restore
+                )
+
+                MorpheDialogOutlinedButton(
+                    text = stringResource(android.R.string.cancel),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     ) {
         Column(
@@ -122,47 +148,23 @@ fun AppCardColorDialog(
         ) {
             AppCardColorPreview(colors = previewColors)
 
-            SettingsGroup {
-                SettingsItem(
-                    onClick = {
-                        draftMode = if (draftMode == AppCardColorMode.ACCENT) {
-                            AppCardColorMode.DEFAULT
-                        } else {
-                            AppCardColorMode.ACCENT
+            Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)) {
+                MODE_OPTIONS.chunked(MODE_COLUMNS).forEach { row ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                    ) {
+                        row.forEach { (optionMode, icon) ->
+                            ModernIconOptionCard(
+                                selected = draftMode == optionMode,
+                                onClick = { draftMode = optionMode },
+                                icon = icon,
+                                label = stringResource(optionMode.labelResId),
+                                modifier = Modifier.weight(1f)
+                            )
                         }
-                    },
-                    title = stringResource(R.string.settings_appearance_app_card_colors_accent),
-                    subtitle = stringResource(R.string.settings_appearance_app_card_colors_accent_description),
-                    leadingContent = {
-                        MorpheIcon(icon = Icons.Outlined.ColorLens)
-                    },
-                    trailingContent = {
-                        MorpheSwitch(
-                            checked = draftMode == AppCardColorMode.ACCENT,
-                            onCheckedChange = null
-                        )
                     }
-                )
-            }
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
-            ) {
-                CompactOptionCard(
-                    selected = draftMode == AppCardColorMode.GRADIENT,
-                    onClick = { draftMode = AppCardColorMode.GRADIENT },
-                    icon = Icons.Outlined.Palette,
-                    label = stringResource(R.string.settings_appearance_app_card_colors_gradient),
-                    modifier = Modifier.weight(1f)
-                )
-                CompactOptionCard(
-                    selected = draftMode == AppCardColorMode.SOLID,
-                    onClick = { draftMode = AppCardColorMode.SOLID },
-                    icon = Icons.Outlined.Circle,
-                    label = stringResource(R.string.settings_appearance_app_card_colors_solid),
-                    modifier = Modifier.weight(1f)
-                )
+                }
             }
 
             Text(
@@ -171,46 +173,42 @@ fun AppCardColorDialog(
                 color = LocalDialogSecondaryTextColor.current
             )
 
-            AnimatedVisibility(
-                visible = draftMode != AppCardColorMode.SOLID && draftMode != AppCardColorMode.ACCENT
-            ) {
-                SettingsGroup {
-                    AppCardColorItem(
-                        title = stringResource(R.string.settings_appearance_app_card_colors_start),
-                        color = gradientColors[0],
-                        onClick = {
-                            draftMode = AppCardColorMode.GRADIENT
-                            editingStop = AppCardColorStop.START
-                        }
-                    )
-                    MorpheSettingsDivider()
-                    AppCardColorItem(
-                        title = stringResource(R.string.settings_appearance_app_card_colors_middle),
-                        color = gradientColors[1],
-                        onClick = {
-                            draftMode = AppCardColorMode.GRADIENT
-                            editingStop = AppCardColorStop.MIDDLE
-                        }
-                    )
-                    MorpheSettingsDivider()
-                    AppCardColorItem(
-                        title = stringResource(R.string.settings_appearance_app_card_colors_end),
-                        color = gradientColors[2],
-                        onClick = {
-                            draftMode = AppCardColorMode.GRADIENT
-                            editingStop = AppCardColorStop.END
-                        }
-                    )
-                }
-            }
+            // A single crossfade keeps the dialog height from jumping twice when picker groups swap
+            AnimatedContent(
+                targetState = draftMode,
+                transitionSpec = MorpheAnimations.fadeCrossfade(),
+                label = "app_card_color_pickers"
+            ) { activeMode ->
+                when (activeMode) {
+                    AppCardColorMode.GRADIENT -> SettingsGroup {
+                        AppCardColorItem(
+                            title = stringResource(R.string.settings_appearance_app_card_colors_start),
+                            color = gradientColors[0],
+                            onClick = { editingStop = AppCardColorStop.START }
+                        )
+                        MorpheSettingsDivider()
+                        AppCardColorItem(
+                            title = stringResource(R.string.settings_appearance_app_card_colors_middle),
+                            color = gradientColors[1],
+                            onClick = { editingStop = AppCardColorStop.MIDDLE }
+                        )
+                        MorpheSettingsDivider()
+                        AppCardColorItem(
+                            title = stringResource(R.string.settings_appearance_app_card_colors_end),
+                            color = gradientColors[2],
+                            onClick = { editingStop = AppCardColorStop.END }
+                        )
+                    }
 
-            AnimatedVisibility(visible = draftMode == AppCardColorMode.SOLID) {
-                SettingsGroup {
-                    AppCardColorItem(
-                        title = stringResource(R.string.settings_appearance_app_card_colors_solid_color),
-                        color = solidColors[0],
-                        onClick = { editingStop = AppCardColorStop.SOLID }
-                    )
+                    AppCardColorMode.SOLID -> SettingsGroup {
+                        AppCardColorItem(
+                            title = stringResource(R.string.settings_appearance_app_card_colors_solid_color),
+                            color = solidColors[0],
+                            onClick = { editingStop = AppCardColorStop.SOLID }
+                        )
+                    }
+
+                    AppCardColorMode.DEFAULT, AppCardColorMode.ACCENT -> Spacer(Modifier)
                 }
             }
         }
@@ -228,22 +226,10 @@ fun AppCardColorDialog(
             currentColor = color.toHexString(),
             onColorSelected = { selectedColor ->
                 when (stop) {
-                    AppCardColorStop.START -> {
-                        draftStartColorHex = selectedColor
-                        draftMode = AppCardColorMode.GRADIENT
-                    }
-                    AppCardColorStop.MIDDLE -> {
-                        draftMiddleColorHex = selectedColor
-                        draftMode = AppCardColorMode.GRADIENT
-                    }
-                    AppCardColorStop.END -> {
-                        draftEndColorHex = selectedColor
-                        draftMode = AppCardColorMode.GRADIENT
-                    }
-                    AppCardColorStop.SOLID -> {
-                        draftSolidColorHex = selectedColor
-                        draftMode = AppCardColorMode.SOLID
-                    }
+                    AppCardColorStop.START -> draftStartColorHex = selectedColor
+                    AppCardColorStop.MIDDLE -> draftMiddleColorHex = selectedColor
+                    AppCardColorStop.END -> draftEndColorHex = selectedColor
+                    AppCardColorStop.SOLID -> draftSolidColorHex = selectedColor
                 }
                 editingStop = null
             },
@@ -272,42 +258,25 @@ fun AppCardColorMiniPreview(
     )
 }
 
+/**
+ * Renders a real home app card so the preview matches the home screen exactly, down to the
+ * layered glass background and the placeholder icon. [colors] is provided the same way the
+ * theme provides it at runtime; null falls back to the default palette.
+ */
 @Composable
-private fun AppCardColorPreview(colors: List<Color>) {
-    val textColor = if (colors.firstOrNull()?.requiresLightContent() != false) Color.White else Color.Black
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(96.dp)
-            .clip(RoundedCornerShape(24.dp))
-            .appCardColorPreviewBackground(colors)
-            .border(
-                width = 1.dp,
-                color = Color.White.copy(alpha = 0.35f),
-                shape = RoundedCornerShape(24.dp)
-            )
-            .padding(horizontal = 20.dp),
-        contentAlignment = Alignment.CenterStart
-    ) {
-        Column {
-            Text(
-                text = stringResource(R.string.app_name),
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                color = textColor,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-            FrostedGlassChip(
-                text = stringResource(R.string.home_not_patched_yet),
-                icon = Icons.Outlined.Extension,
-                containerColor = if (textColor == Color.White) {
-                    Color.White.copy(alpha = 0.20f)
-                } else {
-                    Color.Black.copy(alpha = 0.10f)
-                },
-                contentColor = textColor
+private fun AppCardColorPreview(colors: List<Color>?) {
+    CompositionLocalProvider(LocalAppCardColors provides colors) {
+        AppCardLayout(
+            gradientColors = AppCardColorDefaults.defaultGradientColors,
+            enabled = true,
+            onClick = {}
+        ) {
+            AppCardContent(
+                packageName = null,
+                packageInfo = null,
+                displayName = stringResource(R.string.app_name),
+                subtitle = stringResource(R.string.home_not_patched_yet),
+                gradientColors = AppCardColorDefaults.defaultGradientColors
             )
         }
     }
@@ -348,19 +317,3 @@ private fun Modifier.appCardColorPreviewBackground(colors: List<Color>): Modifie
         onDrawBehind { drawRect(brush) }
     }
 }
-
-private val AppCardColorMode.descriptionResId: Int
-    get() = when (this) {
-        AppCardColorMode.DEFAULT -> R.string.settings_appearance_app_card_colors_default_description
-        AppCardColorMode.ACCENT -> R.string.settings_appearance_app_card_colors_accent_description
-        AppCardColorMode.GRADIENT -> R.string.settings_appearance_app_card_colors_gradient_description
-        AppCardColorMode.SOLID -> R.string.settings_appearance_app_card_colors_solid_description
-    }
-
-private val AppCardColorStop.titleResId: Int
-    get() = when (this) {
-        AppCardColorStop.START -> R.string.settings_appearance_app_card_colors_start
-        AppCardColorStop.MIDDLE -> R.string.settings_appearance_app_card_colors_middle
-        AppCardColorStop.END -> R.string.settings_appearance_app_card_colors_end
-        AppCardColorStop.SOLID -> R.string.settings_appearance_app_card_colors_solid_color
-    }

@@ -6,19 +6,34 @@
 package app.morphe.manager.util
 
 import androidx.compose.ui.graphics.Color
+import app.morphe.manager.R
+import kotlinx.serialization.Serializable
 
-enum class AppCardColorMode {
-    DEFAULT,
-    ACCENT,
-    GRADIENT,
-    SOLID
+@Serializable
+enum class AppCardColorMode(val labelResId: Int, val descriptionResId: Int) {
+    DEFAULT(
+        R.string.settings_appearance_app_card_colors_default,
+        R.string.settings_appearance_app_card_colors_default_description
+    ),
+    ACCENT(
+        R.string.settings_appearance_app_card_colors_accent,
+        R.string.settings_appearance_app_card_colors_accent_description
+    ),
+    GRADIENT(
+        R.string.settings_appearance_app_card_colors_gradient,
+        R.string.settings_appearance_app_card_colors_gradient_description
+    ),
+    SOLID(
+        R.string.settings_appearance_app_card_colors_solid,
+        R.string.settings_appearance_app_card_colors_solid_description
+    )
 }
 
-enum class AppCardColorStop {
-    START,
-    MIDDLE,
-    END,
-    SOLID
+enum class AppCardColorStop(val titleResId: Int) {
+    START(R.string.settings_appearance_app_card_colors_start),
+    MIDDLE(R.string.settings_appearance_app_card_colors_middle),
+    END(R.string.settings_appearance_app_card_colors_end),
+    SOLID(R.string.settings_appearance_app_card_colors_solid_color)
 }
 
 data class AppCardColorValues(
@@ -35,49 +50,28 @@ object AppCardColorDefaults {
         get() = KnownApps.DEFAULT_COLORS
 
     val defaultSolidColor: Color
-        get() = defaultGradientColors.getOrElse(1) {
-            defaultGradientColors.firstOrNull() ?: Color.White
-        }
-
-    val defaultAccentColor: Color
         get() = KnownApps.GRADIENT_MID
 
+    /**
+     * Card colors for [mode], or `null` when cards keep the per-app colors declared by their
+     * bundle. [accentFallback] is the accent of the active theme, used by [AppCardColorMode.ACCENT]
+     * when the user has not picked a custom accent color.
+     */
     fun colors(
         mode: AppCardColorMode,
         accentHex: String,
-        startHex: String,
-        middleHex: String,
-        endHex: String,
-        solidHex: String
-    ): List<Color> = when (mode) {
-        AppCardColorMode.DEFAULT -> defaultColors()
-        AppCardColorMode.ACCENT -> accentColors(accentHex)
-        AppCardColorMode.GRADIENT -> gradientColors(startHex, middleHex, endHex)
-        AppCardColorMode.SOLID -> solidColors(solidHex)
+        accentFallback: Color,
+        values: AppCardColorValues
+    ): List<Color>? = when (mode) {
+        AppCardColorMode.DEFAULT -> null
+        AppCardColorMode.ACCENT -> accentColors(accentHex.toColorOrNull() ?: accentFallback)
+        AppCardColorMode.GRADIENT -> gradientColors(
+            startHex = values.startHex,
+            middleHex = values.middleHex,
+            endHex = values.endHex
+        )
+        AppCardColorMode.SOLID -> solidColors(values.solidHex)
     }
-
-    fun previewColors(
-        mode: AppCardColorMode,
-        accentHex: String,
-        values: AppCardColorValues
-    ): List<Color> = colors(
-        mode = mode,
-        accentHex = accentHex,
-        values = values
-    )
-
-    fun colors(
-        mode: AppCardColorMode,
-        accentHex: String,
-        values: AppCardColorValues
-    ): List<Color> = colors(
-        mode = mode,
-        accentHex = accentHex,
-        startHex = values.startHex,
-        middleHex = values.middleHex,
-        endHex = values.endHex,
-        solidHex = values.solidHex
-    )
 
     fun encodeColorValues(
         startHex: String,
@@ -99,36 +93,22 @@ object AppCardColorDefaults {
         )
     }
 
-    fun defaultColors(): List<Color> = defaultGradientColors
-
-    fun accentColors(accentHex: String): List<Color> {
-        val accent = accentHex.toColorOrNull() ?: defaultAccentColor
-        return accentColors(accent)
-    }
-
-    fun accentColors(accent: Color): List<Color> =
-        listOf(
-            accent.darken(if (accent.requiresLightContent()) 0.16f else 0.46f),
-            accent,
-            if (accent.requiresLightContent()) accent.lighten(0.22f) else accent.darken(0.18f)
-        )
+    /** Spreads [accent] into a three-stop gradient so single-color cards keep their depth. */
+    fun accentColors(accent: Color): List<Color> = listOf(
+        accent.darken(if (accent.requiresLightContent()) 0.16f else 0.46f),
+        accent,
+        if (accent.requiresLightContent()) accent.lighten(0.22f) else accent.darken(0.18f)
+    )
 
     fun gradientColors(
         startHex: String,
         middleHex: String,
         endHex: String
-    ): List<Color> {
-        val fallbackColors = defaultGradientColors
-        return listOf(
-            startHex.toColorOrNull() ?: fallbackColors.getOrElse(0) { Color.White },
-            middleHex.toColorOrNull() ?: fallbackColors.getOrElse(1) {
-                fallbackColors.firstOrNull() ?: Color.White
-            },
-            endHex.toColorOrNull() ?: fallbackColors.getOrElse(2) {
-                fallbackColors.lastOrNull() ?: Color.White
-            }
-        )
-    }
+    ): List<Color> = listOf(
+        startHex.toColorOrNull() ?: defaultGradientColors[0],
+        middleHex.toColorOrNull() ?: defaultGradientColors[1],
+        endHex.toColorOrNull() ?: defaultGradientColors[2]
+    )
 
     fun solidColors(colorHex: String): List<Color> {
         val color = colorHex.toColorOrNull() ?: defaultSolidColor

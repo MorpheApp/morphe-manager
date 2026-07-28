@@ -73,6 +73,10 @@ class ThemeSettingsViewModel(
         prefs.customAccentColor.update(value)
     }
 
+    /**
+     * Persists the card color [mode] together with the picked colors. The colors are kept even
+     * for [AppCardColorMode.DEFAULT] so switching modes back and forth does not discard them.
+     */
     fun applyAppCardColors(
         mode: AppCardColorMode,
         startColorHex: String,
@@ -82,16 +86,12 @@ class ThemeSettingsViewModel(
     ) = viewModelScope.launch {
         prefs.edit {
             prefs.appCardColorMode.value = mode
-            prefs.customAppCardColors.value = if (mode == AppCardColorMode.DEFAULT) {
-                ""
-            } else {
-                AppCardColorDefaults.encodeColorValues(
-                    startHex = startColorHex,
-                    middleHex = middleColorHex,
-                    endHex = endColorHex,
-                    solidHex = solidColorHex
-                )
-            }
+            prefs.customAppCardColors.value = AppCardColorDefaults.encodeColorValues(
+                startHex = startColorHex,
+                middleHex = middleColorHex,
+                endHex = endColorHex,
+                solidHex = solidColorHex
+            )
         }
     }
 

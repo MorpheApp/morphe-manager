@@ -106,6 +106,11 @@ class MainActivity : AppCompatActivity() {
             val pureBlackTheme by vm.prefs.pureBlackTheme.getAsState()
             val customAccentColor by vm.prefs.customAccentColor.getAsState()
             val customThemeColor by vm.prefs.customThemeColor.getAsState()
+            val appCardColorMode by vm.prefs.appCardColorMode.getAsState()
+            val customAppCardColors by vm.prefs.customAppCardColors.getAsState()
+            val appCardColorValues = remember(customAppCardColors) {
+                AppCardColorDefaults.decodeColorValues(customAppCardColors)
+            }
             val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
             val effectiveThemeStyle = resolveThemeStyle(themeStyle, supportsDynamicColor)
             val darkTheme = when (theme) {
@@ -120,7 +125,9 @@ class MainActivity : AppCompatActivity() {
                 pureBlackTheme = pureBlackTheme,
                 monochromeTheme = effectiveThemeStyle == ThemeStyle.MONOCHROME,
                 accentColorHex = customAccentColor.takeUnless { it.isBlank() },
-                themeColorHex = customThemeColor.takeUnless { it.isBlank() }
+                themeColorHex = customThemeColor.takeUnless { it.isBlank() },
+                appCardColorMode = appCardColorMode,
+                appCardColorValues = appCardColorValues
             ) {
                 MorpheManager(vm)
             }
