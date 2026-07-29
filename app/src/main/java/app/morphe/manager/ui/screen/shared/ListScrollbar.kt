@@ -522,15 +522,27 @@ private fun LazyListState.seekTarget(
     val totalItems = layoutInfo.totalItemsCount
     if (totalItems <= 0) return ScrollbarSeekTarget(index = 0)
 
+    val lastIndex = totalItems - 1
+    // Rows never measured are estimated from the average, so the computed range falls short of the
+    // real one whenever they turn out taller. Dragging to the very end therefore aims past the last
+    // row and lets the list clamp, which lands on the true bottom however wrong the estimate was
+    if (fraction >= 1f) {
+        val lastItemSize = sizeCache[lastIndex]?.toFloat() ?: metrics.averageItemSize
+        return ScrollbarSeekTarget(
+            index = lastIndex,
+            offset = (lastItemSize + layoutInfo.afterContentPadding).roundToInt().coerceAtLeast(0)
+        )
+    }
+
     var remaining = fraction * metrics.maxScrollOffset
-    for (index in 0 until totalItems - 1) {
+    for (index in 0 until lastIndex) {
         val itemSize = sizeCache[index]?.toFloat() ?: metrics.averageItemSize
         if (itemSize <= 0f || remaining < itemSize) {
             return ScrollbarSeekTarget(index = index, offset = remaining.roundToInt().coerceAtLeast(0))
         }
         remaining -= itemSize
     }
-    return ScrollbarSeekTarget(index = totalItems - 1, offset = remaining.roundToInt().coerceAtLeast(0))
+    return ScrollbarSeekTarget(index = lastIndex, offset = remaining.roundToInt().coerceAtLeast(0))
 }
 
 private fun ScrollState.scrollbarMetrics(): ScrollbarMetrics {
