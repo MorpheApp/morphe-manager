@@ -49,6 +49,7 @@ import app.morphe.manager.ui.screen.settings.SystemTabContent
 import app.morphe.manager.ui.screen.settings.system.*
 import app.morphe.manager.ui.screen.shared.GlassButton
 import app.morphe.manager.ui.screen.shared.GlassButtonDefaults
+import app.morphe.manager.ui.screen.shared.ListScrollbar
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
 import app.morphe.manager.ui.screen.shared.isLandscape
 import app.morphe.manager.ui.viewmodel.*
@@ -169,6 +170,12 @@ fun SettingsScreen(
     }
 
     val currentTab = SettingsTab.entries[selectedTabIndex]
+    // The tab layouts own the scrolling, so the scrollbar tracks whichever tab is on screen
+    val currentScrollState = when (currentTab) {
+        SettingsTab.APPEARANCE -> appearanceScrollState
+        SettingsTab.ADVANCED -> advancedScrollState
+        SettingsTab.SYSTEM -> systemScrollState
+    }
 
     // Appearance settings
     val theme by themeViewModel.prefs.theme.getAsState()
@@ -337,12 +344,16 @@ fun SettingsScreen(
                     onSystemTabPositioned = { globalOnboardingState?.systemTabBounds = it }
                 )
                 VerticalDivider(modifier = Modifier.padding(vertical = 20.dp))
-                AnimatedContent(
-                    targetState = currentTab,
-                    transitionSpec = MorpheAnimations.fadeCrossfade(200),
-                    label = "settings_tab_landscape",
-                    modifier = Modifier.weight(1f).fillMaxHeight()
-                ) { tab -> TabContent(tab) }
+                Box(modifier = Modifier.weight(1f).fillMaxHeight()) {
+                    AnimatedContent(
+                        targetState = currentTab,
+                        transitionSpec = MorpheAnimations.fadeCrossfade(200),
+                        label = "settings_tab_landscape",
+                        modifier = Modifier.fillMaxSize()
+                    ) { tab -> TabContent(tab) }
+
+                    ListScrollbar(scrollState = currentScrollState)
+                }
             }
         } else {
             // Portrait: horizontal pager + bottom navigation
@@ -361,12 +372,19 @@ fun SettingsScreen(
                             onClick(action = { backPressedDispatcher?.onBackPressed(); true })
                         }
                 )
-                HorizontalPager(
-                    state = pagerState,
+                // Overlay sits outside the pager, which clips each page to its own bounds
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
-                ) { page -> TabContent(SettingsTab.entries[page]) }
+                ) {
+                    HorizontalPager(
+                        state = pagerState,
+                        modifier = Modifier.fillMaxSize()
+                    ) { page -> TabContent(SettingsTab.entries[page]) }
+
+                    ListScrollbar(scrollState = currentScrollState)
+                }
 
                 MorpheBottomNavigation(
                     currentTab = currentTab,
