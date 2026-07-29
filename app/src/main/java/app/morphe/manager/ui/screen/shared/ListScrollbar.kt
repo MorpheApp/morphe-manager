@@ -59,6 +59,12 @@ private val ScrollbarIdleTimeout = 650.milliseconds
 /** Keeps the thumb grabbable on very long lists, where the true ratio would be a few pixels. */
 private const val MinThumbFraction = 0.08f
 
+/**
+ * Below this many letters the track is mostly dead space between a couple of jumps, which reads as
+ * a broken scrollbar rather than a shortcut, so those lists keep the plain proportional thumb.
+ */
+private const val MinAlphabetTargets = 5
+
 /** First row carrying a given leading letter, used to drive the alphabet fast scroll. */
 @Immutable
 data class ScrollTarget(
@@ -111,8 +117,9 @@ private class ScrollbarSeekController(private val scope: CoroutineScope) {
 /**
  * Scrollbar overlay for a [LazyListState]. Place inside a Box that overlays the list.
  *
- * Passing [alphabetTargets] together with [alphabetMode] turns the thumb into an alphabet fast
- * scroll that shows the leading letter while dragging; without them, it stays a plain scrollbar.
+ * Passing [alphabetMode] together with at least [MinAlphabetTargets] [alphabetTargets] turns the
+ * thumb into an alphabet fast scroll that shows the leading letter while dragging; otherwise it
+ * stays a plain scrollbar.
  */
 @Composable
 fun BoxScope.ListScrollbar(
@@ -131,7 +138,7 @@ fun BoxScope.ListScrollbar(
     val canScroll by remember(listState) {
         derivedStateOf { listState.canScrollBackward || listState.canScrollForward }
     }
-    val alphabetEnabled = alphabetMode && alphabetTargets.isNotEmpty()
+    val alphabetEnabled = alphabetMode && alphabetTargets.size >= MinAlphabetTargets
 
     ScrollbarOverlay(
         progress = { metrics.value.progress },
@@ -233,6 +240,11 @@ private fun BoxScope.ScrollbarOverlay(
     var dragging by remember { mutableStateOf(false) }
     var activeLabel by remember { mutableStateOf<String?>(null) }
     var indicatorVisible by remember { mutableStateOf(false) }
+    var dragFraction by remember { mutableFloatStateOf(0f) }
+
+    // A seek clamps once the list runs out of room, so following the resulting scroll would pin the
+    // thumb to an edge while the finger keeps moving. Mid-drag the indicator follows the finger
+    val indicatorProgress = { if (dragging) dragFraction else progress() }
 
     LaunchedEffect(canScroll, isScrolling, dragging) {
         if (!canScroll) {
@@ -299,7 +311,7 @@ private fun BoxScope.ScrollbarOverlay(
                     }
                     drawRoundRect(
                         color = thumbColor,
-                        topLeft = Offset(left, ((size.height - thumbHeight) * progress()).coerceAtLeast(0f)),
+                        topLeft = Offset(left, ((size.height - thumbHeight) * indicatorProgress()).coerceAtLeast(0f)),
                         size = Size(trackWidth, thumbHeight),
                         cornerRadius = corner,
                         alpha = alpha
@@ -318,12 +330,16 @@ private fun BoxScope.ScrollbarOverlay(
                             val event = awaitPointerEvent()
                             val change = event.changes.firstOrNull { it.id == down.id } ?: break
                             if (!change.pressed) break
+                            val fraction = (change.position.y / trackHeight).coerceIn(0f, 1f)
                             if (!dragStarted) {
                                 if (abs(change.position.y - down.position.y) < viewConfiguration.touchSlop) continue
                                 dragStarted = true
+                                // Set before the flag, so the first drawn frame already uses it
+                                dragFraction = fraction
                                 dragging = true
                             }
-                            val target = currentResolveSeek((change.position.y / trackHeight).coerceIn(0f, 1f))
+                            dragFraction = fraction
+                            val target = currentResolveSeek(fraction)
                             activeLabel = target.label
                             // Several pointer events land inside one letter's band, and restarting
                             // the jump for each of them cancels a scroll that has not settled yet
@@ -354,7 +370,7 @@ private fun BoxScope.ScrollbarOverlay(
                         val placeable = measurable.measure(constraints)
                         val trackHeight = constraints.maxHeight.toFloat()
                         val thumbHeight = AlphabetThumbHeight.toPx()
-                        val thumbTop = ((trackHeight - thumbHeight) * progress()).coerceAtLeast(0f)
+                        val thumbTop = ((trackHeight - thumbHeight) * indicatorProgress()).coerceAtLeast(0f)
                         val y = thumbTop + (thumbHeight - placeable.height) / 2f
                         layout(placeable.width, placeable.height) {
                             placeable.place(0, y.roundToInt())
