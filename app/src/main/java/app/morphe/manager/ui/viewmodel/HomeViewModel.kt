@@ -1634,7 +1634,7 @@ class HomeViewModel(
         listOf(
             filesystem.getPatchedAppFile(app.currentPackageName, app.version),
             filesystem.getPatchedAppFile(app.originalPackageName, app.version)
-        ).distinctBy { it.absolutePath }.firstOrNull { it.exists() }
+        ).distinctBy { it.absolutePath }.firstOrNull { it.exists() && it.length() > 0 }
 
     suspend fun persistReinstalledApp(
         app: InstalledApp,
@@ -1922,7 +1922,14 @@ class HomeViewModel(
                 }
                 val expectedSignatures = bundleAppMetadataFlow.value[packageName]?.signatures
                 if (!expectedSignatures.isNullOrEmpty()) {
-                    pm.getInstalledSignatureHashes(packageName).none { it in expectedSignatures }
+                    val installedHashes = pm.getInstalledSignatureHashes(packageName)
+                    if (installedHashes.isEmpty()) {
+                        // Cannot read installed signatures → skip verification, don't treat as patched
+                        val trackedPatch = installedAppRepository.get(packageName)
+                        trackedPatch != null && pkgInfo.versionName == trackedPatch.version
+                    } else {
+                        installedHashes.none { it in expectedSignatures }
+                    }
                 } else {
                     val trackedPatch = installedAppRepository.get(packageName)
                     trackedPatch != null && pkgInfo.versionName == trackedPatch.version

@@ -210,7 +210,7 @@ class PM(
 
     fun isAppDeleted(packageName: String, hasSavedCopy: Boolean, wasInstalledOnDevice: Boolean): Boolean {
         val currentlyInstalled = getPackageInfo(packageName) != null
-        return !currentlyInstalled && wasInstalledOnDevice && hasSavedCopy
+        return !currentlyInstalled && wasInstalledOnDevice
     }
 
     private fun cleanLabel(raw: String, packageName: String): String {
