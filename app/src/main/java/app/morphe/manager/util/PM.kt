@@ -208,7 +208,10 @@ class PM(
         }
     }
 
-    fun isAppDeleted(packageName: String, hasSavedCopy: Boolean, wasInstalledOnDevice: Boolean): Boolean {
+    /**
+     * Whether a tracked app that was installed on the device is now gone.
+     */
+    fun isAppDeleted(packageName: String, wasInstalledOnDevice: Boolean): Boolean {
         val currentlyInstalled = getPackageInfo(packageName) != null
         return !currentlyInstalled && wasInstalledOnDevice
     }

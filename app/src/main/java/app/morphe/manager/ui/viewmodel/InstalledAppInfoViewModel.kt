@@ -233,7 +233,7 @@ class InstalledAppInfoViewModel(
             filesystem.getPatchedAppFile(target.currentPackageName, target.version),
             filesystem.getPatchedAppFile(target.originalPackageName, target.version)
         ).distinct()
-        return candidates.firstOrNull { it.exists() }
+        return candidates.firstOrNull { it.exists() && it.length() > 0 }
     }
 
     private suspend fun refreshAppState(app: InstalledApp) {
@@ -251,7 +251,6 @@ class InstalledAppInfoViewModel(
             // App is deleted if it was installed on device but now missing
             isAppDeleted = pm.isAppDeleted(
                 packageName = app.currentPackageName,
-                hasSavedCopy = hasSavedCopy,
                 wasInstalledOnDevice = app.installType != InstallType.SAVED
             )
             appInfo = withContext(Dispatchers.IO) {

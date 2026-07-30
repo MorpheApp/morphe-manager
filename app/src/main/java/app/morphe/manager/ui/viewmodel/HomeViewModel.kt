@@ -537,10 +537,6 @@ class HomeViewModel(
             .map { sources -> sources.any { it.enabled && it.uid != DEFAULT_SOURCE_UID } }
             .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
-    // Track deleted apps
-    var appsDeletedStatus by mutableStateOf<Map<String, Boolean>>(emptyMap())
-        private set
-
     // Using mount install (set externally)
     var usingMountInstall: Boolean = false
 
@@ -705,7 +701,6 @@ class HomeViewModel(
         triggerUpdateCheck()
         observeLoadingState()
         observeInstalledAppUpdates()
-        observeDeletedAppsStatus()
         observeSnackbarState()
     }
 
@@ -767,17 +762,6 @@ class HomeViewModel(
                 .collect { (installedApps, _, _) ->
                     checkInstalledAppsForUpdates(installedApps)
                 }
-        }
-    }
-
-    /**
-     * Reactively keeps [appsDeletedStatus] up to date when the installed apps list changes.
-     */
-    private fun observeDeletedAppsStatus() {
-        viewModelScope.launch {
-            installedAppRepository.getAll()
-                .filter { it.isNotEmpty() }
-                .collect { installedApps -> updateDeletedAppsStatus(installedApps) }
         }
     }
 
@@ -1253,7 +1237,6 @@ class HomeViewModel(
             val isDeleted = installedApp?.let { installed ->
                 pm.isAppDeleted(
                     packageName = installed.currentPackageName,
-                    hasSavedCopy = hasSavedCopy,
                     wasInstalledOnDevice = installed.installType != InstallType.SAVED
                 )
             } == true
@@ -1617,19 +1600,6 @@ class HomeViewModel(
             (state?.visible?.size ?: 0) > 4 || thirdParty
         }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
-    /**
-     * Update deleted apps status.
-     */
-    fun updateDeletedAppsStatus(installedApps: List<InstalledApp>) {
-        appsDeletedStatus = installedApps.associate { app ->
-            app.currentPackageName to pm.isAppDeleted(
-                packageName = app.currentPackageName,
-                hasSavedCopy = savedPatchedApkFile(app) != null,
-                wasInstalledOnDevice = app.installType != InstallType.SAVED
-            )
-        }
-    }
-
     fun savedPatchedApkFile(app: InstalledApp): File? =
         listOf(
             filesystem.getPatchedAppFile(app.currentPackageName, app.version),
@@ -1923,17 +1893,13 @@ class HomeViewModel(
                 val expectedSignatures = bundleAppMetadataFlow.value[packageName]?.signatures
                 if (!expectedSignatures.isNullOrEmpty()) {
                     val installedHashes = pm.getInstalledSignatureHashes(packageName)
-                    if (installedHashes.isEmpty()) {
-                        // Cannot read installed signatures → skip verification, don't treat as patched
-                        val trackedPatch = installedAppRepository.get(packageName)
-                        trackedPatch != null && pkgInfo.versionName == trackedPatch.version
-                    } else {
-                        installedHashes.none { it in expectedSignatures }
+                    if (installedHashes.isNotEmpty()) {
+                        return@run installedHashes.none { it in expectedSignatures }
                     }
-                } else {
-                    val trackedPatch = installedAppRepository.get(packageName)
-                    trackedPatch != null && pkgInfo.versionName == trackedPatch.version
+                    // Can't read installed signatures → fall through to DB tracking
                 }
+                val trackedPatch = installedAppRepository.get(packageName)
+                trackedPatch != null && pkgInfo.versionName == trackedPatch.version
             }
             if (isPatched) return true to null
 
