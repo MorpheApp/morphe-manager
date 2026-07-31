@@ -31,6 +31,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.ui.screen.home.ExpertModeDialog
+import app.morphe.manager.ui.screen.home.ExpertPatchActions
 import app.morphe.manager.ui.screen.patcher.ExpertPatchingInProgress
 import app.morphe.manager.ui.screen.patcher.PatcherErrorDialog
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
@@ -132,6 +134,34 @@ fun BatchPatcherScreen(
 
     LaunchedEffect(viewModel.attachTarget) {
         if (viewModel.attachTarget != null) openApkPicker()
+    }
+
+    // The same dialog the single-app flow uses, pointed at one queued app instead of the
+    // patcher, so the queue never has to grow a second patch list
+    viewModel.edit?.let { edit ->
+        ExpertModeDialog(
+            options = edit.options,
+            allPatchesInfo = edit.allPatchesInfo,
+            totalSelectedCount = edit.totalSelectedCount,
+            totalPatchesCount = edit.totalPatchesCount,
+            hasMultipleBundles = edit.hasMultipleBundles,
+            patchActions = ExpertPatchActions(
+                onPatchToggle = edit::togglePatch,
+                onSelectAll = edit::selectAll,
+                onDeselectAll = edit::deselectAll,
+                onResetToDefault = edit::resetToDefault,
+                onRestoreSaved = edit::restoreSaved,
+                // Copying a selection between sources belongs to the app's own patch dialog,
+                // where it can be saved, rather than to a single queued run
+                onCopyFromBundle = {},
+                onOptionChange = edit::updateOption,
+                onResetOptions = edit::resetOptions
+            ),
+            savedPatches = edit.savedSelection,
+            proceedText = stringResource(R.string.save),
+            onDismiss = viewModel::cancelEdit,
+            onProceed = viewModel::applyEdit
+        )
     }
 
     // Cards clamp the failure text, so the full reason lives in the patcher's own error dialog
@@ -268,6 +298,9 @@ fun BatchPatcherScreen(
                         onAttach = { viewModel.requestAttach(item.packageName) },
                         onToggleExcluded = { viewModel.toggleExcluded(item.packageName) },
                         onForceVersion = { viewModel.forceVersion(item.packageName) },
+                        // Nothing to choose from until an APK resolves, the patch list is
+                        // scoped to its exact version
+                        onEditPatches = item.source?.let { { viewModel.beginEdit(item) } },
                         // Installing everything is not always what the user wants once they
                         // see which apps succeeded
                         onInstall = request?.let { { startInstallQueue(listOf(it)) } },
@@ -454,6 +487,7 @@ private fun BatchItemCard(
     onAttach: () -> Unit,
     onToggleExcluded: () -> Unit,
     onForceVersion: () -> Unit,
+    onEditPatches: (() -> Unit)? = null,
     onInstall: (() -> Unit)? = null,
     onOpen: (() -> Unit)? = null,
     onShowError: () -> Unit = {}
@@ -560,6 +594,16 @@ private fun BatchItemCard(
                             contentDescription = attachLabel,
                             tooltip = attachLabel
                         )
+
+                        if (onEditPatches != null) {
+                            val editLabel = stringResource(R.string.batch_patch_edit_patches)
+                            ActionPillButton(
+                                onClick = onEditPatches,
+                                icon = Icons.Outlined.Tune,
+                                contentDescription = editLabel,
+                                tooltip = editLabel
+                            )
+                        }
 
                         if (item.state == BatchItemState.VERSION_MISMATCH) {
                             val forceLabel = stringResource(R.string.batch_patch_force_version)

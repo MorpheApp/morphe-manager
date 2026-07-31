@@ -66,6 +66,7 @@ fun ExpertModeDialog(
     hasMultipleBundles: Boolean,
     patchActions: ExpertPatchActions,
     savedPatches: PatchSelection = emptyMap(),
+    proceedText: String = stringResource(R.string.expert_mode_proceed),
     onDismiss: () -> Unit,
     onProceed: () -> Unit
 ) {
@@ -447,7 +448,7 @@ fun ExpertModeDialog(
 
             // Proceed to Patching button
             MorpheDialogButton(
-                text = stringResource(R.string.expert_mode_proceed),
+                text = proceedText,
                 onClick = {
                     // Check if multiple bundles are selected
                     if (hasMultipleBundles) {

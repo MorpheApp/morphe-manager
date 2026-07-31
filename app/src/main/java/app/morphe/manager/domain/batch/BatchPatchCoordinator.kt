@@ -20,7 +20,9 @@ import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.ui.model.PatchRunProgress
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.AppCoroutineScope
+import app.morphe.manager.util.Options
 import app.morphe.manager.util.PM
+import app.morphe.manager.util.PatchSelection
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -142,6 +144,32 @@ class BatchPatchCoordinator(
                     } else {
                         item
                     }
+                }
+            )
+        }
+    }
+
+    /**
+     * Replaces what one queued app will be patched with, after the user edited it on the
+     * preflight screen. Deselecting everything leaves nothing to run, which is the same
+     * situation as a source that contributes no patches.
+     */
+    fun updateSelection(packageName: String, selection: PatchSelection, options: Options) {
+        _state.update { state ->
+            state.copy(
+                items = state.items.map { item ->
+                    if (item.packageName != packageName || item.state.isTerminal) return@map item
+
+                    val empty = selection.values.sumOf { it.size } == 0
+                    item.copy(
+                        selection = selection,
+                        options = options,
+                        state = when {
+                            empty -> BatchItemState.NO_PATCHES
+                            item.state == BatchItemState.NO_PATCHES -> BatchItemState.READY
+                            else -> item.state
+                        }
+                    )
                 }
             )
         }

@@ -17,23 +17,97 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
-import app.morphe.manager.domain.batch.BatchInstallOutcome
-import app.morphe.manager.domain.batch.BatchInstallPolicy
-import app.morphe.manager.domain.batch.BatchItemState
-import app.morphe.manager.domain.batch.BatchPatchCoordinator
-import app.morphe.manager.domain.batch.BatchPatchItem
-import app.morphe.manager.domain.batch.BatchPhase
+import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.util.PM
-import app.morphe.manager.util.tag
-import app.morphe.manager.util.toast
+import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.util.*
+import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
+import app.morphe.manager.util.PatchSelectionUtils.togglePatch
+import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
+
+/**
+ * Live patch selection for one queued app while its editor is open.
+ *
+ * Mirrors the state the expert dialog drives in the single-app flow, so the batch screen can
+ * reuse that dialog instead of growing a second patch list. Edits stay here until they are
+ * applied, which keeps a canceled edit from touching the plan.
+ */
+class BatchPatchEdit(
+    val packageName: String,
+    val appName: String,
+    val bundles: List<PatchBundleInfo.Scoped>,
+    val savedSelection: PatchSelection,
+    initialOptions: Options
+) {
+    var selection by mutableStateOf(savedSelection)
+        private set
+
+    var options by mutableStateOf(initialOptions)
+        private set
+
+    val allPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>
+        get() = bundles.map { bundle ->
+            val selected = selection[bundle.uid].orEmpty()
+            val patches = bundle.patchSequence(true)
+                .map { patch -> patch to (patch.name in selected) }
+                .sortedBy { (patch, _) -> patch.name }
+                .toList()
+            bundle to patches
+        }.filter { it.second.isNotEmpty() }
+            .sortedByDescending { (bundle, _) -> bundle.compatible.size }
+
+    val totalSelectedCount get() = selection.values.sumOf { it.size }
+
+    val totalPatchesCount get() = allPatchesInfo.sumOf { it.second.size }
+
+    val hasMultipleBundles get() = selection.count { (_, patches) -> patches.isNotEmpty() } > 1
+
+    fun togglePatch(bundleUid: Int, patchName: String) {
+        selection = selection.togglePatch(bundleUid, patchName)
+    }
+
+    fun selectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) =
+        replaceBundle(bundleUid, patches.mapTo(mutableSetOf()) { (patch, _) -> patch.name })
+
+    fun deselectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
+        val removed = patches.mapTo(mutableSetOf()) { (patch, _) -> patch.name }
+        replaceBundle(bundleUid, selection[bundleUid].orEmpty() - removed)
+    }
+
+    fun resetToDefault(bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) =
+        replaceBundle(
+            bundleUid,
+            allPatches.filter { (patch, _) -> patch.include }
+                .mapTo(mutableSetOf()) { (patch, _) -> patch.name }
+        )
+
+    fun restoreSaved(bundleUid: Int) {
+        replaceBundle(bundleUid, savedSelection[bundleUid] ?: return)
+    }
+
+    fun updateOption(bundleUid: Int, patchName: String, optionKey: String, value: Any?) {
+        options = options.updateOption(bundleUid, patchName, optionKey, value)
+    }
+
+    fun resetOptions(bundleUid: Int, patchName: String) {
+        options = options.resetOptionsForPatch(bundleUid, patchName)
+    }
+
+    private fun replaceBundle(bundleUid: Int, patches: Set<String>) {
+        selection = selection.toMutableMap().apply {
+            if (patches.isEmpty()) remove(bundleUid) else put(bundleUid, patches)
+        }
+    }
+}
 
 /**
  * Screen-level wrapper around [BatchPatchCoordinator].
@@ -73,6 +147,42 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
 
     fun requestAttach(packageName: String) {
         attachTarget = packageName
+    }
+
+    /** Patch selection editor for one queued app, null when none is open. */
+    var edit: BatchPatchEdit? by mutableStateOf(null)
+        private set
+
+    /**
+     * Opens the editor for [item], scoping the patch list to the exact APK version the queue
+     * resolved so the user never sees patches that could not run against it anyway.
+     */
+    fun beginEdit(item: BatchPatchItem) {
+        val source = item.source ?: return
+        viewModelScope.launch {
+            val bundles = patchBundleRepository
+                .scopedBundleInfoFlow(item.packageName, source.version, source.versionCode)
+                .first()
+                .filter { it.enabled }
+
+            edit = BatchPatchEdit(
+                packageName = item.packageName,
+                appName = item.appName,
+                bundles = bundles,
+                savedSelection = item.selection,
+                initialOptions = item.options
+            )
+        }
+    }
+
+    fun cancelEdit() {
+        edit = null
+    }
+
+    fun applyEdit() {
+        val current = edit ?: return
+        coordinator.updateSelection(current.packageName, current.selection, current.options)
+        edit = null
     }
 
     /**
