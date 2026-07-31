@@ -68,6 +68,7 @@ import kotlin.time.Duration.Companion.milliseconds
 fun HomeDialogs(
     homeViewModel: HomeViewModel,
     storagePickerLauncher: () -> Unit,
+    openApkDownloadHelper: (() -> Unit)? = null,
     openBundlePicker: () -> Unit,
     patchesItem: MutableState<HomeAppItem?>,
     globalOnboardingState: GlobalOnboardingState? = null
@@ -169,7 +170,8 @@ fun HomeDialogs(
             onDismiss = {
                 homeViewModel.showDownloadInstructionsDialog = false
                 homeViewModel.cleanupPendingData()
-            }
+            },
+            onOpenApkDownloadHelper = openApkDownloadHelper
         ) {
             homeViewModel.handleDownloadInstructionsContinue { url ->
                 try {
@@ -798,6 +800,7 @@ private fun DownloadInstructionsDialog(
     downloadColor: Color,
     isApkBundle: Boolean,
     onDismiss: () -> Unit,
+    onOpenApkDownloadHelper: (() -> Unit)? = null,
     onContinue: () -> Unit
 ) {
     val context = LocalContext.current
@@ -815,12 +818,23 @@ private fun DownloadInstructionsDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_download_instructions_title),
         footer = {
-            MorpheDialogButton(
-                text = stringResource(R.string.home_download_instructions_continue),
-                onClick = onContinue,
-                icon = Icons.AutoMirrored.Outlined.OpenInNew,
-                modifier = Modifier.fillMaxWidth()
-            )
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                if (onOpenApkDownloadHelper != null) {
+                    MorpheDialogOutlinedButton(
+                        text = stringResource(R.string.home_apk_helper_download),
+                        onClick = onOpenApkDownloadHelper,
+                        icon = Icons.Outlined.Download,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                MorpheDialogButton(
+                    text = stringResource(R.string.home_download_instructions_continue),
+                    onClick = onContinue,
+                    icon = Icons.AutoMirrored.Outlined.OpenInNew,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     ) {
         val textColor = LocalDialogTextColor.current

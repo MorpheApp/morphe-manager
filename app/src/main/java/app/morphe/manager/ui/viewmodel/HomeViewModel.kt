@@ -3068,6 +3068,43 @@ class HomeViewModel(
         return searchUrl
     }
 
+    fun createApkDownloadHelperIntent(): Intent? {
+        val packageName = pendingPackageName ?: return null
+        val appName = pendingAppName ?: KnownApps.getAppName(packageName)
+        val versionForSearch = pendingSelectedDownloadVersion ?: pendingRecommendedVersion
+        val metadata = bundleAppMetadataFlow.value[packageName]
+        val compatibleVersionNames = pendingCompatibleVersions
+            .mapNotNull { it.target.version }
+            .distinct()
+        val selectedVersionCodes = pendingCompatibleVersions
+            .filter { it.target.version == versionForSearch?.version }
+            .flatMap { it.buildCodes.orEmpty() }
+            .distinct()
+            .map { it.toLong() }
+            .toLongArray()
+        val compatibleVersionCodes = pendingCompatibleVersions
+            .flatMap { it.buildCodes.orEmpty() }
+            .distinct()
+            .map { it.toLong() }
+            .toLongArray()
+
+        return ApkDownloadHelperContract.createRequestIntent(
+            callerPackage = app.packageName,
+            packageName = packageName,
+            appName = appName,
+            versionName = versionForSearch?.version,
+            versionCode = selectedVersionCodes.singleOrNull(),
+            versionCodes = selectedVersionCodes,
+            compatibleVersionNames = compatibleVersionNames,
+            compatibleVersionCodes = compatibleVersionCodes,
+            supportedAbis = Build.SUPPORTED_ABIS,
+            requestedFileType = metadata?.apkFileType?.toString(),
+            allowSplitArchive = metadata?.apkFileType?.isApk == false,
+            installStockAfterDownload = usingMountInstall && pendingTargetAppInstalled != true,
+            fallbackWebUrl = getApiOfflineWebSearchUrl()
+        )
+    }
+
     /**
      * Handle download instructions continue.
      */
