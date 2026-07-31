@@ -143,9 +143,9 @@ fun BatchPatcherScreen(
                 appName = item.appName,
                 packageName = item.packageName,
                 appVersion = item.version.orEmpty(),
-                bundles = listOfNotNull(
-                    item.bundleName?.let { PatcherErrorInfo.BundleInfo(name = it, version = null) }
-                )
+                bundles = item.bundles.map {
+                    PatcherErrorInfo.BundleInfo(name = it.name, version = null)
+                }
             ),
             onDismiss = { errorItem = null }
         )
@@ -681,7 +681,8 @@ private fun itemDetails(item: BatchPatchItem): String = when (item.state) {
             item.patchCount,
             item.patchCount
         )
-        listOfNotNull(item.version, source, patches, item.bundleName).joinToString(" • ")
+        val bundles = item.bundles.joinToString(", ") { it.name }.takeIf { it.isNotEmpty() }
+        listOfNotNull(item.version, source, patches, bundles).joinToString(" • ")
     }
 }
 

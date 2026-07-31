@@ -266,8 +266,9 @@ class BatchPatchCoordinator(
 
         val outputFile = workspace.resolve("${item.packageName}.apk")
 
+        val itemBundleUids = item.bundles.mapTo(mutableSetOf()) { it.uid }
         val bundleVersions = patchBundleRepository.sources.first()
-            .filter { item.bundleUid == null || it.uid == item.bundleUid }
+            .filter { itemBundleUids.isEmpty() || it.uid in itemBundleUids }
             .mapNotNull { it.version }
 
         val args = PatcherWorker.Args(
@@ -434,7 +435,9 @@ class BatchPatchCoordinator(
         patchSelectionRepository.updateSelection(
             item.packageName,
             item.selection,
-            scope = item.bundleUid?.let(::setOf) ?: item.selection.keys
+            // Scoped to every source the plan considered, so a source the user ended up taking
+            // nothing from has its stale selection cleared rather than left behind
+            scope = item.bundles.mapTo(mutableSetOf()) { it.uid }.ifEmpty { item.selection.keys }
         )
         // Simple mode derives its options from the per-app preference screen rather than the
         // database, so only an expert-mode selection is worth writing back
@@ -519,8 +522,7 @@ class BatchPatchCoordinator(
         source = null,
         selection = emptyMap(),
         options = emptyMap(),
-        bundleUid = null,
-        bundleName = null,
+        bundles = emptyList(),
         state = BatchItemState.NEEDS_APK
     )
 

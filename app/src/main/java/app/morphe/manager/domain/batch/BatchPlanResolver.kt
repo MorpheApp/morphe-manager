@@ -97,8 +97,7 @@ class BatchPlanResolver(
                 source = null,
                 selection = emptyMap(),
                 options = emptyMap(),
-                bundleUid = null,
-                bundleName = null,
+                bundles = emptyList(),
                 state = BatchItemState.NEEDS_APK
             )
         }
@@ -112,8 +111,7 @@ class BatchPlanResolver(
                     source = null,
                     selection = emptyMap(),
                     options = emptyMap(),
-                    bundleUid = null,
-                    bundleName = null,
+                    bundles = emptyList(),
                     state = BatchItemState.NEEDS_APK,
                     message = actualPackage
                 )
@@ -180,27 +178,29 @@ class BatchPlanResolver(
         val hasIncompatible = bundles.any { it.incompatible.isNotEmpty() }
         val hasUniversal = bundles.any { it.universal.isNotEmpty() }
 
-        fun noPatches(bundle: PatchBundleInfo.Scoped? = null) = BatchPatchItem(
+        fun noPatches(contributing: List<PatchBundleInfo.Scoped> = emptyList()) = BatchPatchItem(
             packageName = packageName,
             appName = appName,
             source = source,
             selection = emptyMap(),
             options = emptyMap(),
-            bundleUid = bundle?.uid,
-            bundleName = bundle?.name,
+            bundles = contributing.map { BatchBundleRef(it.uid, it.name) },
             state = BatchItemState.NO_PATCHES
         )
 
         if (!hasCompatible && !hasIncompatible && !hasUniversal) return noPatches()
 
-        val bundle = pickBundle(packageName, bundles, allowIncompatible) ?: return noPatches()
+        // Every source that has something to contribute is used, the same way the single-app
+        // flow merges them. Picking just one would silently drop patches the user relies on
+        val contributing = bundles.filter { it.patchSequence(allowIncompatible).any() }
+        if (contributing.isEmpty()) return noPatches()
 
-        val selection = resolveSelection(packageName, bundle, allowIncompatible)
+        val selection = resolveSelection(packageName, contributing, allowIncompatible)
             .let { if (useMount) it.filterGmsCore() else it }
 
-        if (selection.values.sumOf { it.size } == 0) return noPatches(bundle)
+        if (selection.values.sumOf { it.size } == 0) return noPatches(contributing)
 
-        val options = resolveOptions(packageName, bundle)
+        val options = resolveOptions(packageName, contributing)
 
         val versionMismatch = !hasCompatible && hasIncompatible && !allowIncompatible
 
@@ -210,65 +210,45 @@ class BatchPlanResolver(
             source = source,
             selection = selection,
             options = options,
-            bundleUid = bundle.uid,
-            bundleName = bundle.name,
+            bundles = contributing.map { BatchBundleRef(it.uid, it.name) },
             state = if (versionMismatch) BatchItemState.VERSION_MISMATCH else BatchItemState.READY
         )
     }
 
     /**
-     * Picks the single bundle used for this app. The interactive flow asks the user when more
-     * than one bundle applies, so the batch mirrors that choice with a stable rule: the bundle
-     * the user already patched this app with wins, otherwise the one with the most patches
-     * compatible with this exact version.
-     */
-    private suspend fun pickBundle(
-        packageName: String,
-        bundles: List<PatchBundleInfo.Scoped>,
-        allowIncompatible: Boolean
-    ): PatchBundleInfo.Scoped? {
-        val candidates = bundles.filter { bundle ->
-            bundle.patchSequence(allowIncompatible).any()
-        }
-        if (candidates.isEmpty()) return null
-        if (candidates.size == 1) return candidates.first()
-
-        val saved = patchSelectionRepository.getAllSelectionsForPackage(packageName)
-            .filterValues { it.isNotEmpty() }
-        candidates.firstOrNull { it.uid in saved.keys }?.let { return it }
-
-        return candidates.maxByOrNull { it.compatible.size }
-    }
-
-    /**
-     * Mirrors the single-app selection rules: a validated saved selection wins, otherwise the
-     * bundle defaults (`include = true`) are used.
+     * Mirrors the single-app selection rules across every contributing bundle: a validated
+     * saved selection wins, otherwise the bundle defaults (`include = true`) are used.
      */
     private suspend fun resolveSelection(
         packageName: String,
-        bundle: PatchBundleInfo.Scoped,
+        bundles: List<PatchBundleInfo.Scoped>,
         allowIncompatible: Boolean
     ): PatchSelection {
-        val patchesByName = mapOf(bundle.uid to bundle.patches.associateBy { it.name })
+        val uids = bundles.mapTo(mutableSetOf()) { it.uid }
+        val patchesByName = bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
         val saved = patchSelectionRepository.getAllSelectionsForPackage(packageName)
-            .filterKeys { it == bundle.uid }
+            .filterKeys { it in uids }
 
         if (saved.isNotEmpty()) {
             val validated = validatePatchSelection(saved, patchesByName)
-            val seen = patchSelectionRepository.getSeenPatches(packageName, bundle.uid)
-            val known = seen ?: saved[bundle.uid] ?: emptySet()
 
-            // Patches added to the bundle since the last run follow their include default, the
-            // same rule the expert dialog applies when it merges new patches into a selection
-            val newDefaults = bundle.patches
-                .filter { it.name !in known && it.include }
-                .mapTo(mutableSetOf()) { it.name }
+            val merged = bundles.associate { bundle ->
+                val seen = patchSelectionRepository.getSeenPatches(packageName, bundle.uid)
+                val known = seen ?: saved[bundle.uid] ?: emptySet()
 
-            val merged = (validated[bundle.uid].orEmpty() + newDefaults)
-            if (merged.isNotEmpty()) return mapOf(bundle.uid to merged)
+                // Patches added to the bundle since the last run follow their include default,
+                // the same rule the expert dialog applies when it merges new patches in
+                val newDefaults = bundle.patches
+                    .filter { it.name !in known && it.include }
+                    .mapTo(mutableSetOf()) { it.name }
+
+                bundle.uid to (validated[bundle.uid].orEmpty() + newDefaults)
+            }.filterValues { it.isNotEmpty() }
+
+            if (merged.isNotEmpty()) return merged
         }
 
-        return listOf(bundle).toPatchSelection(allowIncompatible) { _, patch -> patch.include }
+        return bundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
             .filterValues { it.isNotEmpty() }
     }
 
@@ -278,16 +258,17 @@ class BatchPlanResolver(
      */
     private suspend fun resolveOptions(
         packageName: String,
-        bundle: PatchBundleInfo.Scoped
+        bundles: List<PatchBundleInfo.Scoped>
     ): Options {
         if (!prefs.useExpertMode.get()) {
             return runCatching { patchOptionsPrefs.exportPatchOptions(packageName) }
                 .getOrDefault(emptyMap())
         }
 
-        val patchesByName = mapOf(bundle.uid to bundle.patches.associateBy { it.name })
+        val uids = bundles.mapTo(mutableSetOf()) { it.uid }
+        val patchesByName = bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
         val saved = patchOptionsRepository.getAllOptionsForPackage(packageName, patchesByName)
-            .filterKeys { it == bundle.uid }
+            .filterKeys { it in uids }
         return validatePatchOptions(saved, patchesByName)
     }
 

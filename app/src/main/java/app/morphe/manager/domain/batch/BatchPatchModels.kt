@@ -83,10 +83,15 @@ enum class BatchItemState {
 /** What happened when the patched APK was handed to the installer. */
 enum class BatchInstallOutcome { INSTALLED, FAILED }
 
+/** A patch source contributing to one queued app, kept for the run scope and for display. */
+data class BatchBundleRef(val uid: Int, val name: String)
+
 /**
  * A single app queued for patching, carrying everything the patcher needs so the run
  * itself never has to ask the user anything.
  *
+ * @param bundles Every enabled source that contributes patches to this app. An app covered by
+ *   more than one source is patched with all of them at once, exactly like the single-app flow.
  * @param forceVersionMismatch Set when the user chose to patch despite an unsupported version.
  * @param restoreState State to return to when the user un-excludes the item.
  * @param patchedFile Populated after a successful run with the retained patched APK.
@@ -99,8 +104,7 @@ data class BatchPatchItem(
     val source: BatchApkSource?,
     val selection: PatchSelection,
     val options: Options,
-    val bundleUid: Int?,
-    val bundleName: String?,
+    val bundles: List<BatchBundleRef>,
     val state: BatchItemState,
     val message: String? = null,
     val forceVersionMismatch: Boolean = false,
