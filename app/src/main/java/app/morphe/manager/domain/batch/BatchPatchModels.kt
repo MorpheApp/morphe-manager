@@ -83,8 +83,18 @@ enum class BatchItemState {
 /** What happened when the patched APK was handed to the installer. */
 enum class BatchInstallOutcome { INSTALLED, FAILED }
 
-/** A patch source contributing to one queued app, kept for the run scope and for display. */
-data class BatchBundleRef(val uid: Int, val name: String)
+/**
+ * A patch source contributing to one queued app, kept for the run scope and for display.
+ *
+ * @param patchNames Every patch the source offered at plan time, written back as the seen
+ *   snapshot after a successful run so the next plan can tell a genuinely new patch from one
+ *   the user deselected.
+ */
+data class BatchBundleRef(
+    val uid: Int,
+    val name: String,
+    val patchNames: Set<String>
+)
 
 /**
  * A single app queued for patching, carrying everything the patcher needs so the run

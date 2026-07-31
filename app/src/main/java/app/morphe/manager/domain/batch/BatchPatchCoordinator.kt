@@ -467,6 +467,15 @@ class BatchPatchCoordinator(
             // nothing from has its stale selection cleared rather than left behind
             scope = item.bundles.mapTo(mutableSetOf()) { it.uid }.ifEmpty { item.selection.keys }
         )
+        // Without this the next plan cannot tell a patch the user deselected from one that was
+        // added since, and would keep re-enabling every deselected default
+        item.bundles.forEach { bundle ->
+            patchSelectionRepository.saveSeenPatches(
+                packageName = item.packageName,
+                bundleUid = bundle.uid,
+                patchNames = bundle.patchNames
+            )
+        }
         // Simple mode derives its options from the per-app preference screen rather than the
         // database, so only an expert-mode selection is worth writing back
         if (prefs.useExpertMode.get()) {

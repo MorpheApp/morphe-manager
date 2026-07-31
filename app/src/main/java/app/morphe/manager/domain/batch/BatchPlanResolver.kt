@@ -184,7 +184,7 @@ class BatchPlanResolver(
             source = source,
             selection = emptyMap(),
             options = emptyMap(),
-            bundles = contributing.map { BatchBundleRef(it.uid, it.name) },
+            bundles = contributing.map { it.toRef() },
             state = BatchItemState.NO_PATCHES
         )
 
@@ -210,10 +210,16 @@ class BatchPlanResolver(
             source = source,
             selection = selection,
             options = options,
-            bundles = contributing.map { BatchBundleRef(it.uid, it.name) },
+            bundles = contributing.map { it.toRef() },
             state = if (versionMismatch) BatchItemState.VERSION_MISMATCH else BatchItemState.READY
         )
     }
+
+    private fun PatchBundleInfo.Scoped.toRef() = BatchBundleRef(
+        uid = uid,
+        name = name,
+        patchNames = patches.mapTo(mutableSetOf()) { it.name }
+    )
 
     /**
      * Mirrors the single-app selection rules across every contributing bundle: a validated
