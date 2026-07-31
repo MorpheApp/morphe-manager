@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -54,6 +55,24 @@ fun MultiSelectShell(
             content = content
         )
     }
+}
+
+private class LastVisibleValue<T>(var value: T)
+
+/**
+ * Returns [value] while [visible] is true, and the last value seen before that afterwards.
+ *
+ * Action handlers clear the selection in the same pass that hides the bar, so a row rendered
+ * from live state loses buttons and zeroes its counter while it is still sliding out.
+ *
+ * This holds only while both writes land in one snapshot. A handler that hides the bar and
+ * clears its state in separate frames has nothing left to freeze by the time [visible] flips.
+ */
+@Composable
+fun <T> rememberWhileVisible(visible: Boolean, value: T): T {
+    val holder = remember { LastVisibleValue(value) }
+    if (visible) holder.value = value
+    return holder.value
 }
 
 /**
