@@ -165,7 +165,7 @@ class PatcherWorker(
         // Don't show "patching complete" when Shizuku auto-install will immediately follow
         if (succeeded && autoInstallPending) return
         // Don't notify when the app is in the foreground - user sees the result on screen
-        if (isAppInForeground()) return
+        if (ManagerApplication.isInForeground) return
         val notification = Notification.Builder(applicationContext, "morphe-patcher-patching")
             .setContentTitle(
                 applicationContext.getString(
@@ -180,9 +180,6 @@ class PatcherWorker(
         applicationContext.getSystemService(NotificationManager::class.java)
             .notify(COMPLETION_NOTIFICATION_ID, notification)
     }
-
-    private fun isAppInForeground(): Boolean =
-        ManagerApplication.startedActivityCount > 0
 
     override suspend fun doWork(): Result {
         if (runAttemptCount > 0) {

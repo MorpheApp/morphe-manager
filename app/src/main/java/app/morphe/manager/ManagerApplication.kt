@@ -44,8 +44,16 @@ import org.lsposed.hiddenapibypass.HiddenApiBypass
 
 class ManagerApplication : Application() {
     companion object {
-        @Volatile var startedActivityCount: Int = 0
+        /**
+         * Resumed rather than started activities, because this answers "is the user looking at
+         * the result right now". A started activity can sit unfocused beside another app in
+         * split screen, where a completion notification is exactly what is wanted.
+         */
+        @Volatile var resumedActivityCount: Int = 0
             private set
+
+        /** True while a Morphe screen is in focus, so a result needs no notification. */
+        val isInForeground: Boolean get() = resumedActivityCount > 0
 
         /** Launcher shortcut that opens the batch queue with everything worth re-patching. */
         private const val SHORTCUT_ID_REPATCH = "repatch_outdated"
@@ -199,10 +207,10 @@ class ManagerApplication : Application() {
                 } else Log.d(tag, "System-initiated process death detected")
             }
 
-            override fun onActivityStarted(activity: Activity) { startedActivityCount++ }
-            override fun onActivityResumed(activity: Activity) {}
-            override fun onActivityPaused(activity: Activity) {}
-            override fun onActivityStopped(activity: Activity) { startedActivityCount-- }
+            override fun onActivityStarted(activity: Activity) {}
+            override fun onActivityResumed(activity: Activity) { resumedActivityCount++ }
+            override fun onActivityPaused(activity: Activity) { resumedActivityCount-- }
+            override fun onActivityStopped(activity: Activity) {}
             override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
             override fun onActivityDestroyed(activity: Activity) {}
         })

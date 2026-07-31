@@ -9,6 +9,7 @@ import android.app.Application
 import android.util.Log
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
+import app.morphe.manager.ManagerApplication
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
@@ -290,11 +291,15 @@ class BatchPatchCoordinator(
         if (state.scheduled) return
         if (state.succeeded == 0 && state.failed == 0) return
 
-        notificationManager.showBatchCompletionNotification(
-            patched = state.succeeded,
-            failed = state.failed,
-            skipped = state.skipped
-        )
+        // The summary screen already says all of this when the user is watching it, the same
+        // rule a single run follows. The tone still plays, it is what draws them back
+        if (!ManagerApplication.isInForeground) {
+            notificationManager.showBatchCompletionNotification(
+                patched = state.succeeded,
+                failed = state.failed,
+                skipped = state.skipped
+            )
+        }
 
         if (prefs.patcherCompletionSound.get()) {
             CompletionSound.play(
