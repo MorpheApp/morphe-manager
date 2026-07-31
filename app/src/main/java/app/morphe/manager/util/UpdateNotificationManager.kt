@@ -127,6 +127,45 @@ class UpdateNotificationManager(private val context: Context) {
     }
 
     /**
+     * Post the result of a queue the user started themselves.
+     *
+     * Scheduled runs are reported by [showAutoPatchNotification] instead: they are silent by
+     * design and often finish while nobody is looking.
+     */
+    fun showBatchCompletionNotification(patched: Int, failed: Int, skipped: Int) {
+        val succeeded = patched > 0
+        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        // The patcher worker owns this channel, but a queue can finish without one ever
+        // posting, for example when every app failed before its worker started
+        manager.createNotificationChannel(
+            NotificationChannel(
+                CHANNEL_PATCHER,
+                context.getString(R.string.notification_channel_patcher),
+                NotificationManager.IMPORTANCE_LOW
+            ).apply {
+                description = context.getString(R.string.notification_channel_patcher_description)
+            }
+        )
+
+        val notification = NotificationCompat.Builder(context, CHANNEL_PATCHER)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(
+                context.getString(
+                    if (succeeded) R.string.patcher_complete_title else R.string.patcher_failed_title
+                )
+            )
+            .setContentText(
+                context.getString(R.string.batch_patch_summary, patched, failed, skipped)
+            )
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setContentIntent(buildBatchResultIntent())
+            .setAutoCancel(true)
+            .build()
+
+        manager.notify(NOTIFICATION_ID_BATCH_RESULT, notification)
+    }
+
+    /**
      * Post why an automatic re-patch run could not start. Android blocks background foreground
      * services and defers work in Doze, so the user has to know the schedule is not working
      * rather than silently getting nothing.
@@ -254,10 +293,14 @@ class UpdateNotificationManager(private val context: Context) {
         /** Silent channel for automatic re-patching progress and results. */
         const val CHANNEL_AUTO_PATCH = "morphe_auto_patch"
 
+        /** Owned by the patcher worker, reused so a queue result lands where patching does. */
+        private const val CHANNEL_PATCHER = "morphe-patcher-patching"
+
         private const val NOTIFICATION_ID_MANAGER_UPDATE = 2001
         private const val NOTIFICATION_ID_BUNDLE_UPDATE  = 2002
         private const val NOTIFICATION_ID_AUTO_PATCH     = 2003
         private const val NOTIFICATION_ID_AUTO_PATCH_BLOCKED = 2004
+        private const val NOTIFICATION_ID_BATCH_RESULT   = 2005
 
         /** Foreground service notification held for the duration of an automatic run. */
         const val NOTIFICATION_ID_AUTO_PATCH_RUN = 3001

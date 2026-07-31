@@ -120,7 +120,12 @@ class AutoPatchWorker(
         }
 
         Log.i(tag, "AutoPatchWorker: queueing ${candidates.size} app(s) for re-patching")
-        coordinator.plan(candidates, useMount = false, policy = BatchInstallPolicy.SAVE_ONLY)
+        coordinator.plan(
+            candidates,
+            useMount = false,
+            policy = BatchInstallPolicy.SAVE_ONLY,
+            scheduled = true
+        )
 
         // A null state means something cleared the run underneath us, which is a race rather
         // than a decision, so the queue is worth another attempt

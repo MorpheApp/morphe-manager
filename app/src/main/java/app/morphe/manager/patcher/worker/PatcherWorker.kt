@@ -6,14 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.graphics.drawable.Icon
-import android.media.AudioAttributes
-import android.media.AudioManager
-import android.media.Ringtone
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.*
 import android.util.Log
-import androidx.core.net.toUri
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
@@ -72,10 +66,15 @@ class PatcherWorker(
          * Batch runs announce the whole queue once instead of every app, so the completion
          * tone and notification are suppressed per item.
          */
-        val announceCompletion: Boolean = true
+        val announceCompletion: Boolean = true,
+        /** Apps already done and the queue total, null for a single run. */
+        val queuePosition: Pair<Int, Int>? = null
     ) {
         val packageName get() = input.packageName
     }
+
+    /** Queue position shown in the ongoing notification, set once the args are claimed. */
+    private var queueLabel: String? = null
 
     override suspend fun getForegroundInfo() =
         ForegroundInfo(
@@ -118,7 +117,11 @@ class PatcherWorker(
             .setContentTitle(
                 stepName ?: applicationContext.getString(R.string.patcher_notification_title)
             )
-            .setContentText(contentText ?: applicationContext.getText(R.string.patcher_notification_text))
+            .setContentText(
+                contentText
+                    ?: queueLabel
+                    ?: applicationContext.getText(R.string.patcher_notification_text)
+            )
             .apply {
                 if (patchProgress != null) {
                     val (completed, total) = patchProgress
@@ -153,7 +156,12 @@ class PatcherWorker(
         successSoundUri: String,
         errorSoundUri: String,
     ) {
-        if (playSound) playCompletionSound(succeeded, successSoundUri, errorSoundUri)
+        if (playSound) CompletionSound.play(
+            applicationContext,
+            succeeded,
+            successSoundUri,
+            errorSoundUri
+        )
         // Don't show "patching complete" when Shizuku auto-install will immediately follow
         if (succeeded && autoInstallPending) return
         // Don't notify when the app is in the foreground - user sees the result on screen
@@ -172,53 +180,6 @@ class PatcherWorker(
         applicationContext.getSystemService(NotificationManager::class.java)
             .notify(COMPLETION_NOTIFICATION_ID, notification)
     }
-
-    private fun playCompletionSound(
-        succeeded: Boolean,
-        successSoundUri: String,
-        errorSoundUri: String,
-    ) {
-        // Respect ringer mode and notification-stream volume.
-        // So users can silence the tone with the volume rocker before it plays
-        val audioManager = applicationContext.getSystemService(AudioManager::class.java) ?: return
-        if (audioManager.ringerMode != AudioManager.RINGER_MODE_NORMAL) return
-        if (audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION) == 0) return
-
-        val custom = if (succeeded) successSoundUri else errorSoundUri
-        val bundledRes = if (succeeded) R.raw.success else R.raw.error
-        val bundledUri = "android.resource://${applicationContext.packageName}/$bundledRes".toUri()
-        val customUri = custom.takeIf { it.isNotBlank() }?.toUri()
-
-        val ringtone = customUri?.let { tryGetRingtone(it) }
-            ?: tryGetRingtone(bundledUri)
-            ?: return
-        ringtone.audioAttributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_NOTIFICATION_EVENT)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-            .build()
-
-        // Expose the ringtone so the patcher screen can stop it when the user navigates home
-        // before it finishes on its own
-        activeCompletionRingtone = ringtone
-        try {
-            ringtone.play()
-        } catch (e: Exception) {
-            Log.w(tag, "Failed to play completion sound".logFmt(), e)
-        }
-        // Safety-net cleanup in case the user never navigates home
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (activeCompletionRingtone === ringtone) {
-                runCatching { ringtone.stop() }
-                activeCompletionRingtone = null
-            }
-        }, ACTIVE_RINGTONE_RETAIN_MS)
-    }
-
-    private fun tryGetRingtone(uri: Uri): Ringtone? = runCatching {
-        RingtoneManager.getRingtone(applicationContext, uri)
-    }.onFailure {
-        Log.w(tag, "Failed to load ringtone $uri".logFmt(), it)
-    }.getOrNull()
 
     private fun isAppInForeground(): Boolean =
         ManagerApplication.startedActivityCount > 0
@@ -253,6 +214,9 @@ class PatcherWorker(
         var patchingSucceeded = false
         val result = try {
             args = workerRepository.claimInput(this)
+            queueLabel = args.queuePosition?.let { (done, total) ->
+                applicationContext.getString(R.string.batch_patch_progress_counter, done, total)
+            }
             runPatcher(args).also { if (it == Result.success()) patchingSucceeded = true }
         } finally {
             wakeLock.release()
@@ -526,21 +490,8 @@ class PatcherWorker(
         const val NOTIFICATION_ID = 1
         const val COMPLETION_NOTIFICATION_ID = 2
 
-        private const val ACTIVE_RINGTONE_RETAIN_MS = 60_000L
-
-        @Volatile
-        private var activeCompletionRingtone: Ringtone? = null
-
-        /**
-         * Stops the completion tone (if any) currently playing from the last patcher run. Safe to
-         * call from any thread and any state - a no-op when nothing is playing. Also invoked as a
-         * safety net after [ACTIVE_RINGTONE_RETAIN_MS] if nothing else stopped it by then.
-         */
-        fun stopCompletionSound() {
-            val ringtone = activeCompletionRingtone ?: return
-            activeCompletionRingtone = null
-            runCatching { ringtone.stop() }
-        }
+        /** Kept as the patcher screen's entry point now that the tone itself is shared. */
+        fun stopCompletionSound() = CompletionSound.stop()
 
         const val PROCESS_EXIT_CODE_KEY = "process_exit_code"
         const val PROCESS_PREVIOUS_LIMIT_KEY = "process_previous_limit"

@@ -160,6 +160,8 @@ data class BatchRunState(
     val phase: BatchPhase,
     val policy: BatchInstallPolicy,
     val useMount: Boolean = false,
+    /** Started by the schedule rather than the user, which keeps the run silent. */
+    val scheduled: Boolean = false,
     val activeIndex: Int? = null,
     val activeRun: PatchRunProgress? = null
 ) {

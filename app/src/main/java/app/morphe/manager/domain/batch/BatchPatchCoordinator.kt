@@ -20,10 +20,12 @@ import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.ui.model.PatchRunProgress
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.AppCoroutineScope
+import app.morphe.manager.util.CompletionSound
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.PatchSelection
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
+import app.morphe.manager.util.UpdateNotificationManager
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -58,6 +60,7 @@ class BatchPatchCoordinator(
     private val patchOptionsRepository: PatchOptionsRepository,
     private val installedAppRepository: InstalledAppRepository,
     private val originalApkRepository: OriginalApkRepository,
+    private val notificationManager: UpdateNotificationManager,
     private val scope: AppCoroutineScope
 ) {
     private val workManager = WorkManager.getInstance(app)
@@ -81,7 +84,8 @@ class BatchPatchCoordinator(
     fun plan(
         packageNames: List<String>,
         useMount: Boolean,
-        policy: BatchInstallPolicy
+        policy: BatchInstallPolicy,
+        scheduled: Boolean = false
     ) {
         if (isRunning) return
         runJob?.cancel()
@@ -90,7 +94,8 @@ class BatchPatchCoordinator(
                 items = packageNames.map { placeholder(it) },
                 phase = BatchPhase.PLANNING,
                 policy = policy,
-                useMount = useMount
+                useMount = useMount,
+                scheduled = scheduled
             )
             val items = resolver.resolve(packageNames, useMount)
             _state.update { it.copy(items = items, phase = BatchPhase.PREFLIGHT) }
@@ -247,6 +252,7 @@ class BatchPatchCoordinator(
                 withContext(NonCancellable) {
                     activeWorkId = null
                     _state.update { it.copy(phase = BatchPhase.FINISHED, activeIndex = null, activeRun = null) }
+                    announceCompletion()
                 }
             }
         }
@@ -270,6 +276,34 @@ class BatchPatchCoordinator(
         runJob?.cancel()
         runJob = null
         _state.value = null
+    }
+
+    /**
+     * Reports a finished queue once, instead of once per app: a queue of eight would otherwise
+     * ping eight times, and no single app finishing is something the user can act on.
+     *
+     * Scheduled runs stay silent. They are reported by their own worker and often finish at
+     * night, which is the last time anyone wants a tone.
+     */
+    private suspend fun announceCompletion() {
+        val state = _state.value ?: return
+        if (state.scheduled) return
+        if (state.succeeded == 0 && state.failed == 0) return
+
+        notificationManager.showBatchCompletionNotification(
+            patched = state.succeeded,
+            failed = state.failed,
+            skipped = state.skipped
+        )
+
+        if (prefs.patcherCompletionSound.get()) {
+            CompletionSound.play(
+                context = app,
+                succeeded = state.succeeded > 0,
+                successSoundUri = prefs.patcherSuccessSoundUri.get(),
+                errorSoundUri = prefs.patcherErrorSoundUri.get()
+            )
+        }
     }
 
     private suspend fun runQueue() {
@@ -337,7 +371,8 @@ class BatchPatchCoordinator(
             },
             onProgress = runProgress::onProgress,
             bundleVersions = bundleVersions,
-            announceCompletion = false
+            announceCompletion = false,
+            queuePosition = _state.value?.let { it.processed to it.total }
         )
 
         val workId = workerRepository.launchExpedited<PatcherWorker, PatcherWorker.Args>(args)
