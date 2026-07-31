@@ -9,8 +9,11 @@ import android.os.ParcelUuid
 import android.os.PowerManager
 import android.util.Log
 import androidx.activity.result.ActivityResult
-import androidx.compose.runtime.*
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.autoSaver
+import androidx.compose.runtime.setValue
 import androidx.core.os.BundleCompat
 import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.compose.SavedStateHandleSaveableApi
@@ -28,6 +31,7 @@ import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.runtime.ProcessRuntime
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
@@ -203,36 +207,34 @@ class PatcherViewModel(
             input.selectedApp.versionCode
         ).first().associateBy { it.uid }
 
-    suspend fun collectSelectedBundleMetadata(): Pair<List<String>, List<String>> {
+    suspend fun collectSelectedBundleMetadata(): List<PatchSourceRef> {
         val globalBundles = patchBundleRepository.bundleInfoFlow.first()
         val scopedBundles = gatherScopedBundles()
         val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundles)
-        val versions = mutableListOf<String>()
-        val names = mutableListOf<String>()
         val displayNames = patchBundleRepository.sources.first().associate { it.uid to it.displayTitle }
-        sanitizedSelection.keys.forEach { uid ->
-            val scoped = scopedBundles[uid]
-            val global = globalBundles[uid]
-            val displayName = displayNames[uid]
-                ?: scoped?.name
-                ?: global?.name
-            global?.version?.takeIf { it.isNotBlank() }?.let(versions::add)
-            displayName?.takeIf { it.isNotBlank() }?.let(names::add)
-        }
-        return versions.distinct() to names.distinct()
+
+        return sanitizedSelection.keys.mapNotNull { uid ->
+            val name = (displayNames[uid] ?: scopedBundles[uid]?.name ?: globalBundles[uid]?.name)
+                ?.takeIf { it.isNotBlank() }
+                ?: return@mapNotNull null
+            PatchSourceRef(
+                name = name,
+                version = globalBundles[uid]?.version?.takeIf { it.isNotBlank() }
+            )
+        }.distinctBy { it.name }
     }
 
     private suspend fun buildExportMetadata(packageInfo: PackageInfo?): PatchedAppExportData? {
         val info = packageInfo ?: pm.getPackageInfo(outputFile) ?: return null
-        val (bundleVersions, bundleNames) = collectSelectedBundleMetadata()
+        val sources = collectSelectedBundleMetadata()
         val label = runCatching { with(pm) { info.label() } }.getOrNull()
         val versionName = info.versionName?.takeUnless { it.isBlank() } ?: version ?: "unspecified"
         return PatchedAppExportData(
             appName = label,
             packageName = info.packageName,
             appVersion = versionName,
-            patchBundleVersions = bundleVersions,
-            patchBundleNames = bundleNames
+            patchBundleVersions = sources.mapNotNull { it.version },
+            patchBundleNames = sources.map { it.name }
         )
     }
 
@@ -241,15 +243,11 @@ class PatcherViewModel(
      * Called after patching fails so the dialog opens instantly without an extra async wait.
      */
     suspend fun buildErrorInfo(): PatcherErrorInfo {
-        val (bundleVersions, bundleNames) = collectSelectedBundleMetadata()
         val label = runCatching {
             pm.getPackageInfo(outputFile)?.let { with(pm) { it.label() } }
         }.getOrNull()
-        val bundles = bundleNames.mapIndexed { i, name ->
-            PatcherErrorInfo.BundleInfo(
-                name = name,
-                version = bundleVersions.getOrNull(i)
-            )
+        val bundles = collectSelectedBundleMetadata().map {
+            PatcherErrorInfo.BundleInfo(name = it.name, version = it.version)
         }
         return PatcherErrorInfo(
             appName = label ?: packageName,
@@ -343,8 +341,8 @@ class PatcherViewModel(
             }
         }
 
-    /** Bundle versions collected during preflight, forwarded to the worker for logging. */
-    private var bundleVersionsForLog: List<String> = emptyList()
+    /** Patch sources collected during preflight, forwarded to the worker for logging. */
+    private var patchSourcesForLog: List<PatchSourceRef> = emptyList()
 
     /** True when the current patching step has been running for over a minute. */
     val showLongStepWarning: StateFlow<Boolean> = patchRun.showLongStepWarning
@@ -413,7 +411,7 @@ class PatcherViewModel(
             return
         }
 
-        bundleVersionsForLog = collectSelectedBundleMetadata().first
+        patchSourcesForLog = collectSelectedBundleMetadata()
 
         // Check that all selected bundles are compatible with the patcher bundled in this
         // version of the manager. If a bundle requires a newer patcher, block and show a dialog
@@ -820,7 +818,7 @@ class PatcherViewModel(
                 }
             },
             onProgress = patchRun::onProgress,
-            bundleVersions = bundleVersionsForLog,
+            patchSources = patchSourcesForLog,
         )
     }
 

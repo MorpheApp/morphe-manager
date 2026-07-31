@@ -1,16 +1,22 @@
 package app.morphe.manager.patcher.worker
 
 import android.annotation.SuppressLint
-import android.app.*
+import android.app.ActivityManager
+import android.app.Notification
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.graphics.drawable.Icon
-import android.os.*
+import android.os.Build
+import android.os.PowerManager
+import android.os.StatFs
 import android.util.Log
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
+import app.morphe.manager.BuildConfig
 import app.morphe.manager.MainActivity
 import app.morphe.manager.ManagerApplication
 import app.morphe.manager.R
@@ -25,6 +31,7 @@ import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.worker.Worker
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.logger.Logger
+import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.runtime.CoroutineRuntime
 import app.morphe.manager.patcher.runtime.ProcessRuntime
 import app.morphe.manager.patcher.split.SplitApkPreparer
@@ -61,7 +68,7 @@ class PatcherWorker(
         val onPatchCompleted: suspend () -> Unit,
         val setInputFile: suspend (File, Boolean, Boolean) -> Unit,
         val onProgress: ProgressEventHandler,
-        val bundleVersions: List<String> = emptyList(),
+        val patchSources: List<PatchSourceRef> = emptyList(),
         /**
          * Batch runs announce the whole queue once instead of every app, so the completion
          * tone and notification are suppressed per item.
@@ -305,6 +312,17 @@ class PatcherWorker(
                     .getMemoryInfo(it)
             }
             val statFs = StatFs(applicationContext.filesDir.absolutePath)
+
+            // What this build of Morphe brings to the run. Every bug report needs the versions,
+            // and native lib stripping silently changes what ends up in the output APK.
+            // The bytecode mode is left out, the patcher logs it itself while writing dex
+            args.logger.info(
+                "$LOG_WORKER_PREFIX_BUILD " +
+                        "$LOG_WORKER_FIELD_MANAGER=${BuildConfig.VERSION_NAME} " +
+                        "$LOG_WORKER_FIELD_PATCHER=${BuildConfig.PATCHER_VERSION} " +
+                        "$LOG_WORKER_FIELD_NATIVE_LIBS=$stripNativeLibs"
+            )
+
             args.logger.info(
                 "$LOG_WORKER_PREFIX_DEVICE " +
                         "$LOG_WORKER_FIELD_ANDROID=${Build.VERSION.RELEASE} " +
@@ -318,11 +336,19 @@ class PatcherWorker(
             args.logger.info(
                 "Patching started at ${System.currentTimeMillis()} " +
                         "pkg=${args.packageName} version=${args.input.version} " +
-                        "bundle=${args.bundleVersions.joinToString(",").ifBlank { "?" }} " +
                         "input=${inputFile.absolutePath} size=${inputFile.length()} " +
                         "split=$inputIsSplitArchive patches=$selectedCount " +
                         "device=${Build.MANUFACTURER} model=${Build.MODEL}"
             )
+
+            // One line per source rather than a joined list, so a name and its version stay
+            // together no matter how many sources contributed to this run
+            args.patchSources.forEach { source ->
+                args.logger.info(
+                    "$LOG_WORKER_PREFIX_SOURCE $LOG_WORKER_FIELD_NAME=\"${source.name}\" " +
+                            "$LOG_WORKER_FIELD_VERSION=\"${source.version ?: "?"}\""
+                )
+            }
 
             // Log runtime mode info
             if (useProcessRuntime) {
@@ -488,6 +514,14 @@ class PatcherWorker(
         const val LOG_WORKER_PREFIX_SUCCEEDED = "Patching succeeded:"
         const val LOG_WORKER_PREFIX_DEVICE = "Device:"
         const val LOG_WORKER_PREFIX_RUNTIME = "Runtime:"
+        const val LOG_WORKER_PREFIX_SOURCE = "Source:"
+        const val LOG_WORKER_PREFIX_BUILD = "Build:"
+
+        const val LOG_WORKER_FIELD_NAME = "name"
+        const val LOG_WORKER_FIELD_VERSION = "version"
+        const val LOG_WORKER_FIELD_MANAGER = "manager"
+        const val LOG_WORKER_FIELD_PATCHER = "patcher"
+        const val LOG_WORKER_FIELD_NATIVE_LIBS = "nativeLibs"
         const val LOG_PROCESS_PREFIX_COROUTINE_HEAP = "App memory limit:"
         const val LOG_WORKER_FIELD_SIZE = "size"
         const val LOG_WORKER_FIELD_MEMORY_LIMIT = "memoryLimit"

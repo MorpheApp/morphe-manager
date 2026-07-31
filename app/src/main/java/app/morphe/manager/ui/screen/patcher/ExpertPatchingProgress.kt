@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.patcher.logger.LogLevel
+import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_FIELD_AVERAGE
 import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_FIELD_MAX
 import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_PREFIX_DONE
@@ -46,14 +47,21 @@ import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_PROCESS_PRE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_ANDROID
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_API
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_ELAPSED
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_MANAGER
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_MEMORY_LIMIT
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_NAME
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_NATIVE_LIBS
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_PATCHER
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_RAM_AVAIL
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_RAM_TOTAL
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_SIZE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_STORAGE_AVAIL
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_STORAGE_TOTAL
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_VERSION
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_BUILD
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_DEVICE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_RUNTIME
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SOURCE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SUCCEEDED
 import app.morphe.manager.ui.model.PatchProgressSource
 import app.morphe.manager.ui.model.State
@@ -78,7 +86,10 @@ sealed interface LogItem {
     data class StartBanner(
         val packageName: String,
         val version: String,
-        val bundleVersion: String?,
+        val sources: List<PatchSourceRef>,
+        val managerVersion: String?,
+        val patcherVersion: String?,
+        val stripsNativeLibs: Boolean?,
         val apkSizeMb: String,
         val patchCount: Int,
         val isSplit: Boolean,
@@ -154,9 +165,26 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
     var storageTotal: String? = null
     var deviceManufacturer: String?
     var deviceModel: String?
+    val sources = mutableListOf<PatchSourceRef>()
+    var managerVersion: String? = null
+    var patcherVersion: String? = null
+    var stripsNativeLibs: Boolean? = null
 
     for ((_, message) in this) {
         when {
+            message.startsWith(LOG_WORKER_PREFIX_BUILD) -> {
+                managerVersion = message.logField(LOG_WORKER_FIELD_MANAGER)
+                patcherVersion = message.logField(LOG_WORKER_FIELD_PATCHER)
+                stripsNativeLibs = message.logField(LOG_WORKER_FIELD_NATIVE_LIBS)?.toBooleanStrictOrNull()
+            }
+            message.startsWith(LOG_WORKER_PREFIX_SOURCE) -> {
+                message.logField(LOG_WORKER_FIELD_NAME)?.let { name ->
+                    sources += PatchSourceRef(
+                        name = name,
+                        version = message.logField(LOG_WORKER_FIELD_VERSION)?.takeIf { it != "?" }
+                    )
+                }
+            }
             message.startsWith(LOG_WORKER_PREFIX_RUNTIME) -> {
                 runtimeMemoryLimitMb = message.logField(LOG_WORKER_FIELD_MEMORY_LIMIT)?.let { "${it}MB" }
             }
@@ -181,7 +209,9 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
         LOG_PROCESS_PREFIX_COROUTINE_HEAP,
         LOG_MEMORY_PREFIX_DONE,
         LOG_WORKER_PREFIX_DEVICE,
-        LOG_WORKER_PREFIX_RUNTIME
+        LOG_WORKER_PREFIX_RUNTIME,
+        LOG_WORKER_PREFIX_SOURCE,
+        LOG_WORKER_PREFIX_BUILD
     )
 
     val result = mutableListOf<LogItem>()
@@ -197,7 +227,10 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
                     result += LogItem.StartBanner(
                         packageName = pkg,
                         version = message.logField("version") ?: "?",
-                        bundleVersion = message.logField("bundle"),
+                        sources = sources,
+                        managerVersion = managerVersion,
+                        patcherVersion = patcherVersion,
+                        stripsNativeLibs = stripsNativeLibs,
                         apkSizeMb = "%.1f MB".format(
                             (message.logField("size")?.toLongOrNull() ?: 0L) / 1_048_576.0
                         ),
@@ -850,8 +883,9 @@ private fun PatcherInfoCard(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 14.dp, vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+                .padding(horizontal = 14.dp, vertical = 10.dp),
+            // Tight, because these cards carry a lot of short fields and are read at a glance
+            verticalArrangement = Arrangement.spacedBy(7.dp)
         ) {
             // Header row: title + optional badge
             Row(
@@ -910,24 +944,15 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
                 value = item.version,
                 modifier = Modifier.weight(1f))
             BannerFieldCell(
-                label = "Patches version",
-                value = item.bundleVersion ?: "?",
+                label = "APK size",
+                value = item.apkSizeMb,
                 modifier = Modifier.weight(1f))
         }
-
-        HorizontalDivider(
-            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-            thickness = 1.dp
-        )
 
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            BannerFieldCell(
-                label = "APK size",
-                value = item.apkSizeMb,
-                modifier = Modifier.weight(1f))
             BannerFieldCell(
                 label = "Patches",
                 value = item.patchCount.toString(),
@@ -940,33 +965,73 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             )
         }
 
-        // Runtime row
-        val runtimeLabel = if (item.runtimeMemoryLimitMb != null) "Process" else "Coroutine"
+        // A cell per source, so a version always sits under the name it belongs to. Laid out
+        // two per row like everything else, and an odd one keeps its half rather than stretching
+        if (item.sources.isEmpty()) {
+            BannerFieldCell(label = "Patches version", value = "?", modifier = Modifier.weight(1f))
+        } else {
+            item.sources.chunked(2).forEach { pair ->
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    pair.forEach { source ->
+                        BannerFieldCell(
+                            label = source.name,
+                            value = source.version ?: "?",
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                    if (pair.size == 1) Spacer(Modifier.weight(1f))
+                }
+            }
+        }
+
+        HorizontalDivider(
+            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+            thickness = 1.dp
+        )
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             BannerFieldCell(
-                label = "Runtime",
-                value = runtimeLabel,
+                label = "Manager",
+                value = item.managerVersion ?: "?",
                 modifier = Modifier.weight(1f))
-            if (item.runtimeMemoryLimitMb != null) {
+            BannerFieldCell(
+                label = "Patcher",
+                value = item.patcherVersion ?: "?",
+                modifier = Modifier.weight(1f))
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            // The heap limit only exists for the process runtime, so it rides along with the
+            // runtime name rather than taking a cell that is empty half the time
+            BannerFieldCell(
+                label = "Runtime",
+                value = item.runtimeMemoryLimitMb
+                    ?.let { "Process $it" }
+                    ?: "Coroutine",
+                modifier = Modifier.weight(1f),
+                valueColor = item.runtimeMemoryLimitMb?.let { MaterialTheme.colorScheme.primary }
+            )
+            item.stripsNativeLibs?.let { strips ->
                 BannerFieldCell(
-                    label = "Heap limit",
-                    value = item.runtimeMemoryLimitMb,
+                    label = "Native libs",
+                    value = if (strips) "stripped" else "kept",
                     modifier = Modifier.weight(1f),
-                    valueColor = MaterialTheme.colorScheme.primary
+                    valueColor = if (strips) MaterialTheme.colorScheme.tertiary else null
                 )
             }
         }
 
         // Device environment only shown when data is available
         if (item.androidVersion != null || item.ramTotal != null || item.deviceManufacturer != null) {
-            HorizontalDivider(
-                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.08f),
-                thickness = 1.dp
-            )
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -1057,9 +1122,10 @@ private fun BannerFieldCell(
     modifier: Modifier = Modifier,
     label: String,
     value: String,
-    valueColor: Color? = null
+    valueColor: Color? = null,
+    maxLines: Int = 1
 ) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(2.dp)) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(1.dp)) {
         Text(
             text = label.uppercase(),
             style = MaterialTheme.typography.labelSmall,
@@ -1074,7 +1140,7 @@ private fun BannerFieldCell(
             fontWeight = FontWeight.Medium,
             color = valueColor ?: MaterialTheme.colorScheme.onSurface,
             fontSize = 11.sp,
-            maxLines = 1,
+            maxLines = maxLines,
             overflow = TextOverflow.Ellipsis
         )
     }

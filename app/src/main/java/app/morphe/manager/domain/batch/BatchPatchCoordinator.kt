@@ -16,6 +16,7 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.worker.WorkerRepository
+import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.ui.model.PatchRunProgress
@@ -359,10 +360,12 @@ class BatchPatchCoordinator(
 
         val outputFile = workspace.resolve("${item.packageName}.apk")
 
-        val itemBundleUids = item.bundles.mapTo(mutableSetOf()) { it.uid }
-        val bundleVersions = patchBundleRepository.sources.first()
-            .filter { itemBundleUids.isEmpty() || it.uid in itemBundleUids }
-            .mapNotNull { it.version }
+        // Only the sources actually contributing patches, so narrowing an app to one source
+        // is reflected in the log as well as on the card
+        val versionsByUid = patchBundleRepository.sources.first().associate { it.uid to it.version }
+        val patchSources = item.bundles
+            .filter { it.uid in item.selection.keys }
+            .map { PatchSourceRef(it.name, versionsByUid[it.uid]) }
 
         val args = PatcherWorker.Args(
             input = selectedApp,
@@ -375,7 +378,7 @@ class BatchPatchCoordinator(
                 runProgress.updateSplitRequirement(file, needsSplit, merged)
             },
             onProgress = runProgress::onProgress,
-            bundleVersions = bundleVersions,
+            patchSources = patchSources,
             announceCompletion = false,
             queuePosition = _state.value?.let { it.processed to it.total }
         )
