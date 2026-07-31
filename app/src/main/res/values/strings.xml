@@ -331,6 +331,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="batch_patch_progress_counter">Patched %1$d of %2$d</string>
     <string name="batch_patch_summary">%1$d patched, %2$d failed, %3$d skipped</string>
     <string name="batch_patch_saved_hint">The patched apps are saved. Install them now, or later from the patched APK list in settings</string>
+    <string name="batch_patch_multiple_sources">Some apps combine patches from more than one source, which can cause conflicts</string>
     <string name="batch_patch_needs_apk">No APK available, attach a file</string>
     <string name="batch_patch_wrong_package">The attached file belongs to %s</string>
     <string name="batch_patch_version_mismatch">Version %s is not supported by the patches</string>

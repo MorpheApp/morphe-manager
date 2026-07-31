@@ -160,6 +160,8 @@ fun BatchPatcherScreen(
             ),
             savedPatches = edit.savedSelection,
             proceedText = stringResource(R.string.save),
+            // The queue combines sources by design, and the tabs make it plain enough
+            warnOnMultipleBundles = false,
             onDismiss = viewModel::cancelEdit,
             onProceed = viewModel::applyEdit
         )
@@ -444,6 +446,18 @@ private fun BatchStatusCard(state: BatchRunState) {
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Medium,
                     color = LocalDialogTextColor.current
+                )
+            }
+
+            // Mixing sources is decided by the plan, not by the user, so this is the one place
+            // it can be pointed out. Said once for the run rather than blocking the queue
+            if (state.phase == BatchPhase.PREFLIGHT &&
+                state.runnable.any { it.selection.keys.size > 1 }
+            ) {
+                Text(
+                    text = stringResource(R.string.batch_patch_multiple_sources),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogSecondaryTextColor.current
                 )
             }
 
