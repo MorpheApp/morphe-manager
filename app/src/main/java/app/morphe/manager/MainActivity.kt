@@ -187,7 +187,10 @@ class MainActivity : AppCompatActivity() {
             } else {
                 vm.pendingBatchPatch = MainViewModel.BatchPatchRequest(
                     packageNames = packageNames,
-                    callerPackage = callingPackage ?: referrer?.host
+                    // Only the system-supplied caller is trustworthy here. getReferrer() reads
+                    // EXTRA_REFERRER, which the sender fills in itself, so it could name any
+                    // package and both skip the confirmation and misname it in the dialog
+                    callerPackage = callingPackage
                 )
             }
             return
