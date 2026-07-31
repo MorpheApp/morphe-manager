@@ -281,6 +281,7 @@ internal fun DynamicAppCard(
 
     val hideLabel = stringResource(R.string.hide)
     val patchesLabel = stringResource(R.string.patches)
+    val selectLabel = stringResource(R.string.accessibility_select_app)
     val moveUpLabel = stringResource(R.string.accessibility_move_up)
     val moveDownLabel = stringResource(R.string.accessibility_move_down)
     val errorContainer = MaterialTheme.colorScheme.errorContainer
@@ -307,6 +308,12 @@ internal fun DynamicAppCard(
 
     Box(modifier = modifier.fillMaxWidth().semantics {
         customActions = buildList {
+            // A long press is the only way into multi-select, and a gesture on its own is
+            // nothing a screen reader can announce. In multi-select the card's own click
+            // already toggles it, so the action would be a duplicate
+            if (!isMultiSelectMode) {
+                add(CustomAccessibilityAction(selectLabel) { onLongPress(); true })
+            }
             if (swipeActionsEnabled) {
                 add(CustomAccessibilityAction(hideLabel) { showHideDialog.value = true; true })
                 add(CustomAccessibilityAction(patchesLabel) { onShowPatches(); true })
@@ -486,8 +493,7 @@ internal fun HiddenSearchAppCard(
                     gradientColors = item.gradientColors,
                     onClick = onAppClick,
                     hasUpdate = item.hasUpdate,
-                    isAppDeleted = item.isDeleted,
-                    onLongClick = {}
+                    isAppDeleted = item.isDeleted
                 )
             } else {
                 AppButton(
@@ -495,8 +501,7 @@ internal fun HiddenSearchAppCard(
                     displayName = item.displayName,
                     packageInfo = item.packageInfo,
                     gradientColors = item.gradientColors,
-                    onClick = onAppClick,
-                    onLongClick = {}
+                    onClick = onAppClick
                 )
             }
         }

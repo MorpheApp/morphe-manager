@@ -408,6 +408,11 @@ internal fun AppCardLayout(
     val shape = RoundedCornerShape(cardStyle.cardRadius)
     val view = LocalView.current
 
+    // Long-pressing a card always means the same thing here, so the gesture is announced
+    // rather than left as an unlabeled action the screen reader cannot describe
+    val longClickLabel = stringResource(R.string.accessibility_select_app)
+        .takeIf { onLongClick != null }
+
     val contentAlpha = if (enabled) 1f else 0.45f
     val colors = cardStyle.cardColors(gradientColors)
     val baseColor = colors.firstOrNull() ?: Color.White
@@ -547,6 +552,7 @@ internal fun AppCardLayout(
                     view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                     onClick()
                 },
+                onLongClickLabel = longClickLabel,
                 onLongClick = if (onLongClick != null) {
                     {
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
