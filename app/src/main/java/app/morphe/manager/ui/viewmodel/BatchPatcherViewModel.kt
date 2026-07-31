@@ -20,6 +20,7 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.util.*
@@ -43,9 +44,9 @@ import java.io.File
  */
 class BatchPatchEdit(
     val packageName: String,
-    val appName: String,
     val bundles: List<PatchBundleInfo.Scoped>,
     val savedSelection: PatchSelection,
+    val newPatches: Map<Int, Set<String>>,
     initialOptions: Options
 ) {
     var selection by mutableStateOf(savedSelection)
@@ -123,6 +124,7 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
     private val coordinator: BatchPatchCoordinator by inject()
     private val installedAppRepository: InstalledAppRepository by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
+    private val patchSelectionRepository: PatchSelectionRepository by inject()
 
     val state = coordinator.state
 
@@ -165,11 +167,21 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
                 .first()
                 .filter { it.enabled }
 
+            // A patch counts as new when it was absent from the snapshot taken at the last
+            // run. Without a snapshot there is no "last run" to compare against, so nothing
+            // is badged rather than everything
+            val newPatches = bundles.associate { bundle ->
+                val seen = patchSelectionRepository.getSeenPatches(item.packageName, bundle.uid)
+                bundle.uid to bundle.patches
+                    .filter { seen != null && it.name !in seen }
+                    .mapTo(mutableSetOf()) { it.name }
+            }.filterValues { it.isNotEmpty() }
+
             edit = BatchPatchEdit(
                 packageName = item.packageName,
-                appName = item.appName,
                 bundles = bundles,
                 savedSelection = item.selection,
+                newPatches = newPatches,
                 initialOptions = item.options
             )
         }

@@ -140,6 +140,7 @@ fun BatchPatcherScreen(
     // patcher, so the queue never has to grow a second patch list
     viewModel.edit?.let { edit ->
         ExpertModeDialog(
+            newPatches = edit.newPatches,
             options = edit.options,
             allPatchesInfo = edit.allPatchesInfo,
             totalSelectedCount = edit.totalSelectedCount,
