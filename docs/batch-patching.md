@@ -44,6 +44,22 @@ build.
 so you install them yourself; on hands the whole batch to the installer as soon as patching
 ends.
 
+### Deciding what gets applied
+
+Each app starts from the same patches a normal patch would use: your saved selection if you
+have patched it before, the recommended set otherwise. Patches added to a source since your
+last run join in if they are recommended, exactly as they do elsewhere.
+
+An app covered by more than one enabled source is patched with all of them. What you do about
+that depends on the mode you are in:
+
+- **Expert mode** puts a **Choose patches** button on each card. It opens the same patch list
+  the single-app flow uses, with a tab per source, and **Save** writes your choice into the
+  queue. A successful run then keeps it as the app's saved selection.
+- **Simple mode** puts a **Select patch source** button on cards where more than one source
+  applies, the same question simple mode asks before a single-app patch. Picking one drops the
+  others for this app, and you can switch again until the queue starts.
+
 > [!TIP]
 > Turn on **Keep original APKs** in **Settings → System**. It is what lets a batch run without
 > asking for a single file.

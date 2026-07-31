@@ -118,6 +118,8 @@ data class BatchPatchItem(
     val state: BatchItemState,
     val message: String? = null,
     val forceVersionMismatch: Boolean = false,
+    /** Selection before the user narrowed it to one source, so another can still be chosen. */
+    val resolvedSelection: PatchSelection? = null,
     val restoreState: BatchItemState? = null,
     val patchedFile: File? = null,
     val installOutcome: BatchInstallOutcome? = null,

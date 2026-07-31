@@ -191,6 +191,29 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
         edit = null
     }
 
+    /**
+     * App whose patch source is being chosen, null when no picker is open.
+     *
+     * Simple mode is asked which source to use in the single-app flow too. The queue cannot
+     * ask mid-run, so the same question is answered here instead.
+     */
+    var sourcePick: BatchPatchItem? by mutableStateOf(null)
+        private set
+
+    fun beginSourcePick(item: BatchPatchItem) {
+        sourcePick = item
+    }
+
+    fun cancelSourcePick() {
+        sourcePick = null
+    }
+
+    fun pickSource(bundleUid: Int) {
+        val item = sourcePick ?: return
+        sourcePick = null
+        coordinator.narrowToSource(item.packageName, bundleUid)
+    }
+
     fun applyEdit() {
         val current = edit ?: return
         coordinator.updateSelection(current.packageName, current.selection, current.options)

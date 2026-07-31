@@ -177,6 +177,30 @@ class BatchPatchCoordinator(
         }
     }
 
+    /**
+     * Restricts one queued app to a single patch source, the question simple mode answers
+     * before a single-app patch. The full plan is kept so another source can still be picked.
+     *
+     * Options are left alone: they are keyed by source, and the patcher ignores those it has
+     * no selected patch for.
+     */
+    fun narrowToSource(packageName: String, bundleUid: Int) {
+        _state.update { state ->
+            if (state.phase != BatchPhase.PREFLIGHT) return@update state
+            state.copy(
+                items = state.items.map { item ->
+                    if (item.packageName != packageName) return@map item
+
+                    val resolved = item.resolvedSelection ?: item.selection
+                    item.copy(
+                        resolvedSelection = resolved,
+                        selection = resolved.filterKeys { it == bundleUid }
+                    )
+                }
+            )
+        }
+    }
+
     fun setPolicy(policy: BatchInstallPolicy) {
         _state.update { it.copy(policy = policy) }
     }

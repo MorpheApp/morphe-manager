@@ -33,6 +33,8 @@ import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.home.ExpertModeDialog
 import app.morphe.manager.ui.screen.home.ExpertPatchActions
+import app.morphe.manager.ui.screen.home.SimpleBundleCandidate
+import app.morphe.manager.ui.screen.home.SimpleBundleSelectDialog
 import app.morphe.manager.ui.screen.patcher.ExpertPatchingInProgress
 import app.morphe.manager.ui.screen.patcher.PatcherErrorDialog
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
@@ -164,6 +166,25 @@ fun BatchPatcherScreen(
             warnOnMultipleBundles = false,
             onDismiss = viewModel::cancelEdit,
             onProceed = viewModel::applyEdit
+        )
+    }
+
+    // The same source question simple mode answers before a single-app patch
+    viewModel.sourcePick?.let { item ->
+        // Offered from the full plan, not the narrowed selection, so switching sources works
+        val offered = item.resolvedSelection ?: item.selection
+        SimpleBundleSelectDialog(
+            candidates = item.bundles
+                .filter { it.uid in offered.keys }
+                .map { bundle ->
+                    SimpleBundleCandidate(
+                        uid = bundle.uid,
+                        displayTitle = bundle.name,
+                        patchCount = offered[bundle.uid]?.size ?: 0
+                    )
+                },
+            onSelect = viewModel::pickSource,
+            onDismiss = viewModel::cancelSourcePick
         )
     }
 
@@ -307,6 +328,14 @@ fun BatchPatcherScreen(
                         onEditPatches = item.source
                             ?.takeIf { useExpertMode }
                             ?.let { { viewModel.beginEdit(item) } },
+                        // Simple mode gets the source question it knows from single-app
+                        // patching instead of the patch list it never sees
+                        onPickSource = item
+                            .takeIf {
+                                !useExpertMode &&
+                                    (it.resolvedSelection ?: it.selection).keys.size > 1
+                            }
+                            ?.let { { viewModel.beginSourcePick(item) } },
                         // Installing everything is not always what the user wants once they
                         // see which apps succeeded
                         onInstall = request?.let { { startInstallQueue(listOf(it)) } },
@@ -506,6 +535,7 @@ private fun BatchItemCard(
     onToggleExcluded: () -> Unit,
     onForceVersion: () -> Unit,
     onEditPatches: (() -> Unit)? = null,
+    onPickSource: (() -> Unit)? = null,
     onInstall: (() -> Unit)? = null,
     onOpen: (() -> Unit)? = null,
     onShowError: () -> Unit = {}
@@ -620,6 +650,16 @@ private fun BatchItemCard(
                                 icon = Icons.Outlined.Tune,
                                 contentDescription = editLabel,
                                 tooltip = editLabel
+                            )
+                        }
+
+                        if (onPickSource != null) {
+                            val sourceLabel = stringResource(R.string.home_simple_bundle_select_title)
+                            ActionPillButton(
+                                onClick = onPickSource,
+                                icon = Icons.Outlined.Layers,
+                                contentDescription = sourceLabel,
+                                tooltip = sourceLabel
                             )
                         }
 
@@ -743,7 +783,12 @@ private fun itemDetails(item: BatchPatchItem): String = when (item.state) {
             item.patchCount,
             item.patchCount
         )
-        val bundles = item.bundles.joinToString(", ") { it.name }.takeIf { it.isNotEmpty() }
+        // Only the sources actually contributing patches, so narrowing an app to one source
+        // is reflected here instead of still listing everything the plan looked at
+        val bundles = item.bundles
+            .filter { item.selection.isEmpty() || it.uid in item.selection.keys }
+            .joinToString(", ") { it.name }
+            .takeIf { it.isNotEmpty() }
         listOfNotNull(item.version, source, patches, bundles).joinToString(" • ")
     }
 }
