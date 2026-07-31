@@ -69,10 +69,21 @@ class UpdateNotificationManager(private val context: Context) {
             setSound(null, null)
         }
 
+        // Created here rather than by the patcher worker, because a queue can post its result
+        // without any worker having run, for example when every app failed to be prepared
+        val patcherChannel = NotificationChannel(
+            CHANNEL_PATCHER,
+            context.getString(R.string.notification_channel_patcher),
+            NotificationManager.IMPORTANCE_LOW
+        ).apply {
+            description = context.getString(R.string.notification_channel_patcher_description)
+        }
+
         val systemNotificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         systemNotificationManager.createNotificationChannel(fcmChannel)
         systemNotificationManager.createNotificationChannel(autoPatchChannel)
+        systemNotificationManager.createNotificationChannel(patcherChannel)
     }
 
     /**
@@ -93,6 +104,7 @@ class UpdateNotificationManager(private val context: Context) {
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setSilent(true)
             .setOngoing(true)
+            .setGroup(GROUP_PATCHING)
             .setContentIntent(buildBatchResultIntent())
             .build()
 
@@ -134,19 +146,6 @@ class UpdateNotificationManager(private val context: Context) {
      */
     fun showBatchCompletionNotification(patched: Int, failed: Int, skipped: Int) {
         val succeeded = patched > 0
-        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        // The patcher worker owns this channel, but a queue can finish without one ever
-        // posting, for example when every app failed before its worker started
-        manager.createNotificationChannel(
-            NotificationChannel(
-                CHANNEL_PATCHER,
-                context.getString(R.string.notification_channel_patcher),
-                NotificationManager.IMPORTANCE_LOW
-            ).apply {
-                description = context.getString(R.string.notification_channel_patcher_description)
-            }
-        )
-
         val notification = NotificationCompat.Builder(context, CHANNEL_PATCHER)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(
@@ -162,6 +161,7 @@ class UpdateNotificationManager(private val context: Context) {
             .setAutoCancel(true)
             .build()
 
+        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         manager.notify(NOTIFICATION_ID_BATCH_RESULT, notification)
     }
 
@@ -294,7 +294,14 @@ class UpdateNotificationManager(private val context: Context) {
         const val CHANNEL_AUTO_PATCH = "morphe_auto_patch"
 
         /** Owned by the patcher worker, reused so a queue result lands where patching does. */
-        private const val CHANNEL_PATCHER = "morphe-patcher-patching"
+        const val CHANNEL_PATCHER = "morphe-patcher-patching"
+
+        /**
+         * Groups the ongoing notifications a run produces. A scheduled queue holds two
+         * foreground services at once, its own and the patcher's, and each is required to
+         * show a notification. Grouping lets the shade fold them into one entry.
+         */
+        const val GROUP_PATCHING = "morphe_patching"
 
         private const val NOTIFICATION_ID_MANAGER_UPDATE = 2001
         private const val NOTIFICATION_ID_BUNDLE_UPDATE  = 2002

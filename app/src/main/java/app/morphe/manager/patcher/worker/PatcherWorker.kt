@@ -103,17 +103,7 @@ class PatcherWorker(
         contentText: String? = null,
     ): Notification {
         val pendingIntent = mainActivityPendingIntent()
-        val channel = NotificationChannel(
-            "morphe-patcher-patching",
-            applicationContext.getString(R.string.notification_channel_patcher),
-            NotificationManager.IMPORTANCE_LOW
-        ).apply {
-            description = applicationContext.getString(R.string.notification_channel_patcher_description)
-        }
-        val notificationManager =
-            applicationContext.getSystemService(NotificationManager::class.java)
-        notificationManager.createNotificationChannel(channel)
-        return Notification.Builder(applicationContext, channel.id)
+        return Notification.Builder(applicationContext, UpdateNotificationManager.CHANNEL_PATCHER)
             .setContentTitle(
                 stepName ?: applicationContext.getString(R.string.patcher_notification_title)
             )
@@ -132,6 +122,7 @@ class PatcherWorker(
             .setSmallIcon(Icon.createWithResource(applicationContext, R.drawable.ic_notification))
             .setContentIntent(pendingIntent)
             .setCategory(Notification.CATEGORY_SERVICE)
+            .setGroup(UpdateNotificationManager.GROUP_PATCHING)
             .setOngoing(true)
             .build()
     }
@@ -166,7 +157,7 @@ class PatcherWorker(
         if (succeeded && autoInstallPending) return
         // Don't notify when the app is in the foreground - user sees the result on screen
         if (ManagerApplication.isInForeground) return
-        val notification = Notification.Builder(applicationContext, "morphe-patcher-patching")
+        val notification = Notification.Builder(applicationContext, UpdateNotificationManager.CHANNEL_PATCHER)
             .setContentTitle(
                 applicationContext.getString(
                     if (succeeded) R.string.patcher_complete_title else R.string.patcher_failed_title
