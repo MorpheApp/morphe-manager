@@ -137,6 +137,7 @@ class BatchPatchCoordinator(
     /** Accepts an unsupported version for one item, mirroring the single-app warning dialog. */
     fun forceVersion(packageName: String) {
         _state.update { state ->
+            if (state.phase != BatchPhase.PREFLIGHT) return@update state
             state.copy(
                 items = state.items.map { item ->
                     if (item.packageName == packageName && item.state == BatchItemState.VERSION_MISMATCH) {
@@ -156,9 +157,10 @@ class BatchPatchCoordinator(
      */
     fun updateSelection(packageName: String, selection: PatchSelection, options: Options) {
         _state.update { state ->
+            if (state.phase != BatchPhase.PREFLIGHT) return@update state
             state.copy(
                 items = state.items.map { item ->
-                    if (item.packageName != packageName || item.state.isTerminal) return@map item
+                    if (item.packageName != packageName) return@map item
 
                     val empty = selection.values.sumOf { it.size } == 0
                     item.copy(
@@ -435,6 +437,30 @@ class BatchPatchCoordinator(
 
         saveOriginalApk(item, selectedApp, version)
 
+        // What the user chose to patch with is recorded whether the APK is kept: the
+        // two are separate settings, and the summary can still install from the workspace
+        patchSelectionRepository.updateSelection(
+            item.packageName,
+            item.selection,
+            // Scoped to every source the plan considered, so a source the user ended up taking
+            // nothing from has its stale selection cleared rather than left behind
+            scope = item.bundles.mapTo(mutableSetOf()) { it.uid }.ifEmpty { item.selection.keys }
+        )
+        // Without this the next plan cannot tell a patch the user deselected from one that was
+        // added since, and would keep re-enabling every deselected default
+        item.bundles.forEach { bundle ->
+            patchSelectionRepository.saveSeenPatches(
+                packageName = item.packageName,
+                bundleUid = bundle.uid,
+                patchNames = bundle.patchNames
+            )
+        }
+        // Simple mode derives its options from the per-app preference screen rather than the
+        // database, so only an expert-mode selection is worth writing back
+        if (prefs.useExpertMode.get()) {
+            patchOptionsRepository.saveOptions(item.packageName, item.options)
+        }
+
         if (!prefs.savePatchedApks.get()) {
             // Retention is off, so the patched APK only lives long enough for the summary
             // to install it and is dropped together with the workspace
@@ -460,27 +486,6 @@ class BatchPatchCoordinator(
             item.selection,
             selectionPayload
         )
-        patchSelectionRepository.updateSelection(
-            item.packageName,
-            item.selection,
-            // Scoped to every source the plan considered, so a source the user ended up taking
-            // nothing from has its stale selection cleared rather than left behind
-            scope = item.bundles.mapTo(mutableSetOf()) { it.uid }.ifEmpty { item.selection.keys }
-        )
-        // Without this the next plan cannot tell a patch the user deselected from one that was
-        // added since, and would keep re-enabling every deselected default
-        item.bundles.forEach { bundle ->
-            patchSelectionRepository.saveSeenPatches(
-                packageName = item.packageName,
-                bundleUid = bundle.uid,
-                patchNames = bundle.patchNames
-            )
-        }
-        // Simple mode derives its options from the per-app preference screen rather than the
-        // database, so only an expert-mode selection is worth writing back
-        if (prefs.useExpertMode.get()) {
-            patchOptionsRepository.saveOptions(item.packageName, item.options)
-        }
 
         stored
     }
