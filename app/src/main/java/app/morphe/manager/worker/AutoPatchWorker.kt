@@ -124,7 +124,7 @@ class AutoPatchWorker(
 
         // A null state means something cleared the run underneath us, which is a race rather
         // than a decision, so the queue is worth another attempt
-        val planned = coordinator.state.first { it?.phase == BatchPhase.PREFLIGHT }
+        val planned = coordinator.state.first { it == null || it.phase == BatchPhase.PREFLIGHT }
             ?: return Result.retry()
         if (planned.runnable.isEmpty()) {
             Log.d(tag, "AutoPatchWorker: nothing could be resolved without user input")
@@ -133,7 +133,7 @@ class AutoPatchWorker(
         }
 
         coordinator.start()
-        val finished = coordinator.state.first { it?.phase == BatchPhase.FINISHED }
+        val finished = coordinator.state.first { it == null || it.phase == BatchPhase.FINISHED }
             ?: return Result.retry()
 
         val patched = finished.patchedItems
