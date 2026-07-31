@@ -59,7 +59,8 @@ internal fun MultiSelectBar(
     contextActionIcon: ImageVector? = null,
     contextActionContentDescription: String? = null,
     contextActionColors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors(),
-    onMoveToCategory: (() -> Unit)? = null
+    onMoveToCategory: (() -> Unit)? = null,
+    onPatchSelected: (() -> Unit)? = null
 ) {
     val effectiveReorderMode = isReorderMode && showReorderButton
 
@@ -82,7 +83,8 @@ internal fun MultiSelectBar(
     val deselectAllLabel = stringResource(R.string.deselect_all)
     val deselectAllDone = stringResource(R.string.deselect_all_done)
     val selectedLabel = stringResource(R.string.selected).lowercase()
-    val allSelected = selectedCount >= totalCount && totalCount > 0
+    val patchSelectedLabel = stringResource(R.string.batch_patch_action)
+    val allSelected = totalCount in 1..selectedCount
     val selectionToggleLabel = if (allSelected) deselectAllLabel else selectAllLabel
     val selectionToggleDone = if (allSelected) deselectAllDone else selectAllDone
 
@@ -155,6 +157,19 @@ internal fun MultiSelectBar(
                             tooltip = selectionToggleLabel,
                             enabled = totalCount > 0
                         )
+                        if (onPatchSelected != null) {
+                            ActionPillButton(
+                                onClick = onPatchSelected,
+                                icon = Icons.Outlined.AutoFixHigh,
+                                contentDescription = patchSelectedLabel,
+                                tooltip = patchSelectedLabel,
+                                enabled = selectedCount > 0,
+                                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                                )
+                            )
+                        }
                         if (onMoveToCategory != null) {
                             ActionPillButton(
                                 onClick = onMoveToCategory,

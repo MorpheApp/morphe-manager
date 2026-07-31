@@ -67,7 +67,12 @@ class PatcherWorker(
         val onPatchCompleted: suspend () -> Unit,
         val setInputFile: suspend (File, Boolean, Boolean) -> Unit,
         val onProgress: ProgressEventHandler,
-        val bundleVersions: List<String> = emptyList()
+        val bundleVersions: List<String> = emptyList(),
+        /**
+         * Batch runs announce the whole queue once instead of every app, so the completion
+         * tone and notification are suppressed per item.
+         */
+        val announceCompletion: Boolean = true
     ) {
         val packageName get() = input.packageName
     }
@@ -496,7 +501,7 @@ class PatcherWorker(
             if (!patchedApk.delete() && patchedApk.exists()) {
                 Log.w(tag, "Failed to delete temporary patched APK: ${patchedApk.absolutePath}".logFmt())
             }
-            if (!isStopped) showCompletionNotification(
+            if (!isStopped && args.announceCompletion) showCompletionNotification(
                 succeeded,
                 autoInstallPending,
                 completionSoundEnabled,

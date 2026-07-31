@@ -1,5 +1,7 @@
 package app.morphe.manager.di
 
+import app.morphe.manager.domain.batch.BatchPatchCoordinator
+import app.morphe.manager.domain.batch.BatchPlanResolver
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
@@ -24,4 +26,6 @@ val managerModule = module {
     singleOf(::UpdateNotificationManager)
     singleOf(::HomeAppButtonPreferences)
     singleOf(::AppCoroutineScope)
+    singleOf(::BatchPlanResolver)
+    singleOf(::BatchPatchCoordinator)
 }

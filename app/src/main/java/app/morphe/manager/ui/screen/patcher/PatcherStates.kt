@@ -78,7 +78,7 @@ class MorphePatcherState(
     val effectiveErrorMessage: String
         get() {
             if (errorMessage.isNotBlank()) return errorMessage
-            val logText = viewModel.logs.joinToString("\n") { (level, msg) -> "[$level] $msg" }
+            val logText = viewModel.patchRun.logs.joinToString("\n") { (level, msg) -> "[$level] $msg" }
             return logText.ifBlank { errorMessage }
         }
 

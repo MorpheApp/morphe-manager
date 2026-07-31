@@ -26,10 +26,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
+import app.morphe.manager.ui.model.PatchProgressSource
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeAndPatcherMessages
-import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 
@@ -43,7 +43,7 @@ import kotlin.time.Duration.Companion.seconds
 fun SimplePatchingInProgress(
     progress: Float,
     patchesProgress: Pair<Int, Int>,
-    patcherViewModel: PatcherViewModel,
+    patchProgress: PatchProgressSource,
     showLongStepWarning: Boolean = false,
     onCancelClick: () -> Unit,
     onHomeClick: () -> Unit
@@ -86,7 +86,7 @@ fun SimplePatchingInProgress(
                 completed = completed,
                 total = total,
                 showLongStepWarning = showLongStepWarning,
-                patcherViewModel = patcherViewModel,
+                patchProgress = patchProgress,
                 onCancelClick = onCancelClick,
                 onHomeClick = onHomeClick
             )
@@ -119,7 +119,7 @@ private fun AdaptiveProgressContent(
     completed: Int,
     total: Int,
     showLongStepWarning: Boolean,
-    patcherViewModel: PatcherViewModel,
+    patchProgress: PatchProgressSource,
     onCancelClick: () -> Unit = {},
     onHomeClick: () -> Unit = {}
 ) {
@@ -152,7 +152,7 @@ private fun AdaptiveProgressContent(
 
                     ProgressDetailsSection(
                         showLongStepWarning = showLongStepWarning,
-                        patcherViewModel = patcherViewModel,
+                        patchProgress = patchProgress,
                         windowSize = windowSize
                     )
                 }
@@ -205,7 +205,7 @@ private fun AdaptiveProgressContent(
 
             ProgressDetailsSection(
                 showLongStepWarning = showLongStepWarning,
-                patcherViewModel = patcherViewModel,
+                patchProgress = patchProgress,
                 windowSize = windowSize
             )
         }
@@ -233,7 +233,7 @@ private fun ProgressMessageSection(currentMessage: Int) {
 @Composable
 private fun ProgressDetailsSection(
     showLongStepWarning: Boolean,
-    patcherViewModel: PatcherViewModel,
+    patchProgress: PatchProgressSource,
     windowSize: WindowSize
 ) {
     Column(
@@ -259,7 +259,7 @@ private fun ProgressDetailsSection(
 
         // Current step indicator
         CurrentStepIndicator(
-            patcherViewModel = patcherViewModel,
+            patchProgress = patchProgress,
             windowSize = windowSize
         )
     }
@@ -373,12 +373,13 @@ private fun CircularProgressWithStats(
  */
 @Composable
 fun CurrentStepIndicator(
-    patcherViewModel: PatcherViewModel,
+    patchProgress: PatchProgressSource,
     windowSize: WindowSize
 ) {
-    val currentStep by remember {
+    // Keyed on the run: a queue swaps in a new source without leaving composition
+    val currentStep by remember(patchProgress) {
         derivedStateOf {
-            patcherViewModel.steps.firstOrNull { it.state == State.RUNNING }
+            patchProgress.steps.firstOrNull { it.state == State.RUNNING }
         }
     }
     val reduceMotion = rememberAccessibilityEnabled()

@@ -55,11 +55,11 @@ import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIEL
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_DEVICE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_RUNTIME
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SUCCEEDED
+import app.morphe.manager.ui.model.PatchProgressSource
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.patcher.game.MiniGameContent
 import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -240,13 +240,13 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
  * Expert mode patching screen.
  *
  * Shows a horizontal linear progress bar, step pipeline, and real-time log
- * output sourced directly from [PatcherViewModel.logs].
+ * output sourced directly from [PatchProgressSource.logs].
  */
 @Composable
 fun ExpertPatchingInProgress(
     progress: Float,
     patchesProgress: Pair<Int, Int>,
-    patcherViewModel: PatcherViewModel,
+    patchProgress: PatchProgressSource,
     patcherSucceeded: Boolean? = null,
     miniGameState: MiniGameState,
     onCancelClick: () -> Unit,
@@ -254,7 +254,7 @@ fun ExpertPatchingInProgress(
     onHomeClick: () -> Unit
 ) {
     val (completed, total) = patchesProgress
-    val rawLogs = patcherViewModel.logs
+    val rawLogs = patchProgress.logs
     val initialIndex = (rawLogs.size - 1).coerceAtLeast(0)
     val listState = rememberLazyListState(initialFirstVisibleItemIndex = initialIndex)
     val windowSize = rememberWindowSize()
@@ -302,7 +302,7 @@ fun ExpertPatchingInProgress(
                         progress = progress,
                         completed = completed,
                         total = total,
-                        patcherViewModel = patcherViewModel,
+                        patchProgress = patchProgress,
                         patcherSucceeded = patcherSucceeded
                     )
 
@@ -327,7 +327,7 @@ fun ExpertPatchingInProgress(
 
                 // Right column: log panel
                 ExpertLogPanel(
-                    patcherViewModel = patcherViewModel,
+                    patchProgress = patchProgress,
                     listState = listState,
                     patcherSucceeded = patcherSucceeded,
                     miniGameState = miniGameState,
@@ -350,12 +350,12 @@ fun ExpertPatchingInProgress(
                     progress = progress,
                     completed = completed,
                     total = total,
-                    patcherViewModel = patcherViewModel,
+                    patchProgress = patchProgress,
                     patcherSucceeded = patcherSucceeded
                 )
 
                 ExpertLogPanel(
-                    patcherViewModel = patcherViewModel,
+                    patchProgress = patchProgress,
                     listState = listState,
                     patcherSucceeded = patcherSucceeded,
                     miniGameState = miniGameState,
@@ -398,12 +398,13 @@ private fun ExpertProgressHeader(
     progress: Float,
     completed: Int,
     total: Int,
-    patcherViewModel: PatcherViewModel,
+    patchProgress: PatchProgressSource,
     patcherSucceeded: Boolean? = null
 ) {
-    val currentStep by remember {
+    // Keyed on the run: a queue swaps in a new source without leaving composition
+    val currentStep by remember(patchProgress) {
         derivedStateOf {
-            patcherViewModel.steps.firstOrNull { it.state == State.RUNNING }
+            patchProgress.steps.firstOrNull { it.state == State.RUNNING }
         }
     }
 
@@ -475,8 +476,8 @@ private fun ExpertProgressHeader(
         }
 
         // Memory graph
-        val heapSamples = patcherViewModel.heapSamples
-        val heapLimitMb = patcherViewModel.heapLimitMb
+        val heapSamples = patchProgress.heapSamples
+        val heapLimitMb = patchProgress.heapLimitMb
         AnimatedVisibility(
             visible = heapSamples.isNotEmpty(),
             enter = MorpheAnimations.expandFadeEnter
@@ -646,20 +647,20 @@ private fun HeapUsageGraph(
 }
 
 /**
- * Scrollable log panel backed directly by [PatcherViewModel.logs].
+ * Scrollable log panel backed directly by [PatchProgressSource.logs].
  * The header tab row lets the user switch between logs and the mini-game.
  */
 @Composable
 private fun ExpertLogPanel(
     modifier: Modifier = Modifier,
-    patcherViewModel: PatcherViewModel,
+    patchProgress: PatchProgressSource,
     listState: LazyListState,
     patcherSucceeded: Boolean? = null,
     miniGameState: MiniGameState
 ) {
-    val rawLogs = patcherViewModel.logs
+    val rawLogs = patchProgress.logs
     // Convert the full list in one stateful pass so banner cards can aggregate metadata from auxiliary lines
-    val logItems = remember(rawLogs.size) { rawLogs.toLogItems() }
+    val logItems = remember(rawLogs, rawLogs.size) { rawLogs.toLogItems() }
     // 0 = logs, 1 = game
     var activeTab by rememberSaveable { mutableIntStateOf(0) }
     LaunchedEffect(activeTab) {

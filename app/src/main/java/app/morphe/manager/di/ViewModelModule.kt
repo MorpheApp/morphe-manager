@@ -10,6 +10,7 @@ val viewModelModule = module {
     viewModelOf(::ThemeSettingsViewModel)
     viewModelOf(::SettingsViewModel)
     viewModelOf(::PatcherViewModel)
+    viewModelOf(::BatchPatcherViewModel)
     viewModelOf(::InstallViewModel)
     viewModelOf(::UpdateViewModel)
     viewModelOf(::ImportExportViewModel)

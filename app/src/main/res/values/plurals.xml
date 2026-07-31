@@ -40,6 +40,14 @@
         <item quantity="one">Uninstall %d app?</item>
         <item quantity="other">Uninstall %d apps?</item>
     </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%d app ready to patch</item>
+        <item quantity="other">%d apps ready to patch</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%d app is ready to install</item>
+        <item quantity="other">%d apps are ready to install</item>
+    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Skipped %d app</item>
         <item quantity="other">Skipped %d apps</item>

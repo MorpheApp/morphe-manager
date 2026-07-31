@@ -51,6 +51,7 @@ import kotlin.time.Duration.Companion.milliseconds
 fun HomeScreen(
     onSettingsClick: () -> Unit,
     onStartQuickPatch: (QuickPatchParams) -> Unit,
+    onStartBatchPatch: (List<String>, Boolean) -> Unit,
     homeViewModel: HomeViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
     homeAppButtonPrefs: HomeAppButtonPreferences = koinInject(),
@@ -177,6 +178,24 @@ fun HomeScreen(
         startInstallQueue(requests)
     }
 
+    val batchInProgressText = stringResource(R.string.batch_patch_in_progress)
+    val startBatchPatch: (List<HomeAppItem>) -> Unit = { items ->
+        val packageNames = items.map { it.packageName }
+        when {
+            availablePatches <= 0 -> context.toast(sourcesLoadingText)
+            homeViewModel.android11BugActive -> homeViewModel.showAndroid11Dialog = true
+            packageNames.isEmpty() -> Unit
+            // A live queue keeps its own selection, so open it instead of swapping the apps
+            homeViewModel.batchPatchRunning -> {
+                context.toast(batchInProgressText)
+                onStartBatchPatch(packageNames, false)
+            }
+            // The queue installs through the standard installer, never by mounting, so the
+            // single-app mount choice must not carry over and strip GmsCore patches here
+            else -> onStartBatchPatch(packageNames, false)
+        }
+    }
+
     // Handle patch trigger from dialog
     LaunchedEffect(patchTriggerPackage) {
         patchTriggerPackage?.let { packageName ->
@@ -284,6 +303,7 @@ fun HomeScreen(
                     onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.hideApp(it) } },
                     onUninstallMultiple = { items -> homeViewModel.uninstallApps(items) },
                     onReinstallMultiple = { items -> startBatchReinstall(items) },
+                    onPatchMultiple = { items -> startBatchPatch(items) },
                     onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
                     onShowPatches = { item -> patchesSheetItem.value = item },
                     onGestureHintShown = {

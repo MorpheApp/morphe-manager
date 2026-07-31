@@ -68,6 +68,10 @@ Step-by-step walkthroughs with screenshots, covering patching in both modes, ins
 - Sends a notification the moment patching finishes, so you don't have to keep the app open
 - Optional completion sound, with a distinct tone for success and failure
 - Optional auto-install with Shizuku right after patching completes
+- Batch patching - select several apps and patch them in one queue, with every question asked
+  up front so the run never stops to wait for you
+- Optional automatic re-patching in the background when a patch source releases changes for
+  your apps, with silent progress and result notifications
 
 **Patch options** *(Simple mode: available in the Advanced tab; Expert mode: available on the patch selection screen)*
 - Custom app display name, launcher icon, and header logo per app, with built-in creators that generate every density variant for you
@@ -102,7 +106,10 @@ Step-by-step walkthroughs with screenshots, covering patching in both modes, ins
 - Group your apps by patch source or your own categories
 - Hide apps you never patch, and bring them back whenever you like
 - Home cards for apps patched with universal patches, not just app-specific ones
-- Multi-select and bulk actions for cleaning up saved APKs and patch selections
+- Multi-select and bulk actions for cleaning up saved APKs and patch selections, and for
+  patching several apps in one queue
+- Launcher shortcuts for re-patching outdated apps, checking for updates, and jumping straight
+  into patching a recently patched app
 - Floating scroll-to-top button when your lists get long
 - A short guided tour after your first patch, so you know where everything lives
 
@@ -115,6 +122,8 @@ Step-by-step walkthroughs with screenshots, covering patching in both modes, ins
 - Process runtime - run patching in a separate process for better stability, with configurable memory limit
 - Bytecode processing mode - controls how bytecode is processed during patching, affecting patching speed, memory usage, and output APK size
 - Built-in file picker as an alternative to the system one, with an option to show hidden files
+- Optional external trigger, so automation apps can queue a batch through an intent, gated by
+  a per-app confirmation
 - Export debug logs for troubleshooting
 
 ## ❓ New to GitHub?

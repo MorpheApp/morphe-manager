@@ -26,6 +26,7 @@ import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
+import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
@@ -237,7 +238,8 @@ class HomeViewModel(
     private val installerManager: InstallerManager,
     private val filesystem: Filesystem,
     private val homeAppButtonPrefs: HomeAppButtonPreferences,
-    private val appDataResolver: AppDataResolver
+    private val appDataResolver: AppDataResolver,
+    private val batchPatchCoordinator: BatchPatchCoordinator
 ) : ViewModel() {
     val availablePatches = patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
     val bundleUpdateProgress = patchBundleRepository.bundleUpdateProgress
@@ -838,6 +840,9 @@ class HomeViewModel(
         return networkInfo.isMetered()
     }
 
+    /** True while a batch queue is patching, so callers can explain why a start was ignored. */
+    val batchPatchRunning: Boolean get() = batchPatchCoordinator.isRunning
+
     /**
      * Guard entry-point for all patching flows.
      * Shows MeteredPatchingDialog when on metered network with updates disabled,
@@ -845,6 +850,13 @@ class HomeViewModel(
      * Otherwise, launches [action] immediately.
      */
     fun guardPatching(action: suspend () -> Unit) {
+        // A batch run owns the patcher worker for its whole duration, so starting a single
+        // patch would replace the app the queue is currently working on
+        if (batchPatchCoordinator.isRunning) {
+            app.toast(app.getString(R.string.batch_patch_in_progress))
+            return
+        }
+
         // Check available storage first - low disk space is the most common cause of
         // cryptic "file not found" errors and corrupt output APKs during patching.
         val freeBytes = StatFs(app.filesDir.absolutePath).availableBytes

@@ -26,6 +26,7 @@ import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.syncFcmTopics
+import app.morphe.manager.worker.AutoPatchWorker
 import app.morphe.manager.worker.UpdateCheckInterval
 import app.morphe.manager.worker.UpdateCheckWorker
 import app.morphe.patcher.dex.BytecodeMode
@@ -145,6 +146,52 @@ class SettingsViewModel(
     /** Persists the allow-metered-updates preference. */
     fun toggleAllowMeteredUpdates(current: Boolean) = viewModelScope.launch {
         prefs.allowMeteredUpdates.update(!current)
+    }
+
+    /** Turns automatic re-patching on or off and schedules or cancels its periodic work. */
+    fun toggleAutoPatch(current: Boolean) = viewModelScope.launch {
+        val enabled = !current
+        prefs.autoPatchEnabled.update(enabled)
+        if (enabled) {
+            AutoPatchWorker.schedule(
+                appContext,
+                prefs.autoPatchInterval.get(),
+                prefs.autoPatchRequiresCharging.get()
+            )
+        } else {
+            AutoPatchWorker.cancel(appContext)
+        }
+    }
+
+    /** Persists the automatic re-patch interval and reschedules the worker when it is on. */
+    fun selectAutoPatchInterval(interval: UpdateCheckInterval) = viewModelScope.launch {
+        prefs.autoPatchInterval.update(interval)
+        if (prefs.autoPatchEnabled.get()) {
+            AutoPatchWorker.schedule(appContext, interval, prefs.autoPatchRequiresCharging.get())
+        }
+    }
+
+    /** Reschedules automatic re-patching with the new charging constraint. */
+    fun toggleAutoPatchCharging(current: Boolean) = viewModelScope.launch {
+        val requiresCharging = !current
+        prefs.autoPatchRequiresCharging.update(requiresCharging)
+        if (prefs.autoPatchEnabled.get()) {
+            AutoPatchWorker.schedule(appContext, prefs.autoPatchInterval.get(), requiresCharging)
+        }
+    }
+
+    fun toggleAutoPatchInstall(current: Boolean) = viewModelScope.launch {
+        prefs.autoPatchInstall.update(!current)
+    }
+
+    /**
+     * Turns the external batch patch entry point on or off. Disabling it also forgets every
+     * app that was trusted before, so re-enabling starts from a clean allowlist.
+     */
+    fun toggleExternalBatchPatch(current: Boolean) = viewModelScope.launch {
+        val enabled = !current
+        prefs.externalBatchPatchEnabled.update(enabled)
+        if (!enabled) prefs.externalBatchPatchAllowlist.update(emptySet())
     }
 
     /**

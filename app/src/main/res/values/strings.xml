@@ -323,6 +323,40 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="header_creator_guide_positioning_title">Positioning and scaling</string>
     <string name="header_creator_guide_positioning_body">Use pinch-to-zoom and drag gestures directly in the preview to position and scale your image. Snap guides appear when the image is near the center. You can also use the slider below the preview.</string>
 
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Patch selected</string>
+    <string name="batch_patch_title">Batch patching</string>
+    <string name="batch_patch_planning">Preparing the queue…</string>
+    <string name="batch_patch_preparing_next">Preparing the next app…</string>
+    <string name="batch_patch_progress_counter">Patched %1$d of %2$d</string>
+    <string name="batch_patch_summary">%1$d patched, %2$d failed, %3$d skipped</string>
+    <string name="batch_patch_saved_hint">The patched apps are saved. Install them now, or later from the patched APK list in settings</string>
+    <string name="batch_patch_needs_apk">No APK available, attach a file</string>
+    <string name="batch_patch_wrong_package">The attached file belongs to %s</string>
+    <string name="batch_patch_version_mismatch">Version %s is not supported by the patches</string>
+    <string name="batch_patch_source_saved">Saved original</string>
+    <string name="batch_patch_source_installed">Installed app</string>
+    <string name="batch_patch_source_file">Attached file</string>
+    <string name="batch_patch_source_unavailable">The APK could not be prepared</string>
+    <string name="batch_patch_attach_apk">Attach APK</string>
+    <string name="batch_patch_force_version">Patch anyway</string>
+    <string name="batch_patch_state_no_apk">No APK</string>
+    <string name="batch_patch_state_no_patches">No patches</string>
+    <string name="batch_patch_policy_install">Install when finished</string>
+    <string name="batch_patch_policy_install_description">Installs every patched app right after the queue finishes. Off keeps the APKs for later</string>
+    <string name="batch_patch_start">Start patching</string>
+    <string name="batch_patch_stop_title">Stop batch patching?</string>
+    <string name="batch_patch_stop_description">The app being patched right now and everything still queued will be cancelled</string>
+    <string name="batch_patch_install_all">Install all</string>
+    <string name="batch_patch_install_failed">Install failed</string>
+    <string name="batch_patch_in_progress">Batch patching is already running</string>
+    <string name="batch_patch_nothing_outdated">Every patched app is up to date</string>
+    <string name="shortcut_repatch_short">Re-patch</string>
+    <string name="shortcut_repatch_long">Re-patch outdated apps</string>
+    <string name="shortcut_check_updates_short">Check updates</string>
+    <string name="shortcut_check_updates_long">Check for patch updates</string>
+    <string name="shortcut_patch_app">Patch %s</string>
+
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Are you sure you want to uninstall this app?</string>
     <string name="batch_uninstall_confirm_body">The selected apps will be permanently removed from your device</string>
@@ -608,7 +642,30 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Background check frequency</string>
     <string name="settings_advanced_update_interval_battery_warning">Background checks may not work reliably on some devices. Manufacturers like Xiaomi, Huawei, Samsung, and OnePlus often aggressively restrict background processes to save battery</string>
 
+    <string name="settings_advanced_auto_patch">Automatic re-patching</string>
+    <string name="settings_advanced_auto_patch_description">Re-patches installed apps in the background when their patches change. Only apps with a saved original APK are covered</string>
+    <string name="settings_advanced_auto_patch_interval">Re-patch frequency</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">How often patched apps are rebuilt</string>
+    <string name="settings_advanced_auto_patch_charging">Only while charging</string>
+    <string name="settings_advanced_auto_patch_charging_description">Patching is heavy on the CPU and memory, so it waits for a charger</string>
+    <string name="settings_advanced_auto_patch_install">Install automatically</string>
+    <string name="settings_advanced_auto_patch_install_description">Requires Shizuku as the installer. With any other installer the patched apps are only saved</string>
+
+    <string name="settings_advanced_external_batch_patch">Allow external triggers</string>
+    <string name="settings_advanced_external_batch_patch_description">Lets automation apps start batch patching with an intent. Every new app has to be confirmed once</string>
+    <string name="external_batch_patch_title">Start batch patching?</string>
+    <string name="external_batch_patch_description">%s wants Morphe to patch and install apps</string>
+    <string name="external_batch_patch_trust_caller">Always allow this app</string>
+    <string name="external_batch_patch_unknown_caller">An unknown app</string>
+
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Automatic re-patching finished</string>
+    <string name="notification_auto_patch_running_title">Re-patching apps</string>
+    <string name="notification_auto_patch_blocked_title">Automatic re-patching did not run</string>
+    <string name="notification_auto_patch_blocked_battery">Exempt Morphe from battery optimization, otherwise Android stops the run before it starts</string>
+    <string name="notification_auto_patch_blocked_foreground">Android did not allow patching to start in the background. Open Morphe and patch from the app</string>
+    <string name="notification_channel_auto_patch">Automatic re-patching</string>
+    <string name="notification_channel_auto_patch_description">Silent progress and result notifications for scheduled re-patching</string>
     <string name="notification_manager_update_title">Morphe update available</string>
     <string name="notification_bundle_update_title">New patches available</string>
     <string name="notification_update_text">Version %s is ready to download</string>
@@ -803,7 +860,7 @@ Details: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android blocked this because it would downgrade the installed app</string>
     <string name="installer_shizuku_error_signature">Android blocked this because the installed app has a different signature</string>
     <string name="installer_shizuku_error_invalid_apk">Android could not read this APK</string>
-    <string name="installer_shizuku_error_user_profile">Android blocked this for the current user or work profile</string>
+    <string name="installer_shizuku_error_user_profile">The system blocked this install. On Xiaomi and similar devices, turn on "Install via USB" in developer options. On a work profile, installs can be restricted by policy</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery optimization</string>
     <string name="settings_system_battery_optimization_description">Keeps the patcher running when the app is minimized</string>
@@ -1002,6 +1059,9 @@ Details: %2$s"</string>
     <string name="confirm">Confirm</string>
     <string name="warning">Warning</string>
     <string name="error_">Error</string>
+    <string name="failed">Failed</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="ready">Ready</string>
     <string name="retry">Retry</string>
     <string name="refresh">Refresh</string>
     <string name="add">Add</string>
@@ -1014,6 +1074,9 @@ Details: %2$s"</string>
     <string name="delete">Delete</string>
     <string name="delete_all">Delete all</string>
     <string name="remove">Remove</string>
+    <string name="exclude">Exclude</string>
+    <string name="excluded">Excluded</string>
+    <string name="include">Include</string>
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
     <string name="loading">Loading…</string>
@@ -1058,6 +1121,7 @@ Details: %2$s"</string>
     <string name="continue_">Continue</string>
     <string name="version">Version</string>
     <string name="patch">Patch</string>
+    <string name="patching">Patching</string>
     <string name="repatch">Repatch</string>
     <string name="open">Open</string>
     <string name="mount">Mount</string>

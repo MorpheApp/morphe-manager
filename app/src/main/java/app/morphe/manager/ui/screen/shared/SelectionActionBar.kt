@@ -84,7 +84,7 @@ fun SelectionActionBar(
     val deselectAllDone = stringResource(R.string.deselect_all_done)
     val cancelLabel = stringResource(android.R.string.cancel)
     val selectedLabel = stringResource(R.string.selected).lowercase()
-    val allSelected = selectedCount >= totalCount && totalCount > 0
+    val allSelected = totalCount in 1..selectedCount
     val canToggleToDeselect = allSelected && onDeselectAll != null
     val selectionToggleLabel = if (canToggleToDeselect) deselectAllLabel else selectAllLabel
     val selectionToggleDone = if (canToggleToDeselect) deselectAllDone else selectAllDone
@@ -123,7 +123,7 @@ fun SelectionActionBar(
         ActionPillRow {
             ActionPillButton(
                 onClick = withToast(selectionToggleDone) {
-                    if (canToggleToDeselect) onDeselectAll?.invoke() else onSelectAll()
+                    if (canToggleToDeselect) onDeselectAll() else onSelectAll()
                 },
                 icon = if (canToggleToDeselect) Icons.Outlined.RemoveDone else Icons.Outlined.DoneAll,
                 contentDescription = selectionToggleLabel,

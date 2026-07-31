@@ -112,6 +112,12 @@
                 <data android:mimeType="application/apks" />
             </intent-filter>
 
+            <!-- Batch patching triggered by another app -->
+            <intent-filter>
+                <action android:name="app.morphe.manager.action.BATCH_PATCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
             <!-- Add-source deep link. Website acts as the gateway for repo validation -->
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />

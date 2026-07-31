@@ -1,17 +1,17 @@
 package app.morphe.manager.ui.viewmodel
 
 import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.net.Uri
+import android.os.Bundle
 import android.os.ParcelUuid
 import android.os.PowerManager
 import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.autoSaver
-import androidx.compose.runtime.snapshots.Snapshot
+import androidx.core.os.BundleCompat
 import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.compose.SavedStateHandleSaveableApi
 import androidx.lifecycle.viewmodel.compose.saveable
@@ -27,16 +27,11 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.domain.worker.WorkerRepository
-import app.morphe.manager.patcher.logger.LogLevel
-import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.patch.PatchBundleInfo
-import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_PREFIX_CURRENT
 import app.morphe.manager.patcher.runtime.ProcessRuntime
-import app.morphe.manager.patcher.runtime.process.PatcherProcess.Companion.LOG_PROCESS_PREFIX_PROCESS_HEAP
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.ui.model.*
-import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
 import app.morphe.manager.util.*
@@ -54,8 +49,6 @@ import java.io.File
 import java.io.IOException
 import java.nio.file.Files
 import java.util.UUID
-import kotlin.math.max
-import kotlin.math.min
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
@@ -94,7 +87,6 @@ class PatcherViewModel(
     }
     private var appliedSelection: PatchSelection = input.selectedPatches.mapValues { it.value.toSet() }
     private var appliedOptions: Options = input.options
-    val currentSelectedApp: SelectedApp get() = selectedApp
     val patchedFromInstalledDevice: Boolean
         get() = (selectedApp as? SelectedApp.Local)?.fromInstalledDevice == true
 
@@ -308,50 +300,31 @@ class PatcherViewModel(
             return (selectedApp as? SelectedApp.Local)?.temporary == true
         }
 
-    private var requiresSplitPreparation by savedStateHandle.saveableVar {
-        initialSplitRequirement(input.selectedApp)
-    }
     val outputFile = tempDir.resolve("output.apk")
 
-    /**
-     * How much of the progress is allocated to executing patches.
-     */
-    private var patchesPercentage = 0.0
-
-    val steps by savedStateHandle.saveable(saver = snapshotStateListSaver()) {
-        val stepsList = generateSteps(
-            app,
-            requiresSplitPreparation
-        ).toMutableStateList()
-
-        // Patches use the remaining unallocated percentage.
-        patchesPercentage = max(0.0, 1.0 - stepsList.sumOf { it.progressPercentage })
-
-        stepsList
-    }
-
-    private var currentStepIndex = 0
-
     private val patchCount = input.selectedPatches.values.sumOf { it.size }
-    private var completedPatchCount by savedStateHandle.saveable {
-        // SavedStateHandle.saveable only supports the boxed version.
-        @Suppress("AutoboxingStateCreation") mutableStateOf(0)
-    }
+
+    private val restoredProgress: Bundle? = savedStateHandle[KEY_PROGRESS]
 
     /**
-     * [0, 1.0] progress value.
+     * Step, log and progress state of this run. Shared with the patching screens through
+     * [PatchProgressSource] so the batch queue can render the very same UI, and restored
+     * from [SavedStateHandle] when the process was killed while the worker kept going.
      */
-    val progress by derivedStateOf {
-        val currentProgress = steps.sumOf {
-            if (it.state == State.COMPLETED && it.category != StepCategory.PATCHING) {
-                it.progressPercentage
-            } else {
-                0.0
-            }
-        } + ((completedPatchCount / patchCount.toDouble()) * patchesPercentage)
+    val patchRun = PatchRunProgress(
+        context = app,
+        scope = viewModelScope,
+        totalPatches = patchCount,
+        splitStepActive = initialSplitRequirement(input.selectedApp),
+        restoredSteps = restoredProgress?.let {
+            BundleCompat.getParcelableArrayList(it, KEY_STEPS, Step::class.java)
+        },
+        restoredCompletedPatches = restoredProgress?.getInt(KEY_COMPLETED_PATCHES) ?: 0
+    )
 
-        min(1.0, currentProgress).toFloat()
-    }
+    val steps: List<Step> get() = patchRun.steps
+    val progress: Float get() = patchRun.progress
+    val patchesProgress get() = patchRun.patchesProgress
 
     private val workManager = WorkManager.getInstance(app)
     private val _patcherSucceeded = MutableLiveData<Boolean?>()
@@ -370,57 +343,11 @@ class PatcherViewModel(
             }
         }
 
-    /** Real-time log entries exposed to the UI. Collected by the patcher worker. */
-    val logs = mutableStateListOf<Pair<LogLevel, String>>()
-
-    /** Heap usage samples (MB) collected every second during patching. */
-    val heapSamples = mutableStateListOf<Int>()
-
-    /** Heap limit (MB) of the patcher process - parsed from "Process heap memory limit:" log line. */
-    var heapLimitMb: Int by mutableIntStateOf(0)
-        private set
-
     /** Bundle versions collected during preflight, forwarded to the worker for logging. */
     private var bundleVersionsForLog: List<String> = emptyList()
 
-    private val logger = object : Logger() {
-        override fun log(level: LogLevel, message: String) {
-            level.androidLog(message)
-
-            // Parse heap limit
-            if (message.startsWith(LOG_PROCESS_PREFIX_PROCESS_HEAP)) {
-                val mb = message.removePrefix(LOG_PROCESS_PREFIX_PROCESS_HEAP)
-                    .substringBefore("MB").trim().toIntOrNull()
-                if (mb != null) viewModelScope.launch { heapLimitMb = mb }
-                // still pass through to logs
-            }
-
-            // Extract heap samples from process runtime polling - keep last 60
-            if (message.startsWith(LOG_MEMORY_PREFIX_CURRENT)) {
-                val mb = message.removePrefix(LOG_MEMORY_PREFIX_CURRENT)
-                    .substringBefore("MB").toIntOrNull()
-                if (mb != null) {
-                    viewModelScope.launch {
-                        heapSamples.add(mb)
-                        if (heapSamples.size > 60) heapSamples.removeAt(0)
-                    }
-                }
-                return // Don't show raw heap poll lines in the log panel
-            }
-
-            if (level == LogLevel.TRACE) return
-
-            viewModelScope.launch {
-                logs.add(level to message)
-            }
-        }
-    }
-
-    /**
-     * Long-step warning: true when the current patching step has been running for >60 seconds.
-     */
-    private val _showLongStepWarning = MutableStateFlow(false)
-    val showLongStepWarning: StateFlow<Boolean> = _showLongStepWarning.asStateFlow()
+    /** True when the current patching step has been running for over a minute. */
+    val showLongStepWarning: StateFlow<Boolean> = patchRun.showLongStepWarning
 
     /**
      * Emits true once after a successful export or install to prompt the notification permission
@@ -438,6 +365,15 @@ class PatcherViewModel(
     val shouldPromptTour: StateFlow<Boolean> = _shouldPromptTour.asStateFlow()
 
     init {
+        // Steps and the applied-patch count survive process death, so a run that continued in
+        // the worker while the UI was gone comes back with its pipeline intact
+        savedStateHandle.setSavedStateProvider(KEY_PROGRESS) {
+            Bundle().apply {
+                putParcelableArrayList(KEY_STEPS, ArrayList(patchRun.steps))
+                putInt(KEY_COMPLETED_PATCHES, patchRun.completedPatches)
+            }
+        }
+
         val existingId = patcherWorkerId?.uuid
         if (existingId != null) {
             observeWorker(existingId)
@@ -459,7 +395,7 @@ class PatcherViewModel(
                 runPreflightCheck()
             }
         }
-        observeLongStepWarning()
+        patchRun.startStallWatch()
     }
 
     private suspend fun runPreflightCheck() {
@@ -684,7 +620,6 @@ class PatcherViewModel(
         true
     }
 
-    val patchesProgress get() = completedPatchCount to patchCount
     override var downloadProgress by savedStateHandle.saveable(
         key = "downloadProgress",
         stateSaver = autoSaver()
@@ -808,34 +743,6 @@ class PatcherViewModel(
         }
     }
 
-    /**
-     * Starts the long-step warning observer loop.
-     * Called once from init so the loop runs for the ViewModel's lifetime.
-     * Resets the warning whenever real progress advances and sets it after 60 s of no movement.
-     */
-    private fun observeLongStepWarning() {
-        viewModelScope.launch {
-            var lastProgress = Snapshot.withoutReadObservation { progress }
-            var stepStartTime = System.currentTimeMillis()
-
-            while (patcherSucceeded.value == null) {
-                val now = System.currentTimeMillis()
-                val current = Snapshot.withoutReadObservation { progress }
-                if (current != lastProgress) {
-                    lastProgress = current
-                    stepStartTime = now
-                    _showLongStepWarning.value = false
-                } else if (!_showLongStepWarning.value &&
-                    now - stepStartTime > 60_000L
-                ) {
-                    _showLongStepWarning.value = true
-                }
-                delay(250.milliseconds)
-            }
-            _showLongStepWarning.value = false
-        }
-    }
-
     fun rejectInteraction() {
         currentActivityRequest?.first?.complete(false)
     }
@@ -885,10 +792,8 @@ class PatcherViewModel(
             outputFile.path,
             input.selectedPatches,
             mergedOptions,
-            logger,
-            onPatchCompleted = {
-                withContext(Dispatchers.Main) { completedPatchCount += 1 }
-            },
+            patchRun.logger,
+            onPatchCompleted = { patchRun.onPatchCompleted() },
             setInputFile = { file, needsSplit, merged ->
                 val storedFile = if (shouldPreserveInput) {
                     val existing = inputFile
@@ -911,26 +816,10 @@ class PatcherViewModel(
 
                 withContext(Dispatchers.Main) {
                     inputFile = storedFile
-                    updateSplitStepRequirement(storedFile, needsSplit, merged)
+                    patchRun.updateSplitRequirement(storedFile, needsSplit, merged)
                 }
             },
-            onProgress = { name, state, message ->
-                viewModelScope.launch {
-                    steps[currentStepIndex] = steps[currentStepIndex].run {
-                        copy(
-                            name = name ?: this.name,
-                            state = state ?: this.state,
-                            message = message ?: this.message
-                        )
-                    }
-
-                    if (state == State.COMPLETED && currentStepIndex != steps.lastIndex) {
-                        currentStepIndex++
-                        steps[currentStepIndex] =
-                            steps[currentStepIndex].copy(state = State.RUNNING)
-                    }
-                }
-            },
+            onProgress = patchRun::onProgress,
             bundleVersions = bundleVersionsForLog,
         )
     }
@@ -942,6 +831,7 @@ class PatcherViewModel(
                 when (workInfo?.state) {
                     WorkInfo.State.SUCCEEDED -> {
                         forceKeepLocalInput = false
+                        patchRun.stopStallWatch()
 
                         // Save original APK before deleting temporary file (blocking).
                         // Launched independently so cancelling observeWorkerJob (new patch run)
@@ -966,6 +856,7 @@ class PatcherViewModel(
                     }
 
                     WorkInfo.State.FAILED -> {
+                        patchRun.stopStallWatch()
                         handleWorkerFailure(workInfo)
                         isPatching = false
                         _patcherSucceeded.value = false
@@ -1032,77 +923,6 @@ class PatcherViewModel(
             else -> false
         }
 
-    private fun updateSplitStepRequirement(
-        file: File?,
-        needsSplitOverride: Boolean? = null,
-        merged: Boolean = false
-    ) {
-        val needsSplit = needsSplitOverride
-                ?: merged
-                || file?.let(SplitApkPreparer::isSplitArchive) == true
-        when {
-            needsSplit && !requiresSplitPreparation -> {
-                requiresSplitPreparation = true
-                addSplitStep()
-            }
-
-            !needsSplit && requiresSplitPreparation -> {
-                requiresSplitPreparation = false
-                removeSplitStep()
-                return
-            }
-        }
-
-        if (needsSplit && merged) {
-            val index = steps.indexOfFirst { it.id == StepId.PREPARE_SPLIT_APK }
-            if (index >= 0) {
-                steps[index] = steps[index].copy(state = State.COMPLETED)
-                if (currentStepIndex == index && index < steps.lastIndex) {
-                    currentStepIndex++
-                    steps[currentStepIndex] = steps[currentStepIndex].copy(state = State.RUNNING)
-                }
-            }
-        }
-    }
-
-    private fun addSplitStep() {
-        if (steps.any { it.id == StepId.PREPARE_SPLIT_APK }) return
-
-        val loadIndex = steps.indexOfFirst { it.id == StepId.LOAD_PATCHES }
-        val insertIndex = when {
-            loadIndex >= 0 -> loadIndex + 1
-            else -> steps.indexOfFirst { it.id == StepId.READ_APK }.takeIf { it >= 0 } ?: steps.size
-        }
-        val state = if (insertIndex <= currentStepIndex) State.COMPLETED else State.WAITING
-
-        steps.add(insertIndex, buildSplitStep(app, state = state))
-
-        if (insertIndex <= currentStepIndex) {
-            currentStepIndex++
-        }
-    }
-
-    private fun removeSplitStep() {
-        val index = steps.indexOfFirst { it.id == StepId.PREPARE_SPLIT_APK }
-        if (index == -1) return
-
-        val removingCurrent = index == currentStepIndex
-        steps.removeAt(index)
-
-        when {
-            currentStepIndex > index -> currentStepIndex--
-            removingCurrent -> {
-                currentStepIndex = index.coerceAtMost(steps.lastIndex).coerceAtLeast(0)
-                if (steps.isNotEmpty()) {
-                    val current = steps[currentStepIndex]
-                    if (current.state == State.WAITING) {
-                        steps[currentStepIndex] = current.copy(state = State.RUNNING)
-                    }
-                }
-            }
-        }
-    }
-
     private fun sanitizeSelection(
         selection: PatchSelection,
         bundles: Map<Int, PatchBundleInfo.Scoped>
@@ -1159,7 +979,7 @@ class PatcherViewModel(
         if (input.selectedApp is SelectedApp.Local && input.selectedApp.temporary) {
             inputFile?.takeIf { it.exists() }?.delete()
             inputFile = null
-            updateSplitStepRequirement(null)
+            patchRun.updateSplitRequirement(null)
         }
     }
 
@@ -1189,6 +1009,10 @@ class PatcherViewModel(
         private const val MEMORY_ADJUSTMENT_MB = 200
         private const val MIN_LIMIT_MB = 200
 
+        private const val KEY_PROGRESS = "patch_progress"
+        private const val KEY_STEPS = "steps"
+        private const val KEY_COMPLETED_PATCHES = "completed_patches"
+
         /**
          * Returns true if [required] is strictly newer than [current].
          * Uses the semver library already present in the project.
@@ -1198,68 +1022,5 @@ class PatcherViewModel(
             Version.parse(required, strict = false) >
                     Version.parse(current, strict = false)
         }.getOrDefault(false)
-
-        fun LogLevel.androidLog(msg: String) = when (this) {
-            LogLevel.TRACE -> Log.v(TAG, msg)
-            LogLevel.INFO -> Log.i(TAG, msg)
-            LogLevel.WARN -> Log.w(TAG, msg)
-            LogLevel.ERROR -> Log.e(TAG, msg)
-        }
-
-        fun generateSteps(
-            context: Context,
-            splitStepActive: Boolean
-        ): List<Step> {
-            return listOfNotNull(
-                Step(
-                    id = StepId.LOAD_PATCHES,
-                    name = context.getString(R.string.patcher_step_load_patches),
-                    category = StepCategory.PREPARING,
-                    state = State.RUNNING,
-                    progressPercentage = 0.05
-                ),
-                buildSplitStep(context).takeIf { splitStepActive },
-                Step(
-                    id = StepId.READ_APK,
-                    name = context.getString(R.string.patcher_step_unpack),
-                    category = StepCategory.PREPARING,
-                    progressPercentage = 0.05
-                ),
-
-                Step(
-                    id = StepId.EXECUTE_PATCHES,
-                    name = context.getString(R.string.applying_patches),
-                    category = StepCategory.PATCHING,
-                    // progress percentage is calculated as all remaining percentages not declared here.
-                    progressPercentage = 0.0
-                ),
-
-                Step(
-                    id = StepId.WRITE_PATCHED_APK,
-                    name = context.getString(R.string.patcher_step_write_patched),
-                    category = StepCategory.SAVING,
-                    progressPercentage = 0.4
-                ),
-                Step(
-                    id = StepId.SIGN_PATCHED_APK,
-                    name = context.getString(R.string.patcher_step_sign_apk),
-                    category = StepCategory.SAVING,
-                    progressPercentage = 0.1
-                )
-            )
-        }
     }
 }
-
-private fun buildSplitStep(
-    context: Context,
-    state: State = State.WAITING,
-    message: String? = null
-) = Step(
-    id = StepId.PREPARE_SPLIT_APK,
-    name = context.getString(R.string.patcher_step_prepare_split_apk),
-    category = StepCategory.PREPARING,
-    state = state,
-    message = message,
-    progressPercentage = 0.1
-)

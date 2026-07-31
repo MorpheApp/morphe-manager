@@ -96,6 +96,7 @@ class HomeAppActions(
     val onHideMultiple: (Set<String>) -> Unit,
     val onUninstallMultiple: (List<HomeAppItem>) -> Unit,
     val onReinstallMultiple: (List<HomeAppItem>) -> Unit,
+    val onPatchMultiple: (List<HomeAppItem>) -> Unit,
     val onUnhideApp: (String) -> Unit,
     val onShowPatches: (HomeAppItem) -> Unit,
     val onGestureHintShown: () -> Unit,
@@ -1696,6 +1697,12 @@ fun MainAppsSection(
                         onMoveToCategory = if (isCustomCategoryView) {
                             { showMoveCategoryDialog.value = true }
                         } else null,
+                        onPatchSelected = {
+                            appActions.onPatchMultiple(selectedAppItems)
+                            isMultiSelectMode.value = false
+                            selectedPackages.clear()
+                            selectedGroupKey = null
+                        },
                         onCancel = {
                             isMultiSelectMode.value = false
                             selectedPackages.clear()

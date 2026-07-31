@@ -33,13 +33,16 @@ import java.io.File
  *        runs after a successful install to persist app metadata in the caller's repository.
  * @param onInstalled invoked with the installed package name after a successful install,
  *        before the next queue item starts.
+ * @param onFailed invoked with the failure reason when an item is skipped or rejected, for
+ *        callers that show per-item state instead of relying on the summary toast alone.
  */
 data class InstallQueueRequest(
     val file: File,
     val originalPackageName: String,
     val mountPackageName: String? = null,
     val onPersistApp: suspend (String, InstallType) -> Boolean,
-    val onInstalled: (installedPackageName: String) -> Unit = {}
+    val onInstalled: (installedPackageName: String) -> Unit = {},
+    val onFailed: (message: String?) -> Unit = {}
 )
 
 /**
@@ -126,6 +129,7 @@ fun rememberInstallQueue(
                     !installViewModel.showInstallerSelectionDialog
                 ) {
                     skipped++
+                    current.onFailed(null)
                     active = null
                     activeStarted = false
                     startNext()
@@ -141,6 +145,7 @@ fun rememberInstallQueue(
             }
             is InstallViewModel.InstallState.Error -> {
                 skipped++
+                current.onFailed(state.message)
                 context.toast(state.message)
                 active = null
                 activeStarted = false
@@ -149,6 +154,7 @@ fun rememberInstallQueue(
             }
             is InstallViewModel.InstallState.Conflict -> {
                 skipped++
+                current.onFailed(conflictText)
                 context.toast(conflictText)
                 active = null
                 activeStarted = false

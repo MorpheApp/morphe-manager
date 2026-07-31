@@ -36,12 +36,15 @@ import app.morphe.manager.worker.UpdateCheckInterval
 @Composable
 fun UpdatesSettingsItem(
     settingsViewModel: SettingsViewModel,
-    onManagerPrereleasesToggle: () -> Unit
+    onManagerPrereleasesToggle: () -> Unit,
+    onAutoPatchClick: () -> Unit
 ) {
     val prefs = settingsViewModel.prefs
     val backgroundUpdateNotifications by prefs.backgroundUpdateNotifications.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
     val allowMeteredUpdates by prefs.allowMeteredUpdates.getAsState()
+    val autoPatchEnabled by prefs.autoPatchEnabled.getAsState()
+    val autoPatchInterval by prefs.autoPatchInterval.getAsState()
     val useManagerPrereleases by prefs.useManagerPrereleases.getAsState()
     val usePatchesPrereleases by prefs.bundlePrereleasesEnabled.getAsState()
     val showIntervalDialog = remember { mutableStateOf(false) }
@@ -103,6 +106,20 @@ fun UpdatesSettingsItem(
             title = stringResource(R.string.settings_advanced_updates_allow_metered),
             subtitle = stringResource(R.string.settings_advanced_updates_allow_metered_description)
         )
+
+        MorpheSettingsDivider()
+
+        // Automatic re-patching, configured in its own dialog
+        SettingsItem(
+            onClick = onAutoPatchClick,
+            title = stringResource(R.string.settings_advanced_auto_patch),
+            subtitle = if (autoPatchEnabled) {
+                stringResource(autoPatchInterval.labelResId)
+            } else {
+                stringResource(R.string.disabled)
+            },
+            leadingContent = { MorpheIcon(icon = Icons.Outlined.AutoMode) }
+        )
     }
 }
 
@@ -150,13 +167,16 @@ fun NotificationPermissionDialog(
 }
 
 /**
- * Discrete-slider dialog to pick the background update check interval.
+ * Discrete-slider dialog to pick a periodic background interval. Shared by the update check
+ * and the automatic re-patch schedule, which is why the wording is passed in.
  */
 @Composable
-private fun UpdateCheckIntervalDialog(
+internal fun UpdateCheckIntervalDialog(
     currentInterval: UpdateCheckInterval,
     onIntervalSelected: (UpdateCheckInterval) -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    title: String = stringResource(R.string.settings_advanced_update_interval_dialog_title),
+    chipSubtitle: String = stringResource(R.string.settings_advanced_update_interval_chip_subtitle)
 ) {
     val entries = UpdateCheckInterval.entries
     var sliderIndex by remember { mutableFloatStateOf(entries.indexOf(currentInterval).toFloat()) }
@@ -164,7 +184,7 @@ private fun UpdateCheckIntervalDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.settings_advanced_update_interval_dialog_title),
+        title = title,
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.save),
@@ -199,7 +219,7 @@ private fun UpdateCheckIntervalDialog(
                         color = LocalDialogTextColor.current
                     )
                     Text(
-                        text = stringResource(R.string.settings_advanced_update_interval_chip_subtitle),
+                        text = chipSubtitle,
                         style = MaterialTheme.typography.bodySmall,
                         color = LocalDialogSecondaryTextColor.current,
                         textAlign = TextAlign.Center

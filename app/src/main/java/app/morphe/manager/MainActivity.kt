@@ -18,7 +18,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
@@ -32,13 +34,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.ui.model.navigation.BatchPatcher
 import app.morphe.manager.ui.model.navigation.ComplexParameter
 import app.morphe.manager.ui.model.navigation.HomeScreen
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.model.navigation.Settings
+import app.morphe.manager.ui.screen.BatchPatcherScreen
 import app.morphe.manager.ui.screen.HomeScreen
 import app.morphe.manager.ui.screen.PatcherScreen
 import app.morphe.manager.ui.screen.SettingsScreen
+import app.morphe.manager.ui.screen.home.ExternalBatchPatchDialog
 import app.morphe.manager.ui.screen.home.GlobalOnboardingState
 import app.morphe.manager.ui.screen.home.OnboardingShowcase
 import app.morphe.manager.ui.screen.home.OnboardingState
@@ -136,11 +141,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        val vm: MainViewModel = getActivityViewModel()
-        if (intent.getBooleanExtra(UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK, false)) {
-            vm.pendingUpdateCheck = true
-        }
-        handleDeepLinkIntent(intent, vm)
+        handleDeepLinkIntent(intent, getActivityViewModel())
     }
 
     /**
@@ -149,6 +150,49 @@ class MainActivity : AppCompatActivity() {
      * Only GitHub and GitLab URLs are accepted.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
+        // Handled here rather than in onNewIntent so a cold start from a notification or a
+        // launcher shortcut triggers the check as well
+        if (intent?.getBooleanExtra(UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK, false) == true) {
+            vm.pendingUpdateCheck = true
+            return
+        }
+
+        // Automatic re-patch notification: reopens the queue it reports about
+        if (intent?.action == ACTION_SHOW_BATCH_RESULT) {
+            vm.pendingBatchResult = true
+            return
+        }
+
+        // Launcher shortcut for one app: opens the usual patch dialog for it
+        if (intent?.action == ACTION_PATCH_APP) {
+            intent.getStringExtra(EXTRA_PATCH_PACKAGE)
+                ?.takeIf { it.isNotBlank() }
+                ?.let { vm.pendingPatchPackage = it }
+            return
+        }
+
+        // Batch patch requested by another app, for example an automation tool.
+        // The request is only recorded here; MorpheManager gates it before anything runs
+        if (intent?.action == ACTION_BATCH_PATCH) {
+            val packageNames = intent.getStringArrayExtra(EXTRA_BATCH_PACKAGES)?.toList()
+                ?: intent.getStringExtra(EXTRA_BATCH_PACKAGES)
+                    ?.split(',')
+                    ?.map(String::trim)
+                    ?.filter(String::isNotBlank)
+
+            if (packageNames.isNullOrEmpty()) {
+                // No list means the launcher shortcut, which asks the app to work out what is
+                // outdated. It only opens the preflight list, so it needs no caller gate
+                vm.pendingOutdatedBatch = true
+            } else {
+                vm.pendingBatchPatch = MainViewModel.BatchPatchRequest(
+                    packageNames = packageNames,
+                    callerPackage = callingPackage ?: referrer?.host
+                )
+            }
+            return
+        }
+
         // Handle APK-family file shared via system share sheet (.apk/.apks/.xapk/.apkm)
         if (intent?.action == Intent.ACTION_SEND) {
             val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -194,6 +238,26 @@ class MainActivity : AppCompatActivity() {
             vm.pendingDeepLinkSource = MainViewModel.DeepLinkSource(url = url, name = name)
             return
         }
+    }
+
+    companion object {
+        /** Action other apps use to queue a batch patch run. */
+        const val ACTION_BATCH_PATCH = "app.morphe.manager.action.BATCH_PATCH"
+
+        /** Package names to patch, either a string array or a comma-separated string. */
+        const val EXTRA_BATCH_PACKAGES = "packages"
+
+        /** Action behind the per-app launcher shortcuts. */
+        const val ACTION_PATCH_APP = "app.morphe.manager.action.PATCH_APP"
+
+        /** Action behind the update check shortcut. Shortcut intents must carry one. */
+        const val ACTION_CHECK_UPDATES = "app.morphe.manager.action.CHECK_UPDATES"
+
+        /** Action that reopens the batch queue from an automatic re-patch notification. */
+        const val ACTION_SHOW_BATCH_RESULT = "app.morphe.manager.action.SHOW_BATCH_RESULT"
+
+        /** Package the per-app shortcut opens the patch dialog for. */
+        const val EXTRA_PATCH_PACKAGE = "patch_package"
     }
 }
 
@@ -241,6 +305,61 @@ private fun MorpheManager(vm: MainViewModel) {
             homeViewModel.setPendingMpp(uri)
             vm.pendingMppUri = null
         }
+    }
+
+    // Gate an incoming external batch request, then run it once approved
+    LaunchedEffect(vm.pendingBatchPatch) {
+        vm.pendingBatchPatch?.let(vm::onExternalBatchRequest)
+    }
+
+    LaunchedEffect(vm.pendingOutdatedBatch) {
+        if (vm.pendingOutdatedBatch) vm.onShortcutBatchRequest()
+    }
+
+    LaunchedEffect(vm.pendingBatchResult) {
+        if (vm.pendingBatchResult) vm.onShowBatchResult()
+    }
+
+    // Per-app shortcut reuses the trigger the installed-app dialog already goes through
+    LaunchedEffect(vm.pendingPatchPackage) {
+        vm.pendingPatchPackage?.let { packageName ->
+            vm.pendingPatchPackage = null
+            navController.popBackStack(HomeScreen, false)
+            navController.getBackStackEntry(HomeScreen)
+                .savedStateHandle["patch_trigger_package"] = packageName
+        }
+    }
+
+    val context = LocalContext.current
+    val nothingToRepatchText = stringResource(R.string.batch_patch_nothing_outdated)
+    LaunchedEffect(vm.nothingToRepatch) {
+        if (vm.nothingToRepatch) {
+            context.toast(nothingToRepatchText)
+            vm.consumeNothingToRepatch()
+        }
+    }
+
+    LaunchedEffect(vm.approvedBatchPatch) {
+        vm.approvedBatchPatch?.let { request ->
+            vm.consumeApprovedBatch()
+            navController.popBackStack(HomeScreen, false)
+            navController.navigateComplex(
+                BatchPatcher,
+                BatchPatcher.ViewModelParams(
+                    packageNames = request.packageNames,
+                    useMount = false
+                )
+            )
+        }
+    }
+
+    vm.batchPatchConfirmation?.let { request ->
+        ExternalBatchPatchDialog(
+            callerPackage = request.callerPackage,
+            packageCount = request.packageNames.size,
+            onConfirm = { trustCaller -> vm.approveExternalBatch(trustCaller) },
+            onDismiss = vm::dismissExternalBatch
+        )
     }
 
     // Handle .apk file shared via share sheet
@@ -424,6 +543,17 @@ private fun MorpheManager(vm: MainViewModel) {
                             )
                         }
                     },
+                    onStartBatchPatch = { packageNames, useMount ->
+                        entry.lifecycleScope.launch {
+                            navController.navigateComplex(
+                                BatchPatcher,
+                                BatchPatcher.ViewModelParams(
+                                    packageNames = packageNames,
+                                    useMount = useMount
+                                )
+                            )
+                        }
+                    },
                     homeViewModel = homeViewModel,
                     usingMountInstallState = usingMountInstallState,
                     bundleUpdateProgress = bundleUpdateProgress,
@@ -431,6 +561,16 @@ private fun MorpheManager(vm: MainViewModel) {
                     onPatchTriggerHandled = {
                         entry.savedStateHandle["patch_trigger_package"] = null
                     }
+                )
+            }
+
+            composable<BatchPatcher> { entry ->
+                val params = entry.getComplexArg<BatchPatcher.ViewModelParams>() ?: return@composable
+                BatchPatcherScreen(
+                    packageNames = params.packageNames,
+                    useMount = params.useMount,
+                    onBackClick = { navController.popBackStack() },
+                    onAppStateChanged = homeViewModel::notifyAppStateChanged
                 )
             }
 

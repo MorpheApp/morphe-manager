@@ -60,6 +60,9 @@ Long-press any card to select it, then tap others to add them. The bar that appe
 **Select all** and **Deselect all**, **Move to category**, reordering, **Reset order**, and
 the batch actions, including uninstalling every selected app at once.
 
+The wand button patches everything you selected in one queue, see
+[Patching several apps at once](batch-patching.md).
+
 ## Other apps
 
 **Other apps** at the bottom of the list opens patching for apps outside the built-in list:
