@@ -129,7 +129,10 @@ class BatchPlanResolver(
      * answer to the question "what is worth re-patching right now".
      */
     suspend fun findOutdatedPackages(): List<String> = withContext(Dispatchers.IO) {
-        val currentVersions = patchBundleRepository.sources.first().associate { it.uid to it.version }
+        // Scoped to the sources planning will actually use. A disabled or blocked source moving
+        // on is not a reason to re-patch, and the plan would only report No patches anyway
+        val currentVersions = patchBundleRepository.enabledBundlesInfoFlow.first()
+            .mapValues { (_, info) -> info.version }
         if (currentVersions.isEmpty()) return@withContext emptyList()
 
         installedAppRepository.getAll().first()
