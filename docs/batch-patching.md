@@ -139,9 +139,23 @@ adb shell am start -n app.morphe.manager/app.morphe.manager.MainActivity \
 `packages` takes a string array or a comma-separated string of package names.
 
 This is off by default. Turn on **Allow external triggers** in the same settings dialog, and
-the first request from an app asks for your confirmation, with the option to trust it from
-then on. A request never starts patching by itself: it opens the preflight list, and the run
-begins when you tap **Start patching**.
+every request asks for your confirmation first. A request never starts patching by itself: it
+opens the preflight list, and the run begins when you tap **Start patching**.
+
+### Trusting an app
+
+The confirmation dialog offers **Always allow this app** only when Android can tell Morphe who
+sent the request, which it does only for callers that launch Morphe **for a result**
+(`startActivityForResult`). A plain `startActivity`, and the `adb` command above, arrive
+anonymously.
+
+This is deliberate. The other way to identify a caller is the referrer, and a sender can set
+that to any package name it likes, which would let a hostile app both skip the dialog and show
+someone else's name in it. Morphe would rather ask every time than trust a name that can be
+made up.
+
+So a request from an anonymous caller still works, it just shows **An unknown app** and asks
+again next time.
 
 ## Troubleshooting
 

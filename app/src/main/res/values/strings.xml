@@ -653,7 +653,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_advanced_auto_patch_install_description">Requires Shizuku as the installer. With any other installer the patched apps are only saved</string>
 
     <string name="settings_advanced_external_batch_patch">Allow external triggers</string>
-    <string name="settings_advanced_external_batch_patch_description">Lets automation apps start batch patching with an intent. Every new app has to be confirmed once</string>
+    <string name="settings_advanced_external_batch_patch_description">Lets automation apps start batch patching with an intent. Every request is confirmed before anything runs</string>
     <string name="external_batch_patch_title">Start batch patching?</string>
     <string name="external_batch_patch_description">%s wants Morphe to patch and install apps</string>
     <string name="external_batch_patch_trust_caller">Always allow this app</string>
