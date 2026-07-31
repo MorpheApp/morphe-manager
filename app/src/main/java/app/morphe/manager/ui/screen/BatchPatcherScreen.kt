@@ -298,9 +298,12 @@ fun BatchPatcherScreen(
                         onAttach = { viewModel.requestAttach(item.packageName) },
                         onToggleExcluded = { viewModel.toggleExcluded(item.packageName) },
                         onForceVersion = { viewModel.forceVersion(item.packageName) },
-                        // Nothing to choose from until an APK resolves, the patch list is
-                        // scoped to its exact version
-                        onEditPatches = item.source?.let { { viewModel.beginEdit(item) } },
+                        // Simple mode never exposes individual patches, and the options edited
+                        // here would not be persisted for it. Nothing to choose from until an
+                        // APK resolves either, the patch list is scoped to its exact version
+                        onEditPatches = item.source
+                            ?.takeIf { useExpertMode }
+                            ?.let { { viewModel.beginEdit(item) } },
                         // Installing everything is not always what the user wants once they
                         // see which apps succeeded
                         onInstall = request?.let { { startInstallQueue(listOf(it)) } },
