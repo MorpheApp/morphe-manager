@@ -5,11 +5,8 @@
 
 package app.morphe.manager.ui.screen
 
-import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -19,17 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.supportsMount
-import app.morphe.manager.domain.manager.HomeAppButtonPreferences
-import app.morphe.manager.domain.manager.HomeAppCategoryState
-import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
-import app.morphe.manager.domain.manager.HomeAppSortMode
-import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.home.*
@@ -37,11 +27,7 @@ import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
 import app.morphe.manager.ui.screen.settings.system.PrePatchInstallerDialog
 import app.morphe.manager.ui.screen.shared.InstallQueueRequest
 import app.morphe.manager.ui.screen.shared.rememberInstallQueue
-import app.morphe.manager.ui.viewmodel.HomeAndPatcherMessages
-import app.morphe.manager.ui.viewmodel.HomeViewModel
-import app.morphe.manager.ui.viewmodel.InstallViewModel
-import app.morphe.manager.ui.viewmodel.QuickPatchParams
-import app.morphe.manager.ui.viewmodel.UpdateViewModel
+import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -70,7 +56,6 @@ fun HomeScreen(
     installViewModel: InstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
-    val lifecycleOwner = LocalLifecycleOwner.current
     val view = LocalView.current
     val scope = rememberCoroutineScope()
     val sourcesLoadingText = stringResource(R.string.home_sources_are_loading)
@@ -144,18 +129,6 @@ fun HomeScreen(
         mimeTypes = APK_FILE_MIME_TYPES,
         onResult = { uri -> uri?.let { homeViewModel.handleApkSelection(it) } }
     )
-
-    val apkDownloadHelperLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            ApkDownloadHelperContract.resultUri(result.data)?.let { uri ->
-                homeViewModel.showDownloadInstructionsDialog = false
-                homeViewModel.showFilePickerPromptDialog = false
-                homeViewModel.handleApkSelection(uri)
-            }
-        }
-    }
 
     val openBundlePicker = rememberAdaptiveFilePicker(
         mimeTypes = MPP_FILE_MIME_TYPES,
@@ -249,47 +222,10 @@ fun HomeScreen(
         )
     }
 
-    var apkDownloadHelperAvailable by remember { mutableStateOf(false) }
-    fun refreshApkDownloadHelperAvailability() {
-        apkDownloadHelperAvailable = ApkDownloadHelperContract.hasHelper(context)
-    }
-
-    LaunchedEffect(context) {
-        refreshApkDownloadHelperAvailability()
-    }
-
-    DisposableEffect(lifecycleOwner, context) {
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_RESUME) {
-                refreshApkDownloadHelperAvailability()
-            }
-        }
-        lifecycleOwner.lifecycle.addObserver(observer)
-        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
-    }
-
-    val openApkDownloadHelper: (() -> Unit)? = if (apkDownloadHelperAvailable) {
-        {
-            val intent = homeViewModel.createApkDownloadHelperIntent()
-            if (intent != null && ApkDownloadHelperContract.hasHelper(context)) {
-                try {
-                    apkDownloadHelperLauncher.launch(intent)
-                } catch (_: ActivityNotFoundException) {
-                    refreshApkDownloadHelperAvailability()
-                }
-            } else {
-                refreshApkDownloadHelperAvailability()
-            }
-        }
-    } else {
-        null
-    }
-
     // All dialogs
     HomeDialogs(
         homeViewModel = homeViewModel,
         storagePickerLauncher = { openApkPicker() },
-        openApkDownloadHelper = openApkDownloadHelper,
         openBundlePicker = { openBundlePicker() },
         patchesItem = patchesSheetItem,
         globalOnboardingState = globalOnboardingState

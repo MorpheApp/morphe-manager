@@ -68,7 +68,6 @@ import kotlin.time.Duration.Companion.milliseconds
 fun HomeDialogs(
     homeViewModel: HomeViewModel,
     storagePickerLauncher: () -> Unit,
-    openApkDownloadHelper: (() -> Unit)? = null,
     openBundlePicker: () -> Unit,
     patchesItem: MutableState<HomeAppItem?>,
     globalOnboardingState: GlobalOnboardingState? = null
@@ -76,6 +75,13 @@ fun HomeDialogs(
     val uriHandler = LocalUriHandler.current
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val apkDownloadHelperEnabled by homeViewModel.prefs.useApkDownloadHelper.getAsState()
+
+    // Kept outside the dialog so the picker state survives the download dialog's exit animation
+    val openApkDownloadHelper = rememberApkDownloadHelperAction(
+        homeViewModel = homeViewModel,
+        enabled = apkDownloadHelperEnabled && homeViewModel.showDownloadInstructionsDialog
+    )
 
     // APK selection processing overlay - blocks interaction while APK is loaded/validated in background
     MorpheOverlay(visible = homeViewModel.processingApkSelection) {
@@ -818,16 +824,17 @@ private fun DownloadInstructionsDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_download_instructions_title),
         footer = {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                if (onOpenApkDownloadHelper != null) {
-                    MorpheDialogOutlinedButton(
-                        text = stringResource(R.string.home_apk_helper_download),
-                        onClick = onOpenApkDownloadHelper,
-                        icon = Icons.Outlined.Download,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-
+            if (onOpenApkDownloadHelper != null) {
+                MorpheDialogButtonRow(
+                    primaryText = stringResource(R.string.home_download_instructions_continue),
+                    onPrimaryClick = onContinue,
+                    primaryIcon = Icons.AutoMirrored.Outlined.OpenInNew,
+                    secondaryText = stringResource(R.string.home_apk_helper_download),
+                    onSecondaryClick = onOpenApkDownloadHelper,
+                    secondaryIcon = Icons.Outlined.Download,
+                    layout = DialogButtonLayout.Vertical
+                )
+            } else {
                 MorpheDialogButton(
                     text = stringResource(R.string.home_download_instructions_continue),
                     onClick = onContinue,

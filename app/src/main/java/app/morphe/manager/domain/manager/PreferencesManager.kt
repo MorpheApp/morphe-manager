@@ -132,6 +132,10 @@ class PreferencesManager(
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
 
     val useCustomFilePicker = booleanPreference("use_custom_file_picker", false)
+
+    /** Whether an installed third-party APK download helper may be offered. */
+    val useApkDownloadHelper = booleanPreference("use_apk_download_helper", false)
+
     val lastFilePickerPath = stringPreference("last_file_picker_path", "")
     val filePickerSortMode = stringPreference("file_picker_sort_mode", "NAME_ASC")
     val filePickerShowHiddenFiles = booleanPreference("file_picker_show_hidden_files", false)
@@ -272,6 +276,7 @@ class PreferencesManager(
         val filePickerShowHiddenFiles: Boolean? = null,
         val useCustomFilePicker: Boolean? = null,
         val customFilePickerUserConfigured: Boolean? = null,
+        val useApkDownloadHelper: Boolean? = null,
         val sourceBundleSortMode: String? = null,
         val saveOriginalApks: Boolean? = null,
         val savePatchedApks: Boolean? = null,
@@ -324,6 +329,7 @@ class PreferencesManager(
         filePickerShowHiddenFiles = filePickerShowHiddenFiles.get(),
         useCustomFilePicker = useCustomFilePicker.get(),
         customFilePickerUserConfigured = customFilePickerUserConfigured.get(),
+        useApkDownloadHelper = useApkDownloadHelper.get(),
         sourceBundleSortMode = sourceBundleSortMode.get(),
         saveOriginalApks = saveOriginalApks.get(),
         savePatchedApks = savePatchedApks.get(),
@@ -378,6 +384,7 @@ class PreferencesManager(
         snapshot.filePickerShowHiddenFiles?.let { filePickerShowHiddenFiles.value = it }
         snapshot.useCustomFilePicker?.let { useCustomFilePicker.value = it }
         snapshot.customFilePickerUserConfigured?.let { customFilePickerUserConfigured.value = it }
+        snapshot.useApkDownloadHelper?.let { useApkDownloadHelper.value = it }
         snapshot.sourceBundleSortMode?.let { sourceBundleSortMode.value = it }
         snapshot.saveOriginalApks?.let { saveOriginalApks.value = it }
         snapshot.savePatchedApks?.let { savePatchedApks.value = it }

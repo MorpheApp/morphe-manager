@@ -170,7 +170,13 @@
     <string name="home_apk_availability_incompatible_label">Incompatible</string>
     <string name="home_apk_availability_yes">Yes, help me find an APK</string>
     <string name="home_apk_availability_no">No, I already have an APK</string>
-    <string name="home_apk_helper_download">Download with helper</string>
+    <string name="home_apk_helper_download">Download with a helper app</string>
+    <string name="home_apk_helper_title">Download with a helper app</string>
+    <string name="home_apk_helper_description">Morphe will ask the app below to download the original APK and hand the file back</string>
+    <string name="home_apk_helper_continue">Open helper</string>
+    <string name="home_apk_helper_warning">Only continue if you trust this app. Morphe checks the package, version and signature of whatever it receives before patching</string>
+    <string name="home_apk_helper_warning_unverified">Only continue if you trust this app. Morphe cannot verify the signature of this APK, so a modified file would not be detected</string>
+    <string name="home_apk_helper_no_result">The helper app did not return an APK</string>
     <string name="home_apk_use_saved">Use saved APK</string>
     <string name="home_apk_use_installed">Use installed APK</string>
     <string name="home_apk_use_installed_unverified">Could not verify the signature of the installed app, so it may already be patched</string>
@@ -1020,6 +1026,8 @@ Details: %2$s"</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Custom file picker</string>
     <string name="settings_system_custom_file_picker_description">Browse storage with Morphe\'s built-in file picker instead of the system default</string>
+    <string name="settings_system_apk_download_helper">APK download helper</string>
+    <string name="settings_system_apk_download_helper_description">Let an installed helper app fetch original APKs for you. The file comes from that app, so only enable this if you trust it</string>
 
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Previous directory</string>

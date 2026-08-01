@@ -265,6 +265,10 @@ class SettingsViewModel(
         prefs.customFilePickerUserConfigured.update(true)
     }
 
+    fun setUseApkDownloadHelper(enabled: Boolean) = viewModelScope.launch {
+        prefs.useApkDownloadHelper.update(enabled)
+    }
+
     fun setPatcherCompletionSound(enabled: Boolean) = viewModelScope.launch {
         prefs.patcherCompletionSound.update(enabled)
     }
