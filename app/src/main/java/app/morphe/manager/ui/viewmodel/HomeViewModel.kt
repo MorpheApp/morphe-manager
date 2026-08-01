@@ -2986,7 +2986,7 @@ class HomeViewModel(
             // Mirrors processSelectedApp - only a required plain APK rules split archives out
             allowSplitArchive = !(apkFileType?.isApk == true && apkFileType.isRequired),
             stockInstallRequired = usingMountInstall && pendingTargetAppInstalled != true,
-            fallbackWebUrl = getApiOfflineWebSearchUrl()
+            fallbackWebUrl = downloadUrlResolver.webSearchUrl(packageName, requestedVersion?.version)
         )
     }
 
