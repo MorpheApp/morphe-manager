@@ -12,7 +12,7 @@ contract: any app can implement it.
 **Settings → System → Files & storage → APK download helper**. The toggle only appears once
 an app implementing the contract is installed, and it is off by default.
 
-With it on, the download instructions dialog gains a **Download with a helper app** button
+With it on, the download instructions dialog gains a **Use a helper app** button
 next to the usual **Continue** button.
 
 ## What happens when you use it

@@ -170,12 +170,12 @@
     <string name="home_apk_availability_incompatible_label">Incompatible</string>
     <string name="home_apk_availability_yes">Yes, help me find an APK</string>
     <string name="home_apk_availability_no">No, I already have an APK</string>
-    <string name="home_apk_helper_download">Download with a helper app</string>
+    <string name="home_apk_helper_download">Use a helper app</string>
     <string name="home_apk_helper_title">Download with a helper app</string>
-    <string name="home_apk_helper_description">Morphe will ask the app below to download the original APK and hand the file back</string>
-    <string name="home_apk_helper_continue">Open helper</string>
-    <string name="home_apk_helper_warning">Only continue if you trust this app. Morphe checks the package, version and signature of whatever it receives before patching</string>
-    <string name="home_apk_helper_warning_unverified">Only continue if you trust this app. Morphe cannot verify the signature of this APK, so a modified file would not be detected</string>
+    <string name="home_apk_helper_description">Morphe will ask the helper app below to download the original APK and hand the file back</string>
+    <string name="home_apk_helper_continue">Open helper app</string>
+    <string name="home_apk_helper_warning">Only continue if you trust this helper app. Morphe checks the package, version and signature of whatever it receives before patching</string>
+    <string name="home_apk_helper_warning_unverified">Only continue if you trust this helper app. Morphe cannot verify the signature of this APK, so a modified file would not be detected</string>
     <string name="home_apk_helper_no_result">The helper app did not return an APK</string>
     <string name="home_apk_use_saved">Use saved APK</string>
     <string name="home_apk_use_installed">Use installed APK</string>
