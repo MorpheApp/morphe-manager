@@ -2584,7 +2584,8 @@ class HomeViewModel(
 
                 expertModeSelectedApp = selectedApp
                 expertModeBundles = allBundles
-                savedSelections.toMutableMap().also { expertModePatches = it; expertModeInitialPatches = it }
+                savedSelections.applyInstallerRules().toMutableMap()
+                    .also { expertModePatches = it; expertModeInitialPatches = it }
                 expertModeOptions = savedOptions.toMutableMap()
                 showExpertModeDialog = true
                 return
@@ -2872,7 +2873,9 @@ class HomeViewModel(
             val updatedSelection = expertModePatches.toMutableMap()
             if (patches.isEmpty()) updatedSelection.remove(targetBundleUid)
             else updatedSelection[targetBundleUid] = patches
-            expertModePatches = updatedSelection
+            // The copy comes from a run that may have targeted another installer, so the patches
+            // it carries are put through the availability rules of this one
+            expertModePatches = updatedSelection.applyExpertModeAvailability()
 
             val currentOptions = expertModeOptions.toMutableMap()
             val bundleOptions = currentOptions[targetBundleUid]?.toMutableMap() ?: mutableMapOf()
@@ -2893,6 +2896,14 @@ class HomeViewModel(
             closeExpertModeCopyDialog()
         }
     }
+
+    /** Availability rules of the current install target, scoped to the bundles the dialog shows. */
+    private fun PatchSelection.applyExpertModeAvailability(): PatchSelection =
+        applyAvailability(
+            currentInstallerType,
+            currentApkArchitecture,
+            expertModeBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
+        )
 
     private fun targetBundlePatchNames(bundleUid: Int): Set<String> =
         expertModeBundles.firstOrNull { it.uid == bundleUid }
