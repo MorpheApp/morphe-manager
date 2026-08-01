@@ -440,6 +440,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patcher_install_error_subtitle">Try uninstalling and installing again</string>
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
+    <string name="patcher_patches_excluded_for_installer">Not available for this install method and excluded: %s</string>
     <string name="patcher_storage_permission_dialog_title">Cannot access storage path</string>
     <string name="patcher_incompatible_patcher_title">Update required</string>
     <string name="patcher_incompatible_patcher_description">The bundle &lt;b&gt;%1$s&lt;/b&gt; requires patcher version &lt;b&gt;%2$s&lt;/b&gt; or newer. Please update Morphe to patch this app</string>

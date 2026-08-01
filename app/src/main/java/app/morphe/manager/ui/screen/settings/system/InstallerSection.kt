@@ -947,12 +947,11 @@ fun PlayStoreInstallerWarningDialog(
  * Dialog shown to root device users before patching to choose between root mount mode and
  * standard install mode.
  *
- * The patch mode directly affects how the APK is patched:
- * - **Root Mount** excludes the GmsCore support patch - the mounted APK replaces the
- *   stock APK in-place via bind-mount, so the original Google services remain available
- *   and GmsCore would actually interfere.
- * - **Standard Install** includes GmsCore support - the patched APK is installed as a
- *   separate app that needs the microG / GmsCore bridge to communicate with Google services.
+ * The patch mode is the install target patches declare their availability against, so it decides
+ * which of them can run at all:
+ * - **Root Mount** replaces the stock APK in-place via bind-mount, so the original Google services
+ *   remain available and patches that bridge them declare themselves unavailable here.
+ * - **Standard Install** produces a separate app, where those same patches are required instead.
  *
  * Because of this, the choice cannot be deferred to after patching. The user must decide now so
  * the correct set of patches is applied.

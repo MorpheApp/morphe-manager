@@ -31,7 +31,9 @@ import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.PatchSourceRef
+import app.morphe.manager.patcher.patch.SELECTION_APK_ARCHITECTURE
 import app.morphe.manager.patcher.runtime.ProcessRuntime
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
@@ -40,6 +42,7 @@ import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
 import app.morphe.manager.util.*
 import app.morphe.manager.worker.UpdateCheckWorker
+import app.morphe.patcher.patch.InstallerType
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -204,6 +207,18 @@ class PatcherViewModel(
             input.selectedApp.version,
             input.selectedApp.versionCode
         ).first().associateBy { it.uid }
+
+    /**
+     * Patches the sources declare unavailable for [installerType], so the finished app can name
+     * what it was built without instead of leaving the user to spot the missing patch.
+     */
+    suspend fun unavailablePatchNames(installerType: InstallerType): List<String> =
+        gatherScopedBundles().values
+            .flatMap { it.patches }
+            .filter { it.lockState(installerType, SELECTION_APK_ARCHITECTURE) == PatchLockState.LOCKED_OFF }
+            .map { it.name }
+            .distinct()
+            .sorted()
 
     suspend fun collectSelectedBundleMetadata(): List<PatchSourceRef> {
         val globalBundles = patchBundleRepository.bundleInfoFlow.first()

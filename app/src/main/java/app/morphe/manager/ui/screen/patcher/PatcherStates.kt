@@ -127,6 +127,7 @@ fun PatchingSuccess(
     onUseFallbackInstaller: () -> Unit,
     onDismissInstallerDialog: () -> Unit,
     usingMountInstall: Boolean,
+    excludedPatches: List<String> = emptyList(),
     isExpertMode: Boolean = false,
     onInstall: () -> Unit,
     onUninstall: (String) -> Unit,
@@ -185,6 +186,7 @@ fun PatchingSuccess(
                 isConflict = isConflict,
                 installedPackageName = installedPackageName,
                 usingMountInstall = usingMountInstall,
+                excludedPatches = excludedPatches,
                 errorMessage = errorMessage,
                 conflictPackageName = conflictPackageName,
                 onInstall = onInstall,
@@ -232,6 +234,7 @@ private fun AdaptiveSuccessContent(
     isConflict: Boolean,
     installedPackageName: String?,
     usingMountInstall: Boolean,
+    excludedPatches: List<String>,
     errorMessage: String?,
     conflictPackageName: String?,
     onInstall: () -> Unit,
@@ -328,8 +331,8 @@ private fun AdaptiveSuccessContent(
 
                 SuccessConflictHint(isConflict = isConflict)
 
-                SuccessRootWarning(
-                    usingMountInstall = usingMountInstall,
+                SuccessExcludedPatchesHint(
+                    excludedPatches = excludedPatches,
                     isReady = !isInstalling && !isInstalled && !isError && !isConflict
                 )
 
@@ -389,8 +392,8 @@ private fun AdaptiveSuccessContent(
 
             SuccessConflictHint(isConflict = isConflict)
 
-            SuccessRootWarning(
-                usingMountInstall = usingMountInstall,
+            SuccessExcludedPatchesHint(
+                excludedPatches = excludedPatches,
                 isReady = !isInstalling && !isInstalled && !isError && !isConflict
             )
 
@@ -550,16 +553,19 @@ private fun SuccessConflictHint(isConflict: Boolean) {
 }
 
 /**
- * Success screen root warning.
+ * Success screen hint naming the patches the sources ruled out for the chosen install method.
  */
 @Composable
-private fun SuccessRootWarning(
-    usingMountInstall: Boolean,
+private fun SuccessExcludedPatchesHint(
+    excludedPatches: List<String>,
     isReady: Boolean
 ) {
     SuccessHint(
-        visible = usingMountInstall && isReady,
-        text = stringResource(R.string.root_gmscore_excluded),
+        visible = excludedPatches.isNotEmpty() && isReady,
+        text = stringResource(
+            R.string.patcher_patches_excluded_for_installer,
+            excludedPatches.joinToString()
+        ),
         icon = Icons.Outlined.Info,
         containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
         iconTint = MaterialTheme.colorScheme.primary

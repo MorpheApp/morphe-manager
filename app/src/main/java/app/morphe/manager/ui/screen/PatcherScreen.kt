@@ -41,6 +41,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.patcher.patch.installerTypeFor
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.patcher.*
 import app.morphe.manager.ui.screen.patcher.game.MiniGameState
@@ -283,6 +284,12 @@ fun PatcherScreen(
 
     val showInstalledSourceConflictDialog = remember { mutableStateOf(false) }
     val shouldPromptTour by patcherViewModel.shouldPromptTour.collectAsStateWithLifecycle()
+
+    // Named on the success screen so the finished app says what the install method left out
+    var excludedPatches by remember { mutableStateOf(emptyList<String>()) }
+    LaunchedEffect(usingMountInstall) {
+        excludedPatches = patcherViewModel.unavailablePatchNames(installerTypeFor(usingMountInstall))
+    }
 
     LaunchedEffect(installState) {
         if (installState is InstallViewModel.InstallState.Installed) {
@@ -587,6 +594,7 @@ fun PatcherScreen(
                         onUseFallbackInstaller = installViewModel::proceedWithFallbackInstaller,
                         onDismissInstallerDialog = installViewModel::dismissInstallerUnavailableDialog,
                         usingMountInstall = usingMountInstall,
+                        excludedPatches = excludedPatches,
                         isExpertMode = useExpertMode,
                         onLogsClick = { patcherViewModel.hideSuccessScreen() },
                         onInstall = {
