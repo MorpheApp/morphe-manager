@@ -1457,15 +1457,24 @@ fun InvalidSignatureDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_invalid_signature_title),
         footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.home_split_apk_warning_pick_another),
-                onPrimaryClick = onPickAnother,
-                primaryIcon = Icons.Outlined.FolderOpen,
-                secondaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
-                onSecondaryClick = onProceed,
-                isPrimaryDestructive = false,
-                layout = DialogButtonLayout.Vertical,
-            )
+            MorpheDialogButtonColumn {
+                MorpheDialogButton(
+                    text = stringResource(R.string.home_split_apk_warning_pick_another),
+                    onClick = onPickAnother,
+                    icon = Icons.Outlined.FolderOpen,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
+                    onClick = onProceed,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                MorpheDialogOutlinedButton(
+                    text = stringResource(android.R.string.cancel),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     ) {
         Column(

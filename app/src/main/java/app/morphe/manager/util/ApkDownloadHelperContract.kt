@@ -6,6 +6,7 @@
 package app.morphe.manager.util
 
 import android.content.ComponentName
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -139,5 +140,12 @@ object ApkDownloadHelperContract {
         putExtra(EXTRA_FALLBACK_WEB_URL, fallbackWebUrl)
     }
 
-    fun resultUri(intent: Intent?): Uri? = intent?.data
+    /**
+     * The archive a helper handed back, or null when it answered with anything else.
+     *
+     * Only `content://` is accepted. A `file://` answer would make Morphe read a path under its
+     * own UID on behalf of the helper, which the contract never asks for.
+     */
+    fun resultUri(intent: Intent?): Uri? =
+        intent?.data?.takeIf { it.scheme == ContentResolver.SCHEME_CONTENT }
 }
