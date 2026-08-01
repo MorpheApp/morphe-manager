@@ -13,6 +13,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -26,6 +27,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
@@ -94,6 +96,7 @@ class HomeAppActions(
     val onHideMultiple: (Set<String>) -> Unit,
     val onUninstallMultiple: (List<HomeAppItem>) -> Unit,
     val onReinstallMultiple: (List<HomeAppItem>) -> Unit,
+    val onPatchMultiple: (List<HomeAppItem>) -> Unit,
     val onUnhideApp: (String) -> Unit,
     val onShowPatches: (HomeAppItem) -> Unit,
     val onGestureHintShown: () -> Unit,
@@ -825,6 +828,8 @@ fun MainAppsSection(
             ignoreCollapsed = searchQuery.isNotBlank()
         )
     }
+    // Drag updates this in place and the final order is flushed to preferences on reorder
+    // exit, so ReorderableLazyListState indices stay in sync with the rendered groups mid-drag
     var localSourceGroupOrder by remember { mutableStateOf(apps.sourceGroups.map { it.uid }) }
     LaunchedEffect(apps.sourceGroups, isCategoryReorderMode.value, isSourceCategoryView) {
         if (isCategoryReorderMode.value && isSourceCategoryView) return@LaunchedEffect
@@ -850,6 +855,38 @@ fun MainAppsSection(
             orderedGroups + sourceCategoryGroups.filter { group ->
                 val uid = group.sourceUid
                 uid == null || uid !in orderedUids
+            }
+        }
+    }
+    // Drag updates this in place and the final order is flushed to preferences on reorder
+    // exit, so ReorderableLazyListState indices stay in sync with the rendered groups mid-drag
+    var localCategoryOrder by remember {
+        mutableStateOf(apps.categoryState.categories.map { it.id })
+    }
+    LaunchedEffect(apps.categoryState.categories, isCategoryReorderMode.value, isSourceCategoryView) {
+        if (isCategoryReorderMode.value && !isSourceCategoryView) return@LaunchedEffect
+        val categoryIds = apps.categoryState.categories.map { it.id }
+        val kept = localCategoryOrder.filter { it in categoryIds }
+        val added = categoryIds.filter { it !in kept }
+        localCategoryOrder = kept + added
+    }
+    val displayedCategoryGroups = remember(
+        categoryGroups,
+        localCategoryOrder,
+        isCategoryReorderMode.value,
+        isSourceCategoryView
+    ) {
+        if (!isCategoryReorderMode.value || isSourceCategoryView) {
+            categoryGroups
+        } else {
+            val byId = categoryGroups.mapNotNull { group ->
+                group.id?.let { id -> id to group }
+            }.toMap()
+            val orderedGroups = localCategoryOrder.mapNotNull { byId[it] }
+            val orderedIds = orderedGroups.mapNotNullTo(mutableSetOf()) { it.id }
+            orderedGroups + categoryGroups.filter { group ->
+                val id = group.id
+                id == null || id !in orderedIds
             }
         }
     }
@@ -967,7 +1004,7 @@ fun MainAppsSection(
     fun headerGroupAtListIndex(index: Int): HomeCategoryGroup? {
         val groups = when (appGrouping) {
             HomeAppCategoryViewMode.SOURCES -> displayedSourceCategoryGroups
-            HomeAppCategoryViewMode.CUSTOM -> categoryGroups
+            HomeAppCategoryViewMode.CUSTOM -> displayedCategoryGroups
             HomeAppCategoryViewMode.ALL_APPS -> emptyList()
         }
         var currentIndex = 0
@@ -1009,14 +1046,14 @@ fun MainAppsSection(
             HomeAppCategoryViewMode.CUSTOM -> {
                 val fromId = fromGroup.id ?: return@rememberReorderableLazyListState
                 val toId = toGroup.id ?: return@rememberReorderableLazyListState
-                val orderedIds = apps.categoryState.categories.map { it.id }.toMutableList()
+                val orderedIds = localCategoryOrder.toMutableList()
                 val fromPosition = orderedIds.indexOf(fromId)
                 val toPosition = orderedIds.indexOf(toId)
                 if (fromPosition == -1 || toPosition == -1) return@rememberReorderableLazyListState
 
                 val moved = orderedIds.removeAt(fromPosition)
                 orderedIds.add(toPosition.coerceIn(0, orderedIds.size), moved)
-                appActions.onSaveCategoryOrder(orderedIds)
+                localCategoryOrder = orderedIds
             }
 
             HomeAppCategoryViewMode.ALL_APPS -> Unit
@@ -1034,6 +1071,55 @@ fun MainAppsSection(
         } ?: reorderScopePackages?.let { scopePackages ->
             orderedItems.filter { it.packageName in scopePackages }
         } ?: orderedItems
+    }
+    val displayedAppGroups = remember(
+        appGrouping,
+        displayedSourceCategoryGroups,
+        displayedCategoryGroups
+    ) {
+        when (appGrouping) {
+            HomeAppCategoryViewMode.SOURCES -> displayedSourceCategoryGroups
+            HomeAppCategoryViewMode.CUSTOM -> displayedCategoryGroups
+            HomeAppCategoryViewMode.ALL_APPS -> emptyList()
+        }
+    }
+    // Reordering and the Sources grouping have no alphabetical order to jump through
+    val alphabetScrollMode = (apps.sortMode == HomeAppSortMode.NAME_ASC ||
+            apps.sortMode == HomeAppSortMode.NAME_DESC) &&
+            appGrouping != HomeAppCategoryViewMode.SOURCES &&
+            !isReorderMode.value &&
+            !isCategoryReorderMode.value
+    val scrollTargets = remember(
+        alphabetScrollMode,
+        stableLoadingState.value,
+        homeAppItems.isEmpty(),
+        isGroupedAppView,
+        filteredItems,
+        displayedAppGroups
+    ) {
+        when {
+            !alphabetScrollMode -> emptyList()
+            stableLoadingState.value && homeAppItems.isEmpty() -> emptyList()
+            isGroupedAppView -> buildGroupedHomeScrollTargets(displayedAppGroups)
+            else -> buildFlatHomeScrollTargets(filteredItems)
+        }
+    }
+
+    // Cards that arrive after the first frame can sort above the anchor, and LazyColumn keeps
+    // the keyed first visible item in place, leaving the list scrolled past its top. Pin to the
+    // top until a real drag, so programmatic scrolls and rotation keep the user's position.
+    var userScrolledList by rememberSaveable { mutableStateOf(false) }
+    LaunchedEffect(listState) {
+        listState.interactionSource.interactions.collect { interaction ->
+            if (interaction is DragInteraction.Start) userScrolledList = true
+        }
+    }
+    val listOrderKeys = remember(homeAppItems) { homeAppItems.map { it.packageName } }
+    LaunchedEffect(listOrderKeys, userScrolledList) {
+        if (userScrolledList || isReorderMode.value) return@LaunchedEffect
+        if (listState.firstVisibleItemIndex != 0 || listState.firstVisibleItemScrollOffset != 0) {
+            listState.scrollToItem(0)
+        }
     }
 
     // Flat-only: grouped scrolls in onEnterReorder before the items list swaps
@@ -1259,14 +1345,7 @@ fun MainAppsSection(
                                         }
                                     }
                                 } else if (isGroupedAppView) {
-                                    // isGroupedAppView already excludes ALL_APPS, so the switch
-                                    // only needs to distinguish between SOURCES and CUSTOM
-                                    val groups = when (appGrouping) {
-                                        HomeAppCategoryViewMode.SOURCES -> displayedSourceCategoryGroups
-                                        else -> categoryGroups
-                                    }
-
-                                    groups.forEach { group ->
+                                    displayedAppGroups.forEach { group ->
                                         val headerKey = "category_${group.id ?: "uncategorized"}"
                                         item(key = headerKey) {
                                             // Long-press is gated while any other footer mode is
@@ -1508,6 +1587,13 @@ fun MainAppsSection(
                                 )
                             }
 
+                            ListScrollbar(
+                                listState = listState,
+                                alphabetTargets = scrollTargets,
+                                alphabetMode = alphabetScrollMode,
+                                extraBottomPadding = if (isMultibarVisible) 96.dp else 0.dp
+                            )
+
                             // Lift extra space for the MultiSelectBar when it's visible
                             ScrollToTopButton(
                                 listState = listState,
@@ -1611,6 +1697,12 @@ fun MainAppsSection(
                         onMoveToCategory = if (isCustomCategoryView) {
                             { showMoveCategoryDialog.value = true }
                         } else null,
+                        onPatchSelected = {
+                            appActions.onPatchMultiple(selectedAppItems)
+                            isMultiSelectMode.value = false
+                            selectedPackages.clear()
+                            selectedGroupKey = null
+                        },
                         onCancel = {
                             isMultiSelectMode.value = false
                             selectedPackages.clear()
@@ -1730,6 +1822,8 @@ fun MainAppsSection(
                         onExitReorder = {
                             if (isSourceCategoryView) {
                                 appActions.onSaveSourceGroupOrder(localSourceGroupOrder)
+                            } else {
+                                appActions.onSaveCategoryOrder(localCategoryOrder)
                             }
                             isCategoryReorderMode.value = false
                         },

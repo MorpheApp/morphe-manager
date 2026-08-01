@@ -40,6 +40,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
+import app.morphe.manager.data.room.apps.installed.supportsMount
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
@@ -1197,6 +1198,35 @@ private fun ActionsSection(
         )
     }
 
+    val installsThroughMount = viewModel.primaryInstallerIsMount && installedApp.supportsMount
+
+    val mountSavedApp: () -> Unit = {
+        val savedFile = viewModel.savedApkFile()
+        if (savedFile != null) {
+            installViewModel.installSavedMount(
+                outputFile = savedFile,
+                packageName = installedApp.currentPackageName,
+                onPersistApp = { _, _ ->
+                    viewModel.updateInstallType(
+                        packageName = installedApp.currentPackageName,
+                        newInstallType = InstallType.MOUNT
+                    )
+                    true
+                }
+            )
+        } else if (viewModel.isMounted) {
+            installViewModel.remount(
+                packageName = installedApp.currentPackageName,
+                version = installedApp.version
+            )
+        } else {
+            installViewModel.mount(
+                packageName = installedApp.currentPackageName,
+                version = installedApp.version
+            )
+        }
+    }
+
     // Show install/reinstall from saved copy whenever the patched APK is available
     if (viewModel.hasSavedCopy) {
         val installText = if (viewModel.isInstalledOnDevice) {
@@ -1212,15 +1242,19 @@ private fun ActionsSection(
                     val savedFile = viewModel.savedApkFile()
                     if (savedFile != null) {
                         val installAction = {
-                            installViewModel.install(
-                                outputFile = savedFile,
-                                originalPackageName = installedApp.originalPackageName,
-                                onPersistApp = { _, _ ->
-                                    // Callback will be called after successful installation
-                                    // The LaunchedEffect handler will update the installation type
-                                    true
-                                }
-                            )
+                            if (installsThroughMount) {
+                                mountSavedApp()
+                            } else {
+                                installViewModel.install(
+                                    outputFile = savedFile,
+                                    originalPackageName = installedApp.originalPackageName,
+                                    onPersistApp = { _, _ ->
+                                        // Callback will be called after successful installation
+                                        // The LaunchedEffect handler will update the installation type
+                                        true
+                                    }
+                                )
+                            }
                         }
 
                         // Check if mount warning is needed
@@ -1244,32 +1278,6 @@ private fun ActionsSection(
     when (installedApp.installType) {
         InstallType.MOUNT -> {
             val isMountLoading = mountOperation != null
-            val mountSavedApp: () -> Unit = {
-                val savedFile = viewModel.savedApkFile()
-                if (savedFile != null) {
-                    installViewModel.installSavedMount(
-                        outputFile = savedFile,
-                        packageName = installedApp.currentPackageName,
-                        onPersistApp = { _, _ ->
-                            viewModel.updateInstallType(
-                                packageName = installedApp.currentPackageName,
-                                newInstallType = InstallType.MOUNT
-                            )
-                            true
-                        }
-                    )
-                } else if (viewModel.isMounted) {
-                    installViewModel.remount(
-                        packageName = installedApp.currentPackageName,
-                        version = installedApp.version
-                    )
-                } else {
-                    installViewModel.mount(
-                        packageName = installedApp.currentPackageName,
-                        version = installedApp.version
-                    )
-                }
-            }
             if (viewModel.isMounted) {
                 // Remount button
                 secondaryActions.add(

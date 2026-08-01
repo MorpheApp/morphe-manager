@@ -271,6 +271,10 @@ fun Context.isAndroidTv(): Boolean {
  * [customPickerMimeTypes] overrides the MIME types passed to the custom picker only,
  * allowing tighter extension filtering without affecting the system picker.
  * Defaults to [mimeTypes] when not specified.
+ *
+ * [onResult] is called exactly once per launch, with null when the user backed out or denied
+ * storage access. Callers keep track of what a pending pick is for, and a launch that never
+ * reports back would leave that state pointing at a request that is already over.
  */
 @Composable
 fun rememberAdaptiveFilePicker(
@@ -293,15 +297,20 @@ fun rememberAdaptiveFilePicker(
     val (permissionContract, permissionName) = remember { fs.permissionContract() }
     val showPickerState = remember { mutableStateOf(false) }
 
+    // Every path reports back, including the ones that pick nothing. Callers track which
+    // request is pending, and a silent exit would leave that state stuck on the last one
     val permissionLauncher = rememberLauncherForActivityResult(contract = permissionContract) { granted ->
-        if (granted) showPickerState.value = true
+        if (granted) showPickerState.value = true else onResult(null)
     }
 
     if (showPickerState.value) {
         FilePicker(
             mimeTypes = customPickerMimeTypes,
             allowFolderSelection = allowFolderSelection,
-            onDismiss = { showPickerState.value = false },
+            onDismiss = {
+                showPickerState.value = false
+                onResult(null)
+            },
             onFilePicked = { file ->
                 showPickerState.value = false
                 onResult(Uri.fromFile(file))

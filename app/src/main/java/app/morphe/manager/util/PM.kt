@@ -39,6 +39,16 @@ class PM(
 ) {
     private companion object {
         const val TAG = "Morphe PM"
+
+        // Other managers whose installs are always patched.
+        // Morphe's own id comes from the application at runtime so debug builds are covered too.
+        val PATCH_MANAGER_PACKAGES = setOf(
+            "app.revanced.manager",
+            "app.revanced.manager.flutter",
+            "app.rvx.manager",
+            "app.rvx.manager.flutter",
+            "app.universal.revanced.manager"
+        )
     }
 
     val application: Application get() = app
@@ -152,15 +162,67 @@ class PM(
      * Extracts SHA-256 certificate fingerprints from the installed [packageName].
      * Returns an empty set if the package is not found or signatures cannot be read.
      * Uses full signing history to handle apps with certificate rotation.
+     *
+     * Falls back to parsing the APK on disk: the package manager query travels through binder
+     * and comes back empty on transaction failures, while the archive is parsed in-process.
      */
     fun getInstalledSignatureHashes(packageName: String): Set<String> {
-        return try {
-            val pkgInfo = getPackageInfo(packageName, signingFlags()) ?: return emptySet()
-            pkgInfo.extractSignatures()?.toSha256Hashes() ?: emptySet()
+        val recorded = recordedSignatureHashes(packageName)
+        if (recorded.isNotEmpty()) return recorded
+
+        val sourceDir = getApplicationInfo(packageName)?.sourceDir ?: return emptySet()
+        return getApkFileSignatureHashes(File(sourceDir))
+    }
+
+    /**
+     * Returns true if the APK on disk is signed differently from what the system recorded for
+     * [packageName]. A mounted install looks exactly like that: the package manager keeps reporting
+     * the stock certificate while [ApplicationInfo.sourceDir] is bind-mounted onto the patched APK.
+     * Returns false when either side cannot be read, so an unreadable certificate is never a
+     * mismatch on its own.
+     */
+    fun hasSourceApkSignatureMismatch(packageName: String): Boolean {
+        val recorded = recordedSignatureHashes(packageName)
+        if (recorded.isEmpty()) return false
+        val sourceDir = getApplicationInfo(packageName)?.sourceDir ?: return false
+        val onDisk = getApkFileSignatureHashes(File(sourceDir))
+        if (onDisk.isEmpty()) return false
+        return onDisk.none { it in recorded }
+    }
+
+    /** Certificate fingerprints the package manager holds for [packageName], without disk access. */
+    private fun recordedSignatureHashes(packageName: String): Set<String> =
+        try {
+            getPackageInfo(packageName, signingFlags())?.extractSignatures()?.toSha256Hashes().orEmpty()
         } catch (e: Exception) {
             Log.e(TAG, "Failed to read installed signatures for $packageName", e)
             emptySet()
         }
+
+    /**
+     * Package that installed [packageName], or null when unknown.
+     * Unlike the installed-app database this survives clearing Morphe's data, so it is the last
+     * remaining hint that an app was put there by a patch manager.
+     */
+    @Suppress("DEPRECATION")
+    fun getInstallerPackageName(packageName: String): String? = try {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+            app.packageManager.getInstallSourceInfo(packageName).installingPackageName
+        else
+            app.packageManager.getInstallerPackageName(packageName)
+    } catch (e: Exception) {
+        Log.e(TAG, "Failed to read install source for $packageName", e)
+        null
+    }
+
+    /**
+     * Whether [packageName] was installed by a patch manager, as those only install patched APKs.
+     * Reinstalling from another source (Play, a store, adb) replaces the installer, so this does
+     * not linger after the user goes back to the original app.
+     */
+    fun isInstalledByPatchManager(packageName: String): Boolean {
+        val installer = getInstallerPackageName(packageName) ?: return false
+        return installer == app.packageName || installer in PATCH_MANAGER_PACKAGES
     }
 
     /**
@@ -208,9 +270,12 @@ class PM(
         }
     }
 
-    fun isAppDeleted(packageName: String, hasSavedCopy: Boolean, wasInstalledOnDevice: Boolean): Boolean {
+    /**
+     * Whether a tracked app that was installed on the device is now gone.
+     */
+    fun isAppDeleted(packageName: String, wasInstalledOnDevice: Boolean): Boolean {
         val currentlyInstalled = getPackageInfo(packageName) != null
-        return !currentlyInstalled && wasInstalledOnDevice && hasSavedCopy
+        return !currentlyInstalled && wasInstalledOnDevice
     }
 
     private fun cleanLabel(raw: String, packageName: String): String {

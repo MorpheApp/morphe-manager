@@ -37,34 +37,46 @@
         <item quantity="other">%s APK súborov</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">Nainštalovaných %d aplikácií</item>
-        <item quantity="few">Nainštalovaných %d aplikácií</item>
-        <item quantity="many">Nainštalovaných %d aplikácií</item>
-        <item quantity="other">Nainštalovaných %d aplikácií</item>
+        <item quantity="one">Nainštalovaná %s aplikácia</item>
+        <item quantity="few">Nainštalované %s aplikácie</item>
+        <item quantity="many">Nainštalované %s aplikácie</item>
+        <item quantity="other">Nainštalované %s aplikácie</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">Preinštalovaných %d aplikácií</item>
-        <item quantity="few">Preinštalovaných %d aplikácií</item>
-        <item quantity="many">Preinštalovaných %d aplikácií</item>
-        <item quantity="other">Preinštalovaných %d aplikácií</item>
+        <item quantity="one">Znovu nainštalovaná %s aplikácia</item>
+        <item quantity="few">Znovu nainštalované %s aplikácie</item>
+        <item quantity="many">Znovu nainštalované %s aplikácie</item>
+        <item quantity="other">Znovu nainštalované %s aplikácie</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">Odinštalovaných %d aplikácií</item>
-        <item quantity="few">Odinštalovaných %d aplikácií</item>
-        <item quantity="many">Odinštalovaných %d aplikácií</item>
-        <item quantity="other">Odinštalovaných %d aplikácií</item>
+        <item quantity="one">Odinštalovaná %s aplikácia</item>
+        <item quantity="few">Odinštalované %s aplikácie</item>
+        <item quantity="many">Odinštalované %s aplikácie</item>
+        <item quantity="other">Odinštalované %s aplikácie</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">Odinštalovať %d aplikáciu?</item>
-        <item quantity="few">Odinštalovať %d aplikácie?</item>
-        <item quantity="many">Odinštalovať %d aplikácií?</item>
-        <item quantity="other">Odinštalovať %d aplikácií?</item>
+        <item quantity="one">Odinštaliť %s aplikáciu?</item>
+        <item quantity="few">Odinštaliť %s aplikácie?</item>
+        <item quantity="many">Odinštaliť %s aplikácie?</item>
+        <item quantity="other">Odinštaliť %s aplikácie?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s aplikácia pripravená na záplatu</item>
+        <item quantity="few">%s aplikácie pripravené na záplatu</item>
+        <item quantity="many">%s aplikácie pripravené na záplatu</item>
+        <item quantity="other">%s aplikácie pripravené na záplatu</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%s aplikácia je pripravená na inštaláciu</item>
+        <item quantity="few">%s aplikácie sú pripravené na inštaláciu</item>
+        <item quantity="many">%s aplikácie sú pripravené na inštaláciu</item>
+        <item quantity="other">%s aplikácie sú pripravené na inštaláciu</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">Preskočená %d aplikácia</item>
-        <item quantity="few">Preskočených %d aplikácií</item>
-        <item quantity="many">Preskočených %d aplikácií</item>
-        <item quantity="other">Preskočených %d aplikácií</item>
+        <item quantity="one">Preskočená %s aplikácia</item>
+        <item quantity="few">Preskočené %s aplikácie</item>
+        <item quantity="many">Preskočené %s aplikácie</item>
+        <item quantity="other">Preskočené %s aplikácie</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Odstránená %s zastaralá záplata z uloženého výberu</item>
@@ -95,5 +107,11 @@
         <item quantity="few">%s aplikácie</item>
         <item quantity="many">%s aplikácií</item>
         <item quantity="other">%s aplikácií</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Skopírovaná %s záplata z vybraného balíka</item>
+        <item quantity="few">Skopírované %s záplaty z vybraného balíka</item>
+        <item quantity="many">Skopírované %s záplat z vybraného balíka</item>
+        <item quantity="other">Skopírované %s záplat z vybraného balíka</item>
     </plurals>
 </resources>

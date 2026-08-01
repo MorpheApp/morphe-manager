@@ -19,8 +19,8 @@ import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.InstallMobile
-import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -78,7 +78,7 @@ class MorphePatcherState(
     val effectiveErrorMessage: String
         get() {
             if (errorMessage.isNotBlank()) return errorMessage
-            val logText = viewModel.logs.joinToString("\n") { (level, msg) -> "[$level] $msg" }
+            val logText = viewModel.patchRun.logs.joinToString("\n") { (level, msg) -> "[$level] $msg" }
             return logText.ifBlank { errorMessage }
         }
 
@@ -520,7 +520,7 @@ private fun SuccessErrorMessage(
         errorMessage?.let { message ->
             Surface(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
                 color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
             ) {
                 Text(
@@ -581,7 +581,7 @@ private fun SuccessHint(
     ) {
         Surface(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
             color = containerColor
         ) {
             Row(
@@ -593,7 +593,7 @@ private fun SuccessHint(
                     imageVector = icon,
                     contentDescription = null,
                     tint = iconTint,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
                 )
                 Text(
                     text = text,

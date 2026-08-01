@@ -25,24 +25,32 @@
         <item quantity="other">%s APK skrár</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">Installuð %d app</item>
-        <item quantity="other">Installuð %d apps</item>
+        <item quantity="one">%s app uppsett</item>
+        <item quantity="other">%s app uppsett</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">Endurinstalluð %d app</item>
-        <item quantity="other">Endurinstalluð %d apps</item>
+        <item quantity="one">%s app endurskipt</item>
+        <item quantity="other">%s app endurskipt</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">Afinstalluð %d app</item>
-        <item quantity="other">Afinstalluð %d apps</item>
+        <item quantity="one">%s app afhent</item>
+        <item quantity="other">%s app afhent</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">Afinstalla %d app?</item>
-        <item quantity="other">Afinstalla %d forrit?</item>
+        <item quantity="one">Afhent %s app?</item>
+        <item quantity="other">Afhent %s app?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s app tilbúið til að flikka</item>
+        <item quantity="other">%s app tilbúið til að flikka</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%s app tilbúið til uppsetningar</item>
+        <item quantity="other">%s app tilbúið til uppsetningar</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">Sleppt %d app</item>
-        <item quantity="other">Sleppt %d apps</item>
+        <item quantity="one">Hlétt af %s app</item>
+        <item quantity="other">Hlétt af %s app</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Fjarlægði %s úreldna flákann frá vistaðri vali</item>
@@ -63,5 +71,9 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s app</item>
         <item quantity="other">%s apps</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Afritað %s breytingu úr völdum pakka</item>
+        <item quantity="other">Afritaðar %s breytingar úr völdum pakka</item>
     </plurals>
 </resources>

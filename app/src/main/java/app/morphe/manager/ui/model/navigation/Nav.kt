@@ -17,6 +17,15 @@ object HomeScreen
 object Settings
 
 @Serializable
+data object BatchPatcher : ComplexParameter<BatchPatcher.ViewModelParams> {
+    @Parcelize
+    data class ViewModelParams(
+        val packageNames: List<String>,
+        val useMount: Boolean
+    ) : Parcelable
+}
+
+@Serializable
 data object Patcher : ComplexParameter<Patcher.ViewModelParams> {
     @Parcelize
     data class ViewModelParams(

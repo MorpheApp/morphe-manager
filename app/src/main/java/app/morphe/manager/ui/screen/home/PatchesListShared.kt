@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.HeroInfoCard
 import app.morphe.manager.ui.screen.shared.MorpheAnimations
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import app.morphe.manager.ui.screen.shared.MorpheDialogTextField
 
 /**
@@ -122,7 +123,7 @@ internal fun PatchesListSearchRow(
                     Icon(
                         imageVector = Icons.Outlined.FilterList,
                         contentDescription = stringResource(R.string.filter),
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
                     )
                 }
             }

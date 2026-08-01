@@ -24,6 +24,7 @@ import app.morphe.manager.ui.screen.shared.MorpheSettingsDivider
 import app.morphe.manager.ui.screen.shared.SettingsGroup
 import app.morphe.manager.ui.screen.shared.SettingsItem
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
+import app.morphe.manager.util.isolateLtr
 import app.morphe.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import org.koin.androidx.compose.koinViewModel
@@ -47,7 +48,7 @@ fun AboutSection(
         SettingsItem(
             onClick = onAboutClick,
             title = stringResource(R.string.app_name),
-            subtitle = stringResource(R.string.version) + " " + BuildConfig.VERSION_NAME,
+            subtitle = stringResource(R.string.version) + " " + BuildConfig.VERSION_NAME.isolateLtr(),
             leadingContent = {
                 Image(
                     painter = rememberDrawablePainter(

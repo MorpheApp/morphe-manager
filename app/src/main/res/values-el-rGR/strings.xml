@@ -164,10 +164,11 @@
     <string name="home_apk_availability_no">Όχι, ήδη έχω ένα APK</string>
     <string name="home_apk_use_saved">Χρήση αποθηκευμένου APK</string>
     <string name="home_apk_use_installed">Χρήση εγκατεστημένου APK</string>
+    <string name="home_apk_use_installed_unverified">Δεν μπόρεσα να επαληθεύσω την υπογραφή της εγκατεστημένης εφαρμογής, επομένως ενδέχεται να έχει ήδη τροποποιηθεί</string>
     <string name="home_app_info_no_saved_apk">Δεν υπάρχει αποθηκευμένο APK. Η τροποποίηση κώδικα θα απαιτήσει την επιλογή του αρχείου APK ξανά</string>
     <string name="home_version_requires_android">Απαιτείται Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Δεν υποστηρίζεται σε αυτή τη συσκευή</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; δεν έχει υποστηριζόμενες εκδόσεις για το Android %2$d (API %3$d). Όλες οι δηλωμένες εκδόσεις απαιτούν μια υψηλότερη έκδοση Android</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; δεν έχει υποστηριζόμενες εκδόσεις για Android %2$s (API %3$s). Όλες οι δηλωμένες εκδόσεις απαιτούν μια υψηλότερη έκδοση Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Λήψη του αρχικού APK</string>
     <string name="home_download_instructions_steps_title">Οδηγίες:</string>
@@ -214,6 +215,8 @@
     <string name="expert_mode_reset_to_default_done">Εφαρμόστηκαν οι προτεινόμενες διορθώσεις</string>
     <string name="expert_mode_restore_saved">Επαναφορά αποθηκευμένης επιλογής</string>
     <string name="expert_mode_restore_saved_done">Επαναφορά επιλεγμένων αποθηκευμένων στοιχείων</string>
+    <string name="expert_mode_copy_from_bundle">Αντιγραφή επιλογής από άλλο πακέτο</string>
+    <string name="expert_mode_copy_from_bundle_no_patches">Δεν βρέθηκαν αντίστοιχα διορθωτικά σε αυτό το πακέτο</string>
     <string name="expert_mode_no_results">Δε βρέθηκαν τροποποιήσεις </string>
     <string name="expert_mode_universal_patches">Γενικές τροποποιήσεις </string>
     <string name="expert_mode_new_patches">Νέο</string>
@@ -241,7 +244,7 @@
     <string name="home_dialog_unsupported_version_compatible_versions">Συμβατές εκδόσεις:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Μη υποστηριζόμενο</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build">Δημιουργία %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Αυτή είναι μια διαφορετική έκδοση της ίδιας έκδοσης. Οι ενημερώσεις απαιτούν μια συγκεκριμένη έκδοση</string>
     <string name="home_dialog_wrong_package_title">Επιλέχθηκε λάθος πακέτο</string>
     <string name="home_dialog_wrong_package_description">Το επιλεγμένο APK δεν είναι για την εφαρμογή που επιθυμείτε να τροποποιήσετε</string>
@@ -304,6 +307,43 @@
     <string name="header_creator_guide_themes_body">Οι περισσότερες εφαρμογές απαιτούν ξεχωριστές εικόνες για τα θέματα φωτός και σκούρου. Ορισμένες εφαρμογές (όπως το YouTube Music) χρησιμοποιούν μόνο το σκούρο θέμα, επομένως εμφανίζεται μόνο αυτή η ενότητα.</string>
     <string name="header_creator_guide_positioning_title">Τοποθέτηση και κλιμάκωση</string>
     <string name="header_creator_guide_positioning_body">Χρησιμοποιήστε χειρονομίες ζουμ και μεταφοράς απευθείας στην προεπισκόπηση για να τοποθετήσετε και να κλιμακώσετε την εικόνα σας. Εμφανίζονται καθοδηγητικοί οδηγοί όταν η εικόνα είναι κοντά στο κέντρο. Μπορείτε επίσης να χρησιμοποιήσετε το ρυθμιστικό κάτω από την προεπισκόπηση.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Τροποποίηση επιλέχθηκε</string>
+    <string name="batch_patch_title">Μαζική τροποποίηση</string>
+    <string name="batch_patch_planning">Προετοιμασία της ουράς…</string>
+    <string name="batch_patch_preparing_next">Προετοιμασία της επόμενης εφαρμογής…</string>
+    <string name="batch_patch_progress_counter">Επιδιορθωμένο %1$s του %2$s</string>
+    <string name="batch_patch_summary">%1$s επιδιορθώθηκε, %2$s απέτυχε, %3$s παρακάμφθηκαν</string>
+    <string name="batch_patch_saved_hint">Οι διορθωμένες εφαρμογές έχουν αποθηκευτεί. Εγκαταστήστε τες τώρα, ή αργότερα από τη λίστα των διορθωμένων APK στις ρυθμίσεις</string>
+    <string name="batch_patch_multiple_sources">Ορισμένες εφαρμογές συνδυάζουν διορθώσεις από περισσότερες από μία πηγές, κάτι που μπορεί να προκαλέσει συγκρούσεις</string>
+    <string name="batch_patch_needs_apk">Δεν είναι διαθέσιμο APK, επισυνάψτε ένα αρχείο</string>
+    <string name="batch_patch_wrong_package">Το επισυναπτόμενο αρχείο ανήκει στο %s</string>
+    <string name="batch_patch_version_mismatch">Η έκδοση %s δεν υποστηρίζεται από τις διορθώσεις</string>
+    <string name="batch_patch_source_saved">Αποθηκεύτηκε το αρχικό</string>
+    <string name="batch_patch_source_installed">Εγκατεστημένη εφαρμογή</string>
+    <string name="batch_patch_source_file">Επισυναπτόμενο αρχείο</string>
+    <string name="batch_patch_source_unavailable">Το APK δεν μπόρεσε να προετοιμαστεί</string>
+    <string name="batch_patch_find_apk">Βρείτε APK</string>
+    <string name="batch_patch_attach_apk">Επισυνάψτε APK</string>
+    <string name="batch_patch_force_version">Διόρθωση ούτως ή άλλως</string>
+    <string name="batch_patch_force_version_done">Προστέθηκε στην ουρά ούτως ή άλλως, οι ενημερώσεις για άλλες εκδόσεις ενδέχεται να προκαλέσουν προβλήματα στην εφαρμογή</string>
+    <string name="batch_patch_edit_patches">Επιλέξτε διορθώσεις</string>
+    <string name="batch_patch_state_no_apk">Δεν υπάρχει APK</string>
+    <string name="batch_patch_state_no_patches">Δεν υπάρχουν διορθώσεις</string>
+    <string name="batch_patch_policy_install">Εγκατάσταση μετά την ολοκλήρωση</string>
+    <string name="batch_patch_policy_install_description">Εγκαθιστά κάθε διορθωμένη εφαρμογή αμέσως μετά την ολοκλήρωση της ουράς. Η απενεργοποίηση διατηρεί τα APK για αργότερα</string>
+    <string name="batch_patch_start">Έναρξη διόρθωσης</string>
+    <string name="batch_patch_stop_title">Διακοπή ομαδικής διόρθωσης;</string>
+    <string name="batch_patch_stop_description">Η εφαρμογή που διορθώνεται αυτήν τη στιγμή και ό,τι έχει οριστεί στην ουρά θα ακυρωθεί</string>
+    <string name="batch_patch_install_all">Εγκατάσταση όλων</string>
+    <string name="batch_patch_install_failed">Η εγκατάσταση απέτυχε</string>
+    <string name="batch_patch_in_progress">Η ομαδική διόρθωση είναι ήδη σε εξέλιξη</string>
+    <string name="batch_patch_nothing_outdated">Κάθε διορθωμένη εφαρμογή είναι ενημερωμένη</string>
+    <string name="shortcut_repatch_short">Επανάληψη διόρθωσης</string>
+    <string name="shortcut_repatch_long">Επανάληψη διόρθωσης ξεπερασμένων εφαρμογών</string>
+    <string name="shortcut_check_updates_short">Έλεγχος για ενημερώσεις</string>
+    <string name="shortcut_check_updates_long">Έλεγχος για ενημερώσεις διορθώσεων</string>
+    <string name="shortcut_patch_app">Διόρθωση %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Είστε βέβαιοι ότι θέλετε να απεγκαταστήσετε αυτή την εφαρμογή;</string>
     <string name="batch_uninstall_confirm_body">Οι επιλεγμένες εφαρμογές θα διαγραφούν οριστικά από τη συσκευή σας</string>
@@ -337,7 +377,7 @@
     <string name="root_pre_patch_installer_description">Η συσκευή σας έχει πρόσβαση root. Επιλέξτε αν η εφαρμογή θα ενημερωθεί για προσάρτηση root ή τυπική εγκατάσταση</string>
     <string name="root_pre_patch_installer_mount_title">Λειτουργία προσάρτησης root</string>
     <string name="root_pre_patch_installer_mount_description">Ενημερώσεις για προσάρτηση root, στη συνέχεια προσαρτά το APK πάνω από την αντίστοιχη εργοστασιακή εφαρμογή. Δεν απαιτείται GmsCore</string>
-    <string name="root_mount_module_unmount_warning">Εάν χρησιμοποιείτε KernelSU ή APatch, απενεργοποιήστε την αποσυναρμολόγηση ή απόκρυψη module για εφαρμογές που έχουν εγκατασταθεί με root mount. Διαφορετικά, η αρχική εφαρμογή ενδέχεται να εξακολουθεί να εκτελείται ακόμα και όταν το Morphe την εμφανίζει ως προσδεδεμένη</string>
+    <string name="root_mount_module_unmount_warning">Εάν το KernelSU έχει ενεργοποιημένα από προεπιλογή modules Αποσυναρμολόγησης, ανοίξτε το KernelSU > Superuser > την εφαρμογή που τοποθετήσατε > Profile > Custom και απενεργοποιήστε τα modules Αποσυναρμολόγησης. Διαφορετικά, το τοποθετημένο τροποποιημένο APK ενδέχεται να μην έχει αποτέλεσμα, ακόμη και αν το Morphe το εμφανίζει ως τοποθετημένο</string>
     <string name="root_pre_patch_installer_standard_title">Τυπική Εγκατάσταση</string>
     <string name="root_pre_patch_installer_standard_description">Εφαρμογές ενημέρωσης ως ένα κανονικό APK με υποστήριξη GmsCore. Η ρύθμιση του εγκαταστάτη σας χρησιμοποιείται μετά την ενημέρωση</string>
     <string name="root_pre_patch_installer_hint">Αυτή η λειτουργία ενημέρωσης είναι ανεξάρτητη από τις Ρυθμίσεις > Σύστημα > Εγκαταστάτη και δεν μπορεί να αλλάξει μετά την ενημέρωση</string>
@@ -450,8 +490,8 @@
     <string name="failed_to_mount">Αδυναμία προσάρτησης: %s</string>
     <string name="failed_to_unmount">Αποτυχία αποπροσάρτησης: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Βαθμολογία %d</string>
-    <string name="mini_game_best">Καλύτερο %d</string>
+    <string name="mini_game_score">Βαθμολογία %s</string>
+    <string name="mini_game_best">Καλύτερη %s</string>
     <string name="mini_game_new_record">Νέο ρεκόρ!</string>
     <string name="mini_game_game_over">Τέλος παιχνιδιού</string>
     <string name="mini_game_try_again">Δοκιμάστε ξανά</string>
@@ -494,6 +534,7 @@
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Μονόχρωμο</string>
     <string name="settings_appearance_color_style">Στυλ χρώματος</string>
+    <string name="settings_appearance_colors">Χρώματα</string>
     <string name="settings_appearance_accent_color">Χρώμα έμφασης</string>
     <string name="settings_appearance_pure_black">Αληθινό μαύρο</string>
     <string name="settings_appearance_pure_black_description">Χρησιμοποιεί αληθινά μαύρα φόντα</string>
@@ -511,6 +552,21 @@
     <string name="settings_appearance_app_grouping_description">Εμφάνιση διακόπτη στην αρχική οθόνη για ομαδοποίηση εφαρμογών κατά πηγή ή δικές σας κατηγορίες, διατηρώντας την επιλογή όταν είναι απενεργοποιημένη</string>
     <string name="settings_appearance_sort_button">Κουμπί ταξινόμησης</string>
     <string name="settings_appearance_sort_button_description">Εμφάνιση του κουμπιού ταξινόμησης στην αρχική οθόνη</string>
+    <string name="settings_appearance_app_card_colors">Χρώματα καρτών εφαρμογών</string>
+    <string name="settings_appearance_app_card_colors_default">Προεπιλογή</string>
+    <string name="settings_appearance_app_card_colors_default_description">Δώστε σε κάθε εφαρμογή το χρώμα του δικού της πακέτου</string>
+    <string name="settings_appearance_app_card_colors_accent">Απόχρωση</string>
+    <string name="settings_appearance_app_card_colors_accent_description">Χρησιμοποιήστε την απόχρωση της εφαρμογής για τις κάρτες της αρχικής οθόνης</string>
+    <string name="settings_appearance_app_card_colors_gradient">Διαβάθμιση</string>
+    <string name="settings_appearance_app_card_colors_gradient_description">Χρησιμοποιήστε μία προσαρμοσμένη διαβάθμιση για τις κάρτες της αρχικής οθόνης</string>
+    <string name="settings_appearance_app_card_colors_solid">Μονόχρωμο</string>
+    <string name="settings_appearance_app_card_colors_solid_description">Χρησιμοποιήστε ένα προσαρμοσμένο χρώμα για τις κάρτες της αρχικής οθόνης</string>
+    <string name="settings_appearance_app_card_colors_start">Αρχικό χρώμα</string>
+    <string name="settings_appearance_app_card_colors_middle">Μεσαίο χρώμα</string>
+    <string name="settings_appearance_app_card_colors_end">Τελικό χρώμα</string>
+    <string name="settings_appearance_app_card_colors_solid_color">Μονόχρωμο χρώμα</string>
+    <string name="settings_appearance_app_card_colors_bundle">Χρώματα θέματος εφαρμογής</string>
+    <string name="settings_appearance_app_card_colors_bundle_description">Χρησιμοποιήστε το δικό σας χρώμα για κάθε εφαρμογή εδώ, με αυτόματη απόχρωση ώστε να ταιριάζει</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Εικονίδιο εφαρμογής</string>
     <string name="settings_appearance_app_icon_default">Προεπιλογή</string>
@@ -540,7 +596,28 @@
     <string name="settings_advanced_update_interval_monthly">Κάθε μήνα</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Συχνότητα ελέγχου στο παρασκήνιο</string>
     <string name="settings_advanced_update_interval_battery_warning">Οι έλεγχοι στο παρασκήνιο μπορεί να μη λειτουργούν σωστά σε ορισμένες συσκευές. Κατασκευαστές όπως Xiaomi, Huawei, Samsung και OnePlus συχνά περιορίζουν σφοδρά τις διαδικασίες παρασκηνίου για να εξοικονομήσουν μπαταρία</string>
+    <string name="settings_advanced_auto_patch">Αυτόματη επανάληψη διόρθωσης</string>
+    <string name="settings_advanced_auto_patch_description">Επαναφέρει τις εγκατεστημένες εφαρμογές στο παρασκήνιο όταν οι διορθώσεις τους αλλάζουν. Μόνο οι εφαρμογές με αποθηκευμένο αρχικό APK καλύπτονται</string>
+    <string name="settings_advanced_auto_patch_interval">Συχνότητα επανάληψης διόρθωσης</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Πόσο συχνά επαναδημιουργούνται οι διορθωμένες εφαρμογές</string>
+    <string name="settings_advanced_auto_patch_charging">Μόνο κατά τη φόρτιση</string>
+    <string name="settings_advanced_auto_patch_charging_description">Η διόρθωση καταπονεί τον επεξεργαστή και τη μνήμη, οπότε αναμένει έναν φορτιστή</string>
+    <string name="settings_advanced_auto_patch_install">Εγκατάσταση αυτόματα</string>
+    <string name="settings_advanced_auto_patch_install_description">Απαιτεί το Shizuku ως εγκαταστάτη. Με οποιονδήποτε άλλο εγκαταστάτη, οι διορθωμένες εφαρμογές αποθηκεύονται μόνο</string>
+    <string name="settings_advanced_external_batch_patch">Επιτρέψτε εξωτερικούς ενεργοποιητές</string>
+    <string name="settings_advanced_external_batch_patch_description">Επιτρέπει σε εφαρμογές αυτοματισμού να ξεκινήσουν την ομαδική διόρθωση με μια πρόθεση. Κάθε αίτημα επιβεβαιώνεται πριν από την εκτέλεση οποιασδήποτε ενέργειας</string>
+    <string name="external_batch_patch_title">Έναρξη ομαδικής διόρθωσης;</string>
+    <string name="external_batch_patch_description">Το %s θέλει να κάνει το Morphe να διορθώσει και να εγκαταστήσει εφαρμογές</string>
+    <string name="external_batch_patch_trust_caller">Να επιτρέπεται πάντα αυτήν την εφαρμογή</string>
+    <string name="external_batch_patch_unknown_caller">Μια άγνωστη εφαρμογή</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Ολοκληρώθηκε η αυτόματη επανάληψη διόρθωσης</string>
+    <string name="notification_auto_patch_running_title">Επανάληψη διόρθωσης εφαρμογών</string>
+    <string name="notification_auto_patch_blocked_title">Η αυτόματη επανάληψη διόρθωσης δεν εκτελέστηκε</string>
+    <string name="notification_auto_patch_blocked_battery">Το σύστημα μπλόκαρε αυτή την εγκατάσταση. Στα Xiaomi και παρόμοιες συσκευές, ενεργοποιήστε το \"Εγκατάσταση μέσω USB\" στις επιλογές προγραμματιστή. Σε ένα προφίλ εργασίας, οι εγκαταστάσεις μπορούν να περιοριστούν από την πολιτική</string>
+    <string name="notification_auto_patch_blocked_foreground">Απέτυχε</string>
+    <string name="notification_channel_auto_patch">Ακυρώθηκε</string>
+    <string name="notification_channel_auto_patch_description">Έτοιμο</string>
     <string name="notification_manager_update_title">Διαθέσιμη ενημέρωση του Morphe</string>
     <string name="notification_bundle_update_title">Νέες τροποποιήσεις διαθέσιμες</string>
     <string name="notification_update_text">Η έκδοση %s είναι έτοιμη για λήψη</string>
@@ -574,6 +651,8 @@
     <string name="settings_advanced_github_pat_configured">Διαμορφωμένο κλειδί</string>
     <string name="settings_advanced_github_pat_how_to_get">Πως να πάρετε ένα κλειδί</string>
     <string name="settings_advanced_github_pat_dialog_title">Ορίστε ένα GitHub προσωπικό κλειδί πρόσβασης(PAT)</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Ορίστε ένα PAT στο GitHub για να μπορείτε να προσθέσετε pull requests ως εξωτερικές πηγές. Δημιουργήστε ένα PAT με πρόθεση το public_repo 
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Συμπερίληψη στις ρυθμίσεις εξαγωγής</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Προσθέτει αυτό το PAT στις εξαγόμενες ρυθμίσεις του Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Δεν πρέπει να μοιράζεστε το PAT. Εάν το συμπεριλάβετε στις εξαγόμενες ρυθμίσεις, διατηρήστε το αρχείο ιδιωτικό διότι περιέχει το κλειδί</string>
@@ -724,7 +803,7 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">Το Android μπλόκαρε αυτό επειδή θα υποβάθμιζε την εγκατεστημένη εφαρμογή</string>
     <string name="installer_shizuku_error_signature">Το Android μπλόκαρε αυτό επειδή η εγκατεστημένη εφαρμογή έχει διαφορετική υπογραφή</string>
     <string name="installer_shizuku_error_invalid_apk">Το Android δεν μπόρεσε να διαβάσει αυτό το APK</string>
-    <string name="installer_shizuku_error_user_profile">Το Android μπλόκαρε αυτό για τον τρέχοντα χρήστη ή το επαγγελματικό προφίλ</string>
+    <string name="installer_shizuku_error_user_profile">Αποκλεισμός</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Βελτιστοποίηση μπαταρίας</string>
     <string name="settings_system_battery_optimization_description">Διατηρεί τον επεξεργαστή ενεργό όταν η εφαρμογή είναι ελαχιστοποιημένη</string>
@@ -860,6 +939,12 @@ morphe_header_custom_dark.png
     <string name="settings_system_selected_patches_section">Επιλεγμένες τροποποιήσεις</string>
     <string name="settings_system_patch_options_section">Επιλογές τροποποιήσεων</string>
     <string name="settings_system_no_patches_or_options">Δεν υπάρχουν αποθηκευμένες τροποποιήσεις ή επιλογές</string>
+    <!-- Copy selection from another bundle -->
+    <string name="copy_selection_title">Αντιγραφή επιλογής από…</string>
+    <string name="copy_selection_confirm_with_count">Αντιγραφή %s</string>
+    <string name="copy_selection_empty">Δεν υπάρχουν άλλες αποθηκευμένες επιλογές για αντιγραφή</string>
+    <string name="copy_selection_available_format">%1$s από %2$s διαθέσιμα</string>
+    <string name="copy_selection_same_source">Ίδια πηγή</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Προσαρμοσμένη επιλογή αρχείων</string>
     <string name="settings_system_custom_file_picker_description">Χρησιμοποιήστε την ενσωματωμένη επιλογή αρχείων του Morphe αντί για την προεπιλεγμένη του συστήματος</string>
@@ -901,6 +986,9 @@ morphe_header_custom_dark.png
     <string name="confirm">Επιβεβαίωση</string>
     <string name="warning">Προειδοποίηση</string>
     <string name="error_">Σφάλμα</string>
+    <string name="failed">Αποκλείστηκε</string>
+    <string name="cancelled">Συμπερίληψη</string>
+    <string name="ready">Επιλογή εφαρμογής</string>
     <string name="retry">Προσπαθήστε ξανά</string>
     <string name="refresh">Ανανέωση</string>
     <string name="add">Προσθήκη</string>
@@ -913,6 +1001,9 @@ morphe_header_custom_dark.png
     <string name="delete">Διαγραφή</string>
     <string name="delete_all">Διαγραφή όλων</string>
     <string name="remove">Αφαίρεση</string>
+    <string name="exclude">Διόρθωση</string>
+    <string name="excluded">Εξαιρούνται</string>
+    <string name="include">Συμπερίληψη</string>
     <string name="disable">Απενεργοποίηση</string>
     <string name="enable">Ενεργοποίηση</string>
     <string name="loading">Φόρτωση…</string>
@@ -939,13 +1030,15 @@ morphe_header_custom_dark.png
     <string name="reorder_done">Η σειρά αποθηκεύτηκε</string>
     <string name="reset_order">Επαναφορά σειράς</string>
     <string name="reset_order_done">Επαναφορά παραγγελίας</string>
+    <string name="accessibility_select_app">Επιλογή εφαρμογής</string>
     <string name="accessibility_move_up">Μετακίνηση προς τα πάνω</string>
     <string name="accessibility_move_down">Μετακίνηση προς τα κάτω</string>
-    <string name="accessibility_app_moved_announcement">Το %1$s μετακινήθηκε στη θέση %2$d από %3$d</string>
+    <string name="accessibility_app_moved_announcement">Το %1$s μετακινήθηκε στη θέση %2$s του/της %3$s</string>
     <string name="accessibility_scroll_to_top">Μετακίνηση στην κορυφή της λίστας</string>
     <string name="rename">Μετονομασία</string>
     <string name="import_">Εισαγωγή</string>
     <string name="export">Εξαγωγή</string>
+    <string name="copy">Αντιγραφή</string>
     <string name="download">Λήψη</string>
     <string name="less">Λιγότερα</string>
     <string name="expand">Επεκτείνετε</string>
@@ -956,6 +1049,7 @@ morphe_header_custom_dark.png
     <string name="continue_">Συνέχεια</string>
     <string name="version">Έκδοση</string>
     <string name="patch">Τροποποίηση</string>
+    <string name="patching">Τροποποίηση</string>
     <string name="repatch">Επανεφαρμογή τροποποιήσεων</string>
     <string name="open">Άνοιγμα</string>
     <string name="mount">Προσάρτηση</string>
@@ -973,7 +1067,6 @@ morphe_header_custom_dark.png
     <string name="saved">Αποθηκεύτηκε</string>
     <string name="update">Ενημέρωση</string>
     <string name="allow">Επιτρέψτε</string>
-    <string name="details">Λεπτομέρειες</string>
     <string name="hide">Απόκρυψη</string>
     <string name="hidden">Κρυφό</string>
     <string name="unhide">Εμφάνιση</string>
@@ -1007,8 +1100,8 @@ morphe_header_custom_dark.png
 Θέλετε ακόμα να συνεχίσετε;"</string>
     <string name="download_update_confirmation">Λήψη ενημέρωσης;</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d από %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s σε %2$s</string>
     <string name="onboarding_sources_desc">Διαχείριση των πηγών ενημερώσεων. Κάθε πηγή παρέχει ενημερώσεις που μπορούν να εφαρμοστούν στις εφαρμογές σας</string>
     <string name="onboarding_swipe_title">Ζεστοί χειρισμοί</string>
     <string name="onboarding_swipe_desc">Σύρετε προς τα δεξιά σε μια κάρτα εφαρμογής για να δείτε τις διαθέσιμες ενημερώσεις της. Σύρετε προς τα αριστερά για να αποκρύψετε την κάρτα από την αρχική οθόνη</string>

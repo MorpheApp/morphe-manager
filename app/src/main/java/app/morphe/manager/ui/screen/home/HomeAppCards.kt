@@ -50,16 +50,16 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstalledApp
-import app.morphe.manager.ui.screen.shared.AppIcon
-import app.morphe.manager.ui.screen.shared.MorpheAnimations
-import app.morphe.manager.ui.screen.shared.ShimmerBox
-import app.morphe.manager.ui.screen.shared.drawDiagonalShimmer
+import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.theme.LocalAppCardColorResolver
 import app.morphe.manager.ui.theme.LocalMonochromeTheme
 import app.morphe.manager.ui.theme.MonochromeThemeDefaults
+import app.morphe.manager.util.AppCardColorResolver
 import app.morphe.manager.util.AppDataSource
 
 private data class HomeAppCardStyle(
     val monochrome: Boolean,
+    val colorResolver: AppCardColorResolver?,
     val iconSize: Dp,
     val titleColor: Color,
     val subtitleColor: Color,
@@ -72,7 +72,15 @@ private data class HomeAppCardStyle(
     val cardHeight: Dp = 80.dp,
     val contentPadding: Dp = 16.dp,
     val contentSpacing: Dp = 16.dp
-)
+) {
+    /**
+     * Applies the card colors chosen in the appearance settings to [bundleColors], the palette
+     * declared by this card's own bundle. Stops bound to the bundle are derived from it, so the
+     * result stays per-app even when the rest of the gradient is fixed.
+     */
+    fun cardColors(bundleColors: List<Color>): List<Color> =
+        colorResolver?.resolve(bundleColors) ?: bundleColors
+}
 
 @Composable
 private fun homeAppCardStyle(subtitleAlpha: Float = 0.75f): HomeAppCardStyle {
@@ -94,6 +102,7 @@ private fun homeAppCardStyle(subtitleAlpha: Float = 0.75f): HomeAppCardStyle {
 
     return HomeAppCardStyle(
         monochrome = monochrome,
+        colorResolver = LocalAppCardColorResolver.current,
         iconSize = 60.dp,
         titleColor = if (monochrome) MaterialTheme.colorScheme.onSurface else Color.White,
         subtitleColor = if (monochrome) {
@@ -123,15 +132,17 @@ private fun homeAppCardStyle(subtitleAlpha: Float = 0.75f): HomeAppCardStyle {
 /**
  * Shared icon + text content for [AppCardLayout] rows.
  *
- * @param packageName    Package name used for icon lookup when [packageInfo] is null.
+ * @param packageName    Package name used for icon lookup when [packageInfo] is null;
+ *   null renders the glass placeholder without resolving an icon.
  * @param packageInfo    Resolved [PackageInfo]; when non-null [packageName] is ignored for the icon.
  * @param displayName    Primary label shown in bold.
  * @param subtitle       Secondary line shown below [displayName]; null → not rendered.
- * @param gradientColors Gradient palette forwarded to [AppIcon] placeholder.
+ * @param gradientColors Gradient palette forwarded to [AppIcon] placeholder, unless the user
+ *   picked fixed card colors in the appearance settings.
  */
 @Composable
 internal fun RowScope.AppCardContent(
-    packageName: String,
+    packageName: String?,
     packageInfo: PackageInfo?,
     displayName: String,
     subtitle: String?,
@@ -145,7 +156,7 @@ internal fun RowScope.AppCardContent(
         contentDescription = null,
         modifier = Modifier.size(cardStyle.iconSize),
         preferredSource = AppDataSource.PATCHED_APK,
-        placeholderGradientColors = gradientColors,
+        placeholderGradientColors = cardStyle.cardColors(gradientColors),
         placeholderInnerPadding = 6.dp
     )
 
@@ -203,7 +214,9 @@ private fun GlassChip(
             Text(
                 text = text,
                 style = MaterialTheme.typography.labelSmall,
-                color = cardStyle.chipContentColor
+                color = cardStyle.chipContentColor,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
         }
     }
@@ -225,6 +238,7 @@ fun InstalledAppCard(
     onLongClick: (() -> Unit)? = null
 ) {
     val cardStyle = homeAppCardStyle(subtitleAlpha = 0.85f)
+    val showsUpdateBadge = hasUpdate && !isAppDeleted
 
     val versionLabel = stringResource(R.string.version)
     val installedLabel = stringResource(R.string.installed)
@@ -236,7 +250,7 @@ fun InstalledAppCard(
         if (raw.startsWith("v")) raw else "v$raw"
     }
 
-    val contentDesc = remember(displayName, version, versionLabel, installedLabel, hasUpdate, updateAvailableLabel, isAppDeleted, deletedLabel) {
+    val contentDesc = remember(displayName, version, versionLabel, installedLabel, showsUpdateBadge, updateAvailableLabel, isAppDeleted, deletedLabel) {
         buildString {
             append(displayName)
             if (version.isNotEmpty()) {
@@ -244,7 +258,7 @@ fun InstalledAppCard(
             }
             append(", ")
             append(if (isAppDeleted) deletedLabel else installedLabel)
-            if (hasUpdate && !isAppDeleted) append(", $updateAvailableLabel")
+            if (showsUpdateBadge) append(", $updateAvailableLabel")
         }
     }
 
@@ -303,7 +317,7 @@ fun InstalledAppCard(
                 }
 
                 AnimatedVisibility(
-                    visible = hasUpdate && !isAppDeleted,
+                    visible = showsUpdateBadge,
                     enter = MorpheAnimations.expandHorizFadeIn,
                     exit = MorpheAnimations.shrinkHorizFadeOut
                 ) {
@@ -394,10 +408,16 @@ internal fun AppCardLayout(
     val shape = RoundedCornerShape(cardStyle.cardRadius)
     val view = LocalView.current
 
+    // Long-pressing a card always means the same thing here, so the gesture is announced
+    // rather than left as an unlabeled action the screen reader cannot describe
+    val longClickLabel = stringResource(R.string.accessibility_select_app)
+        .takeIf { onLongClick != null }
+
     val contentAlpha = if (enabled) 1f else 0.45f
-    val baseColor = gradientColors.firstOrNull() ?: Color.White
-    val midColor = gradientColors.getOrElse(1) { baseColor }
-    val endColor = gradientColors.lastOrNull() ?: baseColor
+    val colors = cardStyle.cardColors(gradientColors)
+    val baseColor = colors.firstOrNull() ?: Color.White
+    val midColor = colors.getOrElse(1) { baseColor }
+    val endColor = colors.lastOrNull() ?: baseColor
 
     // Disabled state fades everything
     val glassAlpha  = if (enabled) 1f else 0.5f
@@ -532,6 +552,7 @@ internal fun AppCardLayout(
                     view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                     onClick()
                 },
+                onLongClickLabel = longClickLabel,
                 onLongClick = if (onLongClick != null) {
                     {
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
@@ -604,7 +625,8 @@ fun AppLoadingCard(
                     } else {
                         Modifier.background(
                             brush = Brush.linearGradient(
-                                colors = gradientColors.map { it.copy(alpha = pulseAlpha) },
+                                colors = cardStyle.cardColors(gradientColors)
+                                    .map { it.copy(alpha = pulseAlpha) },
                                 start = Offset(if (rtl) 1000f else 0f, 0f),
                                 end = Offset(if (rtl) 0f else 1000f, 0f)
                             )
@@ -639,7 +661,7 @@ fun AppLoadingCard(
                 modifier = Modifier
                     .size(60.dp)
                     .padding(6.dp),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
                 baseColor = Color.White.copy(alpha = 0.2f)
             )
 

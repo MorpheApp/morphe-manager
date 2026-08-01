@@ -7,6 +7,7 @@ package app.morphe.manager.ui.screen.settings.system
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
@@ -83,7 +84,15 @@ fun ChangelogDialog(
                 }
             }
 
-            ScrollToTopButton(listState = listState)
+            ListScrollbar(
+                listState = listState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
+
+            ScrollToTopButton(
+                listState = listState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
         }
     }
 

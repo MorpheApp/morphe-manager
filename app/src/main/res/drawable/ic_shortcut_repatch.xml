@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Magic wand, matching the icon the batch queue uses in the app. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <path
+        android:fillColor="@color/shortcut_icon_tint"
+        android:pathData="M20,7l0.94,-2.06L23,4l-2.06,-0.94L20,1l-0.94,2.06L17,4l2.06,0.94L20,7zM8.5,7l0.94,-2.06L11.5,4L9.44,3.06L8.5,1l-0.94,2.06L5.5,4l2.06,0.94L8.5,7zM20,12.5l-0.94,2.06L17,15.5l2.06,0.94L20,18.5l0.94,-2.06L23,15.5l-2.06,-0.94L20,12.5zM17.71,9.12l-2.83,-2.83c-0.39,-0.39 -1.02,-0.39 -1.41,0L2.29,17.46c-0.39,0.39 -0.39,1.02 0,1.41l2.83,2.83c0.39,0.39 1.02,0.39 1.41,0L17.71,10.54C18.1,10.15 18.1,9.51 17.71,9.12zM14.21,11.21l-1.42,-1.42l1.41,-1.41l1.42,1.42L14.21,11.21z" />
+</vector>

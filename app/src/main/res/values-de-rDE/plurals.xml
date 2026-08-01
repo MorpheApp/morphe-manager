@@ -25,24 +25,32 @@
         <item quantity="other">%s APK-Dateien</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">%d App installiert</item>
-        <item quantity="other">%d Apps installiert</item>
+        <item quantity="one">%s App installiert</item>
+        <item quantity="other">%s Apps installiert</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">%d App erneut installiert</item>
-        <item quantity="other">%d Apps erneut installiert</item>
+        <item quantity="one">%s App erneut installiert</item>
+        <item quantity="other">%s Apps erneut installiert</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">%d App deinstalliert</item>
-        <item quantity="other">%d Apps deinstalliert</item>
+        <item quantity="one">%s App deinstalliert</item>
+        <item quantity="other">%s Apps deinstalliert</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">%d App deinstallieren?</item>
-        <item quantity="other">%d Apps deinstallieren?</item>
+        <item quantity="one">%s App deinstallieren?</item>
+        <item quantity="other">%s Apps deinstallieren?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s App bereit zum Patchen</item>
+        <item quantity="other">%s Apps bereit zum Patchen</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%s App ist bereit zur Installation</item>
+        <item quantity="other">%s Apps sind bereit zur Installation</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">%d App übersprungen</item>
-        <item quantity="other">%d Apps übersprungen</item>
+        <item quantity="one">%s App übersprungen</item>
+        <item quantity="other">%s Apps übersprungen</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Veralteten %s Patch von der gespeicherten Auswahl entfernt</item>
@@ -63,5 +71,9 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s App</item>
         <item quantity="other">%s Apps</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">%s Patch von ausgewähltem Paket kopiert</item>
+        <item quantity="other">%s Patches von ausgewähltem Paket kopiert</item>
     </plurals>
 </resources>

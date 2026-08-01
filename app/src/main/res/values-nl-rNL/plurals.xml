@@ -25,24 +25,32 @@
         <item quantity="other">%s APK-bestanden</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">%d app geïnstalleerd</item>
-        <item quantity="other">%d apps geïnstalleerd</item>
+        <item quantity="one">%s app geïnstalleerd</item>
+        <item quantity="other">%s apps geïnstalleerd</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">%d app opnieuw geïnstalleerd</item>
-        <item quantity="other">%d apps opnieuw geïnstalleerd</item>
+        <item quantity="one">%s app opnieuw geïnstalleerd</item>
+        <item quantity="other">%s apps opnieuw geïnstalleerd</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">%d app verwijderd</item>
-        <item quantity="other">%d apps verwijderd</item>
+        <item quantity="one">%s app verwijderd</item>
+        <item quantity="other">%s apps verwijderd</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">%d app verwijderen?</item>
-        <item quantity="other">%d apps verwijderen?</item>
+        <item quantity="one">%s app verwijderen?</item>
+        <item quantity="other">%s apps verwijderen?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s app klaar om te patchen</item>
+        <item quantity="other">%s apps klaar om te patchen</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%s app is klaar voor installatie</item>
+        <item quantity="other">%s apps zijn klaar voor installatie</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">%d app overgeslagen</item>
-        <item quantity="other">%d apps overgeslagen</item>
+        <item quantity="one">%s app overgeslagen</item>
+        <item quantity="other">%s apps overgeslagen</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Verwijderd %s verouderde patch uit opgeslagen selectie</item>
@@ -63,5 +71,9 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s app</item>
         <item quantity="other">%s apps</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">%s patch gekopieerd van het geselecteerde pakket</item>
+        <item quantity="other">%s patches gekopieerd van het geselecteerde pakket</item>
     </plurals>
 </resources>

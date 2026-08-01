@@ -689,7 +689,15 @@ fun FilePicker(
                     }
                 }
 
-                ScrollToTopButton(listState = listState)
+                ListScrollbar(
+                    listState = listState,
+                    modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+                )
+
+                ScrollToTopButton(
+                    listState = listState,
+                    modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+                )
             }
 
             HorizontalDivider(color = LocalDialogTextColor.current.copy(alpha = 0.08f))

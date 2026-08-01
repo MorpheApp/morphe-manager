@@ -25,24 +25,32 @@
         <item quantity="other">%s mga APK file</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">Na-install ang %d app</item>
-        <item quantity="other">Na-install ang %d apps</item>
+        <item quantity="one">Na-install ang %s app</item>
+        <item quantity="other">Na-install ang %s apps</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">Muling na-install ang %d app</item>
-        <item quantity="other">Muling na-install ang %d apps</item>
+        <item quantity="one">Muling na-install ang %s app</item>
+        <item quantity="other">Muling na-install ang %s apps</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">Binura ang %d app</item>
-        <item quantity="other">Binura ang %d apps</item>
+        <item quantity="one">Binura ang %s app</item>
+        <item quantity="other">Binura ang %s apps</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">I-uninstall ang %d app?</item>
-        <item quantity="other">I-uninstall ang %d apps?</item>
+        <item quantity="one">Burahin ang %s app?</item>
+        <item quantity="other">Burahin ang %s apps?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">Ang %s app ay handa nang i-patch</item>
+        <item quantity="other">Ang %s apps ay handa nang i-patch</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">Ang %s app ay handa nang i-install</item>
+        <item quantity="other">Ang %s apps ay handa nang i-install</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">Nilaktawan ang %d app</item>
-        <item quantity="other">Nilaktawan ang %d apps</item>
+        <item quantity="one">Hindi isinama ang %s app</item>
+        <item quantity="other">Hindi isinama ang %s apps</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Inalis ang %s na outdated patch mula sa nakaimbak na seleksyon</item>
@@ -63,5 +71,9 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s app</item>
         <item quantity="other">%s apps</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Kopyado ang %s patch mula sa napiling bundle</item>
+        <item quantity="other">Kopyado ang %s patches mula sa napiling bundle</item>
     </plurals>
 </resources>

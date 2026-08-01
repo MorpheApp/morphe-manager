@@ -12,7 +12,7 @@
     />
 </picture>
 
-[![Website badge](https://img.shields.io/badge/Website-gray.svg?logo=data:image/svg%2bxml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ29weXJpZ2h0IDIwMjUgTW9ycGhlLiBUaGlzIGlzIGNvcHlyaWdodGVkIGNvbnRlbnQsIGFuZCBub3QgbGljZW5zZWQgdW5kZXIgb3BlbiBzb3VyY2UgdGVybXMuCiAgICAgU2VlIGh0dHBzOi8vZ2l0aHViLmNvbS9Nb3JwaGVBcHAvbW9ycGhlLWJyYW5kaW5nIC0tPgoKPHN2ZwogICB3aWR0aD0iNTEyIgogICBoZWlnaHQ9IjUxMiIKICAgdmlld0JveD0iMCAwIDUxMiA1MTIiCiAgIHZlcnNpb249IjEuMSIKICAgaWQ9InN2ZzIiCiAgIHNvZGlwb2RpOmRvY25hbWU9Im1vcnBoZV9sb2dvX2xpZ2h0LnN2ZyIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMS40LjIgKGViZjBlOTQwZDAsIDIwMjUtMDUtMDgpIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0ibmFtZWR2aWV3MiIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiMwMDAwMDAiCiAgICAgYm9yZGVyb3BhY2l0eT0iMC4yNSIKICAgICBpbmtzY2FwZTpzaG93cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZGVza2NvbG9yPSIjZDFkMWQxIgogICAgIGlua3NjYXBlOnpvb209IjEuMTU0Mjk2OSIKICAgICBpbmtzY2FwZTpjeD0iMjU2IgogICAgIGlua3NjYXBlOmN5PSIyNTYiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxNDQwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjgzNiIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9InN2ZzIiPgogICAgPGlua3NjYXBlOnBhZ2UKICAgICAgIHg9IjAiCiAgICAgICB5PSIwIgogICAgICAgd2lkdGg9IjUxMiIKICAgICAgIGhlaWdodD0iNTEyIgogICAgICAgaWQ9InBhZ2UyIgogICAgICAgbWFyZ2luPSIwIgogICAgICAgYmxlZWQ9IjAiIC8+CiAgPC9zb2RpcG9kaTpuYW1lZHZpZXc+CiAgPGRlZnMKICAgICBpZD0iZGVmczIiIC8+CiAgPCEtLSBMZXR0ZXIgLS0+CiAgPGcKICAgICBpZD0iTGV0dGVyIgogICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjEiPgogICAgPHBhdGgKICAgICAgIGlkPSJMZWZ0IgogICAgICAgZD0ibSAxMjMsMTQwIGMgLTIxLDAgLTM5LDE3IC00MCwzOCB2IDE5MiBjIDEsMjEgMTksMzggNDAsMzggMjEsMCAzOSwtMTcgNDAsLTM4IFYgMTc4IGMgLTEsLTIxIC0xOSwtMzggLTQwLC0zOCB6IgogICAgICAgZmlsbD0iIzFFNUFBOCIKICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjEiIC8+CiAgICA8cGF0aAogICAgICAgaWQ9IlJpZ2h0IgogICAgICAgZD0ibSAzNDksMjg1IHYgODUgYyAxLDIxIDE5LDM4IDQwLDM4IDIxLDAgMzksLTE3IDQwLC0zOCBWIDE4MiBjIC0xMSwtMTQgLTc0LDYzIC04MCwxMDMgeiIKICAgICAgIGZpbGw9IiMwMEFGQUUiCiAgICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO2ZpbGwtb3BhY2l0eToxIiAvPgogICAgPHBhdGgKICAgICAgIGlkPSJNaWRkbGUiCiAgICAgICBkPSJtIDEyNywxMDggYyAtMzQsMCAtNDQsMjUgLTQ0LDQwIHYgNTQgYyAzMCwtMzMgNzUsMjcgODAsMzMgMjgsMzIgNDQsODcgOTMsODkgNDgsLTIgNjcsLTU2IDkzLC04OSAwLDAgNDUsLTc0IDgwLC04MCAwLC0yOCAtMTEsLTQ3IC00NCwtNDcgLTM0LDAgLTU4LDUwIC03NSw3MiAtMTcsMjIgLTI1LDQ2IC01NCw0NiAtMjksMCAtMzgsLTI1IC01NCwtNDYgLTE3LC0yMiAtNDEsLTcyIC03NSwtNzIgeiIKICAgICAgIGZpbGw9InVybCgjbGluZWFyR3JhZGllbnQyKSIKICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjEiIC8+CiAgPC9nPgo8L3N2Zz4K&style=for-the-badge)](https://morphe.software) [![Documentation badge](https://img.shields.io/badge/Documentation-gray?style=for-the-badge&logo=github)](https://github.com/MorpheApp/morphe-documentation#readme) [![Subreddit badge](https://img.shields.io/badge/Reddit-gray?style=for-the-badge&logo=reddit&logoColor=white)](https://www.reddit.com/r/MorpheApp) [![Crowdin badge](https://img.shields.io/badge/Translations-gray?style=for-the-badge&logo=crowdin)](https://morphe.software/translate)
+[![Website badge](https://img.shields.io/badge/Website-gray.svg?logo=data:image/svg%2bxml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ29weXJpZ2h0IDIwMjUgTW9ycGhlLiBUaGlzIGlzIGNvcHlyaWdodGVkIGNvbnRlbnQsIGFuZCBub3QgbGljZW5zZWQgdW5kZXIgb3BlbiBzb3VyY2UgdGVybXMuCiAgICAgU2VlIGh0dHBzOi8vZ2l0aHViLmNvbS9Nb3JwaGVBcHAvbW9ycGhlLWJyYW5kaW5nIC0tPgoKPHN2ZwogICB3aWR0aD0iNTEyIgogICBoZWlnaHQ9IjUxMiIKICAgdmlld0JveD0iMCAwIDUxMiA1MTIiCiAgIHZlcnNpb249IjEuMSIKICAgaWQ9InN2ZzIiCiAgIHNvZGlwb2RpOmRvY25hbWU9Im1vcnBoZV9sb2dvX2xpZ2h0LnN2ZyIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMS40LjIgKGViZjBlOTQwZDAsIDIwMjUtMDUtMDgpIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0ibmFtZWR2aWV3MiIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiMwMDAwMDAiCiAgICAgYm9yZGVyb3BhY2l0eT0iMC4yNSIKICAgICBpbmtzY2FwZTpzaG93cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZGVza2NvbG9yPSIjZDFkMWQxIgogICAgIGlua3NjYXBlOnpvb209IjEuMTU0Mjk2OSIKICAgICBpbmtzY2FwZTpjeD0iMjU2IgogICAgIGlua3NjYXBlOmN5PSIyNTYiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxNDQwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjgzNiIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9InN2ZzIiPgogICAgPGlua3NjYXBlOnBhZ2UKICAgICAgIHg9IjAiCiAgICAgICB5PSIwIgogICAgICAgd2lkdGg9IjUxMiIKICAgICAgIGhlaWdodD0iNTEyIgogICAgICAgaWQ9InBhZ2UyIgogICAgICAgbWFyZ2luPSIwIgogICAgICAgYmxlZWQ9IjAiIC8+CiAgPC9zb2RpcG9kaTpuYW1lZHZpZXc+CiAgPGRlZnMKICAgICBpZD0iZGVmczIiIC8+CiAgPCEtLSBMZXR0ZXIgLS0+CiAgPGcKICAgICBpZD0iTGV0dGVyIgogICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjEiPgogICAgPHBhdGgKICAgICAgIGlkPSJMZWZ0IgogICAgICAgZD0ibSAxMjMsMTQwIGMgLTIxLDAgLTM5LDE3IC00MCwzOCB2IDE5MiBjIDEsMjEgMTksMzggNDAsMzggMjEsMCAzOSwtMTcgNDAsLTM4IFYgMTc4IGMgLTEsLTIxIC0xOSwtMzggLTQwLC0zOCB6IgogICAgICAgZmlsbD0iIzFFNUFBOCIKICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjEiIC8+CiAgICA8cGF0aAogICAgICAgaWQ9IlJpZ2h0IgogICAgICAgZD0ibSAzNDksMjg1IHYgODUgYyAxLDIxIDE5LDM4IDQwLDM4IDIxLDAgMzksLTE3IDQwLC0zOCBWIDE4MiBjIC0xMSwtMTQgLTc0LDYzIC04MCwxMDMgeiIKICAgICAgIGZpbGw9IiMwMEFGQUUiCiAgICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO2ZpbGwtb3BhY2l0eToxIiAvPgogICAgPHBhdGgKICAgICAgIGlkPSJNaWRkbGUiCiAgICAgICBkPSJtIDEyNywxMDggYyAtMzQsMCAtNDQsMjUgLTQ0LDQwIHYgNTQgYyAzMCwtMzMgNzUsMjcgODAsMzMgMjgsMzIgNDQsODcgOTMsODkgNDgsLTIgNjcsLTU2IDkzLC04OSAwLDAgNDUsLTc0IDgwLC04MCAwLC0yOCAtMTEsLTQ3IC00NCwtNDcgLTM0LDAgLTU4LDUwIC03NSw3MiAtMTcsMjIgLTI1LDQ2IC01NCw0NiAtMjksMCAtMzgsLTI1IC01NCwtNDYgLTE3LC0yMiAtNDEsLTcyIC03NSwtNzIgeiIKICAgICAgIGZpbGw9InVybCgjbGluZWFyR3JhZGllbnQyKSIKICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjEiIC8+CiAgPC9nPgo8L3N2Zz4K&style=for-the-badge)](https://morphe.software) [![Documentation badge](https://img.shields.io/badge/Documentation-gray?style=for-the-badge&logo=github)](https://github.com/MorpheApp/morphe-documentation#readme) [![Guides badge](https://img.shields.io/badge/Guides-gray?style=for-the-badge&logo=bookstack&logoColor=white)](docs/README.md) [![Subreddit badge](https://img.shields.io/badge/Reddit-gray?style=for-the-badge&logo=reddit&logoColor=white)](https://www.reddit.com/r/MorpheApp) [![Crowdin badge](https://img.shields.io/badge/Translations-gray?style=for-the-badge&logo=crowdin)](https://morphe.software/translate)
 <br>
 </div>
 
@@ -47,10 +47,14 @@ The website will guide you to the latest release for your device. No account nee
 3. **Choose your mode:**
     - **Simple mode** - designed for a one-tap experience. Just tap Patch and Morphe handles the rest with sensible defaults. No configuration needed.
     - **Expert mode** - gives you full control. Choose exactly which of the 100+ patches to apply, configure per-patch options (colors, toggles, and more), and fine-tune everything before patching.
-4. **Provide the APK** - Morphe guides you through obtaining the original app file via step-by-step dialogs. The patching itself happens entirely on your device. *(If you can't select the APK file, try moving it out of the Downloads folder to the root of your internal storage.)*
+4. **Provide the APK** - Morphe guides you through obtaining the original app file via step-by-step dialogs. The patching itself happens entirely on your device.
 5. **Install and enjoy** - once patching is complete, install the result like any normal APK.
 
 Everything happens locally. Morphe never uploads your APKs or personal data anywhere.
+
+## 📖 Guides
+
+Step-by-step walkthroughs with screenshots, covering patching in both modes, installers, updates, patch sources, backups, and customization: **[→ Morphe guides](docs/README.md)**
 
 ## 🔧 Features
 
@@ -60,13 +64,17 @@ Everything happens locally. Morphe never uploads your APKs or personal data anyw
 - Expert mode also shows an expanded patching screen with real-time logs and live RAM usage monitoring during patching
 - 100+ patches for YouTube, YouTube Music, and Reddit
 - Support for split APKs
-- Skips split APK modules for unsupported CPU architectures, locales, and screen densities during merge
-- Strips native libraries for unsupported architectures from plain APKs after patching
+- Optional "Optimize for device architecture" mode - skips split APK modules for unsupported CPU architectures, locales, and screen densities during merge, and strips native libraries for unsupported architectures from plain APKs after patching
 - Sends a notification the moment patching finishes, so you don't have to keep the app open
+- Optional completion sound, with a distinct tone for success and failure
 - Optional auto-install with Shizuku right after patching completes
+- Batch patching - select several apps and patch them in one queue, with every question asked
+  up front so the run never stops to wait for you
+- Optional automatic re-patching in the background when a patch source releases changes for
+  your apps, with silent progress and result notifications
 
 **Patch options** *(Simple mode: available in the Advanced tab; Expert mode: available on the patch selection screen)*
-- Custom app display name and header logo per app
+- Custom app display name, launcher icon, and header logo per app, with built-in creators that generate every density variant for you
 - App theme colors (background color presets)
 - Hide Shorts app shortcut and widget (YouTube)
 - And more, depending on installed patch bundles
@@ -95,8 +103,13 @@ Everything happens locally. Morphe never uploads your APKs or personal data anyw
 **Home screen**
 - Friendly time-of-day greeting when you open the app
 - Rearrange your app list into the order that suits you
+- Group your apps by patch source or your own categories
+- Hide apps you never patch, and bring them back whenever you like
 - Home cards for apps patched with universal patches, not just app-specific ones
-- Multi-select and bulk actions for cleaning up saved APKs and patch selections
+- Multi-select and bulk actions for cleaning up saved APKs and patch selections, and for
+  patching several apps in one queue
+- Launcher shortcuts for re-patching outdated apps, checking for updates, and jumping straight
+  into patching a recently patched app
 - Floating scroll-to-top button when your lists get long
 - A short guided tour after your first patch, so you know where everything lives
 
@@ -109,6 +122,8 @@ Everything happens locally. Morphe never uploads your APKs or personal data anyw
 - Process runtime - run patching in a separate process for better stability, with configurable memory limit
 - Bytecode processing mode - controls how bytecode is processed during patching, affecting patching speed, memory usage, and output APK size
 - Built-in file picker as an alternative to the system one, with an option to show hidden files
+- Optional external trigger, so automation apps can queue a batch through an intent, gated by
+  a per-app confirmation
 - Export debug logs for troubleshooting
 
 ## ❓ New to GitHub?
@@ -120,13 +135,13 @@ If you ended up here but aren't sure what to do next - no worries. Here's the sh
 3. Open the downloaded file on your Android device and tap **Install**.
 4. If Android asks you to allow installs from unknown sources, follow the prompt to enable it - this is required for any app not from the Play Store.
 
-That's it. Once Morphe is installed, everything else happens inside the app.
+That's it. Once Morphe is installed, everything else happens inside the app - the **[guides](docs/README.md)** above walk you through the first patch.
 
-For guides, FAQs, and troubleshooting, visit **[morphe.software](https://morphe.software)** or join the community on **[Reddit](https://www.reddit.com/r/MorpheApp)**.
+For FAQs and troubleshooting, visit **[morphe.software](https://morphe.software)** or join the community on **[Reddit](https://www.reddit.com/r/MorpheApp)**.
 
 ## 📙 Contributing
 
-Thank you for considering contributing to Morphe Manager.
+Thank you for considering contributing to Morphe.
 You can find the contribution guidelines [here](CONTRIBUTING.md).
 
 ## ❗ About

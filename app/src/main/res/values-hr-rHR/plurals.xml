@@ -50,4 +50,14 @@
         <item quantity="few">%s skrivenih aplikacija</item>
         <item quantity="other">%s skrivenih aplikacija</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s aplikacija</item>
+        <item quantity="few">%s aplikacija</item>
+        <item quantity="other">%s aplikacija</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Kopiran je %s patch iz odabranog paketa</item>
+        <item quantity="few">Kopirano je %s patcheva iz odabranog paketa</item>
+        <item quantity="other">Kopirano je %s patcheva iz odabranog paketa</item>
+    </plurals>
 </resources>

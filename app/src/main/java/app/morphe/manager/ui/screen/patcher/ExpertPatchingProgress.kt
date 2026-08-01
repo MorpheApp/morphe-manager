@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.patcher.logger.LogLevel
+import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_FIELD_AVERAGE
 import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_FIELD_MAX
 import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_PREFIX_DONE
@@ -46,39 +47,49 @@ import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_PROCESS_PRE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_ANDROID
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_API
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_ELAPSED
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_MANAGER
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_MEMORY_LIMIT
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_NAME
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_NATIVE_LIBS
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_PATCHER
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_RAM_AVAIL
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_RAM_TOTAL
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_SIZE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_STORAGE_AVAIL
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_STORAGE_TOTAL
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_VERSION
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_BUILD
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_DEVICE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_RUNTIME
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SOURCE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SUCCEEDED
+import app.morphe.manager.ui.model.PatchProgressSource
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.patcher.game.MiniGameContent
 import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
 
-/** Brand blue — start of the progress gradient. */
+/** Brand blue - start of the progress gradient. */
 private val PatcherProgressBlueColor = Color(0xFF1E5AA8)
 
-/** Brand teal — used for the live indicator dot, step pipeline, progress bar end, and success state. */
+/** Brand teal - used for the live indicator dot, step pipeline, progress bar end, and success state. */
 private val PatcherProgressTealColor = Color(0xFF00AFAE)
 
 sealed interface LogItem {
     /**
      * Structured card shown at the start of patching.
-     * Aggregates data from "Patching started at …", "Runtime: …",
-     * "Process heap memory limit: …" and "Device: …" log lines.
+     * Aggregates data from "Patching started at …", "Runtime: …", "Process heap memory limit: …"
+     * and "Device: …" log lines.
      */
     data class StartBanner(
         val packageName: String,
         val version: String,
-        val bundleVersion: String?,
+        val sources: List<PatchSourceRef>,
+        val managerVersion: String?,
+        val patcherVersion: String?,
+        val stripsNativeLibs: Boolean?,
         val apkSizeMb: String,
         val patchCount: Int,
         val isSplit: Boolean,
@@ -96,8 +107,7 @@ sealed interface LogItem {
 
     /**
      * Structured card shown after patching succeeds.
-     * Aggregates data from "Patching succeeded: …" and
-     * "Process heap after patching: …" log lines.
+     * Aggregates data from "Patching succeeded: …" and "Process heap after patching: …" log lines.
      */
     data class SuccessSummary(
         val outputSizeMb: String,
@@ -111,8 +121,10 @@ sealed interface LogItem {
     data class Entry(val level: LogLevel, val message: String) : LogItem
 }
 
-/** Extracts a space-delimited key=value field from a flat log string.
- *  Supports quoted values (e.g. key="some value with spaces"). */
+/**
+ * Extracts a space-delimited key=value field from a flat log string.
+ * Supports quoted values (e.g. key="some value with spaces").
+ */
 private fun String.logField(key: String): String? {
     val prefix = "$key="
     val start = indexOf(prefix).takeIf { it >= 0 } ?: return null
@@ -153,9 +165,26 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
     var storageTotal: String? = null
     var deviceManufacturer: String?
     var deviceModel: String?
+    val sources = mutableListOf<PatchSourceRef>()
+    var managerVersion: String? = null
+    var patcherVersion: String? = null
+    var stripsNativeLibs: Boolean? = null
 
     for ((_, message) in this) {
         when {
+            message.startsWith(LOG_WORKER_PREFIX_BUILD) -> {
+                managerVersion = message.logField(LOG_WORKER_FIELD_MANAGER)
+                patcherVersion = message.logField(LOG_WORKER_FIELD_PATCHER)
+                stripsNativeLibs = message.logField(LOG_WORKER_FIELD_NATIVE_LIBS)?.toBooleanStrictOrNull()
+            }
+            message.startsWith(LOG_WORKER_PREFIX_SOURCE) -> {
+                message.logField(LOG_WORKER_FIELD_NAME)?.let { name ->
+                    sources += PatchSourceRef(
+                        name = name,
+                        version = message.logField(LOG_WORKER_FIELD_VERSION)?.takeIf { it != "?" }
+                    )
+                }
+            }
             message.startsWith(LOG_WORKER_PREFIX_RUNTIME) -> {
                 runtimeMemoryLimitMb = message.logField(LOG_WORKER_FIELD_MEMORY_LIMIT)?.let { "${it}MB" }
             }
@@ -180,7 +209,9 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
         LOG_PROCESS_PREFIX_COROUTINE_HEAP,
         LOG_MEMORY_PREFIX_DONE,
         LOG_WORKER_PREFIX_DEVICE,
-        LOG_WORKER_PREFIX_RUNTIME
+        LOG_WORKER_PREFIX_RUNTIME,
+        LOG_WORKER_PREFIX_SOURCE,
+        LOG_WORKER_PREFIX_BUILD
     )
 
     val result = mutableListOf<LogItem>()
@@ -196,7 +227,10 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
                     result += LogItem.StartBanner(
                         packageName = pkg,
                         version = message.logField("version") ?: "?",
-                        bundleVersion = message.logField("bundle"),
+                        sources = sources,
+                        managerVersion = managerVersion,
+                        patcherVersion = patcherVersion,
+                        stripsNativeLibs = stripsNativeLibs,
                         apkSizeMb = "%.1f MB".format(
                             (message.logField("size")?.toLongOrNull() ?: 0L) / 1_048_576.0
                         ),
@@ -239,21 +273,22 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
  * Expert mode patching screen.
  *
  * Shows a horizontal linear progress bar, step pipeline, and real-time log
- * output sourced directly from [PatcherViewModel.logs].
+ * output sourced directly from [PatchProgressSource.logs].
  */
 @Composable
 fun ExpertPatchingInProgress(
     progress: Float,
     patchesProgress: Pair<Int, Int>,
-    patcherViewModel: PatcherViewModel,
+    patchProgress: PatchProgressSource,
     patcherSucceeded: Boolean? = null,
     miniGameState: MiniGameState,
+    queueHeader: (@Composable () -> Unit)? = null,
     onCancelClick: () -> Unit,
     onInstallClick: () -> Unit = {},
     onHomeClick: () -> Unit
 ) {
     val (completed, total) = patchesProgress
-    val rawLogs = patcherViewModel.logs
+    val rawLogs = patchProgress.logs
     val initialIndex = (rawLogs.size - 1).coerceAtLeast(0)
     val listState = rememberLazyListState(initialFirstVisibleItemIndex = initialIndex)
     val windowSize = rememberWindowSize()
@@ -297,13 +332,17 @@ fun ExpertPatchingInProgress(
                         .fillMaxHeight(),
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    ExpertProgressHeader(
-                        progress = progress,
-                        completed = completed,
-                        total = total,
-                        patcherViewModel = patcherViewModel,
-                        patcherSucceeded = patcherSucceeded
-                    )
+                    Column {
+                        queueHeader?.invoke()
+
+                        ExpertProgressHeader(
+                            progress = progress,
+                            completed = completed,
+                            total = total,
+                            patchProgress = patchProgress,
+                            patcherSucceeded = patcherSucceeded
+                        )
+                    }
 
                     // Action bar inside left column
                     PatcherBottomActionBar(
@@ -326,7 +365,7 @@ fun ExpertPatchingInProgress(
 
                 // Right column: log panel
                 ExpertLogPanel(
-                    patcherViewModel = patcherViewModel,
+                    patchProgress = patchProgress,
                     listState = listState,
                     patcherSucceeded = patcherSucceeded,
                     miniGameState = miniGameState,
@@ -345,16 +384,18 @@ fun ExpertPatchingInProgress(
                     .padding(top = windowSize.contentPadding),
                 verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing)
             ) {
+                queueHeader?.invoke()
+
                 ExpertProgressHeader(
                     progress = progress,
                     completed = completed,
                     total = total,
-                    patcherViewModel = patcherViewModel,
+                    patchProgress = patchProgress,
                     patcherSucceeded = patcherSucceeded
                 )
 
                 ExpertLogPanel(
-                    patcherViewModel = patcherViewModel,
+                    patchProgress = patchProgress,
                     listState = listState,
                     patcherSucceeded = patcherSucceeded,
                     miniGameState = miniGameState,
@@ -397,12 +438,13 @@ private fun ExpertProgressHeader(
     progress: Float,
     completed: Int,
     total: Int,
-    patcherViewModel: PatcherViewModel,
+    patchProgress: PatchProgressSource,
     patcherSucceeded: Boolean? = null
 ) {
-    val currentStep by remember {
+    // Keyed on the run: a queue swaps in a new source without leaving composition
+    val currentStep by remember(patchProgress) {
         derivedStateOf {
-            patcherViewModel.steps.firstOrNull { it.state == State.RUNNING }
+            patchProgress.steps.firstOrNull { it.state == State.RUNNING }
         }
     }
 
@@ -474,8 +516,8 @@ private fun ExpertProgressHeader(
         }
 
         // Memory graph
-        val heapSamples = patcherViewModel.heapSamples
-        val heapLimitMb = patcherViewModel.heapLimitMb
+        val heapSamples = patchProgress.heapSamples
+        val heapLimitMb = patchProgress.heapLimitMb
         AnimatedVisibility(
             visible = heapSamples.isNotEmpty(),
             enter = MorpheAnimations.expandFadeEnter
@@ -581,7 +623,7 @@ private fun HeapUsageGraph(
                 )
             }
 
-            // Bar graph — 60 slots, filled from right
+            // Bar graph - 60 slots, filled from right
             val slotCount = 60
             val padded = List(slotCount - samples.size) { 0 } + samples.takeLast(slotCount)
 
@@ -645,20 +687,20 @@ private fun HeapUsageGraph(
 }
 
 /**
- * Scrollable log panel backed directly by [PatcherViewModel.logs].
+ * Scrollable log panel backed directly by [PatchProgressSource.logs].
  * The header tab row lets the user switch between logs and the mini-game.
  */
 @Composable
 private fun ExpertLogPanel(
     modifier: Modifier = Modifier,
-    patcherViewModel: PatcherViewModel,
+    patchProgress: PatchProgressSource,
     listState: LazyListState,
     patcherSucceeded: Boolean? = null,
     miniGameState: MiniGameState
 ) {
-    val rawLogs = patcherViewModel.logs
+    val rawLogs = patchProgress.logs
     // Convert the full list in one stateful pass so banner cards can aggregate metadata from auxiliary lines
-    val logItems = remember(rawLogs.size) { rawLogs.toLogItems() }
+    val logItems = remember(rawLogs, rawLogs.size) { rawLogs.toLogItems() }
     // 0 = logs, 1 = game
     var activeTab by rememberSaveable { mutableIntStateOf(0) }
     LaunchedEffect(activeTab) {
@@ -841,15 +883,16 @@ private fun PatcherInfoCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 10.dp, vertical = 6.dp),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
         color = bgColor,
         tonalElevation = 0.dp
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 14.dp, vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+                .padding(horizontal = 14.dp, vertical = 10.dp),
+            // Tight, because these cards carry a lot of short fields and are read at a glance
+            verticalArrangement = Arrangement.spacedBy(7.dp)
         ) {
             // Header row: title + optional badge
             Row(
@@ -908,24 +951,15 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
                 value = item.version,
                 modifier = Modifier.weight(1f))
             BannerFieldCell(
-                label = "Patches version",
-                value = item.bundleVersion ?: "?",
+                label = "APK size",
+                value = item.apkSizeMb,
                 modifier = Modifier.weight(1f))
         }
-
-        HorizontalDivider(
-            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-            thickness = 1.dp
-        )
 
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            BannerFieldCell(
-                label = "APK size",
-                value = item.apkSizeMb,
-                modifier = Modifier.weight(1f))
             BannerFieldCell(
                 label = "Patches",
                 value = item.patchCount.toString(),
@@ -938,33 +972,73 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             )
         }
 
-        // Runtime row
-        val runtimeLabel = if (item.runtimeMemoryLimitMb != null) "Process" else "Coroutine"
+        // A cell per source, so a version always sits under the name it belongs to. Laid out
+        // two per row like everything else, and an odd one keeps its half rather than stretching
+        if (item.sources.isEmpty()) {
+            BannerFieldCell(label = "Patches version", value = "?", modifier = Modifier.weight(1f))
+        } else {
+            item.sources.chunked(2).forEach { pair ->
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    pair.forEach { source ->
+                        BannerFieldCell(
+                            label = source.name,
+                            value = source.version ?: "?",
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                    if (pair.size == 1) Spacer(Modifier.weight(1f))
+                }
+            }
+        }
+
+        HorizontalDivider(
+            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+            thickness = 1.dp
+        )
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             BannerFieldCell(
-                label = "Runtime",
-                value = runtimeLabel,
+                label = "Manager",
+                value = item.managerVersion ?: "?",
                 modifier = Modifier.weight(1f))
-            if (item.runtimeMemoryLimitMb != null) {
+            BannerFieldCell(
+                label = "Patcher",
+                value = item.patcherVersion ?: "?",
+                modifier = Modifier.weight(1f))
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            // The heap limit only exists for the process runtime, so it rides along with the
+            // runtime name rather than taking a cell that is empty half the time
+            BannerFieldCell(
+                label = "Runtime",
+                value = item.runtimeMemoryLimitMb
+                    ?.let { "Process $it" }
+                    ?: "Coroutine",
+                modifier = Modifier.weight(1f),
+                valueColor = item.runtimeMemoryLimitMb?.let { MaterialTheme.colorScheme.primary }
+            )
+            item.stripsNativeLibs?.let { strips ->
                 BannerFieldCell(
-                    label = "Heap limit",
-                    value = item.runtimeMemoryLimitMb,
+                    label = "Native libs",
+                    value = if (strips) "stripped" else "kept",
                     modifier = Modifier.weight(1f),
-                    valueColor = MaterialTheme.colorScheme.primary
+                    valueColor = if (strips) MaterialTheme.colorScheme.tertiary else null
                 )
             }
         }
 
         // Device environment only shown when data is available
         if (item.androidVersion != null || item.ramTotal != null || item.deviceManufacturer != null) {
-            HorizontalDivider(
-                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.08f),
-                thickness = 1.dp
-            )
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -1055,9 +1129,10 @@ private fun BannerFieldCell(
     modifier: Modifier = Modifier,
     label: String,
     value: String,
-    valueColor: Color? = null
+    valueColor: Color? = null,
+    maxLines: Int = 1
 ) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(2.dp)) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(1.dp)) {
         Text(
             text = label.uppercase(),
             style = MaterialTheme.typography.labelSmall,
@@ -1072,7 +1147,7 @@ private fun BannerFieldCell(
             fontWeight = FontWeight.Medium,
             color = valueColor ?: MaterialTheme.colorScheme.onSurface,
             fontSize = 11.sp,
-            maxLines = 1,
+            maxLines = maxLines,
             overflow = TextOverflow.Ellipsis
         )
     }

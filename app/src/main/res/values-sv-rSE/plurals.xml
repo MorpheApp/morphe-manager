@@ -40,4 +40,12 @@
         <item quantity="one">%s dold app</item>
         <item quantity="other">%s dolda appar</item>
     </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s app</item>
+        <item quantity="other">%s appar</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Kopierade %s tillägg från det valda paketet</item>
+        <item quantity="other">Kopierade %s tillägg från det valda paketet</item>
+    </plurals>
 </resources>

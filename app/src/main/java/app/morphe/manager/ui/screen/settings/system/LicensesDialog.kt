@@ -8,6 +8,7 @@ package app.morphe.manager.ui.screen.settings.system
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -23,6 +24,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.DialogPadding
+import app.morphe.manager.ui.screen.shared.ListScrollbar
+import app.morphe.manager.ui.screen.shared.LocalDialogHorizontalInset
 import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
 import app.morphe.manager.ui.screen.shared.MorpheDialog
 import app.morphe.manager.ui.screen.shared.MorpheDialogOutlinedButton
@@ -141,7 +144,15 @@ fun LicensesDialog(onDismiss: () -> Unit) {
                 }
             )
 
-            ScrollToTopButton(listState = lazyListState)
+            ListScrollbar(
+                listState = lazyListState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
+
+            ScrollToTopButton(
+                listState = lazyListState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
         }
     }
 }

@@ -91,7 +91,7 @@ fun MorpheDialogButton(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
             )
             Spacer(Modifier.width(8.dp))
         }
@@ -137,7 +137,7 @@ fun MorpheDialogOutlinedButton(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
             )
             Spacer(Modifier.width(8.dp))
         }

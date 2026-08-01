@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Tryk for at gennemgå og fjerne</string>
     <string name="home_metadata_errors_title">Nogle patchkilder er ikke tilgængelige</string>
     <string name="home_metadata_errors_subtitle">Tryk for at gennemgå kilder</string>
+    <string name="home_outdated_manager_title">Morphe er forældet</string>
+    <string name="home_outdated_manager_subtitle">Nogle kilde-feeds kræver en nyere version</string>
     <string name="home_metered_skipped_title">Opdateringer pauset på mobildata</string>
     <string name="home_metered_skipped_subtitle">Tryk for at tillade opdateringer over mobildata</string>
     <string name="home_update_error">Opdatering mislykkedes</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Metadata ikke tilgængelig</string>
     <string name="sources_management_metadata_unavailable_hint">Den eksterne metadatafil er ikke tilgængelig. Opdatering med den installerede pakke fungerer stadig, men automatisk opdatering er deaktiveret for denne kilde</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Opdateringspakken kunne ikke hentes. Kilde-URL\'en kan være forkert, eller filen findes ikke</string>
+    <string name="sources_management_outdated_manager_badge">Opdater Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Denne kilde er bygget til patcher %1$s, men Morphe %2$s indeholder patcher %3$s. Opdater Morphe for at bruge den</string>
     <string name="sources_management_source_enabled">Kilde aktiveret</string>
     <string name="sources_management_source_disabled">Kilde deaktiveret</string>
     <string name="sources_management_source_updating">Opdaterer kilde</string>
@@ -164,10 +168,11 @@
     <string name="home_apk_availability_no">Nej, jeg har allerede en APK</string>
     <string name="home_apk_use_saved">Brug gemt APK</string>
     <string name="home_apk_use_installed">Brug installeret APK</string>
+    <string name="home_apk_use_installed_unverified">Kunne ikke verificere signaturen af den installerede app, så den kan allerede være blevet patchet</string>
     <string name="home_app_info_no_saved_apk">Ingen gemt APK. Patchning kræver at du vælger APK-filen igen</string>
     <string name="home_version_requires_android">Kræver Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ikke understøttet på denne enhed</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har ingen understøttede versioner til Android %2$d (API %3$d). Alle erklærede versioner kræver en højere Android-version</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har ingen understøttede versioner til Android %2$s (API %3$s). Alle deklarerede versioner kræver en højere Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download den originale APK</string>
     <string name="home_download_instructions_steps_title">Instruktioner:</string>
@@ -214,6 +219,8 @@
     <string name="expert_mode_reset_to_default_done">Anbefalede patches anvendt</string>
     <string name="expert_mode_restore_saved">Gendan gemt valg</string>
     <string name="expert_mode_restore_saved_done">Gemt valg er gendannet</string>
+    <string name="expert_mode_copy_from_bundle">Kopier udvalg fra en anden pakke</string>
+    <string name="expert_mode_copy_from_bundle_no_patches">Ingen matchende patches i denne pakke</string>
     <string name="expert_mode_no_results">Ingen patches fundet</string>
     <string name="expert_mode_universal_patches">Universelle patches</string>
     <string name="expert_mode_new_patches">Ny</string>
@@ -241,7 +248,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatible versioner:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Ikke understøttet</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build">Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Dette er en anden build af den samme version. Patchene kræver en specifik build</string>
     <string name="home_dialog_wrong_package_title">Forkert pakke valgt</string>
     <string name="home_dialog_wrong_package_description">Den valgte APK matcher ikke den app, du tilsigtede at patche</string>
@@ -304,6 +311,37 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="header_creator_guide_themes_body">De fleste apps kræver separate billeder til de lyse og mørke temaer. Nogle apps (f.eks. YouTube Music) bruger kun det mørke tema, så kun det afsnit vises.</string>
     <string name="header_creator_guide_positioning_title">Positionering og skalering</string>
     <string name="header_creator_guide_positioning_body">Brug knib-til-zoom og trækbevægelser direkte i forhåndsvisningen for at placere og skalere dit billede. Snappingsguider vises, når billedet er tæt på midten. Du kan også bruge skyderen under forhåndsvisningen.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_progress_counter">Patchet %1$s af %2$s</string>
+    <string name="batch_patch_summary">%1$s patchet, %2$s mislykkedes, %3$s sprunget over</string>
+    <string name="batch_patch_saved_hint">De rettede apps er gemt. Installer dem nu, eller senere fra listen over rettede APK\'er i indstillingerne</string>
+    <string name="batch_patch_multiple_sources">Nogle apps kombinerer patches fra mere end én kilde, hvilket kan forårsage konflikter</string>
+    <string name="batch_patch_needs_apk">Ingen APK tilgængelig, vedhæft en fil</string>
+    <string name="batch_patch_wrong_package">Den vedhæftede fil tilhører %s</string>
+    <string name="batch_patch_version_mismatch">Version %s er ikke understøttet af patchesene</string>
+    <string name="batch_patch_source_saved">Original gemt</string>
+    <string name="batch_patch_source_installed">Installeret app</string>
+    <string name="batch_patch_source_file">Vedhæftet fil</string>
+    <string name="batch_patch_source_unavailable">APK\'en kunne ikke forberedes</string>
+    <string name="batch_patch_attach_apk">Vedhæft APK</string>
+    <string name="batch_patch_force_version">Patch alligevel</string>
+    <string name="batch_patch_edit_patches">Vælg patches</string>
+    <string name="batch_patch_state_no_apk">Ingen APK</string>
+    <string name="batch_patch_state_no_patches">Ingen patches</string>
+    <string name="batch_patch_policy_install">Installer når færdig</string>
+    <string name="batch_patch_policy_install_description">Installerer hver rettet app lige efter køen er afsluttet. Fra giver mulighed for senere installation af APK\'er</string>
+    <string name="batch_patch_start">Start patching</string>
+    <string name="batch_patch_stop_title">Stop batch patching?</string>
+    <string name="batch_patch_stop_description">Appen, der patchess lige nu, og alt, der stadig er i kø, annulleres</string>
+    <string name="batch_patch_install_all">Installer alle</string>
+    <string name="batch_patch_install_failed">Installation mislykkedes</string>
+    <string name="batch_patch_in_progress">Batch patching er allerede i gang</string>
+    <string name="batch_patch_nothing_outdated">Alle rettede apps er opdaterede</string>
+    <string name="shortcut_repatch_short">Genpatch</string>
+    <string name="shortcut_repatch_long">Genpatch forældede apps</string>
+    <string name="shortcut_check_updates_short">Tjek opdateringer</string>
+    <string name="shortcut_check_updates_long">Tjek for patch-opdateringer</string>
+    <string name="shortcut_patch_app">Patch %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Er du sikker på at du vil fjerne denne app? </string>
     <string name="batch_uninstall_confirm_body">De valgte apps vil blive permanent fjernet fra din enhed</string>
@@ -337,7 +375,7 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="root_pre_patch_installer_description">Din enhed har root-adgang. Vælg om denne app skal patchettes til root-montering eller standard installation</string>
     <string name="root_pre_patch_installer_mount_title">Root-monteringstilstand</string>
     <string name="root_pre_patch_installer_mount_description">Patches til root-montering og monterer derefter APK\'en over den matchende standardapp. Intet GmsCore er nødvendigt</string>
-    <string name="root_mount_module_unmount_warning">Hvis du bruger KernelSU eller APatch, skal du deaktivere afmontering eller skjuling af moduler for apps installeret med root mount. Ellers kan stock-appen stadig køre, selvom Morphe viser den som monteret.</string>
+    <string name="root_mount_module_unmount_warning">Hvis KernelSU har Unmount-moduler aktiveret som standard, skal du åbne KernelSU &gt; Superuser &gt; den app, du har monteret &gt; Profil &gt; Custom og deaktivere Unmount-moduler. Ellers kan den monterede patched APK muligvis ikke træde i kraft, selvom Morphe viser, at den er monteret</string>
     <string name="root_pre_patch_installer_standard_title">Standard installationsmode</string>
     <string name="root_pre_patch_installer_standard_description">Patches som en normal APK med GmsCore support. Din installationsindstilling bruges efter patching.</string>
     <string name="root_pre_patch_installer_hint">Denne patch-mode er separat fra Indstillinger > System > Installer og kan ikke ændres efter patching.</string>
@@ -450,8 +488,8 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="failed_to_mount">Kunne ikke montere: %s</string>
     <string name="failed_to_unmount">Kunne ikke afmontere: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Score %d</string>
-    <string name="mini_game_best">Bedste %d</string>
+    <string name="mini_game_score">Score %s</string>
+    <string name="mini_game_best">Bedste %s</string>
     <string name="mini_game_new_record">Ny rekord!</string>
     <string name="mini_game_game_over">Game Over</string>
     <string name="mini_game_try_again">Prøv igen</string>
@@ -494,6 +532,7 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Monokrom</string>
     <string name="settings_appearance_color_style">Farvestil</string>
+    <string name="settings_appearance_colors">Farver</string>
     <string name="settings_appearance_accent_color">Accentfarve</string>
     <string name="settings_appearance_pure_black">Ægte sort</string>
     <string name="settings_appearance_pure_black_description">Brug ægte sort i baggrunde</string>
@@ -510,6 +549,21 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_appearance_app_grouping_description">Vis en hjemmeskærms-skifter til at gruppere apps efter kilde eller dine egne kategorier, og bevar udvælgelsen, når den er slået fra</string>
     <string name="settings_appearance_sort_button">Sortér knap</string>
     <string name="settings_appearance_sort_button_description">Vis sorteringsknappen på startskærmen</string>
+    <string name="settings_appearance_app_card_colors">App-kort farver</string>
+    <string name="settings_appearance_app_card_colors_default">Standard</string>
+    <string name="settings_appearance_app_card_colors_default_description">Giv hver app farven af sin egen bundle</string>
+    <string name="settings_appearance_app_card_colors_accent">Accent</string>
+    <string name="settings_appearance_app_card_colors_accent_description">Brug appens accentfarve til hjem-app kort</string>
+    <string name="settings_appearance_app_card_colors_gradient">Gradient</string>
+    <string name="settings_appearance_app_card_colors_gradient_description">Brug en enkelt brugerdefineret gradient til hjem-app kort</string>
+    <string name="settings_appearance_app_card_colors_solid">Ensfarvet</string>
+    <string name="settings_appearance_app_card_colors_solid_description">Brug en enkelt brugerdefineret farve til hjem-app kort</string>
+    <string name="settings_appearance_app_card_colors_start">Startfarve</string>
+    <string name="settings_appearance_app_card_colors_middle">Mellemfarve</string>
+    <string name="settings_appearance_app_card_colors_end">Slutfarve</string>
+    <string name="settings_appearance_app_card_colors_solid_color">Ensfarvet farve</string>
+    <string name="settings_appearance_app_card_colors_bundle">App-bundelfarve</string>
+    <string name="settings_appearance_app_card_colors_bundle_description">Brug hver apps egen farve her, med automatisk skyggelægning, så den passer</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Appikon</string>
     <string name="settings_appearance_app_icon_default">Standard</string>
@@ -539,7 +593,28 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_advanced_update_interval_monthly">En gang om måneden</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Baggrundsopdateringsfrekvens</string>
     <string name="settings_advanced_update_interval_battery_warning">Baggrundsopdateringer fungerer muligvis ikke på visse enheder. Mærker som Xiaomi, Huawei, Samsung og OnePlus begrænser ofte baggrundsprocesser aggressivt for at spare batteri</string>
+    <string name="settings_advanced_auto_patch">Automatisk genpatchning</string>
+    <string name="settings_advanced_auto_patch_description">Genpatcher installerede apps i baggrunden, når deres patches ændres. Kun apps med en gemt original APK er inkluderet</string>
+    <string name="settings_advanced_auto_patch_interval">Genpatch-frekvens</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Hvor ofte rettede apps genopbygges</string>
+    <string name="settings_advanced_auto_patch_charging">Kun mens der oplades</string>
+    <string name="settings_advanced_auto_patch_charging_description">Patching belaster CPU og hukommelse, så det venter på en oplader</string>
+    <string name="settings_advanced_auto_patch_install">Installer automatisk</string>
+    <string name="settings_advanced_auto_patch_install_description">Kræver Shizuku som installatør. Med andre installatører gemmes de rettede apps kun</string>
+    <string name="settings_advanced_external_batch_patch">Tillad eksterne triggere</string>
+    <string name="settings_advanced_external_batch_patch_description">Lader automatiseringsapps starte batch patching med et intent. Enhver anmodning bekræftes, før noget køres</string>
+    <string name="external_batch_patch_title">Start batch patching?</string>
+    <string name="external_batch_patch_description">%s vil have Morphe til at patche og installere apps</string>
+    <string name="external_batch_patch_trust_caller">Tillad altid denne app</string>
+    <string name="external_batch_patch_unknown_caller">En ukendt app</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Automatisk genpatchning fuldført</string>
+    <string name="notification_auto_patch_running_title">Genpatchning af apps</string>
+    <string name="notification_auto_patch_blocked_title">Automatisk genpatchning blev ikke kørt</string>
+    <string name="notification_auto_patch_blocked_battery">Systemet blokerede denne installation. På Xiaomi og lignende enheder skal du aktivere \"Installer via USB\" i udviklerindstillingerne. På en arbejdsprofil kan installationer være begrænset af politikken</string>
+    <string name="notification_auto_patch_blocked_foreground">Android tillod ikke patching at starte i baggrunden. Åbn Morphe og patch fra appen</string>
+    <string name="notification_channel_auto_patch">Automatisk genpatchning</string>
+    <string name="notification_channel_auto_patch_description">Stille fremskridt og resultatnotifikationer for planlagt genpatchning</string>
     <string name="notification_manager_update_title">Morphe-opdatering tilgængelig</string>
     <string name="notification_bundle_update_title">Nye patches tilgængelige</string>
     <string name="notification_update_text">Version %s er klar til download</string>
@@ -724,7 +799,7 @@ Detaljer: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android blokerede dette, fordi det ville nedgradere den installerede app</string>
     <string name="installer_shizuku_error_signature">Android blokerede dette, fordi den installerede app har en anden signatur</string>
     <string name="installer_shizuku_error_invalid_apk">Android kunne ikke læse denne APK</string>
-    <string name="installer_shizuku_error_user_profile">Android blokerede dette for den aktuelle bruger eller arbejdsprofil</string>
+    <string name="installer_shizuku_error_user_profile">Systemet blokerede denne installation. På Xiaomi og lignende enheder skal du aktivere \"Installer via USB\" i udviklerindstillingerne. På en arbejdsprofil kan installationer være begrænset af politikken</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterioptimering</string>
     <string name="settings_system_battery_optimization_description">Holder patcheren kørende, når appen er minimeret</string>
@@ -860,6 +935,12 @@ Detaljer: %2$s"</string>
     <string name="settings_system_selected_patches_section">Valgte patches</string>
     <string name="settings_system_patch_options_section">Patchvalg</string>
     <string name="settings_system_no_patches_or_options">Ingen patches eller valg gemt</string>
+    <!-- Copy selection from another bundle -->
+    <string name="copy_selection_title">Kopier udvalg fra…</string>
+    <string name="copy_selection_confirm_with_count">Kopier %s</string>
+    <string name="copy_selection_empty">Ingen andre gemte udvalg at kopiere fra</string>
+    <string name="copy_selection_available_format">%1$s af %2$s tilgængelig</string>
+    <string name="copy_selection_same_source">Samme kilde</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Brugerdefineret filvælger</string>
     <string name="settings_system_custom_file_picker_description">Brug Morphes indbyggede filvælger i stedet for systemstandardindstillingen</string>
@@ -901,6 +982,9 @@ Detaljer: %2$s"</string>
     <string name="confirm">Bekræft</string>
     <string name="warning">Advarsel</string>
     <string name="error_">Fejl</string>
+    <string name="failed">Mislykkedes</string>
+    <string name="cancelled">Annulleret</string>
+    <string name="ready">Klar</string>
     <string name="retry">Forsøg igen</string>
     <string name="refresh">Opdater</string>
     <string name="add">Tilføj</string>
@@ -913,6 +997,9 @@ Detaljer: %2$s"</string>
     <string name="delete">Slet</string>
     <string name="delete_all">Slet alle</string>
     <string name="remove">Fjern</string>
+    <string name="exclude">Ekskluder</string>
+    <string name="excluded">Ekskluderet</string>
+    <string name="include">Inkluder</string>
     <string name="disable">Deaktivér</string>
     <string name="enable">Aktiver</string>
     <string name="loading">Indlæser…</string>
@@ -939,13 +1026,15 @@ Detaljer: %2$s"</string>
     <string name="reorder_done">Rækkefølge gemt</string>
     <string name="reset_order">Nulstil rækkefølge</string>
     <string name="reset_order_done">Ordre nulstillet</string>
+    <string name="accessibility_select_app">Vælg app</string>
     <string name="accessibility_move_up">Flyt op</string>
     <string name="accessibility_move_down">Flyt ned</string>
-    <string name="accessibility_app_moved_announcement">%1$s er blevet flyttet til position %2$d ud af %3$d</string>
+    <string name="accessibility_app_moved_announcement">%1$s flyttet til position %2$s af %3$s</string>
     <string name="accessibility_scroll_to_top">Rul til toppen af listen</string>
     <string name="rename">Omdøb</string>
     <string name="import_">Importer</string>
     <string name="export">Eksportér</string>
+    <string name="copy">Kopiér</string>
     <string name="download">Download</string>
     <string name="less">Mindre</string>
     <string name="expand">Udvid</string>
@@ -956,6 +1045,7 @@ Detaljer: %2$s"</string>
     <string name="continue_">Fortsæt</string>
     <string name="version">Version</string>
     <string name="patch">Patch</string>
+    <string name="patching">Patchning</string>
     <string name="repatch">Patch igen</string>
     <string name="open">Åben</string>
     <string name="mount">Monter</string>
@@ -973,7 +1063,6 @@ Detaljer: %2$s"</string>
     <string name="saved">Gemt</string>
     <string name="update">Opdater</string>
     <string name="allow">Tillad</string>
-    <string name="details">Detaljer</string>
     <string name="hide">Skjul</string>
     <string name="hidden">Skjult</string>
     <string name="unhide">Vis</string>
@@ -1007,8 +1096,8 @@ Detaljer: %2$s"</string>
 Vil du stadig fortsætte?"</string>
     <string name="download_update_confirmation">Download opdatering?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d af %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s af %2$s</string>
     <string name="onboarding_sources_desc">Administrer dine patch-kilder. Hver kilde leverer patches, der kan anvendes på dine apps</string>
     <string name="onboarding_swipe_title">Swipe-gestusser</string>
     <string name="onboarding_swipe_desc">Stryg til højre på et app-kort for at se de tilgængelige patches. Stryg til venstre for at skjule kortet fra startskærmen</string>

@@ -11,15 +11,12 @@ import android.os.PowerManager
 import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -67,20 +64,14 @@ fun BackgroundSection(
                 title = stringResource(R.string.settings_system_battery_optimization),
                 subtitle = stringResource(R.string.settings_system_battery_optimization_description),
                 leadingContent = { MorpheIcon(icon = Icons.Outlined.BatterySaver) },
-                trailingContent = {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        StatusCircleIcon(
-                            icon = if (isIgnoringBatteryOptimizations) Icons.Outlined.Check else Icons.Outlined.Warning,
-                            containerColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.primaryContainer
-                            else MaterialTheme.colorScheme.secondaryContainer,
-                            contentColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.onPrimaryContainer
-                            else MaterialTheme.colorScheme.onSecondaryContainer
-                        )
-                        MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                    }
+                statusContent = {
+                    StatusCircleIcon(
+                        icon = if (isIgnoringBatteryOptimizations) Icons.Outlined.Check else Icons.Outlined.Warning,
+                        containerColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.primaryContainer
+                        else MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = if (isIgnoringBatteryOptimizations) MaterialTheme.colorScheme.onPrimaryContainer
+                        else MaterialTheme.colorScheme.onSecondaryContainer
+                    )
                 }
             )
 
@@ -90,8 +81,7 @@ fun BackgroundSection(
                 onClick = onNotificationsClick,
                 title = stringResource(R.string.settings_system_notifications),
                 subtitle = stringResource(R.string.settings_system_notifications_description),
-                leadingContent = { MorpheIcon(icon = Icons.Outlined.NotificationsActive) },
-                trailingContent = { MorpheIcon(icon = Icons.Outlined.ChevronRight) }
+                leadingContent = { MorpheIcon(icon = Icons.Outlined.NotificationsActive) }
             )
         }
     }

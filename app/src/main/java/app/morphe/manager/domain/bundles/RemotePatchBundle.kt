@@ -7,6 +7,7 @@ import app.morphe.manager.network.dto.MorpheAsset
 import app.morphe.manager.network.service.HttpService
 import app.morphe.manager.network.utils.getOrThrow
 import app.morphe.manager.util.ChangelogEntry
+import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.compareVersions
 import app.morphe.manager.util.releasePageUrl
 import io.ktor.client.request.header
@@ -29,6 +30,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
 import java.io.IOException
+import java.util.concurrent.ConcurrentHashMap
 import java.util.zip.ZipInputStream
 
 data class PatchBundleDownloadResult(
@@ -100,14 +102,22 @@ sealed class RemotePatchBundle(
         }
 
     /**
+     * [getLatestInfo] with the manifest page URL remembered, so [browsePageUrl] can use it without
+     * a network request of its own.
+     */
+    private suspend fun latestInfo(): MorpheAsset = getLatestInfo().also { asset ->
+        asset.pageUrl?.let { pageUrls[uid] = it }
+    }
+
+    /**
      * Downloads the latest version regardless if there is a new update available.
      */
     suspend fun downloadLatest(onProgress: PatchBundleDownloadProgress? = null): PatchBundleDownloadResult =
-        download(getLatestInfo(), onProgress)
+        download(latestInfo(), onProgress)
 
     suspend fun update(onProgress: PatchBundleDownloadProgress? = null): PatchBundleDownloadResult? =
         withContext(Dispatchers.IO) {
-            val info = getLatestInfo()
+            val info = latestInfo()
             val remoteCreatedAt = runCatching {
                 info.createdAt.toInstant(TimeZone.UTC).toEpochMilliseconds()
             }.getOrNull()
@@ -128,12 +138,27 @@ sealed class RemotePatchBundle(
         }
         if (cached != null) return cached.asset
 
-        val asset = getLatestInfo()
+        val asset = latestInfo()
         changelogCacheMutex.withLock {
             changelogCache[key] = CachedChangelog(asset, now)
         }
         return asset
     }
+
+    /**
+     * Page URL declared by the manifest of the most recently fetched release, if any.
+     */
+    private val manifestPageUrl: String? get() = pageUrls[uid]
+
+    /**
+     * Where the "open in browser" action takes the user: the source itself, not a single release.
+     *
+     * Hosts other than GitHub and GitLab have no known repository layout, so those fall back to the
+     * page URL the manifest declares and finally to the endpoint, keeping self-hosted sources on
+     * their own server instead of an unrelated repository.
+     */
+    open val browsePageUrl: String
+        get() = inferPageUrlFromEndpoint(endpoint) ?: manifestPageUrl ?: endpoint
 
     /**
      * Shared cache logic for [fetchChangelogEntries] and its overrides.
@@ -179,6 +204,7 @@ sealed class RemotePatchBundle(
 
     fun clearChangelogCache() {
         val assetKey = "$uid|$endpoint"
+        pageUrls.remove(uid)
         changelogCacheMutex.tryLock()
         try {
             changelogCache.remove(assetKey)
@@ -205,8 +231,12 @@ sealed class RemotePatchBundle(
         internal val entriesCacheMutex = Mutex()
         internal val entriesCache = mutableMapOf<String, Pair<Long, List<ChangelogEntry>>>()
 
+        // Manifest page URLs by source uid, kept here because bundle instances are recreated on every reload
+        private val pageUrls = ConcurrentHashMap<Int, String>()
+
         /**
-         * Infer GitHub page URL from various endpoint formats.
+         * Infer the repository page URL from various endpoint formats.
+         * Returns null for hosts other than GitHub and GitLab, whose repository layout is unknown.
          */
         fun inferPageUrlFromEndpoint(endpoint: String): String? {
             return try {
@@ -474,6 +504,9 @@ class APIPatchBundle(
     private val api: MorpheAPI by inject()
 
     override suspend fun getLatestInfo() = api.getPatchesUpdate(usePrerelease).getOrThrow()
+
+    // The endpoint is the API identifier rather than a browsable URL
+    override val browsePageUrl: String get() = SOURCE_REPO_URL
 
     override suspend fun fetchChangelogEntries(sinceVersion: String?): List<ChangelogEntry> {
         val branch = if (usePrerelease) BRANCH_DEV else BRANCH_STABLE

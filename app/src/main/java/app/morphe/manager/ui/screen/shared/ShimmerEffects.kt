@@ -228,8 +228,8 @@ fun ShimmerChangelogHeader() {
  */
 @Composable
 fun ShimmerHeroInfoCard(
-    accentColor: Color = MaterialTheme.colorScheme.primary,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    accentColor: Color = MaterialTheme.colorScheme.primary
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
@@ -275,7 +275,7 @@ fun ShimmerApkItem() {
             ) {
                 ShimmerBox(
                     modifier = Modifier.size(48.dp),
-                    shape = RoundedCornerShape(12.dp)
+                    shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius)
                 )
 
                 Column(

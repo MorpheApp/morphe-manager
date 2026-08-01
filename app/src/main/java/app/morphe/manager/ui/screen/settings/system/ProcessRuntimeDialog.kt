@@ -11,17 +11,18 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.Warning
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import app.morphe.manager.R
 import app.morphe.manager.patcher.runtime.*
 import app.morphe.manager.ui.screen.shared.*
+import kotlin.math.roundToInt
 
 /**
  * Dialog for configuring process runtime settings.
@@ -39,10 +40,9 @@ fun ProcessRuntimeDialog(
     val maxLimit: Int = calculateAdaptiveMemoryLimit(context).coerceIn(
         PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION, PROCESS_RUNTIME_MEMORY_MAX_LIMIT
     )
-    val enabledState = stringResource(R.string.enabled)
-    val disabledState = stringResource(R.string.disabled)
     var enabled by remember { mutableStateOf(currentEnabled) }
     var sliderValue by remember { mutableFloatStateOf(currentLimit.toFloat()) }
+    val selectedLimit = sliderValue.roundToInt()
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -62,29 +62,16 @@ fun ProcessRuntimeDialog(
             verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
         ) {
             // Enable/Disable toggle
-            SettingsItem(
-                onClick = {
+            SettingsSwitchItem(
+                checked = enabled,
+                onToggle = {
                     enabled = !enabled
                     onEnabledChange(enabled)
                 },
-                leadingContent = {
-                    MorpheIcon(icon = Icons.Outlined.Memory)
-                },
+                icon = Icons.Outlined.Memory,
                 title = stringResource(R.string.settings_system_process_runtime_enable),
                 subtitle = stringResource(R.string.settings_system_process_runtime_description),
-                showBorder = true,
-                trailingContent = {
-                    MorpheSwitch(
-                        checked = enabled,
-                        onCheckedChange = {
-                            enabled = it
-                            onEnabledChange(it)
-                        },
-                        modifier = Modifier.semantics {
-                            stateDescription = if (enabled) enabledState else disabledState
-                        }
-                    )
-                }
+                showBorder = true
             )
 
             // Memory limit section
@@ -99,7 +86,7 @@ fun ProcessRuntimeDialog(
                 // Current value display
                 InfoStatBox(
                     modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding),
-                    value = "${sliderValue.toInt()} MB",
+                    value = "$selectedLimit MB",
                     subtitle = stringResource(R.string.settings_system_memory_limit_subtitle),
                     containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
                     valueColor = LocalDialogTextColor.current
@@ -113,7 +100,7 @@ fun ProcessRuntimeDialog(
                     Slider(
                         value = sliderValue,
                         onValueChange = { sliderValue = it },
-                        onValueChangeFinished = { onLimitChange(sliderValue.toInt()) },
+                        onValueChangeFinished = { onLimitChange(selectedLimit) },
                         valueRange = PROCESS_RUNTIME_MEMORY_MINIMUM.toFloat()..maxLimit.toFloat(),
                         steps = (((maxLimit.toDouble() - PROCESS_RUNTIME_MEMORY_MINIMUM)
                                 / PROCESS_RUNTIME_MEMORY_STEP - 1)).toInt(),

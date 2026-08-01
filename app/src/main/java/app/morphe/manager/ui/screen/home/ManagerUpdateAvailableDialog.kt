@@ -7,6 +7,8 @@ package app.morphe.manager.ui.screen.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -175,119 +177,26 @@ fun ManagerUpdateDetailsDialog(
         }
     ) {
         val textColor = LocalDialogTextColor.current
+        val listState = rememberLazyListState()
 
-        LazyColumn(modifier = Modifier.fillMaxWidth()) {
-            when (state) {
-                UpdateViewModel.State.DOWNLOADING -> item("download_progress") {
-                    DownloadProgressSection(
-                        downloadedSize = updateViewModel.downloadedSize,
-                        totalSize = updateViewModel.totalSize,
-                        progress = updateViewModel.downloadProgress,
-                        textColor = textColor
-                    )
-                }
-
-                UpdateViewModel.State.INSTALLING -> item("installing") {
-                    PulsingLogoWithCaption(
-                        caption = stringResource(R.string.installing_manager_update)
-                    )
-                }
-
-                UpdateViewModel.State.FAILED -> {
-                    if (updateViewModel.installError.isNotEmpty()) item("failed_error") {
-                        Surface(
-                            modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(16.dp),
-                            color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
-                        ) {
-                            Column(
-                                modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-                                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
-                            ) {
-                                Row(
-                                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                    verticalAlignment = Alignment.Top
-                                ) {
-                                    MorpheIcon(
-                                        icon = Icons.Outlined.ErrorOutline,
-                                        tint = MaterialTheme.colorScheme.error
-                                    )
-                                    Column(
-                                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                                    ) {
-                                        Text(
-                                            text = stringResource(R.string.install_update_manager_failed),
-                                            style = MaterialTheme.typography.titleSmall,
-                                            fontWeight = FontWeight.Bold,
-                                            color = MaterialTheme.colorScheme.onErrorContainer
-                                        )
-                                        Text(
-                                            text = updateViewModel.installError,
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.8f)
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                UpdateViewModel.State.SUCCESS -> item("success") {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 48.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(20.dp)
-                        ) {
-                            Surface(
-                                shape = CircleShape,
-                                color = MaterialTheme.colorScheme.tertiaryContainer,
-                                modifier = Modifier.size(80.dp)
-                            ) {
-                                Box(contentAlignment = Alignment.Center) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.CheckCircle,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.tertiary,
-                                        modifier = Modifier.size(40.dp)
-                                    )
-                                }
-                            }
-
-                            Text(
-                                text = stringResource(R.string.update_completed),
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onTertiaryContainer,
-                                textAlign = TextAlign.Center
-                            )
-                        }
-                    }
-                }
-
-                UpdateViewModel.State.CAN_DOWNLOAD, UpdateViewModel.State.CAN_INSTALL -> {
-                    val entries = updateViewModel.missedChangelogEntries
-                    if (entries == null) {
-                        item("missed_loading") { ChangelogSectionLoading() }
-                    } else {
-                        changelogEntryItems(
-                            entries = entries,
-                            keyPrefix = "missed",
-                            headerIcon = Icons.Outlined.NewReleases
-                        )
-                        changelogOlderItems(
-                            entries = updateViewModel.olderManagerEntries,
-                            isLoading = updateViewModel.isLoadingOlderEntries,
-                            onExpand = { updateViewModel.loadOlderManagerEntries() }
-                        )
-                    }
-                }
+        Box(modifier = Modifier.fillMaxWidth()) {
+            LazyColumn(state = listState, modifier = Modifier.fillMaxWidth()) {
+                updateDetailsItems(
+                    state = state,
+                    updateViewModel = updateViewModel,
+                    textColor = textColor
+                )
             }
+
+            ListScrollbar(
+                listState = listState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
+
+            ScrollToTopButton(
+                listState = listState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
         }
     }
 
@@ -318,6 +227,125 @@ fun ManagerUpdateDetailsDialog(
                 style = InfoBadgeStyle.Warning,
                 isExpanded = true
             )
+        }
+    }
+}
+
+/** Rows of the update details dialog, one branch per [UpdateViewModel.State]. */
+private fun LazyListScope.updateDetailsItems(
+    state: UpdateViewModel.State,
+    updateViewModel: UpdateViewModel,
+    textColor: Color
+) {
+    when (state) {
+        UpdateViewModel.State.DOWNLOADING -> item("download_progress") {
+            DownloadProgressSection(
+                downloadedSize = updateViewModel.downloadedSize,
+                totalSize = updateViewModel.totalSize,
+                progress = updateViewModel.downloadProgress,
+                textColor = textColor
+            )
+        }
+
+        UpdateViewModel.State.INSTALLING -> item("installing") {
+            PulsingLogoWithCaption(
+                caption = stringResource(R.string.installing_manager_update)
+            )
+        }
+
+        UpdateViewModel.State.FAILED -> {
+            if (updateViewModel.installError.isNotEmpty()) item("failed_error") {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+                ) {
+                    Column(
+                        modifier = Modifier.padding(MorpheDefaults.ContentPadding),
+                        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                    ) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.Top
+                        ) {
+                            MorpheIcon(
+                                icon = Icons.Outlined.ErrorOutline,
+                                tint = MaterialTheme.colorScheme.error
+                            )
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.install_update_manager_failed),
+                                    style = MaterialTheme.typography.titleSmall,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onErrorContainer
+                                )
+                                Text(
+                                    text = updateViewModel.installError,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.8f)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        UpdateViewModel.State.SUCCESS -> item("success") {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 48.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    Surface(
+                        shape = CircleShape,
+                        color = MaterialTheme.colorScheme.tertiaryContainer,
+                        modifier = Modifier.size(80.dp)
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                imageVector = Icons.Outlined.CheckCircle,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.tertiary,
+                                modifier = Modifier.size(40.dp)
+                            )
+                        }
+                    }
+
+                    Text(
+                        text = stringResource(R.string.update_completed),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+        }
+
+        UpdateViewModel.State.CAN_DOWNLOAD, UpdateViewModel.State.CAN_INSTALL -> {
+            val entries = updateViewModel.missedChangelogEntries
+            if (entries == null) {
+                item("missed_loading") { ChangelogSectionLoading() }
+            } else {
+                changelogEntryItems(
+                    entries = entries,
+                    keyPrefix = "missed",
+                    headerIcon = Icons.Outlined.NewReleases
+                )
+                changelogOlderItems(
+                    entries = updateViewModel.olderManagerEntries,
+                    isLoading = updateViewModel.isLoadingOlderEntries,
+                    onExpand = { updateViewModel.loadOlderManagerEntries() }
+                )
+            }
         }
     }
 }

@@ -5,10 +5,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import app.morphe.manager.domain.batch.BatchPatchCoordinator
+import app.morphe.manager.domain.batch.BatchPlanResolver
 import app.morphe.manager.domain.manager.PreferencesManager
+import kotlinx.coroutines.launch
 
 class MainViewModel(
-    val prefs: PreferencesManager
+    val prefs: PreferencesManager,
+    private val batchPlanResolver: BatchPlanResolver,
+    private val batchPatchCoordinator: BatchPatchCoordinator
 ) : ViewModel() {
 
     /**
@@ -40,5 +46,115 @@ class MainViewModel(
      */
     var pendingExternalApkUri: Uri? by mutableStateOf(null)
 
+    /** Batch patch request received from another app, waiting to be gated. */
+    var pendingBatchPatch: BatchPatchRequest? by mutableStateOf(null)
+
+    /** Set by the launcher shortcut, which asks the app to work out what needs re-patching. */
+    var pendingOutdatedBatch by mutableStateOf(false)
+
+    /** Package a per-app launcher shortcut wants the patch dialog opened for. */
+    var pendingPatchPackage: String? by mutableStateOf(null)
+
+    /** Set when an automatic re-patch notification asks to reopen its queue. */
+    var pendingBatchResult by mutableStateOf(false)
+
+    /** True once a shortcut run found nothing to do, so the UI can say so and move on. */
+    var nothingToRepatch by mutableStateOf(false)
+        private set
+
+    /** Request currently shown in the confirmation dialog. */
+    var batchPatchConfirmation: BatchPatchRequest? by mutableStateOf(null)
+        private set
+
+    /** Request the user let through, consumed by the navigation host. */
+    var approvedBatchPatch: BatchPatchRequest? by mutableStateOf(null)
+        private set
+
+    /**
+     * Decides what happens to an incoming batch request. Starting a queue installs software,
+     * so an unknown caller never gets through without the user saying so, and the whole
+     * entry point stays off until it is enabled in settings.
+     */
+    fun onExternalBatchRequest(request: BatchPatchRequest) {
+        pendingBatchPatch = null
+        viewModelScope.launch {
+            if (!prefs.externalBatchPatchEnabled.get()) return@launch
+
+            val caller = request.callerPackage
+            if (caller != null && caller in prefs.externalBatchPatchAllowlist.get()) {
+                approvedBatchPatch = request
+            } else {
+                batchPatchConfirmation = request
+            }
+        }
+    }
+
+    /**
+     * @param trustCaller Remembers the calling package so later requests from it skip the dialog.
+     */
+    fun approveExternalBatch(trustCaller: Boolean) {
+        val request = batchPatchConfirmation ?: return
+        batchPatchConfirmation = null
+        viewModelScope.launch {
+            val caller = request.callerPackage
+            if (trustCaller && caller != null) {
+                prefs.externalBatchPatchAllowlist.update(
+                    prefs.externalBatchPatchAllowlist.get() + caller
+                )
+            }
+            approvedBatchPatch = request
+        }
+    }
+
+    /**
+     * Resolves the apps a launcher shortcut asked to re-patch. No confirmation dialog here:
+     * the request comes from Morphe's own shortcut and only opens the preflight list, which
+     * the user still has to start by hand.
+     */
+    fun onShortcutBatchRequest() {
+        pendingOutdatedBatch = false
+        viewModelScope.launch {
+            val packageNames = batchPlanResolver.findOutdatedPackages()
+            if (packageNames.isEmpty()) {
+                nothingToRepatch = true
+            } else {
+                approvedBatchPatch = BatchPatchRequest(packageNames, callerPackage = null)
+            }
+        }
+    }
+
+    fun consumeNothingToRepatch() {
+        nothingToRepatch = false
+    }
+
+    /**
+     * Reopens the queue an automatic run left behind. Navigating with its own package list
+     * keeps the finished state, which the batch screen would otherwise re-plan away.
+     */
+    fun onShowBatchResult() {
+        pendingBatchResult = false
+        val packageNames = batchPatchCoordinator.state.value?.items?.map { it.packageName }
+        if (packageNames.isNullOrEmpty()) return
+        approvedBatchPatch = BatchPatchRequest(packageNames, callerPackage = null)
+    }
+
+    fun dismissExternalBatch() {
+        batchPatchConfirmation = null
+    }
+
+    fun consumeApprovedBatch() {
+        approvedBatchPatch = null
+    }
+
     data class DeepLinkSource(val url: String, val name: String?)
+
+    /**
+     * A batch patch run requested through [app.morphe.manager.MainActivity.ACTION_BATCH_PATCH].
+     *
+     * @param callerPackage Package that sent the intent, null when it could not be determined.
+     */
+    data class BatchPatchRequest(
+        val packageNames: List<String>,
+        val callerPackage: String?
+    )
 }

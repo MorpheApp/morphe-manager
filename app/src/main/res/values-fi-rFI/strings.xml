@@ -164,10 +164,11 @@
     <string name="home_apk_availability_no">Ei, minulla on jo APK</string>
     <string name="home_apk_use_saved">Käytä tallennettua APK:ta</string>
     <string name="home_apk_use_installed">Käytä asennettua APK:ta</string>
+    <string name="home_apk_use_installed_unverified">Sovelluksen asennetun version allekirjoitusta ei voitu vahvistaa, joten se on ehkä jo muutettu</string>
     <string name="home_app_info_no_saved_apk">Ei tallennettua APK:ta. Muokkaaminen edellyttää APK-tiedoston valitsemista uudelleen.</string>
     <string name="home_version_requires_android">Vaatii Android-version %s tai uudemman</string>
     <string name="home_apk_no_compatible_versions_title">Ei tueta tällä laitteella</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt;-sovellusta ei ole tuettuja versioita Android %2$d -versiolle (API %3$d). Kaikki ilmoitetut versiot vaativat uudemman Android-version</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; -sovellusta ei ole tuettuja versioita Android %2$s -versiolle (API %3$s). Kaikki ilmoitetut versiot vaativat uudemman Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Lataa alkuperäinen APK</string>
     <string name="home_download_instructions_steps_title">Ohjeet:</string>
@@ -214,6 +215,8 @@
     <string name="expert_mode_reset_to_default_done">Suositellut korjaukset asennettu</string>
     <string name="expert_mode_restore_saved">Palauta tallennettu valinta</string>
     <string name="expert_mode_restore_saved_done">Tallennusvalinta palautettu</string>
+    <string name="expert_mode_copy_from_bundle">Kopioi valinta toisesta paketista</string>
+    <string name="expert_mode_copy_from_bundle_no_patches">Tästä paketista ei löytynyt vastaavia korjauksia</string>
     <string name="expert_mode_no_results">Lisäosia ei löytynyt</string>
     <string name="expert_mode_universal_patches">Yleispätevät lisäosat</string>
     <string name="expert_mode_new_patches">Uusi</string>
@@ -242,7 +245,7 @@ Sovelluksen &lt;b&gt;%s&lt;/b&gt; tässä versiossa on varhainen kokeellinen tuk
     <string name="home_dialog_unsupported_version_compatible_versions">Yhteensopivat versiot:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Tukematon</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Rakenna %d</string>
+    <string name="home_dialog_unsupported_version_build">Rakennus %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Tämä on eri rakenne samasta versiosta. Päivitykset vaativat tietyn rakenteen</string>
     <string name="home_dialog_wrong_package_title">Väärä paketti on valittu</string>
     <string name="home_dialog_wrong_package_description">Valittu APK ei ole sovellukselle, jota aioit muokata</string>
@@ -305,6 +308,41 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="header_creator_guide_themes_body">Useimmat sovellukset vaativat erilliset kuvat vaaleaa ja tummaa teemaa varten. Jotkut sovellukset (kuten YouTube Music) käyttävät vain tummaa teemaa, joten vain tämä osio näytetään.</string>
     <string name="header_creator_guide_positioning_title">Sijainti ja skaalaus</string>
     <string name="header_creator_guide_positioning_body">Käytä nipistyszoom- ja vedä-eleitä suoraan esikatselussa kuvan sijoittamiseen ja skaalaamiseen. Ohjaimet näkyvät, kun kuva on lähellä keskustaa. Voit käyttää myös esikatselun alla olevaa liukusäädintä.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Valittu lisäosa</string>
+    <string name="batch_patch_title">Ryhmäkorjaus</string>
+    <string name="batch_patch_planning">Jonon valmistelu…</string>
+    <string name="batch_patch_preparing_next">Seuraavan sovelluksen valmistelu…</string>
+    <string name="batch_patch_progress_counter">Korjattu %1$s / %2$s</string>
+    <string name="batch_patch_summary">%1$s korjattu, %2$s epäonnistui, %3$s ohitettu</string>
+    <string name="batch_patch_saved_hint">Korjatut sovellukset on tallennettu. Asenna ne nyt tai myöhemmin korjattujen APK-tiedostojen luettelosta asetuksista</string>
+    <string name="batch_patch_multiple_sources">Jotkut sovellukset yhdistävät korjauksia useista lähteistä, mikä voi aiheuttaa ristiriitoja</string>
+    <string name="batch_patch_needs_apk">APK-tiedostoa ei ole saatavilla, liitä tiedosto</string>
+    <string name="batch_patch_wrong_package">Liitetty tiedosto kuuluu %s:ään</string>
+    <string name="batch_patch_version_mismatch">Versio %s ei ole korjausten tukema</string>
+    <string name="batch_patch_source_saved">Alkuperäinen tallennettu</string>
+    <string name="batch_patch_source_installed">Asennettu sovellus</string>
+    <string name="batch_patch_source_file">Liitetty tiedosto</string>
+    <string name="batch_patch_source_unavailable">APK-tiedostoa ei voitu valmistella</string>
+    <string name="batch_patch_attach_apk">Liitä APK-tiedosto</string>
+    <string name="batch_patch_force_version">Korjaa joka tapauksessa</string>
+    <string name="batch_patch_edit_patches">Valitse korjaukset</string>
+    <string name="batch_patch_state_no_apk">APK-tiedostoa ei ole</string>
+    <string name="batch_patch_state_no_patches">Ei korjauksia</string>
+    <string name="batch_patch_policy_install">Asenna valmistuttua</string>
+    <string name="batch_patch_policy_install_description">Asentaa jokaisen korjatun sovelluksen heti jonon valmistuttua. Pois käytöstä pitää APK-tiedostot myöhempää käyttöä varten</string>
+    <string name="batch_patch_start">Aloita korjaaminen</string>
+    <string name="batch_patch_stop_title">Lopeta eräkorjaus?</string>
+    <string name="batch_patch_stop_description">Tällä hetkellä korjattava sovellus ja kaikki vielä jonossa olevat sovellukset peruutetaan</string>
+    <string name="batch_patch_install_all">Asenna kaikki</string>
+    <string name="batch_patch_install_failed">Asennus epäonnistui</string>
+    <string name="batch_patch_in_progress">Eräkorjaus on jo käynnissä</string>
+    <string name="batch_patch_nothing_outdated">Kaikki korjatut sovellukset ovat ajan tasalla</string>
+    <string name="shortcut_repatch_short">Korjaa uudelleen</string>
+    <string name="shortcut_repatch_long">Korjaa vanhentuneet sovellukset</string>
+    <string name="shortcut_check_updates_short">Tarkista päivitykset</string>
+    <string name="shortcut_check_updates_long">Tarkista korjauspäivitykset</string>
+    <string name="shortcut_patch_app">Korjaa %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Haluatko varmasti poistaa tämän sovelluksen?</string>
     <string name="batch_uninstall_confirm_body">Valitut sovellukset poistetaan pysyvästi laitteestasi</string>
@@ -338,7 +376,7 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="root_pre_patch_installer_description">Laitteellasi on root-oikeudet. Valitse, tuliko sovelluksen paikkaus tehdä root-asennukselle vai tavalliseen asennukseen</string>
     <string name="root_pre_patch_installer_mount_title">Root-liitostila</string>
     <string name="root_pre_patch_installer_mount_description">Paikkaukset root-liitosta varten ja APK asennetaan vastaavan vakiosovelluksen päälle. GmsCorea ei tarvita.</string>
-    <string name="root_mount_module_unmount_warning">Jos käytät KernelSU:ta tai APatchia, poista moduulin purkaminen tai piilottaminen käytöstä sovelluksille, jotka on asennettu root-liitoksella. Muussa tapauksessa alkuperäinen sovellus saattaa silti käynnistyä, vaikka Morphe näyttäisi sen asennettuna.</string>
+    <string name="root_mount_module_unmount_warning">Jos KernelSU:ssa on oletusarvoisesti asennettuina irrotusmoduulit, avaa KernelSU &gt; Superkäyttäjä &gt; sovellus, jonka asensit &gt; Profiili &gt; Mukautettu ja poista irrotusmoduulit käytöstä. Muuten asennettu korjattu APK ei välttämättä tule voimaan, vaikka Morphe näyttäisi sen asennettuna.</string>
     <string name="root_pre_patch_installer_standard_title">Vakioasennustila</string>
     <string name="root_pre_patch_installer_standard_description">Paikkaa normaalina APK-tiedostona GmsCore-tuella. Asennusasetuksiasi käytetään paikkaamisen jälkeen.</string>
     <string name="root_pre_patch_installer_hint">Tämä paikkaustila on erillinen Asetukset > Järjestelmä > Asennusohjelma -asetuksista, eikä sitä voi muuttaa paikkaamisen jälkeen.</string>
@@ -358,6 +396,10 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="patcher_failed_subtitle">Tarkista virheen tiedot alta</string>
     <string name="patcher_failed_dialog_title">Paikkaus epäonnistui</string>
     <string name="patcher_unknown_error">Tapahtui tuntematon virhe</string>
+    <string name="patcher_split_step_extracting">Ositettujen APK-tiedostojen purkaminen</string>
+    <string name="patcher_split_step_merging">Yhdistetään %s</string>
+    <string name="patcher_split_step_writing">Kirjoitetaan yhdistetty APK</string>
+    <string name="patcher_split_step_finalizing">Viimeistellään yhdistetty APK</string>
     <string name="patcher_conflict_title">Pakettiristiriita</string>
     <string name="patcher_conflict_subtitle">Sinun on poistettava olemassa oleva versio</string>
     <string name="patcher_conflict_hint">Korjattu sovellus käyttää erilaista varmentajaa kuin asennettu versio. Poistaminen poistaa kaikki sovelluksen tiedot</string>
@@ -447,8 +489,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="failed_to_mount">Liittäminen epäonnistui: %s</string>
     <string name="failed_to_unmount">Irrottaminen epäonnistui: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Pisteet %d</string>
-    <string name="mini_game_best">Paras %d</string>
+    <string name="mini_game_score">Pisteet %s</string>
+    <string name="mini_game_best">Paras %s</string>
     <string name="mini_game_new_record">Uusi ennätys!</string>
     <string name="mini_game_game_over">Peli ohi</string>
     <string name="mini_game_try_again">Yritä uudelleen</string>
@@ -491,6 +533,7 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Monokrominen</string>
     <string name="settings_appearance_color_style">Värityyli</string>
+    <string name="settings_appearance_colors">Värit</string>
     <string name="settings_appearance_accent_color">Korostusväri</string>
     <string name="settings_appearance_pure_black">Täysin musta</string>
     <string name="settings_appearance_pure_black_description">Käytä täysin mustia taustoja</string>
@@ -508,6 +551,21 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_app_grouping_description">Näytä kotinäkymän vaihto, jolla voit ryhmitellä sovellukset lähteen tai omien luokkien mukaan ja säilytä valinta, kun se on poissa päältä</string>
     <string name="settings_appearance_sort_button">Lajittelupainike</string>
     <string name="settings_appearance_sort_button_description">Näytä lajittelupainike aloitusnäytöllä</string>
+    <string name="settings_appearance_app_card_colors">Sovelluksen korttien värit</string>
+    <string name="settings_appearance_app_card_colors_default">Oletus</string>
+    <string name="settings_appearance_app_card_colors_default_description">Anna jokaiselle sovellukselle sen oman paketin väri</string>
+    <string name="settings_appearance_app_card_colors_accent">Korostusväri</string>
+    <string name="settings_appearance_app_card_colors_accent_description">Käytä sovelluksen korostusväriä kodin sovelluskorteissa</string>
+    <string name="settings_appearance_app_card_colors_gradient">Liukuväri</string>
+    <string name="settings_appearance_app_card_colors_gradient_description">Käytä yhtä mukautettua liukuväriä kodin sovelluskorteissa</string>
+    <string name="settings_appearance_app_card_colors_solid">Yksivärinen</string>
+    <string name="settings_appearance_app_card_colors_solid_description">Käytä yhtä mukautettua väriä kodin sovelluskorteissa</string>
+    <string name="settings_appearance_app_card_colors_start">Aloitusväri</string>
+    <string name="settings_appearance_app_card_colors_middle">Keski-väri</string>
+    <string name="settings_appearance_app_card_colors_end">Lopetusväri</string>
+    <string name="settings_appearance_app_card_colors_solid_color">Yksivärinen väri</string>
+    <string name="settings_appearance_app_card_colors_bundle">Sovelluksen teemavärit</string>
+    <string name="settings_appearance_app_card_colors_bundle_description">Käytä tässä kunkin sovelluksen omaa väriä, joka on automaattisesti sävytetty sopimaan</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Sovelluskuvake</string>
     <string name="settings_appearance_app_icon_default">Oletus</string>
@@ -537,7 +595,28 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_advanced_update_interval_monthly">Kerran kuukaudessa</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Taustatarkistuksen tiheys</string>
     <string name="settings_advanced_update_interval_battery_warning">Taustatarkistukset eivät välttämättä toimi luotettavasti kaikilla laitteilla. Valmistajat, kuten Xiaomi, Huawei, Samsung ja OnePlus, rajoittavat usein aggressiivisesti taustaprosesseja säästääkseen akkua</string>
+    <string name="settings_advanced_auto_patch">Automaattinen uudelleenkorjaus</string>
+    <string name="settings_advanced_auto_patch_description">Korjaa asennetut sovellukset taustalla, kun niiden korjaukset muuttuvat. Vain sovellukset, joista on tallennettu alkuperäinen APK-tiedosto, kuuluvat korjaukseen</string>
+    <string name="settings_advanced_auto_patch_interval">Uudelleenkorjaustiheys</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Kuinka usein korjatut sovellukset rakennetaan uudelleen</string>
+    <string name="settings_advanced_auto_patch_charging">Vain latauksen aikana</string>
+    <string name="settings_advanced_auto_patch_charging_description">Korjaaminen kuormittaa suoritinta ja muistia, joten se odottaa laturia</string>
+    <string name="settings_advanced_auto_patch_install">Asenna automaattisesti</string>
+    <string name="settings_advanced_auto_patch_install_description">Vaatii Shizukun asentajaksi. Muilla asentajilla korjatut sovellukset tallennetaan vain</string>
+    <string name="settings_advanced_external_batch_patch">Salli ulkoiset käynnistimet</string>
+    <string name="settings_advanced_external_batch_patch_description">Salli automatisointisovellusten aloittaa eräkorjaus intentin avulla. Jokainen pyyntö vahvistetaan ennen suoritusta</string>
+    <string name="external_batch_patch_title">Aloita eräkorjaus?</string>
+    <string name="external_batch_patch_description">%s haluaa Morphen korjata ja asentaa sovelluksia</string>
+    <string name="external_batch_patch_trust_caller">Salli tämä sovellus aina</string>
+    <string name="external_batch_patch_unknown_caller">Tuntematon sovellus</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Automaattinen uudelleenkorjaus valmis</string>
+    <string name="notification_auto_patch_running_title">Korjataan sovelluksia</string>
+    <string name="notification_auto_patch_blocked_title">Automaattinen uudelleenkorjaus ei suoritunut</string>
+    <string name="notification_auto_patch_blocked_battery">Järjestelmä esti tämän asennuksen. Xiaomi- ja vastaavissa laitteissa ota käyttöön \"Asenna USB:n kautta\" kehittäjäasetuksissa. Työprofiilissa asennuksia voidaan rajoittaa käytännöllä</string>
+    <string name="notification_auto_patch_blocked_foreground">Poista Morphe akun optimoinnista, muuten Android lopettaa suorittamisen ennen kuin se on alkanut</string>
+    <string name="notification_channel_auto_patch">Automaattinen uudelleenkorjaus</string>
+    <string name="notification_channel_auto_patch_description">Hiljaiset edistys- ja tulosilmoitukset ajoitetulle uudelleenkorjaukselle</string>
     <string name="notification_manager_update_title">Morphe-päivitys saatavilla</string>
     <string name="notification_bundle_update_title">Uusia lisäosia saatavilla</string>
     <string name="notification_update_text">Versio %s on valmis ladattavaksi</string>
@@ -723,7 +802,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android esti tämän, koska se alentaisi asennettua sovellusta</string>
     <string name="installer_shizuku_error_signature">Android esti tämän, koska asennetulla sovelluksella on eri allekirjoitus</string>
     <string name="installer_shizuku_error_invalid_apk">Android ei pystynyt lukemaan tätä APK:ta</string>
-    <string name="installer_shizuku_error_user_profile">Android esti tämän nykyiselle käyttäjälle tai työprofiilille</string>
+    <string name="installer_shizuku_error_user_profile">Järjestelmä esti tämän asennuksen. Käytä Xiaomi- ja vastaavilla laitteilla \"Asenna USB:n kautta\" -asetusta kehittäjäasetuksissa. Työprofiilissa asennuksia voidaan rajoittaa käytännöillä</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Akun käytön optimointi</string>
     <string name="settings_system_battery_optimization_description">Pitää paikkaajan käynnissä, kun sovellus on pienennetty</string>
@@ -859,6 +938,12 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_selected_patches_section">Valitut lisäosat</string>
     <string name="settings_system_patch_options_section">Lisäosien asetukset</string>
     <string name="settings_system_no_patches_or_options">Ei lisäosia tai asetuksia tallennettu</string>
+    <!-- Copy selection from another bundle -->
+    <string name="copy_selection_title">Kopioi valinta…</string>
+    <string name="copy_selection_confirm_with_count">Kopioi %s</string>
+    <string name="copy_selection_empty">Ei muita tallennettuja valintoja kopioitavaksi</string>
+    <string name="copy_selection_available_format">%1$s / %2$s käytettävissä</string>
+    <string name="copy_selection_same_source">Sama lähde</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Mukautettu tiedostonvalitsin</string>
     <string name="settings_system_custom_file_picker_description">Käytä Morphen sisäänrakennettua tiedostonvalitsinta järjestelmän oletusarvon sijaan</string>
@@ -900,6 +985,9 @@ Yksityiskohdat: %2$s"</string>
     <string name="confirm">Vahvista</string>
     <string name="warning">Varoitus</string>
     <string name="error_">Virhe</string>
+    <string name="failed">Epäonnistui</string>
+    <string name="cancelled">Peruutettu</string>
+    <string name="ready">Valmis</string>
     <string name="retry">Yritä uudelleen</string>
     <string name="refresh">Päivitä</string>
     <string name="add">Lisää</string>
@@ -912,6 +1000,9 @@ Yksityiskohdat: %2$s"</string>
     <string name="delete">Poista</string>
     <string name="delete_all">Poista kaikki</string>
     <string name="remove">Poista</string>
+    <string name="exclude">Sulje pois</string>
+    <string name="excluded">Suljettu pois</string>
+    <string name="include">Sisällytä</string>
     <string name="disable">Poista käytöstä</string>
     <string name="enable">Ota käyttöön</string>
     <string name="loading">Ladataan…</string>
@@ -938,13 +1029,15 @@ Yksityiskohdat: %2$s"</string>
     <string name="reorder_done">Järjestys tallennettu</string>
     <string name="reset_order">Palauta järjestys</string>
     <string name="reset_order_done">Tilaus nollattu</string>
+    <string name="accessibility_select_app">Valitse sovellus</string>
     <string name="accessibility_move_up">Siirrä ylös</string>
     <string name="accessibility_move_down">Siirrä alas</string>
-    <string name="accessibility_app_moved_announcement">%1$s siirrettiin kohtaan %2$d / %3$d</string>
+    <string name="accessibility_app_moved_announcement">%1$s siirrettiin kohtaan %2$s %3$s:sta</string>
     <string name="accessibility_scroll_to_top">Siirry listan alkuun</string>
     <string name="rename">Nimeä uudelleen</string>
     <string name="import_">Tuo</string>
     <string name="export">Vie</string>
+    <string name="copy">Kopioi</string>
     <string name="download">Lataa</string>
     <string name="less">Vähemmän</string>
     <string name="expand">Laajenna</string>
@@ -955,6 +1048,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="continue_">Jatka</string>
     <string name="version">Versio</string>
     <string name="patch">Muokkaa</string>
+    <string name="patching">Korjataan</string>
     <string name="repatch">Muokkaa uudelleen</string>
     <string name="open">Avaa</string>
     <string name="mount">Liitä</string>
@@ -972,7 +1066,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="saved">Tallennettu</string>
     <string name="update">Päivitä</string>
     <string name="allow">Salli</string>
-    <string name="details">Tiedot</string>
     <string name="hide">Piilota</string>
     <string name="hidden">Piilotettu</string>
     <string name="unhide">Näytä</string>
@@ -988,6 +1081,8 @@ Yksityiskohdat: %2$s"</string>
     <string name="changelog_description">Katso tämän päivityksen uusimmat muutokset</string>
     <string name="changelog_download_fail">Muutoslokin lataaminen epäonnistui: %s</string>
     <string name="changelog_empty">Muutoslokia ei ole saatavilla</string>
+    <string name="changelog_show_older">Näytä vanhemmat julkaisut</string>
+    <string name="changelog_older_empty">Ei vanhempia julkaisuja näytettäväksi</string>
     <string name="no_network_toast">Ei internetyhteyttä</string>
     <string name="update_available">Päivitys on saatavilla</string>
     <string name="ready_to_install_update">Valmis asentamaan päivityksen</string>
@@ -1004,8 +1099,8 @@ Yksityiskohdat: %2$s"</string>
 Haluatko silti jatkaa?"</string>
     <string name="download_update_confirmation">Ladataanko päivitys?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d / %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s / %2$s</string>
     <string name="onboarding_sources_desc">Hallitse korjauslähteitäsi. Jokainen lähde tarjoaa korjauksia, jotka voidaan soveltaa sovelluksiisi</string>
     <string name="onboarding_swipe_title">Pyyhkäisyeleet</string>
     <string name="onboarding_swipe_desc">Pyyhkäise oikealle sovelluskortissa nähdäksesi sen käytettävissä olevat korjaukset. Pyyhkäise vasemmalle piilottaaksesi kortin aloitusnäytöltä</string>

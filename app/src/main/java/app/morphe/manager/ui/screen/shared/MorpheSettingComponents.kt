@@ -18,10 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.outlined.ChevronRight
-import androidx.compose.material.icons.outlined.Download
-import androidx.compose.material.icons.outlined.FolderOff
-import androidx.compose.material.icons.outlined.Upload
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -31,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.semantics
@@ -40,6 +38,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.theme.LocalMonochromeTheme
@@ -49,9 +48,13 @@ import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 object MorpheDefaults {
     val CardElevation = 2.dp
     val CardCornerRadius = 16.dp
+    val CompactCornerRadius = 12.dp
     val SettingsCornerRadius = 14.dp
     val SectionCornerRadius = 18.dp
     val IconSize = 24.dp
+    val IconSizeSmall = 20.dp
+
+    val MinTouchTarget = 48.dp
     val ContentPaddingSmall = 8.dp
     val ContentPadding = 16.dp
     val ContentPaddingMedium = 24.dp
@@ -474,12 +477,34 @@ fun SettingsItemCard(
     }
 }
 
-private val defaultChevronTrailing: @Composable () -> Unit = {
-    MorpheIcon(icon = Icons.Outlined.ChevronRight)
+/**
+ * Chevron pointing towards whatever a row navigates to.
+ * Material ships no auto-mirrored variant of [Icons.Outlined.ChevronRight], so RTL layouts
+ * have to be served the mirrored icon explicitly.
+ */
+@Composable
+fun ForwardChevronIcon(
+    modifier: Modifier = Modifier,
+    size: Dp = MorpheDefaults.IconSize,
+    tint: Color = MaterialTheme.colorScheme.primary
+) {
+    MorpheIcon(
+        icon = if (LocalLayoutDirection.current == LayoutDirection.Rtl) {
+            Icons.Outlined.ChevronLeft
+        } else {
+            Icons.Outlined.ChevronRight
+        },
+        modifier = modifier,
+        size = size,
+        tint = tint
+    )
 }
 
 /**
  * Standard settings item. Pass [icon] for a simple icon leading, or [leadingContent] for custom leading.
+ *
+ * [statusContent] is placed ahead of [trailingContent] for rows that show a state indicator
+ * next to the chevron, so call sites do not have to rebuild the trailing row themselves.
  */
 @Composable
 fun SettingsItem(
@@ -490,7 +515,8 @@ fun SettingsItem(
     leadingContent: @Composable (() -> Unit)? = null,
     subtitle: String? = null,
     showBorder: Boolean = false,
-    trailingContent: @Composable (() -> Unit)? = defaultChevronTrailing
+    statusContent: @Composable (() -> Unit)? = null,
+    trailingContent: @Composable (() -> Unit)? = { ForwardChevronIcon() }
 ) {
     SettingsItemCard(
         onClick = onClick,
@@ -502,9 +528,60 @@ fun SettingsItem(
             leadingContent = leadingContent ?: icon?.let { { MorpheIcon(icon = it) } },
             title = title,
             description = subtitle,
-            trailingContent = trailingContent
+            trailingContent = when (statusContent) {
+                null -> trailingContent
+                else -> {
+                    {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            statusContent()
+                            trailingContent?.invoke()
+                        }
+                    }
+                }
+            }
         )
     }
+}
+
+/**
+ * [SettingsItem] trailed by a switch that reflects [checked]. Tapping anywhere on the row
+ * toggles it, so the switch itself stays non-interactive.
+ */
+@Composable
+fun SettingsSwitchItem(
+    checked: Boolean,
+    onToggle: () -> Unit,
+    title: String,
+    modifier: Modifier = Modifier,
+    icon: ImageVector? = null,
+    leadingContent: @Composable (() -> Unit)? = null,
+    subtitle: String? = null,
+    showBorder: Boolean = false
+) {
+    val enabledLabel = stringResource(R.string.enabled)
+    val disabledLabel = stringResource(R.string.disabled)
+
+    SettingsItem(
+        onClick = onToggle,
+        title = title,
+        modifier = modifier,
+        icon = icon,
+        leadingContent = leadingContent,
+        subtitle = subtitle,
+        showBorder = showBorder,
+        trailingContent = {
+            MorpheSwitch(
+                checked = checked,
+                onCheckedChange = null,
+                modifier = Modifier.semantics {
+                    stateDescription = if (checked) enabledLabel else disabledLabel
+                }
+            )
+        }
+    )
 }
 
 /**
@@ -640,7 +717,7 @@ fun InfoStatBox(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
         color = containerColor
     ) {
         Column(
@@ -752,7 +829,7 @@ fun InfoBox(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
         color = containerColor
     ) {
         Row(

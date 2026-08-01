@@ -164,10 +164,11 @@
     <string name="home_apk_availability_no">Não, já tenho um APK</string>
     <string name="home_apk_use_saved">Usar APK salvo</string>
     <string name="home_apk_use_installed">Usar APK instalado</string>
+    <string name="home_apk_use_installed_unverified">Não foi possível verificar a assinatura do aplicativo instalado, portanto, ele pode já estar modificado</string>
     <string name="home_app_info_no_saved_apk">Não existe um APK guardado. A modificação exigirá a seleção do ficheiro APK novamente</string>
     <string name="home_version_requires_android">Requer o Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Não suportado neste dispositivo</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; não tem versões compatíveis para o Android %2$d (API %3$d). Todas as versões declaradas requerem uma versão mais recente do Android</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; não possui versões suportadas para Android %2$s (API %3$s). Todas as versões declaradas requerem uma versão mais recente do Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Transferir o APK original</string>
     <string name="home_download_instructions_steps_title">Instruções:</string>
@@ -214,6 +215,8 @@
     <string name="expert_mode_reset_to_default_done">Modificações recomendadas aplicadas</string>
     <string name="expert_mode_restore_saved">Restaurar seleção guardada</string>
     <string name="expert_mode_restore_saved_done">Seleção guardada restaurada</string>
+    <string name="expert_mode_copy_from_bundle">Copiar seleção de outro pacote</string>
+    <string name="expert_mode_copy_from_bundle_no_patches">Nenhum patch correspondente neste pacote</string>
     <string name="expert_mode_no_results">Nenhuma modificação encontrada</string>
     <string name="expert_mode_universal_patches">Modificações universais</string>
     <string name="expert_mode_new_patches">Novo</string>
@@ -241,7 +244,7 @@ Para obteres os melhores resultados, este ficheiro recomenda a modificação de 
     <string name="home_dialog_unsupported_version_compatible_versions">Versões compatíveis:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Não suportado</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Compilação %d</string>
+    <string name="home_dialog_unsupported_version_build">Compilação %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Esta é uma compilação diferente da mesma versão. Os patches exigem uma compilação específica</string>
     <string name="home_dialog_wrong_package_title">Pacote incorreto selecionado</string>
     <string name="home_dialog_wrong_package_description">O APK selecionado não serve para a aplicação que pretendes modificar</string>
@@ -304,6 +307,39 @@ Zona externa (tracejada): pode ser cortada pela máscara do iniciador - mantenha
     <string name="header_creator_guide_themes_body">A maioria dos aplicativos requer imagens separadas para os temas claro e escuro. Alguns aplicativos (como o YouTube Music) usam apenas o tema escuro, portanto, apenas essa seção é exibida.</string>
     <string name="header_creator_guide_positioning_title">Posicionamento e dimensionamento</string>
     <string name="header_creator_guide_positioning_body">Use gestos de pinça para ampliar e arrastar diretamente na visualização para posicionar e dimensionar sua imagem. Guias de ajuste aparecem quando a imagem está perto do centro. Você também pode usar o controle deslizante abaixo da visualização.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_progress_counter">Corrigido %1$s de %2$s</string>
+    <string name="batch_patch_summary">%1$s corrigidos, %2$s falhados, %3$s ignorados</string>
+    <string name="batch_patch_saved_hint">Os aplicativos corrigidos foram salvos. Instale-os agora ou mais tarde a partir da lista de APKs corrigidos nas configurações</string>
+    <string name="batch_patch_multiple_sources">Alguns aplicativos combinam patches de mais de uma fonte, o que pode causar conflitos</string>
+    <string name="batch_patch_needs_apk">Nenhum APK disponível, anexe um arquivo</string>
+    <string name="batch_patch_wrong_package">O arquivo anexado pertence a %s</string>
+    <string name="batch_patch_version_mismatch">A versão %s não é suportada pelos patches</string>
+    <string name="batch_patch_source_saved">Original salvo</string>
+    <string name="batch_patch_source_installed">Aplicativo instalado</string>
+    <string name="batch_patch_source_file">Arquivo anexado</string>
+    <string name="batch_patch_source_unavailable">O APK não pôde ser preparado</string>
+    <string name="batch_patch_find_apk">Encontrar APK</string>
+    <string name="batch_patch_attach_apk">Anexar APK</string>
+    <string name="batch_patch_force_version">Corrigir de qualquer maneira</string>
+    <string name="batch_patch_force_version_done">Enfileirado de qualquer forma, as correções feitas para outras versões podem quebrar o aplicativo</string>
+    <string name="batch_patch_edit_patches">Escolher patches</string>
+    <string name="batch_patch_state_no_apk">Nenhum APK</string>
+    <string name="batch_patch_state_no_patches">Nenhum patch encontrado</string>
+    <string name="batch_patch_policy_install">Instalar quando terminar</string>
+    <string name="batch_patch_policy_install_description">Instala cada aplicativo corrigido logo após o término da fila. Desativado mantém os APKs para mais tarde</string>
+    <string name="batch_patch_start">Iniciar correção</string>
+    <string name="batch_patch_stop_title">Parar correção em lote?</string>
+    <string name="batch_patch_stop_description">O aplicativo que está sendo corrigido agora e tudo o que ainda está na fila será cancelado</string>
+    <string name="batch_patch_install_all">Instalar tudo</string>
+    <string name="batch_patch_install_failed">Instalação falhou</string>
+    <string name="batch_patch_in_progress">Correção em lote já está em execução</string>
+    <string name="batch_patch_nothing_outdated">Todos os aplicativos corrigidos estão atualizados</string>
+    <string name="shortcut_repatch_short">Refazer correção</string>
+    <string name="shortcut_repatch_long">Refazer correção dos aplicativos desatualizados</string>
+    <string name="shortcut_check_updates_short">Verificar atualizações</string>
+    <string name="shortcut_check_updates_long">Verificar atualizações de patch</string>
+    <string name="shortcut_patch_app">Corrigir %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Tens a certeza de que queres desinstalar esta aplicação?</string>
     <string name="batch_uninstall_confirm_body">Os aplicativos selecionados serão removidos permanentemente do seu dispositivo</string>
@@ -337,7 +373,7 @@ Zona externa (tracejada): pode ser cortada pela máscara do iniciador - mantenha
     <string name="root_pre_patch_installer_description">Seu dispositivo tem acesso root. Escolha se este aplicativo deve ser corrigido para montagem root ou instalação padrão</string>
     <string name="root_pre_patch_installer_mount_title">Modo de montagem root</string>
     <string name="root_pre_patch_installer_mount_description">Patches para montagem root, então monta o APK sobre o aplicativo original correspondente. Nenhum GmsCore necessário</string>
-    <string name="root_mount_module_unmount_warning">Se você usar o KernelSU ou APatch, desative a desmontagem ou ocultação de módulos para aplicativos instalados com montagem root. Caso contrário, o aplicativo original ainda poderá ser executado, mesmo que o Morphe o mostre como montado.</string>
+    <string name="root_mount_module_unmount_warning">Se o KernelSU tiver módulos Desmontar ativados por padrão, abra o KernelSU &gt; Superusuário &gt; o aplicativo que você montou &gt; Perfil &gt; Personalizado e desative os módulos Desmontar. Caso contrário, o APK patch montado pode não ter efeito, mesmo que o Morphe mostre que ele está montado.</string>
     <string name="root_pre_patch_installer_standard_title">Modo de instalação padrão</string>
     <string name="root_pre_patch_installer_standard_description">Patches como um APK normal com suporte ao GmsCore. Sua configuração de instalador será usada após a aplicação do patch.</string>
     <string name="root_pre_patch_installer_hint">Este modo de patch é separado de Configurações > Sistema > Instalador e não pode ser alterado após a aplicação do patch.</string>
@@ -450,8 +486,8 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="failed_to_mount">Erro ao montar: %s</string>
     <string name="failed_to_unmount">Erro ao desmontar: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Pontuação: %d</string>
-    <string name="mini_game_best">Melhor %d</string>
+    <string name="mini_game_score">Pontuação %s</string>
+    <string name="mini_game_best">Melhor %s</string>
     <string name="mini_game_new_record">Novo recorde!</string>
     <string name="mini_game_game_over">Fim de Jogo</string>
     <string name="mini_game_try_again">Tentar novamente</string>
@@ -494,6 +530,7 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Monocromático</string>
     <string name="settings_appearance_color_style">Estilo de cor</string>
+    <string name="settings_appearance_colors">Cores</string>
     <string name="settings_appearance_accent_color">Cor de destaque</string>
     <string name="settings_appearance_pure_black">Preto Puro</string>
     <string name="settings_appearance_pure_black_description">Usar fundos pretos puros</string>
@@ -511,6 +548,21 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="settings_appearance_app_grouping_description">Mostrar um seletor de tela inicial para agrupar aplicativos por origem ou suas próprias categorias, mantendo a seleção quando desativado</string>
     <string name="settings_appearance_sort_button">Botão de ordenar</string>
     <string name="settings_appearance_sort_button_description">Mostrar o botão de ordenar na tela inicial</string>
+    <string name="settings_appearance_app_card_colors">Cores do cartão do aplicativo</string>
+    <string name="settings_appearance_app_card_colors_default">Padrão</string>
+    <string name="settings_appearance_app_card_colors_default_description">Atribua a cada aplicativo a cor do seu próprio pacote</string>
+    <string name="settings_appearance_app_card_colors_accent">Acento</string>
+    <string name="settings_appearance_app_card_colors_accent_description">Use a cor de destaque do aplicativo para os cartões do aplicativo inicial</string>
+    <string name="settings_appearance_app_card_colors_gradient">Gradiente</string>
+    <string name="settings_appearance_app_card_colors_gradient_description">Use um gradiente personalizado para os cartões do aplicativo inicial</string>
+    <string name="settings_appearance_app_card_colors_solid">Sólido</string>
+    <string name="settings_appearance_app_card_colors_solid_description">Use uma cor personalizada para os cartões do aplicativo inicial</string>
+    <string name="settings_appearance_app_card_colors_start">Cor inicial</string>
+    <string name="settings_appearance_app_card_colors_middle">Cor intermediária</string>
+    <string name="settings_appearance_app_card_colors_end">Cor final</string>
+    <string name="settings_appearance_app_card_colors_solid_color">Cor sólida</string>
+    <string name="settings_appearance_app_card_colors_bundle">Cor do pacote de aplicativos</string>
+    <string name="settings_appearance_app_card_colors_bundle_description">Use cada aplicativo\'s cor aqui, sombreada automaticamente para se ajustar</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ícone da aplicação</string>
     <string name="settings_appearance_app_icon_default">Padrão</string>
@@ -540,7 +592,28 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="settings_advanced_update_interval_monthly">Uma vez por mês</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Frequência de verificação em segundo plano</string>
     <string name="settings_advanced_update_interval_battery_warning">As verificações em segundo plano podem não funcionar de forma confiável em alguns dispositivos. Fabricantes como Xiaomi, Huawei, Samsung e OnePlus frequentemente restringem agressivamente os processos em segundo plano para poupar bateria</string>
+    <string name="settings_advanced_auto_patch">Correção automática</string>
+    <string name="settings_advanced_auto_patch_description">Refaz a correção dos aplicativos instalados em segundo plano quando seus patches mudam. Apenas aplicativos com um APK original salvo são cobertos</string>
+    <string name="settings_advanced_auto_patch_interval">Frequência de refazer correção</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Com que frequência os aplicativos corrigidos são reconstruídos</string>
+    <string name="settings_advanced_auto_patch_charging">Apenas enquanto carregando</string>
+    <string name="settings_advanced_auto_patch_charging_description">A correção consome muita CPU e memória, então aguarda um carregador</string>
+    <string name="settings_advanced_auto_patch_install">Instalar automaticamente</string>
+    <string name="settings_advanced_auto_patch_install_description">Requer Shizuku como o instalador. Com qualquer outro instalador, os aplicativos corrigidos são apenas salvos</string>
+    <string name="settings_advanced_external_batch_patch">Permitir gatilhos externos</string>
+    <string name="settings_advanced_external_batch_patch_description">Permite que aplicativos de automação iniciem a correção em lote com uma intent. Cada solicitação é confirmada antes de qualquer execução</string>
+    <string name="external_batch_patch_title">Iniciar correção em lote?</string>
+    <string name="external_batch_patch_description">%s deseja que Morphe corrija e instale aplicativos</string>
+    <string name="external_batch_patch_trust_caller">Sempre permitir este aplicativo</string>
+    <string name="external_batch_patch_unknown_caller">Um aplicativo desconhecido</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Correção automática concluída</string>
+    <string name="notification_auto_patch_running_title">Refazendo a correção dos aplicativos</string>
+    <string name="notification_auto_patch_blocked_title">A correção automática não foi executada</string>
+    <string name="notification_auto_patch_blocked_battery">O sistema bloqueou esta instalação. Em dispositivos Xiaomi e similares, ative \"Instalar via USB\" nas opções do desenvolvedor. Em um perfil de trabalho, as instalações podem ser restritas por política</string>
+    <string name="notification_auto_patch_blocked_foreground">Falhou</string>
+    <string name="notification_channel_auto_patch">Cancelado</string>
+    <string name="notification_channel_auto_patch_description">Pronto</string>
     <string name="notification_manager_update_title">Atualização do Morphe disponível</string>
     <string name="notification_bundle_update_title">Novas modificações disponíveis</string>
     <string name="notification_update_text">Versão %s está pronta para transferir</string>
@@ -574,6 +647,8 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="settings_advanced_github_pat_configured">Token configurado</string>
     <string name="settings_advanced_github_pat_how_to_get">Como obter um token</string>
     <string name="settings_advanced_github_pat_dialog_title">Definir Token de Acesso Pessoal do GitHub (PAT)</string>
+    <string name="settings_advanced_github_pat_dialog_description">"Defina um Token de Acesso Pessoal do GitHub para poder adicionar solicitações de pull como fontes externas. Crie um PAT com scope public_repo na
+%s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Incluir na exportação de definições</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Adiciona este PAT às configurações exportadas do Morphe</string>
     <string name="settings_advanced_github_pat_export_warning">Não partilhes a tua PAT. Se o incluíres numa exportação de definições, mantém esse ficheiro privado pois este contém o token</string>
@@ -724,7 +799,7 @@ Detalhes: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">O Android bloqueou isso porque isso rebaixaria o aplicativo instalado</string>
     <string name="installer_shizuku_error_signature">O Android bloqueou isso porque o aplicativo instalado tem uma assinatura diferente</string>
     <string name="installer_shizuku_error_invalid_apk">O Android não conseguiu ler este APK</string>
-    <string name="installer_shizuku_error_user_profile">O Android bloqueou isso para o usuário ou perfil de trabalho atual</string>
+    <string name="installer_shizuku_error_user_profile">Excluir</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Otimização de bateria</string>
     <string name="settings_system_battery_optimization_description">Mantém o modificador em execução quando a aplicação é minimizada</string>
@@ -860,6 +935,12 @@ Detalhes: %2$s"</string>
     <string name="settings_system_selected_patches_section">Modificações selecionadas</string>
     <string name="settings_system_patch_options_section">Opções de modificação</string>
     <string name="settings_system_no_patches_or_options"> Nenhuma modificação ou opção guardada</string>
+    <!-- Copy selection from another bundle -->
+    <string name="copy_selection_title">Copiar seleção de…</string>
+    <string name="copy_selection_confirm_with_count">Copiar %s</string>
+    <string name="copy_selection_empty">Nenhuma outra seleção salva para copiar</string>
+    <string name="copy_selection_available_format">%1$s de %2$s disponíveis</string>
+    <string name="copy_selection_same_source">Mesma origem</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Seletor de arquivos personalizado</string>
     <string name="settings_system_custom_file_picker_description">Navegue pelo armazenamento com o seletor de arquivos integrado do Morphe, em vez do padrão do sistema</string>
@@ -901,6 +982,9 @@ Detalhes: %2$s"</string>
     <string name="confirm">Confirmar</string>
     <string name="warning">Aviso</string>
     <string name="error_">Erro</string>
+    <string name="failed">Excluído</string>
+    <string name="cancelled">Incluir</string>
+    <string name="ready">Selecionar aplicativo</string>
     <string name="retry">Tentar de novo</string>
     <string name="refresh">Atualizar</string>
     <string name="add">Adicionar</string>
@@ -913,6 +997,9 @@ Detalhes: %2$s"</string>
     <string name="delete">Eliminar</string>
     <string name="delete_all">Eliminar tudo</string>
     <string name="remove">Remover</string>
+    <string name="exclude">Corrigindo</string>
+    <string name="excluded">Excluído</string>
+    <string name="include">Incluir</string>
     <string name="disable">Desativar</string>
     <string name="enable">Ativar</string>
     <string name="loading">A carregar…</string>
@@ -939,13 +1026,15 @@ Detalhes: %2$s"</string>
     <string name="reorder_done">Ordem salva</string>
     <string name="reset_order">Restaurar ordem</string>
     <string name="reset_order_done">Pedido redefinido</string>
+    <string name="accessibility_select_app">Selecionar aplicativo</string>
     <string name="accessibility_move_up">Mover para cima</string>
     <string name="accessibility_move_down">Mover para baixo</string>
-    <string name="accessibility_app_moved_announcement">%1$s movido para a posição %2$d de %3$d</string>
+    <string name="accessibility_app_moved_announcement">%1$s movido para a posição %2$s de %3$s</string>
     <string name="accessibility_scroll_to_top">Ir para o topo da lista</string>
     <string name="rename">Mudar o nome</string>
     <string name="import_">Importar</string>
     <string name="export">Exportar</string>
+    <string name="copy">Copiar</string>
     <string name="download">Transferir</string>
     <string name="less">Menos</string>
     <string name="expand">Expandir</string>
@@ -956,6 +1045,7 @@ Detalhes: %2$s"</string>
     <string name="continue_">Continuar</string>
     <string name="version">Versão</string>
     <string name="patch">Aplicar modificações</string>
+    <string name="patching">A modificar</string>
     <string name="repatch">Modificar de novo</string>
     <string name="open">Abrir</string>
     <string name="mount">Montar</string>
@@ -973,7 +1063,6 @@ Detalhes: %2$s"</string>
     <string name="saved">Guardado</string>
     <string name="update">Atualizar</string>
     <string name="allow">Permitir</string>
-    <string name="details">Detalhes</string>
     <string name="hide">Ocultar</string>
     <string name="hidden">Oculto</string>
     <string name="unhide">Desocultar</string>
@@ -1007,8 +1096,8 @@ Detalhes: %2$s"</string>
 Queres continuar na mesma?"</string>
     <string name="download_update_confirmation">Descarregar atualização?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d de %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s de %2$s</string>
     <string name="onboarding_sources_desc">Gerencie suas fontes de patch. Cada fonte fornece patches que podem ser aplicados aos seus aplicativos.</string>
     <string name="onboarding_swipe_title">Gestos de deslizar</string>
     <string name="onboarding_swipe_desc">Deslize o dedo para a direita em um cartão de aplicativo para visualizar os patches disponíveis. Deslize para a esquerda para ocultar o cartão da tela inicial.</string>

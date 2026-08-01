@@ -1,3 +1,200 @@
+# [1.25.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.10...v1.25.0-dev.11) (2026-08-01)
+
+
+### Bug Fixes
+
+* Reopen the file picker after it was closed without picking ([063093d](https://github.com/MorpheApp/morphe-manager/commit/063093d7d848ef45852ff862d098f88bb25813a9))
+
+
+### Features
+
+* Add APK export and hide install once an app is installed ([6bbfc07](https://github.com/MorpheApp/morphe-manager/commit/6bbfc07cb61415c80cd652b4e11e218ee0504221))
+* Offer to find the right APK from the batch queue ([375da51](https://github.com/MorpheApp/morphe-manager/commit/375da5125d4216211bad8d2233eeb3f8b4c24c71))
+* Warn when a patch source needs a newer version of the manager ([e4d649b](https://github.com/MorpheApp/morphe-manager/commit/e4d649b93b0da592193f2bdcf0f74c05e030340e))
+
+# [1.25.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.9...v1.25.0-dev.10) (2026-08-01)
+
+
+### Features
+
+* Patch several apps in one queue, and keep them patched automatically ([#795](https://github.com/MorpheApp/morphe-manager/issues/795)) ([a3c0427](https://github.com/MorpheApp/morphe-manager/commit/a3c0427756b95773d6a1a3c317c1b88ed641e867))
+
+# [1.25.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.8...v1.25.0-dev.9) (2026-07-30)
+
+
+### Bug Fixes
+
+* Mirror the list scrollbar to the correct side in RTL layouts ([e8fd43b](https://github.com/MorpheApp/morphe-manager/commit/e8fd43b5a2fe835aef4d9ea664e04d679f797262))
+
+# [1.25.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.7...v1.25.0-dev.8) (2026-07-30)
+
+
+### Bug Fixes
+
+* Mirror navigation chevrons and isolate version strings in RTL layouts ([ca60cd0](https://github.com/MorpheApp/morphe-manager/commit/ca60cd05e33ef08d78edf84f2a8592243289e117))
+
+# [1.25.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.6...v1.25.0-dev.7) (2026-07-30)
+
+
+### Bug Fixes
+
+* Correct app status, signature and saved APK checks ([#791](https://github.com/MorpheApp/morphe-manager/issues/791)) ([c47ac44](https://github.com/MorpheApp/morphe-manager/commit/c47ac44050ddaf6fcec5df184f3349244cbb84cc))
+* Derive source page and avatar URLs from the source endpoint ([e1c7fdf](https://github.com/MorpheApp/morphe-manager/commit/e1c7fdf52cd4af131ae92fd1de3a827b4010be3c))
+* Remove app card color mini preview ([b394eb8](https://github.com/MorpheApp/morphe-manager/commit/b394eb8c4319ff16198193b49e204dfd352d208f))
+* Treat a mounted install as patched when picking a patch source ([1d84c9e](https://github.com/MorpheApp/morphe-manager/commit/1d84c9e6fa35a71ea04171f362f84078355697f2))
+
+
+### Features
+
+* Fall back to APK and installer signals when signatures are unreadable ([22b3104](https://github.com/MorpheApp/morphe-manager/commit/22b310468b4e2a98e4152e035d0423cbe12ab8a2))
+
+# [1.25.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.5...v1.25.0-dev.6) (2026-07-29)
+
+
+### Bug Fixes
+
+* Keep patch selection of bundles disabled at patch time ([c0d6b8c](https://github.com/MorpheApp/morphe-manager/commit/c0d6b8cf1415bdaa763f97f5ba6df3f4bbfba4a7))
+
+
+### Features
+
+* Add long-press tooltip to icon-only bottom action bar buttons ([2a5158a](https://github.com/MorpheApp/morphe-manager/commit/2a5158a0ca1b80896662086b2d6c4e014be18b7b))
+* Allow gradient stops to follow the app bundle color ([664e5f2](https://github.com/MorpheApp/morphe-manager/commit/664e5f285edd14f7c51e7454d1db3a37dc7451f3))
+* Show reclaimable size on storage cache clear buttons ([40e093c](https://github.com/MorpheApp/morphe-manager/commit/40e093c1744e0d4dc4758934764e0d526e9a5130))
+
+# [1.25.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.4...v1.25.0-dev.5) (2026-07-29)
+
+
+### Features
+
+* Add a shared list scrollbar across lists and dialogs ([#780](https://github.com/MorpheApp/morphe-manager/issues/780)) ([0d48d36](https://github.com/MorpheApp/morphe-manager/commit/0d48d368f959be3c8ece42563d658bfea548ff91))
+
+# [1.25.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.3...v1.25.0-dev.4) (2026-07-28)
+
+
+### Bug Fixes
+
+* Fetch metadata for newly imported bundles that are disabled ([98af3c6](https://github.com/MorpheApp/morphe-manager/commit/98af3c6783310ec3217eda595e6119ab14fa4369))
+
+
+### Features
+
+* Add home app card color settings ([#777](https://github.com/MorpheApp/morphe-manager/issues/777)) ([18ba4ba](https://github.com/MorpheApp/morphe-manager/commit/18ba4bac4692ea2e357356e0da47eca9679e76da))
+
+# [1.25.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.2...v1.25.0-dev.3) (2026-07-26)
+
+
+### Bug Fixes
+
+* Preserve mount installs for saved APK flows ([#779](https://github.com/MorpheApp/morphe-manager/issues/779)) ([37cabf6](https://github.com/MorpheApp/morphe-manager/commit/37cabf6745d85ba7529f6a9f01ca229212b607fc))
+* Use the typed option API for folder options in Simple mode ([a9e21d8](https://github.com/MorpheApp/morphe-manager/commit/a9e21d810316f6b9406084e5d0900341934415a0))
+
+# [1.25.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.1...v1.25.0-dev.2) (2026-07-25)
+
+
+### Bug Fixes
+
+* Ignore updates of uninstalled apps in category icon tint ([7f1a5f2](https://github.com/MorpheApp/morphe-manager/commit/7f1a5f2a8a9e337eea95c977b4ddb7a360c6b6dc))
+* Open home app list at the top on launch ([829d151](https://github.com/MorpheApp/morphe-manager/commit/829d151338fee1593ad76b5e4a9e78299b0ae756))
+
+# [1.25.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.24.3...v1.25.0-dev.1) (2026-07-25)
+
+
+### Bug Fixes
+
+* Smooth category reorder animation in Custom sort mode ([607890f](https://github.com/MorpheApp/morphe-manager/commit/607890f7871f948a8621a47b24fb4ed3e78cf078))
+
+
+### Features
+
+* Copy patch selection between bundles ([#769](https://github.com/MorpheApp/morphe-manager/issues/769)) ([011b934](https://github.com/MorpheApp/morphe-manager/commit/011b9342200da38eb3e2fdcbbab356fd9e104396))
+* Tint category folder icon when group has pending updates ([849c119](https://github.com/MorpheApp/morphe-manager/commit/849c11996f0ff7c6ad5736ece8d13fbf5a94456d))
+
+## [1.24.3](https://github.com/MorpheApp/morphe-manager/compare/v1.24.2...v1.24.3) (2026-07-23)
+
+
+### Bug Fixes
+
+* Allow root mount when only versionCode differs from patched APK ([#760](https://github.com/MorpheApp/morphe-manager/issues/760)) ([05717c8](https://github.com/MorpheApp/morphe-manager/commit/05717c81874c8a27e0b33d2b00d600a62c0166bf))
+
+## [1.24.2](https://github.com/MorpheApp/morphe-manager/compare/v1.24.1...v1.24.2) (2026-07-23)
+
+
+### Bug Fixes
+
+* Crash opening bundle patches list due to duplicate LazyColumn keys ([77e4c72](https://github.com/MorpheApp/morphe-manager/commit/77e4c7271b949d756dacba895b617dfd66b7bea9))
+
+## [1.24.1](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0...v1.24.1) (2026-07-23)
+
+
+### Bug Fixes
+
+* Crash opening patch list due to duplicate LazyColumn keys ([02e874a](https://github.com/MorpheApp/morphe-manager/commit/02e874aee03791b2ed606b191cb7b7ae62a173cb))
+
+# [1.24.0](https://github.com/MorpheApp/morphe-manager/compare/v1.23.0...v1.24.0) (2026-07-23)
+
+
+### Bug Fixes
+
+* Add confirmation dialog before batch uninstall ([3486b62](https://github.com/MorpheApp/morphe-manager/commit/3486b62a9ee79cc49eb61e21463338651b4aeb63))
+* Align `About section` app-info item style with installer item ([d20d23b](https://github.com/MorpheApp/morphe-manager/commit/d20d23bceaf663e9e30a319f94089cdf2c1d6f7b))
+* Align patch options notices with `InfoBadge` component ([3b7236d](https://github.com/MorpheApp/morphe-manager/commit/3b7236d2c1a1c04ebe3718219451afbfe9ff3531))
+* Center text in translation info dialog and format GitHub PAT link ([74e128c](https://github.com/MorpheApp/morphe-manager/commit/74e128c9c8cfa8147e9fafad44427c5720048bf3))
+* Consistent search field spacing in patch list dialogs ([1103fda](https://github.com/MorpheApp/morphe-manager/commit/1103fda7ea2820e38f7b798257f271d78f198fb5))
+* Correct emoji flag size in language selection card ([72dd679](https://github.com/MorpheApp/morphe-manager/commit/72dd679e7a80d200a127a281a3c0bef326bfa2bd))
+* Dedupe expert-mode UI patterns and reuse shared components ([e172fda](https://github.com/MorpheApp/morphe-manager/commit/e172fda8a66f417a82df724a657693936d777c66))
+* Deduplicate confirmation dialogs with shared `ConfirmDialog` ([f954119](https://github.com/MorpheApp/morphe-manager/commit/f9541196d0f3eefecc419d2b81dd0dce7ff14084))
+* Don't trigger update badge for experimental-version-only changes ([#666](https://github.com/MorpheApp/morphe-manager/issues/666)) ([6854d0f](https://github.com/MorpheApp/morphe-manager/commit/6854d0f1d160c0801fc5e24ef2a4de745b2e5e51))
+* Drop top padding in title-less compact dialogs ([34545e9](https://github.com/MorpheApp/morphe-manager/commit/34545e948a861af2086bfcb76dc0fe66a58c5616))
+* Extract `CardActionRow` and align card paddings ([7d2aabf](https://github.com/MorpheApp/morphe-manager/commit/7d2aabf32c649f1a5651243b83a71e1dec8d9b3d))
+* Extract `SelectionTile` for grid-style appearance pickers ([7274264](https://github.com/MorpheApp/morphe-manager/commit/72742649f06e41988578a31dbe2ea36a178b5544))
+* Fix multiselect mode in APK dialogs ([b6f4f63](https://github.com/MorpheApp/morphe-manager/commit/b6f4f63c7b9fe131981e7fba218670f100452480))
+* Fix spurious patch source badge and refine installer dialog UI ([00059a0](https://github.com/MorpheApp/morphe-manager/commit/00059a050febb9b4fd1af99534039c1bdd262eed))
+* Harden root mount installs ([#737](https://github.com/MorpheApp/morphe-manager/issues/737)) ([5f05273](https://github.com/MorpheApp/morphe-manager/commit/5f0527333c4ac7668eca61fe9db0312a496ba277))
+* Inline `SelectionActionBar` into `MultiSelectBar` and reorder cancel button ([70d7991](https://github.com/MorpheApp/morphe-manager/commit/70d7991458ed41c8c22531df2e95044908f795bd))
+* Keep simple mode patch options rendered on tab re-entry ([fd33414](https://github.com/MorpheApp/morphe-manager/commit/fd3341410f056e0baffe48d303f0d044318dd60b))
+* Migrate `PatchCard` to shared `SettingsItemCard` ([4704c40](https://github.com/MorpheApp/morphe-manager/commit/4704c406c3be2ed9aac02b5c02a30f57620ae552))
+* Migrate language picker to shared `RadioSelectionCard` ([09c760b](https://github.com/MorpheApp/morphe-manager/commit/09c760b60aba85456ac3a14f83ba2c7e00a18e96))
+* Move installer prompt toggle into selection dialog ([9f96f37](https://github.com/MorpheApp/morphe-manager/commit/9f96f375ecdc7b6f69622d3a830d59c67b031562))
+* Normalize expert-mode padding to `MorpheDefaults` ([ecb6c7b](https://github.com/MorpheApp/morphe-manager/commit/ecb6c7bccc288729a5b3154d99eebe7a0bccfb08))
+* Prevent storage dialog crash when segments list is empty ([b155ddb](https://github.com/MorpheApp/morphe-manager/commit/b155ddb40bf84e3691e66aab03ed6b614529d1ff))
+* Replace bundle card toggles with `ToggleRow` and fix expanded card spacing ([3ca5d32](https://github.com/MorpheApp/morphe-manager/commit/3ca5d3281f7699579158baaa0c1281fe06ca3fe1))
+* Replace compactPadding/noPadding booleans with `DialogPadding` enum ([0d7758b](https://github.com/MorpheApp/morphe-manager/commit/0d7758ba623e192986959272bcc6dccd889e5491))
+* Rewrite `CreditsDialog` with Morphe-style components ([2a8eb38](https://github.com/MorpheApp/morphe-manager/commit/2a8eb38f166e464b6501f3fe7557ccc95e1234c5))
+* Share patch list components and consolidate badges ([797004d](https://github.com/MorpheApp/morphe-manager/commit/797004d9c1bb94f4397a43102b84049cad8852a9))
+* Show installer prompt toggle regardless of expert mode ([9ce1857](https://github.com/MorpheApp/morphe-manager/commit/9ce1857d3df7f571bdfe392ad6d87f5af4c376c8))
+* Show intermediate dev versions in changelog dialog ([44a9948](https://github.com/MorpheApp/morphe-manager/commit/44a994824be1fa5d45bbb7e1b3212059ddce9945))
+* Show music note icon for audio files in custom file picker ([ac082cf](https://github.com/MorpheApp/morphe-manager/commit/ac082cf5a3dcd9c4320bbf4da66ba6abeb7072b1))
+* Split `ExpertModeDialog` into focused files ([a9e857c](https://github.com/MorpheApp/morphe-manager/commit/a9e857c9c82fea373c3dd422b60432ef7b631e5c))
+* Split `SectionsLayout` into focused files ([56085e0](https://github.com/MorpheApp/morphe-manager/commit/56085e096308ac1a49a4549a2e961e7485ff65e8))
+* Top-align list-based dialogs and dedupe `MorpheDialog` ([c012263](https://github.com/MorpheApp/morphe-manager/commit/c01226307b3d6d78155f3df352005b724b967d72))
+* Unify `RadioSelectionCard` visuals across dialogs ([885dd2d](https://github.com/MorpheApp/morphe-manager/commit/885dd2d2b19606cd2ccb22b19f2f902044b63e58))
+* Unify settings tabs with `SettingsGroup` and consolidate item components ([3277958](https://github.com/MorpheApp/morphe-manager/commit/32779585a6103643116a34855a8ae36b0626f909))
+* Use correct `ChangelogEntryHeader` color ([83bc437](https://github.com/MorpheApp/morphe-manager/commit/83bc437ae19effa851d5f9cc4ad2f4626ef699eb))
+* Wrap `AboutSection` items in `SettingsGroup` ([2367e6c](https://github.com/MorpheApp/morphe-manager/commit/2367e6c82ac1d020c46f3782ab9d084469e66af1))
+
+
+### Features
+
+* Add APK retention toggles in storage management ([c57edb7](https://github.com/MorpheApp/morphe-manager/commit/c57edb7692f249e7b81450082bd076b16bc40a13))
+* Add batch app uninstall and reinstall actions ([#739](https://github.com/MorpheApp/morphe-manager/issues/739)) ([998e943](https://github.com/MorpheApp/morphe-manager/commit/998e94394ddff1bbee5e8c41d7091dff3b1cd4ab))
+* Add footer section to `RadioSelectionCard` and apply it to installer options ([ecfaf03](https://github.com/MorpheApp/morphe-manager/commit/ecfaf03c00ad36fc551dbd4f410eeb8f7d72669a))
+* Add home app grouping controls ([#725](https://github.com/MorpheApp/morphe-manager/issues/725)) ([6b10955](https://github.com/MorpheApp/morphe-manager/commit/6b109551655cf0b296468edd5767e93e247ccb87))
+* Add monochrome theme ([#740](https://github.com/MorpheApp/morphe-manager/issues/740)) ([1e3d0b7](https://github.com/MorpheApp/morphe-manager/commit/1e3d0b7591f8eb952f5b3d79b9f9a05f0518b711))
+* Add patcher notification sounds with settings toggle and reorganize settings tabs ([51dda37](https://github.com/MorpheApp/morphe-manager/commit/51dda37f61e229b30e7dca4dbd542899718bc86a))
+* Add press-scale animation to `ActionPillButton` ([6721137](https://github.com/MorpheApp/morphe-manager/commit/6721137320dace79180aef40ae031451ad2a19fb))
+* Add sort button visibility toggle in Appearance settings ([c3c5e8b](https://github.com/MorpheApp/morphe-manager/commit/c3c5e8b86bf8224afff2384ab9843904a883b080))
+* Add source labels and versions to patch source picker ([0b3f299](https://github.com/MorpheApp/morphe-manager/commit/0b3f299d6f05d50535b0570e565ca9aaf818c806))
+* Add storage and cache management dialog ([#714](https://github.com/MorpheApp/morphe-manager/issues/714)) ([f8e354d](https://github.com/MorpheApp/morphe-manager/commit/f8e354d55ac08504212077b2d52b9257c98ed122))
+* Add typed patch options ([#706](https://github.com/MorpheApp/morphe-manager/issues/706)) ([52727a4](https://github.com/MorpheApp/morphe-manager/commit/52727a42e14b0b478bd80343880b411021a3cc5e))
+* Animate `HeroInfoCard` in APK management dialogs with shimmer and counter transitions ([f98a602](https://github.com/MorpheApp/morphe-manager/commit/f98a6026b3ff3e5b27b85605ca44bf653cd0f29b))
+* Display CPU architecture in saved and patched APK cards ([1d2b6e8](https://github.com/MorpheApp/morphe-manager/commit/1d2b6e8304a3ff3467e7f880d64bd028546289aa))
+* Improve Shizuku installer flow ([#734](https://github.com/MorpheApp/morphe-manager/issues/734)) ([08ab696](https://github.com/MorpheApp/morphe-manager/commit/08ab6967de5baaebb1fa4354488abc9a1e9e65be))
+* Redesign `InstalledAppInfoDialog` with Morphe-style components and layout improvements ([d9e4ef3](https://github.com/MorpheApp/morphe-manager/commit/d9e4ef30d07577c973c008330d599d1c8c1e633f))
+* Redesign `PatchListComponents` with Morphe-style components and layout improvements ([d733da6](https://github.com/MorpheApp/morphe-manager/commit/d733da626d51dc87801107bcc06612ee48af3617))
+* Redesign destructive confirmation dialogs ([85dfad9](https://github.com/MorpheApp/morphe-manager/commit/85dfad99455c2203c2327e70ad307566386e5b9e))
+* Route add-source through the website and enforce a remote blocklist ([#715](https://github.com/MorpheApp/morphe-manager/issues/715)) ([8f1494e](https://github.com/MorpheApp/morphe-manager/commit/8f1494ef97a6f2c3f401ee5acbefafaceeb35dca))
+
 # [1.24.0-dev.14](https://github.com/MorpheApp/morphe-manager/compare/v1.24.0-dev.13...v1.24.0-dev.14) (2026-07-21)
 
 

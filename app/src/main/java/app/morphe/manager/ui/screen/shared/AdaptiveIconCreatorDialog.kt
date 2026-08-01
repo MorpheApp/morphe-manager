@@ -514,7 +514,7 @@ fun AdaptiveIconCreatorDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
                     color = swatchColor,
                     border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline)
                 ) {
@@ -764,7 +764,7 @@ private fun StatusBarPreview(
     val contentColor = MaterialTheme.colorScheme.onSurface
     val guideColor = contentColor.copy(alpha = 0.5f)
     val dashEffect = remember { PathEffect.dashPathEffect(floatArrayOf(3f, 3f), 0f) }
-    val shape = RoundedCornerShape(12.dp)
+    val shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius)
     // Capture RGB components for use inside Canvas DrawScope
     val iconR = contentColor.red * 255f
     val iconG = contentColor.green * 255f
@@ -844,19 +844,19 @@ private fun StatusBarPreview(
             Icon(
                 imageVector = Icons.Outlined.SignalCellular4Bar,
                 contentDescription = null,
-                modifier = Modifier.size(20.dp),
+                modifier = Modifier.size(MorpheDefaults.IconSizeSmall),
                 tint = contentColor
             )
             Icon(
                 imageVector = Icons.Outlined.Wifi,
                 contentDescription = null,
-                modifier = Modifier.size(20.dp),
+                modifier = Modifier.size(MorpheDefaults.IconSizeSmall),
                 tint = contentColor
             )
             Icon(
                 imageVector = Icons.Outlined.BatteryFull,
                 contentDescription = null,
-                modifier = Modifier.size(20.dp),
+                modifier = Modifier.size(MorpheDefaults.IconSizeSmall),
                 tint = contentColor
             )
         }

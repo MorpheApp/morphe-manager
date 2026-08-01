@@ -25,24 +25,32 @@
         <item quantity="other">%s APK fájl</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">%d alkalmazás telepítve</item>
-        <item quantity="other">%d alkalmazás telepítve</item>
+        <item quantity="one">%s alkalmazás telepítve</item>
+        <item quantity="other">%s alkalmazás telepítve</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">%d alkalmazás újratelepítve</item>
-        <item quantity="other">%d alkalmazás újratelepítve</item>
+        <item quantity="one">%s alkalmazás újra telepítve</item>
+        <item quantity="other">%s alkalmazás újra telepítve</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">%d alkalmazás eltávolítva</item>
-        <item quantity="other">%d alkalmazás eltávolítva</item>
+        <item quantity="one">%s alkalmazás eltávolítva</item>
+        <item quantity="other">%s alkalmazás eltávolítva</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">%d alkalmazás eltávolítása?</item>
-        <item quantity="other">%d alkalmazás eltávolítása?</item>
+        <item quantity="one">Eltávolítja az %s alkalmazást?</item>
+        <item quantity="other">Eltávolítja az %s alkalmazásokat?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s alkalmazás javításra kész</item>
+        <item quantity="other">%s alkalmazás javításra kész</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%s alkalmazás telepítésre kész</item>
+        <item quantity="other">%s alkalmazás telepítésre kész</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">%d alkalmazás kihagyva</item>
-        <item quantity="other">%d alkalmazás kihagyva</item>
+        <item quantity="one">%s alkalmazás kihagyva</item>
+        <item quantity="other">%s alkalmazás kihagyva</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">%s elavult módosítás eltávolítva a mentett kiválasztásból</item>
@@ -63,5 +71,9 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s alkalmazás</item>
         <item quantity="other">%s alkalmazások</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Másolta a kiválasztott csomagból a(z) %s javítást</item>
+        <item quantity="other">Másolta a kiválasztott csomagból a(z) %s javításokat</item>
     </plurals>
 </resources>

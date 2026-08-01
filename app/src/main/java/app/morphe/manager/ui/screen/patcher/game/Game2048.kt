@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import kotlin.math.abs
 import kotlin.random.Random
 
@@ -189,7 +190,7 @@ private fun BoardGrid(state: Game2048State, size: Dp) {
     Box(
         modifier = Modifier
             .size(size)
-            .background(BoardBg, RoundedCornerShape(12.dp))
+            .background(BoardBg, RoundedCornerShape(MorpheDefaults.CompactCornerRadius))
             .pointerInput(Unit) {
                 var drag = Offset.Zero
                 detectDragGestures(

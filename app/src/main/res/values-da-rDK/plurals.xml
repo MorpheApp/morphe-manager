@@ -25,24 +25,32 @@
         <item quantity="other">%s APK-filer</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">Installeret %d app</item>
-        <item quantity="other">Installeret %d apps</item>
+        <item quantity="one">Installeret %s app</item>
+        <item quantity="other">Installeret %s apps</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">Geninstalleret %d app</item>
-        <item quantity="other">Geninstalleret %d apps</item>
+        <item quantity="one">Geninstalleret %s app</item>
+        <item quantity="other">Geninstalleret %s apps</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">Afinstalleret %d app</item>
-        <item quantity="other">Afinstalleret %d apps</item>
+        <item quantity="one">Afinstalleret %s app</item>
+        <item quantity="other">Afinstalleret %s apps</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">Afinstaller %d app?</item>
-        <item quantity="other">Afinstaller %d apps?</item>
+        <item quantity="one">Afinstaller %s app?</item>
+        <item quantity="other">Afinstaller %s apps?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s app klar til patching</item>
+        <item quantity="other">%s apps klar til patching</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%s app er klar til installation</item>
+        <item quantity="other">%s apps er klar til installation</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">Spundet over %d app</item>
-        <item quantity="other">Spundet over %d apps</item>
+        <item quantity="one">Springet %s app over</item>
+        <item quantity="other">Springet %s apps over</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Fjernet %s forældet patch fra gemt udvalg</item>
@@ -63,5 +71,9 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s app</item>
         <item quantity="other">%s apps</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Kopierede %s patch fra det valgte bundle</item>
+        <item quantity="other">Kopierede %s patches fra det valgte bundle</item>
     </plurals>
 </resources>

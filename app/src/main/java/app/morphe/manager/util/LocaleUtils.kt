@@ -12,6 +12,9 @@ import java.util.Locale
 private const val LOCALE_PREFS_NAME = "morphe_locale"
 private const val LOCALE_PREF_KEY = "app_language"
 
+private const val LEFT_TO_RIGHT_ISOLATE = '\u2066'
+private const val POP_DIRECTIONAL_ISOLATE = '\u2069'
+
 /**
  * Persist [code] to SharedPreferences so it is readable from attachBaseContext
  * before the Koin DataStore singleton is available.
@@ -71,6 +74,12 @@ fun parseLocalesConfig(): List<String> = listOf(
     "sw-KE", "ta-IN", "te-IN", "th-TH", "tr-TR", "uk-UA", "ur-IN", "uz-UZ",
     "vi-VN", "zh-CN", "zh-TW", "zu-ZA"
 )
+
+/**
+ * Wraps the string in Unicode isolate marks so a left-to-right token (version name, URL,
+ * package name) keeps its internal order when placed inside right-to-left UI text.
+ */
+fun String.isolateLtr(): String = "$LEFT_TO_RIGHT_ISOLATE$this$POP_DIRECTIONAL_ISOLATE"
 
 /**
  * Apply the app language to the entire application process via

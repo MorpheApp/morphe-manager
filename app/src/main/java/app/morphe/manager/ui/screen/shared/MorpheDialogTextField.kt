@@ -166,7 +166,7 @@ fun MorpheDialogTextField(
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
         colors = morpheDialogTextFieldColors(textColor)
     )
 }
@@ -290,7 +290,7 @@ fun MorpheDialogDropdownTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(focusRequester),
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
             colors = morpheDialogTextFieldColors(textColor)
         )
 

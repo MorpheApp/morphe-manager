@@ -29,6 +29,28 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.toast
 
 /**
+ * Everything [MultiSelectBar] renders from state its own actions clear, kept together so it
+ * can be frozen as a single value while the bar slides out. Anything that changes as a result
+ * of using the bar belongs here rather than being read straight from a parameter.
+ */
+private data class MultiSelectDisplay(
+    val count: Int,
+    val total: Int,
+    val inReorderMode: Boolean,
+    val contextIcon: ImageVector?,
+    val contextDescription: String?,
+    val contextColors: IconButtonColors,
+    val onContextAction: (() -> Unit)?
+)
+
+/** The same, for [CategoryActionBar]. */
+private data class CategoryDisplay(
+    val title: String?,
+    val inReorderMode: Boolean,
+    val showEditActions: Boolean
+)
+
+/**
  * Animated confirmation bar that slides up from the bottom of the card list
  * when the user is in multi-select mode.
  */
@@ -59,10 +81,9 @@ internal fun MultiSelectBar(
     contextActionIcon: ImageVector? = null,
     contextActionContentDescription: String? = null,
     contextActionColors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors(),
-    onMoveToCategory: (() -> Unit)? = null
+    onMoveToCategory: (() -> Unit)? = null,
+    onPatchSelected: (() -> Unit)? = null
 ) {
-    val effectiveReorderMode = isReorderMode && showReorderButton
-
     val context = LocalContext.current
     fun withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
         context.toast(doneMessage)
@@ -82,13 +103,28 @@ internal fun MultiSelectBar(
     val deselectAllLabel = stringResource(R.string.deselect_all)
     val deselectAllDone = stringResource(R.string.deselect_all_done)
     val selectedLabel = stringResource(R.string.selected).lowercase()
-    val allSelected = selectedCount >= totalCount && totalCount > 0
+    val patchSelectedLabel = stringResource(R.string.batch_patch_action)
+
+    val selection = rememberWhileVisible(
+        visible,
+        MultiSelectDisplay(
+            count = selectedCount,
+            total = totalCount,
+            inReorderMode = isReorderMode && showReorderButton,
+            contextIcon = contextActionIcon,
+            contextDescription = contextActionContentDescription,
+            contextColors = contextActionColors,
+            onContextAction = onContextAction
+        )
+    )
+
+    val allSelected = selection.total in 1..selection.count
     val selectionToggleLabel = if (allSelected) deselectAllLabel else selectAllLabel
     val selectionToggleDone = if (allSelected) deselectAllDone else selectAllDone
 
     MultiSelectShell(visible = visible, modifier = modifier) {
         AnimatedContent(
-            targetState = effectiveReorderMode,
+            targetState = selection.inReorderMode,
             transitionSpec = MorpheAnimations.fadeCrossfade(200),
             label = "multibar_mode"
         ) { inReorder ->
@@ -135,7 +171,7 @@ internal fun MultiSelectBar(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     AnimatedContent(
-                        targetState = selectedCount,
+                        targetState = selection.count,
                         transitionSpec = MorpheAnimations.compactCounterTransitionSpec,
                         label = "multibar_count"
                     ) { count ->
@@ -153,25 +189,41 @@ internal fun MultiSelectBar(
                             icon = if (allSelected) Icons.Outlined.RemoveDone else Icons.Outlined.DoneAll,
                             contentDescription = selectionToggleLabel,
                             tooltip = selectionToggleLabel,
-                            enabled = totalCount > 0
+                            enabled = selection.total > 0
                         )
+                        if (onPatchSelected != null) {
+                            ActionPillButton(
+                                onClick = onPatchSelected,
+                                icon = Icons.Outlined.AutoFixHigh,
+                                contentDescription = patchSelectedLabel,
+                                tooltip = patchSelectedLabel,
+                                enabled = selection.count > 0,
+                                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                                )
+                            )
+                        }
                         if (onMoveToCategory != null) {
                             ActionPillButton(
                                 onClick = onMoveToCategory,
                                 icon = Icons.Outlined.FolderOpen,
                                 contentDescription = moveToCategoryLabel,
                                 tooltip = moveToCategoryLabel,
-                                enabled = selectedCount > 0
+                                enabled = selection.count > 0
                             )
                         }
-                        if (onContextAction != null && contextActionIcon != null && contextActionContentDescription != null) {
+                        val contextIcon = selection.contextIcon
+                        val contextDescription = selection.contextDescription
+                        val contextAction = selection.onContextAction
+                        if (contextIcon != null && contextDescription != null && contextAction != null) {
                             ActionPillButton(
-                                onClick = onContextAction,
-                                icon = contextActionIcon,
-                                contentDescription = contextActionContentDescription,
-                                tooltip = contextActionContentDescription,
-                                enabled = selectedCount > 0,
-                                colors = contextActionColors
+                                onClick = contextAction,
+                                icon = contextIcon,
+                                contentDescription = contextDescription,
+                                tooltip = contextDescription,
+                                enabled = selection.count > 0,
+                                colors = selection.contextColors
                             )
                         }
                         ActionPillButton(
@@ -179,7 +231,7 @@ internal fun MultiSelectBar(
                             icon = actionIcon,
                             contentDescription = actionContentDescription,
                             tooltip = actionContentDescription,
-                            enabled = selectedCount > 0,
+                            enabled = selection.count > 0,
                             colors = actionColors
                         )
                         if (showReorderButton) {
@@ -188,7 +240,7 @@ internal fun MultiSelectBar(
                                 icon = Icons.Outlined.Reorder,
                                 contentDescription = reorderListLabel,
                                 tooltip = reorderListLabel,
-                                enabled = selectedCount > 0
+                                enabled = selection.count > 0
                             )
                         }
                         ActionPillButton(
@@ -232,9 +284,18 @@ internal fun CategoryActionBar(
         contentColor = MaterialTheme.colorScheme.onErrorContainer
     )
 
+    val category = rememberWhileVisible(
+        visible,
+        CategoryDisplay(
+            title = activeCategoryTitle,
+            inReorderMode = isReorderMode,
+            showEditActions = showEditActions
+        )
+    )
+
     MultiSelectShell(visible = visible, modifier = modifier) {
         AnimatedContent(
-            targetState = isReorderMode,
+            targetState = category.inReorderMode,
             transitionSpec = MorpheAnimations.fadeCrossfade(200),
             label = "category_bar_mode"
         ) { inReorder ->
@@ -260,9 +321,10 @@ internal fun CategoryActionBar(
                         )
                     }
                 } else {
-                    if (activeCategoryTitle != null) {
+                    val title = category.title
+                    if (title != null) {
                         Text(
-                            text = activeCategoryTitle,
+                            text = title,
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             maxLines = 1,
@@ -270,7 +332,7 @@ internal fun CategoryActionBar(
                         )
                     }
                     ActionPillRow {
-                        if (showEditActions) {
+                        if (category.showEditActions) {
                             ActionPillButton(
                                 onClick = onRename,
                                 icon = Icons.Outlined.Edit,
@@ -284,7 +346,7 @@ internal fun CategoryActionBar(
                             contentDescription = reorderListLabel,
                             tooltip = reorderListLabel
                         )
-                        if (showEditActions) {
+                        if (category.showEditActions) {
                             ActionPillButton(
                                 onClick = onDelete,
                                 icon = Icons.Outlined.Delete,

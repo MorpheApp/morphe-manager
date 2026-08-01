@@ -1,22 +1,22 @@
 package app.morphe.manager.patcher.worker
 
 import android.annotation.SuppressLint
-import android.app.*
+import android.app.ActivityManager
+import android.app.Notification
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.graphics.drawable.Icon
-import android.media.AudioAttributes
-import android.media.AudioManager
-import android.media.Ringtone
-import android.media.RingtoneManager
-import android.net.Uri
-import android.os.*
+import android.os.Build
+import android.os.PowerManager
+import android.os.StatFs
 import android.util.Log
-import androidx.core.net.toUri
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
+import app.morphe.manager.BuildConfig
 import app.morphe.manager.MainActivity
 import app.morphe.manager.ManagerApplication
 import app.morphe.manager.R
@@ -31,6 +31,7 @@ import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.worker.Worker
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.logger.Logger
+import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.runtime.CoroutineRuntime
 import app.morphe.manager.patcher.runtime.ProcessRuntime
 import app.morphe.manager.patcher.split.SplitApkPreparer
@@ -67,10 +68,20 @@ class PatcherWorker(
         val onPatchCompleted: suspend () -> Unit,
         val setInputFile: suspend (File, Boolean, Boolean) -> Unit,
         val onProgress: ProgressEventHandler,
-        val bundleVersions: List<String> = emptyList()
+        val patchSources: List<PatchSourceRef> = emptyList(),
+        /**
+         * Batch runs announce the whole queue once instead of every app, so the completion
+         * tone and notification are suppressed per item.
+         */
+        val announceCompletion: Boolean = true,
+        /** Apps already done and the queue total, null for a single run. */
+        val queuePosition: Pair<Int, Int>? = null
     ) {
         val packageName get() = input.packageName
     }
+
+    /** Queue position shown in the ongoing notification, set once the args are claimed. */
+    private var queueLabel: String? = null
 
     override suspend fun getForegroundInfo() =
         ForegroundInfo(
@@ -99,21 +110,15 @@ class PatcherWorker(
         contentText: String? = null,
     ): Notification {
         val pendingIntent = mainActivityPendingIntent()
-        val channel = NotificationChannel(
-            "morphe-patcher-patching",
-            applicationContext.getString(R.string.notification_channel_patcher),
-            NotificationManager.IMPORTANCE_LOW
-        ).apply {
-            description = applicationContext.getString(R.string.notification_channel_patcher_description)
-        }
-        val notificationManager =
-            applicationContext.getSystemService(NotificationManager::class.java)
-        notificationManager.createNotificationChannel(channel)
-        return Notification.Builder(applicationContext, channel.id)
+        return Notification.Builder(applicationContext, UpdateNotificationManager.CHANNEL_PATCHER)
             .setContentTitle(
                 stepName ?: applicationContext.getString(R.string.patcher_notification_title)
             )
-            .setContentText(contentText ?: applicationContext.getText(R.string.patcher_notification_text))
+            .setContentText(
+                contentText
+                    ?: queueLabel
+                    ?: applicationContext.getText(R.string.patcher_notification_text)
+            )
             .apply {
                 if (patchProgress != null) {
                     val (completed, total) = patchProgress
@@ -124,6 +129,7 @@ class PatcherWorker(
             .setSmallIcon(Icon.createWithResource(applicationContext, R.drawable.ic_notification))
             .setContentIntent(pendingIntent)
             .setCategory(Notification.CATEGORY_SERVICE)
+            .setGroup(UpdateNotificationManager.GROUP_PATCHING)
             .setOngoing(true)
             .build()
     }
@@ -148,12 +154,17 @@ class PatcherWorker(
         successSoundUri: String,
         errorSoundUri: String,
     ) {
-        if (playSound) playCompletionSound(succeeded, successSoundUri, errorSoundUri)
+        if (playSound) CompletionSound.play(
+            applicationContext,
+            succeeded,
+            successSoundUri,
+            errorSoundUri
+        )
         // Don't show "patching complete" when Shizuku auto-install will immediately follow
         if (succeeded && autoInstallPending) return
         // Don't notify when the app is in the foreground - user sees the result on screen
-        if (isAppInForeground()) return
-        val notification = Notification.Builder(applicationContext, "morphe-patcher-patching")
+        if (ManagerApplication.isInForeground) return
+        val notification = Notification.Builder(applicationContext, UpdateNotificationManager.CHANNEL_PATCHER)
             .setContentTitle(
                 applicationContext.getString(
                     if (succeeded) R.string.patcher_complete_title else R.string.patcher_failed_title
@@ -167,56 +178,6 @@ class PatcherWorker(
         applicationContext.getSystemService(NotificationManager::class.java)
             .notify(COMPLETION_NOTIFICATION_ID, notification)
     }
-
-    private fun playCompletionSound(
-        succeeded: Boolean,
-        successSoundUri: String,
-        errorSoundUri: String,
-    ) {
-        // Respect ringer mode and notification-stream volume.
-        // So users can silence the tone with the volume rocker before it plays
-        val audioManager = applicationContext.getSystemService(AudioManager::class.java) ?: return
-        if (audioManager.ringerMode != AudioManager.RINGER_MODE_NORMAL) return
-        if (audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION) == 0) return
-
-        val custom = if (succeeded) successSoundUri else errorSoundUri
-        val bundledRes = if (succeeded) R.raw.success else R.raw.error
-        val bundledUri = "android.resource://${applicationContext.packageName}/$bundledRes".toUri()
-        val customUri = custom.takeIf { it.isNotBlank() }?.toUri()
-
-        val ringtone = customUri?.let { tryGetRingtone(it) }
-            ?: tryGetRingtone(bundledUri)
-            ?: return
-        ringtone.audioAttributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_NOTIFICATION_EVENT)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-            .build()
-
-        // Expose the ringtone so the patcher screen can stop it when the user navigates home
-        // before it finishes on its own
-        activeCompletionRingtone = ringtone
-        try {
-            ringtone.play()
-        } catch (e: Exception) {
-            Log.w(tag, "Failed to play completion sound".logFmt(), e)
-        }
-        // Safety-net cleanup in case the user never navigates home
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (activeCompletionRingtone === ringtone) {
-                runCatching { ringtone.stop() }
-                activeCompletionRingtone = null
-            }
-        }, ACTIVE_RINGTONE_RETAIN_MS)
-    }
-
-    private fun tryGetRingtone(uri: Uri): Ringtone? = runCatching {
-        RingtoneManager.getRingtone(applicationContext, uri)
-    }.onFailure {
-        Log.w(tag, "Failed to load ringtone $uri".logFmt(), it)
-    }.getOrNull()
-
-    private fun isAppInForeground(): Boolean =
-        ManagerApplication.startedActivityCount > 0
 
     override suspend fun doWork(): Result {
         if (runAttemptCount > 0) {
@@ -248,6 +209,9 @@ class PatcherWorker(
         var patchingSucceeded = false
         val result = try {
             args = workerRepository.claimInput(this)
+            queueLabel = args.queuePosition?.let { (done, total) ->
+                applicationContext.getString(R.string.batch_patch_progress_counter, done, total)
+            }
             runPatcher(args).also { if (it == Result.success()) patchingSucceeded = true }
         } finally {
             wakeLock.release()
@@ -348,6 +312,17 @@ class PatcherWorker(
                     .getMemoryInfo(it)
             }
             val statFs = StatFs(applicationContext.filesDir.absolutePath)
+
+            // What this build of Morphe brings to the run. Every bug report needs the versions,
+            // and native lib stripping silently changes what ends up in the output APK.
+            // The bytecode mode is left out, the patcher logs it itself while writing dex
+            args.logger.info(
+                "$LOG_WORKER_PREFIX_BUILD " +
+                        "$LOG_WORKER_FIELD_MANAGER=${BuildConfig.VERSION_NAME} " +
+                        "$LOG_WORKER_FIELD_PATCHER=${BuildConfig.PATCHER_VERSION} " +
+                        "$LOG_WORKER_FIELD_NATIVE_LIBS=$stripNativeLibs"
+            )
+
             args.logger.info(
                 "$LOG_WORKER_PREFIX_DEVICE " +
                         "$LOG_WORKER_FIELD_ANDROID=${Build.VERSION.RELEASE} " +
@@ -361,11 +336,19 @@ class PatcherWorker(
             args.logger.info(
                 "Patching started at ${System.currentTimeMillis()} " +
                         "pkg=${args.packageName} version=${args.input.version} " +
-                        "bundle=${args.bundleVersions.joinToString(",").ifBlank { "?" }} " +
                         "input=${inputFile.absolutePath} size=${inputFile.length()} " +
                         "split=$inputIsSplitArchive patches=$selectedCount " +
                         "device=${Build.MANUFACTURER} model=${Build.MODEL}"
             )
+
+            // One line per source rather than a joined list, so a name and its version stay
+            // together no matter how many sources contributed to this run
+            args.patchSources.forEach { source ->
+                args.logger.info(
+                    "$LOG_WORKER_PREFIX_SOURCE $LOG_WORKER_FIELD_NAME=\"${source.name}\" " +
+                            "$LOG_WORKER_FIELD_VERSION=\"${source.version ?: "?"}\""
+                )
+            }
 
             // Log runtime mode info
             if (useProcessRuntime) {
@@ -496,7 +479,7 @@ class PatcherWorker(
             if (!patchedApk.delete() && patchedApk.exists()) {
                 Log.w(tag, "Failed to delete temporary patched APK: ${patchedApk.absolutePath}".logFmt())
             }
-            if (!isStopped) showCompletionNotification(
+            if (!isStopped && args.announceCompletion) showCompletionNotification(
                 succeeded,
                 autoInstallPending,
                 completionSoundEnabled,
@@ -521,21 +504,8 @@ class PatcherWorker(
         const val NOTIFICATION_ID = 1
         const val COMPLETION_NOTIFICATION_ID = 2
 
-        private const val ACTIVE_RINGTONE_RETAIN_MS = 60_000L
-
-        @Volatile
-        private var activeCompletionRingtone: Ringtone? = null
-
-        /**
-         * Stops the completion tone (if any) currently playing from the last patcher run. Safe to
-         * call from any thread and any state - a no-op when nothing is playing. Also invoked as a
-         * safety net after [ACTIVE_RINGTONE_RETAIN_MS] if nothing else stopped it by then.
-         */
-        fun stopCompletionSound() {
-            val ringtone = activeCompletionRingtone ?: return
-            activeCompletionRingtone = null
-            runCatching { ringtone.stop() }
-        }
+        /** Kept as the patcher screen's entry point now that the tone itself is shared. */
+        fun stopCompletionSound() = CompletionSound.stop()
 
         const val PROCESS_EXIT_CODE_KEY = "process_exit_code"
         const val PROCESS_PREVIOUS_LIMIT_KEY = "process_previous_limit"
@@ -544,6 +514,14 @@ class PatcherWorker(
         const val LOG_WORKER_PREFIX_SUCCEEDED = "Patching succeeded:"
         const val LOG_WORKER_PREFIX_DEVICE = "Device:"
         const val LOG_WORKER_PREFIX_RUNTIME = "Runtime:"
+        const val LOG_WORKER_PREFIX_SOURCE = "Source:"
+        const val LOG_WORKER_PREFIX_BUILD = "Build:"
+
+        const val LOG_WORKER_FIELD_NAME = "name"
+        const val LOG_WORKER_FIELD_VERSION = "version"
+        const val LOG_WORKER_FIELD_MANAGER = "manager"
+        const val LOG_WORKER_FIELD_PATCHER = "patcher"
+        const val LOG_WORKER_FIELD_NATIVE_LIBS = "nativeLibs"
         const val LOG_PROCESS_PREFIX_COROUTINE_HEAP = "App memory limit:"
         const val LOG_WORKER_FIELD_SIZE = "size"
         const val LOG_WORKER_FIELD_MEMORY_LIMIT = "memoryLimit"

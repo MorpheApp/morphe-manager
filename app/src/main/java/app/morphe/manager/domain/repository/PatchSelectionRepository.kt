@@ -29,12 +29,19 @@ class PatchSelectionRepository(db: AppDatabase) {
             .filterValues { it.isNotEmpty() }
 
     /**
-     * Replace the full set of selections for a package. Bundles that previously had
-     * selections but are absent from [selection] are cleared so no orphan rows remain.
+     * Replace the selections for a package within [scope]. Bundles inside [scope] that had
+     * selections but are absent from [selection] are cleared so no orphan rows remain, while
+     * bundles outside it keep what they had: a disabled bundle is not part of any patching
+     * session and must not lose its selection because of one.
      */
-    suspend fun updateSelection(packageName: String, selection: Map<Int, Set<String>>) {
+    suspend fun updateSelection(
+        packageName: String,
+        selection: Map<Int, Set<String>>,
+        scope: Set<Int> = selection.keys
+    ) {
         val previousBundles = dao.getAllSelectionsForPackage(packageName).keys
-        val full = (previousBundles + selection.keys).associateWith { selection[it] ?: emptySet() }
+        val full = (previousBundles.intersect(scope) + selection.keys)
+            .associateWith { selection[it] ?: emptySet() }
         dao.updateSelections(full.mapKeys { (sourceUid, _) ->
             getOrCreateSelection(sourceUid, packageName)
         })

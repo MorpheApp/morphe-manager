@@ -46,6 +46,7 @@ data class BundleUpdateState(
 @Immutable
 data class HomeNotificationsUi(
     val managerUpdate: AlertState,
+    val outdatedManager: AlertState,
     val blockedSources: AlertState,
     val metadataErrors: AlertState,
     val meteredSkipped: AlertState,
@@ -78,6 +79,17 @@ fun NotificationsOverlay(
                 subtitle = stringResource(R.string.home_blocked_source_subtitle),
                 onShowDetails = notifications.blockedSources.onShow,
                 swipeEnabled = false,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // A source built for a newer patcher stays unusable until the app itself is updated
+            AlertSnackbar(
+                visible = notifications.outdatedManager.visible,
+                level = AlertLevel.Error,
+                icon = Icons.Outlined.SystemUpdate,
+                title = stringResource(R.string.home_outdated_manager_title),
+                subtitle = stringResource(R.string.home_outdated_manager_subtitle),
+                onShowDetails = notifications.outdatedManager.onShow,
                 modifier = Modifier.fillMaxWidth()
             )
 

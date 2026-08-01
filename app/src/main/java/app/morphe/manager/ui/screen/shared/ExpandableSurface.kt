@@ -50,8 +50,8 @@ fun ExpandableSurface(
     Surface(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp)),
-        shape = RoundedCornerShape(12.dp),
+            .clip(RoundedCornerShape(MorpheDefaults.CompactCornerRadius)),
+        shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
         color = headerTint.copy(alpha = 0.05f)
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -73,7 +73,7 @@ fun ExpandableSurface(
                         imageVector = icon,
                         contentDescription = null,
                         tint = headerTint,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
                     )
                     Text(
                         text = title,
@@ -90,7 +90,7 @@ fun ExpandableSurface(
                     else
                         stringResource(R.string.expand),
                     modifier = Modifier
-                        .size(20.dp)
+                        .size(MorpheDefaults.IconSizeSmall)
                         .rotate(rotationAngle),
                     tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
                 )

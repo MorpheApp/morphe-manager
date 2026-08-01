@@ -505,7 +505,7 @@ private fun HeaderPreview(
             modifier = Modifier
                 .width(previewWidth)
                 .height(previewHeight)
-                .clip(RoundedCornerShape(12.dp))
+                .clip(RoundedCornerShape(MorpheDefaults.CompactCornerRadius))
                 .background(
                     if (isDarkTheme)
                         Color(0xFF1C1C1C)
@@ -515,7 +515,7 @@ private fun HeaderPreview(
                 .border(
                     HeaderConfig.BORDER_STROKE_WIDTH.dp,
                     MaterialTheme.colorScheme.outline,
-                    RoundedCornerShape(12.dp)
+                    RoundedCornerShape(MorpheDefaults.CompactCornerRadius)
                 ),
             contentAlignment = Alignment.Center
         ) {

@@ -8,9 +8,9 @@ package app.morphe.manager.ui.screen.settings.advanced
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AutoAwesome
+import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.Image
 import androidx.compose.material.icons.outlined.Restore
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -29,8 +29,10 @@ import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companio
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.LIGHT_THEME_COLOR_DESC
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.LIGHT_THEME_COLOR_TITLE
 import app.morphe.manager.domain.manager.getLocalizedOrCustomText
+import app.morphe.manager.patcher.patch.ExplicitOptionKind
 import app.morphe.manager.ui.screen.home.ColorPresetItem
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.viewmodel.OptionInfo
 import app.morphe.manager.ui.viewmodel.PatchOptionKeys
 import app.morphe.manager.ui.viewmodel.PatchOptionsViewModel
 import app.morphe.manager.util.KnownApps
@@ -316,13 +318,13 @@ fun CustomBrandingDialog(
 
             // Icon path field with folder picker
             if (iconOption != null) {
-                MorpheDialogTextField(
+                FolderOptionInput(
+                    option = iconOption,
                     value = iconPath.value,
+                    label = stringResource(R.string.settings_advanced_patch_options_custom_branding_custom_icon),
+                    placeholder = "/storage/emulated/0/icons",
                     onValueChange = { iconPath.value = it },
-                    label = { Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_custom_icon)) },
-                    placeholder = { Text("/storage/emulated/0/icons") },
-                    showClearButton = true,
-                    onFolderPickerClick = { openFolderPicker() }
+                    onPickFolder = { openFolderPicker() }
                 )
 
                 // Create icon button
@@ -372,6 +374,46 @@ fun CustomBrandingDialog(
                 iconPath.value = path
                 showIconCreator.value = false
             }
+        )
+    }
+}
+
+/**
+ * Folder input for a patch option. Typed folder options render as a picker button,
+ * matching the patch options shown during patching. Plain untyped string options
+ * declared by older patch bundles keep the editable path field.
+ */
+@Composable
+private fun FolderOptionInput(
+    option: OptionInfo,
+    value: String,
+    label: String,
+    placeholder: String,
+    onValueChange: (String) -> Unit,
+    onPickFolder: () -> Unit
+) {
+    if (option.explicitKind == ExplicitOptionKind.Folder) {
+        PickerFieldHeader(
+            title = label,
+            required = option.required,
+            isInvalid = option.required && value.isBlank()
+        )
+
+        PickerButtonRow(
+            label = stringResource(R.string.select_folder),
+            selectedPath = value,
+            icon = Icons.Outlined.Folder,
+            onPick = onPickFolder,
+            onClear = { onValueChange("") }
+        )
+    } else {
+        MorpheDialogTextField(
+            value = value,
+            onValueChange = onValueChange,
+            label = { Text(label) },
+            placeholder = { Text(placeholder) },
+            showClearButton = true,
+            onFolderPickerClick = onPickFolder
         )
     }
 }
@@ -431,13 +473,13 @@ fun CustomHeaderDialog(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             if (customOption != null) {
-                MorpheDialogTextField(
+                FolderOptionInput(
+                    option = customOption,
                     value = headerPath.value,
+                    label = stringResource(R.string.settings_advanced_patch_options_custom_header),
+                    placeholder = "/storage/emulated/0/header",
                     onValueChange = { headerPath.value = it },
-                    label = { Text(stringResource(R.string.settings_advanced_patch_options_custom_header)) },
-                    placeholder = { Text("/storage/emulated/0/header") },
-                    showClearButton = true,
-                    onFolderPickerClick = { openFolderPicker() }
+                    onPickFolder = { openFolderPicker() }
                 )
 
                 // Create header button

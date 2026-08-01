@@ -25,24 +25,32 @@
         <item quantity="other">%s archivos APK</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">%d aplicación instalada</item>
-        <item quantity="other">%d aplicaciones instaladas</item>
+        <item quantity="one">%s aplicación instalada</item>
+        <item quantity="other">%s aplicaciones instaladas</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">%d aplicación reinstalada</item>
-        <item quantity="other">%d aplicaciones reinstaladas</item>
+        <item quantity="one">%s aplicación reinstalada</item>
+        <item quantity="other">%s aplicaciones reinstaladas</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">%d aplicación desinstalada</item>
-        <item quantity="other">%d aplicaciones desinstaladas</item>
+        <item quantity="one">%s aplicación desinstalada</item>
+        <item quantity="other">%s aplicaciones desinstaladas</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">¿Desinstalar %d aplicación?</item>
-        <item quantity="other">¿Desinstalar %d aplicaciones?</item>
+        <item quantity="one">¿Desinstalar %s aplicación?</item>
+        <item quantity="other">¿Desinstalar %s aplicaciones?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s aplicación lista para parchear</item>
+        <item quantity="other">%s aplicaciones listas para parchear</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%s aplicación está lista para instalar</item>
+        <item quantity="other">%s aplicaciones están listas para instalar</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">%d aplicación omitida</item>
-        <item quantity="other">%d aplicaciones omitidas</item>
+        <item quantity="one">%s aplicación omitida</item>
+        <item quantity="other">%s aplicaciones omitidas</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Eliminado %s parche obsoleto de la selección guardada</item>
@@ -63,5 +71,9 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s aplicación</item>
         <item quantity="other">%s aplicaciones</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Se copió el parche %s del paquete seleccionado</item>
+        <item quantity="other">Se copiaron %s parches del paquete seleccionado</item>
     </plurals>
 </resources>

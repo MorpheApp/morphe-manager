@@ -36,6 +36,7 @@ import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.AboutViewModel
+import app.morphe.manager.util.isolateLtr
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 /**
@@ -127,7 +128,7 @@ fun AboutDialog(onDismiss: () -> Unit) {
                     color = textColor
                 )
                 Text(
-                    text = stringResource(R.string.version) + " " + BuildConfig.VERSION_NAME,
+                    text = stringResource(R.string.version) + " " + BuildConfig.VERSION_NAME.isolateLtr(),
                     style = MaterialTheme.typography.bodyMedium,
                     color = secondaryColor
                 )

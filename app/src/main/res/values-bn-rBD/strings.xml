@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">পর্যালোচনা ও সরানোর জন্য আলতো চাপুন</string>
     <string name="home_metadata_errors_title">কিছু প্যাচ সোর্স অনুপলব্ধ</string>
     <string name="home_metadata_errors_subtitle">সোর্সগুলি পর্যালোচনা করার জন্য আলতো চাপুন</string>
+    <string name="home_outdated_manager_title">Morphe à®¦®°®¨ à®¨®²®¨ à®¨®¤®°</string>
+    <string name="home_outdated_manager_subtitle">কিছু প্যাচ উৎসের একটি নতুন সংস্করণ প্রয়োজন</string>
     <string name="home_metered_skipped_title">মোবাইল ডেটাতে আপডেটগুলিPaused</string>
     <string name="home_metered_skipped_subtitle">মোবাইল ডেটাতে আপডেট করার জন্য ট্যাপ করুন</string>
     <string name="home_update_error">আপডেট ব্যর্থ হয়েছে</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">মেটাডেটা উপলব্ধ নয়</string>
     <string name="sources_management_metadata_unavailable_hint">রিমোট মেটাডেটা ফাইলটি পাওয়া যাচ্ছে না। ইনস্টল করা বান্ডেলের সাথে প্যাচিং এখনও কাজ করে, তবে এই উৎসের জন্য স্বয়ংক্রিয় আপডেট নিষ্ক্রিয় করা হয়েছে</string>
     <string name="sources_management_metadata_unavailable_hint_missing">প্যাচ বান্ডেল ডাউনলোড করা যায়নি। উৎস URL ভুল হতে পারে অথবা ফাইলটি বিদ্যমান নেই</string>
+    <string name="sources_management_outdated_manager_badge">মর্ফে আপডেট করুন</string>
+    <string name="sources_management_outdated_manager_hint">এই উৎসটি প্যাচার %1$s এর জন্য তৈরি করা হয়েছে, কিন্তু মর্ফে %2$s এ প্যাচার %3$s অন্তর্ভুক্ত রয়েছে। এটি ব্যবহার করার জন্য মর্ফে আপডেট করুন</string>
     <string name="sources_management_source_enabled">সোর্স সক্রিয় করা হয়েছে</string>
     <string name="sources_management_source_disabled">সোর্স নিষ্ক্রিয় করা হয়েছে</string>
     <string name="sources_management_source_updating">সোর্স আপডেট করা হচ্ছে</string>
@@ -164,10 +168,11 @@
     <string name="home_apk_availability_no">না, আমি ইতিমধ্যে একটি APK পেয়েছি</string>
     <string name="home_apk_use_saved">সেভ করে রাখা APK-টি ব্যবহার করুন</string>
     <string name="home_apk_use_installed">ফোনে ইনস্টল থাকা APK-টি ব্যবহার করুন</string>
+    <string name="home_apk_use_installed_unverified">ইনস্টল করা অ্যাপের স্বাক্ষর যাচাই করা যায়নি, তাই এটি ইতোমধ্যেই প্যাচ করা থাকতে পারে</string>
     <string name="home_app_info_no_saved_apk">কোন সংরক্ষিত APK নেই। প্যাচিংয়ের জন্য আবার APK ফাইল নির্বাচন করতে হবে</string>
     <string name="home_version_requires_android">Android %s+ প্রয়োজন</string>
     <string name="home_apk_no_compatible_versions_title">এই ডিভাইসে সমর্থিত নয়</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt;-এর Android %2$d (API %3$d)-এর জন্য কোনো সমর্থিত সংস্করণ নেই। ঘোষিত সমস্ত সংস্করণের জন্য উচ্চতর Android সংস্করণ প্রয়োজন</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt;-এর Android %2$s (API %3$s)-এর জন্য কোনো সমর্থিত সংস্করণ নেই। ঘোষিত সমস্ত সংস্করণগুলির জন্য উচ্চতর Android সংস্করণ প্রয়োজন।</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">মূল APK ডাউনলোড করুন</string>
     <string name="home_download_instructions_steps_title">নির্দেশাবলী:</string>
@@ -214,6 +219,8 @@
     <string name="expert_mode_reset_to_default_done">সুপারিশ করা প্যাচগুলি প্রয়োগ করা হয়েছে</string>
     <string name="expert_mode_restore_saved">সংরক্ষিত নির্বাচন পুনরুদ্ধার করুন</string>
     <string name="expert_mode_restore_saved_done">সংরক্ষিত নির্বাচন পুনরুদ্ধার করা হয়েছে</string>
+    <string name="expert_mode_copy_from_bundle">অন্য বান্ডেল থেকে নির্বাচন কপি করুন</string>
+    <string name="expert_mode_copy_from_bundle_no_patches">এই বান্ডেলে কোনো মেলানো প্যাচ নেই</string>
     <string name="expert_mode_no_results">কোনো প্যাচ পাওয়া যায়নি</string>
     <string name="expert_mode_universal_patches">সার্বজনীন প্যাচ</string>
     <string name="expert_mode_new_patches">নতুন</string>
@@ -241,7 +248,7 @@
     <string name="home_dialog_unsupported_version_compatible_versions">সমর্থিত সংস্করণ:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">সমর্থিত হয়নি</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">বিল্ড %d</string>
+    <string name="home_dialog_unsupported_version_build">বিল্ড %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">এটি একই সংস্করণের একটি ভিন্ন বিল্ড। প্যাচগুলো কাজ করার জন্য একটি নির্দিষ্ট বিল্ডের প্রয়োজন</string>
     <string name="home_dialog_wrong_package_title">ভুলি প্যাকেজ নির্বাচন করা হয়েছে</string>
     <string name="home_dialog_wrong_package_description">নির্বাচিত APK অ্যাপের জন্য নির্বাচিত হয়নি</string>
@@ -304,6 +311,43 @@
     <string name="header_creator_guide_themes_body">বেশিরভাগ অ্যাপের জন্য লাইট এবং ডার্ক থিমের জন্য আলাদা ইমেজ প্রয়োজন। কিছু অ্যাপ (যেমন YouTube Music) শুধুমাত্র ডার্ক থিম ব্যবহার করে, তাই শুধুমাত্র সেই অংশটি দেখানো হয়েছে।</string>
     <string name="header_creator_guide_positioning_title">অবস্থান এবং স্কেলিং</string>
     <string name="header_creator_guide_positioning_body">অবস্থান এবং স্কেল করার জন্য সরাসরি প্রিভিউতে পিঞ্চ-টু-জুম এবং ড্র্যাগ অঙ্গভঙ্গি ব্যবহার করুন। ইমেজটি কেন্দ্রের কাছাকাছি এলে স্ন্যাপ গাইড প্রদর্শিত হবে। আপনি প্রিভিউর নীচে স্লাইডারটিও ব্যবহার করতে পারেন।</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">টি প্যাচ নির্বাচন করা হয়েছে</string>
+    <string name="batch_patch_title">ব্যাচ প্যাচিং</string>
+    <string name="batch_patch_planning">ক queue প্রস্তুত করা হচ্ছে…</string>
+    <string name="batch_patch_preparing_next">পরবর্তী অ্যাপ প্রস্তুত করা হচ্ছে…</string>
+    <string name="batch_patch_progress_counter">%2$s-এর %1$s প্যাচ করা হয়েছে</string>
+    <string name="batch_patch_summary">%1$s টি প্যাচ করা হয়েছে, %2$s টি ব্যর্থ হয়েছে, %3$s টি বাদ দেওয়া হয়েছে</string>
+    <string name="batch_patch_saved_hint">প্যাচ করা অ্যাপগুলি সেভ করা হয়েছে। সেগুলি এখন ইনস্টল করুন, অথবা সেটিংসের প্যাচ করা APK তালিকা থেকে পরে ইনস্টল করুন</string>
+    <string name="batch_patch_multiple_sources">কিছু অ্যাপ একাধিক উৎস থেকে প্যাচ একত্রিত করে, যা বিরোধ তৈরি করতে পারে</string>
+    <string name="batch_patch_needs_apk">কোনো APK উপলব্ধ নেই, একটি ফাইল সংযুক্ত করুন</string>
+    <string name="batch_patch_wrong_package">সংযুক্ত ফাইলটি %s এর সাথে সম্পর্কিত</string>
+    <string name="batch_patch_version_mismatch">প্যাচগুলির সাথে সংস্করণ %s সমর্থিত নয়</string>
+    <string name="batch_patch_source_saved">মূল ফাইল সেভ করা হয়েছে</string>
+    <string name="batch_patch_source_installed">অ্যাপ ইনস্টল করা হয়েছে</string>
+    <string name="batch_patch_source_file">সংযুক্ত ফাইল</string>
+    <string name="batch_patch_source_unavailable">APK প্রস্তুত করা যায়নি</string>
+    <string name="batch_patch_find_apk">APK খুঁজুন</string>
+    <string name="batch_patch_attach_apk">APK সংযুক্ত করুন</string>
+    <string name="batch_patch_force_version">যাইহোক প্যাচ করুন</string>
+    <string name="batch_patch_force_version_done">যাইহোক, সারিবদ্ধ করা হয়েছে, অন্যান্য সংস্করণের জন্য তৈরি করা প্যাচগুলি অ্যাপটিকে ভেঙে দিতে পারে</string>
+    <string name="batch_patch_edit_patches">প্যাচ নির্বাচন করুন</string>
+    <string name="batch_patch_state_no_apk">কোনো APK নেই</string>
+    <string name="batch_patch_state_no_patches">কোনো প্যাচ নেই</string>
+    <string name="batch_patch_policy_install">শেষ হলে ইনস্টল করুন</string>
+    <string name="batch_patch_policy_install_description">সারিবদ্ধ শেষ হওয়ার সাথে সাথেই প্রতিটি প্যাচ করা অ্যাপ ইনস্টল করে। বন্ধ করলে APKগুলি পরে ব্যবহারের জন্য সেভ করা থাকবে</string>
+    <string name="batch_patch_start">প্যাচিং শুরু করুন</string>
+    <string name="batch_patch_stop_title">ব্যাচ প্যাচিং বন্ধ করবেন?</string>
+    <string name="batch_patch_stop_description">বর্তমানে প্যাচ করা অ্যাপ এবং সারিতে থাকা সবকিছু বাতিল করা হবে</string>
+    <string name="batch_patch_install_all">সব ইনস্টল করুন</string>
+    <string name="batch_patch_install_failed">ইনস্টল করতে ব্যর্থ</string>
+    <string name="batch_patch_in_progress">ব্যাচ প্যাচিং ইতিমধ্যে চলছে</string>
+    <string name="batch_patch_nothing_outdated">প্রতিটি প্যাচ করা অ্যাপ আপ টু ডেট</string>
+    <string name="shortcut_repatch_short">পুনরায় প্যাচ করুন</string>
+    <string name="shortcut_repatch_long">পুরানো অ্যাপগুলি পুনরায় প্যাচ করুন</string>
+    <string name="shortcut_check_updates_short">আপডেটগুলি দেখুন</string>
+    <string name="shortcut_check_updates_long">প্যাচ আপডেটের জন্য দেখুন</string>
+    <string name="shortcut_patch_app">%s প্যাচ করুন</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">আপন কি এই অ্যাপটি মুছে ফেলতে চানেন? </string>
     <string name="batch_uninstall_confirm_body">আপনার ডিভাইস থেকে নির্বাচিত অ্যাপগুলি স্থায়ীভাবে মুছে ফেলা হবে।</string>
@@ -337,7 +381,7 @@
     <string name="root_pre_patch_installer_description">আপনার ডিভাইসে রুট অ্যাক্সেস আছে। এই অ্যাপটি রুট মাউন্ট এর জন্য নাকি স্ট্যান্ডার্ড ইনস্টলের জন্য প্যাচ করা উচিত তা নির্বাচন করুন</string>
     <string name="root_pre_patch_installer_mount_title">রুট মাউন্ট মোড</string>
     <string name="root_pre_patch_installer_mount_description">রুটের জন্য প্যাচগুলি, তারপর স্টক অ্যাপের উপরে APK মাউন্ট করে। GmsCore প্রয়োজন নেই</string>
-    <string name="root_mount_module_unmount_warning">আপনি যদি KernelSU বা APatch ব্যবহার করেন, তাহলে রুট মাউন্ট করে ইনস্টল করা অ্যাপের জন্য মডিউল আনমাউন্টিং বা লুকানো নিষ্ক্রিয় করুন। অন্যথায়, Morphe এটিকে মাউন্ট করা দেখালেও স্টক অ্যাপটি চলতে পারে।</string>
+    <string name="root_mount_module_unmount_warning">যদি KernelSU ডিফল্টভাবে আনমাউন্ট মডিউলগুলি সক্রিয় করে, তাহলে KernelSU > সুপারইউজার > আপনি যে অ্যাপটি মাউন্ট করেছেন > প্রোফাইল > কাস্টম খুলুন এবং আনমাউন্ট মডিউলগুলি নিষ্ক্রিয় করুন। অন্যথায় মাউন্ট করা প্যাচ করা APK কার্যকর নাও হতে পারে, এমনকি যদি Morphe এটিকে মাউন্ট করা হিসাবে দেখায়।</string>
     <string name="root_pre_patch_installer_standard_title">স্ট্যান্ডার্ড ইনস্টল মোড</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore সমর্থন সহ একটি সাধারণ APK হিসাবে প্যাচ। প্যাচিং করার পরে আপনার ইনস্টলার সেটিংস ব্যবহার করা হয়</string>
     <string name="root_pre_patch_installer_hint">এই প্যাচ মোডটি সেটিংস > সিস্টেম > ইনস্টলার থেকে আলাদা এবং প্যাচিং করার পরে পরিবর্তন করা যাবে না।</string>
@@ -450,8 +494,8 @@
     <string name="failed_to_mount">মাউন্ট করতে ব্যর্থ: %s</string>
     <string name="failed_to_unmount">আনমাউন্ট করতে ব্যর্থ: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">স্কোর: %d</string>
-    <string name="mini_game_best">সেরা %d</string>
+    <string name="mini_game_score">স্কোর %s</string>
+    <string name="mini_game_best">সেরা %s</string>
     <string name="mini_game_new_record">নতুন রেকর্ড!</string>
     <string name="mini_game_game_over">গেম ওভার</string>
     <string name="mini_game_try_again">আবার চেষ্টা করুন</string>
@@ -494,6 +538,7 @@
     <string name="settings_appearance_dynamic">এক্সেন্ট কালার</string>
     <string name="settings_appearance_monochrome">একবর্ণ</string>
     <string name="settings_appearance_color_style">রঙের ধরণ</string>
+    <string name="settings_appearance_colors">রং</string>
     <string name="settings_appearance_accent_color">অ্যাকসেন্ট রঙ</string>
     <string name="settings_appearance_pure_black">পুরো কালো</string>
     <string name="settings_appearance_pure_black_description">ব্যবহার করে খাঁটি কালো ব্যাকগ্রাউন্ড।</string>
@@ -511,6 +556,21 @@
     <string name="settings_appearance_app_grouping_description">উৎস অথবা আপনার নিজের বিভাগ অনুসারে অ্যাপ grouping করার জন্য একটি হোম স্ক্রিন সুইচ দেখান, বন্ধ থাকা অবস্থায় নির্বাচন ধরে রাখুন।</string>
     <string name="settings_appearance_sort_button">সর্ট করার বাটন</string>
     <string name="settings_appearance_sort_button_description">হোম স্ক্রিনে সর্ট করার বাটনটি দেখান</string>
+    <string name="settings_appearance_app_card_colors">অ্যাপ কার্ডের রং</string>
+    <string name="settings_appearance_app_card_colors_default">ডিফল্ট</string>
+    <string name="settings_appearance_app_card_colors_default_description">প্রতিটি অ্যাপকে তার নিজস্ব বান্ডেলের রং দিন</string>
+    <string name="settings_appearance_app_card_colors_accent">accent</string>
+    <string name="settings_appearance_app_card_colors_accent_description">হোম অ্যাপ কার্ডের জন্য অ্যাপ অ্যাকসেন্ট রং ব্যবহার করুন</string>
+    <string name="settings_appearance_app_card_colors_gradient">gradient</string>
+    <string name="settings_appearance_app_card_colors_gradient_description">হোম অ্যাপ কার্ডের জন্য একটি কাস্টম গ্রেডিয়েন্ট ব্যবহার করুন</string>
+    <string name="settings_appearance_app_card_colors_solid">solid</string>
+    <string name="settings_appearance_app_card_colors_solid_description">হোম অ্যাপ কার্ডের জন্য একটি কাস্টম রং ব্যবহার করুন</string>
+    <string name="settings_appearance_app_card_colors_start">শুরু রং</string>
+    <string name="settings_appearance_app_card_colors_middle">middle color</string>
+    <string name="settings_appearance_app_card_colors_end">end color</string>
+    <string name="settings_appearance_app_card_colors_solid_color">solid color</string>
+    <string name="settings_appearance_app_card_colors_bundle">অ্যাপ বান্ডেল রং</string>
+    <string name="settings_appearance_app_card_colors_bundle_description">এখানে প্রতিটি অ্যাপের নিজস্ব রঙ ব্যবহার করুন, যা স্বয়ংক্রিয়ভাবে মানানসই করার জন্য শেড করা হবে</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">অ্যাপ আইকন</string>
     <string name="settings_appearance_app_icon_default">ডিফল্ট</string>
@@ -540,7 +600,28 @@
     <string name="settings_advanced_update_interval_monthly">এক মাস অন্তরে</string>
     <string name="settings_advanced_update_interval_chip_subtitle">ব্যাকগ্রাউন্ড চেকের সময়</string>
     <string name="settings_advanced_update_interval_battery_warning">কিছু ডিভাইসে ব্যাকগ্রাউন্ড চেকগুলি সঠিকভাবে কাজ করতে পারে না। ব্যাটারি সংরক্ষণের জন্য ম্যানুফ্যাকচারাররা যেমন এক্সিয়োমি, হুয়াওয়েই, স্যামসাং এবং অনেপ্লাস ব্যাকগ্রাউন্ড প্রসেসগুলি সীমিত করে।</string>
+    <string name="settings_advanced_auto_patch">স্বয়ংক্রিয় পুনরায় প্যাচিং</string>
+    <string name="settings_advanced_auto_patch_description">প্যাচ পরিবর্তন হলে ব্যাকগ্রাউন্ডে ইনস্টল করা অ্যাপগুলি পুনরায় প্যাচ করে। শুধুমাত্র সেভ করা মূল APK সহ অ্যাপগুলি অন্তর্ভুক্ত থাকবে</string>
+    <string name="settings_advanced_auto_patch_interval">পুনরায় প্যাচ করার ফ্রিকোয়েন্সি</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">প্যাচ করা অ্যাপগুলি কত ঘন ঘন পুনরায় তৈরি করা হবে</string>
+    <string name="settings_advanced_auto_patch_charging">শুধুমাত্র চার্জ করার সময়</string>
+    <string name="settings_advanced_auto_patch_charging_description">প্যাচিং CPU এবং মেমরির উপর ভারী, তাই এটি চার্জারের জন্য অপেক্ষা করে</string>
+    <string name="settings_advanced_auto_patch_install">স্বয়ংক্রিয়ভাবে ইনস্টল করুন</string>
+    <string name="settings_advanced_auto_patch_install_description">ইনস্টলার হিসাবে Shizuku প্রয়োজন। অন্য কোনো ইনস্টলারের সাথে প্যাচ করা অ্যাপগুলি শুধুমাত্র সেভ করা হবে</string>
+    <string name="settings_advanced_external_batch_patch">বাহ্যিক ট্রিগার করার অনুমতি দিন</string>
+    <string name="settings_advanced_external_batch_patch_description">স্বয়ংক্রিয়তা অ্যাপ্লিকেশনগুলিকে একটি অভিপ্রায় দিয়ে ব্যাচ প্যাচিং শুরু করতে দেয়। কোনো কিছু চালানোর আগে প্রতিটি অনুরোধ নিশ্চিত করা হবে</string>
+    <string name="external_batch_patch_title">ব্যাচ প্যাচিং শুরু করবেন?</string>
+    <string name="external_batch_patch_description">%s Morphe কে অ্যাপগুলি প্যাচ এবং ইনস্টল করতে চায়</string>
+    <string name="external_batch_patch_trust_caller">সর্বদা এই অ্যাপটিকে অনুমতি দিন</string>
+    <string name="external_batch_patch_unknown_caller">একটি অজানা অ্যাপ</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">স্বয়ংক্রিয় পুনরায় প্যাচিং সম্পন্ন হয়েছে</string>
+    <string name="notification_auto_patch_running_title">অ্যাপগুলি পুনরায় প্যাচ করা হচ্ছে</string>
+    <string name="notification_auto_patch_blocked_title">স্বয়ংক্রিয় পুনরায় প্যাচিং চালাননি</string>
+    <string name="notification_auto_patch_blocked_battery">ব্যাটারি অপ্টিমাইজেশন থেকে Morphe কে অব্যাহতি দিন, অন্যথায় Android শুরু হওয়ার আগেই চালাবে</string>
+    <string name="notification_auto_patch_blocked_foreground">Android ব্যাকগ্রাউন্ডে প্যাচিং শুরু করতে দেয়নি। Morphe খুলুন এবং অ্যাপ থেকে প্যাচ করুন</string>
+    <string name="notification_channel_auto_patch">স্বয়ংক্রিয় পুনরায় প্যাচিং</string>
+    <string name="notification_channel_auto_patch_description">अनुसूचित পুনরায় প্যাচিংয়ের জন্য নীরব অগ্রগতি এবং ফলাফল বিজ্ঞপ্তি</string>
     <string name="notification_manager_update_title">Morphe আপডেট উপলব্ধ</string>
     <string name="notification_bundle_update_title">নতুন প্যাচ পাওয়া গেছে</string>
     <string name="notification_update_text">Version %s ডাউনলোড করার জন্য প্রস্তুত</string>
@@ -715,7 +796,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_shizuku_error_downgrade">Android এটি ব্লক করেছে কারণ এটি ইনস্টল করা অ্যাপটিকে ডাউনগ্রেড করবে।</string>
     <string name="installer_shizuku_error_signature">Android এটি ব্লক করেছে কারণ ইনস্টল করা অ্যাপটির একটি ভিন্ন স্বাক্ষর রয়েছে।</string>
     <string name="installer_shizuku_error_invalid_apk">Android এই APK পড়তে পারেনি।</string>
-    <string name="installer_shizuku_error_user_profile">Android বর্তমান ব্যবহারকারী বা কাজের প্রোফাইলের জন্য এটি ব্লক করেছে।</string>
+    <string name="installer_shizuku_error_user_profile">সিস্টেম এই ইনস্টলটি ব্লক করেছে। Xiaomi এবং অনুরূপ ডিভাইসে, ডেভেলপার বিকল্পগুলিতে \"USB এর মাধ্যমে ইনস্টল করুন\" চালু করুন। একটি কাজের প্রোফাইলে, নীতি দ্বারা ইনস্টলেশন সীমাবদ্ধ হতে পারে</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">ব্যাটারি অপটিমাইজেশন</string>
     <string name="settings_system_battery_optimization_description">অ্যাপটি মিনিমাইজ করা হলে প্যাচার চালু রাখে।</string>
@@ -853,6 +934,12 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_selected_patches_section">নির্বাচিত প্যাচ</string>
     <string name="settings_system_patch_options_section">প্যাচ অপশন</string>
     <string name="settings_system_no_patches_or_options">কোনো সংরক্ষিত প্যাচ বা বিকল্প নেই</string>
+    <!-- Copy selection from another bundle -->
+    <string name="copy_selection_title">অন্য বান্ডেল থেকে নির্বাচন কপি করুন…</string>
+    <string name="copy_selection_confirm_with_count">%s কপি করুন</string>
+    <string name="copy_selection_empty">কপি করার জন্য আর কোনো সংরক্ষিত নির্বাচন নেই</string>
+    <string name="copy_selection_available_format">%1$s এর মধ্যে %2$s টি উপলব্ধ</string>
+    <string name="copy_selection_same_source">একই উৎস</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">কাস্টম ফাইল পিকার</string>
     <string name="settings_system_custom_file_picker_description">সিস্টেম ডিফল্টের পরিবর্তে Morphe-এর বিল্ট-ইন ফাইল পিকার দিয়ে স্টোরেজ ব্রাউজ করুন</string>
@@ -894,6 +981,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="confirm">নিশ্চিত করুন</string>
     <string name="warning">সতর্কবার্তা</string>
     <string name="error_">ত্রুটি</string>
+    <string name="failed">ব্যর্থ</string>
+    <string name="cancelled">বাতিল করা হয়েছে</string>
+    <string name="ready">প্রস্তুত</string>
     <string name="retry">আবার চেষ্টা করুন</string>
     <string name="refresh">রিফ্রেশ করুন</string>
     <string name="add">যোগ করুন</string>
@@ -906,6 +996,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="delete">মুছুন</string>
     <string name="delete_all">সবকিছু মুছে ফেলুন</string>
     <string name="remove">সরান</string>
+    <string name="exclude">বাদ দিন</string>
+    <string name="excluded">বাদ দেওয়া হয়েছে</string>
+    <string name="include">অন্তর্ভুক্ত করুন</string>
     <string name="disable">নিষ্ক্রিয় করুন</string>
     <string name="enable">有効にする</string>
     <string name="loading">লোড হচ্ছে…</string>
@@ -932,13 +1025,15 @@ morphe_adaptive_monochrome_custom.xml
     <string name="reorder_done">নতুন ক্রমটি সেভ করা হয়েছে</string>
     <string name="reset_order">পূর্বের ক্রমে ফিরে যান</string>
     <string name="reset_order_done">পূর্বের ক্রমে ফিরে যাওয়া হয়েছে</string>
+    <string name="accessibility_select_app">অ্যাপ নির্বাচন করুন</string>
     <string name="accessibility_move_up">উপরে সরান</string>
     <string name="accessibility_move_down">নিচে সরান</string>
-    <string name="accessibility_app_moved_announcement">%1$s %3$d-এর মধ্যে %2$d অবস্থানে স্থানান্তরিত হয়েছে</string>
+    <string name="accessibility_app_moved_announcement">%1$s কে %3$s এর %2$s অবস্থানে সরানো হয়েছে</string>
     <string name="accessibility_scroll_to_top">তালিকার শীর্ষে স্ক্রোল করুন</string>
     <string name="rename">রেনেম করুন</string>
     <string name="import_">আমদানি করুন</string>
     <string name="export">এক্সপোর্ট করুন</string>
+    <string name="copy">অনুলিপি করুন</string>
     <string name="download">ডাউনলোড</string>
     <string name="less">কম</string>
     <string name="expand">বিস্তারিত দেখুন</string>
@@ -949,6 +1044,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="continue_">এগিয়ে যান</string>
     <string name="version">সংস্করণ</string>
     <string name="patch">প্যাচ</string>
+    <string name="patching">প্যাচিং</string>
     <string name="repatch">রিপ্যাচ</string>
     <string name="open">খুলুন</string>
     <string name="mount">মাউন্ট</string>
@@ -966,7 +1062,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="saved">সংরক্ষিত হয়েছে</string>
     <string name="update">আপডেট</string>
     <string name="allow">অনুমতি দিন</string>
-    <string name="details">বিস্তারিত</string>
     <string name="hide">গোপন রাখুন</string>
     <string name="hidden">লুকানো</string>
     <string name="unhide">আনলুকানো</string>
@@ -1000,8 +1095,8 @@ morphe_adaptive_monochrome_custom.xml
 আপনি কি এখনও চালিয়ে যেতে চান?"</string>
     <string name="download_update_confirmation">আপডেট ডাউনলোড করবেন?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d এর মধ্যে %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%2$s এর %1$s</string>
     <string name="onboarding_sources_desc">আপনার প্যাচ উৎসগুলি পরিচালনা করুন। প্রতিটি উৎস এমন প্যাচ সরবরাহ করে যা আপনার অ্যাপগুলিতে প্রয়োগ করা যেতে পারে।</string>
     <string name="onboarding_swipe_title">সোয়াইপ অঙ্গভঙ্গি</string>
     <string name="onboarding_swipe_desc">অ্যাপ কার্ডে সোয়াইপ করে এর উপলব্ধ প্যাচগুলি দেখুন। কার্ডটি হোম স্ক্রীন থেকে লুকানোর জন্য বাম দিকে সোয়াইপ করুন</string>

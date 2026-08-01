@@ -131,7 +131,7 @@ fun StorageManagementDialog(
                     accentColor = StorageColors.HttpCache,
                     title = stringResource(R.string.settings_system_storage_http_cache_title),
                     description = stringResource(R.string.settings_system_storage_http_cache_description),
-                    enabled = stats.httpCacheBytes > 0L,
+                    bytes = stats.httpCacheBytes,
                     onClear = { viewModel.clearHttpCache(onCleared) }
                 )
                 MorpheSettingsDivider()
@@ -140,7 +140,7 @@ fun StorageManagementDialog(
                     accentColor = StorageColors.InstallerShare,
                     title = stringResource(R.string.settings_system_storage_installer_cache_title),
                     description = stringResource(R.string.settings_system_storage_installer_cache_description),
-                    enabled = stats.installerShareBytes > 0L,
+                    bytes = stats.installerShareBytes,
                     onClear = { viewModel.clearInstallerShareCache(onCleared) }
                 )
                 MorpheSettingsDivider()
@@ -149,7 +149,7 @@ fun StorageManagementDialog(
                     accentColor = StorageColors.PatcherWorkspace,
                     title = stringResource(R.string.settings_system_storage_patcher_workspace_title),
                     description = stringResource(R.string.settings_system_storage_patcher_workspace_description),
-                    enabled = stats.patcherWorkspaceBytes > 0L,
+                    bytes = stats.patcherWorkspaceBytes,
                     onClear = { viewModel.clearPatcherWorkspace(onCleared) }
                 )
                 MorpheSettingsDivider()
@@ -158,7 +158,7 @@ fun StorageManagementDialog(
                     accentColor = StorageColors.Temporary,
                     title = stringResource(R.string.settings_system_storage_temporary_title),
                     description = stringResource(R.string.settings_system_storage_temporary_description),
-                    enabled = stats.temporaryBytes > 0L,
+                    bytes = stats.temporaryBytes,
                     onClear = { viewModel.clearTemporary(onCleared) }
                 )
                 MorpheSettingsDivider()
@@ -167,7 +167,7 @@ fun StorageManagementDialog(
                     accentColor = MaterialTheme.colorScheme.error,
                     title = stringResource(R.string.settings_system_storage_clear_all),
                     description = stringResource(R.string.settings_system_storage_clear_all_description),
-                    enabled = stats.totalCacheBytes > 0L,
+                    bytes = stats.totalCacheBytes,
                     onClear = { showClearAllConfirm = true }
                 )
             }
@@ -216,7 +216,7 @@ private fun CacheActionRow(
     accentColor: Color,
     title: String,
     description: String,
-    enabled: Boolean,
+    bytes: Long,
     onClear: () -> Unit
 ) {
     Column(
@@ -234,9 +234,9 @@ private fun CacheActionRow(
             actions = listOf(
                 CardAction(
                     icon = Icons.Outlined.DeleteSweep,
-                    label = stringResource(R.string.clear),
+                    label = "${stringResource(R.string.clear)} (${formatBytes(bytes)})",
                     onClick = onClear,
-                    enabled = enabled,
+                    enabled = bytes > 0L,
                     destructive = true
                 )
             )

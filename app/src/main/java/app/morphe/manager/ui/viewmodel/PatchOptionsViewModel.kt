@@ -11,6 +11,7 @@ import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companio
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_HIDE_SHORTS
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_THEME
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.patcher.patch.ExplicitOptionKind
 import app.morphe.manager.util.KnownApps
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -127,7 +128,8 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
                             type = option.type.toString(),
                             default = option.default,
                             presets = option.presets,
-                            required = option.required
+                            required = option.required,
+                            explicitKind = option.explicitKind
                         )
                     } ?: emptyList()
 
@@ -275,5 +277,6 @@ data class OptionInfo(
     val type: String,
     val default: Any?,
     val presets: Map<String, Any?>?,
-    val required: Boolean
+    val required: Boolean,
+    val explicitKind: ExplicitOptionKind? = null
 )

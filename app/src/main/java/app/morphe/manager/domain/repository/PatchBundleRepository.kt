@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.annotation.StringRes
+import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.redux.Action
@@ -440,7 +441,19 @@ class PatchBundleRepository(
                 )
             } catch (error: Throwable) {
                 failures += src.uid to error
-                Log.e(tag, "Failed to load bundle ${src.name}", error)
+                val requiredPatcher = bundle.manifestAttributes?.patcherVersion
+                if (requiredPatcher != null && isPatcherOutdated(requiredPatcher)) {
+                    // Loading fails with linkage errors when the bundle uses patcher APIs this
+                    // manager does not have. Spell it out so logs are not just a NoSuchMethodError
+                    Log.e(
+                        tag,
+                        "Failed to load bundle ${src.name}: it requires patcher $requiredPatcher, " +
+                                "but this manager ships ${BuildConfig.PATCHER_VERSION}. Update the manager",
+                        error
+                    )
+                } else {
+                    Log.e(tag, "Failed to load bundle ${src.name}", error)
+                }
                 null
             }
         }.toMap()
@@ -1412,19 +1425,6 @@ class PatchBundleRepository(
         )
     }
 
-    suspend fun updateOnlyMorpheBundle(
-        force: Boolean = false,
-        showToast: Boolean = false
-    ) {
-        store.dispatch(
-            Update(
-                force = force,
-                showToast = showToast,
-                allowUnsafeNetwork = false
-            ) { it.uid == DEFAULT_SOURCE_UID }
-        )
-    }
-
     /**
      * Suspends until any currently active update job completes.
      */
@@ -2081,7 +2081,9 @@ class PatchBundleRepository(
                 onPerBundleProgress = null,
                 predicate = { bundle ->
                     bundle.uid != DEFAULT_SOURCE_UID &&
-                            bundle.enabled &&
+                            // Disabled bundles are not refreshed, but ones that were never
+                            // downloaded still need their initial fetch
+                            (bundle.enabled || bundle.state is PatchBundleSource.State.Missing) &&
                             snapshots.any { s ->
                                 bundle.endpoint.equals(
                                     runCatching { normalizeRemoteBundleUrl(s.source) }.getOrNull(),

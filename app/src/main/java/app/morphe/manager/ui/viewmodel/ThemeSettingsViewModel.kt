@@ -8,6 +8,8 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
+import app.morphe.manager.util.AppCardColorDefaults
+import app.morphe.manager.util.AppCardColorMode
 import app.morphe.manager.util.applyAppLanguage
 import app.morphe.manager.util.toHexString
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -69,6 +71,28 @@ class ThemeSettingsViewModel(
     fun setCustomAccentColor(color: Color?) = viewModelScope.launch {
         val value = color?.toHexString().orEmpty()
         prefs.customAccentColor.update(value)
+    }
+
+    /**
+     * Persists the card color [mode] together with the picked colors. The colors are kept even
+     * for [AppCardColorMode.DEFAULT] so switching modes back and forth does not discard them.
+     */
+    fun applyAppCardColors(
+        mode: AppCardColorMode,
+        startColorHex: String,
+        middleColorHex: String,
+        endColorHex: String,
+        solidColorHex: String
+    ) = viewModelScope.launch {
+        prefs.edit {
+            prefs.appCardColorMode.value = mode
+            prefs.customAppCardColors.value = AppCardColorDefaults.encodeColorValues(
+                startHex = startColorHex,
+                middleHex = middleColorHex,
+                endHex = endColorHex,
+                solidHex = solidColorHex
+            )
+        }
     }
 
     /**

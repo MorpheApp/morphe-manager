@@ -13,10 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -56,7 +53,7 @@ fun HomeBottomActionBar(
     onSettingsPositioned: ((Rect) -> Unit)? = null
 ) {
     // Show labels when there are 2 buttons, or on wider screens where 3 buttons still have room.
-    // Four actions stay icon-only to avoid cramped labels.
+    // Four actions stay icon-only to avoid cramped labels
     val windowSize = rememberWindowSize()
     val actionCount = 2 + (if (showSearchButton) 1 else 0) + (if (showSortButton) 1 else 0)
     val showLabels = actionCount <= 2 ||
@@ -149,6 +146,7 @@ fun HomeBottomActionBar(
  * Individual bottom action button.
  * Rectangular shape with rounded corners.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomActionButton(
     onClick: () -> Unit,
@@ -197,7 +195,7 @@ fun BottomActionButton(
     }
 
     // Press-scale feedback matches the home pill and category header pattern so every
-    // interactive surface on this screen shares the same tactile response.
+    // interactive surface on this screen shares the same tactile response
     val interactionSource = remember { MutableInteractionSource() }
     val scale = rememberPressScale(
         interactionSource = interactionSource,
@@ -207,65 +205,85 @@ fun BottomActionButton(
     // Surface(enabled = enabled) already gates the click, so we can pass onClick straight
     val handleClick = rememberHapticClick(onClick)
 
-    Surface(
-        onClick = handleClick,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(56.dp)
-            .graphicsLayer { scaleX = scale; scaleY = scale }
-            .semantics {
-                role = Role.Button
-                this.contentDescription = contentDesc
-                if (stateDescription != null) {
-                    this.stateDescription = stateDescription
-                }
-                if (showProgress) {
-                    liveRegion = LiveRegionMode.Polite
-                }
-            },
-        shape = shape,
-        color = finalContainerColor.copy(alpha = if (enabled) 1f else 0.5f),
-        interactionSource = interactionSource,
-        border = BorderStroke(
-            width = 1.dp,
-            brush = Brush.linearGradient(
-                colors = listOf(
-                    finalContentColor.copy(alpha = if (enabled) 0.2f else 0.1f),
-                    finalContentColor.copy(alpha = if (enabled) 0.1f else 0.05f)
-                )
-            )
-        ),
-        enabled = enabled
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = MorpheDefaults.ItemSpacing),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            if (showProgress) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(20.dp),
-                    color = finalContentColor,
-                    strokeWidth = 2.dp
-                )
-            } else {
-                MorpheIcon(
-                    icon = icon,
-                    tint = finalContentColor.copy(alpha = if (enabled) 1f else 0.5f)
-                )
-                if (showLabel && text != null) {
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = text,
-                        style = MaterialTheme.typography.labelLarge,
-                        color = finalContentColor.copy(alpha = if (enabled) 1f else 0.5f),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+    val button: @Composable (Modifier) -> Unit = { outerModifier ->
+        Surface(
+            onClick = handleClick,
+            modifier = outerModifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .graphicsLayer { scaleX = scale; scaleY = scale }
+                .semantics {
+                    role = Role.Button
+                    this.contentDescription = contentDesc
+                    if (stateDescription != null) {
+                        this.stateDescription = stateDescription
+                    }
+                    if (showProgress) {
+                        liveRegion = LiveRegionMode.Polite
+                    }
+                },
+            shape = shape,
+            color = finalContainerColor.copy(alpha = if (enabled) 1f else 0.5f),
+            interactionSource = interactionSource,
+            border = BorderStroke(
+                width = 1.dp,
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        finalContentColor.copy(alpha = if (enabled) 0.2f else 0.1f),
+                        finalContentColor.copy(alpha = if (enabled) 0.1f else 0.05f)
                     )
+                )
+            ),
+            enabled = enabled
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = MorpheDefaults.ItemSpacing),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if (showProgress) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(MorpheDefaults.IconSizeSmall),
+                        color = finalContentColor,
+                        strokeWidth = 2.dp
+                    )
+                } else {
+                    MorpheIcon(
+                        icon = icon,
+                        tint = finalContentColor.copy(alpha = if (enabled) 1f else 0.5f)
+                    )
+                    if (showLabel && text != null) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = text,
+                            style = MaterialTheme.typography.labelLarge,
+                            color = finalContentColor.copy(alpha = if (enabled) 1f else 0.5f),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
             }
+        }
+    }
+
+    // The weight/positioning modifier must land on this Box so Row still sees it as the direct
+    // child; TooltipBox applies its own modifier to an inner wrapper, which Row can't see
+    Box(modifier = modifier) {
+        // Only surface a tooltip when the label itself is hidden; otherwise the two would repeat
+        if (!showLabel && text != null) {
+            TooltipBox(
+                positionProvider = TooltipDefaults.rememberTooltipPositionProvider(TooltipAnchorPosition.Above),
+                tooltip = { PlainTooltip { Text(text) } },
+                state = rememberTooltipState(),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                button(Modifier)
+            }
+        } else {
+            button(Modifier.fillMaxWidth())
         }
     }
 }

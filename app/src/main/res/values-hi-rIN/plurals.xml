@@ -25,24 +25,32 @@
         <item quantity="other">%s एपीके फाइलें</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">%d ऐप इंस्टॉल किए गए</item>
-        <item quantity="other">%d ऐप इंस्टॉल किए गए</item>
+        <item quantity="one">%s ऐप इंस्टॉल किया गया</item>
+        <item quantity="other">%s ऐप्स इंस्टॉल किए गए</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">%d ऐप पुनर्स्थापित किए गए</item>
-        <item quantity="other">%d ऐप पुनर्स्थापित किए गए</item>
+        <item quantity="one">%s ऐप पुनर्स्थापित किया गया</item>
+        <item quantity="other">%s ऐप्स पुनर्स्थापित किए गए</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">%d ऐप अनइंस्टॉल किए गए</item>
-        <item quantity="other">%d ऐप अनइंस्टॉल किए गए</item>
+        <item quantity="one">%s ऐप अनइंस्टॉल किया गया</item>
+        <item quantity="other">%s ऐप्स अनइंस्टॉल किए गए</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">%d ऐप अनइंस्टॉल करें?</item>
-        <item quantity="other">%d ऐप अनइंस्टॉल करें?</item>
+        <item quantity="one">%s ऐप अनइंस्टॉल करें?</item>
+        <item quantity="other">%s ऐप्स अनइंस्टॉल करें?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s ऐप पैच करने के लिए तैयार है</item>
+        <item quantity="other">%s ऐप्स पैच करने के लिए तैयार हैं</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%s ऐप इंस्टॉल करने के लिए तैयार है</item>
+        <item quantity="other">%s ऐप्स इंस्टॉल करने के लिए तैयार हैं</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">%d ऐप छोड़ दिए गए</item>
-        <item quantity="other">%d ऐप छोड़ दिए गए</item>
+        <item quantity="one">%s ऐप छोड़ दिया गया</item>
+        <item quantity="other">%s ऐप्स छोड़ दिए गए</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">सохित चयन से %s पुरानी पटच को हटा दिया गया</item>
@@ -63,5 +71,9 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s ऐप</item>
         <item quantity="other">%s ऐप्स</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">चयनित बंडल से %s पैच कॉपी किया गया</item>
+        <item quantity="other">चयनित बंडल से %s पैच कॉपी किए गए</item>
     </plurals>
 </resources>

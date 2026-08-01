@@ -25,24 +25,32 @@
         <item quantity="other">%s APK-tiedostoa</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">Asennettu %d sovellus</item>
-        <item quantity="other">Asennettu %d sovellusta</item>
+        <item quantity="one">Asennettu %s sovellus</item>
+        <item quantity="other">Asennettu %s sovellusta</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">Asennettu uudelleen %d sovellus</item>
-        <item quantity="other">Asennettu uudelleen %d sovellusta</item>
+        <item quantity="one">Asennettu uudelleen %s sovellus</item>
+        <item quantity="other">Asennettu uudelleen %s sovellusta</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">Poistettu %d sovellus</item>
-        <item quantity="other">Poistettu %d sovellusta</item>
+        <item quantity="one">Poistettu %s sovellus</item>
+        <item quantity="other">Poistettu %s sovellusta</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">Poista %d sovellus?</item>
-        <item quantity="other">Poista %d sovellusta?</item>
+        <item quantity="one">Poista %s sovellus?</item>
+        <item quantity="other">Poista %s sovellusta?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s sovellus valmis päivitykseen</item>
+        <item quantity="other">%s sovellusta valmis päivitykseen</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%s sovellus on valmis asennettavaksi</item>
+        <item quantity="other">%s sovellusta on valmis asennettavaksi</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">Ohitettu %d sovellus</item>
-        <item quantity="other">Ohitettu %d sovellusta</item>
+        <item quantity="one">Ohitettu %s sovellus</item>
+        <item quantity="other">Ohitettu %s sovellusta</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Poistettiin %s vanhentunut lisäosa tallennetusta valinnasta</item>
@@ -63,5 +71,9 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s sovellus</item>
         <item quantity="other">%s sovellusta</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Kopioitiin %s korjaustiedosto valitusta paketista</item>
+        <item quantity="other">Kopioitiin %s korjaustiedostoa valitusta paketista</item>
     </plurals>
 </resources>

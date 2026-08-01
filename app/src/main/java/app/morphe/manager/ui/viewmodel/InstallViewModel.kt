@@ -22,8 +22,6 @@ import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
-import java.io.IOException
-import java.nio.file.Files
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
@@ -803,6 +801,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         if (installState is InstallState.Installing) return
 
         viewModelScope.launch {
+            currentInstallType = InstallType.MOUNT
             installState = InstallState.Installing
 
             try {
@@ -834,19 +833,18 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 var stockInfo = inputs.installedInfo
                 val label = with(pm) { packageInfo.label() }
                 val patchedVersion = packageInfo.versionName?.takeUnless { it.isBlank() } ?: "unknown"
-                val patchedVersionCode = pm.getVersionCode(packageInfo)
+                // Bind mount only replaces the APK file, so matching versionName is enough;
+                // versionCodes routinely differ across split-APK variants of the same release.
                 fun PackageInfo.matchesPatched() =
                     packageName == this.packageName &&
-                            versionName == patchedVersion &&
-                            pm.getVersionCode(this) == patchedVersionCode
+                            versionName == patchedVersion
                 fun MountStockCandidate.matchesPatched() =
                     info.matchesPatched()
 
                 if (waitForStockInstall && stockInfo != null && !stockInfo.matchesPatched()) {
                     stockInfo = waitForMatchingInstalledStock(
                         packageName = packageName,
-                        versionName = patchedVersion,
-                        versionCode = patchedVersionCode
+                        versionName = patchedVersion
                     ) ?: stockInfo
                 }
 
@@ -1026,15 +1024,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
             return@launch
         }
 
-        val exportSucceeded = runCatching {
-            withContext(Dispatchers.IO) {
-                app.contentResolver.openOutputStream(uri)
-                    ?.use { stream -> Files.copy(outputFile.toPath(), stream) }
-                    ?: throw IOException("Could not open output stream for export")
-            }
-        }.isSuccess
-
-        onComplete(exportSucceeded)
+        onComplete(app.exportApkTo(outputFile, uri))
     }
 
     /**
@@ -1295,8 +1285,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
     private suspend fun waitForMatchingInstalledStock(
         packageName: String,
-        versionName: String,
-        versionCode: Long
+        versionName: String
     ): PackageInfo? {
         var matchingInfo: PackageInfo? = null
         withTimeoutOrNull(STOCK_INSTALL_SETTLE_TIMEOUT) {
@@ -1304,8 +1293,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 val info = withContext(Dispatchers.IO) { pm.getPackageInfo(packageName) }
                 if (info != null &&
                     info.packageName == packageName &&
-                    info.versionName == versionName &&
-                    pm.getVersionCode(info) == versionCode
+                    info.versionName == versionName
                 ) {
                     matchingInfo = info
                 } else {

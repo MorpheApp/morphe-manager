@@ -17,6 +17,7 @@ import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
 import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.ui.viewmodel.RandomInterval
+import app.morphe.manager.util.AppCardColorMode
 import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckInterval
@@ -38,6 +39,8 @@ class PreferencesManager(
     val showGreetingPhrases = booleanPreference("show_greeting_phrases", true)
     val customAccentColor = stringPreference("custom_accent_color", "")
     val customThemeColor = stringPreference("custom_theme_color", "")
+    val appCardColorMode = enumPreference("app_card_color_mode", AppCardColorMode.DEFAULT)
+    val customAppCardColors = stringPreference("custom_app_card_colors", "")
     val theme = enumPreference("theme", Theme.SYSTEM)
     val themeStyle = enumPreference("theme_style", ThemeStyle.MORPHE)
 
@@ -60,6 +63,27 @@ class PreferencesManager(
 
     /**  How often the background update check should run. */
     val updateCheckInterval = enumPreference("update_check_interval", UpdateCheckInterval.DAILY)
+
+    /** Whether patched apps are re-patched automatically when their patch bundle changes. */
+    val autoPatchEnabled = booleanPreference("auto_patch_enabled", false)
+
+    /** How often the automatic re-patch check runs. */
+    val autoPatchInterval = enumPreference("auto_patch_interval", UpdateCheckInterval.WEEKLY)
+
+    /** Restricts automatic re-patching to a charging device, patching is CPU and RAM heavy. */
+    val autoPatchRequiresCharging = booleanPreference("auto_patch_requires_charging", true)
+
+    /**
+     * Installs automatically re-patched apps without asking. Only possible with an installer
+     * that works unattended, otherwise the run stops after saving the APKs.
+     */
+    val autoPatchInstall = booleanPreference("auto_patch_install", false)
+
+    /** Whether other apps may start a batch patch run through an intent. */
+    val externalBatchPatchEnabled = booleanPreference("external_batch_patch_enabled", false)
+
+    /** Packages allowed to start a batch patch run without a confirmation dialog. */
+    val externalBatchPatchAllowlist = stringSetPreference("external_batch_patch_allowlist", emptySet())
 
     /** Tracks whether the POST_NOTIFICATIONS runtime permission dialog has already been shown at least once on first launch (Android 13+). */
     val notificationPermissionRequested = booleanPreference("notification_permission_requested", false)
@@ -192,6 +216,8 @@ class PreferencesManager(
         val pureBlackTheme: Boolean? = null,
         val customAccentColor: String? = null,
         val customThemeColor: String? = null,
+        val appCardColorMode: AppCardColorMode? = null,
+        val customAppCardColors: String? = null,
         val stripUnusedNativeLibs: Boolean? = null,
         val theme: Theme? = null,
         val themeStyle: ThemeStyle? = null,
@@ -234,6 +260,12 @@ class PreferencesManager(
         val randomBackgroundInterval: RandomInterval? = null,
         val useExpertMode: Boolean? = null,
         val updateCheckInterval: UpdateCheckInterval? = null,
+        val autoPatchEnabled: Boolean? = null,
+        val autoPatchInterval: UpdateCheckInterval? = null,
+        val autoPatchRequiresCharging: Boolean? = null,
+        val autoPatchInstall: Boolean? = null,
+        val externalBatchPatchEnabled: Boolean? = null,
+        val externalBatchPatchAllowlist: Set<String>? = null,
         val customBundles: List<BundleSnapshot>? = null,
         val bytecodeModePreference: BytecodeMode? = null,
         val filePickerSortMode: String? = null,
@@ -254,6 +286,8 @@ class PreferencesManager(
         pureBlackTheme = pureBlackTheme.get(),
         customAccentColor = customAccentColor.get(),
         customThemeColor = customThemeColor.get(),
+        appCardColorMode = appCardColorMode.get(),
+        customAppCardColors = customAppCardColors.get(),
         stripUnusedNativeLibs = stripUnusedNativeLibs.get(),
         theme = theme.get(),
         themeStyle = themeStyle.get(),
@@ -279,6 +313,12 @@ class PreferencesManager(
         randomBackgroundInterval = randomBackgroundInterval.get(),
         useExpertMode = useExpertMode.get(),
         updateCheckInterval = updateCheckInterval.get(),
+        autoPatchEnabled = autoPatchEnabled.get(),
+        autoPatchInterval = autoPatchInterval.get(),
+        autoPatchRequiresCharging = autoPatchRequiresCharging.get(),
+        autoPatchInstall = autoPatchInstall.get(),
+        externalBatchPatchEnabled = externalBatchPatchEnabled.get(),
+        externalBatchPatchAllowlist = externalBatchPatchAllowlist.get(),
         bytecodeModePreference = bytecodeModePreference.get(),
         filePickerSortMode = filePickerSortMode.get(),
         filePickerShowHiddenFiles = filePickerShowHiddenFiles.get(),
@@ -296,6 +336,8 @@ class PreferencesManager(
         snapshot.pureBlackTheme?.let { pureBlackTheme.value = it }
         snapshot.customAccentColor?.let { customAccentColor.value = it }
         snapshot.customThemeColor?.let { customThemeColor.value = it }
+        snapshot.appCardColorMode?.let { appCardColorMode.value = it }
+        snapshot.customAppCardColors?.let { customAppCardColors.value = it }
         snapshot.stripUnusedNativeLibs?.let { stripUnusedNativeLibs.value = it }
         snapshot.theme?.let { theme.value = it }
         snapshot.themeStyle?.let { themeStyle.value = it }
@@ -325,6 +367,12 @@ class PreferencesManager(
         snapshot.randomBackgroundInterval?.let { randomBackgroundInterval.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
+        snapshot.autoPatchEnabled?.let { autoPatchEnabled.value = it }
+        snapshot.autoPatchInterval?.let { autoPatchInterval.value = it }
+        snapshot.autoPatchRequiresCharging?.let { autoPatchRequiresCharging.value = it }
+        snapshot.autoPatchInstall?.let { autoPatchInstall.value = it }
+        snapshot.externalBatchPatchEnabled?.let { externalBatchPatchEnabled.value = it }
+        snapshot.externalBatchPatchAllowlist?.let { externalBatchPatchAllowlist.value = it }
         snapshot.bytecodeModePreference?.let { bytecodeModePreference.value = it }
         snapshot.filePickerSortMode?.let { filePickerSortMode.value = it }
         snapshot.filePickerShowHiddenFiles?.let { filePickerShowHiddenFiles.value = it }

@@ -544,7 +544,7 @@ fun PatcherScreen(
                         ExpertPatchingInProgress(
                             progress = displayProgressAnimate,
                             patchesProgress = patchesProgress,
-                            patcherViewModel = patcherViewModel,
+                            patchProgress = patcherViewModel.patchRun,
                             patcherSucceeded = patcherSucceeded,
                             miniGameState = miniGameState,
                             onCancelClick = { state.showCancelDialog = true },
@@ -555,7 +555,7 @@ fun PatcherScreen(
                         SimplePatchingInProgress(
                             progress = displayProgressAnimate,
                             patchesProgress = patchesProgress,
-                            patcherViewModel = patcherViewModel,
+                            patchProgress = patcherViewModel.patchRun,
                             showLongStepWarning = showLongStepWarning,
                             onCancelClick = { state.showCancelDialog = true },
                             onHomeClick = onBackClick

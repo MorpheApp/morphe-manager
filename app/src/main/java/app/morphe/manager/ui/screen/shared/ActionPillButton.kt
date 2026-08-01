@@ -17,6 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -53,25 +56,31 @@ fun ActionPillButton(
         label = "action_pill_press_scale"
     )
 
+    // Surface rather than FilledTonalIconButton: the latter always centers its content in a
+    // fixed icon-sized box, so a labeled pill can never measure itself against its own text
     val pill: @Composable (Modifier) -> Unit = { outerModifier ->
-        FilledTonalIconButton(
+        Surface(
             onClick = onClick,
             enabled = enabled,
-            colors = colors,
             shape = PillShape,
+            color = if (enabled) colors.containerColor else colors.disabledContainerColor,
+            contentColor = if (enabled) colors.contentColor else colors.disabledContentColor,
             interactionSource = interactionSource,
             modifier = outerModifier
                 .height(height)
                 .widthIn(min = minWidth)
                 .graphicsLayer { scaleX = scale; scaleY = scale }
+                .semantics { role = Role.Button }
         ) {
-            PillContent(
-                icon = icon,
-                iconSize = iconSize,
-                contentDescription = contentDescription,
-                label = label,
-                textStyle = textStyle
-            )
+            Box(contentAlignment = Alignment.Center) {
+                PillContent(
+                    icon = icon,
+                    iconSize = iconSize,
+                    contentDescription = contentDescription,
+                    label = label,
+                    textStyle = textStyle
+                )
+            }
         }
     }
 
@@ -99,7 +108,7 @@ private fun PillContent(
 ) {
     if (label != null) {
         Row(
-            modifier = Modifier.padding(horizontal = 8.dp),
+            modifier = Modifier.padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -139,7 +148,7 @@ data class CardAction(
 
 /**
  * Wide action row anchored to the bottom of a card. Accepts one or two [CardAction]s.
- * A single action is centered at 50% width; two actions split the row equally.
+ * A single action is centered at no less than 50% width; two actions split the row equally.
  * Buttons are rendered as [ActionPillButton] with `large = true`.
  */
 @Composable
@@ -149,29 +158,38 @@ fun CardActionRow(
 ) {
     require(actions.size in 1..2) { "CardActionRow supports 1 or 2 actions" }
     val hasBoth = actions.size == 2
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = if (hasBoth) Arrangement.spacedBy(8.dp) else Arrangement.Center
-    ) {
-        actions.forEach { action ->
-            val colors = if (action.destructive) {
-                IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                    contentColor = MaterialTheme.colorScheme.onErrorContainer
+    BoxWithConstraints(modifier = modifier.fillMaxWidth()) {
+        // Half width is a floor rather than a fixed size, so a single action that carries a long
+        // label (a translated verb plus a value) grows instead of ellipsizing it away
+        val singleActionMinWidth = maxWidth / 2
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = if (hasBoth) Arrangement.spacedBy(8.dp) else Arrangement.Center
+        ) {
+            actions.forEach { action ->
+                val colors = if (action.destructive) {
+                    IconButtonDefaults.filledTonalIconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer,
+                        contentColor = MaterialTheme.colorScheme.onErrorContainer
+                    )
+                } else {
+                    IconButtonDefaults.filledTonalIconButtonColors()
+                }
+                ActionPillButton(
+                    onClick = action.onClick,
+                    icon = action.icon,
+                    contentDescription = action.label,
+                    label = action.label,
+                    enabled = action.enabled,
+                    large = true,
+                    modifier = if (hasBoth) {
+                        Modifier.weight(1f)
+                    } else {
+                        Modifier.widthIn(min = singleActionMinWidth)
+                    },
+                    colors = colors
                 )
-            } else {
-                IconButtonDefaults.filledTonalIconButtonColors()
             }
-            ActionPillButton(
-                onClick = action.onClick,
-                icon = action.icon,
-                contentDescription = action.label,
-                label = action.label,
-                enabled = action.enabled,
-                large = true,
-                modifier = if (hasBoth) Modifier.weight(1f) else Modifier.fillMaxWidth(0.5f),
-                colors = colors
-            )
         }
     }
 }

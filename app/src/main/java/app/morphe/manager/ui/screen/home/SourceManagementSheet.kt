@@ -36,7 +36,6 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.boundsInWindow
@@ -52,6 +51,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
@@ -61,17 +61,18 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.manager.SourceBundleSortMode
 import app.morphe.manager.domain.repository.BlocklistRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.screen.patcher.IncompatiblePatcherVersionDialog
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.RemoteAvatar
-import app.morphe.manager.util.SOURCE_REPO_URL
-import app.morphe.manager.util.getRelativeTimeString
-import app.morphe.manager.util.toast
+import app.morphe.manager.util.*
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 import java.util.Locale
+
+/** Keeps the scrollbar clear of the sheet's bottom action row. */
+private val SourceListScrollbarBottomInset = 64.dp
 
 /**
  * Bottom sheet for managing patch bundles.
@@ -139,6 +140,15 @@ fun BundleManagementSheet(
     val orderedSources = remember(localOrder, sources, sourceSortMode) {
         sources.sortedForSourceSort(sourceSortMode, localOrder)
     }
+    val alphabetScrollMode = sourceSortMode == SourceBundleSortMode.NAME_ASC ||
+            sourceSortMode == SourceBundleSortMode.NAME_DESC
+    val sourceScrollTargets = remember(alphabetScrollMode, orderedSources) {
+        if (!alphabetScrollMode) {
+            emptyList()
+        } else {
+            buildIndexedScrollTargets(orderedSources) { source -> source.displayTitle }
+        }
+    }
     val haptic = LocalHapticFeedback.current
     val reorderableState = rememberReorderableLazyListState(listState) { from, to ->
         val newOrder = localOrder.toMutableList()
@@ -148,6 +158,7 @@ fun BundleManagementSheet(
     }
 
     val bundleToShowPatches = remember { mutableStateOf<PatchBundleSource?>(null) }
+    var bundleRequiringManagerUpdate by remember { mutableStateOf<PatchBundleSource?>(null) }
     var bundleToShowChangelogUid by remember { mutableStateOf<Int?>(null) }
     val bundleToShowChangelog = bundleToShowChangelogUid
         ?.let { uid -> sources.filterIsInstance<RemotePatchBundle>().find { it.uid == uid } }
@@ -323,6 +334,7 @@ fun BundleManagementSheet(
                                     hasExperimentalVersions = hasExperimentalVersions,
                                     useExperimentalVersions = useExperimentalVersions,
                                     onPatchesClick = { bundleToShowPatches.value = bundle },
+                                    onOutdatedManagerClick = { bundleRequiringManagerUpdate = bundle },
                                     onVersionClick = {
                                         if (bundle is RemotePatchBundle) {
                                             bundleToShowChangelogUid = bundle.uid
@@ -330,9 +342,7 @@ fun BundleManagementSheet(
                                     },
                                     onOpenInBrowser = {
                                         val pageUrl = manualUpdateInfo[bundle.uid]?.pageUrl
-                                            ?: (bundle as? RemotePatchBundle)?.let { remote ->
-                                                RemotePatchBundle.inferPageUrlFromEndpoint(remote.endpoint)
-                                            }
+                                            ?: (bundle as? RemotePatchBundle)?.browsePageUrl
                                             ?: SOURCE_REPO_URL
                                         try {
                                             uriHandler.openUri(pageUrl)
@@ -365,7 +375,17 @@ fun BundleManagementSheet(
                         }
                     }
 
-                    ScrollToTopButton(listState = listState)
+                    ListScrollbar(
+                        listState = listState,
+                        alphabetTargets = sourceScrollTargets,
+                        alphabetMode = alphabetScrollMode,
+                        extraBottomPadding = SourceListScrollbarBottomInset
+                    )
+
+                    ScrollToTopButton(
+                        listState = listState,
+                        extraBottomPadding = SourceListScrollbarBottomInset
+                    )
                 }
             }
         }
@@ -403,6 +423,15 @@ fun BundleManagementSheet(
         BundlePatchesDialog(
             onDismissRequest = { bundleToShowPatches.value = null },
             src = bundleToShowPatches.value!!
+        )
+    }
+
+    // Outdated manager dialog, shared with the pre-flight check done when patching starts
+    bundleRequiringManagerUpdate?.let { bundle ->
+        IncompatiblePatcherVersionDialog(
+            bundleName = bundle.displayTitle,
+            requiredVersion = bundle.requiredPatcherVersion.orEmpty(),
+            onDismiss = { bundleRequiringManagerUpdate = null }
         )
     }
 
@@ -484,6 +513,7 @@ private fun BundleManagementCard(
     onPatchesClick: () -> Unit,
     onVersionClick: () -> Unit,
     onOpenInBrowser: () -> Unit,
+    onOutdatedManagerClick: () -> Unit,
     forceExpanded: Boolean = false
 ) {
     // Localized strings for accessibility
@@ -632,6 +662,25 @@ private fun BundleManagementCard(
                                 style = InfoBadgeStyle.Error
                             )
                         }
+
+                        // Outdated manager hint
+                        AnimatedVisibility(
+                            visible = bundle.requiresManagerUpdate,
+                            enter = MorpheAnimations.expandFadeEnter,
+                            exit = MorpheAnimations.shrinkFadeExit
+                        ) {
+                            InfoBadge(
+                                modifier = Modifier.clickable(onClick = onOutdatedManagerClick),
+                                text = stringResource(
+                                    R.string.sources_management_outdated_manager_hint,
+                                    bundle.requiredPatcherVersion.orEmpty(),
+                                    BuildConfig.VERSION_NAME,
+                                    BuildConfig.PATCHER_VERSION
+                                ),
+                                icon = Icons.Outlined.SystemUpdate,
+                                style = InfoBadgeStyle.Error
+                            )
+                        }
                     }
 
                     // Patches
@@ -661,7 +710,7 @@ private fun BundleManagementCard(
                         ),
                         icon = Icons.Outlined.Update,
                         title = stringResource(R.string.version),
-                        value = bundle.version?.removePrefix("v") ?: "N/A",
+                        value = bundle.version?.removePrefix("v")?.isolateLtr() ?: "N/A",
                         onClick = onVersionClick,
                         enabled = !isUpdating
                     )
@@ -676,7 +725,7 @@ private fun BundleManagementCard(
                                 .semantics {
                                     contentDescription = openInBrowser
                                 },
-                            shape = RoundedCornerShape(12.dp)
+                            shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius)
                         ) {
                             Icon(
                                 Icons.AutoMirrored.Outlined.OpenInNew,
@@ -928,6 +977,20 @@ private fun BundleCardHeader(
                     )
                 }
 
+                // Outdated manager badge
+                AnimatedVisibility(
+                    visible = bundle.requiresManagerUpdate,
+                    enter = MorpheAnimations.expandHorizFadeIn,
+                    exit = MorpheAnimations.shrinkHorizFadeOut
+                ) {
+                    InfoBadge(
+                        text = stringResource(R.string.sources_management_outdated_manager_badge),
+                        style = InfoBadgeStyle.Error,
+                        icon = null,
+                        isCompact = true
+                    )
+                }
+
                 // Blocked badge
                 AnimatedVisibility(
                     visible = blockedInfo != null,
@@ -976,83 +1039,6 @@ private fun BundleCardHeader(
                 modifier = Modifier.rotate(rotation),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
-        }
-    }
-}
-
-@Composable
-private fun BundleInfoCard(
-    modifier: Modifier = Modifier,
-    icon: ImageVector,
-    title: String,
-    value: String,
-    onClick: () -> Unit,
-    showChevron: Boolean = true,
-    enabled: Boolean = true
-) {
-    val contentDesc = "$title: $value"
-
-    Surface(
-        modifier = modifier.semantics {
-            contentDescription = contentDesc
-            role = Role.Button
-        },
-        shape = RoundedCornerShape(12.dp),
-        color = if (enabled) {
-            MaterialTheme.colorScheme.secondaryContainer
-        } else {
-            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-        },
-        onClick = onClick,
-        enabled = enabled
-    ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            MorpheIcon(
-                icon = icon,
-                size = 20.dp,
-                tint = MaterialTheme.colorScheme.onSecondaryContainer
-            )
-
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f),
-                    maxLines = 1,
-                )
-                if (value.isNotEmpty()) {
-                    Text(
-                        text = value,
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer,
-                        maxLines = 1,
-                    )
-                }
-            }
-
-            if (showChevron && enabled) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Icon(
-                        Icons.Outlined.TouchApp,
-                        contentDescription = null,
-                        modifier = Modifier.size(14.dp),
-                        tint = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.6f)
-                    )
-                    Text(
-                        text = stringResource(R.string.details),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.6f)
-                    )
-                }
-            }
         }
     }
 }

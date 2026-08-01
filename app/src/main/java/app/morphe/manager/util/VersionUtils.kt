@@ -1,5 +1,20 @@
 package app.morphe.manager.util
 
+import app.morphe.manager.BuildConfig
+import io.github.z4kn4fein.semver.Version
+
+/**
+ * Check if the patcher version [required] by a patch bundle is newer than the [current] one
+ * shipped in the manager, meaning the app has to be updated before the bundle can be used.
+ *
+ * Falls back to false (bundle considered usable) if either string cannot be parsed, so a
+ * malformed manifest attribute never blocks patching.
+ */
+fun isPatcherOutdated(required: String, current: String = BuildConfig.PATCHER_VERSION): Boolean =
+    runCatching {
+        Version.parse(required, strict = false) > Version.parse(current, strict = false)
+    }.getOrDefault(false)
+
 /**
  * Strips a leading `v` and surrounding whitespace so version strings from different
  * sources (GitHub tags, JSON metadata, BuildConfig) can be compared without mismatch.

@@ -317,10 +317,18 @@ internal fun GameScoreRow(
         }
         Spacer(Modifier.weight(1f))
         GameChip(onClick = onRestart) {
-            Icon(Icons.Outlined.Refresh, contentDescription = null, modifier = Modifier.size(20.dp))
+            Icon(
+                imageVector = Icons.Outlined.Refresh,
+                contentDescription = null,
+                modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
+            )
         }
         GameChip(onClick = onChangeGame) {
-            Icon(Icons.Outlined.SportsEsports, contentDescription = null, modifier = Modifier.size(20.dp))
+            Icon(
+                imageVector = Icons.Outlined.SportsEsports,
+                contentDescription = null,
+                modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
+            )
         }
     }
 }

@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.data.room.apps.installed.supportsMount
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.HomeAppCategoryState
 import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
@@ -50,6 +51,7 @@ import kotlin.time.Duration.Companion.milliseconds
 fun HomeScreen(
     onSettingsClick: () -> Unit,
     onStartQuickPatch: (QuickPatchParams) -> Unit,
+    onStartBatchPatch: (List<String>, Boolean) -> Unit,
     homeViewModel: HomeViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
     homeAppButtonPrefs: HomeAppButtonPreferences = koinInject(),
@@ -164,6 +166,7 @@ fun HomeScreen(
             InstallQueueRequest(
                 file = savedFile,
                 originalPackageName = installed.originalPackageName,
+                mountPackageName = installed.currentPackageName.takeIf { installed.supportsMount },
                 onPersistApp = { packageName, installType ->
                     homeViewModel.persistReinstalledApp(installed, packageName, installType)
                 },
@@ -173,6 +176,24 @@ fun HomeScreen(
             )
         }
         startInstallQueue(requests)
+    }
+
+    val batchInProgressText = stringResource(R.string.batch_patch_in_progress)
+    val startBatchPatch: (List<HomeAppItem>) -> Unit = { items ->
+        val packageNames = items.map { it.packageName }
+        when {
+            availablePatches <= 0 -> context.toast(sourcesLoadingText)
+            homeViewModel.android11BugActive -> homeViewModel.showAndroid11Dialog = true
+            packageNames.isEmpty() -> Unit
+            // A live queue keeps its own selection, so open it instead of swapping the apps
+            homeViewModel.batchPatchRunning -> {
+                context.toast(batchInProgressText)
+                onStartBatchPatch(packageNames, false)
+            }
+            // The queue installs through the standard installer, never by mounting, so the
+            // single-app mount choice must not carry over into the patches it resolves
+            else -> onStartBatchPatch(packageNames, false)
+        }
     }
 
     // Handle patch trigger from dialog
@@ -191,6 +212,11 @@ fun HomeScreen(
 
     val metadataFetchErrors by homeViewModel.patchBundleRepository.metadataFetchErrors.collectAsStateWithLifecycle(emptyMap())
     val hasMetadataErrors = metadataFetchErrors.isNotEmpty()
+
+    // Sources built for a newer patcher than this manager ships. They cannot be loaded or patched
+    // with until the app is updated, so surface it instead of leaving the source silently broken
+    val bundleSources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
+    val hasOutdatedManagerSources = bundleSources.any { it.requiresManagerUpdate }
 
     // Manager update details dialog
     if (showUpdateDetailsDialog.value) {
@@ -245,6 +271,7 @@ fun HomeScreen(
             SectionsLayout(
                 notifications = HomeNotificationsUi(
                     managerUpdate = AlertState(hasManagerUpdate) { showUpdateDetailsDialog.value = true },
+                    outdatedManager = AlertState(hasOutdatedManagerSources) { homeViewModel.showBundleManagementSheet = true },
                     blockedSources = AlertState(hasBlockedSources) { homeViewModel.showBundleManagementSheet = true },
                     metadataErrors = AlertState(hasMetadataErrors) { homeViewModel.showBundleManagementSheet = true },
                     meteredSkipped = AlertState(homeViewModel.updatesSkippedDueToMetered) { onSettingsClick() },
@@ -282,6 +309,7 @@ fun HomeScreen(
                     onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.hideApp(it) } },
                     onUninstallMultiple = { items -> homeViewModel.uninstallApps(items) },
                     onReinstallMultiple = { items -> startBatchReinstall(items) },
+                    onPatchMultiple = { items -> startBatchPatch(items) },
                     onUnhideApp = { packageName -> homeViewModel.unhideApp(packageName) },
                     onShowPatches = { item -> patchesSheetItem.value = item },
                     onGestureHintShown = {

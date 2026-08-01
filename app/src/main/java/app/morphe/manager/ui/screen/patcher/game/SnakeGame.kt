@@ -27,11 +27,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.shared.MorpheDefaults
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.random.Random
+import kotlin.time.Duration.Companion.milliseconds
 
 private const val SNAKE_GRID = 20
 
@@ -119,7 +121,7 @@ fun SnakeGame(state: SnakeGameState) {
     GameOverHaptic { state.isGameOver }
     LaunchedEffect(Unit) {
         while (isActive) {
-            delay(state.tickMs)
+            delay(state.tickMs.milliseconds)
             state.tick()
         }
     }
@@ -132,7 +134,7 @@ private const val SNAKE_SWIPE_THRESHOLD = 30f
 private fun SnakeCanvas(state: SnakeGameState, modifier: Modifier) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(MorpheDefaults.CompactCornerRadius))
             .background(SnakeBg)
             .pointerInput(Unit) {
                 var drag = Offset.Zero

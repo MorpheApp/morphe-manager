@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.BundleSourceType
+import app.morphe.manager.domain.bundles.BundledAppTarget
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.sourceType
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -410,6 +411,9 @@ fun HomeDialogs(
                 onRestoreSaved = { bundleUid ->
                     homeViewModel.expertModeRestoreSaved(bundleUid)
                 },
+                onCopyFromBundle = { bundleUid ->
+                    homeViewModel.openExpertModeCopyDialog(bundleUid)
+                },
                 onOptionChange = { bundleUid, patchName, optionKey, value ->
                     homeViewModel.updateOptionInExpertMode(bundleUid, patchName, optionKey, value)
                 },
@@ -428,6 +432,24 @@ fun HomeDialogs(
                 homeViewModel.proceedExpertMode()
             }
         )
+
+        homeViewModel.expertModeCopyTargetBundleUid?.let { targetUid ->
+            val selectedApp = homeViewModel.expertModeSelectedApp ?: return@let
+            val targetBundle = homeViewModel.expertModeBundles.firstOrNull { it.uid == targetUid }
+                ?: return@let
+            val appDisplayName = targetBundle.displayName ?: selectedApp.packageName
+            CopySelectionFromBundleDialog(
+                target = CopySelectionTarget(
+                    packageName = selectedApp.packageName,
+                    bundleUid = targetUid,
+                    bundleName = targetBundle.name,
+                    appDisplayName = appDisplayName
+                ),
+                candidates = homeViewModel.expertModeCopyCandidates,
+                onConfirm = { homeViewModel.applyExpertModeCopy(it) },
+                onDismiss = { homeViewModel.closeExpertModeCopyDialog() }
+            )
+        }
     }
 
     // Bundle management sheet
@@ -670,6 +692,16 @@ private fun ApkAvailabilityDialog(
                         icon = Icons.Outlined.PhoneAndroid,
                         modifier = Modifier.fillMaxWidth()
                     )
+
+                    // The certificate check could not run, so the installed app may already be patched
+                    if (installedApkInfo.patchStateUnknown) {
+                        InfoBadge(
+                            text = stringResource(R.string.home_apk_use_installed_unverified),
+                            style = InfoBadgeStyle.Warning,
+                            icon = Icons.Outlined.Warning,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
                 }
             }
         }
@@ -764,7 +796,7 @@ private fun ApkAvailabilityDialog(
  * Dialog 2: Download instructions dialog.
  */
 @Composable
-private fun DownloadInstructionsDialog(
+internal fun DownloadInstructionsDialog(
     usingMountInstall: Boolean,
     targetAppInstalled: Boolean,
     downloadColor: Color,
@@ -853,7 +885,7 @@ private fun DownloadInstructionsDialog(
                                 imageVector = Icons.Filled.Download,
                                 contentDescription = null,
                                 tint = downloadContentColor,
-                                modifier = Modifier.size(20.dp)
+                                modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
                             )
                             Text(
                                 text = if (isApkBundle) "DOWNLOAD APK BUNDLE" else "DOWNLOAD APK",
@@ -940,7 +972,7 @@ private fun InstructionStep(
  * Dialog 3: File picker prompt dialog.
  */
 @Composable
-private fun FilePickerPromptDialog(
+internal fun FilePickerPromptDialog(
     appName: String,
     isOtherApps: Boolean,
     isLoadingInstalledApps: Boolean,
@@ -1076,7 +1108,7 @@ private fun InstalledAppPickerDialog(
                 Icon(
                     imageVector = icon,
                     contentDescription = description,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
                 )
             }
         },
@@ -1218,7 +1250,15 @@ private fun InstalledAppPickerDialog(
                 }
             }
 
-            ScrollToTopButton(listState = listState)
+            ListScrollbar(
+                listState = listState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
+
+            ScrollToTopButton(
+                listState = listState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
         }
     }
 }
@@ -2196,7 +2236,7 @@ fun DeepLinkAddSourceDialog(
 
             // Bundle details card
             Surface(
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
                 color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -2287,7 +2327,7 @@ fun MppImportDialog(
 
             // Bundle details card
             Surface(
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
                 color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
                 modifier = Modifier.fillMaxWidth()
             ) {

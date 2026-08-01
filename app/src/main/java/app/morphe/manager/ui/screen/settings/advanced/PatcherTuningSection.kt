@@ -8,13 +8,17 @@ package app.morphe.manager.ui.screen.settings.advanced
 import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.outlined.Check
+import androidx.compose.material.icons.outlined.Code
+import androidx.compose.material.icons.outlined.Memory
+import androidx.compose.material.icons.outlined.Speed
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.boundsInWindow
@@ -87,20 +91,14 @@ fun PatcherTuningSection(
                         )
                     else stringResource(R.string.settings_system_process_runtime_disabled_description),
                     leadingContent = { MorpheIcon(icon = Icons.Outlined.Memory) },
-                    trailingContent = {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            StatusCircleIcon(
-                                icon = Icons.Outlined.Check,
-                                containerColor = if (useProcessRuntime) MaterialTheme.colorScheme.primaryContainer
-                                else MaterialTheme.colorScheme.surfaceVariant,
-                                contentColor = if (useProcessRuntime) MaterialTheme.colorScheme.onPrimaryContainer
-                                else MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
-                        }
+                    statusContent = {
+                        StatusCircleIcon(
+                            icon = Icons.Outlined.Check,
+                            containerColor = if (useProcessRuntime) MaterialTheme.colorScheme.primaryContainer
+                            else MaterialTheme.colorScheme.surfaceVariant,
+                            contentColor = if (useProcessRuntime) MaterialTheme.colorScheme.onPrimaryContainer
+                            else MaterialTheme.colorScheme.onSurfaceVariant
+                        )
                     }
                 )
             } else {
@@ -123,8 +121,7 @@ fun PatcherTuningSection(
                 onClick = { showBytecodeDialog.value = true },
                 title = stringResource(R.string.settings_advanced_bytecode_mode),
                 subtitle = stringResource(bytecodeMode.labelRes()),
-                leadingContent = { MorpheIcon(icon = Icons.Outlined.Code) },
-                trailingContent = { MorpheIcon(icon = Icons.Outlined.ChevronRight) }
+                leadingContent = { MorpheIcon(icon = Icons.Outlined.Code) }
             )
         }
     }

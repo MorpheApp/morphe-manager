@@ -19,19 +19,25 @@
         <item quantity="other">%s tệp APK</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="other">Đã cài đặt %d ứng dụng</item>
+        <item quantity="other">Đã cài đặt %s ứng dụng</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="other">Cài đặt lại %d ứng dụng</item>
+        <item quantity="other">Đã cài đặt lại %s ứng dụng</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="other">Gỡ cài đặt %d ứng dụng</item>
+        <item quantity="other">Đã gỡ cài đặt %s ứng dụng</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="other">Gỡ cài đặt %d ứng dụng?</item>
+        <item quantity="other">Gỡ cài đặt %s ứng dụng?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="other">%s ứng dụng sẵn sàng để vá</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="other">%s ứng dụng đã sẵn sàng để cài đặt</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="other">Bỏ qua %d ứng dụng</item>
+        <item quantity="other">Đã bỏ qua %s ứng dụng</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="other">Đã loại bỏ %s bản vá lỗi thời khỏi danh sách bản vá đã lưu</item>
@@ -47,5 +53,8 @@
     </plurals>
     <plurals name="home_category_app_count">
         <item quantity="other">%s ứng dụng</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="other">Đã sao chép %s bản vá từ gói được chọn</item>
     </plurals>
 </resources>

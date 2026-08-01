@@ -37,34 +37,46 @@
         <item quantity="other">%s קבצי APK</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">הותקנו %d אפליקציות</item>
-        <item quantity="two">הותקנו %d אפליקציות</item>
-        <item quantity="many">הותקנו %d אפליקציות</item>
-        <item quantity="other">הותקנו %d אפליקציות</item>
+        <item quantity="one">הותקנו %s אפליקציות</item>
+        <item quantity="two">הותקנו %s אפליקציות</item>
+        <item quantity="many">הותקנו %s אפליקציות</item>
+        <item quantity="other">הותקנו %s אפליקציות</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">הותקנו מחדש %d אפליקציות</item>
-        <item quantity="two">הותקנו מחדש %d אפליקציות</item>
-        <item quantity="many">הותקנו מחדש %d אפליקציות</item>
-        <item quantity="other">הותקנו מחדש %d אפליקציות</item>
+        <item quantity="one">הותקנו מחדש %s אפליקציה</item>
+        <item quantity="two">הותקנו מחדש %s אפליקציות</item>
+        <item quantity="many">הותקנו מחדש %s אפליקציות</item>
+        <item quantity="other">הותקנו מחדש %s אפליקציות</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">הוסרו %d אפליקציות</item>
-        <item quantity="two">הוסרו %d אפליקציות</item>
-        <item quantity="many">הוסרו %d אפליקציות</item>
-        <item quantity="other">הוסרו %d אפליקציות</item>
+        <item quantity="one">הוסרו %s אפליקציות</item>
+        <item quantity="two">הוסרו %s אפליקציות</item>
+        <item quantity="many">הוסרו %s אפליקציות</item>
+        <item quantity="other">הוסרו %s אפליקציות</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">הסר התקנה של %d אפליקציה?</item>
-        <item quantity="two">הסר התקנה של %d אפליקציות?</item>
-        <item quantity="many">הסר התקנה של %d אפליקציות?</item>
-        <item quantity="other">הסר התקנה של %d אפליקציות?</item>
+        <item quantity="one">להסיר %s אפליקציה?</item>
+        <item quantity="two">להסיר %s אפליקציות?</item>
+        <item quantity="many">להסיר %s אפליקציות?</item>
+        <item quantity="other">להסיר %s אפליקציות?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s אפליקציה מוכנה לתיקון</item>
+        <item quantity="two">%s אפליקציות מוכנות לתיקון</item>
+        <item quantity="many">%s אפליקציות מוכנות לתיקון</item>
+        <item quantity="other">%s אפליקציות מוכנות לתיקון</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%s אפליקציה מוכנה להתקנה</item>
+        <item quantity="two">%s אפליקציות מוכנות להתקנה</item>
+        <item quantity="many">%s אפליקציות מוכנות להתקנה</item>
+        <item quantity="other">%s אפליקציות מוכנות להתקנה</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">דילג על %d אפליקציה</item>
-        <item quantity="two">דילג על %d אפליקציות</item>
-        <item quantity="many">דילג על %d אפליקציות</item>
-        <item quantity="other">דילג על %d אפליקציות</item>
+        <item quantity="one">דילוג על %s אפליקציה</item>
+        <item quantity="two">דילוג על %s אפליקציות</item>
+        <item quantity="many">דילוג על %s אפליקציות</item>
+        <item quantity="other">דילוג על %s אפליקציות</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">הוסר תיקון מיושן אחד מהמבחר השמור</item>
@@ -95,5 +107,11 @@
         <item quantity="two">%s אפליקציות</item>
         <item quantity="many">%s אפליקציות</item>
         <item quantity="other">%s אפליקציות</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">הועתקו %s תיקונים מהחבילה הנבחרת</item>
+        <item quantity="two">הועתקו %s תיקונים מהחבילה הנבחרת</item>
+        <item quantity="many">הועתקו %s תיקונים מהחבילה הנבחרת</item>
+        <item quantity="other">הועתקו %s תיקונים מהחבילה הנבחרת</item>
     </plurals>
 </resources>

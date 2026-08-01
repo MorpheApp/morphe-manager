@@ -33,8 +33,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -42,6 +40,7 @@ import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
+import app.morphe.manager.data.room.apps.installed.supportsMount
 import app.morphe.manager.data.room.apps.original.OriginalApk
 import app.morphe.manager.domain.installer.InstallerFileProvider
 import app.morphe.manager.domain.installer.InstallerManager
@@ -263,10 +262,10 @@ private fun PatchedApksContent(
     fun installRequests(items: List<ApkItemData>) = items.mapNotNull { item ->
         val installedApp = appByKey[item.selectionKey] ?: return@mapNotNull null
         val file = item.file?.takeIf { it.exists() } ?: return@mapNotNull null
-        if (item.installType == InstallType.MOUNT) return@mapNotNull null
         InstallQueueRequest(
             file = file,
             originalPackageName = installedApp.originalPackageName,
+            mountPackageName = installedApp.currentPackageName.takeIf { installedApp.supportsMount },
             onPersistApp = { packageName, installType ->
                 val appliedPatches = repository.getAppliedPatches(installedApp.currentPackageName)
                 repository.addOrUpdate(
@@ -854,24 +853,14 @@ private fun ApkManagementDialogContent(
             ) {
                 if (retentionToggle != null) {
                     item(key = "retention") {
-                        val enabledState = stringResource(R.string.enabled)
-                        val disabledState = stringResource(R.string.disabled)
                         Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)) {
-                            SettingsItem(
-                                onClick = { retentionToggle.onCheckedChange(!retentionToggle.checked) },
+                            SettingsSwitchItem(
+                                checked = retentionToggle.checked,
+                                onToggle = { retentionToggle.onCheckedChange(!retentionToggle.checked) },
                                 leadingContent = { MorpheIcon(icon = meta.icon, tint = meta.accentColor) },
                                 title = retentionToggle.title,
                                 subtitle = retentionToggle.description,
-                                showBorder = true,
-                                trailingContent = {
-                                    MorpheSwitch(
-                                        checked = retentionToggle.checked,
-                                        onCheckedChange = retentionToggle.onCheckedChange,
-                                        modifier = Modifier.semantics {
-                                            stateDescription = if (retentionToggle.checked) enabledState else disabledState
-                                        }
-                                    )
-                                }
+                                showBorder = true
                             )
                             MorpheSettingsDivider(fullWidth = true)
                         }
@@ -942,7 +931,15 @@ private fun ApkManagementDialogContent(
                 }
             }
 
-            ScrollToTopButton(listState = listState)
+            ListScrollbar(
+                listState = listState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
+
+            ScrollToTopButton(
+                listState = listState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
         }
     }
 

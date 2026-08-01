@@ -37,34 +37,46 @@
         <item quantity="other">%s APK файлів</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">Встановлено %d застосунок</item>
-        <item quantity="few">Встановлено %d застосунки</item>
-        <item quantity="many">Встановлено %d застосунків</item>
-        <item quantity="other">Встановлено %d застосунків</item>
+        <item quantity="one">Встановлено %s застосунок</item>
+        <item quantity="few">Встановлено %s застосунки</item>
+        <item quantity="many">Встановлено %s застосунків</item>
+        <item quantity="other">Встановлено %s застосунків</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">Перевстановлено %d застосунок</item>
-        <item quantity="few">Перевстановлено %d застосунки</item>
-        <item quantity="many">Перевстановлено %d застосунків</item>
-        <item quantity="other">Перевстановлено %d застосунків</item>
+        <item quantity="one">Перевстановлено %s застосунок</item>
+        <item quantity="few">Перевстановлено %s застосунки</item>
+        <item quantity="many">Перевстановлено %s застосунків</item>
+        <item quantity="other">Перевстановлено %s застосунків</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">Видалено %d застосунок</item>
-        <item quantity="few">Видалено %d застосунки</item>
-        <item quantity="many">Видалено %d застосунків</item>
-        <item quantity="other">Видалено %d застосунків</item>
+        <item quantity="one">Видалено %s застосунок</item>
+        <item quantity="few">Видалено %s застосунки</item>
+        <item quantity="many">Видалено %s застосунків</item>
+        <item quantity="other">Видалено %s застосунків</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">Видалити %d застосунок?</item>
-        <item quantity="few">Видалити %d застосунки?</item>
-        <item quantity="many">Видалити %d застосунків?</item>
-        <item quantity="other">Видалити %d застосунків?</item>
+        <item quantity="one">Видалити %s застосунок?</item>
+        <item quantity="few">Видалити %s застосунки?</item>
+        <item quantity="many">Видалити %s застосунків?</item>
+        <item quantity="other">Видалити %s застосунків?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s застосунок готовий до патчингу</item>
+        <item quantity="few">%s застосунки готові до патчингу</item>
+        <item quantity="many">%s застосунків готові до патчингу</item>
+        <item quantity="other">%s застосунків готові до патчингу</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%s застосунок готовий до встановлення</item>
+        <item quantity="few">%s застосунки готові до встановлення</item>
+        <item quantity="many">%s застосунків готові до встановлення</item>
+        <item quantity="other">%s застосунків готові до встановлення</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">Пропущено %d застосунок</item>
-        <item quantity="few">Пропущено %d застосунки</item>
-        <item quantity="many">Пропущено %d застосунків</item>
-        <item quantity="other">Пропущено %d застосунків</item>
+        <item quantity="one">Пропущено %s застосунок</item>
+        <item quantity="few">Пропущено %s застосунки</item>
+        <item quantity="many">Пропущено %s застосунків</item>
+        <item quantity="other">Пропущено %s застосунків</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Видалено %s застарілий патч зі збереженого вибору</item>
@@ -95,5 +107,11 @@
         <item quantity="few">%s застосунки</item>
         <item quantity="many">%s застосунків</item>
         <item quantity="other">%s застосунків</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Скопійовано %s патч із вибраного пакета</item>
+        <item quantity="few">Скопійовано %s патчі із вибраного пакета</item>
+        <item quantity="many">Скопійовано %s патчів із вибраного пакета</item>
+        <item quantity="other">Скопійовано %s патчів із вибраного пакета</item>
     </plurals>
 </resources>
