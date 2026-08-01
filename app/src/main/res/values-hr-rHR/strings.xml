@@ -167,7 +167,6 @@
     <string name="home_app_info_no_saved_apk">Nema spremljene aplikacije. Patchanje će zahtijevati ponovni odabir aplikacije</string>
     <string name="home_version_requires_android">Zahtijeva Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nije podržano na ovom uređaju</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nema podržane verzije za Android %2$d (API %3$d). Sve deklarirane verzije zahtijevaju višu verziju Androida</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Preuzmite originalnu aplikaciju</string>
     <string name="home_download_instructions_steps_title">Upute:</string>
@@ -245,7 +244,6 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatibilne verzije:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nije podržano</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Verzija %d</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Ovo je različita verzija iste verzije. Patchevi zahtijevaju posebnu verziju</string>
     <string name="home_dialog_wrong_package_title">Pogrešan paket odabran</string>
     <string name="home_dialog_wrong_package_description">Odabrana aplikacija nije namijenjena za aplikaciju koju želite patchati</string>
@@ -308,6 +306,7 @@ Vanjska zona (isprekidana): može biti odrezana maskom pokretača - važne detal
     <string name="header_creator_guide_themes_body">Većina aplikacija zahtijeva odvojene slike za svjietlu i tamnu temu. Neke aplikacije (kao YouTube Music) koriste samo tamnu temu, pa se prikazuje samo taj odabir.</string>
     <string name="header_creator_guide_positioning_title">Pozicioniranje i skaliranje</string>
     <string name="header_creator_guide_positioning_body">Koristite geste zumiranja i povlačenja izravno u pregledu kako biste pozicionirali i skalirali svoju sliku. Vodiči za snimanje pojavljuju se kada je slika blizu središta. Možete koristiti i klizač ispod pregleda.</string>
+    <!-- Batch patching -->
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Jeste li sigurni da želite deinstalirati ovu aplikaciju?</string>
     <string name="batch_uninstall_confirm_body">Odabrane aplikacije trajno će biti uklonjene s vašeg uređaja</string>
@@ -454,8 +453,6 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="failed_to_mount">Nije moguće učitati: %s</string>
     <string name="failed_to_unmount">Nije moguće odčitati: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Rezultat %d</string>
-    <string name="mini_game_best">Najbolje %d</string>
     <string name="mini_game_new_record">Novi rekord!</string>
     <string name="mini_game_game_over">Kraj igre</string>
     <string name="mini_game_try_again">Pokušaj ponovo</string>
@@ -729,7 +726,6 @@ Detalji: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android je ovo blokirao jer bi time vratio instaliranu aplikaciju na stariju verziju.</string>
     <string name="installer_shizuku_error_signature">Android je blokirao ovo jer instalirana aplikacija ima drugačiji potpis</string>
     <string name="installer_shizuku_error_invalid_apk">Android nije mogao pročitati ovaj APK</string>
-    <string name="installer_shizuku_error_user_profile">Android je blokirao ovo za trenutnog korisnika ili radni profil</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizacija baterije</string>
     <string name="settings_system_battery_optimization_description">Održava aplikaciju pokrenutom čak i kada je minimizirana</string>
@@ -952,7 +948,6 @@ Detalji: %2$s"</string>
     <string name="reset_order_done">Redoslijed poništen</string>
     <string name="accessibility_move_up">Pomakni gore</string>
     <string name="accessibility_move_down">Pomakni dolje</string>
-    <string name="accessibility_app_moved_announcement">%1$s premješten na poziciju %2$d od %3$d</string>
     <string name="accessibility_scroll_to_top">Pomakni se na vrh popisa</string>
     <string name="rename">Preimenuj</string>
     <string name="import_">Uvezi</string>
@@ -1019,8 +1014,7 @@ Detalji: %2$s"</string>
 "</string>
     <string name="download_update_confirmation">Preuzeti ažuriranje?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d od %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_sources_desc">Upravljajte izvorima patcheva. Svaki izvor pruža patcheve koje se mogu primijeniti na vaše aplikacije</string>
     <string name="onboarding_swipe_title">Geste povlačenja</string>
     <string name="onboarding_swipe_desc">Povucite desno preko kartice aplikacije kako biste vidjeli dostupne patcheve. Povucite lijevo kako biste sakrili karticu s početnog zaslona</string>

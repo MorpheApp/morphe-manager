@@ -164,10 +164,10 @@
     <string name="home_apk_availability_no">いいえ、既に APK を持っています</string>
     <string name="home_apk_use_saved">保存済みのAPKを使用する</string>
     <string name="home_apk_use_installed">インストール済みのAPKを使用する</string>
+    <string name="home_apk_use_installed_unverified">インストールされているアプリの署名を検証できなかったため、すでにパッチが適用されている可能性があります</string>
     <string name="home_app_info_no_saved_apk">保存済みの APK がありません。パッチを適用するには、 APK ファイルを再度選択してください</string>
     <string name="home_version_requires_android">Android %s 以降が必要です</string>
     <string name="home_apk_no_compatible_versions_title">このデバイスではサポートされていません</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; は Android %2$d (API %3$d) に対応したバージョンがありません。すべての対応バージョンは、より新しい Android バージョンが必要です</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">オリジナルの APK をダウンロード</string>
     <string name="home_download_instructions_steps_title">操作手順:</string>
@@ -243,7 +243,6 @@
     <string name="home_dialog_unsupported_version_compatible_versions">互換性のあるバージョン:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">未対応</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">ビルド %d</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">これは同じバージョンの別のビルドです。パッチには特定のビルドが必要です</string>
     <string name="home_dialog_wrong_package_title">無効なパッケージが選択されました</string>
     <string name="home_dialog_wrong_package_description">選択された APK は、パッチを適用しようとしているアプリのものではありません</string>
@@ -306,6 +305,39 @@
     <string name="header_creator_guide_themes_body">多くのアプリでは、ライトテーマ用とダークテーマ用にそれぞれ画像が必要です。一部のアプリ（YouTube Music など）はダークテーマのみを使用するため、該当するセクションのみ表示されます。</string>
     <string name="header_creator_guide_positioning_title">位置とサイズ調整</string>
     <string name="header_creator_guide_positioning_body">プレビュー上でピンチズームやドラッグ操作を使用して、画像の位置やサイズを調整できます。画像が中央付近にあるときにスナップガイドが表示されます。プレビュー下のスライダーを使用して調整することもできます。</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">個のパッチを選択中</string>
+    <string name="batch_patch_title">バッチパッチ</string>
+    <string name="batch_patch_planning">キューを準備しています…</string>
+    <string name="batch_patch_preparing_next">次のアプリを準備しています…</string>
+    <string name="batch_patch_saved_hint">パッチ適用されたアプリが保存されました。設定のパッチ適用済みAPKリストから、今すぐまたは後でインストールしてください</string>
+    <string name="batch_patch_multiple_sources">複数のソースからパッチを組み合わせたアプリがあり、競合が発生する可能性があります</string>
+    <string name="batch_patch_needs_apk">APKがありません。ファイルを添付してください</string>
+    <string name="batch_patch_wrong_package">添付ファイルは %s に属します</string>
+    <string name="batch_patch_version_mismatch">パッチではバージョン %s がサポートされていません</string>
+    <string name="batch_patch_source_saved">オリジナルを保存しました</string>
+    <string name="batch_patch_source_installed">アプリをインストールしました</string>
+    <string name="batch_patch_source_file">添付ファイル</string>
+    <string name="batch_patch_source_unavailable">APKを準備できませんでした</string>
+    <string name="batch_patch_attach_apk">APKを添付してください</string>
+    <string name="batch_patch_force_version">とにかくパッチを適用する</string>
+    <string name="batch_patch_edit_patches">パッチを選択する</string>
+    <string name="batch_patch_state_no_apk">APKがありません</string>
+    <string name="batch_patch_state_no_patches">パッチがありません</string>
+    <string name="batch_patch_policy_install">完了後にインストールする</string>
+    <string name="batch_patch_policy_install_description">キューが完了するとすぐに、パッチが適用された各アプリをインストールします。オフにすると、後で使用するためにAPKが保存されます</string>
+    <string name="batch_patch_start">パッチ処理を開始する</string>
+    <string name="batch_patch_stop_title">バッチパッチを停止しますか？</string>
+    <string name="batch_patch_stop_description">現在パッチを適用中のアプリと、まだキューに登録されているアプリはキャンセルされます</string>
+    <string name="batch_patch_install_all">すべてインストールする</string>
+    <string name="batch_patch_install_failed">インストールに失敗しました</string>
+    <string name="batch_patch_in_progress">バッチパッチはすでに実行中です</string>
+    <string name="batch_patch_nothing_outdated">すべてのパッチ適用済みアプリは最新の状態です</string>
+    <string name="shortcut_repatch_short">再パッチ</string>
+    <string name="shortcut_repatch_long">古いアプリを再パッチ</string>
+    <string name="shortcut_check_updates_short">更新を確認</string>
+    <string name="shortcut_check_updates_long">パッチの更新を確認</string>
+    <string name="shortcut_patch_app">%s をパッチ処理</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">このアプリをアンインストールしますか？</string>
     <string name="batch_uninstall_confirm_body">選択したアプリは端末から完全に削除されます</string>
@@ -452,8 +484,6 @@
     <string name="failed_to_mount">マウントに失敗しました: %s</string>
     <string name="failed_to_unmount">アンマウントに失敗しました: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">スコア %d</string>
-    <string name="mini_game_best">ベストスコア %d</string>
     <string name="mini_game_new_record">新記録！</string>
     <string name="mini_game_game_over">ゲームオーバー</string>
     <string name="mini_game_try_again">リトライ</string>
@@ -496,6 +526,7 @@
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">モノクロ</string>
     <string name="settings_appearance_color_style">カラーモード</string>
+    <string name="settings_appearance_colors">色</string>
     <string name="settings_appearance_accent_color">アクセントカラー</string>
     <string name="settings_appearance_pure_black">ピュアブラック</string>
     <string name="settings_appearance_pure_black_description">真っ黒な背景を使用します</string>
@@ -512,6 +543,9 @@
     <string name="settings_appearance_app_grouping_description">ホーム画面スイッチャーを表示して、ソース別または独自のカテゴリでアプリをグループ化します。オフにしたときも選択内容は保持されます</string>
     <string name="settings_appearance_sort_button">並べ替えボタン</string>
     <string name="settings_appearance_sort_button_description">ホーム画面に並べ替えボタンを表示します</string>
+    <string name="settings_appearance_app_card_colors">アプリカードの色</string>
+    <string name="settings_appearance_app_card_colors_default">デフォルト</string>
+    <string name="settings_appearance_app_card_colors_default_description">アプリの色を、それぞれのバンドルカラーにする</string>
     <string name="settings_appearance_app_card_colors_accent">アクセント</string>
     <string name="settings_appearance_app_card_colors_accent_description">ホームアプリカードにアプリのアクセントカラーを使用する</string>
     <string name="settings_appearance_app_card_colors_gradient">グラデーション</string>
@@ -522,6 +556,8 @@
     <string name="settings_appearance_app_card_colors_middle">中間色</string>
     <string name="settings_appearance_app_card_colors_end">終了色</string>
     <string name="settings_appearance_app_card_colors_solid_color">単色</string>
+    <string name="settings_appearance_app_card_colors_bundle">アプリのバンドルカラー</string>
+    <string name="settings_appearance_app_card_colors_bundle_description">アプリのテーマカラーを使用し、自動でなじむように色調を調整します</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">アプリアイコン</string>
     <string name="settings_appearance_app_icon_default">デフォルト</string>
@@ -551,7 +587,28 @@
     <string name="settings_advanced_update_interval_monthly">1 か月に 1 回</string>
     <string name="settings_advanced_update_interval_chip_subtitle">バックグラウンドでの確認頻度</string>
     <string name="settings_advanced_update_interval_battery_warning">一部のデバイスでは、バックグラウンドでの確認が正常に動作しない場合があります。Xiaomi、Huawei、Samsung、OnePlus などのメーカーは、バッテリーを節約するためにバックグラウンド プロセスを厳しく制限することがよくあります。</string>
+    <string name="settings_advanced_auto_patch">自動再パッチ</string>
+    <string name="settings_advanced_auto_patch_description">パッチの変更時に、インストールされているアプリをバックグラウンドで再パッチします。保存されたオリジナルのAPKがあるアプリのみが対象です</string>
+    <string name="settings_advanced_auto_patch_interval">再パッチ頻度</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">パッチ適用済みアプリが再構築される頻度</string>
+    <string name="settings_advanced_auto_patch_charging">充電中のみ</string>
+    <string name="settings_advanced_auto_patch_charging_description">パッチ処理はCPUとメモリに負荷がかかるため、充電器を待機します</string>
+    <string name="settings_advanced_auto_patch_install">自動的にインストール</string>
+    <string name="settings_advanced_auto_patch_install_description">インストーラーとしてShizukuが必要です。それ以外のインストーラーを使用すると、パッチが適用されたアプリは保存されるだけです</string>
+    <string name="settings_advanced_external_batch_patch">外部トリガーを許可</string>
+    <string name="settings_advanced_external_batch_patch_description">自動化アプリがインテントでバッチパッチを開始できるようにします。すべてのリクエストは実行前に確認されます</string>
+    <string name="external_batch_patch_title">バッチパッチを開始しますか？</string>
+    <string name="external_batch_patch_description">%s が Morphe にアプリのパッチ適用とインストールを要求しています</string>
+    <string name="external_batch_patch_trust_caller">このアプリを常に許可</string>
+    <string name="external_batch_patch_unknown_caller">不明なアプリ</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">自動再パッチが完了しました</string>
+    <string name="notification_auto_patch_running_title">アプリを再パッチしています</string>
+    <string name="notification_auto_patch_blocked_title">自動再パッチは実行されませんでした</string>
+    <string name="notification_auto_patch_blocked_battery">バッテリー最適化からMorpheを除外してください。そうしないと、Androidは開始する前に実行を停止します</string>
+    <string name="notification_auto_patch_blocked_foreground">Androidはバックグラウンドでのパッチ処理を開始することを許可しませんでした。Morpheを開いてアプリからパッチを適用してください</string>
+    <string name="notification_channel_auto_patch">自動再パッチ</string>
+    <string name="notification_channel_auto_patch_description">スケジュールされた再パッチ処理に関するサイレントな進行状況と結果の通知</string>
     <string name="notification_manager_update_title">Morphe の更新が利用可能です</string>
     <string name="notification_bundle_update_title">新しいパッチが利用可能です</string>
     <string name="notification_update_text">バージョン %s がダウンロード可能です</string>
@@ -736,7 +793,7 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">インストール済みのアプリより古いバージョンであるため、Android によりブロックされました</string>
     <string name="installer_shizuku_error_signature">インストール済みのアプリと署名が異なるため、Android によってブロックされました</string>
     <string name="installer_shizuku_error_invalid_apk">APK ファイルの読み込みに失敗しました</string>
-    <string name="installer_shizuku_error_user_profile">現在のユーザーまたは仕事用プロファイルの制限により、インストールが拒否されました</string>
+    <string name="installer_shizuku_error_user_profile">システムはインストールをブロックしました。Xiaomiなどのデバイスでは、開発者向けオプションで「USB経由でのインストール」を有効にしてください。作業プロファイルでは、インストールはポリシーによって制限される場合があります</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">電池の最適化</string>
     <string name="settings_system_battery_optimization_description">アプリを閉じているときでも、パッチャーを実行し続けます</string>
@@ -919,6 +976,9 @@ morphe_header_custom_dark.png
     <string name="confirm">確認</string>
     <string name="warning">警告</string>
     <string name="error_">エラー</string>
+    <string name="failed">失敗</string>
+    <string name="cancelled">キャンセル</string>
+    <string name="ready">準備完了</string>
     <string name="retry">再試行</string>
     <string name="refresh">更新</string>
     <string name="add">追加</string>
@@ -931,6 +991,9 @@ morphe_header_custom_dark.png
     <string name="delete">削除</string>
     <string name="delete_all">すべて削除</string>
     <string name="remove">削除</string>
+    <string name="exclude">除外</string>
+    <string name="excluded">除外済み</string>
+    <string name="include">含める</string>
     <string name="disable">無効</string>
     <string name="enable">有効にする</string>
     <string name="loading">読み込み中…</string>
@@ -957,9 +1020,10 @@ morphe_header_custom_dark.png
     <string name="reorder_done">順序を保存しました</string>
     <string name="reset_order">順序をリセット</string>
     <string name="reset_order_done">注文をリセットしました</string>
+    <string name="accessibility_select_app">アプリを選択</string>
     <string name="accessibility_move_up">上に移動</string>
     <string name="accessibility_move_down">下に移動</string>
-    <string name="accessibility_app_moved_announcement">%1$s を %2$d 番目の位置 (%3$d 個中) に移動しました</string>
+    <string name="accessibility_app_moved_announcement">%1$s を %2$s 番目の位置 (%3$s 個中) に移動しました</string>
     <string name="accessibility_scroll_to_top">リストの一番上にスクロール</string>
     <string name="rename">名前を変更する</string>
     <string name="import_">インポート</string>
@@ -975,6 +1039,7 @@ morphe_header_custom_dark.png
     <string name="continue_">続行</string>
     <string name="version">バージョン</string>
     <string name="patch">パッチ</string>
+    <string name="patching">パッチ処理</string>
     <string name="repatch">再パッチ</string>
     <string name="open">開く</string>
     <string name="mount">マウント</string>
@@ -1025,8 +1090,8 @@ morphe_header_custom_dark.png
 それでも続行しますか？"</string>
     <string name="download_update_confirmation">アップデートをダウンロードしますか？</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d / %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s / %2$s</string>
     <string name="onboarding_sources_desc">パッチソースを管理できます。各ソースは、アプリに適用できるパッチを提供します</string>
     <string name="onboarding_swipe_title">ジェスチャー操作</string>
     <string name="onboarding_swipe_desc">アプリカードを右にスワイプすると、利用可能なパッチを表示できます。左にスワイプすると、ホーム画面からカードを非表示にできます</string>

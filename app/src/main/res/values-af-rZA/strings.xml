@@ -164,10 +164,11 @@
     <string name="home_apk_availability_no">Nee, ek het reeds \'n APK</string>
     <string name="home_apk_use_saved">Gebruik gestoorde APK</string>
     <string name="home_apk_use_installed">Gebruik geïnstalleerde APK</string>
+    <string name="home_apk_use_installed_unverified">Kon nie die handtekening van die geïnstalleerde app verifieer nie, dus is dit moontlik reeds gemodifiseer</string>
     <string name="home_app_info_no_saved_apk">Geen gestoorde APK nie. Verandering sal vereis dat jy die APK vyl weer kies</string>
     <string name="home_version_requires_android">Vereis Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nie op hierdie toestel ondersteun nie</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; het geen ondersteunde weergawes vir Android %2$d (API %3$d) nie. Alle verklaarde weergawes vereis \'n hoër Android-weergawe</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; het geen ondersteunde weergawes vir Android %2$s (API %3$s) nie. Alle verklaarde weergawes vereis \'n hoër Android-weergawe</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Laai die oorspronklike APK af</string>
     <string name="home_download_instructions_steps_title">Instruksies:</string>
@@ -243,7 +244,7 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="home_dialog_unsupported_version_compatible_versions">Versoenbare weergawes:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nie ondersteun nie</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Bou %d</string>
+    <string name="home_dialog_unsupported_version_build">Bou %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Dit is \'n ander weergawe van dieselfde weergawe. Die lappies vereis \'n spesifieke weergawe</string>
     <string name="home_dialog_wrong_package_title">Verkeerde pakket gekies</string>
     <string name="home_dialog_wrong_package_description">Die gekose APK is nie vir die aansoek wat jy wou patch nie</string>
@@ -306,6 +307,41 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="header_creator_guide_themes_body">Die meeste toepassings vereis aparte beelde vir die ligte en donker temas. Sommige toepassings (soos YouTube Music) gebruik slegs die donker tema, so slegs daardie afdeling word gewys.</string>
     <string name="header_creator_guide_positioning_title">Posisionering en skaal</string>
     <string name="header_creator_guide_positioning_body">Gebruik knyp-om-zoem en sleep gebare direk in die voorskou om jou beeld te posisioneer en te skaal. Snap gidse verskyn wanneer die beeld naby die middel is. Jy kan ook die skyfie onder die voorskou gebruik.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Verandering gekies</string>
+    <string name="batch_patch_title">Groepbedekking</string>
+    <string name="batch_patch_planning">Besig om die tou voor te berei…</string>
+    <string name="batch_patch_preparing_next">Besig om die volgende app voor te berei…</string>
+    <string name="batch_patch_progress_counter">Gepatch %1$s van %2$s</string>
+    <string name="batch_patch_summary">%1$s gepatch, %2$s gefaal, %3$s oorgeslaan</string>
+    <string name="batch_patch_saved_hint">Die gepatchte programme is gestoor. Installeer hulle nou, of later vanaf die lys van gepatchde APK\'s in instellings</string>
+    <string name="batch_patch_multiple_sources">Sommige programme kombineer pleisters van meer as een bron, wat konflik kan veroorsaak</string>
+    <string name="batch_patch_needs_apk">Geen APK beskikbaar nie, voeg \'n lêr by</string>
+    <string name="batch_patch_wrong_package">Die aangehegte lêr behoort aan %s</string>
+    <string name="batch_patch_version_mismatch">Weergawe %s word nie deur die pleisters ondersteun nie</string>
+    <string name="batch_patch_source_saved">Oorspronklike weergawe gestoor</string>
+    <string name="batch_patch_source_installed">Geïnstalleerde program</string>
+    <string name="batch_patch_source_file">Aangehegte lêr</string>
+    <string name="batch_patch_source_unavailable">Die APK kon nie voorberei word nie</string>
+    <string name="batch_patch_attach_apk">Voeg APK by</string>
+    <string name="batch_patch_force_version">Patcher tog</string>
+    <string name="batch_patch_edit_patches">Kies pleisters</string>
+    <string name="batch_patch_state_no_apk">Geen APK</string>
+    <string name="batch_patch_state_no_patches">Geen pleisters</string>
+    <string name="batch_patch_policy_install">Installeer wanneer voltooi</string>
+    <string name="batch_patch_policy_install_description">Installeer elke gepatchte program direk nadat die tou voltooi is. Af skakel die APK\'s vir later af</string>
+    <string name="batch_patch_start">Begin met pleister</string>
+    <string name="batch_patch_stop_title">Stop batch pleister?</string>
+    <string name="batch_patch_stop_description">Die program wat tans gepatch word en alles wat nog in die tou staan, sal gekanselleer word</string>
+    <string name="batch_patch_install_all">Installeer alles</string>
+    <string name="batch_patch_install_failed">Installasie misluk</string>
+    <string name="batch_patch_in_progress">Batch pleister is reeds besig</string>
+    <string name="batch_patch_nothing_outdated">Elke gepatchte program is op datum</string>
+    <string name="shortcut_repatch_short">Her-pleister</string>
+    <string name="shortcut_repatch_long">Her-pleister verouderde programme</string>
+    <string name="shortcut_check_updates_short">Kyk vir opgraderings</string>
+    <string name="shortcut_check_updates_long">Kyk vir pleister opgraderings</string>
+    <string name="shortcut_patch_app">Pleister %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Is jy seker jy wil hierdie app deïnstalleer?</string>
     <string name="batch_uninstall_confirm_body">Die geselekteerde toepassings sal permanent van jou toestel verwyder word</string>
@@ -452,8 +488,8 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="failed_to_mount">Kon nie monteer nie: %s</string>
     <string name="failed_to_unmount">Kon nie dedemonteer nie: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Punt %d</string>
-    <string name="mini_game_best">Beste %d</string>
+    <string name="mini_game_score">Punt %s</string>
+    <string name="mini_game_best">Beste %s</string>
     <string name="mini_game_new_record">Nuwe rekord!</string>
     <string name="mini_game_game_over">Speletjie Einde</string>
     <string name="mini_game_try_again">Probeer weer</string>
@@ -558,7 +594,28 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_advanced_update_interval_monthly">Een keer per maand</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Agtergrondkontroleer frekwensie</string>
     <string name="settings_advanced_update_interval_battery_warning">Agtergrondkontroles werk moontlik nie betroubaar op sommige toestelle nie. Vervaardigers soos Xiaomi, Huawei, Samsung en OnePlus beperk dikwels agtergrondprosesse aggressief om battery te spaar</string>
+    <string name="settings_advanced_auto_patch">Outomatiese her-pleister</string>
+    <string name="settings_advanced_auto_patch_description">Her-pleister geïnstalleerde programme op die agtergrond wanneer hul pleisters verander. Slegs programme met \'n gestoorde oorspronklike APK word gedek</string>
+    <string name="settings_advanced_auto_patch_interval">Her-pleister frekwensie</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Hoe gereeld gepatchte programme herbou word</string>
+    <string name="settings_advanced_auto_patch_charging">Slegs tydens laai</string>
+    <string name="settings_advanced_auto_patch_charging_description">Pleistering is swaar op die SVE en geheue, so dit wag vir \'n laaier</string>
+    <string name="settings_advanced_auto_patch_install">Installeer outomaties</string>
+    <string name="settings_advanced_auto_patch_install_description">Vereis Shizuku as die installeerder. Met enige ander installeerder word die gepatchte programme slegs gestoor</string>
+    <string name="settings_advanced_external_batch_patch">Laat eksterne snellers toe</string>
+    <string name="settings_advanced_external_batch_patch_description">Laat outomatiseringsprogramme batch pleister begin met \'n intent. Elke versoek word bevestig voordat enigiets uitgevoer word</string>
+    <string name="external_batch_patch_title">Begin batch pleister?</string>
+    <string name="external_batch_patch_description">%s wil Morphe laat programme patch en installeer</string>
+    <string name="external_batch_patch_trust_caller">Altyd hierdie program toelaat</string>
+    <string name="external_batch_patch_unknown_caller">\'n Onbekende program</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Outomatiese her-pleister voltooi</string>
+    <string name="notification_auto_patch_running_title">Programme her-pleister</string>
+    <string name="notification_auto_patch_blocked_title">Outomatiese her-pleister het nie geloop nie</string>
+    <string name="notification_auto_patch_blocked_battery">Stelsel het hierdie installasie geblokkeer. Op Xiaomi en soortgelyke toestelle, skakel \"Installeer via USB\" in ontwikkelaar opsies. Op \'n werksprofiel kan installasies deur beleid beperk word</string>
+    <string name="notification_auto_patch_blocked_foreground">Morphe van battery optimalisering vrygestel, anders stop Android die uitvoering voordat dit begin</string>
+    <string name="notification_channel_auto_patch">Outomatiese her-pleister</string>
+    <string name="notification_channel_auto_patch_description">Stille vordering en resultaat kennisgewings vir geskeduleerde her-pleister</string>
     <string name="notification_manager_update_title">Morphe-opdatering beskikbaar</string>
     <string name="notification_bundle_update_title">Nuwe kolle beskikbaar</string>
     <string name="notification_update_text">Weergawe %s is gereed om af te laai</string>
@@ -744,7 +801,7 @@ Besonderhede: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android het dit geblokkeer omdat dit die geïnstalleerde app sou teruggradeer.</string>
     <string name="installer_shizuku_error_signature">Android het dit geblokkeer omdat die geïnstalleerde app \'n ander handtekening het.</string>
     <string name="installer_shizuku_error_invalid_apk">Android kon hierdie APK nie lees nie.</string>
-    <string name="installer_shizuku_error_user_profile">Android het dit vir die huidige gebruiker of werksprofil geblokkeer.</string>
+    <string name="installer_shizuku_error_user_profile">Die stelsel het hierdie installasie geblokkeer. Op Xiaomi en soortgelyke toestelle, skakel \"Installeer via USB\" in ontwikkelaar opsies. Op \'n werksprofiel kan installasies deur beleid beperk word</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery-optimalisering</string>
     <string name="settings_system_battery_optimization_description">Hou die patcher lopend wanneer die toepassing geminimaliseer is</string>
@@ -927,6 +984,9 @@ Besonderhede: %2$s"</string>
     <string name="confirm">Bevestig</string>
     <string name="warning">Waarskuwing</string>
     <string name="error_">Fout</string>
+    <string name="failed">Misluk</string>
+    <string name="cancelled">Gekanselleer</string>
+    <string name="ready">Klaar</string>
     <string name="retry">Probeer weer</string>
     <string name="refresh">Herlaai</string>
     <string name="add">Voeg by</string>
@@ -939,6 +999,9 @@ Besonderhede: %2$s"</string>
     <string name="delete">Verwyder</string>
     <string name="delete_all">Alles verwyder</string>
     <string name="remove">Verwyder</string>
+    <string name="exclude">Uitsluit</string>
+    <string name="excluded">Uitgesluit</string>
+    <string name="include">Insluit</string>
     <string name="disable">Deaktiveer</string>
     <string name="enable">Aktiveer</string>
     <string name="loading">Laai…</string>
@@ -965,9 +1028,10 @@ Besonderhede: %2$s"</string>
     <string name="reorder_done">Volgorde stoor</string>
     <string name="reset_order">Herstel volgorde</string>
     <string name="reset_order_done">Bestelling terugstel</string>
+    <string name="accessibility_select_app">Kies program</string>
     <string name="accessibility_move_up">Beweeg op</string>
     <string name="accessibility_move_down">Beweeg af</string>
-    <string name="accessibility_app_moved_announcement">%1$s is na posisie %2$d van %3$d geskuif</string>
+    <string name="accessibility_app_moved_announcement">%1$s het na posisie %2$s van %3$s verskuif</string>
     <string name="accessibility_scroll_to_top">Rol na bo van lys</string>
     <string name="rename">Hernoem</string>
     <string name="import_">Importeer</string>
@@ -983,6 +1047,7 @@ Besonderhede: %2$s"</string>
     <string name="continue_">Gaan voort</string>
     <string name="version">Weergawe</string>
     <string name="patch">Verandering</string>
+    <string name="patching">Pleister</string>
     <string name="repatch">Herpatch</string>
     <string name="open">Open</string>
     <string name="mount">Monteer</string>
@@ -1033,8 +1098,8 @@ Besonderhede: %2$s"</string>
 Wil jy voortgaan?"</string>
     <string name="download_update_confirmation">Opdatering aflaai?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d van %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s van %2$s</string>
     <string name="onboarding_sources_desc">Bestuur jou bronne vir pleisters. Elke bron verskaf pleisters wat op jou programme toegepas kan word.</string>
     <string name="onboarding_swipe_title">Swiepgebare</string>
     <string name="onboarding_swipe_desc">Swiep regs op \'n programkaart om die beskikbare pleisters te besigtig. Swiep links om die kaart van die hoofskerm te verberg.</string>

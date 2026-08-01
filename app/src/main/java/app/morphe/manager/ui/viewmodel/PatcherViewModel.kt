@@ -40,7 +40,6 @@ import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
 import app.morphe.manager.util.*
 import app.morphe.manager.worker.UpdateCheckWorker
-import io.github.z4kn4fein.semver.Version
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -51,7 +50,6 @@ import org.koin.core.component.get
 import org.koin.core.component.inject
 import java.io.File
 import java.io.IOException
-import java.nio.file.Files
 import java.util.UUID
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
@@ -638,14 +636,7 @@ class PatcherViewModel(
             _isSaving.value = true
             try {
                 ensureExportMetadata()
-                val exportSucceeded = runCatching {
-                    withContext(Dispatchers.IO) {
-                        app.contentResolver.openOutputStream(targetUri)
-                            ?.use { stream -> Files.copy(outputFile.toPath(), stream) }
-                            ?: throw IOException("Could not open output stream for export")
-                    }
-                }.isSuccess
-                finishExport(exportSucceeded)
+                finishExport(app.exportApkTo(outputFile, targetUri))
             } finally {
                 _isSaving.value = false
             }
@@ -1010,15 +1001,5 @@ class PatcherViewModel(
         private const val KEY_PROGRESS = "patch_progress"
         private const val KEY_STEPS = "steps"
         private const val KEY_COMPLETED_PATCHES = "completed_patches"
-
-        /**
-         * Returns true if [required] is strictly newer than [current].
-         * Uses the semver library already present in the project.
-         * Falls back to false (allow patching) if either string cannot be parsed.
-         */
-        fun isPatcherOutdated(required: String, current: String): Boolean = runCatching {
-            Version.parse(required, strict = false) >
-                    Version.parse(current, strict = false)
-        }.getOrDefault(false)
     }
 }

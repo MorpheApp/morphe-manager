@@ -23,6 +23,8 @@
     <string name="home_blocked_source_subtitle">Tap to review and remove</string>
     <string name="home_metadata_errors_title">Some patch sources are unavailable</string>
     <string name="home_metadata_errors_subtitle">Tap to review sources</string>
+    <string name="home_outdated_manager_title">Morphe is out of date</string>
+    <string name="home_outdated_manager_subtitle">Some patch sources need a newer version</string>
     <string name="home_metered_skipped_title">Updates paused on mobile data</string>
     <string name="home_metered_skipped_subtitle">Tap to allow updates on mobile data</string>
     <string name="home_update_error">Update failed</string>
@@ -128,6 +130,8 @@
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
     <string name="sources_management_metadata_unavailable_hint">The remote metadata file is unavailable. Patching with the installed bundle still works, but auto-update is disabled for this source</string>
     <string name="sources_management_metadata_unavailable_hint_missing">The patch bundle could not be downloaded. The source URL may be incorrect or the file does not exist</string>
+    <string name="sources_management_outdated_manager_badge">Update Morphe</string>
+    <string name="sources_management_outdated_manager_hint">This source is built for patcher %1$s, but Morphe %2$s includes patcher %3$s. Update Morphe to use it</string>
     <string name="sources_management_source_enabled">Source enabled</string>
     <string name="sources_management_source_disabled">Source disabled</string>
     <string name="sources_management_source_updating">Updating source</string>
@@ -183,7 +187,7 @@
     <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
     <string name="home_version_requires_android">Requires Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Not supported on this device</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; has no supported versions for Android %2$d (API %3$d). All declared versions require a higher Android version</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; has no supported versions for Android %2$s (API %3$s). All declared versions require a higher Android version</string>
 
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download the original APK</string>
@@ -263,7 +267,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_dialog_unsupported_version_compatible_versions">Compatible versions:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Unsupported</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build">Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">This is a different build of the same version. The patches require a specific build</string>
     <string name="home_dialog_wrong_package_title">Wrong package selected</string>
     <string name="home_dialog_wrong_package_description">The selected APK is not for the application you intended to patch</string>
@@ -335,8 +339,8 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="batch_patch_title">Batch patching</string>
     <string name="batch_patch_planning">Preparing the queue…</string>
     <string name="batch_patch_preparing_next">Preparing the next app…</string>
-    <string name="batch_patch_progress_counter">Patched %1$d of %2$d</string>
-    <string name="batch_patch_summary">%1$d patched, %2$d failed, %3$d skipped</string>
+    <string name="batch_patch_progress_counter">Patched %1$s of %2$s</string>
+    <string name="batch_patch_summary">%1$s patched, %2$s failed, %3$s skipped</string>
     <string name="batch_patch_saved_hint">The patched apps are saved. Install them now, or later from the patched APK list in settings</string>
     <string name="batch_patch_multiple_sources">Some apps combine patches from more than one source, which can cause conflicts</string>
     <string name="batch_patch_needs_apk">No APK available, attach a file</string>
@@ -346,8 +350,10 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="batch_patch_source_installed">Installed app</string>
     <string name="batch_patch_source_file">Attached file</string>
     <string name="batch_patch_source_unavailable">The APK could not be prepared</string>
+    <string name="batch_patch_find_apk">Find APK</string>
     <string name="batch_patch_attach_apk">Attach APK</string>
     <string name="batch_patch_force_version">Patch anyway</string>
+    <string name="batch_patch_force_version_done">Queued anyway, patches made for other versions may break the app</string>
     <string name="batch_patch_edit_patches">Choose patches</string>
     <string name="batch_patch_state_no_apk">No APK</string>
     <string name="batch_patch_state_no_patches">No patches</string>
@@ -526,8 +532,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="failed_to_unmount">Failed to unmount: %s</string>
 
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Score %d</string>
-    <string name="mini_game_best">Best %d</string>
+    <string name="mini_game_score">Score %s</string>
+    <string name="mini_game_best">Best %s</string>
     <string name="mini_game_new_record">New record!</string>
     <string name="mini_game_game_over">Game Over</string>
     <string name="mini_game_try_again">Try Again</string>
@@ -1117,7 +1123,7 @@ Details: %2$s"</string>
     <string name="accessibility_select_app">Select app</string>
     <string name="accessibility_move_up">Move up</string>
     <string name="accessibility_move_down">Move down</string>
-    <string name="accessibility_app_moved_announcement">%1$s moved to position %2$d of %3$d</string>
+    <string name="accessibility_app_moved_announcement">%1$s moved to position %2$s of %3$s</string>
     <string name="accessibility_scroll_to_top">Scroll to top of list</string>
     <string name="rename">Rename</string>
     <string name="import_">Import</string>
@@ -1188,8 +1194,8 @@ Do you still want to continue?"</string>
     <string name="download_update_confirmation">Download update?</string>
 
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d of %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s of %2$s</string>
     <string name="onboarding_sources_desc">Manage your patch sources. Each source provides patches that can be applied to your apps</string>
     <string name="onboarding_swipe_title">Swipe gestures</string>
     <string name="onboarding_swipe_desc">Swipe right on an app card to view its available patches. Swipe left to hide the card from the home screen</string>

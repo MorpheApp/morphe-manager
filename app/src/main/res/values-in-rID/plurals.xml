@@ -19,19 +19,25 @@
         <item quantity="other">%s berkas APK</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="other">Terpasang %d aplikasi</item>
+        <item quantity="other">%s aplikasi terpasang</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="other">Dipasang ulang %d aplikasi</item>
+        <item quantity="other">%s aplikasi dipasang ulang</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="other">Dihapus %d aplikasi</item>
+        <item quantity="other">%s aplikasi dihapus</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="other">Hapus %d aplikasi?</item>
+        <item quantity="other">Copot pemasangan %s aplikasi?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="other">%s aplikasi siap ditambal</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="other">%s aplikasi siap dipasang</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="other">Dilewati %d aplikasi</item>
+        <item quantity="other">%s aplikasi dilewati</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="other">Menghapus %s tambalan lama dari pilihan yang tersimpan</item>

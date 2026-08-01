@@ -168,7 +168,7 @@
     <string name="home_app_info_no_saved_apk">Saxlanılan APK yoxdur. Yamaqlanma APK faylını təkrar seçmək istəyəcək</string>
     <string name="home_version_requires_android">Android %s+ tələb olunur</string>
     <string name="home_apk_no_compatible_versions_title">Bu cihazda dəstəklənmir</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; tətbiqinin Android %2$d (API %3$d) üçün dəstəklənən versiyaları yoxdur. Bütün elan olunan versiyalar daha yüksək Android versiyası tələb edir</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; tətbiqinin Android %2$s (API %3$s) üçün dəstəklənən versiyaları yoxdur. Bütün elan olunan versiyalar daha yüksək Android versiyası tələb edir</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Əsil APK-nı Yüklə</string>
     <string name="home_download_instructions_steps_title">Təlimatlar:</string>
@@ -244,7 +244,7 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Uyuşan versiyalar:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Dəstəklənməyən</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Qurulma %d</string>
+    <string name="home_dialog_unsupported_version_build">Qurulma %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Bu, eyni versiyanın fərqli quruluşudur. Yamaqlar xüsusi quruluş tələb edir</string>
     <string name="home_dialog_wrong_package_title">Yanlış paket seçildi</string>
     <string name="home_dialog_wrong_package_description">Seçilən APK, yamaq üçün təyin etdiyiniz tətbiq üçün deyil</string>
@@ -307,6 +307,41 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="header_creator_guide_themes_body">Əksər tətbiqlər işıqlı və qaranlıq koloritlər üçün ayrı şəkillər tələb edir. Bəzi tətbiqlər (məsələn, YouTube Music) yalnız qaranlıq kolorit istifadə edir, belə ki yalnız həmin bölmə görünür.</string>
     <string name="header_creator_guide_positioning_title">Yerləşdirmə və ölçüləndirmə</string>
     <string name="header_creator_guide_positioning_body">Şəklinizi yerləşdirmək və ölçüləndirmək məqsədilə önizləmədəki birbaşa yaxınlaşdırmaq üçün çimdikləmək və sürükləmək jestlərin istifadə edin. Şəkil mərkəzə yaxındırsa, dartma göstəriciləri görünür. Önizləmənin aşağısındakı sürüşdürməni də istifadə edə bilərsiniz.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Seçiləni yamaqla</string>
+    <string name="batch_patch_title">Toplu yamaqlama</string>
+    <string name="batch_patch_planning">Növbə hazırlanır...</string>
+    <string name="batch_patch_preparing_next">Növbəti tətbiq hazırlanır...</string>
+    <string name="batch_patch_progress_counter">%2$s tətbiqdən %1$s-i yamaqlandı</string>
+    <string name="batch_patch_summary">%1$s yamaqlandı, %2$s uğursuz oldu, %3$s ötürüldü</string>
+    <string name="batch_patch_saved_hint">Yamaqlanmış tətbiqlər saxlanılır. Onları indi və ya daha sonra tənzimləmələrdəki yamaqlanmış APK siyahısından quraşdır</string>
+    <string name="batch_patch_multiple_sources">Bəzi tətbiqlər birdən çox mənbədən yamaqları birləşdirir ki, bu da toqquşmalara səbəb ola bilər</string>
+    <string name="batch_patch_needs_apk">APK mövcud deyil, fayl əlavə et</string>
+    <string name="batch_patch_wrong_package">Əlavə olunmuş fayl %s tətbiqinə aiddir</string>
+    <string name="batch_patch_version_mismatch">%s versiyası yamaqlar tərəfindən dəstəklənmir</string>
+    <string name="batch_patch_source_saved">Orijinal saxlanıldı</string>
+    <string name="batch_patch_source_installed">Quraşdırılmış tətbiq</string>
+    <string name="batch_patch_source_file">Əlavə olunmuş fayl</string>
+    <string name="batch_patch_source_unavailable">APK hazır vəziyyətə gətirilə bilmədi</string>
+    <string name="batch_patch_attach_apk">APK Əlavə Et</string>
+    <string name="batch_patch_force_version">Yenə də yamaqla</string>
+    <string name="batch_patch_edit_patches">Yamaqları seç</string>
+    <string name="batch_patch_state_no_apk">APK Yoxdur</string>
+    <string name="batch_patch_state_no_patches">Yamaq yoxdur</string>
+    <string name="batch_patch_policy_install">Bitdikdə quraşdır</string>
+    <string name="batch_patch_policy_install_description">Növbə bitdikdən dərhal sonra hər bir yamaqlanmış tətbiqi quraşdırır. Qapalıdırsa, APK-lar daha sonra üçün saxlanılır</string>
+    <string name="batch_patch_start">Yamaqlamağa başla</string>
+    <string name="batch_patch_stop_title">Toplu yamaqlama dayandırılsın?</string>
+    <string name="batch_patch_stop_description">Hal-hazırda yamaqlanan tətbiq və növbədə olan hər şey ləğv ediləcək</string>
+    <string name="batch_patch_install_all">Hamısını quraşdır</string>
+    <string name="batch_patch_install_failed">Quraşdırma uğursuz oldu</string>
+    <string name="batch_patch_in_progress">Toplu yamaqlama artıq icra olunur</string>
+    <string name="batch_patch_nothing_outdated">Yamaqlanmış bütün tətbiqlər yenilənib</string>
+    <string name="shortcut_repatch_short">Yenidən yamaqla</string>
+    <string name="shortcut_repatch_long">Köhnəlmiş tətbiqləri yenidən yamaqla</string>
+    <string name="shortcut_check_updates_short">Yeniləmələri yoxla</string>
+    <string name="shortcut_check_updates_long">Yamaq yeniləmələrini yoxla</string>
+    <string name="shortcut_patch_app">%s tətbiqini yamaqla</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bu tətbiqi silmək istədiyinizə əminsiniz?</string>
     <string name="batch_uninstall_confirm_body">Seçilmiş tətbiqlər cihazınızdan həmişəlik silinəcək</string>
@@ -453,8 +488,8 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="failed_to_mount">Montajlama uğursuzdu: %s</string>
     <string name="failed_to_unmount">Montajı silmək olmadı: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Hesab %d</string>
-    <string name="mini_game_best">Ən yaxşı %d</string>
+    <string name="mini_game_score">Hesab %s</string>
+    <string name="mini_game_best">Ən yaxşı %s</string>
     <string name="mini_game_new_record">Yeni rekord!</string>
     <string name="mini_game_game_over">Oyun Bitdi</string>
     <string name="mini_game_try_again">Təkrar cəhd et</string>
@@ -558,6 +593,18 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_advanced_update_interval_monthly">Ayda bir dəfə</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Fon yoxlanma tezliyi</string>
     <string name="settings_advanced_update_interval_battery_warning">Fon yoxlamaları bəzi cihazlarda davamlı işləməyə bilər. Xiaomi, Huawei, Samsung və OnePlus kimi istehsalçılar batareyanı qorumaq üçün dəfələrlə fon proseslərini ciddi şəkildə məhdudlaşdırırlar</string>
+    <string name="settings_advanced_auto_patch">Avtomatik yenidən yamaqlama</string>
+    <string name="settings_advanced_auto_patch_description">Yamaqları dəyişdikdə quraşdırılmış tətbiqləri fonda yenidən yamaqlayır. Yalnız orijinal APK-sı saxlanılan tətbiqlər əhatə olunur</string>
+    <string name="settings_advanced_auto_patch_interval">Yenidən yamaqlama tezliyi</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Yamaqlanmış tətbiqlər nə qədər tez-tez yenidən qurulsun</string>
+    <string name="settings_advanced_auto_patch_charging">Yalnız enerji dolduranda</string>
+    <string name="settings_advanced_auto_patch_charging_description">Yamaqlama CPU və yaddaşa çox yüklənir, buna görə də enerji doldurucunu gözləyir</string>
+    <string name="settings_advanced_auto_patch_install">Avtomatik olaraq quraşdır</string>
+    <string name="settings_advanced_auto_patch_install_description">Quraşdırıcı kimi Shizuku tələb olunur. Başqa quraşdırıcılarla yamaqlanmış tətbiqlər yalnız saxlanılır</string>
+    <string name="settings_advanced_external_batch_patch">Xarici tətikləyicilərə icazə ver</string>
+    <string name="settings_advanced_external_batch_patch_description">Avtomatlaşdırma tətbiqlərinin \'intent\' vasitəsilə toplu yamaqlamaya başlamasına icazə verir. Hər bir sorğu icra olunmazdan əvvəl təsdiqlənir</string>
+    <string name="external_batch_patch_title">Toplu yamaqlamaya başlanılsın?</string>
+    <string name="external_batch_patch_description">%s Morphe-nin tətbiqləri yamaqlamasını və quraşdırmasını istəyir</string>
     <!-- Notification content -->
     <string name="notification_manager_update_title">Əlçatan Morphe yenilənməsi</string>
     <string name="notification_bundle_update_title">Yeni yamaqlar var</string>
@@ -742,7 +789,6 @@ Təfərrüatlar: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android bunu blokladı, çünki quraşdırılmış tətbiqin versiyasını aşağı salacaqdı</string>
     <string name="installer_shizuku_error_signature">Android bunu blokladı, çünki quraşdırılmış tətbiqin imzası fərqlidir</string>
     <string name="installer_shizuku_error_invalid_apk">Android bu APK-nı oxuya bilmədi</string>
-    <string name="installer_shizuku_error_user_profile">Android bunu hazırkı istifadəçi və ya iş profili üçün blokladı</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batareya yaxşılaşdırma</string>
     <string name="settings_system_battery_optimization_description">Tətbiq qısılanda yamaqlayıcını işlək saxlayır</string>
@@ -965,7 +1011,6 @@ Təfərrüatlar: %2$s"</string>
     <string name="reset_order_done">Düzülüş sıfırlandı</string>
     <string name="accessibility_move_up">Yuxarı köçür</string>
     <string name="accessibility_move_down">Aşağı köçür</string>
-    <string name="accessibility_app_moved_announcement">%1$s %3$d-dən %2$d mövqeyinə köçürüldü</string>
     <string name="accessibility_scroll_to_top">Siyahının ən yuxarısına sürüşdür</string>
     <string name="rename">Təkrar adlandır</string>
     <string name="import_">İdxal et</string>
@@ -1031,8 +1076,7 @@ Təfərrüatlar: %2$s"</string>
 Hələ də davam etmək istəyirsiniz?"</string>
     <string name="download_update_confirmation">Yeniləmə yüklənilsin?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">​%1$d / %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_sources_desc">Yamaq mənbələrinizi idarə edin. Hər mənbə tətbiqlərinizə tətbiq oluna bilən yamaqlar təmin edir</string>
     <string name="onboarding_swipe_title">Sürüşdürmə jestləri</string>
     <string name="onboarding_swipe_desc">Mövcud yamaqlara baxmaq üçün tətbiq kartında sağa sürüşdür. Kartı əsas ekrandan gizlətmək üçün sola sürüşdür</string>

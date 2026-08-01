@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.BundleSourceType
+import app.morphe.manager.domain.bundles.BundledAppTarget
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.sourceType
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -800,7 +801,7 @@ private fun ApkAvailabilityDialog(
  * Dialog 2: Download instructions dialog.
  */
 @Composable
-private fun DownloadInstructionsDialog(
+internal fun DownloadInstructionsDialog(
     usingMountInstall: Boolean,
     targetAppInstalled: Boolean,
     downloadColor: Color,
@@ -989,7 +990,7 @@ private fun InstructionStep(
  * Dialog 3: File picker prompt dialog.
  */
 @Composable
-private fun FilePickerPromptDialog(
+internal fun FilePickerPromptDialog(
     appName: String,
     isOtherApps: Boolean,
     isLoadingInstalledApps: Boolean,

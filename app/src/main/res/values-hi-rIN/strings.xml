@@ -168,7 +168,7 @@
     <string name="home_app_info_no_saved_apk">कोई प्रतिलिपि APK नहीं है। पट्च करना पुनः APK फ़ाइल का चयन करना आवश्यक होगा</string>
     <string name="home_version_requires_android">Android %s+ की आवश्यकता है</string>
     <string name="home_apk_no_compatible_versions_title">इस डिवाइस पर समर्थित नहीं है</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; के पास Android %2$d (API %3$d) के लिए कोई समर्थित संस्करण नहीं है। सभी घोषित संस्करणों के लिए उच्च Android संस्करण की आवश्यकता है।</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; के Android %2$s (API %3$s) के लिए कोई समर्थित संस्करण नहीं है। सभी घोषित संस्करणों के लिए उच्चतर Android संस्करण की आवश्यकता है</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">ओरिजनल APK डाउनलोड करें</string>
     <string name="home_download_instructions_steps_title">निर्देश:</string>
@@ -244,7 +244,7 @@
     <string name="home_dialog_unsupported_version_compatible_versions">संगत संस्करण:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">असंगत</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">निर्माण %d</string>
+    <string name="home_dialog_unsupported_version_build">बिल्ड %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">यह उसी संस्करण का एक अलग निर्माण है। पैच को एक विशिष्ट निर्माण की आवश्यकता होती है</string>
     <string name="home_dialog_wrong_package_title">गलत पैकेज चुना गया</string>
     <string name="home_dialog_wrong_package_description">चुनी गई APK, आपने पथच करने के लिए इरादत किया गया एप्लिकेशन के लिए नहीं है।</string>
@@ -307,6 +307,37 @@
     <string name="header_creator_guide_themes_body">अधिकांश ऐप्स को लाइट और डार्क थीम के लिए अलग-अलग छवियों की आवश्यकता होती है। कुछ ऐप्स (जैसे YouTube Music) केवल डार्क थीम का उपयोग करते हैं, इसलिए केवल वह खंड दिखाया गया है।</string>
     <string name="header_creator_guide_positioning_title">स्थिति निर्धारण और स्केलिंग</string>
     <string name="header_creator_guide_positioning_body">अपनी छवि को स्थिति और स्केल करने के लिए पूर्वावलोकन में सीधे पिंच-टू-ज़ूम और ड्रैग जेस्चर का उपयोग करें। जब छवि केंद्र के पास होती है तो स्नैप गाइड दिखाई देती हैं। आप पूर्वावलोकन के नीचे स्लाइडर का भी उपयोग कर सकते हैं।</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_progress_counter">%2$s का पैच %1$s</string>
+    <string name="batch_patch_summary">%1$s पैच किए गए, %2$s विफल रहे, %3$s को छोड़ दिया गया</string>
+    <string name="batch_patch_saved_hint">पैच किए गए ऐप्स सहेजे गए हैं। उन्हें अभी इंस्टॉल करें, या सेटिंग्स में पैच किए गए APK सूची से बाद में इंस्टॉल करें</string>
+    <string name="batch_patch_multiple_sources">कुछ ऐप एक से अधिक स्रोत से पैच को जोड़ते हैं, जिससे टकराव हो सकता है</string>
+    <string name="batch_patch_needs_apk">कोई APK उपलब्ध नहीं है, एक फ़ाइल संलग्न करें</string>
+    <string name="batch_patch_wrong_package">संलग्न फ़ाइल %s से संबंधित है</string>
+    <string name="batch_patch_version_mismatch">पैच द्वारा %s संस्करण समर्थित नहीं है</string>
+    <string name="batch_patch_source_saved">मूल सहेजा गया</string>
+    <string name="batch_patch_source_installed">इंस्टॉल किया गया ऐप</string>
+    <string name="batch_patch_source_file">संलग्न फ़ाइल</string>
+    <string name="batch_patch_source_unavailable">APK तैयार नहीं किया जा सका</string>
+    <string name="batch_patch_attach_apk">APK संलग्न करें</string>
+    <string name="batch_patch_force_version">फिर भी पैच करें</string>
+    <string name="batch_patch_edit_patches">पैच चुनें</string>
+    <string name="batch_patch_state_no_apk">कोई APK नहीं</string>
+    <string name="batch_patch_state_no_patches">कोई पैच नहीं</string>
+    <string name="batch_patch_policy_install">पूरा होने पर इंस्टॉल करें</string>
+    <string name="batch_patch_policy_install_description">क्यू खत्म होने के तुरंत बाद हर पैच किए गए ऐप को इंस्टॉल करता है। बंद रखने से APK बाद के लिए बच जाते हैं</string>
+    <string name="batch_patch_start">पैचिंग शुरू करें</string>
+    <string name="batch_patch_stop_title">बैच पैचिंग रोकें?</string>
+    <string name="batch_patch_stop_description">अभी पैच किया जा रहा ऐप और सब कुछ अभी भी कतारबद्ध है, रद्द कर दिया जाएगा</string>
+    <string name="batch_patch_install_all">सब इंस्टॉल करें</string>
+    <string name="batch_patch_install_failed">इंस्टॉल करने में विफल</string>
+    <string name="batch_patch_in_progress">बैच पैचिंग पहले से ही चल रही है</string>
+    <string name="batch_patch_nothing_outdated">प्रत्येक पैच किया गया ऐप अप टू डेट है</string>
+    <string name="shortcut_repatch_short">पुन: पैच करें</string>
+    <string name="shortcut_repatch_long">आउटडेटेड ऐप्स को पुन: पैच करें</string>
+    <string name="shortcut_check_updates_short">अपडेट जांचें</string>
+    <string name="shortcut_check_updates_long">पैच अपडेट के लिए जांचें</string>
+    <string name="shortcut_patch_app">%s को पैच करें</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">क्या आप वाकई तौर पर इस ऐप को अनइंस्टॉल करना चाहते हैं?</string>
     <string name="batch_uninstall_confirm_body">चुने गए ऐप आपके डिवाइस से स्थायी रूप से हटा दिए जाएंगे</string>
@@ -453,8 +484,8 @@
     <string name="failed_to_mount">%s को माउंट करने में विफल</string>
     <string name="failed_to_unmount">%s को अनमाउंट करने में विफल।</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">अंक %d</string>
-    <string name="mini_game_best">सर्वश्रेष्ठ %d</string>
+    <string name="mini_game_score">स्कोर %s</string>
+    <string name="mini_game_best">सर्वश्रेष्ठ %s</string>
     <string name="mini_game_new_record">नया रिकॉर्ड!</string>
     <string name="mini_game_game_over">खेल खत्म</string>
     <string name="mini_game_try_again">फिर से प्रयास करें</string>
@@ -559,7 +590,28 @@
     <string name="settings_advanced_update_interval_monthly">एक महीने में एक बार</string>
     <string name="settings_advanced_update_interval_chip_subtitle">बैकग्राउंड अपडेट दर</string>
     <string name="settings_advanced_update_interval_battery_warning">कुछ डिवाइसों पर बैकग्राउंड चेकز कोष्ठक में काम नहीं करना चाहिए। बटरी बचाने के लिए मैन्युफैक्चरर जैसे कि एक्सियाومی, ह्वाईवे, सैमसंग, और वनप्लस बैकग्राउंड प्रोसेसेज को अग्रेषित रूप से प्रतिबंधित करते हैं</string>
+    <string name="settings_advanced_auto_patch">स्वचालित पुन: पैचिंग</string>
+    <string name="settings_advanced_auto_patch_description">जब उनके पैच बदलते हैं तो पृष्ठभूमि में इंस्टॉल किए गए ऐप्स को पुन: पैच करता है। केवल सहेजे गए मूल APK वाले ऐप शामिल हैं</string>
+    <string name="settings_advanced_auto_patch_interval">पुन: पैच आवृत्ति</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">पैच किए गए ऐप्स को कितनी बार फिर से बनाया जाता है</string>
+    <string name="settings_advanced_auto_patch_charging">केवल चार्ज करते समय</string>
+    <string name="settings_advanced_auto_patch_charging_description">पैचिंग CPU और मेमोरी पर भारी होती है, इसलिए यह चार्जर का इंतजार करता है</string>
+    <string name="settings_advanced_auto_patch_install">स्वचालित रूप से इंस्टॉल करें</string>
+    <string name="settings_advanced_auto_patch_install_description">इंस्टॉलर के रूप में Shizuku की आवश्यकता है। किसी भी अन्य इंस्टॉलर के साथ, पैच किए गए ऐप्स केवल सहेजे जाते हैं</string>
+    <string name="settings_advanced_external_batch_patch">बाहरी ट्रिगर की अनुमति दें</string>
+    <string name="settings_advanced_external_batch_patch_description">स्वचालन ऐप्स को एक इरादे के साथ बैच पैचिंग शुरू करने देता है। प्रत्येक अनुरोध को कुछ भी चलने से पहले पुष्टि की जाती है</string>
+    <string name="external_batch_patch_title">बैच पैचिंग शुरू करें?</string>
+    <string name="external_batch_patch_description">%s चाहता है कि Morphe ऐप्स को पैच और इंस्टॉल करे</string>
+    <string name="external_batch_patch_trust_caller">हमेशा इस ऐप की अनुमति दें</string>
+    <string name="external_batch_patch_unknown_caller">एक अज्ञात ऐप</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">स्वचालित पुन: पैचिंग समाप्त हो गई</string>
+    <string name="notification_auto_patch_running_title">ऐप्स को पुन: पैच करना</string>
+    <string name="notification_auto_patch_blocked_title">स्वचालित पुन: पैचिंग नहीं चली</string>
+    <string name="notification_auto_patch_blocked_battery">सिस्टम ने इस इंस्टॉल को ब्लॉक कर दिया। Xiaomi और समान उपकरणों पर, डेवलपर विकल्पों में \"USB के माध्यम से इंस्टॉल करें\" चालू करें। कार्य प्रोफ़ाइल पर, इंस्टॉल को नीति द्वारा प्रतिबंधित किया जा सकता है</string>
+    <string name="notification_auto_patch_blocked_foreground">विफल</string>
+    <string name="notification_channel_auto_patch">रद्द किया गया</string>
+    <string name="notification_channel_auto_patch_description">तैयार</string>
     <string name="notification_manager_update_title">मोर्फ़ अपडेट उपलब्ध है</string>
     <string name="notification_bundle_update_title">नई पैच उपलब्ध हैं</string>
     <string name="notification_update_text">संस्करण %s डाउनलोड करने के लिए तैयार है।</string>
@@ -745,7 +797,7 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">Android ने इसे इस वजह से अवरुद्ध कर दिया क्योंकि यह इंस्टॉल किए गए ऐप को डिग्रेड करेगा</string>
     <string name="installer_shizuku_error_signature">Android ने इसे रोक दिया क्योंकि इंस्टॉल किए गए ऐप में अलग हस्ताक्षर हैं</string>
     <string name="installer_shizuku_error_invalid_apk">Android इस APK को पढ़ने में विफल रहा</string>
-    <string name="installer_shizuku_error_user_profile">Android ने वर्तमान उपयोगकर्ता या कार्य प्रोफ़ाइल के लिए इसे अवरुद्ध कर दिया</string>
+    <string name="installer_shizuku_error_user_profile">बहिष्कृत करें</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">बैटरी अनुकूलन</string>
     <string name="settings_system_battery_optimization_description">जब ऐप छोटा किया जाता है, तो पैचर को चालू रखता है।</string>
@@ -928,6 +980,9 @@ morphe_header_custom_dark.png
     <string name="confirm">पुष्टि करें</string>
     <string name="warning">चेतावनी</string>
     <string name="error_">त्रुटि</string>
+    <string name="failed">बहिष्कृत</string>
+    <string name="cancelled">शामिल करें</string>
+    <string name="ready">ऐप चुनें</string>
     <string name="retry">पुनरावलोकन करें</string>
     <string name="refresh">ताज़ा करें</string>
     <string name="add">जोड़ें</string>
@@ -940,6 +995,9 @@ morphe_header_custom_dark.png
     <string name="delete">हटाएं</string>
     <string name="delete_all">सभी हटाएं</string>
     <string name="remove">निकालें</string>
+    <string name="exclude">पैचिंग</string>
+    <string name="excluded">शामिल करें</string>
+    <string name="include">शामिल करें</string>
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
     <string name="loading">Loading…</string>
@@ -966,9 +1024,10 @@ morphe_header_custom_dark.png
     <string name="reorder_done">क्रम सहेजा गया</string>
     <string name="reset_order">क्रम रीसेट करें</string>
     <string name="reset_order_done">ऑर्डर रीसेट हो गया</string>
+    <string name="accessibility_select_app">ऐप चुनें</string>
     <string name="accessibility_move_up">ऊपर ले जाएं</string>
     <string name="accessibility_move_down">नीचे ले जाएं</string>
-    <string name="accessibility_app_moved_announcement">%1$s को %3$d में से %2$d स्थान पर ले जाया गया</string>
+    <string name="accessibility_app_moved_announcement">%1$s को %3$s के %2$s स्थान पर ले जाया गया</string>
     <string name="accessibility_scroll_to_top">सूची के शीर्ष पर स्क्रॉल करें</string>
     <string name="rename">रename</string>
     <string name="import_">आयात करें</string>
@@ -984,6 +1043,7 @@ morphe_header_custom_dark.png
     <string name="continue_">Continue</string>
     <string name="version">Version</string>
     <string name="patch">पैच</string>
+    <string name="patching">पैचिंग</string>
     <string name="repatch">Repatch</string>
     <string name="open">खुला</string>
     <string name="mount">माउंट करें</string>
@@ -1034,8 +1094,8 @@ morphe_header_custom_dark.png
 क्या आप अभी भी आगे बढ़ना चाहते हैं?"</string>
     <string name="download_update_confirmation">अपडेट डाउनलोड करें?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d में से %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%2$s में से %1$s</string>
     <string name="onboarding_sources_desc">अपने पैच स्रोतों का प्रबंधन करें। प्रत्येक स्रोत पैच प्रदान करता है जिन्हें आपके ऐप्स पर लागू किया जा सकता है।</string>
     <string name="onboarding_swipe_title">स्वाइप इशारे</string>
     <string name="onboarding_swipe_desc">अपने उपलब्ध पैच देखने के लिए किसी ऐप कार्ड पर दाईं ओर स्वाइप करें। होम स्क्रीन से कार्ड को छिपाने के लिए बाईं ओर स्वाइप करें।</string>

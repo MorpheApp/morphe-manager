@@ -168,7 +168,7 @@
     <string name="home_app_info_no_saved_apk">Kayıtlı APK yok. Yamayı uygulayabilmek için tekrar APK dosyasını seçmeniz gerekiyor</string>
     <string name="home_version_requires_android">Android %s+ gerektiriyor</string>
     <string name="home_apk_no_compatible_versions_title">Bu cihazda desteklenmiyor</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; Android %2$d (API %3$d) için desteklenen sürümlere sahip değil. Bildirilen tüm sürümler daha yüksek bir Android sürümü gerektiriyor</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; Android %2$s (API %3$s) için desteklenen bir sürümü yok. Bildirilen tüm sürümler daha yüksek bir Android sürümü gerektiriyor.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Orijinal APK\'yi indir</string>
     <string name="home_download_instructions_steps_title">Talimatlar:</string>
@@ -244,7 +244,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="home_dialog_unsupported_version_compatible_versions"> Uyumlu sürümler:</string>
     <string name="home_dialog_unsupported_version_unsupported_label"> Uyumlu değil</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Yapı %d</string>
+    <string name="home_dialog_unsupported_version_build">Yapı %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Bu, aynı sürüme ait farklı bir yapıdır. Yamalar belirli bir yapı gerektirir</string>
     <string name="home_dialog_wrong_package_title">Yanlış paket seçildi</string>
     <string name="home_dialog_wrong_package_description">Seçilen APK, yamalamak istediğiniz uygulama için değil</string>
@@ -307,6 +307,41 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="header_creator_guide_themes_body">Çoğu uygulama, açık ve koyu temalar için ayrı görüntüler gerektirir. Bazı uygulamalar (YouTube Music gibi) yalnızca koyu temayı kullanır, bu nedenle yalnızca o bölüm gösterilir.</string>
     <string name="header_creator_guide_positioning_title">Konumlandırma ve ölçeklendirme</string>
     <string name="header_creator_guide_positioning_body">Görüntünüzü konumlandırmak ve ölçeklendirmek için ön izlemede doğrudan yakınlaştırma ve sürükleme hareketlerini kullanın. Görüntü merkeze yaklaştığında hizalama kılavuzları görünür. Ön izlemenin altındaki kaydırıcıyı da kullanabilirsiniz.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Yama seçildi</string>
+    <string name="batch_patch_title">Toplu yama</string>
+    <string name="batch_patch_planning">Sıra hazırlanıyor…</string>
+    <string name="batch_patch_preparing_next">Bir sonraki uygulama hazırlanıyor…</string>
+    <string name="batch_patch_progress_counter">%2$s için yama %1$s</string>
+    <string name="batch_patch_summary">%1$s yamalandı, %2$s başarısız oldu, %3$s atlandı</string>
+    <string name="batch_patch_saved_hint">Yamalanan uygulamalar kaydedildi. Şimdi kurun veya ayarlar bölümündeki yamalı APK listesinden daha sonra kurun</string>
+    <string name="batch_patch_multiple_sources">Bazı uygulamalar yamaları birden fazla kaynaktan birleştirir, bu da çakışmalara neden olabilir</string>
+    <string name="batch_patch_needs_apk">APK mevcut değil, bir dosya ekleyin</string>
+    <string name="batch_patch_wrong_package">Ekli dosya %s\'ye ait</string>
+    <string name="batch_patch_version_mismatch">%s sürümü yamalar tarafından desteklenmiyor</string>
+    <string name="batch_patch_source_saved">Orijinal kaydedildi</string>
+    <string name="batch_patch_source_installed">Kurulu uygulama</string>
+    <string name="batch_patch_source_file">Ekli dosya</string>
+    <string name="batch_patch_source_unavailable">APK hazırlanmadı</string>
+    <string name="batch_patch_attach_apk">APK ekle</string>
+    <string name="batch_patch_force_version">Yine de yamala</string>
+    <string name="batch_patch_edit_patches">Yamaları seç</string>
+    <string name="batch_patch_state_no_apk">APK yok</string>
+    <string name="batch_patch_state_no_patches">Yama yok</string>
+    <string name="batch_patch_policy_install">Tamamlandığında kur</string>
+    <string name="batch_patch_policy_install_description">Sıra bittikten hemen sonra her yamalı uygulamayı kurar. Kapalı bırakmak, APK\'ları daha sonra kullanmak üzere saklar</string>
+    <string name="batch_patch_start">Yamalama işlemini başlat</string>
+    <string name="batch_patch_stop_title">Toplu yamalamayı durdur?</string>
+    <string name="batch_patch_stop_description">Şu anda yamalanan uygulama ve hala sırada bekleyen her şey iptal edilecektir</string>
+    <string name="batch_patch_install_all">Tümünü kur</string>
+    <string name="batch_patch_install_failed">Kurulum başarısız oldu</string>
+    <string name="batch_patch_in_progress">Toplu yamalama zaten çalışıyor</string>
+    <string name="batch_patch_nothing_outdated">Her yamalı uygulama güncel</string>
+    <string name="shortcut_repatch_short">Yeniden yama</string>
+    <string name="shortcut_repatch_long">Güncel olmayan uygulamaları yeniden yama</string>
+    <string name="shortcut_check_updates_short">Güncellemeleri kontrol et</string>
+    <string name="shortcut_check_updates_long">Yama güncellemelerini kontrol et</string>
+    <string name="shortcut_patch_app">%s\'yi yamala</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bu uygulamayı kaldırmak istediğinizden emin misiniz?</string>
     <string name="batch_uninstall_confirm_body">Seçili uygulamalar cihazınızdan kalıcı olarak silinecektir.</string>
@@ -453,8 +488,8 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="failed_to_mount">Bağlanamadı: %s</string>
     <string name="failed_to_unmount">Bağlama kaldırılamadı: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">%d puan</string>
-    <string name="mini_game_best">En iyisi %d</string>
+    <string name="mini_game_score">Puan %s</string>
+    <string name="mini_game_best">En İyi %s</string>
     <string name="mini_game_new_record">Yeni rekor!</string>
     <string name="mini_game_game_over">Oyun Bitti</string>
     <string name="mini_game_try_again">Tekrar Dene</string>
@@ -558,7 +593,28 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_advanced_update_interval_monthly">Ayda bir</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Arka plan kontrol sıklığı</string>
     <string name="settings_advanced_update_interval_battery_warning">Bazı cihazlarda arka plan kontrolleri güvenilir şekilde çalışmayabilir. Xiaomi, Huawei, Samsung ve OnePlus gibi üreticiler, pil ömrünü uzatmak için arka plan işlemlerini genellikle agresif şekilde kısıtlarlar</string>
+    <string name="settings_advanced_auto_patch">Otomatik yeniden yama</string>
+    <string name="settings_advanced_auto_patch_description">Yamalar değiştiğinde, arka planda kurulu uygulamaları yeniden yamar. Yalnızca kaydedilmiş orijinal APK\'sı olan uygulamalar kapsam dahilindedir</string>
+    <string name="settings_advanced_auto_patch_interval">Yeniden yama sıklığı</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Yamalı uygulamaların ne sıklıkta yeniden oluşturulduğu</string>
+    <string name="settings_advanced_auto_patch_charging">Yalnızca şarj olurken</string>
+    <string name="settings_advanced_auto_patch_charging_description">Yamalama CPU ve belleğe çok yüklendiği için bir şarj cihazı bekler</string>
+    <string name="settings_advanced_auto_patch_install">Otomatik olarak kur</string>
+    <string name="settings_advanced_auto_patch_install_description">Kurulum aracı olarak Shizuku gerektirir. Başka herhangi bir kurulum aracıyla yamalı uygulamalar yalnızca kaydedilir</string>
+    <string name="settings_advanced_external_batch_patch">Harici tetikleyicilere izin ver</string>
+    <string name="settings_advanced_external_batch_patch_description">Otomasyon uygulamalarının bir intent ile toplu yamalamayı başlatmasına izin verir. Her istek herhangi bir şey çalıştırılmadan önce onaylanır</string>
+    <string name="external_batch_patch_title">Toplu yamalamayı başlat?</string>
+    <string name="external_batch_patch_description">%s, Morphe\'nin uygulamaları yamalamasını ve kurmasını istiyor</string>
+    <string name="external_batch_patch_trust_caller">Bu uygulamaya her zaman izin ver</string>
+    <string name="external_batch_patch_unknown_caller">Bilinmeyen bir uygulama</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Otomatik yeniden yama tamamlandı</string>
+    <string name="notification_auto_patch_running_title">Uygulamalar yeniden yamalanıyor</string>
+    <string name="notification_auto_patch_blocked_title">Otomatik yeniden yama çalışmadı</string>
+    <string name="notification_auto_patch_blocked_battery">Sistem bu kurulumu engelledi. Xiaomi ve benzeri cihazlarda geliştirici seçeneklerinden \"USB üzerinden kur\" seçeneğini açın. Bir iş profili üzerinde, kurulumlar ilke tarafından kısıtlanabilir</string>
+    <string name="notification_auto_patch_blocked_foreground">Başarısız</string>
+    <string name="notification_channel_auto_patch">İptal edildi</string>
+    <string name="notification_channel_auto_patch_description">Hazır</string>
     <string name="notification_manager_update_title">Morphe güncellemesi mevcut</string>
     <string name="notification_bundle_update_title">Yeni yamalar mevcut</string>
     <string name="notification_update_text">%s sürümü indirilmeye hazır</string>
@@ -743,7 +799,7 @@ Ayrıntılar: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android, bunu mevcut uygulamayı düşürdüğü için engelledi.</string>
     <string name="installer_shizuku_error_signature">Android, yüklenen uygulamanın farklı bir imzaya sahip olması nedeniyle bunu engelledi.</string>
     <string name="installer_shizuku_error_invalid_apk">Android bu APK\'yı okuyamadı.</string>
-    <string name="installer_shizuku_error_user_profile">Android, geçerli kullanıcı veya iş profili için bunu engelledi.</string>
+    <string name="installer_shizuku_error_user_profile">Dışla</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pil optimizasyonu</string>
     <string name="settings_system_battery_optimization_description">Uygulama küçültüldüğünde patcher\'ı çalışır durumda tutar</string>
@@ -926,6 +982,9 @@ Ayrıntılar: %2$s"</string>
     <string name="confirm">Onayla</string>
     <string name="warning">Uyarı</string>
     <string name="error_">Hata</string>
+    <string name="failed">Dışlandı</string>
+    <string name="cancelled">Dahil et</string>
+    <string name="ready">Uygulama seç</string>
     <string name="retry">Tekrar deneyin</string>
     <string name="refresh">Yenile</string>
     <string name="add">Ekle</string>
@@ -938,6 +997,9 @@ Ayrıntılar: %2$s"</string>
     <string name="delete">Sil</string>
     <string name="delete_all">Tümünü sil</string>
     <string name="remove">Kaldır</string>
+    <string name="exclude">Yamalıyor</string>
+    <string name="excluded">Yamalanıyor</string>
+    <string name="include">Dahil Et</string>
     <string name="disable">Devre dışı bırak</string>
     <string name="enable">Etkinleştir</string>
     <string name="loading">Yükleniyor…</string>
@@ -964,9 +1026,10 @@ Ayrıntılar: %2$s"</string>
     <string name="reorder_done">Sıra kaydedildi</string>
     <string name="reset_order">Sırayı sıfırla</string>
     <string name="reset_order_done">Sıra sıfırlandı</string>
+    <string name="accessibility_select_app">Uygulama seç</string>
     <string name="accessibility_move_up">Yukarı taşı</string>
     <string name="accessibility_move_down">Aşağı taşı</string>
-    <string name="accessibility_app_moved_announcement">%1$s, %3$d\'nin %2$d konumuna taşındı</string>
+    <string name="accessibility_app_moved_announcement">%1$s, %3$s\'nin %2$s konumuna taşındı</string>
     <string name="accessibility_scroll_to_top">Listenin en üstüne kaydır</string>
     <string name="rename">Yeniden adlandır</string>
     <string name="import_">İçe aktar</string>
@@ -982,6 +1045,7 @@ Ayrıntılar: %2$s"</string>
     <string name="continue_">Devam et</string>
     <string name="version">Sürüm</string>
     <string name="patch">Yamala</string>
+    <string name="patching">Yamalanıyor</string>
     <string name="repatch">Yeniden yamala</string>
     <string name="open">Aç</string>
     <string name="mount">Bağla</string>
@@ -1032,8 +1096,8 @@ Ayrıntılar: %2$s"</string>
 Devam etmek istiyor musunuz?"</string>
     <string name="download_update_confirmation">Güncelleme indirilsin mi?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d / %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%2$stan %1$s</string>
     <string name="onboarding_sources_desc">Yama kaynaklarınızı yönetin. Her kaynak, uygulamalarınıza uygulanabilecek yamalar sağlar</string>
     <string name="onboarding_swipe_title">Kaydırma hareketleri</string>
     <string name="onboarding_swipe_desc">Bir uygulama kartında bulunan yamaları görmek için sağa kaydırın. Kartı ana ekranından gizlemek için sola kaydırın</string>

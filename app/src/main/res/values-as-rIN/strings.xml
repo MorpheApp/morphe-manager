@@ -28,6 +28,7 @@
     <!-- Patch Options -->
     <!-- Adaptive Icon Creator -->
     <!-- Header Creator -->
+    <!-- Batch patching -->
     <!-- Home Screen - App Info Screen -->
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
@@ -75,7 +76,7 @@
     <!-- Settings - System Tab - About Section -->
     <!-- Shared strings -->
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->
     <!-- Tour prompt dialog shown after first successful patch install -->
 </resources>

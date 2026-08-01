@@ -141,19 +141,24 @@ class BatchPatchCoordinator(
         }
     }
 
-    /** Accepts an unsupported version for one item, mirroring the single-app warning dialog. */
+    /**
+     * Accepts an unsupported version for one item, mirroring the single-app warning dialog.
+     *
+     * The item is resolved again rather than just flipped to runnable, because accepting the
+     * version is what brings in the patches that declare a different one. Without that the
+     * app would be patched with nothing but the universal patches.
+     */
     fun forceVersion(packageName: String) {
-        _state.update { state ->
-            if (state.phase != BatchPhase.PREFLIGHT) return@update state
-            state.copy(
-                items = state.items.map { item ->
-                    if (item.packageName == packageName && item.state == BatchItemState.VERSION_MISMATCH) {
-                        item.copy(state = BatchItemState.READY, forceVersionMismatch = true)
-                    } else {
-                        item
-                    }
-                }
-            )
+        val current = _state.value ?: return
+        if (current.phase != BatchPhase.PREFLIGHT) return
+        val item = current.items.firstOrNull { it.packageName == packageName } ?: return
+        if (item.state != BatchItemState.VERSION_MISMATCH) return
+
+        scope.launch {
+            val resolved = resolver.forceVersion(item, current.useMount)
+            _state.update { state ->
+                state.copy(items = state.items.map { if (it.packageName == packageName) resolved else it })
+            }
         }
     }
 
@@ -362,10 +367,9 @@ class BatchPatchCoordinator(
 
         // Only the sources actually contributing patches, so narrowing an app to one source
         // is reflected in the log as well as on the card
-        val versionsByUid = patchBundleRepository.sources.first().associate { it.uid to it.version }
         val patchSources = item.bundles
             .filter { it.uid in item.selection.keys }
-            .map { PatchSourceRef(it.name, versionsByUid[it.uid]) }
+            .map { PatchSourceRef(it.name, it.version) }
 
         val args = PatcherWorker.Args(
             input = selectedApp,

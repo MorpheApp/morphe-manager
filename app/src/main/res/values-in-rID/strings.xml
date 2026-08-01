@@ -168,7 +168,7 @@
     <string name="home_app_info_no_saved_apk">Tidak ada APK yang disimpan. Penambalan akan memerlukan memilih berkas APK lagi</string>
     <string name="home_version_requires_android">Membutuhkan Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Tidak didukung di perangkat ini</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; tidak memiliki versi yang didukung untuk Android %2$d (API %3$d). Semua versi yang tersedia memerlukan versi Android yang lebih tinggi</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; tidak memiliki versi yang didukung untuk Android %2$s (API %3$s). Semua versi yang tersedia memerlukan versi Android yang lebih tinggi</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Unduh APK asli</string>
     <string name="home_download_instructions_steps_title">Petunjuk:</string>
@@ -245,7 +245,7 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <string name="home_dialog_unsupported_version_compatible_versions">Versi yang cocok:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Tidak didukung</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build">Kode versi %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Ini adalah build yang berbeda dari versi yang sama. Tambalan memerlukan build tertentu</string>
     <string name="home_dialog_wrong_package_title">Salah memilih paket</string>
     <string name="home_dialog_wrong_package_description">APK yang dipilih bukan untuk aplikasi yang Anda harapkan untuk ditambal</string>
@@ -308,6 +308,41 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="header_creator_guide_themes_body">Sebagian besar aplikasi memerlukan gambar terpisah untuk tema terang dan gelap. Beberapa aplikasi (seperti YouTube Music) hanya menggunakan tema gelap, jadi hanya bagian itu yang ditampilkan.</string>
     <string name="header_creator_guide_positioning_title">Pemosisian dan penskalaan</string>
     <string name="header_creator_guide_positioning_body">Gunakan gerakan mencubit dan menyeret langsung di jendela pratinjau untuk mengatur posisi dan memperbesar atau memperkecil gambar Anda. Garis panduan akan muncul saat gambar berada mendekati bagian tengah. Anda juga dapat menggunakan bilah geser di bawah jendela pratinjau.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Tambalan dipilih</string>
+    <string name="batch_patch_title">Penambalan massal</string>
+    <string name="batch_patch_planning">Menyiapkan antrean…</string>
+    <string name="batch_patch_preparing_next">Mempersiapkan aplikasi selanjutnya…</string>
+    <string name="batch_patch_progress_counter">Menambal %1$s dari %2$s</string>
+    <string name="batch_patch_summary">%1$s ditambal, %2$s gagal, %3$s dilewati</string>
+    <string name="batch_patch_saved_hint">Aplikasi yang telah ditambal telah tersimpan. Instal sekarang, atau nanti dari daftar APK yang telah ditambal di pengaturan.</string>
+    <string name="batch_patch_multiple_sources">Beberapa aplikasi menggabungkan tambalan dari lebih dari satu sumber, yang dapat menyebabkan konflik</string>
+    <string name="batch_patch_needs_apk">Tidak ada APK yang tersedia, lampirkan file</string>
+    <string name="batch_patch_wrong_package">Berkas terlampir milik %s</string>
+    <string name="batch_patch_version_mismatch">Versi %s tidak didukung tambalan</string>
+    <string name="batch_patch_source_saved">Aplikasi asli disimpan</string>
+    <string name="batch_patch_source_installed">Aplikasi terpasang</string>
+    <string name="batch_patch_source_file">Berkas terlampir</string>
+    <string name="batch_patch_source_unavailable">APK tidak dapat disiapkan</string>
+    <string name="batch_patch_attach_apk">Lampirkan APK</string>
+    <string name="batch_patch_force_version">Tetap tambal</string>
+    <string name="batch_patch_edit_patches">Pilih tambalan</string>
+    <string name="batch_patch_state_no_apk">Tidak ada APK</string>
+    <string name="batch_patch_state_no_patches">Tidak ada tambalan</string>
+    <string name="batch_patch_policy_install">Pasang setelah selesai</string>
+    <string name="batch_patch_policy_install_description">Menginstal setiap aplikasi yang ditambal segera setelah antrean selesai. Jika dinonaktifkan, APK akan disimpan untuk nanti</string>
+    <string name="batch_patch_start">Mulai menambal</string>
+    <string name="batch_patch_stop_title">Hentikan penambalan massal?</string>
+    <string name="batch_patch_stop_description">Aplikasi yang sedang ditambal saat ini dan semua yang masih dalam antrean akan dibatalkan</string>
+    <string name="batch_patch_install_all">Pasang semua</string>
+    <string name="batch_patch_install_failed">Pemasangan gagal</string>
+    <string name="batch_patch_in_progress">Penambalan massal sedang berjalan</string>
+    <string name="batch_patch_nothing_outdated">Semua aplikasi yang ditambal sudah versi terbaru</string>
+    <string name="shortcut_repatch_short">Tambal ulang</string>
+    <string name="shortcut_repatch_long">Tambal ulang aplikasi usang</string>
+    <string name="shortcut_check_updates_short">Periksa pembaruan</string>
+    <string name="shortcut_check_updates_long">Periksa pembaruan tambalan</string>
+    <string name="shortcut_patch_app">Tambal %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Apakah Anda yakin ingin menghapus pemasangan aplikasi ini?</string>
     <string name="batch_uninstall_confirm_body">Aplikasi yang dipilih akan dihapus secara permanen dari perangkat Anda</string>
@@ -454,8 +489,8 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="failed_to_mount">Gagal mount: %s</string>
     <string name="failed_to_unmount">Gagal unmount: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Skor %d</string>
-    <string name="mini_game_best">Terbaik %d</string>
+    <string name="mini_game_score">Skor %s</string>
+    <string name="mini_game_best">%s terbaik</string>
     <string name="mini_game_new_record">Rekor baru!</string>
     <string name="mini_game_game_over">Permainan Selesai</string>
     <string name="mini_game_try_again">Coba Lagi</string>
@@ -554,13 +589,34 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="settings_advanced_updates_background_notifications_description_fcm">Pemberitahuan dorong untuk rilis terbaru, bahkan saat aplikasi sedang ditutup</string>
     <string name="settings_advanced_update_interval">Jadwal periksa</string>
     <string name="settings_advanced_update_interval_dialog_title">Periksa untuk pembaruan</string>
-    <string name="settings_advanced_update_interval_hourly">Sekali dalam jam</string>
-    <string name="settings_advanced_update_interval_daily">Sekali dalam hari</string>
-    <string name="settings_advanced_update_interval_weekly">Sekali dalam minggu</string>
-    <string name="settings_advanced_update_interval_monthly">Sekali dalam bulan</string>
+    <string name="settings_advanced_update_interval_hourly">Sejam sekali</string>
+    <string name="settings_advanced_update_interval_daily">Sehari sekali</string>
+    <string name="settings_advanced_update_interval_weekly">Seminggu sekali</string>
+    <string name="settings_advanced_update_interval_monthly">Sebulan sekali</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Jadwal periksa latar belakang</string>
     <string name="settings_advanced_update_interval_battery_warning">Periksa latar belakang mungkin tidak bekerja dengan baik pada beberapa perangkat. Produsen seperti Xiaomi, Huawei, Samsung, dan OnePlus sering membatasi proses latar belakang untuk menghemat baterai</string>
+    <string name="settings_advanced_auto_patch">Penambalan ulang otomatis</string>
+    <string name="settings_advanced_auto_patch_description">Menambal ulang aplikasi yang terpasang di latar belakang saat tambalannya berubah. Hanya aplikasi dengan APK asli yang tersimpan yang akan ditambal</string>
+    <string name="settings_advanced_auto_patch_interval">Jadwal tambal ulang</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Seberapa sering aplikasi yang ditambal dibuat ulang</string>
+    <string name="settings_advanced_auto_patch_charging">Hanya saat mengisi daya</string>
+    <string name="settings_advanced_auto_patch_charging_description">Proses penambalan sangat membebani CPU dan memori, sehingga akan menunggu hingga pengisi daya terhubung</string>
+    <string name="settings_advanced_auto_patch_install">Pasang otomatis</string>
+    <string name="settings_advanced_auto_patch_install_description">Membutuhkan Shizuku sebagai penginstal. Dengan penginstal lain, aplikasi yang telah ditambal hanya akan tersimpan</string>
+    <string name="settings_advanced_external_batch_patch">Izinkan pemicu eksternal</string>
+    <string name="settings_advanced_external_batch_patch_description">Mengizinkan aplikasi otomasi untuk memulai penambalan massal menggunakan intent. Setiap permintaan akan dikonfirmasi sebelum proses dijalankan</string>
+    <string name="external_batch_patch_title">Mulai penambalan massal?</string>
+    <string name="external_batch_patch_description">%s ingin Morphe menambal dan memasang aplikasi</string>
+    <string name="external_batch_patch_trust_caller">Selalu izinkan aplikasi ini</string>
+    <string name="external_batch_patch_unknown_caller">Aplikasi tidak dikenal</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Penambalan ulang otomatis telah selesai</string>
+    <string name="notification_auto_patch_running_title">Menambal ulang aplikasi</string>
+    <string name="notification_auto_patch_blocked_title">Penambalan ulang otomatis tidak dijalankan</string>
+    <string name="notification_auto_patch_blocked_battery">Kecualikan Morphe dari pengoptimalan baterai, jika tidak, Android akan menghentikan proses sebelum dimulai</string>
+    <string name="notification_auto_patch_blocked_foreground">Android tidak mengizinkan proses penambalan berjalan di latar belakang. Buka Morphe dan lakukan penambalan dari aplikasi tersebut</string>
+    <string name="notification_channel_auto_patch">Penambalan ulang otomatis</string>
+    <string name="notification_channel_auto_patch_description">Notifikasi kemajuan dan hasil secara senyap untuk pembaruan tambalan terjadwal.</string>
     <string name="notification_manager_update_title">Pembaruan Morphe tersedia</string>
     <string name="notification_bundle_update_title">Patches baru tersedia</string>
     <string name="notification_update_text">Versi %s siap untuk diunduh</string>
@@ -746,7 +802,7 @@ Rincian: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android memblokir ini karena akan menurunkan versi aplikasi yang terpasang</string>
     <string name="installer_shizuku_error_signature">Android memblokir ini karena aplikasi yang terpasang memiliki tanda tangan yang berbeda</string>
     <string name="installer_shizuku_error_invalid_apk">Android tidak dapat membaca APK ini</string>
-    <string name="installer_shizuku_error_user_profile">Android memblokir ini untuk profil pengguna atau profil kerja saat ini</string>
+    <string name="installer_shizuku_error_user_profile">Sistem memblokir pemasangan ini. Pada Xiaomi dan perangkat serupa, aktifkan \"Instal via USB\" di opsi pengembang. Pada profil kerja, pemasangan dapat dibatasi oleh kebijakan</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisasi baterai</string>
     <string name="settings_system_battery_optimization_description">Menjaga penambal tetap berjalan saat aplikasi diminimalkan</string>
@@ -929,6 +985,9 @@ Rincian: %2$s"</string>
     <string name="confirm">Konfirmasi</string>
     <string name="warning">Peringatan</string>
     <string name="error_">Kesalahan</string>
+    <string name="failed">Gagal</string>
+    <string name="cancelled">Dibatalkan</string>
+    <string name="ready">Siap</string>
     <string name="retry">Coba lagi</string>
     <string name="refresh">Segarkan</string>
     <string name="add">Tambah</string>
@@ -941,6 +1000,9 @@ Rincian: %2$s"</string>
     <string name="delete">Hapus</string>
     <string name="delete_all">Hapus semua</string>
     <string name="remove">Hapus</string>
+    <string name="exclude">Mengecualikan</string>
+    <string name="excluded">Dikecualikan</string>
+    <string name="include">Termasuk</string>
     <string name="disable">Nonaktifkan</string>
     <string name="enable">Aktifkan</string>
     <string name="loading">Memuat…</string>
@@ -967,9 +1029,10 @@ Rincian: %2$s"</string>
     <string name="reorder_done">Urutan disimpan</string>
     <string name="reset_order">Atur ulang urutan</string>
     <string name="reset_order_done">Urutan diatur ulang</string>
+    <string name="accessibility_select_app">Pilih aplikasi</string>
     <string name="accessibility_move_up">Pindah ke atas</string>
     <string name="accessibility_move_down">Pindah ke bawah</string>
-    <string name="accessibility_app_moved_announcement">%1$s dipindahkan ke posisi %2$d dari %3$d</string>
+    <string name="accessibility_app_moved_announcement">%1$s dipindahkan ke posisi %2$s dari %3$s</string>
     <string name="accessibility_scroll_to_top">Gulir ke atas daftar</string>
     <string name="rename">Ganti nama</string>
     <string name="import_">Impor</string>
@@ -985,6 +1048,7 @@ Rincian: %2$s"</string>
     <string name="continue_">Lanjutkan</string>
     <string name="version">Versi</string>
     <string name="patch">Tambalan</string>
+    <string name="patching">Menambal</string>
     <string name="repatch">Terapkan patch ulang</string>
     <string name="open">Buka</string>
     <string name="mount">Mount</string>
@@ -1025,7 +1089,7 @@ Rincian: %2$s"</string>
     <string name="update_completed">Pembaruan terpasang</string>
     <string name="install_update_manager_failed">Gagal memasang pembaruan</string>
     <string name="installing_manager_update">Memasang pembaruan…</string>
-    <string name="downloading_manager_update">Memperbarui pembaruan…</string>
+    <string name="downloading_manager_update">Mengunduh pembaruan…</string>
     <string name="download_manager_failed">Gagal mengunduh pembaruan: %s</string>
     <string name="failed_to_check_updates">Gagal memeriksa pembaruan: %s</string>
     <string name="failed_to_download_update">Gagal mengunduh pembaruan: %s</string>
@@ -1035,8 +1099,8 @@ Rincian: %2$s"</string>
 Apakah Anda masih ingin melanjutkan?"</string>
     <string name="download_update_confirmation">Unduh pembaruan?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d dari %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s dari %2$s</string>
     <string name="onboarding_sources_desc">Kelola sumber tambalan Anda. Setiap sumber menyediakan tambalan yang dapat diterapkan ke aplikasi Anda</string>
     <string name="onboarding_swipe_title">Gerakan usapan</string>
     <string name="onboarding_swipe_desc">Usap ke kanan pada kartu aplikasi untuk melihat tambalan yang tersedia. Usap ke kiri untuk menyembunyikan kartu dari layar utama</string>

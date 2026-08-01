@@ -168,7 +168,7 @@
     <string name="home_app_info_no_saved_apk">Engin geymd APK. Pökkun mun þurfa að velja APK skrá aftur</string>
     <string name="home_version_requires_android">Krefst Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ekki studd á þessari tæki</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; hefur engar samhæfar útgáfur fyrir Android %2$d (API %3$d). Allar lýstar útgáfur krefjast hærri Android útgáfu</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; hefur engar samhæfðar útgáfur fyrir Android %2$s (API %3$s). Allar skilgreindar útgáfur krefjast hærri Android útgáfu</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Sæktu upprunalega APK skrána</string>
     <string name="home_download_instructions_steps_title">Leiðbeiningar:</string>
@@ -243,7 +243,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="home_dialog_unsupported_version_compatible_versions">Samhæfar útgáfur:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Stuðlað er við</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Gerð %d</string>
+    <string name="home_dialog_unsupported_version_build">Útgáfa %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Þetta er önnur gerð af sömu útgáfu. Viðgerðirnar krefjast sérstakrar gerðar</string>
     <string name="home_dialog_wrong_package_title">Rangur pakki valinn</string>
     <string name="home_dialog_wrong_package_description">Valin pakkning er ekki fyrir það app sem þú ætlaðir að patta</string>
@@ -305,6 +305,41 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="header_creator_guide_themes_body">Flest app krefjast sérstakara mynda fyrir ljósa og aðra lit. Sum app (slátt YouTube músik) nota eingöngu aðra litinn, svo að aðeins það deild er sýnið.</string>
     <string name="header_creator_guide_positioning_title">Staða og mál</string>
     <string name="header_creator_guide_positioning_body">Nota pincu-til-zoom og dráttar hreyfingar beint í forsvísun til að staðsetja og stærð liti. Snappa leiðbeiningar birtast þegar myndin er nálæg miðju. Hægt er einnig að nota rennara hér að neðan.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Valdar patch</string>
+    <string name="batch_patch_title">Batch patching</string>
+    <string name="batch_patch_planning">Býr til biðröð…</string>
+    <string name="batch_patch_preparing_next">Býr appið næst…</string>
+    <string name="batch_patch_progress_counter">Lagfært %1$s af %2$s</string>
+    <string name="batch_patch_summary">%1$s lagfært, %2$s mislukkaðist, %3$s sleppt</string>
+    <string name="batch_patch_saved_hint">Pökkunarpakkarnir sem breyttu eru vistaðir. Settu þá upp núna, eða síðar frá listanum yfir breytt APK í stillingum</string>
+    <string name="batch_patch_multiple_sources">Sumir appnotkunarpakkarnir sameina breytingar frá fleiri en einni uppruna, sem getur valdið átökum</string>
+    <string name="batch_patch_needs_apk">Enginn APK er tiltækur, bættu við skrá</string>
+    <string name="batch_patch_wrong_package">Skráin sem bætt var við tilheyrir %s</string>
+    <string name="batch_patch_version_mismatch">Útgáfa %s er ekki studd af breytingunum</string>
+    <string name="batch_patch_source_saved">Vistaður upprunalegi</string>
+    <string name="batch_patch_source_installed">Uppsett app</string>
+    <string name="batch_patch_source_file">Bætt skrá</string>
+    <string name="batch_patch_source_unavailable">Ekki tókst að búa til APK</string>
+    <string name="batch_patch_attach_apk">Bættu við APK</string>
+    <string name="batch_patch_force_version">Breyta samt sem áður</string>
+    <string name="batch_patch_edit_patches">Veldu breytingar</string>
+    <string name="batch_patch_state_no_apk">Enginn APK</string>
+    <string name="batch_patch_state_no_patches">Engar breytingar</string>
+    <string name="batch_patch_policy_install">Settur upp þegar búið er</string>
+    <string name="batch_patch_policy_install_description">Setur upp hvert breytt app þegar biðröðin er lokið. Slökkt heldur APK-skránum til síðara</string>
+    <string name="batch_patch_start">Hejaðu breytingum</string>
+    <string name="batch_patch_stop_title">Hætta við breytingum?</string>
+    <string name="batch_patch_stop_description">Appið sem er breytt núna og allt sem bíður í biðröð verður hætt</string>
+    <string name="batch_patch_install_all">Settu upp allt</string>
+    <string name="batch_patch_install_failed">Miskunstrið við uppsetningu</string>
+    <string name="batch_patch_in_progress">Breytingar eru þegar í gangi</string>
+    <string name="batch_patch_nothing_outdated">Allt breytt app er uppfært</string>
+    <string name="shortcut_repatch_short">Endurbreyta</string>
+    <string name="shortcut_repatch_long">Endurbreyta úreltum appum</string>
+    <string name="shortcut_check_updates_short">Leita að uppfærslum</string>
+    <string name="shortcut_check_updates_long">Leita að breytingum</string>
+    <string name="shortcut_patch_app">Breyta %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Ertu viss um að þú viljir afinstallera þetta app?</string>
     <string name="batch_uninstall_confirm_body">Appsín sem hafa verið valið verð permanentlega fjarlægt af tækjunum þínum.</string>
@@ -451,8 +486,8 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="failed_to_mount">Ekki tókst að festa: %s</string>
     <string name="failed_to_unmount">Ekki tókst að afmesta: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Stig %d</string>
-    <string name="mini_game_best">Bestur %d</string>
+    <string name="mini_game_score">Stig %s</string>
+    <string name="mini_game_best">Best %s</string>
     <string name="mini_game_new_record">Nýtt met!</string>
     <string name="mini_game_game_over">Leikur er búinn</string>
     <string name="mini_game_try_again">Reyna aftur</string>
@@ -526,6 +561,7 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_app_card_colors_middle">Miðlitur</string>
     <string name="settings_appearance_app_card_colors_end">Loklitur</string>
     <string name="settings_appearance_app_card_colors_solid_color">Einföldur litur</string>
+    <string name="settings_appearance_app_card_colors_bundle">Lit app búnt</string>
     <string name="settings_appearance_app_card_colors_bundle_description">Nota lit hvers apps hér, sem er sjálfkrafa gerður dimmari til að passa</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">App tákn</string>
@@ -556,7 +592,28 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_advanced_update_interval_monthly">Einu sinni á mánuði</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Bakgrunns þjónastútur tímatali</string>
     <string name="settings_advanced_update_interval_battery_warning">Bakgrunnur prótanir mega ekki virka á ákveðnum tækjum. Framleiðendur eins og Xiaomi, Huawei, Samsung og OnePlus takast oft á við bakgrunns prótanir til að spara rafmagn</string>
+    <string name="settings_advanced_auto_patch">Sjálfvirk endurbreyting</string>
+    <string name="settings_advanced_auto_patch_description">Endurbreyta uppsettum appum í bakgrunni þegar breytingar á þeim gerast. Aðeins appum með vistaðan upprunalegan APK er hyljað</string>
+    <string name="settings_advanced_auto_patch_interval">Endurbreytingartíðni</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Hversu oft breytt app er endurbreytt</string>
+    <string name="settings_advanced_auto_patch_charging">Aðeins þegar hlaðið er</string>
+    <string name="settings_advanced_auto_patch_charging_description">Breytingar eru þungar á örgjörvann og minni, þannig að það bíður eftir hleðslu</string>
+    <string name="settings_advanced_auto_patch_install">Settur upp sjálfkrafa</string>
+    <string name="settings_advanced_auto_patch_install_description">Krefst Shizuku sem uppsetningaraðila. Með öðrum uppsetningaraðila eru breytt app bara vistað</string>
+    <string name="settings_advanced_external_batch_patch">Leyfa ytri kveikja</string>
+    <string name="settings_advanced_external_batch_patch_description">Leyfir sjálfvirkni forritum að heja breytingum með því að nota fyrirspurn. Allar beiðnir eru staðfestar áður en eitthvað er keyrt</string>
+    <string name="external_batch_patch_title">Heja breytingum?</string>
+    <string name="external_batch_patch_description">%s vill að Morphe breyti og setji upp app</string>
+    <string name="external_batch_patch_trust_caller">Alltaf leyfa þessu appi</string>
+    <string name="external_batch_patch_unknown_caller">Óþekkt app</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Sjálfvirk endurbreyting lokið</string>
+    <string name="notification_auto_patch_running_title">Endurbreyting appa</string>
+    <string name="notification_auto_patch_blocked_title">Sjálfvirk endurbreyting hófst ekki</string>
+    <string name="notification_auto_patch_blocked_battery">Kerfið lokaði þessari uppsetningu. Á Xiaomi og sambærilegum tækjum, kveiktu á \"Uppsetningu í gegnum USB\" í valkostum fyrir forritara. Á vinnusniðum geta uppsetningar verið takmörkuð af stefnu</string>
+    <string name="notification_auto_patch_blocked_foreground">Android leyfði ekki breytingum að hefjast í bakgrunni. Opnaðu Morphe og breyttu frá appinu</string>
+    <string name="notification_channel_auto_patch">Sjálfvirk endurbreyting</string>
+    <string name="notification_channel_auto_patch_description">Hlífðarlaus framvindandi og niðurstöðugar tilkynningar um skipulagða endurbreytingu</string>
     <string name="notification_manager_update_title">Morphe uppfærsla í boði</string>
     <string name="notification_bundle_update_title">Nýjar pakkningar í boði</string>
     <string name="notification_update_text">Útgáfa %s er tilbúin til að hlaða niður</string>
@@ -739,7 +796,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android bannaði þetta því það myndi niðurfella sett appið.</string>
     <string name="installer_shizuku_error_signature">Android bannaði þetta því sett appið hefur mismunandi signature.</string>
     <string name="installer_shizuku_error_invalid_apk">Android gat ekki lesið þetta APK</string>
-    <string name="installer_shizuku_error_user_profile">Android bannaði þetta fyrir núverandi notanda eða vinnuhólinu.</string>
+    <string name="installer_shizuku_error_user_profile">Kerfið lokaði þessari uppsetningu. Á Xiaomi og sambærilegum tækjum, kveiktu á \"Uppsetningu í gegnum USB\" í valkostum fyrir forritara. Á vinnusniðum geta uppsetningar verið takmörkuð af stefnu</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Rafhlöðu útvinnslustillingar</string>
     <string name="settings_system_battery_optimization_description">Skoða upprunaleg geymslu</string>
@@ -922,6 +979,9 @@ Nánari upplýsingar: %2$s"</string>
     <string name="confirm">Staðfesta</string>
     <string name="warning">Vara</string>
     <string name="error_">Villa</string>
+    <string name="failed">Miskunstrað</string>
+    <string name="cancelled">Hætt við</string>
+    <string name="ready">Tilbúinn</string>
     <string name="retry">Reyna aftur</string>
     <string name="refresh">Endurhæfa</string>
     <string name="add">Bæta við</string>
@@ -934,6 +994,9 @@ Nánari upplýsingar: %2$s"</string>
     <string name="delete">Eyða</string>
     <string name="delete_all">Eyða öllu</string>
     <string name="remove">Fjarlægja</string>
+    <string name="exclude">Útiloka</string>
+    <string name="excluded">Útilokað</string>
+    <string name="include">Taka með</string>
     <string name="disable">Gerðu óvirkt</string>
     <string name="enable">Gerðu virkt</string>
     <string name="loading">Hlaða…</string>
@@ -960,9 +1023,10 @@ Nánari upplýsingar: %2$s"</string>
     <string name="reorder_done">Röð vistuð</string>
     <string name="reset_order">Endurstilla röð</string>
     <string name="reset_order_done">Pöntun endurstillt</string>
+    <string name="accessibility_select_app">Veldu app</string>
     <string name="accessibility_move_up">Færa upp</string>
     <string name="accessibility_move_down">Færa niður</string>
-    <string name="accessibility_app_moved_announcement">%1$s fært á stöðu %2$d af %3$d</string>
+    <string name="accessibility_app_moved_announcement">%1$s flutt til staðar %2$s af %3$s</string>
     <string name="accessibility_scroll_to_top">Skrúllaðu efst á lista</string>
     <string name="rename">Endurnefna</string>
     <string name="import_">Flytja</string>
@@ -978,6 +1042,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="continue_">Halda áfram</string>
     <string name="version">Útgáfa</string>
     <string name="patch">Breytistilling</string>
+    <string name="patching">Breytingar</string>
     <string name="repatch">Breytistilla aftur</string>
     <string name="open">Opna</string>
     <string name="mount">Festa</string>
@@ -1028,8 +1093,8 @@ Nánari upplýsingar: %2$s"</string>
 Haltu samt sem áður?"</string>
     <string name="download_update_confirmation">Sæka uppfærslu?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d af %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s af %2$s</string>
     <string name="onboarding_sources_desc">Stjórna þínum uppsprettum. Hver uppspretta gefur breytingar sem hægt er að beita á þín forrit</string>
     <string name="onboarding_swipe_title">Hreyfingar fingrum</string>
     <string name="onboarding_swipe_desc">Stryndu til hægri á forritskorti til að skoða lausar breytingar. Stryndu til vinstri til að fela kortið af heimaskjánum</string>

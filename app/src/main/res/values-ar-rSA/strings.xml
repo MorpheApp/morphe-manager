@@ -34,12 +34,12 @@
     <string name="home_update_success_subtitle">مصادرك محدثة</string>
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
     <string name="home_search_apps">البحث عن التطبيقات</string>
-    <string name="home_app_sort_title">ترتيب التطبيقات</string>
-    <string name="home_app_sort_manual_description">اضغط مطولًا على تطبيق، ثم اضغط على زر إعادة الترتيب</string>
+    <string name="home_app_sort_title">فرز التطبيقات</string>
+    <string name="home_app_sort_manual_description">اضغط مطولًا على تطبيق، ثم انقر على زر إعادة الترتيب</string>
     <string name="home_app_sort_recommended">الترتيب الموصى به</string>
     <string name="home_app_sort_recommended_description">التطبيقات المنصَّبة والمثبتة أولًا</string>
-    <string name="home_app_sort_name_asc_description">أبجديًا، من الألف إلى الياء</string>
-    <string name="home_app_sort_name_desc_description">عكس أبجدي، من الياء إلى الألف</string>
+    <string name="home_app_sort_name_asc_description">أبجديًا، من A إلى Z</string>
+    <string name="home_app_sort_name_desc_description">عكس أبجدي، من Z إلى A</string>
     <string name="home_app_sort_updates_first">تحديثات التعديل أولًا</string>
     <string name="home_app_sort_updates_first_description">التطبيقات التي تحتوي على شارات التحديث أولًا، ثم الترتيب الموصى به</string>
     <string name="home_no_apps_title">لا توجد تطبيقات متاحة</string>
@@ -107,7 +107,7 @@
     <string name="sources_sort_manual_hint">اضغط مطولًا على مصدر لإعادة الترتيب</string>
     <string name="sources_sort_last_updated">آخر تحديث</string>
     <string name="sources_sort_last_updated_description">آخر تحديثات المصادر أولًا</string>
-    <string name="sources_sort_enabled_first">مُمَكّن أولًا</string>
+    <string name="sources_sort_enabled_first">المفعّلة أولًا</string>
     <string name="sources_sort_enabled_first_description">عرض المصادر النشطة قبل المصادر المعطلة</string>
     <string name="sources_management_open_in_browser">فتح في المتصفح</string>
     <string name="sources_management_failed_to_open_url">فشل في فتح الرابط</string>
@@ -168,7 +168,7 @@
     <string name="home_app_info_no_saved_apk">لا يوجد ملف APK محفوظ. ستتطلب عملية التعديل إعادة اختيار ملف APK</string>
     <string name="home_version_requires_android">يتطلب Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">غير مدعوم على هذا الجهاز</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; لا يحتوي على إصدارات مدعومة لنظام Android %2$d (واجهة برمجة التطبيقات %3$d). جميع الإصدارات المعلنة تتطلب إصدار Android أعلى</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; لا يحتوي على إصدارات مدعومة لنظام Android %2$s (واجهة برمجة التطبيقات %3$s). جميع الإصدارات المعلنة تتطلب إصدار Android أعلى</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">تنزيل ملف APK الأصلي</string>
     <string name="home_download_instructions_steps_title">التعليمات:</string>
@@ -244,7 +244,7 @@
     <string name="home_dialog_unsupported_version_compatible_versions">الإصدارات المتوافقة:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">غير مدعوم</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">البناء ‎%d‎</string>
+    <string name="home_dialog_unsupported_version_build">البناء ‎%s‎</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">هذا بناء مختلف من نفس الاصدار. تتطلب التعديلات بناءً معينًا</string>
     <string name="home_dialog_wrong_package_title">تم اختيار حزمة تطبيق خاطئة</string>
     <string name="home_dialog_wrong_package_description">ملف APK المحدد ليس للتطبيق الذي كنت تنوي تعديله</string>
@@ -264,7 +264,7 @@
     <string name="patch_option_instructions">تعليمات</string>
     <string name="patch_option_enter_value">أدخل القيمة</string>
     <string name="patch_option_enter_number">أدخل العدد</string>
-    <string name="patch_option_enter_decimal">أدخل رقمًا العشريًا</string>
+    <string name="patch_option_enter_decimal">أدخل رقمًا عشريًا</string>
     <string name="patch_option_list_duplicate">القيمة موجودة بالفعل</string>
     <string name="patch_option_list_empty">لا يمكن أن تكون القيمة فارغة</string>
     <string name="patch_option_list_empty_state">لم يتم إضافة أي قيم حتى الآن</string>
@@ -307,6 +307,41 @@
     <string name="header_creator_guide_themes_body">تتطلب معظم التطبيقات صورًا منفصلة للمظهر الفاتحة والداكنة. تستخدم بعض التطبيقات (مثل YouTube Music) فقط المظهر الداكن، لذلك يظهر هذا القسم فقط.</string>
     <string name="header_creator_guide_positioning_title">الموضع والحجم</string>
     <string name="header_creator_guide_positioning_body">استخدم إيماءات التكبير والتصغير والسحب مباشرةً في المعاينة لتحديد موضع الصورة وتغيير حجمها. تظهر خطوط التوجيه عندما تكون الصورة قريبة من المركز. يمكنك أيضًا استخدام شريط التمرير أسفل المعاينة.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">تعديل محدد</string>
+    <string name="batch_patch_title">تعديل عدة تطبيقات على دفعات</string>
+    <string name="batch_patch_planning">جارٍ إعداد قائمة الانتظار...</string>
+    <string name="batch_patch_preparing_next">جارٍ إعداد التطبيق التالي...</string>
+    <string name="batch_patch_progress_counter">تم تعديل %1$s من %2$s</string>
+    <string name="batch_patch_summary">تم تعديل %1$s، فشل %2$s، تم تخطي %3$s</string>
+    <string name="batch_patch_saved_hint">تم حفظ التطبيقات التي تم تعديلها. قم بتثبيتها الآن، أو لاحقًا من قائمة ملفات APK التي تم تعديلها في الإعدادات</string>
+    <string name="batch_patch_multiple_sources">تدمج بعض التطبيقات تعديلات من أكثر من مصدر، ما قد يؤدي إلى تعارضات</string>
+    <string name="batch_patch_needs_apk">لا يوجد ملف APK متاح، قم بإرفاق ملف</string>
+    <string name="batch_patch_wrong_package">الملف المرفق ينتمي إلى %s</string>
+    <string name="batch_patch_version_mismatch">الإصدار %s غير مدعوم بالتعديلات</string>
+    <string name="batch_patch_source_saved">تم حفظ النسخة الأصلية</string>
+    <string name="batch_patch_source_installed">تم تثبيت التطبيق</string>
+    <string name="batch_patch_source_file">ملف مرفق</string>
+    <string name="batch_patch_source_unavailable">تعذر إعداد ملف APK</string>
+    <string name="batch_patch_attach_apk">إرفاق ملف APK</string>
+    <string name="batch_patch_force_version">تعديل على أي حال</string>
+    <string name="batch_patch_edit_patches">اختر التعديلات</string>
+    <string name="batch_patch_state_no_apk">لا يوجد ملف APK</string>
+    <string name="batch_patch_state_no_patches">لا توجد تعديلات</string>
+    <string name="batch_patch_policy_install">التثبيت عند الانتهاء</string>
+    <string name="batch_patch_policy_install_description">يقوم بتثبيت كل تطبيق تم تعديله مباشرة بعد انتهاء قائمة الإنتظار. وعند الإيقاف، تُحفظ ملفات APK للاستخدام لاحقًا</string>
+    <string name="batch_patch_start">بدء التعديل</string>
+    <string name="batch_patch_stop_title">إيقاف تعديل عدة تطبيقات؟</string>
+    <string name="batch_patch_stop_description">سيتم إلغاء التطبيق الذي يتم تعديله الآن، مع كل العناصر المتبقية في قائمة الانتظار</string>
+    <string name="batch_patch_install_all">تثبيت الكل</string>
+    <string name="batch_patch_install_failed">فشل التثبيت</string>
+    <string name="batch_patch_in_progress">عملية التعديل على دفعات قيد التشغيل بالفعل</string>
+    <string name="batch_patch_nothing_outdated">كل التطبيقات التي تم تعديلها محدثة</string>
+    <string name="shortcut_repatch_short">إعادة التعديل</string>
+    <string name="shortcut_repatch_long">إعادة تعديل التطبيقات غير المحدثة</string>
+    <string name="shortcut_check_updates_short">التحقق من التحديثات</string>
+    <string name="shortcut_check_updates_long">التحقق من تحديثات التعديل</string>
+    <string name="shortcut_patch_app">تعديل %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">هل تريد بالتأكيد حذف هذا التطبيق؟</string>
     <string name="batch_uninstall_confirm_body">سيتم حذف التطبيقات المحددة نهائيًا من جهازك</string>
@@ -366,7 +401,7 @@
     <string name="patcher_split_step_finalizing">تتم المعالجة النهائية لملف APK المدمج</string>
     <string name="patcher_conflict_title">تعارض الحزمة</string>
     <string name="patcher_conflict_subtitle">تحتاج إلى إلغاء تثبيت الإصدار الحالي</string>
-    <string name="patcher_conflict_hint">يستخدم التطبيق الذي تم تعديله شهادة مختلفة عن الإصدار المثبت. سيؤدي إلغاء التثبيت إلى محو جميع بيانات التطبيق.</string>
+    <string name="patcher_conflict_hint">يستخدم التطبيق الذي تم تعديله شهادة مختلفة عن الإصدار المثبت. سيؤدي إلغاء التثبيت إلى محو جميع بيانات التطبيق</string>
     <string name="patcher_installed_conflict_title">يتطلب إلغاء التثبيت</string>
     <string name="patcher_installed_conflict_body">"يقوم Morphe بتوقيع التطبيقات التي تم تعديلها بشهادته الخاصة، والتي تختلف عن الأصلية. يتطلب Android إزالة الإصدار الحالي قبل تثبيت التطبيق الذي تم تعديله.
 
@@ -382,7 +417,7 @@
     <string name="patcher_storage_permission_description_api30">إحدى خيارات التعديل أو أكثر تشير إلى مسارات لا يمكن لـ Morphe قراءتها. قم بتخصيص الوصول إلى التخزين وانقر على الزر ثم سيبدأ التعديل تلقائيًا</string>
     <string name="patcher_storage_permission_description_legacy">يشير خيار واحد أو أكثر من خيارات التعديل إلى مسارات لا يمكن الوصول إليها. قم بتحديث المسارات في خيارات التعديل وحاول مرة أخرى</string>
     <string name="patcher_storage_permission_grant">منح إذن الوصول</string>
-    <string name="patcher_storage_permission_denied_warning">تم رفض الإذن على التخزين. قم بإعطاء الإذن لاستخدام هذا المسار، أو نقل الملفات إلى مجلد خاص بالتطبيق.</string>
+    <string name="patcher_storage_permission_denied_warning">تم رفض الإذن على التخزين. قم بإعطاء الإذن لاستخدام هذا المسار، أو انقل الملفات إلى مجلد خاص بالتطبيق</string>
     <string name="patcher_storage_permission_open_settings">فتح إعدادات التخزين</string>
     <string name="patcher_storage_badge_denied">تم رفض الإذن</string>
     <string name="patcher_storage_badge_missing">غير موجود</string>
@@ -449,13 +484,13 @@
     <string name="save_apk_success">تم حفظ APK</string>
     <string name="saved_app_export_failed">فشل تصدير التطبيق المعدل</string>
     <string name="saved_app_removed_toast">تمت إزالة التطبيق المعدل المحفوظ</string>
-    <string name="saved_app_launch_unavailable">قم بتثبيت التطبيق قبل فتحه</string>
+    <string name="saved_app_launch_unavailable">ثبّت التطبيق قبل فتحه</string>
     <string name="package_name">اسم الحزمة</string>
     <string name="failed_to_mount">فشل تركيب: %s</string>
     <string name="failed_to_unmount">فشل فك تركيب: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">النتيجة %d</string>
-    <string name="mini_game_best">الأفضل %d</string>
+    <string name="mini_game_score">النتيجة %s</string>
+    <string name="mini_game_best">الأفضل %s</string>
     <string name="mini_game_new_record">رقم قياسي جديد!</string>
     <string name="mini_game_game_over">انتهت اللعبة</string>
     <string name="mini_game_try_again">حاول مرة أخرى</string>
@@ -521,13 +556,13 @@
     <string name="settings_appearance_app_card_colors_default_description">امنح كل تطبيق لون حزمته الخاصة</string>
     <string name="settings_appearance_app_card_colors_accent">لون التمييز</string>
     <string name="settings_appearance_app_card_colors_accent_description">استخدام لون تمييز التطبيق لبطاقات تطبيقات الصفحة الرئيسية</string>
-    <string name="settings_appearance_app_card_colors_gradient">التدرج</string>
+    <string name="settings_appearance_app_card_colors_gradient">تدرج</string>
     <string name="settings_appearance_app_card_colors_gradient_description">استخدام تدرج لوني مخصص لبطاقات تطبيقات الصفحة الرئيسية</string>
     <string name="settings_appearance_app_card_colors_solid">طبقة لون واحد</string>
     <string name="settings_appearance_app_card_colors_solid_description">استخدام لونًا مخصصًا واحدًا لبطاقات تطبيقات الصفحة الرئيسية</string>
     <string name="settings_appearance_app_card_colors_start">لون البداية</string>
     <string name="settings_appearance_app_card_colors_middle">لون المنتصف</string>
-    <string name="settings_appearance_app_card_colors_end">لون النهاية </string>
+    <string name="settings_appearance_app_card_colors_end">لون النهاية</string>
     <string name="settings_appearance_app_card_colors_solid_color">لون ثابت</string>
     <string name="settings_appearance_app_card_colors_bundle">لون مجموعة التطبيق</string>
     <string name="settings_appearance_app_card_colors_bundle_description">استخدم لون كل تطبيق هنا، مع تظليله تلقائيًا ليناسب المساحة المتاحة</string>
@@ -560,7 +595,28 @@
     <string name="settings_advanced_update_interval_monthly">مرة في الشهر</string>
     <string name="settings_advanced_update_interval_chip_subtitle">تكرار التحقق في الخلفية</string>
     <string name="settings_advanced_update_interval_battery_warning">قد لا يعمل التحقق في الخلفية بشكل موثوق على بعض الأجهزة. غالبًا ماتقيّد الشركات المصنعة مثل Xiaomi، Huawei، Samsung، و OnePlus عمليات الخلفية بشدة لتوفير البطارية</string>
+    <string name="settings_advanced_auto_patch">إعادة التعديل التلقائي</string>
+    <string name="settings_advanced_auto_patch_description">يقوم بإعادة تعديل التطبيقات المثبتة في الخلفية عندما تتغير تعديلاتُها. وينطبق ذلك فقط على التطبيقات التي لديها ملف APK الأصلي محفوظًا</string>
+    <string name="settings_advanced_auto_patch_interval">معدل إعادة التعديل</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">عدد مرات إعادة بناء التطبيقات المعدلة</string>
+    <string name="settings_advanced_auto_patch_charging">فقط أثناء الشحن</string>
+    <string name="settings_advanced_auto_patch_charging_description">عملية التعديل تستهلك المعالج والذاكرة بكثرة، لذلك تنتظر توصيل الشاحن</string>
+    <string name="settings_advanced_auto_patch_install">التثبيت التلقائي</string>
+    <string name="settings_advanced_auto_patch_install_description">يتطلب Shizuku كأداة تثبيت. ومع أي أداة تثبيت أخرى، لا يتم إلا حفظ التطبيقات المعدلة</string>
+    <string name="settings_advanced_external_batch_patch">السماح بالمشغلات الخارجية</string>
+    <string name="settings_advanced_external_batch_patch_description">يسمح لتطبيقات الأتمتة ببدء التعديل على دفعات عبر intent، مع تأكيد كل طلب قبل التنفيذ</string>
+    <string name="external_batch_patch_title">بدء تعديل التطبيقات على دفعات؟</string>
+    <string name="external_batch_patch_description">%s يريد من Morphe تعديل التطبيقات وتثبيتها</string>
+    <string name="external_batch_patch_trust_caller">السماح لهذا التطبيق دائمًا</string>
+    <string name="external_batch_patch_unknown_caller">تطبيق غير معروف</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">اكتمل إعادة التعديل التلقائي</string>
+    <string name="notification_auto_patch_running_title">إعادة تعديل التطبيقات</string>
+    <string name="notification_auto_patch_blocked_title">لم يتم تشغيل إعادة التعديل التلقائي</string>
+    <string name="notification_auto_patch_blocked_battery">استثنِ Morphe من تحسين البطارية، وإلا فسيُوقف Android التشغيل قبل أن يبدأ</string>
+    <string name="notification_auto_patch_blocked_foreground">لم يسمح نظام Android ببدء التعديل في الخلفية. افتح Morphe وقم بالتعديل من التطبيق</string>
+    <string name="notification_channel_auto_patch">إعادة التعديل التلقائي</string>
+    <string name="notification_channel_auto_patch_description">إشعارات صامتة للتقدم والنتائج عند إعادة التعديل المجدولة</string>
     <string name="notification_manager_update_title">تحديث Morphe متاح</string>
     <string name="notification_bundle_update_title">تعديلات جديدة متاحة</string>
     <string name="notification_update_text">إصدار %s جاهز للتنزيل</string>
@@ -581,7 +637,7 @@
     <string name="settings_advanced_strip_unused_libs">تحسين وفق معمارية الجهاز</string>
     <string name="settings_advanced_strip_unused_libs_description">يُزيل مكتبات معمارية المعالج غير المستخدمة ووحدات Split APK</string>
     <!-- Bytecode mode -->
-    <string name="settings_advanced_bytecode_mode">وضع المعالجة Bytecode</string>
+    <string name="settings_advanced_bytecode_mode">وضع معالجة Bytecode</string>
     <string name="settings_advanced_bytecode_mode_dialog_description">يتحكم في كيفية معالجة Bytecode أثناء التعديل. يؤثر على سرعة التعديل، استخدام الذاكرة، وحجم APK الناتج</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_label">(موصى به) Fast</string>
     <string name="settings_advanced_bytecode_mode_strip_fast">Fast</string>
@@ -748,7 +804,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_shizuku_error_downgrade">منع Android هذا الإجراء لأنه سيُرجع نسخة التطبيق المثبّتة إلى إصدار أقدم</string>
     <string name="installer_shizuku_error_signature">منع Android هذا الإجراء لأن التطبيق المثبت له توقيع مختلف</string>
     <string name="installer_shizuku_error_invalid_apk">تعذر على Android قراءة ملف APK هذا</string>
-    <string name="installer_shizuku_error_user_profile">منع Android هذا الإجراء للمستخدم الحالي أو ملف العمل</string>
+    <string name="installer_shizuku_error_user_profile">حظر النظام هذا التثبيت. على أجهزة Xiaomi والأجهزة المشابهة، قم بتشغيل \"التثبيت عبر USB\" من خيارات المطوّر. في ملف العمل، قد تقيّد السياسة عمليات التثبيت</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">تحسينات البطارية</string>
     <string name="settings_system_battery_optimization_description">يحافظ على تشغيل أداة التعديل عند تصغير التطبيق</string>
@@ -900,8 +956,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="file_picker_internal_storage">التخزين الداخلي</string>
     <string name="file_picker_sd_card">الذاكرة الخارجية SD</string>
     <string name="file_picker_root">Root (/)</string>
-    <string name="file_picker_sort_name_asc">الاسم (أ–ي)</string>
-    <string name="file_picker_sort_name_desc">الاسم (ي–أ)</string>
+    <string name="file_picker_sort_name_asc">الاسم (A–Z)</string>
+    <string name="file_picker_sort_name_desc">الاسم (Z–A)</string>
     <string name="file_picker_sort_size_desc">الحجم (الأكبر أولًا)</string>
     <string name="file_picker_sort_size_asc">الحجم (الأصغر أولًا)</string>
     <string name="file_picker_sort_date_desc">التاريخ (الأحدث أولًا)</string>
@@ -931,6 +987,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="confirm">تأكيد</string>
     <string name="warning">تحذير</string>
     <string name="error_">خطأ</string>
+    <string name="failed">فشل</string>
+    <string name="cancelled">تم الإلغاء</string>
+    <string name="ready">جاهز</string>
     <string name="retry">إعادة المحاولة</string>
     <string name="refresh">تحديث</string>
     <string name="add">إضافة</string>
@@ -943,6 +1002,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="delete">حذف</string>
     <string name="delete_all">حذف الكل</string>
     <string name="remove">إزالة</string>
+    <string name="exclude">استبعاد</string>
+    <string name="excluded">مستبعد</string>
+    <string name="include">إدراج</string>
     <string name="disable">تعطيل</string>
     <string name="enable">تمكين</string>
     <string name="loading">جارٍ التحميل…</string>
@@ -969,9 +1031,10 @@ morphe_adaptive_monochrome_custom.xml
     <string name="reorder_done">تم حفظ الترتيب</string>
     <string name="reset_order">إعادة تعيين الترتيب</string>
     <string name="reset_order_done">تم إعادة تعيين الترتيب</string>
+    <string name="accessibility_select_app">اختر تطبيق</string>
     <string name="accessibility_move_up">حرّك لأعلى</string>
     <string name="accessibility_move_down">حرّك لأسفل</string>
-    <string name="accessibility_app_moved_announcement">%1$s حُرِّك إلى الموضع %2$d من %3$d</string>
+    <string name="accessibility_app_moved_announcement">%1$s حُرِّك إلى الموضع %2$s من %3$s</string>
     <string name="accessibility_scroll_to_top">التمرير إلى أعلى القائمة</string>
     <string name="rename">إعادة تسمية</string>
     <string name="import_">استيراد</string>
@@ -987,6 +1050,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="continue_">متابعة</string>
     <string name="version">الإصدار</string>
     <string name="patch">تعديل</string>
+    <string name="patching">جارٍ التعديل</string>
     <string name="repatch">إعادة التعديل</string>
     <string name="open">فتح</string>
     <string name="mount">تركيب</string>
@@ -1037,8 +1101,8 @@ morphe_adaptive_monochrome_custom.xml
 هل لا تزال ترغب في المتابعة؟"</string>
     <string name="download_update_confirmation">تنزيل التحديث؟</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">‎%1$d من %2$d‎</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s من %2$s</string>
     <string name="onboarding_sources_desc">إدارة مصادر التعديلات الخاصة بك. يوفر كل مصدر تعديلات يمكن تطبيقها على تطبيقاتك</string>
     <string name="onboarding_swipe_title">إيماءات التمرير</string>
     <string name="onboarding_swipe_desc">مرِّر لليمين على بطاقة التطبيق لعرض التعديلات المتاحة له. مرٍّر لليسار لإخفاء البطاقة من الشاشة الرئيسية</string>

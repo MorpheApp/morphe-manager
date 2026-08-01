@@ -3,7 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">แอปพลิเคชันอื่นๆ</string>
     <string name="home_not_patched_yet">ยังไม่ได้รับการแพตซ์</string>
-    <string name="home_no_patches_available">ไม่มีแพตซ์รองรับ</string>
+    <string name="home_no_patches_available">ไม่มีแอปที่ใช้งานได้</string>
     <string name="home_app_hide_title">ซ่อนแอปนี้หรือไม่?</string>
     <string name="home_app_hide_message">แอปนี้จะถูกซ่อนจากหน้าจอหลัก คุณสามารถกู้คืนได้ภายหลังโดยใช้ปุ่ม \'\' ที่ด้านล่างของรายการ</string>
     <string name="home_app_will_be_hidden">แอปนี้จะถูกซ่อน</string>
@@ -164,10 +164,11 @@
     <string name="home_apk_availability_no">ไม่, ฉันมี APK แล้ว</string>
     <string name="home_apk_use_saved">ใช้ APK ที่บันทึกไว้</string>
     <string name="home_apk_use_installed">ใช้ APK ที่ติดตั้งไว้</string>
+    <string name="home_apk_use_installed_unverified">ไม่สามารถตรวจสอบลายเซ็นของแอปที่ติดตั้งได้ ดังนั้นจึงอาจได้รับการแพตช์แล้ว</string>
     <string name="home_app_info_no_saved_apk">ไม่มี APK ที่ถูกบันทึก การแพตซ์จะต้องเลือกไฟล์ APK อีกครั้ง</string>
     <string name="home_version_requires_android">ต้องใช้ Android %s ขึ้นไป</string>
     <string name="home_apk_no_compatible_versions_title">ไม่รองรับบนอุปกรณ์นี้</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; ไม่มีเวอร์ชันที่รองรับสำหรับ Android %2$d (API %3$d) ทุกเวอร์ชันที่ประกาศต้องการ Android เวอร์ชันที่สูงกว่า</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; ไม่มีเวอร์ชันที่รองรับสำหรับ Android %2$s (API %3$s) เวอร์ชันที่ประกาศทั้งหมดต้องใช้เวอร์ชัน Android ที่สูงกว่า</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">ดาวน์โหลด APK ต้นฉบับ</string>
     <string name="home_download_instructions_steps_title">คำแนะนำ:</string>
@@ -243,7 +244,7 @@
     <string name="home_dialog_unsupported_version_compatible_versions">เวอร์ชันที่เข้ากันได้:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">ไม่รองรับ</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">บิลด์ %d</string>
+    <string name="home_dialog_unsupported_version_build">บิลด์ %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">นี่เป็นบิลด์ที่แตกต่างของเวอร์ชันเดียวกัน การอัปเดตต้องการบิลด์ที่เฉพาะเจาะจง</string>
     <string name="home_dialog_wrong_package_title">แพ็กเกจที่เลือกไม่ถูกต้อง</string>
     <string name="home_dialog_wrong_package_description">ไฟล์ APK ที่เลือกไว้ ไม่ใช่แอปพลิเคชันสำหรับทำการแพตซ์</string>
@@ -306,6 +307,41 @@
     <string name="header_creator_guide_themes_body">แอปส่วนใหญ่ต้องการรูปภาพที่แยกกันสำหรับธีมสว่างและธีมมืด บางแอป (เช่น YouTube Music) ใช้เฉพาะธีมมืดเท่านั้น ดังนั้นจึงแสดงเฉพาะส่วนนั้นเท่านั้น</string>
     <string name="header_creator_guide_positioning_title">ตำแหน่งและการปรับขนาด</string>
     <string name="header_creator_guide_positioning_body">ใช้ท่าทางหนีบเพื่อซูมและลากโดยตรงในการแสดงตัวอย่างเพื่อวางตำแหน่งและปรับขนาดรูปภาพของคุณ แนวไกด์จะปรากฏขึ้นเมื่อรูปภาพอยู่ใกล้ศูนย์ คุณยังสามารถใช้แถบเลื่อนด้านล่างการแสดงตัวอย่างได้</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">แพตช์ถูกเลือก</string>
+    <string name="batch_patch_title">การแพตช์เป็นชุด</string>
+    <string name="batch_patch_planning">กำลังเตรียมคิว…</string>
+    <string name="batch_patch_preparing_next">กำลังเตรียมแอปถัดไป…</string>
+    <string name="batch_patch_progress_counter">แพตช์แล้ว %1$s จาก %2$s</string>
+    <string name="batch_patch_summary">%1$s ถูกแพตช์, %2$s ล้มเหลว, %3$s ถูกข้าม</string>
+    <string name="batch_patch_saved_hint">แอปที่แพตช์แล้วถูกบันทึกไว้ ติดตั้งเลย หรือภายหลังได้จากรายการ APK ที่แพตช์แล้วในตั้งค่า</string>
+    <string name="batch_patch_multiple_sources">แอปบางตัวรวมแพตช์จากหลายแหล่ง ซึ่งอาจทำให้เกิดข้อขัดแย้ง</string>
+    <string name="batch_patch_needs_apk">ไม่มี APK พร้อมใช้งาน, แนบไฟล์</string>
+    <string name="batch_patch_wrong_package">ไฟล์ที่แนบมาเป็นของ %s</string>
+    <string name="batch_patch_version_mismatch">เวอร์ชัน %s ไม่รองรับโดยแพตช์</string>
+    <string name="batch_patch_source_saved">บันทึกต้นฉบับ</string>
+    <string name="batch_patch_source_installed">ติดตั้งแอปแล้ว</string>
+    <string name="batch_patch_source_file">ไฟล์ที่แนบมา</string>
+    <string name="batch_patch_source_unavailable">ไม่สามารถเตรียม APK ได้</string>
+    <string name="batch_patch_attach_apk">แนบ APK</string>
+    <string name="batch_patch_force_version">แพตช์อยู่ดี</string>
+    <string name="batch_patch_edit_patches">เลือกแพตช์</string>
+    <string name="batch_patch_state_no_apk">ไม่มี APK</string>
+    <string name="batch_patch_state_no_patches">ไม่มีแพตช์</string>
+    <string name="batch_patch_policy_install">ติดตั้งเมื่อเสร็จสิ้น</string>
+    <string name="batch_patch_policy_install_description">ติดตั้งแอปที่แพตช์ทุกแอปทันทีที่คิวเสร็จสิ้น ปิดจะเก็บ APK ไว้ในภายหลัง</string>
+    <string name="batch_patch_start">เริ่มแพตช์</string>
+    <string name="batch_patch_stop_title">หยุดแพตช์กลุ่ม?</string>
+    <string name="batch_patch_stop_description">แอปที่กำลังแพตช์อยู่ตอนนี้และทุกอย่างที่อยู่ในคิวจะถูกยกเลิก</string>
+    <string name="batch_patch_install_all">ติดตั้งทั้งหมด</string>
+    <string name="batch_patch_install_failed">ติดตั้งล้มเหลว</string>
+    <string name="batch_patch_in_progress">กำลังแพตช์กลุ่มอยู่แล้ว</string>
+    <string name="batch_patch_nothing_outdated">แอปที่แพตช์ทั้งหมดเป็นเวอร์ชันล่าสุดแล้ว</string>
+    <string name="shortcut_repatch_short">แพตช์ซ้ำ</string>
+    <string name="shortcut_repatch_long">แพตช์แอปที่ล้าสมัยซ้ำ</string>
+    <string name="shortcut_check_updates_short">ตรวจสอบการอัปเดต</string>
+    <string name="shortcut_check_updates_long">ตรวจสอบการอัปเดตแพตช์</string>
+    <string name="shortcut_patch_app">แพตช์ %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">คุณแน่ใจหรือไม่ว่าต้องการลบแอปนี้?</string>
     <string name="batch_uninstall_confirm_body">แอปที่เลือกจะถูกลบออกจากอุปกรณ์ของคุณอย่างถาวร</string>
@@ -452,8 +488,8 @@
     <string name="failed_to_mount">ไม่สามารถติดตั้งใช้งานได้: %s</string>
     <string name="failed_to_unmount">ไม่สามารถยกเลิกการติดตั้งใช้งานได้: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">คะแนน %d</string>
-    <string name="mini_game_best">ดีที่สุด %d</string>
+    <string name="mini_game_score">คะแนน %s</string>
+    <string name="mini_game_best">ดีที่สุด %s</string>
     <string name="mini_game_new_record">บันทึกใหม่!</string>
     <string name="mini_game_game_over">เกมจบ</string>
     <string name="mini_game_try_again">ลองอีกครั้ง</string>
@@ -558,7 +594,28 @@
     <string name="settings_advanced_update_interval_monthly">ทุกเดือน</string>
     <string name="settings_advanced_update_interval_chip_subtitle">ความถี่การตรวจสอบพื้นหลัง</string>
     <string name="settings_advanced_update_interval_battery_warning">การตรวจสอบพื้นหลังอาจไม่ทำงานได้อย่างมั่นคงบนบางอุปกรณ์. ผู้ผลิตเช่น Xiaomi, Huawei, Samsung, และ OnePlus บ่อยครั้งจำกัดขั้นตอนการทำงานพื้นหลังอย่างเข้มงวดเพื่อประหยัดแบตเตอรี่</string>
+    <string name="settings_advanced_auto_patch">การแพตช์ซ้ำอัตโนมัติ</string>
+    <string name="settings_advanced_auto_patch_description">แพตช์แอปที่ติดตั้งใหม่ในเบื้องหลังเมื่อแพตช์มีการเปลี่ยนแปลง เฉพาะแอปที่มี APK ต้นฉบับที่บันทึกไว้เท่านั้นที่ครอบคลุม</string>
+    <string name="settings_advanced_auto_patch_interval">ความถี่ในการแพตช์ซ้ำ</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">แอปที่แพตช์จะถูกสร้างใหม่บ่อยแค่ไหน</string>
+    <string name="settings_advanced_auto_patch_charging">เฉพาะขณะชาร์จ</string>
+    <string name="settings_advanced_auto_patch_charging_description">การแพตช์ใช้ CPU และหน่วยความจำอย่างมาก จึงรอที่ชาร์จ</string>
+    <string name="settings_advanced_auto_patch_install">ติดตั้งโดยอัตโนมัติ</string>
+    <string name="settings_advanced_auto_patch_install_description">ต้องใช้ Shizuku เป็นตัวติดตั้ง หากใช้ตัวติดตั้งอื่น แอปที่แพตช์จะถูกบันทึกไว้เท่านั้น</string>
+    <string name="settings_advanced_external_batch_patch">อนุญาตให้ทริกเกอร์ภายนอก</string>
+    <string name="settings_advanced_external_batch_patch_description">ให้แอปอัตโนมัติเริ่มแพตช์กลุ่มด้วยความตั้งใจ การร้องขอทุกครั้งจะได้รับการยืนยันก่อนดำเนินการ</string>
+    <string name="external_batch_patch_title">เริ่มแพตช์กลุ่ม?</string>
+    <string name="external_batch_patch_description">%s ต้องการให้ Morphe แพตช์และติดตั้งแอป</string>
+    <string name="external_batch_patch_trust_caller">อนุญาตแอปนี้เสมอ</string>
+    <string name="external_batch_patch_unknown_caller">แอปที่ไม่รู้จัก</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">การแพตช์ซ้ำอัตโนมัติเสร็จสิ้น</string>
+    <string name="notification_auto_patch_running_title">กำลังแพตช์แอปซ้ำ</string>
+    <string name="notification_auto_patch_blocked_title">การแพตช์ซ้ำอัตโนมัติไม่ทำงาน</string>
+    <string name="notification_auto_patch_blocked_battery">ระบบบล็อกการติดตั้งนี้ ใน Xiaomi และอุปกรณ์ที่คล้ายกัน เปิด \"ติดตั้งผ่าน USB\" ในตัวเลือกสำหรับนักพัฒนา ในโปรไฟล์งาน การติดตั้งอาจถูกจำกัดโดยนโยบาย</string>
+    <string name="notification_auto_patch_blocked_foreground">Android ไม่อนุญาตให้เริ่มการแพตช์ในพื้นหลัง เปิด Morphe และแพตช์จากแอป</string>
+    <string name="notification_channel_auto_patch">การแพตช์ซ้ำอัตโนมัติ</string>
+    <string name="notification_channel_auto_patch_description">การแจ้งเตือนความคืบหน้าและผลลัพธ์ที่เงียบสำหรับ การแพตช์ซ้ำตามกำหนดเวลา</string>
     <string name="notification_manager_update_title">มีการอัปเดต Morphe แล้ว</string>
     <string name="notification_bundle_update_title">มีแพ็คเกจใหม่ให้ใช้งาน</string>
     <string name="notification_update_text">พร้อมดาวน์โหลดเวอร์ชัน %s แล้ว</string>
@@ -744,7 +801,7 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">Android บล็อกสิ่งนี้เนื่องจากจะลดระดับแอปที่ติดตั้ง</string>
     <string name="installer_shizuku_error_signature">Android บล็อกสิ่งนี้เนื่องจากแอปที่ติดตั้งมีลายเซ็นที่แตกต่างกัน</string>
     <string name="installer_shizuku_error_invalid_apk">Android ไม่สามารถอ่าน APK นี้ได้</string>
-    <string name="installer_shizuku_error_user_profile">Android บล็อกสิ่งนี้สำหรับผู้ใช้ปัจจุบันหรือโปรไฟล์การทำงาน</string>
+    <string name="installer_shizuku_error_user_profile">ระบบบล็อกการติดตั้งนี้ เปิด \"ติดตั้งผ่าน USB\" ในตัวเลือกสำหรับนักพัฒนา</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">การเพิ่มประสิทธิภาพแบตเตอรี่</string>
     <string name="settings_system_battery_optimization_description">ทำให้ตัวแพตช์ทำงานต่อไปเมื่อแอปพลิเคชันถูกลดขนาด</string>
@@ -927,6 +984,9 @@ morphe_header_custom_dark.png
     <string name="confirm">ยืนยัน</string>
     <string name="warning">คำเตือน</string>
     <string name="error_">ข้อผิดพลาด</string>
+    <string name="failed">ล้มเหลว</string>
+    <string name="cancelled">ยกเลิก</string>
+    <string name="ready">พร้อม</string>
     <string name="retry">ลองใหม่</string>
     <string name="refresh">รีเฟรช</string>
     <string name="add">เพิ่ม</string>
@@ -939,6 +999,9 @@ morphe_header_custom_dark.png
     <string name="delete">ลบ</string>
     <string name="delete_all">ลบทั้งหมด</string>
     <string name="remove">นำออก</string>
+    <string name="exclude">ยกเว้น</string>
+    <string name="excluded">ยกเว้นแล้ว</string>
+    <string name="include">รวม</string>
     <string name="disable">ปิดการใช้งาน</string>
     <string name="enable">อนุญาต</string>
     <string name="loading">กำลังโหลด…</string>
@@ -965,9 +1028,10 @@ morphe_header_custom_dark.png
     <string name="reorder_done">บันทึกการจัดเรียงแล้ว</string>
     <string name="reset_order">รีเซ็ตการจัดเรียง</string>
     <string name="reset_order_done">รีเซ็ตการจัดเรียงแล้ว</string>
+    <string name="accessibility_select_app">เลือกแอป</string>
     <string name="accessibility_move_up">ย้ายขึ้น</string>
     <string name="accessibility_move_down">ย้ายลง</string>
-    <string name="accessibility_app_moved_announcement">%1$s ย้ายไปยังตำแหน่งที่ %2$d จาก %3$d แล้ว</string>
+    <string name="accessibility_app_moved_announcement">%1$s ย้ายไปยังตำแหน่งที่ %2$s จาก %3$s แล้ว</string>
     <string name="accessibility_scroll_to_top">เลื่อนไปยังด้านบนของรายการ</string>
     <string name="rename">เปลี่ยนชื่อ</string>
     <string name="import_">นำเข้า</string>
@@ -983,6 +1047,7 @@ morphe_header_custom_dark.png
     <string name="continue_">ดำเนินการต่อ</string>
     <string name="version">เวอร์ชัน</string>
     <string name="patch">แพตช์</string>
+    <string name="patching">กำลังแพตช์</string>
     <string name="repatch">แพตช์ใหม่</string>
     <string name="open">เปิด</string>
     <string name="mount">เมานต์</string>
@@ -1033,8 +1098,8 @@ morphe_header_custom_dark.png
 คุณยังต้องการดำเนินการต่อหรือไม่?"</string>
     <string name="download_update_confirmation">ดาวน์โหลดอัปเดตหรือไม่?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d จาก %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s จาก %2$s</string>
     <string name="onboarding_sources_desc">จัดการแหล่งแพตช์ของคุณ แต่ละแหล่งให้แพตช์ที่สามารถนำไปใช้กับแอปของคุณได้</string>
     <string name="onboarding_swipe_title">ท่าทางสัมผัส</string>
     <string name="onboarding_swipe_desc">ปัดไปทางขวาบนการ์ดแอปเพื่อดูแพตช์ที่มีอยู่ ปัดไปทางซ้ายเพื่อซ่อนการ์ดออกจากหน้าจอหลัก</string>

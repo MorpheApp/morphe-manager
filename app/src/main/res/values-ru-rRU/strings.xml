@@ -167,7 +167,6 @@
     <string name="home_app_info_no_saved_apk">Нет сохраненного APK. Для патча нужно будет снова выбрать APK файл</string>
     <string name="home_version_requires_android">Требуется Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Не поддерживается на этом устройстве</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; не имеет поддерживаемых версий для Android %2$d (API %3$d). Все объявленные версии требуют более высокую версию Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Загрузить оригинальный APK</string>
     <string name="home_download_instructions_steps_title">Инструкции:</string>
@@ -243,7 +242,6 @@
     <string name="home_dialog_unsupported_version_compatible_versions">Совместимые версии:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Неподдерживаемые</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Сборка %d</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Это другая сборка той же версии. Патчи требуют конкретную сборку</string>
     <string name="home_dialog_wrong_package_title">Неверно выбранный пакет</string>
     <string name="home_dialog_wrong_package_description">Выбранный APK не соответствует приложению, которое вы собирались пропатчить</string>
@@ -306,6 +304,39 @@
     <string name="header_creator_guide_themes_body">Большинству приложений требуются отдельные изображения для светлой и темной тем. Некоторые приложения (такие как YouTube Music) используют только темную тему, поэтому отображается только этот раздел.</string>
     <string name="header_creator_guide_positioning_title">Позиционирование и масштабирование</string>
     <string name="header_creator_guide_positioning_body">Используйте жесты масштабирования и перетаскивания непосредственно в предварительном просмотре, чтобы позиционировать и масштабировать изображение. Направляющие появляются, когда изображение находится рядом с центром. Вы также можете использовать ползунок ниже предварительного просмотра.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Патч выбран</string>
+    <string name="batch_patch_title">Пакетное применение патчей</string>
+    <string name="batch_patch_planning">Подготовка очереди…</string>
+    <string name="batch_patch_preparing_next">Подготовка следующего приложения…</string>
+    <string name="batch_patch_saved_hint">Сохраненные пропатченные приложения доступны для установки сейчас или позже из списка пропатченных APK в настройках</string>
+    <string name="batch_patch_multiple_sources">Некоторые приложения объединяют патчи из разных источников, что может привести к конфликтам</string>
+    <string name="batch_patch_needs_apk">Нет APK, прикрепите файл</string>
+    <string name="batch_patch_wrong_package">Прикрепленный файл принадлежит %s</string>
+    <string name="batch_patch_version_mismatch">Версия %s не поддерживается патчами</string>
+    <string name="batch_patch_source_saved">Сохранен оригинал</string>
+    <string name="batch_patch_source_installed">Установленное приложение</string>
+    <string name="batch_patch_source_file">Прикрепленный файл</string>
+    <string name="batch_patch_source_unavailable">Не удалось подготовить APK</string>
+    <string name="batch_patch_attach_apk">Прикрепить APK</string>
+    <string name="batch_patch_force_version">Патчить в любом случае</string>
+    <string name="batch_patch_edit_patches">Выбрать патчи</string>
+    <string name="batch_patch_state_no_apk">Нет APK</string>
+    <string name="batch_patch_state_no_patches">Нет патчей</string>
+    <string name="batch_patch_policy_install">Устанавливать по завершении</string>
+    <string name="batch_patch_policy_install_description">Устанавливает каждое пропатченное приложение сразу после завершения очереди. Выкл. сохраняет APK для последующей установки</string>
+    <string name="batch_patch_start">Начать патчинг</string>
+    <string name="batch_patch_stop_title">Остановить массовый патчинг?</string>
+    <string name="batch_patch_stop_description">Приложение, которое пропатчивается сейчас, и все, что еще ожидает в очереди, будет отменено</string>
+    <string name="batch_patch_install_all">Установить все</string>
+    <string name="batch_patch_install_failed">Ошибка установки</string>
+    <string name="batch_patch_in_progress">Массовый патчинг уже выполняется</string>
+    <string name="batch_patch_nothing_outdated">Все пропатченные приложения обновлены</string>
+    <string name="shortcut_repatch_short">Перепаковать</string>
+    <string name="shortcut_repatch_long">Перепаковать устаревшие приложения</string>
+    <string name="shortcut_check_updates_short">Проверить обновления</string>
+    <string name="shortcut_check_updates_long">Проверить наличие обновлений патчей</string>
+    <string name="shortcut_patch_app">Патч %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Вы уверены, что хотите удалить это приложение?</string>
     <string name="batch_uninstall_confirm_body">Выбранные приложения будут безвозвратно удалены с вашего устройства</string>
@@ -451,8 +482,6 @@
     <string name="failed_to_mount">Не удалось смонтировать: %s</string>
     <string name="failed_to_unmount">Не удалось размонтировать: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Счет %d</string>
-    <string name="mini_game_best">Лучший %d</string>
     <string name="mini_game_new_record">Новый рекорд!</string>
     <string name="mini_game_game_over">Игра окончена</string>
     <string name="mini_game_try_again">Попробовать снова</string>
@@ -550,7 +579,28 @@
     <string name="settings_advanced_update_interval_monthly">Раз в месяц</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Частота фоновой проверки</string>
     <string name="settings_advanced_update_interval_battery_warning">Фоновые проверки могут не работать надежно на некоторых устройствах. Производители, такие как Xiaomi, Huawei, Samsung и OnePlus, часто агрессивно ограничивают фоновые процессы для экономии батареи</string>
+    <string name="settings_advanced_auto_patch">Автоматический перепатчинг</string>
+    <string name="settings_advanced_auto_patch_description">Автоматически перепаковывает установленные приложения в фоновом режиме при изменении их патчей. Поддерживаются только приложения с сохраненным оригинальным APK</string>
+    <string name="settings_advanced_auto_patch_interval">Частота перепатчинг</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Как часто перепаковываются пропатченные приложения</string>
+    <string name="settings_advanced_auto_patch_charging">Только при зарядке</string>
+    <string name="settings_advanced_auto_patch_charging_description">Патчинг потребляет много ресурсов ЦП и памяти, поэтому он ждет зарядки</string>
+    <string name="settings_advanced_auto_patch_install">Устанавливать автоматически</string>
+    <string name="settings_advanced_auto_patch_install_description">Требуется Shizuku в качестве установщика. При использовании любого другого установщика пропатченные приложения будут только сохранены</string>
+    <string name="settings_advanced_external_batch_patch">Разрешить внешние триггеры</string>
+    <string name="settings_advanced_external_batch_patch_description">Позволяет автоматизированным приложениям запускать массовый патчинг через intent. Каждый запрос подтверждается перед началом выполнения</string>
+    <string name="external_batch_patch_title">Начать массовый патчинг?</string>
+    <string name="external_batch_patch_description">%s хочет, чтобы Morphe пропатчил и установил приложения</string>
+    <string name="external_batch_patch_trust_caller">Всегда разрешать это приложение</string>
+    <string name="external_batch_patch_unknown_caller">Неизвестное приложение</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Автоматический перепатчинг завершен</string>
+    <string name="notification_auto_patch_running_title">Перепатчивание приложений</string>
+    <string name="notification_auto_patch_blocked_title">Автоматический перепатчинг не был запущен</string>
+    <string name="notification_auto_patch_blocked_battery">Исключите Morphe из оптимизации батареи, иначе Android остановит выполнение до начала</string>
+    <string name="notification_auto_patch_blocked_foreground">Android не разрешил запуск патчинга в фоновом режиме. Откройте Morphe и пропатчите из приложения</string>
+    <string name="notification_channel_auto_patch">Автоматический перепатчинг</string>
+    <string name="notification_channel_auto_patch_description">Тихие уведомления о ходе выполнения и результате запланированного перепатчивания</string>
     <string name="notification_manager_update_title">Доступно обновление Morphe</string>
     <string name="notification_bundle_update_title">Доступны новые патчи</string>
     <string name="notification_update_text">Версия %s готова к загрузке</string>
@@ -735,7 +785,7 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">Android заблокировал это, поскольку это приведет к понижению версии установленного приложения.</string>
     <string name="installer_shizuku_error_signature">Android заблокировал это, поскольку у установленного приложения другая подпись.</string>
     <string name="installer_shizuku_error_invalid_apk">Android не смог прочитать этот APK.</string>
-    <string name="installer_shizuku_error_user_profile">Android заблокировал это для текущего пользователя или рабочего профиля.</string>
+    <string name="installer_shizuku_error_user_profile">Система заблокировала эту установку. На Xiaomi и подобных устройствах включите \"Установка через USB\" в настройках разработчика. На рабочем профиле установки могут быть ограничены политикой</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизация батареи</string>
     <string name="settings_system_battery_optimization_description">Поддерживает работу патчера при минимизации приложения</string>
@@ -918,6 +968,9 @@ morphe_header_custom_dark.png
     <string name="confirm">Подтвердить</string>
     <string name="warning">Предупреждение</string>
     <string name="error_">Ошибка</string>
+    <string name="failed">Не удалось</string>
+    <string name="cancelled">Отменено</string>
+    <string name="ready">Готово</string>
     <string name="retry">Повторить попытку</string>
     <string name="refresh">Обновить</string>
     <string name="add">Добавить</string>
@@ -930,6 +983,9 @@ morphe_header_custom_dark.png
     <string name="delete">Удалить</string>
     <string name="delete_all">Удалить все</string>
     <string name="remove">Удалить</string>
+    <string name="exclude">Исключить</string>
+    <string name="excluded">Исключено</string>
+    <string name="include">Включить</string>
     <string name="disable">Отключить</string>
     <string name="enable">Включить</string>
     <string name="loading">Загрузка…</string>
@@ -956,9 +1012,10 @@ morphe_header_custom_dark.png
     <string name="reorder_done">Порядок сохранен</string>
     <string name="reset_order">Сбросить порядок</string>
     <string name="reset_order_done">Сброс заказа</string>
+    <string name="accessibility_select_app">Выберите приложение</string>
     <string name="accessibility_move_up">Переместить вверх</string>
     <string name="accessibility_move_down">Переместить вниз</string>
-    <string name="accessibility_app_moved_announcement">%1$s перемещен на позицию %2$d из %3$d</string>
+    <string name="accessibility_app_moved_announcement">%1$s перемещен(а) на позицию %2$s из %3$s</string>
     <string name="accessibility_scroll_to_top">Прокрутить к началу списка</string>
     <string name="rename">Переименовать</string>
     <string name="import_">Импортировать</string>
@@ -974,6 +1031,7 @@ morphe_header_custom_dark.png
     <string name="continue_">Продолжить</string>
     <string name="version">Версия</string>
     <string name="patch">Патч</string>
+    <string name="patching">Патчинг</string>
     <string name="repatch">Применить патч</string>
     <string name="open">Открыть</string>
     <string name="mount">Смонтировать</string>
@@ -1024,8 +1082,8 @@ morphe_header_custom_dark.png
 Вы все еще хотите продолжить?"</string>
     <string name="download_update_confirmation">Загрузить обновление?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d из %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s из %2$s</string>
     <string name="onboarding_sources_desc">Управляйте источниками патчей. Каждый источник предоставляет патчи, которые можно применить к вашим приложениям</string>
     <string name="onboarding_swipe_title">Жесты смахивания</string>
     <string name="onboarding_swipe_desc">Смахните вправо по карте приложения, чтобы просмотреть доступные патчи. Смахните влево, чтобы скрыть карту с главного экрана</string>

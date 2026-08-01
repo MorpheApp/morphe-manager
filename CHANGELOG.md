@@ -1,3 +1,10 @@
+# [1.25.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.9...v1.25.0-dev.10) (2026-08-01)
+
+
+### Features
+
+* Patch several apps in one queue, and keep them patched automatically ([#795](https://github.com/MorpheApp/morphe-manager/issues/795)) ([a3c0427](https://github.com/MorpheApp/morphe-manager/commit/a3c0427756b95773d6a1a3c317c1b88ed641e867))
+
 # [1.25.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.8...v1.25.0-dev.9) (2026-07-30)
 
 

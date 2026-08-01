@@ -165,10 +165,11 @@
     <string name="home_apk_availability_no">Не, вече имам APK</string>
     <string name="home_apk_use_saved">Използвайте запазен APK</string>
     <string name="home_apk_use_installed">Използвайте инсталиран APK</string>
+    <string name="home_apk_use_installed_unverified">Не успяхме да потвърдим подписа на инсталираното приложение, затова е възможно вече да е променено</string>
     <string name="home_app_info_no_saved_apk">Няма запазено APK. Пatching ще изисква отново да изберете APK файл.</string>
     <string name="home_version_requires_android">Изисква Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Не се поддържа на това устройство</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; няма поддържани версии за Android %2$d (API %3$d). Всички декларирани версии изискват по-нова версия на Android</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; няма поддържани версии за Android %2$s (API %3$s). Всички декларирани версии изискват по-нова версия на Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Изтеглете оригинален APK</string>
     <string name="home_download_instructions_steps_title">Инструкции:</string>
@@ -244,7 +245,7 @@
     <string name="home_dialog_unsupported_version_compatible_versions">Съвместими версии:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Несъвместим</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Версия %d</string>
+    <string name="home_dialog_unsupported_version_build">Изграждане %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Това е различна версия на същата версия. Пачовете изискват определена версия</string>
     <string name="home_dialog_wrong_package_title">Грешно избрано пакети</string>
     <string name="home_dialog_wrong_package_description">Избраното APK не е за приложението, което искате да поправите</string>
@@ -307,6 +308,13 @@
     <string name="header_creator_guide_themes_body">Повечето приложения изискват отделни изображения за светлите и тъмните теми. Някои приложения (като YouTube Music) използват само тъмната тема, така че се показва само този раздел.</string>
     <string name="header_creator_guide_positioning_title">Позициониране и мащабиране</string>
     <string name="header_creator_guide_positioning_body">Използвайте жестовете „щипване за увеличаване“ и плъзгане директно в прегледа, за да позиционирате и мащабирате изображението си. Появяват се направляващи линии, когато изображението е близо до центъра. Можете също да използвате плъзгача под прегледа.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Избран пач</string>
+    <string name="batch_patch_title">Пакетно прилагане на корекции</string>
+    <string name="batch_patch_planning">Подготвя се опашката…</string>
+    <string name="batch_patch_preparing_next">Подготвя се следващото приложение…</string>
+    <string name="batch_patch_progress_counter">Коригирана %1$s от %2$s</string>
+    <string name="batch_patch_summary">%1$s коригирани, %2$s неуспешни, %3$s пропуснати</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Сигурни ли сте, че искате да деинсталирате това приложение?</string>
     <string name="batch_uninstall_confirm_body">Избраните приложения ще бъдат трайно премахнати от вашето устройство</string>
@@ -453,8 +461,8 @@
     <string name="failed_to_mount">Неуспешно монтиране: %s</string>
     <string name="failed_to_unmount">Неуспешно откачване: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Резултат %d</string>
-    <string name="mini_game_best">Най-добър %d</string>
+    <string name="mini_game_score">Резултат %s</string>
+    <string name="mini_game_best">Най-добър %s</string>
     <string name="mini_game_new_record">Нов рекорд!</string>
     <string name="mini_game_game_over">Край на играта</string>
     <string name="mini_game_try_again">Опитай отново</string>
@@ -518,6 +526,16 @@
     <string name="settings_appearance_app_card_colors">Цветове на картите на приложенията</string>
     <string name="settings_appearance_app_card_colors_default">По подразбиране</string>
     <string name="settings_appearance_app_card_colors_default_description">Присвояване на цвета на пакета на всяко приложение</string>
+    <string name="settings_appearance_app_card_colors_accent">Акцент</string>
+    <string name="settings_appearance_app_card_colors_accent_description">Използвайте акцентния цвят на приложението за картите на началния екран</string>
+    <string name="settings_appearance_app_card_colors_gradient">Градиент</string>
+    <string name="settings_appearance_app_card_colors_gradient_description">Използвайте един потребителски градиент за картите на началния екран</string>
+    <string name="settings_appearance_app_card_colors_solid">Плътен</string>
+    <string name="settings_appearance_app_card_colors_solid_description">Използвайте един потребителски цвят за картите на началния екран</string>
+    <string name="settings_appearance_app_card_colors_start">Начален цвят</string>
+    <string name="settings_appearance_app_card_colors_middle">Среден цвят</string>
+    <string name="settings_appearance_app_card_colors_end">Краен цвят</string>
+    <string name="settings_appearance_app_card_colors_solid_color">Плътен цвят</string>
     <string name="settings_appearance_app_card_colors_bundle">Цвет на пакета приложения</string>
     <string name="settings_appearance_app_card_colors_bundle_description">Използвайте собствения цвят на всяко приложение тук, оцветен автоматично, за да пасне</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
@@ -735,7 +753,6 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">Android блокира това, защото ще понижи нивото на инсталираното приложение.</string>
     <string name="installer_shizuku_error_signature">Android блокира това, защото инсталираното приложение има различен подпис.</string>
     <string name="installer_shizuku_error_invalid_apk">Android не може да прочете този APK файл.</string>
-    <string name="installer_shizuku_error_user_profile">Android блокира това за текущия потребител или работен профил.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизация на батерията</string>
     <string name="settings_system_battery_optimization_description">Поддържа работещ патчър, когато приложението е минимизирано</string>
@@ -958,7 +975,7 @@ morphe_header_custom_dark.png
     <string name="reset_order_done">Заявката е възстановена</string>
     <string name="accessibility_move_up">Преместване нагоре</string>
     <string name="accessibility_move_down">Преместване надолу</string>
-    <string name="accessibility_app_moved_announcement">%1$s беше преместен на позиция %2$d от %3$d</string>
+    <string name="accessibility_app_moved_announcement">%1$s преместен на позиция %2$s от %3$s</string>
     <string name="accessibility_scroll_to_top">Превъртете до началото на списъка</string>
     <string name="rename">Преименуване</string>
     <string name="import_">Импортиране</string>
@@ -1024,8 +1041,8 @@ morphe_header_custom_dark.png
 Искате ли да продължите още?"</string>
     <string name="download_update_confirmation">Да сваля обновление?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d от %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s от %2$s</string>
     <string name="onboarding_sources_desc">Управлявайте източниците на пакети. Всеки източник предоставя пакети, които могат да бъдат приложени към вашите приложения. </string>
     <string name="onboarding_swipe_title">Жестове с плъзгане</string>
     <string name="onboarding_swipe_desc">Плъзнете надясно върху карта на приложение, за да видите наличните пакети. Плъзнете наляво, за да скриете картата от началния екран. </string>

@@ -164,10 +164,10 @@
     <string name="home_apk_availability_no">Ne, već imam APK</string>
     <string name="home_apk_use_saved">Користи сачувани APK</string>
     <string name="home_apk_use_installed">Користи инсталирани APK</string>
+    <string name="home_apk_use_installed_unverified">Нисмо могли да потврдимо потпис инсталиране апликације, тако да је она можда већ закрпљена</string>
     <string name="home_app_info_no_saved_apk">Nema saćuvanog APK-a. Patching zahtijeva ponovno odabir APK datoteke</string>
     <string name="home_version_requires_android">Захтева Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Није подржано на овом уређају</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; нема подржаних верзија за Android %2$d (API %3$d). Све декларисане верзије захтевају вишу верзију Android-а</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Преузмите оригинални APK</string>
     <string name="home_download_instructions_steps_title">Упутства:</string>
@@ -214,6 +214,8 @@
     <string name="expert_mode_reset_to_default_done">Примењене препоручене закрпе</string>
     <string name="expert_mode_restore_saved">Поврати сачувани избор</string>
     <string name="expert_mode_restore_saved_done">Враћена сачувана селекција</string>
+    <string name="expert_mode_copy_from_bundle">Копирај селекцију из другог пакета</string>
+    <string name="expert_mode_copy_from_bundle_no_patches">Нема поклапајућих закрпа у овом пакету</string>
     <string name="expert_mode_no_results">Нema пронађених печева</string>
     <string name="expert_mode_universal_patches">Универзалне површине</string>
     <string name="expert_mode_new_patches">Ново</string>
@@ -241,7 +243,6 @@
     <string name="home_dialog_unsupported_version_compatible_versions">Дозвољене верзије:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Недозвољен</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Изградња %d</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Ово је другачија изградња исте верзије. Пакети захтевају специфичну изградњу</string>
     <string name="home_dialog_wrong_package_title">Изабран је погрешан пакет</string>
     <string name="home_dialog_wrong_package_description">Изабрани APK није за апликацију коју сте намеравали да печујете</string>
@@ -304,8 +305,38 @@
     <string name="header_creator_guide_themes_body">Већини апликација су потребне посебне слике за светле и тамне теме. Неке апликације (као што је YouTube Music) користе само тамну тему, па се приказује само та секција.</string>
     <string name="header_creator_guide_positioning_title">Позиционирање и скалирање</string>
     <string name="header_creator_guide_positioning_body">Користите гестове пецкања за зумирање и превлачење директно у прегледу да бисте позиционирали и скалирали слику. Водичи се појављују када је слика близу центра. Такође можете користити клизач испод прегледа.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_saved_hint">Печене апликације су сачуване. Инсталирајте их сада или касније из листе печених APK-ова у подешавањима</string>
+    <string name="batch_patch_multiple_sources">Неке апликације комбинују печеве из више извора, што може изазвати сукобе</string>
+    <string name="batch_patch_needs_apk">Нема доступног APK-а, приложите датотеку</string>
+    <string name="batch_patch_wrong_package">Приложена датотека припада %s</string>
+    <string name="batch_patch_version_mismatch">Верзија %s није подржана од стране печева</string>
+    <string name="batch_patch_source_saved">Сачуван оригинал</string>
+    <string name="batch_patch_source_installed">Инсталирана апликација</string>
+    <string name="batch_patch_source_file">Приложена датотека</string>
+    <string name="batch_patch_source_unavailable">APK није могао да се припреми</string>
+    <string name="batch_patch_attach_apk">Приложи APK</string>
+    <string name="batch_patch_force_version">Ипак настави</string>
+    <string name="batch_patch_edit_patches">Изаберите печеве</string>
+    <string name="batch_patch_state_no_apk">Нема APK-а</string>
+    <string name="batch_patch_state_no_patches">Нема печева</string>
+    <string name="batch_patch_policy_install">Инсталирај када се заврши</string>
+    <string name="batch_patch_policy_install_description">Инсталира сваку печену апликацију одмах након што се заврши ред. Искључено задржава APK-ове за касније</string>
+    <string name="batch_patch_start">Почните са печењем</string>
+    <string name="batch_patch_stop_title">Заустави групно печење?</string>
+    <string name="batch_patch_stop_description">Апликација која се пече управо и све што је још у реду ће бити отказано</string>
+    <string name="batch_patch_install_all">Инсталирај све</string>
+    <string name="batch_patch_install_failed">Инсталација је неуспела</string>
+    <string name="batch_patch_in_progress">Групно печење је већ у току</string>
+    <string name="batch_patch_nothing_outdated">Све печене апликације су ажурне</string>
+    <string name="shortcut_repatch_short">Поново пеци</string>
+    <string name="shortcut_repatch_long">Поново пеци застареле апликације</string>
+    <string name="shortcut_check_updates_short">Провери ажурирања</string>
+    <string name="shortcut_check_updates_long">Провери за ажурирања печева</string>
+    <string name="shortcut_patch_app">Пеци %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Да ли сте сигурни да желите да уклоните ову апликацију?</string>
+    <string name="batch_uninstall_confirm_body">Селектоване апликације ће бити трајно уклоњене са вашег уређаја</string>
     <string name="home_app_info_remove_app_warning">Ово ће трајно обрисати:</string>
     <string name="home_app_info_delete_item_database">Унос у базу података</string>
     <string name="home_app_info_delete_item_patched_apk">Патчиран APK фајл</string>
@@ -336,6 +367,7 @@
     <string name="root_pre_patch_installer_description">Ваш уређај има рут приступ. Изаберите да ли ће апликација бити фластерована за рут монтирање или стандардну инсталацију.</string>
     <string name="root_pre_patch_installer_mount_title">Режим фластеровања рут монтирања</string>
     <string name="root_pre_patch_installer_mount_description">Фластери за рут монтирање, затим монтира APK преко одговарајуће оригиналне апликације. Није потребна GmsCore.</string>
+    <string name="root_mount_module_unmount_warning">Ако KernelSU има подразумевано укључене модуле за демонтажу, отворите KernelSU &gt; Superuser &gt; апликацију коју сте монтирали &gt; Profile &gt; Custom и деактивирајте демонтажу модула. У супротном, монтирана закрпљена APK апликација можда неће ступити на снагу, чак и ако Morphe показује да је монтирана</string>
     <string name="root_pre_patch_installer_standard_title">Стандардна мода инсталације</string>
     <string name="root_pre_patch_installer_standard_description">Закрпе као нормалан APK са GmsCore подршком. Ваша поставка инсталатера се користи након закрпе.</string>
     <string name="root_pre_patch_installer_hint">Овај режим закрпе је посебан од Подешавања > Систем > Инсталатер и не може се променити након закрпе.</string>
@@ -448,8 +480,6 @@
     <string name="failed_to_mount">Није успело монтирање: %s</string>
     <string name="failed_to_unmount">Није успело демонтирање: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Резултат %d</string>
-    <string name="mini_game_best">Најбоља %d</string>
     <string name="mini_game_new_record">Нови рекорд!</string>
     <string name="mini_game_game_over">Игра завршена</string>
     <string name="mini_game_try_again">Покушај поново</string>
@@ -492,6 +522,7 @@
     <string name="settings_appearance_dynamic">Материјал You</string>
     <string name="settings_appearance_monochrome">Монохроматски</string>
     <string name="settings_appearance_color_style">Стил боје</string>
+    <string name="settings_appearance_colors">Боје</string>
     <string name="settings_appearance_accent_color">Акцент боја</string>
     <string name="settings_appearance_pure_black">Svetlo crno</string>
     <string name="settings_appearance_pure_black_description">Користи праву црну позадину</string>
@@ -509,6 +540,9 @@
     <string name="settings_appearance_app_grouping_description">Прикажи прекидач почетног екрана за груписање апликација по извору или властитим категоријама, задржавајући селекцију када је искључено</string>
     <string name="settings_appearance_sort_button">Дугме за сортирање</string>
     <string name="settings_appearance_sort_button_description">Прикажи дугме за сортирање на почетном екрану</string>
+    <string name="settings_appearance_app_card_colors">Боје картица апликација</string>
+    <string name="settings_appearance_app_card_colors_default">Подразумевано</string>
+    <string name="settings_appearance_app_card_colors_default_description">Додели свакој апликацији боју њеног пакета</string>
     <string name="settings_appearance_app_card_colors_accent">Акцент</string>
     <string name="settings_appearance_app_card_colors_accent_description">Користите боју акцента апликације за почетне картице</string>
     <string name="settings_appearance_app_card_colors_gradient">Градијент</string>
@@ -519,6 +553,8 @@
     <string name="settings_appearance_app_card_colors_middle">Средња боја</string>
     <string name="settings_appearance_app_card_colors_end">Крајња боја</string>
     <string name="settings_appearance_app_card_colors_solid_color">Пуна боја</string>
+    <string name="settings_appearance_app_card_colors_bundle">Боја пакета апликације</string>
+    <string name="settings_appearance_app_card_colors_bundle_description">Користи боју сваке апликације овде, аутоматски затамњену да би се уклопила</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Иконица апликације</string>
     <string name="settings_appearance_app_icon_default">Подразумеван</string>
@@ -548,7 +584,28 @@
     <string name="settings_advanced_update_interval_monthly">Одавно једном на месец</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Фреквенција позадинских провере</string>
     <string name="settings_advanced_update_interval_battery_warning">Позадинске провере могу не радити на неким уређајима. Производитељи попут Xiaomi, Huawei, Samsung и OnePlus често агресивно ограничавају позадинске процесе да би сачували батерију</string>
+    <string name="settings_advanced_auto_patch">Аутоматско поновно печење</string>
+    <string name="settings_advanced_auto_patch_description">Поново пеци инсталиране апликације у позадини када се њихови печеви промене. Само апликације са сачуваним оригиналним APK-ом су обухваћене</string>
+    <string name="settings_advanced_auto_patch_interval">Фреквенција поновног печења</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Како често се печене апликације поново граде</string>
+    <string name="settings_advanced_auto_patch_charging">Само током пуњења</string>
+    <string name="settings_advanced_auto_patch_charging_description">Печење је напорно за процесор и меморију, па се чека пуњач</string>
+    <string name="settings_advanced_auto_patch_install">Инсталирај аутоматски</string>
+    <string name="settings_advanced_auto_patch_install_description">Захтева Shizuku као инсталатер. Са било којим другим инсталатером, печене апликације се само сачувају</string>
+    <string name="settings_advanced_external_batch_patch">Дозволи екстерне окидаче</string>
+    <string name="settings_advanced_external_batch_patch_description">Омогућава апликацијама за аутоматизацију да почну групно печење помоћу намене. Сваки захтев се потврђује пре него што се било шта изврши</string>
+    <string name="external_batch_patch_title">Почните групно печење?</string>
+    <string name="external_batch_patch_description">%s жели да Morphe пеци и инсталира апликације</string>
+    <string name="external_batch_patch_trust_caller">Увек дозволи ову апликацију</string>
+    <string name="external_batch_patch_unknown_caller">Непозната апликација</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Аутоматско поновно печење је завршено</string>
+    <string name="notification_auto_patch_running_title">Поновно пеци апликације</string>
+    <string name="notification_auto_patch_blocked_title">Аутоматско поновно печење није покренуто</string>
+    <string name="notification_auto_patch_blocked_battery">Систем је блокирао ову инсталацију. На Xiaomi и сличним уређајима, укључите \"Инсталирај преко USB-а\" у опцијама за програмере. На радном профилу, инсталације могу бити ограничене политиком</string>
+    <string name="notification_auto_patch_blocked_foreground">Android није дозволио да се печење почне у позадини. Отворите Morphe и пеците из апликације</string>
+    <string name="notification_channel_auto_patch">Аутоматско поновно печење</string>
+    <string name="notification_channel_auto_patch_description">Тиха напредна и резултатска обавештења за планирано поновно печење</string>
     <string name="notification_manager_update_title">Доступно ажурирање Morphe-а</string>
     <string name="notification_bundle_update_title">Доступна су нова патчеа</string>
     <string name="notification_update_text">Верзија %s је спремна за преузимање</string>
@@ -734,7 +791,7 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">Android је блокирао ово јер би деградирао инсталирану апликацију</string>
     <string name="installer_shizuku_error_signature">Android је блокирао ово јер инсталирана апликација има другачији потпис</string>
     <string name="installer_shizuku_error_invalid_apk">Android није могао да прочита овај APK</string>
-    <string name="installer_shizuku_error_user_profile">Android је блокирао ово за тренутног корисника или радни профил</string>
+    <string name="installer_shizuku_error_user_profile">Систем је блокирао ову инсталацију. На Xiaomi и сличним уређајима, укључите \"Инсталирај преко USB-а\" у опцијама за програмере. На радном профилу, инсталације могу бити ограничене политиком</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизација батерије</string>
     <string name="settings_system_battery_optimization_description">Држи закрпљивач активним када је апликација минимизирана</string>
@@ -871,7 +928,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_options_section">Опције поправке</string>
     <string name="settings_system_no_patches_or_options">Нema сачуваних пакета или опција</string>
     <!-- Copy selection from another bundle -->
+    <string name="copy_selection_title">Копирај селекцију из…</string>
+    <string name="copy_selection_confirm_with_count">Копирај %s</string>
+    <string name="copy_selection_empty">Нема других сачуваних селекција за копирање</string>
     <string name="copy_selection_available_format">%1$s od %2$s dostupno</string>
+    <string name="copy_selection_same_source">Исти извор</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Подешавач фајлова по мери</string>
     <string name="settings_system_custom_file_picker_description">Прегледајте складиште користећи уграђени изабирач фајлова у Morphe-у уместо подразумеваног у систему</string>
@@ -913,6 +974,9 @@ morphe_header_custom_dark.png
     <string name="confirm">Potvrdite</string>
     <string name="warning">Упозорење</string>
     <string name="error_">Грешка</string>
+    <string name="failed">Неуспешно</string>
+    <string name="cancelled">Отказано</string>
+    <string name="ready">Спремно</string>
     <string name="retry">Покушај поново</string>
     <string name="refresh">Освежи</string>
     <string name="add">Додај</string>
@@ -925,6 +989,9 @@ morphe_header_custom_dark.png
     <string name="delete">Избриши</string>
     <string name="delete_all">Обрисати све</string>
     <string name="remove">Ukloni</string>
+    <string name="exclude">Искључи</string>
+    <string name="excluded">Искључено</string>
+    <string name="include">Укључи</string>
     <string name="disable">Онемогући</string>
     <string name="enable">Укључи</string>
     <string name="loading">Учитавање…</string>
@@ -951,13 +1018,14 @@ morphe_header_custom_dark.png
     <string name="reorder_done">Ред је сачуван</string>
     <string name="reset_order">Ресетуј ред</string>
     <string name="reset_order_done">Ресет поруџбине</string>
+    <string name="accessibility_select_app">Изаберите апликацију</string>
     <string name="accessibility_move_up">Помери нагоре</string>
     <string name="accessibility_move_down">Помери надоле</string>
-    <string name="accessibility_app_moved_announcement">%1$s померен на позицију %2$d од %3$d</string>
     <string name="accessibility_scroll_to_top">Скролуј до врха листе</string>
     <string name="rename">Преименуј</string>
     <string name="import_">Увоз</string>
     <string name="export">Извези</string>
+    <string name="copy">Копирај</string>
     <string name="download">Преузми</string>
     <string name="less">Мање</string>
     <string name="expand">Прошири</string>
@@ -968,6 +1036,7 @@ morphe_header_custom_dark.png
     <string name="continue_">Настави</string>
     <string name="version">Верзија</string>
     <string name="patch">Печ</string>
+    <string name="patching">Пецање</string>
     <string name="repatch">Поново патч</string>
     <string name="open">Отворити</string>
     <string name="mount">Монтирај</string>
@@ -1018,8 +1087,7 @@ morphe_header_custom_dark.png
 Да ли и даље желите да наставите?"</string>
     <string name="download_update_confirmation">Преузети ажурирање?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d од %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_sources_desc">Управљајте изворима за закрпе. Сваки извор пружа закрпе које могу да се примене на ваше апликације</string>
     <string name="onboarding_swipe_title">Покрети превлачења</string>
     <string name="onboarding_swipe_desc">Превуците удесно преко картице апликације да бисте видели доступне закрпе. Превуците улево да бисте сакрили картицу са почетног екрана</string>

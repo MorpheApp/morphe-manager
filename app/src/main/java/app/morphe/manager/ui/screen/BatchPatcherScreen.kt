@@ -6,6 +6,8 @@
 package app.morphe.manager.ui.screen
 
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
@@ -22,6 +24,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -31,8 +35,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.screen.home.DownloadInstructionsDialog
 import app.morphe.manager.ui.screen.home.ExpertModeDialog
 import app.morphe.manager.ui.screen.home.ExpertPatchActions
+import app.morphe.manager.ui.screen.home.FilePickerPromptDialog
 import app.morphe.manager.ui.screen.home.SimpleBundleCandidate
 import app.morphe.manager.ui.screen.home.SimpleBundleSelectDialog
 import app.morphe.manager.ui.screen.patcher.ExpertPatchingInProgress
@@ -45,7 +52,12 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.BatchPatcherViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.util.APK_FILE_MIME_TYPES
+import app.morphe.manager.util.APK_MIMETYPE
+import app.morphe.manager.util.ExportNameFormatter
+import app.morphe.manager.util.KnownApps
+import app.morphe.manager.util.PatchedAppExportData
 import app.morphe.manager.util.rememberAdaptiveFilePicker
+import app.morphe.manager.util.toast
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
@@ -64,6 +76,7 @@ fun BatchPatcherScreen(
     viewModel: BatchPatcherViewModel = koinViewModel(),
     installViewModel: InstallViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
+    patchBundleRepository: PatchBundleRepository = koinInject(),
     onAppStateChanged: (String) -> Unit = {}
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -87,8 +100,11 @@ fun BatchPatcherScreen(
     InstallerFlowDialogs(installViewModel = installViewModel)
 
     val current = state
+    // Apps already on the device drop out, so "Install all" means what is left and a card
+    // that is done stops offering the button. One list drives both
     val installRequests: List<InstallQueueRequest> = remember(current?.items) {
         current?.patchedItems.orEmpty().mapNotNull { item ->
+            if (item.installOutcome == BatchInstallOutcome.INSTALLED) return@mapNotNull null
             val file = item.patchedFile ?: return@mapNotNull null
             InstallQueueRequest(
                 file = file,
@@ -134,8 +150,11 @@ fun BatchPatcherScreen(
         )
     }
 
-    LaunchedEffect(viewModel.attachTarget) {
-        if (viewModel.attachTarget != null) openApkPicker()
+    // Opened straight from the actions that need it rather than by watching state: the target
+    // can repeat, and a repeated value is not an event a keyed effect would fire on again
+    val attachApkTo = { packageName: String ->
+        viewModel.requestAttach(packageName)
+        openApkPicker()
     }
 
     // The same dialog the single-app flow uses, pointed at one queued app instead of the
@@ -169,6 +188,42 @@ fun BatchPatcherScreen(
         )
     }
 
+    // The same instructions the single-app flow shows before sending someone to download an
+    // APK, pointed at a queued app. Continuing opens the browser and then the file picker
+    viewModel.apkSearch?.let { search ->
+        val uriHandler = LocalUriHandler.current
+        val bundleMetadata by patchBundleRepository.appMetadata.collectAsStateWithLifecycle()
+        val metadata = bundleMetadata[search.item.packageName]
+
+        DownloadInstructionsDialog(
+            usingMountInstall = false,
+            targetAppInstalled = search.item.source is BatchApkSource.Installed,
+            downloadColor = metadata?.downloadColor ?: KnownApps.DEFAULT_DOWNLOAD_COLOR,
+            isApkBundle = metadata?.apkFileType?.isApk == false,
+            onDismiss = viewModel::cancelApkSearch
+        ) {
+            viewModel.confirmApkSearch { url ->
+                runCatching { uriHandler.openUri(url) }.isSuccess
+            }
+        }
+    }
+
+    // Waits on screen while the user is in the browser, so the picker opens on their tap
+    // once they are back rather than behind whatever the browser put in front
+    viewModel.attachPrompt?.let { item ->
+        FilePickerPromptDialog(
+            appName = item.appName,
+            isOtherApps = false,
+            isLoadingInstalledApps = false,
+            onDismiss = viewModel::dismissAttachPrompt,
+            onOpenFilePicker = {
+                viewModel.dismissAttachPrompt()
+                attachApkTo(item.packageName)
+            },
+            onUseInstalledApp = null
+        )
+    }
+
     // The same source question simple mode answers before a single-app patch
     viewModel.sourcePick?.let { item ->
         // Offered from the full plan, not the narrowed selection, so switching sources works
@@ -185,6 +240,38 @@ fun BatchPatcherScreen(
                 },
             onSelect = viewModel::pickSource,
             onDismiss = viewModel::cancelSourcePick
+        )
+    }
+
+    // Saving a patched APK somewhere the user picks, the same export the single-app flow and
+    // the saved APK list offer. Held as state because the file name is built from the item
+    var exportItem by remember { mutableStateOf<BatchPatchItem?>(null) }
+    val exportSuccessMessage = stringResource(R.string.save_apk_success)
+    val exportFailedMessage = stringResource(R.string.saved_app_export_failed)
+    val context = LocalContext.current
+    val exportLauncher = rememberLauncherForActivityResult(CreateDocument(APK_MIMETYPE)) { uri ->
+        val file = exportItem?.patchedFile
+        exportItem = null
+        if (file != null && uri != null) {
+            installViewModel.export(file, uri) { success ->
+                context.toast(if (success) exportSuccessMessage else exportFailedMessage)
+            }
+        }
+    }
+
+    LaunchedEffect(exportItem) {
+        val item = exportItem ?: return@LaunchedEffect
+        exportLauncher.launch(
+            ExportNameFormatter.format(
+                null,
+                PatchedAppExportData(
+                    appName = item.appName,
+                    packageName = item.packageName,
+                    appVersion = item.version,
+                    patchBundleVersions = item.bundles.mapNotNull { it.version?.takeIf(String::isNotBlank) },
+                    patchBundleNames = item.bundles.map { it.name }
+                )
+            )
         )
     }
 
@@ -319,7 +406,14 @@ fun BatchPatcherScreen(
                     BatchItemCard(
                         item = item,
                         editable = current.phase == BatchPhase.PREFLIGHT,
-                        onAttach = { viewModel.requestAttach(item.packageName) },
+                        onAttach = { attachApkTo(item.packageName) },
+                        // Offered whenever downloading would get a different file than the one
+                        // on hand, which also covers a saved original the sources have moved
+                        // past. No point when there is nothing to patch with at all
+                        onFindApk = item
+                            .takeIf { it.state != BatchItemState.NO_PATCHES }
+                            ?.takeIf { it.suggestedVersion != null && it.suggestedVersion != it.version }
+                            ?.let { { viewModel.beginApkSearch(item) } },
                         onToggleExcluded = { viewModel.toggleExcluded(item.packageName) },
                         onForceVersion = { viewModel.forceVersion(item.packageName) },
                         // Simple mode never exposes individual patches, and the options edited
@@ -336,9 +430,8 @@ fun BatchPatcherScreen(
                                     (it.resolvedSelection ?: it.selection).keys.size > 1
                             }
                             ?.let { { viewModel.beginSourcePick(item) } },
-                        // Installing everything is not always what the user wants once they
-                        // see which apps succeeded
                         onInstall = request?.let { { startInstallQueue(listOf(it)) } },
+                        onExport = item.patchedFile?.let { { exportItem = item } },
                         onOpen = item.installedPackageName
                             ?.takeIf { item.installOutcome == BatchInstallOutcome.INSTALLED }
                             ?.let { { viewModel.openApp(it) } },
@@ -532,17 +625,20 @@ private fun BatchItemCard(
     item: BatchPatchItem,
     editable: Boolean,
     onAttach: () -> Unit,
+    onFindApk: (() -> Unit)? = null,
     onToggleExcluded: () -> Unit,
     onForceVersion: () -> Unit,
     onEditPatches: (() -> Unit)? = null,
     onPickSource: (() -> Unit)? = null,
     onInstall: (() -> Unit)? = null,
+    onExport: (() -> Unit)? = null,
     onOpen: (() -> Unit)? = null,
     onShowError: () -> Unit = {}
 ) {
     val excluded = item.state == BatchItemState.EXCLUDED
     val failed = !editable && item.state == BatchItemState.FAILED && !item.message.isNullOrBlank()
-    val hasResultActions = !editable && (onInstall != null || onOpen != null || failed)
+    val hasResultActions = !editable &&
+            (onInstall != null || onExport != null || onOpen != null || failed)
 
     SectionCard(modifier = Modifier.fillMaxWidth()) {
         Column {
@@ -635,6 +731,16 @@ private fun BatchItemCard(
                             vertical = MorpheDefaults.ItemSpacing
                         )
                     ) {
+                        if (onFindApk != null) {
+                            val findLabel = stringResource(R.string.batch_patch_find_apk)
+                            ActionPillButton(
+                                onClick = onFindApk,
+                                icon = Icons.Outlined.Search,
+                                contentDescription = findLabel,
+                                tooltip = findLabel
+                            )
+                        }
+
                         val attachLabel = stringResource(R.string.batch_patch_attach_apk)
                         ActionPillButton(
                             onClick = onAttach,
@@ -736,6 +842,16 @@ private fun BatchItemCard(
                                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                                     contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                                 )
+                            )
+                        }
+
+                        if (onExport != null) {
+                            val exportLabel = stringResource(R.string.export)
+                            ActionPillButton(
+                                onClick = onExport,
+                                icon = Icons.Outlined.SaveAlt,
+                                contentDescription = exportLabel,
+                                tooltip = exportLabel
                             )
                         }
 

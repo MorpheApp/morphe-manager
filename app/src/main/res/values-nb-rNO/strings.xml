@@ -168,7 +168,7 @@
     <string name="home_app_info_no_saved_apk">Ingen lagret APK. Patching krever at du velger APK-filen på nytt</string>
     <string name="home_version_requires_android">Krever Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ikke støttes på denne enheten</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har ingen støttede versjoner for Android %2$d (API %3$d). Alle deklarerte versjoner krever en høyere Android-versjon</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har ingen støttede versjoner for Android %2$s (API %3$s). Alle deklarerte versjoner krever en høyere Android-versjon</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Last ned den originale APK-filen</string>
     <string name="home_download_instructions_steps_title">Instruksjoner:</string>
@@ -244,7 +244,7 @@ For de beste resultatene anbefaler denne appen å patche en &lt;b&gt;full APK-fi
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatible versjoner:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Ikke støttet</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Bygg %d</string>
+    <string name="home_dialog_unsupported_version_build">Bygg %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Dette er en annen build av samme versjon. Patchene krever en spesifikk build</string>
     <string name="home_dialog_wrong_package_title">Feil pakke valgt</string>
     <string name="home_dialog_wrong_package_description">Den valgte APK-en er ikke for applikasjonen du hadde tenkt å patche</string>
@@ -307,6 +307,41 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <string name="header_creator_guide_themes_body">De fleste apper krever separate bilder for lyse og mørke temaer. Noen apper (som YouTube Music) bruker bare det mørke temaet, så bare den delen vises.</string>
     <string name="header_creator_guide_positioning_title">Posisjonering og skalering</string>
     <string name="header_creator_guide_positioning_body">Bruk klype-for-zoom og dra-bevegelser direkte i forhåndsvisningen for å posisjonere og skalere bildet. Snap-guider vises når bildet er nær senteret. Du kan også bruke skyvebryteren under forhåndsvisningen.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Valgt patch</string>
+    <string name="batch_patch_title">Batch patching</string>
+    <string name="batch_patch_planning">Forbereder køen…</string>
+    <string name="batch_patch_preparing_next">Forbereder neste app…</string>
+    <string name="batch_patch_progress_counter">Patchet %1$s av %2$s</string>
+    <string name="batch_patch_summary">%1$s patchet, %2$s feilet, %3$s hoppet over</string>
+    <string name="batch_patch_saved_hint">De patchede appene er lagret. Installer dem nå, eller senere fra listen over patchede APK-er i innstillinger</string>
+    <string name="batch_patch_multiple_sources">Noen apper kombinerer patcher fra mer enn én kilde, noe som kan føre til konflikter</string>
+    <string name="batch_patch_needs_apk">Ingen APK tilgjengelig, legg ved en fil</string>
+    <string name="batch_patch_wrong_package">Den vedlagte filen tilhører %s</string>
+    <string name="batch_patch_version_mismatch">Versjon %s støttes ikke av patchene</string>
+    <string name="batch_patch_source_saved">Original fil lagret</string>
+    <string name="batch_patch_source_installed">Installert app</string>
+    <string name="batch_patch_source_file">Vedlagt fil</string>
+    <string name="batch_patch_source_unavailable">APK-en kunne ikke klargjøres</string>
+    <string name="batch_patch_attach_apk">Legg ved APK</string>
+    <string name="batch_patch_force_version">Patch uansett</string>
+    <string name="batch_patch_edit_patches">Velg patcher</string>
+    <string name="batch_patch_state_no_apk">Ingen APK</string>
+    <string name="batch_patch_state_no_patches">Ingen patcher</string>
+    <string name="batch_patch_policy_install">Installer når ferdig</string>
+    <string name="batch_patch_policy_install_description">Installerer hver patchede app rett etter at køen er ferdig. Av slår på beholder APK-ene for senere</string>
+    <string name="batch_patch_start">Start patching</string>
+    <string name="batch_patch_stop_title">Stopp batch-patching?</string>
+    <string name="batch_patch_stop_description">Appen du patcher akkurat nå, og alt som står i kø, vil bli kansellert</string>
+    <string name="batch_patch_install_all">Installer alle</string>
+    <string name="batch_patch_install_failed">Installering mislyktes</string>
+    <string name="batch_patch_in_progress">Batch-patching kjører allerede</string>
+    <string name="batch_patch_nothing_outdated">Alle patchede apper er oppdaterte</string>
+    <string name="shortcut_repatch_short">Repatch</string>
+    <string name="shortcut_repatch_long">Repatch utdaterte apper</string>
+    <string name="shortcut_check_updates_short">Sjekk oppdateringer</string>
+    <string name="shortcut_check_updates_long">Sjekk etter patcheoppdateringer</string>
+    <string name="shortcut_patch_app">Patch %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Er du sikker på at du vil avinstallere denne appen?</string>
     <string name="batch_uninstall_confirm_body">De valgte appene vil bli permanent fjernet fra enheten din</string>
@@ -453,8 +488,8 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="failed_to_mount">Kunne ikke montere: %s</string>
     <string name="failed_to_unmount">Kunne ikke demontere: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Poeng: %d</string>
-    <string name="mini_game_best">Beste %d</string>
+    <string name="mini_game_score">Poengsum %s</string>
+    <string name="mini_game_best">Beste %s</string>
     <string name="mini_game_new_record">Ny rekord!</string>
     <string name="mini_game_game_over">Spillet er over</string>
     <string name="mini_game_try_again">Prøv igjen</string>
@@ -559,7 +594,28 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_advanced_update_interval_monthly">En gang i måneden</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Bakgrunnssjekkfrekvens</string>
     <string name="settings_advanced_update_interval_battery_warning">Bakgrunnssjekker fungerer kanskje ikke pålitelig på noen enheter. Produsenter som Xiaomi, Huawei, Samsung og OnePlus begrenser ofte bakgrunnsprosesser for å spare batteri</string>
+    <string name="settings_advanced_auto_patch">Automatisk repatching</string>
+    <string name="settings_advanced_auto_patch_description">Repatcher installerte apper i bakgrunnen når patchene endres. Kun apper med en lagret original APK er dekket</string>
+    <string name="settings_advanced_auto_patch_interval">Repatch-frekvens</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Hvor ofte patchede apper bygges på nytt</string>
+    <string name="settings_advanced_auto_patch_charging">Kun under lading</string>
+    <string name="settings_advanced_auto_patch_charging_description">Patching er tungt for CPU og minne, så den venter på en lader</string>
+    <string name="settings_advanced_auto_patch_install">Installer automatisk</string>
+    <string name="settings_advanced_auto_patch_install_description">Krever Shizuku som installasjonsprogram. Med ethvert annet installasjonsprogram lagres kun de patchede APK-ene</string>
+    <string name="settings_advanced_external_batch_patch">Tillat eksterne utløsere</string>
+    <string name="settings_advanced_external_batch_patch_description">Lar automatiseringsapper starte batch-patching med en intensjon. Hver forespørsel bekreftes før noe kjøres</string>
+    <string name="external_batch_patch_title">Start batch-patching?</string>
+    <string name="external_batch_patch_description">%s vil at Morphe skal patche og installere apper</string>
+    <string name="external_batch_patch_trust_caller">Tillat alltid denne appen</string>
+    <string name="external_batch_patch_unknown_caller">En ukjent app</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Automatisk repatching fullført</string>
+    <string name="notification_auto_patch_running_title">Repatcher apper</string>
+    <string name="notification_auto_patch_blocked_title">Automatisk repatching ble ikke kjørt</string>
+    <string name="notification_auto_patch_blocked_battery">Systemet blokkerte denne installasjonen. På Xiaomi og lignende enheter, slå på \"Installer via USB\" i utvikleralternativer. På en arbeidsprofil kan installasjoner være begrenset av policy</string>
+    <string name="notification_auto_patch_blocked_foreground">Android tillot ikke patching å starte i bakgrunnen. Åpne Morphe og patch fra appen</string>
+    <string name="notification_channel_auto_patch">Automatisk repatching</string>
+    <string name="notification_channel_auto_patch_description">Stille fremdrifts- og resultatvarsler for planlagt repatching</string>
     <string name="notification_manager_update_title">Morphe-oppdatering er tilgjengelig</string>
     <string name="notification_bundle_update_title">Nye patcher tilgjengelig</string>
     <string name="notification_update_text">Versjon %s er klar for nedlasting</string>
@@ -745,7 +801,7 @@ Detaljer: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android blokkerte dette fordi det ville nedgradere den installerte appen</string>
     <string name="installer_shizuku_error_signature">Android blokkerte dette fordi den installerte appen har en annen signatur</string>
     <string name="installer_shizuku_error_invalid_apk">Android kunne ikke lese denne APK-en</string>
-    <string name="installer_shizuku_error_user_profile">Android blokkerte dette for den nåværende brukeren eller arbeidsprofilen</string>
+    <string name="installer_shizuku_error_user_profile">Systemet blokkerte denne installasjonen. På Xiaomi og lignende enheter, slå på \"Installer via USB\" i utvikleralternativer. På en arbeidsprofil kan installasjoner være begrenset av policy</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimalisering av batteri</string>
     <string name="settings_system_battery_optimization_description">Holder oppdatereren i gang når appen minimeres</string>
@@ -928,6 +984,9 @@ Detaljer: %2$s"</string>
     <string name="confirm">Bekreft</string>
     <string name="warning">Advarsel</string>
     <string name="error_">Feil</string>
+    <string name="failed">Mislyktes</string>
+    <string name="cancelled">Kansellert</string>
+    <string name="ready">Klar</string>
     <string name="retry">Prøv igjen</string>
     <string name="refresh">Oppdater</string>
     <string name="add">Legg til</string>
@@ -940,6 +999,9 @@ Detaljer: %2$s"</string>
     <string name="delete">Slett</string>
     <string name="delete_all">Slette alt</string>
     <string name="remove">Fjern</string>
+    <string name="exclude">Utelukk</string>
+    <string name="excluded">Utelukket</string>
+    <string name="include">Inkluder</string>
     <string name="disable">Deaktiver</string>
     <string name="enable">Aktiver</string>
     <string name="loading">Laster…</string>
@@ -966,9 +1028,10 @@ Detaljer: %2$s"</string>
     <string name="reorder_done">Rekkefølge lagret</string>
     <string name="reset_order">Tilbakestill rekkefølge</string>
     <string name="reset_order_done">Bestilling tilbakestilt</string>
+    <string name="accessibility_select_app">Velg app</string>
     <string name="accessibility_move_up">Flytt opp</string>
     <string name="accessibility_move_down">Flytt ned</string>
-    <string name="accessibility_app_moved_announcement">%1$s flyttet til posisjon %2$d av %3$d</string>
+    <string name="accessibility_app_moved_announcement">%1$s flyttet til posisjon %2$s av %3$s</string>
     <string name="accessibility_scroll_to_top">Rull til toppen av listen</string>
     <string name="rename">Gi nytt navn</string>
     <string name="import_">Importer</string>
@@ -984,6 +1047,7 @@ Detaljer: %2$s"</string>
     <string name="continue_">Fortsett</string>
     <string name="version">Versjon</string>
     <string name="patch">Patch</string>
+    <string name="patching">Patching</string>
     <string name="repatch">Patch på nytt</string>
     <string name="open">Åpne</string>
     <string name="mount">Monter</string>
@@ -1034,8 +1098,8 @@ Detaljer: %2$s"</string>
 Vil du likevel fortsette?"</string>
     <string name="download_update_confirmation">Last ned oppdatering?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d av %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s av %2$s</string>
     <string name="onboarding_sources_desc">Administrer kildeinnstillingene dine. Hver kilde gir oppdateringer som kan brukes på appene dine.</string>
     <string name="onboarding_swipe_title">Sveipbevegelser</string>
     <string name="onboarding_swipe_desc">Sveip mot høyre på et app-kort for å se tilgjengelige oppdateringer. Sveip mot venstre for å skjule kortet fra startskjermen.</string>

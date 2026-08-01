@@ -30,8 +30,8 @@ and which source they come from. The badge says whether the app is ready:
 | Badge | Meaning | What to do |
 | --- | --- | --- |
 | **Ready** | An APK and a patch selection were found | Nothing |
-| **No APK** | No saved original, and the installed app cannot be used | **Attach APK** and pick the file |
-| **Version** | This APK version is not covered by the patches | **Patch anyway**, or attach a supported version |
+| **No APK** | No saved original, and the installed app cannot be used | **Find APK**, or **Attach APK** if you already have the file |
+| **Version** | This APK version is not covered by the patches | **Find APK** for a supported version, **Patch anyway**, or attach a file |
 | **No patches** | No enabled source has patches for this app | Enable a source, or exclude the app |
 | **Excluded** | You removed it from this run | **Include** to bring it back |
 
@@ -39,6 +39,11 @@ Where does the APK come from? Morphe looks for a saved original first, then for 
 on the device, and only asks you for a file when neither exists. An installed app is skipped
 when it looks like it was already patched, because patching a patched APK produces a broken
 build.
+
+**Find APK** appears on cards that need one. It works out which version the sources want,
+sends you to the download page for exactly that version, and opens the file picker when you
+come back, so the file lands on the app it was fetched for. It is the same helper the
+single-app flow uses.
 
 **Install when finished** decides what happens after the last app. Off keeps the patched APKs
 so you install them yourself; on hands the whole batch to the installer as soon as patching
@@ -93,10 +98,16 @@ each card:
 - **Install failed** - with the reason underneath, in place of the app details.
 
 Use **Install all** at the bottom, or the install button on a single card when you only want
-one. Cards keep their install button after a failure, so you can fix the cause and try again
-without patching anything a second time. Once an app is installed the card offers to open it,
-and an app that failed to patch gets a button for the full error, which is longer than the
-card can show.
+one. An installed app drops out of both: its card swaps the install button for **Open**, and
+**Install all** covers only what is left. After a long run that is how you tell at a glance
+what still needs doing.
+
+A failed install keeps its button, so you can fix the cause and try again without patching
+anything a second time. An app that failed to *patch* gets a button for the full error, which
+is longer than the card can show.
+
+**Export** saves the patched APK wherever you choose, without installing it. It is on every
+card that produced a file, before and after installing.
 
 The refresh button next to the title re-plans the apps that failed or were canceled.
 

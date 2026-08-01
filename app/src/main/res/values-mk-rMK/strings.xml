@@ -120,7 +120,6 @@
     <string name="home_app_info_no_saved_apk">Не се зачувани APK-а. За да закрпите ќе треба повторно да изберете APK датотека</string>
     <string name="home_version_requires_android">Бара Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Не е поддржано на овој уред</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; нема поддржани верзии за Android %2$d (API %3$d). Сите декларирани верзии бараат повисока верзија на Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Преземете го оригиналниот APK</string>
     <string name="home_download_instructions_steps_title">Инструкции:</string>
@@ -251,6 +250,7 @@
     <string name="header_creator_guide_themes_body">Повеќето апликации бараат посебни слики за светлата и темната тема. Некои апликации (како што е YouTube Music) користат само темна тема, па се прикажува само таа секција.</string>
     <string name="header_creator_guide_positioning_title">Поставување и скалирање</string>
     <string name="header_creator_guide_positioning_body">Искористете гестови со пинцети за зумирање и превлекување директно во преглед за да ја позиционирате и скалирате вашата слика. Возилата за менување се појавуваат кога сликата е близу центарот. Можете исто така да ја користите лизгалката подолу од прегледот.</string>
+    <!-- Batch patching -->
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Дали сте сигурни дека сакате да ја деинсталирате оваа апликација?</string>
     <string name="home_app_info_remove_app_warning">Ова ќе се избрише трајно:</string>
@@ -374,8 +374,6 @@
     <string name="failed_to_mount">Не успеа да се монтира: %s</string>
     <string name="failed_to_unmount">Не успеа да се размонтира: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Резултат %d</string>
-    <string name="mini_game_best">Најдобро %d</string>
     <string name="mini_game_new_record">Нов рекорд!</string>
     <string name="mini_game_game_over">Игра завршена</string>
     <string name="mini_game_try_again">Обидете се повторно</string>
@@ -799,8 +797,7 @@ morphe_header_custom_dark.png
 Дали сепак сакате да продолжите?"</string>
     <string name="download_update_confirmation">Преземи ажурирање?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d од %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_sources_desc">Управувајте со вашите извори на закрпи. Секој извор обезбедува закрпи што можат да се применат на вашите апликации.</string>
     <string name="onboarding_swipe_title">Гестови на лизгање</string>
     <string name="onboarding_swipe_desc">Повлечете надесно на картичката со апликација за да ги видите достапните закрпи. Повлечете налево за да ја скриете картичката од почетниот екран.</string>

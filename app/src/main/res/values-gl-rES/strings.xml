@@ -113,7 +113,6 @@
     <string name="home_app_info_no_saved_apk">Sen APK gardado. O parche precisa seleccionar o arquivo APK de novo</string>
     <string name="home_version_requires_android">Require Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Non compatible con este dispositivo</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; non ten versións compatibles para Android %2$d (API %3$d). Todas as versións declaradas requiren unha versión superior de Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descargar o APK orixinal</string>
     <string name="home_download_instructions_steps_title">Instrucións:</string>
@@ -203,6 +202,7 @@ Elixe outro APK</string>
     <string name="adaptive_icon_created_success">Icona adaptable creada con éxito</string>
     <string name="adaptive_icon_creation_failed">Non se puido crear a icona adaptable</string>
     <!-- Header Creator -->
+    <!-- Batch patching -->
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_delete_preservation_note">A súa selección de parches e opcións conservaránse para futuros parcheos</string>
     <string name="home_app_info_patches_name_default">Parches</string>
@@ -304,7 +304,7 @@ Elixe outro APK</string>
     <string name="import_">Importar</string>
     <string name="allow">Permitir</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->
     <!-- Tour prompt dialog shown after first successful patch install -->
 </resources>

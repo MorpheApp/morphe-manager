@@ -106,7 +106,6 @@
     <string name="home_app_info_no_saved_apk">APK پاشەکەوت نەکراوە. پینەکردن پێویستی بە دیاریکردنی فایلی APK دووبارە هەیە</string>
     <string name="home_version_requires_android">پێویستی بە ئەندرۆید %s+ هەیە</string>
     <string name="home_apk_no_compatible_versions_title">پشتگیری نەکراوە لەسەر ئەم ئامێرە</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; هیچ وەشانێکی پشتیوانیکراوی نیە بۆ ئەندرۆید.   %2$d (API %3$d). هەموو وەشانە ڕاگەیەندراوەکان پێویستیان بە وەشانێکی بەرزتری ئەندرۆید هەیە</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">APKی ڕەسەن دابەزێنە</string>
     <string name="home_download_instructions_steps_title">ڕێنماییەکان:</string>
@@ -209,6 +208,7 @@
     <string name="header_creator_no_image">هیچ وێنەیەک دیاری نەکراوە</string>
     <string name="header_creator_success">سەرپەڕە بە سەرکەوتوویی دروستکرا</string>
     <string name="header_creator_failed">شکستی هێنا لە دروستکردنی سەرپەڕە</string>
+    <!-- Batch patching -->
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_remove_app_warning">ئایا تۆ پشتڕاستیت کە دەتەوێت ئەم کاربەرنامەیە لابدەیت؟</string>
     <string name="home_app_info_delete_item_database">داخڵکردنی بنکەدراوە</string>
@@ -451,7 +451,7 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - System Tab - About Section -->
     <!-- Shared strings -->
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->
     <!-- Tour prompt dialog shown after first successful patch install -->
 </resources>

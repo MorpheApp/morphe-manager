@@ -87,6 +87,7 @@
     <string name="patch_option_instructions">સૂચનાઓ</string>
     <!-- Adaptive Icon Creator -->
     <!-- Header Creator -->
+    <!-- Batch patching -->
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_patches_name_default">પેચો</string>
     <!-- Home Screen - Root Mode -->
@@ -226,7 +227,7 @@ morphe_header_custom_dark.png
     <string name="search">શોધો</string>
     <string name="search_no_results">કોઈ પરિણામ મળ્યું નથી.</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->
     <!-- Tour prompt dialog shown after first successful patch install -->
 </resources>

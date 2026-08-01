@@ -22,8 +22,6 @@ import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
-import java.io.IOException
-import java.nio.file.Files
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
@@ -1026,15 +1024,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
             return@launch
         }
 
-        val exportSucceeded = runCatching {
-            withContext(Dispatchers.IO) {
-                app.contentResolver.openOutputStream(uri)
-                    ?.use { stream -> Files.copy(outputFile.toPath(), stream) }
-                    ?: throw IOException("Could not open output stream for export")
-            }
-        }.isSuccess
-
-        onComplete(exportSucceeded)
+        onComplete(app.exportApkTo(outputFile, uri))
     }
 
     /**

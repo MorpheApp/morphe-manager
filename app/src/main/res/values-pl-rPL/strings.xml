@@ -168,7 +168,7 @@
     <string name="home_app_info_no_saved_apk">Brak zapisanego pliku APK. Modyfikacja będzie wymagać ponownego wybrania pliku</string>
     <string name="home_version_requires_android">Wymaga Androida %s+</string>
     <string name="home_apk_no_compatible_versions_title">Niewspierane na tym urządzeniu</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nie ma wersji wspieranych z Androidem %2$d (API %3$d). Wszystkie zadeklarowane wersje wymagają nowszego systemu Android</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nie ma wersji wspieranych z Androidem %2$s (API %3$s). Wszystkie zadeklarowane wersje wymagają wyższej wersji Androida</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Pobierz oryginalny plik APK</string>
     <string name="home_download_instructions_steps_title">Instrukcja:</string>
@@ -244,7 +244,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="home_dialog_unsupported_version_compatible_versions">Zgodne wersje:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Niewspierana</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Kompilacja %d</string>
+    <string name="home_dialog_unsupported_version_build">Kompilacja %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">To inna kompilacja tej samej wersji. Te modyfikacje wymagają konkretnej kompilacji</string>
     <string name="home_dialog_wrong_package_title">Wybrano nieprawidłowy pakiet</string>
     <string name="home_dialog_wrong_package_description">Wybrany plik APK nie jest przeznaczony dla modyfikowanej aplikacji</string>
@@ -307,6 +307,41 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="header_creator_guide_themes_body">Większość aplikacji wymaga oddzielnych obrazów dla jasnego i ciemnego motywu. Niektóre aplikacje (np. YouTube Music) używają tylko ciemnego motywu, dlatego wyświetlana jest tylko ta sekcja.</string>
     <string name="header_creator_guide_positioning_title">Pozycjonowanie i skalowanie</string>
     <string name="header_creator_guide_positioning_body">Przesuwaj i powiększaj dwoma palcami bezpośrednio na podglądzie, aby dopasować i wykadrować obraz. Gdy obraz znajdzie się blisko środka, pojawią się linie pomocnicze. Możesz też użyć suwaka pod spodem.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Wybrana modyfikacja</string>
+    <string name="batch_patch_title">Modyfikowanie grupowe</string>
+    <string name="batch_patch_planning">Przygotowywanie kolejki…</string>
+    <string name="batch_patch_preparing_next">Przygotowywanie następnej aplikacji…</string>
+    <string name="batch_patch_progress_counter">Zmodyfikowano %1$s z %2$s</string>
+    <string name="batch_patch_summary">%1$s zmodyfikowano, %2$s nie powiodło się, %3$s pominięto</string>
+    <string name="batch_patch_saved_hint">Zmodyfikowane aplikacje zostały zapisane. Zainstaluj je teraz lub później z listy zmodyfikowanych plików APK w ustawieniach</string>
+    <string name="batch_patch_multiple_sources">Niektóre aplikacje łączą modyfikacje z więcej niż jednego źródła, co może powodować konflikty</string>
+    <string name="batch_patch_needs_apk">Brak dostępnego pliku APK, dołącz plik</string>
+    <string name="batch_patch_wrong_package">Dołączony plik należy do %s</string>
+    <string name="batch_patch_version_mismatch">Wersja %s nie jest obsługiwana przez modyfikacje</string>
+    <string name="batch_patch_source_saved">Zapisany oryginał</string>
+    <string name="batch_patch_source_installed">Zainstalowana aplikacja</string>
+    <string name="batch_patch_source_file">Dołączony plik</string>
+    <string name="batch_patch_source_unavailable">Nie udało się przygotować pliku APK</string>
+    <string name="batch_patch_attach_apk">Dołącz plik APK</string>
+    <string name="batch_patch_force_version">Zmodyfikuj mimo to</string>
+    <string name="batch_patch_edit_patches">Wybierz modyfikacje</string>
+    <string name="batch_patch_state_no_apk">Brak pliku APK</string>
+    <string name="batch_patch_state_no_patches">Brak modyfikacji</string>
+    <string name="batch_patch_policy_install">Zainstaluj po zakończeniu</string>
+    <string name="batch_patch_policy_install_description">Instaluje każdą zmodyfikowaną aplikację zaraz po zakończeniu kolejki. Wyłączenie zachowa pliki APK na później</string>
+    <string name="batch_patch_start">Rozpocznij modyfikowanie</string>
+    <string name="batch_patch_stop_title">Zatrzymać modyfikowanie grupowe?</string>
+    <string name="batch_patch_stop_description">Aktualnie modyfikowana aplikacja i wszystkie pozostałe w kolejce zostaną anulowane</string>
+    <string name="batch_patch_install_all">Zainstaluj wszystkie</string>
+    <string name="batch_patch_install_failed">Instalacja nie powiodła się</string>
+    <string name="batch_patch_in_progress">Modyfikowanie grupowe już trwa</string>
+    <string name="batch_patch_nothing_outdated">Wszystkie zmodyfikowane aplikacje są aktualne</string>
+    <string name="shortcut_repatch_short">Zmodyfikuj ponownie</string>
+    <string name="shortcut_repatch_long">Zmodyfikuj ponownie nieaktualne aplikacje</string>
+    <string name="shortcut_check_updates_short">Sprawdź aktualizacje</string>
+    <string name="shortcut_check_updates_long">Sprawdź aktualizacje modyfikacji</string>
+    <string name="shortcut_patch_app">Zmodyfikuj %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Czy na pewno chcesz odinstalować tę aplikację?</string>
     <string name="batch_uninstall_confirm_body">Wybrane aplikacje zostaną trwale usunięte z twojego urządzenia</string>
@@ -453,8 +488,8 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="failed_to_mount">Nie udało się zamontować: %s</string>
     <string name="failed_to_unmount">Nie udało się odmontować: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Wynik %d</string>
-    <string name="mini_game_best">Rekord %d</string>
+    <string name="mini_game_score">Wynik %s</string>
+    <string name="mini_game_best">Rekord %s</string>
     <string name="mini_game_new_record">Nowy rekord!</string>
     <string name="mini_game_game_over">Koniec gry</string>
     <string name="mini_game_try_again">Spróbuj ponownie</string>
@@ -559,7 +594,28 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_advanced_update_interval_monthly">Raz w miesiącu</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Częstotliwość sprawdzania w tle</string>
     <string name="settings_advanced_update_interval_battery_warning">Sprawdzanie w tle może nie działać stabilnie na niektórych urządzeniach. Producenci tacy jak Xiaomi, Huawei, Samsung czy OnePlus często agresywnie ograniczają procesy w tle, aby oszczędzać baterię</string>
+    <string name="settings_advanced_auto_patch">Automatyczne ponowne modyfikowanie</string>
+    <string name="settings_advanced_auto_patch_description">Ponownie modyfikuje zainstalowane aplikacje w tle, gdy zmienią się ich modyfikacje. Obejmuje tylko aplikacje z zapisanym oryginalnym plikiem APK</string>
+    <string name="settings_advanced_auto_patch_interval">Częstotliwość ponownego modyfikowania</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Jak często zmodyfikowane aplikacje są przebudowywane</string>
+    <string name="settings_advanced_auto_patch_charging">Tylko podczas ładowania</string>
+    <string name="settings_advanced_auto_patch_charging_description">Modyfikowanie mocno obciąża procesor i pamięć, więc czeka na podłączenie ładowarki</string>
+    <string name="settings_advanced_auto_patch_install">Instaluj automatycznie</string>
+    <string name="settings_advanced_auto_patch_install_description">Wymaga Shizuku jako instalatora. W przypadku innego instalatora zmodyfikowane aplikacje są tylko zapisywane</string>
+    <string name="settings_advanced_external_batch_patch">Zezwalaj na zewnętrzne wyzwalacze</string>
+    <string name="settings_advanced_external_batch_patch_description">Pozwala aplikacjom do automatyzacji uruchamiać modyfikowanie grupowe za pomocą intencji. Każde żądanie jest potwierdzane przed uruchomieniem czegokolwiek</string>
+    <string name="external_batch_patch_title">Rozpocząć modyfikowanie grupowe?</string>
+    <string name="external_batch_patch_description">%s chce, aby Morphe zmodyfikował i zainstalował aplikacje</string>
+    <string name="external_batch_patch_trust_caller">Zawsze zezwalaj tej aplikacji</string>
+    <string name="external_batch_patch_unknown_caller">Nieznana aplikacja</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Automatyczne ponowne modyfikowanie zakończone</string>
+    <string name="notification_auto_patch_running_title">Ponownie modyfikowanie aplikacji</string>
+    <string name="notification_auto_patch_blocked_title">Automatyczne ponowne modyfikowanie nie zostało uruchomione</string>
+    <string name="notification_auto_patch_blocked_battery">Wyłącz optymalizację baterii dla Morphe, w przeciwnym razie Android zatrzyma proces przed jego rozpoczęciem</string>
+    <string name="notification_auto_patch_blocked_foreground">Android nie pozwolił na rozpoczęcie modyfikowania w tle. Otwórz Morphe i uruchom modyfikowanie z poziomu aplikacji</string>
+    <string name="notification_channel_auto_patch">Automatyczne ponowne modyfikowanie</string>
+    <string name="notification_channel_auto_patch_description">Ciche powiadomienia o postępie i wynikach zaplanowanego ponownego modyfikowania</string>
     <string name="notification_manager_update_title">Dostępna aktualizacja Morphe</string>
     <string name="notification_bundle_update_title">Dostępne nowe modyfikacje</string>
     <string name="notification_update_text">Wersja %s jest gotowa do pobrania</string>
@@ -745,7 +801,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_shizuku_error_downgrade">Android zablokował tę akcję, ponieważ oznaczałaby ona instalację starszej wersji aplikacji</string>
     <string name="installer_shizuku_error_signature">Android zablokował tę akcję, ponieważ zainstalowana aplikacja ma inny podpis</string>
     <string name="installer_shizuku_error_invalid_apk">Android nie mógł odczytać tego pliku APK</string>
-    <string name="installer_shizuku_error_user_profile">Android zablokował tę akcję dla obecnego użytkownika lub profilu służbowego</string>
+    <string name="installer_shizuku_error_user_profile">System zablokował tę instalację. Na urządzeniach Xiaomi i podobnych włącz \"Instalowanie przez USB\" w opcjach programisty. Na profilu służbowym instalacje mogą być ograniczone przez zasady</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optymalizacja baterii</string>
     <string name="settings_system_battery_optimization_description">Utrzymuje działanie modyfikatora, gdy aplikacja jest zminimalizowana</string>
@@ -928,6 +984,9 @@ Wymagane są następujące wymiary obrazów:
     <string name="confirm">Potwierdź</string>
     <string name="warning">Ostrzeżenie</string>
     <string name="error_">Błąd</string>
+    <string name="failed">Nie powiodło się</string>
+    <string name="cancelled">Anulowano</string>
+    <string name="ready">Gotowe</string>
     <string name="retry">Spróbuj ponownie</string>
     <string name="refresh">Odśwież</string>
     <string name="add">Dodaj</string>
@@ -940,6 +999,9 @@ Wymagane są następujące wymiary obrazów:
     <string name="delete">Usuń</string>
     <string name="delete_all">Usuń wszystko</string>
     <string name="remove">Usuń</string>
+    <string name="exclude">Wyklucz</string>
+    <string name="excluded">Wykluczono</string>
+    <string name="include">Uwzględnij</string>
     <string name="disable">Wyłącz</string>
     <string name="enable">Włącz</string>
     <string name="loading">Wczytywanie…</string>
@@ -966,9 +1028,10 @@ Wymagane są następujące wymiary obrazów:
     <string name="reorder_done">Zapisano kolejność</string>
     <string name="reset_order">Zresetuj kolejność</string>
     <string name="reset_order_done">Zresetowano kolejność</string>
+    <string name="accessibility_select_app">Wybierz aplikację</string>
     <string name="accessibility_move_up">Przenieś w górę</string>
     <string name="accessibility_move_down">Przenieś w dół</string>
-    <string name="accessibility_app_moved_announcement">Przeniesiono %1$s na pozycję %2$d z %3$d</string>
+    <string name="accessibility_app_moved_announcement">Przeniesiono %1$s na pozycję %2$s z %3$s</string>
     <string name="accessibility_scroll_to_top">Przewiń do góry listy</string>
     <string name="rename">Zmień nazwę</string>
     <string name="import_">Importuj</string>
@@ -984,6 +1047,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="continue_">Kontynuuj</string>
     <string name="version">Wersja</string>
     <string name="patch">Modyfikuj</string>
+    <string name="patching">Modyfikowanie</string>
     <string name="repatch">Modyfikuj ponownie</string>
     <string name="open">Otwórz</string>
     <string name="mount">Zamontuj</string>
@@ -1034,8 +1098,8 @@ Wymagane są następujące wymiary obrazów:
 Czy mimo to chcesz kontynuować?"</string>
     <string name="download_update_confirmation">Pobrać aktualizację?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d z %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s z %2$s</string>
     <string name="onboarding_sources_desc">Zarządzaj źródłami. Każde z nich oferuje modyfikacje, które możesz zastosować w swoich aplikacjach</string>
     <string name="onboarding_swipe_title">Gesty przesunięcia</string>
     <string name="onboarding_swipe_desc">Przesuń kartę aplikacji w prawo, aby zobaczyć dostępne modyfikacje. Przesuń w lewo, aby ukryć ją z ekranu głównego</string>

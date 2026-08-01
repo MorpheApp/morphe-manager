@@ -131,7 +131,6 @@
     <string name="home_app_info_no_saved_apk">Tiada APK tersimpan. Tampalan akan memerlukan fail APK yang dipilih semula</string>
     <string name="home_version_requires_android">Memerlukan Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Tidak disokong pada peranti ini</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; tidak mempunyai versi yang disokong untuk Android %2$d (API %3$d). Semua versi yang dinyatakan memerlukan versi Android yang lebih tinggi</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Muat turun APK asal</string>
     <string name="home_download_instructions_steps_title">Arahan:</string>
@@ -206,7 +205,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versi-versi bersesuaian:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Tidak disokong</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Binaan %d</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Ini ialah binaan yang berbeza bagi versi yang sama. Tampalan memerlukan binaan tertentu</string>
     <string name="home_dialog_wrong_package_title">Pakej yang dipilih salah</string>
     <string name="home_dialog_wrong_package_description">APK yang dipilih bukan untuk aplikasi yang anda ingin tampal</string>
@@ -263,6 +261,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="header_creator_guide_themes_title">Tema cerah dan gelap</string>
     <string name="header_creator_guide_themes_body">Kebanyakan aplikasi memerlukan imej berasingan untuk tema cerah dan gelap. Sesetengah aplikasi (seperti YouTube Music) hanya menggunakan tema gelap, jadi hanya bahagian itu yang ditunjukkan.</string>
     <string name="header_creator_guide_positioning_title">Kedudukan dan penskalaan</string>
+    <!-- Batch patching -->
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Adakah anda pasti mahu menyahpasang aplikasi ini?</string>
     <string name="home_app_info_remove_app_warning">Ini akan dipadam secara kekal:</string>
@@ -381,8 +380,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="failed_to_mount">Gagal untuk ditunggang: %s</string>
     <string name="failed_to_unmount">Gagal untuk nyah-tunggang %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Markah %d</string>
-    <string name="mini_game_best">Terbaik %d</string>
     <string name="mini_game_new_record">Rekod baharu!</string>
     <string name="mini_game_game_over">Permainan Tamat</string>
     <string name="mini_game_try_again">Cuba Lagi</string>
@@ -717,7 +714,7 @@ Dimensi gambar mestilah seperti berikut:
 Adakah anda masih ingin meneruskan?"</string>
     <string name="download_update_confirmation">Mukim kemas kini?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="onboarding_restart_desc">Ikuti lawatan terpandu bagi ciri-ciri utama Morphe\'s</string>

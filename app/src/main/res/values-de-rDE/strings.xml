@@ -168,7 +168,7 @@
     <string name="home_app_info_no_saved_apk">Keine gespeicherte APK. Das Patchen erfordert die erneute Auswahl der APK-Datei</string>
     <string name="home_version_requires_android">Benötigt Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Wird auf diesem Gerät nicht unterstützt</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; hat keine unterstützten Versionen für Android %2$d (API %3$d). Alle deklarierten Versionen erfordern eine höhere Android-Version</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; hat keine unterstützten Versionen für Android %2$s (API %3$s). Alle deklarierten Versionen erfordern eine höhere Android-Version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Laden Sie die originale APK herunter </string>
     <string name="home_download_instructions_steps_title">Anleitung:</string>
@@ -244,7 +244,7 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatible Versionen:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nicht unterstützt</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build">Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Dies ist ein anderer Build derselben Version. Die Patches erfordern einen bestimmten Build</string>
     <string name="home_dialog_wrong_package_title">Falsches Paket ausgewählt</string>
     <string name="home_dialog_wrong_package_description">Die ausgewählte APK ist nicht für die App bestimmt, die du patchen wolltest</string>
@@ -307,6 +307,41 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="header_creator_guide_themes_body">Die meisten Apps benötigen separate Bilder für die hellen und dunklen Designs. Einige Apps (wie YouTube Music) verwenden nur das dunkle Design, daher wird nur dieser Abschnitt angezeigt.</string>
     <string name="header_creator_guide_positioning_title">Positionierung und Skalierung</string>
     <string name="header_creator_guide_positioning_body">Verwenden Sie Pinch-to-Zoom- und Drag-Gesten direkt in der Vorschau, um Ihr Bild zu positionieren und zu skalieren. Wenn das Bild in der Nähe der Mitte ist, erscheinen Führungslinien. Sie können auch den Schieberegler unterhalb der Vorschau verwenden.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Ausgewählte Patches anwenden</string>
+    <string name="batch_patch_title">Patches im Batch anwenden</string>
+    <string name="batch_patch_planning">Warteschlange wird vorbereitet…</string>
+    <string name="batch_patch_preparing_next">Nächste App wird vorbereitet…</string>
+    <string name="batch_patch_progress_counter">Gepatchter %1$s von %2$s</string>
+    <string name="batch_patch_summary">%1$s gepatcht, %2$s fehlgeschlagen, %3$s übersprungen</string>
+    <string name="batch_patch_saved_hint">Die gepatchten Apps sind gespeichert. Installiere sie jetzt oder später aus der Liste der gepatchten APKs in den Einstellungen</string>
+    <string name="batch_patch_multiple_sources">Einige Apps kombinieren Patches aus mehr als einer Quelle, was zu Konflikten führen kann</string>
+    <string name="batch_patch_needs_apk">Keine APK verfügbar, hänge eine Datei an</string>
+    <string name="batch_patch_wrong_package">Die angehängte Datei gehört zu %s</string>
+    <string name="batch_patch_version_mismatch">Version %s wird von den Patches nicht unterstützt</string>
+    <string name="batch_patch_source_saved">Original wurde gespeichert</string>
+    <string name="batch_patch_source_installed">Installierte App verwenden</string>
+    <string name="batch_patch_source_file">Angehängte Datei</string>
+    <string name="batch_patch_source_unavailable">Die APK konnte nicht vorbereitet werden</string>
+    <string name="batch_patch_attach_apk">APK anhängen</string>
+    <string name="batch_patch_force_version">Trotzdem fortfahren</string>
+    <string name="batch_patch_edit_patches">Patches auswählen</string>
+    <string name="batch_patch_state_no_apk">Keine APK</string>
+    <string name="batch_patch_state_no_patches">Keine Patches</string>
+    <string name="batch_patch_policy_install">Beim Fertigstellen installieren</string>
+    <string name="batch_patch_policy_install_description">Installiert jede gepatchte App direkt nach Abschluss der Warteschlange. Aus deaktiviert behält die APKs für später bei</string>
+    <string name="batch_patch_start">Mit dem Patchen beginnen</string>
+    <string name="batch_patch_stop_title">Batch-Patchen anhalten?</string>
+    <string name="batch_patch_stop_description">Die App, die gerade gepatcht wird, und alles, was noch in der Warteschlange steht, wird abgebrochen</string>
+    <string name="batch_patch_install_all">Alle installieren</string>
+    <string name="batch_patch_install_failed">Installation fehlgeschlagen</string>
+    <string name="batch_patch_in_progress">Batch-Patchen ist bereits aktiv</string>
+    <string name="batch_patch_nothing_outdated">Alle gepatchten Apps sind auf dem neuesten Stand</string>
+    <string name="shortcut_repatch_short">Neu patchen</string>
+    <string name="shortcut_repatch_long">Veraltete Apps neu patchen</string>
+    <string name="shortcut_check_updates_short">Auf Updates prüfen</string>
+    <string name="shortcut_check_updates_long">Nach Patch-Updates suchen</string>
+    <string name="shortcut_patch_app">%s patchen</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Sind Sie sicher, dass Sie diese App deinstallieren möchten?</string>
     <string name="batch_uninstall_confirm_body">Die ausgewählten Apps werden dauerhaft von Ihrem Gerät entfernt.</string>
@@ -454,8 +489,8 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="failed_to_mount">Mounten fehlgeschlagen: %s</string>
     <string name="failed_to_unmount">Unmounten fehlgeschlagen: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Punktzahl %d</string>
-    <string name="mini_game_best">Beste(r) %d</string>
+    <string name="mini_game_score">Punktzahl %s</string>
+    <string name="mini_game_best">Beste(r) %s</string>
     <string name="mini_game_new_record">Neuer Rekord!</string>
     <string name="mini_game_game_over">Spiel vorbei</string>
     <string name="mini_game_try_again">Erneut versuchen</string>
@@ -560,7 +595,28 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="settings_advanced_update_interval_monthly">Monatlich</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Häufigkeit der Update-Suche im Hintergrund</string>
     <string name="settings_advanced_update_interval_battery_warning">Die Suche nach Updates im Hintergrund funktioniert möglicherweise auf einigen Geräten nicht zuverlässig. Hersteller wie Xiaomi, Huawei, Samsung und OnePlus beschränken oft aggressiv Hintergrundprozesse, um Batterieleistung zu sparen</string>
+    <string name="settings_advanced_auto_patch">Automatisches Neu-Patchen</string>
+    <string name="settings_advanced_auto_patch_description">Patched installierte Apps im Hintergrund neu, wenn sich ihre Patches ändern. Nur Apps mit einer gespeicherten ursprünglichen APK werden berücksichtigt</string>
+    <string name="settings_advanced_auto_patch_interval">Häufigkeit des Neu-Patchings</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Wie oft gepatchte Apps neu erstellt werden</string>
+    <string name="settings_advanced_auto_patch_charging">Nur während des Ladevorgangs</string>
+    <string name="settings_advanced_auto_patch_charging_description">Das Patchen beansprucht viel CPU und Speicher, daher wird gewartet, bis ein Ladegerät angeschlossen ist</string>
+    <string name="settings_advanced_auto_patch_install">Automatisch installieren</string>
+    <string name="settings_advanced_auto_patch_install_description">Benötigt Shizuku als Installer. Mit jedem anderen Installer werden die gepatchten Apps nur gespeichert</string>
+    <string name="settings_advanced_external_batch_patch">Externe Trigger zulassen</string>
+    <string name="settings_advanced_external_batch_patch_description">Ermöglicht es Automatisierungs-Apps, das Batch-Patchen mit einer Absicht zu starten. Jede Anfrage wird vor der Ausführung bestätigt</string>
+    <string name="external_batch_patch_title">Batch-Patchen starten?</string>
+    <string name="external_batch_patch_description">%s möchte Morphe Apps patchen und installieren</string>
+    <string name="external_batch_patch_trust_caller">Immer diese App zulassen</string>
+    <string name="external_batch_patch_unknown_caller">Eine unbekannte App</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Automatisches Neu-Patchen abgeschlossen</string>
+    <string name="notification_auto_patch_running_title">Apps werden neu gepatcht</string>
+    <string name="notification_auto_patch_blocked_title">Automatisches Neu-Patchen wurde nicht ausgeführt</string>
+    <string name="notification_auto_patch_blocked_battery">Befreie Morphe von der Batteriestoppfunktion, andernfalls stoppt Android die Ausführung, bevor sie beginnt</string>
+    <string name="notification_auto_patch_blocked_foreground">Android hat das Starten des Patchvorgangs im Hintergrund nicht zugelassen. Öffne Morphe und patche die App</string>
+    <string name="notification_channel_auto_patch">Automatisches Neu-Patchen</string>
+    <string name="notification_channel_auto_patch_description">Leise Fortschritts- und Ergebnismeldungen für das geplante Neu-Patchen</string>
     <string name="notification_manager_update_title">Morphe-Update verfügbar</string>
     <string name="notification_bundle_update_title">Neue Patches verfügbar</string>
     <string name="notification_update_text">Version %s ist zum Herunterladen bereit</string>
@@ -746,7 +802,7 @@ Details: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android hat dies blockiert, da es sich um ein Downgrade der installierten App handeln würde.</string>
     <string name="installer_shizuku_error_signature">Android hat dies blockiert, da die installierte App eine andere Signatur aufweist.</string>
     <string name="installer_shizuku_error_invalid_apk">Android konnte diese APK nicht lesen.</string>
-    <string name="installer_shizuku_error_user_profile">Android hat dies für den aktuellen Benutzer oder das Arbeitsprofil blockiert.</string>
+    <string name="installer_shizuku_error_user_profile">Das System hat diese Installation blockiert. Bei Xiaomi und ähnlichen Geräten aktiviere \"Installieren über USB\" in den Entwickleroptionen. In einem Arbeitsprofil können Installationen durch Richtlinien eingeschränkt werden</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Hintergrundoptimierung</string>
     <string name="settings_system_battery_optimization_description">Behält den Patcher im Betrieb, wenn die App minimiert wird</string>
@@ -929,6 +985,9 @@ Details: %2$s"</string>
     <string name="confirm">Bestätigen</string>
     <string name="warning">Warnung</string>
     <string name="error_">Fehler</string>
+    <string name="failed">Fehlgeschlagen</string>
+    <string name="cancelled">Abgebrochen</string>
+    <string name="ready">Bereit</string>
     <string name="retry">Erneut versuchen</string>
     <string name="refresh">Aktualisieren</string>
     <string name="add">Hinzufügen</string>
@@ -941,6 +1000,9 @@ Details: %2$s"</string>
     <string name="delete">Löschen</string>
     <string name="delete_all">Alle löschen</string>
     <string name="remove">Entfernen</string>
+    <string name="exclude">Ausschließen</string>
+    <string name="excluded">Ausgeschlossen</string>
+    <string name="include">Einschließen</string>
     <string name="disable">Deaktivieren</string>
     <string name="enable">Aktivieren</string>
     <string name="loading">Lädt…</string>
@@ -967,9 +1029,10 @@ Details: %2$s"</string>
     <string name="reorder_done">Reihenfolge gespeichert</string>
     <string name="reset_order">Reihenfolge zurücksetzen</string>
     <string name="reset_order_done">Bestellung zurückgesetzt</string>
+    <string name="accessibility_select_app">App auswählen</string>
     <string name="accessibility_move_up">Nach oben verschieben</string>
     <string name="accessibility_move_down">Nach unten verschieben</string>
-    <string name="accessibility_app_moved_announcement">%1$s wurde auf Position %2$d von %3$d verschoben</string>
+    <string name="accessibility_app_moved_announcement">%1$s wurde an Position %2$s von %3$s verschoben</string>
     <string name="accessibility_scroll_to_top">Zum Anfang der Liste scrollen</string>
     <string name="rename">Umbenennen</string>
     <string name="import_">Importieren</string>
@@ -985,6 +1048,7 @@ Details: %2$s"</string>
     <string name="continue_">Weiter</string>
     <string name="version">Version</string>
     <string name="patch">Patchen</string>
+    <string name="patching">Patchen</string>
     <string name="repatch">Repatchen</string>
     <string name="open">Öffnen</string>
     <string name="mount">Mounten</string>
@@ -1035,8 +1099,8 @@ Details: %2$s"</string>
 Wollen Sie trotzdem fortfahren?"</string>
     <string name="download_update_confirmation">Update herunterladen?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d von %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s von %2$s</string>
     <string name="onboarding_sources_desc">Verwalten Sie Ihre Patch-Quellen. Jede Quelle stellt Patches bereit, die auf Ihre Apps angewendet werden können</string>
     <string name="onboarding_swipe_title">Wischgesten</string>
     <string name="onboarding_swipe_desc">Wischen Sie mit dem Finger nach rechts über eine App-Karte, um die verfügbaren Patches anzuzeigen. Wischen Sie nach links, um die Karte vom Startbildschirm auszublenden</string>

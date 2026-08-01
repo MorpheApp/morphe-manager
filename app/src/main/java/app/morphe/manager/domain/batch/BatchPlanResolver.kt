@@ -8,6 +8,7 @@ package app.morphe.manager.domain.batch
 import android.content.pm.PackageInfo
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
+import app.morphe.manager.domain.bundles.AppVersionCatalog
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
@@ -20,6 +21,7 @@ import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelect
 import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.util.AppDataResolver
+import app.morphe.patcher.patch.AppTarget
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PM
@@ -54,6 +56,7 @@ class BatchPlanResolver(
     private val prefs: PreferencesManager,
     private val fs: Filesystem,
     private val appDataResolver: AppDataResolver,
+    private val versionCatalog: AppVersionCatalog,
     private val pm: PM
 ) {
     /**
@@ -66,9 +69,12 @@ class BatchPlanResolver(
         packageNames: List<String>,
         useMount: Boolean
     ): List<BatchPatchItem> = coroutineScope {
+        // Built once for the whole plan: it is derived from every patch of every source, and
+        // resolving it per app would repeat that work for each one of them
+        val recommended = versionCatalog.recommendedVersions.first()
         packageNames
             .distinct()
-            .map { packageName -> async { resolve(packageName, useMount) } }
+            .map { packageName -> async { resolve(packageName, useMount, recommended = recommended) } }
             .awaitAll()
     }
 
@@ -79,9 +85,13 @@ class BatchPlanResolver(
     suspend fun resolve(
         packageName: String,
         useMount: Boolean,
-        attachedFile: File? = null
+        attachedFile: File? = null,
+        recommended: Map<String, AppTarget>? = null,
+        allowIncompatible: Boolean = false
     ): BatchPatchItem = withContext(Dispatchers.IO) {
         val appName = resolveAppName(packageName)
+        val suggested = recommended?.get(packageName)?.version
+            ?: versionCatalog.recommendedVersion(packageName)
 
         val source = try {
             attachedFile?.let { readAttachedFile(it) } ?: findSource(packageName)
@@ -98,6 +108,7 @@ class BatchPlanResolver(
                 selection = emptyMap(),
                 options = emptyMap(),
                 bundles = emptyList(),
+                suggestedVersion = suggested,
                 state = BatchItemState.NEEDS_APK
             )
         }
@@ -112,13 +123,14 @@ class BatchPlanResolver(
                     selection = emptyMap(),
                     options = emptyMap(),
                     bundles = emptyList(),
+                    suggestedVersion = suggested,
                     state = BatchItemState.NEEDS_APK,
                     message = actualPackage
                 )
             }
         }
 
-        buildItem(packageName, appName, source, useMount)
+        buildItem(packageName, appName, source, useMount, suggested, allowIncompatible)
     }
 
     /**
@@ -153,30 +165,42 @@ class BatchPlanResolver(
      * force-version choice.
      */
     suspend fun reattach(item: BatchPatchItem, file: File, useMount: Boolean): BatchPatchItem =
-        resolve(item.packageName, useMount, attachedFile = file)
-            .copy(forceVersionMismatch = item.forceVersionMismatch)
-            .let { resolved ->
-                // A forced item stays runnable after swapping its APK, so the user does not
-                // have to confirm the same version warning twice
-                if (resolved.state == BatchItemState.VERSION_MISMATCH && resolved.forceVersionMismatch) {
-                    resolved.copy(state = BatchItemState.READY)
-                } else {
-                    resolved
-                }
-            }
+        resolve(
+            packageName = item.packageName,
+            useMount = useMount,
+            attachedFile = file,
+            // A forced item stays runnable after swapping its APK, so the user does not have
+            // to confirm the same version warning twice, and keeps the patches that came with it
+            allowIncompatible = item.forceVersionMismatch
+        ).copy(forceVersionMismatch = item.forceVersionMismatch)
+
+    /**
+     * Re-resolves an app the user accepted an unsupported version for, this time keeping the
+     * patches that declare a different version.
+     */
+    suspend fun forceVersion(item: BatchPatchItem, useMount: Boolean): BatchPatchItem =
+        resolve(
+            packageName = item.packageName,
+            useMount = useMount,
+            attachedFile = (item.source as? BatchApkSource.UserFile)?.file,
+            allowIncompatible = true
+        ).copy(forceVersionMismatch = true)
 
     private suspend fun buildItem(
         packageName: String,
         appName: String,
         source: BatchApkSource,
-        useMount: Boolean
+        useMount: Boolean,
+        suggested: String?,
+        forceIncompatible: Boolean
     ): BatchPatchItem {
         val bundles = patchBundleRepository
             .scopedBundleInfoFlow(packageName, source.version, source.versionCode)
             .first()
             .filter { it.enabled }
 
-        val allowIncompatible = prefs.disablePatchVersionCompatCheck.get()
+        // Forced per app from the preflight screen, or globally by the compatibility setting
+        val allowIncompatible = forceIncompatible || prefs.disablePatchVersionCompatCheck.get()
         val hasCompatible = bundles.any { it.compatible.isNotEmpty() }
         val hasIncompatible = bundles.any { it.incompatible.isNotEmpty() }
         val hasUniversal = bundles.any { it.universal.isNotEmpty() }
@@ -214,6 +238,7 @@ class BatchPlanResolver(
             selection = selection,
             options = options,
             bundles = contributing.map { it.toRef() },
+            suggestedVersion = suggested,
             state = if (versionMismatch) BatchItemState.VERSION_MISMATCH else BatchItemState.READY
         )
     }
@@ -221,6 +246,7 @@ class BatchPlanResolver(
     private fun PatchBundleInfo.Scoped.toRef() = BatchBundleRef(
         uid = uid,
         name = name,
+        version = version,
         patchNames = patches.mapTo(mutableSetOf()) { it.name }
     )
 

@@ -133,7 +133,6 @@
     <string name="home_app_info_no_saved_apk">Nėra išsaugoto APK. Siekiant pataisyti, reikės dar karta pasirinkti APK failą</string>
     <string name="home_version_requires_android">Privaloma Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nesuportuota ant sio įrenginio</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; neturi palaikytų versijų ant Android %2$d (API %3$d). Visos deklaruotos versijos reikalauja aukštesnės Android versijos</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Parsisiųskite originalų APK</string>
     <string name="home_download_instructions_steps_title">Instrukcijos:</string>
@@ -207,7 +206,6 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="home_dialog_unsupported_version_compatible_versions">Suderinamos versijos:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nepalaikomas</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Versija %d</string>
     <string name="home_dialog_wrong_package_title">Pasirinktas netinkamas failas</string>
     <string name="home_dialog_wrong_package_description">Pasirinktas APK failas nėra skirtas jums reikiamo programavimo apipavidalinimui</string>
     <string name="home_dialog_expected_package">Lauktas paketas:</string>
@@ -264,6 +262,7 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="header_creator_guide_image_body">Naudokite bet kokį paveikslėlio failą (PNG arba JPEG). Geriausiam rezultatui pasiekiamas, naudokite plačio formato paveikslėlį, kurio santykis apytiksliai 2,7:1. PNG failai su skaidriais fanais natūraliai susisiekia su programos tema.</string>
     <string name="header_creator_guide_themes_title">Šviesios ir tamsios temos</string>
     <string name="header_creator_guide_positioning_title">Padėtis ir mastelis</string>
+    <!-- Batch patching -->
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Ar tikrai norite ištrinti šią programą?</string>
     <string name="home_app_info_remove_app_warning">Tai visam laikui ištryns:</string>
@@ -525,7 +524,7 @@ Pasirinktinai, nuoroda gali turėti pranešimo piktogramą viename iš išvardin
     <!-- Shared strings -->
     <string name="search">Ieškoti</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->
     <!-- Tour prompt dialog shown after first successful patch install -->
 </resources>

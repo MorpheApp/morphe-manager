@@ -19,6 +19,7 @@ import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.repository.InstalledAppRepository
+import app.morphe.manager.domain.manager.DownloadUrlResolver
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.patcher.patch.PatchBundleInfo
@@ -125,6 +126,7 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
     private val installedAppRepository: InstalledAppRepository by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
     private val patchSelectionRepository: PatchSelectionRepository by inject()
+    private val downloadUrlResolver: DownloadUrlResolver by inject()
 
     val state = coordinator.state
 
@@ -149,6 +151,59 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
 
     fun requestAttach(packageName: String) {
         attachTarget = packageName
+    }
+
+    /**
+     * App the download instructions are open for, with the best URL known so far.
+     *
+     * The API redirect takes a moment, so the unresolved search URL is published first and
+     * replaced once it resolves. That way the dialog is never waiting on the network.
+     */
+    data class ApkSearch(val item: BatchPatchItem, val url: String)
+
+    var apkSearch: ApkSearch? by mutableStateOf(null)
+        private set
+
+    fun beginApkSearch(item: BatchPatchItem) {
+        apkSearch = ApkSearch(
+            item = item,
+            url = downloadUrlResolver.apiSearchUrl(item.packageName, item.suggestedVersion)
+        )
+        viewModelScope.launch {
+            val resolved = withContext(Dispatchers.IO) {
+                downloadUrlResolver.resolve(item.packageName, item.suggestedVersion)
+            }
+            apkSearch = apkSearch?.takeIf { it.item.packageName == item.packageName }?.copy(url = resolved)
+        }
+    }
+
+    fun cancelApkSearch() {
+        apkSearch = null
+    }
+
+    /** App waiting for its downloaded file, null when nothing was sent to the browser. */
+    var attachPrompt: BatchPatchItem? by mutableStateOf(null)
+        private set
+
+    /**
+     * Hands the download page to the browser and leaves a prompt behind.
+     *
+     * The file picker deliberately waits for that prompt rather than opening straight away:
+     * the browser is coming to the front at this moment, and Android does not let a
+     * backgrounded app reliably start anything on top of it.
+     */
+    fun confirmApkSearch(openUrl: (String) -> Boolean) {
+        val search = apkSearch ?: return
+        apkSearch = null
+        if (openUrl(search.url)) {
+            attachPrompt = search.item
+        } else {
+            app.toast(app.getString(R.string.sources_management_failed_to_open_url))
+        }
+    }
+
+    fun dismissAttachPrompt() {
+        attachPrompt = null
     }
 
     /** Patch selection editor for one queued app, null when none is open. */
@@ -241,7 +296,14 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
 
     fun toggleExcluded(packageName: String) = coordinator.toggleExcluded(packageName)
 
-    fun forceVersion(packageName: String) = coordinator.forceVersion(packageName)
+    /**
+     * Accepts an unsupported version. Confirmed with a toast because the card only swaps a
+     * badge, which does not say what was just taken on.
+     */
+    fun forceVersion(packageName: String) {
+        coordinator.forceVersion(packageName)
+        app.toast(app.getString(R.string.batch_patch_force_version_done))
+    }
 
     fun setPolicy(policy: BatchInstallPolicy) = coordinator.setPolicy(policy)
 

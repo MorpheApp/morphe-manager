@@ -2,6 +2,7 @@ package app.morphe.manager.domain.bundles
 
 import androidx.compose.runtime.Stable
 import app.morphe.manager.patcher.patch.PatchBundle
+import app.morphe.manager.util.isPatcherOutdated
 import java.io.File
 import java.io.FilterOutputStream
 import java.io.IOException
@@ -35,10 +36,31 @@ sealed class PatchBundleSource(
     }
 
     val patchBundle get() = (state as? State.Available)?.bundle
-    val version get() = patchBundle?.manifestAttributes?.version
-    val isNameOutOfDate get() = patchBundle?.manifestAttributes?.name?.let { it != name } == true
+
+    /**
+     * Manifest of the installed patches.jar. Read straight from the file instead of going through
+     * [patchBundle] so name, version and patcher requirements stay visible when the patches
+     * themselves cannot be loaded, which is exactly the case a patcher mismatch produces.
+     */
+    private val manifestAttributes by lazy {
+        (patchBundle ?: patchesFile.takeIf { it.exists() }?.let { PatchBundle(it.absolutePath) })
+            ?.manifestAttributes
+    }
+
+    val version get() = manifestAttributes?.version
+    val isNameOutOfDate get() = manifestAttributes?.name?.let { it != name } == true
     val error get() = (state as? State.Failed)?.throwable
     val displayTitle get() = displayName?.takeUnless { it.isBlank() } ?: name
+
+    /** Patcher version this bundle was built for, null for bundles built before the attribute existed. */
+    val requiredPatcherVersion get() = manifestAttributes?.patcherVersion
+
+    /**
+     * True when the bundle was built for a newer patcher than the one shipped in this manager.
+     * Such bundles either fail to load outright or break during patching, so the manager has to
+     * be updated first.
+     */
+    val requiresManagerUpdate get() = requiredPatcherVersion?.let { isPatcherOutdated(it) } == true
 
     abstract fun copy(
         error: Throwable? = this.error,

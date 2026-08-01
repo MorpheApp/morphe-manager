@@ -168,7 +168,7 @@
     <string name="home_app_info_no_saved_apk">Er is geen APK opgeslagen. Om de patch uit te voeren, moet u het APK opnieuw selecteren</string>
     <string name="home_version_requires_android">Vereist Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Niet ondersteund voor dit apparaat</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; heeft geen ondersteunde versies voor Android %2$d (API %3$d). Alle vermelde versies vereisen een hogere Android-versie</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; heeft geen ondersteunde versies voor Android %2$s (API %3$s). Alle gedeclareerde versies vereisen een hogere Android versie</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download de originele .APK-bestand</string>
     <string name="home_download_instructions_steps_title">Instructies:</string>
@@ -244,7 +244,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="home_dialog_unsupported_version_compatible_versions">Compatibele versies:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Niet ondersteund</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build">Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Dit is een andere build van dezelfde versie. De patches vereisen een specifieke build</string>
     <string name="home_dialog_wrong_package_title">Verkeerde package geselecteerd</string>
     <string name="home_dialog_wrong_package_description">Het geselecteerde APK-bestand is niet geschikt voor de applicatie die u wilde patchen</string>
@@ -307,6 +307,41 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="header_creator_guide_themes_body">De meeste apps vereisen aparte afbeeldingen voor de lichte en donkere thema\'s. Sommige apps (zoals YouTube Music) gebruiken alleen het donkere thema, dus alleen dat gedeelte wordt weergegeven.</string>
     <string name="header_creator_guide_positioning_title">Positionering en schaling</string>
     <string name="header_creator_guide_positioning_body">Gebruik knijp-om-zoomen en sleepgeesten direct in de preview om uw afbeelding te positioneren en te schalen. Snap-richtlijnen verschijnen wanneer de afbeelding zich dicht bij het midden bevindt. U kunt ook de schuifregelaar onder de preview gebruiken.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Patches geselecteerd</string>
+    <string name="batch_patch_title">Batch patching</string>
+    <string name="batch_patch_planning">De wachtrij wordt voorbereid…</string>
+    <string name="batch_patch_preparing_next">De volgende app wordt voorbereid…</string>
+    <string name="batch_patch_progress_counter">Gepatcht %1$s van %2$s</string>
+    <string name="batch_patch_summary">%1$s gepatcht, %2$s mislukt, %3$s overgeslagen</string>
+    <string name="batch_patch_saved_hint">De gepatchte apps zijn opgeslagen. Installeer ze nu, of later vanuit de lijst met gepatchte APK\'s in de instellingen</string>
+    <string name="batch_patch_multiple_sources">Sommige apps combineren patches uit meer dan één bron, wat conflicten kan veroorzaken</string>
+    <string name="batch_patch_needs_apk">Geen APK beschikbaar, voeg een bestand toe</string>
+    <string name="batch_patch_wrong_package">Het bijgevoegde bestand behoort tot %s</string>
+    <string name="batch_patch_version_mismatch">Versie %s wordt niet ondersteund door de patches</string>
+    <string name="batch_patch_source_saved">Origineel opgeslagen</string>
+    <string name="batch_patch_source_installed">Geïnstalleerde app</string>
+    <string name="batch_patch_source_file">Bijgevoegd bestand</string>
+    <string name="batch_patch_source_unavailable">De APK kon niet worden voorbereid</string>
+    <string name="batch_patch_attach_apk">APK toevoegen</string>
+    <string name="batch_patch_force_version">Toch patchen</string>
+    <string name="batch_patch_edit_patches">Patches kiezen</string>
+    <string name="batch_patch_state_no_apk">Geen APK</string>
+    <string name="batch_patch_state_no_patches">Geen patches</string>
+    <string name="batch_patch_policy_install">Installeren na afronding</string>
+    <string name="batch_patch_policy_install_description">Installeert elke gepatchte app direct na het afronden van de wachtrij. Uitgeschakeld bewaart de APK\'s voor later</string>
+    <string name="batch_patch_start">Starten met patchen</string>
+    <string name="batch_patch_stop_title">Batch patchen stoppen?</string>
+    <string name="batch_patch_stop_description">De app die momenteel wordt gepatcht en alles wat nog in de wachtrij staat, wordt geannuleerd</string>
+    <string name="batch_patch_install_all">Alles installeren</string>
+    <string name="batch_patch_install_failed">Installatie mislukt</string>
+    <string name="batch_patch_in_progress">Batch patchen is al bezig</string>
+    <string name="batch_patch_nothing_outdated">Elke gepatchte app is up-to-date</string>
+    <string name="shortcut_repatch_short">Opnieuw patchen</string>
+    <string name="shortcut_repatch_long">Oude apps opnieuw patchen</string>
+    <string name="shortcut_check_updates_short">Controleren op updates</string>
+    <string name="shortcut_check_updates_long">Controleren op patch updates</string>
+    <string name="shortcut_patch_app">Patch %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Weet u zeker dat u deze app wilt verwijderen?</string>
     <string name="batch_uninstall_confirm_body">De geselecteerde apps worden permanent van je apparaat verwijderd</string>
@@ -453,8 +488,8 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="failed_to_mount">Kon %s niet koppelen</string>
     <string name="failed_to_unmount">Mislukt om te demonteer: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Score %d</string>
-    <string name="mini_game_best">Beste %d</string>
+    <string name="mini_game_score">Score %s</string>
+    <string name="mini_game_best">Beste %s</string>
     <string name="mini_game_new_record">Nieuw record!</string>
     <string name="mini_game_game_over">Game Over</string>
     <string name="mini_game_try_again">Probeer opnieuw</string>
@@ -559,7 +594,28 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="settings_advanced_update_interval_monthly">Eenmaal per maand</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Achtergrondcontrole frequentie</string>
     <string name="settings_advanced_update_interval_battery_warning">Achtergrondcontroles werken mogelijk niet betrouwbaar op sommige apparaten. Fabrikanten zoals Xiaomi, Huawei, Samsung en OnePlus beperken achtergrondprocessen vaak sterk om de batterij te sparen</string>
+    <string name="settings_advanced_auto_patch">Automatisch opnieuw patchen</string>
+    <string name="settings_advanced_auto_patch_description">Herpatcht geïnstalleerde apps op de achtergrond wanneer hun patches veranderen. Alleen apps met een opgeslagen originele APK worden ondersteund</string>
+    <string name="settings_advanced_auto_patch_interval">Frequentie opnieuw patchen</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Hoe vaak gepatchte apps worden herbouwd</string>
+    <string name="settings_advanced_auto_patch_charging">Alleen tijdens het opladen</string>
+    <string name="settings_advanced_auto_patch_charging_description">Patchen is zwaar voor de CPU en het geheugen, dus het wacht op een oplader</string>
+    <string name="settings_advanced_auto_patch_install">Automatisch installeren</string>
+    <string name="settings_advanced_auto_patch_install_description">Vereist Shizuku als de installer. Met elke andere installer worden de gepatchte apps alleen opgeslagen</string>
+    <string name="settings_advanced_external_batch_patch">Externe triggers toestaan</string>
+    <string name="settings_advanced_external_batch_patch_description">Hiermee kunnen automatiseringsapps batch patchen starten met een intent. Elke aanvraag wordt bevestigd voordat er iets wordt uitgevoerd</string>
+    <string name="external_batch_patch_title">Batch patchen starten?</string>
+    <string name="external_batch_patch_description">%s wil dat Morphe apps patched en installeert</string>
+    <string name="external_batch_patch_trust_caller">Sta deze app altijd toe</string>
+    <string name="external_batch_patch_unknown_caller">Een onbekende app</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Automatisch opnieuw patchen voltooid</string>
+    <string name="notification_auto_patch_running_title">Apps opnieuw patchen</string>
+    <string name="notification_auto_patch_blocked_title">Automatisch opnieuw patchen is niet uitgevoerd</string>
+    <string name="notification_auto_patch_blocked_battery">Het systeem heeft deze installatie geblokkeerd. Op Xiaomi en vergelijkbare apparaten, zet \"Install via USB\" aan in de ontwikkelaarsopties. Op een werkprofiel kunnen installaties worden beperkt door beleid</string>
+    <string name="notification_auto_patch_blocked_foreground">Uitzondering maken voor Morphe van batterijoptimalisatie, anders stopt Android de uitvoering voordat deze is gestart</string>
+    <string name="notification_channel_auto_patch">Automatisch opnieuw patchen</string>
+    <string name="notification_channel_auto_patch_description">Stille voortgangs- en resultaatmeldingen voor gepland opnieuw patchen</string>
     <string name="notification_manager_update_title">Morphe-update beschikbaar</string>
     <string name="notification_bundle_update_title">Nieuwe patches beschikbaar</string>
     <string name="notification_update_text">Versie %s is klaar om te downloaden</string>
@@ -745,7 +801,7 @@ Details: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android heeft dit geblokkeerd omdat het de geïnstalleerde app zou downgraden</string>
     <string name="installer_shizuku_error_signature">Android heeft dit geblokkeerd omdat de geïnstalleerde app een andere handtekening heeft</string>
     <string name="installer_shizuku_error_invalid_apk">Android kon deze APK niet lezen</string>
-    <string name="installer_shizuku_error_user_profile">Android heeft dit geblokkeerd voor de huidige gebruiker of het werkprofiel</string>
+    <string name="installer_shizuku_error_user_profile">Het systeem heeft deze installatie geblokkeerd. Op Xiaomi en soortgelijke apparaten, schakel \"Installeren via USB\" in de ontwikkelaarsopties in. Op een werkprofiel kunnen installaties worden beperkt door beleid</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batterijoptimalisatie</string>
     <string name="settings_system_battery_optimization_description">Houdt de patcher actief wanneer de app geminimaliseerd is</string>
@@ -928,6 +984,9 @@ Details: %2$s"</string>
     <string name="confirm">Bevestigen</string>
     <string name="warning">Waarschuwing</string>
     <string name="error_">Fout</string>
+    <string name="failed">Mislukt</string>
+    <string name="cancelled">Geannuleerd</string>
+    <string name="ready">Klaar</string>
     <string name="retry">Opnieuw proberen</string>
     <string name="refresh">Vernieuwen</string>
     <string name="add">Toevoegen</string>
@@ -940,6 +999,9 @@ Details: %2$s"</string>
     <string name="delete">Verwijderen</string>
     <string name="delete_all">Alles verwijderen</string>
     <string name="remove">Verwijderen</string>
+    <string name="exclude">Uitsluiten</string>
+    <string name="excluded">Uitgesloten</string>
+    <string name="include">Opnemen</string>
     <string name="disable">Uitschakelen</string>
     <string name="enable">Inschakelen</string>
     <string name="loading">Bezig met laden…</string>
@@ -966,9 +1028,10 @@ Details: %2$s"</string>
     <string name="reorder_done">Volgorde opgeslagen</string>
     <string name="reset_order">Volgorde herstellen</string>
     <string name="reset_order_done">Bestelling gereset</string>
+    <string name="accessibility_select_app">App selecteren</string>
     <string name="accessibility_move_up">Omhoog verplaatsen</string>
     <string name="accessibility_move_down">Omlaag verplaatsen</string>
-    <string name="accessibility_app_moved_announcement">%1$s verplaatst naar positie %2$d van %3$d</string>
+    <string name="accessibility_app_moved_announcement">%1$s verplaatst naar positie %2$s van %3$s</string>
     <string name="accessibility_scroll_to_top">Scroll naar de top van de lijst</string>
     <string name="rename">Hernoemen</string>
     <string name="import_">Importeren</string>
@@ -984,6 +1047,7 @@ Details: %2$s"</string>
     <string name="continue_">Doorgaan</string>
     <string name="version">Versie</string>
     <string name="patch">Patchen</string>
+    <string name="patching">Patchen</string>
     <string name="repatch">Opnieuw patchen</string>
     <string name="open">Openen</string>
     <string name="mount">Mount</string>
@@ -1034,8 +1098,8 @@ Details: %2$s"</string>
 Wilt u toch doorgaan?"</string>
     <string name="download_update_confirmation">Update downloaden?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d van %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s van %2$s</string>
     <string name="onboarding_sources_desc">Beheer uw patchbronnen. Elke bron biedt patches die kunnen worden toegepast op uw apps</string>
     <string name="onboarding_swipe_title">Veeggebaren</string>
     <string name="onboarding_swipe_desc">Veeg naar rechts op een app-kaart om de beschikbare patches te bekijken. Veeg naar links om de kaart te verbergen van het startscherm</string>

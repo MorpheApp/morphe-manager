@@ -51,6 +51,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
@@ -60,6 +61,7 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.manager.SourceBundleSortMode
 import app.morphe.manager.domain.repository.BlocklistRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.screen.patcher.IncompatiblePatcherVersionDialog
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.*
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
@@ -156,6 +158,7 @@ fun BundleManagementSheet(
     }
 
     val bundleToShowPatches = remember { mutableStateOf<PatchBundleSource?>(null) }
+    var bundleRequiringManagerUpdate by remember { mutableStateOf<PatchBundleSource?>(null) }
     var bundleToShowChangelogUid by remember { mutableStateOf<Int?>(null) }
     val bundleToShowChangelog = bundleToShowChangelogUid
         ?.let { uid -> sources.filterIsInstance<RemotePatchBundle>().find { it.uid == uid } }
@@ -331,6 +334,7 @@ fun BundleManagementSheet(
                                     hasExperimentalVersions = hasExperimentalVersions,
                                     useExperimentalVersions = useExperimentalVersions,
                                     onPatchesClick = { bundleToShowPatches.value = bundle },
+                                    onOutdatedManagerClick = { bundleRequiringManagerUpdate = bundle },
                                     onVersionClick = {
                                         if (bundle is RemotePatchBundle) {
                                             bundleToShowChangelogUid = bundle.uid
@@ -422,6 +426,15 @@ fun BundleManagementSheet(
         )
     }
 
+    // Outdated manager dialog, shared with the pre-flight check done when patching starts
+    bundleRequiringManagerUpdate?.let { bundle ->
+        IncompatiblePatcherVersionDialog(
+            bundleName = bundle.displayTitle,
+            requiredVersion = bundle.requiredPatcherVersion.orEmpty(),
+            onDismiss = { bundleRequiringManagerUpdate = null }
+        )
+    }
+
     // Changelog dialog
     if (bundleToShowChangelog != null) {
         key(bundleToShowChangelogKey) {
@@ -500,6 +513,7 @@ private fun BundleManagementCard(
     onPatchesClick: () -> Unit,
     onVersionClick: () -> Unit,
     onOpenInBrowser: () -> Unit,
+    onOutdatedManagerClick: () -> Unit,
     forceExpanded: Boolean = false
 ) {
     // Localized strings for accessibility
@@ -645,6 +659,25 @@ private fun BundleManagementCard(
                             InfoBadge(
                                 text = hintText,
                                 icon = Icons.Outlined.CloudOff,
+                                style = InfoBadgeStyle.Error
+                            )
+                        }
+
+                        // Outdated manager hint
+                        AnimatedVisibility(
+                            visible = bundle.requiresManagerUpdate,
+                            enter = MorpheAnimations.expandFadeEnter,
+                            exit = MorpheAnimations.shrinkFadeExit
+                        ) {
+                            InfoBadge(
+                                modifier = Modifier.clickable(onClick = onOutdatedManagerClick),
+                                text = stringResource(
+                                    R.string.sources_management_outdated_manager_hint,
+                                    bundle.requiredPatcherVersion.orEmpty(),
+                                    BuildConfig.VERSION_NAME,
+                                    BuildConfig.PATCHER_VERSION
+                                ),
+                                icon = Icons.Outlined.SystemUpdate,
                                 style = InfoBadgeStyle.Error
                             )
                         }
@@ -938,6 +971,20 @@ private fun BundleCardHeader(
                 ) {
                     InfoBadge(
                         text = stringResource(R.string.sources_management_metadata_unavailable),
+                        style = InfoBadgeStyle.Error,
+                        icon = null,
+                        isCompact = true
+                    )
+                }
+
+                // Outdated manager badge
+                AnimatedVisibility(
+                    visible = bundle.requiresManagerUpdate,
+                    enter = MorpheAnimations.expandHorizFadeIn,
+                    exit = MorpheAnimations.shrinkHorizFadeOut
+                ) {
+                    InfoBadge(
+                        text = stringResource(R.string.sources_management_outdated_manager_badge),
                         style = InfoBadgeStyle.Error,
                         icon = null,
                         isCompact = true

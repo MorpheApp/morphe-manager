@@ -24,26 +24,6 @@
         <item quantity="one">%s APK-fil</item>
         <item quantity="other">%s APK-filer</item>
     </plurals>
-    <plurals name="batch_install_summary">
-        <item quantity="one">Installerade %d app</item>
-        <item quantity="other">Installerade %d appar</item>
-    </plurals>
-    <plurals name="batch_reinstall_summary">
-        <item quantity="one">Installerade om %d app</item>
-        <item quantity="other">Installerade om %d appar</item>
-    </plurals>
-    <plurals name="batch_uninstall_summary">
-        <item quantity="one">Avinstallerade %d app</item>
-        <item quantity="other">Avinstallerade %d appar</item>
-    </plurals>
-    <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">Avinstallera %d app?</item>
-        <item quantity="other">Avinstallera %d appar?</item>
-    </plurals>
-    <plurals name="batch_skipped_summary">
-        <item quantity="one">Hoppade över %d app</item>
-        <item quantity="other">Hoppade över %d appar</item>
-    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Tog bort %s inaktuellt tillägg från det sparade urvalet</item>
         <item quantity="other">Tog bort %s inaktuella tillägg från det sparade urvalet</item>
@@ -63,5 +43,9 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s app</item>
         <item quantity="other">%s appar</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Kopierade %s tillägg från det valda paketet</item>
+        <item quantity="other">Kopierade %s tillägg från det valda paketet</item>
     </plurals>
 </resources>

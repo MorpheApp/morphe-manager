@@ -168,7 +168,7 @@
     <string name="home_app_info_no_saved_apk">저장된 APK가 없습니다. 패치하려면 APK 파일을 다시 선택하세요</string>
     <string name="home_version_requires_android">Android %s+ 필요</string>
     <string name="home_apk_no_compatible_versions_title">이 기기에서는 지원되지 않음</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt;는 Android %2$d (API %3$d)에서 지원되는 버전이 없습니다. 선언된 모든 앱 버전은 더 높은 Android 버전을 요구합니다</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt;는 Android %2$s (API %3$s)에서 지원되는 버전이 없습니다. 선언된 모든 앱 버전은 더 높은 Android 버전을 요구합니다</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">원본 APK 다운로드</string>
     <string name="home_download_instructions_steps_title">설명서:</string>
@@ -244,7 +244,7 @@
     <string name="home_dialog_unsupported_version_compatible_versions">호환 가능한 버전:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">지원되지 않음</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build">Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">동일 버전이지만 다른 빌드입니다. 패치하려면 특정 빌드가 필요합니다</string>
     <string name="home_dialog_wrong_package_title">잘못된 패키지가 선택됨</string>
     <string name="home_dialog_wrong_package_description">선택된 APK는 패치하려는 애플리케이션이 아닙니다</string>
@@ -307,6 +307,42 @@
     <string name="header_creator_guide_themes_body">대부분의 앱은 밝은 테마와 어두운 테마용 이미지를 각각 필요로 합니다. 일부 앱(예: YouTube Music)은 어두운 테마만 사용하므로 해당 섹션만 표시됩니다.</string>
     <string name="header_creator_guide_positioning_title">위치 및 크기 조정</string>
     <string name="header_creator_guide_positioning_body">미리보기에서 핀치 확대/축소 및 드래그 제스처를 사용하여 이미지 위치와 크기를 조정할 수 있습니다. 이미지가 중앙에 가까워지면 스냅 가이드가 표시됩니다. 미리보기 아래의 슬라이더로도 조정할 수 있습니다.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">패치 선택</string>
+    <string name="batch_patch_title">일괄 패치</string>
+    <string name="batch_patch_planning">패치 목록을 준비하는 중…</string>
+    <string name="batch_patch_preparing_next">다음 앱을 준비하는 중…</string>
+    <string name="batch_patch_progress_counter">%2$s 개 중 %1$s 개 패치 완료</string>
+    <string name="batch_patch_summary">%1$s 개 패치됨, %2$s 개 실패, %3$s 개 건너뜀</string>
+    <string name="batch_patch_saved_hint">패치된 앱을 저장하였습니다. 지금 설치하거나 나중에 설정의 패치된 APK 목록에서 설치할 수 있습니다</string>
+    <string name="batch_patch_multiple_sources">일부 앱은 여러 소스의 패치가 선택되어 있으므로 충돌이 발생할 수 있습니다</string>
+    <string name="batch_patch_needs_apk">APK를 사용할 수 없습니다. 파일을 첨부하세요</string>
+    <string name="batch_patch_wrong_package">첨부된 파일은 \'%s\'에 속합니다</string>
+    <string name="batch_patch_version_mismatch">버전 %s는 패치에서 지원되지 않습니다</string>
+    <string name="batch_patch_source_saved">저장된 원본</string>
+    <string name="batch_patch_source_installed">설치된 앱</string>
+    <string name="batch_patch_source_file">첨부된 파일</string>
+    <string name="batch_patch_source_unavailable">APK를 준비할 수 없습니다</string>
+    <string name="batch_patch_find_apk">APK 찾기</string>
+    <string name="batch_patch_attach_apk">APK 첨부</string>
+    <string name="batch_patch_force_version">버전 강제 적용</string>
+    <string name="batch_patch_edit_patches">패치 선택</string>
+    <string name="batch_patch_state_no_apk">APK 없음</string>
+    <string name="batch_patch_state_no_patches">패치 없음</string>
+    <string name="batch_patch_policy_install">완료 후 설치</string>
+    <string name="batch_patch_policy_install_description">패치 목록이 완료되면 패치된 각 앱을 즉시 설치합니다. 비활성화하면 나중에 사용할 수 있도록 APK를 유지합니다</string>
+    <string name="batch_patch_start">패치 시작</string>
+    <string name="batch_patch_stop_title">일괄 패치 중지</string>
+    <string name="batch_patch_stop_description">현재 패치 중인 앱과 대기 중인 모든 앱을 취소합니다</string>
+    <string name="batch_patch_install_all">모두 설치</string>
+    <string name="batch_patch_install_failed">설치 실패</string>
+    <string name="batch_patch_in_progress">일괄 패치가 이미 실행 중입니다</string>
+    <string name="batch_patch_nothing_outdated">모든 패치된 앱이 최신 상태입니다</string>
+    <string name="shortcut_repatch_short">다시 패치</string>
+    <string name="shortcut_repatch_long">오래된 앱 다시 패치</string>
+    <string name="shortcut_check_updates_short">업데이트 확인</string>
+    <string name="shortcut_check_updates_long">패치 업데이트 확인</string>
+    <string name="shortcut_patch_app">%s 패치</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">이 앱을 정말 제거하시겠습니까?</string>
     <string name="batch_uninstall_confirm_body">선택된 앱을 기기에서 영구적으로 제거합니다</string>
@@ -453,8 +489,8 @@
     <string name="failed_to_mount">마운트할 수 없습니다: %s</string>
     <string name="failed_to_unmount">마운트를 해제할 수 없습니다: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">점수 %d</string>
-    <string name="mini_game_best">최고 %d</string>
+    <string name="mini_game_score">점수 %s</string>
+    <string name="mini_game_best">최고 %s</string>
     <string name="mini_game_new_record">신기록!</string>
     <string name="mini_game_game_over">게임 종료</string>
     <string name="mini_game_try_again">다시 시도</string>
@@ -558,7 +594,28 @@
     <string name="settings_advanced_update_interval_monthly">한 달에 한 번</string>
     <string name="settings_advanced_update_interval_chip_subtitle">백그라운드 확인 빈도</string>
     <string name="settings_advanced_update_interval_battery_warning">일부 기기에서는 백그라운드 확인 기능이 정상적으로 작동하지 않을 수 있습니다. 특히 Xiaomi, Huawei, Samsung, OnePlus 기기는 배터리 최적화 정책 때문에 백그라운드 작업이 제한되는 경우가 많습니다</string>
+    <string name="settings_advanced_auto_patch">자동 다시 패치</string>
+    <string name="settings_advanced_auto_patch_description">패치가 변경될 경우에 설치된 앱을 백그라운드에서 다시 패치합니다. 원본 APK가 저장된 앱만 해당됩니다</string>
+    <string name="settings_advanced_auto_patch_interval">다시 패치 빈도</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">패치된 앱이 다시 빌드되는 빈도</string>
+    <string name="settings_advanced_auto_patch_charging">충전 중일 때만</string>
+    <string name="settings_advanced_auto_patch_charging_description">패치는 CPU와 메모리 사용량이 많아서, 충전기에 연결될 때까지 대기합니다</string>
+    <string name="settings_advanced_auto_patch_install">자동 설치</string>
+    <string name="settings_advanced_auto_patch_install_description">설치 프로그램으로 Shizuku가 필요합니다. 다른 설치 프로그램을 사용하는 경우에는 패치된 앱은 저장만 됩니다</string>
+    <string name="settings_advanced_external_batch_patch">외부 트리거 허용</string>
+    <string name="settings_advanced_external_batch_patch_description">자동화 앱이 인텐트를 사용하여 일괄 패치를 시작하도록 허용합니다. 실행되기 전에 모든 요청은 사용자 확인을 거칩니다</string>
+    <string name="external_batch_patch_title">일괄 패치 시작</string>
+    <string name="external_batch_patch_description">\'%s\'가 Morphe를 사용하여 앱을 패치하고 설치하려고 합니다</string>
+    <string name="external_batch_patch_trust_caller">이 앱을 항상 허용</string>
+    <string name="external_batch_patch_unknown_caller">알 수 없는 앱</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">자동 다시 패치 완료</string>
+    <string name="notification_auto_patch_running_title">앱 다시 패치</string>
+    <string name="notification_auto_patch_blocked_title">자동 다시 패치가 실행되지 않았습니다</string>
+    <string name="notification_auto_patch_blocked_battery">Morphe를 배터리 최적화 목록에서 제외하세요. 그렇지 않으면 Android가 시작되기 전에 실행을 중지합니다</string>
+    <string name="notification_auto_patch_blocked_foreground">Android에서 백그라운드로 패치를 시작할 수 없습니다. Morphe를 실행한 후 앱에서 패치를 진행하세요</string>
+    <string name="notification_channel_auto_patch">자동 다시 패치</string>
+    <string name="notification_channel_auto_patch_description">예약된 다시 패치에 대한 조용한 \'진행 상태\' 및 \'결과\' 알림</string>
     <string name="notification_manager_update_title">Morphe 업데이트 사용 가능</string>
     <string name="notification_bundle_update_title">새 패치 사용 가능</string>
     <string name="notification_update_text">%s 버전 다운로드 준비 완료</string>
@@ -568,8 +625,8 @@
     <string name="notification_post_patch_dialog_title">업데이트가 있을 때 알림을 받으시겠습니까?</string>
     <string name="notification_channel_fcm_updates">업데이트 알림</string>
     <string name="notification_channel_fcm_updates_description">새 Morphe 및 패치 릴리스에 대한 알림</string>
-    <string name="notification_channel_patcher">패치하는 중</string>
-    <string name="notification_channel_patcher_description">Morphe가 백그라운드에서 앱을 패치하는 동안 표시됩니다</string>
+    <string name="notification_channel_patcher">패치</string>
+    <string name="notification_channel_patcher_description">Morphe가 백그라운드에서 앱을 패치하는 동안에 표시되는 알림</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">전문가 설정</string>
     <string name="settings_advanced_expert_mode">전문가 모드</string>
@@ -743,7 +800,7 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">Android가 설치된 앱을 다운그레이드할 수 있기 때문에 이 작업을 차단하였습니다</string>
     <string name="installer_shizuku_error_signature">Android가 설치된 앱에 다른 서명이 있기 때문에 이 작업을 차단하였습니다</string>
     <string name="installer_shizuku_error_invalid_apk">Android가 이 APK를 읽을 수 없습니다</string>
-    <string name="installer_shizuku_error_user_profile">Android가 현재 사용자 또는 업무 프로필에 대해 이 작업을 차단하였습니다</string>
+    <string name="installer_shizuku_error_user_profile">시스템에서 이 설치를 차단하였습니다. Xiaomi 및 유사한 장치에서는 개발자 옵션에서 \'USB로 설치\'를 활성화하세요. 작업 프로필에서는 정책에 따라 설치가 제한될 수 있습니다</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">배터리 최적화</string>
     <string name="settings_system_battery_optimization_description">앱이 최소화되어도 패처가 계속 실행되도록 유지합니다</string>
@@ -926,6 +983,9 @@ morphe_header_custom_dark.png
     <string name="confirm">확인</string>
     <string name="warning">경고</string>
     <string name="error_">오류</string>
+    <string name="failed">실패</string>
+    <string name="cancelled">취소됨</string>
+    <string name="ready">준비 완료</string>
     <string name="retry">다시 시도</string>
     <string name="refresh">새로고침</string>
     <string name="add">추가</string>
@@ -938,6 +998,9 @@ morphe_header_custom_dark.png
     <string name="delete">파일 삭제</string>
     <string name="delete_all">모두 삭제</string>
     <string name="remove">제거</string>
+    <string name="exclude">제외</string>
+    <string name="excluded">제외됨</string>
+    <string name="include">포함</string>
     <string name="disable">비활성화</string>
     <string name="enable">활성화</string>
     <string name="loading">불러오는 중…</string>
@@ -964,9 +1027,10 @@ morphe_header_custom_dark.png
     <string name="reorder_done">순서를 저장하였습니다</string>
     <string name="reset_order">순서 초기화</string>
     <string name="reset_order_done">순서를 초기화하였습니다</string>
+    <string name="accessibility_select_app">앱 선택</string>
     <string name="accessibility_move_up">위로 이동</string>
     <string name="accessibility_move_down">아래로 이동</string>
-    <string name="accessibility_app_moved_announcement">\'%1$s\'가 %3$d 개 중 %2$d 번째 위치로 이동하였습니다</string>
+    <string name="accessibility_app_moved_announcement">\'%1$s\'가 %3$s 개 중 %2$s 번째 위치로 이동하였습니다</string>
     <string name="accessibility_scroll_to_top">목록 맨 위로 스크롤</string>
     <string name="rename">이름 변경</string>
     <string name="import_">가져오기</string>
@@ -982,6 +1046,7 @@ morphe_header_custom_dark.png
     <string name="continue_">계속</string>
     <string name="version">버전</string>
     <string name="patch">패치</string>
+    <string name="patching">패치</string>
     <string name="repatch">다시 패치</string>
     <string name="open">열기</string>
     <string name="mount">마운트</string>
@@ -1032,8 +1097,8 @@ morphe_header_custom_dark.png
 그래도 계속하시겠습니까?"</string>
     <string name="download_update_confirmation">업데이트를 다운로드하시겠습니까?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%2$d 단계 중 %1$d 단계</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%2$s 단계 중 %1$s 단계</string>
     <string name="onboarding_sources_desc">앱에 적용할 패치를 제공하는 패치 소스를 관리할 수 있습니다. 각 소스는 앱에 적용할 수 있는 패치를 제공합니다</string>
     <string name="onboarding_swipe_title">스와이프 제스처</string>
     <string name="onboarding_swipe_desc">앱 카드를 오른쪽으로 스와이프하여 사용 가능한 패치를 확인할 수 있고, 왼쪽으로 스와이프하여 홈 화면에서 카드를 숨길 수 있습니다</string>

@@ -164,10 +164,10 @@
     <string name="home_apk_availability_no">Nu, am deja un APK</string>
     <string name="home_apk_use_saved">Utilizează APK salvat</string>
     <string name="home_apk_use_installed">Utilizează APK instalat</string>
+    <string name="home_apk_use_installed_unverified">Nu s-a putut verifica semnătura aplicației instalate, deci este posibil să fie deja patch-uită</string>
     <string name="home_app_info_no_saved_apk">Niciun APK salvat. Patch-uirea necesită selectarea APK-ului din nou</string>
     <string name="home_version_requires_android">Necesită Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nu este suportat pe acest dispozitiv</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; nu are versiuni suportate pentru Android %2$d (API %3$d). Toate versiunile declarate necesită o versiune Android superioară</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descarcă APK-ul original</string>
     <string name="home_download_instructions_steps_title">Instrucțiuni:</string>
@@ -214,6 +214,8 @@
     <string name="expert_mode_reset_to_default_done">Patch-urile recomandate au fost aplicate</string>
     <string name="expert_mode_restore_saved">Restaurarea selecției salvate</string>
     <string name="expert_mode_restore_saved_done">Selecția salvată a fost restabilită</string>
+    <string name="expert_mode_copy_from_bundle">Copiază selecția dintr-un alt pachet</string>
+    <string name="expert_mode_copy_from_bundle_no_patches">Nu există patch-uri corespunzătoare în acest pachet</string>
     <string name="expert_mode_no_results">Nu au fost găsite patch-uri</string>
     <string name="expert_mode_universal_patches">Patch-uri universale</string>
     <string name="expert_mode_new_patches">Nou</string>
@@ -241,7 +243,6 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="home_dialog_unsupported_version_compatible_versions">Versiuni compatibile:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Incompatibil</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Versiunea %d</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Aceasta este o versiune diferită a aceleiași versiuni. Pachetele necesită o versiune specifică</string>
     <string name="home_dialog_wrong_package_title">Pachet greșit selectat</string>
     <string name="home_dialog_wrong_package_description">APK-ul selectat nu este pentru aplicația pe care dorești să o patch-uiești</string>
@@ -304,8 +305,14 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="header_creator_guide_themes_body">Majoritatea aplicațiilor necesită imagini separate pentru temele deschise și întunecate. Unele aplicații (cum ar fi YouTube Music) utilizează doar tema întunecată, astfel încât doar acea secțiune este afișată.</string>
     <string name="header_creator_guide_positioning_title">Poziționare și scalare</string>
     <string name="header_creator_guide_positioning_body">Utilizați gesturile pinch-to-zoom și glisare direct în previzualizare pentru a poziționa și scala imaginea. Ghiduri de ajustare apar când imaginea este aproape de centru. De asemenea, puteți utiliza glisorul de sub previzualizare.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Patch-uri selectate</string>
+    <string name="batch_patch_title">Patch-uri în lot</string>
+    <string name="batch_patch_planning">Se pregătește coada…</string>
+    <string name="batch_patch_preparing_next">Se pregătește următoarea aplicație…</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Sigur doriți să ștergeți această aplicație?</string>
+    <string name="batch_uninstall_confirm_body">Aplicațiile selectate vor fi eliminate permanent de pe dispozitivul dumneavoastră</string>
     <string name="home_app_info_remove_app_warning">Aceasta va șterge permanent:</string>
     <string name="home_app_info_delete_item_database">Intrare în bază de date</string>
     <string name="home_app_info_delete_item_patched_apk">Fișierul APK modificat</string>
@@ -336,6 +343,7 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="root_pre_patch_installer_description">Dispozitivul tău are acces root. Alege dacă această aplicație ar trebui să fie patch-uită pentru montare root sau instalare standard</string>
     <string name="root_pre_patch_installer_mount_title">Mod de montare root</string>
     <string name="root_pre_patch_installer_mount_description">Patch-uri pentru montare root, apoi montează APK-ul peste aplicația stock corespunzătoare. Nu este necesar GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Dacă KernelSU are modulul Deconectare module activat implicit, deschide KernelSU &gt; Superuser &gt; aplicația montată &gt; Profil &gt; Personalizat și dezactivează Deconectare module. Altfel, fișierul APK patch-uit montat s-ar putea să nu aibă efect, chiar dacă Morphe îl afișează ca fiind montat</string>
     <string name="root_pre_patch_installer_standard_title">Mod de instalare standard</string>
     <string name="root_pre_patch_installer_standard_description">Patch-uri ca un APK normal cu suport GmsCore. Setarea de instalare este folositã dupã aplicarea patch-ului.</string>
     <string name="root_pre_patch_installer_hint">Acest mod de patch este separat de Settings &gt; System &gt; Installer şi nu poate fi modificat dupã aplicarea patch-ului.</string>
@@ -448,8 +456,6 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="failed_to_mount">Montare eșuată: %s</string>
     <string name="failed_to_unmount">Demontare eșuată: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Punctaj %d</string>
-    <string name="mini_game_best">Cel mai bun %d</string>
     <string name="mini_game_new_record">Record nou!</string>
     <string name="mini_game_game_over">Game Over</string>
     <string name="mini_game_try_again">Încearcă din nou</string>
@@ -492,6 +498,7 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Monocrom</string>
     <string name="settings_appearance_color_style">Stil de culoare</string>
+    <string name="settings_appearance_colors">Culori</string>
     <string name="settings_appearance_accent_color">Culoare accent</string>
     <string name="settings_appearance_pure_black">Negru pur</string>
     <string name="settings_appearance_pure_black_description">Folosește fundaluri negre pure</string>
@@ -508,6 +515,9 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_app_grouping_description">Afișează un comutator al ecranului principal pentru a grupa aplicațiile după sursă sau după propriile categorii, menținând selecția când este dezactivat</string>
     <string name="settings_appearance_sort_button">Buton sortare</string>
     <string name="settings_appearance_sort_button_description">Afișează butonul de sortare pe ecranul principal</string>
+    <string name="settings_appearance_app_card_colors">Culori card aplicație</string>
+    <string name="settings_appearance_app_card_colors_default">Implicit</string>
+    <string name="settings_appearance_app_card_colors_default_description">Oferă fiecărei aplicații culoarea propriului pachet</string>
     <string name="settings_appearance_app_card_colors_accent">Accent</string>
     <string name="settings_appearance_app_card_colors_accent_description">Use the app accent color for home app cards</string>
     <string name="settings_appearance_app_card_colors_gradient">Gradient</string>
@@ -518,6 +528,8 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_app_card_colors_middle">Middle color</string>
     <string name="settings_appearance_app_card_colors_end">End color</string>
     <string name="settings_appearance_app_card_colors_solid_color">Solid color</string>
+    <string name="settings_appearance_app_card_colors_bundle">Culoare pachet aplicație</string>
+    <string name="settings_appearance_app_card_colors_bundle_description">Utilizează culoarea proprie a fiecărei aplicații aici, nuanțată automat pentru a se potrivi</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Pictogramă aplicație</string>
     <string name="settings_appearance_app_icon_default">Implicit</string>
@@ -733,7 +745,6 @@ Detalii: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android a blocat această acțiune deoarece ar face o retrogradare a aplicației instalate.</string>
     <string name="installer_shizuku_error_signature">Android a blocat această acțiune deoarece aplicația instalată are o semnătură diferită.</string>
     <string name="installer_shizuku_error_invalid_apk">Android nu a putut citi acest fișier APK.</string>
-    <string name="installer_shizuku_error_user_profile">Android a blocat acest lucru pentru utilizatorul curent sau profilul de lucru.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizarea bateriei</string>
     <string name="settings_system_battery_optimization_description">Menține patcherul în funcțiune când aplicația este minimizată</string>
@@ -870,6 +881,9 @@ Detalii: %2$s"</string>
     <string name="settings_system_patch_options_section">Opțiuni de patch-uri</string>
     <string name="settings_system_no_patches_or_options">Nicio pachet sau opțiune salvată</string>
     <!-- Copy selection from another bundle -->
+    <string name="copy_selection_title">Copiază selecția de…</string>
+    <string name="copy_selection_confirm_with_count">Copiază %s</string>
+    <string name="copy_selection_empty">Nu există alte selecții salvate de copiat</string>
     <string name="copy_selection_available_format">%1$s din %2$s disponibile</string>
     <string name="copy_selection_same_source">Aceeași sursă</string>
     <!-- Settings - System Tab - Custom file picker -->
@@ -953,7 +967,7 @@ Detalii: %2$s"</string>
     <string name="reset_order_done">Comanda resetată</string>
     <string name="accessibility_move_up">Mută în sus</string>
     <string name="accessibility_move_down">Mută în jos</string>
-    <string name="accessibility_app_moved_announcement">%1$s a fost mutat în poziția %2$d din %3$d</string>
+    <string name="accessibility_app_moved_announcement">%1$s a fost mutat pe poziția %2$s din %3$s</string>
     <string name="accessibility_scroll_to_top">Derulează până în partea de sus a listei</string>
     <string name="rename">Redenumește</string>
     <string name="import_">Importă</string>
@@ -1019,8 +1033,8 @@ Detalii: %2$s"</string>
 Doriți totuși să continuați?"</string>
     <string name="download_update_confirmation">Descarci actualizarea?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d din %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s din %2$s</string>
     <string name="onboarding_sources_desc">Gestionează sursele de patch-uri. Fiecare sursă oferă patch-uri care pot fi aplicate aplicațiilor tale</string>
     <string name="onboarding_swipe_title">Gesturi de glisare</string>
     <string name="onboarding_swipe_desc">Glisează spre dreapta pe o carte de aplicație pentru a vedea patch-urile disponibile. Glisează spre stânga pentru a ascunde cardul de pe ecranul principal</string>

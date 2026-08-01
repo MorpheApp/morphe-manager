@@ -164,10 +164,10 @@
     <string name="home_apk_availability_no">不，我已经有APK了</string>
     <string name="home_apk_use_saved">使用保存的 APK</string>
     <string name="home_apk_use_installed">使用已安装的 APK</string>
+    <string name="home_apk_use_installed_unverified">无法验证已安装应用的签名，因此该应用可能已被修补</string>
     <string name="home_app_info_no_saved_apk">没有已保存的 APK 文件, 需要重新选择 APK 文件进行修补</string>
     <string name="home_version_requires_android">需要 Android %s+。</string>
     <string name="home_apk_no_compatible_versions_title">不支持此设备</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; 没有适用于 Android %2$d (API %3$d) 的支持版本。所有声明的版本都需要更高版本的 Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">下载原始 APK</string>
     <string name="home_download_instructions_steps_title">说明：</string>
@@ -214,6 +214,8 @@
     <string name="expert_mode_reset_to_default_done">已应用推荐补丁</string>
     <string name="expert_mode_restore_saved">还原已保存的选择</string>
     <string name="expert_mode_restore_saved_done">已保存的选择已恢复</string>
+    <string name="expert_mode_copy_from_bundle">从其他包复制选定的内容</string>
+    <string name="expert_mode_copy_from_bundle_no_patches">此包中没有匹配的补丁</string>
     <string name="expert_mode_no_results">未找到修补的应用</string>
     <string name="expert_mode_universal_patches">通用补丁</string>
     <string name="expert_mode_new_patches">新</string>
@@ -241,7 +243,6 @@
     <string name="home_dialog_unsupported_version_compatible_versions">兼容版本：</string>
     <string name="home_dialog_unsupported_version_unsupported_label">不支持</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">构建 %d</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">这是同一版本的不同构建。补丁需要特定的构建</string>
     <string name="home_dialog_wrong_package_title">选择的 APK 不是您打算修补的应用。</string>
     <string name="home_dialog_wrong_package_description">您选择的 APK 不是您打算修补的应用</string>
@@ -304,8 +305,14 @@
     <string name="header_creator_guide_themes_body">大多数应用程序需要浅色和深色主题的单独图像。一些应用程序（如YouTube Music）仅使用深色主题，因此仅显示该部分。</string>
     <string name="header_creator_guide_positioning_title">定位和缩放</string>
     <string name="header_creator_guide_positioning_body">直接在预览中使用捏合缩放和平移手势来定位和缩放图像。当图像靠近中心时，会出现捕捉指南。您还可以使用预览下方的滑块。</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">已选择  个补丁</string>
+    <string name="batch_patch_title">批量补丁</string>
+    <string name="batch_patch_planning">正在准备队列…</string>
+    <string name="batch_patch_preparing_next">正在准备下一个应用…</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">是否要卸载此应用？</string>
+    <string name="batch_uninstall_confirm_body">选定的应用将永久从您的设备中移除</string>
     <string name="home_app_info_remove_app_warning">这将永久删除：</string>
     <string name="home_app_info_delete_item_database">数据库条目</string>
     <string name="home_app_info_delete_item_patched_apk">修补后的 APK 文件</string>
@@ -449,8 +456,6 @@
     <string name="failed_to_mount">挂载失败：%s</string>
     <string name="failed_to_unmount">取消挂载失败：%s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">得分：%d</string>
-    <string name="mini_game_best">最佳 %d</string>
     <string name="mini_game_new_record">新的记录！</string>
     <string name="mini_game_game_over">游戏结束</string>
     <string name="mini_game_try_again">重试</string>
@@ -493,6 +498,7 @@
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">单色</string>
     <string name="settings_appearance_color_style">颜色样式</string>
+    <string name="settings_appearance_colors">颜色</string>
     <string name="settings_appearance_accent_color">强调色</string>
     <string name="settings_appearance_pure_black">纯黑</string>
     <string name="settings_appearance_pure_black_description">使用真正的黑色背景</string>
@@ -510,6 +516,9 @@
     <string name="settings_appearance_app_grouping_description">显示主屏幕切换器，按来源或您自己的分类对应用进行分组，并在关闭时保持选择</string>
     <string name="settings_appearance_sort_button">排序按钮</string>
     <string name="settings_appearance_sort_button_description">在主屏幕上显示排序按钮</string>
+    <string name="settings_appearance_app_card_colors">应用卡片颜色</string>
+    <string name="settings_appearance_app_card_colors_default">默认</string>
+    <string name="settings_appearance_app_card_colors_default_description">为每个应用赋予其自身包的颜色</string>
     <string name="settings_appearance_app_card_colors_accent">强调色</string>
     <string name="settings_appearance_app_card_colors_accent_description">将应用强调色用于首页应用卡片</string>
     <string name="settings_appearance_app_card_colors_gradient">渐变色</string>
@@ -520,6 +529,8 @@
     <string name="settings_appearance_app_card_colors_middle">中间颜色</string>
     <string name="settings_appearance_app_card_colors_end">结束颜色</string>
     <string name="settings_appearance_app_card_colors_solid_color">纯色</string>
+    <string name="settings_appearance_app_card_colors_bundle">应用包颜色</string>
+    <string name="settings_appearance_app_card_colors_bundle_description">在此处使用每个应用自己的颜色，并自动调整阴影以适应</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">应用图标</string>
     <string name="settings_appearance_app_icon_default">默认</string>
@@ -735,7 +746,6 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">Android 阻止了此操作，因为它会降级已安装的应用</string>
     <string name="installer_shizuku_error_signature">Android 阻止了此操作，因为已安装的应用具有不同的签名</string>
     <string name="installer_shizuku_error_invalid_apk">Android 无法读取此 APK</string>
-    <string name="installer_shizuku_error_user_profile">Android 阻止了当前用户或工作配置文件中的此操作</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">电池优化</string>
     <string name="settings_system_battery_optimization_description">在应用最小化时，保持修补程序运行</string>
@@ -872,6 +882,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_options_section">补丁选项</string>
     <string name="settings_system_no_patches_or_options">没有保存的补丁或选项</string>
     <!-- Copy selection from another bundle -->
+    <string name="copy_selection_title">从…复制选定的内容</string>
+    <string name="copy_selection_confirm_with_count">复制 %s</string>
+    <string name="copy_selection_empty">没有其他已保存的选定内容可供复制</string>
     <string name="copy_selection_available_format">%1$s of %2$s 可用</string>
     <string name="copy_selection_same_source">相同来源</string>
     <!-- Settings - System Tab - Custom file picker -->
@@ -955,7 +968,6 @@ morphe_header_custom_dark.png
     <string name="reset_order_done">订单已重置</string>
     <string name="accessibility_move_up">上移</string>
     <string name="accessibility_move_down">下移</string>
-    <string name="accessibility_app_moved_announcement">%1$s 移动到 %3$d 中的第 %2$d 个位置</string>
     <string name="accessibility_scroll_to_top">滚动到列表顶部</string>
     <string name="rename">重命名</string>
     <string name="import_">导入</string>
@@ -971,6 +983,7 @@ morphe_header_custom_dark.png
     <string name="continue_">继续</string>
     <string name="version">版本</string>
     <string name="patch">修补</string>
+    <string name="patching">正在修补</string>
     <string name="repatch">重新修补</string>
     <string name="open">打开</string>
     <string name="mount">挂载</string>
@@ -1019,8 +1032,7 @@ morphe_header_custom_dark.png
     <string name="download_confirmation_metered">"您当前使用的是计量连接，可能会产生服务提供商的数据费用。\n\n您仍然要继续吗？"</string>
     <string name="download_update_confirmation">下载更新？</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d/%2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_sources_desc">管理您的补丁源。每个源提供可应用于您的应用程序的补丁</string>
     <string name="onboarding_swipe_title">滑动势</string>
     <string name="onboarding_swipe_desc">向右滑动应用程序卡片以查看其可用补丁。向左滑动可从主屏幕隐藏该卡片</string>

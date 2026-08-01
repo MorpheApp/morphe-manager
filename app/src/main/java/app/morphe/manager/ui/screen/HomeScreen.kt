@@ -205,6 +205,11 @@ fun HomeScreen(
     val metadataFetchErrors by homeViewModel.patchBundleRepository.metadataFetchErrors.collectAsStateWithLifecycle(emptyMap())
     val hasMetadataErrors = metadataFetchErrors.isNotEmpty()
 
+    // Sources built for a newer patcher than this manager ships. They cannot be loaded or patched
+    // with until the app is updated, so surface it instead of leaving the source silently broken
+    val bundleSources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
+    val hasOutdatedManagerSources = bundleSources.any { it.requiresManagerUpdate }
+
     // Manager update details dialog
     if (showUpdateDetailsDialog.value) {
         val updateViewModel: UpdateViewModel = koinViewModel(parameters = { parametersOf(false) })
@@ -258,6 +263,7 @@ fun HomeScreen(
             SectionsLayout(
                 notifications = HomeNotificationsUi(
                     managerUpdate = AlertState(hasManagerUpdate) { showUpdateDetailsDialog.value = true },
+                    outdatedManager = AlertState(hasOutdatedManagerSources) { homeViewModel.showBundleManagementSheet = true },
                     blockedSources = AlertState(hasBlockedSources) { homeViewModel.showBundleManagementSheet = true },
                     metadataErrors = AlertState(hasMetadataErrors) { homeViewModel.showBundleManagementSheet = true },
                     meteredSkipped = AlertState(homeViewModel.updatesSkippedDueToMetered) { onSettingsClick() },

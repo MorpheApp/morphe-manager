@@ -168,7 +168,7 @@
     <string name="home_app_info_no_saved_apk">沒有已儲存的 APK。修補時需要再次選取 APK 檔案</string>
     <string name="home_version_requires_android">需要 Android %s 以上版本</string>
     <string name="home_apk_no_compatible_versions_title">此裝置不支援</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; 沒有支援 Android %2$d (API %3$d) 的版本。所有已宣告的版本都需要更高版本的 Android</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; 沒有支援 Android %2$s (API %3$s) 的版本。所有已宣告的版本都需要更高版本的 Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">下載原始 APK</string>
     <string name="home_download_instructions_steps_title">步驟如下：</string>
@@ -244,7 +244,7 @@
     <string name="home_dialog_unsupported_version_compatible_versions">相容版本：</string>
     <string name="home_dialog_unsupported_version_unsupported_label">不支援</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Build %d</string>
+    <string name="home_dialog_unsupported_version_build">Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">這是相同版本的不同組建。修補程式需要特定的組建</string>
     <string name="home_dialog_wrong_package_title">選取了錯誤的套件</string>
     <string name="home_dialog_wrong_package_description">所選的 APK 不是您打算修補的應用程式</string>
@@ -307,6 +307,37 @@
     <string name="header_creator_guide_themes_body">大多數應用程式需要淺色和深色主題的分開圖像。有些應用程式（例如 YouTube Music）僅使用深色主題，因此僅顯示該部分。</string>
     <string name="header_creator_guide_positioning_title">定位與縮放</string>
     <string name="header_creator_guide_positioning_body">直接在預覽中，使用雙指縮放和拖動手勢來定位和縮放您的圖像。當圖像靠近中心時，會出現快照指南。您也可以使用預覽下方的滑桿。</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_progress_counter">修補 %1$s 的 %2$s</string>
+    <string name="batch_patch_summary">%1$s 已修補，%2$s 失敗，%3$s 已略過</string>
+    <string name="batch_patch_saved_hint">已儲存已修補的應用程式。立即安裝或稍後從設定中的已修補 APK 清單安裝</string>
+    <string name="batch_patch_multiple_sources">某些應用程式合併來自多個來源的修補程式，這可能會導致衝突</string>
+    <string name="batch_patch_needs_apk">沒有可用的 APK，請附加檔案</string>
+    <string name="batch_patch_wrong_package">附加的檔案屬於 %s</string>
+    <string name="batch_patch_version_mismatch">修補程式不支援版本 %s</string>
+    <string name="batch_patch_source_saved">已儲存原始檔案</string>
+    <string name="batch_patch_source_installed">已安裝的應用程式</string>
+    <string name="batch_patch_source_file">附加檔案</string>
+    <string name="batch_patch_source_unavailable">無法準備 APK</string>
+    <string name="batch_patch_attach_apk">附加 APK</string>
+    <string name="batch_patch_force_version">仍要繼續</string>
+    <string name="batch_patch_edit_patches">選擇修補程式</string>
+    <string name="batch_patch_state_no_apk">沒有 APK</string>
+    <string name="batch_patch_state_no_patches">沒有修補程式</string>
+    <string name="batch_patch_policy_install">完成後安裝</string>
+    <string name="batch_patch_policy_install_description">佇列完成後會立即安裝每個已修補的應用程式。關閉後保留 APK 以供日後使用</string>
+    <string name="batch_patch_start">開始修補</string>
+    <string name="batch_patch_stop_title">停止批次修補？</string>
+    <string name="batch_patch_stop_description">目前正在修補的應用程式以及所有排隊的應用程式將會取消</string>
+    <string name="batch_patch_install_all">全選</string>
+    <string name="batch_patch_install_failed">安裝失敗</string>
+    <string name="batch_patch_in_progress">批次修補正在執行</string>
+    <string name="batch_patch_nothing_outdated">每個已修補的應用程式都是最新的</string>
+    <string name="shortcut_repatch_short">重新修補</string>
+    <string name="shortcut_repatch_long">重新修補過時的應用程式</string>
+    <string name="shortcut_check_updates_short">檢查更新</string>
+    <string name="shortcut_check_updates_long">檢查修補程式更新</string>
+    <string name="shortcut_patch_app">修補 %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">確定要解除安裝此應用程式？</string>
     <string name="batch_uninstall_confirm_body">所選取的應用程式將會從您的裝置中永久移除。</string>
@@ -453,8 +484,8 @@
     <string name="failed_to_mount">無法掛載：%s</string>
     <string name="failed_to_unmount">無法解除掛載：%s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">分數：%d</string>
-    <string name="mini_game_best">最佳 %d</string>
+    <string name="mini_game_score">分數 %s</string>
+    <string name="mini_game_best">最佳 %s</string>
     <string name="mini_game_new_record">新紀錄！</string>
     <string name="mini_game_game_over">遊戲結束</string>
     <string name="mini_game_try_again">再試一次</string>
@@ -528,6 +559,7 @@
     <string name="settings_appearance_app_card_colors_end">結束顏色</string>
     <string name="settings_appearance_app_card_colors_solid_color">純色</string>
     <string name="settings_appearance_app_card_colors_bundle">應用程式主題顏色</string>
+    <string name="settings_appearance_app_card_colors_bundle_description">在此處使用每個應用程式自己的顏色，並自動調整陰影以適應</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">應用程式圖示</string>
     <string name="settings_appearance_app_icon_default">預設</string>
@@ -557,7 +589,28 @@
     <string name="settings_advanced_update_interval_monthly">每月一次</string>
     <string name="settings_advanced_update_interval_chip_subtitle">背景檢查頻率</string>
     <string name="settings_advanced_update_interval_battery_warning">在某些裝置上，背景檢查可能無法可靠運作。小米、華為、三星和 OnePlus 等製造商通常會積極限制背景程序以節省電池電量</string>
+    <string name="settings_advanced_auto_patch">自動重新修補</string>
+    <string name="settings_advanced_auto_patch_description">在修補程式變更時，後台重新修補已安裝的應用程式。僅涵蓋已儲存原始 APK 的應用程式</string>
+    <string name="settings_advanced_auto_patch_interval">重新修補頻率</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">修補應用程式會重建</string>
+    <string name="settings_advanced_auto_patch_charging">僅在充電時</string>
+    <string name="settings_advanced_auto_patch_charging_description">修補對 CPU 和記憶體要求很高，因此會等待充電器</string>
+    <string name="settings_advanced_auto_patch_install">自動安裝</string>
+    <string name="settings_advanced_auto_patch_install_description">需要 Shizuku 作為安裝程式。使用任何其他安裝程式時，僅儲存已修補的應用程式</string>
+    <string name="settings_advanced_external_batch_patch">允許外部觸發器</string>
+    <string name="settings_advanced_external_batch_patch_description">讓自動化應用程式使用意圖啟動批次修補。每個請求在執行任何操作前都會得到確認</string>
+    <string name="external_batch_patch_title">開始批次修補？</string>
+    <string name="external_batch_patch_description">%s 想要 Morphe 修補和安裝應用程式</string>
+    <string name="external_batch_patch_trust_caller">總是允許此應用程式</string>
+    <string name="external_batch_patch_unknown_caller">未知應用程式</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">自動重新修補完成</string>
+    <string name="notification_auto_patch_running_title">正在重新修補應用程式</string>
+    <string name="notification_auto_patch_blocked_title">自動重新修補未執行</string>
+    <string name="notification_auto_patch_blocked_battery">將 Morphe 從電池優化中排除，否則 Android 會在啟動前停止執行</string>
+    <string name="notification_auto_patch_blocked_foreground">Android 不允許在後台啟動修補。開啟 Morphe 並從應用程式修補</string>
+    <string name="notification_channel_auto_patch">自動重新修補</string>
+    <string name="notification_channel_auto_patch_description">排程重新修補的靜默進度和結果通知</string>
     <string name="notification_manager_update_title">有可用的 Morphe 更新</string>
     <string name="notification_bundle_update_title">有新的修補程式可用</string>
     <string name="notification_update_text">版本 %s 已準備好下載</string>
@@ -741,7 +794,7 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">Android 已封鎖此操作，因為這會降級已安裝的應用程式</string>
     <string name="installer_shizuku_error_signature">Android 已封鎖此操作，因為已安裝的應用程式具有不同的簽名</string>
     <string name="installer_shizuku_error_invalid_apk">Android 無法讀取此 APK</string>
-    <string name="installer_shizuku_error_user_profile">Android 已對目前的使用者或工作設定檔封鎖此操作</string>
+    <string name="installer_shizuku_error_user_profile">系統阻止此安裝。在 Xiaomi 和類似裝置上，請在開發人員選項中開啟「透過 USB 安裝」。在工作配置檔案中，安裝可能會受到策略限制</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">電池最佳化</string>
     <string name="settings_system_battery_optimization_description">即使應用程式被最小化，也會保持修補程式的執行</string>
@@ -924,6 +977,9 @@ morphe_header_custom_dark.png
     <string name="confirm">確認</string>
     <string name="warning">警告</string>
     <string name="error_">錯誤</string>
+    <string name="failed">失敗</string>
+    <string name="cancelled">已取消</string>
+    <string name="ready">就緒</string>
     <string name="retry">重試</string>
     <string name="refresh">重新整理</string>
     <string name="add">新增</string>
@@ -936,6 +992,9 @@ morphe_header_custom_dark.png
     <string name="delete">刪除</string>
     <string name="delete_all">全部刪除</string>
     <string name="remove">刪除</string>
+    <string name="exclude">排除</string>
+    <string name="excluded">已排除</string>
+    <string name="include">包含</string>
     <string name="disable">停用</string>
     <string name="enable">啟用</string>
     <string name="loading">載入中……</string>
@@ -962,9 +1021,10 @@ morphe_header_custom_dark.png
     <string name="reorder_done">排序已儲存</string>
     <string name="reset_order">重設排序</string>
     <string name="reset_order_done">訂單已重設</string>
+    <string name="accessibility_select_app">選取應用程式</string>
     <string name="accessibility_move_up">向上移動</string>
     <string name="accessibility_move_down">向下移動</string>
-    <string name="accessibility_app_moved_announcement">%1$s 已移動至 %3$d 的第 %2$d 個位置</string>
+    <string name="accessibility_app_moved_announcement">%1$s 移至 %3$s 的第 %2$s 個位置</string>
     <string name="accessibility_scroll_to_top">捲動到列表頂端</string>
     <string name="rename">重新命名</string>
     <string name="import_">匯入</string>
@@ -980,6 +1040,7 @@ morphe_header_custom_dark.png
     <string name="continue_">繼續</string>
     <string name="version">版本</string>
     <string name="patch">修補</string>
+    <string name="patching">修補中</string>
     <string name="repatch">重新修補</string>
     <string name="open">開啟</string>
     <string name="mount">掛載</string>
@@ -1030,8 +1091,8 @@ morphe_header_custom_dark.png
 您仍要繼續嗎？\""</string>
     <string name="download_update_confirmation">要下載更新嗎？</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d / %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%2$s 中的 %1$s</string>
     <string name="onboarding_sources_desc">管理您的修補檔案來源。每個來源都提供可用於您應用程式的修補檔案</string>
     <string name="onboarding_swipe_title">手勢</string>
     <string name="onboarding_swipe_desc">向右滑動應用程式卡片以查看其可用的修補。向左滑動可從主螢幕隱藏卡片</string>

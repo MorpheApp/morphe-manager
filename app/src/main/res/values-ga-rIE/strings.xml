@@ -164,10 +164,11 @@
     <string name="home_apk_availability_no">Níl, tá APK agam cheana féin</string>
     <string name="home_apk_use_saved">Úsáid APK sábháilte</string>
     <string name="home_apk_use_installed">Úsáid APK suiteáilte</string>
+    <string name="home_apk_use_installed_unverified">Níorbh fhéidir síniú an aip suiteáilte a fhíorú, mar sin d\'fhéadfadh sé go bhfuil paiste air cheana féin</string>
     <string name="home_app_info_no_saved_apk">Níl aon APK sábháilte. Beidh ort an comhad APK a roghnú arís le haghaidh paisteála.</string>
     <string name="home_version_requires_android">Éilíonn Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ní thacaítear leis ar an ngléas seo</string>
-    <string name="home_apk_no_compatible_versions_message">Níl aon leaganacha tacaithe ag &lt;b&gt;%1$s&lt;/b&gt; le haghaidh Android %2$d (API %3$d). Éilíonn gach leagan dearbhaithe leagan níos airde de Android.</string>
+    <string name="home_apk_no_compatible_versions_message">Níl aon leaganacha tacaithe ag &lt;b&gt;%1$s&lt;/b&gt; do Android %2$s (API %3$s). Éilíonn gach leagan dearbhaithe leagan níos airde de Android.</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Íoslódáil an APK bunaidh</string>
     <string name="home_download_instructions_steps_title">Treoracha:</string>
@@ -243,7 +244,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="home_dialog_unsupported_version_compatible_versions">Leaganacha comhoiriúnacha:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Gan tacaíocht</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Tóg %d</string>
+    <string name="home_dialog_unsupported_version_build">Tóg %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Is tógáil dhifriúil den leagan céanna é seo. Éilíonn na paistí tógáil shonrach</string>
     <string name="home_dialog_wrong_package_title">Pacáiste mícheart roghnaithe</string>
     <string name="home_dialog_wrong_package_description">Níl an APK roghnaithe don fheidhmchlár arbh eol duit paiste a chur air</string>
@@ -306,6 +307,9 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="header_creator_guide_themes_body">Éilíonn formhór na n-aipeanna íomhánna ar leithligh don téama geal agus dorcha. Ní úsáideann roinnt aipeanna (amhail YouTube Music) ach an téama dorcha, mar sin ní thaispeántar ach an chuid sin.</string>
     <string name="header_creator_guide_positioning_title">Suíomh agus scálú</string>
     <string name="header_creator_guide_positioning_body">Bain úsáid as gothaí pinch-to-zúmáil agus tarraing go díreach sa réamhamharc chun d’íomhá a shuíomh agus a scála. Feictear treoracha snap nuair a bhíonn an íomhá gar don lár. Is féidir leat an sleamhnán faoin réamhamharc a úsáid freisin.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Paiste roghnaithe</string>
+    <string name="batch_patch_title">Paisteáil bhaisc</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">An bhfuil tú cinnte gur mian leat an aip seo a dhíshuiteáil?</string>
     <string name="batch_uninstall_confirm_body">Bainfear na haipeanna roghnaithe go buan de do ghléas</string>
@@ -452,8 +456,6 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="failed_to_mount">Theip ar fheistiú: %s</string>
     <string name="failed_to_unmount">Theip ar dhíshuiteáil: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Scór %d</string>
-    <string name="mini_game_best">Is fearr %d</string>
     <string name="mini_game_new_record">Taifead nua!</string>
     <string name="mini_game_game_over">Cluiche Thart</string>
     <string name="mini_game_try_again">Bain Triail Arís</string>
@@ -742,7 +744,6 @@ Sonraí: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Chuir Android bac air seo mar go ndéanfadh sé an aip suiteáilte a íosghrádú</string>
     <string name="installer_shizuku_error_signature">Chuir Android bac air seo mar gheall go bhfuil síniú difriúil ag an aip suiteáilte</string>
     <string name="installer_shizuku_error_invalid_apk">Níorbh fhéidir le Android an APK seo a léamh</string>
-    <string name="installer_shizuku_error_user_profile">Chuir Android bac air seo don úsáideoir nó don phróifíl oibre reatha</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Uasmhéadú ceallraí</string>
     <string name="settings_system_battery_optimization_description">Coinníonn an paisteálaí ag rith nuair a bhíonn an aip íoslaghdaithe</string>
@@ -965,7 +966,6 @@ Sonraí: %2$s"</string>
     <string name="reset_order_done">Athshocrú ordaithe</string>
     <string name="accessibility_move_up">Bog suas</string>
     <string name="accessibility_move_down">Bog síos</string>
-    <string name="accessibility_app_moved_announcement">%1$s bogtha go suíomh %2$d de %3$d</string>
     <string name="accessibility_scroll_to_top">Scrollaigh go barr an liosta</string>
     <string name="rename">Athainmnigh</string>
     <string name="import_">Iompórtáil</string>
@@ -1031,8 +1031,7 @@ Sonraí: %2$s"</string>
 Ar mhaith leat leanúint ar aghaidh fós?"</string>
     <string name="download_update_confirmation">Íoslódáil an nuashonrú?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d de %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_sources_desc">Bainistigh do fhoinsí paistí. Soláthraíonn gach foinse paistí is féidir a chur i bhfeidhm ar d’aipeanna.</string>
     <string name="onboarding_swipe_title">Gothaí svaidhpeála</string>
     <string name="onboarding_swipe_desc">Svaidhpeáil ar dheis ar chárta aipe chun na paistí atá ar fáil a fheiceáil. Svaidhpeáil ar chlé chun an cárta a cheilt ón scáileán baile.</string>

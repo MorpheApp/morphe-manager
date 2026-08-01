@@ -19,19 +19,25 @@
         <item quantity="other">APK %s ไฟล์</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="other">ติดตั้งแอป %d แอปแล้ว</item>
+        <item quantity="other">ติดตั้ง %s แอปแล้ว</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="other">ติดตั้งแอปใหม่ %d แอปแล้ว</item>
+        <item quantity="other">ติดตั้งใหม่ %s แอปแล้ว</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="other">ถอนการติดตั้งแอป %d แอปแล้ว</item>
+        <item quantity="other">ถอนการติดตั้ง %s แอปแล้ว</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="other">ยกเลิกการติดตั้งแอป %d แอปหรือไม่?</item>
+        <item quantity="other">ถอนการติดตั้ง %s แอป?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="other">%s แอปพร้อมสำหรับการแพตช์</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="other">%s แอปพร้อมสำหรับการติดตั้ง</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="other">ข้ามแอป %d แอปแล้ว</item>
+        <item quantity="other">ข้ามแอป %s แอปแล้ว</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="other">ลบ %s แพตช์เก่าไปจากตัวเลือกที่ถูกบันทึกไว้แล้ว</item>

@@ -93,6 +93,7 @@ enum class BatchInstallOutcome { INSTALLED, FAILED }
 data class BatchBundleRef(
     val uid: Int,
     val name: String,
+    val version: String?,
     val patchNames: Set<String>
 )
 
@@ -117,6 +118,8 @@ data class BatchPatchItem(
     val bundles: List<BatchBundleRef>,
     val state: BatchItemState,
     val message: String? = null,
+    /** Version the sources recommend, offered for download when the APK is missing or wrong. */
+    val suggestedVersion: String? = null,
     val forceVersionMismatch: Boolean = false,
     /** Selection before the user narrowed it to one source, so another can still be chosen. */
     val resolvedSelection: PatchSelection? = null,

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.annotation.StringRes
+import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.redux.Action
@@ -440,7 +441,19 @@ class PatchBundleRepository(
                 )
             } catch (error: Throwable) {
                 failures += src.uid to error
-                Log.e(tag, "Failed to load bundle ${src.name}", error)
+                val requiredPatcher = bundle.manifestAttributes?.patcherVersion
+                if (requiredPatcher != null && isPatcherOutdated(requiredPatcher)) {
+                    // Loading fails with linkage errors when the bundle uses patcher APIs this
+                    // manager does not have. Spell it out so logs are not just a NoSuchMethodError
+                    Log.e(
+                        tag,
+                        "Failed to load bundle ${src.name}: it requires patcher $requiredPatcher, " +
+                                "but this manager ships ${BuildConfig.PATCHER_VERSION}. Update the manager",
+                        error
+                    )
+                } else {
+                    Log.e(tag, "Failed to load bundle ${src.name}", error)
+                }
                 null
             }
         }.toMap()

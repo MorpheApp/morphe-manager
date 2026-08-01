@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-07-30T18:50:38",
-  "description": "# [1.25.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.8...v1.25.0-dev.9) (2026-07-30)\n\n\n### Bug Fixes\n\n* Mirror the list scrollbar to the correct side in RTL layouts ([e8fd43b](https://github.com/MorpheApp/morphe-manager/commit/e8fd43b5a2fe835aef4d9ea664e04d679f797262))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.25.0-dev.9/morphe-manager-1.25.0-dev.9.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.25.0-dev.9/morphe-manager-1.25.0-dev.9.apk.asc",
-  "version": "1.25.0-dev.9"
+  "created_at": "2026-08-01T06:49:35",
+  "description": "# [1.25.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.9...v1.25.0-dev.10) (2026-08-01)\n\n\n### Features\n\n* Patch several apps in one queue, and keep them patched automatically ([#795](https://github.com/MorpheApp/morphe-manager/issues/795)) ([a3c0427](https://github.com/MorpheApp/morphe-manager/commit/a3c0427756b95773d6a1a3c317c1b88ed641e867))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.25.0-dev.10/morphe-manager-1.25.0-dev.10.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.25.0-dev.10/morphe-manager-1.25.0-dev.10.apk.asc",
+  "version": "1.25.0-dev.10"
 }

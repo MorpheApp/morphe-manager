@@ -167,7 +167,6 @@
     <string name="home_app_info_no_saved_apk">Chưa lưu APK nào. Bạn sẽ phải chọn lại APK khi vá</string>
     <string name="home_version_requires_android">Yêu cầu Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Không hỗ trợ trên thiết bị này</string>
-    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; không có phiên bản nào hỗ trợ cho Android %2$d (API %3$d). Tất cả các phiên bản đã khai báo đều yêu cầu phiên bản Android cao hơn</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Tải APK gốc</string>
     <string name="home_download_instructions_steps_title">Hướng dẫn:</string>
@@ -243,7 +242,6 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="home_dialog_unsupported_version_compatible_versions">Phiên bản tương thích:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Không tương thích</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Bản dựng %d</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Mặc dù cùng phiên bản, nhưng đây là bản dựng khác. Các bản vá yêu cầu đúng bản dựng mới hỗ trợ</string>
     <string name="home_dialog_wrong_package_title">Chọn sai gói rồi</string>
     <string name="home_dialog_wrong_package_description">APK đã chọn không dành cho ứng dụng mà bạn định vá</string>
@@ -306,6 +304,39 @@ Vùng ngoài (nét đứt): có thể bị cắt theo hình dạng biểu tượ
     <string name="header_creator_guide_themes_body">Hầu hết các ứng dụng yêu cầu hình ảnh riêng cho chế độ sáng và tối. Một số ứng dụng (như YouTube Music) chỉ sử dụng chế độ tối, vì vậy chỉ phần đó mới được hiển thị.</string>
     <string name="header_creator_guide_positioning_title">Căn chỉnh và thu phóng</string>
     <string name="header_creator_guide_positioning_body">Dùng cử chỉ chụm để thu phóng và kéo trực tiếp trong phần xem trước để căn chỉnh vị trí và kích thước hình ảnh. Các đường căn chỉnh sẽ xuất hiện khi hình ảnh ở gần trung tâm. Bạn cũng có thể dùng thanh trượt bên dưới phần xem trước.</string>
+    <!-- Batch patching -->
+    <string name="batch_patch_action">Đã chọn bản vá</string>
+    <string name="batch_patch_title">Đang vá hàng loạt</string>
+    <string name="batch_patch_planning">Đang chuẩn bị hàng đợi…</string>
+    <string name="batch_patch_preparing_next">Đang chuẩn bị ứng dụng tiếp theo…</string>
+    <string name="batch_patch_saved_hint">Các ứng dụng đã vá đã được lưu. Cài đặt chúng ngay bây giờ hoặc sau từ danh sách APK đã vá trong cài đặt</string>
+    <string name="batch_patch_multiple_sources">Một số ứng dụng kết hợp các bản vá từ nhiều nguồn khác nhau, điều này có thể gây ra xung đột</string>
+    <string name="batch_patch_needs_apk">Không có APK nào, hãy đính kèm một tệp</string>
+    <string name="batch_patch_wrong_package">Tệp đính kèm thuộc về %s</string>
+    <string name="batch_patch_version_mismatch">Phiên bản %s không được hỗ trợ bởi các bản vá</string>
+    <string name="batch_patch_source_saved">Đã lưu bản gốc</string>
+    <string name="batch_patch_source_installed">Ứng dụng đã cài đặt</string>
+    <string name="batch_patch_source_file">Tệp đính kèm</string>
+    <string name="batch_patch_source_unavailable">Không thể chuẩn bị APK</string>
+    <string name="batch_patch_attach_apk">Đính kèm APK</string>
+    <string name="batch_patch_force_version">Vẫn tiếp tục vá</string>
+    <string name="batch_patch_edit_patches">Chọn bản vá</string>
+    <string name="batch_patch_state_no_apk">Không có APK</string>
+    <string name="batch_patch_state_no_patches">Không có bản vá</string>
+    <string name="batch_patch_policy_install">Cài đặt khi hoàn tất</string>
+    <string name="batch_patch_policy_install_description">Cài đặt mọi ứng dụng đã vá ngay sau khi hàng đợi hoàn tất. Tắt sẽ giữ lại APK để sau</string>
+    <string name="batch_patch_start">Bắt đầu vá</string>
+    <string name="batch_patch_stop_title">Dừng vá hàng loạt?</string>
+    <string name="batch_patch_stop_description">Ứng dụng đang được vá ngay bây giờ và mọi thứ vẫn được xếp hàng sẽ bị hủy bỏ</string>
+    <string name="batch_patch_install_all">Cài đặt tất cả</string>
+    <string name="batch_patch_install_failed">Cài đặt thất bại</string>
+    <string name="batch_patch_in_progress">Vá hàng loạt đã chạy</string>
+    <string name="batch_patch_nothing_outdated">Mọi ứng dụng đã vá đều được cập nhật</string>
+    <string name="shortcut_repatch_short">Vá lại</string>
+    <string name="shortcut_repatch_long">Vá lại các ứng dụng đã lỗi thời</string>
+    <string name="shortcut_check_updates_short">Kiểm tra cập nhật</string>
+    <string name="shortcut_check_updates_long">Kiểm tra cập nhật bản vá</string>
+    <string name="shortcut_patch_app">Vá %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bạn có chắc muốn gỡ ứng dụng này không?</string>
     <string name="home_app_info_remove_app_warning">Thao tác này sẽ xóa vĩnh viễn:</string>
@@ -450,8 +481,6 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="failed_to_mount">Không thể gắn: %s</string>
     <string name="failed_to_unmount">Không thể gỡ gắn: %s</string>
     <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Điểm: %d</string>
-    <string name="mini_game_best">Cao nhất %d</string>
     <string name="mini_game_new_record">Kỷ lục mới!</string>
     <string name="mini_game_game_over">Bạn đã thua</string>
     <string name="mini_game_try_again">Thử lại</string>
@@ -542,7 +571,28 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_advanced_update_interval_monthly">1 tháng/lần</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Tần suất kiểm tra trong nền</string>
     <string name="settings_advanced_update_interval_battery_warning">Tính năng này có thể không hoạt động trên một số thiết bị như Xiaomi, Huawei, Samsung và OnePlus, vì chúng thường giới hạn ứng dụng chạy nền để tiết kiệm pin</string>
+    <string name="settings_advanced_auto_patch">Tự động vá lại</string>
+    <string name="settings_advanced_auto_patch_description">Tự động vá lại các ứng dụng đã cài đặt trong nền khi bản vá của chúng thay đổi. Chỉ các ứng dụng có APK gốc đã lưu được hỗ trợ</string>
+    <string name="settings_advanced_auto_patch_interval">Tần suất vá lại tự động</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Tần suất các ứng dụng đã vá được xây dựng lại</string>
+    <string name="settings_advanced_auto_patch_charging">Chỉ khi đang sạc</string>
+    <string name="settings_advanced_auto_patch_charging_description">Việc vá tốn nhiều CPU và bộ nhớ, vì vậy nó sẽ đợi bộ sạc</string>
+    <string name="settings_advanced_auto_patch_install">Cài đặt tự động</string>
+    <string name="settings_advanced_auto_patch_install_description">Yêu cầu Shizuku làm trình cài đặt. Với bất kỳ trình cài đặt nào khác, các ứng dụng đã vá chỉ được lưu</string>
+    <string name="settings_advanced_external_batch_patch">Cho phép các trình kích hoạt bên ngoài</string>
+    <string name="settings_advanced_external_batch_patch_description">Cho phép các ứng dụng tự động hóa bắt đầu vá hàng loạt bằng một ý định. Mọi yêu cầu đều được xác nhận trước khi mọi thứ chạy</string>
+    <string name="external_batch_patch_title">Bắt đầu vá hàng loạt?</string>
+    <string name="external_batch_patch_description">%s muốn Morphe vá và cài đặt ứng dụng</string>
+    <string name="external_batch_patch_trust_caller">Luôn cho phép ứng dụng này</string>
+    <string name="external_batch_patch_unknown_caller">Một ứng dụng không xác định</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Vá lại tự động đã hoàn thành</string>
+    <string name="notification_auto_patch_running_title">Đang vá lại ứng dụng</string>
+    <string name="notification_auto_patch_blocked_title">Vá lại tự động không chạy</string>
+    <string name="notification_auto_patch_blocked_battery">Hệ thống chặn cài đặt này. Trên Xiaomi và các thiết bị tương tự, hãy bật \"Cài đặt qua USB\" trong tùy chọn nhà phát triển. Trên một cấu hình làm việc, cài đặt có thể bị hạn chế theo chính sách</string>
+    <string name="notification_auto_patch_blocked_foreground">Android không cho phép vá bắt đầu trong nền. Mở Morphe và vá từ ứng dụng</string>
+    <string name="notification_channel_auto_patch">Vá lại tự động</string>
+    <string name="notification_channel_auto_patch_description">Thông báo tiến trình và kết quả im lặng để vá lại theo lịch trình</string>
     <string name="notification_manager_update_title">Đã có bản cập nhật Morphe mới</string>
     <string name="notification_bundle_update_title">Đã có bản vá mới</string>
     <string name="notification_update_text">Phiên bản %s đã sẵn sàng để tải xuống</string>
@@ -728,7 +778,7 @@ Chi tiết: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android chặn điều này vì nó sẽ hạ cấp ứng dụng đã cài đặt</string>
     <string name="installer_shizuku_error_signature">Android chặn điều này vì ứng dụng đã cài đặt có chữ ký khác</string>
     <string name="installer_shizuku_error_invalid_apk">Android không thể đọc APK này</string>
-    <string name="installer_shizuku_error_user_profile">Android chặn điều này đối với người dùng hiện tại hoặc cấu hình làm việc</string>
+    <string name="installer_shizuku_error_user_profile">Hệ thống chặn cài đặt này. Trên Xiaomi và các thiết bị tương tự, bật \"Cài đặt qua USB\" trong tùy chọn nhà phát triển. Trên một cấu hình làm việc, cài đặt có thể bị hạn chế bởi chính sách</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Tối ưu hóa pin</string>
     <string name="settings_system_battery_optimization_description">Duy trì trình vá tiếp tục chạy kể cả khi ứng dụng bị thu nhỏ</string>
@@ -911,6 +961,9 @@ Chi tiết: %2$s"</string>
     <string name="confirm">OK</string>
     <string name="warning">Cảnh báo</string>
     <string name="error_">Lỗi</string>
+    <string name="failed">Thất bại</string>
+    <string name="cancelled">Đã hủy</string>
+    <string name="ready">Sẵn sàng</string>
     <string name="retry">Thử lại</string>
     <string name="refresh">Làm mới</string>
     <string name="add">Thêm</string>
@@ -923,6 +976,9 @@ Chi tiết: %2$s"</string>
     <string name="delete">Xoá</string>
     <string name="delete_all">Xóa tất cả</string>
     <string name="remove">Xóa</string>
+    <string name="exclude">Loại trừ</string>
+    <string name="excluded">Đã loại trừ</string>
+    <string name="include">Bao gồm</string>
     <string name="disable">Tắt</string>
     <string name="enable">Không sợ</string>
     <string name="loading">Đang tải…</string>
@@ -949,9 +1005,10 @@ Chi tiết: %2$s"</string>
     <string name="reorder_done">Đã lưu thứ tự</string>
     <string name="reset_order">Đặt lại thứ tự</string>
     <string name="reset_order_done">Đặt lại thứ tự</string>
+    <string name="accessibility_select_app">Chọn ứng dụng</string>
     <string name="accessibility_move_up">Lên trên</string>
     <string name="accessibility_move_down">Xuống dưới</string>
-    <string name="accessibility_app_moved_announcement">Đã chuyển %1$s đến vị trí %2$d/%3$d</string>
+    <string name="accessibility_app_moved_announcement">Đã chuyển %1$s đến vị trí %2$s/%3$s</string>
     <string name="accessibility_scroll_to_top">Về đầu danh sách</string>
     <string name="rename">Đổi tên</string>
     <string name="import_">Nhập</string>
@@ -967,6 +1024,7 @@ Chi tiết: %2$s"</string>
     <string name="continue_">Tiếp</string>
     <string name="version">Phiên bản</string>
     <string name="patch">Vá</string>
+    <string name="patching">Đang vá</string>
     <string name="repatch">Vá lại</string>
     <string name="open">Mở</string>
     <string name="mount">Gắn kết</string>
@@ -1015,8 +1073,8 @@ Chi tiết: %2$s"</string>
     <string name="download_confirmation_metered">"Bạn đang dùng 4G/5G, tiếp tục có thể phát sinh cước dữ liệu.\n\nBạn vẫn muốn tiếp tục?"</string>
     <string name="download_update_confirmation">Tải bản cập nhật?</string>
     <!-- Onboarding coach marks -->
-    <!-- %1$d = current step number, %2$d = total number of steps (e.g. "3 of 13") -->
-    <string name="onboarding_step_of">%1$d / %2$d</string>
+    <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s trong %2$s</string>
     <string name="onboarding_sources_desc">Quản lý các nguồn vá. Mỗi nguồn cung cấp các bản vá có thể được áp dụng cho ứng dụng của bạn</string>
     <string name="onboarding_swipe_title">Cử chỉ vuốt</string>
     <string name="onboarding_swipe_desc">Vuốt phải để xem bản vá. Vuốt trái để ẩn thẻ khỏi màn hình chính</string>
