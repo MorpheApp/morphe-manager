@@ -43,6 +43,7 @@ fun rememberApkDownloadHelperAction(
 ): (() -> Unit)? {
     val context = LocalContext.current
     val noResultMessage = stringResource(R.string.home_apk_helper_no_result)
+    val noAccessMessage = stringResource(R.string.home_apk_helper_no_access)
     var helpers by remember { mutableStateOf(emptyList<ApkDownloadHelperContract.Helper>()) }
     var showPicker by remember { mutableStateOf(false) }
 
@@ -63,6 +64,13 @@ fun rememberApkDownloadHelperAction(
         val uri = ApkDownloadHelperContract.resultUri(result.data)
         if (uri == null) {
             context.toast(noResultMessage)
+            return@rememberLauncherForActivityResult
+        }
+
+        // Reading would fail with a SecurityException anyway, but that surfaces as a generic
+        // "try again" error, which is misleading when the helper is the one at fault
+        if (!ApkDownloadHelperContract.grantsReadAccess(result.data)) {
+            context.toast(noAccessMessage)
             return@rememberLauncherForActivityResult
         }
 

@@ -181,6 +181,7 @@
     <string name="home_apk_helper_warning">Only continue if you trust this helper app. Morphe checks the package, version and signature of whatever it receives before patching</string>
     <string name="home_apk_helper_warning_unverified">Only continue if you trust this helper app. Morphe cannot verify the signature of this APK, so a modified file would not be detected</string>
     <string name="home_apk_helper_no_result">The helper app did not return an APK</string>
+    <string name="home_apk_helper_no_access">The helper app did not grant access to the APK it returned</string>
     <string name="home_apk_use_saved">Use saved APK</string>
     <string name="home_apk_use_installed">Use installed APK</string>
     <string name="home_apk_use_installed_unverified">Could not verify the signature of the installed app, so it may already be patched</string>

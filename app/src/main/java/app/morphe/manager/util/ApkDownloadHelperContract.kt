@@ -148,4 +148,13 @@ object ApkDownloadHelperContract {
      */
     fun resultUri(intent: Intent?): Uri? =
         intent?.data?.takeIf { it.scheme == ContentResolver.SCHEME_CONTENT }
+
+    /**
+     * Whether the helper granted read access to what it returned.
+     *
+     * Reported separately from [resultUri] so a helper that forgets the flag gets a message
+     * naming the real cause, instead of a generic read failure the user cannot act on.
+     */
+    fun grantsReadAccess(intent: Intent?): Boolean =
+        intent != null && intent.flags and Intent.FLAG_GRANT_READ_URI_PERMISSION != 0
 }

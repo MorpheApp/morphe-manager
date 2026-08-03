@@ -49,8 +49,9 @@ The contract lives in
 In short, a helper declares an exported activity with an intent filter for
 `app.morphe.manager.action.DOWNLOAD_ORIGINAL_APK` and `android.intent.category.DEFAULT`, reads
 the request from the intent extras, and answers with `RESULT_OK`, the downloaded file in
-`Intent.setData`, and `FLAG_GRANT_READ_URI_PERMISSION` so Morphe can open it. Without that
-flag the selection is reported as unreadable.
+`Intent.setData`, and `FLAG_GRANT_READ_URI_PERMISSION` so Morphe can open it. The answer must
+use a `content://` Uri; a result without the flag, or on any other scheme, is rejected before
+Morphe reads anything.
 
 Requests are always sent to the exact component the user picked, so a helper is never invoked
 just for claiming the action.
@@ -62,7 +63,7 @@ just for claiming the action.
 | The toggle is missing in Settings | No installed app implements the contract |
 | The button is missing in the dialog | The toggle is off, or the helper was uninstalled since Morphe last looked |
 | "The helper app did not return an APK" | The helper finished without handing back a file. Use **Continue** to download it manually |
-| "Could not read the APK file" | The helper did not grant read access to the file it returned |
+| "The helper app did not grant access to the APK it returned" | The helper answered without `FLAG_GRANT_READ_URI_PERMISSION` |
 | A wrong package or version warning | The helper returned a different app or version than the one requested |
 
 ## Next steps
