@@ -169,7 +169,7 @@ internal fun PatchOptionsDialog(
 
     val showColorPicker = remember { mutableStateOf<Pair<String, String>?>(null) }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = patch.name,
         titleTrailingContent = {
@@ -180,7 +180,7 @@ internal fun PatchOptionsDialog(
             )
         },
         footer = {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
@@ -196,7 +196,7 @@ internal fun PatchOptionsDialog(
                     color = LocalDialogSecondaryTextColor.current
                 )
                 HorizontalDivider(
-                    modifier = Modifier.padding(vertical = MorpheDefaults.ItemSpacing),
+                    modifier = Modifier.padding(vertical = Defaults.ItemSpacing),
                     color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
                     thickness = 0.5.dp
                 )
@@ -217,10 +217,10 @@ internal fun PatchOptionsDialog(
                     // Consecutive boolean toggles get a small spacer instead of a divider.
                     // Dividers between toggles look redundant since each toggle is already a distinct row
                     if (bothBooleans) {
-                        Spacer(modifier = Modifier.height(MorpheDefaults.ContentPaddingSmall))
+                        Spacer(modifier = Modifier.height(Defaults.ContentPaddingSmall))
                     } else {
                         HorizontalDivider(
-                            modifier = Modifier.padding(vertical = MorpheDefaults.ItemSpacing),
+                            modifier = Modifier.padding(vertical = Defaults.ItemSpacing),
                             color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
                             thickness = 0.5.dp
                         )
@@ -407,7 +407,7 @@ private fun ColorOptionWithPresets(
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
     ) {
         // Title and description
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -463,7 +463,7 @@ fun ColorPresetItem(
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null
 ) {
-    val shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius)
+    val shape = RoundedCornerShape(Defaults.CompactCornerRadius)
 
     val isMaterialYou = colorValue.contains("system_neutral", ignoreCase = true) ||
             colorValue.contains("system_accent", ignoreCase = true) ||
@@ -562,7 +562,7 @@ fun ColorPresetItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
+            horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (isCustom || isMaterialYou || parsedColor != null) {
@@ -574,7 +574,7 @@ fun ColorPresetItem(
                     },
                     contentDescription = null,
                     tint = contentColor.copy(alpha = 0.7f),
-                    modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
+                    modifier = Modifier.size(Defaults.IconSizeSmall)
                 )
             }
 
@@ -591,7 +591,7 @@ fun ColorPresetItem(
                     imageVector = Icons.Default.Check,
                     contentDescription = null,
                     tint = contentColor,
-                    modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
+                    modifier = Modifier.size(Defaults.IconSizeSmall)
                 )
             }
         }
@@ -624,7 +624,7 @@ private fun PathInputOption(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
     ) {
         // Folder picker button (needs permissions for icon/header creation)
         val folderPicker = rememberFolderPickerWithPermission { uri ->
@@ -632,7 +632,7 @@ private fun PathInputOption(
             onValueChange(uri.toFilePath())
         }
 
-        MorpheDialogTextField(
+        AppDialogTextField(
             value = value,
             onValueChange = onValueChange,
             label = {
@@ -648,7 +648,7 @@ private fun PathInputOption(
 
         // Create Icon button (only for the default Morphe bundle)
         if (isIconField && isDefaultBundle) {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.adaptive_icon_create),
                 onClick = { showIconCreator.value = true },
                 icon = Icons.Outlined.AutoAwesome,
@@ -658,7 +658,7 @@ private fun PathInputOption(
 
         // Create Header button (only for the default Morphe bundle)
         if (isHeaderField && isDefaultBundle) {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.header_creator_create),
                 onClick = { showHeaderCreator.value = true },
                 icon = Icons.Outlined.Image,
@@ -726,9 +726,9 @@ private fun FilePathInputOption(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
     ) {
-        MorpheDialogTextField(
+        AppDialogTextField(
             value = value,
             onValueChange = onValueChange,
             label = { Text(if (required) "$title *" else title) },
@@ -781,7 +781,7 @@ private fun PathWithPresetsOption(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
     ) {
         // Folder picker
         val folderPicker = rememberFolderPickerWithPermission { uri ->
@@ -789,7 +789,7 @@ private fun PathWithPresetsOption(
         }
 
         // Dropdown TextField with folder picker and clear button
-        MorpheDialogDropdownTextField(
+        AppDialogDropdownTextField(
             value = value,
             onValueChange = onValueChange,
             dropdownItems = dropdownItems,
@@ -803,7 +803,7 @@ private fun PathWithPresetsOption(
 
         // Create Icon button (only for the default Morphe bundle)
         if (isIconField && isDefaultBundle) {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.adaptive_icon_create),
                 onClick = { showIconCreator.value = true },
                 icon = Icons.Outlined.AutoAwesome,
@@ -813,7 +813,7 @@ private fun PathWithPresetsOption(
 
         // Create Header button (only for the default Morphe bundle)
         if (isHeaderField && isDefaultBundle) {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.header_creator_create),
                 onClick = { showHeaderCreator.value = true },
                 icon = Icons.Outlined.Image,
@@ -875,9 +875,9 @@ private fun TextInputOption(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
     ) {
-        MorpheDialogTextField(
+        AppDialogTextField(
             value = value,
             onValueChange = onValueChange,
             label = {
@@ -936,7 +936,7 @@ private fun DialogTintedSurface(
     onClick: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
-    val shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius)
+    val shape = RoundedCornerShape(Defaults.CompactCornerRadius)
     Surface(
         modifier = modifier
             .fillMaxWidth()
@@ -966,7 +966,7 @@ private fun ListStringInputOption(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ItemSpacing),
+                .padding(horizontal = Defaults.ContentPadding, vertical = Defaults.ItemSpacing),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -991,17 +991,16 @@ private fun ListStringInputOption(
                 }
             }
 
-            Spacer(Modifier.width(MorpheDefaults.ItemSpacing))
+            Spacer(Modifier.width(Defaults.ItemSpacing))
 
             Row(
                 horizontalArrangement = Arrangement.spacedBy(6.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (value.isNotEmpty()) {
-                    InfoBadge(
+                    StatusBadge(
                         text = "${value.size}",
-                        style = InfoBadgeStyle.Primary,
-                        isCompact = true
+                        tone = SemanticTone.Primary
                     )
                 }
                 Icon(
@@ -1059,12 +1058,12 @@ private fun ListStringEditorDialog(
         inputError = false
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = title,
         dismissOnClickOutside = false,
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.save),
                 onPrimaryClick = { onConfirm(items.toList()) },
                 secondaryText = stringResource(android.R.string.cancel),
@@ -1074,7 +1073,7 @@ private fun ListStringEditorDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
         ) {
             // Description
             if (description.isNotBlank()) {
@@ -1088,10 +1087,10 @@ private fun ListStringEditorDialog(
             // Input row
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                MorpheDialogTextField(
+                AppDialogTextField(
                     value = inputText,
                     onValueChange = {
                         inputText = it
@@ -1132,7 +1131,7 @@ private fun ListStringEditorDialog(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = MorpheDefaults.ContentPadding),
+                        .padding(vertical = Defaults.ContentPadding),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -1212,7 +1211,7 @@ private fun DropdownOptionItem(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(
@@ -1230,7 +1229,7 @@ private fun DropdownOptionItem(
             }
         }
 
-        MorpheDialogDropdownTextField(
+        AppDialogDropdownTextField(
             value = value,
             onValueChange = { newValue ->
                 // Try to find the actual value from presets by matching the string representation
@@ -1274,7 +1273,7 @@ private fun FolderPickerOption(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
     ) {
         // Folder picker (needs permissions for icon/header creation)
         val folderPicker = rememberFolderPickerWithPermission { uri ->
@@ -1293,7 +1292,7 @@ private fun FolderPickerOption(
 
         // Create Icon button (only for the default Morphe bundle)
         if (isIconField && isDefaultBundle) {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.adaptive_icon_create),
                 onClick = { showIconCreator.value = true },
                 icon = Icons.Outlined.AutoAwesome,
@@ -1303,7 +1302,7 @@ private fun FolderPickerOption(
 
         // Create Header button (only for the default Morphe bundle)
         if (isHeaderField && isDefaultBundle) {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.header_creator_create),
                 onClick = { showHeaderCreator.value = true },
                 icon = Icons.Outlined.Image,
@@ -1374,7 +1373,7 @@ private fun FilePickerOption(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
     ) {
         PickerFieldHeader(title = title, required = required, isInvalid = isInvalid)
 
@@ -1424,7 +1423,7 @@ private fun ImageInputOption(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
     ) {
         PickerFieldHeader(title = title, required = required, isInvalid = isInvalid)
 

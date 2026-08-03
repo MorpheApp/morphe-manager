@@ -50,7 +50,7 @@ import app.morphe.manager.ui.screen.settings.system.*
 import app.morphe.manager.ui.screen.shared.GlassButton
 import app.morphe.manager.ui.screen.shared.GlassButtonDefaults
 import app.morphe.manager.ui.screen.shared.ListScrollbar
-import app.morphe.manager.ui.screen.shared.MorpheAnimations
+import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.screen.shared.isLandscape
 import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.*
@@ -347,7 +347,7 @@ fun SettingsScreen(
                 Box(modifier = Modifier.weight(1f).fillMaxHeight()) {
                     AnimatedContent(
                         targetState = currentTab,
-                        transitionSpec = MorpheAnimations.fadeCrossfade(200),
+                        transitionSpec = Animations.fadeCrossfade(200),
                         label = "settings_tab_landscape",
                         modifier = Modifier.fillMaxSize()
                     ) { tab -> TabContent(tab) }
@@ -386,7 +386,7 @@ fun SettingsScreen(
                     ListScrollbar(scrollState = currentScrollState)
                 }
 
-                MorpheBottomNavigation(
+                BottomNavigation(
                     currentTab = currentTab,
                     onTabSelected = { tab ->
                         coroutineScope.launch { pagerState.animateScrollToPage(tab.ordinal) }
@@ -547,7 +547,7 @@ private fun LandscapeNavItem(
  * Bottom navigation bar.
  */
 @Composable
-private fun MorpheBottomNavigation(
+private fun BottomNavigation(
     currentTab: SettingsTab,
     onTabSelected: (SettingsTab) -> Unit,
     onAppearanceTabPositioned: ((Rect) -> Unit)? = null,

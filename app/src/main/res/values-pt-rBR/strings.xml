@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Toque para revisar e remover</string>
     <string name="home_metadata_errors_title">Algumas fontes de patch estão indisponíveis</string>
     <string name="home_metadata_errors_subtitle">Toque para revisar as fontes</string>
+    <string name="home_outdated_manager_title">O Morphe está desatualizado</string>
+    <string name="home_outdated_manager_subtitle">Algumas fontes de patches precisam de uma nova versão</string>
     <string name="home_metered_skipped_title">Atualizações pausadas em dados móveis</string>
     <string name="home_metered_skipped_subtitle">Toque para permitir atualizações usando dados móveis</string>
     <string name="home_update_error">Falha na atualização</string>
@@ -83,20 +85,20 @@
     <string name="home_greeting_morning_1">Levante e atualize</string>
     <string name="home_greeting_morning_2">Bom dia! Apps não se atualizam sozinhos</string>
     <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Cai a tarde e você sem atualização? Atualize algo</string>
+    <string name="home_greeting_afternoon_1">Bateu a preguiça da tarde? Patcheie alguma coisa</string>
     <string name="home_greeting_afternoon_2">O patching pós-almoço é diferente</string>
     <string name="home_greeting_afternoon_3">O turno da tarde: edição de patches</string>
     <!-- Evening greetings (17:00–21:59) -->
     <string name="home_greeting_evening_1">Boa noite! Patches à noite batem diferente</string>
     <string name="home_greeting_evening_2">Quase capotando? Patcheie um app primeiro</string>
-    <string name="home_greeting_evening_3">Fim do expediente? Patcheie algo primeiro</string>
+    <string name="home_greeting_evening_3">Fim do expediente? Patcheie alguma coisa primeiro</string>
     <!-- Late night greetings (22:00–23:59) -->
     <string name="home_greeting_late_night_1">Ainda acordado? Os apps que precisam ser patcheados também</string>
     <string name="home_greeting_late_night_2">Sessão de patches tarde da noite? Respeito</string>
     <string name="home_greeting_late_night_3">Modo coruja noturna: ativado</string>
     <!-- Super late night greetings (0:00–4:59) -->
     <string name="home_greeting_super_late_1">Horário de pico de patches... aparentemente</string>
-    <string name="home_greeting_super_late_2">Não consegue dormir? Patcheie algo</string>
+    <string name="home_greeting_super_late_2">Não consegue dormir? Patcheie alguma coisa</string>
     <string name="home_greeting_super_late_3">Nesse ponto, fique acordado e patcheie</string>
     <string name="home_greeting_super_late_4">Você e os servidores, ambos acordados</string>
     <string name="home_greeting_super_late_5">Noturno e produtivo</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Metadados N/A</string>
     <string name="sources_management_metadata_unavailable_hint">O arquivo de metadados remoto não está disponível. A aplicação de patches com o pacote instalado ainda funciona, mas a atualização automática está desativada para esta fonte.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">O pacote de patches não pôde ser baixado. A URL de origem pode estar incorreta ou o arquivo não existir.</string>
+    <string name="sources_management_outdated_manager_badge">Atualize o Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Esta fonte foi criada para o patcher %1$s, mas o Morphe %2$s já inclui o patcher %3$s. Atualize o Morphe para usá-la</string>
     <string name="sources_management_source_enabled">Fonte ativada</string>
     <string name="sources_management_source_disabled">Fonte desativada</string>
     <string name="sources_management_source_updating">Atualizando fonte</string>
@@ -164,7 +168,7 @@
     <string name="home_apk_availability_no">Não, eu já tenho um APK</string>
     <string name="home_apk_use_saved">Usar APK salvo</string>
     <string name="home_apk_use_installed">Usar APK instalado</string>
-    <string name="home_apk_use_installed_unverified">Não foi possível verificar a assinatura do aplicativo instalado, portanto, ele pode já estar modificado</string>
+    <string name="home_apk_use_installed_unverified">Não foi possível verificar a assinatura do app instalado, portanto, ele pode já estar patcheado</string>
     <string name="home_app_info_no_saved_apk">Não há APK salvo. O patch exigirá a seleção do arquivo APK novamente</string>
     <string name="home_version_requires_android">Requer Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Não suportado neste dispositivo</string>
@@ -250,6 +254,11 @@ Para obter os melhores resultados, este app recomenda aplicar os patches em um &
     <string name="home_dialog_wrong_package_description">O APK selecionado não é para o aplicativo que você pretendia aplicar os patches</string>
     <string name="home_dialog_expected_package">Pacote esperado:</string>
     <string name="home_dialog_selected_package">Pacote selecionado:</string>
+    <string name="home_dialog_orphaned_install_title">Cópia anterior deixada para trás</string>
+    <string name="home_dialog_orphaned_install_description">A aplicação de patch alterou o nome do pacote, então a cópia que você aplicou patch anteriormente ainda está instalada como um aplicativo separado</string>
+    <string name="home_dialog_orphaned_install_warning">Não está mais sendo rastreada e não receberá atualizações de patch</string>
+    <string name="home_dialog_orphaned_install_uninstall">Desinstalá-la</string>
+    <string name="home_dialog_orphaned_install_keep">Mantenha</string>
     <string name="home_outdated_patches_dialog_title">Patches podem estar desatualizados</string>
     <string name="home_outdated_patches_dialog_message">Dados móveis estão ativos e atualizações de patch estão desativadas</string>
     <string name="home_outdated_patches_dialog_warning">Usar patches desatualizados pode resultar em um app quebrado</string>
@@ -308,6 +317,10 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="header_creator_guide_positioning_title">Posicionamento e dimensionamento</string>
     <string name="header_creator_guide_positioning_body">Use gestos de pinça para aumentar o zoom e arraste diretamente na visualização para posicionar e dimensionar sua imagem. Guias de ajuste aparecem quando a imagem está perto do centro. Você também pode usar o controle deslizante abaixo da visualização.</string>
     <!-- Batch patching -->
+    <string name="batch_patch_action">Patches selecionados</string>
+    <string name="batch_patch_title">Aplicação de patches em lote</string>
+    <string name="batch_patch_planning">Preparando a fila…</string>
+    <string name="batch_patch_preparing_next">Preparando o próximo app…</string>
     <string name="batch_patch_progress_counter">%1$s corrigido(a) de %2$s</string>
     <string name="batch_patch_summary">%1$s corrigidos, %2$s falharam, %3$s ignorados</string>
     <string name="batch_patch_saved_hint">Os aplicativos corrigidos foram salvos. Instale-os agora ou mais tarde a partir da lista de APKs corrigidos nas configurações</string>
@@ -373,7 +386,7 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="root_pre_patch_installer_description">Seu dispositivo tem acesso root. Escolha se este aplicativo deve ser aplicado um patch para acesso root ou instalação padrão</string>
     <string name="root_pre_patch_installer_mount_title">Modo de montagem root</string>
     <string name="root_pre_patch_installer_mount_description">Patches para montagem root, então monta o APK sobre o aplicativo original correspondente. Sem necessidade de GmsCore</string>
-    <string name="root_mount_module_unmount_warning">Se o KernelSU tiver os módulos de Desmontagem habilitados por padrão, abra o KernelSU &gt; Superusuário &gt; o aplicativo que você montou &gt; Perfil &gt; Personalizado e desabilite os módulos de Desmontagem. Caso contrário, o APK montado e corrigido pode não ter efeito, mesmo que o Morphe mostre que ele está montado</string>
+    <string name="root_mount_module_unmount_warning">Se o KernelSU tiver os módulos de Desmontagem habilitados por padrão, abra o KernelSU &gt; Superusuário &gt; o app que você montou &gt; Perfil &gt; Personalizado e desabilite os módulos de Desmontagem. Caso contrário, o APK montado e patcheado pode não ter efeito, mesmo que o Morphe mostre que ele está montado</string>
     <string name="root_pre_patch_installer_standard_title">Modo de instalação padrão</string>
     <string name="root_pre_patch_installer_standard_description">Patches como um APK normal com suporte ao GmsCore. Sua configuração de instalador é usada após o patching</string>
     <string name="root_pre_patch_installer_hint">Este modo de patch é separado de Configurações > Sistema > Instalador e não pode ser alterado após o patching</string>
@@ -384,6 +397,8 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="patcher_error_dialog_app_info">Informações do app</string>
     <string name="patcher_tab_logs">Logs do Patcher</string>
     <string name="patcher_tab_game">Jogos</string>
+    <string name="patcher_logs_waiting">Aguardando saída do log…</string>
+    <string name="patcher_logs_lost">A saída do log não é mantida entre reinicializações do app</string>
     <string name="patcher_long_step_warning">Esta etapa pode demorar um pouco. Por favor, aguarde…</string>
     <string name="patcher_installing_subtitle">Tá quase na hora do show! 🎸</string>
     <string name="patcher_success_title">Pronto! 🎉</string>
@@ -439,7 +454,7 @@ A desinstalação apagará permanentemente todos os dados do aplicativo."</strin
     <string name="patcher_stop_confirm_title">Parar patcher</string>
     <string name="patcher_stop_confirm_description">Tem certeza de que deseja interromper o processo de patching?</string>
     <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Transformando seu app em algo incrível… 🏆</string>
+    <string name="patcher_message_1">Morphando seu app em algo incrível… 🏆</string>
     <string name="patcher_message_2">Ensinando novos truques para apps antigos… 🎩</string>
     <string name="patcher_message_3">Dando um upgrade digital no seu app… 🔧</string>
     <string name="patcher_message_4">Criando magia digital… ☕</string>
@@ -1087,6 +1102,7 @@ Detalhes: %2$s"</string>
     <string name="install_update_manager_failed">Falha ao instalar a atualização</string>
     <string name="installing_manager_update">Instalando atualização…</string>
     <string name="downloading_manager_update">Baixando atualização…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Falha ao baixar atualização: %s</string>
     <string name="failed_to_check_updates">Falha ao verificar atualizações: %s</string>
     <string name="failed_to_download_update">Falha ao baixar atualização: %s</string>

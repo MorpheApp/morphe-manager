@@ -30,8 +30,8 @@ and which source they come from. The badge says whether the app is ready:
 | Badge | Meaning | What to do |
 | --- | --- | --- |
 | **Ready** | An APK and a patch selection were found | Nothing |
-| **No APK** | No saved original, and the installed app cannot be used | **Find APK**, or **Attach APK** if you already have the file |
-| **Version** | This APK version is not covered by the patches | **Find APK** for a supported version, **Patch anyway**, or attach a file |
+| **No APK** | No saved original, and the installed app cannot be used | **Select APK** and pick where it comes from |
+| **Version** | This APK version is not covered by the patches | **Select APK** for a supported version, or **Patch anyway** |
 | **No patches** | No enabled source has patches for this app | Enable a source, or exclude the app |
 | **Excluded** | You removed it from this run | **Include** to bring it back |
 
@@ -40,10 +40,16 @@ on the device, and only asks you for a file when neither exists. An installed ap
 when it looks like it was already patched, because patching a patched APK produces a broken
 build.
 
-**Find APK** appears on cards that need one. It works out which version the sources want,
-sends you to the download page for exactly that version, and opens the file picker when you
-come back, so the file lands on the app it was fetched for. It is the same helper the
-single-app flow uses.
+That means an app you have never patched is queued at whatever version is installed. When the
+sources mark that version **experimental**, the card is tagged with it next to the app name.
+Nothing stops the run, because experimental versions do work, but it is the one caveat the
+queue cannot ask you about mid-run.
+
+**Select APK** on any card opens the same APK question the single-app flow asks, so the answer
+is the same everywhere. From there you can pick a version, including an experimental one, and
+choose where the file comes from: the saved original, the app installed on the device, a file
+you already have, or a download. Downloading sends you to the page for the version you picked
+and opens the file picker when you come back, so the file lands on the app it was fetched for.
 
 **Install when finished** decides what happens after the last app. Off keeps the patched APKs
 so you install them yourself; on hands the whole batch to the installer as soon as patching

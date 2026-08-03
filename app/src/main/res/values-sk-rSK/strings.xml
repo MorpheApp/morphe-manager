@@ -248,6 +248,10 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="home_dialog_wrong_package_description">Vybratý APK súbor nie je pre aplikáciu, ktorú sa chystáte zaplátať</string>
     <string name="home_dialog_expected_package">Očakávaný balík:</string>
     <string name="home_dialog_selected_package">Zvolený balík:</string>
+    <string name="home_dialog_orphaned_install_title">Predchádzajúca kópia zostala</string>
+    <string name="home_dialog_orphaned_install_description">Zmena názvu balíka spôsobila, že kópia, ktorú si predtým upravili, je stále nainštalovaná ako samostatná aplikácia</string>
+    <string name="home_dialog_orphaned_install_warning">Už nie je sledovaná a nebude prijímať aktualizácie</string>
+    <string name="home_dialog_orphaned_install_uninstall">Odinštalovať ju</string>
     <string name="home_outdated_patches_dialog_title">Záplaty môžu byť zastaralé</string>
     <string name="home_outdated_patches_dialog_message">Mobilné dáta sú aktívne a aktualizácie záplat sú zakázané</string>
     <string name="home_outdated_patches_dialog_warning">Používanie zastaraných záplat môže spôsobiť nefunkčnosť aplikácie</string>
@@ -1083,6 +1087,7 @@ Podrobnosti: %2$s"</string>
     <string name="install_update_manager_failed">Nepodarilo sa nainštalovať aktualizáciu</string>
     <string name="installing_manager_update">Inštalácia aktualizácie…</string>
     <string name="downloading_manager_update">Sťahovanie aktualizácie…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Nepodarilo sa stiahnuť aktualizáciu: %s</string>
     <string name="failed_to_check_updates">Nepodarilo sa skontrolovať aktualizácie: %s</string>
     <string name="failed_to_download_update">Nepodarilo sa stiahnuť aktualizáciu: %s</string>

@@ -250,6 +250,11 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="home_dialog_wrong_package_description">E\'lon qiling</string>
     <string name="home_dialog_expected_package">Kutilgan paket:</string>
     <string name="home_dialog_selected_package">Tanlangan paket:</string>
+    <string name="home_dialog_orphaned_install_title">Old nusxa qoldirilgan</string>
+    <string name="home_dialog_orphaned_install_description">Qo\'llanilgan yangilash paket nomi o\'zgartirilgan, shuning uchun avval qo\'llagan nusxangiz alohida ilova sifatida o\'rnatilgan</string>
+    <string name="home_dialog_orphaned_install_warning">U endi kuzatilmaydi va yangilash paketlariga ega bo\'lmaydi</string>
+    <string name="home_dialog_orphaned_install_uninstall">Uni o\'chirib tashlang</string>
+    <string name="home_dialog_orphaned_install_keep">Saqlab qolish</string>
     <string name="home_outdated_patches_dialog_title">Patchlar eskirgan bo\'lishi mumkin</string>
     <string name="home_outdated_patches_dialog_message">Ilovani ochishdan oldin o\'rnating</string>
     <string name="home_outdated_patches_dialog_warning">O\'rnatuvchini tanlang</string>
@@ -388,6 +393,8 @@ Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafs
     <string name="patcher_error_dialog_app_info">Ilova haqida ma\'lumot</string>
     <string name="patcher_tab_logs">Patcher jurnallari</string>
     <string name="patcher_tab_game">Kechirdi</string>
+    <string name="patcher_logs_waiting">Jurnal chiqishini kutish…</string>
+    <string name="patcher_logs_lost">Jurnal chiqishi ilovani qayta ishga tushirgandan keyin saqlanmaydi</string>
     <string name="patcher_long_step_warning">Kutib o‘tiring, bu biroz vaqt olishi mumkin…</string>
     <string name="patcher_installing_subtitle">Tayyor bo‘lding! 🎸</string>
     <string name="patcher_success_title">Barcha tugadi! 🎉</string>
@@ -1090,6 +1097,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="install_update_manager_failed">Yangilanishni o‘rnatishda xatolik</string>
     <string name="installing_manager_update">Yangilanish o‘rnatilmoqda…</string>
     <string name="downloading_manager_update">Yangilanish yuklanmoqda…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Yangilanishni yuklab olishda xatolik: %s</string>
     <string name="failed_to_check_updates">Yangilanishlarni tekshirishda xatolik: %s</string>
     <string name="failed_to_download_update">Yangilanishni yuklab olishda xatolik: %s</string>

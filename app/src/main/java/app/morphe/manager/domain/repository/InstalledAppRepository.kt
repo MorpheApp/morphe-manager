@@ -7,11 +7,15 @@ import app.morphe.manager.data.room.apps.installed.AppliedPatch
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.installed.SelectionPayload
+import app.morphe.manager.util.PM
 import app.morphe.manager.util.PatchSelection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.withContext
 
 private const val TAG = "Morphe InstalledAppRepository"
@@ -19,10 +23,20 @@ private const val TAG = "Morphe InstalledAppRepository"
 class InstalledAppRepository(
     db: AppDatabase,
     private val patchBundleRepository: PatchBundleRepository,
-    private val filesystem: Filesystem
+    private val filesystem: Filesystem,
+    private val pm: PM
 ) {
     private val dao = db.installedAppDao()
     private val bundleDao = db.patchBundleDao()
+
+    private val _orphanedInstalls = MutableStateFlow<List<InstalledApp>>(emptyList())
+
+    /**
+     * Copies that patching left behind on the device under their previous package name.
+     * They are no longer tracked in the database, so the UI offers to remove them before
+     * they turn into installs nothing points at.
+     */
+    val orphanedInstalls = _orphanedInstalls.asStateFlow()
 
     fun getAll() = dao.getAll().distinctUntilChanged()
 
@@ -55,6 +69,7 @@ class InstalledAppRepository(
         // This happens when repatching with a different bundle
         val staleEntries = dao.getStaleEntries(originalPackageName, currentPackageName)
         staleEntries.forEach { dao.delete(it) }
+        rememberOrphanedInstalls(staleEntries)
 
         // Skip applied patches whose bundle uid is no longer in patch_bundles:
         // the FK constraint would otherwise abort the entire upsert transaction.
@@ -86,6 +101,36 @@ class InstalledAppRepository(
             ),
             appliedPatches
         )
+    }
+
+    /**
+     * A package rename does not replace the previous install, it installs alongside it, so the
+     * records dropped above may still have a live app behind them. Collect those so the user can
+     * remove the leftovers instead of ending up with an untracked copy that never sees an update.
+     *
+     * Only apps a patch manager put there are offered: a record can outlive the patched APK it
+     * described, and by then the package name may well belong to the stock app from the Play Store.
+     * Mount installs never qualify anyway, since their package is the stock app and has to be
+     * unmounted rather than uninstalled.
+     */
+    private fun rememberOrphanedInstalls(staleEntries: List<InstalledApp>) {
+        val stillInstalled = staleEntries.filter {
+            it.installType != InstallType.MOUNT &&
+                    pm.getPackageInfo(it.currentPackageName) != null &&
+                    pm.isInstalledByPatchManager(it.currentPackageName)
+        }
+        if (stillInstalled.isEmpty()) return
+
+        _orphanedInstalls.update { current ->
+            val known = current.mapTo(mutableSetOf()) { it.currentPackageName }
+            current + stillInstalled.filter { it.currentPackageName !in known }
+        }
+        Log.i(TAG, "Orphaned installs left by rename: ${stillInstalled.map { it.currentPackageName }}")
+    }
+
+    /** Stops offering [installedApp] for cleanup once the user has removed or kept it. */
+    fun forgetOrphanedInstall(installedApp: InstalledApp) = _orphanedInstalls.update { current ->
+        current.filterNot { it.currentPackageName == installedApp.currentPackageName }
     }
 
     /**

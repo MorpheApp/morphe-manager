@@ -186,7 +186,7 @@ internal fun PatchCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(MorpheDefaults.ContentPadding),
+                    .padding(Defaults.ContentPadding),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -213,10 +213,9 @@ internal fun PatchCard(
                             modifier = Modifier.weight(1f, fill = false)
                         )
                         if (isNew) {
-                            InfoBadge(
+                            StatusBadge(
                                 text = stringResource(R.string.expert_mode_new_patches),
-                                style = InfoBadgeStyle.Primary,
-                                isCompact = true
+                                tone = SemanticTone.Primary
                             )
                         }
                     }
@@ -275,8 +274,8 @@ internal fun PatchCard(
                         .fillMaxWidth()
                         .background(colors.onSurface.copy(alpha = 0.06f))
                         .padding(
-                            horizontal = MorpheDefaults.ContentPadding,
-                            vertical = MorpheDefaults.ContentPaddingSmall,
+                            horizontal = Defaults.ContentPadding,
+                            vertical = Defaults.ContentPaddingSmall,
                         ),
                     contentAlignment = Alignment.Center,
                 ) {

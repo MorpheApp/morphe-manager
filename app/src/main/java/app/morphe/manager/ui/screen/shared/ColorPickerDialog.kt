@@ -85,11 +85,11 @@ fun ColorPickerDialog(
     val previewColor = activeToggle?.previewColor ?: Color(red, green, blue)
     val previewGradient = activeToggle?.previewGradient?.takeIf { it.size > 1 }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = title,
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.save),
                 onPrimaryClick = {
                     onColorSelected(activeToggle?.token ?: hexInput)
@@ -101,7 +101,7 @@ fun ColorPickerDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
         ) {
             // Color preview. A gradient carries its own meaning and is labeled by the switch
             // below, so the hex readout only makes sense for a single picked color
@@ -109,7 +109,7 @@ fun ColorPickerDialog(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(60.dp)
-                    .clip(RoundedCornerShape(MorpheDefaults.CompactCornerRadius))
+                    .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
                     .then(
                         if (previewGradient != null) {
                             Modifier.background(Brush.horizontalGradient(previewGradient))
@@ -140,7 +140,7 @@ fun ColorPickerDialog(
             }
 
             // Hex input
-            MorpheDialogTextField(
+            AppDialogTextField(
                 enabled = activeToggle == null,
                 value = hexInput,
                 onValueChange = { input ->
@@ -212,7 +212,7 @@ private fun ColorSlider(
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+        horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
     ) {
         Text(
             text = label,

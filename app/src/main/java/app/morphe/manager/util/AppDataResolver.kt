@@ -17,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.util.Optional
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -65,6 +66,11 @@ class AppDataResolver(
     // during a single session.
     private val cache = ConcurrentHashMap<Pair<String, AppDataSource>, ResolvedAppData>()
 
+    // Per-source lookups keyed by the source they came from rather than the caller's preference.
+    // The same APK is otherwise re-read once per preferredSource, and every archive read costs a
+    // full PackageManager parse that leaks an ApkAssets object until the finalizer runs.
+    private val sourceCache = ConcurrentHashMap<Pair<String, AppDataSource>, Optional<ResolvedAppData>>()
+
     /**
      * Invalidate cached data for a specific package.
      * Call this after installation, uninstallation, or any state change
@@ -72,11 +78,13 @@ class AppDataResolver(
      */
     fun invalidate(packageName: String) {
         cache.keys.removeAll { it.first == packageName }
+        sourceCache.keys.removeAll { it.first == packageName }
     }
 
     /** Invalidate all cached data. Call this when a global refresh is needed. */
     fun invalidateAll() {
         cache.clear()
+        sourceCache.clear()
     }
 
     /**
@@ -119,14 +127,7 @@ class AppDataResolver(
         }
 
         // Phase 1: find the best available icon + packageInfo from APK sources
-        val apkResult = apkSources.firstNotNullOfOrNull { source ->
-            when (source) {
-                AppDataSource.INSTALLED -> tryGetFromInstalled(packageName)
-                AppDataSource.ORIGINAL_APK -> tryGetFromOriginalApk(packageName)
-                AppDataSource.PATCHED_APK -> tryGetFromPatchedApk(packageName)
-                else -> null
-            }
-        }
+        val apkResult = apkSources.firstNotNullOfOrNull { source -> resolveFromSource(packageName, source) }
 
         // Phase 2: display name
         // apkResult already reflects the preferred source order (PATCHED_APK → ORIGINAL_APK → INSTALLED),
@@ -145,6 +146,24 @@ class AppDataResolver(
             source = apkResult?.source ?: if (bundleName != null) AppDataSource.BUNDLE_METADATA else AppDataSource.CONSTANTS
         ).also { cache[packageName to preferredSource] = it }
     }
+
+    /**
+     * Reads one source, reusing the previous answer for that exact source. A miss is remembered
+     * too, so a package without a saved APK does not reparse on every lookup.
+     */
+    private suspend fun resolveFromSource(
+        packageName: String,
+        source: AppDataSource
+    ): ResolvedAppData? = sourceCache.getOrPut(packageName to source) {
+        Optional.ofNullable(
+            when (source) {
+                AppDataSource.INSTALLED -> tryGetFromInstalled(packageName)
+                AppDataSource.ORIGINAL_APK -> tryGetFromOriginalApk(packageName)
+                AppDataSource.PATCHED_APK -> tryGetFromPatchedApk(packageName)
+                else -> null
+            }
+        )
+    }.orElse(null)
 
     /**
      * Try to get app data from installed app.

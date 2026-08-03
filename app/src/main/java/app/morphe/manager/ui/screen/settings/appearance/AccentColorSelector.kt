@@ -27,7 +27,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
+import app.morphe.manager.ui.screen.shared.Defaults
 import app.morphe.manager.ui.screen.shared.SectionCard
 import app.morphe.manager.util.darken
 import app.morphe.manager.util.toColorOrNull
@@ -92,19 +92,19 @@ fun AccentColorSelector(
                     val isSelected = selectedArgb != null && preset.toArgb() == selectedArgb
                     Box(
                         modifier = Modifier
-                            .size(MorpheDefaults.MinTouchTarget)
-                            .clip(RoundedCornerShape(MorpheDefaults.CompactCornerRadius))
+                            .size(Defaults.MinTouchTarget)
+                            .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
                             .border(
                                 width = if (isSelected) 3.dp else 1.dp,
                                 color = if (isSelected)
                                     preset.darken(0.4f)
                                 else
                                     MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
-                                shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius)
+                                shape = RoundedCornerShape(Defaults.CompactCornerRadius)
                             )
                             .background(
                                 preset.copy(alpha = if (isEnabled) 1f else 0.5f),
-                                RoundedCornerShape(MorpheDefaults.CompactCornerRadius)
+                                RoundedCornerShape(Defaults.CompactCornerRadius)
                             )
                             .clickable(enabled = isEnabled) {
                                 if (isEnabled) {

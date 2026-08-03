@@ -254,6 +254,11 @@
     <string name="home_dialog_wrong_package_description">선택된 APK는 패치하려는 애플리케이션이 아닙니다</string>
     <string name="home_dialog_expected_package">예상된 패키지:</string>
     <string name="home_dialog_selected_package">선택된 패키지:</string>
+    <string name="home_dialog_orphaned_install_title">이전 복사본이 남아 있습니다</string>
+    <string name="home_dialog_orphaned_install_description">패치로 인해 패키지명이 변경되었으므로, 이전에 패치한 복사본은 별도의 앱으로 설치되어 있습니다</string>
+    <string name="home_dialog_orphaned_install_warning">더 이상 추적되지 않으며 패치 업데이트를 받지 않습니다</string>
+    <string name="home_dialog_orphaned_install_uninstall">제거</string>
+    <string name="home_dialog_orphaned_install_keep">유지</string>
     <string name="home_outdated_patches_dialog_title">패치가 오래되었을 수 있습니다</string>
     <string name="home_outdated_patches_dialog_message">모바일 데이터가 활성화되어 있고 패치 업데이트가 비활성화되었습니다</string>
     <string name="home_outdated_patches_dialog_warning">오래된 패치를 사용하면 앱이 손상될 수 있습니다</string>
@@ -392,6 +397,8 @@
     <string name="patcher_error_dialog_app_info">앱 정보</string>
     <string name="patcher_tab_logs">패처 로그</string>
     <string name="patcher_tab_game">게임</string>
+    <string name="patcher_logs_waiting">로그 출력을 기다리는 중…</string>
+    <string name="patcher_logs_lost">앱을 다시 시작하는 경우에 로그 출력이 유지되지 않습니다</string>
     <string name="patcher_long_step_warning">이 단계는 시간이 걸릴 수 있습니다. 잠시만 기다려 주세요…</string>
     <string name="patcher_installing_subtitle">신나게 놀 준비가 거의 다 됐어요🎸</string>
     <string name="patcher_success_title">모두 완료! 🎉</string>
@@ -1022,7 +1029,7 @@ morphe_header_custom_dark.png
     <string name="enabled">활성화됨</string>
     <string name="disabled">비활성화됨</string>
     <string name="selected">선택됨</string>
-    <string name="not_selected">선택 안 함</string>
+    <string name="not_selected">선택 안함</string>
     <string name="select_all">모두 선택</string>
     <string name="select_all_done">모두 선택하였습니다</string>
     <string name="deselect_all">모두 선택 해제</string>
@@ -1093,6 +1100,7 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">업데이트를 할 수 없습니다</string>
     <string name="installing_manager_update">업데이트를 설치하는 중…</string>
     <string name="downloading_manager_update">업데이트를 다운로드하는 중…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">업데이트를 다운로드할 수 없습니다: %s</string>
     <string name="failed_to_check_updates">업데이트를 확인할 수 없습니다: %s</string>
     <string name="failed_to_download_update">업데이트를 다운로드할 수 없습니다: %s</string>

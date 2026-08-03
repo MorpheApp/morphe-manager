@@ -38,11 +38,11 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
-import app.morphe.manager.ui.screen.shared.MorpheDialogTextField
+import app.morphe.manager.ui.screen.shared.Defaults
+import app.morphe.manager.ui.screen.shared.AppDialogTextField
 
 /**
- * Wraps [MorpheDialogTextField] with [LocalDialogTextColor] set to onSurface
+ * Wraps [AppDialogTextField] with [LocalDialogTextColor] set to onSurface
  * so it renders correctly outside a dialog context.
  */
 @Composable
@@ -63,7 +63,7 @@ internal fun HomeSearchTextField(
     }
 
     CompositionLocalProvider(LocalDialogTextColor provides MaterialTheme.colorScheme.onSurface) {
-        MorpheDialogTextField(
+        AppDialogTextField(
             value = value,
             onValueChange = onValueChange,
             label = { Text(stringResource(R.string.home_search_apps)) },
@@ -83,7 +83,7 @@ internal fun HomeSearchTextField(
  * Generic empty state with icon, title, optional subtitle and optional action button.
  */
 @Composable
-internal fun MorpheEmptyState(
+internal fun HomeEmptyState(
     modifier: Modifier = Modifier,
     icon: ImageVector,
     title: String,
@@ -245,8 +245,8 @@ internal fun LazyListScope.hiddenSearchAndShowHiddenItems(
                 count = hiddenAppItems.size,
                 onClick = onShowHiddenApps,
                 modifier = Modifier.animateItem(
-                    fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-                    fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+                    fadeInSpec = tween(Defaults.ANIMATION_DURATION),
+                    fadeOutSpec = tween(Defaults.ANIMATION_DURATION),
                     placementSpec = spring(stiffness = Spring.StiffnessMediumLow)
                 )
             )

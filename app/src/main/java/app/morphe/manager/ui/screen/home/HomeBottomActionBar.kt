@@ -91,8 +91,8 @@ fun HomeBottomActionBar(
             AnimatedVisibility(
                 visible = showSearchButton,
                 modifier = Modifier.weight(1f),
-                enter = MorpheAnimations.expandHorizFadeIn,
-                exit = MorpheAnimations.shrinkHorizFadeOut
+                enter = Animations.expandHorizFadeIn,
+                exit = Animations.shrinkHorizFadeOut
             ) {
                 val searchExpandedLabel = stringResource(R.string.expanded)
                 val searchCollapsedLabel = stringResource(R.string.collapsed)
@@ -110,8 +110,8 @@ fun HomeBottomActionBar(
             AnimatedVisibility(
                 visible = showSortButton,
                 modifier = Modifier.weight(1f),
-                enter = MorpheAnimations.expandHorizFadeIn,
-                exit = MorpheAnimations.shrinkHorizFadeOut
+                enter = Animations.expandHorizFadeIn,
+                exit = Animations.shrinkHorizFadeOut
             ) {
                 BottomActionButton(
                     onClick = onSortClick,
@@ -161,7 +161,7 @@ fun BottomActionButton(
     isExpertMode: Boolean = false,
     stateDescription: String? = null
 ) {
-    val shape = RoundedCornerShape(MorpheDefaults.CardCornerRadius)
+    val shape = RoundedCornerShape(Defaults.CardCornerRadius)
 
     // Use expert mode colors if enabled
     val finalContainerColor = containerColor ?: if (isExpertMode) {
@@ -239,18 +239,18 @@ fun BottomActionButton(
             Row(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = MorpheDefaults.ItemSpacing),
+                    .padding(horizontal = Defaults.ItemSpacing),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (showProgress) {
                     CircularProgressIndicator(
-                        modifier = Modifier.size(MorpheDefaults.IconSizeSmall),
+                        modifier = Modifier.size(Defaults.IconSizeSmall),
                         color = finalContentColor,
                         strokeWidth = 2.dp
                     )
                 } else {
-                    MorpheIcon(
+                    ThemedIcon(
                         icon = icon,
                         tint = finalContentColor.copy(alpha = if (enabled) 1f else 0.5f)
                     )

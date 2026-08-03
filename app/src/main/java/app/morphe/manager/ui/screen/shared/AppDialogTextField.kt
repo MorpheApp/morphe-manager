@@ -54,7 +54,7 @@ private fun morpheDialogTextFieldColors(textColor: Color) = OutlinedTextFieldDef
  * Supports password visibility toggle and clear button.
  */
 @Composable
-fun MorpheDialogTextField(
+fun AppDialogTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
@@ -166,7 +166,7 @@ fun MorpheDialogTextField(
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+        shape = RoundedCornerShape(Defaults.CompactCornerRadius),
         colors = morpheDialogTextFieldColors(textColor)
     )
 }
@@ -183,7 +183,7 @@ fun MorpheDialogTextField(
  * @param dropdownItems Map of display name to value shown in the dropdown menu.
  */
 @Composable
-fun MorpheDialogDropdownTextField(
+fun AppDialogDropdownTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
@@ -290,7 +290,7 @@ fun MorpheDialogDropdownTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(focusRequester),
-            shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+            shape = RoundedCornerShape(Defaults.CompactCornerRadius),
             colors = morpheDialogTextFieldColors(textColor)
         )
 

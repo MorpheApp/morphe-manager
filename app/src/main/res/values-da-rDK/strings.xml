@@ -254,6 +254,11 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="home_dialog_wrong_package_description">Den valgte APK matcher ikke den app, du tilsigtede at patche</string>
     <string name="home_dialog_expected_package">Forventet pakke:</string>
     <string name="home_dialog_selected_package">Valgt pakke:</string>
+    <string name="home_dialog_orphaned_install_title">Tidligere kopi efterladt</string>
+    <string name="home_dialog_orphaned_install_description">Patchen ændrede pakkenavnet, så den kopi, du patched tidligere, er stadig installeret som en separat app</string>
+    <string name="home_dialog_orphaned_install_warning">Den spores ikke længere og vil ikke modtage patch-opdateringer</string>
+    <string name="home_dialog_orphaned_install_uninstall">Afinstaller den</string>
+    <string name="home_dialog_orphaned_install_keep">Behold</string>
     <string name="home_outdated_patches_dialog_title">Patches kan være forældede</string>
     <string name="home_outdated_patches_dialog_message">Mobildata er aktiv og patchopdateringer er deaktiveret</string>
     <string name="home_outdated_patches_dialog_warning">At patche med forældede patches kan resultere i en defekt app</string>
@@ -386,6 +391,8 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_error_dialog_app_info">App-oplysninger</string>
     <string name="patcher_tab_logs">Patch-logfiler</string>
     <string name="patcher_tab_game">Spil</string>
+    <string name="patcher_logs_waiting">Vent på log output…</string>
+    <string name="patcher_logs_lost">Log output gemmes ikke mellem app genstarter</string>
     <string name="patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
     <string name="patcher_installing_subtitle">Næsten klar til at rocke! 🎸</string>
     <string name="patcher_success_title">Færdig! 🎉</string>
@@ -1087,6 +1094,7 @@ Detaljer: %2$s"</string>
     <string name="install_update_manager_failed">Kunne ikke installere opdatering</string>
     <string name="installing_manager_update">Installerer opdatering…</string>
     <string name="downloading_manager_update">Downloader opdatering…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Kunne ikke downloade opdatering: %s</string>
     <string name="failed_to_check_updates">Kunne ikke søge efter opdateringer: %s</string>
     <string name="failed_to_download_update">Kunne ikke downloade opdatering: %s</string>

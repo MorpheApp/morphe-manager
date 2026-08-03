@@ -254,6 +254,11 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_dialog_wrong_package_description">Seçilən APK, yamaq üçün təyin etdiyiniz tətbiq üçün deyil</string>
     <string name="home_dialog_expected_package">Gözlənilən paket:</string>
     <string name="home_dialog_selected_package">Seçilən paket:</string>
+    <string name="home_dialog_orphaned_install_title">Əvvəlki nüsxə yerində qalıb</string>
+    <string name="home_dialog_orphaned_install_description">Yamaqlama paketin adını dəyişdirdi, buna görə də əvvəllər yamaqladığınız nüsxə hələ də ayrı tətbiq kimi quraşdırılıb</string>
+    <string name="home_dialog_orphaned_install_warning">Artıq izlənilmir və yamaq yeniləmələrini almayacaq</string>
+    <string name="home_dialog_orphaned_install_uninstall">Bunu sil</string>
+    <string name="home_dialog_orphaned_install_keep">Bunu saxla</string>
     <string name="home_outdated_patches_dialog_title">Yamaqlar köhnəlmiş ola bilər</string>
     <string name="home_outdated_patches_dialog_message">Mobil data işləkdir və yamaq yeniləmələri qapalıdır</string>
     <string name="home_outdated_patches_dialog_warning">Köhnə yamaqlarla yamaqlanma tətbiq pozulmasına səbəb ola bilər</string>
@@ -392,6 +397,8 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="patcher_error_dialog_app_info">Tətbiq məlumatı</string>
     <string name="patcher_tab_logs">Yamaqlayıcı qeydləri</string>
     <string name="patcher_tab_game">Oyunlar</string>
+    <string name="patcher_logs_waiting">Qeyd çıxarışı gözlənilir…</string>
+    <string name="patcher_logs_lost">Qeyd çıxarışı tətbiq yenidən başladıldıqda saxlanılmır</string>
     <string name="patcher_long_step_warning">Bu keçid bir müddət çəkə bilər. Zəhmət olmasa, gözləyin...</string>
     <string name="patcher_installing_subtitle">Təqribən rok-a hazırdır! 🎸</string>
     <string name="patcher_success_title">Hamısı bitdi! 🎉</string>
@@ -1092,6 +1099,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="install_update_manager_failed">Yeniləməni quraşdırmaq olmadı</string>
     <string name="installing_manager_update">Yeniləmə quraşdırılır…</string>
     <string name="downloading_manager_update">Yenilənmə yüklənilir…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Yeniləməni yükləmək olmadı: %s</string>
     <string name="failed_to_check_updates">Yeniləmələri yoxlamaq uğursuzdu: %s</string>
     <string name="failed_to_download_update">Yeniləməni yükləmək olmadı: %s</string>

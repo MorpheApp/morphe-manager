@@ -1,3 +1,61 @@
+# [1.25.0-dev.16](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.15...v1.25.0-dev.16) (2026-08-03)
+
+
+### Bug Fixes
+
+* Save the process runtime memory limit when the slider is tapped ([#815](https://github.com/MorpheApp/morphe-manager/issues/815)) ([d9c9079](https://github.com/MorpheApp/morphe-manager/commit/d9c90798fc6ee9fe91f2333e450d2b1ba2c6cec8))
+
+
+### Features
+
+* Flag an experimental APK version on the queue card ([a6446d8](https://github.com/MorpheApp/morphe-manager/commit/a6446d878b127a24500d3a6ffac2d47c6683db28))
+* Merge the queue's APK buttons into one version-aware chooser ([79aff36](https://github.com/MorpheApp/morphe-manager/commit/79aff3692c7019a62548b8bab1dd180b954466cb))
+
+# [1.25.0-dev.15](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.14...v1.25.0-dev.15) (2026-08-03)
+
+
+### Bug Fixes
+
+* Deduplicate update checks and install patch bundles atomically ([bf3e4e1](https://github.com/MorpheApp/morphe-manager/commit/bf3e4e1ddfee6fca170e05f3640ab3298a15cf9c))
+* Handle preference IO errors and skip cancellation in uiSafe ([c5b8e26](https://github.com/MorpheApp/morphe-manager/commit/c5b8e267b3b37e25d8cc6f9529378ec6420b0a7c))
+* Reduce startup cost and split the home apps section ([d8ee88f](https://github.com/MorpheApp/morphe-manager/commit/d8ee88fece6a7a994214be7403c4a509bf13a0cb))
+
+
+### Features
+
+* Update the file of a local patch source in place ([f4fc760](https://github.com/MorpheApp/morphe-manager/commit/f4fc760f7b93dfa306900e64f38576991ac5aca9))
+
+# [1.25.0-dev.14](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.13...v1.25.0-dev.14) (2026-08-02)
+
+
+### Bug Fixes
+
+* Announce a manager update only once its APK is downloadable ([9939cd1](https://github.com/MorpheApp/morphe-manager/commit/9939cd192cb32083eef4636b8b2560c70c8b41f4))
+* Close open dialogs when a patch source arrives from outside the app ([550926b](https://github.com/MorpheApp/morphe-manager/commit/550926b3091431de1e8f94e6a62ce32bc07f57a4))
+
+
+### Features
+
+* Crossfade dialog content when it swaps between states ([48848f2](https://github.com/MorpheApp/morphe-manager/commit/48848f257f1506745ef699fc293b82048aa22f26))
+
+# [1.25.0-dev.13](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.12...v1.25.0-dev.13) (2026-08-02)
+
+
+### Bug Fixes
+
+* Offer to remove the app copy a package rename left behind ([adfe445](https://github.com/MorpheApp/morphe-manager/commit/adfe445ff66aa7e7a3d8527e57e8cdb7dd7b666f))
+* Restore the patch outcome after process death ([2095298](https://github.com/MorpheApp/morphe-manager/commit/20952988876fc8dc0842509014f66a5677f5b7fe))
+
+# [1.25.0-dev.12](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.11...v1.25.0-dev.12) (2026-08-01)
+
+
+### Bug Fixes
+
+* Put the queue counter inside the patcher layout ([4a4ed2f](https://github.com/MorpheApp/morphe-manager/commit/4a4ed2f65aa7c2f48c2b610eea15bf2219ac59af))
+* Round stepped slider values instead of truncating them ([b4f0c56](https://github.com/MorpheApp/morphe-manager/commit/b4f0c56602eccff113a202e958b85086337a6260))
+* Stop the install queue failing the item it just started ([e333e6b](https://github.com/MorpheApp/morphe-manager/commit/e333e6b63c164d1e6690c27ffc11ce00c54e7b87))
+* Tell an unsupported version apart from an app with no patches ([cd5701b](https://github.com/MorpheApp/morphe-manager/commit/cd5701b417cb1ef7e9f13960cead44dee146c254))
+
 # [1.25.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0-dev.10...v1.25.0-dev.11) (2026-08-01)
 
 

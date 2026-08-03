@@ -56,7 +56,7 @@ fun ModernIconOptionCard(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(MorpheDefaults.ItemSpacing),
+                .padding(Defaults.ItemSpacing),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -109,19 +109,19 @@ fun CompactOptionCard(
         stateDescription = stringResource(
             if (selected) R.string.selected else R.string.not_selected
         ),
-        modifier = modifier.height(MorpheDefaults.MinTouchTarget)
+        modifier = modifier.height(Defaults.MinTouchTarget)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(
-                    horizontal = MorpheDefaults.ContentPadding,
-                    vertical = MorpheDefaults.ContentPaddingSmall
+                    horizontal = Defaults.ContentPadding,
+                    vertical = Defaults.ContentPaddingSmall
                 ),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            MorpheIcon(
+            ThemedIcon(
                 icon = icon,
                 tint = if (selected) {
                     MaterialTheme.colorScheme.onPrimaryContainer

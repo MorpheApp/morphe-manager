@@ -254,6 +254,11 @@
     <string name="home_dialog_wrong_package_description">নির্বাচিত APK অ্যাপের জন্য নির্বাচিত হয়নি</string>
     <string name="home_dialog_expected_package">অ্যাপের নাম:</string>
     <string name="home_dialog_selected_package">নির্বাচিত অ্যাপ:</string>
+    <string name="home_dialog_orphaned_install_title">আগের কপিটি রয়ে গেছে</string>
+    <string name="home_dialog_orphaned_install_description">প্যাচিং প্যাকেজের নাম পরিবর্তন করেছে, তাই আপনি আগে যে কপিটি প্যাচ করেছিলেন সেটি এখনও একটি পৃথক অ্যাপ্লিকেশন হিসাবে ইনস্টল করা আছে</string>
+    <string name="home_dialog_orphaned_install_warning">এটি আর ট্র্যাক করা হবে না এবং প্যাচ আপডেট পাবে না</string>
+    <string name="home_dialog_orphaned_install_uninstall">এটি আনইনস্টল করুন</string>
+    <string name="home_dialog_orphaned_install_keep">এটা রাখুন</string>
     <string name="home_outdated_patches_dialog_title">প্যাচগুলি পুরানো হতে পারে</string>
     <string name="home_outdated_patches_dialog_message">মোবাইল ডেটা সক্রিয় এবং প্যাচ আপডেট অক্ষম</string>
     <string name="home_outdated_patches_dialog_warning">পুরানো প্যাচগুলি ব্যবহার করে অ্যাপটি ভেঙে যেতে পারে</string>
@@ -392,6 +397,8 @@
     <string name="patcher_error_dialog_app_info">অ্যাপ তথ্য</string>
     <string name="patcher_tab_logs">প্যাচার লগ</string>
     <string name="patcher_tab_game">গেমস</string>
+    <string name="patcher_logs_waiting">লগ আউটপুটের জন্য অপেক্ষা করা হচ্ছে…</string>
+    <string name="patcher_logs_lost">অ্যাপ পুনরায় চালু করলে লগ আউটপুট সংরক্ষণ করা হবে না</string>
     <string name="patcher_long_step_warning">এই ধাপটি সম্পন্ন হতে কিছু সময় লাগতে পারে। অনুগ্রহ করে অপেক্ষা করুন…</string>
     <string name="patcher_installing_subtitle">প্রায় রক-এর জন্য প্রস্তুত! 🎸</string>
     <string name="patcher_success_title">সবকিছু সম্পন্ন! 🎉</string>
@@ -1086,6 +1093,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="install_update_manager_failed">আপডেট ইনস্টল করতে ব্যর্থ</string>
     <string name="installing_manager_update">আপডেট ইনস্টল করা হচ্ছে…</string>
     <string name="downloading_manager_update">আপডেট ডাউনলোড হচ্ছে…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">আপডেট ডাউনলোড করা যায়নি: %s</string>
     <string name="failed_to_check_updates">আপডেটগুলি পরীক্ষা করতে ব্যর্থ: %s</string>
     <string name="failed_to_download_update">আপডেট ডাউনলোড করতে ব্যর্থ: %s</string>

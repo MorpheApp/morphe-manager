@@ -24,6 +24,34 @@
         <item quantity="one">%s APK-fil</item>
         <item quantity="other">%s APK-filer</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Installerade %s app</item>
+        <item quantity="other">Installerade %s appar</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Installerade om %s app</item>
+        <item quantity="other">Installerade om %s appar</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Avinstallerade %s app</item>
+        <item quantity="other">Avinstallerade %s appar</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Avinstallera %s app?</item>
+        <item quantity="other">Avinstallera %s appar?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s app redo att modifieras</item>
+        <item quantity="other">%s appar redo att modifieras</item>
+    </plurals>
+    <plurals name="batch_patch_notification_ready">
+        <item quantity="one">%s app är redo att installeras</item>
+        <item quantity="other">%s appar är redo att installeras</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Hoppade över %s app</item>
+        <item quantity="other">Hoppade över %s appar</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Tog bort %s inaktuellt tillägg från det sparade urvalet</item>
         <item quantity="other">Tog bort %s inaktuella tillägg från det sparade urvalet</item>

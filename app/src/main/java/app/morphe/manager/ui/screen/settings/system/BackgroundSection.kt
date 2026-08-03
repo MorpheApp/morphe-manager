@@ -45,7 +45,7 @@ fun BackgroundSection(
         }
     }
 
-    Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)) {
         SectionTitle(
             text = stringResource(R.string.settings_system_background),
             icon = Icons.Outlined.PhoneAndroid
@@ -63,7 +63,7 @@ fun BackgroundSection(
                 },
                 title = stringResource(R.string.settings_system_battery_optimization),
                 subtitle = stringResource(R.string.settings_system_battery_optimization_description),
-                leadingContent = { MorpheIcon(icon = Icons.Outlined.BatterySaver) },
+                leadingContent = { ThemedIcon(icon = Icons.Outlined.BatterySaver) },
                 statusContent = {
                     StatusCircleIcon(
                         icon = if (isIgnoringBatteryOptimizations) Icons.Outlined.Check else Icons.Outlined.Warning,
@@ -75,13 +75,13 @@ fun BackgroundSection(
                 }
             )
 
-            MorpheSettingsDivider()
+            SettingsDivider()
 
             SettingsItem(
                 onClick = onNotificationsClick,
                 title = stringResource(R.string.settings_system_notifications),
                 subtitle = stringResource(R.string.settings_system_notifications_description),
-                leadingContent = { MorpheIcon(icon = Icons.Outlined.NotificationsActive) }
+                leadingContent = { ThemedIcon(icon = Icons.Outlined.NotificationsActive) }
             )
         }
     }

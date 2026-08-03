@@ -40,8 +40,8 @@ fun MultiSelectShell(
 ) {
     AnimatedVisibility(
         visible = visible,
-        enter = MorpheAnimations.springSlideUpEnter,
-        exit = MorpheAnimations.springSlideDownExit,
+        enter = Animations.springSlideUpEnter,
+        exit = Animations.springSlideDownExit,
         modifier = modifier
     ) {
         Surface(
@@ -115,7 +115,7 @@ fun SelectionActionBar(
     ) {
         AnimatedContent(
             targetState = selectedCount,
-            transitionSpec = MorpheAnimations.compactCounterTransitionSpec,
+            transitionSpec = Animations.compactCounterTransitionSpec,
             label = "selected_count"
         ) { count ->
             Text(
@@ -128,7 +128,7 @@ fun SelectionActionBar(
         if (subtitle != null) {
             AnimatedContent(
                 targetState = subtitle,
-                transitionSpec = MorpheAnimations.compactCounterTransitionSpec,
+                transitionSpec = Animations.compactCounterTransitionSpec,
                 label = "selection_subtitle"
             ) { text ->
                 Text(

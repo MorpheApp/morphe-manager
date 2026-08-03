@@ -84,6 +84,7 @@
     <!-- File Picker -->
     <!-- Settings - System Tab - About Section -->
     <!-- Shared strings -->
+    <!-- Shown while resuming a download, before the total size is known -->
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->

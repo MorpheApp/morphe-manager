@@ -125,7 +125,7 @@ internal fun MultiSelectBar(
     MultiSelectShell(visible = visible, modifier = modifier) {
         AnimatedContent(
             targetState = selection.inReorderMode,
-            transitionSpec = MorpheAnimations.fadeCrossfade(200),
+            transitionSpec = Animations.fadeCrossfade(200),
             label = "multibar_mode"
         ) { inReorder ->
             if (inReorder) {
@@ -172,7 +172,7 @@ internal fun MultiSelectBar(
                 ) {
                     AnimatedContent(
                         targetState = selection.count,
-                        transitionSpec = MorpheAnimations.compactCounterTransitionSpec,
+                        transitionSpec = Animations.compactCounterTransitionSpec,
                         label = "multibar_count"
                     ) { count ->
                         Text(
@@ -296,7 +296,7 @@ internal fun CategoryActionBar(
     MultiSelectShell(visible = visible, modifier = modifier) {
         AnimatedContent(
             targetState = category.inReorderMode,
-            transitionSpec = MorpheAnimations.fadeCrossfade(200),
+            transitionSpec = Animations.fadeCrossfade(200),
             label = "category_bar_mode"
         ) { inReorder ->
             Column(

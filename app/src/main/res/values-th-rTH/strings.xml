@@ -3,7 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">แอปพลิเคชันอื่นๆ</string>
     <string name="home_not_patched_yet">ยังไม่ได้รับการแพตซ์</string>
-    <string name="home_no_patches_available">ไม่มีแอปที่ใช้งานได้</string>
+    <string name="home_no_patches_available">No patches available</string>
     <string name="home_app_hide_title">ซ่อนแอปนี้หรือไม่?</string>
     <string name="home_app_hide_message">แอปนี้จะถูกซ่อนจากหน้าจอหลัก คุณสามารถกู้คืนได้ภายหลังโดยใช้ปุ่ม \'\' ที่ด้านล่างของรายการ</string>
     <string name="home_app_will_be_hidden">แอปนี้จะถูกซ่อน</string>
@@ -17,11 +17,13 @@
     <string name="deep_link_add_source_warning">เพิ่มแหล่งข้อมูลที่คุณเชื่อถือเท่านั้น</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">มีการอัปเดต Morphe พร้อมใช้งาน</string>
-    <string name="home_update_available_subtitle">มีเวอร์ชันใหม่พร้อมติดตั้ง</string>
+    <string name="home_update_available_subtitle">New version ready to install</string>
     <string name="home_blocked_source_title">ตรวจพบแหล่งแพตช์ที่ถูกบล็อก</string>
     <string name="home_blocked_source_subtitle">แตะเพื่อตรวจสอบและนำออก</string>
     <string name="home_metadata_errors_title">บางแหล่งแพตช์ไม่สามารถใช้งานได้</string>
     <string name="home_metadata_errors_subtitle">แตะเพื่อตรวจสอบแหล่งที่มา</string>
+    <string name="home_outdated_manager_title">Morphe ล้าสมัย</string>
+    <string name="home_outdated_manager_subtitle">แหล่งแพตช์บางแหล่งจำเป็นต้องใช้เวอร์ชันที่ใหม่กว่า</string>
     <string name="home_metered_skipped_title">หยุดการอัปเดตเมื่อใช้ข้อมูลมือถือ</string>
     <string name="home_metered_skipped_subtitle">แตะเพื่ออนุญาตการอัปเดตผ่านข้อมูลมือถือ</string>
     <string name="home_update_error">อัปเดตล้มเหลว</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">ไม่มีข้อมูล Metadata</string>
     <string name="sources_management_metadata_unavailable_hint">ไฟล์ Metadata ระยะไกลไม่พร้อมใช้งาน การแก้ไขด้วยชุดติดตั้งที่มีอยู่ยังคงทำงานได้ แต่การอัปเดตอัตโนมัติถูกปิดใช้งานสำหรับแหล่งที่มานี้</string>
     <string name="sources_management_metadata_unavailable_hint_missing">ไม่สามารถดาวน์โหลดชุดแก้ไขได้ URL แหล่งที่มาอาจไม่ถูกต้อง หรือไฟล์ไม่มีอยู่</string>
+    <string name="sources_management_outdated_manager_badge">อัปเดต Morphe</string>
+    <string name="sources_management_outdated_manager_hint">แหล่งที่มานี้สร้างขึ้นสำหรับแพตเชอร์ %1$s แต่ Morphe %2$s มีแพตเชอร์ %3$s อัปเดต Morphe เพื่อใช้งาน</string>
     <string name="sources_management_source_enabled">แหล่งที่มาเปิดใช้งานแล้ว</string>
     <string name="sources_management_source_disabled">แหล่งที่มาปิดใช้งานแล้ว</string>
     <string name="sources_management_source_updating">กำลังอัปเดตแหล่งที่มา</string>
@@ -1091,6 +1095,7 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">ไม่สามารถติดตั้งอัปเดตได้</string>
     <string name="installing_manager_update">กำลังติดตั้งอัปเดต…</string>
     <string name="downloading_manager_update">กำลังดาวน์โหลดอัปเดต…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">ไม่สามารถดาวน์โหลดอัปเดตได้: %s</string>
     <string name="failed_to_check_updates">ไม่สามารถตรวจสอบการอัปเดตได้: %s</string>
     <string name="failed_to_download_update">ไม่สามารถดาวน์โหลดอัปเดตได้: %s</string>

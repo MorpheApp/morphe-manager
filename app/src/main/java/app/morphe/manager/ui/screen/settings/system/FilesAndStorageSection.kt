@@ -59,7 +59,7 @@ fun FilesAndStorageSection(
 
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
     ) {
         SectionTitle(
             text = stringResource(R.string.settings_system_files),
@@ -71,18 +71,18 @@ fun FilesAndStorageSection(
                 onClick = { showStorageDialog.value = true },
                 title = stringResource(R.string.settings_system_storage_management_title),
                 subtitle = stringResource(R.string.settings_system_storage_management_description),
-                leadingContent = { MorpheIcon(icon = Icons.Outlined.Storage) }
+                leadingContent = { ThemedIcon(icon = Icons.Outlined.Storage) }
             )
 
             // Patch Selections (Expert mode only)
             if (useExpertMode) {
-                MorpheSettingsDivider()
+                SettingsDivider()
 
                 SettingsItem(
                     onClick = { showPatchSelectionDialog.value = true },
                     title = stringResource(R.string.settings_system_patch_selections_title),
                     subtitle = stringResource(R.string.settings_system_patch_selections_description),
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Tune) }
+                    leadingContent = { ThemedIcon(icon = Icons.Outlined.Tune) }
                 )
             }
         }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2026 Morphe.
  * https://github.com/MorpheApp/morphe-manager
  */
@@ -16,13 +16,13 @@ import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material.icons.outlined.Inbox
+import androidx.compose.material.icons.outlined.Source
+import androidx.compose.material.icons.outlined.Visibility
+import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
@@ -33,10 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.boundsInWindow
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -49,9 +46,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import app.morphe.manager.R
-import app.morphe.manager.domain.manager.HomeAppCategory
 import app.morphe.manager.domain.manager.HomeAppCategoryState
 import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
 import app.morphe.manager.domain.manager.HomeAppSortMode
@@ -59,19 +54,11 @@ import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeAppSourceGroup
 import app.morphe.manager.util.KnownApps
-import app.morphe.manager.util.htmlAnnotatedString
-import app.morphe.manager.util.toast
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 import kotlin.time.Duration.Companion.milliseconds
 
-private data class CategoryNameRequest(
-    val category: HomeAppCategory?
-)
-
-private fun HomeCategoryGroup.selectionKey(): String =
+internal fun HomeCategoryGroup.selectionKey(): String =
     sourceUid?.let { "source_$it" } ?: id?.let { "category_$it" } ?: "uncategorized"
 
 /** Visible and hidden app lists with their loading state. */
@@ -441,8 +428,8 @@ private fun HomeFooterControls(
     ) {
         AnimatedVisibility(
             visible = showOtherApps,
-            enter = MorpheAnimations.expandFadeEnter,
-            exit = MorpheAnimations.shrinkFadeExit
+            enter = Animations.expandFadeEnter,
+            exit = Animations.shrinkFadeExit
         ) {
             Column {
                 Spacer(modifier = Modifier.height(itemSpacing))
@@ -489,8 +476,8 @@ private fun AppGroupingFooter(
 ) {
     AnimatedVisibility(
         visible = visible,
-        enter = MorpheAnimations.expandFadeEnter,
-        exit = MorpheAnimations.shrinkFadeExit
+        enter = Animations.expandFadeEnter,
+        exit = Animations.shrinkFadeExit
     ) {
         AppGroupingToolbar(
             mode = mode,
@@ -523,7 +510,7 @@ fun GreetingSection(
     ) {
         AnimatedContent(
             targetState = message,
-            transitionSpec = MorpheAnimations.slideUpContentTransitionSpec,
+            transitionSpec = Animations.slideUpContentTransitionSpec,
             label = "greeting_transition"
         ) { targetMessage ->
             Text(
@@ -567,74 +554,34 @@ fun MainAppsSection(
     val isGroupedAppView = appGrouping != HomeAppCategoryViewMode.ALL_APPS
     val isCustomCategoryView = appGrouping == HomeAppCategoryViewMode.CUSTOM
 
-    // Multi-select state - set of packageNames chosen for bulk hide
-    val isMultiSelectMode = remember { mutableStateOf(false) }
-    val selectedPackages = rememberSelectionState<String>()
-
-    // Reorder state
-    val isReorderMode = remember { mutableStateOf(false) }
-    var localOrder by remember { mutableStateOf(homeAppItems.map { it.packageName }) }
-    var reorderScopePackages by remember { mutableStateOf<Set<String>?>(null) }
-    var reorderScopeSourceUid by remember { mutableStateOf<Int?>(null) }
-    var scopedSourceOrder by remember { mutableStateOf<List<String>?>(null) }
-    var selectedGroupKey by remember { mutableStateOf<String?>(null) }
-    // Snapshot on drag start when the dragged card is part of a multi-selection. Only
-    // the dragged card moves during the drag; onDragStopped teleports these followers next
-    // to it so the group lands consolidated at the drop position.
-    var reorderGroupFollowers by remember { mutableStateOf<List<String>?>(null) }
-    // Packages that were selected when entering reorder mode; used to scroll
-    // the reordered list back to the card the user long-pressed (e.g. from search)
-    val reorderFocusPackages = remember { mutableStateOf<Set<String>>(emptySet()) }
+    val state = rememberHomeAppsSectionState(
+        initialOrder = homeAppItems.map { it.packageName },
+        initialSourceGroupOrder = apps.sourceGroups.map { it.uid },
+        initialCategoryOrder = apps.categoryState.categories.map { it.id },
+        hasContent = homeAppItems.isNotEmpty() || hiddenAppItems.isNotEmpty(),
+    )
+    val selectedPackages = state.selectedPackages
     val haptic = LocalHapticFeedback.current
     val scope = rememberCoroutineScope()
 
-    // Split into two flags so the app multi-select and category context bars stay
-    // mutually exclusive at the footer slot
-    var activeCategoryId by remember { mutableStateOf<String?>(null) }
-    var activeSourceUid by remember { mutableStateOf<Int?>(null) }
-    val isCategoryReorderMode = remember { mutableStateOf(false) }
     val isSourceCategoryView = appGrouping == HomeAppCategoryViewMode.SOURCES
-    val isCategoryBarVisible = activeCategoryId != null ||
-            activeSourceUid != null ||
-            isCategoryReorderMode.value
-
-    val isMultibarVisible = isMultiSelectMode.value || isReorderMode.value || isCategoryBarVisible
 
     // Back gesture/button cancels multi-select instead of navigating back
-    BackHandler(enabled = isMultiSelectMode.value) {
-        isMultiSelectMode.value = false
-        selectedPackages.clear()
-        selectedGroupKey = null
-    }
+    BackHandler(enabled = state.isMultiSelectMode) { state.exitMultiSelect() }
 
     // Back gesture/button exits reorder mode without saving
-    BackHandler(enabled = isReorderMode.value) {
-        isReorderMode.value = false
-        selectedPackages.clear()
-        reorderScopePackages = null
-        reorderScopeSourceUid = null
-        scopedSourceOrder = null
-        selectedGroupKey = null
-        reorderGroupFollowers = null
-        localOrder = homeAppItems.map { it.packageName }
+    BackHandler(enabled = state.isReorderMode) {
+        state.exitReorder(homeAppItems.map { it.packageName })
     }
 
-    BackHandler(enabled = isCategoryBarVisible) {
-        activeCategoryId = null
-        activeSourceUid = null
-        isCategoryReorderMode.value = false
-    }
+    BackHandler(enabled = state.isCategoryBarVisible) { state.closeCategoryBar() }
 
     // Retire stale header action state when switching grouping modes.
-    LaunchedEffect(appGrouping) {
-        activeCategoryId = null
-        activeSourceUid = null
-        isCategoryReorderMode.value = false
-    }
+    LaunchedEffect(appGrouping) { state.closeCategoryBar() }
     LaunchedEffect(apps.categoryState.categories) {
         val currentIds = apps.categoryState.categories.mapTo(mutableSetOf()) { it.id }
-        if (activeCategoryId != null && activeCategoryId !in currentIds) {
-            activeCategoryId = null
+        if (state.activeCategoryId != null && state.activeCategoryId !in currentIds) {
+            state.activeCategoryId = null
         }
     }
     // Sync selection and local order with current item list
@@ -642,144 +589,49 @@ fun MainAppsSection(
         val currentPackages = homeAppItems.mapTo(mutableSetOf()) { it.packageName }
         selectedPackages.retain { it in currentPackages }
         if (selectedPackages.isEmpty) {
-            isMultiSelectMode.value = false
-            selectedGroupKey = null
+            state.isMultiSelectMode = false
+            state.selectedGroupKey = null
         }
 
-        if (!isReorderMode.value) {
-            localOrder = homeAppItems.map { it.packageName }
+        if (!state.isReorderMode) {
+            state.localOrder = homeAppItems.map { it.packageName }
         } else {
             val pkgSet = homeAppItems.mapTo(mutableSetOf()) { it.packageName }
-            scopedSourceOrder = scopedSourceOrder?.filter { it in pkgSet }
-            val kept = localOrder.filter { it in pkgSet }
+            state.scopedSourceOrder = state.scopedSourceOrder?.filter { it in pkgSet }
+            val kept = state.localOrder.filter { it in pkgSet }
             val keptSet = kept.toSet()
             val added = pkgSet.filter { it !in keptSet }
-            localOrder = kept + added
+            state.localOrder = kept + added
         }
     }
-
-    // Track if real content has ever arrived so we never re-show the shimmer on resume
-    val hasEverLoaded = remember {
-        mutableStateOf(homeAppItems.isNotEmpty() || hiddenAppItems.isNotEmpty())
-    }
-
-    // Stable loading state - drives shimmer visibility.
-    // Starts as true when there is nothing to show yet; once content arrives it latches to false
-    // and never goes back to true (we don't want shimmer on every recomposition).
-    val stableLoadingState = remember { mutableStateOf(!hasEverLoaded.value) }
 
     LaunchedEffect(apps.installedAppsLoading, homeAppItems.size, hiddenAppItems.size) {
         val hasItems = homeAppItems.isNotEmpty() || hiddenAppItems.isNotEmpty()
-        if (hasItems) hasEverLoaded.value = true
+        if (hasItems) state.hasEverLoaded = true
 
-        val shouldShowShimmer = !hasEverLoaded.value && apps.installedAppsLoading
+        val shouldShowShimmer = !state.hasEverLoaded && apps.installedAppsLoading
         if (shouldShowShimmer) {
-            stableLoadingState.value = true
+            state.isLoading = true
         } else {
             // Small delay so Compose has one frame to lay out the real cards before the
             // shimmer fades out - prevents a single-frame empty gap.
-            if (stableLoadingState.value) delay(50.milliseconds)
-            stableLoadingState.value = false
+            if (state.isLoading) delay(50.milliseconds)
+            state.isLoading = false
         }
     }
 
     // Placeholder gradients for cold-start shimmer
     val placeholderGradients = remember { KnownApps.DEFAULT_SHIMMER_GRADIENTS }
 
-    // Hidden apps dialog state
-    val showHiddenAppsDialog = remember { mutableStateOf(false) }
-    val showMoveCategoryDialog = remember { mutableStateOf(false) }
-    var categoryNameRequest by remember { mutableStateOf<CategoryNameRequest?>(null) }
-    var pendingDeleteCategoryId by remember { mutableStateOf<String?>(null) }
-    var showBatchUninstallConfirm by remember { mutableStateOf(false) }
-    var pendingUninstallItems by remember { mutableStateOf<List<HomeAppItem>>(emptyList()) }
-
     // Resolved outside the LazyColumn DSL scope since @Composable calls aren't allowed there
     val context = LocalContext.current
     val categoryActionsUnavailableToast = stringResource(R.string.home_category_actions_unavailable)
 
-    if (showHiddenAppsDialog.value) {
-        HiddenAppsDialog(
-            hiddenAppItems = hiddenAppItems,
-            onUnhide = appActions.onUnhideApp,
-            onUnhideMultiple = { packages ->
-                packages.forEach { appActions.onUnhideApp(it) }
-            },
-            onShowPatches = appActions.onShowPatches,
-            onDismiss = { showHiddenAppsDialog.value = false }
-        )
-    }
-
-    categoryNameRequest?.let { request ->
-        CategoryNameDialog(
-            category = request.category,
-            onDismiss = { categoryNameRequest = null },
-            onConfirm = { name ->
-                val category = request.category
-                if (category == null) appActions.onCreateCategory(name)
-                else appActions.onRenameCategory(category.id, name)
-                categoryNameRequest = null
-            }
-        )
-    }
-
-    // Held in local state so the dialog outlives the bar closing on Delete tap
-    pendingDeleteCategoryId?.let { pendingId ->
-        val category = apps.categoryState.categories.firstOrNull { it.id == pendingId }
-        if (category == null) {
-            pendingDeleteCategoryId = null
-        } else {
-            ConfirmDialog(
-                title = stringResource(R.string.home_category_delete_confirm_title),
-                message = htmlAnnotatedString(stringResource(R.string.home_category_delete_confirm_message, category.name, stringResource(R.string.home_category_uncategorized))),
-                primaryText = stringResource(R.string.delete),
-                onDismiss = { pendingDeleteCategoryId = null },
-                onConfirm = {
-                    appActions.onDeleteCategory(pendingId)
-                    pendingDeleteCategoryId = null
-                }
-            )
-        }
-    }
-
-    if (showMoveCategoryDialog.value) {
-        MoveToCategoryDialog(
-            categories = apps.categoryState.categories,
-            onDismiss = { showMoveCategoryDialog.value = false },
-            onSelect = { categoryId ->
-                appActions.onAssignAppsToCategory(selectedPackages.keys.toSet(), categoryId)
-                selectedPackages.clear()
-                isMultiSelectMode.value = false
-                showMoveCategoryDialog.value = false
-            },
-            onCreateAndSelect = { name ->
-                val categoryId = appActions.onCreateCategory(name)
-                if (categoryId.isNotBlank()) {
-                    appActions.onAssignAppsToCategory(selectedPackages.keys.toSet(), categoryId)
-                    selectedPackages.clear()
-                    isMultiSelectMode.value = false
-                    showMoveCategoryDialog.value = false
-                }
-            }
-        )
-    }
-
-    if (showBatchUninstallConfirm) {
-        ConfirmDialog(
-            title = pluralStringResource(R.plurals.batch_uninstall_confirm_title, pendingUninstallItems.size, pendingUninstallItems.size),
-            message = stringResource(R.string.batch_uninstall_confirm_body),
-            primaryText = stringResource(R.string.uninstall),
-            onConfirm = {
-                appActions.onUninstallMultiple(pendingUninstallItems)
-                isMultiSelectMode.value = false
-                selectedPackages.clear()
-                selectedGroupKey = null
-                pendingUninstallItems = emptyList()
-                showBatchUninstallConfirm = false
-            },
-            onDismiss = { showBatchUninstallConfirm = false }
-        )
-    }
+    HomeAppsSectionDialogs(
+        state = state,
+        apps = apps,
+        appActions = appActions
+    )
 
     // Filtered visible items based on search query
     val filteredItems = remember(homeAppItems, searchQuery) {
@@ -828,29 +680,26 @@ fun MainAppsSection(
             ignoreCollapsed = searchQuery.isNotBlank()
         )
     }
-    // Drag updates this in place and the final order is flushed to preferences on reorder
-    // exit, so ReorderableLazyListState indices stay in sync with the rendered groups mid-drag
-    var localSourceGroupOrder by remember { mutableStateOf(apps.sourceGroups.map { it.uid }) }
-    LaunchedEffect(apps.sourceGroups, isCategoryReorderMode.value, isSourceCategoryView) {
-        if (isCategoryReorderMode.value && isSourceCategoryView) return@LaunchedEffect
+    LaunchedEffect(apps.sourceGroups, state.isCategoryReorderMode, isSourceCategoryView) {
+        if (state.isCategoryReorderMode && isSourceCategoryView) return@LaunchedEffect
         val sourceUids = apps.sourceGroups.map { it.uid }
-        val kept = localSourceGroupOrder.filter { it in sourceUids }
+        val kept = state.localSourceGroupOrder.filter { it in sourceUids }
         val added = sourceUids.filter { it !in kept }
-        localSourceGroupOrder = kept + added
+        state.localSourceGroupOrder = kept + added
     }
     val displayedSourceCategoryGroups = remember(
         sourceCategoryGroups,
-        localSourceGroupOrder,
-        isCategoryReorderMode.value,
+        state.localSourceGroupOrder,
+        state.isCategoryReorderMode,
         isSourceCategoryView
     ) {
-        if (!isCategoryReorderMode.value || !isSourceCategoryView) {
+        if (!state.isCategoryReorderMode || !isSourceCategoryView) {
             sourceCategoryGroups
         } else {
             val byUid = sourceCategoryGroups.mapNotNull { group ->
                 group.sourceUid?.let { uid -> uid to group }
             }.toMap()
-            val orderedGroups = localSourceGroupOrder.mapNotNull { byUid[it] }
+            val orderedGroups = state.localSourceGroupOrder.mapNotNull { byUid[it] }
             val orderedUids = orderedGroups.mapNotNullTo(mutableSetOf()) { it.sourceUid }
             orderedGroups + sourceCategoryGroups.filter { group ->
                 val uid = group.sourceUid
@@ -858,31 +707,26 @@ fun MainAppsSection(
             }
         }
     }
-    // Drag updates this in place and the final order is flushed to preferences on reorder
-    // exit, so ReorderableLazyListState indices stay in sync with the rendered groups mid-drag
-    var localCategoryOrder by remember {
-        mutableStateOf(apps.categoryState.categories.map { it.id })
-    }
-    LaunchedEffect(apps.categoryState.categories, isCategoryReorderMode.value, isSourceCategoryView) {
-        if (isCategoryReorderMode.value && !isSourceCategoryView) return@LaunchedEffect
+    LaunchedEffect(apps.categoryState.categories, state.isCategoryReorderMode, isSourceCategoryView) {
+        if (state.isCategoryReorderMode && !isSourceCategoryView) return@LaunchedEffect
         val categoryIds = apps.categoryState.categories.map { it.id }
-        val kept = localCategoryOrder.filter { it in categoryIds }
+        val kept = state.localCategoryOrder.filter { it in categoryIds }
         val added = categoryIds.filter { it !in kept }
-        localCategoryOrder = kept + added
+        state.localCategoryOrder = kept + added
     }
     val displayedCategoryGroups = remember(
         categoryGroups,
-        localCategoryOrder,
-        isCategoryReorderMode.value,
+        state.localCategoryOrder,
+        state.isCategoryReorderMode,
         isSourceCategoryView
     ) {
-        if (!isCategoryReorderMode.value || isSourceCategoryView) {
+        if (!state.isCategoryReorderMode || isSourceCategoryView) {
             categoryGroups
         } else {
             val byId = categoryGroups.mapNotNull { group ->
                 group.id?.let { id -> id to group }
             }.toMap()
-            val orderedGroups = localCategoryOrder.mapNotNull { byId[it] }
+            val orderedGroups = state.localCategoryOrder.mapNotNull { byId[it] }
             val orderedIds = orderedGroups.mapNotNullTo(mutableSetOf()) { it.id }
             orderedGroups + categoryGroups.filter { group ->
                 val id = group.id
@@ -892,8 +736,8 @@ fun MainAppsSection(
     }
     LaunchedEffect(sourceCategoryGroups) {
         val currentUids = sourceCategoryGroups.mapNotNullTo(mutableSetOf()) { it.sourceUid }
-        if (activeSourceUid != null && activeSourceUid !in currentUids) {
-            activeSourceUid = null
+        if (state.activeSourceUid != null && state.activeSourceUid !in currentUids) {
+            state.activeSourceUid = null
         }
     }
     val groupedReorderGroups = remember(
@@ -928,7 +772,7 @@ fun MainAppsSection(
     val groupedSelectionGroup = remember(
         appGrouping,
         firstSelectedPackage,
-        selectedGroupKey,
+        state.selectedGroupKey,
         groupedReorderGroups
     ) {
         if (appGrouping == HomeAppCategoryViewMode.ALL_APPS || firstSelectedPackage == null) {
@@ -937,7 +781,7 @@ fun MainAppsSection(
         val hasSelected: (HomeCategoryGroup) -> Boolean = { group ->
             group.items.any { it.packageName == firstSelectedPackage }
         }
-        val keyMatch = selectedGroupKey?.let { key ->
+        val keyMatch = state.selectedGroupKey?.let { key ->
             groupedReorderGroups.firstOrNull { it.selectionKey() == key && hasSelected(it) }
         }
         keyMatch ?: groupedReorderGroups.firstOrNull(hasSelected)
@@ -965,22 +809,22 @@ fun MainAppsSection(
     }
 
     fun moveAppOrder(fromIndex: Int, toIndex: Int): List<String> {
-        val scopePackages = reorderScopePackages ?: return movePackagesInOrder(
-            order = localOrder,
+        val scopePackages = state.reorderScopePackages ?: return movePackagesInOrder(
+            order = state.localOrder,
             fromIndex = fromIndex,
             toIndex = toIndex
         )
 
-        val scopedOrder = localOrder.filter { it in scopePackages }
+        val scopedOrder = state.localOrder.filter { it in scopePackages }
         val movedScopedOrder = movePackagesInOrder(
             order = scopedOrder,
             fromIndex = fromIndex,
             toIndex = toIndex
         )
-        if (movedScopedOrder == scopedOrder) return localOrder
+        if (movedScopedOrder == scopedOrder) return state.localOrder
 
         val movedIterator = movedScopedOrder.iterator()
-        return localOrder.map { packageName ->
+        return state.localOrder.map { packageName ->
             if (packageName in scopePackages) {
                 movedIterator.next()
             } else {
@@ -990,11 +834,11 @@ fun MainAppsSection(
     }
 
     fun moveReorderOrder(fromIndex: Int, toIndex: Int) {
-        val sourceOrder = scopedSourceOrder
+        val sourceOrder = state.scopedSourceOrder
         if (sourceOrder != null) {
-            scopedSourceOrder = movePackagesInOrder(sourceOrder, fromIndex, toIndex)
+            state.scopedSourceOrder = movePackagesInOrder(sourceOrder, fromIndex, toIndex)
         } else {
-            localOrder = moveAppOrder(fromIndex, toIndex)
+            state.localOrder = moveAppOrder(fromIndex, toIndex)
         }
     }
 
@@ -1033,27 +877,27 @@ fun MainAppsSection(
             HomeAppCategoryViewMode.SOURCES -> {
                 val fromUid = fromGroup.sourceUid ?: return@rememberReorderableLazyListState
                 val toUid = toGroup.sourceUid ?: return@rememberReorderableLazyListState
-                val orderedUids = localSourceGroupOrder.toMutableList()
+                val orderedUids = state.localSourceGroupOrder.toMutableList()
                 val fromPosition = orderedUids.indexOf(fromUid)
                 val toPosition = orderedUids.indexOf(toUid)
                 if (fromPosition == -1 || toPosition == -1) return@rememberReorderableLazyListState
 
                 val moved = orderedUids.removeAt(fromPosition)
                 orderedUids.add(toPosition.coerceIn(0, orderedUids.size), moved)
-                localSourceGroupOrder = orderedUids
+                state.localSourceGroupOrder = orderedUids
             }
 
             HomeAppCategoryViewMode.CUSTOM -> {
                 val fromId = fromGroup.id ?: return@rememberReorderableLazyListState
                 val toId = toGroup.id ?: return@rememberReorderableLazyListState
-                val orderedIds = localCategoryOrder.toMutableList()
+                val orderedIds = state.localCategoryOrder.toMutableList()
                 val fromPosition = orderedIds.indexOf(fromId)
                 val toPosition = orderedIds.indexOf(toId)
                 if (fromPosition == -1 || toPosition == -1) return@rememberReorderableLazyListState
 
                 val moved = orderedIds.removeAt(fromPosition)
                 orderedIds.add(toPosition.coerceIn(0, orderedIds.size), moved)
-                localCategoryOrder = orderedIds
+                state.localCategoryOrder = orderedIds
             }
 
             HomeAppCategoryViewMode.ALL_APPS -> Unit
@@ -1062,13 +906,13 @@ fun MainAppsSection(
     val homeItemsByPackage = remember(homeAppItems) {
         homeAppItems.associateBy { it.packageName }
     }
-    val orderedItems = remember(localOrder, homeItemsByPackage) {
-        localOrder.mapNotNull { homeItemsByPackage[it] }
+    val orderedItems = remember(state.localOrder, homeItemsByPackage) {
+        state.localOrder.mapNotNull { homeItemsByPackage[it] }
     }
-    val reorderItems = remember(orderedItems, reorderScopePackages, scopedSourceOrder, homeItemsByPackage) {
-        scopedSourceOrder?.let { sourceOrder ->
+    val reorderItems = remember(orderedItems, state.reorderScopePackages, state.scopedSourceOrder, homeItemsByPackage) {
+        state.scopedSourceOrder?.let { sourceOrder ->
             sourceOrder.mapNotNull { homeItemsByPackage[it] }
-        } ?: reorderScopePackages?.let { scopePackages ->
+        } ?: state.reorderScopePackages?.let { scopePackages ->
             orderedItems.filter { it.packageName in scopePackages }
         } ?: orderedItems
     }
@@ -1087,11 +931,11 @@ fun MainAppsSection(
     val alphabetScrollMode = (apps.sortMode == HomeAppSortMode.NAME_ASC ||
             apps.sortMode == HomeAppSortMode.NAME_DESC) &&
             appGrouping != HomeAppCategoryViewMode.SOURCES &&
-            !isReorderMode.value &&
-            !isCategoryReorderMode.value
+            !state.isReorderMode &&
+            !state.isCategoryReorderMode
     val scrollTargets = remember(
         alphabetScrollMode,
-        stableLoadingState.value,
+        state.isLoading,
         homeAppItems.isEmpty(),
         isGroupedAppView,
         filteredItems,
@@ -1099,7 +943,7 @@ fun MainAppsSection(
     ) {
         when {
             !alphabetScrollMode -> emptyList()
-            stableLoadingState.value && homeAppItems.isEmpty() -> emptyList()
+            state.isLoading && homeAppItems.isEmpty() -> emptyList()
             isGroupedAppView -> buildGroupedHomeScrollTargets(displayedAppGroups)
             else -> buildFlatHomeScrollTargets(filteredItems)
         }
@@ -1116,21 +960,21 @@ fun MainAppsSection(
     }
     val listOrderKeys = remember(homeAppItems) { homeAppItems.map { it.packageName } }
     LaunchedEffect(listOrderKeys, userScrolledList) {
-        if (userScrolledList || isReorderMode.value) return@LaunchedEffect
+        if (userScrolledList || state.isReorderMode) return@LaunchedEffect
         if (listState.firstVisibleItemIndex != 0 || listState.firstVisibleItemScrollOffset != 0) {
             listState.scrollToItem(0)
         }
     }
 
     // Flat-only: grouped scrolls in onEnterReorder before the items list swaps
-    LaunchedEffect(isReorderMode.value) {
-        if (isReorderMode.value && reorderScopePackages == null) {
-            val targets = reorderFocusPackages.value
+    LaunchedEffect(state.isReorderMode) {
+        if (state.isReorderMode && state.reorderScopePackages == null) {
+            val targets = state.reorderFocusPackages
             if (targets.isNotEmpty()) {
                 val topIndex = reorderItems.indexOfFirst { it.packageName in targets }
                 if (topIndex >= 0) listState.scrollToItem(topIndex)
             }
-            reorderFocusPackages.value = emptySet()
+            state.reorderFocusPackages = emptySet()
         }
     }
 
@@ -1140,21 +984,21 @@ fun MainAppsSection(
     val moveAnnouncementFormat = stringResource(R.string.accessibility_app_moved_announcement)
 
     // True empty state: loaded, no apps from any bundle (no sources / all disabled)
-    val isNoSourcesState = !stableLoadingState.value && homeAppItems.isEmpty() && hiddenAppItems.isEmpty()
+    val isNoSourcesState = !state.isLoading && homeAppItems.isEmpty() && hiddenAppItems.isEmpty()
     // All-hidden state: apps exist but all are hidden
-    val isAllHiddenState = !stableLoadingState.value && homeAppItems.isEmpty() && hiddenAppItems.isNotEmpty()
+    val isAllHiddenState = !state.isLoading && homeAppItems.isEmpty() && hiddenAppItems.isNotEmpty()
     val isEmptyState = isNoSourcesState || isAllHiddenState
     // Search empty state: items exist but nothing matches query (including hidden)
-    val isSearchEmpty = !stableLoadingState.value && homeAppItems.isNotEmpty() &&
+    val isSearchEmpty = !state.isLoading && homeAppItems.isNotEmpty() &&
             searchQuery.isNotBlank() && filteredItems.isEmpty() && filteredHiddenItems.isEmpty()
 
     // Horizontal swipe on the background cycles through the visible grouping modes
     val modes = HomeAppCategoryViewMode.entries
     val currentModeIndex = modes.indexOf(appGrouping)
     val canSwipeMode = apps.showCategoryViewSwitcher &&
-            !isMultiSelectMode.value &&
-            !isReorderMode.value &&
-            !isCategoryBarVisible &&
+            !state.isMultiSelectMode &&
+            !state.isReorderMode &&
+            !state.isCategoryBarVisible &&
             !searchState.visible
     val swipeThresholdPx = with(LocalDensity.current) { 64.dp.toPx() }
     val layoutDirection = LocalLayoutDirection.current
@@ -1196,21 +1040,21 @@ fun MainAppsSection(
 
         AnimatedContent(
             targetState = isEmptyState,
-            transitionSpec = MorpheAnimations.fadeCrossfade(300),
+            transitionSpec = Animations.fadeCrossfade(300),
             label = "home_empty_state"
         ) { empty ->
             if (empty) {
                 if (isAllHiddenState) {
-                    MorpheEmptyState(
+                    HomeEmptyState(
                         icon = Icons.Outlined.VisibilityOff,
                         title = stringResource(R.string.home_all_apps_hidden_title),
                         subtitle = stringResource(R.string.home_all_apps_hidden_subtitle),
                         actionIcon = Icons.Outlined.Visibility,
                         actionLabel = pluralStringResource(R.plurals.home_app_show_hidden_count, hiddenAppItems.size, hiddenAppItems.size.toString()),
-                        onAction = { showHiddenAppsDialog.value = true }
+                        onAction = { state.showHiddenAppsDialog = true }
                     )
                 } else {
-                    MorpheEmptyState(
+                    HomeEmptyState(
                         icon = Icons.Outlined.Inbox,
                         title = stringResource(R.string.home_no_apps_title),
                         subtitle = stringResource(R.string.home_no_apps_subtitle, stringResource(R.string.sources_management_title)),
@@ -1231,8 +1075,8 @@ fun MainAppsSection(
                         // Search bar
                         AnimatedVisibility(
                             visible = searchState.visible,
-                            enter = MorpheAnimations.expandFadeEnter,
-                            exit = MorpheAnimations.shrinkFadeExit
+                            enter = Animations.expandFadeEnter,
+                            exit = Animations.shrinkFadeExit
                         ) {
                             HomeSearchTextField(
                                 value = searchQuery,
@@ -1255,14 +1099,14 @@ fun MainAppsSection(
                         ) {
                             // Cached so the LazyColumn doesn't allocate a new PaddingValues on
                             // every recomposition (which can be per-frame under scroll)
-                            val listContentPadding = remember(horizontalPadding, itemSpacing, isMultibarVisible) {
+                            val listContentPadding = remember(horizontalPadding, itemSpacing, state.isFooterBarVisible) {
                                 PaddingValues(
                                     start = horizontalPadding,
                                     end = horizontalPadding,
                                     // Extra bottom padding so cards aren't hidden behind the action bar
                                     // MultiSelectBar surface height (100dp) minus bar's own
                                     // 8dp top padding, plus itemSpacing for consistent card gap
-                                    bottom = if (isMultibarVisible) 92.dp + itemSpacing else 0.dp
+                                    bottom = if (state.isFooterBarVisible) 92.dp + itemSpacing else 0.dp
                                 )
                             }
                             val listArrangement = remember(itemSpacing, isGroupedAppView) {
@@ -1280,170 +1124,33 @@ fun MainAppsSection(
                                 contentPadding = listContentPadding
                             ) {
                                 // Cold start: homeAppItems still empty - show placeholder shimmer cards
-                                if (stableLoadingState.value && homeAppItems.isEmpty()) {
+                                if (state.isLoading && homeAppItems.isEmpty()) {
                                     items(3, key = { "placeholder_$it" }) { index ->
                                         AppLoadingCard(
                                             gradientColors = placeholderGradients[index % placeholderGradients.size],
                                             modifier = Modifier.animateItem()
                                         )
                                     }
-                                } else if (isReorderMode.value) {
-                                    itemsIndexed(
+                                } else if (state.isReorderMode) {
+                                    reorderableAppCards(
+                                        state = state,
                                         items = reorderItems,
-                                        key = { _, item -> item.packageName }
-                                    ) { _, item ->
-                                        ReorderableItem(reorderableState, key = item.packageName) { itemIsDragging ->
-                                            DynamicAppCard(
-                                                item = item,
-                                                isLoading = false,
-                                                hasUpdate = item.hasUpdate,
-                                                onAppClick = {
-                                                    if (selectedPackages.isNotEmpty) {
-                                                        selectedPackages.toggle(item.packageName)
-                                                    }
-                                                },
-                                                onHide = {},
-                                                onShowPatches = {},
-                                                showGestureHint = false,
-                                                onGestureHintShown = {},
-                                                isSelected = selectedPackages.contains(item.packageName),
-                                                isMultiSelectMode = selectedPackages.isNotEmpty,
-                                                onLongPress = { selectedPackages.toggle(item.packageName) },
-                                                swipeActionsEnabled = false,
-                                                dragHandleModifier = Modifier.draggableHandle(
-                                                    onDragStarted = {
-                                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                        val currentPkg = item.packageName
-                                                        val selected = selectedPackages.keys
-                                                        reorderGroupFollowers = if (selected.size > 1 && currentPkg in selected) {
-                                                            (scopedSourceOrder ?: localOrder)
-                                                                .filter { it in selected && it != currentPkg }
-                                                        } else null
-                                                    },
-                                                    onDragStopped = {
-                                                        val followers = reorderGroupFollowers
-                                                        reorderGroupFollowers = null
-                                                        if (followers.isNullOrEmpty()) return@draggableHandle
-                                                        val currentOrder = scopedSourceOrder ?: localOrder
-                                                        val withoutFollowers = currentOrder.filter { it !in followers }
-                                                        val dropIdx = withoutFollowers.indexOf(item.packageName)
-                                                        if (dropIdx < 0) return@draggableHandle
-                                                        val nextOrder = buildList {
-                                                            addAll(withoutFollowers.take(dropIdx + 1))
-                                                            addAll(followers)
-                                                            addAll(withoutFollowers.drop(dropIdx + 1))
-                                                        }
-                                                        if (scopedSourceOrder != null) {
-                                                            scopedSourceOrder = nextOrder
-                                                        } else {
-                                                            localOrder = nextOrder
-                                                        }
-                                                    }
-                                                ),
-                                                modifier = Modifier.zIndex(if (itemIsDragging) 1f else 0f)
-                                            )
-                                        }
-                                    }
+                                        reorderableState = reorderableState,
+                                        haptic = haptic
+                                    )
                                 } else if (isGroupedAppView) {
-                                    displayedAppGroups.forEach { group ->
-                                        val headerKey = "category_${group.id ?: "uncategorized"}"
-                                        item(key = headerKey) {
-                                            // Long-press is gated while any other footer mode is
-                                            // already using the slot
-                                            val isFooterBusy = isMultiSelectMode.value ||
-                                                    isReorderMode.value ||
-                                                    isCategoryReorderMode.value
-                                            val headerLongPress: (() -> Unit)? = when {
-                                                isFooterBusy -> null
-                                                group.editable -> { -> activeCategoryId = group.id }
-                                                group.sourceUid != null -> { -> activeSourceUid = group.sourceUid }
-                                                else -> { -> context.toast(categoryActionsUnavailableToast) }
-                                            }
-                                            val headerContent: @Composable ((@Composable () -> Unit)?) -> Unit = { dragHandle ->
-                                                HomeCategoryHeader(
-                                                    group = group,
-                                                    onToggle = {
-                                                        val sourceUid = group.sourceUid
-                                                        if (sourceUid != null) {
-                                                            appActions.onToggleSourceGroupCollapsed(sourceUid)
-                                                        } else {
-                                                            // null id = uncategorized bucket
-                                                            appActions.onToggleCategoryCollapsed(group.id)
-                                                        }
-                                                    },
-                                                    onLongPress = headerLongPress,
-                                                    modifier = Modifier.animateItem(),
-                                                    dragHandle = dragHandle
-                                                )
-                                            }
-
-                                            val canReorderHeader = when (appGrouping) {
-                                                HomeAppCategoryViewMode.SOURCES -> group.sourceUid != null
-                                                HomeAppCategoryViewMode.CUSTOM -> group.editable
-                                                HomeAppCategoryViewMode.ALL_APPS -> false
-                                            }
-                                            if (canReorderHeader && isCategoryReorderMode.value) {
-                                                ReorderableItem(categoryReorderableState, key = headerKey) { _ ->
-                                                    headerContent {
-                                                        CategoryHeaderDragHandle(
-                                                            modifier = Modifier.draggableHandle(
-                                                                onDragStarted = {
-                                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                                }
-                                                            )
-                                                        )
-                                                    }
-                                                }
-                                            } else {
-                                                headerContent(null)
-                                            }
-                                        }
-
-                                        if (!group.collapsed) {
-                                            items(
-                                                items = group.items,
-                                                key = { item -> "category_${group.id ?: "uncategorized"}_${item.packageName}" }
-                                            ) { item ->
-                                                val groupKey = group.selectionKey()
-                                                val isSelected = selectedPackages.contains(item.packageName) &&
-                                                        (selectedGroupKey == null || selectedGroupKey == groupKey)
-                                                DynamicAppCard(
-                                                    item = item,
-                                                    isLoading = stableLoadingState.value,
-                                                    hasUpdate = item.hasUpdate,
-                                                    onAppClick = {
-                                                        if (isMultiSelectMode.value) {
-                                                            if (selectedGroupKey != null && selectedGroupKey != groupKey) {
-                                                                selectedPackages.clear()
-                                                            }
-                                                            selectedGroupKey = groupKey
-                                                            selectedPackages.toggle(item.packageName)
-                                                            if (selectedPackages.isEmpty) selectedGroupKey = null
-                                                        } else {
-                                                            appActions.onAppClick(item)
-                                                        }
-                                                    },
-                                                    onHide = { appActions.onHideApp(item.packageName) },
-                                                    onShowPatches = { appActions.onShowPatches(item) },
-                                                    showGestureHint = item.packageName == filteredItems.firstOrNull()?.packageName &&
-                                                            apps.showGestureHint,
-                                                    onGestureHintShown = appActions.onGestureHintShown,
-                                                    isSelected = isSelected,
-                                                    isMultiSelectMode = isMultiSelectMode.value,
-                                                    onLongPress = {
-                                                        // Skip so the category bar doesn't overlap with app multi-select
-                                                        if (!isCategoryBarVisible) {
-                                                            selectedGroupKey = groupKey
-                                                            isMultiSelectMode.value = true
-                                                            selectedPackages.toggle(item.packageName)
-                                                            if (selectedPackages.isEmpty) selectedGroupKey = null
-                                                        }
-                                                    },
-                                                    modifier = Modifier.animateItem()
-                                                )
-                                            }
-                                        }
-                                    }
+                                    groupedAppCards(
+                                        state = state,
+                                        groups = displayedAppGroups,
+                                        appGrouping = appGrouping,
+                                        firstFilteredPackage = filteredItems.firstOrNull()?.packageName,
+                                        showGestureHint = apps.showGestureHint,
+                                        appActions = appActions,
+                                        categoryReorderableState = categoryReorderableState,
+                                        haptic = haptic,
+                                        context = context,
+                                        categoryActionsUnavailableToast = categoryActionsUnavailableToast
+                                    )
 
                                     hiddenSearchAndShowHiddenItems(
                                         hiddenAppItems = hiddenAppItems,
@@ -1451,83 +1158,24 @@ fun MainAppsSection(
                                         searchQuery = searchQuery,
                                         isSearchEmpty = isSearchEmpty,
                                         appActions = appActions,
-                                        onShowHiddenApps = { showHiddenAppsDialog.value = true },
+                                        onShowHiddenApps = { state.showHiddenAppsDialog = true },
                                         keyPrefix = "category_"
                                     )
                                 } else {
-                                    // Direct reorder a11y actions are exposed only when there's no search
-                                    // filter and no multi-select active so the indices match localOrder
-                                    val directReorderAllowed = searchQuery.isBlank() && !isMultiSelectMode.value
-                                    itemsIndexed(
+                                    flatAppCards(
+                                        state = state,
                                         items = filteredItems,
-                                        key = { _, item -> item.packageName }
-                                    ) { index, item ->
-                                        val isSelected = selectedPackages.contains(item.packageName)
-                                        DynamicAppCard(
-                                            item = item,
-                                            isLoading = stableLoadingState.value,
-                                            hasUpdate = item.hasUpdate,
-                                            onAppClick = {
-                                                if (isMultiSelectMode.value) {
-                                                    // In multi-select mode taps toggle selection
-                                                    selectedPackages.toggle(item.packageName)
-                                                } else {
-                                                    appActions.onAppClick(item)
-                                                }
-                                            },
-                                            onHide = { appActions.onHideApp(item.packageName) },
-                                            onShowPatches = { appActions.onShowPatches(item) },
-                                            // Hint plays only on the first card
-                                            showGestureHint = index == 0 && apps.showGestureHint,
-                                            onGestureHintShown = appActions.onGestureHintShown,
-                                            isSelected = isSelected,
-                                            isMultiSelectMode = isMultiSelectMode.value,
-                                            onLongPress = {
-                                                // Long-press enters multi-select and toggles this card
-                                                isMultiSelectMode.value = true
-                                                selectedPackages.toggle(item.packageName)
-                                            },
-                                            onMoveUp = if (directReorderAllowed && index > 0) {
-                                                {
-                                                    val current = localOrder.toMutableList()
-                                                    val from = current.indexOf(item.packageName)
-                                                    if (from > 0) {
-                                                        val moved = current.removeAt(from)
-                                                        current.add(from - 1, moved)
-                                                        localOrder = current
-                                                        appActions.onSaveOrder(current)
-                                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                        moveAnnouncement = moveAnnouncementFormat
-                                                            .format(item.displayName, from, current.size)
-                                                    }
-                                                }
-                                            } else null,
-                                            onMoveDown = if (directReorderAllowed && index < filteredItems.size - 1) {
-                                                {
-                                                    val current = localOrder.toMutableList()
-                                                    val from = current.indexOf(item.packageName)
-                                                    if (from in 0 until current.size - 1) {
-                                                        val moved = current.removeAt(from)
-                                                        current.add(from + 1, moved)
-                                                        localOrder = current
-                                                        appActions.onSaveOrder(current)
-                                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                        moveAnnouncement = moveAnnouncementFormat
-                                                            .format(item.displayName, from + 2, current.size)
-                                                    }
-                                                }
-                                            } else null,
-                                            modifier = Modifier
-                                                .animateItem()
-                                                .then(
-                                                    if (index == 0 && onboardingState != null)
-                                                        Modifier.onGloballyPositioned { coords ->
-                                                            onboardingState.firstAppCardBounds = coords.boundsInWindow()
-                                                        }
-                                                    else Modifier
-                                                )
-                                        )
-                                    }
+                                        showGestureHint = apps.showGestureHint,
+                                        // Direct reorder a11y actions are exposed only when there's no
+                                        // search filter and no multi-select active, so the indices
+                                        // match state.localOrder
+                                        directReorderAllowed = searchQuery.isBlank() && !state.isMultiSelectMode,
+                                        appActions = appActions,
+                                        haptic = haptic,
+                                        onboardingState = onboardingState,
+                                        moveAnnouncementFormat = moveAnnouncementFormat,
+                                        onMoveAnnouncement = { moveAnnouncement = it }
+                                    )
 
                                     hiddenSearchAndShowHiddenItems(
                                         hiddenAppItems = hiddenAppItems,
@@ -1535,7 +1183,7 @@ fun MainAppsSection(
                                         searchQuery = searchQuery,
                                         isSearchEmpty = isSearchEmpty,
                                         appActions = appActions,
-                                        onShowHiddenApps = { showHiddenAppsDialog.value = true }
+                                        onShowHiddenApps = { state.showHiddenAppsDialog = true }
                                     )
                                 }
                             }
@@ -1591,250 +1239,36 @@ fun MainAppsSection(
                                 listState = listState,
                                 alphabetTargets = scrollTargets,
                                 alphabetMode = alphabetScrollMode,
-                                extraBottomPadding = if (isMultibarVisible) 96.dp else 0.dp
+                                extraBottomPadding = if (state.isFooterBarVisible) 96.dp else 0.dp
                             )
 
                             // Lift extra space for the MultiSelectBar when it's visible
                             ScrollToTopButton(
                                 listState = listState,
-                                extraBottomPadding = if (isMultibarVisible) 96.dp else 0.dp
+                                extraBottomPadding = if (state.isFooterBarVisible) 96.dp else 0.dp
                             )
                         }
 
                     }
 
-                    // Multi-select / reorder bar - slides up from bottom
-                    val activeAppScopePackages = reorderScopePackages ?: groupedSelectionPackages
-                    // Memoized - otherwise selection toggles refilter homeAppItems each pass
-                    val activeAppScopeItems = remember(
-                        activeAppScopePackages,
-                        groupedSelectionGroup,
-                        homeAppItems,
-                        reorderItems,
-                        isReorderMode.value
-                    ) {
-                        when {
-                            isReorderMode.value -> reorderItems
-                            groupedSelectionGroup != null -> groupedSelectionGroup.items
-                            activeAppScopePackages != null -> homeAppItems.filter { it.packageName in activeAppScopePackages }
-                            else -> homeAppItems
-                        }
-                    }
-                    val selectedAppItems = remember(selectedPackages.keys.toList(), homeAppItems) {
-                        val selected = selectedPackages.keys.toSet()
-                        homeAppItems.filter { it.packageName in selected }
-                    }
-                    val selectedInstalledItems = remember(selectedAppItems) {
-                        selectedAppItems.filter { it.isInstalledOnDevice }
-                    }
-                    val selectedReinstallItems = remember(selectedAppItems) {
-                        selectedAppItems.filter {
-                            !it.isInstalledOnDevice && it.hasSavedCopy && it.installedApp != null
-                        }
-                    }
-                    val contextActionIsReinstall = selectedAppItems.isNotEmpty() &&
-                            selectedReinstallItems.size == selectedAppItems.size
-                    val contextActionIsUninstall = selectedAppItems.isNotEmpty() &&
-                            selectedInstalledItems.size == selectedAppItems.size
-                    val reinstallLabel = stringResource(R.string.reinstall)
-                    val uninstallLabel = stringResource(R.string.uninstall)
-                    MultiSelectBar(
-                        selectedCount = selectedPackages.size,
-                        totalCount = activeAppScopeItems.size,
-                        visible = isMultibarVisible,
-                        isReorderMode = isReorderMode.value,
-                        onSelectAll = {
-                            selectedPackages.setAll(activeAppScopeItems.map { it.packageName })
-                        },
-                        onDeselectAll = {
-                            selectedPackages.clear()
-                            selectedGroupKey = null
-                        },
-                        onAction = {
-                            appActions.onHideMultiple(selectedPackages.keys.toSet())
-                            isMultiSelectMode.value = false
-                            selectedPackages.clear()
-                            selectedGroupKey = null
-                        },
-                        actionIcon = Icons.Outlined.VisibilityOff,
-                        actionContentDescription = stringResource(R.string.hide),
-                        actionDoneMessage = stringResource(R.string.hidden),
-                        onContextAction = when {
-                            contextActionIsReinstall -> {
-                                {
-                                    appActions.onReinstallMultiple(selectedReinstallItems)
-                                    isMultiSelectMode.value = false
-                                    selectedPackages.clear()
-                                    selectedGroupKey = null
-                                }
-                            }
-                            contextActionIsUninstall -> {
-                                {
-                                    pendingUninstallItems = selectedInstalledItems.toList()
-                                    showBatchUninstallConfirm = true
-                                }
-                            }
-                            else -> null
-                        },
-                        contextActionIcon = when {
-                            contextActionIsReinstall -> Icons.Outlined.InstallMobile
-                            contextActionIsUninstall -> Icons.Outlined.DeleteForever
-                            else -> null
-                        },
-                        contextActionContentDescription = when {
-                            contextActionIsReinstall -> reinstallLabel
-                            contextActionIsUninstall -> uninstallLabel
-                            else -> null
-                        },
-                        contextActionColors = if (contextActionIsUninstall) {
-                            IconButtonDefaults.filledTonalIconButtonColors(
-                                containerColor = MaterialTheme.colorScheme.errorContainer,
-                                contentColor = MaterialTheme.colorScheme.onErrorContainer
-                            )
-                        } else {
-                            IconButtonDefaults.filledTonalIconButtonColors()
-                        },
-                        onMoveToCategory = if (isCustomCategoryView) {
-                            { showMoveCategoryDialog.value = true }
-                        } else null,
-                        onPatchSelected = {
-                            appActions.onPatchMultiple(selectedAppItems)
-                            isMultiSelectMode.value = false
-                            selectedPackages.clear()
-                            selectedGroupKey = null
-                        },
-                        onCancel = {
-                            isMultiSelectMode.value = false
-                            selectedPackages.clear()
-                            selectedGroupKey = null
-                        },
-                        onEnterReorder = {
-                            groupedSelectionPackages?.let { pkgs ->
-                                selectedPackages.retain { it in pkgs }
-                            }
-                            reorderScopePackages = groupedSelectionPackages
-                            reorderScopeSourceUid = groupedSelectionGroup?.sourceUid
-                            val sourceOrder = groupedSelectionGroup
-                                ?.takeIf { it.sourceUid != null }
-                                ?.items
-                                ?.map { it.packageName }
-                            scopedSourceOrder = sourceOrder
-                            val focusTargets = selectedPackages.keys.toSet()
-                            // Grouped pre-scrolls below (before flipping mode) so the
-                            // LazyColumn doesn't hold a stale offset when items swap to the
-                            // scoped list; flat defers to the LaunchedEffect after flipping
-                            reorderFocusPackages.value = if (groupedSelectionPackages == null) focusTargets else emptySet()
-                            isMultiSelectMode.value = false
-                            searchState.onClose()
-                            groupedSelectionPackages?.let { scopePackages ->
-                                val scopedItems = sourceOrder
-                                    ?.mapNotNull { homeItemsByPackage[it] }
-                                    ?: orderedItems.filter { it.packageName in scopePackages }
-                                val focusIndex = scopedItems.indexOfFirst { it.packageName in focusTargets }
-                                scope.launch {
-                                    listState.scrollToItem(focusIndex.coerceAtLeast(0))
-                                    isReorderMode.value = true
-                                }
-                            } ?: run {
-                                isReorderMode.value = true
-                            }
-                        },
-                        onSaveOrder = {
-                            val sourceUid = reorderScopeSourceUid
-                            if (sourceUid != null) {
-                                appActions.onSaveSourceOrder(sourceUid, scopedSourceOrder ?: reorderItems.map { it.packageName })
-                            } else {
-                                appActions.onSaveOrder(localOrder)
-                            }
-                            isReorderMode.value = false
-                            reorderScopePackages = null
-                            reorderScopeSourceUid = null
-                            scopedSourceOrder = null
-                            reorderGroupFollowers = null
-                            selectedPackages.clear()
-                            selectedGroupKey = null
-                        },
-                        onResetOrder = {
-                            val sourceUid = reorderScopeSourceUid
-                            if (sourceUid != null) {
-                                appActions.onResetSourceOrder(sourceUid)
-                            } else {
-                                appActions.onResetOrder()
-                            }
-                            localOrder = homeAppItems.map { it.packageName }
-                            isReorderMode.value = false
-                            reorderScopePackages = null
-                            reorderScopeSourceUid = null
-                            scopedSourceOrder = null
-                            reorderGroupFollowers = null
-                            selectedPackages.clear()
-                            selectedGroupKey = null
-                        },
-                        onCancelReorder = {
-                            isReorderMode.value = false
-                            reorderScopePackages = null
-                            reorderScopeSourceUid = null
-                            scopedSourceOrder = null
-                            reorderGroupFollowers = null
-                            selectedPackages.clear()
-                            selectedGroupKey = null
-                            localOrder = homeAppItems.map { it.packageName }
-                        },
+                    HomeAppsFooterBars(
+                        state = state,
+                        apps = apps,
+                        appActions = appActions,
+                        searchState = searchState,
+                        reorderItems = reorderItems,
+                        orderedItems = orderedItems,
+                        itemsByPackage = homeItemsByPackage,
+                        groupedSelectionGroup = groupedSelectionGroup,
+                        groupedSelectionPackages = groupedSelectionPackages,
+                        sourceGroups = displayedSourceCategoryGroups,
+                        isCustomCategoryView = isCustomCategoryView,
+                        isSourceCategoryView = isSourceCategoryView,
+                        listState = listState,
+                        scope = scope,
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
                             .padding(horizontal = horizontalPadding)
-                    )
-
-                    val activeCategoryTitle = activeCategoryId?.let { id ->
-                        apps.categoryState.categories.firstOrNull { it.id == id }?.name
-                    }
-                    val activeSourceTitle = activeSourceUid?.let { uid ->
-                        displayedSourceCategoryGroups.firstOrNull { it.sourceUid == uid }?.title
-                    }
-                    CategoryActionBar(
-                        activeCategoryTitle = activeCategoryTitle ?: activeSourceTitle,
-                        visible = isCategoryBarVisible,
-                        isReorderMode = isCategoryReorderMode.value,
-                        onRename = {
-                            val category = apps.categoryState.categories
-                                .firstOrNull { it.id == activeCategoryId }
-                            if (category != null) {
-                                categoryNameRequest = CategoryNameRequest(category)
-                            }
-                            activeCategoryId = null
-                            activeSourceUid = null
-                        },
-                        onDelete = {
-                            // Hand off to the confirmation dialog; actual deletion runs only if
-                            // the user confirms. Close the bar so the dialog isn't shadowed.
-                            pendingDeleteCategoryId = activeCategoryId
-                            activeCategoryId = null
-                            activeSourceUid = null
-                        },
-                        onEnterReorder = {
-                            // localSourceGroupOrder is kept in sync by LaunchedEffect(apps.sourceGroups),
-                            // so it already reflects the current source list when reorder begins
-                            activeCategoryId = null
-                            activeSourceUid = null
-                            searchState.onClose()
-                            isCategoryReorderMode.value = true
-                        },
-                        onExitReorder = {
-                            if (isSourceCategoryView) {
-                                appActions.onSaveSourceGroupOrder(localSourceGroupOrder)
-                            } else {
-                                appActions.onSaveCategoryOrder(localCategoryOrder)
-                            }
-                            isCategoryReorderMode.value = false
-                        },
-                        onCancel = {
-                            activeCategoryId = null
-                            activeSourceUid = null
-                        },
-                        modifier = Modifier
-                            .align(Alignment.BottomCenter)
-                            .padding(horizontal = horizontalPadding),
-                        showEditActions = activeSourceUid == null && !isSourceCategoryView
                     )
                 }
             }

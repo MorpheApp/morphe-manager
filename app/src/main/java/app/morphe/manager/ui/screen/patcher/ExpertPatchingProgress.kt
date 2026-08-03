@@ -482,7 +482,7 @@ private fun ExpertProgressHeader(
         ) {
             AnimatedContent(
                 targetState = currentStep?.name,
-                transitionSpec = MorpheAnimations.fadeCrossfade(300),
+                transitionSpec = Animations.fadeCrossfade(300),
                 label = "expert_step_name",
                 modifier = Modifier.weight(1f)
             ) { stepName ->
@@ -520,7 +520,7 @@ private fun ExpertProgressHeader(
         val heapLimitMb = patchProgress.heapLimitMb
         AnimatedVisibility(
             visible = heapSamples.isNotEmpty(),
-            enter = MorpheAnimations.expandFadeEnter
+            enter = Animations.expandFadeEnter
         ) {
             HeapUsageGraph(
                 samples = heapSamples,
@@ -726,7 +726,7 @@ private fun ExpertLogPanel(
 
             AnimatedContent(
                 targetState = activeTab,
-                transitionSpec = MorpheAnimations.fadeCrossfade(200),
+                transitionSpec = Animations.fadeCrossfade(200),
                 modifier = Modifier.weight(1f).fillMaxWidth(),
                 label = "log_game_tab"
             ) { tab ->
@@ -751,9 +751,14 @@ private fun ExpertLogPanel(
                                             horizontalAlignment = Alignment.CenterHorizontally,
                                             verticalArrangement = Arrangement.spacedBy(10.dp)
                                         ) {
-                                            LiveIndicatorDot(size = 10.dp)
+                                            // Nothing is going to arrive for a run whose log died
+                                            // with its process, so the live dot would be a lie
+                                            if (!patchProgress.logsLost) LiveIndicatorDot(size = 10.dp)
                                             Text(
-                                                text = "Waiting for log output…",
+                                                text = stringResource(
+                                                    if (patchProgress.logsLost) R.string.patcher_logs_lost
+                                                    else R.string.patcher_logs_waiting
+                                                ),
                                                 style = MaterialTheme.typography.bodySmall,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f),
                                                 fontFamily = FontFamily.Monospace,
@@ -883,7 +888,7 @@ private fun PatcherInfoCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 10.dp, vertical = 6.dp),
-        shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+        shape = RoundedCornerShape(Defaults.CompactCornerRadius),
         color = bgColor,
         tonalElevation = 0.dp
     ) {

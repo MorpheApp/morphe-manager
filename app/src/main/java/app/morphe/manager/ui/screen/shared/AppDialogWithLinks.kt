@@ -28,7 +28,7 @@ import androidx.compose.ui.text.withStyle
  * @param onDismiss Callback when OK is pressed
  */
 @Composable
-fun MorpheDialogWithLinks(
+fun AppDialogWithLinks(
     title: String,
     message: String,
     urlLink: String,
@@ -65,11 +65,11 @@ fun MorpheDialogWithLinks(
         append(message.substring(end))
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = title,
         footer = {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(android.R.string.ok),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()

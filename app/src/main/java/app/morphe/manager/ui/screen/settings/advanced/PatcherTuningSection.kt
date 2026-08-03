@@ -69,7 +69,7 @@ fun PatcherTuningSection(
 
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
     ) {
         SectionTitle(
             text = stringResource(R.string.settings_advanced_patcher),
@@ -90,7 +90,7 @@ fun PatcherTuningSection(
                             memoryLimit
                         )
                     else stringResource(R.string.settings_system_process_runtime_disabled_description),
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Memory) },
+                    leadingContent = { ThemedIcon(icon = Icons.Outlined.Memory) },
                     statusContent = {
                         StatusCircleIcon(
                             icon = Icons.Outlined.Check,
@@ -105,7 +105,7 @@ fun PatcherTuningSection(
                 IconTextRow(
                     modifier = Modifier.padding(16.dp),
                     leadingContent = {
-                        MorpheIcon(
+                        ThemedIcon(
                             icon = Icons.Outlined.Memory,
                             tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
                         )
@@ -115,13 +115,13 @@ fun PatcherTuningSection(
                 )
             }
 
-            MorpheSettingsDivider()
+            SettingsDivider()
 
             SettingsItem(
                 onClick = { showBytecodeDialog.value = true },
                 title = stringResource(R.string.settings_advanced_bytecode_mode),
                 subtitle = stringResource(bytecodeMode.labelRes()),
-                leadingContent = { MorpheIcon(icon = Icons.Outlined.Code) }
+                leadingContent = { ThemedIcon(icon = Icons.Outlined.Code) }
             )
         }
     }

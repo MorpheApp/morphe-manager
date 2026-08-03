@@ -27,8 +27,8 @@ import app.morphe.manager.ui.screen.shared.DialogPadding
 import app.morphe.manager.ui.screen.shared.ListScrollbar
 import app.morphe.manager.ui.screen.shared.LocalDialogHorizontalInset
 import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
-import app.morphe.manager.ui.screen.shared.MorpheDialog
-import app.morphe.manager.ui.screen.shared.MorpheDialogOutlinedButton
+import app.morphe.manager.ui.screen.shared.AppDialog
+import app.morphe.manager.ui.screen.shared.AppDialogOutlinedButton
 import app.morphe.manager.ui.screen.shared.ScrollToTopButton
 import com.mikepenz.aboutlibraries.entity.Library
 import com.mikepenz.aboutlibraries.ui.compose.LibraryColors
@@ -77,12 +77,12 @@ service marks, or logos.
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LicensesDialog(onDismiss: () -> Unit) {
-    MorpheDialog(
+    AppDialog(
         title = stringResource(R.string.opensource_licenses),
         onDismissRequest = onDismiss,
         scrollable = false, // LibrariesContainer has its own LazyColumn
         footer = {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()

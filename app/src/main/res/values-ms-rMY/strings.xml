@@ -705,6 +705,7 @@ Dimensi gambar mestilah seperti berikut:
     <string name="install_update_manager_failed">Gagal memasang kemas kini</string>
     <string name="installing_manager_update">Memasang kemas kini…</string>
     <string name="downloading_manager_update">Memukim kemas kini…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Gagal memukim kemas kini: %s</string>
     <string name="failed_to_check_updates">Gagal menyemak kemas kini: %s</string>
     <string name="failed_to_download_update">Gagal memukim kemas kini: %s</string>

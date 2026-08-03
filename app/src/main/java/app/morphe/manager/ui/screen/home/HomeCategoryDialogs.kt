@@ -38,14 +38,14 @@ internal fun CategoryNameDialog(
     var name by remember(category?.id) { mutableStateOf(category?.name.orEmpty()) }
     val trimmed = name.trim()
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(
             if (category == null) R.string.home_category_new_title
             else R.string.home_category_rename_title
         ),
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(if (category == null) R.string.add else R.string.rename),
                 onPrimaryClick = { onConfirm(trimmed) },
                 primaryEnabled = trimmed.isNotEmpty(),
@@ -54,7 +54,7 @@ internal fun CategoryNameDialog(
             )
         }
     ) {
-        MorpheDialogTextField(
+        AppDialogTextField(
             value = name,
             onValueChange = { name = it },
             label = { Text(stringResource(R.string.home_category_name)) },
@@ -93,11 +93,11 @@ internal fun MoveToCategoryDialog(
         )
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_category_move_selected_title),
         footer = {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
@@ -107,13 +107,13 @@ internal fun MoveToCategoryDialog(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = MorpheDefaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                .padding(vertical = Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
         ) {
             SettingsItemCard(onClick = { showCreateDialog = true }, borderWidth = 1.dp) {
                 IconTextRow(
-                    modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Add) },
+                    modifier = Modifier.padding(Defaults.ContentPadding),
+                    leadingContent = { ThemedIcon(icon = Icons.Outlined.Add) },
                     title = stringResource(R.string.home_category_add),
                     trailingContent = null
                 )
@@ -121,8 +121,8 @@ internal fun MoveToCategoryDialog(
 
             SettingsItemCard(onClick = { onSelect(null) }, borderWidth = 1.dp) {
                 IconTextRow(
-                    modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.FolderOff) },
+                    modifier = Modifier.padding(Defaults.ContentPadding),
+                    leadingContent = { ThemedIcon(icon = Icons.Outlined.FolderOff) },
                     title = stringResource(R.string.home_category_uncategorized),
                     trailingContent = null
                 )
@@ -131,8 +131,8 @@ internal fun MoveToCategoryDialog(
             categories.forEach { category ->
                 SettingsItemCard(onClick = { onSelect(category.id) }, borderWidth = 1.dp) {
                     IconTextRow(
-                        modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-                        leadingContent = { MorpheIcon(icon = Icons.Outlined.Folder) },
+                        modifier = Modifier.padding(Defaults.ContentPadding),
+                        leadingContent = { ThemedIcon(icon = Icons.Outlined.Folder) },
                         title = category.name,
                         trailingContent = null
                     )

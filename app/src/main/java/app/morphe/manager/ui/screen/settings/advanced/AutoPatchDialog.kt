@@ -63,11 +63,11 @@ fun AutoPatchDialog(
         )
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_advanced_auto_patch),
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(android.R.string.ok),
                 onPrimaryClick = onDismiss
             )
@@ -76,7 +76,7 @@ fun AutoPatchDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
         ) {
             SettingsGroup {
                 SettingsSwitchItem(
@@ -97,20 +97,20 @@ fun AutoPatchDialog(
 
                 AnimatedVisibility(
                     visible = autoPatchEnabled,
-                    enter = MorpheAnimations.expandFadeEnter,
-                    exit = MorpheAnimations.shrinkFadeExit
+                    enter = Animations.expandFadeEnter,
+                    exit = Animations.shrinkFadeExit
                 ) {
                     Column {
-                        MorpheSettingsDivider()
+                        SettingsDivider()
 
                         SettingsItem(
                             onClick = { showIntervalDialog = true },
                             title = stringResource(R.string.settings_advanced_auto_patch_interval),
                             subtitle = stringResource(autoPatchInterval.labelResId),
-                            leadingContent = { MorpheIcon(icon = Icons.Outlined.Schedule) }
+                            leadingContent = { ThemedIcon(icon = Icons.Outlined.Schedule) }
                         )
 
-                        MorpheSettingsDivider()
+                        SettingsDivider()
 
                         SettingsSwitchItem(
                             checked = autoPatchRequiresCharging,
@@ -120,7 +120,7 @@ fun AutoPatchDialog(
                             subtitle = stringResource(R.string.settings_advanced_auto_patch_charging_description)
                         )
 
-                        MorpheSettingsDivider()
+                        SettingsDivider()
 
                         SettingsSwitchItem(
                             checked = autoPatchInstall,

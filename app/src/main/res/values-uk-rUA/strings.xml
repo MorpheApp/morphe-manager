@@ -255,6 +255,11 @@
     <string name="home_dialog_wrong_package_description">Вибраний APK файл не відповідає застосунку, який ви збиралися пропатчити</string>
     <string name="home_dialog_expected_package">Очікуваний пакет:</string>
     <string name="home_dialog_selected_package">Вибраний пакет:</string>
+    <string name="home_dialog_orphaned_install_title">Попередня копія залишена</string>
+    <string name="home_dialog_orphaned_install_description">Патчинг змінив назву пакета, тому копія, яку ви пропатчили раніше, все ще встановлена як окремий застосунок</string>
+    <string name="home_dialog_orphaned_install_warning">Вона більше не відстежується і не отримуватиме оновлення патчів</string>
+    <string name="home_dialog_orphaned_install_uninstall">Видалити її</string>
+    <string name="home_dialog_orphaned_install_keep">Залишити її</string>
     <string name="home_outdated_patches_dialog_title">Патчі можуть бути застарілими</string>
     <string name="home_outdated_patches_dialog_message">Мобільна мережа активна, оновлення патчів вимкнено</string>
     <string name="home_outdated_patches_dialog_warning">Патчинг застарілими патчами може призвести до несправності застосунку</string>
@@ -393,6 +398,8 @@
     <string name="patcher_error_dialog_app_info">Інформація про застосунок</string>
     <string name="patcher_tab_logs">Журнали патчера</string>
     <string name="patcher_tab_game">Ігри</string>
+    <string name="patcher_logs_waiting">Очікування виводу журналу…</string>
+    <string name="patcher_logs_lost">Вивід журналу не зберігається після перезапуску застосунку</string>
     <string name="patcher_long_step_warning">Цей крок може тривати деякий час. Будь ласка, зачекайте…</string>
     <string name="patcher_installing_subtitle">Майже готово до драйву! 🎸</string>
     <string name="patcher_success_title">Все готово! 🎉</string>
@@ -1096,6 +1103,9 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">Не вдалося встановити оновлення</string>
     <string name="installing_manager_update">Встановлення оновлення…</string>
     <string name="downloading_manager_update">Завантаження оновлення…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
+    <string name="manager_update_progress_downloaded">Завантажено %1$.1f МБ</string>
+    <string name="manager_update_not_ready">Цей реліз ще публікується. Спробуйте знову за кілька хвилин</string>
     <string name="download_manager_failed">Помилка завантаження оновлення: %s</string>
     <string name="failed_to_check_updates">Не вдалося перевірити наявність оновлень: %s</string>
     <string name="failed_to_download_update">Помилка завантаження оновлення: %s</string>

@@ -87,7 +87,7 @@ fun PatcherScreen(
     val patcherSucceeded by patcherViewModel.patcherSucceeded.observeAsState(null)
 
     // Remember patcher state
-    val state = rememberMorphePatcherState(patcherViewModel)
+    val state = rememberPatcherScreenState(patcherViewModel)
     val scope = rememberCoroutineScope()
     val miniGameState = remember { MiniGameState(prefs, scope) }
 
@@ -341,14 +341,14 @@ fun PatcherScreen(
 
     // Tour prompt dialog shown after first successful install
     if (shouldPromptTour) {
-        MorpheDialog(
+        AppDialog(
             onDismissRequest = {
                 patcherViewModel.consumeTourPrompt()
                 onDeclineTour()
             },
             title = stringResource(R.string.tour_prompt_title),
             footer = {
-                MorpheDialogButtonRow(
+                AppDialogButtonRow(
                     primaryText = stringResource(R.string.tour_prompt_confirm),
                     onPrimaryClick = {
                         patcherViewModel.consumeTourPrompt()
@@ -541,7 +541,7 @@ fun PatcherScreen(
             transitionSpec = if (reduceMotion) {
                 { EnterTransition.None togetherWith ExitTransition.None }
             } else {
-                MorpheAnimations.fadeCrossfade(800)
+                Animations.fadeCrossfade(800)
             },
             label = "patcher_state_animation"
         ) { patcherState ->

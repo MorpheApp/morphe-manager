@@ -220,7 +220,7 @@
     <string name="expert_mode_reset_to_default_done">Zastosowano zalecane modyfikacje</string>
     <string name="expert_mode_restore_saved">Przywróć zapisany wybór</string>
     <string name="expert_mode_restore_saved_done">Przywrócono zapisany wybór</string>
-    <string name="expert_mode_copy_from_bundle">Skopiuj wybór z innego pakietu</string>
+    <string name="expert_mode_copy_from_bundle">Kopiuj wybór z innego pakietu</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Brak pasujących modyfikacji w tym pakiecie</string>
     <string name="expert_mode_no_results">Nie znaleziono modyfikacji</string>
     <string name="expert_mode_universal_patches">Uniwersalne modyfikacje</string>
@@ -255,6 +255,11 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="home_dialog_wrong_package_description">Wybrany plik APK nie jest przeznaczony dla modyfikowanej aplikacji</string>
     <string name="home_dialog_expected_package">Oczekiwany pakiet:</string>
     <string name="home_dialog_selected_package">Wybrany pakiet:</string>
+    <string name="home_dialog_orphaned_install_title">Pozostała poprzednia kopia</string>
+    <string name="home_dialog_orphaned_install_description">Modyfikowanie zmieniło nazwę pakietu, więc wcześniej zmodyfikowana kopia jest nadal zainstalowana jako osobna aplikacja</string>
+    <string name="home_dialog_orphaned_install_warning">Nie jest już śledzona i nie będzie otrzymywać aktualizacji modyfikacji</string>
+    <string name="home_dialog_orphaned_install_uninstall">Odinstaluj ją</string>
+    <string name="home_dialog_orphaned_install_keep">Zachowaj ją</string>
     <string name="home_outdated_patches_dialog_title">Modyfikacje mogą być przestarzałe</string>
     <string name="home_outdated_patches_dialog_message">Dane mobilne są aktywne, a aktualizacje modyfikacji wyłączone</string>
     <string name="home_outdated_patches_dialog_warning">Modyfikowanie za pomocą przestarzałych modyfikacji może zepsuć aplikację</string>
@@ -393,6 +398,8 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="patcher_error_dialog_app_info">Informacje o aplikacji</string>
     <string name="patcher_tab_logs">Logi modyfikatora</string>
     <string name="patcher_tab_game">Gry</string>
+    <string name="patcher_logs_waiting">Oczekiwanie na logi…</string>
+    <string name="patcher_logs_lost">Logi nie są zachowywane po ponownym uruchomieniu aplikacji</string>
     <string name="patcher_long_step_warning">Ten krok może trochę potrwać. Proszę czekać…</string>
     <string name="patcher_installing_subtitle">Prawie gotowe do akcji! 🎸</string>
     <string name="patcher_success_title">Wszystko gotowe! 🎉</string>
@@ -945,8 +952,8 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_patch_options_section">Opcje modyfikacji</string>
     <string name="settings_system_no_patches_or_options">Brak zapisanych modyfikacji lub opcji</string>
     <!-- Copy selection from another bundle -->
-    <string name="copy_selection_title">Skopiuj wybór z…</string>
-    <string name="copy_selection_confirm_with_count">Skopiuj %s</string>
+    <string name="copy_selection_title">Kopiuj wybór z…</string>
+    <string name="copy_selection_confirm_with_count">Kopiuj %s</string>
     <string name="copy_selection_empty">Brak innych zapisanych wyborów do skopiowania</string>
     <string name="copy_selection_available_format">Dostępne %1$s z %2$s</string>
     <string name="copy_selection_same_source">To samo źródło</string>
@@ -1043,7 +1050,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="rename">Zmień nazwę</string>
     <string name="import_">Importuj</string>
     <string name="export">Eksportuj</string>
-    <string name="copy">Skopiuj</string>
+    <string name="copy">Kopiuj</string>
     <string name="download">Pobierz</string>
     <string name="less">Mniej</string>
     <string name="expand">Rozwiń</string>
@@ -1096,6 +1103,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="install_update_manager_failed">Nie udało się zainstalować aktualizacji</string>
     <string name="installing_manager_update">Instalowanie aktualizacji…</string>
     <string name="downloading_manager_update">Pobieranie aktualizacji…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Nie udało się pobrać aktualizacji: %s</string>
     <string name="failed_to_check_updates">Nie udało się wyszukać aktualizacji: %s</string>
     <string name="failed_to_download_update">Nie udało się pobrać aktualizacji: %s</string>

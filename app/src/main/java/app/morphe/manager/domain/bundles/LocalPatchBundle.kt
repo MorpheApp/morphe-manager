@@ -21,18 +21,19 @@ class LocalPatchBundle(
         onProgress: ((bytesRead: Long, totalBytes: Long?) -> Unit)? = null
     ) {
         withContext(Dispatchers.IO) {
-            patchBundleOutputStream().use { outputStream ->
-                val buffer = ByteArray(256 * 1024)
-                var readTotal = 0L
-                while (true) {
-                    val read = patches.read(buffer)
-                    if (read == -1) break
-                    outputStream.write(buffer, 0, read)
-                    readTotal += read
-                    onProgress?.invoke(readTotal, totalBytes)
+            installPatchBundle("Importing patch bundle") { staging ->
+                staging.outputStream().use { outputStream ->
+                    val buffer = ByteArray(256 * 1024)
+                    var readTotal = 0L
+                    while (true) {
+                        val read = patches.read(buffer)
+                        if (read == -1) break
+                        outputStream.write(buffer, 0, read)
+                        readTotal += read
+                        onProgress?.invoke(readTotal, totalBytes)
+                    }
                 }
             }
-            requireNonEmptyPatchesFile("Importing patch bundle")
         }
     }
 
@@ -43,15 +44,14 @@ class LocalPatchBundle(
     ): Boolean = withContext(Dispatchers.IO) {
         val target = patchesJarFile
         target.parentFile?.mkdirs()
-        target.setWritable(true, true)
-        if (target.exists() && !target.delete()) {
-            return@withContext false
-        }
+        // Made read-only before the swap rather than after: the rename replaces the installed
+        // bundle in one step, so a concurrent reader never sees a writable dex container
+        tempFile.setReadOnly()
         if (!tempFile.renameTo(target)) {
+            runCatching { tempFile.setWritable(true, true) }
             return@withContext false
         }
-        target.setReadOnly()
-        requireNonEmptyPatchesFile("Importing patch bundle")
+        requireNonEmptyBundleFile(target, "Importing patch bundle")
         onProgress?.invoke(0L, totalBytes)
         return@withContext true
     }

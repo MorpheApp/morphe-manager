@@ -62,7 +62,7 @@ enum class PatcherState {
  * Manages patching progress, dialogs, and installation flow.
  */
 @Stable
-class MorphePatcherState(
+class PatcherScreenState(
     val viewModel: PatcherViewModel
 ) {
     // Error handling
@@ -101,11 +101,11 @@ class MorphePatcherState(
  * Remember patcher state with proper lifecycle.
  */
 @Composable
-fun rememberMorphePatcherState(
+fun rememberPatcherScreenState(
     viewModel: PatcherViewModel
-): MorphePatcherState {
+): PatcherScreenState {
     return remember(viewModel) {
-        MorphePatcherState(viewModel)
+        PatcherScreenState(viewModel)
     }
 }
 
@@ -456,7 +456,7 @@ private fun SuccessStatusText(
 ) {
     AnimatedContent(
         targetState = getTitleForState(isInstalling, isInstalled, isError, isConflict, installedPackageName),
-        transitionSpec = MorpheAnimations.fadeCrossfade(500),
+        transitionSpec = Animations.fadeCrossfade(500),
         label = "title_animation"
     ) { titleRes ->
         Text(
@@ -492,7 +492,7 @@ private fun SuccessInstructionsText(
 ) {
     AnimatedContent(
         targetState = getSubtitleForState(isInstalling, isInstalled, isError, isConflict, installedPackageName, usingMountInstall),
-        transitionSpec = MorpheAnimations.fadeCrossfade(500),
+        transitionSpec = Animations.fadeCrossfade(500),
         label = "subtitle_animation"
     ) { subtitleRes ->
         if (subtitleRes != 0) {
@@ -517,13 +517,13 @@ private fun SuccessErrorMessage(
 ) {
     AnimatedVisibility(
         visible = errorMessage != null && isError,
-        enter = MorpheAnimations.fadeIn,
-        exit = MorpheAnimations.fadeOut
+        enter = Animations.fadeIn,
+        exit = Animations.fadeOut
     ) {
         errorMessage?.let { message ->
             Surface(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+                shape = RoundedCornerShape(Defaults.CompactCornerRadius),
                 color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
             ) {
                 Text(
@@ -582,12 +582,12 @@ private fun SuccessHint(
 ) {
     AnimatedVisibility(
         visible = visible,
-        enter = MorpheAnimations.fadeIn,
-        exit = MorpheAnimations.fadeOut
+        enter = Animations.fadeIn,
+        exit = Animations.fadeOut
     ) {
         Surface(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+            shape = RoundedCornerShape(Defaults.CompactCornerRadius),
             color = containerColor
         ) {
             Row(
@@ -599,7 +599,7 @@ private fun SuccessHint(
                     imageVector = icon,
                     contentDescription = null,
                     tint = iconTint,
-                    modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
+                    modifier = Modifier.size(Defaults.IconSizeSmall)
                 )
                 Text(
                     text = text,
@@ -669,7 +669,7 @@ private fun InstallActionButton(
                 fontWeight = FontWeight.SemiBold
             )
         } else {
-            MorpheIcon(
+            ThemedIcon(
                 icon = when {
                     isInstalled -> Icons.AutoMirrored.Outlined.Launch
                     isConflict -> Icons.Default.DeleteForever

@@ -71,7 +71,7 @@ fun ThemeColorDialog(
     val lightThemeOption = patchOptionsViewModel.getOption(themeOptions, PatchOptionKeys.LIGHT_THEME_COLOR)
     val lightPresets = lightThemeOption?.let { patchOptionsViewModel.getOptionPresetsMap(it) } ?: emptyMap()
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_advanced_patch_options_theme_colors),
         titleTrailingContent = {
@@ -88,7 +88,7 @@ fun ThemeColorDialog(
             )
         },
         footer = {
-            MorpheDialogButton(
+            AppDialogButton(
                 text = stringResource(R.string.save),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
@@ -281,11 +281,11 @@ fun CustomBrandingDialog(
         }
     )
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_advanced_patch_options_custom_branding),
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.save),
                 onPrimaryClick = {
                     patchOptionsViewModel.saveCustomBranding(
@@ -307,7 +307,7 @@ fun CustomBrandingDialog(
         ) {
             // App name field
             if (appNameOption != null) {
-                MorpheDialogTextField(
+                AppDialogTextField(
                     value = appName.value,
                     onValueChange = { appName.value = it },
                     label = { Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_app_name)) },
@@ -328,7 +328,7 @@ fun CustomBrandingDialog(
                 )
 
                 // Create icon button
-                MorpheDialogOutlinedButton(
+                AppDialogOutlinedButton(
                     text = stringResource(R.string.adaptive_icon_create),
                     onClick = { showIconCreator.value = true },
                     icon = Icons.Outlined.AutoAwesome,
@@ -407,7 +407,7 @@ private fun FolderOptionInput(
             onClear = { onValueChange("") }
         )
     } else {
-        MorpheDialogTextField(
+        AppDialogTextField(
             value = value,
             onValueChange = onValueChange,
             label = { Text(label) },
@@ -449,11 +449,11 @@ fun CustomHeaderDialog(
         }
     )
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_advanced_patch_options_custom_header),
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.save),
                 onPrimaryClick = {
                     patchOptionsViewModel.saveCustomHeader(
@@ -483,7 +483,7 @@ fun CustomHeaderDialog(
                 )
 
                 // Create header button
-                MorpheDialogOutlinedButton(
+                AppDialogOutlinedButton(
                     text = stringResource(R.string.header_creator_create),
                     onClick = { showHeaderCreator.value = true },
                     icon = Icons.Outlined.Image,

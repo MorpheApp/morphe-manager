@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
@@ -42,19 +43,19 @@ fun ChangelogDialog(
         onDispose { updateViewModel.resetOlderManagerEntries() }
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.changelog),
         scrollable = false,
         footer = {
-            MorpheDialogButtonColumn {
+            AppDialogButtonColumn {
                 ChangelogButton(
                     pageUrl = entries?.firstOrNull()?.version?.let {
                         releasePageUrl(MANAGER_REPO_URL, it)
                     },
                     modifier = Modifier.fillMaxWidth()
                 )
-                MorpheDialogButton(
+                AppDialogButton(
                     text = stringResource(android.R.string.ok),
                     onClick = onDismiss,
                     modifier = Modifier.fillMaxWidth()
@@ -62,17 +63,26 @@ fun ChangelogDialog(
             }
         }
     ) {
-        val listState = rememberLazyListState()
-        Box(modifier = Modifier.fillMaxWidth()) {
-            LazyColumn(
-                state = listState,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                if (entries == null) {
-                    item("changelog_loading") { ChangelogSectionLoading() }
-                } else {
+        AnimatedContent(
+            targetState = entries,
+            transitionSpec = Animations.fadeCrossfade(),
+            contentKey = { it != null },
+            modifier = Modifier.fillMaxWidth(),
+            label = "changelogContent"
+        ) { loadedEntries ->
+            if (loadedEntries == null) {
+                ChangelogSectionLoading()
+                return@AnimatedContent
+            }
+
+            val listState = rememberLazyListState()
+            Box(modifier = Modifier.fillMaxWidth()) {
+                LazyColumn(
+                    state = listState,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     changelogEntryItems(
-                        entries = entries,
+                        entries = loadedEntries,
                         keyPrefix = "changelog_current",
                         headerIcon = Icons.Outlined.NewReleases
                     )
@@ -82,21 +92,21 @@ fun ChangelogDialog(
                         onExpand = { updateViewModel.loadOlderManagerEntries() }
                     )
                 }
+
+                ListScrollbar(
+                    listState = listState,
+                    modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+                )
+
+                ScrollToTopButton(
+                    listState = listState,
+                    modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+                )
             }
-
-            ListScrollbar(
-                listState = listState,
-                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
-            )
-
-            ScrollToTopButton(
-                listState = listState,
-                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
-            )
         }
     }
 
-    MorpheOverlay(visible = updateViewModel.isLoadingOlderEntries) {
+    Overlay(visible = updateViewModel.isLoadingOlderEntries) {
         PulsingLogoWithCaption(caption = stringResource(R.string.loading_older_releases))
     }
 }

@@ -1031,6 +1031,7 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">安装更新失败</string>
     <string name="installing_manager_update">正在安装更新…</string>
     <string name="downloading_manager_update">正在下载更新…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">下载更新失败：%s</string>
     <string name="failed_to_check_updates">检查更新失败：%s</string>
     <string name="failed_to_download_update">下载更新失败：%s</string>

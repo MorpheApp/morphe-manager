@@ -117,30 +117,27 @@ fun PatchOptionsSection(
             }
 
             noPatchesAvailable -> {
-                InfoBadge(
+                Notice(
                     text = stringResource(R.string.settings_advanced_patch_options_waiting_for_source),
-                    style = InfoBadgeStyle.Success,
-                    icon = Icons.Outlined.Info,
-                    isExpanded = true
+                    tone = SemanticTone.Success,
+                    icon = Icons.Outlined.Info
                 )
             }
 
             loadError != null -> {
-                InfoBadge(
+                Notice(
                     text = stringResource(R.string.settings_advanced_patch_options_load_error) +
                             "\n" + loadError,
-                    style = InfoBadgeStyle.Error,
-                    icon = Icons.Outlined.Error,
-                    isExpanded = true
+                    tone = SemanticTone.Error,
+                    icon = Icons.Outlined.Error
                 )
             }
 
             else -> {
-                InfoBadge(
+                Notice(
                     icon = Icons.Outlined.Info,
                     text = stringResource(R.string.settings_advanced_patch_options_restart_message),
-                    style = InfoBadgeStyle.Success,
-                    isExpanded = true
+                    tone = SemanticTone.Success
                 )
 
                 // YouTube
@@ -234,7 +231,7 @@ private fun AppPatchOptionsCard(
 
         // Custom Branding
         if (hasBranding) {
-            MorpheSettingsDivider()
+            SettingsDivider()
 
             SettingsItem(
                 icon = Icons.Outlined.Style,
@@ -246,7 +243,7 @@ private fun AppPatchOptionsCard(
 
         // Custom Header
         if (hasHeader) {
-            MorpheSettingsDivider()
+            SettingsDivider()
 
             SettingsItem(
                 icon = Icons.Outlined.Image,
@@ -321,7 +318,7 @@ private fun HideShortsSection(
 
         // Hide Widget
         if (hasWidgetOption && widgetOption != null) {
-            MorpheSettingsDivider()
+            SettingsDivider()
 
             val hideShortsWidget by patchOptionsPrefs.hideShortsWidget.getAsState()
             val title = getLocalizedOrCustomText(

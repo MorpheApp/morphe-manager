@@ -1,6 +1,7 @@
 package app.morphe.manager.domain.manager.base
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.datastore.core.DataStore
@@ -8,17 +9,25 @@ import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.domain.manager.base.BasePreferencesManager.Companion.editor
+import app.morphe.manager.util.tag
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
+import java.io.IOException
 
 abstract class BasePreferencesManager(private val context: Context, name: String) {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = name)
     protected val dataStore get() = context.dataStore
 
+    /** Warms the store so the first blocking read on the UI thread is already served from memory. */
     suspend fun preload() {
-        dataStore.data.first()
+        try {
+            dataStore.data.first()
+        } catch (e: IOException) {
+            Log.e(tag, "Could not preload preferences", e)
+        }
     }
 
     suspend fun edit(block: EditorContext.() -> Unit) = dataStore.editor(block)
@@ -46,9 +55,18 @@ abstract class BasePreferencesManager(private val context: Context, name: String
     ) = EnumPreference(dataStore, key, default, enumValues())
 
     companion object {
+        /**
+         * A failed write is logged and dropped rather than thrown. Preference edits are launched
+         * as fire-and-forget coroutines all over the UI, so an unreadable or full store would
+         * take the whole app down instead of costing one setting.
+         */
         suspend inline fun DataStore<Preferences>.editor(crossinline block: EditorContext.() -> Unit) {
-            edit {
-                EditorContext(it).run(block)
+            try {
+                edit {
+                    EditorContext(it).run(block)
+                }
+            } catch (e: IOException) {
+                Log.e(tag, "Could not write preferences", e)
             }
         }
     }
@@ -71,7 +89,16 @@ abstract class Preference<T>(
     internal abstract fun Preferences.read(): T
     internal abstract fun MutablePreferences.write(value: T)
 
-    val flow = dataStore.data.map { with(it) { read() } ?: default }.distinctUntilChanged()
+    // A store that cannot be read falls back to defaults instead of throwing into every collector,
+    // including the blocking read composition performs on the first frame
+    val flow = dataStore.data
+        .catch { error ->
+            if (error !is IOException) throw error
+            Log.e(tag, "Could not read preferences", error)
+            emit(emptyPreferences())
+        }
+        .map { with(it) { read() } ?: default }
+        .distinctUntilChanged()
 
     suspend fun get() = flow.first()
     fun getBlocking() = runBlocking { get() }

@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.shared.MorpheAnimations
+import app.morphe.manager.ui.screen.shared.Animations
 import kotlin.math.roundToInt
 
 /** One coach-mark step: resource IDs for text, a lambda that returns the current target bounds,
@@ -131,7 +131,7 @@ fun OnboardingShowcase(
     var visible by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) { visible = true }
 
-    AnimatedVisibility(visible = visible, enter = MorpheAnimations.overlayEnter) {
+    AnimatedVisibility(visible = visible, enter = Animations.overlayEnter) {
         BoxWithConstraints(
             modifier = Modifier
                 .fillMaxSize()

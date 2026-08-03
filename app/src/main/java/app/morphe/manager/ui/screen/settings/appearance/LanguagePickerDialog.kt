@@ -53,11 +53,11 @@ fun LanguagePickerDialog(
 
     val listState = rememberLazyListState()
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_appearance_app_language),
         footer = {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(android.R.string.cancel),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
@@ -67,10 +67,10 @@ fun LanguagePickerDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
         ) {
             // Search field
-            MorpheDialogTextField(
+            AppDialogTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
                 label = {
@@ -80,7 +80,7 @@ fun LanguagePickerDialog(
                     )
                 },
                 leadingIcon = {
-                    MorpheIcon(
+                    ThemedIcon(
                         icon = Icons.Outlined.Search,
                         tint = LocalDialogSecondaryTextColor.current
                     )

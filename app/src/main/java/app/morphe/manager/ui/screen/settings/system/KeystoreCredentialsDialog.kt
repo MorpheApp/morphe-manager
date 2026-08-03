@@ -40,11 +40,11 @@ fun KeystoreCredentialsDialog(
     var pass by rememberSaveable { mutableStateOf("") }
     var format by rememberSaveable(initialFormat) { mutableStateOf(initialFormat) }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_system_import_keystore_dialog_title),
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.import_),
                 onPrimaryClick = { onSubmit(alias, pass, "", format) },
                 secondaryText = stringResource(android.R.string.cancel),
@@ -57,7 +57,7 @@ fun KeystoreCredentialsDialog(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
         ) {
             Text(
                 text = stringResource(R.string.settings_system_import_keystore_dialog_description),
@@ -70,7 +70,7 @@ fun KeystoreCredentialsDialog(
             val formatItems = remember {
                 KeystoreInputFormat.entries.associate { it.displayName to it.name }
             }
-            MorpheDialogDropdownTextField(
+            AppDialogDropdownTextField(
                 value = format.name,
                 onValueChange = { name ->
                     format = KeystoreInputFormat.entries.firstOrNull { it.name == name } ?: format
@@ -87,7 +87,7 @@ fun KeystoreCredentialsDialog(
             )
 
             // Alias Input
-            MorpheDialogTextField(
+            AppDialogTextField(
                 value = alias,
                 onValueChange = { alias = it },
                 label = {
@@ -104,7 +104,7 @@ fun KeystoreCredentialsDialog(
             )
 
             // Password Input
-            MorpheDialogTextField(
+            AppDialogTextField(
                 value = pass,
                 onValueChange = { pass = it },
                 label = {

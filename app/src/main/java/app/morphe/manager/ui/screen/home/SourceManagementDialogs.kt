@@ -89,11 +89,11 @@ fun AddSourceDialog(
     val localFileValidation = rememberLocalFileValidation(selectedLocalPath)
     val isLocalValid = localFileValidation == FieldValidation.Valid
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.sources_dialog_add_source),
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.add),
                 onPrimaryClick = {
                     when (selectedTab) {
@@ -109,7 +109,7 @@ fun AddSourceDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
         ) {
             // Type selector cards
             Row(
@@ -144,7 +144,7 @@ fun AddSourceDialog(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            MorpheIcon(
+                            ThemedIcon(
                                 icon = icon,
                                 tint = if (isSelected)
                                     LocalDialogTextColor.current
@@ -168,7 +168,7 @@ fun AddSourceDialog(
             // Tab content
             AnimatedContent(
                 targetState = selectedTab,
-                transitionSpec = MorpheAnimations.fadeCrossfade()
+                transitionSpec = Animations.fadeCrossfade()
             ) { tab ->
                 when (tab) {
                     0 -> RemoteTabContent(
@@ -233,7 +233,7 @@ private fun RemoteTabContent(
     urlValidation: FieldValidation,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        MorpheDialogTextField(
+        AppDialogTextField(
             value = remoteUrl,
             onValueChange = onUrlChange,
             label = { Text(stringResource(R.string.sources_dialog_remote_url)) },
@@ -271,11 +271,10 @@ private fun RemoteTabContent(
         }
 
         // URL format hint
-        InfoBadge(
+        StatusBadge(
             icon = Icons.Outlined.Info,
             text = stringResource(R.string.sources_dialog_remote_url_formats_title),
-            style = InfoBadgeStyle.Default,
-            isCompact = true
+            tone = SemanticTone.Neutral
         )
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             UrlFormatRow(
@@ -350,7 +349,7 @@ private fun LocalTabContent(
             // Selected file
             val isValid = validation == FieldValidation.Valid
             Surface(
-                shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+                shape = RoundedCornerShape(Defaults.CompactCornerRadius),
                 color = if (isValid)
                     MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
                 else
@@ -365,7 +364,7 @@ private fun LocalTabContent(
                     Icon(
                         imageVector = if (isValid) Icons.Outlined.CheckCircle else Icons.Outlined.ErrorOutline,
                         contentDescription = null,
-                        modifier = Modifier.size(MorpheDefaults.IconSizeSmall),
+                        modifier = Modifier.size(Defaults.IconSizeSmall),
                         tint = if (isValid) ColorValid else MaterialTheme.colorScheme.error
                     )
                     Column(modifier = Modifier.weight(1f)) {
@@ -423,12 +422,12 @@ fun RenameBundleDialog(
     var textValue by remember { mutableStateOf(initialValue) }
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismissRequest,
         title = stringResource(R.string.sources_dialog_display_name),
         dismissOnClickOutside = false,
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(android.R.string.ok),
                 onPrimaryClick = {
                     keyboardController?.hide()
@@ -447,7 +446,7 @@ fun RenameBundleDialog(
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
         ) {
             Text(
                 text = stringResource(R.string.sources_dialog_rename),
@@ -456,7 +455,7 @@ fun RenameBundleDialog(
                 textAlign = TextAlign.Center
             )
 
-            MorpheDialogTextField(
+            AppDialogTextField(
                 value = textValue,
                 onValueChange = { textValue = it },
                 placeholder = {
@@ -466,7 +465,7 @@ fun RenameBundleDialog(
                     )
                 },
                 leadingIcon = {
-                    MorpheIcon(
+                    ThemedIcon(
                         icon = Icons.Outlined.Edit,
                         tint = secondaryColor
                     )
@@ -545,7 +544,7 @@ fun BundlePatchesDialog(
 
     val isFiltering = searchQuery.isNotBlank() || selectedPackages.isNotEmpty()
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = {
             when {
                 searchQuery.isNotBlank() -> searchQuery = ""
@@ -555,7 +554,7 @@ fun BundlePatchesDialog(
         },
         title = null,
         footer = {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismissRequest,
                 modifier = Modifier.fillMaxWidth()
@@ -565,16 +564,25 @@ fun BundlePatchesDialog(
         scrollable = false,
         contentArrangement = Arrangement.Top
     ) {
-        if (isLoading) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                PulsingLogoIndicator()
+        AnimatedContent(
+            targetState = isLoading,
+            transitionSpec = Animations.fadeCrossfade(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            label = "bundlePatches"
+        ) { loading ->
+            if (loading) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    PulsingLogoIndicator()
+                }
+
+                return@AnimatedContent
             }
-        } else {
+
             val listState = rememberLazyListState()
             var displayedPackages by remember { mutableStateOf(emptySet<String>()) }
             LaunchedEffect(selectedPackages) {
@@ -583,7 +591,7 @@ fun BundlePatchesDialog(
 
             Column(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
             ) {
                 PatchesListSearchRow(
                     searchQuery = searchQuery,
@@ -595,8 +603,8 @@ fun BundlePatchesDialog(
 
                 AnimatedVisibility(
                     visible = selectedPackages.isNotEmpty(),
-                    enter = MorpheAnimations.expandFadeEnter,
-                    exit = MorpheAnimations.shrinkFadeExit
+                    enter = Animations.expandFadeEnter,
+                    exit = Animations.shrinkFadeExit
                 ) {
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         displayedPackages.forEach { pkg ->
@@ -621,7 +629,7 @@ fun BundlePatchesDialog(
                     LazyColumn(
                         state = listState,
                         modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                        verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
                     ) {
                         // Bundle header
                         item {
@@ -660,8 +668,8 @@ fun BundlePatchesDialog(
                                 } else null,
                                 accentColor = accentColor,
                                 modifier = Modifier.animateItem(
-                                    fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-                                    fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
+                                    fadeInSpec = tween(Defaults.ANIMATION_DURATION),
+                                    fadeOutSpec = tween(Defaults.ANIMATION_DURATION_SHORT),
                                     placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
                                 )
                             )
@@ -684,7 +692,7 @@ fun BundlePatchesDialog(
 
     // App filter bottom sheet
     if (showFilterSheet.value) {
-        MorpheBottomSheet(
+        AppBottomSheet(
             onDismissRequest = { showFilterSheet.value = false }
         ) {
             Column(
@@ -764,7 +772,7 @@ fun PatchItemCard(
 
     val rotationAngle by animateFloatAsState(
         targetValue = if (expandOptions) 180f else 0f,
-        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+        animationSpec = tween(Defaults.ANIMATION_DURATION),
         label = "expand_rotation"
     )
 
@@ -794,8 +802,8 @@ fun PatchItemCard(
         color = cardColor ?: MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
     ) {
         Column(
-            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+            modifier = Modifier.padding(Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
         ) {
             // Header
             Row(
@@ -812,7 +820,7 @@ fun PatchItemCard(
                 )
 
                 if (!patch.options.isNullOrEmpty()) {
-                    MorpheIcon(
+                    ThemedIcon(
                         icon = Icons.Outlined.ExpandMore,
                         contentDescription = if (expandOptions)
                             stringResource(R.string.collapse)
@@ -839,11 +847,11 @@ fun PatchItemCard(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    PillBadge(
+                    StatusBadge(
                         text = stringResource(R.string.sources_dialog_view_any_package),
                         icon = Icons.Outlined.Apps
                     )
-                    PillBadge(
+                    StatusBadge(
                         text = stringResource(R.string.sources_dialog_view_any_version),
                         icon = Icons.Outlined.Code
                     )
@@ -861,39 +869,27 @@ fun PatchItemCard(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            PillBadge(
+                            StatusBadge(
                                 text = appName,
                                 icon = Icons.Outlined.Apps,
-                                style = InfoBadgeStyle.Primary,
+                                tone = SemanticTone.Primary,
                                 modifier = Modifier.align(Alignment.CenterVertically)
                             )
 
                             if (versions.isNotEmpty()) {
-                                if (expandVersions) {
-                                    versions.forEach { version ->
-                                        val isExperimental =
-                                            compatiblePackage.experimentalVersions?.contains(version) == true
-                                        PillBadge(
-                                            text = version,
-                                            icon = if (isExperimental) Icons.Outlined.Science else Icons.Outlined.Code,
-                                            style = if (isExperimental) InfoBadgeStyle.Warning else InfoBadgeStyle.Default,
-                                            modifier = Modifier.align(Alignment.CenterVertically)
-                                        )
-                                    }
-                                } else {
-                                    val firstVersion = versions.first()
-                                    val firstIsExperimental =
-                                        compatiblePackage.experimentalVersions?.contains(firstVersion) == true
-                                    PillBadge(
-                                        text = firstVersion,
-                                        icon = if (firstIsExperimental) Icons.Outlined.Science else Icons.Outlined.Code,
-                                        style = if (firstIsExperimental) InfoBadgeStyle.Warning else InfoBadgeStyle.Default,
+                                val shownVersions =
+                                    if (expandVersions) versions else versions.take(1)
+                                shownVersions.forEach { version ->
+                                    PatchVersionBadge(
+                                        version = version,
+                                        isExperimental = compatiblePackage.experimentalVersions
+                                            ?.contains(version) == true,
                                         modifier = Modifier.align(Alignment.CenterVertically)
                                     )
                                 }
 
                                 if (versions.size > 1) {
-                                    PillBadge(
+                                    StatusBadge(
                                         text = if (expandVersions)
                                             stringResource(R.string.less)
                                         else
@@ -910,10 +906,10 @@ fun PatchItemCard(
 
             // Expert badge - shown only for patches that are disabled by default
             if (!patch.include && onExpertBadgeClick != null) {
-                PillBadge(
+                StatusBadge(
                     text = stringResource(R.string.sources_patch_expert_badge),
                     icon = Icons.Outlined.Lock,
-                    style = InfoBadgeStyle.Warning,
+                    tone = SemanticTone.Warning,
                     onClick = onExpertBadgeClick
                 )
             }
@@ -922,8 +918,8 @@ fun PatchItemCard(
             if (!patch.options.isNullOrEmpty()) {
                 AnimatedVisibility(
                     visible = expandOptions,
-                    enter = MorpheAnimations.expandFadeEnter,
-                    exit = MorpheAnimations.shrinkFadeExit
+                    enter = Animations.expandFadeEnter,
+                    exit = Animations.shrinkFadeExit
                 ) {
                     Column(
                         modifier = Modifier.padding(top = 4.dp),
@@ -932,7 +928,7 @@ fun PatchItemCard(
                         patch.options.forEach { option ->
                             Surface(
                                 modifier = Modifier.fillMaxWidth(),
-                                shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+                                shape = RoundedCornerShape(Defaults.CompactCornerRadius),
                                 color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
                             ) {
                                 Column(
@@ -958,6 +954,23 @@ fun PatchItemCard(
             }
         }
     }
+}
+
+/**
+ * One version a patch declares support for, tagged the way every version list tags it.
+ */
+@Composable
+private fun PatchVersionBadge(
+    version: String,
+    isExperimental: Boolean,
+    modifier: Modifier = Modifier
+) {
+    StatusBadge(
+        modifier = modifier,
+        text = version,
+        icon = if (isExperimental) VersionTag.Experimental.icon else Icons.Outlined.Code,
+        tone = if (isExperimental) VersionTag.Experimental.tone else SemanticTone.Neutral
+    )
 }
 
 /**
@@ -1072,7 +1085,7 @@ fun BundleChangelogDialog(
         }
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismissRequest,
         // Start fetch only after the dialog enter animation completes so the shimmer
         // is always visible first, even when data is cached and would resolve instantly
@@ -1086,14 +1099,14 @@ fun BundleChangelogDialog(
         footer = {
             when (val current = state) {
                 is BundleChangelogState.Entries -> {
-                    MorpheDialogButtonColumn {
+                    AppDialogButtonColumn {
                         current.latestPageUrl?.let { url ->
                             ChangelogButton(
                                 pageUrl = url,
                                 modifier = Modifier.fillMaxWidth()
                             )
                         }
-                        MorpheDialogButton(
+                        AppDialogButton(
                             text = stringResource(android.R.string.ok),
                             onClick = onDismissRequest,
                             modifier = Modifier.fillMaxWidth()
@@ -1101,13 +1114,13 @@ fun BundleChangelogDialog(
                     }
                 }
                 is BundleChangelogState.Error -> {
-                    MorpheDialogButtonColumn {
-                        MorpheDialogButton(
+                    AppDialogButtonColumn {
+                        AppDialogButton(
                             text = stringResource(R.string.retry),
                             onClick = { fetchTrigger++ },
                             modifier = Modifier.fillMaxWidth()
                         )
-                        MorpheDialogButton(
+                        AppDialogButton(
                             text = stringResource(android.R.string.ok),
                             onClick = onDismissRequest,
                             modifier = Modifier.fillMaxWidth()
@@ -1115,7 +1128,7 @@ fun BundleChangelogDialog(
                     }
                 }
                 BundleChangelogState.Loading -> {
-                    MorpheDialogButton(
+                    AppDialogButton(
                         text = stringResource(android.R.string.ok),
                         onClick = onDismissRequest,
                         modifier = Modifier.fillMaxWidth()
@@ -1131,7 +1144,7 @@ fun BundleChangelogDialog(
         )
     }
 
-    MorpheOverlay(visible = olderState is OlderBundleState.Loading) {
+    Overlay(visible = olderState is OlderBundleState.Loading) {
         PulsingLogoWithCaption(caption = stringResource(R.string.loading_older_releases))
     }
 }
@@ -1144,7 +1157,7 @@ private fun BundleChangelogContent(
 ) {
     Crossfade(
         targetState = state,
-        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+        animationSpec = tween(Defaults.ANIMATION_DURATION),
         modifier = Modifier.fillMaxWidth(),
         label = "changelog_state"
     ) { current ->
@@ -1170,8 +1183,8 @@ private fun BundleChangelogContent(
                                 if (index > 0) {
                                     HorizontalDivider(
                                         modifier = Modifier.padding(
-                                            top = MorpheDefaults.ContentPaddingSmall,
-                                            bottom = MorpheDefaults.ContentPadding
+                                            top = Defaults.ContentPaddingSmall,
+                                            bottom = Defaults.ContentPadding
                                         ),
                                         color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
                                     )

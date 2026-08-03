@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Tapnite za pregled in odstranitev</string>
     <string name="home_metadata_errors_title">Nekateri viri popravkov niso na voljo</string>
     <string name="home_metadata_errors_subtitle">Tapnite za pregled virov</string>
+    <string name="home_outdated_manager_title">Morphe je zastarel</string>
+    <string name="home_outdated_manager_subtitle">Nekateri viri posodobitev potrebujejo novejšo različico</string>
     <string name="home_metered_skipped_title">Posodobitve so prekinjene pri uporabi mobilnih podatkov</string>
     <string name="home_metered_skipped_subtitle">Tapnite za dovoljenje posodobitev prek mobilnih podatkov</string>
     <string name="home_update_error">Posodobitev ni uspela</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Metapodatki N/A</string>
     <string name="sources_management_metadata_unavailable_hint">Dostop do datoteke metapodatkov na daljavo ni možen. Uporaba popravka z nameščenim paketom še vedno deluje, vendar je samodejno posodabljanje za ta vir onemogočeno.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Paketa s popravki ni bilo mogoče prenesti. Izvorni URL naslov je lahko napačen ali datoteka ne obstaja.</string>
+    <string name="sources_management_outdated_manager_badge">Posodobi Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Ta vir je izdelan za popravek %1$s, vendar Morphe %2$s vključuje popravek %3$s. Posodobi Morphe, da ga uporabiš</string>
     <string name="sources_management_source_enabled">Vir omogočen</string>
     <string name="sources_management_source_disabled">Vir onemogočen</string>
     <string name="sources_management_source_updating">Posodabljanje vira</string>
@@ -247,6 +251,11 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polnega A
     <string name="home_dialog_wrong_package_description">Izbrana datoteka APK ni za aplikacijo, ki jo želite popraviti.</string>
     <string name="home_dialog_expected_package">Pričakovan paket:</string>
     <string name="home_dialog_selected_package">Izbrani paket:</string>
+    <string name="home_dialog_orphaned_install_title">Prejšnja kopija je ostala</string>
+    <string name="home_dialog_orphaned_install_description">Popravek je spremenil ime paketa, zato je kopija, ki ste jo popravili, še vedno nameščena kot ločena aplikacija</string>
+    <string name="home_dialog_orphaned_install_warning">Ni več sledena in ne bo prejemala posodobitev popravkov</string>
+    <string name="home_dialog_orphaned_install_uninstall">Odmeščeno</string>
+    <string name="home_dialog_orphaned_install_keep">Shrani</string>
     <string name="home_outdated_patches_dialog_title">Popravki so lahko zastareli</string>
     <string name="home_outdated_patches_dialog_message">Mobilni podatki so aktivni in posodobitve popravkov so onemogočene</string>
     <string name="home_outdated_patches_dialog_warning">Popravljanje z zastarelimi popravki lahko povzroči okvarjeno aplikacijo</string>
@@ -378,6 +387,8 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <string name="patcher_error_dialog_app_info">Podatki o aplikaciji</string>
     <string name="patcher_tab_logs">Dnevniki popravkov</string>
     <string name="patcher_tab_game">Igre</string>
+    <string name="patcher_logs_waiting">Čakam na izpis dnevnika…</string>
+    <string name="patcher_logs_lost">Izpis dnevnika ni shranjen ob ponovnem zagonu aplikacije.</string>
     <string name="patcher_long_step_warning">Ta korak lahko traja nekaj časa. Prosim, počakajte…</string>
     <string name="patcher_installing_subtitle">Skoraj pripravljeni na zažiganje! 🎸</string>
     <string name="patcher_success_title">Končano! 🎉</string>
@@ -1078,6 +1089,7 @@ Podrobnosti: %2$s"</string>
     <string name="install_update_manager_failed">Posodobitev ni uspela</string>
     <string name="installing_manager_update">Nameščanje posodobitve…</string>
     <string name="downloading_manager_update">Prenašanje posodobitve…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Prenos posodobitve ni uspel: %s</string>
     <string name="failed_to_check_updates">Ni uspelo preveriti posodobitev: %s</string>
     <string name="failed_to_download_update">Prenos posodobitve ni uspel: %s</string>

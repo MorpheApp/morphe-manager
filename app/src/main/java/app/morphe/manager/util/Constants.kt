@@ -20,12 +20,6 @@ const val MORPHE_API_URL = "https://api.morphe.software"
 const val MORPHE_WEBSITE_URL = "https://morphe.software"
 const val BLOCKED_SOURCES_URL = "$MORPHE_API_URL/v2/blocked-sources"
 
-/**
- * Delay before showing a manager update notification to the user.
- * Gives time for the APK to be fully uploaded after app-release.json is published.
- */
-const val MANAGER_UPDATE_SHOW_DELAY_SECONDS = 7 * 60
-
 /** Raw GitHub URL for the stable manager release JSON (main branch) */
 const val MANAGER_RELEASE_JSON_URL = "https://raw.githubusercontent.com/MorpheApp/morphe-manager/refs/heads/main/app-release.json"
 

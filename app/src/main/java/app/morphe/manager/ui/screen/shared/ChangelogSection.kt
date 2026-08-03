@@ -43,7 +43,7 @@ fun ChangelogButton(
     val uriHandler = LocalUriHandler.current
 
     pageUrl?.let { url ->
-        MorpheDialogOutlinedButton(
+        AppDialogOutlinedButton(
             text = stringResource(R.string.changelog),
             onClick = { uriHandler.openUri(url) },
             icon = Icons.AutoMirrored.Outlined.Article,
@@ -61,7 +61,7 @@ fun ChangelogSectionLoading(
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
     ) {
         // Header shimmer
         ShimmerChangelogHeader()
@@ -82,7 +82,7 @@ fun ChangelogEntrySection(
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
     ) {
         ChangelogEntryHeader(
             version = entry.version,

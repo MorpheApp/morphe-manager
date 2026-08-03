@@ -168,7 +168,7 @@ fun rememberInstallQueue(
     }
 
     if (showOverlay) {
-        MorpheOverlay(
+        Overlay(
             visible = active != null &&
                     installViewModel.installState is InstallViewModel.InstallState.Installing
         ) {
