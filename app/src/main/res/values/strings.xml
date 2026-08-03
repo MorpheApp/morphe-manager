@@ -1040,6 +1040,8 @@ Details: %2$s"</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Custom file picker</string>
     <string name="settings_system_custom_file_picker_description">Browse storage with Morphe\'s built-in file picker instead of the system default</string>
+
+    <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">APK download helper</string>
     <string name="settings_system_apk_download_helper_description">Let an installed helper app fetch original APKs for you. The file comes from that app, so only enable this if you trust it</string>
 
