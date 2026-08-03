@@ -44,6 +44,13 @@ fun ProcessRuntimeDialog(
     var sliderValue by remember { mutableFloatStateOf(currentLimit.toFloat()) }
     val selectedLimit = sliderValue.roundToInt()
 
+    // Persist every settled step change instead of relying on `onValueChangeFinished`,
+    // which the slider only delivers for drag gestures — tapping a position on the
+    // track moved the thumb but never saved
+    LaunchedEffect(selectedLimit) {
+        if (selectedLimit != currentLimit) onLimitChange(selectedLimit)
+    }
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_system_process_runtime),
@@ -100,7 +107,6 @@ fun ProcessRuntimeDialog(
                     Slider(
                         value = sliderValue,
                         onValueChange = { sliderValue = it },
-                        onValueChangeFinished = { onLimitChange(selectedLimit) },
                         valueRange = PROCESS_RUNTIME_MEMORY_MINIMUM.toFloat()..maxLimit.toFloat(),
                         steps = (((maxLimit.toDouble() - PROCESS_RUNTIME_MEMORY_MINIMUM)
                                 / PROCESS_RUNTIME_MEMORY_STEP - 1)).toInt(),
@@ -135,7 +141,7 @@ fun ProcessRuntimeDialog(
 
                 // Warning for low values — top padding inside so shrink includes spacing
                 AnimatedVisibility(
-                    visible = enabled && sliderValue < PROCESS_RUNTIME_MEMORY_LOW_WARNING,
+                    visible = enabled && selectedLimit < PROCESS_RUNTIME_MEMORY_LOW_WARNING,
                     enter = MorpheAnimations.expandFadeEnter,
                     exit = MorpheAnimations.shrinkFadeExit
                 ) {
