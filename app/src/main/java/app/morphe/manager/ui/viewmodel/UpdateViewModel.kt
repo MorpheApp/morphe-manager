@@ -16,6 +16,7 @@ import app.morphe.manager.domain.installer.InstallResult
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.repository.ManagerUpdateRepository
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.network.dto.MorpheAsset
 import app.morphe.manager.network.service.HttpService
@@ -33,6 +34,7 @@ class UpdateViewModel(
 ) : ViewModel(), KoinComponent {
     private val app: Application by inject()
     private val morpheAPI: MorpheAPI by inject()
+    private val managerUpdateRepository: ManagerUpdateRepository by inject()
     private val http: HttpService by inject()
     private val sessionInstaller: SessionInstaller by inject()
     private val networkInfo: NetworkInfo by inject()
@@ -62,6 +64,11 @@ class UpdateViewModel(
     var releaseInfo: MorpheAsset? by mutableStateOf(null)
         private set
 
+    // True while an update check is in flight, so the dialog can tell a check that is still
+    // resolving apart from one that resolved to nothing
+    var isCheckingForUpdate by mutableStateOf(true)
+        private set
+
     // Changelog entries for the current channel (shown in Settings → Changelog).
     // Stable channel: single entry for the installed version.
     // Prerelease channel: the installed dev version and every preceding dev entry down to
@@ -89,24 +96,43 @@ class UpdateViewModel(
         private set
 
     private val location = fs.tempDir.resolve("updater.apk")
-    private val job = viewModelScope.launch {
-        uiSafe(app, R.string.download_manager_failed, "Failed to download Morphe Manager") {
-            releaseInfo = morpheAPI.getAppUpdate()
+    private var job = resolveUpdate()
 
-            if (releaseInfo != null) {
-                loadMissedChangelog()
+    /**
+     * Resolves the available update through [ManagerUpdateRepository] so the dialog shows the
+     * same release the home banner announced, then loads its changelog.
+     */
+    private fun resolveUpdate() = viewModelScope.launch {
+        isCheckingForUpdate = true
+        try {
+            uiSafe(app, R.string.download_manager_failed, "Failed to download Morphe Manager") {
+                releaseInfo = managerUpdateRepository.getOrRefresh()
             }
-
-            if (downloadOnScreenEntry) {
-                if (releaseInfo != null) {
-                    downloadUpdate()
-                } else {
-                    state = State.CAN_DOWNLOAD
-                }
-            } else {
-                state = State.CAN_DOWNLOAD
-            }
+        } finally {
+            isCheckingForUpdate = false
         }
+
+        if (releaseInfo == null) {
+            state = State.CAN_DOWNLOAD
+            return@launch
+        }
+
+        loadMissedChangelog()
+
+        if (downloadOnScreenEntry) {
+            downloadUpdate()
+        } else {
+            state = State.CAN_DOWNLOAD
+        }
+    }
+
+    /**
+     * Re-runs the update check. Offered when the check resolved nothing, which happens while
+     * a release is announced but its APK is still uploading.
+     */
+    fun retryUpdateCheck() {
+        if (isCheckingForUpdate) return
+        job = resolveUpdate()
     }
 
     val isConnected: Boolean
@@ -390,8 +416,28 @@ class UpdateViewModel(
             val newer = ChangelogParser.entriesNewerThan(entries, installedVersion)
             // Strip pre-release entries when on stable channel - main CHANGELOG.md
             // contains merged pre-release entries that stable users should not see
-            missedChangelogEntries = if (forDevBranch) newer else newer.filter { !it.isPrerelease }
+            val filtered = if (forDevBranch) newer else newer.filter { !it.isPrerelease }
+            // Right after a release the raw CDN can still serve a CHANGELOG.md that predates
+            // it, so fall back to the notes the release itself carries rather than show nothing
+            missedChangelogEntries = filtered.ifEmpty { listOfNotNull(releaseNotesEntry()) }
         }
+    }
+
+    /**
+     * Builds a changelog entry from the release notes attached to the update.
+     * The leading version heading is dropped because the entry header already shows it.
+     */
+    private fun releaseNotesEntry(): ChangelogEntry? {
+        val release = releaseInfo ?: return null
+        val lines = release.description.trim().lines()
+        val body = if (lines.firstOrNull()?.trimStart()?.startsWith("# ") == true) lines.drop(1) else lines
+        val notes = body.joinToString("\n").trim()
+
+        return if (notes.isBlank()) null else ChangelogEntry(
+            version = release.version.normalizeVersion(),
+            date = release.createdAt.date.toString(),
+            content = notes
+        )
     }
 
     /**

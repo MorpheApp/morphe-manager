@@ -50,7 +50,7 @@ fun ScrollableInstruction(
                 .padding(horizontal = 12.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            MorpheSettingsDivider(fullWidth = true)
+            SettingsDivider(fullWidth = true)
 
             Text(
                 text = description,

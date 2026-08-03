@@ -94,9 +94,9 @@ val WindowSize.useCompactDialog: Boolean
  */
 val WindowSize.contentPadding: Dp
     get() = when (widthSizeClass) {
-        WindowWidthSizeClass.Compact -> MorpheDefaults.ContentPadding
-        WindowWidthSizeClass.Medium -> MorpheDefaults.ContentPaddingMedium
-        WindowWidthSizeClass.Expanded -> MorpheDefaults.ContentPaddingExpanded
+        WindowWidthSizeClass.Compact -> Defaults.ContentPadding
+        WindowWidthSizeClass.Medium -> Defaults.ContentPaddingMedium
+        WindowWidthSizeClass.Expanded -> Defaults.ContentPaddingExpanded
     }
 
 /**

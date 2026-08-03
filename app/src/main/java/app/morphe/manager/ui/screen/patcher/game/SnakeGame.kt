@@ -27,7 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
+import app.morphe.manager.ui.screen.shared.Defaults
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlin.math.abs
@@ -134,7 +134,7 @@ private const val SNAKE_SWIPE_THRESHOLD = 30f
 private fun SnakeCanvas(state: SnakeGameState, modifier: Modifier) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(MorpheDefaults.CompactCornerRadius))
+            .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
             .background(SnakeBg)
             .pointerInput(Unit) {
                 var drag = Offset.Zero

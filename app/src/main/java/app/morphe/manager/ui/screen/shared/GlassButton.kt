@@ -106,8 +106,8 @@ fun GlassButton(
             }
             AnimatedVisibility(
                 visible = effectiveShowLabel,
-                enter = MorpheAnimations.expandHorizFadeIn,
-                exit = MorpheAnimations.shrinkHorizFadeOut
+                enter = Animations.expandHorizFadeIn,
+                exit = Animations.shrinkHorizFadeOut
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     if (icon != null) {

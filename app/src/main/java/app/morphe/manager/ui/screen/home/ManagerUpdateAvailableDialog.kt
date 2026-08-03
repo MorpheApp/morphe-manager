@@ -5,20 +5,25 @@
 
 package app.morphe.manager.ui.screen.home
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -27,6 +32,44 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
 import app.morphe.manager.util.formatMegabytes
+import app.morphe.manager.util.isolateLtr
+
+private val ProgressBarHeight = 8.dp
+private val SuccessIconContainerSize = 80.dp
+private val SuccessIconSize = 40.dp
+
+/**
+ * The distinct bodies the update dialog can show. States that share a body map to the same
+ * entry so switching between them does not restart the crossfade.
+ */
+private enum class UpdateDialogContent {
+    DetailsLoading,
+    DetailsUnavailable,
+    Details,
+    Downloading,
+    Installing,
+    Failed,
+    Success
+}
+
+/** Resolves the body to show, including which variant of the details view applies. */
+private fun updateDialogContentOf(updateViewModel: UpdateViewModel): UpdateDialogContent =
+    when (updateViewModel.state) {
+        UpdateViewModel.State.CAN_DOWNLOAD, UpdateViewModel.State.CAN_INSTALL -> when {
+            // A banner can outlive the release it points at, and a check can fail outright,
+            // so name the situation rather than wait on data that is not coming
+            updateViewModel.releaseInfo == null && !updateViewModel.isCheckingForUpdate ->
+                UpdateDialogContent.DetailsUnavailable
+
+            updateViewModel.missedChangelogEntries == null -> UpdateDialogContent.DetailsLoading
+            else -> UpdateDialogContent.Details
+        }
+
+        UpdateViewModel.State.DOWNLOADING -> UpdateDialogContent.Downloading
+        UpdateViewModel.State.INSTALLING -> UpdateDialogContent.Installing
+        UpdateViewModel.State.FAILED -> UpdateDialogContent.Failed
+        UpdateViewModel.State.SUCCESS -> UpdateDialogContent.Success
+    }
 
 /**
  * Update details dialog with download and install functionality.
@@ -37,7 +80,6 @@ fun ManagerUpdateDetailsDialog(
     updateViewModel: UpdateViewModel
 ) {
     val state = updateViewModel.state
-    val releaseInfo = updateViewModel.releaseInfo
 
     // Reset state when dialog is opened if installation was canceled
     // This handles the case when user canceled the system install dialog
@@ -61,156 +103,75 @@ fun ManagerUpdateDetailsDialog(
         onDispose { updateViewModel.resetOlderManagerEntries() }
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(
-            when (state) {
-                UpdateViewModel.State.CAN_DOWNLOAD -> R.string.update_available
-                UpdateViewModel.State.DOWNLOADING -> R.string.downloading_manager_update
-                UpdateViewModel.State.CAN_INSTALL -> R.string.ready_to_install_update
-                UpdateViewModel.State.INSTALLING -> R.string.installing_manager_update
-                UpdateViewModel.State.FAILED -> R.string.install_update_manager_failed
-                UpdateViewModel.State.SUCCESS -> R.string.update_completed
-            }
-        ),
+        title = stringResource(state.title),
         scrollable = false,
         footer = {
-            when (state) {
-                UpdateViewModel.State.CAN_DOWNLOAD -> {
-                    MorpheDialogButtonColumn {
-                        MorpheDialogButton(
-                            text = stringResource(
-                                if (updateViewModel.canResumeDownload) R.string.resume_download
-                                else R.string.download
-                            ),
-                            onClick = { updateViewModel.downloadUpdate() },
-                            icon = Icons.Outlined.Download,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        // Changelog button
-                        releaseInfo?.let {
-                            ChangelogButton(
-                                pageUrl = it.pageUrl,
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                        }
-                    }
-                }
-
-                UpdateViewModel.State.DOWNLOADING -> {
-                    MorpheDialogOutlinedButton(
-                        text = stringResource(R.string.close),
-                        onClick = onDismiss,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-
-                UpdateViewModel.State.CAN_INSTALL -> {
-                    MorpheDialogButtonColumn {
-                        MorpheDialogButton(
-                            text = stringResource(R.string.install),
-                            onClick = { updateViewModel.installUpdate() },
-                            icon = Icons.Outlined.InstallMobile,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        // Changelog button
-                        releaseInfo?.let {
-                            ChangelogButton(
-                                pageUrl = it.pageUrl,
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                        }
-                    }
-                }
-
-                UpdateViewModel.State.INSTALLING -> {
-                    // No cancel button during installation - can't cancel system dialog
-                    // User can close our dialog, but install will continue
-                }
-
-                UpdateViewModel.State.FAILED -> {
-                    MorpheDialogButtonColumn {
-                        if (updateViewModel.canResumeDownload) {
-                            // Download failed/canceled - offer to resume
-                            MorpheDialogButton(
-                                text = stringResource(R.string.resume_download),
-                                onClick = { updateViewModel.downloadUpdate() },
-                                icon = Icons.Outlined.Download,
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                        } else {
-                            // Download completed but install failed - offer to retry install
-                            MorpheDialogButton(
-                                text = stringResource(R.string.install),
-                                onClick = { updateViewModel.installUpdate() },
-                                icon = Icons.Outlined.InstallMobile,
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                        }
-
-                        // Changelog button
-                        releaseInfo?.let {
-                            ChangelogButton(
-                                pageUrl = it.pageUrl,
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                        }
-
-                        MorpheDialogOutlinedButton(
-                            text = stringResource(android.R.string.cancel),
-                            onClick = onDismiss,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
-                }
-
-                UpdateViewModel.State.SUCCESS -> {
-                    MorpheDialogButton(
-                        text = stringResource(android.R.string.ok),
-                        onClick = onDismiss,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
+            AnimatedContent(
+                targetState = state,
+                transitionSpec = Animations.fadeCrossfade(),
+                modifier = Modifier.fillMaxWidth(),
+                label = "updateFooter"
+            ) { footerState ->
+                UpdateDialogFooter(
+                    state = footerState,
+                    updateViewModel = updateViewModel,
+                    onDismiss = onDismiss
+                )
             }
         }
     ) {
-        val textColor = LocalDialogTextColor.current
-        val listState = rememberLazyListState()
+        AnimatedContent(
+            targetState = updateDialogContentOf(updateViewModel),
+            transitionSpec = Animations.fadeCrossfade(),
+            modifier = Modifier.fillMaxWidth(),
+            label = "updateContent"
+        ) { content ->
+            when (content) {
+                UpdateDialogContent.DetailsLoading -> ChangelogSectionLoading()
 
-        Box(modifier = Modifier.fillMaxWidth()) {
-            LazyColumn(state = listState, modifier = Modifier.fillMaxWidth()) {
-                updateDetailsItems(
-                    state = state,
-                    updateViewModel = updateViewModel,
-                    textColor = textColor
+                UpdateDialogContent.DetailsUnavailable -> Notice(
+                    icon = Icons.Outlined.HourglassEmpty,
+                    text = stringResource(R.string.manager_update_not_ready),
+                    tone = SemanticTone.Warning
+                )
+
+                UpdateDialogContent.Details -> UpdateDetailsContent(updateViewModel)
+
+                UpdateDialogContent.Downloading -> DownloadProgressCard(
+                    version = updateViewModel.releaseInfo?.version,
+                    downloadedSize = updateViewModel.downloadedSize,
+                    totalSize = updateViewModel.totalSize,
+                    progress = updateViewModel.downloadProgress
+                )
+
+                // The dialog title already reads "Installing update", so the logo carries it
+                // as a description instead of repeating it on screen
+                UpdateDialogContent.Installing -> PulsingLogoIndicator(
+                    contentDescription = stringResource(R.string.installing_manager_update)
+                )
+
+                UpdateDialogContent.Failed -> InstallFailureContent(updateViewModel.installError)
+
+                UpdateDialogContent.Success -> UpdateCompletedContent(
+                    version = updateViewModel.releaseInfo?.version
                 )
             }
-
-            ListScrollbar(
-                listState = listState,
-                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
-            )
-
-            ScrollToTopButton(
-                listState = listState,
-                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
-            )
         }
     }
 
-    MorpheOverlay(visible = updateViewModel.isLoadingOlderEntries) {
+    Overlay(visible = updateViewModel.isLoadingOlderEntries) {
         PulsingLogoWithCaption(caption = stringResource(R.string.loading_older_releases))
     }
 
     // Internet check dialog
     if (updateViewModel.showInternetCheckDialog) {
-        MorpheDialog(
+        AppDialog(
             onDismissRequest = { updateViewModel.showInternetCheckDialog = false },
             title = stringResource(R.string.download_update_confirmation),
             footer = {
-                MorpheDialogButtonRow(
+                AppDialogButtonRow(
                     primaryText = stringResource(R.string.download),
                     onPrimaryClick = {
                         updateViewModel.showInternetCheckDialog = false
@@ -221,206 +182,292 @@ fun ManagerUpdateDetailsDialog(
                 )
             }
         ) {
-            InfoBadge(
+            Notice(
                 icon = Icons.Outlined.Warning,
                 text = stringResource(R.string.download_confirmation_metered),
-                style = InfoBadgeStyle.Warning,
-                isExpanded = true
+                tone = SemanticTone.Warning
             )
         }
     }
 }
 
-/** Rows of the update details dialog, one branch per [UpdateViewModel.State]. */
-private fun LazyListScope.updateDetailsItems(
+/** Dialog actions, one set per [UpdateViewModel.State]. */
+@Composable
+private fun UpdateDialogFooter(
     state: UpdateViewModel.State,
     updateViewModel: UpdateViewModel,
-    textColor: Color
+    onDismiss: () -> Unit
 ) {
+    val releaseInfo = updateViewModel.releaseInfo
+
     when (state) {
-        UpdateViewModel.State.DOWNLOADING -> item("download_progress") {
-            DownloadProgressSection(
-                downloadedSize = updateViewModel.downloadedSize,
-                totalSize = updateViewModel.totalSize,
-                progress = updateViewModel.downloadProgress,
-                textColor = textColor
+        UpdateViewModel.State.CAN_DOWNLOAD -> {
+            AppDialogButtonColumn {
+                AppDialogButton(
+                    text = stringResource(
+                        if (updateViewModel.canResumeDownload) R.string.resume_download
+                        else R.string.download
+                    ),
+                    onClick = { updateViewModel.downloadUpdate() },
+                    icon = Icons.Outlined.Download,
+                    // Nothing to download until the check resolves an actual release
+                    enabled = releaseInfo != null,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // Offered once the check has settled on nothing, which is recoverable
+                // on its own a moment later
+                if (releaseInfo == null && !updateViewModel.isCheckingForUpdate) {
+                    AppDialogOutlinedButton(
+                        text = stringResource(R.string.retry),
+                        onClick = { updateViewModel.retryUpdateCheck() },
+                        icon = Icons.Outlined.Refresh,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                ChangelogButton(
+                    pageUrl = releaseInfo?.pageUrl,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+
+        UpdateViewModel.State.DOWNLOADING -> {
+            AppDialogOutlinedButton(
+                text = stringResource(R.string.close),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
             )
         }
 
-        UpdateViewModel.State.INSTALLING -> item("installing") {
-            PulsingLogoWithCaption(
-                caption = stringResource(R.string.installing_manager_update)
-            )
+        UpdateViewModel.State.CAN_INSTALL -> {
+            AppDialogButtonColumn {
+                AppDialogButton(
+                    text = stringResource(R.string.install),
+                    onClick = { updateViewModel.installUpdate() },
+                    icon = Icons.Outlined.InstallMobile,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                ChangelogButton(
+                    pageUrl = releaseInfo?.pageUrl,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+
+        UpdateViewModel.State.INSTALLING -> {
+            // No cancel button during installation - can't cancel system dialog
+            // User can close our dialog, but install will continue
         }
 
         UpdateViewModel.State.FAILED -> {
-            if (updateViewModel.installError.isNotEmpty()) item("failed_error") {
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-                        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
-                    ) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.Top
-                        ) {
-                            MorpheIcon(
-                                icon = Icons.Outlined.ErrorOutline,
-                                tint = MaterialTheme.colorScheme.error
-                            )
-                            Column(
-                                verticalArrangement = Arrangement.spacedBy(4.dp)
-                            ) {
-                                Text(
-                                    text = stringResource(R.string.install_update_manager_failed),
-                                    style = MaterialTheme.typography.titleSmall,
-                                    fontWeight = FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.onErrorContainer
-                                )
-                                Text(
-                                    text = updateViewModel.installError,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.8f)
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        UpdateViewModel.State.SUCCESS -> item("success") {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 48.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(20.dp)
-                ) {
-                    Surface(
-                        shape = CircleShape,
-                        color = MaterialTheme.colorScheme.tertiaryContainer,
-                        modifier = Modifier.size(80.dp)
-                    ) {
-                        Box(contentAlignment = Alignment.Center) {
-                            Icon(
-                                imageVector = Icons.Outlined.CheckCircle,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.tertiary,
-                                modifier = Modifier.size(40.dp)
-                            )
-                        }
-                    }
-
-                    Text(
-                        text = stringResource(R.string.update_completed),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onTertiaryContainer,
-                        textAlign = TextAlign.Center
+            AppDialogButtonColumn {
+                if (updateViewModel.canResumeDownload) {
+                    // Download failed/canceled - offer to resume
+                    AppDialogButton(
+                        text = stringResource(R.string.resume_download),
+                        onClick = { updateViewModel.downloadUpdate() },
+                        icon = Icons.Outlined.Download,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                } else {
+                    // Download completed but install failed - offer to retry install
+                    AppDialogButton(
+                        text = stringResource(R.string.install),
+                        onClick = { updateViewModel.installUpdate() },
+                        icon = Icons.Outlined.InstallMobile,
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
+
+                ChangelogButton(
+                    pageUrl = releaseInfo?.pageUrl,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                AppDialogOutlinedButton(
+                    text = stringResource(android.R.string.cancel),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
 
-        UpdateViewModel.State.CAN_DOWNLOAD, UpdateViewModel.State.CAN_INSTALL -> {
-            val entries = updateViewModel.missedChangelogEntries
-            if (entries == null) {
-                item("missed_loading") { ChangelogSectionLoading() }
-            } else {
-                changelogEntryItems(
-                    entries = entries,
-                    keyPrefix = "missed",
-                    headerIcon = Icons.Outlined.NewReleases
-                )
-                changelogOlderItems(
-                    entries = updateViewModel.olderManagerEntries,
-                    isLoading = updateViewModel.isLoadingOlderEntries,
-                    onExpand = { updateViewModel.loadOlderManagerEntries() }
-                )
-            }
+        UpdateViewModel.State.SUCCESS -> {
+            AppDialogButton(
+                text = stringResource(android.R.string.ok),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }
 
 /**
- * Download progress section with styled progress bar.
+ * Changelog for everything the user is about to install, with its own scrollbar so the list
+ * stays lazy while the surrounding dialog does not scroll.
  */
 @Composable
-private fun DownloadProgressSection(
+private fun UpdateDetailsContent(updateViewModel: UpdateViewModel) {
+    val listState = rememberLazyListState()
+    val entries = updateViewModel.missedChangelogEntries.orEmpty()
+
+    Box(modifier = Modifier.fillMaxWidth()) {
+        LazyColumn(state = listState, modifier = Modifier.fillMaxWidth()) {
+            changelogEntryItems(
+                entries = entries,
+                keyPrefix = "missed",
+                headerIcon = Icons.Outlined.NewReleases
+            )
+            changelogOlderItems(
+                entries = updateViewModel.olderManagerEntries,
+                isLoading = updateViewModel.isLoadingOlderEntries,
+                onExpand = { updateViewModel.loadOlderManagerEntries() }
+            )
+        }
+
+        ListScrollbar(
+            listState = listState,
+            modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+        )
+
+        ScrollToTopButton(
+            listState = listState,
+            modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+        )
+    }
+}
+
+/**
+ * Download progress with an animated bar.
+ *
+ * The total size is unknown until the first progress callback, so a resumed download shows an
+ * indeterminate bar rather than one pinned at zero while bytes are already arriving.
+ */
+@Composable
+private fun DownloadProgressCard(
+    version: String?,
     downloadedSize: Long,
     totalSize: Long,
-    progress: Float,
-    textColor: Color
+    progress: Float
 ) {
-    Surface(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-    ) {
-        Column(
-            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(14.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Outlined.Download,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(28.dp)
-                        )
-                    }
-                }
+    val hasKnownSize = totalSize > 0L
+    val animatedProgress by animateFloatAsState(
+        targetValue = progress,
+        animationSpec = tween(Defaults.ANIMATION_DURATION),
+        label = "downloadProgress"
+    )
 
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.downloading_manager_update),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = textColor
-                    )
+    HeroInfoCard(
+        icon = Icons.Outlined.Download,
+        // Names the release being fetched, since the dialog title already says it is downloading
+        title = version?.isolateLtr() ?: stringResource(R.string.app_name),
+        footer = {
+            val progressModifier = Modifier
+                .fillMaxWidth()
+                .height(ProgressBarHeight)
+            val trackColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
 
-                    Text(
-                        text = stringResource(
-                            R.string.manager_update_progress_detail,
-                            formatMegabytes(downloadedSize),
-                            formatMegabytes(totalSize),
-                            (progress * 100).toInt()
-                        ),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Medium
-                    )
-                }
+            if (hasKnownSize) {
+                LinearProgressIndicator(
+                    progress = { animatedProgress },
+                    modifier = progressModifier,
+                    color = MaterialTheme.colorScheme.primary,
+                    trackColor = trackColor
+                )
+            } else {
+                LinearProgressIndicator(
+                    modifier = progressModifier,
+                    color = MaterialTheme.colorScheme.primary,
+                    trackColor = trackColor
+                )
             }
-
-            LinearProgressIndicator(
-                progress = { progress },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(8.dp),
+        },
+        subtitle = {
+            Text(
+                text = if (hasKnownSize) {
+                    stringResource(
+                        R.string.manager_update_progress_detail,
+                        formatMegabytes(downloadedSize),
+                        formatMegabytes(totalSize),
+                        (animatedProgress * 100).toInt()
+                    )
+                } else {
+                    stringResource(
+                        R.string.manager_update_progress_downloaded,
+                        formatMegabytes(downloadedSize)
+                    )
+                },
+                style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary,
-                trackColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                fontWeight = FontWeight.Medium
+            )
+        }
+    )
+}
+
+/** Installer failure details. The dialog title already states that the install failed. */
+@Composable
+private fun InstallFailureContent(message: String) {
+    if (message.isEmpty()) return
+
+    Notice(
+        icon = Icons.Outlined.ErrorOutline,
+        text = message,
+        tone = SemanticTone.Error
+    )
+}
+
+/**
+ * Success confirmation, with the check mark springing into place. The installed [version] takes
+ * the place of a caption because the dialog title already announces the result.
+ */
+@Composable
+private fun UpdateCompletedContent(version: String?) {
+    var appeared by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) { appeared = true }
+
+    val scale by animateFloatAsState(
+        targetValue = if (appeared) 1f else 0.6f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessLow
+        ),
+        label = "successScale"
+    )
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = Defaults.ContentPaddingExpanded),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingMedium)
+    ) {
+        Surface(
+            shape = CircleShape,
+            color = MaterialTheme.colorScheme.tertiaryContainer,
+            modifier = Modifier
+                .size(SuccessIconContainerSize)
+                .scale(scale)
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                ThemedIcon(
+                    icon = Icons.Outlined.CheckCircle,
+                    tint = MaterialTheme.colorScheme.tertiary,
+                    size = SuccessIconSize
+                )
+            }
+        }
+
+        if (version != null) {
+            Text(
+                text = version.isolateLtr(),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = LocalDialogTextColor.current,
+                textAlign = TextAlign.Center
             )
         }
     }

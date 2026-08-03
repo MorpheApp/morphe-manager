@@ -31,7 +31,9 @@ import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.PatchSourceRef
+import app.morphe.manager.patcher.patch.SELECTION_APK_ARCHITECTURE
 import app.morphe.manager.patcher.runtime.ProcessRuntime
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
@@ -40,6 +42,7 @@ import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
 import app.morphe.manager.util.*
 import app.morphe.manager.worker.UpdateCheckWorker
+import app.morphe.patcher.patch.InstallerType
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -205,6 +208,18 @@ class PatcherViewModel(
             input.selectedApp.versionCode
         ).first().associateBy { it.uid }
 
+    /**
+     * Patches the sources declare unavailable for [installerType], so the finished app can name
+     * what it was built without instead of leaving the user to spot the missing patch.
+     */
+    suspend fun unavailablePatchNames(installerType: InstallerType): List<String> =
+        gatherScopedBundles().values
+            .flatMap { it.patches }
+            .filter { it.lockState(installerType, SELECTION_APK_ARCHITECTURE) == PatchLockState.LOCKED_OFF }
+            .map { it.name }
+            .distinct()
+            .sorted()
+
     suspend fun collectSelectedBundleMetadata(): List<PatchSourceRef> {
         val globalBundles = patchBundleRepository.bundleInfoFlow.first()
         val scopedBundles = gatherScopedBundles()
@@ -361,12 +376,16 @@ class PatcherViewModel(
     val shouldPromptTour: StateFlow<Boolean> = _shouldPromptTour.asStateFlow()
 
     init {
-        // Steps and the applied-patch count survive process death, so a run that continued in
-        // the worker while the UI was gone comes back with its pipeline intact
+        restoreOutcome()
+
+        // The pipeline and the outcome survive process death, so a run that continued in the
+        // worker while the UI was gone comes back exactly where it was left
         savedStateHandle.setSavedStateProvider(KEY_PROGRESS) {
             Bundle().apply {
                 putParcelableArrayList(KEY_STEPS, ArrayList(patchRun.steps))
                 putInt(KEY_COMPLETED_PATCHES, patchRun.completedPatches)
+                putBoolean(KEY_SUCCESS_SCREEN, showSuccessScreen)
+                _patcherSucceeded.value?.let { putBoolean(KEY_SUCCEEDED, it) }
             }
         }
 
@@ -392,6 +411,21 @@ class PatcherViewModel(
             }
         }
         patchRun.startStallWatch()
+    }
+
+    /**
+     * Puts back the outcome of a run that had already finished when the process was killed.
+     * Without it the screen resumes in its in-progress state and only catches up once [WorkInfo]
+     * arrives, which is what makes a long-finished run flick past the log screen on the way to
+     * the finished one.
+     */
+    private fun restoreOutcome() {
+        val progress = restoredProgress ?: return
+        if (!progress.containsKey(KEY_SUCCEEDED)) return
+
+        _patcherSucceeded.value = progress.getBoolean(KEY_SUCCEEDED)
+        showSuccessScreen = progress.getBoolean(KEY_SUCCESS_SCREEN)
+        isPatching = false
     }
 
     private suspend fun runPreflightCheck() {
@@ -817,6 +851,10 @@ class PatcherViewModel(
         observeWorkerJob?.cancel()
         observeWorkerJob = viewModelScope.launch {
             workManager.getWorkInfoByIdFlow(id).collect { workInfo ->
+                // WorkManager prunes finished work eventually, and a record that is simply gone
+                // says nothing about a run whose outcome was restored after process death
+                if (workInfo == null && _patcherSucceeded.value != null) return@collect
+
                 when (workInfo?.state) {
                     WorkInfo.State.SUCCEEDED -> {
                         forceKeepLocalInput = false
@@ -1001,5 +1039,7 @@ class PatcherViewModel(
         private const val KEY_PROGRESS = "patch_progress"
         private const val KEY_STEPS = "steps"
         private const val KEY_COMPLETED_PATCHES = "completed_patches"
+        private const val KEY_SUCCEEDED = "succeeded"
+        private const val KEY_SUCCESS_SCREEN = "success_screen"
     }
 }

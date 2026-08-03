@@ -118,6 +118,20 @@ class BatchPatchCoordinator(
         }
     }
 
+    /** Re-resolves one item against the APK the user picked, saved original or installed app. */
+    fun useSource(packageName: String, preferInstalled: Boolean) {
+        val current = _state.value ?: return
+        if (current.phase != BatchPhase.PREFLIGHT) return
+        val item = current.items.firstOrNull { it.packageName == packageName } ?: return
+
+        scope.launch {
+            val resolved = resolver.useSource(item, current.useMount, preferInstalled)
+            _state.update { state ->
+                state.copy(items = state.items.map { if (it.packageName == packageName) resolved else it })
+            }
+        }
+    }
+
     /** Toggles an item between excluded and its resolved state. */
     fun toggleExcluded(packageName: String) {
         _state.update { state ->

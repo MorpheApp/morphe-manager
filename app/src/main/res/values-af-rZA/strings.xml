@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Tik om te hersien en te verwyder</string>
     <string name="home_metadata_errors_title">Sommige bronne vir plakkers is nie beskikbaar nie</string>
     <string name="home_metadata_errors_subtitle">Tik om bronne te hersien</string>
+    <string name="home_outdated_manager_title">Morphe is verouderd</string>
+    <string name="home_outdated_manager_subtitle">Sommige bronlêers benodig \'n nuwer weergawe</string>
     <string name="home_metered_skipped_title">Opdaterings gestop op mobiele data</string>
     <string name="home_metered_skipped_subtitle">Tik om opdaterings op mobiele data toe te laat</string>
     <string name="home_update_error">Opdatering het misluk</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Metadata Nie beskikbaar nie</string>
     <string name="sources_management_metadata_unavailable_hint">Die afstandmetadata lêer is nie beskikbaar nie. Patches met die geïnstalleerde bundel werk steeds, maar outo-opdatering is vir hierdie bron afgeskakel</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Die patch bundel kon nie afgelaai word nie. Die bron-URL kan verkeerd wees of die lêer bestaan ​​nie</string>
+    <string name="sources_management_outdated_manager_badge">Opdatering Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Hierdie bron is gebou vir pleister %1$s, maar Morphe %2$s sluit pleister %3$s in. Opdateer Morphe om dit te gebruik</string>
     <string name="sources_management_source_enabled">Bron geaktiveer</string>
     <string name="sources_management_source_disabled">Bron gedeaktiveer</string>
     <string name="sources_management_source_updating">Bron besig om op te dateer</string>
@@ -250,6 +254,11 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="home_dialog_wrong_package_description">Die gekose APK is nie vir die aansoek wat jy wou patch nie</string>
     <string name="home_dialog_expected_package">Verwagte pakket:</string>
     <string name="home_dialog_selected_package">Gekose pakket:</string>
+    <string name="home_dialog_orphaned_install_title">Vorige kopie agtergelaat</string>
+    <string name="home_dialog_orphaned_install_description">Patcher het die pakketnaam verander, dus die kopie wat u vroeër gepatch het, is steeds as \'n aparte app geïnstalleer</string>
+    <string name="home_dialog_orphaned_install_warning">Dit word nie meer dopgehou nie en sal nie patch-opdaterings ontvang nie</string>
+    <string name="home_dialog_orphaned_install_uninstall">Deïnstalleer dit</string>
+    <string name="home_dialog_orphaned_install_keep">Hou dit</string>
     <string name="home_outdated_patches_dialog_title">Plesters kan verouder wees</string>
     <string name="home_outdated_patches_dialog_message">Mobiele data is aktief en pleisteropdaterings is gedeaktiveer</string>
     <string name="home_outdated_patches_dialog_warning">Pleister met verouderde pleisters kan \'n gebroke app tot gevolg hê</string>
@@ -323,8 +332,10 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="batch_patch_source_installed">Geïnstalleerde program</string>
     <string name="batch_patch_source_file">Aangehegte lêr</string>
     <string name="batch_patch_source_unavailable">Die APK kon nie voorberei word nie</string>
+    <string name="batch_patch_find_apk">Vind APK</string>
     <string name="batch_patch_attach_apk">Voeg APK by</string>
     <string name="batch_patch_force_version">Patcher tog</string>
+    <string name="batch_patch_force_version_done">In tou gesit, maar wysigings wat vir ander weergawes gemaak is, kan die toepassing breek</string>
     <string name="batch_patch_edit_patches">Kies pleisters</string>
     <string name="batch_patch_state_no_apk">Geen APK</string>
     <string name="batch_patch_state_no_patches">Geen pleisters</string>
@@ -386,6 +397,8 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="patcher_error_dialog_app_info">App-inligting</string>
     <string name="patcher_tab_logs">Patcher-logboeke</string>
     <string name="patcher_tab_game">Speletjies</string>
+    <string name="patcher_logs_waiting">Wag vir log-uitvoer…</string>
+    <string name="patcher_logs_lost">Log-uitvoer word nie tussen app-herstarte gehou nie</string>
     <string name="patcher_long_step_warning">Hierdie stap kan \'n rukkie neem. Wag asseblief…</string>
     <string name="patcher_installing_subtitle">Byna gereed om te rock! 🎸</string>
     <string name="patcher_success_title">Klaar! 🎉</string>
@@ -1089,6 +1102,7 @@ Besonderhede: %2$s"</string>
     <string name="install_update_manager_failed">Kon nie opdatering installeer nie</string>
     <string name="installing_manager_update">Installeer opdatering…</string>
     <string name="downloading_manager_update">Laai opdatering af…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Kon nie opdatering aflaai nie: %s</string>
     <string name="failed_to_check_updates">Kon nie opdaterings nagaan nie: %s</string>
     <string name="failed_to_download_update">Kon nie opdatering aflaai nie: %s</string>

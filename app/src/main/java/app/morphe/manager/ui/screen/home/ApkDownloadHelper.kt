@@ -107,23 +107,24 @@ private fun ApkDownloadHelperDialog(
 ) {
     var selected by remember(helpers) { mutableStateOf(helpers.firstOrNull()) }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_apk_helper_title),
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.home_apk_helper_continue),
                 onPrimaryClick = { selected?.let(onConfirm) },
                 primaryIcon = Icons.Outlined.Download,
                 primaryEnabled = selected != null,
                 secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss
+                onSecondaryClick = onDismiss,
+                layout = DialogButtonLayout.Vertical
             )
         }
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
         ) {
             Text(
                 text = stringResource(R.string.home_apk_helper_description),
@@ -140,7 +141,7 @@ private fun ApkDownloadHelperDialog(
                 )
             }
 
-            InfoBadge(
+            Notice(
                 text = stringResource(
                     if (signatureCheckAvailable) {
                         R.string.home_apk_helper_warning
@@ -148,10 +149,8 @@ private fun ApkDownloadHelperDialog(
                         R.string.home_apk_helper_warning_unverified
                     }
                 ),
-                style = InfoBadgeStyle.Warning,
-                icon = Icons.Outlined.Warning,
-                isExpanded = true,
-                modifier = Modifier.fillMaxWidth()
+                tone = SemanticTone.Warning,
+                icon = Icons.Outlined.Warning
             )
         }
     }

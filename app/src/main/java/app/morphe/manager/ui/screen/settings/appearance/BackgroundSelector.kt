@@ -77,8 +77,8 @@ fun BackgroundSelector(
             // Interval selector — visible only when RANDOM is active
             AnimatedVisibility(
                 visible = selectedBackground == BackgroundType.RANDOM,
-                enter = MorpheAnimations.expandFadeEnter,
-                exit = MorpheAnimations.shrinkFadeExit
+                enter = Animations.expandFadeEnter,
+                exit = Animations.shrinkFadeExit
             ) {
                 RandomIntervalSelector(
                     selectedInterval = selectedInterval,

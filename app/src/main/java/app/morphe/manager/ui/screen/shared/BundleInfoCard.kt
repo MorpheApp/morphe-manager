@@ -43,7 +43,7 @@ fun BundleInfoCard(
             contentDescription = contentDesc
             role = Role.Button
         },
-        shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+        shape = RoundedCornerShape(Defaults.CompactCornerRadius),
         color = if (enabled) {
             MaterialTheme.colorScheme.secondaryContainer
         } else {
@@ -53,13 +53,13 @@ fun BundleInfoCard(
         enabled = enabled
     ) {
         Row(
-            modifier = Modifier.padding(MorpheDefaults.ItemSpacing),
+            modifier = Modifier.padding(Defaults.ItemSpacing),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+            horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
         ) {
-            MorpheIcon(
+            ThemedIcon(
                 icon = icon,
-                size = MorpheDefaults.IconSizeSmall,
+                size = Defaults.IconSizeSmall,
                 tint = contentColor
             )
 
@@ -82,7 +82,7 @@ fun BundleInfoCard(
             }
 
             if (enabled) {
-                ForwardChevronIcon(size = MorpheDefaults.IconSizeSmall, tint = contentColor)
+                ForwardChevronIcon(size = Defaults.IconSizeSmall, tint = contentColor)
             }
         }
     }

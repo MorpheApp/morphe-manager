@@ -63,8 +63,8 @@ fun RadioSelectionCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(MorpheDefaults.ContentPadding),
-                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+                    .padding(Defaults.ContentPadding),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (leadingContent != null) {
@@ -84,8 +84,8 @@ fun RadioSelectionCard(
                             else colors.onSurface.copy(alpha = 0.06f)
                         )
                         .padding(
-                            horizontal = MorpheDefaults.ContentPadding,
-                            vertical = MorpheDefaults.ContentPaddingSmall
+                            horizontal = Defaults.ContentPadding,
+                            vertical = Defaults.ContentPaddingSmall
                         ),
                     contentAlignment = Alignment.Center
                 ) {

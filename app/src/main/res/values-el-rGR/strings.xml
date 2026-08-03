@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Πατήστε για να ελέγξετε και να καταργήσετε</string>
     <string name="home_metadata_errors_title">Ορισμένες πηγές ενημερώσεων δεν είναι διαθέσιμες</string>
     <string name="home_metadata_errors_subtitle">Πατήστε για να ελέγξετε τις πηγές</string>
+    <string name="home_outdated_manager_title">Η εφαρμογή Morphe είναι παλιά</string>
+    <string name="home_outdated_manager_subtitle">Ορισμένες πηγές ενημερώσεων απαιτούν νεότερη έκδοση</string>
     <string name="home_metered_skipped_title">Οι ενημερώσεις έχουν παύσει στα δεδομένα κινητής τηλεφωνίας</string>
     <string name="home_metered_skipped_subtitle">Πατήστε για να επιτρέψετε ενημερώσεις μέσω κινητών δεδομένων</string>
     <string name="home_update_error">Η ενημέρωση απέτυχε</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Μεταδεδομένα μη διαθέσιμα</string>
     <string name="sources_management_metadata_unavailable_hint">Το απομακρυσμένο αρχείο μεταδεδομένων δεν είναι διαθέσιμο. Η επιδιόρθωση με το εγκατεστημένο πακέτο εξακολουθεί να λειτουργεί, αλλά η αυτόματη ενημέρωση είναι απενεργοποιημένη για αυτήν την πηγή</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Το πακέτο επιδιόρθωσης δεν κατέβηκε. Η διεύθυνση URL της πηγής ενδέχεται να είναι λανθασμένη ή το αρχείο να μην υπάρχει</string>
+    <string name="sources_management_outdated_manager_badge">Ενημέρωση Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Αυτή η πηγή είναι κατασκευασμένη για το patcher %1$s, αλλά η Morphe %2$s περιλαμβάνει το patcher %3$s. Ενημερώστε την Morphe για να το χρησιμοποιήσετε</string>
     <string name="sources_management_source_enabled">Ενεργοποιημένη πηγή</string>
     <string name="sources_management_source_disabled">Απενεργοποιημένη πηγή</string>
     <string name="sources_management_source_updating">Ενημέρωση πηγής</string>
@@ -250,6 +254,11 @@
     <string name="home_dialog_wrong_package_description">Το επιλεγμένο APK δεν είναι για την εφαρμογή που επιθυμείτε να τροποποιήσετε</string>
     <string name="home_dialog_expected_package">Αναμενόμενο πακέτο:</string>
     <string name="home_dialog_selected_package">Επιλεγμένο πακέτο:</string>
+    <string name="home_dialog_orphaned_install_title">Προηγούμενο αντίγραφο που παραμένει</string>
+    <string name="home_dialog_orphaned_install_description">Η επιδιόρθωση άλλαξε το όνομα του πακέτου, επομένως το αντίγραφο που επιδιορθώσατε νωρίτερα εξακολουθεί να είναι εγκατεστημένο ως ξεχωριστή εφαρμογή</string>
+    <string name="home_dialog_orphaned_install_warning">Δεν παρακολουθείται πλέον και δεν θα λάβει ενημερώσεις επιδιόρθωσης</string>
+    <string name="home_dialog_orphaned_install_uninstall">Απεγκατάσταση</string>
+    <string name="home_dialog_orphaned_install_keep">Διατήρησέ το</string>
     <string name="home_outdated_patches_dialog_title">Οι τροποποιήσεις μπορεί να είναι απαρχαιωμένες</string>
     <string name="home_outdated_patches_dialog_message">Τα δεδομένα κινητής τηλεφωνίας είναι ενεργά και οι ενημερώσεις τροποποιήσεων είναι απενεργοποιημένες</string>
     <string name="home_outdated_patches_dialog_warning">Η τροποποίηση με απαρχαιωμένες εκδόσεις των τροποποιήσεων μπορεί να καταλήξει σε ένα κατεστραμμένο πρόγραμμα</string>
@@ -323,8 +332,10 @@
     <string name="batch_patch_source_installed">Εγκατεστημένη εφαρμογή</string>
     <string name="batch_patch_source_file">Επισυναπτόμενο αρχείο</string>
     <string name="batch_patch_source_unavailable">Το APK δεν μπόρεσε να προετοιμαστεί</string>
+    <string name="batch_patch_find_apk">Βρείτε APK</string>
     <string name="batch_patch_attach_apk">Επισυνάψτε APK</string>
     <string name="batch_patch_force_version">Διόρθωση ούτως ή άλλως</string>
+    <string name="batch_patch_force_version_done">Προστέθηκε στην ουρά ούτως ή άλλως, οι ενημερώσεις για άλλες εκδόσεις ενδέχεται να προκαλέσουν προβλήματα στην εφαρμογή</string>
     <string name="batch_patch_edit_patches">Επιλέξτε διορθώσεις</string>
     <string name="batch_patch_state_no_apk">Δεν υπάρχει APK</string>
     <string name="batch_patch_state_no_patches">Δεν υπάρχουν διορθώσεις</string>
@@ -386,6 +397,8 @@
     <string name="patcher_error_dialog_app_info">Πληροφορίες εφαρμογής</string>
     <string name="patcher_tab_logs">Καταγραφές Patcher</string>
     <string name="patcher_tab_game">Παιχνίδια</string>
+    <string name="patcher_logs_waiting">Αναμονή για έξοδο καταγραφής…</string>
+    <string name="patcher_logs_lost">Η έξοδος καταγραφής δεν διατηρείται κατά την επανεκκίνηση της εφαρμογής</string>
     <string name="patcher_long_step_warning">Αυτό το βήμα μπορεί να διαρκέσει λίγο. Παρακαλώ περιμένετε…</string>
     <string name="patcher_installing_subtitle">Σχεδόν έτοιμο για δράση! 🎸</string>
     <string name="patcher_success_title">Ολοκληρώθηκε! 🎉</string>
@@ -1089,6 +1102,7 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">Η εγκατάσταση της ενημέρωσης απέτυχε</string>
     <string name="installing_manager_update">Εγκατάσταση ενημέρωσης…</string>
     <string name="downloading_manager_update">Λήψη ενημέρωσης…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Αποτυχία λήψης ενημέρωσης: %s</string>
     <string name="failed_to_check_updates">Ο έλεγχος για ενημερώσεις απέτυχε: %s</string>
     <string name="failed_to_download_update">Η λήψη ενημέρωσης απέτυχε: %s</string>

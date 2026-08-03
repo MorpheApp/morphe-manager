@@ -42,6 +42,9 @@ interface PatchProgressSource {
     val logs: List<Pair<LogLevel, String>>
     val heapSamples: List<Int>
     val heapLimitMb: Int
+
+    /** Whether this run printed a log that is no longer available to show. */
+    val logsLost: Boolean
 }
 
 /**
@@ -67,6 +70,12 @@ class PatchRunProgress(
 
     /** Real-time log entries, collected from the patcher worker. */
     override val logs = mutableStateListOf<Pair<LogLevel, String>>()
+
+    /**
+     * The log of a run that was interrupted by process death is gone: it only ever lived in
+     * memory, and the steps came back from the saved state without it.
+     */
+    override val logsLost = restoredSteps != null
 
     /** Heap usage samples (MB) collected every second while patching. */
     override val heapSamples = mutableStateListOf<Int>()

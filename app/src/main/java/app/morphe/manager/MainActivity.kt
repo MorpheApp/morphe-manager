@@ -50,7 +50,7 @@ import app.morphe.manager.ui.screen.home.OnboardingState
 import app.morphe.manager.ui.screen.home.StepDef
 import app.morphe.manager.ui.screen.shared.AnimatedBackground
 import app.morphe.manager.ui.screen.shared.BackgroundType
-import app.morphe.manager.ui.screen.shared.MorpheAnimations
+import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.theme.ManagerTheme
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
@@ -510,10 +510,10 @@ private fun MorpheManager(vm: MainViewModel) {
         NavHost(
             navController = navController,
             startDestination = HomeScreen,
-            enterTransition = { MorpheAnimations.screenEnter },
-            exitTransition = { MorpheAnimations.screenExit },
-            popEnterTransition = { MorpheAnimations.screenEnter },
-            popExitTransition = { MorpheAnimations.screenExit }
+            enterTransition = { Animations.screenEnter },
+            exitTransition = { Animations.screenExit },
+            popEnterTransition = { Animations.screenEnter },
+            popExitTransition = { Animations.screenExit }
         ) {
             composable<HomeScreen> { entry ->
                 val bundleUpdateProgress by homeViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
@@ -603,8 +603,8 @@ private fun MorpheManager(vm: MainViewModel) {
             }
 
             composable<Settings>(
-                enterTransition = { MorpheAnimations.pushEnter },
-                popExitTransition = { MorpheAnimations.pushExit }
+                enterTransition = { Animations.pushEnter },
+                popExitTransition = { Animations.pushExit }
             ) {
                 SettingsScreen(
                     homeViewModel = homeViewModel,

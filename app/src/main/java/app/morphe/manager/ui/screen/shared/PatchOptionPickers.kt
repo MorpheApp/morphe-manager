@@ -57,7 +57,7 @@ fun PickerButtonRow(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        MorpheDialogOutlinedButton(
+        AppDialogOutlinedButton(
             text = label,
             textSuffix = selectedPath.takeIf { it.isNotBlank() },
             icon = icon,

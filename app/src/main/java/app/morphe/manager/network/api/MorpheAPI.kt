@@ -135,9 +135,21 @@ class MorpheAPI(
         config: RepoConfig,
         branch: String
     ): APIResponse<T> {
-        val url = config.rawFileUrl(branch, "patches-bundle.json")
+        val url = cacheBusted(config.rawFileUrl(branch, "patches-bundle.json"))
         Log.d(tag, "rawPatchesBundleRequest: $url")
         return client.request { url(url) }
+    }
+
+    /**
+     * Appends a per-minute cache buster to a raw file URL.
+     *
+     * The GitHub raw CDN ignores request cache headers and serves an edge copy for several
+     * minutes, which is long enough for the release JSON and CHANGELOG.md to disagree about
+     * the newest version. A per-minute key bypasses that without defeating caching entirely.
+     */
+    private fun cacheBusted(url: String): String {
+        val minute = System.currentTimeMillis() / 60_000L
+        return if ('?' in url) "$url&t=$minute" else "$url?t=$minute"
     }
 
     /**
@@ -256,10 +268,10 @@ class MorpheAPI(
      * Fetches manager metadata from the static JSON endpoint (bypasses GitHub API rate limits).
      *
      * [branch] determines which JSON URL is used (`dev` → prerelease, anything else → stable).
-     * Cache-Control: no-cache ensures we never get a stale CDN response.
+     * The request is cache busted because the raw CDN serves stale copies of freshly pushed files.
      */
     private suspend fun getManagerFromJson(branch: String): APIResponse<MorpheAsset> {
-        val url = if (branch == "dev") MANAGER_PRERELEASE_JSON_URL else MANAGER_RELEASE_JSON_URL
+        val url = cacheBusted(if (branch == "dev") MANAGER_PRERELEASE_JSON_URL else MANAGER_RELEASE_JSON_URL)
         return when (val response = client.request<ManagerReleaseInfo> {
             url(url)
             header("Cache-Control", "no-cache")
@@ -291,6 +303,9 @@ class MorpheAPI(
      * Update sources:
      *  - Primary: static JSON file ([USE_MANAGER_DIRECT_JSON] == true)
      *  - Fallback: GitHub Releases API
+     *
+     * A newer version is reported only once its APK is downloadable, so a release that is
+     * already announced but still uploading is treated as if it did not exist yet.
      */
     suspend fun getAppUpdate(): MorpheAsset? {
         val usePrereleases = prefs.useManagerPrereleases.get()
@@ -307,9 +322,18 @@ class MorpheAPI(
         }.getOrNull()
 
         // Return only if the remote version is strictly newer than what's installed
-        return candidate?.takeIf {
+        val update = candidate?.takeIf {
             versionWeight(it.version.removePrefix("v")) > currentWeight
+        } ?: return null
+
+        // Only a definitive "not there" hides the update: a check that could not run at all
+        // must not keep a real release from being offered
+        if (client.isReachable(update.downloadUrl) == false) {
+            Log.d(tag, "Manager update ${update.version} is announced but its APK is not downloadable yet")
+            return null
         }
+
+        return update
     }
 
     /**
@@ -449,7 +473,7 @@ class MorpheAPI(
         path: String = "CHANGELOG.md",
         stopAfterFirstStable: Boolean = false
     ): List<ChangelogEntry> {
-        val url = config.rawFileUrl(branch, path)
+        val url = cacheBusted(config.rawFileUrl(branch, path))
         Log.d(tag, "fetchChangelog: $url")
         return when (val r = client.request<String> {
             url(url)

@@ -17,17 +17,28 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
+import app.morphe.manager.domain.apk.InstalledApkInfo
+import app.morphe.manager.domain.apk.LocalApkSources
+import app.morphe.manager.domain.apk.SavedApkInfo
 import app.morphe.manager.domain.batch.*
-import app.morphe.manager.domain.repository.InstalledAppRepository
+import app.morphe.manager.domain.bundles.AppVersionCatalog
+import app.morphe.manager.domain.bundles.BundleRecommendation
+import app.morphe.manager.domain.bundles.BundledAppTarget
 import app.morphe.manager.domain.manager.DownloadUrlResolver
+import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.patcher.patch.PatchLockState
+import app.morphe.manager.patcher.patch.SELECTION_APK_ARCHITECTURE
+import app.morphe.manager.patcher.patch.installerTypeFor
 import app.morphe.manager.util.*
+import app.morphe.patcher.patch.InstallerType
 import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
 import app.morphe.manager.util.PatchSelectionUtils.togglePatch
 import app.morphe.manager.util.PatchSelectionUtils.updateOption
+import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -48,7 +59,8 @@ class BatchPatchEdit(
     val bundles: List<PatchBundleInfo.Scoped>,
     val savedSelection: PatchSelection,
     val newPatches: Map<Int, Set<String>>,
-    initialOptions: Options
+    initialOptions: Options,
+    private val installerType: InstallerType
 ) {
     var selection by mutableStateOf(savedSelection)
         private set
@@ -73,22 +85,37 @@ class BatchPatchEdit(
 
     val hasMultipleBundles get() = selection.count { (_, patches) -> patches.isNotEmpty() } > 1
 
+    /** Lock state of [patch] for the install target this queue runs against. */
+    fun lockStateOf(patch: PatchInfo) = patch.lockState(installerType, SELECTION_APK_ARCHITECTURE)
+
     fun togglePatch(bundleUid: Int, patchName: String) {
+        // Locked patches are toggled only through availability rules; no-op here
+        val patch = bundles.firstOrNull { it.uid == bundleUid }
+            ?.patches
+            ?.firstOrNull { it.name == patchName }
+        if (patch != null && lockStateOf(patch) != PatchLockState.NONE) return
+
         selection = selection.togglePatch(bundleUid, patchName)
     }
 
     fun selectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) =
-        replaceBundle(bundleUid, patches.mapTo(mutableSetOf()) { (patch, _) -> patch.name })
+        replaceBundle(
+            bundleUid,
+            patches.filterNot { (patch, _) -> lockStateOf(patch) == PatchLockState.LOCKED_OFF }
+                .mapTo(mutableSetOf()) { (patch, _) -> patch.name }
+        )
 
     fun deselectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
-        val removed = patches.mapTo(mutableSetOf()) { (patch, _) -> patch.name }
+        val removed = patches
+            .filterNot { (patch, _) -> lockStateOf(patch) == PatchLockState.LOCKED_ON }
+            .mapTo(mutableSetOf()) { (patch, _) -> patch.name }
         replaceBundle(bundleUid, selection[bundleUid].orEmpty() - removed)
     }
 
     fun resetToDefault(bundleUid: Int, allPatches: List<Pair<PatchInfo, Boolean>>) =
         replaceBundle(
             bundleUid,
-            allPatches.filter { (patch, _) -> patch.include }
+            allPatches.filter { (patch, _) -> patch.defaultSelected(installerType, SELECTION_APK_ARCHITECTURE) }
                 .mapTo(mutableSetOf()) { (patch, _) -> patch.name }
         )
 
@@ -127,6 +154,8 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
     private val patchBundleRepository: PatchBundleRepository by inject()
     private val patchSelectionRepository: PatchSelectionRepository by inject()
     private val downloadUrlResolver: DownloadUrlResolver by inject()
+    private val versionCatalog: AppVersionCatalog by inject()
+    private val localApkSources: LocalApkSources by inject()
 
     val state = coordinator.state
 
@@ -154,6 +183,59 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
     }
 
     /**
+     * Everything the APK availability dialog needs about one queued app: which versions the
+     * sources cover, and what is already on the device to patch from.
+     */
+    data class ApkChoice(
+        val item: BatchPatchItem,
+        val recommended: AppTarget?,
+        val compatible: List<BundledAppTarget>,
+        val recommendedByBundle: Map<Int, BundleRecommendation>,
+        val saved: SavedApkInfo?,
+        val installed: InstalledApkInfo?,
+        val installedOnDevice: Boolean,
+        val selectedVersion: AppTarget?
+    )
+
+    var apkChoice: ApkChoice? by mutableStateOf(null)
+        private set
+
+    fun beginApkChoice(item: BatchPatchItem) {
+        viewModelScope.launch {
+            val recommended = versionCatalog.recommendedVersions.first()[item.packageName]
+            val (onDevice, installed) = withContext(Dispatchers.IO) {
+                localApkSources.installed(item.packageName)
+            }
+
+            apkChoice = ApkChoice(
+                item = item,
+                recommended = recommended,
+                compatible = versionCatalog.compatibleVersions.first()[item.packageName].orEmpty(),
+                recommendedByBundle = versionCatalog.recommendedVersionsByBundle.first()[item.packageName].orEmpty(),
+                saved = withContext(Dispatchers.IO) { localApkSources.saved(item.packageName) },
+                installed = installed,
+                installedOnDevice = onDevice,
+                selectedVersion = recommended
+            )
+        }
+    }
+
+    fun selectApkVersion(target: AppTarget) {
+        apkChoice = apkChoice?.copy(selectedVersion = target)
+    }
+
+    fun cancelApkChoice() {
+        apkChoice = null
+    }
+
+    /** Keeps the APK already on hand, re-resolving in case the user switched between the two. */
+    fun useApkSource(preferInstalled: Boolean) {
+        val choice = apkChoice ?: return
+        apkChoice = null
+        coordinator.useSource(choice.item.packageName, preferInstalled)
+    }
+
+    /**
      * App the download instructions are open for, with the best URL known so far.
      *
      * The API redirect takes a moment, so the unresolved search URL is published first and
@@ -164,14 +246,16 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
     var apkSearch: ApkSearch? by mutableStateOf(null)
         private set
 
-    fun beginApkSearch(item: BatchPatchItem) {
+    /** [version] is what the user picked in the availability dialog, not just the recommended one. */
+    fun beginApkSearch(item: BatchPatchItem, version: String?) {
+        apkChoice = null
         apkSearch = ApkSearch(
             item = item,
-            url = downloadUrlResolver.apiSearchUrl(item.packageName, item.suggestedVersion)
+            url = downloadUrlResolver.apiSearchUrl(item.packageName, version)
         )
         viewModelScope.launch {
             val resolved = withContext(Dispatchers.IO) {
-                downloadUrlResolver.resolve(item.packageName, item.suggestedVersion)
+                downloadUrlResolver.resolve(item.packageName, version)
             }
             apkSearch = apkSearch?.takeIf { it.item.packageName == item.packageName }?.copy(url = resolved)
         }
@@ -237,7 +321,10 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
                 bundles = bundles,
                 savedSelection = item.selection,
                 newPatches = newPatches,
-                initialOptions = item.options
+                initialOptions = item.options,
+                // The queue resolved its plan against one install target, so the editor has to
+                // lock patches by the same rules the run will be executed with
+                installerType = installerTypeFor(state.value?.useMount == true)
             )
         }
     }

@@ -101,7 +101,7 @@ fun AppearanceTabContent(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
-            .padding(horizontal = contentPadding, vertical = MorpheDefaults.ContentPadding)
+            .padding(horizontal = contentPadding, vertical = Defaults.ContentPadding)
     ) {
         LanguageSection(
             appLanguage = appLanguage,
@@ -154,8 +154,8 @@ fun AppearanceTabContent(
     // App card color dialog
     AnimatedVisibility(
         visible = showAppCardColorDialog.value && showAppCardColorSetting,
-        enter = MorpheAnimations.fadeIn,
-        exit = MorpheAnimations.fadeOut
+        enter = Animations.fadeIn,
+        exit = Animations.fadeOut
     ) {
         AppCardColorDialog(
             mode = appCardColorMode,
@@ -172,10 +172,10 @@ fun AppearanceTabContent(
     // Translation info dialog
     AnimatedVisibility(
         visible = showTranslationInfoDialog.value,
-        enter = MorpheAnimations.fadeIn,
-        exit = MorpheAnimations.fadeOut(if (showLanguageDialog.value) 0 else MorpheDefaults.ANIMATION_DURATION)
+        enter = Animations.fadeIn,
+        exit = Animations.fadeOut(if (showLanguageDialog.value) 0 else Defaults.ANIMATION_DURATION)
     ) {
-        MorpheDialogWithLinks(
+        AppDialogWithLinks(
             title = stringResource(R.string.settings_appearance_translations_info_title),
             message = stringResource(
                 R.string.settings_appearance_translations_info_text,
@@ -195,8 +195,8 @@ fun AppearanceTabContent(
     // Language picker dialog
     AnimatedVisibility(
         visible = showLanguageDialog.value,
-        enter = MorpheAnimations.fadeIn,
-        exit = MorpheAnimations.fadeOut
+        enter = Animations.fadeIn,
+        exit = Animations.fadeOut
     ) {
         LanguagePickerDialog(
             currentLanguage = appLanguage,
@@ -229,20 +229,20 @@ private fun LanguageSection(
             .find { it.code == appLanguage }
     }
 
-    Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)) {
         SectionTitle(
             text = stringResource(R.string.settings_appearance_app_language),
             icon = Icons.Outlined.Language
         )
 
-        SettingsGroup(modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)) {
+        SettingsGroup(modifier = Modifier.padding(bottom = Defaults.ContentPadding)) {
             SettingsItem(
                 onClick = onLanguageClick,
                 title = stringResource(R.string.settings_appearance_app_language_current),
                 subtitle = currentLanguage,
                 leadingContent = {
                     Box(
-                        modifier = Modifier.size(MorpheDefaults.IconSize),
+                        modifier = Modifier.size(Defaults.IconSize),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -280,7 +280,7 @@ private fun ThemeSection(
 
     Box(
         Modifier
-            .padding(bottom = MorpheDefaults.ContentPadding)
+            .padding(bottom = Defaults.ContentPadding)
             .fillMaxWidth()
             .then(
                 if (onSelectorPositioned != null || onSelectorScrollTarget != null)
@@ -297,7 +297,7 @@ private fun ThemeSection(
         )
     }
 
-    Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
+    Box(Modifier.padding(bottom = Defaults.ContentPadding).fillMaxWidth()) {
         ThemeStyleSelector(
             style = themeStyle,
             supportsDynamicColor = supportsDynamicColor,
@@ -307,10 +307,10 @@ private fun ThemeSection(
 
     AnimatedVisibility(
         visible = supportsPureBlack,
-        enter = MorpheAnimations.expandFadeEnter,
-        exit = MorpheAnimations.shrinkFadeExit
+        enter = Animations.expandFadeEnter,
+        exit = Animations.shrinkFadeExit
     ) {
-        SettingsGroup(modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)) {
+        SettingsGroup(modifier = Modifier.padding(bottom = Defaults.ContentPadding)) {
             SettingsSwitchItem(
                 title = stringResource(R.string.settings_appearance_pure_black),
                 subtitle = stringResource(R.string.settings_appearance_pure_black_description),
@@ -342,10 +342,10 @@ private fun ColorsSection(
     // Dynamic color derives the accent from the wallpaper, leaving nothing to pick here
     AnimatedVisibility(
         visible = themeStyle != ThemeStyle.MATERIAL_YOU,
-        enter = MorpheAnimations.expandFadeEnter,
-        exit = MorpheAnimations.shrinkFadeExit
+        enter = Animations.expandFadeEnter,
+        exit = Animations.shrinkFadeExit
     ) {
-        Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
+        Box(Modifier.padding(bottom = Defaults.ContentPadding).fillMaxWidth()) {
             AccentColorSelector(
                 selectedColorHex = accentColorHex,
                 onColorSelected = onAccentSelected,
@@ -356,15 +356,15 @@ private fun ColorsSection(
 
     AnimatedVisibility(
         visible = showAppCardColors,
-        enter = MorpheAnimations.expandFadeEnter,
-        exit = MorpheAnimations.shrinkFadeExit
+        enter = Animations.expandFadeEnter,
+        exit = Animations.shrinkFadeExit
     ) {
-        SettingsGroup(modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)) {
+        SettingsGroup(modifier = Modifier.padding(bottom = Defaults.ContentPadding)) {
             SettingsItem(
                 onClick = onAppCardColorsClick,
                 title = stringResource(R.string.settings_appearance_app_card_colors),
                 subtitle = stringResource(appCardColorMode.descriptionResId),
-                leadingContent = { MorpheIcon(icon = Icons.Outlined.Style) }
+                leadingContent = { ThemedIcon(icon = Icons.Outlined.Style) }
             )
         }
     }
@@ -387,7 +387,7 @@ private fun HomeScreenSection(
         icon = Icons.Outlined.Dashboard
     )
 
-    SettingsGroup(modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)) {
+    SettingsGroup(modifier = Modifier.padding(bottom = Defaults.ContentPadding)) {
         SettingsSwitchItem(
             title = stringResource(R.string.settings_appearance_greeting_phrases),
             subtitle = stringResource(R.string.settings_appearance_greeting_phrases_subtitle),
@@ -395,7 +395,7 @@ private fun HomeScreenSection(
             checked = showGreetingPhrases,
             onToggle = onGreetingPhrasesToggle
         )
-        MorpheSettingsDivider()
+        SettingsDivider()
         SettingsSwitchItem(
             title = stringResource(R.string.settings_appearance_sort_button),
             subtitle = stringResource(R.string.settings_appearance_sort_button_description),
@@ -403,7 +403,7 @@ private fun HomeScreenSection(
             checked = showSortButton,
             onToggle = onSortButtonToggle
         )
-        MorpheSettingsDivider()
+        SettingsDivider()
         SettingsSwitchItem(
             title = stringResource(R.string.settings_appearance_app_grouping),
             subtitle = stringResource(R.string.settings_appearance_app_grouping_description),
@@ -431,7 +431,7 @@ private fun BackgroundSection(
         icon = Icons.Outlined.Wallpaper
     )
 
-    Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
+    Box(Modifier.padding(bottom = Defaults.ContentPadding).fillMaxWidth()) {
         BackgroundSelector(
             selectedBackground = backgroundType,
             onBackgroundSelected = onBackgroundSelected,
@@ -442,10 +442,10 @@ private fun BackgroundSection(
 
     AnimatedVisibility(
         visible = backgroundType != BackgroundType.NONE,
-        enter = MorpheAnimations.expandFadeEnter,
-        exit = MorpheAnimations.shrinkFadeExit
+        enter = Animations.expandFadeEnter,
+        exit = Animations.shrinkFadeExit
     ) {
-        SettingsGroup(modifier = Modifier.padding(bottom = MorpheDefaults.ContentPadding)) {
+        SettingsGroup(modifier = Modifier.padding(bottom = Defaults.ContentPadding)) {
             SettingsSwitchItem(
                 title = stringResource(R.string.settings_appearance_parallax_effect),
                 subtitle = stringResource(R.string.settings_appearance_parallax_effect_description),
@@ -475,7 +475,7 @@ private fun AppIconSection() {
  */
 @Composable
 private fun SectionHeader(text: String, icon: ImageVector) {
-    Box(Modifier.padding(bottom = MorpheDefaults.ContentPadding).fillMaxWidth()) {
+    Box(Modifier.padding(bottom = Defaults.ContentPadding).fillMaxWidth()) {
         SectionTitle(text = text, icon = icon)
     }
 }

@@ -36,6 +36,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.screen.home.ApkAvailabilityDialog
 import app.morphe.manager.ui.screen.home.DownloadInstructionsDialog
 import app.morphe.manager.ui.screen.home.ExpertModeDialog
 import app.morphe.manager.ui.screen.home.ExpertPatchActions
@@ -150,6 +151,8 @@ fun BatchPatcherScreen(
         )
     }
 
+    val useExpertMode by prefs.useExpertMode.getAsState()
+
     // Opened straight from the actions that need it rather than by watching state: the target
     // can repeat, and a repeated value is not an event a keyed effect would fire on again
     val attachApkTo = { packageName: String ->
@@ -180,11 +183,38 @@ fun BatchPatcherScreen(
                 onResetOptions = edit::resetOptions
             ),
             savedPatches = edit.savedSelection,
+            lockStateOf = edit::lockStateOf,
             proceedText = stringResource(R.string.save),
             // The queue combines sources by design, and the tabs make it plain enough
             warnOnMultipleBundles = false,
             onDismiss = viewModel::cancelEdit,
             onProceed = viewModel::applyEdit
+        )
+    }
+
+    // The single-app flow's own APK question, pointed at a queued app. It carries the version
+    // list, so picking a specific or experimental version works here exactly as it does there
+    viewModel.apkChoice?.let { choice ->
+        ApkAvailabilityDialog(
+            appName = choice.item.appName,
+            recommendedVersion = choice.recommended,
+            compatibleVersions = choice.compatible,
+            recommendedBundleVersions = choice.recommendedByBundle,
+            selectedDownloadVersion = choice.selectedVersion,
+            onVersionSelect = viewModel::selectApkVersion,
+            usingMountInstall = false,
+            targetAppInstalled = choice.installedOnDevice,
+            isExpertMode = useExpertMode,
+            savedApkInfo = choice.saved,
+            installedApkInfo = choice.installed,
+            onDismiss = viewModel::cancelApkChoice,
+            onHaveApk = {
+                viewModel.cancelApkChoice()
+                attachApkTo(choice.item.packageName)
+            },
+            onNeedApk = { viewModel.beginApkSearch(choice.item, choice.selectedVersion?.version) },
+            onUseSaved = { viewModel.useApkSource(preferInstalled = false) },
+            onUseInstalled = { viewModel.useApkSource(preferInstalled = true) }
         )
     }
 
@@ -293,7 +323,6 @@ fun BatchPatcherScreen(
     }
 
     val listState = rememberLazyListState()
-    val useExpertMode by prefs.useExpertMode.getAsState()
     val activeRun = current?.activeRun
 
     // Patching an app looks exactly like a single run, with a queue counter on top
@@ -302,15 +331,15 @@ fun BatchPatcherScreen(
         // patcher fades in on its own to soften the switch
         val appear = remember { MutableTransitionState(false).apply { targetState = true } }
 
-        AnimatedVisibility(visibleState = appear, enter = MorpheAnimations.fadeIn) {
+        AnimatedVisibility(visibleState = appear, enter = Animations.fadeIn) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .statusBarsPadding()
             ) {
-                BatchRunHeader(state = current)
-
                 if (activeRun == null) {
+                    BatchRunHeader(state = current)
+
                     // Between apps: the previous run is over and the next has not started, so
                     // there are no live steps to show
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -324,6 +353,7 @@ fun BatchPatcherScreen(
                         patchesProgress = activeRun.patchesProgress,
                         patchProgress = activeRun,
                         miniGameState = miniGameState,
+                        queueHeader = { BatchRunHeader(state = current) },
                         onCancelClick = { showCancelDialog = true },
                         onHomeClick = onBackClick
                     )
@@ -334,6 +364,7 @@ fun BatchPatcherScreen(
                         patchesProgress = activeRun.patchesProgress,
                         patchProgress = activeRun,
                         showLongStepWarning = longStepWarning,
+                        queueHeader = { BatchRunHeader(state = current) },
                         onCancelClick = { showCancelDialog = true },
                         onHomeClick = onBackClick
                     )
@@ -355,7 +386,7 @@ fun BatchPatcherScreen(
         it.state == BatchItemState.FAILED || it.state == BatchItemState.CANCELLED
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = close,
         title = stringResource(R.string.batch_patch_title),
         titleTrailingContent = if (current?.phase == BatchPhase.FINISHED && hasUnfinished) {
@@ -386,7 +417,7 @@ fun BatchPatcherScreen(
             LazyColumn(
                 state = listState,
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
             ) {
                 if (current == null) return@LazyColumn
 
@@ -406,14 +437,7 @@ fun BatchPatcherScreen(
                     BatchItemCard(
                         item = item,
                         editable = current.phase == BatchPhase.PREFLIGHT,
-                        onAttach = { attachApkTo(item.packageName) },
-                        // Offered whenever downloading would get a different file than the one
-                        // on hand, which also covers a saved original the sources have moved
-                        // past. No point when there is nothing to patch with at all
-                        onFindApk = item
-                            .takeIf { it.state != BatchItemState.NO_PATCHES }
-                            ?.takeIf { it.suggestedVersion != null && it.suggestedVersion != it.version }
-                            ?.let { { viewModel.beginApkSearch(item) } },
+                        onSelectApk = { viewModel.beginApkChoice(item) },
                         onToggleExcluded = { viewModel.toggleExcluded(item.packageName) },
                         onForceVersion = { viewModel.forceVersion(item.packageName) },
                         // Simple mode never exposes individual patches, and the options edited
@@ -451,7 +475,7 @@ fun BatchPatcherScreen(
         }
     }
 
-    MorpheOverlay(visible = !closing && (current == null || current.phase == BatchPhase.PLANNING)) {
+    Overlay(visible = !closing && (current == null || current.phase == BatchPhase.PLANNING)) {
         PulsingLogoWithCaption(caption = stringResource(R.string.batch_patch_planning))
     }
 }
@@ -466,7 +490,7 @@ private fun BatchDialogButtons(
     onClose: () -> Unit
 ) {
     when (state?.phase) {
-        BatchPhase.PREFLIGHT -> MorpheDialogButtonRow(
+        BatchPhase.PREFLIGHT -> AppDialogButtonRow(
             primaryText = stringResource(R.string.batch_patch_start),
             primaryIcon = Icons.Outlined.PlayArrow,
             onPrimaryClick = onStart,
@@ -476,7 +500,7 @@ private fun BatchDialogButtons(
         )
 
         BatchPhase.FINISHED -> if (canInstall) {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.batch_patch_install_all),
                 primaryIcon = Icons.Outlined.InstallMobile,
                 onPrimaryClick = onInstallAll,
@@ -484,13 +508,13 @@ private fun BatchDialogButtons(
                 onSecondaryClick = onClose
             )
         } else {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.done),
                 onPrimaryClick = onClose
             )
         }
 
-        else -> MorpheDialogButtonRow(
+        else -> AppDialogButtonRow(
             primaryText = stringResource(android.R.string.cancel),
             onPrimaryClick = onClose
         )
@@ -503,14 +527,14 @@ private fun BatchRunHeader(state: BatchRunState) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = MorpheDefaults.ContentPadding)
-            .padding(top = MorpheDefaults.ContentPaddingSmall),
+            .padding(horizontal = Defaults.ContentPadding)
+            .padding(top = Defaults.ContentPaddingSmall),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         AnimatedContent(
             targetState = state.processed to state.total,
-            transitionSpec = MorpheAnimations.counterTransitionSpec,
+            transitionSpec = Animations.counterTransitionSpec,
             label = "batch_run_counter"
         ) { (processed, total) ->
             Text(
@@ -555,12 +579,12 @@ private fun BatchStatusCard(state: BatchRunState) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(MorpheDefaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+                .padding(Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
         ) {
             AnimatedContent(
                 targetState = summary,
-                transitionSpec = MorpheAnimations.counterTransitionSpec,
+                transitionSpec = Animations.counterTransitionSpec,
                 label = "batch_summary"
             ) { text ->
                 Text(
@@ -624,8 +648,7 @@ private fun BatchPolicyCard(
 private fun BatchItemCard(
     item: BatchPatchItem,
     editable: Boolean,
-    onAttach: () -> Unit,
-    onFindApk: (() -> Unit)? = null,
+    onSelectApk: () -> Unit,
     onToggleExcluded: () -> Unit,
     onForceVersion: () -> Unit,
     onEditPatches: (() -> Unit)? = null,
@@ -645,8 +668,8 @@ private fun BatchItemCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(MorpheDefaults.ContentPadding),
-                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+                    .padding(Defaults.ContentPadding),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 AppIcon(
@@ -659,30 +682,35 @@ private fun BatchItemCard(
                     modifier = Modifier.weight(1f),
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = item.appName,
-                            style = MaterialTheme.typography.bodyLarge,
-                            fontWeight = FontWeight.Medium,
-                            color = LocalDialogTextColor.current,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.weight(1f, fill = false)
-                        )
+                    // The name gets a line to itself: badges beside it grow with translation
+                    // and would push it out of the card entirely
+                    Text(
+                        text = item.appName,
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Medium,
+                        color = LocalDialogTextColor.current,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    StatusBadgeRow {
+                        // The queue takes whatever APK is on hand and never stops to warn, so
+                        // the caveat the single-app flow raises a dialog for is tagged here
+                        if (item.experimentalVersion) {
+                            VersionTagBadge(VersionTag.Experimental)
+                        }
+
                         // Once installing has been tried, its outcome is the newer and more
                         // useful fact about the app than how the patching went
                         when (item.installOutcome) {
-                            BatchInstallOutcome.INSTALLED -> PillBadge(
+                            BatchInstallOutcome.INSTALLED -> StatusBadge(
                                 text = stringResource(R.string.installed),
-                                style = InfoBadgeStyle.Success
+                                tone = SemanticTone.Success
                             )
 
-                            BatchInstallOutcome.FAILED -> PillBadge(
+                            BatchInstallOutcome.FAILED -> StatusBadge(
                                 text = stringResource(R.string.batch_patch_install_failed),
-                                style = InfoBadgeStyle.Error
+                                tone = SemanticTone.Error
                             )
 
                             null -> BatchStateBadge(item.state)
@@ -720,33 +748,23 @@ private fun BatchItemCard(
 
             AnimatedVisibility(
                 visible = editable,
-                enter = MorpheAnimations.expandFadeEnter,
-                exit = MorpheAnimations.shrinkFadeExit
+                enter = Animations.expandFadeEnter,
+                exit = Animations.shrinkFadeExit
             ) {
                 Column {
-                    MorpheSettingsDivider()
+                    SettingsDivider()
                     ActionPillRow(
                         modifier = Modifier.padding(
-                            horizontal = MorpheDefaults.ContentPadding,
-                            vertical = MorpheDefaults.ItemSpacing
+                            horizontal = Defaults.ContentPadding,
+                            vertical = Defaults.ItemSpacing
                         )
                     ) {
-                        if (onFindApk != null) {
-                            val findLabel = stringResource(R.string.batch_patch_find_apk)
-                            ActionPillButton(
-                                onClick = onFindApk,
-                                icon = Icons.Outlined.Search,
-                                contentDescription = findLabel,
-                                tooltip = findLabel
-                            )
-                        }
-
-                        val attachLabel = stringResource(R.string.batch_patch_attach_apk)
+                        val selectApkLabel = stringResource(R.string.home_select_apk_title)
                         ActionPillButton(
-                            onClick = onAttach,
+                            onClick = onSelectApk,
                             icon = Icons.Outlined.FileOpen,
-                            contentDescription = attachLabel,
-                            tooltip = attachLabel
+                            contentDescription = selectApkLabel,
+                            tooltip = selectApkLabel
                         )
 
                         if (onEditPatches != null) {
@@ -806,15 +824,15 @@ private fun BatchItemCard(
 
             AnimatedVisibility(
                 visible = hasResultActions,
-                enter = MorpheAnimations.expandFadeEnter,
-                exit = MorpheAnimations.shrinkFadeExit
+                enter = Animations.expandFadeEnter,
+                exit = Animations.shrinkFadeExit
             ) {
                 Column {
-                    MorpheSettingsDivider()
+                    SettingsDivider()
                     ActionPillRow(
                         modifier = Modifier.padding(
-                            horizontal = MorpheDefaults.ContentPadding,
-                            vertical = MorpheDefaults.ItemSpacing
+                            horizontal = Defaults.ContentPadding,
+                            vertical = Defaults.ItemSpacing
                         )
                     ) {
                         if (failed) {
@@ -912,17 +930,17 @@ private fun itemDetails(item: BatchPatchItem): String = when (item.state) {
 /** Compact status pill, sized to its text so the app name keeps the rest of the row. */
 @Composable
 private fun BatchStateBadge(state: BatchItemState) {
-    val (labelRes, style) = when (state) {
-        BatchItemState.READY -> R.string.ready to InfoBadgeStyle.Primary
-        BatchItemState.RUNNING -> R.string.patching to InfoBadgeStyle.Primary
-        BatchItemState.SUCCEEDED -> R.string.done to InfoBadgeStyle.Success
-        BatchItemState.FAILED -> R.string.failed to InfoBadgeStyle.Error
-        BatchItemState.CANCELLED -> R.string.cancelled to InfoBadgeStyle.Default
-        BatchItemState.EXCLUDED -> R.string.excluded to InfoBadgeStyle.Default
-        BatchItemState.NEEDS_APK -> R.string.batch_patch_state_no_apk to InfoBadgeStyle.Error
-        BatchItemState.VERSION_MISMATCH -> R.string.version to InfoBadgeStyle.Warning
-        BatchItemState.NO_PATCHES -> R.string.batch_patch_state_no_patches to InfoBadgeStyle.Error
+    val (labelRes, tone) = when (state) {
+        BatchItemState.READY -> R.string.ready to SemanticTone.Primary
+        BatchItemState.RUNNING -> R.string.patching to SemanticTone.Primary
+        BatchItemState.SUCCEEDED -> R.string.done to SemanticTone.Success
+        BatchItemState.FAILED -> R.string.failed to SemanticTone.Error
+        BatchItemState.CANCELLED -> R.string.cancelled to SemanticTone.Neutral
+        BatchItemState.EXCLUDED -> R.string.excluded to SemanticTone.Neutral
+        BatchItemState.NEEDS_APK -> R.string.batch_patch_state_no_apk to SemanticTone.Error
+        BatchItemState.VERSION_MISMATCH -> R.string.version to SemanticTone.Warning
+        BatchItemState.NO_PATCHES -> R.string.batch_patch_state_no_patches to SemanticTone.Error
     }
-    PillBadge(text = stringResource(labelRes), style = style)
+    StatusBadge(text = stringResource(labelRes), tone = tone)
 }
 

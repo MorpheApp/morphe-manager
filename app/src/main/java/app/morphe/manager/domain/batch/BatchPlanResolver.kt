@@ -9,6 +9,7 @@ import android.content.pm.PackageInfo
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.bundles.AppVersionCatalog
+import app.morphe.manager.domain.bundles.AppVersionHints
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
@@ -18,14 +19,16 @@ import app.morphe.manager.domain.repository.PatchOptionsRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
+import app.morphe.manager.patcher.patch.SELECTION_APK_ARCHITECTURE
+import app.morphe.manager.patcher.patch.installerTypeFor
 import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.util.AppDataResolver
-import app.morphe.patcher.patch.AppTarget
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.PatchSelection
+import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
 import app.morphe.manager.util.PatchSelectionUtils.filterGmsCore
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
 import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
@@ -62,8 +65,8 @@ class BatchPlanResolver(
     /**
      * Resolves every package in parallel and returns the items in the requested order.
      *
-     * @param useMount Mount installs replace the stock APK in place, so GmsCore patches are
-     *   dropped from every selection just like the single-app flow does.
+     * @param useMount Picks the install target every selection is resolved against, so patches
+     *   that declare themselves unavailable for it are dropped just like the single-app flow does.
      */
     suspend fun resolve(
         packageNames: List<String>,
@@ -71,10 +74,10 @@ class BatchPlanResolver(
     ): List<BatchPatchItem> = coroutineScope {
         // Built once for the whole plan: it is derived from every patch of every source, and
         // resolving it per app would repeat that work for each one of them
-        val recommended = versionCatalog.recommendedVersions.first()
+        val hints = versionCatalog.hints()
         packageNames
             .distinct()
-            .map { packageName -> async { resolve(packageName, useMount, recommended = recommended) } }
+            .map { packageName -> async { resolve(packageName, useMount, hints = hints[packageName]) } }
             .awaitAll()
     }
 
@@ -86,15 +89,16 @@ class BatchPlanResolver(
         packageName: String,
         useMount: Boolean,
         attachedFile: File? = null,
-        recommended: Map<String, AppTarget>? = null,
-        allowIncompatible: Boolean = false
+        hints: AppVersionHints? = null,
+        allowIncompatible: Boolean = false,
+        preferInstalled: Boolean = false
     ): BatchPatchItem = withContext(Dispatchers.IO) {
         val appName = resolveAppName(packageName)
-        val suggested = recommended?.get(packageName)?.version
-            ?: versionCatalog.recommendedVersion(packageName)
+        val versions = hints ?: versionCatalog.hints(packageName)
+        val suggested = versions?.recommendedVersion
 
         val source = try {
-            attachedFile?.let { readAttachedFile(it) } ?: findSource(packageName)
+            attachedFile?.let { readAttachedFile(it) } ?: findSource(packageName, preferInstalled)
         } catch (e: Exception) {
             Log.e(TAG, "Failed to resolve APK source for $packageName", e)
             null
@@ -130,7 +134,15 @@ class BatchPlanResolver(
             }
         }
 
-        buildItem(packageName, appName, source, useMount, suggested, allowIncompatible)
+        buildItem(
+            packageName = packageName,
+            appName = appName,
+            source = source,
+            useMount = useMount,
+            suggested = suggested,
+            experimental = source.version in versions?.experimentalVersions.orEmpty(),
+            forceIncompatible = allowIncompatible
+        )
     }
 
     /**
@@ -175,6 +187,18 @@ class BatchPlanResolver(
         ).copy(forceVersionMismatch = item.forceVersionMismatch)
 
     /**
+     * Re-resolves an app against the APK the user picked in the availability dialog. Only the
+     * order of preference changes: the file itself is still discovered the usual way.
+     */
+    suspend fun useSource(item: BatchPatchItem, useMount: Boolean, preferInstalled: Boolean): BatchPatchItem =
+        resolve(
+            packageName = item.packageName,
+            useMount = useMount,
+            allowIncompatible = item.forceVersionMismatch,
+            preferInstalled = preferInstalled
+        ).copy(forceVersionMismatch = item.forceVersionMismatch)
+
+    /**
      * Re-resolves an app the user accepted an unsupported version for, this time keeping the
      * patches that declare a different version.
      */
@@ -192,6 +216,7 @@ class BatchPlanResolver(
         source: BatchApkSource,
         useMount: Boolean,
         suggested: String?,
+        experimental: Boolean,
         forceIncompatible: Boolean
     ): BatchPatchItem {
         val bundles = patchBundleRepository
@@ -205,31 +230,37 @@ class BatchPlanResolver(
         val hasIncompatible = bundles.any { it.incompatible.isNotEmpty() }
         val hasUniversal = bundles.any { it.universal.isNotEmpty() }
 
-        fun noPatches(contributing: List<PatchBundleInfo.Scoped> = emptyList()) = BatchPatchItem(
+        val versionMismatch = !hasCompatible && hasIncompatible && !allowIncompatible
+
+        /**
+         * Nothing to run with. Which of the two reasons it is matters: an app whose patches
+         * simply declare other versions still has a way forward, and calling that "no patches"
+         * would hide both the reason and the buttons that fix it.
+         */
+        fun blocked(contributing: List<PatchBundleInfo.Scoped> = emptyList()) = BatchPatchItem(
             packageName = packageName,
             appName = appName,
             source = source,
             selection = emptyMap(),
             options = emptyMap(),
             bundles = contributing.map { it.toRef() },
-            state = BatchItemState.NO_PATCHES
+            experimentalVersion = experimental,
+            suggestedVersion = suggested,
+            state = if (versionMismatch) BatchItemState.VERSION_MISMATCH else BatchItemState.NO_PATCHES
         )
 
-        if (!hasCompatible && !hasIncompatible && !hasUniversal) return noPatches()
+        if (!hasCompatible && !hasIncompatible && !hasUniversal) return blocked()
 
         // Every source that has something to contribute is used, the same way the single-app
         // flow merges them. Picking just one would silently drop patches the user relies on
         val contributing = bundles.filter { it.patchSequence(allowIncompatible).any() }
-        if (contributing.isEmpty()) return noPatches()
+        if (contributing.isEmpty()) return blocked()
 
-        val selection = resolveSelection(packageName, contributing, allowIncompatible)
-            .let { if (useMount) it.filterGmsCore() else it }
+        val selection = resolveSelection(packageName, contributing, allowIncompatible, useMount)
 
-        if (selection.values.sumOf { it.size } == 0) return noPatches(contributing)
+        if (selection.values.sumOf { it.size } == 0) return blocked(contributing)
 
         val options = resolveOptions(packageName, contributing)
-
-        val versionMismatch = !hasCompatible && hasIncompatible && !allowIncompatible
 
         return BatchPatchItem(
             packageName = packageName,
@@ -238,6 +269,7 @@ class BatchPlanResolver(
             selection = selection,
             options = options,
             bundles = contributing.map { it.toRef() },
+            experimentalVersion = experimental,
             suggestedVersion = suggested,
             state = if (versionMismatch) BatchItemState.VERSION_MISMATCH else BatchItemState.READY
         )
@@ -252,13 +284,16 @@ class BatchPlanResolver(
 
     /**
      * Mirrors the single-app selection rules across every contributing bundle: a validated
-     * saved selection wins, otherwise the bundle defaults (`include = true`) are used.
+     * saved selection wins, otherwise the bundle defaults are used. Whichever selection is
+     * reached, the patches' own availability for the install target has the final say.
      */
     private suspend fun resolveSelection(
         packageName: String,
         bundles: List<PatchBundleInfo.Scoped>,
-        allowIncompatible: Boolean
+        allowIncompatible: Boolean,
+        useMount: Boolean
     ): PatchSelection {
+        val installerType = installerTypeFor(useMount)
         val uids = bundles.mapTo(mutableSetOf()) { it.uid }
         val patchesByName = bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
         val saved = patchSelectionRepository.getAllSelectionsForPackage(packageName)
@@ -271,21 +306,38 @@ class BatchPlanResolver(
                 val seen = patchSelectionRepository.getSeenPatches(packageName, bundle.uid)
                 val known = seen ?: saved[bundle.uid] ?: emptySet()
 
-                // Patches added to the bundle since the last run follow their include default,
+                // Patches added to the bundle since the last run follow their own default,
                 // the same rule the expert dialog applies when it merges new patches in
                 val newDefaults = bundle.patches
-                    .filter { it.name !in known && it.include }
+                    .filter {
+                        it.name !in known && it.defaultSelected(installerType, SELECTION_APK_ARCHITECTURE)
+                    }
                     .mapTo(mutableSetOf()) { it.name }
 
                 bundle.uid to (validated[bundle.uid].orEmpty() + newDefaults)
             }.filterValues { it.isNotEmpty() }
 
-            if (merged.isNotEmpty()) return merged
+            if (merged.isNotEmpty()) {
+                return merged
+                    .applyAvailability(installerType, SELECTION_APK_ARCHITECTURE, patchesByName)
+                    .applyLegacyMountRules(useMount)
+            }
         }
 
-        return bundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
+        return bundles
+            .toPatchSelection(allowIncompatible) { _, patch ->
+                patch.defaultSelected(installerType, SELECTION_APK_ARCHITECTURE)
+            }
             .filterValues { it.isNotEmpty() }
+            .applyAvailability(installerType, SELECTION_APK_ARCHITECTURE, patchesByName)
+            .applyLegacyMountRules(useMount)
     }
+
+    // Safety net for bundles that have not adopted the availability API
+    // TODO: Drop this fallback together with PatchSelectionUtils.filterGmsCore
+    @Suppress("DEPRECATION")
+    private fun PatchSelection.applyLegacyMountRules(useMount: Boolean): PatchSelection =
+        if (useMount) filterGmsCore() else this
 
     /**
      * Expert mode stores options per bundle in the database, simple mode derives them from the
@@ -356,7 +408,10 @@ class BatchPlanResolver(
      * unpatched and already on disk, then the installed APK when it still looks like the
      * stock app.
      */
-    private suspend fun findSource(packageName: String): BatchApkSource? {
+    private suspend fun findSource(packageName: String, preferInstalled: Boolean): BatchApkSource? {
+        if (preferInstalled) {
+            installedSource(packageName)?.let { return it }
+        }
         savedOriginalSource(packageName)?.let { return it }
         return installedSource(packageName)
     }

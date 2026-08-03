@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">İncelemek ve kaldırmak için dokunun</string>
     <string name="home_metadata_errors_title">Bazı yama kaynakları kullanılamıyor</string>
     <string name="home_metadata_errors_subtitle">Kaynakları incelemek için dokunun</string>
+    <string name="home_outdated_manager_title">Morphe güncel değil</string>
+    <string name="home_outdated_manager_subtitle">Bazı yama kaynaklarının daha yeni bir sürümü gerekiyor</string>
     <string name="home_metered_skipped_title">Mobil veride güncellemeler duraklatıldı</string>
     <string name="home_metered_skipped_subtitle">Mobil veride güncellemeleri etkinleştirmek için dokunun</string>
     <string name="home_update_error">Güncelleme başarısız</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Metadata Yok</string>
     <string name="sources_management_metadata_unavailable_hint">Uzak metadata dosyası kullanılamıyor. Yüklü paketle yamalama hala çalışır, ancak bu kaynak için otomatik güncelleme devre dışı bırakıldı</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Yama paketi indirilemedi. Kaynak URL\'si yanlış olabilir veya dosya mevcut olmayabilir</string>
+    <string name="sources_management_outdated_manager_badge">Morphe\'yi güncelleyin</string>
+    <string name="sources_management_outdated_manager_hint">Bu kaynak, %1$s yama programı için oluşturulmuş, ancak Morphe %2$s, %3$s yama programını içeriyor. Bunu kullanmak için Morphe\'yi güncelleyin</string>
     <string name="sources_management_source_enabled">Kaynak etkin</string>
     <string name="sources_management_source_disabled">Kaynak devre dışı</string>
     <string name="sources_management_source_updating">Kaynak güncelleniyor</string>
@@ -250,6 +254,11 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="home_dialog_wrong_package_description">Seçilen APK, yamalamak istediğiniz uygulama için değil</string>
     <string name="home_dialog_expected_package">Beklenen paket:</string>
     <string name="home_dialog_selected_package">Seçilen paket:</string>
+    <string name="home_dialog_orphaned_install_title">Önceki kopya geride kaldı</string>
+    <string name="home_dialog_orphaned_install_description">Yama paket adını değiştirdi, bu nedenle daha önce yamaladığınız kopya ayrı bir uygulama olarak hala yüklü</string>
+    <string name="home_dialog_orphaned_install_warning">Artık izlenmiyor ve yama güncellemeleri almayacak</string>
+    <string name="home_dialog_orphaned_install_uninstall">Kaldırılıyor</string>
+    <string name="home_dialog_orphaned_install_keep">Sakla</string>
     <string name="home_outdated_patches_dialog_title">Yamalar eskimiş olabilir</string>
     <string name="home_outdated_patches_dialog_message">Mobil veri etkin ve yama güncellemeleri devre dışı bırakıldı</string>
     <string name="home_outdated_patches_dialog_warning">Eskimiş yamaları kullanmak uygulamanın bozulmasına neden olabilir</string>
@@ -323,8 +332,10 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="batch_patch_source_installed">Kurulu uygulama</string>
     <string name="batch_patch_source_file">Ekli dosya</string>
     <string name="batch_patch_source_unavailable">APK hazırlanmadı</string>
+    <string name="batch_patch_find_apk">APK\'yı Bul</string>
     <string name="batch_patch_attach_apk">APK ekle</string>
     <string name="batch_patch_force_version">Yine de yamala</string>
+    <string name="batch_patch_force_version_done">Yine de kuyruğa eklendi, diğer sürümler için yapılan yamalar uygulamayı bozabilir</string>
     <string name="batch_patch_edit_patches">Yamaları seç</string>
     <string name="batch_patch_state_no_apk">APK yok</string>
     <string name="batch_patch_state_no_patches">Yama yok</string>
@@ -386,6 +397,8 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="patcher_error_dialog_app_info">Uygulama bilgisi</string>
     <string name="patcher_tab_logs">Patcher günlükleri</string>
     <string name="patcher_tab_game">Oyunlar</string>
+    <string name="patcher_logs_waiting">Log çıktısı bekleniyor…</string>
+    <string name="patcher_logs_lost">Log çıktısı uygulama yeniden başlatıldığında korunmaz</string>
     <string name="patcher_long_step_warning">Bu adım biraz zaman alabilir. Lütfen bekleyin…</string>
     <string name="patcher_installing_subtitle">Neredeyse hazırız! 🎸</string>
     <string name="patcher_success_title">Tamamlandı! 🎉</string>
@@ -1087,6 +1100,7 @@ Ayrıntılar: %2$s"</string>
     <string name="install_update_manager_failed">Güncelleme yüklenemedi</string>
     <string name="installing_manager_update">Güncelleme yükleniyor…</string>
     <string name="downloading_manager_update">Güncelleme indiriliyor…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Güncelleme indirilemedi: %s</string>
     <string name="failed_to_check_updates">Güncellemeler kontrol edilemedi: %s</string>
     <string name="failed_to_download_update">Güncelleme indirilemedi: %s</string>

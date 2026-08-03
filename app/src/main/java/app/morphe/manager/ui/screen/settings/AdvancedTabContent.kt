@@ -88,8 +88,8 @@ fun AdvancedTabContent(
             .fillMaxSize()
             .verticalScroll(scrollState)
             .animateContentSize()
-            .padding(horizontal = contentPadding, vertical = MorpheDefaults.ContentPadding),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            .padding(horizontal = contentPadding, vertical = Defaults.ContentPadding),
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
     ) {
         // Updates section
         SectionTitle(
@@ -143,7 +143,7 @@ fun AdvancedTabContent(
             label = "expert_mode_crossfade"
         ) { expertMode ->
             if (expertMode) {
-                Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
+                Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)) {
                     SettingsGroup {
                         // GitHub PAT
                         GitHubPatSettingsItem(
@@ -154,7 +154,7 @@ fun AdvancedTabContent(
                             }
                         )
 
-                        MorpheSettingsDivider()
+                        SettingsDivider()
 
                         // Strip unused native libraries + filter split APKs for device
                         SettingsSwitchItem(
@@ -170,16 +170,15 @@ fun AdvancedTabContent(
 
                     // Expert mode notice shown once after enabling
                     if (showExpertModeNotice) {
-                        InfoBadge(
+                        Notice(
                             icon = Icons.Outlined.Info,
                             text = stringResource(R.string.settings_advanced_patch_options_expert_mode_notice),
-                            style = InfoBadgeStyle.Warning,
-                            isExpanded = true
+                            tone = SemanticTone.Warning
                         )
                     }
                 }
             } else {
-                Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
+                Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)) {
                     // Patch Options (Simple mode only)
                     SectionTitle(
                         text = stringResource(R.string.settings_advanced_patch_options),
@@ -205,11 +204,11 @@ private fun ExpertModeConfirmationDialog(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_advanced_expert_mode_dialog_title),
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.enable),
                 onPrimaryClick = onConfirm,
                 isPrimaryDestructive = true,

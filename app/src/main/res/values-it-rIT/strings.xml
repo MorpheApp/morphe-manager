@@ -23,6 +23,8 @@ Nessuna patch disponibile</string>
     <string name="home_blocked_source_subtitle">Tocca per visualizzare e rimuovere</string>
     <string name="home_metadata_errors_title">Alcune fonti di patch non sono disponibili</string>
     <string name="home_metadata_errors_subtitle">Tocca per visualizzare le fonti</string>
+    <string name="home_outdated_manager_title">Morphe non è aggiornato</string>
+    <string name="home_outdated_manager_subtitle">Alcune sorgenti di patch richiedono una versione più recente</string>
     <string name="home_metered_skipped_title">Aggiornamenti in pausa sulla rete dati mobile</string>
     <string name="home_metered_skipped_subtitle">Tocca per consentire gli aggiornamenti sulla rete mobile</string>
     <string name="home_update_error">Aggiornamento non riuscito</string>
@@ -123,6 +125,8 @@ Nessuna patch disponibile</string>
     <string name="sources_management_metadata_unavailable">Metadati non disponibili</string>
     <string name="sources_management_metadata_unavailable_hint">Il file dei metadati remoti non è disponibile. L\'applicazione della patch con il bundle installato funziona ancora, ma l\'aggiornamento automatico è disabilitato per questa sorgente</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Impossibile scaricare il bundle di patch. L\'URL di origine potrebbe essere errato oppure il file inesistente </string>
+    <string name="sources_management_outdated_manager_badge">Aggiorna Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Questa sorgente è stata creata per patcher %1$s, ma Morphe %2$s include patcher %3$s. Aggiorna Morphe per utilizzarlo</string>
     <string name="sources_management_source_enabled">Sorgente abilitata</string>
     <string name="sources_management_source_disabled">Sorgente disabilitata</string>
     <string name="sources_management_source_updating">Aggiornamento sorgente</string>
@@ -251,6 +255,11 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="home_dialog_wrong_package_description">L\'APK selezionato non è per l’applicazione che volevi patchare</string>
     <string name="home_dialog_expected_package">Pacchetto atteso:</string>
     <string name="home_dialog_selected_package">Pacchetto selezionato:</string>
+    <string name="home_dialog_orphaned_install_title">Copia precedente abbandonata</string>
+    <string name="home_dialog_orphaned_install_description">L\'applicazione di una patch ha modificato il nome del pacchetto, quindi la copia che hai applicato una patch in precedenza è ancora installata come app separata</string>
+    <string name="home_dialog_orphaned_install_warning">Non è più tracciata e non riceverà aggiornamenti di patch</string>
+    <string name="home_dialog_orphaned_install_uninstall">Disinstallala</string>
+    <string name="home_dialog_orphaned_install_keep">Mantienilo</string>
     <string name="home_outdated_patches_dialog_title">Le patch potrebbero essere obsolete</string>
     <string name="home_outdated_patches_dialog_message">La connessione con i dati mobili è attiva e gli aggiornamenti delle patch sono disabilitati</string>
     <string name="home_outdated_patches_dialog_warning">Il patching con patch obsolete potrebbe risultare in un\'app non funzionante</string>
@@ -324,8 +333,10 @@ Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio:
     <string name="batch_patch_source_installed">App installata</string>
     <string name="batch_patch_source_file">File allegato</string>
     <string name="batch_patch_source_unavailable">L\'APK non è stato possibile prepararlo</string>
+    <string name="batch_patch_find_apk">Trova APK</string>
     <string name="batch_patch_attach_apk">Allega APK</string>
     <string name="batch_patch_force_version">Applica comunque</string>
+    <string name="batch_patch_force_version_done">Messo in coda comunque, le patch create per altre versioni potrebbero compromettere il funzionamento dell\'app</string>
     <string name="batch_patch_edit_patches">Scegli patch</string>
     <string name="batch_patch_state_no_apk">Nessun APK</string>
     <string name="batch_patch_state_no_patches">Nessuna patch</string>
@@ -387,6 +398,8 @@ Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio:
     <string name="patcher_error_dialog_app_info">Informazioni sull\'app</string>
     <string name="patcher_tab_logs">Log del patcher</string>
     <string name="patcher_tab_game">Giochi</string>
+    <string name="patcher_logs_waiting">In attesa dell\'output del log…</string>
+    <string name="patcher_logs_lost">L\'output del log non viene mantenuto tra un riavvio dell\'app e l\'altro</string>
     <string name="patcher_long_step_warning">Questo passaggio potrebbe richiedere un po\'  di tempo. Si prega di attendere…</string>
     <string name="patcher_installing_subtitle">Quasi pronti a partire! 🎸</string>
     <string name="patcher_success_title">Fatto! 🎉</string>
@@ -1090,6 +1103,7 @@ Dettagli: %2$s"</string>
     <string name="install_update_manager_failed">Impossibile installare l\'aggiornamento</string>
     <string name="installing_manager_update">Installazione dell\'aggiornamento in corso…</string>
     <string name="downloading_manager_update">Download dell\'aggiornamento in corso…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Impossibile scaricare l\'aggiornamento: %s</string>
     <string name="failed_to_check_updates">Impossibile verificare la presenza degli aggiornamenti: %s</string>
     <string name="failed_to_download_update">Impossibile scaricare l\'aggiornamento: %s</string>

@@ -7,6 +7,7 @@ package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -45,7 +46,7 @@ import app.morphe.manager.ui.theme.LocalMonochromeTheme
 import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 
 // Constants
-object MorpheDefaults {
+object Defaults {
     val CardElevation = 2.dp
     val CardCornerRadius = 16.dp
     val CompactCornerRadius = 12.dp
@@ -82,12 +83,12 @@ object MorpheDefaults {
  * Base card for all other card types.
  */
 @Composable
-fun MorpheCard(
+fun SurfaceCard(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
     enabled: Boolean = true,
-    elevation: Dp = MorpheDefaults.CardElevation,
-    cornerRadius: Dp = MorpheDefaults.CardCornerRadius,
+    elevation: Dp = Defaults.CardElevation,
+    cornerRadius: Dp = Defaults.CardCornerRadius,
     borderWidth: Dp = 0.dp,
     borderColor: Color = MaterialTheme.colorScheme.outlineVariant,
     color: Color = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
@@ -124,7 +125,7 @@ fun MorpheCard(
  * Horizontal divider for settings sections.
  */
 @Composable
-fun MorpheSettingsDivider(
+fun SettingsDivider(
     modifier: Modifier = Modifier,
     fullWidth: Boolean = false
 ) {
@@ -139,7 +140,7 @@ fun MorpheSettingsDivider(
         }
     }
     HorizontalDivider(
-        modifier = if (fullWidth) modifier else modifier.padding(horizontal = MorpheDefaults.ContentPadding),
+        modifier = if (fullWidth) modifier else modifier.padding(horizontal = Defaults.ContentPadding),
         color = color
     )
 }
@@ -184,12 +185,12 @@ fun ToggleRow(
                 .semantics {
                     stateDescription = if (checked) enabledLabel else disabledLabel
                 }
-                .padding(vertical = MorpheDefaults.ContentPaddingSmall, horizontal = 4.dp),
+                .padding(vertical = Defaults.ContentPaddingSmall, horizontal = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             if (icon != null) {
-                MorpheIcon(icon = icon, tint = iconTint)
+                ThemedIcon(icon = icon, tint = iconTint)
             }
             Column(modifier = Modifier.weight(1f)) {
                 Text(
@@ -208,6 +209,7 @@ fun ToggleRow(
             Crossfade(
                 targetState = isLoading,
                 modifier = Modifier.size(width = 52.dp, height = 32.dp),
+                animationSpec = tween(Defaults.ANIMATION_DURATION),
                 label = "toggle_row_loading"
             ) { loading ->
                 Box(
@@ -220,7 +222,7 @@ fun ToggleRow(
                             strokeWidth = 2.dp
                         )
                     } else {
-                        MorpheSwitch(checked = checked, onCheckedChange = null)
+                        ToggleSwitch(checked = checked, onCheckedChange = null)
                     }
                 }
             }
@@ -232,10 +234,10 @@ fun ToggleRow(
  * Reusable icon component with standard styling.
  */
 @Composable
-fun MorpheIcon(
+fun ThemedIcon(
     icon: ImageVector,
     modifier: Modifier = Modifier,
-    size: Dp = MorpheDefaults.IconSize,
+    size: Dp = Defaults.IconSize,
     tint: Color = MaterialTheme.colorScheme.primary,
     contentDescription: String? = null
 ) {
@@ -266,7 +268,7 @@ fun StatusCirclePlaceholder(
  * Switch with check/close icons in the thumb.
  */
 @Composable
-fun MorpheSwitch(
+fun ToggleSwitch(
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
@@ -344,11 +346,11 @@ fun ImportExportRow(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(MorpheDefaults.ContentPadding),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            .padding(Defaults.ContentPadding),
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+            horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
             verticalAlignment = Alignment.CenterVertically
         ) {
             leadingContent()
@@ -382,9 +384,9 @@ fun GradientCircleIcon(
     icon: ImageVector,
     modifier: Modifier = Modifier,
     size: Dp = 40.dp,
-    iconSize: Dp = MorpheDefaults.IconSize,
+    iconSize: Dp = Defaults.IconSize,
     contentDescription: String? = null,
-    gradientColors: List<Color> = MorpheDefaults.DefaultGradientColors
+    gradientColors: List<Color> = Defaults.DefaultGradientColors
 ) {
     Box(
         modifier = modifier
@@ -393,7 +395,7 @@ fun GradientCircleIcon(
             .background(brush = MonochromeThemeDefaults.iconBackground(gradientColors)),
         contentAlignment = Alignment.Center
     ) {
-        MorpheIcon(
+        ThemedIcon(
             icon = icon,
             contentDescription = contentDescription,
             tint = MonochromeThemeDefaults.iconTint(Color.White),
@@ -417,7 +419,7 @@ fun IconTextRow(
     descriptionStyle: TextStyle = MaterialTheme.typography.bodyMedium,
     descriptionColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     trailingContent: @Composable (() -> Unit)? = null,
-    spacing: Dp = MorpheDefaults.ItemSpacing
+    spacing: Dp = Defaults.ItemSpacing
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -463,11 +465,11 @@ fun SettingsItemCard(
     color: Color = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
     content: @Composable () -> Unit
 ) {
-    MorpheCard(
+    SurfaceCard(
         onClick = onClick,
         enabled = enabled,
         elevation = 1.dp,
-        cornerRadius = MorpheDefaults.SettingsCornerRadius,
+        cornerRadius = Defaults.SettingsCornerRadius,
         borderWidth = borderWidth,
         borderColor = borderColor,
         color = color,
@@ -485,10 +487,10 @@ fun SettingsItemCard(
 @Composable
 fun ForwardChevronIcon(
     modifier: Modifier = Modifier,
-    size: Dp = MorpheDefaults.IconSize,
+    size: Dp = Defaults.IconSize,
     tint: Color = MaterialTheme.colorScheme.primary
 ) {
-    MorpheIcon(
+    ThemedIcon(
         icon = if (LocalLayoutDirection.current == LayoutDirection.Rtl) {
             Icons.Outlined.ChevronLeft
         } else {
@@ -524,8 +526,8 @@ fun SettingsItem(
         modifier = modifier
     ) {
         IconTextRow(
-            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-            leadingContent = leadingContent ?: icon?.let { { MorpheIcon(icon = it) } },
+            modifier = Modifier.padding(Defaults.ContentPadding),
+            leadingContent = leadingContent ?: icon?.let { { ThemedIcon(icon = it) } },
             title = title,
             description = subtitle,
             trailingContent = when (statusContent) {
@@ -533,7 +535,7 @@ fun SettingsItem(
                 else -> {
                     {
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
+                            horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             statusContent()
@@ -573,7 +575,7 @@ fun SettingsSwitchItem(
         subtitle = subtitle,
         showBorder = showBorder,
         trailingContent = {
-            MorpheSwitch(
+            ToggleSwitch(
                 checked = checked,
                 onCheckedChange = null,
                 modifier = Modifier.semantics {
@@ -593,10 +595,10 @@ fun SectionCard(
     onClick: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
-    MorpheCard(
+    SurfaceCard(
         onClick = onClick,
-        elevation = MorpheDefaults.CardElevation,
-        cornerRadius = MorpheDefaults.SectionCornerRadius,
+        elevation = Defaults.CardElevation,
+        cornerRadius = Defaults.SectionCornerRadius,
         borderWidth = 1.dp,
         modifier = modifier
     ) {
@@ -626,7 +628,7 @@ fun SectionTitle(
     icon: ImageVector? = null
 ) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (icon != null) {
@@ -659,17 +661,17 @@ fun CardHeader(
         Surface(
             modifier = Modifier.fillMaxWidth(),
             color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-            shape = RoundedCornerShape(topStart = MorpheDefaults.SectionCornerRadius, topEnd = MorpheDefaults.SectionCornerRadius)
+            shape = RoundedCornerShape(topStart = Defaults.SectionCornerRadius, topEnd = Defaults.SectionCornerRadius)
         ) {
             IconTextRow(
-                modifier = Modifier.padding(MorpheDefaults.ContentPadding),
-                leadingContent = { MorpheIcon(icon = icon) },
+                modifier = Modifier.padding(Defaults.ContentPadding),
+                leadingContent = { ThemedIcon(icon = icon) },
                 title = title,
                 description = description
             )
         }
 
-        MorpheSettingsDivider(fullWidth = true)
+        SettingsDivider(fullWidth = true)
     }
 }
 
@@ -686,11 +688,11 @@ fun DeleteListItem(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = MorpheDefaults.ContentPadding),
-        horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+            .padding(horizontal = Defaults.ContentPadding),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        MorpheIcon(
+        ThemedIcon(
             icon = icon,
             tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
@@ -717,11 +719,11 @@ fun InfoStatBox(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+        shape = RoundedCornerShape(Defaults.CompactCornerRadius),
         color = containerColor
     ) {
         Column(
-            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
+            modifier = Modifier.padding(Defaults.ContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
@@ -745,6 +747,10 @@ fun InfoStatBox(
 
 /**
  * Prominent hero-style header used at the top of dialogs and sections.
+ *
+ * [footer] is laid out below the header row inside the same surface, for cards that carry a
+ * progress bar or similar trailing element. It deliberately sits before [subtitle] so that a
+ * trailing lambda still binds to the subtitle, the way every caller already writes it.
  */
 @Composable
 fun HeroInfoCard(
@@ -755,61 +761,69 @@ fun HeroInfoCard(
     iconContainerColor: Color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
     iconTint: Color = MaterialTheme.colorScheme.primary,
     titleColor: Color = LocalDialogTextColor.current,
+    footer: (@Composable ColumnScope.() -> Unit)? = null,
     subtitle: (@Composable RowScope.() -> Unit)? = null
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(MorpheDefaults.SectionCornerRadius),
+        shape = RoundedCornerShape(Defaults.SectionCornerRadius),
         color = containerColor
     ) {
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(MorpheDefaults.ContentPadding),
-            horizontalArrangement = Arrangement.spacedBy(14.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
-            Surface(
-                shape = CircleShape,
-                color = iconContainerColor,
-                modifier = Modifier.size(56.dp)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(14.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = null,
-                        tint = iconTint,
-                        modifier = Modifier.size(28.dp)
-                    )
+                Surface(
+                    shape = CircleShape,
+                    color = iconContainerColor,
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = icon,
+                            contentDescription = null,
+                            tint = iconTint,
+                            modifier = Modifier.size(28.dp)
+                        )
+                    }
+                }
+
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    AnimatedContent(
+                        targetState = title,
+                        transitionSpec = Animations.counterTransitionSpec,
+                        label = "heroTitle"
+                    ) { t ->
+                        Text(
+                            text = t,
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = titleColor,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                    if (subtitle != null) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            content = subtitle
+                        )
+                    }
                 }
             }
 
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                AnimatedContent(
-                    targetState = title,
-                    transitionSpec = MorpheAnimations.counterTransitionSpec,
-                    label = "heroTitle"
-                ) { t ->
-                    Text(
-                        text = t,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = titleColor,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-                if (subtitle != null) {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(6.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        content = subtitle
-                    )
-                }
-            }
+            footer?.invoke(this)
         }
     }
 }
@@ -829,7 +843,7 @@ fun InfoBox(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+        shape = RoundedCornerShape(Defaults.CompactCornerRadius),
         color = containerColor
     ) {
         Row(

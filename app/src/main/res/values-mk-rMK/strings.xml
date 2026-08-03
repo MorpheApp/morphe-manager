@@ -788,6 +788,7 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">Не успеа да се инсталира ажурирањето</string>
     <string name="installing_manager_update">Инсталирање ажурирање…</string>
     <string name="downloading_manager_update">Преземање ажурирање…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Не успеа да се преземе ажурирање: %s</string>
     <string name="failed_to_check_updates">Не успеа да се провери за ажурирања: %s</string>
     <string name="failed_to_download_update">Не успеа да се преземе ажурирање: %s</string>

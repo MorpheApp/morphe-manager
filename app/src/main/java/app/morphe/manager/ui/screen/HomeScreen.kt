@@ -183,7 +183,7 @@ fun HomeScreen(
                 onStartBatchPatch(packageNames, false)
             }
             // The queue installs through the standard installer, never by mounting, so the
-            // single-app mount choice must not carry over and strip GmsCore patches here
+            // single-app mount choice must not carry over into the patches it resolves
             else -> onStartBatchPatch(packageNames, false)
         }
     }

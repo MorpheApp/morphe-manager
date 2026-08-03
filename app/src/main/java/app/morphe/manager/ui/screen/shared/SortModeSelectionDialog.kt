@@ -40,11 +40,11 @@ fun <T> SortModeSelectionDialog(
     onSelect: (T) -> Unit,
     onDismiss: () -> Unit
 ) {
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = title,
         footer = {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
@@ -54,8 +54,8 @@ fun <T> SortModeSelectionDialog(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = MorpheDefaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                .padding(vertical = Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
         ) {
             options.forEach { option ->
                 RadioSelectionCard(

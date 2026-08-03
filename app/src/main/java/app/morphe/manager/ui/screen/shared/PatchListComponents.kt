@@ -27,11 +27,11 @@ fun PatchNameRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = MorpheDefaults.ContentPadding),
-        horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+            .padding(horizontal = Defaults.ContentPadding),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        MorpheIcon(
+        ThemedIcon(
             icon = Icons.Outlined.CheckCircle,
             tint = if (dimmed) colors.onSurfaceVariant.copy(alpha = 0.4f) else colors.primary
         )
@@ -46,8 +46,8 @@ fun PatchNameRow(
 
 @Composable
 fun LabeledSection(
-    title: String? = null,
     modifier: Modifier = Modifier,
+    title: String? = null,
     version: String? = null,
     count: Int? = null,
     content: @Composable ColumnScope.() -> Unit
@@ -55,12 +55,12 @@ fun LabeledSection(
     val effectiveVersion = version?.takeIf { it.isNotBlank() }
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
     ) {
         if (title != null || effectiveVersion != null || count != null) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
             ) {
                 if (title != null) {
                     Text(
@@ -84,18 +84,17 @@ fun LabeledSection(
                     }
                 }
                 if (count != null) {
-                    InfoBadge(
+                    StatusBadge(
                         text = count.toString(),
-                        style = InfoBadgeStyle.Primary,
-                        isCompact = true
+                        tone = SemanticTone.Primary
                     )
                 }
             }
         }
         SettingsGroup {
             Column(
-                modifier = Modifier.padding(vertical = MorpheDefaults.ItemSpacing),
-                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+                modifier = Modifier.padding(vertical = Defaults.ItemSpacing),
+                verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
             ) {
                 content()
             }
@@ -111,14 +110,14 @@ fun PatchOptionsGroup(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = MorpheDefaults.ContentPadding),
+            .padding(horizontal = Defaults.ContentPadding),
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+            horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            MorpheIcon(
+            ThemedIcon(
                 icon = Icons.Outlined.Tune,
                 tint = MaterialTheme.colorScheme.primary
             )
@@ -132,7 +131,7 @@ fun PatchOptionsGroup(
         }
         options.forEach { (key, value) ->
             Column(
-                modifier = Modifier.padding(start = MorpheDefaults.ItemSpacing),
+                modifier = Modifier.padding(start = Defaults.ItemSpacing),
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 Text(

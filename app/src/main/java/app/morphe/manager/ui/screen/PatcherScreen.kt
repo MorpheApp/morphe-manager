@@ -41,6 +41,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.patcher.patch.installerTypeFor
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.patcher.*
 import app.morphe.manager.ui.screen.patcher.game.MiniGameState
@@ -86,7 +87,7 @@ fun PatcherScreen(
     val patcherSucceeded by patcherViewModel.patcherSucceeded.observeAsState(null)
 
     // Remember patcher state
-    val state = rememberMorphePatcherState(patcherViewModel)
+    val state = rememberPatcherScreenState(patcherViewModel)
     val scope = rememberCoroutineScope()
     val miniGameState = remember { MiniGameState(prefs, scope) }
 
@@ -284,6 +285,12 @@ fun PatcherScreen(
     val showInstalledSourceConflictDialog = remember { mutableStateOf(false) }
     val shouldPromptTour by patcherViewModel.shouldPromptTour.collectAsStateWithLifecycle()
 
+    // Named on the success screen so the finished app says what the install method left out
+    var excludedPatches by remember { mutableStateOf(emptyList<String>()) }
+    LaunchedEffect(usingMountInstall) {
+        excludedPatches = patcherViewModel.unavailablePatchNames(installerTypeFor(usingMountInstall))
+    }
+
     LaunchedEffect(installState) {
         if (installState is InstallViewModel.InstallState.Installed) {
             patcherViewModel.triggerPostInstallPromptsIfNeeded()
@@ -334,14 +341,14 @@ fun PatcherScreen(
 
     // Tour prompt dialog shown after first successful install
     if (shouldPromptTour) {
-        MorpheDialog(
+        AppDialog(
             onDismissRequest = {
                 patcherViewModel.consumeTourPrompt()
                 onDeclineTour()
             },
             title = stringResource(R.string.tour_prompt_title),
             footer = {
-                MorpheDialogButtonRow(
+                AppDialogButtonRow(
                     primaryText = stringResource(R.string.tour_prompt_confirm),
                     onPrimaryClick = {
                         patcherViewModel.consumeTourPrompt()
@@ -534,7 +541,7 @@ fun PatcherScreen(
             transitionSpec = if (reduceMotion) {
                 { EnterTransition.None togetherWith ExitTransition.None }
             } else {
-                MorpheAnimations.fadeCrossfade(800)
+                Animations.fadeCrossfade(800)
             },
             label = "patcher_state_animation"
         ) { patcherState ->
@@ -587,6 +594,7 @@ fun PatcherScreen(
                         onUseFallbackInstaller = installViewModel::proceedWithFallbackInstaller,
                         onDismissInstallerDialog = installViewModel::dismissInstallerUnavailableDialog,
                         usingMountInstall = usingMountInstall,
+                        excludedPatches = excludedPatches,
                         isExpertMode = useExpertMode,
                         onLogsClick = { patcherViewModel.hideSuccessScreen() },
                         onInstall = {

@@ -28,7 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
+import app.morphe.manager.ui.screen.shared.Defaults
 import kotlinx.coroutines.isActive
 import kotlin.math.min
 import kotlin.random.Random
@@ -220,7 +220,7 @@ fun DinoGame(state: DinoGameState) {
 private fun DinoCanvas(state: DinoGameState, modifier: Modifier) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(MorpheDefaults.CompactCornerRadius))
+            .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
             .background(DinoBg)
             .pointerInput(Unit) { detectTapGestures(onPress = { state.tap() }) }
     ) {

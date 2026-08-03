@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">देखने और हटाने के लिए टैप करें</string>
     <string name="home_metadata_errors_title">कुछ पैच स्रोत अनुपलब्ध हैं</string>
     <string name="home_metadata_errors_subtitle">स्रोतों की समीक्षा करने के लिए टैप करें</string>
+    <string name="home_outdated_manager_title">Morphe पुरानी हो गई है</string>
+    <string name="home_outdated_manager_subtitle">कुछ पैच स्रोतों को एक नए संस्करण की आवश्यकता है</string>
     <string name="home_metered_skipped_title">मोबाइल डेटा पर अपडेट रोक दिए गए हैं</string>
     <string name="home_metered_skipped_subtitle">मोबाइल डेटा पर अपडेट की अनुमति देने के लिए टैप करें</string>
     <string name="home_update_error">उपडेट विफल हुआ</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नहीं है</string>
     <string name="sources_management_metadata_unavailable_hint">रिमोट मेटाडेटा फ़ाइल अनुपलब्ध है। स्थापित बंडल के साथ पैचिंग अभी भी काम करती है, लेकिन इस स्रोत के लिए ऑटो-अपडेट अक्षम कर दिया गया है</string>
     <string name="sources_management_metadata_unavailable_hint_missing">पैच बंडल डाउनलोड नहीं किया जा सका। स्रोत URL गलत हो सकता है या फ़ाइल मौजूद नहीं है</string>
+    <string name="sources_management_outdated_manager_badge">Morphe को अपडेट करें</string>
+    <string name="sources_management_outdated_manager_hint">यह स्रोत पैचर %1$s के लिए बनाया गया है, लेकिन Morphe %2$s में पैचर %3$s शामिल है। इसका उपयोग करने के लिए Morphe को अपडेट करें</string>
     <string name="sources_management_source_enabled">स्रोत सक्षम किया गया</string>
     <string name="sources_management_source_disabled">स्रोत अक्षम किया गया</string>
     <string name="sources_management_source_updating">स्रोत अपडेट किया जा रहा है</string>
@@ -250,6 +254,11 @@
     <string name="home_dialog_wrong_package_description">चुनी गई APK, आपने पथच करने के लिए इरादत किया गया एप्लिकेशन के लिए नहीं है।</string>
     <string name="home_dialog_expected_package">अनुकूलित पैकेज:</string>
     <string name="home_dialog_selected_package">चयनित पैकेज:</string>
+    <string name="home_dialog_orphaned_install_title">पिछली कॉपी पीछे छूट गई</string>
+    <string name="home_dialog_orphaned_install_description">पैचिंग ने पैकेज का नाम बदल दिया है, इसलिए आपने जो कॉपी पहले पैच की थी, वह अभी भी एक अलग ऐप के रूप में स्थापित है</string>
+    <string name="home_dialog_orphaned_install_warning">अब इसे ट्रैक नहीं किया जा रहा है और इसे पैच अपडेट प्राप्त नहीं होंगे</string>
+    <string name="home_dialog_orphaned_install_uninstall">इसे अनइंस्टॉल करें</string>
+    <string name="home_dialog_orphaned_install_keep">इसे बनाए रखें</string>
     <string name="home_outdated_patches_dialog_title">पैच पुराने हो सकते हैं</string>
     <string name="home_outdated_patches_dialog_message">मोबाइल डेटा सक्रिय है और पैच अपडेट बंद हैं</string>
     <string name="home_outdated_patches_dialog_warning">पुराने पैच से पैच करना हो सकता है कि एप्लिकेशन को तोड़ सकता है</string>
@@ -319,8 +328,10 @@
     <string name="batch_patch_source_installed">इंस्टॉल किया गया ऐप</string>
     <string name="batch_patch_source_file">संलग्न फ़ाइल</string>
     <string name="batch_patch_source_unavailable">APK तैयार नहीं किया जा सका</string>
+    <string name="batch_patch_find_apk">APK खोजें</string>
     <string name="batch_patch_attach_apk">APK संलग्न करें</string>
     <string name="batch_patch_force_version">फिर भी पैच करें</string>
+    <string name="batch_patch_force_version_done">फिर भी कतार में रखा गया, अन्य संस्करणों के लिए बनाए गए पैच ऐप को तोड़ सकते हैं</string>
     <string name="batch_patch_edit_patches">पैच चुनें</string>
     <string name="batch_patch_state_no_apk">कोई APK नहीं</string>
     <string name="batch_patch_state_no_patches">कोई पैच नहीं</string>
@@ -382,6 +393,8 @@
     <string name="patcher_error_dialog_app_info">ऐप जानकारी</string>
     <string name="patcher_tab_logs">पैचर लॉग</string>
     <string name="patcher_tab_game">खेल</string>
+    <string name="patcher_logs_waiting">लॉग आउटपुट की प्रतीक्षा की जा रही है…</string>
+    <string name="patcher_logs_lost">ऐप रीस्टार्ट होने पर लॉग आउटपुट सहेजा नहीं जाता है</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="patcher_installing_subtitle">Almost ready to rock! 🎸</string>
     <string name="patcher_success_title">हो गया! 🎉</string>
@@ -1085,6 +1098,7 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">अपडेट स्थापित करने में विफल</string>
     <string name="installing_manager_update">अपडेट इंस्टॉल हो रहा है…</string>
     <string name="downloading_manager_update">अपडेट डाउनलोड हो रहा है…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">अपडेट डाउनलोड करने में विफल: %s</string>
     <string name="failed_to_check_updates">अपडेट के लिए जाँच करने में विफल: %s</string>
     <string name="failed_to_download_update">अपडेट डाउनलोड करने में विफल: %s</string>

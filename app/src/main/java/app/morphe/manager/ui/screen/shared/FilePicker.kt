@@ -317,7 +317,7 @@ fun FilePicker(
             searchFocusRequester.requestFocus()
         } else {
             // Clear query only after the exit animation finishes so the text doesn't flash away
-            delay(MorpheDefaults.ANIMATION_DURATION.toLong().milliseconds)
+            delay(Defaults.ANIMATION_DURATION.toLong().milliseconds)
             searchQuery = ""
         }
     }
@@ -339,7 +339,7 @@ fun FilePicker(
         currentDir = if (atStorageRoot) null else currentDir?.parentFile
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = {
             when {
                 showSearch -> { showSearch = false }
@@ -356,7 +356,7 @@ fun FilePicker(
             // New content appears instantly; old content fades out
             AnimatedContent(
                 targetState = showSearch,
-                transitionSpec = MorpheAnimations.fadeCrossfade(),
+                transitionSpec = Animations.fadeCrossfade(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .statusBarsPadding()
@@ -484,8 +484,8 @@ fun FilePicker(
 
             AnimatedVisibility(
                 visible = currentDir != null,
-                enter = MorpheAnimations.expandFadeEnter,
-                exit = MorpheAnimations.shrinkFadeExit
+                enter = Animations.expandFadeEnter,
+                exit = Animations.shrinkFadeExit
             ) {
                 Column {
                     Box {
@@ -709,13 +709,13 @@ fun FilePicker(
                     .padding(horizontal = 16.dp, vertical = 12.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                MorpheDialogOutlinedButton(
+                AppDialogOutlinedButton(
                     text = stringResource(R.string.close),
                     onClick = onDismiss,
                     modifier = Modifier.weight(1f)
                 )
                 if (allowFolderSelection) {
-                    MorpheDialogButton(
+                    AppDialogButton(
                         text = stringResource(R.string.select_folder),
                         onClick = { currentDir?.let { onFilePicked(it) } },
                         enabled = currentDir != null,

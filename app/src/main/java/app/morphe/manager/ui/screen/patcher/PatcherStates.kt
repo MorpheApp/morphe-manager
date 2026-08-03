@@ -62,7 +62,7 @@ enum class PatcherState {
  * Manages patching progress, dialogs, and installation flow.
  */
 @Stable
-class MorphePatcherState(
+class PatcherScreenState(
     val viewModel: PatcherViewModel
 ) {
     // Error handling
@@ -101,11 +101,11 @@ class MorphePatcherState(
  * Remember patcher state with proper lifecycle.
  */
 @Composable
-fun rememberMorphePatcherState(
+fun rememberPatcherScreenState(
     viewModel: PatcherViewModel
-): MorphePatcherState {
+): PatcherScreenState {
     return remember(viewModel) {
-        MorphePatcherState(viewModel)
+        PatcherScreenState(viewModel)
     }
 }
 
@@ -127,6 +127,7 @@ fun PatchingSuccess(
     onUseFallbackInstaller: () -> Unit,
     onDismissInstallerDialog: () -> Unit,
     usingMountInstall: Boolean,
+    excludedPatches: List<String> = emptyList(),
     isExpertMode: Boolean = false,
     onInstall: () -> Unit,
     onUninstall: (String) -> Unit,
@@ -185,6 +186,7 @@ fun PatchingSuccess(
                 isConflict = isConflict,
                 installedPackageName = installedPackageName,
                 usingMountInstall = usingMountInstall,
+                excludedPatches = excludedPatches,
                 errorMessage = errorMessage,
                 conflictPackageName = conflictPackageName,
                 onInstall = onInstall,
@@ -232,6 +234,7 @@ private fun AdaptiveSuccessContent(
     isConflict: Boolean,
     installedPackageName: String?,
     usingMountInstall: Boolean,
+    excludedPatches: List<String>,
     errorMessage: String?,
     conflictPackageName: String?,
     onInstall: () -> Unit,
@@ -328,8 +331,8 @@ private fun AdaptiveSuccessContent(
 
                 SuccessConflictHint(isConflict = isConflict)
 
-                SuccessRootWarning(
-                    usingMountInstall = usingMountInstall,
+                SuccessExcludedPatchesHint(
+                    excludedPatches = excludedPatches,
                     isReady = !isInstalling && !isInstalled && !isError && !isConflict
                 )
 
@@ -389,8 +392,8 @@ private fun AdaptiveSuccessContent(
 
             SuccessConflictHint(isConflict = isConflict)
 
-            SuccessRootWarning(
-                usingMountInstall = usingMountInstall,
+            SuccessExcludedPatchesHint(
+                excludedPatches = excludedPatches,
                 isReady = !isInstalling && !isInstalled && !isError && !isConflict
             )
 
@@ -453,7 +456,7 @@ private fun SuccessStatusText(
 ) {
     AnimatedContent(
         targetState = getTitleForState(isInstalling, isInstalled, isError, isConflict, installedPackageName),
-        transitionSpec = MorpheAnimations.fadeCrossfade(500),
+        transitionSpec = Animations.fadeCrossfade(500),
         label = "title_animation"
     ) { titleRes ->
         Text(
@@ -489,7 +492,7 @@ private fun SuccessInstructionsText(
 ) {
     AnimatedContent(
         targetState = getSubtitleForState(isInstalling, isInstalled, isError, isConflict, installedPackageName, usingMountInstall),
-        transitionSpec = MorpheAnimations.fadeCrossfade(500),
+        transitionSpec = Animations.fadeCrossfade(500),
         label = "subtitle_animation"
     ) { subtitleRes ->
         if (subtitleRes != 0) {
@@ -514,13 +517,13 @@ private fun SuccessErrorMessage(
 ) {
     AnimatedVisibility(
         visible = errorMessage != null && isError,
-        enter = MorpheAnimations.fadeIn,
-        exit = MorpheAnimations.fadeOut
+        enter = Animations.fadeIn,
+        exit = Animations.fadeOut
     ) {
         errorMessage?.let { message ->
             Surface(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+                shape = RoundedCornerShape(Defaults.CompactCornerRadius),
                 color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
             ) {
                 Text(
@@ -550,16 +553,19 @@ private fun SuccessConflictHint(isConflict: Boolean) {
 }
 
 /**
- * Success screen root warning.
+ * Success screen hint naming the patches the sources ruled out for the chosen install method.
  */
 @Composable
-private fun SuccessRootWarning(
-    usingMountInstall: Boolean,
+private fun SuccessExcludedPatchesHint(
+    excludedPatches: List<String>,
     isReady: Boolean
 ) {
     SuccessHint(
-        visible = usingMountInstall && isReady,
-        text = stringResource(R.string.root_gmscore_excluded),
+        visible = excludedPatches.isNotEmpty() && isReady,
+        text = stringResource(
+            R.string.patcher_patches_excluded_for_installer,
+            excludedPatches.joinToString()
+        ),
         icon = Icons.Outlined.Info,
         containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
         iconTint = MaterialTheme.colorScheme.primary
@@ -576,12 +582,12 @@ private fun SuccessHint(
 ) {
     AnimatedVisibility(
         visible = visible,
-        enter = MorpheAnimations.fadeIn,
-        exit = MorpheAnimations.fadeOut
+        enter = Animations.fadeIn,
+        exit = Animations.fadeOut
     ) {
         Surface(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+            shape = RoundedCornerShape(Defaults.CompactCornerRadius),
             color = containerColor
         ) {
             Row(
@@ -593,7 +599,7 @@ private fun SuccessHint(
                     imageVector = icon,
                     contentDescription = null,
                     tint = iconTint,
-                    modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
+                    modifier = Modifier.size(Defaults.IconSizeSmall)
                 )
                 Text(
                     text = text,
@@ -663,7 +669,7 @@ private fun InstallActionButton(
                 fontWeight = FontWeight.SemiBold
             )
         } else {
-            MorpheIcon(
+            ThemedIcon(
                 icon = when {
                     isInstalled -> Icons.AutoMirrored.Outlined.Launch
                     isConflict -> Icons.Default.DeleteForever

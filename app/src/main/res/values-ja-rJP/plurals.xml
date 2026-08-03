@@ -19,25 +19,25 @@
         <item quantity="other">APK ファイル %s 個</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="other">%s個のアプリをインストールしました</item>
+        <item quantity="other">%s 個のアプリをインストールしました</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="other">%s個のアプリを再インストールしました</item>
+        <item quantity="other">%s 個のアプリを再インストールしました</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="other">%s個のアプリをアンインストールしました</item>
+        <item quantity="other">%s 個のアプリをアンインストールしました</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="other">%s個のアプリをアンインストールしますか？</item>
+        <item quantity="other">%s 個のアプリをアンインストールしますか？</item>
     </plurals>
     <plurals name="batch_patch_ready_count">
-        <item quantity="other">%s個のアプリがパッチ適用可能です</item>
+        <item quantity="other">%s 個のアプリがパッチ適用可能です</item>
     </plurals>
     <plurals name="batch_patch_notification_ready">
-        <item quantity="other">%s個のアプリがインストール可能です</item>
+        <item quantity="other">%s 個のアプリがインストール可能です</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="other">%s個のアプリをスキップしました</item>
+        <item quantity="other">%s 個のアプリをスキップしました</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="other">保存済みセレクションから互換性を失った %s 個のパッチを削除しました</item>

@@ -66,7 +66,11 @@ fun rememberInstallQueue(
     val conflictText = stringResource(R.string.installer_hint_conflict)
     var queue by remember { mutableStateOf<List<InstallQueueRequest>>(emptyList()) }
     var active by remember { mutableStateOf<InstallQueueRequest?>(null) }
-    var activeStarted by remember { mutableStateOf(false) }
+
+    // Whether the current item put an installer dialog on screen. Ready on its own does not
+    // mean the user backed out of one, because install() only reaches Installing from a
+    // coroutine, leaving a just-started item in the same state as a dismissed one
+    var awaitedInstallerDialog by remember { mutableStateOf(false) }
     var completed by remember { mutableIntStateOf(0) }
     var skipped by remember { mutableIntStateOf(0) }
 
@@ -81,7 +85,7 @@ fun rememberInstallQueue(
         val next = queue.firstOrNull()
         if (next == null) {
             active = null
-            activeStarted = false
+            awaitedInstallerDialog = false
             showSummary()
             return
         }
@@ -95,7 +99,7 @@ fun rememberInstallQueue(
         }
 
         active = next
-        activeStarted = true
+        awaitedInstallerDialog = false
         val mountPackageName = next.mountPackageName
         if (
             mountPackageName != null &&
@@ -121,17 +125,18 @@ fun rememberInstallQueue(
         installViewModel.showInstallerSelectionDialog
     ) {
         val current = active ?: return@LaunchedEffect
+
+        val dialogShowing = installViewModel.installerUnavailableDialog != null ||
+                installViewModel.showInstallerSelectionDialog
+        if (dialogShowing) awaitedInstallerDialog = true
+
         when (val state = installViewModel.installState) {
             is InstallViewModel.InstallState.Ready -> {
-                if (
-                    activeStarted &&
-                    installViewModel.installerUnavailableDialog == null &&
-                    !installViewModel.showInstallerSelectionDialog
-                ) {
+                // The dialog this item raised is gone and nothing began, so it was dismissed
+                if (awaitedInstallerDialog && !dialogShowing) {
                     skipped++
                     current.onFailed(null)
                     active = null
-                    activeStarted = false
                     startNext()
                 }
             }
@@ -139,7 +144,6 @@ fun rememberInstallQueue(
                 completed++
                 current.onInstalled(state.packageName)
                 active = null
-                activeStarted = false
                 installViewModel.resetInstallState()
                 startNext()
             }
@@ -148,7 +152,6 @@ fun rememberInstallQueue(
                 current.onFailed(state.message)
                 context.toast(state.message)
                 active = null
-                activeStarted = false
                 installViewModel.resetInstallState()
                 startNext()
             }
@@ -157,7 +160,6 @@ fun rememberInstallQueue(
                 current.onFailed(conflictText)
                 context.toast(conflictText)
                 active = null
-                activeStarted = false
                 installViewModel.resetInstallState()
                 startNext()
             }
@@ -166,7 +168,7 @@ fun rememberInstallQueue(
     }
 
     if (showOverlay) {
-        MorpheOverlay(
+        Overlay(
             visible = active != null &&
                     installViewModel.installState is InstallViewModel.InstallState.Installing
         ) {
@@ -178,7 +180,7 @@ fun rememberInstallQueue(
         if (requests.isNotEmpty()) {
             queue = requests
             active = null
-            activeStarted = false
+            awaitedInstallerDialog = false
             completed = 0
             skipped = 0
             installViewModel.resetInstallState()

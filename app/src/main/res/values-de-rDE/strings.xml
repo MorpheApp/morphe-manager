@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Zum Überprüfen und Entfernen antippen</string>
     <string name="home_metadata_errors_title">Einige Patch-Quellen sind nicht verfügbar</string>
     <string name="home_metadata_errors_subtitle">Tippe, um die Quellen zu überprüfen</string>
+    <string name="home_outdated_manager_title">Morphe ist veraltet</string>
+    <string name="home_outdated_manager_subtitle">Einige Patch-Quellen benötigen eine neuere Version</string>
     <string name="home_metered_skipped_title">Updates über mobile Daten wurden pausiert</string>
     <string name="home_metered_skipped_subtitle">Tippe, um Updates über mobile Daten zu erlauben</string>
     <string name="home_update_error">Update fehlgeschlagen</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Metadaten nicht verfügbar</string>
     <string name="sources_management_metadata_unavailable_hint">Die Metadatei des Remote-Servers ist nicht verfügbar. Das Patchen mit dem installierten Paket funktioniert weiterhin, die automatische Aktualisierung ist jedoch für diese Quelle deaktiviert</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Das Patch-Bundle konnte nicht heruntergeladen werden. Die Quell-URL ist möglicherweise falsch oder die Datei existiert nicht.</string>
+    <string name="sources_management_outdated_manager_badge">Morphe aktualisieren</string>
+    <string name="sources_management_outdated_manager_hint">Diese Quelle ist für Patcher %1$s erstellt, aber Morphe %2$s enthält Patcher %3$s. Aktualisieren Sie Morphe, um diese zu verwenden.</string>
     <string name="sources_management_source_enabled">Quelle aktiviert</string>
     <string name="sources_management_source_disabled">Quelle deaktiviert</string>
     <string name="sources_management_source_updating">Quellen werden aktualisiert</string>
@@ -250,6 +254,11 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="home_dialog_wrong_package_description">Die ausgewählte APK ist nicht für die App bestimmt, die du patchen wolltest</string>
     <string name="home_dialog_expected_package">Erwartetes Paket:</string>
     <string name="home_dialog_selected_package">Ausgewähltes Paket:</string>
+    <string name="home_dialog_orphaned_install_title">Vorherige Kopie wurde zurückgelassen</string>
+    <string name="home_dialog_orphaned_install_description">Das Patchen hat den Paketnamen geändert, sodass die zuvor gepatchte Kopie weiterhin als separate App installiert ist</string>
+    <string name="home_dialog_orphaned_install_warning">Sie wird nicht mehr nachverfolgt und empfängt keine Patch-Updates mehr</string>
+    <string name="home_dialog_orphaned_install_uninstall">Deinstallation erforderlich</string>
+    <string name="home_dialog_orphaned_install_keep">Behalten</string>
     <string name="home_outdated_patches_dialog_title">Patches könnten veraltet sein</string>
     <string name="home_outdated_patches_dialog_message">Mobile Daten sind aktiv und Patch-Updates sind deaktiviert</string>
     <string name="home_outdated_patches_dialog_warning">Das Patchen mit veralteten Patches kann zu einer defekten App führen</string>
@@ -323,8 +332,10 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="batch_patch_source_installed">Installierte App verwenden</string>
     <string name="batch_patch_source_file">Angehängte Datei</string>
     <string name="batch_patch_source_unavailable">Die APK konnte nicht vorbereitet werden</string>
+    <string name="batch_patch_find_apk">APK finden</string>
     <string name="batch_patch_attach_apk">APK anhängen</string>
     <string name="batch_patch_force_version">Trotzdem fortfahren</string>
+    <string name="batch_patch_force_version_done">Warteschlange trotzdem aktiviert. Patches, die für andere Versionen erstellt wurden, können die App beschädigen.</string>
     <string name="batch_patch_edit_patches">Patches auswählen</string>
     <string name="batch_patch_state_no_apk">Keine APK</string>
     <string name="batch_patch_state_no_patches">Keine Patches</string>
@@ -386,6 +397,8 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="patcher_error_dialog_app_info">App-Informationen</string>
     <string name="patcher_tab_logs">Patcher-Protokolle</string>
     <string name="patcher_tab_game">Spiele</string>
+    <string name="patcher_logs_waiting">Warte auf die Log-Ausgabe…</string>
+    <string name="patcher_logs_lost">Die Log-Ausgabe wird zwischen App-Neustarts nicht gespeichert</string>
     <string name="patcher_long_step_warning">Dieser Schritt kann eine Weile dauern. Bitte warten…</string>
     <string name="patcher_installing_subtitle">Gleich geht die Party ab! 🎸</string>
     <string name="patcher_success_title">Alles erledigt! 🎉</string>
@@ -1090,6 +1103,7 @@ Details: %2$s"</string>
     <string name="install_update_manager_failed">Installation des Updates fehlgeschlagen</string>
     <string name="installing_manager_update">Installiere Update…</string>
     <string name="downloading_manager_update">Lade Update herunter…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Herunterladen des Updates fehlgeschlagen: %s</string>
     <string name="failed_to_check_updates">Prüfung auf Updates fehlgeschlagen: %s</string>
     <string name="failed_to_download_update">Herunterladen des Updates fehlgeschlagen: %s</string>

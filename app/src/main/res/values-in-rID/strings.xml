@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Ketuk untuk meninjau dan menghapus</string>
     <string name="home_metadata_errors_title">Beberapa sumber tambalan tidak tersedia</string>
     <string name="home_metadata_errors_subtitle">Ketuk untuk meninjau sumber</string>
+    <string name="home_outdated_manager_title">Morphe sudah tidak terbaru</string>
+    <string name="home_outdated_manager_subtitle">Beberapa sumber patch memerlukan versi yang lebih baru</string>
     <string name="home_metered_skipped_title">Pembaruan dijeda pada data seluler</string>
     <string name="home_metered_skipped_subtitle">Ketuk untuk mengizinkan pembaruan pada data seluler</string>
     <string name="home_update_error">Pembaruan gagal</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Metadata Tidak Tersedia</string>
     <string name="sources_management_metadata_unavailable_hint">Berkas metadata daring tidak tersedia. Penambalan dengan bundel yang terpasang masih berfungsi, tetapi pembaruan otomatis dinonaktifkan untuk sumber ini</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Bundel tambalan tidak dapat diunduh. Sumber URL mungkin salah atau berkas tidak ada</string>
+    <string name="sources_management_outdated_manager_badge">Perbarui Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Sumber ini dibuat untuk patcher %1$s, tetapi Morphe %2$s menyertakan patcher %3$s. Perbarui Morphe untuk menggunakannya</string>
     <string name="sources_management_source_enabled">Sumber diaktifkan</string>
     <string name="sources_management_source_disabled">Sumber dinonaktifkan</string>
     <string name="sources_management_source_updating">Memperbarui sumber</string>
@@ -251,6 +255,10 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <string name="home_dialog_wrong_package_description">APK yang dipilih bukan untuk aplikasi yang Anda harapkan untuk ditambal</string>
     <string name="home_dialog_expected_package">Paket yang diharapkan:</string>
     <string name="home_dialog_selected_package">Paket terpilih:</string>
+    <string name="home_dialog_orphaned_install_title">Salinan sebelumnya masih ada</string>
+    <string name="home_dialog_orphaned_install_description">Penambalan mengubah nama paket, sehingga salinan yang Anda tambal sebelumnya masih terpasang sebagai aplikasi terpisah</string>
+    <string name="home_dialog_orphaned_install_warning">Salinan ini tidak lagi dilacak dan tidak akan menerima pembaruan tambalan</string>
+    <string name="home_dialog_orphaned_install_uninstall">Hapus pemasangannya</string>
     <string name="home_outdated_patches_dialog_title">Tambalan mungkin sudah usang</string>
     <string name="home_outdated_patches_dialog_message">Data seluler aktif dan pembaruan tambalan dinonaktifkan</string>
     <string name="home_outdated_patches_dialog_warning">Menambal dengan tambalan yang sudah usang mungkin menghasilkan aplikasi yang rusak</string>
@@ -1090,6 +1098,7 @@ Rincian: %2$s"</string>
     <string name="install_update_manager_failed">Gagal memasang pembaruan</string>
     <string name="installing_manager_update">Memasang pembaruan…</string>
     <string name="downloading_manager_update">Mengunduh pembaruan…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Gagal mengunduh pembaruan: %s</string>
     <string name="failed_to_check_updates">Gagal memeriksa pembaruan: %s</string>
     <string name="failed_to_download_update">Gagal mengunduh pembaruan: %s</string>

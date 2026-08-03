@@ -47,7 +47,7 @@ fun AppIconSelector() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(MorpheDefaults.ContentPadding),
+                .padding(Defaults.ContentPadding),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             // Icon grid - 3 columns
@@ -128,7 +128,7 @@ private fun AppIconCard(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(MorpheDefaults.ItemSpacing),
+                .padding(Defaults.ItemSpacing),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -171,11 +171,11 @@ private fun AppIconChangeDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_appearance_app_icon_change_dialog_title),
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.settings_appearance_app_icon_change_dialog_confirm),
                 onPrimaryClick = onConfirm,
                 secondaryText = stringResource(android.R.string.cancel),

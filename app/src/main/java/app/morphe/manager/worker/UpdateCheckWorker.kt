@@ -11,8 +11,8 @@ import androidx.work.*
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.repository.ManagerUpdateRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.tag
 import kotlinx.coroutines.flow.first
@@ -64,7 +64,7 @@ class UpdateCheckWorker(
 ) : CoroutineWorker(context, params), KoinComponent {
 
     private val prefs: PreferencesManager by inject()
-    private val morpheAPI: MorpheAPI by inject()
+    private val managerUpdateRepository: ManagerUpdateRepository by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
     private val notificationManager: UpdateNotificationManager by inject()
 
@@ -91,12 +91,12 @@ class UpdateCheckWorker(
 
     /**
      * Check if a new Morphe Manager version is available.
-     * Delegates to [MorpheAPI.getAppUpdate] which handles semver comparison,
-     * prerelease logic and fetching from the correct branch.
+     * Delegates to [ManagerUpdateRepository] which handles semver comparison, prerelease
+     * logic, fetching from the correct branch and verifying that the APK is downloadable.
      */
     private suspend fun checkForManagerUpdate() {
         val update = runCatching {
-            morpheAPI.getAppUpdate()
+            managerUpdateRepository.refresh()
         }.getOrNull() ?: return
 
         val newVersion = update.version.removePrefix("v")

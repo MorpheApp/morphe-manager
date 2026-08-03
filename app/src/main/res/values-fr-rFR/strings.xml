@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Appuyez pour consulter et supprimer</string>
     <string name="home_metadata_errors_title">Certaines sources de patchs sont indisponibles</string>
     <string name="home_metadata_errors_subtitle">Appuyez pour consulter les sources</string>
+    <string name="home_outdated_manager_title">Morphe n\'est plus à jour</string>
+    <string name="home_outdated_manager_subtitle">Certaines sources de patchs nécessitent une version plus récente</string>
     <string name="home_metered_skipped_title">Mises à jour suspendues sur les données mobiles</string>
     <string name="home_metered_skipped_subtitle">Appuyez pour autoriser les mises à jour via les données mobiles</string>
     <string name="home_update_error">Mise à jour échouée</string>
@@ -80,7 +82,7 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Alimenté par la caféine et les bons patchs</string>
     <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Réveil et patch</string>
+    <string name="home_greeting_morning_1">Se lever et patcher</string>
     <string name="home_greeting_morning_2">Bonjour ! Les applications ne se patchent pas toutes seules</string>
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">Coup de mou de l\'après-midi ? Patcher quelque chose</string>
@@ -111,7 +113,7 @@
     <string name="sources_sort_enabled_first_description">Afficher les sources actives avant les sources désactivées</string>
     <string name="sources_management_open_in_browser">Ouvrir dans le navigateur</string>
     <string name="sources_management_failed_to_open_url">Échec de l\'ouverture de l\'URL</string>
-    <string name="sources_management_prerelease_toggle">Préversion de patchs</string>
+    <string name="sources_management_prerelease_toggle">Patchs en préversion</string>
     <string name="sources_management_prerelease_toggle_description">Reçoit un accès anticipé aux nouvelles versions expérimentales des patchs</string>
     <string name="sources_management_experimental_versions_toggle">Versions expérimentales de l\'application</string>
     <string name="sources_management_experimental_versions_toggle_description">Patche les cibles de l\'application expérimentale si disponibles</string>
@@ -121,7 +123,9 @@
     <string name="sources_management_source_blocked_badge">Bloqué</string>
     <string name="sources_management_metadata_unavailable">Métadonnées ND</string>
     <string name="sources_management_metadata_unavailable_hint">Le fichier de métadonnées distant est indisponible. Le patching avec le bundle installé fonctionne toujours, mais la mise à jour automatique est désactivée pour cette source</string>
-    <string name="sources_management_metadata_unavailable_hint_missing">Le bundle de patch n\'a pas pu être téléchargé. L\'URL de la source est peut-être incorrecte ou le fichier n’existe pas</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Le bundle de patchs n\'a pas pu être téléchargé. L\'URL de la source est peut-être incorrecte ou le fichier n’existe pas</string>
+    <string name="sources_management_outdated_manager_badge">Mettre à jour Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Cette source est conçue pour le patcheur %1$s, mais Morphe %2$s inclut le patcher %3$s. Mettez Morphe à jour pour l\'utiliser</string>
     <string name="sources_management_source_enabled">Source activée</string>
     <string name="sources_management_source_disabled">Source désactivée</string>
     <string name="sources_management_source_updating">Mise à jour de la source</string>
@@ -150,7 +154,7 @@
     <string name="sources_update_unavailable">Aucune mise à jour disponible</string>
     <string name="sources_download_fail">Échec du téléchargement des sources : %s</string>
     <string name="sources_download_fail_named">\'%s\' n\'a pas pu être mis à jour. Vérifiez votre connexion internet et réessayez</string>
-    <string name="sources_download_endpoint_not_found">\'%s\' : métadonnées de patch introuvables</string>
+    <string name="sources_download_endpoint_not_found">\'%s\' : métadonnées de patchs introuvables</string>
     <string name="sources_patch_expert_badge">Expert</string>
     <string name="sources_patch_expert_badge_tooltip">Activer le mode Expert dans les Paramètres pour inclure ce patch manuellement
 </string>
@@ -251,10 +255,15 @@ Pour de meilleurs résultats, cette application recommande d'effectuer le patchi
     <string name="home_dialog_wrong_package_description">L\'APK sélectionné ne correspond pas à l\'application que vous aviez l\'intention de patcher</string>
     <string name="home_dialog_expected_package">Paquet attendu :</string>
     <string name="home_dialog_selected_package">Paquet sélectionné :</string>
+    <string name="home_dialog_orphaned_install_title">Ancienne copie laissée en place</string>
+    <string name="home_dialog_orphaned_install_description">Le patching a modifié le nom du paquet, donc la copie que vous avez patchée précédemment est toujours installée comme une application distincte</string>
+    <string name="home_dialog_orphaned_install_warning">Elle n\'est plus suivie et ne recevra plus de mises à jour de patchs</string>
+    <string name="home_dialog_orphaned_install_uninstall">Le désinstaller</string>
+    <string name="home_dialog_orphaned_install_keep">Le conserver</string>
     <string name="home_outdated_patches_dialog_title">Les patchs peuvent être obsolètes</string>
-    <string name="home_outdated_patches_dialog_message">Les données mobiles sont activées et les mises à jour de patch sont désactivées</string>
+    <string name="home_outdated_patches_dialog_message">Les données mobiles sont activées et les mises à jour de patchs sont désactivées</string>
     <string name="home_outdated_patches_dialog_warning">Le patching avec des patchs obsolètes peut rendre l\'application inutilisable</string>
-    <string name="home_outdated_patches_dialog_update_and_patch">Mise à jour &amp; patch</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Mise à jour &amp; patchs</string>
     <string name="home_low_disk_space_dialog_title">Espace libre faible</string>
     <string name="home_low_disk_space_dialog_message">Seulement %1$.2f Go d\'espace de stockage libre disponible. Le patching nécessite au moins %2$.2f Go d\'espace libre pour fonctionner correctement</string>
     <string name="home_low_disk_space_dialog_warning">Continuer peut entraîner une erreur \"fichier introuvable\" ou un APK corrompu</string>
@@ -324,11 +333,13 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="batch_patch_source_installed">Application installée</string>
     <string name="batch_patch_source_file">Fichier joint</string>
     <string name="batch_patch_source_unavailable">L’APK n’a pas pu être préparé</string>
+    <string name="batch_patch_find_apk">Rechercher l\'APK</string>
     <string name="batch_patch_attach_apk">Joindre l’APK</string>
     <string name="batch_patch_force_version">Patcher quand même</string>
+    <string name="batch_patch_force_version_done">Mis en file d\'attente malgré tout, les patchs conçus pour d\'autres versions peuvent rendre l\'application inutilisable</string>
     <string name="batch_patch_edit_patches">Choisissez les patchs</string>
     <string name="batch_patch_state_no_apk">Aucun APK</string>
-    <string name="batch_patch_state_no_patches">Aucun patchs</string>
+    <string name="batch_patch_state_no_patches">Aucun patch</string>
     <string name="batch_patch_policy_install">Installer une fois terminé</string>
     <string name="batch_patch_policy_install_description">Installe chaque application patchée juste après la fin de la file d’attente. Désactivé conserve les APK pour plus tard</string>
     <string name="batch_patch_start">Démarrer le patching</string>
@@ -364,9 +375,9 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="home_app_info_install_type_root_play_store">Installation root depuis le Play Store</string>
     <string name="home_app_info_install_type_shizuku_play_store">Installation via Shizuku depuis le Play Store</string>
     <string name="home_app_info_patch_update_available">Mise à jour de patch disponible</string>
-    <string name="home_app_info_patch_update_available_description">Une version plus récente des patchs est disponible. Repatchez votre application pour bénéficier des dernières améliorations et corrections</string>
+    <string name="home_app_info_patch_update_available_description">Une version plus récente des patchs est disponible. Re-patchez votre application pour bénéficier des dernières améliorations et corrections</string>
     <string name="home_app_info_app_deleted_warning">L\'application a été désinstallée</string>
-    <string name="home_app_info_app_deleted_description">Cette application a été désinstallée en dehors de Morphe. Repatchez-la pour restaurer les fonctionnalités
+    <string name="home_app_info_app_deleted_description">Cette application a été désinstallée en dehors de Morphe. Re-patchez-la pour restaurer les fonctionnalités
 </string>
     <string name="home_app_info_apk_size">Taille de l\'APK</string>
     <string name="home_app_info_cpu_arch">Architecture du CPU</string>
@@ -388,6 +399,8 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="patcher_error_dialog_app_info">Informations sur l\'application</string>
     <string name="patcher_tab_logs">Journaux du patcheur</string>
     <string name="patcher_tab_game">Jeux</string>
+    <string name="patcher_logs_waiting">En attente de la sortie du journal…</string>
+    <string name="patcher_logs_lost">La sortie du journal n\'est pas conservée entre les redémarrages de l\'application</string>
     <string name="patcher_long_step_warning">Cette étape peut prendre un certain temps. Veuillez patienter…</string>
     <string name="patcher_installing_subtitle">Bientôt prêt à mettre le feu  ! 🎸</string>
     <string name="patcher_success_title">Tout est prêt ! 🎉</string>
@@ -423,7 +436,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="patcher_storage_permission_open_settings">Ouvrir les paramètres de stockage</string>
     <string name="patcher_storage_badge_denied">Autorisation refusée</string>
     <string name="patcher_storage_badge_missing">Introuvable</string>
-    <string name="patcher_storage_permission_hint">Astuce : Déplacez les fichiers vers /Android/data/app.morphe.manager/files/ - pas d\'autorisations supplémentaires nécessaires</string>
+    <string name="patcher_storage_permission_hint">Astuce : Déplacez les fichiers vers /Android/data/app.morphe.manager/files/ — aucune autorisation supplémentaire n\'est nécessaire</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Préparation</string>
     <string name="patcher_step_load_patches">Chargement des patchs</string>
@@ -856,7 +869,7 @@ Détails : %2$s"</string>
     <string name="settings_system_import_manager_settings_mode_title">Importer les paramètres de Morphe</string>
     <string name="settings_system_import_manager_settings_mode_description">Choisissez comment les paramètres et les sources importés doivent être appliqués</string>
     <string name="settings_system_import_selections_mode_title">Importer les sélections de patchs</string>
-    <string name="settings_system_import_selections_mode_description">Choisissez comment les sélections et les options de patchs importées doivent être appliquées</string>
+    <string name="settings_system_import_selections_mode_description">Choisissez comment les sélections et les options de patch importées doivent être appliquées</string>
     <string name="import_mode_replace_title">Remplacer l\'existant</string>
     <string name="import_mode_replace_description">Faire correspondre exactement à la sauvegarde. Les éléments absents de la sauvegarde seront supprimés</string>
     <string name="import_mode_merge_title">Fusionner avec l\'existant</string>
@@ -927,7 +940,7 @@ Détails : %2$s"</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Réinitialiser les sélections de paquets ?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Réinitialiser les paquets sélectionnés ?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Réinitialiser la sélection de sources ?</string>
-    <string name="settings_system_patch_selection_no_saved">Aucune sélection de patchs enregistrée</string>
+    <string name="settings_system_patch_selection_no_saved">Aucune sélection de patch enregistrée</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s à %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dans %2$s</string>
     <string name="settings_system_patch_selection_source_format">Source #%s</string>
@@ -941,7 +954,7 @@ Détails : %2$s"</string>
     <string name="settings_system_import_source_data_fail">Échec de l\'importation des données de source</string>
     <string name="settings_system_import_source_data_success">Données de source importées avec succès</string>
     <string name="settings_system_selected_patches_section">Patchs sélectionnés</string>
-    <string name="settings_system_patch_options_section">Options de patchs</string>
+    <string name="settings_system_patch_options_section">Options de patch</string>
     <string name="settings_system_no_patches_or_options">Aucun patch ou option enregistré</string>
     <!-- Copy selection from another bundle -->
     <string name="copy_selection_title">Copier la sélection depuis…</string>
@@ -1011,7 +1024,7 @@ Détails : %2$s"</string>
     <string name="disable">Désactiver</string>
     <string name="enable">Activer</string>
     <string name="loading">Chargement…</string>
-    <string name="loading_older_releases">Chargement des anciennes sorties…</string>
+    <string name="loading_older_releases">Chargement des versions antérieures…</string>
     <string name="creating">Création…</string>
     <string name="processing_apk">Traitement de l\'APK…</string>
     <string name="exporting_apks">Exportation des APK…</string>
@@ -1086,8 +1099,8 @@ Détails : %2$s"</string>
     <string name="changelog_description">Découvrez les dernières modifications de cette mise à jour</string>
     <string name="changelog_download_fail">Échec du téléchargement du journal des modifications : %s</string>
     <string name="changelog_empty">Aucun journal des modifications disponible</string>
-    <string name="changelog_show_older">Afficher les sorties plus anciennes</string>
-    <string name="changelog_older_empty">Aucune sortie plus ancienne à afficher</string>
+    <string name="changelog_show_older">Chargement des versions antérieures</string>
+    <string name="changelog_older_empty">Aucune version antérieure à afficher</string>
     <string name="no_network_toast">Aucune connexion internet disponible</string>
     <string name="update_available">Une mise à jour est disponible</string>
     <string name="ready_to_install_update">Prêt à installer la mise à jour</string>
@@ -1095,6 +1108,9 @@ Détails : %2$s"</string>
     <string name="install_update_manager_failed">Échec de l\'installation de la mise à jour</string>
     <string name="installing_manager_update">Installation de la mise à jour…</string>
     <string name="downloading_manager_update">Téléchargement de la mise à jour…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
+    <string name="manager_update_progress_downloaded">%1$.1f Mo téléchargés</string>
+    <string name="manager_update_not_ready">Cette version est toujours en cours de publication. Réessayez dans quelques minutes</string>
     <string name="download_manager_failed">Échec du téléchargement de la mise à jour : %s</string>
     <string name="failed_to_check_updates">Échec de la vérification des mises à jour : %s</string>
     <string name="failed_to_download_update">Échec du téléchargement de la mise à jour : %s</string>

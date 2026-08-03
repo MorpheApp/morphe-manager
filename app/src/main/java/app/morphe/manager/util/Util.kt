@@ -11,9 +11,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -23,6 +24,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlin.properties.PropertyDelegateProvider
 import kotlin.properties.ReadWriteProperty
@@ -61,6 +63,10 @@ inline fun uiSafe(context: Context, @StringRes toastMsg: Int, logMsg: String, bl
     try {
         block()
     } catch (error: Exception) {
+        // Cancellation is how a screen that goes away stops its own work, so reporting it would
+        // put an error in front of the user for something they did on purpose
+        if (error is CancellationException) throw error
+
         // Toast must be posted to the main thread
         Handler(Looper.getMainLooper()).post {
             context.toast(context.getString(toastMsg, error.simpleMessage()))
@@ -138,12 +144,6 @@ fun Int.androidVersionName(): String = when (this) {
     26 -> "8.0"
     else -> "$this" // future or very old SDK - just use the number
 }
-
-/** Creates a [Saver] for [SnapshotStateList]s so they survive process death via [SavedStateHandle]. */
-fun <T> snapshotStateListSaver() = Saver<SnapshotStateList<T>, List<T>>(
-    save = { it.toMutableList() },
-    restore = { it.toMutableStateList() }
-)
 
 /**
  * Property delegate that stores a non-null value of type [T] in [SavedStateHandle],

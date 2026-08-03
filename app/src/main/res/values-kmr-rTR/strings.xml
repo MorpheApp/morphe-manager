@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Bixin da ku binêrin û bênin serbest</string>
     <string name="home_metadata_errors_title">Hinek çavkaniyên pelê ne berdest in</string>
     <string name="home_metadata_errors_subtitle">Bixin da ku çavkaniyan binêrin</string>
+    <string name="home_outdated_manager_title">Morphe kevn e</string>
+    <string name="home_outdated_manager_subtitle">Çend çavkaniyên paşêrê hewceyê guherîna vêjêyek nû ne.</string>
     <string name="home_metered_skipped_title">Nûvekirin li ser data mobîlê hatin sekinin</string>
     <string name="home_metered_skipped_subtitle">Bikîne da ku nûvekirinên li ser data mobîl destûr bidî</string>
     <string name="home_update_error">Nûvekirin ji destûr ve çû</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
     <string name="sources_management_metadata_unavailable_hint">Pelgeya metadateya dûr nepehwîze. Lê dîsa jî nûkirina bi pakêta ku hatiye saz kirin dixebite, lê nûvekirina otomatîkî ji bo vê çavkaniyê nehate çalak kirin</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Pakêta paşîn nikaribû were dakêşîn. URL-a çavkaniyê dikare ne rast be an pelge ne heye</string>
+    <string name="sources_management_outdated_manager_badge">Morphe nûve bike</string>
+    <string name="sources_management_outdated_manager_hint">Ev çavkanî ji bo patcher %1$s hatî çêkirin, lê Morphe %2$s patcher %3$s vedihewîne. Morphe nûve bike da ku wê bikar bîne</string>
     <string name="sources_management_source_enabled">Çavkanî aktîv kirin</string>
     <string name="sources_management_source_disabled">Çavkanî ne aktîv kirin</string>
     <string name="sources_management_source_updating">Çavkanî nûkirin</string>
@@ -248,6 +252,11 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_dialog_wrong_package_description">APK ya hilbijartin ji bo sepanek lê çêkirin dirêj nadê</string>
     <string name="home_dialog_expected_package">Pakê dîtbar:</string>
     <string name="home_dialog_selected_package">Pakê hilbijartin:</string>
+    <string name="home_dialog_orphaned_install_title">Nusxeya berê ma nû ve şopîne</string>
+    <string name="home_dialog_orphaned_install_description">Pêşdehatina paketê navê guherand, ji ber vê jî nusxeya ku hûn berê şopand hewşa wek serîlêdana veqetî install e</string>
+    <string name="home_dialog_orphaned_install_warning">Ew neyê şopandin û dê pêşdehatinên paşê werne wergirtin</string>
+    <string name="home_dialog_orphaned_install_uninstall">Dev ji wê bikin</string>
+    <string name="home_dialog_orphaned_install_keep">Parastînin</string>
     <string name="home_outdated_patches_dialog_title">Dirûtinan dibin kevn</string>
     <string name="home_outdated_patches_dialog_message">Dane mobîl aktîv e û nûvekirina dirûtinan qut kirin</string>
     <string name="home_outdated_patches_dialog_warning">Dirûtîna bi dirûtinên kevn dibe sedî sepanê tê birçîbûn</string>
@@ -317,8 +326,10 @@ Herêma derveyî (qutkirî): dikare ji aliyê maskeya launcher'ê ve were qutkir
     <string name="batch_patch_source_installed">Sepa hat saz kirin</string>
     <string name="batch_patch_source_file">Pela têxistî</string>
     <string name="batch_patch_source_unavailable">Nexşeya APK nehatibû amadekirin</string>
+    <string name="batch_patch_find_apk">APK-ê bibîne</string>
     <string name="batch_patch_attach_apk">APK bişîne</string>
     <string name="batch_patch_force_version">Bi her halî patch bike</string>
+    <string name="batch_patch_force_version_done">Bi vî awayî li siruşê hat kirin, şîroveyên ji bo guhertoyên din dikarin sepanê bişikînin.</string>
     <string name="batch_patch_edit_patches">Patchan hilbijêre</string>
     <string name="batch_patch_state_no_apk">APK ne heye</string>
     <string name="batch_patch_state_no_patches">Patch ne hene</string>
@@ -380,6 +391,8 @@ Herêma derveyî (qutkirî): dikare ji aliyê maskeya launcher'ê ve were qutkir
     <string name="patcher_error_dialog_app_info">Agahdariya sepanê</string>
     <string name="patcher_tab_logs">Tovêrên patcherê</string>
     <string name="patcher_tab_game">Lîstik</string>
+    <string name="patcher_logs_waiting">Li bendê ne ku derketina logê bê nivîsîn…</string>
+    <string name="patcher_logs_lost">Derketina logê piştî demekê winda dibe</string>
     <string name="patcher_long_step_warning">Ev gav dikare hinekî dem bigire. Heke...</string>
     <string name="patcher_installing_subtitle">Nêzîk e ku hûn şêwaz bin! 🎸</string>
     <string name="patcher_success_title">Temam bû! 🎉</string>
@@ -1079,6 +1092,7 @@ Detay: %2$s"</string>
     <string name="install_update_manager_failed">Sazkirina nûvekirinê serket</string>
     <string name="installing_manager_update">Sazkirina nûvekirinê…</string>
     <string name="downloading_manager_update">Bar kirina nûvekirinê…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Bar kirina nûvekirinê serket: %s</string>
     <string name="failed_to_check_updates">Serketina kontrolkirina nûvekirinê: %s</string>
     <string name="failed_to_download_update">Bar kirina nûvekirinê serket: %s</string>

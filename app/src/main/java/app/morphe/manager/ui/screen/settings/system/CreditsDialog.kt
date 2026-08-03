@@ -64,11 +64,11 @@ fun CreditsDialog(onDismiss: () -> Unit) {
         LicensesDialog(onDismiss = { showLicensesDialog.value = false })
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.credits),
         footer = {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
@@ -77,7 +77,7 @@ fun CreditsDialog(onDismiss: () -> Unit) {
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
         ) {
             ContributorSection(
                 label = stringResource(R.string.credits_current_development),
@@ -106,7 +106,7 @@ private fun ContributorSection(
     contributors: List<Contributor>,
     onContributorClick: (Contributor) -> Unit
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)) {
         Text(
             text = label,
             style = MaterialTheme.typography.labelMedium,
@@ -121,7 +121,7 @@ private fun ContributorSection(
                     subtitle = "github.com/${contributor.organisation}"
                 )
                 if (index < contributors.lastIndex) {
-                    MorpheSettingsDivider()
+                    SettingsDivider()
                 }
             }
         }

@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PatchSelection
@@ -66,6 +67,7 @@ fun ExpertModeDialog(
     hasMultipleBundles: Boolean,
     patchActions: ExpertPatchActions,
     savedPatches: PatchSelection = emptyMap(),
+    lockStateOf: (PatchInfo) -> PatchLockState = { PatchLockState.NONE },
     proceedText: String = stringResource(R.string.expert_mode_proceed),
     /** Off where mixing sources is the norm rather than something the user just did. */
     warnOnMultipleBundles: Boolean = true,
@@ -118,19 +120,18 @@ fun ExpertModeDialog(
         }
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.expert_mode_title),
         titleTrailingContent = {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Count badge
-                InfoBadge(
+                StatusBadge(
                     text = "$totalSelectedCount/$totalPatchesCount",
-                    style = if (totalSelectedCount > 0) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
-                    isCompact = true
+                    tone = if (totalSelectedCount > 0) SemanticTone.Primary else SemanticTone.Neutral
                 )
 
                 // Search toggle button
@@ -171,13 +172,13 @@ fun ExpertModeDialog(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
         ) {
             // Search bar
             AnimatedVisibility(
                 visible = searchVisible,
-                enter = MorpheAnimations.expandFadeEnter,
-                exit = MorpheAnimations.shrinkFadeExit
+                enter = Animations.expandFadeEnter,
+                exit = Animations.shrinkFadeExit
             ) {
                 val focusRequester = remember { FocusRequester() }
                 val keyboardController = LocalSoftwareKeyboardController.current
@@ -185,7 +186,7 @@ fun ExpertModeDialog(
                     focusRequester.requestFocus()
                     keyboardController?.show()
                 }
-                MorpheDialogTextField(
+                AppDialogTextField(
                     value = searchQuery,
                     onValueChange = { searchQuery = it },
                     label = {
@@ -214,7 +215,7 @@ fun ExpertModeDialog(
 
                 // Bundle name header
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall),
+                    horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     StatusCircleIcon(
@@ -262,12 +263,13 @@ fun ExpertModeDialog(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .verticalScroll(singleBundleScroll),
-                            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+                            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
                         ) {
                             PatchListWithUniversalSection(
                                 patches = filteredPatches,
                                 newPatchNames = newPatches[bundle.uid] ?: emptySet(),
                                 missingRequiredOptions = patchesWithMissingRequired,
+                                lockStateOf = lockStateOf,
                                 onToggle = { patchActions.onPatchToggle(bundle.uid, it) },
                                 onConfigureOptions = {
                                     if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
@@ -334,7 +336,7 @@ fun ExpertModeDialog(
                             ) {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
-                                    modifier = Modifier.padding(horizontal = MorpheDefaults.ItemSpacing, vertical = 10.dp)
+                                    modifier = Modifier.padding(horizontal = Defaults.ItemSpacing, vertical = 10.dp)
                                 ) {
                                     Text(
                                         text = bundle.name,
@@ -347,11 +349,9 @@ fun ExpertModeDialog(
                                     Spacer(modifier = Modifier.height(2.dp))
 
                                     // Patch count badge
-                                    InfoBadge(
+                                    StatusBadge(
                                         text = "$enabledCount/$totalCount",
-                                        style = if (isSelected && hasResults) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
-                                        isCompact = true,
-                                        isCentered = true
+                                        tone = if (isSelected && hasResults) SemanticTone.Primary else SemanticTone.Neutral
                                     )
                                 }
                             }
@@ -378,7 +378,7 @@ fun ExpertModeDialog(
                             onRestoreSaved = { patchActions.onRestoreSaved(currentBundle.uid) },
                             onCopyFromBundle = { patchActions.onCopyFromBundle(currentBundle.uid) },
                             hasSavedSelection = savedPatches[currentBundle.uid]?.isNotEmpty() == true,
-                            modifier = Modifier.padding(vertical = MorpheDefaults.ContentPaddingSmall)
+                            modifier = Modifier.padding(vertical = Defaults.ContentPaddingSmall)
                         )
                     } else {
                         // Reserve space so pager height stays stable when a tab has no results
@@ -411,12 +411,13 @@ fun ExpertModeDialog(
                                     modifier = Modifier
                                         .fillMaxSize()
                                         .verticalScroll(pageScroll),
-                                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+                                    verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
                                 ) {
                                     PatchListWithUniversalSection(
                                         patches = patches,
                                         newPatchNames = newPatches[bundle.uid] ?: emptySet(),
                                         missingRequiredOptions = patchesWithMissingRequired,
+                                        lockStateOf = lockStateOf,
                                         onToggle = { patchActions.onPatchToggle(bundle.uid, it) },
                                         onConfigureOptions = {
                                             if (!it.options.isNullOrEmpty()) selectedPatchForOptions.value = bundle.uid to it
@@ -449,7 +450,7 @@ fun ExpertModeDialog(
             }
 
             // Proceed to Patching button
-            MorpheDialogButton(
+            AppDialogButton(
                 text = proceedText,
                 onClick = {
                     // Check if multiple bundles are selected
@@ -516,6 +517,7 @@ private fun PatchListWithUniversalSection(
     patches: List<Pair<PatchInfo, Boolean>>,
     newPatchNames: Set<String> = emptySet(),
     missingRequiredOptions: Set<String> = emptySet(),
+    lockStateOf: (PatchInfo) -> PatchLockState = { PatchLockState.NONE },
     onToggle: (String) -> Unit,
     onConfigureOptions: (PatchInfo) -> Unit,
 ) {
@@ -543,6 +545,7 @@ private fun PatchListWithUniversalSection(
             isEnabled = isEnabled,
             isNew = patch.name in newPatchNames,
             hasRequiredOptionsMissing = patch.name in missingRequiredOptions,
+            lockState = lockStateOf(patch),
             onToggle = { onToggle(patch.name) },
             onConfigureOptions = { onConfigureOptions(patch) },
             hasOptions = !patch.options.isNullOrEmpty()

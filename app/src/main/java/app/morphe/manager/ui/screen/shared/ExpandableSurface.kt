@@ -43,15 +43,15 @@ fun ExpandableSurface(
     var expanded by remember { mutableStateOf(initialExpanded) }
     val rotationAngle by animateFloatAsState(
         targetValue = if (expanded) 180f else 0f,
-        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION),
+        animationSpec = tween(Defaults.ANIMATION_DURATION),
         label = "rotation"
     )
 
     Surface(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(MorpheDefaults.CompactCornerRadius)),
-        shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+            .clip(RoundedCornerShape(Defaults.CompactCornerRadius)),
+        shape = RoundedCornerShape(Defaults.CompactCornerRadius),
         color = headerTint.copy(alpha = 0.05f)
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -73,7 +73,7 @@ fun ExpandableSurface(
                         imageVector = icon,
                         contentDescription = null,
                         tint = headerTint,
-                        modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
+                        modifier = Modifier.size(Defaults.IconSizeSmall)
                     )
                     Text(
                         text = title,
@@ -90,7 +90,7 @@ fun ExpandableSurface(
                     else
                         stringResource(R.string.expand),
                     modifier = Modifier
-                        .size(MorpheDefaults.IconSizeSmall)
+                        .size(Defaults.IconSizeSmall)
                         .rotate(rotationAngle),
                     tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
                 )
@@ -99,8 +99,8 @@ fun ExpandableSurface(
             // Expandable content
             AnimatedVisibility(
                 visible = expanded,
-                enter = MorpheAnimations.expandFadeEnter,
-                exit = MorpheAnimations.shrinkFadeExit
+                enter = Animations.expandFadeEnter,
+                exit = Animations.shrinkFadeExit
             ) {
                 content()
             }

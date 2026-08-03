@@ -54,17 +54,17 @@ fun AboutDialog(onDismiss: () -> Unit) {
         CreditsDialog(onDismiss = { showCreditsDialog.value = false })
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         footer = {
-            MorpheDialogButtonColumn {
-                MorpheDialogOutlinedButton(
+            AppDialogButtonColumn {
+                AppDialogOutlinedButton(
                     text = stringResource(R.string.credits),
                     onClick = { showCreditsDialog.value = true },
                     icon = Icons.Outlined.People,
                     modifier = Modifier.fillMaxWidth()
                 )
-                MorpheDialogOutlinedButton(
+                AppDialogOutlinedButton(
                     text = stringResource(R.string.close),
                     onClick = onDismiss,
                     modifier = Modifier.fillMaxWidth()

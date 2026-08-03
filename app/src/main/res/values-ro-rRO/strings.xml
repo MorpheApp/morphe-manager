@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Atingeți pentru a revizui și elimina</string>
     <string name="home_metadata_errors_title">Unele surse de patch-uri sunt indisponibile</string>
     <string name="home_metadata_errors_subtitle">Atingeți pentru a revizui sursele</string>
+    <string name="home_outdated_manager_title">Morphe este depășit(ă)</string>
+    <string name="home_outdated_manager_subtitle">Unele surse de patch-uri necesită o versiune mai nouă</string>
     <string name="home_metered_skipped_title">Actualizările sunt întrerupte pe date mobile</string>
     <string name="home_metered_skipped_subtitle">Atingeți pentru a permite actualizări pe date mobile</string>
     <string name="home_update_error">Actualizarea a eșuat</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Metadate indisponibile</string>
     <string name="sources_management_metadata_unavailable_hint">Fișierul de metadate de la distanță nu este disponibil. Aplicarea pachetului instalat funcționează în continuare, dar actualizarea automată este dezactivată pentru această sursă</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Pachetul de corecție nu a putut fi descărcat. URL-ul sursă poate fi incorect sau fișierul nu există</string>
+    <string name="sources_management_outdated_manager_badge">Actualizează Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Această sursă este construită pentru patcher %1$s, dar Morphe %2$s include patcher %3$s. Actualizează Morphe pentru a-l utiliza</string>
     <string name="sources_management_source_enabled">Sursă activată</string>
     <string name="sources_management_source_disabled">Sursă dezactivată</string>
     <string name="sources_management_source_updating">Se actualizează sursa</string>
@@ -248,6 +252,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="home_dialog_wrong_package_description">APK-ul selectat nu este pentru aplicația pe care dorești să o patch-uiești</string>
     <string name="home_dialog_expected_package">Pachet așteptat:</string>
     <string name="home_dialog_selected_package">Pachet selectat:</string>
+    <string name="home_dialog_orphaned_install_keep">Pãstreazã</string>
     <string name="home_outdated_patches_dialog_title">Patches pot fi depășite</string>
     <string name="home_outdated_patches_dialog_message">Datele mobile sunt active și actualizările patch-urilor sunt dezactivate</string>
     <string name="home_outdated_patches_dialog_warning">Folosirea patch-urilor învechite poate duce la o aplicație defectuoasă</string>
@@ -354,6 +359,8 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="patcher_error_dialog_app_info">Informații aplicație</string>
     <string name="patcher_tab_logs">Jurnale de patch-uri</string>
     <string name="patcher_tab_game">Jocuri</string>
+    <string name="patcher_logs_waiting">Se éteptarea ieşirii jurnalului…</string>
+    <string name="patcher_logs_lost">Ieşirile jurnalului nu sunt pãstrate la repornirea aplicaţiei</string>
     <string name="patcher_long_step_warning">Acest pas poate dura ceva timp. Vă rugăm să așteptați…</string>
     <string name="patcher_installing_subtitle">Aproape gata de distracție! 🎸</string>
     <string name="patcher_success_title">Gata! 🎉</string>
@@ -1024,6 +1031,7 @@ Detalii: %2$s"</string>
     <string name="install_update_manager_failed">Eroare la instalarea actualizării</string>
     <string name="installing_manager_update">Se instalează actualizarea...</string>
     <string name="downloading_manager_update">Se descarcă actualizarea...</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Descărcarea actualizării a eșuat: %s</string>
     <string name="failed_to_check_updates">Nu s-a putut verifica existența actualizărilor: %s</string>
     <string name="failed_to_download_update">Nu s-a putut descărca actualizarea: %s</string>

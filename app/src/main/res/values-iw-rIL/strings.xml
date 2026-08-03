@@ -23,6 +23,7 @@
     <string name="home_blocked_source_subtitle">הקש כדי לעיין ולהסיר</string>
     <string name="home_metadata_errors_title">חלק ממקורות התיקונים אינם זמינים</string>
     <string name="home_metadata_errors_subtitle">הקש כדי לעיין במקורות</string>
+    <string name="home_outdated_manager_title">Morphe מיושן</string>
     <string name="home_metered_skipped_title">עדכונים הופסקו בזמן שימוש בנתונים סלולריים</string>
     <string name="home_metered_skipped_subtitle">הקש כדי לאפשר עדכונים בנתונים סלולריים</string>
     <string name="home_update_error">העדכון נכשל</string>
@@ -249,6 +250,11 @@
     <string name="home_dialog_wrong_package_description">הקובץ APK שבחרת אינו עבור האפליקציה שברצונך לתקן</string>
     <string name="home_dialog_expected_package">תיקיית חבילה צפויה:</string>
     <string name="home_dialog_selected_package">תיקיית חבילה נבחרת:</string>
+    <string name="home_dialog_orphaned_install_title">עותק קודם שהושאר מאחור</string>
+    <string name="home_dialog_orphaned_install_description">התיקון שינה את שם החבילה, כך שהעותק שתיקנת קודם לכן עדיין מותקן כאפליקציה נפרדת</string>
+    <string name="home_dialog_orphaned_install_warning">הוא כבר לא במעקב ולא יקבל עדכוני תיקון</string>
+    <string name="home_dialog_orphaned_install_uninstall">הסר אותו</string>
+    <string name="home_dialog_orphaned_install_keep">שמור אותו</string>
     <string name="home_outdated_patches_dialog_title">הטיקים עשויים להיות מיושנים</string>
     <string name="home_outdated_patches_dialog_message">נתוני מובייל פעילים וכל עדכונים של טיקים מושבתים</string>
     <string name="home_outdated_patches_dialog_warning">התקנה עם טיקים מיושנים עשויה להוביל לאפליקציה שבורה</string>
@@ -320,8 +326,10 @@
     <string name="batch_patch_source_installed">אפליקציה מותקנת</string>
     <string name="batch_patch_source_file">קובץ מצורף</string>
     <string name="batch_patch_source_unavailable">לא ניתן היה להכין את ה-APK</string>
+    <string name="batch_patch_find_apk">APK חפש</string>
     <string name="batch_patch_attach_apk">צרף APK</string>
     <string name="batch_patch_force_version">טלא באופן אוטומטי</string>
+    <string name="batch_patch_force_version_done">תורן בכל זאת, תיקונים שנעשו לגרסאות אחרות עלולים לשבור את האפליקציה</string>
     <string name="batch_patch_edit_patches">בחר טלאים</string>
     <string name="batch_patch_state_no_apk">אין APK</string>
     <string name="batch_patch_state_no_patches">אין טלאים</string>
@@ -383,6 +391,8 @@
     <string name="patcher_error_dialog_app_info">מידע על האפליקציה</string>
     <string name="patcher_tab_logs">יומני תיקונים</string>
     <string name="patcher_tab_game">משחקים</string>
+    <string name="patcher_logs_waiting">ממתין לפלט לוג…</string>
+    <string name="patcher_logs_lost">פלט הלוג לא נשמר בין הפעלות מחדש של האפליקציה</string>
     <string name="patcher_long_step_warning">שלב זה עשוי לקחת זמן. אנא המתן…</string>
     <string name="patcher_installing_subtitle">כמעט מוכן לרוק! 🎸</string>
     <string name="patcher_success_title">סיימנו! 🎉</string>
@@ -1093,6 +1103,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="install_update_manager_failed">שגיאה בהתקנת עדכון</string>
     <string name="installing_manager_update">מתקין עדכון…</string>
     <string name="downloading_manager_update">מוריד עדכון…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">שגיאה בהורדת עדכון: %s</string>
     <string name="failed_to_check_updates">בדיקת עדכונים נכשלה: %s</string>
     <string name="failed_to_download_update">כשל בהורדת העדכון: %s</string>

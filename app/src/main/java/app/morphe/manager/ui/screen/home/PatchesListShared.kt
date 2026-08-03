@@ -21,9 +21,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.HeroInfoCard
-import app.morphe.manager.ui.screen.shared.MorpheAnimations
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
-import app.morphe.manager.ui.screen.shared.MorpheDialogTextField
+import app.morphe.manager.ui.screen.shared.Animations
+import app.morphe.manager.ui.screen.shared.Defaults
+import app.morphe.manager.ui.screen.shared.AppDialogTextField
 
 /**
  * Header card shown at the top of patches-list dialogs.
@@ -57,7 +57,7 @@ internal fun PatchesListHeaderCard(
         else patchCountLabel
         AnimatedContent(
             targetState = countText,
-            transitionSpec = MorpheAnimations.counterTransitionSpec,
+            transitionSpec = Animations.counterTransitionSpec,
             label = "patches_count"
         ) { count ->
             Text(
@@ -91,7 +91,7 @@ internal fun PatchesListSearchRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.Bottom
         ) {
-            MorpheDialogTextField(
+            AppDialogTextField(
                 value = searchQuery,
                 onValueChange = onSearchQueryChange,
                 label = { Text(stringResource(R.string.expert_mode_search)) },
@@ -123,7 +123,7 @@ internal fun PatchesListSearchRow(
                     Icon(
                         imageVector = Icons.Outlined.FilterList,
                         contentDescription = stringResource(R.string.filter),
-                        modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
+                        modifier = Modifier.size(Defaults.IconSizeSmall)
                     )
                 }
             }

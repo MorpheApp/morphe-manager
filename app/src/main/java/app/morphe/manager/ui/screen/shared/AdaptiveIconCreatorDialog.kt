@@ -224,7 +224,7 @@ fun AdaptiveIconCreatorDialog(
         }
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = { if (!isCreating) onDismiss() },
         title = stringResource(R.string.adaptive_icon_create),
         titleTrailingContent = {
@@ -236,7 +236,7 @@ fun AdaptiveIconCreatorDialog(
         },
         padding = DialogPadding.Compact,
         footer = {
-            MorpheDialogButton(
+            AppDialogButton(
                 text = stringResource(R.string.adaptive_icon_create),
                 onClick = { openFolderPicker() },
                 enabled = foregroundBitmap != null && !isCreating,
@@ -251,7 +251,7 @@ fun AdaptiveIconCreatorDialog(
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 // Foreground image picker
-                MorpheDialogOutlinedButton(
+                AppDialogOutlinedButton(
                     text = if (foregroundUri == null)
                         stringResource(R.string.adaptive_icon_select_image)
                     else
@@ -264,8 +264,8 @@ fun AdaptiveIconCreatorDialog(
                 // Transparency warning shown when the selected image has no transparent pixels
                 AnimatedVisibility(
                     visible = showTransparencyWarning,
-                    enter = MorpheAnimations.expandFadeEnter,
-                    exit = MorpheAnimations.shrinkFadeExit
+                    enter = Animations.expandFadeEnter,
+                    exit = Animations.shrinkFadeExit
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -290,7 +290,7 @@ fun AdaptiveIconCreatorDialog(
                 //    Each column takes equal weight so the previews fill available width side by side
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding),
+                    horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPadding),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     // Adaptive icon preview, interactive
@@ -514,7 +514,7 @@ fun AdaptiveIconCreatorDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),
-                    shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+                    shape = RoundedCornerShape(Defaults.CompactCornerRadius),
                     color = swatchColor,
                     border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline)
                 ) {
@@ -528,7 +528,7 @@ fun AdaptiveIconCreatorDialog(
                     }
                 }
             }
-            MorpheContentOverlay(visible = isCreating) {
+            ContentOverlay(visible = isCreating) {
                 PulsingLogoWithCaption(caption = stringResource(R.string.creating))
             }
         }
@@ -549,11 +549,11 @@ fun AdaptiveIconCreatorDialog(
 
     // Icon creation guide dialog
     if (showInfoDialog.value) {
-        MorpheDialog(
+        AppDialog(
             onDismissRequest = { showInfoDialog.value = false },
             title = stringResource(R.string.adaptive_icon_guide),
             footer = {
-                MorpheDialogButton(
+                AppDialogButton(
                     text = stringResource(android.R.string.ok),
                     onClick = { showInfoDialog.value = false },
                     modifier = Modifier.fillMaxWidth()
@@ -764,7 +764,7 @@ private fun StatusBarPreview(
     val contentColor = MaterialTheme.colorScheme.onSurface
     val guideColor = contentColor.copy(alpha = 0.5f)
     val dashEffect = remember { PathEffect.dashPathEffect(floatArrayOf(3f, 3f), 0f) }
-    val shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius)
+    val shape = RoundedCornerShape(Defaults.CompactCornerRadius)
     // Capture RGB components for use inside Canvas DrawScope
     val iconR = contentColor.red * 255f
     val iconG = contentColor.green * 255f
@@ -844,19 +844,19 @@ private fun StatusBarPreview(
             Icon(
                 imageVector = Icons.Outlined.SignalCellular4Bar,
                 contentDescription = null,
-                modifier = Modifier.size(MorpheDefaults.IconSizeSmall),
+                modifier = Modifier.size(Defaults.IconSizeSmall),
                 tint = contentColor
             )
             Icon(
                 imageVector = Icons.Outlined.Wifi,
                 contentDescription = null,
-                modifier = Modifier.size(MorpheDefaults.IconSizeSmall),
+                modifier = Modifier.size(Defaults.IconSizeSmall),
                 tint = contentColor
             )
             Icon(
                 imageVector = Icons.Outlined.BatteryFull,
                 contentDescription = null,
-                modifier = Modifier.size(MorpheDefaults.IconSizeSmall),
+                modifier = Modifier.size(Defaults.IconSizeSmall),
                 tint = contentColor
             )
         }

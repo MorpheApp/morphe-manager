@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">पुनरावलोकन करण्यासाठी आणि काढण्यासाठी टॅप करा</string>
     <string name="home_metadata_errors_title">काही पॅच स्त्रोत अनुपलब्ध आहेत</string>
     <string name="home_metadata_errors_subtitle">स्त्रोतांचे पुनरावलोकन करण्यासाठी टॅप करा</string>
+    <string name="home_outdated_manager_title">Morphe जुने झाले आहे</string>
+    <string name="home_outdated_manager_subtitle">काही पॅच स्त्रोतांना नवीन आवृत्ती आवश्यक आहे</string>
     <string name="home_metered_skipped_title">मोबाइल डेटावर अद्यतने थांबवली आहेत</string>
     <string name="home_metered_skipped_subtitle">मोबाईल डेटावर अपडेट्सला अनुमती देण्यासाठी टॅप करा</string>
     <string name="home_update_error">सुधारणा अयशस्वी झाली</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नाही</string>
     <string name="sources_management_metadata_unavailable_hint">दूरस्थ मेटाडेटा फाइल उपलब्ध नाही. स्थापित बंडलसह पॅचिंग अजूनही कार्य करते, परंतु या स्रोतासाठी स्वयंचलित अद्यतन अक्षम केले आहे</string>
     <string name="sources_management_metadata_unavailable_hint_missing">पॅच बंडल डाउनलोड करता आले नाही. स्रोत URL चुकीचा असू शकतो किंवा फाइल अस्तित्वात नाही</string>
+    <string name="sources_management_outdated_manager_badge">Morphe अद्यतनित करा</string>
+    <string name="sources_management_outdated_manager_hint">हा स्रोत पॅचर %1$s साठी तयार केला आहे, परंतु Morphe %2$s मध्ये पॅचर %3$s समाविष्ट आहे. ते वापरण्यासाठी Morphe अद्यतनित करा</string>
     <string name="sources_management_source_enabled">स्रोत सक्षम केले</string>
     <string name="sources_management_source_disabled">स्रोत अक्षम केले</string>
     <string name="sources_management_source_updating">स्रोत अद्यतनित करत आहे</string>
@@ -249,6 +253,11 @@
     <string name="home_dialog_wrong_package_description">तुम्ही निवडलेला APK तुम्ही पॅच करू इच्छित असलेल्या ॲप्लिकेशनसाठी नाही</string>
     <string name="home_dialog_expected_package">अपेक्षित पॅकेज:</string>
     <string name="home_dialog_selected_package">निवडलेले पॅकेज:</string>
+    <string name="home_dialog_orphaned_install_title">मागील प्रत मागे राहिली</string>
+    <string name="home_dialog_orphaned_install_description">पॅचिंगमुळे पॅकेजचे नाव बदलले, त्यामुळे तुम्ही पूर्वी पॅच केलेली प्रत अजूनही स्वतंत्र ॲप म्हणून स्थापित आहे</string>
+    <string name="home_dialog_orphaned_install_warning">हे आता ट्रॅक केले जाणार नाही आणि पॅच अपडेट्स मिळणार नाहीत</string>
+    <string name="home_dialog_orphaned_install_uninstall">अनइंस्टॉल करा</string>
+    <string name="home_dialog_orphaned_install_keep">ठेवा</string>
     <string name="home_outdated_patches_dialog_title">पॅच कालबाह्य होऊ शकतात</string>
     <string name="home_outdated_patches_dialog_message">मोबाइल डेटा सक्रिय आहे आणि पॅच अपडेट्स बंद आहेत</string>
     <string name="home_outdated_patches_dialog_warning">कालबाह्य पॅचसह पॅचिंग केल्याने ॲप खंडित होऊ शकते</string>
@@ -322,8 +331,10 @@
     <string name="batch_patch_source_installed">इंस्टॉल केलेले ॲप</string>
     <string name="batch_patch_source_file">जोडलेली फाइल</string>
     <string name="batch_patch_source_unavailable">APK तयार होऊ शकले नाही.</string>
+    <string name="batch_patch_find_apk">APK शोधा</string>
     <string name="batch_patch_attach_apk">APK जोडा</string>
     <string name="batch_patch_force_version">तरीही पॅच करा</string>
+    <string name="batch_patch_force_version_done">असो, रांगेत टाकले, इतर आवृत्त्यांसाठी केलेले पॅच ॲप खराब करू शकतात</string>
     <string name="batch_patch_edit_patches">पॅच निवडा</string>
     <string name="batch_patch_state_no_apk">APK नाही</string>
     <string name="batch_patch_state_no_patches">पॅच नाहीत</string>
@@ -385,6 +396,8 @@
     <string name="patcher_error_dialog_app_info">ॲप माहिती</string>
     <string name="patcher_tab_logs">पॅचर लॉग</string>
     <string name="patcher_tab_game">गेम</string>
+    <string name="patcher_logs_waiting">लॉग आउटपुटची प्रतीक्षा करत आहे…</string>
+    <string name="patcher_logs_lost">ॲप रीस्टार्ट झाल्यावर लॉग आउटपुट ठेवला जात नाही</string>
     <string name="patcher_long_step_warning">या स्टेपला थोडा वेळ लागू शकतो. कृपया प्रतीक्षा करा…</string>
     <string name="patcher_installing_subtitle">जवळपास तयार! 🎸</string>
     <string name="patcher_success_title">सर्व पूर्ण झाले! 🎉</string>
@@ -1088,6 +1101,7 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">अपडेट स्थापित करण्यात अयशस्वी</string>
     <string name="installing_manager_update">अपडेट स्थापित करत आहे…</string>
     <string name="downloading_manager_update">अपडेट डाउनलोड करत आहे…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">अपडेट डाउनलोड करण्यात अयशस्वी: %s</string>
     <string name="failed_to_check_updates">अपडेट तपासण्यात अयशस्वी: %s</string>
     <string name="failed_to_download_update">अपडेट डाउनलोड करण्यात अयशस्वी: %s</string>

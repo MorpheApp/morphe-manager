@@ -63,7 +63,7 @@ private fun resolveButtonColors(isDestructive: Boolean, filled: Boolean): Dialog
  * Semi-transparent primary button for dialogs.
  */
 @Composable
-fun MorpheDialogButton(
+fun AppDialogButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -91,7 +91,7 @@ fun MorpheDialogButton(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
+                modifier = Modifier.size(Defaults.IconSizeSmall)
             )
             Spacer(Modifier.width(8.dp))
         }
@@ -108,7 +108,7 @@ fun MorpheDialogButton(
  * Semi-transparent outlined button for dialogs.
  */
 @Composable
-fun MorpheDialogOutlinedButton(
+fun AppDialogOutlinedButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -137,7 +137,7 @@ fun MorpheDialogOutlinedButton(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                modifier = Modifier.size(MorpheDefaults.IconSizeSmall)
+                modifier = Modifier.size(Defaults.IconSizeSmall)
             )
             Spacer(Modifier.width(8.dp))
         }
@@ -184,7 +184,7 @@ enum class DialogButtonLayout {
  * when combined text exceeds 30 chars or either label exceeds 18 chars.
  */
 @Composable
-fun MorpheDialogButtonRow(
+fun AppDialogButtonRow(
     primaryText: String,
     onPrimaryClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -212,9 +212,9 @@ fun MorpheDialogButtonRow(
         // Vertical layout - primary on top
         Column(
             modifier = modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding / 2)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding / 2)
         ) {
-            MorpheDialogButton(
+            AppDialogButton(
                 text = primaryText,
                 onClick = onPrimaryClick,
                 icon = primaryIcon,
@@ -225,14 +225,14 @@ fun MorpheDialogButtonRow(
 
             if (secondaryText != null && onSecondaryClick != null) {
                 if (isSecondaryPrimary) {
-                    MorpheDialogButton(
+                    AppDialogButton(
                         text = secondaryText,
                         onClick = onSecondaryClick,
                         icon = secondaryIcon,
                         modifier = Modifier.fillMaxWidth()
                     )
                 } else {
-                    MorpheDialogOutlinedButton(
+                    AppDialogOutlinedButton(
                         text = secondaryText,
                         onClick = onSecondaryClick,
                         icon = secondaryIcon,
@@ -245,18 +245,18 @@ fun MorpheDialogButtonRow(
         // Horizontal layout
         Row(
             modifier = modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+            horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
         ) {
             if (secondaryText != null && onSecondaryClick != null) {
                 if (isSecondaryPrimary) {
-                    MorpheDialogButton(
+                    AppDialogButton(
                         text = secondaryText,
                         onClick = onSecondaryClick,
                         icon = secondaryIcon,
                         modifier = Modifier.weight(1f)
                     )
                 } else {
-                    MorpheDialogOutlinedButton(
+                    AppDialogOutlinedButton(
                         text = secondaryText,
                         onClick = onSecondaryClick,
                         icon = secondaryIcon,
@@ -265,7 +265,7 @@ fun MorpheDialogButtonRow(
                 }
             }
 
-            MorpheDialogButton(
+            AppDialogButton(
                 text = primaryText,
                 onClick = onPrimaryClick,
                 icon = primaryIcon,
@@ -281,13 +281,13 @@ fun MorpheDialogButtonRow(
  * Vertically stacked button group for dialogs with more than two actions.
  */
 @Composable
-fun MorpheDialogButtonColumn(
+fun AppDialogButtonColumn(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding / 2),
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding / 2),
         horizontalAlignment = Alignment.CenterHorizontally,
         content = content
     )

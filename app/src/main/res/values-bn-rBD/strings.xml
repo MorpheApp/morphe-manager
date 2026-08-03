@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">পর্যালোচনা ও সরানোর জন্য আলতো চাপুন</string>
     <string name="home_metadata_errors_title">কিছু প্যাচ সোর্স অনুপলব্ধ</string>
     <string name="home_metadata_errors_subtitle">সোর্সগুলি পর্যালোচনা করার জন্য আলতো চাপুন</string>
+    <string name="home_outdated_manager_title">Morphe à®¦®°®¨ à®¨®²®¨ à®¨®¤®°</string>
+    <string name="home_outdated_manager_subtitle">কিছু প্যাচ উৎসের একটি নতুন সংস্করণ প্রয়োজন</string>
     <string name="home_metered_skipped_title">মোবাইল ডেটাতে আপডেটগুলিPaused</string>
     <string name="home_metered_skipped_subtitle">মোবাইল ডেটাতে আপডেট করার জন্য ট্যাপ করুন</string>
     <string name="home_update_error">আপডেট ব্যর্থ হয়েছে</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">মেটাডেটা উপলব্ধ নয়</string>
     <string name="sources_management_metadata_unavailable_hint">রিমোট মেটাডেটা ফাইলটি পাওয়া যাচ্ছে না। ইনস্টল করা বান্ডেলের সাথে প্যাচিং এখনও কাজ করে, তবে এই উৎসের জন্য স্বয়ংক্রিয় আপডেট নিষ্ক্রিয় করা হয়েছে</string>
     <string name="sources_management_metadata_unavailable_hint_missing">প্যাচ বান্ডেল ডাউনলোড করা যায়নি। উৎস URL ভুল হতে পারে অথবা ফাইলটি বিদ্যমান নেই</string>
+    <string name="sources_management_outdated_manager_badge">মর্ফে আপডেট করুন</string>
+    <string name="sources_management_outdated_manager_hint">এই উৎসটি প্যাচার %1$s এর জন্য তৈরি করা হয়েছে, কিন্তু মর্ফে %2$s এ প্যাচার %3$s অন্তর্ভুক্ত রয়েছে। এটি ব্যবহার করার জন্য মর্ফে আপডেট করুন</string>
     <string name="sources_management_source_enabled">সোর্স সক্রিয় করা হয়েছে</string>
     <string name="sources_management_source_disabled">সোর্স নিষ্ক্রিয় করা হয়েছে</string>
     <string name="sources_management_source_updating">সোর্স আপডেট করা হচ্ছে</string>
@@ -250,6 +254,11 @@
     <string name="home_dialog_wrong_package_description">নির্বাচিত APK অ্যাপের জন্য নির্বাচিত হয়নি</string>
     <string name="home_dialog_expected_package">অ্যাপের নাম:</string>
     <string name="home_dialog_selected_package">নির্বাচিত অ্যাপ:</string>
+    <string name="home_dialog_orphaned_install_title">আগের কপিটি রয়ে গেছে</string>
+    <string name="home_dialog_orphaned_install_description">প্যাচিং প্যাকেজের নাম পরিবর্তন করেছে, তাই আপনি আগে যে কপিটি প্যাচ করেছিলেন সেটি এখনও একটি পৃথক অ্যাপ্লিকেশন হিসাবে ইনস্টল করা আছে</string>
+    <string name="home_dialog_orphaned_install_warning">এটি আর ট্র্যাক করা হবে না এবং প্যাচ আপডেট পাবে না</string>
+    <string name="home_dialog_orphaned_install_uninstall">এটি আনইনস্টল করুন</string>
+    <string name="home_dialog_orphaned_install_keep">এটা রাখুন</string>
     <string name="home_outdated_patches_dialog_title">প্যাচগুলি পুরানো হতে পারে</string>
     <string name="home_outdated_patches_dialog_message">মোবাইল ডেটা সক্রিয় এবং প্যাচ আপডেট অক্ষম</string>
     <string name="home_outdated_patches_dialog_warning">পুরানো প্যাচগুলি ব্যবহার করে অ্যাপটি ভেঙে যেতে পারে</string>
@@ -323,8 +332,10 @@
     <string name="batch_patch_source_installed">অ্যাপ ইনস্টল করা হয়েছে</string>
     <string name="batch_patch_source_file">সংযুক্ত ফাইল</string>
     <string name="batch_patch_source_unavailable">APK প্রস্তুত করা যায়নি</string>
+    <string name="batch_patch_find_apk">APK খুঁজুন</string>
     <string name="batch_patch_attach_apk">APK সংযুক্ত করুন</string>
     <string name="batch_patch_force_version">যাইহোক প্যাচ করুন</string>
+    <string name="batch_patch_force_version_done">যাইহোক, সারিবদ্ধ করা হয়েছে, অন্যান্য সংস্করণের জন্য তৈরি করা প্যাচগুলি অ্যাপটিকে ভেঙে দিতে পারে</string>
     <string name="batch_patch_edit_patches">প্যাচ নির্বাচন করুন</string>
     <string name="batch_patch_state_no_apk">কোনো APK নেই</string>
     <string name="batch_patch_state_no_patches">কোনো প্যাচ নেই</string>
@@ -386,6 +397,8 @@
     <string name="patcher_error_dialog_app_info">অ্যাপ তথ্য</string>
     <string name="patcher_tab_logs">প্যাচার লগ</string>
     <string name="patcher_tab_game">গেমস</string>
+    <string name="patcher_logs_waiting">লগ আউটপুটের জন্য অপেক্ষা করা হচ্ছে…</string>
+    <string name="patcher_logs_lost">অ্যাপ পুনরায় চালু করলে লগ আউটপুট সংরক্ষণ করা হবে না</string>
     <string name="patcher_long_step_warning">এই ধাপটি সম্পন্ন হতে কিছু সময় লাগতে পারে। অনুগ্রহ করে অপেক্ষা করুন…</string>
     <string name="patcher_installing_subtitle">প্রায় রক-এর জন্য প্রস্তুত! 🎸</string>
     <string name="patcher_success_title">সবকিছু সম্পন্ন! 🎉</string>
@@ -1080,6 +1093,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="install_update_manager_failed">আপডেট ইনস্টল করতে ব্যর্থ</string>
     <string name="installing_manager_update">আপডেট ইনস্টল করা হচ্ছে…</string>
     <string name="downloading_manager_update">আপডেট ডাউনলোড হচ্ছে…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">আপডেট ডাউনলোড করা যায়নি: %s</string>
     <string name="failed_to_check_updates">আপডেটগুলি পরীক্ষা করতে ব্যর্থ: %s</string>
     <string name="failed_to_download_update">আপডেট ডাউনলোড করতে ব্যর্থ: %s</string>

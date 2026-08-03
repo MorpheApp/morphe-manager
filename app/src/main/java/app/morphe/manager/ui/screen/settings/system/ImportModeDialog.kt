@@ -41,18 +41,18 @@ fun ImportModeDialog(
     onDismiss: () -> Unit,
     onSelect: (ImportMode) -> Unit,
 ) {
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(titleRes),
         footer = {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(android.R.string.cancel),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
             )
         }
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)) {
+        Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)) {
             Text(
                 text = stringResource(descriptionRes),
                 style = MaterialTheme.typography.bodyMedium,

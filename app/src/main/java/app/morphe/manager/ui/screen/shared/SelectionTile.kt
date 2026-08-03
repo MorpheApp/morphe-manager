@@ -37,7 +37,7 @@ fun SelectionTile(
             if (stateDescription != null) this.stateDescription = stateDescription
             if (contentDescription != null) this.contentDescription = contentDescription
         },
-        shape = RoundedCornerShape(MorpheDefaults.SettingsCornerRadius),
+        shape = RoundedCornerShape(Defaults.SettingsCornerRadius),
         color = if (selected) colors.primaryContainer else colors.surface,
         border = BorderStroke(
             width = if (selected) 2.dp else 1.dp,

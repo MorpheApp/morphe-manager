@@ -28,8 +28,8 @@ import app.morphe.manager.util.ChangelogEntry
 private fun ChangelogEntryDivider() {
     HorizontalDivider(
         modifier = Modifier.padding(
-            top = MorpheDefaults.ContentPaddingSmall,
-            bottom = MorpheDefaults.ContentPadding
+            top = Defaults.ContentPaddingSmall,
+            bottom = Defaults.ContentPadding
         ),
         color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
     )
@@ -74,8 +74,8 @@ fun LazyListScope.changelogOlderItems(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    top = MorpheDefaults.ContentPaddingSmall,
-                    bottom = MorpheDefaults.ContentPadding
+                    top = Defaults.ContentPaddingSmall,
+                    bottom = Defaults.ContentPadding
                 ),
             color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
         )
@@ -83,7 +83,7 @@ fun LazyListScope.changelogOlderItems(
 
     when {
         entries == null -> item("changelog_older_button") {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.changelog_show_older),
                 onClick = onExpand,
                 icon = Icons.Outlined.History,

@@ -24,6 +24,18 @@
         <item quantity="one">%s APK faylı</item>
         <item quantity="other">%s APK faylı</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">%s tətbiq quraşdırıldı</item>
+        <item quantity="other">%s tətbiq quraşdırıldı</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">%s tətbiq yenidən quraşdırıldı</item>
+        <item quantity="other">%s tətbiq yenidən quraşdırıldı</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">%s tətbiq silindi</item>
+        <item quantity="other">%s tətbiq silindi</item>
+    </plurals>
     <plurals name="batch_uninstall_confirm_title">
         <item quantity="one">%s tətbiq silinsin?</item>
         <item quantity="other">%s tətbiq silinsin?</item>

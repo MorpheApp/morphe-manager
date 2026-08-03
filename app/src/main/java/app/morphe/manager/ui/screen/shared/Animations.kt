@@ -10,14 +10,14 @@ import androidx.compose.animation.core.*
 import androidx.compose.ui.Alignment
 
 /**
- * Shared [EnterTransition] and [ExitTransition] for all MorpheDialog instances and
+ * Shared [EnterTransition] and [ExitTransition] for all AppDialog instances and
  * dialog-level AnimatedVisibility wrappers. Changing these values updates every dialog
  * animation in the app at once.
  */
-object MorpheAnimations {
+object Animations {
     // Private helper to avoid repeating tween specifications
     private fun <T> defaultTween(
-        duration: Int = MorpheDefaults.ANIMATION_DURATION,
+        duration: Int = Defaults.ANIMATION_DURATION,
         easing: Easing = LinearOutSlowInEasing
     ) = tween<T>(duration, easing = easing)
 
@@ -27,11 +27,11 @@ object MorpheAnimations {
 
     // Dialog transitions
     val dialogEnter = fadeIn + scaleIn(
-        initialScale = MorpheDefaults.DIALOG_SCALE,
+        initialScale = Defaults.DIALOG_SCALE,
         animationSpec = defaultTween(easing = FastOutSlowInEasing)
     )
     val dialogExit = fadeOut + scaleOut(
-        targetScale = MorpheDefaults.DIALOG_SCALE,
+        targetScale = Defaults.DIALOG_SCALE,
         animationSpec = defaultTween()
     )
 
@@ -41,10 +41,10 @@ object MorpheAnimations {
 
     // Screen transitions.
     // Enter uses a longer duration; exit is identical to dialogExit so we reuse it directly
-    val screenEnter = fadeIn(defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION)) +
+    val screenEnter = fadeIn(defaultTween(Defaults.SCREEN_ENTER_DURATION)) +
             scaleIn(
-                initialScale = MorpheDefaults.DIALOG_SCALE,
-                animationSpec = defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
+                initialScale = Defaults.DIALOG_SCALE,
+                animationSpec = defaultTween(Defaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
             )
     val screenExit = dialogExit
 
@@ -69,26 +69,26 @@ object MorpheAnimations {
 
     // Push transitions (Settings screen slides up over home, returns by sliding down)
     val pushEnter = slideInVertically(
-        animationSpec = defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
-    ) { it } + fadeIn(defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION))
+        animationSpec = defaultTween(Defaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
+    ) { it } + fadeIn(defaultTween(Defaults.SCREEN_ENTER_DURATION))
     val pushExit = slideOutVertically(
-        animationSpec = defaultTween(MorpheDefaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
-    ) { it } + fadeOut(tween(MorpheDefaults.SCREEN_ENTER_DURATION, easing = LinearEasing))
+        animationSpec = defaultTween(Defaults.SCREEN_ENTER_DURATION, FastOutSlowInEasing)
+    ) { it } + fadeOut(tween(Defaults.SCREEN_ENTER_DURATION, easing = LinearEasing))
 
     // Spring & custom transitions
     val springSlideUpEnter = slideInVertically(
         animationSpec = spring(Spring.DampingRatioMediumBouncy, Spring.StiffnessMedium),
         initialOffsetY = { it }
-    ) + fadeIn(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
+    ) + fadeIn(tween(Defaults.ANIMATION_DURATION_SHORT))
 
     val springSlideDownExit = slideOutVertically(
         animationSpec = defaultTween(easing = FastOutSlowInEasing),
         targetOffsetY = { it }
-    ) + fadeOut(tween(MorpheDefaults.ANIMATION_DURATION_SHORT))
+    ) + fadeOut(tween(Defaults.ANIMATION_DURATION_SHORT))
 
     // Scale Transitions
-    val fadeScaleIn = fadeIn + scaleIn(defaultTween(), initialScale = MorpheDefaults.DIALOG_SCALE)
-    val fadeScaleOut = fadeOut + scaleOut(defaultTween(), targetScale = MorpheDefaults.DIALOG_SCALE)
+    val fadeScaleIn = fadeIn + scaleIn(defaultTween(), initialScale = Defaults.DIALOG_SCALE)
+    val fadeScaleOut = fadeOut + scaleOut(defaultTween(), targetScale = Defaults.DIALOG_SCALE)
 
     // Floating Button (FAB / scroll-to-top). Pops in from below with a stronger scale
     val fabEnter = fadeIn + scaleIn(defaultTween(), initialScale = 0.85f) +
@@ -121,7 +121,7 @@ object MorpheAnimations {
     val slideUpContentTransitionSpec = slideTransitionSpec(enterDuration = 400, exitDuration = 200, offset = { it / 4 })
 
     // Simple crossfade with configurable duration
-    fun fadeCrossfade(duration: Int = MorpheDefaults.ANIMATION_DURATION): AnimatedContentTransitionScope<*>.() -> ContentTransform = {
+    fun fadeCrossfade(duration: Int = Defaults.ANIMATION_DURATION): AnimatedContentTransitionScope<*>.() -> ContentTransform = {
         fadeIn(tween(duration)) togetherWith fadeOut(tween(duration))
     }
 

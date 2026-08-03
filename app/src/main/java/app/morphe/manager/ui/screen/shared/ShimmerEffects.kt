@@ -233,13 +233,13 @@ fun ShimmerHeroInfoCard(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(MorpheDefaults.SectionCornerRadius),
+        shape = RoundedCornerShape(Defaults.SectionCornerRadius),
         color = accentColor.copy(alpha = 0.15f)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(MorpheDefaults.ContentPadding),
+                .padding(Defaults.ContentPadding),
             horizontalArrangement = Arrangement.spacedBy(14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -269,13 +269,13 @@ fun ShimmerApkItem() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(MorpheDefaults.ContentPadding),
-                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+                    .padding(Defaults.ContentPadding),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 ShimmerBox(
                     modifier = Modifier.size(48.dp),
-                    shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius)
+                    shape = RoundedCornerShape(Defaults.CompactCornerRadius)
                 )
 
                 Column(
@@ -291,14 +291,14 @@ fun ShimmerApkItem() {
                 }
             }
 
-            MorpheSettingsDivider()
+            SettingsDivider()
 
             FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = MorpheDefaults.ContentPadding, vertical = MorpheDefaults.ItemSpacing),
-                horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall, Alignment.CenterHorizontally),
-                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+                    .padding(horizontal = Defaults.ContentPadding, vertical = Defaults.ItemSpacing),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall, Alignment.CenterHorizontally),
+                verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
             ) {
                 repeat(4) {
                     ShimmerBox(

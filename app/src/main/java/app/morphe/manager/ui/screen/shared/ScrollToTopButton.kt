@@ -101,8 +101,8 @@ private fun ScrollToTopButtonImpl(
 
     AnimatedVisibility(
         visible = visible,
-        enter = if (a11y) MorpheAnimations.fadeIn else MorpheAnimations.fabEnter,
-        exit = if (a11y) MorpheAnimations.fadeOut else MorpheAnimations.fabExit,
+        enter = if (a11y) Animations.fadeIn else Animations.fabEnter,
+        exit = if (a11y) Animations.fadeOut else Animations.fabExit,
         modifier = modifier.padding(
             end = ButtonPadding,
             bottom = ButtonPadding + extraBottomPadding
@@ -127,7 +127,7 @@ private fun ScrollToTopButtonImpl(
                     onClick()
                 }
         ) {
-            MorpheIcon(
+            ThemedIcon(
                 icon = Icons.Rounded.KeyboardArrowUp,
                 contentDescription = label
             )

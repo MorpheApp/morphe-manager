@@ -22,14 +22,14 @@ hiddenapibypass = "6.1"
 koin = "4.2.2"
 kotlin = "2.4.10"
 kotlin-process = "1.5.1"
-ktor = "3.5.1"
+ktor = "3.5.2"
 ktx = "1.19.0"
 libsu = "6.0.0"
 markdown-renderer = "0.43.0"
 # Remove when released stable 1.5.0 in Compose BOM. Fix for https://github.com/MorpheApp/morphe-manager/issues/74
 material3 = "1.5.0-alpha25" # 1.5.0-alpha09 API Changes: Remove deprecated experimental ModalBottomSheet
 morphe-library = "1.4.0"
-morphe-patcher = "1.8.0-dev.3" # TODO change to stable
+morphe-patcher = "1.8.0-dev.5" # TODO change to stable
 navigation = "2.9.8"
 placeholder = "2.0.0"
 play-services-base = "18.10.0"

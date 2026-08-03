@@ -29,7 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.shared.MorpheDefaults
+import app.morphe.manager.ui.screen.shared.Defaults
 import kotlinx.coroutines.isActive
 import kotlin.random.Random
 
@@ -152,7 +152,7 @@ fun FlappyBirdGame(state: FlappyGameState) {
 private fun FlappyCanvas(state: FlappyGameState, modifier: Modifier) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(MorpheDefaults.CompactCornerRadius))
+            .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
             .background(FlappySkyColor)
             .pointerInput(Unit) { detectTapGestures(onPress = { state.tap() }) }
     ) {

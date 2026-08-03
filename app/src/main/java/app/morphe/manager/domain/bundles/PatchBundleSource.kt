@@ -4,9 +4,7 @@ import androidx.compose.runtime.Stable
 import app.morphe.manager.patcher.patch.PatchBundle
 import app.morphe.manager.util.isPatcherOutdated
 import java.io.File
-import java.io.FilterOutputStream
 import java.io.IOException
-import java.io.OutputStream
 
 /**
  * A [PatchBundle] source.
@@ -73,25 +71,39 @@ sealed class PatchBundleSource(
 
     protected fun hasInstalled() = patchesFile.exists()
 
-    protected fun patchBundleOutputStream(): OutputStream = with(patchesFile) {
-        // Android 14+ requires dex containers to be readonly.
-        setWritable(true, true)
-        val base = outputStream()
-        object : FilterOutputStream(base) {
-            override fun close() {
-                try {
-                    super.close()
-                } finally {
-                    setReadOnly()
-                }
+    /**
+     * Installs a new patches.jar by writing it to a staging file that replaces the installed one
+     * only once it is complete. Metadata is reloaded while downloads are still running, and a
+     * reader must never observe the container half-written or writable - Android 14+ rejects a
+     * writable dex container outright.
+     *
+     * [write] receives the staging file and is responsible for filling it.
+     */
+    protected suspend fun installPatchBundle(context: String, write: suspend (staging: File) -> Unit) {
+        val staging = directory.resolve(STAGING_FILE_NAME)
+        try {
+            directory.mkdirs()
+            runCatching { staging.setWritable(true, true) }
+            runCatching { staging.delete() }
+            write(staging)
+            requireNonEmptyBundleFile(staging, context)
+            staging.setReadOnly()
+            // Replaces the installed bundle in a single step, so readers see either the old
+            // file or the new one
+            if (!staging.renameTo(patchesFile)) {
+                throw IOException("$context could not replace the installed patch bundle")
             }
+        } catch (t: Throwable) {
+            runCatching { staging.setWritable(true, true) }
+            runCatching { staging.delete() }
+            throw t
         }
     }
 
-    protected fun requireNonEmptyPatchesFile(context: String) {
-        val length = runCatching { patchesFile.length() }.getOrDefault(0L)
+    protected fun requireNonEmptyBundleFile(file: File, context: String) {
+        val length = runCatching { file.length() }.getOrDefault(0L)
         if (length < MIN_PATCH_BUNDLE_BYTES) {
-            runCatching { patchesFile.delete() }
+            runCatching { file.delete() }
             throw IOException("$context produced an empty or truncated patch bundle (size=$length)")
         }
     }
@@ -104,6 +116,7 @@ sealed class PatchBundleSource(
 
     companion object Extensions {
         private const val MIN_PATCH_BUNDLE_BYTES = 8L
+        private const val STAGING_FILE_NAME = "patches.jar.tmp"
         private const val JSON_EXTENSION = ".json"
         val PatchBundleSource.isDefault inline get() = uid == 0
         val PatchBundleSource.asRemoteOrNull inline get() = this as? RemotePatchBundle

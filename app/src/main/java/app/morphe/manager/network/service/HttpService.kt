@@ -30,6 +30,7 @@ import java.nio.channels.FileChannel
 import java.nio.file.StandardOpenOption
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.math.abs
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * Central HTTP service built on Ktor Client. Handles:
@@ -433,7 +434,7 @@ class HttpService(
                 if (attempt >= MAX_RETRY_ATTEMPTS) throw t
                 val wait = (t.retryAfterMillis ?: delayMs).coerceAtMost(MAX_RETRY_DELAY_MS)
                 Log.w(tag, "$operationName hit 429 (attempt $attempt/$MAX_RETRY_ATTEMPTS), waiting ${wait}ms")
-                delay(wait)
+                delay(wait.milliseconds)
                 delayMs = (delayMs * 2).coerceAtMost(MAX_RETRY_DELAY_MS)
             }
         }
@@ -463,7 +464,7 @@ class HttpService(
                     throw t
                 }
                 Log.w(tag, "$operationName attempt $attempt failed: ${t::class.simpleName}: ${t.message}")
-                delay(currentDelay)
+                delay(currentDelay.milliseconds)
                 currentDelay = (currentDelay * 2).coerceAtMost(MAX_RETRY_DELAY_MS)
             }
         }
@@ -479,6 +480,46 @@ class HttpService(
             ?.toLongOrNull()
             ?.coerceAtLeast(0)
             ?.times(1000)
+
+    /**
+     * Reports whether [url] can be downloaded right now, following redirects.
+     *
+     * Returns true when the server serves it, false only when the server states it is not
+     * there, and null when the answer is inconclusive (rate limit, server error, no route).
+     * Callers that gate a feature on availability must treat null as available, otherwise a
+     * throttled check would hide working content. Servers that reject HEAD get a ranged GET.
+     */
+    suspend fun isReachable(url: String): Boolean? = runCatching {
+        val head = statusOf(HttpMethod.Head, url)
+
+        val status = if (head == HttpStatusCode.MethodNotAllowed) {
+            statusOf(HttpMethod.Get, url) { header(HttpHeaders.Range, "bytes=0-0") }
+        } else {
+            head
+        }
+
+        when {
+            status.isSuccess() -> true
+            status == HttpStatusCode.NotFound || status == HttpStatusCode.Gone -> false
+            else -> null
+        }
+    }.getOrElse { error ->
+        if (error is CancellationException) throw error
+        Log.w(tag, "isReachable($url) could not be determined: ${error::class.simpleName}: ${error.message}")
+        null
+    }
+
+    /** Issues [httpMethod] against [url] and returns only the status, discarding the body. */
+    private suspend fun statusOf(
+        httpMethod: HttpMethod,
+        url: String,
+        builder: HttpRequestBuilder.() -> Unit = {}
+    ): HttpStatusCode = http.request {
+        method = httpMethod
+        url(url)
+        header(HttpHeaders.CacheControl, "no-cache")
+        builder()
+    }.status
 
     /**
      * Performs a HEAD request to [url] and returns the value of the Location header,

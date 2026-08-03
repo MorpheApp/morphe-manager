@@ -23,8 +23,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.LocalDialogSecondaryTextColor
-import app.morphe.manager.ui.screen.shared.MorpheDialog
-import app.morphe.manager.ui.screen.shared.MorpheDialogButtonRow
+import app.morphe.manager.ui.screen.shared.AppDialog
+import app.morphe.manager.ui.screen.shared.AppDialogButtonRow
 
 /**
  * Confirmation for a batch patch run requested by another app.
@@ -42,11 +42,11 @@ fun ExternalBatchPatchDialog(
     var trustCaller by remember { mutableStateOf(false) }
     val caller = callerPackage ?: stringResource(R.string.external_batch_patch_unknown_caller)
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.external_batch_patch_title),
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.continue_),
                 primaryIcon = Icons.Outlined.Check,
                 onPrimaryClick = { onConfirm(trustCaller && callerPackage != null) },

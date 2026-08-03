@@ -118,6 +118,8 @@ data class BatchPatchItem(
     val bundles: List<BatchBundleRef>,
     val state: BatchItemState,
     val message: String? = null,
+    /** True when the sources mark this APK version as experimental. */
+    val experimentalVersion: Boolean = false,
     /** Version the sources recommend, offered for download when the APK is missing or wrong. */
     val suggestedVersion: String? = null,
     val forceVersionMismatch: Boolean = false,

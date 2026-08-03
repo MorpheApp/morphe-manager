@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">點擊以檢視並移除</string>
     <string name="home_metadata_errors_title">部分修補程式來源無法使用</string>
     <string name="home_metadata_errors_subtitle">點擊以檢視來源</string>
+    <string name="home_outdated_manager_title">Morphe 要更新</string>
+    <string name="home_outdated_manager_subtitle">有五个踪户源需待新版机</string>
     <string name="home_metered_skipped_title">已暫停行動數據上的更新</string>
     <string name="home_metered_skipped_subtitle">點擊以允許在行動數據上更新</string>
     <string name="home_update_error">更新失敗</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">中繼資料無法使用</string>
     <string name="sources_management_metadata_unavailable_hint">遠端中繼資料檔案無法使用。您仍可使用已安裝的套件進行修補，但此來源的自動更新已停用</string>
     <string name="sources_management_metadata_unavailable_hint_missing">無法下載修補套件。來源 URL 可能不正確，或檔案不存在</string>
+    <string name="sources_management_outdated_manager_badge">更新 Morphe</string>
+    <string name="sources_management_outdated_manager_hint">这个源来股如踪户 %1$s。例如 Morphe %2$s包含踪户 %3$s。更新 Morphe對可使用</string>
     <string name="sources_management_source_enabled">來源已啟用</string>
     <string name="sources_management_source_disabled">來源已停用</string>
     <string name="sources_management_source_updating">正在更新來源…</string>
@@ -174,7 +178,7 @@
     <string name="home_download_instructions_steps_title">步驟如下：</string>
     <string name="home_download_instructions_step1">請選取下方的「%s」按鈕</string>
     <string name="home_download_instructions_step2_part1">請往下滑動網頁，然後點選</string>
-    <string name="home_download_instructions_download_button_toast">請到網站上點選 [下載]，不是這裡的範例按鈕 😊</string>
+    <string name="home_download_instructions_download_button_toast">請到網站上輕觸「下載」，不是這裡的範例按鈕 😊</string>
     <string name="home_download_instructions_download_button_toast_2">太棒了！現在點擊繼續並前往網站 👆</string>
     <string name="home_download_instructions_download_button_toast_3">熟能生巧，你快要掌握了 💪</string>
     <string name="home_download_instructions_download_button_toast_4">不是這個按鈕… 這只是範例按鈕… 🙈</string>
@@ -250,6 +254,10 @@
     <string name="home_dialog_wrong_package_description">所選的 APK 不是您打算修補的應用程式</string>
     <string name="home_dialog_expected_package">預期套件：</string>
     <string name="home_dialog_selected_package">所選套件：</string>
+    <string name="home_dialog_orphaned_install_title">先前複製遺留</string>
+    <string name="home_dialog_orphaned_install_description">修補程式變更套件名稱，因此您先前修補的副本仍以獨立應用程式安裝</string>
+    <string name="home_dialog_orphaned_install_warning">它不再受到追蹤，也不會收到修補程式更新</string>
+    <string name="home_dialog_orphaned_install_uninstall">解除安裝</string>
     <string name="home_outdated_patches_dialog_title">修補程式可能已過時</string>
     <string name="home_outdated_patches_dialog_message">行動數據已啟用且修補程式更新已停用</string>
     <string name="home_outdated_patches_dialog_warning">使用過時的修補程式進行修補可能會導致應用程式損壞</string>
@@ -319,8 +327,10 @@
     <string name="batch_patch_source_installed">已安裝的應用程式</string>
     <string name="batch_patch_source_file">附加檔案</string>
     <string name="batch_patch_source_unavailable">無法準備 APK</string>
+    <string name="batch_patch_find_apk">尋找 APK</string>
     <string name="batch_patch_attach_apk">附加 APK</string>
     <string name="batch_patch_force_version">仍要繼續</string>
+    <string name="batch_patch_force_version_done">已排隊處理，但為其他版本所做的修補程式可能會導致應用程式出現問題</string>
     <string name="batch_patch_edit_patches">選擇修補程式</string>
     <string name="batch_patch_state_no_apk">沒有 APK</string>
     <string name="batch_patch_state_no_patches">沒有修補程式</string>
@@ -1082,6 +1092,7 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">無法安裝更新</string>
     <string name="installing_manager_update">正在安裝更新……</string>
     <string name="downloading_manager_update">正在下載更新……</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">無法下載更新：%s</string>
     <string name="failed_to_check_updates">無法檢查更新：%s</string>
     <string name="failed_to_download_update">無法下載更新：%s</string>

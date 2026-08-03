@@ -27,11 +27,11 @@ fun BytecodeModeDialog(
     onDismiss: () -> Unit,
     onSelect: (BytecodeMode) -> Unit,
 ) {
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_advanced_bytecode_mode),
         footer = {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
@@ -41,8 +41,8 @@ fun BytecodeModeDialog(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = MorpheDefaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                .padding(vertical = Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
         ) {
             Text(
                 text = stringResource(R.string.settings_advanced_bytecode_mode_dialog_description),

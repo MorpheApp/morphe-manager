@@ -242,6 +242,8 @@
     <string name="expert_mode_no_results">No patches found</string>
     <string name="expert_mode_universal_patches">Universal patches</string>
     <string name="expert_mode_new_patches">New</string>
+    <string name="expert_mode_patch_required_by_installer">Required for the selected install target</string>
+    <string name="expert_mode_patch_unavailable_for_installer">Not available for the selected install target</string>
     <string name="expert_mode_multiple_sources_warning_title">Multiple patch sources selected</string>
     <string name="expert_mode_multiple_sources_warning_message">"You have selected patches from multiple patch sources. This may cause compatibility issues or unexpected behavior.
 
@@ -273,6 +275,11 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_dialog_wrong_package_description">The selected APK is not for the application you intended to patch</string>
     <string name="home_dialog_expected_package">Expected package:</string>
     <string name="home_dialog_selected_package">Selected package:</string>
+    <string name="home_dialog_orphaned_install_title">Previous copy left behind</string>
+    <string name="home_dialog_orphaned_install_description">Patching changed the package name, so the copy you patched earlier is still installed as a separate app</string>
+    <string name="home_dialog_orphaned_install_warning">It is no longer tracked and will not receive patch updates</string>
+    <string name="home_dialog_orphaned_install_uninstall">Uninstall it</string>
+    <string name="home_dialog_orphaned_install_keep">Keep it</string>
     <string name="home_outdated_patches_dialog_title">Patches may be outdated</string>
     <string name="home_outdated_patches_dialog_message">Mobile data is active and patch updates are disabled</string>
     <string name="home_outdated_patches_dialog_warning">Patching with outdated patches may result in a broken app</string>
@@ -350,8 +357,6 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="batch_patch_source_installed">Installed app</string>
     <string name="batch_patch_source_file">Attached file</string>
     <string name="batch_patch_source_unavailable">The APK could not be prepared</string>
-    <string name="batch_patch_find_apk">Find APK</string>
-    <string name="batch_patch_attach_apk">Attach APK</string>
     <string name="batch_patch_force_version">Patch anyway</string>
     <string name="batch_patch_force_version_done">Queued anyway, patches made for other versions may break the app</string>
     <string name="batch_patch_edit_patches">Choose patches</string>
@@ -402,7 +407,6 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
 
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching</string>
-    <string name="root_gmscore_excluded">GmsCore support patch is excluded in root mode</string>
     <string name="root_pre_patch_installer_title">Choose patch mode</string>
     <string name="root_pre_patch_installer_description">Your device has root access. Choose whether this app should be patched for root mount or standard install</string>
     <string name="root_pre_patch_installer_mount_title">Root mount mode</string>
@@ -421,6 +425,8 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="patcher_percentage" translatable="false">%s%%</string>
     <string name="patcher_tab_logs">Patcher logs</string>
     <string name="patcher_tab_game">Games</string>
+    <string name="patcher_logs_waiting">Waiting for log output…</string>
+    <string name="patcher_logs_lost">Log output is not kept across app restarts</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="patcher_installing_subtitle">Almost ready to rock! 🎸</string>
     <string name="patcher_success_title">All done! 🎉</string>
@@ -445,6 +451,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patcher_install_error_subtitle">Try uninstalling and installing again</string>
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
+    <string name="patcher_patches_excluded_for_installer">Not available for this install method and excluded: %s</string>
     <string name="patcher_storage_permission_dialog_title">Cannot access storage path</string>
     <string name="patcher_incompatible_patcher_title">Update required</string>
     <string name="patcher_incompatible_patcher_description">The bundle &lt;b&gt;%1$s&lt;/b&gt; requires patcher version &lt;b&gt;%2$s&lt;/b&gt; or newer. Please update Morphe to patch this app</string>
@@ -1184,6 +1191,9 @@ Details: %2$s"</string>
     <string name="installing_manager_update">Installing update…</string>
     <string name="downloading_manager_update">Downloading update…</string>
     <string name="manager_update_progress_detail" translatable="false">%1$.1f MB / %2$.1f MB (%3$s%%)</string>
+    <!-- Shown while resuming a download, before the total size is known -->
+    <string name="manager_update_progress_downloaded">%1$.1f MB downloaded</string>
+    <string name="manager_update_not_ready">This release is still being published. Try again in a few minutes</string>
     <string name="download_manager_failed">Failed to download update: %s</string>
     <string name="failed_to_check_updates">Failed to check for updates: %s</string>
     <string name="failed_to_download_update">Failed to download update: %s</string>

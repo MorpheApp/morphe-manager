@@ -114,7 +114,7 @@ fun AppPatchesDialog(
         result.map { it.first to it.second.toList() }
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = {
             when {
                 searchQuery.value.isNotBlank() -> searchQuery.value = ""
@@ -128,7 +128,7 @@ fun AppPatchesDialog(
         scrollable = false,
         contentArrangement = Arrangement.Top,
         footer = {
-            MorpheDialogOutlinedButton(
+            AppDialogOutlinedButton(
                 text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
@@ -144,7 +144,7 @@ fun AppPatchesDialog(
 
         Column(
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
         ) {
             PatchesListSearchRow(
                 searchQuery = searchQuery.value,
@@ -156,8 +156,8 @@ fun AppPatchesDialog(
 
             AnimatedVisibility(
                 visible = selectedBundle.value != null,
-                enter = MorpheAnimations.expandFadeEnter,
-                exit = MorpheAnimations.shrinkFadeExit
+                enter = Animations.expandFadeEnter,
+                exit = Animations.shrinkFadeExit
             ) {
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     InputChip(
@@ -179,7 +179,7 @@ fun AppPatchesDialog(
                 LazyColumn(
                     state = listState,
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                    verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
                 ) {
                     // App header
                     item {
@@ -232,11 +232,11 @@ fun AppPatchesDialog(
                                             collapsedBundles.value + uid
                                         }
                                     },
-                                    cornerRadius = MorpheDefaults.SettingsCornerRadius,
+                                    cornerRadius = Defaults.SettingsCornerRadius,
                                     modifier = Modifier
                                         .animateItem(
-                                            fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-                                            fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
+                                            fadeInSpec = tween(Defaults.ANIMATION_DURATION),
+                                            fadeOutSpec = tween(Defaults.ANIMATION_DURATION_SHORT),
                                             placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
                                         )
                                 )
@@ -256,8 +256,8 @@ fun AppPatchesDialog(
                                 val isFirstUniversalOfBundle = isUniversal && patch === firstUniversal
                                 Column(
                                     modifier = Modifier.animateItem(
-                                        fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-                                        fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
+                                        fadeInSpec = tween(Defaults.ANIMATION_DURATION),
+                                        fadeOutSpec = tween(Defaults.ANIMATION_DURATION_SHORT),
                                         placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
                                     )
                                 ) {
@@ -267,7 +267,7 @@ fun AppPatchesDialog(
                                             modifier = Modifier
                                                 .fillMaxWidth()
                                                 .padding(
-                                                    top = if (hasSpecificInBundle) MorpheDefaults.ContentPaddingSmall else 0.dp,
+                                                    top = if (hasSpecificInBundle) Defaults.ContentPaddingSmall else 0.dp,
                                                     bottom = 4.dp
                                                 ),
                                             verticalAlignment = Alignment.CenterVertically,
@@ -318,7 +318,7 @@ fun AppPatchesDialog(
 
     // Bundle filter bottom sheet (multi-bundle only)
     if (showFilterSheet.value && isMultiBundle) {
-        MorpheBottomSheet(
+        AppBottomSheet(
             onDismissRequest = { showFilterSheet.value = false }
         ) {
             Column(
@@ -379,11 +379,11 @@ internal fun HideAppDialog(
     onDismiss: () -> Unit,
     onHide: () -> Unit
 ) {
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_app_hide_title),
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.hide),
                 primaryIcon = Icons.Outlined.VisibilityOff,
                 onPrimaryClick = onHide,
@@ -480,7 +480,7 @@ internal fun HiddenAppsDialog(
         )
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = {
             if (isMultiSelectMode.value) {
                 isMultiSelectMode.value = false
@@ -524,7 +524,7 @@ internal fun HiddenAppsDialog(
                     onCancelReorder = {}
                 )
             } else {
-                MorpheDialogOutlinedButton(
+                AppDialogOutlinedButton(
                     text = stringResource(R.string.close),
                     onClick = onDismiss,
                     modifier = Modifier.fillMaxWidth()
@@ -535,7 +535,7 @@ internal fun HiddenAppsDialog(
         scrollable = false
     ) {
         if (hiddenAppItems.isEmpty()) {
-            MorpheEmptyState(
+            HomeEmptyState(
                 icon = Icons.Outlined.Visibility,
                 title = stringResource(R.string.home_app_no_hidden)
             )
@@ -561,8 +561,8 @@ internal fun HiddenAppsDialog(
 
                         SelectableCard(
                             modifier = Modifier.animateItem(
-                                fadeInSpec = tween(MorpheDefaults.ANIMATION_DURATION),
-                                fadeOutSpec = tween(MorpheDefaults.ANIMATION_DURATION_SHORT),
+                                fadeInSpec = tween(Defaults.ANIMATION_DURATION),
+                                fadeOutSpec = tween(Defaults.ANIMATION_DURATION_SHORT),
                                 placementSpec = spring(stiffness = 400f, dampingRatio = 0.8f)
                             ),
                             isSelected = isSelected,

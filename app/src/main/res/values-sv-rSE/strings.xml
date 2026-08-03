@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Tryck för att granska och ta bort</string>
     <string name="home_metadata_errors_title">Vissa tilläggskällor är inte tillgängliga</string>
     <string name="home_metadata_errors_subtitle">Tryck för att granska källor</string>
+    <string name="home_outdated_manager_title">Morphe är inaktuellt</string>
+    <string name="home_outdated_manager_subtitle">Vissa tilläggskällor behöver en nyare version</string>
     <string name="home_metered_skipped_title">Uppdateringar via mobildata har pausats</string>
     <string name="home_metered_skipped_subtitle">Tryck för att tillåta uppdateringar via mobildata</string>
     <string name="home_update_error">Uppdatering misslyckades</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Metadata är inte tillgängliga</string>
     <string name="sources_management_metadata_unavailable_hint">Fjärrfilen för metadata är inte tillgänglig. Modifiering med det installerade arkivet fungerar fortfarande, men automatisk uppdatering är inaktiverad för den här källan</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Det gick inte att ladda ned tilläggsarkivet. Källadressen kan vara felaktig eller så finns inte filen</string>
+    <string name="sources_management_outdated_manager_badge">Uppdatera Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Den här källan är avsedd för modifieringsverktyg %1$s, men i Morphe %2$s ingår modifieringsverktyg %3$s. Uppdatera Morphe om du vill använda den</string>
     <string name="sources_management_source_enabled">Källan har aktiverats</string>
     <string name="sources_management_source_disabled">Källan har inaktiverats</string>
     <string name="sources_management_source_updating">Uppdaterar källan</string>
@@ -168,6 +172,7 @@
     <string name="home_app_info_no_saved_apk">Ingen sparad APK-fil. Modifieringen kräver att du väljer APK-filen igen</string>
     <string name="home_version_requires_android">Kräver Android %s eller senare</string>
     <string name="home_apk_no_compatible_versions_title">Stöds inte på den här enheten</string>
+    <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; har inga versioner som stöds för Android %2$s (API %3$s). Alla deklarerade versioner kräver en senare Android-version</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Ladda ned den ursprungliga APK-filen</string>
     <string name="home_download_instructions_steps_title">Anvisningar:</string>
@@ -243,6 +248,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatibla versioner:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Stöds inte</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_dialog_unsupported_version_build">Bygge %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Det här är ett annat bygge av samma version. Tilläggen kräver ett specifikt bygge. </string>
     <string name="home_dialog_wrong_package_title">Fel paket har valts</string>
     <string name="home_dialog_wrong_package_description">Den valda APK-filen är inte för den app du avsåg att modifiera</string>
@@ -306,6 +312,7 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="header_creator_guide_positioning_title">Position och skala</string>
     <string name="header_creator_guide_positioning_body">Nyp och dra direkt i förhandsgranskningen för att flytta och skalförändra bilden. Hjälplinjer visas när bilden är nära mitten. Du kan även använda skjutreglaget under förhandsgranskningen.</string>
     <!-- Batch patching -->
+    <string name="batch_patch_action">Modifiera markerade</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Är du säker på att du vill avinstallera den här appen?</string>
     <string name="batch_uninstall_confirm_body">De markerade apparna tas bort från enheten permanent</string>
@@ -553,7 +560,16 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="settings_advanced_update_interval_weekly">En gång i veckan</string>
     <string name="settings_advanced_update_interval_monthly">En gång i månaden</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Sökningsfrekvens i bakgrunden</string>
-    <string name="settings_advanced_update_interval_battery_warning">Sökningar i bakgrunden kanske inte fungerar tillförlitligt på vissa enheter. Tillverkare som Xiaomi, Huawei, Samsung och OnePlus begränsar ofta aggressivt bakgrundsprocesser för att spara batteri</string>
+    <string name="settings_advanced_update_interval_battery_warning">Kontroller i bakgrunden kanske inte fungerar tillförlitligt på vissa enheter. Tillverkare som Xiaomi, Huawei, Samsung och OnePlus begränsar ofta bakgrundsprocesser aggressivt för att spara batteri</string>
+    <string name="settings_advanced_auto_patch">Modifiera igen automatiskt</string>
+    <string name="settings_advanced_auto_patch_description">Modifierar installerade appar igen i bakgrunden när deras tillägg ändras. Endast appar med en sparad ursprunglig APK-fil omfattas</string>
+    <string name="settings_advanced_auto_patch_interval">Modifieringsfrekvens</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Hur ofta modifierade appar byggs om</string>
+    <string name="settings_advanced_auto_patch_charging">Endast när enheten laddas</string>
+    <string name="settings_advanced_auto_patch_charging_description">Modifieringen belastar CPU:n och minnet kraftigt, så den väntar på en laddare</string>
+    <string name="settings_advanced_auto_patch_install">Installera automatiskt</string>
+    <string name="settings_advanced_auto_patch_install_description">Kräver Shizuku som installerare. Med andra installerare sparas de modifierade apparna endast</string>
+    <string name="settings_advanced_external_batch_patch">Tillåt externa utlösare</string>
     <!-- Notification content -->
     <string name="notification_manager_update_title">Uppdatering för Morphe är tillgänglig</string>
     <string name="notification_bundle_update_title">Nya tillägg är tillgängliga </string>
@@ -1018,6 +1034,7 @@ Information: %2$s"</string>
     <string name="install_update_manager_failed">Det gick inte att installera uppdateringen</string>
     <string name="installing_manager_update">Installerar uppdateringen …</string>
     <string name="downloading_manager_update">Laddar ned uppdateringen …</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Det gick inte att ladda ned uppdateringen: %s</string>
     <string name="failed_to_check_updates">Det gick inte att söka efter uppdateringar: %s</string>
     <string name="failed_to_download_update">Det gick inte att ladda ned uppdateringen: %s</string>
@@ -1028,6 +1045,7 @@ Vill du fortsätta ändå?"</string>
     <string name="download_update_confirmation">Ladda ned uppdatering?</string>
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s av %2$s</string>
     <string name="onboarding_sources_desc">Hantera dina tilläggskällor. Varje källa tillhandahåller tillägg som kan tillämpas i dina appar</string>
     <string name="onboarding_swipe_title">Svepgester</string>
     <string name="onboarding_swipe_desc">Svep åt höger på ett appkort om du vill visa dess tillgängliga tillägg. Svep åt vänster om du vill dölja kortet från startskärmen</string>

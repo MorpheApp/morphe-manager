@@ -29,6 +29,7 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.worker.UpdateCheckInterval
+import kotlin.math.roundToInt
 
 /**
  * Updates section settings items for the Advanced tab.
@@ -81,22 +82,22 @@ fun UpdatesSettingsItem(
         // are enabled from the Notifications settings dialog
         AnimatedVisibility(
             visible = backgroundUpdateNotifications && !settingsViewModel.hasGms,
-            enter = MorpheAnimations.expandFadeEnter,
-            exit = MorpheAnimations.shrinkFadeExit
+            enter = Animations.expandFadeEnter,
+            exit = Animations.shrinkFadeExit
         ) {
             Column {
-                MorpheSettingsDivider()
+                SettingsDivider()
 
                 SettingsItem(
                     onClick = { showIntervalDialog.value = true },
-                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Schedule) },
+                    leadingContent = { ThemedIcon(icon = Icons.Outlined.Schedule) },
                     title = stringResource(R.string.settings_advanced_update_interval),
                     subtitle = stringResource(updateCheckInterval.labelResId)
                 )
             }
         }
 
-        MorpheSettingsDivider()
+        SettingsDivider()
 
         // Allow updates on metered connections
         SettingsSwitchItem(
@@ -107,7 +108,7 @@ fun UpdatesSettingsItem(
             subtitle = stringResource(R.string.settings_advanced_updates_allow_metered_description)
         )
 
-        MorpheSettingsDivider()
+        SettingsDivider()
 
         // Automatic re-patching, configured in its own dialog
         SettingsItem(
@@ -118,7 +119,7 @@ fun UpdatesSettingsItem(
             } else {
                 stringResource(R.string.disabled)
             },
-            leadingContent = { MorpheIcon(icon = Icons.Outlined.AutoMode) }
+            leadingContent = { ThemedIcon(icon = Icons.Outlined.AutoMode) }
         )
     }
 }
@@ -138,11 +139,11 @@ fun NotificationPermissionDialog(
         onResult = onPermissionResult
     )
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismissRequest,
         title = title,
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.allow),
                 onPrimaryClick = {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -180,13 +181,13 @@ internal fun UpdateCheckIntervalDialog(
 ) {
     val entries = UpdateCheckInterval.entries
     var sliderIndex by remember { mutableFloatStateOf(entries.indexOf(currentInterval).toFloat()) }
-    val selectedInterval = entries[sliderIndex.toInt().coerceIn(entries.indices)]
+    val selectedInterval = entries[sliderIndex.roundToInt().coerceIn(entries.indices)]
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = title,
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = stringResource(R.string.save),
                 onPrimaryClick = { onIntervalSelected(selectedInterval) },
                 primaryIcon = Icons.Outlined.Check,
@@ -204,7 +205,7 @@ internal fun UpdateCheckIntervalDialog(
             // Current value chip
             Surface(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(MorpheDefaults.CompactCornerRadius),
+                shape = RoundedCornerShape(Defaults.CompactCornerRadius),
                 color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
             ) {
                 Column(
@@ -255,10 +256,11 @@ internal fun UpdateCheckIntervalDialog(
             }
 
             // Battery optimization warning
-            InfoBadge(
+            Notice(
                 text = stringResource(R.string.settings_advanced_update_interval_battery_warning),
-                style = InfoBadgeStyle.Warning,
-                icon = Icons.Outlined.BatteryAlert
+                tone = SemanticTone.Warning,
+                icon = Icons.Outlined.BatteryAlert,
+                density = NoticeDensity.Compact
             )
         }
     }

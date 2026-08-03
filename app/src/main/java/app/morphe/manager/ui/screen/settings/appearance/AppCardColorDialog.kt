@@ -114,15 +114,15 @@ fun AppCardColorDialog(
         AppCardColorMode.SOLID -> solidColors
     }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_appearance_app_card_colors),
         footer = {
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPaddingSmall)
+                verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
             ) {
-                MorpheDialogButtonRow(
+                AppDialogButtonRow(
                     primaryText = stringResource(R.string.save),
                     onPrimaryClick = {
                         onApply(
@@ -139,7 +139,7 @@ fun AppCardColorDialog(
                     secondaryIcon = Icons.Outlined.Restore
                 )
 
-                MorpheDialogOutlinedButton(
+                AppDialogOutlinedButton(
                     text = stringResource(android.R.string.cancel),
                     onClick = onDismiss,
                     modifier = Modifier.fillMaxWidth()
@@ -149,15 +149,15 @@ fun AppCardColorDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
         ) {
             AppCardColorPreview(colors = previewColors)
 
-            Column(verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)) {
+            Column(verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)) {
                 MODE_OPTIONS.chunked(MODE_COLUMNS).forEach { row ->
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing)
+                        horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
                     ) {
                         row.forEach { (optionMode, icon) ->
                             ModernIconOptionCard(
@@ -181,7 +181,7 @@ fun AppCardColorDialog(
             // A single crossfade keeps the dialog height from jumping twice when picker groups swap
             AnimatedContent(
                 targetState = draftMode,
-                transitionSpec = MorpheAnimations.fadeCrossfade(),
+                transitionSpec = Animations.fadeCrossfade(),
                 label = "app_card_color_pickers"
             ) { activeMode ->
                 when (activeMode) {
@@ -193,7 +193,7 @@ fun AppCardColorDialog(
                             followsBundle = AppCardColorDefaults.isBundleColor(draftStartColorHex),
                             onClick = { editingStop = AppCardColorStop.START }
                         )
-                        MorpheSettingsDivider()
+                        SettingsDivider()
                         AppCardColorItem(
                             title = stringResource(R.string.settings_appearance_app_card_colors_middle),
                             stop = AppCardColorStop.MIDDLE,
@@ -201,7 +201,7 @@ fun AppCardColorDialog(
                             followsBundle = AppCardColorDefaults.isBundleColor(draftMiddleColorHex),
                             onClick = { editingStop = AppCardColorStop.MIDDLE }
                         )
-                        MorpheSettingsDivider()
+                        SettingsDivider()
                         AppCardColorItem(
                             title = stringResource(R.string.settings_appearance_app_card_colors_end),
                             stop = AppCardColorStop.END,

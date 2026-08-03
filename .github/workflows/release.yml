@@ -97,7 +97,7 @@ jobs:
 
       - name: Wait before sending FCM
         if: steps.release.outputs.new_release_published == 'true' && (github.event_name == 'push' || inputs.send_fcm == true)
-        run: sleep 480
+        run: sleep 300
 
       - name: Setup Python for FCM
         if: steps.release.outputs.new_release_published == 'true' && (github.event_name == 'push' || inputs.send_fcm == true)

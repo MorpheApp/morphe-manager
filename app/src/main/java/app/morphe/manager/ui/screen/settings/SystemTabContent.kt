@@ -65,8 +65,8 @@ fun SystemTabContent(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
-            .padding(horizontal = contentPadding, vertical = MorpheDefaults.ContentPadding),
-        verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+            .padding(horizontal = contentPadding, vertical = Defaults.ContentPadding),
+        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
     ) {
         // Installers
         SectionTitle(

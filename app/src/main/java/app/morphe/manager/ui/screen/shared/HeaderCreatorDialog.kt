@@ -221,7 +221,7 @@ fun HeaderCreatorDialog(
 
     val showInfoDialog = remember { mutableStateOf(false) }
 
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = { if (!isCreating) onDismiss() },
         title = stringResource(R.string.header_creator_create),
         titleTrailingContent = {
@@ -232,7 +232,7 @@ fun HeaderCreatorDialog(
             )
         },
         footer = {
-            MorpheDialogButton(
+            AppDialogButton(
                 text = stringResource(R.string.header_creator_create),
                 onClick = { openFolderPicker() },
                 enabled = canCreate && !isCreating,
@@ -244,7 +244,7 @@ fun HeaderCreatorDialog(
         Box(modifier = Modifier.fillMaxWidth()) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
+                verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
             ) {
                 // Light header section
                 if (showLightVariant) {
@@ -255,7 +255,7 @@ fun HeaderCreatorDialog(
                         color = LocalDialogTextColor.current
                     )
 
-                    MorpheDialogOutlinedButton(
+                    AppDialogOutlinedButton(
                         text = if (lightHeaderUri == null)
                             stringResource(R.string.adaptive_icon_select_image)
                         else
@@ -336,7 +336,7 @@ fun HeaderCreatorDialog(
                     color = LocalDialogTextColor.current
                 )
 
-                MorpheDialogOutlinedButton(
+                AppDialogOutlinedButton(
                     text = if (darkHeaderUri == null)
                         stringResource(R.string.adaptive_icon_select_image)
                     else
@@ -406,18 +406,18 @@ fun HeaderCreatorDialog(
                     }
                 }
             }
-            MorpheContentOverlay(visible = isCreating) {
+            ContentOverlay(visible = isCreating) {
                 PulsingLogoWithCaption(caption = stringResource(R.string.creating))
             }
         }
     }
 
     if (showInfoDialog.value) {
-        MorpheDialog(
+        AppDialog(
             onDismissRequest = { showInfoDialog.value = false },
             title = stringResource(R.string.header_creator_guide),
             footer = {
-                MorpheDialogButton(
+                AppDialogButton(
                     text = stringResource(android.R.string.ok),
                     onClick = { showInfoDialog.value = false },
                     modifier = Modifier.fillMaxWidth()
@@ -505,7 +505,7 @@ private fun HeaderPreview(
             modifier = Modifier
                 .width(previewWidth)
                 .height(previewHeight)
-                .clip(RoundedCornerShape(MorpheDefaults.CompactCornerRadius))
+                .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
                 .background(
                     if (isDarkTheme)
                         Color(0xFF1C1C1C)
@@ -515,7 +515,7 @@ private fun HeaderPreview(
                 .border(
                     HeaderConfig.BORDER_STROKE_WIDTH.dp,
                     MaterialTheme.colorScheme.outline,
-                    RoundedCornerShape(MorpheDefaults.CompactCornerRadius)
+                    RoundedCornerShape(Defaults.CompactCornerRadius)
                 ),
             contentAlignment = Alignment.Center
         ) {

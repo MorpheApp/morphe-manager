@@ -24,11 +24,11 @@ fun ConfirmDialog(
     isPrimaryDestructive: Boolean = true,
     secondaryText: String = stringResource(android.R.string.cancel)
 ) {
-    MorpheDialog(
+    AppDialog(
         onDismissRequest = onDismiss,
         title = title,
         footer = {
-            MorpheDialogButtonRow(
+            AppDialogButtonRow(
                 primaryText = primaryText,
                 onPrimaryClick = onConfirm,
                 isPrimaryDestructive = isPrimaryDestructive,

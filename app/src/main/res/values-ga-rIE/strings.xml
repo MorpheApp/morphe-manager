@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Tapáil chun athbhreithniú a dhéanamh agus a bhaint</string>
     <string name="home_metadata_errors_title">Níl roinnt foinsí paiste ar fáil</string>
     <string name="home_metadata_errors_subtitle">Tapáil chun foinsí a athbhreithniú</string>
+    <string name="home_outdated_manager_title">Tá Morphe as dáta</string>
+    <string name="home_outdated_manager_subtitle">Teastaíonn leagan nuaer de roinnt foinsí páta</string>
     <string name="home_metered_skipped_title">Nuashonruithe curtha ar sos ar shonraí soghluaiste</string>
     <string name="home_metered_skipped_subtitle">Tapáil chun nuashonruithe ar shonraí soghluaiste a cheadú</string>
     <string name="home_update_error">Theip ar nuashonrú</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Meiteashonraí N/B</string>
     <string name="sources_management_metadata_unavailable_hint">Níl an cianchomhad meiteashonraí ar fáil. Oibríonn paistí leis an mbeart suiteáilte fós, ach tá uath-nuashonrú díchumasaithe don fhoinse seo</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Níorbh fhéidir an pacáiste paiste a íoslódáil. B’fhéidir go bhfuil an URL foinse mícheart nó nach bhfuil an comhad ann.</string>
+    <string name="sources_management_outdated_manager_badge">Nuashonaigh Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Tá an fhoinse seo tógtha do phéatcher %1$s, ach tá péatcher %3$s sa Morphe %2$s. Nuashonaigh Morphe chun é a úsáid</string>
     <string name="sources_management_source_enabled">Foinse cumasaithe</string>
     <string name="sources_management_source_disabled">Foinse díchumasaithe</string>
     <string name="sources_management_source_updating">Foinse á nuashonrú</string>
@@ -250,6 +254,11 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="home_dialog_wrong_package_description">Níl an APK roghnaithe don fheidhmchlár arbh eol duit paiste a chur air</string>
     <string name="home_dialog_expected_package">Pacáiste ionchais:</string>
     <string name="home_dialog_selected_package">Pacáiste roghnaithe:</string>
+    <string name="home_dialog_orphaned_install_title">Cóip roimhe seo fágtha ar lár</string>
+    <string name="home_dialog_orphaned_install_description">D\'athraigh pacáistiú an patching an t-ainm pacáiste, mar sin tá an cóip a patcháil tú níos luaithe fós suiteáilte mar aip ar leith</string>
+    <string name="home_dialog_orphaned_install_warning">Ní bhaineann sé le rianú a thuilleadh agus ní gheobhaidh sé nuashonruithe plaistreach</string>
+    <string name="home_dialog_orphaned_install_uninstall">Díshuiteáil é</string>
+    <string name="home_dialog_orphaned_install_keep">Coinnigh é</string>
     <string name="home_outdated_patches_dialog_title">B’fhéidir go bhfuil na paistí as dáta</string>
     <string name="home_outdated_patches_dialog_message">Tá sonraí soghluaiste gníomhach agus tá nuashonruithe paiste díchumasaithe</string>
     <string name="home_outdated_patches_dialog_warning">D’fhéadfadh go mbeadh aip briste mar thoradh ar phaistí le paistí atá as dáta</string>
@@ -310,6 +319,40 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <!-- Batch patching -->
     <string name="batch_patch_action">Paiste roghnaithe</string>
     <string name="batch_patch_title">Paisteáil bhaisc</string>
+    <string name="batch_patch_planning">Ag ullmhú na scuaine…</string>
+    <string name="batch_patch_preparing_next">Ag ullmhú an chéad aip eile…</string>
+    <string name="batch_patch_progress_counter">Paisteáladh %1$s de %2$s</string>
+    <string name="batch_patch_summary">%1$s paisteáilte, theip ar %2$s, scipeáil %3$s</string>
+    <string name="batch_patch_saved_hint">Tá na haipeanna paisteáilte sábháilte. Suiteáil iad anois, nó níos déanaí ón liosta APK paisteáilte sna socruithe.</string>
+    <string name="batch_patch_multiple_sources">Comhcheanglaíonn roinnt aipeanna paistí ó níos mó ná foinse amháin, rud a d’fhéadfadh coimhlintí a chruthú</string>
+    <string name="batch_patch_needs_apk">Níl aon APK ar fáil, ceangail comhad</string>
+    <string name="batch_patch_wrong_package">Is le %s an comhad ceangailte</string>
+    <string name="batch_patch_version_mismatch">Ní thacaíonn na paistí le leagan %s</string>
+    <string name="batch_patch_source_saved">Bunleagan sábháilte</string>
+    <string name="batch_patch_source_installed">Aip suiteáilte</string>
+    <string name="batch_patch_source_file">Comhad ceangailte</string>
+    <string name="batch_patch_source_unavailable">Níorbh fhéidir an APK a ullmhú</string>
+    <string name="batch_patch_find_apk">Aimsigh APK</string>
+    <string name="batch_patch_attach_apk">Ceangail APK</string>
+    <string name="batch_patch_force_version">Paiste ar aon nós</string>
+    <string name="batch_patch_force_version_done">Sa scuaine ar aon nós, d\'fhéadfadh paistí a rinneadh do leaganacha eile an aip a bhriseadh</string>
+    <string name="batch_patch_edit_patches">Roghnaigh paistí</string>
+    <string name="batch_patch_state_no_apk">Gan APK</string>
+    <string name="batch_patch_state_no_patches">Gan paistí</string>
+    <string name="batch_patch_policy_install">Suiteáil nuair a bheidh sé críochnaithe</string>
+    <string name="batch_patch_policy_install_description">Suiteálann sé gach aip phaisteáilte díreach tar éis don scuaine a bheith críochnaithe. Coinníonn sé na APKanna le haghaidh níos déanaí má bhíonn sé múchta.</string>
+    <string name="batch_patch_start">Tosaigh ag paisteáil</string>
+    <string name="batch_patch_stop_title">Stop a chur le paistí baisce?</string>
+    <string name="batch_patch_stop_description">Cuirfear ar ceal an aip atá á paisteáil faoi láthair agus gach rud atá fós i scuaine</string>
+    <string name="batch_patch_install_all">Suiteáil gach rud</string>
+    <string name="batch_patch_install_failed">Theip ar an suiteáil</string>
+    <string name="batch_patch_in_progress">Tá paisteáil bhaisc ag rith cheana féin</string>
+    <string name="batch_patch_nothing_outdated">Tá gach aip paisteáilte cothrom le dáta</string>
+    <string name="shortcut_repatch_short">Athphaisteáil</string>
+    <string name="shortcut_repatch_long">Athphaisteáil aipeanna atá as dáta</string>
+    <string name="shortcut_check_updates_short">Seiceáil nuashonruithe</string>
+    <string name="shortcut_check_updates_long">Seiceáil le haghaidh nuashonruithe paiste</string>
+    <string name="shortcut_patch_app">Paiste %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">An bhfuil tú cinnte gur mian leat an aip seo a dhíshuiteáil?</string>
     <string name="batch_uninstall_confirm_body">Bainfear na haipeanna roghnaithe go buan de do ghléas</string>
@@ -354,6 +397,8 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="patcher_error_dialog_app_info">Eolas faoin aip</string>
     <string name="patcher_tab_logs">Logaí paisteora</string>
     <string name="patcher_tab_game">Cluichí</string>
+    <string name="patcher_logs_waiting">Ag fanacht le logas aschur…</string>
+    <string name="patcher_logs_lost">Ní shábháiltear logas aschur thar athchóiriú an aipe</string>
     <string name="patcher_long_step_warning">D’fhéadfadh sé go dtógfadh an chéim seo tamall. Fan le do thoil…</string>
     <string name="patcher_installing_subtitle">Beagnach réidh le tosú! 🎸</string>
     <string name="patcher_success_title">Gach rud déanta! 🎉</string>
@@ -456,6 +501,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="failed_to_mount">Theip ar fheistiú: %s</string>
     <string name="failed_to_unmount">Theip ar dhíshuiteáil: %s</string>
     <!-- Patcher Screen - Mini-games -->
+    <string name="mini_game_score">Scór %s</string>
+    <string name="mini_game_best">Is Fearr %s</string>
     <string name="mini_game_new_record">Taifead nua!</string>
     <string name="mini_game_game_over">Cluiche Thart</string>
     <string name="mini_game_try_again">Bain Triail Arís</string>
@@ -560,7 +607,28 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_advanced_update_interval_monthly">Uair sa mhí</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Minicíocht seiceálacha cúlra</string>
     <string name="settings_advanced_update_interval_battery_warning">B’fhéidir nach n-oibreoidh seiceálacha cúlra go hiontaofa ar roinnt gléasanna. Is minic a chuireann monaróirí cosúil le Xiaomi, Huawei, Samsung, agus OnePlus srian dian ar phróisis chúlra chun ceallraí a shábháil.</string>
+    <string name="settings_advanced_auto_patch">Athphaisteáil uathoibríoch</string>
+    <string name="settings_advanced_auto_patch_description">Athphaisteálann sé aipeanna suiteáilte sa chúlra nuair a athraíonn a bpaistí. Ní chumhdaítear ach aipeanna a bhfuil APK bunaidh sábháilte acu.</string>
+    <string name="settings_advanced_auto_patch_interval">Minicíocht athphaisteála</string>
+    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Cé chomh minic a atógtar aipeanna paisteáilte</string>
+    <string name="settings_advanced_auto_patch_charging">Agus é á mhuirearú amháin</string>
+    <string name="settings_advanced_auto_patch_charging_description">Tá paistí trom ar an LAP agus ar an gcuimhne, mar sin fanann sé le luchtaire</string>
+    <string name="settings_advanced_auto_patch_install">Suiteáil go huathoibríoch</string>
+    <string name="settings_advanced_auto_patch_install_description">Éilíonn Shizuku mar an suiteálaí. Le haon suiteálaí eile, ní shábhálfar ach na haipeanna paisteáilte.</string>
+    <string name="settings_advanced_external_batch_patch">Ceadaigh spreagthóirí seachtracha</string>
+    <string name="settings_advanced_external_batch_patch_description">Ligeann sé d’aipeanna uathoibrithe tosú ag paisteáil bhaisc le hintinn áirithe. Deimhnítear gach iarratas sula ritheann aon rud</string>
+    <string name="external_batch_patch_title">Tosaigh ag paisteáil bhaisc?</string>
+    <string name="external_batch_patch_description">Ba mhaith le %s go ndéanfadh Morphe paistí agus aipeanna a shuiteáil</string>
+    <string name="external_batch_patch_trust_caller">Ceadaigh an aip seo i gcónaí</string>
+    <string name="external_batch_patch_unknown_caller">Aip anaithnid</string>
     <!-- Notification content -->
+    <string name="notification_auto_patch_title">Athphaisteáil uathoibríoch críochnaithe</string>
+    <string name="notification_auto_patch_running_title">Athphaisteáil aipeanna</string>
+    <string name="notification_auto_patch_blocked_title">Níor rith an athphaisteáil uathoibríoch</string>
+    <string name="notification_auto_patch_blocked_battery">Díolmhaigh Morphe ó uasmhéadú ceallraí, nó stopann Android an rith sula dtosaíonn sé</string>
+    <string name="notification_auto_patch_blocked_foreground">Níor cheadaigh Android don phaisteáil tosú sa chúlra. Oscail Morphe agus déan paisteáil ón aip.</string>
+    <string name="notification_channel_auto_patch">Athphaisteáil uathoibríoch</string>
+    <string name="notification_channel_auto_patch_description">Fógraí ciúine maidir le dul chun cinn agus torthaí le haghaidh athphaisteáil sceidealaithe</string>
     <string name="notification_manager_update_title">Nuashonrú Morphe ar fáil</string>
     <string name="notification_bundle_update_title">Paistí nua ar fáil</string>
     <string name="notification_update_text">Tá leagan %s réidh le híoslódáil</string>
@@ -744,6 +812,7 @@ Sonraí: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Chuir Android bac air seo mar go ndéanfadh sé an aip suiteáilte a íosghrádú</string>
     <string name="installer_shizuku_error_signature">Chuir Android bac air seo mar gheall go bhfuil síniú difriúil ag an aip suiteáilte</string>
     <string name="installer_shizuku_error_invalid_apk">Níorbh fhéidir le Android an APK seo a léamh</string>
+    <string name="installer_shizuku_error_user_profile">Chuir an córas bac ar an suiteáil seo. Ar Xiaomi agus gléasanna comhchosúla, cuir \"Suiteáil trí USB\" ar siúl i roghanna forbróra. Ar phróifíl oibre, is féidir suiteálacha a shrianadh de réir polasaí.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Uasmhéadú ceallraí</string>
     <string name="settings_system_battery_optimization_description">Coinníonn an paisteálaí ag rith nuair a bhíonn an aip íoslaghdaithe</string>
@@ -926,6 +995,9 @@ Sonraí: %2$s"</string>
     <string name="confirm">Deimhnigh</string>
     <string name="warning">Rabhadh</string>
     <string name="error_">Earráid</string>
+    <string name="failed">Theip air</string>
+    <string name="cancelled">Cealaithe</string>
+    <string name="ready">Réidh</string>
     <string name="retry">Déan iarracht eile</string>
     <string name="refresh">Athnuachan</string>
     <string name="add">Cuir leis</string>
@@ -938,6 +1010,9 @@ Sonraí: %2$s"</string>
     <string name="delete">Scrios</string>
     <string name="delete_all">Scrios gach rud</string>
     <string name="remove">Bain</string>
+    <string name="exclude">Eisiamh</string>
+    <string name="excluded">Eisiata</string>
+    <string name="include">Cuir san áireamh</string>
     <string name="disable">Díchumasaigh</string>
     <string name="enable">Os comhad</string>
     <string name="loading">Ag lódáil…</string>
@@ -964,8 +1039,10 @@ Sonraí: %2$s"</string>
     <string name="reorder_done">Ordú sábháilte</string>
     <string name="reset_order">Athshocraigh an t-ordú</string>
     <string name="reset_order_done">Athshocrú ordaithe</string>
+    <string name="accessibility_select_app">Roghnaigh aip</string>
     <string name="accessibility_move_up">Bog suas</string>
     <string name="accessibility_move_down">Bog síos</string>
+    <string name="accessibility_app_moved_announcement">%1$s bogtha go suíomh %2$s de %3$s</string>
     <string name="accessibility_scroll_to_top">Scrollaigh go barr an liosta</string>
     <string name="rename">Athainmnigh</string>
     <string name="import_">Iompórtáil</string>
@@ -981,6 +1058,7 @@ Sonraí: %2$s"</string>
     <string name="continue_">Lean ar aghaidh</string>
     <string name="version">Leagan</string>
     <string name="patch">Paiste</string>
+    <string name="patching">Paisteáil</string>
     <string name="repatch">Athphaitseáil</string>
     <string name="open">Oscail</string>
     <string name="mount">Ceangail</string>
@@ -1022,6 +1100,7 @@ Sonraí: %2$s"</string>
     <string name="install_update_manager_failed">Theip ar an nuashonrú a shuiteáil</string>
     <string name="installing_manager_update">Ag suiteáil an nuashonraithe…</string>
     <string name="downloading_manager_update">Ag íoslódáil an nuashonraithe…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Theip ar an nuashonrú a íoslódáil: %s</string>
     <string name="failed_to_check_updates">Theip ar sheiceáil le haghaidh nuashonruithe: %s</string>
     <string name="failed_to_download_update">Theip ar an nuashonrú a íoslódáil: %s</string>
@@ -1032,6 +1111,7 @@ Ar mhaith leat leanúint ar aghaidh fós?"</string>
     <string name="download_update_confirmation">Íoslódáil an nuashonrú?</string>
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
+    <string name="onboarding_step_of">%1$s de %2$s</string>
     <string name="onboarding_sources_desc">Bainistigh do fhoinsí paistí. Soláthraíonn gach foinse paistí is féidir a chur i bhfeidhm ar d’aipeanna.</string>
     <string name="onboarding_swipe_title">Gothaí svaidhpeála</string>
     <string name="onboarding_swipe_desc">Svaidhpeáil ar dheis ar chárta aipe chun na paistí atá ar fáil a fheiceáil. Svaidhpeáil ar chlé chun an cárta a cheilt ón scáileán baile.</string>

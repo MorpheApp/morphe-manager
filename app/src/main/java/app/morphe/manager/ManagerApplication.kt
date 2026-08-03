@@ -15,10 +15,10 @@ import androidx.core.graphics.drawable.toBitmap
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.di.*
-import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.BlocklistRepository
+import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.util.*
@@ -89,8 +89,7 @@ class ManagerApplication : Application() {
                 managerModule,
                 workerModule,
                 viewModelModule,
-                databaseModule,
-                rootModule
+                databaseModule
             )
         }
 
@@ -163,6 +162,8 @@ class ManagerApplication : Application() {
             }
         }
 
+        // First touch of the repository builds the Ktor client, which costs seconds on a cold
+        // start, so it happens here on a background dispatcher rather than in the Koin graph
         scope.launch(Dispatchers.Default) {
             with(patchBundleRepository) {
                 reload()

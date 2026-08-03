@@ -37,7 +37,7 @@ import app.morphe.manager.ui.theme.MonochromeThemeDefaults
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MorpheBottomSheet(
+fun AppBottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
     sheetState: SheetState = rememberBottomSheetState(

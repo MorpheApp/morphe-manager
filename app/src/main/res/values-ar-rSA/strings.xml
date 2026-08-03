@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">انقر للمراجعة والإزالة</string>
     <string name="home_metadata_errors_title">بعض مصادر التعديل غير متوفرة</string>
     <string name="home_metadata_errors_subtitle">انقر لمراجعة المصادر</string>
+    <string name="home_outdated_manager_title">Morphe غير محدّث</string>
+    <string name="home_outdated_manager_subtitle">بعض مصادر التعديل تتطلب إصدارًا أحدث</string>
     <string name="home_metered_skipped_title">التحديثات متوقفة على بيانات الجوّال</string>
     <string name="home_metered_skipped_subtitle">انقر للسماح بالتحديثات على بيانات الجوّال</string>
     <string name="home_update_error">فشل التحديث</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">البيانات الوصفية غير متوفرة</string>
     <string name="sources_management_metadata_unavailable_hint">ملف البيانات الوصفية عن بعد غير متوفر. لا يزال التعديل بالحزمة المثبتة يعمل، ولكن التحديث التلقائي معطل لهذا المصدر.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">تعذر تنزيل حزمة التعديل. قد يكون عنوان URL المصدر غير صحيح أو أن الملف غير موجود.</string>
+    <string name="sources_management_outdated_manager_badge">تحديث Morphe</string>
+    <string name="sources_management_outdated_manager_hint">تم إنشاء هذا المصدر لأداة التعديل %1$s، لكن Morphe %2$s يتضمن أداة التعديل %3$s. قم بتحديث Morphe لاستخدامها</string>
     <string name="sources_management_source_enabled">تم تمكين المصدر</string>
     <string name="sources_management_source_disabled">تم تعطيل المصدر</string>
     <string name="sources_management_source_updating">جارٍ تحديث المصدر</string>
@@ -250,6 +254,11 @@
     <string name="home_dialog_wrong_package_description">ملف APK المحدد ليس للتطبيق الذي كنت تنوي تعديله</string>
     <string name="home_dialog_expected_package">الحزمة المتوقعة:</string>
     <string name="home_dialog_selected_package">الحزمة المحددة:</string>
+    <string name="home_dialog_orphaned_install_title">نسخة سابقة متبقية</string>
+    <string name="home_dialog_orphaned_install_description">تم تغيير اسم الحزمة أثناء التعديل، لذلك لا تزال النسخة التي عدّلتها سابقًا مثبتة كتطبيق منفصل</string>
+    <string name="home_dialog_orphaned_install_warning">لم تعد هذه النسخة مُتتبَّعة ولن تتلقى تحديثات</string>
+    <string name="home_dialog_orphaned_install_uninstall">إلغاء تثبيتها</string>
+    <string name="home_dialog_orphaned_install_keep">الاحتفاظ بها</string>
     <string name="home_outdated_patches_dialog_title">قد تكون التعديلات قديمة</string>
     <string name="home_outdated_patches_dialog_message">بيانات الجوّال نشطة وتحديثات التعديلات معطلة</string>
     <string name="home_outdated_patches_dialog_warning">قد يؤدي التعديل باستخدام تعديلات قديمة إلى حدوث عطل في التطبيق</string>
@@ -323,8 +332,10 @@
     <string name="batch_patch_source_installed">تم تثبيت التطبيق</string>
     <string name="batch_patch_source_file">ملف مرفق</string>
     <string name="batch_patch_source_unavailable">تعذر إعداد ملف APK</string>
+    <string name="batch_patch_find_apk">البحث عن ملف APK</string>
     <string name="batch_patch_attach_apk">إرفاق ملف APK</string>
     <string name="batch_patch_force_version">تعديل على أي حال</string>
+    <string name="batch_patch_force_version_done">تمت إضافتها إلى قائمة الانتظار على أية حال؛ فالتعديلات المُعدّة لإصدارات أخرى قد تتسبب في تعطل التطبيق</string>
     <string name="batch_patch_edit_patches">اختر التعديلات</string>
     <string name="batch_patch_state_no_apk">لا يوجد ملف APK</string>
     <string name="batch_patch_state_no_patches">لا توجد تعديلات</string>
@@ -386,6 +397,8 @@
     <string name="patcher_error_dialog_app_info">معلومات التطبيق</string>
     <string name="patcher_tab_logs">سجلات أداة التعديل</string>
     <string name="patcher_tab_game">ألعاب</string>
+    <string name="patcher_logs_waiting">في انتظار مخرجات السجل…</string>
+    <string name="patcher_logs_lost">لا يتم الاحتفاظ بمخرجات السجل بعد إعادة تشغيل التطبيق</string>
     <string name="patcher_long_step_warning">قد تستغرق هذه الخطوة بعض الوقت. يرجى الانتظار…</string>
     <string name="patcher_installing_subtitle">على وشك أن نكون جاهزين للانطلاق! 🎸</string>
     <string name="patcher_success_title">تم الانتهاء! 🎉</string>
@@ -1092,6 +1105,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="install_update_manager_failed">فشل تثبيت التحديث</string>
     <string name="installing_manager_update">جارٍ تثبيت التحديث...</string>
     <string name="downloading_manager_update">جارٍ تنزيل التحديث...</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">فشل تنزيل التحديث: %s</string>
     <string name="failed_to_check_updates">فشل التحقق من التحديثات: %s</string>
     <string name="failed_to_download_update">فشل تنزيل التحديث: %s</string>

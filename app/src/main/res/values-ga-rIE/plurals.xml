@@ -43,39 +43,39 @@
         <item quantity="other">%s comhaid APK</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">Suiteáladh %s aip</item>
-        <item quantity="two">Suiteáladh %s aipanna</item>
-        <item quantity="few">Suiteáladh %s aip</item>
-        <item quantity="many">Suiteáladh %s aip</item>
-        <item quantity="other">Suiteáladh %s aipanna</item>
+        <item quantity="one">%s aip suiteáilte</item>
+        <item quantity="two">%s aipanna suiteáilte</item>
+        <item quantity="few">%s aipanna suiteáilte</item>
+        <item quantity="many">%s aipanna suiteáilte</item>
+        <item quantity="other">%s aipanna suiteáilte</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
         <item quantity="one">Athshuiteáladh %s aip</item>
-        <item quantity="two">Athshuiteáladh %s aipanna</item>
-        <item quantity="few">Athshuiteáladh %s aip</item>
-        <item quantity="many">Athshuiteáladh %s aip</item>
-        <item quantity="other">Athshuiteáladh %s aipanna</item>
+        <item quantity="two">Athshuiteáladh %s aipeanna</item>
+        <item quantity="few">Athshuiteáladh %s aipeanna</item>
+        <item quantity="many">Athshuiteáladh %s aipeanna</item>
+        <item quantity="other">Athshuiteáladh %s aipeanna</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
         <item quantity="one">Díshuiteáladh %s aip</item>
         <item quantity="two">Díshuiteáladh %s aipanna</item>
-        <item quantity="few">Díshuiteáladh %s aip</item>
-        <item quantity="many">Díshuiteáladh %s aip</item>
-        <item quantity="other">Díshuiteáladh %s aipanna</item>
+        <item quantity="few">Díshuiteáladh %s aipeanna</item>
+        <item quantity="many">Díshuiteáladh %s aipeanna</item>
+        <item quantity="other">Díshuiteáladh %s aipeanna</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
         <item quantity="one">Díshuiteáil %s aip?</item>
         <item quantity="two">Díshuiteáil %s aipanna?</item>
-        <item quantity="few">Díshuiteáil %s aip?</item>
+        <item quantity="few">Díshuiteáil %s aipanna?</item>
         <item quantity="many">Díshuiteáil %s aipanna?</item>
         <item quantity="other">Díshuiteáil %s aipanna?</item>
     </plurals>
     <plurals name="batch_patch_ready_count">
-        <item quantity="one">%s aip réidh le plaisteach</item>
-        <item quantity="two">%s aipanna réidh le plaisteach</item>
-        <item quantity="few">%s aip réidh le plaisteach</item>
-        <item quantity="many">%s aip réidh le plaisteach</item>
-        <item quantity="other">%s aipanna réidh le plaisteach</item>
+        <item quantity="one">%s aip réidh le paisteáil</item>
+        <item quantity="two">%s aipeanna réidh le paisteáil</item>
+        <item quantity="few">%s aipeanna réidh le paisteáil</item>
+        <item quantity="many">%s aipeanna réidh le paisteáil</item>
+        <item quantity="other">%s aipeanna réidh le paisteáil</item>
     </plurals>
     <plurals name="batch_patch_notification_ready">
         <item quantity="one">Tá %s aip réidh le suiteáil</item>
@@ -87,8 +87,8 @@
     <plurals name="batch_skipped_summary">
         <item quantity="one">Scipeáladh %s aip</item>
         <item quantity="two">Scipeáladh %s aipanna</item>
-        <item quantity="few">Scipeáladh %s aip</item>
-        <item quantity="many">Scipeáladh %s aip</item>
+        <item quantity="few">Scipeáladh %s aipanna</item>
+        <item quantity="many">Scipeáladh %s aipanna</item>
         <item quantity="other">Scipeáladh %s aipanna</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">

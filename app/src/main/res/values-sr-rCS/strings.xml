@@ -22,6 +22,8 @@
     <string name="home_blocked_source_subtitle">Dodirnite da biste pregledali i uklonili</string>
     <string name="home_metadata_errors_title">Neki izvori zakrpe nisu dostupni</string>
     <string name="home_metadata_errors_subtitle">Dodirnite da biste pregledali izvore</string>
+    <string name="home_outdated_manager_title">Morphe je zastareo</string>
+    <string name="home_outdated_manager_subtitle">Neki izvori zakrpa zahtevaju noviju verziju</string>
     <string name="home_metered_skipped_title">Ažuriranja su pauzirana na mobilnim podacima</string>
     <string name="home_metered_skipped_subtitle">Dodirnite da biste dozvolili ažuriranja putem mobilnih podataka</string>
     <string name="home_update_error">Ažuriranje nije uspelo</string>
@@ -122,6 +124,8 @@
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
     <string name="sources_management_metadata_unavailable_hint">Datoteka sa daljinskim metapodacima nije dostupna. Primena instaliranog paketa i dalje funkcioniše, ali automatsko ažuriranje je onemogućeno za ovaj izvor.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Paket zakrpa nije uspeo da se preuzme. URL adresa izvora može biti netačna ili datoteka ne postoji.</string>
+    <string name="sources_management_outdated_manager_badge">Ažuriraj Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Ovaj izvor je napravljen za patcher %1$s, ali Morphe %2$s uključuje patcher %3$s. Ažuriraj Morphe da bi ga koristio</string>
     <string name="sources_management_source_enabled">Izvor je uključen</string>
     <string name="sources_management_source_disabled">Izvor je isključen</string>
     <string name="sources_management_source_updating">Ažuriranje izvora</string>
@@ -248,6 +252,10 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="home_dialog_wrong_package_description">Odabrani APK nije za aplikaciju koju ste željeli patchirati</string>
     <string name="home_dialog_expected_package">Očekivan paket:</string>
     <string name="home_dialog_selected_package">Izabrani paket:</string>
+    <string name="home_dialog_orphaned_install_title">Prethodna kopija je ostala</string>
+    <string name="home_dialog_orphaned_install_description">Zamenom paketa promenjeno je ime, tako da kopija koju ste ranije zamenili i dalje funkcioniše kao zasebna aplikacija</string>
+    <string name="home_dialog_orphaned_install_warning">Više nije praćena i neće primati ažuriranja</string>
+    <string name="home_dialog_orphaned_install_uninstall">Deinstaliraj je</string>
     <string name="home_outdated_patches_dialog_title">Patch-ovi mogu biti zastareli</string>
     <string name="home_outdated_patches_dialog_message">Mobilni podaci su aktivni i ažuriranja patch-ova su onemogućena</string>
     <string name="home_outdated_patches_dialog_warning">Ažuriranje sa zastarelima patch-ovima može dovesti do pokvarenog aplikacije</string>
@@ -319,8 +327,10 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="batch_patch_source_installed">Instalirana aplikacija</string>
     <string name="batch_patch_source_file">Priložena datoteka</string>
     <string name="batch_patch_source_unavailable">APK nije mogao da bude pripremljen</string>
+    <string name="batch_patch_find_apk">Pronadi APK</string>
     <string name="batch_patch_attach_apk">Priložite APK</string>
     <string name="batch_patch_force_version">Zakrpi bez obzira</string>
+    <string name="batch_patch_force_version_done">Zakazano je, bez obzira na to, zakrpe napravljene za druge verzije mogu da oštete aplikaciju</string>
     <string name="batch_patch_edit_patches">Izaberite zakrpe</string>
     <string name="batch_patch_state_no_apk">Nema APK-a</string>
     <string name="batch_patch_state_no_patches">Nema zakrpa</string>
@@ -1067,6 +1077,7 @@ Detalji: %2$s"</string>
     <string name="install_update_manager_failed">Neuspešno instaliranje ažuriranja</string>
     <string name="installing_manager_update">Instaliranje ažuriranja…</string>
     <string name="downloading_manager_update">Preuzimanje ažuriranja…</string>
+    <!-- Shown while resuming a download, before the total size is known -->
     <string name="download_manager_failed">Nije uspelo preuzimanje ažuriranja: %s</string>
     <string name="failed_to_check_updates">Nije uspelo proveravanje ažuriranja: %s</string>
     <string name="failed_to_download_update">Neuspešno preuzimanje ažuriranja: %s</string>

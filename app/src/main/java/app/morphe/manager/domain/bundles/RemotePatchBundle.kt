@@ -77,20 +77,12 @@ sealed class RemotePatchBundle(
 
     protected open suspend fun download(info: MorpheAsset, onProgress: PatchBundleDownloadProgress? = null) =
         withContext(Dispatchers.IO) {
-            try {
-                patchesFile.parentFile?.mkdirs()
-                patchesFile.setWritable(true, true)
+            installPatchBundle("Downloading patch bundle") { staging ->
                 http.downloadToFile(
-                    saveLocation = patchesFile,
+                    saveLocation = staging,
                     builder = { url(info.downloadUrl) },
                     onProgress = onProgress
                 )
-                patchesFile.setReadOnly()
-                requireNonEmptyPatchesFile("Downloading patch bundle")
-            } catch (t: Throwable) {
-                runCatching { patchesFile.setWritable(true, true) }
-                runCatching { patchesFile.delete() }
-                throw t
             }
 
             PatchBundleDownloadResult(
@@ -570,7 +562,7 @@ class GitHubPullRequestBundle(
             if (it.isBlank()) throw RuntimeException("PAT is required")
         }
 
-        try {
+        installPatchBundle("Downloading patch bundle") { staging ->
             with(http.http) {
                 prepareGet {
                     url(info.downloadUrl)
@@ -586,7 +578,7 @@ class GitHubPullRequestBundle(
                     val isZip = contentType.contains("zip", ignoreCase = true)
                             || info.downloadUrl.endsWith(".zip", ignoreCase = true)
 
-                    patchBundleOutputStream().use { patchOutput ->
+                    staging.outputStream().use { patchOutput ->
                         if (isZip) {
                             ZipInputStream(httpResponse.bodyAsChannel().toInputStream()).use { zis ->
                                 // Use larger buffer for faster I/O (512 KB)
@@ -660,10 +652,6 @@ class GitHubPullRequestBundle(
                     }
                 }
             }
-            requireNonEmptyPatchesFile("Downloading patch bundle")
-        } catch (t: Throwable) {
-            runCatching { patchesFile.delete() }
-            throw t
         }
 
         PatchBundleDownloadResult(
