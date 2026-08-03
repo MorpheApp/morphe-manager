@@ -221,6 +221,9 @@ object PatchSelectionUtils {
      *  - REQUIRED: force the patch into the selection even if the user did not pick it
      *  - UNAVAILABLE: remove the patch from the selection even if the user did pick it
      *  - ENABLED / DISABLED: leave the selection untouched (user choice wins)
+     *
+     * Patches without an availability resolver are left untouched here. Legacy GmsCore hardcoding
+     * lives in [filterGmsCore] for the transition period.
      */
     fun PatchSelection.applyAvailability(
         installerType: InstallerType,
@@ -247,6 +250,26 @@ object PatchSelectionUtils {
         }
 
         return result
+    }
+
+    /**
+     * Filter out GmsCore support patch from selection (for mount installs).
+     *
+     * Safety net for bundles that predate the availability API or come from third-party sources
+     * that have not adopted it yet. Matches strictly by patch name so it becomes a no-op the
+     * moment the bundle's own resolver removes the patch first.
+     */
+    // TODO: Delete once the patches release declaring `availability {}` for "GmsCore support"
+    //  has propagated to users, together with both call sites:
+    //  HomeViewModel.applyInstallerRules and BatchPlanResolver.applyLegacyMountRules
+    @Deprecated(
+        message = "Kept for legacy bundles. Prefer applyAvailability with the patch-declared resolver.",
+        replaceWith = ReplaceWith("applyAvailability(InstallerType.MOUNT, apkArchitecture, allBundlePatches)")
+    )
+    fun PatchSelection.filterGmsCore(): PatchSelection {
+        return mapValues { (_, patches) ->
+            patches.filterNot { it.equals("GmsCore support", ignoreCase = true) }.toSet()
+        }.filterValues { it.isNotEmpty() }
     }
 
 }
