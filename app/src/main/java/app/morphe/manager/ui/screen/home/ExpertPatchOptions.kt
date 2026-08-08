@@ -171,7 +171,7 @@ internal fun PatchOptionsDialog(
 
     AppDialog(
         onDismissRequest = onDismiss,
-        title = patch.name,
+        title = patch.displayName,
         titleTrailingContent = {
             DialogTitleAction(
                 icon = Icons.Outlined.Restore,

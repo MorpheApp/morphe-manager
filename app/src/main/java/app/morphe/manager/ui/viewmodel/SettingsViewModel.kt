@@ -377,6 +377,8 @@ class SettingsViewModel(
     data class PatchDetails(
         val patchList: List<String>,
         val optionsMap: Map<String, Map<String, Any?>>,
+        /** Stored key to the name its bundle declares, for keys the bundle still knows. */
+        val displayNames: Map<String, String>,
     )
 
     /** Loads patch selections and options for one package+bundle. */
@@ -390,7 +392,9 @@ class SettingsViewModel(
             val optionsMap = rawOptions.mapValues { (_, patchOptions) ->
                 patchOptions.mapValues { (_, jsonString) -> parseJsonValue(jsonString) }
             }
-            PatchDetails(patchList, optionsMap)
+            val displayNames = targetBundlePatchInfos(packageName, bundleUid)
+                .mapValues { (_, info) -> info.displayName }
+            PatchDetails(patchList, optionsMap, displayNames)
         }
 
     /** Assemble picker candidates intersected against the target bundle's patch list. */
@@ -398,7 +402,7 @@ class SettingsViewModel(
         targetPackageName: String,
         targetBundleUid: Int
     ): List<CopySelectionCandidate> = withContext(Dispatchers.IO) {
-        val targetPatchNames = targetBundlePatchNames(targetBundleUid)
+        val targetPatchNames = targetBundlePatchNames(targetPackageName, targetBundleUid)
         loadCopySelectionCandidatesShared(
             patchSelectionRepository = selectionRepository,
             patchBundleRepository = patchBundleRepository,
@@ -417,7 +421,7 @@ class SettingsViewModel(
         target: CopyTarget,
         candidate: CopySelectionCandidate
     ) = viewModelScope.launch(Dispatchers.IO) {
-        val targetPatches = targetBundlePatchInfos(target.bundleUid)
+        val targetPatches = targetBundlePatchInfos(target.packageName, target.bundleUid)
         val sourcePatchNames = selectionRepository.exportForPackageAndBundle(
             candidate.packageName,
             candidate.bundleUid
@@ -445,14 +449,16 @@ class SettingsViewModel(
         }
     }
 
-    private suspend fun targetBundlePatchNames(bundleUid: Int): Set<String> {
-        val info = patchBundleRepository.allBundlesInfoFlow.first()[bundleUid] ?: return emptySet()
-        return info.patches.mapTo(mutableSetOf()) { it.name }
-    }
+    private suspend fun targetBundlePatchNames(packageName: String, bundleUid: Int): Set<String> =
+        targetBundlePatchInfos(packageName, bundleUid).keys
 
-    private suspend fun targetBundlePatchInfos(bundleUid: Int): Map<String, PatchInfo> {
+    /**
+     * Patches the bundle offers for [packageName], keyed the way selections are stored.
+     * Scoped to the app because that is where duplicate names get their suffix.
+     */
+    private suspend fun targetBundlePatchInfos(packageName: String, bundleUid: Int): Map<String, PatchInfo> {
         val info = patchBundleRepository.allBundlesInfoFlow.first()[bundleUid] ?: return emptyMap()
-        return info.patches.associateBy { it.name }
+        return info.forPackage(packageName, null).patches.associateBy { it.name }
     }
 
     companion object {

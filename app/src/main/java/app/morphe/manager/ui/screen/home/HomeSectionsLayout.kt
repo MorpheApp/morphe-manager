@@ -31,8 +31,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -903,6 +907,22 @@ fun MainAppsSection(
             HomeAppCategoryViewMode.ALL_APPS -> Unit
         }
     }
+    // Overscroll left over by the list reaches the pull-to-refresh wrapping the screen, which would
+    // otherwise fire a source update while the user is only picking or rearranging cards
+    val pullToRefreshGuard = remember(state) {
+        object : NestedScrollConnection {
+            override fun onPostScroll(
+                consumed: Offset,
+                available: Offset,
+                source: NestedScrollSource
+            ): Offset = if (state.isMultiSelectMode || state.isReorderMode || state.isCategoryReorderMode) {
+                available
+            } else {
+                Offset.Zero
+            }
+        }
+    }
+
     val homeItemsByPackage = remember(homeAppItems) {
         homeAppItems.associateBy { it.packageName }
     }
@@ -1115,7 +1135,8 @@ fun MainAppsSection(
                             }
                             LazyColumn(
                                 state = listState,
-                                modifier = if (fillHeight) Modifier.fillMaxSize() else Modifier.fillMaxWidth(),
+                                modifier = (if (fillHeight) Modifier.fillMaxSize() else Modifier.fillMaxWidth())
+                                    .nestedScroll(pullToRefreshGuard),
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 // Center items vertically in the flat All-apps view when the list
                                 // is shorter than the viewport; grouped views stay top-aligned so

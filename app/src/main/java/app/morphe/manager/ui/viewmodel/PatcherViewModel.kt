@@ -216,7 +216,7 @@ class PatcherViewModel(
         gatherScopedBundles().values
             .flatMap { it.patches }
             .filter { it.lockState(installerType, SELECTION_APK_ARCHITECTURE) == PatchLockState.LOCKED_OFF }
-            .map { it.name }
+            .map { it.displayName }
             .distinct()
             .sorted()
 

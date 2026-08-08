@@ -162,6 +162,8 @@ internal fun HomeAppsFooterBars(
             // stale offset when items swap to the scoped list; flat defers to the LaunchedEffect
             // after flipping
             state.reorderFocusPackages = if (groupedSelectionPackages == null) focusTargets else emptySet()
+            // A lone card is not a group, so keeping it highlighted only dims everything else for nothing
+            if (selectedPackages.size == 1) selectedPackages.clear()
             state.isMultiSelectMode = false
             searchState.onClose()
             groupedSelectionPackages?.let { scopePackages ->

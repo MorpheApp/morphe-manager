@@ -304,9 +304,9 @@ class InstalledAppInfoViewModel(
                 }
                 val title = source?.displayTitle ?: info?.name ?: "$fallbackName (#$bundleUid)"
                 val version = storedVersions[bundleUid] ?: info?.version
-                val patchInfos = info?.patches
+                // Scoped to the app the patches were picked for, so keys match what was stored
+                val patchInfos = info?.forPackage(app.originalPackageName, null)?.patches
                     ?.filter { it.name in bundlePatches }
-                    ?.distinctBy { it.name }
                     ?.sortedBy { it.name }
                     ?: emptyList()
                 val missingNames = bundlePatches.toList().sorted()

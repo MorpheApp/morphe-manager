@@ -23,12 +23,15 @@ import app.morphe.patcher.patch.ImageOption as PatchImageOption
 import app.morphe.patcher.patch.Option as PatchOption
 
 data class PatchInfo(
+    /** Key for selections and options, unique within one app's list: [displayName], suffixed on collision. */
     val name: String,
     val description: String?,
     val include: Boolean,
     val compatiblePackages: ImmutableList<CompatiblePackage>?,
     val options: ImmutableList<Option<*>>?,
     val availabilityResolver: AvailabilityResolver? = null,
+    /** The name as declared by the bundle, for anything the user reads. */
+    val displayName: String = name,
 ) {
     @Suppress("DEPRECATION")
     constructor(patch: Patch<*>) : this(
@@ -172,6 +175,32 @@ data class PatchInfo(
     private fun pkgFor(packageName: String): CompatiblePackage? =
         compatiblePackages?.firstOrNull { it.packageName == packageName }
 
+}
+
+/** Compatible package names, sorted, or empty for a universal patch. */
+private fun PatchInfo.compatibilityKey() =
+    compatiblePackages?.mapNotNull { it.packageName }?.sorted()?.joinToString().orEmpty()
+
+/**
+ * Selection keys for [patches], in the same order, keeping same-named ones apart so they cannot
+ * share one entry. Scoped to a single app's list, because that is how selections are stored.
+ */
+fun uniqueNames(patches: List<PatchInfo>): List<String> {
+    val keys = patches.mapTo(mutableListOf()) { it.name }
+    val duplicates = patches.withIndex().groupBy { it.value.name }.filterValues { it.size > 1 }
+    if (duplicates.isEmpty()) return keys
+
+    val taken = patches.mapTo(mutableSetOf()) { it.name }
+    duplicates.forEach { (name, group) ->
+        // The most specific patch keeps the plain name, so already stored keys stay valid
+        group.sortedByDescending { it.value.compatibilityKey() }.drop(1).forEach { (index, _) ->
+            var occurrence = 1
+            var key = name
+            while (!taken.add(key)) key = "$name (${++occurrence})"
+            keys[index] = key
+        }
+    }
+    return keys
 }
 
 @Immutable

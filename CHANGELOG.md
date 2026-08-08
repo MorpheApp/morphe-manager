@@ -1,3 +1,12 @@
+## [1.25.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.25.0...v1.25.1-dev.1) (2026-08-08)
+
+
+### Bug Fixes
+
+* Stop an expanding source card from overlapping the one below ([cb8f95c](https://github.com/MorpheApp/morphe-manager/commit/cb8f95c4e298d7fad53f1e66334c99ecf050761d))
+* Stop same-named patches in a source from being selected together ([9219193](https://github.com/MorpheApp/morphe-manager/commit/92191933fabec7130ecd2e956ed2d3259055e4cc))
+* Stop selection and reorder modes from triggering source updates ([121a5d3](https://github.com/MorpheApp/morphe-manager/commit/121a5d37031a96c860df0aadd763c73144e09f85))
+
 # [1.25.0](https://github.com/MorpheApp/morphe-manager/compare/v1.24.3...v1.25.0) (2026-08-06)
 
 

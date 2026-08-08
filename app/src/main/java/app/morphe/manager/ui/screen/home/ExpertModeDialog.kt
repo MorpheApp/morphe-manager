@@ -112,7 +112,7 @@ fun ExpertModeDialog(
         } else {
             allPatchesInfo.mapNotNull { (bundle, patches) ->
                 val filtered = patches.filter { (patch, _) ->
-                    patch.name.contains(searchQuery, ignoreCase = true) ||
+                    patch.displayName.contains(searchQuery, ignoreCase = true) ||
                             patch.description?.contains(searchQuery, ignoreCase = true) == true
                 }
                 if (filtered.isEmpty()) null else bundle to filtered
@@ -486,7 +486,7 @@ fun ExpertModeDialog(
     val patchForOptions = selectedPatchForOptions.value
     if (patchForOptions != null) {
         val (bundleUid, patch) = patchForOptions
-        val missingOptionsMessage = stringResource(R.string.patch_option_required_missing, patch.name)
+        val missingOptionsMessage = stringResource(R.string.patch_option_required_missing, patch.displayName)
         PatchOptionsDialog(
             patch = patch,
             isDefaultBundle = bundleUid == 0,

@@ -112,7 +112,7 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
 
                 defaultBundle.patches.forEach { patch ->
                     // Only process allowed patches
-                    if (patch.name !in ALLOWED_PATCHES) return@forEach
+                    if (patch.displayName !in ALLOWED_PATCHES) return@forEach
 
                     val compatiblePackages = patch.compatiblePackages ?: return@forEach
 

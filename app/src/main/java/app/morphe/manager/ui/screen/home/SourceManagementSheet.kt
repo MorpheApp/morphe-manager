@@ -283,7 +283,17 @@ fun BundleManagementSheet(
                             val useExperimentalVersions = bundle.uid.toString() in experimentalVersionsEnabled
 
                             val isFirstCard = bundle.uid == orderedSources.firstOrNull()?.uid
-                            ReorderableItem(reorderableState, key = bundle.uid) { itemIsDragging ->
+                            ReorderableItem(
+                                reorderableState,
+                                key = bundle.uid,
+                                // Only wanted while dragging: elsewhere it lags behind a card growing
+                                // on expand, letting it overlap the one below
+                                animateItemModifier = if (isDragging) {
+                                    Modifier.animateItem()
+                                } else {
+                                    Modifier.animateItem(placementSpec = null)
+                                }
+                            ) { itemIsDragging ->
                                 BundleManagementCard(
                                     bundle = bundle,
                                     patchCount = patchCounts[bundle.uid] ?: 0,

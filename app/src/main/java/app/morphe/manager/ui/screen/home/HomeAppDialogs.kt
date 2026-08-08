@@ -90,7 +90,7 @@ fun AppPatchesDialog(
         allPatches.filter { (uid, patch) ->
             val bundleMatch = selectedBundle.value == null || uid == selectedBundle.value
             val queryMatch = searchQuery.value.isBlank() ||
-                    patch.name.contains(searchQuery.value, ignoreCase = true) ||
+                    patch.displayName.contains(searchQuery.value, ignoreCase = true) ||
                     patch.description?.contains(searchQuery.value, ignoreCase = true) == true
             bundleMatch && queryMatch
         }

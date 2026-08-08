@@ -88,17 +88,17 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
 
         fun metadata(bundle: PatchBundle) = metadataFor(bundle)
 
-        fun patches(bundles: Iterable<PatchBundle>, packageName: String) =
+        fun patches(bundles: Iterable<PatchBundle>, packageName: String): Map<PatchBundle, Map<String, Patch<*>>> =
             bundles.associateWith { bundle ->
-                loadBundle(bundle).filter { patch ->
-                    val compatibility = patch.compatibility
-                        ?: return@filter true // Universal patch
+                // Filtered and keyed exactly like PatchBundleInfo.Global.forPackage, so a selection
+                // made against the metadata resolves to the same patch here
+                val relevant = loadBundle(bundle)
+                    .map { patch -> PatchInfo(patch) to patch }
+                    .filter { (info, _) -> info.compatibleWith(packageName) }
 
-                    compatibility.any { compat ->
-                        compat.packageName == packageName ||
-                                compat.packageName == null // Universal compatibility entry
-                    }
-                }.toSet()
+                uniqueNames(relevant.map { (info, _) -> info })
+                    .mapIndexed { index, key -> key to relevant[index].second }
+                    .toMap()
             }
 
         private fun validateDexEntries(jarPath: String) {

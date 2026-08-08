@@ -1012,6 +1012,8 @@ private fun PatchDetailsDialog(
             } else {
                 val patchList = details?.patchList ?: emptyList()
                 val optionsMap = details?.optionsMap ?: emptyMap()
+                // Stored keys carry a suffix when the bundle ships duplicate patch names
+                val displayNames = details?.displayNames ?: emptyMap()
 
                 // Patches section
                 if (patchList.isNotEmpty()) {
@@ -1020,7 +1022,7 @@ private fun PatchDetailsDialog(
                         count = patchList.size
                     ) {
                         patchList.forEach { patchName ->
-                            PatchNameRow(name = patchName)
+                            PatchNameRow(name = displayNames[patchName] ?: patchName)
                         }
                     }
                 }
@@ -1032,7 +1034,10 @@ private fun PatchDetailsDialog(
                         count = optionsMap.size
                     ) {
                         optionsMap.entries.forEach { (patchName, options) ->
-                            PatchOptionsGroup(patchName = patchName, options = options)
+                            PatchOptionsGroup(
+                                patchName = displayNames[patchName] ?: patchName,
+                                options = options
+                            )
                         }
                     }
                 }

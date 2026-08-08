@@ -1708,6 +1708,8 @@ private fun AppliedPatchesDialog(
 
             bundles.forEach { bundle ->
                 val bundleOptions = bundleOptionsMap[bundle.uid] ?: emptyMap()
+                // Options are stored under the selection key, which is suffixed on duplicate names
+                val patchDisplayNames = bundle.patchInfos.associate { it.name to it.displayName }
                 val patchCount = bundle.patchInfos.size + bundle.fallbackNames.size
 
                 Column(
@@ -1720,7 +1722,7 @@ private fun AppliedPatchesDialog(
                         count = patchCount
                     ) {
                         bundle.patchInfos.forEach { patch ->
-                            PatchNameRow(name = patch.name)
+                            PatchNameRow(name = patch.displayName)
                         }
                         bundle.fallbackNames.forEach { patchName ->
                             PatchNameRow(name = patchName, dimmed = true)
@@ -1733,7 +1735,10 @@ private fun AppliedPatchesDialog(
                             count = bundleOptions.size
                         ) {
                             bundleOptions.entries.forEach { (patchName, options) ->
-                                PatchOptionsGroup(patchName = patchName, options = options)
+                                PatchOptionsGroup(
+                                    patchName = patchDisplayNames[patchName] ?: patchName,
+                                    options = options
+                                )
                             }
                         }
                     }

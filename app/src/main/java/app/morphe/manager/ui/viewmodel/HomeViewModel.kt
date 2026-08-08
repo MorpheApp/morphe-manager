@@ -1415,12 +1415,7 @@ class HomeViewModel(
             bundleInfo
                 .filter { (_, info) -> info.enabled }
                 .forEach { (uid, info) ->
-                    val patches = info.patches
-                        .filter { patch ->
-                            patch.compatiblePackages == null ||
-                                    patch.compatiblePackages.any { it.packageName == packageName }
-                        }
-                        .distinctBy { it.name }
+                    val patches = info.forPackage(packageName, null).patches
                     if (patches.isNotEmpty()) put(uid, patches)
                 }
         }
@@ -1437,9 +1432,8 @@ class HomeViewModel(
         val applied = installedAppRepository.getAppliedPatches(packageName)
         return applied.entries.mapNotNull { (uid, patchNames) ->
             if (patchNames.isEmpty()) return@mapNotNull null
-            val patchInfos = bundleInfo[uid]?.patches
+            val patchInfos = bundleInfo[uid]?.forPackage(packageName, null)?.patches
                 ?.filter { it.name in patchNames }
-                ?.distinctBy { it.name }
                 ?.sortedBy { it.name }
                 ?: return@mapNotNull null
             if (patchInfos.isEmpty()) null else uid to patchInfos

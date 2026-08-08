@@ -147,7 +147,7 @@ internal fun PatchCard(
     val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
     val patchState = if (isEnabled) enabledState else disabledState
-    val contentDesc = remember(patch.name, patchState) { "${patch.name}, $patchState" }
+    val contentDesc = remember(patch.displayName, patchState) { "${patch.displayName}, $patchState" }
 
     val context = LocalContext.current
     val lockedMessage = when (lockState) {
@@ -203,7 +203,7 @@ internal fun PatchCard(
                         horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
                         Text(
-                            text = patch.name,
+                            text = patch.displayName,
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.SemiBold,
                             color = if (isEnabled)
@@ -242,7 +242,7 @@ internal fun PatchCard(
                         modifier = Modifier
                             .size(36.dp)
                             .semantics {
-                                contentDescription = "${patch.name}, $settings"
+                                contentDescription = "${patch.displayName}, $settings"
                             },
                         enabled = isEnabled,
                         colors = IconButtonDefaults.filledTonalIconButtonColors(

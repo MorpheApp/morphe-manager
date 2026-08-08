@@ -65,8 +65,7 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
             val allPatches = PatchBundle.Loader.patches(parameters.configurations.map { it.bundle }, parameters.packageName)
             val patchList = parameters.configurations.flatMap { config ->
                 val patches = (allPatches[config.bundle] ?: return@flatMap emptyList())
-                    .filter { it.name in config.patches }
-                    .associateBy { it.name }
+                    .filterKeys { it in config.patches }
 
                 config.options.forEach { (patchName, opts) ->
                     // Morphe: Skip if patch doesn't exist in this bundle

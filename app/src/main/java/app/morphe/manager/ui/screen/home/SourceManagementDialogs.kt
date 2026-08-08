@@ -517,19 +517,20 @@ fun BundlePatchesDialog(
 
     val hasMultiplePackages = appLabels.size > 1
 
-    val filteredPatches: List<PatchInfo> = remember(patches, searchQuery, selectedPackages) {
-        patches
-            .filter { patch ->
+    // Carries each patch's position in the unfiltered list: a bundle may declare several patches
+    // under one name and compatibility, so nothing derived from the patch itself is a unique key
+    val filteredPatches: List<IndexedValue<PatchInfo>> = remember(patches, searchQuery, selectedPackages) {
+        patches.withIndex()
+            .filter { (_, patch) ->
                 val packageMatch = selectedPackages.isEmpty() ||
                         patch.compatiblePackages
                             ?.any { it.packageName in selectedPackages } == true
                 val queryMatch = searchQuery.isBlank() ||
-                        patch.name.contains(searchQuery, ignoreCase = true) ||
+                        patch.displayName.contains(searchQuery, ignoreCase = true) ||
                         patch.description?.contains(searchQuery, ignoreCase = true) == true
                 packageMatch && queryMatch
             }
-            .sortedBy { it.name }
-            .distinctBy { it.name }
+            .sortedBy { (_, patch) -> patch.displayName }
     }
 
     // Per-patch accent color: first non-null appIconColor across all compatible packages,
@@ -652,10 +653,8 @@ fun BundlePatchesDialog(
                         // Filtered patches list
                         items(
                             filteredPatches,
-                            key = { patch ->
-                                patch.name + (patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty())
-                            }
-                        ) { patch ->
+                            key = { (index, _) -> index }
+                        ) { (_, patch) ->
                             val context = LocalContext.current
                             val expertBadgeTooltip = stringResource(R.string.sources_patch_expert_badge_tooltip)
                             val accentColor = patchAccentColors[patch.name]
@@ -812,7 +811,7 @@ fun PatchItemCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = patch.name,
+                    text = patch.displayName,
                     color = textColor,
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Medium,
