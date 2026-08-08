@@ -51,7 +51,7 @@
     <string name="home_all_apps_hidden_subtitle">لقد أخفيت جميع التطبيقات من الشاشة الرئيسية</string>
     <string name="home_category_add">إضافة فئة</string>
     <string name="home_category_all_apps">كل التطبيقات</string>
-    <string name="home_category_custom">مخصص</string>
+    <string name="home_category_custom">مخصّص</string>
     <string name="home_category_uncategorized">غير مصنف</string>
     <string name="home_category_new_title">فئة جديدة</string>
     <string name="home_category_rename_title">إعادة تسمية الفئة</string>
