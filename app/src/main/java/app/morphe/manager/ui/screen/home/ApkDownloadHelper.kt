@@ -61,6 +61,13 @@ fun rememberApkDownloadHelperAction(
     ) { result ->
         if (result.resultCode != Activity.RESULT_OK) return@rememberLauncherForActivityResult
 
+        ApkDownloadHelperContract.resultInstalledPackageName(result.data)?.let { packageName ->
+            homeViewModel.showDownloadInstructionsDialog = false
+            homeViewModel.showFilePickerPromptDialog = false
+            homeViewModel.handleHelperInstalledAppSelection(packageName)
+            return@rememberLauncherForActivityResult
+        }
+
         val uri = ApkDownloadHelperContract.resultUri(result.data)
         if (uri == null) {
             context.toast(noResultMessage)

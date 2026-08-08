@@ -1881,6 +1881,34 @@ class HomeViewModel(
     }
 
     /**
+     * Handles a helper result where the user installed the target app outside Morphe.
+     */
+    fun handleHelperInstalledAppSelection(packageName: String) {
+        val pending = pendingPackageName
+        if (pending == null || pending != packageName) {
+            app.toast(app.getString(R.string.home_apk_helper_installed_unavailable))
+            cleanupPendingData()
+            return
+        }
+
+        viewModelScope.launch {
+            val (installed, info) = withContext(Dispatchers.IO) {
+                localApkSources.installed(packageName)
+            }
+            pendingTargetAppInstalled = installed
+            pendingInstalledApkInfo = info?.takeIf { isInstalledVersionCompatible(it.version, it.versionCode) }
+
+            if (pendingInstalledApkInfo == null) {
+                app.toast(app.getString(R.string.home_apk_helper_installed_unavailable))
+                cleanupPendingData()
+                return@launch
+            }
+
+            handleInstalledApkSelection()
+        }
+    }
+
+    /**
      * Loads all user-installed apps and opens the picker dialog.
      * Called from the "Other apps" file-picker prompt when the user taps "Use installed app".
      */
