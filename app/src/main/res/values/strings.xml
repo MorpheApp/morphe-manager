@@ -40,7 +40,13 @@
     <string name="home_update_success_subtitle">Your sources are up to date</string>
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>
     <string name="home_search_apps">Search apps</string>
-    <string name="home_app_sort_title">Sort apps</string>
+    <string name="home_app_list_options_title">Sort and filter</string>
+    <string name="home_app_filter_all_description">Show everything on the home screen</string>
+    <string name="home_app_filter_patched">Patched</string>
+    <string name="home_app_filter_patched_description">Apps you have patched or saved with Morphe</string>
+    <string name="home_app_filter_not_patched_description">Apps you have not patched in Morphe yet</string>
+    <string name="home_app_filter_installed_description">Apps currently installed on this device</string>
+    <string name="home_app_filter_uninstalled_description">Patched apps saved in Morphe but no longer installed</string>
     <string name="home_app_sort_manual_description">Long-press an app, then tap reorder button</string>
     <string name="home_app_sort_recommended">Recommended order</string>
     <string name="home_app_sort_recommended_description">Installed and pinned apps first</string>
@@ -53,6 +59,8 @@
     <string name="home_no_apps_search_subtitle">No apps match \"%s\"</string>
     <string name="home_all_apps_hidden_title">All apps are hidden</string>
     <string name="home_all_apps_hidden_subtitle">You\'ve hidden all apps from the home screen</string>
+    <string name="home_no_apps_filter_title">No apps match this filter</string>
+    <string name="home_no_apps_filter_subtitle">Nothing matched %s</string>
     <string name="home_category_add">Add category</string>
     <string name="home_category_all_apps">All apps</string>
     <string name="home_category_custom">Custom</string>
@@ -616,8 +624,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Show a greeting message on the home screen</string>
     <string name="settings_appearance_app_grouping">App grouping</string>
     <string name="settings_appearance_app_grouping_description">Show a home screen switcher to group apps by source or your own categories, keeping the selection when off</string>
-    <string name="settings_appearance_sort_button">Sort button</string>
-    <string name="settings_appearance_sort_button_description">Show the sort button on the home screen</string>
+    <string name="settings_appearance_sort_button">Sort and filter button</string>
+    <string name="settings_appearance_sort_button_description">Show the sort and filter button on the home screen</string>
     <string name="settings_appearance_app_card_colors">App card colors</string>
     <string name="settings_appearance_app_card_colors_default">Default</string>
     <string name="settings_appearance_app_card_colors_default_description">Give each app the color of its own bundle</string>

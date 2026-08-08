@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">مصادرك محدثة</string>
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
     <string name="home_search_apps">البحث عن التطبيقات</string>
-    <string name="home_app_sort_title">فرز التطبيقات</string>
     <string name="home_app_sort_manual_description">اضغط مطولًا على تطبيق، ثم انقر على زر إعادة الترتيب</string>
     <string name="home_app_sort_recommended">الترتيب الموصى به</string>
     <string name="home_app_sort_recommended_description">التطبيقات المنصَّبة والمثبتة أولًا</string>
@@ -570,8 +569,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">عرض رسالة ترحيب على الشاشة الرئيسية</string>
     <string name="settings_appearance_app_grouping">تجميع التطبيقات</string>
     <string name="settings_appearance_app_grouping_description">عرض مُبدِّل الشاشة الرئيسية لتجميع التطبيقات حسب المصدر أو فئاتك الخاصة، مع الاحتفاظ بالتحديد عند إيقاف تشغيلها</string>
-    <string name="settings_appearance_sort_button">زر الفرز</string>
-    <string name="settings_appearance_sort_button_description">عرض زر الفرز على الشاشة الرئيسية</string>
     <string name="settings_appearance_app_card_colors">ألوان بطاقة التطبيق</string>
     <string name="settings_appearance_app_card_colors_default">الافتراضية</string>
     <string name="settings_appearance_app_card_colors_default_description">امنح كل تطبيق لون حزمته الخاصة</string>

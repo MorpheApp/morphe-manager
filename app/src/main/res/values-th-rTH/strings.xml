@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">แหล่งทีมาของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="home_sources_are_loading">กำลังโหลดแหล่งที่มา กรุณารอสักครู่…</string>
     <string name="home_search_apps">ค้นหาแอป</string>
-    <string name="home_app_sort_title">จัดเรียงแอป</string>
     <string name="home_app_sort_manual_description">แตะแอปค้างไว้ แล้วแตะปุ่มจัดเรียงใหม่</string>
     <string name="home_app_sort_recommended">เรียงตามที่แนะนำ</string>
     <string name="home_app_sort_recommended_description">แอปที่ติดตั้งและตรึงไว้ก่อน</string>
@@ -569,8 +568,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">แสดงข้อความทักทายบนหน้าจอหลัก</string>
     <string name="settings_appearance_app_grouping">การจัดกลุ่มแอป</string>
     <string name="settings_appearance_app_grouping_description">แสดงตัวสลับหน้าจอหลักเพื่อจัดกลุ่มแอปตามแหล่งที่มาหรือตามหมวดหมู่ของคุณเอง โดยจะเก็บการเลือกไว้เมื่อปิด</string>
-    <string name="settings_appearance_sort_button">ปุ่มเรียงลำดับ</string>
-    <string name="settings_appearance_sort_button_description">แสดงปุ่มเรียงลำดับบนหน้าจอหลัก</string>
     <string name="settings_appearance_app_card_colors">สีการ์ดแอป</string>
     <string name="settings_appearance_app_card_colors_default">ค่าเริ่มต้น</string>
     <string name="settings_appearance_app_card_colors_default_description">กำหนดสีให้บันเดิลของแต่ละแอป</string>

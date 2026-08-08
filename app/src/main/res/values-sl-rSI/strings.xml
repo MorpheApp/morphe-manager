@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Viri so posodobljeni</string>
     <string name="home_sources_are_loading">Viri se nalagajo, počakajte…</string>
     <string name="home_search_apps">Poišči aplikacije</string>
-    <string name="home_app_sort_title">Razvrsti aplikacije</string>
     <string name="home_app_sort_manual_description">Dolgo pritisnite aplikacijo, nato tapnite gumb za ponovno razvrstitev</string>
     <string name="home_app_sort_recommended">Priporočen vrstni red</string>
     <string name="home_app_sort_recommended_description">Nameščene in pripete aplikacije naj bodo prve</string>
@@ -569,8 +568,6 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Prikaži pozdravno sporočilo na začetnem zaslonu</string>
     <string name="settings_appearance_app_grouping">Grupiranje aplikacij</string>
     <string name="settings_appearance_app_grouping_description">Prikaži stikalo na začetnem zaslonu za grupiranje aplikacij po izvoru ali lastnih kategorijah, obdrži izbor, ko je izklopljeno</string>
-    <string name="settings_appearance_sort_button">Gumb za razvrščanje</string>
-    <string name="settings_appearance_sort_button_description">Prikaži gumb za razvrščanje na začetnem zaslonu</string>
     <string name="settings_appearance_app_card_colors">Barve kartic aplikacij</string>
     <string name="settings_appearance_app_card_colors_default">Privzeto</string>
     <string name="settings_appearance_app_card_colors_default_description">Daj vsaki aplikaciji barvo njenega paketa</string>

@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Napapanahon ang iyong mga mapagkukunan</string>
     <string name="home_sources_are_loading">Naglo-load ang iyong mga mapagkukunan, mangyaring maghintay…</string>
     <string name="home_search_apps">Maghanap ng mga app</string>
-    <string name="home_app_sort_title">Pagbukud-bukurin ang mga app</string>
     <string name="home_app_sort_manual_description">Pindutin nang matagal ang isang app, pagkatapos ay i-tap ang button na muling ayusin</string>
     <string name="home_app_sort_recommended">Inirerekomendang bersyon</string>
     <string name="home_app_sort_recommended_description">Mga naka-install at naka-pin na app muna</string>
@@ -569,8 +568,6 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ipakita ang mensahe ng pagbati sa pangunahing iskrin</string>
     <string name="settings_appearance_app_grouping">Pagpapangkat ng app</string>
     <string name="settings_appearance_app_grouping_description">Magpakita ng home screen switcher upang pangkatin ang mga app ayon sa pinagmulan o iyong sariling mga kategorya, pinapanatili ang pagpili kapag naka-off</string>
-    <string name="settings_appearance_sort_button">Pindutan ng Pagbukod-bukod</string>
-    <string name="settings_appearance_sort_button_description">Ipakita ang pindutan ng pagbukod-bukod sa pangunahing screen</string>
     <string name="settings_appearance_app_card_colors">Mga kulay ng card ng app</string>
     <string name="settings_appearance_app_card_colors_default">Panimula</string>
     <string name="settings_appearance_app_card_colors_default_description">Bigyan ang bawat app ng kulay ng sarili nitong bundle</string>

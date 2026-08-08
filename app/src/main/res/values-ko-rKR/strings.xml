@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">소스가 최신 상태입니다</string>
     <string name="home_sources_are_loading">소스를 불러오는 중, 잠시만 기다려 주세요…</string>
     <string name="home_search_apps">앱 검색</string>
-    <string name="home_app_sort_title">앱 정렬</string>
     <string name="home_app_sort_manual_description">앱을 길게 탭한 후에 정렬 버튼을 탭하면 순서를 변경할 수 있습니다</string>
     <string name="home_app_sort_recommended">권장 순서</string>
     <string name="home_app_sort_recommended_description">설치된 앱 및 고정된 앱을 먼저 표시</string>
@@ -568,8 +567,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">홈 화면에 인사말을 표시합니다</string>
     <string name="settings_appearance_app_grouping">앱 그룹화</string>
     <string name="settings_appearance_app_grouping_description">앱 출처 또는 사용자 정의 카테고리별로 앱을 그룹화하는 홈 화면 전환기를 표시하며, 비활성화할 경우에는 선택 사항을 유지합니다</string>
-    <string name="settings_appearance_sort_button">정렬 버튼</string>
-    <string name="settings_appearance_sort_button_description">홈 화면에 정렬 버튼을 표시합니다</string>
     <string name="settings_appearance_app_card_colors">앱 카드 색상</string>
     <string name="settings_appearance_app_card_colors_default">기본값</string>
     <string name="settings_appearance_app_card_colors_default_description">각 앱에 해당 앱 번들의 고유 색상을 적용합니다</string>

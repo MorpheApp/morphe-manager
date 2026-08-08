@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Vaše zdroje sú aktuálne</string>
     <string name="home_sources_are_loading">Zdroje sa načítavajú, prosím počkajte…</string>
     <string name="home_search_apps">Vyhľadávanie aplikácií</string>
-    <string name="home_app_sort_title">Zoradiť aplikácie</string>
     <string name="home_app_sort_manual_description">Dlhým stlačením aplikácie a potom klepnutím na tlačidlo zoradiť</string>
     <string name="home_app_sort_recommended">Odporúčaná verzia</string>
     <string name="home_app_sort_recommended_description">Najprv nainštalované a pripnuté aplikácie</string>
@@ -569,8 +568,6 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zobrazovať pozdravnú správu na domovskej obrazovke</string>
     <string name="settings_appearance_app_grouping">Zoskupovanie aplikácií</string>
     <string name="settings_appearance_app_grouping_description">Zobraziť prepínač na domácej obrazovke na zoskupovanie aplikácií podľa zdroja alebo vlastných kategórií, pričom výber sa zachová aj keď je vypnutý</string>
-    <string name="settings_appearance_sort_button">Tlačidlo zoradenia</string>
-    <string name="settings_appearance_sort_button_description">Zobraziť tlačidlo zoradenia na domovskej obrazovke</string>
     <string name="settings_appearance_app_card_colors">Farby karty aplikácie</string>
     <string name="settings_appearance_app_card_colors_default">Predvolená</string>
     <string name="settings_appearance_app_card_colors_default_description">Priradiť každej aplikácii farbu jej vlastného balíka</string>

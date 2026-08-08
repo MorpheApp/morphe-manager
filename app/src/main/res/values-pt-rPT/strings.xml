@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">As tuas fontes estão atualizadas</string>
     <string name="home_sources_are_loading">A carregar fontes, por favor aguarda…</string>
     <string name="home_search_apps">Pesquisar aplicações</string>
-    <string name="home_app_sort_title">Ordenar aplicativos</string>
     <string name="home_app_sort_manual_description">Pressione e segure um aplicativo, depois toque no botão de reordenar</string>
     <string name="home_app_sort_recommended">Ordem recomendada</string>
     <string name="home_app_sort_recommended_description">Aplicativos instalados e fixados primeiro</string>
@@ -569,8 +568,6 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostrar uma mensagem de boas-vindas no ecrã principal</string>
     <string name="settings_appearance_app_grouping">Agrupamento de aplicativos</string>
     <string name="settings_appearance_app_grouping_description">Mostrar um seletor de tela inicial para agrupar aplicativos por origem ou suas próprias categorias, mantendo a seleção quando desativado</string>
-    <string name="settings_appearance_sort_button">Botão de ordenar</string>
-    <string name="settings_appearance_sort_button_description">Mostrar o botão de ordenar na tela inicial</string>
     <string name="settings_appearance_app_card_colors">Cores do cartão do aplicativo</string>
     <string name="settings_appearance_app_card_colors_default">Padrão</string>
     <string name="settings_appearance_app_card_colors_default_description">Atribua a cada aplicativo a cor do seu próprio pacote</string>

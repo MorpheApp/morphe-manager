@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Sizning manbalaringiz yangilandi</string>
     <string name="home_sources_are_loading">Manbalar yuklanayapti, iltimos kuting…</string>
     <string name="home_search_apps">Ilovalarni qidiring</string>
-    <string name="home_app_sort_title">Tampilkan file tersembunyi</string>
     <string name="home_app_sort_manual_description">Urutkan aplikasi</string>
     <string name="home_app_sort_recommended">Tekan lama sebuah aplikasi, lalu ketuk tombol urutkan ulang</string>
     <string name="home_app_sort_recommended_description">Urutan yang direkomendasikan</string>
@@ -568,8 +567,6 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Bosh ekranda salomlashish xabarini ko‘rsatish</string>
     <string name="settings_appearance_app_grouping">Ilovalarni guruhlash</string>
     <string name="settings_appearance_app_grouping_description">Ilovalarni manbaiga yoki o\'zingizning kategoriyalaringizga qarab guruhlash uchun uy ekrani almashtirgichni ko\'rsating, o\'chirilganda tanlovni saqlab qolish</string>
-    <string name="settings_appearance_sort_button">Tartiblash tugmasi</string>
-    <string name="settings_appearance_sort_button_description">Bosh ekranda tartiblash tugmasini ko‘rsatish</string>
     <string name="settings_appearance_app_card_colors">Ilovalar kartasining ranglari</string>
     <string name="settings_appearance_app_card_colors_default">Standart</string>
     <string name="settings_appearance_app_card_colors_default_description">Har bir ilovaga o\'z to\'plamining rangini bering</string>

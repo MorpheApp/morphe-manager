@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">您的源已是最新的</string>
     <string name="home_sources_are_loading">源正在加载，请稍等…</string>
     <string name="home_search_apps">搜索应用</string>
-    <string name="home_app_sort_title">排序应用</string>
     <string name="home_app_sort_manual_description">长按一个应用，然后点击重新排序按钮</string>
     <string name="home_app_sort_recommended">推荐顺序</string>
     <string name="home_app_sort_recommended_description">优先显示已安装和固定应用</string>
@@ -569,8 +568,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">在主屏幕上显示问候消息</string>
     <string name="settings_appearance_app_grouping">应用分组</string>
     <string name="settings_appearance_app_grouping_description">显示主屏幕切换器，按来源或您自己的分类对应用进行分组，并在关闭时保持选择</string>
-    <string name="settings_appearance_sort_button">排序按钮</string>
-    <string name="settings_appearance_sort_button_description">在主屏幕上显示排序按钮</string>
     <string name="settings_appearance_app_card_colors">应用卡片颜色</string>
     <string name="settings_appearance_app_card_colors_default">默认</string>
     <string name="settings_appearance_app_card_colors_default_description">为每个应用赋予其自身包的颜色</string>

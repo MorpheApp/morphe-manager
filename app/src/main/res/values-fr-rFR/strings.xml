@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Vos sources sont à jour</string>
     <string name="home_sources_are_loading">Les sources sont en cours de chargement, veuillez patienter…</string>
     <string name="home_search_apps">Rechercher des applications</string>
-    <string name="home_app_sort_title">Trier les applications</string>
     <string name="home_app_sort_manual_description">Appuyez longuement sur une application, puis appuyez sur le bouton de réorganisation</string>
     <string name="home_app_sort_recommended">Ordre recommandé</string>
     <string name="home_app_sort_recommended_description">Applications installées et épinglées en premier</string>
@@ -571,8 +570,6 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_appearance_greeting_phrases_subtitle">Afficher un message de salutation sur l\'écran d\'accueil</string>
     <string name="settings_appearance_app_grouping">Regroupement d\'applications</string>
     <string name="settings_appearance_app_grouping_description">Afficher un sélecteur sur l\'écran d\'accueil pour regrouper les applications par source ou selon vos propres catégories, en conservant la sélection lorsqu\'il est désactivé</string>
-    <string name="settings_appearance_sort_button">Bouton de tri</string>
-    <string name="settings_appearance_sort_button_description">Afficher le bouton de tri sur l\'écran d\'accueil</string>
     <string name="settings_appearance_app_card_colors">Couleurs des cartes des applications</string>
     <string name="settings_appearance_app_card_colors_default">Par défaut</string>
     <string name="settings_appearance_app_card_colors_default_description">Donner à chaque application la couleur de son propre bundle</string>

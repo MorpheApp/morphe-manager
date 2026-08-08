@@ -46,6 +46,7 @@ fun HomeBottomActionBar(
     showSearchButton: Boolean = false,
     showSortButton: Boolean = false,
     sortMode: HomeAppSortMode = HomeAppSortMode.MANUAL,
+    filterMode: HomeAppFilterMode = HomeAppFilterMode.ALL,
     searchActive: Boolean = false,
     onSearchClick: () -> Unit = {},
     onSortClick: () -> Unit = {},
@@ -55,7 +56,9 @@ fun HomeBottomActionBar(
     // Show labels when there are 2 buttons, or on wider screens where 3 buttons still have room.
     // Four actions stay icon-only to avoid cramped labels
     val windowSize = rememberWindowSize()
-    val actionCount = 2 + (if (showSearchButton) 1 else 0) + (if (showSortButton) 1 else 0)
+    val actionCount = 2 +
+            (if (showSearchButton) 1 else 0) +
+            (if (showSortButton) 1 else 0)
     val showLabels = actionCount <= 2 ||
             (actionCount <= 3 && windowSize.widthSizeClass != WindowWidthSizeClass.Compact)
 
@@ -113,12 +116,17 @@ fun HomeBottomActionBar(
                 enter = Animations.expandHorizFadeIn,
                 exit = Animations.shrinkHorizFadeOut
             ) {
+                val filterActive = filterMode.isActive
                 BottomActionButton(
                     onClick = onSortClick,
                     icon = Icons.AutoMirrored.Outlined.Sort,
                     text = stringResource(R.string.sort),
                     showLabel = showLabels,
-                    stateDescription = stringResource(sortMode.labelRes),
+                    containerColor = if (filterActive) MaterialTheme.colorScheme.tertiaryContainer else null,
+                    contentColor = if (filterActive) MaterialTheme.colorScheme.onTertiaryContainer else null,
+                    stateDescription = stringResource(
+                        if (filterActive) filterMode.labelRes else sortMode.labelRes
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
             }

@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">A forrásaid naprakészek</string>
     <string name="home_sources_are_loading">Források betöltése...</string>
     <string name="home_search_apps">Alkalmazások keresése</string>
-    <string name="home_app_sort_title">Alkalmazások rendezése</string>
     <string name="home_app_sort_manual_description">Nyomja meg hosszan az alkalmazást, majd érintse meg a sorrend módosítása gombot</string>
     <string name="home_app_sort_recommended">Ajánlott sorrend</string>
     <string name="home_app_sort_recommended_description">Először a telepített és rögzített alkalmazások</string>
@@ -568,8 +567,6 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése a kezdőképernyőn</string>
     <string name="settings_appearance_app_grouping">Alkalmazáscsoportosítás</string>
     <string name="settings_appearance_app_grouping_description">Mutasson egy főképernyő váltót az alkalmazások forrás vagy saját kategóriák szerinti csoportosításához, a kiválasztást megőrizve, ha ki van kapcsolva</string>
-    <string name="settings_appearance_sort_button">Rendezés gomb</string>
-    <string name="settings_appearance_sort_button_description">Mutassa a rendezés gombot a kezdőképernyőn</string>
     <string name="settings_appearance_app_card_colors">Alkalmazáskártyák színei</string>
     <string name="settings_appearance_app_card_colors_default">Alapértelmezett</string>
     <string name="settings_appearance_app_card_colors_default_description">Minden alkalmazásnak a saját csomagjának színét adja</string>

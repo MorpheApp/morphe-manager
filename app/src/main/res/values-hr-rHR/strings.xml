@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Vaši izvori su ažurirani</string>
     <string name="home_sources_are_loading">Izvori se učitavaju, molimo pričekajte…</string>
     <string name="home_search_apps">Pretraživanje aplikacija</string>
-    <string name="home_app_sort_title">Poredaj aplikacije</string>
     <string name="home_app_sort_manual_description">Dugo pritisnite aplikaciju, a zatim dodirnite tipku za promjenu redoslijeda</string>
     <string name="home_app_sort_recommended">Preporučeni redoslijed</string>
     <string name="home_app_sort_recommended_description">Instalirane i pričvršćene aplikacije prvo</string>
@@ -560,8 +559,6 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Pokaži poruku dobrodošlice na početnom zaslonu</string>
     <string name="settings_appearance_app_grouping">Grupiranje aplikacija</string>
     <string name="settings_appearance_app_grouping_description">Prikaži prekidač početnog zaslona za grupiranje aplikacija prema izvoru ili vlastitim kategorijama, zadržavajući odabir kada je isključen</string>
-    <string name="settings_appearance_sort_button">Tipka za sortiranje</string>
-    <string name="settings_appearance_sort_button_description">Pokaži tipku za sortiranje na početnom zaslonu</string>
     <string name="settings_appearance_app_card_colors">Boje kartica aplikacije</string>
     <string name="settings_appearance_app_card_colors_default">Zadano</string>
     <string name="settings_appearance_app_card_colors_default_description">Dajte svakoj aplikaciji boju vlastitog paketa</string>

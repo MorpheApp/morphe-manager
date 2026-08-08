@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Źródła są aktualne</string>
     <string name="home_sources_are_loading">Wczytywanie źródeł, proszę czekać…</string>
     <string name="home_search_apps">Szukaj aplikacji</string>
-    <string name="home_app_sort_title">Sortuj aplikacje</string>
     <string name="home_app_sort_manual_description">Przytrzymaj aplikację, a następnie dotknij przycisku zmiany kolejności</string>
     <string name="home_app_sort_recommended">Zalecana kolejność</string>
     <string name="home_app_sort_recommended_description">Najpierw zainstalowane i przypięte aplikacje</string>
@@ -570,8 +569,6 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Wyświetlaj powitanie na ekranie głównym</string>
     <string name="settings_appearance_app_grouping">Grupowanie aplikacji</string>
     <string name="settings_appearance_app_grouping_description">Wyświetl na ekranie głównym przełącznik do grupowania aplikacji według źródła lub własnych kategorii, zachowując wybór po wyłączeniu</string>
-    <string name="settings_appearance_sort_button">Przycisk sortowania</string>
-    <string name="settings_appearance_sort_button_description">Pokaż przycisk sortowania na ekranie głównym</string>
     <string name="settings_appearance_app_card_colors">Kolory kart aplikacji</string>
     <string name="settings_appearance_app_card_colors_default">Domyślne</string>
     <string name="settings_appearance_app_card_colors_default_description">Nadaj każdej aplikacji kolor z jego własnego pakietu</string>

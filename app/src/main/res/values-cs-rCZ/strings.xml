@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Vaše zdroje jsou aktuální</string>
     <string name="home_sources_are_loading">Zdroje se načítají, počkejte prosím…</string>
     <string name="home_search_apps">Hledat aplikace</string>
-    <string name="home_app_sort_title">Řazení aplikací</string>
     <string name="home_app_sort_manual_description">Dlouze stiskněte aplikaci a poté klepněte na tlačítko pro změnu pořadí</string>
     <string name="home_app_sort_recommended">Doporučené pořadí</string>
     <string name="home_app_sort_recommended_description">Nejprve nainstalované a připnuté aplikace</string>
@@ -568,8 +567,6 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zobrazit pozdravný vzkaz na domovské obrazovce</string>
     <string name="settings_appearance_app_grouping">Kreslení aplikací</string>
     <string name="settings_appearance_app_grouping_description">Zobrazit přepínač domovské obrazovky pro seskupení aplikací podle zdroje nebo vlastních kategorií, s ponecháním výběru při vypnutí</string>
-    <string name="settings_appearance_sort_button">Tlačítko pro řazení</string>
-    <string name="settings_appearance_sort_button_description">Zobrazit tlačítko pro řazení na domovské obrazovce</string>
     <string name="settings_appearance_app_card_colors">Barvy karet aplikací</string>
     <string name="settings_appearance_app_card_colors_default">Výchozí</string>
     <string name="settings_appearance_app_card_colors_default_description">Přiřadí každé aplikaci barvu jejího balíčku</string>

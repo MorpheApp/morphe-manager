@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">আপনার সোর্সগুলি আপ-টু-ডেট আছে</string>
     <string name="home_sources_are_loading">সোর্স লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন…</string>
     <string name="home_search_apps">অ্যাপস অনুসন্ধান করুন</string>
-    <string name="home_app_sort_title">অ্যাপস সাজান</string>
     <string name="home_app_sort_manual_description">কোনো অ্যাপ দীর্ঘক্ষণ চাপুন, তারপর পুনর্বিন্যাস বোতামে আলতো চাপুন</string>
     <string name="home_app_sort_recommended">সুপারিশকৃত ক্রম</string>
     <string name="home_app_sort_recommended_description">ইনস্টল করা এবং পিন করা অ্যাপগুলি প্রথমে</string>
@@ -569,8 +568,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">হোম স্ক্রিনে একটি শুভেচ্ছা বার্তা দেখান</string>
     <string name="settings_appearance_app_grouping">অ্যাপ grouping</string>
     <string name="settings_appearance_app_grouping_description">উৎস অথবা আপনার নিজের বিভাগ অনুসারে অ্যাপ grouping করার জন্য একটি হোম স্ক্রিন সুইচ দেখান, বন্ধ থাকা অবস্থায় নির্বাচন ধরে রাখুন।</string>
-    <string name="settings_appearance_sort_button">সর্ট করার বাটন</string>
-    <string name="settings_appearance_sort_button_description">হোম স্ক্রিনে সর্ট করার বাটনটি দেখান</string>
     <string name="settings_appearance_app_card_colors">অ্যাপ কার্ডের রং</string>
     <string name="settings_appearance_app_card_colors_default">ডিফল্ট</string>
     <string name="settings_appearance_app_card_colors_default_description">প্রতিটি অ্যাপকে তার নিজস্ব বান্ডেলের রং দিন</string>

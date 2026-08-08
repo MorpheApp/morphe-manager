@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Ваші джерела актуальні</string>
     <string name="home_sources_are_loading">Джерела завантажуються, будь ласка, зачекайте…</string>
     <string name="home_search_apps">Пошук застосунків</string>
-    <string name="home_app_sort_title">Сортувати застосунки</string>
     <string name="home_app_sort_manual_description">Натисніть та утримуйте на картці застосунку, потім натисніть кнопку зміни порядку</string>
     <string name="home_app_sort_recommended">Рекомендований порядок</string>
     <string name="home_app_sort_recommended_description">Спочатку встановлені та закріплені застосунки</string>
@@ -570,8 +569,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показувати вітальне повідомлення на головному екрані</string>
     <string name="settings_appearance_app_grouping">Групування застосунків</string>
     <string name="settings_appearance_app_grouping_description">Показує перемикач на головному екрані для групування застосунків за джерелом або власними категоріями, зберігаючи вибір при вимкненні</string>
-    <string name="settings_appearance_sort_button">Кнопка сортування</string>
-    <string name="settings_appearance_sort_button_description">Показувати кнопку сортування на головному екрані</string>
     <string name="settings_appearance_app_card_colors">Кольори картки застосунку</string>
     <string name="settings_appearance_app_card_colors_default">Стандартний</string>
     <string name="settings_appearance_app_card_colors_default_description">Надавати кожному застосунку колір його власного пакета</string>

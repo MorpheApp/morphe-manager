@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Вашите източници са актуални</string>
     <string name="home_sources_are_loading">Зареждане на източниците, моля изчакайте…</string>
     <string name="home_search_apps">Търсене на приложения</string>
-    <string name="home_app_sort_title">Сортиране на приложения</string>
     <string name="home_app_sort_manual_description">Натиснете и задръжте приложение, след което докоснете бутона за пренареждане</string>
     <string name="home_app_sort_recommended">Препоръчителен ред</string>
     <string name="home_app_sort_recommended_description">Инсталирани и закрепени приложения първо</string>
@@ -570,8 +569,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показване на поздравително съобщение на началния екран</string>
     <string name="settings_appearance_app_grouping">Групиране на приложения</string>
     <string name="settings_appearance_app_grouping_description">Покажи превключвател на началния екран за групиране на приложения по източник или по твои категории, запазвайки селекцията, когато е изключено</string>
-    <string name="settings_appearance_sort_button">Бутон за сортиране</string>
-    <string name="settings_appearance_sort_button_description">Покажи бутона за сортиране на началния екран</string>
     <string name="settings_appearance_app_card_colors">Цветове на картите на приложенията</string>
     <string name="settings_appearance_app_card_colors_default">По подразбиране</string>
     <string name="settings_appearance_app_card_colors_default_description">Присвояване на цвета на пакета на всяко приложение</string>

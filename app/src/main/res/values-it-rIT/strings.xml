@@ -37,7 +37,6 @@ Nessuna patch disponibile</string>
     <string name="home_update_success_subtitle">Le tue fonti sono aggiornate</string>
     <string name="home_sources_are_loading">Le fonti si stanno caricando, si prega di attendere…</string>
     <string name="home_search_apps">Cerca app</string>
-    <string name="home_app_sort_title">Ordina app</string>
     <string name="home_app_sort_manual_description">Tieni premuta un\'app, quindi tocca il pulsante di riordino</string>
     <string name="home_app_sort_recommended">Ordine consigliato</string>
     <string name="home_app_sort_recommended_description">App installate e fissate per prime</string>
@@ -570,8 +569,6 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostra un messaggio di saluto nella schermata principale</string>
     <string name="settings_appearance_app_grouping">Raggruppamento app</string>
     <string name="settings_appearance_app_grouping_description">Mostra un selettore schermata Home per raggruppare le app per origine o per le tue categorie, mantenendo la selezione quando disattivato</string>
-    <string name="settings_appearance_sort_button">Pulsante Ordina</string>
-    <string name="settings_appearance_sort_button_description">Mostra il pulsante Ordina nella schermata Home</string>
     <string name="settings_appearance_app_card_colors">Colori delle schede app</string>
     <string name="settings_appearance_app_card_colors_default">Predefinita</string>
     <string name="settings_appearance_app_card_colors_default_description">Assegna a ciascuna app il colore del proprio bundle</string>

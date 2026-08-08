@@ -1220,7 +1220,7 @@ class HomeViewModel(
                 installedApp = installedApp,
                 packageInfo = resolvedData.packageInfo,
                 isPinnedByDefault = knownApp?.isPinnedByDefault == true,
-                isInstalledOnDevice = isInstalledOnDevice,
+                isInstalledOnDevice = isInstalledOnDevice || resolvedData.source == AppDataSource.INSTALLED,
                 isDeleted = isDeleted,
                 hasSavedCopy = hasSavedCopy,
                 hasUpdate = hasUpdate,

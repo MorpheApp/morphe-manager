@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Deine Quellen sind auf dem neuesten Stand</string>
     <string name="home_sources_are_loading"> Quellen werden geladen, bitte warten…</string>
     <string name="home_search_apps">Apps suchen</string>
-    <string name="home_app_sort_title">Apps sortieren</string>
     <string name="home_app_sort_manual_description">Halte eine App lange gedrückt und tippe dann auf die Schaltfläche zum Sortieren</string>
     <string name="home_app_sort_recommended">Empfohlene Reihenfolge</string>
     <string name="home_app_sort_recommended_description">Installierte und angeheftete Apps zuerst</string>
@@ -570,8 +569,6 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zeige auf dem Startbildschirm eine Begrüßung an</string>
     <string name="settings_appearance_app_grouping">App-Gruppierung</string>
     <string name="settings_appearance_app_grouping_description">Zeigt einen Home-Bildschirm-Wechsler an, um Apps nach Quelle oder Ihren eigenen Kategorien zu gruppieren und die Auswahl bei Deaktivierung beizubehalten</string>
-    <string name="settings_appearance_sort_button">Sortierknopf</string>
-    <string name="settings_appearance_sort_button_description">Zeigt eine Schaltfläche zum Sortieren auf dem Startbildschirm an</string>
     <string name="settings_appearance_app_card_colors">Farben der App-Karten</string>
     <string name="settings_appearance_app_card_colors_default">Standard</string>
     <string name="settings_appearance_app_card_colors_default_description">Jeder App die Farbe ihres eigenen Bundles zuweisen</string>

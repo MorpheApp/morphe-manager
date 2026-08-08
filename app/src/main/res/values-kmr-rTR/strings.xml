@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Kanalan we nû kirin</string>
     <string name="home_sources_are_loading">Kanalan ketin, ji kerema xwe bibeku</string>
     <string name="home_search_apps">İlave avakurîn</string>
-    <string name="home_app_sort_title">Serîkirina sepanan</string>
     <string name="home_app_sort_manual_description">Sepana dirêj bike, paşê bişîne ser butona rijandinê</string>
     <string name="home_app_sort_recommended">Rêza pêşniyarkirî</string>
     <string name="home_app_sort_recommended_description">Sepanên saz kirî û têxîkirî pêşî</string>
@@ -567,8 +566,6 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="settings_appearance_greeting_phrases_subtitle">Nîşanekê bi xêrhatinê li ser mîna malê nîşan bide</string>
     <string name="settings_appearance_app_grouping">Komkirina sepanan</string>
     <string name="settings_appearance_app_grouping_description">Nîşanekê bike ku sepanan bi çavkanî an kategoriyên te kom bike, hilbijarkirina xwe jî dema ku neçalak e parastin</string>
-    <string name="settings_appearance_sort_button">Dugmeya rêberkirinê</string>
-    <string name="settings_appearance_sort_button_description">Dugmeya rêberkirinê li ser mîhengê nîşan bide</string>
     <string name="settings_appearance_app_card_colors">Rengên karta sepanê</string>
     <string name="settings_appearance_app_card_colors_default">Bixweber</string>
     <string name="settings_appearance_app_card_colors_default_description">Bi her sepanê rengê paketa wê bidin</string>

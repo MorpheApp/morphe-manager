@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">आपके स्रोत अप टू डेट हैं</string>
     <string name="home_sources_are_loading">स्रोत लोड हो रहे हैं, कृपया प्रतीक्षा करें…</string>
     <string name="home_search_apps">ऐप्स खोजें</string>
-    <string name="home_app_sort_title">ऐप्स को क्रमबद्ध करें</string>
     <string name="home_app_sort_manual_description">किसी ऐप को देर तक दबाएं, फिर पुन: व्यवस्थित करें बटन पर टैप करें</string>
     <string name="home_app_sort_recommended">अनुशंसित क्रम</string>
     <string name="home_app_sort_recommended_description">स्थापित और पिन किए गए ऐप्स पहले</string>
@@ -569,8 +568,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">मुखपृष्ठ पर अभिवादन संदेश दिखाएँ</string>
     <string name="settings_appearance_app_grouping">ऐप समूहीकरण</string>
     <string name="settings_appearance_app_grouping_description">स्रोत या अपनी श्रेणियों द्वारा ऐप्स को समूहित करने के लिए होम स्क्रीन स्विचर दिखाएं, बंद होने पर चयन को बनाए रखें</string>
-    <string name="settings_appearance_sort_button">क्रमबद्ध करें बटन</string>
-    <string name="settings_appearance_sort_button_description">होम स्क्रीन पर क्रमबद्ध करें बटन दिखाएँ</string>
     <string name="settings_appearance_app_card_colors">ऐप कार्ड रंग</string>
     <string name="settings_appearance_app_card_colors_default">डिफ़ॉल्ट</string>
     <string name="settings_appearance_app_card_colors_default_description">प्रत्येक ऐप को अपने बंडल का रंग दें</string>

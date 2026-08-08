@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Sumber Anda sudah yang terbaru</string>
     <string name="home_sources_are_loading">Sumber sedang dimuat, harap tunggu…</string>
     <string name="home_search_apps">Cari aplikasi</string>
-    <string name="home_app_sort_title">Urutkan aplikasi</string>
     <string name="home_app_sort_manual_description">Tekan lama sebuah aplikasi, lalu ketuk tombol urutkan</string>
     <string name="home_app_sort_recommended">Urutan yang Direkomendasikan</string>
     <string name="home_app_sort_recommended_description">Aplikasi yang sudah dipasang dan disematkan terlebih dahulu</string>
@@ -570,8 +569,6 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="settings_appearance_greeting_phrases_subtitle">Tampilkan pesan sapaan di layar beranda</string>
     <string name="settings_appearance_app_grouping">Pengelompokan aplikasi</string>
     <string name="settings_appearance_app_grouping_description">Tampilkan pengalih layar beranda untuk mengelompokkan aplikasi berdasarkan sumber atau kategori Anda sendiri, mempertahankan pilihan saat dinonaktifkan</string>
-    <string name="settings_appearance_sort_button">Tombol urutkan</string>
-    <string name="settings_appearance_sort_button_description">Tampilkan tombol urutkan di layar utama</string>
     <string name="settings_appearance_app_card_colors">Warna kartu aplikasi</string>
     <string name="settings_appearance_app_card_colors_default">Bawaan</string>
     <string name="settings_appearance_app_card_colors_default_description">Beri setiap aplikasi warna dari bundelnya sendiri</string>

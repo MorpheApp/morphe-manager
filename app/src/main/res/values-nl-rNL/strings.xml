@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Uw bronnen zijn up-to-date</string>
     <string name="home_sources_are_loading">Bronnen worden geladen, even geduld…</string>
     <string name="home_search_apps">Apps zoeken</string>
-    <string name="home_app_sort_title">Sorteer apps</string>
     <string name="home_app_sort_manual_description">Houd een app ingedrukt en tik vervolgens op de herordenen-knop</string>
     <string name="home_app_sort_recommended">Aanbevolen volgorde</string>
     <string name="home_app_sort_recommended_description">Geïnstalleerde en vastgezette apps eerst</string>
@@ -569,8 +568,6 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Toon een begroetingsbericht op de startscherm</string>
     <string name="settings_appearance_app_grouping">App-groepering</string>
     <string name="settings_appearance_app_grouping_description">Toon een schakelaar op het startscherm om apps te groeperen op bron of eigen categorieën, en selecteer deze instelling wanneer deze uit staat</string>
-    <string name="settings_appearance_sort_button">Sorteer knop</string>
-    <string name="settings_appearance_sort_button_description">Toon de sorteerknop op het startscherm</string>
     <string name="settings_appearance_app_card_colors">App-kaart kleuren</string>
     <string name="settings_appearance_app_card_colors_default">Standaard</string>
     <string name="settings_appearance_app_card_colors_default_description">Geef elke app de kleur van zijn eigen bundle</string>

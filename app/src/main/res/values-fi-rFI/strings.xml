@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Lähteet ovat ajan tasalla</string>
     <string name="home_sources_are_loading">Lähteitä ladataan, odota…</string>
     <string name="home_search_apps">Hae sovelluksia</string>
-    <string name="home_app_sort_title">Järjestä sovellukset</string>
     <string name="home_app_sort_manual_description">Paina sovellusta pitkään ja napauta sitten uudelleenjärjestä-painiketta</string>
     <string name="home_app_sort_recommended">Suositeltu järjestys</string>
     <string name="home_app_sort_recommended_description">Asennetut ja kiinnitetyt sovellukset ensin</string>
@@ -570,8 +569,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Näytä tervehdysviesti aloitusnäytöllä</string>
     <string name="settings_appearance_app_grouping">Sovellusten ryhmittely</string>
     <string name="settings_appearance_app_grouping_description">Näytä kotinäkymän vaihto, jolla voit ryhmitellä sovellukset lähteen tai omien luokkien mukaan ja säilytä valinta, kun se on poissa päältä</string>
-    <string name="settings_appearance_sort_button">Lajittelupainike</string>
-    <string name="settings_appearance_sort_button_description">Näytä lajittelupainike aloitusnäytöllä</string>
     <string name="settings_appearance_app_card_colors">Sovelluksen korttien värit</string>
     <string name="settings_appearance_app_card_colors_default">Oletus</string>
     <string name="settings_appearance_app_card_colors_default_description">Anna jokaiselle sovellukselle sen oman paketin väri</string>

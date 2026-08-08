@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">آپ کے ذرائع تازہ ترین ہیں</string>
     <string name="home_sources_are_loading">ذرائع لوڈ ہو رہے ہیں، براہ کرم انتظار کریں…</string>
     <string name="home_search_apps">Search apps</string>
-    <string name="home_app_sort_title">ایپس کو ترتیب دیں</string>
     <string name="home_app_sort_manual_description">کسی ایپ کو لمبا دبائیں، پھر دوبارہ ترتیب دینے والے بٹن پر ٹیپ کریں</string>
     <string name="home_app_sort_recommended">تجویز کردہ ترتیب</string>
     <string name="home_app_sort_recommended_description">انسٹال شدہ اور پن شدہ ایپس پہلے</string>
@@ -564,8 +563,6 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_greeting_phrases_subtitle"> ہوم سکرین پر ایک تحیاتی میسج دکھائیں</string>
     <string name="settings_appearance_app_grouping">تجميع التطبيقات</string>
     <string name="settings_appearance_app_grouping_description">إظهار مُبدِّل الشاشة الرئيسية لتجميع التطبيقات حسب المصدر أو الفئات الخاصة بك، مع الاحتفاظ بالتحديد عند إيقاف التشغيل</string>
-    <string name="settings_appearance_sort_button">زر الفرز</string>
-    <string name="settings_appearance_sort_button_description">إظهار زر الفرز على الشاشة الرئيسية</string>
     <string name="settings_appearance_app_card_colors">ایپ کارڈ کے رنگ</string>
     <string name="settings_appearance_app_card_colors_default">ڈیفالٹ</string>
     <string name="settings_appearance_app_card_colors_default_description">ہر ایپ کو اس کے اپنے بنڈل کا رنگ دیں</string>

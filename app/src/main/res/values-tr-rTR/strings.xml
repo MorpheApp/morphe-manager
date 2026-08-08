@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Kaynaklarınız güncel</string>
     <string name="home_sources_are_loading">Kaynaklar yükleniyor, lütfen bekleyin…</string>
     <string name="home_search_apps">Uygulamaları ara</string>
-    <string name="home_app_sort_title">Uygulamaları sırala</string>
     <string name="home_app_sort_manual_description">Bir uygulamaya uzun basın, ardından yeniden sıralama düğmesine dokunun</string>
     <string name="home_app_sort_recommended">Önerilen sıra</string>
     <string name="home_app_sort_recommended_description">Önce yüklenen ve sabitlenen uygulamalar</string>
@@ -568,8 +567,6 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ana ekranda bir selamlama mesajı göster</string>
     <string name="settings_appearance_app_grouping">Uygulama gruplandırma</string>
     <string name="settings_appearance_app_grouping_description">Uygulamaları kaynaklarına veya kendi kategorilerinize göre gruplamak için bir ana ekran değiştirici göster. Kapalıyken seçimi korur</string>
-    <string name="settings_appearance_sort_button">Sıralama düğmesi</string>
-    <string name="settings_appearance_sort_button_description">Ana ekranda sıralama düğmesini göster</string>
     <string name="settings_appearance_app_card_colors">Uygulama kartı renkleri</string>
     <string name="settings_appearance_app_card_colors_default">Varsayılan</string>
     <string name="settings_appearance_app_card_colors_default_description">Her uygulamaya kendi paketinin rengini ver</string>

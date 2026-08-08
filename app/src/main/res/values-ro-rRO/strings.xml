@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Sursele tale sunt actualizate</string>
     <string name="home_sources_are_loading">Se încarcă sursele…</string>
     <string name="home_search_apps">Caută aplicații</string>
-    <string name="home_app_sort_title">Sortați aplicațiile</string>
     <string name="home_app_sort_manual_description">Apăsați lung pe o aplicație, apoi atingeți butonul de reordonare</string>
     <string name="home_app_sort_recommended">Ordinare recomandată</string>
     <string name="home_app_sort_recommended_description">Aplicațiile instalate și fixate primele</string>
@@ -568,8 +567,6 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Afișează un mesaj de salut pe ecranul principal</string>
     <string name="settings_appearance_app_grouping">Gruparea aplicațiilor</string>
     <string name="settings_appearance_app_grouping_description">Afișează un comutator al ecranului principal pentru a grupa aplicațiile după sursă sau după propriile categorii, menținând selecția când este dezactivat</string>
-    <string name="settings_appearance_sort_button">Buton sortare</string>
-    <string name="settings_appearance_sort_button_description">Afișează butonul de sortare pe ecranul principal</string>
     <string name="settings_appearance_app_card_colors">Culori card aplicație</string>
     <string name="settings_appearance_app_card_colors_default">Implicit</string>
     <string name="settings_appearance_app_card_colors_default_description">Oferă fiecărei aplicații culoarea propriului pachet</string>

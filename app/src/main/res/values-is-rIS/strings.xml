@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Heimildir þínar eru upp til daglegt</string>
     <string name="home_sources_are_loading">Heimildir eru að hlaða, vinsamlegast bíðu…</string>
     <string name="home_search_apps">Leita að forritum</string>
-    <string name="home_app_sort_title">Raða forritum</string>
     <string name="home_app_sort_manual_description">Langt ýta á forrit, þá smelltu á endurraða hnappinn</string>
     <string name="home_app_sort_recommended">Rækt ráðlagður röð</string>
     <string name="home_app_sort_recommended_description">Uppsett og fest forrit fyrst</string>
@@ -567,8 +566,6 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Sýna kveðju skilaboð á heimaskjá</string>
     <string name="settings_appearance_app_grouping">Forritaflokkun</string>
     <string name="settings_appearance_app_grouping_description">Sýna rofasa á heimaskjá til að flokka forrit eftir uppruna eða eigin flokkum, halda vali þegar slökkt er á rofanum</string>
-    <string name="settings_appearance_sort_button">Röðunarhnappur</string>
-    <string name="settings_appearance_sort_button_description">Sýna röðunarhnapp á heimsíðunni</string>
     <string name="settings_appearance_app_card_colors">Litir á app kortum</string>
     <string name="settings_appearance_app_card_colors_default">Sjálfgefið</string>
     <string name="settings_appearance_app_card_colors_default_description">Nota litinn á pakkann fyrir hvert app</string>

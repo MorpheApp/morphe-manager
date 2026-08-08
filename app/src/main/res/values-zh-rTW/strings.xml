@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">來源已是最新狀態</string>
     <string name="home_sources_are_loading">正在載入來源，請稍候…</string>
     <string name="home_search_apps">搜尋應用程式</string>
-    <string name="home_app_sort_title">排序應用程式</string>
     <string name="home_app_sort_manual_description">長按應用程式，然後點選重新排序按鈕</string>
     <string name="home_app_sort_recommended">推薦順序</string>
     <string name="home_app_sort_recommended_description">優先顯示已安裝和固定應用程式</string>
@@ -568,8 +567,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">在主螢幕上顯示問候訊息</string>
     <string name="settings_appearance_app_grouping">應用程式分組</string>
     <string name="settings_appearance_app_grouping_description">顯示主畫面切換器，以依來源或您自己的類別分組應用程式，並在關閉時保留選取內容</string>
-    <string name="settings_appearance_sort_button">排序按鈕</string>
-    <string name="settings_appearance_sort_button_description">在主螢幕上顯示排序按鈕</string>
     <string name="settings_appearance_app_card_colors">應用程式卡片顏色</string>
     <string name="settings_appearance_app_card_colors_default">預設</string>
     <string name="settings_appearance_app_card_colors_default_description">讓每個應用程式都擁有其套件的顏色</string>

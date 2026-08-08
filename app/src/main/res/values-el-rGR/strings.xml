@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Οι πηγές σας είναι ενημερωμένες</string>
     <string name="home_sources_are_loading">Οι πηγές φορτώνονται, παρακαλώ περιμένετε…</string>
     <string name="home_search_apps">Αναζήτηση εφαρμογών</string>
-    <string name="home_app_sort_title">Ταξινόμηση εφαρμογών</string>
     <string name="home_app_sort_manual_description">Πατήστε παρατεταμένα μια εφαρμογή, στη συνέχεια πατήστε το κουμπί αναδιάταξης</string>
     <string name="home_app_sort_recommended">Προτεινόμενη έκδοση</string>
     <string name="home_app_sort_recommended_description">Εγκατεστημένες και закрепленные εφαρμογές πρώτα</string>
@@ -569,8 +568,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Εμφάνιση μηνύματος υποδοχής στην αρχική οθόνη</string>
     <string name="settings_appearance_app_grouping">Ομαδοποίηση εφαρμογών</string>
     <string name="settings_appearance_app_grouping_description">Εμφάνιση διακόπτη στην αρχική οθόνη για ομαδοποίηση εφαρμογών κατά πηγή ή δικές σας κατηγορίες, διατηρώντας την επιλογή όταν είναι απενεργοποιημένη</string>
-    <string name="settings_appearance_sort_button">Κουμπί ταξινόμησης</string>
-    <string name="settings_appearance_sort_button_description">Εμφάνιση του κουμπιού ταξινόμησης στην αρχική οθόνη</string>
     <string name="settings_appearance_app_card_colors">Χρώματα καρτών εφαρμογών</string>
     <string name="settings_appearance_app_card_colors_default">Προεπιλογή</string>
     <string name="settings_appearance_app_card_colors_default_description">Δώστε σε κάθε εφαρμογή το χρώμα του δικού της πακέτου</string>

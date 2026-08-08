@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Kildene dine er oppdatert</string>
     <string name="home_sources_are_loading">Kilder lastes, vennligst vent…</string>
     <string name="home_search_apps">Søk etter apper</string>
-    <string name="home_app_sort_title">Sorter apper</string>
     <string name="home_app_sort_manual_description">Trykk og hold på en app, og trykk deretter på sorter-knappen</string>
     <string name="home_app_sort_recommended">Anbefalt rekkefølge</string>
     <string name="home_app_sort_recommended_description">Installerte og fastsatte apper først</string>
@@ -569,8 +568,6 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Vis en hilsenmelding på startskjermen</string>
     <string name="settings_appearance_app_grouping">Appgruppering</string>
     <string name="settings_appearance_app_grouping_description">Vis en startskjermbryter for å gruppere apper etter kilde eller egne kategorier, og behold valget når den er slått av</string>
-    <string name="settings_appearance_sort_button">Sorter-knapp</string>
-    <string name="settings_appearance_sort_button_description">Vis sorter-knappen på hjemmeskjermen</string>
     <string name="settings_appearance_app_card_colors">App-kortfarger</string>
     <string name="settings_appearance_app_card_colors_default">Standard</string>
     <string name="settings_appearance_app_card_colors_default_description">Gi hver app fargen fra sin egen pakke</string>

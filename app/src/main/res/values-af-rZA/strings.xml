@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Jou oorspronge is opgedateer</string>
     <string name="home_sources_are_loading">Oorsprong word gelaai, wag asseblief…</string>
     <string name="home_search_apps">Soek programme</string>
-    <string name="home_app_sort_title">Sorteer programme</string>
     <string name="home_app_sort_manual_description">Druk lank op \'n program, en tik dan op die herordeneer knoppie</string>
     <string name="home_app_sort_recommended">Aanbevole volgorde</string>
     <string name="home_app_sort_recommended_description">Geïnstalleerde en vasgestelde programme eerste</string>
@@ -569,8 +568,6 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Wys \'n groet-boodskap op die tuisskerm</string>
     <string name="settings_appearance_app_grouping">Toepassingsgroepering</string>
     <string name="settings_appearance_app_grouping_description">Wys \'n tuisskermskakelaar om toepassings volgens bron of jou eie kategorieë te groepeer, en die keuse te behou wanneer dit af is</string>
-    <string name="settings_appearance_sort_button">Sorteer knoppie</string>
-    <string name="settings_appearance_sort_button_description">Wys die sorteer knoppie op die tuisskerm</string>
     <string name="settings_appearance_app_card_colors">App-kaartkleure</string>
     <string name="settings_appearance_app_card_colors_default">Verstek</string>
     <string name="settings_appearance_app_card_colors_default_description">Gee elke app die kleur van sy eie bundel</string>

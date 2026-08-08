@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Đã cập nhật tất cả nguồn lên mới nhất</string>
     <string name="home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
     <string name="home_search_apps">Tìm ứng dụng</string>
-    <string name="home_app_sort_title">Sắp xếp ứng dụng</string>
     <string name="home_app_sort_manual_description">Bấm giữ một ứng dụng, sau đó chọn nút sắp xếp lại</string>
     <string name="home_app_sort_recommended">Thứ tự đề xuất</string>
     <string name="home_app_sort_recommended_description">Ưu tiên ứng dụng đã cài đặt và được ghim trước</string>
@@ -569,8 +568,6 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_greeting_phrases_subtitle">Hiện thông điệp trên trang chủ</string>
     <string name="settings_appearance_app_grouping">Nhóm ứng dụng</string>
     <string name="settings_appearance_app_grouping_description">Hiển thị công tắc màn hình chính để nhóm ứng dụng theo nguồn hoặc danh mục của riêng bạn, giữ lựa chọn khi tắt</string>
-    <string name="settings_appearance_sort_button">Nút sắp xếp</string>
-    <string name="settings_appearance_sort_button_description">Hiển thị nút sắp xếp trên màn hình chính</string>
     <string name="settings_appearance_app_card_colors">Màu thẻ ứng dụng</string>
     <string name="settings_appearance_app_card_colors_default">Mặc định</string>
     <string name="settings_appearance_app_card_colors_default_description">Gán màu của gói ứng dụng cho mỗi ứng dụng</string>

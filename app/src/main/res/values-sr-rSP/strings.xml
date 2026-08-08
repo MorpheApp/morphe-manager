@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Ваши извори су ажурни</string>
     <string name="home_sources_are_loading">Извори се учитавају, молимо сачекајте…</string>
     <string name="home_search_apps">Претрага апликација</string>
-    <string name="home_app_sort_title">Сортирај апликације</string>
     <string name="home_app_sort_manual_description">Притисните и задржите апликацију, затим додирните дугме за поредање</string>
     <string name="home_app_sort_recommended">Препоручени поредак</string>
     <string name="home_app_sort_recommended_description">Инсталиране и причвршћене апликације прво</string>
@@ -569,8 +568,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Прикажи поруку на почетном екрану</string>
     <string name="settings_appearance_app_grouping">Груписање апликација</string>
     <string name="settings_appearance_app_grouping_description">Прикажи прекидач почетног екрана за груписање апликација по извору или властитим категоријама, задржавајући селекцију када је искључено</string>
-    <string name="settings_appearance_sort_button">Дугме за сортирање</string>
-    <string name="settings_appearance_sort_button_description">Прикажи дугме за сортирање на почетном екрану</string>
     <string name="settings_appearance_app_card_colors">Боје картица апликација</string>
     <string name="settings_appearance_app_card_colors_default">Подразумевано</string>
     <string name="settings_appearance_app_card_colors_default_description">Додели свакој апликацији боју њеног пакета</string>

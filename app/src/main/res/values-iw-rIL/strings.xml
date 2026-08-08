@@ -37,7 +37,6 @@
     <string name="home_update_success_subtitle">המקורות שלך מעודכנים</string>
     <string name="home_sources_are_loading">המקורות נטענים, נא להמתין…</string>
     <string name="home_search_apps">חיפוש אפליקציות</string>
-    <string name="home_app_sort_title">מיין אפליקציות</string>
     <string name="home_app_sort_manual_description">החזק לחיצה ארוכה על אפליקציה, ולאחר מכן הקש על כפתור הסדר מחדש</string>
     <string name="home_app_sort_recommended">סדר מומלץ</string>
     <string name="home_app_sort_recommended_description">אפליקציות מותקנות ומעוגנות ראשונות</string>
@@ -570,8 +569,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">הצגת הודעת פתיחה על מסך הבית</string>
     <string name="settings_appearance_app_grouping">קיבוץ אפליקציות</string>
     <string name="settings_appearance_app_grouping_description">הצג מחליף מסך בית לקיבוץ אפליקציות לפי מקור או קטגוריות משלך, ושמור את הבחירה כאשר הוא כבוי</string>
-    <string name="settings_appearance_sort_button">כפתור מיון</string>
-    <string name="settings_appearance_sort_button_description">הצג את כפתור המיון במסך הבית</string>
     <string name="settings_appearance_app_card_colors">צבעי כרטיסי האפליקציה</string>
     <string name="settings_appearance_app_card_colors_default">ברירת מחדל</string>
     <string name="settings_appearance_app_card_colors_default_description">להעניק לכל אפליקציה את צבע החבילה שלה</string>

@@ -15,11 +15,14 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.FilterList
 import androidx.compose.material.icons.outlined.Inbox
+import androidx.compose.material.icons.outlined.SearchOff
 import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
@@ -174,18 +177,16 @@ fun SectionsLayout(
         onToggle = { searchVisible.value = !searchVisible.value },
         onClose = { searchVisible.value = false }
     )
-    var showSortDialog by remember { mutableStateOf(false) }
+    var showListOptionsDialog by remember { mutableStateOf(false) }
+    var filterMode by rememberSaveable { mutableStateOf(HomeAppFilterMode.ALL) }
 
-    if (showSortDialog) {
-        SortModeSelectionDialog(
-            title = stringResource(R.string.home_app_sort_title),
-            current = apps.sortMode,
-            options = sortModeOptions<HomeAppSortMode>(),
-            onSelect = { mode ->
-                appActions.onSortModeChange(mode)
-                showSortDialog = false
-            },
-            onDismiss = { showSortDialog = false }
+    if (showListOptionsDialog) {
+        HomeAppListOptionsDialog(
+            sortMode = apps.sortMode,
+            filterMode = filterMode,
+            onSortModeChange = appActions.onSortModeChange,
+            onFilterModeChange = { mode -> filterMode = mode },
+            onDismiss = { showListOptionsDialog = false }
         )
     }
 
@@ -210,7 +211,9 @@ fun SectionsLayout(
                     searchState = searchState,
                     chromeActions = chromeActions,
                     chromeFlags = chromeFlags,
-                    onSortClick = { showSortDialog = true },
+                    filterMode = filterMode,
+                    onClearFilter = { filterMode = HomeAppFilterMode.ALL },
+                    onSortClick = { showListOptionsDialog = true },
                     onboardingState = onboardingState
                 )
             }
@@ -224,9 +227,10 @@ fun SectionsLayout(
                     showSearchButton = chromeFlags.showSearchButton,
                     showSortButton = chromeFlags.showSortButton,
                     sortMode = apps.sortMode,
+                    filterMode = filterMode,
                     searchActive = searchState.visible,
                     onSearchClick = searchState.onToggle,
-                    onSortClick = { showSortDialog = true },
+                    onSortClick = { showListOptionsDialog = true },
                     onSourcesPositioned = onboardingState?.let { s -> { b -> s.sourcesButtonBounds = b } },
                     onSettingsPositioned = onboardingState?.let { s -> { b -> s.settingsButtonBounds = b } }
                 )
@@ -257,6 +261,8 @@ private fun AdaptiveContent(
     searchState: HomeSearchState,
     chromeActions: HomeChromeActions,
     chromeFlags: HomeChromeFlags,
+    filterMode: HomeAppFilterMode,
+    onClearFilter: () -> Unit,
     onSortClick: () -> Unit,
     onboardingState: OnboardingState? = null
 ) {
@@ -292,6 +298,7 @@ private fun AdaptiveContent(
                     isExpertModeEnabled = chromeFlags.isExpertModeEnabled,
                     showSortButton = chromeFlags.showSortButton,
                     sortMode = apps.sortMode,
+                    filterMode = filterMode,
                     onSearchClick = searchState.onToggle,
                     onSortClick = onSortClick,
                     onBundlesClick = chromeActions.onBundlesClick,
@@ -327,6 +334,8 @@ private fun AdaptiveContent(
                                 apps = apps,
                                 appActions = appActions,
                                 searchState = searchState,
+                                filterMode = filterMode,
+                                onClearFilter = onClearFilter,
                                 onBundlesClick = chromeActions.onBundlesClick,
                                 itemSpacing = itemSpacing,
                                 maxCardWidth = maxCardWidth,
@@ -378,6 +387,8 @@ private fun AdaptiveContent(
                         apps = apps,
                         appActions = appActions,
                         searchState = searchState,
+                        filterMode = filterMode,
+                        onClearFilter = onClearFilter,
                         onBundlesClick = chromeActions.onBundlesClick,
                         itemSpacing = itemSpacing,
                         horizontalPadding = contentPadding,
@@ -538,6 +549,8 @@ fun MainAppsSection(
     apps: HomeAppListUi,
     appActions: HomeAppActions,
     searchState: HomeSearchState,
+    filterMode: HomeAppFilterMode,
+    onClearFilter: () -> Unit,
     onBundlesClick: () -> Unit,
     modifier: Modifier = Modifier,
     itemSpacing: Dp = 16.dp,
@@ -554,6 +567,8 @@ fun MainAppsSection(
     val homeAppItems = apps.visible
     val hiddenAppItems = apps.hidden
     val searchQuery = searchState.query
+    val isFilterActive = filterMode.isActive
+    val isFilteringList = searchQuery.isNotBlank() || isFilterActive
     val appGrouping = apps.categoryViewMode
     val isGroupedAppView = appGrouping != HomeAppCategoryViewMode.ALL_APPS
     val isCustomCategoryView = appGrouping == HomeAppCategoryViewMode.CUSTOM
@@ -637,21 +652,23 @@ fun MainAppsSection(
         appActions = appActions
     )
 
-    // Filtered visible items based on search query
-    val filteredItems = remember(homeAppItems, searchQuery) {
-        if (searchQuery.isBlank()) homeAppItems
-        else homeAppItems.filter { item ->
-            item.displayName.contains(searchQuery, ignoreCase = true) ||
-                    item.packageName.contains(searchQuery, ignoreCase = true)
+    fun HomeAppItem.matchesSearch(): Boolean =
+        searchQuery.isBlank() ||
+                displayName.contains(searchQuery, ignoreCase = true) ||
+                packageName.contains(searchQuery, ignoreCase = true)
+
+    // Filtered visible items based on selected status filter and search query.
+    val filteredItems = remember(homeAppItems, searchQuery, filterMode) {
+        homeAppItems.filter { item ->
+            filterMode.matches(item) && item.matchesSearch()
         }
     }
 
     // Hidden items that match the search query
-    val filteredHiddenItems = remember(hiddenAppItems, searchQuery) {
+    val filteredHiddenItems = remember(hiddenAppItems, searchQuery, filterMode) {
         if (searchQuery.isBlank()) emptyList()
         else hiddenAppItems.filter { item ->
-            item.displayName.contains(searchQuery, ignoreCase = true) ||
-                    item.packageName.contains(searchQuery, ignoreCase = true)
+            filterMode.matches(item) && item.matchesSearch()
         }
     }
 
@@ -666,7 +683,7 @@ fun MainAppsSection(
             items = filteredItems,
             categoryState = apps.categoryState,
             uncategorizedTitle = uncategorizedTitle,
-            ignoreCollapsed = searchQuery.isNotBlank()
+            ignoreCollapsed = isFilteringList
         )
     }
     val sourceCategoryGroups = remember(
@@ -681,7 +698,7 @@ fun MainAppsSection(
             sourceGroups = apps.sourceGroups,
             uncategorizedTitle = uncategorizedTitle,
             uncategorizedCollapsed = apps.categoryState.uncategorizedCollapsed,
-            ignoreCollapsed = searchQuery.isNotBlank()
+            ignoreCollapsed = isFilteringList
         )
     }
     LaunchedEffect(apps.sourceGroups, state.isCategoryReorderMode, isSourceCategoryView) {
@@ -1011,6 +1028,8 @@ fun MainAppsSection(
     // Search empty state: items exist but nothing matches query (including hidden)
     val isSearchEmpty = !state.isLoading && homeAppItems.isNotEmpty() &&
             searchQuery.isNotBlank() && filteredItems.isEmpty() && filteredHiddenItems.isEmpty()
+    val isFilterEmpty = !state.isLoading && homeAppItems.isNotEmpty() &&
+            searchQuery.isBlank() && isFilterActive && filteredItems.isEmpty()
 
     // Horizontal swipe on the background cycles through the visible grouping modes
     val modes = HomeAppCategoryViewMode.entries
@@ -1119,7 +1138,11 @@ fun MainAppsSection(
                         ) {
                             // Cached so the LazyColumn doesn't allocate a new PaddingValues on
                             // every recomposition (which can be per-frame under scroll)
-                            val listContentPadding = remember(horizontalPadding, itemSpacing, state.isFooterBarVisible) {
+                            val listContentPadding = remember(
+                                horizontalPadding,
+                                itemSpacing,
+                                state.isFooterBarVisible
+                            ) {
                                 PaddingValues(
                                     start = horizontalPadding,
                                     end = horizontalPadding,
@@ -1173,6 +1196,13 @@ fun MainAppsSection(
                                         categoryActionsUnavailableToast = categoryActionsUnavailableToast
                                     )
 
+                                    filterEmptyState(
+                                        isFilterEmpty = isFilterEmpty,
+                                        filterMode = filterMode,
+                                        onClearFilter = onClearFilter,
+                                        keyPrefix = "category_"
+                                    )
+
                                     hiddenSearchAndShowHiddenItems(
                                         hiddenAppItems = hiddenAppItems,
                                         filteredHiddenItems = filteredHiddenItems,
@@ -1196,6 +1226,12 @@ fun MainAppsSection(
                                         onboardingState = onboardingState,
                                         moveAnnouncementFormat = moveAnnouncementFormat,
                                         onMoveAnnouncement = { moveAnnouncement = it }
+                                    )
+
+                                    filterEmptyState(
+                                        isFilterEmpty = isFilterEmpty,
+                                        filterMode = filterMode,
+                                        onClearFilter = onClearFilter
                                     )
 
                                     hiddenSearchAndShowHiddenItems(
@@ -1294,5 +1330,29 @@ fun MainAppsSection(
                 }
             }
         }
+    }
+}
+
+private fun LazyListScope.filterEmptyState(
+    isFilterEmpty: Boolean,
+    filterMode: HomeAppFilterMode,
+    onClearFilter: () -> Unit,
+    keyPrefix: String = ""
+) {
+    if (!isFilterEmpty) return
+
+    item(key = "${keyPrefix}filter_empty") {
+        HomeEmptyState(
+            icon = Icons.Outlined.SearchOff,
+            title = stringResource(R.string.home_no_apps_filter_title),
+            subtitle = stringResource(
+                R.string.home_no_apps_filter_subtitle,
+                stringResource(filterMode.labelRes)
+            ),
+            actionIcon = Icons.Outlined.FilterList,
+            actionLabel = stringResource(R.string.clear),
+            onAction = onClearFilter,
+            modifier = Modifier.animateItem()
+        )
     }
 }

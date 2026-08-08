@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Ваши источники обновлены</string>
     <string name="home_sources_are_loading">Загрузка источников, пожалуйста, подождите…</string>
     <string name="home_search_apps">Поиск приложений</string>
-    <string name="home_app_sort_title">Сортировка приложений</string>
     <string name="home_app_sort_manual_description">Нажмите и удерживайте значок приложения, затем нажмите кнопку изменения порядка</string>
     <string name="home_app_sort_recommended">Рекомендуемый порядок</string>
     <string name="home_app_sort_recommended_description">Сначала установленные и закреплённые приложения</string>
@@ -568,8 +567,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показывать приветственное сообщение на главном экране</string>
     <string name="settings_appearance_app_grouping">Группировка приложений</string>
     <string name="settings_appearance_app_grouping_description">Отображать переключатель на главном экране для группировки приложений по источнику или вашим категориям, сохраняя выбор при отключении</string>
-    <string name="settings_appearance_sort_button">Кнопка сортировки</string>
-    <string name="settings_appearance_sort_button_description">Показывать кнопку сортировки на главном экране</string>
     <string name="settings_appearance_app_card_colors">Цвета карточек приложений</string>
     <string name="settings_appearance_app_card_colors_default">По умолчанию</string>
     <string name="settings_appearance_app_card_colors_default_description">Присваивать каждому приложению цвет его собственного набора</string>

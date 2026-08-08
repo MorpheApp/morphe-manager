@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">तुमची मुळे आधीच नवीन आहेत.</string>
     <string name="home_sources_are_loading">मुळे लोड होत आहेत, कृपया वाट पहा</string>
     <string name="home_search_apps">ॲप्स शोधा</string>
-    <string name="home_app_sort_title">ॲप्स सॉर्ट करा</string>
     <string name="home_app_sort_manual_description">एका ॲपला लांब दाबा, मग पुन्हा क्रमवारी लावा बटणावर टॅप करा</string>
     <string name="home_app_sort_recommended">सुचवलेला क्रम</string>
     <string name="home_app_sort_recommended_description">इंस्टॉल केलेले आणि पिन केलेले ॲप्स प्रथम</string>
@@ -568,8 +567,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">मुख्य स्क्रीनवर शुभेच्छा संदेश दर्शवा</string>
     <string name="settings_appearance_app_grouping">ॲप समूहीकरण</string>
     <string name="settings_appearance_app_grouping_description">ॲप्स स्रोत किंवा आपल्या स्वतःच्या श्रेणीनुसार समूहीकृत करण्यासाठी होम स्क्रीन स्विचर दाखवा, बंद केल्यावर निवड जतन करा</string>
-    <string name="settings_appearance_sort_button">क्रमवारी लावण्याचे बटण</string>
-    <string name="settings_appearance_sort_button_description">मुख्य स्क्रीनवर क्रमवारी लावण्याचे बटण दर्शवा</string>
     <string name="settings_appearance_app_card_colors">ॲप कार्ड रंग</string>
     <string name="settings_appearance_app_card_colors_default">डीफॉल्ट</string>
     <string name="settings_appearance_app_card_colors_default_description">प्रत्येक ॲपला स्वतःच्या बंडलचा रंग द्या</string>
