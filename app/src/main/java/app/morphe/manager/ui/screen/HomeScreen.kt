@@ -154,7 +154,7 @@ fun HomeScreen(
     val startBatchReinstall: (List<HomeAppItem>) -> Unit = { items ->
         val requests = items.mapNotNull { item ->
             val installed = item.installedApp ?: return@mapNotNull null
-            val savedFile = homeViewModel.savedPatchedApkFile(installed) ?: return@mapNotNull null
+            val savedFile = item.savedApkFile ?: return@mapNotNull null
             InstallQueueRequest(
                 file = savedFile,
                 originalPackageName = installed.originalPackageName,

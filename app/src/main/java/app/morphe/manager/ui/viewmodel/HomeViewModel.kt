@@ -7,10 +7,12 @@ package app.morphe.manager.ui.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.net.Uri
@@ -20,6 +22,7 @@ import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.runtime.*
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
@@ -75,6 +78,8 @@ import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.InstallerType
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.withPermit
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
@@ -443,6 +448,14 @@ class HomeViewModel(
 
     // Ticker to force homeAppState recomputation after install/uninstall without changing DB state
     private val _appStateTicker = MutableStateFlow(0L)
+    private val trackedAppInspectionSemaphore = Semaphore(4)
+
+    private val packageChangeReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val packageName = intent?.data?.schemeSpecificPart ?: return
+            notifyAppStateChanged(packageName)
+        }
+    }
 
     // Track when at least one third-party source is enabled
     val hasThirdPartySource: StateFlow<Boolean> =
@@ -618,6 +631,19 @@ class HomeViewModel(
     var onStartQuickPatch: ((QuickPatchParams) -> Unit)? = null
 
     init {
+        ContextCompat.registerReceiver(
+            app,
+            packageChangeReceiver,
+            IntentFilter().apply {
+                addAction(Intent.ACTION_PACKAGE_ADDED)
+                addAction(Intent.ACTION_PACKAGE_REMOVED)
+                addAction(Intent.ACTION_PACKAGE_REPLACED)
+                addDataScheme("package")
+            },
+            // Package lifecycle broadcasts originate outside this app. The receiver only
+            // invalidates cached UI state, so accepting them does not expose a privileged action.
+            ContextCompat.RECEIVER_EXPORTED
+        )
         observeManagerUpdate()
         triggerUpdateCheck()
         observeLoadingState()
@@ -1206,11 +1232,14 @@ class HomeViewModel(
             val displayName = resolvedData.displayName.takeIf {
                 resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
             } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
-            val savedPatchedApk = installedApp?.let(::savedPatchedApkFile)
-            val hasSavedCopy = savedPatchedApk != null
-            val trackedPatchState = installedApp
-                ?.takeUnless { it.installType == InstallType.SAVED }
-                ?.let { localApkSources.trackedPatchState(it) }
+            val trackedSnapshot = installedApp?.let {
+                trackedAppInspectionSemaphore.withPermit {
+                    localApkSources.trackedAppSnapshot(it)
+                }
+            }
+            val savedPatchedApk = trackedSnapshot?.savedPatchedApk
+            val savedPackageInfo = savedPatchedApk?.let(pm::getPackageInfo)
+            val trackedPatchState = trackedSnapshot?.patchState
             val isInstalledOnDevice = trackedPatchState == InstalledPatchState.Patched
             val isDeleted = installedApp != null &&
                     installedApp.installType != InstallType.SAVED &&
@@ -1224,14 +1253,14 @@ class HomeViewModel(
                 displayName = displayName,
                 gradientColors = gradientColors,
                 installedApp = installedApp,
-                packageInfo = resolvedData.packageInfo.takeIf {
+                packageInfo = savedPackageInfo ?: resolvedData.packageInfo.takeIf {
                     installedApp == null || isInstalledOnDevice
-                } ?: savedPatchedApk?.let(pm::getPackageInfo),
+                },
                 isPinnedByDefault = knownApp?.isPinnedByDefault == true,
                 isInstalledOnDevice = isInstalledOnDevice,
                 isDeleted = isDeleted,
                 isInstallStateUnknown = isInstallStateUnknown,
-                hasSavedCopy = hasSavedCopy,
+                savedApkFile = savedPatchedApk,
                 hasUpdate = hasUpdate,
                 patchCount = 0
             )
@@ -1569,14 +1598,6 @@ class HomeViewModel(
             (state?.visible?.size ?: 0) > 4 || thirdParty
         }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
-    fun savedPatchedApkFile(app: InstalledApp): File? =
-        listOf(
-            filesystem.getPatchedAppFile(app.currentPackageName, app.version),
-            filesystem.getPatchedAppFile(app.originalPackageName, app.version)
-        ).distinctBy { it.absolutePath }.firstOrNull {
-            pm.isUsableApk(it, app.version, app.currentPackageName, app.originalPackageName)
-        }
-
     suspend fun persistReinstalledApp(
         app: InstalledApp,
         packageName: String,
@@ -1598,9 +1619,7 @@ class HomeViewModel(
     }
 
     fun uninstallApps(items: Collection<HomeAppItem>) {
-        val apps = items.mapNotNull { it.installedApp }.filter { installed ->
-            installed.installType == InstallType.MOUNT || pm.getPackageInfo(installed.currentPackageName) != null
-        }
+        val apps = items.mapNotNull { it.installedApp }.distinctBy { it.currentPackageName }
         if (apps.isEmpty()) return
 
         viewModelScope.launch {
@@ -1608,6 +1627,9 @@ class HomeViewModel(
             var skipped = 0
             for (installed in apps) {
                 runCatching {
+                    if (localApkSources.trackedPatchState(installed) != InstalledPatchState.Patched) {
+                        return@runCatching false
+                    }
                     when (installed.installType) {
                         InstallType.MOUNT -> {
                             installerManager.uninstallPackage(installed.currentPackageName, installed.installType)
@@ -1621,8 +1643,9 @@ class HomeViewModel(
                             if (!removed) error(app.getString(R.string.uninstall_timeout))
                         }
                     }
-                }.onSuccess {
-                    completed++
+                    true
+                }.onSuccess { removed ->
+                    if (removed) completed++ else skipped++
                     notifyAppStateChanged(installed.currentPackageName)
                 }.onFailure { error ->
                     skipped++
@@ -1647,13 +1670,17 @@ class HomeViewModel(
     fun uninstallOrphanedInstall(orphan: InstalledApp) {
         viewModelScope.launch {
             runCatching {
+                if (localApkSources.trackedPatchState(orphan) != InstalledPatchState.Patched) {
+                    return@runCatching false
+                }
                 val removed = withTimeoutOrNull(BATCH_UNINSTALL_TIMEOUT) {
                     installerManager.uninstallPackage(orphan.currentPackageName, orphan.installType)
                     true
                 } == true
                 if (!removed) error(app.getString(R.string.uninstall_timeout))
-            }.onSuccess {
-                notifyAppStateChanged(orphan.currentPackageName)
+                true
+            }.onSuccess { removed ->
+                if (removed) notifyAppStateChanged(orphan.currentPackageName)
             }.onFailure { error ->
                 if (error !is UninstallCancelledException) {
                     app.toast(app.getString(R.string.uninstall_app_fail, error.simpleMessage()))
@@ -3032,6 +3059,7 @@ class HomeViewModel(
      * the ViewModel while a temporary APK file is still held in pendingSelectedApp.
      */
     override fun onCleared() {
+        runCatching { app.unregisterReceiver(packageChangeReceiver) }
         val pending = pendingSelectedApp
         if (pending is SelectedApp.Local && pending.temporary) {
             pending.file.delete()

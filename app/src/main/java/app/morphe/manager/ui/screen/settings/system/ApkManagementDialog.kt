@@ -43,6 +43,8 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.installed.supportsMount
 import app.morphe.manager.data.room.apps.original.OriginalApk
+import app.morphe.manager.domain.apk.InstalledPatchState
+import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.installer.InstallerFileProvider
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.UninstallCancelledException
@@ -196,6 +198,7 @@ private fun PatchedApksContent(
     val appDataResolver: AppDataResolver = koinInject()
     val prefs: PreferencesManager = koinInject()
     val pm: PM = koinInject()
+    val localApkSources: LocalApkSources = koinInject()
     val installerManager: InstallerManager = koinInject()
     val savePatchedApks by prefs.savePatchedApks.getAsState()
 
@@ -206,28 +209,33 @@ private fun PatchedApksContent(
             state = ApkLoadState.Loaded(
                 withContext(Dispatchers.IO) {
                     apps.mapNotNull { app ->
-                        // Check if saved APK file exists
-                        val savedFile = listOf(
+                        val storedFile = listOf(
                             filesystem.getPatchedAppFile(app.currentPackageName, app.version),
                             filesystem.getPatchedAppFile(app.originalPackageName, app.version)
                         ).distinct().firstOrNull { it.exists() } ?: return@mapNotNull null
+                        val snapshot = localApkSources.trackedAppSnapshot(app)
+                        val savedFile = snapshot.savedPatchedApk
 
                         // Use AppDataResolver to get data
                         val resolvedData = appDataResolver.resolveAppData(
                             app.currentPackageName,
                             preferredSource = AppDataSource.PATCHED_APK
                         )
+                        val savedDisplayName = savedFile
+                            ?.let(pm::getPackageInfo)
+                            ?.let { packageInfo -> runCatching { with(pm) { packageInfo.label() } }.getOrNull() }
+                            ?.takeUnless(String::isBlank)
 
                         ApkItemDataWithApp(
                             packageName = app.currentPackageName,
-                            displayName = resolvedData.displayName,
+                            displayName = savedDisplayName ?: resolvedData.displayName,
                             version = app.version,
-                            fileSize = savedFile.length(),
+                            fileSize = (savedFile ?: storedFile).length(),
                             installedApp = app,
                             file = savedFile,
                             installType = app.installType,
-                            isInstalledOnDevice = pm.getPackageInfo(app.currentPackageName) != null,
-                            abis = NativeLibStripper.extractAbisFromApk(savedFile)
+                            isInstalledOnDevice = snapshot.patchState == InstalledPatchState.Patched,
+                            abis = savedFile?.let(NativeLibStripper::extractAbisFromApk).orEmpty()
                         )
                     }
                 }
@@ -303,6 +311,11 @@ private fun PatchedApksContent(
             for (item in items) {
                 val installedApp = appByKey[item.selectionKey]
                 val result = runCatching {
+                    if (installedApp == null ||
+                        localApkSources.trackedPatchState(installedApp) != InstalledPatchState.Patched
+                    ) {
+                        return@runCatching false
+                    }
                     val removed = withTimeoutOrNull(BATCH_UNINSTALL_TIMEOUT) {
                         uninstallStorageItem(
                             item = item,
@@ -313,9 +326,10 @@ private fun PatchedApksContent(
                         true
                     } == true
                     if (!removed) error(uninstallTimeoutText)
+                    true
                 }
-                result.onSuccess {
-                    completed++
+                result.onSuccess { removed ->
+                    if (removed) completed++ else skipped++
                     updateInstalledState(item.packageName, false)
                 }.onFailure { error ->
                     skipped++

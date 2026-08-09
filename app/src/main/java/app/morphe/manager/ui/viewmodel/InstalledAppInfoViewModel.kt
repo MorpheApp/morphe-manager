@@ -50,6 +50,7 @@ class InstalledAppInfoViewModel(
         private set
     var appInfo: PackageInfo? by mutableStateOf(null)
         private set
+    private var usableSavedApk: File? = null
 
     private val _appliedPatches = MutableStateFlow<PatchSelection?>(null)
     var appliedPatches: PatchSelection?
@@ -129,7 +130,14 @@ class InstalledAppInfoViewModel(
         if (app.installType == InstallType.SAVED) {
             context.toast(context.getString(R.string.saved_app_launch_unavailable))
         } else {
-            pm.launch(app.currentPackageName)
+            viewModelScope.launch {
+                if (localApkSources.trackedPatchState(app) == InstalledPatchState.Patched) {
+                    pm.launch(app.currentPackageName)
+                } else {
+                    refreshAppState(app)
+                    onAppStateChanged?.invoke(app.currentPackageName)
+                }
+            }
         }
     }
 
@@ -145,6 +153,11 @@ class InstalledAppInfoViewModel(
             InstallType.SAVED -> {
                 viewModelScope.launch {
                     try {
+                        if (localApkSources.trackedPatchState(app) != InstalledPatchState.Patched) {
+                            refreshAppState(app)
+                            onAppStateChanged?.invoke(app.currentPackageName)
+                            return@launch
+                        }
                         installerManager.uninstallPackage(app.currentPackageName, app.installType)
                         refreshCurrentAppState()
                         onAppStateChanged?.invoke(app.currentPackageName)
@@ -157,6 +170,13 @@ class InstalledAppInfoViewModel(
             }
 
             InstallType.MOUNT -> applicationScope.launch {
+                if (localApkSources.trackedPatchState(app) != InstalledPatchState.Patched) {
+                    withContext(Dispatchers.Main) {
+                        refreshAppState(app)
+                        onAppStateChanged?.invoke(app.currentPackageName)
+                    }
+                    return@launch
+                }
                 // Detached from viewModelScope: dialog dismissal must not abort the cleanup
                 rootInstaller.uninstall(app.currentPackageName)
                 // Delete record and APK but preserve selection and options
@@ -211,6 +231,7 @@ class InstalledAppInfoViewModel(
         withContext(Dispatchers.IO) {
             savedApkCandidates(app).forEach { it.delete() }
         }
+        usableSavedApk = null
         hasSavedCopy = false
     }
 
@@ -232,12 +253,7 @@ class InstalledAppInfoViewModel(
         refreshAppState(app.copy(installType = newInstallType, currentPackageName = packageName))
     }
 
-    fun savedApkFile(app: InstalledApp? = this.installedApp): File? {
-        val target = app ?: return null
-        return savedApkCandidates(target).firstOrNull {
-            pm.isUsableApk(it, target.version, target.currentPackageName, target.originalPackageName)
-        }
-    }
+    fun savedApkFile(): File? = usableSavedApk
 
     private fun savedApkCandidates(app: InstalledApp): List<File> =
         listOf(
@@ -246,17 +262,11 @@ class InstalledAppInfoViewModel(
         ).distinctBy { it.absolutePath }
 
     private suspend fun refreshAppState(app: InstalledApp) {
-        val installedInfo = withContext(Dispatchers.IO) {
-            pm.getPackageInfo(app.currentPackageName)
-        }
-        val savedFile = withContext(Dispatchers.IO) { savedApkFile(app) }
-        hasSavedCopy = savedFile != null
-
-        val trackedPatchState = if (app.installType == InstallType.SAVED) {
-            null
-        } else {
-            withContext(Dispatchers.IO) { localApkSources.trackedPatchState(app) }
-        }
+        val snapshot = localApkSources.trackedAppSnapshot(app)
+        val installedInfo = snapshot.installedPackageInfo
+        usableSavedApk = snapshot.savedPatchedApk
+        hasSavedCopy = usableSavedApk != null
+        val trackedPatchState = snapshot.patchState
 
         if (installedInfo != null && trackedPatchState == InstalledPatchState.Patched) {
             isInstalledOnDevice = true
@@ -271,7 +281,7 @@ class InstalledAppInfoViewModel(
                     (trackedPatchState == null || trackedPatchState == InstalledPatchState.NotPatched)
             isInstallStateUnknown = trackedPatchState == InstalledPatchState.Unknown
             appInfo = withContext(Dispatchers.IO) {
-                savedFile?.let(pm::getPackageInfo)
+                usableSavedApk?.let(pm::getPackageInfo)
             }
         }
 

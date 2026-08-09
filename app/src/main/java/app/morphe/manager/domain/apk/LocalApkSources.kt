@@ -5,8 +5,10 @@
 
 package app.morphe.manager.domain.apk
 
+import android.content.pm.PackageInfo
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
+import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
@@ -44,6 +46,12 @@ enum class InstalledPatchState {
     NotPatched,
     Unknown
 }
+
+data class TrackedAppSnapshot(
+    val installedPackageInfo: PackageInfo?,
+    val savedPatchedApk: File?,
+    val patchState: InstalledPatchState?
+)
 
 internal fun resolveTrackedPatchState(
     installedHashes: Set<String>,
@@ -152,22 +160,31 @@ class LocalApkSources(
      * certificates, or the installer rather than being accepted merely because the row exists.
      * Null means the package is no longer installed.
      */
-    suspend fun trackedPatchState(app: InstalledApp): InstalledPatchState? = withContext(Dispatchers.IO) {
-        if (pm.getPackageInfo(app.currentPackageName) == null) return@withContext null
+    suspend fun trackedPatchState(app: InstalledApp): InstalledPatchState? =
+        trackedAppSnapshot(app).patchState
+
+    /** Resolves the saved APK and installed identity together for UI action gating. */
+    suspend fun trackedAppSnapshot(app: InstalledApp): TrackedAppSnapshot = withContext(Dispatchers.IO) {
+        val savedPatchedApk = validatedPatchedApk(app)
+        if (app.installType == InstallType.SAVED) {
+            return@withContext TrackedAppSnapshot(null, savedPatchedApk, null)
+        }
+
+        val installedPackageInfo = pm.getPackageInfo(app.currentPackageName)
+            ?: return@withContext TrackedAppSnapshot(null, savedPatchedApk, null)
 
         // A mounted install keeps the stock certificate in PackageManager while sourceDir points
         // at the patched APK, so this signal must win over all certificate comparisons below.
         if (pm.hasSourceApkSignatureMismatch(app.currentPackageName)) {
-            return@withContext InstalledPatchState.Patched
+            return@withContext TrackedAppSnapshot(
+                installedPackageInfo,
+                savedPatchedApk,
+                InstalledPatchState.Patched
+            )
         }
 
         val installedHashes = pm.getInstalledSignatureHashes(app.currentPackageName)
-        val savedPatchedHashes = listOf(
-            filesystem.getPatchedAppFile(app.currentPackageName, app.version),
-            filesystem.getPatchedAppFile(app.originalPackageName, app.version)
-        ).distinctBy { it.absolutePath }.firstOrNull {
-            pm.isUsableApk(it, app.version, app.currentPackageName, app.originalPackageName)
-        }?.let(pm::getApkFileSignatureHashes).orEmpty()
+        val savedPatchedHashes = savedPatchedApk?.let(pm::getApkFileSignatureHashes).orEmpty()
 
         val savedOriginalHashes = originalApkRepository.get(app.originalPackageName)
             ?.let { File(it.filePath) }
@@ -180,13 +197,29 @@ class LocalApkSources(
 
         // Play Store-attributed and custom install modes make installer identity inconclusive.
         // An unverified same-name package must not enable actions that could uninstall stock.
-        resolveTrackedPatchState(
-            installedHashes = installedHashes,
-            savedPatchedHashes = savedPatchedHashes,
-            originalHashes = originalHashes,
-            installedByPatchManager = pm.isInstalledByPatchManager(app.currentPackageName)
+        TrackedAppSnapshot(
+            installedPackageInfo = installedPackageInfo,
+            savedPatchedApk = savedPatchedApk,
+            patchState = resolveTrackedPatchState(
+                installedHashes = installedHashes,
+                savedPatchedHashes = savedPatchedHashes,
+                originalHashes = originalHashes,
+                installedByPatchManager = pm.isInstalledByPatchManager(app.currentPackageName)
+            )
         )
     }
+
+    /**
+     * Searches both current and legacy storage paths, but only accepts the package Morphe tracks.
+     * A renamed app must never fall back to an APK whose embedded id is the original package.
+     */
+    private fun validatedPatchedApk(app: InstalledApp): File? =
+        listOf(
+            filesystem.getPatchedAppFile(app.currentPackageName, app.version),
+            filesystem.getPatchedAppFile(app.originalPackageName, app.version)
+        ).distinctBy { it.absolutePath }.firstOrNull {
+            pm.isUsableApk(it, app.version, app.currentPackageName)
+        }
 
     /**
      * Decided in priority order, most reliable first: a mounted install, the saved original's
