@@ -23,11 +23,11 @@ class TrackedPatchStateResolverTest {
     }
 
     @Test
-    fun `different certificate from saved patched APK is a replacement`() {
+    fun `different certificate from saved patched APK remains unknown`() {
         assertEquals(
-            InstalledPatchState.NotPatched,
+            InstalledPatchState.Unknown,
             resolveTrackedPatchState(
-                installedHashes = setOf("stock"),
+                installedHashes = setOf("unrecognized"),
                 savedPatchedHashes = setOf("patched"),
                 originalHashes = emptySet(),
                 installedByPatchManager = false
@@ -49,11 +49,24 @@ class TrackedPatchStateResolverTest {
     }
 
     @Test
-    fun `certificate different from original identifies a patched install`() {
+    fun `saved original certificate identifies stock when patched certificate differs`() {
         assertEquals(
-            InstalledPatchState.Patched,
+            InstalledPatchState.NotPatched,
             resolveTrackedPatchState(
-                installedHashes = setOf("patched"),
+                installedHashes = setOf("stock"),
+                savedPatchedHashes = setOf("patched"),
+                originalHashes = setOf("stock"),
+                installedByPatchManager = false
+            )
+        )
+    }
+
+    @Test
+    fun `certificate different from original remains unknown`() {
+        assertEquals(
+            InstalledPatchState.Unknown,
+            resolveTrackedPatchState(
+                installedHashes = setOf("unrecognized"),
                 savedPatchedHashes = emptySet(),
                 originalHashes = setOf("stock"),
                 installedByPatchManager = false
@@ -69,6 +82,19 @@ class TrackedPatchStateResolverTest {
                 installedHashes = emptySet(),
                 savedPatchedHashes = emptySet(),
                 originalHashes = emptySet(),
+                installedByPatchManager = true
+            )
+        )
+    }
+
+    @Test
+    fun `patch manager installer identifies patched install when certificates differ`() {
+        assertEquals(
+            InstalledPatchState.Patched,
+            resolveTrackedPatchState(
+                installedHashes = setOf("patched"),
+                savedPatchedHashes = setOf("old-patched"),
+                originalHashes = setOf("stock"),
                 installedByPatchManager = true
             )
         )

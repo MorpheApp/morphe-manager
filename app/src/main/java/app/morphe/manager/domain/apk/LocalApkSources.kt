@@ -51,20 +51,15 @@ internal fun resolveTrackedPatchState(
     originalHashes: Set<String>,
     installedByPatchManager: Boolean
 ): InstalledPatchState {
-    if (savedPatchedHashes.isNotEmpty() && installedHashes.isNotEmpty()) {
-        return if (installedHashes.any { it in savedPatchedHashes }) {
-            InstalledPatchState.Patched
-        } else {
-            InstalledPatchState.NotPatched
-        }
+    // A mismatch only proves that the installed package is not the reference artifact; it does
+    // not identify what replaced it. Only positive matches and trusted installer evidence can
+    // confirm either state.
+    if (installedHashes.any { it in savedPatchedHashes }) {
+        return InstalledPatchState.Patched
     }
 
-    if (originalHashes.isNotEmpty() && installedHashes.isNotEmpty()) {
-        return if (installedHashes.any { it in originalHashes }) {
-            InstalledPatchState.NotPatched
-        } else {
-            InstalledPatchState.Patched
-        }
+    if (installedHashes.any { it in originalHashes }) {
+        return InstalledPatchState.NotPatched
     }
 
     if (installedByPatchManager) return InstalledPatchState.Patched

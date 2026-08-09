@@ -209,7 +209,7 @@ class InstalledAppInfoViewModel(
 
         // Delete patched APK file
         withContext(Dispatchers.IO) {
-            savedApkFile(app)?.delete()
+            savedApkCandidates(app).forEach { it.delete() }
         }
         hasSavedCopy = false
     }
@@ -234,14 +234,16 @@ class InstalledAppInfoViewModel(
 
     fun savedApkFile(app: InstalledApp? = this.installedApp): File? {
         val target = app ?: return null
-        val candidates = listOf(
-            filesystem.getPatchedAppFile(target.currentPackageName, target.version),
-            filesystem.getPatchedAppFile(target.originalPackageName, target.version)
-        ).distinct()
-        return candidates.firstOrNull {
+        return savedApkCandidates(target).firstOrNull {
             pm.isUsableApk(it, target.version, target.currentPackageName, target.originalPackageName)
         }
     }
+
+    private fun savedApkCandidates(app: InstalledApp): List<File> =
+        listOf(
+            filesystem.getPatchedAppFile(app.currentPackageName, app.version),
+            filesystem.getPatchedAppFile(app.originalPackageName, app.version)
+        ).distinctBy { it.absolutePath }
 
     private suspend fun refreshAppState(app: InstalledApp) {
         val installedInfo = withContext(Dispatchers.IO) {
