@@ -19,6 +19,7 @@ data class HomeAppItem(
     val isPinnedByDefault: Boolean,
     val isInstalledOnDevice: Boolean,
     val isDeleted: Boolean,
+    val isInstallStateUnknown: Boolean,
     val hasSavedCopy: Boolean,
     val hasUpdate: Boolean,
     val patchCount: Int
@@ -27,5 +28,5 @@ data class HomeAppItem(
      * Whether the pending update is worth surfacing in the UI.
      * Uninstalled apps keep their update flag but show the uninstalled state instead.
      */
-    val showsUpdateBadge: Boolean get() = hasUpdate && !isDeleted
+    val showsUpdateBadge: Boolean get() = hasUpdate && !isDeleted && !isInstallStateUnknown
 }

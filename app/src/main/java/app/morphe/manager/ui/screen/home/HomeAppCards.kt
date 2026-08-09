@@ -16,6 +16,7 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.outlined.ArrowUpward
 import androidx.compose.material.icons.outlined.DeleteOutline
 import androidx.compose.material3.MaterialTheme
@@ -192,29 +193,48 @@ fun InstalledAppCard(
     modifier: Modifier = Modifier,
     hasUpdate: Boolean = false,
     isAppDeleted: Boolean = false,
+    isInstallStateUnknown: Boolean = false,
     onLongClick: (() -> Unit)? = null
 ) {
     val cardStyle = homeAppCardStyle(subtitleAlpha = 0.85f)
-    val showsUpdateBadge = hasUpdate && !isAppDeleted
+    val showsUpdateBadge = hasUpdate && !isAppDeleted && !isInstallStateUnknown
 
     val versionLabel = stringResource(R.string.version)
     val installedLabel = stringResource(R.string.installed)
     val updateAvailableLabel = stringResource(R.string.update_available)
     val deletedLabel = stringResource(R.string.uninstalled)
+    val unverifiedLabel = stringResource(R.string.home_unverified)
 
     val version = remember(packageInfo, installedApp, isAppDeleted) {
         val raw = packageInfo?.versionName ?: installedApp.version
         if (raw.startsWith("v")) raw else "v$raw"
     }
 
-    val contentDesc = remember(displayName, version, versionLabel, installedLabel, showsUpdateBadge, updateAvailableLabel, isAppDeleted, deletedLabel) {
+    val contentDesc = remember(
+        displayName,
+        version,
+        versionLabel,
+        installedLabel,
+        showsUpdateBadge,
+        updateAvailableLabel,
+        isAppDeleted,
+        deletedLabel,
+        isInstallStateUnknown,
+        unverifiedLabel
+    ) {
         buildString {
             append(displayName)
             if (version.isNotEmpty()) {
                 append(", $versionLabel $version")
             }
             append(", ")
-            append(if (isAppDeleted) deletedLabel else installedLabel)
+            append(
+                when {
+                    isAppDeleted -> deletedLabel
+                    isInstallStateUnknown -> unverifiedLabel
+                    else -> installedLabel
+                }
+            )
             if (showsUpdateBadge) append(", $updateAvailableLabel")
         }
     }
@@ -274,6 +294,15 @@ fun InstalledAppCard(
                     StatusBadge(
                         text = stringResource(R.string.uninstalled),
                         icon = Icons.Outlined.DeleteOutline,
+                        containerColor = cardStyle.chipContainerColor,
+                        contentColor = cardStyle.chipContentColor
+                    )
+                }
+
+                if (isInstallStateUnknown) {
+                    StatusBadge(
+                        text = unverifiedLabel,
+                        icon = Icons.AutoMirrored.Outlined.HelpOutline,
                         containerColor = cardStyle.chipContainerColor,
                         contentColor = cardStyle.chipContentColor
                     )

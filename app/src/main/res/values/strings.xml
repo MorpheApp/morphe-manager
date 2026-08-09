@@ -185,6 +185,7 @@
     <string name="home_apk_use_saved">Use saved APK</string>
     <string name="home_apk_use_installed">Use installed APK</string>
     <string name="home_apk_use_installed_unverified">Could not verify the signature of the installed app, so it may already be patched</string>
+    <string name="home_unverified">Unverified</string>
     <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
     <string name="home_version_requires_android">Requires Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Not supported on this device</string>

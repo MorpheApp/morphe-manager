@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.automirrored.outlined.Launch
 import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.*
@@ -460,7 +461,22 @@ fun InstalledAppInfoDialog(
                                     }
                                 }
                                 AnimatedVisibility(
-                                    visible = hasUpdate && !viewModel.isAppDeleted,
+                                    visible = viewModel.isInstallStateUnknown,
+                                    enter = Animations.expandFadeEnter,
+                                    exit = Animations.shrinkFadeExit
+                                ) {
+                                    StaggeredItem(entered = entered.value, index = 2) {
+                                        Notice(
+                                            text = stringResource(R.string.home_apk_use_installed_unverified),
+                                            tone = SemanticTone.Warning,
+                                            icon = Icons.AutoMirrored.Outlined.HelpOutline
+                                        )
+                                    }
+                                }
+                                AnimatedVisibility(
+                                    visible = hasUpdate &&
+                                            !viewModel.isAppDeleted &&
+                                            !viewModel.isInstallStateUnknown,
                                     enter = Animations.expandFadeEnter,
                                     exit = Animations.shrinkFadeExit
                                 ) {
@@ -1336,7 +1352,7 @@ private fun ActionsSection(
         )
     }
 
-    if (viewModel.hasSavedCopy) {
+    if (viewModel.hasSavedCopy || viewModel.isAppDeleted) {
         destructiveActions.add(
             ActionItem(
                 text = stringResource(R.string.delete),

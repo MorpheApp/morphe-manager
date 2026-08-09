@@ -365,6 +365,7 @@ internal fun DynamicAppCard(
                                 onClick = onAppClick,
                                 hasUpdate = hasUpdate,
                                 isAppDeleted = item.isDeleted,
+                                isInstallStateUnknown = item.isInstallStateUnknown,
                                 onLongClick = {
                                     view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                                     onLongPress()
@@ -493,7 +494,8 @@ internal fun HiddenSearchAppCard(
                     gradientColors = item.gradientColors,
                     onClick = onAppClick,
                     hasUpdate = item.hasUpdate,
-                    isAppDeleted = item.isDeleted
+                    isAppDeleted = item.isDeleted,
+                    isInstallStateUnknown = item.isInstallStateUnknown
                 )
             } else {
                 AppButton(

@@ -11,6 +11,8 @@ import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
+import app.morphe.manager.domain.apk.InstalledPatchState
+import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.UninstallCancelledException
@@ -39,6 +41,7 @@ class InstalledAppInfoViewModel(
     private val originalApkRepository: OriginalApkRepository by inject()
     private val filesystem: Filesystem by inject()
     private val applicationScope: AppCoroutineScope by inject()
+    private val localApkSources: LocalApkSources by inject()
 
     lateinit var onBackClick: () -> Unit
     var onAppStateChanged: ((packageName: String) -> Unit)? = null
@@ -61,6 +64,8 @@ class InstalledAppInfoViewModel(
     var hasOriginalApk by mutableStateOf(false)
         private set
     var isAppDeleted by mutableStateOf(false)
+        private set
+    var isInstallStateUnknown by mutableStateOf(false)
         private set
     var isLoading by mutableStateOf(true)
         private set
@@ -233,28 +238,38 @@ class InstalledAppInfoViewModel(
             filesystem.getPatchedAppFile(target.currentPackageName, target.version),
             filesystem.getPatchedAppFile(target.originalPackageName, target.version)
         ).distinct()
-        return candidates.firstOrNull { it.exists() && it.length() > 0 }
+        return candidates.firstOrNull {
+            pm.isUsableApk(it, target.version, target.currentPackageName, target.originalPackageName)
+        }
     }
 
     private suspend fun refreshAppState(app: InstalledApp) {
         val installedInfo = withContext(Dispatchers.IO) {
             pm.getPackageInfo(app.currentPackageName)
         }
-        hasSavedCopy = withContext(Dispatchers.IO) { savedApkFile(app) != null }
+        val savedFile = withContext(Dispatchers.IO) { savedApkFile(app) }
+        hasSavedCopy = savedFile != null
 
-        if (installedInfo != null) {
+        val trackedPatchState = if (app.installType == InstallType.SAVED) {
+            null
+        } else {
+            withContext(Dispatchers.IO) { localApkSources.trackedPatchState(app) }
+        }
+
+        if (installedInfo != null && trackedPatchState == InstalledPatchState.Patched) {
             isInstalledOnDevice = true
             isAppDeleted = false
+            isInstallStateUnknown = false
             appInfo = installedInfo
         } else {
             isInstalledOnDevice = false
-            // App is deleted if it was installed on device but now missing
-            isAppDeleted = pm.isAppDeleted(
-                packageName = app.currentPackageName,
-                wasInstalledOnDevice = app.installType != InstallType.SAVED
-            )
+            // A missing or stock package means the tracked patched build is gone. Unknown is kept
+            // separate so the UI stays honest while still withholding destructive app actions.
+            isAppDeleted = app.installType != InstallType.SAVED &&
+                    (trackedPatchState == null || trackedPatchState == InstalledPatchState.NotPatched)
+            isInstallStateUnknown = trackedPatchState == InstalledPatchState.Unknown
             appInfo = withContext(Dispatchers.IO) {
-                savedApkFile(app)?.let(pm::getPackageInfo)
+                savedFile?.let(pm::getPackageInfo)
             }
         }
 

@@ -6,6 +6,8 @@
 package app.morphe.manager.domain.apk
 
 import android.util.Log
+import app.morphe.manager.data.platform.Filesystem
+import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -13,6 +15,8 @@ import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.tag
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.File
 
 /** Saved APK information for display in APK selection dialog. */
@@ -41,6 +45,32 @@ enum class InstalledPatchState {
     Unknown
 }
 
+internal fun resolveTrackedPatchState(
+    installedHashes: Set<String>,
+    savedPatchedHashes: Set<String>,
+    originalHashes: Set<String>,
+    installedByPatchManager: Boolean
+): InstalledPatchState {
+    if (savedPatchedHashes.isNotEmpty() && installedHashes.isNotEmpty()) {
+        return if (installedHashes.any { it in savedPatchedHashes }) {
+            InstalledPatchState.Patched
+        } else {
+            InstalledPatchState.NotPatched
+        }
+    }
+
+    if (originalHashes.isNotEmpty() && installedHashes.isNotEmpty()) {
+        return if (installedHashes.any { it in originalHashes }) {
+            InstalledPatchState.NotPatched
+        } else {
+            InstalledPatchState.Patched
+        }
+    }
+
+    if (installedByPatchManager) return InstalledPatchState.Patched
+    return InstalledPatchState.Unknown
+}
+
 /**
  * The APKs already on the device that an app could be patched from: the original Morphe kept
  * from a previous run, and the app as the system has it installed.
@@ -50,6 +80,7 @@ class LocalApkSources(
     private val installedAppRepository: InstalledAppRepository,
     private val patchBundleRepository: PatchBundleRepository,
     private val appDataResolver: AppDataResolver,
+    private val filesystem: Filesystem,
     private val pm: PM
 ) {
     /** The original APK kept after a previous patch, or null when there is none on disk. */
@@ -114,6 +145,52 @@ class LocalApkSources(
     } catch (e: Exception) {
         Log.e(tag, "Failed to load installed app info", e)
         false to null
+    }
+
+    /**
+     * Identifies whether the package currently occupying a tracked app's package name is still
+     * the patched build Morphe recorded.
+     *
+     * The installed-app row is deliberately not evidence here: it survives an uninstall so the
+     * user can retain patch settings. A stock reinstall with the same package and version must
+     * therefore be checked against the saved patched APK, the original certificate, bundle
+     * certificates, or the installer rather than being accepted merely because the row exists.
+     * Null means the package is no longer installed.
+     */
+    suspend fun trackedPatchState(app: InstalledApp): InstalledPatchState? = withContext(Dispatchers.IO) {
+        if (pm.getPackageInfo(app.currentPackageName) == null) return@withContext null
+
+        // A mounted install keeps the stock certificate in PackageManager while sourceDir points
+        // at the patched APK, so this signal must win over all certificate comparisons below.
+        if (pm.hasSourceApkSignatureMismatch(app.currentPackageName)) {
+            return@withContext InstalledPatchState.Patched
+        }
+
+        val installedHashes = pm.getInstalledSignatureHashes(app.currentPackageName)
+        val savedPatchedHashes = listOf(
+            filesystem.getPatchedAppFile(app.currentPackageName, app.version),
+            filesystem.getPatchedAppFile(app.originalPackageName, app.version)
+        ).distinctBy { it.absolutePath }.firstOrNull {
+            pm.isUsableApk(it, app.version, app.currentPackageName, app.originalPackageName)
+        }?.let(pm::getApkFileSignatureHashes).orEmpty()
+
+        val savedOriginalHashes = originalApkRepository.get(app.originalPackageName)
+            ?.let { File(it.filePath) }
+            ?.takeIf { it.exists() }
+            ?.let(pm::getApkFileSignatureHashes)
+            .orEmpty()
+        val originalHashes = savedOriginalHashes.ifEmpty {
+            patchBundleRepository.appMetadata.value[app.originalPackageName]?.signatures.orEmpty()
+        }
+
+        // Play Store-attributed and custom install modes make installer identity inconclusive.
+        // An unverified same-name package must not enable actions that could uninstall stock.
+        resolveTrackedPatchState(
+            installedHashes = installedHashes,
+            savedPatchedHashes = savedPatchedHashes,
+            originalHashes = originalHashes,
+            installedByPatchManager = pm.isInstalledByPatchManager(app.currentPackageName)
+        )
     }
 
     /**

@@ -245,6 +245,26 @@ class PM(
         }
     }
 
+    /**
+     * Whether [file] is a signed APK for [version] and one of [packageNames].
+     *
+     * A path alone is not a usable saved copy: an interrupted write, corrupt archive or stale
+     * file for another package/version must not enable install, export or mount actions.
+     */
+    fun isUsableApk(file: File, version: String, vararg packageNames: String): Boolean {
+        if (!file.isFile) return false
+        return try {
+            val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, signingFlags())
+                ?: return false
+            info.packageName in packageNames &&
+                    info.versionName == version &&
+                    !info.extractSignatures().isNullOrEmpty()
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to validate APK file: ${file.absolutePath}", e)
+            false
+        }
+    }
+
     @Suppress("DEPRECATION")
     private fun signingFlags() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
         PackageManager.GET_SIGNING_CERTIFICATES
@@ -268,14 +288,6 @@ class PM(
             digest.reset()
             digest.digest(sig.toByteArray()).joinToString("") { b -> "%02x".format(b) }
         }
-    }
-
-    /**
-     * Whether a tracked app that was installed on the device is now gone.
-     */
-    fun isAppDeleted(packageName: String, wasInstalledOnDevice: Boolean): Boolean {
-        val currentlyInstalled = getPackageInfo(packageName) != null
-        return !currentlyInstalled && wasInstalledOnDevice
     }
 
     private fun cleanLabel(raw: String, packageName: String): String {

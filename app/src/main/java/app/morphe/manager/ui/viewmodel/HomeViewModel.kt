@@ -28,6 +28,7 @@ import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.apk.InstalledApkInfo
+import app.morphe.manager.domain.apk.InstalledPatchState
 import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.apk.SavedApkInfo
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
@@ -1163,7 +1164,10 @@ class HomeViewModel(
                 }
                 // Reconcile DB version with the actually-installed version.
                 // Skipped for MOUNT (PM reports the stock APK) and SAVED (no live install)
-                if (app.installType != InstallType.MOUNT && app.installType != InstallType.SAVED) {
+                if (app.installType != InstallType.MOUNT &&
+                    app.installType != InstallType.SAVED &&
+                    localApkSources.trackedPatchState(app) == InstalledPatchState.Patched
+                ) {
                     val liveVersion = pm.getPackageInfo(app.currentPackageName)?.versionName
                     if (!liveVersion.isNullOrBlank() && liveVersion != app.version) {
                         installedAppRepository.updateInstalledVersion(app, liveVersion)
@@ -1202,14 +1206,16 @@ class HomeViewModel(
             val displayName = resolvedData.displayName.takeIf {
                 resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
             } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
-            val hasSavedCopy = installedApp?.let { savedPatchedApkFile(it) != null } == true
-            val isInstalledOnDevice = installedApp?.let { pm.getPackageInfo(it.currentPackageName) != null } == true
-            val isDeleted = installedApp?.let { installed ->
-                pm.isAppDeleted(
-                    packageName = installed.currentPackageName,
-                    wasInstalledOnDevice = installed.installType != InstallType.SAVED
-                )
-            } == true
+            val savedPatchedApk = installedApp?.let(::savedPatchedApkFile)
+            val hasSavedCopy = savedPatchedApk != null
+            val trackedPatchState = installedApp
+                ?.takeUnless { it.installType == InstallType.SAVED }
+                ?.let { localApkSources.trackedPatchState(it) }
+            val isInstalledOnDevice = trackedPatchState == InstalledPatchState.Patched
+            val isDeleted = installedApp != null &&
+                    installedApp.installType != InstallType.SAVED &&
+                    (trackedPatchState == null || trackedPatchState == InstalledPatchState.NotPatched)
+            val isInstallStateUnknown = trackedPatchState == InstalledPatchState.Unknown
             val hasUpdate = installedApp?.let {
                 updatesMap[it.currentPackageName] == true
             } == true
@@ -1218,10 +1224,13 @@ class HomeViewModel(
                 displayName = displayName,
                 gradientColors = gradientColors,
                 installedApp = installedApp,
-                packageInfo = resolvedData.packageInfo,
+                packageInfo = resolvedData.packageInfo.takeIf {
+                    installedApp == null || isInstalledOnDevice
+                } ?: savedPatchedApk?.let(pm::getPackageInfo),
                 isPinnedByDefault = knownApp?.isPinnedByDefault == true,
                 isInstalledOnDevice = isInstalledOnDevice,
                 isDeleted = isDeleted,
+                isInstallStateUnknown = isInstallStateUnknown,
                 hasSavedCopy = hasSavedCopy,
                 hasUpdate = hasUpdate,
                 patchCount = 0
@@ -1564,7 +1573,9 @@ class HomeViewModel(
         listOf(
             filesystem.getPatchedAppFile(app.currentPackageName, app.version),
             filesystem.getPatchedAppFile(app.originalPackageName, app.version)
-        ).distinctBy { it.absolutePath }.firstOrNull { it.exists() && it.length() > 0 }
+        ).distinctBy { it.absolutePath }.firstOrNull {
+            pm.isUsableApk(it, app.version, app.currentPackageName, app.originalPackageName)
+        }
 
     suspend fun persistReinstalledApp(
         app: InstalledApp,
