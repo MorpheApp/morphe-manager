@@ -21,6 +21,7 @@ import android.os.StatFs
 import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.compose.runtime.*
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
@@ -1784,6 +1785,15 @@ class HomeViewModel(
      *   - Simple mode + saved APK == recommended version
      */
     fun showPatchDialog(packageName: String) {
+        preparePendingFlow(packageName)
+
+        // Guard: if there is a pending bundle update on metered data, show the outdated-patches
+        // dialog before proceeding with the actual APK selection flow.
+        guardPatching { showPatchDialogInternal(packageName) }
+    }
+
+    /** Seeds the pending APK selection state for [packageName] from the current bundle data. */
+    private fun preparePendingFlow(packageName: String) {
         pendingPackageName = packageName
         pendingAppName = bundleAppMetadataFlow.value[packageName]?.displayName
             ?: KnownApps.getAppName(packageName)
@@ -1795,10 +1805,6 @@ class HomeViewModel(
         pendingSavedApkInfo = null
         pendingInstalledApkInfo = null
         pendingTargetAppInstalled = null
-
-        // Guard: if there is a pending bundle update on metered data, show the outdated-patches
-        // dialog before proceeding with the actual APK selection flow.
-        guardPatching { showPatchDialogInternal(packageName) }
     }
 
     private suspend fun showPatchDialogInternal(packageName: String) {
@@ -1866,10 +1872,7 @@ class HomeViewModel(
                 async(Dispatchers.IO) { localApkSources.installed(packageName) }
             } else null
             savedJob?.await()?.let { pendingSavedApkInfo = it }
-            installedJob?.await()?.let { (installed, info) ->
-                pendingTargetAppInstalled = installed
-                pendingInstalledApkInfo = info?.takeIf { isInstalledVersionCompatible(it.version, it.versionCode) }
-            }
+            installedJob?.await()?.let { (installed, info) -> applyInstalledApkInfo(installed, info) }
         }
 
         val recommendedVersion = pendingRecommendedVersion
@@ -1886,6 +1889,15 @@ class HomeViewModel(
             // Show dialog
             showApkAvailabilityDialog = true
         }
+    }
+
+    /**
+     * Stores the installed-app lookup, keeping the APK only when its version can be patched
+     * so every caller offers the installed source under the same condition.
+     */
+    private fun applyInstalledApkInfo(installed: Boolean, info: InstalledApkInfo?) {
+        pendingTargetAppInstalled = installed
+        pendingInstalledApkInfo = info?.takeIf { isInstalledVersionCompatible(it.version, it.versionCode) }
     }
 
     /**
@@ -1963,6 +1975,78 @@ class HomeViewModel(
                 processingApkSelection = false
             }
         }
+    }
+
+    /**
+     * Handles a helper result where the user installed the target app outside Morphe.
+     *
+     * Reached in simple mode too, where the installed source is otherwise hidden: the helper is
+     * opt-in and the hand-off was confirmed, so the app store is the whole point of the request.
+     */
+    fun handleHelperInstalledAppSelection(packageName: String) {
+        viewModelScope.launch {
+            val pending = pendingPackageName
+            if (pending != null && pending != packageName) {
+                // The helper answered about an app the user never asked to patch
+                stopHelperHandoff(pending, R.string.home_apk_helper_wrong_package)
+                return@launch
+            }
+
+            // A hand-off through an app store can outlive Morphe, so the flow is rebuilt from the
+            // bundle data. Unknown packages are refused because without their compatible versions
+            // there is nothing left to check the installed build against
+            if (pending == null) {
+                if (packageName !in compatibleVersions) {
+                    app.toast(app.getString(R.string.home_apk_helper_installed_unavailable))
+                    cleanupPendingData()
+                    return@launch
+                }
+                preparePendingFlow(packageName)
+            }
+
+            processingApkSelection = true
+            val (installed, info) = withContext(Dispatchers.IO) {
+                localApkSources.installed(packageName)
+            }
+            applyInstalledApkInfo(installed, info)
+
+            val installedInfo = pendingInstalledApkInfo
+            if (installedInfo == null) {
+                // An app store hands out the newest build, which is regularly one no bundle covers
+                stopHelperHandoff(
+                    packageName,
+                    if (info == null) {
+                        R.string.home_apk_helper_installed_unavailable
+                    } else {
+                        R.string.home_apk_helper_installed_incompatible
+                    }
+                )
+                return@launch
+            }
+
+            // Continuing here would swallow the warning the availability dialog carries when the
+            // certificate could not be read, so that case goes back to the user
+            if (installedInfo.patchStateUnknown) {
+                stopHelperHandoff(packageName)
+                return@launch
+            }
+
+            handleInstalledApkSelection()
+        }
+    }
+
+    /**
+     * Ends a helper hand-off at the APK availability dialog, so the remaining sources stay one tap
+     * away instead of the user landing back on the home screen with nothing to act on.
+     */
+    private suspend fun stopHelperHandoff(packageName: String, @StringRes message: Int? = null) {
+        processingApkSelection = false
+        message?.let { app.toast(app.getString(it)) }
+
+        if (pendingSavedApkInfo == null) {
+            pendingSavedApkInfo = withContext(Dispatchers.IO) { localApkSources.saved(packageName) }
+        }
+        showApkAvailabilityDialog = true
     }
 
     /**

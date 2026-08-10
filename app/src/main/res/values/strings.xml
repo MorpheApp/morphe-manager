@@ -182,6 +182,10 @@
     <string name="home_apk_helper_warning_unverified">Only continue if you trust this helper app. Morphe cannot verify the signature of this APK, so a modified file would not be detected</string>
     <string name="home_apk_helper_no_result">The helper app did not return an APK</string>
     <string name="home_apk_helper_no_access">The helper app did not grant access to the APK it returned</string>
+    <string name="home_apk_helper_no_package">The helper app did not say which installed app to use</string>
+    <string name="home_apk_helper_wrong_package">The helper app returned a different app than the one being patched</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe could not use the installed app</string>
+    <string name="home_apk_helper_installed_incompatible">The installed version cannot be patched</string>
     <string name="home_apk_use_saved">Use saved APK</string>
     <string name="home_apk_use_installed">Use installed APK</string>
     <string name="home_apk_use_installed_unverified">Could not verify the signature of the installed app, so it may already be patched</string>

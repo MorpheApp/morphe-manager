@@ -44,6 +44,7 @@ fun rememberApkDownloadHelperAction(
     val context = LocalContext.current
     val noResultMessage = stringResource(R.string.home_apk_helper_no_result)
     val noAccessMessage = stringResource(R.string.home_apk_helper_no_access)
+    val noPackageMessage = stringResource(R.string.home_apk_helper_no_package)
     var helpers by remember { mutableStateOf(emptyList<ApkDownloadHelperContract.Helper>()) }
     var showPicker by remember { mutableStateOf(false) }
 
@@ -60,6 +61,19 @@ fun rememberApkDownloadHelperAction(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode != Activity.RESULT_OK) return@rememberLauncherForActivityResult
+
+        if (ApkDownloadHelperContract.isInstalledAppResult(result.data)) {
+            val packageName = ApkDownloadHelperContract.resultInstalledPackageName(result.data)
+            if (packageName == null) {
+                context.toast(noPackageMessage)
+                return@rememberLauncherForActivityResult
+            }
+
+            homeViewModel.showDownloadInstructionsDialog = false
+            homeViewModel.showFilePickerPromptDialog = false
+            homeViewModel.handleHelperInstalledAppSelection(packageName)
+            return@rememberLauncherForActivityResult
+        }
 
         val uri = ApkDownloadHelperContract.resultUri(result.data)
         if (uri == null) {
