@@ -41,7 +41,13 @@ object ApkDownloadHelperContract {
     const val PROTOCOL_VERSION = 2
 
     const val EXTRA_PROTOCOL_VERSION = "app.morphe.manager.extra.PROTOCOL_VERSION"
+
+    /**
+     * Informational only. Any app can send this action, so a helper that gates on who asked has to
+     * read `Activity.getCallingPackage()` instead of trusting this value.
+     */
     const val EXTRA_CALLER_PACKAGE = "app.morphe.manager.extra.CALLER_PACKAGE"
+
     const val EXTRA_PACKAGE_NAME = "app.morphe.manager.extra.PACKAGE_NAME"
     const val EXTRA_APP_NAME = "app.morphe.manager.extra.APP_NAME"
 
@@ -118,10 +124,26 @@ object ApkDownloadHelperContract {
                 val activity = info.activityInfo ?: return@mapNotNull null
                 Helper(
                     componentName = ComponentName(activity.packageName, activity.name),
-                    label = info.loadLabel(packageManager).toString()
+                    label = info.loadLabel(packageManager).toString().asHelperLabel(activity.packageName)
                 )
             }
             .sortedBy { it.label.lowercase() }
+    }
+
+    private const val MAX_LABEL_LENGTH = 50
+    private val LABEL_WHITESPACE = Regex("\\s+")
+
+    /**
+     * Bounds the name a helper gave itself, because the picker weighs it against a warning that an
+     * oversized label would push out of view. Falls back to [packageName] when nothing is left.
+     */
+    private fun String.asHelperLabel(packageName: String): String {
+        val collapsed = replace(LABEL_WHITESPACE, " ").trim()
+        return when {
+            collapsed.isEmpty() -> packageName
+            collapsed.length > MAX_LABEL_LENGTH -> collapsed.take(MAX_LABEL_LENGTH).trimEnd() + "…"
+            else -> collapsed
+        }
     }
 
     fun createRequestIntent(
