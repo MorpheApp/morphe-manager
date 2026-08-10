@@ -175,6 +175,11 @@ fun SectionsLayout(
     var showListOptionsDialog by remember { mutableStateOf(false) }
     var filterMode by rememberSaveable { mutableStateOf(HomeAppFilterMode.ALL) }
 
+    // Drop the filter if the button disappears, otherwise the list stays trimmed with no way back
+    LaunchedEffect(chromeFlags.showSortButton) {
+        if (!chromeFlags.showSortButton) filterMode = HomeAppFilterMode.ALL
+    }
+
     if (showListOptionsDialog) {
         HomeAppListOptionsDialog(
             sortMode = apps.sortMode,
@@ -1209,10 +1214,10 @@ fun MainAppsSection(
                                         state = state,
                                         items = filteredItems,
                                         showGestureHint = apps.showGestureHint,
-                                        // Direct reorder a11y actions are exposed only when there's no
-                                        // search filter and no multi-select active, so the indices
+                                        // Direct reorder a11y actions are exposed only when the list is
+                                        // unfiltered and no multi-select is active, so the indices
                                         // match state.localOrder
-                                        directReorderAllowed = searchQuery.isBlank() && !state.isMultiSelectMode,
+                                        directReorderAllowed = !isFilteringList && !state.isMultiSelectMode,
                                         appActions = appActions,
                                         haptic = haptic,
                                         onboardingState = onboardingState,

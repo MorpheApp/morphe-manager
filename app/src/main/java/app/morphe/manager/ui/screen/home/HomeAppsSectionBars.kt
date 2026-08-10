@@ -70,7 +70,9 @@ internal fun HomeAppsFooterBars(
         homeAppItems.filter { it.packageName in selected }
     }
     val selectedInstalledItems = remember(selectedAppItems) {
-        selectedAppItems.filter { it.isInstalledOnDevice }
+        // Apps that are on the device but were never patched here have nothing Morphe can
+        // uninstall, so they must not put the selection into the uninstall verb
+        selectedAppItems.filter { it.isInstalledOnDevice && it.installedApp != null }
     }
     val selectedReinstallItems = remember(selectedAppItems) {
         selectedAppItems.filter {

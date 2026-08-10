@@ -122,9 +122,7 @@ fun HomeBottomActionBar(
                     showLabel = showLabels,
                     containerColor = if (filterActive) MaterialTheme.colorScheme.tertiaryContainer else null,
                     contentColor = if (filterActive) MaterialTheme.colorScheme.onTertiaryContainer else null,
-                    stateDescription = stringResource(
-                        if (filterActive) filterMode.labelRes else sortMode.labelRes
-                    ),
+                    stateDescription = homeAppListOptionsStateDescription(sortMode, filterMode),
                     modifier = Modifier.fillMaxWidth()
                 )
             }

@@ -41,12 +41,12 @@
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>
     <string name="home_search_apps">Search apps</string>
     <string name="home_app_list_options_title">Sort and filter</string>
-    <string name="home_app_filter_all_description">Show everything on the home screen</string>
-    <string name="home_app_filter_patched">Patched</string>
+    <string name="home_app_list_options_state_description">Sorted by %1$s, filtered by %2$s</string>
+    <string name="home_app_filter_all_description">Every app on the home screen</string>
     <string name="home_app_filter_patched_description">Apps you have patched or saved with Morphe</string>
     <string name="home_app_filter_not_patched_description">Apps you have not patched in Morphe yet</string>
     <string name="home_app_filter_installed_description">Apps currently installed on this device</string>
-    <string name="home_app_filter_uninstalled_description">Patched apps saved in Morphe but no longer installed</string>
+    <string name="home_app_filter_uninstalled_description">Apps patched with Morphe that are no longer on this device</string>
     <string name="home_app_sort_manual_description">Long-press an app, then tap reorder button</string>
     <string name="home_app_sort_recommended">Recommended order</string>
     <string name="home_app_sort_recommended_description">Installed and pinned apps first</string>
@@ -1170,6 +1170,7 @@ Details: %2$s"</string>
     <string name="version">Version</string>
     <string name="patch">Patch</string>
     <string name="patching">Patching</string>
+    <string name="patched">Patched</string>
     <string name="repatch">Repatch</string>
     <string name="open">Open</string>
     <string name="mount">Mount</string>

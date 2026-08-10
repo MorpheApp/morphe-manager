@@ -73,9 +73,7 @@ internal fun HomeSidebarPanel(
                 icon = Icons.AutoMirrored.Outlined.Sort,
                 label = stringResource(R.string.sort),
                 isSelected = filterActive || sortMode != HomeAppSortMode.MANUAL,
-                stateDescription = stringResource(
-                    if (filterActive) filterMode.labelRes else sortMode.labelRes
-                ),
+                stateDescription = homeAppListOptionsStateDescription(sortMode, filterMode),
                 onClick = onSortClick
             )
         }

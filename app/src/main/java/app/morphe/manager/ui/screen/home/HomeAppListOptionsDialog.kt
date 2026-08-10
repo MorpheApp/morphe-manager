@@ -14,11 +14,29 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.outlined.FilterList
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.ui.screen.shared.*
+
+/**
+ * The button carries both modes, so the sort mode alone only describes it while nothing is filtered.
+ */
+@Composable
+internal fun homeAppListOptionsStateDescription(
+    sortMode: HomeAppSortMode,
+    filterMode: HomeAppFilterMode
+): String = if (filterMode.isActive) {
+    stringResource(
+        R.string.home_app_list_options_state_description,
+        stringResource(sortMode.labelRes),
+        stringResource(filterMode.labelRes)
+    )
+} else {
+    stringResource(sortMode.labelRes)
+}
 
 @Composable
 internal fun HomeAppListOptionsDialog(
@@ -28,7 +46,7 @@ internal fun HomeAppListOptionsDialog(
     onFilterModeChange: (HomeAppFilterMode) -> Unit,
     onDismiss: () -> Unit
 ) {
-    var selectedTab by remember { mutableIntStateOf(if (filterMode.isActive) 1 else 0) }
+    var selectedTab by rememberSaveable { mutableIntStateOf(if (filterMode.isActive) 1 else 0) }
     val tabs = listOf(
         CardSelectorOption(
             label = stringResource(R.string.sort),
