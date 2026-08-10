@@ -62,6 +62,8 @@ import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
+import app.morphe.manager.util.PatchSelectionUtils.bulkEnableHoldsUniversal
+import app.morphe.manager.util.PatchSelectionUtils.bulkEnablePatches
 import app.morphe.manager.util.PatchSelectionUtils.filterGmsCore
 import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
@@ -294,6 +296,9 @@ class HomeViewModel(
     var expertModeOptions by mutableStateOf<Options>(emptyMap())
     // Patches that are new in the current bundle version relative to the last saved selection
     var expertModeNewPatches by mutableStateOf<Map<Int, Set<String>>>(emptyMap())
+    // Bundle and selection left behind by the last "Enable all". Universal patches are applied
+    // only while this still matches the live selection, so any other edit disarms them again
+    private var expertModeUniversalArmedFor by mutableStateOf<Pair<Int, Set<String>>?>(null)
 
     /** Target bundle uid for the in-flight copy-from-another-bundle picker; null while the picker is closed. */
     var expertModeCopyTargetBundleUid by mutableStateOf<Int?>(null)
@@ -2733,25 +2738,38 @@ class HomeViewModel(
      * Select all given patches for a bundle.
      * Only adds patches that are not already selected. LOCKED_OFF patches are skipped.
      *
-     * Universal patches are selected in a second pass: the first tap selects regular
-     * patches only, and a later tap includes universal patches if the regular patches
-     * in the current scope are already selected.
+     * Universal patches are staged behind the regular ones and need a second call, see
+     * [PatchSelectionUtils.bulkEnablePatches]. [patches] is the list the dialog currently
+     * shows, so an active search narrows the scope of both stages.
      */
     fun expertModeSelectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
-        val current = expertModePatches.toMutableMap()
-        val set = current[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        val selectablePatches = patches
-            .filter { (patch, _) -> patch.lockState(currentInstallerType, currentApkArchitecture) != PatchLockState.LOCKED_OFF }
-        val regularPatches = selectablePatches.filter { (patch, _) -> !patch.compatiblePackages.isNullOrEmpty() }
-        val hasUnselectedRegularPatch = regularPatches.any { (patch, enabled) -> !enabled && patch.name !in set }
-        val patchesToSelect = if (hasUnselectedRegularPatch) regularPatches else selectablePatches
+        val selected = expertModePatches[bundleUid].orEmpty()
+        val updated = bulkEnablePatches(
+            patches,
+            selected,
+            expertModeUniversalArmed(bundleUid, selected),
+            ::expertModeLockState
+        )
 
-        patchesToSelect.forEach { (patch, enabled) ->
-            if (!enabled) set.add(patch.name)
-        }
-        current[bundleUid] = set
-        expertModePatches = current
+        expertModePatches = expertModePatches.toMutableMap().apply { put(bundleUid, updated) }
+        expertModeUniversalArmedFor = bundleUid to updated
     }
+
+    /** True when the next [expertModeSelectAll] holds universal patches back for another tap. */
+    fun expertModeSelectAllHoldsUniversal(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>): Boolean {
+        val selected = expertModePatches[bundleUid].orEmpty()
+        return bulkEnableHoldsUniversal(
+            patches,
+            expertModeUniversalArmed(bundleUid, selected),
+            ::expertModeLockState
+        )
+    }
+
+    private fun expertModeLockState(patch: PatchInfo) =
+        patch.lockState(currentInstallerType, currentApkArchitecture)
+
+    private fun expertModeUniversalArmed(bundleUid: Int, selected: Set<String>) =
+        expertModeUniversalArmedFor == (bundleUid to selected)
 
     /**
      * Deselect all given patches for a bundle.
@@ -2823,6 +2841,7 @@ class HomeViewModel(
         expertModeInitialPatches = emptyMap()
         expertModeOptions = emptyMap()
         expertModeNewPatches = emptyMap()
+        expertModeUniversalArmedFor = null
         closeExpertModeCopyDialog()
     }
 

@@ -36,13 +36,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.ui.screen.home.ApkAvailabilityDialog
-import app.morphe.manager.ui.screen.home.DownloadInstructionsDialog
-import app.morphe.manager.ui.screen.home.ExpertModeDialog
-import app.morphe.manager.ui.screen.home.ExpertPatchActions
-import app.morphe.manager.ui.screen.home.FilePickerPromptDialog
-import app.morphe.manager.ui.screen.home.SimpleBundleCandidate
-import app.morphe.manager.ui.screen.home.SimpleBundleSelectDialog
+import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.patcher.ExpertPatchingInProgress
 import app.morphe.manager.ui.screen.patcher.PatcherErrorDialog
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
@@ -52,13 +46,7 @@ import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.BatchPatcherViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
-import app.morphe.manager.util.APK_FILE_MIME_TYPES
-import app.morphe.manager.util.APK_MIMETYPE
-import app.morphe.manager.util.ExportNameFormatter
-import app.morphe.manager.util.KnownApps
-import app.morphe.manager.util.PatchedAppExportData
-import app.morphe.manager.util.rememberAdaptiveFilePicker
-import app.morphe.manager.util.toast
+import app.morphe.manager.util.*
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
@@ -184,6 +172,7 @@ fun BatchPatcherScreen(
             ),
             savedPatches = edit.savedSelection,
             lockStateOf = edit::lockStateOf,
+            holdsUniversalPatches = edit::selectAllHoldsUniversal,
             proceedText = stringResource(R.string.save),
             // The queue combines sources by design, and the tabs make it plain enough
             warnOnMultipleBundles = false,
