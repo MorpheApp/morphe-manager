@@ -34,6 +34,7 @@ import app.morphe.manager.util.toast
 internal fun BundlePatchControls(
     enabledCount: Int,
     totalCount: Int,
+    holdsUniversalPatches: Boolean,
     onSelectAll: () -> Unit,
     onDeselectAll: () -> Unit,
     onResetToDefault: () -> Unit,
@@ -56,7 +57,12 @@ internal fun BundlePatchControls(
     val copyLabel = stringResource(R.string.expert_mode_copy_from_bundle)
     val deselectAllLabel = stringResource(R.string.expert_mode_disable_all)
 
-    val enabledDone = stringResource(R.string.expert_mode_enable_all_done)
+    // Universal patches stay off until a second tap, so the first one must not claim otherwise
+    val enabledDone = if (holdsUniversalPatches) {
+        stringResource(R.string.expert_mode_enable_all_universal_pending)
+    } else {
+        stringResource(R.string.expert_mode_enable_all_done)
+    }
     val disabledDone = stringResource(R.string.expert_mode_disable_all_done)
     val resetDone = stringResource(R.string.expert_mode_reset_to_default_done)
     val restoredDone = stringResource(R.string.expert_mode_restore_saved_done)

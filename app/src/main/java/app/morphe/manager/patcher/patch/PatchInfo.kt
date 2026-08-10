@@ -1,19 +1,8 @@
 package app.morphe.manager.patcher.patch
 
 import androidx.compose.runtime.Immutable
-import app.morphe.patcher.patch.ApkArchitecture
-import app.morphe.patcher.patch.AppTarget
-import app.morphe.patcher.patch.AvailabilityResolver
-import app.morphe.patcher.patch.InstallerType
-import app.morphe.patcher.patch.Patch
-import app.morphe.patcher.patch.PatchAvailability
-import app.morphe.patcher.patch.ApkFileType
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.ImmutableMap
-import kotlinx.collections.immutable.ImmutableSet
-import kotlinx.collections.immutable.toImmutableList
-import kotlinx.collections.immutable.toImmutableMap
-import kotlinx.collections.immutable.toImmutableSet
+import app.morphe.patcher.patch.*
+import kotlinx.collections.immutable.*
 import kotlin.reflect.KType
 import app.morphe.patcher.patch.ColorOption as PatchColorOption
 import app.morphe.patcher.patch.FilePathOption as PatchFilePathOption
@@ -124,6 +113,9 @@ data class PatchInfo(
             PatchAvailability.DISABLED    -> PatchLockState.NONE
         }
     }
+
+    /** Universal patches declare no compatible packages and therefore apply to any app. */
+    val isUniversal get() = compatiblePackages.isNullOrEmpty()
 
     fun compatibleWith(packageName: String) =
         compatiblePackages == null ||

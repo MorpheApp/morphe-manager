@@ -841,7 +841,7 @@ fun PatchItemCard(
             }
 
             // Compatibility info
-            if (patch.compatiblePackages.isNullOrEmpty()) {
+            if (patch.isUniversal) {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -859,7 +859,7 @@ fun PatchItemCard(
                 Column(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    patch.compatiblePackages.forEach { compatiblePackage ->
+                    patch.compatiblePackages.orEmpty().forEach { compatiblePackage ->
                         val anyString = stringResource(R.string.any_version)
                         val appName = compatiblePackage.displayName ?: compatiblePackage.packageName ?: anyString
                         val versions = compatiblePackage.versions.orEmpty()

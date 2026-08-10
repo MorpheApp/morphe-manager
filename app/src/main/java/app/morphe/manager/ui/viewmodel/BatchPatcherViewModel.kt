@@ -28,17 +28,15 @@ import app.morphe.manager.domain.manager.DownloadUrlResolver
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
-import app.morphe.manager.patcher.patch.PatchBundleInfo
-import app.morphe.manager.patcher.patch.PatchInfo
-import app.morphe.manager.patcher.patch.PatchLockState
-import app.morphe.manager.patcher.patch.SELECTION_APK_ARCHITECTURE
-import app.morphe.manager.patcher.patch.installerTypeFor
+import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.util.*
-import app.morphe.patcher.patch.InstallerType
+import app.morphe.manager.util.PatchSelectionUtils.bulkEnableHoldsUniversal
+import app.morphe.manager.util.PatchSelectionUtils.bulkEnablePatches
 import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
 import app.morphe.manager.util.PatchSelectionUtils.togglePatch
 import app.morphe.manager.util.PatchSelectionUtils.updateOption
 import app.morphe.patcher.patch.AppTarget
+import app.morphe.patcher.patch.InstallerType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -67,6 +65,10 @@ class BatchPatchEdit(
 
     var options by mutableStateOf(initialOptions)
         private set
+
+    // Bundle and selection left behind by the last "Enable all". Universal patches are applied
+    // only while this still matches the live selection, so any other edit disarms them again
+    private var universalArmedFor by mutableStateOf<Pair<Int, Set<String>>?>(null)
 
     val allPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>
         get() = bundles.map { bundle ->
@@ -98,12 +100,26 @@ class BatchPatchEdit(
         selection = selection.togglePatch(bundleUid, patchName)
     }
 
-    fun selectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) =
-        replaceBundle(
-            bundleUid,
-            patches.filterNot { (patch, _) -> lockStateOf(patch) == PatchLockState.LOCKED_OFF }
-                .mapTo(mutableSetOf()) { (patch, _) -> patch.name }
-        )
+    /**
+     * Select all patches shown for a bundle, staging universal patches behind the regular ones
+     * exactly like the single-app flow does, see [PatchSelectionUtils.bulkEnablePatches].
+     */
+    fun selectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
+        val selected = selection[bundleUid].orEmpty()
+        val updated = bulkEnablePatches(patches, selected, universalArmed(bundleUid, selected), ::lockStateOf)
+
+        replaceBundle(bundleUid, updated)
+        universalArmedFor = bundleUid to updated
+    }
+
+    /** True when the next [selectAll] holds universal patches back for another tap. */
+    fun selectAllHoldsUniversal(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>): Boolean {
+        val selected = selection[bundleUid].orEmpty()
+        return bulkEnableHoldsUniversal(patches, universalArmed(bundleUid, selected), ::lockStateOf)
+    }
+
+    private fun universalArmed(bundleUid: Int, selected: Set<String>) =
+        universalArmedFor == (bundleUid to selected)
 
     fun deselectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
         val removed = patches

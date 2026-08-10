@@ -68,6 +68,8 @@ fun ExpertModeDialog(
     patchActions: ExpertPatchActions,
     savedPatches: PatchSelection = emptyMap(),
     lockStateOf: (PatchInfo) -> PatchLockState = { PatchLockState.NONE },
+    /** True while "Enable all" still holds the universal patches of the given list back. */
+    holdsUniversalPatches: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Boolean = { _, _ -> false },
     proceedText: String = stringResource(R.string.expert_mode_proceed),
     /** Off where mixing sources is the norm rather than something the user just did. */
     warnOnMultipleBundles: Boolean = true,
@@ -237,6 +239,7 @@ fun ExpertModeDialog(
                 BundlePatchControls(
                     enabledCount = enabledCount,
                     totalCount = totalCount,
+                    holdsUniversalPatches = holdsUniversalPatches(bundle.uid, displayPatches),
                     onSelectAll = { patchActions.onSelectAll(bundle.uid, displayPatches) },
                     onDeselectAll = { patchActions.onDeselectAll(bundle.uid, displayPatches) },
                     onResetToDefault = { patchActions.onResetToDefault(bundle.uid, allPatches) },
@@ -372,6 +375,7 @@ fun ExpertModeDialog(
                         BundlePatchControls(
                             enabledCount = currentFiltered.count { it.second },
                             totalCount = currentFiltered.size,
+                            holdsUniversalPatches = holdsUniversalPatches(currentBundle.uid, currentFiltered),
                             onSelectAll = { patchActions.onSelectAll(currentBundle.uid, currentFiltered) },
                             onDeselectAll = { patchActions.onDeselectAll(currentBundle.uid, currentFiltered) },
                             onResetToDefault = { patchActions.onResetToDefault(currentBundle.uid, currentAllPatches) },
@@ -522,7 +526,7 @@ private fun PatchListWithUniversalSection(
     onConfigureOptions: (PatchInfo) -> Unit,
 ) {
     val (regular, universal) = remember(patches) {
-        patches.partition { (patch, _) -> !patch.compatiblePackages.isNullOrEmpty() }
+        patches.partition { (patch, _) -> !patch.isUniversal }
     }
 
     // New patches float to the top; within each group order is alphabetical
