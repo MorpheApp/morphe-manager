@@ -112,58 +112,20 @@ fun AddSourceDialog(
             verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
         ) {
             // Type selector cards
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                listOf(
-                    0 to (stringResource(R.string.sources_dialog_remote) to Icons.Outlined.Language),
-                    1 to (stringResource(R.string.sources_dialog_local) to Icons.AutoMirrored.Outlined.InsertDriveFile)
-                ).forEach { (index, pair) ->
-                    val (label, icon) = pair
-                    val isSelected = selectedTab == index
-                    Surface(
-                        modifier = Modifier
-                            .weight(1f)
-                            .clickable { selectedTab = index },
-                        shape = RoundedCornerShape(16.dp),
-                        color = if (isSelected)
-                            MaterialTheme.colorScheme.surfaceVariant
-                        else
-                            Color.Transparent,
-                        border = BorderStroke(
-                            width = if (isSelected) 1.5.dp else 0.5.dp,
-                            color = if (isSelected)
-                                LocalDialogTextColor.current.copy(alpha = 0.5f)
-                            else
-                                LocalDialogTextColor.current.copy(alpha = 0.2f)
-                        )
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(14.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            ThemedIcon(
-                                icon = icon,
-                                tint = if (isSelected)
-                                    LocalDialogTextColor.current
-                                else
-                                    LocalDialogTextColor.current.copy(alpha = 0.4f)
-                            )
-                            Text(
-                                text = label,
-                                style = MaterialTheme.typography.bodyMedium,
-                                fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
-                                color = if (isSelected)
-                                    LocalDialogTextColor.current
-                                else
-                                    LocalDialogTextColor.current.copy(alpha = 0.5f)
-                            )
-                        }
-                    }
-                }
-            }
+            CardSelectorRow(
+                options = listOf(
+                    CardSelectorOption(
+                        label = stringResource(R.string.sources_dialog_remote),
+                        icon = Icons.Outlined.Language
+                    ),
+                    CardSelectorOption(
+                        label = stringResource(R.string.sources_dialog_local),
+                        icon = Icons.AutoMirrored.Outlined.InsertDriveFile
+                    )
+                ),
+                selectedIndex = selectedTab,
+                onSelect = { selectedTab = it }
+            )
 
             // Tab content
             AnimatedContent(

@@ -15,17 +15,12 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.FilterList
-import androidx.compose.material.icons.outlined.Inbox
-import androidx.compose.material.icons.outlined.SearchOff
-import androidx.compose.material.icons.outlined.Source
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
@@ -1025,11 +1020,12 @@ fun MainAppsSection(
     // All-hidden state: apps exist but all are hidden
     val isAllHiddenState = !state.isLoading && homeAppItems.isEmpty() && hiddenAppItems.isNotEmpty()
     val isEmptyState = isNoSourcesState || isAllHiddenState
-    // Search empty state: items exist but nothing matches query (including hidden)
-    val isSearchEmpty = !state.isLoading && homeAppItems.isNotEmpty() &&
-            searchQuery.isNotBlank() && filteredItems.isEmpty() && filteredHiddenItems.isEmpty()
-    val isFilterEmpty = !state.isLoading && homeAppItems.isNotEmpty() &&
-            searchQuery.isBlank() && isFilterActive && filteredItems.isEmpty()
+    // Nothing left to show: items exist but neither the filter nor the query matches any of them
+    val isListEmpty = !state.isLoading && homeAppItems.isNotEmpty() &&
+            filteredItems.isEmpty() && filteredHiddenItems.isEmpty()
+    // An active filter takes the empty state, since clearing it is the way out the user needs
+    val isFilterEmpty = isListEmpty && isFilterActive
+    val isSearchEmpty = isListEmpty && !isFilterActive && searchQuery.isNotBlank()
 
     // Horizontal swipe on the background cycles through the visible grouping modes
     val modes = HomeAppCategoryViewMode.entries
@@ -1138,11 +1134,7 @@ fun MainAppsSection(
                         ) {
                             // Cached so the LazyColumn doesn't allocate a new PaddingValues on
                             // every recomposition (which can be per-frame under scroll)
-                            val listContentPadding = remember(
-                                horizontalPadding,
-                                itemSpacing,
-                                state.isFooterBarVisible
-                            ) {
+                            val listContentPadding = remember(horizontalPadding, itemSpacing, state.isFooterBarVisible) {
                                 PaddingValues(
                                     start = horizontalPadding,
                                     end = horizontalPadding,
@@ -1343,7 +1335,7 @@ private fun LazyListScope.filterEmptyState(
 
     item(key = "${keyPrefix}filter_empty") {
         HomeEmptyState(
-            icon = Icons.Outlined.SearchOff,
+            icon = Icons.Outlined.FilterListOff,
             title = stringResource(R.string.home_no_apps_filter_title),
             subtitle = stringResource(
                 R.string.home_no_apps_filter_subtitle,

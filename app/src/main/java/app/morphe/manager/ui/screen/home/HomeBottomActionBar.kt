@@ -56,9 +56,7 @@ fun HomeBottomActionBar(
     // Show labels when there are 2 buttons, or on wider screens where 3 buttons still have room.
     // Four actions stay icon-only to avoid cramped labels
     val windowSize = rememberWindowSize()
-    val actionCount = 2 +
-            (if (showSearchButton) 1 else 0) +
-            (if (showSortButton) 1 else 0)
+    val actionCount = 2 + (if (showSearchButton) 1 else 0) + (if (showSortButton) 1 else 0)
     val showLabels = actionCount <= 2 ||
             (actionCount <= 3 && windowSize.widthSizeClass != WindowWidthSizeClass.Compact)
 
