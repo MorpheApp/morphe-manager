@@ -34,8 +34,11 @@ import android.os.Build
 object ApkDownloadHelperContract {
     const val ACTION_DOWNLOAD_ORIGINAL_APK = "app.morphe.manager.action.DOWNLOAD_ORIGINAL_APK"
 
-    /** Bumped whenever the extras below change in a way helpers have to react to. */
-    const val PROTOCOL_VERSION = 1
+    /**
+     * Bumped whenever the extras below change in a way helpers have to react to.
+     * Version 2 added the installed-app result, so a helper can tell whether Morphe accepts one.
+     */
+    const val PROTOCOL_VERSION = 2
 
     const val EXTRA_PROTOCOL_VERSION = "app.morphe.manager.extra.PROTOCOL_VERSION"
     const val EXTRA_CALLER_PACKAGE = "app.morphe.manager.extra.CALLER_PACKAGE"
@@ -62,7 +65,7 @@ object ApkDownloadHelperContract {
 
     /**
      * Informational hint that the unpatched app still has to be installed for a mount install.
-     * Morphe performs that installation itself; helpers must not install anything.
+     * Morphe performs that installation itself; a helper may only hand the user to an app store.
      */
     const val EXTRA_STOCK_INSTALL_REQUIRED = "app.morphe.manager.extra.STOCK_INSTALL_REQUIRED"
 
@@ -76,7 +79,13 @@ object ApkDownloadHelperContract {
     const val FILE_TYPE_APKS = "apks"
     const val FILE_TYPE_XAPK = "xapk"
 
+    /**
+     * Set by a helper that handed the user to an app store instead of downloading a file,
+     * asking Morphe to continue from the package the user installed there.
+     */
     const val EXTRA_RESULT_USE_INSTALLED_APP = "app.morphe.manager.extra.RESULT_USE_INSTALLED_APP"
+
+    /** The package an installed-app result refers to. Must be the one Morphe asked for. */
     const val EXTRA_RESULT_PACKAGE_NAME = "app.morphe.manager.extra.RESULT_PACKAGE_NAME"
 
     /** An installed activity that can serve [ACTION_DOWNLOAD_ORIGINAL_APK]. */
@@ -163,9 +172,16 @@ object ApkDownloadHelperContract {
     fun grantsReadAccess(intent: Intent?): Boolean =
         intent != null && intent.flags and Intent.FLAG_GRANT_READ_URI_PERMISSION != 0
 
+    /** Whether the helper answered with an installed app rather than a file. */
+    fun isInstalledAppResult(intent: Intent?): Boolean =
+        intent != null && intent.getBooleanExtra(EXTRA_RESULT_USE_INSTALLED_APP, false)
+
+    /**
+     * The package an installed-app result names, or null when the helper named none.
+     *
+     * Read only after [isInstalledAppResult], so a helper that sets the flag without a package
+     * gets a message naming the real cause instead of one about a missing file.
+     */
     fun resultInstalledPackageName(intent: Intent?): String? =
-        intent
-            ?.takeIf { it.getBooleanExtra(EXTRA_RESULT_USE_INSTALLED_APP, false) }
-            ?.getStringExtra(EXTRA_RESULT_PACKAGE_NAME)
-            ?.takeIf { it.isNotBlank() }
+        intent?.getStringExtra(EXTRA_RESULT_PACKAGE_NAME)?.takeIf { it.isNotBlank() }
 }
