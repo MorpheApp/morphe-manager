@@ -264,25 +264,30 @@ class PM(
     }
 
     /**
-     * Parsed [file] when it is a signed APK belonging to one of [packageNames], or null otherwise.
+     * Parsed [file] when it is the signed APK the record describes, or null otherwise.
      *
      * A path alone is not a usable saved copy: an interrupted write, corrupt archive or a file
-     * left behind by another package must not enable install, export or mount actions. The
-     * version is deliberately not compared, because patches are free to rewrite `versionName`
-     * while the file keeps the name it was saved under.
+     * left behind by another package or version must not enable install, export or mount actions,
+     * and must never stand in as the certificate that proves an install is the patched build.
      *
      * The parse is shared with [getApkFileSignatureHashes] so callers that need both the identity
      * and the certificates pay for the archive only once.
      */
-    fun readSavedApkInfo(file: File, vararg packageNames: String): PackageInfo? {
+    fun readSavedApkInfo(file: File, version: String, vararg packageNames: String): PackageInfo? {
         if (!file.isFile) return null
         return try {
             val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, signingFlags())
                 ?: return null
-            if (info.packageName !in packageNames) return null
 
             val hashes = signatureHashes(info)
-            if (hashes.isEmpty()) return null
+            val matches = matchesSavedApkRecord(
+                archivePackageName = info.packageName,
+                archiveVersionName = info.versionName,
+                isSigned = hashes.isNotEmpty(),
+                trackedPackageNames = packageNames.asList(),
+                trackedVersion = version
+            )
+            if (!matches) return null
 
             signatureCacheKey(file)?.let { cacheSignatureHashes(it, hashes) }
             // Needed by callers that read the label or icon straight off the archive
@@ -350,6 +355,25 @@ class PM(
         return candidate.ifBlank { trimmed }
     }
 }
+
+/**
+ * Whether a parsed archive is the artifact a saved-APK record describes.
+ *
+ * The version is compared rather than inferred from the file name: the patcher persists the
+ * version it produced both as the record's version and in the retained file name, so an archive
+ * that reports a different one is not the build the record was written for. Accepting it would
+ * hand its certificate to the tracked-install check as proof that an install is patched.
+ */
+internal fun matchesSavedApkRecord(
+    archivePackageName: String?,
+    archiveVersionName: String?,
+    isSigned: Boolean,
+    trackedPackageNames: Collection<String>,
+    trackedVersion: String
+): Boolean =
+    isSigned &&
+            archivePackageName in trackedPackageNames &&
+            archiveVersionName == trackedVersion
 
 fun File.sha256OrNull(): String? = runCatching {
     if (!isFile) return@runCatching null

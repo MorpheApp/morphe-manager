@@ -269,15 +269,16 @@ class LocalApkSources(
     }
 
     /**
-     * Searches both current and legacy storage paths, but only accepts the package Morphe tracks.
-     * A renamed app must never fall back to an APK whose embedded id is the original package.
+     * Searches both current and legacy storage paths, but only accepts the artifact the record
+     * describes. A renamed app must never fall back to an APK whose embedded id is the original
+     * package, and the expected file name is not on its own proof of what the file contains.
      */
     private fun validatedPatchedApk(app: InstalledApp): Pair<File, PackageInfo>? =
         listOf(
             filesystem.getPatchedAppFile(app.currentPackageName, app.version),
             filesystem.getPatchedAppFile(app.originalPackageName, app.version)
         ).distinctBy { it.absolutePath }.firstNotNullOfOrNull { file ->
-            pm.readSavedApkInfo(file, app.currentPackageName)?.let { file to it }
+            pm.readSavedApkInfo(file, app.version, app.currentPackageName)?.let { file to it }
         }
 
     /** Certificates that identify the stock build: the retained original first, then the bundle. */
