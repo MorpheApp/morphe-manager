@@ -657,14 +657,14 @@ fun MainAppsSection(
                 displayName.contains(searchQuery, ignoreCase = true) ||
                 packageName.contains(searchQuery, ignoreCase = true)
 
-    // Filtered visible items based on selected status filter and search query.
+    // Filtered visible items based on selected status filter and search query
     val filteredItems = remember(homeAppItems, searchQuery, filterMode) {
         homeAppItems.filter { item ->
             filterMode.matches(item) && item.matchesSearch()
         }
     }
 
-    // Hidden items that match the search query
+    // Hidden items surface only while searching, and still obey the status filter
     val filteredHiddenItems = remember(hiddenAppItems, searchQuery, filterMode) {
         if (searchQuery.isBlank()) emptyList()
         else hiddenAppItems.filter { item ->
@@ -1310,6 +1310,7 @@ fun MainAppsSection(
                         apps = apps,
                         appActions = appActions,
                         searchState = searchState,
+                        listedItems = filteredItems,
                         reorderItems = reorderItems,
                         orderedItems = orderedItems,
                         itemsByPackage = homeItemsByPackage,
