@@ -470,7 +470,7 @@ fun InstalledAppInfoDialog(
                                 ) {
                                     StaggeredItem(entered = entered.value, index = 2) {
                                         Notice(
-                                            text = stringResource(R.string.home_apk_use_installed_unverified),
+                                            text = stringResource(R.string.home_app_info_install_unverified),
                                             tone = SemanticTone.Warning,
                                             icon = Icons.AutoMirrored.Outlined.HelpOutline
                                         )
@@ -570,7 +570,7 @@ fun InstalledAppInfoDialog(
                                         Spacer(Modifier.height(Defaults.ItemSpacing))
                                         StaggeredItem(entered = entered.value, index = 1) {
                                             Notice(
-                                                text = stringResource(R.string.home_apk_use_installed_unverified),
+                                                text = stringResource(R.string.home_app_info_install_unverified),
                                                 tone = SemanticTone.Warning,
                                                 icon = Icons.AutoMirrored.Outlined.HelpOutline,
                                                 modifier = Modifier.padding(horizontal = Defaults.ContentPadding)

@@ -126,6 +126,12 @@ object KnownApps {
  */
 val BATCH_UNINSTALL_TIMEOUT: Duration = 2.minutes
 
+/**
+ * Window used to collect package add, remove and replace broadcasts into a single home refresh.
+ * A store updating several apps emits them in bursts, and each refresh re-inspects tracked apps.
+ */
+const val PACKAGE_CHANGE_DEBOUNCE_MS = 400L
+
 const val APK_MIMETYPE  = "application/vnd.android.package-archive"
 
 const val PLAY_STORE_INSTALLER_PACKAGE = "com.android.vending"

@@ -186,6 +186,7 @@
     <string name="home_apk_use_installed">Use installed APK</string>
     <string name="home_apk_use_installed_unverified">Could not verify the signature of the installed app, so it may already be patched</string>
     <string name="home_unverified">Unverified</string>
+    <string name="home_app_info_install_unverified">Morphe cannot confirm that the installed app is the build it patched. Reinstall it from the saved APK to restore its actions</string>
     <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
     <string name="home_version_requires_android">Requires Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Not supported on this device</string>
@@ -530,6 +531,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="install_app_success">Installed successfully</string>
     <string name="install_app_fail">Failed to install app: %s</string>
     <string name="uninstall_app_fail">Failed to uninstall app: %s</string>
+    <string name="uninstall_app_unverified">Left in place: the installed app is no longer the patched build Morphe tracked</string>
+    <string name="launch_app_unverified">The installed app is no longer the patched build Morphe tracked</string>
     <string name="uninstall_timeout">Uninstall timed out</string>
     <string name="save_apk_success">APK Saved</string>
     <string name="saved_app_export_failed">Failed to export patched app</string>

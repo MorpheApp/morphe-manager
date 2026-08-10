@@ -134,6 +134,8 @@ class InstalledAppInfoViewModel(
                 if (localApkSources.trackedPatchState(app) == InstalledPatchState.Patched) {
                     pm.launch(app.currentPackageName)
                 } else {
+                    // The dialog was opened before the package changed underneath it
+                    context.toast(context.getString(R.string.launch_app_unverified))
                     refreshAppState(app)
                     onAppStateChanged?.invoke(app.currentPackageName)
                 }
@@ -154,6 +156,7 @@ class InstalledAppInfoViewModel(
                 viewModelScope.launch {
                     try {
                         if (localApkSources.trackedPatchState(app) != InstalledPatchState.Patched) {
+                            context.toast(context.getString(R.string.uninstall_app_unverified))
                             refreshAppState(app)
                             onAppStateChanged?.invoke(app.currentPackageName)
                             return@launch
@@ -169,14 +172,9 @@ class InstalledAppInfoViewModel(
                 }
             }
 
+            // No verification gate: unmounting only removes the bind mount and the module files,
+            // so it never touches whichever package currently owns the name
             InstallType.MOUNT -> applicationScope.launch {
-                if (localApkSources.trackedPatchState(app) != InstalledPatchState.Patched) {
-                    withContext(Dispatchers.Main) {
-                        refreshAppState(app)
-                        onAppStateChanged?.invoke(app.currentPackageName)
-                    }
-                    return@launch
-                }
                 // Detached from viewModelScope: dialog dismissal must not abort the cleanup
                 rootInstaller.uninstall(app.currentPackageName)
                 // Delete record and APK but preserve selection and options
@@ -235,6 +233,23 @@ class InstalledAppInfoViewModel(
         hasSavedCopy = false
     }
 
+    /**
+     * Both storage paths this app can occupy, minus any that another record owns.
+     * A rename leaves a copy under the original package name, but that same path is where a
+     * separate, unrenamed record would keep its own APK.
+     */
+    private suspend fun savedApkCandidates(app: InstalledApp): List<File> {
+        val paths = mutableListOf(filesystem.getPatchedAppFile(app.currentPackageName, app.version))
+
+        if (app.originalPackageName != app.currentPackageName &&
+            installedAppRepository.get(app.originalPackageName) == null
+        ) {
+            paths.add(filesystem.getPatchedAppFile(app.originalPackageName, app.version))
+        }
+
+        return paths.distinctBy { it.absolutePath }
+    }
+
     suspend fun updateInstallType(packageName: String, newInstallType: InstallType) {
         val app = installedApp ?: return
         // Update in database
@@ -255,12 +270,6 @@ class InstalledAppInfoViewModel(
 
     fun savedApkFile(): File? = usableSavedApk
 
-    private fun savedApkCandidates(app: InstalledApp): List<File> =
-        listOf(
-            filesystem.getPatchedAppFile(app.currentPackageName, app.version),
-            filesystem.getPatchedAppFile(app.originalPackageName, app.version)
-        ).distinctBy { it.absolutePath }
-
     private suspend fun refreshAppState(app: InstalledApp) {
         val snapshot = localApkSources.trackedAppSnapshot(app)
         val installedInfo = snapshot.installedPackageInfo
@@ -280,9 +289,7 @@ class InstalledAppInfoViewModel(
             isAppDeleted = app.installType != InstallType.SAVED &&
                     (trackedPatchState == null || trackedPatchState == InstalledPatchState.NotPatched)
             isInstallStateUnknown = trackedPatchState == InstalledPatchState.Unknown
-            appInfo = withContext(Dispatchers.IO) {
-                usableSavedApk?.let(pm::getPackageInfo)
-            }
+            appInfo = snapshot.savedPatchedApkInfo
         }
 
         // Update mounted state

@@ -40,6 +40,10 @@ class PM(
     private companion object {
         const val TAG = "Morphe PM"
 
+        // Certificate extraction verifies the whole archive, so repeating it for every home
+        // refresh is the single most expensive thing this class can do.
+        const val SIGNATURE_CACHE_ENTRIES = 64
+
         // Other managers whose installs are always patched.
         // Morphe's own id comes from the application at runtime so debug builds are covered too.
         val PATCH_MANAGER_PACKAGES = setOf(
@@ -50,6 +54,13 @@ class PM(
             "app.universal.revanced.manager"
         )
     }
+
+    // Keyed by size and timestamp as well as path, so a rewritten APK never returns a stale answer
+    private val archiveSignatureCache =
+        object : LinkedHashMap<String, Set<String>>(0, 0.75f, true) {
+            override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, Set<String>>) =
+                size > SIGNATURE_CACHE_ENTRIES
+        }
 
     val application: Application get() = app
 
@@ -193,7 +204,7 @@ class PM(
     /** Certificate fingerprints the package manager holds for [packageName], without disk access. */
     private fun recordedSignatureHashes(packageName: String): Set<String> =
         try {
-            getPackageInfo(packageName, signingFlags())?.extractSignatures()?.toSha256Hashes().orEmpty()
+            getPackageInfo(packageName, signingFlags())?.let(::signatureHashes).orEmpty()
         } catch (e: Exception) {
             Log.e(TAG, "Failed to read installed signatures for $packageName", e)
             emptySet()
@@ -220,8 +231,12 @@ class PM(
      * Reinstalling from another source (Play, a store, adb) replaces the installer, so this does
      * not linger after the user goes back to the original app.
      */
-    fun isInstalledByPatchManager(packageName: String): Boolean {
-        val installer = getInstallerPackageName(packageName) ?: return false
+    fun isInstalledByPatchManager(packageName: String): Boolean =
+        isPatchManagerInstaller(getInstallerPackageName(packageName))
+
+    /** [isInstalledByPatchManager] for callers that already resolved the installer. */
+    fun isPatchManagerInstaller(installer: String?): Boolean {
+        if (installer == null) return false
         return installer == app.packageName || installer in PATCH_MANAGER_PACKAGES
     }
 
@@ -231,6 +246,9 @@ class PM(
      * Uses full signing history to handle apps with certificate rotation.
      */
     fun getApkFileSignatureHashes(file: File): Set<String> {
+        val key = signatureCacheKey(file) ?: return emptySet()
+        cachedSignatureHashes(key)?.let { return it }
+
         return try {
             val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, signingFlags())
                 ?: return emptySet()
@@ -238,7 +256,7 @@ class PM(
                 sourceDir = file.absolutePath
                 publicSourceDir = file.absolutePath
             }
-            info.extractSignatures()?.toSha256Hashes() ?: emptySet()
+            signatureHashes(info).also { cacheSignatureHashes(key, it) }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to read APK file signatures", e)
             emptySet()
@@ -246,23 +264,53 @@ class PM(
     }
 
     /**
-     * Whether [file] is a signed APK for [version] and one of [packageNames].
+     * Parsed [file] when it is a signed APK belonging to one of [packageNames], or null otherwise.
      *
-     * A path alone is not a usable saved copy: an interrupted write, corrupt archive or stale
-     * file for another package/version must not enable install, export or mount actions.
+     * A path alone is not a usable saved copy: an interrupted write, corrupt archive or a file
+     * left behind by another package must not enable install, export or mount actions. The
+     * version is deliberately not compared, because patches are free to rewrite `versionName`
+     * while the file keeps the name it was saved under.
+     *
+     * The parse is shared with [getApkFileSignatureHashes] so callers that need both the identity
+     * and the certificates pay for the archive only once.
      */
-    fun isUsableApk(file: File, version: String, vararg packageNames: String): Boolean {
-        if (!file.isFile) return false
+    fun readSavedApkInfo(file: File, vararg packageNames: String): PackageInfo? {
+        if (!file.isFile) return null
         return try {
             val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, signingFlags())
-                ?: return false
-            info.packageName in packageNames &&
-                    info.versionName == version &&
-                    !info.extractSignatures().isNullOrEmpty()
+                ?: return null
+            if (info.packageName !in packageNames) return null
+
+            val hashes = signatureHashes(info)
+            if (hashes.isEmpty()) return null
+
+            signatureCacheKey(file)?.let { cacheSignatureHashes(it, hashes) }
+            // Needed by callers that read the label or icon straight off the archive
+            info.applicationInfo?.apply {
+                sourceDir = file.absolutePath
+                publicSourceDir = file.absolutePath
+            }
+            info
         } catch (e: Exception) {
             Log.e(TAG, "Failed to validate APK file: ${file.absolutePath}", e)
-            false
+            null
         }
+    }
+
+    /** SHA-256 certificate fingerprints of an already parsed [packageInfo]. */
+    fun signatureHashes(packageInfo: PackageInfo): Set<String> =
+        packageInfo.extractSignatures()?.toSha256Hashes().orEmpty()
+
+    private fun signatureCacheKey(file: File): String? {
+        if (!file.isFile) return null
+        return "${file.absolutePath}:${file.length()}:${file.lastModified()}"
+    }
+
+    private fun cachedSignatureHashes(key: String): Set<String>? =
+        synchronized(archiveSignatureCache) { archiveSignatureCache[key] }
+
+    private fun cacheSignatureHashes(key: String, hashes: Set<String>) {
+        synchronized(archiveSignatureCache) { archiveSignatureCache[key] = hashes }
     }
 
     @Suppress("DEPRECATION")
