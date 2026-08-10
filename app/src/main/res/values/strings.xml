@@ -190,6 +190,10 @@
     <string name="home_apk_helper_warning_unverified">Only continue if you trust this helper app. Morphe cannot verify the signature of this APK, so a modified file would not be detected</string>
     <string name="home_apk_helper_no_result">The helper app did not return an APK</string>
     <string name="home_apk_helper_no_access">The helper app did not grant access to the APK it returned</string>
+    <string name="home_apk_helper_no_package">The helper app did not say which installed app to use</string>
+    <string name="home_apk_helper_wrong_package">The helper app returned a different app than the one being patched</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe could not use the installed app</string>
+    <string name="home_apk_helper_installed_incompatible">The installed version cannot be patched</string>
     <string name="home_apk_use_saved">Use saved APK</string>
     <string name="home_apk_use_installed">Use installed APK</string>
     <string name="home_apk_use_installed_unverified">Could not verify the signature of the installed app, so it may already be patched</string>
@@ -489,6 +493,12 @@ Uninstalling will permanently erase all app data"</string>
     <string name="battery_optimization_dialog_description">Some devices may stop the patcher when the app is minimized. Allow Morphe to run without battery restrictions to ensure patching completes reliably</string>
     <string name="battery_optimization_not_now">Not now</string>
 
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Not enough memory</string>
+    <string name="patcher_memory_adjustment_description">The patcher was stopped by the system while running with a %1$d MB memory limit. Lowering the limit to %2$d MB makes the patcher a smaller target and can let the run finish</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">The patcher was stopped by the system while running with a %1$d MB memory limit, which is already the lowest available. Try patching with fewer patch sources, or select fewer patches</string>
+    <string name="patcher_memory_adjustment_apply">Lower to %1$d MB</string>
+
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching in progress…</string>
     <string name="patcher_notification_text">Tap to return to the patcher</string>
@@ -533,6 +543,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
     <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin</string>
     <string name="patcher_process_exit_message">Patcher process exited with code %s</string>
+    <string name="patcher_heap_exhausted_message">The patcher ran out of memory with a %1$d MB heap. This app is too large for the selected patches. Try patching with fewer patch sources, or select fewer patches</string>
 
     <string name="install_app_success">Installed successfully</string>
     <string name="install_app_fail">Failed to install app: %s</string>

@@ -147,6 +147,25 @@ class PatchRunProgress(
     }
 
     /**
+     * Drops everything the abandoned attempt reported and puts the pipeline back at its first
+     * step, so the retry that follows counts from zero instead of on top of it.
+     *
+     * The log survives: it is the only record of why the run started over. Whether the input is
+     * a split archive is a property of the input rather than of the attempt, so that is kept too.
+     */
+    fun onRestart() {
+        scope.launch(Dispatchers.Main) {
+            completedPatches = 0
+            currentStepIndex = 0
+            steps.clear()
+            steps.addAll(generatePatchSteps(appContext, requiresSplitPreparation))
+            patchesPercentage = max(0.0, 1.0 - steps.sumOf { it.progressPercentage })
+            heapSamples.clear()
+            _showLongStepWarning.value = false
+        }
+    }
+
+    /**
      * Adds or removes the split preparation step as the worker learns what the input
      * actually is. [merged] marks the step as done once the archive has been merged.
      */

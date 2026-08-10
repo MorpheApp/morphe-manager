@@ -24,6 +24,22 @@ sealed class Runtime(context: Context) : KoinComponent {
 
     protected suspend fun bundles() = patchBundlesRepo.bundles.first()
 
+    /**
+     * Patches [inputFile] into [outputFile].
+     *
+     * @param inputFile        Path of the APK or split archive to patch.
+     * @param outputFile       Path the patched APK is written to.
+     * @param packageName      Package of the app being patched.
+     * @param selectedPatches  Patches to apply, per bundle.
+     * @param options          Patch option values, per bundle.
+     * @param logger           Sink for everything the run reports.
+     * @param onPatchCompleted Called with the name of each patch that finished.
+     * @param onProgress       Called as the run moves between steps.
+     * @param skipUnneededSplits Whether split configurations the device cannot use are dropped.
+     * @param onMergedApkReady Called with the merged APK when the input was a split archive.
+     * @param onRestart        Called when the current attempt is abandoned and patching starts over,
+     *                         so progress reported so far can be dropped instead of accumulating.
+     */
     abstract suspend fun execute(
         inputFile: String,
         outputFile: String,
@@ -35,5 +51,6 @@ sealed class Runtime(context: Context) : KoinComponent {
         onProgress: ProgressEventHandler,
         skipUnneededSplits: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)? = null,
+        onRestart: suspend () -> Unit = {},
     )
 }

@@ -25,31 +25,31 @@
         <item quantity="other">%s arquivos APK</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">%s app instalado</item>
+        <item quantity="one">%s aplicativo instalado</item>
         <item quantity="other">%s apps instalados</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">%s app reinstalado</item>
+        <item quantity="one">%s aplicativo reinstalado</item>
         <item quantity="other">%s apps reinstalados</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">%s app desinstalado</item>
-        <item quantity="other">%s apps desinstalados</item>
+        <item quantity="one">%s aplicativo desinstalado</item>
+        <item quantity="other">%s aplicativos desinstalados</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
-        <item quantity="one">Desinstalar %s app?</item>
-        <item quantity="other">Desinstalar %s apps?</item>
+        <item quantity="one">Desinstalar %s aplicativo?</item>
+        <item quantity="other">Desinstalar %s aplicativos?</item>
     </plurals>
     <plurals name="batch_patch_ready_count">
-        <item quantity="one">%s app pronto para a aplicação de patches</item>
-        <item quantity="other">%s apps prontos para a aplicação de patches</item>
+        <item quantity="one">%s aplicativo pronto para aplicar patch</item>
+        <item quantity="other">%s aplicativos prontos para aplicar patch</item>
     </plurals>
     <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s app pronto para instalar</item>
+        <item quantity="one">%s aplicativo pronto para instalar</item>
         <item quantity="other">%s apps prontos para instalar</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">%s app ignorado</item>
+        <item quantity="one">%s aplicativo ignorado</item>
         <item quantity="other">%s apps ignorados</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
@@ -65,11 +65,11 @@
         <item quantity="other">%s patches selecionados</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
-        <item quantity="one">%s app oculto</item>
+        <item quantity="one">%s aplicativo oculto</item>
         <item quantity="other">%s apps ocultos</item>
     </plurals>
     <plurals name="home_category_app_count">
-        <item quantity="one">%s app</item>
+        <item quantity="one">%s aplicativo</item>
         <item quantity="other">%s apps</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">

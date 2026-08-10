@@ -336,6 +336,67 @@ fun BatteryOptimizationDialog(
 }
 
 /**
+ * Shown after the system killed the patcher process, offering the lower memory limit that
+ * might get the next run through. The limit is a user setting, so nothing changes until it
+ * is accepted here.
+ */
+@Composable
+fun MemoryAdjustmentDialog(
+    currentLimit: Int,
+    suggestedLimit: Int,
+    canAdjust: Boolean,
+    onApply: () -> Unit,
+    onDismiss: () -> Unit,
+) {
+    AppDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.patcher_memory_adjustment_title),
+        footer = {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                if (canAdjust) {
+                    AppDialogButton(
+                        text = stringResource(
+                            R.string.patcher_memory_adjustment_apply,
+                            suggestedLimit
+                        ),
+                        onClick = onApply,
+                        icon = Icons.Outlined.Memory,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+                AppDialogOutlinedButton(
+                    text = stringResource(R.string.close),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+    ) {
+        Text(
+            text = if (canAdjust) {
+                stringResource(
+                    R.string.patcher_memory_adjustment_description,
+                    currentLimit,
+                    suggestedLimit
+                )
+            } else {
+                stringResource(
+                    R.string.patcher_memory_adjustment_description_at_minimum,
+                    currentLimit
+                )
+            },
+            style = MaterialTheme.typography.bodyLarge,
+            color = LocalDialogSecondaryTextColor.current,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+/**
  * Full-screen error dialog shown when patching fails.
  */
 @Composable

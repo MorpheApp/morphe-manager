@@ -66,6 +66,11 @@ class PatcherWorker(
         val options: Options,
         val logger: Logger,
         val onPatchCompleted: suspend () -> Unit,
+        /**
+         * Patching was abandoned and started over from the first step, so anything reported by
+         * the previous attempt has to be discarded rather than counted twice.
+         */
+        val onPatchingRestarted: suspend () -> Unit,
         val setInputFile: suspend (File, Boolean, Boolean) -> Unit,
         val onProgress: ProgressEventHandler,
         val patchSources: List<PatchSourceRef> = emptyList(),
@@ -210,7 +215,11 @@ class PatcherWorker(
         val result = try {
             args = workerRepository.claimInput(this)
             queueLabel = args.queuePosition?.let { (done, total) ->
-                applicationContext.getString(R.string.batch_patch_progress_counter, done, total)
+                applicationContext.getString(
+                    R.string.batch_patch_progress_counter,
+                    done.toString(),
+                    total.toString()
+                )
             }
             runPatcher(args).also { if (it == Result.success()) patchingSucceeded = true }
         } finally {
@@ -267,6 +276,17 @@ class PatcherWorker(
                 contentText = if (isExpertMode && patchName.isNotBlank()) patchName else null,
             )
             args.onPatchCompleted()
+        }
+
+        // The notification carries a patch count of its own, which would otherwise keep
+        // climbing past the total once a restarted attempt reports the same patches again.
+        // It goes back to the indeterminate form because the next attempt starts at loading
+        // patches, not at applying them
+        val onRestart: suspend () -> Unit = {
+            completedPatches = 0
+            patchingPhaseCompleted = false
+            updatePatcherNotification(stepName = null, patchProgress = null)
+            args.onPatchingRestarted()
         }
 
         val patchedApk = fs.tempDir.resolve("patched.apk")
@@ -394,7 +414,8 @@ class PatcherWorker(
                     onPatchCompleted,
                     ::updateProgress,
                     stripNativeLibs,
-                    onMergedApkReady
+                    onMergedApkReady,
+                    onRestart
                 )
             } catch (e: Exception) {
                 if (!useProcessRuntime || Build.VERSION.SDK_INT > Build.VERSION_CODES.Q || !isOomRelated(e)) {
@@ -402,6 +423,9 @@ class PatcherWorker(
                 }
 
                 args.logger.warn("Process runtime OOM on Android ${Build.VERSION.RELEASE}, falling back to coroutine runtime")
+
+                // The fallback is a fresh run of the whole pipeline, same as a memory retry
+                onRestart()
 
                 CoroutineRuntime(applicationContext).execute(
                     inputFile.absolutePath,
@@ -413,7 +437,8 @@ class PatcherWorker(
                     onPatchCompleted,
                     ::updateProgress,
                     stripNativeLibs,
-                    onMergedApkReady
+                    onMergedApkReady,
+                    onRestart
                 )
             }
 
@@ -452,13 +477,27 @@ class PatcherWorker(
                 e.exitCode.toString()
             )
             updateProgress(state = State.FAILED, message = message)
-            val previousLimit = prefs.patcherProcessMemoryLimit.get()
             Result.failure(
                 workDataOf(
                     PROCESS_EXIT_CODE_KEY to e.exitCode,
-                    PROCESS_PREVIOUS_LIMIT_KEY to previousLimit,
+                    PROCESS_PREVIOUS_LIMIT_KEY to e.heapLimitMb,
                     PROCESS_FAILURE_MESSAGE_KEY to message
                 )
+            )
+        } catch (e: ProcessRuntime.HeapExhaustedException) {
+            Log.e(
+                tag,
+                "Patcher exhausted its ${e.heapLimitMb}MB heap. ${e.originalStackTrace}".logFmt()
+            )
+            // The stack trace is already in the log; the failure itself says what the user can
+            // act on, since no memory limit this device allows would have been enough
+            val message = applicationContext.getString(
+                R.string.patcher_heap_exhausted_message,
+                e.heapLimitMb
+            )
+            updateProgress(state = State.FAILED, message = message)
+            Result.failure(
+                workDataOf(PROCESS_FAILURE_MESSAGE_KEY to message)
             )
         } catch (e: ProcessRuntime.RemoteFailureException) {
             Log.e(
@@ -492,6 +531,7 @@ class PatcherWorker(
     private fun isOomRelated(e: Exception) = when (e) {
         is ProcessRuntime.ProcessExitException ->
             e.exitCode == ProcessRuntime.OOM_EXIT_CODE || e.exitCode == ProcessRuntime.SIGKILL_EXIT_CODE
+        is ProcessRuntime.HeapExhaustedException -> true
         is ProcessRuntime.RemoteFailureException ->
             e.originalStackTrace.contains("OutOfMemoryError", ignoreCase = true)
         else -> false

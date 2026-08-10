@@ -538,7 +538,11 @@ private fun BatchRunHeader(state: BatchRunState) {
             label = "batch_run_counter"
         ) { (processed, total) ->
             Text(
-                text = stringResource(R.string.batch_patch_progress_counter, processed, total),
+                text = stringResource(
+                    R.string.batch_patch_progress_counter,
+                    processed.toString(),
+                    total.toString()
+                ),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
