@@ -2732,12 +2732,21 @@ class HomeViewModel(
     /**
      * Select all given patches for a bundle.
      * Only adds patches that are not already selected. LOCKED_OFF patches are skipped.
+     *
+     * Universal patches are selected in a second pass: the first tap selects regular
+     * patches only, and a later tap includes universal patches if the regular patches
+     * in the current scope are already selected.
      */
     fun expertModeSelectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
         val current = expertModePatches.toMutableMap()
         val set = current[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        patches.forEach { (patch, enabled) ->
-            if (patch.lockState(currentInstallerType, currentApkArchitecture) == PatchLockState.LOCKED_OFF) return@forEach
+        val selectablePatches = patches
+            .filter { (patch, _) -> patch.lockState(currentInstallerType, currentApkArchitecture) != PatchLockState.LOCKED_OFF }
+        val regularPatches = selectablePatches.filter { (patch, _) -> !patch.compatiblePackages.isNullOrEmpty() }
+        val hasUnselectedRegularPatch = regularPatches.any { (patch, enabled) -> !enabled && patch.name !in set }
+        val patchesToSelect = if (hasUnselectedRegularPatch) regularPatches else selectablePatches
+
+        patchesToSelect.forEach { (patch, enabled) ->
             if (!enabled) set.add(patch.name)
         }
         current[bundleUid] = set
