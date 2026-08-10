@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Lähteet ovat ajan tasalla</string>
     <string name="home_sources_are_loading">Lähteitä ladataan, odota…</string>
     <string name="home_search_apps">Hae sovelluksia</string>
+    <string name="home_app_sort_title">Järjestä sovellukset</string>
     <string name="home_app_sort_manual_description">Paina sovellusta pitkään ja napauta sitten uudelleenjärjestä-painiketta</string>
     <string name="home_app_sort_recommended">Suositeltu järjestys</string>
     <string name="home_app_sort_recommended_description">Asennetut ja kiinnitetyt sovellukset ensin</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Jatka vain, jos luotat tähän apuohjelmaan. Morphe ei voi vahvistaa tämän APK-tiedoston allekirjoitusta, joten muokattua tiedostoa ei havaita</string>
     <string name="home_apk_helper_no_result">Apuohjelma ei palauttanut APK-tiedostoa</string>
     <string name="home_apk_helper_no_access">Apuohjelma ei myöntänyt pääsyä palauttamalleen APK-tiedostolle</string>
+    <string name="home_apk_helper_no_package">Apusovellus ei kertonut, mitä asennettua sovellusta käytetään</string>
+    <string name="home_apk_helper_wrong_package">Apusovellus palautti eri sovelluksen kuin se, jota paikataan</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe ei voinut käyttää asennettua sovellusta</string>
+    <string name="home_apk_helper_installed_incompatible">Asennettua versiota ei voi paikata</string>
     <string name="home_apk_use_saved">Käytä tallennettua APK:ta</string>
     <string name="home_apk_use_installed">Käytä asennettua APK:ta</string>
     <string name="home_apk_use_installed_unverified">Sovelluksen asennetun version allekirjoitusta ei voitu vahvistaa, joten se on ehkä jo muutettu</string>
@@ -456,6 +461,11 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="battery_optimization_dialog_title">Taustakorjaussuojaus</string>
     <string name="battery_optimization_dialog_description">Jotkin laitteet saattavat pysäyttää korjausohjelman, kun sovellus minimoidaan. Salli Morphen toimia ilman virransäästörajoituksia varmistaaksesi, että korjaus suoritetaan luotettavasti.</string>
     <string name="battery_optimization_not_now">Ei nyt</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Muisti ei riitä</string>
+    <string name="patcher_memory_adjustment_description">Järjestelmä pysäytti patcherin, kun se toimi %1$d Mt:n muistirajalla. Laskemalla rajan arvoon %2$d Mt patcherista tulee pienempi kohde, ja suoritus voi päättyä.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Järjestelmä pysäytti patcherin, kun se toimi %1$d Mt:n muistirajalla, joka on jo alin käytettävissä oleva. Yritä paikkausta vähemmillä patch-lähteillä tai valitse vähemmän patcheja.</string>
+    <string name="patcher_memory_adjustment_apply">Pienennä arvoon %1$d Mt</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Muokkaus käynnissä…</string>
     <string name="patcher_notification_text">Palaa muokkaukseen napauttamalla</string>
@@ -569,6 +579,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Näytä tervehdysviesti aloitusnäytöllä</string>
     <string name="settings_appearance_app_grouping">Sovellusten ryhmittely</string>
     <string name="settings_appearance_app_grouping_description">Näytä kotinäkymän vaihto, jolla voit ryhmitellä sovellukset lähteen tai omien luokkien mukaan ja säilytä valinta, kun se on poissa päältä</string>
+    <string name="settings_appearance_sort_button">Lajittelupainike</string>
+    <string name="settings_appearance_sort_button_description">Näytä lajittelupainike aloitusnäytöllä</string>
     <string name="settings_appearance_app_card_colors">Sovelluksen korttien värit</string>
     <string name="settings_appearance_app_card_colors_default">Oletus</string>
     <string name="settings_appearance_app_card_colors_default_description">Anna jokaiselle sovellukselle sen oman paketin väri</string>

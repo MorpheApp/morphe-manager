@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">مصادرك محدثة</string>
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
     <string name="home_search_apps">البحث عن التطبيقات</string>
+    <string name="home_app_sort_title">فرز التطبيقات</string>
     <string name="home_app_sort_manual_description">اضغط مطولًا على تطبيق، ثم انقر على زر إعادة الترتيب</string>
     <string name="home_app_sort_recommended">الترتيب الموصى به</string>
     <string name="home_app_sort_recommended_description">التطبيقات المنصَّبة والمثبتة أولًا</string>
@@ -50,7 +51,7 @@
     <string name="home_all_apps_hidden_subtitle">لقد أخفيت جميع التطبيقات من الشاشة الرئيسية</string>
     <string name="home_category_add">إضافة فئة</string>
     <string name="home_category_all_apps">كل التطبيقات</string>
-    <string name="home_category_custom">مخصص</string>
+    <string name="home_category_custom">مخصّص</string>
     <string name="home_category_uncategorized">غير مصنف</string>
     <string name="home_category_new_title">فئة جديدة</string>
     <string name="home_category_rename_title">إعادة تسمية الفئة</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">تابع فقط إذا كنت تثق بهذا التطبيق المساعد. لا يستطيع Morphe التحقق من توقيع ملف APK هذا، لذلك قد لا يتم اكتشاف أي ملف معدل</string>
     <string name="home_apk_helper_no_result">لم يقم التطبيق المساعد بتوفير ملف APK</string>
     <string name="home_apk_helper_no_access">لم يمنح التطبيق المساعد إذن الوصول إلى ملف APK الذي قام بتوفيره</string>
+    <string name="home_apk_helper_no_package">لم يحدد التطبيق المساعد أي تطبيق مثبت يجب استخدامه</string>
+    <string name="home_apk_helper_wrong_package">أعاد التطبيق المساعد تطبيقًا مختلفًا عن التطبيق الذي يتم تعديله</string>
+    <string name="home_apk_helper_installed_unavailable">تعذر على Morphe استخدام التطبيق المثبت</string>
+    <string name="home_apk_helper_installed_incompatible">لا يمكن تعديل الإصدار المثبت</string>
     <string name="home_apk_use_saved">استخدام ملف APK المحفوظ</string>
     <string name="home_apk_use_installed">استخدام ملف APK المثبت</string>
     <string name="home_apk_use_installed_unverified">تعذر التحقق من توقيع التطبيق المثبت، لذا قد يكون قد تم تعديله بالفعل</string>
@@ -456,6 +461,11 @@
     <string name="battery_optimization_dialog_description">قد توقف بعض الأجهزة عملية أداة التعديل عند تصغير التطبيق.
 اسمح لتطبيق Morphe بالعمل دون قيود على البطارية لضمان اكتمال التعديل بشكل موثوق</string>
     <string name="battery_optimization_not_now">ليس الآن</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">الذاكرة غير كافية</string>
+    <string name="patcher_memory_adjustment_description">تم إيقاف أداة الترقيع بواسطة النظام أثناء تشغيلها بحد ذاكرة يبلغ %1$d ميغابايت. تخفيض الحد إلى %2$d ميغابايت يجعل أداة الترقيع هدفًا أصغر وقد يسمح بإكمال العملية.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">تم إيقاف أداة الترقيع بواسطة النظام أثناء تشغيلها بحد ذاكرة يبلغ %1$d ميغابايت، وهو بالفعل أقل حد متاح. جرّب الترقيع بعدد أقل من مصادر الترقيع، أو اختر عددًا أقل من الرقع.</string>
+    <string name="patcher_memory_adjustment_apply">خفض الحد إلى %1$d ميغابايت</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">جارٍ التعديل…</string>
     <string name="patcher_notification_text">انقر للعودة إلى أداة التعديل</string>
@@ -569,6 +579,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">عرض رسالة ترحيب على الشاشة الرئيسية</string>
     <string name="settings_appearance_app_grouping">تجميع التطبيقات</string>
     <string name="settings_appearance_app_grouping_description">عرض مُبدِّل الشاشة الرئيسية لتجميع التطبيقات حسب المصدر أو فئاتك الخاصة، مع الاحتفاظ بالتحديد عند إيقاف تشغيلها</string>
+    <string name="settings_appearance_sort_button">زر الفرز</string>
+    <string name="settings_appearance_sort_button_description">عرض زر الفرز على الشاشة الرئيسية</string>
     <string name="settings_appearance_app_card_colors">ألوان بطاقة التطبيق</string>
     <string name="settings_appearance_app_card_colors_default">الافتراضية</string>
     <string name="settings_appearance_app_card_colors_default_description">امنح كل تطبيق لون حزمته الخاصة</string>

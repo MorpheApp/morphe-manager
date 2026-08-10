@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Vos sources sont à jour</string>
     <string name="home_sources_are_loading">Les sources sont en cours de chargement, veuillez patienter…</string>
     <string name="home_search_apps">Rechercher des applications</string>
+    <string name="home_app_sort_title">Trier les applications</string>
     <string name="home_app_sort_manual_description">Appuyez longuement sur une application, puis appuyez sur le bouton de réorganisation</string>
     <string name="home_app_sort_recommended">Ordre recommandé</string>
     <string name="home_app_sort_recommended_description">Applications installées et épinglées en premier</string>
@@ -175,6 +176,10 @@
     <string name="home_apk_helper_warning_unverified">Ne continuez que si vous faites confiance à cette application d\'assistance. Morphe ne peut pas vérifier la signature de cet APK, donc un fichier modifié ne serait pas détecté</string>
     <string name="home_apk_helper_no_result">L\'application d\'assistance n\'a pas renvoyé de fichier APK</string>
     <string name="home_apk_helper_no_access">L\'application d\'assistance n\'a pas accordé l\'accès à l\'APK qu\'elle a renvoyé</string>
+    <string name="home_apk_helper_no_package">L\'application d\'assistance n\'a pas indiqué quelle application installée utiliser.</string>
+    <string name="home_apk_helper_wrong_package">L’application d’assistance a renvoyé une application différente de celle en train d’être patchée</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe n’a pas pu utiliser l’application installée</string>
+    <string name="home_apk_helper_installed_incompatible">La version installée ne peut pas être patchée</string>
     <string name="home_apk_use_saved">Utiliser l\'APK enregistré</string>
     <string name="home_apk_use_installed">Utiliser l\'APK installé</string>
     <string name="home_apk_use_installed_unverified">Impossible de vérifier la signature de l\'application installée, il est donc possible qu\'elle soit déjà patchée</string>
@@ -359,7 +364,7 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="shortcut_repatch_short">Re-patcher</string>
     <string name="shortcut_repatch_long">Re-patcher les applications obsolètes</string>
     <string name="shortcut_check_updates_short">Vérifier les mises à jour</string>
-    <string name="shortcut_check_updates_long">Vérifier les mises à jour des patchs</string>
+    <string name="shortcut_check_updates_long">Vérifier les mises à jour de patchs</string>
     <string name="shortcut_patch_app">Patcher %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Êtes-vous sûr de vouloir désinstaller cette application ?</string>
@@ -381,7 +386,7 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="home_app_info_install_type_play_store">Installation depuis le Play Store</string>
     <string name="home_app_info_install_type_root_play_store">Installation root depuis le Play Store</string>
     <string name="home_app_info_install_type_shizuku_play_store">Installation via Shizuku depuis le Play Store</string>
-    <string name="home_app_info_patch_update_available">Mise à jour de patch disponible</string>
+    <string name="home_app_info_patch_update_available">Mise à jour de patchs disponible</string>
     <string name="home_app_info_patch_update_available_description">Une version plus récente des patchs est disponible. Re-patchez votre application pour bénéficier des dernières améliorations et corrections</string>
     <string name="home_app_info_app_deleted_warning">L\'application a été désinstallée</string>
     <string name="home_app_info_app_deleted_description">Cette application a été désinstallée en dehors de Morphe. Re-patchez-la pour restaurer les fonctionnalités
@@ -457,6 +462,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="battery_optimization_dialog_title">Protection du patching en arrière-plan</string>
     <string name="battery_optimization_dialog_description">Certains appareils peuvent arrêter le patcheur lorsque l\'application est minimisée. Autorisez Morphe à fonctionner sans restriction de batterie afin de garantir que le patching s\'effectue correctement</string>
     <string name="battery_optimization_not_now">Pas maintenant</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching en cours…</string>
     <string name="patcher_notification_text">Appuyez pour revenir au patcheur</string>
@@ -570,6 +576,8 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_appearance_greeting_phrases_subtitle">Afficher un message de salutation sur l\'écran d\'accueil</string>
     <string name="settings_appearance_app_grouping">Regroupement d\'applications</string>
     <string name="settings_appearance_app_grouping_description">Afficher un sélecteur sur l\'écran d\'accueil pour regrouper les applications par source ou selon vos propres catégories, en conservant la sélection lorsqu\'il est désactivé</string>
+    <string name="settings_appearance_sort_button">Bouton de tri</string>
+    <string name="settings_appearance_sort_button_description">Afficher le bouton de tri sur l\'écran d\'accueil</string>
     <string name="settings_appearance_app_card_colors">Couleurs des cartes des applications</string>
     <string name="settings_appearance_app_card_colors_default">Par défaut</string>
     <string name="settings_appearance_app_card_colors_default_description">Donner à chaque application la couleur de son propre bundle</string>

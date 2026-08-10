@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Mənbələriniz yenilənib</string>
     <string name="home_sources_are_loading">Mənbələr yüklənilir, xahiş olunur gözləyin...</string>
     <string name="home_search_apps">Tətbiqləri axtar</string>
+    <string name="home_app_sort_title">Tətbiqləri sırala</string>
     <string name="home_app_sort_manual_description">Tətbiqə uzun bas, sonra yenidən sıralama düyməsinə toxun</string>
     <string name="home_app_sort_recommended">Tövsiyə olunan düzülüş</string>
     <string name="home_app_sort_recommended_description">Əvvəlcə quraşdırılmış və nişanlanmış tətbiqlər</string>
@@ -455,6 +456,7 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="battery_optimization_dialog_title">Fon yamaqlanma müdafiəsi</string>
     <string name="battery_optimization_dialog_description">Bəzi cihazlar tətbiqi qısanda yamaqlayıcını dayandıra bilər. Etibarlı tamamlanan yamaqlanmaya əmin olmaq üçün Morphe-ni batareya məhdudiyyətləri olmadan işlətməyə icazə ver</string>
     <string name="battery_optimization_not_now">İndi deyil</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Yamaqlanma irəliləyişdədir...</string>
     <string name="patcher_notification_text">Yamaqlayıcıya qayıtmaq üçün toxun</string>
@@ -567,6 +569,8 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Əsas ekranda salamlaşma mesajı göstər</string>
     <string name="settings_appearance_app_grouping">Tətbiq qruplaşdırılması</string>
     <string name="settings_appearance_app_grouping_description">Tətbiqləri mənbəyə və ya öz kateqoriyalarınıza görə qruplaşdırmaq üçün əsas ekran keçiricisini göstər, qapalı olduqda seçimi qoruyur</string>
+    <string name="settings_appearance_sort_button">Sıralama düyməsi</string>
+    <string name="settings_appearance_sort_button_description">Əsas ekranda sıralama düyməsini göstər</string>
     <string name="settings_appearance_app_card_colors">Tətbiq kartı rəngləri</string>
     <string name="settings_appearance_app_card_colors_default">İlkin</string>
     <string name="settings_appearance_app_card_colors_default_description">Hər tətbiqə öz paketinin rəngini ver</string>

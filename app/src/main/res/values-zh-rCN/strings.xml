@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">您的源已是最新的</string>
     <string name="home_sources_are_loading">源正在加载，请稍等…</string>
     <string name="home_search_apps">搜索应用</string>
+    <string name="home_app_sort_title">排序应用</string>
     <string name="home_app_sort_manual_description">长按一个应用，然后点击重新排序按钮</string>
     <string name="home_app_sort_recommended">推荐顺序</string>
     <string name="home_app_sort_recommended_description">优先显示已安装和固定应用</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">只有在您信任此辅助应用程序时才继续。Morphe 无法验证此 APK 的签名，因此修改后的文件将无法检测到</string>
     <string name="home_apk_helper_no_result">辅助应用程序未返回 APK</string>
     <string name="home_apk_helper_no_access">辅助应用程序未授予对其返回的 APK 的访问权限</string>
+    <string name="home_apk_helper_no_package">辅助应用未说明要使用哪个已安装的应用</string>
+    <string name="home_apk_helper_wrong_package">辅助应用返回的应用与正在修补的应用不同</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe 无法使用已安装的应用</string>
+    <string name="home_apk_helper_installed_incompatible">已安装的版本无法修补</string>
     <string name="home_apk_use_saved">使用保存的 APK</string>
     <string name="home_apk_use_installed">使用已安装的 APK</string>
     <string name="home_apk_use_installed_unverified">无法验证已安装应用的签名，因此该应用可能已被修补</string>
@@ -455,6 +460,11 @@
     <string name="battery_optimization_dialog_title">后台补丁保护</string>
     <string name="battery_optimization_dialog_description">一些设备在应用被最小化时可能会停止补丁程序。允许 Morphe 在没有电池限制的情况下运行，以确保补丁完成可靠。</string>
     <string name="battery_optimization_not_now">暂不</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">内存不足</string>
+    <string name="patcher_memory_adjustment_description">补丁程序在内存限制为 %1$d MB 的情况下运行时被系统停止。将限制降低到 %2$d MB 会使补丁程序成为更小的目标，并可能让运行完成。</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">补丁程序在内存限制为 %1$d MB 的情况下运行时被系统停止，这已经是可用的最低限制。请尝试使用更少的补丁源，或选择更少的补丁。</string>
+    <string name="patcher_memory_adjustment_apply">降低到 %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">正在修补…</string>
     <string name="patcher_notification_text">点击返回修补程序</string>
@@ -568,6 +578,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">在主屏幕上显示问候消息</string>
     <string name="settings_appearance_app_grouping">应用分组</string>
     <string name="settings_appearance_app_grouping_description">显示主屏幕切换器，按来源或您自己的分类对应用进行分组，并在关闭时保持选择</string>
+    <string name="settings_appearance_sort_button">排序按钮</string>
+    <string name="settings_appearance_sort_button_description">在主屏幕上显示排序按钮</string>
     <string name="settings_appearance_app_card_colors">应用卡片颜色</string>
     <string name="settings_appearance_app_card_colors_default">默认</string>
     <string name="settings_appearance_app_card_colors_default_description">为每个应用赋予其自身包的颜色</string>

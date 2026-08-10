@@ -282,6 +282,7 @@
     <string name="battery_optimization_dialog_title">پاراستن لە پینەکردنی پاشخان</string>
     <string name="battery_optimization_dialog_description">هەندێک ئامێر لەوانەیە پینەکەرەکە بوەستێنن کاتێک ئەپەکە بچووک دەکرێتەوە. ڕێگە بە Morphe بدە بە کارکردن بەبێ سنووردارکردنی پاتری بۆ دڵنیابوون لە تەواوبوونی پینەکردن بە شێوەیەکی باوەڕپێکراو</string>
     <string name="battery_optimization_not_now">ئێستا نا</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">پینەکردن بەردەوامە…</string>
     <string name="patcher_notification_text">کرتە بکە بۆ گەڕانەوە بۆ پینەکەرەکە</string>

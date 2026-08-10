@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Οι πηγές σας είναι ενημερωμένες</string>
     <string name="home_sources_are_loading">Οι πηγές φορτώνονται, παρακαλώ περιμένετε…</string>
     <string name="home_search_apps">Αναζήτηση εφαρμογών</string>
+    <string name="home_app_sort_title">Ταξινόμηση εφαρμογών</string>
     <string name="home_app_sort_manual_description">Πατήστε παρατεταμένα μια εφαρμογή, στη συνέχεια πατήστε το κουμπί αναδιάταξης</string>
     <string name="home_app_sort_recommended">Προτεινόμενη έκδοση</string>
     <string name="home_app_sort_recommended_description">Εγκατεστημένες και закрепленные εφαρμογές πρώτα</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Συνεχίστε μόνο εάν εμπιστεύεστε αυτή τη βοηθητική εφαρμογή. Η Morphe δεν μπορεί να επαληθεύσει την υπογραφή αυτού του APK, επομένως ένα τροποποιημένο αρχείο δεν θα ανιχνευθεί</string>
     <string name="home_apk_helper_no_result">Η βοηθητική εφαρμογή δεν επέστρεψε ένα APK</string>
     <string name="home_apk_helper_no_access">Η βοηθητική εφαρμογή δεν conceded πρόσβαση στο APK που επέστρεψε</string>
+    <string name="home_apk_helper_no_package">Η βοηθητική εφαρμογή δεν ανέφερε ποια εγκατεστημένη εφαρμογή να χρησιμοποιήσει</string>
+    <string name="home_apk_helper_wrong_package">Η βοηθητική εφαρμογή επέστρεψε μια διαφορετική εφαρμογή από αυτή που τροποποιείται</string>
+    <string name="home_apk_helper_installed_unavailable">Ο Morphe δεν μπόρεσε να χρησιμοποιήσει την εγκατεστημένη εφαρμογή</string>
+    <string name="home_apk_helper_installed_incompatible">Η εγκατεστημένη έκδοση δεν μπορεί να τροποποιηθεί</string>
     <string name="home_apk_use_saved">Χρήση αποθηκευμένου APK</string>
     <string name="home_apk_use_installed">Χρήση εγκατεστημένου APK</string>
     <string name="home_apk_use_installed_unverified">Δεν μπόρεσα να επαληθεύσω την υπογραφή της εγκατεστημένης εφαρμογής, επομένως ενδέχεται να έχει ήδη τροποποιηθεί</string>
@@ -455,6 +460,7 @@
     <string name="battery_optimization_dialog_title">Προστασία επισκευής παρασκηνίου</string>
     <string name="battery_optimization_dialog_description">Ορισμένες συσκευές ενδέχεται να σταματήσουν το πρόγραμμα επισκευής όταν η εφαρμογή ελαχιστοποιηθεί. Επιτρέψτε στο Morphe να εκτελείται χωρίς περιορισμούς μπαταρίας για να διασφαλίσετε ότι η επισκευή ολοκληρώνεται αξιόπιστα</string>
     <string name="battery_optimization_not_now">Όχι τώρα</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Τροποποίηση σε εξέλιξη…</string>
     <string name="patcher_notification_text">Πατήστε για να επιστρέψετε στο πρόγραμμα τροποποίησης</string>
@@ -568,6 +574,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Εμφάνιση μηνύματος υποδοχής στην αρχική οθόνη</string>
     <string name="settings_appearance_app_grouping">Ομαδοποίηση εφαρμογών</string>
     <string name="settings_appearance_app_grouping_description">Εμφάνιση διακόπτη στην αρχική οθόνη για ομαδοποίηση εφαρμογών κατά πηγή ή δικές σας κατηγορίες, διατηρώντας την επιλογή όταν είναι απενεργοποιημένη</string>
+    <string name="settings_appearance_sort_button">Κουμπί ταξινόμησης</string>
+    <string name="settings_appearance_sort_button_description">Εμφάνιση του κουμπιού ταξινόμησης στην αρχική οθόνη</string>
     <string name="settings_appearance_app_card_colors">Χρώματα καρτών εφαρμογών</string>
     <string name="settings_appearance_app_card_colors_default">Προεπιλογή</string>
     <string name="settings_appearance_app_card_colors_default_description">Δώστε σε κάθε εφαρμογή το χρώμα του δικού της πακέτου</string>

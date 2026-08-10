@@ -332,6 +332,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="battery_optimization_dialog_title">Perlindungan tampalan latar belakang</string>
     <string name="battery_optimization_dialog_description">Sesetengah peranti mungkin menghentikan penampal apabila aplikasi diminimumkan. Benarkan Morphe berjalan tanpa keterbatasan bateri untuk memastikan tampalan selesai dengan teliti</string>
     <string name="battery_optimization_not_now">Bukan sekarang</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Tampalan sedang berjalan… </string>
     <string name="patcher_notification_text">Tekan untuk kembali ke penampal</string>

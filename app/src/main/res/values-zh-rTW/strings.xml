@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">來源已是最新狀態</string>
     <string name="home_sources_are_loading">正在載入來源，請稍候…</string>
     <string name="home_search_apps">搜尋應用程式</string>
+    <string name="home_app_sort_title">排序應用程式</string>
     <string name="home_app_sort_manual_description">長按應用程式，然後點選重新排序按鈕</string>
     <string name="home_app_sort_recommended">推薦順序</string>
     <string name="home_app_sort_recommended_description">優先顯示已安裝和固定應用程式</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">僅在您信任此輔助應用程式時才繼續。Morphe 無法驗證此 APK 的簽章，因此無法偵測到已修改的檔案</string>
     <string name="home_apk_helper_no_result">輔助應用程式未傳回 APK</string>
     <string name="home_apk_helper_no_access">輔助應用程式未授權存取其傳回的 APK</string>
+    <string name="home_apk_helper_no_package">輔助應用程式未指定要使用的已安裝應用程式</string>
+    <string name="home_apk_helper_wrong_package">輔助應用程式回傳了與正在修補的應用程式不同的應用程式</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe 無法使用已安裝的應用程式</string>
+    <string name="home_apk_helper_installed_incompatible">安裝的版本無法修補</string>
     <string name="home_apk_use_saved">使用已儲存的 APK</string>
     <string name="home_apk_use_installed">使用已安裝的 APK</string>
     <string name="home_apk_use_installed_unverified">無法驗證已安裝應用程式的簽名，因此可能已經被篡改</string>
@@ -455,6 +460,11 @@
     <string name="battery_optimization_dialog_title">背景修補保護</string>
     <string name="battery_optimization_dialog_description">部分裝置可能在應用程式縮小時停止修補程式。允許 Morphe 在沒有電池限制的情況下執行，以確保修補程式可靠完成。</string>
     <string name="battery_optimization_not_now">稍後再說</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">記憶體不足</string>
+    <string name="patcher_memory_adjustment_description">修補程式在以 %1$d MB 記憶體限制執行時被系統停止。將限制降低至 %2$d MB 可讓修補程式成為較小的目標，並可能讓執行完成。</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">修補程式在以 %1$d MB 記憶體限制執行時被系統停止，而該限制已是最低可用值。請嘗試使用較少的修補來源，或選擇較少的修補項目。</string>
+    <string name="patcher_memory_adjustment_apply">降至 %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">修補進行中…</string>
     <string name="patcher_notification_text">輕觸以返回修補程式畫面</string>
@@ -567,6 +577,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">在主螢幕上顯示問候訊息</string>
     <string name="settings_appearance_app_grouping">應用程式分組</string>
     <string name="settings_appearance_app_grouping_description">顯示主畫面切換器，以依來源或您自己的類別分組應用程式，並在關閉時保留選取內容</string>
+    <string name="settings_appearance_sort_button">排序按鈕</string>
+    <string name="settings_appearance_sort_button_description">在主螢幕上顯示排序按鈕</string>
     <string name="settings_appearance_app_card_colors">應用程式卡片顏色</string>
     <string name="settings_appearance_app_card_colors_default">預設</string>
     <string name="settings_appearance_app_card_colors_default_description">讓每個應用程式都擁有其套件的顏色</string>

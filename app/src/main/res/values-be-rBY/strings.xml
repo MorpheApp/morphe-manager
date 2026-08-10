@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Вашы крыніцы абноўлены</string>
     <string name="home_sources_are_loading">Крыніцы загружаюцца, калі ласка, пачакайце…</string>
     <string name="home_search_apps">Пошук праграм</string>
+    <string name="home_app_sort_title">Сартаванне праграм</string>
     <string name="home_app_sort_manual_description">Націсніце і ўтрымлівайце праграму, затым націсніце кнопку перастаноўкі</string>
     <string name="home_app_sort_recommended">Рэкамендаваны парадак</string>
     <string name="home_app_sort_recommended_description">Спачатку ўсталяваныя і прышпіленыя праграмы</string>
@@ -126,6 +127,7 @@
     <!-- Patcher Screen -->
     <!-- Patcher Screen - Patcher Steps -->
     <!-- Battery optimization pre-flight dialog -->
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <!-- Patcher Screen - Patcher Messages -->
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->

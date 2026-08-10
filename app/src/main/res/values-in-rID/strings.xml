@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Sumber Anda sudah yang terbaru</string>
     <string name="home_sources_are_loading">Sumber sedang dimuat, harap tunggu…</string>
     <string name="home_search_apps">Cari aplikasi</string>
+    <string name="home_app_sort_title">Urutkan aplikasi</string>
     <string name="home_app_sort_manual_description">Tekan lama sebuah aplikasi, lalu ketuk tombol urutkan</string>
     <string name="home_app_sort_recommended">Urutan yang Direkomendasikan</string>
     <string name="home_app_sort_recommended_description">Aplikasi yang sudah dipasang dan disematkan terlebih dahulu</string>
@@ -169,10 +170,14 @@
     <string name="home_apk_helper_title">Unduh dengan aplikasi pembantu</string>
     <string name="home_apk_helper_description">Morphe akan meminta aplikasi pembantu di bawah ini untuk mengunduh APK asli dan mengembalikan berkas tersebut</string>
     <string name="home_apk_helper_continue">Buka aplikasi pembantu</string>
-    <string name="home_apk_helper_warning">Lanjutkan hanya jika Anda mempercayai aplikasi pembantu ini. Morphe memeriksa paket, versi, dan tanda tangan dari apa pun yang diterimanya sebelum melakukan penambalan</string>
+    <string name="home_apk_helper_warning">Lanjutkan hanya jika Anda mempercayai aplikasi pembantu ini. Morphe memeriksa paket, versi dan tanda tangan dari apa pun yang diterimanya sebelum melakukan penambalan</string>
     <string name="home_apk_helper_warning_unverified">Lanjutkan hanya jika Anda mempercayai aplikasi pembantu ini. Morphe tidak dapat memverifikasi tanda tangan APK ini, sehingga berkas yang dimodifikasi tidak akan terdeteksi</string>
     <string name="home_apk_helper_no_result">Aplikasi pembantu tidak mengembalikan file APK</string>
     <string name="home_apk_helper_no_access">Aplikasi pembantu tersebut tidak memberikan akses ke APK yang dikembalikannya</string>
+    <string name="home_apk_helper_no_package">Aplikasi pembantu tersebut tidak menyebutkan aplikasi mana yang sudah terpasang untuk digunakan</string>
+    <string name="home_apk_helper_wrong_package">Aplikasi pembantu mengembalikan aplikasi yang berbeda dari aplikasi yang sedang diperbarui</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe tidak dapat menggunakan aplikasi yang telah dipasang</string>
+    <string name="home_apk_helper_installed_incompatible">Versi yang sudah terpasang tidak dapat ditambal</string>
     <string name="home_apk_use_saved">Gunakan APK yang tersimpan</string>
     <string name="home_apk_use_installed">Gunakan APK yang terpasang</string>
     <string name="home_apk_use_installed_unverified">Tanda tangan aplikasi yang terpasang tidak dapat diverifikasi, jadi kemungkinan aplikasi tersebut sudah ditambal.</string>
@@ -456,6 +461,7 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="battery_optimization_dialog_title">Perlindungan penambalan latar belakang</string>
     <string name="battery_optimization_dialog_description">Beberapa perangkat mungkin menghentikan proses penambal ketika aplikasi diminimalkan. Izinkan Morphe berjalan tanpa batasan penggunaan baterai agar proses penambalan dapat diselesaikan dengan lancar</string>
     <string name="battery_optimization_not_now">Nanti saja</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Penyematan sedang berlangsung…</string>
     <string name="patcher_notification_text">Ketuk untuk kembali ke penambal</string>
@@ -569,6 +575,8 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="settings_appearance_greeting_phrases_subtitle">Tampilkan pesan sapaan di layar beranda</string>
     <string name="settings_appearance_app_grouping">Pengelompokan aplikasi</string>
     <string name="settings_appearance_app_grouping_description">Tampilkan pengalih layar beranda untuk mengelompokkan aplikasi berdasarkan sumber atau kategori Anda sendiri, mempertahankan pilihan saat dinonaktifkan</string>
+    <string name="settings_appearance_sort_button">Tombol urutkan</string>
+    <string name="settings_appearance_sort_button_description">Tampilkan tombol urutkan di layar utama</string>
     <string name="settings_appearance_app_card_colors">Warna kartu aplikasi</string>
     <string name="settings_appearance_app_card_colors_default">Bawaan</string>
     <string name="settings_appearance_app_card_colors_default_description">Beri setiap aplikasi warna dari bundelnya sendiri</string>

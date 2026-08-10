@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Sizning manbalaringiz yangilandi</string>
     <string name="home_sources_are_loading">Manbalar yuklanayapti, iltimos kuting…</string>
     <string name="home_search_apps">Ilovalarni qidiring</string>
+    <string name="home_app_sort_title">Tampilkan file tersembunyi</string>
     <string name="home_app_sort_manual_description">Urutkan aplikasi</string>
     <string name="home_app_sort_recommended">Tekan lama sebuah aplikasi, lalu ketuk tombol urutkan ulang</string>
     <string name="home_app_sort_recommended_description">Urutan yang direkomendasikan</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Agar ushbu yordamchi ilovaga ishonmasangiz, davom etmang. Morphe ushbu APK ning imzosini tasdiqlay olmaydi, shuning uchun oʻzgartirilgan fayl aniqlanmaydi</string>
     <string name="home_apk_helper_no_result">Yordamchi ilova APK ni qaytarib bermadi</string>
     <string name="home_apk_helper_no_access">Yordamchi ilova qaytargan APK ga kirish huquqini bermadi</string>
+    <string name="home_apk_helper_no_package">Yordamchi ilova qaysi o\'rnatilgan ilovadan foydalanish kerakligini aytmadi.</string>
+    <string name="home_apk_helper_wrong_package">Yordamchi ilova yamlanayotgan ilovadan boshqa ilovani qaytardi.</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe o\'rnatilgan ilovadan foydalana olmadi.</string>
+    <string name="home_apk_helper_installed_incompatible">O\'rnatilgan versiyani yamlab bo\'lmaydi.</string>
     <string name="home_apk_use_saved">Saqlangan APKdan foydalanish</string>
     <string name="home_apk_use_installed">O\'rnatilgan APKdan foydalanish</string>
     <string name="home_apk_use_installed_unverified">O\'rnatilgan ilovaning imzosi tasdiqlanmadi, shuning uchun u allaqachon o\'zgartirilgan bo\'lishi mumkin</string>
@@ -454,6 +459,7 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="battery_optimization_dialog_title">Patchlashni himoya qilish</string>
     <string name="battery_optimization_dialog_description">Ba\'zi moslamalar ilovani minimallashtirganda patcherni to‘xtatishi mumkin. Patchlash ishonchli bajarilishini ta\'minlash uchun Morphe batareyani cheklashsiz ishlay olishiga ruxsat bering</string>
     <string name="battery_optimization_not_now">Hozir emas</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patchlash jarayonida…</string>
     <string name="patcher_notification_text">Patcherni ko‘rish uchun bosish</string>
@@ -567,6 +573,8 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Bosh ekranda salomlashish xabarini ko‘rsatish</string>
     <string name="settings_appearance_app_grouping">Ilovalarni guruhlash</string>
     <string name="settings_appearance_app_grouping_description">Ilovalarni manbaiga yoki o\'zingizning kategoriyalaringizga qarab guruhlash uchun uy ekrani almashtirgichni ko\'rsating, o\'chirilganda tanlovni saqlab qolish</string>
+    <string name="settings_appearance_sort_button">Tartiblash tugmasi</string>
+    <string name="settings_appearance_sort_button_description">Bosh ekranda tartiblash tugmasini ko‘rsatish</string>
     <string name="settings_appearance_app_card_colors">Ilovalar kartasining ranglari</string>
     <string name="settings_appearance_app_card_colors_default">Standart</string>
     <string name="settings_appearance_app_card_colors_default_description">Har bir ilovaga o\'z to\'plamining rangini bering</string>

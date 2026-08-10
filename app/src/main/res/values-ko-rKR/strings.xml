@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">소스가 최신 상태입니다</string>
     <string name="home_sources_are_loading">소스를 불러오는 중, 잠시만 기다려 주세요…</string>
     <string name="home_search_apps">앱 검색</string>
+    <string name="home_app_sort_title">앱 정렬</string>
     <string name="home_app_sort_manual_description">앱을 길게 탭한 후에 정렬 버튼을 탭하면 순서를 변경할 수 있습니다</string>
     <string name="home_app_sort_recommended">권장 순서</string>
     <string name="home_app_sort_recommended_description">설치된 앱 및 고정된 앱을 먼저 표시</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">이 도우미 앱을 신뢰하는 경우에만 계속 진행하세요. Morphe는 이 APK의 서명을 확인할 수 없으므로, 파일이 변조되었더라도 이를 감지하지 못할 수 있습니다</string>
     <string name="home_apk_helper_no_result">도우미 앱에서 APK 파일을 반환하지 않았습니다</string>
     <string name="home_apk_helper_no_access">도우미 앱이 반환한 APK에 대한 접근 권한을 부여하지 않았습니다</string>
+    <string name="home_apk_helper_no_package">도우미 앱에서 어떤 설치된 앱을 사용해야 하는지 지정하지 않았습니다</string>
+    <string name="home_apk_helper_wrong_package">도우미 앱이 패치하려는 앱과 다른 앱을 반환하였습니다</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe가 설치된 앱을 사용할 수 없습니다</string>
+    <string name="home_apk_helper_installed_incompatible">설치된 버전은 패치할 수 없습니다</string>
     <string name="home_apk_use_saved">저장된 APK 사용</string>
     <string name="home_apk_use_installed">설치된 APK 사용</string>
     <string name="home_apk_use_installed_unverified">설치된 앱의 서명을 확인할 수 없으므로 이미 패치된 앱일 수 있습니다</string>
@@ -455,6 +460,11 @@
     <string name="battery_optimization_dialog_title">백그라운드 패치 보호</string>
     <string name="battery_optimization_dialog_description">일부 기기에서는 앱이 최소화되면 패처가 중지될 수 있습니다. 패치가 안정적으로 완료되도록 Morphe가 배터리 제한 없이 실행되도록 허용하세요</string>
     <string name="battery_optimization_not_now">나중에</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">메모리가 부족합니다</string>
+    <string name="patcher_memory_adjustment_description">패처가 %1$d MB 메모리 제한으로 실행되는 동안 시스템에 의해 중지되었습니다. 제한을 %2$d MB로 낮추면 패처가 사용하는 메모리가 줄어들어 작업이 완료될 수 있습니다</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">패처가 %1$d MB 메모리 제한으로 실행되는 동안 시스템에 의해 중지되었습니다. 이 제한은 이미 설정 가능한 가장 낮은 값입니다. 패치 소스를 더 적게 사용하거나 패치를 더 적게 선택한 후 다시 패치해 보세요</string>
+    <string name="patcher_memory_adjustment_apply">%1$d MB로 낮추기</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">패치를 진행하는 중…</string>
     <string name="patcher_notification_text">패처로 돌아가려면 여기를 탭하세요</string>
@@ -496,6 +506,7 @@
     <string name="patched_app_save_failed_toast">패치된 앱을 저장할 수 없습니다</string>
     <string name="plugin_activity_dialog_body">이 플러그인을 사용하려면 사용자 상호작용이 필요합니다</string>
     <string name="patcher_process_exit_message">패처 프로세스를 코드 \'%s\'로 종료하였습니다</string>
+    <string name="patcher_heap_exhausted_message">패처가 %1$d MB 힙 메모리를 사용하는 동안 메모리가 부족해졌습니다. 이 앱은 선택한 패치를 적용하기에는 너무 큽니다. 패치 소스를 더 적게 사용하거나 패치를 더 적게 선택한 후 다시 패치해 보세요</string>
     <string name="install_app_success">성공적으로 설치하였습니다</string>
     <string name="install_app_fail">앱을 설치할 수 없습니다: %s</string>
     <string name="uninstall_app_fail">앱을 제거할 수 없습니다: %s</string>
@@ -567,6 +578,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">홈 화면에 인사말을 표시합니다</string>
     <string name="settings_appearance_app_grouping">앱 그룹화</string>
     <string name="settings_appearance_app_grouping_description">앱 출처 또는 사용자 정의 카테고리별로 앱을 그룹화하는 홈 화면 전환기를 표시하며, 비활성화할 경우에는 선택 사항을 유지합니다</string>
+    <string name="settings_appearance_sort_button">정렬 버튼</string>
+    <string name="settings_appearance_sort_button_description">홈 화면에 정렬 버튼을 표시합니다</string>
     <string name="settings_appearance_app_card_colors">앱 카드 색상</string>
     <string name="settings_appearance_app_card_colors_default">기본값</string>
     <string name="settings_appearance_app_card_colors_default_description">각 앱에 해당 앱 번들의 고유 색상을 적용합니다</string>

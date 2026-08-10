@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">A forrásaid naprakészek</string>
     <string name="home_sources_are_loading">Források betöltése...</string>
     <string name="home_search_apps">Alkalmazások keresése</string>
+    <string name="home_app_sort_title">Alkalmazások rendezése</string>
     <string name="home_app_sort_manual_description">Nyomja meg hosszan az alkalmazást, majd érintse meg a sorrend módosítása gombot</string>
     <string name="home_app_sort_recommended">Ajánlott sorrend</string>
     <string name="home_app_sort_recommended_description">Először a telepített és rögzített alkalmazások</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Csak akkor folytasd, ha megbízol ebben a segédalkalmazásban. A Morphe nem tudja ellenőrizni ennek az APK-nak az aláírását, így egy módosított fájl nem lenne felismerhető.</string>
     <string name="home_apk_helper_no_result">A segédalkalmazás nem adott vissza APK-t.</string>
     <string name="home_apk_helper_no_access">A segédalkalmazás nem engedte hozzáférést a visszaadott APK-hoz.</string>
+    <string name="home_apk_helper_no_package">A segédalkalmazás nem mondta meg, melyik telepített alkalmazást kell használni.</string>
+    <string name="home_apk_helper_wrong_package">A segédalkalmazás másik alkalmazást adott vissza, mint amelyiket éppen foltozzák.</string>
+    <string name="home_apk_helper_installed_unavailable">A Morphe nem tudta használni a telepített alkalmazást.</string>
+    <string name="home_apk_helper_installed_incompatible">A telepített verzió nem foltozható.</string>
     <string name="home_apk_use_saved">Mentett APK használata</string>
     <string name="home_apk_use_installed">Telepített APK használata</string>
     <string name="home_apk_use_installed_unverified">Nem sikerült ellenőrizni a telepített alkalmazás áláísás állását, ezért lehetséges, hogy már másolták.</string>
@@ -455,6 +460,7 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="battery_optimization_dialog_title">Háttérjavítási védelem</string>
     <string name="battery_optimization_dialog_description">Bizonyos eszközök leállíthatják a javítót, ha az alkalmazás minimalizálva van. Engedélyezze a Morphe akadálytalan futását akkumulátor-korlátozások nélkül, hogy a javítás megbízhatóan befejeződjön.</string>
     <string name="battery_optimization_not_now">Most nem</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Módosítás folyamatban…</string>
     <string name="patcher_notification_text">Koppints a módosítóhoz való visszatéréshez</string>
@@ -567,6 +573,8 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése a kezdőképernyőn</string>
     <string name="settings_appearance_app_grouping">Alkalmazáscsoportosítás</string>
     <string name="settings_appearance_app_grouping_description">Mutasson egy főképernyő váltót az alkalmazások forrás vagy saját kategóriák szerinti csoportosításához, a kiválasztást megőrizve, ha ki van kapcsolva</string>
+    <string name="settings_appearance_sort_button">Rendezés gomb</string>
+    <string name="settings_appearance_sort_button_description">Mutassa a rendezés gombot a kezdőképernyőn</string>
     <string name="settings_appearance_app_card_colors">Alkalmazáskártyák színei</string>
     <string name="settings_appearance_app_card_colors_default">Alapértelmezett</string>
     <string name="settings_appearance_app_card_colors_default_description">Minden alkalmazásnak a saját csomagjának színét adja</string>

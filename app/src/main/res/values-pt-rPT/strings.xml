@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">As tuas fontes estão atualizadas</string>
     <string name="home_sources_are_loading">A carregar fontes, por favor aguarda…</string>
     <string name="home_search_apps">Pesquisar aplicações</string>
+    <string name="home_app_sort_title">Ordenar aplicativos</string>
     <string name="home_app_sort_manual_description">Pressione e segure um aplicativo, depois toque no botão de reordenar</string>
     <string name="home_app_sort_recommended">Ordem recomendada</string>
     <string name="home_app_sort_recommended_description">Aplicativos instalados e fixados primeiro</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Continue apenas se você confiar neste aplicativo auxiliar. Morphe não pode verificar a assinatura deste APK, então um arquivo modificado não seria detectado</string>
     <string name="home_apk_helper_no_result">O aplicativo auxiliar não retornou um APK</string>
     <string name="home_apk_helper_no_access">O aplicativo auxiliar não concedeu acesso ao APK que retornou</string>
+    <string name="home_apk_helper_no_package">A aplicação auxiliar não disse qual aplicação instalada usar</string>
+    <string name="home_apk_helper_wrong_package">A aplicação auxiliar devolveu uma aplicação diferente da que está a ser modificada</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe não conseguiu usar a aplicação instalada</string>
+    <string name="home_apk_helper_installed_incompatible">A versão instalada não pode ser modificada</string>
     <string name="home_apk_use_saved">Usar APK salvo</string>
     <string name="home_apk_use_installed">Usar APK instalado</string>
     <string name="home_apk_use_installed_unverified">Não foi possível verificar a assinatura do aplicativo instalado, portanto, ele pode já estar modificado</string>
@@ -455,6 +460,7 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="battery_optimization_dialog_title">Proteção contra aplicação de patches em segundo plano</string>
     <string name="battery_optimization_dialog_description">Alguns dispositivos podem interromper o aplicador de patches quando o aplicativo é minimizado. Permita que o Morphe seja executado sem restrições de bateria para garantir que a aplicação de patches seja concluída de forma confiável</string>
     <string name="battery_optimization_not_now">Não agora</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Modificação em progresso…</string>
     <string name="patcher_notification_text">Toca para voltar ao modificador</string>
@@ -568,6 +574,8 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostrar uma mensagem de boas-vindas no ecrã principal</string>
     <string name="settings_appearance_app_grouping">Agrupamento de aplicativos</string>
     <string name="settings_appearance_app_grouping_description">Mostrar um seletor de tela inicial para agrupar aplicativos por origem ou suas próprias categorias, mantendo a seleção quando desativado</string>
+    <string name="settings_appearance_sort_button">Botão de ordenar</string>
+    <string name="settings_appearance_sort_button_description">Mostrar o botão de ordenar na tela inicial</string>
     <string name="settings_appearance_app_card_colors">Cores do cartão do aplicativo</string>
     <string name="settings_appearance_app_card_colors_default">Padrão</string>
     <string name="settings_appearance_app_card_colors_default_description">Atribua a cada aplicativo a cor do seu próprio pacote</string>

@@ -347,6 +347,7 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="battery_optimization_dialog_title">Foninio taisymo apsauga</string>
     <string name="battery_optimization_dialog_description">Kai kurie prietaisai gali sustabdyti taisytoją kai programa yra sumažinama. Leiskite Morphe veikti be baterijos apribojimų, kad pataisymas būtų įvykdytas patikimai</string>
     <string name="battery_optimization_not_now">Ne dabar</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Vyksta taisymas…</string>
     <string name="patcher_notification_text">Paspauskite, kad grįžtumėte į taisytoją</string>

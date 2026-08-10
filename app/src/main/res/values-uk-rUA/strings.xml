@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Ваші джерела актуальні</string>
     <string name="home_sources_are_loading">Джерела завантажуються, будь ласка, зачекайте…</string>
     <string name="home_search_apps">Пошук застосунків</string>
+    <string name="home_app_sort_title">Сортувати застосунки</string>
     <string name="home_app_sort_manual_description">Натисніть та утримуйте на картці застосунку, потім натисніть кнопку зміни порядку</string>
     <string name="home_app_sort_recommended">Рекомендований порядок</string>
     <string name="home_app_sort_recommended_description">Спочатку встановлені та закріплені застосунки</string>
@@ -174,6 +175,10 @@
     <string name="home_apk_helper_warning_unverified">Продовжуйте лише якщо довіряєте цьому допоміжному застосунку. Morphe не може перевірити підпис цього APK, тому змінений файл не буде виявлено</string>
     <string name="home_apk_helper_no_result">Допоміжний застосунок не повернув APK</string>
     <string name="home_apk_helper_no_access">Допоміжний застосунок не надав доступу до APK, який він повернув</string>
+    <string name="home_apk_helper_no_package">Допоміжний застосунок не вказав, який встановлений застосунок використовувати</string>
+    <string name="home_apk_helper_wrong_package">Допоміжний застосунок повернув інший застосунок, ніж той, що патчиться</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe не зміг використати встановлений застосунок</string>
+    <string name="home_apk_helper_installed_incompatible">Встановлену версію неможливо пропатчити</string>
     <string name="home_apk_use_saved">Збережений APK</string>
     <string name="home_apk_use_installed">Встановлений APK</string>
     <string name="home_apk_use_installed_unverified">Не вдалося перевірити підпис встановленого застосунку, тому він може бути вже пропатчений</string>
@@ -456,6 +461,11 @@
     <string name="battery_optimization_dialog_title">Захист патчингу у фоні</string>
     <string name="battery_optimization_dialog_description">Деякі пристрої можуть зупиняти патчер, коли застосунок згорнуто. Дозвольте Morphe працювати без обмежень батареї, щоб патчинг завершувався стабільно</string>
     <string name="battery_optimization_not_now">Не зараз</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Недостатньо пам\'яті</string>
+    <string name="patcher_memory_adjustment_description">Патчер було зупинено системою під час виконання з обмеженням пам\'яті %1$d МБ. Зниження ліміту до %2$d МБ зменшує розмір цілі патчера та може дозволити завершити виконання</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Патчер було зупинено системою під час виконання з обмеженням пам\'яті %1$d МБ, яке вже є мінімально можливим. Спробуйте патчити з меншою кількістю джерел патчів або оберіть менше патчів</string>
+    <string name="patcher_memory_adjustment_apply">Знизити до %1$d МБ</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Триває патчинг…</string>
     <string name="patcher_notification_text">Натисніть, щоб повернутися до патчера</string>
@@ -497,6 +507,7 @@
     <string name="patched_app_save_failed_toast">Не вдалося зберегти патчений застосунок</string>
     <string name="plugin_activity_dialog_body">Для продовження потрібна взаємодія користувача з цим плагіном</string>
     <string name="patcher_process_exit_message">Процес патчера завершився з кодом %s</string>
+    <string name="patcher_heap_exhausted_message">Патчеру не вистачило пам\'яті з heap розміром %1$d МБ. Цей застосунок занадто великий для вибраних патчів. Спробуйте патчити з меншою кількістю джерел патчів або оберіть менше патчів</string>
     <string name="install_app_success">Встановлено успішно</string>
     <string name="install_app_fail">Неможливо встановити застосунок: %s</string>
     <string name="uninstall_app_fail">Не вдалося видалити застосунок: %s</string>
@@ -569,6 +580,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показувати вітальне повідомлення на головному екрані</string>
     <string name="settings_appearance_app_grouping">Групування застосунків</string>
     <string name="settings_appearance_app_grouping_description">Показує перемикач на головному екрані для групування застосунків за джерелом або власними категоріями, зберігаючи вибір при вимкненні</string>
+    <string name="settings_appearance_sort_button">Кнопка сортування</string>
+    <string name="settings_appearance_sort_button_description">Показувати кнопку сортування на головному екрані</string>
     <string name="settings_appearance_app_card_colors">Кольори картки застосунку</string>
     <string name="settings_appearance_app_card_colors_default">Стандартний</string>
     <string name="settings_appearance_app_card_colors_default_description">Надавати кожному застосунку колір його власного пакета</string>

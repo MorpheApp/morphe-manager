@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Tá do foinsí suas chun dáta</string>
     <string name="home_sources_are_loading">Tá na foinsí ag lódáil, fan le do thoil…</string>
     <string name="home_search_apps">Cuardaigh aipeanna</string>
+    <string name="home_app_sort_title">Sórtáil aipeanna</string>
     <string name="home_app_sort_manual_description">Brúigh go fada ar aip, ansin tapáil an cnaipe athordaithe</string>
     <string name="home_app_sort_recommended">Ordú molta</string>
     <string name="home_app_sort_recommended_description">Aipeanna suiteáilte agus bioráilte ar dtús</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Ná lean ar aghaidh ach amháin má tá muinín agat as an aip chúnta seo. Ní féidir le Morphe síniú an APK seo a fhíorú, mar sin ní bhraithfí comhad modhnaithe.</string>
     <string name="home_apk_helper_no_result">Níor thug an aip chúnta APK ar ais</string>
     <string name="home_apk_helper_no_access">Níor dheonaigh an aip chúnta rochtain ar an APK a thug sí ar ais</string>
+    <string name="home_apk_helper_no_package">Níor dúirt an aip chúnta cén aip suiteáilte atá le húsáid</string>
+    <string name="home_apk_helper_wrong_package">D\'fhill an aip chúnta aip eile seachas an ceann a bhí á phaisteáil</string>
+    <string name="home_apk_helper_installed_unavailable">Níorbh fhéidir le Morphe an aip suiteáilte a úsáid</string>
+    <string name="home_apk_helper_installed_incompatible">Ní féidir an leagan suiteáilte a phaisteáil</string>
     <string name="home_apk_use_saved">Úsáid APK sábháilte</string>
     <string name="home_apk_use_installed">Úsáid APK suiteáilte</string>
     <string name="home_apk_use_installed_unverified">Níorbh fhéidir síniú an aip suiteáilte a fhíorú, mar sin d\'fhéadfadh sé go bhfuil paiste air cheana féin</string>
@@ -455,6 +460,7 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="battery_optimization_dialog_title">Cosaint paisteála cúlra</string>
     <string name="battery_optimization_dialog_description">D\'fhéadfadh roinnt feistí an paiste a stopadh nuair a íoslaghdaítear an aip. Lig do Morphe rith gan srianta ceallraí chun a chinntiú go gcríochnaítear an paiste go hiontaofa</string>
     <string name="battery_optimization_not_now">Ní anois</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Paisteáil ar siúl…</string>
     <string name="patcher_notification_text">Tapáil chun filleadh ar an paisteálaí</string>
@@ -568,6 +574,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Taispeáin teachtaireacht beannachta ar an scáileán baile</string>
     <string name="settings_appearance_app_grouping">Grúpáil aipeanna</string>
     <string name="settings_appearance_app_grouping_description">Taispeáin an roghchlár scáileáin bhaile chun aipeanna a ghrúpáil de réir foinse nó do chatagóirí féin, agus an rogha a choinneáil nuair a bhíonn sé múchta</string>
+    <string name="settings_appearance_sort_button">Cnaipe sórtála</string>
+    <string name="settings_appearance_sort_button_description">Taispeáin an cnaipe sórtála ar an scáileán baile</string>
     <string name="settings_appearance_app_card_colors">Dathanna cártaí aipeanna</string>
     <string name="settings_appearance_app_card_colors_default">Réamhshocrú</string>
     <string name="settings_appearance_app_card_colors_default_description">Tabhair dath a phacáiste féin do gach aip</string>

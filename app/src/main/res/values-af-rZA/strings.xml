@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Jou oorspronge is opgedateer</string>
     <string name="home_sources_are_loading">Oorsprong word gelaai, wag asseblief…</string>
     <string name="home_search_apps">Soek programme</string>
+    <string name="home_app_sort_title">Sorteer programme</string>
     <string name="home_app_sort_manual_description">Druk lank op \'n program, en tik dan op die herordeneer knoppie</string>
     <string name="home_app_sort_recommended">Aanbevole volgorde</string>
     <string name="home_app_sort_recommended_description">Geïnstalleerde en vasgestelde programme eerste</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Gaan slegs voort as jy hierdie helper-toepassing vertrou. Morphe kan nie die handtekening van hierdie APK verifieer nie, so \'n gewysigde lêer sal nie opgespoor word nie</string>
     <string name="home_apk_helper_no_result">Die helper-toepassing het nie \'n APK teruggegee nie</string>
     <string name="home_apk_helper_no_access">Die helper-toepassing het nie toegang tot die APK wat dit teruggegee het, toegelaat nie</string>
+    <string name="home_apk_helper_no_package">Die hulptoepassing het nie gesê watter geïnstalleerde toepassing gebruik moet word nie</string>
+    <string name="home_apk_helper_wrong_package">Die hulptoepassing het \'n ander toepassing teruggegee as die een wat gepatch word</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe kon nie die geïnstalleerde toepassing gebruik nie</string>
+    <string name="home_apk_helper_installed_incompatible">Die geïnstalleerde weergawe kan nie gepatch word nie</string>
     <string name="home_apk_use_saved">Gebruik gestoorde APK</string>
     <string name="home_apk_use_installed">Gebruik geïnstalleerde APK</string>
     <string name="home_apk_use_installed_unverified">Kon nie die handtekening van die geïnstalleerde app verifieer nie, dus is dit moontlik reeds gemodifiseer</string>
@@ -455,6 +460,11 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="battery_optimization_dialog_title">Beskerming teen agtergrondpleister</string>
     <string name="battery_optimization_dialog_description">Sommige toestelle kan die pleister stop wanneer die toepassing geminimaliseer word. Laat Morphe sonder batterybeperkings loop om te verseker dat die pleister betroubaar voltooi word.</string>
     <string name="battery_optimization_not_now">Nie nou nie</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Nie genoeg geheue</string>
+    <string name="patcher_memory_adjustment_description">Die patcher is deur die stelsel gestop terwyl dit met \'n %1$d MB geheueperk loop. Deur die perk na %2$d MB te verlaag, maak die patcher \'n kleiner teiken en kan die loop laat klaarmaak.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Die patcher is deur die stelsel gestop terwyl dit met \'n %1$d MB geheueperk loop, wat reeds die laagste beskikbare is. Probeer om met minder patchbronne te patch, of kies minder patches.</string>
+    <string name="patcher_memory_adjustment_apply">Verlaag na %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching aan die gang…</string>
     <string name="patcher_notification_text">Tik om terug te keer na die patcher</string>
@@ -568,6 +578,8 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Wys \'n groet-boodskap op die tuisskerm</string>
     <string name="settings_appearance_app_grouping">Toepassingsgroepering</string>
     <string name="settings_appearance_app_grouping_description">Wys \'n tuisskermskakelaar om toepassings volgens bron of jou eie kategorieë te groepeer, en die keuse te behou wanneer dit af is</string>
+    <string name="settings_appearance_sort_button">Sorteer knoppie</string>
+    <string name="settings_appearance_sort_button_description">Wys die sorteer knoppie op die tuisskerm</string>
     <string name="settings_appearance_app_card_colors">App-kaartkleure</string>
     <string name="settings_appearance_app_card_colors_default">Verstek</string>
     <string name="settings_appearance_app_card_colors_default_description">Gee elke app die kleur van sy eie bundel</string>

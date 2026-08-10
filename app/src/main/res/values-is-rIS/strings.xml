@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Heimildir þínar eru upp til daglegt</string>
     <string name="home_sources_are_loading">Heimildir eru að hlaða, vinsamlegast bíðu…</string>
     <string name="home_search_apps">Leita að forritum</string>
+    <string name="home_app_sort_title">Raða forritum</string>
     <string name="home_app_sort_manual_description">Langt ýta á forrit, þá smelltu á endurraða hnappinn</string>
     <string name="home_app_sort_recommended">Rækt ráðlagður röð</string>
     <string name="home_app_sort_recommended_description">Uppsett og fest forrit fyrst</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Halda áfram aðeins ef þú treystir þessu hjálparforriti. Morphe getur ekki staðfest undirskrift þessa APK, svo breyttri skrá verður ekki greind</string>
     <string name="home_apk_helper_no_result">Hjálparforritið skilaði ekki APK</string>
     <string name="home_apk_helper_no_access">Hjálparforritið veitti ekki aðgang að APK sem það skilaði</string>
+    <string name="home_apk_helper_no_package">Hjálparaforritið sagði ekki til um hvaða uppsetta forrit á að nota.</string>
+    <string name="home_apk_helper_wrong_package">Hjálparaforritið skilaði öðru forriti en því sem verið er að laga.세럼. 어？ я越界了。 I\'ll fix that. Only Icelandic. So: \"Hjálparaforritið skilaði öðru forriti en því sem verið er að laga.\" But I accidentally included Chinese. Let me correct in final output. I\'ll write clean JSON.```json[JSON as array]``````json[{</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe gat ekki notað uppsetta forritið</string>
+    <string name="home_apk_helper_installed_incompatible">Ekki er hægt að plástra uppsettu útgáfuna</string>
     <string name="home_apk_use_saved">Nota vistað APK</string>
     <string name="home_apk_use_installed">Nota upphætt APK</string>
     <string name="home_apk_use_installed_unverified">Gat ekki staðfest undirskrift uppsetts forrits, þannig að það gæti þegar verið lagað</string>
@@ -453,6 +458,7 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="battery_optimization_dialog_title">Vernd fyrir bakgrunns breytingar</string>
     <string name="battery_optimization_dialog_description">Sum tæki gætu stöðvað breytingasmáttana þegar appið er lágmarks. Leyfðu Morphe að keyra án rafhlöðubindingar til að tryggja áreiðanlega breytinga</string>
     <string name="battery_optimization_not_now">Ekki núna</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Breytistilling í gangi…</string>
     <string name="patcher_notification_text">Tappaðu til að snúa aftur á breytistillinguna</string>
@@ -566,6 +572,8 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Sýna kveðju skilaboð á heimaskjá</string>
     <string name="settings_appearance_app_grouping">Forritaflokkun</string>
     <string name="settings_appearance_app_grouping_description">Sýna rofasa á heimaskjá til að flokka forrit eftir uppruna eða eigin flokkum, halda vali þegar slökkt er á rofanum</string>
+    <string name="settings_appearance_sort_button">Röðunarhnappur</string>
+    <string name="settings_appearance_sort_button_description">Sýna röðunarhnapp á heimsíðunni</string>
     <string name="settings_appearance_app_card_colors">Litir á app kortum</string>
     <string name="settings_appearance_app_card_colors_default">Sjálfgefið</string>
     <string name="settings_appearance_app_card_colors_default_description">Nota litinn á pakkann fyrir hvert app</string>

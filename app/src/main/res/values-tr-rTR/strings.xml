@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Kaynaklarınız güncel</string>
     <string name="home_sources_are_loading">Kaynaklar yükleniyor, lütfen bekleyin…</string>
     <string name="home_search_apps">Uygulamaları ara</string>
+    <string name="home_app_sort_title">Uygulamaları sırala</string>
     <string name="home_app_sort_manual_description">Bir uygulamaya uzun basın, ardından yeniden sıralama düğmesine dokunun</string>
     <string name="home_app_sort_recommended">Önerilen sıra</string>
     <string name="home_app_sort_recommended_description">Önce yüklenen ve sabitlenen uygulamalar</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Bu yardımcı uygulamayı yalnızca güveniyorsanız devam edin. Morphe bu APK\'nın imzasını doğrulayamıyor, bu nedenle değiştirilmiş bir dosya tespit edilemez.</string>
     <string name="home_apk_helper_no_result">Yardımcı uygulama bir APK döndürmedi.</string>
     <string name="home_apk_helper_no_access">Yardımcı uygulama, döndürdüğü APK\'ya erişim izni vermedi.</string>
+    <string name="home_apk_helper_no_package">Yardımcı uygulama hangi yüklü uygulamanın kullanılacağını belirtmedi</string>
+    <string name="home_apk_helper_wrong_package">Yardımcı uygulama yamalanan uygulamadan farklı bir uygulama döndürdü</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe yüklü uygulamayı kullanamadı</string>
+    <string name="home_apk_helper_installed_incompatible">Yüklü sürüm yamalanamıyor</string>
     <string name="home_apk_use_saved">Kayıtlı APK\'yi kullan</string>
     <string name="home_apk_use_installed">Yüklü APK\'yi kullan</string>
     <string name="home_apk_use_installed_unverified">Yüklenen uygulamanın imzası doğrulanamadı, bu nedenle zaten yama uygulanmış olabilir</string>
@@ -455,6 +460,7 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="battery_optimization_dialog_title">Arka plan yama koruması</string>
     <string name="battery_optimization_dialog_description">Bazı cihazlar, uygulama küçültüldüğünde patcher\'ı durdurabilir. Yamalamanın güvenilir bir şekilde tamamlanmasını sağlamak için Morphe\'nin pil kısıtlamaları olmadan çalışmasına izin verin</string>
     <string name="battery_optimization_not_now">Şimdi değil</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Yamalama devam ediyor…</string>
     <string name="patcher_notification_text">Patcher\'a dönmek için dokunun</string>
@@ -567,6 +573,8 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ana ekranda bir selamlama mesajı göster</string>
     <string name="settings_appearance_app_grouping">Uygulama gruplandırma</string>
     <string name="settings_appearance_app_grouping_description">Uygulamaları kaynaklarına veya kendi kategorilerinize göre gruplamak için bir ana ekran değiştirici göster. Kapalıyken seçimi korur</string>
+    <string name="settings_appearance_sort_button">Sıralama düğmesi</string>
+    <string name="settings_appearance_sort_button_description">Ana ekranda sıralama düğmesini göster</string>
     <string name="settings_appearance_app_card_colors">Uygulama kartı renkleri</string>
     <string name="settings_appearance_app_card_colors_default">Varsayılan</string>
     <string name="settings_appearance_app_card_colors_default_description">Her uygulamaya kendi paketinin rengini ver</string>

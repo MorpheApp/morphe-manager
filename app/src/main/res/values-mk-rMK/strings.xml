@@ -325,6 +325,7 @@
     <string name="battery_optimization_dialog_title">Заштита од закрпување во позадина</string>
     <string name="battery_optimization_dialog_description">Некои уреди може да го запре закрпувачот кога апликацијата е минимизирана. Дозволете на Morphe да работи без ограничувања на батеријата за да се осигури закрпувањето целосно</string>
     <string name="battery_optimization_not_now">Не сега</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Поправување во тек…</string>
     <string name="patcher_notification_text">Допрете за да се вратите на поправувачот</string>

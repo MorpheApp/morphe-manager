@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Viri so posodobljeni</string>
     <string name="home_sources_are_loading">Viri se nalagajo, počakajte…</string>
     <string name="home_search_apps">Poišči aplikacije</string>
+    <string name="home_app_sort_title">Razvrsti aplikacije</string>
     <string name="home_app_sort_manual_description">Dolgo pritisnite aplikacijo, nato tapnite gumb za ponovno razvrstitev</string>
     <string name="home_app_sort_recommended">Priporočen vrstni red</string>
     <string name="home_app_sort_recommended_description">Nameščene in pripete aplikacije naj bodo prve</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Nadaljuj samo, če zaupaš temu pomožnemu programu. Morphe ne more preveriti podpisa tega APK-ja, zato spremenjena datoteka ne bi bila zaznana.</string>
     <string name="home_apk_helper_no_result">Pomožni program ni vrnil APK-ja</string>
     <string name="home_apk_helper_no_access">Pomožni program ni odobril dostopa do APK-ja, ki ga je vrnil</string>
+    <string name="home_apk_helper_no_package">Pomožna aplikacija ni povedala, katero nameščeno aplikacijo uporabiti.</string>
+    <string name="home_apk_helper_wrong_package">Pomožna aplikacija je vrnila drugo aplikacijo, kot je tista, ki se popravlja.</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe ni mogel uporabiti nameščene aplikacije.</string>
+    <string name="home_apk_helper_installed_incompatible">Nameščene različice ni mogoče popraviti.</string>
     <string name="home_apk_use_saved">Uporabite shranjen APK</string>
     <string name="home_apk_use_installed">Uporabite nameščen APK</string>
     <string name="home_apk_use_installed_unverified">Ni je bilo mogoče preveriti podpis nameščenega programa, zato je morda že spremenjen.</string>
@@ -455,6 +460,7 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="battery_optimization_dialog_title">Zaščita popravljanja v ozadju</string>
     <string name="battery_optimization_dialog_description">Nekatere naprave lahko ustavijo popravek, ko je aplikacija minimizirana. Dovolite programu Morphe, da se izvaja brez omejitev baterije, da zagotovite zanesljivo dokončanje popravljanja.</string>
     <string name="battery_optimization_not_now">Pozneje</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Popravljanje v teku …</string>
     <string name="patcher_notification_text">Dotaknite se, da se vrnete k popravilu</string>
@@ -568,6 +574,8 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Prikaži pozdravno sporočilo na začetnem zaslonu</string>
     <string name="settings_appearance_app_grouping">Grupiranje aplikacij</string>
     <string name="settings_appearance_app_grouping_description">Prikaži stikalo na začetnem zaslonu za grupiranje aplikacij po izvoru ali lastnih kategorijah, obdrži izbor, ko je izklopljeno</string>
+    <string name="settings_appearance_sort_button">Gumb za razvrščanje</string>
+    <string name="settings_appearance_sort_button_description">Prikaži gumb za razvrščanje na začetnem zaslonu</string>
     <string name="settings_appearance_app_card_colors">Barve kartic aplikacij</string>
     <string name="settings_appearance_app_card_colors_default">Privzeto</string>
     <string name="settings_appearance_app_card_colors_default_description">Daj vsaki aplikaciji barvo njenega paketa</string>

@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">แหล่งทีมาของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="home_sources_are_loading">กำลังโหลดแหล่งที่มา กรุณารอสักครู่…</string>
     <string name="home_search_apps">ค้นหาแอป</string>
+    <string name="home_app_sort_title">จัดเรียงแอป</string>
     <string name="home_app_sort_manual_description">แตะแอปค้างไว้ แล้วแตะปุ่มจัดเรียงใหม่</string>
     <string name="home_app_sort_recommended">เรียงตามที่แนะนำ</string>
     <string name="home_app_sort_recommended_description">แอปที่ติดตั้งและตรึงไว้ก่อน</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">ดำเนินการต่อหากคุณเชื่อถือแอปตัวช่วยนี้เท่านั้น Morphe ไม่สามารถยืนยันลายเซ็นของ APK นี้ ดังนั้นจึงจะตรวจไม่พบไฟล์ที่แก้ไข</string>
     <string name="home_apk_helper_no_result">แอปตัวช่วยไม่ได้ส่งคืน APK</string>
     <string name="home_apk_helper_no_access">แอปตัวช่วยไม่ได้ให้สิทธิ์การเข้าถึง APK ที่ส่งคืน</string>
+    <string name="home_apk_helper_no_package">แอปตัวช่วยไม่ได้ระบุว่าจะใช้แอปที่ติดตั้งไว้ตัวใด</string>
+    <string name="home_apk_helper_wrong_package">แอปตัวช่วยส่งคืนแอปอื่นที่ไม่ใช่แอปที่กำลังแพตช์</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe ไม่สามารถใช้แอปที่ติดตั้งอยู่ได้</string>
+    <string name="home_apk_helper_installed_incompatible">ไม่สามารถแพตช์เวอร์ชันที่ติดตั้งอยู่ได้</string>
     <string name="home_apk_use_saved">ใช้ APK ที่บันทึกไว้</string>
     <string name="home_apk_use_installed">ใช้ APK ที่ติดตั้งไว้</string>
     <string name="home_apk_use_installed_unverified">ไม่สามารถตรวจสอบลายเซ็นของแอปที่ติดตั้งได้ ดังนั้นจึงอาจได้รับการแพตช์แล้ว</string>
@@ -455,6 +460,7 @@
     <string name="battery_optimization_dialog_title">การป้องกันการปรับแก้เบื้องหลัง</string>
     <string name="battery_optimization_dialog_description">อุปกรณ์บางเครื่องอาจหยุดโปรแกรมปรับแก้เมื่อแอปพลิเคชันถูกลดขนาด อนุญาตให้ Morphe ทำงานโดยไม่มีข้อจำกัดด้านแบตเตอรี่เพื่อให้แน่ใจว่าการปรับแก้เสร็จสมบูรณ์ได้อย่างน่าเชื่อถือ</string>
     <string name="battery_optimization_not_now">ไม่ใช่ตอนนี้</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">กำลังดำเนินการแพตช์…</string>
     <string name="patcher_notification_text">แตะเพื่อกลับไปยังตัวแพตช์</string>
@@ -568,6 +574,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">แสดงข้อความทักทายบนหน้าจอหลัก</string>
     <string name="settings_appearance_app_grouping">การจัดกลุ่มแอป</string>
     <string name="settings_appearance_app_grouping_description">แสดงตัวสลับหน้าจอหลักเพื่อจัดกลุ่มแอปตามแหล่งที่มาหรือตามหมวดหมู่ของคุณเอง โดยจะเก็บการเลือกไว้เมื่อปิด</string>
+    <string name="settings_appearance_sort_button">ปุ่มเรียงลำดับ</string>
+    <string name="settings_appearance_sort_button_description">แสดงปุ่มเรียงลำดับบนหน้าจอหลัก</string>
     <string name="settings_appearance_app_card_colors">สีการ์ดแอป</string>
     <string name="settings_appearance_app_card_colors_default">ค่าเริ่มต้น</string>
     <string name="settings_appearance_app_card_colors_default_description">กำหนดสีให้บันเดิลของแต่ละแอป</string>

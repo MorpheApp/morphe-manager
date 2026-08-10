@@ -235,6 +235,7 @@ Elixe outro APK</string>
     <string name="patcher_step_group_patching">Parcheando</string>
     <string name="patcher_step_group_saving">Gardando</string>
     <!-- Battery optimization pre-flight dialog -->
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Parcheado en progreso...</string>
     <string name="patcher_notification_text">Toque para volver ao parcheador</string>

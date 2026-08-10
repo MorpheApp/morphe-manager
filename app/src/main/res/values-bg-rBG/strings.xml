@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Вашите източници са актуални</string>
     <string name="home_sources_are_loading">Зареждане на източниците, моля изчакайте…</string>
     <string name="home_search_apps">Търсене на приложения</string>
+    <string name="home_app_sort_title">Сортиране на приложения</string>
     <string name="home_app_sort_manual_description">Натиснете и задръжте приложение, след което докоснете бутона за пренареждане</string>
     <string name="home_app_sort_recommended">Препоръчителен ред</string>
     <string name="home_app_sort_recommended_description">Инсталирани и закрепени приложения първо</string>
@@ -174,6 +175,9 @@
     <string name="home_apk_helper_warning_unverified">Продължете само ако имате доверие на това помощно приложение. Morphe не може да провери подписа на този APK файл, така че модифициран файл няма да бъде открит</string>
     <string name="home_apk_helper_no_result">Помощното приложение не върна APK файл</string>
     <string name="home_apk_helper_no_access">Помощното приложение не предостави достъп до APK файла, който върна</string>
+    <string name="home_apk_helper_no_package">Помощното приложение не посочи кое инсталирано приложение да се използва</string>
+    <string name="home_apk_helper_wrong_package">Помощното приложение върна различно приложение от това, което се кърпи.</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe не можа да използва инсталираното приложение</string>
     <string name="home_apk_use_saved">Използвайте запазен APK</string>
     <string name="home_apk_use_installed">Използвайте инсталиран APK</string>
     <string name="home_apk_use_installed_unverified">Не успяхме да потвърдим подписа на инсталираното приложение, затова е възможно вече да е променено</string>
@@ -456,6 +460,11 @@
     <string name="battery_optimization_dialog_title">Защита от корекции във фонов режим</string>
     <string name="battery_optimization_dialog_description">Някои устройства може да спрат коректора, когато приложението е минимизирано. Разрешете на Morphe да работи без ограничения на батерията, за да сте сигурни, че корекциите ще бъдат завършени надеждно.</string>
     <string name="battery_optimization_not_now">Не сега</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Недостатъчно памет</string>
+    <string name="patcher_memory_adjustment_description">Патчерът беше спрян от системата, докато работеше с лимит на паметта от %1$d MB. Намаляването на лимита до %2$d MB прави патчера по-малка цел и може да позволи на изпълнението да завърши.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Патчерът беше спрян от системата, докато работеше с лимит на паметта от %1$d MB, който вече е най-ниският наличен. Опитайте се да патчвате с по-малко източници на пачове или изберете по-малко пачове.</string>
+    <string name="patcher_memory_adjustment_apply">Намали до %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Morphe</string>
     <string name="patcher_notification_text">Toast</string>
@@ -569,6 +578,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показване на поздравително съобщение на началния екран</string>
     <string name="settings_appearance_app_grouping">Групиране на приложения</string>
     <string name="settings_appearance_app_grouping_description">Покажи превключвател на началния екран за групиране на приложения по източник или по твои категории, запазвайки селекцията, когато е изключено</string>
+    <string name="settings_appearance_sort_button">Бутон за сортиране</string>
+    <string name="settings_appearance_sort_button_description">Покажи бутона за сортиране на началния екран</string>
     <string name="settings_appearance_app_card_colors">Цветове на картите на приложенията</string>
     <string name="settings_appearance_app_card_colors_default">По подразбиране</string>
     <string name="settings_appearance_app_card_colors_default_description">Присвояване на цвета на пакета на всяко приложение</string>

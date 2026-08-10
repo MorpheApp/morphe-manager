@@ -2,7 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Altre app</string>
-    <string name="home_not_patched_yet">Non ancora patchato</string>
+    <string name="home_not_patched_yet">Non ancora modificato</string>
     <string name="home_no_patches_available">
 Nessuna patch disponibile</string>
     <string name="home_app_hide_title">Nascondere questa app?</string>
@@ -37,6 +37,7 @@ Nessuna patch disponibile</string>
     <string name="home_update_success_subtitle">Le tue fonti sono aggiornate</string>
     <string name="home_sources_are_loading">Le fonti si stanno caricando, si prega di attendere…</string>
     <string name="home_search_apps">Cerca app</string>
+    <string name="home_app_sort_title">Ordina app</string>
     <string name="home_app_sort_manual_description">Tieni premuta un\'app, quindi tocca il pulsante di riordino</string>
     <string name="home_app_sort_recommended">Ordine consigliato</string>
     <string name="home_app_sort_recommended_description">App installate e fissate per prime</string>
@@ -174,6 +175,10 @@ Nessuna patch disponibile</string>
     <string name="home_apk_helper_warning_unverified">Continua solo se ti fidi di questa app di supporto. Morphe non può verificare la firma di questo APK, quindi un file modificato non verrebbe rilevato</string>
     <string name="home_apk_helper_no_result">L\'app di supporto non ha restituito un APK</string>
     <string name="home_apk_helper_no_access">L\'app di supporto non ha concesso l\'accesso all\'APK restituito</string>
+    <string name="home_apk_helper_no_package">L\'app helper non ha indicato quale app installata utilizzare</string>
+    <string name="home_apk_helper_wrong_package">L\'app helper ha restituito un\'app diversa da quella in fase di patch</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe non ha potuto utilizzare l\'app installata</string>
+    <string name="home_apk_helper_installed_incompatible">La versione installata non può essere patchata</string>
     <string name="home_apk_use_saved">Usa APK salvato</string>
     <string name="home_apk_use_installed">Usa APK installato</string>
     <string name="home_apk_use_installed_unverified">Impossibile verificare la firma dell\'app installata, pertanto potrebbe essere già stata modificata</string>
@@ -456,6 +461,7 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="battery_optimization_dialog_title">Protezione applicazione patch in background</string>
     <string name="battery_optimization_dialog_description">Alcuni dispositivi potrebbero interrompere l\'applicazione patch quando l\'app è minimizzata. Consenti a Morphe di funzionare senza restrizioni sulla batteria per garantire che l\'applicazione patch venga completata in modo affidabile.</string>
     <string name="battery_optimization_not_now">Non ora</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching in corso…</string>
     <string name="patcher_notification_text">Tocca per tornare al patcher</string>
@@ -569,6 +575,8 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostra un messaggio di saluto nella schermata principale</string>
     <string name="settings_appearance_app_grouping">Raggruppamento app</string>
     <string name="settings_appearance_app_grouping_description">Mostra un selettore schermata Home per raggruppare le app per origine o per le tue categorie, mantenendo la selezione quando disattivato</string>
+    <string name="settings_appearance_sort_button">Pulsante Ordina</string>
+    <string name="settings_appearance_sort_button_description">Mostra il pulsante Ordina nella schermata Home</string>
     <string name="settings_appearance_app_card_colors">Colori delle schede app</string>
     <string name="settings_appearance_app_card_colors_default">Predefinita</string>
     <string name="settings_appearance_app_card_colors_default_description">Assegna a ciascuna app il colore del proprio bundle</string>

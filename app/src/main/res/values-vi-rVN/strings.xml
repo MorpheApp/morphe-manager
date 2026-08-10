@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Đã cập nhật tất cả nguồn lên mới nhất</string>
     <string name="home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
     <string name="home_search_apps">Tìm ứng dụng</string>
+    <string name="home_app_sort_title">Sắp xếp ứng dụng</string>
     <string name="home_app_sort_manual_description">Bấm giữ một ứng dụng, sau đó chọn nút sắp xếp lại</string>
     <string name="home_app_sort_recommended">Thứ tự đề xuất</string>
     <string name="home_app_sort_recommended_description">Ưu tiên ứng dụng đã cài đặt và được ghim trước</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Chỉ tiếp tục nếu bạn tin tưởng ứng dụng hỗ trợ này. Morphe không thể xác minh chữ ký của APK này, vì vậy một tệp đã sửa đổi sẽ không được phát hiện</string>
     <string name="home_apk_helper_no_result">Ứng dụng hỗ trợ không trả về APK</string>
     <string name="home_apk_helper_no_access">Ứng dụng hỗ trợ không cấp quyền truy cập vào APK mà nó trả về</string>
+    <string name="home_apk_helper_no_package">Ứng dụng trợ giúp không cho biết ứng dụng đã cài đặt nào để sử dụng</string>
+    <string name="home_apk_helper_wrong_package">Ứng dụng trợ giúp trả về một ứng dụng khác với ứng dụng đang được vá</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe không thể sử dụng ứng dụng đã cài đặt</string>
+    <string name="home_apk_helper_installed_incompatible">Phiên bản đã cài đặt không thể vá được</string>
     <string name="home_apk_use_saved">Sử dụng APK đã lưu</string>
     <string name="home_apk_use_installed">Sử dụng APK đã cài đặt</string>
     <string name="home_apk_use_installed_unverified">Không thể xác minh chữ ký của ứng dụng đã cài đặt, vì vậy ứng dụng có thể đã bị sửa đổi</string>
@@ -455,6 +460,7 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="battery_optimization_dialog_title">Bảo vệ khi vá nền</string>
     <string name="battery_optimization_dialog_description">Một số thiết bị có thể tắt trình vá khi ứng dụng bị thu nhỏ. Cho phép Morphe chạy không giới hạn pin để quá trình vá hoàn thành ổn định</string>
     <string name="battery_optimization_not_now">Từ từ</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Đang vá…</string>
     <string name="patcher_notification_text">Bấm để quay trở lại trình vá</string>
@@ -568,6 +574,8 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_greeting_phrases_subtitle">Hiện thông điệp trên trang chủ</string>
     <string name="settings_appearance_app_grouping">Nhóm ứng dụng</string>
     <string name="settings_appearance_app_grouping_description">Hiển thị công tắc màn hình chính để nhóm ứng dụng theo nguồn hoặc danh mục của riêng bạn, giữ lựa chọn khi tắt</string>
+    <string name="settings_appearance_sort_button">Nút sắp xếp</string>
+    <string name="settings_appearance_sort_button_description">Hiển thị nút sắp xếp trên màn hình chính</string>
     <string name="settings_appearance_app_card_colors">Màu thẻ ứng dụng</string>
     <string name="settings_appearance_app_card_colors_default">Mặc định</string>
     <string name="settings_appearance_app_card_colors_default_description">Gán màu của gói ứng dụng cho mỗi ứng dụng</string>

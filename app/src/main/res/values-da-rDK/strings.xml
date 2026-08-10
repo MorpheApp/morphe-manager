@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Dine kilder er opdaterede</string>
     <string name="home_sources_are_loading">Kilder hentes, vent venligst…</string>
     <string name="home_search_apps">Søg apps</string>
+    <string name="home_app_sort_title">Sortér apps</string>
     <string name="home_app_sort_manual_description">Hold en app nede, og tryk derefter på omdør knappen</string>
     <string name="home_app_sort_recommended">Anbefalet rækkefølge</string>
     <string name="home_app_sort_recommended_description">Installerede og fastgjorte apps først</string>
@@ -173,6 +174,8 @@
     <string name="home_apk_helper_warning_unverified">Fortsæt kun, hvis du stoler på denne hjælpeapp. Morphe kan ikke verificere signaturen af denne APK, så en modificeret fil vil ikke blive opdaget</string>
     <string name="home_apk_helper_no_result">Hjælpeappen returnerede ikke en APK</string>
     <string name="home_apk_helper_no_access">Hjælpeappen gav ikke adgang til den APK, den returnerede</string>
+    <string name="home_apk_helper_no_package">Hjælpeappen angav ikke, hvilken installeret app der skulle bruges</string>
+    <string name="home_apk_helper_wrong_package">Hjælpeappen returnerede en anden app end den, der bliver patchet</string>
     <string name="home_apk_use_saved">Brug gemt APK</string>
     <string name="home_apk_use_installed">Brug installeret APK</string>
     <string name="home_apk_use_installed_unverified">Kunne ikke verificere signaturen af den installerede app, så den kan allerede være blevet patchet</string>
@@ -455,6 +458,11 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="battery_optimization_dialog_title">Beskyttelse mod baggrundspatching</string>
     <string name="battery_optimization_dialog_description">Nogle enheder kan stoppe patcheren, når appen minimeres. Tillad Morphe at køre uden batterirestriktioner for at sikre, at patching fuldføres pålideligt</string>
     <string name="battery_optimization_not_now">Ikke nu</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Ikke nok hukommelse</string>
+    <string name="patcher_memory_adjustment_description">Patcheren blev stoppet af systemet, mens den kørte med en hukommelsesgrænse på %1$d MB. En sænkning af grænsen til %2$d MB gør patcheren til et mindre mål og kan lade kørslen fuldføre.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Patcheren blev stoppet af systemet, mens den kørte med en hukommelsesgrænse på %1$d MB, hvilket allerede er den laveste tilgængelige. Prøv at patche med færre patchkilder, eller vælg færre patches.</string>
+    <string name="patcher_memory_adjustment_apply">Sænk til %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching i gang…</string>
     <string name="patcher_notification_text">Tryk for at vende tilbage til patcheren</string>
@@ -567,6 +575,8 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Vis en hilsenbesked på startskærmen</string>
     <string name="settings_appearance_app_grouping">App-gruppering</string>
     <string name="settings_appearance_app_grouping_description">Vis en hjemmeskærms-skifter til at gruppere apps efter kilde eller dine egne kategorier, og bevar udvælgelsen, når den er slået fra</string>
+    <string name="settings_appearance_sort_button">Sortér knap</string>
+    <string name="settings_appearance_sort_button_description">Vis sorteringsknappen på startskærmen</string>
     <string name="settings_appearance_app_card_colors">App-kort farver</string>
     <string name="settings_appearance_app_card_colors_default">Standard</string>
     <string name="settings_appearance_app_card_colors_default_description">Giv hver app farven af sin egen bundle</string>

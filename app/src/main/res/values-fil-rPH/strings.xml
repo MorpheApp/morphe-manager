@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Napapanahon ang iyong mga mapagkukunan</string>
     <string name="home_sources_are_loading">Naglo-load ang iyong mga mapagkukunan, mangyaring maghintay…</string>
     <string name="home_search_apps">Maghanap ng mga app</string>
+    <string name="home_app_sort_title">Pagbukud-bukurin ang mga app</string>
     <string name="home_app_sort_manual_description">Pindutin nang matagal ang isang app, pagkatapos ay i-tap ang button na muling ayusin</string>
     <string name="home_app_sort_recommended">Inirerekomendang bersyon</string>
     <string name="home_app_sort_recommended_description">Mga naka-install at naka-pin na app muna</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Magpatuloy lamang kung pinagkakatiwalaan mo ang helper app na ito. Hindi maaaring i-verify ng Morphe ang lagda ng APK na ito, kaya ang binagong file ay hindi matutukoy</string>
     <string name="home_apk_helper_no_result">Hindi nagbalik ng APK ang helper app</string>
     <string name="home_apk_helper_no_access">Hindi nagbigay ng pahintulot ang helper app na i-access ang APK na ibinalik nito</string>
+    <string name="home_apk_helper_no_package">Hindi sinabi ng helper app kung aling naka-install na app ang gagamitin</string>
+    <string name="home_apk_helper_wrong_package">Ang helper app ay nagbalik ng ibang app kaysa sa pinapa-patch</string>
+    <string name="home_apk_helper_installed_unavailable">Hindi magamit ni Morphe ang naka-install na app</string>
+    <string name="home_apk_helper_installed_incompatible">Ang naka-install na bersyon ay hindi maaaring i-patch</string>
     <string name="home_apk_use_saved">Gamitin ang nakaimbak na APK</string>
     <string name="home_apk_use_installed">Gamitin ang naka-install na APK</string>
     <string name="home_apk_use_installed_unverified">Hindi mapatunayan ang lagda ng naka-install na app, kaya maaaring na-patch na ito</string>
@@ -455,6 +460,11 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="battery_optimization_dialog_title">Proteksyon sa pag-patch sa background</string>
     <string name="battery_optimization_dialog_description">Maaaring itigil ng ilang device ang patcher kapag na-minimize ang app. Payagan ang Morphe na tumakbo nang walang mga paghihigpit sa baterya upang matiyak na kumpleto ang pag-patch nang maaasahan</string>
     <string name="battery_optimization_not_now">Hindi na ngayon</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Hindi sapat na memorya</string>
+    <string name="patcher_memory_adjustment_description">Ang patcher ay pinahinto ng sistema habang tumatakbo na may %1$d MB na limitasyon sa memorya. Ang pagbaba ng limitasyon sa %2$d MB ay ginagawang mas maliit na target ang patcher at maaaring payagan ang pagtakbo na matapos.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Ang patcher ay pinahinto ng sistema habang tumatakbo na may %1$d MB na limitasyon sa memorya, na siya nang pinakamababang magagamit. Subukang mag-patch gamit ang mas kaunting mga pinagmumulan ng patch, o pumili ng mas kaunting mga patch.</string>
+    <string name="patcher_memory_adjustment_apply">Ibaba sa %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Pinoproseso ang pagpa-patch…</string>
     <string name="patcher_notification_text">Pindutin upang bumalik sa patcher</string>
@@ -568,6 +578,8 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ipakita ang mensahe ng pagbati sa pangunahing iskrin</string>
     <string name="settings_appearance_app_grouping">Pagpapangkat ng app</string>
     <string name="settings_appearance_app_grouping_description">Magpakita ng home screen switcher upang pangkatin ang mga app ayon sa pinagmulan o iyong sariling mga kategorya, pinapanatili ang pagpili kapag naka-off</string>
+    <string name="settings_appearance_sort_button">Pindutan ng Pagbukod-bukod</string>
+    <string name="settings_appearance_sort_button_description">Ipakita ang pindutan ng pagbukod-bukod sa pangunahing screen</string>
     <string name="settings_appearance_app_card_colors">Mga kulay ng card ng app</string>
     <string name="settings_appearance_app_card_colors_default">Panimula</string>
     <string name="settings_appearance_app_card_colors_default_description">Bigyan ang bawat app ng kulay ng sarili nitong bundle</string>

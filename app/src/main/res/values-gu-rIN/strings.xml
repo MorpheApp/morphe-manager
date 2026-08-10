@@ -107,6 +107,7 @@
     <string name="patcher_ready_to_mount_subtitle">માઉન્ટ કરવા માટે નીચેનું બટન દબાવો</string>
     <!-- Patcher Screen - Patcher Steps -->
     <!-- Battery optimization pre-flight dialog -->
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <!-- Patcher Screen - Patcher Messages -->
     <string name="patcher_message_1">તમારી એપ્લિકેશનને કંઈક અદ્ભુત ઢાળ આપી રહ્યા છીએ… 🏆</string>

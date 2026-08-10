@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">আপনার সোর্সগুলি আপ-টু-ডেট আছে</string>
     <string name="home_sources_are_loading">সোর্স লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন…</string>
     <string name="home_search_apps">অ্যাপস অনুসন্ধান করুন</string>
+    <string name="home_app_sort_title">অ্যাপস সাজান</string>
     <string name="home_app_sort_manual_description">কোনো অ্যাপ দীর্ঘক্ষণ চাপুন, তারপর পুনর্বিন্যাস বোতামে আলতো চাপুন</string>
     <string name="home_app_sort_recommended">সুপারিশকৃত ক্রম</string>
     <string name="home_app_sort_recommended_description">ইনস্টল করা এবং পিন করা অ্যাপগুলি প্রথমে</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">আপনি যদি এই সহায়ক অ্যাপটিকে বিশ্বাস করেন তবেই চালিয়ে যান। মর্ফে এই APK-এর স্বাক্ষর যাচাই করতে পারবে না, তাই একটি পরিবর্তিত ফাইল সনাক্ত করা যাবে না</string>
     <string name="home_apk_helper_no_result">সহায়ক অ্যাপটি একটি APK ফেরত দেয়নি</string>
     <string name="home_apk_helper_no_access">সহায়ক অ্যাপটি ফেরত দেওয়া APK-এ অ্যাক্সেস দেওয়ার অনুমতি দেয়নি</string>
+    <string name="home_apk_helper_no_package">সাহায্যকারী অ্যাপটি জানায়নি কোন ইনস্টল করা অ্যাপ ব্যবহার করতে হবে</string>
+    <string name="home_apk_helper_wrong_package">সাহায্যকারী অ্যাপটি প্যাচ করা অ্যাপের চেয়ে ভিন্ন একটি অ্যাপ ফিরিয়ে দিয়েছে</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe ইনস্টল করা অ্যাপটি ব্যবহার করতে পারেনি</string>
+    <string name="home_apk_helper_installed_incompatible">ইনস্টল করা সংস্করণটি প্যাচ করা যায় না</string>
     <string name="home_apk_use_saved">সেভ করে রাখা APK-টি ব্যবহার করুন</string>
     <string name="home_apk_use_installed">ফোনে ইনস্টল থাকা APK-টি ব্যবহার করুন</string>
     <string name="home_apk_use_installed_unverified">ইনস্টল করা অ্যাপের স্বাক্ষর যাচাই করা যায়নি, তাই এটি ইতোমধ্যেই প্যাচ করা থাকতে পারে</string>
@@ -455,6 +460,11 @@
     <string name="battery_optimization_dialog_title">ব্যাকগ্রাউন্ড প্যাচিং সুরক্ষা</string>
     <string name="battery_optimization_dialog_description">কিছু ডিভাইস অ্যাপটি মিনিমাইজ করা হলে প্যাচার বন্ধ করতে পারে। প্যাচিং নির্ভরযোগ্যভাবে সম্পন্ন করার জন্য Morphe-কে ব্যাটারি সীমাবদ্ধতা ছাড়াই চলতে দেওয়ার অনুমতি দিন</string>
     <string name="battery_optimization_not_now">এখন নয়</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">পর্যাপ্ত মেমোরি নেই</string>
+    <string name="patcher_memory_adjustment_description">প্যাচারটি %1$d MB মেমোরি সীমা নিয়ে চলার সময় সিস্টেম এটি বন্ধ করে দিয়েছিল। সীমাটি %2$d MB-এ কমালে প্যাচারটি ছোট লক্ষ্য হয়ে যায় এবং রানটি শেষ হতে পারে।</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">প্যাচারটি %1$d MB মেমোরি সীমা নিয়ে চলার সময় সিস্টেম এটি বন্ধ করে দিয়েছিল, যা ইতিমধ্যে সর্বনিম্ন উপলব্ধ। কম প্যাচ উৎস দিয়ে প্যাচিং করার চেষ্টা করুন, অথবা কম প্যাচ নির্বাচন করুন।</string>
+    <string name="patcher_memory_adjustment_apply">%1$d MB-এ নামান</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">প্যাচিং চলছে…</string>
     <string name="patcher_notification_text">প্যাচার-এ ফিরে যেতে ট্যাপ করুন</string>
@@ -568,6 +578,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">হোম স্ক্রিনে একটি শুভেচ্ছা বার্তা দেখান</string>
     <string name="settings_appearance_app_grouping">অ্যাপ grouping</string>
     <string name="settings_appearance_app_grouping_description">উৎস অথবা আপনার নিজের বিভাগ অনুসারে অ্যাপ grouping করার জন্য একটি হোম স্ক্রিন সুইচ দেখান, বন্ধ থাকা অবস্থায় নির্বাচন ধরে রাখুন।</string>
+    <string name="settings_appearance_sort_button">সর্ট করার বাটন</string>
+    <string name="settings_appearance_sort_button_description">হোম স্ক্রিনে সর্ট করার বাটনটি দেখান</string>
     <string name="settings_appearance_app_card_colors">অ্যাপ কার্ডের রং</string>
     <string name="settings_appearance_app_card_colors_default">ডিফল্ট</string>
     <string name="settings_appearance_app_card_colors_default_description">প্রতিটি অ্যাপকে তার নিজস্ব বান্ডেলের রং দিন</string>

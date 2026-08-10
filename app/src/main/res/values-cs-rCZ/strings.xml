@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">Vaše zdroje jsou aktuální</string>
     <string name="home_sources_are_loading">Zdroje se načítají, počkejte prosím…</string>
     <string name="home_search_apps">Hledat aplikace</string>
+    <string name="home_app_sort_title">Řazení aplikací</string>
     <string name="home_app_sort_manual_description">Dlouze stiskněte aplikaci a poté klepněte na tlačítko pro změnu pořadí</string>
     <string name="home_app_sort_recommended">Doporučené pořadí</string>
     <string name="home_app_sort_recommended_description">Nejprve nainstalované a připnuté aplikace</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">Pokračujte pouze v případě, že této pomocné aplikaci důvěřujete. Morphe nemůže ověřit podpis tohoto APK, takže upravený soubor by nebyl odhalen</string>
     <string name="home_apk_helper_no_result">Pomocná aplikace nevrátila APK</string>
     <string name="home_apk_helper_no_access">Pomocná aplikace neudělila přístup k vrácenému APK</string>
+    <string name="home_apk_helper_no_package">Pomocná aplikace neřekla, kterou nainstalovanou aplikaci použít</string>
+    <string name="home_apk_helper_wrong_package">Pomocná aplikace vrátila jinou aplikaci, než která je patchovaná</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe nemohl použít nainstalovanou aplikaci</string>
+    <string name="home_apk_helper_installed_incompatible">Nainstalovanou verzi nelze patchovat</string>
     <string name="home_apk_use_saved">Použít uložený APK</string>
     <string name="home_apk_use_installed">Użyj zainstalowane APK</string>
     <string name="home_apk_use_installed_unverified">Nepodařilo se ověřit podpis nainstalované aplikace, takže může být již opravená</string>
@@ -455,6 +460,11 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="battery_optimization_dialog_title">Ochrana záplat na pozadí</string>
     <string name="battery_optimization_dialog_description">Na některých zařízeních se může záplata zastavit, když je aplikace minimalizována. Povolte aplikaci Morphe, aby běžela bez omezení spotřeby energie, a zajistěte tak spolehlivé dokončení záplatování.</string>
     <string name="battery_optimization_not_now">Ne teď</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Nedostatek paměti</string>
+    <string name="patcher_memory_adjustment_description">Proces patchování byl zastaven systémem při běhu s limitem paměti %1$d MB. Snížení limitu na %2$d MB zmenší jeho cíl a může umožnit dokončení běhu.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Proces patchování byl zastaven systémem při běhu s limitem paměti %1$d MB, což je již nejnižší dostupný limit. Zkuste patchovat s méně zdroji patchů nebo vyberte méně patchů.</string>
+    <string name="patcher_memory_adjustment_apply">Snížit na %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Záplatování probíhá…</string>
     <string name="patcher_notification_text">Klepněte pro návrat k patcheru</string>
@@ -567,6 +577,8 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zobrazit pozdravný vzkaz na domovské obrazovce</string>
     <string name="settings_appearance_app_grouping">Kreslení aplikací</string>
     <string name="settings_appearance_app_grouping_description">Zobrazit přepínač domovské obrazovky pro seskupení aplikací podle zdroje nebo vlastních kategorií, s ponecháním výběru při vypnutí</string>
+    <string name="settings_appearance_sort_button">Tlačítko pro řazení</string>
+    <string name="settings_appearance_sort_button_description">Zobrazit tlačítko pro řazení na domovské obrazovce</string>
     <string name="settings_appearance_app_card_colors">Barvy karet aplikací</string>
     <string name="settings_appearance_app_card_colors_default">Výchozí</string>
     <string name="settings_appearance_app_card_colors_default_description">Přiřadí každé aplikaci barvu jejího balíčku</string>

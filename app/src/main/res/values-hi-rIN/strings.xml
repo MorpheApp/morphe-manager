@@ -36,6 +36,7 @@
     <string name="home_update_success_subtitle">आपके स्रोत अप टू डेट हैं</string>
     <string name="home_sources_are_loading">स्रोत लोड हो रहे हैं, कृपया प्रतीक्षा करें…</string>
     <string name="home_search_apps">ऐप्स खोजें</string>
+    <string name="home_app_sort_title">ऐप्स को क्रमबद्ध करें</string>
     <string name="home_app_sort_manual_description">किसी ऐप को देर तक दबाएं, फिर पुन: व्यवस्थित करें बटन पर टैप करें</string>
     <string name="home_app_sort_recommended">अनुशंसित क्रम</string>
     <string name="home_app_sort_recommended_description">स्थापित और पिन किए गए ऐप्स पहले</string>
@@ -173,6 +174,10 @@
     <string name="home_apk_helper_warning_unverified">केवल तभी आगे बढ़ें जब आप इस सहायक ऐप पर भरोसा करते हैं। मॉर्फ़ इस APK के हस्ताक्षर को सत्यापित नहीं कर सकता है, इसलिए संशोधित फ़ाइल का पता नहीं लगाया जाएगा</string>
     <string name="home_apk_helper_no_result">सहायक ऐप ने APK वापस नहीं किया</string>
     <string name="home_apk_helper_no_access">सहायक ऐप ने APK तक पहुंच प्रदान नहीं की जो उसने वापस किया</string>
+    <string name="home_apk_helper_no_package">हेल्पर ऐप ने यह नहीं बताया कि कौन सा इंस्टॉल किया गया ऐप इस्तेमाल करना है</string>
+    <string name="home_apk_helper_wrong_package">हेल्पर ऐप ने पैच किए जा रहे ऐप के अलावा कोई दूसरा ऐप लौटाया</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe इंस्टॉल किए गए ऐप का उपयोग नहीं कर सका</string>
+    <string name="home_apk_helper_installed_incompatible">इंस्टॉल किया गया संस्करण पैच नहीं किया जा सकता</string>
     <string name="home_apk_use_saved">सहेजी गई APK का उपयोग करें</string>
     <string name="home_apk_use_installed">स्थापित APK का उपयोग करें</string>
     <string name="home_apk_use_installed_unverified">इंस्टॉल किए गए ऐप के हस्ताक्षर को सत्यापित नहीं किया जा सका, इसलिए यह पहले से ही पैच किया जा सकता है</string>
@@ -455,6 +460,7 @@
     <string name="battery_optimization_dialog_title">पृष्ठभूमि पैचिंग सुरक्षा</string>
     <string name="battery_optimization_dialog_description">कुछ डिवाइस ऐप को मिनिमाइज किए जाने पर पैचर को रोक सकते हैं। पैचिंग को विश्वसनीय रूप से पूरा करने के लिए मोर्फ़ को बैटरी प्रतिबंधों के बिना चलाने की अनुमति दें।</string>
     <string name="battery_optimization_not_now">अभी नहीं</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching in progress…</string>
     <string name="patcher_notification_text">Tap to return to the patcher</string>
@@ -568,6 +574,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">मुखपृष्ठ पर अभिवादन संदेश दिखाएँ</string>
     <string name="settings_appearance_app_grouping">ऐप समूहीकरण</string>
     <string name="settings_appearance_app_grouping_description">स्रोत या अपनी श्रेणियों द्वारा ऐप्स को समूहित करने के लिए होम स्क्रीन स्विचर दिखाएं, बंद होने पर चयन को बनाए रखें</string>
+    <string name="settings_appearance_sort_button">क्रमबद्ध करें बटन</string>
+    <string name="settings_appearance_sort_button_description">होम स्क्रीन पर क्रमबद्ध करें बटन दिखाएँ</string>
     <string name="settings_appearance_app_card_colors">ऐप कार्ड रंग</string>
     <string name="settings_appearance_app_card_colors_default">डिफ़ॉल्ट</string>
     <string name="settings_appearance_app_card_colors_default_description">प्रत्येक ऐप को अपने बंडल का रंग दें</string>
