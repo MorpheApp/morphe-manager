@@ -134,7 +134,8 @@ class InstalledAppInfoViewModel(
                 if (localApkSources.trackedPatchState(app) == InstalledPatchState.Patched) {
                     pm.launch(app.currentPackageName)
                 } else {
-                    // The dialog was opened before the package changed underneath it
+                    // Covers both a package replaced under an open dialog and one whose identity
+                    // cannot be established, so the message must not claim which of the two it is
                     context.toast(context.getString(R.string.launch_app_unverified))
                     refreshAppState(app)
                     onAppStateChanged?.invoke(app.currentPackageName)
