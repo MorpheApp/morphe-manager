@@ -65,7 +65,10 @@ class PatchBundleRepository(
     val bundleState: StateFlow<BundleState> = store.state
         .stateIn(scope, SharingStarted.Eagerly, BundleState.Loading)
 
-    val sources = store.state.map { (it as? BundleState.Ready)?.sources?.values?.toList() ?: emptyList() }
+    // Hot so collectors see the loaded sources on their first frame instead of an empty list
+    val sources = store.state
+        .map { (it as? BundleState.Ready)?.sources?.values?.toList() ?: emptyList() }
+        .stateIn(scope, SharingStarted.Eagerly, emptyList())
     val bundles = store.state.map {
         (it as? BundleState.Ready)?.sources?.mapNotNull { (uid, src) ->
             uid to (src.patchBundle ?: return@mapNotNull null)

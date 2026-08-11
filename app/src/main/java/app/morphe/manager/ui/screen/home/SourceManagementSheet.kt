@@ -93,7 +93,7 @@ fun BundleManagementSheet(
     val prefs: PreferencesManager = koinInject()
     val scope = rememberCoroutineScope()
 
-    val sources by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
+    val sources by patchBundleRepository.sources.collectAsStateWithLifecycle()
     val patchCounts by patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
     val manualUpdateInfo by patchBundleRepository.manualUpdateInfo.collectAsStateWithLifecycle(emptyMap())
     val activeUpdateUids by patchBundleRepository.activeUpdateUidsFlow.collectAsStateWithLifecycle(emptySet())
