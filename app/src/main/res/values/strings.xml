@@ -218,6 +218,8 @@
     <string name="home_download_instructions_step4">After the download finishes, return to Morphe</string>
     <string name="home_download_instructions_step4_mount">After installing the original APK, return to Morphe</string>
     <string name="home_download_instructions_continue">Continue to APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Continue to %1$s</string>
+    <string name="home_download_instructions_continue_generic">Continue</string>
 
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Select downloaded APK</string>

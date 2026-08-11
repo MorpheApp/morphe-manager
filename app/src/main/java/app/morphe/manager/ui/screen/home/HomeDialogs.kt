@@ -176,6 +176,7 @@ fun HomeDialogs(
             targetAppInstalled = homeViewModel.pendingTargetAppInstalled == true,
             downloadColor = downloadColor,
             isApkBundle = isApkBundle,
+            downloadUrl = homeViewModel.resolvedDownloadUrl,
             onDismiss = {
                 homeViewModel.showDownloadInstructionsDialog = false
                 homeViewModel.cleanupPendingData()
@@ -835,11 +836,36 @@ internal fun DownloadInstructionsDialog(
     targetAppInstalled: Boolean,
     downloadColor: Color,
     isApkBundle: Boolean,
+    downloadUrl: String? = null,
     onDismiss: () -> Unit,
     onOpenApkDownloadHelper: (() -> Unit)? = null,
     onContinue: () -> Unit
 ) {
     val context = LocalContext.current
+    val downloadHost = remember(downloadUrl) {
+    downloadUrl
+        ?.takeUnless { it.contains("/v2/web-search/") }
+        ?.let { runCatching { URI(it).host }.getOrNull() }
+        ?.removePrefix("www.")
+        ?.let { host ->
+            val parts = host.split('.')
+            when {
+                parts.size <= 2 -> host
+                parts.takeLast(2).joinToString(".") in setOf(
+                    "co.uk",
+                    "org.uk",
+                    "ac.uk",
+                    "com.au",
+                    "net.au",
+                    "org.au",
+                    "co.in",
+                    "com.br",
+                    "co.jp"
+                ) -> parts.takeLast(3).joinToString(".")
+                else -> parts.takeLast(2).joinToString(".")
+            }
+        }
+    }
     val downloadButtonToasts = listOf(
         stringResource(R.string.home_download_instructions_download_button_toast),
         stringResource(R.string.home_download_instructions_download_button_toast_2),
@@ -856,7 +882,9 @@ internal fun DownloadInstructionsDialog(
         footer = {
             if (onOpenApkDownloadHelper != null) {
                 AppDialogButtonRow(
-                    primaryText = stringResource(R.string.home_download_instructions_continue),
+                    primaryText = downloadHost?.let {
+                        stringResource(R.string.home_download_instructions_continue_to, it)
+                    } ?: stringResource(R.string.home_download_instructions_continue_generic),
                     onPrimaryClick = onContinue,
                     primaryIcon = Icons.AutoMirrored.Outlined.OpenInNew,
                     secondaryText = stringResource(R.string.home_apk_helper_download),
@@ -866,7 +894,9 @@ internal fun DownloadInstructionsDialog(
                 )
             } else {
                 AppDialogButton(
-                    text = stringResource(R.string.home_download_instructions_continue),
+                    text = downloadHost?.let {
+                        stringResource(R.string.home_download_instructions_continue_to, it)
+                    } ?: stringResource(R.string.home_download_instructions_continue_generic),
                     onClick = onContinue,
                     icon = Icons.AutoMirrored.Outlined.OpenInNew,
                     modifier = Modifier.fillMaxWidth()
