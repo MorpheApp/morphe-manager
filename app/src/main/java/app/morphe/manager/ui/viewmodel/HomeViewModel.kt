@@ -63,6 +63,8 @@ import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.domain.manager.loadCopySelectionCandidates
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.model.SelectedApp
+import app.morphe.manager.ui.model.TrackedInstallPresentation
+import app.morphe.manager.ui.model.trackedInstallPresentation
 import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
@@ -1261,11 +1263,10 @@ class HomeViewModel(
             val savedPatchedApk = trackedSnapshot?.savedPatchedApk
             val savedPackageInfo = trackedSnapshot?.savedPatchedApkInfo
             val trackedPatchState = trackedSnapshot?.patchState
-            val isInstalledOnDevice = trackedPatchState == InstalledPatchState.Patched
-            val isDeleted = installedApp != null &&
-                    installedApp.installType != InstallType.SAVED &&
-                    (trackedPatchState == null || trackedPatchState == InstalledPatchState.NotPatched)
-            val isInstallStateUnknown = trackedPatchState == InstalledPatchState.Unknown
+            val trackedPresentation = installedApp?.let {
+                trackedInstallPresentation(it.installType, trackedPatchState)
+            } ?: TrackedInstallPresentation()
+            val isInstalledOnDevice = trackedPresentation.isPatched
             val hasUpdate = installedApp?.let {
                 updatesMap[it.currentPackageName] == true
             } == true
@@ -1288,8 +1289,9 @@ class HomeViewModel(
                 },
                 isPinnedByDefault = knownApp?.isPinnedByDefault == true,
                 isInstalledOnDevice = isInstalledOnDevice || resolvedData.source == AppDataSource.INSTALLED,
-                isDeleted = isDeleted,
-                isInstallStateUnknown = isInstallStateUnknown,
+                isDeleted = trackedPresentation.isDeleted,
+                isInstallStateNotPatched = trackedPresentation.isNotPatched,
+                isInstallStateUnknown = trackedPresentation.isUnknown,
                 savedApkFile = savedPatchedApk,
                 hasUpdate = hasUpdate,
                 patchCount = 0

@@ -18,6 +18,7 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.UninstallCancelledException
 import app.morphe.manager.domain.repository.*
+import app.morphe.manager.ui.model.trackedInstallPresentation
 import app.morphe.manager.ui.screen.home.AppliedPatchBundleUi
 import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
@@ -66,6 +67,8 @@ class InstalledAppInfoViewModel(
     var hasOriginalApk by mutableStateOf(false)
         private set
     var isAppDeleted by mutableStateOf(false)
+        private set
+    var isInstallStateNotPatched by mutableStateOf(false)
         private set
     var isInstallStateUnknown by mutableStateOf(false)
         private set
@@ -280,21 +283,18 @@ class InstalledAppInfoViewModel(
         usableSavedApk = snapshot.savedPatchedApk
         hasSavedCopy = usableSavedApk != null
         val trackedPatchState = snapshot.patchState
+        val trackedPresentation = trackedInstallPresentation(app.installType, trackedPatchState)
 
-        if (installedInfo != null && trackedPatchState == InstalledPatchState.Patched) {
+        if (installedInfo != null && trackedPresentation.isPatched) {
             isInstalledOnDevice = true
-            isAppDeleted = false
-            isInstallStateUnknown = false
             appInfo = installedInfo
         } else {
             isInstalledOnDevice = false
-            // A missing or stock package means the tracked patched build is gone. Unknown is kept
-            // separate so the UI stays honest while still withholding destructive app actions.
-            isAppDeleted = app.installType != InstallType.SAVED &&
-                    (trackedPatchState == null || trackedPatchState == InstalledPatchState.NotPatched)
-            isInstallStateUnknown = trackedPatchState == InstalledPatchState.Unknown
             appInfo = snapshot.savedPatchedApkInfo
         }
+        isAppDeleted = trackedPresentation.isDeleted
+        isInstallStateNotPatched = trackedPresentation.isNotPatched
+        isInstallStateUnknown = trackedPresentation.isUnknown
 
         canRemoveRecord = canRemoveTrackedRecord(app.installType, trackedPatchState, hasSavedCopy)
 

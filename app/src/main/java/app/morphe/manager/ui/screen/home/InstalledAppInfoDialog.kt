@@ -95,6 +95,7 @@ fun InstalledAppInfoDialog(
     val hasUpdate = appUpdates[packageName] == true
     val showsUpdateBanner = hasUpdate &&
             !viewModel.isAppDeleted &&
+            !viewModel.isInstallStateNotPatched &&
             !viewModel.isInstallStateUnknown
 
     // Accent color resolution order: bundle metadata (appIconColor) -> KnownApps.brandColor -> default.
@@ -449,7 +450,7 @@ fun InstalledAppInfoDialog(
                                 verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
                             ) {
                                 AnimatedVisibility(
-                                    visible = viewModel.isAppDeleted,
+                                    visible = viewModel.isAppDeleted && !viewModel.isInstallStateNotPatched,
                                     enter = Animations.expandFadeEnter,
                                     exit = Animations.shrinkFadeExit
                                 ) {
@@ -463,6 +464,23 @@ fun InstalledAppInfoDialog(
                                             onClick = { onTriggerPatchFlow(installedApp.originalPackageName) },
                                             accentColor = infoAccentColor,
                                             isError = true
+                                        )
+                                    }
+                                }
+                                AnimatedVisibility(
+                                    visible = viewModel.isInstallStateNotPatched,
+                                    enter = Animations.expandFadeEnter,
+                                    exit = Animations.shrinkFadeExit
+                                ) {
+                                    StaggeredItem(entered = entered.value, index = 2) {
+                                        WarningBanner(
+                                            icon = Icons.Outlined.AutoFixHigh,
+                                            title = stringResource(R.string.home_not_patched_yet),
+                                            description = stringResource(R.string.home_app_info_not_patched_description),
+                                            buttonText = stringResource(R.string.patch),
+                                            buttonIcon = Icons.Outlined.AutoFixHigh,
+                                            onClick = { onTriggerPatchFlow(installedApp.originalPackageName) },
+                                            accentColor = infoAccentColor
                                         )
                                     }
                                 }
@@ -541,7 +559,7 @@ fun InstalledAppInfoDialog(
                         item(key = "banner") {
                             Column {
                                 androidx.compose.animation.AnimatedVisibility(
-                                    visible = viewModel.isAppDeleted,
+                                    visible = viewModel.isAppDeleted && !viewModel.isInstallStateNotPatched,
                                     enter = Animations.expandFadeEnter,
                                     exit = Animations.shrinkFadeExit
                                 ) {
@@ -559,6 +577,29 @@ fun InstalledAppInfoDialog(
                                                 },
                                                 accentColor = infoAccentColor,
                                                 isError = true,
+                                                modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
+                                            )
+                                        }
+                                    }
+                                }
+                                androidx.compose.animation.AnimatedVisibility(
+                                    visible = viewModel.isInstallStateNotPatched,
+                                    enter = Animations.expandFadeEnter,
+                                    exit = Animations.shrinkFadeExit
+                                ) {
+                                    Column {
+                                        Spacer(Modifier.height(Defaults.ItemSpacing))
+                                        StaggeredItem(entered = entered.value, index = 1) {
+                                            WarningBanner(
+                                                icon = Icons.Outlined.AutoFixHigh,
+                                                title = stringResource(R.string.home_not_patched_yet),
+                                                description = stringResource(R.string.home_app_info_not_patched_description),
+                                                buttonText = stringResource(R.string.patch),
+                                                buttonIcon = Icons.Outlined.AutoFixHigh,
+                                                onClick = {
+                                                    onTriggerPatchFlow(installedApp.originalPackageName)
+                                                },
+                                                accentColor = infoAccentColor,
                                                 modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
                                             )
                                         }

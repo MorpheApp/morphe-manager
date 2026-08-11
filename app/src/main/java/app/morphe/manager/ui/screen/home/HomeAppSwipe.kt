@@ -365,6 +365,7 @@ internal fun DynamicAppCard(
                                 onClick = onAppClick,
                                 hasUpdate = hasUpdate,
                                 isAppDeleted = item.isDeleted,
+                                isInstallStateNotPatched = item.isInstallStateNotPatched,
                                 isInstallStateUnknown = item.isInstallStateUnknown,
                                 onLongClick = {
                                     view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
@@ -495,6 +496,7 @@ internal fun HiddenSearchAppCard(
                     onClick = onAppClick,
                     hasUpdate = item.hasUpdate,
                     isAppDeleted = item.isDeleted,
+                    isInstallStateNotPatched = item.isInstallStateNotPatched,
                     isInstallStateUnknown = item.isInstallStateUnknown
                 )
             } else {
