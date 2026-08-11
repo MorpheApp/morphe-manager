@@ -6,14 +6,15 @@
 package app.morphe.manager.ui.screen.patcher
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -25,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -38,10 +38,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.patcher.logger.LogLevel
+import app.morphe.manager.patcher.logger.logField
 import app.morphe.manager.patcher.patch.PatchSourceRef
-import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_FIELD_AVERAGE
-import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_FIELD_MAX
-import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_PREFIX_DONE
+import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_MEMORY_FIELD_AVERAGE
+import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_MEMORY_FIELD_MAX
+import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_MEMORY_PREFIX_DONE
 import app.morphe.manager.patcher.runtime.process.PatcherProcess.Companion.LOG_PROCESS_PREFIX_PROCESS_HEAP
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_PROCESS_PREFIX_COROUTINE_HEAP
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_ANDROID
@@ -68,6 +69,7 @@ import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.patcher.game.MiniGameContent
 import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.shared.Animations
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -119,24 +121,6 @@ sealed interface LogItem {
 
     /** Standard single-line log entry. */
     data class Entry(val level: LogLevel, val message: String) : LogItem
-}
-
-/**
- * Extracts a space-delimited key=value field from a flat log string.
- * Supports quoted values (e.g. key="some value with spaces").
- */
-private fun String.logField(key: String): String? {
-    val prefix = "$key="
-    val start = indexOf(prefix).takeIf { it >= 0 } ?: return null
-    val valueStart = start + prefix.length
-    if (valueStart >= length) return null
-    return if (this[valueStart] == '"') {
-        val end = indexOf('"', valueStart + 1).takeIf { it >= 0 } ?: return null
-        substring(valueStart + 1, end).ifBlank { null }
-    } else {
-        val end = indexOf(' ', valueStart).takeIf { it >= 0 } ?: length
-        substring(valueStart, end).ifBlank { null }
-    }
 }
 
 private fun formatElapsed(ms: Long?): String {
@@ -329,10 +313,15 @@ fun ExpertPatchingInProgress(
                 Column(
                     modifier = Modifier
                         .weight(0.42f)
-                        .fillMaxHeight(),
-                    verticalArrangement = Arrangement.SpaceBetween
+                        .fillMaxHeight()
                 ) {
-                    Column {
+                    // The usage graphs can outgrow a short window, so the header scrolls while
+                    // the action bar below it stays put
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .verticalScroll(rememberScrollState())
+                    ) {
                         queueHeader?.invoke()
 
                         ExpertProgressHeader(
@@ -342,6 +331,8 @@ fun ExpertPatchingInProgress(
                             patchProgress = patchProgress,
                             patcherSucceeded = patcherSucceeded
                         )
+
+                        Spacer(Modifier.height(12.dp))
                     }
 
                     // Action bar inside left column
@@ -381,7 +372,9 @@ fun ExpertPatchingInProgress(
                     .weight(1f)
                     .fillMaxWidth()
                     .padding(horizontal = windowSize.contentPadding)
-                    .padding(top = windowSize.contentPadding),
+                    // Only enough to clear the status bar: the screen starts at the very top and
+                    // a queue header brings padding of its own
+                    .padding(top = Defaults.ContentPaddingSmall),
                 verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing)
             ) {
                 queueHeader?.invoke()
@@ -448,9 +441,12 @@ private fun ExpertProgressHeader(
         }
     }
 
+    // A phone on its side has barely more height than the header itself asks for
+    val shortWindow = rememberWindowSize().heightSizeClass == WindowHeightSizeClass.Compact
+
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(18.dp)
+        verticalArrangement = Arrangement.spacedBy(if (shortWindow) 12.dp else 18.dp)
     ) {
         // Title + percentage badge
         Row(
@@ -468,7 +464,10 @@ private fun ExpertProgressHeader(
                 modifier = Modifier.weight(1f, fill = false)
             )
 
-            PercentageBadge(progress = progress)
+            StatusBadge(
+                text = "${(progress * 100).toInt()}%",
+                tone = SemanticTone.Primary
+            )
         }
 
         // Progress bar
@@ -497,56 +496,28 @@ private fun ExpertProgressHeader(
             }
 
             if (total > 0) {
-                Surface(
-                    shape = RoundedCornerShape(8.dp),
-                    color = if (patcherSucceeded == true)
+                // A finished run wears the same teal the success card and the progress bar end on
+                StatusBadge(
+                    text = "$completed / $total",
+                    containerColor = if (patcherSucceeded == true) {
                         PatcherProgressTealColor.copy(alpha = 0.18f)
-                    else
-                        MaterialTheme.colorScheme.primaryContainer
-                ) {
-                    Text(
-                        text = "$completed / $total",
-                        style = MaterialTheme.typography.labelMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
-                    )
-                }
+                    } else {
+                        SemanticTone.Primary.container
+                    },
+                    contentColor = if (patcherSucceeded == true) {
+                        PatcherProgressTealColor
+                    } else {
+                        SemanticTone.Primary.content
+                    }
+                )
             }
         }
 
-        // Memory graph
-        val heapSamples = patchProgress.heapSamples
-        val heapLimitMb = patchProgress.heapLimitMb
-        AnimatedVisibility(
-            visible = heapSamples.isNotEmpty(),
-            enter = Animations.expandFadeEnter
-        ) {
-            HeapUsageGraph(
-                samples = heapSamples,
-                maxHeapMb = heapLimitMb.takeIf { it > 0 }
-                    ?: (Runtime.getRuntime().maxMemory().toInt() / (1024 * 1024)),
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-    }
-}
-
-/**
- * Pill badge showing current progress as an integer percentage.
- */
-@Composable
-private fun PercentageBadge(progress: Float) {
-    Surface(
-        shape = RoundedCornerShape(10.dp),
-        color = MaterialTheme.colorScheme.primaryContainer
-    ) {
-        Text(
-            text = "${(progress * 100).toInt()}%",
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
-            modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp)
+        // Heap, CPU and storage graphs
+        PatchingUsageGraphs(
+            patchProgress = patchProgress,
+            compact = !isLandscape(),
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
@@ -576,113 +547,6 @@ private fun ExpertLinearProgressBar(progress: Float) {
                 .clip(RoundedCornerShape(5.dp))
                 .background(Brush.horizontalGradient(listOf(PatcherProgressBlueColor, PatcherProgressTealColor)))
         )
-    }
-}
-
-/**
- * Live bar graph showing heap usage over the last 60 seconds.
- */
-@Composable
-private fun HeapUsageGraph(
-    samples: List<Int>,
-    maxHeapMb: Int,
-    modifier: Modifier = Modifier
-) {
-    val barColor = MaterialTheme.colorScheme.primary
-    val warnColor = MaterialTheme.colorScheme.error
-    val trackColor = MaterialTheme.colorScheme.surfaceVariant
-
-    Surface(
-        modifier = modifier,
-        shape = RoundedCornerShape(10.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
-        tonalElevation = 0.dp
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(R.string.memory_usage),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-                    fontSize = 10.sp
-                )
-                Text(
-                    text = "${samples.lastOrNull() ?: 0} MB / $maxHeapMb MB",
-                    style = MaterialTheme.typography.labelSmall,
-                    fontFamily = FontFamily.Monospace,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-                    fontSize = 10.sp
-                )
-            }
-
-            // Bar graph - 60 slots, filled from right
-            val slotCount = 60
-            val padded = List(slotCount - samples.size) { 0 } + samples.takeLast(slotCount)
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(36.dp),
-                horizontalArrangement = Arrangement.spacedBy(1.dp),
-                verticalAlignment = Alignment.Bottom
-            ) {
-                val redThresholdForMaxColor = 1.0f
-                val smoothStart = 0.7f
-                val memoryFractionRollingAverageSamples = 3
-                var memoryFractionAverage = 0.0
-
-                padded.forEach { sample ->
-                    val memoryUsage = if (maxHeapMb > 0) {
-                        (sample / maxHeapMb.toFloat()).coerceIn(0f, 1f)
-                    } else 0f
-
-                    memoryFractionAverage =
-                        (memoryFractionAverage * memoryFractionRollingAverageSamples + memoryUsage) /
-                                (memoryFractionRollingAverageSamples + 1)
-
-                    // Only interpolate above 70%
-                    val t = if (memoryFractionAverage <= smoothStart) {
-                        0f
-                    } else {
-                        ((memoryFractionAverage - smoothStart) / (redThresholdForMaxColor - smoothStart))
-                            .coerceIn(0.0, 1.0)
-                            .toFloat()
-                    }
-
-                    val color = lerp(barColor, warnColor, t)
-
-                    Box(modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight()) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .fillMaxHeight()
-                                .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp))
-                                .background(if (sample > 0) trackColor.copy(alpha = 0.3f) else Color.Transparent)
-                        )
-                        if (memoryUsage > 0f) {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .fillMaxHeight(memoryUsage)
-                                    .align(Alignment.BottomCenter)
-                                    .clip(RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp))
-                                    .background(color.copy(alpha = 0.75f))
-                            )
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 

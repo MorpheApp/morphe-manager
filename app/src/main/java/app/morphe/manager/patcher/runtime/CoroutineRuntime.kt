@@ -29,7 +29,7 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         // This runtime patches in the app's own process and gets one attempt at it
         onRestart: suspend () -> Unit,
     ) {
-        MemoryMonitor.startMemoryPolling(logger)
+        ResourceMonitor.startPolling(logger)
 
         try {
             val selectedBundles = selectedPatches.keys
@@ -99,7 +99,7 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
                 preparation.cleanup()
             }
         } finally {
-            MemoryMonitor.stopMemoryPolling(logger)
+            ResourceMonitor.stopPolling(logger)
         }
     }
 }

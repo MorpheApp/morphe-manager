@@ -539,6 +539,8 @@ Uninstalling will permanently erase all app data"</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Patching app</string>
     <string name="memory_usage">Memory usage</string>
+    <string name="cpu_usage">CPU usage</string>
+    <string name="storage_io_usage">Storage I/O</string>
 
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Applying patches</string>
