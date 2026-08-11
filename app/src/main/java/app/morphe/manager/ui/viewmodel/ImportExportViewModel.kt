@@ -98,6 +98,10 @@ data class BundleSnapshot(
     val sortOrder: Int,
     val createdAt: Long? = null,
     val updatedAt: Long? = null,
+    /** Whether the dev/prerelease branch is enabled for this source. */
+    val prerelease: Boolean? = null,
+    /** Whether experimental app versions are preferred for this source. */
+    val experimentalVersions: Boolean? = null,
 )
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -640,6 +644,9 @@ class ImportExportViewModel(
         private val json = Json {
             ignoreUnknownKeys = true
             prettyPrint = true // Make exports human-readable
+            // Skip null and default-valued fields so exports stay lean and readable
+            explicitNulls = false
+            encodeDefaults = false
         }
 
         val knownPasswords = arrayOf("Morphe", "s3cur3p@ssw0rd")

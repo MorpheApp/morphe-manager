@@ -244,8 +244,10 @@ class PreferencesManager(
         val firstLaunch: Boolean? = null,
         val showManagerUpdateDialogOnLaunch: Boolean? = null,
         val useManagerPrereleases: Boolean? = null,
-        val bundlePrereleasesEnabled: Set<String>? = null,
-        val bundleExperimentalVersionsEnabled: Set<String>? = null,
+        /** Readable prerelease toggle for the official source (UID 0). */
+        val officialBundlePrerelease: Boolean? = null,
+        /** Readable experimental-versions toggle for the official source (UID 0). */
+        val officialBundleExperimentalVersions: Boolean? = null,
         val disablePatchVersionCompatCheck: Boolean? = null,
         val disableSelectionWarning: Boolean? = null,
         val disableUniversalPatchCheck: Boolean? = null,
@@ -310,8 +312,11 @@ class PreferencesManager(
         keystorePassword = keystorePassword.get().takeIf { it.isNotEmpty() },
         firstLaunch = firstLaunch.get(),
         useManagerPrereleases = useManagerPrereleases.get(),
-        bundlePrereleasesEnabled = bundlePrereleasesEnabled.get(),
-        bundleExperimentalVersionsEnabled = bundleExperimentalVersionsEnabled.get(),
+        // Custom sources carry prerelease/experimental toggles in customBundles, and the official
+        // source (UID 0) gets readable booleans below - so raw UID sets are no longer exported
+        officialBundlePrerelease = bundlePrereleasesEnabled.get().contains(DEFAULT_SOURCE_UID.toString()),
+        officialBundleExperimentalVersions =
+            bundleExperimentalVersionsEnabled.get().contains(DEFAULT_SOURCE_UID.toString()),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
         showGreetingPhrases = showGreetingPhrases.get(),
         backgroundType = backgroundType.get(),
@@ -365,8 +370,19 @@ class PreferencesManager(
         snapshot.keystorePassword?.let { keystorePassword.value = it }
         snapshot.firstLaunch?.let { firstLaunch.value = it }
         snapshot.useManagerPrereleases?.let { useManagerPrereleases.value = it }
-        snapshot.bundlePrereleasesEnabled?.let { bundlePrereleasesEnabled.value = it }
-        snapshot.bundleExperimentalVersionsEnabled?.let { bundleExperimentalVersionsEnabled.value = it }
+        // Exports carry the official source's toggles as readable booleans
+        snapshot.officialBundlePrerelease?.let { official ->
+            val current = bundlePrereleasesEnabled.value.toMutableSet()
+            val uidKey = DEFAULT_SOURCE_UID.toString()
+            if (official) current.add(uidKey) else current.remove(uidKey)
+            bundlePrereleasesEnabled.value = current
+        }
+        snapshot.officialBundleExperimentalVersions?.let { experimental ->
+            val current = bundleExperimentalVersionsEnabled.value.toMutableSet()
+            val uidKey = DEFAULT_SOURCE_UID.toString()
+            if (experimental) current.add(uidKey) else current.remove(uidKey)
+            bundleExperimentalVersionsEnabled.value = current
+        }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
         snapshot.showGreetingPhrases?.let { showGreetingPhrases.value = it }
         snapshot.backgroundType?.let { backgroundType.value = it }

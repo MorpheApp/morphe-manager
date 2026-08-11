@@ -2039,6 +2039,13 @@ class PatchBundleRepository(
                     sortOrder = entity.sortOrder,
                     createdAt = entity.createdAt,
                     updatedAt = entity.updatedAt,
+                    prerelease = when (val source = entity.source) {
+                        is SourceInfo.Remote -> shouldUsePrerelease(entity.uid, source.url.toString())
+                        else -> null
+                    },
+                    experimentalVersions = prefs.bundleExperimentalVersionsEnabled
+                        .getBlocking()
+                        .contains(entity.uid.toString()),
                 )
             }
     }
@@ -2119,6 +2126,34 @@ class PatchBundleRepository(
                         updateDb(bundle.uid) { it.copy(enabled = snapshot.enabled) }
                         changedAny = true
                     }
+                    // Reconcile prerelease and experimental-version toggles by endpoint,
+                    // so they survive a cross-device import
+                    snapshot.prerelease?.let { wantPrerelease ->
+                        val current = prefs.bundlePrereleasesEnabled.get().toMutableSet()
+                        val uidKey = bundle.uid.toString()
+                        if (wantPrerelease && uidKey !in current) {
+                            current.add(uidKey)
+                            prefs.bundlePrereleasesEnabled.update(current)
+                            changedAny = true
+                        } else if (!wantPrerelease && uidKey in current) {
+                            current.remove(uidKey)
+                            prefs.bundlePrereleasesEnabled.update(current)
+                            changedAny = true
+                        }
+                    }
+                    snapshot.experimentalVersions?.let { wantExperimental ->
+                        val current = prefs.bundleExperimentalVersionsEnabled.get().toMutableSet()
+                        val uidKey = bundle.uid.toString()
+                        if (wantExperimental && uidKey !in current) {
+                            current.add(uidKey)
+                            prefs.bundleExperimentalVersionsEnabled.update(current)
+                            changedAny = true
+                        } else if (!wantExperimental && uidKey in current) {
+                            current.remove(uidKey)
+                            prefs.bundleExperimentalVersionsEnabled.update(current)
+                            changedAny = true
+                        }
+                    }
                 }
             }
 
@@ -2129,7 +2164,7 @@ class PatchBundleRepository(
 
                 if (normalizedUrl.lowercase(Locale.US) in keptEndpoints) return@forEach
 
-                createEntity(
+                val created = createEntity(
                     name = snapshot.name,
                     source = Source.from(normalizedUrl),
                     autoUpdate = snapshot.autoUpdate,
@@ -2139,6 +2174,19 @@ class PatchBundleRepository(
                     updatedAt = snapshot.updatedAt,
                     enabled = snapshot.enabled,
                 )
+                // New bundles get fresh UIDs, so carry the toggles over by UID
+                if (snapshot.prerelease == true) {
+                    val current = prefs.bundlePrereleasesEnabled.get().toMutableSet()
+                    if (current.add(created.uid.toString())) {
+                        prefs.bundlePrereleasesEnabled.update(current)
+                    }
+                }
+                if (snapshot.experimentalVersions == true) {
+                    val current = prefs.bundleExperimentalVersionsEnabled.get().toMutableSet()
+                    if (current.add(created.uid.toString())) {
+                        prefs.bundleExperimentalVersionsEnabled.update(current)
+                    }
+                }
                 changedAny = true
             }
 
