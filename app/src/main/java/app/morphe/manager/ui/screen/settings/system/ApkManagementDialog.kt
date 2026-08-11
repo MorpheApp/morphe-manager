@@ -62,6 +62,7 @@ import kotlinx.coroutines.withTimeoutOrNull
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import java.io.File
+import java.util.Locale
 
 /** Type of APKs to manage. */
 enum class ApkManagementType {
@@ -86,6 +87,9 @@ private val ApkItemData.selectionKey: String
 
 private val ApkItemData.isInstallableFromStorage: Boolean
     get() = file?.exists() == true && installType != InstallType.MOUNT
+
+private fun List<ApkItemData>.sortedByDisplayName(): List<ApkItemData> =
+    sortedBy { it.displayName.lowercase(Locale.ROOT) }
 
 private val ApkItemData.installLabelRes: Int
     get() = when (installType) {
@@ -251,7 +255,7 @@ private fun PatchedApksContent(
     var deleteDisplayName by remember { mutableStateOf("") }
 
     // Look up by selectionKey to avoid index shifts on concurrent list updates
-    val displayItems = remember(state) { apkItems.map { it.toApkItemData() } }
+    val displayItems = remember(state) { apkItems.map { it.toApkItemData() }.sortedByDisplayName() }
     val appByKey = remember(state) {
         apkItems.associate { it.toApkItemData().selectionKey to it.installedApp }
     }
@@ -514,7 +518,7 @@ private fun OriginalApksContent(
 
     val isLoading = state is ApkLoadState.Loading
     val entries = (state as? ApkLoadState.Loaded)?.items ?: emptyList()
-    val apkItems = remember(state) { entries.map { it.data } }
+    val apkItems = remember(state) { entries.map { it.data }.sortedByDisplayName() }
     val apkByKey = remember(state) { entries.associate { it.data.selectionKey to it.apk } }
     val totalSize = remember(state) { apkItems.sumOf { it.fileSize } }
     val itemToDelete = remember { mutableStateOf<OriginalApk?>(null) }
