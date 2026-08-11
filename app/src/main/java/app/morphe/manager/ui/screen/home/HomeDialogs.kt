@@ -843,10 +843,10 @@ internal fun DownloadInstructionsDialog(
 ) {
     val context = LocalContext.current
     val downloadHost = remember(downloadUrl) {
-    downloadUrl
-        ?.takeUnless { it.contains("/v2/web-search/") }
-        ?.let { runCatching { URI(it).host }.getOrNull() }
-        ?.removePrefix("www.")
+        downloadUrl
+            ?.takeUnless { it.contains("/v2/web-search/") }
+            ?.let { runCatching { URI(it).host }.getOrNull() }
+            ?.removePrefix("www.")
         ?.let { host ->
             val parts = host.split('.')
             when {
