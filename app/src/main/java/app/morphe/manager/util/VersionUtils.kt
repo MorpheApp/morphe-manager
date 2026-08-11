@@ -21,6 +21,9 @@ fun isPatcherOutdated(required: String, current: String = BuildConfig.PATCHER_VE
  */
 fun String.normalizeVersion(): String = removePrefix("v").trim()
 
+/** Adds the conventional display prefix without duplicating one already supplied by the app. */
+fun String.withVersionPrefix(): String = if (startsWith("v")) this else "v$this"
+
 /**
  * Compare two version strings.
  * Returns: -1 if v1 < v2, 0 if v1 == v2, 1 if v1 > v2

@@ -2,6 +2,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Other apps</string>
     <string name="home_not_patched_yet">Not patched yet</string>
+    <string name="home_unpatched_version_installed">Unpatched version installed</string>
     <string name="home_no_patches_available">No patches available</string>
     <string name="home_app_hide_title">Hide this app?</string>
     <string name="home_app_hide_message">This app will be hidden from the home screen. You can restore it later from the hidden apps using the button at the bottom of the list</string>
@@ -419,7 +420,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="home_app_info_patch_update_available_description">A newer version of patches is available. Repatch your app to get the latest improvements and fixes</string>
     <string name="home_app_info_app_deleted_warning">App was uninstalled</string>
     <string name="home_app_info_app_deleted_description">This app was uninstalled outside the Morphe. Repatch it to restore functionality</string>
-    <string name="home_app_info_not_patched_description">The app installed on this device is not the build Morphe patched. Patch it to restore Morphe\'s tracked install</string>
+    <string name="home_app_info_not_patched_description">An unpatched version of this app is installed. Morphe still has its previous patch record</string>
     <string name="home_app_info_apk_size">APK size</string>
     <string name="home_app_info_cpu_arch">CPU architecture</string>
 

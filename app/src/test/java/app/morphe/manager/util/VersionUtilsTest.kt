@@ -41,6 +41,12 @@ class VersionUtilsTest {
     }
 
     @Test
+    fun `display prefix is added exactly once`() {
+        assertEquals("v1.25.0", "1.25.0".withVersionPrefix())
+        assertEquals("v1.25.0", "v1.25.0".withVersionPrefix())
+    }
+
+    @Test
     fun `segments are compared numerically rather than as text`() {
         assertOlder("1.9.0", "1.10.0")
         assertOlder("1.25.9", "1.25.10")

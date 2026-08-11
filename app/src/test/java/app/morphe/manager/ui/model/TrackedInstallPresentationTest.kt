@@ -14,7 +14,7 @@ class TrackedInstallPresentationTest {
     @Test
     fun `confirmed patched install is presented as installed`() {
         assertEquals(
-            TrackedInstallPresentation(isPatched = true),
+            TrackedInstallPresentation(isPatched = true, showsInstalledPackage = true),
             trackedInstallPresentation(InstallType.DEFAULT, InstalledPatchState.Patched)
         )
     }
@@ -28,10 +28,73 @@ class TrackedInstallPresentationTest {
     }
 
     @Test
-    fun `present non-patched package is distinguished from an absent package`() {
+    fun `confirmed replacement is present and distinct from a never-patched app`() {
         assertEquals(
-            TrackedInstallPresentation(isDeleted = true, isNotPatched = true),
+            TrackedInstallPresentation(isNotPatched = true, showsInstalledPackage = true),
             trackedInstallPresentation(InstallType.DEFAULT, InstalledPatchState.NotPatched)
+        )
+    }
+
+    @Test
+    fun `confirmed replacement displays current package information`() {
+        val presentation = trackedInstallPresentation(
+            InstallType.DEFAULT,
+            InstalledPatchState.NotPatched
+        )
+
+        assertEquals(
+            "current",
+            presentation.displayedPackageInfo(
+                installedPackageInfo = "current",
+                savedPackageInfo = "saved"
+            )
+        )
+    }
+
+    @Test
+    fun `unknown package keeps displaying retained package information`() {
+        val presentation = trackedInstallPresentation(
+            InstallType.DEFAULT,
+            InstalledPatchState.Unknown
+        )
+
+        assertEquals(
+            "saved",
+            presentation.displayedPackageInfo(
+                installedPackageInfo = "current",
+                savedPackageInfo = "saved"
+            )
+        )
+    }
+
+    @Test
+    fun `unknown tracked package never falls back to untracked current information`() {
+        val presentation = trackedInstallPresentation(
+            InstallType.DEFAULT,
+            InstalledPatchState.Unknown
+        )
+
+        assertEquals(
+            null,
+            displayedHomePackageInfo(
+                trackedPresentation = presentation,
+                installedPackageInfo = "current",
+                savedPackageInfo = null,
+                untrackedPackageInfo = "resolved-current"
+            )
+        )
+    }
+
+    @Test
+    fun `untracked app uses normally resolved package information`() {
+        assertEquals(
+            "resolved-current",
+            displayedHomePackageInfo(
+                trackedPresentation = null,
+                installedPackageInfo = "current",
+                savedPackageInfo = null,
+                untrackedPackageInfo = "resolved-current"
+            )
         )
     }
 

@@ -63,7 +63,7 @@ import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.domain.manager.loadCopySelectionCandidates
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.model.SelectedApp
-import app.morphe.manager.ui.model.TrackedInstallPresentation
+import app.morphe.manager.ui.model.displayedHomePackageInfo
 import app.morphe.manager.ui.model.trackedInstallPresentation
 import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
 import app.morphe.manager.util.*
@@ -1265,8 +1265,8 @@ class HomeViewModel(
             val trackedPatchState = trackedSnapshot?.patchState
             val trackedPresentation = installedApp?.let {
                 trackedInstallPresentation(it.installType, trackedPatchState)
-            } ?: TrackedInstallPresentation()
-            val isInstalledOnDevice = trackedPresentation.isPatched
+            }
+            val isInstalledOnDevice = trackedPresentation?.isPatched == true
             val hasUpdate = installedApp?.let {
                 updatesMap[it.currentPackageName] == true
             } == true
@@ -1280,18 +1280,21 @@ class HomeViewModel(
                 displayName = displayName,
                 gradientColors = gradientColors,
                 installedApp = installedApp,
-                // A tracked app that cannot be confirmed shows what Morphe kept on disk rather
-                // than describing whatever package took over its name
-                packageInfo = when {
-                    installedApp == null -> resolvedData.packageInfo
-                    isInstalledOnDevice -> resolvedData.packageInfo ?: savedPackageInfo
-                    else -> savedPackageInfo
-                },
+                // Confirmed installs and replacements use the package actually on the device.
+                // Unknown packages keep showing what Morphe retained rather than attributing the
+                // record to whichever package currently owns the name.
+                packageInfo = displayedHomePackageInfo(
+                    trackedPresentation = trackedPresentation,
+                    installedPackageInfo = trackedSnapshot?.installedPackageInfo,
+                    savedPackageInfo = savedPackageInfo,
+                    untrackedPackageInfo = resolvedData.packageInfo
+                ),
                 isPinnedByDefault = knownApp?.isPinnedByDefault == true,
-                isInstalledOnDevice = isInstalledOnDevice || resolvedData.source == AppDataSource.INSTALLED,
-                isDeleted = trackedPresentation.isDeleted,
-                isInstallStateNotPatched = trackedPresentation.isNotPatched,
-                isInstallStateUnknown = trackedPresentation.isUnknown,
+                isInstalledOnDevice = (trackedPresentation?.showsInstalledPackage == true) ||
+                        (installedApp == null && resolvedData.source == AppDataSource.INSTALLED),
+                isDeleted = trackedPresentation?.isDeleted == true,
+                isInstallStateNotPatched = trackedPresentation?.isNotPatched == true,
+                isInstallStateUnknown = trackedPresentation?.isUnknown == true,
                 savedApkFile = savedPatchedApk,
                 hasUpdate = hasUpdate,
                 patchCount = 0

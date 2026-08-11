@@ -18,6 +18,7 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.UninstallCancelledException
 import app.morphe.manager.domain.repository.*
+import app.morphe.manager.ui.model.displayedPackageInfo
 import app.morphe.manager.ui.model.trackedInstallPresentation
 import app.morphe.manager.ui.screen.home.AppliedPatchBundleUi
 import app.morphe.manager.util.*
@@ -285,13 +286,13 @@ class InstalledAppInfoViewModel(
         val trackedPatchState = snapshot.patchState
         val trackedPresentation = trackedInstallPresentation(app.installType, trackedPatchState)
 
-        if (installedInfo != null && trackedPresentation.isPatched) {
-            isInstalledOnDevice = true
-            appInfo = installedInfo
-        } else {
-            isInstalledOnDevice = false
-            appInfo = snapshot.savedPatchedApkInfo
-        }
+        // This flag authorizes actions against Morphe's tracked build, so a confirmed stock
+        // replacement remains false even though its own metadata is safe to display.
+        isInstalledOnDevice = installedInfo != null && trackedPresentation.isPatched
+        appInfo = trackedPresentation.displayedPackageInfo(
+            installedPackageInfo = installedInfo,
+            savedPackageInfo = snapshot.savedPatchedApkInfo
+        )
         isAppDeleted = trackedPresentation.isDeleted
         isInstallStateNotPatched = trackedPresentation.isNotPatched
         isInstallStateUnknown = trackedPresentation.isUnknown

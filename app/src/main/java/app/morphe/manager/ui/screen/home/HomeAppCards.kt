@@ -55,6 +55,7 @@ import app.morphe.manager.ui.theme.LocalMonochromeTheme
 import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 import app.morphe.manager.util.AppCardColorResolver
 import app.morphe.manager.util.AppDataSource
+import app.morphe.manager.util.withVersionPrefix
 
 private data class HomeAppCardStyle(
     val monochrome: Boolean,
@@ -208,12 +209,12 @@ fun InstalledAppCard(
     val installedLabel = stringResource(R.string.installed)
     val updateAvailableLabel = stringResource(R.string.update_available)
     val deletedLabel = stringResource(R.string.uninstalled)
-    val notPatchedLabel = stringResource(R.string.home_not_patched_yet)
+    val replacementLabel = stringResource(R.string.home_unpatched_version_installed)
     val unverifiedLabel = stringResource(R.string.home_unverified)
 
     val version = remember(packageInfo, installedApp, isAppDeleted) {
         val raw = packageInfo?.versionName ?: installedApp.version
-        if (raw.startsWith("v")) raw else "v$raw"
+        raw.withVersionPrefix()
     }
 
     val contentDesc = remember(
@@ -226,7 +227,7 @@ fun InstalledAppCard(
         isAppDeleted,
         deletedLabel,
         isInstallStateNotPatched,
-        notPatchedLabel,
+        replacementLabel,
         isInstallStateUnknown,
         unverifiedLabel
     ) {
@@ -238,7 +239,7 @@ fun InstalledAppCard(
             append(", ")
             append(
                 when {
-                    isInstallStateNotPatched -> notPatchedLabel
+                    isInstallStateNotPatched -> replacementLabel
                     isAppDeleted -> deletedLabel
                     isInstallStateUnknown -> unverifiedLabel
                     else -> installedLabel
@@ -310,7 +311,7 @@ fun InstalledAppCard(
 
                 if (isInstallStateNotPatched) {
                     StatusBadge(
-                        text = notPatchedLabel,
+                        text = replacementLabel,
                         icon = Icons.Outlined.AutoFixHigh,
                         containerColor = cardStyle.chipContainerColor,
                         contentColor = cardStyle.chipContentColor

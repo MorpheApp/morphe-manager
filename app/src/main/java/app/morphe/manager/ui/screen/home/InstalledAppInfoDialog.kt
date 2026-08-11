@@ -475,7 +475,7 @@ fun InstalledAppInfoDialog(
                                     StaggeredItem(entered = entered.value, index = 2) {
                                         WarningBanner(
                                             icon = Icons.Outlined.AutoFixHigh,
-                                            title = stringResource(R.string.home_not_patched_yet),
+                                            title = stringResource(R.string.home_unpatched_version_installed),
                                             description = stringResource(R.string.home_app_info_not_patched_description),
                                             buttonText = stringResource(R.string.patch),
                                             buttonIcon = Icons.Outlined.AutoFixHigh,
@@ -592,7 +592,7 @@ fun InstalledAppInfoDialog(
                                         StaggeredItem(entered = entered.value, index = 1) {
                                             WarningBanner(
                                                 icon = Icons.Outlined.AutoFixHigh,
-                                                title = stringResource(R.string.home_not_patched_yet),
+                                                title = stringResource(R.string.home_unpatched_version_installed),
                                                 description = stringResource(R.string.home_app_info_not_patched_description),
                                                 buttonText = stringResource(R.string.patch),
                                                 buttonIcon = Icons.Outlined.AutoFixHigh,
@@ -927,7 +927,7 @@ private fun AppHeroHeader(
                     }
                     // Animated version (slightly behind name via sub-range)
                     Text(
-                        text = appInfo?.versionName?.let { "v$it" } ?: installedApp.version,
+                        text = (appInfo?.versionName ?: installedApp.version).withVersionPrefix(),
                         style = MaterialTheme.typography.bodyMedium,
                         color = onHero.copy(alpha = 0.50f),
                         modifier = Modifier.graphicsLayer {
