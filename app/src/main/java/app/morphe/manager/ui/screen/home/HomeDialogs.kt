@@ -1132,7 +1132,7 @@ private fun InstalledAppPickerDialog(
                 AppFilter.UserOnly -> Icons.Outlined.Person to labelUser
                 AppFilter.SystemOnly -> Icons.Outlined.Android to labelSystem
             }
-            DialogTitleAction(
+            TitleAction(
                 icon = icon,
                 contentDescription = description,
                 onClick = {
@@ -1149,7 +1149,7 @@ private fun InstalledAppPickerDialog(
                         }
                     )
                 },
-                style = DialogTitleActionStyle.Toggle,
+                style = TitleActionStyle.Toggle,
                 active = appFilter != AppFilter.All
             )
         },

@@ -380,7 +380,7 @@ fun BatchPatcherScreen(
         title = stringResource(R.string.batch_patch_title),
         titleTrailingContent = if (current?.phase == BatchPhase.FINISHED && hasUnfinished) {
             {
-                DialogTitleAction(
+                TitleAction(
                     icon = Icons.Outlined.Refresh,
                     contentDescription = stringResource(R.string.retry),
                     onClick = viewModel::retryUnfinished

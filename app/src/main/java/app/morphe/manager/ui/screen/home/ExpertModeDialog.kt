@@ -129,11 +129,11 @@ fun ExpertModeDialog(
                 tone = if (totalSelectedCount > 0) SemanticTone.Primary else SemanticTone.Neutral
             )
 
-            DialogTitleAction(
+            TitleAction(
                 icon = if (search.visible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
                 contentDescription = stringResource(R.string.expert_mode_search),
                 onClick = { search.toggle() },
-                style = DialogTitleActionStyle.Toggle,
+                style = TitleActionStyle.Toggle,
                 active = search.visible
             )
         },

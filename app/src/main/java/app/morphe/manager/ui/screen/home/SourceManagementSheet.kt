@@ -236,56 +236,33 @@ fun BundleManagementSheet(
                                     horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    FilledIconButton(
+                                    TitleAction(
+                                        icon = if (search.visible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
+                                        contentDescription = stringResource(R.string.search),
                                         onClick = { search.toggle() },
-                                        // Pinned to the container the button already draws, otherwise
-                                        // it reserves the 48dp touch target and doubles the row spacing
-                                        modifier = Modifier.size(IconButtonDefaults.smallContainerSize()),
-                                        colors = IconButtonDefaults.filledIconButtonColors(
-                                            containerColor = if (search.visible)
-                                                MaterialTheme.colorScheme.primary
-                                            else
-                                                MaterialTheme.colorScheme.primaryContainer
-                                        )
-                                    ) {
-                                        Icon(
-                                            imageVector = if (search.visible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
-                                            contentDescription = stringResource(R.string.search)
-                                        )
-                                    }
+                                        style = TitleActionStyle.AccentToggle,
+                                        active = search.visible
+                                    )
 
                                     val activeSortLabel = stringResource(sourceSortMode.labelRes)
-                                    FilledIconButton(
+                                    TitleAction(
+                                        icon = Icons.AutoMirrored.Outlined.Sort,
+                                        contentDescription = stringResource(R.string.sort),
                                         onClick = { showSortDialog = true },
-                                        modifier = Modifier
-                                            .size(IconButtonDefaults.smallContainerSize())
-                                            .semantics {
-                                                role = Role.Button
-                                                stateDescription = activeSortLabel
-                                            },
-                                        colors = IconButtonDefaults.filledIconButtonColors(
-                                            containerColor = MaterialTheme.colorScheme.primaryContainer
-                                        )
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.AutoMirrored.Outlined.Sort,
-                                            contentDescription = stringResource(R.string.sort)
-                                        )
-                                    }
+                                        modifier = Modifier.semantics {
+                                            role = Role.Button
+                                            stateDescription = activeSortLabel
+                                        },
+                                        style = TitleActionStyle.Accent
+                                    )
                                 }
                             }
-                            FilledIconButton(
+                            TitleAction(
+                                icon = Icons.Default.Add,
+                                contentDescription = stringResource(R.string.add),
                                 onClick = onAddSource,
-                                modifier = Modifier.size(IconButtonDefaults.smallContainerSize()),
-                                colors = IconButtonDefaults.filledIconButtonColors(
-                                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                                )
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Add,
-                                    contentDescription = stringResource(R.string.add)
-                                )
-                            }
+                                style = TitleActionStyle.Accent
+                            )
                         }
                     }
 

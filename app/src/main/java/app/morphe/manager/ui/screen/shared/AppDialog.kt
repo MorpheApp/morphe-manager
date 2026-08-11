@@ -50,16 +50,6 @@ enum class DialogPadding {
     None
 }
 
-/** Visual style of a [DialogTitleAction]. */
-enum class DialogTitleActionStyle {
-    /** Flat [IconButton], 24dp icon, dialog text tint. Use for info/reset actions */
-    Plain,
-    /** Tonal 36dp circle with errorContainer palette, 20dp icon. Use for bulk destructive actions */
-    Destructive,
-    /** Tonal 36dp circle that fills with the primary palette while active. Use for search and filter toggles */
-    Toggle
-}
-
 /**
  * Unified fullscreen dialog component.
  *
@@ -224,81 +214,6 @@ fun BoxScope.ContentOverlay(
             contentAlignment = Alignment.Center,
             content = content
         )
-    }
-}
-
-/**
- * Icon action rendered inside the [AppDialog] title trailing slot. Uniforms the
- * button styles used across dialogs so callers only pick an icon and a semantic style.
- *
- * @param active Whether a [DialogTitleActionStyle.Toggle] action is currently engaged.
- */
-@Composable
-fun DialogTitleAction(
-    icon: ImageVector,
-    contentDescription: String,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    style: DialogTitleActionStyle = DialogTitleActionStyle.Plain,
-    active: Boolean = false
-) {
-    // Pinned to the container the button already draws, otherwise it reserves the 48dp touch
-    // target around it and doubles the gap the title row asks for
-    val sizedModifier = modifier.size(IconButtonDefaults.smallContainerSize())
-
-    when (style) {
-        DialogTitleActionStyle.Plain -> {
-            IconButton(onClick = onClick, modifier = sizedModifier) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = contentDescription,
-                    modifier = Modifier.size(Defaults.IconSize),
-                    tint = LocalDialogTextColor.current
-                )
-            }
-        }
-
-        DialogTitleActionStyle.Destructive -> {
-            FilledTonalIconButton(
-                onClick = onClick,
-                modifier = sizedModifier,
-                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                    contentColor = MaterialTheme.colorScheme.onErrorContainer
-                )
-            ) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = contentDescription,
-                    modifier = Modifier.size(Defaults.IconSize)
-                )
-            }
-        }
-
-        DialogTitleActionStyle.Toggle -> {
-            FilledTonalIconButton(
-                onClick = onClick,
-                modifier = sizedModifier,
-                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = if (active) {
-                        MaterialTheme.colorScheme.primaryContainer
-                    } else {
-                        MaterialTheme.colorScheme.surfaceVariant
-                    },
-                    contentColor = if (active) {
-                        MaterialTheme.colorScheme.onPrimaryContainer
-                    } else {
-                        MaterialTheme.colorScheme.onSurfaceVariant
-                    }
-                )
-            ) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = contentDescription,
-                    modifier = Modifier.size(Defaults.IconSize)
-                )
-            }
-        }
     }
 }
 

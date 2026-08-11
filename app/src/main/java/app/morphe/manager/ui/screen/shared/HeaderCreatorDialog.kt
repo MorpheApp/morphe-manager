@@ -225,7 +225,7 @@ fun HeaderCreatorDialog(
         onDismissRequest = { if (!isCreating) onDismiss() },
         title = stringResource(R.string.header_creator_create),
         titleTrailingContent = {
-            DialogTitleAction(
+            TitleAction(
                 icon = Icons.Outlined.Info,
                 contentDescription = stringResource(R.string.header_creator_guide),
                 onClick = { showInfoDialog.value = true }

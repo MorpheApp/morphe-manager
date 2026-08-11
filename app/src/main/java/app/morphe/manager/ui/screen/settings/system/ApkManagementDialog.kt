@@ -776,20 +776,20 @@ private fun ApkManagementDialogContent(
         titleTrailingContent = if (isSearchable || canDeleteAll) {
             {
                 if (isSearchable) {
-                    DialogTitleAction(
+                    TitleAction(
                         icon = if (search.visible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
                         contentDescription = stringResource(R.string.search),
                         onClick = { search.toggle() },
-                        style = DialogTitleActionStyle.Toggle,
+                        style = TitleActionStyle.Toggle,
                         active = search.visible
                     )
                 }
                 if (canDeleteAll) {
-                    DialogTitleAction(
+                    TitleAction(
                         icon = Icons.Outlined.DeleteForever,
                         contentDescription = stringResource(R.string.delete_all),
                         onClick = { showDeleteAllConfirmation = true },
-                        style = DialogTitleActionStyle.Destructive
+                        style = TitleActionStyle.Destructive
                     )
                 }
             }

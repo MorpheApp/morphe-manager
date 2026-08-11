@@ -318,20 +318,20 @@ private fun PatchSelectionManagementDialogContent(
         titleTrailingContent = if (isSearchable || canResetAll) {
             {
                 if (isSearchable) {
-                    DialogTitleAction(
+                    TitleAction(
                         icon = if (search.visible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
                         contentDescription = stringResource(R.string.search),
                         onClick = { search.toggle() },
-                        style = DialogTitleActionStyle.Toggle,
+                        style = TitleActionStyle.Toggle,
                         active = search.visible
                     )
                 }
                 if (canResetAll) {
-                    DialogTitleAction(
+                    TitleAction(
                         icon = Icons.Outlined.Restore,
                         contentDescription = stringResource(R.string.reset),
                         onClick = onShowResetAllConfirmation,
-                        style = DialogTitleActionStyle.Destructive
+                        style = TitleActionStyle.Destructive
                     )
                 }
             }
