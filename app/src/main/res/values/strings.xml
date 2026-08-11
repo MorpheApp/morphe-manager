@@ -118,6 +118,7 @@
 
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch sources</string>
+    <string name="sources_search">Search sources</string>
     <string name="sources_sort_title">Sort patch sources</string>
     <string name="sources_sort_manual">Manual order</string>
     <string name="sources_sort_manual_hint">Long-press a source to reorder</string>

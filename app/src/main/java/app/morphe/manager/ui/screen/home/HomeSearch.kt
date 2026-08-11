@@ -50,6 +50,7 @@ internal fun HomeSearchTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
+    label: String = stringResource(R.string.home_search_apps),
     requestFocus: Boolean = false
 ) {
     val focusRequester = remember { FocusRequester() }
@@ -66,11 +67,11 @@ internal fun HomeSearchTextField(
         AppDialogTextField(
             value = value,
             onValueChange = onValueChange,
-            label = { Text(stringResource(R.string.home_search_apps)) },
+            label = { Text(label) },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Outlined.Search,
-                    contentDescription = stringResource(R.string.home_search_apps)
+                    contentDescription = label
                 )
             },
             showClearButton = true,

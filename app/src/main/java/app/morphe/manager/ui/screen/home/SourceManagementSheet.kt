@@ -106,6 +106,8 @@ fun BundleManagementSheet(
 
     val bundleToDelete = remember { mutableStateOf<PatchBundleSource?>(null) }
     var showSortDialog by remember { mutableStateOf(false) }
+    var searchQuery by remember { mutableStateOf("") }
+    var searchVisible by remember { mutableStateOf(false) }
     // Expanded state lifted out of LazyColumn so it survives scroll-off-screen recomposition
     var expandedBundleUids by remember { mutableStateOf<Set<Int>>(emptySet()) }
 
@@ -139,6 +141,13 @@ fun BundleManagementSheet(
     val isManualSort = sourceSortMode == SourceBundleSortMode.MANUAL
     val orderedSources = remember(localOrder, sources, sourceSortMode) {
         sources.sortedForSourceSort(sourceSortMode, localOrder)
+    }
+    val visibleSources = remember(orderedSources, searchQuery) {
+        if (searchQuery.isBlank()) orderedSources
+        else orderedSources.filter { source ->
+            source.displayTitle.contains(searchQuery, ignoreCase = true) ||
+                    source.name.contains(searchQuery, ignoreCase = true)
+        }
     }
     val alphabetScrollMode = sourceSortMode == SourceBundleSortMode.NAME_ASC ||
             sourceSortMode == SourceBundleSortMode.NAME_DESC
@@ -219,6 +228,25 @@ fun BundleManagementSheet(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             AnimatedVisibility(visible = sources.size >= 2) {
+                                FilledIconButton(
+                                    onClick = {
+                                        if (searchVisible) searchQuery = ""
+                                        searchVisible = !searchVisible
+                                    },
+                                    colors = IconButtonDefaults.filledIconButtonColors(
+                                        containerColor = if (searchVisible)
+                                            MaterialTheme.colorScheme.primary
+                                        else
+                                            MaterialTheme.colorScheme.primaryContainer
+                                    )
+                                ) {
+                                    Icon(
+                                        imageVector = if (searchVisible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
+                                        contentDescription = stringResource(R.string.search)
+                                    )
+                                }
+                            }
+                            AnimatedVisibility(visible = sources.size >= 2) {
                                 val activeSortLabel = stringResource(sourceSortMode.labelRes)
                                 FilledIconButton(
                                     onClick = { showSortDialog = true },
@@ -250,6 +278,22 @@ fun BundleManagementSheet(
                         }
                     }
 
+                    AnimatedVisibility(
+                        visible = searchVisible && sources.size >= 2,
+                        enter = Animations.expandFadeEnter,
+                        exit = Animations.shrinkFadeExit
+                    ) {
+                        HomeSearchTextField(
+                            value = searchQuery,
+                            onValueChange = { searchQuery = it },
+                            label = stringResource(R.string.sources_search),
+                            requestFocus = true,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 8.dp)
+                        )
+                    }
+
                     Spacer(Modifier.height(8.dp))
                 }
 
@@ -272,7 +316,16 @@ fun BundleManagementSheet(
                             bottom = 16.dp
                         )
                     ) {
-                        items(orderedSources, key = { bundle -> bundle.uid }) { bundle ->
+                        if (visibleSources.isEmpty() && searchQuery.isNotBlank()) {
+                            item(key = "search_empty") {
+                                EmptyState(
+                                    message = stringResource(R.string.search_no_results),
+                                    icon = Icons.Outlined.SearchOff
+                                )
+                            }
+                        }
+
+                        items(visibleSources, key = { bundle -> bundle.uid }) { bundle ->
                             val hasExperimentalVersions = remember(bundle.uid, bundleInfo) {
                                 bundleInfo[bundle.uid]?.patches?.any { patch ->
                                     patch.compatiblePackages?.any { pkg ->
@@ -282,7 +335,7 @@ fun BundleManagementSheet(
                             }
                             val useExperimentalVersions = bundle.uid.toString() in experimentalVersionsEnabled
 
-                            val isFirstCard = bundle.uid == orderedSources.firstOrNull()?.uid
+                            val isFirstCard = bundle.uid == visibleSources.firstOrNull()?.uid
                             ReorderableItem(
                                 reorderableState,
                                 key = bundle.uid,
