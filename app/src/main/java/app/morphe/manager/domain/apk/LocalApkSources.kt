@@ -103,6 +103,22 @@ internal fun resolveTrackedPatchState(
 }
 
 /**
+ * Whether the tracked record can still be removed from the app detail view.
+ *
+ * The record outlives the build it describes, so cleanup has to stay reachable whenever the
+ * patched build is no longer accounted for. Only a confirmed patched install with nothing
+ * retained has nothing to clean up, since the record then describes the app on the device.
+ */
+internal fun canRemoveTrackedRecord(
+    installType: InstallType,
+    patchState: InstalledPatchState?,
+    hasSavedApk: Boolean
+): Boolean =
+    hasSavedApk ||
+            installType == InstallType.SAVED ||
+            patchState != InstalledPatchState.Patched
+
+/**
  * The APKs already on the device that an app could be patched from: the original Morphe kept
  * from a previous run, and the app as the system has it installed.
  */

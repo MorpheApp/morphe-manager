@@ -306,7 +306,10 @@ fun InstalledAppInfoDialog(
         show = showDeleteDialog.value,
         isSavedOnly = installedApp?.installType == InstallType.SAVED,
         appInfo = viewModel.appInfo,
-        appLabel = viewModel.appInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString(),
+        packageName = packageName,
+        appLabel = appLabel,
+        hasSavedApk = viewModel.hasSavedCopy,
+        hasOriginalApk = viewModel.hasOriginalApk,
         onConfirm = {
             viewModel.removeAppCompletely()
             showDeleteDialog.value = false
@@ -1370,7 +1373,7 @@ private fun ActionsSection(
         )
     }
 
-    if (viewModel.hasSavedCopy || viewModel.isAppDeleted || installedApp.installType == InstallType.SAVED) {
+    if (viewModel.canRemoveRecord) {
         destructiveActions.add(
             ActionItem(
                 text = stringResource(R.string.delete),
@@ -1589,7 +1592,10 @@ private fun DeleteConfirmDialog(
     show: Boolean,
     isSavedOnly: Boolean,
     appInfo: PackageInfo?,
-    appLabel: String?,
+    packageName: String,
+    appLabel: String,
+    hasSavedApk: Boolean,
+    hasOriginalApk: Boolean,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -1615,18 +1621,17 @@ private fun DeleteConfirmDialog(
         ) {
             AppIcon(
                 packageInfo = appInfo,
+                packageName = packageName,
                 contentDescription = null,
                 modifier = Modifier.size(64.dp)
             )
-            if (appLabel != null) {
-                Text(
-                    text = appLabel,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.SemiBold,
-                    color = LocalDialogTextColor.current,
-                    textAlign = TextAlign.Center
-                )
-            }
+            Text(
+                text = appLabel,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.SemiBold,
+                color = LocalDialogTextColor.current,
+                textAlign = TextAlign.Center
+            )
             LabeledSection(
                 title = stringResource(R.string.home_app_info_remove_app_warning)
             ) {
@@ -1636,18 +1641,23 @@ private fun DeleteConfirmDialog(
                         text = stringResource(R.string.home_app_info_delete_item_patched_apk)
                     )
                 } else {
+                    // A record can outlive both archives, so only list the files that are there
                     DeleteListItem(
                         icon = Icons.Outlined.Storage,
                         text = stringResource(R.string.home_app_info_delete_item_database)
                     )
-                    DeleteListItem(
-                        icon = Icons.Outlined.Android,
-                        text = stringResource(R.string.home_app_info_delete_item_patched_apk)
-                    )
-                    DeleteListItem(
-                        icon = Icons.Outlined.FilePresent,
-                        text = stringResource(R.string.home_app_info_delete_item_original_apk)
-                    )
+                    if (hasSavedApk) {
+                        DeleteListItem(
+                            icon = Icons.Outlined.Android,
+                            text = stringResource(R.string.home_app_info_delete_item_patched_apk)
+                        )
+                    }
+                    if (hasOriginalApk) {
+                        DeleteListItem(
+                            icon = Icons.Outlined.FilePresent,
+                            text = stringResource(R.string.home_app_info_delete_item_original_apk)
+                        )
+                    }
                 }
             }
             if (!isSavedOnly) {

@@ -13,6 +13,7 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.apk.InstalledPatchState
 import app.morphe.manager.domain.apk.LocalApkSources
+import app.morphe.manager.domain.apk.canRemoveTrackedRecord
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.UninstallCancelledException
@@ -67,6 +68,8 @@ class InstalledAppInfoViewModel(
     var isAppDeleted by mutableStateOf(false)
         private set
     var isInstallStateUnknown by mutableStateOf(false)
+        private set
+    var canRemoveRecord by mutableStateOf(false)
         private set
     var isLoading by mutableStateOf(true)
         private set
@@ -292,6 +295,8 @@ class InstalledAppInfoViewModel(
             isInstallStateUnknown = trackedPatchState == InstalledPatchState.Unknown
             appInfo = snapshot.savedPatchedApkInfo
         }
+
+        canRemoveRecord = canRemoveTrackedRecord(app.installType, trackedPatchState, hasSavedCopy)
 
         // Update mounted state
         isMounted = rootInstaller.isDeviceRooted() && rootInstaller.isAppMounted(app.currentPackageName)
