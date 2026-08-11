@@ -37,9 +37,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.model.HomeAppItem
-import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
-import app.morphe.manager.ui.screen.shared.Defaults
 import app.morphe.manager.ui.screen.shared.AppDialogTextField
+import app.morphe.manager.ui.screen.shared.Defaults
+import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
 
 /**
  * Wraps [AppDialogTextField] with [LocalDialogTextColor] set to onSurface
@@ -69,9 +69,10 @@ internal fun HomeSearchTextField(
             onValueChange = onValueChange,
             label = { Text(label) },
             leadingIcon = {
+                // The label already announces the field, so the icon stays decorative
                 Icon(
                     imageVector = Icons.Outlined.Search,
-                    contentDescription = label
+                    contentDescription = null
                 )
             },
             showClearButton = true,

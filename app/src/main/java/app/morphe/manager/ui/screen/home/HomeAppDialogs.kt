@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.home
 
 import android.view.HapticFeedbackConstants
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
@@ -115,13 +116,7 @@ fun AppPatchesDialog(
     }
 
     AppDialog(
-        onDismissRequest = {
-            when {
-                searchQuery.value.isNotBlank() -> searchQuery.value = ""
-                selectedBundle.value != null -> selectedBundle.value = null
-                else -> onDismiss()
-            }
-        },
+        onDismissRequest = onDismiss,
         dismissOnClickOutside = true,
         title = null,
         padding = DialogPadding.Compact,
@@ -135,6 +130,11 @@ fun AppPatchesDialog(
             )
         }
     ) {
+        // Back unwinds the active filters before the dialog itself. Registered last so the
+        // query clears first, and kept off onDismissRequest so an outside tap still dismisses.
+        BackHandler(enabled = selectedBundle.value != null) { selectedBundle.value = null }
+        BackHandler(enabled = searchQuery.value.isNotBlank()) { searchQuery.value = "" }
+
         val listState = rememberLazyListState()
         val activeBundleLabel = remember { mutableStateOf("") }
         LaunchedEffect(selectedBundle.value) {

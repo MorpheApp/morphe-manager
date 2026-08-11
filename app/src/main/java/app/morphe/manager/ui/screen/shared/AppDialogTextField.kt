@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -23,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -169,6 +171,84 @@ fun AppDialogTextField(
         shape = RoundedCornerShape(Defaults.CompactCornerRadius),
         colors = morpheDialogTextFieldColors(textColor)
     )
+}
+
+/**
+ * Search field for dialog lists, backed by an opaque surface so list items
+ * scrolling underneath a sticky header stay hidden.
+ *
+ * @param requestFocus Opens the keyboard on first composition, for fields revealed by a toggle.
+ */
+@Composable
+fun AppDialogSearchTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    requestFocus: Boolean = false
+) {
+    val focusRequester = remember { FocusRequester() }
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    LaunchedEffect(requestFocus) {
+        if (requestFocus) {
+            focusRequester.requestFocus()
+            keyboardController?.show()
+        }
+    }
+
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.surface
+    ) {
+        AppDialogTextField(
+            value = value,
+            onValueChange = onValueChange,
+            label = { Text(label) },
+            leadingIcon = {
+                // The label already announces the field, so the icon stays decorative
+                Icon(
+                    imageVector = Icons.Outlined.Search,
+                    contentDescription = null
+                )
+            },
+            showClearButton = true,
+            enabled = enabled,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 4.dp)
+                .focusRequester(focusRequester)
+        )
+    }
+}
+
+/**
+ * Collapsible [AppDialogSearchTextField] for the sticky header of a dialog list.
+ *
+ * Kept as its own composable so no layout scope is in scope at the [AnimatedVisibility] call:
+ * inside `stickyHeader` the innermost receiver is `LazyItemScope`, and an enclosing `ColumnScope`
+ * would otherwise pull in the scoped overload, which cannot be called there.
+ */
+@Composable
+fun AppDialogSearchHeader(
+    visible: Boolean,
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String
+) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = Animations.expandFadeEnter,
+        exit = Animations.shrinkFadeExit
+    ) {
+        AppDialogSearchTextField(
+            value = value,
+            onValueChange = onValueChange,
+            label = label,
+            requestFocus = true
+        )
+    }
 }
 
 /**

@@ -1132,7 +1132,9 @@ private fun InstalledAppPickerDialog(
                 AppFilter.UserOnly -> Icons.Outlined.Person to labelUser
                 AppFilter.SystemOnly -> Icons.Outlined.Android to labelSystem
             }
-            FilledTonalIconButton(
+            DialogTitleAction(
+                icon = icon,
+                contentDescription = description,
                 onClick = {
                     appFilter = when (appFilter) {
                         AppFilter.All -> AppFilter.UserOnly
@@ -1147,17 +1149,9 @@ private fun InstalledAppPickerDialog(
                         }
                     )
                 },
-                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-            ) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = description,
-                    modifier = Modifier.size(Defaults.IconSizeSmall)
-                )
-            }
+                style = DialogTitleActionStyle.Toggle,
+                active = appFilter != AppFilter.All
+            )
         },
         footer = {
             AppDialogOutlinedButton(
@@ -1178,24 +1172,12 @@ private fun InstalledAppPickerDialog(
                 userScrollEnabled = !isLoading
             ) {
                 stickyHeader {
-                    Surface(
-                        modifier = Modifier.fillMaxWidth(),
-                        color = MaterialTheme.colorScheme.surface
-                    ) {
-                        AppDialogTextField(
-                            value = searchQuery.value,
-                            onValueChange = { searchQuery.value = it },
-                            placeholder = { Text(stringResource(R.string.search)) },
-                            leadingIcon = {
-                                Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
-                            },
-                            showClearButton = true,
-                            enabled = !isLoading,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(bottom = 4.dp)
-                        )
-                    }
+                    AppDialogSearchTextField(
+                        value = searchQuery.value,
+                        onValueChange = { searchQuery.value = it },
+                        label = stringResource(R.string.search),
+                        enabled = !isLoading
+                    )
                 }
 
                 if (isLoading) {

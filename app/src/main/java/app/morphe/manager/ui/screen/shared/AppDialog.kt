@@ -55,7 +55,9 @@ enum class DialogTitleActionStyle {
     /** Flat [IconButton], 24dp icon, dialog text tint. Use for info/reset actions */
     Plain,
     /** Tonal 36dp circle with errorContainer palette, 20dp icon. Use for bulk destructive actions */
-    Destructive
+    Destructive,
+    /** Tonal 36dp circle that fills with the primary palette while active. Use for search and filter toggles */
+    Toggle
 }
 
 /**
@@ -63,7 +65,7 @@ enum class DialogTitleActionStyle {
  *
  * @param onDismissRequest Called when user dismisses the dialog.
  * @param title Optional title displayed at the top.
- * @param titleTrailingContent Optional content displayed after the title.
+ * @param titleTrailingContent Optional actions displayed after the title, laid out in a row.
  * @param footer Optional footer content.
  * @param dismissOnClickOutside Whether clicking outside dismisses the dialog.
  * @param scrollable Whether to wrap content in verticalScroll and draw a [ListScrollbar] and [ScrollToTopButton] over it.
@@ -76,7 +78,7 @@ enum class DialogTitleActionStyle {
 fun AppDialog(
     onDismissRequest: () -> Unit,
     title: String? = null,
-    titleTrailingContent: (@Composable () -> Unit)? = null,
+    titleTrailingContent: (@Composable RowScope.() -> Unit)? = null,
     footer: (@Composable () -> Unit)? = null,
     dismissOnClickOutside: Boolean = false,
     scrollable: Boolean = true,
@@ -226,8 +228,10 @@ fun BoxScope.ContentOverlay(
 }
 
 /**
- * Icon action rendered inside the [AppDialog] title trailing slot. Uniforms the two
+ * Icon action rendered inside the [AppDialog] title trailing slot. Uniforms the
  * button styles used across dialogs so callers only pick an icon and a semantic style.
+ *
+ * @param active Whether a [DialogTitleActionStyle.Toggle] action is currently engaged.
  */
 @Composable
 fun DialogTitleAction(
@@ -235,15 +239,20 @@ fun DialogTitleAction(
     contentDescription: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    style: DialogTitleActionStyle = DialogTitleActionStyle.Plain
+    style: DialogTitleActionStyle = DialogTitleActionStyle.Plain,
+    active: Boolean = false
 ) {
+    // Pinned to the container the button already draws, otherwise it reserves the 48dp touch
+    // target around it and doubles the gap the title row asks for
+    val sizedModifier = modifier.size(IconButtonDefaults.smallContainerSize())
+
     when (style) {
         DialogTitleActionStyle.Plain -> {
-            IconButton(onClick = onClick, modifier = modifier) {
+            IconButton(onClick = onClick, modifier = sizedModifier) {
                 Icon(
                     imageVector = icon,
                     contentDescription = contentDescription,
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(Defaults.IconSize),
                     tint = LocalDialogTextColor.current
                 )
             }
@@ -252,7 +261,7 @@ fun DialogTitleAction(
         DialogTitleActionStyle.Destructive -> {
             FilledTonalIconButton(
                 onClick = onClick,
-                modifier = modifier.size(36.dp),
+                modifier = sizedModifier,
                 colors = IconButtonDefaults.filledTonalIconButtonColors(
                     containerColor = MaterialTheme.colorScheme.errorContainer,
                     contentColor = MaterialTheme.colorScheme.onErrorContainer
@@ -261,7 +270,32 @@ fun DialogTitleAction(
                 Icon(
                     imageVector = icon,
                     contentDescription = contentDescription,
-                    modifier = Modifier.size(Defaults.IconSizeSmall)
+                    modifier = Modifier.size(Defaults.IconSize)
+                )
+            }
+        }
+
+        DialogTitleActionStyle.Toggle -> {
+            FilledTonalIconButton(
+                onClick = onClick,
+                modifier = sizedModifier,
+                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = if (active) {
+                        MaterialTheme.colorScheme.primaryContainer
+                    } else {
+                        MaterialTheme.colorScheme.surfaceVariant
+                    },
+                    contentColor = if (active) {
+                        MaterialTheme.colorScheme.onPrimaryContainer
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    }
+                )
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = contentDescription,
+                    modifier = Modifier.size(Defaults.IconSize)
                 )
             }
         }
@@ -274,7 +308,7 @@ fun DialogTitleAction(
 @Composable
 private fun DialogContent(
     title: String?,
-    titleTrailingContent: (@Composable () -> Unit)?,
+    titleTrailingContent: (@Composable RowScope.() -> Unit)?,
     footer: (@Composable () -> Unit)?,
     isDarkTheme: Boolean,
     scrollable: Boolean,
@@ -374,7 +408,13 @@ private fun DialogContent(
                                 modifier = Modifier.fillMaxWidth()
                             )
                         }
-                        if (titleTrailingContent != null) titleTrailingContent()
+                        if (titleTrailingContent != null) {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+                                verticalAlignment = Alignment.CenterVertically,
+                                content = titleTrailingContent
+                            )
+                        }
                     }
                 }
 

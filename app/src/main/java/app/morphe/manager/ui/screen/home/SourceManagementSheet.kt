@@ -106,8 +106,9 @@ fun BundleManagementSheet(
 
     val bundleToDelete = remember { mutableStateOf<PatchBundleSource?>(null) }
     var showSortDialog by remember { mutableStateOf(false) }
-    var searchQuery by remember { mutableStateOf("") }
-    var searchVisible by remember { mutableStateOf(false) }
+    // Search is offered from two sources up
+    val isSearchable = sources.size >= 2
+    val search = rememberSearchFieldState(searchable = isSearchable)
     // Expanded state lifted out of LazyColumn so it survives scroll-off-screen recomposition
     var expandedBundleUids by remember { mutableStateOf<Set<Int>>(emptySet()) }
 
@@ -142,20 +143,20 @@ fun BundleManagementSheet(
     val orderedSources = remember(localOrder, sources, sourceSortMode) {
         sources.sortedForSourceSort(sourceSortMode, localOrder)
     }
-    val visibleSources = remember(orderedSources, searchQuery) {
-        if (searchQuery.isBlank()) orderedSources
+    val visibleSources = remember(orderedSources, search.query) {
+        if (search.query.isBlank()) orderedSources
         else orderedSources.filter { source ->
-            source.displayTitle.contains(searchQuery, ignoreCase = true) ||
-                    source.name.contains(searchQuery, ignoreCase = true)
+            source.displayTitle.contains(search.query, ignoreCase = true) ||
+                    source.name.contains(search.query, ignoreCase = true)
         }
     }
     val alphabetScrollMode = sourceSortMode == SourceBundleSortMode.NAME_ASC ||
             sourceSortMode == SourceBundleSortMode.NAME_DESC
-    val sourceScrollTargets = remember(alphabetScrollMode, orderedSources) {
+    val sourceScrollTargets = remember(alphabetScrollMode, visibleSources) {
         if (!alphabetScrollMode) {
             emptyList()
         } else {
-            buildIndexedScrollTargets(orderedSources) { source -> source.displayTitle }
+            buildIndexedScrollTargets(visibleSources) { source -> source.displayTitle }
         }
     }
     val haptic = LocalHapticFeedback.current
@@ -195,6 +196,9 @@ fun BundleManagementSheet(
         val uriHandler = LocalUriHandler.current
         val failedToOpenUrlText = stringResource(R.string.sources_management_failed_to_open_url)
 
+        // Registered inside the sheet content so it outranks the sheet's own dismiss handler
+        SearchFieldBackHandler(search)
+
         Box {
             Column(Modifier.fillMaxWidth()) {
                 // Header - outside scrollable area
@@ -224,48 +228,55 @@ fun BundleManagementSheet(
                         }
 
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            AnimatedVisibility(visible = sources.size >= 2) {
-                                FilledIconButton(
-                                    onClick = {
-                                        if (searchVisible) searchQuery = ""
-                                        searchVisible = !searchVisible
-                                    },
-                                    colors = IconButtonDefaults.filledIconButtonColors(
-                                        containerColor = if (searchVisible)
-                                            MaterialTheme.colorScheme.primary
-                                        else
-                                            MaterialTheme.colorScheme.primaryContainer
-                                    )
+                            AnimatedVisibility(visible = isSearchable) {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+                                    verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    Icon(
-                                        imageVector = if (searchVisible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
-                                        contentDescription = stringResource(R.string.search)
-                                    )
-                                }
-                            }
-                            AnimatedVisibility(visible = sources.size >= 2) {
-                                val activeSortLabel = stringResource(sourceSortMode.labelRes)
-                                FilledIconButton(
-                                    onClick = { showSortDialog = true },
-                                    modifier = Modifier.semantics {
-                                        role = Role.Button
-                                        stateDescription = activeSortLabel
-                                    },
-                                    colors = IconButtonDefaults.filledIconButtonColors(
-                                        containerColor = MaterialTheme.colorScheme.primaryContainer
-                                    )
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.AutoMirrored.Outlined.Sort,
-                                        contentDescription = stringResource(R.string.sort)
-                                    )
+                                    FilledIconButton(
+                                        onClick = { search.toggle() },
+                                        // Pinned to the container the button already draws, otherwise
+                                        // it reserves the 48dp touch target and doubles the row spacing
+                                        modifier = Modifier.size(IconButtonDefaults.smallContainerSize()),
+                                        colors = IconButtonDefaults.filledIconButtonColors(
+                                            containerColor = if (search.visible)
+                                                MaterialTheme.colorScheme.primary
+                                            else
+                                                MaterialTheme.colorScheme.primaryContainer
+                                        )
+                                    ) {
+                                        Icon(
+                                            imageVector = if (search.visible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
+                                            contentDescription = stringResource(R.string.search)
+                                        )
+                                    }
+
+                                    val activeSortLabel = stringResource(sourceSortMode.labelRes)
+                                    FilledIconButton(
+                                        onClick = { showSortDialog = true },
+                                        modifier = Modifier
+                                            .size(IconButtonDefaults.smallContainerSize())
+                                            .semantics {
+                                                role = Role.Button
+                                                stateDescription = activeSortLabel
+                                            },
+                                        colors = IconButtonDefaults.filledIconButtonColors(
+                                            containerColor = MaterialTheme.colorScheme.primaryContainer
+                                        )
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.AutoMirrored.Outlined.Sort,
+                                            contentDescription = stringResource(R.string.sort)
+                                        )
+                                    }
                                 }
                             }
                             FilledIconButton(
                                 onClick = onAddSource,
+                                modifier = Modifier.size(IconButtonDefaults.smallContainerSize()),
                                 colors = IconButtonDefaults.filledIconButtonColors(
                                     containerColor = MaterialTheme.colorScheme.primaryContainer
                                 )
@@ -279,13 +290,13 @@ fun BundleManagementSheet(
                     }
 
                     AnimatedVisibility(
-                        visible = searchVisible && sources.size >= 2,
+                        visible = search.visible,
                         enter = Animations.expandFadeEnter,
                         exit = Animations.shrinkFadeExit
                     ) {
                         HomeSearchTextField(
-                            value = searchQuery,
-                            onValueChange = { searchQuery = it },
+                            value = search.query,
+                            onValueChange = { search.query = it },
                             label = stringResource(R.string.sources_search),
                             requestFocus = true,
                             modifier = Modifier
@@ -316,7 +327,7 @@ fun BundleManagementSheet(
                             bottom = 16.dp
                         )
                     ) {
-                        if (visibleSources.isEmpty() && searchQuery.isNotBlank()) {
+                        if (search.isFiltering && visibleSources.isEmpty()) {
                             item(key = "search_empty") {
                                 EmptyState(
                                     message = stringResource(R.string.search_no_results),
@@ -415,7 +426,9 @@ fun BundleManagementSheet(
                                     },
                                     forceExpanded = isSingleDefaultBundle,
                                     isDragging = itemIsDragging,
-                                    longPressModifier = if (isManualSort) {
+                                    // Reorder maps list positions onto the full order, so a
+                                    // filtered list would move the wrong sources
+                                    longPressModifier = if (isManualSort && !search.isFiltering) {
                                         Modifier.longPressDraggableHandle(
                                             onDragStarted = {
                                                 isDragging = true
