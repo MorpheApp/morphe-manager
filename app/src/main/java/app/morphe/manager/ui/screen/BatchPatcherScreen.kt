@@ -215,6 +215,8 @@ fun BatchPatcherScreen(
         val metadata = bundleMetadata[search.item.packageName]
 
         DownloadInstructionsDialog(
+            downloadUrl = search.url,
+            requestedVersion = search.version,
             usingMountInstall = false,
             targetAppInstalled = search.item.source is BatchApkSource.Installed,
             downloadColor = metadata?.downloadColor ?: KnownApps.DEFAULT_DOWNLOAD_COLOR,

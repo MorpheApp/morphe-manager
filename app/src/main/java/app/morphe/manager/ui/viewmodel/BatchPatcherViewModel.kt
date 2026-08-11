@@ -257,7 +257,7 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
      * The API redirect takes a moment, so the unresolved search URL is published first and
      * replaced once it resolves. That way the dialog is never waiting on the network.
      */
-    data class ApkSearch(val item: BatchPatchItem, val url: String)
+    data class ApkSearch(val item: BatchPatchItem, val version: String?, val url: String)
 
     var apkSearch: ApkSearch? by mutableStateOf(null)
         private set
@@ -267,6 +267,7 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
         apkChoice = null
         apkSearch = ApkSearch(
             item = item,
+            version = version,
             url = downloadUrlResolver.apiSearchUrl(item.packageName, version)
         )
         viewModelScope.launch {
