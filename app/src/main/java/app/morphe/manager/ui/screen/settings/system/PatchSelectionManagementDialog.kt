@@ -37,6 +37,7 @@ import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.*
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 /** Snapshot of package/bundle selection counts. */
 @Immutable
@@ -416,12 +417,66 @@ private fun SelectionList(
     val selections = data.selections
     val listState = rememberLazyListState()
     val expandedPackages = remember { mutableStateOf<Set<String>>(emptySet()) }
+    var searchQuery by remember { mutableStateOf("") }
+
+    // Resolve display names once so the list can be sorted A-Z by app name.
+    // Falls back to the package name while a resolution is still in flight.
+    val displayNameByPackage = remember(selections) { mutableStateMapOf<String, String>() }
+    LaunchedEffect(selections) {
+        displayNameByPackage.clear()
+        selections.keys.forEach { packageName ->
+            val (name, _) = settingsViewModel.resolveAppDisplayName(packageName)
+            displayNameByPackage[packageName] = name
+        }
+    }
+
+    // Filter by app/package name, then sort A-Z by display name.
+    // Derived state so the list re-sorts as display names finish resolving.
+    val displayEntries by remember(selections, searchQuery, displayNameByPackage) {
+        derivedStateOf {
+            selections.entries
+                .filter { (packageName, _) ->
+                    searchQuery.isBlank() ||
+                        packageName.contains(searchQuery, ignoreCase = true) ||
+                        (displayNameByPackage[packageName] ?: packageName)
+                            .contains(searchQuery, ignoreCase = true)
+                }
+                .sortedBy { (packageName, _) ->
+                    (displayNameByPackage[packageName] ?: packageName).lowercase(Locale.ROOT)
+                }
+        }
+    }
+
     Box(modifier = Modifier.fillMaxWidth()) {
         LazyColumn(
             state = listState,
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
         ) {
+            // Sticky search bar
+            stickyHeader(key = "search") {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = MaterialTheme.colorScheme.surface
+                ) {
+                    AppDialogTextField(
+                        value = searchQuery,
+                        onValueChange = { searchQuery = it },
+                        label = { Text(stringResource(R.string.home_search_apps)) },
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Search,
+                                contentDescription = stringResource(R.string.home_search_apps)
+                            )
+                        },
+                        showClearButton = true,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 4.dp)
+                    )
+                }
+            }
+
             // Summary box
             item(key = "summary") {
                 HeroInfoCard(
@@ -445,11 +500,20 @@ private fun SelectionList(
                 )
             }
 
-            // List of packages with selections
-            items(
-                items = selections.entries.toList(),
-                key = { it.key }
-            ) { (packageName, bundleMap) ->
+            if (displayEntries.isEmpty()) {
+                // No matches for the current search query
+                item(key = "search_empty") {
+                    EmptyState(
+                        message = stringResource(R.string.search_no_results),
+                        icon = Icons.Outlined.SearchOff
+                    )
+                }
+            } else {
+                // List of packages with selections
+                items(
+                    items = displayEntries,
+                    key = { it.key }
+                ) { (packageName, bundleMap) ->
                 PackageSelectionItem(
                     packageName = packageName,
                     bundleMap = bundleMap,
@@ -478,6 +542,7 @@ private fun SelectionList(
                         }
                     }
                 )
+                }
             }
         }
 
