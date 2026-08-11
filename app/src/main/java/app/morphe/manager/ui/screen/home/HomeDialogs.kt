@@ -866,6 +866,9 @@ internal fun DownloadInstructionsDialog(
             }
         }
     }
+    val continueLabel = downloadHost?.let {
+        stringResource(R.string.home_download_instructions_continue_to, it)
+    } ?: stringResource(R.string.home_download_instructions_continue_generic)
     val downloadButtonToasts = listOf(
         stringResource(R.string.home_download_instructions_download_button_toast),
         stringResource(R.string.home_download_instructions_download_button_toast_2),
@@ -882,9 +885,7 @@ internal fun DownloadInstructionsDialog(
         footer = {
             if (onOpenApkDownloadHelper != null) {
                 AppDialogButtonRow(
-                    primaryText = downloadHost?.let {
-                        stringResource(R.string.home_download_instructions_continue_to, it)
-                    } ?: stringResource(R.string.home_download_instructions_continue_generic),
+                    primaryText = continueLabel,
                     onPrimaryClick = onContinue,
                     primaryIcon = Icons.AutoMirrored.Outlined.OpenInNew,
                     secondaryText = stringResource(R.string.home_apk_helper_download),
@@ -894,9 +895,7 @@ internal fun DownloadInstructionsDialog(
                 )
             } else {
                 AppDialogButton(
-                    text = downloadHost?.let {
-                        stringResource(R.string.home_download_instructions_continue_to, it)
-                    } ?: stringResource(R.string.home_download_instructions_continue_generic),
+                    text = continueLabel,
                     onClick = onContinue,
                     icon = Icons.AutoMirrored.Outlined.OpenInNew,
                     modifier = Modifier.fillMaxWidth()
@@ -922,7 +921,7 @@ internal fun DownloadInstructionsDialog(
                 number = "1",
                 text = stringResource(
                     R.string.home_download_instructions_step1,
-                    stringResource(R.string.home_download_instructions_continue)
+                    continueLabel
                 ),
                 textColor = textColor,
                 secondaryColor = secondaryColor
