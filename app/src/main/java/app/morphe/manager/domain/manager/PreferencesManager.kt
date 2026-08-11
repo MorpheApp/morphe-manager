@@ -215,7 +215,6 @@ class PreferencesManager(
 
     @Serializable
     data class SettingsSnapshot(
-        /** Retired flag, kept so pre-migration snapshots still deserialize into [themeStyle]. */
         val dynamicColor: Boolean? = null,
         val pureBlackTheme: Boolean? = null,
         val customAccentColor: String? = null,
@@ -244,10 +243,10 @@ class PreferencesManager(
         val firstLaunch: Boolean? = null,
         val showManagerUpdateDialogOnLaunch: Boolean? = null,
         val useManagerPrereleases: Boolean? = null,
-        /** Readable prerelease toggle for the official source (UID 0). */
         val officialBundlePrerelease: Boolean? = null,
-        /** Readable experimental-versions toggle for the official source (UID 0). */
         val officialBundleExperimentalVersions: Boolean? = null,
+        val bundlePrereleasesEnabled: Set<String>? = null,
+        val bundleExperimentalVersionsEnabled: Set<String>? = null,
         val disablePatchVersionCompatCheck: Boolean? = null,
         val disableSelectionWarning: Boolean? = null,
         val disableUniversalPatchCheck: Boolean? = null,
@@ -370,17 +369,21 @@ class PreferencesManager(
         snapshot.keystorePassword?.let { keystorePassword.value = it }
         snapshot.firstLaunch?.let { firstLaunch.value = it }
         snapshot.useManagerPrereleases?.let { useManagerPrereleases.value = it }
-        // Exports carry the official source's toggles as readable booleans
-        snapshot.officialBundlePrerelease?.let { official ->
+        // Exports carry the official source's toggles as readable booleans; older ones only have
+        // the UID sets, where the official source is the one UID that is stable across devices
+        val officialUid = DEFAULT_SOURCE_UID.toString()
+        val officialPrerelease = snapshot.officialBundlePrerelease
+            ?: snapshot.bundlePrereleasesEnabled?.contains(officialUid)
+        val officialExperimental = snapshot.officialBundleExperimentalVersions
+            ?: snapshot.bundleExperimentalVersionsEnabled?.contains(officialUid)
+        officialPrerelease?.let { enabled ->
             val current = bundlePrereleasesEnabled.value.toMutableSet()
-            val uidKey = DEFAULT_SOURCE_UID.toString()
-            if (official) current.add(uidKey) else current.remove(uidKey)
+            if (enabled) current.add(officialUid) else current.remove(officialUid)
             bundlePrereleasesEnabled.value = current
         }
-        snapshot.officialBundleExperimentalVersions?.let { experimental ->
+        officialExperimental?.let { enabled ->
             val current = bundleExperimentalVersionsEnabled.value.toMutableSet()
-            val uidKey = DEFAULT_SOURCE_UID.toString()
-            if (experimental) current.add(uidKey) else current.remove(uidKey)
+            if (enabled) current.add(officialUid) else current.remove(officialUid)
             bundleExperimentalVersionsEnabled.value = current
         }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
@@ -410,9 +413,7 @@ class PreferencesManager(
     }
 
     companion object {
-        /**
-         * Check if current version is a development/prerelease version.
-         */
+        /** Check if current version is a development/prerelease version. */
         fun isDevVersion(): Boolean {
             return BuildConfig.VERSION_NAME.contains("-dev", ignoreCase = true)
         }

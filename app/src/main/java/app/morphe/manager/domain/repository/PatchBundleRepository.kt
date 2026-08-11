@@ -2024,9 +2024,20 @@ class PatchBundleRepository(
     )
 
     /**
+     * Adds or removes [uid] from a set of bundle UID preference keys, reporting whether it changed.
+     */
+    private fun MutableSet<String>.toggleUid(uid: Int, enabled: Boolean) =
+        if (enabled) add(uid.toString()) else remove(uid.toString())
+
+    /**
      * Export all third-party remote bundles as a list of snapshots.
      */
     suspend fun exportCustomBundles(): List<BundleSnapshot> {
+        // Only the toggles the user set are exported. Prerelease implied by a "dev" endpoint is
+        // derived from the URL again on import, so it must not be baked into the snapshot
+        val prereleaseUids = prefs.bundlePrereleasesEnabled.get()
+        val experimentalUids = prefs.bundleExperimentalVersionsEnabled.get()
+
         return dao.all()
             .filter { it.uid != DEFAULT_SOURCE_UID && it.source !is Source.Local }
             .map { entity ->
@@ -2039,13 +2050,8 @@ class PatchBundleRepository(
                     sortOrder = entity.sortOrder,
                     createdAt = entity.createdAt,
                     updatedAt = entity.updatedAt,
-                    prerelease = when (val source = entity.source) {
-                        is SourceInfo.Remote -> shouldUsePrerelease(entity.uid, source.url.toString())
-                        else -> null
-                    },
-                    experimentalVersions = prefs.bundleExperimentalVersionsEnabled
-                        .getBlocking()
-                        .contains(entity.uid.toString()),
+                    prerelease = entity.uid.toString() in prereleaseUids,
+                    experimentalVersions = entity.uid.toString() in experimentalUids,
                 )
             }
     }
@@ -2089,6 +2095,12 @@ class PatchBundleRepository(
 
             var changedAny = false
 
+            // Toggles are collected here and written once at the end, so a backup with many
+            // sources does not commit the preference store twice per source
+            val prereleaseUids = prefs.bundlePrereleasesEnabled.get().toMutableSet()
+            val experimentalUids = prefs.bundleExperimentalVersionsEnabled.get().toMutableSet()
+            var togglesChanged = false
+
             // Replace mode: remove custom remotes whose endpoint is not in the backup
             if (mode == ImportMode.Replace) {
                 val toRemove = customRemotes
@@ -2099,6 +2111,10 @@ class PatchBundleRepository(
                         directoryOf(bundle.uid).deleteRecursively()
                     }
                     val removedUids = toRemove.map { it.uid }.toSet()
+                    removedUids.forEach { uid ->
+                        togglesChanged = prereleaseUids.toggleUid(uid, false) || togglesChanged
+                        togglesChanged = experimentalUids.toggleUid(uid, false) || togglesChanged
+                    }
                     metadataFetchErrorsFlow.update { it - removedUids }
                     val (affectedCount, remaining) = cancelRemoteUpdates(removedUids)
                     updateProgressAfterRemoval(affectedCount, remaining)
@@ -2128,31 +2144,11 @@ class PatchBundleRepository(
                     }
                     // Reconcile prerelease and experimental-version toggles by endpoint,
                     // so they survive a cross-device import
-                    snapshot.prerelease?.let { wantPrerelease ->
-                        val current = prefs.bundlePrereleasesEnabled.get().toMutableSet()
-                        val uidKey = bundle.uid.toString()
-                        if (wantPrerelease && uidKey !in current) {
-                            current.add(uidKey)
-                            prefs.bundlePrereleasesEnabled.update(current)
-                            changedAny = true
-                        } else if (!wantPrerelease && uidKey in current) {
-                            current.remove(uidKey)
-                            prefs.bundlePrereleasesEnabled.update(current)
-                            changedAny = true
-                        }
+                    snapshot.prerelease?.let {
+                        togglesChanged = prereleaseUids.toggleUid(bundle.uid, it) || togglesChanged
                     }
-                    snapshot.experimentalVersions?.let { wantExperimental ->
-                        val current = prefs.bundleExperimentalVersionsEnabled.get().toMutableSet()
-                        val uidKey = bundle.uid.toString()
-                        if (wantExperimental && uidKey !in current) {
-                            current.add(uidKey)
-                            prefs.bundleExperimentalVersionsEnabled.update(current)
-                            changedAny = true
-                        } else if (!wantExperimental && uidKey in current) {
-                            current.remove(uidKey)
-                            prefs.bundleExperimentalVersionsEnabled.update(current)
-                            changedAny = true
-                        }
+                    snapshot.experimentalVersions?.let {
+                        togglesChanged = experimentalUids.toggleUid(bundle.uid, it) || togglesChanged
                     }
                 }
             }
@@ -2176,16 +2172,18 @@ class PatchBundleRepository(
                 )
                 // New bundles get fresh UIDs, so carry the toggles over by UID
                 if (snapshot.prerelease == true) {
-                    val current = prefs.bundlePrereleasesEnabled.get().toMutableSet()
-                    if (current.add(created.uid.toString())) {
-                        prefs.bundlePrereleasesEnabled.update(current)
-                    }
+                    togglesChanged = prereleaseUids.toggleUid(created.uid, true) || togglesChanged
                 }
                 if (snapshot.experimentalVersions == true) {
-                    val current = prefs.bundleExperimentalVersionsEnabled.get().toMutableSet()
-                    if (current.add(created.uid.toString())) {
-                        prefs.bundleExperimentalVersionsEnabled.update(current)
-                    }
+                    togglesChanged = experimentalUids.toggleUid(created.uid, true) || togglesChanged
+                }
+                changedAny = true
+            }
+
+            if (togglesChanged) {
+                prefs.edit {
+                    prefs.bundlePrereleasesEnabled.value = prereleaseUids.toSet()
+                    prefs.bundleExperimentalVersionsEnabled.value = experimentalUids.toSet()
                 }
                 changedAny = true
             }
