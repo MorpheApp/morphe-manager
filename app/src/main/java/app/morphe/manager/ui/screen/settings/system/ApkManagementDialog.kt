@@ -22,8 +22,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -712,7 +714,15 @@ private fun ApkManagementDialogContent(
     var itemToUninstallConfirm by remember { mutableStateOf<ApkItemData?>(null) }
     var isMultiSelectMode by remember { mutableStateOf(false) }
     var isExporting by remember { mutableStateOf(false) }
+    var searchQuery by remember { mutableStateOf("") }
     val selection = rememberSelectionState<String>()
+    val filteredItems = remember(items, searchQuery) {
+        if (searchQuery.isBlank()) items
+        else items.filter {
+            it.displayName.contains(searchQuery, ignoreCase = true) ||
+                    it.packageName.contains(searchQuery, ignoreCase = true)
+        }
+    }
     val selectedItems = items.filter { selection.contains(it.selectionKey) }
     val selectedFiles = selectedItems.mapNotNull { item -> item.file?.takeIf { it.exists() } }
     val selectedInstalledItems = selectedItems.filter { it.isInstalledOnDevice }
@@ -877,6 +887,29 @@ private fun ApkManagementDialogContent(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
             ) {
+                stickyHeader(key = "search") {
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        color = MaterialTheme.colorScheme.surface
+                    ) {
+                        AppDialogTextField(
+                            value = searchQuery,
+                            onValueChange = { searchQuery = it },
+                            label = { Text(stringResource(R.string.home_search_apps)) },
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Outlined.Search,
+                                    contentDescription = stringResource(R.string.home_search_apps)
+                                )
+                            },
+                            showClearButton = true,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 4.dp)
+                        )
+                    }
+                }
+
                 if (retentionToggle != null) {
                     item(key = "retention") {
                         Column(verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)) {
@@ -937,7 +970,13 @@ private fun ApkManagementDialogContent(
                     // Show shimmer while loading
                     meta.isLoading -> items(3) { ShimmerApkItem() }
                     meta.isEmpty -> item { EmptyState(message = meta.emptyMessage) }
-                    else -> items(items = items, key = { it.selectionKey }) { item ->
+                    filteredItems.isEmpty() -> item(key = "search_empty") {
+                        EmptyState(
+                            message = stringResource(R.string.search_no_results),
+                            icon = Icons.Outlined.SearchOff
+                        )
+                    }
+                    else -> items(items = filteredItems, key = { it.selectionKey }) { item ->
                         val selected = selection.contains(item.selectionKey)
                         ApkItemCard(
                             data = item,
