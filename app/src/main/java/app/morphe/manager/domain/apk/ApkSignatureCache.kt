@@ -12,6 +12,8 @@ import app.morphe.manager.data.room.apk.ApkSignature
 import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.tag
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import java.io.File
 
 // Enough for every saved, original and installed archive a tracked app can point at
@@ -34,29 +36,42 @@ class ApkSignatureCache(
             size > MEMORY_ENTRIES
     }
     private var restored = false
+    private val persistenceMutex = Mutex()
 
-    /** Fingerprints previously taken from [file], or null when it has to be read. */
-    fun get(file: File): Set<String>? {
-        val key = key(file) ?: return null
+    /** Captures the exact file revision that an archive read is about to inspect. */
+    internal fun stamp(file: File): ApkFileStamp? = file.apkFileStampOrNull()
+
+    /** Fingerprints previously taken from [stamp], or null when it has to be read. */
+    internal fun get(stamp: ApkFileStamp): Set<String>? {
         return synchronized(entries) {
             restoreOnce()
-            entries[key]
+            entries[stamp.cacheKey]
         }
     }
 
-    fun put(file: File, hashes: Set<String>) {
-        val key = key(file) ?: return
-        synchronized(entries) { entries[key] = hashes }
+    /**
+     * Stores [hashes] only if [file] is still the revision that was inspected.
+     *
+     * Retained APKs are overwritten in place. Rechecking the stamp prevents hashes read from the
+     * old archive from being assigned to the new revision, while the mutex prevents an older
+     * asynchronous database write from winning after a newer one.
+     */
+    internal fun putIfUnchanged(file: File, stamp: ApkFileStamp, hashes: Set<String>) {
+        if (file.apkFileStampOrNull() != stamp) return
+        synchronized(entries) { entries[stamp.cacheKey] = hashes }
 
         val record = ApkSignature(
-            filePath = file.absolutePath,
-            fileSize = file.length(),
-            lastModified = file.lastModified(),
+            filePath = stamp.path,
+            fileSize = stamp.size,
+            lastModified = stamp.lastModified,
             hashes = hashes.joinToString(ApkSignature.SEPARATOR)
         )
         scope.launch {
-            runCatching { dao.upsert(record) }
-                .onFailure { Log.e(tag, "Failed to persist signatures for ${file.absolutePath}", it) }
+            persistenceMutex.withLock {
+                if (file.apkFileStampOrNull() != stamp) return@withLock
+                runCatching { dao.upsert(record) }
+                    .onFailure { Log.e(tag, "Failed to persist signatures for ${file.absolutePath}", it) }
+            }
         }
     }
 
@@ -68,36 +83,34 @@ class ApkSignatureCache(
      */
     private fun restoreOnce() {
         if (restored) return
-        restored = true
         if (Looper.myLooper() == Looper.getMainLooper()) return
+        restored = true
 
         val persisted = runCatching { dao.getAllBlocking() }
             .onFailure { Log.e(tag, "Failed to read persisted APK signatures", it) }
             .getOrNull()
             ?: return
 
-        val stale = mutableListOf<String>()
+        val stale = mutableListOf<ApkSignature>()
         persisted.forEach { record ->
             val file = File(record.filePath)
             if (file.length() != record.fileSize || file.lastModified() != record.lastModified) {
-                stale += record.filePath
+                stale += record
                 return@forEach
             }
-            entries[cacheKey(record.filePath, record.fileSize, record.lastModified)] =
+            entries[ApkFileStamp(record.filePath, record.fileSize, record.lastModified).cacheKey] =
                 record.hashes.split(ApkSignature.SEPARATOR).filterTo(mutableSetOf()) { it.isNotEmpty() }
         }
 
         if (stale.isEmpty()) return
         scope.launch {
-            runCatching { dao.deleteByPaths(stale) }
-                .onFailure { Log.e(tag, "Failed to drop stale APK signatures", it) }
+            persistenceMutex.withLock {
+                runCatching {
+                    stale.forEach { record ->
+                        dao.deleteRevision(record.filePath, record.fileSize, record.lastModified)
+                    }
+                }.onFailure { Log.e(tag, "Failed to drop stale APK signatures", it) }
+            }
         }
     }
-
-    private fun key(file: File): String? {
-        if (!file.isFile) return null
-        return cacheKey(file.absolutePath, file.length(), file.lastModified())
-    }
-
-    private fun cacheKey(path: String, size: Long, lastModified: Long) = "$path:$size:$lastModified"
 }

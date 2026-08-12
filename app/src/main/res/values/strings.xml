@@ -200,6 +200,7 @@
     <string name="home_apk_use_installed">Use installed APK</string>
     <string name="home_apk_use_installed_unverified">Could not verify the signature of the installed app, so it may already be patched</string>
     <string name="home_unverified">Unverified</string>
+    <string name="home_install_verification_pending">Checking install…</string>
     <string name="home_app_info_install_unverified">Morphe cannot confirm that the installed app is the build it patched. Reinstall it from the saved APK to restore its actions</string>
     <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
     <string name="home_version_requires_android">Requires Android %s+</string>

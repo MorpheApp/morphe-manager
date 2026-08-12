@@ -31,6 +31,7 @@ class HomeAppFilterModeTest {
             isDeleted = false,
             isInstallStateNotPatched = true,
             isInstallStateUnknown = false,
+            isInstallStatePending = false,
             savedApkFile = null,
             hasUpdate = false,
             patchCount = 0
@@ -40,5 +41,34 @@ class HomeAppFilterModeTest {
         assertTrue(HomeAppFilterMode.INSTALLED.matches(item))
         assertFalse(HomeAppFilterMode.NOT_PATCHED.matches(item))
         assertFalse(HomeAppFilterMode.UNINSTALLED.matches(item))
+    }
+
+    @Test
+    fun `pending verification stays physically installed without showing an update verdict`() {
+        val item = HomeAppItem(
+            packageName = "app.example",
+            displayName = "Example",
+            gradientColors = emptyList(),
+            installedApp = InstalledApp(
+                currentPackageName = "app.example",
+                originalPackageName = "app.example",
+                version = "1.0",
+                installType = InstallType.DEFAULT
+            ),
+            packageInfo = null,
+            isPinnedByDefault = false,
+            isInstalledOnDevice = true,
+            isDeleted = false,
+            isInstallStateNotPatched = false,
+            isInstallStateUnknown = false,
+            isInstallStatePending = true,
+            savedApkFile = null,
+            hasUpdate = true,
+            patchCount = 0
+        )
+
+        assertTrue(HomeAppFilterMode.INSTALLED.matches(item))
+        assertFalse(HomeAppFilterMode.UNINSTALLED.matches(item))
+        assertFalse(item.showsUpdateBadge)
     }
 }

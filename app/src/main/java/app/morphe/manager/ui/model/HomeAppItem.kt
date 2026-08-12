@@ -22,6 +22,7 @@ data class HomeAppItem(
     val isDeleted: Boolean,
     val isInstallStateNotPatched: Boolean,
     val isInstallStateUnknown: Boolean,
+    val isInstallStatePending: Boolean,
     val savedApkFile: File?,
     val hasUpdate: Boolean,
     val patchCount: Int
@@ -35,5 +36,6 @@ data class HomeAppItem(
     val showsUpdateBadge: Boolean get() = hasUpdate &&
             !isDeleted &&
             !isInstallStateNotPatched &&
-            !isInstallStateUnknown
+            !isInstallStateUnknown &&
+            !isInstallStatePending
 }

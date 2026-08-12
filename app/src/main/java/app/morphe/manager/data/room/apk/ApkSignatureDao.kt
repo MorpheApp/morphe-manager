@@ -14,6 +14,13 @@ interface ApkSignatureDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(signature: ApkSignature)
 
-    @Query("DELETE FROM apk_signatures WHERE file_path IN (:filePaths)")
-    suspend fun deleteByPaths(filePaths: Collection<String>)
+    @Query(
+        """
+        DELETE FROM apk_signatures
+        WHERE file_path = :filePath
+          AND file_size = :fileSize
+          AND last_modified = :lastModified
+        """
+    )
+    suspend fun deleteRevision(filePath: String, fileSize: Long, lastModified: Long)
 }

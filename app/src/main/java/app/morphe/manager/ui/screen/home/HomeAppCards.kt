@@ -20,6 +20,7 @@ import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.outlined.ArrowUpward
 import androidx.compose.material.icons.outlined.AutoFixHigh
 import androidx.compose.material.icons.outlined.DeleteOutline
+import androidx.compose.material.icons.outlined.HourglassEmpty
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -197,13 +198,15 @@ fun InstalledAppCard(
     isAppDeleted: Boolean = false,
     isInstallStateNotPatched: Boolean = false,
     isInstallStateUnknown: Boolean = false,
+    isInstallStatePending: Boolean = false,
     onLongClick: (() -> Unit)? = null
 ) {
     val cardStyle = homeAppCardStyle(subtitleAlpha = 0.85f)
     val showsUpdateBadge = hasUpdate &&
             !isAppDeleted &&
             !isInstallStateNotPatched &&
-            !isInstallStateUnknown
+            !isInstallStateUnknown &&
+            !isInstallStatePending
 
     val versionLabel = stringResource(R.string.version)
     val installedLabel = stringResource(R.string.installed)
@@ -211,6 +214,7 @@ fun InstalledAppCard(
     val deletedLabel = stringResource(R.string.uninstalled)
     val replacementLabel = stringResource(R.string.home_unpatched_version_installed)
     val unverifiedLabel = stringResource(R.string.home_unverified)
+    val pendingLabel = stringResource(R.string.home_install_verification_pending)
 
     val version = remember(packageInfo, installedApp, isAppDeleted) {
         val raw = packageInfo?.versionName ?: installedApp.version
@@ -229,7 +233,9 @@ fun InstalledAppCard(
         isInstallStateNotPatched,
         replacementLabel,
         isInstallStateUnknown,
-        unverifiedLabel
+        unverifiedLabel,
+        isInstallStatePending,
+        pendingLabel
     ) {
         buildString {
             append(displayName)
@@ -239,6 +245,7 @@ fun InstalledAppCard(
             append(", ")
             append(
                 when {
+                    isInstallStatePending -> pendingLabel
                     isInstallStateNotPatched -> replacementLabel
                     isAppDeleted -> deletedLabel
                     isInstallStateUnknown -> unverifiedLabel
@@ -322,6 +329,15 @@ fun InstalledAppCard(
                     StatusBadge(
                         text = unverifiedLabel,
                         icon = Icons.AutoMirrored.Outlined.HelpOutline,
+                        containerColor = cardStyle.chipContainerColor,
+                        contentColor = cardStyle.chipContentColor
+                    )
+                }
+
+                if (isInstallStatePending) {
+                    StatusBadge(
+                        text = pendingLabel,
+                        icon = Icons.Outlined.HourglassEmpty,
                         containerColor = cardStyle.chipContainerColor,
                         contentColor = cardStyle.chipContentColor
                     )

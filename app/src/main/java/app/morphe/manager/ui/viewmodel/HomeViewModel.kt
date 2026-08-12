@@ -73,6 +73,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
+import java.util.concurrent.atomic.AtomicLong
 import java.util.zip.CRC32
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
@@ -86,6 +87,10 @@ enum class BundleUpdateStatus {
     Warning,  // Patches may be outdated (on metered network, updates disabled)
     Error     // Error occurred (including no internet)
 }
+
+/** Keys whose evidence was added, removed, or replaced between two snapshots. */
+internal fun <K, V> changedMapKeys(previous: Map<K, V>, current: Map<K, V>): Set<K> =
+    (previous.keys + current.keys).filterTo(mutableSetOf()) { previous[it] != current[it] }
 
 /** * Dialog state for unsupported version warning. */
 data class UnsupportedVersionDialogState(
@@ -442,9 +447,24 @@ class HomeViewModel(
     private val _appStateTicker = MutableStateFlow(0L)
     private val trackedAppInspectionSemaphore = Semaphore(4)
 
+    private data class TrackedSnapshotEntry(
+        val app: InstalledApp,
+        val snapshot: TrackedAppSnapshot
+    )
+
+    private data class TrackedInspectionInputs(
+        val apps: List<InstalledApp>,
+        val originalEvidence: Map<String, String>,
+        val bundleSignatures: Map<String, Set<String>>
+    )
+
     // Verified tracked installs, keyed by the package the record currently occupies.
     // Resolved away from the home state so inspecting archives never holds the cards back.
-    private val _trackedSnapshots = MutableStateFlow<Map<String, TrackedAppSnapshot>>(emptyMap())
+    private val _trackedSnapshots = MutableStateFlow<Map<String, TrackedSnapshotEntry>>(emptyMap())
+    private val trackedInspectionGeneration = AtomicLong()
+
+    @Volatile
+    private var activeTrackedApps: Map<String, InstalledApp> = emptyMap()
 
     // Both signals rebuild the same cards, so they reach the home state as one source
     private val appStateSignal = combine(_appStateTicker, _trackedSnapshots) { ticker, snapshots ->
@@ -460,8 +480,33 @@ class HomeViewModel(
         override fun onReceive(context: Context?, intent: Intent?) {
             val packageName = intent?.data?.schemeSpecificPart ?: return
             if (packageName !in trackedPackageNames) return
+            // Stop presenting the previous verdict immediately, but keep the expensive refresh
+            // debounced until the package manager finishes its add/remove/replace broadcast burst.
+            markTrackedPackagesPending(setOf(packageName), invalidateCache = false)
             pendingPackageChanges.update { it + packageName }
         }
+    }
+
+    private fun trackedCurrentPackages(observedPackages: Set<String>): Set<String> {
+        val matches = activeTrackedApps.values.asSequence()
+            .filter {
+                it.currentPackageName in observedPackages ||
+                        it.originalPackageName in observedPackages
+            }
+            .mapTo(mutableSetOf()) { it.currentPackageName }
+        if (matches.isEmpty()) matches += observedPackages
+        return matches
+    }
+
+    private fun markTrackedPackagesPending(
+        observedPackages: Set<String>,
+        invalidateCache: Boolean
+    ) {
+        if (observedPackages.isEmpty()) return
+        val currentPackages = trackedCurrentPackages(observedPackages)
+        trackedInspectionGeneration.incrementAndGet()
+        if (invalidateCache) currentPackages.forEach(localApkSources::invalidate)
+        _trackedSnapshots.update { snapshots -> snapshots - currentPackages }
     }
 
     /**
@@ -476,8 +521,8 @@ class HomeViewModel(
                 delay(PACKAGE_CHANGE_DEBOUNCE_MS.milliseconds)
                 pending.forEach {
                     appDataResolver.invalidate(it)
-                    localApkSources.invalidate(it)
                 }
+                markTrackedPackagesPending(pending, invalidateCache = true)
                 _appStateTicker.value = System.currentTimeMillis()
                 pendingPackageChanges.value = emptySet()
             }
@@ -490,21 +535,84 @@ class HomeViewModel(
      * state. Cards appear as soon as the bundles are known and adopt the verdict as it lands.
      */
     private fun observeTrackedApps() = viewModelScope.launch {
-        combine(installedAppRepository.getAll(), _appStateTicker) { apps, _ -> apps }
-            .collectLatest { apps ->
-                val snapshots = withContext(Dispatchers.IO) {
-                    coroutineScope {
-                        apps.map { installed ->
-                            async {
-                                installed.currentPackageName to trackedAppInspectionSemaphore.withPermit {
-                                    localApkSources.trackedAppSnapshot(installed)
-                                }
-                            }
-                        }.awaitAll().toMap()
+        val originalEvidence = originalApkRepository.getAll()
+            .map { originals ->
+                originals.associate { original ->
+                    val file = File(original.filePath)
+                    original.packageName to buildString {
+                        append(original.version).append('|')
+                        append(original.filePath).append('|')
+                        append(file.length()).append(':').append(file.lastModified())
                     }
                 }
-                _trackedSnapshots.value = snapshots
             }
+            .distinctUntilChanged()
+        val bundleSignatures = patchBundleRepository.appMetadata
+            .map { metadata ->
+                metadata.mapValues { (_, appMetadata) -> appMetadata.signatures.orEmpty().toSet() }
+            }
+            .distinctUntilChanged()
+
+        var previousOriginalEvidence: Map<String, String>? = null
+        var previousBundleSignatures: Map<String, Set<String>>? = null
+
+        combine(
+            installedAppRepository.getAll(),
+            _appStateTicker,
+            originalEvidence,
+            bundleSignatures
+        ) { apps, _, originals, signatures ->
+            TrackedInspectionInputs(apps, originals, signatures)
+        }.collectLatest { inputs ->
+            val appsByPackage = inputs.apps.associateBy { it.currentPackageName }
+            activeTrackedApps = appsByPackage
+            trackedPackageNames = inputs.apps.flatMapTo(mutableSetOf()) {
+                listOf(it.currentPackageName, it.originalPackageName)
+            }
+
+            val changedEvidence = buildSet {
+                previousOriginalEvidence?.let {
+                    addAll(changedMapKeys(it, inputs.originalEvidence))
+                }
+                previousBundleSignatures?.let {
+                    addAll(changedMapKeys(it, inputs.bundleSignatures))
+                }
+            }
+            previousOriginalEvidence = inputs.originalEvidence
+            previousBundleSignatures = inputs.bundleSignatures
+            markTrackedPackagesPending(changedEvidence, invalidateCache = true)
+
+            // A changed or removed database record is pending until its matching result arrives;
+            // never keep presenting a snapshot produced for the previous record.
+            _trackedSnapshots.update { snapshots ->
+                snapshots.filter { (packageName, entry) ->
+                    appsByPackage[packageName] == entry.app
+                }
+            }
+
+            val generation = trackedInspectionGeneration.incrementAndGet()
+            withContext(Dispatchers.IO) {
+                coroutineScope {
+                    inputs.apps.map { installed ->
+                        launch {
+                            val snapshot = trackedAppInspectionSemaphore.withPermit {
+                                localApkSources.trackedAppSnapshot(installed)
+                            }
+                            if (trackedInspectionGeneration.get() != generation ||
+                                activeTrackedApps[installed.currentPackageName] != installed
+                            ) return@launch
+
+                            _trackedSnapshots.update { snapshots ->
+                                snapshots + (installed.currentPackageName to TrackedSnapshotEntry(
+                                    app = installed,
+                                    snapshot = snapshot
+                                ))
+                            }
+                        }
+                    }.joinAll()
+                }
+            }
+        }
     }
 
     // Track when at least one third-party source is enabled
@@ -1276,7 +1384,10 @@ class HomeViewModel(
             val displayName = resolvedData.displayName.takeIf {
                 resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
             } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
-            val trackedSnapshot = installedApp?.let { trackedSnapshots[it.currentPackageName] }
+            val trackedEntry = installedApp?.let { tracked ->
+                trackedSnapshots[tracked.currentPackageName]?.takeIf { it.app == tracked }
+            }
+            val trackedSnapshot = trackedEntry?.snapshot
             val savedPatchedApk = trackedSnapshot?.savedPatchedApk
             val savedPackageInfo = trackedSnapshot?.savedPatchedApkInfo
             // Inspection resolves on its own, so a record without a snapshot has not been judged
@@ -1290,6 +1401,7 @@ class HomeViewModel(
             val isUninspectedInstall = installedApp != null &&
                     trackedSnapshot == null &&
                     pm.getPackageInfo(installedApp.currentPackageName) != null
+            val isInstallStatePending = installedApp != null && trackedSnapshot == null
             val isInstalledOnDevice = trackedPresentation?.isPatched == true
             val hasUpdate = installedApp?.let {
                 updatesMap[it.currentPackageName] == true
@@ -1320,6 +1432,7 @@ class HomeViewModel(
                 isDeleted = trackedPresentation?.isDeleted == true,
                 isInstallStateNotPatched = trackedPresentation?.isNotPatched == true,
                 isInstallStateUnknown = trackedPresentation?.isUnknown == true,
+                isInstallStatePending = isInstallStatePending,
                 savedApkFile = savedPatchedApk,
                 hasUpdate = hasUpdate,
                 patchCount = 0
@@ -1500,7 +1613,7 @@ class HomeViewModel(
      */
     fun notifyAppStateChanged(packageName: String) {
         appDataResolver.invalidate(packageName)
-        localApkSources.invalidate(packageName)
+        markTrackedPackagesPending(setOf(packageName), invalidateCache = true)
         _appStateTicker.value = System.currentTimeMillis()
     }
 

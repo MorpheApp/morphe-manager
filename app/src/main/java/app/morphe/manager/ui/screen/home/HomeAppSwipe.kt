@@ -367,6 +367,7 @@ internal fun DynamicAppCard(
                                 isAppDeleted = item.isDeleted,
                                 isInstallStateNotPatched = item.isInstallStateNotPatched,
                                 isInstallStateUnknown = item.isInstallStateUnknown,
+                                isInstallStatePending = item.isInstallStatePending,
                                 onLongClick = {
                                     view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                                     onLongPress()
@@ -497,7 +498,8 @@ internal fun HiddenSearchAppCard(
                     hasUpdate = item.hasUpdate,
                     isAppDeleted = item.isDeleted,
                     isInstallStateNotPatched = item.isInstallStateNotPatched,
-                    isInstallStateUnknown = item.isInstallStateUnknown
+                    isInstallStateUnknown = item.isInstallStateUnknown,
+                    isInstallStatePending = item.isInstallStatePending
                 )
             } else {
                 AppButton(

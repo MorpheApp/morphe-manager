@@ -220,10 +220,13 @@ class LocalApkSources(
      */
     suspend fun trackedAppSnapshot(app: InstalledApp): TrackedAppSnapshot = withContext(Dispatchers.IO) {
         val installedPackageInfo = pm.getPackageInfo(app.currentPackageName)
-        val fingerprint = trackedAppFingerprint(app, installedPackageInfo)
+        val installer = installedPackageInfo?.let {
+            pm.getInstallerPackageName(app.currentPackageName)
+        }
+        val fingerprint = trackedAppFingerprint(app, installedPackageInfo, installer)
         cachedSnapshot(app.currentPackageName, fingerprint)?.let { return@withContext it }
 
-        val snapshot = resolveTrackedAppSnapshot(app, installedPackageInfo)
+        val snapshot = resolveTrackedAppSnapshot(app, installedPackageInfo, installer)
         cacheSnapshot(app.currentPackageName, fingerprint, snapshot)
         snapshot
     }
@@ -235,7 +238,8 @@ class LocalApkSources(
 
     private suspend fun resolveTrackedAppSnapshot(
         app: InstalledApp,
-        installedPackageInfo: PackageInfo?
+        installedPackageInfo: PackageInfo?,
+        installer: String?
     ): TrackedAppSnapshot {
         val savedPatched = validatedPatchedApk(app)
         val savedPatchedApk: File? = savedPatched?.first
@@ -245,7 +249,6 @@ class LocalApkSources(
             return TrackedAppSnapshot(null, savedPatchedApk, savedPatchedInfo, null)
         }
 
-        val installer = pm.getInstallerPackageName(app.currentPackageName)
         val patchState = resolveTrackedPatchState(
             installedHashes = pm.getInstalledSignatureHashes(app.currentPackageName),
             savedPatchedHashes = savedPatchedApk?.let(pm::getApkFileSignatureHashes).orEmpty(),
@@ -285,15 +288,32 @@ class LocalApkSources(
      * A mount swaps the file behind `sourceDir` and a repatch rewrites the saved APK in place.
      * Both archives are therefore described by their own size and timestamp, not by the record.
      */
-    private fun trackedAppFingerprint(app: InstalledApp, installedPackageInfo: PackageInfo?): String {
+    private suspend fun trackedAppFingerprint(
+        app: InstalledApp,
+        installedPackageInfo: PackageInfo?,
+        installer: String?
+    ): String {
         val installedApk = installedPackageInfo?.applicationInfo?.sourceDir?.let(::File)
+        val originalApk = originalApkRepository.get(app.originalPackageName)
+        val originalFile = originalApk?.let { File(it.filePath) }
+        val bundleSignatures = patchBundleRepository.appMetadata.value[app.originalPackageName]
+            ?.signatures
+            .orEmpty()
         return buildString {
+            append(app.currentPackageName).append('|')
+            append(app.originalPackageName).append('|')
             append(app.version).append('|')
             append(app.installType).append('|')
             append(app.patchedAt).append('|')
+            append(installedPackageInfo?.versionName).append('|')
+            append(installedPackageInfo?.firstInstallTime).append('|')
             append(installedPackageInfo?.lastUpdateTime).append('|')
+            append(installer).append('|')
             append(fileStamp(installedApk)).append('|')
             savedPatchedApkCandidates(app).joinTo(this, ";") { fileStamp(it) }
+            append('|').append(originalApk?.version).append('|')
+            append(originalFile?.absolutePath).append(':').append(fileStamp(originalFile)).append('|')
+            bundleSignatures.sorted().joinTo(this, ",")
         }
     }
 

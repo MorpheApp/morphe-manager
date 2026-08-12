@@ -239,7 +239,8 @@ class PM(
      * Uses full signing history to handle apps with certificate rotation.
      */
     fun getApkFileSignatureHashes(file: File): Set<String> {
-        signatureCache.get(file)?.let { return it }
+        val stamp = signatureCache.stamp(file) ?: return emptySet()
+        signatureCache.get(stamp)?.let { return it }
 
         return try {
             val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, signingFlags())
@@ -248,7 +249,7 @@ class PM(
                 sourceDir = file.absolutePath
                 publicSourceDir = file.absolutePath
             }
-            signatureHashes(info).also { signatureCache.put(file, it) }
+            signatureHashes(info).also { signatureCache.putIfUnchanged(file, stamp, it) }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to read APK file signatures", e)
             emptySet()
