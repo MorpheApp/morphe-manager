@@ -60,10 +60,6 @@
         <item quantity="one">%s πηγή εγκαταστάθηκε</item>
         <item quantity="other">%s πηγές εγκαταστάθηκαν</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s τροποποίηση επιλέχθηκε</item>
-        <item quantity="other">%s τροποποιήσεις επιλέχθηκαν</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s κρυφή εφαρμογή</item>
         <item quantity="other">%s κρυφές εφαρμογές</item>

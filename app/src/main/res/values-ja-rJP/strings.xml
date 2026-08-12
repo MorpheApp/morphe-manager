@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">その他のアプリ</string>
     <string name="home_not_patched_yet">まだパッチを適用していません</string>
+    <string name="home_unpatched_version_installed">未パッチ版がインストールされています</string>
     <string name="home_no_patches_available">利用可能なパッチはありません</string>
     <string name="home_app_hide_title">このアプリを非表示にしますか？</string>
     <string name="home_app_hide_message">このアプリはホーム画面から非表示になります。リスト下部のボタンから再表示できます</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">ソースは最新の状態です</string>
     <string name="home_sources_are_loading">ソースを読み込んでいます。しばらくお待ちください…</string>
     <string name="home_search_apps">アプリを検索</string>
-    <string name="home_app_sort_title">アプリを並べ替え</string>
+    <string name="home_app_list_options_title">並べ替えと絞り込み</string>
+    <string name="home_app_list_options_state_description">%1$s で並べ替え、%2$s で絞り込み</string>
+    <string name="home_app_filter_all_description">ホーム画面上のすべてのアプリ</string>
+    <string name="home_app_filter_patched_description">Morphe でパッチを適用した、または保存したアプリ</string>
+    <string name="home_app_filter_not_patched_description">Morphe でまだパッチを適用していないアプリ</string>
+    <string name="home_app_filter_installed_description">このデバイスに現在インストールされているアプリ</string>
+    <string name="home_app_filter_uninstalled_description">Morphe でパッチ適用されたアプリのうち、このデバイス上にもう存在しないもの</string>
     <string name="home_app_sort_manual_description">アプリを長押しして、並べ替えボタンをタップ</string>
     <string name="home_app_sort_recommended">推奨順</string>
     <string name="home_app_sort_recommended_description">インストール済みのアプリと固定アプリを優先</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">「%s」に一致するアプリはありません</string>
     <string name="home_all_apps_hidden_title">すべてのアプリが非表示です</string>
     <string name="home_all_apps_hidden_subtitle">ホーム画面からすべてのアプリを非表示にしました</string>
+    <string name="home_no_apps_filter_title">このフィルターに一致するアプリがありません</string>
+    <string name="home_no_apps_filter_subtitle">%s に一致するものはありません</string>
     <string name="home_category_add">カテゴリを追加</string>
     <string name="home_category_all_apps">すべてのアプリ</string>
     <string name="home_category_custom">カスタム</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">夜行性で生産的</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">パッチソース</string>
+    <string name="sources_search">ソースを検索</string>
     <string name="sources_sort_title">パッチソースを並べ替え</string>
     <string name="sources_sort_manual">手動の並び替え</string>
     <string name="sources_sort_manual_hint">ソースを長押しして並び替えます</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">このヘルパーアプリを信頼できる場合にのみ続行してください。Morphe はこの APK の署名を検証できないため、改ざんされたファイルは検出されません</string>
     <string name="home_apk_helper_no_result">ヘルパーアプリは APK を返しませんでした</string>
     <string name="home_apk_helper_no_access">ヘルパーアプリは APK へのアクセスを許可しませんでした</string>
+    <string name="home_apk_helper_no_package">ヘルパーアプリは、使用するインストール済みアプリを指定しませんでした。</string>
+    <string name="home_apk_helper_wrong_package">ヘルパーアプリが、パッチ適用中のアプリとは異なるアプリを返しました。</string>
+    <string name="home_apk_helper_installed_unavailable">Morpheはインストール済みアプリを使用できませんでした。</string>
+    <string name="home_apk_helper_installed_incompatible">インストール済みバージョンはパッチ適用できません。</string>
     <string name="home_apk_use_saved">保存済みのAPKを使用する</string>
     <string name="home_apk_use_installed">インストール済みのAPKを使用する</string>
     <string name="home_apk_use_installed_unverified">インストールされているアプリの署名を検証できなかったため、すでにパッチが適用されている可能性があります</string>
+    <string name="home_unverified">未検証</string>
+    <string name="home_app_info_install_unverified">Morpheは、インストールされたアプリがパッチを適用したビルドであることを確認できません。保存されたAPKから再インストールして、そのアクションを復元してください。</string>
     <string name="home_app_info_no_saved_apk">保存済みの APK がありません。パッチを適用するには、 APK ファイルを再度選択してください</string>
     <string name="home_version_requires_android">Android %s 以降が必要です</string>
     <string name="home_apk_no_compatible_versions_title">このデバイスではサポートされていません</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">オリジナルの APK をダウンロード</string>
     <string name="home_download_instructions_steps_title">操作手順:</string>
+    <string name="home_download_instructions_finding">ダウンロードページを探しています…</string>
     <string name="home_download_instructions_step1">下の 「%s」 ボタンをタップする</string>
     <string name="home_download_instructions_step2_part1">ウェブページを下にスクロールして、このボタンをタップする</string>
+    <string name="home_download_instructions_step2_generic">ウェブページを下にスクロールして、そのダウンロードボタンをタップしてください</string>
+    <string name="home_download_instructions_step2_variant">ウェブページを下にスクロールして、一番上の&lt;b&gt;APK variant&lt;/b&gt;のダウンロードボタンをタップしてください</string>
+    <string name="home_download_instructions_step2_search">信頼できるウェブサイトの検索結果を開いてください</string>
+    <string name="home_download_instructions_step2_search_note">Morpheはこれらのウェブサイトを保証できません。APKファイルの代わりに独自のアプリストアを提供しているサイトはスキップしてください</string>
+    <string name="home_download_instructions_step3_search">そのウェブサイトで、最新版ではなく、&lt;b&gt;%s&lt;/b&gt;バージョンのAPKをダウンロードしてください</string>
+    <string name="home_download_instructions_step3_search_any">そのウェブサイトで、アプリのAPKをダウンロードしてください。&lt;b&gt;どのバージョンでも&lt;/b&gt;パッチを適用できます</string>
     <string name="home_download_instructions_download_button_toast">ここではなく、ウェブサイトにあるボタンをタップしてください😊</string>
     <string name="home_download_instructions_download_button_toast_2">それでは、下の「続行」をタップしてウェブサイトへ進んでください👆</string>
     <string name="home_download_instructions_download_button_toast_3">練習あるのみ！着実に上達していますよ！💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">ダウンロードが完了するまで待ち、&lt;b&gt;その APK をインストールする&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">ダウンロード完了後、 Morphe に戻る</string>
     <string name="home_download_instructions_step4_mount">オリジナルの APK をインストール後、 Morphe に戻る</string>
-    <string name="home_download_instructions_continue">APKMirror.com で続行</string>
+    <string name="home_download_instructions_continue_to">%sへ進む</string>
+    <string name="home_download_instructions_destination">ダウンロードページ</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">ダウンロードした APK を選択</string>
     <string name="home_file_picker_prompt_description">先ほどダウンロードした &lt;b&gt;%s&lt;/b&gt; の APK ファイルを選択してください</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">すべてのパッチが無効になりました</string>
     <string name="expert_mode_enable_all">全て有効化</string>
     <string name="expert_mode_enable_all_done">すべてのパッチが有効になりました</string>
+    <string name="expert_mode_enable_all_universal_pending">ユニバーサルパッチを有効にするには、もう一度タップしてください</string>
     <string name="expert_mode_reset_to_default">推奨パッチの有効化</string>
     <string name="expert_mode_reset_to_default_done">推奨パッチが適用されました</string>
     <string name="expert_mode_restore_saved">保存済みのパッチ セレクションの復元</string>
@@ -385,6 +410,7 @@
     <string name="home_app_info_patch_update_available_description">新しいバージョンのパッチが利用可能です。最新の変更を反映するには、アプリを再パッチしてください</string>
     <string name="home_app_info_app_deleted_warning">アプリがアンインストールされました</string>
     <string name="home_app_info_app_deleted_description">Morphe 外でアプリがアンインストールされました。機能を復元するには、再パッチしてください</string>
+    <string name="home_app_info_not_patched_description">このアプリの未パッチ版がインストールされています。Morpheは以前のパッチ記録を保持しています</string>
     <string name="home_app_info_apk_size">APK サイズ</string>
     <string name="home_app_info_cpu_arch">CPU アーキテクチャ</string>
     <!-- Home Screen - Root Mode -->
@@ -456,6 +482,11 @@
     <string name="battery_optimization_dialog_title">バックグラウンドパッチ保護</string>
     <string name="battery_optimization_dialog_description">一部のデバイスでは、アプリを最小化するとパッチャーが停止する場合があります。確実にパッチ処理を完了するため、Morphe をバッテリー制限の対象外にしてください</string>
     <string name="battery_optimization_not_now">後で</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">メモリ不足</string>
+    <string name="patcher_memory_adjustment_description">メモリ上限 %1$d MB で実行中に、パッチャーがシステムによって停止されました。上限を %2$d MB に引き下げると、パッチャーが停止されにくくなり、実行を完了できる可能性があります。</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">メモリ上限 %1$d MB（すでに利用可能な最低値）で実行中に、パッチャーがシステムによって停止されました。パッチソースを減らすか、選択するパッチを減らしてお試しください。</string>
+    <string name="patcher_memory_adjustment_apply">%1$d MB に下げる</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">パッチを適用中…</string>
     <string name="patcher_notification_text">パッチ画面に戻るにはタップ</string>
@@ -490,6 +521,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">アプリにパッチを適用中</string>
     <string name="memory_usage">メモリ使用量</string>
+    <string name="cpu_usage">CPU使用率</string>
+    <string name="storage_io_usage">ストレージI/O</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">パッチを適用中</string>
     <string name="failed_to_execute_patch">%s の実行に失敗しました</string>
@@ -497,9 +530,12 @@
     <string name="patched_app_save_failed_toast">パッチ適用済みアプリの保存に失敗しました</string>
     <string name="plugin_activity_dialog_body">このプラグインを続行するには、ユーザーの操作が必要です</string>
     <string name="patcher_process_exit_message">パッチ処理がコード %s で終了しました</string>
+    <string name="patcher_heap_exhausted_message">パッチャーが %1$d MB のヒープメモリを使い果たしました。このアプリは選択したパッチには大きすぎます。パッチソースを減らしてパッチを適用するか、選択するパッチを減らしてください。</string>
     <string name="install_app_success">正常にインストールされました</string>
     <string name="install_app_fail">アプリのインストールに失敗しました: %s</string>
     <string name="uninstall_app_fail">アプリのアンインストールに失敗しました: %s</string>
+    <string name="uninstall_app_unverified">そのまま残されています: Morpheは、インストールされたアプリがパッチを適用したビルドであることを確認できませんでした。</string>
+    <string name="launch_app_unverified">Morpheは、インストールされたアプリがパッチを適用したビルドであることを確認できませんでした。</string>
     <string name="uninstall_timeout">アンインストールがタイムアウトしました</string>
     <string name="save_apk_success">APK を保存しました</string>
     <string name="saved_app_export_failed">パッチ適用済みアプリのエクスポートに失敗しました</string>
@@ -568,8 +604,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">ホーム画面に挨拶メッセージを表示します</string>
     <string name="settings_appearance_app_grouping">アプリのグループ化</string>
     <string name="settings_appearance_app_grouping_description">ホーム画面スイッチャーを表示して、ソース別または独自のカテゴリでアプリをグループ化します。オフにしたときも選択内容は保持されます</string>
-    <string name="settings_appearance_sort_button">並べ替えボタン</string>
-    <string name="settings_appearance_sort_button_description">ホーム画面に並べ替えボタンを表示します</string>
+    <string name="settings_appearance_sort_button">並べ替えとフィルターボタン</string>
+    <string name="settings_appearance_sort_button_description">ホーム画面に並べ替えとフィルターボタンを表示する</string>
     <string name="settings_appearance_app_card_colors">アプリカードの色</string>
     <string name="settings_appearance_app_card_colors_default">デフォルト</string>
     <string name="settings_appearance_app_card_colors_default_description">アプリの色を、それぞれのバンドルカラーにする</string>
@@ -1070,6 +1106,7 @@ morphe_header_custom_dark.png
     <string name="version">バージョン</string>
     <string name="patch">パッチ</string>
     <string name="patching">パッチ処理</string>
+    <string name="patched">パッチの適用</string>
     <string name="repatch">再パッチ</string>
     <string name="open">開く</string>
     <string name="mount">マウント</string>

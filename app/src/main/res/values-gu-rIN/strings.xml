@@ -69,7 +69,6 @@
     <string name="home_download_instructions_download_button_toast">વેબસાઇટ પર ડાઉનલોડ દબાવો, અને અહીં નહીં 😊</string>
     <string name="home_download_instructions_step3">ડાઉનલોડ પૂર્ણ થાય ત્યાં સુધી રાહ જુઓ, અને APK &lt;b&gt;ઇન્સ્ટોલ કરશો નહીં&lt;b&gt;</string>
     <string name="home_download_instructions_step3_mount">ડાઉનલોડની રાહ જુઓ ડાઉનલોડ પૂર્ણ થાય ત્યાં સુધી રાહ જુઓ, પછી &lt;b&gt;APK ઇન્સ્ટોલ કરો&lt;b&gt;</string>
-    <string name="home_download_instructions_continue">APKMirror.com પર ચાલુ રાખો</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_recommended_version">ભલામણ કરેલ સંસ્કરણ</string>
     <string name="home_selected_version">પસંદ કરેલ સંસ્કરણ</string>
@@ -107,6 +106,7 @@
     <string name="patcher_ready_to_mount_subtitle">માઉન્ટ કરવા માટે નીચેનું બટન દબાવો</string>
     <!-- Patcher Screen - Patcher Steps -->
     <!-- Battery optimization pre-flight dialog -->
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <!-- Patcher Screen - Patcher Messages -->
     <string name="patcher_message_1">તમારી એપ્લિકેશનને કંઈક અદ્ભુત ઢાળ આપી રહ્યા છીએ… 🏆</string>

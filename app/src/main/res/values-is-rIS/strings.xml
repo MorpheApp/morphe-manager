@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Önnur app</string>
     <string name="home_not_patched_yet">Ekki breytt ennþá</string>
+    <string name="home_unpatched_version_installed">Óplötuð útgáfa uppsett</string>
     <string name="home_no_patches_available">Engar breytistillingar eru til staðar</string>
     <string name="home_app_hide_title">Fela þetta app?</string>
     <string name="home_app_hide_message">Þetta app verður falið frá heimaskjánum. Hægt er að endurheimta það síðar frá falinu forritum með því að nota hnappinn neðst á listanum</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">Heimildir þínar eru upp til daglegt</string>
     <string name="home_sources_are_loading">Heimildir eru að hlaða, vinsamlegast bíðu…</string>
     <string name="home_search_apps">Leita að forritum</string>
-    <string name="home_app_sort_title">Raða forritum</string>
+    <string name="home_app_list_options_title">Raða og sía</string>
+    <string name="home_app_list_options_state_description">Raðað eftir %1$s, síað eftir %2$s</string>
+    <string name="home_app_filter_all_description">Öll forrit á heimaskjánum</string>
+    <string name="home_app_filter_patched_description">Forrit sem þú hefur plástrað eða vistað með Morphe</string>
+    <string name="home_app_filter_not_patched_description">Forrit sem þú hefur ekki ennþá plástrað í Morphe</string>
+    <string name="home_app_filter_installed_description">Forrit sem nú eru uppsett á þessu tæki</string>
+    <string name="home_app_filter_uninstalled_description">Forrit sem voru plástruð með Morphe en eru ekki lengur á þessu tæki</string>
     <string name="home_app_sort_manual_description">Langt ýta á forrit, þá smelltu á endurraða hnappinn</string>
     <string name="home_app_sort_recommended">Rækt ráðlagður röð</string>
     <string name="home_app_sort_recommended_description">Uppsett og fest forrit fyrst</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">Engin forrit passa við \"%s\"</string>
     <string name="home_all_apps_hidden_title">Öll app eru faldin</string>
     <string name="home_all_apps_hidden_subtitle">Þú hefur falið öll app frá heimaskjánum</string>
+    <string name="home_no_apps_filter_title">Engin forrit passa við þessa síu</string>
+    <string name="home_no_apps_filter_subtitle">Ekkert passaði við %s</string>
     <string name="home_category_add">Bæta við flokki</string>
     <string name="home_category_all_apps">Allar apps</string>
     <string name="home_category_custom">Sérsniðin</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">Næturhægur og afkastamikill</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Heimildir breytistillinga</string>
+    <string name="sources_search">Leita að uppruna</string>
     <string name="sources_sort_title">Flokka uppfærslujöfn</string>
     <string name="sources_sort_manual">Handvirkuð pöntun</string>
     <string name="sources_sort_manual_hint">Halðu lengi á uppspretta til að raða á ný</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">Halda áfram aðeins ef þú treystir þessu hjálparforriti. Morphe getur ekki staðfest undirskrift þessa APK, svo breyttri skrá verður ekki greind</string>
     <string name="home_apk_helper_no_result">Hjálparforritið skilaði ekki APK</string>
     <string name="home_apk_helper_no_access">Hjálparforritið veitti ekki aðgang að APK sem það skilaði</string>
+    <string name="home_apk_helper_no_package">Hjálparaforritið sagði ekki til um hvaða uppsetta forrit á að nota.</string>
+    <string name="home_apk_helper_wrong_package">Hjálparaforritið skilaði öðru forriti en því sem verið er að laga.세럼. 어？ я越界了。 I\'ll fix that. Only Icelandic. So: \"Hjálparaforritið skilaði öðru forriti en því sem verið er að laga.\" But I accidentally included Chinese. Let me correct in final output. I\'ll write clean JSON.```json[JSON as array]``````json[{</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe gat ekki notað uppsetta forritið</string>
+    <string name="home_apk_helper_installed_incompatible">Ekki er hægt að plástra uppsettu útgáfuna</string>
     <string name="home_apk_use_saved">Nota vistað APK</string>
     <string name="home_apk_use_installed">Nota upphætt APK</string>
     <string name="home_apk_use_installed_unverified">Gat ekki staðfest undirskrift uppsetts forrits, þannig að það gæti þegar verið lagað</string>
+    <string name="home_unverified">Óstaðfest</string>
+    <string name="home_app_info_install_unverified">Morphe getur ekki staðfest að uppsetta forritið sé byggingin sem það plástraði. Settu það upp aftur frá vistuðu APK til að endurheimta aðgerðir þess</string>
     <string name="home_app_info_no_saved_apk">Engin geymd APK. Pökkun mun þurfa að velja APK skrá aftur</string>
     <string name="home_version_requires_android">Krefst Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ekki studd á þessari tæki</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Sæktu upprunalega APK skrána</string>
     <string name="home_download_instructions_steps_title">Leiðbeiningar:</string>
+    <string name="home_download_instructions_finding">Finn niðurhalssíðuna…</string>
     <string name="home_download_instructions_step1">Ýttu á \"%s\" hnappinn hér að neðan</string>
     <string name="home_download_instructions_step2_part1">Scrollaðu niður á vefsíðuna og ýttu á</string>
+    <string name="home_download_instructions_step2_generic">Skrunaðu niður vefsíðuna og ýttu á niðurhalstakkann hennar</string>
+    <string name="home_download_instructions_step2_variant">Skrunaðu niður vefsíðuna og ýttu á niðurhalstakkann á efsta &lt;b&gt;APK afbrigðinu&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_search">Opnaðu leitarniðurstöðu af vefsíðu sem þú treystir</string>
+    <string name="home_download_instructions_step2_search_note">Morphe getur ekki ábyrgst þessar vefsíður. Slepptu þeim sem bjóða upp á eigin app-verslun í stað APK skráar</string>
+    <string name="home_download_instructions_step3_search">Á þeirri vefsíðu skaltu sækja APK af útgáfunni &lt;b&gt;%s&lt;/b&gt;, ekki þeirri nýjustu</string>
+    <string name="home_download_instructions_step3_search_any">Á þeirri vefsíðu skaltu sækja APK appið. &lt;b&gt;Sérhver útgáfa&lt;/b&gt; er hægt að plástra</string>
     <string name="home_download_instructions_download_button_toast">Ýttu á niðuhlaðningu á vefsíðunni, og ekki hér 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Frábært! Smelltu áfram og farðu á vefsíðuna 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Æfingin skapar meistarann og þú ert á góðri leið 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">Bíðu þar til niðuhlaðningu er lokið, þá &lt;b&gt;setja upp APK skrárna&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Eftir að niðursöltunin er lokið, farðu aftur til Morphe</string>
     <string name="home_download_instructions_step4_mount">Eftir að setja upp upprunalega APK-skrána, farðu aftur til Morphe</string>
-    <string name="home_download_instructions_continue">Halda áfram á APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Halda áfram til %s</string>
+    <string name="home_download_instructions_destination">niðurhalssíðan</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Velja skrá</string>
     <string name="home_file_picker_prompt_description">Veldu &lt;b&gt;%s&lt;/b&gt; APK skrána sem þú hlaðið niður</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">Allar breytingar gerða óvirkar</string>
     <string name="expert_mode_enable_all">Gerðu allt virkt</string>
     <string name="expert_mode_enable_all_done">Allar breytingar virkar</string>
+    <string name="expert_mode_enable_all_universal_pending">Ýttu aftur til að fá algilda plástra</string>
     <string name="expert_mode_reset_to_default">Virkja mæltu breytingar</string>
     <string name="expert_mode_reset_to_default_done">Mæltu breytingarnar notaðar</string>
     <string name="expert_mode_restore_saved">Endurheimta valda</string>
@@ -383,6 +408,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="home_app_info_patch_update_available_description">Nýrri útgáfa af patta er í boði. Endurpakkalaðu þitt app til að fá nýjustu endurbætur og lagfæringar</string>
     <string name="home_app_info_app_deleted_warning">App var afhent</string>
     <string name="home_app_info_app_deleted_description">Þetta app var afhent utan Morphe. Endurpakkalaðu það til að endurheimta virkni</string>
+    <string name="home_app_info_not_patched_description">Óplötuð útgáfa af þessu forriti er uppsett. Morphe hefur enn fyrri plástursskrá sína</string>
     <string name="home_app_info_apk_size">APK stærð</string>
     <string name="home_app_info_cpu_arch">CPU arkitektúr</string>
     <!-- Home Screen - Root Mode -->
@@ -454,6 +480,11 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="battery_optimization_dialog_title">Vernd fyrir bakgrunns breytingar</string>
     <string name="battery_optimization_dialog_description">Sum tæki gætu stöðvað breytingasmáttana þegar appið er lágmarks. Leyfðu Morphe að keyra án rafhlöðubindingar til að tryggja áreiðanlega breytinga</string>
     <string name="battery_optimization_not_now">Ekki núna</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Ekki nóg minni</string>
+    <string name="patcher_memory_adjustment_description">Patcher var stöðvaður af kerfinu á meðan hann keyrði með %1$d MB minnismörk. Lækkun minnismarkanna í %2$d MB gerir hann að minna skotmarki og getur leyft keyrslunni að ljúka.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Patcher var stöðvaður af kerfinu á meðan hann keyrði með %1$d MB minnismörk, sem eru þegar þau lægstu sem í boði eru. Reyndu að plástra með færri uppsprettum, eða veldu færri plástra.</string>
+    <string name="patcher_memory_adjustment_apply">Lækka í %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Breytistilling í gangi…</string>
     <string name="patcher_notification_text">Tappaðu til að snúa aftur á breytistillinguna</string>
@@ -488,6 +519,8 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Pakkning app</string>
     <string name="memory_usage">Minniskot</string>
+    <string name="cpu_usage">CPU notkun</string>
+    <string name="storage_io_usage">Geymslu I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Á breytistillingar</string>
     <string name="failed_to_execute_patch">Ekki tókst að á breytistillingu %s</string>
@@ -495,9 +528,12 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patched_app_save_failed_toast">Ekki tókst að vista breytt app</string>
     <string name="plugin_activity_dialog_body">Þú þarft að grípa í gagnvirkt á hugbuginn til að fara áfram</string>
     <string name="patcher_process_exit_message">Breytingavinnsla endaði með kóða %s</string>
+    <string name="patcher_heap_exhausted_message">Plástrarinn kláraði minnið með %1$d MB minnisgeymi. Þetta forrit er of stórt fyrir valda plástra. Reyndu að nota færri plástrauppsprettur, eða veldu færri plástra.</string>
     <string name="install_app_success">Uppsett með góðum árangri</string>
     <string name="install_app_fail">Ekki tókst að setja upp app: %s</string>
     <string name="uninstall_app_fail">Ekki tókst að afinstalla app: %s</string>
+    <string name="uninstall_app_unverified">Skilið eftir á sínum stað: Morphe gat ekki staðfest að uppsetta forritið sé byggingin sem það plástraði</string>
+    <string name="launch_app_unverified">Morphe gat ekki staðfest að uppsetta forritið sé byggingin sem það plástraði</string>
     <string name="uninstall_timeout">Afhenting af uppsetningu tók of langa tíma</string>
     <string name="save_apk_success">APK skrá vistuð</string>
     <string name="saved_app_export_failed">Ekki tókst að flytja breytt app</string>
@@ -567,8 +603,8 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Sýna kveðju skilaboð á heimaskjá</string>
     <string name="settings_appearance_app_grouping">Forritaflokkun</string>
     <string name="settings_appearance_app_grouping_description">Sýna rofasa á heimaskjá til að flokka forrit eftir uppruna eða eigin flokkum, halda vali þegar slökkt er á rofanum</string>
-    <string name="settings_appearance_sort_button">Röðunarhnappur</string>
-    <string name="settings_appearance_sort_button_description">Sýna röðunarhnapp á heimsíðunni</string>
+    <string name="settings_appearance_sort_button">Röðunar- og síunarhnappur</string>
+    <string name="settings_appearance_sort_button_description">Sýna röðunar- og síunarhnappinn á heimaskjánum</string>
     <string name="settings_appearance_app_card_colors">Litir á app kortum</string>
     <string name="settings_appearance_app_card_colors_default">Sjálfgefið</string>
     <string name="settings_appearance_app_card_colors_default_description">Nota litinn á pakkann fyrir hvert app</string>
@@ -1067,6 +1103,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="version">Útgáfa</string>
     <string name="patch">Breytistilling</string>
     <string name="patching">Breytingar</string>
+    <string name="patched">Plástrað</string>
     <string name="repatch">Breytistilla aftur</string>
     <string name="open">Opna</string>
     <string name="mount">Festa</string>

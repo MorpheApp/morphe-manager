@@ -60,10 +60,6 @@
         <item quantity="one">%s fuente instalada</item>
         <item quantity="other">%s fuentes instaladas</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s parche seleccionado</item>
-        <item quantity="other">%s parches seleccionados</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s aplicación oculta</item>
         <item quantity="other">%s aplicaciones ocultas</item>

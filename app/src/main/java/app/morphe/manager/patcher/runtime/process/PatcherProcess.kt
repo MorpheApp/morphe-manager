@@ -13,8 +13,8 @@ import app.morphe.manager.patcher.Session
 import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.patch.PatchBundle
-import app.morphe.manager.patcher.runtime.MemoryMonitor
 import app.morphe.manager.patcher.runtime.ProcessRuntime
+import app.morphe.manager.patcher.runtime.ResourceMonitor
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.split.SplitPreparationEvent
 import app.morphe.manager.ui.model.State
@@ -58,7 +58,7 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                     events.log(level.name, message)
             }
 
-            MemoryMonitor.startMemoryPolling(logger)
+            ResourceMonitor.startPolling(logger)
 
             logger.info("$LOG_PROCESS_PREFIX_PROCESS_HEAP ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
 
@@ -124,10 +124,10 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                 ).use {
                     it.run(File(parameters.outputFile), patchList)
                 }
-                MemoryMonitor.stopMemoryPolling(logger)
+                ResourceMonitor.stopPolling(logger)
                 events.finished(null)
             } catch (e: Exception) {
-                MemoryMonitor.stopMemoryPolling(logger)
+                ResourceMonitor.stopPolling(logger)
                 events.finished(e.stackTraceToString())
             } finally {
                 preparation.cleanup()

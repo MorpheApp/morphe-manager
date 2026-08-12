@@ -60,10 +60,6 @@
         <item quantity="one">%s installerad källa</item>
         <item quantity="other">%s installerade källor</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s valt tillägg</item>
-        <item quantity="other">%s valda tillägg</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s dold app</item>
         <item quantity="other">%s dolda appar</item>

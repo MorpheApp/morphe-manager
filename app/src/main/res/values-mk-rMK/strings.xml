@@ -134,7 +134,6 @@
     <string name="home_download_instructions_step3_mount">Почекајте да се заврши преземањето, потоа &lt;b&gt;инсталирајте го APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Откако ќе заврши преземањето, вратете се во Morphe</string>
     <string name="home_download_instructions_step4_mount">Откако ќе ја инсталирате оригиналната APK, вратете се во Morphe</string>
-    <string name="home_download_instructions_continue">Оди на APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Избери APK</string>
     <string name="home_file_picker_prompt_description">Изберете ја APK-то датотеката што току што ја преземавте &lt;b&gt;%s&lt;/b&gt;.</string>
@@ -325,6 +324,7 @@
     <string name="battery_optimization_dialog_title">Заштита од закрпување во позадина</string>
     <string name="battery_optimization_dialog_description">Некои уреди може да го запре закрпувачот кога апликацијата е минимизирана. Дозволете на Morphe да работи без ограничувања на батеријата за да се осигури закрпувањето целосно</string>
     <string name="battery_optimization_not_now">Не сега</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Поправување во тек…</string>
     <string name="patcher_notification_text">Допрете за да се вратите на поправувачот</string>

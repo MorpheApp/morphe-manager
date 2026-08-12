@@ -22,9 +22,7 @@ import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -48,19 +46,17 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.morphe.manager.domain.bundles.BundleSourceType
 import app.morphe.manager.domain.apk.InstalledApkInfo
 import app.morphe.manager.domain.apk.SavedApkInfo
-import app.morphe.manager.domain.bundles.BundleRecommendation
-import app.morphe.manager.domain.bundles.BundledAppTarget
-import app.morphe.manager.domain.bundles.experimentalVersions
+import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.sourceType
-import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.activity.ApkDownloadWebViewActivity
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.viewmodel.*
+import app.morphe.manager.ui.viewmodel.HomeViewModel
+import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
+import app.morphe.manager.ui.viewmodel.InstalledAppPickerItem
 import app.morphe.manager.util.*
 import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.delay
@@ -196,6 +192,10 @@ fun HomeDialogs(
         val usingMountInstall = homeViewModel.usingMountInstall
         // Remember packageName to prevent color flickering during exit animation
         val packageName = remember { homeViewModel.pendingPackageName }
+        // Settled in dialog 1 and remembered for the same reason, so the steps stay put on the way out
+        val requestedVersion = remember {
+            (homeViewModel.pendingSelectedDownloadVersion ?: homeViewModel.pendingRecommendedVersion)?.version
+        }
 
         // Resolve download button color: bundle declared → default
         val bundleMetadata by homeViewModel.bundleAppMetadataFlow.collectAsStateWithLifecycle()
@@ -210,6 +210,8 @@ fun HomeDialogs(
         }
 
         DownloadInstructionsDialog(
+            downloadUrl = homeViewModel.resolvedDownloadUrl,
+            requestedVersion = requestedVersion,
             usingMountInstall = usingMountInstall,
             targetAppInstalled = homeViewModel.pendingTargetAppInstalled == true,
             downloadColor = downloadColor,
@@ -484,6 +486,7 @@ fun HomeDialogs(
             lockStateOf = { patch ->
                 patch.lockState(homeViewModel.currentInstallerType, homeViewModel.currentApkArchitecture)
             },
+            holdsUniversalPatches = homeViewModel::expertModeSelectAllHoldsUniversal,
             onDismiss = {
                 homeViewModel.cleanupExpertModeData()
             },
@@ -1179,7 +1182,9 @@ private fun InstalledAppPickerDialog(
                 AppFilter.UserOnly -> Icons.Outlined.Person to labelUser
                 AppFilter.SystemOnly -> Icons.Outlined.Android to labelSystem
             }
-            FilledTonalIconButton(
+            TitleAction(
+                icon = icon,
+                contentDescription = description,
                 onClick = {
                     appFilter = when (appFilter) {
                         AppFilter.All -> AppFilter.UserOnly
@@ -1194,17 +1199,9 @@ private fun InstalledAppPickerDialog(
                         }
                     )
                 },
-                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-            ) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = description,
-                    modifier = Modifier.size(Defaults.IconSizeSmall)
-                )
-            }
+                style = TitleActionStyle.Toggle,
+                active = appFilter != AppFilter.All
+            )
         },
         footer = {
             AppDialogOutlinedButton(
@@ -1225,24 +1222,12 @@ private fun InstalledAppPickerDialog(
                 userScrollEnabled = !isLoading
             ) {
                 stickyHeader {
-                    Surface(
-                        modifier = Modifier.fillMaxWidth(),
-                        color = MaterialTheme.colorScheme.surface
-                    ) {
-                        AppDialogTextField(
-                            value = searchQuery.value,
-                            onValueChange = { searchQuery.value = it },
-                            placeholder = { Text(stringResource(R.string.search)) },
-                            leadingIcon = {
-                                Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
-                            },
-                            showClearButton = true,
-                            enabled = !isLoading,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(bottom = 4.dp)
-                        )
-                    }
+                    AppDialogSearchTextField(
+                        value = searchQuery.value,
+                        onValueChange = { searchQuery.value = it },
+                        label = stringResource(R.string.search),
+                        enabled = !isLoading
+                    )
                 }
 
                 if (isLoading) {

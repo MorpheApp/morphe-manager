@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Diğer uygulamalar</string>
     <string name="home_not_patched_yet">Henüz yamalanmadı</string>
+    <string name="home_unpatched_version_installed">Yamalanmamış sürüm yüklendi</string>
     <string name="home_no_patches_available">Yama mevcut değil</string>
     <string name="home_app_hide_title">Uygulama gizlensin mi?</string>
     <string name="home_app_hide_message">Bu uygulama ana ekrandan gizlenecektir. Daha sonra listenin altındaki düğmeyi kullanarak gizli uygulamalardan geri getirebilirsiniz</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">Kaynaklarınız güncel</string>
     <string name="home_sources_are_loading">Kaynaklar yükleniyor, lütfen bekleyin…</string>
     <string name="home_search_apps">Uygulamaları ara</string>
-    <string name="home_app_sort_title">Uygulamaları sırala</string>
+    <string name="home_app_list_options_title">Sırala ve filtrele</string>
+    <string name="home_app_list_options_state_description">Sıralama: %1$s, Filtre: %2$s</string>
+    <string name="home_app_filter_all_description">Ana ekrandaki tüm uygulamalar</string>
+    <string name="home_app_filter_patched_description">Morphe ile yamaladığınız veya kaydettiğiniz uygulamalar</string>
+    <string name="home_app_filter_not_patched_description">Morphe\'de henüz yamalamadığınız uygulamalar</string>
+    <string name="home_app_filter_installed_description">Bu cihazda şu anda yüklü olan uygulamalar</string>
+    <string name="home_app_filter_uninstalled_description">Morphe ile yamalanmış ve bu cihazda artık bulunmayan uygulamalar</string>
     <string name="home_app_sort_manual_description">Bir uygulamaya uzun basın, ardından yeniden sıralama düğmesine dokunun</string>
     <string name="home_app_sort_recommended">Önerilen sıra</string>
     <string name="home_app_sort_recommended_description">Önce yüklenen ve sabitlenen uygulamalar</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">\"%s\" ile eşleşen uygulama yok</string>
     <string name="home_all_apps_hidden_title">Tüm uygulamalar gizlendi</string>
     <string name="home_all_apps_hidden_subtitle">Ana ekrandaki tüm uygulamaları gizlediniz</string>
+    <string name="home_no_apps_filter_title">Bu filtreye uyan uygulama yok</string>
+    <string name="home_no_apps_filter_subtitle">%s ile eşleşen bir şey yok</string>
     <string name="home_category_add">Kategori ekle</string>
     <string name="home_category_all_apps">Tüm uygulamalar</string>
     <string name="home_category_custom">Özel</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">Gececi ve üretken</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yama kaynakları</string>
+    <string name="sources_search">Kaynakları Ara</string>
     <string name="sources_sort_title">Yama kaynaklarını sırala</string>
     <string name="sources_sort_manual">Manuel sıra</string>
     <string name="sources_sort_manual_hint">Yeniden sıralamak için bir kaynağa uzun basın</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">Bu yardımcı uygulamayı yalnızca güveniyorsanız devam edin. Morphe bu APK\'nın imzasını doğrulayamıyor, bu nedenle değiştirilmiş bir dosya tespit edilemez.</string>
     <string name="home_apk_helper_no_result">Yardımcı uygulama bir APK döndürmedi.</string>
     <string name="home_apk_helper_no_access">Yardımcı uygulama, döndürdüğü APK\'ya erişim izni vermedi.</string>
+    <string name="home_apk_helper_no_package">Yardımcı uygulama hangi yüklü uygulamanın kullanılacağını belirtmedi</string>
+    <string name="home_apk_helper_wrong_package">Yardımcı uygulama yamalanan uygulamadan farklı bir uygulama döndürdü</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe yüklü uygulamayı kullanamadı</string>
+    <string name="home_apk_helper_installed_incompatible">Yüklü sürüm yamalanamıyor</string>
     <string name="home_apk_use_saved">Kayıtlı APK\'yi kullan</string>
     <string name="home_apk_use_installed">Yüklü APK\'yi kullan</string>
     <string name="home_apk_use_installed_unverified">Yüklenen uygulamanın imzası doğrulanamadı, bu nedenle zaten yama uygulanmış olabilir</string>
+    <string name="home_unverified">Doğrulanmamış</string>
+    <string name="home_app_info_install_unverified">Morphe, yüklü uygulamanın yamaladığı sürüm olduğunu doğrulayamıyor. Eylemlerini geri yüklemek için kaydedilen APK\'dan yeniden yükleyin.</string>
     <string name="home_app_info_no_saved_apk">Kayıtlı APK yok. Yamayı uygulayabilmek için tekrar APK dosyasını seçmeniz gerekiyor</string>
     <string name="home_version_requires_android">Android %s+ gerektiriyor</string>
     <string name="home_apk_no_compatible_versions_title">Bu cihazda desteklenmiyor</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Orijinal APK\'yi indir</string>
     <string name="home_download_instructions_steps_title">Talimatlar:</string>
+    <string name="home_download_instructions_finding">İndirme sayfası aranıyor…</string>
     <string name="home_download_instructions_step1">Aşağıdaki \"%s\" düğmesine tıklayın</string>
     <string name="home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve</string>
+    <string name="home_download_instructions_step2_generic">Web sayfasını aşağı kaydırın ve indirme düğmesine basın</string>
+    <string name="home_download_instructions_step2_variant">Web sayfasını aşağı kaydırın ve en üstteki &lt;b&gt;APK varyantının&lt;/b&gt; indirme düğmesine basın</string>
+    <string name="home_download_instructions_step2_search">Güvendiğiniz bir web sitesinden bir arama sonucunu açın</string>
+    <string name="home_download_instructions_step2_search_note">Morphe bu web sitelerini garanti edemez. APK dosyası yerine kendi uygulama mağazasını sunanları atlayın</string>
+    <string name="home_download_instructions_step3_search">Bu web sitesinde, en yeni sürümü değil, &lt;b&gt;%s&lt;/b&gt; sürümünün APK\'sını indirin</string>
+    <string name="home_download_instructions_step3_search_any">Bu web sitesinde uygulamanın APK\'sını indirin. &lt;b&gt;Herhangi bir sürüm&lt;/b&gt; yamalanabilir</string>
     <string name="home_download_instructions_download_button_toast">Web sitesindeki indirme düğmesine basın, buradakine değil 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Harika! Şimdi devam\'a tıklayın ve web sitesine gidin 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Pratik mükemmelleştirir ve yavaş yavaş ilerliyorsun 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">İndirmenin tamamlanmasını bekleyin, ardından &lt;b&gt;APK\'yi yükleyin&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">İndirme tamamlandıktan sonra Morphe\'ye geri dönün</string>
     <string name="home_download_instructions_step4_mount">Orijinal APK\'yi yükledikten sonra Morphe\'ye geri dönün</string>
-    <string name="home_download_instructions_continue">APKMirror.com\'a devam et</string>
+    <string name="home_download_instructions_continue_to">%s sayfasına devam edin</string>
+    <string name="home_download_instructions_destination">indirme sayfası</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">İndirilen APK\'yi seç</string>
     <string name="home_file_picker_prompt_description">İndirdiğiniz &lt;b&gt;%s&lt;/b&gt; APK dosyasını seçin</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">Tüm yamalar devre dışı bırakıldı</string>
     <string name="expert_mode_enable_all">Hepsini etkinleştir</string>
     <string name="expert_mode_enable_all_done">Tüm yamalar etkinleştirildi</string>
+    <string name="expert_mode_enable_all_universal_pending">Evrensel yamalar için tekrar dokunun</string>
     <string name="expert_mode_reset_to_default">Önerilen yamaları etkinleştir</string>
     <string name="expert_mode_reset_to_default_done">Önerilen yamalar uygulandı</string>
     <string name="expert_mode_restore_saved">Kaydedilen seçimi geri yükle</string>
@@ -385,6 +410,7 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="home_app_info_patch_update_available_description">Daha yeni sürüm yamalar mevcut. En son iyileştirmeleri ve düzeltmeleri almak için uygulamayı yeniden yamalayın</string>
     <string name="home_app_info_app_deleted_warning">Uygulama kaldırıldı</string>
     <string name="home_app_info_app_deleted_description">Bu uygulama Morphe dışından kaldırıldı. İşlevselliği geri getirmek için yeniden yamalayın</string>
+    <string name="home_app_info_not_patched_description">Bu uygulamanın yamalanmamış bir sürümü yüklü. Morphe hâlâ önceki yama kaydına sahiptir</string>
     <string name="home_app_info_apk_size">APK boyutu</string>
     <string name="home_app_info_cpu_arch">CPU mimarisi</string>
     <!-- Home Screen - Root Mode -->
@@ -456,6 +482,11 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="battery_optimization_dialog_title">Arka plan yama koruması</string>
     <string name="battery_optimization_dialog_description">Bazı cihazlar, uygulama küçültüldüğünde patcher\'ı durdurabilir. Yamalamanın güvenilir bir şekilde tamamlanmasını sağlamak için Morphe\'nin pil kısıtlamaları olmadan çalışmasına izin verin</string>
     <string name="battery_optimization_not_now">Şimdi değil</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Yetersiz bellek</string>
+    <string name="patcher_memory_adjustment_description">Yamalayıcı, %1$d MB bellek sınırıyla çalışırken sistem tarafından durduruldu. Sınırı %2$d MB değerine düşürmek yamalayıcıyı daha küçük bir hedef haline getirir ve çalıştırmanın tamamlanmasını sağlayabilir.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Yamalayıcı, zaten mevcut en düşük değer olan %1$d MB bellek sınırıyla çalışırken sistem tarafından durduruldu. Daha az yama kaynağıyla yamalamayı deneyin veya daha az yama seçin.</string>
+    <string name="patcher_memory_adjustment_apply">Sınırı %1$d MB değerine düşür</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Yamalama devam ediyor…</string>
     <string name="patcher_notification_text">Patcher\'a dönmek için dokunun</string>
@@ -490,6 +521,8 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Uygulama yamalanıyor</string>
     <string name="memory_usage"> Bellek kullanımı</string>
+    <string name="cpu_usage">CPU kullanımı</string>
+    <string name="storage_io_usage">Depolama G/Ç</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Yamalar uygulanıyor</string>
     <string name="failed_to_execute_patch">%s uygulanamadı</string>
@@ -497,9 +530,12 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="patched_app_save_failed_toast">Yamalanmış uygulama kaydedilemedi</string>
     <string name="plugin_activity_dialog_body">Bu eklentinin çalışmaya devam edebilmesi için kullanıcı etkileşimi gereklidir</string>
     <string name="patcher_process_exit_message">Patcher işlemi %s kodu ile sonlandı</string>
+    <string name="patcher_heap_exhausted_message">Yama uygulayıcının belleği, %1$d MB\'lik bir yığın ile tükendi. Bu uygulama seçilen yamalar için çok büyük. Daha az yama kaynağıyla yama uygulamayı deneyin veya daha az yama seçin.</string>
     <string name="install_app_success">Başarıyla yüklendi</string>
     <string name="install_app_fail">Uygulama yüklenemedi: %s</string>
     <string name="uninstall_app_fail">Uygulama kaldırılamadı: %s</string>
+    <string name="uninstall_app_unverified">Yerinde bırakıldı: Morphe, yüklü uygulamanın yamaladığı sürüm olduğunu doğrulayamadı.</string>
+    <string name="launch_app_unverified">Morphe, yüklü uygulamanın yamaladığı sürüm olduğunu doğrulayamadı.</string>
     <string name="uninstall_timeout">Kaldırma zaman aşımına uğradı</string>
     <string name="save_apk_success">APK Kaydedildi</string>
     <string name="saved_app_export_failed">Yamalanmış uygulama dışa aktarılamadı</string>
@@ -568,8 +604,8 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ana ekranda bir selamlama mesajı göster</string>
     <string name="settings_appearance_app_grouping">Uygulama gruplandırma</string>
     <string name="settings_appearance_app_grouping_description">Uygulamaları kaynaklarına veya kendi kategorilerinize göre gruplamak için bir ana ekran değiştirici göster. Kapalıyken seçimi korur</string>
-    <string name="settings_appearance_sort_button">Sıralama düğmesi</string>
-    <string name="settings_appearance_sort_button_description">Ana ekranda sıralama düğmesini göster</string>
+    <string name="settings_appearance_sort_button">Sıralama ve filtreleme düğmesi</string>
+    <string name="settings_appearance_sort_button_description">Ana ekranda sıralama ve filtreleme düğmesini göster</string>
     <string name="settings_appearance_app_card_colors">Uygulama kartı renkleri</string>
     <string name="settings_appearance_app_card_colors_default">Varsayılan</string>
     <string name="settings_appearance_app_card_colors_default_description">Her uygulamaya kendi paketinin rengini ver</string>
@@ -1070,6 +1106,7 @@ Ayrıntılar: %2$s"</string>
     <string name="version">Sürüm</string>
     <string name="patch">Yamala</string>
     <string name="patching">Yamalanıyor</string>
+    <string name="patched">Yamalı</string>
     <string name="repatch">Yeniden yamala</string>
     <string name="open">Aç</string>
     <string name="mount">Bağla</string>

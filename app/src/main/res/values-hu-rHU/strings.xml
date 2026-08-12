@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Egyéb alkalmazások</string>
     <string name="home_not_patched_yet">Még nincs módosítva</string>
+    <string name="home_unpatched_version_installed">A nem javított verzió van telepítve</string>
     <string name="home_no_patches_available">Nincsenek elérhető módosítások</string>
     <string name="home_app_hide_title">Elrejted az alkalmazást?</string>
     <string name="home_app_hide_message">Ez az alkalmazás el lesz rejtve a főképernyőről. Később visszaállíthatod a lista alján található gomb segítségével.</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">A forrásaid naprakészek</string>
     <string name="home_sources_are_loading">Források betöltése...</string>
     <string name="home_search_apps">Alkalmazások keresése</string>
-    <string name="home_app_sort_title">Alkalmazások rendezése</string>
+    <string name="home_app_list_options_title">Rendezés és szűrés</string>
+    <string name="home_app_list_options_state_description">Rendezés: %1$s, szűrés: %2$s</string>
+    <string name="home_app_filter_all_description">Minden alkalmazás a kezdőképernyőn</string>
+    <string name="home_app_filter_patched_description">A Morphe segítségével patchelt vagy elmentett alkalmazások</string>
+    <string name="home_app_filter_not_patched_description">A Morphe segítségével még nem patchelt alkalmazások</string>
+    <string name="home_app_filter_installed_description">A jelenleg ezen az eszközön telepített alkalmazások</string>
+    <string name="home_app_filter_uninstalled_description">A Morphe programmal módosított alkalmazások, amelyek már nincsenek ezen az eszközön</string>
     <string name="home_app_sort_manual_description">Nyomja meg hosszan az alkalmazást, majd érintse meg a sorrend módosítása gombot</string>
     <string name="home_app_sort_recommended">Ajánlott sorrend</string>
     <string name="home_app_sort_recommended_description">Először a telepített és rögzített alkalmazások</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">Nincs találat erre: „%s”</string>
     <string name="home_all_apps_hidden_title">Minden alkalmazás el van rejtve</string>
     <string name="home_all_apps_hidden_subtitle">Minden alkalmazást elrejtettél a kezdőképernyőről</string>
+    <string name="home_no_apps_filter_title">Nincs ennek a szűrőnek megfelelő alkalmazás</string>
+    <string name="home_no_apps_filter_subtitle">Semmi sem felelt meg a(z) %s szűrőnek</string>
     <string name="home_category_add">Kategória hozzáadása</string>
     <string name="home_category_all_apps">Összes alkalmazás</string>
     <string name="home_category_custom">Egyedi</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">Éjszakai és produktív</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Módosításforrások</string>
+    <string name="sources_search">Források keresése</string>
     <string name="sources_sort_title">Javításforrások rendezése</string>
     <string name="sources_sort_manual">Kézi sorrend</string>
     <string name="sources_sort_manual_hint">Nyomja meg hosszan egy forrást a sorrend megváltoztatásához.</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">Csak akkor folytasd, ha megbízol ebben a segédalkalmazásban. A Morphe nem tudja ellenőrizni ennek az APK-nak az aláírását, így egy módosított fájl nem lenne felismerhető.</string>
     <string name="home_apk_helper_no_result">A segédalkalmazás nem adott vissza APK-t.</string>
     <string name="home_apk_helper_no_access">A segédalkalmazás nem engedte hozzáférést a visszaadott APK-hoz.</string>
+    <string name="home_apk_helper_no_package">A segédalkalmazás nem mondta meg, melyik telepített alkalmazást kell használni.</string>
+    <string name="home_apk_helper_wrong_package">A segédalkalmazás másik alkalmazást adott vissza, mint amelyiket éppen foltozzák.</string>
+    <string name="home_apk_helper_installed_unavailable">A Morphe nem tudta használni a telepített alkalmazást.</string>
+    <string name="home_apk_helper_installed_incompatible">A telepített verzió nem foltozható.</string>
     <string name="home_apk_use_saved">Mentett APK használata</string>
     <string name="home_apk_use_installed">Telepített APK használata</string>
     <string name="home_apk_use_installed_unverified">Nem sikerült ellenőrizni a telepített alkalmazás áláísás állását, ezért lehetséges, hogy már másolták.</string>
+    <string name="home_unverified">Nem ellenőrzött</string>
+    <string name="home_app_info_install_unverified">A Morphe nem tudja megerősíteni, hogy a telepített alkalmazás az a build, amelyet javított. Telepítse újra a mentett APK-ból a műveletek visszaállításához</string>
     <string name="home_app_info_no_saved_apk">Nincs mentett APK. A módosításhoz újra ki kell választanod az APK-fájlt.</string>
     <string name="home_version_requires_android">Android %s+ verziót igényel</string>
     <string name="home_apk_no_compatible_versions_title">Nem támogatott ezen az eszközen</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Az eredeti APK letöltése</string>
     <string name="home_download_instructions_steps_title">Útmutató:</string>
+    <string name="home_download_instructions_finding">A letöltési oldal keresése…</string>
     <string name="home_download_instructions_step1">Koppints az alábbi „%s” gombra</string>
     <string name="home_download_instructions_step2_part1">Görgess le a weboldalon, majd nyomd meg:</string>
+    <string name="home_download_instructions_step2_generic">Görgess le a weboldalon, majd nyomd meg a letöltő gombját</string>
+    <string name="home_download_instructions_step2_variant">Görgess le a weboldalon, majd nyomd meg a legfelső &lt;b&gt;APK-változat&lt;/b&gt; letöltő gombját</string>
+    <string name="home_download_instructions_step2_search">Nyiss meg egy keresési találatot egy olyan weboldalról, amelyben megbízol</string>
+    <string name="home_download_instructions_step2_search_note">A Morphe nem tud jótállni ezekért a weboldalakért. Hagyd ki azokat, amelyek APK-fájl helyett saját alkalmazásboltot kínálnak</string>
+    <string name="home_download_instructions_step3_search">Azon a weboldalon töltsd le a &lt;b&gt;%s&lt;/b&gt; verzió APK-ját, nem a legújabbat</string>
+    <string name="home_download_instructions_step3_search_any">Azon a weboldalon töltsd le az alkalmazás APK-ját. &lt;b&gt;Bármelyik verzió&lt;/b&gt; patch-elhető</string>
     <string name="home_download_instructions_download_button_toast">​A weboldalon nyomj a letöltésre, ne itt 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Szuper! Most kattints a folytatásra, és látogass el a weboldalra 👆</string>
     <string name="home_download_instructions_download_button_toast_3">A gyakorlás tökéletessé tesz, és már jó úton vagy 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">Várj, amíg a letöltés befejeződik, majd &lt;b&gt;telepítsd az APK-t&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">A letöltés után térj vissza a Morphe alkalmazásba</string>
     <string name="home_download_instructions_step4_mount">Az eredeti APK telepítése után térj vissza Morphe alkalmazásba</string>
-    <string name="home_download_instructions_continue">Tovább az APKMirror.com oldalra</string>
+    <string name="home_download_instructions_continue_to">Tovább: %s</string>
+    <string name="home_download_instructions_destination">a letöltési oldalra</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Válaszd ki a letöltött APK-t</string>
     <string name="home_file_picker_prompt_description">Válaszd ki a most letöltött &lt;b&gt;%s&lt;/b&gt; APK fájlt</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">Az összes patch le van tiltva</string>
     <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
     <string name="expert_mode_enable_all_done">Az összes patch engedélyezve van</string>
+    <string name="expert_mode_enable_all_universal_pending">Koppintson újra az univerzális javításokhoz.</string>
     <string name="expert_mode_reset_to_default">Ajánlott módosítások engedélyezése</string>
     <string name="expert_mode_reset_to_default_done">A javasolt patch-ek alkalmazva</string>
     <string name="expert_mode_restore_saved">Mentett összeállítás visszaállítása</string>
@@ -385,6 +410,7 @@ Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos r�
     <string name="home_app_info_patch_update_available_description">Újabb módosítások érhetők el. Alkalmazd őket újra az alkalmazáson a legfrissebb javításokért és fejlesztésekért.</string>
     <string name="home_app_info_app_deleted_warning">Az alkalmazást eltávolították</string>
     <string name="home_app_info_app_deleted_description">Ezt az alkalmazást a Morphén kívül távolították el. Alkalmazd újra a módosításokat a működés helyreállításához.</string>
+    <string name="home_app_info_not_patched_description">Az alkalmazás nem javított verziója van telepítve. A Morphe még mindig tartalmazza a korábbi javítási rekordját.</string>
     <string name="home_app_info_apk_size">APK méret</string>
     <string name="home_app_info_cpu_arch">CPU architektúra</string>
     <!-- Home Screen - Root Mode -->
@@ -456,6 +482,11 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="battery_optimization_dialog_title">Háttérjavítási védelem</string>
     <string name="battery_optimization_dialog_description">Bizonyos eszközök leállíthatják a javítót, ha az alkalmazás minimalizálva van. Engedélyezze a Morphe akadálytalan futását akkumulátor-korlátozások nélkül, hogy a javítás megbízhatóan befejeződjön.</string>
     <string name="battery_optimization_not_now">Most nem</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Nincs elég memória</string>
+    <string name="patcher_memory_adjustment_description">A rendszer leállította a patchert, miközben %1$d MB memóriakorláttal futott. A korlát %2$d MB-ra csökkentése kisebb célponttá teszi a patchert, és lehetővé teheti a futás befejezését.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">A rendszer leállította a patchert, miközben %1$d MB memóriakorláttal futott; ez a korlát már a legalacsonyabb elérhető. Próbáljon meg kevesebb patchforrással patchelni, vagy válasszon kevesebb patch-et.</string>
+    <string name="patcher_memory_adjustment_apply">Csökkentés %1$d MB-ra</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Módosítás folyamatban…</string>
     <string name="patcher_notification_text">Koppints a módosítóhoz való visszatéréshez</string>
@@ -490,6 +521,8 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Alkalmazás módosítása</string>
     <string name="memory_usage">Memóriahasználat</string>
+    <string name="cpu_usage">CPU-használat</string>
+    <string name="storage_io_usage">Tárhely I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Módosítások alkalmazása</string>
     <string name="failed_to_execute_patch">Nem sikerült alkalmazni: %s</string>
@@ -497,9 +530,12 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="patched_app_save_failed_toast">A módosított alkalmazás mentése sikertelen</string>
     <string name="plugin_activity_dialog_body">A bővítmény használatához felhasználói beavatkozásra van szükség</string>
     <string name="patcher_process_exit_message">A módosítási folyamat %s kóddal kilépett</string>
+    <string name="patcher_heap_exhausted_message">A javítóprogram kifutott a memóriából egy %1$d MB méretű heap-pel. Ez az alkalmazás túl nagy a kiválasztott javításokhoz. Próbáljon kevesebb javítási forrással javítani, vagy válasszon kevesebb javítást.</string>
     <string name="install_app_success">Sikeresen telepítve</string>
     <string name="install_app_fail">Nem sikerült telepíteni az alkalmazást: %s</string>
     <string name="uninstall_app_fail">Nem sikerült eltávolítani az alkalmazást: %s</string>
+    <string name="uninstall_app_unverified">A helyén hagyva: a Morphe nem tudta ellenőrizni, hogy a telepített alkalmazás az a build, amelyet javított</string>
+    <string name="launch_app_unverified">A Morphe nem tudta ellenőrizni, hogy a telepített alkalmazás az a build, amelyet javított</string>
     <string name="uninstall_timeout">Az eltávolítás időtúllépése</string>
     <string name="save_apk_success">APK mentve</string>
     <string name="saved_app_export_failed">Nem sikerült exportálni a módosított alkalmazást</string>
@@ -568,8 +604,8 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése a kezdőképernyőn</string>
     <string name="settings_appearance_app_grouping">Alkalmazáscsoportosítás</string>
     <string name="settings_appearance_app_grouping_description">Mutasson egy főképernyő váltót az alkalmazások forrás vagy saját kategóriák szerinti csoportosításához, a kiválasztást megőrizve, ha ki van kapcsolva</string>
-    <string name="settings_appearance_sort_button">Rendezés gomb</string>
-    <string name="settings_appearance_sort_button_description">Mutassa a rendezés gombot a kezdőképernyőn</string>
+    <string name="settings_appearance_sort_button">Rendezés és szűrés gomb</string>
+    <string name="settings_appearance_sort_button_description">A rendezés és szűrés gomb megjelenítése a kezdőképernyőn</string>
     <string name="settings_appearance_app_card_colors">Alkalmazáskártyák színei</string>
     <string name="settings_appearance_app_card_colors_default">Alapértelmezett</string>
     <string name="settings_appearance_app_card_colors_default_description">Minden alkalmazásnak a saját csomagjának színét adja</string>
@@ -1071,6 +1107,7 @@ Részletek: %2$s"</string>
     <string name="version">Verzió</string>
     <string name="patch">Módosítás</string>
     <string name="patching">Javítás</string>
+    <string name="patched">Módosított</string>
     <string name="repatch">Módosítás újra</string>
     <string name="open">Megnyitás</string>
     <string name="mount">Csatolás</string>

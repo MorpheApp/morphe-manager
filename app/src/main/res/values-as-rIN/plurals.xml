@@ -28,8 +28,4 @@
         <item quantity="one">%s টা সোর্স ইনষ্টল হৈ আছে</item>
         <item quantity="other">%s টা সোর্স ইনষ্টল হৈ আছে</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s টা প্যাচ চয়ন কৰা হৈছে</item>
-        <item quantity="other">%s টা প্যাচ চয়ন কৰা হৈছে</item>
-    </plurals>
 </resources>

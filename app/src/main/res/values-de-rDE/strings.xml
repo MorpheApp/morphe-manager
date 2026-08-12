@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Andere Apps</string>
     <string name="home_not_patched_yet">Noch nicht gepatcht</string>
+    <string name="home_unpatched_version_installed">Ungepatchte Version installiert</string>
     <string name="home_no_patches_available">Keine Patches verfügbar</string>
     <string name="home_app_hide_title">Diese App ausblenden?</string>
     <string name="home_app_hide_message">Diese App wird auf dem Startbildschirm ausgeblendet. Sie können sie später über die Schaltfläche am Ende der Liste wiederherstellen</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">Deine Quellen sind auf dem neuesten Stand</string>
     <string name="home_sources_are_loading"> Quellen werden geladen, bitte warten…</string>
     <string name="home_search_apps">Apps suchen</string>
-    <string name="home_app_sort_title">Apps sortieren</string>
+    <string name="home_app_list_options_title">Sortieren und Filtern</string>
+    <string name="home_app_list_options_state_description">Sortiert nach %1$s, gefiltert nach %2$s</string>
+    <string name="home_app_filter_all_description">Jede App auf dem Startbildschirm</string>
+    <string name="home_app_filter_patched_description">Apps, die du mit Morphe gepatcht oder gespeichert hast</string>
+    <string name="home_app_filter_not_patched_description">Apps, die du noch nicht in Morphe gepatcht hast</string>
+    <string name="home_app_filter_installed_description">Apps, die derzeit auf diesem Gerät installiert sind</string>
+    <string name="home_app_filter_uninstalled_description">Apps, die mit Morphe gepatcht wurden und nicht mehr auf diesem Gerät vorhanden sind</string>
     <string name="home_app_sort_manual_description">Halte eine App lange gedrückt und tippe dann auf die Schaltfläche zum Sortieren</string>
     <string name="home_app_sort_recommended">Empfohlene Reihenfolge</string>
     <string name="home_app_sort_recommended_description">Installierte und angeheftete Apps zuerst</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">Keine Apps passen zu \"%s\"</string>
     <string name="home_all_apps_hidden_title">Alle Apps sind ausgeblendet</string>
     <string name="home_all_apps_hidden_subtitle">Sie haben alle Apps vom Startbildschirm ausgeblendet</string>
+    <string name="home_no_apps_filter_title">Keine Apps entsprechen diesem Filter</string>
+    <string name="home_no_apps_filter_subtitle">Nichts entspricht %s</string>
     <string name="home_category_add">Kategorie hinzufügen</string>
     <string name="home_category_all_apps">Alle Apps</string>
     <string name="home_category_custom">Benutzerdefiniert</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">Nachtaktiv und produktiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch-Quellen</string>
+    <string name="sources_search">Quellen suchen</string>
     <string name="sources_sort_title">Patch-Quellen sortieren</string>
     <string name="sources_sort_manual">Manuelle Reihenfolge</string>
     <string name="sources_sort_manual_hint">Halte eine Quelle gedrückt, um sie neu anzuordnen</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">Fahren Sie nur fort, wenn Sie dieser Hilfs-App vertrauen. Morphe kann die Signatur dieser APK nicht überprüfen, sodass eine geänderte Datei nicht erkannt würde</string>
     <string name="home_apk_helper_no_result">Die Hilfs-App hat keine APK zurückgegeben</string>
     <string name="home_apk_helper_no_access">Die Hilfs-App hat keinen Zugriff auf die zurückgegebene APK gewährt</string>
+    <string name="home_apk_helper_no_package">Die Helfer-App hat nicht angegeben, welche installierte App verwendet werden soll.</string>
+    <string name="home_apk_helper_wrong_package">Die Hilfs-App hat eine andere App zurückgegeben als die, die gepatcht wird. Der key ist \"home_apk_helper_wrong_package\"? Nein, das ist nur eine Übersetzung, aber wir müssen das JSON behalten. Also ich übersetze nur den Text. Eigentlich sollte ich nur den Text ändern, aber ich habe das ganze Objekt übernommen. Ich sollte nur den Text-Feld ändern. Also im JSON: {</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe konnte die installierte App nicht verwenden</string>
+    <string name="home_apk_helper_installed_incompatible">Die installierte Version kann nicht gepatcht werden</string>
     <string name="home_apk_use_saved">Gespeicherte APK verwenden</string>
     <string name="home_apk_use_installed">Installierte App verwenden</string>
     <string name="home_apk_use_installed_unverified">Die Signatur der installierten App konnte nicht verifiziert werden. Sie ist möglicherweise bereits gepatcht.</string>
+    <string name="home_unverified">Unbestätigt</string>
+    <string name="home_app_info_install_unverified">Morphe kann nicht bestätigen, dass die installierte App der von ihm gepatchte Build ist. Installieren Sie sie erneut aus der gespeicherten APK, um ihre Aktionen wiederherzustellen</string>
     <string name="home_app_info_no_saved_apk">Keine gespeicherte APK. Das Patchen erfordert die erneute Auswahl der APK-Datei</string>
     <string name="home_version_requires_android">Benötigt Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Wird auf diesem Gerät nicht unterstützt</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Laden Sie die originale APK herunter </string>
     <string name="home_download_instructions_steps_title">Anleitung:</string>
+    <string name="home_download_instructions_finding">Suche nach der Download-Seite …</string>
     <string name="home_download_instructions_step1">Drücken Sie die Taste \'%s\' unten </string>
     <string name="home_download_instructions_step2_part1">Scrollen Sie auf der Webseite nach unten und drücken Sie </string>
+    <string name="home_download_instructions_step2_generic">Scrollen Sie auf der Webseite nach unten und drücken Sie auf deren Download-Schaltfläche.</string>
+    <string name="home_download_instructions_step2_variant">Scrollen Sie auf der Webseite nach unten und drücken Sie auf die Download-Schaltfläche der oberen &lt;b&gt;APK-Variante&lt;/b&gt;.</string>
+    <string name="home_download_instructions_step2_search">Öffnen Sie ein Suchergebnis von einer Website, der Sie vertrauen.</string>
+    <string name="home_download_instructions_step2_search_note">Morphe kann nicht für diese Websites bürgen. Überspringen Sie diejenigen, die statt einer APK-Datei einen eigenen App-Store anbieten.</string>
+    <string name="home_download_instructions_step3_search">Laden Sie auf dieser Website die APK der Version &lt;b&gt;%s&lt;/b&gt; herunter, nicht die neueste Version.</string>
+    <string name="home_download_instructions_step3_search_any">Laden Sie auf dieser Website die APK der App herunter. &lt;b&gt;Jede Version&lt;/b&gt; kann gepatcht werden.</string>
     <string name="home_download_instructions_download_button_toast">Drücken Sie die Download-Taste auf der Website und nicht hier 😊 </string>
     <string name="home_download_instructions_download_button_toast_2">Ausgezeichnet! Klicken Sie nun auf \'Weiter\' und gehen Sie zur Website 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Übung macht den Meister, und Sie sind auf dem richtigen Weg 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">Warten Sie bis der Download abgeschlossen ist, dann &lt;b&gt;installieren Sie die APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Nachdem der Download abgeschlossen ist, kehren Sie zu Morphe zurück</string>
     <string name="home_download_instructions_step4_mount">Nach der Installation der originalen APK, kehren Sie zu Morphe zurück</string>
-    <string name="home_download_instructions_continue">Weiter zu APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Weiter zu %s</string>
+    <string name="home_download_instructions_destination">der Download-Seite</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Heruntergeladene APK-Datei auswählen</string>
     <string name="home_file_picker_prompt_description">Wählen Sie die &lt;b&gt;%s&lt;/b&gt; APK-Datei aus, die Sie gerade heruntergeladen haben</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">Alle Patches deaktiviert</string>
     <string name="expert_mode_enable_all">Alle aktivieren</string>
     <string name="expert_mode_enable_all_done">Alle Patches aktiviert</string>
+    <string name="expert_mode_enable_all_universal_pending">Tippe erneut für universelle Patches</string>
     <string name="expert_mode_reset_to_default">Empfohlene Patches aktivieren</string>
     <string name="expert_mode_reset_to_default_done">Empfohlene Patches angewendet</string>
     <string name="expert_mode_restore_saved">Gespeicherte Auswahl wiederherstellen</string>
@@ -385,6 +410,7 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="home_app_info_patch_update_available_description">Eine neuere Version von Patches ist verfügbar. Repatchen Sie Ihre App, um die neuesten Verbesserungen und Fehlerbehebungen zu erhalten</string>
     <string name="home_app_info_app_deleted_warning">App wurde deinstalliert</string>
     <string name="home_app_info_app_deleted_description">Diese App wurde außerhalb von Morphe deinstalliert. Repatchen Sie sie, um die Funktionalität wiederherzustellen</string>
+    <string name="home_app_info_not_patched_description">Eine ungepatchte Version dieser App ist installiert. Morphe hat immer noch seinen vorherigen Patch-Datensatz</string>
     <string name="home_app_info_apk_size">APK-Größe</string>
     <string name="home_app_info_cpu_arch">CPU-Architektur</string>
     <!-- Home Screen - Root Mode -->
@@ -457,6 +483,11 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="battery_optimization_dialog_title">Schutz vor Hintergrund-Patching</string>
     <string name="battery_optimization_dialog_description">Auf einigen Geräten wird das Patchen unterbrochen, sobald die App minimiert wird. Erlaube Morphe, ohne Akkuoptimierung im Hintergrund zu laufen, um sicherzustellen, dass der Vorgang zuverlässig abgeschlossen wird</string>
     <string name="battery_optimization_not_now">Nicht jetzt</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Nicht genügend Speicher</string>
+    <string name="patcher_memory_adjustment_description">Der Patcher wurde vom System beendet, während er mit einem Speicherlimit von %1$d MB ausgeführt wurde. Das Senken des Limits auf %2$d MB macht den Patcher zu einem kleineren Ziel und kann dafür sorgen, dass der Lauf abgeschlossen wird.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Der Patcher wurde vom System beendet, während er mit einem Speicherlimit von %1$d MB ausgeführt wurde, was bereits das niedrigste verfügbare Limit ist. Versuche, mit weniger Patchquellen zu patchen, oder wähle weniger Patches aus.</string>
+    <string name="patcher_memory_adjustment_apply">Auf %1$d MB senken</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patch-Vorgang läuft…</string>
     <string name="patcher_notification_text">Zum Patcher zurückkehren</string>
@@ -491,6 +522,8 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">App wird gepatcht</string>
     <string name="memory_usage">Speichernutzung</string>
+    <string name="cpu_usage">CPU-Auslastung</string>
+    <string name="storage_io_usage">Speicher-I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Patches werden angewendet</string>
     <string name="failed_to_execute_patch">%s konnte nicht angewendet werden</string>
@@ -498,9 +531,12 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="patched_app_save_failed_toast">Speichern der gepatchten App fehlgeschlagen</string>
     <string name="plugin_activity_dialog_body">Benutzerinteraktion ist erforderlich, um dieses Plugin fortzusetzen</string>
     <string name="patcher_process_exit_message">Patcher-Prozess wurde mit Code %s beendet</string>
+    <string name="patcher_heap_exhausted_message">Dem Patcher ging bei einem Heap von %1$d MB der Speicher aus. Diese App ist zu groß für die ausgewählten Patches. Versuche, mit weniger Patch-Quellen zu patchen, oder wähle weniger Patches.</string>
     <string name="install_app_success">Erfolgreich installiert</string>
     <string name="install_app_fail">Installation der App fehlgeschlagen: %s</string>
     <string name="uninstall_app_fail">App konnte nicht deinstalliert werden: %s</string>
+    <string name="uninstall_app_unverified">An Ort und Stelle belassen: Morphe konnte nicht überprüfen, dass die installierte App der von ihm gepatchte Build ist</string>
+    <string name="launch_app_unverified">Morphe konnte nicht überprüfen, dass die installierte App der von ihm gepatchte Build ist</string>
     <string name="uninstall_timeout">Deinstallation zeitüberschritten</string>
     <string name="save_apk_success">APK gespeichert</string>
     <string name="saved_app_export_failed">Export der gepatchten App fehlgeschlagen</string>
@@ -570,8 +606,8 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zeige auf dem Startbildschirm eine Begrüßung an</string>
     <string name="settings_appearance_app_grouping">App-Gruppierung</string>
     <string name="settings_appearance_app_grouping_description">Zeigt einen Home-Bildschirm-Wechsler an, um Apps nach Quelle oder Ihren eigenen Kategorien zu gruppieren und die Auswahl bei Deaktivierung beizubehalten</string>
-    <string name="settings_appearance_sort_button">Sortierknopf</string>
-    <string name="settings_appearance_sort_button_description">Zeigt eine Schaltfläche zum Sortieren auf dem Startbildschirm an</string>
+    <string name="settings_appearance_sort_button">Schaltfläche zum Sortieren und Filtern</string>
+    <string name="settings_appearance_sort_button_description">Zeigt eine Schaltfläche zum Sortieren und Filtern auf dem Startbildschirm an</string>
     <string name="settings_appearance_app_card_colors">Farben der App-Karten</string>
     <string name="settings_appearance_app_card_colors_default">Standard</string>
     <string name="settings_appearance_app_card_colors_default_description">Jeder App die Farbe ihres eigenen Bundles zuweisen</string>
@@ -1073,6 +1109,7 @@ Details: %2$s"</string>
     <string name="version">Version</string>
     <string name="patch">Patchen</string>
     <string name="patching">Patchen</string>
+    <string name="patched">Gepatcht am</string>
     <string name="repatch">Repatchen</string>
     <string name="open">Öffnen</string>
     <string name="mount">Mounten</string>

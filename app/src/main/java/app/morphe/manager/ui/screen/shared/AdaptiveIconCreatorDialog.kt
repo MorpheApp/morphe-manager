@@ -228,7 +228,7 @@ fun AdaptiveIconCreatorDialog(
         onDismissRequest = { if (!isCreating) onDismiss() },
         title = stringResource(R.string.adaptive_icon_create),
         titleTrailingContent = {
-            DialogTitleAction(
+            TitleAction(
                 icon = Icons.Outlined.Info,
                 contentDescription = stringResource(R.string.adaptive_icon_guide),
                 onClick = { showInfoDialog.value = true }

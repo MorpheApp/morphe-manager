@@ -173,7 +173,7 @@ internal fun PatchOptionsDialog(
         onDismissRequest = onDismiss,
         title = patch.displayName,
         titleTrailingContent = {
-            DialogTitleAction(
+            TitleAction(
                 icon = Icons.Outlined.Restore,
                 contentDescription = stringResource(R.string.reset),
                 onClick = onReset

@@ -392,6 +392,7 @@ class BatchPatchCoordinator(
             options = item.options.sanitizeForPatcher(),
             logger = runProgress.logger,
             onPatchCompleted = { runProgress.onPatchCompleted() },
+            onPatchingRestarted = { runProgress.onRestart() },
             setInputFile = { file, needsSplit, merged ->
                 runProgress.updateSplitRequirement(file, needsSplit, merged)
             },

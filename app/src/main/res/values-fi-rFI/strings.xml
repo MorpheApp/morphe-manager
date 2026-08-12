@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Muut sovellukset</string>
     <string name="home_not_patched_yet">Ei vielä muokattu</string>
+    <string name="home_unpatched_version_installed">Korjaamaton versio asennettu</string>
     <string name="home_no_patches_available">Lisäosia ei ole saatavilla</string>
     <string name="home_app_hide_title">Piilota tämä sovellus?</string>
     <string name="home_app_hide_message">Tämä sovellus piilotetaan aloitusnäytöstä. Voit palauttaa sen myöhemmin piilotettujen sovellusten joukosta luettelon alareunassa olevalla painikkeella.</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">Lähteet ovat ajan tasalla</string>
     <string name="home_sources_are_loading">Lähteitä ladataan, odota…</string>
     <string name="home_search_apps">Hae sovelluksia</string>
-    <string name="home_app_sort_title">Järjestä sovellukset</string>
+    <string name="home_app_list_options_title">Lajittelu ja suodatus</string>
+    <string name="home_app_list_options_state_description">Lajiteltu: %1$s, suodatettu: %2$s</string>
+    <string name="home_app_filter_all_description">Kaikki aloitusnäytön sovellukset</string>
+    <string name="home_app_filter_patched_description">Morphella paikkaamasi tai tallentamasi sovellukset</string>
+    <string name="home_app_filter_not_patched_description">Sovellukset, joita et ole vielä paikannut Morphessa</string>
+    <string name="home_app_filter_installed_description">Sovellukset, jotka on tällä hetkellä asennettu tähän laitteeseen</string>
+    <string name="home_app_filter_uninstalled_description">Morphella muokatut sovellukset, joita ei ole enää tällä laitteella</string>
     <string name="home_app_sort_manual_description">Paina sovellusta pitkään ja napauta sitten uudelleenjärjestä-painiketta</string>
     <string name="home_app_sort_recommended">Suositeltu järjestys</string>
     <string name="home_app_sort_recommended_description">Asennetut ja kiinnitetyt sovellukset ensin</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">\"%s\" ei vastaa yhtään sovellusta</string>
     <string name="home_all_apps_hidden_title">Kaikki sovellukset on piilotettu</string>
     <string name="home_all_apps_hidden_subtitle">Olet piilottanut kaikki sovellukset aloitusnäytöstä</string>
+    <string name="home_no_apps_filter_title">Mikään sovellus ei vastaa tätä suodatinta</string>
+    <string name="home_no_apps_filter_subtitle">Mikään ei vastannut suodatinta %s</string>
     <string name="home_category_add">Lisää kategoria</string>
     <string name="home_category_all_apps">Kaikki sovellukset</string>
     <string name="home_category_custom">Mukautettu</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">Yökyykkymäinen ja tuottelias</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Lisäosien lähteet</string>
+    <string name="sources_search">Etsi lähteitä</string>
     <string name="sources_sort_title">Lajittele lisäosien lähteet</string>
     <string name="sources_sort_manual">Manuaalinen järjestys</string>
     <string name="sources_sort_manual_hint">Paina ja pidä lähdettä uudelleenjärjestämistä varten</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">Jatka vain, jos luotat tähän apuohjelmaan. Morphe ei voi vahvistaa tämän APK-tiedoston allekirjoitusta, joten muokattua tiedostoa ei havaita</string>
     <string name="home_apk_helper_no_result">Apuohjelma ei palauttanut APK-tiedostoa</string>
     <string name="home_apk_helper_no_access">Apuohjelma ei myöntänyt pääsyä palauttamalleen APK-tiedostolle</string>
+    <string name="home_apk_helper_no_package">Apusovellus ei kertonut, mitä asennettua sovellusta käytetään</string>
+    <string name="home_apk_helper_wrong_package">Apusovellus palautti eri sovelluksen kuin se, jota paikataan</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe ei voinut käyttää asennettua sovellusta</string>
+    <string name="home_apk_helper_installed_incompatible">Asennettua versiota ei voi paikata</string>
     <string name="home_apk_use_saved">Käytä tallennettua APK:ta</string>
     <string name="home_apk_use_installed">Käytä asennettua APK:ta</string>
     <string name="home_apk_use_installed_unverified">Sovelluksen asennetun version allekirjoitusta ei voitu vahvistaa, joten se on ehkä jo muutettu</string>
+    <string name="home_unverified">Vahvistamaton</string>
+    <string name="home_app_info_install_unverified">Morphe ei voi vahvistaa, että asennettu sovellus on se сборка, jonka se korjasi. Asenna se uudelleen tallennetusta APK:sta palauttaaksesi sen toiminnot</string>
     <string name="home_app_info_no_saved_apk">Ei tallennettua APK:ta. Muokkaaminen edellyttää APK-tiedoston valitsemista uudelleen.</string>
     <string name="home_version_requires_android">Vaatii Android-version %s tai uudemman</string>
     <string name="home_apk_no_compatible_versions_title">Ei tueta tällä laitteella</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Lataa alkuperäinen APK</string>
     <string name="home_download_instructions_steps_title">Ohjeet:</string>
+    <string name="home_download_instructions_finding">Etsitään lataussivua…</string>
     <string name="home_download_instructions_step1">Valitse alta %s -painike</string>
     <string name="home_download_instructions_step2_part1">Vieritä verkkosivua alaspäin ja valitse</string>
+    <string name="home_download_instructions_step2_generic">Vieritä verkkosivua alaspäin ja paina sen latauspainiketta</string>
+    <string name="home_download_instructions_step2_variant">Vieritä verkkosivua alaspäin ja paina ylimmän &lt;b&gt;APK-variantin&lt;/b&gt; latauspainiketta</string>
+    <string name="home_download_instructions_step2_search">Avaa hakutulos verkkosivustolta, johon luotat</string>
+    <string name="home_download_instructions_step2_search_note">Morphe ei voi mennä takuuseen näistä verkkosivustoista. Ohita ne, jotka tarjoavat omaa sovelluskauppaansa APK-tiedoston sijaan</string>
+    <string name="home_download_instructions_step3_search">Lataa siltä verkkosivustolta version &lt;b&gt;%s&lt;/b&gt; APK, ei uusinta</string>
+    <string name="home_download_instructions_step3_search_any">Lataa siltä verkkosivustolta sovelluksen APK. &lt;b&gt;Mikä tahansa versio&lt;/b&gt; voidaan paikata</string>
     <string name="home_download_instructions_download_button_toast">Paina latauspainiketta verkkosivustolla, älä tässä 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Hienoa! Napsauta nyt Jatka ja siirry verkkosivustolle 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Harjoitus tekee mestarin, ja olet jo pitkällä 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">Odota, että lataus valmistuu, ja &lt;b&gt;asenna sitten APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Kun lataus on valmis, palaa Morpheen</string>
     <string name="home_download_instructions_step4_mount">Kun olet asentanut alkuperäisen APK:n, palaa Morpheen</string>
-    <string name="home_download_instructions_continue">Jatka sivustolle APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Jatka %s</string>
+    <string name="home_download_instructions_destination">lataussivulle</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Valitse ladattu APK</string>
     <string name="home_file_picker_prompt_description">Valitse juuri lataamasi APK sovellukselle: &lt;b&gt;%s&lt;/b&gt;</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">Kaikki korjaukset poistettu käytöstä</string>
     <string name="expert_mode_enable_all">Ota kaikki käyttöön</string>
     <string name="expert_mode_enable_all_done">Kaikki korjaukset käytössä</string>
+    <string name="expert_mode_enable_all_universal_pending">Napauta uudelleen ottaaksesi universaalit korjaukset käyttöön</string>
     <string name="expert_mode_reset_to_default">Ota suositellut lisäosat käyttöön</string>
     <string name="expert_mode_reset_to_default_done">Suositellut korjaukset asennettu</string>
     <string name="expert_mode_restore_saved">Palauta tallennettu valinta</string>
@@ -386,6 +411,7 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="home_app_info_patch_update_available_description">Uudempi lisäosien versio on saatavilla. Muokkaa sovellusta uudestaan saadaksesi uusimmat parannukset ja korjaukset</string>
     <string name="home_app_info_app_deleted_warning">Sovellus poistettiin</string>
     <string name="home_app_info_app_deleted_description">Tämä sovellus poistettiin Morphen ulkopuolelta. Muokkaa sitä uudelleen palauttaaksesi toiminnot</string>
+    <string name="home_app_info_not_patched_description">Tästä sovelluksesta on asennettu korjaamaton versio. Morphella on edelleen aiempi korjaustietue.</string>
     <string name="home_app_info_apk_size">APK:n koko</string>
     <string name="home_app_info_cpu_arch">Suorittimen arkkitehtuuri</string>
     <!-- Home Screen - Root Mode -->
@@ -457,6 +483,11 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="battery_optimization_dialog_title">Taustakorjaussuojaus</string>
     <string name="battery_optimization_dialog_description">Jotkin laitteet saattavat pysäyttää korjausohjelman, kun sovellus minimoidaan. Salli Morphen toimia ilman virransäästörajoituksia varmistaaksesi, että korjaus suoritetaan luotettavasti.</string>
     <string name="battery_optimization_not_now">Ei nyt</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Muisti ei riitä</string>
+    <string name="patcher_memory_adjustment_description">Järjestelmä pysäytti patcherin, kun se toimi %1$d Mt:n muistirajalla. Laskemalla rajan arvoon %2$d Mt patcherista tulee pienempi kohde, ja suoritus voi päättyä.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Järjestelmä pysäytti patcherin, kun se toimi %1$d Mt:n muistirajalla, joka on jo alin käytettävissä oleva. Yritä paikkausta vähemmillä patch-lähteillä tai valitse vähemmän patcheja.</string>
+    <string name="patcher_memory_adjustment_apply">Pienennä arvoon %1$d Mt</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Muokkaus käynnissä…</string>
     <string name="patcher_notification_text">Palaa muokkaukseen napauttamalla</string>
@@ -491,6 +522,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Muokataan sovellusta</string>
     <string name="memory_usage">Muistin käyttö</string>
+    <string name="cpu_usage">Suorittimen käyttö</string>
+    <string name="storage_io_usage">Tallennustilan I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Otetaan lisäosia käyttöön</string>
     <string name="failed_to_execute_patch">Käyttöönotto epäonnistui: %s</string>
@@ -498,9 +531,12 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="patched_app_save_failed_toast">Muokatun sovelluksen tallennus epäonnistui</string>
     <string name="plugin_activity_dialog_body">Tämän liitännäisen käyttöönoton jatkamiseksi tarvitaan käyttäjän toimia.</string>
     <string name="patcher_process_exit_message">Muokkausprosessi päättyi koodilla %s</string>
+    <string name="patcher_heap_exhausted_message">Paikkaajalta loppui muisti %1$d MB:n kekomuistilla. Tämä sovellus on liian suuri valituille paikkauksille. Yritä paikata vähemmillä paikkalähteillä tai valitse vähemmän paikkauksia.</string>
     <string name="install_app_success">Asennus onnistui</string>
     <string name="install_app_fail">Sovelluksen asentaminen epäonnistui: %s</string>
     <string name="uninstall_app_fail">Sovelluksen poistaminen epäonnistui: %s</string>
+    <string name="uninstall_app_unverified">Jätetty paikalleen: Morphe ei voinut vahvistaa, että asennettu sovellus on se сборка, jonka se korjasi</string>
+    <string name="launch_app_unverified">Morphe ei voinut vahvistaa, että asennettu sovellus on se сборка, jonka se korjasi</string>
     <string name="uninstall_timeout">Asennuksen poistaminen aikakatkaistiin</string>
     <string name="save_apk_success">APK tallennettu</string>
     <string name="saved_app_export_failed">Muokatun sovelluksen vienti epäonnistui</string>
@@ -570,8 +606,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Näytä tervehdysviesti aloitusnäytöllä</string>
     <string name="settings_appearance_app_grouping">Sovellusten ryhmittely</string>
     <string name="settings_appearance_app_grouping_description">Näytä kotinäkymän vaihto, jolla voit ryhmitellä sovellukset lähteen tai omien luokkien mukaan ja säilytä valinta, kun se on poissa päältä</string>
-    <string name="settings_appearance_sort_button">Lajittelupainike</string>
-    <string name="settings_appearance_sort_button_description">Näytä lajittelupainike aloitusnäytöllä</string>
+    <string name="settings_appearance_sort_button">Lajittelu- ja suodatuspainike</string>
+    <string name="settings_appearance_sort_button_description">Näytä lajittelu- ja suodatuspainike aloitusnäytöllä</string>
     <string name="settings_appearance_app_card_colors">Sovelluksen korttien värit</string>
     <string name="settings_appearance_app_card_colors_default">Oletus</string>
     <string name="settings_appearance_app_card_colors_default_description">Anna jokaiselle sovellukselle sen oman paketin väri</string>
@@ -1073,6 +1109,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="version">Versio</string>
     <string name="patch">Muokkaa</string>
     <string name="patching">Korjataan</string>
+    <string name="patched">Muokatut</string>
     <string name="repatch">Muokkaa uudelleen</string>
     <string name="open">Avaa</string>
     <string name="mount">Liitä</string>

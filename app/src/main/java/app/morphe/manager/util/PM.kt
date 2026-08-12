@@ -19,6 +19,7 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.compose.runtime.Immutable
 import androidx.core.content.pm.PackageInfoCompat
+import app.morphe.manager.domain.apk.ApkSignatureCache
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -35,7 +36,10 @@ data class AppInfo(
 
 @SuppressLint("QueryPermissionsNeeded")
 class PM(
-    private val app: Application
+    private val app: Application,
+    // Certificate extraction verifies the whole archive, so repeating it for every home refresh
+    // is the single most expensive thing this class can do
+    private val signatureCache: ApkSignatureCache
 ) {
     private companion object {
         const val TAG = "Morphe PM"
@@ -193,7 +197,7 @@ class PM(
     /** Certificate fingerprints the package manager holds for [packageName], without disk access. */
     private fun recordedSignatureHashes(packageName: String): Set<String> =
         try {
-            getPackageInfo(packageName, signingFlags())?.extractSignatures()?.toSha256Hashes().orEmpty()
+            getPackageInfo(packageName, signingFlags())?.let(::signatureHashes).orEmpty()
         } catch (e: Exception) {
             Log.e(TAG, "Failed to read installed signatures for $packageName", e)
             emptySet()
@@ -220,8 +224,12 @@ class PM(
      * Reinstalling from another source (Play, a store, adb) replaces the installer, so this does
      * not linger after the user goes back to the original app.
      */
-    fun isInstalledByPatchManager(packageName: String): Boolean {
-        val installer = getInstallerPackageName(packageName) ?: return false
+    fun isInstalledByPatchManager(packageName: String): Boolean =
+        isPatchManagerInstaller(getInstallerPackageName(packageName))
+
+    /** [isInstalledByPatchManager] for callers that already resolved the installer. */
+    fun isPatchManagerInstaller(installer: String?): Boolean {
+        if (installer == null) return false
         return installer == app.packageName || installer in PATCH_MANAGER_PACKAGES
     }
 
@@ -231,6 +239,8 @@ class PM(
      * Uses full signing history to handle apps with certificate rotation.
      */
     fun getApkFileSignatureHashes(file: File): Set<String> {
+        signatureCache.get(file)?.let { return it }
+
         return try {
             val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, signingFlags())
                 ?: return emptySet()
@@ -238,12 +248,52 @@ class PM(
                 sourceDir = file.absolutePath
                 publicSourceDir = file.absolutePath
             }
-            info.extractSignatures()?.toSha256Hashes() ?: emptySet()
+            signatureHashes(info).also { signatureCache.put(file, it) }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to read APK file signatures", e)
             emptySet()
         }
     }
+
+    /**
+     * Parsed [file] when it is the signed APK the record describes, or null otherwise.
+     *
+     * A path alone is not a usable saved copy: an interrupted write, corrupt archive or a file
+     * left behind by another package or version must not enable install, export or mount actions,
+     * and must never stand in as the certificate that proves an install is the patched build.
+     *
+     * The identity is read from the manifest alone, so an archive that is not the recorded
+     * artifact is rejected before its certificate is ever extracted.
+     */
+    fun readSavedApkInfo(file: File, version: String, vararg packageNames: String): PackageInfo? {
+        if (!file.isFile) return null
+        return try {
+            val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, 0) ?: return null
+
+            val matches = matchesSavedApkRecord(
+                archivePackageName = info.packageName,
+                archiveVersionName = info.versionName,
+                trackedPackageNames = packageNames.asList(),
+                trackedVersion = version,
+                isSigned = { getApkFileSignatureHashes(file).isNotEmpty() }
+            )
+            if (!matches) return null
+
+            // Needed by callers that read the label or icon straight off the archive
+            info.applicationInfo?.apply {
+                sourceDir = file.absolutePath
+                publicSourceDir = file.absolutePath
+            }
+            info
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to validate APK file: ${file.absolutePath}", e)
+            null
+        }
+    }
+
+    /** SHA-256 certificate fingerprints of an already parsed [packageInfo]. */
+    private fun signatureHashes(packageInfo: PackageInfo): Set<String> =
+        packageInfo.extractSignatures()?.toSha256Hashes().orEmpty()
 
     @Suppress("DEPRECATION")
     private fun signingFlags() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
@@ -270,14 +320,6 @@ class PM(
         }
     }
 
-    /**
-     * Whether a tracked app that was installed on the device is now gone.
-     */
-    fun isAppDeleted(packageName: String, wasInstalledOnDevice: Boolean): Boolean {
-        val currentlyInstalled = getPackageInfo(packageName) != null
-        return !currentlyInstalled && wasInstalledOnDevice
-    }
-
     private fun cleanLabel(raw: String, packageName: String): String {
         val trimmed = raw.trim()
         if (trimmed.isEmpty()) return trimmed
@@ -290,6 +332,28 @@ class PM(
         return candidate.ifBlank { trimmed }
     }
 }
+
+/**
+ * Whether a parsed archive is the artifact a saved-APK record describes.
+ *
+ * The version is compared rather than inferred from the file name: the patcher persists the
+ * version it produced both as the record's version and in the retained file name, so an archive
+ * that reports a different one is not the build the record was written for. Accepting it would
+ * hand its certificate to the tracked-install check as proof that an install is patched.
+ *
+ * [isSigned] is evaluated last and only when the identity already matches, because reading a
+ * certificate means verifying the entire archive.
+ */
+internal fun matchesSavedApkRecord(
+    archivePackageName: String?,
+    archiveVersionName: String?,
+    trackedPackageNames: Collection<String>,
+    trackedVersion: String,
+    isSigned: () -> Boolean
+): Boolean =
+    archivePackageName in trackedPackageNames &&
+            archiveVersionName == trackedVersion &&
+            isSigned()
 
 fun File.sha256OrNull(): String? = runCatching {
     if (!isFile) return@runCatching null

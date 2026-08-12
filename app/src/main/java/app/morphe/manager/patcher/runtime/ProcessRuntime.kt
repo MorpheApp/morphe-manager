@@ -39,6 +39,10 @@ private const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 640
 const val PROCESS_RUNTIME_MEMORY_LOW_WARNING = 640
 const val PROCESS_RUNTIME_MEMORY_STEP = 128
 
+// Every retry patches the app again from the beginning, so a long ladder of them costs the
+// user minutes of work and a hot device for an outcome that keeps getting less likely
+const val PROCESS_RUNTIME_MEMORY_MAX_RETRIES = 2
+
 // Sentinel value indicating the memory limit has never been set
 // triggers adaptive calculation on first use
 const val PROCESS_RUNTIME_MEMORY_NOT_SET = -1
@@ -109,10 +113,11 @@ class ProcessRuntime(
         onPatchCompleted: suspend (String) -> Unit,
         onProgress: ProgressEventHandler,
         skipUnneededSplits: Boolean,
-        onMergedApkReady: (suspend (File) -> Unit)?
+        onMergedApkReady: (suspend (File) -> Unit)?,
+        onRestart: suspend () -> Unit
     ) = coroutineScope {
-        val minMemoryLimit = 256
-        var memoryMB = max(minMemoryLimit, prefs.patcherProcessMemoryLimit.get())
+        var memoryMB = max(PROCESS_RUNTIME_MEMORY_MINIMUM, prefs.patcherProcessMemoryLimit.get())
+        var retries = 0
 
         while (true) {
             try {
@@ -132,21 +137,47 @@ class ProcessRuntime(
 
                 return@coroutineScope
             } catch (e: Exception) {
-                val isMemoryFailure = when (e) {
-                    is ProcessExitException -> e.exitCode == OOM_EXIT_CODE || e.exitCode == SIGKILL_EXIT_CODE || e.exitCode == SIGSEGV_EXIT_CODE
-                    is RemoteFailureException -> e.originalStackTrace.contains("OutOfMemoryError", ignoreCase = true)
-                    else -> false
-                }
+                val nextMemoryMB = memoryMB - PROCESS_RUNTIME_MEMORY_STEP
+                val retry = e.isReclaimableMemoryFailure() &&
+                        !skipMemoryRetry &&
+                        retries < PROCESS_RUNTIME_MEMORY_MAX_RETRIES &&
+                        nextMemoryMB >= PROCESS_RUNTIME_MEMORY_MINIMUM
 
-                if (isMemoryFailure && !skipMemoryRetry && memoryMB > minMemoryLimit) {
-                    memoryMB -= PROCESS_RUNTIME_MEMORY_STEP
-                    Log.i(tag, "Process memory limit failed, retrying with: $memoryMB")
-                    continue
-                }
-                throw e
+                if (!retry) throw e.withHeapExhaustionReported(memoryMB)
+
+                memoryMB = nextMemoryMB
+                retries++
+                Log.i(tag, "Process memory limit failed, retrying with: $memoryMB")
+                logger.warn(
+                    "Patcher process was killed, restarting with a ${memoryMB}MB heap " +
+                            "(attempt ${retries + 1} of ${PROCESS_RUNTIME_MEMORY_MAX_RETRIES + 1})"
+                )
+                // The attempt that just died reported patches and steps of its own. Everything
+                // the next one reports starts from zero, so the listener has to as well
+                onRestart()
             }
         }
     }
+
+    /**
+     * Whether a smaller heap stands a chance. These are kills from the outside: the pressure
+     * came from the system, and giving the process less to hold makes it a smaller target.
+     */
+    private fun Exception.isReclaimableMemoryFailure() = this is ProcessExitException &&
+            (exitCode == OOM_EXIT_CODE || exitCode == SIGKILL_EXIT_CODE || exitCode == SIGSEGV_EXIT_CODE)
+
+    /**
+     * Restates a heap the patcher filled on its own as [HeapExhaustedException]. Shrinking that
+     * heap only reaches the same wall sooner, so it is reported rather than retried.
+     */
+    private fun Exception.withHeapExhaustionReported(memoryMB: Int) =
+        if (this is RemoteFailureException &&
+            originalStackTrace.contains("OutOfMemoryError", ignoreCase = true)
+        ) {
+            HeapExhaustedException(memoryMB, originalStackTrace)
+        } else {
+            this
+        }
 
     private suspend fun executeWithMemory(
         memoryLimit: Int,
@@ -207,7 +238,7 @@ class ProcessRuntime(
 
             Log.d(tag, "Process finished with exit code ${result.resultCode}")
 
-            if (result.resultCode != 0) throw ProcessExitException(result.resultCode)
+            if (result.resultCode != 0) throw ProcessExitException(result.resultCode, memoryLimit)
         }
 
         val patching = CompletableDeferred<Unit>()
@@ -325,6 +356,21 @@ class ProcessRuntime(
      */
     class RemoteFailureException(val originalStackTrace: String) : Exception()
 
-    class ProcessExitException(val exitCode: Int) :
+    /**
+     * @param exitCode The nonzero code the patcher process exited with.
+     * @param heapLimitMb The limit the killed attempt ran with, which is not the stored setting
+     *                    once the memory retries have lowered it.
+     */
+    class ProcessExitException(val exitCode: Int, val heapLimitMb: Int) :
         Exception("Process exited with nonzero exit code $exitCode")
+
+    /**
+     * The patcher ran out of the heap it was given, which no smaller heap can fix. Carries the
+     * limit that was in effect so the failure can name the number the user set.
+     *
+     * @param heapLimitMb The heap limit the run was given, in megabytes.
+     * @param originalStackTrace The stack trace of the [OutOfMemoryError].
+     */
+    class HeapExhaustedException(val heapLimitMb: Int, val originalStackTrace: String) :
+        Exception("Patcher exhausted its ${heapLimitMb}MB heap")
 }

@@ -46,6 +46,7 @@ fun HomeBottomActionBar(
     showSearchButton: Boolean = false,
     showSortButton: Boolean = false,
     sortMode: HomeAppSortMode = HomeAppSortMode.MANUAL,
+    filterMode: HomeAppFilterMode = HomeAppFilterMode.ALL,
     searchActive: Boolean = false,
     onSearchClick: () -> Unit = {},
     onSortClick: () -> Unit = {},
@@ -113,12 +114,15 @@ fun HomeBottomActionBar(
                 enter = Animations.expandHorizFadeIn,
                 exit = Animations.shrinkHorizFadeOut
             ) {
+                val filterActive = filterMode.isActive
                 BottomActionButton(
                     onClick = onSortClick,
                     icon = Icons.AutoMirrored.Outlined.Sort,
                     text = stringResource(R.string.sort),
                     showLabel = showLabels,
-                    stateDescription = stringResource(sortMode.labelRes),
+                    containerColor = if (filterActive) MaterialTheme.colorScheme.tertiaryContainer else null,
+                    contentColor = if (filterActive) MaterialTheme.colorScheme.onTertiaryContainer else null,
+                    stateDescription = homeAppListOptionsStateDescription(sortMode, filterMode),
                     modifier = Modifier.fillMaxWidth()
                 )
             }

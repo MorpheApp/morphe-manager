@@ -2,7 +2,8 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Altre app</string>
-    <string name="home_not_patched_yet">Non ancora patchato</string>
+    <string name="home_not_patched_yet">Non ancora modificato</string>
+    <string name="home_unpatched_version_installed">Versione non patchata installata</string>
     <string name="home_no_patches_available">
 Nessuna patch disponibile</string>
     <string name="home_app_hide_title">Nascondere questa app?</string>
@@ -37,7 +38,13 @@ Nessuna patch disponibile</string>
     <string name="home_update_success_subtitle">Le tue fonti sono aggiornate</string>
     <string name="home_sources_are_loading">Le fonti si stanno caricando, si prega di attendere…</string>
     <string name="home_search_apps">Cerca app</string>
-    <string name="home_app_sort_title">Ordina app</string>
+    <string name="home_app_list_options_title">Ordina e filtra</string>
+    <string name="home_app_list_options_state_description">Ordinate per %1$s, filtrate per %2$s</string>
+    <string name="home_app_filter_all_description">Tutte le app nella schermata Home</string>
+    <string name="home_app_filter_patched_description">App che hai patchato o salvato con Morphe</string>
+    <string name="home_app_filter_not_patched_description">App che non hai ancora patchato in Morphe</string>
+    <string name="home_app_filter_installed_description">App attualmente installate su questo dispositivo</string>
+    <string name="home_app_filter_uninstalled_description">App patchate con Morphe che non sono più presenti su questo dispositivo</string>
     <string name="home_app_sort_manual_description">Tieni premuta un\'app, quindi tocca il pulsante di riordino</string>
     <string name="home_app_sort_recommended">Ordine consigliato</string>
     <string name="home_app_sort_recommended_description">App installate e fissate per prime</string>
@@ -50,6 +57,8 @@ Nessuna patch disponibile</string>
     <string name="home_no_apps_search_subtitle">Nessuna app corrisponde a \"%s\"</string>
     <string name="home_all_apps_hidden_title">Tutte le app sono nascoste</string>
     <string name="home_all_apps_hidden_subtitle">Hai nascosto tutte le app dalla schermata Home</string>
+    <string name="home_no_apps_filter_title">Nessuna app corrisponde a questo filtro</string>
+    <string name="home_no_apps_filter_subtitle">Nessun risultato per %s</string>
     <string name="home_category_add">Aggiungi categoria</string>
     <string name="home_category_all_apps">Tutte le app</string>
     <string name="home_category_custom">Personalizzato</string>
@@ -105,6 +114,7 @@ Nessuna patch disponibile</string>
     <string name="home_greeting_super_late_5">Notturno e produttivo/a</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fonti delle patch</string>
+    <string name="sources_search">Cerca fonti</string>
     <string name="sources_sort_title">Ordina fonti patch</string>
     <string name="sources_sort_manual">Ordine manuale</string>
     <string name="sources_sort_manual_hint">Tieni premuto un elemento per riordinarlo</string>
@@ -175,9 +185,15 @@ Nessuna patch disponibile</string>
     <string name="home_apk_helper_warning_unverified">Continua solo se ti fidi di questa app di supporto. Morphe non può verificare la firma di questo APK, quindi un file modificato non verrebbe rilevato</string>
     <string name="home_apk_helper_no_result">L\'app di supporto non ha restituito un APK</string>
     <string name="home_apk_helper_no_access">L\'app di supporto non ha concesso l\'accesso all\'APK restituito</string>
+    <string name="home_apk_helper_no_package">L\'app helper non ha indicato quale app installata utilizzare</string>
+    <string name="home_apk_helper_wrong_package">L\'app helper ha restituito un\'app diversa da quella in fase di patch</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe non ha potuto utilizzare l\'app installata</string>
+    <string name="home_apk_helper_installed_incompatible">La versione installata non può essere patchata</string>
     <string name="home_apk_use_saved">Usa APK salvato</string>
     <string name="home_apk_use_installed">Usa APK installato</string>
     <string name="home_apk_use_installed_unverified">Impossibile verificare la firma dell\'app installata, pertanto potrebbe essere già stata modificata</string>
+    <string name="home_unverified">Non verificata</string>
+    <string name="home_app_info_install_unverified">Morphe non può confermare che l\'app installata sia la build che ha patchato. Reinstallala dall\'APK salvato per ripristinare le sue azioni.</string>
     <string name="home_app_info_no_saved_apk">Nessun APK salvato. Il patching richiederà la selezione del file APK</string>
     <string name="home_version_requires_android">Richiede Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Non supportato su questo dispositivo</string>
@@ -185,8 +201,15 @@ Nessuna patch disponibile</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Scarica l\'APK originale</string>
     <string name="home_download_instructions_steps_title">Istruzioni:</string>
+    <string name="home_download_instructions_finding">Ricerca della pagina di download…</string>
     <string name="home_download_instructions_step1">Premi il pulsante \'%s\' qui sotto</string>
     <string name="home_download_instructions_step2_part1">Scorri verso il basso la pagina web e premi</string>
+    <string name="home_download_instructions_step2_generic">Scorri verso il basso la pagina web e premi il suo pulsante di download</string>
+    <string name="home_download_instructions_step2_variant">Scorri verso il basso la pagina web e premi il pulsante di download della &lt;b&gt;variante APK&lt;/b&gt; in cima</string>
+    <string name="home_download_instructions_step2_search">Apri un risultato di ricerca da un sito web di cui ti fidi</string>
+    <string name="home_download_instructions_step2_search_note">Morphe non può garantire per questi siti web. Salta quelli che offrono il proprio app store invece di un file APK</string>
+    <string name="home_download_instructions_step3_search">Su quel sito web, scarica l\'APK della versione &lt;b&gt;%s&lt;/b&gt;, non quella più recente</string>
+    <string name="home_download_instructions_step3_search_any">Su quel sito web, scarica l\'APK dell\'app. &lt;b&gt;Qualsiasi versione&lt;/b&gt; può essere patchata</string>
     <string name="home_download_instructions_download_button_toast">Premi scarica sul sito web, e non qui 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Ottimo! Ora clicca su continua e vai al sito web 👆</string>
     <string name="home_download_instructions_download_button_toast_3">La pratica rende perfetti e ci stai quasi arrivando 💪</string>
@@ -197,7 +220,8 @@ Nessuna patch disponibile</string>
     <string name="home_download_instructions_step3_mount">Attendi che il download si completi, poi &lt;b&gt;installa l\'APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Dopo che il download è terminato, torna a Morphe</string>
     <string name="home_download_instructions_step4_mount">Dopo aver installato l\'APK originale, torna a Morphe</string>
-    <string name="home_download_instructions_continue">Continua su APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Continua verso %s</string>
+    <string name="home_download_instructions_destination">la pagina di download</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Seleziona l\'APK scaricato</string>
     <string name="home_file_picker_prompt_description">Seleziona il file &lt;b&gt;%s&lt;/b&gt; APK che hai appena scaricato</string>
@@ -224,6 +248,7 @@ Nessuna patch disponibile</string>
     <string name="expert_mode_disable_all_done">Tutte le patch disabilitate</string>
     <string name="expert_mode_enable_all">Abilita tutte</string>
     <string name="expert_mode_enable_all_done">Tutte le patch abilitate</string>
+    <string name="expert_mode_enable_all_universal_pending">Tocca di nuovo per le patch universali</string>
     <string name="expert_mode_reset_to_default">Abilitare patch consigliate</string>
     <string name="expert_mode_reset_to_default_done">Patch consigliate applicate</string>
     <string name="expert_mode_restore_saved">Ripristinare la selezione salvata</string>
@@ -386,6 +411,7 @@ Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio:
     <string name="home_app_info_patch_update_available_description">È disponibile una nuova versione delle patch. Ripatcha la tua app per ottenere gli ultimi miglioramenti e correttivi</string>
     <string name="home_app_info_app_deleted_warning">L\'app è stata disinstallata</string>
     <string name="home_app_info_app_deleted_description">Questa app è stata disinstallata al di fuori di Morphe. Ripatchala per ripristinare la funzionalità</string>
+    <string name="home_app_info_not_patched_description">Una versione non patchata di questa app è installata. Morphe ha ancora il suo record di patch precedente</string>
     <string name="home_app_info_apk_size">Dimensione APK</string>
     <string name="home_app_info_cpu_arch">Architettura CPU</string>
     <!-- Home Screen - Root Mode -->
@@ -457,6 +483,11 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="battery_optimization_dialog_title">Protezione applicazione patch in background</string>
     <string name="battery_optimization_dialog_description">Alcuni dispositivi potrebbero interrompere l\'applicazione patch quando l\'app è minimizzata. Consenti a Morphe di funzionare senza restrizioni sulla batteria per garantire che l\'applicazione patch venga completata in modo affidabile.</string>
     <string name="battery_optimization_not_now">Non ora</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Memoria insufficiente</string>
+    <string name="patcher_memory_adjustment_description">Il patcher è stato interrotto dal sistema mentre era in esecuzione con un limite di memoria di %1$d MB. Ridurre il limite a %2$d MB rende il patcher un bersaglio più piccolo e può consentire il completamento dell\'esecuzione.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Il patcher è stato interrotto dal sistema mentre era in esecuzione con un limite di memoria di %1$d MB, che è già il più basso disponibile. Prova a eseguire il patching con meno sorgenti di patch oppure seleziona meno patch.</string>
+    <string name="patcher_memory_adjustment_apply">Riduci a %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching in corso…</string>
     <string name="patcher_notification_text">Tocca per tornare al patcher</string>
@@ -491,6 +522,8 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Applicazione delle patch</string>
     <string name="memory_usage">Uso della memoria</string>
+    <string name="cpu_usage">Utilizzo CPU</string>
+    <string name="storage_io_usage">I/O dello storage</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Applicazione delle patch</string>
     <string name="failed_to_execute_patch">Impossibile applicare %s</string>
@@ -498,9 +531,12 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="patched_app_save_failed_toast">Impossibile salvare l\'app modificata</string>
     <string name="plugin_activity_dialog_body">È richiesta l\'interazione dell\'utente per procedere con questo plugin</string>
     <string name="patcher_process_exit_message">Il processo del patcher è terminato con codice %s</string>
+    <string name="patcher_heap_exhausted_message">Il patcher ha esaurito la memoria con un heap di %1$d MB. Questa app è troppo grande per le patch selezionate. Prova a eseguire il patching con meno sorgenti di patch oppure seleziona meno patch.</string>
     <string name="install_app_success">Installato correttamente</string>
     <string name="install_app_fail">Impossibile installare l\'app: %s</string>
     <string name="uninstall_app_fail">Impossibile disinstallare l\'app: %s</string>
+    <string name="uninstall_app_unverified">Lasciata al suo posto: Morphe non ha potuto verificare che l\'app installata sia la build che ha patchato.</string>
+    <string name="launch_app_unverified">Morphe non ha potuto verificare che l\'app installata sia la build che ha patchato.</string>
     <string name="uninstall_timeout">Timeout dell\'installazione</string>
     <string name="save_apk_success">APK salvato</string>
     <string name="saved_app_export_failed">Impossibile esportare l\'app patchata</string>
@@ -570,8 +606,8 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostra un messaggio di saluto nella schermata principale</string>
     <string name="settings_appearance_app_grouping">Raggruppamento app</string>
     <string name="settings_appearance_app_grouping_description">Mostra un selettore schermata Home per raggruppare le app per origine o per le tue categorie, mantenendo la selezione quando disattivato</string>
-    <string name="settings_appearance_sort_button">Pulsante Ordina</string>
-    <string name="settings_appearance_sort_button_description">Mostra il pulsante Ordina nella schermata Home</string>
+    <string name="settings_appearance_sort_button">Pulsante per ordinare e filtrare</string>
+    <string name="settings_appearance_sort_button_description">Mostra il pulsante per ordinare e filtrare nella schermata Home</string>
     <string name="settings_appearance_app_card_colors">Colori delle schede app</string>
     <string name="settings_appearance_app_card_colors_default">Predefinita</string>
     <string name="settings_appearance_app_card_colors_default_description">Assegna a ciascuna app il colore del proprio bundle</string>
@@ -1073,6 +1109,7 @@ Dettagli: %2$s"</string>
     <string name="version">Versione</string>
     <string name="patch">Patch</string>
     <string name="patching">Modifica</string>
+    <string name="patched">Patchate</string>
     <string name="repatch">Ripatcha</string>
     <string name="open">Apri</string>
     <string name="mount">Monta</string>

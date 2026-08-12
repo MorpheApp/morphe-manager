@@ -1,5 +1,6 @@
 package app.morphe.manager.di
 
+import app.morphe.manager.domain.apk.ApkSignatureCache
 import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.batch.BatchPlanResolver
@@ -16,6 +17,7 @@ import org.koin.dsl.module
 
 val managerModule = module {
     singleOf(::KeystoreManager)
+    singleOf(::ApkSignatureCache)
     singleOf(::PM)
     singleOf(::RootInstaller)
     singleOf(::SessionInstaller)

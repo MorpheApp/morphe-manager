@@ -60,10 +60,6 @@
         <item quantity="one">%s çavkanî hate saz kirin</item>
         <item quantity="other">%s çavkanîyên hate saz kirin</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s çareser hatin hilbijartin</item>
-        <item quantity="other">%s çareserên hatin hilbijartin</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s sepanêyê veşartî</item>
         <item quantity="other">%s sepanên veşartî</item>

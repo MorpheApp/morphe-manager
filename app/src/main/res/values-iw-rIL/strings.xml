@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">אפליקציות אחרות</string>
     <string name="home_not_patched_yet">עדיין לא תוקן</string>
+    <string name="home_unpatched_version_installed">מותקנת גרסה לא מתוקנת</string>
     <string name="home_no_patches_available">אין תיקונים זמינים</string>
     <string name="home_app_hide_title">להסתיר את האפליקציה הזאת?</string>
     <string name="home_app_hide_message">האפליקציה הזו תוסתר ממסך הבית. תוכל לשחזר אותה מאוחר יותר מהאפליקציות המוסתרות באמצעות הכפתור בתחתית הרשימה</string>
@@ -37,7 +38,13 @@
     <string name="home_update_success_subtitle">המקורות שלך מעודכנים</string>
     <string name="home_sources_are_loading">המקורות נטענים, נא להמתין…</string>
     <string name="home_search_apps">חיפוש אפליקציות</string>
-    <string name="home_app_sort_title">מיין אפליקציות</string>
+    <string name="home_app_list_options_title">מיון וסינון</string>
+    <string name="home_app_list_options_state_description">ממוינת לפי %1$s, מסוננת לפי %2$s</string>
+    <string name="home_app_filter_all_description">כל אפליקציה במסך הבית</string>
+    <string name="home_app_filter_patched_description">אפליקציות שתיקנת או שמרת עם Morphe</string>
+    <string name="home_app_filter_not_patched_description">אפליקציות שעדיין לא תיקנת ב-Morphe</string>
+    <string name="home_app_filter_installed_description">אפליקציות שמותקנות כעת במכשיר זה</string>
+    <string name="home_app_filter_uninstalled_description">אפליקציות שתוקנו באמצעות Morphe ושאינן מותקנות עוד במכשיר זה</string>
     <string name="home_app_sort_manual_description">החזק לחיצה ארוכה על אפליקציה, ולאחר מכן הקש על כפתור הסדר מחדש</string>
     <string name="home_app_sort_recommended">סדר מומלץ</string>
     <string name="home_app_sort_recommended_description">אפליקציות מותקנות ומעוגנות ראשונות</string>
@@ -50,6 +57,8 @@
     <string name="home_no_apps_search_subtitle">אף אפליקציה לא תואמת ל-\"%s\"</string>
     <string name="home_all_apps_hidden_title">כל האפליקציות מוסתרות</string>
     <string name="home_all_apps_hidden_subtitle">הסתרת את כל האפליקציות מהמסך הראשי</string>
+    <string name="home_no_apps_filter_title">אין אפליקציות שתואמות למסנן זה</string>
+    <string name="home_no_apps_filter_subtitle">שום דבר לא תואם ל-%s</string>
     <string name="home_category_add">הוסף קטגוריה</string>
     <string name="home_category_all_apps">כל האפליקציות</string>
     <string name="home_category_custom">מותאם אישית</string>
@@ -105,6 +114,7 @@
     <string name="home_greeting_super_late_5">ליליים ופרודוקטיביים</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">מקורות תיקונים</string>
+    <string name="sources_search">חיפוש מקורות</string>
     <string name="sources_sort_title">מקורות תיקונים</string>
     <string name="sources_sort_manual">הזמנה ידנית</string>
     <string name="sources_sort_manual_hint">לחץ לחיצה ארוכה על מקור כדי לשנות את הסדר</string>
@@ -175,9 +185,15 @@
     <string name="home_apk_helper_warning_unverified">המשך רק אם אתה סומך על האפליקציה המסייעת הזו. Morphe אינה יכולה לאמת את החתימה של קובץ ה-APK הזה, ולכן קובץ ששוּנה לא יזוהה</string>
     <string name="home_apk_helper_no_result">האפליקציה המסייעת לא החזירה APK</string>
     <string name="home_apk_helper_no_access">האפליקציה המסייעת לא העניקה גישה ל-APK שהוחזר</string>
+    <string name="home_apk_helper_no_package">אפליקציית העזר לא ציינה באיזו אפליקציה מותקנת להשתמש</string>
+    <string name="home_apk_helper_wrong_package">אפליקציית העזר החזירה אפליקציה שונה מזו שמתוקנת</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe לא הצליח להשתמש באפליקציה המותקנת</string>
+    <string name="home_apk_helper_installed_incompatible">לא ניתן לתקן את הגרסה המותקנת</string>
     <string name="home_apk_use_saved">השתמש ב-APK שמור</string>
     <string name="home_apk_use_installed">השתמש ב-APK מותקן</string>
     <string name="home_apk_use_installed_unverified">לא ניתן לאמת את החתימה של האפליקציה המותקנת, כך שהיא עשויה להיות כבר מטופלת</string>
+    <string name="home_unverified">לא מאומת</string>
+    <string name="home_app_info_install_unverified">Morphe אינה יכולה לאשר שהאפליקציה המותקנת היא הגרסה שתיקנה. התקן אותה מחדש מה-APK השמור כדי לשחזר את הפעולות שלה.</string>
     <string name="home_app_info_no_saved_apk">אין אפאק שמור. תיקון ידרש לבחור את קובץ האפאק שוב</string>
     <string name="home_version_requires_android">דורש Android %s+‎</string>
     <string name="home_apk_no_compatible_versions_title">לא נתמך במכשיר זה</string>
@@ -185,8 +201,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">הורד את ה-APK המקורי</string>
     <string name="home_download_instructions_steps_title">הוראות:</string>
+    <string name="home_download_instructions_finding">מאתרים את דף ההורדה…</string>
     <string name="home_download_instructions_step1">לחץ על הכפתור \'%s\' למטה כדי להוריד</string>
     <string name="home_download_instructions_step2_part1">גלול מטה בדף האינטרנט ולחץ על</string>
+    <string name="home_download_instructions_step2_generic">גללו למטה בדף האינטרנט ולחצו על לחצן ההורדה שלו</string>
+    <string name="home_download_instructions_step2_variant">גללו למטה בדף האינטרנט ולחצו על לחצן ההורדה של &lt;b&gt;גרסת ה-APK&lt;/b&gt; העליונה</string>
+    <string name="home_download_instructions_step2_search">פתחו תוצאת חיפוש מאתר שאתם בוטחים בו</string>
+    <string name="home_download_instructions_step2_search_note">Morphe אינה יכולה לערוב לאתרים אלה. דלגו על אלה שמציעים חנות אפליקציות משלהם במקום קובץ APK</string>
+    <string name="home_download_instructions_step3_search">באתר זה, הורידו את ה-APK של גרסה &lt;b&gt;%s&lt;/b&gt;, לא את הגרסה החדשה ביותר</string>
+    <string name="home_download_instructions_step3_search_any">באתר זה, הורידו את ה-APK של האפליקציה. &lt;b&gt;כל גרסה&lt;/b&gt; ניתנת לתיקון</string>
     <string name="home_download_instructions_download_button_toast">לחץ הורד באתר, ולא כאן 😊</string>
     <string name="home_download_instructions_download_button_toast_2">נפלא! עכשיו לחץ על המשך וכנס לאתר 👆</string>
     <string name="home_download_instructions_download_button_toast_3">תרגול הופך את הדברים לשלמים ואתה בדרך הנכונה 💪</string>
@@ -197,7 +220,8 @@
     <string name="home_download_instructions_step3_mount">המתן להשלמת ההורדה, ואז &lt;b&gt;התקן את ה-APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">לאחר סיום ההורדה, חזרו ל-Morphe</string>
     <string name="home_download_instructions_step4_mount">לאחר התקנת APK המקורית, חזרו ל-Morphe</string>
-    <string name="home_download_instructions_continue">המשך ל-APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">המשיכו אל %s</string>
+    <string name="home_download_instructions_destination">דף ההורדה</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">בחרו קובץ APK שהורד</string>
     <string name="home_file_picker_prompt_description">בחר את קובץ ה-APK &lt;b&gt;%s&lt;/b&gt; שהורדת זה עתה</string>
@@ -224,6 +248,7 @@
     <string name="expert_mode_disable_all_done">כל התיקונים מושבתים</string>
     <string name="expert_mode_enable_all">הפעל את כולם</string>
     <string name="expert_mode_enable_all_done">כל התיקונים מופעלים</string>
+    <string name="expert_mode_enable_all_universal_pending">הקש שוב עבור תיקונים אוניברסליים</string>
     <string name="expert_mode_reset_to_default">להפעיל תיקונים מומלצים</string>
     <string name="expert_mode_reset_to_default_done">התיקונים המומלצים הוחלו</string>
     <string name="expert_mode_restore_saved">שחזור בחירה שמורה</string>
@@ -386,6 +411,7 @@
     <string name="home_app_info_patch_update_available_description">גרסה חדשה של תיקונים זמינה. תיקן את האפליקציה שלך כדי לקבל את התיקונים וההערות החדשים</string>
     <string name="home_app_info_app_deleted_warning">האפליקציה הוסרה</string>
     <string name="home_app_info_app_deleted_description">האפליקציה הוסרה מחוץ ל-Morphe. התאם כדי לשחזר את הפונקציונליות</string>
+    <string name="home_app_info_not_patched_description">מותקנת גרסה לא מתוקנת של אפליקציה זו. ל-Morphe עדיין יש רשומת תיקון קודמת.</string>
     <string name="home_app_info_apk_size">גודל APK</string>
     <string name="home_app_info_cpu_arch">ארכיטקטורת מעבד</string>
     <!-- Home Screen - Root Mode -->
@@ -457,6 +483,11 @@
     <string name="battery_optimization_dialog_title">הגנה על תיקון רקע</string>
     <string name="battery_optimization_dialog_description">ייתכן שמכשירים מסוימים יפסיקו את המתקן כאשר האפליקציה מצומצמת. אפשר ל-Morphe לפעול ללא הגבלות סוללה כדי להבטיח שהתיקון יושלם באופן מהימן</string>
     <string name="battery_optimization_not_now">לא עכשיו</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">אין מספיק זיכרון</string>
+    <string name="patcher_memory_adjustment_description">המתקן הופסק על ידי המערכת בזמן שפעל עם מגבלת זיכרון של %1$d MB. הורדת המגבלה ל-%2$d MB הופכת את המתקן למטרה קטנה יותר ויכולה לאפשר להריצה להסתיים.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">המתקן הופסק על ידי המערכת בזמן שפעל עם מגבלת זיכרון של %1$d MB, שהיא כבר הנמוכה ביותר הזמינה. נסה לתקן עם פחות מקורות תיקון, או בחר פחות תיקונים.</string>
+    <string name="patcher_memory_adjustment_apply">הורד ל-%1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">התיקון מתבצע…</string>
     <string name="patcher_notification_text">הקש כדי לחזור למתקן</string>
@@ -491,6 +522,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">מילוי אפליקציה</string>
     <string name="memory_usage">שימוש בזיכרון</string>
+    <string name="cpu_usage">שימוש במעבד</string>
+    <string name="storage_io_usage">קלט/פלט של אחסון</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">החלת טלאים</string>
     <string name="failed_to_execute_patch">נכשל להחיל %s</string>
@@ -498,9 +531,12 @@
     <string name="patched_app_save_failed_toast">נכשל לשמור אפליקציה מתוקנת</string>
     <string name="plugin_activity_dialog_body">נדרש אינטראקציה של המשתמש כדי להמשיך עם תוסף זה</string>
     <string name="patcher_process_exit_message">פועל הפייסר יצא עם קוד %s</string>
+    <string name="patcher_heap_exhausted_message">למתקן נגמר הזיכרון עם ערימת %1$d מגה-בייט. האפליקציה הזו גדולה מדי עבור התיקונים שנבחרו. נסה לתקן עם פחות מקורות תיקון, או בחר פחות תיקונים.</string>
     <string name="install_app_success">הותקן בהצלחה</string>
     <string name="install_app_fail">נכשל להתקין את האפליקציה: %s</string>
     <string name="uninstall_app_fail">נכשלה הסרת האפליקציה: %s</string>
+    <string name="uninstall_app_unverified">הושאר במקום: Morphe לא יכלה לאמת שהאפליקציה המותקנת היא הגרסה שתיקנה.</string>
+    <string name="launch_app_unverified">Morphe לא יכלה לאמת שהאפליקציה המותקנת היא הגרסה שתיקנה.</string>
     <string name="uninstall_timeout">ההתקנה בוטלה עקב פקיעת זמן</string>
     <string name="save_apk_success">APK נשמר</string>
     <string name="saved_app_export_failed">כשל בייצוא האפליקציה המתוקנת</string>
@@ -570,8 +606,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">הצגת הודעת פתיחה על מסך הבית</string>
     <string name="settings_appearance_app_grouping">קיבוץ אפליקציות</string>
     <string name="settings_appearance_app_grouping_description">הצג מחליף מסך בית לקיבוץ אפליקציות לפי מקור או קטגוריות משלך, ושמור את הבחירה כאשר הוא כבוי</string>
-    <string name="settings_appearance_sort_button">כפתור מיון</string>
-    <string name="settings_appearance_sort_button_description">הצג את כפתור המיון במסך הבית</string>
+    <string name="settings_appearance_sort_button">כפתור מיון וסינון</string>
+    <string name="settings_appearance_sort_button_description">הצג את כפתור המיון והסינון במסך הבית</string>
     <string name="settings_appearance_app_card_colors">צבעי כרטיסי האפליקציה</string>
     <string name="settings_appearance_app_card_colors_default">ברירת מחדל</string>
     <string name="settings_appearance_app_card_colors_default_description">להעניק לכל אפליקציה את צבע החבילה שלה</string>
@@ -1083,6 +1119,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="version">גרסה</string>
     <string name="patch">תיקון</string>
     <string name="patching">מתקן</string>
+    <string name="patched">מתוקנות</string>
     <string name="repatch">החל תיקון</string>
     <string name="open">פתח</string>
     <string name="mount">הרכבה</string>

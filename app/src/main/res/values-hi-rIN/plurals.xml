@@ -60,10 +60,6 @@
         <item quantity="one">%s स्रोत स्थापित</item>
         <item quantity="other">%s स्रोत स्थापित</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s पटच चुना गया</item>
-        <item quantity="other">%s पटच चुने गए</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s छिपा ऐप</item>
         <item quantity="other">%s छिपे हुए ऐप</item>

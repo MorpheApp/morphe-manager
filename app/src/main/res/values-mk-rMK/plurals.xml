@@ -32,10 +32,6 @@
         <item quantity="one">%s извор инсталиран</item>
         <item quantity="other">%s извори инсталирани</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s поправка избрана</item>
-        <item quantity="other">%s поправки избрани</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s скриена апликација</item>
         <item quantity="other">%s скриени апликации</item>

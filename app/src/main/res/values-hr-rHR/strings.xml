@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Vaši izvori su ažurirani</string>
     <string name="home_sources_are_loading">Izvori se učitavaju, molimo pričekajte…</string>
     <string name="home_search_apps">Pretraživanje aplikacija</string>
-    <string name="home_app_sort_title">Poredaj aplikacije</string>
     <string name="home_app_sort_manual_description">Dugo pritisnite aplikaciju, a zatim dodirnite tipku za promjenu redoslijeda</string>
     <string name="home_app_sort_recommended">Preporučeni redoslijed</string>
     <string name="home_app_sort_recommended_description">Instalirane i pričvršćene aplikacije prvo</string>
@@ -166,6 +165,10 @@
     <string name="home_apk_availability_incompatible_label">Nekompatibilno</string>
     <string name="home_apk_availability_yes">Da, pomozi mi pronaći aplikaciju</string>
     <string name="home_apk_availability_no">Ne, već imam aplikaciju</string>
+    <string name="home_apk_helper_warning">Nastavite samo ako vjerujete ovoj pomoćnoj aplikaciji. Morphe provjerava paket, verziju i potpis svega što primi prije patchanja</string>
+    <string name="home_apk_helper_warning_unverified">Nastavite samo ako vjerujete ovoj pomoćnoj aplikaciji. Morphe ne može provjeriti potpis ovog APK-a, tako da modificirana datoteka neće biti otkrivena</string>
+    <string name="home_apk_helper_no_result">Pomoćna aplikacija nije vratila APK</string>
+    <string name="home_apk_helper_no_access">Pomoćna aplikacija nije odobrila pristup APK-u koji je vratila</string>
     <string name="home_apk_use_saved">Koristi spremljenu aplikaciju</string>
     <string name="home_apk_use_installed">Koristi instaliranu aplikaciju</string>
     <string name="home_apk_use_installed_unverified">Nije moguće provjeriti potpis instalirane aplikacije, pa je moguće da je već ažurirana.</string>
@@ -188,7 +191,6 @@
     <string name="home_download_instructions_step3_mount">Pričekajte da se preuzimanje završi, a zatim &lt;b&gt;instalirajte aplikaciju&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Nakon što preuzimanje završi, vrati se u Morphe</string>
     <string name="home_download_instructions_step4_mount">Nakon instaliranja originalne aplikacije, vrati se u Morphe</string>
-    <string name="home_download_instructions_continue">Nastavite na APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Odaberite preuzetu aplikaciju</string>
     <string name="home_file_picker_prompt_description">Odaberite &lt;b&gt;%s&lt;/b&gt; aplikaciju koju ste upravo preuzeli</string>
@@ -226,6 +228,8 @@
     <string name="expert_mode_no_results">Nema pronađenih patcheva</string>
     <string name="expert_mode_universal_patches">Univerzalni patchevi</string>
     <string name="expert_mode_new_patches">Novi</string>
+    <string name="expert_mode_patch_required_by_installer">Obavezno za odabrani cilj instalacije</string>
+    <string name="expert_mode_patch_unavailable_for_installer">Nije dostupno za odabranu ciljnu instalaciju</string>
     <string name="expert_mode_multiple_sources_warning_title">Odabrano više izvora patcheva</string>
     <string name="expert_mode_multiple_sources_warning_message">"Odabrali ste patcheve iz više izvora. To može uzrokovati probleme s kompatibilnošću ili neočekivano ponašanje.
 
@@ -423,6 +427,7 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="patcher_install_error_subtitle">Pokušajte deinstalirati i instalirati ponovo</string>
     <string name="patcher_ready_to_install_subtitle">Pritisnite tipku ispod za instalaciju</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite tipku ispod da učitate</string>
+    <string name="patcher_patches_excluded_for_installer">Nije dostupno za ovu metodu instalacije i isključeno je: %s</string>
     <string name="patcher_storage_permission_dialog_title">Nije moguće pristupiti putanji pohrane</string>
     <string name="patcher_incompatible_patcher_title">Potrebno je ažuriranje</string>
     <string name="patcher_incompatible_patcher_description">Paket &lt;b&gt;%1$s&lt;/b&gt; zahtijeva verziju patchera &lt;b&gt;%2$s&lt;/b&gt; ili noviju. Molimo ažurirajte Morphe kako biste patchali ovu aplikaciju</string>
@@ -448,6 +453,7 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="battery_optimization_dialog_title">Zaštita patchanja u pozadini</string>
     <string name="battery_optimization_dialog_description">Neki uređaji mogu zaustaviti patcher  kada je aplikacija minimizirana. Dopustite Morpheu da radi bez ograničenja baterije kako biste osigurali pouzdano dovršavanje patchanja</string>
     <string name="battery_optimization_not_now">Ne sada</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patchanje u tijeku …</string>
     <string name="patcher_notification_text">Dodirnite da se vratite u patcher</string>
@@ -560,8 +566,6 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Pokaži poruku dobrodošlice na početnom zaslonu</string>
     <string name="settings_appearance_app_grouping">Grupiranje aplikacija</string>
     <string name="settings_appearance_app_grouping_description">Prikaži prekidač početnog zaslona za grupiranje aplikacija prema izvoru ili vlastitim kategorijama, zadržavajući odabir kada je isključen</string>
-    <string name="settings_appearance_sort_button">Tipka za sortiranje</string>
-    <string name="settings_appearance_sort_button_description">Pokaži tipku za sortiranje na početnom zaslonu</string>
     <string name="settings_appearance_app_card_colors">Boje kartica aplikacije</string>
     <string name="settings_appearance_app_card_colors_default">Zadano</string>
     <string name="settings_appearance_app_card_colors_default_description">Dajte svakoj aplikaciji boju vlastitog paketa</string>
@@ -959,6 +963,8 @@ Detalji: %2$s"</string>
     <string name="settings_system_custom_file_picker">Prilagođeni alat za odabir datoteka</string>
     <string name="settings_system_custom_file_picker_description">Pregledavajte pohranu pomoću Morpheovog ugrađenog alata za odabir datoteka umjesto zadanog sustava</string>
     <!-- Settings - System Tab - APK download helper -->
+    <string name="settings_system_apk_download_helper">Pomoćnik za preuzimanje APK-a</string>
+    <string name="settings_system_apk_download_helper_description">Neka instalirana pomoćna aplikacija dohvati originalne APK-ove za vas. Datoteka dolazi iz te aplikacije, stoga omogućite ovo samo ako joj vjerujete</string>
     <!-- File Picker -->
     <string name="file_picker_previous_directory">Prethodna mapa</string>
     <string name="file_picker_no_files">Nema datoteka ovdje</string>
@@ -1061,6 +1067,7 @@ Detalji: %2$s"</string>
     <string name="version">Verzija</string>
     <string name="patch">Patch</string>
     <string name="patching">Patchanje</string>
+    <string name="patched">Patchano</string>
     <string name="repatch">Ponovno patchaj</string>
     <string name="open">Otvori</string>
     <string name="mount">Učitaj</string>

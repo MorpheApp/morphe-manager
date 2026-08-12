@@ -60,10 +60,6 @@
         <item quantity="one">%s Quelle installiert</item>
         <item quantity="other">%s Quellen installiert</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s Patch ausgewählt</item>
-        <item quantity="other">%s Patches ausgewählt</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s ausgeblendete App</item>
         <item quantity="other">%s ausgeblendete Apps</item>

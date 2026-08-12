@@ -12,8 +12,4 @@
         <item quantity="one">%s سورس نصب شده</item>
         <item quantity="other">%s منابع نصب شده</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s پچ انتخاب شد</item>
-        <item quantity="other">%s پچ های انتخاب شده</item>
-    </plurals>
 </resources>

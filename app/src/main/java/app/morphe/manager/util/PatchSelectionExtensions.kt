@@ -3,6 +3,9 @@ package app.morphe.manager.util
 import app.morphe.manager.data.room.apps.installed.SelectionPayload
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.patcher.patch.PatchLockState
+import app.morphe.manager.util.PatchSelectionUtils.bulkEnablePatches
+import app.morphe.manager.util.PatchSelectionUtils.filterGmsCore
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
 import app.morphe.patcher.patch.ApkArchitecture
 import app.morphe.patcher.patch.InstallerType
@@ -75,6 +78,47 @@ object PatchSelectionUtils {
 
         return current
     }
+
+    /**
+     * Patch names a bulk enable adds to the [selected] patches of one bundle.
+     *
+     * Universal patches are staged behind the regular ones: applying them blindly is a common
+     * cause of failed patching, so they join the selection only once every regular patch is on
+     * and [universalArmed] confirms that a previous bulk enable already left it that way.
+     * [patches] is the list the user currently sees, so an active search narrows both stages.
+     */
+    fun bulkEnablePatches(
+        patches: List<Pair<PatchInfo, Boolean>>,
+        selected: Set<String>,
+        universalArmed: Boolean,
+        lockStateOf: (PatchInfo) -> PatchLockState
+    ): Set<String> {
+        val selectable = patches.selectable(lockStateOf)
+        val staged = if (universalArmed && selectable.allRegularSelected()) {
+            selectable
+        } else {
+            selectable.filterNot { (patch, _) -> patch.isUniversal }
+        }
+        return selected + staged.map { (patch, _) -> patch.name }
+    }
+
+    /** True when [bulkEnablePatches] leaves universal patches of [patches] for another tap. */
+    fun bulkEnableHoldsUniversal(
+        patches: List<Pair<PatchInfo, Boolean>>,
+        universalArmed: Boolean,
+        lockStateOf: (PatchInfo) -> PatchLockState
+    ): Boolean {
+        val selectable = patches.selectable(lockStateOf)
+        val hasUnselectedUniversal = selectable.any { (patch, enabled) -> patch.isUniversal && !enabled }
+        return hasUnselectedUniversal && !(universalArmed && selectable.allRegularSelected())
+    }
+
+    /** Patches the user is allowed to turn on, i.e. everything except the locked off ones. */
+    private fun List<Pair<PatchInfo, Boolean>>.selectable(lockStateOf: (PatchInfo) -> PatchLockState) =
+        filterNot { (patch, _) -> lockStateOf(patch) == PatchLockState.LOCKED_OFF }
+
+    private fun List<Pair<PatchInfo, Boolean>>.allRegularSelected() =
+        none { (patch, enabled) -> !patch.isUniversal && !enabled }
 
     /**
      * Update a single option value in an options map.

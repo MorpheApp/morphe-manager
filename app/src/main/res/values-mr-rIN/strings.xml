@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">इतर ॲप्स</string>
     <string name="home_not_patched_yet">अजून सुधारणा केलेली नाही</string>
+    <string name="home_unpatched_version_installed">अनपॅच केलेली आवृत्ती स्थापित</string>
     <string name="home_no_patches_available">सुधारणा उपलब्ध नाहीत</string>
     <string name="home_app_hide_title">हे ॲप लपवायचे का</string>
     <string name="home_app_hide_message">हे ॲप मुख्य पानावरून लपवले जाईल. तुम्ही नंतर यादीच्या तळाशी असलेल्या  \'\' बटणाचा वापर करून ते पुन्हा मिळवू शकता.</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">तुमची मुळे आधीच नवीन आहेत.</string>
     <string name="home_sources_are_loading">मुळे लोड होत आहेत, कृपया वाट पहा</string>
     <string name="home_search_apps">ॲप्स शोधा</string>
-    <string name="home_app_sort_title">ॲप्स सॉर्ट करा</string>
+    <string name="home_app_list_options_title">क्रमवारी लावा आणि फिल्टर करा</string>
+    <string name="home_app_list_options_state_description">%1$s नुसार क्रमवारी लावलेले, %2$s नुसार फिल्टर केलेले</string>
+    <string name="home_app_filter_all_description">होम स्क्रीनवरील प्रत्येक अॅप</string>
+    <string name="home_app_filter_patched_description">तुम्ही Morphe सह पॅच केलेले किंवा सेव्ह केलेले अॅप्स</string>
+    <string name="home_app_filter_not_patched_description">तुम्ही Morphe मध्ये अद्याप पॅच न केलेले अॅप्स</string>
+    <string name="home_app_filter_installed_description">या डिव्हाइसवर सध्या इंस्टॉल केलेले ॲप्स</string>
+    <string name="home_app_filter_uninstalled_description">Morphe वापरून पॅच केलेले आणि या डिव्हाइसवर यापुढे नसलेले ॲप्स</string>
     <string name="home_app_sort_manual_description">एका ॲपला लांब दाबा, मग पुन्हा क्रमवारी लावा बटणावर टॅप करा</string>
     <string name="home_app_sort_recommended">सुचवलेला क्रम</string>
     <string name="home_app_sort_recommended_description">इंस्टॉल केलेले आणि पिन केलेले ॲप्स प्रथम</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">\"%s\" शी जुळणारे कोणतेही ॲप्स नाहीत</string>
     <string name="home_all_apps_hidden_title">सर्व ॲप्स लपवले आहेत</string>
     <string name="home_all_apps_hidden_subtitle">तुम्ही होम स्क्रीनवरून सर्व ॲप्स लपवले आहेत</string>
+    <string name="home_no_apps_filter_title">या फिल्टरशी जुळणारे कोणतेही ॲप्स नाहीत</string>
+    <string name="home_no_apps_filter_subtitle">%s शी काहीही जुळले नाही</string>
     <string name="home_category_add">श्रेणी जोडा</string>
     <string name="home_category_all_apps">सर्व ॲप्स</string>
     <string name="home_category_custom">सानुकूल</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">रात्रीचे आणि productive</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">सुधारणांची मुळे</string>
+    <string name="sources_search">स्रोत शोधा</string>
     <string name="sources_sort_title">सुधारणा स्रोत क्रमवारी लावा</string>
     <string name="sources_sort_manual">मॅन्युअल ऑर्डर</string>
     <string name="sources_sort_manual_hint">पुन्हा क्रमवारी लावण्यासाठी स्रोतावर दाबून ठेवा</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">तुम्ही या हेल्पर ॲपवर विश्वास ठेवल्यासच पुढे जा. मॉर्फे या APKची स्वाक्षरी सत्यापित करू शकत नाही, त्यामुळे सुधारित फाइल शोधली जाणार नाही.</string>
     <string name="home_apk_helper_no_result">हेल्पर ॲपने APK परत केले नाही</string>
     <string name="home_apk_helper_no_access">हेल्पर ॲपने APK ॲक्सेस करण्याची परवानगी दिली नाही</string>
+    <string name="home_apk_helper_no_package">सहायक अॅपने कोणता स्थापित अॅप वापरायचा हे सांगितले नाही</string>
+    <string name="home_apk_helper_wrong_package">सहायक अॅपने पॅच केला जात असलेल्या अॅपपेक्षा वेगळा अॅप परत केला</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe स्थापित अॅप वापरू शकला नाही</string>
+    <string name="home_apk_helper_installed_incompatible">स्थापित आवृत्ती पॅच केली जाऊ शकत नाही</string>
     <string name="home_apk_use_saved">आधीच साठवलेली APK वापरा</string>
     <string name="home_apk_use_installed">इंस्टॉल केलेली APK वापरा</string>
     <string name="home_apk_use_installed_unverified">इंस्टॉल केलेल्या ॲपची सही तपासता आली नाही, त्यामुळे ते आधीच बदललेले असू शकते</string>
+    <string name="home_unverified">असत्यापित</string>
+    <string name="home_app_info_install_unverified">Morphe हे पुष्टी करू शकत नाही की स्थापित अॅप हा त्याने पॅच केलेला बिल्ड आहे. त्याची क्रिया पुनर्संचयित करण्यासाठी सेव्ह केलेल्या APK मधून ते पुन्हा स्थापित करा.</string>
     <string name="home_app_info_no_saved_apk">कोणतीही साठवलेली APK नाही. तुम्हाला पुन्हा एकदा APK फाईल निवडावी लागेल.</string>
     <string name="home_version_requires_android">Android %s+ आवश्यक आहे</string>
     <string name="home_apk_no_compatible_versions_title">या डिव्हाइसवर समर्थित नाही</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">मूळ APK डाउनलोड करा</string>
     <string name="home_download_instructions_steps_title">सूचना</string>
+    <string name="home_download_instructions_finding">डाउनलोड पेज शोधत आहे…</string>
     <string name="home_download_instructions_step1">खालील \'%s\' बटण दाबा</string>
     <string name="home_download_instructions_step2_part1">वेबपेजवर खाली स्क्रोल करा आणि दाबा</string>
+    <string name="home_download_instructions_step2_generic">वेबपेजवर खाली स्क्रोल करा आणि त्याचे डाउनलोड बटण दाबा</string>
+    <string name="home_download_instructions_step2_variant">वेबपेजवर खाली स्क्रोल करा आणि सर्वात वरच्या &lt;b&gt;APK व्हेरिएंट&lt;/b&gt; चे डाउनलोड बटण दाबा</string>
+    <string name="home_download_instructions_step2_search">तुम्ही विश्वास ठेवलेल्या वेबसाइटवरून शोध निकाल उघडा</string>
+    <string name="home_download_instructions_step2_search_note">Morphe या वेबसाइट्सची हमी देऊ शकत नाही. APK फाईलऐवजी स्वतःचा अॅप स्टोअर देणाऱ्या वेबसाइट्स वगळा</string>
+    <string name="home_download_instructions_step3_search">त्या वेबसाइटवर, आवृत्ती &lt;b&gt;%s&lt;/b&gt; चा APK डाउनलोड करा, सर्वात नवीन आवृत्ती नाही</string>
+    <string name="home_download_instructions_step3_search_any">त्या वेबसाइटवर, अॅपचा APK डाउनलोड करा. &lt;b&gt;कोणतीही आवृत्ती&lt;/b&gt; पॅच केली जाऊ शकते</string>
     <string name="home_download_instructions_download_button_toast">वेबसाइटवर असलेल्या डाउनलोड बटणावर दाबा, येथे नाही. 😊</string>
     <string name="home_download_instructions_download_button_toast_2">उत्तम! आता पुढे क्लिक करा आणि वेबसाइटवर जा 👆</string>
     <string name="home_download_instructions_download_button_toast_3">सरावाने माणूस पारंगत होतो आणि तुम्ही तिथे पोहोचत आहात 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">डाउनलोड पूर्ण होण्याची प्रतीक्षा करा, त्यानंतर  &lt;b&gt;APK इन्स्टॉल करा&lt;b&gt;</string>
     <string name="home_download_instructions_step4">डाउनलोड झाल्यावर पुन्हा Morphe उघडा.</string>
     <string name="home_download_instructions_step4_mount">इन्स्टॉलेशन पूर्ण झाल्यावर Morphe कडे परत वळा.</string>
-    <string name="home_download_instructions_continue">APKMirror.com उघडा</string>
+    <string name="home_download_instructions_continue_to">%s वर पुढे जा</string>
+    <string name="home_download_instructions_destination">डाउनलोड पेज</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">डाउनलोड केलेली APK निवडा</string>
     <string name="home_file_picker_prompt_description">तुम्ही आत्ताच डाउनलोड केलेली &lt;b&gt;%s&lt;/b&gt; APK फाईल निवडा</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">सर्व पॅच अक्षम केले</string>
     <string name="expert_mode_enable_all">सर्व सक्षम करा</string>
     <string name="expert_mode_enable_all_done">सर्व पॅच सक्षम केले</string>
+    <string name="expert_mode_enable_all_universal_pending">सार्वत्रिक पॅचेससाठी पुन्हा टॅप करा</string>
     <string name="expert_mode_reset_to_default">शिफारस केलेले पॅचेस सक्षम करा</string>
     <string name="expert_mode_reset_to_default_done">शिफारस केलेले पॅच लागू केले</string>
     <string name="expert_mode_restore_saved">निवडलेला डेटा पुनर्संचयित करा</string>
@@ -384,6 +409,7 @@
     <string name="home_app_info_patch_update_available_description">पॅचची नवीन आवृत्ती उपलब्ध आहे. नवीनतम सुधारणा आणि निराकरणे मिळवण्यासाठी तुमचे ॲप पुन्हा पॅच करा</string>
     <string name="home_app_info_app_deleted_warning">ॲप अनइंस्टॉल केले होते</string>
     <string name="home_app_info_app_deleted_description">हे ॲप Morphe बाहेर अनइंस्टॉल केले गेले होते. कार्यक्षमता पुनर्संचयित करण्यासाठी ते पुन्हा पॅच करा</string>
+    <string name="home_app_info_not_patched_description">या अॅपची अनपॅच केलेली आवृत्ती स्थापित आहे. Morphe कडे अजूनही त्याचा मागील पॅच रेकॉर्ड आहे.</string>
     <string name="home_app_info_apk_size">APK आकार</string>
     <string name="home_app_info_cpu_arch">CPU आर्किटेक्चर</string>
     <!-- Home Screen - Root Mode -->
@@ -455,6 +481,11 @@
     <string name="battery_optimization_dialog_title">पार्श्वभूमी पॅचिंग संरक्षण</string>
     <string name="battery_optimization_dialog_description">ॲप मिनिमाइज केल्यावर काही उपकरणे पॅचर थांबवू शकतात. पॅचिंग নির্ভরযোগ্যपणे पूर्ण होण्यासाठी मोर्फेला बॅटरी निर्बंधांशिवाय चालण्याची परवानगी द्या.</string>
     <string name="battery_optimization_not_now">आता नाही</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">पुरेशी मेमरी नाही</string>
+    <string name="patcher_memory_adjustment_description">पॅचर %1$d MB मेमरी मर्यादेसह चालू असताना सिस्टमने तो थांबवला. मर्यादा %2$d MB पर्यंत कमी केल्याने पॅचर लहान लक्ष्य बनतो आणि रन पूर्ण होऊ शकतो.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">पॅचर %1$d MB मेमरी मर्यादेसह चालू असताना सिस्टमने तो थांबवला, जी आधीच उपलब्ध सर्वात कमी मर्यादा आहे. कमी पॅच स्रोतांसह पॅचिंग करून पहा किंवा कमी पॅच निवडा.</string>
+    <string name="patcher_memory_adjustment_apply">%1$d MB पर्यंत कमी करा</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">पॅचिंग सुरू आहे…</string>
     <string name="patcher_notification_text">पॅचरवर परत जाण्यासाठी टॅप करा</string>
@@ -489,6 +520,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">ॲप पॅचिंग</string>
     <string name="memory_usage">मेमरी वापर</string>
+    <string name="cpu_usage">CPU वापर</string>
+    <string name="storage_io_usage">स्टोरेज इनपुट/आउटपुट</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">पॅच लावत आहे</string>
     <string name="failed_to_execute_patch">%s लागू करण्यात अयशस्वी</string>
@@ -496,9 +529,12 @@
     <string name="patched_app_save_failed_toast">पॅच केलेले ॲप जतन करण्यात अयशस्वी</string>
     <string name="plugin_activity_dialog_body">या प्लगइनसह पुढे जाण्यासाठी वापरकर्त्याच्या इंटरॅक्शनची आवश्यकता आहे</string>
     <string name="patcher_process_exit_message">पॅचर प्रक्रिया कोड %s सह बाहेर पडली</string>
+    <string name="patcher_heap_exhausted_message">पॅचरला %1$d MB हीपसह मेमरी संपली. हे अॅप निवडलेल्या पॅचेससाठी खूप मोठे आहे. कमी पॅच स्रोतांसह पॅचिंग करून पहा, किंवा कमी पॅच निवडा.</string>
     <string name="install_app_success">इंस्टॉल यशस्वी झाले</string>
     <string name="install_app_fail">ॲप इंस्टॉल करण्यात अयशस्वी: %s</string>
     <string name="uninstall_app_fail">ॲप अनइंस्टॉल करण्यात अयशस्वी: %s</string>
+    <string name="uninstall_app_unverified">ठिकाणी सोडले: Morphe हे सत्यापित करू शकला नाही की स्थापित अॅप हा त्याने पॅच केलेला बिल्ड आहे.</string>
+    <string name="launch_app_unverified">Morphe हे सत्यापित करू शकला नाही की स्थापित अॅप हा त्याने पॅच केलेला बिल्ड आहे.</string>
     <string name="uninstall_timeout">अनइंस्टॉल टाइम आउट हुआ</string>
     <string name="save_apk_success">APK जतन केले</string>
     <string name="saved_app_export_failed">पॅच केलेले ॲप एक्सपोर्ट करण्यात अयशस्वी</string>
@@ -568,8 +604,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">मुख्य स्क्रीनवर शुभेच्छा संदेश दर्शवा</string>
     <string name="settings_appearance_app_grouping">ॲप समूहीकरण</string>
     <string name="settings_appearance_app_grouping_description">ॲप्स स्रोत किंवा आपल्या स्वतःच्या श्रेणीनुसार समूहीकृत करण्यासाठी होम स्क्रीन स्विचर दाखवा, बंद केल्यावर निवड जतन करा</string>
-    <string name="settings_appearance_sort_button">क्रमवारी लावण्याचे बटण</string>
-    <string name="settings_appearance_sort_button_description">मुख्य स्क्रीनवर क्रमवारी लावण्याचे बटण दर्शवा</string>
+    <string name="settings_appearance_sort_button">क्रमवारी आणि फिल्टर बटण</string>
+    <string name="settings_appearance_sort_button_description">होम स्क्रीनवर क्रमवारी आणि फिल्टर बटण दाखवा</string>
     <string name="settings_appearance_app_card_colors">ॲप कार्ड रंग</string>
     <string name="settings_appearance_app_card_colors_default">डीफॉल्ट</string>
     <string name="settings_appearance_app_card_colors_default_description">प्रत्येक ॲपला स्वतःच्या बंडलचा रंग द्या</string>
@@ -1071,6 +1107,7 @@ morphe_header_custom_dark.png
     <string name="version">व्हर्जन</string>
     <string name="patch">सुधारणा</string>
     <string name="patching">पॅचिंग</string>
+    <string name="patched">पॅच केलेले</string>
     <string name="repatch">रीपॅच करा</string>
     <string name="open">उघडा</string>
     <string name="mount">माउंट करा</string>

@@ -32,6 +32,7 @@ internal fun HomeAppsFooterBars(
     apps: HomeAppListUi,
     appActions: HomeAppActions,
     searchState: HomeSearchState,
+    listedItems: List<HomeAppItem>,
     reorderItems: List<HomeAppItem>,
     orderedItems: List<HomeAppItem>,
     itemsByPackage: Map<String, HomeAppItem>,
@@ -42,27 +43,27 @@ internal fun HomeAppsFooterBars(
     isSourceCategoryView: Boolean,
     listState: LazyListState,
     scope: CoroutineScope,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     val homeAppItems = apps.visible
     val selectedPackages = state.selectedPackages
 
     // What "select all" covers: the scope being reordered, the group being selected in, or
-    // everything when neither narrows it
+    // whatever the search and filter left on screen when neither narrows it
     val activeAppScopePackages = state.reorderScopePackages ?: groupedSelectionPackages
-    // Memoized - otherwise selection toggles refilter homeAppItems each pass
+    // Memoized - otherwise selection toggles refilter listedItems each pass
     val activeAppScopeItems = remember(
         activeAppScopePackages,
         groupedSelectionGroup,
-        homeAppItems,
+        listedItems,
         reorderItems,
         state.isReorderMode
     ) {
         when {
             state.isReorderMode -> reorderItems
             groupedSelectionGroup != null -> groupedSelectionGroup.items
-            activeAppScopePackages != null -> homeAppItems.filter { it.packageName in activeAppScopePackages }
-            else -> homeAppItems
+            activeAppScopePackages != null -> listedItems.filter { it.packageName in activeAppScopePackages }
+            else -> listedItems
         }
     }
     val selectedAppItems = remember(selectedPackages.keys.toList(), homeAppItems) {
@@ -70,7 +71,9 @@ internal fun HomeAppsFooterBars(
         homeAppItems.filter { it.packageName in selected }
     }
     val selectedInstalledItems = remember(selectedAppItems) {
-        selectedAppItems.filter { it.isInstalledOnDevice }
+        // Apps that are on the device but were never patched here have nothing Morphe can
+        // uninstall, so they must not put the selection into the uninstall verb
+        selectedAppItems.filter { it.isInstalledOnDevice && it.installedApp != null }
     }
     val selectedReinstallItems = remember(selectedAppItems) {
         selectedAppItems.filter {

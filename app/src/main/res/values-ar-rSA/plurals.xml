@@ -120,14 +120,6 @@
         <item quantity="many">%s مصادر تم تثبيتها</item>
         <item quantity="other">%s مصادر تم تثبيتها</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="zero">%s تعديل محدد</item>
-        <item quantity="one">%s تعديل محدد</item>
-        <item quantity="two">%s تعديلات محددة</item>
-        <item quantity="few">%s تعديل محدد</item>
-        <item quantity="many">%s تعديل محدد</item>
-        <item quantity="other">%s تعديل محدد</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="zero">%s تطبيق مخفي</item>
         <item quantity="one">%s تطبيق مخفي</item>

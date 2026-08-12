@@ -7,28 +7,23 @@ package app.morphe.manager.ui.model
 
 import android.content.Context
 import android.util.Log
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.Snapshot
-import androidx.compose.runtime.toMutableStateList
 import app.morphe.manager.R
 import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
-import app.morphe.manager.patcher.runtime.MemoryMonitor.LOG_MEMORY_PREFIX_CURRENT
+import app.morphe.manager.patcher.logger.logField
+import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_MEMORY_PREFIX_CURRENT
+import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_FIELD_CPU
+import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_FIELD_IO_READ
+import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_FIELD_IO_WRITE
+import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_PREFIX_CURRENT
 import app.morphe.manager.patcher.runtime.process.PatcherProcess.Companion.LOG_PROCESS_PREFIX_PROCESS_HEAP
 import app.morphe.manager.patcher.split.SplitApkPreparer
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
 import java.io.File
 import kotlin.math.max
 import kotlin.math.min
@@ -36,12 +31,23 @@ import kotlin.time.Duration.Companion.milliseconds
 
 private const val TAG = "Morphe Patcher"
 
+/** One storage throughput sample of the patcher run, in kilobytes per second. */
+data class IoSample(val readKbPerSec: Int, val writeKbPerSec: Int) {
+    val totalKbPerSec get() = readKbPerSec + writeKbPerSec
+}
+
 /** Live state of one patcher run, as consumed by the patching screens. */
 interface PatchProgressSource {
     val steps: List<Step>
     val logs: List<Pair<LogLevel, String>>
     val heapSamples: List<Int>
     val heapLimitMb: Int
+
+    /** Load of every CPU core in percent, empty while the device exposes no core counters. */
+    val cpuCoreLoads: List<Int>
+
+    /** Storage throughput samples, collected alongside [heapSamples]. */
+    val ioSamples: List<IoSample>
 
     /** Whether this run printed a log that is no longer available to show. */
     val logsLost: Boolean
@@ -83,6 +89,16 @@ class PatchRunProgress(
     /** Heap limit (MB) of the patcher process, parsed from the runtime's log line. */
     override var heapLimitMb by mutableIntStateOf(0)
         private set
+
+    /**
+     * Replaced as a whole rather than mutated in place: the cores are read as one snapshot and
+     * only mean anything next to each other.
+     */
+    override var cpuCoreLoads by mutableStateOf<List<Int>>(emptyList())
+        private set
+
+    /** Storage throughput samples (KB/s) collected while patching. */
+    override val ioSamples = mutableStateListOf<IoSample>()
 
     var completedPatches by mutableIntStateOf(restoredCompletedPatches)
         private set
@@ -144,6 +160,27 @@ class PatchRunProgress(
 
     fun onPatchCompleted() {
         scope.launch(Dispatchers.Main) { completedPatches += 1 }
+    }
+
+    /**
+     * Drops everything the abandoned attempt reported and puts the pipeline back at its first
+     * step, so the retry that follows counts from zero instead of on top of it.
+     *
+     * The log survives: it is the only record of why the run started over. Whether the input is
+     * a split archive is a property of the input rather than of the attempt, so that is kept too.
+     */
+    fun onRestart() {
+        scope.launch(Dispatchers.Main) {
+            completedPatches = 0
+            currentStepIndex = 0
+            steps.clear()
+            steps.addAll(generatePatchSteps(appContext, requiresSplitPreparation))
+            patchesPercentage = max(0.0, 1.0 - steps.sumOf { it.progressPercentage })
+            heapSamples.clear()
+            ioSamples.clear()
+            cpuCoreLoads = emptyList()
+            _showLongStepWarning.value = false
+        }
     }
 
     /**
@@ -231,10 +268,28 @@ class PatchRunProgress(
             if (mb != null) {
                 scope.launch(Dispatchers.Main) {
                     heapSamples.add(mb)
-                    if (heapSamples.size > HEAP_SAMPLE_LIMIT) heapSamples.removeAt(0)
+                    if (heapSamples.size > SAMPLE_HISTORY_LIMIT) heapSamples.removeAt(0)
                 }
             }
             return // Raw heap polls would drown out the log panel
+        }
+
+        if (message.startsWith(LOG_USAGE_PREFIX_CURRENT)) {
+            val coreLoads = message.logField(LOG_USAGE_FIELD_CPU)
+                ?.split(',')
+                ?.mapNotNull(String::toIntOrNull)
+            val read = message.logField(LOG_USAGE_FIELD_IO_READ)?.toIntOrNull()
+            val write = message.logField(LOG_USAGE_FIELD_IO_WRITE)?.toIntOrNull()
+
+            scope.launch(Dispatchers.Main) {
+                if (!coreLoads.isNullOrEmpty()) cpuCoreLoads = coreLoads
+
+                if (read != null && write != null) {
+                    ioSamples.add(IoSample(read, write))
+                    if (ioSamples.size > SAMPLE_HISTORY_LIMIT) ioSamples.removeAt(0)
+                }
+            }
+            return // Raw usage polls would drown out the log panel
         }
 
         if (level == LogLevel.TRACE) return
@@ -281,7 +336,7 @@ class PatchRunProgress(
     }
 
     private companion object {
-        const val HEAP_SAMPLE_LIMIT = 60
+        const val SAMPLE_HISTORY_LIMIT = 60
         const val STALL_THRESHOLD_MS = 60_000L
 
         fun LogLevel.androidLog(msg: String) = when (this) {

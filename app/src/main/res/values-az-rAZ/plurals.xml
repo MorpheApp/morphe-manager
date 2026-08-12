@@ -60,10 +60,6 @@
         <item quantity="one">%s mənbə quraşdırılıb</item>
         <item quantity="other">%s mənbə quraşdırılıb</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s yamaq seçildi</item>
-        <item quantity="other">%s yamaq seçildi</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s gizli tətbiq</item>
         <item quantity="other">%s gizli tətbiq</item>

@@ -4,6 +4,7 @@ import android.content.pm.PackageInfo
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import app.morphe.manager.data.room.apps.installed.InstalledApp
+import java.io.File
 
 /**
  * Represents a single app button on the home screen.
@@ -19,13 +20,20 @@ data class HomeAppItem(
     val isPinnedByDefault: Boolean,
     val isInstalledOnDevice: Boolean,
     val isDeleted: Boolean,
-    val hasSavedCopy: Boolean,
+    val isInstallStateNotPatched: Boolean,
+    val isInstallStateUnknown: Boolean,
+    val savedApkFile: File?,
     val hasUpdate: Boolean,
     val patchCount: Int
 ) {
+    val hasSavedCopy: Boolean get() = savedApkFile != null
+
     /**
      * Whether the pending update is worth surfacing in the UI.
      * Uninstalled apps keep their update flag but show the uninstalled state instead.
      */
-    val showsUpdateBadge: Boolean get() = hasUpdate && !isDeleted
+    val showsUpdateBadge: Boolean get() = hasUpdate &&
+            !isDeleted &&
+            !isInstallStateNotPatched &&
+            !isInstallStateUnknown
 }

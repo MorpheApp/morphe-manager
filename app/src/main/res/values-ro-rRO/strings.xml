@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Alte aplicații</string>
     <string name="home_not_patched_yet">Nepatch-uit încă</string>
+    <string name="home_unpatched_version_installed">Versiune necorectată instalată</string>
     <string name="home_no_patches_available">Niciun patch disponibil</string>
     <string name="home_app_hide_title">Ascunzi aplicația?</string>
     <string name="home_app_hide_message">Aplicația va fi ascunsă de pe ecranul principal. O vei putea restaura mai târziu folosind butonul de la capătul listei.</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">Sursele tale sunt actualizate</string>
     <string name="home_sources_are_loading">Se încarcă sursele…</string>
     <string name="home_search_apps">Caută aplicații</string>
-    <string name="home_app_sort_title">Sortați aplicațiile</string>
+    <string name="home_app_list_options_title">Sortare și filtrare</string>
+    <string name="home_app_list_options_state_description">Sortate după %1$s, filtrate după %2$s</string>
+    <string name="home_app_filter_all_description">Fiecare aplicație de pe ecranul principal</string>
+    <string name="home_app_filter_patched_description">Aplicațiile pe care le-ai modificat sau salvat cu Morphe</string>
+    <string name="home_app_filter_not_patched_description">Aplicațiile pe care nu le-ai modificat încă în Morphe</string>
+    <string name="home_app_filter_installed_description">Aplicații instalate în prezent pe acest dispozitiv</string>
+    <string name="home_app_filter_uninstalled_description">Aplicații patch-uite cu Morphe care nu mai sunt pe acest dispozitiv</string>
     <string name="home_app_sort_manual_description">Apăsați lung pe o aplicație, apoi atingeți butonul de reordonare</string>
     <string name="home_app_sort_recommended">Ordinare recomandată</string>
     <string name="home_app_sort_recommended_description">Aplicațiile instalate și fixate primele</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">Nici o aplicație nu corespunde cu \"%s\"</string>
     <string name="home_all_apps_hidden_title">Toate aplicațiile sunt ascunse</string>
     <string name="home_all_apps_hidden_subtitle">Ați ascuns toate aplicațiile de pe ecranul principal</string>
+    <string name="home_no_apps_filter_title">Nicio aplicație nu corespunde acestui filtru</string>
+    <string name="home_no_apps_filter_subtitle">Nimic nu corespunde cu %s</string>
     <string name="home_category_add">Adaugă categorie</string>
     <string name="home_category_all_apps">Toate aplicațiile</string>
     <string name="home_category_custom">Personalizat</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">Nocturn și productiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Surse de patch-uri</string>
+    <string name="sources_search">Căutare surse</string>
     <string name="sources_sort_title">Sortare surse de patch-uri</string>
     <string name="sources_sort_manual">Comandă manuală</string>
     <string name="sources_sort_manual_hint">Țineți apăsat pe o sursă pentru a reordona</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">Continuă numai dacă ai încredere în această aplicație auxiliară. Morphe nu poate verifica semnătura acestui APK, astfel încât un fișier modificat nu ar fi detectat</string>
     <string name="home_apk_helper_no_result">Aplicația auxiliară nu a returnat un APK</string>
     <string name="home_apk_helper_no_access">Aplicația auxiliară nu a acordat acces la APK-ul returnat</string>
+    <string name="home_apk_helper_no_package">Aplicația de ajutor nu a precizat ce aplicație instalată să folosească</string>
+    <string name="home_apk_helper_wrong_package">Aplicația de ajutor a returnat o aplicație diferită de cea care este modificată</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe nu a putut utiliza aplicația instalată</string>
+    <string name="home_apk_helper_installed_incompatible">Versiunea instalată nu poate fi modificată</string>
     <string name="home_apk_use_saved">Utilizează APK salvat</string>
     <string name="home_apk_use_installed">Utilizează APK instalat</string>
     <string name="home_apk_use_installed_unverified">Nu s-a putut verifica semnătura aplicației instalate, deci este posibil să fie deja patch-uită</string>
+    <string name="home_unverified">Neverificat</string>
+    <string name="home_app_info_install_unverified">Morphe nu poate confirma că aplicația instalată este build-ul pe care l-a patch-uit. Reinstaleaz-o din APK-ul salvat pentru a-i restabili acțiunile</string>
     <string name="home_app_info_no_saved_apk">Niciun APK salvat. Patch-uirea necesită selectarea APK-ului din nou</string>
     <string name="home_version_requires_android">Necesită Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nu este suportat pe acest dispozitiv</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descarcă APK-ul original</string>
     <string name="home_download_instructions_steps_title">Instrucțiuni:</string>
+    <string name="home_download_instructions_finding">Se caută pagina de descărcare…</string>
     <string name="home_download_instructions_step1">Apasă pe butonul \'%s\' de mai jos</string>
     <string name="home_download_instructions_step2_part1">Derulează în josul paginii și apasă</string>
+    <string name="home_download_instructions_step2_generic">Derulează în josul paginii web și apasă butonul ei de descărcare</string>
+    <string name="home_download_instructions_step2_variant">Derulează în josul paginii web și apasă butonul de descărcare al &lt;b&gt;variantei APK&lt;/b&gt; din partea de sus</string>
+    <string name="home_download_instructions_step2_search">Deschide un rezultat de căutare de pe un site web de încredere</string>
+    <string name="home_download_instructions_step2_search_note">Morphe nu poate garanta pentru aceste site-uri web. Evită-le pe cele care oferă propriul magazin de aplicații în loc de un fișier APK</string>
+    <string name="home_download_instructions_step3_search">Pe site-ul respectiv, descarcă APK-ul versiunii &lt;b&gt;%s&lt;/b&gt;, nu pe cea mai nouă</string>
+    <string name="home_download_instructions_step3_search_any">Pe site-ul respectiv, descarcă APK-ul aplicației. &lt;b&gt;Orice versiune&lt;/b&gt; poate fi patch-uită</string>
     <string name="home_download_instructions_download_button_toast">Apasă butonul pe site, nu aici 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Excelent! Acum apasă pe continuare și mergi pe site-ul web 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Exercițiul este cheia succesului și te apropii din ce în ce mai mult 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">Așteaptă ca descărcarea să se finalizeze, și &lt;b&gt;instalează&lt;/b&gt; APK-ul</string>
     <string name="home_download_instructions_step4">După ce descărcarea se termină, revino la Morphe</string>
     <string name="home_download_instructions_step4_mount">După instalarea APK-ului original, revino la Morphe</string>
-    <string name="home_download_instructions_continue">Continuă către APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Continuă la %s</string>
+    <string name="home_download_instructions_destination">pagina de descărcare</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Selectează APK-ul descărcat</string>
     <string name="home_file_picker_prompt_description">Selectează fișierul APK &lt;b&gt;%s&lt;/b&gt; pe care tocmai l-ai descărcat</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">Toate patch-urile dezactivate</string>
     <string name="expert_mode_enable_all">Activează toate</string>
     <string name="expert_mode_enable_all_done">Toate patch-urile activate</string>
+    <string name="expert_mode_enable_all_universal_pending">Atingeți din nou pentru patch-uri universale</string>
     <string name="expert_mode_reset_to_default">Activează patch-urile recomandate</string>
     <string name="expert_mode_reset_to_default_done">Patch-urile recomandate au fost aplicate</string>
     <string name="expert_mode_restore_saved">Restaurarea selecției salvate</string>
@@ -385,6 +410,7 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="home_app_info_patch_update_available_description">O versiune mai nouă a modificărilor este disponibilă. Repătați aplicația pentru a obține ultimele îmbunătățiri și corectări</string>
     <string name="home_app_info_app_deleted_warning">Aplicația a fost dezinstalată</string>
     <string name="home_app_info_app_deleted_description">Această aplicație a fost dezinstalată în afara Morphe. Aplica-o din nou pentru a restabili funcționalitatea</string>
+    <string name="home_app_info_not_patched_description">O versiune necorectată a acestei aplicații este instalată. Morphe încă are înregistrarea anterioară a corecțiilor sale.</string>
     <string name="home_app_info_apk_size">Dimensiunea APK</string>
     <string name="home_app_info_cpu_arch">Arhitectura procesorului</string>
     <!-- Home Screen - Root Mode -->
@@ -456,6 +482,11 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="battery_optimization_dialog_title">Protecție la patch-uri în fundal</string>
     <string name="battery_optimization_dialog_description">Unele dispozitive pot opri patcher-ul când aplicația este minimizată. Permiteți aplicației Morphe să ruleze fără restricții de baterie pentru a asigura finalizarea fiabilă a patch-urilor</string>
     <string name="battery_optimization_not_now">Nu acum</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Memorie insuficientă</string>
+    <string name="patcher_memory_adjustment_description">Patcher-ul a fost oprit de sistem în timp ce rula cu o limită de memorie de %1$d MB. Scăderea limitei la %2$d MB face din patcher o țintă mai mică și poate permite finalizarea rulării.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Patcher-ul a fost oprit de sistem în timp ce rula cu o limită de memorie de %1$d MB, care este deja cea mai mică disponibilă. Încearcă să aplici patch-uri cu mai puține surse de patch-uri sau selectează mai puține patch-uri.</string>
+    <string name="patcher_memory_adjustment_apply">Scade la %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Se aplică modificările…</string>
     <string name="patcher_notification_text">Atinge pentru a reveni la patcher</string>
@@ -490,6 +521,8 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Se patch-uiește aplicația</string>
     <string name="memory_usage">Utilizare memorie</string>
+    <string name="cpu_usage">Utilizare CPU</string>
+    <string name="storage_io_usage">I/O stocare</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Se aplică patch-urile</string>
     <string name="failed_to_execute_patch">Nu s-a putut aplica %s</string>
@@ -497,9 +530,12 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="patched_app_save_failed_toast">Eroare la salvarea aplicației modificate</string>
     <string name="plugin_activity_dialog_body">Este necesară interacțiunea utilizatorului pentru a continua cu acest plugin</string>
     <string name="patcher_process_exit_message">Procesul patcher-ului s-a încheiat cu codul %s</string>
+    <string name="patcher_heap_exhausted_message">Patcher-ul a rămas fără memorie cu un heap de %1$d MB. Această aplicație este prea mare pentru patch-urile selectate. Încearcă să aplici patch-uri cu mai puține surse de patch-uri sau selectează mai puține patch-uri.</string>
     <string name="install_app_success">Instalat cu succes</string>
     <string name="install_app_fail">Nu s-a putut instala aplicația: %s</string>
     <string name="uninstall_app_fail">Eșuat la dezinstalarea aplicației: %s</string>
+    <string name="uninstall_app_unverified">Rămas instalat: Morphe nu a putut verifica că aplicația instalată este build-ul pe care l-a patch-uit</string>
+    <string name="launch_app_unverified">Morphe nu a putut verifica că aplicația instalată este build-ul pe care l-a patch-uit</string>
     <string name="uninstall_timeout">Depășirea limitei de timp pentru dezinstalare</string>
     <string name="save_apk_success">APK salvat</string>
     <string name="saved_app_export_failed">Nu s-a putut exporta aplicația modificată</string>
@@ -568,8 +604,8 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Afișează un mesaj de salut pe ecranul principal</string>
     <string name="settings_appearance_app_grouping">Gruparea aplicațiilor</string>
     <string name="settings_appearance_app_grouping_description">Afișează un comutator al ecranului principal pentru a grupa aplicațiile după sursă sau după propriile categorii, menținând selecția când este dezactivat</string>
-    <string name="settings_appearance_sort_button">Buton sortare</string>
-    <string name="settings_appearance_sort_button_description">Afișează butonul de sortare pe ecranul principal</string>
+    <string name="settings_appearance_sort_button">Buton de sortare și filtrare</string>
+    <string name="settings_appearance_sort_button_description">Afișează butonul de sortare și filtrare pe ecranul de pornire</string>
     <string name="settings_appearance_app_card_colors">Culori card aplicație</string>
     <string name="settings_appearance_app_card_colors_default">Implicit</string>
     <string name="settings_appearance_app_card_colors_default_description">Oferă fiecărei aplicații culoarea propriului pachet</string>
@@ -1071,6 +1107,7 @@ Detalii: %2$s"</string>
     <string name="version">Versiune</string>
     <string name="patch">Patch-uiește</string>
     <string name="patching">Se aplică patch-uri</string>
+    <string name="patched">Patch-uite</string>
     <string name="repatch">Patch-uiește din nou</string>
     <string name="open">Deschide</string>
     <string name="mount">Montează</string>

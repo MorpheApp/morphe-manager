@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Aplikasi lainnya</string>
     <string name="home_not_patched_yet">Belum ditambal</string>
+    <string name="home_unpatched_version_installed">Versi tanpa patch terpasang</string>
     <string name="home_no_patches_available">Tidak ada tambalan yang tersedia</string>
     <string name="home_app_hide_title">Sembunyikan aplikasi ini?</string>
     <string name="home_app_hide_message">Aplikasi ini akan disembunyikan dari layar utama. Anda dapat mengembalikannya nanti dari aplikasi tersembunyi menggunakan tombol di bagian bawah daftar</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">Sumber Anda sudah yang terbaru</string>
     <string name="home_sources_are_loading">Sumber sedang dimuat, harap tunggu…</string>
     <string name="home_search_apps">Cari aplikasi</string>
-    <string name="home_app_sort_title">Urutkan aplikasi</string>
+    <string name="home_app_list_options_title">Urutkan dan saring</string>
+    <string name="home_app_list_options_state_description">Diurutkan berdasarkan %1$s, disaring berdasarkan %2$s</string>
+    <string name="home_app_filter_all_description">Semua aplikasi di layar utama</string>
+    <string name="home_app_filter_patched_description">Aplikasi yang sudah Anda tambal atau simpan dengan Morphe</string>
+    <string name="home_app_filter_not_patched_description">Aplikasi yang belum Anda tambal di Morphe</string>
+    <string name="home_app_filter_installed_description">Aplikasi yang saat ini terpasang di perangkat ini</string>
+    <string name="home_app_filter_uninstalled_description">Aplikasi yang ditambal dengan Morphe dan tidak lagi berada di perangkat ini</string>
     <string name="home_app_sort_manual_description">Tekan lama sebuah aplikasi, lalu ketuk tombol urutkan</string>
     <string name="home_app_sort_recommended">Urutan yang Direkomendasikan</string>
     <string name="home_app_sort_recommended_description">Aplikasi yang sudah dipasang dan disematkan terlebih dahulu</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">Tidak ada aplikasi yang cocok \"%s\"</string>
     <string name="home_all_apps_hidden_title">Semua aplikasi disembunyikan</string>
     <string name="home_all_apps_hidden_subtitle">Anda telah menyembunyikan semua aplikasi dari layar utama</string>
+    <string name="home_no_apps_filter_title">Tidak ada aplikasi yang cocok dengan penyaring ini</string>
+    <string name="home_no_apps_filter_subtitle">Tidak ada yang cocok dengan %s</string>
     <string name="home_category_add">Tambahkan kategori</string>
     <string name="home_category_all_apps">Semua aplikasi</string>
     <string name="home_category_custom">Khusus</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">Aktif di malam hari dan produktif</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Sumber tambalan</string>
+    <string name="sources_search">Cari sumber</string>
     <string name="sources_sort_title">Urutkan sumber tambalan</string>
     <string name="sources_sort_manual">Urutan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk mengubah urutan</string>
@@ -170,13 +180,19 @@
     <string name="home_apk_helper_title">Unduh dengan aplikasi pembantu</string>
     <string name="home_apk_helper_description">Morphe akan meminta aplikasi pembantu di bawah ini untuk mengunduh APK asli dan mengembalikan berkas tersebut</string>
     <string name="home_apk_helper_continue">Buka aplikasi pembantu</string>
-    <string name="home_apk_helper_warning">Lanjutkan hanya jika Anda mempercayai aplikasi pembantu ini. Morphe memeriksa paket, versi, dan tanda tangan dari apa pun yang diterimanya sebelum melakukan penambalan</string>
+    <string name="home_apk_helper_warning">Lanjutkan hanya jika Anda mempercayai aplikasi pembantu ini. Morphe memeriksa paket, versi dan tanda tangan dari apa pun yang diterimanya sebelum melakukan penambalan</string>
     <string name="home_apk_helper_warning_unverified">Lanjutkan hanya jika Anda mempercayai aplikasi pembantu ini. Morphe tidak dapat memverifikasi tanda tangan APK ini, sehingga berkas yang dimodifikasi tidak akan terdeteksi</string>
     <string name="home_apk_helper_no_result">Aplikasi pembantu tidak mengembalikan file APK</string>
     <string name="home_apk_helper_no_access">Aplikasi pembantu tersebut tidak memberikan akses ke APK yang dikembalikannya</string>
+    <string name="home_apk_helper_no_package">Aplikasi pembantu tersebut tidak menyebutkan aplikasi mana yang sudah terpasang untuk digunakan</string>
+    <string name="home_apk_helper_wrong_package">Aplikasi pembantu mengembalikan aplikasi yang berbeda dari aplikasi yang sedang diperbarui</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe tidak dapat menggunakan aplikasi yang telah dipasang</string>
+    <string name="home_apk_helper_installed_incompatible">Versi yang sudah terpasang tidak dapat ditambal</string>
     <string name="home_apk_use_saved">Gunakan APK yang tersimpan</string>
     <string name="home_apk_use_installed">Gunakan APK yang terpasang</string>
     <string name="home_apk_use_installed_unverified">Tanda tangan aplikasi yang terpasang tidak dapat diverifikasi, jadi kemungkinan aplikasi tersebut sudah ditambal.</string>
+    <string name="home_unverified">Tidak Terverifikasi</string>
+    <string name="home_app_info_install_unverified">Morphe tidak dapat memastikan bahwa aplikasi yang terpasang adalah build yang ditambalnya. Pasang ulang dari APK yang disimpan untuk memulihkan tindakannya</string>
     <string name="home_app_info_no_saved_apk">Tidak ada APK yang disimpan. Penambalan akan memerlukan memilih berkas APK lagi</string>
     <string name="home_version_requires_android">Membutuhkan Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Tidak didukung di perangkat ini</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Unduh APK asli</string>
     <string name="home_download_instructions_steps_title">Petunjuk:</string>
+    <string name="home_download_instructions_finding">Mencari halaman unduh…</string>
     <string name="home_download_instructions_step1">Tekan tombol \'%s\' di bawah ini</string>
     <string name="home_download_instructions_step2_part1">Geser halaman web ke bawah dan tekan</string>
+    <string name="home_download_instructions_step2_generic">Geser halaman web ke bawah dan tekan tombol unduhnya</string>
+    <string name="home_download_instructions_step2_variant">Geser halaman web ke bawah dan tekan tombol unduh dari &lt;b&gt;varian APK&lt;/b&gt; teratas</string>
+    <string name="home_download_instructions_step2_search">Buka hasil penelusuran dari situs web yang Anda percayai</string>
+    <string name="home_download_instructions_step2_search_note">Morphe tidak dapat menjamin situs-situs web ini. Lewati yang menawarkan toko aplikasi sendiri, bukan file APK</string>
+    <string name="home_download_instructions_step3_search">Di situs web tersebut, unduh APK versi &lt;b&gt;%s&lt;/b&gt;, bukan versi terbaru</string>
+    <string name="home_download_instructions_step3_search_any">Di situs web tersebut, unduh APK aplikasi. &lt;b&gt;Versi apa pun&lt;/b&gt; dapat ditambal</string>
     <string name="home_download_instructions_download_button_toast">Tekan unduh di situs web, dan bukan di sini 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Bagus! Sekarang klik lanjutkan dan kunjungi situs webnya 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Latihan membuat sempurna dan kamu sudah hampir sampai 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">Tunggu hingga unduhan selesai, kemudian &lt;b&gt;pasang APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Setelah proses unduh selesai, kembali ke Morphe</string>
     <string name="home_download_instructions_step4_mount">Setelah memasang APK asli, kembali ke Morphe</string>
-    <string name="home_download_instructions_continue">Lanjutkan ke APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Lanjutkan ke %s</string>
+    <string name="home_download_instructions_destination">halaman unduh</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Pilih APK yang telah diunduh</string>
     <string name="home_file_picker_prompt_description">Pilih berkas APK &lt;b&gt;%s&lt;/b&gt; yang baru saja Anda unduh</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">Semua tambalan dinonaktifkan</string>
     <string name="expert_mode_enable_all">Aktifkan semua</string>
     <string name="expert_mode_enable_all_done">Semua tambalan diaktifkan</string>
+    <string name="expert_mode_enable_all_universal_pending">Ketuk lagi untuk tambalan universal</string>
     <string name="expert_mode_reset_to_default">Aktifkan tambalan yang direkomendasikan</string>
     <string name="expert_mode_reset_to_default_done">Tambalan yang direkomendasikan diterapkan</string>
     <string name="expert_mode_restore_saved">Kembalikan pilihan yang disimpan</string>
@@ -386,6 +411,7 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="home_app_info_patch_update_available_description">Versi tambalan lebih baru tersedia. Tambal ulang aplikasi Anda untuk mendapatkan pembaruan terbaru dan perbaikan</string>
     <string name="home_app_info_app_deleted_warning">Aplikasi telah dihapus</string>
     <string name="home_app_info_app_deleted_description">Aplikasi ini telah dihapus di luar Morphe. Tambal ulang untuk mengembalikan fungsinya</string>
+    <string name="home_app_info_not_patched_description">Versi tanpa patch dari aplikasi ini terpasang. Morphe masih memiliki catatan patch sebelumnya.</string>
     <string name="home_app_info_apk_size">Ukuran APK</string>
     <string name="home_app_info_cpu_arch">Arsitektur CPU</string>
     <!-- Home Screen - Root Mode -->
@@ -457,6 +483,11 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="battery_optimization_dialog_title">Perlindungan penambalan latar belakang</string>
     <string name="battery_optimization_dialog_description">Beberapa perangkat mungkin menghentikan proses penambal ketika aplikasi diminimalkan. Izinkan Morphe berjalan tanpa batasan penggunaan baterai agar proses penambalan dapat diselesaikan dengan lancar</string>
     <string name="battery_optimization_not_now">Nanti saja</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Memori tidak cukup</string>
+    <string name="patcher_memory_adjustment_description">Penambal dihentikan oleh sistem saat berjalan dengan batas memori %1$d MB. Menurunkan batas menjadi %2$d MB membuat penambal menjadi target yang lebih kecil dan dapat membuat prosesnya selesai</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Penambal dihentikan oleh sistem saat berjalan dengan batas memori %1$d MB, yang merupakan batas terendah yang tersedia. Coba lakukan penambalan dengan lebih sedikit sumber tambalan, atau pilih lebih sedikit tambalan</string>
+    <string name="patcher_memory_adjustment_apply">Turunkan ke %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Penyematan sedang berlangsung…</string>
     <string name="patcher_notification_text">Ketuk untuk kembali ke penambal</string>
@@ -491,6 +522,8 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <!-- Expert patcher Screen -->
     <string name="patching_app">Menambal aplikasi</string>
     <string name="memory_usage">Pemakaian memori</string>
+    <string name="cpu_usage">Penggunaan CPU</string>
+    <string name="storage_io_usage">I/O penyimpanan</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Menerapkan tambalan</string>
     <string name="failed_to_execute_patch">Gagal menerapkan %s</string>
@@ -498,9 +531,12 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="patched_app_save_failed_toast">Gagal menyimpan aplikasi yang ditambal</string>
     <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk melanjutkan plugin ini</string>
     <string name="patcher_process_exit_message">Proses Penambal dihentikan dengan kode %s</string>
+    <string name="patcher_heap_exhausted_message">Penambal kehabisan memori dengan heap %1$d MB. Aplikasi ini terlalu besar untuk tambalan yang dipilih. Coba menambal dengan lebih sedikit sumber tambalan, atau pilih lebih sedikit tambalan</string>
     <string name="install_app_success">Berhasil dipasang</string>
     <string name="install_app_fail">Gagal memasang aplikasi: %s</string>
     <string name="uninstall_app_fail">Gagal menghapus aplikasi: %s</string>
+    <string name="uninstall_app_unverified">Dibiarkan di tempat: Morphe tidak dapat memverifikasi bahwa aplikasi yang terpasang adalah build yang ditambalnya</string>
+    <string name="launch_app_unverified">Morphe tidak dapat memverifikasi bahwa aplikasi yang terpasang adalah build yang ditambalnya</string>
     <string name="uninstall_timeout">Waktu penghapusan instalasi habis</string>
     <string name="save_apk_success">APK Tersimpan</string>
     <string name="saved_app_export_failed">Gagal mengekspor aplikasi hasil patch</string>
@@ -570,8 +606,8 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="settings_appearance_greeting_phrases_subtitle">Tampilkan pesan sapaan di layar beranda</string>
     <string name="settings_appearance_app_grouping">Pengelompokan aplikasi</string>
     <string name="settings_appearance_app_grouping_description">Tampilkan pengalih layar beranda untuk mengelompokkan aplikasi berdasarkan sumber atau kategori Anda sendiri, mempertahankan pilihan saat dinonaktifkan</string>
-    <string name="settings_appearance_sort_button">Tombol urutkan</string>
-    <string name="settings_appearance_sort_button_description">Tampilkan tombol urutkan di layar utama</string>
+    <string name="settings_appearance_sort_button">Tombol urutkan dan saring</string>
+    <string name="settings_appearance_sort_button_description">Tampilkan tombol urutkan dan fsaring di layar utama</string>
     <string name="settings_appearance_app_card_colors">Warna kartu aplikasi</string>
     <string name="settings_appearance_app_card_colors_default">Bawaan</string>
     <string name="settings_appearance_app_card_colors_default_description">Beri setiap aplikasi warna dari bundelnya sendiri</string>
@@ -591,9 +627,9 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="settings_appearance_app_icon_selector_title">Ikon aplikasi</string>
     <string name="settings_appearance_app_icon_default">Bawaan</string>
     <string name="settings_appearance_app_icon_light_2">Langit</string>
-    <string name="settings_appearance_app_icon_light_3">Matahari terbenam</string>
+    <string name="settings_appearance_app_icon_light_3">Senja</string>
     <string name="settings_appearance_app_icon_dark_1">Samudra</string>
-    <string name="settings_appearance_app_icon_dark_2">Kosong</string>
+    <string name="settings_appearance_app_icon_dark_2">Hampa</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Ubah ikon aplikasi?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Ubah menjadi &lt;b&gt;%s&lt;/b&gt; dan mulai ulang?</string>
@@ -1073,6 +1109,7 @@ Rincian: %2$s"</string>
     <string name="version">Versi</string>
     <string name="patch">Tambalan</string>
     <string name="patching">Menambal</string>
+    <string name="patched">Ditambal</string>
     <string name="repatch">Terapkan patch ulang</string>
     <string name="open">Buka</string>
     <string name="mount">Mount</string>

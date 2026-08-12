@@ -47,7 +47,8 @@ import kotlin.time.Duration.Companion.milliseconds
 
 private val ScrollbarEdgePadding = 4.dp
 private val ScrollbarVerticalPadding = 8.dp
-private val ScrollbarTouchWidth = 32.dp
+/** Wider steals ordinary edge scrolls into the scrollbar's own drag; narrower loses the thumb. */
+private val ScrollbarTouchWidth = 16.dp
 private val ScrollbarOverlayWidth = 104.dp
 private val ScrollbarTrackWidth = 4.dp
 private val ScrollbarMinThumbHeight = 36.dp

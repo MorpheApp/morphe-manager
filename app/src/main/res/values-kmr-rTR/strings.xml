@@ -36,7 +36,13 @@
     <string name="home_update_success_subtitle">Kanalan we nû kirin</string>
     <string name="home_sources_are_loading">Kanalan ketin, ji kerema xwe bibeku</string>
     <string name="home_search_apps">İlave avakurîn</string>
-    <string name="home_app_sort_title">Serîkirina sepanan</string>
+    <string name="home_app_list_options_title">Rêzkirin û fîltrekirin</string>
+    <string name="home_app_list_options_state_description">Rêzkirî li gorî %1$s, fîltrekirî li gorî %2$s</string>
+    <string name="home_app_filter_all_description">Her sepana li ser ekrana sereke</string>
+    <string name="home_app_filter_patched_description">Sepanên ku we bi Morphe pîne kirine an jî tomar kirine</string>
+    <string name="home_app_filter_not_patched_description">Sepanên ku we hê di Morphe de pîne nekirine</string>
+    <string name="home_app_filter_installed_description">Sepanên ku niha li ser vê cîhazê sazkirî ne</string>
+    <string name="home_app_filter_uninstalled_description">Sepanên ku bi Morphe ve hatine patchkirin û êdî li ser vê cîhazê nînin</string>
     <string name="home_app_sort_manual_description">Sepana dirêj bike, paşê bişîne ser butona rijandinê</string>
     <string name="home_app_sort_recommended">Rêza pêşniyarkirî</string>
     <string name="home_app_sort_recommended_description">Sepanên saz kirî û têxîkirî pêşî</string>
@@ -49,6 +55,8 @@
     <string name="home_no_apps_search_subtitle">Tu din li gor \'%s\' hene</string>
     <string name="home_all_apps_hidden_title">Hemû serlêdanan veşartin</string>
     <string name="home_all_apps_hidden_subtitle">Ez hemû serlêdanan ji ekranê pêşîn veşartim</string>
+    <string name="home_no_apps_filter_title">Tu sepan bi vê parzûnê re li hev nayê</string>
+    <string name="home_no_apps_filter_subtitle">Tiştek bi %s re li hev nehat</string>
     <string name="home_category_add">Kategoriyê zêde bike</string>
     <string name="home_category_all_apps">Hemû sepan</string>
     <string name="home_category_custom">Sazkirî</string>
@@ -174,9 +182,15 @@
     <string name="home_apk_helper_warning_unverified">Tenê pêşkeve, heke te ewî serlêdanê arîkar bawer bikî. Morphe nikare îmzaya vê APK-yê verast bike, ji ber vê yekê pelê guherandî nabe dîtin</string>
     <string name="home_apk_helper_no_result">Serlêdanê arîkar APK-yek negerand</string>
     <string name="home_apk_helper_no_access">Serlêdanê arîkar destûr nedaye gihîştina APK-ya ku ew gerand</string>
+    <string name="home_apk_helper_no_package">Appa alîkar ne got ku kîjan appa sazkirî were bikaranîn</string>
+    <string name="home_apk_helper_wrong_package">Appa alîkar appek cuda vegerand ji ya ku tê patchkirin</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe nekarî appa sazkirî bikar bîne</string>
+    <string name="home_apk_helper_installed_incompatible">Guhertoya sazkirî nayê patchkirin</string>
     <string name="home_apk_use_saved">APK ya saved bikar bîne</string>
     <string name="home_apk_use_installed">APK ya sazkirî bikar bîne</string>
     <string name="home_apk_use_installed_unverified">Nezêrbû ku îmzaya sepanê yê ku hatî saz kirin bê xeml kirin, lew re dibe ku jî berê hatî guhertin</string>
+    <string name="home_unverified">Neverastkirî</string>
+    <string name="home_app_info_install_unverified">Morphe nikare piştrast bike ku sepana sazkirî ew guhertoya ku ew patch kiriye ye. Ji APK-ya tomarkirî wê ji nû ve saz bikin da ku çalakiyên wê vegerin.</string>
     <string name="home_app_info_no_saved_apk">APK kume ne. Berî ev, wê APK ava beke</string>
     <string name="home_version_requires_android">Android %s+ hewce dike.</string>
     <string name="home_apk_no_compatible_versions_title">Li vê cihazê de ne piştgirîkirî</string>
@@ -184,8 +198,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">APK-a orîjinalê dakêşîne</string>
     <string name="home_download_instructions_steps_title">Rêberî:</string>
+    <string name="home_download_instructions_finding">Rûpela daxistinê tê dîtin…</string>
     <string name="home_download_instructions_step1">Butona \'%s\' ya jêr lê deynin.</string>
     <string name="home_download_instructions_step2_part1">Li ser rûbera malperê biqewime û bikşîne</string>
+    <string name="home_download_instructions_step2_generic">Rûpela webê berjêr bigerînin û pêlî bişkoka daxistinê ya wê bikin</string>
+    <string name="home_download_instructions_step2_variant">Rûpela webê berjêr bigerînin û pêlî bişkoka daxistinê ya <b>guhertoya APK</b> ya jorîn bikin</string>
+    <string name="home_download_instructions_step2_search">Netîceyek lêgerînê ji malpereke ku hûn pê bawer in vekin</string>
+    <string name="home_download_instructions_step2_search_note">Morphe nikare ji bo van malperan garantiyê bide. Yên ku li şûna dosyeyeke APK firoşgeha xwe ya sepanan pêşkêş dikin derbas bikin</string>
+    <string name="home_download_instructions_step3_search">Li ser wê malperê, APK-ya guhertoya <b>%s</b> daxînin, ne guhertoya herî nû</string>
+    <string name="home_download_instructions_step3_search_any">Li ser wê malperê, APK-ya sepanê daxînin. <b>Her guhertoyek</b> dikare were patch kirin</string>
     <string name="home_download_instructions_download_button_toast">Li ser malpera çapa serdest bike, ne ku xwer li vir 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Serkeftî! Naha bikîne virê û biçin ser malperê 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Ezberkirin baş e û hûn nêzîk dibin 💪</string>
@@ -196,7 +217,8 @@
     <string name="home_download_instructions_step3_mount">Binevin destpêkirina daxistnê biqedîne, paşê &lt;b&gt;APKê nas bike&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Pi serîdana daxistinê bi dawî bû, vegerin ser Morphe</string>
     <string name="home_download_instructions_step4_mount">Pi naskindina APK\'ya bilavkirinê, vegerin Morphe</string>
-    <string name="home_download_instructions_continue">Bibe APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Berdewam bikin ser %s</string>
+    <string name="home_download_instructions_destination">rûpela daxistinê</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">APKê daxistî hilbijêre</string>
     <string name="home_file_picker_prompt_description">Pelê APK ya &lt;b&gt;%s&lt;/b&gt; ya hûn niha dakêşandî hilbijêrin.</string>
@@ -223,6 +245,7 @@
     <string name="expert_mode_disable_all_done">Hemû pelikên guherînê neçalak hatin kirin</string>
     <string name="expert_mode_enable_all">Hemû çêbakîne</string>
     <string name="expert_mode_enable_all_done">Hemû pelikên guherînê aktîv hatin kirin</string>
+    <string name="expert_mode_enable_all_universal_pending">Dîsa bikirtîne ji bo pêçekên gerdûnî</string>
     <string name="expert_mode_reset_to_default">Pêşdixeşinên pêşniyar kirî çêbêje</string>
     <string name="expert_mode_reset_to_default_done">Pelîkên ku hatine pêşniyar kirin hatin çêkirin</string>
     <string name="expert_mode_restore_saved">Şêvikî serdest vegerîne</string>
@@ -454,6 +477,11 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="battery_optimization_dialog_title">Parastina parêzgeha paşgirê</string>
     <string name="battery_optimization_dialog_description">Heke sepan biçikînin, hin cîhazan dikarin paşgirê rawestînin. Ji bo ku paşgirê bi pêvehiyê qediya, bihêle Morphe bêyî astengiyên serfkirina batêriyê bixebite.</string>
     <string name="battery_optimization_not_now">Niha ne</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Bîra têra nake</string>
+    <string name="patcher_memory_adjustment_description">Patcher ji aliyê pergalê ve hate rawestandin dema ku bi sînorê bîrê %1$d MB dixebitî. Daxistina sînorî bo %2$d MB patcherê dike hedefeke piçûktir û dikare xebatê biqedîne.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Patcher ji aliyê pergalê ve hate rawestandin dema ku bi sînorê bîrê %1$d MB dixebitî, ku ev jixwe kêmtirîn sînorê berdest e. Hewl bidin ku bi çavkaniyên patchê yên kêmtir patch bikin, an jî patchên kêmtir hilbijêrin.</string>
+    <string name="patcher_memory_adjustment_apply">Daxîne bo %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patch kirin di pêşbaziyê de ye…</string>
     <string name="patcher_notification_text">Hêla bimeşin ser patcher</string>
@@ -488,6 +516,8 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <!-- Expert patcher Screen -->
     <string name="patching_app">Dirûtîna sepanê</string>
     <string name="memory_usage">Baxê hevalê</string>
+    <string name="cpu_usage">Bikaranîna CPU</string>
+    <string name="storage_io_usage">I/O ya hilanînê</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Kêm</string>
     <string name="failed_to_execute_patch">Şeva pek dabeşin %s</string>
@@ -495,9 +525,12 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="patched_app_save_failed_toast">Hate parastina sepeya patch kirî</string>
     <string name="plugin_activity_dialog_body">Bixweştana mêz rêk û pê dei bilinge da pêşbaziyê bi zaniye vê plugin you bo lazmî bîye se</string>
     <string name="patcher_process_exit_message">Prosesa guheztinê bi kodê %s xilas bû.</string>
+    <string name="patcher_heap_exhausted_message">Bîra patcherê bi heapê %1$d MB jî têr nekir. Ev sepan ji bo patchên hilbijartî pir mezin e. Hewl bidin ku bi çavkaniyên patchan ên kêmtir patch bikin, an patchên kêmtir hilbijêrin.</string>
     <string name="install_app_success">Bi ser ketin</string>
     <string name="install_app_fail">Serketina kuştina sepanê: %s</string>
     <string name="uninstall_app_fail">Serêxistina rakirina sepanê têk çû: %s</string>
+    <string name="uninstall_app_unverified">Li cîh hiştin: Morphe nikaribû verast bike ku sepana sazkirî ew guhertoya ku ew patch kiriye ye.</string>
+    <string name="launch_app_unverified">Morphe nikaribû verast bike ku sepana sazkirî ew guhertoya ku ew patch kiriye ye.</string>
     <string name="uninstall_timeout">Rakirin serbest maye</string>
     <string name="save_apk_success">APK-yê hatiye parastin</string>
     <string name="saved_app_export_failed">Serketina paşerojê ya sepanê</string>
@@ -567,8 +600,8 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="settings_appearance_greeting_phrases_subtitle">Nîşanekê bi xêrhatinê li ser mîna malê nîşan bide</string>
     <string name="settings_appearance_app_grouping">Komkirina sepanan</string>
     <string name="settings_appearance_app_grouping_description">Nîşanekê bike ku sepanan bi çavkanî an kategoriyên te kom bike, hilbijarkirina xwe jî dema ku neçalak e parastin</string>
-    <string name="settings_appearance_sort_button">Dugmeya rêberkirinê</string>
-    <string name="settings_appearance_sort_button_description">Dugmeya rêberkirinê li ser mîhengê nîşan bide</string>
+    <string name="settings_appearance_sort_button">Bişkoka rêzkirin û parzûnkirinê</string>
+    <string name="settings_appearance_sort_button_description">Bişkoka rêzkirin û parzûnkirinê li ser ekrana malê nîşan bide</string>
     <string name="settings_appearance_app_card_colors">Rengên karta sepanê</string>
     <string name="settings_appearance_app_card_colors_default">Bixweber</string>
     <string name="settings_appearance_app_card_colors_default_description">Bi her sepanê rengê paketa wê bidin</string>
@@ -1070,6 +1103,7 @@ Detay: %2$s"</string>
     <string name="version">Versiyon</string>
     <string name="patch">Dîrok</string>
     <string name="patching">Patchkirin</string>
+    <string name="patched">Patchkirî</string>
     <string name="repatch">Sererêxane</string>
     <string name="open">Veşêre</string>
     <string name="mount">Çêkirin</string>

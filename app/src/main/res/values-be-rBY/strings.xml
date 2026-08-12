@@ -36,7 +36,6 @@
     <string name="home_update_success_subtitle">Вашы крыніцы абноўлены</string>
     <string name="home_sources_are_loading">Крыніцы загружаюцца, калі ласка, пачакайце…</string>
     <string name="home_search_apps">Пошук праграм</string>
-    <string name="home_app_sort_title">Сартаванне праграм</string>
     <string name="home_app_sort_manual_description">Націсніце і ўтрымлівайце праграму, затым націсніце кнопку перастаноўкі</string>
     <string name="home_app_sort_recommended">Рэкамендаваны парадак</string>
     <string name="home_app_sort_recommended_description">Спачатку ўсталяваныя і прышпіленыя праграмы</string>
@@ -110,10 +109,100 @@
     <string name="sources_sort_last_updated">Апошняе абнаўленне</string>
     <string name="sources_sort_last_updated_description">Спачатку апошнія абнаўленні крыніц</string>
     <string name="sources_sort_enabled_first">Спачатку уключаныя</string>
+    <string name="sources_sort_enabled_first_description">Паказваць актыўныя крыніцы перад адключанымі</string>
+    <string name="sources_management_open_in_browser">Адкрыць у браўзеры</string>
+    <string name="sources_management_failed_to_open_url">Не ўдалося адкрыць URL</string>
+    <string name="sources_management_prerelease_toggle">Перадвыпускныя патчы</string>
+    <string name="sources_management_prerelease_toggle_description">Атрымлівае ранні доступ да новых эксперыментальных версій патчаў</string>
+    <string name="sources_management_experimental_versions_toggle">Эксперыментальныя версіі праграмы</string>
+    <string name="sources_management_experimental_versions_toggle_description">Патч эксперыментальных мэтавых параметраў праграмы, калі яны даступны</string>
+    <string name="sources_management_already_exists">Гэтая крыніца ўжо дададзены</string>
+    <string name="sources_management_invalid_url">Няправільны URL крыніцы. Калі ласка, праверце адрас і паспрабуйце зноў</string>
+    <string name="sources_management_blocked">Гэтая крыніца патча заблакавана і не можа быць дададзена.</string>
+    <string name="sources_management_source_blocked_badge">Заблакавана</string>
+    <string name="sources_management_metadata_unavailable">Метаданыя недаступны</string>
+    <string name="sources_management_metadata_unavailable_hint">Знешні файл метаданых недаступны. Прымяненне патча да ўсталяванага пакета па-ранейшаму працуе, але аўтаматычныя абнаўленні для гэтай крыніцы адключаны</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Не ўдалося спампаваць пакет патчаў. Магчыма, URL-адрас крыніцы няправільны або файл не існуе</string>
+    <string name="sources_management_outdated_manager_badge">Абнавіць Morphe</string>
+    <string name="sources_management_outdated_manager_hint">Гэтая крыніца створана для патчара %1$s, але Morphe %2$s уключае патчар %3$s. Абнавіце Morphe, каб выкарыстоўваць яе</string>
+    <string name="sources_management_source_enabled">Крыніца ўключана</string>
+    <string name="sources_management_source_disabled">Крыніца адключана</string>
+    <string name="sources_management_source_updating">Абнаўленне крыніцы</string>
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_dialog_display_name">Адлюстраванае iмя</string>
+    <string name="sources_dialog_rename">Перайменаваць крыніцу патча</string>
+    <string name="sources_dialog_duplicate_name_error">Крыніца патча з такой назвай ужо існуе</string>
+    <string name="sources_dialog_missing_error">Не ўдалося абнавіць гэтую крыніцу патча</string>
+    <string name="sources_dialog_view_any_version">Любая версія</string>
+    <string name="sources_dialog_view_any_package">Любы пакет</string>
+    <string name="sources_dialog_add_source">Дадаць крыніцу патча</string>
+    <string name="sources_dialog_delete_confirm_message">Выдаліць крыніцу \"%s\"? Гэтага нельга будзе адмяніць</string>
+    <string name="sources_dialog_remote">Знешні</string>
+    <string name="sources_dialog_remote_url">URL крыніцы</string>
+    <string name="sources_dialog_remote_url_formats_title">Прыклады:</string>
+    <string name="sources_dialog_local">Лакальны</string>
+    <string name="sources_dialog_local_file">Выберыце файл крыніцы патча</string>
+    <string name="sources_dialog_local_file_tap_hint">Націсніце, каб прагледзець сховішча</string>
+    <string name="sources_dialog_local_file_description">Выберыце файл крыніцы патча .mpp з сховішча</string>
+    <string name="sources_dialog_local_invalid_extension">Файл павінен мець пашырэнне .mpp</string>
+    <string name="sources_dialog_url_valid">Дзейны рэпазіторый або JSON URL</string>
+    <string name="sources_dialog_url_invalid">URL павінен паказваць на рэпазіторый GitHub/GitLab або файл .json</string>
+    <string name="sources_dialog_local_change_file">Змяніць файл</string>
+    <string name="sources_dialog_preinstalled">Папярэдне ўсталяваны</string>
+    <string name="sources_update_success">Паспяхова абноўлена</string>
+    <string name="sources_update_unavailable">Абнаўленняў няма</string>
+    <string name="sources_download_fail">Не ўдалася спампоўка крыніц: %s</string>
+    <string name="sources_download_fail_named">Абнаўленне \'%s\' не ўдалося. Праверце злучэнне з інтэрнэтам і паспрабуйце зноў</string>
+    <string name="sources_download_endpoint_not_found">У \"%s\" не знойдзена метаданых патча</string>
+    <string name="sources_patch_expert_badge">Эксперт</string>
+    <string name="sources_patch_expert_badge_tooltip">Уключыце рэжым эксперта ў наладах, каб уручную дадаць гэты патч</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
+    <string name="home_apk_availability_dialog_title">Патрэбна дапамога з пошукам арыгінальнага APK?</string>
+    <string name="home_apk_availability_dialog_simple">Каб прапатчыць &lt;b&gt;%s&lt;/b&gt;, вам спатрэбіцца арыгінальны APK наступнай версіі:</string>
+    <string name="home_apk_availability_dialog_expert">Каб прапатчыць &lt;b&gt;%s&lt;/b&gt;, вам спатрэбіцца арыгінальны APK наступных версій:</string>
+    <string name="home_apk_availability_recommended_label">Рэкамендаваны</string>
+    <string name="home_apk_availability_unpatched_label">Без патчаў</string>
+    <string name="home_apk_availability_incompatible_label">Несумяшчальны</string>
+    <string name="home_apk_availability_yes">Так, дапамажы мне знайсці APK</string>
+    <string name="home_apk_availability_no">Не, у мяне ўжо ёсць APK</string>
+    <string name="home_apk_helper_download">Выкарыстоўваць дапаможную праграму</string>
+    <string name="home_apk_helper_title">Спампаваць з дапаможнай праграмай</string>
+    <string name="home_apk_helper_description">Morphe папросіць дапаможную праграму ніжэй спампаваць арыгінальны APK і вярнуць файл</string>
+    <string name="home_apk_helper_continue">Адкрыць дапаможную праграму</string>
+    <string name="home_apk_helper_warning">Працягвайце толькі ў тым выпадку, калі вы давяраеце гэтай дапаможнай праграме. Morphe правярае пакет, версію і подпіс атрыманых даных перад патчынгам</string>
+    <string name="home_apk_helper_warning_unverified">Працягвайце толькі ў тым выпадку, калі вы давяраеце гэтай дапаможнай праграме. Morphe не можа праверыць подпіс гэтага APK, таму прапатчаны файл не будзе выяўлены</string>
+    <string name="home_apk_helper_no_result">Дапаможная праграма не вярнула APK</string>
+    <string name="home_apk_helper_no_access">Дапаможная праграма не дала доступу да APK, які яна вярнула</string>
+    <string name="home_apk_helper_no_package">Дапаможная праграма не пазначыла, якую з усталяваных праграм трэба выкарыстоўваць</string>
+    <string name="home_apk_helper_wrong_package">Дапаможная праграма вярнула іншую праграму, чым тую, якую патчыла</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe не змог выкарыстоўваць усталяваную праграму</string>
+    <string name="home_apk_helper_installed_incompatible">Усталяваную версію немагчыма прапатчыць</string>
+    <string name="home_apk_use_saved">Выкарыстоўваць захаваны APK</string>
+    <string name="home_apk_use_installed">Выкарыстоўваць усталяваны APK</string>
+    <string name="home_apk_use_installed_unverified">Не ўдалося праверыць подпіс усталяванай праграмы, таму яна, магчыма, ужо прапатчана</string>
+    <string name="home_app_info_no_saved_apk">APK не захаваны. Для абнаўлення спатрэбіцца зноў выбраць файл APK</string>
+    <string name="home_version_requires_android">Патрабуецца Android %s+</string>
+    <string name="home_apk_no_compatible_versions_title">Не падтрымліваецца на гэтай прыладзе</string>
+    <string name="home_apk_no_compatible_versions_message">Для &lt;b&gt;%1$s&lt;/b&gt; няма падтрымліваемых версій Android %2$s (API %3$s). Усе заяўленыя версіі патрабуюць больш новай версіі Android</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
+    <string name="home_download_instructions_title">Спампаваць арыгінальны APK</string>
+    <string name="home_download_instructions_steps_title">Інструкцыі:</string>
+    <string name="home_download_instructions_step1">Націсніце кнопку \'%s\' ніжэй</string>
+    <string name="home_download_instructions_step2_part1">Пракруціце старонку ўніз і націсніце</string>
+    <string name="home_download_instructions_download_button_toast">Націсніце \"Спампаваць\" на сайце, а не тут 😊</string>
+    <string name="home_download_instructions_download_button_toast_2">Выдатна! Цяпер націсніце \"Працягнуць\" і перайдзіце на вэб-сайт 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Трэніроўкі робяць сваю справу, і ў цябе атрымліваецца 💪</string>
+    <string name="home_download_instructions_download_button_toast_4">Усё яшчэ не тут… усё яшчэ не тут… 🙈</string>
+    <string name="home_download_instructions_download_button_toast_5">Добра, я паважаю адданасць 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">Вы цяпер афіцыйны тэстар кнопкі Morphe 🏅</string>
+    <string name="home_download_instructions_step3">Дачакайцеся завяршэння спампоўкі і &lt;b&gt;не ўсталёўвайце&lt;/b&gt; APK</string>
+    <string name="home_download_instructions_step3_mount">Дачакайцеся завяршэння спампоўкі, затым &lt;b&gt;усталюйце APK&lt;/b&gt;</string>
+    <string name="home_download_instructions_step4">Пасля завяршэння спампоўкі вярніцеся да Morphe</string>
+    <string name="home_download_instructions_step4_mount">Пасля ўсталявання арыгінальнага APK, вярніцеся да Morphe</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
+    <string name="home_file_picker_prompt_title">Выберыце спампаваны APK</string>
+    <string name="home_file_picker_prompt_description">Выберыце &lt;b&gt;%s&lt;/b&gt; файл APK, які вы толькі што спампавалі</string>
+    <string name="home_file_picker_prompt_open_apk">Адкрыць APK-файл</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <!-- Home Screen - Home Sub-Dialogs -->
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
@@ -127,6 +216,7 @@
     <!-- Patcher Screen -->
     <!-- Patcher Screen - Patcher Steps -->
     <!-- Battery optimization pre-flight dialog -->
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <!-- Patcher Screen - Patcher Messages -->
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->

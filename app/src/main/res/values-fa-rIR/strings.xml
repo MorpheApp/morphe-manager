@@ -94,7 +94,6 @@
     <string name="home_download_instructions_step3_mount">صبر کنید تا دانلود کامل شود، سپس &lt;b&gt;APK را نصب کنید&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">پس از پایان دانلود، به Morphe بازگردید</string>
     <string name="home_download_instructions_step4_mount">پس از نصب APK اصلی، به Morphe بازگردید</string>
-    <string name="home_download_instructions_continue">ادامه در APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">انتخاب APK دانلود شده</string>
     <string name="home_file_picker_prompt_description">انتخاب &lt;b&gt;%s&lt;/b&gt; فایل APK که همین الان دانلود کردی</string>
@@ -177,6 +176,7 @@
     <!-- Patcher Screen -->
     <!-- Patcher Screen - Patcher Steps -->
     <!-- Battery optimization pre-flight dialog -->
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <!-- Patcher Screen - Patcher Messages -->
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->

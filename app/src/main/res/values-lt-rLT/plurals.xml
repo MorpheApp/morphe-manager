@@ -48,12 +48,6 @@
         <item quantity="many">%s šaltiniai įdiegti</item>
         <item quantity="other">%s šaltiniai įdiegti</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s pataisa pasirinkta</item>
-        <item quantity="few">%s pataisos pasirinktos</item>
-        <item quantity="many">%s pataisos pasirinktos</item>
-        <item quantity="other">%s pataisos pasirinktos</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s paslėpta programėlė</item>
         <item quantity="few">%s paslėptos programos</item>

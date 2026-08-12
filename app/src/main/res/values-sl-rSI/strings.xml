@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Ostale aplikacije</string>
     <string name="home_not_patched_yet">Še ni popravljeno</string>
+    <string name="home_unpatched_version_installed">Nameščena je nepopravljena različica</string>
     <string name="home_no_patches_available">Na voljo ni nobenih popravkov</string>
     <string name="home_app_hide_title">Skrijem to aplikacijo?</string>
     <string name="home_app_hide_message">Ta aplikacija bo skrita iz začetnega zaslona. Lahko jo obnovite pozneje iz skritih aplikacij s klikom na gumb na dnu seznama.</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">Viri so posodobljeni</string>
     <string name="home_sources_are_loading">Viri se nalagajo, počakajte…</string>
     <string name="home_search_apps">Poišči aplikacije</string>
-    <string name="home_app_sort_title">Razvrsti aplikacije</string>
+    <string name="home_app_list_options_title">Razvrščanje in filtriranje</string>
+    <string name="home_app_list_options_state_description">Razvrščeno po %1$s, filtrirano po %2$s</string>
+    <string name="home_app_filter_all_description">Vse aplikacije na domačem zaslonu</string>
+    <string name="home_app_filter_patched_description">Aplikacije, ki ste jih zakrpali ali shranili z Morphe</string>
+    <string name="home_app_filter_not_patched_description">Aplikacije, ki jih v Morphe še niste zakrpali</string>
+    <string name="home_app_filter_installed_description">Aplikacije, trenutno nameščene na tej napravi</string>
+    <string name="home_app_filter_uninstalled_description">Aplikacije, popravljene z Morphe, ki niso več na tej napravi</string>
     <string name="home_app_sort_manual_description">Dolgo pritisnite aplikacijo, nato tapnite gumb za ponovno razvrstitev</string>
     <string name="home_app_sort_recommended">Priporočen vrstni red</string>
     <string name="home_app_sort_recommended_description">Nameščene in pripete aplikacije naj bodo prve</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">Nobena aplikacija se ne ujema z \"%s\"</string>
     <string name="home_all_apps_hidden_title">Vse aplikacije so skrite</string>
     <string name="home_all_apps_hidden_subtitle">Skrili ste vse aplikacije z začetnega zaslona</string>
+    <string name="home_no_apps_filter_title">Nobena aplikacija ne ustreza temu filtru</string>
+    <string name="home_no_apps_filter_subtitle">Nič ni ustrezalo %s</string>
     <string name="home_category_add">Dodaj kategorijo</string>
     <string name="home_category_all_apps">Vse aplikacije</string>
     <string name="home_category_custom">Prilagoditve</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">Nočni in produktivni</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Popravi vire</string>
+    <string name="sources_search">Preišči vire</string>
     <string name="sources_sort_title">Sortiraj vire popravkov</string>
     <string name="sources_sort_manual">Ročno urejanje</string>
     <string name="sources_sort_manual_hint">Dolgo pritisnite vir, da ga ponovno uredite</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">Nadaljuj samo, če zaupaš temu pomožnemu programu. Morphe ne more preveriti podpisa tega APK-ja, zato spremenjena datoteka ne bi bila zaznana.</string>
     <string name="home_apk_helper_no_result">Pomožni program ni vrnil APK-ja</string>
     <string name="home_apk_helper_no_access">Pomožni program ni odobril dostopa do APK-ja, ki ga je vrnil</string>
+    <string name="home_apk_helper_no_package">Pomožna aplikacija ni povedala, katero nameščeno aplikacijo uporabiti.</string>
+    <string name="home_apk_helper_wrong_package">Pomožna aplikacija je vrnila drugo aplikacijo, kot je tista, ki se popravlja.</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe ni mogel uporabiti nameščene aplikacije.</string>
+    <string name="home_apk_helper_installed_incompatible">Nameščene različice ni mogoče popraviti.</string>
     <string name="home_apk_use_saved">Uporabite shranjen APK</string>
     <string name="home_apk_use_installed">Uporabite nameščen APK</string>
     <string name="home_apk_use_installed_unverified">Ni je bilo mogoče preveriti podpis nameščenega programa, zato je morda že spremenjen.</string>
+    <string name="home_unverified">Nepotrjeno</string>
+    <string name="home_app_info_install_unverified">Morphe ne more potrditi, da je nameščena aplikacija graditev, ki jo je zakrpala. Znova jo namestite iz shranjene datoteke APK, da obnovite njeno delovanje.</string>
     <string name="home_app_info_no_saved_apk">Ni shranjenega APK. Popravilo bo zahtevalo ponovno izbiro datoteke APK.</string>
     <string name="home_version_requires_android">Zahteva Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ni podprto na tej napravi</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Prenesi izvirni APK</string>
     <string name="home_download_instructions_steps_title">Navodila:</string>
+    <string name="home_download_instructions_finding">Iskanje strani za prenos…</string>
     <string name="home_download_instructions_step1">Pritisnite gumb \"%s\" spodaj</string>
     <string name="home_download_instructions_step2_part1">Podrsajte po spletni strani navzdol in pritisni</string>
+    <string name="home_download_instructions_step2_generic">Pomaknite se navzdol po spletni strani in pritisnite njen gumb za prenos</string>
+    <string name="home_download_instructions_step2_variant">Pomaknite se navzdol po spletni strani in pritisnite gumb za prenos zgornje &lt;b&gt;različice APK&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_search">Odprite rezultat iskanja s spletne strani, ki ji zaupate</string>
+    <string name="home_download_instructions_step2_search_note">Morphe ne more jamčiti za te spletne strani. Preskočite tiste, ki ponujajo svojo trgovino z aplikacijami namesto datoteke APK</string>
+    <string name="home_download_instructions_step3_search">Na tisti spletni strani prenesite APK različice &lt;b&gt;%s&lt;/b&gt;, ne najnovejše</string>
+    <string name="home_download_instructions_step3_search_any">Na tisti spletni strani prenesite APK aplikacije. &lt;b&gt;Katero koli različico&lt;/b&gt; je mogoče zakrpati</string>
     <string name="home_download_instructions_download_button_toast">Pritisnite na gumb za prenos na spletni strani, ne tukaj 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Super! Sedaj kliknite na gumb \"nadaljuj\" spodaj in obiščite spletno stran 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Vaja dela mojstra, skoraj ste že tam 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">Počakaj, da se prenos konča, nato &lt;b&gt;namestite APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Po končanem prenosu se vrnite v Morphe</string>
     <string name="home_download_instructions_step4_mount">Po namestitvi izvirnega APK se vrnite v Morphe</string>
-    <string name="home_download_instructions_continue">Nadaljuj na APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Nadaljujte na %s</string>
+    <string name="home_download_instructions_destination">stran za prenos</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Izberite prenesen APK</string>
     <string name="home_file_picker_prompt_description">Izberite datoteko &lt;b&gt;%s&lt;/b&gt; APK, ki ste jo pravkar prenesli</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">Vsi popravke so onemogočeni</string>
     <string name="expert_mode_enable_all">Omogoči vse</string>
     <string name="expert_mode_enable_all_done">Vsi popravki so omogočeni</string>
+    <string name="expert_mode_enable_all_universal_pending">Ponovno se dotaknite za univerzalne popravke.</string>
     <string name="expert_mode_reset_to_default">Omogoči priporočene popravke</string>
     <string name="expert_mode_reset_to_default_done">Uporabljeni priporočeni popravki</string>
     <string name="expert_mode_restore_saved">Obnovi izbrano izbiro</string>
@@ -385,6 +410,7 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <string name="home_app_info_patch_update_available_description">Na voljo je novejša različica popravkov. Popravite svojo aplikacijo, da pridobite najnovejše izboljšave in popravke.</string>
     <string name="home_app_info_app_deleted_warning">Aplikacija je bila odstranjena</string>
     <string name="home_app_info_app_deleted_description">Ta aplikacija je bila odstranjena izven aplikacije Morphe. Ponovno jo popravite, da obnovite funkcionalnost</string>
+    <string name="home_app_info_not_patched_description">Nameščena je nepopravljena različica te aplikacije. Morphe še vedno ima svoj prejšnji zapis o popravku.</string>
     <string name="home_app_info_apk_size">Velikost APK</string>
     <string name="home_app_info_cpu_arch">CPU arhitektura</string>
     <!-- Home Screen - Root Mode -->
@@ -456,6 +482,11 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="battery_optimization_dialog_title">Zaščita popravljanja v ozadju</string>
     <string name="battery_optimization_dialog_description">Nekatere naprave lahko ustavijo popravek, ko je aplikacija minimizirana. Dovolite programu Morphe, da se izvaja brez omejitev baterije, da zagotovite zanesljivo dokončanje popravljanja.</string>
     <string name="battery_optimization_not_now">Pozneje</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Ni dovolj pomnilnika</string>
+    <string name="patcher_memory_adjustment_description">Sistem je ustavil patcher, ko je ta deloval z omejitvijo pomnilnika %1$d MB. Znižanje omejitve na %2$d MB naredi iz patcherja manjšo tarčo in lahko omogoči, da se izvajanje zaključi.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Sistem je ustavil patcher, ko je ta deloval z omejitvijo pomnilnika %1$d MB, kar je že najnižja razpoložljiva omejitev. Poskusite krpati z manj viri popravkov ali izberite manj popravkov.</string>
+    <string name="patcher_memory_adjustment_apply">Znižaj na %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Popravljanje v teku …</string>
     <string name="patcher_notification_text">Dotaknite se, da se vrnete k popravilu</string>
@@ -490,6 +521,8 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Popravljanje aplikacije</string>
     <string name="memory_usage">Uporaba pomnilnika</string>
+    <string name="cpu_usage">Uporaba procesorja</string>
+    <string name="storage_io_usage">V/I shrambe</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Nanašanje popravkov</string>
     <string name="failed_to_execute_patch">Ni uspelo nanesti %s</string>
@@ -497,9 +530,12 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="patched_app_save_failed_toast">Ni uspelo shraniti popravljene aplikacije</string>
     <string name="plugin_activity_dialog_body">Za nadaljevanje s tem dodatkom je potrebna uporabniško sodelovanje.</string>
     <string name="patcher_process_exit_message">Postopek popravljanja se je končal s kodo %s</string>
+    <string name="patcher_heap_exhausted_message">Patcherju je zmanjkalo pomnilnika s kopico velikosti %1$d MB. Ta aplikacija je prevelika za izbrane popravke. Poskusite uporabiti manj virov popravkov ali izberite manj popravkov.</string>
     <string name="install_app_success">Namestitev je uspela</string>
     <string name="install_app_fail">Ni uspelo namestiti aplikacije: %s</string>
     <string name="uninstall_app_fail">Neuspelo odstranjevanje aplikacije: %s</string>
+    <string name="uninstall_app_unverified">Pustite na mestu: Morphe ni mogel potrditi, da je nameščena aplikacija graditev, ki jo je zakrpala.</string>
+    <string name="launch_app_unverified">Morphe ni mogel potrditi, da je nameščena aplikacija graditev, ki jo je zakrpala.</string>
     <string name="uninstall_timeout">Čas za odstranitev je iztekel</string>
     <string name="save_apk_success">APK shranjen</string>
     <string name="saved_app_export_failed">Ni uspelo izvoziti popravljene aplikacije</string>
@@ -569,8 +605,8 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Prikaži pozdravno sporočilo na začetnem zaslonu</string>
     <string name="settings_appearance_app_grouping">Grupiranje aplikacij</string>
     <string name="settings_appearance_app_grouping_description">Prikaži stikalo na začetnem zaslonu za grupiranje aplikacij po izvoru ali lastnih kategorijah, obdrži izbor, ko je izklopljeno</string>
-    <string name="settings_appearance_sort_button">Gumb za razvrščanje</string>
-    <string name="settings_appearance_sort_button_description">Prikaži gumb za razvrščanje na začetnem zaslonu</string>
+    <string name="settings_appearance_sort_button">Gumb za razvrščanje in filtriranje</string>
+    <string name="settings_appearance_sort_button_description">Prikaži gumb za razvrščanje in filtriranje na začetnem zaslonu</string>
     <string name="settings_appearance_app_card_colors">Barve kartic aplikacij</string>
     <string name="settings_appearance_app_card_colors_default">Privzeto</string>
     <string name="settings_appearance_app_card_colors_default_description">Daj vsaki aplikaciji barvo njenega paketa</string>
@@ -1072,6 +1108,7 @@ Podrobnosti: %2$s"</string>
     <string name="version">Različica</string>
     <string name="patch">Popravi</string>
     <string name="patching">Popravljanje</string>
+    <string name="patched">Popravljeno</string>
     <string name="repatch">Ponovno popravi</string>
     <string name="open">Odpri</string>
     <string name="mount">Montiraj</string>

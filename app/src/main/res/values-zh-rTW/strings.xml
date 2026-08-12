@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">其他應用程式</string>
     <string name="home_not_patched_yet">尚未修補</string>
+    <string name="home_unpatched_version_installed">已安裝未修補版本</string>
     <string name="home_no_patches_available">沒有可用的修補程式</string>
     <string name="home_app_hide_title">要隱藏這個應用程式嗎？</string>
     <string name="home_app_hide_message">此應用程式將從主螢幕隱藏。您之後可以在 [隱藏的應用程式] 中，使用清單底部的按鈕將其還原</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">來源已是最新狀態</string>
     <string name="home_sources_are_loading">正在載入來源，請稍候…</string>
     <string name="home_search_apps">搜尋應用程式</string>
-    <string name="home_app_sort_title">排序應用程式</string>
+    <string name="home_app_list_options_title">排序與篩選</string>
+    <string name="home_app_list_options_state_description">依 %1$s 排序，依 %2$s 篩選</string>
+    <string name="home_app_filter_all_description">主畫面上的每個應用程式</string>
+    <string name="home_app_filter_patched_description">您已使用 Morphe 修補或儲存的應用程式</string>
+    <string name="home_app_filter_not_patched_description">您尚未在 Morphe 中修補的應用程式</string>
+    <string name="home_app_filter_installed_description">目前安裝在此裝置上的應用程式</string>
+    <string name="home_app_filter_uninstalled_description">已使用 Morphe 修補但已不在這部裝置上的應用程式</string>
     <string name="home_app_sort_manual_description">長按應用程式，然後點選重新排序按鈕</string>
     <string name="home_app_sort_recommended">推薦順序</string>
     <string name="home_app_sort_recommended_description">優先顯示已安裝和固定應用程式</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">沒有符合「%s」的應用程式</string>
     <string name="home_all_apps_hidden_title">所有應用程式皆已隱藏</string>
     <string name="home_all_apps_hidden_subtitle">您已從主畫面隱藏所有應用程式</string>
+    <string name="home_no_apps_filter_title">沒有符合此篩選條件的應用程式</string>
+    <string name="home_no_apps_filter_subtitle">沒有符合「%s」的項目</string>
     <string name="home_category_add">新增類別</string>
     <string name="home_category_all_apps">所有應用程式</string>
     <string name="home_category_custom">自訂</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">夜間且有效率</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">修補來源</string>
+    <string name="sources_search">搜尋來源</string>
     <string name="sources_sort_title">排序修補來源</string>
     <string name="sources_sort_manual">手動排序</string>
     <string name="sources_sort_manual_hint">長按來源以重新排序</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">僅在您信任此輔助應用程式時才繼續。Morphe 無法驗證此 APK 的簽章，因此無法偵測到已修改的檔案</string>
     <string name="home_apk_helper_no_result">輔助應用程式未傳回 APK</string>
     <string name="home_apk_helper_no_access">輔助應用程式未授權存取其傳回的 APK</string>
+    <string name="home_apk_helper_no_package">輔助應用程式未指定要使用的已安裝應用程式</string>
+    <string name="home_apk_helper_wrong_package">輔助應用程式回傳了與正在修補的應用程式不同的應用程式</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe 無法使用已安裝的應用程式</string>
+    <string name="home_apk_helper_installed_incompatible">安裝的版本無法修補</string>
     <string name="home_apk_use_saved">使用已儲存的 APK</string>
     <string name="home_apk_use_installed">使用已安裝的 APK</string>
     <string name="home_apk_use_installed_unverified">無法驗證已安裝應用程式的簽名，因此可能已經被篡改</string>
+    <string name="home_unverified">未驗證</string>
+    <string name="home_app_info_install_unverified">Morphe 無法確認安裝的應用程式是它所修補的版本。請從已儲存的 APK 重新安裝，以恢復其操作。</string>
     <string name="home_app_info_no_saved_apk">沒有已儲存的 APK。修補時需要再次選取 APK 檔案</string>
     <string name="home_version_requires_android">需要 Android %s 以上版本</string>
     <string name="home_apk_no_compatible_versions_title">此裝置不支援</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">下載原始 APK</string>
     <string name="home_download_instructions_steps_title">步驟如下：</string>
+    <string name="home_download_instructions_finding">正在尋找下載頁面…</string>
     <string name="home_download_instructions_step1">請選取下方的「%s」按鈕</string>
     <string name="home_download_instructions_step2_part1">請往下滑動網頁，然後點選</string>
+    <string name="home_download_instructions_step2_generic">請往下滑動網頁，然後點選其下載按鈕</string>
+    <string name="home_download_instructions_step2_variant">請往下滑動網頁，然後點選最上方&lt;b&gt;APK 變體&lt;/b&gt;的下載按鈕</string>
+    <string name="home_download_instructions_step2_search">從您信任的網站開啟搜尋結果</string>
+    <string name="home_download_instructions_step2_search_note">Morphe 無法為這些網站擔保。請略過那些提供自家應用程式商店而不是 APK 檔案的網站</string>
+    <string name="home_download_instructions_step3_search">在該網站上，請下載版本&lt;b&gt;%s&lt;/b&gt;的 APK，而不是最新版</string>
+    <string name="home_download_instructions_step3_search_any">在該網站上，請下載該應用程式的 APK。&lt;b&gt;任何版本&lt;/b&gt;都可以修補</string>
     <string name="home_download_instructions_download_button_toast">請到網站上輕觸「下載」，不是這裡的範例按鈕 😊</string>
     <string name="home_download_instructions_download_button_toast_2">太棒了！現在點擊繼續並前往網站 👆</string>
     <string name="home_download_instructions_download_button_toast_3">熟能生巧，你快要掌握了 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">等待下載完成，然後 <b>安裝該 APK</b></string>
     <string name="home_download_instructions_step4">下載完成後，回到 Morphe</string>
     <string name="home_download_instructions_step4_mount">安裝原始 APK 後，回到 Morphe</string>
-    <string name="home_download_instructions_continue">前往 APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">繼續前往%s</string>
+    <string name="home_download_instructions_destination">下載頁面</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">選取已下載的 APK</string>
     <string name="home_file_picker_prompt_description">選取您剛才下載的 <b>%s</b> APK 檔案</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">已停用所有修補程式</string>
     <string name="expert_mode_enable_all">全部啟用</string>
     <string name="expert_mode_enable_all_done">已啟用所有修補程式</string>
+    <string name="expert_mode_enable_all_universal_pending">再點按一次以套用通用修補程式</string>
     <string name="expert_mode_reset_to_default">啟用推薦的修補程式</string>
     <string name="expert_mode_reset_to_default_done">已套用推薦的修補程式</string>
     <string name="expert_mode_restore_saved">還原儲存的選取範圍</string>
@@ -385,6 +410,7 @@
     <string name="home_app_info_patch_update_available_description">有較新版本的修補程式可用。重新修補您的應用程式以獲得最新的改進和修復</string>
     <string name="home_app_info_app_deleted_warning">應用程式已解除安裝</string>
     <string name="home_app_info_app_deleted_description">此應用程式已在 Morphe 外部被解除安裝。重新修補以還原功能</string>
+    <string name="home_app_info_not_patched_description">已安裝此應用程式的未修補版本。Morphe 仍保留其先前的修補記錄。</string>
     <string name="home_app_info_apk_size">APK 大小</string>
     <string name="home_app_info_cpu_arch">CPU 架构</string>
     <!-- Home Screen - Root Mode -->
@@ -456,6 +482,11 @@
     <string name="battery_optimization_dialog_title">背景修補保護</string>
     <string name="battery_optimization_dialog_description">部分裝置可能在應用程式縮小時停止修補程式。允許 Morphe 在沒有電池限制的情況下執行，以確保修補程式可靠完成。</string>
     <string name="battery_optimization_not_now">稍後再說</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">記憶體不足</string>
+    <string name="patcher_memory_adjustment_description">修補程式在以 %1$d MB 記憶體限制執行時被系統停止。將限制降低至 %2$d MB 可讓修補程式成為較小的目標，並可能讓執行完成。</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">修補程式在以 %1$d MB 記憶體限制執行時被系統停止，而該限制已是最低可用值。請嘗試使用較少的修補來源，或選擇較少的修補項目。</string>
+    <string name="patcher_memory_adjustment_apply">降至 %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">修補進行中…</string>
     <string name="patcher_notification_text">輕觸以返回修補程式畫面</string>
@@ -490,6 +521,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">正在修補應用程式</string>
     <string name="memory_usage">記憶體使用量</string>
+    <string name="cpu_usage">CPU 使用率</string>
+    <string name="storage_io_usage">儲存體 I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">正在套用修補程式</string>
     <string name="failed_to_execute_patch">無法套用 %s</string>
@@ -497,9 +530,12 @@
     <string name="patched_app_save_failed_toast">無法儲存修補後的應用程式</string>
     <string name="plugin_activity_dialog_body">需要使用者互動才能繼續使用此外掛程式</string>
     <string name="patcher_process_exit_message">修補程序已結束，代碼為 %s</string>
+    <string name="patcher_heap_exhausted_message">修補程式在堆積大小為 %1$d MB 時記憶體不足。此應用程式對所選的修補程式而言過大。請嘗試使用較少的修補程式來源進行修補，或選擇較少的修補程式。</string>
     <string name="install_app_success">安裝成功</string>
     <string name="install_app_fail">無法安裝應用程式：%s</string>
     <string name="uninstall_app_fail">無法解除安裝應用程式：%s</string>
+    <string name="uninstall_app_unverified">保留在原地：Morphe 無法驗證安裝的應用程式是它所修補的版本。</string>
+    <string name="launch_app_unverified">Morphe 無法驗證安裝的應用程式是它所修補的版本。</string>
     <string name="uninstall_timeout">解除安裝逾時</string>
     <string name="save_apk_success">APK 已儲存</string>
     <string name="saved_app_export_failed">無法匯出已修補的應用程式</string>
@@ -568,8 +604,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">在主螢幕上顯示問候訊息</string>
     <string name="settings_appearance_app_grouping">應用程式分組</string>
     <string name="settings_appearance_app_grouping_description">顯示主畫面切換器，以依來源或您自己的類別分組應用程式，並在關閉時保留選取內容</string>
-    <string name="settings_appearance_sort_button">排序按鈕</string>
-    <string name="settings_appearance_sort_button_description">在主螢幕上顯示排序按鈕</string>
+    <string name="settings_appearance_sort_button">排序與篩選按鈕</string>
+    <string name="settings_appearance_sort_button_description">在主畫面上顯示排序與篩選按鈕</string>
     <string name="settings_appearance_app_card_colors">應用程式卡片顏色</string>
     <string name="settings_appearance_app_card_colors_default">預設</string>
     <string name="settings_appearance_app_card_colors_default_description">讓每個應用程式都擁有其套件的顏色</string>
@@ -1069,6 +1105,7 @@ morphe_header_custom_dark.png
     <string name="version">版本</string>
     <string name="patch">修補</string>
     <string name="patching">修補中</string>
+    <string name="patched">修補時間</string>
     <string name="repatch">重新修補</string>
     <string name="open">開啟</string>
     <string name="mount">掛載</string>

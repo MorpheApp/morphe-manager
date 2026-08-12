@@ -61,8 +61,8 @@ internal data class HomeCategoryGroup(
 
 /**
  * Bucket [items] into the user's custom categories plus an uncategorized tail.
- * [ignoreCollapsed] is used by the search flow to force every group open so matches are
- * visible; when true, empty categories are also dropped from the result.
+ * [ignoreCollapsed] is used by the search and filter flows to force every group open so matches
+ * are visible; when true, empty categories are also dropped from the result.
  */
 internal fun buildHomeCategoryGroups(
     items: List<HomeAppItem>,

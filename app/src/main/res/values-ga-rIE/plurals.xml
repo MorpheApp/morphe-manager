@@ -105,13 +105,6 @@
         <item quantity="many">%s foinsí suiteáilte</item>
         <item quantity="other">%s foinsí suiteáilte</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s paiste roghnaithe</item>
-        <item quantity="two">%s paistí roghnaithe</item>
-        <item quantity="few">%s paistí roghnaithe</item>
-        <item quantity="many">%s paistí roghnaithe</item>
-        <item quantity="other">%s paistí roghnaithe</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s aip i bhfolach</item>
         <item quantity="two">%s aipeanna i bhfolach</item>

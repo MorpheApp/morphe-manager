@@ -37,6 +37,7 @@ import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.*
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 /** Snapshot of package/bundle selection counts. */
 @Immutable
@@ -303,19 +304,36 @@ private fun PatchSelectionManagementDialogContent(
         uri?.let { importExportViewModel.exportAllSelections(it) }
     }
 
+    // Nothing to narrow down with a single entry
+    val isSearchable = selections.size >= 2
+    // Hoisted out of the list so the title action can drive it
+    val search = rememberSearchFieldState(searchable = isSearchable)
+    val canResetAll = !multiSelect.isSelectionMode && selections.isNotEmpty()
+
     AppDialog(
         onDismissRequest = {
             if (multiSelect.isSelectionMode) onExitSelection() else onDismiss()
         },
         title = stringResource(R.string.settings_system_patch_selections_title),
-        titleTrailingContent = if (!multiSelect.isSelectionMode && selections.isNotEmpty()) {
+        titleTrailingContent = if (isSearchable || canResetAll) {
             {
-                DialogTitleAction(
-                    icon = Icons.Outlined.Restore,
-                    contentDescription = stringResource(R.string.reset),
-                    onClick = onShowResetAllConfirmation,
-                    style = DialogTitleActionStyle.Destructive
-                )
+                if (isSearchable) {
+                    TitleAction(
+                        icon = if (search.visible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
+                        contentDescription = stringResource(R.string.search),
+                        onClick = { search.toggle() },
+                        style = TitleActionStyle.Toggle,
+                        active = search.visible
+                    )
+                }
+                if (canResetAll) {
+                    TitleAction(
+                        icon = Icons.Outlined.Restore,
+                        contentDescription = stringResource(R.string.reset),
+                        onClick = onShowResetAllConfirmation,
+                        style = TitleActionStyle.Destructive
+                    )
+                }
             }
         } else {
             null
@@ -382,6 +400,8 @@ private fun PatchSelectionManagementDialogContent(
         padding = DialogPadding.Compact,
         contentArrangement = Arrangement.Top
     ) {
+        SearchFieldBackHandler(search)
+
         if (selections.isEmpty()) {
             EmptyState(message = stringResource(R.string.settings_system_no_patches_or_options))
         } else {
@@ -390,6 +410,7 @@ private fun PatchSelectionManagementDialogContent(
                 multiSelect = multiSelect,
                 settingsViewModel = settingsViewModel,
                 importExportViewModel = importExportViewModel,
+                search = search,
                 onSetResetTarget = onSetResetTarget,
                 onShowPatchDetails = onShowPatchDetails,
                 onOpenCopyFromBundle = onOpenCopyFromBundle,
@@ -408,6 +429,7 @@ private fun SelectionList(
     multiSelect: PatchSelectionMultiSelect,
     settingsViewModel: SettingsViewModel,
     importExportViewModel: ImportExportViewModel,
+    search: SearchFieldState,
     onSetResetTarget: (ResetTarget) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit,
     onOpenCopyFromBundle: (CopyTarget) -> Unit,
@@ -416,12 +438,51 @@ private fun SelectionList(
     val selections = data.selections
     val listState = rememberLazyListState()
     val expandedPackages = remember { mutableStateOf<Set<String>>(emptySet()) }
+
+    // Resolved here rather than per row: the list sorts by these names, and each row would
+    // otherwise repeat the same lookup. Falls back to the package name while one is in flight.
+    val resolvedApps = remember(selections) {
+        mutableStateMapOf<String, Pair<String, AppDataSource>>()
+    }
+    LaunchedEffect(selections) {
+        resolvedApps.clear()
+        selections.keys.forEach { packageName ->
+            launch { resolvedApps[packageName] = settingsViewModel.resolveAppDisplayName(packageName) }
+        }
+    }
+
+    // Derived so the list re-filters and re-sorts as display names finish resolving
+    val displayEntries by remember(selections) {
+        derivedStateOf {
+            val query = search.query
+            val displayNameOf = { packageName: String ->
+                resolvedApps[packageName]?.first ?: packageName
+            }
+            selections.entries
+                .filter { (packageName, _) ->
+                    query.isBlank() ||
+                        packageName.contains(query, ignoreCase = true) ||
+                        displayNameOf(packageName).contains(query, ignoreCase = true)
+                }
+                .sortedBy { (packageName, _) -> displayNameOf(packageName).lowercase(Locale.ROOT) }
+        }
+    }
+
     Box(modifier = Modifier.fillMaxWidth()) {
         LazyColumn(
             state = listState,
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
         ) {
+            stickyHeader(key = "search") {
+                AppDialogSearchHeader(
+                    visible = search.visible,
+                    value = search.query,
+                    onValueChange = { search.query = it },
+                    label = stringResource(R.string.home_search_apps)
+                )
+            }
+
             // Summary box
             item(key = "summary") {
                 HeroInfoCard(
@@ -434,7 +495,7 @@ private fun SelectionList(
                     subtitle = {
                         Text(
                             text = pluralStringResource(
-                                R.plurals.patch_selection_total_patches,
+                                R.plurals.patch_count,
                                 data.totalSelections,
                                 data.totalSelections
                             ),
@@ -445,39 +506,52 @@ private fun SelectionList(
                 )
             }
 
-            // List of packages with selections
-            items(
-                items = selections.entries.toList(),
-                key = { it.key }
-            ) { (packageName, bundleMap) ->
-                PackageSelectionItem(
-                    packageName = packageName,
-                    bundleMap = bundleMap,
-                    bundleNames = data.bundleNames,
-                    settingsViewModel = settingsViewModel,
-                    importExportViewModel = importExportViewModel,
-                    onResetPackage = {
-                        onSetResetTarget(ResetTarget.Package(packageName))
-                    },
-                    onResetPackageBundle = { bundleUid ->
-                        onSetResetTarget(ResetTarget.PackageBundle(packageName, bundleUid))
-                    },
-                    onShowPatchDetails = onShowPatchDetails,
-                    onOpenCopyFromBundle = onOpenCopyFromBundle,
-                    onImport = onImport,
-                    isSelected = multiSelect.selectedPackages.contains(packageName),
-                    isSelectionMode = multiSelect.isSelectionMode,
-                    onEnterSelection = { multiSelect.onEnterSelection(packageName) },
-                    onToggleSelection = { multiSelect.onToggleSelection(packageName) },
-                    expanded = packageName in expandedPackages.value,
-                    onToggleExpanded = {
-                        expandedPackages.value = if (packageName in expandedPackages.value) {
-                            expandedPackages.value - packageName
-                        } else {
-                            expandedPackages.value + packageName
+            if (displayEntries.isEmpty()) {
+                // No matches for the current search query
+                item(key = "search_empty") {
+                    EmptyState(
+                        message = stringResource(R.string.search_no_results),
+                        icon = Icons.Outlined.SearchOff
+                    )
+                }
+            } else {
+                // List of packages with selections
+                items(
+                    items = displayEntries,
+                    key = { it.key }
+                ) { (packageName, bundleMap) ->
+                    val (displayName, appDataSource) = resolvedApps[packageName]
+                        ?: (packageName to AppDataSource.INSTALLED)
+                    PackageSelectionItem(
+                        packageName = packageName,
+                        displayName = displayName,
+                        appDataSource = appDataSource,
+                        bundleMap = bundleMap,
+                        bundleNames = data.bundleNames,
+                        importExportViewModel = importExportViewModel,
+                        onResetPackage = {
+                            onSetResetTarget(ResetTarget.Package(packageName))
+                        },
+                        onResetPackageBundle = { bundleUid ->
+                            onSetResetTarget(ResetTarget.PackageBundle(packageName, bundleUid))
+                        },
+                        onShowPatchDetails = onShowPatchDetails,
+                        onOpenCopyFromBundle = onOpenCopyFromBundle,
+                        onImport = onImport,
+                        isSelected = multiSelect.selectedPackages.contains(packageName),
+                        isSelectionMode = multiSelect.isSelectionMode,
+                        onEnterSelection = { multiSelect.onEnterSelection(packageName) },
+                        onToggleSelection = { multiSelect.onToggleSelection(packageName) },
+                        expanded = packageName in expandedPackages.value,
+                        onToggleExpanded = {
+                            expandedPackages.value = if (packageName in expandedPackages.value) {
+                                expandedPackages.value - packageName
+                            } else {
+                                expandedPackages.value + packageName
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
 
@@ -499,9 +573,10 @@ private fun SelectionList(
 @Composable
 private fun PackageSelectionItem(
     packageName: String,
+    displayName: String,
+    appDataSource: AppDataSource,
     bundleMap: Map<Int, Int>,
     bundleNames: Map<Int, String>,
-    settingsViewModel: SettingsViewModel,
     importExportViewModel: ImportExportViewModel,
     onResetPackage: () -> Unit,
     onResetPackageBundle: (Int) -> Unit,
@@ -515,16 +590,7 @@ private fun PackageSelectionItem(
     expanded: Boolean,
     onToggleExpanded: () -> Unit
 ) {
-    var displayName by remember { mutableStateOf(packageName) }
-    var appDataSource by remember { mutableStateOf(AppDataSource.INSTALLED) }
     val view = LocalView.current
-
-    // Resolve app name and source
-    LaunchedEffect(packageName) {
-        val (name, source) = settingsViewModel.resolveAppDisplayName(packageName)
-        displayName = name
-        appDataSource = source
-    }
 
     val totalPatches = remember(bundleMap) { bundleMap.values.sum() }
     // In selection mode force cards closed so nested bundle taps do not race with tap-to-toggle

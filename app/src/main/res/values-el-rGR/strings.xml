@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Άλλες εφαρμογές</string>
     <string name="home_not_patched_yet">Δεν τροποποιήθηκε ακόμη</string>
+    <string name="home_unpatched_version_installed">Εγκαταστάθηκε μη ενημερωμένη έκδοση</string>
     <string name="home_no_patches_available">Δεν υπάρχουν διαθέσιμες τροποποιήσεις</string>
     <string name="home_app_hide_title"> Απόκρυψη αυτής της εφαρμογής;</string>
     <string name="home_app_hide_message">Αυτή η εφαρμογή θα αποκρυφθεί από την αρχική οθόνη. Μπορείτε να την επαναφέρετε αργότερα από τις κρυφές εφαρμογές χρησιμοποιώντας το κουμπί στο κάτω μέρος της λίστας</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">Οι πηγές σας είναι ενημερωμένες</string>
     <string name="home_sources_are_loading">Οι πηγές φορτώνονται, παρακαλώ περιμένετε…</string>
     <string name="home_search_apps">Αναζήτηση εφαρμογών</string>
-    <string name="home_app_sort_title">Ταξινόμηση εφαρμογών</string>
+    <string name="home_app_list_options_title">Ταξινόμηση και φιλτράρισμα</string>
+    <string name="home_app_list_options_state_description">Ταξινομημένες κατά %1$s, φιλτραρισμένες κατά %2$s</string>
+    <string name="home_app_filter_all_description">Κάθε εφαρμογή στην αρχική οθόνη</string>
+    <string name="home_app_filter_patched_description">Εφαρμογές που έχετε επιδιορθώσει ή αποθηκεύσει με το Morphe</string>
+    <string name="home_app_filter_not_patched_description">Εφαρμογές που δεν έχετε επιδιορθώσει ακόμα στο Morphe</string>
+    <string name="home_app_filter_installed_description">Εφαρμογές που είναι εγκατεστημένες αυτήν τη στιγμή σε αυτήν τη συσκευή</string>
+    <string name="home_app_filter_uninstalled_description">Εφαρμογές που έχουν επιδιορθωθεί με το Morphe και δεν βρίσκονται πλέον σε αυτήν τη συσκευή</string>
     <string name="home_app_sort_manual_description">Πατήστε παρατεταμένα μια εφαρμογή, στη συνέχεια πατήστε το κουμπί αναδιάταξης</string>
     <string name="home_app_sort_recommended">Προτεινόμενη έκδοση</string>
     <string name="home_app_sort_recommended_description">Εγκατεστημένες και закрепленные εφαρμογές πρώτα</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">Καμία εφαρμογή δεν ταιριάζει με το \"%s\"</string>
     <string name="home_all_apps_hidden_title">Όλες οι εφαρμογές είναι κρυφές</string>
     <string name="home_all_apps_hidden_subtitle">Έχετε αποκρύψει όλες τις εφαρμογές από την αρχική οθόνη</string>
+    <string name="home_no_apps_filter_title">Καμία εφαρμογή δεν ταιριάζει με αυτό το φίλτρο</string>
+    <string name="home_no_apps_filter_subtitle">Τίποτα δεν ταιριάζει με %s</string>
     <string name="home_category_add">Προσθήκη κατηγορίας</string>
     <string name="home_category_all_apps">Όλες οι εφαρμογές</string>
     <string name="home_category_custom">Προσαρμοσμένο</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">Νυχτερινός και παραγωγικός</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Πηγές τροποποιήσεων</string>
+    <string name="sources_search">Αναζήτηση πηγών</string>
     <string name="sources_sort_title">Ταξινόμηση πηγών ενημερώσεων</string>
     <string name="sources_sort_manual">Χειροκίνητη ταξινόμηση</string>
     <string name="sources_sort_manual_hint">Πατήστε παρατεταμένα μια πηγή για να την αναδιατάξετε</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">Συνεχίστε μόνο εάν εμπιστεύεστε αυτή τη βοηθητική εφαρμογή. Η Morphe δεν μπορεί να επαληθεύσει την υπογραφή αυτού του APK, επομένως ένα τροποποιημένο αρχείο δεν θα ανιχνευθεί</string>
     <string name="home_apk_helper_no_result">Η βοηθητική εφαρμογή δεν επέστρεψε ένα APK</string>
     <string name="home_apk_helper_no_access">Η βοηθητική εφαρμογή δεν conceded πρόσβαση στο APK που επέστρεψε</string>
+    <string name="home_apk_helper_no_package">Η βοηθητική εφαρμογή δεν ανέφερε ποια εγκατεστημένη εφαρμογή να χρησιμοποιήσει</string>
+    <string name="home_apk_helper_wrong_package">Η βοηθητική εφαρμογή επέστρεψε μια διαφορετική εφαρμογή από αυτή που τροποποιείται</string>
+    <string name="home_apk_helper_installed_unavailable">Ο Morphe δεν μπόρεσε να χρησιμοποιήσει την εγκατεστημένη εφαρμογή</string>
+    <string name="home_apk_helper_installed_incompatible">Η εγκατεστημένη έκδοση δεν μπορεί να τροποποιηθεί</string>
     <string name="home_apk_use_saved">Χρήση αποθηκευμένου APK</string>
     <string name="home_apk_use_installed">Χρήση εγκατεστημένου APK</string>
     <string name="home_apk_use_installed_unverified">Δεν μπόρεσα να επαληθεύσω την υπογραφή της εγκατεστημένης εφαρμογής, επομένως ενδέχεται να έχει ήδη τροποποιηθεί</string>
+    <string name="home_unverified">Μη επαληθευμένο</string>
+    <string name="home_app_info_install_unverified">Η Morphe δεν μπορεί να επιβεβαιώσει ότι η εγκατεστημένη εφαρμογή είναι η έκδοση που επιδιόρθωσε. Επανεγκαταστήστε την από το αποθηκευμένο APK για να επαναφέρετε τις ενέργειές της</string>
     <string name="home_app_info_no_saved_apk">Δεν υπάρχει αποθηκευμένο APK. Η τροποποίηση κώδικα θα απαιτήσει την επιλογή του αρχείου APK ξανά</string>
     <string name="home_version_requires_android">Απαιτείται Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Δεν υποστηρίζεται σε αυτή τη συσκευή</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Λήψη του αρχικού APK</string>
     <string name="home_download_instructions_steps_title">Οδηγίες:</string>
+    <string name="home_download_instructions_finding">Εντοπισμός της σελίδας λήψης…</string>
     <string name="home_download_instructions_step1">Πατήστε το παρακάτω κουμπί \'%s\'</string>
     <string name="home_download_instructions_step2_part1">Κάντε κύλιση της ιστοσελίδας προς τα κάτω και πατήστε</string>
+    <string name="home_download_instructions_step2_generic">Κάντε κύλιση προς τα κάτω στην ιστοσελίδα και πατήστε το κουμπί λήψης της</string>
+    <string name="home_download_instructions_step2_variant">Κάντε κύλιση προς τα κάτω στην ιστοσελίδα και πατήστε το κουμπί λήψης της πρώτης &lt;b&gt;παραλλαγής APK&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_search">Ανοίξτε ένα αποτέλεσμα αναζήτησης από έναν ιστότοπο που εμπιστεύεστε</string>
+    <string name="home_download_instructions_step2_search_note">Το Morphe δεν μπορεί να εγγυηθεί για αυτούς τους ιστότοπους. Παραλείψτε όσους προσφέρουν το δικό τους κατάστημα εφαρμογών αντί για αρχείο APK</string>
+    <string name="home_download_instructions_step3_search">Σε αυτόν τον ιστότοπο, κατεβάστε το APK της έκδοσης &lt;b&gt;%s&lt;/b&gt;, όχι τη νεότερη</string>
+    <string name="home_download_instructions_step3_search_any">Σε αυτόν τον ιστότοπο, κατεβάστε το APK της εφαρμογής. &lt;b&gt;Οποιαδήποτε έκδοση&lt;/b&gt; μπορεί να τροποποιηθεί</string>
     <string name="home_download_instructions_download_button_toast">Πατήστε λήψη στην ιστοσελίδα, και όχι εδώ 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Εξαιρετικά! Τώρα κάντε κλικ στο συνεχίστε και επισκεφθείτε την ιστοσελίδα 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Η εξάσκηση φέρνει την τελειότητα και πλησιάζεις 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">Περιμένετε μέχρι να ολοκληρωθεί η λήψη, και μετά &lt;b&gt;εγκαταστήστε το APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Μετά την ολοκλήρωση της λήψης, επιστρέψτε στο Morphe</string>
     <string name="home_download_instructions_step4_mount">Μετά την εγκατάσταση του πρωτότυπου APK, επιστρέψτε στο Morphe</string>
-    <string name="home_download_instructions_continue">Συνέχεια στο APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Συνεχίστε στη %s</string>
+    <string name="home_download_instructions_destination">σελίδα λήψης</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Επιλογή ληφθέντος APK</string>
     <string name="home_file_picker_prompt_description">Επιλέξτε το &lt;b&gt;%s&lt;/b&gt; APK που μόλις ελήφθη</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">Όλες οι διορθώσεις απενεργοποιήθηκαν</string>
     <string name="expert_mode_enable_all">Ενεργοποίηση όλων</string>
     <string name="expert_mode_enable_all_done">Όλες οι διορθώσεις ενεργοποιήθηκαν</string>
+    <string name="expert_mode_enable_all_universal_pending">Πατήστε ξανά για καθολικά patches</string>
     <string name="expert_mode_reset_to_default">Ενεργοποίηση συνιστώμενων διορθώσεων</string>
     <string name="expert_mode_reset_to_default_done">Εφαρμόστηκαν οι προτεινόμενες διορθώσεις</string>
     <string name="expert_mode_restore_saved">Επαναφορά αποθηκευμένης επιλογής</string>
@@ -385,6 +410,7 @@
     <string name="home_app_info_patch_update_available_description">Μια καινούρια έκδοση τροποποιήσεων είναι διαθέσιμη. Τροποποιήσετε ξανά την εφαρμογή για να λάβετε τις τελευταίες βελτιώσεις και διορθώσεις</string>
     <string name="home_app_info_app_deleted_warning">Η εφαρμογή έχει απεγκατασταθεί</string>
     <string name="home_app_info_app_deleted_description">Η εφαρμογή αυτή απεγκαταστάθηκε εκτός του Morphe. Τροποποιήστε την ξανά για την επαναφορά λειτουργικότητά της</string>
+    <string name="home_app_info_not_patched_description">Μια μη ενημερωμένη έκδοση αυτής της εφαρμογής είναι εγκατεστημένη. Το Morphe εξακολουθεί να έχει το προηγούμενο αρχείο επιδιορθώσεων.</string>
     <string name="home_app_info_apk_size">Μέγεθος APK</string>
     <string name="home_app_info_cpu_arch">Αρχιτεκτονική CPU</string>
     <!-- Home Screen - Root Mode -->
@@ -456,6 +482,11 @@
     <string name="battery_optimization_dialog_title">Προστασία επισκευής παρασκηνίου</string>
     <string name="battery_optimization_dialog_description">Ορισμένες συσκευές ενδέχεται να σταματήσουν το πρόγραμμα επισκευής όταν η εφαρμογή ελαχιστοποιηθεί. Επιτρέψτε στο Morphe να εκτελείται χωρίς περιορισμούς μπαταρίας για να διασφαλίσετε ότι η επισκευή ολοκληρώνεται αξιόπιστα</string>
     <string name="battery_optimization_not_now">Όχι τώρα</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Δεν υπάρχει αρκετή μνήμη</string>
+    <string name="patcher_memory_adjustment_description">Το patcher σταμάτησε από το σύστημα ενώ εκτελούνταν με όριο μνήμης %1$d MB. Η μείωση του ορίου σε %2$d MB καθιστά το patcher μικρότερο στόχο και μπορεί να επιτρέψει την ολοκλήρωση της εκτέλεσης.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Το patcher σταμάτησε από το σύστημα ενώ εκτελούνταν με όριο μνήμης %1$d MB, το οποίο είναι ήδη το χαμηλότερο διαθέσιμο. Δοκιμάστε να επιδιορθώσετε με λιγότερες πηγές επιδιόρθωσης ή επιλέξτε λιγότερες επιδιορθώσεις.</string>
+    <string name="patcher_memory_adjustment_apply">Μειώστε σε %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Τροποποίηση σε εξέλιξη…</string>
     <string name="patcher_notification_text">Πατήστε για να επιστρέψετε στο πρόγραμμα τροποποίησης</string>
@@ -490,6 +521,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">Τροποποίηση εφαρμογής</string>
     <string name="memory_usage">Χρήση μνήμης</string>
+    <string name="cpu_usage">Χρήση CPU</string>
+    <string name="storage_io_usage">I/O αποθήκευσης</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Εφαρμογή τροποποιήσεων</string>
     <string name="failed_to_execute_patch">Απέτυχε η εφαρμογή του %s</string>
@@ -497,9 +530,12 @@
     <string name="patched_app_save_failed_toast">Αποτυχία αποθήκευσης της τροποποιημένης εφαρμογής</string>
     <string name="plugin_activity_dialog_body">Απαιτείται αλληλεπίδραση χρήστη για να συνεχίσετε με αυτό το πρόσθετο.</string>
     <string name="patcher_process_exit_message">Η διαδικασία του τροποποιητή σταμάτησε με κωδικό %s</string>
+    <string name="patcher_heap_exhausted_message">Ο patcher εξάντλησε τη μνήμη με μέγεθος σωρού %1$d MB. Αυτή η εφαρμογή είναι πολύ μεγάλη για τα επιλεγμένα patches. Δοκιμάστε να κάνετε patch με λιγότερες πηγές patch ή επιλέξτε λιγότερα patches.</string>
     <string name="install_app_success">Επιτυχής εγκατάσταση</string>
     <string name="install_app_fail">Απέτυχε η εγκατάσταση της εφαρμογής: %s</string>
     <string name="uninstall_app_fail">Αποfailed να απεγκατασταθεί η εφαρμογή: %s</string>
+    <string name="uninstall_app_unverified">Παρέμεινε στη θέση του: Η Morphe δεν μπόρεσε να επαληθεύσει ότι η εγκατεστημένη εφαρμογή είναι η έκδοση που επιδιόρθωσε</string>
+    <string name="launch_app_unverified">Η Morphe δεν μπόρεσε να επαληθεύσει ότι η εγκατεστημένη εφαρμογή είναι η έκδοση που επιδιόρθωσε</string>
     <string name="uninstall_timeout">Η απεγκατάσταση έληξε</string>
     <string name="save_apk_success">Το APK αποθηκεύτηκε</string>
     <string name="saved_app_export_failed">Η εξαγωγή της τροποποιημένης εφαρμογής απέτυχε</string>
@@ -569,8 +605,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Εμφάνιση μηνύματος υποδοχής στην αρχική οθόνη</string>
     <string name="settings_appearance_app_grouping">Ομαδοποίηση εφαρμογών</string>
     <string name="settings_appearance_app_grouping_description">Εμφάνιση διακόπτη στην αρχική οθόνη για ομαδοποίηση εφαρμογών κατά πηγή ή δικές σας κατηγορίες, διατηρώντας την επιλογή όταν είναι απενεργοποιημένη</string>
-    <string name="settings_appearance_sort_button">Κουμπί ταξινόμησης</string>
-    <string name="settings_appearance_sort_button_description">Εμφάνιση του κουμπιού ταξινόμησης στην αρχική οθόνη</string>
+    <string name="settings_appearance_sort_button">Κουμπί ταξινόμησης και φιλτραρίσματος</string>
+    <string name="settings_appearance_sort_button_description">Εμφάνιση του κουμπιού ταξινόμησης και φιλτραρίσματος στην αρχική οθόνη</string>
     <string name="settings_appearance_app_card_colors">Χρώματα καρτών εφαρμογών</string>
     <string name="settings_appearance_app_card_colors_default">Προεπιλογή</string>
     <string name="settings_appearance_app_card_colors_default_description">Δώστε σε κάθε εφαρμογή το χρώμα του δικού της πακέτου</string>
@@ -1072,6 +1108,7 @@ morphe_header_custom_dark.png
     <string name="version">Έκδοση</string>
     <string name="patch">Τροποποίηση</string>
     <string name="patching">Τροποποίηση</string>
+    <string name="patched">Τροποποιήθηκε</string>
     <string name="repatch">Επανεφαρμογή τροποποιήσεων</string>
     <string name="open">Άνοιγμα</string>
     <string name="mount">Προσάρτηση</string>

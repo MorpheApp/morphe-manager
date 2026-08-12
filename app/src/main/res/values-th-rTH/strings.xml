@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">แอปอื่น ๆ</string>
     <string name="home_not_patched_yet">ยังไม่ได้รับการแพตซ์</string>
+    <string name="home_unpatched_version_installed">ติดตั้งเวอร์ชันที่ไม่ได้รับการแพตช์</string>
     <string name="home_no_patches_available">ไม่มีแพตซ์ที่ใช้งานได้</string>
     <string name="home_app_hide_title">ซ่อนแอปนี้หรือไม่?</string>
     <string name="home_app_hide_message">แอปนี้จะถูกซ่อนจากหน้าจอหลัก คุณสามารถกู้คืนได้ภายหลังโดยใช้ปุ่ม \'\' ที่ด้านล่างของรายการ</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">แหล่งทีมาของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="home_sources_are_loading">กำลังโหลดแหล่งที่มา กรุณารอสักครู่…</string>
     <string name="home_search_apps">ค้นหาแอป</string>
-    <string name="home_app_sort_title">จัดเรียงแอป</string>
+    <string name="home_app_list_options_title">จัดเรียงและกรอง</string>
+    <string name="home_app_list_options_state_description">เรียงตาม %1$s, กรองตาม %2$s</string>
+    <string name="home_app_filter_all_description">ทุกแอปบนหน้าจอหลัก</string>
+    <string name="home_app_filter_patched_description">แอปที่คุณแพตช์หรือบันทึกด้วย Morphe แล้ว</string>
+    <string name="home_app_filter_not_patched_description">แอปที่คุณยังไม่ได้แพตช์ใน Morphe</string>
+    <string name="home_app_filter_installed_description">แอปที่ติดตั้งอยู่บนอุปกรณ์นี้ในขณะนี้</string>
+    <string name="home_app_filter_uninstalled_description">แอปที่แพตช์ด้วย Morphe ซึ่งไม่ได้อยู่บนอุปกรณ์นี้แล้ว</string>
     <string name="home_app_sort_manual_description">แตะแอปค้างไว้ แล้วแตะปุ่มจัดเรียงใหม่</string>
     <string name="home_app_sort_recommended">เรียงตามที่แนะนำ</string>
     <string name="home_app_sort_recommended_description">แอปที่ติดตั้งและตรึงไว้ก่อน</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">ไม่พบแอปที่ตรงกับ \"%s\"</string>
     <string name="home_all_apps_hidden_title">แอปทั้งหมดถูกซ่อน</string>
     <string name="home_all_apps_hidden_subtitle">คุณได้ซ่อนแอปทั้งหมดออกจากหน้าจอหลักแล้ว</string>
+    <string name="home_no_apps_filter_title">ไม่มีแอปที่ตรงกับตัวกรองนี้</string>
+    <string name="home_no_apps_filter_subtitle">ไม่พบสิ่งที่ตรงกับ %s</string>
     <string name="home_category_add">เพิ่มหมวดหมู่</string>
     <string name="home_category_all_apps">แอปทั้งหมด</string>
     <string name="home_category_custom">กำหนดเอง</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">ตื่นตอนกลางคืนและยังทำงานได้</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">จัดการแหล่งที่มา</string>
+    <string name="sources_search">ค้นหาแหล่งที่มา</string>
     <string name="sources_sort_title">เรียงลำดับแหล่งที่มาของแพตช์</string>
     <string name="sources_sort_manual">จัดเรียงด้วยตนเอง</string>
     <string name="sources_sort_manual_hint">แตะค้างที่แหล่งข้อมูลเพื่อจัดเรียงใหม่</string>
@@ -122,8 +132,8 @@
     <string name="sources_management_blocked">แหล่งแพตช์นี้ถูกบล็อกและไม่สามารถเพิ่มได้</string>
     <string name="sources_management_source_blocked_badge">ถูกบล็อก</string>
     <string name="sources_management_metadata_unavailable">ไม่มีข้อมูล Metadata</string>
-    <string name="sources_management_metadata_unavailable_hint">ไฟล์ Metadata ระยะไกลไม่พร้อมใช้งาน การแก้ไขด้วยชุดติดตั้งที่มีอยู่ยังคงทำงานได้ แต่การอัปเดตอัตโนมัติถูกปิดใช้งานสำหรับแหล่งที่มานี้</string>
-    <string name="sources_management_metadata_unavailable_hint_missing">ไม่สามารถดาวน์โหลดชุดแก้ไขได้ URL แหล่งที่มาอาจไม่ถูกต้อง หรือไฟล์ไม่มีอยู่</string>
+    <string name="sources_management_metadata_unavailable_hint">ไฟล์ Metadata ระยะไกลไม่พร้อมใช้งาน การแพตช์ด้วยชุดที่ติดตั้งยังคงทำงานได้ แต่การอัปเดตอัตโนมัติถูกปิดใช้งานสำหรับแหล่งที่มานี้</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">ไม่สามารถดาวน์โหลดชุดแพตช์ได้ URL แหล่งที่มาอาจไม่ถูกต้อง หรือไฟล์ไม่มีอยู่</string>
     <string name="sources_management_outdated_manager_badge">อัปเดต Morphe</string>
     <string name="sources_management_outdated_manager_hint">แหล่งที่มานี้สร้างขึ้นสำหรับแพตเชอร์ %1$s แต่ Morphe %2$s มีแพตเชอร์ %3$s อัปเดต Morphe เพื่อใช้งาน</string>
     <string name="sources_management_source_enabled">แหล่งที่มาเปิดใช้งานแล้ว</string>
@@ -158,9 +168,9 @@
     <string name="sources_patch_expert_badge">ผู้เชี่ยวชาญ</string>
     <string name="sources_patch_expert_badge_tooltip">เปิดใช้งานโหมดผู้เชี่ยวชาญในการตั้งค่าเพื่อเลือกแพตช์นี้ด้วยตนเอง</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">ต้องการความช่วยเหลือในการค้นหา APK เวอร์ชันที่ยังไม่ถูกแก้ไข?</string>
-    <string name="home_apk_availability_dialog_simple">เพื่อที่จะแพตซ์ &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK ที่ยังไม่ถูกแก้ไขเวอร์ชัน:</string>
-    <string name="home_apk_availability_dialog_expert">เพื่อที่จะแพตซ์ &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK ที่ยังไม่ถูกแก้ไขเวอร์ชัน:</string>
+    <string name="home_apk_availability_dialog_title">ต้องการความช่วยเหลือในการค้นหา APK เวอร์ชันที่ยังไม่ถูกแพตช์?</string>
+    <string name="home_apk_availability_dialog_simple">เพื่อที่จะแพตซ์ &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK ที่ยังไม่ถูกแพตช์เวอร์ชัน:</string>
+    <string name="home_apk_availability_dialog_expert">เพื่อที่จะแพตซ์ &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK ที่ยังไม่ถูกแพตช์ของเวอร์ชัน:</string>
     <string name="home_apk_availability_recommended_label">แนะนำ</string>
     <string name="home_apk_availability_unpatched_label">ไม่ได้แพตซ์</string>
     <string name="home_apk_availability_incompatible_label">ไม่รองรับ</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">ดำเนินการต่อหากคุณเชื่อถือแอปตัวช่วยนี้เท่านั้น Morphe ไม่สามารถยืนยันลายเซ็นของ APK นี้ ดังนั้นจึงจะตรวจไม่พบไฟล์ที่แก้ไข</string>
     <string name="home_apk_helper_no_result">แอปตัวช่วยไม่ได้ส่งคืน APK</string>
     <string name="home_apk_helper_no_access">แอปตัวช่วยไม่ได้ให้สิทธิ์การเข้าถึง APK ที่ส่งคืน</string>
+    <string name="home_apk_helper_no_package">แอปตัวช่วยไม่ได้ระบุว่าจะใช้แอปที่ติดตั้งไว้ตัวใด</string>
+    <string name="home_apk_helper_wrong_package">แอปตัวช่วยส่งคืนแอปอื่นที่ไม่ใช่แอปที่กำลังแพตช์</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe ไม่สามารถใช้แอปที่ติดตั้งอยู่ได้</string>
+    <string name="home_apk_helper_installed_incompatible">ไม่สามารถแพตช์เวอร์ชันที่ติดตั้งอยู่ได้</string>
     <string name="home_apk_use_saved">ใช้ APK ที่บันทึกไว้</string>
     <string name="home_apk_use_installed">ใช้ APK ที่ติดตั้งไว้</string>
     <string name="home_apk_use_installed_unverified">ไม่สามารถตรวจสอบลายเซ็นของแอปที่ติดตั้งได้ ดังนั้นจึงอาจได้รับการแพตช์แล้ว</string>
+    <string name="home_unverified">ไม่ได้รับการยืนยัน</string>
+    <string name="home_app_info_install_unverified">Morphe ไม่สามารถยืนยันได้ว่าแอปที่ติดตั้งนั้นเป็นรุ่นที่ได้รับการแพตช์แล้ว ติดตั้งใหม่จาก APK ที่บันทึกไว้เพื่อคืนค่าการดำเนินการ</string>
     <string name="home_app_info_no_saved_apk">ไม่มี APK ที่ถูกบันทึก การแพตซ์จะต้องเลือกไฟล์ APK อีกครั้ง</string>
     <string name="home_version_requires_android">ต้องใช้ Android %s ขึ้นไป</string>
     <string name="home_apk_no_compatible_versions_title">ไม่รองรับบนอุปกรณ์นี้</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">ดาวน์โหลด APK ต้นฉบับ</string>
     <string name="home_download_instructions_steps_title">คำแนะนำ:</string>
+    <string name="home_download_instructions_finding">กำลังค้นหาหน้าดาวน์โหลด…</string>
     <string name="home_download_instructions_step1">กดปุ่ม \'%s\' ด้านล่าง</string>
     <string name="home_download_instructions_step2_part1">เลื่อนลงมาที่หน้าเว็บแล้วกดปุ่ม</string>
+    <string name="home_download_instructions_step2_generic">เลื่อนลงมาที่หน้าเว็บแล้วกดปุ่มดาวน์โหลด</string>
+    <string name="home_download_instructions_step2_variant">เลื่อนลงมาที่หน้าเว็บแล้วกดปุ่มดาวน์โหลดของ &lt;b&gt;รูปแบบ APK&lt;/b&gt; ที่อยู่ด้านบน</string>
+    <string name="home_download_instructions_step2_search">เปิดผลการค้นหาจากเว็บไซต์ที่คุณเชื่อถือ</string>
+    <string name="home_download_instructions_step2_search_note">Morphe ไม่สามารถรับรองเว็บไซต์เหล่านี้ได้ ข้ามเว็บไซต์ที่เสนอแอปสโตร์ของตัวเองแทนไฟล์ APK</string>
+    <string name="home_download_instructions_step3_search">บนเว็บไซต์นั้น ให้ดาวน์โหลด APK ของเวอร์ชัน &lt;b&gt;%s&lt;/b&gt; ไม่ใช่เวอร์ชันล่าสุด</string>
+    <string name="home_download_instructions_step3_search_any">บนเว็บไซต์นั้น ให้ดาวน์โหลด APK ของแอป &lt;b&gt;ไม่ว่าเวอร์ชันใด&lt;/b&gt;ก็สามารถแพตช์ได้</string>
     <string name="home_download_instructions_download_button_toast">กดดาวน์โหลดบนเว็บไซต์ อย่ากดที่นี่ 😊</string>
     <string name="home_download_instructions_download_button_toast_2">เยี่ยมเลย! ตอนนี้ก็คลิกดำเนินการต่อแล้วไปที่เว็บไซต์ 👆</string>
     <string name="home_download_instructions_download_button_toast_3">การฝึกฝนทำให้สมบูรณ์แบบ และคุณก็กำลังไปถึงจุดนั้น 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">รอให้การดาวน์โหลดเสร็จสิ้น แล้ว &lt;b&gt;ติดตั้ง APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">หลังจากที่การดาวน์โหลดเสร็จสิ้น ให้กลับมาที่ Morphe</string>
     <string name="home_download_instructions_step4_mount">หลังจากติดตั้ง APK ต้นฉบับเสร็จสิ้น กลับมาที่ Morphe</string>
-    <string name="home_download_instructions_continue">ไปที่ APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">ไปยัง %s</string>
+    <string name="home_download_instructions_destination">หน้าดาวน์โหลด</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">เลือก APK ที่ดาวน์โหลด</string>
     <string name="home_file_picker_prompt_description">เลือกไฟล์ APK &lt;b&gt;%s&lt;/b&gt; ที่คุณดาวน์โหลด</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">ปิดการใช้งานแพตช์ทั้งหมดแล้ว</string>
     <string name="expert_mode_enable_all">เปิดการแพตซ์ทั้งหมด</string>
     <string name="expert_mode_enable_all_done">เปิดใช้งานแพตช์ทั้งหมดแล้ว</string>
+    <string name="expert_mode_enable_all_universal_pending">แตะอีกครั้งสำหรับแพตช์สากล</string>
     <string name="expert_mode_reset_to_default">เปิดใช้งานแพตช์ที่แนะนำ</string>
     <string name="expert_mode_reset_to_default_done">ใช้แพตช์ที่แนะนำแล้ว</string>
     <string name="expert_mode_restore_saved">คืนการเลือกที่บันทึกไว้</string>
@@ -261,7 +286,7 @@
     <string name="home_dialog_unsupported_version_build">บิลด์ %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">นี่เป็นบิลด์ที่แตกต่างของเวอร์ชันเดียวกัน การอัปเดตต้องการบิลด์ที่เฉพาะเจาะจง</string>
     <string name="home_dialog_wrong_package_title">แพ็กเกจที่เลือกไม่ถูกต้อง</string>
-    <string name="home_dialog_wrong_package_description">ไฟล์ APK ที่เลือกไว้ ไม่ใช่แอปพลิเคชันสำหรับทำการแพตซ์</string>
+    <string name="home_dialog_wrong_package_description">ไฟล์ APK ที่เลือกไว้ ไม่ใช่แอปพลิเคชันที่คุณต้องการแพตซ์</string>
     <string name="home_dialog_expected_package">แพ็กเกจที่คาดหวัง:</string>
     <string name="home_dialog_selected_package">แพตซ์ที่เลือก:</string>
     <string name="home_dialog_orphaned_install_title">สำเนาเก่าที่ถูกทิ้งไว้</string>
@@ -366,9 +391,9 @@
     <string name="batch_uninstall_confirm_body">แอปที่เลือกจะถูกลบออกจากอุปกรณ์ของคุณอย่างถาวร</string>
     <string name="home_app_info_remove_app_warning">การดำเนินการนี้จะลบถาวร:</string>
     <string name="home_app_info_delete_item_database">บันทึกฐานข้อมูล</string>
-    <string name="home_app_info_delete_item_patched_apk">ไฟล์ APK ที่แก้ไขแล้ว</string>
+    <string name="home_app_info_delete_item_patched_apk">ไฟล์ APK ที่แพตช์แล้ว</string>
     <string name="home_app_info_delete_item_original_apk">ไฟล์ APK รุ่นต้นฉบับ</string>
-    <string name="home_app_info_delete_preservation_note">แพตซ์ที่คุณเลือกไว้และการตั้งค่าของคุณจะถูกเก็บไว้สำหรับการแก้ไขในอนาคต</string>
+    <string name="home_app_info_delete_preservation_note">แพตซ์ที่คุณเลือกไว้และการตั้งค่าของคุณจะถูกเก็บไว้สำหรับการแพตช์ในอนาคต</string>
     <string name="home_app_info_patches_name_default">แพตช์</string>
     <string name="home_app_info_patches_name_fallback">ไม่มีชื่อ</string>
     <string name="home_app_info_patches_replace_fail">ไม่สามารถนำเข้าแพตช์: %s</string>
@@ -385,6 +410,7 @@
     <string name="home_app_info_patch_update_available_description">มีแพตซ์เวอร์ชันใหม่พร้อมใช้งานแล้ว ให้แพตซ์อีกครั้งเพื่อรับการปรับปรุงและการแก้ไขสำหรับเวอร์ชันล่าสุด</string>
     <string name="home_app_info_app_deleted_warning">แอปถูกถอนการติดตั้ง</string>
     <string name="home_app_info_app_deleted_description">แอปนี้ถูกลบออกนอก Morphe. แพตซ์อีกครั้งเพื่อฟื้นฟูฟังก์ชัน</string>
+    <string name="home_app_info_not_patched_description">แอปเวอร์ชันที่ไม่ได้รับการแพตช์ถูกติดตั้งไว้ Morphe ยังคงมีบันทึกแพตช์ก่อนหน้า</string>
     <string name="home_app_info_apk_size">ขนาด APK</string>
     <string name="home_app_info_cpu_arch">สถาปัตยกรรม CPU</string>
     <!-- Home Screen - Root Mode -->
@@ -433,7 +459,7 @@
     <string name="patcher_patches_excluded_for_installer">ไม่สามารถใช้ได้กับวิธีการติดตั้งนี้ และไม่รวม: %s</string>
     <string name="patcher_storage_permission_dialog_title">ไม่สามารถเข้าถึงเส้นทางเก็บข้อมูล</string>
     <string name="patcher_incompatible_patcher_title">จำเป็นต้องอัปเดต</string>
-    <string name="patcher_incompatible_patcher_description">ชุดข้อมูล &lt;b&gt;%1$s&lt;/b&gt; จำเป็นต้องใช้เวอร์ชันตัวแก้ไขแพตช์ &lt;b&gt;%2$s&lt;/b&gt; หรือใหม่กว่า โปรดอัปเดต Morphe เพื่อแพตช์แอปนี้</string>
+    <string name="patcher_incompatible_patcher_description">ชุดข้อมูล &lt;b&gt;%1$s&lt;/b&gt; จำเป็นต้องใช้ตัวแพตช์เวอร์ชัน &lt;b&gt;%2$s&lt;/b&gt; หรือใหม่กว่า โปรดอัปเดต Morphe เพื่อแพตช์แอปนี้</string>
     <string name="patcher_incompatible_patcher_update_button">ดาวน์โหลดและอัปเดต Morphe</string>
     <string name="patcher_storage_permission_description_api30">ตัวเลือกแพตช์อย่างน้อยหนึ่งรายการชี้ไปยังพาธที่ Morphe ไม่สามารถอ่านได้ ให้สิทธิ์การเข้าถึงพื้นที่เก็บข้อมูลและแตะปุ่ม จากนั้นการแพตช์จะเริ่มทำงานโดยอัตโนมัติ</string>
     <string name="patcher_storage_permission_description_legacy">ตัวเลือกแพตช์บางตัวอ้างอิงไปยังเส้นทางที่ไม่สามารถเข้าถึงได้ อัปเดตเส้นทางในตัวเลือกแพตช์และลองใหม่อีกครั้ง</string>
@@ -456,6 +482,11 @@
     <string name="battery_optimization_dialog_title">การป้องกันการปรับแก้เบื้องหลัง</string>
     <string name="battery_optimization_dialog_description">อุปกรณ์บางเครื่องอาจหยุดโปรแกรมปรับแก้เมื่อแอปพลิเคชันถูกลดขนาด อนุญาตให้ Morphe ทำงานโดยไม่มีข้อจำกัดด้านแบตเตอรี่เพื่อให้แน่ใจว่าการปรับแก้เสร็จสมบูรณ์ได้อย่างน่าเชื่อถือ</string>
     <string name="battery_optimization_not_now">ไม่ใช่ตอนนี้</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">หน่วยความจำไม่เพียงพอ</string>
+    <string name="patcher_memory_adjustment_description">ตัวแพตช์ถูกหยุดโดยระบบขณะทำงานด้วยขีดจำกัดหน่วยความจำ %1$d MB การลดขีดจำกัดลงเป็น %2$d MB จะทำให้แพตเชอร์เป็นเป้าหมายที่เล็กลงและอาจทำให้การทำงานเสร็จสมบูรณ์</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">ตัวแพตช์ถูกหยุดโดยระบบขณะทำงานด้วยขีดจำกัดหน่วยความจำ %1$d MB ซึ่งเป็นค่าต่ำสุดที่มีอยู่แล้ว ลองแพตช์โดยใช้แหล่งแพตช์น้อยลง หรือเลือกแพตช์น้อยลง</string>
+    <string name="patcher_memory_adjustment_apply">ลดเป็น %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">กำลังดำเนินการแพตช์…</string>
     <string name="patcher_notification_text">แตะเพื่อกลับไปยังตัวแพตช์</string>
@@ -474,7 +505,7 @@
     <string name="patcher_message_9">กำลังแก้ไขปัญหาในแอปที่ไม่ถูกแพตช์… 🪲</string>
     <string name="patcher_message_10">แพตช์ดีๆ กับคุ้มค่ากับที่รอคอย… ⏳</string>
     <string name="patcher_message_11">กำลังขัดเกลาเม็ดพิกเซลให้เปล่งประกาย… 💎</string>
-    <string name="patcher_message_12">โปรดนั่งรอจนกว่าลูกเรือจะปิดป้ายบอกว่า \'กำลังแก้ไข\' 💺✈️</string>
+    <string name="patcher_message_12">โปรดนั่งรอจนกว่าลูกเรือจะปิดป้ายบอกว่า \'กำลังแพตช์\' 💺✈️</string>
     <string name="patcher_message_13">กำลังปรุงแอปที่แพตช์แล้วของคุณ สดๆ ร้อนๆ … 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="patcher_message_14">กำลังเจรจาอย่างสุภาพกับไบต์โค้ด… 🤝</string>
@@ -490,16 +521,21 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">กำลังแพตช์แอป</string>
     <string name="memory_usage">การใช้พื้นที่ความจำ</string>
+    <string name="cpu_usage">การใช้งาน CPU</string>
+    <string name="storage_io_usage">I/O ของพื้นที่เก็บข้อมูล</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">กำลังใช้แพตช์</string>
     <string name="failed_to_execute_patch">ไม่สามารถใช้ %s ได้</string>
     <string name="patched_app_saved_toast">บันทึกแอปที่แพตช์แล้วสำหรับภายหลัง</string>
-    <string name="patched_app_save_failed_toast">ไม่สามารถบันทึกแอปที่แพตช์ได้</string>
+    <string name="patched_app_save_failed_toast">ไม่สามารถบันทึกแอปที่แพตช์แล้วได้</string>
     <string name="plugin_activity_dialog_body">ต้องมีการติดต่อผู้ใช้เพื่อดำเนินการต่อไปนี้</string>
     <string name="patcher_process_exit_message">กระบวนการแพตช์เสร็จสิ้นด้วยรหัส %s</string>
+    <string name="patcher_heap_exhausted_message">แพตเชอร์ใช้หน่วยความจำไม่เพียงพอสำหรับฮีปขนาด %1$d MB แอปนี้ใหญ่เกินไปสำหรับแพตช์ที่เลือกไว้ ลองแพตช์โดยใช้แหล่งแพตช์น้อยลง หรือเลือกแพตช์ให้น้อยลง</string>
     <string name="install_app_success">ติดตั้งสำเร็จแล้ว</string>
     <string name="install_app_fail">ไม่สามารถติดตั้งแอปได้: %s</string>
     <string name="uninstall_app_fail">ไม่สามารถถอนการติดตั้งแอป: %s</string>
+    <string name="uninstall_app_unverified">ทิ้งไว้ที่เดิม: Morphe ไม่สามารถยืนยันได้ว่าแอปที่ติดตั้งนั้นเป็นรุ่นที่ได้รับการแพตช์แล้ว</string>
+    <string name="launch_app_unverified">Morphe ไม่สามารถยืนยันได้ว่าแอปที่ติดตั้งนั้นเป็นรุ่นที่ได้รับการแพตช์แล้ว</string>
     <string name="uninstall_timeout">หมดเวลาในการถอนการติดตั้ง</string>
     <string name="save_apk_success">บันทึก APK สำเร็จ</string>
     <string name="saved_app_export_failed">ไม่สามารถส่งออกแอปที่แพตช์แล้วได้</string>
@@ -569,8 +605,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">แสดงข้อความทักทายบนหน้าจอหลัก</string>
     <string name="settings_appearance_app_grouping">การจัดกลุ่มแอป</string>
     <string name="settings_appearance_app_grouping_description">แสดงตัวสลับหน้าจอหลักเพื่อจัดกลุ่มแอปตามแหล่งที่มาหรือตามหมวดหมู่ของคุณเอง โดยจะเก็บการเลือกไว้เมื่อปิด</string>
-    <string name="settings_appearance_sort_button">ปุ่มเรียงลำดับ</string>
-    <string name="settings_appearance_sort_button_description">แสดงปุ่มเรียงลำดับบนหน้าจอหลัก</string>
+    <string name="settings_appearance_sort_button">ปุ่มเรียงลำดับและกรอง</string>
+    <string name="settings_appearance_sort_button_description">แสดงปุ่มเรียงลำดับและกรองบนหน้าจอหลัก</string>
     <string name="settings_appearance_app_card_colors">สีการ์ดแอป</string>
     <string name="settings_appearance_app_card_colors_default">ค่าเริ่มต้น</string>
     <string name="settings_appearance_app_card_colors_default_description">กำหนดสีให้บันเดิลของแต่ละแอป</string>
@@ -658,7 +694,7 @@
     <string name="settings_advanced_strip_unused_libs_description">ลบไลบรารีสถาปัตยกรรม CPU ที่ไม่ได้ใช้งานและโมดูล APK ที่แยกออก</string>
     <!-- Bytecode mode -->
     <string name="settings_advanced_bytecode_mode">โหมดการประมวลผลไบต์โค้ด</string>
-    <string name="settings_advanced_bytecode_mode_dialog_description">ควบคุมวิธีการประมวลผลไบต์โค้ดในระหว่างการแก้ไขแพตช์ มีผลต่อความเร็วในการแก้ไข การใช้หน่วยความจำ และขนาด APK ที่ได้</string>
+    <string name="settings_advanced_bytecode_mode_dialog_description">ควบคุมวิธีการประมวลผลไบต์โค้ดในระหว่างการแพตช์ มีผลต่อความเร็วในการแก้ไข การใช้หน่วยความจำ และขนาด APK ที่ได้</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_label">รวดเร็ว (แนะนำ)</string>
     <string name="settings_advanced_bytecode_mode_strip_fast">เร็ว</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_description">การปรับปรุงแพตช์ที่เร็วขึ้นและการใช้หน่วยความจำน้อยลง แต่มีขนาด APK ที่ใหญ่ขึ้น แนะนำสำหรับอุปกรณ์ที่มี RAM ต่ำหรือเก่า</string>
@@ -787,7 +823,7 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">ให้แน่ใจว่า Shizuku กำลังทำงานและให้สิทธิ์แก่แอปนี้</string>
     <string name="installer_use_standard">ใช้มาตรฐาน</string>
     <string name="installer_play_store_warning_title">ติดตั้งเป็น Play Store หรือไม่?</string>
-    <string name="installer_play_store_warning_message">แอปที่แก้ไขแล้วจะถูกบันทึกว่าติดตั้งจาก Google Play Store ซึ่งจะช่วยให้บริการต่างๆ เช่น Android Auto จดจำว่าเป็นแอปจาก Play Store ได้ แต่ไม่รับประกันสำหรับแอปหรืออุปกรณ์ทุกเครื่อง พฤติกรรมอาจแตกต่างกันไปตามเวอร์ชัน Android, ROM, แบรนด์อุปกรณ์ และการตรวจสอบเฉพาะแอป</string>
+    <string name="installer_play_store_warning_message">แอปที่แพตช์แล้วจะถูกบันทึกว่าติดตั้งจาก Google Play Store ซึ่งจะช่วยให้บริการต่างๆ เช่น Android Auto จดจำว่าเป็นแอปจาก Play Store ได้ แต่ไม่รับประกันสำหรับแอปหรืออุปกรณ์ทุกเครื่อง พฤติกรรมอาจแตกต่างกันไปตามเวอร์ชัน Android, ROM, แบรนด์อุปกรณ์ และการตรวจสอบเฉพาะแอป</string>
     <string name="installer_play_store_warning_risk">Play Store อาจมีอัปเดตสำหรับแอปที่ปรับแก้แล้ว การติดตั้งอัปเดตนั้นจะเขียนทับ APK ที่ปรับแก้แล้วด้วยเวอร์ชันเดิม และลบการปรับแก้ หากได้รับการแจ้งให้อัปเดต ให้แตะเมนูจุดสามจุดบนหน้าแอป Play Store แล้วเลือก \"ปิดการอัปเดต\"</string>
     <string name="installer_play_store_warning_continue">ฉันเข้าใจแล้ว ดำเนินการต่อ</string>
     <string name="installer_play_store_mode">ติดตั้งเป็น Play Store</string>
@@ -799,8 +835,8 @@ morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">ถอนการติดตั้งอัตโนมัติเมื่อเกิดข้อขัดแย้ง</string>
     <string name="settings_auto_uninstall_with_shizuku_description">เมื่อติดตั้งอัตโนมัติด้วย Shizuku ให้ถอนการติดตั้งแอปที่มีอยู่ก่อนหาก Android รายงานว่ามีข้อขัดแย้งของลายเซ็น ซึ่งอาจลบข้อมูลแอปได้</string>
     <string name="settings_auto_uninstall_warning_title">เปิดใช้งานการถอนการติดตั้งอัตโนมัติหรือไม่</string>
-    <string name="settings_auto_uninstall_warning_message">หาก Android รายงานข้อขัดแย้งของลายเซ็นระหว่างการติดตั้งอัตโนมัติของ Shizuku, Morphe จะถอนการติดตั้งแอปที่มีอยู่ก่อนที่จะติดตั้ง APK ที่แก้ไขแล้ว</string>
-    <string name="settings_auto_uninstall_warning_risk">ซึ่งอาจลบข้อมูลแอปได้ หาก APK ที่แก้ไขแล้วไม่สามารถติดตั้งได้หลังจากถอนการติดตั้ง แอปก่อนหน้านี้อาจหายไปแล้ว</string>
+    <string name="settings_auto_uninstall_warning_message">หาก Android รายงานข้อขัดแย้งของลายเซ็นระหว่างการติดตั้งอัตโนมัติของ Shizuku, Morphe จะถอนการติดตั้งแอปที่มีอยู่ก่อนที่จะติดตั้ง APK ที่แพตช์แล้ว</string>
+    <string name="settings_auto_uninstall_warning_risk">ซึ่งอาจลบข้อมูลแอปได้ หาก APK ที่แพตช์แล้วไม่สามารถติดตั้งได้หลังจากถอนการติดตั้ง แอปก่อนหน้านี้อาจหายไปแล้ว</string>
     <string name="installer_shizuku_status_action">ตรวจสอบสถานะ Shizuku</string>
     <string name="installer_shizuku_status_title">สถานะ Shizuku</string>
     <string name="installer_shizuku_status_ready">พร้อมใช้งาน</string>
@@ -837,7 +873,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_disabled_description">คลิกเพื่อตั้งค่า</string>
     <string name="settings_system_process_runtime_description_not_available">คุณสมบัติขั้นตอนนี้ต้องการ Android 11 หรือเวอร์ชันที่สูงกว่า</string>
     <string name="settings_system_patcher_completion_sound">เสียงเมื่อเสร็จสิ้น</string>
-    <string name="settings_system_patcher_completion_sound_description">เล่นเสียงที่แตกต่างเมื่อการแก้ไขเสร็จสมบูรณ์ ไม่ว่าจะเป็นความสำเร็จหรือความล้มเหลว</string>
+    <string name="settings_system_patcher_completion_sound_description">เล่นเสียงที่แตกต่างเมื่อการแพตช์เสร็จสมบูรณ์ ไม่ว่าจะเป็นความสำเร็จหรือความล้มเหลว</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">การแจ้งเตือน</string>
     <string name="settings_system_notifications_description">กำหนดการแจ้งเตือนพื้นหลังและเสียงเมื่อเสร็จสิ้น</string>
@@ -904,13 +940,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_http_cache_description">แคชการตอบกลับ HTTP เพื่อเพิ่มความเร็วในการอัปเดต</string>
     <string name="settings_system_storage_installer_cache_title">แคชตัวติดตั้งภายนอก</string>
     <string name="settings_system_storage_installer_cache_description">สำเนา APK ที่ส่งไปยังตัวติดตั้งของบุคคลที่สาม</string>
-    <string name="settings_system_storage_patcher_workspace_title">พื้นที่ทำงานของตัวปรับแต่งแก้ไข</string>
-    <string name="settings_system_storage_patcher_workspace_description">ไฟล์รันไทม์ของตัวปรับแต่งแก้ไขและข้อมูลขยะที่ไม่ได้ใช้งาน</string>
+    <string name="settings_system_storage_patcher_workspace_title">พื้นที่ทำงานของตัวแพตช์</string>
+    <string name="settings_system_storage_patcher_workspace_description">ไฟล์รันไทม์ของตัวแพตช์และข้อมูลขยะที่ไม่ได้ใช้งาน</string>
     <string name="settings_system_storage_temporary_title">ไฟล์ชั่วคราว</string>
-    <string name="settings_system_storage_temporary_description">ไฟล์ทำงานที่สร้างขึ้นระหว่างการปรับแต่งแก้ไข</string>
+    <string name="settings_system_storage_temporary_description">ไฟล์ทำงานที่สร้างขึ้นระหว่างการแพตช์</string>
     <string name="settings_system_storage_clear_all">ล้างแคชทั้งหมด</string>
     <string name="settings_system_storage_clear_all_description">ล้างพื้นที่แคชที่สามารถเรียกคืนได้ทั้งหมดในครั้งเดียว</string>
-    <string name="settings_system_storage_clear_all_confirm">การดำเนินการนี้จะล้างการตอบกลับเครือข่ายที่แคชไว้ สำเนาตัวติดตั้งที่จัดเตรียมไว้ และไฟล์ชั่วคราว ไฟล์ APK ดั้งเดิมและที่ปรับแต่งแก้ไขจะถูกเก็บไว้</string>
+    <string name="settings_system_storage_clear_all_confirm">การดำเนินการนี้จะล้างการตอบกลับเครือข่ายที่แคชไว้ สำเนาตัวติดตั้งที่จัดเตรียมไว้ และไฟล์ชั่วคราว ไฟล์ APK ดั้งเดิมและที่แพตช์แล้วจะถูกเก็บไว้</string>
     <string name="settings_system_storage_cleared">พื้นที่ว่าง %s</string>
     <string name="settings_system_storage_nothing_to_clear">ไม่มีอะไรให้ล้าง</string>
     <string name="settings_system_storage_open_app_info_title">เปิดที่เก็บข้อมูลแอป Android</string>
@@ -1072,6 +1108,7 @@ morphe_header_custom_dark.png
     <string name="version">เวอร์ชัน</string>
     <string name="patch">แพตช์</string>
     <string name="patching">กำลังแพตช์</string>
+    <string name="patched">แพตช์แล้ว</string>
     <string name="repatch">แพตช์ใหม่</string>
     <string name="open">เปิด</string>
     <string name="mount">เมานต์</string>

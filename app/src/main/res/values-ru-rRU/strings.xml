@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Другие приложения</string>
     <string name="home_not_patched_yet">Еще не пропатчено</string>
+    <string name="home_unpatched_version_installed">Установлена непатченная версия</string>
     <string name="home_no_patches_available">Нет доступных патчей</string>
     <string name="home_app_hide_title">Скрыть это приложение?</string>
     <string name="home_app_hide_message">Это приложение будет скрыто из домашнего экрана. Вы можете восстановить его позже из скрытых приложений, используя кнопку внизу списка.</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">Ваши источники обновлены</string>
     <string name="home_sources_are_loading">Загрузка источников, пожалуйста, подождите…</string>
     <string name="home_search_apps">Поиск приложений</string>
-    <string name="home_app_sort_title">Сортировка приложений</string>
+    <string name="home_app_list_options_title">Сортировка и фильтрация</string>
+    <string name="home_app_list_options_state_description">Отсортировано по %1$s, отфильтровано по %2$s</string>
+    <string name="home_app_filter_all_description">Все приложения на главном экране</string>
+    <string name="home_app_filter_patched_description">Приложения, которые вы пропатчили или сохранили с помощью Morphe</string>
+    <string name="home_app_filter_not_patched_description">Приложения, которые вы ещё не пропатчили в Morphe</string>
+    <string name="home_app_filter_installed_description">Приложения, установленные на этом устройстве</string>
+    <string name="home_app_filter_uninstalled_description">Приложения, пропатченные с помощью Morphe, которых больше нет на этом устройстве</string>
     <string name="home_app_sort_manual_description">Нажмите и удерживайте значок приложения, затем нажмите кнопку изменения порядка</string>
     <string name="home_app_sort_recommended">Рекомендуемый порядок</string>
     <string name="home_app_sort_recommended_description">Сначала установленные и закреплённые приложения</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">Нет соответствующих приложений \"%s\"</string>
     <string name="home_all_apps_hidden_title">Все приложения скрыты</string>
     <string name="home_all_apps_hidden_subtitle">Вы скрыли все приложения с главного экрана</string>
+    <string name="home_no_apps_filter_title">Ни одно приложение не соответствует этому фильтру</string>
+    <string name="home_no_apps_filter_subtitle">Ничего не соответствует %s</string>
     <string name="home_category_add">Добавить категорию</string>
     <string name="home_category_all_apps">Все приложения</string>
     <string name="home_category_custom">Пользовательское</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">Ночной и продуктивный</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Источники патчей</string>
+    <string name="sources_search">Поиск источников</string>
     <string name="sources_sort_title">Сортировка источников патчей</string>
     <string name="sources_sort_manual">Ручная сортировка</string>
     <string name="sources_sort_manual_hint">Нажмите и удерживайте источник, чтобы изменить порядок</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">Продолжайте только в том случае, если вы доверяете этому вспомогательному приложению. Morphe не может проверить подпись этого APK, поэтому измененный файл не будет обнаружен</string>
     <string name="home_apk_helper_no_result">Вспомогательное приложение не вернуло APK</string>
     <string name="home_apk_helper_no_access">Вспомогательное приложение не предоставило доступа к возвращенному APK</string>
+    <string name="home_apk_helper_no_package">Вспомогательное приложение не указало, какое установленное приложение использовать.</string>
+    <string name="home_apk_helper_wrong_package">Вспомогательное приложение вернуло другое приложение, чем то, которое пропатчивается</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe не смог использовать установленное приложение</string>
+    <string name="home_apk_helper_installed_incompatible">Установленную версию невозможно пропатчить</string>
     <string name="home_apk_use_saved">Использовать сохраненный APK</string>
     <string name="home_apk_use_installed">Использовать установленный APK</string>
     <string name="home_apk_use_installed_unverified">Не удалось проверить подпись установленного приложения, поэтому оно может быть уже пропатчено</string>
+    <string name="home_unverified">Непроверенный</string>
+    <string name="home_app_info_install_unverified">Morphe не может подтвердить, что установленное приложение является сборкой, которую он пропатчил. Переустановите его из сохраненного APK, чтобы восстановить его действия.</string>
     <string name="home_app_info_no_saved_apk">Нет сохраненного APK. Для патча нужно будет снова выбрать APK файл</string>
     <string name="home_version_requires_android">Требуется Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Не поддерживается на этом устройстве</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Загрузить оригинальный APK</string>
     <string name="home_download_instructions_steps_title">Инструкции:</string>
+    <string name="home_download_instructions_finding">Поиск страницы загрузки…</string>
     <string name="home_download_instructions_step1">Нажмите \'%s\' кнопке ниже</string>
     <string name="home_download_instructions_step2_part1">Прокрутите страницу вниз и нажмите</string>
+    <string name="home_download_instructions_step2_generic">Прокрутите страницу вниз и нажмите её кнопку загрузки</string>
+    <string name="home_download_instructions_step2_variant">Прокрутите страницу вниз и нажмите кнопку загрузки верхнего &lt;b&gt;варианта APK&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_search">Откройте результат поиска на сайте, которому вы доверяете</string>
+    <string name="home_download_instructions_step2_search_note">Morphe не может поручиться за эти сайты. Пропустите те, которые предлагают собственный магазин приложений вместо APK-файла</string>
+    <string name="home_download_instructions_step3_search">На этом сайте скачайте APK версии &lt;b&gt;%s&lt;/b&gt;, а не последней</string>
+    <string name="home_download_instructions_step3_search_any">На этом сайте скачайте APK приложения. &lt;b&gt;Любую версию&lt;/b&gt; можно пропатчить</string>
     <string name="home_download_instructions_download_button_toast">Нажмите скачать на веб-сайте, а не здесь 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Отлично! Теперь нажмите \"Продолжить\" и перейдите на сайт 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Практика — залог успеха, и у вас всё получается 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">Дождитесь завершения загрузки, затем &lt;b&gt;установите APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">После завершения загрузки, вернитесь в Morphe</string>
     <string name="home_download_instructions_step4_mount">После установки оригинального APK, вернитесь в Morphe</string>
-    <string name="home_download_instructions_continue">Перейти на APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Перейти на %s</string>
+    <string name="home_download_instructions_destination">страницу загрузки</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Выберите загруженный APK</string>
     <string name="home_file_picker_prompt_description">Выберите файл %s APK, который вы только что загрузили</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">Все патчи отключены</string>
     <string name="expert_mode_enable_all">Включить все</string>
     <string name="expert_mode_enable_all_done">Все патчи включены</string>
+    <string name="expert_mode_enable_all_universal_pending">Нажмите еще раз для универсальных патчей</string>
     <string name="expert_mode_reset_to_default">Включить рекомендованные патчи</string>
     <string name="expert_mode_reset_to_default_done">Рекомендуемые патчи применены</string>
     <string name="expert_mode_restore_saved">Восстановить сохраненный выбор</string>
@@ -385,6 +410,7 @@
     <string name="home_app_info_patch_update_available_description">Доступна более новая версия патчей. Обновите приложение, чтобы получить последние улучшения и исправления.</string>
     <string name="home_app_info_app_deleted_warning">Приложение было удалено.</string>
     <string name="home_app_info_app_deleted_description">Это приложение было удалено вне устройства Morphe. Переустановите его, чтобы восстановить работоспособность.</string>
+    <string name="home_app_info_not_patched_description">Установлена непатченная версия этого приложения. Morphe по-прежнему имеет свою предыдущую запись о патче.</string>
     <string name="home_app_info_apk_size">Размер APK</string>
     <string name="home_app_info_cpu_arch">Архитектура процессора</string>
     <!-- Home Screen - Root Mode -->
@@ -456,6 +482,11 @@
     <string name="battery_optimization_dialog_title">Защита от патчей в фоновом режиме</string>
     <string name="battery_optimization_dialog_description">На некоторых устройствах патчер может быть остановлен, когда приложение свернуто. Разрешите Morphe работать без ограничений заряда батареи, чтобы гарантировать надежное завершение патчинга.</string>
     <string name="battery_optimization_not_now">Не сейчас</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Недостаточно памяти</string>
+    <string name="patcher_memory_adjustment_description">Патчер был остановлен системой при работе с лимитом памяти %1$d МБ. Снижение лимита до %2$d МБ делает патчер менее заметной целью и может позволить завершить процесс.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Патчер был остановлен системой при работе с лимитом памяти %1$d МБ, что уже является минимально возможным. Попробуйте выполнить патчинг с меньшим количеством источников патчей или выберите меньшее количество патчей.</string>
+    <string name="patcher_memory_adjustment_apply">Снизить до %1$d МБ</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Идет установка исправлений…</string>
     <string name="patcher_notification_text">Нажмите, чтобы вернуться к патчеру</string>
@@ -490,6 +521,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">Патчинг приложения</string>
     <string name="memory_usage">Использование памяти</string>
+    <string name="cpu_usage">Использование ЦП</string>
+    <string name="storage_io_usage">Ввод-вывод хранилища</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Применение патчей</string>
     <string name="failed_to_execute_patch">Не удалось применить %s</string>
@@ -497,9 +530,12 @@
     <string name="patched_app_save_failed_toast">Не удалось сохранить исправленное приложение</string>
     <string name="plugin_activity_dialog_body">Требуется взаимодействие пользователя для продолжения работы с этим плагином</string>
     <string name="patcher_process_exit_message">Процесс патчера завершился с кодом %s</string>
+    <string name="patcher_heap_exhausted_message">Патчеру не хватило памяти при куче размером %1$d МБ. Это приложение слишком велико для выбранных патчей. Попробуйте использовать меньше источников патчей или выберите меньше патчей.</string>
     <string name="install_app_success">Успешно установлено</string>
     <string name="install_app_fail">Не удалось установить приложение: %s</string>
     <string name="uninstall_app_fail">Не удалось удалить приложение: %s</string>
+    <string name="uninstall_app_unverified">Оставлено на месте: Morphe не удалось проверить, что установленное приложение является сборкой, которую он пропатчил.</string>
+    <string name="launch_app_unverified">Morphe не удалось проверить, что установленное приложение является сборкой, которую он пропатчил.</string>
     <string name="uninstall_timeout">Время ожидания удаления истекло</string>
     <string name="save_apk_success">APK сохранен</string>
     <string name="saved_app_export_failed">Не удалось экспортировать исправленное приложение</string>
@@ -568,8 +604,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показывать приветственное сообщение на главном экране</string>
     <string name="settings_appearance_app_grouping">Группировка приложений</string>
     <string name="settings_appearance_app_grouping_description">Отображать переключатель на главном экране для группировки приложений по источнику или вашим категориям, сохраняя выбор при отключении</string>
-    <string name="settings_appearance_sort_button">Кнопка сортировки</string>
-    <string name="settings_appearance_sort_button_description">Показывать кнопку сортировки на главном экране</string>
+    <string name="settings_appearance_sort_button">Кнопка сортировки и фильтрации</string>
+    <string name="settings_appearance_sort_button_description">Показывать кнопку сортировки и фильтрации на главном экране</string>
     <string name="settings_appearance_app_card_colors">Цвета карточек приложений</string>
     <string name="settings_appearance_app_card_colors_default">По умолчанию</string>
     <string name="settings_appearance_app_card_colors_default_description">Присваивать каждому приложению цвет его собственного набора</string>
@@ -1070,6 +1106,7 @@ morphe_header_custom_dark.png
     <string name="version">Версия</string>
     <string name="patch">Патч</string>
     <string name="patching">Патчинг</string>
+    <string name="patched">Пропатчен</string>
     <string name="repatch">Применить патч</string>
     <string name="open">Открыть</string>
     <string name="mount">Смонтировать</string>

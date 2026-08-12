@@ -75,7 +75,7 @@ fun ThemeColorDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_advanced_patch_options_theme_colors),
         titleTrailingContent = {
-            DialogTitleAction(
+            TitleAction(
                 icon = Icons.Outlined.Restore,
                 contentDescription = stringResource(R.string.reset),
                 onClick = {

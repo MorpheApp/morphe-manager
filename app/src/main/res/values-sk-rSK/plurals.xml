@@ -90,12 +90,6 @@
         <item quantity="many">%s zdrojov nainštalovaných</item>
         <item quantity="other">%s zdrojov nainštalovaných</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s zvolená záplata</item>
-        <item quantity="few">%s zvolené záplaty</item>
-        <item quantity="many">%s zvolených záplat</item>
-        <item quantity="other">%s zvolených záplat</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s skrytá aplikácia</item>
         <item quantity="few">%s skryté aplikácie</item>

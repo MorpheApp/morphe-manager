@@ -75,11 +75,6 @@
         <item quantity="few">%s izvora instalirano</item>
         <item quantity="other">%s izvora instalirano</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">Odabrano je %s od  patcheva</item>
-        <item quantity="few">Odabrano je %s od  patcheva</item>
-        <item quantity="other">Odabrano je %s od  patcheva</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s skrivena aplikacija</item>
         <item quantity="few">%s skrivenih aplikacija</item>

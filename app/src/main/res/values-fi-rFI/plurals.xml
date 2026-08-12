@@ -60,10 +60,6 @@
         <item quantity="one">%s asennettu lähde</item>
         <item quantity="other">%s asennettua lähdettä</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s valittu lisäosa</item>
-        <item quantity="other">%s valittua lisäosaa</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s piilotettu sovellus</item>
         <item quantity="other">%s piilotettua sovellusta</item>

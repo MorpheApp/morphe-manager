@@ -119,7 +119,6 @@
 &lt;b&gt;  APK دابەزێنە &lt;/b&gt;</string>
     <string name="home_download_instructions_step4">دوای تەواوبوونی داگرتنەکە بگەڕێوە بۆ Morphe</string>
     <string name="home_download_instructions_step4_mount">دوای دامەزراندنی APK ی بنەڕەتی، بگەڕێوە بۆ Morphe</string>
-    <string name="home_download_instructions_continue">بەردەوام بە لە APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">APKی دابەزێندراو دیاری بکە</string>
     <string name="home_file_picker_prompt_description">&lt;b&gt;%s&lt;/b&gt; APK دیاری بکە کە داتبەزاندووە</string>
@@ -282,6 +281,7 @@
     <string name="battery_optimization_dialog_title">پاراستن لە پینەکردنی پاشخان</string>
     <string name="battery_optimization_dialog_description">هەندێک ئامێر لەوانەیە پینەکەرەکە بوەستێنن کاتێک ئەپەکە بچووک دەکرێتەوە. ڕێگە بە Morphe بدە بە کارکردن بەبێ سنووردارکردنی پاتری بۆ دڵنیابوون لە تەواوبوونی پینەکردن بە شێوەیەکی باوەڕپێکراو</string>
     <string name="battery_optimization_not_now">ئێستا نا</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">پینەکردن بەردەوامە…</string>
     <string name="patcher_notification_text">کرتە بکە بۆ گەڕانەوە بۆ پینەکەرەکە</string>
@@ -476,6 +476,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="download">دابەزاندن</string>
     <string name="continue_">بەردەوامبوون</string>
     <string name="patching">پینەکردن</string>
+    <string name="patched">پینەکراو</string>
     <string name="allow">ڕێگەپێدان</string>
     <!-- Shown while resuming a download, before the total size is known -->
     <!-- Onboarding coach marks -->

@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.automirrored.outlined.Launch
 import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.*
@@ -92,6 +93,10 @@ fun InstalledAppInfoDialog(
     // Get update status from the shared HomeViewModel instance
     val appUpdates by homeViewModel.appUpdatesAvailable.collectAsStateWithLifecycle()
     val hasUpdate = appUpdates[packageName] == true
+    val showsUpdateBanner = hasUpdate &&
+            !viewModel.isAppDeleted &&
+            !viewModel.isInstallStateNotPatched &&
+            !viewModel.isInstallStateUnknown
 
     // Accent color resolution order: bundle metadata (appIconColor) -> KnownApps.brandColor -> default.
     // originalPackageName needed because metadata is keyed by original pkg, not patched.
@@ -302,7 +307,10 @@ fun InstalledAppInfoDialog(
         show = showDeleteDialog.value,
         isSavedOnly = installedApp?.installType == InstallType.SAVED,
         appInfo = viewModel.appInfo,
-        appLabel = viewModel.appInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString(),
+        packageName = packageName,
+        appLabel = appLabel,
+        hasSavedApk = viewModel.hasSavedCopy,
+        hasOriginalApk = viewModel.hasOriginalApk,
         onConfirm = {
             viewModel.removeAppCompletely()
             showDeleteDialog.value = false
@@ -379,7 +387,7 @@ fun InstalledAppInfoDialog(
                                         availablePatches = availablePatches,
                                         isInstalling = isInstalling,
                                         mountOperation = mountOperation,
-                                        hasUpdate = hasUpdate,
+                                        showsUpdateBanner = showsUpdateBanner,
                                         accentColor = infoAccentColor,
                                         onPatchClick = { handlePatchClick() },
                                         onUninstall = { showUninstallConfirm.value = true },
@@ -442,7 +450,7 @@ fun InstalledAppInfoDialog(
                                 verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
                             ) {
                                 AnimatedVisibility(
-                                    visible = viewModel.isAppDeleted,
+                                    visible = viewModel.isAppDeleted && !viewModel.isInstallStateNotPatched,
                                     enter = Animations.expandFadeEnter,
                                     exit = Animations.shrinkFadeExit
                                 ) {
@@ -460,7 +468,37 @@ fun InstalledAppInfoDialog(
                                     }
                                 }
                                 AnimatedVisibility(
-                                    visible = hasUpdate && !viewModel.isAppDeleted,
+                                    visible = viewModel.isInstallStateNotPatched,
+                                    enter = Animations.expandFadeEnter,
+                                    exit = Animations.shrinkFadeExit
+                                ) {
+                                    StaggeredItem(entered = entered.value, index = 2) {
+                                        WarningBanner(
+                                            icon = Icons.Outlined.AutoFixHigh,
+                                            title = stringResource(R.string.home_unpatched_version_installed),
+                                            description = stringResource(R.string.home_app_info_not_patched_description),
+                                            buttonText = stringResource(R.string.patch),
+                                            buttonIcon = Icons.Outlined.AutoFixHigh,
+                                            onClick = { onTriggerPatchFlow(installedApp.originalPackageName) },
+                                            accentColor = infoAccentColor
+                                        )
+                                    }
+                                }
+                                AnimatedVisibility(
+                                    visible = viewModel.isInstallStateUnknown,
+                                    enter = Animations.expandFadeEnter,
+                                    exit = Animations.shrinkFadeExit
+                                ) {
+                                    StaggeredItem(entered = entered.value, index = 2) {
+                                        Notice(
+                                            text = stringResource(R.string.home_app_info_install_unverified),
+                                            tone = SemanticTone.Warning,
+                                            icon = Icons.AutoMirrored.Outlined.HelpOutline
+                                        )
+                                    }
+                                }
+                                AnimatedVisibility(
+                                    visible = showsUpdateBanner,
                                     enter = Animations.expandFadeEnter,
                                     exit = Animations.shrinkFadeExit
                                 ) {
@@ -521,7 +559,7 @@ fun InstalledAppInfoDialog(
                         item(key = "banner") {
                             Column {
                                 androidx.compose.animation.AnimatedVisibility(
-                                    visible = viewModel.isAppDeleted,
+                                    visible = viewModel.isAppDeleted && !viewModel.isInstallStateNotPatched,
                                     enter = Animations.expandFadeEnter,
                                     exit = Animations.shrinkFadeExit
                                 ) {
@@ -545,7 +583,47 @@ fun InstalledAppInfoDialog(
                                     }
                                 }
                                 androidx.compose.animation.AnimatedVisibility(
-                                    visible = hasUpdate && !viewModel.isAppDeleted,
+                                    visible = viewModel.isInstallStateNotPatched,
+                                    enter = Animations.expandFadeEnter,
+                                    exit = Animations.shrinkFadeExit
+                                ) {
+                                    Column {
+                                        Spacer(Modifier.height(Defaults.ItemSpacing))
+                                        StaggeredItem(entered = entered.value, index = 1) {
+                                            WarningBanner(
+                                                icon = Icons.Outlined.AutoFixHigh,
+                                                title = stringResource(R.string.home_unpatched_version_installed),
+                                                description = stringResource(R.string.home_app_info_not_patched_description),
+                                                buttonText = stringResource(R.string.patch),
+                                                buttonIcon = Icons.Outlined.AutoFixHigh,
+                                                onClick = {
+                                                    onTriggerPatchFlow(installedApp.originalPackageName)
+                                                },
+                                                accentColor = infoAccentColor,
+                                                modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
+                                            )
+                                        }
+                                    }
+                                }
+                                androidx.compose.animation.AnimatedVisibility(
+                                    visible = viewModel.isInstallStateUnknown,
+                                    enter = Animations.expandFadeEnter,
+                                    exit = Animations.shrinkFadeExit
+                                ) {
+                                    Column {
+                                        Spacer(Modifier.height(Defaults.ItemSpacing))
+                                        StaggeredItem(entered = entered.value, index = 1) {
+                                            Notice(
+                                                text = stringResource(R.string.home_app_info_install_unverified),
+                                                tone = SemanticTone.Warning,
+                                                icon = Icons.AutoMirrored.Outlined.HelpOutline,
+                                                modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
+                                            )
+                                        }
+                                    }
+                                }
+                                androidx.compose.animation.AnimatedVisibility(
+                                    visible = showsUpdateBanner,
                                     enter = Animations.expandFadeEnter,
                                     exit = Animations.shrinkFadeExit
                                 ) {
@@ -599,7 +677,7 @@ fun InstalledAppInfoDialog(
                                     availablePatches = availablePatches,
                                     isInstalling = isInstalling,
                                     mountOperation = mountOperation,
-                                    hasUpdate = hasUpdate,
+                                    showsUpdateBanner = showsUpdateBanner,
                                     accentColor = infoAccentColor,
                                     onPatchClick = { handlePatchClick() },
                                     onUninstall = { showUninstallConfirm.value = true },
@@ -849,7 +927,7 @@ private fun AppHeroHeader(
                     }
                     // Animated version (slightly behind name via sub-range)
                     Text(
-                        text = appInfo?.versionName?.let { "v$it" } ?: installedApp.version,
+                        text = (appInfo?.versionName ?: installedApp.version).withVersionPrefix(),
                         style = MaterialTheme.typography.bodyMedium,
                         color = onHero.copy(alpha = 0.50f),
                         modifier = Modifier.graphicsLayer {
@@ -1157,7 +1235,7 @@ private fun ActionsSection(
     availablePatches: Int,
     isInstalling: Boolean,
     mountOperation: InstallViewModel.MountOperation?,
-    hasUpdate: Boolean,
+    showsUpdateBanner: Boolean,
     accentColor: Color,
     onPatchClick: () -> Unit,
     onUninstall: () -> Unit,
@@ -1174,7 +1252,7 @@ private fun ActionsSection(
 
     // Primary actions - Single Patch button that triggers APK selection dialog
     // The dialog will show "Use saved APK" option if original APK exists
-    if (!hasUpdate && !viewModel.isAppDeleted) { // Hide the Patch button if there is a banner with its own button
+    if (!showsUpdateBanner && !viewModel.isAppDeleted) {
         primaryActions.add(
             ActionItem(
                 text = stringResource(R.string.patch),
@@ -1336,7 +1414,7 @@ private fun ActionsSection(
         )
     }
 
-    if (viewModel.hasSavedCopy) {
+    if (viewModel.canRemoveRecord) {
         destructiveActions.add(
             ActionItem(
                 text = stringResource(R.string.delete),
@@ -1555,7 +1633,10 @@ private fun DeleteConfirmDialog(
     show: Boolean,
     isSavedOnly: Boolean,
     appInfo: PackageInfo?,
-    appLabel: String?,
+    packageName: String,
+    appLabel: String,
+    hasSavedApk: Boolean,
+    hasOriginalApk: Boolean,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -1581,18 +1662,17 @@ private fun DeleteConfirmDialog(
         ) {
             AppIcon(
                 packageInfo = appInfo,
+                packageName = packageName,
                 contentDescription = null,
                 modifier = Modifier.size(64.dp)
             )
-            if (appLabel != null) {
-                Text(
-                    text = appLabel,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.SemiBold,
-                    color = LocalDialogTextColor.current,
-                    textAlign = TextAlign.Center
-                )
-            }
+            Text(
+                text = appLabel,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.SemiBold,
+                color = LocalDialogTextColor.current,
+                textAlign = TextAlign.Center
+            )
             LabeledSection(
                 title = stringResource(R.string.home_app_info_remove_app_warning)
             ) {
@@ -1602,18 +1682,23 @@ private fun DeleteConfirmDialog(
                         text = stringResource(R.string.home_app_info_delete_item_patched_apk)
                     )
                 } else {
+                    // A record can outlive both archives, so only list the files that are there
                     DeleteListItem(
                         icon = Icons.Outlined.Storage,
                         text = stringResource(R.string.home_app_info_delete_item_database)
                     )
-                    DeleteListItem(
-                        icon = Icons.Outlined.Android,
-                        text = stringResource(R.string.home_app_info_delete_item_patched_apk)
-                    )
-                    DeleteListItem(
-                        icon = Icons.Outlined.FilePresent,
-                        text = stringResource(R.string.home_app_info_delete_item_original_apk)
-                    )
+                    if (hasSavedApk) {
+                        DeleteListItem(
+                            icon = Icons.Outlined.Android,
+                            text = stringResource(R.string.home_app_info_delete_item_patched_apk)
+                        )
+                    }
+                    if (hasOriginalApk) {
+                        DeleteListItem(
+                            icon = Icons.Outlined.FilePresent,
+                            text = stringResource(R.string.home_app_info_delete_item_original_apk)
+                        )
+                    }
                 }
             }
             if (!isSavedOnly) {

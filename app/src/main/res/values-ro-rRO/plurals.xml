@@ -75,11 +75,6 @@
         <item quantity="few">%s surse instalate</item>
         <item quantity="other">%s de surse instalate</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s patch selectat</item>
-        <item quantity="few">%s patch-uri selectate</item>
-        <item quantity="other">%s de patch-uri selectate</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s aplicație ascunsă</item>
         <item quantity="few">%s aplicații ascunse</item>

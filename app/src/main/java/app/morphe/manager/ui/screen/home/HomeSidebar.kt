@@ -42,6 +42,7 @@ internal fun HomeSidebarPanel(
     isExpertModeEnabled: Boolean,
     showSortButton: Boolean,
     sortMode: HomeAppSortMode,
+    filterMode: HomeAppFilterMode,
     onSearchClick: () -> Unit,
     onSortClick: () -> Unit,
     onBundlesClick: () -> Unit,
@@ -67,11 +68,12 @@ internal fun HomeSidebarPanel(
             )
         }
         if (showSortButton) {
+            val filterActive = filterMode.isActive
             HomeSidebarNavItem(
                 icon = Icons.AutoMirrored.Outlined.Sort,
                 label = stringResource(R.string.sort),
-                isSelected = sortMode != HomeAppSortMode.MANUAL,
-                stateDescription = stringResource(sortMode.labelRes),
+                isSelected = filterActive || sortMode != HomeAppSortMode.MANUAL,
+                stateDescription = homeAppListOptionsStateDescription(sortMode, filterMode),
                 onClick = onSortClick
             )
         }

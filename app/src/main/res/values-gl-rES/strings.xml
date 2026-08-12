@@ -125,7 +125,6 @@
     <string name="home_download_instructions_step3_mount">Agarda a que a descarga se complete, despois &lt;b&gt; instalará a APK &lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Cando remate a descarga, regrese a Morphe</string>
     <string name="home_download_instructions_step4_mount">Tras instalar o APK orixinal, regrese a Morphe</string>
-    <string name="home_download_instructions_continue">Continuar a APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Seleccionar o APK descargado</string>
     <string name="home_file_picker_prompt_description">Escolle a APK &lt;b&gt;%s&lt;/b&gt; que acabas de descargar</string>
@@ -235,6 +234,7 @@ Elixe outro APK</string>
     <string name="patcher_step_group_patching">Parcheando</string>
     <string name="patcher_step_group_saving">Gardando</string>
     <!-- Battery optimization pre-flight dialog -->
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Parcheado en progreso...</string>
     <string name="patcher_notification_text">Toque para volver ao parcheador</string>
@@ -310,6 +310,7 @@ Elixe outro APK</string>
     <string name="import_">Importar</string>
     <string name="copy">Copiar</string>
     <string name="patching">Parcheando</string>
+    <string name="patched">Parcheado</string>
     <string name="allow">Permitir</string>
     <!-- Shown while resuming a download, before the total size is known -->
     <!-- Onboarding coach marks -->

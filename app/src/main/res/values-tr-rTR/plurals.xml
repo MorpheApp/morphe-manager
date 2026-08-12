@@ -60,10 +60,6 @@
         <item quantity="one">%s kaynak yüklendi</item>
         <item quantity="other">%s kaynak yüklendi</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s yama seçildi</item>
-        <item quantity="other">%s yama seçildi</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s gizli uygulama</item>
         <item quantity="other">%s gizli uygulama</item>

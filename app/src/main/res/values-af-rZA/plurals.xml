@@ -60,10 +60,6 @@
         <item quantity="one">%s oorsprong geïnstalleer</item>
         <item quantity="other">%s oorspronge geïnstalleer</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s verandering gekies</item>
-        <item quantity="other">%s veeanderinge gekies</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s versteek program</item>
         <item quantity="other">%s versteek programme</item>

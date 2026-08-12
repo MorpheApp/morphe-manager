@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">其他应用</string>
     <string name="home_not_patched_yet">尚未修补</string>
+    <string name="home_unpatched_version_installed">已安装未修补版本</string>
     <string name="home_no_patches_available">没有可用的补丁</string>
     <string name="home_app_hide_title">隐藏此应用？</string>
     <string name="home_app_hide_message">此应用将从主屏幕隐藏。您可以使用列表底部的按钮稍后从隐藏的应用中恢复它。</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">您的源已是最新的</string>
     <string name="home_sources_are_loading">源正在加载，请稍等…</string>
     <string name="home_search_apps">搜索应用</string>
-    <string name="home_app_sort_title">排序应用</string>
+    <string name="home_app_list_options_title">排序和筛选</string>
+    <string name="home_app_list_options_state_description">已按 %1$s 排序，已按 %2$s 筛选</string>
+    <string name="home_app_filter_all_description">主屏幕上的所有应用</string>
+    <string name="home_app_filter_patched_description">你已使用 Morphe 修补或保存的应用</string>
+    <string name="home_app_filter_not_patched_description">你尚未在 Morphe 中修补的应用</string>
+    <string name="home_app_filter_installed_description">此设备上当前安装的应用</string>
+    <string name="home_app_filter_uninstalled_description">使用 Morphe 修补过且已不在本设备上的应用</string>
     <string name="home_app_sort_manual_description">长按一个应用，然后点击重新排序按钮</string>
     <string name="home_app_sort_recommended">推荐顺序</string>
     <string name="home_app_sort_recommended_description">优先显示已安装和固定应用</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">没有应用匹配“%s”</string>
     <string name="home_all_apps_hidden_title">所有应用已隐藏</string>
     <string name="home_all_apps_hidden_subtitle">您已将所有应用从主屏幕隐藏</string>
+    <string name="home_no_apps_filter_title">没有应用匹配此筛选条件</string>
+    <string name="home_no_apps_filter_subtitle">没有与 %s 匹配的内容</string>
     <string name="home_category_add">添加类别</string>
     <string name="home_category_all_apps">所有应用</string>
     <string name="home_category_custom">自定义</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">夜间且高效</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">补丁源</string>
+    <string name="sources_search">搜索来源</string>
     <string name="sources_sort_title">对补丁源进行排序</string>
     <string name="sources_sort_manual">手动排序</string>
     <string name="sources_sort_manual_hint">长按源以重新排序</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">只有在您信任此辅助应用程序时才继续。Morphe 无法验证此 APK 的签名，因此修改后的文件将无法检测到</string>
     <string name="home_apk_helper_no_result">辅助应用程序未返回 APK</string>
     <string name="home_apk_helper_no_access">辅助应用程序未授予对其返回的 APK 的访问权限</string>
+    <string name="home_apk_helper_no_package">辅助应用未说明要使用哪个已安装的应用</string>
+    <string name="home_apk_helper_wrong_package">辅助应用返回的应用与正在修补的应用不同</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe 无法使用已安装的应用</string>
+    <string name="home_apk_helper_installed_incompatible">已安装的版本无法修补</string>
     <string name="home_apk_use_saved">使用保存的 APK</string>
     <string name="home_apk_use_installed">使用已安装的 APK</string>
     <string name="home_apk_use_installed_unverified">无法验证已安装应用的签名，因此该应用可能已被修补</string>
+    <string name="home_unverified">未验证</string>
+    <string name="home_app_info_install_unverified">Morphe 无法确认已安装的应用是它修补的构建。请从保存的 APK 重新安装以恢复其操作。</string>
     <string name="home_app_info_no_saved_apk">没有已保存的 APK 文件, 需要重新选择 APK 文件进行修补</string>
     <string name="home_version_requires_android">需要 Android %s+。</string>
     <string name="home_apk_no_compatible_versions_title">不支持此设备</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">下载原始 APK</string>
     <string name="home_download_instructions_steps_title">说明：</string>
+    <string name="home_download_instructions_finding">正在查找下载页面…</string>
     <string name="home_download_instructions_step1">请按下下面的“%s”按钮。</string>
     <string name="home_download_instructions_step2_part1">向下滚动网页并按</string>
+    <string name="home_download_instructions_step2_generic">向下滚动网页并点击其下载按钮</string>
+    <string name="home_download_instructions_step2_variant">向下滚动网页，然后点击顶部 &lt;b&gt;APK 变体&lt;/b&gt; 的下载按钮</string>
+    <string name="home_download_instructions_step2_search">打开来自你信任的网站的搜索结果</string>
+    <string name="home_download_instructions_step2_search_note">Morphe 无法为这些网站担保。请跳过那些提供自己的应用商店而不是 APK 文件的网站</string>
+    <string name="home_download_instructions_step3_search">在那个网站上，下载 &lt;b&gt;%s&lt;/b&gt; 版本的 APK，而不是最新版本</string>
+    <string name="home_download_instructions_step3_search_any">在那个网站上，下载该应用的 APK。&lt;b&gt;任何版本&lt;/b&gt;都可以修补</string>
     <string name="home_download_instructions_download_button_toast">在网站上按下下载，而不是在这里 😊</string>
     <string name="home_download_instructions_download_button_toast_2">太棒了！现在点击继续并访问网站👆</string>
     <string name="home_download_instructions_download_button_toast_3">熟能生巧，你做得越来越好了💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">等待下载完成，然后 &lt;b&gt;安装 APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">下载完成后，返回 Morphe</string>
     <string name="home_download_instructions_step4_mount">安装原始APK后，返回Morphe</string>
-    <string name="home_download_instructions_continue">继续到 APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">继续前往 %s</string>
+    <string name="home_download_instructions_destination">下载页面</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">选择下载的 APK</string>
     <string name="home_file_picker_prompt_description">选择您刚刚下载的&lt;b&gt;%s&lt;/b&gt; APK 文件</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">所有补丁已禁用</string>
     <string name="expert_mode_enable_all">启用所有</string>
     <string name="expert_mode_enable_all_done">所有补丁已启用</string>
+    <string name="expert_mode_enable_all_universal_pending">再次点按以启用通用补丁</string>
     <string name="expert_mode_reset_to_default">启用推荐补丁</string>
     <string name="expert_mode_reset_to_default_done">已应用推荐补丁</string>
     <string name="expert_mode_restore_saved">还原已保存的选择</string>
@@ -385,6 +410,7 @@
     <string name="home_app_info_patch_update_available_description">有新的修补版本可用。重新修补您的应用以获取最新改进和修复</string>
     <string name="home_app_info_app_deleted_warning">应用已卸载</string>
     <string name="home_app_info_app_deleted_description">此应用已在 Morphe 外卸载。重新安装以恢复功能</string>
+    <string name="home_app_info_not_patched_description">此应用安装的是未修补版本。Morphe仍保留其先前的补丁记录。</string>
     <string name="home_app_info_apk_size">APK大小</string>
     <string name="home_app_info_cpu_arch">CPU 架构</string>
     <!-- Home Screen - Root Mode -->
@@ -456,6 +482,11 @@
     <string name="battery_optimization_dialog_title">后台补丁保护</string>
     <string name="battery_optimization_dialog_description">一些设备在应用被最小化时可能会停止补丁程序。允许 Morphe 在没有电池限制的情况下运行，以确保补丁完成可靠。</string>
     <string name="battery_optimization_not_now">暂不</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">内存不足</string>
+    <string name="patcher_memory_adjustment_description">补丁程序在内存限制为 %1$d MB 的情况下运行时被系统停止。将限制降低到 %2$d MB 会使补丁程序成为更小的目标，并可能让运行完成。</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">补丁程序在内存限制为 %1$d MB 的情况下运行时被系统停止，这已经是可用的最低限制。请尝试使用更少的补丁源，或选择更少的补丁。</string>
+    <string name="patcher_memory_adjustment_apply">降低到 %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">正在修补…</string>
     <string name="patcher_notification_text">点击返回修补程序</string>
@@ -490,6 +521,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">修补应用</string>
     <string name="memory_usage">内存使用</string>
+    <string name="cpu_usage">CPU 使用率</string>
+    <string name="storage_io_usage">存储 I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">应用补丁</string>
     <string name="failed_to_execute_patch">执行 %s 失败</string>
@@ -497,9 +530,12 @@
     <string name="patched_app_save_failed_toast">保存修补后的应用失败</string>
     <string name="plugin_activity_dialog_body">需要用户交互才能继续使用此插件</string>
     <string name="patcher_process_exit_message">修補程式程序結束，傳回代碼 %s</string>
+    <string name="patcher_heap_exhausted_message">补丁程序在堆内存为 %1$d MB 时内存不足。此应用对于所选补丁来说太大。请尝试使用更少的补丁源进行修补，或选择更少的补丁。</string>
     <string name="install_app_success">安装成功</string>
     <string name="install_app_fail">应用安装失败：%s</string>
     <string name="uninstall_app_fail">卸载应用失败：%s</string>
+    <string name="uninstall_app_unverified">保留：Morphe 无法验证已安装的应用是它修补的构建。</string>
+    <string name="launch_app_unverified">Morphe 无法验证已安装的应用是它修补的构建。</string>
     <string name="uninstall_timeout">卸载超时</string>
     <string name="save_apk_success">APK 已保存</string>
     <string name="saved_app_export_failed">导出修补的应用失败</string>
@@ -569,8 +605,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">在主屏幕上显示问候消息</string>
     <string name="settings_appearance_app_grouping">应用分组</string>
     <string name="settings_appearance_app_grouping_description">显示主屏幕切换器，按来源或您自己的分类对应用进行分组，并在关闭时保持选择</string>
-    <string name="settings_appearance_sort_button">排序按钮</string>
-    <string name="settings_appearance_sort_button_description">在主屏幕上显示排序按钮</string>
+    <string name="settings_appearance_sort_button">排序和筛选按钮</string>
+    <string name="settings_appearance_sort_button_description">在主屏幕上显示排序和筛选按钮</string>
     <string name="settings_appearance_app_card_colors">应用卡片颜色</string>
     <string name="settings_appearance_app_card_colors_default">默认</string>
     <string name="settings_appearance_app_card_colors_default_description">为每个应用赋予其自身包的颜色</string>
@@ -1072,6 +1108,7 @@ morphe_header_custom_dark.png
     <string name="version">版本</string>
     <string name="patch">修补</string>
     <string name="patching">正在修补</string>
+    <string name="patched">已修补</string>
     <string name="repatch">重新修补</string>
     <string name="open">打开</string>
     <string name="mount">挂载</string>

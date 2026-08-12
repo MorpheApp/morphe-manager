@@ -45,9 +45,6 @@
     <plurals name="sources_management_subtitle">
         <item quantity="other">ติดตั้ง %s ที่มาแล้ว</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="other">%s แพตช์ถูกเลือก</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">แอปที่ซ่อนอยู่ %s แอป</item>
     </plurals>

@@ -28,8 +28,4 @@
         <item quantity="one">%s સ્રોત ઇન્સ્ટોલ કરેલ છે</item>
         <item quantity="other">%s સ્ત્રોતો ઇન્સ્ટોલ કરેલ છે</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s પેચ પસંદ કર્યો</item>
-        <item quantity="other">%s પેચો પસંદ કર્યા</item>
-    </plurals>
 </resources>

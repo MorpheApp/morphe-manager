@@ -120,6 +120,9 @@ dependencies {
 
     // Semantic versioning parser
     implementation(libs.semver.parser)
+
+    // Unit tests
+    testImplementation(libs.kotlin.test.junit)
 }
 
 android {

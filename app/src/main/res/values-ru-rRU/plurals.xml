@@ -90,12 +90,6 @@
         <item quantity="many">%s источников установлено</item>
         <item quantity="other">%s источников установлено</item>
     </plurals>
-    <plurals name="patch_selection_total_patches">
-        <item quantity="one">%s патч выбран</item>
-        <item quantity="few">%s патчи выбрано</item>
-        <item quantity="many">%s патчей выбрано</item>
-        <item quantity="other">%s патчей выбрано</item>
-    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s скрытое приложение</item>
         <item quantity="few">%s скрытые приложения</item>

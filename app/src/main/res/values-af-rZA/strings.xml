@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Ander programme</string>
     <string name="home_not_patched_yet">Nog nie verander nie</string>
+    <string name="home_unpatched_version_installed">Ongepatchte weergawe geïnstalleer</string>
     <string name="home_no_patches_available">Geen veranderinge beskikbaar</string>
     <string name="home_app_hide_title">Versteek hierdie program?</string>
     <string name="home_app_hide_message">Hierdie app sal van die tuisskerm weggesteek word. Jy kan dit later herstel deur die \'\'-knoppie onderaan die lys te gebruik</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">Jou oorspronge is opgedateer</string>
     <string name="home_sources_are_loading">Oorsprong word gelaai, wag asseblief…</string>
     <string name="home_search_apps">Soek programme</string>
-    <string name="home_app_sort_title">Sorteer programme</string>
+    <string name="home_app_list_options_title">Sorteer en filter</string>
+    <string name="home_app_list_options_state_description">Gesorteer volgens %1$s, gefiltreer volgens %2$s</string>
+    <string name="home_app_filter_all_description">Elke app op die tuisskerm</string>
+    <string name="home_app_filter_patched_description">Apps wat jy met Morphe gepatch of gestoor het</string>
+    <string name="home_app_filter_not_patched_description">Apps wat jy nog nie in Morphe gepatch het nie</string>
+    <string name="home_app_filter_installed_description">Toepassings wat tans op hierdie toestel geïnstalleer is</string>
+    <string name="home_app_filter_uninstalled_description">Toepassings wat met Morphe gepatch is en nie meer op hierdie toestel is nie</string>
     <string name="home_app_sort_manual_description">Druk lank op \'n program, en tik dan op die herordeneer knoppie</string>
     <string name="home_app_sort_recommended">Aanbevole volgorde</string>
     <string name="home_app_sort_recommended_description">Geïnstalleerde en vasgestelde programme eerste</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">Geen programme gelyk aan \"%s\" nie</string>
     <string name="home_all_apps_hidden_title">Alle programme is versteek</string>
     <string name="home_all_apps_hidden_subtitle">Jy het alle programme van die tuisskerm versteek</string>
+    <string name="home_no_apps_filter_title">Geen toepassings pas by hierdie filter nie</string>
+    <string name="home_no_apps_filter_subtitle">Niks het met %s ooreengestem nie</string>
     <string name="home_category_add">Kategorie byvoeg</string>
     <string name="home_category_all_apps">Alle toepassings</string>
     <string name="home_category_custom">Pasgemaak</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">Nagtelike en produktief</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Verandering oorspronge</string>
+    <string name="sources_search">Soek bronne</string>
     <string name="sources_sort_title">Sorteer foutbronne</string>
     <string name="sources_sort_manual">Handmatige volgorde</string>
     <string name="sources_sort_manual_hint">Druk lank op \'n bron om te herschik</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">Gaan slegs voort as jy hierdie helper-toepassing vertrou. Morphe kan nie die handtekening van hierdie APK verifieer nie, so \'n gewysigde lêer sal nie opgespoor word nie</string>
     <string name="home_apk_helper_no_result">Die helper-toepassing het nie \'n APK teruggegee nie</string>
     <string name="home_apk_helper_no_access">Die helper-toepassing het nie toegang tot die APK wat dit teruggegee het, toegelaat nie</string>
+    <string name="home_apk_helper_no_package">Die hulptoepassing het nie gesê watter geïnstalleerde toepassing gebruik moet word nie</string>
+    <string name="home_apk_helper_wrong_package">Die hulptoepassing het \'n ander toepassing teruggegee as die een wat gepatch word</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe kon nie die geïnstalleerde toepassing gebruik nie</string>
+    <string name="home_apk_helper_installed_incompatible">Die geïnstalleerde weergawe kan nie gepatch word nie</string>
     <string name="home_apk_use_saved">Gebruik gestoorde APK</string>
     <string name="home_apk_use_installed">Gebruik geïnstalleerde APK</string>
     <string name="home_apk_use_installed_unverified">Kon nie die handtekening van die geïnstalleerde app verifieer nie, dus is dit moontlik reeds gemodifiseer</string>
+    <string name="home_unverified">Ongeverifieer</string>
+    <string name="home_app_info_install_unverified">Morphe kan nie bevestig dat die geïnstalleerde app die weergawe is wat dit gepatch het nie. Installeer dit weer vanaf die gestoorde APK om sy aksies te herstel.</string>
     <string name="home_app_info_no_saved_apk">Geen gestoorde APK nie. Verandering sal vereis dat jy die APK vyl weer kies</string>
     <string name="home_version_requires_android">Vereis Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nie op hierdie toestel ondersteun nie</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Laai die oorspronklike APK af</string>
     <string name="home_download_instructions_steps_title">Instruksies:</string>
+    <string name="home_download_instructions_finding">Besig om die aflaaibladsy te vind…</string>
     <string name="home_download_instructions_step1">Druk op die \'%s\' knoppie hieronder</string>
     <string name="home_download_instructions_step2_part1">Rol af op die webblad en druk</string>
+    <string name="home_download_instructions_step2_generic">Rol af op die webblad en druk op sy aflaaiknoppie</string>
+    <string name="home_download_instructions_step2_variant">Rol af op die webblad en druk op die aflaaiknoppie van die boonste &lt;b&gt;APK-variant&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_search">Maak ’n soekresultaat oop van ’n webwerf wat jy vertrou</string>
+    <string name="home_download_instructions_step2_search_note">Morphe kan nie vir hierdie webwerwe instaan nie. Slaan dié oor wat hul eie appwinkel in plaas van ’n APK-lêer aanbied</string>
+    <string name="home_download_instructions_step3_search">Op daardie webwerf, laai die APK van weergawe &lt;b&gt;%s&lt;/b&gt; af, nie die nuutste een nie</string>
+    <string name="home_download_instructions_step3_search_any">Op daardie webwerf, laai die APK van die app af. &lt;b&gt;Enige weergawe&lt;/b&gt; kan gepatch word</string>
     <string name="home_download_instructions_download_button_toast">Druk op aflaai op die webwerf, en nie hier nie 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Fantasties! Klik nou op \"Gaan voort\" en besoek die webwerf 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Oefening maak perfeksie en jy kom daar 🔥</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">Wag vir die aflaai om voltooi te wees, en &lt;b&gt;installeer dan die APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Nadat die aflaai voltooi is, keer terug na Morphe</string>
     <string name="home_download_instructions_step4_mount">Nadat die oorspronklike APK geïnstalleer is, keer terug na Morphe</string>
-    <string name="home_download_instructions_continue">Gaan voort na APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Gaan voort na %s</string>
+    <string name="home_download_instructions_destination">die aflaaibladsy</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Kies afgelaaide APK</string>
     <string name="home_file_picker_prompt_description">Kies die &lt;b&gt;%s&lt;/b&gt; APK-vyl wat jy pas afgelaai het</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">Alle pleisters gedeaktiveer</string>
     <string name="expert_mode_enable_all">Aktiveer alles</string>
     <string name="expert_mode_enable_all_done">Alle pleisters geaktiveer</string>
+    <string name="expert_mode_enable_all_universal_pending">Tik weer vir universele patches</string>
     <string name="expert_mode_reset_to_default">Aktiveer aanbevole pleisters</string>
     <string name="expert_mode_reset_to_default_done">Aanbevole pleisters toegepas</string>
     <string name="expert_mode_restore_saved">Ingevoeg suksesvol</string>
@@ -385,6 +410,7 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="home_app_info_patch_update_available_description">\'n Nuwer weergawe van patches is beskikbaar. Herpatch jou app om die nuutste verbeterings en regstellings te kry</string>
     <string name="home_app_info_app_deleted_warning">App is verwyder</string>
     <string name="home_app_info_app_deleted_description">Hierdie app is buite Morphe verwyder. Pleister dit weer om funksionaliteit te herstel</string>
+    <string name="home_app_info_not_patched_description">\'n Ongepatchte weergawe van hierdie app is geïnstalleer. Morphe het steeds sy vorige pleisterrekord.</string>
     <string name="home_app_info_apk_size">APK-grootte</string>
     <string name="home_app_info_cpu_arch">Sentrale prosessorargitektuur</string>
     <!-- Home Screen - Root Mode -->
@@ -456,6 +482,11 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="battery_optimization_dialog_title">Beskerming teen agtergrondpleister</string>
     <string name="battery_optimization_dialog_description">Sommige toestelle kan die pleister stop wanneer die toepassing geminimaliseer word. Laat Morphe sonder batterybeperkings loop om te verseker dat die pleister betroubaar voltooi word.</string>
     <string name="battery_optimization_not_now">Nie nou nie</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Nie genoeg geheue</string>
+    <string name="patcher_memory_adjustment_description">Die patcher is deur die stelsel gestop terwyl dit met \'n %1$d MB geheueperk loop. Deur die perk na %2$d MB te verlaag, maak die patcher \'n kleiner teiken en kan die loop laat klaarmaak.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Die patcher is deur die stelsel gestop terwyl dit met \'n %1$d MB geheueperk loop, wat reeds die laagste beskikbare is. Probeer om met minder patchbronne te patch, of kies minder patches.</string>
+    <string name="patcher_memory_adjustment_apply">Verlaag na %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching aan die gang…</string>
     <string name="patcher_notification_text">Tik om terug te keer na die patcher</string>
@@ -490,6 +521,8 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">App word gepleister</string>
     <string name="memory_usage">Geheiebruik</string>
+    <string name="cpu_usage">SVE-gebruik</string>
+    <string name="storage_io_usage">Berging I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Patchings toedien</string>
     <string name="failed_to_execute_patch">Kon nie %s toepas nie</string>
@@ -497,9 +530,12 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="patched_app_save_failed_toast">Kon nie gepatchte app stoor nie</string>
     <string name="plugin_activity_dialog_body">Gebruikers interaksie is vereis om met hierdie inprop voort te gaan</string>
     <string name="patcher_process_exit_message">Patcherproses het met kode %s afgehandel</string>
+    <string name="patcher_heap_exhausted_message">Die patcher het nie genoeg geheue gehad nie met \'n %1$d MB-heap. Hierdie app is te groot vir die geselekteerde patches. Probeer om met minder patchbronne te patch, of kies minder patches.</string>
     <string name="install_app_success">Suksesvol geïnstalleer</string>
     <string name="install_app_fail">Kon nie app installeer nie: %s</string>
     <string name="uninstall_app_fail">Kon nie app verwyder nie: %s</string>
+    <string name="uninstall_app_unverified">Gelaat in plek: Morphe kon nie verifieer dat die geïnstalleerde app die weergawe is wat dit gepatch het nie.</string>
+    <string name="launch_app_unverified">Morphe kon nie verifieer dat die geïnstalleerde app die weergawe is wat dit gepatch het nie.</string>
     <string name="uninstall_timeout">Ontinstallering het tyd uitgeloop</string>
     <string name="save_apk_success">APK Gestoor</string>
     <string name="saved_app_export_failed">Kon nie gepatchte app uitvoer nie</string>
@@ -569,8 +605,8 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Wys \'n groet-boodskap op die tuisskerm</string>
     <string name="settings_appearance_app_grouping">Toepassingsgroepering</string>
     <string name="settings_appearance_app_grouping_description">Wys \'n tuisskermskakelaar om toepassings volgens bron of jou eie kategorieë te groepeer, en die keuse te behou wanneer dit af is</string>
-    <string name="settings_appearance_sort_button">Sorteer knoppie</string>
-    <string name="settings_appearance_sort_button_description">Wys die sorteer knoppie op die tuisskerm</string>
+    <string name="settings_appearance_sort_button">Sorteer- en filterknoppie</string>
+    <string name="settings_appearance_sort_button_description">Wys die sorteer- en filterknoppie op die tuisskerm</string>
     <string name="settings_appearance_app_card_colors">App-kaartkleure</string>
     <string name="settings_appearance_app_card_colors_default">Verstek</string>
     <string name="settings_appearance_app_card_colors_default_description">Gee elke app die kleur van sy eie bundel</string>
@@ -1072,6 +1108,7 @@ Besonderhede: %2$s"</string>
     <string name="version">Weergawe</string>
     <string name="patch">Verandering</string>
     <string name="patching">Pleister</string>
+    <string name="patched">Gepatch</string>
     <string name="repatch">Herpatch</string>
     <string name="open">Open</string>
     <string name="mount">Monteer</string>

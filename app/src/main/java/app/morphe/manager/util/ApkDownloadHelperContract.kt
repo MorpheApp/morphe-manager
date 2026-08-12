@@ -17,13 +17,15 @@ import android.os.Build
  * Public intent contract for optional third-party APK download helpers.
  *
  * Morphe only describes the original APK it needs. The helper owns provider lookup,
- * download UI, and file sharing, then returns the downloaded archive.
+ * download UI, and file sharing, then returns either the downloaded archive or a request to use
+ * the package that the user installed outside Morphe.
  *
  * A helper declares an exported activity with an intent filter for
  * `ACTION_DOWNLOAD_ORIGINAL_APK` and [Intent.CATEGORY_DEFAULT]. It answers with
- * [android.app.Activity.RESULT_OK] and the archive in `Intent.setData`, granting read access via
- * [Intent.FLAG_GRANT_READ_URI_PERMISSION]. Without that flag Morphe cannot open the file and
- * reports the selection as unreadable.
+ * [android.app.Activity.RESULT_OK]. File results put the archive in `Intent.setData` and grant
+ * read access via [Intent.FLAG_GRANT_READ_URI_PERMISSION]. Installed-app results set
+ * [EXTRA_RESULT_USE_INSTALLED_APP] and [EXTRA_RESULT_PACKAGE_NAME], after which Morphe re-checks
+ * the installed package before patching.
  *
  * Requests go to the explicit component the user picked, and everything a helper returns still
  * runs through the normal package, version and signature checks. A helper is a download
@@ -32,11 +34,20 @@ import android.os.Build
 object ApkDownloadHelperContract {
     const val ACTION_DOWNLOAD_ORIGINAL_APK = "app.morphe.manager.action.DOWNLOAD_ORIGINAL_APK"
 
-    /** Bumped whenever the extras below change in a way helpers have to react to. */
-    const val PROTOCOL_VERSION = 1
+    /**
+     * Bumped whenever the extras below change in a way helpers have to react to.
+     * Version 2 added the installed-app result, so a helper can tell whether Morphe accepts one.
+     */
+    const val PROTOCOL_VERSION = 2
 
     const val EXTRA_PROTOCOL_VERSION = "app.morphe.manager.extra.PROTOCOL_VERSION"
+
+    /**
+     * Informational only. Any app can send this action, so a helper that gates on who asked has to
+     * read `Activity.getCallingPackage()` instead of trusting this value.
+     */
     const val EXTRA_CALLER_PACKAGE = "app.morphe.manager.extra.CALLER_PACKAGE"
+
     const val EXTRA_PACKAGE_NAME = "app.morphe.manager.extra.PACKAGE_NAME"
     const val EXTRA_APP_NAME = "app.morphe.manager.extra.APP_NAME"
 
@@ -60,7 +71,7 @@ object ApkDownloadHelperContract {
 
     /**
      * Informational hint that the unpatched app still has to be installed for a mount install.
-     * Morphe performs that installation itself; helpers must not install anything.
+     * Morphe performs that installation itself; a helper may only hand the user to an app store.
      */
     const val EXTRA_STOCK_INSTALL_REQUIRED = "app.morphe.manager.extra.STOCK_INSTALL_REQUIRED"
 
@@ -73,6 +84,15 @@ object ApkDownloadHelperContract {
     const val FILE_TYPE_APKM = "apkm"
     const val FILE_TYPE_APKS = "apks"
     const val FILE_TYPE_XAPK = "xapk"
+
+    /**
+     * Set by a helper that handed the user to an app store instead of downloading a file,
+     * asking Morphe to continue from the package the user installed there.
+     */
+    const val EXTRA_RESULT_USE_INSTALLED_APP = "app.morphe.manager.extra.RESULT_USE_INSTALLED_APP"
+
+    /** The package an installed-app result refers to. Must be the one Morphe asked for. */
+    const val EXTRA_RESULT_PACKAGE_NAME = "app.morphe.manager.extra.RESULT_PACKAGE_NAME"
 
     /** An installed activity that can serve [ACTION_DOWNLOAD_ORIGINAL_APK]. */
     data class Helper(
@@ -104,10 +124,26 @@ object ApkDownloadHelperContract {
                 val activity = info.activityInfo ?: return@mapNotNull null
                 Helper(
                     componentName = ComponentName(activity.packageName, activity.name),
-                    label = info.loadLabel(packageManager).toString()
+                    label = info.loadLabel(packageManager).toString().asHelperLabel(activity.packageName)
                 )
             }
             .sortedBy { it.label.lowercase() }
+    }
+
+    private const val MAX_LABEL_LENGTH = 50
+    private val LABEL_WHITESPACE = Regex("\\s+")
+
+    /**
+     * Bounds the name a helper gave itself, because the picker weighs it against a warning that an
+     * oversized label would push out of view. Falls back to [packageName] when nothing is left.
+     */
+    private fun String.asHelperLabel(packageName: String): String {
+        val collapsed = replace(LABEL_WHITESPACE, " ").trim()
+        return when {
+            collapsed.isEmpty() -> packageName
+            collapsed.length > MAX_LABEL_LENGTH -> collapsed.take(MAX_LABEL_LENGTH).trimEnd() + "…"
+            else -> collapsed
+        }
     }
 
     fun createRequestIntent(
@@ -157,4 +193,17 @@ object ApkDownloadHelperContract {
      */
     fun grantsReadAccess(intent: Intent?): Boolean =
         intent != null && intent.flags and Intent.FLAG_GRANT_READ_URI_PERMISSION != 0
+
+    /** Whether the helper answered with an installed app rather than a file. */
+    fun isInstalledAppResult(intent: Intent?): Boolean =
+        intent != null && intent.getBooleanExtra(EXTRA_RESULT_USE_INSTALLED_APP, false)
+
+    /**
+     * The package an installed-app result names, or null when the helper named none.
+     *
+     * Read only after [isInstalledAppResult], so a helper that sets the flag without a package
+     * gets a message naming the real cause instead of one about a missing file.
+     */
+    fun resultInstalledPackageName(intent: Intent?): String? =
+        intent?.getStringExtra(EXTRA_RESULT_PACKAGE_NAME)?.takeIf { it.isNotBlank() }
 }

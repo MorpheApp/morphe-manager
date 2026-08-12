@@ -452,6 +452,20 @@ fun PatcherScreen(
         )
     }
 
+    // Memory limit dialog, shown after the system killed the patcher process.
+    // Waits for the error dialog to close: that one explains the failure this one offers a fix for
+    if (!state.showErrorDialog) {
+        patcherViewModel.memoryAdjustmentDialog?.let { dialogState ->
+            MemoryAdjustmentDialog(
+                currentLimit = dialogState.currentLimit,
+                suggestedLimit = dialogState.suggestedLimit,
+                canAdjust = dialogState.canAdjust,
+                onApply = patcherViewModel::applyMemoryAdjustment,
+                onDismiss = patcherViewModel::dismissMemoryAdjustment
+            )
+        }
+    }
+
     // Error dialog
     if (state.showErrorDialog) {
         PatcherErrorDialog(

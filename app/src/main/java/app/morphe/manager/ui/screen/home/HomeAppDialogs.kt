@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.home
 
 import android.view.HapticFeedbackConstants
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
@@ -57,12 +58,12 @@ fun AppPatchesDialog(
         patchesByBundle.entries
             .sortedWith(
                 compareBy(
-                    { (_, patches) -> patches.all { it.compatiblePackages == null } },
+                    { (_, patches) -> patches.all { it.isUniversal } },
                     { (uid, _) -> bundleNames[uid] ?: uid.toString() }
                 )
             )
             .flatMap { (uid, patches) ->
-                val (universal, specific) = patches.partition { it.compatiblePackages == null }
+                val (universal, specific) = patches.partition { it.isUniversal }
                 (specific.sortedBy { it.name } + universal.sortedBy { it.name })
                     .map { patch -> uid to patch }
             }
@@ -115,13 +116,7 @@ fun AppPatchesDialog(
     }
 
     AppDialog(
-        onDismissRequest = {
-            when {
-                searchQuery.value.isNotBlank() -> searchQuery.value = ""
-                selectedBundle.value != null -> selectedBundle.value = null
-                else -> onDismiss()
-            }
-        },
+        onDismissRequest = onDismiss,
         dismissOnClickOutside = true,
         title = null,
         padding = DialogPadding.Compact,
@@ -135,6 +130,11 @@ fun AppPatchesDialog(
             )
         }
     ) {
+        // Back unwinds the active filters before the dialog itself. Registered last so the
+        // query clears first, and kept off onDismissRequest so an outside tap still dismisses.
+        BackHandler(enabled = selectedBundle.value != null) { selectedBundle.value = null }
+        BackHandler(enabled = searchQuery.value.isNotBlank()) { searchQuery.value = "" }
+
         val listState = rememberLazyListState()
         val activeBundleLabel = remember { mutableStateOf("") }
         LaunchedEffect(selectedBundle.value) {
@@ -244,15 +244,15 @@ fun AppPatchesDialog(
                         }
 
                         if (uid !in collapsedBundles.value) {
-                            val firstUniversal = bundlePatches.firstOrNull { it.compatiblePackages == null }
-                            val hasSpecificInBundle = bundlePatches.any { it.compatiblePackages != null }
+                            val firstUniversal = bundlePatches.firstOrNull { it.isUniversal }
+                            val hasSpecificInBundle = bundlePatches.any { !it.isUniversal }
                             items(
                                 bundlePatches,
                                 key = { patch ->
                                     "$uid:${patch.name}:${patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty()}"
                                 }
                             ) { patch ->
-                                val isUniversal = patch.compatiblePackages == null
+                                val isUniversal = patch.isUniversal
                                 val isFirstUniversalOfBundle = isUniversal && patch === firstUniversal
                                 Column(
                                     modifier = Modifier.animateItem(

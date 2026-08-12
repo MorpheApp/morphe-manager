@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Andre apps</string>
     <string name="home_not_patched_yet">Ikke patchet endnu</string>
+    <string name="home_unpatched_version_installed">Upatchet version installeret</string>
     <string name="home_no_patches_available">Ingen patches tilgængelige</string>
     <string name="home_app_hide_title">Skjul denne app?</string>
     <string name="home_app_hide_message">Denne app vil være skjult fra startskærmen. Du kan gendanne den senere fra de skjulte apps ved hjælp af knappen nederst i listen.</string>
@@ -36,7 +37,13 @@
     <string name="home_update_success_subtitle">Dine kilder er opdaterede</string>
     <string name="home_sources_are_loading">Kilder hentes, vent venligst…</string>
     <string name="home_search_apps">Søg apps</string>
-    <string name="home_app_sort_title">Sortér apps</string>
+    <string name="home_app_list_options_title">Sorter og filtrer</string>
+    <string name="home_app_list_options_state_description">Sorteret efter %1$s, filtreret efter %2$s</string>
+    <string name="home_app_filter_all_description">Alle apps på startskærmen</string>
+    <string name="home_app_filter_patched_description">Apps, som du har patchet eller gemt med Morphe</string>
+    <string name="home_app_filter_not_patched_description">Apps, som du ikke har patchet i Morphe endnu</string>
+    <string name="home_app_filter_installed_description">Apps, der aktuelt er installeret på denne enhed</string>
+    <string name="home_app_filter_uninstalled_description">Apps patchet med Morphe, som ikke længere er på denne enhed</string>
     <string name="home_app_sort_manual_description">Hold en app nede, og tryk derefter på omdør knappen</string>
     <string name="home_app_sort_recommended">Anbefalet rækkefølge</string>
     <string name="home_app_sort_recommended_description">Installerede og fastgjorte apps først</string>
@@ -49,6 +56,8 @@
     <string name="home_no_apps_search_subtitle">Ingen apps matcher \"%s\"</string>
     <string name="home_all_apps_hidden_title">Alle apps er skjult</string>
     <string name="home_all_apps_hidden_subtitle">Du har skjult alle apps fra startskærmen</string>
+    <string name="home_no_apps_filter_title">Ingen apps matcher dette filter</string>
+    <string name="home_no_apps_filter_subtitle">Intet matchede %s</string>
     <string name="home_category_add">Tilføj kategori</string>
     <string name="home_category_all_apps">Alle apps</string>
     <string name="home_category_custom">Brugerdefineret</string>
@@ -104,6 +113,7 @@
     <string name="home_greeting_super_late_5">Natlig og produktiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patchkilder</string>
+    <string name="sources_search">Søg kilder</string>
     <string name="sources_sort_title">Sortér patch-kilder</string>
     <string name="sources_sort_manual">Manuel orden</string>
     <string name="sources_sort_manual_hint">Tryk og hold på en kilde for at ændre rækkefølgen</string>
@@ -174,9 +184,15 @@
     <string name="home_apk_helper_warning_unverified">Fortsæt kun, hvis du stoler på denne hjælpeapp. Morphe kan ikke verificere signaturen af denne APK, så en modificeret fil vil ikke blive opdaget</string>
     <string name="home_apk_helper_no_result">Hjælpeappen returnerede ikke en APK</string>
     <string name="home_apk_helper_no_access">Hjælpeappen gav ikke adgang til den APK, den returnerede</string>
+    <string name="home_apk_helper_no_package">Hjælpeappen angav ikke, hvilken installeret app der skulle bruges</string>
+    <string name="home_apk_helper_wrong_package">Hjælpeappen returnerede en anden app end den, der bliver patchet</string>
+    <string name="home_apk_helper_installed_unavailable">Morphe kunne ikke bruge den installerede app</string>
+    <string name="home_apk_helper_installed_incompatible">Den installerede version kan ikke blive patchet</string>
     <string name="home_apk_use_saved">Brug gemt APK</string>
     <string name="home_apk_use_installed">Brug installeret APK</string>
     <string name="home_apk_use_installed_unverified">Kunne ikke verificere signaturen af den installerede app, så den kan allerede være blevet patchet</string>
+    <string name="home_unverified">Uverificeret</string>
+    <string name="home_app_info_install_unverified">Morphe kan ikke bekræfte, at den installerede app er den build, den har patchet. Geninstallér den fra den gemte APK for at gendanne dens handlinger</string>
     <string name="home_app_info_no_saved_apk">Ingen gemt APK. Patchning kræver at du vælger APK-filen igen</string>
     <string name="home_version_requires_android">Kræver Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Ikke understøttet på denne enhed</string>
@@ -184,8 +200,15 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download den originale APK</string>
     <string name="home_download_instructions_steps_title">Instruktioner:</string>
+    <string name="home_download_instructions_finding">Finder downloadsiden…</string>
     <string name="home_download_instructions_step1">Tryk på \'%s\' knappen nedenfor</string>
     <string name="home_download_instructions_step2_part1">Rul ned på websiden og tryk</string>
+    <string name="home_download_instructions_step2_generic">Rul ned på websiden, og tryk på dens downloadknap</string>
+    <string name="home_download_instructions_step2_variant">Rul ned på websiden, og tryk på downloadknappen for den øverste &lt;b&gt;APK-variant&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_search">Åbn et søgeresultat fra et websted, som du stoler på</string>
+    <string name="home_download_instructions_step2_search_note">Morphe kan ikke stå inde for disse websteder. Spring dem over, der tilbyder deres egen app-butik i stedet for en APK-fil</string>
+    <string name="home_download_instructions_step3_search">På det websted skal du downloade APK\'en for version &lt;b&gt;%s&lt;/b&gt;, ikke den nyeste</string>
+    <string name="home_download_instructions_step3_search_any">På det websted skal du downloade appens APK. &lt;b&gt;Enhver version&lt;/b&gt; kan blive patchet</string>
     <string name="home_download_instructions_download_button_toast">Tryk på download på hjemmesiden, og ikke her 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Fantastisk! Klik nu på fortsæt og gå til hjemmesiden 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Øvelse gør mester, og du er godt på vej 💪</string>
@@ -196,7 +219,8 @@
     <string name="home_download_instructions_step3_mount">Vent på at downloaden er færdig, og &lt;b&gt;installer APK\'en&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Når downloaden er færdigt, vend tilbage til Morphe</string>
     <string name="home_download_instructions_step4_mount">Når det originale APK er installeret, vend tilbage til Morphe</string>
-    <string name="home_download_instructions_continue">Fortsæt til APKMirror.com</string>
+    <string name="home_download_instructions_continue_to">Fortsæt til %s</string>
+    <string name="home_download_instructions_destination">downloadsiden</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Vælg den downloadede APK</string>
     <string name="home_file_picker_prompt_description">Vælg det &lt;b&gt;%s&lt;/b&gt; APK-fil du lige har downloadet</string>
@@ -223,6 +247,7 @@
     <string name="expert_mode_disable_all_done">Alle patches deaktiveret</string>
     <string name="expert_mode_enable_all">Aktiver alle</string>
     <string name="expert_mode_enable_all_done">Alle patches aktiveret</string>
+    <string name="expert_mode_enable_all_universal_pending">Tryk igen for universelle patches</string>
     <string name="expert_mode_reset_to_default">Aktivér anbefalede patches</string>
     <string name="expert_mode_reset_to_default_done">Anbefalede patches anvendt</string>
     <string name="expert_mode_restore_saved">Gendan gemt valg</string>
@@ -385,6 +410,7 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="home_app_info_patch_update_available_description">En nyere version af patches er tilgængelig. Repatch din app for at få de seneste forbedringer og rettelser</string>
     <string name="home_app_info_app_deleted_warning">Appen blev fjernet</string>
     <string name="home_app_info_app_deleted_description">Denne app blev fjernet udenfor Morphe. Repatch den for at gendanne funktionalitet</string>
+    <string name="home_app_info_not_patched_description">En upatchet version af denne app er installeret. Morphe har stadig sin tidligere patch-registrering</string>
     <string name="home_app_info_apk_size">APK-størrelse</string>
     <string name="home_app_info_cpu_arch">CPU-arkitektur</string>
     <!-- Home Screen - Root Mode -->
@@ -456,6 +482,11 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="battery_optimization_dialog_title">Beskyttelse mod baggrundspatching</string>
     <string name="battery_optimization_dialog_description">Nogle enheder kan stoppe patcheren, når appen minimeres. Tillad Morphe at køre uden batterirestriktioner for at sikre, at patching fuldføres pålideligt</string>
     <string name="battery_optimization_not_now">Ikke nu</string>
+    <!-- Memory limit dialog, shown after the patcher process was killed -->
+    <string name="patcher_memory_adjustment_title">Ikke nok hukommelse</string>
+    <string name="patcher_memory_adjustment_description">Patcheren blev stoppet af systemet, mens den kørte med en hukommelsesgrænse på %1$d MB. En sænkning af grænsen til %2$d MB gør patcheren til et mindre mål og kan lade kørslen fuldføre.</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Patcheren blev stoppet af systemet, mens den kørte med en hukommelsesgrænse på %1$d MB, hvilket allerede er den laveste tilgængelige. Prøv at patche med færre patchkilder, eller vælg færre patches.</string>
+    <string name="patcher_memory_adjustment_apply">Sænk til %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching i gang…</string>
     <string name="patcher_notification_text">Tryk for at vende tilbage til patcheren</string>
@@ -490,6 +521,8 @@ Afinstallation sletter permanent alle appdata."</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Patcher app</string>
     <string name="memory_usage">Hukommelsesforbrug</string>
+    <string name="cpu_usage">CPU-forbrug</string>
+    <string name="storage_io_usage">Lagring I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Anvender patches</string>
     <string name="failed_to_execute_patch">Kunne ikke anvende %s</string>
@@ -497,9 +530,12 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="patched_app_save_failed_toast">Kunne ikke gemme patchet app</string>
     <string name="plugin_activity_dialog_body">Brugerinteraktion er nødvendig for at fortsætte med dette plugin</string>
     <string name="patcher_process_exit_message">Patcher-processen lukkede med koden %s</string>
+    <string name="patcher_heap_exhausted_message">Patcheren løb tør for hukommelse med en heap på %1$d MB. Denne app er for stor til de valgte patches. Prøv at patche med færre patchkilder, eller vælg færre patches.</string>
     <string name="install_app_success">Installeret</string>
     <string name="install_app_fail">Kunne ikke installere app: %s</string>
     <string name="uninstall_app_fail">Kunne ikke afinstallere appen: %s</string>
+    <string name="uninstall_app_unverified">Efterladt på plads: Morphe kunne ikke verificere, at den installerede app er den build, den har patchet</string>
+    <string name="launch_app_unverified">Morphe kunne ikke verificere, at den installerede app er den build, den har patchet</string>
     <string name="uninstall_timeout">Afinstallationen timeoutede</string>
     <string name="save_apk_success">APK gemt</string>
     <string name="saved_app_export_failed">Kunne ikke eksportere patchet app</string>
@@ -568,8 +604,8 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Vis en hilsenbesked på startskærmen</string>
     <string name="settings_appearance_app_grouping">App-gruppering</string>
     <string name="settings_appearance_app_grouping_description">Vis en hjemmeskærms-skifter til at gruppere apps efter kilde eller dine egne kategorier, og bevar udvælgelsen, når den er slået fra</string>
-    <string name="settings_appearance_sort_button">Sortér knap</string>
-    <string name="settings_appearance_sort_button_description">Vis sorteringsknappen på startskærmen</string>
+    <string name="settings_appearance_sort_button">Sorterings- og filterknap</string>
+    <string name="settings_appearance_sort_button_description">Vis sorterings- og filterknappen på hjemmeskærmen</string>
     <string name="settings_appearance_app_card_colors">App-kort farver</string>
     <string name="settings_appearance_app_card_colors_default">Standard</string>
     <string name="settings_appearance_app_card_colors_default_description">Giv hver app farven af sin egen bundle</string>
@@ -1070,6 +1106,7 @@ Detaljer: %2$s"</string>
     <string name="version">Version</string>
     <string name="patch">Patch</string>
     <string name="patching">Patchning</string>
+    <string name="patched">Patchet</string>
     <string name="repatch">Patch igen</string>
     <string name="open">Åben</string>
     <string name="mount">Monter</string>

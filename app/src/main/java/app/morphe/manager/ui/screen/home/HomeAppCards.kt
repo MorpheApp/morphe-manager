@@ -16,7 +16,9 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.outlined.ArrowUpward
+import androidx.compose.material.icons.outlined.AutoFixHigh
 import androidx.compose.material.icons.outlined.DeleteOutline
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -53,6 +55,7 @@ import app.morphe.manager.ui.theme.LocalMonochromeTheme
 import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 import app.morphe.manager.util.AppCardColorResolver
 import app.morphe.manager.util.AppDataSource
+import app.morphe.manager.util.withVersionPrefix
 
 private data class HomeAppCardStyle(
     val monochrome: Boolean,
@@ -192,29 +195,56 @@ fun InstalledAppCard(
     modifier: Modifier = Modifier,
     hasUpdate: Boolean = false,
     isAppDeleted: Boolean = false,
+    isInstallStateNotPatched: Boolean = false,
+    isInstallStateUnknown: Boolean = false,
     onLongClick: (() -> Unit)? = null
 ) {
     val cardStyle = homeAppCardStyle(subtitleAlpha = 0.85f)
-    val showsUpdateBadge = hasUpdate && !isAppDeleted
+    val showsUpdateBadge = hasUpdate &&
+            !isAppDeleted &&
+            !isInstallStateNotPatched &&
+            !isInstallStateUnknown
 
     val versionLabel = stringResource(R.string.version)
     val installedLabel = stringResource(R.string.installed)
     val updateAvailableLabel = stringResource(R.string.update_available)
     val deletedLabel = stringResource(R.string.uninstalled)
+    val replacementLabel = stringResource(R.string.home_unpatched_version_installed)
+    val unverifiedLabel = stringResource(R.string.home_unverified)
 
     val version = remember(packageInfo, installedApp, isAppDeleted) {
         val raw = packageInfo?.versionName ?: installedApp.version
-        if (raw.startsWith("v")) raw else "v$raw"
+        raw.withVersionPrefix()
     }
 
-    val contentDesc = remember(displayName, version, versionLabel, installedLabel, showsUpdateBadge, updateAvailableLabel, isAppDeleted, deletedLabel) {
+    val contentDesc = remember(
+        displayName,
+        version,
+        versionLabel,
+        installedLabel,
+        showsUpdateBadge,
+        updateAvailableLabel,
+        isAppDeleted,
+        deletedLabel,
+        isInstallStateNotPatched,
+        replacementLabel,
+        isInstallStateUnknown,
+        unverifiedLabel
+    ) {
         buildString {
             append(displayName)
             if (version.isNotEmpty()) {
                 append(", $versionLabel $version")
             }
             append(", ")
-            append(if (isAppDeleted) deletedLabel else installedLabel)
+            append(
+                when {
+                    isInstallStateNotPatched -> replacementLabel
+                    isAppDeleted -> deletedLabel
+                    isInstallStateUnknown -> unverifiedLabel
+                    else -> installedLabel
+                }
+            )
             if (showsUpdateBadge) append(", $updateAvailableLabel")
         }
     }
@@ -270,10 +300,28 @@ fun InstalledAppCard(
 
                 // Frosted-glass colors: a white semi-transparent fill reads on any accent
                 // color the card's bundle brings, and on the user's dynamic theme
-                if (isAppDeleted) {
+                if (isAppDeleted && !isInstallStateNotPatched) {
                     StatusBadge(
                         text = stringResource(R.string.uninstalled),
                         icon = Icons.Outlined.DeleteOutline,
+                        containerColor = cardStyle.chipContainerColor,
+                        contentColor = cardStyle.chipContentColor
+                    )
+                }
+
+                if (isInstallStateNotPatched) {
+                    StatusBadge(
+                        text = replacementLabel,
+                        icon = Icons.Outlined.AutoFixHigh,
+                        containerColor = cardStyle.chipContainerColor,
+                        contentColor = cardStyle.chipContentColor
+                    )
+                }
+
+                if (isInstallStateUnknown) {
+                    StatusBadge(
+                        text = unverifiedLabel,
+                        icon = Icons.AutoMirrored.Outlined.HelpOutline,
                         containerColor = cardStyle.chipContainerColor,
                         contentColor = cardStyle.chipContentColor
                     )

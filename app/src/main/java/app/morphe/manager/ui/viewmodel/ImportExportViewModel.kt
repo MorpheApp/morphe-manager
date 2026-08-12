@@ -70,6 +70,8 @@ data class PatchBundleDataExportFile(
     // Map<PackageName, List<PatchName>>
     val selections: Map<String, List<String>>,
     // Map<PackageName, Map<PatchName, Map<OptionKey, OptionValue>>>
+    // Deliberately without a default: the field has always been written out, and giving it one
+    // would drop it from the file for versions that still require it
     val options: Map<String, Map<String, Map<String, String>>>?
 )
 
@@ -98,6 +100,10 @@ data class BundleSnapshot(
     val sortOrder: Int,
     val createdAt: Long? = null,
     val updatedAt: Long? = null,
+    // Prerelease toggle. Null in backups written before per-source toggles were exported
+    val prerelease: Boolean? = null,
+    // Experimental versions toggle. Null in backups written before per-source toggles were exported
+    val experimentalVersions: Boolean? = null
 )
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -211,7 +217,7 @@ class ImportExportViewModel(
         uiSafe(app, R.string.settings_system_import_manager_settings_fail, "Failed to import manager settings") {
             val exportFile = withContext(Dispatchers.IO) {
                 contentResolver.openInputStream(source)!!.use {
-                    json.decodeFromStream<ManagerSettingsExportFile>(it)
+                    settingsJson.decodeFromStream<ManagerSettingsExportFile>(it)
                 }
             }
 
@@ -245,7 +251,7 @@ class ImportExportViewModel(
 
             withContext(Dispatchers.IO) {
                 contentResolver.openOutputStream(target, "wt")!!.use { output ->
-                    json.encodeToStream(
+                    settingsJson.encodeToStream(
                         ManagerSettingsExportFile(
                             settings = snapshot.copy(
                                 customBundles = bundles.ifEmpty { null },
@@ -604,7 +610,7 @@ class ImportExportViewModel(
                 val stream = openDownloadsOutputStream("morphe_manager_settings.json", JSON_MIMETYPE)
                     ?: throw IllegalStateException("Cannot open Downloads output stream")
                 stream.use {
-                    json.encodeToStream(
+                    settingsJson.encodeToStream(
                         ManagerSettingsExportFile(
                             settings = snapshot.copy(
                                 customBundles = bundles.ifEmpty { null },
@@ -635,14 +641,21 @@ class ImportExportViewModel(
         cancelKeystoreImport()
     }
 
-    private companion object {
-        // Reusable JSON instances to avoid redundant creation
-        private val json = Json {
+    companion object {
+        // Reusable JSON instances to avoid redundant creation. Both are internal so the export
+        // format stays under test instead of the tests rebuilding their own configuration
+        internal val json = Json {
             ignoreUnknownKeys = true
             prettyPrint = true // Make exports human-readable
         }
 
-        val knownPasswords = arrayOf("Morphe", "s3cur3p@ssw0rd")
-        val aliases = arrayOf(KeystoreManager.DEFAULT, "alias", "Morphe Key")
+        /**
+         * Settings exports omit unset fields instead of writing a wall of nulls. Every field in
+         * that file has a default, so older manager versions still read the trimmed form.
+         */
+        internal val settingsJson = Json(json) { explicitNulls = false }
+
+        private val knownPasswords = arrayOf("Morphe", "s3cur3p@ssw0rd")
+        private val aliases = arrayOf(KeystoreManager.DEFAULT, "alias", "Morphe Key")
     }
 }
