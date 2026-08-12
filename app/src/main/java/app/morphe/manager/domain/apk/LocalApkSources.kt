@@ -130,6 +130,11 @@ class LocalApkSources(
     private val filesystem: Filesystem,
     private val pm: PM
 ) {
+    // Keyed by the tracked package, kept only while the evidence behind it is unchanged
+    private val snapshotCache = mutableMapOf<String, CachedSnapshot>()
+
+    private data class CachedSnapshot(val fingerprint: String, val snapshot: TrackedAppSnapshot)
+
     /** The original APK kept after a previous patch, or null when there is none on disk. */
     suspend fun saved(packageName: String): SavedApkInfo? = try {
         val originalApk = originalApkRepository.get(packageName)
@@ -210,44 +215,90 @@ class LocalApkSources(
     /**
      * Resolves the saved APK and installed identity together for UI action gating.
      *
-     * Certificate reads go through [PM]'s archive cache, so repeated calls for an unchanged app
-     * cost a package manager query rather than a full archive verification.
+     * Repeated calls for an unchanged app are answered from the previous result, so a refresh can
+     * ask about every tracked app without paying for the inspection again.
      */
     suspend fun trackedAppSnapshot(app: InstalledApp): TrackedAppSnapshot = withContext(Dispatchers.IO) {
+        val installedPackageInfo = pm.getPackageInfo(app.currentPackageName)
+        val fingerprint = trackedAppFingerprint(app, installedPackageInfo)
+        cachedSnapshot(app.currentPackageName, fingerprint)?.let { return@withContext it }
+
+        val snapshot = resolveTrackedAppSnapshot(app, installedPackageInfo)
+        cacheSnapshot(app.currentPackageName, fingerprint, snapshot)
+        snapshot
+    }
+
+    /** Drops the remembered snapshot of [packageName] so the next read inspects the disk again. */
+    fun invalidate(packageName: String) {
+        synchronized(snapshotCache) { snapshotCache.remove(packageName) }
+    }
+
+    private suspend fun resolveTrackedAppSnapshot(
+        app: InstalledApp,
+        installedPackageInfo: PackageInfo?
+    ): TrackedAppSnapshot {
         val savedPatched = validatedPatchedApk(app)
         val savedPatchedApk: File? = savedPatched?.first
         val savedPatchedInfo: PackageInfo? = savedPatched?.second
 
-        val installedPackageInfo = pm.getPackageInfo(app.currentPackageName)
-            ?: return@withContext TrackedAppSnapshot(null, savedPatchedApk, savedPatchedInfo, null)
-
-        // A mounted install keeps the stock certificate in PackageManager while sourceDir points
-        // at the patched APK, so this signal must win over all certificate comparisons below.
-        if (pm.hasSourceApkSignatureMismatch(app.currentPackageName)) {
-            return@withContext TrackedAppSnapshot(
-                installedPackageInfo,
-                savedPatchedApk,
-                savedPatchedInfo,
-                InstalledPatchState.Patched
-            )
+        if (installedPackageInfo == null) {
+            return TrackedAppSnapshot(null, savedPatchedApk, savedPatchedInfo, null)
         }
 
         val installer = pm.getInstallerPackageName(app.currentPackageName)
+        val patchState = resolveTrackedPatchState(
+            installedHashes = pm.getInstalledSignatureHashes(app.currentPackageName),
+            savedPatchedHashes = savedPatchedApk?.let(pm::getApkFileSignatureHashes).orEmpty(),
+            originalHashes = referenceSignatureHashes(app.originalPackageName),
+            installedByPatchManager = pm.isPatchManagerInstaller(installer),
+            installerAttributionMatches = installerMatchesRecord(app.installType, installer),
+            installedAfterPatching = installedAfterPatching(app, installedPackageInfo)
+        )
 
-        TrackedAppSnapshot(
+        // A mounted install reports the stock certificate while sourceDir points at the patched
+        // APK, so it overrides the verdict, and is only read while that verdict is still open
+        val mounted = patchState != InstalledPatchState.Patched &&
+                pm.hasSourceApkSignatureMismatch(app.currentPackageName)
+
+        return TrackedAppSnapshot(
             installedPackageInfo = installedPackageInfo,
             savedPatchedApk = savedPatchedApk,
             savedPatchedApkInfo = savedPatchedInfo,
-            patchState = resolveTrackedPatchState(
-                installedHashes = pm.getInstalledSignatureHashes(app.currentPackageName),
-                savedPatchedHashes = savedPatchedInfo?.let(pm::signatureHashes).orEmpty(),
-                originalHashes = referenceSignatureHashes(app.originalPackageName),
-                installedByPatchManager = pm.isPatchManagerInstaller(installer),
-                installerAttributionMatches = installerMatchesRecord(app.installType, installer),
-                installedAfterPatching = installedAfterPatching(app, installedPackageInfo)
-            )
+            patchState = if (mounted) InstalledPatchState.Patched else patchState
         )
     }
+
+    private fun cachedSnapshot(packageName: String, fingerprint: String): TrackedAppSnapshot? =
+        synchronized(snapshotCache) {
+            snapshotCache[packageName]?.takeIf { it.fingerprint == fingerprint }?.snapshot
+        }
+
+    private fun cacheSnapshot(packageName: String, fingerprint: String, snapshot: TrackedAppSnapshot) {
+        synchronized(snapshotCache) {
+            snapshotCache[packageName] = CachedSnapshot(fingerprint, snapshot)
+        }
+    }
+
+    /**
+     * Everything that can change what the snapshot resolves to, read with stat calls alone.
+     *
+     * A mount swaps the file behind `sourceDir` and a repatch rewrites the saved APK in place.
+     * Both archives are therefore described by their own size and timestamp, not by the record.
+     */
+    private fun trackedAppFingerprint(app: InstalledApp, installedPackageInfo: PackageInfo?): String {
+        val installedApk = installedPackageInfo?.applicationInfo?.sourceDir?.let(::File)
+        return buildString {
+            append(app.version).append('|')
+            append(app.installType).append('|')
+            append(app.patchedAt).append('|')
+            append(installedPackageInfo?.lastUpdateTime).append('|')
+            append(fileStamp(installedApk)).append('|')
+            savedPatchedApkCandidates(app).joinTo(this, ";") { fileStamp(it) }
+        }
+    }
+
+    private fun fileStamp(file: File?): String =
+        if (file == null) "-" else "${file.length()}:${file.lastModified()}"
 
     /**
      * Whether the current installer is the one Morphe itself would have set for this record.
@@ -284,16 +335,20 @@ class LocalApkSources(
         return installedPackageInfo.firstInstallTime > patchedAt + INSTALL_TIME_TOLERANCE_MS
     }
 
-    /**
-     * Searches both current and legacy storage paths, but only accepts the artifact the record
-     * describes. A renamed app must never fall back to an APK whose embedded id is the original
-     * package, and the expected file name is not on its own proof of what the file contains.
-     */
-    private fun validatedPatchedApk(app: InstalledApp): Pair<File, PackageInfo>? =
+    /** Current and legacy storage paths a patched build could have been retained at. */
+    private fun savedPatchedApkCandidates(app: InstalledApp): List<File> =
         listOf(
             filesystem.getPatchedAppFile(app.currentPackageName, app.version),
             filesystem.getPatchedAppFile(app.originalPackageName, app.version)
-        ).distinctBy { it.absolutePath }.firstNotNullOfOrNull { file ->
+        ).distinctBy { it.absolutePath }
+
+    /**
+     * Searches both storage paths, but only accepts the artifact the record describes. A renamed
+     * app must never fall back to an APK whose embedded id is the original package. The expected
+     * file name is not on its own proof of what the file contains.
+     */
+    private fun validatedPatchedApk(app: InstalledApp): Pair<File, PackageInfo>? =
+        savedPatchedApkCandidates(app).firstNotNullOfOrNull { file ->
             pm.readSavedApkInfo(file, app.version, app.currentPackageName)?.let { file to it }
         }
 

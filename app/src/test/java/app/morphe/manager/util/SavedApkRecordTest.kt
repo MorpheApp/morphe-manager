@@ -11,8 +11,8 @@ import kotlin.test.assertTrue
 
 /**
  * The accepted archive becomes the certificate that decides whether an installed package is the
- * tracked patched build, so anything reaching this predicate has to be the artifact the record
- * was written for and not merely a file sitting at the expected path.
+ * tracked patched build. Anything reaching this predicate has to be the artifact the record was
+ * written for, not merely a file sitting at the expected path.
  */
 class SavedApkRecordTest {
     private fun matches(
@@ -24,9 +24,9 @@ class SavedApkRecordTest {
     ) = matchesSavedApkRecord(
         archivePackageName = archivePackageName,
         archiveVersionName = archiveVersionName,
-        isSigned = isSigned,
         trackedPackageNames = trackedPackageNames,
-        trackedVersion = trackedVersion
+        trackedVersion = trackedVersion,
+        isSigned = { isSigned }
     )
 
     @Test
@@ -67,5 +67,23 @@ class SavedApkRecordTest {
         assertFalse(matches(isSigned = false))
         assertFalse(matches(archivePackageName = null))
         assertFalse(matches(archiveVersionName = null))
+    }
+
+    @Test
+    fun `an archive that is not the recorded artifact is rejected without reading its certificate`() {
+        var certificateRead = false
+        val matched = matchesSavedApkRecord(
+            archivePackageName = "app.morphe.other",
+            archiveVersionName = "1.2.3",
+            trackedPackageNames = listOf("app.morphe.target"),
+            trackedVersion = "1.2.3",
+            isSigned = {
+                certificateRead = true
+                true
+            }
+        )
+
+        assertFalse(matched)
+        assertFalse(certificateRead)
     }
 }

@@ -3,6 +3,8 @@ package app.morphe.manager.data.room
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import app.morphe.manager.data.room.apk.ApkSignature
+import app.morphe.manager.data.room.apk.ApkSignatureDao
 import app.morphe.manager.data.room.apps.installed.AppliedPatch
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.installed.InstalledAppDao
@@ -29,9 +31,10 @@ import kotlin.random.Random
         AppliedPatch::class,
         OptionGroup::class,
         Option::class,
-        OriginalApk::class
+        OriginalApk::class,
+        ApkSignature::class
     ],
-    version = 12
+    version = 13
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -40,6 +43,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun installedAppDao(): InstalledAppDao
     abstract fun optionDao(): OptionDao
     abstract fun originalApkDao(): OriginalApkDao
+    abstract fun apkSignatureDao(): ApkSignatureDao
 
     companion object {
         fun generateUid() = Random.nextInt()

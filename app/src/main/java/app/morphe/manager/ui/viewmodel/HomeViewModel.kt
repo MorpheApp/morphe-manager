@@ -30,6 +30,7 @@ import app.morphe.manager.domain.apk.InstalledApkInfo
 import app.morphe.manager.domain.apk.InstalledPatchState
 import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.apk.SavedApkInfo
+import app.morphe.manager.domain.apk.TrackedAppSnapshot
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
@@ -441,6 +442,15 @@ class HomeViewModel(
     private val _appStateTicker = MutableStateFlow(0L)
     private val trackedAppInspectionSemaphore = Semaphore(4)
 
+    // Verified tracked installs, keyed by the package the record currently occupies.
+    // Resolved away from the home state so inspecting archives never holds the cards back.
+    private val _trackedSnapshots = MutableStateFlow<Map<String, TrackedAppSnapshot>>(emptyMap())
+
+    // Both signals rebuild the same cards, so they reach the home state as one source
+    private val appStateSignal = combine(_appStateTicker, _trackedSnapshots) { ticker, snapshots ->
+        ticker to snapshots
+    }
+
     // Package names worth reacting to, refreshed from the same flow that feeds the home cards
     @Volatile
     private var trackedPackageNames: Set<String> = emptySet()
@@ -464,9 +474,36 @@ class HomeViewModel(
             .filter { it.isNotEmpty() }
             .collectLatest { pending ->
                 delay(PACKAGE_CHANGE_DEBOUNCE_MS.milliseconds)
-                pending.forEach { appDataResolver.invalidate(it) }
+                pending.forEach {
+                    appDataResolver.invalidate(it)
+                    localApkSources.invalidate(it)
+                }
                 _appStateTicker.value = System.currentTimeMillis()
                 pendingPackageChanges.value = emptySet()
+            }
+    }
+
+    /**
+     * Keeps [_trackedSnapshots] in step with the records and with anything that changed a package.
+     *
+     * Inspecting a record reads its archives, so it happens here rather than inside the home
+     * state. Cards appear as soon as the bundles are known and adopt the verdict as it lands.
+     */
+    private fun observeTrackedApps() = viewModelScope.launch {
+        combine(installedAppRepository.getAll(), _appStateTicker) { apps, _ -> apps }
+            .collectLatest { apps ->
+                val snapshots = withContext(Dispatchers.IO) {
+                    coroutineScope {
+                        apps.map { installed ->
+                            async {
+                                installed.currentPackageName to trackedAppInspectionSemaphore.withPermit {
+                                    localApkSources.trackedAppSnapshot(installed)
+                                }
+                            }
+                        }.awaitAll().toMap()
+                    }
+                }
+                _trackedSnapshots.value = snapshots
             }
     }
 
@@ -658,6 +695,7 @@ class HomeViewModel(
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
         observePackageChanges()
+        observeTrackedApps()
         observeManagerUpdate()
         triggerUpdateCheck()
         observeLoadingState()
@@ -1208,8 +1246,8 @@ class HomeViewModel(
             }
         },
         _appUpdatesAvailable,
-        _appStateTicker,
-    ) { bundleState, homePrefs, installedApps, updatesMap, _ ->
+        appStateSignal,
+    ) { bundleState, homePrefs, installedApps, updatesMap, (_, trackedSnapshots) ->
         val ready = bundleState as? PatchBundleRepository.BundleState.Ready
             ?: return@combine null
 
@@ -1238,17 +1276,20 @@ class HomeViewModel(
             val displayName = resolvedData.displayName.takeIf {
                 resolvedData.source == AppDataSource.INSTALLED || resolvedData.source == AppDataSource.PATCHED_APK
             } ?: bundleMeta?.displayName ?: KnownApps.getAppName(packageName)
-            val trackedSnapshot = installedApp?.let {
-                trackedAppInspectionSemaphore.withPermit {
-                    localApkSources.trackedAppSnapshot(it)
-                }
-            }
+            val trackedSnapshot = installedApp?.let { trackedSnapshots[it.currentPackageName] }
             val savedPatchedApk = trackedSnapshot?.savedPatchedApk
             val savedPackageInfo = trackedSnapshot?.savedPatchedApkInfo
-            val trackedPatchState = trackedSnapshot?.patchState
-            val trackedPresentation = installedApp?.let {
-                trackedInstallPresentation(it.installType, trackedPatchState)
+            // Inspection resolves on its own, so a record without a snapshot has not been judged
+            // yet and must not be presented as any of the resolved states
+            val trackedPresentation = if (installedApp != null && trackedSnapshot != null) {
+                trackedInstallPresentation(installedApp.installType, trackedSnapshot.patchState)
+            } else {
+                null
             }
+            // An unjudged record is described the way the package manager sees it
+            val isUninspectedInstall = installedApp != null &&
+                    trackedSnapshot == null &&
+                    pm.getPackageInfo(installedApp.currentPackageName) != null
             val isInstalledOnDevice = trackedPresentation?.isPatched == true
             val hasUpdate = installedApp?.let {
                 updatesMap[it.currentPackageName] == true
@@ -1274,6 +1315,7 @@ class HomeViewModel(
                 ),
                 isPinnedByDefault = knownApp?.isPinnedByDefault == true,
                 isInstalledOnDevice = (trackedPresentation?.showsInstalledPackage == true) ||
+                        isUninspectedInstall ||
                         (installedApp == null && resolvedData.source == AppDataSource.INSTALLED),
                 isDeleted = trackedPresentation?.isDeleted == true,
                 isInstallStateNotPatched = trackedPresentation?.isNotPatched == true,
@@ -1458,6 +1500,7 @@ class HomeViewModel(
      */
     fun notifyAppStateChanged(packageName: String) {
         appDataResolver.invalidate(packageName)
+        localApkSources.invalidate(packageName)
         _appStateTicker.value = System.currentTimeMillis()
     }
 

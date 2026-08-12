@@ -81,3 +81,19 @@ val MIGRATION_11_12 = object : Migration(11, 12) {
         )
     }
 }
+
+val MIGRATION_12_13 = object : Migration(12, 13) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL(
+            """
+            CREATE TABLE IF NOT EXISTS apk_signatures (
+                file_path TEXT NOT NULL,
+                file_size INTEGER NOT NULL,
+                last_modified INTEGER NOT NULL,
+                hashes TEXT NOT NULL,
+                PRIMARY KEY(file_path)
+            )
+            """.trimIndent()
+        )
+    }
+}
