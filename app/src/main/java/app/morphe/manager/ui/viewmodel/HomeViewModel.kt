@@ -2978,12 +2978,15 @@ class HomeViewModel(
     /**
      * Handle download instructions continue.
      */
-    fun handleDownloadInstructionsContinue(onOpenUrl: (String) -> Boolean) {
+    fun handleDownloadInstructionsContinue(
+        onOpenUrl: (String) -> Boolean,
+        openFilePickerAfterLaunch: Boolean = true
+    ) {
         val urlToOpen = resolvedDownloadUrl!!
 
         if (onOpenUrl(urlToOpen)) {
             showDownloadInstructionsDialog = false
-            showFilePickerPromptDialog = true
+            showFilePickerPromptDialog = openFilePickerAfterLaunch
         } else {
             Log.w(tag, "Failed to open URL")
             app.toast(app.getString(R.string.sources_management_failed_to_open_url))

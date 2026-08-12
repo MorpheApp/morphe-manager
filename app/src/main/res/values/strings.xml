@@ -193,19 +193,32 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download the original APK</string>
     <string name="home_download_instructions_steps_title">Instructions:</string>
-    <string name="home_download_instructions_step1">Press the \'%s\' button below</string>
-    <string name="home_download_instructions_step2_part1">Scroll down the webpage and press</string>
     <string name="home_download_instructions_download_button_toast">Press download on the website, and not here 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Great! Now click continue and go to the website 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Practice makes perfect and you\'re getting there 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Still not here… still not here… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK I respect the dedication 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">You are now an official Morphe button tester 🏅</string>
-    <string name="home_download_instructions_step3">Wait for the download to complete, and &lt;b&gt;do not install&lt;/b&gt; the APK</string>
-    <string name="home_download_instructions_step3_mount">Wait for the download to complete, then &lt;b&gt;install the APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">After the download finishes, return to Morphe</string>
-    <string name="home_download_instructions_step4_mount">After installing the original APK, return to Morphe</string>
     <string name="home_download_instructions_continue">Continue to APKMirror.com</string>
+    <string name="home_download_instructions_step1">"Press the '%s' button below"</string>
+    <string name="home_download_instructions_step2_part1">Scroll down the webpage and press</string>
+    <string name="home_download_instructions_step3">Once the download starts morphe will guide you through the rest</string>
+    <string name="home_download_instructions_step3_mount">Wait for the download to complete, then &lt;b>install the APK&lt;/b></string>
+    <string name="home_download_instructions_step4_mount">After installing the original APK, return to Morphe</string>
+
+    <!-- Apk Download Webview -->
+    <string name="home_download_stats_bytes_downloaded">Downloaded %1$s</string>
+    <string name="home_download_stats_eta">Approximately %1$s remaining</string>
+    <string name="home_download_stats_finalizing">"This may take some time to complete.\nThe last few percent can take longer than expected."</string>
+    <string name="home_download_webview_aborted">Download was canceled. Pick the APK file manually to continue</string>
+    <string name="home_download_webview_cancel_message">This will stop the current download and return you to APK help</string>
+    <string name="home_download_webview_cancel_title">Cancel download?</string>
+    <string name="home_download_webview_downloading">Downloading APK</string>
+    <string name="home_download_webview_failed">Download failed. Pick the APK file manually to continue</string>
+    <string name="home_download_webview_finalizing">Finalizing download…</string>
+    <string name="home_download_webview_loading">Opening download page…</string>
+    <string name="home_download_webview_progress">%1$d%%</string>
+    <string name="home_download_webview_progress_indeterminate">Starting download</string>
 
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Select downloaded APK</string>
@@ -899,6 +912,8 @@ Details: %2$s"</string>
     <string name="settings_system_process_runtime_description_not_available">This feature requires Android 11 or greater</string>
     <string name="settings_system_patcher_completion_sound">Completion sound</string>
     <string name="settings_system_patcher_completion_sound_description">Plays a distinct tone for success or failure when patching finishes</string>
+    <string name="settings_system_crash_app">Crash App</string>
+    <string name="settings_system_crash_app_description">Click to crash the app for testing purposes.</string>
 
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Notifications</string>

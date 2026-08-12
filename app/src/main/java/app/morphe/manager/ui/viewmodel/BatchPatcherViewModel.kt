@@ -241,7 +241,7 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
      * The API redirect takes a moment, so the unresolved search URL is published first and
      * replaced once it resolves. That way the dialog is never waiting on the network.
      */
-    data class ApkSearch(val item: BatchPatchItem, val url: String)
+    data class ApkSearch(val item: BatchPatchItem, val version: String?, val url: String)
 
     var apkSearch: ApkSearch? by mutableStateOf(null)
         private set
@@ -251,6 +251,7 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
         apkChoice = null
         apkSearch = ApkSearch(
             item = item,
+            version = version,
             url = downloadUrlResolver.apiSearchUrl(item.packageName, version)
         )
         viewModelScope.launch {
@@ -276,14 +277,26 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent {
      * the browser is coming to the front at this moment, and Android does not let a
      * backgrounded app reliably start anything on top of it.
      */
-    fun confirmApkSearch(openUrl: (String) -> Boolean) {
+    fun confirmApkSearch(openUrl: (String) -> Boolean, promptForFile: Boolean = true) {
         val search = apkSearch ?: return
         apkSearch = null
         if (openUrl(search.url)) {
-            attachPrompt = search.item
+            if (promptForFile) {
+                attachPrompt = search.item
+            }
         } else {
             app.toast(app.getString(R.string.sources_management_failed_to_open_url))
         }
+    }
+    /** Hands a downloaded archive to the same import path the file picker uses. */
+    fun handleDownloadedApk(packageName: String, uri: Uri?) {
+        requestAttach(packageName)
+        onApkPicked(uri)
+    }
+
+    /** Shows the regular "pick the downloaded file" prompt for [item]. */
+    fun promptAttach(item: BatchPatchItem) {
+        attachPrompt = item
     }
 
     fun dismissAttachPrompt() {
