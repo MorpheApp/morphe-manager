@@ -494,6 +494,7 @@ class HomeViewModel(
                         it.originalPackageName in observedPackages
             }
             .mapTo(mutableSetOf()) { it.currentPackageName }
+        // The records may not be loaded yet, so an unmatched package is treated as its own key
         if (matches.isEmpty()) matches += observedPackages
         return matches
     }

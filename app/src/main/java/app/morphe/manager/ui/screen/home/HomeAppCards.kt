@@ -24,7 +24,9 @@ import androidx.compose.material.icons.outlined.HourglassEmpty
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -57,6 +59,10 @@ import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 import app.morphe.manager.util.AppCardColorResolver
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.withVersionPrefix
+import kotlinx.coroutines.delay
+
+// A verdict answered from cache lands within a frame, so the badge waits rather than flashing
+private const val INSTALL_VERIFICATION_BADGE_DELAY_MS = 400L
 
 private data class HomeAppCardStyle(
     val monochrome: Boolean,
@@ -216,6 +222,16 @@ fun InstalledAppCard(
     val unverifiedLabel = stringResource(R.string.home_unverified)
     val pendingLabel = stringResource(R.string.home_install_verification_pending)
 
+    val showsPendingBadge = remember { mutableStateOf(false) }
+    LaunchedEffect(isInstallStatePending) {
+        if (!isInstallStatePending) {
+            showsPendingBadge.value = false
+            return@LaunchedEffect
+        }
+        delay(INSTALL_VERIFICATION_BADGE_DELAY_MS)
+        showsPendingBadge.value = true
+    }
+
     val version = remember(packageInfo, installedApp, isAppDeleted) {
         val raw = packageInfo?.versionName ?: installedApp.version
         raw.withVersionPrefix()
@@ -234,7 +250,7 @@ fun InstalledAppCard(
         replacementLabel,
         isInstallStateUnknown,
         unverifiedLabel,
-        isInstallStatePending,
+        showsPendingBadge.value,
         pendingLabel
     ) {
         buildString {
@@ -245,7 +261,7 @@ fun InstalledAppCard(
             append(", ")
             append(
                 when {
-                    isInstallStatePending -> pendingLabel
+                    showsPendingBadge.value -> pendingLabel
                     isInstallStateNotPatched -> replacementLabel
                     isAppDeleted -> deletedLabel
                     isInstallStateUnknown -> unverifiedLabel
@@ -334,7 +350,7 @@ fun InstalledAppCard(
                     )
                 }
 
-                if (isInstallStatePending) {
+                if (showsPendingBadge.value) {
                     StatusBadge(
                         text = pendingLabel,
                         icon = Icons.Outlined.HourglassEmpty,
