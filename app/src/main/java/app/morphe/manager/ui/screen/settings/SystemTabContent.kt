@@ -124,5 +124,22 @@ fun SystemTabContent(
                 onStartTour = onStartTour
             )
         }
+
+        if (useExpertMode) {
+            // Add button to test crash the app
+            SectionTitle(
+                text = stringResource(R.string.settings_system_crash_app)
+            )
+
+            SettingsGroup {
+                SettingsItem(
+                    title = stringResource(R.string.settings_system_crash_app),
+                    subtitle = stringResource(R.string.settings_system_crash_app_description),
+                    onClick = {
+                        throw RuntimeException("Test crash triggered from settings.")
+                    }
+                )
+            }
+        }
     }
 }
