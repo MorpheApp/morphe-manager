@@ -5,9 +5,11 @@
 
 package app.morphe.manager.ui.screen
 
+import android.app.Activity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
@@ -36,6 +38,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.activity.ApkDownloadWebViewActivity
 import app.morphe.manager.ui.screen.home.ApkAvailabilityDialog
 import app.morphe.manager.ui.screen.home.DownloadInstructionsDialog
 import app.morphe.manager.ui.screen.home.ExpertModeDialog
@@ -82,6 +85,7 @@ fun BatchPatcherScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
     val miniGameState = remember { MiniGameState(prefs, scope) }
 
     LaunchedEffect(packageNames, useMount) {
@@ -92,6 +96,36 @@ fun BatchPatcherScreen(
         mimeTypes = APK_FILE_MIME_TYPES,
         onResult = viewModel::onApkPicked
     )
+
+    var activeWebDownload by remember { mutableStateOf<BatchPatcherViewModel.ApkSearch?>(null) }
+    val webDownloadLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        val active = activeWebDownload ?: return@rememberLauncherForActivityResult
+        activeWebDownload = null
+
+        val uri = ApkDownloadWebViewActivity.resultUri(result.data)
+        if (result.resultCode == Activity.RESULT_OK && uri != null) {
+            viewModel.handleDownloadedApk(active.item.packageName, uri)
+            return@rememberLauncherForActivityResult
+        }
+
+        when (ApkDownloadWebViewActivity.resultStatus(result.data)) {
+            ApkDownloadWebViewActivity.RESULT_STATUS_RETURN_TO_APK_HELP -> {
+                viewModel.beginApkChoice(active.item)
+                return@rememberLauncherForActivityResult
+            }
+
+            ApkDownloadWebViewActivity.RESULT_STATUS_ABORTED -> {
+                context.toast(context.getString(R.string.home_download_webview_aborted))
+            }
+
+            ApkDownloadWebViewActivity.RESULT_STATUS_FAILED -> {
+                context.toast(context.getString(R.string.home_download_webview_failed))
+            }
+        }
+        viewModel.promptAttach(active.item)
+    }
 
     val startInstallQueue = rememberInstallQueue(
         installViewModel = installViewModel,
@@ -230,11 +264,31 @@ fun BatchPatcherScreen(
             targetAppInstalled = search.item.source is BatchApkSource.Installed,
             downloadColor = metadata?.downloadColor ?: KnownApps.DEFAULT_DOWNLOAD_COLOR,
             isApkBundle = metadata?.apkFileType?.isApk == false,
-            onDismiss = viewModel::cancelApkSearch
-        ) {
-            viewModel.confirmApkSearch { url ->
-                runCatching { uriHandler.openUri(url) }.isSuccess
+            onDismiss = {
+                activeWebDownload = null
+                viewModel.cancelApkSearch()
             }
+        ) {
+            activeWebDownload = search
+            viewModel.confirmApkSearch(
+                openUrl = { url ->
+                    val launched = runCatching {
+                        webDownloadLauncher.launch(
+                            ApkDownloadWebViewActivity.createIntent(
+                                context = context,
+                                url = url,
+                                packageName = search.item.packageName,
+                                version = search.version
+                            )
+                        )
+                    }.isSuccess
+                    if (!launched) {
+                        activeWebDownload = null
+                    }
+                    launched
+                },
+                promptForFile = false
+            )
         }
     }
 
@@ -278,7 +332,6 @@ fun BatchPatcherScreen(
     var exportItem by remember { mutableStateOf<BatchPatchItem?>(null) }
     val exportSuccessMessage = stringResource(R.string.save_apk_success)
     val exportFailedMessage = stringResource(R.string.saved_app_export_failed)
-    val context = LocalContext.current
     val exportLauncher = rememberLauncherForActivityResult(CreateDocument(APK_MIMETYPE)) { uri ->
         val file = exportItem?.patchedFile
         exportItem = null

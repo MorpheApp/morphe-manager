@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Process
 import android.util.Log
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -77,6 +78,9 @@ class ManagerApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        // Crash report UI runs in its own lightweight process.
+        if (isCrashReportProcess()) return
+
         startKoin {
             androidContext(this@ManagerApplication)
             androidLogger()
@@ -92,6 +96,9 @@ class ManagerApplication : Application() {
                 databaseModule
             )
         }
+
+        // Install global crash handler to persist crash reports and exit gracefully
+        CrashHandler.install(this)
 
         // App icon loader (Coil)
         val pixels = 512
@@ -215,6 +222,15 @@ class ManagerApplication : Application() {
             override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
             override fun onActivityDestroyed(activity: Activity) {}
         })
+    }
+
+    private fun isCrashReportProcess(): Boolean {
+        val processName = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            Application.getProcessName()
+        } else {
+            null
+        } ?: return false
+        return processName == "$packageName:crashreport"
     }
 
     /**

@@ -130,6 +130,17 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="app.morphe.manager.ui.activity.ApkDownloadWebViewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MorpheManager" />
+        <activity
+            android:name="app.morphe.manager.ui.activity.CrashReportActivity"
+            android:exported="false"
+            android:process=":crashreport"
+            android:theme="@style/Theme.MorpheManager"
+        />
+
         <!-- Default launcher icon -->
         <activity-alias
             android:name="app.morphe.manager.MainActivity_Default"

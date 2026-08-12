@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                 config.setLocale(locale)
                 super.attachBaseContext(newBase.createConfigurationContext(config))
                 return
-            }
+            } 
         }
         super.attachBaseContext(newBase)
     }

@@ -5,8 +5,11 @@
 
 package app.morphe.manager.ui.screen.home
 
+import android.app.Activity
 import android.os.Build
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
@@ -54,6 +57,7 @@ import app.morphe.manager.domain.bundles.experimentalVersions
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.sourceType
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.activity.ApkDownloadWebViewActivity
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.*
@@ -81,12 +85,44 @@ fun HomeDialogs(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val apkDownloadHelperEnabled by homeViewModel.prefs.useApkDownloadHelper.getAsState()
+    val webDownloadAbortedText = stringResource(R.string.home_download_webview_aborted)
+    val webDownloadFailedText = stringResource(R.string.home_download_webview_failed)
 
     // Kept outside the dialog so the picker state survives the download dialog's exit animation
     val openApkDownloadHelper = rememberApkDownloadHelperAction(
         homeViewModel = homeViewModel,
         enabled = apkDownloadHelperEnabled && homeViewModel.showDownloadInstructionsDialog
     )
+
+    val webDownloadLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        val uri = ApkDownloadWebViewActivity.resultUri(result.data)
+        if (result.resultCode == Activity.RESULT_OK && uri != null) {
+            homeViewModel.handleApkSelection(uri)
+            return@rememberLauncherForActivityResult
+        }
+
+        when (ApkDownloadWebViewActivity.resultStatus(result.data)) {
+            ApkDownloadWebViewActivity.RESULT_STATUS_RETURN_TO_APK_HELP -> {
+                homeViewModel.showDownloadInstructionsDialog = false
+                homeViewModel.showFilePickerPromptDialog = false
+                homeViewModel.showApkAvailabilityDialog = true
+                return@rememberLauncherForActivityResult
+            }
+
+            ApkDownloadWebViewActivity.RESULT_STATUS_ABORTED -> {
+                context.toast(webDownloadAbortedText)
+            }
+
+            ApkDownloadWebViewActivity.RESULT_STATUS_FAILED -> {
+                context.toast(webDownloadFailedText)
+            }
+        }
+
+        homeViewModel.showDownloadInstructionsDialog = true
+        homeViewModel.showFilePickerPromptDialog = false
+    }
 
     // APK selection processing overlay - blocks interaction while APK is loaded/validated in background
     Overlay(visible = homeViewModel.processingApkSelection) {
@@ -184,14 +220,25 @@ fun HomeDialogs(
             },
             onOpenApkDownloadHelper = openApkDownloadHelper
         ) {
-            homeViewModel.handleDownloadInstructionsContinue { url ->
-                try {
-                    uriHandler.openUri(url)
-                    true
-                } catch (_: Exception) {
-                    false
+            homeViewModel.handleDownloadInstructionsContinue(
+                openFilePickerAfterLaunch = false,
+                onOpenUrl = { url ->
+                    val packageName = homeViewModel.pendingPackageName ?: return@handleDownloadInstructionsContinue false
+                    val version = (homeViewModel.pendingSelectedDownloadVersion
+                        ?: homeViewModel.pendingRecommendedVersion)?.version
+
+                    runCatching {
+                        webDownloadLauncher.launch(
+                            ApkDownloadWebViewActivity.createIntent(
+                                context = context,
+                                url = url,
+                                packageName = packageName,
+                                version = version
+                            )
+                        )
+                    }.isSuccess
                 }
-            }
+            )
         }
     }
 
@@ -962,15 +1009,14 @@ internal fun DownloadInstructionsDialog(
                 secondaryColor = secondaryColor
             )
 
-            InstructionStep(
-                number = "4",
-                text = stringResource(
-                    if (mountInstallRequired) R.string.home_download_instructions_step4_mount
-                    else R.string.home_download_instructions_step4
-                ),
-                textColor = textColor,
-                secondaryColor = secondaryColor
-            )
+            if (mountInstallRequired) {
+                InstructionStep(
+                    number = "4",
+                    text = stringResource(R.string.home_download_instructions_step4_mount),
+                    textColor = textColor,
+                    secondaryColor = secondaryColor
+                )
+            }
         }
     }
 }
