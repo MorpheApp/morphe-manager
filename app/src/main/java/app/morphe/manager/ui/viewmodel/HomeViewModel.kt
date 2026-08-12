@@ -73,7 +73,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
-import java.util.concurrent.atomic.AtomicLong
+import java.util.concurrent.ConcurrentHashMap
 import java.util.zip.CRC32
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
@@ -461,7 +461,10 @@ class HomeViewModel(
     // Verified tracked installs, keyed by the package the record currently occupies.
     // Resolved away from the home state so inspecting archives never holds the cards back.
     private val _trackedSnapshots = MutableStateFlow<Map<String, TrackedSnapshotEntry>>(emptyMap())
-    private val trackedInspectionGeneration = AtomicLong()
+
+    // Counted per package, so invalidating one app never discards results already produced for
+    // the others in the same pass
+    private val trackedInspectionGenerations = ConcurrentHashMap<String, Long>()
 
     @Volatile
     private var activeTrackedApps: Map<String, InstalledApp> = emptyMap()
@@ -505,10 +508,14 @@ class HomeViewModel(
     ) {
         if (observedPackages.isEmpty()) return
         val currentPackages = trackedCurrentPackages(observedPackages)
-        trackedInspectionGeneration.incrementAndGet()
+        currentPackages.forEach(::bumpTrackedInspection)
         if (invalidateCache) currentPackages.forEach(localApkSources::invalidate)
         _trackedSnapshots.update { snapshots -> snapshots - currentPackages }
     }
+
+    /** Claims the next inspection for [packageName], so any result in flight for it is dropped. */
+    private fun bumpTrackedInspection(packageName: String): Long =
+        trackedInspectionGenerations.merge(packageName, 1L, Long::plus)!!
 
     /**
      * Coalesces package broadcasts before rebuilding the home state.
@@ -591,15 +598,17 @@ class HomeViewModel(
                 }
             }
 
-            val generation = trackedInspectionGeneration.incrementAndGet()
+            trackedInspectionGenerations.keys.retainAll(appsByPackage.keys)
+
             withContext(Dispatchers.IO) {
                 coroutineScope {
                     inputs.apps.map { installed ->
+                        val generation = bumpTrackedInspection(installed.currentPackageName)
                         launch {
                             val snapshot = trackedAppInspectionSemaphore.withPermit {
                                 localApkSources.trackedAppSnapshot(installed)
                             }
-                            if (trackedInspectionGeneration.get() != generation ||
+                            if (trackedInspectionGenerations[installed.currentPackageName] != generation ||
                                 activeTrackedApps[installed.currentPackageName] != installed
                             ) return@launch
 
