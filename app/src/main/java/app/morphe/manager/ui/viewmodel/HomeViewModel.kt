@@ -26,11 +26,7 @@ import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
-import app.morphe.manager.domain.apk.InstalledApkInfo
-import app.morphe.manager.domain.apk.InstalledPatchState
-import app.morphe.manager.domain.apk.LocalApkSources
-import app.morphe.manager.domain.apk.SavedApkInfo
-import app.morphe.manager.domain.apk.TrackedAppSnapshot
+import app.morphe.manager.domain.apk.*
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
@@ -531,7 +527,7 @@ class HomeViewModel(
                     appDataResolver.invalidate(it)
                 }
                 markTrackedPackagesPending(pending, invalidateCache = true)
-                _appStateTicker.value = System.currentTimeMillis()
+                _appStateTicker.update { it + 1 }
                 pendingPackageChanges.value = emptySet()
             }
     }
@@ -941,7 +937,7 @@ class HomeViewModel(
                 _isRefreshing.value = false
             }
             appDataResolver.invalidateAll()
-            _appStateTicker.value = System.currentTimeMillis()
+            _appStateTicker.update { it + 1 }
         }
     }
 
@@ -1634,7 +1630,7 @@ class HomeViewModel(
     fun notifyAppStateChanged(packageName: String) {
         appDataResolver.invalidate(packageName)
         markTrackedPackagesPending(setOf(packageName), invalidateCache = true)
-        _appStateTicker.value = System.currentTimeMillis()
+        _appStateTicker.update { it + 1 }
     }
 
     /**

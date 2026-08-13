@@ -86,24 +86,6 @@ class TrackedInstallPresentationTest {
     }
 
     @Test
-    fun `unknown detail falls back to installed icon without replacing tracked metadata`() {
-        val presentation = trackedInstallPresentation(
-            InstallType.DEFAULT,
-            InstalledPatchState.Unknown
-        )
-        val displayedInfo = presentation.displayedPackageInfo(
-            installedPackageInfo = "installed",
-            savedPackageInfo = null
-        )
-
-        assertEquals(null, displayedInfo)
-        assertEquals(
-            "installed",
-            trackedDetailIconPackageInfo(displayedInfo, installedPackageInfo = "installed")
-        )
-    }
-
-    @Test
     fun `untracked app uses normally resolved package information`() {
         assertEquals(
             "resolved-current",

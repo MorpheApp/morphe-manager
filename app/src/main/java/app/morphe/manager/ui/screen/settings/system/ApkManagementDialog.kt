@@ -38,7 +38,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.installed.supportsMount
@@ -201,7 +200,6 @@ private fun PatchedApksContent(
     val patchedApksDeletedText = stringResource(R.string.settings_system_patched_apks_deleted)
     val apksDeletedAllText = stringResource(R.string.settings_system_apks_deleted_all)
     val repository: InstalledAppRepository = koinInject()
-    val filesystem: Filesystem = koinInject()
     val appDataResolver: AppDataResolver = koinInject()
     val prefs: PreferencesManager = koinInject()
     val pm: PM = koinInject()
@@ -219,10 +217,10 @@ private fun PatchedApksContent(
             state = ApkLoadState.Loaded(
                 withContext(Dispatchers.IO) {
                     apps.mapNotNull { app ->
-                        val storedFile = listOf(
-                            filesystem.getPatchedAppFile(app.currentPackageName, app.version),
-                            filesystem.getPatchedAppFile(app.originalPackageName, app.version)
-                        ).distinct().firstOrNull { it.exists() } ?: return@mapNotNull null
+                        // Only the copies this record owns, so a renamed app never lists the
+                        // archive an unrenamed record keeps under the same original name
+                        val storedFile = repository.savedPatchedApkFiles(app)
+                            .firstOrNull { it.exists() } ?: return@mapNotNull null
                         val snapshot = localApkSources.trackedAppSnapshot(app)
                         val savedFile = snapshot.savedPatchedApk
 

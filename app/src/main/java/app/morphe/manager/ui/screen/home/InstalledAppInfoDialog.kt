@@ -49,6 +49,7 @@ import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
 import app.morphe.manager.ui.screen.settings.system.InstallerUnavailableDialog
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.theme.MonochromeThemeDefaults
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
@@ -110,7 +111,6 @@ fun InstalledAppInfoDialog(
     val context = LocalContext.current
     val installedApp = viewModel.installedApp
     val appInfo = viewModel.appInfo
-    val appIconInfo = viewModel.appIconInfo
     val appliedPatches = viewModel.appliedPatches
     val isLoading = viewModel.isLoading
 
@@ -464,7 +464,6 @@ fun InstalledAppInfoDialog(
                         item(contentType = "hero") {
                             AppHeroHeader(
                                 appInfo = appInfo,
-                                appIconInfo = appIconInfo,
                                 packageName = packageName,
                                 installedApp = installedApp,
                                 accentColor = infoAccentColor,
@@ -572,7 +571,6 @@ fun InstalledAppInfoDialog(
                         item(contentType = "hero") {
                             AppHeroHeader(
                                 appInfo = appInfo,
-                                appIconInfo = appIconInfo,
                                 packageName = packageName,
                                 installedApp = installedApp,
                                 accentColor = infoAccentColor,
@@ -844,7 +842,6 @@ private fun WarningBanner(
 @Composable
 private fun AppHeroHeader(
     appInfo: PackageInfo?,
-    appIconInfo: PackageInfo?,
     packageName: String,
     installedApp: InstalledApp,
     accentColor: Color,
@@ -922,9 +919,10 @@ private fun AppHeroHeader(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                // Animated app icon
+                // Animated app icon, resolved by name when the record has no metadata to show
                 AppIcon(
-                    packageInfo = appIconInfo,
+                    packageInfo = appInfo,
+                    packageName = packageName,
                     contentDescription = null,
                     modifier = Modifier
                         .size(iconSize)

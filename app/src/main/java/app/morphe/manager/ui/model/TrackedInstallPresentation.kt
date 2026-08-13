@@ -33,15 +33,6 @@ internal fun <T> TrackedInstallPresentation.displayedPackageInfo(
 }
 
 /**
- * Lets an Unverified detail view use the live app's icon when no retained icon remains, without
- * also replacing the tracked label and version with metadata from an unverified package.
- */
-internal fun <T> trackedDetailIconPackageInfo(
-    displayedPackageInfo: T?,
-    installedPackageInfo: T?
-): T? = displayedPackageInfo ?: installedPackageInfo
-
-/**
  * Keeps the untracked-app resolver fallback out of tracked states. In particular, an Unknown
  * tracked package with no retained APK must stay metadata-free instead of silently revealing the
  * package currently occupying its name.
@@ -61,8 +52,9 @@ internal fun <T> displayedHomePackageInfo(
  * Keeps a present, confirmed non-patched package distinct from a package that is absent.
  *
  * A confirmed replacement is present, not deleted, but it remains distinct from both the patched
- * build in Morphe's record and an app that has never been patched. [showsInstalledPackage] lets
- * the UI use the replacement's current icon and version only when its identity is confirmed.
+ * build in Morphe's record and an app that has never been patched.
+ * [TrackedInstallPresentation.showsInstalledPackage] lets the UI use the replacement's current
+ * icon and version only when its identity is confirmed.
  */
 internal fun trackedInstallPresentation(
     installType: InstallType,

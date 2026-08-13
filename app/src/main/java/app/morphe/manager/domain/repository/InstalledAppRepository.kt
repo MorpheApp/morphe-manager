@@ -10,17 +10,33 @@ import app.morphe.manager.data.room.apps.installed.SelectionPayload
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.PatchSelection
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
+import java.io.File
 
 private const val TAG = "Morphe InstalledAppRepository"
+
+/**
+ * Package names a record keeps its retained copies under, given whether a record already occupies
+ * its original name. A rename leaves a copy under the original package name, but that same path is
+ * where a separate, unrenamed record would keep its own APK.
+ */
+internal fun retainedPatchedApkOwners(
+    currentPackageName: String,
+    originalPackageName: String,
+    originalPackageIsTracked: Boolean
+): List<String> = if (originalPackageName == currentPackageName || originalPackageIsTracked) {
+    listOf(currentPackageName)
+} else {
+    listOf(currentPackageName, originalPackageName)
+}
+
+/**
+ * Whether the record still describes something once its retained copies are gone.
+ * A saved-only record is the archive, so nothing is left to track without it.
+ */
+internal fun outlivesRetainedPatchedApk(installType: InstallType) =
+    installType != InstallType.SAVED
 
 class InstalledAppRepository(
     db: AppDatabase,
@@ -162,45 +178,50 @@ class InstalledAppRepository(
             Log.i(TAG, "Reconciled version for ${app.currentPackageName}: ${app.version} → $newVersion")
         }
 
-    private fun savedPatchedApkFiles(installedApp: InstalledApp) =
-        listOf(
-            filesystem.getPatchedAppFile(installedApp.currentPackageName, installedApp.version),
-            filesystem.getPatchedAppFile(installedApp.originalPackageName, installedApp.version)
-        ).distinctBy { it.absolutePath }
+    /** Every storage path this record owns a retained copy at, current and legacy. */
+    suspend fun savedPatchedApkFiles(installedApp: InstalledApp): List<File> =
+        retainedPatchedApkOwners(
+            currentPackageName = installedApp.currentPackageName,
+            originalPackageName = installedApp.originalPackageName,
+            originalPackageIsTracked = dao.get(installedApp.originalPackageName) != null
+        ).map { packageName ->
+            filesystem.getPatchedAppFile(packageName, installedApp.version)
+        }
 
-    /** Deletes every current or legacy retained copy and reports whether any file changed. */
-    private fun deleteSavedPatchedApkFiles(installedApp: InstalledApp): Boolean {
+    /** Deletes every retained copy this record owns and reports whether any of them existed. */
+    private suspend fun deleteSavedPatchedApkFiles(installedApp: InstalledApp): Boolean {
         val savedFiles = savedPatchedApkFiles(installedApp).filter { it.exists() }
         if (savedFiles.isEmpty()) {
             Log.d(TAG, "No saved APK found for ${installedApp.currentPackageName} v${installedApp.version}")
             return false
         }
 
-        var changed = false
         savedFiles.forEach { savedFile ->
-            val deleted = runCatching { savedFile.delete() }.getOrDefault(false)
-            if (deleted) {
-                changed = true
+            if (runCatching { savedFile.delete() }.getOrDefault(false)) {
                 Log.d(TAG, "Deleted patched APK: ${savedFile.absolutePath}")
             } else {
                 Log.w(TAG, "Failed to delete patched APK: ${savedFile.absolutePath}")
             }
         }
-        return changed
+        // Reported even when a delete failed, so the listing rebuilds from what is actually there
+        return true
     }
 
     /**
-     * Deletes retained patched APK files while preserving their patch records and settings.
+     * Deletes retained patched APK files while preserving the records that describe an install.
+     * A saved-only record describes nothing once its archive is gone, so it goes with the file.
      * Consumers are notified because this changes the evidence used to verify live installs.
      */
     suspend fun deleteSavedPatchedApks(installedApps: Collection<InstalledApp>) =
         withContext(Dispatchers.IO) {
             val changedPackages = buildSet {
                 installedApps.forEach { installedApp ->
-                    if (deleteSavedPatchedApkFiles(installedApp)) {
-                        add(installedApp.currentPackageName)
-                        add(installedApp.originalPackageName)
+                    if (!deleteSavedPatchedApkFiles(installedApp)) return@forEach
+                    if (!outlivesRetainedPatchedApk(installedApp.installType)) {
+                        dao.delete(installedApp)
                     }
+                    add(installedApp.currentPackageName)
+                    add(installedApp.originalPackageName)
                 }
             }
             if (changedPackages.isNotEmpty()) {
