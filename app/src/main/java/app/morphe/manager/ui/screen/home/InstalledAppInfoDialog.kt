@@ -110,6 +110,7 @@ fun InstalledAppInfoDialog(
     val context = LocalContext.current
     val installedApp = viewModel.installedApp
     val appInfo = viewModel.appInfo
+    val appIconInfo = viewModel.appIconInfo
     val appliedPatches = viewModel.appliedPatches
     val isLoading = viewModel.isLoading
 
@@ -463,6 +464,7 @@ fun InstalledAppInfoDialog(
                         item(contentType = "hero") {
                             AppHeroHeader(
                                 appInfo = appInfo,
+                                appIconInfo = appIconInfo,
                                 packageName = packageName,
                                 installedApp = installedApp,
                                 accentColor = infoAccentColor,
@@ -570,6 +572,7 @@ fun InstalledAppInfoDialog(
                         item(contentType = "hero") {
                             AppHeroHeader(
                                 appInfo = appInfo,
+                                appIconInfo = appIconInfo,
                                 packageName = packageName,
                                 installedApp = installedApp,
                                 accentColor = infoAccentColor,
@@ -841,6 +844,7 @@ private fun WarningBanner(
 @Composable
 private fun AppHeroHeader(
     appInfo: PackageInfo?,
+    appIconInfo: PackageInfo?,
     packageName: String,
     installedApp: InstalledApp,
     accentColor: Color,
@@ -920,7 +924,7 @@ private fun AppHeroHeader(
             ) {
                 // Animated app icon
                 AppIcon(
-                    packageInfo = appInfo,
+                    packageInfo = appIconInfo,
                     contentDescription = null,
                     modifier = Modifier
                         .size(iconSize)

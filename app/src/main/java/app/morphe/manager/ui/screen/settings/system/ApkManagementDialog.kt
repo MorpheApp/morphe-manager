@@ -56,6 +56,9 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
@@ -209,7 +212,10 @@ private fun PatchedApksContent(
     var state by remember { mutableStateOf<ApkLoadState<ApkItemDataWithApp>>(ApkLoadState.Loading) }
 
     LaunchedEffect(Unit) {
-        repository.getAll().collect { apps ->
+        combine(
+            repository.getAll(),
+            repository.savedPatchedApkChanges.onStart { emit(emptySet()) }
+        ) { apps, _ -> apps }.collectLatest { apps ->
             state = ApkLoadState.Loaded(
                 withContext(Dispatchers.IO) {
                     apps.mapNotNull { app ->
@@ -435,14 +441,14 @@ private fun PatchedApksContent(
             onDeleteSelectedConfirm = { selectedItems ->
                 val appsToDelete = selectedItems.mapNotNull { appByKey[it.selectionKey] }
                 scope.launch {
-                    appsToDelete.forEach { repository.delete(it) }
+                    repository.deleteSavedPatchedApks(appsToDelete)
                     context.toast(apksDeletedAllText)
                 }
             },
             onDeleteAllConfirm = {
                 val appsToDelete = apkItems.map { it.installedApp }
                 scope.launch {
-                    appsToDelete.forEach { repository.delete(it) }
+                    repository.deleteSavedPatchedApks(appsToDelete)
                     context.toast(apksDeletedAllText)
                 }
             }
@@ -459,7 +465,7 @@ private fun PatchedApksContent(
             onDismiss = { itemToDelete.value = null },
             onConfirm = {
                 scope.launch {
-                    repository.delete(itemToDelete.value!!)
+                    repository.deleteSavedPatchedApk(itemToDelete.value!!)
                     context.toast(patchedApksDeletedText)
                     itemToDelete.value = null
                 }

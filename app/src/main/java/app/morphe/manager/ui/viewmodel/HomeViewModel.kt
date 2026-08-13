@@ -536,6 +536,15 @@ class HomeViewModel(
             }
     }
 
+    /** Rechecks only tracked evidence when storage management removes a retained patched APK. */
+    private fun observeSavedPatchedApkChanges() = viewModelScope.launch {
+        installedAppRepository.savedPatchedApkChanges.collect { packageNames ->
+            packageNames.forEach(appDataResolver::invalidate)
+            markTrackedPackagesPending(packageNames, invalidateCache = true)
+            _appStateTicker.update { it + 1 }
+        }
+    }
+
     /**
      * Keeps [_trackedSnapshots] in step with the records and with anything that changed a package.
      *
@@ -813,6 +822,7 @@ class HomeViewModel(
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
         observePackageChanges()
+        observeSavedPatchedApkChanges()
         observeTrackedApps()
         observeManagerUpdate()
         triggerUpdateCheck()

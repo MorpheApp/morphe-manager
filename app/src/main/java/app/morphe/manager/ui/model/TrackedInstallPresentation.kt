@@ -33,6 +33,15 @@ internal fun <T> TrackedInstallPresentation.displayedPackageInfo(
 }
 
 /**
+ * Lets an Unverified detail view use the live app's icon when no retained icon remains, without
+ * also replacing the tracked label and version with metadata from an unverified package.
+ */
+internal fun <T> trackedDetailIconPackageInfo(
+    displayedPackageInfo: T?,
+    installedPackageInfo: T?
+): T? = displayedPackageInfo ?: installedPackageInfo
+
+/**
  * Keeps the untracked-app resolver fallback out of tracked states. In particular, an Unknown
  * tracked package with no retained APK must stay metadata-free instead of silently revealing the
  * package currently occupying its name.

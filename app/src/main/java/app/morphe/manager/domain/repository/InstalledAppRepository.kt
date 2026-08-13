@@ -11,7 +11,9 @@ import app.morphe.manager.util.PM
 import app.morphe.manager.util.PatchSelection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
@@ -30,6 +32,7 @@ class InstalledAppRepository(
     private val bundleDao = db.patchBundleDao()
 
     private val _orphanedInstalls = MutableStateFlow<List<InstalledApp>>(emptyList())
+    private val _savedPatchedApkChanges = MutableSharedFlow<Set<String>>(extraBufferCapacity = 1)
 
     /**
      * Copies that patching left behind on the device under their previous package name.
@@ -37,6 +40,9 @@ class InstalledAppRepository(
      * they turn into installs nothing points at.
      */
     val orphanedInstalls = _orphanedInstalls.asStateFlow()
+
+    /** Package names whose retained patched APK evidence changed without changing its record. */
+    val savedPatchedApkChanges = _savedPatchedApkChanges.asSharedFlow()
 
     fun getAll() = dao.getAll().distinctUntilChanged()
 
@@ -156,27 +162,61 @@ class InstalledAppRepository(
             Log.i(TAG, "Reconciled version for ${app.currentPackageName}: ${app.version} → $newVersion")
         }
 
-    /**
-     * Delete installed app record and its saved patched APK file from storage.
-     * Looks up the file by both currentPackageName and originalPackageName to handle renamed packages.
-     */
-    suspend fun delete(installedApp: InstalledApp) = withContext(Dispatchers.IO) {
-        // Find the saved patched APK file
-        val savedFile = listOf(
+    private fun savedPatchedApkFiles(installedApp: InstalledApp) =
+        listOf(
             filesystem.getPatchedAppFile(installedApp.currentPackageName, installedApp.version),
             filesystem.getPatchedAppFile(installedApp.originalPackageName, installedApp.version)
-        ).distinct().firstOrNull { it.exists() }
+        ).distinctBy { it.absolutePath }
 
-        if (savedFile != null) {
-            val deleted = runCatching { savedFile.delete() }.getOrElse { false }
+    /** Deletes every current or legacy retained copy and reports whether any file changed. */
+    private fun deleteSavedPatchedApkFiles(installedApp: InstalledApp): Boolean {
+        val savedFiles = savedPatchedApkFiles(installedApp).filter { it.exists() }
+        if (savedFiles.isEmpty()) {
+            Log.d(TAG, "No saved APK found for ${installedApp.currentPackageName} v${installedApp.version}")
+            return false
+        }
+
+        var changed = false
+        savedFiles.forEach { savedFile ->
+            val deleted = runCatching { savedFile.delete() }.getOrDefault(false)
             if (deleted) {
+                changed = true
                 Log.d(TAG, "Deleted patched APK: ${savedFile.absolutePath}")
             } else {
                 Log.w(TAG, "Failed to delete patched APK: ${savedFile.absolutePath}")
             }
-        } else {
-            Log.d(TAG, "No saved APK found for ${installedApp.currentPackageName} v${installedApp.version}")
         }
+        return changed
+    }
+
+    /**
+     * Deletes retained patched APK files while preserving their patch records and settings.
+     * Consumers are notified because this changes the evidence used to verify live installs.
+     */
+    suspend fun deleteSavedPatchedApks(installedApps: Collection<InstalledApp>) =
+        withContext(Dispatchers.IO) {
+            val changedPackages = buildSet {
+                installedApps.forEach { installedApp ->
+                    if (deleteSavedPatchedApkFiles(installedApp)) {
+                        add(installedApp.currentPackageName)
+                        add(installedApp.originalPackageName)
+                    }
+                }
+            }
+            if (changedPackages.isNotEmpty()) {
+                _savedPatchedApkChanges.emit(changedPackages)
+            }
+        }
+
+    suspend fun deleteSavedPatchedApk(installedApp: InstalledApp) =
+        deleteSavedPatchedApks(listOf(installedApp))
+
+    /**
+     * Deletes an installed app record together with every retained patched APK copy.
+     * This is the explicit "forget app" operation, not storage-only APK cleanup.
+     */
+    suspend fun delete(installedApp: InstalledApp) = withContext(Dispatchers.IO) {
+        deleteSavedPatchedApkFiles(installedApp)
 
         dao.delete(installedApp)
     }

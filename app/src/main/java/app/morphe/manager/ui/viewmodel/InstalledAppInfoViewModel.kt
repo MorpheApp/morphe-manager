@@ -19,6 +19,7 @@ import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.UninstallCancelledException
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.ui.model.displayedPackageInfo
+import app.morphe.manager.ui.model.trackedDetailIconPackageInfo
 import app.morphe.manager.ui.model.trackedInstallPresentation
 import app.morphe.manager.ui.screen.home.AppliedPatchBundleUi
 import app.morphe.manager.ui.screen.home.resolveAppliedBundleAttribution
@@ -53,6 +54,8 @@ class InstalledAppInfoViewModel(
     var installedApp: InstalledApp? by mutableStateOf(null)
         private set
     var appInfo: PackageInfo? by mutableStateOf(null)
+        private set
+    var appIconInfo: PackageInfo? by mutableStateOf(null)
         private set
     private var usableSavedApk: File? = null
 
@@ -215,6 +218,7 @@ class InstalledAppInfoViewModel(
         withContext(Dispatchers.Main) {
             installedApp = null
             appInfo = null
+            appIconInfo = null
             appliedPatches = null
             isInstalledOnDevice = false
             context.toast(context.getString(R.string.saved_app_removed_toast))
@@ -290,10 +294,12 @@ class InstalledAppInfoViewModel(
         // This flag authorizes actions against Morphe's tracked build, so a confirmed stock
         // replacement remains false even though its own metadata is safe to display.
         isInstalledOnDevice = installedInfo != null && trackedPresentation.isPatched
-        appInfo = trackedPresentation.displayedPackageInfo(
+        val displayedInfo = trackedPresentation.displayedPackageInfo(
             installedPackageInfo = installedInfo,
             savedPackageInfo = snapshot.savedPatchedApkInfo
         )
+        appInfo = displayedInfo
+        appIconInfo = trackedDetailIconPackageInfo(displayedInfo, installedInfo)
         isAppDeleted = trackedPresentation.isDeleted
         isInstallStateNotPatched = trackedPresentation.isNotPatched
         isInstallStateUnknown = trackedPresentation.isUnknown
