@@ -157,18 +157,14 @@ class InstalledAppRepository(
 
     /**
      * Update only the [InstalledApp.version] of an existing record and drop the orphan
-     * patched APK at the old version path. Applied patches and selectionPayload are
-     * left untouched.
+     * patched APKs it owned at the old version path. Applied patches and selectionPayload
+     * are left untouched.
      */
     suspend fun updateInstalledVersion(app: InstalledApp, newVersion: String) =
         withContext(Dispatchers.IO) {
             if (app.version == newVersion) return@withContext
             dao.upsertApp(app.copy(version = newVersion))
-            val orphans = listOf(
-                filesystem.getPatchedAppFile(app.currentPackageName, app.version),
-                filesystem.getPatchedAppFile(app.originalPackageName, app.version)
-            ).distinctBy { it.absolutePath }
-            orphans.forEach { file ->
+            savedPatchedApkFiles(app).forEach { file ->
                 if (file.exists()) {
                     runCatching { file.delete() }.onFailure {
                         Log.w(TAG, "Failed to delete ${file.absolutePath}", it)
