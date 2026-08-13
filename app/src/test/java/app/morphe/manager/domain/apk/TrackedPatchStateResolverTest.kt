@@ -5,6 +5,8 @@
 
 package app.morphe.manager.domain.apk
 
+import app.morphe.manager.data.room.apps.installed.InstallType
+import app.morphe.manager.util.AOSP_INSTALLER_PACKAGE
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -150,6 +152,20 @@ class TrackedPatchStateResolverTest {
             resolve(
                 installedHashes = setOf("unrecognized"),
                 installerAttributionMatches = true,
+                installedAfterPatching = true
+            )
+        )
+    }
+
+    @Test
+    fun `saved export installed through system installer remains unknown without signatures`() {
+        assertEquals(
+            InstalledPatchState.Unknown,
+            resolve(
+                installerAttributionMatches = installerAttributionMatchesRecord(
+                    InstallType.SAVED,
+                    AOSP_INSTALLER_PACKAGE
+                ),
                 installedAfterPatching = true
             )
         )

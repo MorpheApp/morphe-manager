@@ -119,6 +119,32 @@ internal fun canRemoveTrackedRecord(
             patchState != InstalledPatchState.Patched
 
 /**
+ * Whether an installer attribution is compatible with how the record was created.
+ * A saved export may later be installed by any tool, so its installer is not evidence that the
+ * package was replaced after patching.
+ */
+internal fun installerAttributionMatchesRecord(
+    installType: InstallType,
+    installer: String?
+): Boolean = when (installType) {
+        InstallType.PLAY_STORE,
+        InstallType.ROOT_PLAY_STORE,
+        InstallType.SHIZUKU_PLAY_STORE -> installer == PLAY_STORE_INSTALLER_PACKAGE
+
+        // A mounted stock app, a user-picked installer and a saved export can carry any attribution
+        InstallType.MOUNT, InstallType.CUSTOM, InstallType.SAVED -> true
+
+        // Handing the APK to the system installer can leave either Morphe or the installer itself
+        // as the attribution, and the Morphe case was already accepted as proof above
+        InstallType.DEFAULT -> installer == null ||
+                installer == AOSP_INSTALLER_PACKAGE ||
+                installer == AOSP_INSTALLER_PACKAGE_LEGACY
+
+        // Shizuku installs leave no attribution behind, so anything else replaced the package
+        InstallType.SHIZUKU -> installer == null
+}
+
+/**
  * The APKs already on the device that an app could be patched from: the original Morphe kept
  * from a previous run, and the app as the system has it installed.
  */
@@ -254,7 +280,7 @@ class LocalApkSources(
             savedPatchedHashes = savedPatchedApk?.let(pm::getApkFileSignatureHashes).orEmpty(),
             originalHashes = referenceSignatureHashes(app.originalPackageName),
             installedByPatchManager = pm.isPatchManagerInstaller(installer),
-            installerAttributionMatches = installerMatchesRecord(app.installType, installer),
+            installerAttributionMatches = installerAttributionMatchesRecord(app.installType, installer),
             installedAfterPatching = installedAfterPatching(app, installedPackageInfo)
         )
 
@@ -319,31 +345,6 @@ class LocalApkSources(
 
     private fun fileStamp(file: File?): String =
         if (file == null) "-" else "${file.length()}:${file.lastModified()}"
-
-    /**
-     * Whether the current installer is the one Morphe itself would have set for this record.
-     *
-     * Play Store-attributed and custom install modes make installer identity inconclusive, so
-     * only the modes that leave a predictable attribution can rule an installation out.
-     */
-    private fun installerMatchesRecord(installType: InstallType, installer: String?): Boolean =
-        when (installType) {
-            InstallType.PLAY_STORE,
-            InstallType.ROOT_PLAY_STORE,
-            InstallType.SHIZUKU_PLAY_STORE -> installer == PLAY_STORE_INSTALLER_PACKAGE
-
-            // A mounted stock app and a user-picked installer can carry any attribution
-            InstallType.MOUNT, InstallType.CUSTOM -> true
-
-            // Handing the APK to the system installer can leave either Morphe or the installer
-            // itself as the attribution, and the Morphe case was already accepted as proof above
-            InstallType.DEFAULT -> installer == null ||
-                    installer == AOSP_INSTALLER_PACKAGE ||
-                    installer == AOSP_INSTALLER_PACKAGE_LEGACY
-
-            // Shizuku installs leave no attribution behind, so anything else replaced the package
-            InstallType.SHIZUKU, InstallType.SAVED -> installer == null
-        }
 
     /**
      * Whether the installation on the device is newer than the patch record tracking it.

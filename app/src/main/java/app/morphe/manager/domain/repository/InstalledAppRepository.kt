@@ -32,14 +32,41 @@ internal fun retainedPatchedApkOwners(
 }
 
 /**
+ * How the package occupying a saved record's name relates to its retained patched APK.
+ * Signature failures remain [UNKNOWN] so storage cleanup never destroys tracking evidence merely
+ * because either side could not be inspected.
+ */
+internal enum class InstalledSavedApkIdentity {
+    ABSENT,
+    MATCHES_RETAINED,
+    DIFFERS_FROM_RETAINED,
+    UNKNOWN
+}
+
+internal fun installedSavedApkIdentity(
+    packageIsInstalled: Boolean,
+    installedSignatureHashes: Set<String>,
+    retainedSignatureHashes: Set<String>
+): InstalledSavedApkIdentity = when {
+    !packageIsInstalled -> InstalledSavedApkIdentity.ABSENT
+    installedSignatureHashes.isEmpty() || retainedSignatureHashes.isEmpty() ->
+        InstalledSavedApkIdentity.UNKNOWN
+    installedSignatureHashes.any { it in retainedSignatureHashes } ->
+        InstalledSavedApkIdentity.MATCHES_RETAINED
+    else -> InstalledSavedApkIdentity.DIFFERS_FROM_RETAINED
+}
+
+/**
  * Whether the record still describes something once its retained copies are gone.
- * [InstallType.SAVED] records can also describe APKs installed after they were exported, so the
- * install type alone cannot decide whether deleting the archive should forget the record.
+ * A [InstallType.SAVED] record outlives the archive when the installed package matches it, or when
+ * identity could not be established. A confirmed different package is not the exported build.
  */
 internal fun outlivesRetainedPatchedApk(
     installType: InstallType,
-    packageIsInstalled: Boolean
-) = installType != InstallType.SAVED || packageIsInstalled
+    installedPackageIdentity: InstalledSavedApkIdentity
+) = installType != InstallType.SAVED ||
+        installedPackageIdentity == InstalledSavedApkIdentity.MATCHES_RETAINED ||
+        installedPackageIdentity == InstalledSavedApkIdentity.UNKNOWN
 
 /**
  * Deletes every retained copy in [files] and returns those still on storage afterwards.
@@ -62,6 +89,11 @@ private enum class SavedApkDeletion {
     /** At least one copy survived and still occupies storage. */
     Failed
 }
+
+private data class SavedApkDeletionResult(
+    val status: SavedApkDeletion,
+    val installedPackageIdentity: InstalledSavedApkIdentity = InstalledSavedApkIdentity.UNKNOWN
+)
 
 class InstalledAppRepository(
     db: AppDatabase,
@@ -209,29 +241,66 @@ class InstalledAppRepository(
             filesystem.getPatchedAppFile(packageName, installedApp.version)
         }
 
+    /**
+     * Resolves whether the package at a saved record's name is the retained export.
+     * Only archives that still match the record may prove a signature mismatch; a corrupt or stale
+     * file leaves the result unknown and therefore cannot cause the record to be discarded.
+     */
+    private fun resolveInstalledSavedApkIdentity(
+        installedApp: InstalledApp,
+        savedFiles: List<File>
+    ): InstalledSavedApkIdentity {
+        if (installedApp.installType != InstallType.SAVED) {
+            return InstalledSavedApkIdentity.UNKNOWN
+        }
+
+        val packageIsInstalled = pm.getPackageInfo(installedApp.currentPackageName) != null
+        if (!packageIsInstalled) return InstalledSavedApkIdentity.ABSENT
+
+        val installedHashes = pm.getInstalledSignatureHashes(installedApp.currentPackageName)
+        val retainedHashes = savedFiles.asSequence()
+            .filter { file ->
+                pm.readSavedApkInfo(
+                    file,
+                    installedApp.version,
+                    installedApp.currentPackageName
+                ) != null
+            }
+            .flatMap { pm.getApkFileSignatureHashes(it).asSequence() }
+            .toSet()
+
+        return installedSavedApkIdentity(
+            packageIsInstalled = true,
+            installedSignatureHashes = installedHashes,
+            retainedSignatureHashes = retainedHashes
+        )
+    }
+
     /** Deletes every retained copy this record owns and reports what became of them. */
-    private suspend fun deleteSavedPatchedApkFiles(installedApp: InstalledApp): SavedApkDeletion {
+    private suspend fun deleteSavedPatchedApkFiles(installedApp: InstalledApp): SavedApkDeletionResult {
         val savedFiles = savedPatchedApkFiles(installedApp).filter { it.exists() }
         if (savedFiles.isEmpty()) {
             Log.d(TAG, "No saved APK found for ${installedApp.currentPackageName} v${installedApp.version}")
-            return SavedApkDeletion.Nothing
+            return SavedApkDeletionResult(SavedApkDeletion.Nothing)
         }
 
+        val installedPackageIdentity = resolveInstalledSavedApkIdentity(installedApp, savedFiles)
         val survivors = deleteRetainedCopies(savedFiles)
         if (survivors.isNotEmpty()) {
             Log.w(TAG, "Patched APKs left behind: ${survivors.map { it.absolutePath }}")
-            return SavedApkDeletion.Failed
+            return SavedApkDeletionResult(SavedApkDeletion.Failed)
         }
 
         Log.d(TAG, "Deleted patched APKs for ${installedApp.currentPackageName} v${installedApp.version}")
-        return SavedApkDeletion.Deleted
+        return SavedApkDeletionResult(SavedApkDeletion.Deleted, installedPackageIdentity)
     }
 
     /**
      * Deletes retained patched APK files while preserving the records that describe an install.
-     * A saved-only record goes with its archive only when its package is not installed. Exporting
-     * records an app as [InstallType.SAVED], and installing that export later does not change the
-     * record, so an installed package must keep its tracking evidence for verification.
+     * Exporting records an app as [InstallType.SAVED], and installing that export later does not
+     * change the record. A matching installed package therefore keeps the row, while a confirmed
+     * different package does not make the saved-only record outlive its archive. An unreadable
+     * identity is preserved so a transient inspection failure cannot destroy tracking evidence.
      * A copy that survives the attempt keeps its record: the listing is built from records, so
      * dropping one would leave the file occupying storage with nothing left to remove it with.
      * Consumers are notified because this changes the evidence used to verify live installs.
@@ -243,16 +312,14 @@ class InstalledAppRepository(
             var deletedEverything = true
             val changedPackages = buildSet {
                 installedApps.forEach { installedApp ->
-                    when (deleteSavedPatchedApkFiles(installedApp)) {
+                    val deletion = deleteSavedPatchedApkFiles(installedApp)
+                    when (deletion.status) {
                         SavedApkDeletion.Nothing -> return@forEach
                         SavedApkDeletion.Failed -> deletedEverything = false
                         SavedApkDeletion.Deleted -> {
-                            val savedPackageIsInstalled =
-                                installedApp.installType == InstallType.SAVED &&
-                                        pm.getPackageInfo(installedApp.currentPackageName) != null
                             if (!outlivesRetainedPatchedApk(
                                     installedApp.installType,
-                                    savedPackageIsInstalled
+                                    deletion.installedPackageIdentity
                                 )
                             ) {
                                 dao.delete(installedApp)
