@@ -492,6 +492,8 @@ private fun OriginalApksContent(
     var state by remember { mutableStateOf<ApkLoadState<OriginalApkEntry>>(ApkLoadState.Loading) }
 
     LaunchedEffect(Unit) {
+        // Records left behind by a file that is already gone would show a stale size and count
+        repository.pruneMissingApks()
         repository.getAll().collect { apks ->
             state = ApkLoadState.Loaded(
                 withContext(Dispatchers.IO) {
