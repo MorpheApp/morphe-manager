@@ -33,10 +33,13 @@ internal fun retainedPatchedApkOwners(
 
 /**
  * Whether the record still describes something once its retained copies are gone.
- * A saved-only record is the archive, so nothing is left to track without it.
+ * [InstallType.SAVED] records can also describe APKs installed after they were exported, so the
+ * install type alone cannot decide whether deleting the archive should forget the record.
  */
-internal fun outlivesRetainedPatchedApk(installType: InstallType) =
-    installType != InstallType.SAVED
+internal fun outlivesRetainedPatchedApk(
+    installType: InstallType,
+    packageIsInstalled: Boolean
+) = installType != InstallType.SAVED || packageIsInstalled
 
 /**
  * Deletes every retained copy in [files] and returns those still on storage afterwards.
@@ -226,7 +229,9 @@ class InstalledAppRepository(
 
     /**
      * Deletes retained patched APK files while preserving the records that describe an install.
-     * A saved-only record describes nothing once its archive is gone, so it goes with the file.
+     * A saved-only record goes with its archive only when its package is not installed. Exporting
+     * records an app as [InstallType.SAVED], and installing that export later does not change the
+     * record, so an installed package must keep its tracking evidence for verification.
      * A copy that survives the attempt keeps its record: the listing is built from records, so
      * dropping one would leave the file occupying storage with nothing left to remove it with.
      * Consumers are notified because this changes the evidence used to verify live installs.
@@ -241,10 +246,18 @@ class InstalledAppRepository(
                     when (deleteSavedPatchedApkFiles(installedApp)) {
                         SavedApkDeletion.Nothing -> return@forEach
                         SavedApkDeletion.Failed -> deletedEverything = false
-                        SavedApkDeletion.Deleted ->
-                            if (!outlivesRetainedPatchedApk(installedApp.installType)) {
+                        SavedApkDeletion.Deleted -> {
+                            val savedPackageIsInstalled =
+                                installedApp.installType == InstallType.SAVED &&
+                                        pm.getPackageInfo(installedApp.currentPackageName) != null
+                            if (!outlivesRetainedPatchedApk(
+                                    installedApp.installType,
+                                    savedPackageIsInstalled
+                                )
+                            ) {
                                 dao.delete(installedApp)
                             }
+                        }
                     }
                     add(installedApp.currentPackageName)
                     add(installedApp.originalPackageName)

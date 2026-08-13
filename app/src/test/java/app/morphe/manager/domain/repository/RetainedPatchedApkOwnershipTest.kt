@@ -47,13 +47,38 @@ class RetainedPatchedApkOwnershipTest {
     }
 
     @Test
-    fun `saved-only record does not outlive its archive`() {
-        assertFalse(outlivesRetainedPatchedApk(InstallType.SAVED))
+    fun `installed saved record outlives its archive`() {
+        assertTrue(
+            outlivesRetainedPatchedApk(
+                InstallType.SAVED,
+                packageIsInstalled = true
+            )
+        )
     }
 
     @Test
-    fun `installed record outlives its archive`() {
-        assertTrue(outlivesRetainedPatchedApk(InstallType.DEFAULT))
-        assertTrue(outlivesRetainedPatchedApk(InstallType.MOUNT))
+    fun `saved-only record does not outlive its archive`() {
+        assertFalse(
+            outlivesRetainedPatchedApk(
+                InstallType.SAVED,
+                packageIsInstalled = false
+            )
+        )
+    }
+
+    @Test
+    fun `installed record types outlive their archives even while absent`() {
+        assertTrue(
+            outlivesRetainedPatchedApk(
+                InstallType.DEFAULT,
+                packageIsInstalled = false
+            )
+        )
+        assertTrue(
+            outlivesRetainedPatchedApk(
+                InstallType.MOUNT,
+                packageIsInstalled = false
+            )
+        )
     }
 }
