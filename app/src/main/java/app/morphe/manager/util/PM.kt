@@ -102,7 +102,7 @@ class PM(
 
     fun PackageInfo.label(): String {
         val raw = this.applicationInfo!!.loadLabel(app.packageManager).toString()
-        return cleanLabel(raw, this.packageName)
+        return cleanPackageLabel(raw, this.packageName)
     }
 
     fun getVersionCode(packageInfo: PackageInfo) = PackageInfoCompat.getLongVersionCode(packageInfo)
@@ -320,18 +320,37 @@ class PM(
             digest.digest(sig.toByteArray()).joinToString("") { b -> "%02x".format(b) }
         }
     }
+}
 
-    private fun cleanLabel(raw: String, packageName: String): String {
-        val trimmed = raw.trim()
-        if (trimmed.isEmpty()) return trimmed
-        // If the label contains the package name or a dotted class, strip to the last segment.
-        val hasDots = trimmed.contains('.')
-        val pkgMatch = packageName.isNotEmpty() && (trimmed.startsWith(packageName) || trimmed.contains(packageName))
-        val base = if (hasDots || pkgMatch) trimmed.substringAfterLast('.') else trimmed
-        val withoutSuffix = base.removeSuffix("Application")
-        val candidate = withoutSuffix.ifBlank { base }
-        return candidate.ifBlank { trimmed }
-    }
+/**
+ * Whether a label is an identifier the app never meant to show, rather than a name it chose.
+ *
+ * Apps without a real label fall back to their package or a launcher class, and only those are
+ * worth reducing to a last segment. A brand that simply contains a dot must survive, so a dotted
+ * label only qualifies with the shape of a package: no spaces, three or more segments, and a
+ * lowercase top-level domain in front.
+ */
+private fun looksLikeIdentifierLabel(label: String, packageName: String): Boolean {
+    if (label.any(Char::isWhitespace)) return false
+    if (packageName.isNotEmpty() && label.contains(packageName)) return true
+    if (label.count { it == '.' } < 2) return false
+    if (!label.all { it.isLetterOrDigit() || it == '.' || it == '_' }) return false
+    return label.substringBefore('.').none(Char::isUpperCase)
+}
+
+/**
+ * Reduces a launcher label to the part worth showing.
+ * Kept free of Android APIs so the identifier rules can be tested directly.
+ */
+internal fun cleanPackageLabel(raw: String, packageName: String): String {
+    val trimmed = raw.trim()
+    if (trimmed.isEmpty()) return trimmed
+    if (!looksLikeIdentifierLabel(trimmed, packageName)) return trimmed
+
+    val base = trimmed.substringAfterLast('.')
+    val withoutSuffix = base.removeSuffix("Application")
+    val candidate = withoutSuffix.ifBlank { base }
+    return candidate.ifBlank { trimmed }
 }
 
 /**
