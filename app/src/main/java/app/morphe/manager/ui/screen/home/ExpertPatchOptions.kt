@@ -33,13 +33,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.patcher.patch.ExplicitOptionKind
-import app.morphe.manager.patcher.patch.ImageSize
-import app.morphe.manager.patcher.patch.Option
-import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.*
 import kotlinx.collections.immutable.ImmutableList
+import kotlin.math.roundToInt
 
 /**
  * Represents the resolved UI kind of patch option.
@@ -65,6 +63,14 @@ private sealed interface OptionKind {
     data object IntLong         : OptionKind
     data object FloatDouble     : OptionKind
     data object ArrayDropdown   : OptionKind
+    /** Slider for a typed integer option that declares bounds. */
+    data class IntSlider(val bounds: SliderBounds)        : OptionKind
+    /** Slider for a typed decimal option that declares bounds. */
+    data class FloatSlider(val bounds: SliderBounds)      : OptionKind
+    /** Range slider for a typed integer range option. */
+    data class IntRangeSlider(val bounds: SliderBounds)   : OptionKind
+    /** Range slider for a typed decimal range option. */
+    data class FloatRangeSlider(val bounds: SliderBounds) : OptionKind
 }
 
 /**
@@ -75,13 +81,20 @@ private fun resolveOptionKind(option: Option<*>, value: Any?): OptionKind {
     // Typed options dispatch to their dedicated picker Kind. Untyped string options
     // fall through to the heuristics below and render with the classic text field.
     option.explicitKind?.let { kind ->
-        return when (kind) {
-            ExplicitOptionKind.Folder   -> OptionKind.FolderPicker
-            ExplicitOptionKind.FilePath -> OptionKind.FilePicker
-            ExplicitOptionKind.Files    -> OptionKind.StringList
-            ExplicitOptionKind.Image    -> OptionKind.Image
-            ExplicitOptionKind.Color    -> OptionKind.Color
+        val explicit = when (kind) {
+            ExplicitOptionKind.Folder      -> OptionKind.FolderPicker
+            ExplicitOptionKind.FilePath    -> OptionKind.FilePicker
+            ExplicitOptionKind.Files       -> OptionKind.StringList
+            ExplicitOptionKind.Image       -> OptionKind.Image
+            ExplicitOptionKind.Color       -> OptionKind.Color
+            // A slider cannot be drawn without bounds, so such an option falls back
+            // to the numeric field below instead of rendering as an empty track
+            ExplicitOptionKind.IntSlider   -> option.sliderBounds?.let(OptionKind::IntSlider)
+            ExplicitOptionKind.FloatSlider -> option.sliderBounds?.let(OptionKind::FloatSlider)
+            ExplicitOptionKind.IntRange    -> option.sliderBounds?.let(OptionKind::IntRangeSlider)
+            ExplicitOptionKind.FloatRange  -> option.sliderBounds?.let(OptionKind::FloatRangeSlider)
         }
+        if (explicit != null) return explicit
     }
 
     val t        = option.type.toString()
@@ -149,6 +162,16 @@ private fun resolveOptionKind(option: Option<*>, value: Any?): OptionKind {
         // Safe fallback
         else -> OptionKind.StringText
     }
+}
+
+/**
+ * A stored range option value read back as a range. Range options hold a two element list,
+ * so anything else means the value predates the option or was written by another tool.
+ */
+private fun Any?.asFloatRange(): ClosedFloatingPointRange<Float>? {
+    val pair = (this as? List<*>)?.mapNotNull { (it as? Number)?.toFloat() } ?: return null
+    if (pair.size != 2) return null
+    return minOf(pair[0], pair[1])..maxOf(pair[0], pair[1])
 }
 
 /**
@@ -227,7 +250,7 @@ internal fun PatchOptionsDialog(
                     }
                 }
 
-                when (resolveOptionKind(option, value)) {
+                when (val kind = resolveOptionKind(option, value)) {
                     OptionKind.StringList -> ListStringInputOption(
                         title = option.title,
                         description = option.description,
@@ -376,6 +399,58 @@ internal fun PatchOptionsDialog(
                         value = value?.toString() ?: "",
                         presets = option.presets ?: emptyMap(),
                         onValueChange = { onValueChange(key, it) }
+                    )
+
+                    is OptionKind.IntSlider -> SliderOptionInput(
+                        title = option.title,
+                        description = option.description,
+                        value = (value as? Number)?.toFloat() ?: kind.bounds.min,
+                        min = kind.bounds.min,
+                        max = kind.bounds.max,
+                        step = kind.bounds.step,
+                        isInteger = true,
+                        required = option.required,
+                        onValueChange = { onValueChange(key, it.roundToInt()) }
+                    )
+
+                    is OptionKind.FloatSlider -> SliderOptionInput(
+                        title = option.title,
+                        description = option.description,
+                        value = (value as? Number)?.toFloat() ?: kind.bounds.min,
+                        min = kind.bounds.min,
+                        max = kind.bounds.max,
+                        step = kind.bounds.step,
+                        isInteger = false,
+                        required = option.required,
+                        onValueChange = { onValueChange(key, it) }
+                    )
+
+                    is OptionKind.IntRangeSlider -> RangeSliderOptionInput(
+                        title = option.title,
+                        description = option.description,
+                        value = value.asFloatRange() ?: (kind.bounds.min..kind.bounds.max),
+                        min = kind.bounds.min,
+                        max = kind.bounds.max,
+                        step = kind.bounds.step,
+                        isInteger = true,
+                        required = option.required,
+                        onValueChange = { range ->
+                            onValueChange(key, listOf(range.start.roundToInt(), range.endInclusive.roundToInt()))
+                        }
+                    )
+
+                    is OptionKind.FloatRangeSlider -> RangeSliderOptionInput(
+                        title = option.title,
+                        description = option.description,
+                        value = value.asFloatRange() ?: (kind.bounds.min..kind.bounds.max),
+                        min = kind.bounds.min,
+                        max = kind.bounds.max,
+                        step = kind.bounds.step,
+                        isInteger = false,
+                        required = option.required,
+                        onValueChange = { range ->
+                            onValueChange(key, listOf(range.start, range.endInclusive))
+                        }
                     )
                 }
             }
