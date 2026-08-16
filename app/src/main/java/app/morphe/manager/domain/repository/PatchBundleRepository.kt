@@ -26,6 +26,7 @@ import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.util.*
 import io.ktor.client.plugins.ResponseException
 import io.ktor.http.Url
+import io.ktor.http.hostWithPortIfSpecified
 import kotlinx.collections.immutable.PersistentMap
 import kotlinx.collections.immutable.mutate
 import kotlinx.collections.immutable.persistentMapOf
@@ -1332,15 +1333,6 @@ class PatchBundleRepository(
         val host = parsed.host
         val pathSegments = parsed.encodedPath.trim('/').split('/').filter { it.isNotBlank() }
 
-        // Host including a non default port, so that bundles served on a custom port
-        // remain reachable. Only used for arbitrary hosts: the GitHub and GitLab
-        // branches below rewrite to fixed hosts where a port is never meaningful.
-        val authority = if (parsed.port == parsed.protocol.defaultPort) {
-            host
-        } else {
-            "$host:${parsed.port}"
-        }
-
         // Handle GitHub repository URLs
         if (host.equals("github.com", ignoreCase = true)) {
             if (pathSegments.size < 2) {
@@ -1474,7 +1466,9 @@ class PatchBundleRepository(
         }
 
         val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
-        return "https://$authority$normalizedPath$query"
+        // Rebuilt from the host and port rather than the host alone, so that a bundle served on a
+        // custom port is not silently requested on the protocol default one
+        return "https://${parsed.hostWithPortIfSpecified}$normalizedPath$query"
     }
 
     /** Returns true if [uid] corresponds to a currently loaded bundle. */
