@@ -7,6 +7,7 @@ package app.morphe.manager.ui.screen.shared
 
 import android.view.HapticFeedbackConstants
 import android.view.View
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
@@ -17,8 +18,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.Image
+import androidx.compose.material.icons.outlined.RestartAlt
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -199,6 +205,80 @@ fun SliderPairConnector() {
                 shape = RoundedCornerShape(1.dp)
             )
     )
+}
+
+/**
+ * A scale slider flanked by the same icon twice, small on the left and large on the right,
+ * which is how every "resize this image" control in the dialogs reads its range. The value is
+ * clamped into [valueRange] before it is reported.
+ *
+ * @param trailing Extra actions after the track, typically a [SliderResetAction].
+ */
+@Composable
+fun ScaleSliderRow(
+    value: Float,
+    onValueChange: (Float) -> Unit,
+    valueRange: ClosedFloatingPointRange<Float>,
+    modifier: Modifier = Modifier,
+    icon: ImageVector = Icons.Outlined.Image,
+    trailing: @Composable RowScope.() -> Unit = {}
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            modifier = Modifier.size(16.dp),
+            tint = LocalDialogSecondaryTextColor.current
+        )
+        Spacer(Modifier.width(8.dp))
+        Slider(
+            value = value,
+            onValueChange = { onValueChange(it.coerceIn(valueRange.start, valueRange.endInclusive)) },
+            valueRange = valueRange,
+            modifier = Modifier.weight(1f)
+        )
+        Spacer(Modifier.width(8.dp))
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            modifier = Modifier.size(22.dp),
+            tint = LocalDialogSecondaryTextColor.current
+        )
+        trailing()
+    }
+}
+
+/**
+ * Reset button that appears next to a [ScaleSliderRow] once the transform moved away from its
+ * default. The spacer sits inside the animation so the gap collapses with the button.
+ */
+@Composable
+fun RowScope.SliderResetAction(
+    visible: Boolean,
+    contentDescription: String?,
+    onReset: () -> Unit
+) {
+    AnimatedVisibility(visible = visible) {
+        Row {
+            Spacer(Modifier.width(8.dp))
+            IconButton(
+                onClick = onReset,
+                modifier = Modifier.size(40.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.RestartAlt,
+                    contentDescription = contentDescription,
+                    modifier = Modifier.size(24.dp),
+                    tint = LocalDialogTextColor.current
+                )
+            }
+        }
+    }
 }
 
 /** The two ends of the scale, shown under the track. */

@@ -238,21 +238,10 @@ internal fun UpdateCheckIntervalDialog(
                     modifier = Modifier.fillMaxWidth()
                 )
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = stringResource(entries.first().labelResId),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                    Text(
-                        text = stringResource(entries.last().labelResId),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                }
+                SliderScaleLabels(
+                    start = stringResource(entries.first().labelResId),
+                    end = stringResource(entries.last().labelResId)
+                )
             }
 
             // Battery optimization warning

@@ -112,21 +112,10 @@ fun ProcessRuntimeDialog(
                         modifier = Modifier.fillMaxWidth()
                     )
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            text = "$PROCESS_RUNTIME_MEMORY_MINIMUM MB",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = LocalDialogSecondaryTextColor.current
-                        )
-                        Text(
-                            text = "$maxLimit MB",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = LocalDialogSecondaryTextColor.current
-                        )
-                    }
+                    SliderScaleLabels(
+                        start = "$PROCESS_RUNTIME_MEMORY_MINIMUM MB",
+                        end = "$maxLimit MB"
+                    )
                 }
 
                 // Description

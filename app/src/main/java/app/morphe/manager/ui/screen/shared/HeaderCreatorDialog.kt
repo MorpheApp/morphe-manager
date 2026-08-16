@@ -9,7 +9,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.net.Uri
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -281,47 +280,16 @@ fun HeaderCreatorDialog(
                     )
 
                     if (lightHeaderBitmap != null) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 4.dp),
-                            verticalAlignment = Alignment.CenterVertically,
+                        ScaleSliderRow(
+                            value = lightScale,
+                            onValueChange = { lightScale = it },
+                            valueRange = HeaderConfig.MIN_SCALE..HeaderConfig.MAX_SCALE
                         ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Image,
+                            SliderResetAction(
+                                visible = lightScale != 1f || lightOffsetX != 0f || lightOffsetY != 0f,
                                 contentDescription = null,
-                                modifier = Modifier.size(16.dp),
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                onReset = { lightScale = 1f; lightOffsetX = 0f; lightOffsetY = 0f }
                             )
-                            Spacer(Modifier.width(8.dp))
-                            Slider(
-                                value = lightScale,
-                                onValueChange = { lightScale = it.coerceIn(HeaderConfig.MIN_SCALE, HeaderConfig.MAX_SCALE) },
-                                valueRange = HeaderConfig.MIN_SCALE..HeaderConfig.MAX_SCALE,
-                                modifier = Modifier.weight(1f)
-                            )
-                            Spacer(Modifier.width(8.dp))
-                            Icon(
-                                imageVector = Icons.Outlined.Image,
-                                contentDescription = null,
-                                modifier = Modifier.size(22.dp),
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                            AnimatedVisibility(visible = lightScale != 1f || lightOffsetX != 0f || lightOffsetY != 0f) {
-                                Row {
-                                    Spacer(Modifier.width(8.dp))
-                                    IconButton(
-                                        onClick = { lightScale = 1f; lightOffsetX = 0f; lightOffsetY = 0f },
-                                        modifier = Modifier.size(40.dp)
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Outlined.RestartAlt,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(24.dp)
-                                        )
-                                    }
-                                }
-                            }
                         }
                     }
 
@@ -362,47 +330,16 @@ fun HeaderCreatorDialog(
                 )
 
                 if (darkHeaderBitmap != null) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
+                    ScaleSliderRow(
+                        value = darkScale,
+                        onValueChange = { darkScale = it },
+                        valueRange = HeaderConfig.MIN_SCALE..HeaderConfig.MAX_SCALE
                     ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Image,
+                        SliderResetAction(
+                            visible = darkScale != 1f || darkOffsetX != 0f || darkOffsetY != 0f,
                             contentDescription = null,
-                            modifier = Modifier.size(16.dp),
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            onReset = { darkScale = 1f; darkOffsetX = 0f; darkOffsetY = 0f }
                         )
-                        Spacer(Modifier.width(8.dp))
-                        Slider(
-                            value = darkScale,
-                            onValueChange = { darkScale = it.coerceIn(HeaderConfig.MIN_SCALE, HeaderConfig.MAX_SCALE) },
-                            valueRange = HeaderConfig.MIN_SCALE..HeaderConfig.MAX_SCALE,
-                            modifier = Modifier.weight(1f)
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Icon(
-                            imageVector = Icons.Outlined.Image,
-                            contentDescription = null,
-                            modifier = Modifier.size(22.dp),
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        AnimatedVisibility(visible = darkScale != 1f || darkOffsetX != 0f || darkOffsetY != 0f) {
-                            Row {
-                                Spacer(Modifier.width(8.dp))
-                                IconButton(
-                                    onClick = { darkScale = 1f; darkOffsetX = 0f; darkOffsetY = 0f },
-                                    modifier = Modifier.size(40.dp)
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.RestartAlt,
-                                        contentDescription = null,
-                                        modifier = Modifier.size(24.dp)
-                                    )
-                                }
-                            }
-                        }
                     }
                 }
             }
