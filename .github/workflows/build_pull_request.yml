@@ -55,6 +55,9 @@ jobs:
 
       - name: Run unit tests
         env:
+          # Needed to resolve morphe-patcher from GitHub Packages, which rejects
+          # anonymous reads even for public packages
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           _JAVA_OPTIONS: "-Djava.awt.headless=true"
         run: |
           chmod +x ./gradlew
