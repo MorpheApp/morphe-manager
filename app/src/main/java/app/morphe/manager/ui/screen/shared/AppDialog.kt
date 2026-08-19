@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
+import androidx.core.view.WindowCompat
 import app.morphe.manager.util.isDarkBackground
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -137,6 +138,8 @@ fun AppDialog(
             dialogWindow?.let {
                 it.setDimAmount(0f)
                 it.setBackgroundDrawableResource(android.R.color.transparent)
+                WindowCompat.getInsetsController(it, it.decorView).isAppearanceLightStatusBars = !isDarkTheme
+                WindowCompat.getInsetsController(it, it.decorView).isAppearanceLightNavigationBars = !isDarkTheme
             }
         }
 
