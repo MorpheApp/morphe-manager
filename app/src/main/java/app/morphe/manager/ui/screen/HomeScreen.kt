@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen
 
+import app.morphe.manager.ManagerApplication
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -59,10 +61,21 @@ fun HomeScreen(
 ) {
     val context = LocalContext.current
     val view = LocalView.current
+
+    LaunchedEffect(Unit) {
+    }
     val scope = rememberCoroutineScope()
     val sourcesLoadingText = stringResource(R.string.home_sources_are_loading)
     val otherAppsText = stringResource(R.string.home_other_apps)
 
+    var p40RepositoryReady by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        withFrameNanos { }
+        val managerApplication = context.applicationContext as? ManagerApplication
+        managerApplication?.signalHomeFirstFrameReady()
+        managerApplication?.awaitPatchBundleRepositoryConstructed()
+        p40RepositoryReady = true
+    }
     // Dialog states
     val showUpdateDetailsDialog = remember { mutableStateOf(false) }
 
@@ -80,7 +93,6 @@ fun HomeScreen(
         mutableStateOf(if (showGreetingPhrases) HomeAndPatcherMessages.getHomeMessage(context) else null)
     }
     val greetingMessage = greetingResId?.let { stringResource(it) }
-
     // Handle refresh with haptic feedback.
     // showPatchingPhrases is read from the reactive state captured in the
     // outer scope so the lambda always uses the current value at invocation.
@@ -92,7 +104,11 @@ fun HomeScreen(
     }
 
     // Collect state flows
-    val availablePatches by homeViewModel.availablePatches.collectAsStateWithLifecycle(0)
+    val availablePatches = if (p40RepositoryReady) {
+        homeViewModel.availablePatches.collectAsStateWithLifecycle(0).value
+    } else {
+        0
+    }
     // Atomic home state - null means pipeline is still initializing (shimmer)
     val homeAppState by homeViewModel.homeAppState.collectAsStateWithLifecycle()
     val homeAppItems = homeAppState?.visible ?: emptyList()
@@ -103,11 +119,18 @@ fun HomeScreen(
     val showCategoryViewSwitcher = homeAppState?.showCategoryViewSwitcher == true
     val homeAppSourceGroups = homeAppState?.sourceGroups ?: emptyList()
     val bundlePipelineLoading = homeAppState == null
+
+    var p21ReadyLogged by remember { mutableStateOf(false) }
+    LaunchedEffect(homeAppState) {
+        if (homeAppState != null && !p21ReadyLogged) {
+            p21ReadyLogged = true
+        }
+    }
+
     val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
     val showSortButtonPref by homeAppButtonPrefs.showSortButton.collectAsStateWithLifecycle()
     val useExpertMode by prefs.useExpertMode.getAsState()
-
     // Gesture hint: shown once per bundle addition, in-memory
     val showGestureHint by homeViewModel.showSwipeGestureHint.collectAsStateWithLifecycle()
 
@@ -121,7 +144,6 @@ fun HomeScreen(
         // just keep usingMountInstallState in sync for PatcherScreen to read
         usingMountInstallState.value = homeViewModel.usingMountInstall
     }
-
     // Set up HomeViewModel
     LaunchedEffect(Unit) {
         homeViewModel.onStartQuickPatch = onStartQuickPatch
@@ -152,7 +174,6 @@ fun HomeScreen(
         installViewModel = installViewModel,
         completedPluralRes = R.plurals.batch_reinstall_summary
     )
-
     val startBatchReinstall: (List<HomeAppItem>) -> Unit = { items ->
         val requests = items.mapNotNull { item ->
             val installed = item.installedApp ?: return@mapNotNull null
@@ -207,18 +228,27 @@ fun HomeScreen(
 
     // Check for manager update
     val hasManagerUpdate = !homeViewModel.updatedManagerVersion.isNullOrEmpty()
-
-    val blockedSources by homeViewModel.patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
+    val blockedSources = if (p40RepositoryReady) {
+        homeViewModel.patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap()).value
+    } else {
+        emptyMap()
+    }
     val hasBlockedSources = blockedSources.isNotEmpty()
-
-    val metadataFetchErrors by homeViewModel.patchBundleRepository.metadataFetchErrors.collectAsStateWithLifecycle(emptyMap())
+    val metadataFetchErrors = if (p40RepositoryReady) {
+        homeViewModel.patchBundleRepository.metadataFetchErrors.collectAsStateWithLifecycle(emptyMap()).value
+    } else {
+        emptyMap()
+    }
     val hasMetadataErrors = metadataFetchErrors.isNotEmpty()
 
     // Sources built for a newer patcher than this manager ships. They cannot be loaded or patched
     // with until the app is updated, so surface it instead of leaving the source silently broken
-    val bundleSources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
+    val bundleSources = if (p40RepositoryReady) {
+        homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList()).value
+    } else {
+        emptyList()
+    }
     val hasOutdatedManagerSources = bundleSources.any { it.requiresManagerUpdate }
-
     // Manager update details dialog
     if (showUpdateDetailsDialog.value) {
         val updateViewModel: UpdateViewModel = koinViewModel(parameters = { parametersOf(false) })

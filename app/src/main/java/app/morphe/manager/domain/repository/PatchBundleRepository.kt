@@ -34,7 +34,9 @@ import kotlinx.collections.immutable.toPersistentMap
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.sync.withPermit
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
@@ -62,6 +64,15 @@ class PatchBundleRepository(
 
     private val scope = CoroutineScope(Dispatchers.Default)
     private val store = Store<BundleState>(scope, BundleState.Loading)
+
+    // P1 instrumentation only. No scheduling, concurrency, or networking behavior is changed.
+
+    private fun recordPeak(peak: AtomicInteger, value: Int) {
+        while (true) {
+            val current = peak.get()
+            if (value <= current || peak.compareAndSet(current, value)) return
+        }
+    }
 
     val bundleState: StateFlow<BundleState> = store.state
         .stateIn(scope, SharingStarted.Eagerly, BundleState.Loading)
@@ -380,31 +391,34 @@ class PatchBundleRepository(
     private suspend fun doReload(): BundleState.Ready {
         val entities = loadEntitiesEnforcingOfficialOrder()
 
-        val sources = entities.associate { it.uid to it.load() }.toMutableMap()
+        val prereleaseEnabledUids = prefs.bundlePrereleasesEnabled.getBlocking()
 
-        val hasOutOfDateNames = sources.values.any { it.isNameOutOfDate }
-        if (hasOutOfDateNames) dispatchAction(
-            "Sync names"
-        ) { state ->
-            val ready = state as? BundleState.Ready ?: return@dispatchAction state
-            val nameChanges = ready.sources.mapNotNull { (_, src) ->
-                if (!src.isNameOutOfDate) return@mapNotNull null
-                val newName = src.patchBundle?.manifestAttributes?.name?.takeIf { it != src.name }
-                    ?: return@mapNotNull null
+        val sources = entities.associate { entity ->
+            val loaded = entity.load(prereleaseEnabledUids)
+            entity.uid to loaded
+        }.toMutableMap()
+        val info = loadMetadata(sources).toMutableMap()
 
-                src.uid to newName
-            }
-            val sources = ready.sources.toMutableMap()
-            val info = ready.info.toMutableMap()
+        // P9: metadata loading has already touched the installed bundle manifest for every
+        // successfully loaded bundle. Reuse that cached manifest instead of doing a separate
+        // pre-metadata manifest scan. Failed bundles retain PatchBundleSource's installed-file
+        // fallback, preserving the old name-sync behavior.
+        val nameChanges = sources.values.mapNotNull { src ->
+            val manifestName = src.installedManifestName?.takeIf { it != src.name }
+                ?: return@mapNotNull null
+            src.uid to manifestName
+        }
+
+        if (nameChanges.isNotEmpty()) {
             nameChanges.forEach { (uid, name) ->
                 updateDb(uid) { it.copy(name = name) }
-                sources[uid] = sources[uid]!!.copy(name = name)
+                val src = sources[uid] ?: return@forEach
+                sources[uid] = src.copy(name = name)
                 info[uid] = info[uid]?.copy(name = name) ?: return@forEach
             }
-
-            ready.copy(sources = sources.toPersistentMap(), info = info.toPersistentMap())
+        } else {
         }
-        val info = loadMetadata(sources).toMutableMap()
+
 
         // Ensure official bundle has default display name if none is set
         val officialSource = sources[0]
@@ -420,7 +434,8 @@ class PatchBundleRepository(
             }
         }
 
-        return BundleState.Ready(sources.toPersistentMap(), info.toPersistentMap())
+        val ready = BundleState.Ready(sources.toPersistentMap(), info.toPersistentMap())
+        return ready
     }
 
     suspend fun reload() = dispatchAction("Full reload") {
@@ -440,7 +455,8 @@ class PatchBundleRepository(
     }
 
     private suspend fun loadMetadata(sources: Map<Int, PatchBundleSource>): Map<Int, PatchBundleInfo.Global> {
-        // Map bundles -> sources
+
+        // Map bundles -> sources, preserving the same source order as P4.
         val map = sources.mapNotNull { (_, src) ->
             (src.patchBundle ?: return@mapNotNull null) to src
         }.toMap()
@@ -448,35 +464,49 @@ class PatchBundleRepository(
         if (map.isEmpty()) return emptyMap()
 
         val failures = mutableListOf<Pair<Int, Throwable>>()
+        val failureMutex = Mutex()
+        val metadataDispatcher = Dispatchers.IO.limitedParallelism(8)
+        val metadataSemaphore = Semaphore(8)
 
-        val metadata = map.mapNotNull { (bundle, src) ->
-            try {
-                src.uid to PatchBundleInfo.Global(
-                    name = src.displayTitle,
-                    version = bundle.manifestAttributes?.version,
-                    uid = src.uid,
-                    enabled = src.enabled,
-                    patches = PatchBundle.Loader.metadata(bundle),
-                    patcherVersion = bundle.manifestAttributes?.patcherVersion,
-                )
-            } catch (error: Throwable) {
-                failures += src.uid to error
-                val requiredPatcher = bundle.manifestAttributes?.patcherVersion
-                if (requiredPatcher != null && isPatcherOutdated(requiredPatcher)) {
-                    // Loading fails with linkage errors when the bundle uses patcher APIs this
-                    // manager does not have. Spell it out so logs are not just a NoSuchMethodError
-                    Log.e(
-                        tag,
-                        "Failed to load bundle ${src.name}: it requires patcher $requiredPatcher, " +
-                                "but this manager ships ${BuildConfig.PATCHER_VERSION}. Update the manager",
-                        error
-                    )
-                } else {
-                    Log.e(tag, "Failed to load bundle ${src.name}", error)
+        val metadata = coroutineScope {
+            map.map { (bundle, src) ->
+                async(metadataDispatcher) {
+                    metadataSemaphore.withPermit {
+                        try {
+                            val result = src.uid to PatchBundleInfo.Global(
+                                name = src.displayTitle,
+                                version = bundle.manifestAttributes?.version,
+                                uid = src.uid,
+                                enabled = src.enabled,
+                                patches = PatchBundle.Loader.metadata(bundle),
+                                patcherVersion = bundle.manifestAttributes?.patcherVersion,
+                            )
+                            result
+                        } catch (error: Throwable) {
+
+                            failureMutex.withLock {
+                                failures += src.uid to error
+                            }
+
+                            val requiredPatcher = bundle.manifestAttributes?.patcherVersion
+                            if (requiredPatcher != null && isPatcherOutdated(requiredPatcher)) {
+                                // Loading fails with linkage errors when the bundle uses patcher APIs this
+                                // manager does not have. Spell it out so logs are not just a NoSuchMethodError
+                                Log.e(
+                                    tag,
+                                    "Failed to load bundle ${src.name}: it requires patcher $requiredPatcher, " +
+                                            "but this manager ships ${BuildConfig.PATCHER_VERSION}. Update the manager",
+                                    error
+                                )
+                            } else {
+                                Log.e(tag, "Failed to load bundle ${src.name}", error)
+                            }
+                            null
+                        }
+                    }
                 }
-                null
-            }
-        }.toMap()
+            }.awaitAll().filterNotNull().toMap()
+        }
 
         if (failures.isNotEmpty()) {
             dispatchAction("Mark bundles as failed") { state ->
@@ -497,7 +527,9 @@ class PatchBundleRepository(
      */
     private fun directoryOf(uid: Int) = bundlesDir.resolve(uid.toString()).also { it.mkdirs() }
 
-    private fun PatchBundleEntity.load(): PatchBundleSource {
+    private fun PatchBundleEntity.load(
+        prereleaseEnabledUids: Set<String> = prefs.bundlePrereleasesEnabled.getBlocking(),
+    ): PatchBundleSource {
         val dir = directoryOf(uid)
         val actualName =
             name.ifEmpty { app.getString(if (uid == 0) R.string.home_app_info_patches_name_default else R.string.home_app_info_patches_name_fallback) }
@@ -526,7 +558,7 @@ class PatchBundleRepository(
                 SourceInfo.API.SENTINEL,
                 true, // Morphe always auto updates
                 enabled,
-                usePrerelease = prefs.bundlePrereleasesEnabled.getBlocking().contains(uid.toString()),
+                usePrerelease = prereleaseEnabledUids.contains(uid.toString()),
             )
 
             is SourceInfo.Remote -> JsonPatchBundle(
@@ -541,7 +573,7 @@ class PatchBundleRepository(
                 source.url.toString(),
                 autoUpdate,
                 enabled,
-                usePrerelease = shouldUsePrerelease(uid, source.url.toString()),
+                usePrerelease = shouldUsePrerelease(uid, source.url.toString(), prereleaseEnabledUids),
             )
             is SourceInfo.GitHubPullRequest -> GitHubPullRequestBundle(
                 actualName,
@@ -1253,8 +1285,12 @@ class PatchBundleRepository(
      * - the uid is already stored in [PreferencesManager.bundlePrereleasesEnabled] (user toggled it on)
      * - the endpoint URL explicitly targets the "dev" branch.
      */
-    private fun shouldUsePrerelease(uid: Int, url: String): Boolean {
-        if (prefs.bundlePrereleasesEnabled.getBlocking().contains(uid.toString())) return true
+    private fun shouldUsePrerelease(
+        uid: Int,
+        url: String,
+        prereleaseEnabledUids: Set<String>,
+    ): Boolean {
+        if (prereleaseEnabledUids.contains(uid.toString())) return true
         return JsonPatchBundle.extractBranch(url) == "dev"
     }
 
@@ -1694,7 +1730,8 @@ class PatchBundleRepository(
         val predicate = predicateFor(request.target)
         try {
             // Check network connectivity first
-            if (!networkInfo.isConnected()) {
+            val connected = networkInfo.isConnected()
+            if (!connected) {
                 Log.d(tag, "No internet connection for bundle update")
 
                 // Show "No Internet" state
@@ -1757,6 +1794,7 @@ class PatchBundleRepository(
             val bundleBytes = ConcurrentHashMap<Int, Pair<Long, Long?>>()
             val completedCount = AtomicInteger(0)
             val downloadDispatcher = Dispatchers.IO.limitedParallelism(4)
+            val sourceSemaphore = Semaphore(32)
 
             // Read snapshots below use toMutableList() rather than toList(): the latter's
             // size==1 fast path calls iterator().next() without a hasNext() guard, so
@@ -1764,10 +1802,12 @@ class PatchBundleRepository(
             // NoSuchElementException between the size check and the read
             val activeNamesMap = ConcurrentHashMap<Int, String>()
 
+
             val updated: Map<RemotePatchBundle, PatchBundleDownloadResult> = try {
                 coroutineScope {
                     targets.map { bundle ->
                         async(downloadDispatcher) {
+                            sourceSemaphore.withPermit {
                             if (isRemoteUpdateCancelled(bundle.uid)) return@async null
 
                             Log.d(tag, "Updating patch bundle: ${bundle.name}")
@@ -1821,6 +1861,7 @@ class PatchBundleRepository(
                             }
 
                             if (result != null) bundle to result else null
+                            }
                         }
                     }.awaitAll().filterNotNull().toMap()
                 }
@@ -1846,6 +1887,7 @@ class PatchBundleRepository(
                 toast(R.string.sources_download_fail, e.simpleMessage())
                 return@coroutineScope
             }
+
 
             if (updated.isEmpty()) {
                 if (showToast) toast(R.string.sources_update_unavailable)

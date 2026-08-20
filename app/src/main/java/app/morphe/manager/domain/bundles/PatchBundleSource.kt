@@ -48,7 +48,8 @@ sealed class PatchBundleSource(
     }
 
     val version get() = manifestAttributes?.version
-    val isNameOutOfDate get() = manifestAttributes?.name?.let { it != name } == true
+    internal val installedManifestName get() = manifestAttributes?.name
+    val isNameOutOfDate get() = installedManifestName?.let { it != name } == true
     val error get() = (state as? State.Failed)?.throwable
     val displayTitle get() = displayName?.takeUnless { it.isBlank() } ?: name
 

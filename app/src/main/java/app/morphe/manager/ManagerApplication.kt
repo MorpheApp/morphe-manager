@@ -29,6 +29,7 @@ import coil.ImageLoader
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.topjohnwu.superuser.Shell
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.first
@@ -66,6 +67,19 @@ class ManagerApplication : Application() {
         private const val SHORTCUT_ICON_PX = 192
     }
     private val scope = MainScope()
+
+    // P40: nothing may construct PatchBundleRepository until Home has rendered one frame.
+    private val homeFirstFrameReady = CompletableDeferred<Unit>()
+    private val patchBundleRepositoryConstructed = CompletableDeferred<Unit>()
+
+    fun signalHomeFirstFrameReady() {
+        if (homeFirstFrameReady.complete(Unit)) {
+        }
+    }
+
+    suspend fun awaitPatchBundleRepositoryConstructed() {
+        patchBundleRepositoryConstructed.await()
+    }
     private val prefs: PreferencesManager by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
     private val blocklistRepository: BlocklistRepository by inject()
@@ -164,8 +178,15 @@ class ManagerApplication : Application() {
 
         // First touch of the repository builds the Ktor client, which costs seconds on a cold
         // start, so it happens here on a background dispatcher rather than in the Koin graph
+        // P40: preserve the same startup work, but do not compete with Activity/Compose startup.
+        // Home signals after its first rendered frame; construction then happens on Default.
         scope.launch(Dispatchers.Default) {
-            with(patchBundleRepository) {
+            homeFirstFrameReady.await()
+
+            val repository = patchBundleRepository
+            patchBundleRepositoryConstructed.complete(Unit)
+
+            with(repository) {
                 reload()
                 updateCheck()
             }
@@ -177,12 +198,14 @@ class ManagerApplication : Application() {
         scope.launch(Dispatchers.Default) {
             blocklistRepository.loadFromCache()
             blocklistRepository.refresh()
+            patchBundleRepositoryConstructed.await()
             patchBundleRepository.logBlockedSources()
         }
 
         // Preload bundle avatar images into AvatarCache while the user hasn't opened the sheet yet.
         // Suspends until sources are ready, then fetches all URLs in parallel on IO threads
         scope.launch(Dispatchers.IO) {
+            patchBundleRepositoryConstructed.await()
             patchBundleRepository.sources.first { it.isNotEmpty() }.forEach { bundle ->
                 launch {
                     val avatarUrls = bundle.avatarUrls

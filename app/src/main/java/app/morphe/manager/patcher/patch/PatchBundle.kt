@@ -57,10 +57,32 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
     )
 
     object Loader {
+
         private fun loadBundle(bundle: PatchBundle): Collection<Patch<*>> {
-            validateDexEntries(bundle.patchesJar)
+
+            val validationJar = File(bundle.patchesJar)
+            val validationIndex = File(validationJar.parentFile, ".morphe-dex-class-index-v1")
+            val validationSignature = "${validationJar.length()}:${validationJar.lastModified()}"
+            val canReuseValidation = runCatching {
+                validationIndex.useLines { lines ->
+                    lines.firstOrNull() == validationSignature
+                }
+            }.getOrDefault(false)
+
+            if (canReuseValidation) {
+            } else {
+                validateDexEntries(bundle.patchesJar)
+            }
+
+
             val patchFiles = runCatching {
                 val jarFile = File(bundle.patchesJar)
+                val classIndexFile = File(jarFile.parentFile, ".morphe-dex-class-index-v1")
+                val classIndexSignature = "${jarFile.length()}:${jarFile.lastModified()}"
+                val classIndexHit = runCatching {
+                    classIndexFile.useLines { lines -> lines.firstOrNull() == classIndexSignature }
+                }.getOrDefault(false)
+
                 loadPatchesFromDex(
                     setOf(jarFile),
                     if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
@@ -75,13 +97,22 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
             }.getOrElse { error ->
                 throw IllegalStateException("Patch bundle is corrupted or incomplete", error)
             }
+
+
             val entry = patchFiles.entries.singleOrNull()
                 ?: throw IllegalStateException("Unexpected patch bundle load result for ${bundle.patchesJar}")
 
             return entry.value
         }
 
-        private fun metadataFor(bundle: PatchBundle) = loadBundle(bundle).map(::PatchInfo)
+        private fun metadataFor(bundle: PatchBundle): List<PatchInfo> {
+
+            val patches = loadBundle(bundle)
+
+            val info = patches.map(::PatchInfo)
+
+            return info
+        }
 
         fun metadata(bundles: Iterable<PatchBundle>) =
             bundles.associateWith(::metadataFor)

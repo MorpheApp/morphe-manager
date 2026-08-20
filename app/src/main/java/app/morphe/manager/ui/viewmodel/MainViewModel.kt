@@ -11,12 +11,20 @@ import app.morphe.manager.domain.batch.BatchPlanResolver
 import app.morphe.manager.domain.batch.BatchTarget
 import app.morphe.manager.domain.manager.PreferencesManager
 import kotlinx.coroutines.launch
+import org.koin.core.context.GlobalContext
 
 class MainViewModel(
     val prefs: PreferencesManager,
-    private val batchPlanResolver: BatchPlanResolver,
-    private val batchPatchCoordinator: BatchPatchCoordinator
 ) : ViewModel() {
+
+    private val batchPlanResolver: BatchPlanResolver by lazy(LazyThreadSafetyMode.NONE) {
+        GlobalContext.get().get<BatchPlanResolver>()
+    }
+
+    private val batchPatchCoordinator: BatchPatchCoordinator by lazy(LazyThreadSafetyMode.NONE) {
+        GlobalContext.get().get<BatchPatchCoordinator>()
+    }
+
 
     /**
      * Set by [app.morphe.manager.MainActivity.onNewIntent] when the user taps an FCM

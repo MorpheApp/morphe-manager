@@ -195,7 +195,7 @@ private data class HomeCategoryPrefs(
  */
 class HomeViewModel(
     private val app: Application,
-    val patchBundleRepository: PatchBundleRepository,
+    private val patchBundleRepositoryLazy: Lazy<PatchBundleRepository>,
     private val installedAppRepository: InstalledAppRepository,
     private val originalApkRepository: OriginalApkRepository,
     private val patchSelectionRepository: PatchSelectionRepository,
@@ -214,8 +214,14 @@ class HomeViewModel(
     versionCatalog: AppVersionCatalog,
     private val localApkSources: LocalApkSources
 ) : ViewModel(), ApkDownloadHelperHost {
-    val availablePatches = patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
-    val bundleUpdateProgress = patchBundleRepository.bundleUpdateProgress
+    val patchBundleRepository: PatchBundleRepository
+        get() = patchBundleRepositoryLazy.value
+    val availablePatches by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
+    }
+    val bundleUpdateProgress by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        patchBundleRepository.bundleUpdateProgress
+    }
     private val contentResolver: ContentResolver = app.contentResolver
 
     /** Becomes true once the bundle repository has finished its initial DB load. */
