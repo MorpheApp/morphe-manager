@@ -537,7 +537,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patcher_message_4">Brewing digital magic… ☕</string>
     <string name="patcher_message_5">Coffee break recommended… ☕</string>
     <string name="patcher_message_6">Look outside, it\'s nice out there… 🌤️</string>
-    <string name="patcher_message_7">Adjusting 1\'s and 0\'s… 🤖</string>
+    <string name="patcher_message_7">Adjusting 1s and 0s… 🤖</string>
     <string name="patcher_message_8">Untangling digital spaghetti… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="patcher_message_9">Fixing bugs in the unpatched app… 🪲</string>
