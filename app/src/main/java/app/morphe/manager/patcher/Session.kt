@@ -41,6 +41,7 @@ class Session(
             temporaryFilesPath = tempDir,
             frameworkFileDirectory = frameworkDir,
             useBytecodeMode = bytecodeMode,
+            fileWorkspacePath = androidContext.cacheDir,
         )
     )
 
