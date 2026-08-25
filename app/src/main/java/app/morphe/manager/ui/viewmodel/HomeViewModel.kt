@@ -1724,6 +1724,13 @@ class HomeViewModel(
     fun getBundleDisplayName(uid: Int): String? =
         allBundlesInfoState.value[uid]?.name
 
+    /**
+     * Returns the issues page URL of the bundle with [uid], or null when the bundle
+     * is not a remote source with a known GitHub/GitLab repository.
+     */
+    fun getBundleIssuesUrl(uid: Int): String? =
+        (patchSourcesState.value[uid] as? RemotePatchBundle)?.issuesPageUrl
+
     fun saveAppOrder(packageNames: List<String>) {
         homeAppButtonPrefs.saveOrder(packageNames)
     }

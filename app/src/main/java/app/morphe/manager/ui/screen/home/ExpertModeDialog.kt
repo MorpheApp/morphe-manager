@@ -26,6 +26,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -74,6 +75,8 @@ fun ExpertModeDialog(
     proceedText: String = stringResource(R.string.expert_mode_proceed),
     /** Off where mixing sources is the norm rather than something the user just did. */
     warnOnMultipleBundles: Boolean = true,
+    /** Issues page URLs keyed by bundle uid, for the per-bundle "report an issue" action. */
+    bundleIssueUrls: Map<Int, String> = emptyMap(),
     onDismiss: () -> Unit,
     onProceed: () -> Unit
 ) {
@@ -81,6 +84,17 @@ fun ExpertModeDialog(
     val search = rememberSearchFieldState()
     val showMultipleSourcesWarning = remember { mutableStateOf(false) }
     val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
+    val failedToOpenUrlText = stringResource(R.string.sources_management_failed_to_open_url)
+    val reportIssueLabel = stringResource(R.string.sources_management_report_issue)
+    fun openIssueUrl(url: String?) {
+        if (url == null) return
+        try {
+            uriHandler.openUri(url)
+        } catch (_: Exception) {
+            context.toast(failedToOpenUrlText)
+        }
+    }
 
     // Compute set of enabled patch names that have at least one required option
     // with no default (default == null) and no user-provided non-blank value.
@@ -236,7 +250,9 @@ fun ExpertModeDialog(
                     onResetToDefault = { patchActions.onResetToDefault(bundle.uid) },
                     onRestoreSaved = { patchActions.onRestoreSaved(bundle.uid) },
                     onCopyFromBundle = { patchActions.onCopyFromBundle(bundle.uid) },
-                    hasSavedSelection = savedPatches[bundle.uid]?.isNotEmpty() == true
+                    hasSavedSelection = savedPatches[bundle.uid]?.isNotEmpty() == true,
+                    onReportIssue = bundleIssueUrls[bundle.uid]?.let { url -> { openIssueUrl(url) } },
+                    reportIssueLabel = reportIssueLabel
                 )
 
                 if (filteredPatches == null) {
@@ -384,6 +400,8 @@ fun ExpertModeDialog(
                             onRestoreSaved = { patchActions.onRestoreSaved(currentBundle.uid) },
                             onCopyFromBundle = { patchActions.onCopyFromBundle(currentBundle.uid) },
                             hasSavedSelection = savedPatches[currentBundle.uid]?.isNotEmpty() == true,
+                            onReportIssue = bundleIssueUrls[currentBundle.uid]?.let { url -> { openIssueUrl(url) } },
+                            reportIssueLabel = reportIssueLabel,
                             modifier = Modifier.padding(vertical = Defaults.ContentPaddingSmall)
                         )
                     } else {

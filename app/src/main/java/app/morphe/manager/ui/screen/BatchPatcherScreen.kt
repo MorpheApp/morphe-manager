@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.batch.*
+import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.home.*
@@ -183,6 +184,12 @@ fun BatchPatcherScreen(
             savedPatches = edit.savedSelection,
             lockStateOf = edit::lockStateOf,
             holdsUniversalPatches = edit::selectAllHoldsUniversal,
+            bundleIssueUrls = remember(edit.allPatchesInfo) {
+                val sources = patchBundleRepository.sources.value.associateBy { it.uid }
+                edit.allPatchesInfo.mapNotNull { (bundle, _) ->
+                    (sources[bundle.uid] as? RemotePatchBundle)?.issuesPageUrl?.let { bundle.uid to it }
+                }.toMap()
+            },
             proceedText = stringResource(R.string.save),
             // The queue combines sources by design, and the tabs make it plain enough
             warnOnMultipleBundles = false,

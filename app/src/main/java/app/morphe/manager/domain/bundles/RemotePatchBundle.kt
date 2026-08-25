@@ -155,6 +155,15 @@ sealed class RemotePatchBundle(
         get() = inferPageUrlFromEndpoint(endpoint) ?: manifestPageUrl ?: endpoint
 
     /**
+     * Where the "report an issue" action takes the user: the repository's issues page.
+     *
+     * Derived from [browsePageUrl] (GitHub: /issues, GitLab: /-/issues). Hosts other than
+     * GitHub and GitLab have no known issues layout, so those fall back to [browsePageUrl].
+     */
+    open val issuesPageUrl: String
+        get() = inferIssuesUrlFromEndpoint(endpoint) ?: browsePageUrl
+
+    /**
      * Shared cache logic for [fetchChangelogEntries] and its overrides.
      */
     protected suspend fun fetchAndCacheEntries(
@@ -252,6 +261,19 @@ sealed class RemotePatchBundle(
                 }
             } catch (_: Exception) {
                 null
+            }
+        }
+
+        /**
+         * Infer the issues page URL from various endpoint formats.
+         * Returns null for hosts other than GitHub and GitLab, whose issues layout is unknown.
+         */
+        fun inferIssuesUrlFromEndpoint(endpoint: String): String? {
+            val repoUrl = inferPageUrlFromEndpoint(endpoint) ?: return null
+            return when {
+                repoUrl.startsWith("https://github.com/") -> "$repoUrl/issues"
+                repoUrl.startsWith("https://gitlab.com/") -> "$repoUrl/-/issues"
+                else -> null
             }
         }
     }
@@ -501,6 +523,8 @@ class APIPatchBundle(
 
     // The endpoint is the API identifier rather than a browsable URL
     override val browsePageUrl: String get() = SOURCE_REPO_URL
+
+    override val issuesPageUrl: String get() = "$SOURCE_REPO_URL/issues"
 
     override suspend fun fetchChangelogEntries(sinceVersion: String?): List<ChangelogEntry> {
         val branch = if (usePrerelease) BRANCH_DEV else BRANCH_STABLE

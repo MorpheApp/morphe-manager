@@ -435,6 +435,11 @@ fun HomeDialogs(
             savedPatches = homeViewModel.expertModeInitialPatches,
             lockStateOf = homeViewModel::expertModeLockState,
             holdsUniversalPatches = homeViewModel::expertModeSelectAllHoldsUniversal,
+            bundleIssueUrls = remember(homeViewModel.expertModeAllPatchesInfo) {
+                homeViewModel.expertModeAllPatchesInfo.mapNotNull { (bundle, _) ->
+                    homeViewModel.getBundleIssuesUrl(bundle.uid)?.let { bundle.uid to it }
+                }.toMap()
+            },
             onDismiss = {
                 homeViewModel.cleanupExpertModeData()
             },

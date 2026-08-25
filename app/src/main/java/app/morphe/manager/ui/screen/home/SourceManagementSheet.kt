@@ -411,6 +411,15 @@ fun BundleManagementSheet(
                                             context.toast(failedToOpenUrlText)
                                         }
                                     },
+                                    onReportIssue = {
+                                        val issuesUrl = (bundle as? RemotePatchBundle)?.issuesPageUrl
+                                            ?: SOURCE_REPO_URL
+                                        try {
+                                            uriHandler.openUri(issuesUrl)
+                                        } catch (_: Exception) {
+                                            context.toast(failedToOpenUrlText)
+                                        }
+                                    },
                                     forceExpanded = isSingleDefaultBundle,
                                     isDragging = itemIsDragging,
                                     // Reorder maps list positions onto the full order, so a
@@ -576,6 +585,7 @@ private fun BundleManagementCard(
     onPatchesClick: () -> Unit,
     onVersionClick: () -> Unit,
     onOpenInBrowser: () -> Unit,
+    onReportIssue: () -> Unit,
     onOutdatedManagerClick: () -> Unit,
     forceExpanded: Boolean = false
 ) {
@@ -585,6 +595,7 @@ private fun BundleManagementCard(
     val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
     val openInBrowser = stringResource(R.string.sources_management_open_in_browser)
+    val reportIssue = stringResource(R.string.sources_management_report_issue)
 
     val context = LocalContext.current
     fun withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
@@ -896,6 +907,21 @@ private fun BundleManagementCard(
                                     contentDescription = updateDesc,
                                     tooltip = updateVerb,
                                     enabled = !isBlocked
+                                )
+                            }
+
+                            // Report an issue button, next to the delete action
+                            if (bundle is RemotePatchBundle) {
+                                val issueDesc = reportIssue + " " + bundle.displayTitle
+                                ActionPillButton(
+                                    onClick = onReportIssue,
+                                    icon = Icons.Outlined.BugReport,
+                                    contentDescription = issueDesc,
+                                    tooltip = reportIssue,
+                                    colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
                                 )
                             }
 
