@@ -1642,6 +1642,11 @@ class HomeViewModel(
                 compareByDescending<HomeAppItem> { it.showsUpdateBadge }
                     .then(morpheComparator)
             )
+            HomeAppSortMode.RECENTLY_PATCHED -> items.sortedWith(
+                // Newest patch first; apps never patched sort last, in recommended order
+                compareByDescending<HomeAppItem> { it.installedApp?.patchedAt ?: Long.MIN_VALUE }
+                    .then(morpheComparator)
+            )
         }
     }
 

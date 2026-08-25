@@ -16,7 +16,8 @@ enum class HomeAppSortMode(
     RECOMMENDED(R.string.home_app_sort_recommended, R.string.home_app_sort_recommended_description),
     NAME_ASC(R.string.file_picker_sort_name_asc, R.string.home_app_sort_name_asc_description),
     NAME_DESC(R.string.file_picker_sort_name_desc, R.string.home_app_sort_name_desc_description),
-    UPDATES_FIRST(R.string.home_app_sort_updates_first, R.string.home_app_sort_updates_first_description);
+    UPDATES_FIRST(R.string.home_app_sort_updates_first, R.string.home_app_sort_updates_first_description),
+    RECENTLY_PATCHED(R.string.home_app_sort_recently_patched, R.string.home_app_sort_recently_patched_description);
 
     companion object {
         fun fromPreference(value: String?): HomeAppSortMode =
