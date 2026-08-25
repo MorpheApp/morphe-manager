@@ -249,10 +249,14 @@ fun ExpertModeDialog(
                 }
 
                 val holdsUniversal = holdsUniversalPatches(bundle.uid, displayPatches)
+                // The second "Enable all" tap applies every universal patch at once; warn first
+                val warnsOnUniversalAll = !holdsUniversal &&
+                        displayPatches.any { (patch, isEnabled) -> patch.isUniversal && !isEnabled }
                 BundlePatchControls(
                     enabledCount = enabledCount,
                     totalCount = totalCount,
                     holdsUniversalPatches = holdsUniversal,
+                    warnOnUniversalAll = warnsOnUniversalAll,
                     onSelectAll = {
                         // This tap enables the universal patches, so it has to show what it turned on
                         if (!holdsUniversal) setUniversalExpanded(bundle.uid, true)
@@ -398,10 +402,13 @@ fun ExpertModeDialog(
 
                     if (currentFiltered != null) {
                         val holdsUniversal = holdsUniversalPatches(currentBundle.uid, currentFiltered)
+                        val warnsOnUniversalAll = !holdsUniversal &&
+                                currentFiltered.any { (patch, isEnabled) -> patch.isUniversal && !isEnabled }
                         BundlePatchControls(
                             enabledCount = currentFiltered.count { it.second },
                             totalCount = currentFiltered.size,
                             holdsUniversalPatches = holdsUniversal,
+                            warnOnUniversalAll = warnsOnUniversalAll,
                             onSelectAll = {
                                 // This tap enables the universal patches, so it has to show what it turned on
                                 if (!holdsUniversal) setUniversalExpanded(currentBundle.uid, true)

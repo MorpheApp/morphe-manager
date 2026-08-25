@@ -11,7 +11,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -44,7 +47,9 @@ internal fun BundlePatchControls(
     hasSavedSelection: Boolean,
     modifier: Modifier = Modifier,
     onReportIssue: (() -> Unit)? = null,
-    reportIssueLabel: String? = null
+    reportIssueLabel: String? = null,
+    /** True when this "Enable all" tap would also enable the universal patches. */
+    warnOnUniversalAll: Boolean = false
 ) {
     val context = LocalContext.current
 
@@ -60,6 +65,10 @@ internal fun BundlePatchControls(
     val copyLabel = stringResource(R.string.expert_mode_copy_from_bundle)
     val deselectAllLabel = stringResource(R.string.expert_mode_disable_all)
 
+    // The second "Enable all" tap applies every universal patch at once, which is a common
+    // cause of conflicts and failed patching. Confirmation makes that risk explicit.
+    var showUniversalAllWarning by remember { mutableStateOf(false) }
+
     // Universal patches stay off until a second tap, so the first one must not claim otherwise
     val enabledDone = if (holdsUniversalPatches) {
         stringResource(R.string.expert_mode_enable_all_universal_pending)
@@ -72,7 +81,13 @@ internal fun BundlePatchControls(
 
     ActionPillRow(modifier = modifier) {
         ActionPillButton(
-            onClick = withToast(enabledDone, onSelectAll),
+            onClick = {
+                if (warnOnUniversalAll) {
+                    showUniversalAllWarning = true
+                } else {
+                    withToast(enabledDone, onSelectAll)()
+                }
+            },
             icon = Icons.Outlined.DoneAll,
             contentDescription = selectAllLabel,
             tooltip = selectAllLabel,
@@ -150,6 +165,20 @@ internal fun BundlePatchControls(
                 )
             )
         }
+    }
+
+    if (showUniversalAllWarning) {
+        ConfirmDialog(
+            title = stringResource(R.string.expert_mode_universal_all_warning_title),
+            message = stringResource(R.string.expert_mode_universal_all_warning_message),
+            primaryText = stringResource(R.string.expert_mode_universal_all_enable),
+            isPrimaryDestructive = false,
+            onDismiss = { showUniversalAllWarning = false },
+            onConfirm = {
+                showUniversalAllWarning = false
+                withToast(enabledDone, onSelectAll)()
+            }
+        )
     }
 }
 
