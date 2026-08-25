@@ -87,22 +87,29 @@ internal fun HomeAppListOptionsDialog(
             ) { tab ->
                 Column(verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)) {
                     when (tab) {
-                        0 -> sortModeOptions<HomeAppSortMode>().forEach { option ->
-                            RadioSelectionCard(
-                                selected = sortMode == option.value,
-                                onSelect = { onSortModeChange(option.value) },
-                                title = option.title,
-                                description = option.description
-                            )
-                        }
+                        0 -> sortModeOptions<HomeAppSortMode>()
+                            .sortedBy { it.title.lowercase() }
+                            .forEach { option ->
+                                RadioSelectionCard(
+                                    selected = sortMode == option.value,
+                                    onSelect = { onSortModeChange(option.value) },
+                                    title = option.title,
+                                    description = option.description
+                                )
+                            }
 
-                        else -> HomeAppFilterMode.entries.forEach { mode ->
-                            RadioSelectionCard(
-                                selected = filterMode == mode,
-                                onSelect = { onFilterModeChange(mode) },
-                                title = stringResource(mode.labelRes),
-                                description = stringResource(mode.descriptionRes)
-                            )
+                        else -> {
+                            val sortedFilters = HomeAppFilterMode.entries
+                                .map { it to stringResource(it.labelRes) }
+                                .sortedBy { (_, label) -> label.lowercase() }
+                            sortedFilters.forEach { (mode, _) ->
+                                RadioSelectionCard(
+                                    selected = filterMode == mode,
+                                    onSelect = { onFilterModeChange(mode) },
+                                    title = stringResource(mode.labelRes),
+                                    description = stringResource(mode.descriptionRes)
+                                )
+                            }
                         }
                     }
                 }
