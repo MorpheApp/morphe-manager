@@ -440,6 +440,14 @@ fun HomeDialogs(
                     homeViewModel.getBundleIssuesUrl(bundle.uid)?.let { bundle.uid to it }
                 }.toMap()
             },
+            prereleaseBundleUids = remember(homeViewModel.expertModeAllPatchesInfo) {
+                homeViewModel.expertModeAllPatchesInfo.mapNotNull { (bundle, _) ->
+                    val source = homeViewModel.getPatchSource(bundle.uid)
+                    val isPrerelease = (source as? APIPatchBundle)?.usePrerelease == true ||
+                            (source as? JsonPatchBundle)?.usePrerelease == true
+                    if (isPrerelease) bundle.uid else null
+                }.toSet()
+            },
             onDismiss = {
                 homeViewModel.cleanupExpertModeData()
             },

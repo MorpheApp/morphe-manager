@@ -109,6 +109,9 @@ fun BundleManagementSheet(
     val showSheetOnboarding = globalOnboardingState?.sheetOnboardingActive == true
 
     val bundleToDelete = remember { mutableStateOf<PatchBundleSource?>(null) }
+    // Set when the user flips pre-releases on: the toggle waits for confirmation first,
+    // so the meaning of unstable testing builds is explained before anything changes
+    val bundleToConfirmPrerelease = remember { mutableStateOf<PatchBundleSource?>(null) }
     var showSortDialog by remember { mutableStateOf(false) }
     // Search is offered from two sources up
     val isSearchable = sources.size >= 2
@@ -368,15 +371,16 @@ fun BundleManagementSheet(
                                     onPrereleasesToggle = when {
                                         bundle is JsonPatchBundle && bundle.supportsPrerelease ||
                                                 bundle is APIPatchBundle -> { usePrerelease ->
-                                            if (bundle.uid == bundleToShowChangelogUid) {
-                                                bundleToShowChangelogUid = null
-                                            }
-                                            bundle.clearChangelogCache()
-                                            scope.launch {
-                                                patchBundleRepository.setUsePrerelease(
-                                                    bundle.uid,
-                                                    usePrerelease
-                                                )
+                                            if (usePrerelease) {
+                                                // Explain what pre-release means before flipping it on
+                                                bundleToConfirmPrerelease.value = bundle
+                                            } else {
+                                                scope.launch {
+                                                    patchBundleRepository.setUsePrerelease(
+                                                        bundle.uid,
+                                                        usePrerelease
+                                                    )
+                                                }
                                             }
                                         }
 
@@ -486,6 +490,27 @@ fun BundleManagementSheet(
             onConfirm = {
                 onDelete(bundleToDelete.value!!)
                 bundleToDelete.value = null
+            }
+        )
+    }
+
+    // Pre-release enable confirmation dialog
+    bundleToConfirmPrerelease.value?.let { bundle ->
+        ConfirmDialog(
+            title = stringResource(R.string.sources_prerelease_warning_title),
+            message = stringResource(R.string.sources_prerelease_warning_message),
+            primaryText = stringResource(R.string.sources_prerelease_enable),
+            isPrimaryDestructive = false,
+            onDismiss = { bundleToConfirmPrerelease.value = null },
+            onConfirm = {
+                bundleToConfirmPrerelease.value = null
+                if (bundle.uid == bundleToShowChangelogUid) {
+                    bundleToShowChangelogUid = null
+                }
+                (bundle as? RemotePatchBundle)?.clearChangelogCache()
+                scope.launch {
+                    patchBundleRepository.setUsePrerelease(bundle.uid, true)
+                }
             }
         )
     }

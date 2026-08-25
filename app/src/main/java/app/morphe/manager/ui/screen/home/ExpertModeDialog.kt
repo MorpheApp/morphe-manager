@@ -15,6 +15,7 @@ import androidx.compose.material.icons.outlined.AutoFixHigh
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.SearchOff
 import androidx.compose.material.icons.outlined.Source
+import androidx.compose.material.icons.outlined.WarningAmber
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.listSaver
@@ -77,6 +78,8 @@ fun ExpertModeDialog(
     warnOnMultipleBundles: Boolean = true,
     /** Issues page URLs keyed by bundle uid, for the per-bundle "report an issue" action. */
     bundleIssueUrls: Map<Int, String> = emptyMap(),
+    /** Bundle uids currently receiving pre-release patch versions, shown as a warning header. */
+    prereleaseBundleUids: Set<Int> = emptySet(),
     onDismiss: () -> Unit,
     onProceed: () -> Unit
 ) {
@@ -233,6 +236,15 @@ fun ExpertModeDialog(
                         color = LocalDialogTextColor.current,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
+                    )
+                }
+
+                if (bundle.uid in prereleaseBundleUids) {
+                    Notice(
+                        text = stringResource(R.string.expert_mode_prerelease_notice),
+                        icon = Icons.Outlined.WarningAmber,
+                        tone = SemanticTone.Warning,
+                        density = NoticeDensity.Compact
                     )
                 }
 
@@ -407,6 +419,16 @@ fun ExpertModeDialog(
                     } else {
                         // Reserve space so pager height stays stable when a tab has no results
                         Spacer(modifier = Modifier.height(52.dp))
+                    }
+
+                    if (currentBundle.uid in prereleaseBundleUids) {
+                        Notice(
+                            text = stringResource(R.string.expert_mode_prerelease_notice),
+                            icon = Icons.Outlined.WarningAmber,
+                            tone = SemanticTone.Warning,
+                            density = NoticeDensity.Compact,
+                            modifier = Modifier.padding(bottom = Defaults.ContentPaddingSmall)
+                        )
                     }
 
                     // Pager

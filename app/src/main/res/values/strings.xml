@@ -135,6 +135,10 @@
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
     <string name="sources_management_prerelease_toggle">Pre-release patches</string>
     <string name="sources_management_prerelease_toggle_description">Receives early access to new experimental patch versions</string>
+    <string name="sources_prerelease_warning_title">Enable pre-release patches?</string>
+    <string name="sources_prerelease_warning_message">Pre-release builds are under active development and are not subject to the same stability guarantees as stable releases. They may contain incomplete features, unresolved defects, or breaking changes that could affect patching behavior or installed applications. Proceed only if you accept this risk.</string>
+    <string name="sources_prerelease_enable">Enable pre-release</string>
+    <string name="expert_mode_prerelease_notice">This source is configured to receive pre-release patch versions. These builds are under active development and are not subject to the stability guarantees of stable releases; patches may fail or behave unexpectedly.</string>
     <string name="sources_management_experimental_versions_toggle">Experimental app versions</string>
     <string name="sources_management_experimental_versions_toggle_description">Patches experimental app targets if available</string>
     <string name="sources_management_already_exists">This source has already been added</string>
