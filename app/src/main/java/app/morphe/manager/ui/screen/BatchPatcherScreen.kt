@@ -35,7 +35,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
-import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.home.*
@@ -189,10 +188,6 @@ fun BatchPatcherScreen(
             savedPatches = edit.savedSelection,
             lockStateOf = edit::lockStateOf,
             holdsUniversalPatches = edit::selectAllHoldsUniversal,
-            bundleIssueUrls = allPatchesInfo.mapNotNull { (bundle, _) ->
-                (sourcesByUid[bundle.uid] as? RemotePatchBundle)?.issuesPageUrl
-                    ?.let { bundle.uid to it }
-            }.toMap(),
             prereleaseBundleUids = allPatchesInfo.mapNotNull { (bundle, _) ->
                 bundle.uid.takeIf { sourcesByUid[it]?.usesPrerelease == true }
             }.toSet(),

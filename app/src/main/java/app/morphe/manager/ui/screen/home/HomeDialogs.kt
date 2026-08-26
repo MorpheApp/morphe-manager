@@ -438,10 +438,6 @@ fun HomeDialogs(
             savedPatches = homeViewModel.expertModeInitialPatches,
             lockStateOf = homeViewModel::expertModeLockState,
             holdsUniversalPatches = homeViewModel::expertModeSelectAllHoldsUniversal,
-            bundleIssueUrls = allPatchesInfo.mapNotNull { (bundle, _) ->
-                (homeViewModel.getPatchSource(bundle.uid) as? RemotePatchBundle)
-                    ?.issuesPageUrl?.let { bundle.uid to it }
-            }.toMap(),
             prereleaseBundleUids = allPatchesInfo.mapNotNull { (bundle, _) ->
                 bundle.uid.takeIf { homeViewModel.getPatchSource(it)?.usesPrerelease == true }
             }.toSet(),

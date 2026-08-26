@@ -27,7 +27,6 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -77,8 +76,6 @@ fun ExpertModeDialog(
     proceedText: String = stringResource(R.string.expert_mode_proceed),
     /** Off where mixing sources is the norm rather than something the user just did. */
     warnOnMultipleBundles: Boolean = true,
-    /** Issues page URLs keyed by bundle uid, for the per-bundle "report an issue" action. */
-    bundleIssueUrls: Map<Int, String> = emptyMap(),
     /** Bundle uids currently receiving pre-release patch versions, shown as a warning header. */
     prereleaseBundleUids: Set<Int> = emptySet(),
     onDismiss: () -> Unit,
@@ -88,17 +85,6 @@ fun ExpertModeDialog(
     val search = rememberSearchFieldState()
     val showMultipleSourcesWarning = remember { mutableStateOf(false) }
     val context = LocalContext.current
-    val uriHandler = LocalUriHandler.current
-    val failedToOpenUrlText = stringResource(R.string.sources_management_failed_to_open_url)
-    val reportIssueLabel = stringResource(R.string.sources_management_report_issue)
-    fun openIssueUrl(url: String?) {
-        if (url == null) return
-        try {
-            uriHandler.openUri(url)
-        } catch (_: Exception) {
-            context.toast(failedToOpenUrlText)
-        }
-    }
 
     // Compute set of enabled patch names that have at least one required option
     // with no default (default == null) and no user-provided non-blank value.
@@ -240,15 +226,6 @@ fun ExpertModeDialog(
                     )
                 }
 
-                if (bundle.uid in prereleaseBundleUids) {
-                    Notice(
-                        text = stringResource(R.string.expert_mode_prerelease_notice),
-                        icon = Icons.Outlined.WarningAmber,
-                        tone = SemanticTone.Warning,
-                        density = NoticeDensity.Compact
-                    )
-                }
-
                 val holdsUniversal = holdsUniversalPatches(bundle.uid, displayPatches)
                 // The second "Enable all" tap applies every universal patch at once; warn first
                 val warnsOnUniversalAll = !holdsUniversal &&
@@ -267,9 +244,7 @@ fun ExpertModeDialog(
                     onResetToDefault = { patchActions.onResetToDefault(bundle.uid) },
                     onRestoreSaved = { patchActions.onRestoreSaved(bundle.uid) },
                     onCopyFromBundle = { patchActions.onCopyFromBundle(bundle.uid) },
-                    hasSavedSelection = savedPatches[bundle.uid]?.isNotEmpty() == true,
-                    onReportIssue = bundleIssueUrls[bundle.uid]?.let { url -> { openIssueUrl(url) } },
-                    reportIssueLabel = reportIssueLabel
+                    hasSavedSelection = savedPatches[bundle.uid]?.isNotEmpty() == true
                 )
 
                 if (filteredPatches == null) {
@@ -295,6 +270,9 @@ fun ExpertModeDialog(
                             modifier = Modifier.fillMaxSize(),
                             verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
                         ) {
+                            if (bundle.uid in prereleaseBundleUids) {
+                                prereleaseNotice()
+                            }
                             patchSections(
                                 bundleUid = bundle.uid,
                                 sections = sections,
@@ -420,23 +398,11 @@ fun ExpertModeDialog(
                             onRestoreSaved = { patchActions.onRestoreSaved(currentBundle.uid) },
                             onCopyFromBundle = { patchActions.onCopyFromBundle(currentBundle.uid) },
                             hasSavedSelection = savedPatches[currentBundle.uid]?.isNotEmpty() == true,
-                            onReportIssue = bundleIssueUrls[currentBundle.uid]?.let { url -> { openIssueUrl(url) } },
-                            reportIssueLabel = reportIssueLabel,
                             modifier = Modifier.padding(vertical = Defaults.ContentPaddingSmall)
                         )
                     } else {
                         // Reserve space so pager height stays stable when a tab has no results
                         Spacer(modifier = Modifier.height(52.dp))
-                    }
-
-                    if (currentBundle.uid in prereleaseBundleUids) {
-                        Notice(
-                            text = stringResource(R.string.expert_mode_prerelease_notice),
-                            icon = Icons.Outlined.WarningAmber,
-                            tone = SemanticTone.Warning,
-                            density = NoticeDensity.Compact,
-                            modifier = Modifier.padding(bottom = Defaults.ContentPaddingSmall)
-                        )
                     }
 
                     // Pager
@@ -469,6 +435,9 @@ fun ExpertModeDialog(
                                     modifier = Modifier.fillMaxSize(),
                                     verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
                                 ) {
+                                    if (bundle.uid in prereleaseBundleUids) {
+                                        prereleaseNotice()
+                                    }
                                     patchSections(
                                         bundleUid = bundle.uid,
                                         sections = sections,
@@ -598,6 +567,19 @@ private fun rememberPatchSections(
  * Availability is resolved per patch, so a universal patch the installer requires or rules out
  * carries the same lock as an app-specific one.
  */
+/**
+ * Warning header for a source on the dev branch. It scrolls with the patches it belongs to
+ * rather than holding a fixed strip, which also keeps the tabs from shifting as pages change.
+ */
+private fun LazyListScope.prereleaseNotice() = item(key = "prerelease-notice") {
+    Notice(
+        text = stringResource(R.string.expert_mode_prerelease_notice),
+        icon = Icons.Outlined.WarningAmber,
+        tone = SemanticTone.Warning,
+        density = NoticeDensity.Compact
+    )
+}
+
 private fun LazyListScope.patchSections(
     bundleUid: Int,
     sections: PatchSections,

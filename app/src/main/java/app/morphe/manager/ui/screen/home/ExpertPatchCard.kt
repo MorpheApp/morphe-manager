@@ -46,8 +46,6 @@ internal fun BundlePatchControls(
     onCopyFromBundle: () -> Unit,
     hasSavedSelection: Boolean,
     modifier: Modifier = Modifier,
-    onReportIssue: (() -> Unit)? = null,
-    reportIssueLabel: String? = null,
     /** True when this "Enable all" tap would also enable the universal patches. */
     warnOnUniversalAll: Boolean = false
 ) {
@@ -149,22 +147,6 @@ internal fun BundlePatchControls(
                 disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
             )
         )
-
-        // Report an issue on this bundle's repository
-        if (onReportIssue != null && reportIssueLabel != null) {
-            ActionPillButton(
-                onClick = onReportIssue,
-                icon = Icons.Outlined.BugReport,
-                contentDescription = reportIssueLabel,
-                tooltip = reportIssueLabel,
-                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                    disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
-                )
-            )
-        }
     }
 
     if (showUniversalAllWarning) {
