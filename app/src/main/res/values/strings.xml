@@ -719,7 +719,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_advanced_updates">Updates</string>
     <string name="settings_advanced_patcher">Patcher</string>
     <string name="settings_advanced_updates_use_prereleases">Pre-release updates</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Early access to new Morphe app versions. Enable pre-release per source in patch sources</string>
+    <string name="settings_advanced_updates_use_prereleases_description">Early access to new Morphe Manager versions. Note: To enable pre-release patches, enable them in the patch sources list</string>
     <string name="settings_advanced_updates_allow_metered">Mobile data updates</string>
     <string name="settings_advanced_updates_allow_metered_description">Allows Morphe and patch updates to download over mobile data</string>
     <string name="settings_advanced_updates_background_notifications">Background update notifications</string>
