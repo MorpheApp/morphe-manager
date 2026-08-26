@@ -1,0 +1,88 @@
+[
+    {
+        "meta": {
+            "created_at": "2026-08-26T08:02:35.164367388Z",
+            "source": "patches.mpp",
+            "sha256": "8a1104f3e2aba3a671c3aad84493be05090ef3970f83ec74d883f73bd6f6dec2"
+        },
+        "patches": {
+            "Clone app": {
+                "enabled": false,
+                "options": {
+                    "packageName": "Default",
+                    "updatePermissions": false,
+                    "updateProviders": false
+                }
+            },
+            "Change installer source": {
+                "enabled": false,
+                "options": {
+                    "packageInstallerName": "com.android.vending"
+                }
+            },
+            "Override certificate pinning": {
+                "enabled": false
+            },
+            "Disable Play Store updates": {
+                "enabled": false
+            },
+            "Hide ads": {
+                "enabled": true
+            },
+            "Custom font": {
+                "enabled": true
+            },
+            "Force system font": {
+                "enabled": true
+            },
+            "Hide Ask button": {
+                "enabled": true
+            },
+            "Custom branding name for Reddit": {
+                "enabled": false,
+                "options": {
+                    "appName": "Reddit Morphe"
+                }
+            },
+            "Hide communities shelf": {
+                "enabled": true
+            },
+            "Disable modern home": {
+                "enabled": true
+            },
+            "Hide navigation buttons": {
+                "enabled": true
+            },
+            "Disable screenshot popup": {
+                "enabled": true
+            },
+            "Hide Reddit search": {
+                "enabled": false
+            },
+            "Hide sidebar components": {
+                "enabled": true
+            },
+            "Remove subreddit dialog": {
+                "enabled": true
+            },
+            "Hide Trending shelves": {
+                "enabled": true
+            },
+            "Show view count": {
+                "enabled": true
+            },
+            "Spoof signature": {
+                "enabled": true
+            },
+            "Open links directly": {
+                "enabled": true
+            },
+            "Open links externally": {
+                "enabled": true
+            },
+            "Sanitize sharing links": {
+                "enabled": true
+            }
+        }
+    }
+]

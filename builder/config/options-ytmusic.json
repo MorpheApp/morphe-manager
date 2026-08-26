@@ -1,0 +1,158 @@
+[
+    {
+        "meta": {
+            "created_at": "2026-08-26T08:02:31.579235991Z",
+            "source": "patches.mpp",
+            "sha256": "8a1104f3e2aba3a671c3aad84493be05090ef3970f83ec74d883f73bd6f6dec2"
+        },
+        "patches": {
+            "Clone app": {
+                "enabled": false,
+                "options": {
+                    "packageName": "Default",
+                    "updatePermissions": false,
+                    "updateProviders": false
+                }
+            },
+            "Change installer source": {
+                "enabled": false,
+                "options": {
+                    "packageInstallerName": "com.android.vending"
+                }
+            },
+            "Override certificate pinning": {
+                "enabled": false
+            },
+            "Disable Play Store updates": {
+                "enabled": false
+            },
+            "Hide ads": {
+                "enabled": true
+            },
+            "Hide flyout menu components": {
+                "enabled": true
+            },
+            "Crossfade": {
+                "enabled": true
+            },
+            "Remove viewer discretion dialog": {
+                "enabled": true
+            },
+            "Disable dislike redirection": {
+                "enabled": true
+            },
+            "Downloads": {
+                "enabled": true
+            },
+            "Remember repeat state": {
+                "enabled": true
+            },
+            "Remember shuffle state": {
+                "enabled": true
+            },
+            "Scrobbling": {
+                "enabled": true
+            },
+            "Custom branding": {
+                "enabled": true,
+                "options": {
+                    "customName": null,
+                    "customIcon": null
+                }
+            },
+            "Change header": {
+                "enabled": true,
+                "options": {
+                    "custom": null
+                }
+            },
+            "Hide buttons": {
+                "enabled": true
+            },
+            "Hide music action buttons": {
+                "enabled": true
+            },
+            "Hide filter bar": {
+                "enabled": true
+            },
+            "Hide layout components": {
+                "enabled": true
+            },
+            "Settings menu filter": {
+                "enabled": true
+            },
+            "Third-party lyrics": {
+                "enabled": true
+            },
+            "Change miniplayer color": {
+                "enabled": true
+            },
+            "Enable forced miniplayer": {
+                "enabled": true
+            },
+            "Enable swipe to dismiss miniplayer": {
+                "enabled": true
+            },
+            "Miniplayer previous and next buttons": {
+                "enabled": true
+            },
+            "Navigation bar": {
+                "enabled": true
+            },
+            "Return YouTube Dislike": {
+                "enabled": true
+            },
+            "SponsorBlock": {
+                "enabled": true
+            },
+            "Change start page": {
+                "enabled": true
+            },
+            "Theme": {
+                "enabled": true,
+                "options": {
+                    "darkThemeColor": "in-app"
+                }
+            },
+            "Bypass certificate checks": {
+                "enabled": true
+            },
+            "Disable DRC audio": {
+                "enabled": true
+            },
+            "Enable exclusive audio playback": {
+                "enabled": true
+            },
+            "Force original audio": {
+                "enabled": true
+            },
+            "Remove background playback restrictions": {
+                "enabled": true
+            },
+            "Enable debugging": {
+                "enabled": true
+            },
+            "Check watch history domain name resolution": {
+                "enabled": true
+            },
+            "GmsCore support": {
+                "enabled": true
+            },
+            "Sanitize sharing links": {
+                "enabled": true
+            },
+            "Network proxy": {
+                "enabled": false
+            },
+            "Disable QUIC protocol": {
+                "enabled": true
+            },
+            "Spoof video streams": {
+                "enabled": true
+            },
+            "Spoof app version": {
+                "enabled": true
+            }
+        }
+    }
+]

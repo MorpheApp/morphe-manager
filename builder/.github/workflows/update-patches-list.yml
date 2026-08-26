@@ -1,0 +1,73 @@
+name: Sync Latest Patches List
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Runs automatically every Sunday at midnight UTC
+  workflow_dispatch:      # Allows manual one-click trigger anytime
+
+permissions:
+  contents: write
+
+jobs:
+  sync-patches:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Fetch Latest Morphe Tools & Patches
+        run: |
+          python3 - << 'EOF'
+          import urllib.request, json, os, sys
+
+          os.makedirs("build-tools", exist_ok=True)
+          headers = {"User-Agent": "Mozilla/5.0"}
+
+          # Fetch CLI
+          print("Fetching latest Morphe Desktop CLI...")
+          req_cli = urllib.request.Request("https://api.github.com/repos/MorpheApp/morphe-desktop/releases/latest", headers=headers)
+          cli_data = json.loads(urllib.request.urlopen(req_cli).read().decode())
+          for a in cli_data.get("assets", []):
+              if a["name"].endswith(".jar"):
+                  urllib.request.urlretrieve(a["browser_download_url"], "build-tools/morphe-desktop.jar")
+                  break
+
+          # Fetch MPP
+          print("Fetching latest Morphe Patches bundle...")
+          req_patches = urllib.request.Request("https://api.github.com/repos/MorpheApp/morphe-patches/releases/latest", headers=headers)
+          patches_data = json.loads(urllib.request.urlopen(req_patches).read().decode())
+          for a in patches_data.get("assets", []):
+              if a["name"].endswith(".mpp"):
+                  urllib.request.urlretrieve(a["browser_download_url"], "build-tools/patches.mpp")
+                  break
+          EOF
+
+      - name: Sync & Update App-Wise JSON Configurations
+        run: |
+          python3 scripts/sync_patches.py
+
+      - name: Commit & Push Updated JSON Configs
+        run: |
+          git config --global user.name "anurag008w"
+          git config --global user.email "anurag008w@users.noreply.github.com"
+          
+          git add config/*.json .github/workflows/ scripts/
+          if git diff --staged --quiet; then
+            echo "No new patches found. Everything is already up to date!"
+          else
+            git commit -m "Sync latest Morphe patches JSON & workflow updates"
+            git push origin main
+            echo "Pushed updated JSON patch configs to repository!"
+          fi
