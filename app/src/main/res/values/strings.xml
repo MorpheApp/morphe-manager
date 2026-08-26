@@ -272,7 +272,6 @@
     <string name="expert_mode_enable_all_universal_pending">Tap again for universal patches</string>
     <string name="expert_mode_universal_all_warning_title">Enable all universal patches?</string>
     <string name="expert_mode_universal_all_warning_message">Universal patches are not tested together. Enabling all of them at once can cause conflicts, failed patching, or crashes</string>
-    <string name="expert_mode_universal_all_enable">Enable all universal patches</string>
     <string name="expert_mode_reset_to_default">Enable recommended patches</string>
     <string name="expert_mode_reset_to_default_done">Recommended patches applied</string>
     <string name="expert_mode_restore_saved">Restore saved selection</string>

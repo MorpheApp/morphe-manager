@@ -734,7 +734,7 @@ private fun BatchItemCard(
                         }
                     }
 
-                    // The install's own package, which is what tells clones of one app apart
+                    // This entry's own package, which is what tells clones of one app apart
                     Text(
                         text = item.id,
                         style = MaterialTheme.typography.bodySmall,

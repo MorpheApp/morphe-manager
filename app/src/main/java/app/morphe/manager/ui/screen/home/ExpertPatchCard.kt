@@ -153,7 +153,7 @@ internal fun BundlePatchControls(
         ConfirmDialog(
             title = stringResource(R.string.expert_mode_universal_all_warning_title),
             message = stringResource(R.string.expert_mode_universal_all_warning_message),
-            primaryText = stringResource(R.string.expert_mode_universal_all_enable),
+            primaryText = stringResource(R.string.enable),
             isPrimaryDestructive = false,
             onDismiss = { showUniversalAllWarning = false },
             onConfirm = {
