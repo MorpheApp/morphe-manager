@@ -130,6 +130,14 @@ sealed class PatchBundleSource(
         val PatchBundleSource.isDefault inline get() = uid == 0
         val PatchBundleSource.asRemoteOrNull inline get() = this as? RemotePatchBundle
 
+        /**
+         * True while the source is set to fetch pre-release builds. Only the two remote kinds
+         * carry the flag, so anything else can never be on a pre-release branch.
+         */
+        val PatchBundleSource.usesPrerelease: Boolean
+            get() = (this as? JsonPatchBundle)?.usePrerelease == true ||
+                    (this as? APIPatchBundle)?.usePrerelease == true
+
         /** Classifies a [PatchBundleSource] into its user-visible type. */
         val PatchBundleSource.sourceType: BundleSourceType get() = when {
             isDefault -> BundleSourceType.PreInstalled

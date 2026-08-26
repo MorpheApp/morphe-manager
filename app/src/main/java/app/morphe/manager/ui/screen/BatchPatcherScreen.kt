@@ -34,8 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.batch.*
-import app.morphe.manager.domain.bundles.APIPatchBundle
-import app.morphe.manager.domain.bundles.JsonPatchBundle
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -164,12 +163,16 @@ fun BatchPatcherScreen(
     // The same dialog the single-app flow uses, pointed at one queued app instead of the
     // patcher, so the queue never has to grow a second patch list
     viewModel.edit?.let { edit ->
+        // Reading the property re-walks and re-sorts every bundle's patches, so it is taken once
+        val allPatchesInfo = edit.allPatchesInfo
+        val sources by patchBundleRepository.sources.collectAsStateWithLifecycle()
+        val sourcesByUid = remember(sources) { sources.associateBy { it.uid } }
         ExpertModeDialog(
             newPatches = edit.newPatches,
             options = edit.options,
-            allPatchesInfo = edit.allPatchesInfo,
+            allPatchesInfo = allPatchesInfo,
             totalSelectedCount = edit.totalSelectedCount,
-            totalPatchesCount = edit.totalPatchesCount,
+            totalPatchesCount = allPatchesInfo.sumOf { (_, patches) -> patches.size },
             hasMultipleBundles = edit.hasMultipleBundles,
             patchActions = ExpertPatchActions(
                 onPatchToggle = edit::togglePatch,
@@ -186,21 +189,13 @@ fun BatchPatcherScreen(
             savedPatches = edit.savedSelection,
             lockStateOf = edit::lockStateOf,
             holdsUniversalPatches = edit::selectAllHoldsUniversal,
-            bundleIssueUrls = remember(edit.allPatchesInfo) {
-                val sources = patchBundleRepository.sources.value.associateBy { it.uid }
-                edit.allPatchesInfo.mapNotNull { (bundle, _) ->
-                    (sources[bundle.uid] as? RemotePatchBundle)?.issuesPageUrl?.let { bundle.uid to it }
-                }.toMap()
-            },
-            prereleaseBundleUids = remember(edit.allPatchesInfo) {
-                val sources = patchBundleRepository.sources.value.associateBy { it.uid }
-                edit.allPatchesInfo.mapNotNull { (bundle, _) ->
-                    val source = sources[bundle.uid]
-                    val isPrerelease = (source as? APIPatchBundle)?.usePrerelease == true ||
-                            (source as? JsonPatchBundle)?.usePrerelease == true
-                    if (isPrerelease) bundle.uid else null
-                }.toSet()
-            },
+            bundleIssueUrls = allPatchesInfo.mapNotNull { (bundle, _) ->
+                (sourcesByUid[bundle.uid] as? RemotePatchBundle)?.issuesPageUrl
+                    ?.let { bundle.uid to it }
+            }.toMap(),
+            prereleaseBundleUids = allPatchesInfo.mapNotNull { (bundle, _) ->
+                bundle.uid.takeIf { sourcesByUid[it]?.usesPrerelease == true }
+            }.toSet(),
             proceedText = stringResource(R.string.save),
             // The queue combines sources by design, and the tabs make it plain enough
             warnOnMultipleBundles = false,

@@ -46,8 +46,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.APIPatchBundle
-import app.morphe.manager.domain.bundles.JsonPatchBundle
 import app.morphe.manager.domain.bundles.PatchBundleSource
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.patch.PatchInfo
@@ -943,8 +943,7 @@ fun BundleChangelogDialog(
         state = BundleChangelogState.Loading
         state = withContext(Dispatchers.Default) {
             try {
-                val usePrerelease = (src as? APIPatchBundle)?.usePrerelease == true
-                        || (src as? JsonPatchBundle)?.usePrerelease == true
+                val usePrerelease = src.usesPrerelease
 
                 val allEntries = src.fetchChangelogEntries(sinceVersion = null)
 

@@ -96,8 +96,6 @@ class BatchPatchEdit(
 
     val totalSelectedCount get() = selection.values.sumOf { it.size }
 
-    val totalPatchesCount get() = allPatchesInfo.sumOf { it.second.size }
-
     val hasMultipleBundles get() = selection.spansMultipleBundles()
 
     private val patchesByName = bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }

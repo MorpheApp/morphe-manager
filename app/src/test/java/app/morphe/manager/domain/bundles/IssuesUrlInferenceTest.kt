@@ -6,6 +6,7 @@
 package app.morphe.manager.domain.bundles
 
 import app.morphe.manager.domain.bundles.RemotePatchBundle.Companion.inferIssuesUrlFromEndpoint
+import app.morphe.manager.domain.bundles.RemotePatchBundle.Companion.issuesUrlForRepoUrl
 import kotlin.test.*
 
 /**
@@ -52,5 +53,18 @@ class IssuesUrlInferenceTest {
     @Test
     fun `malformed endpoint has no issues page`() {
         assertNull(inferIssuesUrlFromEndpoint("not a url"))
+    }
+
+    @Test
+    fun `manifest declared repository gets the host issues path`() {
+        assertEquals(
+            "https://github.com/owner/repo/issues",
+            issuesUrlForRepoUrl("https://github.com/owner/repo")
+        )
+        assertEquals(
+            "https://gitlab.com/owner/repo/-/issues",
+            issuesUrlForRepoUrl("https://gitlab.com/owner/repo")
+        )
+        assertNull(issuesUrlForRepoUrl("https://patches.example.com/owner/repo"))
     }
 }

@@ -157,11 +157,14 @@ sealed class RemotePatchBundle(
     /**
      * Where the "report an issue" action takes the user: the repository's issues page.
      *
-     * Derived from [browsePageUrl] (GitHub: /issues, GitLab: /-/issues). Hosts other than
-     * GitHub and GitLab have no known issues layout, so those fall back to [browsePageUrl].
+     * Follows the same order as [browsePageUrl] and appends the host's issues path
+     * (GitHub: /issues, GitLab: /-/issues). Hosts other than GitHub and GitLab have no known
+     * issues layout, so those land on the browse page instead of a guessed path.
      */
     open val issuesPageUrl: String
-        get() = inferIssuesUrlFromEndpoint(endpoint) ?: browsePageUrl
+        get() = inferIssuesUrlFromEndpoint(endpoint)
+            ?: manifestPageUrl?.let { issuesUrlForRepoUrl(it) }
+            ?: browsePageUrl
 
     /**
      * Shared cache logic for [fetchChangelogEntries] and its overrides.
@@ -268,13 +271,14 @@ sealed class RemotePatchBundle(
          * Infer the issues page URL from various endpoint formats.
          * Returns null for hosts other than GitHub and GitLab, whose issues layout is unknown.
          */
-        fun inferIssuesUrlFromEndpoint(endpoint: String): String? {
-            val repoUrl = inferPageUrlFromEndpoint(endpoint) ?: return null
-            return when {
-                repoUrl.startsWith("https://github.com/") -> "$repoUrl/issues"
-                repoUrl.startsWith("https://gitlab.com/") -> "$repoUrl/-/issues"
-                else -> null
-            }
+        fun inferIssuesUrlFromEndpoint(endpoint: String): String? =
+            inferPageUrlFromEndpoint(endpoint)?.let { issuesUrlForRepoUrl(it) }
+
+        /** Appends the host's issues path to an already resolved repository URL. */
+        fun issuesUrlForRepoUrl(repoUrl: String): String? = when {
+            repoUrl.startsWith("https://github.com/") -> "$repoUrl/issues"
+            repoUrl.startsWith("https://gitlab.com/") -> "$repoUrl/-/issues"
+            else -> null
         }
     }
 

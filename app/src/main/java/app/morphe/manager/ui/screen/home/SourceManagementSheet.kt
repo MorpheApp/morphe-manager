@@ -56,6 +56,7 @@ import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.sourceType
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.manager.SourceBundleSortMode
 import app.morphe.manager.domain.repository.BlocklistRepository
@@ -180,9 +181,19 @@ fun BundleManagementSheet(
     val bundleToShowChangelog = bundleToShowChangelogUid
         ?.let { uid -> sources.filterIsInstance<RemotePatchBundle>().find { it.uid == uid } }
     val bundleToShowChangelogKey = bundleToShowChangelog?.let {
-        val usePrerelease = (it as? APIPatchBundle)?.usePrerelease == true
-                || (it as? JsonPatchBundle)?.usePrerelease == true
-        "${it.installedVersionSignature}|$usePrerelease"
+        "${it.installedVersionSignature}|${it.usesPrerelease}"
+    }
+
+    // Switching branches invalidates whatever the changelog dialog is holding, so the cache goes
+    // and an open dialog closes rather than keeping entries from the branch that was just left
+    fun applyPrerelease(bundle: PatchBundleSource, usePrerelease: Boolean) {
+        if (bundle.uid == bundleToShowChangelogUid) {
+            bundleToShowChangelogUid = null
+        }
+        (bundle as? RemotePatchBundle)?.clearChangelogCache()
+        scope.launch {
+            patchBundleRepository.setUsePrerelease(bundle.uid, usePrerelease)
+        }
     }
 
     // Check if only default bundle exists
@@ -375,12 +386,7 @@ fun BundleManagementSheet(
                                                 // Explain what pre-release means before flipping it on
                                                 bundleToConfirmPrerelease.value = bundle
                                             } else {
-                                                scope.launch {
-                                                    patchBundleRepository.setUsePrerelease(
-                                                        bundle.uid,
-                                                        usePrerelease
-                                                    )
-                                                }
+                                                applyPrerelease(bundle, false)
                                             }
                                         }
 
@@ -504,13 +510,7 @@ fun BundleManagementSheet(
             onDismiss = { bundleToConfirmPrerelease.value = null },
             onConfirm = {
                 bundleToConfirmPrerelease.value = null
-                if (bundle.uid == bundleToShowChangelogUid) {
-                    bundleToShowChangelogUid = null
-                }
-                (bundle as? RemotePatchBundle)?.clearChangelogCache()
-                scope.launch {
-                    patchBundleRepository.setUsePrerelease(bundle.uid, true)
-                }
+                applyPrerelease(bundle, true)
             }
         )
     }
@@ -844,11 +844,7 @@ private fun BundleManagementCard(
                         SettingsDivider(fullWidth = true)
 
                         // Resolve prerelease state once
-                        val currentUsePrerelease = when (bundle) {
-                            is JsonPatchBundle -> bundle.usePrerelease
-                            is APIPatchBundle -> bundle.usePrerelease
-                            else -> false
-                        }
+                        val currentUsePrerelease = bundle.usesPrerelease
 
                         // Prerelease toggle (for JsonPatchBundle with GitHub endpoint or APIPatchBundle)
                         if (onPrereleasesToggle != null) {

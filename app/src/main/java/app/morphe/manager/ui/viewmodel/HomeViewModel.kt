@@ -1729,13 +1729,6 @@ class HomeViewModel(
     fun getBundleDisplayName(uid: Int): String? =
         allBundlesInfoState.value[uid]?.name
 
-    /**
-     * Returns the issues page URL of the bundle with [uid], or null when the bundle
-     * is not a remote source with a known GitHub/GitLab repository.
-     */
-    fun getBundleIssuesUrl(uid: Int): String? =
-        (patchSourcesState.value[uid] as? RemotePatchBundle)?.issuesPageUrl
-
     fun saveAppOrder(packageNames: List<String>) {
         homeAppButtonPrefs.saveOrder(packageNames)
     }
@@ -2990,10 +2983,6 @@ class HomeViewModel(
     /** Total number of currently selected patches across all bundles. */
     val expertModeTotalSelectedCount: Int
         get() = expertModePatches.values.sumOf { it.size }
-
-    /** Total number of available patches across all bundles. */
-    val expertModeTotalPatchesCount: Int
-        get() = expertModeAllPatchesInfo.sumOf { it.second.size }
 
     /** True when patches from more than one bundle are selected (triggers warning on proceed). */
     val expertModeHasMultipleBundles: Boolean

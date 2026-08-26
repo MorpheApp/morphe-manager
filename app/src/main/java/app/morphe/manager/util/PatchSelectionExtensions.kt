@@ -113,6 +113,14 @@ object PatchSelectionUtils {
         return hasUnselectedUniversal && !(universalArmed && selectable.allRegularSelected())
     }
 
+    /**
+     * True when a bulk enable of [this] would turn on at least one universal patch, i.e. the
+     * locked off ones do not count because [bulkEnablePatches] leaves them alone.
+     */
+    fun List<Pair<PatchInfo, Boolean>>.hasEnablableUniversal(
+        lockStateOf: (PatchInfo) -> PatchLockState
+    ) = selectable(lockStateOf).any { (patch, enabled) -> patch.isUniversal && !enabled }
+
     /** Patches the user is allowed to turn on, i.e. everything except the locked off ones. */
     private fun List<Pair<PatchInfo, Boolean>>.selectable(lockStateOf: (PatchInfo) -> PatchLockState) =
         filterNot { (patch, _) -> lockStateOf(patch) == PatchLockState.LOCKED_OFF }

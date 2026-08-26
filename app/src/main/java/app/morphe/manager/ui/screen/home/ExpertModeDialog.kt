@@ -40,6 +40,7 @@ import app.morphe.manager.ui.model.renamesByDefault
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PatchSelection
+import app.morphe.manager.util.PatchSelectionUtils.hasEnablableUniversal
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.launch
 
@@ -251,7 +252,7 @@ fun ExpertModeDialog(
                 val holdsUniversal = holdsUniversalPatches(bundle.uid, displayPatches)
                 // The second "Enable all" tap applies every universal patch at once; warn first
                 val warnsOnUniversalAll = !holdsUniversal &&
-                        displayPatches.any { (patch, isEnabled) -> patch.isUniversal && !isEnabled }
+                        displayPatches.hasEnablableUniversal(lockStateOf)
                 BundlePatchControls(
                     enabledCount = enabledCount,
                     totalCount = totalCount,
@@ -403,7 +404,7 @@ fun ExpertModeDialog(
                     if (currentFiltered != null) {
                         val holdsUniversal = holdsUniversalPatches(currentBundle.uid, currentFiltered)
                         val warnsOnUniversalAll = !holdsUniversal &&
-                                currentFiltered.any { (patch, isEnabled) -> patch.isUniversal && !isEnabled }
+                                currentFiltered.hasEnablableUniversal(lockStateOf)
                         BundlePatchControls(
                             enabledCount = currentFiltered.count { it.second },
                             totalCount = currentFiltered.size,
