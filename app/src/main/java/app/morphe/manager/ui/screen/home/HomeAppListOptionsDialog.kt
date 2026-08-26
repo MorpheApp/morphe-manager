@@ -87,19 +87,16 @@ internal fun HomeAppListOptionsDialog(
             ) { tab ->
                 Column(verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)) {
                     when (tab) {
-                        0 -> {
-                            val options = sortModeOptions<HomeAppSortMode>()
-                                .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.title })
-                            options.forEach { option ->
-                                RadioSelectionCard(
-                                    selected = sortMode == option.value,
-                                    onSelect = { onSortModeChange(option.value) },
-                                    title = option.title,
-                                    description = option.description
-                                )
-                            }
+                        0 -> sortModeOptions<HomeAppSortMode>().forEach { option ->
+                            RadioSelectionCard(
+                                selected = sortMode == option.value,
+                                onSelect = { onSortModeChange(option.value) },
+                                title = option.title,
+                                description = option.description
+                            )
                         }
 
+                        // Filters are not SortModeSpec, so they get the same ordering here
                         else -> {
                             val filters = HomeAppFilterMode.entries.map { mode ->
                                 Triple(

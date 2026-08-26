@@ -21,6 +21,11 @@ data class SortModeOption<T>(
     val description: String
 )
 
+/**
+ * Options of [T] in the order they are offered to the user, which is alphabetical rather than
+ * the declaration order: the lists are read as a menu, and every sort dialog has to agree on
+ * where an entry sits, including the ones the enums share.
+ */
 @Composable
 inline fun <reified T> sortModeOptions(): List<SortModeOption<T>>
     where T : Enum<T>, T : SortModeSpec =
@@ -30,7 +35,7 @@ inline fun <reified T> sortModeOptions(): List<SortModeOption<T>>
             title = stringResource(mode.labelRes),
             description = stringResource(mode.descriptionRes)
         )
-    }
+    }.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.title })
 
 @Composable
 fun <T> SortModeSelectionDialog(
