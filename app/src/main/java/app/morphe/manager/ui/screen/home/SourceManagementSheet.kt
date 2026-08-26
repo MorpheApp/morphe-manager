@@ -505,7 +505,7 @@ fun BundleManagementSheet(
         ConfirmDialog(
             title = stringResource(R.string.sources_prerelease_warning_title),
             message = stringResource(R.string.sources_prerelease_warning_message),
-            primaryText = stringResource(R.string.sources_prerelease_enable),
+            primaryText = stringResource(R.string.enable),
             isPrimaryDestructive = false,
             onDismiss = { bundleToConfirmPrerelease.value = null },
             onConfirm = {
@@ -583,6 +583,7 @@ private fun PatchBundleSource.sourceSortTitle(): String =
 /**
  * Card for individual bundle management.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BundleManagementCard(
     bundle: PatchBundleSource,
@@ -820,24 +821,54 @@ private fun BundleManagementCard(
                             enabled = !isUpdating
                         )
 
-                        // Open in browser button
+                        // Both actions leave for the same repository, so they share a row.
+                        // Only the primary one carries a label, keeping it clear of the
+                        // width its own translation happens to need
                         if (bundle is RemotePatchBundle) {
-                            FilledTonalButton(
-                                onClick = onOpenInBrowser,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(48.dp)
-                                    .semantics {
-                                        contentDescription = openInBrowser
-                                    },
-                                shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+                            val issueDesc = reportIssue + " " + bundle.displayTitle
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
                             ) {
-                                Icon(
-                                    Icons.AutoMirrored.Outlined.OpenInNew,
-                                    contentDescription = null
-                                )
-                                Spacer(Modifier.width(8.dp))
-                                Text(openInBrowser)
+                                FilledTonalButton(
+                                    onClick = onOpenInBrowser,
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(48.dp)
+                                        .semantics {
+                                            contentDescription = openInBrowser
+                                        },
+                                    shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+                                ) {
+                                    Icon(
+                                        Icons.AutoMirrored.Outlined.OpenInNew,
+                                        contentDescription = null
+                                    )
+                                    Spacer(Modifier.width(8.dp))
+                                    Text(openInBrowser)
+                                }
+
+                                TooltipBox(
+                                    positionProvider = TooltipDefaults.rememberTooltipPositionProvider(
+                                        TooltipAnchorPosition.Above
+                                    ),
+                                    tooltip = { PlainTooltip { Text(reportIssue) } },
+                                    state = rememberTooltipState()
+                                ) {
+                                    FilledTonalIconButton(
+                                        onClick = onReportIssue,
+                                        modifier = Modifier
+                                            .size(48.dp)
+                                            .semantics {
+                                                contentDescription = issueDesc
+                                            },
+                                        shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+                                    ) {
+                                        Icon(
+                                            Icons.Outlined.BugReport,
+                                            contentDescription = null
+                                        )
+                                    }
+                                }
                             }
                         }
 
@@ -928,21 +959,6 @@ private fun BundleManagementCard(
                                     contentDescription = updateDesc,
                                     tooltip = updateVerb,
                                     enabled = !isBlocked
-                                )
-                            }
-
-                            // Report an issue button, next to the delete action
-                            if (bundle is RemotePatchBundle) {
-                                val issueDesc = reportIssue + " " + bundle.displayTitle
-                                ActionPillButton(
-                                    onClick = onReportIssue,
-                                    icon = Icons.Outlined.BugReport,
-                                    contentDescription = issueDesc,
-                                    tooltip = reportIssue,
-                                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-                                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
                                 )
                             }
 
