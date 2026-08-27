@@ -205,14 +205,6 @@ class ProcessRuntime(
                     put("LD_PRELOAD", propOverride)
                     put("PROP_dalvik.vm.heapgrowthlimit", heapSizeString)
                     put("PROP_dalvik.vm.heapsize", heapSizeString)
-                    // ART otherwise starts at dalvik.vm.heapstartsize (8-16 MB) and grows to the
-                    // cap one collection at a time, so a run that ends up near the limit spends a
-                    // large share of its time in blocking allocation GCs. Start close to where the
-                    // heap ends up and let it stay there: same ceiling, far fewer collections.
-                    put("PROP_dalvik.vm.heapstartsize", "${(memoryLimit * 3) / 4}M")
-                    put("PROP_dalvik.vm.heapminfree", "8M")
-                    put("PROP_dalvik.vm.heapmaxfree", "32M")
-                    put("PROP_dalvik.vm.heaptargetutilization", "0.5")
                 } else {
                     Log.w(tag, "Skipping prop override on Android ${Build.VERSION.SDK_INT}")
                 }
