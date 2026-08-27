@@ -47,6 +47,16 @@ fun UpdatesSettingsItem(
     val useManagerPrereleases by prefs.useManagerPrereleases.getAsState()
     val usePatchesPrereleases by prefs.bundlePrereleasesEnabled.getAsState()
     val showIntervalDialog = remember { mutableStateOf(false) }
+    val showPrereleaseWarning = remember { mutableStateOf(false) }
+
+    fun applyManagerPrereleases() {
+        settingsViewModel.toggleManagerPrereleases(
+            currentValue = useManagerPrereleases,
+            backgroundNotificationsEnabled = backgroundUpdateNotifications,
+            patchesPrereleaseIds = usePatchesPrereleases,
+            onCheckUpdate = onManagerPrereleasesToggle
+        )
+    }
 
     if (showIntervalDialog.value) {
         UpdateCheckIntervalDialog(
@@ -59,21 +69,35 @@ fun UpdatesSettingsItem(
         )
     }
 
+    if (showPrereleaseWarning.value) {
+        ConfirmDialog(
+            title = stringResource(R.string.settings_advanced_updates_prerelease_warning_title),
+            message = stringResource(R.string.settings_advanced_updates_prerelease_warning_message),
+            primaryText = stringResource(R.string.enable),
+            isPrimaryDestructive = false,
+            onDismiss = { showPrereleaseWarning.value = false },
+            onConfirm = {
+                showPrereleaseWarning.value = false
+                applyManagerPrereleases()
+            }
+        )
+    }
+
     SettingsGroup {
         // Use manager prereleases toggle
         SettingsSwitchItem(
             checked = useManagerPrereleases,
             onToggle = {
-                settingsViewModel.toggleManagerPrereleases(
-                    currentValue = useManagerPrereleases,
-                    backgroundNotificationsEnabled = backgroundUpdateNotifications,
-                    patchesPrereleaseIds = usePatchesPrereleases,
-                    onCheckUpdate = onManagerPrereleasesToggle
-                )
+                if (useManagerPrereleases) {
+                    applyManagerPrereleases()
+                } else {
+                    // Explain what pre-release means, and that patches are separate, before flipping it on
+                    showPrereleaseWarning.value = true
+                }
             },
             icon = Icons.Outlined.Science,
-            title = stringResource(R.string.settings_advanced_updates_use_prereleases),
-            subtitle = stringResource(R.string.settings_advanced_updates_use_prereleases_description)
+            title = stringResource(R.string.settings_advanced_updates_manager_prereleases),
+            subtitle = stringResource(R.string.settings_advanced_updates_manager_prereleases_description)
         )
 
         // Check frequency interval selector (non-GMS only), shown when background notifications
