@@ -45,16 +45,34 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
         password = prefs.keystorePass.get()
     )
 
+    /**
+     * Signs [input] into [output].
+     *
+     * Repackaging the archive first fixes the malformed headers some third-party APKs carry, but it
+     * means inflating and re-deflating every entry of the archive, which is wasted whenever the
+     * archive was already well-formed - as it is for anything the patcher itself just wrote. So sign
+     * directly and fall back to [sanitizeZipIfNeeded] only if the signer actually rejects the input.
+     */
     suspend fun sign(input: File, output: File) = withContext(Dispatchers.Default) {
-        val sanitized = sanitizeZipIfNeeded(input)
-        ApkUtils.signApk(sanitized, output, prefs.keystoreAlias.get(), signingDetails())
-        if (sanitized != input) sanitized.delete()
+        val alias = prefs.keystoreAlias.get()
+        try {
+            ApkUtils.signApk(input, output, alias, signingDetails())
+        } catch (e: Exception) {
+            Log.w(TAG, "Signing failed, retrying with a repackaged archive", e)
+            val sanitized = sanitizeZipIfNeeded(input)
+            try {
+                ApkUtils.signApk(sanitized, output, alias, signingDetails())
+            } finally {
+                if (sanitized != input) sanitized.delete()
+            }
+        }
     }
 
     /**
      * Some APKs (often from third-party downloads) contain malformed ZIP headers that trigger
      * ApkSigner errors like "Data Descriptor presence mismatch". Repackage the archive to fix
-     * header inconsistencies before signing.
+     * header inconsistencies. Called from [sign] only after a signing attempt has failed, since
+     * repackaging is expensive and almost never needed.
      */
     private suspend fun sanitizeZipIfNeeded(input: File): File = withContext(Dispatchers.IO) {
         runCatching {
