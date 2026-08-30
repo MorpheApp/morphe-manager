@@ -9,6 +9,7 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.InputStream
 
 object SplitApkInspector {
     suspend fun extractRepresentativeApk(source: File, workspace: File): ExtractedApk? {
@@ -22,9 +23,7 @@ object SplitApkInspector {
         return try {
             withContext(Dispatchers.IO) {
                 ZipFile(source).use { zip ->
-                    val entry = selectBestEntry(zip)
-                        ?: throw IOException("Split archive does not contain any APK entries.")
-                    zip.getInputStream(entry).use { input ->
+                    baseApkAsInputStream(zip).use { input ->
                         Files.newOutputStream(temp.toPath()).use { output ->
                             input.copyTo(output)
                         }
@@ -36,6 +35,12 @@ object SplitApkInspector {
             temp.delete()
             throw error
         }
+    }
+
+    fun baseApkAsInputStream(source: ZipFile): InputStream {
+        val entry = selectBestEntry(source)
+            ?: throw IOException("Split archive does not contain any APK entries.")
+        return source.getInputStream(entry)
     }
 
     private fun selectBestEntry(zip: ZipFile): ZipEntry? {

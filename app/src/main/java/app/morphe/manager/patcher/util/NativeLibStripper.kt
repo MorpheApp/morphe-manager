@@ -6,6 +6,7 @@ import app.morphe.manager.patcher.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipInputStream
@@ -119,13 +120,22 @@ object NativeLibStripper {
     fun extractAbisFromApk(apkFile: File): List<String> =
         runCatching {
             ZipFile(apkFile).use { zip ->
-                zip.entries().asSequence()
-                    .map { it.name }
-                    .mapNotNull(::extractAbiFromEntry)
-                    .distinct()
-                    .toList()
+                abisFromEntries(zip.entries().asSequence())
             }
         }.getOrDefault(emptyList())
+
+    fun extractAbisFromApk(apkStream: InputStream): List<String> =
+        runCatching {
+            ZipInputStream(apkStream).use { zis ->
+                abisFromEntries(generateSequence { zis.nextEntry })
+            }
+        }.getOrDefault(emptyList())
+
+    private fun <T : ZipEntry> abisFromEntries(entries: Sequence<T>) = entries
+        .map { it.name }
+        .mapNotNull(::extractAbiFromEntry)
+        .distinct()
+        .toList()
 
     /**
      * The one ABI a run keeps out of [abisInApk], which is the first of [supportedAbis] the APK

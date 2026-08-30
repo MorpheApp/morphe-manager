@@ -6,6 +6,7 @@ import android.util.DisplayMetrics
 import android.util.Log
 import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
+import app.morphe.manager.patcher.util.NativeLibStripper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
 import java.io.File
@@ -13,6 +14,7 @@ import java.io.IOException
 import java.nio.file.Files
 import java.util.Locale
 import java.util.zip.ZipFile
+import java.util.zip.ZipOutputStream
 
 sealed class SplitPreparationEvent {
     data object Extracting : SplitPreparationEvent()
@@ -144,6 +146,11 @@ object SplitApkPreparer {
                     }
                     .distinct()
                     .toList()
+                    .ifEmpty {
+                        SplitApkInspector.baseApkAsInputStream(zip).use { base ->
+                            NativeLibStripper.extractAbisFromApk(base)
+                        }
+                    }
             }
         }.getOrDefault(emptyList())
 
