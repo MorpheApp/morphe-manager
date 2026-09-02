@@ -478,7 +478,27 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">Error log</string>
     <string name="patcher_error_technical">Technical details</string>
-    <string name="patcher_error_dialog_app_info">App info</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostics</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">App</string>
+    <string name="patcher_field_package">Package</string>
+    <string name="patcher_field_source">Source</string>
+    <string name="patcher_field_split">Split APK</string>
+    <string name="patcher_field_manager">Manager</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Runtime</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Libraries</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Device</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memory</string>
+    <string name="patcher_field_storage">Storage</string>
+    <string name="patcher_field_value_unknown">unknown</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">stripped</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">kept</string>
     <string name="patcher_patches_progress_format" translatable="false">%1$s / %2$s</string>
     <string name="patcher_percentage" translatable="false">%s%%</string>
     <string name="patcher_tab_logs">Patcher logs</string>
@@ -491,7 +511,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="patcher_success_subtitle">Your app is patched and installed!</string>
     <string name="patcher_complete_title">Patching complete! ✨</string>
     <string name="patcher_failed_title">Oops! Something went wrong</string>
-    <string name="patcher_failed_subtitle">Check the error details below</string>
+    <string name="patcher_failed_hint">Tap %s to see what went wrong</string>
     <string name="patcher_failed_dialog_title">Patching failed</string>
     <string name="patcher_unknown_error">Unknown error occurred</string>
     <string name="patcher_split_step_extracting">Extracting split APKs</string>

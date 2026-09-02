@@ -337,9 +337,11 @@ fun BatchPatcherScreen(
                 appName = item.appName,
                 packageName = item.packageName,
                 appVersion = item.version.orEmpty(),
+                patchCount = item.selection.values.sumOf { it.size },
                 bundles = item.bundles.map {
                     PatcherErrorInfo.BundleInfo(name = it.name, version = null)
-                }
+                },
+                stripsNativeLibs = null
             ),
             onDismiss = { errorItem = null }
         )

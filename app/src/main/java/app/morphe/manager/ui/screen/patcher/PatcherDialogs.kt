@@ -31,23 +31,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
+import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.ui.model.RenameWarning
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.MORPHE_WEBSITE_URL
 import app.morphe.manager.util.PathValidationResult
+import app.morphe.manager.util.deviceStats
 import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.toast
 
+/**
+ * Ceiling for the label column, past which a translation that runs long would leave its value
+ * with nowhere to go. Labels are measured rather than fixed, so this is only ever a backstop.
+ */
+private const val ErrorInfoLabelMaxFraction = 0.45f
 
 /**
  * Shown when a patch bundle requires a newer version of morphe-patcher than the one
@@ -469,6 +480,16 @@ fun PatcherErrorDialog(
     @Suppress("DEPRECATION")
     val clipboardManager = LocalClipboardManager.current
 
+    val diagnostics = diagnosticSections(errorInfo)
+    // The log alone rarely identifies a failure, so the clipboard carries the diagnostics too
+    val report = remember(diagnostics, errorMessage) {
+        buildString {
+            diagnostics.flatten().forEach { (label, value) -> appendLine("$label: $value") }
+            appendLine()
+            append(errorMessage)
+        }
+    }
+
     AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.patcher_failed_dialog_title),
@@ -478,7 +499,7 @@ fun PatcherErrorDialog(
             AppDialogButtonRow(
                 primaryText = stringResource(android.R.string.copy),
                 onPrimaryClick = {
-                    clipboardManager.setText(AnnotatedString(errorMessage))
+                    clipboardManager.setText(AnnotatedString(report))
                     context.toast(errorCopiedText)
                 },
                 primaryIcon = Icons.Default.ContentCopy,
@@ -491,30 +512,13 @@ fun PatcherErrorDialog(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
         ) {
-            // App info
-            if (errorInfo != null) {
-                ErrorInfoCard(
-                    label = stringResource(R.string.patcher_error_dialog_app_info),
-                    icon = Icons.Outlined.Info
-                ) {
-                    ErrorInfoRow(errorInfo.packageName)
-                    ErrorInfoRow(errorInfo.appVersion)
-
-                    if (errorInfo.bundles.isNotEmpty()) {
-                        errorInfo.bundles.forEach { bundle ->
-                            SettingsDivider()
-
-                            if (bundle.version != null) {
-                                ErrorInfoRow(bundle.name)
-                                ErrorInfoRow(bundle.version)
-                            }
-                            else
-                                ErrorInfoRow(bundle.name)
-                        }
-                    }
-                }
+            ErrorInfoCard(
+                label = stringResource(R.string.patcher_error_dialog_diagnostics),
+                icon = Icons.Outlined.Info
+            ) {
+                DiagnosticsContent(diagnostics)
             }
 
             // Error log card
@@ -535,7 +539,7 @@ fun PatcherErrorDialog(
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontFamily = FontFamily.Monospace,
-                        lineHeight = 18.sp
+                        lineHeight = 16.sp
                     )
                 }
             }
@@ -551,19 +555,21 @@ private fun ErrorInfoCard(
     errorBadge: String? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    SurfaceCard(
-        modifier = modifier.fillMaxWidth(),
-        elevation = 2.dp,
-        cornerRadius = 16.dp
-    ) {
+    SurfaceCard(modifier = modifier.fillMaxWidth()) {
         Column {
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-                shape = RoundedCornerShape(topStart = Defaults.SectionCornerRadius, topEnd = Defaults.SectionCornerRadius)
+                shape = RoundedCornerShape(
+                    topStart = Defaults.CardCornerRadius,
+                    topEnd = Defaults.CardCornerRadius
+                )
             ) {
                 IconTextRow(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    modifier = Modifier.padding(
+                        horizontal = Defaults.ContentPadding,
+                        vertical = Defaults.ContentPaddingSmall
+                    ),
                     leadingContent = {
                         ThemedIcon(
                             icon = icon,
@@ -585,19 +591,136 @@ private fun ErrorInfoCard(
     }
 }
 
+/**
+ * The diagnostics rows. The label column is measured from the labels themselves, so the values
+ * line up under each other in every language instead of under a width guessed from English.
+ */
+@Composable
+private fun DiagnosticsContent(sections: List<List<Pair<String, String>>>) {
+    val bodySmall = MaterialTheme.typography.bodySmall
+    val textStyle = remember(bodySmall) { bodySmall.copy(fontFamily = FontFamily.Monospace) }
+    val measurer = rememberTextMeasurer()
+    val density = LocalDensity.current
+
+    BoxWithConstraints {
+        val labelWidth = remember(sections, textStyle, density, maxWidth) {
+            val widest = sections.flatten().maxOfOrNull { (label, _) ->
+                measurer.measure(label, textStyle).size.width
+            } ?: 0
+            val available = maxWidth - Defaults.ContentPadding * 2 - Defaults.ContentPaddingSmall
+
+            with(density) { widest.toDp() }
+                .coerceAtMost(available * ErrorInfoLabelMaxFraction)
+        }
+
+        // The rows sit tight against each other, so the block keeps its distance from the
+        // header above it and the card edge below rather than every row paying for it
+        Column(modifier = Modifier.padding(vertical = 4.dp)) {
+            sections.forEachIndexed { index, section ->
+                if (index > 0) SettingsDivider()
+
+                section.forEach { (label, value) ->
+                    ErrorInfoRow(
+                        label = label,
+                        value = value,
+                        labelWidth = labelWidth,
+                        textStyle = textStyle
+                    )
+                }
+            }
+        }
+    }
+}
+
 @Composable
 private fun ErrorInfoRow(
-    value: String
+    label: String,
+    value: String,
+    labelWidth: Dp,
+    textStyle: TextStyle
 ) {
-    Text(
-        text = value,
-        style = MaterialTheme.typography.bodySmall,
-        fontFamily = FontFamily.Monospace,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp),
-        maxLines = 2,
-        overflow = TextOverflow.Ellipsis
-    )
+            .padding(horizontal = Defaults.ContentPadding, vertical = 1.dp),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+    ) {
+        Text(
+            text = label,
+            style = textStyle,
+            color = LocalDialogSecondaryTextColor.current,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.width(labelWidth)
+        )
+        Text(
+            text = value,
+            style = textStyle,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.weight(1f)
+        )
+    }
 }
+
+/**
+ * The diagnostics the dialog lists and the copy button carries, grouped into the sections the
+ * card separates: what was patched, what patched it, and what it ran on.
+ */
+@Composable
+private fun diagnosticSections(errorInfo: PatcherErrorInfo?): List<List<Pair<String, String>>> {
+    val context = LocalContext.current
+    val appLabel = stringResource(R.string.patcher_field_app)
+    val packageLabel = stringResource(R.string.patcher_field_package)
+    val versionLabel = stringResource(R.string.version)
+    val patchesLabel = stringResource(R.string.patches)
+    val sourceLabel = stringResource(R.string.patcher_field_source)
+    val managerLabel = stringResource(R.string.patcher_field_manager)
+    val patcherLabel = stringResource(R.string.patcher_field_patcher)
+    val librariesLabel = stringResource(R.string.patcher_field_libraries)
+    val androidLabel = stringResource(R.string.patcher_field_android)
+    val deviceLabel = stringResource(R.string.patcher_field_device)
+    val memoryLabel = stringResource(R.string.patcher_field_memory)
+    val storageLabel = stringResource(R.string.patcher_field_storage)
+    val unknown = stringResource(R.string.patcher_field_value_unknown)
+    val stripped = stringResource(R.string.patcher_field_value_stripped)
+    val kept = stringResource(R.string.patcher_field_value_kept)
+
+    return remember(errorInfo) {
+        val stats = context.deviceStats()
+        val environment = buildList {
+            add(managerLabel to BuildConfig.VERSION_NAME)
+            add(patcherLabel to BuildConfig.PATCHER_VERSION)
+            // Stripping silently changes what ends up in the output APK, so a report that
+            // leaves it out cannot explain a library that went missing
+            errorInfo?.stripsNativeLibs?.let { strips ->
+                add(librariesLabel to if (strips) stripped else kept)
+            }
+            add(androidLabel to "${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})")
+            add(deviceLabel to "${Build.MANUFACTURER} ${Build.MODEL}")
+            add(memoryLabel to (stats?.ram ?: unknown))
+            add(storageLabel to (stats?.storage ?: unknown))
+        }
+
+        val app = errorInfo?.let { info ->
+            buildList {
+                // The label falls back to the package name for an app that is neither installed
+                // nor readable, and a field repeating the one below it names nothing
+                if (info.appName != info.packageName) add(appLabel to info.appName)
+                add(packageLabel to info.packageName)
+                add(versionLabel to info.appVersion.ifBlank { unknown })
+            }
+        }
+
+        val patches = errorInfo?.let { info ->
+            listOf(patchesLabel to info.patchCount.toString()) +
+                    info.bundles.map { bundle ->
+                        sourceLabel to listOfNotNull(bundle.name, bundle.version).joinToString(" ")
+                    }
+        }
+
+        listOfNotNull(app, patches, environment)
+    }
+}
+
